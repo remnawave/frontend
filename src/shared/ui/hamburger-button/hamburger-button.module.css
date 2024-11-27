@@ -1,0 +1,16 @@
+.root {
+  margin-inline-end: 0.75rem;
+  height: auto;
+  width: auto;
+  padding: 0;
+  color: inherit;
+
+  @media (min-width: $mantine-breakpoint-sm) {
+    margin-inline-end: 1rem;
+  }
+}
+
+.icon {
+  width: 1.5rem;
+  height: 1.5rem;
+}

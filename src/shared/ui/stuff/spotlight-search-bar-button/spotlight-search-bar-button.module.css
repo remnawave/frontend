@@ -1,0 +1,30 @@
+.input {
+  display: none;
+
+  @media (min-width: $mantine-breakpoint-xl) {
+    display: inline-block;
+  }
+
+  & input {
+    padding-inline-end: 4rem;
+    pointer-events: none;
+  }
+
+  & [data-position='right'] {
+    pointer-events: none;
+    --section-size: 4rem;
+  }
+}
+
+.button {
+  display: inline-block;
+
+  @media (min-width: $mantine-breakpoint-xl) {
+    display: none;
+  }
+
+  & [data-position] {
+    pointer-events: none;
+    margin-inline-end: 0;
+  }
+}

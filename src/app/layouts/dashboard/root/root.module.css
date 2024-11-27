@@ -1,0 +1,80 @@
+:root {
+  --sidebar-width-xl: 270px;
+  --sidebar-width-2xl: 288px;
+}
+
+.root {
+  display: flex;
+  flex-grow: 1;
+  min-height: 100vh;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  @media (min-width: $mantine-breakpoint-xl) {
+    margin-inline-start: var(--sidebar-width-xl);
+    width: calc(100% - var(--sidebar-width-xl));
+  }
+
+  @media (min-width: $mantine-breakpoint-2xl) {
+    margin-inline-start: var(--sidebar-width-2xl);
+    width: calc(100% - var(--sidebar-width-2xl));
+  }
+}
+
+.main {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  padding: 0.5rem 1rem 1.5rem;
+
+  @media (min-width: $mantine-breakpoint-md) {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+
+  @media (min-width: $mantine-breakpoint-lg) {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    padding-bottom: 2rem;
+  }
+
+  @media (min-width: $mantine-breakpoint-3xl) {
+    padding-left: 2rem;
+    padding-right: 2rem;
+    padding-top: 1rem;
+  }
+
+  @media (min-width: $mantine-breakpoint-4xl) {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+    padding-bottom: 2.25rem;
+  }
+}
+
+.sidebarWrapper {
+  position: fixed;
+  display: none;
+  bottom: 0;
+  z-index: 50;
+  height: 100%;
+  padding-bottom: var(--mantine-spacing-md);
+
+  @media (min-width: $mantine-breakpoint-xl) {
+    display: flex;
+    flex-direction: column;
+    width: var(--sidebar-width-xl);
+  }
+
+  @media (min-width: $mantine-breakpoint-2xl) {
+    width: var(--sidebar-width-2xl);
+  }
+}
+
+.logoWrapper {
+  padding: var(--mantine-spacing-md) var(--mantine-spacing-xl);
+  margin-bottom: var(--mantine-spacing-md);
+}

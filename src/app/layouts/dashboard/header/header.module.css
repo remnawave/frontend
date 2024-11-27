@@ -1,0 +1,40 @@
+.root {
+  z-index: 198;
+  display: flex;
+  justify-content: space-between;
+
+  @media (min-width: $mantine-breakpoint-2xl) {
+    padding-top: 1.25rem;
+    padding-bottom: 1.25rem;
+  }
+
+  @media (min-width: $mantine-breakpoint-3xl) {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+  @media (min-width: $mantine-breakpoint-4xl) {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+  }
+}
+
+.rightContent {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  margin-inline-end: 1rem;
+  width: 2.25rem;
+  flex-shrink: 0;
+  color: inherit;
+
+  @media (min-width: $mantine-breakpoint-lg) {
+    margin-inline-end: 1.25rem;
+  }
+
+  @media (min-width: $mantine-breakpoint-xl) {
+    display: none;
+  }
+}
