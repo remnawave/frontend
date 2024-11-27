@@ -1,3 +1,3 @@
 export interface ISetTokenAction {
-    token: string
+    token: string;
 }

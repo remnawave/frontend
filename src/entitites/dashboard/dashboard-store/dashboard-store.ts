@@ -1,7 +1,7 @@
 import {
-  GetAllUsersCommand,
-  GetInboundsCommand,
-  GetStatsCommand,
+    GetAllUsersCommand,
+    GetInboundsCommand,
+    GetStatsCommand,
 } from '@remnawave/backend-contract';
 import { instance } from '@shared/api';
 import { AxiosError } from 'axios';
@@ -11,117 +11,119 @@ import { notifications } from '@mantine/notifications';
 import { IActions, IState, IUsersParams } from './interfaces';
 
 const initialState: IState = {
-  isLoading: false,
-  systemInfo: null,
-  users: null,
-  usersParams: {
-    limit: 10,
-    offset: 0,
-    orderBy: 'createdAt',
-    orderDir: 'desc',
-  },
-  totalUsers: 0,
-  inbounds: null,
-  isInboundsLoading: false,
+    isLoading: false,
+    systemInfo: null,
+    users: null,
+    usersParams: {
+        limit: 10,
+        offset: 0,
+        orderBy: 'createdAt',
+        orderDir: 'desc',
+    },
+    totalUsers: 0,
+    inbounds: null,
+    isInboundsLoading: false,
 };
 
 export const useDashboardStore = create<IState & IActions>()(
-  devtools(
-    (set, getState) => ({
-      ...initialState,
-      actions: {
-        getSystemInfo: async (): Promise<boolean> => {
-          try {
-            set({ isLoading: true });
-            const response = await instance.get<GetStatsCommand.Response>(GetStatsCommand.url);
-            const {
-              data: { response: dataResponse },
-            } = response;
+    devtools(
+        (set, getState) => ({
+            ...initialState,
+            actions: {
+                getSystemInfo: async (): Promise<boolean> => {
+                    try {
+                        set({ isLoading: true });
+                        const response = await instance.get<GetStatsCommand.Response>(
+                            GetStatsCommand.url
+                        );
+                        const {
+                            data: { response: dataResponse },
+                        } = response;
 
-            set({ systemInfo: dataResponse });
+                        set({ systemInfo: dataResponse });
 
-            return true;
-          } catch (e) {
-            if (e instanceof AxiosError) {
-              throw e;
-            }
-            return false;
-          } finally {
-            set({ isLoading: false });
-          }
-        },
-        getUsers: async (params?: Partial<IUsersParams>): Promise<boolean> => {
-          try {
-            set({ isLoading: true });
-            const currentParams = getState().usersParams;
-            const newParams = { ...currentParams, ...params };
-
-            const response = await instance.get<GetAllUsersCommand.Response>(
-              GetAllUsersCommand.url,
-              {
-                params: {
-                  limit: newParams.limit,
-                  offset: newParams.offset,
-                  orderBy: newParams.orderBy,
-                  orderDir: newParams.orderDir,
-                  search: newParams.search,
-                  searchBy: newParams.searchBy,
+                        return true;
+                    } catch (e) {
+                        if (e instanceof AxiosError) {
+                            throw e;
+                        }
+                        return false;
+                    } finally {
+                        set({ isLoading: false });
+                    }
                 },
-              }
-            );
+                getUsers: async (params?: Partial<IUsersParams>): Promise<boolean> => {
+                    try {
+                        set({ isLoading: true });
+                        const currentParams = getState().usersParams;
+                        const newParams = { ...currentParams, ...params };
 
-            const {
-              data: { response: dataResponse },
-            } = response;
+                        const response = await instance.get<GetAllUsersCommand.Response>(
+                            GetAllUsersCommand.url,
+                            {
+                                params: {
+                                    limit: newParams.limit,
+                                    offset: newParams.offset,
+                                    orderBy: newParams.orderBy,
+                                    orderDir: newParams.orderDir,
+                                    search: newParams.search,
+                                    searchBy: newParams.searchBy,
+                                },
+                            }
+                        );
 
-            set({
-              users: dataResponse.users,
-              totalUsers: dataResponse.total,
-              usersParams: newParams,
-            });
+                        const {
+                            data: { response: dataResponse },
+                        } = response;
 
-            return true;
-          } catch (e) {
-            if (e instanceof AxiosError) {
-              throw e;
-            }
-            return false;
-          } finally {
-            set({ isLoading: false });
-          }
-        },
-        getInbounds: async (): Promise<boolean> => {
-          try {
-            set({ isInboundsLoading: true });
-            const response = await instance.get<GetInboundsCommand.Response>(
-              GetInboundsCommand.url
-            );
-            const {
-              data: { response: dataResponse },
-            } = response;
+                        set({
+                            users: dataResponse.users,
+                            totalUsers: dataResponse.total,
+                            usersParams: newParams,
+                        });
 
-            set({ inbounds: dataResponse });
+                        return true;
+                    } catch (e) {
+                        if (e instanceof AxiosError) {
+                            throw e;
+                        }
+                        return false;
+                    } finally {
+                        set({ isLoading: false });
+                    }
+                },
+                getInbounds: async (): Promise<boolean> => {
+                    try {
+                        set({ isInboundsLoading: true });
+                        const response = await instance.get<GetInboundsCommand.Response>(
+                            GetInboundsCommand.url
+                        );
+                        const {
+                            data: { response: dataResponse },
+                        } = response;
 
-            return true;
-          } catch (e) {
-            if (e instanceof AxiosError) {
-              throw e;
-            }
-            return false;
-          } finally {
-            set({ isInboundsLoading: false });
-          }
-        },
-        resetState: async () => {
-          set({ ...initialState });
-        },
-      },
-    }),
-    {
-      name: 'dashboardStore',
-      anonymousActionType: 'dashboardStore',
-    }
-  )
+                        set({ inbounds: dataResponse });
+
+                        return true;
+                    } catch (e) {
+                        if (e instanceof AxiosError) {
+                            throw e;
+                        }
+                        return false;
+                    } finally {
+                        set({ isInboundsLoading: false });
+                    }
+                },
+                resetState: async () => {
+                    set({ ...initialState });
+                },
+            },
+        }),
+        {
+            name: 'dashboardStore',
+            anonymousActionType: 'dashboardStore',
+        }
+    )
 );
 
 export const useDashboardStoreIsLoading = () => useDashboardStore((store) => store.isLoading);

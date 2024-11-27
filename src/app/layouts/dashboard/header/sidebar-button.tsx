@@ -7,27 +7,27 @@ import { useDisclosure } from '@mantine/hooks';
 import { Sidebar } from '../sidebar';
 
 export function SidebarButton() {
-  const location = useLocation();
-  const [opened, { open, close }] = useDisclosure(false);
+    const location = useLocation();
+    const [opened, { open, close }] = useDisclosure(false);
 
-  useEffect(() => {
-    close();
-  }, [location.pathname]);
+    useEffect(() => {
+        close();
+    }, [location.pathname]);
 
-  return (
-    <>
-      <Drawer.Root opened={opened} onClose={close} size="270px">
-        <Drawer.Overlay />
-        <Drawer.Content>
-          <Drawer.Header px="1.725rem" mb="md">
-            <Logo w="3rem" />
-          </Drawer.Header>
-          <Drawer.Body>
-            <Sidebar />
-          </Drawer.Body>
-        </Drawer.Content>
-      </Drawer.Root>
-      <HamburgerButton onClick={open} display={{ xl: 'none' }} />
-    </>
-  );
+    return (
+        <>
+            <Drawer.Root opened={opened} onClose={close} size="270px">
+                <Drawer.Overlay />
+                <Drawer.Content>
+                    <Drawer.Header px="1.725rem" mb="md">
+                        <Logo w="3rem" />
+                    </Drawer.Header>
+                    <Drawer.Body>
+                        <Sidebar />
+                    </Drawer.Body>
+                </Drawer.Content>
+            </Drawer.Root>
+            <HamburgerButton onClick={open} display={{ xl: 'none' }} />
+        </>
+    );
 }

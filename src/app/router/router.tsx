@@ -1,9 +1,9 @@
 import {
-  createBrowserRouter,
-  createRoutesFromElements,
-  Navigate,
-  Route,
-  RouterProvider,
+    createBrowserRouter,
+    createRoutesFromElements,
+    Navigate,
+    Route,
+    RouterProvider,
 } from 'react-router-dom';
 import { AuthLayout } from '@/app/layouts/auth';
 import { DashboardLayout } from '@/app/layouts/dashboard';
@@ -14,23 +14,23 @@ import { AuthGuard } from '@/shared/hocs/guards/auth-guard';
 import { ROUTES } from '../../shared/constants';
 
 const router = createBrowserRouter(
-  createRoutesFromElements(
-    <Route element={<AuthGuard />}>
-      <Route path="/" element={<Navigate to={ROUTES.DASHBOARD.ROOT} replace />} />
-      <Route path={ROUTES.AUTH.ROOT} element={<AuthLayout />}>
-        <Route index element={<Navigate to={ROUTES.AUTH.LOGIN} replace />} />
-        <Route path={ROUTES.AUTH.LOGIN} element={<LoginPage />} />
-      </Route>
+    createRoutesFromElements(
+        <Route element={<AuthGuard />}>
+            <Route path="/" element={<Navigate to={ROUTES.DASHBOARD.ROOT} replace />} />
+            <Route path={ROUTES.AUTH.ROOT} element={<AuthLayout />}>
+                <Route index element={<Navigate to={ROUTES.AUTH.LOGIN} replace />} />
+                <Route path={ROUTES.AUTH.LOGIN} element={<LoginPage />} />
+            </Route>
 
-      <Route path={ROUTES.DASHBOARD.ROOT} element={<DashboardLayout />}>
-        <Route index element={<Navigate to={ROUTES.DASHBOARD.HOME} replace />} />
-        <Route path={ROUTES.DASHBOARD.HOME} element={<HomePageConnectior />} />
-        <Route path={ROUTES.DASHBOARD.USERS} element={<UsersPageConnector />} />
-      </Route>
-    </Route>
-  )
+            <Route path={ROUTES.DASHBOARD.ROOT} element={<DashboardLayout />}>
+                <Route index element={<Navigate to={ROUTES.DASHBOARD.HOME} replace />} />
+                <Route path={ROUTES.DASHBOARD.HOME} element={<HomePageConnectior />} />
+                <Route path={ROUTES.DASHBOARD.USERS} element={<UsersPageConnector />} />
+            </Route>
+        </Route>
+    )
 );
 
 export function Router() {
-  return <RouterProvider router={router} />;
+    return <RouterProvider router={router} />;
 }

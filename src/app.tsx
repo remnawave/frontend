@@ -21,17 +21,17 @@ import { AuthProvider } from '@/shared/providers/auth-provider';
 import { theme } from '@/shared/theme';
 
 export function App() {
-  return (
-    <HelmetProvider>
-      <AuthProvider>
-        <MantineProvider theme={theme} defaultColorScheme="dark">
-          <Notifications position="top-right" />
-          <NavigationProgress />
-          <ModalsProvider>
-            <Router />
-          </ModalsProvider>
-        </MantineProvider>
-      </AuthProvider>
-    </HelmetProvider>
-  );
+    return (
+        <HelmetProvider>
+            <AuthProvider>
+                <MantineProvider theme={theme} defaultColorScheme="dark">
+                    <Notifications position="top-right" />
+                    <NavigationProgress />
+                    <ModalsProvider>
+                        <Router />
+                    </ModalsProvider>
+                </MantineProvider>
+            </AuthProvider>
+        </HelmetProvider>
+    );
 }

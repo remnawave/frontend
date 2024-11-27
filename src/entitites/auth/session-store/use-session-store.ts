@@ -4,33 +4,33 @@ import { setAuthorizationToken } from '@/shared/api';
 import { IActions, ISetTokenAction, IState } from './interfaces';
 
 export const useSessionStore = create<IState & IActions>()(
-  persist(
-    devtools(
-      (set) => ({
-        token: '',
-        actions: {
-          setToken: (dto: ISetTokenAction) => {
-            set({ token: dto.token });
-          },
-          removeToken: () => {
-            set({ token: '' });
-          },
-        },
-      }),
-      { name: 'sessionStore', anonymousActionType: 'sessionStore' }
-    ),
-    {
-      name: 'sessionStore',
-      partialize: (state) => ({
-        token: state.token,
-      }),
-      storage: createJSONStorage(() => localStorage),
-    }
-  )
+    persist(
+        devtools(
+            (set) => ({
+                token: '',
+                actions: {
+                    setToken: (dto: ISetTokenAction) => {
+                        set({ token: dto.token });
+                    },
+                    removeToken: () => {
+                        set({ token: '' });
+                    },
+                },
+            }),
+            { name: 'sessionStore', anonymousActionType: 'sessionStore' }
+        ),
+        {
+            name: 'sessionStore',
+            partialize: (state) => ({
+                token: state.token,
+            }),
+            storage: createJSONStorage(() => localStorage),
+        }
+    )
 );
 
 useSessionStore.subscribe((state) => {
-  setAuthorizationToken(state.token);
+    setAuthorizationToken(state.token);
 });
 
 setAuthorizationToken(useSessionStore.getState().token);
