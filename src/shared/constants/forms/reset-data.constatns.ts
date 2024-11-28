@@ -1,7 +1,9 @@
+import { RESET_PERIODS } from '@remnawave/backend-contract';
+
 export const resetDataStrategy = [
-    { value: 'NO_RESET', label: 'Never reset' },
-    { value: 'DAILY', label: 'Reset daily' },
-    { value: 'WEEKLY', label: 'Reset weekly' },
-    { value: 'MONTHLY', label: 'Reset monthly' },
-    { value: 'YEARLY', label: 'Reset yearly' },
+    { value: RESET_PERIODS.NO_RESET, label: 'Never reset' },
+    { value: RESET_PERIODS.DAY, label: 'Reset daily' },
+    { value: RESET_PERIODS.WEEK, label: 'Reset weekly' },
+    { value: RESET_PERIODS.MONTH, label: 'Reset monthly' },
+    { value: RESET_PERIODS.YEAR, label: 'Reset yearly' },
 ];

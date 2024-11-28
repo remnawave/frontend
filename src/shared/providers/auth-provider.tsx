@@ -32,6 +32,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
                 await actions.getSystemInfo();
                 setIsAuthenticated(true);
             } catch (error) {
+                setIsAuthenticated(false);
             } finally {
                 setIsInitialized(true);
             }

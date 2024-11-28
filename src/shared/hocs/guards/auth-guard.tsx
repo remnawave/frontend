@@ -1,11 +1,9 @@
-import { ReactNode } from 'react';
 import { ROUTES } from '@shared/constants/routes';
 import { useAuth } from '@shared/hooks';
 import { LoadingScreen } from '@shared/ui/loading-screen';
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
 
 export function AuthGuard() {
-    console.log('123131');
     const location = useLocation();
 
     const { isAuthenticated, isInitialized } = useAuth();

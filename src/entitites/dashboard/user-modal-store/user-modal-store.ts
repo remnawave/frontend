@@ -1,4 +1,12 @@
-import { GetUserByUuidCommand, UpdateUserCommand } from '@remnawave/backend-contract';
+import {
+    DeleteUserCommand,
+    DisableUserCommand,
+    EnableUserCommand,
+    GetUserByUuidCommand,
+    RevokeUserSubscriptionCommand,
+    UpdateUserCommand,
+    USERS_STATUS,
+} from '@remnawave/backend-contract';
 import { instance } from '@shared/api';
 import { AxiosError } from 'axios';
 import { create } from 'zustand';
@@ -68,6 +76,108 @@ export const useUserModalStore = create<IState & IActions>()(
                         return false;
                     } finally {
                         set({ isLoading: false });
+                    }
+                },
+
+                disableUser: async (): Promise<boolean> => {
+                    try {
+                        const userUuid = getState().userUuid;
+
+                        if (!userUuid) {
+                            throw new Error('User UUID is required');
+                        }
+
+                        const response = await instance.patch<DisableUserCommand.Response>(
+                            DisableUserCommand.url(userUuid)
+                        );
+
+                        const {
+                            data: { response: dataResponse },
+                        } = response;
+
+                        set({ user: dataResponse });
+
+                        return true;
+                    } catch (e) {
+                        if (e instanceof AxiosError) {
+                            throw e;
+                        }
+                        return false;
+                    }
+                },
+                enableUser: async (): Promise<boolean> => {
+                    try {
+                        const userUuid = getState().userUuid;
+
+                        if (!userUuid) {
+                            throw new Error('User UUID is required');
+                        }
+
+                        const response = await instance.patch<EnableUserCommand.Response>(
+                            EnableUserCommand.url(userUuid)
+                        );
+
+                        const {
+                            data: { response: dataResponse },
+                        } = response;
+
+                        set({ user: dataResponse });
+
+                        return true;
+                    } catch (e) {
+                        if (e instanceof AxiosError) {
+                            throw e;
+                        }
+                        return false;
+                    }
+                },
+                deleteUser: async (): Promise<boolean> => {
+                    try {
+                        const userUuid = getState().userUuid;
+
+                        if (!userUuid) {
+                            throw new Error('User UUID is required');
+                        }
+
+                        await instance.delete<DeleteUserCommand.Response>(
+                            DeleteUserCommand.url(userUuid)
+                        );
+
+                        getState().actions.resetState();
+
+                        return true;
+                    } catch (e) {
+                        if (e instanceof AxiosError) {
+                            throw e;
+                        }
+                        return false;
+                    }
+                },
+                reveokeSubscription: async (): Promise<boolean> => {
+                    try {
+                        const userUuid = getState().userUuid;
+
+                        if (!userUuid) {
+                            throw new Error('User UUID is required');
+                        }
+
+                        const response =
+                            await instance.patch<RevokeUserSubscriptionCommand.Response>(
+                                RevokeUserSubscriptionCommand.url(userUuid)
+                            );
+
+                        const {
+                            data: { response: dataResponse },
+                        } = response;
+
+                        set({ user: dataResponse });
+
+                        return true;
+                    } catch (e) {
+                        if (e instanceof AxiosError) {
+                            throw e;
+                        }
+                        return false;
                     }
                 },
                 changeModalState: (modalState: boolean) => {

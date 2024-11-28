@@ -1,69 +1,58 @@
-import { ChangeEvent, useState } from 'react';
-import { GetAllUsersCommand } from '@remnawave/backend-contract';
-import { LuRefreshCcw } from 'react-icons/lu';
-import { PiArrowCircleDownDuotone, PiDownload } from 'react-icons/pi';
-import { Box, Button, Group, Select, TextInput } from '@mantine/core';
-import { notifications } from '@mantine/notifications';
+import { ChangeEvent, useState } from 'react'
+
+import { Button, Group } from '@mantine/core'
+import { notifications } from '@mantine/notifications'
 import {
     useDashboardStoreIsLoading,
     useDashboardStoreParams,
     useDashboardStoreTotalUsers,
     useDashboardStoreUsers,
-} from '@/entitites/dashboard/dashboard-store/dashboard-store';
-import {
-    useUserModalStoreActions,
-    useUserModalStoreIsModalOpen,
-} from '@/entitites/dashboard/user-modal-store/user-modal-store';
-import { AddButton } from '@/shared/ui/stuff/add-button';
-import { DataTable } from '@/shared/ui/stuff/data-table';
-import { IProps } from './interfaces';
+    useDashboardStoreUsersLoading
+} from '@entitites/dashboard/dashboard-store/dashboard-store'
+import { useUserCreationModalStoreActions } from '@entitites/dashboard/user-creation-modal-store/user-creation-modal-store'
+import { GetAllUsersCommand } from '@remnawave/backend-contract'
+import { PiArrowsClockwise, PiPlus } from 'react-icons/pi'
+import { DataTable } from '@/shared/ui/stuff/data-table'
+import { IProps } from './interfaces'
 
 export function UserTableWidget(props: IProps) {
     const {
-        search,
-        setSearch,
-        searchBy,
-        setSearchBy,
         tabs: tabsProps,
         columns,
         handleSortStatusChange,
         handlePageChange,
         handleRecordsPerPageChange,
-        handleUpdate,
-    } = props;
+        handleUpdate
+    } = props
 
-    const { tabs, filters } = tabsProps;
-    const [isRefreshing, setIsRefreshing] = useState(false);
+    const { tabs, filters } = tabsProps
 
-    const params = useDashboardStoreParams();
-    const isLoading = useDashboardStoreIsLoading();
-    const users = useDashboardStoreUsers();
-    const totalUsers = useDashboardStoreTotalUsers();
+    const [isRefreshing, setIsRefreshing] = useState(false)
 
-    const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
-        setSearch(e.currentTarget.value);
-    };
-
-    const handleSelectSearch = (value: string | null) => {
-        if (!value) {
-            return;
-        }
-        setSearchBy(value as GetAllUsersCommand.SearchableField);
-    };
+    const params = useDashboardStoreParams()
+    const isLoading = useDashboardStoreIsLoading()
+    const isUsersLoading = useDashboardStoreUsersLoading()
+    const users = useDashboardStoreUsers()
+    const totalUsers = useDashboardStoreTotalUsers()
+    const userCreationModalActions = useUserCreationModalStoreActions()
 
     const handleRefresh = async () => {
-        setIsRefreshing(true);
+        setIsRefreshing(true)
 
-        handleUpdate();
+        handleUpdate()
         setTimeout(() => {
             notifications.show({
                 title: 'Success',
-                message: 'Users fetched successfully',
-            });
+                message: 'Users fetched successfully'
+            })
 
-            setIsRefreshing(false);
-        }, 1000);
-    };
+            setIsRefreshing(false)
+        }, 500)
+    }
+
+    const handleOpenCreateUserModal = async () => {
+        userCreationModalActions.changeModalState(true)
+    }
 
     return (
         <DataTable.Container>
@@ -76,16 +65,21 @@ export function UserTableWidget(props: IProps) {
                             <Button
                                 variant="default"
                                 size="xs"
-                                leftSection={<LuRefreshCcw size="1rem" />}
+                                leftSection={<PiArrowsClockwise size="1rem" />}
                                 onClick={handleRefresh}
                                 loading={isRefreshing}
                             >
                                 Update
                             </Button>
 
-                            <AddButton variant="default" size="xs">
+                            <Button
+                                variant="default"
+                                size="xs"
+                                leftSection={<PiPlus size="1rem" />}
+                                onClick={handleOpenCreateUserModal}
+                            >
                                 Create new user
-                            </AddButton>
+                            </Button>
                         </Group>
                     </>
                 }
@@ -93,15 +87,6 @@ export function UserTableWidget(props: IProps) {
 
             <DataTable.Filters filters={filters.filters} onClear={filters.clear} />
             <DataTable.Tabs tabs={tabs.tabs} onChange={tabs.change} />
-
-            {/* <Group mb="md">
-        <TextInput placeholder="Search..." value={search} onChange={handleSearch} />
-        <Select
-          data={GetAllUsersCommand.SearchableFields}
-          value={searchBy}
-          onChange={handleSelectSearch}
-        />
-      </Group> */}
 
             <DataTable.Content>
                 <DataTable.Table
@@ -121,17 +106,17 @@ export function UserTableWidget(props: IProps) {
                     page={params.offset / params.limit + 1}
                     onPageChange={handlePageChange}
                     records={users || []}
-                    fetching={isLoading}
+                    fetching={isUsersLoading}
                     recordsPerPage={params.limit}
                     totalRecords={totalUsers}
                     sortStatus={{
                         columnAccessor: params.orderBy || 'createdAt',
-                        direction: params.orderDir || 'desc',
+                        direction: params.orderDir || 'desc'
                     }}
                     onSortStatusChange={handleSortStatusChange}
                     columns={columns}
                 />
             </DataTable.Content>
         </DataTable.Container>
-    );
+    )
 }

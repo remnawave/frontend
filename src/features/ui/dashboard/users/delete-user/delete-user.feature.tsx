@@ -1,14 +1,58 @@
+import { useState } from 'react';
+import { PiTrashDuotone } from 'react-icons/pi';
+import { ActionIcon, Tooltip } from '@mantine/core';
+import { notifications } from '@mantine/notifications';
+import {
+    useUserModalStore,
+    useUserModalStoreUser,
+} from '@/entitites/dashboard/user-modal-store/user-modal-store';
 import { IProps } from './interfaces';
 
 export function DeleteUserFeature(props: IProps) {
+    const { actions } = useUserModalStore();
+    const user = useUserModalStoreUser();
+    const [isLoading, setIsLoading] = useState(false);
+
+    if (!user) return null;
+
+    const handleDeleteUser = async () => {
+        try {
+            setIsLoading(true);
+            await actions.deleteUser();
+
+            notifications.show({
+                title: 'User deleted',
+                message: 'User has been deleted successfully',
+                color: 'green',
+            });
+        } catch (error) {
+            notifications.show({
+                title: 'Error',
+                message: 'Failed to delete user',
+                color: 'red',
+            });
+            console.error(error);
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
     return (
-        <Button
-            type="button"
-            variant="subtle"
-            color="red"
-            leftSection={<PiTrashDuotone size="1rem" />}
+        <Tooltip
+            label="Delete user"
+            arrowSize={2}
+            transitionProps={{ transition: 'scale-x', duration: 300 }}
         >
-            Delete
-        </Button>
+            <ActionIcon
+                variant="outline"
+                size="xl"
+                radius="xs"
+                color="red"
+                onClick={handleDeleteUser}
+                loading={isLoading}
+            >
+                <PiTrashDuotone size="1.5rem" />
+            </ActionIcon>
+        </Tooltip>
     );
 }

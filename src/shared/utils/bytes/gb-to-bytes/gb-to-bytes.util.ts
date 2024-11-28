@@ -1,7 +1,7 @@
 import xbytes from 'xbytes';
 
 export function gbToBytesUtil(gbInput: number | undefined): number | undefined {
-    if (!gbInput) return undefined;
+    if (typeof gbInput === 'undefined') return undefined;
     if (typeof gbInput === 'string') {
         gbInput = Number(gbInput);
     }

@@ -1,18 +1,19 @@
-import { fromBytes } from '@tsmx/human-readable';
-import prettyBytes from 'pretty-bytes';
-import xbytes from 'xbytes';
+import xbytes from 'xbytes'
 
 export function bytesToGbUtil(bytesInput: number | undefined | string): number | undefined {
-    if (!bytesInput) return undefined;
+    if (typeof bytesInput === 'undefined') return undefined
+
     if (typeof bytesInput === 'string') {
-        bytesInput = Number(bytesInput);
+        bytesInput = Number(bytesInput)
     }
+
     const res = xbytes.parseBytes(bytesInput, {
         sticky: true,
         prefixIndex: 3,
+        fixed: 0,
         iec: true,
-        space: false,
-    });
+        space: false
+    })
 
-    return Number(res.size.replace('GiB', ''));
+    return Number(res.size.replace('GiB', ''))
 }

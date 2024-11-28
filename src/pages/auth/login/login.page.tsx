@@ -25,7 +25,7 @@ export const LoginPage = () => {
                     </Title>
                 </Group>
 
-                <Box w={500} maw={800}>
+                <Box w={{ base: 440, sm: 500, md: 500 }} maw={800}>
                     <LoginForm />
                 </Box>
             </Stack>

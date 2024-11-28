@@ -1,0 +1,23 @@
+.item {
+    display: flex;
+    align-items: center;
+    border-radius: var(--mantine-radius-md);
+    border: 1px solid light-dark(var(--mantine-color-gray-2), var(--mantine-color-dark-5));
+    padding: var(--mantine-spacing-sm) var(--mantine-spacing-xl);
+    padding-left: calc(var(--mantine-spacing-xl) - var(--mantine-spacing-md));
+    margin-bottom: var(--mantine-spacing-sm);
+}
+
+.itemDragging {
+    border: 1px solid light-dark(var(--mantine-color-blue-5), var(--mantine-color-teal-5));
+    box-shadow: var(--mantine-shadow-xl);
+}
+
+.dragHandle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: var(--mantine-color-dark-1);
+    padding-right: var(--mantine-spacing-md);
+}

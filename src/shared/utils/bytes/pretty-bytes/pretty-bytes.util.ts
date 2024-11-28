@@ -1,18 +1,17 @@
-import xbytes from 'xbytes';
+import xbytes from 'xbytes'
 
 export function prettyBytesUtil(
     bytesInput: number | undefined | string,
     returnZero: boolean = false
 ): string | undefined {
     if (!bytesInput) {
-        return returnZero ? '0' : undefined;
+        return returnZero ? '0' : undefined
     }
     if (typeof bytesInput === 'string') {
-        bytesInput = Number(bytesInput);
+        bytesInput = Number(bytesInput)
     }
 
-    const res = xbytes.parseBytes(bytesInput, { sticky: true, prefixIndex: 3, iec: true });
-    console.log(res);
+    const res = xbytes.parseBytes(bytesInput, { sticky: true, prefixIndex: 3, iec: true })
 
-    return String(res.size);
+    return String(res.size)
 }

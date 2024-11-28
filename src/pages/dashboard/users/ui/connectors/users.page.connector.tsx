@@ -1,113 +1,96 @@
-import { useEffect, useMemo, useState } from 'react';
-import { GetAllUsersCommand } from '@remnawave/backend-contract';
-import { DataTableColumn } from 'mantine-datatable';
-import prettyBytes from 'pretty-bytes';
-import { Box, Group, Indicator, MultiSelect, Select, Text, TextInput } from '@mantine/core';
-import { useDebouncedValue } from '@mantine/hooks';
+import { useEffect, useMemo, useState } from 'react'
+
+import { MultiSelect, TextInput } from '@mantine/core'
+import { useDebouncedValue } from '@mantine/hooks'
 import {
     useDashboardStoreActions,
-    useDashboardStoreIsLoading,
     useDashboardStoreParams,
-    useDashboardStoreSystemInfo,
-    useDashboardStoreTotalUsers,
-    useDashboardStoreUsers,
-} from '@/entitites/dashboard/dashboard-store/dashboard-store';
+    useDashboardStoreSystemInfo
+} from '@entitites/dashboard/dashboard-store/dashboard-store'
+import { useUserCreationModalStoreIsModalOpen } from '@entitites/dashboard/user-creation-modal-store/user-creation-modal-store'
 import {
     useUserModalStoreActions,
-    useUserModalStoreIsModalOpen,
-} from '@/entitites/dashboard/user-modal-store/user-modal-store';
-import { getTabDataUsers, User } from '@/entitites/dashboard/users/models';
-import { DataUsageColumnEntity } from '@/entitites/dashboard/users/ui';
-import { ShortUuidColumnEntity } from '@/entitites/dashboard/users/ui/table-columns/short-uuid';
-import { StatusColumnEntity } from '@/entitites/dashboard/users/ui/table-columns/status/status.column';
-import { UsernameColumnEntity } from '@/entitites/dashboard/users/ui/table-columns/username/username.column';
-import UsersPage from '@/pages/dashboard/users/ui/components/users.page';
-import UsersPageComponent from '@/pages/dashboard/users/ui/components/users.page';
-import { AddButton } from '@/shared/ui/stuff/add-button';
-import { DataTable } from '@/shared/ui/stuff/data-table';
+    useUserModalStoreIsModalOpen
+} from '@entitites/dashboard/user-modal-store/user-modal-store'
+import { getTabDataUsers, User } from '@entitites/dashboard/users/models'
+import { DataUsageColumnEntity } from '@entitites/dashboard/users/ui'
+import { ShortUuidColumnEntity } from '@entitites/dashboard/users/ui/table-columns/short-uuid'
+import { StatusColumnEntity } from '@entitites/dashboard/users/ui/table-columns/status'
+import { UsernameColumnEntity } from '@entitites/dashboard/users/ui/table-columns/username'
+import { GetAllUsersCommand } from '@remnawave/backend-contract'
+import { DataTable } from '@shared/ui/stuff/data-table'
+import { DataTableColumn } from 'mantine-datatable'
+import UsersPageComponent from '../components/users.page'
 
 export function UsersPageConnector() {
-    const users = useDashboardStoreUsers();
-    const isLoading = useDashboardStoreIsLoading();
-    const totalUsers = useDashboardStoreTotalUsers();
-    const params = useDashboardStoreParams();
-    const actions = useDashboardStoreActions();
-    const systemInfo = useDashboardStoreSystemInfo();
+    const params = useDashboardStoreParams()
+    const actions = useDashboardStoreActions()
+    const systemInfo = useDashboardStoreSystemInfo()
 
-    const [search, setSearch] = useState('');
-    const [debouncedSearch] = useDebouncedValue(search, 300);
-    const [searchBy, setSearchBy] = useState<GetAllUsersCommand.SearchableField>('username');
+    const [search, setSearch] = useState('')
+
+    const isModalOpen = useUserModalStoreIsModalOpen()
+    const userModalActions = useUserModalStoreActions()
+
+    // create user modal
+    const isCreateUserModalOpen = useUserCreationModalStoreIsModalOpen()
 
     const dataTab = getTabDataUsers({
         totalUsers: systemInfo?.users.totalUsers,
         activeUsers: systemInfo?.users.statusCounts.ACTIVE,
         disabledUsers: systemInfo?.users.statusCounts.DISABLED,
         expiredUsers: systemInfo?.users.statusCounts.EXPIRED,
-        limitedUsers: systemInfo?.users.statusCounts.LIMITED,
-    });
+        limitedUsers: systemInfo?.users.statusCounts.LIMITED
+    })
 
-    const [debouncedFilters] = useDebouncedValue(dataTab.filters.filters, 300);
+    const [debouncedFilters] = useDebouncedValue(dataTab.filters.filters, 300)
 
     useEffect(() => {
-        actions.getSystemInfo();
+        if (isModalOpen || isCreateUserModalOpen) return
+        actions.getSystemInfo()
 
-        const filterEntry = Object.entries(debouncedFilters).find(([_, filter]) => filter?.value);
+        const filterEntry = Object.entries(debouncedFilters).find(([_, filter]) => filter?.value)
 
         const searchParams = filterEntry
             ? {
                   search: String(filterEntry[1].value),
-                  searchBy: filterEntry[0] as GetAllUsersCommand.SearchableField,
+                  searchBy: filterEntry[0] as GetAllUsersCommand.SearchableField
               }
             : {
                   search: dataTab.tabs.value === '*' ? '' : dataTab.tabs.value,
-                  searchBy:
-                      dataTab.tabs.value === '*' ? ('username' as const) : ('status' as const),
-              };
+                  searchBy: dataTab.tabs.value === '*' ? ('username' as const) : ('status' as const)
+              }
 
-        actions.getUsers(searchParams);
-    }, [dataTab.tabs.value, debouncedFilters]);
-
-    // useEffect(() => {
-    //   actions.getSystemInfo();
-    //   actions.getUsers({
-    //     search: dataTab.tabs.value === '*' ? debouncedSearch : dataTab.tabs.value,
-    //     searchBy: dataTab.tabs.value === '*' ? searchBy : 'status',
-    //   });
-    // }, [debouncedSearch, searchBy, dataTab.tabs.value]);
+        actions.getUsers(searchParams)
+    }, [dataTab.tabs.value, debouncedFilters, isModalOpen, isCreateUserModalOpen])
 
     const handlePageChange = (page: number) => {
-        const offset = (page - 1) * params.limit;
-        actions.getUsers({ offset });
-    };
+        const offset = (page - 1) * params.limit
+        actions.getUsers({ offset })
+    }
 
     const handleRecordsPerPageChange = (limit: number) => {
-        actions.getUsers({ limit, offset: 0 });
-    };
+        actions.getUsers({ limit, offset: 0 })
+    }
 
     const handleSortStatusChange = (status: {
-        columnAccessor: string;
-        direction: 'asc' | 'desc';
+        columnAccessor: string
+        direction: 'asc' | 'desc'
     }) => {
         actions.getUsers({
             orderBy: status.columnAccessor as GetAllUsersCommand.SortableField,
-            orderDir: status.direction,
-        });
-    };
+            orderDir: status.direction
+        })
+    }
 
     const handleUpdate = () => {
-        actions.getUsers({ offset: 0 });
-    };
-
-    // User Modal
-    const isModalOpen = useUserModalStoreIsModalOpen();
-    const userModalActions = useUserModalStoreActions();
+        actions.getUsers({ offset: 0 })
+    }
 
     const handleOpenModal = async (userUuid: string) => {
-        await userModalActions.setUserUuid(userUuid);
-        console.log('userUuid', userUuid);
-        userModalActions.changeModalState(true);
-        // !TODO: Ваня помоги
-    };
+        await userModalActions.setUserUuid(userUuid)
+        userModalActions.changeModalState(true)
+    }
 
     const columns = useMemo<DataTableColumn<User>[]>(
         () => [
@@ -125,12 +108,12 @@ export function UsersPageConnector() {
                             dataTab.filters.change({
                                 name: 'shortUuid',
                                 label: 'Sub-link',
-                                value: e.currentTarget.value,
+                                value: e.currentTarget.value
                             })
                         }
                     />
                 ),
-                render: (user) => <ShortUuidColumnEntity user={user} />,
+                render: (user) => <ShortUuidColumnEntity user={user} />
             },
             {
                 accessor: 'username' as const,
@@ -146,12 +129,12 @@ export function UsersPageConnector() {
                             dataTab.filters.change({
                                 name: 'username',
                                 label: 'Username',
-                                value: e.currentTarget.value,
+                                value: e.currentTarget.value
                             })
                         }
                     />
                 ),
-                render: (user) => <UsernameColumnEntity user={user} />,
+                render: (user) => <UsernameColumnEntity user={user} />
             },
             {
                 accessor: 'expireAt' as const,
@@ -167,44 +150,39 @@ export function UsersPageConnector() {
                             dataTab.filters.change({
                                 name: 'status',
                                 label: 'Status',
-                                value,
+                                value
                             })
                         }
                     />
                 ),
-                render: (user) => <StatusColumnEntity user={user} />,
+                render: (user) => <StatusColumnEntity user={user} />
             },
             {
                 accessor: 'usedTrafficBytes' as const,
                 title: 'Data usage',
                 width: 150,
                 sortable: true,
-                render: (user) => <DataUsageColumnEntity user={user} />,
+                render: (user) => <DataUsageColumnEntity user={user} />
             },
             {
                 accessor: 'actions',
                 title: 'Actions',
                 textAlign: 'right',
                 width: 100,
-                render: (user) => <DataTable.Actions onView={() => handleOpenModal(user.uuid)} />,
-            },
+                render: (user) => <DataTable.Actions onView={() => handleOpenModal(user.uuid)} />
+            }
         ],
         []
-    );
+    )
 
     return (
         <UsersPageComponent
             tabs={dataTab}
-            users={users || []}
-            setSearch={setSearch}
-            setSearchBy={setSearchBy}
-            search={search}
-            searchBy={searchBy}
             columns={columns}
             handleSortStatusChange={handleSortStatusChange}
             handlePageChange={handlePageChange}
             handleRecordsPerPageChange={handleRecordsPerPageChange}
             handleUpdate={handleUpdate}
         />
-    );
+    )
 }

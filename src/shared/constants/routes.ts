@@ -7,5 +7,6 @@ export const ROUTES = {
         ROOT: '/dashboard',
         HOME: '/dashboard/home',
         USERS: '/dashboard/users',
+        HOSTS: '/dashboard/hosts',
     },
 } as const;

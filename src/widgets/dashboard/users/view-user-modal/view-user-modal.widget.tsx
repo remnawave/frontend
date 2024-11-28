@@ -1,8 +1,16 @@
 import { useEffect, useState } from 'react';
 import { UpdateUserCommand } from '@remnawave/backend-contract';
-import { PiUserDuotone } from 'react-icons/pi';
+import { LoaderModalShared } from '@shared/ui/loader-modal';
+import {
+    PiCalendarDuotone,
+    PiClockDuotone,
+    PiFloppyDiskDuotone,
+    PiLinkDuotone,
+    PiUserDuotone,
+} from 'react-icons/pi';
 import { z } from 'zod';
 import {
+    ActionIcon,
     Box,
     Button,
     Checkbox,
@@ -10,7 +18,9 @@ import {
     Group,
     Modal,
     NumberInput,
+    Progress,
     Select,
+    SimpleGrid,
     Stack,
     Text,
     TextInput,
@@ -30,10 +40,11 @@ import {
 import { DeleteUserFeature } from '@/features/ui/dashboard/users/delete-user';
 import { ResetUsageUserFeature } from '@/features/ui/dashboard/users/reset-usage-user';
 import { RevokeSubscriptionUserFeature } from '@/features/ui/dashboard/users/revoke-subscription-user';
+import { ToggleUserStatusButtonFeature } from '@/features/ui/dashboard/users/toggle-user-status-button';
 import { resetDataStrategy } from '@/shared/constants';
 import { handleFormErrors } from '@/shared/utils';
-import { bytesToGbUtil, gbToBytesUtil } from '@/shared/utils/bytes';
-import { LoaderModalShared } from '../../../../shared/ui/loader-modal';
+import { bytesToGbUtil, gbToBytesUtil, prettyBytesUtil } from '@/shared/utils/bytes';
+import { UserStatusBadge } from '@/widgets/dashboard/users/user-status-badge';
 import { InboundCheckboxCardWidget } from '../inbound-checkbox-card';
 import { IFormValues } from './interfaces';
 
@@ -48,6 +59,7 @@ export const ViewUserModal = () => {
     const [isDataSubmitting, setIsDataSubmitting] = useState(false);
 
     const form = useForm<IFormValues>({
+        name: 'edit-user-form',
         mode: 'uncontrolled',
         validate: zodResolver(UpdateUserCommand.RequestSchema),
     });
@@ -77,6 +89,7 @@ export const ViewUserModal = () => {
     useEffect(() => {
         if (user && inbounds) {
             const activeInboundUuids = user.activeUserInbounds.map((inbound) => inbound.uuid);
+
             form.setValues({
                 uuid: user.uuid,
                 username: user.username,
@@ -84,9 +97,18 @@ export const ViewUserModal = () => {
                 trafficLimitStrategy: user.trafficLimitStrategy,
                 expireAt: user.expireAt ? new Date(user.expireAt) : new Date(),
                 activeUserInbounds: activeInboundUuids,
+                shortUuid: user.shortUuid,
+                trojanPassword: user.trojanPassword,
             });
         }
     }, [user, inbounds]);
+
+    if (!user) {
+        return null;
+    }
+
+    const usedTrafficPercentage = (user.usedTrafficBytes / user.trafficLimitBytes) * 100;
+    const totalUsedTraffic = prettyBytesUtil(user.usedTrafficBytes, true);
 
     const handleSubmit = form.onSubmit(async (values) => {
         try {
@@ -107,8 +129,6 @@ export const ViewUserModal = () => {
                 color: 'green',
             });
         } catch (error) {
-            console.error('Full error:', error);
-
             if (error instanceof z.ZodError) {
                 console.error('Zod validation error:', error.errors);
             }
@@ -119,6 +139,7 @@ export const ViewUserModal = () => {
             }
 
             handleFormErrors(form, error);
+
             notifications.show({
                 title: 'Error',
                 message: error instanceof Error ? error.message : 'Failed to update user',
@@ -126,7 +147,6 @@ export const ViewUserModal = () => {
             });
         } finally {
             setIsDataSubmitting(false);
-            actions.changeModalState(false);
         }
     });
 
@@ -135,32 +155,54 @@ export const ViewUserModal = () => {
             opened={isModalOpen}
             onClose={() => actions.changeModalState(false)}
             title="Edit user"
-            size="lg"
+            size="900px"
             centered
         >
             {isLoading ? (
                 <LoaderModalShared text="Loading user data..." h="400" />
             ) : (
                 <form onSubmit={handleSubmit}>
-                    <Stack gap="md">
-                        <TextInput
-                            label="Username"
-                            description="Username cannot be changed"
-                            {...form.getInputProps('username')}
-                            disabled
-                            radius="xs"
-                            leftSection={<PiUserDuotone size="1rem" />}
-                        />
+                    <Group align="flex-start" grow={false}>
+                        {/* Left Section - User Settings */}
+                        <Stack gap="md" w={400}>
+                            <Group gap="xs" justify="space-between" w="100%">
+                                <Text fw={500}>User details</Text>
+                                <UserStatusBadge status={user.status} />
+                            </Group>
 
-                        <Group grow align="flex-start">
+                            <TextInput
+                                label="Username"
+                                description="Username cannot be changed"
+                                key={form.key('username')}
+                                {...form.getInputProps('username')}
+                                disabled
+                                radius="xs"
+                                leftSection={<PiUserDuotone size="1rem" />}
+                            />
+
+                            <TextInput
+                                label="Subscription short uuid"
+                                key={form.key('shortUuid')}
+                                {...form.getInputProps('shortUuid')}
+                                disabled
+                                radius="xs"
+                                leftSection={<PiLinkDuotone size="1rem" />}
+                            />
+                        </Stack>
+
+                        <Divider orientation="vertical" />
+
+                        {/* Right Section - Connection Details */}
+                        <Stack gap="md" w={400}>
+                            <Text fw={500}>Connection Details</Text>
+
                             <NumberInput
-                                {...form.getInputProps('trafficLimitBytes')}
                                 leftSection={
                                     <>
                                         <Text
                                             ta="center"
-                                            size="1rem"
-                                            w={28}
+                                            size="0.75rem"
+                                            w={26}
                                             display="flex"
                                             style={{ justifyContent: 'center' }}
                                         >
@@ -169,55 +211,100 @@ export const ViewUserModal = () => {
                                         <Divider orientation="vertical" />
                                     </>
                                 }
+                                radius="xs"
                                 label="Data Limit"
                                 description="Enter data limit in GB, 0 for unlimited"
                                 allowDecimal={false}
+                                decimalScale={0}
+                                key={form.key('trafficLimitBytes')}
+                                {...form.getInputProps('trafficLimitBytes')}
                             />
+
+                            <Box>
+                                <Progress
+                                    radius="xs"
+                                    size="xl"
+                                    value={usedTrafficPercentage}
+                                    color={usedTrafficPercentage > 100 ? 'yellow' : 'cyan'}
+                                    striped
+                                />
+                                <Group gap="xs" justify="center" mt={2}>
+                                    <Text size="sm" c="white" fw={500}>
+                                        {totalUsedTraffic === '0' ? '' : totalUsedTraffic}
+                                    </Text>
+                                </Group>
+                            </Box>
 
                             <Select
                                 label="Traffic reset strategy"
                                 description="How often the user's traffic should be reset"
                                 placeholder="Pick value"
+                                radius="xs"
+                                allowDeselect={false}
+                                defaultValue={form.values.trafficLimitStrategy}
                                 data={resetDataStrategy}
+                                leftSection={<PiClockDuotone size="1rem" />}
+                                key={form.key('trafficLimitStrategy')}
                                 {...form.getInputProps('trafficLimitStrategy')}
                             />
-                        </Group>
 
-                        <DateTimePicker
-                            label="Expiry Date"
-                            valueFormat="MMMM D, YYYY - HH:mm"
-                            {...form.getInputProps('expireAt')}
-                            clearable
-                        />
+                            <DateTimePicker
+                                label="Expiry Date"
+                                valueFormat="MMMM D, YYYY - HH:mm"
+                                key={form.key('expireAt')}
+                                {...form.getInputProps('expireAt')}
+                                leftSection={<PiCalendarDuotone size="1rem" />}
+                            />
 
-                        <Box>
-                            <Stack gap="xs">
-                                <Checkbox.Group
-                                    {...form.getInputProps('activeUserInbounds')}
-                                    label="Inbounds"
-                                    description="Select available inbounds for this user"
+                            <Checkbox.Group
+                                key={form.key('activeUserInbounds')}
+                                {...form.getInputProps('activeUserInbounds')}
+                                label="Inbounds"
+                                description="Select available inbounds for this user"
+                            >
+                                <SimpleGrid
+                                    pt="md"
+                                    cols={{
+                                        base: 1,
+                                        sm: 1,
+                                        md: 2,
+                                    }}
                                 >
-                                    <Stack pt="md" gap="xs">
-                                        {inbounds?.map((inbound) => (
-                                            <InboundCheckboxCardWidget inbound={inbound} />
-                                        ))}
-                                    </Stack>
-                                </Checkbox.Group>
-                            </Stack>
-                        </Box>
+                                    {inbounds?.map((inbound) => (
+                                        <>
+                                            <InboundCheckboxCardWidget
+                                                key={inbound.uuid}
+                                                inbound={inbound}
+                                            />
+                                        </>
+                                    ))}
+                                </SimpleGrid>
+                            </Checkbox.Group>
+                        </Stack>
+                    </Group>
 
-                        <Group justify="space-between" mt="xl">
-                            <Group>
+                    <Group justify="space-between" mt="xl">
+                        <Group>
+                            <ActionIcon.Group>
                                 <DeleteUserFeature />
                                 <ResetUsageUserFeature />
                                 <RevokeSubscriptionUserFeature />
-                            </Group>
-
-                            <Button type="submit" color="blue" loading={isDataSubmitting}>
+                            </ActionIcon.Group>
+                        </Group>
+                        <Group>
+                            <ToggleUserStatusButtonFeature />
+                            <Button
+                                type="submit"
+                                color="blue"
+                                leftSection={<PiFloppyDiskDuotone size="1rem" />}
+                                variant="outline"
+                                size="md"
+                                loading={isDataSubmitting}
+                            >
                                 Edit user
                             </Button>
                         </Group>
-                    </Stack>
+                    </Group>
                 </form>
             )}
         </Modal>

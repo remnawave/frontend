@@ -1,0 +1,25 @@
+{
+    "singleQuote": true,
+    "singleAttributePerLine": false,
+    "tabWidth": 4,
+    "printWidth": 100,
+    "semi": false,
+    "trailingComma": "none",
+    "plugins": [
+        "@ianvs/prettier-plugin-sort-imports"
+    ],
+    "importOrderCaseSensitive": false,
+    "importOrder": [
+        "^react$",
+        "",
+        "^@mantine/(.*)$",
+        "^@mantinex/(.*)$",
+        "<THIRD_PARTY_MODULES>",
+        "^(@)(/.*)$",
+        "^../(?!.*.css$).*$",
+        "^./(?!.*.css$).*$",
+        "\\.css$",
+        "",
+        "^[.]"
+    ]
+}

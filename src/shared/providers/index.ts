@@ -1,2 +1,1 @@
-export * from './auth-provider';
-export * from './mdx-provider';
+export * from './auth-provider'

@@ -1,5 +1,4 @@
 import { forwardRef, ReactNode, useEffect } from 'react';
-import { Helmet } from 'react-helmet-async';
 import { Box, BoxProps } from '@mantine/core';
 import { nprogress } from '@mantine/nprogress';
 import { app } from '@/config';
@@ -18,10 +17,8 @@ export const Page = forwardRef<HTMLDivElement, PageProps>(
 
         return (
             <>
-                <Helmet>
-                    <title>{`${title} | ${app.name}`}</title>
-                    {meta}
-                </Helmet>
+                <title>{`${title} | ${app.name}`}</title>
+                {meta}
 
                 <Box ref={ref} {...other}>
                     {children}

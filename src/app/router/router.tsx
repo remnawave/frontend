@@ -3,15 +3,16 @@ import {
     createRoutesFromElements,
     Navigate,
     Route,
-    RouterProvider,
-} from 'react-router-dom';
-import { AuthLayout } from '@/app/layouts/auth';
-import { DashboardLayout } from '@/app/layouts/dashboard';
-import { LoginPage } from '@/pages/auth/login/login.page';
-import { HomePageConnectior } from '@/pages/dashboard/home/connectores/home.page.connector';
-import { UsersPageConnector } from '@/pages/dashboard/users/ui/connectors/users.page.connector';
-import { AuthGuard } from '@/shared/hocs/guards/auth-guard';
-import { ROUTES } from '../../shared/constants';
+    RouterProvider
+} from 'react-router-dom'
+import { AuthLayout } from '@/app/layouts/auth'
+import { DashboardLayout } from '@/app/layouts/dashboard'
+import { LoginPage } from '@/pages/auth/login/login.page'
+import { HomePageConnectior } from '@/pages/dashboard/home/connectores/home.page.connector'
+import { HostsPageConnector } from '@/pages/dashboard/hosts/ui/connectors/hosts.page.connector'
+import { UsersPageConnector } from '@/pages/dashboard/users/ui/connectors/users.page.connector'
+import { AuthGuard } from '@/shared/hocs/guards/auth-guard'
+import { ROUTES } from '../../shared/constants'
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -26,11 +27,12 @@ const router = createBrowserRouter(
                 <Route index element={<Navigate to={ROUTES.DASHBOARD.HOME} replace />} />
                 <Route path={ROUTES.DASHBOARD.HOME} element={<HomePageConnectior />} />
                 <Route path={ROUTES.DASHBOARD.USERS} element={<UsersPageConnector />} />
+                <Route path={ROUTES.DASHBOARD.HOSTS} element={<HostsPageConnector />} />
             </Route>
         </Route>
     )
-);
+)
 
 export function Router() {
-    return <RouterProvider router={router} />;
+    return <RouterProvider router={router} />
 }

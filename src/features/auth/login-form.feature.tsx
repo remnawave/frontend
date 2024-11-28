@@ -31,7 +31,7 @@ export const LoginForm = () => {
 
     return (
         <form onSubmit={handleSubmit}>
-            <Container size={600} my={40}>
+            <Container size={'100%'} my={40}>
                 <Paper withBorder shadow="md" p={30} mt={30} radius="md">
                     <TextInput
                         name="username"
