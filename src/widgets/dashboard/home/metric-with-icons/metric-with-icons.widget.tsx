@@ -1,6 +1,6 @@
-import { Group } from '@mantine/core';
-import { MetricCard } from '@/shared/ui/metric-card';
-import { MetricWithIconProps } from './interfaces/iprops';
+import { Group } from '@mantine/core'
+import { MetricCard } from '@/shared/ui/metric-card'
+import { MetricWithIconProps } from './interfaces/iprops'
 
 export const MetricWithIcon = (props: MetricWithIconProps) => (
     <MetricCard.Root key={props.title}>
@@ -14,4 +14,4 @@ export const MetricWithIcon = (props: MetricWithIconProps) => (
             </div>
         </Group>
     </MetricCard.Root>
-);
+)

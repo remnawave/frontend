@@ -24,11 +24,7 @@ export function HostCardWidget(props: IProps) {
     const ch = new ColorHash()
 
     return (
-        <Draggable
-            key={item.uuid}
-            index={index}
-            draggableId={item.uuid}
-        >
+        <Draggable key={item.uuid} index={index} draggableId={item.uuid}>
             {(provided, snapshot) => (
                 <div
                     className={cx(classes.item, {
@@ -37,14 +33,8 @@ export function HostCardWidget(props: IProps) {
                     ref={provided.innerRef}
                     {...provided.draggableProps}
                 >
-                    <div
-                        {...provided.dragHandleProps}
-                        className={classes.dragHandle}
-                    >
-                        <PiDotsSixVertical
-                            size="2rem"
-                            color="white"
-                        />
+                    <div {...provided.dragHandleProps} className={classes.dragHandle}>
+                        <PiDotsSixVertical size="2rem" color="white" />
                     </div>
 
                     <div>
@@ -59,17 +49,10 @@ export function HostCardWidget(props: IProps) {
                             >
                                 {inbound.tag}
                             </Badge>
-                            <Text
-                                fw={400}
-                                miw={'30ch'}
-                                c={'white'}
-                            >
+                            <Text fw={400} miw={'30ch'} c={'white'}>
                                 {item.remark}
                             </Text>
-                            <Text
-                                c="dimmed"
-                                size="sm"
-                            >
+                            <Text c="dimmed" size="sm">
                                 {item.address}
                                 {item.port ? `:${item.port}` : ''}
                             </Text>

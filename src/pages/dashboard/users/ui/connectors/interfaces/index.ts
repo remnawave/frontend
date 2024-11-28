@@ -1,1 +1,1 @@
-export * from './data-table-return.type';
+export * from './data-table-return.type'

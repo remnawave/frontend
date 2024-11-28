@@ -1,14 +1,5 @@
-import { useEffect, useState } from 'react';
-import { UpdateUserCommand } from '@remnawave/backend-contract';
-import { LoaderModalShared } from '@shared/ui/loader-modal';
-import {
-    PiCalendarDuotone,
-    PiClockDuotone,
-    PiFloppyDiskDuotone,
-    PiLinkDuotone,
-    PiUserDuotone,
-} from 'react-icons/pi';
-import { z } from 'zod';
+import { useEffect, useState } from 'react'
+
 import {
     ActionIcon,
     Box,
@@ -23,72 +14,82 @@ import {
     SimpleGrid,
     Stack,
     Text,
-    TextInput,
-} from '@mantine/core';
-import { DateTimePicker } from '@mantine/dates';
-import { useForm, zodResolver } from '@mantine/form';
-import { notifications } from '@mantine/notifications';
+    TextInput
+} from '@mantine/core'
+import { DateTimePicker } from '@mantine/dates'
+import { useForm, zodResolver } from '@mantine/form'
+import { notifications } from '@mantine/notifications'
+import { UpdateUserCommand } from '@remnawave/backend-contract'
+import { LoaderModalShared } from '@shared/ui/loader-modal'
+import {
+    PiCalendarDuotone,
+    PiClockDuotone,
+    PiFloppyDiskDuotone,
+    PiLinkDuotone,
+    PiUserDuotone
+} from 'react-icons/pi'
+import { z } from 'zod'
 import {
     useDashboardStoreActions,
-    useDSInbounds,
-} from '@/entitites/dashboard/dashboard-store/dashboard-store';
+    useDSInbounds
+} from '@/entitites/dashboard/dashboard-store/dashboard-store'
 import {
     useUserModalStoreActions,
     useUserModalStoreIsModalOpen,
-    useUserModalStoreUser,
-} from '@/entitites/dashboard/user-modal-store/user-modal-store';
-import { DeleteUserFeature } from '@/features/ui/dashboard/users/delete-user';
-import { ResetUsageUserFeature } from '@/features/ui/dashboard/users/reset-usage-user';
-import { RevokeSubscriptionUserFeature } from '@/features/ui/dashboard/users/revoke-subscription-user';
-import { ToggleUserStatusButtonFeature } from '@/features/ui/dashboard/users/toggle-user-status-button';
-import { resetDataStrategy } from '@/shared/constants';
-import { handleFormErrors } from '@/shared/utils';
-import { bytesToGbUtil, gbToBytesUtil, prettyBytesUtil } from '@/shared/utils/bytes';
-import { UserStatusBadge } from '@/widgets/dashboard/users/user-status-badge';
-import { InboundCheckboxCardWidget } from '../inbound-checkbox-card';
-import { IFormValues } from './interfaces';
+    useUserModalStoreUser
+} from '@/entitites/dashboard/user-modal-store/user-modal-store'
+import { DeleteUserFeature } from '@/features/ui/dashboard/users/delete-user'
+import { ResetUsageUserFeature } from '@/features/ui/dashboard/users/reset-usage-user'
+import { RevokeSubscriptionUserFeature } from '@/features/ui/dashboard/users/revoke-subscription-user'
+import { ToggleUserStatusButtonFeature } from '@/features/ui/dashboard/users/toggle-user-status-button'
+import { resetDataStrategy } from '@/shared/constants'
+import { handleFormErrors } from '@/shared/utils'
+import { bytesToGbUtil, gbToBytesUtil, prettyBytesUtil } from '@/shared/utils/bytes'
+import { UserStatusBadge } from '@/widgets/dashboard/users/user-status-badge'
+import { InboundCheckboxCardWidget } from '../inbound-checkbox-card'
+import { IFormValues } from './interfaces'
 
 export const ViewUserModal = () => {
-    const isModalOpen = useUserModalStoreIsModalOpen();
-    const actions = useUserModalStoreActions();
-    const user = useUserModalStoreUser();
-    const inbounds = useDSInbounds();
-    const actionsDS = useDashboardStoreActions();
+    const isModalOpen = useUserModalStoreIsModalOpen()
+    const actions = useUserModalStoreActions()
+    const user = useUserModalStoreUser()
+    const inbounds = useDSInbounds()
+    const actionsDS = useDashboardStoreActions()
 
-    const [isLoading, setIsLoading] = useState(true);
-    const [isDataSubmitting, setIsDataSubmitting] = useState(false);
+    const [isLoading, setIsLoading] = useState(true)
+    const [isDataSubmitting, setIsDataSubmitting] = useState(false)
 
     const form = useForm<IFormValues>({
         name: 'edit-user-form',
         mode: 'uncontrolled',
-        validate: zodResolver(UpdateUserCommand.RequestSchema),
-    });
+        validate: zodResolver(UpdateUserCommand.RequestSchema)
+    })
 
     useEffect(() => {
-        let timeout: NodeJS.Timeout | undefined;
+        let timeout: NodeJS.Timeout | undefined
         if (isModalOpen) {
-            (async () => {
-                setIsLoading(true);
+            ;(async () => {
+                setIsLoading(true)
                 try {
-                    await actions.getUser();
-                    await actionsDS.getInbounds();
+                    await actions.getUser()
+                    await actionsDS.getInbounds()
                 } finally {
                     timeout = setTimeout(() => {
-                        setIsLoading(false);
-                    }, 1000);
+                        setIsLoading(false)
+                    }, 1000)
                 }
-            })();
+            })()
             if (!isModalOpen) {
                 if (timeout) {
-                    clearTimeout(timeout);
+                    clearTimeout(timeout)
                 }
             }
         }
-    }, [isModalOpen]);
+    }, [isModalOpen])
 
     useEffect(() => {
         if (user && inbounds) {
-            const activeInboundUuids = user.activeUserInbounds.map((inbound) => inbound.uuid);
+            const activeInboundUuids = user.activeUserInbounds.map((inbound) => inbound.uuid)
 
             form.setValues({
                 uuid: user.uuid,
@@ -98,57 +99,57 @@ export const ViewUserModal = () => {
                 expireAt: user.expireAt ? new Date(user.expireAt) : new Date(),
                 activeUserInbounds: activeInboundUuids,
                 shortUuid: user.shortUuid,
-                trojanPassword: user.trojanPassword,
-            });
+                trojanPassword: user.trojanPassword
+            })
         }
-    }, [user, inbounds]);
+    }, [user, inbounds])
 
     if (!user) {
-        return null;
+        return null
     }
 
-    const usedTrafficPercentage = (user.usedTrafficBytes / user.trafficLimitBytes) * 100;
-    const totalUsedTraffic = prettyBytesUtil(user.usedTrafficBytes, true);
+    const usedTrafficPercentage = (user.usedTrafficBytes / user.trafficLimitBytes) * 100
+    const totalUsedTraffic = prettyBytesUtil(user.usedTrafficBytes, true)
 
     const handleSubmit = form.onSubmit(async (values) => {
         try {
-            setIsDataSubmitting(true);
+            setIsDataSubmitting(true)
             const updateData = {
                 uuid: values.uuid,
                 trafficLimitStrategy: values.trafficLimitStrategy,
                 trafficLimitBytes: gbToBytesUtil(values.trafficLimitBytes),
                 expireAt: values.expireAt,
-                activeUserInbounds: values.activeUserInbounds,
-            };
+                activeUserInbounds: values.activeUserInbounds
+            }
 
-            await actions.updateUser(updateData);
+            await actions.updateUser(updateData)
 
             notifications.show({
                 title: 'Success',
                 message: 'User updated successfully',
-                color: 'green',
-            });
+                color: 'green'
+            })
         } catch (error) {
             if (error instanceof z.ZodError) {
-                console.error('Zod validation error:', error.errors);
+                console.error('Zod validation error:', error.errors)
             }
 
             if (error instanceof Error) {
-                console.error('Error message:', error.message);
-                console.error('Error stack:', error.stack);
+                console.error('Error message:', error.message)
+                console.error('Error stack:', error.stack)
             }
 
-            handleFormErrors(form, error);
+            handleFormErrors(form, error)
 
             notifications.show({
                 title: 'Error',
                 message: error instanceof Error ? error.message : 'Failed to update user',
-                color: 'red',
-            });
+                color: 'red'
+            })
         } finally {
-            setIsDataSubmitting(false);
+            setIsDataSubmitting(false)
         }
-    });
+    })
 
     return (
         <Modal
@@ -267,7 +268,7 @@ export const ViewUserModal = () => {
                                     cols={{
                                         base: 1,
                                         sm: 1,
-                                        md: 2,
+                                        md: 2
                                     }}
                                 >
                                     {inbounds?.map((inbound) => (
@@ -308,5 +309,5 @@ export const ViewUserModal = () => {
                 </form>
             )}
         </Modal>
-    );
-};
+    )
+}

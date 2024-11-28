@@ -29,17 +29,11 @@ export default function HostsPageComponent(props: IProps) {
     }
     return (
         <Page title="Hosts">
-            <PageHeader
-                title="Hosts"
-                breadcrumbs={BREADCRUMBS}
-            />
+            <PageHeader title="Hosts" breadcrumbs={BREADCRUMBS} />
 
             <Grid>
                 <Grid.Col span={12}>
-                    <HostsTableWidget
-                        hosts={hosts}
-                        inbounds={inbounds}
-                    />
+                    <HostsTableWidget hosts={hosts} inbounds={inbounds} />
                 </Grid.Col>
             </Grid>
         </Page>

@@ -1,18 +1,19 @@
-import { useEffect } from 'react';
-import { HamburgerButton } from '@shared/ui/hamburger-button';
-import { Logo } from '@shared/ui/logo';
-import { useLocation } from 'react-router-dom';
-import { Drawer } from '@mantine/core';
-import { useDisclosure } from '@mantine/hooks';
-import { Sidebar } from '../sidebar';
+import { useEffect } from 'react'
+
+import { Drawer } from '@mantine/core'
+import { useDisclosure } from '@mantine/hooks'
+import { HamburgerButton } from '@shared/ui/hamburger-button'
+import { Logo } from '@shared/ui/logo'
+import { useLocation } from 'react-router-dom'
+import { Sidebar } from '../sidebar'
 
 export function SidebarButton() {
-    const location = useLocation();
-    const [opened, { open, close }] = useDisclosure(false);
+    const location = useLocation()
+    const [opened, { open, close }] = useDisclosure(false)
 
     useEffect(() => {
-        close();
-    }, [location.pathname]);
+        close()
+    }, [location.pathname])
 
     return (
         <>
@@ -29,5 +30,5 @@ export function SidebarButton() {
             </Drawer.Root>
             <HamburgerButton onClick={open} display={{ xl: 'none' }} />
         </>
-    );
+    )
 }

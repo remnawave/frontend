@@ -1,33 +1,33 @@
-import { LoginCommand } from '@remnawave/backend-contract';
-import { useAuth } from '@shared/hooks/use-auth';
-import { PiSignInDuotone, PiSignOutDuotone } from 'react-icons/pi';
-import { Button, Container, Paper, PasswordInput, TextInput } from '@mantine/core';
-import { useForm, zodResolver } from '@mantine/form';
+import { Button, Container, Paper, PasswordInput, TextInput } from '@mantine/core'
+import { useForm, zodResolver } from '@mantine/form'
+import { LoginCommand } from '@remnawave/backend-contract'
+import { useAuth } from '@shared/hooks/use-auth'
+import { PiSignInDuotone, PiSignOutDuotone } from 'react-icons/pi'
 import {
     useAuthStoreIsLoading,
-    useLoginPageStoreActions,
-} from '../../entitites/auth/auth-store/auth-store';
-import { handleFormErrors } from '../../shared/utils/form';
+    useLoginPageStoreActions
+} from '../../entitites/auth/auth-store/auth-store'
+import { handleFormErrors } from '../../shared/utils/form'
 
 export const LoginForm = () => {
-    const { setIsAuthenticated } = useAuth();
-    const { login } = useLoginPageStoreActions();
-    const isLoading = useAuthStoreIsLoading();
+    const { setIsAuthenticated } = useAuth()
+    const { login } = useLoginPageStoreActions()
+    const isLoading = useAuthStoreIsLoading()
 
     const form = useForm({
         mode: 'uncontrolled',
         validate: zodResolver(LoginCommand.RequestSchema),
-        initialValues: { username: '', password: '' },
-    });
+        initialValues: { username: '', password: '' }
+    })
 
     const handleSubmit = form.onSubmit(async (variables) => {
         try {
-            await login({ username: variables.username, password: variables.password });
-            setIsAuthenticated(true);
+            await login({ username: variables.username, password: variables.password })
+            setIsAuthenticated(true)
         } catch (error) {
-            handleFormErrors(form, error);
+            handleFormErrors(form, error)
         }
-    });
+    })
 
     return (
         <form onSubmit={handleSubmit}>
@@ -61,5 +61,5 @@ export const LoginForm = () => {
                 </Paper>
             </Container>
         </form>
-    );
-};
+    )
+}

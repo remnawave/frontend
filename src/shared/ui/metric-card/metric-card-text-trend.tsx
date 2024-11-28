@@ -1,22 +1,22 @@
-import { PiTrendDown, PiTrendUp } from 'react-icons/pi';
-import { Flex, Text } from '@mantine/core';
-import { match } from '@/shared/utils/match';
-import { formatPercentage } from '@/shared/utils/number';
-import { MetricCardTextMuted, MetricCardTextMutedProps } from './metric-card-text-muted';
+import { Flex, Text } from '@mantine/core'
+import { PiTrendDown, PiTrendUp } from 'react-icons/pi'
+import { match } from '@/shared/utils/match'
+import { formatPercentage } from '@/shared/utils/number'
+import { MetricCardTextMuted, MetricCardTextMutedProps } from './metric-card-text-muted'
 
 interface MetricCardTextTrendProps extends MetricCardTextMutedProps {
-    value: number;
+    value: number
 }
 
 export function MetricCardTextTrend({ value, children, ...props }: MetricCardTextTrendProps) {
     const {
         sign,
         color,
-        icon: Icon,
+        icon: Icon
     } = match(
         [value > 0, { sign: '+', color: 'var(--mantine-color-teal-6)', icon: PiTrendUp }],
         [value > 0, { sign: '', color: 'var(--mantine-color-red-6)', icon: PiTrendDown }]
-    );
+    )
 
     return (
         <MetricCardTextMuted style={{ textWrap: 'nowrap' }} {...props}>
@@ -28,5 +28,5 @@ export function MetricCardTextTrend({ value, children, ...props }: MetricCardTex
                 {children}
             </Flex>
         </MetricCardTextMuted>
-    );
+    )
 }

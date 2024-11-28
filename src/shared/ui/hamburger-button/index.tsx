@@ -1,9 +1,9 @@
-import clsx from 'clsx';
-import { ActionIcon, ActionIconProps, ElementProps } from '@mantine/core';
-import classes from './hamburger-button.module.css';
+import { ActionIcon, ActionIconProps, ElementProps } from '@mantine/core'
+import clsx from 'clsx'
+import classes from './hamburger-button.module.css'
 
 type HamburgerButtonProps = ElementProps<'button', keyof ActionIconProps> &
-    Omit<ActionIconProps, 'children' | 'variant'>;
+    Omit<ActionIconProps, 'children' | 'variant'>
 
 export function HamburgerButton({ className, ...props }: HamburgerButtonProps) {
     return (
@@ -23,5 +23,5 @@ export function HamburgerButton({ className, ...props }: HamburgerButtonProps) {
                 />
             </svg>
         </ActionIcon>
-    );
+    )
 }

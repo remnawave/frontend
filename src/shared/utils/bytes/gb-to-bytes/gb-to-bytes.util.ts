@@ -1,12 +1,12 @@
-import xbytes from 'xbytes';
+import xbytes from 'xbytes'
 
 export function gbToBytesUtil(gbInput: number | undefined): number | undefined {
-    if (typeof gbInput === 'undefined') return undefined;
+    if (typeof gbInput === 'undefined') return undefined
     if (typeof gbInput === 'string') {
-        gbInput = Number(gbInput);
+        gbInput = Number(gbInput)
     }
 
-    const res = xbytes.parse(`${gbInput} GiB`);
+    const res = xbytes.parse(`${gbInput} GiB`)
 
-    return res.bytes;
+    return res.bytes
 }

@@ -1,19 +1,19 @@
-import { PiSignOutDuotone } from 'react-icons/pi';
-import { useNavigate } from 'react-router-dom';
-import { Button, Menu } from '@mantine/core';
-import { removeToken, useSessionStoreActions } from '../../../../entitites/auth';
-import { ROUTES } from '../../../../shared/constants';
-import { useAuth } from '../../../../shared/hooks/use-auth';
+import { Button, Menu } from '@mantine/core'
+import { PiSignOutDuotone } from 'react-icons/pi'
+import { useNavigate } from 'react-router-dom'
+import { removeToken, useSessionStoreActions } from '../../../../entitites/auth'
+import { ROUTES } from '../../../../shared/constants'
+import { useAuth } from '../../../../shared/hooks/use-auth'
 
 export const HeaderButtons = () => {
-    const { setIsAuthenticated } = useAuth();
+    const { setIsAuthenticated } = useAuth()
 
-    const navigate = useNavigate();
+    const navigate = useNavigate()
     const handleLogout = () => {
-        setIsAuthenticated(false);
-        removeToken();
-        navigate(ROUTES.AUTH.LOGIN);
-    };
+        setIsAuthenticated(false)
+        removeToken()
+        navigate(ROUTES.AUTH.LOGIN)
+    }
 
     return (
         <Menu>
@@ -26,5 +26,5 @@ export const HeaderButtons = () => {
                 Logout
             </Button>
         </Menu>
-    );
-};
+    )
+}

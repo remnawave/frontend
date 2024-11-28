@@ -1,8 +1,8 @@
-import { StickyHeader } from '@shared/ui/sticky-header';
-import { Group } from '@mantine/core';
-import { HeaderButtons } from '../../../../features/ui/dashboard/header-buttons';
-import { SidebarButton } from './sidebar-button';
-import classes from './header.module.css';
+import { Group } from '@mantine/core'
+import { StickyHeader } from '@shared/ui/sticky-header'
+import { HeaderButtons } from '../../../../features/ui/dashboard/header-buttons'
+import { SidebarButton } from './sidebar-button'
+import classes from './header.module.css'
 
 export function Header() {
     return (
@@ -15,5 +15,5 @@ export function Header() {
                 <HeaderButtons />
             </Group>
         </StickyHeader>
-    );
+    )
 }

@@ -64,20 +64,11 @@ export function HostsTableWidget(props: IProps) {
             </DataTable.Container>
 
             <DragDropContext onDragEnd={handleDragEnd}>
-                <Droppable
-                    droppableId="dnd-list"
-                    direction="vertical"
-                >
+                <Droppable droppableId="dnd-list" direction="vertical">
                     {(provided) => (
-                        <div
-                            {...provided.droppableProps}
-                            ref={provided.innerRef}
-                        >
+                        <div {...provided.droppableProps} ref={provided.innerRef}>
                             {state.map((item, index) => (
-                                <HostCardWidget
-                                    item={item}
-                                    index={index}
-                                />
+                                <HostCardWidget item={item} index={index} />
                             ))}
                             {provided.placeholder}
                         </div>

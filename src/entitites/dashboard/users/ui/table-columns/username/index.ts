@@ -1,2 +1,2 @@
-export * from './interface';
-export * from './username.column';
+export * from './interface'
+export * from './username.column'

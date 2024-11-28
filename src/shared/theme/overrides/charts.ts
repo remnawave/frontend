@@ -1,11 +1,11 @@
-import { BarChart } from '@mantine/charts';
+import { BarChart } from '@mantine/charts'
 
 export default {
     BarChart: BarChart.extend({
         defaultProps: {
             barProps: {
-                radius: 8,
-            },
-        },
-    }),
-};
+                radius: 8
+            }
+        }
+    })
+}

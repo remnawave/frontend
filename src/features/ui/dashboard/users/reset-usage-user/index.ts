@@ -1,1 +1,1 @@
-export * from './reset-usage-user.feature';
+export * from './reset-usage-user.feature'

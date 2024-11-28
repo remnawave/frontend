@@ -1,2 +1,2 @@
-export * from './interface';
-export * from './short-uuid.column';
+export * from './interface'
+export * from './short-uuid.column'

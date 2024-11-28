@@ -1,10 +1,10 @@
-import { DrawerOverlay } from '@mantine/core';
+import { DrawerOverlay } from '@mantine/core'
 
 export default {
     DrawerOverlay: DrawerOverlay.extend({
         defaultProps: {
             backgroundOpacity: 0.5,
-            blur: 2,
-        },
-    }),
-};
+            blur: 2
+        }
+    })
+}

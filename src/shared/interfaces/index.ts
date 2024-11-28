@@ -1,1 +1,1 @@
-export * from './breadcrumbds.interface';
+export * from './breadcrumbds.interface'

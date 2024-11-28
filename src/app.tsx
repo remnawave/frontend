@@ -20,10 +20,7 @@ import { theme } from '@/shared/theme'
 export function App() {
     return (
         <AuthProvider>
-            <MantineProvider
-                theme={theme}
-                defaultColorScheme="dark"
-            >
+            <MantineProvider theme={theme} defaultColorScheme="dark">
                 <Notifications position="top-right" />
                 <NavigationProgress />
                 <ModalsProvider>

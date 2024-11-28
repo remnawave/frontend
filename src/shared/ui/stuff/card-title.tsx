@@ -1,10 +1,11 @@
-import { forwardRef, ReactNode } from 'react';
-import { CardSection, CardSectionProps, Group, Text, Title } from '@mantine/core';
+import { forwardRef, ReactNode } from 'react'
+
+import { CardSection, CardSectionProps, Group, Text, Title } from '@mantine/core'
 
 export interface CardTitleProps extends Omit<CardSectionProps, 'size' | 'c' | 'fw' | 'tt'> {
-    title: ReactNode;
-    description?: string;
-    actions?: ReactNode;
+    title: ReactNode
+    description?: string
+    actions?: ReactNode
 }
 
 export const CardTitle = forwardRef<HTMLDivElement, CardTitleProps>(
@@ -30,4 +31,4 @@ export const CardTitle = forwardRef<HTMLDivElement, CardTitleProps>(
             </Group>
         </CardSection>
     )
-);
+)

@@ -1,1 +1,1 @@
-export * from './header-buttons.feature';
+export * from './header-buttons.feature'

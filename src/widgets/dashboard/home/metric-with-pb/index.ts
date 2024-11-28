@@ -1,1 +1,1 @@
-export * from './metric-with-pb.widget';
+export * from './metric-with-pb.widget'

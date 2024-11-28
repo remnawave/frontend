@@ -1,16 +1,16 @@
-import { PiClockCounterClockwiseDuotone } from 'react-icons/pi';
-import { ActionIcon, Tooltip } from '@mantine/core';
-import { notifications } from '@mantine/notifications';
-import { IProps } from './interfaces';
+import { ActionIcon, Tooltip } from '@mantine/core'
+import { notifications } from '@mantine/notifications'
+import { PiClockCounterClockwiseDuotone } from 'react-icons/pi'
+import { IProps } from './interfaces'
 
 export function ResetUsageUserFeature(props: IProps) {
     const handleResetUsage = async () => {
         notifications.show({
             title: 'Reset usage',
             message: 'Reset usage not yet implemented',
-            color: 'yellow',
-        });
-    };
+            color: 'yellow'
+        })
+    }
 
     // TODO: Implement reset usage
 
@@ -30,5 +30,5 @@ export function ResetUsageUserFeature(props: IProps) {
                 <PiClockCounterClockwiseDuotone size="1.5rem" />
             </ActionIcon>
         </Tooltip>
-    );
+    )
 }

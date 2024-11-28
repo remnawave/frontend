@@ -1,1 +1,1 @@
-export * from './user-status-badge.widget';
+export * from './user-status-badge.widget'

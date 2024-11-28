@@ -1,1 +1,1 @@
-export * from './create-user-modal.widget';
+export * from './create-user-modal.widget'

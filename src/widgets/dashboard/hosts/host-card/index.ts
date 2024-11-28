@@ -1,1 +1,1 @@
-export * from './host-card.widget';
+export * from './host-card.widget'

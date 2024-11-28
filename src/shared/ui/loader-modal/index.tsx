@@ -1,1 +1,1 @@
-export * from './loader-model.shared';
+export * from './loader-model.shared'

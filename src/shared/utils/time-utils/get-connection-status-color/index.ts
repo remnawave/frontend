@@ -1,1 +1,1 @@
-export * from './get-connection-status-color.util';
+export * from './get-connection-status-color.util'

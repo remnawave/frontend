@@ -1,10 +1,10 @@
-import { NavLink as RouterLink, useLocation } from 'react-router-dom';
-import { NavLink, Stack, Title } from '@mantine/core';
-import { menu } from './menu-sections';
-import classes from './sidebar.module.css';
+import { NavLink, Stack, Title } from '@mantine/core'
+import { NavLink as RouterLink, useLocation } from 'react-router-dom'
+import { menu } from './menu-sections'
+import classes from './sidebar.module.css'
 
 export function Sidebar() {
-    const { pathname } = useLocation();
+    const { pathname } = useLocation()
 
     return (
         <Stack gap="xl">
@@ -53,5 +53,5 @@ export function Sidebar() {
                 </div>
             ))}
         </Stack>
-    );
+    )
 }

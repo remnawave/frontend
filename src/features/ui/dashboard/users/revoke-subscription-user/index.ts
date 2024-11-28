@@ -1,1 +1,1 @@
-export * from './revoke-subscription-user.feature';
+export * from './revoke-subscription-user.feature'

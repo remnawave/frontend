@@ -1,8 +1,8 @@
-import { Page } from '@shared/ui/page';
-import { UnderlineShape } from '@shared/ui/underline-shape';
-import { Box, Group, Stack, Text, Title } from '@mantine/core';
-import { Logo } from '@/shared/ui/logo';
-import { LoginForm } from '../../../features/auth';
+import { Box, Group, Stack, Text, Title } from '@mantine/core'
+import { Page } from '@shared/ui/page'
+import { UnderlineShape } from '@shared/ui/underline-shape'
+import { Logo } from '@/shared/ui/logo'
+import { LoginForm } from '../../../features/auth'
 
 export const LoginPage = () => {
     return (
@@ -30,7 +30,7 @@ export const LoginPage = () => {
                 </Box>
             </Stack>
         </Page>
-    );
-};
+    )
+}
 
-export default LoginPage;
+export default LoginPage

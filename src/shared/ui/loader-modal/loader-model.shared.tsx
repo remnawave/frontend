@@ -1,8 +1,8 @@
-import { Center, Loader, Stack, Text } from '@mantine/core';
-import { IProps } from './interfaces';
+import { Center, Loader, Stack, Text } from '@mantine/core'
+import { IProps } from './interfaces'
 
 export function LoaderModalShared(props: IProps) {
-    const { text, ...rest } = props;
+    const { text, ...rest } = props
 
     return (
         <Center {...rest}>
@@ -13,5 +13,5 @@ export function LoaderModalShared(props: IProps) {
                 </Text>
             </Stack>
         </Center>
-    );
+    )
 }

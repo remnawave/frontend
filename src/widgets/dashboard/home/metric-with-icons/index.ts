@@ -1,1 +1,1 @@
-export * from './metric-with-icons.widget';
+export * from './metric-with-icons.widget'

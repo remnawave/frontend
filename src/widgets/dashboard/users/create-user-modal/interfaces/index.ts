@@ -1,1 +1,1 @@
-export * from './form-values.interface';
+export * from './form-values.interface'

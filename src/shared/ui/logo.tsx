@@ -1,9 +1,9 @@
-import { Box, BoxProps, ElementProps } from '@mantine/core';
+import { Box, BoxProps, ElementProps } from '@mantine/core'
 
 interface LogoProps
     extends Omit<BoxProps, 'children' | 'ref'>,
         ElementProps<'svg', keyof BoxProps> {
-    size?: string | number;
+    size?: string | number
 }
 
 export function Logo({ size, style, ...props }: LogoProps) {
@@ -23,5 +23,5 @@ export function Logo({ size, style, ...props }: LogoProps) {
                 clipRule="evenodd"
             />
         </Box>
-    );
+    )
 }

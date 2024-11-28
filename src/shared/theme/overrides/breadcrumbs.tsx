@@ -1,5 +1,5 @@
-import { GoDotFill as BreadcrumbsSeparator } from 'react-icons/go';
-import { Breadcrumbs } from '@mantine/core';
+import { Breadcrumbs } from '@mantine/core'
+import { GoDotFill as BreadcrumbsSeparator } from 'react-icons/go'
 
 export default {
     Breadcrumbs: Breadcrumbs.extend({
@@ -10,7 +10,7 @@ export default {
                     color="var(--mantine-color-dimmed)"
                     opacity={0.4}
                 />
-            ),
-        },
-    }),
-};
+            )
+        }
+    })
+}

@@ -1,1 +1,1 @@
-export * from './delete-user.feature';
+export * from './delete-user.feature'

@@ -1,1 +1,1 @@
-export * from './bytes-to-gb.util';
+export * from './bytes-to-gb.util'

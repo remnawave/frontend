@@ -1,1 +1,1 @@
-export * from './view-user-modal.widget';
+export * from './view-user-modal.widget'

@@ -1,1 +1,1 @@
-export * from './user-status-badge-props.interface';
+export * from './user-status-badge-props.interface'

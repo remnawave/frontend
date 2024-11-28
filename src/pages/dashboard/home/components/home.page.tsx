@@ -86,31 +86,19 @@ export const HomePage = (props: IProps) => {
 
     return (
         <Page title="Home">
-            <PageHeader
-                title="Short stats"
-                breadcrumbs={breadcrumbs}
-            />
+            <PageHeader title="Short stats" breadcrumbs={breadcrumbs} />
 
-            <Stack
-                gap="sm"
-                mb="xl"
-            >
+            <Stack gap="sm" mb="xl">
                 <SimpleGrid cols={{ base: 1, sm: 2, xl: 4 }}>
                     {simpleMetrics.map((metric) => (
-                        <MetricWithIcon
-                            key={metric.title}
-                            {...metric}
-                        />
+                        <MetricWithIcon key={metric.title} {...metric} />
                     ))}
                 </SimpleGrid>
 
                 <Text>Users</Text>
                 <SimpleGrid cols={{ base: 1, sm: 2, xl: 4 }}>
                     {usersMetrics.map((metric) => (
-                        <MetricWithIcon
-                            key={metric.title}
-                            {...metric}
-                        />
+                        <MetricWithIcon key={metric.title} {...metric} />
                     ))}
                 </SimpleGrid>
             </Stack>

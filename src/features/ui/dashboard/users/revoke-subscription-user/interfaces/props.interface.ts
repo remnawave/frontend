@@ -1,3 +1,3 @@
-import { GetInboundsCommand } from '@remnawave/backend-contract';
+import { GetInboundsCommand } from '@remnawave/backend-contract'
 
 export interface IProps {}

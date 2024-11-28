@@ -1,1 +1,1 @@
-export * from './home.page.connector';
+export * from './home.page.connector'

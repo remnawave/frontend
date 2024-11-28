@@ -1,1 +1,1 @@
-export * from './pretty-bytes.util';
+export * from './pretty-bytes.util'

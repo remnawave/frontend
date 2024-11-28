@@ -1,1 +1,1 @@
-export * from './user-table.widget';
+export * from './user-table.widget'

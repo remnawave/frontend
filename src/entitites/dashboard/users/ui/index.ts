@@ -1,1 +1,1 @@
-export * from './table-columns';
+export * from './table-columns'

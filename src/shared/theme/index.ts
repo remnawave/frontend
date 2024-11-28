@@ -1,5 +1,5 @@
-import { createTheme } from '@mantine/core';
-import components from './overrides';
+import { createTheme } from '@mantine/core'
+import components from './overrides'
 
 export const theme = createTheme({
     components,
@@ -13,7 +13,7 @@ export const theme = createTheme({
         xl: '80em',
         '2xl': '96em',
         '3xl': '120em',
-        '4xl': '160em',
+        '4xl': '160em'
     },
     colors: {
         dark: [
@@ -26,7 +26,7 @@ export const theme = createTheme({
             '#1A2437',
             '#111827',
             '#0A101C',
-            '#050913',
-        ],
-    },
-});
+            '#050913'
+        ]
+    }
+})

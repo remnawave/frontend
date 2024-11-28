@@ -1,12 +1,12 @@
-import { Box, Group, Indicator, Text } from '@mantine/core';
-import { IProps } from '@/entitites/dashboard/users/ui/table-columns/username/interface';
-import { getConnectionStatusColorUtil, getTimeAgoUtil } from '@/shared/utils/time-utils';
+import { Box, Group, Indicator, Text } from '@mantine/core'
+import { IProps } from '@/entitites/dashboard/users/ui/table-columns/username/interface'
+import { getConnectionStatusColorUtil, getTimeAgoUtil } from '@/shared/utils/time-utils'
 
 export function UsernameColumnEntity(props: IProps) {
-    const { user } = props;
+    const { user } = props
 
-    const color = getConnectionStatusColorUtil(user.onlineAt);
-    const timeAgo = getTimeAgoUtil(user.onlineAt);
+    const color = getConnectionStatusColorUtil(user.onlineAt)
+    const timeAgo = getTimeAgoUtil(user.onlineAt)
 
     return (
         <Group wrap="nowrap" gap="md" align="center">
@@ -20,5 +20,5 @@ export function UsernameColumnEntity(props: IProps) {
                 </Text>
             </Box>
         </Group>
-    );
+    )
 }

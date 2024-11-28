@@ -1,1 +1,1 @@
-export * from './props.interface';
+export * from './props.interface'

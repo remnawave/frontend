@@ -1,1 +1,1 @@
-export * from './hosts-table.widget';
+export * from './hosts-table.widget'

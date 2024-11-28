@@ -1,1 +1,1 @@
-export * from './get-expiration-text.util';
+export * from './get-expiration-text.util'

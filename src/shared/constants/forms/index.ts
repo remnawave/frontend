@@ -1,1 +1,1 @@
-export * from './reset-data.constatns';
+export * from './reset-data.constatns'

@@ -1,1 +1,1 @@
-export * from './toggle-user-status-button.feature';
+export * from './toggle-user-status-button.feature'

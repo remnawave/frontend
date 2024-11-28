@@ -1,10 +1,11 @@
-import { forwardRef } from 'react';
-import { NavLink } from 'react-router-dom';
-import { Chip, ChipProps } from '@mantine/core';
+import { forwardRef } from 'react'
+
+import { Chip, ChipProps } from '@mantine/core'
+import { NavLink } from 'react-router-dom'
 
 interface LinkChipProps extends ChipProps {
-    href?: string;
-    inline?: boolean;
+    href?: string
+    inline?: boolean
 }
 
 export const LinkChip = forwardRef<HTMLInputElement, LinkChipProps>(
@@ -18,4 +19,4 @@ export const LinkChip = forwardRef<HTMLInputElement, LinkChipProps>(
             checked={checked}
         />
     )
-);
+)

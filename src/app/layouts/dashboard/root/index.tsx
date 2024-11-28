@@ -1,9 +1,9 @@
-import { Logo } from '@shared/ui/logo';
-import { Outlet } from 'react-router-dom';
-import { Paper, ScrollArea } from '@mantine/core';
-import { Header } from '../header';
-import { Sidebar } from '../sidebar';
-import classes from './root.module.css';
+import { Paper, ScrollArea } from '@mantine/core'
+import { Logo } from '@shared/ui/logo'
+import { Outlet } from 'react-router-dom'
+import { Header } from '../header'
+import { Sidebar } from '../sidebar'
+import classes from './root.module.css'
 
 export function DashboardLayout() {
     return (
@@ -24,5 +24,5 @@ export function DashboardLayout() {
                 </main>
             </div>
         </div>
-    );
+    )
 }

@@ -1,9 +1,9 @@
-import { Badge, Checkbox, Group, Text } from '@mantine/core';
-import { IProps } from './interfaces';
-import classes from './Checkbox.module.css';
+import { Badge, Checkbox, Group, Text } from '@mantine/core'
+import { IProps } from './interfaces'
+import classes from './Checkbox.module.css'
 
 export function InboundCheckboxCardWidget(props: IProps) {
-    const { inbound } = props;
+    const { inbound } = props
     return (
         <Checkbox.Card className={classes.root} radius="md" value={inbound.uuid} key={inbound.uuid}>
             <Group align="flex-start" gap="xs">
@@ -18,5 +18,5 @@ export function InboundCheckboxCardWidget(props: IProps) {
                 </div>
             </Group>
         </Checkbox.Card>
-    );
+    )
 }

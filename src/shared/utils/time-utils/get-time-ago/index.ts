@@ -1,1 +1,1 @@
-export * from './get-time-ago.util';
+export * from './get-time-ago.util'

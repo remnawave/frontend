@@ -1,14 +1,14 @@
-import { GetAllHostsCommand, ReorderHostCommand } from '@remnawave/backend-contract';
-import { instance } from '@shared/api';
-import { AxiosError } from 'axios';
-import { create } from 'zustand';
-import { devtools } from 'zustand/middleware';
-import { IActions, IState } from './interfaces';
+import { GetAllHostsCommand, ReorderHostCommand } from '@remnawave/backend-contract'
+import { instance } from '@shared/api'
+import { AxiosError } from 'axios'
+import { create } from 'zustand'
+import { devtools } from 'zustand/middleware'
+import { IActions, IState } from './interfaces'
 
 const initialState: IState = {
     isHostsLoading: false,
-    hosts: null,
-};
+    hosts: null
+}
 
 export const useDashboardStore = create<IState & IActions>()(
     devtools(
@@ -17,74 +17,74 @@ export const useDashboardStore = create<IState & IActions>()(
             actions: {
                 getHosts: async (): Promise<boolean> => {
                     try {
-                        set({ isHostsLoading: true });
+                        set({ isHostsLoading: true })
 
                         const response = await instance.get<GetAllHostsCommand.Response>(
                             GetAllHostsCommand.url
-                        );
+                        )
 
                         const {
-                            data: { response: dataResponse },
-                        } = response;
+                            data: { response: dataResponse }
+                        } = response
 
                         set({
-                            hosts: dataResponse,
-                        });
+                            hosts: dataResponse
+                        })
 
-                        return true;
+                        return true
                     } catch (e) {
                         if (e instanceof AxiosError) {
-                            throw e;
+                            throw e
                         }
-                        return false;
+                        return false
                     } finally {
-                        set({ isHostsLoading: false });
+                        set({ isHostsLoading: false })
                     }
                 },
                 reorderHosts: async (
                     hosts: ReorderHostCommand.Request['hosts']
                 ): Promise<boolean> => {
                     try {
-                        set({ isHostsLoading: true });
+                        set({ isHostsLoading: true })
 
                         const response = await instance.post<ReorderHostCommand.Response>(
                             ReorderHostCommand.url,
                             {
-                                hosts,
+                                hosts
                             }
-                        );
+                        )
 
                         const {
-                            data: { response: dataResponse },
-                        } = response;
+                            data: { response: dataResponse }
+                        } = response
 
                         if (dataResponse.isUpdated) {
-                            return true;
+                            return true
                         }
 
-                        return false;
+                        return false
                     } catch (e) {
                         if (e instanceof AxiosError) {
-                            throw e;
+                            throw e
                         }
-                        return false;
+                        return false
                     } finally {
-                        set({ isHostsLoading: false });
+                        set({ isHostsLoading: false })
                     }
                 },
 
                 resetState: async () => {
-                    set({ ...initialState });
-                },
-            },
+                    set({ ...initialState })
+                }
+            }
         }),
         {
             name: 'hostsStore',
-            anonymousActionType: 'hostsStore',
+            anonymousActionType: 'hostsStore'
         }
     )
-);
+)
 
-export const useHostsStoreIsLoading = () => useDashboardStore((store) => store.isHostsLoading);
-export const useHostsStoreHosts = () => useDashboardStore((state) => state.hosts);
-export const useHostsStoreActions = () => useDashboardStore((store) => store.actions);
+export const useHostsStoreIsLoading = () => useDashboardStore((store) => store.isHostsLoading)
+export const useHostsStoreHosts = () => useDashboardStore((state) => state.hosts)
+export const useHostsStoreActions = () => useDashboardStore((store) => store.actions)

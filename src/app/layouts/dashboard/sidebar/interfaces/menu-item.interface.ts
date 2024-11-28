@@ -1,15 +1,15 @@
-import { ElementType } from 'react';
+import { ElementType } from 'react'
 
 export interface MenuItem {
-    header: string;
+    header: string
     section: {
-        name: string;
-        href: string;
-        icon: ElementType;
+        name: string
+        href: string
+        icon: ElementType
         dropdownItems?: {
-            name: string;
-            href: string;
-            badge?: string;
-        }[];
-    }[];
+            name: string
+            href: string
+            badge?: string
+        }[]
+    }[]
 }

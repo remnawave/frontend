@@ -1,23 +1,24 @@
-import { forwardRef } from 'react';
-import { IMaskInput } from 'react-imask';
-import { Input, Text, type InputProps, type InputWrapperProps } from '@mantine/core';
-import { useUncontrolled } from '@mantine/hooks';
+import { forwardRef } from 'react'
+
+import { Input, Text, type InputProps, type InputWrapperProps } from '@mantine/core'
+import { useUncontrolled } from '@mantine/hooks'
+import { IMaskInput } from 'react-imask'
 
 const maskProps = {
     mask: Number,
     thousandsSeparator: ' ',
     radix: '.',
-    normalizeZeros: true,
-};
+    normalizeZeros: true
+}
 
 export interface MoneyInputProps
     extends Pick<InputWrapperProps, 'description' | 'label' | 'error' | 'required'>,
         InputProps {
-    name?: string;
-    value?: string | number;
-    placeholder?: string;
-    onChange?: (value: number | string) => void;
-    currency?: string;
+    name?: string
+    value?: string | number
+    placeholder?: string
+    onChange?: (value: number | string) => void
+    currency?: string
 }
 
 export const MoneyInput = forwardRef<HTMLDivElement, MoneyInputProps>(
@@ -39,17 +40,17 @@ export const MoneyInput = forwardRef<HTMLDivElement, MoneyInputProps>(
         const [uncontrolledValue, handleUncontrolledValueChange] = useUncontrolled({
             value,
             defaultValue: value,
-            onChange,
-        });
+            onChange
+        })
 
         const handleChange = (unmaskedNewValue: string) => {
             // Since money is typed in major units (100 USD), we need to convert
             // it to minor units (10000 cents) before sending it to the backend.
-            const minorUnits = Math.round(Number(unmaskedNewValue) * 100);
-            handleUncontrolledValueChange(minorUnits);
-        };
+            const minorUnits = Math.round(Number(unmaskedNewValue) * 100)
+            handleUncontrolledValueChange(minorUnits)
+        }
 
-        const majorUnitsValue = String(uncontrolledValue ? Number(uncontrolledValue) / 100 : '');
+        const majorUnitsValue = String(uncontrolledValue ? Number(uncontrolledValue) / 100 : '')
 
         return (
             <Input.Wrapper
@@ -72,6 +73,6 @@ export const MoneyInput = forwardRef<HTMLDivElement, MoneyInputProps>(
                     {...rest}
                 />
             </Input.Wrapper>
-        );
+        )
     }
-);
+)

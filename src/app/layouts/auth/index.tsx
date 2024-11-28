@@ -1,5 +1,5 @@
-import { Outlet } from 'react-router-dom';
-import { Box, Center } from '@mantine/core';
+import { Box, Center } from '@mantine/core'
+import { Outlet } from 'react-router-dom'
 
 export function AuthLayout() {
     return (
@@ -8,5 +8,5 @@ export function AuthLayout() {
                 <Outlet />
             </Box>
         </Center>
-    );
+    )
 }

@@ -1,2 +1,2 @@
-export * from './interfaces';
-export * from './tabs.entity';
+export * from './interfaces'
+export * from './tabs.entity'

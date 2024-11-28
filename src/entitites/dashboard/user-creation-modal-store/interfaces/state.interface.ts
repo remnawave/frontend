@@ -1,4 +1,4 @@
 export interface IState {
-    isLoading: boolean;
-    isModalOpen: boolean;
+    isLoading: boolean
+    isModalOpen: boolean
 }

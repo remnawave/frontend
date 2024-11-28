@@ -1,2 +1,2 @@
-export * from './interface';
-export * from './data-usage.column';
+export * from './interface'
+export * from './data-usage.column'
