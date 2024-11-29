@@ -1,3 +1,4 @@
+import { NodesPageConnector } from '@pages/dashboard/nodes/ui/connectors/nodes.page.connector'
 import {
     createBrowserRouter,
     createRoutesFromElements,
@@ -28,6 +29,7 @@ const router = createBrowserRouter(
                 <Route path={ROUTES.DASHBOARD.HOME} element={<HomePageConnectior />} />
                 <Route path={ROUTES.DASHBOARD.USERS} element={<UsersPageConnector />} />
                 <Route path={ROUTES.DASHBOARD.HOSTS} element={<HostsPageConnector />} />
+                <Route path={ROUTES.DASHBOARD.NODES} element={<NodesPageConnector />} />
             </Route>
         </Route>
     )

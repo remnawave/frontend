@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 
+import { useInterval } from '@mantine/hooks'
 import {
     useDashboardStoreActions,
     useDashboardStoreSystemInfo
@@ -13,17 +14,15 @@ export const HomePageConnectior = () => {
 
     useEffect(() => {
         ;(async () => await actions.getSystemInfo())()
-
-        const intervalTime = setInterval(() => {
-            actions.getSystemInfo()
-        }, 5000)
-
-        return () => clearInterval(intervalTime)
     }, [])
 
-    useEffect(() => {
-        ;(async () => {})()
-    }, [systemInfo])
+    useInterval(
+        () => {
+            actions.getSystemInfo()
+        },
+        5000,
+        { autoInvoke: true }
+    )
 
     if (!systemInfo) {
         return <LoadingScreen />
