@@ -1,14 +1,14 @@
-import { notifications } from '@mantine/notifications'
 import {
     GetAllUsersCommand,
     GetInboundsCommand,
     GetStatsCommand
 } from '@remnawave/backend-contract'
 import { instance } from '@shared/api'
+import { create } from '@shared/hocs/store-wrapper'
 import { AxiosError } from 'axios'
-import { create } from 'zustand'
 import { devtools } from 'zustand/middleware'
 import { IInboundsHashMap } from '@/entitites/dashboard/dashboard-store/interfaces/inbounds-hash-map.interface'
+import { getUserTimezoneUtil } from '@/shared/utils/time-utils'
 import { IActions, IState, IUsersParams } from './interfaces'
 
 const initialState: IState = {
@@ -36,9 +36,18 @@ export const useDashboardStore = create<IState & IActions>()(
                 getSystemInfo: async (): Promise<boolean> => {
                     try {
                         set({ isLoading: true })
+
+                        const params: GetStatsCommand.Request = {
+                            tz: getUserTimezoneUtil()
+                        }
+
                         const response = await instance.get<GetStatsCommand.Response>(
-                            GetStatsCommand.url
+                            GetStatsCommand.url,
+                            {
+                                params
+                            }
                         )
+
                         const {
                             data: { response: dataResponse }
                         } = response
@@ -129,7 +138,11 @@ export const useDashboardStore = create<IState & IActions>()(
                         set({ isInboundsLoading: false })
                     }
                 },
+                getInitialState: () => {
+                    return initialState
+                },
                 resetState: async () => {
+                    console.log('resetState')
                     set({ ...initialState })
                 }
             }

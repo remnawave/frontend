@@ -1,6 +1,5 @@
 import { IGetTabData, User } from '@/entitites/dashboard/users/models/interfaces'
 import { DataTable } from '@/shared/ui/stuff/data-table'
-import { UseDataTableArgs } from '@/shared/ui/stuff/data-table/use-data-table'
 
 export function getTabDataUsers(data: IGetTabData) {
     return DataTable.useDataTable<User>({

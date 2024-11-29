@@ -9,9 +9,7 @@ export function ShortUuidColumnEntity(props: IProps) {
     const shortDisplay = user.shortUuid.slice(0, 5)
 
     return (
-        <CopyButton
-            value={user.shortUuid} // копируется полное значение
-        >
+        <CopyButton value={user.shortUuid}>
             {({ copied, copy }) => (
                 <LinkChip inline onClick={copy} checked={copied} icon={<LuCopy />}>
                     {shortDisplay}...

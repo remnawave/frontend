@@ -3,5 +3,5 @@ import { IBreadcrumb } from '@/shared/interfaces'
 
 export const BREADCRUMBS: IBreadcrumb[] = [
     { label: 'Dashboard', href: ROUTES.DASHBOARD.HOME },
-    { label: 'Users', href: ROUTES.DASHBOARD.USERS }
+    { label: 'Hosts', href: ROUTES.DASHBOARD.HOSTS }
 ]

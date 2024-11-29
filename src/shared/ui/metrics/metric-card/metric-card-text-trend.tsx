@@ -23,7 +23,11 @@ export function MetricCardTextTrend({ value, children, ...props }: MetricCardTex
             <Flex align="center">
                 <Icon color={color} size="1rem" />
                 <Text component="span" fz="inherit" c={color} mx="0.25rem">
-                    {formatPercentage(value, { prefix: sign })}
+                    {formatPercentage(value, {
+                        prefix: sign,
+                        precision: 0,
+                        thousandSeparator: ' '
+                    })}
                 </Text>
                 {children}
             </Flex>

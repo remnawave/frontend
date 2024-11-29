@@ -15,18 +15,8 @@ export function ResetUsageUserFeature(props: IProps) {
     // TODO: Implement reset usage
 
     return (
-        <Tooltip
-            label="Reset usage"
-            arrowSize={2}
-            transitionProps={{ transition: 'scale-x', duration: 300 }}
-        >
-            <ActionIcon
-                variant="outline"
-                size="xl"
-                radius="xs"
-                color="blue"
-                onClick={handleResetUsage}
-            >
+        <Tooltip label="Reset usage">
+            <ActionIcon size="xl" color="blue" onClick={handleResetUsage}>
                 <PiClockCounterClockwiseDuotone size="1.5rem" />
             </ActionIcon>
         </Tooltip>

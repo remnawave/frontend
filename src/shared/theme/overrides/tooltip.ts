@@ -4,7 +4,10 @@ export default {
     Tooltip: Tooltip.extend({
         defaultProps: {
             radius: 'md',
-            withArrow: true
+            withArrow: true,
+            transitionProps: { transition: 'scale-x', duration: 300 },
+            arrowSize: 2,
+            color: 'gray'
         }
     })
 }

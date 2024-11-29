@@ -1,7 +1,7 @@
 import { ElementType } from 'react'
 
 import { ROUTES } from '@shared/constants'
-import { PiScrewdriverDuotone, PiStarDuotone, PiUsersDuotone } from 'react-icons/pi'
+import { PiBookmarksDuotone, PiStarDuotone, PiUsersDuotone } from 'react-icons/pi'
 import { MenuItem } from './interfaces'
 
 export const menu: MenuItem[] = [
@@ -19,7 +19,7 @@ export const menu: MenuItem[] = [
         header: 'Management',
         section: [
             { name: 'Users', href: ROUTES.DASHBOARD.USERS, icon: PiUsersDuotone },
-            { name: 'Hosts', href: ROUTES.DASHBOARD.HOSTS, icon: PiScrewdriverDuotone }
+            { name: 'Hosts', href: ROUTES.DASHBOARD.HOSTS, icon: PiBookmarksDuotone }
         ]
     }
 

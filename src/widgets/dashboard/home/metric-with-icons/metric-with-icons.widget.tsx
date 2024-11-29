@@ -1,5 +1,5 @@
 import { Group } from '@mantine/core'
-import { MetricCard } from '@/shared/ui/metric-card'
+import { MetricCard } from '@/shared/ui/metrics/metric-card'
 import { MetricWithIconProps } from './interfaces/iprops'
 
 export const MetricWithIcon = (props: MetricWithIconProps) => (
@@ -10,7 +10,7 @@ export const MetricWithIcon = (props: MetricWithIconProps) => (
             </MetricCard.Icon>
             <div>
                 <MetricCard.TextMuted>{props.title}</MetricCard.TextMuted>
-                <MetricCard.TextEmphasis>{props.value}</MetricCard.TextEmphasis>
+                <MetricCard.TextEmphasis ff={'monospace'}>{props.value}</MetricCard.TextEmphasis>
             </div>
         </Group>
     </MetricCard.Root>

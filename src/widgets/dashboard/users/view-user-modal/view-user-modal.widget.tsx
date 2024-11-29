@@ -79,10 +79,11 @@ export const ViewUserModal = () => {
                     }, 1000)
                 }
             })()
-            if (!isModalOpen) {
-                if (timeout) {
-                    clearTimeout(timeout)
-                }
+        }
+
+        if (!isModalOpen) {
+            if (timeout) {
+                clearTimeout(timeout)
             }
         }
     }, [isModalOpen])
@@ -151,14 +152,16 @@ export const ViewUserModal = () => {
         }
     })
 
+    const handleClose = () => {
+        actions.changeModalState(false)
+
+        form.reset()
+        form.resetDirty()
+        form.resetTouched()
+    }
+
     return (
-        <Modal
-            opened={isModalOpen}
-            onClose={() => actions.changeModalState(false)}
-            title="Edit user"
-            size="900px"
-            centered
-        >
+        <Modal opened={isModalOpen} onClose={handleClose} title="Edit user" size="900px" centered>
             {isLoading ? (
                 <LoaderModalShared text="Loading user data..." h="400" />
             ) : (
@@ -177,7 +180,6 @@ export const ViewUserModal = () => {
                                 key={form.key('username')}
                                 {...form.getInputProps('username')}
                                 disabled
-                                radius="xs"
                                 leftSection={<PiUserDuotone size="1rem" />}
                             />
 
@@ -186,7 +188,6 @@ export const ViewUserModal = () => {
                                 key={form.key('shortUuid')}
                                 {...form.getInputProps('shortUuid')}
                                 disabled
-                                radius="xs"
                                 leftSection={<PiLinkDuotone size="1rem" />}
                             />
                         </Stack>
@@ -212,7 +213,6 @@ export const ViewUserModal = () => {
                                         <Divider orientation="vertical" />
                                     </>
                                 }
-                                radius="xs"
                                 label="Data Limit"
                                 description="Enter data limit in GB, 0 for unlimited"
                                 allowDecimal={false}
@@ -223,10 +223,9 @@ export const ViewUserModal = () => {
 
                             <Box>
                                 <Progress
-                                    radius="xs"
                                     size="xl"
                                     value={usedTrafficPercentage}
-                                    color={usedTrafficPercentage > 100 ? 'yellow' : 'cyan'}
+                                    color={usedTrafficPercentage > 100 ? 'yellow.9' : 'teal.9'}
                                     striped
                                 />
                                 <Group gap="xs" justify="center" mt={2}>
@@ -240,7 +239,6 @@ export const ViewUserModal = () => {
                                 label="Traffic reset strategy"
                                 description="How often the user's traffic should be reset"
                                 placeholder="Pick value"
-                                radius="xs"
                                 allowDeselect={false}
                                 defaultValue={form.values.trafficLimitStrategy}
                                 data={resetDataStrategy}

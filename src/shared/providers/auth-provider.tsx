@@ -1,7 +1,9 @@
 import { createContext, ReactNode, useEffect, useMemo, useState } from 'react'
 
-import { useToken } from '../../entitites/auth'
+import { removeToken, useToken } from '../../entitites/auth'
 import { useDashboardStoreActions } from '../../entitites/dashboard/dashboard-store/dashboard-store'
+import { logoutEvents } from '../emitters'
+import { resetAllStores } from '../hocs/store-wrapper'
 
 interface AuthContextValues {
     isAuthenticated: boolean
@@ -19,7 +21,22 @@ export function AuthProvider({ children }: AuthProviderProps) {
     const [isAuthenticated, setIsAuthenticated] = useState(false)
     const [isInitialized, setIsInitialized] = useState(false)
     const token = useToken()
+
     const actions = useDashboardStoreActions()
+
+    const logoutUser = () => {
+        setIsAuthenticated(false)
+        removeToken()
+        resetAllStores()
+    }
+
+    useEffect(() => {
+        const unsubscribe = logoutEvents.subscribe(() => {
+            logoutUser()
+        })
+
+        return unsubscribe
+    }, [])
 
     useEffect(() => {
         ;(async () => {
@@ -33,7 +50,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
                 await actions.getSystemInfo()
                 setIsAuthenticated(true)
             } catch (error) {
-                setIsAuthenticated(false)
+                logoutUser()
             } finally {
                 setIsInitialized(true)
             }

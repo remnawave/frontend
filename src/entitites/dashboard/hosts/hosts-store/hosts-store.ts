@@ -1,16 +1,32 @@
-import { GetAllHostsCommand, ReorderHostCommand } from '@remnawave/backend-contract'
+import {
+    CreateHostCommand,
+    DeleteHostCommand,
+    GetAllHostsCommand,
+    ReorderHostCommand,
+    UpdateHostCommand
+} from '@remnawave/backend-contract'
 import { instance } from '@shared/api'
+import { create } from '@shared/hocs/store-wrapper'
 import { AxiosError } from 'axios'
-import { create } from 'zustand'
 import { devtools } from 'zustand/middleware'
 import { IActions, IState } from './interfaces'
 
 const initialState: IState = {
     isHostsLoading: false,
-    hosts: null
+    hosts: null,
+    selectedInboundTag: 'ALL',
+    editModal: {
+        isOpen: false,
+        host: null,
+        isLoading: false
+    },
+    createModal: {
+        isOpen: false,
+        isLoading: false
+    }
 }
 
-export const useDashboardStore = create<IState & IActions>()(
+export const useHostsStore = create<IState & IActions>()(
     devtools(
         (set, getState) => ({
             ...initialState,
@@ -38,15 +54,15 @@ export const useDashboardStore = create<IState & IActions>()(
                         }
                         return false
                     } finally {
-                        set({ isHostsLoading: false })
+                        setTimeout(() => {
+                            set({ isHostsLoading: false })
+                        }, 300)
                     }
                 },
                 reorderHosts: async (
                     hosts: ReorderHostCommand.Request['hosts']
                 ): Promise<boolean> => {
                     try {
-                        set({ isHostsLoading: true })
-
                         const response = await instance.post<ReorderHostCommand.Response>(
                             ReorderHostCommand.url,
                             {
@@ -69,12 +85,85 @@ export const useDashboardStore = create<IState & IActions>()(
                         }
                         return false
                     } finally {
-                        set({ isHostsLoading: false })
                     }
                 },
+                deleteHost: async (uuid: string): Promise<boolean> => {
+                    try {
+                        await instance.delete<DeleteHostCommand.Response>(
+                            DeleteHostCommand.url(uuid)
+                        )
 
+                        return true
+                    } catch (e) {
+                        if (e instanceof AxiosError) {
+                            throw e
+                        }
+                        return false
+                    } finally {
+                    }
+                },
+                updateHost: async (host: UpdateHostCommand.Request): Promise<boolean> => {
+                    try {
+                        await instance.post<UpdateHostCommand.Response>(UpdateHostCommand.url, host)
+
+                        return true
+                    } catch (e) {
+                        if (e instanceof AxiosError) {
+                            throw e
+                        }
+                        return false
+                    }
+                },
+                createHost: async (host: CreateHostCommand.Request): Promise<boolean> => {
+                    try {
+                        await instance.post<CreateHostCommand.Response>(CreateHostCommand.url, host)
+
+                        return true
+                    } catch (e) {
+                        if (e instanceof AxiosError) {
+                            throw e
+                        }
+                        return false
+                    }
+                },
+                toggleEditModal: (isOpen: boolean) => {
+                    set((state) => ({
+                        editModal: { ...state.editModal, isOpen }
+                    }))
+                    if (!isOpen) {
+                        getState().actions.getHosts()
+                        set((state) => ({
+                            editModal: { ...state.editModal, host: null, isLoading: false }
+                        }))
+                    }
+                },
+                toggleCreateModal: (isOpen: boolean) => {
+                    set((state) => ({
+                        createModal: { ...state.createModal, isOpen }
+                    }))
+                    if (!isOpen) {
+                        getState().actions.getHosts()
+                        set((state) => ({
+                            createModal: { ...state.createModal, isLoading: false }
+                        }))
+                    }
+                },
+                setHost: (host: UpdateHostCommand.Response['response']) => {
+                    set((state) => ({
+                        editModal: { ...state.editModal, host }
+                    }))
+                },
+                getInitialState: () => {
+                    return initialState
+                },
                 resetState: async () => {
                     set({ ...initialState })
+                },
+                setSelectedInboundTag: (tag: string) => {
+                    set({ selectedInboundTag: tag })
+                },
+                resetSelectedInboundTag: () => {
+                    set({ selectedInboundTag: 'ALL' })
                 }
             }
         }),
@@ -85,6 +174,21 @@ export const useDashboardStore = create<IState & IActions>()(
     )
 )
 
-export const useHostsStoreIsLoading = () => useDashboardStore((store) => store.isHostsLoading)
-export const useHostsStoreHosts = () => useDashboardStore((state) => state.hosts)
-export const useHostsStoreActions = () => useDashboardStore((store) => store.actions)
+export const useHostsStoreIsHostsLoading = () => useHostsStore((store) => store.isHostsLoading)
+export const useHostsStoreHosts = () => useHostsStore((state) => state.hosts)
+export const useHostsStoreActions = () => useHostsStore((store) => store.actions)
+
+export const useHostsStoreSelectedInboundTag = () =>
+    useHostsStore((state) => state.selectedInboundTag)
+
+// Edit Modal
+export const useHostsStoreEditModalIsOpen = () => useHostsStore((state) => state.editModal.isOpen)
+export const useHostsStoreEditModalHost = () => useHostsStore((state) => state.editModal.host)
+export const useHostsStoreEditModalIsLoading = () =>
+    useHostsStore((state) => state.editModal.isLoading)
+
+// Create Modal
+export const useHostsStoreCreateModalIsOpen = () =>
+    useHostsStore((state) => state.createModal.isOpen)
+export const useHostsStoreCreateModalIsLoading = () =>
+    useHostsStore((state) => state.createModal.isLoading)

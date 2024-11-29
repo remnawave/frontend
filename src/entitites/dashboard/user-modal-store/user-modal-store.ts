@@ -4,12 +4,11 @@ import {
     EnableUserCommand,
     GetUserByUuidCommand,
     RevokeUserSubscriptionCommand,
-    UpdateUserCommand,
-    USERS_STATUS
+    UpdateUserCommand
 } from '@remnawave/backend-contract'
 import { instance } from '@shared/api'
+import { create } from '@shared/hocs/store-wrapper'
 import { AxiosError } from 'axios'
-import { create } from 'zustand'
 import { devtools } from 'zustand/middleware'
 import { IActions, IState } from './interfaces'
 
@@ -188,6 +187,9 @@ export const useUserModalStore = create<IState & IActions>()(
                 },
                 setUserUuid: async (userUuid: string): Promise<void> => {
                     set((state) => ({ userUuid }))
+                },
+                getInitialState: () => {
+                    return initialState
                 },
                 resetState: async (): Promise<void> => {
                     set({ ...initialState })

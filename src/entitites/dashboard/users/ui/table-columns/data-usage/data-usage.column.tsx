@@ -25,15 +25,15 @@ export function DataUsageColumnEntity(props: IProps) {
                 radius="xs"
                 size="md"
                 value={usedTrafficPercentage}
-                color={usedTrafficPercentage > 100 ? 'yellow' : 'cyan'}
+                color={usedTrafficPercentage > 100 ? 'yellow.9' : 'teal.9'}
                 striped
                 animated
             />
             <Group gap="xs" justify="space-between" mt={2}>
-                <Text size="xs" c="dimmed">
+                <Text size="xs" c="dimmed" fw={'550'}>
                     {totalUsedTraffic} / {limitBytes} {strategy}
                 </Text>
-                <Text size="xs" c="dimmed">
+                <Text size="xs" c="dimmed" fw={'550'}>
                     Σ {lifetimeUsedTraffic}
                 </Text>
             </Group>

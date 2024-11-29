@@ -15,7 +15,7 @@ export function UsernameColumnEntity(props: IProps) {
                 <Text size="sm" fw={500} truncate="end">
                     {user.username}
                 </Text>
-                <Text size="xs" c="dimmed">
+                <Text size="xs" c="dimmed" fw={600}>
                     {timeAgo}
                 </Text>
             </Box>

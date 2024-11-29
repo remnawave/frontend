@@ -4,7 +4,8 @@ import components from './overrides'
 export const theme = createTheme({
     components,
     cursorType: 'pointer',
-    fontFamily: 'Inter, sans-serif',
+    fontFamily: 'Montserrat, sans-serif',
+    fontFamilyMonospace: 'Fira Mono, monospace',
     breakpoints: {
         xs: '30em',
         sm: '40em',

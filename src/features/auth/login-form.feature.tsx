@@ -32,7 +32,7 @@ export const LoginForm = () => {
     return (
         <form onSubmit={handleSubmit}>
             <Container size={'100%'} my={40}>
-                <Paper withBorder shadow="md" p={30} mt={30} radius="md">
+                <Paper p={30} mt={30}>
                     <TextInput
                         name="username"
                         label="Username"
@@ -51,7 +51,6 @@ export const LoginForm = () => {
                     <Button
                         fullWidth
                         mt="xl"
-                        variant="outline"
                         type="submit"
                         leftSection={<PiSignInDuotone size="1rem" />}
                         loading={isLoading}

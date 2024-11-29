@@ -5,6 +5,7 @@ import card from './card'
 import charts from './charts'
 import drawer from './drawer'
 import inputs from './inputs'
+import layouts from './layouts'
 import loadingOverlay from './loading-overlay'
 import menu from './menu'
 import notification from './notification'
@@ -25,5 +26,6 @@ export default {
     ...notification,
     ...ringProgress,
     ...table,
-    ...tooltip
+    ...tooltip,
+    ...layouts
 }

@@ -39,19 +39,8 @@ export function DeleteUserFeature(props: IProps) {
     }
 
     return (
-        <Tooltip
-            label="Delete user"
-            arrowSize={2}
-            transitionProps={{ transition: 'scale-x', duration: 300 }}
-        >
-            <ActionIcon
-                variant="outline"
-                size="xl"
-                radius="xs"
-                color="red"
-                onClick={handleDeleteUser}
-                loading={isLoading}
-            >
+        <Tooltip label="Delete user">
+            <ActionIcon size="xl" color="red" onClick={handleDeleteUser} loading={isLoading}>
                 <PiTrashDuotone size="1.5rem" />
             </ActionIcon>
         </Tooltip>

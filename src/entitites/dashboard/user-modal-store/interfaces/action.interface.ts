@@ -1,8 +1,5 @@
-import {
-    GetUserByUuidCommand,
-    RevokeUserSubscriptionCommand,
-    UpdateUserCommand
-} from '@remnawave/backend-contract'
+import { UpdateUserCommand } from '@remnawave/backend-contract'
+import { IState } from './state.interface'
 
 export interface IActions {
     actions: {
@@ -15,5 +12,6 @@ export interface IActions {
         changeModalState: (state: boolean) => void
         setUserUuid: (userUuid: string) => Promise<void>
         resetState: () => Promise<void>
+        getInitialState: () => IState
     }
 }

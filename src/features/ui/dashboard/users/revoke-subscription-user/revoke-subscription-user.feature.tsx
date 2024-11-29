@@ -38,15 +38,9 @@ export function RevokeSubscriptionUserFeature(props: IProps) {
     }
 
     return (
-        <Tooltip
-            label="Revoke subscription"
-            arrowSize={2}
-            transitionProps={{ transition: 'scale-x', duration: 300 }}
-        >
+        <Tooltip label="Revoke subscription">
             <ActionIcon
-                variant="outline"
                 size="xl"
-                radius="xs"
                 color="green"
                 loading={isLoading}
                 onClick={handleRevokeSubscription}

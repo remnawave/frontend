@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo } from 'react'
 
 import { MultiSelect, TextInput } from '@mantine/core'
 import { useDebouncedValue } from '@mantine/hooks'
@@ -17,17 +17,16 @@ import { DataUsageColumnEntity } from '@entitites/dashboard/users/ui'
 import { ShortUuidColumnEntity } from '@entitites/dashboard/users/ui/table-columns/short-uuid'
 import { StatusColumnEntity } from '@entitites/dashboard/users/ui/table-columns/status'
 import { UsernameColumnEntity } from '@entitites/dashboard/users/ui/table-columns/username'
+import { ViewUserActionFeature } from '@features/ui/dashboard/users/view-user-action'
 import { GetAllUsersCommand } from '@remnawave/backend-contract'
 import { DataTable } from '@shared/ui/stuff/data-table'
 import { DataTableColumn } from 'mantine-datatable'
-import UsersPageComponent from '../components/users.page'
+import UsersPageComponent from '../components/users.page.component'
 
 export function UsersPageConnector() {
     const params = useDashboardStoreParams()
     const actions = useDashboardStoreActions()
     const systemInfo = useDashboardStoreSystemInfo()
-
-    const [search, setSearch] = useState('')
 
     const isModalOpen = useUserModalStoreIsModalOpen()
     const userModalActions = useUserModalStoreActions()
@@ -46,20 +45,34 @@ export function UsersPageConnector() {
     const [debouncedFilters] = useDebouncedValue(dataTab.filters.filters, 300)
 
     useEffect(() => {
+        return () => {
+            actions.resetState()
+            userModalActions.resetState()
+        }
+    }, [])
+
+    useEffect(() => {
         if (isModalOpen || isCreateUserModalOpen) return
         actions.getSystemInfo()
 
         const filterEntry = Object.entries(debouncedFilters).find(([_, filter]) => filter?.value)
 
-        const searchParams = filterEntry
-            ? {
-                  search: String(filterEntry[1].value),
-                  searchBy: filterEntry[0] as GetAllUsersCommand.SearchableField
-              }
-            : {
-                  search: dataTab.tabs.value === '*' ? '' : dataTab.tabs.value,
-                  searchBy: dataTab.tabs.value === '*' ? ('username' as const) : ('status' as const)
-              }
+        let searchParams: {
+            search: string | undefined
+            searchBy: GetAllUsersCommand.SearchableField
+        }
+
+        if (filterEntry) {
+            searchParams = {
+                search: String(filterEntry[1].value),
+                searchBy: filterEntry[0] as GetAllUsersCommand.SearchableField
+            }
+        } else {
+            searchParams = {
+                search: dataTab.tabs.value === '*' ? '' : dataTab.tabs.value,
+                searchBy: dataTab.tabs.value === '*' ? ('username' as const) : ('status' as const)
+            }
+        }
 
         actions.getUsers(searchParams)
     }, [dataTab.tabs.value, debouncedFilters, isModalOpen, isCreateUserModalOpen])
@@ -83,13 +96,8 @@ export function UsersPageConnector() {
         })
     }
 
-    const handleUpdate = () => {
-        actions.getUsers({ offset: 0 })
-    }
-
-    const handleOpenModal = async (userUuid: string) => {
-        await userModalActions.setUserUuid(userUuid)
-        userModalActions.changeModalState(true)
+    const handleUpdate = async () => {
+        await actions.getUsers({ offset: 0 })
     }
 
     const columns = useMemo<DataTableColumn<User>[]>(
@@ -98,7 +106,6 @@ export function UsersPageConnector() {
                 accessor: 'shortUuid' as const,
                 title: 'Sub-link',
                 width: 50,
-                sortable: true,
                 filterable: true,
                 filter: (
                     <TextInput
@@ -139,7 +146,8 @@ export function UsersPageConnector() {
             {
                 accessor: 'expireAt' as const,
                 title: 'Status',
-                width: 100,
+                width: 90,
+                align: 'center',
                 sortable: true,
                 filter: (
                     <MultiSelect
@@ -168,8 +176,8 @@ export function UsersPageConnector() {
                 accessor: 'actions',
                 title: 'Actions',
                 textAlign: 'right',
-                width: 100,
-                render: (user) => <DataTable.Actions onView={() => handleOpenModal(user.uuid)} />
+                width: 50,
+                render: (user) => <ViewUserActionFeature userUuid={user.uuid} />
             }
         ],
         []

@@ -4,6 +4,7 @@ import { LoadingScreen } from '@shared/ui/loading-screen'
 import { Navigate, Outlet, useLocation } from 'react-router-dom'
 
 export function AuthGuard() {
+    console.log('Auth guard')
     const location = useLocation()
 
     const { isAuthenticated, isInitialized } = useAuth()

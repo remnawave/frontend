@@ -130,7 +130,10 @@ export const CreateUserModalWidget = () => {
 
     const handleCloseModal = () => {
         actions.changeModalState(false)
+
         form.reset()
+        form.resetDirty()
+        form.resetTouched()
     }
 
     return (
@@ -146,7 +149,6 @@ export const CreateUserModalWidget = () => {
                                 description="Username cannot be changed later"
                                 key={form.key('username')}
                                 {...form.getInputProps('username')}
-                                radius="xs"
                                 leftSection={<PiUserDuotone size="1rem" />}
                             />
 
@@ -165,7 +167,6 @@ export const CreateUserModalWidget = () => {
                                         <Divider orientation="vertical" />
                                     </>
                                 }
-                                radius="xs"
                                 label="Data Limit"
                                 description="Enter data limit in GB, 0 for unlimited"
                                 allowDecimal={false}
@@ -179,7 +180,6 @@ export const CreateUserModalWidget = () => {
                                 label="Traffic reset strategy"
                                 description="How often the user's traffic should be reset"
                                 placeholder="Pick value"
-                                radius="xs"
                                 allowDeselect={false}
                                 defaultValue={form.values.trafficLimitStrategy}
                                 data={resetDataStrategy}

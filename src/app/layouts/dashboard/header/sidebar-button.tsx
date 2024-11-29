@@ -21,7 +21,7 @@ export function SidebarButton() {
                 <Drawer.Overlay />
                 <Drawer.Content>
                     <Drawer.Header px="1.725rem" mb="md">
-                        <Logo w="3rem" />
+                        <Logo w="3rem" color="red" c="red" />
                     </Drawer.Header>
                     <Drawer.Body>
                         <Sidebar />

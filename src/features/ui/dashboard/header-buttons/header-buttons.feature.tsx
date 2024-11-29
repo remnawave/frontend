@@ -1,9 +1,10 @@
 import { Button, Menu } from '@mantine/core'
+import { removeToken } from '@entitites/auth'
 import { PiSignOutDuotone } from 'react-icons/pi'
 import { useNavigate } from 'react-router-dom'
-import { removeToken, useSessionStoreActions } from '../../../../entitites/auth'
-import { ROUTES } from '../../../../shared/constants'
-import { useAuth } from '../../../../shared/hooks/use-auth'
+import { ROUTES } from '@/shared/constants'
+import { resetAllStores } from '@/shared/hocs/store-wrapper'
+import { useAuth } from '@/shared/hooks'
 
 export const HeaderButtons = () => {
     const { setIsAuthenticated } = useAuth()
@@ -12,17 +13,13 @@ export const HeaderButtons = () => {
     const handleLogout = () => {
         setIsAuthenticated(false)
         removeToken()
+        resetAllStores()
         navigate(ROUTES.AUTH.LOGIN)
     }
 
     return (
         <Menu>
-            <Button
-                variant="outline"
-                size="md"
-                leftSection={<PiSignOutDuotone size="1rem" />}
-                onClick={handleLogout}
-            >
+            <Button size="md" leftSection={<PiSignOutDuotone size="1rem" />} onClick={handleLogout}>
                 Logout
             </Button>
         </Menu>

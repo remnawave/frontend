@@ -61,7 +61,6 @@ export function ToggleUserStatusButtonFeature(props: IProps) {
         <Button
             type="button"
             size="md"
-            variant="outline"
             color={color}
             leftSection={icon}
             onClick={handleToggleUserStatus}
