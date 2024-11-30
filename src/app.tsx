@@ -10,6 +10,7 @@ import 'mantine-datatable/styles.layer.css'
 import './global.css'
 
 import { MantineProvider } from '@mantine/core'
+import { useMediaQuery } from '@mantine/hooks'
 import { ModalsProvider } from '@mantine/modals'
 import { Notifications } from '@mantine/notifications'
 import { NavigationProgress } from '@mantine/nprogress'
@@ -18,10 +19,12 @@ import { AuthProvider } from '@/shared/providers/auth-provider'
 import { theme } from '@/shared/theme'
 
 export function App() {
+    const mq = useMediaQuery('(min-width: 40em)')
+
     return (
         <AuthProvider>
             <MantineProvider theme={theme} defaultColorScheme="dark">
-                <Notifications position="top-right" />
+                <Notifications position={mq ? 'top-right' : 'bottom-right'} />
                 <NavigationProgress />
                 <ModalsProvider>
                     <Router />

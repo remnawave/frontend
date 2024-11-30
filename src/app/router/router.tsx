@@ -1,4 +1,5 @@
-import { ConfigPageComponent } from '@pages/dashboard/config/config.page.component'
+import { ConfigPageComponent } from '@pages/dashboard/config/ui/components/config.page.component'
+import { HomePageConnectior } from '@pages/dashboard/home/connectors/home.page.connector'
 import { NodesPageConnector } from '@pages/dashboard/nodes/ui/connectors/nodes.page.connector'
 import {
     createBrowserRouter,
@@ -10,7 +11,6 @@ import {
 import { AuthLayout } from '@/app/layouts/auth'
 import { DashboardLayout } from '@/app/layouts/dashboard'
 import { LoginPage } from '@/pages/auth/login/login.page'
-import { HomePageConnectior } from '@/pages/dashboard/home/connectores/home.page.connector'
 import { HostsPageConnector } from '@/pages/dashboard/hosts/ui/connectors/hosts.page.connector'
 import { UsersPageConnector } from '@/pages/dashboard/users/ui/connectors/users.page.connector'
 import { AuthGuard } from '@/shared/hocs/guards/auth-guard'

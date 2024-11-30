@@ -9,9 +9,12 @@ import {
 } from '@entitites/dashboard/config/config-store/config-store'
 import Editor, { Monaco } from '@monaco-editor/react'
 import { Page } from '@shared/ui/page'
-import { PiCheckSquareOffset, PiFloppyDisk, PiPencilCircle } from 'react-icons/pi'
+import axios from 'axios'
+import dayjs from 'dayjs'
+import { PiCheckSquareOffset, PiFloppyDisk } from 'react-icons/pi'
 import { LoadingScreen, PageHeader } from '@/shared/ui'
 import { monacoTheme } from '@/shared/utils/monaco-theme/monaco-theme'
+import { BREADCRUMBS } from './constant'
 
 export const ConfigPageComponent = () => {
     const [isLoading, setIsLoading] = useState(true)
@@ -22,6 +25,7 @@ export const ConfigPageComponent = () => {
     const config = useConfigStoreConfig()
     const actions = useConfigStoreActions()
     const isConfigLoading = useConfigStoreIsConfigLoading()
+    const [downloadProgress, setDownloadProgress] = useState(0)
 
     const editorRef = useRef<any>(null)
     const monacoRef = useRef<any>(null)
@@ -35,8 +39,8 @@ export const ConfigPageComponent = () => {
             if (!monacoRef.current) return
 
             try {
-                const response = await fetch('/xray.schema.json')
-                const schema = await response.json()
+                const response = await axios.get('/xray.schema.json')
+                const schema = await response.data
 
                 monacoRef.current.languages.json.jsonDefaults.setDiagnosticsOptions({
                     validate: true,
@@ -71,8 +75,7 @@ export const ConfigPageComponent = () => {
                     }
                 })
 
-                const wasmResponse = await fetch('/main.wasm')
-                const wasmBytes = await wasmResponse.arrayBuffer()
+                const wasmBytes = await fetchWithProgress('/main.wasm')
 
                 const { instance } = await WebAssembly.instantiate(wasmBytes, go.importObject)
 
@@ -97,6 +100,29 @@ export const ConfigPageComponent = () => {
             delete window.onWasmInitialized
         }
     }, [])
+
+    const fetchWithProgress = async (url: string) => {
+        try {
+            const response = await axios.get(url, {
+                responseType: 'arraybuffer',
+                onDownloadProgress: (progressEvent) => {
+                    if (progressEvent.total) {
+                        const progress = Math.round(
+                            (progressEvent.loaded * 100) / progressEvent.total
+                        )
+                        setDownloadProgress(progress)
+                    } else {
+                        setDownloadProgress(100)
+                    }
+                }
+            })
+
+            return response.data
+        } catch (error) {
+            console.error('Download failed:', error)
+            throw error
+        }
+    }
 
     const handleSave = () => {
         const currentValue = editorRef.current?.getValue()
@@ -128,7 +154,7 @@ export const ConfigPageComponent = () => {
     }
 
     const formatDocument = () => {
-        editorRef.current?.getAction('editor.action.formatDocument').run()
+        editorRef.current.getAction('editor.action.formatDocument').run()
     }
 
     const handleValidate = () => {
@@ -136,10 +162,12 @@ export const ConfigPageComponent = () => {
             const currentValue = editorRef.current?.getValue()
             const validationResult = window.XrayParseConfig(currentValue)
 
-            setResult(validationResult || 'Config is valid')
+            setResult(
+                `${dayjs().format('HH:mm:ss')} | ${validationResult || 'Xray config is valid.'}`
+            )
             setIsConfigValid(!validationResult)
         } catch (err: unknown) {
-            setResult(`Validation error: ${(err as Error).message}`)
+            setResult(`${dayjs().format('HH:mm:ss')} | Validation error: ${(err as Error).message}`)
             setIsConfigValid(false)
         }
     }
@@ -151,12 +179,12 @@ export const ConfigPageComponent = () => {
     }
 
     if (isLoading || isConfigLoading || !config) {
-        return <LoadingScreen />
+        return <LoadingScreen value={downloadProgress} text={`WASM module is loading...`} />
     }
 
     return (
         <Page title="Config">
-            <PageHeader title="Configuration Editor" />
+            <PageHeader title="Xray Config Editor" breadcrumbs={BREADCRUMBS} />
 
             <Box>
                 <Paper withBorder p={0} mb="md" radius="xs">
@@ -167,10 +195,12 @@ export const ConfigPageComponent = () => {
                         value={JSON.stringify(config, null, 2)}
                         theme={'GithubDark'}
                         onChange={handleValidate}
+                        onValidate={handleValidate}
                         beforeMount={handleEditorDidMount}
                         onMount={(editor, monaco) => {
                             editorRef.current = editor
                             monacoRef.current = monaco
+                            handleValidate()
                         }}
                         options={{
                             minimap: { enabled: false },
