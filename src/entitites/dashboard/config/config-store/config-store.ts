@@ -1,16 +1,17 @@
-import { GetXrayConfigCommand, UpdateXrayConfigCommand } from '@remnawave/backend-contract'
-import { instance } from '@shared/api'
-import { create } from '@shared/hocs/store-wrapper'
 import { AxiosError } from 'axios'
+import { instance } from '@shared/api'
 import { devtools } from 'zustand/middleware'
+import { create } from '@shared/hocs/store-wrapper'
+import { GetXrayConfigCommand, UpdateXrayConfigCommand } from '@remnawave/backend-contract'
+
 import { IActions, IState } from './interfaces'
 
 const initialState: IState = {
-    isConfigLoading: false,
-    config: null
+    config: null,
+    isConfigLoading: false
 }
 
-export const useConfigStore = create<IState & IActions>()(
+export const useConfigStore = create<IActions & IState>()(
     devtools(
         (set, getState) => ({
             ...initialState,
@@ -56,11 +57,11 @@ export const useConfigStore = create<IState & IActions>()(
                         return false
                     }
                 },
-                setConfig: (config: string) => {
-                    set({ config })
-                },
                 getInitialState: () => {
                     return initialState
+                },
+                setConfig: (config: string) => {
+                    set({ config })
                 },
                 resetState: async () => {
                     set({ ...initialState })
@@ -68,8 +69,8 @@ export const useConfigStore = create<IState & IActions>()(
             }
         }),
         {
-            name: 'configStore',
-            anonymousActionType: 'configStore'
+            anonymousActionType: 'configStore',
+            name: 'configStore'
         }
     )
 )

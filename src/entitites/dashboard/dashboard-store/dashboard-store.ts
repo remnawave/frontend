@@ -1,14 +1,15 @@
+import { AxiosError } from 'axios'
+import { instance } from '@shared/api'
+import { devtools } from 'zustand/middleware'
+import { create } from '@shared/hocs/store-wrapper'
+import { getUserTimezoneUtil } from '@/shared/utils/time-utils'
+import { IInboundsHashMap } from '@/entitites/dashboard/dashboard-store/interfaces/inbounds-hash-map.interface'
 import {
     GetAllUsersCommand,
     GetInboundsCommand,
     GetStatsCommand
 } from '@remnawave/backend-contract'
-import { instance } from '@shared/api'
-import { create } from '@shared/hocs/store-wrapper'
-import { AxiosError } from 'axios'
-import { devtools } from 'zustand/middleware'
-import { IInboundsHashMap } from '@/entitites/dashboard/dashboard-store/interfaces/inbounds-hash-map.interface'
-import { getUserTimezoneUtil } from '@/shared/utils/time-utils'
+
 import { IActions, IState, IUsersParams } from './interfaces'
 
 const initialState: IState = {
@@ -22,13 +23,14 @@ const initialState: IState = {
         orderBy: 'createdAt',
         orderDir: 'desc'
     },
+
     totalUsers: 0,
     inbounds: null,
     isInboundsLoading: false,
     inboundsHashMap: null
 }
 
-export const useDashboardStore = create<IState & IActions>()(
+export const useDashboardStore = create<IActions & IState>()(
     devtools(
         (set, getState) => ({
             ...initialState,

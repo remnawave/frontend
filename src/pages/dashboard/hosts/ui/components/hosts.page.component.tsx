@@ -1,21 +1,22 @@
-import { Grid } from '@mantine/core'
-import { useHostsStoreIsHostsLoading } from '@entitites/dashboard'
 import { CreateHostModalWidget } from '@widgets/dashboard/hosts/create-host-modal'
-import { EditHostModalWidget } from '@widgets/dashboard/hosts/edit-host-modal'
 import { HostsPageHeaderWidget } from '@widgets/dashboard/hosts/hosts-page-header'
-import { LoadingScreen, Page, PageHeader } from '@/shared/ui'
+import { EditHostModalWidget } from '@widgets/dashboard/hosts/edit-host-modal'
 import { HostsTableWidget } from '@/widgets/dashboard/hosts/hosts-table'
+import { useHostsStoreIsHostsLoading } from '@entitites/dashboard'
+import { LoadingScreen, PageHeader, Page } from '@/shared/ui'
+import { Grid } from '@mantine/core'
+
 import { BREADCRUMBS } from './constants'
 import { IProps } from './interfaces'
 
 export default function HostsPageComponent(props: IProps) {
-    const { hosts, inbounds } = props
+    const { inbounds, hosts } = props
 
     const isHostsLoading = useHostsStoreIsHostsLoading()
 
     return (
         <Page title="Hosts">
-            <PageHeader title="Hosts" breadcrumbs={BREADCRUMBS} />
+            <PageHeader breadcrumbs={BREADCRUMBS} title="Hosts" />
 
             <Grid>
                 <Grid.Col span={12}>
@@ -24,7 +25,7 @@ export default function HostsPageComponent(props: IProps) {
                     {isHostsLoading ? (
                         <LoadingScreen height="60vh" />
                     ) : (
-                        <HostsTableWidget hosts={hosts} inbounds={inbounds} />
+                        <HostsTableWidget inbounds={inbounds} hosts={hosts} />
                     )}
                 </Grid.Col>
             </Grid>

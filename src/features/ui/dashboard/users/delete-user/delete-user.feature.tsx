@@ -1,12 +1,12 @@
 import { useState } from 'react'
-
+import { PiTrashDuotone } from 'react-icons/pi'
 import { ActionIcon, Tooltip } from '@mantine/core'
 import { notifications } from '@mantine/notifications'
-import { PiTrashDuotone } from 'react-icons/pi'
 import {
     useUserModalStore,
     useUserModalStoreUser
 } from '@/entitites/dashboard/user-modal-store/user-modal-store'
+
 import { IProps } from './interfaces'
 
 export function DeleteUserFeature(props: IProps) {
@@ -40,7 +40,7 @@ export function DeleteUserFeature(props: IProps) {
 
     return (
         <Tooltip label="Delete user">
-            <ActionIcon size="xl" color="red" onClick={handleDeleteUser} loading={isLoading}>
+            <ActionIcon color="red" loading={isLoading} onClick={handleDeleteUser} size="xl">
                 <PiTrashDuotone size="1.5rem" />
             </ActionIcon>
         </Tooltip>

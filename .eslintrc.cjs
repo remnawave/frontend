@@ -1,5 +1,4 @@
 module.exports = {
-    root: true,
     env: { browser: true, es2020: true },
     extends: [
         'eslint:recommended',
@@ -7,7 +6,8 @@ module.exports = {
         'plugin:@typescript-eslint/recommended',
         'plugin:react-hooks/recommended',
         'plugin:storybook/recommended',
-        'prettier',
+        'plugin:perfectionist/recommended-natural-legacy',
+        'prettier'
     ],
     ignorePatterns: ['dist', '.eslintrc.cjs', 'plop', 'plop/**', 'plopfile.js', '.stylelintrc.js'],
     parser: '@typescript-eslint/parser',
@@ -15,16 +15,43 @@ module.exports = {
 
     settings: {
         'import/parsers': {
-            '@typescript-eslint/parser': ['.ts', '.tsx'],
+            '@typescript-eslint/parser': ['.ts', '.tsx']
         },
         'import/resolver': {
             node: true,
             typescript: {
-                project: '.',
-            },
-        },
+                project: '.'
+            }
+        }
     },
     rules: {
+        'perfectionist/sort-imports': [
+            'error',
+            {
+                type: 'line-length',
+                order: 'asc',
+                ignoreCase: true,
+                specialCharacters: 'keep',
+                internalPattern: ['^~/.+'],
+                partitionByComment: false,
+                partitionByNewLine: false,
+                newlinesBetween: 'always',
+                maxLineLength: undefined,
+                groups: [
+                    'type',
+                    ['builtin', 'external'],
+                    'internal-type',
+                    'internal',
+                    ['parent-type', 'sibling-type', 'index-type'],
+                    ['parent', 'sibling', 'index'],
+                    'object',
+                    'unknown'
+                ],
+                customGroups: { type: {}, value: {} },
+                environment: 'node'
+            }
+        ],
+        'perfectionist/sort-objects': ['off'],
         indent: ['error', 4, { SwitchCase: 1 }],
         'max-classes-per-file': 'off',
         'import/no-extraneous-dependencies': ['off'],
@@ -34,12 +61,6 @@ module.exports = {
         'no-bitwise': 'off',
         'no-plusplus': 'off',
         'no-restricted-syntax': ['off', 'ForInStatement'],
-        'import/order': [
-            'error',
-            {
-                'newlines-between': 'never',
-            },
-        ],
         'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
         'no-shadow': ['off'],
         'arrow-body-style': ['off'],
@@ -52,8 +73,8 @@ module.exports = {
                 allowAfterThis: true,
                 allowAfterSuper: true,
                 allowAfterThisConstructor: true,
-                enforceInMethodNames: false,
-            },
+                enforceInMethodNames: false
+            }
         ],
         semi: ['error', 'never'],
         'comma-dangle': ['off'],
@@ -65,9 +86,9 @@ module.exports = {
             'error',
             {
                 types: {
-                    '{}': false,
-                },
-            },
-        ],
-    },
+                    '{}': false
+                }
+            }
+        ]
+    }
 }

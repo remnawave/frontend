@@ -1,24 +1,25 @@
-import { Group, JsonInput, SimpleGrid, Stack, Text } from '@mantine/core'
-import { Page } from '@shared/ui/page'
-import dayjs from 'dayjs'
 import {
-    PiChartBarDuotone,
-    PiChartDonutDuotone,
     PiClockCountdownDuotone,
-    PiClockDuotone,
+    PiChartDonutDuotone,
     PiClockUserDuotone,
-    PiCpuDuotone,
+    PiChartBarDuotone,
+    PiProhibitDuotone,
     PiDevicesDuotone,
     PiMemoryDuotone,
-    PiProhibitDuotone,
+    PiClockDuotone,
     PiPulseDuotone,
-    PiUsersDuotone
+    PiUsersDuotone,
+    PiCpuDuotone
 } from 'react-icons/pi'
+import { MetricWithIcon } from '@/widgets/dashboard/home/metric-with-icons'
+import { SimpleGrid, JsonInput, Group, Stack, Text } from '@mantine/core'
 import { LoadingScreen, PageHeader } from '@/shared/ui'
+import { prettyBytesUtil } from '@/shared/utils/bytes'
 import { MetricWithTrend } from '@/shared/ui/metrics'
 import { formatInt } from '@/shared/utils'
-import { prettyBytesUtil } from '@/shared/utils/bytes'
-import { MetricWithIcon } from '@/widgets/dashboard/home/metric-with-icons'
+import { Page } from '@shared/ui/page'
+import dayjs from 'dayjs'
+
 import { BREADCRUMBS } from './constant'
 import { IProps } from './interfaces'
 
@@ -29,87 +30,87 @@ export const HomePage = (props: IProps) => {
         return <LoadingScreen />
     }
 
-    const { users, memory, stats } = systemInfo
+    const { memory, stats, users } = systemInfo
 
     const totalRamGB = prettyBytesUtil(memory.total) ?? 0
     const usedRamGB = prettyBytesUtil(memory.active) ?? 0
 
     const simpleMetrics = [
         {
+            value: prettyBytesUtil(Number(users.totalTrafficBytes)) ?? 0,
             icon: PiChartBarDuotone,
             title: 'Total traffic',
-            value: prettyBytesUtil(Number(users.totalTrafficBytes)) ?? 0,
             color: 'green'
         },
         {
+            value: `${usedRamGB} / ${totalRamGB}`,
             icon: PiMemoryDuotone,
             title: 'RAM usage',
-            value: `${usedRamGB} / ${totalRamGB}`,
             color: 'cyan'
         },
         {
-            icon: PiClockDuotone,
-            title: 'System uptime',
             value: dayjs.duration(systemInfo.uptime, 'seconds').humanize(false),
+            title: 'System uptime',
+            icon: PiClockDuotone,
             color: 'gray'
         }
     ]
 
     const usersMetrics = [
         {
+            value: formatInt(users.onlineLastMinute) ?? 0,
             icon: PiDevicesDuotone,
             title: 'Online users',
-            value: formatInt(users.onlineLastMinute) ?? 0,
             color: 'teal'
         },
         {
+            value: formatInt(users.totalUsers) ?? 0,
             icon: PiUsersDuotone,
             title: 'Total users',
-            value: formatInt(users.totalUsers) ?? 0,
             color: 'blue'
         },
         {
-            icon: PiPulseDuotone,
-            title: 'Active users',
             value: formatInt(users.statusCounts.ACTIVE) ?? 0,
+            title: 'Active users',
+            icon: PiPulseDuotone,
             color: 'teal'
         },
         {
+            value: formatInt(users.statusCounts.EXPIRED) ?? 0,
             icon: PiClockUserDuotone,
             title: 'Expired users',
-            value: formatInt(users.statusCounts.EXPIRED) ?? 0,
             color: 'red'
         },
         {
+            value: formatInt(users.statusCounts.LIMITED) ?? 0,
             icon: PiClockCountdownDuotone,
             title: 'Limited users',
-            value: formatInt(users.statusCounts.LIMITED) ?? 0,
             color: 'orange'
         },
         {
+            value: formatInt(users.statusCounts.DISABLED) ?? 0,
             icon: PiProhibitDuotone,
             title: 'Disabled users',
-            value: formatInt(users.statusCounts.DISABLED) ?? 0,
             color: 'gray'
         }
     ]
 
     return (
         <Page title="Home">
-            <PageHeader title="Short stats" breadcrumbs={BREADCRUMBS} />
+            <PageHeader breadcrumbs={BREADCRUMBS} title="Short stats" />
 
             <Stack gap="sm" mb="xl">
                 <Text fw={600}>Bandwidth</Text>
                 <SimpleGrid cols={{ base: 1, sm: 2, xl: 3 }}>
                     <MetricWithTrend
-                        title="Today's nodes usage"
+                        icon={
+                            <PiChartDonutDuotone color="var(--mantine-color-blue-6)" size="2rem" />
+                        }
+                        percentage={stats.nodesUsageLastTwoDays.percentage}
                         value={stats.nodesUsageLastTwoDays.current}
                         color="var(--mantine-color-blue-6)"
-                        percentage={stats.nodesUsageLastTwoDays.percentage}
+                        title="Today's nodes usage"
                         period="from yesterday"
-                        icon={
-                            <PiChartDonutDuotone size="2rem" color="var(--mantine-color-blue-6)" />
-                        }
                     />
                 </SimpleGrid>
 

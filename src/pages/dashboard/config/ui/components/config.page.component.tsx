@@ -1,19 +1,19 @@
+import axios from 'axios'
+import dayjs from 'dayjs'
+import { Page } from '@shared/ui/page'
 import { useEffect, useRef, useState } from 'react'
-
-import { Box, Button, Code, Group, Paper } from '@mantine/core'
+import Editor, { Monaco } from '@monaco-editor/react'
 import { notifications } from '@mantine/notifications'
+import { LoadingScreen, PageHeader } from '@/shared/ui'
+import { Box, Button, Code, Group, Paper } from '@mantine/core'
+import { PiCheckSquareOffset, PiFloppyDisk } from 'react-icons/pi'
+import { monacoTheme } from '@/shared/utils/monaco-theme/monaco-theme'
 import {
     useConfigStoreActions,
     useConfigStoreConfig,
     useConfigStoreIsConfigLoading
 } from '@entitites/dashboard/config/config-store/config-store'
-import Editor, { Monaco } from '@monaco-editor/react'
-import { Page } from '@shared/ui/page'
-import axios from 'axios'
-import dayjs from 'dayjs'
-import { PiCheckSquareOffset, PiFloppyDisk } from 'react-icons/pi'
-import { LoadingScreen, PageHeader } from '@/shared/ui'
-import { monacoTheme } from '@/shared/utils/monaco-theme/monaco-theme'
+
 import { BREADCRUMBS } from './constant'
 
 export const ConfigPageComponent = () => {
@@ -27,8 +27,8 @@ export const ConfigPageComponent = () => {
     const isConfigLoading = useConfigStoreIsConfigLoading()
     const [downloadProgress, setDownloadProgress] = useState(0)
 
-    const editorRef = useRef<any>(null)
-    const monacoRef = useRef<any>(null)
+    const editorRef = useRef<unknown>(null)
+    const monacoRef = useRef<unknown>(null)
 
     useEffect(() => {
         actions.getConfig()
@@ -43,17 +43,17 @@ export const ConfigPageComponent = () => {
                 const schema = await response.data
 
                 monacoRef.current.languages.json.jsonDefaults.setDiagnosticsOptions({
-                    validate: true,
                     allowComments: false,
+                    enableSchemaRequest: true,
+                    schemaRequest: 'warning',
                     schemas: [
                         {
-                            uri: 'https://xray-config-schema.json',
                             fileMatch: ['*'],
-                            schema
+                            schema,
+                            uri: 'https://xray-config-schema.json'
                         }
                     ],
-                    enableSchemaRequest: true,
-                    schemaRequest: 'warning'
+                    validate: true
                 })
             } catch (error) {
                 console.error('Failed to load JSON schema:', error)
@@ -75,6 +75,7 @@ export const ConfigPageComponent = () => {
                     }
                 })
 
+                // eslint-disable-next-line no-use-before-define
                 const wasmBytes = await fetchWithProgress('/main.wasm')
 
                 const { instance } = await WebAssembly.instantiate(wasmBytes, go.importObject)
@@ -104,7 +105,6 @@ export const ConfigPageComponent = () => {
     const fetchWithProgress = async (url: string) => {
         try {
             const response = await axios.get(url, {
-                responseType: 'arraybuffer',
                 onDownloadProgress: (progressEvent) => {
                     if (progressEvent.total) {
                         const progress = Math.round(
@@ -114,7 +114,8 @@ export const ConfigPageComponent = () => {
                     } else {
                         setDownloadProgress(100)
                     }
-                }
+                },
+                responseType: 'arraybuffer'
             })
 
             return response.data
@@ -125,7 +126,14 @@ export const ConfigPageComponent = () => {
     }
 
     const handleSave = () => {
-        const currentValue = editorRef.current?.getValue()
+        if (!editorRef.current) return
+        if (!monacoRef.current) return
+        if (typeof editorRef.current !== 'object') return
+        if (typeof monacoRef.current !== 'object') return
+        if (!('getValue' in editorRef.current)) return
+        if (typeof editorRef.current.getValue !== 'function') return
+
+        const currentValue = editorRef.current.getValue()
         if (currentValue) {
             setIsSaving(true)
 
@@ -133,17 +141,17 @@ export const ConfigPageComponent = () => {
                 actions.updateConfig(JSON.parse(currentValue))
 
                 notifications.show({
-                    title: 'Success',
+                    color: 'green',
                     message: 'Config updated successfully. All nodes will be restarted.',
-                    color: 'green'
+                    title: 'Success'
                 })
             } catch (err) {
                 setResult(`Error: ${(err as Error).message}`)
 
                 notifications.show({
-                    title: 'Error',
+                    color: 'red',
                     message: `Error: ${(err as Error).message}`,
-                    color: 'red'
+                    title: 'Error'
                 })
             } finally {
                 setTimeout(() => {
@@ -154,12 +162,24 @@ export const ConfigPageComponent = () => {
     }
 
     const formatDocument = () => {
+        if (!editorRef.current) return
+        if (typeof editorRef.current !== 'object') return
+        if (!('getAction' in editorRef.current)) return
+        if (typeof editorRef.current.getAction !== 'function') return
+
         editorRef.current.getAction('editor.action.formatDocument').run()
     }
 
     const handleValidate = () => {
         try {
-            const currentValue = editorRef.current?.getValue()
+            if (!editorRef.current) return
+            if (!monacoRef.current) return
+            if (typeof editorRef.current !== 'object') return
+            if (typeof monacoRef.current !== 'object') return
+            if (!('getValue' in editorRef.current)) return
+            if (typeof editorRef.current.getValue !== 'function') return
+
+            const currentValue = editorRef.current.getValue()
             const validationResult = window.XrayParseConfig(currentValue)
 
             setResult(
@@ -179,69 +199,69 @@ export const ConfigPageComponent = () => {
     }
 
     if (isLoading || isConfigLoading || !config) {
-        return <LoadingScreen value={downloadProgress} text={`WASM module is loading...`} />
+        return <LoadingScreen text={`WASM module is loading...`} value={downloadProgress} />
     }
 
     return (
         <Page title="Config">
-            <PageHeader title="Xray Config Editor" breadcrumbs={BREADCRUMBS} />
+            <PageHeader breadcrumbs={BREADCRUMBS} title="Xray Config Editor" />
 
             <Box>
-                <Paper withBorder p={0} mb="md" radius="xs">
+                <Paper mb="md" p={0} radius="xs" withBorder>
                     <Editor
-                        loading={'Loading editor...'}
-                        height="400px"
-                        defaultLanguage="json"
-                        value={JSON.stringify(config, null, 2)}
-                        theme={'GithubDark'}
-                        onChange={handleValidate}
-                        onValidate={handleValidate}
                         beforeMount={handleEditorDidMount}
+                        defaultLanguage="json"
+                        height="400px"
+                        loading={'Loading editor...'}
+                        onChange={handleValidate}
                         onMount={(editor, monaco) => {
                             editorRef.current = editor
                             monacoRef.current = monaco
                             handleValidate()
                         }}
+                        onValidate={handleValidate}
                         options={{
-                            minimap: { enabled: false },
+                            autoClosingBrackets: 'always',
+                            autoClosingQuotes: 'always',
+                            autoIndent: 'full',
+                            automaticLayout: true,
+                            bracketPairColorization: true,
+                            detectIndentation: true,
+                            folding: true,
+                            foldingStrategy: 'indentation',
                             fontSize: 14,
                             formatOnPaste: true,
                             formatOnType: true,
-                            scrollBeyondLastLine: false,
-                            automaticLayout: true,
-                            quickSuggestions: true,
-                            folding: true,
-                            foldingStrategy: 'indentation',
-                            autoIndent: 'full',
-                            autoClosingBrackets: 'always',
-                            autoClosingQuotes: 'always',
-                            tabSize: 2,
-                            detectIndentation: true,
-
-                            insertSpaces: true,
-                            bracketPairColorization: true,
                             guides: {
                                 bracketPairs: true,
                                 indentation: true
-                            }
+                            },
+                            insertSpaces: true,
+                            minimap: { enabled: false },
+
+                            quickSuggestions: true,
+                            scrollBeyondLastLine: false,
+                            tabSize: 2
                         }}
+                        theme={'GithubDark'}
+                        value={JSON.stringify(config, null, 2)}
                     />
                 </Paper>
 
                 <Group>
                     <Button
-                        onClick={formatDocument}
-                        mb="md"
                         leftSection={<PiCheckSquareOffset size={16} />}
+                        mb="md"
+                        onClick={formatDocument}
                     >
                         Format
                     </Button>
                     <Button
-                        onClick={handleSave}
-                        mb="md"
-                        loading={isSaving}
-                        leftSection={<PiFloppyDisk size={16} />}
                         disabled={!isConfigValid}
+                        leftSection={<PiFloppyDisk size={16} />}
+                        loading={isSaving}
+                        mb="md"
+                        onClick={handleSave}
                     >
                         Save
                     </Button>

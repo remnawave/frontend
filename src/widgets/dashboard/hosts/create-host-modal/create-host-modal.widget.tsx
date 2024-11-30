@@ -1,5 +1,7 @@
-import { useEffect, useState } from 'react'
-
+import { useDSInbounds } from '@/entitites/dashboard/dashboard-store/dashboard-store'
+import { handleFormErrors } from '@/shared/utils'
+import { useHostsStoreActions, useHostsStoreCreateModalIsOpen } from '@entitites/dashboard'
+import { DeleteHostFeature } from '@features/ui/dashboard/hosts/delete-host'
 import {
     ActionIcon,
     Button,
@@ -15,13 +17,11 @@ import {
 } from '@mantine/core'
 import { useForm, zodResolver } from '@mantine/form'
 import { notifications } from '@mantine/notifications'
-import { useHostsStoreActions, useHostsStoreCreateModalIsOpen } from '@entitites/dashboard'
-import { DeleteHostFeature } from '@features/ui/dashboard/hosts/delete-host'
 import { ALPN, CreateHostCommand, FINGERPRINTS } from '@remnawave/backend-contract'
+import { useState } from 'react'
 import { PiCaretDown, PiCaretUp, PiFloppyDiskDuotone } from 'react-icons/pi'
 import { z } from 'zod'
-import { useDSInbounds } from '@/entitites/dashboard/dashboard-store/dashboard-store'
-import { handleFormErrors } from '@/shared/utils'
+
 import { RemarkInfoPopoverWidget } from '../popovers/remark-info/remark-info.widget'
 
 export const CreateHostModalWidget = () => {
@@ -35,10 +35,19 @@ export const CreateHostModalWidget = () => {
     const [isDataSubmitting, setIsDataSubmitting] = useState(false)
 
     const form = useForm<CreateHostCommand.Request>({
-        name: 'create-host-form',
         mode: 'uncontrolled',
+        name: 'create-host-form',
         validate: zodResolver(CreateHostCommand.RequestSchema)
     })
+
+    const handleClose = () => {
+        actions.toggleCreateModal(false)
+        setAdvancedOpened(false)
+
+        form.reset()
+        form.resetDirty()
+        form.resetTouched()
+    }
 
     const handleSubmit = form.onSubmit(async (values) => {
         try {
@@ -55,9 +64,9 @@ export const CreateHostModalWidget = () => {
             })
 
             notifications.show({
-                title: 'Success',
+                color: 'green',
                 message: 'Host created successfully',
-                color: 'green'
+                title: 'Success'
             })
         } catch (error) {
             if (error instanceof z.ZodError) {
@@ -69,9 +78,9 @@ export const CreateHostModalWidget = () => {
             }
             handleFormErrors(form, error)
             notifications.show({
-                title: 'Error',
+                color: 'red',
                 message: error instanceof Error ? error.message : 'Failed to create host',
-                color: 'red'
+                title: 'Error'
             })
         } finally {
             setIsDataSubmitting(false)
@@ -80,21 +89,12 @@ export const CreateHostModalWidget = () => {
         }
     })
 
-    const handleClose = () => {
-        actions.toggleCreateModal(false)
-        setAdvancedOpened(false)
-
-        form.reset()
-        form.resetDirty()
-        form.resetTouched()
-    }
-
     return (
         <Modal
-            opened={isModalOpen}
-            onClose={handleClose}
-            title={<Text fw={500}>Create host</Text>}
             centered
+            onClose={handleClose}
+            opened={isModalOpen}
+            title={<Text fw={500}>Create host</Text>}
         >
             <form onSubmit={handleSubmit}>
                 <Group align="flex-start" grow={false}>
@@ -102,70 +102,69 @@ export const CreateHostModalWidget = () => {
                         <Group gap="xs" justify="space-between" w="100%"></Group>
 
                         <TextInput
-                            label="Remark"
                             key={form.key('remark')}
-                            {...form.getInputProps('remark')}
+                            label="Remark"
+                            leftSection={<RemarkInfoPopoverWidget />}
                             placeholder="e.g. 📊 {{TRAFFIC_USED}}"
                             required
-                            leftSection={<RemarkInfoPopoverWidget />}
+                            {...form.getInputProps('remark')}
                         />
 
                         <Stack gap="md" w={400}>
-                            <Group gap="xs" w="100%" justify="space-between">
+                            <Group gap="xs" justify="space-between" w="100%">
                                 <TextInput
-                                    label="Address"
                                     key={form.key('address')}
+                                    label="Address"
                                     {...form.getInputProps('address')}
                                     placeholder="e.g. example.com"
-                                    w="75%"
                                     required
+                                    w="75%"
                                 />
 
                                 <NumberInput
-                                    label="Port"
                                     key={form.key('port')}
+                                    label="Port"
                                     {...form.getInputProps('port')}
-                                    min={1}
-                                    hideControls
-                                    allowNegative={false}
                                     allowDecimal={false}
-                                    decimalScale={0}
+                                    allowNegative={false}
                                     clampBehavior="strict"
+                                    decimalScale={0}
+                                    hideControls
                                     max={65535}
+                                    min={1}
                                     placeholder="e.g. 443"
-                                    w="20%"
                                     required
+                                    w="20%"
                                 />
                             </Group>
 
-                            <Group gap="xs" w="100%" justify="space-between">
+                            <Group gap="xs" justify="space-between" w="100%">
                                 <Select
-                                    label="Inbound"
-                                    key={form.key('inboundUuid')}
                                     data={Object.values(inbounds ?? {}).map((inbound) => ({
                                         label: inbound.tag,
                                         value: inbound.uuid
                                     }))}
+                                    key={form.key('inboundUuid')}
+                                    label="Inbound"
                                     {...form.getInputProps('inboundUuid')}
-                                    placeholder="Select inbound"
-                                    w="75%"
                                     allowDeselect={false}
+                                    placeholder="Select inbound"
                                     required
+                                    w="75%"
                                 />
 
                                 <Switch
-                                    w="20%"
-                                    size="xl"
-                                    radius="md"
                                     color="teal.8"
-                                    mt={25}
                                     key={form.key('isDisabled')}
+                                    mt={25}
+                                    radius="md"
+                                    size="xl"
+                                    w="20%"
                                     {...form.getInputProps('isDisabled', { type: 'checkbox' })}
                                 />
                             </Group>
 
                             <Button
-                                variant="subtle"
                                 onClick={() => setAdvancedOpened((o) => !o)}
                                 rightSection={
                                     advancedOpened ? (
@@ -174,6 +173,7 @@ export const CreateHostModalWidget = () => {
                                         <PiCaretDown size="1rem" />
                                     )
                                 }
+                                variant="subtle"
                             >
                                 Advanced options
                             </Button>
@@ -181,47 +181,47 @@ export const CreateHostModalWidget = () => {
                             <Collapse in={advancedOpened}>
                                 <Stack gap="md">
                                     <TextInput
+                                        key={form.key('sni')}
                                         label="SNI"
                                         placeholder="SNI (e.g. example.com)"
-                                        key={form.key('sni')}
                                         {...form.getInputProps('sni')}
                                     />
 
                                     <TextInput
-                                        label="Request Host"
                                         key={form.key('requestHost')}
+                                        label="Request Host"
                                         placeholder="Host (e.g. example.com)"
                                         {...form.getInputProps('requestHost')}
                                     />
 
                                     <TextInput
-                                        label="Path"
                                         key={form.key('path')}
+                                        label="Path"
                                         placeholder="path (e.g. /ws)"
                                         {...form.getInputProps('path')}
                                     />
 
                                     <Select
-                                        label="ALPN"
-                                        placeholder="ALPN (e.g. h2)"
-                                        key={form.key('alpn')}
+                                        clearable
                                         data={Object.values(ALPN).map((alpn) => ({
                                             label: alpn,
                                             value: alpn
                                         }))}
-                                        clearable
+                                        key={form.key('alpn')}
+                                        label="ALPN"
+                                        placeholder="ALPN (e.g. h2)"
                                         {...form.getInputProps('alpn')}
                                     />
 
                                     <Select
-                                        label="Fingerprint"
-                                        key={form.key('fingerprint')}
-                                        placeholder="Fingerprint (e.g. chrome)"
+                                        clearable
                                         data={Object.values(FINGERPRINTS).map((fingerprint) => ({
                                             label: fingerprint,
                                             value: fingerprint
                                         }))}
-                                        clearable
+                                        key={form.key('fingerprint')}
+                                        label="Fingerprint"
+                                        placeholder="Fingerprint (e.g. chrome)"
                                         {...form.getInputProps('fingerprint')}
                                     />
                                 </Stack>
@@ -230,18 +230,18 @@ export const CreateHostModalWidget = () => {
                     </Stack>
                 </Group>
 
-                <Group gap="xs" w="100%" pt={15} justify="space-between">
+                <Group gap="xs" justify="space-between" pt={15} w="100%">
                     <ActionIcon.Group>
                         <DeleteHostFeature />
                     </ActionIcon.Group>
 
                     <Button
-                        type="submit"
                         color="blue"
                         leftSection={<PiFloppyDiskDuotone size="1rem" />}
-                        variant="outline"
-                        size="md"
                         loading={isDataSubmitting}
+                        size="md"
+                        type="submit"
+                        variant="outline"
                     >
                         Save
                     </Button>

@@ -1,9 +1,9 @@
 import { useState } from 'react'
-
 import { Button, Group } from '@mantine/core'
 import { notifications } from '@mantine/notifications'
-import { useNodesStoreActions } from '@entitites/dashboard/nodes/nodes-store/nodes-store'
 import { PiArrowsClockwise, PiPlus, PiSpiral } from 'react-icons/pi'
+import { useNodesStoreActions } from '@entitites/dashboard/nodes/nodes-store/nodes-store'
+
 import { IProps } from './interfaces'
 
 export const NodesHeaderActionButtonsFeature = (props: IProps) => {
@@ -51,31 +51,31 @@ export const NodesHeaderActionButtonsFeature = (props: IProps) => {
     return (
         <Group>
             <Button
-                variant="default"
-                size="xs"
                 leftSection={<PiArrowsClockwise size="1rem" />}
-                onClick={handleUpdate}
                 loading={isLoading}
+                onClick={handleUpdate}
+                size="xs"
+                variant="default"
             >
                 Update
             </Button>
 
             <Button
-                variant="default"
-                size="xs"
                 c="teal"
                 leftSection={<PiSpiral size="1rem" />}
-                onClick={handleRestart}
                 loading={isRestartLoading}
+                onClick={handleRestart}
+                size="xs"
+                variant="default"
             >
                 Restart all nodes
             </Button>
 
             <Button
-                variant="default"
-                size="xs"
                 leftSection={<PiPlus size="1rem" />}
                 onClick={handleCreate}
+                size="xs"
+                variant="default"
             >
                 Create new host
             </Button>

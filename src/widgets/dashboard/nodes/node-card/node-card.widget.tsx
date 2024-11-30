@@ -1,15 +1,16 @@
-import { Badge, Container, Group, Progress, Text, UnstyledButton } from '@mantine/core'
+import { UnstyledButton, Container, Progress, Badge, Group, Text } from '@mantine/core'
+import { useNodesStoreActions } from '@entitites/dashboard/nodes'
+import { getNodeResetDaysUtil } from '@/shared/utils/time-utils'
+import { prettyBytesToAnyUtil } from '@/shared/utils/bytes'
+import { PiArrowsCounterClockwise } from 'react-icons/pi'
 import { useClipboard, useHover } from '@mantine/hooks'
 import { notifications } from '@mantine/notifications'
-import { useNodesStoreActions } from '@entitites/dashboard/nodes'
-import clsx from 'clsx'
 import ColorHash from 'color-hash'
-import { PiArrowsCounterClockwise } from 'react-icons/pi'
-import { prettyBytesToAnyUtil } from '@/shared/utils/bytes'
-import { getNodeResetDaysUtil } from '@/shared/utils/time-utils'
+import clsx from 'clsx'
+
 import { NodeStatusBadgeWidget } from '../node-status-badge'
-import { IProps } from './interfaces'
 import classes from './NodeCard.module.css'
+import { IProps } from './interfaces'
 
 export function NodeCardWidget(props: IProps) {
     const { node } = props
@@ -39,8 +40,8 @@ export function NodeCardWidget(props: IProps) {
         e.stopPropagation()
         clipboard.copy(`${node.address}`)
         notifications.show({
-            title: 'Copied',
             message: `${node.address}`,
+            title: 'Copied',
             color: 'teal'
         })
     }
@@ -52,59 +53,59 @@ export function NodeCardWidget(props: IProps) {
 
     return (
         <>
-            <UnstyledButton w={'100%'} onClick={handleViewNode}>
+            <UnstyledButton onClick={handleViewNode} w={'100%'}>
                 <Container
+                    className={clsx(classes.item, { [classes.itemHover]: hovered })}
                     ref={ref}
                     fluid
-                    className={clsx(classes.item, { [classes.itemHover]: hovered })}
                 >
                     <Group gap="xs">
                         <NodeStatusBadgeWidget style={{ cursor: 'pointer' }} node={node} />
 
                         <Badge
-                            miw={'15ch'}
-                            size="lg"
-                            autoContrast
-                            variant="light"
-                            radius="md"
                             style={{ cursor: 'pointer' }}
                             color={ch.hex(node.uuid)}
+                            variant="light"
+                            miw={'15ch'}
+                            autoContrast
+                            radius="md"
+                            size="lg"
                         >
                             {node.name}
                         </Badge>
                         <Text
-                            miw={'22ch'}
                             className={classes.hostInfoLabel}
-                            maw={'22ch'}
-                            truncate="end"
                             style={{ cursor: 'copy' }}
                             onClick={handleCopy}
+                            truncate="end"
+                            miw={'22ch'}
+                            maw={'22ch'}
                         >
                             {node.address}
                             {node.port ? `:${node.port}` : ''}
                         </Text>
 
                         <Badge
-                            miw={'7ch'}
-                            size="lg"
-                            autoContrast
                             style={{ cursor: 'pointer' }}
                             variant="outline"
-                            radius="md"
                             color={'gray'}
+                            autoContrast
+                            miw={'7ch'}
+                            radius="md"
+                            size="lg"
                         >
                             {node.xrayVersion ?? '-'}
                         </Badge>
 
                         <Badge
-                            miw={'15ch'}
-                            color={'gray'}
-                            size="lg"
-                            autoContrast
                             style={{ cursor: 'pointer' }}
                             variant="outline"
-                            radius="md"
                             ff={'monospace'}
+                            color={'gray'}
+                            miw={'15ch'}
+                            autoContrast
+                            radius="md"
+                            size="lg"
                         >
                             {`${prettyUsedData} / ${maxData}`}
                         </Badge>
@@ -112,22 +113,22 @@ export function NodeCardWidget(props: IProps) {
                         {percentage >= 0 && node.isTrafficTrackingActive && (
                             <Progress
                                 color={percentage > 95 ? 'red.9' : 'green.9'}
-                                striped
-                                radius="md"
-                                size="25"
                                 value={percentage}
+                                radius="md"
                                 w={'10ch'}
+                                size="25"
+                                striped
                             />
                         )}
 
                         {node.isTrafficTrackingActive && (
                             <Badge
+                                leftSection={<PiArrowsCounterClockwise size={18} />}
+                                style={{ cursor: 'pointer' }}
+                                variant="outline"
                                 color="gray"
                                 radius="md"
                                 size="lg"
-                                style={{ cursor: 'pointer' }}
-                                variant="outline"
-                                leftSection={<PiArrowsCounterClockwise size={18} />}
                             >
                                 {getNodeResetDaysUtil(node.trafficResetDay ?? 1)}
                             </Badge>

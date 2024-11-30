@@ -6,6 +6,7 @@ import {
     PiWarningCircle,
     PiWarningCircleDuotone
 } from 'react-icons/pi'
+
 import { IProps } from './interface'
 
 export function NodeStatusBadgeWidget(props: IProps) {
@@ -34,7 +35,7 @@ export function NodeStatusBadgeWidget(props: IProps) {
     }
 
     return (
-        <Badge color={color} leftSection={icon} size="lg" miw={'18ch'} {...props}>
+        <Badge color={color} leftSection={icon} miw={'18ch'} size="lg" {...props}>
             {status}
         </Badge>
     )

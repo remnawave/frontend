@@ -15,11 +15,11 @@ export const LoginPage = () => {
                             Remnawave
                             <UnderlineShape
                                 c="red"
+                                w="7rem"
                                 left="0"
                                 pos="absolute"
                                 h="0.625rem"
                                 bottom="-1rem"
-                                w="7rem"
                             />
                         </Text>
                     </Title>

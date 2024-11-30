@@ -2,26 +2,25 @@ import { Center, Progress, Stack, Text } from '@mantine/core'
 
 export function LoadingScreen({
     height = '100%',
-    value = 100,
-    text = undefined
+    text = undefined,
+    value = 100
 }: {
     height?: string
-
-    value?: number
     text?: string
+    value?: number
 }) {
     return (
         <Center h={height}>
-            <Stack w="100%" align="center" gap="xs">
+            <Stack align="center" gap="xs" w="100%">
                 {text && <Text size="lg">{text}</Text>}
                 <Progress
-                    color="red"
-                    radius="xs"
-                    value={value}
-                    striped
-                    w="80%"
                     animated
+                    color="red"
                     maw="32rem"
+                    radius="xs"
+                    striped
+                    value={value}
+                    w="80%"
                 />
             </Stack>
         </Center>

@@ -1,5 +1,3 @@
-import { useEffect } from 'react'
-
 import {
     useDashboardStoreActions,
     useDSInbounds
@@ -9,6 +7,7 @@ import {
     useHostsStoreHosts
 } from '@entitites/dashboard/hosts/hosts-store/hosts-store'
 import HostsPageComponent from '@pages/dashboard/hosts/ui/components/hosts.page.component'
+import { useEffect } from 'react'
 
 export function HostsPageConnector() {
     const actions = useHostsStoreActions()
