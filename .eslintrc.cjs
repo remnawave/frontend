@@ -1,42 +1,28 @@
-// import mantine from 'eslint-config-mantine';
-// import tseslint from 'typescript-eslint';
-
-// export default tseslint.config(
-//   ...mantine,
-//   { ignores: ['**/*.{mjs,cjs,js,d.ts,d.mts}', './.storybook/main.ts'] },
-// );
-
-export default {
+module.exports = {
+    root: true,
     env: { browser: true, es2020: true },
-    plugins: ['react-refresh', 'import', 'perfectionist'],
     extends: [
         'eslint:recommended',
         'airbnb-base',
         'plugin:@typescript-eslint/recommended',
         'plugin:react-hooks/recommended',
-        'plugin:perfectionist/recommended-alphabetical-legacy',
-        'prettier'
+        'plugin:storybook/recommended',
+        'prettier',
     ],
-    ignorePatterns: [
-        'dist',
-        '.eslintrc.cjs',
-        'plop',
-        'plop/**',
-        'plopfile.js',
-        '.stylelintrc.js',
-        'eslint.config.js'
-    ],
+    ignorePatterns: ['dist', '.eslintrc.cjs', 'plop', 'plop/**', 'plopfile.js', '.stylelintrc.js'],
     parser: '@typescript-eslint/parser',
+    plugins: ['react-refresh', 'import'],
+
     settings: {
         'import/parsers': {
-            '@typescript-eslint/parser': ['.ts', '.tsx']
+            '@typescript-eslint/parser': ['.ts', '.tsx'],
         },
         'import/resolver': {
             node: true,
             typescript: {
-                project: '.'
-            }
-        }
+                project: '.',
+            },
+        },
     },
     rules: {
         indent: ['error', 4, { SwitchCase: 1 }],
@@ -51,8 +37,8 @@ export default {
         'import/order': [
             'error',
             {
-                'newlines-between': 'never'
-            }
+                'newlines-between': 'never',
+            },
         ],
         'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
         'no-shadow': ['off'],
@@ -66,8 +52,8 @@ export default {
                 allowAfterThis: true,
                 allowAfterSuper: true,
                 allowAfterThisConstructor: true,
-                enforceInMethodNames: false
-            }
+                enforceInMethodNames: false,
+            },
         ],
         semi: ['error', 'never'],
         'comma-dangle': ['off'],
@@ -79,9 +65,9 @@ export default {
             'error',
             {
                 types: {
-                    '{}': false
-                }
-            }
-        ]
-    }
+                    '{}': false,
+                },
+            },
+        ],
+    },
 }
