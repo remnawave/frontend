@@ -109,7 +109,7 @@ export function NodeCardWidget(props: IProps) {
                             {`${prettyUsedData} / ${maxData}`}
                         </Badge>
 
-                        {percentage > 0 && (
+                        {percentage >= 0 && node.isTrafficTrackingActive && (
                             <Progress
                                 color={percentage > 95 ? 'red.9' : 'green.9'}
                                 striped

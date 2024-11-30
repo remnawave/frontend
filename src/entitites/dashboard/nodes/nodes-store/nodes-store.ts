@@ -6,6 +6,7 @@ import {
     GetAllNodesCommand,
     GetOneNodeCommand,
     GetPubKeyCommand,
+    RestartAllNodesCommand,
     UpdateNodeCommand
 } from '@remnawave/backend-contract'
 import { instance } from '@shared/api'
@@ -158,6 +159,20 @@ export const useNodesStore = create<IState & IActions>()(
                 createNode: async (node: CreateNodeCommand.Request): Promise<boolean> => {
                     try {
                         await instance.post<CreateNodeCommand.Response>(CreateNodeCommand.url, node)
+
+                        return true
+                    } catch (e) {
+                        if (e instanceof AxiosError) {
+                            throw e
+                        }
+                        return false
+                    }
+                },
+                restartAllNodes: async (): Promise<boolean> => {
+                    try {
+                        await instance.get<RestartAllNodesCommand.Response>(
+                            RestartAllNodesCommand.url
+                        )
 
                         return true
                     } catch (e) {

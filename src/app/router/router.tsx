@@ -1,3 +1,4 @@
+import { ConfigPageComponent } from '@pages/dashboard/config/config.page.component'
 import { NodesPageConnector } from '@pages/dashboard/nodes/ui/connectors/nodes.page.connector'
 import {
     createBrowserRouter,
@@ -30,6 +31,7 @@ const router = createBrowserRouter(
                 <Route path={ROUTES.DASHBOARD.USERS} element={<UsersPageConnector />} />
                 <Route path={ROUTES.DASHBOARD.HOSTS} element={<HostsPageConnector />} />
                 <Route path={ROUTES.DASHBOARD.NODES} element={<NodesPageConnector />} />
+                <Route path={ROUTES.DASHBOARD.CONFIG} element={<ConfigPageComponent />} />
             </Route>
         </Route>
     )

@@ -62,6 +62,7 @@
   "include": [
     "src",
     "client.d.ts",
+    "global.d.ts"
   ],
   "references": [
     {

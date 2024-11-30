@@ -2,10 +2,8 @@ import { useEffect } from 'react'
 
 import { useListState } from '@mantine/hooks'
 import { DragDropContext, Droppable, DropResult } from '@hello-pangea/dnd'
-import { useHostsStoreActions, useHostsStoreIsHostsLoading } from '@/entitites/dashboard'
-import { LoadingScreen } from '@/shared/ui/loading-screen'
+import { useHostsStoreActions } from '@/entitites/dashboard'
 import { HostCardWidget } from '@/widgets/dashboard/hosts/host-card'
-import { HostsPageHeaderWidget } from '../hosts-page-header'
 import { IProps } from './interfaces'
 
 export function HostsTableWidget(props: IProps) {
@@ -30,7 +28,12 @@ export function HostsTableWidget(props: IProps) {
                 viewPosition: state.findIndex((stateItem) => stateItem.uuid === host.uuid)
             }))
 
-            await actions.reorderHosts(updatedHosts)
+            // Проверяем, изменился ли порядок
+            const hasOrderChanged = hosts.some((host, index) => host.uuid !== state[index].uuid)
+
+            if (hasOrderChanged) {
+                await actions.reorderHosts(updatedHosts)
+            }
         })()
     }, [state])
 

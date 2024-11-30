@@ -8,6 +8,7 @@ export const ROUTES = {
         HOME: '/dashboard/home',
         USERS: '/dashboard/users',
         HOSTS: '/dashboard/hosts',
-        NODES: '/dashboard/nodes'
+        NODES: '/dashboard/nodes',
+        CONFIG: '/dashboard/config'
     }
 } as const

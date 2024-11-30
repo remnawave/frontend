@@ -4,6 +4,7 @@ import { ROUTES } from '@shared/constants'
 import {
     PiBookmarksDuotone,
     PiComputerTowerDuotone,
+    PiGearDuotone,
     PiStarDuotone,
     PiUsersDuotone
 } from 'react-icons/pi'
@@ -25,7 +26,8 @@ export const menu: MenuItem[] = [
         section: [
             { name: 'Users', href: ROUTES.DASHBOARD.USERS, icon: PiUsersDuotone },
             { name: 'Hosts', href: ROUTES.DASHBOARD.HOSTS, icon: PiBookmarksDuotone },
-            { name: 'Nodes', href: ROUTES.DASHBOARD.NODES, icon: PiComputerTowerDuotone }
+            { name: 'Nodes', href: ROUTES.DASHBOARD.NODES, icon: PiComputerTowerDuotone },
+            { name: 'Config', href: ROUTES.DASHBOARD.CONFIG, icon: PiGearDuotone }
         ]
     }
 

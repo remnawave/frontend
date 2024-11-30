@@ -1,4 +1,4 @@
-import { Group, SimpleGrid, Stack, Text } from '@mantine/core'
+import { Group, JsonInput, SimpleGrid, Stack, Text } from '@mantine/core'
 import { Page } from '@shared/ui/page'
 import dayjs from 'dayjs'
 import {

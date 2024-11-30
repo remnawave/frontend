@@ -12,6 +12,7 @@ dotenv.config({ path: `${__dirname}/.env` })
 export default defineConfig({
     plugins: [react(), visualizer() as PluginOption, tsconfigPaths()],
     build: {
+        target: 'esNext',
         rollupOptions: {
             output: {
                 manualChunks: {

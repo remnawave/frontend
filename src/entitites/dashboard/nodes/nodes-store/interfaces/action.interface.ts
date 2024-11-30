@@ -9,6 +9,7 @@ export interface IActions {
         deleteNode: (uuid: string) => Promise<boolean>
         updateNode: (node: UpdateNodeCommand.Request) => Promise<boolean>
         createNode: (node: CreateNodeCommand.Request) => Promise<boolean>
+        restartAllNodes: () => Promise<boolean>
         toggleCreateModal: (isOpen: boolean) => void
         toggleEditModal: (isOpen: boolean) => void
         getPubKey: () => Promise<boolean>

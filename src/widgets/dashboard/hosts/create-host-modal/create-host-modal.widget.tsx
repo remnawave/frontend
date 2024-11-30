@@ -17,7 +17,7 @@ import { useForm, zodResolver } from '@mantine/form'
 import { notifications } from '@mantine/notifications'
 import { useHostsStoreActions, useHostsStoreCreateModalIsOpen } from '@entitites/dashboard'
 import { DeleteHostFeature } from '@features/ui/dashboard/hosts/delete-host'
-import { ALPN, CreateHostCommand, FINGERPRINTS, x } from '@remnawave/backend-contract'
+import { ALPN, CreateHostCommand, FINGERPRINTS } from '@remnawave/backend-contract'
 import { PiCaretDown, PiCaretUp, PiFloppyDiskDuotone } from 'react-icons/pi'
 import { z } from 'zod'
 import { useDSInbounds } from '@/entitites/dashboard/dashboard-store/dashboard-store'
@@ -82,6 +82,7 @@ export const CreateHostModalWidget = () => {
 
     const handleClose = () => {
         actions.toggleCreateModal(false)
+        setAdvancedOpened(false)
 
         form.reset()
         form.resetDirty()
