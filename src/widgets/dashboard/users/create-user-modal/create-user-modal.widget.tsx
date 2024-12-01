@@ -1,5 +1,3 @@
-import { useEffect, useState } from 'react'
-
 import {
     Button,
     Checkbox,
@@ -13,29 +11,33 @@ import {
     Text,
     TextInput
 } from '@mantine/core'
-import { DateTimePicker } from '@mantine/dates'
-import { useForm, zodResolver } from '@mantine/form'
-import { notifications } from '@mantine/notifications'
-import { CreateUserCommand, USERS_STATUS } from '@remnawave/backend-contract'
-import { LoaderModalShared } from '@shared/ui/loader-modal'
 import {
     PiCalendarDuotone,
     PiClockDuotone,
     PiFloppyDiskDuotone,
     PiUserDuotone
 } from 'react-icons/pi'
+import { CreateUserCommand, USERS_STATUS } from '@remnawave/backend-contract'
+import { notifications } from '@mantine/notifications'
+import { useForm, zodResolver } from '@mantine/form'
+import { DateTimePicker } from '@mantine/dates'
+import { useEffect, useState } from 'react'
+import consola from 'consola/browser'
 import { z } from 'zod'
-import {
-    useDashboardStoreActions,
-    useDSInbounds
-} from '@/entitites/dashboard/dashboard-store/dashboard-store'
+
 import {
     useUserCreationModalStoreActions,
     useUserCreationModalStoreIsModalOpen
 } from '@/entitites/dashboard/user-creation-modal-store/user-creation-modal-store'
+import {
+    useDashboardStoreActions,
+    useDSInbounds
+} from '@/entitites/dashboard/dashboard-store/dashboard-store'
+import { LoaderModalShared } from '@shared/ui/loader-modal'
 import { resetDataStrategy } from '@/shared/constants'
-import { handleFormErrors } from '@/shared/utils'
 import { gbToBytesUtil } from '@/shared/utils/bytes'
+import { handleFormErrors } from '@/shared/utils'
+
 import { InboundCheckboxCardWidget } from '../inbound-checkbox-card'
 
 export const CreateUserModalWidget = () => {
@@ -61,6 +63,14 @@ export const CreateUserModalWidget = () => {
         }
     })
 
+    const handleCloseModal = () => {
+        actions.changeModalState(false)
+
+        form.reset()
+        form.resetDirty()
+        form.resetTouched()
+    }
+
     useEffect(() => {
         let timeout: NodeJS.Timeout | undefined
         if (isModalOpen) {
@@ -69,7 +79,7 @@ export const CreateUserModalWidget = () => {
                 try {
                     await actionsDS.getInbounds()
                 } catch (error) {
-                    console.error(error)
+                    consola.error(error)
                 } finally {
                     timeout = setTimeout(() => {
                         setIsLoading(false)
@@ -108,12 +118,12 @@ export const CreateUserModalWidget = () => {
             }
         } catch (error) {
             if (error instanceof z.ZodError) {
-                console.error('Zod validation error:', error.errors)
+                consola.error('Zod validation error:', error.errors)
             }
 
             if (error instanceof Error) {
-                console.error('Error message:', error.message)
-                console.error('Error stack:', error.stack)
+                consola.error('Error message:', error.message)
+                consola.error('Error stack:', error.stack)
             }
 
             handleFormErrors(form, error)
@@ -128,70 +138,62 @@ export const CreateUserModalWidget = () => {
         }
     })
 
-    const handleCloseModal = () => {
-        actions.changeModalState(false)
-
-        form.reset()
-        form.resetDirty()
-        form.resetTouched()
-    }
-
     return (
-        <Modal opened={isModalOpen} onClose={handleCloseModal} title="Create user" centered>
+        <Modal centered onClose={handleCloseModal} opened={isModalOpen} title="Create user">
             {isLoading ? (
-                <LoaderModalShared text="Loading user creation..." h="500" />
+                <LoaderModalShared h="500" text="Loading user creation..." />
             ) : (
                 <form onSubmit={handleSubmit}>
                     <Group align="flex-start" grow={false}>
                         <Stack gap="md" w={400}>
                             <TextInput
-                                label="Username"
                                 description="Username cannot be changed later"
                                 key={form.key('username')}
+                                label="Username"
                                 {...form.getInputProps('username')}
                                 leftSection={<PiUserDuotone size="1rem" />}
                             />
 
                             <NumberInput
+                                allowDecimal={false}
+                                decimalScale={0}
+                                defaultValue={0}
+                                description="Enter data limit in GB, 0 for unlimited"
+                                key={form.key('trafficLimitBytes')}
+                                label="Data Limit"
                                 leftSection={
                                     <>
                                         <Text
-                                            ta="center"
-                                            size="0.75rem"
-                                            w={26}
                                             display="flex"
+                                            size="0.75rem"
                                             style={{ justifyContent: 'center' }}
+                                            ta="center"
+                                            w={26}
                                         >
                                             GB
                                         </Text>
                                         <Divider orientation="vertical" />
                                     </>
                                 }
-                                label="Data Limit"
-                                description="Enter data limit in GB, 0 for unlimited"
-                                allowDecimal={false}
-                                defaultValue={0}
-                                decimalScale={0}
-                                key={form.key('trafficLimitBytes')}
                                 {...form.getInputProps('trafficLimitBytes')}
                             />
 
                             <Select
-                                label="Traffic reset strategy"
-                                description="How often the user's traffic should be reset"
-                                placeholder="Pick value"
                                 allowDeselect={false}
-                                defaultValue={form.values.trafficLimitStrategy}
                                 data={resetDataStrategy}
-                                leftSection={<PiClockDuotone size="1rem" />}
+                                defaultValue={form.values.trafficLimitStrategy}
+                                description="How often the user's traffic should be reset"
                                 key={form.key('trafficLimitStrategy')}
+                                label="Traffic reset strategy"
+                                leftSection={<PiClockDuotone size="1rem" />}
+                                placeholder="Pick value"
                                 {...form.getInputProps('trafficLimitStrategy')}
                             />
 
                             <DateTimePicker
+                                key={form.key('expireAt')}
                                 label="Expiry Date"
                                 valueFormat="MMMM D, YYYY - HH:mm"
-                                key={form.key('expireAt')}
                                 {...form.getInputProps('expireAt')}
                                 leftSection={<PiCalendarDuotone size="1rem" />}
                             />
@@ -199,22 +201,22 @@ export const CreateUserModalWidget = () => {
                             <Checkbox.Group
                                 key={form.key('activeUserInbounds')}
                                 {...form.getInputProps('activeUserInbounds')}
-                                label="Inbounds"
                                 description="Select available inbounds for this user"
+                                label="Inbounds"
                             >
                                 <SimpleGrid
-                                    pt="md"
                                     cols={{
                                         base: 1,
                                         sm: 1,
                                         md: 2
                                     }}
+                                    pt="md"
                                 >
                                     {inbounds?.map((inbound) => (
                                         <>
                                             <InboundCheckboxCardWidget
-                                                key={inbound.uuid}
                                                 inbound={inbound}
+                                                key={inbound.uuid}
                                             />
                                         </>
                                     ))}
@@ -225,12 +227,12 @@ export const CreateUserModalWidget = () => {
 
                     <Group justify="right" mt="xl">
                         <Button
-                            type="submit"
                             color="teal"
                             leftSection={<PiFloppyDiskDuotone size="1rem" />}
-                            variant="outline"
-                            size="md"
                             loading={isDataSubmitting}
+                            size="md"
+                            type="submit"
+                            variant="outline"
                         >
                             Create user
                         </Button>

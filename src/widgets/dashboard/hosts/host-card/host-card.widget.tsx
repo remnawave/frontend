@@ -1,20 +1,20 @@
-import { Badge, Button, Container, Flex, Group, Text } from '@mantine/core'
-import { useHostsStoreActions, useHostsStoreSelectedInboundTag } from '@entitites/dashboard'
-import { useDSInboundsHashMap } from '@entitites/dashboard/dashboard-store/dashboard-store'
-import { Draggable } from '@hello-pangea/dnd'
-import cx from 'clsx'
-import ColorHash from 'color-hash'
 import {
     PiDotsSixVertical,
-    PiHandDuotone,
     PiLock,
     PiPencil,
     PiProhibitDuotone,
-    PiPulseDuotone,
-    PiTrash
+    PiPulseDuotone
 } from 'react-icons/pi'
-import { IProps } from './interfaces'
+import { Badge, Button, Group, Text } from '@mantine/core'
+import { Draggable } from '@hello-pangea/dnd'
+import ColorHash from 'color-hash'
+import cx from 'clsx'
+
+import { useHostsStoreActions, useHostsStoreSelectedInboundTag } from '@entitites/dashboard'
+import { useDSInboundsHashMap } from '@entitites/dashboard/dashboard-store/dashboard-store'
+
 import classes from './HostCard.module.css'
+import { IProps } from './interfaces'
 
 export function HostCardWidget(props: IProps) {
     const { item, index } = props
@@ -43,10 +43,10 @@ export function HostCardWidget(props: IProps) {
 
     return (
         <Draggable
-            key={item.uuid}
-            index={index}
             draggableId={item.uuid}
+            index={index}
             isDragDisabled={isFiltered}
+            key={item.uuid}
         >
             {(provided, snapshot) => (
                 <>
@@ -59,40 +59,40 @@ export function HostCardWidget(props: IProps) {
                         {...provided.draggableProps}
                     >
                         <div {...provided.dragHandleProps} className={classes.dragHandle}>
-                            {!isFiltered && <PiDotsSixVertical size="2rem" color="white" />}
+                            {!isFiltered && <PiDotsSixVertical color="white" size="2rem" />}
                             {isFiltered && (
-                                <PiLock size="2rem" color="white" style={{ opacity: 0.5 }} />
+                                <PiLock color="white" size="2rem" style={{ opacity: 0.5 }} />
                             )}
                         </div>
 
                         <div>
                             <Group gap="xs">
                                 <Badge
-                                    miw={'15ch'}
-                                    size="lg"
                                     autoContrast
-                                    variant="light"
-                                    radius="md"
                                     color={ch.hex(item.inboundUuid)}
+                                    miw={'15ch'}
+                                    radius="md"
+                                    size="lg"
+                                    variant="light"
                                 >
                                     {inbound.tag}
                                 </Badge>
-                                <Text fw={400} miw={'40ch'} className={classes.label}>
+                                <Text className={classes.label} fw={400} miw={'40ch'}>
                                     {item.remark}
                                 </Text>
-                                <Text miw={'40ch'} className={classes.hostInfoLabel}>
+                                <Text className={classes.hostInfoLabel} miw={'40ch'}>
                                     {item.address}
                                     {item.port ? `:${item.port}` : ''}
                                 </Text>
 
                                 <Group gap="xs" justify="flex-end">
                                     <Button
-                                        onClick={handleEdit}
-                                        variant="outline"
-                                        size="xs"
                                         color="teal"
-                                        radius="md"
                                         leftSection={<PiPencil size="1rem" />}
+                                        onClick={handleEdit}
+                                        radius="md"
+                                        size="xs"
+                                        variant="outline"
                                     >
                                         Edit
                                     </Button>
@@ -116,8 +116,8 @@ export function HostCardWidget(props: IProps) {
                                                 />
                                             )
                                         }
-                                        variant="outline"
                                         size="lg"
+                                        variant="outline"
                                     >
                                         {isHostActive ? 'Visible' : 'Disabled'}
                                     </Badge>

@@ -1,5 +1,6 @@
 import { notifications } from '@mantine/notifications'
 import axios from 'axios'
+
 import { logoutEvents } from '../emitters/emit-logout'
 
 let authorizationToken = ''

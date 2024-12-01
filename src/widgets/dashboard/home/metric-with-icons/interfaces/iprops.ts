@@ -1,6 +1,6 @@
 export interface MetricWithIconProps {
+    color?: string
     icon: React.ElementType
     title: string
-    value: number | string | JSX.Element
-    color?: string
+    value: JSX.Element | number | string
 }

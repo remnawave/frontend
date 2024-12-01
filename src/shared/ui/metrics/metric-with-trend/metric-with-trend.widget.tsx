@@ -1,5 +1,7 @@
 import { Group } from '@mantine/core'
+
 import { MetricCard } from '@/shared/ui/metrics/metric-card'
+
 import { IProps } from './interfaces/iprops'
 
 export const MetricWithTrend = (props: IProps) => {

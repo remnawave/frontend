@@ -1,18 +1,21 @@
-import { notifications } from '@mantine/notifications'
 import { LoginCommand } from '@remnawave/backend-contract'
-import { instance } from '@shared/api'
+import { notifications } from '@mantine/notifications'
+import { devtools } from 'zustand/middleware'
 import { AxiosError } from 'axios'
 import { create } from 'zustand'
-import { devtools } from 'zustand/middleware'
-import { removeToken, setToken } from '../session-store/use-session-store'
+
+import { instance } from '@shared/api'
+
 import type { IActions, IState } from './interfaces'
+
+import { removeToken, setToken } from '../session-store/use-session-store'
 
 const initialState: IState = {
     isLoading: false,
     loginResponse: null
 }
 
-const useAuthStore = create<IState & IActions>()(
+const useAuthStore = create<IActions & IState>()(
     devtools(
         (set, getState) => ({
             ...initialState,

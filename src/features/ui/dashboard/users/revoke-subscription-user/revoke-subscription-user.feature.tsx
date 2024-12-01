@@ -1,12 +1,13 @@
+import { notifications } from '@mantine/notifications'
+import { ActionIcon, Tooltip } from '@mantine/core'
+import { PiKeyDuotone } from 'react-icons/pi'
 import { useState } from 'react'
 
-import { ActionIcon, Button, Tooltip } from '@mantine/core'
-import { notifications } from '@mantine/notifications'
-import { PiKeyDuotone } from 'react-icons/pi'
 import {
     useUserModalStoreActions,
     useUserModalStoreUser
 } from '@/entitites/dashboard/user-modal-store/user-modal-store'
+
 import { IProps } from './interfaces'
 
 export function RevokeSubscriptionUserFeature(props: IProps) {
@@ -40,10 +41,10 @@ export function RevokeSubscriptionUserFeature(props: IProps) {
     return (
         <Tooltip label="Revoke subscription">
             <ActionIcon
-                size="xl"
                 color="green"
                 loading={isLoading}
                 onClick={handleRevokeSubscription}
+                size="xl"
             >
                 <PiKeyDuotone size="1.5rem" />
             </ActionIcon>

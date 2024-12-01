@@ -1,8 +1,9 @@
-import { AxiosError } from 'axios'
-import { instance } from '@shared/api'
-import { devtools } from 'zustand/middleware'
-import { create } from '@shared/hocs/store-wrapper'
 import { GetXrayConfigCommand, UpdateXrayConfigCommand } from '@remnawave/backend-contract'
+import { devtools } from 'zustand/middleware'
+import { AxiosError } from 'axios'
+
+import { create } from '@shared/hocs/store-wrapper'
+import { instance } from '@shared/api'
 
 import { IActions, IState } from './interfaces'
 

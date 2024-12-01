@@ -1,6 +1,8 @@
 import { Group } from '@mantine/core'
+
+import { HeaderButtons } from '@features/ui/dashboard/header-buttons'
 import { StickyHeader } from '@shared/ui/sticky-header'
-import { HeaderButtons } from '../../../../features/ui/dashboard/header-buttons'
+
 import { SidebarButton } from './sidebar-button'
 import classes from './header.module.css'
 

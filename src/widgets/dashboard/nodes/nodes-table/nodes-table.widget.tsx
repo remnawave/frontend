@@ -1,4 +1,3 @@
-import { useNodesStoreActions } from '@entitites/dashboard/nodes'
 import { NodeCardWidget } from '../node-card'
 import { IProps } from './interfaces'
 

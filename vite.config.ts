@@ -1,11 +1,10 @@
 /* eslint-disable indent */
-import { fileURLToPath, URL } from 'node:url'
-
-import react from '@vitejs/plugin-react-swc'
-import * as dotenv from 'dotenv'
 import { visualizer } from 'rollup-plugin-visualizer'
 import { defineConfig, PluginOption } from 'vite'
 import tsconfigPaths from 'vite-tsconfig-paths'
+import { fileURLToPath, URL } from 'node:url'
+import react from '@vitejs/plugin-react-swc'
+import * as dotenv from 'dotenv'
 
 dotenv.config({ path: `${__dirname}/.env` })
 

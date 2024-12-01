@@ -1,7 +1,7 @@
 import { forwardRef, ReactNode, useEffect } from 'react'
-
-import { Box, BoxProps } from '@mantine/core'
 import { nprogress } from '@mantine/nprogress'
+import { Box, BoxProps } from '@mantine/core'
+
 import { app } from '@/config'
 
 interface PageProps extends BoxProps {

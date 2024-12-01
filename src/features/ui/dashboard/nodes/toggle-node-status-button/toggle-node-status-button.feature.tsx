@@ -1,9 +1,10 @@
+import { PiCellSignalFullDuotone, PiCellSignalSlashDuotone, PiTrashDuotone } from 'react-icons/pi'
+import { notifications } from '@mantine/notifications'
+import { Button } from '@mantine/core'
 import { useState } from 'react'
 
-import { Button } from '@mantine/core'
-import { notifications } from '@mantine/notifications'
 import { useNodesStoreActions, useNodesStoreEditModalNode } from '@entitites/dashboard/nodes'
-import { PiCellSignalFullDuotone, PiCellSignalSlashDuotone, PiTrashDuotone } from 'react-icons/pi'
+
 import { IProps } from './interfaces'
 
 export function ToggleNodeStatusButtonFeature(props: IProps) {
@@ -55,12 +56,12 @@ export function ToggleNodeStatusButtonFeature(props: IProps) {
 
     return (
         <Button
-            type="button"
-            size="md"
             color={color}
             leftSection={icon}
-            onClick={handleToggleUserStatus}
             loading={isLoading}
+            onClick={handleToggleUserStatus}
+            size="md"
+            type="button"
         >
             {buttonLabel}
         </Button>

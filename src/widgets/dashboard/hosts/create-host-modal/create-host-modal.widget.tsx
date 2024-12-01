@@ -1,7 +1,3 @@
-import { useDSInbounds } from '@/entitites/dashboard/dashboard-store/dashboard-store'
-import { handleFormErrors } from '@/shared/utils'
-import { useHostsStoreActions, useHostsStoreCreateModalIsOpen } from '@entitites/dashboard'
-import { DeleteHostFeature } from '@features/ui/dashboard/hosts/delete-host'
 import {
     ActionIcon,
     Button,
@@ -15,12 +11,18 @@ import {
     Text,
     TextInput
 } from '@mantine/core'
-import { useForm, zodResolver } from '@mantine/form'
-import { notifications } from '@mantine/notifications'
 import { ALPN, CreateHostCommand, FINGERPRINTS } from '@remnawave/backend-contract'
-import { useState } from 'react'
 import { PiCaretDown, PiCaretUp, PiFloppyDiskDuotone } from 'react-icons/pi'
+import { notifications } from '@mantine/notifications'
+import { useForm, zodResolver } from '@mantine/form'
+import consola from 'consola/browser'
+import { useState } from 'react'
 import { z } from 'zod'
+
+import { useHostsStoreActions, useHostsStoreCreateModalIsOpen } from '@entitites/dashboard'
+import { useDSInbounds } from '@/entitites/dashboard/dashboard-store/dashboard-store'
+import { DeleteHostFeature } from '@features/ui/dashboard/hosts/delete-host'
+import { handleFormErrors } from '@/shared/utils'
 
 import { RemarkInfoPopoverWidget } from '../popovers/remark-info/remark-info.widget'
 
@@ -70,11 +72,11 @@ export const CreateHostModalWidget = () => {
             })
         } catch (error) {
             if (error instanceof z.ZodError) {
-                console.error('Zod validation error:', error.errors)
+                consola.error('Zod validation error:', error.errors)
             }
             if (error instanceof Error) {
-                console.error('Error message:', error.message)
-                console.error('Error stack:', error.stack)
+                consola.error('Error message:', error.message)
+                consola.error('Error stack:', error.stack)
             }
             handleFormErrors(form, error)
             notifications.show({

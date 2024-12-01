@@ -1,30 +1,30 @@
-import { forwardRef, useState } from 'react'
-
+/* eslint-disable no-use-before-define */
 import {
     Badge,
     Box,
     CardSection,
     CardSectionProps,
     Indicator,
-    Tabs,
     type IndicatorProps,
-    type TabsTabProps as MantineTabsTabProps
+    type TabsTabProps as MantineTabsTabProps,
+    Tabs
 } from '@mantine/core'
+import { forwardRef, useState } from 'react'
 
-interface TabsTabProps extends Omit<MantineTabsTabProps, 'children'> {
-    label: string
-    counter?: number
-    hasIndicator?: boolean
+export interface DataTableTabsProps extends Omit<CardSectionProps, 'c' | 'fw' | 'size' | 'tt'> {
+    onChange?: (value: string) => void
+    tabs: TabsTabProps[]
 }
 
-export interface DataTableTabsProps extends Omit<CardSectionProps, 'size' | 'c' | 'fw' | 'tt'> {
-    tabs: TabsTabProps[]
-    onChange?: (value: string) => void
+interface TabsTabProps extends Omit<MantineTabsTabProps, 'children'> {
+    counter?: number
+    hasIndicator?: boolean
+    label: string
 }
 
 function IndicatorWrapper({ children, color }: Pick<IndicatorProps, 'children' | 'color'>) {
     return (
-        <Indicator processing color={color} size={6} position="middle-end" offset={-8}>
+        <Indicator color={color} offset={-8} position="middle-end" processing size={6}>
             {children}
         </Indicator>
     )
@@ -32,16 +32,16 @@ function IndicatorWrapper({ children, color }: Pick<IndicatorProps, 'children' |
 
 export const DataTableTabs = forwardRef<HTMLDivElement, DataTableTabsProps>(
     ({ tabs, onChange, ...props }, ref) => {
-        const [activeTab, setActiveTab] = useState<string | null>(tabs[0].value)
+        const [activeTab, setActiveTab] = useState<null | string>(tabs[0].value)
 
-        const handleTabChange = (value: string | null) => {
+        const handleTabChange = (value: null | string) => {
             setActiveTab(value)
             if (value) onChange?.(value)
         }
 
         return (
             <CardSection ref={ref} {...props}>
-                <Tabs value={activeTab} onChange={handleTabChange}>
+                <Tabs onChange={handleTabChange} value={activeTab}>
                     <Tabs.List>
                         {tabs.map(({ counter, hasIndicator, rightSection, color, ...tab }) => {
                             const BadgeWrapper = hasIndicator ? IndicatorWrapper : Box
@@ -50,9 +50,9 @@ export const DataTableTabs = forwardRef<HTMLDivElement, DataTableTabsProps>(
                                 counter !== undefined ? (
                                     <BadgeWrapper color={color}>
                                         <Badge
-                                            variant={activeTab === tab.value ? 'filled' : 'light'}
                                             color={color}
                                             radius="md"
+                                            variant={activeTab === tab.value ? 'filled' : 'light'}
                                         >
                                             {counter}
                                         </Badge>
@@ -62,9 +62,9 @@ export const DataTableTabs = forwardRef<HTMLDivElement, DataTableTabsProps>(
                             return (
                                 <Tabs.Tab
                                     {...tab}
+                                    color={color}
                                     key={tab.value}
                                     rightSection={badge ?? rightSection}
-                                    color={color}
                                 >
                                     {tab.label}
                                 </Tabs.Tab>

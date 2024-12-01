@@ -1,5 +1,4 @@
-import { useEffect, useState } from 'react'
-
+/* eslint-disable indent */
 import {
     Accordion,
     ActionIcon,
@@ -17,18 +16,6 @@ import {
     Text,
     TextInput
 } from '@mantine/core'
-import { useForm, zodResolver } from '@mantine/form'
-import { useInterval } from '@mantine/hooks'
-import { notifications } from '@mantine/notifications'
-import {
-    useNodesStoreActions,
-    useNodesStoreEditModalIsOpen,
-    useNodesStoreEditModalNode,
-    useNodesStorePubKey
-} from '@entitites/dashboard/nodes'
-import { DeleteNodeFeature } from '@features/ui/dashboard/nodes/delete-node'
-import { ToggleNodeStatusButtonFeature } from '@features/ui/dashboard/nodes/toggle-node-status-button'
-import { UpdateNodeCommand } from '@remnawave/backend-contract'
 import {
     PiCheck,
     PiCheckDuotone,
@@ -38,9 +25,25 @@ import {
     PiNetworkSlash,
     PiXDuotone
 } from 'react-icons/pi'
+import { UpdateNodeCommand } from '@remnawave/backend-contract'
+import { notifications } from '@mantine/notifications'
+import { useForm, zodResolver } from '@mantine/form'
+import { useInterval } from '@mantine/hooks'
+import { useEffect, useState } from 'react'
+import consola from 'consola/browser'
 import { z } from 'zod'
-import { handleFormErrors } from '@/shared/utils'
+
+import {
+    useNodesStoreActions,
+    useNodesStoreEditModalIsOpen,
+    useNodesStoreEditModalNode,
+    useNodesStorePubKey
+} from '@entitites/dashboard/nodes'
+import { ToggleNodeStatusButtonFeature } from '@features/ui/dashboard/nodes/toggle-node-status-button'
+import { DeleteNodeFeature } from '@features/ui/dashboard/nodes/delete-node'
 import { bytesToGbUtil, gbToBytesUtil } from '@/shared/utils/bytes'
+import { handleFormErrors } from '@/shared/utils'
+
 import { NodeStatusBadgeWidget } from '../node-status-badge'
 
 export const EditNodeModalWidget = () => {
@@ -83,6 +86,14 @@ export const EditNodeModalWidget = () => {
         }
     }, [node])
 
+    const handleClose = () => {
+        actions.toggleEditModal(false)
+
+        form.reset()
+        form.resetDirty()
+        form.resetTouched()
+    }
+
     const handleSubmit = form.onSubmit(async (values) => {
         try {
             setIsDataSubmitting(true)
@@ -104,11 +115,11 @@ export const EditNodeModalWidget = () => {
             })
         } catch (error) {
             if (error instanceof z.ZodError) {
-                console.error('Zod validation error:', error.errors)
+                consola.error('Zod validation error:', error.errors)
             }
             if (error instanceof Error) {
-                console.error('Error message:', error.message)
-                console.error('Error stack:', error.stack)
+                consola.error('Error message:', error.message)
+                consola.error('Error stack:', error.stack)
             }
             handleFormErrors(form, error)
             notifications.show({
@@ -123,25 +134,17 @@ export const EditNodeModalWidget = () => {
         }
     })
 
-    const handleClose = () => {
-        actions.toggleEditModal(false)
-
-        form.reset()
-        form.resetDirty()
-        form.resetTouched()
-    }
-
     return (
         <Modal
-            opened={isModalOpen}
+            centered
             onClose={handleClose}
+            opened={isModalOpen}
             title={
                 <Group gap="xl" justify="space-between">
                     <Text fw={500}>Edit node</Text>
                     {node && <NodeStatusBadgeWidget node={node} />}
                 </Group>
             }
-            centered
         >
             <form onSubmit={handleSubmit}>
                 <Group align="flex-start" grow={false}>
@@ -149,8 +152,6 @@ export const EditNodeModalWidget = () => {
                         <Group gap="xs" justify="space-between" w="100%"></Group>
 
                         <Accordion
-                            variant="contained"
-                            radius="md"
                             defaultValue={
                                 node &&
                                 node.lastStatusMessage !== null &&
@@ -159,9 +160,11 @@ export const EditNodeModalWidget = () => {
                                     ? 'error'
                                     : undefined
                             }
+                            radius="md"
+                            variant="contained"
                         >
                             <Accordion.Item value="info">
-                                <Accordion.Control icon={<PiInfo size={'1.50rem'} color="gray" />}>
+                                <Accordion.Control icon={<PiInfo color="gray" size={'1.50rem'} />}>
                                     Important note
                                 </Accordion.Control>
                                 <Accordion.Panel>
@@ -180,11 +183,11 @@ export const EditNodeModalWidget = () => {
                                             >
                                                 {({ copied, copy }) => (
                                                     <ActionIcon
-                                                        variant="outline"
-                                                        size="lg"
-                                                        radius="md"
                                                         color={copied ? 'teal' : 'blue'}
                                                         onClick={copy}
+                                                        radius="md"
+                                                        size="lg"
+                                                        variant="outline"
                                                     >
                                                         {copied ? (
                                                             <PiCheck size="1rem" />
@@ -205,7 +208,7 @@ export const EditNodeModalWidget = () => {
                                     <Accordion.Item value="error">
                                         <Accordion.Control
                                             icon={
-                                                <PiNetworkSlash size={'1.50rem'} color="#FF8787" />
+                                                <PiNetworkSlash color="#FF8787" size={'1.50rem'} />
                                             }
                                         >
                                             <Text fw={600}>Last error message</Text>
@@ -218,36 +221,36 @@ export const EditNodeModalWidget = () => {
                         </Accordion>
 
                         <TextInput
-                            label="Internal name"
                             key={form.key('name')}
+                            label="Internal name"
                             {...form.getInputProps('name')}
                             required
                         />
 
                         <Stack gap="md" w={400}>
-                            <Group gap="xs" w="100%" justify="space-between">
+                            <Group gap="xs" justify="space-between" w="100%">
                                 <TextInput
-                                    label="Address"
                                     key={form.key('address')}
+                                    label="Address"
                                     {...form.getInputProps('address')}
                                     placeholder="e.g. example.com"
-                                    w="75%"
                                     required
+                                    w="75%"
                                 />
 
                                 <NumberInput
-                                    label="Port"
                                     key={form.key('port')}
+                                    label="Port"
                                     {...form.getInputProps('port')}
-                                    hideControls
-                                    allowNegative={false}
                                     allowDecimal={false}
-                                    decimalScale={0}
+                                    allowNegative={false}
                                     clampBehavior="strict"
+                                    decimalScale={0}
+                                    hideControls
                                     max={65535}
                                     placeholder="e.g. 443"
-                                    w="20%"
                                     required
+                                    w="20%"
                                 />
                             </Group>
 
@@ -256,76 +259,76 @@ export const EditNodeModalWidget = () => {
                                 {...form.getInputProps('isTrafficTrackingActive', {
                                     type: 'checkbox'
                                 })}
-                                size="md"
+                                label="Traffic tracking"
                                 onClick={() => setAdvancedOpened((o) => !o)}
+                                size="md"
                                 thumbIcon={
                                     advancedOpened ? (
                                         <PiCheckDuotone
-                                            style={{ width: rem(12), height: rem(12) }}
                                             color={'teal'}
+                                            style={{ width: rem(12), height: rem(12) }}
                                         />
                                     ) : (
                                         <PiXDuotone
-                                            style={{ width: rem(12), height: rem(12) }}
                                             color="red.6"
+                                            style={{ width: rem(12), height: rem(12) }}
                                         />
                                     )
                                 }
-                                label="Traffic tracking"
                             />
 
                             <Collapse in={advancedOpened}>
                                 <Stack gap="md">
-                                    <Group gap="xs" w="100%" justify="space-between">
+                                    <Group gap="xs" justify="space-between" w="100%">
                                         <NumberInput
+                                            allowDecimal={false}
+                                            decimalScale={0}
+                                            defaultValue={0}
+                                            hideControls
+                                            key={form.key('trafficLimitBytes')}
+                                            label="Traffic limit"
                                             leftSection={
                                                 <>
                                                     <Text
-                                                        ta="center"
-                                                        size="0.75rem"
-                                                        w={26}
                                                         display="flex"
+                                                        size="0.75rem"
                                                         style={{ justifyContent: 'center' }}
+                                                        ta="center"
+                                                        w={26}
                                                     >
                                                         GB
                                                     </Text>
                                                     <Divider orientation="vertical" />
                                                 </>
                                             }
-                                            label="Traffic limit"
-                                            allowDecimal={false}
-                                            defaultValue={0}
-                                            decimalScale={0}
-                                            hideControls
-                                            key={form.key('trafficLimitBytes')}
                                             {...form.getInputProps('trafficLimitBytes')}
                                             w="30%"
                                         />
 
                                         <NumberInput
-                                            label="Traffic reset day"
                                             key={form.key('trafficResetDay')}
+                                            label="Traffic reset day"
                                             {...form.getInputProps('trafficResetDay')}
-                                            placeholder="e.g. 1-31"
-                                            hideControls
-                                            allowNegative={false}
                                             allowDecimal={false}
-                                            decimalScale={0}
+                                            allowNegative={false}
                                             clampBehavior="strict"
-                                            min={1}
+                                            decimalScale={0}
+                                            hideControls
                                             max={31}
+                                            min={1}
+                                            placeholder="e.g. 1-31"
                                             w="30%"
                                         />
 
                                         <NumberInput
-                                            label="Notify percent"
                                             key={form.key('notifyPercent')}
+                                            label="Notify percent"
                                             {...form.getInputProps('notifyPercent')}
-                                            hideControls
-                                            allowNegative={false}
                                             allowDecimal={false}
-                                            decimalScale={0}
+                                            allowNegative={false}
                                             clampBehavior="strict"
+                                            decimalScale={0}
+                                            hideControls
                                             max={100}
                                             placeholder="e.g. 50"
                                             w="30%"
@@ -337,7 +340,7 @@ export const EditNodeModalWidget = () => {
                     </Stack>
                 </Group>
 
-                <Group gap="xs" w="100%" pt={15} justify="space-between">
+                <Group gap="xs" justify="space-between" pt={15} w="100%">
                     <ActionIcon.Group>
                         <DeleteNodeFeature />
                     </ActionIcon.Group>
@@ -345,13 +348,13 @@ export const EditNodeModalWidget = () => {
                     <Group>
                         <ToggleNodeStatusButtonFeature />
                         <Button
-                            type="submit"
                             color="blue"
-                            leftSection={<PiFloppyDiskDuotone size="1rem" />}
-                            variant="outline"
-                            size="md"
                             disabled={!form.isValid() || !form.isDirty() || !form.isTouched()}
+                            leftSection={<PiFloppyDiskDuotone size="1rem" />}
                             loading={isDataSubmitting}
+                            size="md"
+                            type="submit"
+                            variant="outline"
                         >
                             Save
                         </Button>

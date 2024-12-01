@@ -6,15 +6,16 @@ import {
     Tooltip,
     useMantineColorScheme
 } from '@mantine/core'
-import { match } from '@shared/utils/match'
 import {
     PiMoonDuotone as DarkIcon,
     PiSunDimDuotone as LightIcon,
     PiDesktop as SystemIcon
 } from 'react-icons/pi'
 
-type ColorSchemeTogglerProps = Omit<ActionIconProps, 'children' | 'c' | 'onClick' | 'size'> &
-    ElementProps<'button', keyof ActionIconProps>
+import { match } from '@shared/utils/match'
+
+type ColorSchemeTogglerProps = ElementProps<'button', keyof ActionIconProps> &
+    Omit<ActionIconProps, 'c' | 'children' | 'onClick' | 'size'>
 
 export function ColorSchemeToggler(props: ColorSchemeTogglerProps) {
     const { colorScheme, setColorScheme } = useMantineColorScheme()
@@ -39,7 +40,7 @@ export function ColorSchemeToggler(props: ColorSchemeTogglerProps) {
 
     return (
         <Tooltip label={label}>
-            <ActionIcon variant="transparent" c="inherit" onClick={handleSchemeChange} {...props}>
+            <ActionIcon c="inherit" onClick={handleSchemeChange} variant="transparent" {...props}>
                 <Icon size="100%" />
             </ActionIcon>
         </Tooltip>

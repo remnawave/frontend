@@ -1,8 +1,7 @@
-import { forwardRef } from 'react'
-
-import { Input, Text, type InputProps, type InputWrapperProps } from '@mantine/core'
+import { Input, type InputProps, type InputWrapperProps, Text } from '@mantine/core'
 import { useUncontrolled } from '@mantine/hooks'
 import { IMaskInput } from 'react-imask'
+import { forwardRef } from 'react'
 
 const maskProps = {
     mask: Number,
@@ -12,13 +11,13 @@ const maskProps = {
 }
 
 export interface MoneyInputProps
-    extends Pick<InputWrapperProps, 'description' | 'label' | 'error' | 'required'>,
-        InputProps {
-    name?: string
-    value?: string | number
-    placeholder?: string
-    onChange?: (value: number | string) => void
+    extends InputProps,
+        Pick<InputWrapperProps, 'description' | 'error' | 'label' | 'required'> {
     currency?: string
+    name?: string
+    onChange?: (value: number | string) => void
+    placeholder?: string
+    value?: number | string
 }
 
 export const MoneyInput = forwardRef<HTMLDivElement, MoneyInputProps>(
@@ -54,21 +53,21 @@ export const MoneyInput = forwardRef<HTMLDivElement, MoneyInputProps>(
 
         return (
             <Input.Wrapper
-                ref={ref}
-                label={label}
-                error={error}
                 description={description}
+                error={error}
+                label={label}
+                ref={ref}
                 required={required}
             >
                 <Input
-                    unmask
                     autoComplete="none"
-                    name={name}
-                    placeholder={placeholder}
                     component={IMaskInput}
-                    rightSection={<Text mr="md">{currency}</Text>}
-                    value={majorUnitsValue}
+                    name={name}
                     onAccept={handleChange}
+                    placeholder={placeholder}
+                    rightSection={<Text mr="md">{currency}</Text>}
+                    unmask
+                    value={majorUnitsValue}
                     {...maskProps}
                     {...rest}
                 />

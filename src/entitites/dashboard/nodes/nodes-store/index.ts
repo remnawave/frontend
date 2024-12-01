@@ -1,2 +1,2 @@
-export * from './nodes-store'
 export * from './interfaces'
+export * from './nodes-store'

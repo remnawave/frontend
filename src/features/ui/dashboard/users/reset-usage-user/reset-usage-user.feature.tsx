@@ -1,6 +1,7 @@
-import { ActionIcon, Tooltip } from '@mantine/core'
-import { notifications } from '@mantine/notifications'
 import { PiClockCounterClockwiseDuotone } from 'react-icons/pi'
+import { notifications } from '@mantine/notifications'
+import { ActionIcon, Tooltip } from '@mantine/core'
+
 import { IProps } from './interfaces'
 
 export function ResetUsageUserFeature(props: IProps) {
@@ -16,7 +17,7 @@ export function ResetUsageUserFeature(props: IProps) {
 
     return (
         <Tooltip label="Reset usage">
-            <ActionIcon size="xl" color="blue" onClick={handleResetUsage}>
+            <ActionIcon color="blue" onClick={handleResetUsage} size="xl">
                 <PiClockCounterClockwiseDuotone size="1.5rem" />
             </ActionIcon>
         </Tooltip>

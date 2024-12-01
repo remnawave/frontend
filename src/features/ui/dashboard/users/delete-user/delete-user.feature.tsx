@@ -1,7 +1,8 @@
-import { useState } from 'react'
-import { PiTrashDuotone } from 'react-icons/pi'
-import { ActionIcon, Tooltip } from '@mantine/core'
 import { notifications } from '@mantine/notifications'
+import { ActionIcon, Tooltip } from '@mantine/core'
+import { PiTrashDuotone } from 'react-icons/pi'
+import { useState } from 'react'
+
 import {
     useUserModalStore,
     useUserModalStoreUser

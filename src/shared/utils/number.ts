@@ -1,10 +1,10 @@
 interface FormatterOptions {
-    precision?: number
-    full?: boolean
-    thousandSeparator?: string
     decimalSeparator?: string
-    suffix?: string
+    full?: boolean
+    precision?: number
     prefix?: string
+    suffix?: string
+    thousandSeparator?: string
 }
 
 const defaultOptions: Required<FormatterOptions> = {
@@ -14,6 +14,15 @@ const defaultOptions: Required<FormatterOptions> = {
     suffix: '',
     prefix: '',
     full: true
+}
+
+export function formatCurrency(
+    value: number | string,
+    options?: FormatterOptions,
+    currency = '$'
+): string {
+    // eslint-disable-next-line no-use-before-define
+    return formatDecimal(value, { ...options, prefix: currency })
 }
 
 export function formatDecimal(value: number | string, options?: FormatterOptions): string {
@@ -47,18 +56,10 @@ export function formatPercentage(value: number | string, options?: FormatterOpti
     return formatDecimal(value, { ...options, suffix: '%' })
 }
 
-export function formatCurrency(
-    value: number | string,
-    currency = '$',
-    options?: FormatterOptions
-): string {
-    return formatDecimal(value, { ...options, prefix: currency })
-}
-
 export function isNumber(value: unknown): value is number {
     return typeof value === 'number' && !Number.isNaN(value)
 }
 
-export function randomInt({ min, max }: { min: number; max: number }) {
+export function randomInt({ min, max }: { max: number; min: number }) {
     return Math.floor(Math.random() * (max - min + 1)) + min
 }

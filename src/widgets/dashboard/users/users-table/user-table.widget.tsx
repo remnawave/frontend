@@ -1,18 +1,17 @@
-import { ChangeEvent, useState } from 'react'
-
-import { Button, Group } from '@mantine/core'
+import { PiArrowsClockwise, PiPlus } from 'react-icons/pi'
 import { notifications } from '@mantine/notifications'
+import { Button, Group } from '@mantine/core'
+import { useState } from 'react'
+
 import {
-    useDashboardStoreIsLoading,
     useDashboardStoreParams,
     useDashboardStoreTotalUsers,
     useDashboardStoreUsers,
     useDashboardStoreUsersLoading
 } from '@entitites/dashboard/dashboard-store/dashboard-store'
 import { useUserCreationModalStoreActions } from '@entitites/dashboard/user-creation-modal-store/user-creation-modal-store'
-import { GetAllUsersCommand } from '@remnawave/backend-contract'
-import { PiArrowsClockwise, PiPlus } from 'react-icons/pi'
 import { DataTable } from '@/shared/ui/stuff/data-table'
+
 import { IProps } from './interfaces'
 
 export function UserTableWidget(props: IProps) {
@@ -30,7 +29,6 @@ export function UserTableWidget(props: IProps) {
     const [isRefreshing, setIsRefreshing] = useState(false)
 
     const params = useDashboardStoreParams()
-    const isLoading = useDashboardStoreIsLoading()
     const isUsersLoading = useDashboardStoreUsersLoading()
     const users = useDashboardStoreUsers()
     const totalUsers = useDashboardStoreTotalUsers()
@@ -57,64 +55,64 @@ export function UserTableWidget(props: IProps) {
     return (
         <DataTable.Container>
             <DataTable.Title
-                title="Users"
-                description="List of all users"
                 actions={
                     <>
                         <Group>
                             <Button
-                                variant="default"
-                                size="xs"
                                 leftSection={<PiArrowsClockwise size="1rem" />}
-                                onClick={handleRefresh}
                                 loading={isRefreshing}
+                                onClick={handleRefresh}
+                                size="xs"
+                                variant="default"
                             >
                                 Update
                             </Button>
 
                             <Button
-                                variant="default"
-                                size="xs"
                                 leftSection={<PiPlus size="1rem" />}
                                 onClick={handleOpenCreateUserModal}
+                                size="xs"
+                                variant="default"
                             >
                                 Create new user
                             </Button>
                         </Group>
                     </>
                 }
+                description="List of all users"
+                title="Users"
             />
 
             <DataTable.Filters filters={filters.filters} onClear={filters.clear} />
-            <DataTable.Tabs tabs={tabs.tabs} onChange={tabs.change} />
+            <DataTable.Tabs onChange={tabs.change} tabs={tabs.tabs} />
 
             <DataTable.Content>
                 <DataTable.Table
-                    withTableBorder
                     borderRadius="sm"
-                    minHeight={150}
+                    columns={columns}
+                    fetching={isUsersLoading}
                     highlightOnHover
-                    verticalSpacing="md"
                     horizontalSpacing="md"
+                    minHeight={150}
                     noRecordsText="No users found"
-                    recordsPerPageLabel="Users per page"
-                    recordsPerPageOptions={[10, 20, 30, 50]}
+                    onPageChange={handlePageChange}
                     onRecordsPerPageChange={handleRecordsPerPageChange}
+                    onSortStatusChange={handleSortStatusChange}
+                    page={params.offset / params.limit + 1}
                     paginationText={({ from, to, totalRecords }) =>
                         `${from} - ${to} / ${totalRecords} users`
                     }
-                    page={params.offset / params.limit + 1}
-                    onPageChange={handlePageChange}
                     records={users || []}
-                    fetching={isUsersLoading}
                     recordsPerPage={params.limit}
-                    totalRecords={totalUsers}
+                    recordsPerPageLabel="Users per page"
+                    recordsPerPageOptions={[10, 20, 30, 50]}
                     sortStatus={{
                         columnAccessor: params.orderBy || 'createdAt',
                         direction: params.orderDir || 'desc'
                     }}
-                    onSortStatusChange={handleSortStatusChange}
-                    columns={columns}
+                    totalRecords={totalUsers}
+                    verticalSpacing="md"
+                    withTableBorder
                 />
             </DataTable.Content>
         </DataTable.Container>

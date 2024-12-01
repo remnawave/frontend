@@ -1,9 +1,10 @@
+import { notifications } from '@mantine/notifications'
+import { ActionIcon, Tooltip } from '@mantine/core'
+import { PiTrashDuotone } from 'react-icons/pi'
 import { useState } from 'react'
 
-import { ActionIcon, Tooltip } from '@mantine/core'
-import { notifications } from '@mantine/notifications'
 import { useHostsStoreActions, useHostsStoreEditModalHost } from '@entitites/dashboard'
-import { PiTrashDuotone } from 'react-icons/pi'
+
 import { IProps } from './interfaces'
 
 export function DeleteHostFeature(props: IProps) {
@@ -39,7 +40,7 @@ export function DeleteHostFeature(props: IProps) {
 
     return (
         <Tooltip label="Delete host">
-            <ActionIcon size="xl" color="red" onClick={handleDeleteHost} loading={isLoading}>
+            <ActionIcon color="red" loading={isLoading} onClick={handleDeleteHost} size="xl">
                 <PiTrashDuotone size="1.5rem" />
             </ActionIcon>
         </Tooltip>

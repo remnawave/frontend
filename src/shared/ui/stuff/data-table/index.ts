@@ -1,13 +1,16 @@
+/* eslint-disable indent */
 import { DataTable as MantineDataTable } from 'mantine-datatable'
+
 import { capitalize } from '@/shared/utils/text'
-import { CardTitle } from '../card-title'
-import { DataTableActions } from './data-table-actions'
+
+import { DataTableTextInputFilter } from './data-table-text-input-filter'
 import { DataTableContainer } from './data-table-container'
+import { DataTableActions } from './data-table-actions'
 import { DataTableContent } from './data-table-content'
 import { DataTableFilters } from './data-table-filters'
 import { DataTableTabs } from './data-table-tabs'
-import { DataTableTextInputFilter } from './data-table-text-input-filter'
 import { useDataTable } from './use-data-table'
+import { CardTitle } from '../card-title'
 
 export const DataTable = {
     useDataTable,

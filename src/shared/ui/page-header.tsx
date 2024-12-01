@@ -1,13 +1,12 @@
-import { ReactNode } from 'react'
-
 import { Anchor, Breadcrumbs, ElementProps, Group, GroupProps, Text, Title } from '@mantine/core'
 import { NavLink } from 'react-router-dom'
+import { ReactNode } from 'react'
 
 interface PageHeaderProps
-    extends Omit<GroupProps, 'title'>,
-        ElementProps<'header', keyof GroupProps> {
+    extends ElementProps<'header', keyof GroupProps>,
+        Omit<GroupProps, 'title'> {
+    breadcrumbs?: { href?: string; label: string }[]
     title: ReactNode
-    breadcrumbs?: { label: string; href?: string }[]
 }
 
 export function PageHeader({
@@ -19,7 +18,7 @@ export function PageHeader({
     ...props
 }: PageHeaderProps) {
     return (
-        <Group component="header" justify="space-between" className={className} mb={mb} {...props}>
+        <Group className={className} component="header" justify="space-between" mb={mb} {...props}>
             <div>
                 <Title component="h2" order={2}>
                     {title}
@@ -30,17 +29,17 @@ export function PageHeader({
                         {breadcrumbs.map((breadcrumb) =>
                             breadcrumb.href ? (
                                 <Anchor
-                                    fz="sm"
-                                    underline="never"
                                     c="inherit"
                                     component={NavLink}
+                                    fz="sm"
                                     key={breadcrumb.label}
                                     to={breadcrumb.href}
+                                    underline="never"
                                 >
                                     {breadcrumb.label}
                                 </Anchor>
                             ) : (
-                                <Text key={breadcrumb.label} c="dimmed" fz="sm">
+                                <Text c="dimmed" fz="sm" key={breadcrumb.label}>
                                     {breadcrumb.label}
                                 </Text>
                             )

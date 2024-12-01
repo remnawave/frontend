@@ -7,15 +7,17 @@ import '@mantine/dropzone/styles.layer.css'
 import '@mantine/notifications/styles.layer.css'
 import '@mantine/nprogress/styles.layer.css'
 import 'mantine-datatable/styles.layer.css'
+
 import './global.css'
 
+import { NavigationProgress } from '@mantine/nprogress'
+import { Notifications } from '@mantine/notifications'
+import { ModalsProvider } from '@mantine/modals'
 import { MantineProvider } from '@mantine/core'
 import { useMediaQuery } from '@mantine/hooks'
-import { ModalsProvider } from '@mantine/modals'
-import { Notifications } from '@mantine/notifications'
-import { NavigationProgress } from '@mantine/nprogress'
-import { Router } from '@/app/router/router'
+
 import { AuthProvider } from '@/shared/providers/auth-provider'
+import { Router } from '@/app/router/router'
 import { theme } from '@/shared/theme'
 
 export function App() {
@@ -23,7 +25,7 @@ export function App() {
 
     return (
         <AuthProvider>
-            <MantineProvider theme={theme} defaultColorScheme="dark">
+            <MantineProvider defaultColorScheme="dark" theme={theme}>
                 <Notifications position={mq ? 'top-right' : 'bottom-right'} />
                 <NavigationProgress />
                 <ModalsProvider>

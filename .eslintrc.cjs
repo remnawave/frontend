@@ -29,10 +29,11 @@ module.exports = {
             'error',
             {
                 type: 'line-length',
-                order: 'asc',
+                order: 'desc',
                 ignoreCase: true,
                 specialCharacters: 'keep',
                 internalPattern: ['^~/.+'],
+                tsconfigRootDir: '.',
                 partitionByComment: false,
                 partitionByNewLine: false,
                 newlinesBetween: 'always',

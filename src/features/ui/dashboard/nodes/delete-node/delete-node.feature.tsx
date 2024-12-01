@@ -1,9 +1,10 @@
+import { notifications } from '@mantine/notifications'
+import { ActionIcon, Tooltip } from '@mantine/core'
+import { PiTrashDuotone } from 'react-icons/pi'
 import { useState } from 'react'
 
-import { ActionIcon, Tooltip } from '@mantine/core'
-import { notifications } from '@mantine/notifications'
 import { useNodesStoreActions, useNodesStoreEditModalNode } from '@entitites/dashboard/nodes'
-import { PiTrashDuotone } from 'react-icons/pi'
+
 import { IProps } from './interfaces'
 
 export function DeleteNodeFeature(props: IProps) {
@@ -39,7 +40,7 @@ export function DeleteNodeFeature(props: IProps) {
 
     return (
         <Tooltip label="Delete node">
-            <ActionIcon size="xl" color="red" onClick={handleDeleteNode} loading={isLoading}>
+            <ActionIcon color="red" loading={isLoading} onClick={handleDeleteNode} size="xl">
                 <PiTrashDuotone size="1.5rem" />
             </ActionIcon>
         </Tooltip>

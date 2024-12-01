@@ -1,9 +1,9 @@
 import { createContext, ReactNode, useEffect, useMemo, useState } from 'react'
 
-import { removeToken, useToken } from '../../entitites/auth'
 import { useDashboardStoreActions } from '../../entitites/dashboard/dashboard-store/dashboard-store'
-import { logoutEvents } from '../emitters'
+import { removeToken, useToken } from '../../entitites/auth'
 import { resetAllStores } from '../hocs/store-wrapper'
+import { logoutEvents } from '../emitters'
 
 interface AuthContextValues {
     isAuthenticated: boolean
@@ -11,6 +11,7 @@ interface AuthContextValues {
     setIsAuthenticated: (isAuthenticated: boolean) => void
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const AuthContext = createContext<AuthContextValues | null>(null)
 
 interface AuthProviderProps {

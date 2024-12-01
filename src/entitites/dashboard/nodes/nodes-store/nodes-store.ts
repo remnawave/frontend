@@ -9,10 +9,12 @@ import {
     RestartAllNodesCommand,
     UpdateNodeCommand
 } from '@remnawave/backend-contract'
-import { instance } from '@shared/api'
-import { create } from '@shared/hocs/store-wrapper'
-import { AxiosError } from 'axios'
 import { devtools } from 'zustand/middleware'
+import { AxiosError } from 'axios'
+
+import { create } from '@shared/hocs/store-wrapper'
+import { instance } from '@shared/api'
+
 import { IActions, IState } from './interfaces'
 
 const initialState: IState = {
@@ -30,7 +32,7 @@ const initialState: IState = {
     pubKey: null
 }
 
-export const useNodesStore = create<IState & IActions>()(
+export const useNodesStore = create<IActions & IState>()(
     devtools(
         (set, getState) => ({
             ...initialState,
@@ -76,7 +78,6 @@ export const useNodesStore = create<IState & IActions>()(
                             throw e
                         }
                         return false
-                    } finally {
                     }
                 },
                 enableNode: async (uuid: string): Promise<boolean> => {

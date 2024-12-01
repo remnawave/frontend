@@ -1,7 +1,8 @@
-import { useState } from 'react'
-import { Button, Group } from '@mantine/core'
-import { notifications } from '@mantine/notifications'
 import { PiArrowsClockwise, PiPlus, PiSpiral } from 'react-icons/pi'
+import { notifications } from '@mantine/notifications'
+import { Button, Group } from '@mantine/core'
+import { useState } from 'react'
+
 import { useNodesStoreActions } from '@entitites/dashboard/nodes/nodes-store/nodes-store'
 
 import { IProps } from './interfaces'

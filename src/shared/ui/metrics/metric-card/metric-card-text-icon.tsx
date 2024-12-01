@@ -1,6 +1,6 @@
 import { Box, BoxProps, ElementProps } from '@mantine/core'
 
-type MetricCardIcon = Omit<BoxProps, 'children'> & ElementProps<'div', keyof BoxProps>
+type MetricCardIcon = ElementProps<'div', keyof BoxProps> & Omit<BoxProps, 'children'>
 
 export function MetricCardIcon({ display = 'flex', ...props }: MetricCardIcon) {
     return (

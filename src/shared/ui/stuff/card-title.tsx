@@ -1,28 +1,27 @@
+import { CardSection, CardSectionProps, Group, Text, Title } from '@mantine/core'
 import { forwardRef, ReactNode } from 'react'
 
-import { CardSection, CardSectionProps, Group, Text, Title } from '@mantine/core'
-
-export interface CardTitleProps extends Omit<CardSectionProps, 'size' | 'c' | 'fw' | 'tt'> {
-    title: ReactNode
-    description?: string
+export interface CardTitleProps extends Omit<CardSectionProps, 'c' | 'fw' | 'size' | 'tt'> {
     actions?: ReactNode
+    description?: string
+    title: ReactNode
 }
 
 export const CardTitle = forwardRef<HTMLDivElement, CardTitleProps>(
     ({ title, description, style, actions, withBorder = true, ...props }, ref) => (
         <CardSection
-            ref={ref}
-            py="md"
-            withBorder={withBorder}
             inheritPadding
+            py="md"
+            ref={ref}
             style={{ ...style, borderTop: 'none' }}
+            withBorder={withBorder}
             {...props}
         >
             <Group justify="space-between">
                 <div>
                     <Title order={5}>{title}</Title>
                     {description && (
-                        <Text size="xs" c="dimmed">
+                        <Text c="dimmed" size="xs">
                             {description}
                         </Text>
                     )}

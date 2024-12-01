@@ -1,7 +1,7 @@
 import { ElementProps, Text, TextProps } from '@mantine/core'
 
-type MetricCardTextEmphasis = Omit<TextProps, 'fz' | 'fw'> & ElementProps<'p', keyof TextProps>
+type MetricCardTextEmphasis = ElementProps<'p', keyof TextProps> & Omit<TextProps, 'fw' | 'fz'>
 
 export function MetricCardTextEmphasis(props: MetricCardTextEmphasis) {
-    return <Text fz="h4" fw="bold" {...props} />
+    return <Text fw="bold" fz="h4" {...props} />
 }

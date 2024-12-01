@@ -1,9 +1,11 @@
-import { create } from 'zustand'
 import { createJSONStorage, devtools, persist } from 'zustand/middleware'
+import { create } from 'zustand'
+
 import { setAuthorizationToken } from '@/shared/api'
+
 import { IActions, ISetTokenAction, IState } from './interfaces'
 
-export const useSessionStore = create<IState & IActions>()(
+export const useSessionStore = create<IActions & IState>()(
     persist(
         devtools(
             (set) => ({

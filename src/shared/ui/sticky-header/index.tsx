@@ -1,13 +1,13 @@
-import { ReactNode } from 'react'
-
-import { Box, BoxProps } from '@mantine/core'
 import { useWindowScroll } from '@mantine/hooks'
+import { Box, BoxProps } from '@mantine/core'
+import { ReactNode } from 'react'
 import clsx from 'clsx'
+
 import classes from './sticky-header.module.css'
 
 interface StickyHeaderProps extends BoxProps {
-    offset?: number
     children?: ReactNode
+    offset?: number
 }
 
 export function StickyHeader({ children, offset = 2, className, ...rest }: StickyHeaderProps) {
@@ -15,8 +15,8 @@ export function StickyHeader({ children, offset = 2, className, ...rest }: Stick
 
     return (
         <Box
-            component="header"
             className={clsx(classes.root, className)}
+            component="header"
             data-sticked={scroll.y > offset}
             {...rest}
         >

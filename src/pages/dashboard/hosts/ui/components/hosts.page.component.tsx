@@ -1,10 +1,11 @@
+import { Grid } from '@mantine/core'
+
 import { CreateHostModalWidget } from '@widgets/dashboard/hosts/create-host-modal'
 import { HostsPageHeaderWidget } from '@widgets/dashboard/hosts/hosts-page-header'
 import { EditHostModalWidget } from '@widgets/dashboard/hosts/edit-host-modal'
 import { HostsTableWidget } from '@/widgets/dashboard/hosts/hosts-table'
 import { useHostsStoreIsHostsLoading } from '@entitites/dashboard'
-import { LoadingScreen, PageHeader, Page } from '@/shared/ui'
-import { Grid } from '@mantine/core'
+import { LoadingScreen, Page, PageHeader } from '@/shared/ui'
 
 import { BREADCRUMBS } from './constants'
 import { IProps } from './interfaces'
@@ -25,7 +26,7 @@ export default function HostsPageComponent(props: IProps) {
                     {isHostsLoading ? (
                         <LoadingScreen height="60vh" />
                     ) : (
-                        <HostsTableWidget inbounds={inbounds} hosts={hosts} />
+                        <HostsTableWidget hosts={hosts} inbounds={inbounds} />
                     )}
                 </Grid.Col>
             </Grid>

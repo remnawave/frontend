@@ -1,6 +1,6 @@
-import dayjs, { isDayjs, type Dayjs } from 'dayjs'
 import customParseFormat from 'dayjs/plugin/customParseFormat'
 import relativeTime from 'dayjs/plugin/relativeTime'
+import dayjs, { type Dayjs, isDayjs } from 'dayjs'
 import { z } from 'zod'
 
 dayjs.extend(customParseFormat)
@@ -10,11 +10,11 @@ export type CustomDate = Dayjs
 
 export const date = dayjs
 
-export function formatDate(value: Date | CustomDate | string, format = 'DD-MM-YYYY') {
+export function formatDate(value: CustomDate | Date | string, format = 'DD-MM-YYYY') {
     return date(value).format(format)
 }
 
-export function formatRelativeDate(value: Date | CustomDate | string) {
+export function formatRelativeDate(value: CustomDate | Date | string) {
     return date(value).fromNow()
 }
 

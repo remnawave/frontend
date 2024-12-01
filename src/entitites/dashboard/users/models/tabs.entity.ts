@@ -2,6 +2,7 @@ import { IGetTabData, User } from '@/entitites/dashboard/users/models/interfaces
 import { DataTable } from '@/shared/ui/stuff/data-table'
 
 export function getTabDataUsers(data: IGetTabData) {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     return DataTable.useDataTable<User>({
         tabsConfig: {
             tabs: [

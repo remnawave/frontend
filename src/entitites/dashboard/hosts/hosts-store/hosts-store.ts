@@ -5,10 +5,12 @@ import {
     ReorderHostCommand,
     UpdateHostCommand
 } from '@remnawave/backend-contract'
-import { instance } from '@shared/api'
-import { create } from '@shared/hocs/store-wrapper'
-import { AxiosError } from 'axios'
 import { devtools } from 'zustand/middleware'
+import { AxiosError } from 'axios'
+
+import { create } from '@shared/hocs/store-wrapper'
+import { instance } from '@shared/api'
+
 import { IActions, IState } from './interfaces'
 
 const initialState: IState = {
@@ -26,7 +28,7 @@ const initialState: IState = {
     }
 }
 
-export const useHostsStore = create<IState & IActions>()(
+export const useHostsStore = create<IActions & IState>()(
     devtools(
         (set, getState) => ({
             ...initialState,
@@ -84,7 +86,6 @@ export const useHostsStore = create<IState & IActions>()(
                             throw e
                         }
                         return false
-                    } finally {
                     }
                 },
                 deleteHost: async (uuid: string): Promise<boolean> => {
@@ -99,7 +100,6 @@ export const useHostsStore = create<IState & IActions>()(
                             throw e
                         }
                         return false
-                    } finally {
                     }
                 },
                 updateHost: async (host: UpdateHostCommand.Request): Promise<boolean> => {

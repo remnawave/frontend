@@ -3,13 +3,13 @@ import { ElementType } from 'react'
 export interface MenuItem {
     header: string
     section: {
-        name: string
+        dropdownItems?: {
+            badge?: string
+            href: string
+            name: string
+        }[]
         href: string
         icon: ElementType
-        dropdownItems?: {
-            name: string
-            href: string
-            badge?: string
-        }[]
+        name: string
     }[]
 }

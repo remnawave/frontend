@@ -1,6 +1,8 @@
 import { Button, Group } from '@mantine/core'
 import { PiEyeDuotone } from 'react-icons/pi'
+
 import { useUserModalStoreActions } from '@/entitites/dashboard/user-modal-store/user-modal-store'
+
 import { IProps } from './interfaces'
 
 export function ViewUserActionFeature(props: IProps) {
@@ -16,11 +18,11 @@ export function ViewUserActionFeature(props: IProps) {
     return (
         <Group gap={'xs'} justify={'center'} wrap={'nowrap'}>
             <Button
-                type="button"
-                size="xs"
-                radius="md"
                 leftSection={<PiEyeDuotone size={'1.5rem'} />}
                 onClick={handleOpenModal}
+                radius="md"
+                size="xs"
+                type="button"
             >
                 View
             </Button>

@@ -1,5 +1,6 @@
-import { Box, Group, Indicator, Progress, Text } from '@mantine/core'
 import { RESET_PERIODS } from '@remnawave/backend-contract'
+import { Box, Group, Progress, Text } from '@mantine/core'
+
 import { IProps } from '@/entitites/dashboard/users/ui/table-columns/username/interface'
 import { prettyBytesUtil } from '@/shared/utils/bytes'
 
@@ -22,18 +23,18 @@ export function DataUsageColumnEntity(props: IProps) {
     return (
         <Box w={300}>
             <Progress
+                animated
+                color={usedTrafficPercentage > 100 ? 'yellow.9' : 'teal.9'}
                 radius="xs"
                 size="md"
-                value={usedTrafficPercentage}
-                color={usedTrafficPercentage > 100 ? 'yellow.9' : 'teal.9'}
                 striped
-                animated
+                value={usedTrafficPercentage}
             />
             <Group gap="xs" justify="space-between" mt={2}>
-                <Text size="xs" c="dimmed" fw={'550'}>
+                <Text c="dimmed" fw={'550'} size="xs">
                     {totalUsedTraffic} / {limitBytes} {strategy}
                 </Text>
-                <Text size="xs" c="dimmed" fw={'550'}>
+                <Text c="dimmed" fw={'550'} size="xs">
                     Σ {lifetimeUsedTraffic}
                 </Text>
             </Group>

@@ -1,6 +1,7 @@
+/* eslint-disable no-param-reassign */
 import xbytes from 'xbytes'
 
-export function bytesToGbUtil(bytesInput: number | undefined | string): number | undefined {
+export function bytesToGbUtil(bytesInput: number | string | undefined): number | undefined {
     if (typeof bytesInput === 'undefined') return undefined
 
     if (typeof bytesInput === 'string') {

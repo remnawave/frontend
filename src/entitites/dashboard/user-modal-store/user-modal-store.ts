@@ -6,10 +6,12 @@ import {
     RevokeUserSubscriptionCommand,
     UpdateUserCommand
 } from '@remnawave/backend-contract'
-import { instance } from '@shared/api'
-import { create } from '@shared/hocs/store-wrapper'
-import { AxiosError } from 'axios'
 import { devtools } from 'zustand/middleware'
+import { AxiosError } from 'axios'
+
+import { create } from '@shared/hocs/store-wrapper'
+import { instance } from '@shared/api'
+
 import { IActions, IState } from './interfaces'
 
 const initialState: IState = {
@@ -19,7 +21,7 @@ const initialState: IState = {
     user: null
 }
 
-export const useUserModalStore = create<IState & IActions>()(
+export const useUserModalStore = create<IActions & IState>()(
     devtools(
         (set, getState) => ({
             ...initialState,
@@ -28,7 +30,7 @@ export const useUserModalStore = create<IState & IActions>()(
                     try {
                         set({ isLoading: true })
 
-                        const userUuid = getState().userUuid
+                        const { userUuid } = getState()
 
                         if (!userUuid) {
                             throw new Error('User UUID is required')
@@ -80,7 +82,7 @@ export const useUserModalStore = create<IState & IActions>()(
 
                 disableUser: async (): Promise<boolean> => {
                     try {
-                        const userUuid = getState().userUuid
+                        const { userUuid } = getState()
 
                         if (!userUuid) {
                             throw new Error('User UUID is required')
@@ -106,7 +108,7 @@ export const useUserModalStore = create<IState & IActions>()(
                 },
                 enableUser: async (): Promise<boolean> => {
                     try {
-                        const userUuid = getState().userUuid
+                        const { userUuid } = getState()
 
                         if (!userUuid) {
                             throw new Error('User UUID is required')
@@ -132,7 +134,7 @@ export const useUserModalStore = create<IState & IActions>()(
                 },
                 deleteUser: async (): Promise<boolean> => {
                     try {
-                        const userUuid = getState().userUuid
+                        const { userUuid } = getState()
 
                         if (!userUuid) {
                             throw new Error('User UUID is required')
@@ -154,7 +156,7 @@ export const useUserModalStore = create<IState & IActions>()(
                 },
                 reveokeSubscription: async (): Promise<boolean> => {
                     try {
-                        const userUuid = getState().userUuid
+                        const { userUuid } = getState()
 
                         if (!userUuid) {
                             throw new Error('User UUID is required')

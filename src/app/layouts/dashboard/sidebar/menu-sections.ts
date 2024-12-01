@@ -1,6 +1,3 @@
-import { ElementType } from 'react'
-
-import { ROUTES } from '@shared/constants'
 import {
     PiBookmarksDuotone,
     PiComputerTowerDuotone,
@@ -8,6 +5,9 @@ import {
     PiStarDuotone,
     PiUsersDuotone
 } from 'react-icons/pi'
+
+import { ROUTES } from '@shared/constants'
+
 import { MenuItem } from './interfaces'
 
 export const menu: MenuItem[] = [

@@ -1,5 +1,6 @@
 import { CopyButton } from '@mantine/core'
 import { LuCopy } from 'react-icons/lu'
+
 import { IProps } from '@/entitites/dashboard/users/ui/table-columns/username/interface'
 import { LinkChip } from '@/shared/ui/stuff/link-chip'
 
@@ -11,7 +12,7 @@ export function ShortUuidColumnEntity(props: IProps) {
     return (
         <CopyButton value={user.shortUuid}>
             {({ copied, copy }) => (
-                <LinkChip inline onClick={copy} checked={copied} icon={<LuCopy />}>
+                <LinkChip checked={copied} icon={<LuCopy />} inline onClick={copy}>
                     {shortDisplay}...
                 </LinkChip>
             )}

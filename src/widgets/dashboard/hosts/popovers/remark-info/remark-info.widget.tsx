@@ -4,7 +4,7 @@ import { PiCheck, PiCopy, PiInfo } from 'react-icons/pi'
 
 export const RemarkInfoPopoverWidget = () => {
     return (
-        <Popover width={200} position="left" offset={10} withArrow shadow="md">
+        <Popover offset={10} position="left" shadow="md" width={200} withArrow>
             <Popover.Target>
                 <span
                     style={{
@@ -30,10 +30,8 @@ export const RemarkInfoPopoverWidget = () => {
                                     <CopyButton value={`{{${key}}}`}>
                                         {({ copied, copy }) => (
                                             <Badge
-                                                key={key}
-                                                size="md"
                                                 color={copied ? 'teal' : 'blue'}
-                                                onClick={copy}
+                                                key={key}
                                                 leftSection={
                                                     copied ? (
                                                         <PiCheck size="1rem" />
@@ -41,6 +39,8 @@ export const RemarkInfoPopoverWidget = () => {
                                                         <PiCopy size="1rem" />
                                                     )
                                                 }
+                                                onClick={copy}
+                                                size="md"
                                             >
                                                 {`{{${key}}}`}
                                             </Badge>

@@ -1,11 +1,12 @@
-import { Badge } from '@mantine/core'
-import { USERS_STATUS } from '@remnawave/backend-contract'
 import {
     PiClockCountdownDuotone,
     PiClockUserDuotone,
     PiProhibitDuotone,
     PiPulseDuotone
 } from 'react-icons/pi'
+import { USERS_STATUS } from '@remnawave/backend-contract'
+import { Badge } from '@mantine/core'
+
 import { UserStatusBadgeProps } from './interfaces'
 
 export function UserStatusBadge({ status, variant = 'outline', ...props }: UserStatusBadgeProps) {
@@ -20,6 +21,10 @@ export function UserStatusBadge({ status, variant = 'outline', ...props }: UserS
             icon = <PiProhibitDuotone size={18} style={{ color: 'var(--mantine-color-gray-6)' }} />
             color = 'gray'
             break
+        case USERS_STATUS.EXPIRED:
+            icon = <PiClockUserDuotone size={18} style={{ color: 'var(--mantine-color-red-6)' }} />
+            color = 'red'
+            break
         case USERS_STATUS.LIMITED:
             icon = (
                 <PiClockCountdownDuotone
@@ -29,14 +34,12 @@ export function UserStatusBadge({ status, variant = 'outline', ...props }: UserS
             )
             color = 'orange'
             break
-        case USERS_STATUS.EXPIRED:
-            icon = <PiClockUserDuotone size={18} style={{ color: 'var(--mantine-color-red-6)' }} />
-            color = 'red'
+        default:
             break
     }
 
     return (
-        <Badge color={color} leftSection={icon} variant={variant} size="lg" {...props}>
+        <Badge color={color} leftSection={icon} size="lg" variant={variant} {...props}>
             {status}
         </Badge>
     )

@@ -1,12 +1,12 @@
+import { Card, CardProps } from '@mantine/core'
 import { ReactNode } from 'react'
 
-import { Card, CardProps } from '@mantine/core'
 import { CardTitle } from './card-title'
 
 interface TableContainerProps extends CardProps {
-    title?: string
-    description?: string
     actions?: ReactNode
+    description?: string
+    title?: string
 }
 
 export function TableContainer({
@@ -19,7 +19,7 @@ export function TableContainer({
     return (
         <Card {...props}>
             {title && (
-                <CardTitle withBorder title={title} description={description} actions={actions} />
+                <CardTitle actions={actions} description={description} title={title} withBorder />
             )}
             <Card.Section>{children}</Card.Section>
         </Card>

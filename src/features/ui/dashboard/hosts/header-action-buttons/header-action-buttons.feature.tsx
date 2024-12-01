@@ -1,9 +1,10 @@
+import { PiArrowsClockwise, PiBookmarks, PiPlus } from 'react-icons/pi'
+import { Button, Group, Select } from '@mantine/core'
+import consola from 'consola/browser'
 import { useState } from 'react'
 
-import { Button, Group, Select } from '@mantine/core'
-import { useDisclosure } from '@mantine/hooks'
 import { useHostsStoreActions, useHostsStoreSelectedInboundTag } from '@entitites/dashboard'
-import { PiArrowsClockwise, PiBookmarks, PiPlus } from 'react-icons/pi'
+
 import { IProps } from './interfaces'
 
 export const HeaderActionButtonsFeature = (props: IProps) => {
@@ -22,7 +23,7 @@ export const HeaderActionButtonsFeature = (props: IProps) => {
             setIsLoading(true)
             actions.getHosts()
         } catch (error) {
-            console.error(error)
+            consola.error(error)
         } finally {
             setTimeout(() => {
                 setIsLoading(false)
@@ -33,13 +34,6 @@ export const HeaderActionButtonsFeature = (props: IProps) => {
     return (
         <Group>
             <Select
-                value={selectedInboundTag}
-                onChange={(value) => actions.setSelectedInboundTag(value || 'ALL')}
-                leftSectionPointerEvents="none"
-                leftSection={<PiBookmarks size="1rem" />}
-                defaultValue="ALL"
-                size="xs"
-                radius="lg"
                 data={[
                     { value: 'ALL', label: 'ALL' },
                     ...inbounds.map((inbound) => ({
@@ -47,22 +41,29 @@ export const HeaderActionButtonsFeature = (props: IProps) => {
                         label: inbound.tag
                     }))
                 ]}
+                defaultValue="ALL"
+                leftSection={<PiBookmarks size="1rem" />}
+                leftSectionPointerEvents="none"
+                onChange={(value) => actions.setSelectedInboundTag(value || 'ALL')}
+                radius="lg"
+                size="xs"
+                value={selectedInboundTag}
             />
             <Button
-                variant="default"
-                size="xs"
                 leftSection={<PiArrowsClockwise size="1rem" />}
-                onClick={handleUpdate}
                 loading={isLoading}
+                onClick={handleUpdate}
+                size="xs"
+                variant="default"
             >
                 Update
             </Button>
 
             <Button
-                variant="default"
-                size="xs"
                 leftSection={<PiPlus size="1rem" />}
                 onClick={handleCreate}
+                size="xs"
+                variant="default"
             >
                 Create new host
             </Button>

@@ -1,13 +1,14 @@
+import { PiCellSignalFullDuotone, PiCellSignalSlashDuotone, PiTrashDuotone } from 'react-icons/pi'
+import { USERS_STATUS } from '@remnawave/backend-contract'
+import { notifications } from '@mantine/notifications'
+import { Button } from '@mantine/core'
 import { useState } from 'react'
 
-import { Button } from '@mantine/core'
-import { notifications } from '@mantine/notifications'
-import { USERS_STATUS } from '@remnawave/backend-contract'
-import { PiCellSignalFullDuotone, PiCellSignalSlashDuotone, PiTrashDuotone } from 'react-icons/pi'
 import {
     useUserModalStoreActions,
     useUserModalStoreUser
 } from '@/entitites/dashboard/user-modal-store/user-modal-store'
+
 import { IProps } from './interfaces'
 
 export function ToggleUserStatusButtonFeature(props: IProps) {
@@ -59,12 +60,12 @@ export function ToggleUserStatusButtonFeature(props: IProps) {
 
     return (
         <Button
-            type="button"
-            size="md"
             color={color}
             leftSection={icon}
-            onClick={handleToggleUserStatus}
             loading={isLoading}
+            onClick={handleToggleUserStatus}
+            size="md"
+            type="button"
         >
             {buttonLabel} user
         </Button>

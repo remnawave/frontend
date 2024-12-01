@@ -1,11 +1,13 @@
 import { Grid } from '@mantine/core'
-import { BREADCRUMBS } from '@/pages/dashboard/users/ui/components/constants'
-import { Page } from '@/shared/ui/page'
-import { PageHeader } from '@/shared/ui/page-header'
+
 import { CreateUserModalWidget } from '@/widgets/dashboard/users/create-user-modal'
-import { UsersMetrics } from '@/widgets/dashboard/users/users-metrics'
-import { UserTableWidget } from '@/widgets/dashboard/users/users-table'
+import { BREADCRUMBS } from '@/pages/dashboard/users/ui/components/constants'
 import { ViewUserModal } from '@/widgets/dashboard/users/view-user-modal'
+import { UserTableWidget } from '@/widgets/dashboard/users/users-table'
+import { UsersMetrics } from '@/widgets/dashboard/users/users-metrics'
+import { PageHeader } from '@/shared/ui/page-header'
+import { Page } from '@/shared/ui/page'
+
 import { IProps } from './interfaces'
 
 export default function UsersPageComponent(props: IProps) {
@@ -20,7 +22,7 @@ export default function UsersPageComponent(props: IProps) {
 
     return (
         <Page title="Users">
-            <PageHeader title="Users" breadcrumbs={BREADCRUMBS} />
+            <PageHeader breadcrumbs={BREADCRUMBS} title="Users" />
 
             <Grid>
                 <Grid.Col span={12}>
@@ -29,12 +31,12 @@ export default function UsersPageComponent(props: IProps) {
 
                 <Grid.Col span={12}>
                     <UserTableWidget
-                        tabs={tabs}
                         columns={columns}
-                        handleSortStatusChange={handleSortStatusChange}
                         handlePageChange={handlePageChange}
                         handleRecordsPerPageChange={handleRecordsPerPageChange}
+                        handleSortStatusChange={handleSortStatusChange}
                         handleUpdate={handleUpdate}
+                        tabs={tabs}
                     />
                 </Grid.Col>
             </Grid>

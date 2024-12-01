@@ -1,6 +1,6 @@
+import { useInterval } from '@mantine/hooks'
 import { useEffect } from 'react'
 
-import { useInterval } from '@mantine/hooks'
 import {
     useDashboardStoreActions,
     useDashboardStoreSystemInfo
@@ -13,8 +13,13 @@ export const HomePageConnectior = () => {
     const systemInfo = useDashboardStoreSystemInfo()
 
     useEffect(() => {
+        // eslint-disable-next-line no-return-await
         ;(async () => await actions.getSystemInfo())()
     }, [])
+
+    // useEffect(() => {
+    //     actions.getSystemInfo()
+    // }, [])
 
     useInterval(
         () => {

@@ -1,6 +1,6 @@
 import dayjs from 'dayjs'
 
-export function getTimeAgoUtil(dateStr: string | Date | null): string {
+export function getTimeAgoUtil(dateStr: Date | null | string): string {
     if (!dateStr) return 'Not connected yet'
 
     const date = dayjs(dateStr)

@@ -1,26 +1,26 @@
+import { GetAllUsersCommand } from '@remnawave/backend-contract'
+import { MultiSelect, TextInput } from '@mantine/core'
+import { DataTableColumn } from 'mantine-datatable'
+import { useDebouncedValue } from '@mantine/hooks'
 import { useEffect, useMemo } from 'react'
 
-import { MultiSelect, TextInput } from '@mantine/core'
-import { useDebouncedValue } from '@mantine/hooks'
 import {
     useDashboardStoreActions,
     useDashboardStoreParams,
     useDashboardStoreSystemInfo
 } from '@entitites/dashboard/dashboard-store/dashboard-store'
-import { useUserCreationModalStoreIsModalOpen } from '@entitites/dashboard/user-creation-modal-store/user-creation-modal-store'
 import {
     useUserModalStoreActions,
     useUserModalStoreIsModalOpen
 } from '@entitites/dashboard/user-modal-store/user-modal-store'
+import { useUserCreationModalStoreIsModalOpen } from '@entitites/dashboard/user-creation-modal-store/user-creation-modal-store'
+import { ShortUuidColumnEntity } from '@entitites/dashboard/users/ui/table-columns/short-uuid'
+import { UsernameColumnEntity } from '@entitites/dashboard/users/ui/table-columns/username'
+import { StatusColumnEntity } from '@entitites/dashboard/users/ui/table-columns/status'
+import { ViewUserActionFeature } from '@features/ui/dashboard/users/view-user-action'
 import { getTabDataUsers, User } from '@entitites/dashboard/users/models'
 import { DataUsageColumnEntity } from '@entitites/dashboard/users/ui'
-import { ShortUuidColumnEntity } from '@entitites/dashboard/users/ui/table-columns/short-uuid'
-import { StatusColumnEntity } from '@entitites/dashboard/users/ui/table-columns/status'
-import { UsernameColumnEntity } from '@entitites/dashboard/users/ui/table-columns/username'
-import { ViewUserActionFeature } from '@features/ui/dashboard/users/view-user-action'
-import { GetAllUsersCommand } from '@remnawave/backend-contract'
-import { DataTable } from '@shared/ui/stuff/data-table'
-import { DataTableColumn } from 'mantine-datatable'
+
 import UsersPageComponent from '../components/users.page.component'
 
 export function UsersPageConnector() {
@@ -55,6 +55,7 @@ export function UsersPageConnector() {
         if (isModalOpen || isCreateUserModalOpen) return
         actions.getSystemInfo()
 
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const filterEntry = Object.entries(debouncedFilters).find(([_, filter]) => filter?.value)
 
         let searchParams: {
@@ -109,8 +110,6 @@ export function UsersPageConnector() {
                 filterable: true,
                 filter: (
                     <TextInput
-                        placeholder="Search by subscription link"
-                        value={dataTab.filters.filters.shortUuid?.value as string}
                         onChange={(e) =>
                             dataTab.filters.change({
                                 name: 'shortUuid',
@@ -118,6 +117,8 @@ export function UsersPageConnector() {
                                 value: e.currentTarget.value
                             })
                         }
+                        placeholder="Search by subscription link"
+                        value={dataTab.filters.filters.shortUuid?.value as string}
                     />
                 ),
                 render: (user) => <ShortUuidColumnEntity user={user} />
@@ -130,8 +131,6 @@ export function UsersPageConnector() {
 
                 filter: (
                     <TextInput
-                        placeholder="Search by username"
-                        value={dataTab.filters.filters.username?.value as string}
                         onChange={(e) =>
                             dataTab.filters.change({
                                 name: 'username',
@@ -139,6 +138,8 @@ export function UsersPageConnector() {
                                 value: e.currentTarget.value
                             })
                         }
+                        placeholder="Search by username"
+                        value={dataTab.filters.filters.username?.value as string}
                     />
                 ),
                 render: (user) => <UsernameColumnEntity user={user} />
@@ -151,9 +152,7 @@ export function UsersPageConnector() {
                 sortable: true,
                 filter: (
                     <MultiSelect
-                        w="10rem"
                         data={['ACTIVE', 'DISABLED', 'EXPIRED', 'LIMITED']}
-                        value={dataTab.filters.filters.status?.value as string[]}
                         onChange={(value) =>
                             dataTab.filters.change({
                                 name: 'status',
@@ -161,6 +160,8 @@ export function UsersPageConnector() {
                                 value
                             })
                         }
+                        value={dataTab.filters.filters.status?.value as string[]}
+                        w="10rem"
                     />
                 ),
                 render: (user) => <StatusColumnEntity user={user} />
@@ -185,12 +186,12 @@ export function UsersPageConnector() {
 
     return (
         <UsersPageComponent
-            tabs={dataTab}
             columns={columns}
-            handleSortStatusChange={handleSortStatusChange}
             handlePageChange={handlePageChange}
             handleRecordsPerPageChange={handleRecordsPerPageChange}
+            handleSortStatusChange={handleSortStatusChange}
             handleUpdate={handleUpdate}
+            tabs={dataTab}
         />
     )
 }

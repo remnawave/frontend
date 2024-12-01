@@ -1,8 +1,10 @@
 import { CreateUserCommand } from '@remnawave/backend-contract'
-import { instance } from '@shared/api'
-import { create } from '@shared/hocs/store-wrapper'
-import { AxiosError } from 'axios'
 import { devtools } from 'zustand/middleware'
+import { AxiosError } from 'axios'
+
+import { create } from '@shared/hocs/store-wrapper'
+import { instance } from '@shared/api'
+
 import { IActions, IState } from './interfaces'
 
 const initialState: IState = {
@@ -10,7 +12,7 @@ const initialState: IState = {
     isModalOpen: false
 }
 
-export const useUserCreationModalStore = create<IState & IActions>()(
+export const useUserCreationModalStore = create<IActions & IState>()(
     devtools(
         (set, getState) => ({
             ...initialState,

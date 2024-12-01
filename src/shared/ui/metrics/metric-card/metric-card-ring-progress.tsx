@@ -6,14 +6,15 @@ import {
     Text,
     TextProps
 } from '@mantine/core'
+
 import { match } from '@/shared/utils/match'
 
 interface MetricRingProgressProps
-    extends Omit<RingProgressProps, 'label' | 'rootColor'>,
-        ElementProps<'div', keyof RingProgressProps> {
-    label?: string
-    labelProps?: Omit<TextProps, 'ta' | 'fw'>
+    extends ElementProps<'div', keyof RingProgressProps>,
+        Omit<RingProgressProps, 'label' | 'rootColor'> {
     baseColor?: string
+    label?: string
+    labelProps?: Omit<TextProps, 'fw' | 'ta'>
 }
 
 export function MetricCardRingProgress({
@@ -31,13 +32,13 @@ export function MetricCardRingProgress({
 
     return (
         <RingProgress
-            rootColor={color}
-            sections={sections}
             label={
                 <Text fw={700} ta="center" {...labelProps}>
                     {label}
                 </Text>
             }
+            rootColor={color}
+            sections={sections}
             {...props}
         />
     )

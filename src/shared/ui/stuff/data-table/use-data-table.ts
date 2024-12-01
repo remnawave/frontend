@@ -1,17 +1,20 @@
+/* eslint-disable no-use-before-define */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { DataTableSortStatus } from 'mantine-datatable'
+import { useDebouncedValue } from '@mantine/hooks'
 import { useMemo, useState } from 'react'
 
-import { useDebouncedValue } from '@mantine/hooks'
-import { DataTableSortStatus } from 'mantine-datatable'
 import { isDefined } from '@/shared/utils/is'
+
 import { DataTableFilter } from './data-table-filters'
 import { DataTableTabsProps } from './data-table-tabs'
 
 export interface UseDataTableArgs<SortableFields> {
-    tabsConfig?: DataTableTabsProps
     sortConfig?: {
         column: DataTableSortStatus<SortableFields>['columnAccessor']
         direction: DataTableSortStatus<SortableFields>['direction']
     }
+    tabsConfig?: DataTableTabsProps
 }
 
 export type UseDataTableReturn<SortableFields = any> = ReturnType<
@@ -41,6 +44,7 @@ export function useDataTable<SortableFields>({
 
     const handleRemoveFilter = (name: string) => {
         setFilters((prevFilters) => {
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
             const { [name]: removed, ...rest } = prevFilters
             return rest
         })

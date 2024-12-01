@@ -1,7 +1,8 @@
-import { NavLink, Stack, Title } from '@mantine/core'
 import { NavLink as RouterLink, useLocation } from 'react-router-dom'
-import { menu } from './menu-sections'
+import { NavLink, Stack, Title } from '@mantine/core'
+
 import classes from './sidebar.module.css'
+import { menu } from './menu-sections'
 
 export function Sidebar() {
     const { pathname } = useLocation()
@@ -10,43 +11,43 @@ export function Sidebar() {
         <Stack gap="xl">
             {menu.map((item) => (
                 <div key={item.header}>
-                    <Title order={6} className={classes.sectionTitle}>
+                    <Title className={classes.sectionTitle} order={6}>
                         {item.header}
                     </Title>
 
                     {item.section.map((subItem) =>
                         subItem.dropdownItems ? (
                             <NavLink
-                                variant="subtle"
-                                key={subItem.name}
-                                label={subItem.name}
+                                active={pathname.includes(subItem.href)}
                                 childrenOffset={0}
                                 className={classes.sectionLink}
-                                active={pathname.includes(subItem.href)}
+                                key={subItem.name}
+                                label={subItem.name}
                                 leftSection={subItem.icon && <subItem.icon />}
+                                variant="subtle"
                             >
                                 {subItem.dropdownItems?.map((dropdownItem) => (
                                     <NavLink
-                                        variant="subtle"
-                                        component={RouterLink}
-                                        to={dropdownItem.href}
-                                        key={dropdownItem.name}
-                                        label={dropdownItem.name}
                                         active={pathname.includes(dropdownItem.href)}
                                         className={classes.sectionDropdownItemLink}
+                                        component={RouterLink}
+                                        key={dropdownItem.name}
+                                        label={dropdownItem.name}
                                         leftSection={<span className="dot" />}
+                                        to={dropdownItem.href}
+                                        variant="subtle"
                                     />
                                 ))}
                             </NavLink>
                         ) : (
                             <NavLink
-                                variant="subtle"
+                                className={classes.sectionLink}
                                 component={RouterLink}
-                                to={subItem.href}
                                 key={subItem.name}
                                 label={subItem.name}
-                                className={classes.sectionLink}
                                 leftSection={subItem.icon && <subItem.icon />}
+                                to={subItem.href}
+                                variant="subtle"
                             />
                         )
                     )}

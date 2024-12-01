@@ -1,6 +1,6 @@
 import dayjs from 'dayjs'
 
-export const getConnectionStatusColorUtil = (onlineAt: string | null | Date): string => {
+export const getConnectionStatusColorUtil = (onlineAt: Date | null | string): string => {
     if (!onlineAt) {
         return 'var(--mantine-color-yellow-5)'
     }

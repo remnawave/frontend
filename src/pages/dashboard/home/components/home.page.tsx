@@ -1,24 +1,24 @@
 import {
-    PiClockCountdownDuotone,
-    PiChartDonutDuotone,
-    PiClockUserDuotone,
     PiChartBarDuotone,
-    PiProhibitDuotone,
+    PiChartDonutDuotone,
+    PiClockCountdownDuotone,
+    PiClockDuotone,
+    PiClockUserDuotone,
     PiDevicesDuotone,
     PiMemoryDuotone,
-    PiClockDuotone,
+    PiProhibitDuotone,
     PiPulseDuotone,
-    PiUsersDuotone,
-    PiCpuDuotone
+    PiUsersDuotone
 } from 'react-icons/pi'
+import { SimpleGrid, Stack, Text } from '@mantine/core'
+import dayjs from 'dayjs'
+
 import { MetricWithIcon } from '@/widgets/dashboard/home/metric-with-icons'
-import { SimpleGrid, JsonInput, Group, Stack, Text } from '@mantine/core'
 import { LoadingScreen, PageHeader } from '@/shared/ui'
 import { prettyBytesUtil } from '@/shared/utils/bytes'
 import { MetricWithTrend } from '@/shared/ui/metrics'
 import { formatInt } from '@/shared/utils'
 import { Page } from '@shared/ui/page'
-import dayjs from 'dayjs'
 
 import { BREADCRUMBS } from './constant'
 import { IProps } from './interfaces'
@@ -103,14 +103,14 @@ export const HomePage = (props: IProps) => {
                 <Text fw={600}>Bandwidth</Text>
                 <SimpleGrid cols={{ base: 1, sm: 2, xl: 3 }}>
                     <MetricWithTrend
+                        color="var(--mantine-color-blue-6)"
                         icon={
                             <PiChartDonutDuotone color="var(--mantine-color-blue-6)" size="2rem" />
                         }
                         percentage={stats.nodesUsageLastTwoDays.percentage}
-                        value={stats.nodesUsageLastTwoDays.current}
-                        color="var(--mantine-color-blue-6)"
-                        title="Today's nodes usage"
                         period="from yesterday"
+                        title="Today's nodes usage"
+                        value={stats.nodesUsageLastTwoDays.current}
                     />
                 </SimpleGrid>
 

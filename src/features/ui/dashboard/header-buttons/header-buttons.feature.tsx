@@ -1,9 +1,10 @@
-import { Button, Menu } from '@mantine/core'
-import { removeToken } from '@entitites/auth'
 import { PiSignOutDuotone } from 'react-icons/pi'
 import { useNavigate } from 'react-router-dom'
-import { ROUTES } from '@/shared/constants'
+import { Button, Menu } from '@mantine/core'
+
 import { resetAllStores } from '@/shared/hocs/store-wrapper'
+import { removeToken } from '@entitites/auth'
+import { ROUTES } from '@/shared/constants'
 import { useAuth } from '@/shared/hooks'
 
 export const HeaderButtons = () => {
@@ -19,7 +20,7 @@ export const HeaderButtons = () => {
 
     return (
         <Menu>
-            <Button size="md" leftSection={<PiSignOutDuotone size="1rem" />} onClick={handleLogout}>
+            <Button leftSection={<PiSignOutDuotone size="1rem" />} onClick={handleLogout} size="md">
                 Logout
             </Button>
         </Menu>

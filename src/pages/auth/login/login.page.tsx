@@ -1,31 +1,33 @@
 import { Box, Group, Stack, Text, Title } from '@mantine/core'
-import { Page } from '@shared/ui/page'
+
 import { UnderlineShape } from '@shared/ui/underline-shape'
 import { Logo } from '@/shared/ui/logo'
+import { Page } from '@shared/ui/page'
+
 import { LoginForm } from '../../../features/auth'
 
 export const LoginPage = () => {
     return (
         <Page title="Login">
-            <Stack gap="xl" align="center">
-                <Group justify="center" align="center">
-                    <Logo size="2.5rem" c="red" />
+            <Stack align="center" gap="xl">
+                <Group align="center" justify="center">
+                    <Logo c="red" size="2.5rem" />
                     <Title order={1}>
-                        <Text fz="inherit" fw="inherit" component="span" pos="relative">
+                        <Text component="span" fw="inherit" fz="inherit" pos="relative">
                             Remnawave
                             <UnderlineShape
+                                bottom="-1rem"
                                 c="red"
-                                w="7rem"
+                                h="0.625rem"
                                 left="0"
                                 pos="absolute"
-                                h="0.625rem"
-                                bottom="-1rem"
+                                w="7rem"
                             />
                         </Text>
                     </Title>
                 </Group>
 
-                <Box w={{ base: 440, sm: 500, md: 500 }} maw={800}>
+                <Box maw={800} w={{ base: 440, sm: 500, md: 500 }}>
                     <LoginForm />
                 </Box>
             </Stack>

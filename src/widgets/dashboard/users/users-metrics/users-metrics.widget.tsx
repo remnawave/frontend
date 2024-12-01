@@ -1,4 +1,3 @@
-import { Group, Loader, SimpleGrid } from '@mantine/core'
 import {
     PiClockCountdownDuotone,
     PiClockUserDuotone,
@@ -6,6 +5,8 @@ import {
     PiPulseDuotone,
     PiUsersDuotone
 } from 'react-icons/pi'
+import { Group, Loader, SimpleGrid } from '@mantine/core'
+
 import {
     useDashboardStoreIsLoading,
     useDashboardStoreSystemInfo
@@ -58,7 +59,7 @@ export function UsersMetrics() {
                             <MetricCard.TextMuted>{card.title}</MetricCard.TextMuted>
                             <MetricCard.TextEmphasis ff={'monospace'}>
                                 {isLoading ? (
-                                    <Loader size="xs" color={card.color} />
+                                    <Loader color={card.color} size="xs" />
                                 ) : (
                                     formatInt(card.value ?? 0)
                                 )}

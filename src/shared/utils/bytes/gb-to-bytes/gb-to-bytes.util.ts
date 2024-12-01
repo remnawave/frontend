@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import xbytes from 'xbytes'
 
 export function gbToBytesUtil(gbInput: number | undefined): number | undefined {

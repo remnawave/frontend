@@ -1,5 +1,3 @@
-import { useEffect, useState } from 'react'
-
 import {
     ActionIcon,
     Button,
@@ -13,19 +11,23 @@ import {
     Text,
     TextInput
 } from '@mantine/core'
-import { useForm, zodResolver } from '@mantine/form'
+import { ALPN, FINGERPRINTS, UpdateHostCommand } from '@remnawave/backend-contract'
+import { PiCaretDown, PiCaretUp, PiFloppyDiskDuotone } from 'react-icons/pi'
 import { notifications } from '@mantine/notifications'
+import { useForm, zodResolver } from '@mantine/form'
+import { useEffect, useState } from 'react'
+import consola from 'consola/browser'
+import { z } from 'zod'
+
 import {
     useHostsStoreActions,
     useHostsStoreEditModalHost,
     useHostsStoreEditModalIsOpen
 } from '@entitites/dashboard'
-import { DeleteHostFeature } from '@features/ui/dashboard/hosts/delete-host'
-import { ALPN, FINGERPRINTS, UpdateHostCommand } from '@remnawave/backend-contract'
-import { PiCaretDown, PiCaretUp, PiFloppyDiskDuotone } from 'react-icons/pi'
-import { z } from 'zod'
 import { useDSInbounds } from '@/entitites/dashboard/dashboard-store/dashboard-store'
+import { DeleteHostFeature } from '@features/ui/dashboard/hosts/delete-host'
 import { handleFormErrors } from '@/shared/utils'
+
 import { RemarkInfoPopoverWidget } from '../popovers/remark-info/remark-info.widget'
 
 export const EditHostModalWidget = () => {
@@ -61,6 +63,14 @@ export const EditHostModalWidget = () => {
         }
     }, [host, inbounds])
 
+    const handleClose = () => {
+        actions.toggleEditModal(false)
+
+        form.reset()
+        form.resetDirty()
+        form.resetTouched()
+    }
+
     const handleSubmit = form.onSubmit(async (values) => {
         try {
             setIsDataSubmitting(true)
@@ -81,11 +91,11 @@ export const EditHostModalWidget = () => {
             })
         } catch (error) {
             if (error instanceof z.ZodError) {
-                console.error('Zod validation error:', error.errors)
+                consola.error('Zod validation error:', error.errors)
             }
             if (error instanceof Error) {
-                console.error('Error message:', error.message)
-                console.error('Error stack:', error.stack)
+                consola.error('Error message:', error.message)
+                consola.error('Error stack:', error.stack)
             }
             handleFormErrors(form, error)
             notifications.show({
@@ -100,20 +110,12 @@ export const EditHostModalWidget = () => {
         }
     })
 
-    const handleClose = () => {
-        actions.toggleEditModal(false)
-
-        form.reset()
-        form.resetDirty()
-        form.resetTouched()
-    }
-
     return (
         <Modal
-            opened={isModalOpen}
-            onClose={handleClose}
-            title={<Text fw={500}>Edit host</Text>}
             centered
+            onClose={handleClose}
+            opened={isModalOpen}
+            title={<Text fw={500}>Edit host</Text>}
         >
             <form onSubmit={handleSubmit}>
                 <Group align="flex-start" grow={false}>
@@ -121,70 +123,69 @@ export const EditHostModalWidget = () => {
                         <Group gap="xs" justify="space-between" w="100%"></Group>
 
                         <TextInput
-                            label="Remark"
                             key={form.key('remark')}
+                            label="Remark"
                             {...form.getInputProps('remark')}
-                            required
                             leftSection={<RemarkInfoPopoverWidget />}
+                            required
                         />
 
                         <Stack gap="md" w={400}>
-                            <Group gap="xs" w="100%" justify="space-between">
+                            <Group gap="xs" justify="space-between" w="100%">
                                 <TextInput
-                                    label="Address"
                                     key={form.key('address')}
+                                    label="Address"
                                     {...form.getInputProps('address')}
                                     placeholder="e.g. example.com"
-                                    w="75%"
                                     required
+                                    w="75%"
                                 />
 
                                 <NumberInput
-                                    label="Port"
                                     key={form.key('port')}
+                                    label="Port"
                                     {...form.getInputProps('port')}
-                                    min={1}
-                                    hideControls
-                                    allowNegative={false}
                                     allowDecimal={false}
-                                    decimalScale={0}
+                                    allowNegative={false}
                                     clampBehavior="strict"
+                                    decimalScale={0}
+                                    hideControls
                                     max={65535}
+                                    min={1}
                                     placeholder="e.g. 443"
-                                    w="20%"
                                     required
+                                    w="20%"
                                 />
                             </Group>
 
-                            <Group gap="xs" w="100%" justify="space-between">
+                            <Group gap="xs" justify="space-between" w="100%">
                                 <Select
-                                    label="Inbound"
-                                    key={form.key('inboundUuid')}
                                     data={Object.values(inbounds ?? {}).map((inbound) => ({
                                         label: inbound.tag,
                                         value: inbound.uuid
                                     }))}
+                                    key={form.key('inboundUuid')}
+                                    label="Inbound"
                                     {...form.getInputProps('inboundUuid')}
+                                    allowDeselect={false}
                                     defaultValue={host?.inboundUuid}
                                     placeholder="Select inbound"
-                                    w="75%"
-                                    allowDeselect={false}
                                     required
+                                    w="75%"
                                 />
 
                                 <Switch
-                                    w="20%"
-                                    size="xl"
-                                    radius="md"
                                     color="teal.8"
-                                    mt={25}
                                     key={form.key('isDisabled')}
+                                    mt={25}
+                                    radius="md"
+                                    size="xl"
+                                    w="20%"
                                     {...form.getInputProps('isDisabled', { type: 'checkbox' })}
                                 />
                             </Group>
 
                             <Button
-                                variant="subtle"
                                 onClick={() => setAdvancedOpened((o) => !o)}
                                 rightSection={
                                     advancedOpened ? (
@@ -193,6 +194,7 @@ export const EditHostModalWidget = () => {
                                         <PiCaretDown size="1rem" />
                                     )
                                 }
+                                variant="subtle"
                             >
                                 Advanced options
                             </Button>
@@ -200,47 +202,47 @@ export const EditHostModalWidget = () => {
                             <Collapse in={advancedOpened}>
                                 <Stack gap="md">
                                     <TextInput
+                                        key={form.key('sni')}
                                         label="SNI"
                                         placeholder="SNI (e.g. example.com)"
-                                        key={form.key('sni')}
                                         {...form.getInputProps('sni')}
                                     />
 
                                     <TextInput
-                                        label="Request Host"
                                         key={form.key('requestHost')}
+                                        label="Request Host"
                                         placeholder="Host (e.g. example.com)"
                                         {...form.getInputProps('requestHost')}
                                     />
 
                                     <TextInput
-                                        label="Path"
                                         key={form.key('path')}
+                                        label="Path"
                                         placeholder="path (e.g. /ws)"
                                         {...form.getInputProps('path')}
                                     />
 
                                     <Select
-                                        label="ALPN"
-                                        placeholder="ALPN (e.g. h2)"
-                                        key={form.key('alpn')}
+                                        clearable
                                         data={Object.values(ALPN).map((alpn) => ({
                                             label: alpn,
                                             value: alpn
                                         }))}
-                                        clearable
+                                        key={form.key('alpn')}
+                                        label="ALPN"
+                                        placeholder="ALPN (e.g. h2)"
                                         {...form.getInputProps('alpn')}
                                     />
 
                                     <Select
-                                        label="Fingerprint"
-                                        key={form.key('fingerprint')}
-                                        placeholder="Fingerprint (e.g. chrome)"
+                                        clearable
                                         data={Object.values(FINGERPRINTS).map((fingerprint) => ({
                                             label: fingerprint,
                                             value: fingerprint
                                         }))}
-                                        clearable
+                                        key={form.key('fingerprint')}
+                                        label="Fingerprint"
+                                        placeholder="Fingerprint (e.g. chrome)"
                                         {...form.getInputProps('fingerprint')}
                                     />
                                 </Stack>
@@ -249,19 +251,19 @@ export const EditHostModalWidget = () => {
                     </Stack>
                 </Group>
 
-                <Group gap="xs" w="100%" pt={15} justify="space-between">
+                <Group gap="xs" justify="space-between" pt={15} w="100%">
                     <ActionIcon.Group>
                         <DeleteHostFeature />
                     </ActionIcon.Group>
 
                     <Button
-                        type="submit"
                         color="blue"
-                        leftSection={<PiFloppyDiskDuotone size="1rem" />}
-                        variant="outline"
-                        size="md"
                         disabled={!form.isValid() || !form.isDirty() || !form.isTouched()}
+                        leftSection={<PiFloppyDiskDuotone size="1rem" />}
                         loading={isDataSubmitting}
+                        size="md"
+                        type="submit"
+                        variant="outline"
                     >
                         Save
                     </Button>

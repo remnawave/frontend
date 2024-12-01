@@ -1,8 +1,10 @@
 import { Button, Container, Paper, PasswordInput, TextInput } from '@mantine/core'
-import { useForm, zodResolver } from '@mantine/form'
 import { LoginCommand } from '@remnawave/backend-contract'
+import { useForm, zodResolver } from '@mantine/form'
+import { PiSignInDuotone } from 'react-icons/pi'
+
 import { useAuth } from '@shared/hooks/use-auth'
-import { PiSignInDuotone, PiSignOutDuotone } from 'react-icons/pi'
+
 import {
     useAuthStoreIsLoading,
     useLoginPageStoreActions
@@ -31,29 +33,29 @@ export const LoginForm = () => {
 
     return (
         <form onSubmit={handleSubmit}>
-            <Container size={'100%'} my={40}>
-                <Paper p={30} mt={30}>
+            <Container my={40} size={'100%'}>
+                <Paper mt={30} p={30}>
                     <TextInput
-                        name="username"
                         label="Username"
+                        name="username"
                         placeholder="username"
                         required
                         {...form.getInputProps('username')}
                     />
                     <PasswordInput
-                        name="password"
                         label="Password"
+                        mt="md"
+                        name="password"
                         placeholder="Your password"
                         required
-                        mt="md"
                         {...form.getInputProps('password')}
                     />
                     <Button
                         fullWidth
-                        mt="xl"
-                        type="submit"
                         leftSection={<PiSignInDuotone size="1rem" />}
                         loading={isLoading}
+                        mt="xl"
+                        type="submit"
                     >
                         Sign in
                     </Button>

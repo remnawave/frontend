@@ -1,11 +1,5 @@
+import { PiProhibitDuotone, PiPulseDuotone, PiWarningCircle } from 'react-icons/pi'
 import { Badge } from '@mantine/core'
-import {
-    PiProhibitDuotone,
-    PiPulse,
-    PiPulseDuotone,
-    PiWarningCircle,
-    PiWarningCircleDuotone
-} from 'react-icons/pi'
 
 import { IProps } from './interface'
 

@@ -1,7 +1,9 @@
-import { Flex, Text } from '@mantine/core'
 import { PiTrendDown, PiTrendUp } from 'react-icons/pi'
-import { match } from '@/shared/utils/match'
+import { Flex, Text } from '@mantine/core'
+
 import { formatPercentage } from '@/shared/utils/number'
+import { match } from '@/shared/utils/match'
+
 import { MetricCardTextMuted, MetricCardTextMutedProps } from './metric-card-text-muted'
 
 interface MetricCardTextTrendProps extends MetricCardTextMutedProps {
@@ -22,7 +24,7 @@ export function MetricCardTextTrend({ value, children, ...props }: MetricCardTex
         <MetricCardTextMuted style={{ textWrap: 'nowrap' }} {...props}>
             <Flex align="center">
                 <Icon color={color} size="1rem" />
-                <Text component="span" fz="inherit" c={color} mx="0.25rem">
+                <Text c={color} component="span" fz="inherit" mx="0.25rem">
                     {formatPercentage(value, {
                         prefix: sign,
                         precision: 0,

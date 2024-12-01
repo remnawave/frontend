@@ -1,5 +1,6 @@
-import { UseFormReturnType } from '@mantine/form'
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { notifications } from '@mantine/notifications'
+import { UseFormReturnType } from '@mantine/form'
 
 export function handleFormErrors(form: UseFormReturnType<any>, errors: unknown) {
     if (!errors || typeof errors !== 'object') {

@@ -1,8 +1,9 @@
-import { useHostsStoreActions } from '@/entitites/dashboard'
-import { HostCardWidget } from '@/widgets/dashboard/hosts/host-card'
 import { DragDropContext, Droppable, DropResult } from '@hello-pangea/dnd'
 import { useListState } from '@mantine/hooks'
 import { useEffect } from 'react'
+
+import { HostCardWidget } from '@/widgets/dashboard/hosts/host-card'
+import { useHostsStoreActions } from '@/entitites/dashboard'
 
 import { IProps } from './interfaces'
 
