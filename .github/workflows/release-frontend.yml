@@ -71,7 +71,7 @@ jobs:
               with:
                   to: ${{ secrets.TELEGRAM_CHAT_ID }}
                   token: ${{ secrets.TELEGRAM_TOKEN }}
-                  format: markdown
+                  format: html
                   message: |
                       ✅ <b>Deploy</b> <code>${{ github.REPOSITORY }}@${{ github.ref_name }}</code> has finished.
 
