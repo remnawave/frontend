@@ -11,7 +11,8 @@ import { getUserTimezoneUtil } from '@/shared/utils/time-utils'
 import { create } from '@shared/hocs/store-wrapper'
 import { instance } from '@shared/api'
 
-import { IActions, IState, IUsersParams } from './interfaces'
+import { IUsersParams } from './interfaces/users-params.interface'
+import { IActions, IState } from './interfaces'
 
 const initialState: IState = {
     isLoading: false,
