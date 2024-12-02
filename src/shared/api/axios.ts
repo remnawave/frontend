@@ -5,8 +5,16 @@ import { logoutEvents } from '../emitters/emit-logout'
 
 let authorizationToken = ''
 
+let BASE_DOMAIN = __DOMAIN_BACKEND__
+const isDev = __NODE_ENV__ === 'development'
+
+if (isDev) {
+    BASE_DOMAIN = __DOMAIN_BACKEND__
+} else {
+    BASE_DOMAIN = window.location.origin
+}
 export const instance = axios.create({
-    baseURL: __DOMAIN_BACKEND__,
+    baseURL: BASE_DOMAIN,
     headers: {
         'Content-type': 'application/json',
         Accept: 'application/json'

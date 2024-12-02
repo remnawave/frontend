@@ -12,6 +12,7 @@ export default defineConfig({
     plugins: [react(), visualizer() as PluginOption, tsconfigPaths()],
     build: {
         target: 'esNext',
+        outDir: 'dist',
         rollupOptions: {
             output: {
                 manualChunks: {
@@ -33,7 +34,7 @@ export default defineConfig({
         }
     },
     define: {
-        __DOMAIN_BACKEND__: JSON.stringify(process.env.DOMAIN_BACKEND).trim(),
+        __DOMAIN_BACKEND__: JSON.stringify(process.env.DOMAIN_BACKEND || 'example.com').trim(),
         __NODE_ENV__: JSON.stringify(process.env.NODE_ENV).trim()
     },
     server: {

@@ -1,0 +1,27 @@
+name: Deploy lib
+on:
+    push:
+        tags:
+            - '*'
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v2
+
+            - name: Setup Node
+              uses: actions/setup-node@v2
+              with:
+                  node-version: '22.x'
+                  registry-url: 'https://npm.pkg.github.com'
+
+            - name: Install dependencies and build
+              working-directory: './'
+              run: npm i && npm run start:build
+
+            - name: Publish package
+              working-directory: './'
+              run: npm publish
+              env:
+                  NODE_AUTH_TOKEN: ${{ secrets.GH_TOKEN }}
