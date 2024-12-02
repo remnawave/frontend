@@ -71,14 +71,11 @@ jobs:
               with:
                   to: ${{ secrets.TELEGRAM_CHAT_ID }}
                   token: ${{ secrets.TELEGRAM_TOKEN }}
-                  format: html
+                  format: markdown
                   message: |
                       ✅ <b>Deploy</b> <code>${{ github.REPOSITORY }}@${{ github.ref_name }}</code> has finished.
 
                       image tag: <code>${{ github.sha }}</code>
-                      commit message: <code>${{ github.event.head_commit.message }}</code>
-                      author: <code>${{ github.event.head_commit.author.name }}</code>
-                      commit timestamp: <code>${{ github.event.head_commit.timestamp }}</code>
 
     notify-on-error:
         runs-on: ubuntu-latest

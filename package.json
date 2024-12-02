@@ -2,7 +2,7 @@
   "name": "@remnawave/frontend",
   "private": false,
   "type": "module",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "scripts": {
     "start:dev": "vite",
     "start:build": "NODE_ENV=production tsc && vite build",
