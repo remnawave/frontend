@@ -1,0 +1,97 @@
+name: Release frontend
+
+on:
+    push:
+        tags:
+            - '*'
+
+jobs:
+    send-start-deploy-telegram-message:
+        name: Send Telegram message
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout source code
+              uses: actions/checkout@v2
+
+            - name: Send Telegram message
+              uses: appleboy/telegram-action@master
+              with:
+                  to: ${{ secrets.TELEGRAM_CHAT_ID }}
+                  token: ${{ secrets.TELEGRAM_TOKEN }}
+                  format: html
+                  message: |
+                      🏹 <b>Deploy</b> <code>${{ github.REPOSITORY }}@${{ github.ref_name }}</code> has started.
+
+                      ⏱️ <code>${{ github.event.head_commit.timestamp }}</code>
+
+    build-and-release:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v3
+
+            - name: Setup Node
+              uses: actions/setup-node@v3
+              with:
+                  node-version: '22.x'
+
+            - name: Install dependencies and build
+              run: |
+                  npm install
+                  npm run start:build
+
+            - name: Get Tag Name
+              run: echo "TAG_NAME=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
+
+            - name: Create ZIP archive of /dist
+              run: |
+                  zip -r remnawave-frontend.zip ./dist
+
+            - name: Upload Release Asset
+              uses: svenstaro/upload-release-action@v2
+              with:
+                  repo_token: ${{ secrets.GH_TOKEN }}
+                  file: remnawave-frontend.zip
+                  asset_name: remnawave-frontend.zip
+                  tag: ${{ env.TAG_NAME }}
+                  release_name: ${{ env.TAG_NAME }}
+                  body: |
+                      Deployed by GitHub Actions
+
+    send-telegram-message:
+        name: Send Telegram message
+        needs: [build-and-release]
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout source code
+              uses: actions/checkout@v2
+
+            - name: Send Telegram message
+              uses: appleboy/telegram-action@master
+              with:
+                  to: ${{ secrets.TELEGRAM_CHAT_ID }}
+                  token: ${{ secrets.TELEGRAM_TOKEN }}
+                  format: html
+                  message: |
+                      ✅ <b>Deploy</b> <code>${{ github.REPOSITORY }}@${{ github.ref_name }}</code> has finished.
+
+                      image tag: <code>${{ github.sha }}</code>
+                      commit message: <code>${{ github.event.head_commit.message }}</code>
+                      author: <code>${{ github.event.head_commit.author.name }}</code>
+                      commit timestamp: <code>${{ github.event.head_commit.timestamp }}</code>
+
+    notify-on-error:
+        runs-on: ubuntu-latest
+        needs: [build-and-release]
+        if: failure()
+        steps:
+            - name: Checkout source code
+              uses: actions/checkout@v2
+
+            - name: Send error notification
+              uses: appleboy/telegram-action@master
+              with:
+                  to: ${{ secrets.TELEGRAM_CHAT_ID }}
+                  token: ${{ secrets.TELEGRAM_TOKEN }}
+                  message: |
+                      ❌ ${{ github.REPOSITORY }}@${{ github.ref_name }} build failed
