@@ -28,14 +28,14 @@ jobs:
 
             - name: Create ZIP archive of /dist
               run: |
-                  zip -r remnawave-frontend-${TAG_NAME}.zip ./dist
+                  zip -r remnawave-frontend.zip ./dist
 
             - name: Upload Release Asset
               uses: svenstaro/upload-release-action@v2
               with:
                   repo_token: ${{ secrets.GH_TOKEN }}
-                  file: remnawave-frontend-${TAG_NAME}.zip
-                  asset_name: remnawave-frontend-${TAG_NAME}.zip
+                  file: remnawave-frontend.zip
+                  asset_name: remnawave-frontend.zip
                   tag: ${{ env.TAG_NAME }}
                   release_name: ${{ env.TAG_NAME }}
                   body: |
