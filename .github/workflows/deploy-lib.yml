@@ -1,27 +1,42 @@
 name: Deploy lib
+
 on:
     push:
         tags:
             - '*'
+
 jobs:
-    build:
+    build_and_release:
         runs-on: ubuntu-latest
+
         steps:
             - name: Checkout
-              uses: actions/checkout@v2
+              uses: actions/checkout@v3
 
             - name: Setup Node
-              uses: actions/setup-node@v2
+              uses: actions/setup-node@v3
               with:
                   node-version: '22.x'
-                  registry-url: 'https://npm.pkg.github.com'
 
             - name: Install dependencies and build
-              working-directory: './'
-              run: npm i && npm run start:build
+              run: |
+                  npm install
+                  npm run start:build
 
-            - name: Publish package
-              working-directory: './'
-              run: npm publish
-              env:
-                  NODE_AUTH_TOKEN: ${{ secrets.GH_TOKEN }}
+            - name: Get Tag Name
+              run: echo "TAG_NAME=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
+
+            - name: Create ZIP archive of /dist
+              run: |
+                  zip -r remnawave-frontend-${TAG_NAME}.zip ./dist
+
+            - name: Upload Release Asset
+              uses: svenstaro/upload-release-action@v2
+              with:
+                  repo_token: ${{ secrets.GH_TOKEN }}
+                  file: remnawave-frontend-${TAG_NAME}.zip
+                  asset_name: remnawave-frontend-${TAG_NAME}.zip
+                  tag: ${{ env.TAG_NAME }}
+                  release_name: ${{ env.TAG_NAME }}
+                  body: |
+                      Deployed by GitHub Actions
