@@ -89,9 +89,11 @@ export const EditNodeModalWidget = () => {
     const handleClose = () => {
         actions.toggleEditModal(false)
 
-        form.reset()
-        form.resetDirty()
-        form.resetTouched()
+        setTimeout(() => {
+            form.reset()
+            form.resetDirty()
+            form.resetTouched()
+        }, 300)
     }
 
     const handleSubmit = form.onSubmit(async (values) => {

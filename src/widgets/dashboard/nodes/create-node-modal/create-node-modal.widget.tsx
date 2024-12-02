@@ -55,9 +55,12 @@ export const CreateNodeModalWidget = () => {
     const handleClose = () => {
         actions.toggleCreateModal(false)
 
-        form.reset()
-        form.resetDirty()
-        form.resetTouched()
+        setTimeout(() => {
+            form.reset()
+            form.resetDirty()
+            form.resetTouched()
+            setAdvancedOpened(false)
+        }, 300)
     }
 
     const handleSubmit = form.onSubmit(async (values) => {
