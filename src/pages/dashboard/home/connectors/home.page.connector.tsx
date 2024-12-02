@@ -8,22 +8,24 @@ import {
 import { HomePage } from '@/pages/dashboard/home/components'
 import { LoadingScreen } from '@/shared/ui/loading-screen'
 
-export const HomePageConnectior = () => {
+export const HomePageConnector = () => {
     const actions = useDashboardStoreActions()
     const systemInfo = useDashboardStoreSystemInfo()
 
-    // useEffect(() => {
-    //     ;(async () => await actions.getSystemInfo())()
-    // }, [])
     useEffect(() => {
-        actions.getSystemInfo()
+        ;(async () => {
+            await actions.getSystemInfo()
+        })()
+        return () => {
+            actions.resetState()
+        }
     }, [])
 
     useInterval(
         () => {
             actions.getSystemInfo()
         },
-        5000,
+        3000,
         { autoInvoke: true }
     )
 
