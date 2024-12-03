@@ -9,6 +9,7 @@ export const ROUTES = {
         USERS: '/dashboard/users',
         HOSTS: '/dashboard/hosts',
         NODES: '/dashboard/nodes',
-        CONFIG: '/dashboard/config'
+        CONFIG: '/dashboard/config',
+        NODES_STATS: '/dashboard/stats/nodes'
     }
 } as const

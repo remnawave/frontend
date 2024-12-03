@@ -88,6 +88,7 @@ export const EditNodeModalWidget = () => {
 
     const handleClose = () => {
         actions.toggleEditModal(false)
+        setAdvancedOpened(false)
 
         setTimeout(() => {
             form.reset()

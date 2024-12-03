@@ -3,7 +3,8 @@ import { useEffect } from 'react'
 
 import {
     useDashboardStoreActions,
-    useDashboardStoreSystemInfo
+    useDashboardStoreSystemInfo,
+    useDSBandwidthStats
 } from '@entitites/dashboard/dashboard-store/dashboard-store'
 import { HomePage } from '@/pages/dashboard/home/components'
 import { LoadingScreen } from '@/shared/ui/loading-screen'
@@ -11,10 +12,11 @@ import { LoadingScreen } from '@/shared/ui/loading-screen'
 export const HomePageConnector = () => {
     const actions = useDashboardStoreActions()
     const systemInfo = useDashboardStoreSystemInfo()
-
+    const bandwidthStats = useDSBandwidthStats()
     useEffect(() => {
         ;(async () => {
             await actions.getSystemInfo()
+            await actions.getBandwidthStats()
         })()
         return () => {
             actions.resetState()
@@ -24,14 +26,15 @@ export const HomePageConnector = () => {
     useInterval(
         () => {
             actions.getSystemInfo()
+            actions.getBandwidthStats()
         },
         3000,
         { autoInvoke: true }
     )
 
-    if (!systemInfo) {
+    if (!systemInfo || !bandwidthStats) {
         return <LoadingScreen />
     }
 
-    return <HomePage systemInfo={systemInfo} />
+    return <HomePage bandwidthStats={bandwidthStats} systemInfo={systemInfo} />
 }

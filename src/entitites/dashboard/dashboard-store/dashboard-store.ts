@@ -1,5 +1,6 @@
 import {
     GetAllUsersCommand,
+    GetBandwidthStatsCommand,
     GetInboundsCommand,
     GetStatsCommand
 } from '@remnawave/backend-contract'
@@ -15,6 +16,7 @@ import { IUsersParams } from './interfaces/users-params.interface'
 import { IActions, IState } from './interfaces'
 
 const initialState: IState = {
+    bandwidthStats: null,
     isLoading: false,
     isUsersLoading: false,
     systemInfo: null,
@@ -57,6 +59,37 @@ export const useDashboardStore = create<IActions & IState>()(
                         } = response
 
                         set({ systemInfo: dataResponse })
+
+                        return true
+                    } catch (e) {
+                        if (e instanceof AxiosError) {
+                            throw e
+                        }
+                        return false
+                    } finally {
+                        set({ isLoading: false })
+                    }
+                },
+                getBandwidthStats: async (): Promise<boolean> => {
+                    try {
+                        set({ isLoading: true })
+
+                        const params: GetBandwidthStatsCommand.Request = {
+                            tz: getUserTimezoneUtil()
+                        }
+
+                        const response = await instance.get<GetBandwidthStatsCommand.Response>(
+                            GetBandwidthStatsCommand.url,
+                            {
+                                params
+                            }
+                        )
+
+                        const {
+                            data: { response: dataResponse }
+                        } = response
+
+                        set({ bandwidthStats: dataResponse })
 
                         return true
                     } catch (e) {
@@ -146,7 +179,6 @@ export const useDashboardStore = create<IActions & IState>()(
                     return initialState
                 },
                 resetState: async () => {
-                    console.log('resetState')
                     set({ ...initialState })
                 }
             }
@@ -171,3 +203,6 @@ export const useDashboardStoreParams = () => useDashboardStore((state) => state.
 export const useDSInbounds = () => useDashboardStore((state) => state.inbounds)
 export const useDSInboundsLoading = () => useDashboardStore((state) => state.isInboundsLoading)
 export const useDSInboundsHashMap = () => useDashboardStore((state) => state.inboundsHashMap)
+
+// Bandwidth
+export const useDSBandwidthStats = () => useDashboardStore((state) => state.bandwidthStats)

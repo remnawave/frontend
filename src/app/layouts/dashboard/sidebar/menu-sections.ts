@@ -29,6 +29,16 @@ export const menu: MenuItem[] = [
             { name: 'Nodes', href: ROUTES.DASHBOARD.NODES, icon: PiComputerTowerDuotone },
             { name: 'Config', href: ROUTES.DASHBOARD.CONFIG, icon: PiGearDuotone }
         ]
+    },
+    {
+        header: 'Statistics',
+        section: [
+            {
+                name: 'Nodes',
+                href: ROUTES.DASHBOARD.NODES_STATS,
+                icon: PiComputerTowerDuotone
+            }
+        ]
     }
 
     // {
