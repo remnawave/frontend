@@ -11,7 +11,7 @@ export function UsernameColumnEntity(props: IProps) {
 
     return (
         <Group align="center" gap="md" wrap="nowrap">
-            <Indicator color={color} inline processing size={12} />
+            <Indicator color={color} inline processing size={12} zIndex={10} />
             <Box w="100%">
                 <Text fw={500} size="sm" truncate="end">
                     {user.username}

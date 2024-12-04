@@ -1,36 +1,21 @@
-/* eslint-disable camelcase */
-import {
-    MantineReactTable,
-    MRT_ColumnFilterFnsState,
-    MRT_ColumnFiltersState,
-    MRT_PaginationState,
-    MRT_SortingState,
-    useMantineReactTable
-} from 'mantine-react-table'
-import { useInterval } from '@mantine/hooks'
-import { useState } from 'react'
+import { MantineReactTable, useMantineReactTable } from 'mantine-react-table'
+import { useEffect } from 'react'
 
-import { UserActionGroupFeature } from '@features/dashboard/users/users-action-group/action-group.feature'
-import { useUserTableColumns } from '@features/dashboard/users/users-table/model/use-table-columns'
-import { useUserTableData } from '@features/dashboard/users/users-table/model/use-table-data'
 import { ViewUserActionFeature } from '@features/ui/dashboard/users/view-user-action'
-import { DataTableShared } from '@/shared/ui/table'
+import { useUsersTableStoreActions } from '@entitites/dashboard/users-table-store'
+import { customIcons } from '@widgets/dashboard/users/users-table/constants'
 
-import { customIcons } from './constants'
+import { useUserTableColumns } from '../model/use-table-columns'
+import { useUserTableData } from '../model/use-table-data'
 
-export function UserTableWidget() {
+export const UserTableFeature = () => {
     const tableColumns = useUserTableColumns()
+    const actions = useUsersTableStoreActions()
 
-    const [sorting, setSorting] = useState<MRT_SortingState>([])
-    const [pagination, setPagination] = useState<MRT_PaginationState>({
-        pageIndex: 0,
-        pageSize: 25
-    })
+    const { sorting, pagination, columnFilters, columnFilterFns, handleStateChange } =
+        useTableState(tableColumns)
 
-    const [columnFilters, setColumnFilters] = useState<MRT_ColumnFiltersState>([])
-    const [columnFilterFns, setColumnFilterFns] = useState<MRT_ColumnFilterFnsState>(
-        Object.fromEntries(tableColumns.map(({ accessorKey }) => [accessorKey, 'contains']))
-    )
+    const { setSorting, setPagination, setColumnFilters, setColumnFilterFns } = handleStateChange
 
     const { data, isError, isFetching, isLoading, refetch } = useUserTableData({
         columnFilterFns,
@@ -39,18 +24,10 @@ export function UserTableWidget() {
         sorting
     })
 
-    useInterval(
-        async () => {
-            await refetch()
-        },
-        5000,
-        { autoInvoke: true }
-    )
-
     const { users, total } = data ?? {}
 
-    const fetchedUsers = users ?? []
     const totalRowCount = total ?? 0
+    const fetchedUsers = users ?? []
 
     const table = useMantineReactTable({
         columns: tableColumns,
@@ -61,10 +38,6 @@ export function UserTableWidget() {
         // enableColumnFilterModes: true,
         columnFilterModeOptions: ['contains'],
         initialState: {
-            pagination: {
-                pageIndex: 0,
-                pageSize: 25
-            },
             showColumnFilters: false,
             density: 'xs',
             columnVisibility: {
@@ -111,19 +84,13 @@ export function UserTableWidget() {
         displayColumnDefOptions: { 'mrt-row-actions': { size: 120 } }
     })
 
-    return (
-        <DataTableShared.Container>
-            <DataTableShared.Title
-                actions={
-                    <UserActionGroupFeature isLoading={isLoading} refetch={refetch} table={table} />
-                }
-                description="List of all users"
-                title="Users"
-            />
+    useEffect(() => {
+        actions.setTableActions(table, refetch)
+    }, [table])
 
-            <DataTableShared.Content>
-                <MantineReactTable table={table} />
-            </DataTableShared.Content>
-        </DataTableShared.Container>
-    )
+    useEffect(() => {
+        actions.setLoadingState(isLoading)
+    }, [isLoading])
+
+    return <MantineReactTable table={table} />
 }

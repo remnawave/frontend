@@ -8,18 +8,7 @@ import { UsersMetrics } from '@/widgets/dashboard/users/users-metrics'
 import { PageHeader } from '@/shared/ui/page-header'
 import { Page } from '@/shared/ui/page'
 
-import { IProps } from './interfaces'
-
-export default function UsersPageComponent(props: IProps) {
-    const {
-        tabs,
-        columns,
-        handleSortStatusChange,
-        handlePageChange,
-        handleRecordsPerPageChange,
-        handleUpdate
-    } = props
-
+export default function UsersPageComponent() {
     return (
         <Page title="Users">
             <PageHeader breadcrumbs={BREADCRUMBS} title="Users" />
@@ -30,14 +19,7 @@ export default function UsersPageComponent(props: IProps) {
                 </Grid.Col>
 
                 <Grid.Col span={12}>
-                    <UserTableWidget
-                        columns={columns}
-                        handlePageChange={handlePageChange}
-                        handleRecordsPerPageChange={handleRecordsPerPageChange}
-                        handleSortStatusChange={handleSortStatusChange}
-                        handleUpdate={handleUpdate}
-                        tabs={tabs}
-                    />
+                    <UserTableWidget />
                 </Grid.Col>
             </Grid>
 

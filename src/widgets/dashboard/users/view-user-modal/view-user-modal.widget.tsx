@@ -78,7 +78,7 @@ export const ViewUserModal = () => {
                 } finally {
                     timeout = setTimeout(() => {
                         setIsLoading(false)
-                    }, 1000)
+                    }, 500)
                 }
             })()
         }

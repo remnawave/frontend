@@ -1,5 +1,5 @@
 import {
-    GetAllUsersCommand,
+    GetAllUsersV2Command,
     GetBandwidthStatsCommand,
     GetInboundsCommand,
     GetStatsCommand
@@ -12,7 +12,7 @@ import { getUserTimezoneUtil } from '@/shared/utils/time-utils'
 import { create } from '@shared/hocs/store-wrapper'
 import { instance } from '@shared/api'
 
-import { IUsersParams } from './interfaces/users-params.interface'
+import { GetUsersV2Params } from './interfaces/get-users-v2.interface'
 import { IActions, IState } from './interfaces'
 
 const initialState: IState = {
@@ -20,15 +20,6 @@ const initialState: IState = {
     isLoading: false,
     isUsersLoading: false,
     systemInfo: null,
-    users: null,
-    usersParams: {
-        limit: 10,
-        offset: 0,
-        orderBy: 'createdAt',
-        orderDir: 'desc'
-    },
-
-    totalUsers: 0,
     inbounds: null,
     isInboundsLoading: false,
     inboundsHashMap: null
@@ -101,23 +92,14 @@ export const useDashboardStore = create<IActions & IState>()(
                         set({ isLoading: false })
                     }
                 },
-                getUsers: async (params?: Partial<IUsersParams>): Promise<boolean> => {
+                getUsersV2: async (
+                    params: GetUsersV2Params
+                ): Promise<GetAllUsersV2Command.Response['response'] | null> => {
                     try {
-                        set({ isUsersLoading: true })
-                        const currentParams = getState().usersParams
-                        const newParams = { ...currentParams, ...params }
-
-                        const response = await instance.get<GetAllUsersCommand.Response>(
-                            GetAllUsersCommand.url,
+                        const response = await instance.get<GetAllUsersV2Command.Response>(
+                            GetAllUsersV2Command.url,
                             {
-                                params: {
-                                    limit: newParams.limit,
-                                    offset: newParams.offset,
-                                    orderBy: newParams.orderBy,
-                                    orderDir: newParams.orderDir,
-                                    search: newParams.search,
-                                    searchBy: newParams.searchBy
-                                }
+                                params
                             }
                         )
 
@@ -125,20 +107,12 @@ export const useDashboardStore = create<IActions & IState>()(
                             data: { response: dataResponse }
                         } = response
 
-                        set({
-                            users: dataResponse.users,
-                            totalUsers: dataResponse.total,
-                            usersParams: newParams
-                        })
-
-                        return true
+                        return dataResponse
                     } catch (e) {
                         if (e instanceof AxiosError) {
                             throw e
                         }
-                        return false
-                    } finally {
-                        set({ isUsersLoading: false })
+                        return null
                     }
                 },
                 getInbounds: async (): Promise<boolean> => {
@@ -195,9 +169,6 @@ export const useDashboardStoreUsersLoading = () =>
     useDashboardStore((store) => store.isUsersLoading)
 export const useDashboardStoreSystemInfo = () => useDashboardStore((state) => state.systemInfo)
 export const useDashboardStoreActions = () => useDashboardStore((store) => store.actions)
-export const useDashboardStoreUsers = () => useDashboardStore((state) => state.users)
-export const useDashboardStoreTotalUsers = () => useDashboardStore((state) => state.totalUsers)
-export const useDashboardStoreParams = () => useDashboardStore((state) => state.usersParams)
 
 // Inbounds
 export const useDSInbounds = () => useDashboardStore((state) => state.inbounds)

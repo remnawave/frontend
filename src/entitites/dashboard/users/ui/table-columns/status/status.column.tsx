@@ -1,13 +1,26 @@
 import { Stack, Text } from '@mantine/core'
 
-import { IProps } from '@/entitites/dashboard/users/ui/table-columns/username/interface'
 import { UserStatusBadge } from '@/widgets/dashboard/users/user-status-badge'
 import { getExpirationTextUtil } from '@/shared/utils/time-utils'
 
+import { IProps } from './interface'
+
 export function StatusColumnEntity(props: IProps) {
-    const { user } = props
+    const { user, need } = props
 
     const expirationText = getExpirationTextUtil(user.expireAt)
+
+    if (need === 'badge') {
+        return <UserStatusBadge miw={'13ch'} status={user.status} />
+    }
+
+    if (need === 'date') {
+        return (
+            <Text c="dimmed" size="xs">
+                {expirationText}
+            </Text>
+        )
+    }
 
     return (
         <Stack gap="xs">
