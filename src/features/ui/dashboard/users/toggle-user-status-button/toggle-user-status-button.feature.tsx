@@ -1,22 +1,25 @@
 import { PiCellSignalFullDuotone, PiCellSignalSlashDuotone, PiTrashDuotone } from 'react-icons/pi'
 import { USERS_STATUS } from '@remnawave/backend-contract'
-import { notifications } from '@mantine/notifications'
 import { Button } from '@mantine/core'
-import { useState } from 'react'
 
-import {
-    useUserModalStoreActions,
-    useUserModalStoreUser
-} from '@/entitites/dashboard/user-modal-store/user-modal-store'
+import { useDisableUser, useEnableUser, useInvalidateUsersTSQ } from '@/shared/api/hooks'
 
 import { IProps } from './interfaces'
 
 export function ToggleUserStatusButtonFeature(props: IProps) {
-    const [isLoading, setIsLoading] = useState(false)
-    const user = useUserModalStoreUser()
-    const actions = useUserModalStoreActions()
+    const { user } = props
+    const invalidateUsers = useInvalidateUsersTSQ()
 
-    if (!user) return null
+    const { mutate: disableUser, isPending: isDisableUserPending } = useDisableUser({
+        mutationFns: {
+            onSuccess: invalidateUsers
+        }
+    })
+    const { mutate: enableUser, isPending: isEnableUserPending } = useEnableUser({
+        mutationFns: {
+            onSuccess: invalidateUsers
+        }
+    })
 
     let buttonLabel = ''
     let color = 'blue'
@@ -33,28 +36,10 @@ export function ToggleUserStatusButtonFeature(props: IProps) {
     }
 
     const handleToggleUserStatus = async () => {
-        setIsLoading(true)
-        try {
-            if (user.status !== USERS_STATUS.DISABLED) {
-                await actions.disableUser()
-            } else {
-                await actions.enableUser()
-            }
-
-            notifications.show({
-                title: 'Success',
-                message: 'User status updated',
-                color: 'green'
-            })
-        } catch (error) {
-            console.error(error)
-            notifications.show({
-                title: 'Error',
-                message: 'Failed to toggle user status',
-                color: 'red'
-            })
-        } finally {
-            setIsLoading(false)
+        if (user.status !== USERS_STATUS.DISABLED) {
+            disableUser({ route: { uuid: user.uuid } })
+        } else {
+            enableUser({ route: { uuid: user.uuid } })
         }
     }
 
@@ -62,7 +47,7 @@ export function ToggleUserStatusButtonFeature(props: IProps) {
         <Button
             color={color}
             leftSection={icon}
-            loading={isLoading}
+            loading={isDisableUserPending || isEnableUserPending}
             onClick={handleToggleUserStatus}
             size="md"
             type="button"

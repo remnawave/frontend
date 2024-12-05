@@ -8,6 +8,7 @@ import {
 } from '@entitites/dashboard/config/config-store/config-store'
 import { fetchWithProgress } from '@/shared/utils/fetch-with-progress'
 import { LoadingScreen } from '@/shared/ui'
+import { app } from '@/config'
 
 import { ConfigPageComponent } from '../components/config.page.component'
 
@@ -34,7 +35,10 @@ export function ConfigPageConnector() {
                     }
                 })
 
-                const wasmBytes = await fetchWithProgress('/main.wasm', setDownloadProgress)
+                const wasmBytes = await fetchWithProgress(
+                    app.configEditor.wasmUrl,
+                    setDownloadProgress
+                )
                 const { instance } = await WebAssembly.instantiate(wasmBytes, go.importObject)
                 go.run(instance)
                 await wasmInitialized

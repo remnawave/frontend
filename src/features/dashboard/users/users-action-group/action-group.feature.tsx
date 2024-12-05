@@ -1,14 +1,8 @@
 /* eslint-disable camelcase */
-import { GetAllUsersV2Command } from '@remnawave/backend-contract'
+
 import { PiArrowsClockwise, PiPlus } from 'react-icons/pi'
-import { MRT_TableInstance } from 'mantine-react-table'
 import { Button, Group } from '@mantine/core'
 
-import {
-    useUsersTableStoreLoading,
-    useUsersTableStoreRefetch,
-    useUsersTableStoreTable
-} from '@entitites/dashboard/users-table-store'
 import { useUserCreationModalStoreActions } from '@entitites/dashboard/user-creation-modal-store'
 
 import { IProps } from './interfaces'

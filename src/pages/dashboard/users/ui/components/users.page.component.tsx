@@ -23,8 +23,8 @@ export default function UsersPageComponent() {
                 </Grid.Col>
             </Grid>
 
-            <ViewUserModal />
-            <CreateUserModalWidget />
+            <ViewUserModal key="view-user-modal" />
+            <CreateUserModalWidget key="create-user-widget" />
         </Page>
     )
 }

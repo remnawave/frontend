@@ -1,3 +1,4 @@
+import cuid2 from '@paralleldrive/cuid2'
 import { Grid } from '@mantine/core'
 
 import { useNodesStoreIsNodesLoading } from '@entitites/dashboard/nodes/nodes-store/nodes-store'
@@ -31,8 +32,8 @@ export default function NodesPageComponent(props: IProps) {
                 </Grid.Col>
             </Grid>
 
-            <EditNodeModalWidget />
-            <CreateNodeModalWidget />
+            <EditNodeModalWidget key="view-node-widget" />
+            <CreateNodeModalWidget key="create-node-widget" />
         </Page>
     )
 }

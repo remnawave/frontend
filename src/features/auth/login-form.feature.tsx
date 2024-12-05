@@ -2,19 +2,15 @@ import { Button, Container, Paper, PasswordInput, TextInput } from '@mantine/cor
 import { LoginCommand } from '@remnawave/backend-contract'
 import { useForm, zodResolver } from '@mantine/form'
 import { PiSignInDuotone } from 'react-icons/pi'
+import MD5 from 'crypto-js/md5'
 
 import { useAuth } from '@shared/hooks/use-auth'
+import { useLogin } from '@/shared/api/hooks'
 
-import {
-    useAuthStoreIsLoading,
-    useLoginPageStoreActions
-} from '../../entitites/auth/auth-store/auth-store'
 import { handleFormErrors } from '../../shared/utils/form'
 
 export const LoginForm = () => {
     const { setIsAuthenticated } = useAuth()
-    const { login } = useLoginPageStoreActions()
-    const isLoading = useAuthStoreIsLoading()
 
     const form = useForm({
         mode: 'uncontrolled',
@@ -22,13 +18,23 @@ export const LoginForm = () => {
         initialValues: { username: '', password: '' }
     })
 
-    const handleSubmit = form.onSubmit(async (variables) => {
-        try {
-            await login({ username: variables.username, password: variables.password })
-            setIsAuthenticated(true)
-        } catch (error) {
-            handleFormErrors(form, error)
-        }
+    const { mutate: login, isPending: isLoading } = useLogin()
+
+    const handleSubmit = form.onSubmit((variables) => {
+        login(
+            {
+                variables: {
+                    username: variables.username,
+                    password: MD5(variables.password).toString()
+                }
+            },
+            {
+                onSuccess: () => {
+                    setIsAuthenticated(true)
+                },
+                onError: (error) => handleFormErrors(form, error)
+            }
+        )
     })
 
     return (

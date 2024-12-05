@@ -18,36 +18,32 @@ import {
     PiUserDuotone
 } from 'react-icons/pi'
 import { CreateUserCommand, USERS_STATUS } from '@remnawave/backend-contract'
-import { notifications } from '@mantine/notifications'
 import { useForm, zodResolver } from '@mantine/form'
 import { DateTimePicker } from '@mantine/dates'
-import { useEffect, useState } from 'react'
-import consola from 'consola/browser'
-import { z } from 'zod'
+import { useEffect } from 'react'
 
 import {
     useUserCreationModalStoreActions,
     useUserCreationModalStoreIsModalOpen
 } from '@/entitites/dashboard/user-creation-modal-store/user-creation-modal-store'
-import {
-    useDashboardStoreActions,
-    useDSInbounds
-} from '@/entitites/dashboard/dashboard-store/dashboard-store'
+import { useCreateUser, useGetInbounds } from '@/shared/api/hooks'
 import { LoaderModalShared } from '@shared/ui/loader-modal'
 import { resetDataStrategy } from '@/shared/constants'
 import { gbToBytesUtil } from '@/shared/utils/bytes'
-import { handleFormErrors } from '@/shared/utils'
 
 import { InboundCheckboxCardWidget } from '../inbound-checkbox-card'
 
 export const CreateUserModalWidget = () => {
     const isModalOpen = useUserCreationModalStoreIsModalOpen()
     const actions = useUserCreationModalStoreActions()
-    const inbounds = useDSInbounds()
-    const actionsDS = useDashboardStoreActions()
 
-    const [isLoading, setIsLoading] = useState(true)
-    const [isDataSubmitting, setIsDataSubmitting] = useState(false)
+    const { data: inbounds, isLoading } = useGetInbounds()
+
+    const {
+        mutate: createUser,
+        isPending: isDataSubmitting,
+        isSuccess: isUserCreated
+    } = useCreateUser()
 
     const form = useForm<CreateUserCommand.Request>({
         name: 'create-user-form',
@@ -72,32 +68,14 @@ export const CreateUserModalWidget = () => {
     }
 
     useEffect(() => {
-        let timeout: NodeJS.Timeout | undefined
-        if (isModalOpen) {
-            ;(async () => {
-                setIsLoading(true)
-                try {
-                    await actionsDS.getInbounds()
-                } catch (error) {
-                    consola.error(error)
-                } finally {
-                    timeout = setTimeout(() => {
-                        setIsLoading(false)
-                    }, 300)
-                }
-            })()
-            if (!isModalOpen) {
-                if (timeout) {
-                    clearTimeout(timeout)
-                }
-            }
+        if (isUserCreated) {
+            handleCloseModal()
         }
-    }, [isModalOpen])
+    }, [isUserCreated])
 
     const handleSubmit = form.onSubmit(async (values) => {
-        try {
-            setIsDataSubmitting(true)
-            const createData = {
+        createUser({
+            variables: {
                 username: values.username,
                 trafficLimitStrategy: values.trafficLimitStrategy,
                 trafficLimitBytes: gbToBytesUtil(values.trafficLimitBytes),
@@ -105,37 +83,7 @@ export const CreateUserModalWidget = () => {
                 activeUserInbounds: values.activeUserInbounds,
                 status: values.status
             }
-
-            const res = await actions.createUser(createData)
-
-            if (res) {
-                notifications.show({
-                    title: 'Success',
-                    message: 'User created successfully',
-                    color: 'green'
-                })
-                handleCloseModal()
-            }
-        } catch (error) {
-            if (error instanceof z.ZodError) {
-                consola.error('Zod validation error:', error.errors)
-            }
-
-            if (error instanceof Error) {
-                consola.error('Error message:', error.message)
-                consola.error('Error stack:', error.stack)
-            }
-
-            handleFormErrors(form, error)
-
-            notifications.show({
-                title: 'Error',
-                message: error instanceof Error ? error.message : 'Failed to update user',
-                color: 'red'
-            })
-        } finally {
-            setIsDataSubmitting(false)
-        }
+        })
     })
 
     return (
@@ -210,15 +158,14 @@ export const CreateUserModalWidget = () => {
                                         sm: 1,
                                         md: 2
                                     }}
+                                    key="create-user-inbounds-grid"
                                     pt="md"
                                 >
                                     {inbounds?.map((inbound) => (
-                                        <>
-                                            <InboundCheckboxCardWidget
-                                                inbound={inbound}
-                                                key={inbound.uuid}
-                                            />
-                                        </>
+                                        <InboundCheckboxCardWidget
+                                            inbound={inbound}
+                                            key={inbound.uuid}
+                                        />
                                     ))}
                                 </SimpleGrid>
                             </Checkbox.Group>

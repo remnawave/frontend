@@ -48,6 +48,9 @@ const useAuthStore = create<IActions & IState>()(
                         set({ isLoading: false })
                     }
                 },
+                setToken: async (token: string) => {
+                    setToken({ token })
+                },
                 resetState: async () => {
                     removeToken()
                     set({ ...initialState })

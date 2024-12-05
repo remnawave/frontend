@@ -1,6 +1,10 @@
 import dayjs from 'dayjs'
 
-export function getExpirationTextUtil(expireAt: Date | string): string {
+export function getExpirationTextUtil(expireAt: Date | null | string): string {
+    if (!expireAt) {
+        return 'Unknown'
+    }
+
     const expiration = dayjs(expireAt)
     const now = dayjs()
 

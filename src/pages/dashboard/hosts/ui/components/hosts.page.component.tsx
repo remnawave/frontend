@@ -31,8 +31,8 @@ export default function HostsPageComponent(props: IProps) {
                 </Grid.Col>
             </Grid>
 
-            <EditHostModalWidget />
-            <CreateHostModalWidget />
+            <EditHostModalWidget key="edit-host-modal" />
+            <CreateHostModalWidget key="create-host-modal" />
         </Page>
     )
 }

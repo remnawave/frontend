@@ -7,16 +7,12 @@ import {
 } from 'react-icons/pi'
 import { Group, Loader, SimpleGrid } from '@mantine/core'
 
-import {
-    useDashboardStoreIsLoading,
-    useDashboardStoreSystemInfo
-} from '@/entitites/dashboard/dashboard-store/dashboard-store'
 import { MetricCard } from '@/shared/ui/metrics/metric-card'
+import { useGetSystemStats } from '@/shared/api/hooks'
 import { formatInt } from '@/shared/utils/number'
 
 export function UsersMetrics() {
-    const isLoading = useDashboardStoreIsLoading()
-    const systemInfo = useDashboardStoreSystemInfo()
+    const { data: systemInfo, isLoading } = useGetSystemStats()
 
     const users = systemInfo?.users
 

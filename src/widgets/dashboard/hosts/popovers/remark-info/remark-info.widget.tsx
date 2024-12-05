@@ -24,29 +24,27 @@ export const RemarkInfoPopoverWidget = () => {
                         </Text>
                         <Text size="sm">Supports templates.</Text>
 
-                        <Group gap="xs">
+                        <Group gap="xs" key="template-keys">
                             {TEMPLATE_KEYS.map((key) => (
-                                <>
-                                    <CopyButton value={`{{${key}}}`}>
-                                        {({ copied, copy }) => (
-                                            <Badge
-                                                color={copied ? 'teal' : 'blue'}
-                                                key={key}
-                                                leftSection={
-                                                    copied ? (
-                                                        <PiCheck size="1rem" />
-                                                    ) : (
-                                                        <PiCopy size="1rem" />
-                                                    )
-                                                }
-                                                onClick={copy}
-                                                size="md"
-                                            >
-                                                {`{{${key}}}`}
-                                            </Badge>
-                                        )}
-                                    </CopyButton>
-                                </>
+                                <CopyButton key={key} value={`{{${key}}}`}>
+                                    {({ copied, copy }) => (
+                                        <Badge
+                                            color={copied ? 'teal' : 'blue'}
+                                            key={key}
+                                            leftSection={
+                                                copied ? (
+                                                    <PiCheck size="1rem" />
+                                                ) : (
+                                                    <PiCopy size="1rem" />
+                                                )
+                                            }
+                                            onClick={copy}
+                                            size="md"
+                                        >
+                                            {`{{${key}}}`}
+                                        </Badge>
+                                    )}
+                                </CopyButton>
                             ))}
                         </Group>
                     </Group>

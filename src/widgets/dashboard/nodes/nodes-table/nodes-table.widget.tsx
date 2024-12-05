@@ -11,7 +11,7 @@ export function NodesTableWidget(props: IProps) {
     return (
         <>
             {nodes.map((node) => (
-                <NodeCardWidget node={node} />
+                <NodeCardWidget key={node.uuid} node={node} />
             ))}
         </>
     )

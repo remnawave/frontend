@@ -2,6 +2,7 @@ import { keepPreviousData, useQuery } from '@tanstack/react-query'
 import { GetAllUsersV2Command } from '@remnawave/backend-contract'
 
 import { useDashboardStoreActions } from '@entitites/dashboard/dashboard-store/dashboard-store'
+import { sToMs } from '@/shared/utils/time-utils'
 
 import { TableParams } from './interfaces'
 
@@ -36,7 +37,8 @@ export const useUserTableData = (tableParams: TableParams) => {
             return data
         },
         placeholderData: keepPreviousData,
-        staleTime: 20_000,
+        staleTime: sToMs(20),
+        refetchInterval: sToMs(25),
         refetchOnWindowFocus: true
     })
 }

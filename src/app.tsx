@@ -17,6 +17,7 @@ import { Notifications } from '@mantine/notifications'
 import { ModalsProvider } from '@mantine/modals'
 import { MantineProvider } from '@mantine/core'
 import { useMediaQuery } from '@mantine/hooks'
+import { StrictMode } from 'react'
 
 import { AuthProvider } from '@/shared/providers/auth-provider'
 import { Router } from '@/app/router/router'
@@ -29,18 +30,18 @@ export function App() {
     const isDev = __NODE_ENV__ === 'development'
 
     return (
+        // <StrictMode>
         <QueryClientProvider client={queryClient}>
             {isDev && <ReactQueryDevtools initialIsOpen={false} />}
             <AuthProvider>
                 <MantineProvider defaultColorScheme="dark" theme={theme}>
                     <Notifications position={mq ? 'top-right' : 'bottom-right'} />
                     <NavigationProgress />
-                    <ModalsProvider>
-                        <Router />
-                    </ModalsProvider>
+
+                    <Router />
                 </MantineProvider>
             </AuthProvider>
-            {isDev && <ReactQueryDevtools />}
         </QueryClientProvider>
+        // </StrictMode>
     )
 }

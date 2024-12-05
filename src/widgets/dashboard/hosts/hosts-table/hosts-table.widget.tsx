@@ -1,4 +1,5 @@
 import { DragDropContext, Droppable, DropResult } from '@hello-pangea/dnd'
+import cuid2, { createId } from '@paralleldrive/cuid2'
 import { useListState } from '@mantine/hooks'
 import { useEffect } from 'react'
 
@@ -48,7 +49,7 @@ export function HostsTableWidget(props: IProps) {
                 {(provided) => (
                     <div {...provided.droppableProps} ref={provided.innerRef}>
                         {state.map((item, index) => (
-                            <HostCardWidget index={index} item={item} />
+                            <HostCardWidget index={index} item={item} key={item.uuid} />
                         ))}
                         {provided.placeholder}
                     </div>

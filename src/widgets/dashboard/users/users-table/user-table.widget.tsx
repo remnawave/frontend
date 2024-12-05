@@ -39,14 +39,6 @@ export function UserTableWidget() {
         sorting
     })
 
-    useInterval(
-        async () => {
-            await refetch()
-        },
-        5000,
-        { autoInvoke: true }
-    )
-
     const { users, total } = data ?? {}
 
     const fetchedUsers = users ?? []

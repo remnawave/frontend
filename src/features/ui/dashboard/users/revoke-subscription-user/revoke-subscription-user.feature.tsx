@@ -1,49 +1,28 @@
-import { notifications } from '@mantine/notifications'
 import { ActionIcon, Tooltip } from '@mantine/core'
 import { PiKeyDuotone } from 'react-icons/pi'
-import { useState } from 'react'
 
-import {
-    useUserModalStoreActions,
-    useUserModalStoreUser
-} from '@/entitites/dashboard/user-modal-store/user-modal-store'
+import { useInvalidateUsersTSQ, useRevokeUserSubscription } from '@/shared/api/hooks'
 
 import { IProps } from './interfaces'
 
 export function RevokeSubscriptionUserFeature(props: IProps) {
-    const actions = useUserModalStoreActions()
-    const [isLoading, setIsLoading] = useState(false)
-    const user = useUserModalStoreUser()
+    const { userUuid } = props
+    const refreshUsers = useInvalidateUsersTSQ()
 
-    if (!user) return null
-
-    const handleRevokeSubscription = async () => {
-        setIsLoading(true)
-        try {
-            await actions.reveokeSubscription()
-
-            notifications.show({
-                title: 'Success',
-                message: 'Subscription revoked',
-                color: 'green'
-            })
-        } catch (error) {
-            notifications.show({
-                title: 'Error',
-                message: 'Failed to revoke subscription',
-                color: 'red'
-            })
-        } finally {
-            setIsLoading(false)
+    const { mutate: revokeUserSubscription, isPending } = useRevokeUserSubscription({
+        mutationFns: {
+            onSuccess: () => {
+                refreshUsers()
+            }
         }
-    }
+    })
 
     return (
         <Tooltip label="Revoke subscription">
             <ActionIcon
                 color="green"
-                loading={isLoading}
-                onClick={handleRevokeSubscription}
+                loading={isPending}
+                onClick={() => revokeUserSubscription({ route: { uuid: userUuid } })}
                 size="xl"
             >
                 <PiKeyDuotone size="1.5rem" />

@@ -22,44 +22,47 @@ import {
     PiUserDuotone
 } from 'react-icons/pi'
 import { UpdateUserCommand } from '@remnawave/backend-contract'
-import { notifications } from '@mantine/notifications'
 import { useForm, zodResolver } from '@mantine/form'
 import { DateTimePicker } from '@mantine/dates'
-import { useEffect, useState } from 'react'
-import consola from 'consola/browser'
-import { z } from 'zod'
+import { useEffect } from 'react'
 
 import {
     useUserModalStoreActions,
     useUserModalStoreIsModalOpen,
-    useUserModalStoreUser
+    useUserModalStoreUserUuid
 } from '@/entitites/dashboard/user-modal-store/user-modal-store'
-import {
-    useDashboardStoreActions,
-    useDSInbounds
-} from '@/entitites/dashboard/dashboard-store/dashboard-store'
 import { ToggleUserStatusButtonFeature } from '@/features/ui/dashboard/users/toggle-user-status-button'
 import { RevokeSubscriptionUserFeature } from '@/features/ui/dashboard/users/revoke-subscription-user'
 import { ResetUsageUserFeature } from '@/features/ui/dashboard/users/reset-usage-user'
 import { bytesToGbUtil, gbToBytesUtil, prettyBytesUtil } from '@/shared/utils/bytes'
+import { useGetInbounds, useGetUserByUuid, useUpdateUser } from '@/shared/api/hooks'
 import { DeleteUserFeature } from '@/features/ui/dashboard/users/delete-user'
 import { UserStatusBadge } from '@/widgets/dashboard/users/user-status-badge'
 import { LoaderModalShared } from '@shared/ui/loader-modal'
 import { resetDataStrategy } from '@/shared/constants'
-import { handleFormErrors } from '@/shared/utils'
 
 import { InboundCheckboxCardWidget } from '../inbound-checkbox-card'
 import { IFormValues } from './interfaces'
 
 export const ViewUserModal = () => {
-    const isModalOpen = useUserModalStoreIsModalOpen()
+    const isViewUserModalOpen = useUserModalStoreIsModalOpen()
     const actions = useUserModalStoreActions()
-    const user = useUserModalStoreUser()
-    const inbounds = useDSInbounds()
-    const actionsDS = useDashboardStoreActions()
+    const selectedUser = useUserModalStoreUserUuid()
 
-    const [isLoading, setIsLoading] = useState(true)
-    const [isDataSubmitting, setIsDataSubmitting] = useState(false)
+    const { data: inbounds } = useGetInbounds()
+
+    const {
+        data: user,
+        isLoading: isUserLoading,
+        refetch: refetchUser
+    } = useGetUserByUuid({
+        route: {
+            uuid: selectedUser ?? ''
+        },
+        rQueryParams: {
+            enabled: !!selectedUser
+        }
+    })
 
     const form = useForm<IFormValues>({
         name: 'edit-user-form',
@@ -67,28 +70,17 @@ export const ViewUserModal = () => {
         validate: zodResolver(UpdateUserCommand.RequestSchema)
     })
 
-    useEffect(() => {
-        let timeout: NodeJS.Timeout | undefined
-        if (isModalOpen) {
-            ;(async () => {
-                setIsLoading(true)
-                try {
-                    await actions.getUser()
-                    await actionsDS.getInbounds()
-                } finally {
-                    timeout = setTimeout(() => {
-                        setIsLoading(false)
-                    }, 500)
-                }
-            })()
-        }
+    const {
+        mutate: updateUser,
+        isPending: isUpdateUserPending,
+        isSuccess: isUserUpdated
+    } = useUpdateUser({})
 
-        if (!isModalOpen) {
-            if (timeout) {
-                clearTimeout(timeout)
-            }
+    useEffect(() => {
+        if (isUserUpdated) {
+            refetchUser()
         }
-    }, [isModalOpen])
+    }, [isUserUpdated])
 
     useEffect(() => {
         if (user && inbounds) {
@@ -107,73 +99,58 @@ export const ViewUserModal = () => {
         }
     }, [user, inbounds])
 
-    if (!user) {
-        return null
-    }
-
-    const usedTrafficPercentage = (user.usedTrafficBytes / user.trafficLimitBytes) * 100
-    const totalUsedTraffic = prettyBytesUtil(user.usedTrafficBytes, true)
+    const usedTrafficPercentage = user ? (user.usedTrafficBytes / user.trafficLimitBytes) * 100 : 0
+    const totalUsedTraffic = prettyBytesUtil(user?.usedTrafficBytes, true)
 
     const handleSubmit = form.onSubmit(async (values) => {
-        try {
-            setIsDataSubmitting(true)
-            const updateData = {
-                uuid: values.uuid,
-                trafficLimitStrategy: values.trafficLimitStrategy,
-                trafficLimitBytes: gbToBytesUtil(values.trafficLimitBytes),
-                expireAt: values.expireAt,
-                activeUserInbounds: values.activeUserInbounds
-            }
-
-            await actions.updateUser(updateData)
-
-            notifications.show({
-                title: 'Success',
-                message: 'User updated successfully',
-                color: 'green'
-            })
-        } catch (error) {
-            if (error instanceof z.ZodError) {
-                consola.error('Zod validation error:', error.errors)
-            }
-
-            if (error instanceof Error) {
-                consola.error('Error message:', error.message)
-                consola.error('Error stack:', error.stack)
-            }
-
-            handleFormErrors(form, error)
-
-            notifications.show({
-                title: 'Error',
-                message: error instanceof Error ? error.message : 'Failed to update user',
-                color: 'red'
-            })
-        } finally {
-            setIsDataSubmitting(false)
+        const updateData = {
+            uuid: values.uuid,
+            trafficLimitStrategy: values.trafficLimitStrategy,
+            trafficLimitBytes: gbToBytesUtil(values.trafficLimitBytes),
+            expireAt: values.expireAt,
+            activeUserInbounds: values.activeUserInbounds
         }
+
+        updateUser({
+            variables: updateData
+        })
     })
 
     const handleClose = () => {
         actions.changeModalState(false)
 
-        form.reset()
-        form.resetDirty()
-        form.resetTouched()
+        setTimeout(() => {
+            form.reset()
+            form.resetDirty()
+            form.resetTouched()
+        }, 300)
     }
 
     return (
-        <Modal centered onClose={handleClose} opened={isModalOpen} size="900px" title="Edit user">
-            {isLoading ? (
+        <Modal
+            centered
+            onClose={handleClose}
+            opened={isViewUserModalOpen}
+            size="900px"
+            title="Edit user"
+        >
+            {isUserLoading ? (
                 <LoaderModalShared h="400" text="Loading user data..." />
             ) : (
-                <form onSubmit={handleSubmit}>
+                <form key="view-user-form" onSubmit={handleSubmit}>
                     <Group align="flex-start" grow={false}>
                         {/* Left Section - User Settings */}
-                        <Stack gap="md" w={400}>
+                        <Stack gap="md" key="view-user-details-stack" w={400}>
                             <Group gap="xs" justify="space-between" w="100%">
-                                <Text fw={500}>User details</Text>
-                                <UserStatusBadge status={user.status} />
+                                <Text fw={500} key="view-user-details-text">
+                                    User details
+                                </Text>
+                                {user && (
+                                    <UserStatusBadge
+                                        key="view-user-status-badge"
+                                        status={user.status}
+                                    />
+                                )}
                             </Group>
 
                             <TextInput
@@ -269,15 +246,14 @@ export const ViewUserModal = () => {
                                         sm: 1,
                                         md: 2
                                     }}
+                                    key={'view-user-inbounds-grid'}
                                     pt="md"
                                 >
                                     {inbounds?.map((inbound) => (
-                                        <>
-                                            <InboundCheckboxCardWidget
-                                                inbound={inbound}
-                                                key={inbound.uuid}
-                                            />
-                                        </>
+                                        <InboundCheckboxCardWidget
+                                            inbound={inbound}
+                                            key={inbound.uuid}
+                                        />
                                     ))}
                                 </SimpleGrid>
                             </Checkbox.Group>
@@ -287,17 +263,17 @@ export const ViewUserModal = () => {
                     <Group justify="space-between" mt="xl">
                         <Group>
                             <ActionIcon.Group>
-                                <DeleteUserFeature />
+                                <DeleteUserFeature userUuid={user?.uuid ?? ''} />
                                 <ResetUsageUserFeature />
-                                <RevokeSubscriptionUserFeature />
+                                <RevokeSubscriptionUserFeature userUuid={user?.uuid ?? ''} />
                             </ActionIcon.Group>
                         </Group>
                         <Group>
-                            <ToggleUserStatusButtonFeature />
+                            {user && <ToggleUserStatusButtonFeature user={user} />}
                             <Button
                                 color="blue"
                                 leftSection={<PiFloppyDiskDuotone size="1rem" />}
-                                loading={isDataSubmitting}
+                                loading={isUpdateUserPending}
                                 size="md"
                                 type="submit"
                                 variant="outline"

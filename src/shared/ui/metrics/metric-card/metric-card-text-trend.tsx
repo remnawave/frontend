@@ -49,15 +49,15 @@ export function MetricCardTextTrend({ value, children, ...props }: MetricCardTex
         valuePrinted = value
     }
 
+    // fz="inherit"
+
     return (
-        <MetricCardTextMuted style={{ textWrap: 'nowrap' }} {...props}>
-            <Flex align="center">
-                <Icon color={color} size="1rem" />
-                <Text c={color} component="span" fz="inherit" mx="0.25rem">
-                    {valuePrinted}
-                </Text>
-                {children}
-            </Flex>
-        </MetricCardTextMuted>
+        <Flex align="center" style={{ textWrap: 'nowrap' }}>
+            <Icon color={color} size="1rem" />
+            <Text c={color} component="span" fz="sm" mx="0.25rem">
+                {valuePrinted}
+            </Text>
+            <MetricCardTextMuted {...props}>{children}</MetricCardTextMuted>
+        </Flex>
     )
 }

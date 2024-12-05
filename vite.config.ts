@@ -28,14 +28,17 @@ export default defineConfig({
                         '@mantine/modals'
                     ],
                     recharts: ['recharts'],
-                    dnd: ['@hello-pangea/dnd']
+                    dnd: ['@hello-pangea/dnd'],
+                    mantinetable: ['mantine-react-table'],
+                    tanstack: ['@tanstack/react-query', '@tanstack/react-table']
                 }
             }
         }
     },
     define: {
         __DOMAIN_BACKEND__: JSON.stringify(process.env.DOMAIN_BACKEND || 'example.com').trim(),
-        __NODE_ENV__: JSON.stringify(process.env.NODE_ENV).trim()
+        __NODE_ENV__: JSON.stringify(process.env.NODE_ENV).trim(),
+        __DOMAIN_OVERRIDE__: JSON.stringify(process.env.DOMAIN_OVERRIDE || '0').trim()
     },
     server: {
         host: '0.0.0.0',
