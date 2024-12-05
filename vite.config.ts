@@ -1,15 +1,26 @@
 /* eslint-disable indent */
+import removeConsole from 'vite-plugin-remove-console'
 import { visualizer } from 'rollup-plugin-visualizer'
 import { defineConfig, PluginOption } from 'vite'
 import tsconfigPaths from 'vite-tsconfig-paths'
 import { fileURLToPath, URL } from 'node:url'
 import react from '@vitejs/plugin-react-swc'
+// import deadFile from 'vite-plugin-deadfile'
 import * as dotenv from 'dotenv'
 
 dotenv.config({ path: `${__dirname}/.env` })
 
 export default defineConfig({
-    plugins: [react(), visualizer() as PluginOption, tsconfigPaths()],
+    plugins: [
+        react(),
+        visualizer() as PluginOption,
+        tsconfigPaths(),
+        removeConsole()
+        // deadFile({
+        //     include: ['src/**/*.{js,jsx,ts,tsx}'],
+        //     exclude: ['node_modules/**', /\.md$/i, 'public/**', 'dist/**', '.git/**', '.vscode/**']
+        // })
+    ],
     build: {
         target: 'esNext',
         outDir: 'dist',

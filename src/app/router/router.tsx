@@ -5,20 +5,20 @@ import {
     Route,
     RouterProvider
 } from 'react-router-dom'
+import { NotFoundPageComponent } from '@pages/not-found'
 
-import { StatisticNodesConnector } from '@pages/dashboard/statistic-nodes/connectors/statistic-nodes.connector'
-import { ConfigPageConnector } from '@pages/dashboard/config/ui/connectors/config.page.connector'
-import { HostsPageConnector } from '@/pages/dashboard/hosts/ui/connectors/hosts.page.connector'
-import { UsersPageConnector } from '@/pages/dashboard/users/ui/connectors/users.page.connector'
-import { NodesPageConnector } from '@pages/dashboard/nodes/ui/connectors/nodes.page.connector'
-import { HomePageConnector } from '@pages/dashboard/home/connectors/home.page.connector'
-import { ErrorBoundaryHoc } from '@/shared/hocs/error-boundary/error-boundary-hoc'
-import { NotFoundPageComponent } from '@pages/not-found/not-found-page.component'
-import { ErrorPageComponent } from '@pages/error/error-page.component'
+import { StatisticNodesConnector } from '@pages/dashboard/statistic-nodes/connectors'
+import { ConfigPageConnector } from '@pages/dashboard/config/ui/connectors'
+import { HostsPageConnector } from '@/pages/dashboard/hosts/ui/connectors'
+import { UsersPageConnector } from '@/pages/dashboard/users/ui/connectors'
+import { NodesPageConnector } from '@pages/dashboard/nodes/ui/connectors'
+import { HomePageConnector } from '@pages/dashboard/home/connectors'
+import { ErrorBoundaryHoc } from '@/shared/hocs/error-boundary'
 import { AuthGuard } from '@/shared/hocs/guards/auth-guard'
 import { DashboardLayout } from '@/app/layouts/dashboard'
-import { LoginPage } from '@/pages/auth/login/login.page'
+import { ErrorPageComponent } from '@pages/error'
 import { AuthLayout } from '@/app/layouts/auth'
+import { LoginPage } from '@pages/auth/login'
 
 import { ROUTES } from '../../shared/constants'
 

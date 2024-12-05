@@ -1,7 +1,6 @@
 /* eslint-disable camelcase */
 import { GetAllUsersV2Command } from '@remnawave/backend-contract'
 import { MRT_TableInstance } from 'mantine-react-table'
-import { table } from 'console'
 
 export interface IProps {
     isLoading: boolean
