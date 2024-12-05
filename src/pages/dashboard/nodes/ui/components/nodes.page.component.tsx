@@ -1,4 +1,3 @@
-import cuid2 from '@paralleldrive/cuid2'
 import { Grid } from '@mantine/core'
 
 import { useNodesStoreIsNodesLoading } from '@entitites/dashboard/nodes/nodes-store/nodes-store'

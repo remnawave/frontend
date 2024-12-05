@@ -66,7 +66,7 @@ export const UserActionGroupFeature = (props: IProps) => {
                 size="xs"
                 variant="default"
             >
-                Create new user
+                New user
             </Button>
         </Group>
     )

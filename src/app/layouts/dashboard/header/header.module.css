@@ -28,3 +28,8 @@
         display: none;
     }
 }
+
+.logoWrapper {
+    padding: var(--mantine-spacing-xl) var(--mantine-spacing-xl);
+    margin-bottom: var(--mantine-spacing-md);
+}

@@ -1,6 +1,7 @@
 import {
     PiBookmarksDuotone,
     PiComputerTowerDuotone,
+    PiCookie,
     PiGearDuotone,
     PiStarDuotone,
     PiUsersDuotone
@@ -27,7 +28,8 @@ export const menu: MenuItem[] = [
             { name: 'Users', href: ROUTES.DASHBOARD.USERS, icon: PiUsersDuotone },
             { name: 'Hosts', href: ROUTES.DASHBOARD.HOSTS, icon: PiBookmarksDuotone },
             { name: 'Nodes', href: ROUTES.DASHBOARD.NODES, icon: PiComputerTowerDuotone },
-            { name: 'Config', href: ROUTES.DASHBOARD.CONFIG, icon: PiGearDuotone }
+            { name: 'Config', href: ROUTES.DASHBOARD.CONFIG, icon: PiGearDuotone },
+            { name: 'API Keys', href: ROUTES.DASHBOARD.CONFIG, icon: PiCookie }
         ]
     },
     {

@@ -1,4 +1,3 @@
-export * from './color-scheme-toggler'
 export * from './loading-screen'
 export * from './logo'
 export * from './page'

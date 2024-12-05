@@ -7,7 +7,6 @@ import {
     MRT_SortingState,
     useMantineReactTable
 } from 'mantine-react-table'
-import { useInterval } from '@mantine/hooks'
 import { useState } from 'react'
 
 import { UserActionGroupFeature } from '@features/dashboard/users/users-action-group/action-group.feature'

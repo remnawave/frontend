@@ -53,90 +53,77 @@ export function NodeCardWidget(props: IProps) {
     }
 
     return (
-        <>
-            <UnstyledButton onClick={handleViewNode} w={'100%'}>
-                <Container
-                    className={clsx(classes.item, { [classes.itemHover]: hovered })}
-                    fluid
-                    ref={ref}
-                >
-                    <Group gap="xs">
-                        <NodeStatusBadgeWidget node={node} style={{ cursor: 'pointer' }} />
+        <UnstyledButton onClick={handleViewNode} w={'100%'}>
+            <Container
+                className={clsx(classes.item, { [classes.itemHover]: hovered })}
+                fluid
+                ref={ref}
+            >
+                <Group gap="xs" grow preventGrowOverflow={false}>
+                    <NodeStatusBadgeWidget node={node} style={{ cursor: 'pointer' }} />
 
-                        <Badge
-                            autoContrast
-                            color={ch.hex(node.uuid)}
-                            miw={'15ch'}
+                    <Badge
+                        autoContrast
+                        color={ch.hex(node.uuid)}
+                        miw={'15ch'}
+                        radius="md"
+                        size="lg"
+                        style={{ cursor: 'pointer' }}
+                        variant="light"
+                    >
+                        {node.name}
+                    </Badge>
+                    <Text
+                        className={classes.hostInfoLabel}
+                        maw={'22ch'}
+                        miw={'22ch'}
+                        onClick={handleCopy}
+                        style={{ cursor: 'copy' }}
+                        truncate="end"
+                    >
+                        {node.address}
+                        {node.port ? `:${node.port}` : ''}
+                    </Text>
+
+                    <Badge
+                        autoContrast
+                        color={'gray'}
+                        ff={'monospace'}
+                        miw={'15ch'}
+                        radius="md"
+                        size="lg"
+                        style={{ cursor: 'pointer' }}
+                        variant="outline"
+                    >
+                        {`${prettyUsedData} / ${maxData}`}
+                    </Badge>
+
+                    {percentage >= 0 && node.isTrafficTrackingActive && (
+                        <Progress
+                            color={percentage > 95 ? 'red.9' : 'green.9'}
                             radius="md"
-                            size="lg"
-                            style={{ cursor: 'pointer' }}
-                            variant="light"
-                        >
-                            {node.name}
-                        </Badge>
-                        <Text
-                            className={classes.hostInfoLabel}
-                            maw={'22ch'}
-                            miw={'22ch'}
-                            onClick={handleCopy}
-                            style={{ cursor: 'copy' }}
-                            truncate="end"
-                        >
-                            {node.address}
-                            {node.port ? `:${node.port}` : ''}
-                        </Text>
+                            size="25"
+                            striped
+                            value={percentage}
+                            w={'10ch'}
+                        />
+                    )}
 
+                    {node.isTrafficTrackingActive && (
                         <Badge
-                            autoContrast
-                            color={'gray'}
-                            miw={'7ch'}
+                            color="gray"
+                            leftSection={<PiArrowsCounterClockwise size={18} />}
+                            maw={'20ch'}
                             radius="md"
                             size="lg"
                             style={{ cursor: 'pointer' }}
                             variant="outline"
                         >
-                            {node.xrayVersion ?? '-'}
+                            {getNodeResetDaysUtil(node.trafficResetDay ?? 1)}
                         </Badge>
-
-                        <Badge
-                            autoContrast
-                            color={'gray'}
-                            ff={'monospace'}
-                            miw={'15ch'}
-                            radius="md"
-                            size="lg"
-                            style={{ cursor: 'pointer' }}
-                            variant="outline"
-                        >
-                            {`${prettyUsedData} / ${maxData}`}
-                        </Badge>
-
-                        {percentage >= 0 && node.isTrafficTrackingActive && (
-                            <Progress
-                                color={percentage > 95 ? 'red.9' : 'green.9'}
-                                radius="md"
-                                size="25"
-                                striped
-                                value={percentage}
-                                w={'10ch'}
-                            />
-                        )}
-
-                        {node.isTrafficTrackingActive && (
-                            <Badge
-                                color="gray"
-                                leftSection={<PiArrowsCounterClockwise size={18} />}
-                                radius="md"
-                                size="lg"
-                                style={{ cursor: 'pointer' }}
-                                variant="outline"
-                            >
-                                {getNodeResetDaysUtil(node.trafficResetDay ?? 1)}
-                            </Badge>
-                        )}
-                    </Group>
-                </Container>
-            </UnstyledButton>
-        </>
+                    )}
+                </Group>
+            </Container>
+        </UnstyledButton>
     )
 }

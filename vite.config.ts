@@ -24,7 +24,7 @@ export default defineConfig({
                 name: 'Remnawave',
                 short_name: 'Remnawave',
                 description: 'Remnawave Dashboard',
-                theme_color: '#151B22',
+                theme_color: '#161B23',
                 icons: [
                     {
                         src: 'pwa-64x64.png',

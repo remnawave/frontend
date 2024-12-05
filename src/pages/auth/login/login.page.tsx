@@ -11,17 +11,17 @@ export const LoginPage = () => {
         <Page title="Login">
             <Stack align="center" gap="xl">
                 <Group align="center" justify="center">
-                    <Logo c="red" size="2.5rem" />
+                    <Logo c="cyan" w="3rem" />
                     <Title order={1}>
                         <Text component="span" fw="inherit" fz="inherit" pos="relative">
                             Remnawave
                             <UnderlineShape
                                 bottom="-1rem"
-                                c="red"
+                                c="cyan"
                                 h="0.625rem"
                                 left="0"
                                 pos="absolute"
-                                w="7rem"
+                                w="7.852rem"
                             />
                         </Text>
                     </Title>
