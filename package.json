@@ -15,7 +15,8 @@
     "lint:eslint": "eslint . --ext .ts,.tsx --cache",
     "lint:stylelint": "stylelint '**/*.css' --cache",
     "prettier": "prettier --check \"**/*.{ts,tsx}\"",
-    "prettier:write": "prettier --write \"**/*.{ts,tsx}\""
+    "prettier:write": "prettier --write \"**/*.{ts,tsx}\"",
+    "generate-pwa-assets": "pwa-assets-generator --preset minimal-2023 public/logo.svg"
   },
   "dependencies": {
     "@hello-pangea/dnd": "^17.0.0",
@@ -73,6 +74,7 @@
     "@types/react-dom": "^18.3.0",
     "@typescript-eslint/eslint-plugin": "^7.0.2",
     "@typescript-eslint/parser": "^7.0.2",
+    "@vite-pwa/assets-generator": "^0.2.6",
     "@vitejs/plugin-react": "^4.3.1",
     "@vitejs/plugin-react-swc": "^3.7.0",
     "cross-env": "^7.0.3",
@@ -101,6 +103,7 @@
     "vite": "6.0.1",
     "vite-plugin-javascript-obfuscator": "^3.1.0",
     "vite-plugin-preload": "^0.4.0",
+    "vite-plugin-pwa": "^0.21.1",
     "vite-plugin-remove-console": "^2.2.0",
     "vite-plugin-wasm": "^3.3.0",
     "vite-plugin-webfont-dl": "^3.9.4",

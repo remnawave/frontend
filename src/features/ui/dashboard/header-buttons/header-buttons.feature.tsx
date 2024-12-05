@@ -23,16 +23,6 @@ export const HeaderButtons = () => {
 
     return (
         <Menu>
-            <Image
-                color="greem"
-                h="2.6rem"
-                onClick={() => window.open(app.githubOrg, '_blank')}
-                radius="lg"
-                src="https://img.shields.io/github/stars/remnawave?style=for-the-badge&logo=github&logoColor=fffff&label=Stars&labelColor=21262d&color=30363d&cacheSeconds=1"
-                style={{ cursor: 'pointer' }}
-                w={'auto'}
-            />
-
             <Button leftSection={<PiSignOutDuotone size="1rem" />} onClick={handleLogout} size="md">
                 Logout
             </Button>
