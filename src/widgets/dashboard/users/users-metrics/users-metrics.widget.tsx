@@ -7,9 +7,9 @@ import {
 } from 'react-icons/pi'
 import { Group, Loader, SimpleGrid } from '@mantine/core'
 
-import { MetricCard } from '@/shared/ui/metrics/metric-card'
-import { useGetSystemStats } from '@/shared/api/hooks'
-import { formatInt } from '@/shared/utils/number'
+import { MetricCard } from '@shared/ui/metrics/metric-card'
+import { useGetSystemStats } from '@shared/api/hooks'
+import { formatInt } from '@shared/utils/number'
 
 export function UsersMetrics() {
     const { data: systemInfo, isLoading } = useGetSystemStats()

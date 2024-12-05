@@ -14,7 +14,6 @@ dotenv.config({ path: `${__dirname}/.env` })
 export default defineConfig({
     plugins: [
         react(),
-        visualizer() as PluginOption,
         tsconfigPaths(),
         removeConsole(),
         VitePWA({
@@ -55,7 +54,8 @@ export default defineConfig({
                     }
                 ]
             }
-        })
+        }),
+        visualizer() as PluginOption
 
         // deadFile({
         //     include: ['src/**/*.{js,jsx,ts,tsx}'],
@@ -79,6 +79,8 @@ export default defineConfig({
                         '@mantine/notifications',
                         '@mantine/modals'
                     ],
+                    motion: ['framer-motion'],
+                    crypto: ['crypto-js'],
                     recharts: ['recharts'],
                     dnd: ['@hello-pangea/dnd'],
                     mantinetable: ['mantine-react-table'],
@@ -100,11 +102,10 @@ export default defineConfig({
     },
     resolve: {
         alias: {
-            '@entitites': fileURLToPath(new URL('./src/entitites', import.meta.url)),
+            '@entities': fileURLToPath(new URL('./src/entities', import.meta.url)),
             '@features': fileURLToPath(new URL('./src/features', import.meta.url)),
             '@pages': fileURLToPath(new URL('./src/pages', import.meta.url)),
             '@widgets': fileURLToPath(new URL('./src/widgets', import.meta.url)),
-            '@': fileURLToPath(new URL('./src', import.meta.url)),
             '@public': fileURLToPath(new URL('./public', import.meta.url)),
             '@shared': fileURLToPath(new URL('./src/shared', import.meta.url))
         }

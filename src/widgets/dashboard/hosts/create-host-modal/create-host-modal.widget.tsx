@@ -19,10 +19,10 @@ import consola from 'consola/browser'
 import { useState } from 'react'
 import { z } from 'zod'
 
-import { useHostsStoreActions, useHostsStoreCreateModalIsOpen } from '@entitites/dashboard'
-import { useDSInbounds } from '@/entitites/dashboard/dashboard-store/dashboard-store'
+import { useHostsStoreActions, useHostsStoreCreateModalIsOpen } from '@entities/dashboard'
+import { useDSInbounds } from '@entities/dashboard/dashboard-store/dashboard-store'
 import { DeleteHostFeature } from '@features/ui/dashboard/hosts/delete-host'
-import { handleFormErrors } from '@/shared/utils'
+import { handleFormErrors } from '@shared/utils'
 
 import { RemarkInfoPopoverWidget } from '../popovers/remark-info/remark-info.widget'
 

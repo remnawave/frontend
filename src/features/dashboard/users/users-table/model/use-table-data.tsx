@@ -1,8 +1,8 @@
 import { keepPreviousData, useQuery } from '@tanstack/react-query'
 import { GetAllUsersV2Command } from '@remnawave/backend-contract'
 
-import { useDashboardStoreActions } from '@entitites/dashboard/dashboard-store/dashboard-store'
-import { sToMs } from '@/shared/utils/time-utils'
+import { useDashboardStoreActions } from '@entities/dashboard/dashboard-store/dashboard-store'
+import { sToMs } from '@shared/utils/time-utils'
 
 import { TableParams } from './interfaces'
 

@@ -1,12 +1,12 @@
 import { Grid } from '@mantine/core'
 
-import { CreateUserModalWidget } from '@/widgets/dashboard/users/create-user-modal'
-import { BREADCRUMBS } from '@/pages/dashboard/users/ui/components/constants'
-import { ViewUserModal } from '@/widgets/dashboard/users/view-user-modal'
-import { UserTableWidget } from '@/widgets/dashboard/users/users-table'
-import { UsersMetrics } from '@/widgets/dashboard/users/users-metrics'
-import { PageHeader } from '@/shared/ui/page-header'
-import { Page } from '@/shared/ui/page'
+import { CreateUserModalWidget } from '@widgets/dashboard/users/create-user-modal'
+import { BREADCRUMBS } from '@pages/dashboard/users/ui/components/constants'
+import { ViewUserModal } from '@widgets/dashboard/users/view-user-modal'
+import { UserTableWidget } from '@widgets/dashboard/users/users-table'
+import { UsersMetrics } from '@widgets/dashboard/users/users-metrics'
+import { PageHeader } from '@shared/ui/page-header'
+import { Page } from '@shared/ui/page'
 
 export default function UsersPageComponent() {
     return (

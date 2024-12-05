@@ -1,7 +1,7 @@
 import { Stack, Text } from '@mantine/core'
 
-import { UserStatusBadge } from '@/widgets/dashboard/users/user-status-badge'
-import { getExpirationTextUtil } from '@/shared/utils/time-utils'
+import { UserStatusBadge } from '@widgets/dashboard/users/user-status-badge'
+import { getExpirationTextUtil } from '@shared/utils/time-utils'
 
 import { IProps } from './interface'
 

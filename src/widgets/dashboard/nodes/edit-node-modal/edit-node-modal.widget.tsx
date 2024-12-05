@@ -17,6 +17,12 @@ import {
     TextInput
 } from '@mantine/core'
 import {
+    useNodesStoreActions,
+    useNodesStoreEditModalIsOpen,
+    useNodesStoreEditModalNode,
+    useNodesStorePubKey
+} from '@entities/dashboard/nodes'
+import {
     PiCheck,
     PiCheckDuotone,
     PiCopy,
@@ -34,16 +40,10 @@ import consola from 'consola/browser'
 import { wrap } from 'module'
 import { z } from 'zod'
 
-import {
-    useNodesStoreActions,
-    useNodesStoreEditModalIsOpen,
-    useNodesStoreEditModalNode,
-    useNodesStorePubKey
-} from '@entitites/dashboard/nodes'
 import { ToggleNodeStatusButtonFeature } from '@features/ui/dashboard/nodes/toggle-node-status-button'
 import { DeleteNodeFeature } from '@features/ui/dashboard/nodes/delete-node'
-import { bytesToGbUtil, gbToBytesUtil } from '@/shared/utils/bytes'
-import { handleFormErrors } from '@/shared/utils'
+import { bytesToGbUtil, gbToBytesUtil } from '@shared/utils/bytes'
+import { handleFormErrors } from '@shared/utils'
 
 import { NodeStatusBadgeWidget } from '../node-status-badge'
 

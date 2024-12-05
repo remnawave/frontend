@@ -1,7 +1,7 @@
 import { Box, Group, Stack, Text, Title } from '@mantine/core'
 
 import { UnderlineShape } from '@shared/ui/underline-shape'
-import { Logo } from '@/shared/ui/logo'
+import { Logo } from '@shared/ui/logo'
 import { Page } from '@shared/ui/page'
 
 import { LoginForm } from '../../../features/auth'

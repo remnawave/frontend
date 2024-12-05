@@ -3,7 +3,7 @@ import { notifications } from '@mantine/notifications'
 import { Button } from '@mantine/core'
 import { useState } from 'react'
 
-import { useNodesStoreActions, useNodesStoreEditModalNode } from '@entitites/dashboard/nodes'
+import { useNodesStoreActions, useNodesStoreEditModalNode } from '@entities/dashboard/nodes'
 
 import { IProps } from './interfaces'
 

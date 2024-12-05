@@ -4,7 +4,7 @@ import { DataTableSortStatus } from 'mantine-datatable'
 import { useDebouncedValue } from '@mantine/hooks'
 import { useMemo, useState } from 'react'
 
-import { isDefined } from '@/shared/utils/is'
+import { isDefined } from '@shared/utils/is'
 
 import { DataTableFilter } from './data-table-filters'
 import { DataTableTabsProps } from './data-table-tabs'

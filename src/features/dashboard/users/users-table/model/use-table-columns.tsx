@@ -4,11 +4,11 @@ import { MRT_ColumnDef } from 'mantine-react-table'
 import { useMemo } from 'react'
 import dayjs from 'dayjs'
 
-import { ShortUuidColumnEntity } from '@entitites/dashboard/users/ui/table-columns/short-uuid'
-import { UsernameColumnEntity } from '@entitites/dashboard/users/ui/table-columns/username'
-import { StatusColumnEntity } from '@entitites/dashboard/users/ui/table-columns/status'
-import { DataUsageColumnEntity } from '@entitites/dashboard/users/ui'
-import { prettyBytesToAnyUtil } from '@/shared/utils/bytes'
+import { ShortUuidColumnEntity } from '@entities/dashboard/users/ui/table-columns/short-uuid'
+import { UsernameColumnEntity } from '@entities/dashboard/users/ui/table-columns/username'
+import { StatusColumnEntity } from '@entities/dashboard/users/ui/table-columns/status'
+import { DataUsageColumnEntity } from '@entities/dashboard/users/ui'
+import { prettyBytesToAnyUtil } from '@shared/utils/bytes'
 
 export const useUserTableColumns = () => {
     return useMemo<MRT_ColumnDef<GetAllUsersV2Command.Response['response']['users'][0]>[]>(

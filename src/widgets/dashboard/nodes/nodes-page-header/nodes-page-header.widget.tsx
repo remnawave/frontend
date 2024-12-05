@@ -1,5 +1,5 @@
 import { NodesHeaderActionButtonsFeature } from '@features/ui/dashboard/nodes/nodes-header-action-buttons'
-import { DataTableShared } from '@/shared/ui/table'
+import { DataTableShared } from '@shared/ui/table'
 
 import { IProps } from './interfaces'
 

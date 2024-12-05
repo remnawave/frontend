@@ -10,9 +10,8 @@ module.exports = {
         'prettier'
     ],
     ignorePatterns: ['dist', '.eslintrc.cjs', 'plop', 'plop/**', 'plopfile.js', '.stylelintrc.js'],
-    parser: '@typescript-eslint/parser',
     plugins: ['react-refresh', 'import'],
-
+    parser: '@typescript-eslint/parser',
     settings: {
         'import/parsers': {
             '@typescript-eslint/parser': ['.ts', '.tsx']

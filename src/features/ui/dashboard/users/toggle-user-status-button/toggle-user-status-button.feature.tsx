@@ -2,7 +2,7 @@ import { PiCellSignalFullDuotone, PiCellSignalSlashDuotone, PiTrashDuotone } fro
 import { USERS_STATUS } from '@remnawave/backend-contract'
 import { Button } from '@mantine/core'
 
-import { useDisableUser, useEnableUser, useInvalidateUsersTSQ } from '@/shared/api/hooks'
+import { useDisableUser, useEnableUser, useInvalidateUsersTSQ } from '@shared/api/hooks'
 
 import { IProps } from './interfaces'
 

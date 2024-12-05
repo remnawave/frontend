@@ -3,7 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { nprogress } from '@mantine/nprogress'
 import { Box, BoxProps } from '@mantine/core'
 
-import { app } from '@/config'
+import { app } from 'src/config'
 
 interface PageProps extends BoxProps {
     children: ReactNode

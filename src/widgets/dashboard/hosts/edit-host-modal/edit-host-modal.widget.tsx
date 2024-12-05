@@ -23,10 +23,10 @@ import {
     useHostsStoreActions,
     useHostsStoreEditModalHost,
     useHostsStoreEditModalIsOpen
-} from '@entitites/dashboard'
-import { useDSInbounds } from '@/entitites/dashboard/dashboard-store/dashboard-store'
+} from '@entities/dashboard'
+import { useDSInbounds } from '@entities/dashboard/dashboard-store/dashboard-store'
 import { DeleteHostFeature } from '@features/ui/dashboard/hosts/delete-host'
-import { handleFormErrors } from '@/shared/utils'
+import { handleFormErrors } from '@shared/utils'
 
 import { RemarkInfoPopoverWidget } from '../popovers/remark-info/remark-info.widget'
 

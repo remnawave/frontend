@@ -7,7 +7,7 @@ import {
     TextProps
 } from '@mantine/core'
 
-import { match } from '@/shared/utils/match'
+import { match } from '@shared/utils/match'
 
 interface MetricRingProgressProps
     extends ElementProps<'div', keyof RingProgressProps>,

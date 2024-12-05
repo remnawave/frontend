@@ -36,8 +36,8 @@
     /* ------------------------------------------------------------ */
     "baseUrl": ".",
     "paths": {
-      "@entitites/*": [
-        "./src/entitites/*"
+      "@entities/*": [
+        "./src/entities/*"
       ],
       "@features/*": [
         "./src/features/*"
@@ -47,9 +47,6 @@
       ],
       "@widgets/*": [
         "./src/widgets/*"
-      ],
-      "@/*": [
-        "./src/*"
       ],
       "@public/*": [
         "./public/*"

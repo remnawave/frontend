@@ -5,8 +5,8 @@ import ColorHash from 'color-hash'
 import { useState } from 'react'
 import cx from 'clsx'
 
-import { useHostsStoreActions, useHostsStoreSelectedInboundTag } from '@entitites/dashboard'
-import { useDSInboundsHashMap } from '@entitites/dashboard/dashboard-store/dashboard-store'
+import { useHostsStoreActions, useHostsStoreSelectedInboundTag } from '@entities/dashboard'
+import { useDSInboundsHashMap } from '@entities/dashboard/dashboard-store/dashboard-store'
 
 import classes from './HostCard.module.css'
 import { IProps } from './interfaces'

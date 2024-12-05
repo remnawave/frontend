@@ -2,7 +2,7 @@ import { PiCheckSquareOffset, PiFloppyDisk } from 'react-icons/pi'
 import { notifications } from '@mantine/notifications'
 import { Button, Group } from '@mantine/core'
 
-import { useConfigStoreActions } from '@entitites/dashboard/config/config-store'
+import { useConfigStoreActions } from '@entities/dashboard/config/config-store'
 
 import { Props } from './interfaces'
 

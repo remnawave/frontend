@@ -3,10 +3,10 @@ import { useEffect } from 'react'
 import {
     useUserModalStoreActions,
     useUserModalStoreIsModalOpen
-} from '@entitites/dashboard/user-modal-store/user-modal-store'
-import { useUserCreationModalStoreIsModalOpen } from '@entitites/dashboard/user-creation-modal-store/user-creation-modal-store'
-import { useDashboardStoreActions } from '@entitites/dashboard/dashboard-store/dashboard-store'
-import { queryClient } from '@/shared/api'
+} from '@entities/dashboard/user-modal-store/user-modal-store'
+import { useUserCreationModalStoreIsModalOpen } from '@entities/dashboard/user-creation-modal-store/user-creation-modal-store'
+import { useDashboardStoreActions } from '@entities/dashboard/dashboard-store/dashboard-store'
+import { queryClient } from '@shared/api'
 
 import UsersPageComponent from '../components/users.page.component'
 

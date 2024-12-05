@@ -7,8 +7,8 @@ import {
 import { devtools } from 'zustand/middleware'
 import { AxiosError } from 'axios'
 
-import { IInboundsHashMap } from '@/entitites/dashboard/dashboard-store/interfaces/inbounds-hash-map.interface'
-import { getUserTimezoneUtil } from '@/shared/utils/time-utils'
+import { IInboundsHashMap } from '@entities/dashboard/dashboard-store/interfaces/inbounds-hash-map.interface'
+import { getUserTimezoneUtil } from '@shared/utils/time-utils'
 import { create } from '@shared/hocs/store-wrapper'
 import { instance } from '@shared/api'
 

@@ -5,7 +5,7 @@ import { Box, Code, Paper } from '@mantine/core'
 import { ConfigEditorActionsFeature } from '@features/dashboard/config/config-editor-actions'
 import { ConfigValidationFeature } from '@features/dashboard/config/config-validation'
 import { MonacoSetupFeature } from '@features/dashboard/config/monaco-setup'
-import { monacoTheme } from '@/shared/utils/monaco-theme/monaco-theme'
+import { monacoTheme } from '@shared/utils/monaco-theme/monaco-theme'
 
 import { Props } from './interfaces'
 

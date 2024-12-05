@@ -3,7 +3,7 @@
 import { PiArrowsClockwise, PiPlus } from 'react-icons/pi'
 import { Button, Group } from '@mantine/core'
 
-import { useUserCreationModalStoreActions } from '@entitites/dashboard/user-creation-modal-store'
+import { useUserCreationModalStoreActions } from '@entities/dashboard/user-creation-modal-store'
 
 import { IProps } from './interfaces'
 

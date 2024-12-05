@@ -1,7 +1,7 @@
 /* eslint-disable indent */
 import { DataTable as MantineDataTable } from 'mantine-datatable'
 
-import { capitalize } from '@/shared/utils/text'
+import { capitalize } from '@shared/utils/text'
 
 import { DataTableTextInputFilter } from './data-table-text-input-filter'
 import { DataTableContainer } from './data-table-container'

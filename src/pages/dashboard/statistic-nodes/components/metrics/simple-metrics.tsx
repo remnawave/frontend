@@ -2,7 +2,7 @@ import { PiChartBarDuotone, PiClockDuotone, PiMemoryDuotone } from 'react-icons/
 import { GetStatsCommand } from '@remnawave/backend-contract'
 import dayjs from 'dayjs'
 
-import { prettyBytesUtil } from '@/shared/utils/bytes'
+import { prettyBytesUtil } from '@shared/utils/bytes'
 
 export const getSimpleMetrics = (systemInfo: GetStatsCommand.Response['response']) => {
     const { memory, users } = systemInfo

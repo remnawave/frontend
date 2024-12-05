@@ -4,7 +4,7 @@ import {
     GetStatsCommand
 } from '@remnawave/backend-contract'
 
-import { IInboundsHashMap } from '@/entitites/dashboard/dashboard-store/interfaces/inbounds-hash-map.interface'
+import { IInboundsHashMap } from '@entities/dashboard/dashboard-store/interfaces/inbounds-hash-map.interface'
 
 export interface IState {
     bandwidthStats: GetBandwidthStatsCommand.Response['response'] | null

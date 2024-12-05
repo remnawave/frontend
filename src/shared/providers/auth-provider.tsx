@@ -1,7 +1,7 @@
 import { createContext, ReactNode, useEffect, useMemo, useState } from 'react'
 
-import { useDashboardStoreActions } from '../../entitites/dashboard/dashboard-store/dashboard-store'
-import { removeToken, useToken } from '../../entitites/auth'
+import { useDashboardStoreActions } from '../../entities/dashboard/dashboard-store/dashboard-store'
+import { removeToken, useToken } from '../../entities/auth'
 import { resetAllStores } from '../hocs/store-wrapper'
 import { clearQueryClient } from '../api/query-client'
 import { logoutEvents } from '../emitters'

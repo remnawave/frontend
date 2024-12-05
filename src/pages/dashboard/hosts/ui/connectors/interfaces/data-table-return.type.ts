@@ -1,7 +1,7 @@
 import { DataTableSortStatus } from 'mantine-datatable'
 
-import { DataTableFilter } from '@/shared/ui/stuff/data-table/data-table-filters'
-import { DataTableTabsProps } from '@/shared/ui/stuff/data-table/data-table-tabs'
+import { DataTableFilter } from '@shared/ui/stuff/data-table/data-table-filters'
+import { DataTableTabsProps } from '@shared/ui/stuff/data-table/data-table-tabs'
 
 export type DataTableReturn<SortableFields> = {
     readonly filters: {

@@ -1,8 +1,8 @@
 import { RESET_PERIODS } from '@remnawave/backend-contract'
 import { Box, Group, Progress, Text } from '@mantine/core'
 
-import { IProps } from '@/entitites/dashboard/users/ui/table-columns/username/interface'
-import { prettyBytesUtil } from '@/shared/utils/bytes'
+import { IProps } from '@entities/dashboard/users/ui/table-columns/username/interface'
+import { prettyBytesUtil } from '@shared/utils/bytes'
 
 export function DataUsageColumnEntity(props: IProps) {
     const { user } = props

@@ -14,15 +14,14 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { QueryClientProvider } from '@tanstack/react-query'
 import { NavigationProgress } from '@mantine/nprogress'
 import { Notifications } from '@mantine/notifications'
-import { ModalsProvider } from '@mantine/modals'
 import { MantineProvider } from '@mantine/core'
 import { useMediaQuery } from '@mantine/hooks'
-import { StrictMode } from 'react'
 
-import { AuthProvider } from '@/shared/providers/auth-provider'
-import { Router } from '@/app/router/router'
-import { theme } from '@/shared/theme'
+// import { StrictMode } from 'react'
+import { AuthProvider } from '@shared/providers/auth-provider'
+import { theme } from '@shared/theme'
 
+import { Router } from './app/router/router'
 import { queryClient } from './shared/api'
 
 export function App() {

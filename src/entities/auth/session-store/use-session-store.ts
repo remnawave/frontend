@@ -1,7 +1,7 @@
 import { createJSONStorage, devtools, persist } from 'zustand/middleware'
 import { create } from 'zustand'
 
-import { setAuthorizationToken } from '@/shared/api'
+import { setAuthorizationToken } from '@shared/api'
 
 import { IActions, ISetTokenAction, IState } from './interfaces'
 

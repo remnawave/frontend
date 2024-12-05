@@ -1,6 +1,6 @@
-import { useGetBandwidthStats, useGetSystemStats } from '@/shared/api/hooks'
-import { HomePage } from '@/pages/dashboard/home/components'
-import { LoadingScreen } from '@/shared/ui/loading-screen'
+import { useGetBandwidthStats, useGetSystemStats } from '@shared/api/hooks'
+import { HomePage } from '@pages/dashboard/home/components'
+import { LoadingScreen } from '@shared/ui/loading-screen'
 
 export const HomePageConnector = () => {
     const { data: systemInfo } = useGetSystemStats()

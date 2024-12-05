@@ -11,7 +11,7 @@ import {
 import { notifications } from '@mantine/notifications'
 import { useQueryClient } from '@tanstack/react-query'
 
-import { sToMs } from '@/shared/utils/time-utils'
+import { sToMs } from '@shared/utils/time-utils'
 
 import {
     createDeleteMutationHook,

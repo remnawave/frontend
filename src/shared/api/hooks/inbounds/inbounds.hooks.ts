@@ -2,7 +2,7 @@ import { GetInboundsCommand } from '@remnawave/backend-contract'
 import { keepPreviousData } from '@tanstack/react-query'
 import { notifications } from '@mantine/notifications'
 
-import { getUserTimezoneUtil, sToMs } from '@/shared/utils/time-utils'
+import { getUserTimezoneUtil, sToMs } from '@shared/utils/time-utils'
 
 import { createGetQueryHook } from '../../tsq-helpers'
 

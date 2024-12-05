@@ -3,7 +3,7 @@ import { Outlet } from 'react-router-dom'
 import { PiLink } from 'react-icons/pi'
 
 import { Logo } from '@shared/ui/logo'
-import { app } from '@/config'
+import { app } from 'src/config'
 
 import { SidebarLayout } from '../sidebar/sidebar.layout'
 import packageJson from '../../../../../package.json'

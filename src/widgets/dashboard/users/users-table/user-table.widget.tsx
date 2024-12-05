@@ -13,7 +13,7 @@ import { UserActionGroupFeature } from '@features/dashboard/users/users-action-g
 import { useUserTableColumns } from '@features/dashboard/users/users-table/model/use-table-columns'
 import { useUserTableData } from '@features/dashboard/users/users-table/model/use-table-data'
 import { ViewUserActionFeature } from '@features/ui/dashboard/users/view-user-action'
-import { DataTableShared } from '@/shared/ui/table'
+import { DataTableShared } from '@shared/ui/table'
 
 import { customIcons } from './constants'
 

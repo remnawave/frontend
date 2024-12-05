@@ -5,9 +5,9 @@ import { notifications } from '@mantine/notifications'
 import ColorHash from 'color-hash'
 import clsx from 'clsx'
 
-import { useNodesStoreActions } from '@entitites/dashboard/nodes'
-import { getNodeResetDaysUtil } from '@/shared/utils/time-utils'
-import { prettyBytesToAnyUtil } from '@/shared/utils/bytes'
+import { useNodesStoreActions } from '@entities/dashboard/nodes'
+import { getNodeResetDaysUtil } from '@shared/utils/time-utils'
+import { prettyBytesToAnyUtil } from '@shared/utils/bytes'
 
 import { NodeStatusBadgeWidget } from '../node-status-badge'
 import classes from './NodeCard.module.css'

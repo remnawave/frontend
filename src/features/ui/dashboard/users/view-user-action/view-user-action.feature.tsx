@@ -1,7 +1,7 @@
 import { Button, Group } from '@mantine/core'
 import { PiEyeDuotone } from 'react-icons/pi'
 
-import { useUserModalStoreActions } from '@/entitites/dashboard/user-modal-store/user-modal-store'
+import { useUserModalStoreActions } from '@entities/dashboard/user-modal-store/user-modal-store'
 
 import { IProps } from './interfaces'
 

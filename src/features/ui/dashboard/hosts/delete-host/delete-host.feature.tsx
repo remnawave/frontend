@@ -3,7 +3,7 @@ import { ActionIcon, Tooltip } from '@mantine/core'
 import { PiTrashDuotone } from 'react-icons/pi'
 import { useState } from 'react'
 
-import { useHostsStoreActions, useHostsStoreEditModalHost } from '@entitites/dashboard'
+import { useHostsStoreActions, useHostsStoreEditModalHost } from '@entities/dashboard'
 
 import { IProps } from './interfaces'
 

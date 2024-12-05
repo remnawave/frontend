@@ -8,7 +8,7 @@ import {
 } from 'react-icons/pi'
 import { GetStatsCommand } from '@remnawave/backend-contract'
 
-import { formatInt } from '@/shared/utils'
+import { formatInt } from '@shared/utils'
 
 export const getUsersMetrics = (users: GetStatsCommand.Response['response']['users']) => {
     return [

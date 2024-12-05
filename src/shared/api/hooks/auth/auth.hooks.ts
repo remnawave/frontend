@@ -1,7 +1,7 @@
 import { LoginCommand } from '@remnawave/backend-contract'
 import { notifications } from '@mantine/notifications'
 
-import { setToken } from '@entitites/auth/session-store'
+import { setToken } from '@entities/auth/session-store'
 
 import { createPostMutationHook } from '../../tsq-helpers'
 

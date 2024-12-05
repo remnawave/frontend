@@ -1,13 +1,12 @@
-import { Button, Image, Menu } from '@mantine/core'
 import { PiSignOutDuotone } from 'react-icons/pi'
 import { useNavigate } from 'react-router-dom'
+import { Button, Menu } from '@mantine/core'
+import { removeToken } from '@entities/auth'
 
-import { resetAllStores } from '@/shared/hocs/store-wrapper'
-import { clearQueryClient } from '@/shared/api'
-import { removeToken } from '@entitites/auth'
-import { ROUTES } from '@/shared/constants'
-import { useAuth } from '@/shared/hooks'
-import { app } from '@/config'
+import { resetAllStores } from '@shared/hocs/store-wrapper'
+import { clearQueryClient } from '@shared/api'
+import { ROUTES } from '@shared/constants'
+import { useAuth } from '@shared/hooks'
 
 export const HeaderButtons = () => {
     const { setIsAuthenticated } = useAuth()

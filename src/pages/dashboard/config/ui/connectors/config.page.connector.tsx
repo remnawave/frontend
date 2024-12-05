@@ -1,14 +1,14 @@
-import { useEffect, useState } from 'react'
-import { consola } from 'consola/browser'
-
 import {
     useConfigStoreActions,
     useConfigStoreConfig,
     useConfigStoreIsConfigLoading
-} from '@entitites/dashboard/config/config-store/config-store'
-import { fetchWithProgress } from '@/shared/utils/fetch-with-progress'
-import { LoadingScreen } from '@/shared/ui'
-import { app } from '@/config'
+} from '@entities/dashboard/config/config-store/config-store'
+import { useEffect, useState } from 'react'
+import { consola } from 'consola/browser'
+
+import { fetchWithProgress } from '@shared/utils/fetch-with-progress'
+import { LoadingScreen } from '@shared/ui'
+import { app } from 'src/config'
 
 import { ConfigPageComponent } from '../components/config.page.component'
 

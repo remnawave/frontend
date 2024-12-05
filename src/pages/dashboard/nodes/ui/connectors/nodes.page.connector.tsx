@@ -1,8 +1,8 @@
 import { useInterval } from '@mantine/hooks'
 import { useEffect } from 'react'
 
-import { useNodesStoreActions, useNodesStoreNodes } from '@entitites/dashboard/nodes/nodes-store'
-import { useDashboardStoreActions } from '@entitites/dashboard/dashboard-store/dashboard-store'
+import { useNodesStoreActions, useNodesStoreNodes } from '@entities/dashboard/nodes/nodes-store'
+import { useDashboardStoreActions } from '@entities/dashboard/dashboard-store/dashboard-store'
 
 import NodesPageComponent from '../components/nodes.page.component'
 

@@ -3,8 +3,8 @@ import cuid2, { createId } from '@paralleldrive/cuid2'
 import { useListState } from '@mantine/hooks'
 import { useEffect } from 'react'
 
-import { HostCardWidget } from '@/widgets/dashboard/hosts/host-card'
-import { useHostsStoreActions } from '@/entitites/dashboard'
+import { HostCardWidget } from '@widgets/dashboard/hosts/host-card'
+import { useHostsStoreActions } from '@entities/dashboard'
 
 import { IProps } from './interfaces'
 

@@ -9,18 +9,18 @@ import { NotFoundPageComponent } from '@pages/not-found'
 
 import { StatisticNodesConnector } from '@pages/dashboard/statistic-nodes/connectors'
 import { ConfigPageConnector } from '@pages/dashboard/config/ui/connectors'
-import { HostsPageConnector } from '@/pages/dashboard/hosts/ui/connectors'
-import { UsersPageConnector } from '@/pages/dashboard/users/ui/connectors'
+import { HostsPageConnector } from '@pages/dashboard/hosts/ui/connectors'
+import { UsersPageConnector } from '@pages/dashboard/users/ui/connectors'
 import { NodesPageConnector } from '@pages/dashboard/nodes/ui/connectors'
 import { HomePageConnector } from '@pages/dashboard/home/connectors'
-import { ErrorBoundaryHoc } from '@/shared/hocs/error-boundary'
-import { AuthGuard } from '@/shared/hocs/guards/auth-guard'
-import { AuthLayout } from '@/app/layouts/auth/auth.layout'
-import { DashboardLayout } from '@/app/layouts/dashboard'
+import { ErrorBoundaryHoc } from '@shared/hocs/error-boundary'
+import { AuthGuard } from '@shared/hocs/guards/auth-guard'
 import { ErrorPageComponent } from '@pages/error'
 import { LoginPage } from '@pages/auth/login'
 
+import { DashboardLayout } from '../layouts/dashboard'
 import { ROUTES } from '../../shared/constants'
+import { AuthLayout } from '../layouts/auth'
 
 const router = createBrowserRouter(
     createRoutesFromElements(

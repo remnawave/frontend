@@ -3,7 +3,7 @@ import { Button, Group, Select } from '@mantine/core'
 import consola from 'consola/browser'
 import { useState } from 'react'
 
-import { useHostsStoreActions, useHostsStoreSelectedInboundTag } from '@entitites/dashboard'
+import { useHostsStoreActions, useHostsStoreSelectedInboundTag } from '@entities/dashboard'
 
 import { IProps } from './interfaces'
 

@@ -1,8 +1,8 @@
 import { PiTrendDown, PiTrendUp } from 'react-icons/pi'
 import { Flex, Text } from '@mantine/core'
 
-import { formatPercentage } from '@/shared/utils/number'
-import { match } from '@/shared/utils/match'
+import { formatPercentage } from '@shared/utils/number'
+import { match } from '@shared/utils/match'
 
 import { MetricCardTextMuted, MetricCardTextMutedProps } from './metric-card-text-muted'
 

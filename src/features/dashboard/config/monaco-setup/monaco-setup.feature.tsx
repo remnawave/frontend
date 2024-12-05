@@ -2,7 +2,7 @@ import { Monaco } from '@monaco-editor/react'
 import { consola } from 'consola/browser'
 import axios from 'axios'
 
-import { app } from '@/config'
+import { app } from 'src/config'
 
 export const MonacoSetupFeature = {
     setup: async (monaco: Monaco) => {

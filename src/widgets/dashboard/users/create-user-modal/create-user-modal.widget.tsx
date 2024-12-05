@@ -25,11 +25,11 @@ import { useEffect } from 'react'
 import {
     useUserCreationModalStoreActions,
     useUserCreationModalStoreIsModalOpen
-} from '@/entitites/dashboard/user-creation-modal-store/user-creation-modal-store'
-import { useCreateUser, useGetInbounds } from '@/shared/api/hooks'
+} from '@entities/dashboard/user-creation-modal-store/user-creation-modal-store'
+import { useCreateUser, useGetInbounds } from '@shared/api/hooks'
 import { LoaderModalShared } from '@shared/ui/loader-modal'
-import { resetDataStrategy } from '@/shared/constants'
-import { gbToBytesUtil } from '@/shared/utils/bytes'
+import { resetDataStrategy } from '@shared/constants'
+import { gbToBytesUtil } from '@shared/utils/bytes'
 
 import { InboundCheckboxCardWidget } from '../inbound-checkbox-card'
 

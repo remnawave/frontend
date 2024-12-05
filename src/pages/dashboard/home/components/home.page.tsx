@@ -1,8 +1,8 @@
 import { SimpleGrid, Stack, Text } from '@mantine/core'
 
-import { MetricWithIcon } from '@/widgets/dashboard/home/metric-with-icons'
-import { LoadingScreen, PageHeader } from '@/shared/ui'
-import { MetricWithTrend } from '@/shared/ui/metrics'
+import { MetricWithIcon } from '@widgets/dashboard/home/metric-with-icons'
+import { LoadingScreen, PageHeader } from '@shared/ui'
+import { MetricWithTrend } from '@shared/ui/metrics'
 import { Page } from '@shared/ui/page'
 
 import { getBandwidthMetrics, getSimpleMetrics, getUsersMetrics } from './metrics'

@@ -1,7 +1,7 @@
 import { ActionIcon, Tooltip } from '@mantine/core'
 import { PiKeyDuotone } from 'react-icons/pi'
 
-import { useInvalidateUsersTSQ, useRevokeUserSubscription } from '@/shared/api/hooks'
+import { useInvalidateUsersTSQ, useRevokeUserSubscription } from '@shared/api/hooks'
 
 import { IProps } from './interfaces'
 

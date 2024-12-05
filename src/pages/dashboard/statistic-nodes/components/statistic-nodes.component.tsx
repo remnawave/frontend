@@ -4,8 +4,8 @@ import { BarChart } from '@mantine/charts'
 import ColorHash from 'color-hash'
 import dayjs from 'dayjs'
 
-import { prettyBytesToAnyUtil } from '@/shared/utils/bytes'
-import { LoadingScreen, PageHeader } from '@/shared/ui'
+import { prettyBytesToAnyUtil } from '@shared/utils/bytes'
+import { LoadingScreen, PageHeader } from '@shared/ui'
 import { Page } from '@shared/ui/page'
 
 import { BREADCRUMBS } from './constant'

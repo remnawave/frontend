@@ -34,9 +34,9 @@ import {
     useNodesStoreActions,
     useNodesStoreCreateModalIsOpen,
     useNodesStorePubKey
-} from '@entitites/dashboard/nodes'
-import { gbToBytesUtil } from '@/shared/utils/bytes'
-import { handleFormErrors } from '@/shared/utils'
+} from '@entities/dashboard/nodes'
+import { gbToBytesUtil } from '@shared/utils/bytes'
+import { handleFormErrors } from '@shared/utils'
 
 export const CreateNodeModalWidget = () => {
     const isModalOpen = useNodesStoreCreateModalIsOpen()

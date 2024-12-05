@@ -1,8 +1,8 @@
 import { ActionIcon, Tooltip } from '@mantine/core'
 import { PiTrashDuotone } from 'react-icons/pi'
 
-import { useUserModalStoreActions } from '@/entitites/dashboard/user-modal-store/user-modal-store'
-import { useDeleteUser } from '@/shared/api/hooks'
+import { useUserModalStoreActions } from '@entities/dashboard/user-modal-store/user-modal-store'
+import { useDeleteUser } from '@shared/api/hooks'
 
 import { IProps } from './interfaces'
 
