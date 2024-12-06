@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 
 import { ROUTES } from '@shared/constants'
 
-import classes from './NotFoundBackground.module.css'
+import classes from './NotFound.module.css'
 
 export function Illustration(props: React.ComponentPropsWithoutRef<'svg'>) {
     return (

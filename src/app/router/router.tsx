@@ -5,7 +5,6 @@ import {
     Route,
     RouterProvider
 } from 'react-router-dom'
-import { NotFoundPageComponent } from '@pages/not-found'
 
 import { StatisticNodesConnector } from '@pages/dashboard/statistic-nodes/connectors'
 import { ConfigPageConnector } from '@pages/dashboard/config/ui/connectors'
@@ -13,9 +12,10 @@ import { HostsPageConnector } from '@pages/dashboard/hosts/ui/connectors'
 import { UsersPageConnector } from '@pages/dashboard/users/ui/connectors'
 import { NodesPageConnector } from '@pages/dashboard/nodes/ui/connectors'
 import { HomePageConnector } from '@pages/dashboard/home/connectors'
+import { NotFoundPageComponent } from '@pages/errors/4xx-error'
 import { ErrorBoundaryHoc } from '@shared/hocs/error-boundary'
+import { ErrorPageComponent } from '@pages/errors/5xx-error'
 import { AuthGuard } from '@shared/hocs/guards/auth-guard'
-import { ErrorPageComponent } from '@pages/error'
 import { LoginPage } from '@pages/auth/login'
 
 import { DashboardLayout } from '../layouts/dashboard'

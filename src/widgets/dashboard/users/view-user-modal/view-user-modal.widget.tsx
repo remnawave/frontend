@@ -15,11 +15,6 @@ import {
     TextInput
 } from '@mantine/core'
 import {
-    useUserModalStoreActions,
-    useUserModalStoreIsModalOpen,
-    useUserModalStoreUserUuid
-} from '@entities/dashboard/user-modal-store/user-modal-store'
-import {
     PiCalendarDuotone,
     PiClockDuotone,
     PiFloppyDiskDuotone,
@@ -31,6 +26,11 @@ import { useForm, zodResolver } from '@mantine/form'
 import { DateTimePicker } from '@mantine/dates'
 import { useEffect } from 'react'
 
+import {
+    useUserModalStoreActions,
+    useUserModalStoreIsModalOpen,
+    useUserModalStoreUserUuid
+} from '@entities/dashboard/user-modal-store/user-modal-store'
 import { ToggleUserStatusButtonFeature } from '@features/ui/dashboard/users/toggle-user-status-button'
 import { RevokeSubscriptionUserFeature } from '@features/ui/dashboard/users/revoke-subscription-user'
 import { ResetUsageUserFeature } from '@features/ui/dashboard/users/reset-usage-user'
