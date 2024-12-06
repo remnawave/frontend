@@ -1,3 +1,4 @@
+import { R } from 'node_modules/@tanstack/react-query-devtools/build/modern/ReactQueryDevtools-Cn7cKi7o'
 import { useQuery, UseQueryResult } from '@tanstack/react-query'
 import { z } from 'zod'
 
@@ -55,12 +56,12 @@ export function createGetQueryHook<
     return (params?: {
         query?: z.infer<RequestQuerySchema>
         route?: z.infer<RouteParamsSchema>
-        rQueryParams?: Omit<typeof rQueryParams, 'queryKey'>
+        rQueryParams?: Partial<typeof rQueryParams>
     }) =>
         useQuery({
             ...rQueryParams,
             ...params?.rQueryParams,
-            queryKey: getQueryKey(rQueryParams.queryKey, params?.route, params?.query),
+            queryKey: params?.rQueryParams?.queryKey ?? rQueryParams.queryKey,
             queryFn: () => queryFn(params)
         }) as UseQueryResult<z.infer<ResponseSchema>['response']>
 }

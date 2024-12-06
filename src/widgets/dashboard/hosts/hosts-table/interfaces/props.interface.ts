@@ -1,6 +1,6 @@
 import { GetAllHostsCommand, GetInboundsCommand } from '@remnawave/backend-contract'
 
 export interface IProps {
-    hosts: GetAllHostsCommand.Response['response'] | null
-    inbounds: GetInboundsCommand.Response['response'] | null
+    hosts: GetAllHostsCommand.Response['response'] | undefined
+    inbounds: GetInboundsCommand.Response['response'] | undefined
 }

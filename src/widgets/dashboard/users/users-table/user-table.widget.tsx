@@ -11,8 +11,8 @@ import { useState } from 'react'
 
 import { UserActionGroupFeature } from '@features/dashboard/users/users-action-group/action-group.feature'
 import { useUserTableColumns } from '@features/dashboard/users/users-table/model/use-table-columns'
-import { useUserTableData } from '@features/dashboard/users/users-table/model/use-table-data'
 import { ViewUserActionFeature } from '@features/ui/dashboard/users/view-user-action'
+import { QueryKeys, useGetUsersV2, usersQueryKeys } from '@shared/api/hooks'
 import { DataTableShared } from '@shared/ui/table'
 
 import { customIcons } from './constants'
@@ -31,11 +31,19 @@ export function UserTableWidget() {
         Object.fromEntries(tableColumns.map(({ accessorKey }) => [accessorKey, 'contains']))
     )
 
-    const { data, isError, isFetching, isLoading, refetch } = useUserTableData({
-        columnFilterFns,
-        columnFilters,
-        pagination,
+    const params = {
+        start: pagination.pageIndex * pagination.pageSize,
+        size: pagination.pageSize,
+        filters: columnFilters,
+        filterModes: columnFilterFns,
         sorting
+    }
+
+    const { data, isError, isFetching, isLoading, refetch } = useGetUsersV2({
+        query: params,
+        rQueryParams: {
+            queryKey: QueryKeys.users.getAllUsers(params).queryKey
+        }
     })
 
     const { users, total } = data ?? {}

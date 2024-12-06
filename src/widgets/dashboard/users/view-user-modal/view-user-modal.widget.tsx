@@ -33,8 +33,8 @@ import {
 } from '@entities/dashboard/user-modal-store/user-modal-store'
 import { ToggleUserStatusButtonFeature } from '@features/ui/dashboard/users/toggle-user-status-button'
 import { RevokeSubscriptionUserFeature } from '@features/ui/dashboard/users/revoke-subscription-user'
+import { useGetInbounds, useGetUserByUuid, usersQueryKeys, useUpdateUser } from '@shared/api/hooks'
 import { ResetUsageUserFeature } from '@features/ui/dashboard/users/reset-usage-user'
-import { useGetInbounds, useGetUserByUuid, useUpdateUser } from '@shared/api/hooks'
 import { bytesToGbUtil, gbToBytesUtil, prettyBytesUtil } from '@shared/utils/bytes'
 import { DeleteUserFeature } from '@features/ui/dashboard/users/delete-user'
 import { UserStatusBadge } from '@widgets/dashboard/users/user-status-badge'
@@ -60,7 +60,8 @@ export const ViewUserModal = () => {
             uuid: selectedUser ?? ''
         },
         rQueryParams: {
-            enabled: !!selectedUser
+            enabled: !!selectedUser,
+            queryKey: usersQueryKeys.getUserByUuid({ uuid: selectedUser ?? '' }).queryKey
         }
     })
 

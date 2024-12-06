@@ -20,8 +20,8 @@ import { useState } from 'react'
 import { z } from 'zod'
 
 import { useHostsStoreActions, useHostsStoreCreateModalIsOpen } from '@entities/dashboard'
-import { useDSInbounds } from '@entities/dashboard/dashboard-store/dashboard-store'
 import { DeleteHostFeature } from '@features/ui/dashboard/hosts/delete-host'
+import { useGetInbounds } from '@shared/api/hooks'
 import { handleFormErrors } from '@shared/utils'
 
 import { RemarkInfoPopoverWidget } from '../popovers/remark-info/remark-info.widget'
@@ -30,7 +30,7 @@ export const CreateHostModalWidget = () => {
     const isModalOpen = useHostsStoreCreateModalIsOpen()
     const actions = useHostsStoreActions()
 
-    const inbounds = useDSInbounds()
+    const { data: inbounds } = useGetInbounds()
 
     const [advancedOpened, setAdvancedOpened] = useState(false)
 

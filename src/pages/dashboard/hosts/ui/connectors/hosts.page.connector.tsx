@@ -1,32 +1,9 @@
-import { useEffect } from 'react'
-
-import {
-    useDashboardStoreActions,
-    useDSInbounds
-} from '@entities/dashboard/dashboard-store/dashboard-store'
-import {
-    useHostsStoreActions,
-    useHostsStoreHosts
-} from '@entities/dashboard/hosts/hosts-store/hosts-store'
 import HostsPageComponent from '@pages/dashboard/hosts/ui/components/hosts.page.component'
+import { useGetHosts, useGetInbounds } from '@shared/api/hooks'
 
 export function HostsPageConnector() {
-    const actions = useHostsStoreActions()
-    const dsActions = useDashboardStoreActions()
-
-    const hosts = useHostsStoreHosts()
-    const inbounds = useDSInbounds()
-
-    useEffect(() => {
-        ;(async () => {
-            await actions.getHosts()
-            await dsActions.getInbounds()
-        })()
-        return () => {
-            actions.resetState()
-            dsActions.resetState()
-        }
-    }, [])
+    const { data: inbounds } = useGetInbounds()
+    const { data: hosts } = useGetHosts()
 
     return <HostsPageComponent hosts={hosts} inbounds={inbounds} />
 }

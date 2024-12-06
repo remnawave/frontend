@@ -6,14 +6,14 @@ import { useState } from 'react'
 import cx from 'clsx'
 
 import { useHostsStoreActions, useHostsStoreSelectedInboundTag } from '@entities/dashboard'
-import { useDSInboundsHashMap } from '@entities/dashboard/dashboard-store/dashboard-store'
+import { useGetInbounds } from '@shared/api/hooks'
 
 import classes from './HostCard.module.css'
 import { IProps } from './interfaces'
 
 export function HostCardWidget(props: IProps) {
     const { item, index } = props
-    const inbounds = useDSInboundsHashMap()
+    const { data: inbounds } = useGetInbounds()
     const selectedInboundTag = useHostsStoreSelectedInboundTag()
     const actions = useHostsStoreActions()
     const [isHovered, setIsHovered] = useState(false)
@@ -21,7 +21,7 @@ export function HostCardWidget(props: IProps) {
         return null
     }
 
-    const inbound = inbounds.get(item.inboundUuid)
+    const inbound = inbounds.find((inbound) => inbound.uuid === item.inboundUuid)
 
     if (!inbound) {
         return null

@@ -3,14 +3,21 @@ import {
     DeleteUserCommand,
     DisableUserCommand,
     EnableUserCommand,
+    GetAllUsersV2Command,
     GetStatsCommand,
     GetUserByUuidCommand,
     RevokeUserSubscriptionCommand,
     UpdateUserCommand
 } from '@remnawave/backend-contract'
+import {
+    createQueryKeys,
+    createQueryKeyStore,
+    inferQueryKeys
+} from '@lukemorales/query-key-factory'
+import { keepPreviousData, QueryFunctionContext, useQueryClient } from '@tanstack/react-query'
 import { notifications } from '@mantine/notifications'
-import { useQueryClient } from '@tanstack/react-query'
 
+import { UsersTableFilters } from '@features/dashboard/users/users-table/model/interfaces'
 import { sToMs } from '@shared/utils/time-utils'
 
 import {
@@ -23,6 +30,15 @@ import {
 export const USERS_QUERY_KEY = 'users'
 const STALE_TIME = sToMs(5)
 const REFETCH_INTERVAL = sToMs(5.1)
+
+export const usersQueryKeys = createQueryKeys('users', {
+    getAllUsers: (filters?: GetAllUsersV2Command.RequestQuery) => ({
+        queryKey: [filters]
+    }),
+    getUserByUuid: (uuid?: GetUserByUuidCommand.Request) => ({
+        queryKey: [uuid]
+    })
+})
 
 export const useInvalidateUsersTSQ = () => {
     const queryClient = useQueryClient()
@@ -172,13 +188,33 @@ export const useGetUserByUuid = createGetQueryHook({
     responseSchema: GetUserByUuidCommand.ResponseSchema,
     routeParamsSchema: GetUserByUuidCommand.RequestSchema,
     rQueryParams: {
-        queryKey: [USERS_QUERY_KEY],
+        queryKey: usersQueryKeys.getUserByUuid().queryKey,
         staleTime: sToMs(20),
         refetchInterval: sToMs(35)
     },
     errorHandler: (error) => {
         notifications.show({
             title: `${GetStatsCommand.url}`,
+            message: error instanceof Error ? error.message : `Request failed with unknown error.`,
+            color: 'red'
+        })
+    }
+})
+
+export const useGetUsersV2 = createGetQueryHook({
+    endpoint: GetAllUsersV2Command.TSQ_url,
+    responseSchema: GetAllUsersV2Command.ResponseSchema,
+    requestQuerySchema: GetAllUsersV2Command.RequestQuerySchema,
+    rQueryParams: {
+        queryKey: usersQueryKeys.getAllUsers({}).queryKey,
+        staleTime: sToMs(20),
+        refetchInterval: sToMs(25),
+        placeholderData: keepPreviousData,
+        refetchOnMount: true
+    },
+    errorHandler: (error) => {
+        notifications.show({
+            title: `${GetAllUsersV2Command.url}`,
             message: error instanceof Error ? error.message : `Request failed with unknown error.`,
             color: 'red'
         })

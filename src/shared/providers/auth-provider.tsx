@@ -1,6 +1,5 @@
 import { createContext, ReactNode, useEffect, useMemo, useState } from 'react'
 
-import { useDashboardStoreActions } from '../../entities/dashboard/dashboard-store/dashboard-store'
 import { removeToken, useToken } from '../../entities/auth'
 import { resetAllStores } from '../hocs/store-wrapper'
 import { clearQueryClient } from '../api/query-client'
@@ -23,8 +22,6 @@ export function AuthProvider({ children }: AuthProviderProps) {
     const [isAuthenticated, setIsAuthenticated] = useState(false)
     const [isInitialized, setIsInitialized] = useState(false)
     const token = useToken()
-
-    const actions = useDashboardStoreActions()
 
     const logoutUser = () => {
         setIsAuthenticated(false)
@@ -50,7 +47,6 @@ export function AuthProvider({ children }: AuthProviderProps) {
             }
 
             try {
-                await actions.getSystemInfo()
                 setIsAuthenticated(true)
             } catch (error) {
                 logoutUser()

@@ -23,6 +23,7 @@ module.exports = {
             }
         }
     },
+
     rules: {
         'perfectionist/sort-imports': [
             'error',

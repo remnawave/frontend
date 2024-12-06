@@ -1,23 +1,24 @@
 import { DragDropContext, Droppable, DropResult } from '@hello-pangea/dnd'
-import cuid2, { createId } from '@paralleldrive/cuid2'
 import { useListState } from '@mantine/hooks'
 import { useEffect } from 'react'
 
 import { HostCardWidget } from '@widgets/dashboard/hosts/host-card'
 import { useHostsStoreActions } from '@entities/dashboard'
+import { useReorderHosts } from '@shared/api/hooks'
 
 import { IProps } from './interfaces'
 
 export function HostsTableWidget(props: IProps) {
     const { hosts, inbounds } = props
 
-    const actions = useHostsStoreActions()
     const [state, handlers] = useListState(hosts || [])
 
     const handleDragEnd = async (result: DropResult) => {
         const { destination, source } = result
         handlers.reorder({ from: source.index, to: destination?.index || 0 })
     }
+
+    const { mutate: reorderHosts } = useReorderHosts()
 
     useEffect(() => {
         ;(async () => {
@@ -34,7 +35,7 @@ export function HostsTableWidget(props: IProps) {
             const hasOrderChanged = hosts?.some((host, index) => host.uuid !== state[index].uuid)
 
             if (hasOrderChanged) {
-                await actions.reorderHosts(updatedHosts)
+                reorderHosts({ variables: { hosts: updatedHosts } })
             }
         })()
     }, [state])

@@ -1,7 +1,5 @@
-import { UndefinedInitialDataOptions } from 'node_modules/@tanstack/react-query/build/modern/queryOptions'
+import { QueryKey, UndefinedInitialDataOptions } from '@tanstack/react-query'
 import { z } from 'zod'
-
-import { QueryKey } from '../types'
 
 /**
  * Arguments for creating a GET query hook with Zod validation

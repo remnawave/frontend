@@ -6,9 +6,10 @@ import {
     MRT_SortingState
 } from 'mantine-react-table'
 
-export interface TableParams {
-    columnFilterFns: MRT_ColumnFilterFnsState
-    columnFilters: MRT_ColumnFiltersState
-    pagination: MRT_PaginationState
+export interface UsersTableFilters {
+    filterModes: MRT_ColumnFilterFnsState
+    filters: MRT_ColumnFiltersState
+    size: number
     sorting: MRT_SortingState
+    start: number
 }

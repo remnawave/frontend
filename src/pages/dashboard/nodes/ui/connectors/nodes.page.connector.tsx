@@ -2,13 +2,11 @@ import { useInterval } from '@mantine/hooks'
 import { useEffect } from 'react'
 
 import { useNodesStoreActions, useNodesStoreNodes } from '@entities/dashboard/nodes/nodes-store'
-import { useDashboardStoreActions } from '@entities/dashboard/dashboard-store/dashboard-store'
 
 import NodesPageComponent from '../components/nodes.page.component'
 
 export function NodesPageConnector() {
     const actions = useNodesStoreActions()
-    const dsActions = useDashboardStoreActions()
 
     const nodes = useNodesStoreNodes()
 
@@ -19,7 +17,6 @@ export function NodesPageConnector() {
         })()
         return () => {
             actions.resetState()
-            dsActions.resetState()
         }
     }, [])
 
