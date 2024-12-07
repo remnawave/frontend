@@ -1,12 +1,8 @@
 import { useEffect, useState } from 'react'
 import { consola } from 'consola/browser'
 
-import {
-    useConfigStoreActions,
-    useConfigStoreConfig,
-    useConfigStoreIsConfigLoading
-} from '@entities/dashboard/config/config-store/config-store'
 import { fetchWithProgress } from '@shared/utils/fetch-with-progress'
+import { useGetConfig } from '@shared/api/hooks'
 import { LoadingScreen } from '@shared/ui'
 import { app } from 'src/config'
 
@@ -16,13 +12,7 @@ export function ConfigPageConnector() {
     const [downloadProgress, setDownloadProgress] = useState(0)
     const [isLoading, setIsLoading] = useState(true)
 
-    const config = useConfigStoreConfig()
-    const actions = useConfigStoreActions()
-    const isConfigLoading = useConfigStoreIsConfigLoading()
-
-    useEffect(() => {
-        actions.getConfig()
-    }, [])
+    const { data: { config } = { config: undefined }, isLoading: isConfigLoading } = useGetConfig()
 
     useEffect(() => {
         const initWasm = async () => {

@@ -6,14 +6,12 @@ import { useState } from 'react'
 import cx from 'clsx'
 
 import { useHostsStoreActions, useHostsStoreSelectedInboundTag } from '@entities/dashboard'
-import { useGetInbounds } from '@shared/api/hooks'
 
 import classes from './HostCard.module.css'
 import { IProps } from './interfaces'
 
 export function HostCardWidget(props: IProps) {
-    const { item, index } = props
-    const { data: inbounds } = useGetInbounds()
+    const { item, index, inbounds } = props
     const selectedInboundTag = useHostsStoreSelectedInboundTag()
     const actions = useHostsStoreActions()
     const [isHovered, setIsHovered] = useState(false)

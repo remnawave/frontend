@@ -40,6 +40,7 @@ import { DeleteUserFeature } from '@features/ui/dashboard/users/delete-user'
 import { UserStatusBadge } from '@widgets/dashboard/users/user-status-badge'
 import { LoaderModalShared } from '@shared/ui/loader-modal'
 import { resetDataStrategy } from '@shared/constants'
+import { queryClient } from '@shared/api'
 
 import { InboundCheckboxCardWidget } from '../inbound-checkbox-card'
 import { IFormValues } from './interfaces'
@@ -60,8 +61,7 @@ export const ViewUserModal = () => {
             uuid: selectedUser ?? ''
         },
         rQueryParams: {
-            enabled: !!selectedUser,
-            queryKey: usersQueryKeys.getUserByUuid({ uuid: selectedUser ?? '' }).queryKey
+            enabled: !!selectedUser
         }
     })
 
@@ -80,6 +80,12 @@ export const ViewUserModal = () => {
     useEffect(() => {
         if (isUserUpdated) {
             refetchUser()
+            queryClient.setQueryData(
+                usersQueryKeys.getUserByUuid({
+                    uuid: selectedUser ?? ''
+                }).queryKey,
+                user
+            )
         }
     }, [isUserUpdated])
 

@@ -2,7 +2,7 @@ import { CopyButton } from '@mantine/core'
 import { LuCopy } from 'react-icons/lu'
 
 import { IProps } from '@entities/dashboard/users/ui/table-columns/username/interface'
-import { LinkChip } from '@shared/ui/stuff/link-chip'
+import { LinkChip } from '@shared/ui/misc'
 
 export function ShortUuidColumnEntity(props: IProps) {
     const { user } = props

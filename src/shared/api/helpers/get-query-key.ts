@@ -6,6 +6,7 @@ export function getQueryKey(
     query: Record<string, number | string | undefined> = {}
 ) {
     const [mainKey, otherKeys = {}] = queryKey
+    const objectKeys = typeof otherKeys === 'object' ? otherKeys : {}
 
-    return [mainKey, { ...otherKeys, ...route, ...query }]
+    return [mainKey, { ...objectKeys, ...route, ...query }]
 }

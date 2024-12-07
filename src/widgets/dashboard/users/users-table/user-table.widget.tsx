@@ -39,11 +39,15 @@ export function UserTableWidget() {
         sorting
     }
 
+    // const { data, isError, isFetching, isLoading, refetch } = useGetUsersV2({
+    //     query: params,
+    //     rQueryParams: {
+    //         queryKey: QueryKeys.users.getAllUsers(params).queryKey
+    //     }
+    // })
+
     const { data, isError, isFetching, isLoading, refetch } = useGetUsersV2({
-        query: params,
-        rQueryParams: {
-            queryKey: QueryKeys.users.getAllUsers(params).queryKey
-        }
+        query: params
     })
 
     const { users, total } = data ?? {}

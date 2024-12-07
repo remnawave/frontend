@@ -1,60 +1,32 @@
 import { PiArrowsClockwise, PiPlus, PiSpiral } from 'react-icons/pi'
-import { notifications } from '@mantine/notifications'
 import { Button, Group } from '@mantine/core'
-import { useState } from 'react'
 
 import { useNodesStoreActions } from '@entities/dashboard/nodes/nodes-store/nodes-store'
+import { useGetNodes, useRestartAllNodes } from '@shared/api/hooks'
 
 import { IProps } from './interfaces'
 
 export const NodesHeaderActionButtonsFeature = (props: IProps) => {
     const actions = useNodesStoreActions()
 
-    const [isLoading, setIsLoading] = useState(false)
-    const [isRestartLoading, setIsRestartLoading] = useState(false)
-
     const handleCreate = () => {
         actions.toggleCreateModal(true)
     }
 
-    const handleUpdate = () => {
-        try {
-            setIsLoading(true)
-            actions.getNodes()
-        } catch (error) {
-            console.error(error)
-        } finally {
-            setTimeout(() => {
-                setIsLoading(false)
-            }, 500)
-        }
-    }
-
-    const handleRestart = () => {
-        try {
-            setIsRestartLoading(true)
-            actions.restartAllNodes()
-
-            notifications.show({
-                title: 'Success',
-                message: 'Please wait while nodes will reconnect',
-                color: 'teal'
-            })
-        } catch (error) {
-            console.error(error)
-        } finally {
-            setTimeout(() => {
-                setIsRestartLoading(false)
-            }, 500)
-        }
-    }
+    const {
+        isLoading: isGetNodesPending,
+        refetch: refetchNodes,
+        isPending,
+        isRefetching
+    } = useGetNodes()
+    const { mutate: restartAllNodes, isPending: isRestartAllNodesPending } = useRestartAllNodes()
 
     return (
         <Group>
             <Button
                 leftSection={<PiArrowsClockwise size="1rem" />}
-                loading={isLoading}
-                onClick={handleUpdate}
+                loading={isGetNodesPending || isPending || isRefetching}
+                onClick={() => refetchNodes()}
                 size="xs"
                 variant="default"
             >
@@ -64,8 +36,8 @@ export const NodesHeaderActionButtonsFeature = (props: IProps) => {
             <Button
                 c="teal"
                 leftSection={<PiSpiral size="1rem" />}
-                loading={isRestartLoading}
-                onClick={handleRestart}
+                loading={isRestartAllNodesPending}
+                onClick={() => restartAllNodes({})}
                 size="xs"
                 variant="default"
             >

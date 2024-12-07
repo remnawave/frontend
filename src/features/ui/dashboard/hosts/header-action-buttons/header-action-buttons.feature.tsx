@@ -1,9 +1,9 @@
 import { PiArrowsClockwise, PiBookmarks, PiPlus } from 'react-icons/pi'
 import { Button, Group, Select } from '@mantine/core'
-import consola from 'consola/browser'
-import { useState } from 'react'
 
 import { useHostsStoreActions, useHostsStoreSelectedInboundTag } from '@entities/dashboard'
+import { QueryKeys, useGetHosts } from '@shared/api/hooks'
+import { queryClient } from '@shared/api'
 
 import { IProps } from './interfaces'
 
@@ -12,23 +12,17 @@ export const HeaderActionButtonsFeature = (props: IProps) => {
 
     const actions = useHostsStoreActions()
     const selectedInboundTag = useHostsStoreSelectedInboundTag()
-    const [isLoading, setIsLoading] = useState(false)
+
+    const { isFetching } = useGetHosts()
 
     const handleCreate = () => {
         actions.toggleCreateModal(true)
     }
 
-    const handleUpdate = () => {
-        try {
-            setIsLoading(true)
-            actions.getHosts()
-        } catch (error) {
-            consola.error(error)
-        } finally {
-            setTimeout(() => {
-                setIsLoading(false)
-            }, 500)
-        }
+    const handleUpdate = async () => {
+        await queryClient.refetchQueries({
+            queryKey: QueryKeys.hosts._def
+        })
     }
 
     return (
@@ -51,7 +45,7 @@ export const HeaderActionButtonsFeature = (props: IProps) => {
             />
             <Button
                 leftSection={<PiArrowsClockwise size="1rem" />}
-                loading={isLoading}
+                loading={isFetching}
                 onClick={handleUpdate}
                 size="xs"
                 variant="default"

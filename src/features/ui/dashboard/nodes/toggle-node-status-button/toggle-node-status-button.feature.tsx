@@ -1,16 +1,26 @@
 import { PiCellSignalFullDuotone, PiCellSignalSlashDuotone, PiTrashDuotone } from 'react-icons/pi'
-import { notifications } from '@mantine/notifications'
 import { Button } from '@mantine/core'
-import { useState } from 'react'
 
-import { useNodesStoreActions, useNodesStoreEditModalNode } from '@entities/dashboard/nodes'
+import { useDisableNode, useEnableNode } from '@shared/api/hooks'
 
 import { IProps } from './interfaces'
 
 export function ToggleNodeStatusButtonFeature(props: IProps) {
-    const [isLoading, setIsLoading] = useState(false)
-    const node = useNodesStoreEditModalNode()
-    const actions = useNodesStoreActions()
+    const { handleClose, node } = props
+
+    const mutationParams = {
+        route: {
+            uuid: node.uuid
+        },
+        mutationFns: {
+            onSuccess: async () => {
+                handleClose()
+            }
+        }
+    }
+
+    const { mutate: disableNode, isPending: isDisableNodePending } = useDisableNode(mutationParams)
+    const { mutate: enableNode, isPending: isEnableNodePending } = useEnableNode(mutationParams)
 
     if (!node) return null
 
@@ -29,28 +39,10 @@ export function ToggleNodeStatusButtonFeature(props: IProps) {
     }
 
     const handleToggleUserStatus = async () => {
-        setIsLoading(true)
-        try {
-            if (node.isDisabled) {
-                await actions.enableNode(node.uuid)
-            } else {
-                await actions.disableNode(node.uuid)
-            }
-
-            notifications.show({
-                title: 'Success',
-                message: 'Node status updated',
-                color: 'green'
-            })
-        } catch (error) {
-            console.error(error)
-            notifications.show({
-                title: 'Error',
-                message: 'Failed to toggle node status',
-                color: 'red'
-            })
-        } finally {
-            setIsLoading(false)
+        if (node.isDisabled) {
+            enableNode({})
+        } else {
+            disableNode({})
         }
     }
 
@@ -58,7 +50,7 @@ export function ToggleNodeStatusButtonFeature(props: IProps) {
         <Button
             color={color}
             leftSection={icon}
-            loading={isLoading}
+            loading={isDisableNodePending || isEnableNodePending}
             onClick={handleToggleUserStatus}
             size="md"
             type="button"

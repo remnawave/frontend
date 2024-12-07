@@ -1,2 +1,5 @@
 export * from './forms'
+export * from './interfaces'
+export * from './monaco-theme'
 export * from './routes'
+export * from './theme'

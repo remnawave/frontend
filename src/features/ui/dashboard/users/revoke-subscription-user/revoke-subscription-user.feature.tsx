@@ -1,18 +1,21 @@
 import { ActionIcon, Tooltip } from '@mantine/core'
 import { PiKeyDuotone } from 'react-icons/pi'
 
-import { useInvalidateUsersTSQ, useRevokeUserSubscription } from '@shared/api/hooks'
+import { useRevokeUserSubscription, usersQueryKeys } from '@shared/api/hooks'
+import { queryClient } from '@shared/api'
 
 import { IProps } from './interfaces'
 
 export function RevokeSubscriptionUserFeature(props: IProps) {
     const { userUuid } = props
-    const refreshUsers = useInvalidateUsersTSQ()
 
     const { mutate: revokeUserSubscription, isPending } = useRevokeUserSubscription({
         mutationFns: {
-            onSuccess: () => {
-                refreshUsers()
+            onSuccess: (data) => {
+                queryClient.setQueryData(
+                    usersQueryKeys.getUserByUuid({ uuid: userUuid }).queryKey,
+                    data
+                )
             }
         }
     })

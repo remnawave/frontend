@@ -49,6 +49,7 @@ export function NodeCardWidget(props: IProps) {
 
     const handleViewNode = () => {
         actions.setNode(node)
+
         actions.toggleEditModal(true)
     }
 

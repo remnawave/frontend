@@ -1,46 +1,35 @@
-import { notifications } from '@mantine/notifications'
 import { ActionIcon, Tooltip } from '@mantine/core'
 import { PiTrashDuotone } from 'react-icons/pi'
-import { useState } from 'react'
 
 import { useHostsStoreActions, useHostsStoreEditModalHost } from '@entities/dashboard'
+import { useDeleteHost } from '@shared/api/hooks'
 
-import { IProps } from './interfaces'
-
-export function DeleteHostFeature(props: IProps) {
+export function DeleteHostFeature() {
     const actions = useHostsStoreActions()
     const host = useHostsStoreEditModalHost()
 
-    const [isLoading, setIsLoading] = useState(false)
+    const { mutate: deleteHost, isPending: isDeleteHostPending } = useDeleteHost({
+        mutationFns: {
+            onSuccess: () => {
+                actions.toggleEditModal(false)
+            }
+        }
+    })
 
     if (!host) return null
 
     const handleDeleteHost = async () => {
-        try {
-            setIsLoading(true)
-            await actions.deleteHost(host.uuid)
-
-            notifications.show({
-                title: 'Host deleted',
-                message: 'Host has been deleted successfully',
-                color: 'green'
-            })
-        } catch (error) {
-            notifications.show({
-                title: 'Error',
-                message: 'Failed to delete host',
-                color: 'red'
-            })
-        } finally {
-            setIsLoading(false)
-
-            actions.toggleEditModal(false)
-        }
+        deleteHost({ route: { uuid: host.uuid } })
     }
 
     return (
         <Tooltip label="Delete host">
-            <ActionIcon color="red" loading={isLoading} onClick={handleDeleteHost} size="xl">
+            <ActionIcon
+                color="red"
+                loading={isDeleteHostPending}
+                onClick={handleDeleteHost}
+                size="xl"
+            >
                 <PiTrashDuotone size="1.5rem" />
             </ActionIcon>
         </Tooltip>

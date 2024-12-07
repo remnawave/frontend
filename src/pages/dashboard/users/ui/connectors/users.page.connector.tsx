@@ -5,7 +5,7 @@ import {
     useUserModalStoreIsModalOpen
 } from '@entities/dashboard/user-modal-store/user-modal-store'
 import { useUserCreationModalStoreIsModalOpen } from '@entities/dashboard/user-creation-modal-store/user-creation-modal-store'
-import { SYSTEM_QUERY_KEY } from '@shared/api/hooks/system/system.hooks'
+import { QueryKeys } from '@shared/api/hooks'
 import { queryClient } from '@shared/api'
 
 import UsersPageComponent from '../components/users.page.component'
@@ -24,9 +24,10 @@ export function UsersPageConnector() {
 
     useEffect(() => {
         if (isModalOpen || isCreateUserModalOpen) return
-
-        queryClient.invalidateQueries({ queryKey: ['users'] })
-        queryClient.invalidateQueries({ queryKey: [SYSTEM_QUERY_KEY] })
+        ;(async () => {
+            await queryClient.refetchQueries({ queryKey: QueryKeys.users._def })
+            await queryClient.refetchQueries({ queryKey: QueryKeys.system._def })
+        })()
     }, [isModalOpen, isCreateUserModalOpen])
 
     return <UsersPageComponent />

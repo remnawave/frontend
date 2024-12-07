@@ -4,10 +4,9 @@ import { useForm, zodResolver } from '@mantine/form'
 import { PiSignInDuotone } from 'react-icons/pi'
 import MD5 from 'crypto-js/md5'
 
+import { handleFormErrors } from '@shared/utils/misc'
 import { useAuth } from '@shared/hooks/use-auth'
 import { useLogin } from '@shared/api/hooks'
-
-import { handleFormErrors } from '../../shared/utils/form'
 
 export const LoginForm = () => {
     const { setIsAuthenticated } = useAuth()

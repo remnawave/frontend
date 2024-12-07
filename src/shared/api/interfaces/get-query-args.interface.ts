@@ -1,4 +1,4 @@
-import { QueryKey, UndefinedInitialDataOptions } from '@tanstack/react-query'
+import { UndefinedInitialDataOptions } from '@tanstack/react-query'
 import { z } from 'zod'
 
 /**
@@ -41,7 +41,5 @@ export interface CreateGetQueryHookArgs<
      * @param enabled - Whether this query should automatically run
      * And other React Query options excluding queryFn and queryKey
      */
-    rQueryParams: Omit<UndefinedInitialDataOptions, 'queryFn' | 'queryKey'> & {
-        queryKey: QueryKey
-    }
+    rQueryParams: Omit<UndefinedInitialDataOptions, 'queryFn' | 'queryKey'>
 }

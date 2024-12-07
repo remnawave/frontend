@@ -4,16 +4,13 @@ import { CreateHostModalWidget } from '@widgets/dashboard/hosts/create-host-moda
 import { HostsPageHeaderWidget } from '@widgets/dashboard/hosts/hosts-page-header'
 import { EditHostModalWidget } from '@widgets/dashboard/hosts/edit-host-modal'
 import { HostsTableWidget } from '@widgets/dashboard/hosts/hosts-table'
-import { useHostsStoreIsHostsLoading } from '@entities/dashboard'
 import { LoadingScreen, Page, PageHeader } from '@shared/ui'
 
 import { BREADCRUMBS } from './constants'
 import { IProps } from './interfaces'
 
 export default function HostsPageComponent(props: IProps) {
-    const { inbounds, hosts } = props
-
-    const isHostsLoading = useHostsStoreIsHostsLoading()
+    const { inbounds, hosts, isHostsLoading } = props
 
     return (
         <Page title="Hosts">

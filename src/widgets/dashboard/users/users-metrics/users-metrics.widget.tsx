@@ -9,7 +9,7 @@ import { Group, Loader, SimpleGrid } from '@mantine/core'
 
 import { MetricCard } from '@shared/ui/metrics/metric-card'
 import { useGetSystemStats } from '@shared/api/hooks'
-import { formatInt } from '@shared/utils/number'
+import { formatInt } from '@shared/utils/misc'
 
 export function UsersMetrics() {
     const { data: systemInfo, isLoading } = useGetSystemStats()

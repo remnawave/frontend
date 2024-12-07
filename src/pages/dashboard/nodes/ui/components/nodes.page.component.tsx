@@ -1,9 +1,8 @@
 import { Grid } from '@mantine/core'
 
-import { useNodesStoreIsNodesLoading } from '@entities/dashboard/nodes/nodes-store/nodes-store'
+import { EditNodeModalConnectorWidget } from '@widgets/dashboard/nodes/edit-node-modal'
 import { CreateNodeModalWidget } from '@widgets/dashboard/nodes/create-node-modal'
 import { NodesPageHeaderWidget } from '@widgets/dashboard/nodes/nodes-page-header'
-import { EditNodeModalWidget } from '@widgets/dashboard/nodes/edit-node-modal'
 import { NodesTableWidget } from '@widgets/dashboard/nodes/nodes-table'
 import { LoadingScreen, Page, PageHeader } from '@shared/ui'
 
@@ -11,9 +10,7 @@ import { BREADCRUMBS } from './constants'
 import { IProps } from './interfaces'
 
 export default function NodesPageComponent(props: IProps) {
-    const { nodes } = props
-
-    const isNodesLoading = useNodesStoreIsNodesLoading()
+    const { nodes, isLoading } = props
 
     return (
         <Page title="Nodes">
@@ -23,7 +20,7 @@ export default function NodesPageComponent(props: IProps) {
                 <Grid.Col span={12}>
                     <NodesPageHeaderWidget />
 
-                    {isNodesLoading && nodes === null ? (
+                    {isLoading ? (
                         <LoadingScreen height="60vh" />
                     ) : (
                         <NodesTableWidget nodes={nodes} />
@@ -31,7 +28,7 @@ export default function NodesPageComponent(props: IProps) {
                 </Grid.Col>
             </Grid>
 
-            <EditNodeModalWidget key="view-node-widget" />
+            <EditNodeModalConnectorWidget key="view-node-widget" />
             <CreateNodeModalWidget key="create-node-widget" />
         </Page>
     )

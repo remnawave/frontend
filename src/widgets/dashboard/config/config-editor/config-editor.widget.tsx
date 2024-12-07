@@ -5,7 +5,7 @@ import { Box, Code, Paper } from '@mantine/core'
 import { ConfigEditorActionsFeature } from '@features/dashboard/config/config-editor-actions'
 import { ConfigValidationFeature } from '@features/dashboard/config/config-validation'
 import { MonacoSetupFeature } from '@features/dashboard/config/monaco-setup'
-import { monacoTheme } from '@shared/utils/monaco-theme/monaco-theme'
+import { monacoTheme } from '@shared/constants/monaco-theme/monaco-theme'
 
 import { Props } from './interfaces'
 
@@ -13,7 +13,6 @@ export function ConfigEditorWidget(props: Props) {
     const { config } = props
     const [result, setResult] = useState('')
     const [isConfigValid, setIsConfigValid] = useState(false)
-    const [isSaving, setIsSaving] = useState(false)
 
     const editorRef = useRef<unknown>(null)
     const monacoRef = useRef<unknown>(null)
@@ -85,9 +84,7 @@ export function ConfigEditorWidget(props: Props) {
             <ConfigEditorActionsFeature
                 editorRef={editorRef}
                 isConfigValid={isConfigValid}
-                isSaving={isSaving}
                 monacoRef={monacoRef}
-                setIsSaving={setIsSaving}
                 setResult={setResult}
             />
 

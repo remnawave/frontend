@@ -1,21 +1,11 @@
-import {
-    CreateHostCommand,
-    DeleteHostCommand,
-    GetAllHostsCommand,
-    ReorderHostCommand,
-    UpdateHostCommand
-} from '@remnawave/backend-contract'
+import { UpdateHostCommand } from '@remnawave/backend-contract'
 import { devtools } from 'zustand/middleware'
-import { AxiosError } from 'axios'
 
 import { create } from '@shared/hocs/store-wrapper'
-import { instance } from '@shared/api'
 
 import { IActions, IState } from './interfaces'
 
 const initialState: IState = {
-    isHostsLoading: false,
-    hosts: null,
     selectedInboundTag: 'ALL',
     editModal: {
         isOpen: false,
@@ -30,108 +20,14 @@ const initialState: IState = {
 
 export const useHostsStore = create<IActions & IState>()(
     devtools(
-        (set, getState) => ({
+        (set) => ({
             ...initialState,
             actions: {
-                getHosts: async (): Promise<boolean> => {
-                    try {
-                        set({ isHostsLoading: true })
-
-                        const response = await instance.get<GetAllHostsCommand.Response>(
-                            GetAllHostsCommand.url
-                        )
-
-                        const {
-                            data: { response: dataResponse }
-                        } = response
-
-                        set({
-                            hosts: dataResponse
-                        })
-
-                        return true
-                    } catch (e) {
-                        if (e instanceof AxiosError) {
-                            throw e
-                        }
-                        return false
-                    } finally {
-                        setTimeout(() => {
-                            set({ isHostsLoading: false })
-                        }, 300)
-                    }
-                },
-                reorderHosts: async (
-                    hosts: ReorderHostCommand.Request['hosts']
-                ): Promise<boolean> => {
-                    try {
-                        const response = await instance.post<ReorderHostCommand.Response>(
-                            ReorderHostCommand.url,
-                            {
-                                hosts
-                            }
-                        )
-
-                        const {
-                            data: { response: dataResponse }
-                        } = response
-
-                        if (dataResponse.isUpdated) {
-                            return true
-                        }
-
-                        return false
-                    } catch (e) {
-                        if (e instanceof AxiosError) {
-                            throw e
-                        }
-                        return false
-                    }
-                },
-                deleteHost: async (uuid: string): Promise<boolean> => {
-                    try {
-                        await instance.delete<DeleteHostCommand.Response>(
-                            DeleteHostCommand.url(uuid)
-                        )
-
-                        return true
-                    } catch (e) {
-                        if (e instanceof AxiosError) {
-                            throw e
-                        }
-                        return false
-                    }
-                },
-                updateHost: async (host: UpdateHostCommand.Request): Promise<boolean> => {
-                    try {
-                        await instance.post<UpdateHostCommand.Response>(UpdateHostCommand.url, host)
-
-                        return true
-                    } catch (e) {
-                        if (e instanceof AxiosError) {
-                            throw e
-                        }
-                        return false
-                    }
-                },
-                createHost: async (host: CreateHostCommand.Request): Promise<boolean> => {
-                    try {
-                        await instance.post<CreateHostCommand.Response>(CreateHostCommand.url, host)
-
-                        return true
-                    } catch (e) {
-                        if (e instanceof AxiosError) {
-                            throw e
-                        }
-                        return false
-                    }
-                },
                 toggleEditModal: (isOpen: boolean) => {
                     set((state) => ({
                         editModal: { ...state.editModal, isOpen }
                     }))
                     if (!isOpen) {
-                        getState().actions.getHosts()
                         set((state) => ({
                             editModal: { ...state.editModal, host: null, isLoading: false }
                         }))
@@ -142,7 +38,6 @@ export const useHostsStore = create<IActions & IState>()(
                         createModal: { ...state.createModal, isOpen }
                     }))
                     if (!isOpen) {
-                        getState().actions.getHosts()
                         set((state) => ({
                             createModal: { ...state.createModal, isLoading: false }
                         }))
@@ -174,8 +69,6 @@ export const useHostsStore = create<IActions & IState>()(
     )
 )
 
-export const useHostsStoreIsHostsLoading = () => useHostsStore((store) => store.isHostsLoading)
-export const useHostsStoreHosts = () => useHostsStore((state) => state.hosts)
 export const useHostsStoreActions = () => useHostsStore((store) => store.actions)
 
 export const useHostsStoreSelectedInboundTag = () =>

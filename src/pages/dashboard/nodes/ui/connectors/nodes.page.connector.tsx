@@ -1,32 +1,40 @@
-import { useInterval } from '@mantine/hooks'
 import { useEffect } from 'react'
 
-import { useNodesStoreActions, useNodesStoreNodes } from '@entities/dashboard/nodes/nodes-store'
+import {
+    useNodesStoreActions,
+    useNodesStoreCreateModalIsOpen,
+    useNodesStoreEditModalIsOpen
+} from '@entities/dashboard/nodes/nodes-store'
+import { nodesQueryKeys, QueryKeys, useGetNodes } from '@shared/api/hooks'
+import { queryClient } from '@shared/api'
 
 import NodesPageComponent from '../components/nodes.page.component'
 
 export function NodesPageConnector() {
     const actions = useNodesStoreActions()
 
-    const nodes = useNodesStoreNodes()
+    const isCreateModalOpen = useNodesStoreCreateModalIsOpen()
+    const isEditModalOpen = useNodesStoreEditModalIsOpen()
+
+    const { data: nodes, isLoading } = useGetNodes()
 
     useEffect(() => {
         ;(async () => {
-            await actions.getNodes()
-            await actions.getPubKey()
+            await queryClient.prefetchQuery({
+                queryKey: nodesQueryKeys.getPubKey.queryKey
+            })
         })()
         return () => {
             actions.resetState()
         }
     }, [])
 
-    useInterval(
-        () => {
-            actions.getNodes()
-        },
-        3000,
-        { autoInvoke: true }
-    )
+    useEffect(() => {
+        if (isCreateModalOpen || isEditModalOpen) return
+        ;(async () => {
+            await queryClient.refetchQueries({ queryKey: QueryKeys.nodes.getAllNodes.queryKey })
+        })()
+    }, [isCreateModalOpen, isEditModalOpen])
 
-    return <NodesPageComponent nodes={nodes} />
+    return <NodesPageComponent isLoading={isLoading} nodes={nodes} />
 }

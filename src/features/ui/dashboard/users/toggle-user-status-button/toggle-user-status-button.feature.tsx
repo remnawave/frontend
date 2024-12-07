@@ -2,22 +2,28 @@ import { PiCellSignalFullDuotone, PiCellSignalSlashDuotone, PiTrashDuotone } fro
 import { USERS_STATUS } from '@remnawave/backend-contract'
 import { Button } from '@mantine/core'
 
-import { useDisableUser, useEnableUser, useInvalidateUsersTSQ } from '@shared/api/hooks'
+import { useDisableUser, useEnableUser, usersQueryKeys } from '@shared/api/hooks'
+import { queryClient } from '@shared/api'
 
 import { IProps } from './interfaces'
 
 export function ToggleUserStatusButtonFeature(props: IProps) {
     const { user } = props
-    const invalidateUsers = useInvalidateUsersTSQ()
+    const { uuid } = user
 
     const { mutate: disableUser, isPending: isDisableUserPending } = useDisableUser({
         mutationFns: {
-            onSuccess: invalidateUsers
+            onSuccess: (data) => {
+                queryClient.setQueryData(usersQueryKeys.getUserByUuid({ uuid }).queryKey, data)
+            }
         }
     })
+
     const { mutate: enableUser, isPending: isEnableUserPending } = useEnableUser({
         mutationFns: {
-            onSuccess: invalidateUsers
+            onSuccess: (data) => {
+                queryClient.setQueryData(usersQueryKeys.getUserByUuid({ uuid }).queryKey, data)
+            }
         }
     })
 
@@ -37,9 +43,9 @@ export function ToggleUserStatusButtonFeature(props: IProps) {
 
     const handleToggleUserStatus = async () => {
         if (user.status !== USERS_STATUS.DISABLED) {
-            disableUser({ route: { uuid: user.uuid } })
+            disableUser({ route: { uuid } })
         } else {
-            enableUser({ route: { uuid: user.uuid } })
+            enableUser({ route: { uuid } })
         }
     }
 
