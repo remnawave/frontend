@@ -56,7 +56,17 @@ jobs:
                   tag: ${{ env.TAG_NAME }}
                   release_name: ${{ env.TAG_NAME }}
                   body: |
-                      Deployed by GitHub Actions
+                      🎉 Automatic release of Remnawave Frontend
+
+                      This release was automatically created through GitHub Actions.
+
+                      ### 📦 Artifacts
+                      - remnawave-frontend.zip - archive with built frontend
+
+                      ### 🔍 Details
+                      - Commit: ${{ github.sha }}
+                      - Branch: ${{ github.ref_name }}
+                      - Build time: ${{ github.event.head_commit.timestamp }}
 
     send-telegram-message:
         name: Send Telegram message
