@@ -3,6 +3,7 @@ import { useListState } from '@mantine/hooks'
 import { useEffect } from 'react'
 
 import { HostCardWidget } from '@widgets/dashboard/hosts/host-card'
+import { EmptyPageLayout } from '@shared/ui/layouts/empty-page'
 import { useReorderHosts } from '@shared/api/hooks'
 
 import { IProps } from './interfaces'
@@ -38,6 +39,10 @@ export function HostsTableWidget(props: IProps) {
 
     if (!hosts || !inbounds) {
         return null
+    }
+
+    if (hosts.length === 0) {
+        return <EmptyPageLayout />
     }
 
     const handleDragEnd = async (result: DropResult) => {

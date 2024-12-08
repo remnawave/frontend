@@ -29,7 +29,7 @@ export const menu: MenuItem[] = [
             { name: 'Hosts', href: ROUTES.DASHBOARD.HOSTS, icon: PiBookmarksDuotone },
             { name: 'Nodes', href: ROUTES.DASHBOARD.NODES, icon: PiComputerTowerDuotone },
             { name: 'Config', href: ROUTES.DASHBOARD.CONFIG, icon: PiGearDuotone },
-            { name: 'API Keys', href: ROUTES.DASHBOARD.CONFIG, icon: PiCookie }
+            { name: 'API Keys', href: ROUTES.DASHBOARD.API_TOKENS, icon: PiCookie }
         ]
     },
     {

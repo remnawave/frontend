@@ -7,6 +7,7 @@ import {
 } from 'react-router-dom'
 
 import { StatisticNodesConnector } from '@pages/dashboard/statistic-nodes/connectors'
+import { ApiTokensPageConnector } from '@pages/dashboard/api-tokens/ui/connectors'
 import { ConfigPageConnector } from '@pages/dashboard/config/ui/connectors'
 import { HostsPageConnector } from '@pages/dashboard/hosts/ui/connectors'
 import { UsersPageConnector } from '@pages/dashboard/users/ui/connectors'
@@ -39,6 +40,10 @@ const router = createBrowserRouter(
                     <Route element={<HostsPageConnector />} path={ROUTES.DASHBOARD.HOSTS} />
                     <Route element={<NodesPageConnector />} path={ROUTES.DASHBOARD.NODES} />
                     <Route element={<ConfigPageConnector />} path={ROUTES.DASHBOARD.CONFIG} />
+                    <Route
+                        element={<ApiTokensPageConnector />}
+                        path={ROUTES.DASHBOARD.API_TOKENS}
+                    />
                     <Route
                         element={<StatisticNodesConnector />}
                         path={ROUTES.DASHBOARD.NODES_STATS}

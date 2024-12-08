@@ -1,5 +1,6 @@
 import { inferQueryKeyStore, mergeQueryKeys } from '@lukemorales/query-key-factory'
 
+import { apiTokensQueryKeys } from './api-tokens/api-tokens.query.hooks'
 import { systemQueryKeys } from './system/system.query.hooks'
 import { inboundsQueryKeys } from './inbounds/inbounds.query'
 import { configQueryKeys } from './config/config.query.hooks'
@@ -13,7 +14,8 @@ export const QueryKeys = mergeQueryKeys(
     inboundsQueryKeys,
     hostsQueryKeys,
     nodesQueryKeys,
-    configQueryKeys
+    configQueryKeys,
+    apiTokensQueryKeys
 )
 
 export type TQueryKeys = inferQueryKeyStore<typeof QueryKeys>
