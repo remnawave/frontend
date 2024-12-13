@@ -1,5 +1,7 @@
 /* eslint-disable no-nested-ternary */
 /* eslint-disable indent */
+import { date, isValid } from 'zod'
+import { format } from 'path'
 import dayjs from 'dayjs'
 
 export function getNodeResetDaysUtil(targetDay: number): string {
@@ -29,4 +31,19 @@ export function getNodeResetDaysUtil(targetDay: number): string {
     }
 
     return targetDate.fromNow()
+}
+
+export function getNodeResetPeriodUtil(targetDay: number): string {
+    const today = dayjs()
+
+    const targetThisMonth = today.date(targetDay)
+    const correctedThisMonth = targetThisMonth.isValid() ? targetThisMonth : today.endOf('month')
+
+    const isPastTargetDay = today.date() > targetDay
+
+    const startDate = isPastTargetDay ? correctedThisMonth : correctedThisMonth.subtract(1, 'month')
+
+    const endDate = isPastTargetDay ? correctedThisMonth.add(1, 'month') : correctedThisMonth
+
+    return `${startDate.format('D MMMM')} – ${endDate.format('D MMMM')}`
 }

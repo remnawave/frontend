@@ -101,7 +101,7 @@ export function NodeCardWidget(props: IProps) {
 
                     {percentage >= 0 && node.isTrafficTrackingActive && (
                         <Progress
-                            color={percentage > 95 ? 'red.9' : 'green.9'}
+                            color={percentage > 95 ? 'red.9' : 'teal.9'}
                             radius="md"
                             size="25"
                             striped

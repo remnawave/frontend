@@ -12,8 +12,8 @@ import { useState } from 'react'
 import { UserActionGroupFeature } from '@features/dashboard/users/users-action-group/action-group.feature'
 import { useUserTableColumns } from '@features/dashboard/users/users-table/model/use-table-columns'
 import { ViewUserActionFeature } from '@features/ui/dashboard/users/view-user-action'
-import { QueryKeys, useGetUsersV2, usersQueryKeys } from '@shared/api/hooks'
 import { DataTableShared } from '@shared/ui/table'
+import { useGetUsersV2 } from '@shared/api/hooks'
 
 import { customIcons } from './constants'
 
@@ -38,13 +38,6 @@ export function UserTableWidget() {
         filterModes: columnFilterFns,
         sorting
     }
-
-    // const { data, isError, isFetching, isLoading, refetch } = useGetUsersV2({
-    //     query: params,
-    //     rQueryParams: {
-    //         queryKey: QueryKeys.users.getAllUsers(params).queryKey
-    //     }
-    // })
 
     const { data, isError, isFetching, isLoading, refetch } = useGetUsersV2({
         query: params

@@ -6,6 +6,7 @@ import {
     RouterProvider
 } from 'react-router-dom'
 
+import { NodesBandwidthTablePageConnector } from '@pages/dashboard/nodes-bandwidth-table/ui/connectors'
 import { StatisticNodesConnector } from '@pages/dashboard/statistic-nodes/connectors'
 import { ApiTokensPageConnector } from '@pages/dashboard/api-tokens/ui/connectors'
 import { ConfigPageConnector } from '@pages/dashboard/config/ui/connectors'
@@ -39,6 +40,10 @@ const router = createBrowserRouter(
                     <Route element={<UsersPageConnector />} path={ROUTES.DASHBOARD.USERS} />
                     <Route element={<HostsPageConnector />} path={ROUTES.DASHBOARD.HOSTS} />
                     <Route element={<NodesPageConnector />} path={ROUTES.DASHBOARD.NODES} />
+                    <Route
+                        element={<NodesBandwidthTablePageConnector />}
+                        path={ROUTES.DASHBOARD.NODES_BANDWIDTH_TABLE}
+                    />
                     <Route element={<ConfigPageConnector />} path={ROUTES.DASHBOARD.CONFIG} />
                     <Route
                         element={<ApiTokensPageConnector />}

@@ -9,6 +9,7 @@ export const ROUTES = {
         USERS: '/dashboard/users',
         HOSTS: '/dashboard/hosts',
         NODES: '/dashboard/nodes',
+        NODES_BANDWIDTH_TABLE: '/dashboard/bandwidth-table',
         CONFIG: '/dashboard/config',
         NODES_STATS: '/dashboard/stats/nodes',
         API_TOKENS: '/dashboard/api-tokens'
