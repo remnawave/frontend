@@ -25,6 +25,7 @@ import { UpdateUserCommand } from '@remnawave/backend-contract'
 import { useForm, zodResolver } from '@mantine/form'
 import { DateTimePicker } from '@mantine/dates'
 import { useEffect } from 'react'
+import dayjs from 'dayjs'
 
 import {
     useUserModalStoreActions,
@@ -175,6 +176,28 @@ export const ViewUserModal = () => {
                                 {...form.getInputProps('shortUuid')}
                                 disabled
                                 leftSection={<PiLinkDuotone size="1rem" />}
+                            />
+
+                            <TextInput
+                                disabled
+                                label="Created at"
+                                leftSection={<PiCalendarDuotone size="1rem" />}
+                                value={
+                                    user?.createdAt
+                                        ? dayjs(user.createdAt).format('DD/MM/YYYY HH:mm')
+                                        : ''
+                                }
+                            />
+
+                            <TextInput
+                                disabled
+                                label="Last traffic reset at"
+                                leftSection={<PiCalendarDuotone size="1rem" />}
+                                value={
+                                    user?.lastTrafficResetAt
+                                        ? dayjs(user.lastTrafficResetAt).format('DD/MM/YYYY HH:mm')
+                                        : 'Never'
+                                }
                             />
                         </Stack>
 

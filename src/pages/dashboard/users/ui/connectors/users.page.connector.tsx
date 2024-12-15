@@ -25,7 +25,7 @@ export function UsersPageConnector() {
     useEffect(() => {
         if (isModalOpen || isCreateUserModalOpen) return
         ;(async () => {
-            await queryClient.refetchQueries({ queryKey: QueryKeys.users._def })
+            await queryClient.refetchQueries({ queryKey: QueryKeys.users.getAllUsers._def })
             await queryClient.refetchQueries({ queryKey: QueryKeys.system._def })
         })()
     }, [isModalOpen, isCreateUserModalOpen])
