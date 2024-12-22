@@ -1,5 +1,5 @@
 import { Badge, Container, Group, Progress, Text, UnstyledButton } from '@mantine/core'
-import { PiArrowsCounterClockwise } from 'react-icons/pi'
+import { PiArrowsCounterClockwise, PiUsersDuotone } from 'react-icons/pi'
 import { useClipboard, useHover } from '@mantine/hooks'
 import { notifications } from '@mantine/notifications'
 import ColorHash from 'color-hash'
@@ -62,6 +62,17 @@ export function NodeCardWidget(props: IProps) {
             >
                 <Group gap="xs" grow preventGrowOverflow={false}>
                     <NodeStatusBadgeWidget node={node} style={{ cursor: 'pointer' }} />
+
+                    <Badge
+                        color={node.usersOnline! > 0 ? 'teal' : 'gray'}
+                        leftSection={<PiUsersDuotone size={18} />}
+                        radius="md"
+                        size="lg"
+                        style={{ cursor: 'pointer' }}
+                        variant="outline"
+                    >
+                        {node.usersOnline}
+                    </Badge>
 
                     <Badge
                         autoContrast

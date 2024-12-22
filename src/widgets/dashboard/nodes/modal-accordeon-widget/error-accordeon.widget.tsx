@@ -1,14 +1,23 @@
 import { Accordion, ActionIcon, Code, CopyButton, Group, Stack, Text } from '@mantine/core'
 import { PiCheck, PiCopy, PiInfo, PiNetworkSlash } from 'react-icons/pi'
+import { useEffect, useState } from 'react'
 
 import { IProps } from './interfaces'
 
 export const ModalAccordionWidget = (props: IProps) => {
     const { node, fetchedNode, pubKey } = props
 
-    const localStatusMessage = node?.lastStatusMessage ?? fetchedNode?.lastStatusMessage
+    const [localStatusMessage, setLocalStatusMessage] = useState<null | string>(null)
 
     const accordionValue = localStatusMessage ? 'error' : 'none'
+
+    useEffect(() => {
+        if (fetchedNode) {
+            setLocalStatusMessage(fetchedNode.lastStatusMessage)
+        } else if (node?.lastStatusMessage) {
+            setLocalStatusMessage(node.lastStatusMessage)
+        }
+    }, [fetchedNode])
 
     return (
         <Accordion defaultValue={accordionValue} key={node?.uuid} radius="md" variant="contained">

@@ -97,7 +97,7 @@ export const EditNodeModalConnectorWidget = () => {
             title={
                 <Group gap="xl" justify="space-between">
                     <Text fw={500}>Edit node</Text>
-                    {node && <NodeStatusBadgeWidget node={node} />}
+                    {node && <NodeStatusBadgeWidget fetchedNode={fetchedNode} node={node} />}
                 </Group>
             }
         >

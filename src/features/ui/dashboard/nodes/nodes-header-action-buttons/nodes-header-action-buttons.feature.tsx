@@ -4,9 +4,7 @@ import { Button, Group } from '@mantine/core'
 import { useNodesStoreActions } from '@entities/dashboard/nodes/nodes-store/nodes-store'
 import { useGetNodes, useRestartAllNodes } from '@shared/api/hooks'
 
-import { IProps } from './interfaces'
-
-export const NodesHeaderActionButtonsFeature = (props: IProps) => {
+export const NodesHeaderActionButtonsFeature = () => {
     const actions = useNodesStoreActions()
 
     const handleCreate = () => {
@@ -50,7 +48,7 @@ export const NodesHeaderActionButtonsFeature = (props: IProps) => {
                 size="xs"
                 variant="default"
             >
-                Create new host
+                Create new node
             </Button>
         </Group>
     )
