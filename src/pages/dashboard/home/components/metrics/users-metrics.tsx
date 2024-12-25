@@ -1,7 +1,6 @@
 import {
     PiClockCountdownDuotone,
     PiClockUserDuotone,
-    PiDevicesDuotone,
     PiProhibitDuotone,
     PiPulseDuotone,
     PiUsersDuotone
@@ -12,12 +11,6 @@ import { formatInt } from '@shared/utils/misc'
 
 export const getUsersMetrics = (users: GetStatsCommand.Response['response']['users']) => {
     return [
-        {
-            value: formatInt(users.onlineLastMinute) ?? 0,
-            icon: PiDevicesDuotone,
-            title: 'Online users',
-            color: 'teal'
-        },
         {
             value: formatInt(users.totalUsers) ?? 0,
             icon: PiUsersDuotone,

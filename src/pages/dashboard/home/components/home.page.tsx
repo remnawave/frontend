@@ -5,7 +5,7 @@ import { LoadingScreen, PageHeader } from '@shared/ui'
 import { MetricWithTrend } from '@shared/ui/metrics'
 import { Page } from '@shared/ui/page'
 
-import { getBandwidthMetrics, getSimpleMetrics, getUsersMetrics } from './metrics'
+import { getBandwidthMetrics, getOnlineMetrics, getSimpleMetrics, getUsersMetrics } from './metrics'
 import { BREADCRUMBS } from './constant'
 import { IProps } from './interfaces'
 
@@ -19,6 +19,7 @@ export const HomePage = (props: IProps) => {
     const bandwidthMetrics = getBandwidthMetrics(bandwidthStats)
     const simpleMetrics = getSimpleMetrics(systemInfo)
     const usersMetrics = getUsersMetrics(systemInfo.users)
+    const onlineMetrics = getOnlineMetrics(systemInfo.onlineStats)
 
     return (
         <Page title="Home">
@@ -35,6 +36,13 @@ export const HomePage = (props: IProps) => {
                 <Text fw={600}>System</Text>
                 <SimpleGrid cols={{ base: 1, sm: 2, xl: 3 }}>
                     {simpleMetrics.map((metric) => (
+                        <MetricWithIcon key={metric.title} {...metric} />
+                    ))}
+                </SimpleGrid>
+
+                <Text fw={600}>Online stats</Text>
+                <SimpleGrid cols={{ base: 1, sm: 2, xl: 4 }}>
+                    {onlineMetrics.map((metric) => (
                         <MetricWithIcon key={metric.title} {...metric} />
                     ))}
                 </SimpleGrid>

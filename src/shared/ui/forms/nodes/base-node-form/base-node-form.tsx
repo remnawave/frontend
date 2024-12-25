@@ -1,11 +1,13 @@
 import {
     ActionIcon,
     Button,
+    Checkbox,
     Collapse,
     Divider,
     Group,
     NumberInput,
     rem,
+    SimpleGrid,
     Stack,
     Switch,
     Text,
@@ -13,8 +15,10 @@ import {
 } from '@mantine/core'
 import { CreateNodeCommand, UpdateNodeCommand } from '@remnawave/backend-contract'
 import { PiCheckDuotone, PiFloppyDiskDuotone, PiXDuotone } from 'react-icons/pi'
+import { useMemo } from 'react'
 
 import { ToggleNodeStatusButtonFeature } from '@features/ui/dashboard/nodes/toggle-node-status-button'
+import { InboundCheckboxCardWidget } from '@widgets/dashboard/users/inbound-checkbox-card'
 import { ModalAccordionWidget } from '@widgets/dashboard/nodes/modal-accordeon-widget'
 import { DeleteNodeFeature } from '@features/ui/dashboard/nodes/delete-node'
 
@@ -32,8 +36,25 @@ export const BaseNodeForm = <T extends CreateNodeCommand.Request | UpdateNodeCom
         advancedOpened,
         isUpdateNodePending,
         handleSubmit,
-        setAdvancedOpened
+        setAdvancedOpened,
+        inbounds
     } = props
+
+    const includedInbounds = useMemo(() => {
+        const excluded = form.getValues().excludedInbounds || []
+        const allInboundUuids = inbounds?.map((inbound) => inbound.uuid) || []
+
+        const included = allInboundUuids.filter((uuid) => !excluded.includes(uuid))
+        return included
+    }, [inbounds, form.getValues().excludedInbounds])
+
+    const handleIncludedInboundsChange = (values: string[]) => {
+        const allInboundUuids = inbounds?.map((inbound) => inbound.uuid) || []
+        const newExcludedInbounds = allInboundUuids.filter((uuid) => !values.includes(uuid))
+
+        // @ts-expect-error unknown error
+        form.setFieldValue('excludedInbounds', newExcludedInbounds)
+    }
 
     return (
         <form onSubmit={handleSubmit}>
@@ -165,6 +186,28 @@ export const BaseNodeForm = <T extends CreateNodeCommand.Request | UpdateNodeCom
                             />
                         </Group>
                     </Collapse>
+
+                    <Checkbox.Group
+                        description="Select active inbounds for this node"
+                        key={form.key('excludedInbounds')}
+                        label="Inbounds"
+                        onChange={handleIncludedInboundsChange}
+                        value={includedInbounds}
+                    >
+                        <SimpleGrid
+                            cols={{
+                                base: 1,
+                                sm: 1,
+                                md: 2
+                            }}
+                            key="node-inbounds-grid"
+                            pt="md"
+                        >
+                            {inbounds?.map((inbound) => (
+                                <InboundCheckboxCardWidget inbound={inbound} key={inbound.uuid} />
+                            ))}
+                        </SimpleGrid>
+                    </Checkbox.Group>
                 </Stack>
             </Stack>
 

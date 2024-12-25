@@ -1,4 +1,4 @@
-import { Badge, Container, Group, Progress, Text, UnstyledButton } from '@mantine/core'
+import { Badge, Container, Group, Paper, Progress, Text, UnstyledButton } from '@mantine/core'
 import { PiArrowsCounterClockwise, PiUsersDuotone } from 'react-icons/pi'
 import { useClipboard, useHover } from '@mantine/hooks'
 import { notifications } from '@mantine/notifications'
@@ -66,6 +66,7 @@ export function NodeCardWidget(props: IProps) {
                     <Badge
                         color={node.usersOnline! > 0 ? 'teal' : 'gray'}
                         leftSection={<PiUsersDuotone size={18} />}
+                        miw={'8ch'}
                         radius="md"
                         size="lg"
                         style={{ cursor: 'pointer' }}
@@ -74,34 +75,39 @@ export function NodeCardWidget(props: IProps) {
                         {node.usersOnline}
                     </Badge>
 
-                    <Badge
-                        autoContrast
-                        color={ch.hex(node.uuid)}
-                        miw={'15ch'}
-                        radius="md"
-                        size="lg"
-                        style={{ cursor: 'pointer' }}
-                        variant="light"
-                    >
-                        {node.name}
-                    </Badge>
-                    <Text
-                        className={classes.hostInfoLabel}
-                        maw={'22ch'}
-                        miw={'22ch'}
-                        onClick={handleCopy}
-                        style={{ cursor: 'copy' }}
-                        truncate="end"
-                    >
-                        {node.address}
-                        {node.port ? `:${node.port}` : ''}
-                    </Text>
+                    <Paper miw={'35ch'}>
+                        <Badge
+                            autoContrast
+                            color={ch.hex(node.uuid)}
+                            miw={'15ch'}
+                            radius="md"
+                            size="lg"
+                            style={{ cursor: 'pointer' }}
+                            variant="light"
+                        >
+                            {node.name}
+                        </Badge>
+                    </Paper>
+
+                    <Paper miw={'22ch'}>
+                        <Text
+                            className={classes.hostInfoLabel}
+                            maw={'22ch'}
+                            miw={'22ch'}
+                            onClick={handleCopy}
+                            style={{ cursor: 'copy' }}
+                            truncate="end"
+                        >
+                            {node.address}
+                            {node.port ? `:${node.port}` : ''}
+                        </Text>
+                    </Paper>
 
                     <Badge
                         autoContrast
                         color={'gray'}
                         ff={'monospace'}
-                        miw={'15ch'}
+                        miw={'25ch'}
                         radius="md"
                         size="lg"
                         style={{ cursor: 'pointer' }}
@@ -113,6 +119,7 @@ export function NodeCardWidget(props: IProps) {
                     {percentage >= 0 && node.isTrafficTrackingActive && (
                         <Progress
                             color={percentage > 95 ? 'red.9' : 'teal.9'}
+                            maw={'30ch'}
                             radius="md"
                             size="25"
                             striped

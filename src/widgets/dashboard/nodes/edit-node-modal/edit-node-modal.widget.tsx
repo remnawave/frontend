@@ -8,7 +8,13 @@ import {
     useNodesStoreEditModalIsOpen,
     useNodesStoreEditModalNode
 } from '@entities/dashboard/nodes'
-import { nodesQueryKeys, useGetNode, useGetPubKey, useUpdateNode } from '@shared/api/hooks'
+import {
+    nodesQueryKeys,
+    useGetInbounds,
+    useGetNode,
+    useGetPubKey,
+    useUpdateNode
+} from '@shared/api/hooks'
 import { BaseNodeForm } from '@shared/ui/forms/nodes/base-node-form/base-node-form'
 import { bytesToGbUtil, gbToBytesUtil } from '@shared/utils/bytes'
 import { queryClient } from '@shared/api'
@@ -29,6 +35,7 @@ export const EditNodeModalConnectorWidget = () => {
     })
 
     const { data: pubKey } = useGetPubKey()
+    const { data: inbounds } = useGetInbounds()
 
     const { data: fetchedNode } = useGetNode({
         route: {
@@ -70,7 +77,8 @@ export const EditNodeModalConnectorWidget = () => {
                 isTrafficTrackingActive: node.isTrafficTrackingActive ?? undefined,
                 trafficLimitBytes: bytesToGbUtil(node.trafficLimitBytes ?? undefined),
                 trafficResetDay: node.trafficResetDay ?? undefined,
-                notifyPercent: node.notifyPercent ?? undefined
+                notifyPercent: node.notifyPercent ?? undefined,
+                excludedInbounds: node.excludedInbounds.map((inbound) => inbound.uuid) ?? []
             })
         }
     }, [node])
@@ -107,6 +115,7 @@ export const EditNodeModalConnectorWidget = () => {
                 form={form}
                 handleClose={handleClose}
                 handleSubmit={handleSubmit}
+                inbounds={inbounds}
                 isUpdateNodePending={isUpdateNodePending}
                 node={node}
                 pubKey={pubKey}

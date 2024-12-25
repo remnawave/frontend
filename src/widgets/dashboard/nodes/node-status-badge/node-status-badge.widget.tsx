@@ -3,9 +3,7 @@ import { Badge } from '@mantine/core'
 
 import { IProps } from './interface'
 
-export function NodeStatusBadgeWidget(props: IProps) {
-    const { node, fetchedNode } = props
-
+export function NodeStatusBadgeWidget({ node, fetchedNode, ...rest }: IProps) {
     let icon: React.ReactNode
     let color = ''
     let status = ''
@@ -31,7 +29,7 @@ export function NodeStatusBadgeWidget(props: IProps) {
     }
 
     return (
-        <Badge color={color} leftSection={icon} miw={'18ch'} size="lg" {...props}>
+        <Badge color={color} leftSection={icon} miw={'20ch'} size="lg" {...rest}>
             {status}
         </Badge>
     )

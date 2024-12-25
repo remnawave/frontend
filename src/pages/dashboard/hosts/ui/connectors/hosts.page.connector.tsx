@@ -12,9 +12,8 @@ export function HostsPageConnector() {
     const { data: inbounds } = useGetInbounds()
     const {
         data: hosts,
-        isFetching: isHostsLoading,
-        isPending: isHostsPending,
-        isRefetching: isHostsRefetching
+
+        isLoading: isHostsLoading
     } = useGetHosts()
 
     const isCreateModalOpen = useHostsStoreCreateModalIsOpen()
@@ -27,11 +26,5 @@ export function HostsPageConnector() {
         })()
     }, [isCreateModalOpen, isEditModalOpen])
 
-    return (
-        <HostsPageComponent
-            hosts={hosts}
-            inbounds={inbounds}
-            isHostsLoading={isHostsLoading || isHostsPending || isHostsRefetching}
-        />
-    )
+    return <HostsPageComponent hosts={hosts} inbounds={inbounds} isHostsLoading={isHostsLoading} />
 }
