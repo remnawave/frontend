@@ -29,7 +29,7 @@ export function NodeStatusBadgeWidget({ node, fetchedNode, ...rest }: IProps) {
     }
 
     return (
-        <Badge color={color} leftSection={icon} miw={'20ch'} size="lg" {...rest}>
+        <Badge color={color} leftSection={icon} maw={'20ch'} miw={'20ch'} size="lg" {...rest}>
             {status}
         </Badge>
     )

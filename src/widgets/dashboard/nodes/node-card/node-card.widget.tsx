@@ -21,7 +21,7 @@ export function NodeCardWidget(props: IProps) {
 
     const clipboard = useClipboard({ timeout: 500 })
 
-    const ch = new ColorHash()
+    const ch = new ColorHash({ lightness: [0.65, 0.65, 0.65] })
 
     let maxData = '∞'
     let percentage = 0
@@ -79,11 +79,12 @@ export function NodeCardWidget(props: IProps) {
                         <Badge
                             autoContrast
                             color={ch.hex(node.uuid)}
-                            miw={'15ch'}
+                            maw={'30ch'}
                             radius="md"
                             size="lg"
                             style={{ cursor: 'pointer' }}
                             variant="light"
+                            w={'100%'}
                         >
                             {node.name}
                         </Badge>
@@ -107,6 +108,7 @@ export function NodeCardWidget(props: IProps) {
                         autoContrast
                         color={'gray'}
                         ff={'monospace'}
+                        maw={'40ch'}
                         miw={'25ch'}
                         radius="md"
                         size="lg"
