@@ -18,12 +18,11 @@ import { MantineProvider } from '@mantine/core'
 import { useMediaQuery } from '@mantine/hooks'
 
 // import { StrictMode } from 'react'
-
+import { AuthProvider } from '@shared/hocs/auth-provider'
 import { theme } from '@shared/constants'
 
 import { Router } from './app/router/router'
 import { queryClient } from './shared/api'
-import { AuthProvider } from '@shared/hocs/auth-provider'
 
 export function App() {
     const mq = useMediaQuery('(min-width: 40em)')

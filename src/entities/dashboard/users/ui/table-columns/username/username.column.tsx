@@ -1,7 +1,7 @@
 import { Box, Group, Indicator, Text } from '@mantine/core'
 
-import { IProps } from '@entities/dashboard/users/ui/table-columns/username/interface'
 import { getConnectionStatusColorUtil, getTimeAgoUtil } from '@shared/utils/time-utils'
+import { IProps } from '@entities/dashboard/users/ui/table-columns/username/interface'
 
 export function UsernameColumnEntity(props: IProps) {
     const { user } = props

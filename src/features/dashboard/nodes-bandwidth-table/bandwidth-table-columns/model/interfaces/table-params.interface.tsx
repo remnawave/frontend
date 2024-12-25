@@ -2,7 +2,6 @@
 import {
     MRT_ColumnFilterFnsState,
     MRT_ColumnFiltersState,
-    MRT_PaginationState,
     MRT_SortingState
 } from 'mantine-react-table'
 
