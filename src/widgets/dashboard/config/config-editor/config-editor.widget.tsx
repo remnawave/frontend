@@ -7,6 +7,7 @@ import { ConfigValidationFeature } from '@features/dashboard/config/config-valid
 import { MonacoSetupFeature } from '@features/dashboard/config/monaco-setup'
 import { monacoTheme } from '@shared/constants/monaco-theme/monaco-theme'
 
+import styles from './ConfigEditor.module.css'
 import { Props } from './interfaces'
 
 export function ConfigEditorWidget(props: Props) {
@@ -30,11 +31,20 @@ export function ConfigEditorWidget(props: Props) {
 
     return (
         <Box>
-            <Paper mb="md" p={0} radius="xs" withBorder>
+            <Paper
+                mb="md"
+                p={0}
+                radius="xs"
+                style={{
+                    resize: 'vertical',
+                    overflow: 'hidden'
+                }}
+                withBorder
+            >
                 <Editor
                     beforeMount={handleEditorDidMount}
+                    className={styles.monacoEditor}
                     defaultLanguage="json"
-                    height="400px"
                     loading={'Loading editor...'}
                     onChange={() =>
                         ConfigValidationFeature.validate(
@@ -71,7 +81,7 @@ export function ConfigEditorWidget(props: Props) {
                             indentation: true
                         },
                         insertSpaces: true,
-                        minimap: { enabled: false },
+                        minimap: { enabled: true },
                         quickSuggestions: true,
                         scrollBeyondLastLine: false,
                         tabSize: 2
