@@ -42,9 +42,7 @@ export const useUserTableColumns = () => {
                 accessorKey: 'expireAt',
                 header: 'Expire at',
                 Cell: ({ cell }) => <StatusColumnEntity need="date" user={cell.row.original} />,
-
                 enableColumnFilterModes: false,
-
                 enableColumnFilter: false
             },
             {
@@ -83,6 +81,8 @@ export const useUserTableColumns = () => {
                 minSize: 170,
                 maxSize: 170,
                 size: 170,
+                enableColumnFilterModes: false,
+                enableColumnFilter: false,
                 mantineTableBodyCellProps: {
                     align: 'center'
                 }
@@ -97,6 +97,8 @@ export const useUserTableColumns = () => {
                 minSize: 170,
                 maxSize: 170,
                 size: 170,
+                enableColumnFilterModes: false,
+                enableColumnFilter: false,
                 mantineTableBodyCellProps: {
                     align: 'center'
                 }
@@ -105,9 +107,10 @@ export const useUserTableColumns = () => {
                 accessorKey: 'subLastUserAgent',
                 header: 'Last UA',
                 accessorFn: (originalRow) => originalRow.subLastUserAgent || '–',
-                minSize: 170,
-                maxSize: 170,
-                size: 170,
+                minSize: 250,
+                maxSize: 500,
+                size: 250,
+
                 mantineTableBodyCellProps: {
                     align: 'center'
                 }
@@ -120,6 +123,8 @@ export const useUserTableColumns = () => {
                 minSize: 170,
                 maxSize: 170,
                 size: 170,
+                enableColumnFilterModes: false,
+                enableColumnFilter: false,
                 mantineTableBodyCellProps: {
                     align: 'center'
                 }
@@ -135,6 +140,8 @@ export const useUserTableColumns = () => {
                 minSize: 170,
                 maxSize: 170,
                 size: 170,
+                enableColumnFilterModes: false,
+                enableColumnFilter: false,
                 mantineTableBodyCellProps: {
                     align: 'center'
                 }
@@ -147,6 +154,8 @@ export const useUserTableColumns = () => {
                 minSize: 170,
                 maxSize: 170,
                 size: 170,
+                enableColumnFilterModes: false,
+                enableColumnFilter: false,
                 mantineTableBodyCellProps: {
                     align: 'center'
                 }
