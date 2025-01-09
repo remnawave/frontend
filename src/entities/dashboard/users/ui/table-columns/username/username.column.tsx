@@ -10,7 +10,7 @@ export function UsernameColumnEntity(props: IProps) {
     const timeAgo = getTimeAgoUtil(user.onlineAt)
 
     return (
-        <Group align="center" gap="md" wrap="nowrap">
+        <Group align="center" gap="md" pl={10} wrap="nowrap">
             <Indicator color={color} inline processing size={12} zIndex={10} />
             <Box w="100%">
                 <Text fw={500} size="sm" truncate="end">

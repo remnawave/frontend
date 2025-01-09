@@ -11,7 +11,7 @@ import { useState } from 'react'
 
 import { UserActionGroupFeature } from '@features/dashboard/users/users-action-group/action-group.feature'
 import { useUserTableColumns } from '@features/dashboard/users/users-table/model/use-table-columns'
-import { ViewUserActionFeature } from '@features/ui/dashboard/users/view-user-action'
+import { UserActionsFeature } from '@features/ui/dashboard/users/user-actions'
 import { DataTableShared } from '@shared/ui/table'
 import { useGetUsersV2 } from '@shared/api/hooks'
 
@@ -103,8 +103,14 @@ export function UserTableWidget() {
             sorting
         },
         enableRowActions: true,
-        renderRowActions: ({ row }) => <ViewUserActionFeature userUuid={row.original.uuid} />,
-        displayColumnDefOptions: { 'mrt-row-actions': { size: 120 } }
+        renderRowActions: ({ row }) => (
+            <UserActionsFeature
+                subscriptionUrl={row.original.subscriptionUrl}
+                userUuid={row.original.uuid}
+            />
+        ),
+
+        displayColumnDefOptions: { 'mrt-row-actions': { size: 160 } }
     })
 
     return (
