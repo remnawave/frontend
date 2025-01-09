@@ -3,7 +3,7 @@
   "private": false,
   "type": "module",
   "version": "0.4.15",
-  "license": "MIT",
+  "license": "AGPL-3.0-only",
   "author": "REMNAWAVE <github.com/remnawave>",
   "homepage": "https://github.com/remnawave",
   "repository": {
