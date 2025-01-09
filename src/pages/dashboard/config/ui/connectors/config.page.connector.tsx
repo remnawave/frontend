@@ -12,7 +12,11 @@ export function ConfigPageConnector() {
     const [downloadProgress, setDownloadProgress] = useState(0)
     const [isLoading, setIsLoading] = useState(true)
 
-    const { data: { config } = { config: undefined }, isLoading: isConfigLoading } = useGetConfig()
+    const {
+        data: { config } = { config: undefined },
+        isLoading: isConfigLoading,
+        refetch
+    } = useGetConfig()
 
     useEffect(() => {
         const initWasm = async () => {
@@ -44,7 +48,9 @@ export function ConfigPageConnector() {
             }
         }
 
+        refetch()
         initWasm()
+
         return () => {
             delete window.onWasmInitialized
         }
