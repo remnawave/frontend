@@ -3,6 +3,7 @@ import {
     DeleteUserCommand,
     DisableUserCommand,
     EnableUserCommand,
+    ResetUserTrafficCommand,
     RevokeUserSubscriptionCommand,
     UpdateUserCommand
 } from '@remnawave/backend-contract'
@@ -144,6 +145,29 @@ export const useDisableUser = createPatchMutationHook({
         onError: (error) => {
             notifications.show({
                 title: `${DisableUserCommand.TSQ_url}`,
+                message:
+                    error instanceof Error ? error.message : `Request failed with unknown error.`,
+                color: 'red'
+            })
+        }
+    }
+})
+
+export const useResetUserTraffic = createPatchMutationHook({
+    endpoint: ResetUserTrafficCommand.TSQ_url,
+    responseSchema: ResetUserTrafficCommand.ResponseSchema,
+    routeParamsSchema: ResetUserTrafficCommand.RequestSchema,
+    rMutationParams: {
+        onSuccess: () => {
+            notifications.show({
+                title: 'Success',
+                message: 'User traffic reset successfully',
+                color: 'teal'
+            })
+        },
+        onError: (error) => {
+            notifications.show({
+                title: `${ResetUserTrafficCommand.TSQ_url}`,
                 message:
                     error instanceof Error ? error.message : `Request failed with unknown error.`,
                 color: 'red'

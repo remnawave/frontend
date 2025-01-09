@@ -3,6 +3,7 @@ import {
     Box,
     Button,
     Checkbox,
+    CopyButton,
     Divider,
     Group,
     Modal,
@@ -16,7 +17,9 @@ import {
 } from '@mantine/core'
 import {
     PiCalendarDuotone,
+    PiCheck,
     PiClockDuotone,
+    PiCopy,
     PiFloppyDiskDuotone,
     PiLinkDuotone,
     PiUserDuotone
@@ -24,7 +27,7 @@ import {
 import { UpdateUserCommand } from '@remnawave/backend-contract'
 import { useForm, zodResolver } from '@mantine/form'
 import { DateTimePicker } from '@mantine/dates'
-import { useEffect } from 'react'
+import { useEffect, useMemo } from 'react'
 import dayjs from 'dayjs'
 
 import {
@@ -93,7 +96,6 @@ export const ViewUserModal = () => {
     useEffect(() => {
         if (user && inbounds) {
             const activeInboundUuids = user.activeUserInbounds.map((inbound) => inbound.uuid)
-
             form.setValues({
                 uuid: user.uuid,
                 username: user.username,
@@ -134,6 +136,11 @@ export const ViewUserModal = () => {
         }, 300)
     }
 
+    const userSubscriptionUrlMemo = useMemo(
+        () => user?.subscriptionUrl || '',
+        [user?.subscriptionUrl]
+    )
+
     return (
         <Modal
             centered
@@ -168,6 +175,23 @@ export const ViewUserModal = () => {
                                 {...form.getInputProps('username')}
                                 disabled
                                 leftSection={<PiUserDuotone size="1rem" />}
+                                rightSection={
+                                    <CopyButton timeout={2000} value={form.getValues().username}>
+                                        {({ copied, copy }) => (
+                                            <ActionIcon
+                                                color={copied ? 'teal' : 'gray'}
+                                                onClick={copy}
+                                                variant="subtle"
+                                            >
+                                                {copied ? (
+                                                    <PiCheck size="1rem" />
+                                                ) : (
+                                                    <PiCopy size="1rem" />
+                                                )}
+                                            </ActionIcon>
+                                        )}
+                                    </CopyButton>
+                                }
                             />
 
                             <TextInput
@@ -176,6 +200,50 @@ export const ViewUserModal = () => {
                                 {...form.getInputProps('shortUuid')}
                                 disabled
                                 leftSection={<PiLinkDuotone size="1rem" />}
+                                rightSection={
+                                    <CopyButton timeout={2000} value={form.getValues().shortUuid}>
+                                        {({ copied, copy }) => (
+                                            <ActionIcon
+                                                color={copied ? 'teal' : 'gray'}
+                                                onClick={copy}
+                                                variant="subtle"
+                                            >
+                                                {copied ? (
+                                                    <PiCheck size="1rem" />
+                                                ) : (
+                                                    <PiCopy size="1rem" />
+                                                )}
+                                            </ActionIcon>
+                                        )}
+                                    </CopyButton>
+                                }
+                            />
+
+                            <TextInput
+                                disabled
+                                label="Subscription url"
+                                leftSection={<PiLinkDuotone size="1rem" />}
+                                rightSection={
+                                    <CopyButton
+                                        timeout={2000}
+                                        value={userSubscriptionUrlMemo || ''}
+                                    >
+                                        {({ copied, copy }) => (
+                                            <ActionIcon
+                                                color={copied ? 'teal' : 'gray'}
+                                                onClick={copy}
+                                                variant="subtle"
+                                            >
+                                                {copied ? (
+                                                    <PiCheck size="1rem" />
+                                                ) : (
+                                                    <PiCopy size="1rem" />
+                                                )}
+                                            </ActionIcon>
+                                        )}
+                                    </CopyButton>
+                                }
+                                value={userSubscriptionUrlMemo || ''}
                             />
 
                             <TextInput
@@ -294,7 +362,7 @@ export const ViewUserModal = () => {
                         <Group>
                             <ActionIcon.Group>
                                 <DeleteUserFeature userUuid={user?.uuid ?? ''} />
-                                <ResetUsageUserFeature />
+                                <ResetUsageUserFeature userUuid={user?.uuid ?? ''} />
                                 <RevokeSubscriptionUserFeature userUuid={user?.uuid ?? ''} />
                             </ActionIcon.Group>
                         </Group>

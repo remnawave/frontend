@@ -14,6 +14,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { QueryClientProvider } from '@tanstack/react-query'
 import { NavigationProgress } from '@mantine/nprogress'
 import { Notifications } from '@mantine/notifications'
+import { ModalsProvider } from '@mantine/modals'
 import { MantineProvider } from '@mantine/core'
 import { useMediaQuery } from '@mantine/hooks'
 
@@ -34,10 +35,12 @@ export function App() {
             {isDev && <ReactQueryDevtools initialIsOpen={false} />}
             <AuthProvider>
                 <MantineProvider defaultColorScheme="dark" theme={theme}>
-                    <Notifications position={mq ? 'top-right' : 'bottom-right'} />
-                    <NavigationProgress />
+                    <ModalsProvider>
+                        <Notifications position={mq ? 'top-right' : 'bottom-right'} />
+                        <NavigationProgress />
 
-                    <Router />
+                        <Router />
+                    </ModalsProvider>
                 </MantineProvider>
             </AuthProvider>
         </QueryClientProvider>
