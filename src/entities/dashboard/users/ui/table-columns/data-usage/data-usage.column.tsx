@@ -17,6 +17,7 @@ export function DataUsageColumnEntity(props: IProps) {
         [RESET_PERIODS.MONTH]: 'Montly',
         [RESET_PERIODS.WEEK]: 'Weekly',
         [RESET_PERIODS.DAY]: 'Daily',
+        [RESET_PERIODS.CALENDAR_MONTH]: 'Calendar Month',
         [RESET_PERIODS.NO_RESET]: '∞'
     }[user.trafficLimitStrategy]
 
