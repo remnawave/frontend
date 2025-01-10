@@ -30,6 +30,10 @@ jobs:
             - name: Checkout
               uses: actions/checkout@v3
 
+            - name: NewTag
+              id: tag
+              uses: JinoArch/get-latest-tag@latest
+
             - name: Setup Node
               uses: actions/setup-node@v3
               with:
@@ -39,9 +43,6 @@ jobs:
               run: |
                   npm install
                   npm run start:build
-
-            - name: Get Tag Name
-              run: echo "TAG_NAME=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
 
             - name: Create ZIP archive of /dist
               run: |
@@ -53,12 +54,17 @@ jobs:
                   repo_token: ${{ secrets.GH_TOKEN }}
                   file: remnawave-frontend.zip
                   asset_name: remnawave-frontend.zip
-                  tag: ${{ env.TAG_NAME }}
-                  release_name: ${{ env.TAG_NAME }}
+                  tag: ${{ github.ref_name }}
+                  release_name: ${{ github.ref_name }}
                   body: |
-                      🎉 Automatic release of Remnawave Frontend
+                      🎉 Automatic release of Remnawave Frontend, v${{ github.ref_name }}
 
                       This release was automatically created through GitHub Actions.
+
+
+                      ### 📝 Changes
+
+                      ✏️ Compare: [${{ steps.tag.outputs.previousTag }}...${{ steps.tag.outputs.latestTag }}](https://github.com/${{ github.repository }}/compare/${{ steps.tag.outputs.previousTag }}...${{ steps.tag.outputs.latestTag }})
 
                       ### 📦 Artifacts
                       - remnawave-frontend.zip - archive with built frontend
