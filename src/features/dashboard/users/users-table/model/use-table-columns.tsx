@@ -55,7 +55,7 @@ export const useUserTableColumns = () => {
                 minSize: 150,
                 enableColumnFilterModes: false,
                 enableColumnFilter: false,
-                maxSize: 300,
+                maxSize: 400,
                 size: 300
             },
             {
@@ -64,7 +64,7 @@ export const useUserTableColumns = () => {
 
                 Cell: ({ cell }) => <ShortUuidColumnEntity user={cell.row.original} />,
                 minSize: 140,
-                maxSize: 200,
+                maxSize: 400,
                 size: 140,
 
                 mantineTableBodyCellProps: {
@@ -79,7 +79,7 @@ export const useUserTableColumns = () => {
                         ? dayjs(originalRow.lastTrafficResetAt).format('DD/MM/YYYY, HH:mm')
                         : 'Never',
                 minSize: 170,
-                maxSize: 170,
+                maxSize: 400,
                 size: 170,
                 enableColumnFilterModes: false,
                 enableColumnFilter: false,
@@ -95,7 +95,7 @@ export const useUserTableColumns = () => {
                         ? dayjs(originalRow.onlineAt).format('DD/MM/YYYY, HH:mm')
                         : 'Never',
                 minSize: 170,
-                maxSize: 170,
+                maxSize: 400,
                 size: 170,
                 enableColumnFilterModes: false,
                 enableColumnFilter: false,
@@ -108,8 +108,7 @@ export const useUserTableColumns = () => {
                 header: 'Last UA',
                 accessorFn: (originalRow) => originalRow.subLastUserAgent || '–',
                 minSize: 250,
-                maxSize: 500,
-                size: 250,
+                size: 400,
 
                 mantineTableBodyCellProps: {
                     align: 'center'
@@ -121,7 +120,7 @@ export const useUserTableColumns = () => {
                 accessorFn: (originalRow) =>
                     prettyBytesToAnyUtil(originalRow.totalUsedBytes) || '–',
                 minSize: 170,
-                maxSize: 170,
+                maxSize: 300,
                 size: 170,
                 enableColumnFilterModes: false,
                 enableColumnFilter: false,
@@ -129,7 +128,20 @@ export const useUserTableColumns = () => {
                     align: 'center'
                 }
             },
-
+            {
+                accessorKey: 'lifetimeUsedTrafficBytes',
+                header: 'Lifetime used',
+                accessorFn: (originalRow) =>
+                    prettyBytesToAnyUtil(originalRow.lifetimeUsedTrafficBytes) || '–',
+                minSize: 170,
+                maxSize: 300,
+                size: 170,
+                enableColumnFilterModes: false,
+                enableColumnFilter: false,
+                mantineTableBodyCellProps: {
+                    align: 'center'
+                }
+            },
             {
                 accessorKey: 'subRevokedAt',
                 header: 'Sub-link revoked at',

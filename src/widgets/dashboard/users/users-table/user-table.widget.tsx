@@ -9,8 +9,14 @@ import {
 } from 'mantine-react-table'
 import { useState } from 'react'
 
-import { UserActionGroupFeature } from '@features/dashboard/users/users-action-group/action-group.feature'
+import {
+    useUsersTableStoreActions,
+    useUsersTableStoreColumnPinning,
+    useUsersTableStoreColumnVisibility,
+    useUsersTableStoreShowColumnFilters
+} from '@entities/dashboard/users/users-table-store'
 import { useUserTableColumns } from '@features/dashboard/users/users-table/model/use-table-columns'
+import { UserActionGroupFeature } from '@features/dashboard/users/users-action-group'
 import { UserActionsFeature } from '@features/ui/dashboard/users/user-actions'
 import { DataTableShared } from '@shared/ui/table'
 import { useGetUsersV2 } from '@shared/api/hooks'
@@ -20,7 +26,14 @@ import { customIcons } from './constants'
 export function UserTableWidget() {
     const tableColumns = useUserTableColumns()
 
+    const actions = useUsersTableStoreActions()
+
+    const columnVisibility = useUsersTableStoreColumnVisibility()
+    const columnPinning = useUsersTableStoreColumnPinning()
+    const showColumnFilters = useUsersTableStoreShowColumnFilters()
+
     const [sorting, setSorting] = useState<MRT_SortingState>([])
+
     const [pagination, setPagination] = useState<MRT_PaginationState>({
         pageIndex: 0,
         pageSize: 25
@@ -51,9 +64,10 @@ export function UserTableWidget() {
     const table = useMantineReactTable({
         columns: tableColumns,
         data: fetchedUsers,
-        enableFullScreenToggle: false,
+        enableFullScreenToggle: true,
         enableSortingRemoval: true,
         enableGlobalFilter: false,
+        enableClickToCopy: true,
         // enableColumnFilterModes: true,
         columnFilterModeOptions: ['contains'],
         initialState: {
@@ -61,20 +75,18 @@ export function UserTableWidget() {
                 pageIndex: 0,
                 pageSize: 25
             },
-            showColumnFilters: false,
+            showColumnFilters,
             density: 'xs',
-            columnVisibility: {
-                shortUuid: false,
-                createdAt: false,
-                subRevokedAt: false,
-                totalUsedBytes: false,
-                onlineAt: false,
-                subLastUserAgent: false
-            }
+            columnVisibility,
+            columnPinning
         },
         manualFiltering: true,
         manualPagination: true,
         manualSorting: true,
+        mantinePaginationProps: {
+            rowsPerPageOptions: ['25', '50', '100', '200', '500']
+        },
+
         icons: customIcons,
         enableColumnResizing: true,
 
@@ -83,10 +95,15 @@ export function UserTableWidget() {
             color: 'red',
             children: 'Error loading data'
         } : undefined,
+
         onColumnFilterFnsChange: setColumnFilterFns,
         onColumnFiltersChange: setColumnFilters,
         onPaginationChange: setPagination,
         onSortingChange: setSorting,
+        onColumnPinningChange: actions.setColumnPinning,
+        onColumnVisibilityChange: actions.setColumnVisibility,
+        onShowColumnFiltersChange: actions.setShowColumnFilters,
+
         mantinePaperProps: {
             style: { '--paper-radius': 'var(--mantine-radius-xs)' },
             withBorder: false
@@ -100,8 +117,12 @@ export function UserTableWidget() {
             pagination,
             showAlertBanner: isError,
             showProgressBars: isFetching,
-            sorting
+            showColumnFilters,
+            sorting,
+            columnVisibility,
+            columnPinning
         },
+
         enableRowActions: true,
         renderRowActions: ({ row }) => (
             <UserActionsFeature

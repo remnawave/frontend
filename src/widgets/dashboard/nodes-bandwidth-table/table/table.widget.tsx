@@ -31,7 +31,7 @@ export function NodesBandwidthTableWidget() {
     const table = useMantineReactTable({
         columns: tableColumns,
         data: nodes ?? [],
-        enableFullScreenToggle: false,
+        enableFullScreenToggle: true,
         enableSortingRemoval: true,
         enableGlobalFilter: false,
         enableColumnFilterModes: false,
