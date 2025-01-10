@@ -31,5 +31,11 @@ export function ApiTokensPageConnector() {
         })()
     }, [isCreateModalOpen])
 
-    return <ApiTokensPageComponent apiTokens={apiTokens} isLoading={isLoading} />
+    return (
+        <ApiTokensPageComponent
+            apiTokens={apiTokens?.apiKeys}
+            docs={apiTokens?.docs}
+            isLoading={isLoading}
+        />
+    )
 }

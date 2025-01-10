@@ -29,6 +29,8 @@ export default defineConfig({
             output: {
                 manualChunks: {
                     react: ['react', 'react-dom', 'react-router-dom', 'zustand'],
+                    icons: ['react-icons/pi'],
+                    date: ['dayjs'],
                     axios: ['axios'],
                     zod: ['zod'],
                     mantine: [
@@ -40,7 +42,7 @@ export default defineConfig({
                         '@mantine/modals'
                     ],
                     motion: ['framer-motion'],
-                    crypto: ['crypto-js'],
+                    crypto: ['crypto-js', '@stablelib/base64', '@stablelib/x25519'],
                     recharts: ['recharts'],
                     dnd: ['@hello-pangea/dnd'],
                     mantinetable: ['mantine-react-table'],

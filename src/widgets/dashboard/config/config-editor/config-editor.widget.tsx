@@ -37,7 +37,8 @@ export function ConfigEditorWidget(props: Props) {
                 radius="xs"
                 style={{
                     resize: 'vertical',
-                    overflow: 'hidden'
+                    overflow: 'hidden',
+                    height: '700px'
                 }}
                 withBorder
             >
