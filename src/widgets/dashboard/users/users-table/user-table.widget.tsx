@@ -83,9 +83,9 @@ export function UserTableWidget() {
         manualFiltering: true,
         manualPagination: true,
         manualSorting: true,
-        mantinePaginationProps: {
-            rowsPerPageOptions: ['25', '50', '100', '200', '500']
-        },
+        // mantinePaginationProps: {
+        //     rowsPerPageOptions: ['25', '50', '100']
+        // },
 
         icons: customIcons,
         enableColumnResizing: true,
