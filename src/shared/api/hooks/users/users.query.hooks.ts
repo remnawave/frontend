@@ -21,7 +21,7 @@ export const useGetUserByUuid = createGetQueryHook({
     routeParamsSchema: GetUserByUuidCommand.RequestSchema,
     getQueryKey: ({ route }) => usersQueryKeys.getUserByUuid(route!).queryKey,
     rQueryParams: {
-        staleTime: sToMs(20),
+        staleTime: sToMs(3),
         refetchInterval: sToMs(35)
     },
     errorHandler: (error) => {
