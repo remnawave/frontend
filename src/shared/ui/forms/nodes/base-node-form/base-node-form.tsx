@@ -7,6 +7,7 @@ import {
     Group,
     NumberInput,
     rem,
+    Select,
     SimpleGrid,
     Stack,
     Switch,
@@ -22,6 +23,7 @@ import { InboundCheckboxCardWidget } from '@widgets/dashboard/users/inbound-chec
 import { ModalAccordionWidget } from '@widgets/dashboard/nodes/modal-accordeon-widget'
 import { DeleteNodeFeature } from '@features/ui/dashboard/nodes/delete-node'
 
+import { COUNTRIES } from './constants'
 import { IProps } from './interfaces'
 
 export const BaseNodeForm = <T extends CreateNodeCommand.Request | UpdateNodeCommand.Request>(
@@ -60,6 +62,17 @@ export const BaseNodeForm = <T extends CreateNodeCommand.Request | UpdateNodeCom
         <form onSubmit={handleSubmit}>
             <Stack gap="md">
                 <ModalAccordionWidget fetchedNode={fetchedNode} node={node} pubKey={pubKey} />
+
+                <Select
+                    key={form.key('countryCode')}
+                    label="Country"
+                    {...form.getInputProps('countryCode')}
+                    data={COUNTRIES}
+                    placeholder="Select country"
+                    required
+                    searchable
+                />
+
                 <TextInput
                     key={form.key('name')}
                     label="Internal name"

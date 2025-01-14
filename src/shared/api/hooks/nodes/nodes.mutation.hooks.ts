@@ -3,6 +3,7 @@ import {
     DeleteNodeCommand,
     DisableNodeCommand,
     EnableNodeCommand,
+    ReorderNodeCommand,
     RestartAllNodesCommand,
     UpdateNodeCommand
 } from '@remnawave/backend-contract'
@@ -144,6 +145,21 @@ export const useRestartAllNodes = createPatchMutationHook({
         onError: (error) => {
             notifications.show({
                 title: `${RestartAllNodesCommand.TSQ_url}`,
+                message:
+                    error instanceof Error ? error.message : `Request failed with unknown error.`,
+                color: 'red'
+            })
+        }
+    }
+})
+export const useReorderNodes = createPostMutationHook({
+    endpoint: ReorderNodeCommand.TSQ_url,
+    bodySchema: ReorderNodeCommand.RequestSchema,
+    responseSchema: ReorderNodeCommand.ResponseSchema,
+    rMutationParams: {
+        onError: (error) => {
+            notifications.show({
+                title: `${ReorderNodeCommand.TSQ_url}`,
                 message:
                     error instanceof Error ? error.message : `Request failed with unknown error.`,
                 color: 'red'

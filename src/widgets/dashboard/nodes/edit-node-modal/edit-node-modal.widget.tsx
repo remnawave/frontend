@@ -71,6 +71,7 @@ export const EditNodeModalConnectorWidget = () => {
         if (node) {
             setAdvancedOpened(node.isTrafficTrackingActive ?? false)
             form.setValues({
+                countryCode: node.countryCode,
                 name: node.name,
                 address: node.address,
                 port: node.port ?? undefined,

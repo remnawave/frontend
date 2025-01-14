@@ -4,6 +4,7 @@ import { MRT_ColumnDef } from 'mantine-react-table'
 import { useMemo } from 'react'
 import dayjs from 'dayjs'
 
+import { ConnectedNodeColumnEntity } from '@entities/dashboard/users/ui/table-columns/connected-node'
 import { ShortUuidColumnEntity } from '@entities/dashboard/users/ui/table-columns/short-uuid'
 import { UsernameColumnEntity } from '@entities/dashboard/users/ui/table-columns/username'
 import { StatusColumnEntity } from '@entities/dashboard/users/ui/table-columns/status'
@@ -34,6 +35,23 @@ export const useUserTableColumns = () => {
                 mantineFilterSelectProps: {
                     data: ['ACTIVE', 'DISABLED', 'LIMITED', 'EXPIRED']
                 },
+                mantineTableBodyCellProps: {
+                    align: 'center'
+                }
+            },
+            {
+                accessorKey: 'nodeName',
+                header: 'Last connected node',
+                Cell: ({ cell }) => (
+                    <ConnectedNodeColumnEntity
+                        nodeName={cell.row.original.lastConnection?.nodeName}
+                    />
+                ),
+                accessorFn: (originalRow) => originalRow.lastConnection?.nodeName || '–',
+
+                enableColumnFilterModes: false,
+                enableColumnFilter: false,
+                enableSorting: false,
                 mantineTableBodyCellProps: {
                     align: 'center'
                 }
@@ -110,20 +128,6 @@ export const useUserTableColumns = () => {
                 minSize: 250,
                 size: 400,
 
-                mantineTableBodyCellProps: {
-                    align: 'center'
-                }
-            },
-            {
-                accessorKey: 'totalUsedBytes',
-                header: 'Total used',
-                accessorFn: (originalRow) =>
-                    prettyBytesToAnyUtil(originalRow.totalUsedBytes) || '–',
-                minSize: 170,
-                maxSize: 300,
-                size: 170,
-                enableColumnFilterModes: false,
-                enableColumnFilter: false,
                 mantineTableBodyCellProps: {
                     align: 'center'
                 }

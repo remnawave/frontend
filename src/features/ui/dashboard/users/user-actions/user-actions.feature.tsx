@@ -36,14 +36,8 @@ export function UserActionsFeature(props: IProps) {
                     </Tooltip>
                 )}
             </CopyButton>
-            <Button
-                leftSection={<PiEyeDuotone size={'1.5rem'} />}
-                onClick={handleOpenModal}
-                radius="md"
-                size="xs"
-                type="button"
-            >
-                View
+            <Button onClick={handleOpenModal} radius="md" size="xs" type="button">
+                <PiEyeDuotone size={'1.5rem'} />
             </Button>
         </Group>
     )

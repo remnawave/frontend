@@ -1,8 +1,11 @@
-import { Badge, Container, Group, Paper, Progress, Text, UnstyledButton } from '@mantine/core'
-import { PiArrowsCounterClockwise, PiUsersDuotone } from 'react-icons/pi'
-import { useClipboard, useHover } from '@mantine/hooks'
+import { PiArrowsCounterClockwise, PiDotsSixVertical, PiUsersDuotone } from 'react-icons/pi'
+import { Badge, Box, Group, Paper, Progress, Text } from '@mantine/core'
 import { notifications } from '@mantine/notifications'
+import ReactCountryFlag from 'react-country-flag'
+import { useClipboard } from '@mantine/hooks'
+import { Draggable } from '@hello-pangea/dnd'
 import ColorHash from 'color-hash'
+import { useState } from 'react'
 import clsx from 'clsx'
 
 import { useNodesStoreActions } from '@entities/dashboard/nodes'
@@ -14,8 +17,9 @@ import classes from './NodeCard.module.css'
 import { IProps } from './interfaces'
 
 export function NodeCardWidget(props: IProps) {
-    const { node } = props
-    const { hovered, ref } = useHover()
+    const { node, index } = props
+
+    const [isHovered, setIsHovered] = useState(false)
 
     const actions = useNodesStoreActions()
 
@@ -54,97 +58,125 @@ export function NodeCardWidget(props: IProps) {
     }
 
     return (
-        <UnstyledButton onClick={handleViewNode} w={'100%'}>
-            <Container
-                className={clsx(classes.item, { [classes.itemHover]: hovered })}
-                fluid
-                ref={ref}
-            >
-                <Group gap="xs" grow preventGrowOverflow={false}>
-                    <NodeStatusBadgeWidget node={node} style={{ cursor: 'pointer' }} />
+        <Draggable draggableId={node.uuid} index={index} key={node.uuid}>
+            {(provided, snapshot) => (
+                <Box
+                    className={clsx(classes.item, {
+                        [classes.itemDragging]: snapshot.isDragging || isHovered
+                    })}
+                    ref={provided.innerRef}
+                    {...provided.draggableProps}
+                >
+                    <div {...provided.dragHandleProps} className={classes.dragHandle}>
+                        <PiDotsSixVertical color="white" size="2rem" />
+                    </div>
 
-                    <Badge
-                        color={node.usersOnline! > 0 ? 'teal' : 'gray'}
-                        leftSection={<PiUsersDuotone size={18} />}
-                        miw={'8ch'}
-                        radius="md"
-                        size="lg"
+                    <Box
+                        onClick={handleViewNode}
+                        onMouseEnter={() => setIsHovered(true)}
+                        onMouseLeave={() => setIsHovered(false)}
                         style={{ cursor: 'pointer' }}
-                        variant="outline"
                     >
-                        {node.usersOnline}
-                    </Badge>
+                        <Group gap="xs" grow preventGrowOverflow={false}>
+                            <NodeStatusBadgeWidget node={node} style={{ cursor: 'pointer' }} />
 
-                    <Paper miw={'35ch'}>
-                        <Badge
-                            autoContrast
-                            color={ch.hex(node.uuid)}
-                            maw={'30ch'}
-                            radius="md"
-                            size="lg"
-                            style={{ cursor: 'pointer' }}
-                            variant="light"
-                            w={'100%'}
-                        >
-                            {node.name}
-                        </Badge>
-                    </Paper>
+                            <Badge
+                                color={node.usersOnline! > 0 ? 'teal' : 'gray'}
+                                leftSection={<PiUsersDuotone size={18} />}
+                                miw={'8ch'}
+                                radius="md"
+                                size="lg"
+                                style={{ cursor: 'pointer' }}
+                                variant="outline"
+                            >
+                                {node.usersOnline}
+                            </Badge>
 
-                    <Paper miw={'22ch'}>
-                        <Text
-                            className={classes.hostInfoLabel}
-                            maw={'22ch'}
-                            miw={'22ch'}
-                            onClick={handleCopy}
-                            style={{ cursor: 'copy' }}
-                            truncate="end"
-                        >
-                            {node.address}
-                            {node.port ? `:${node.port}` : ''}
-                        </Text>
-                    </Paper>
+                            <Paper miw={'35ch'}>
+                                <Badge
+                                    autoContrast
+                                    color={ch.hex(node.uuid)}
+                                    leftSection={
+                                        node.countryCode &&
+                                        node.countryCode !== 'XX' && (
+                                            <ReactCountryFlag
+                                                className="emojiFlag"
+                                                countryCode={node.countryCode}
+                                                style={{
+                                                    fontSize: '2em',
+                                                    lineHeight: '1.5em'
+                                                }}
+                                            />
+                                        )
+                                    }
+                                    maw={'30ch'}
+                                    radius="md"
+                                    size="lg"
+                                    style={{ cursor: 'pointer' }}
+                                    variant="light"
+                                    w={'100%'}
+                                >
+                                    {node.name}
+                                </Badge>
+                            </Paper>
 
-                    <Badge
-                        autoContrast
-                        color={'gray'}
-                        ff={'monospace'}
-                        maw={'40ch'}
-                        miw={'25ch'}
-                        radius="md"
-                        size="lg"
-                        style={{ cursor: 'pointer' }}
-                        variant="outline"
-                    >
-                        {`${prettyUsedData} / ${maxData}`}
-                    </Badge>
+                            <Paper miw={'22ch'}>
+                                <Text
+                                    className={classes.hostInfoLabel}
+                                    maw={'22ch'}
+                                    miw={'22ch'}
+                                    onClick={handleCopy}
+                                    style={{ cursor: 'copy' }}
+                                    truncate="end"
+                                >
+                                    {node.address}
+                                    {node.port ? `:${node.port}` : ''}
+                                </Text>
+                            </Paper>
 
-                    {percentage >= 0 && node.isTrafficTrackingActive && (
-                        <Progress
-                            color={percentage > 95 ? 'red.9' : 'teal.9'}
-                            maw={'30ch'}
-                            radius="md"
-                            size="25"
-                            striped
-                            value={percentage}
-                            w={'10ch'}
-                        />
-                    )}
+                            <Badge
+                                autoContrast
+                                color={'gray'}
+                                ff={'monospace'}
+                                maw={'40ch'}
+                                miw={'25ch'}
+                                radius="md"
+                                size="lg"
+                                style={{ cursor: 'pointer' }}
+                                variant="outline"
+                            >
+                                {`${prettyUsedData} / ${maxData}`}
+                            </Badge>
 
-                    {node.isTrafficTrackingActive && (
-                        <Badge
-                            color="gray"
-                            leftSection={<PiArrowsCounterClockwise size={18} />}
-                            maw={'20ch'}
-                            radius="md"
-                            size="lg"
-                            style={{ cursor: 'pointer' }}
-                            variant="outline"
-                        >
-                            {getNodeResetDaysUtil(node.trafficResetDay ?? 1)}
-                        </Badge>
-                    )}
-                </Group>
-            </Container>
-        </UnstyledButton>
+                            {percentage >= 0 && node.isTrafficTrackingActive && (
+                                <Progress
+                                    color={percentage > 95 ? 'red.9' : 'teal.9'}
+                                    maw={'30ch'}
+                                    radius="md"
+                                    size="25"
+                                    striped
+                                    value={percentage}
+                                    w={'10ch'}
+                                />
+                            )}
+
+                            {node.isTrafficTrackingActive && (
+                                <Badge
+                                    color="gray"
+                                    leftSection={<PiArrowsCounterClockwise size={18} />}
+                                    maw={'20ch'}
+                                    radius="md"
+                                    size="lg"
+                                    style={{ cursor: 'pointer' }}
+                                    variant="outline"
+                                >
+                                    {getNodeResetDaysUtil(node.trafficResetDay ?? 1)}
+                                </Badge>
+                            )}
+                        </Group>
+                    </Box>
+                </Box>
+            )}
+        </Draggable>
     )
 }

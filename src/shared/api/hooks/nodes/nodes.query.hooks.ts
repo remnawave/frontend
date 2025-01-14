@@ -28,10 +28,8 @@ export const useGetNodes = createGetQueryHook({
     responseSchema: GetAllNodesCommand.ResponseSchema,
     getQueryKey: () => nodesQueryKeys.getAllNodes.queryKey,
     rQueryParams: {
-        placeholderData: keepPreviousData,
         refetchOnMount: true,
-        staleTime: sToMs(5),
-        refetchInterval: sToMs(5)
+        staleTime: sToMs(5)
     },
     errorHandler: (error) => {
         notifications.show({

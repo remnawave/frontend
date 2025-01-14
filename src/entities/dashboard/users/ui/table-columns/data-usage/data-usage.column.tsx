@@ -7,22 +7,32 @@ import { prettyBytesUtil } from '@shared/utils/bytes'
 export function DataUsageColumnEntity(props: IProps) {
     const { user } = props
 
-    const usedTrafficPercentage = (user.usedTrafficBytes / user.trafficLimitBytes) * 100
+    const usedTrafficPercentage = user.trafficLimitBytes
+        ? (user.usedTrafficBytes / user.trafficLimitBytes) * 100
+        : 0
     const limitBytes = prettyBytesUtil(user.trafficLimitBytes, true)
     const totalUsedTraffic = prettyBytesUtil(user.usedTrafficBytes, true)
-    const lifetimeUsedTraffic = prettyBytesUtil(user.totalUsedBytes, true)
+    const lifetimeUsedTraffic = prettyBytesUtil(user.lifetimeUsedTrafficBytes, true)
 
     const strategy = {
         [RESET_PERIODS.YEAR]: 'Yearly',
-        [RESET_PERIODS.MONTH]: 'Montly',
+        [RESET_PERIODS.MONTH]: 'Monthly',
         [RESET_PERIODS.WEEK]: 'Weekly',
         [RESET_PERIODS.DAY]: 'Daily',
-        [RESET_PERIODS.CALENDAR_MONTH]: 'Calendar Month',
+        [RESET_PERIODS.CALENDAR_MONTH]: 'Cal. month',
         [RESET_PERIODS.NO_RESET]: '∞'
     }[user.trafficLimitStrategy]
 
     return (
         <Box w={300}>
+            <Group justify="space-between">
+                <Text c="red.5" fw={700} fz="xs">
+                    {Math.round(usedTrafficPercentage)}%
+                </Text>
+                <Text c="teal.5" fw={700} fz="xs">
+                    {Math.round(100 - usedTrafficPercentage)}%
+                </Text>
+            </Group>
             <Progress
                 animated
                 color={usedTrafficPercentage > 100 ? 'yellow.9' : 'teal.9'}
@@ -31,6 +41,7 @@ export function DataUsageColumnEntity(props: IProps) {
                 striped
                 value={usedTrafficPercentage}
             />
+
             <Group gap="xs" justify="space-between" mt={2}>
                 <Text c="dimmed" fw={'550'} size="xs">
                     {totalUsedTraffic} / {limitBytes} {strategy}
