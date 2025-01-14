@@ -77,7 +77,7 @@ export function NodeCardWidget(props: IProps) {
                         onMouseLeave={() => setIsHovered(false)}
                         style={{ cursor: 'pointer' }}
                     >
-                        <Group gap="xs" grow preventGrowOverflow={false}>
+                        <Group gap="xs" preventGrowOverflow={true}>
                             <NodeStatusBadgeWidget node={node} style={{ cursor: 'pointer' }} />
 
                             <Badge
@@ -92,7 +92,7 @@ export function NodeCardWidget(props: IProps) {
                                 {node.usersOnline}
                             </Badge>
 
-                            <Paper miw={'35ch'}>
+                            <Paper miw={'30ch'}>
                                 <Badge
                                     autoContrast
                                     color={ch.hex(node.uuid)}
@@ -114,7 +114,7 @@ export function NodeCardWidget(props: IProps) {
                                     size="lg"
                                     style={{ cursor: 'pointer' }}
                                     variant="light"
-                                    w={'100%'}
+                                    // w={'100%'}
                                 >
                                     {node.name}
                                 </Badge>
