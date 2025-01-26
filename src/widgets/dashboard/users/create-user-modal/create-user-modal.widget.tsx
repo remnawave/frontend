@@ -9,6 +9,7 @@ import {
     SimpleGrid,
     Stack,
     Text,
+    Textarea,
     TextInput
 } from '@mantine/core'
 import {
@@ -55,7 +56,8 @@ export const CreateUserModalWidget = () => {
             trafficLimitStrategy: 'NO_RESET',
             expireAt: new Date(Date.now() + 24 * 60 * 60 * 1000),
             trafficLimitBytes: 0,
-            activeUserInbounds: []
+            activeUserInbounds: [],
+            description: ''
         }
     })
 
@@ -81,7 +83,8 @@ export const CreateUserModalWidget = () => {
                 trafficLimitBytes: gbToBytesUtil(values.trafficLimitBytes),
                 expireAt: values.expireAt,
                 activeUserInbounds: values.activeUserInbounds,
-                status: values.status
+                status: values.status,
+                description: values.description
             }
         })
     })
@@ -144,6 +147,14 @@ export const CreateUserModalWidget = () => {
                                 valueFormat="MMMM D, YYYY - HH:mm"
                                 {...form.getInputProps('expireAt')}
                                 leftSection={<PiCalendarDuotone size="1rem" />}
+                            />
+
+                            <Textarea
+                                description="User description"
+                                key={form.key('description')}
+                                label="Description"
+                                resize="vertical"
+                                {...form.getInputProps('description')}
                             />
 
                             <Checkbox.Group

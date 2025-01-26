@@ -89,6 +89,19 @@ export const useUserTableColumns = () => {
                     align: 'center'
                 }
             },
+
+            {
+                accessorKey: 'description',
+                header: 'Description',
+                accessorFn: (originalRow) => originalRow.description || '–',
+                minSize: 250,
+                size: 400,
+
+                mantineTableBodyCellProps: {
+                    align: 'center'
+                }
+            },
+
             {
                 accessorKey: 'lastTrafficResetAt',
                 header: 'Traffic reset',

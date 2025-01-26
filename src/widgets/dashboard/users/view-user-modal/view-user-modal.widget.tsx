@@ -13,6 +13,7 @@ import {
     SimpleGrid,
     Stack,
     Text,
+    Textarea,
     TextInput
 } from '@mantine/core'
 import {
@@ -104,7 +105,8 @@ export const ViewUserModal = () => {
                 expireAt: user.expireAt ? new Date(user.expireAt) : new Date(),
                 activeUserInbounds: activeInboundUuids,
                 shortUuid: user.shortUuid,
-                trojanPassword: user.trojanPassword
+                trojanPassword: user.trojanPassword,
+                description: user.description ?? ''
             })
         }
     }, [user, inbounds])
@@ -118,7 +120,8 @@ export const ViewUserModal = () => {
             trafficLimitStrategy: values.trafficLimitStrategy,
             trafficLimitBytes: gbToBytesUtil(values.trafficLimitBytes),
             expireAt: values.expireAt,
-            activeUserInbounds: values.activeUserInbounds
+            activeUserInbounds: values.activeUserInbounds,
+            description: values.description
         }
 
         updateUser({
@@ -266,6 +269,14 @@ export const ViewUserModal = () => {
                                         ? dayjs(user.lastTrafficResetAt).format('DD/MM/YYYY HH:mm')
                                         : 'Never'
                                 }
+                            />
+
+                            <Textarea
+                                description="User description"
+                                key={form.key('description')}
+                                label="Description"
+                                resize="vertical"
+                                {...form.getInputProps('description')}
                             />
                         </Stack>
 

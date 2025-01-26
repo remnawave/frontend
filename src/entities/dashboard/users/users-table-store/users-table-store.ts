@@ -13,7 +13,8 @@ const DEFAULT_VISIBILITY: MRT_VisibilityState = {
     totalUsedBytes: false,
     onlineAt: false,
     subLastUserAgent: false,
-    lifetimeUsedTrafficBytes: false
+    lifetimeUsedTrafficBytes: false,
+    description: false
 }
 
 const DEFAULT_PINNING: MRT_ColumnPinningState = {
