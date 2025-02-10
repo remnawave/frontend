@@ -2,14 +2,13 @@
 /* eslint-disable indent */
 import dayjs from 'dayjs'
 
-export function getNodeResetDaysUtil(targetDay: number): string {
+export function getNodeResetDaysUtil(targetDay: number): number {
     const today = dayjs()
 
     const targetThisMonth = today.date(targetDay)
     const targetNextMonth = today.add(1, 'month').date(targetDay)
 
     const correctedThisMonth = targetThisMonth.isValid() ? targetThisMonth : today.endOf('month')
-
     const correctedNextMonth = targetNextMonth.isValid()
         ? targetNextMonth
         : today.add(1, 'month').endOf('month')
@@ -24,11 +23,7 @@ export function getNodeResetDaysUtil(targetDay: number): string {
               ? correctedThisMonth
               : correctedNextMonth
 
-    if (targetDate.format('YYYY-MM-DD') === today.format('YYYY-MM-DD')) {
-        return 'Today'
-    }
-
-    return targetDate.fromNow()
+    return targetDate.diff(today, 'day')
 }
 
 export function getNodeResetPeriodUtil(targetDay: number): string {
