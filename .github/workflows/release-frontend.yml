@@ -14,15 +14,14 @@ jobs:
               uses: actions/checkout@v2
 
             - name: Send Telegram message
-              uses: appleboy/telegram-action@master
+              uses: proDreams/actions-telegram-notifier@main
               with:
-                  to: ${{ secrets.TELEGRAM_CHAT_ID }}
                   token: ${{ secrets.TELEGRAM_TOKEN }}
-                  format: html
-                  message: |
-                      🏹 <b>Deploy</b> <code>${{ github.REPOSITORY }}@${{ github.ref_name }}</code> has started.
-
-                      ⏱️ <code>${{ github.event.head_commit.timestamp }}</code>
+                  chat_id: ${{ secrets.TELEGRAM_CHAT_ID }}
+                  thread_id: ${{ secrets.TELEGRAM_TOPIC_ID }}
+                  status: info
+                  notify_fields: 'repository,branch,commit,workflow'
+                  title: 'Build started: '
 
     build-and-release:
         runs-on: ubuntu-latest
@@ -83,15 +82,14 @@ jobs:
               uses: actions/checkout@v2
 
             - name: Send Telegram message
-              uses: appleboy/telegram-action@master
+              uses: proDreams/actions-telegram-notifier@main
               with:
-                  to: ${{ secrets.TELEGRAM_CHAT_ID }}
                   token: ${{ secrets.TELEGRAM_TOKEN }}
-                  format: html
-                  message: |
-                      ✅ <b>Deploy</b> <code>${{ github.REPOSITORY }}@${{ github.ref_name }}</code> has finished.
-
-                      image tag: <code>${{ github.sha }}</code>
+                  chat_id: ${{ secrets.TELEGRAM_CHAT_ID }}
+                  thread_id: ${{ secrets.TELEGRAM_TOPIC_ID }}
+                  status: success
+                  notify_fields: 'repository,branch,commit,workflow'
+                  title: 'Build finished: '
 
     notify-on-error:
         runs-on: ubuntu-latest
@@ -101,10 +99,12 @@ jobs:
             - name: Checkout source code
               uses: actions/checkout@v2
 
-            - name: Send error notification
-              uses: appleboy/telegram-action@master
+            - name: Send Telegram message
+              uses: proDreams/actions-telegram-notifier@main
               with:
-                  to: ${{ secrets.TELEGRAM_CHAT_ID }}
                   token: ${{ secrets.TELEGRAM_TOKEN }}
-                  message: |
-                      ❌ ${{ github.REPOSITORY }}@${{ github.ref_name }} build failed
+                  chat_id: ${{ secrets.TELEGRAM_CHAT_ID }}
+                  thread_id: ${{ secrets.TELEGRAM_TOPIC_ID }}
+                  status: error
+                  notify_fields: 'repository,branch,commit,workflow'
+                  title: 'Build failed: '
