@@ -36,7 +36,7 @@ export function DashboardLayout() {
                         h="auto"
                         onClick={() => window.open(app.githubOrg, '_blank')}
                         radius="lg"
-                        src="https://img.shields.io/github/stars/remnawave?style=for-the-badge&logo=github&logoColor=fffff&label=Stars&labelColor=21262d&color=30363d&cacheSeconds=1"
+                        src="https://badges.remna.st/remnawave"
                         style={{ cursor: 'pointer' }}
                         w="10rem"
                     />

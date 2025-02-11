@@ -79,7 +79,8 @@ export const EditNodeModalConnectorWidget = () => {
                 trafficLimitBytes: bytesToGbUtil(node.trafficLimitBytes ?? undefined),
                 trafficResetDay: node.trafficResetDay ?? undefined,
                 notifyPercent: node.notifyPercent ?? undefined,
-                excludedInbounds: node.excludedInbounds.map((inbound) => inbound.uuid) ?? []
+                excludedInbounds: node.excludedInbounds.map((inbound) => inbound.uuid) ?? [],
+                consumptionMultiplier: node.consumptionMultiplier ?? undefined
             })
         }
     }, [node])

@@ -9,6 +9,7 @@ import {
     rem,
     Select,
     SimpleGrid,
+    Slider,
     Stack,
     Switch,
     Text,
@@ -111,6 +112,27 @@ export const BaseNodeForm = <T extends CreateNodeCommand.Request | UpdateNodeCom
                             required
                             w="20%"
                         />
+
+                        <Stack gap="xs" mb={10}>
+                            <Text fw={600} size="sm">
+                                Consumption multiplier
+                            </Text>
+                            <Slider
+                                key={form.key('consumptionMultiplier')}
+                                {...form.getInputProps('consumptionMultiplier')}
+                                defaultValue={node?.consumptionMultiplier ?? 1.0}
+                                marks={[
+                                    { value: 10.0, label: '10.0' },
+                                    { value: 1.0, label: '1.0' },
+                                    { value: 0.1, label: '0.1' }
+                                ]}
+                                max={10.0}
+                                min={0.1}
+                                step={0.1}
+                                styles={{ thumb: { borderWidth: 2, padding: 3 } }}
+                                thumbSize={22}
+                            />
+                        </Stack>
                     </Group>
 
                     <Switch
