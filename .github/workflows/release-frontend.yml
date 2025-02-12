@@ -21,7 +21,7 @@ jobs:
                   thread_id: ${{ secrets.TELEGRAM_TOPIC_ID }}
                   status: info
                   notify_fields: 'repository,branch,commit,workflow'
-                  title: 'Build started: '
+                  title: 'Build started'
 
     build-and-release:
         runs-on: ubuntu-latest
@@ -89,7 +89,7 @@ jobs:
                   thread_id: ${{ secrets.TELEGRAM_TOPIC_ID }}
                   status: success
                   notify_fields: 'repository,branch,commit,workflow'
-                  title: 'Build finished: '
+                  title: 'Build finished'
 
     notify-on-error:
         runs-on: ubuntu-latest
@@ -107,4 +107,4 @@ jobs:
                   thread_id: ${{ secrets.TELEGRAM_TOPIC_ID }}
                   status: error
                   notify_fields: 'repository,branch,commit,workflow'
-                  title: 'Build failed: '
+                  title: 'Build failed'
