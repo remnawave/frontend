@@ -44,7 +44,7 @@ export function DataUsageColumnEntity(props: IProps) {
 
             <Group gap="xs" justify="space-between" mt={2}>
                 <Text c="dimmed" fw={'550'} size="xs">
-                    {totalUsedTraffic} / {limitBytes} {strategy}
+                    {totalUsedTraffic} {limitBytes === '0' ? '' : `/ ${limitBytes}`} {strategy}
                 </Text>
                 <Text c="dimmed" fw={'550'} size="xs">
                     Σ {lifetimeUsedTraffic}
