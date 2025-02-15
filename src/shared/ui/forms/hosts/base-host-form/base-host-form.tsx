@@ -126,10 +126,10 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
                             />
 
                             <TextInput
-                                key={form.key('requestHost')}
-                                label="Request Host"
+                                key={form.key('host')}
+                                label="Host"
                                 placeholder="Host (e.g. example.com)"
-                                {...form.getInputProps('requestHost')}
+                                {...form.getInputProps('host')}
                             />
 
                             <TextInput
