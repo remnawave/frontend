@@ -44,10 +44,10 @@ export const useUserTableColumns = () => {
                 header: 'Last connected node',
                 Cell: ({ cell }) => (
                     <ConnectedNodeColumnEntity
-                        nodeName={cell.row.original.lastConnection?.nodeName}
+                        nodeName={cell.row.original.lastConnectedNode?.nodeName}
                     />
                 ),
-                accessorFn: (originalRow) => originalRow.lastConnection?.nodeName || '–',
+                accessorFn: (originalRow) => originalRow.lastConnectedNode?.nodeName || '–',
 
                 enableColumnFilterModes: false,
                 enableColumnFilter: false,

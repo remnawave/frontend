@@ -15,11 +15,9 @@ export function DataUsageColumnEntity(props: IProps) {
     const lifetimeUsedTraffic = prettyBytesUtil(user.lifetimeUsedTrafficBytes, true)
 
     const strategy = {
-        [RESET_PERIODS.YEAR]: 'Yearly',
         [RESET_PERIODS.MONTH]: 'Monthly',
         [RESET_PERIODS.WEEK]: 'Weekly',
         [RESET_PERIODS.DAY]: 'Daily',
-        [RESET_PERIODS.CALENDAR_MONTH]: 'Cal. month',
         [RESET_PERIODS.NO_RESET]: '∞'
     }[user.trafficLimitStrategy]
 
