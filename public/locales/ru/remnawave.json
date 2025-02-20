@@ -1,344 +1,360 @@
 {
     "constants": {
-        "dashboard": "Dashboard",
-        "api-tokens": "API Tokens",
-        "config": "Config",
-        "home": "Home",
-        "hosts": "Hosts",
-        "nodes": "Nodes",
-        "nodes-bandwidth-table": "Nodes bandwidth table",
-        "nodes-statistics": "Nodes statistics",
-        "users": "Users",
-        "overview": "Overview",
-        "management": "Management",
-        "statistics": "Statistics"
+        "dashboard": "Панель управления",
+        "api-tokens": "API токены",
+        "config": "Конфиг",
+        "home": "Главная",
+        "hosts": "Хосты",
+        "nodes": "Ноды",
+        "nodes-bandwidth-table": "Использование трафика",
+        "nodes-statistics": "Статистика нод",
+        "users": "Пользователи",
+        "overview": "Обзор",
+        "management": "Управление",
+        "statistics": "Статистика"
     },
     "bandwidth-metrics": {
-        "current-year": "Current year",
-        "from-last-year": "from last year",
-        "calendar-month": "Calendar month",
-        "from-last-month-0": "from last month",
-        "last-30-days": "Last 30 days",
-        "from-last-month": "from last month",
-        "last-7-days": "Last 7 days",
-        "from-last-week": "from last week",
-        "today": "Today",
-        "from-yesterday": "from yesterday"
+        "current-year": "Текущий год",
+        "from-last-year": "с прошлого года",
+        "calendar-month": "Календарный месяц",
+        "from-last-month-0": "с прошлого месяца",
+        "last-30-days": "Последние 30 дней",
+        "from-last-month": "с прошлого месяца",
+        "last-7-days": "Последние 7 дней",
+        "from-last-week": "с прошлой недели",
+        "today": "Сегодня",
+        "from-yesterday": "со вчерашнего дня"
     },
     "online-metrics": {
-        "never-online": "Never online",
-        "online-this-week": "Online this week",
-        "online-today": "Online today",
-        "online-now": "Online now"
+        "never-online": "Никогда",
+        "online-this-week": "На этой неделе",
+        "online-today": "Сегодня",
+        "online-now": "В сети"
     },
     "simple-metrics": {
-        "system-uptime": "System uptime",
-        "ram-usage": "RAM usage",
-        "total-traffic": "Total traffic"
+        "system-uptime": "Время работы системы",
+        "ram-usage": "Использование RAM",
+        "total-traffic": "Общий трафик"
     },
     "users-metrics": {
-        "disabled-users": "Disabled users",
-        "limited-users": "Limited users",
-        "expired-users": "Expired users",
-        "active-users": "Active users",
-        "total-users": "Total users"
+        "disabled-users": "Disabled польз.",
+        "limited-users": "Limited польз.",
+        "expired-users": "Expired польз.",
+        "active-users": "Active польз.",
+        "total-users": "Всего польз."
     },
     "config-editor-actions": {
         "feature": {
-            "save": "Save",
-            "format": "Format"
+            "save": "Сохранить",
+            "format": "Форматировать"
         }
     },
     "use-bandwidth-table-columns": {
-        "traffic-limit": "Traffic limit",
-        "traffic": "Traffic",
-        "traffic-cycle": "Traffic cycle",
-        "node-name": "Node name"
+        "traffic-limit": "Лимит трафика",
+        "traffic": "Трафик",
+        "traffic-cycle": "Цикл трафика",
+        "node-name": "Имя ноды"
     },
     "action-group": {
         "feature": {
-            "new-user": "New user",
-            "reset-table": "Reset table",
-            "clear-filters": "Clear filters",
-            "update": "Update"
+            "new-user": "Новый пользователь",
+            "reset-table": "Сбросить таблицу",
+            "clear-filters": "Очистить фильтры",
+            "update": "Обновить"
         }
     },
     "use-table-columns": {
-        "username": "Username",
-        "status": "Status",
-        "last-connected-node": "Last connected node",
-        "expire-at": "Expire at",
-        "data-usage": "Data usage",
-        "sub-link": "Sub-link",
-        "description": "Description",
-        "traffic-reset": "Traffic reset",
-        "never": "Never",
-        "online-at": "Online at",
-        "last-ua": "Last UA",
-        "lifetime-used": "Lifetime used",
-        "sub-link-revoked-at": "Sub-link revoked at",
-        "created-at": "Created at"
+        "username": "Имя пользователя",
+        "status": "Статус",
+        "last-connected-node": "Последнее подключение",
+        "expire-at": "Истекает",
+        "data-usage": "Расход трафика",
+        "sub-link": "Ссылка-подписка",
+        "description": "Описание",
+        "traffic-reset": "Сброс трафика",
+        "never": "Никогда",
+        "online-at": "Был в сети",
+        "last-ua": "Последний UA",
+        "lifetime-used": "Трафик за все время",
+        "sub-link-revoked-at": "Сброс ссылки-подписки",
+        "created-at": "Дата создания"
     },
     "api-tokens-header-action-buttons": {
         "feature": {
-            "create-new-api-token": "Create new API token"
+            "create-new-api-token": "Создать новый токен API"
         }
     },
     "header-buttons": {
         "feature": {
-            "logout": "Logout"
+            "logout": "Выйти"
         }
     },
     "delete-host": {
         "feature": {
-            "delete-host": "Delete host"
+            "delete-host": "Удалить хост"
         }
     },
     "header-action-buttons": {
         "feature": {
-            "create-new-host": "Create new host",
-            "update": "Update",
-            "all": "All"
+            "create-new-host": "Создать новый хост",
+            "update": "Обновить",
+            "all": "Все"
         }
     },
     "delete-node": {
         "feature": {
-            "delete-node": "Delete node"
+            "delete-node": "Удалить ноду"
         }
     },
     "nodes-header-action-buttons": {
         "feature": {
-            "update": "Update",
-            "create-new-node": "Create new node",
-            "restart-all-nodes": "Restart all nodes"
+            "update": "Обновить",
+            "create-new-node": "Создать новую ноду",
+            "restart-all-nodes": "Перезапустить все ноды"
         }
     },
     "toggle-node-status-button": {
         "feature": {
-            "disable": "Disable",
-            "enable": "Enable"
+            "disable": "Отключить",
+            "enable": "Включить"
         }
     },
     "api-token-card": {
         "widget": {
-            "delete": "Delete",
-            "copy-token": "Copy token",
-            "copied": "Copied",
-            "apitoken-tokenname-copied-to-clipboard": "{{apiTokenName}} copied to clipboard"
+            "delete": "Удалить",
+            "copy-token": "Скопировать токен",
+            "copied": "Скопировано",
+            "apitoken-tokenname-copied-to-clipboard": "{{apiTokenName}} скопирован в буфер обмена"
         }
     },
     "api-tokens-documentation": {
         "widget": {
-            "open-swagger": "Open Swagger",
-            "open-scalar": "Open Scalar",
-            "doc-description-line-2": "Both provide comprehensive details about available endpoints, request/response formats, and authentication methods.",
-            "doc-description-line-1": "Explore API documentation using either Scalar or Swagger UI.",
-            "api-documentation": "API Documentation"
+            "open-swagger": "Открыть Swagger",
+            "open-scalar": "Открыть Scalar",
+            "doc-description-line-2": "Оба предоставляют исчерпывающую информацию о доступных endpoint, форматах запросов/ответов и методах аутентификации.",
+            "doc-description-line-1": "Изучите документацию API, используя Scalar или Swagger UI.",
+            "api-documentation": "Документация API"
         }
     },
     "api-tokens-page-header": {
         "widget": {
-            "list-of-all-api-tokens": "List of all API tokens"
-        }
-    },
-    "create-api-token-modal": {
-        "widget": {
-            "create-token": "Create token"
+            "list-of-all-api-tokens": "Список всех токенов API"
         }
     },
     "config-editor": {
         "widget": {
-            "loading-editor": "Loading editor..."
+            "loading-editor": "Загрузка редактора..."
         }
     },
     "keypair": {
         "widget": {
-            "public-key": "Public Key",
-            "private-key": "Private Key",
-            "generate-key-pair": "Generate Key Pair"
+            "public-key": "Публичный ключ",
+            "private-key": "Приватный ключ",
+            "generate-key-pair": "Сгенерировать пару ключей"
         }
     },
     "create-host-modal": {
         "widget": {
-            "new-host": "New host"
+            "new-host": "Новый хост"
         }
     },
     "edit-host-modal": {
         "widget": {
-            "edit-host": "Edit host"
+            "edit-host": "Редактировать хост"
         }
     },
     "hosts-page-header": {
         "widget": {
-            "list-of-all-hosts": "List of all hosts"
+            "list-of-all-hosts": "Список всех хостов"
         }
     },
     "remark-info": {
         "widget": {
-            "supports-templates": "Supports templates.",
-            "remark-description": "This is the name of the host that will be displayed in the dashboard."
+            "supports-templates": "Поддерживает шаблоны:",
+            "remark-description": "Это имя хоста, которое будет отображаться у пользователя в подписке и в панели управления."
         }
     },
     "create-node-modal": {
         "widget": {
-            "create-node": "Create node"
+            "create-node": "Создать ноду"
         }
     },
     "edit-node-modal": {
         "widget": {
-            "edit-node": "Edit node"
+            "edit-node": "Редактировать ноду"
         }
     },
     "error-accordeon": {
         "widget": {
-            "last-error-message": "Last error message",
-            "important-note-description": "In order to connect node, you need to run Remnawave Node with the following",
-            "important-note": "Important note"
+            "last-error-message": "Последнее сообщение об ошибке",
+            "important-note-description": "Чтобы подключить ноду, Вам нужно запустить Remnawave Node со следующим",
+            "important-note": "Важно"
         }
     },
     "node-card": {
         "widget": {
-            "copied": "Copied"
+            "copied": "Скопировано"
         }
     },
     "node-status-badge": {
         "widget": {
-            "connected": "connected",
-            "connecting": "connecting",
-            "disabled": "disabled",
-            "disconnected": "disconnected"
+            "connected": "подключено",
+            "connecting": "подключается",
+            "disabled": "выключена",
+            "disconnected": "отключено"
         }
     },
     "nodes-page-header": {
         "widget": {
-            "list-of-all-nodes": "List of all nodes"
+            "list-of-all-nodes": "Список всех нод"
         }
     },
     "table": {
         "widget": {
-            "only-active-nodes": "Only nodes with active traffic tracking are displayed",
-            "today": "Today"
+            "only-active-nodes": "Отображаются только ноды с активным отслеживанием трафика",
+            "today": "Сегодня"
         }
     },
     "create-user-modal": {
         "widget": {
-            "inbounds": "Inbounds",
-            "inbounds-description": "Select available inbounds for this user",
-            "user-description": "User description",
-            "expiry-date": "Expiry Date",
-            "pick-value": "Pick value",
-            "traffic-reset-strategy": "Traffic reset strategy",
-            "traffic-reset-strategy-description": "How often the user's traffic should be reset",
-            "data-limit": "Data Limit",
-            "data-limit-description": "Enter data limit in GB, 0 for unlimited",
-            "username-cannot-be-changed-later": "Username cannot be changed later",
-            "loading-user-creation": "Loading user creation...",
-            "create-user": "Create user"
+            "inbounds": "Инбаунды",
+            "inbounds-description": "Выберите доступные инбаунды для этого пользователя",
+            "user-description": "Описание пользователя",
+            "expiry-date": "Дата, когда истекает подписка",
+            "pick-value": "Выберите значение",
+            "traffic-reset-strategy": "Стратегия сброса трафика",
+            "traffic-reset-strategy-description": "Как часто следует сбрасывать трафик пользователя",
+            "data-limit": "Лимит трафика",
+            "data-limit-description": "Введите лимит данных в ГБ, 0 – безлимит.",
+            "username-cannot-be-changed-later": "Имя пользователя нельзя будет изменить позже",
+            "loading-user-creation": "Загрузка создания пользователя...",
+            "create-user": "Создать пользователя"
         }
     },
     "login-form-feature": {
-        "username": "Username"
+        "username": "Имя пользователя"
     },
     "home-page": {
-        "users": "Users"
+        "users": "Пользователи"
     },
     "user-table": {
         "widget": {
-            "list-of-all-users": "List of all users",
-            "error-loading-data": "Error loading data",
-            "table-title": "Users"
+            "list-of-all-users": "Список всех пользователей",
+            "error-loading-data": "Ошибка загрузки данных",
+            "table-title": "Пользователи"
         }
     },
     "view-user-modal": {
         "widget": {
-            "connection-details": "Connection Details",
-            "last-traffic-reset-at": "Last traffic reset at",
-            "subscription-url": "Subscription url",
-            "subscription-short-uuid": "Subscription short uuid",
-            "username-cannot-be-changed": "Username cannot be changed",
-            "user-details": "User details",
-            "loading-user-data": "Loading user data...",
-            "edit-user": "Edit user",
-            "never": "Never"
+            "connection-details": "Детали подключения",
+            "last-traffic-reset-at": "Последний сброс трафика",
+            "subscription-url": "URL подписки",
+            "subscription-short-uuid": "ShortUuid подписки",
+            "username-cannot-be-changed": "Имя пользователя не может быть изменено",
+            "user-details": "Информация о пользователе",
+            "loading-user-data": "Загрузка данных пользователя...",
+            "edit-user": "Редактировать пользователя",
+            "never": "Никогда"
         }
     },
     "base-api-token-form": {
-        "create": "Create",
-        "token-description": "Token description",
-        "token-name": "Token name"
+        "create": "Создать",
+        "token-description": "Описание токена",
+        "token-name": "Имя токена"
     },
     "empty-page": {
         "layout": {
-            "nothing-found": "Nothing found"
+            "nothing-found": "Ничего не найдено"
         }
     },
     "base-host-form": {
-        "remark": "Remark",
-        "address": "Address",
-        "port": "Port",
-        "inbound": "Inbound",
-        "select-inbound": "Select inbound",
-        "advanced-options": "Advanced options",
-        "host": "Host",
-        "path": "Path",
-        "alpn-e-g-h2": "ALPN (e.g. h2)",
-        "fingerprint": "Fingerprint",
-        "fingerprint-e-g-chrome": "Fingerprint (e.g. chrome)",
-        "save": "Save",
-        "sni-e-g-example-com": "SNI (e.g. example.com)",
-        "host-e-g-example-com": "Host (e.g. example.com)",
-        "e-g-example-com": "e.g. example.com",
-        "e-g-443": "e.g. 443",
-        "path-e-g-ws": "path (e.g. /ws)"
+        "remark": "Примечание",
+        "address": "Адрес",
+        "port": "Порт",
+        "inbound": "Инбаунд",
+        "select-inbound": "Выберите инбаунд",
+        "advanced-options": "Расширенные настройки",
+        "host": "Хост",
+        "path": "Путь",
+        "alpn-e-g-h2": "ALPN (например, h2)",
+        "fingerprint": "Отпечаток",
+        "fingerprint-e-g-chrome": "Отпечаток (например, chrome)",
+        "save": "Сохранить",
+        "sni-e-g-example-com": "SNI (например, example.com)",
+        "host-e-g-example-com": "Хост (например, example.com)",
+        "e-g-example-com": "например, example.com",
+        "e-g-443": "например, 443",
+        "path-e-g-ws": "путь (например, /ws)"
     },
     "base-node-form": {
-        "country": "Country",
-        "select-country": "Select country",
-        "internal-name": "Internal name",
-        "address": "Address",
-        "e-g-example-com": "e.g. example.com",
-        "port": "Port",
-        "e-g-443": "e.g. 443",
-        "consumption-multiplier": "Consumption multiplier",
-        "traffic-tracking": "Traffic tracking",
-        "limit": "Limit",
-        "reset-day": "Reset day",
-        "e-g-1-31": "e.g. 1-31",
-        "notify-percent": "Notify percent",
-        "e-g-50": "e.g. 50",
-        "select-active-inbounds-for-this-node": "Select active inbounds for this node",
-        "inbounds": "Inbounds",
-        "save": "Save"
+        "country": "Страна",
+        "select-country": "Выберите страну",
+        "internal-name": "Внутреннее имя",
+        "address": "Адрес",
+        "e-g-example-com": "например, example.com",
+        "port": "Порт",
+        "e-g-443": "например, 443",
+        "consumption-multiplier": "Коэффициент использования",
+        "traffic-tracking": "Отслеживание трафика",
+        "limit": "Лимит",
+        "reset-day": "День сброса",
+        "e-g-1-31": "например, 1-31",
+        "notify-percent": "Процент уведомления",
+        "e-g-50": "например, 50",
+        "select-active-inbounds-for-this-node": "Выберите активные инбаунды для этой ноды",
+        "inbounds": "Инбаунды",
+        "save": "Сохранить"
     },
     "home": {
         "page": {
-            "online-stats": "Online stats",
-            "system": "System",
-            "bandwidth": "Bandwidth",
-            "short-stats": "Short stats"
+            "online-stats": "Онлайн",
+            "system": "Система",
+            "bandwidth": "Трафик",
+            "short-stats": "Краткая статистика"
         }
     },
     "login-form": {
         "feature": {
-            "sign-in": "Sign in",
-            "your-password": "Your password",
-            "password": "Password",
-            "username": "Username"
+            "sign-in": "Войти",
+            "your-password": "Ваш пароль",
+            "password": "Пароль",
+            "username": "Имя пользователя"
         }
     },
     "statistic-nodes": {
         "component": {
-            "last-7-days-by-nodes": "Last 7 days by nodes",
-            "filter-nodes": "Filter nodes",
-            "bar": "Bar",
-            "line": "Line"
+            "last-7-days-by-nodes": "Последние 7 дней по нодам",
+            "filter-nodes": "Фильтр нод",
+            "bar": "Столбчатая",
+            "line": "Линейная"
         }
     },
     "get-expiration-text": {
         "util": {
-            "expires-in": "Expires in {{expiration}}",
-            "expired": "Expired {{expiration}}",
-            "unknown": "Unknown"
+            "expires-in": "Истекает через {{expiration}}",
+            "expired": "Истек {{expiration}}",
+            "unknown": "Неизвестно"
+        }
+    },
+    "reset-data": {
+        "constants": {
+            "reset-monthly": "Сброс ежемесячно",
+            "reset-weekly": "Сброс еженедельно",
+            "reset-daily": "Сброс ежедневно",
+            "never-reset": "Никогда не сбрасывать"
+        }
+    },
+    "data-usage": {
+        "column": {
+            "monthly": "Ежемесячно",
+            "weekly": "Еженедельно",
+            "daily": "Ежедневно"
+        }
+    },
+    "get-time-ago": {
+        "util": {
+            "invalid-date": "Неверная дата",
+            "not-connected-yet": "Не подключался"
         }
     }
 }

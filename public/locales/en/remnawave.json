@@ -340,5 +340,26 @@
             "expired": "Expired {{expiration}}",
             "unknown": "Unknown"
         }
+    },
+    "reset-data": {
+        "constants": {
+            "reset-monthly": "Reset monthly",
+            "reset-weekly": "Reset weekly",
+            "reset-daily": "Reset daily",
+            "never-reset": "Never reset"
+        }
+    },
+    "data-usage": {
+        "column": {
+            "monthly": "Monthly",
+            "weekly": "Weekly",
+            "daily": "Daily"
+        }
+    },
+    "get-time-ago": {
+        "util": {
+            "invalid-date": "Invalid Date",
+            "not-connected-yet": "Not connected yet"
+        }
     }
 }

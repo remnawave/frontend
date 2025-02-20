@@ -1,10 +1,13 @@
 import { RESET_PERIODS } from '@remnawave/backend-contract'
 import { Box, Group, Progress, Text } from '@mantine/core'
+import { useTranslation } from 'react-i18next'
 
 import { IProps } from '@entities/dashboard/users/ui/table-columns/username/interface'
 import { prettyBytesUtil } from '@shared/utils/bytes'
 
 export function DataUsageColumnEntity(props: IProps) {
+    const { t } = useTranslation()
+
     const { user } = props
 
     const usedTrafficPercentage = user.trafficLimitBytes
@@ -15,9 +18,9 @@ export function DataUsageColumnEntity(props: IProps) {
     const lifetimeUsedTraffic = prettyBytesUtil(user.lifetimeUsedTrafficBytes, true)
 
     const strategy = {
-        [RESET_PERIODS.MONTH]: 'Monthly',
-        [RESET_PERIODS.WEEK]: 'Weekly',
-        [RESET_PERIODS.DAY]: 'Daily',
+        [RESET_PERIODS.MONTH]: t('data-usage.column.monthly'),
+        [RESET_PERIODS.WEEK]: t('data-usage.column.weekly'),
+        [RESET_PERIODS.DAY]: t('data-usage.column.daily'),
         [RESET_PERIODS.NO_RESET]: '∞'
     }[user.trafficLimitStrategy]
 

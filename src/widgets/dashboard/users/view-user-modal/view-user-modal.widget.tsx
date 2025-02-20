@@ -328,7 +328,7 @@ export const ViewUserModal = () => {
 
                             <Select
                                 allowDeselect={false}
-                                data={resetDataStrategy}
+                                data={resetDataStrategy(t)}
                                 defaultValue={form.values.trafficLimitStrategy}
                                 description={t(
                                     'create-user-modal.widget.traffic-reset-strategy-description'
