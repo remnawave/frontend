@@ -2,9 +2,12 @@ import { ActionIcon, Button, Code, CopyButton, Group, Paper, Stack, Text } from 
 import { PiCheck, PiCopy, PiKey } from 'react-icons/pi'
 import { generateKeyPair } from '@stablelib/x25519'
 import { encodeURLSafe } from '@stablelib/base64'
+import { useTranslation } from 'react-i18next'
 import { useEffect, useState } from 'react'
 
 export const KeypairWidget = () => {
+    const { t } = useTranslation()
+
     const [keyPair, setKeyPair] = useState<{
         privateKey: string
         publicKey: string
@@ -35,12 +38,12 @@ export const KeypairWidget = () => {
                     variant="outline"
                     w="320px"
                 >
-                    Generate Key Pair
+                    {t('keypair.widget.generate-key-pair')}
                 </Button>
 
                 <Group gap="xs">
                     <Text c="dimmed" fw={500} size="sm" w="9ch">
-                        Private Key
+                        {t('keypair.widget.private-key')}
                     </Text>
                     <CopyButton value={keyPair.privateKey}>
                         {({ copied, copy }) => (
@@ -59,7 +62,7 @@ export const KeypairWidget = () => {
 
                 <Group gap="xs">
                     <Text c="dimmed" fw={500} size="sm" w="9ch">
-                        Public Key
+                        {t('keypair.widget.public-key')}
                     </Text>
                     <CopyButton value={keyPair.publicKey}>
                         {({ copied, copy }) => (

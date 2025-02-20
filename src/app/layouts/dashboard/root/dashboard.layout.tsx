@@ -2,6 +2,7 @@ import { Code, Divider, Group, Image, Paper, ScrollArea, Stack } from '@mantine/
 import { Outlet } from 'react-router-dom'
 import { PiLink } from 'react-icons/pi'
 
+import { LanguagePicker } from '@shared/ui/language-picker/language-picker.shared'
 import { Logo } from '@shared/ui/logo'
 import { app } from 'src/config'
 
@@ -40,6 +41,8 @@ export function DashboardLayout() {
                         style={{ cursor: 'pointer' }}
                         w="10rem"
                     />
+
+                    <LanguagePicker />
                 </Stack>
             </Paper>
             <div className={classes.content}>

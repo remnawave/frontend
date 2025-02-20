@@ -1,5 +1,6 @@
 import { PiArrowsClockwise, PiBookmarks, PiPlus } from 'react-icons/pi'
 import { Button, Group, Select } from '@mantine/core'
+import { useTranslation } from 'react-i18next'
 
 import { useHostsStoreActions, useHostsStoreSelectedInboundTag } from '@entities/dashboard'
 import { QueryKeys, useGetHosts } from '@shared/api/hooks'
@@ -8,6 +9,8 @@ import { queryClient } from '@shared/api'
 import { IProps } from './interfaces'
 
 export const HeaderActionButtonsFeature = (props: IProps) => {
+    const { t } = useTranslation()
+
     const { inbounds } = props
 
     const actions = useHostsStoreActions()
@@ -29,7 +32,7 @@ export const HeaderActionButtonsFeature = (props: IProps) => {
         <Group>
             <Select
                 data={[
-                    { value: 'ALL', label: 'ALL' },
+                    { value: 'ALL', label: t('header-action-buttons.feature.all') },
                     ...inbounds.map((inbound) => ({
                         value: inbound.tag,
                         label: inbound.tag
@@ -50,7 +53,7 @@ export const HeaderActionButtonsFeature = (props: IProps) => {
                 size="xs"
                 variant="default"
             >
-                Update
+                {t('header-action-buttons.feature.update')}
             </Button>
 
             <Button
@@ -59,7 +62,7 @@ export const HeaderActionButtonsFeature = (props: IProps) => {
                 size="xs"
                 variant="default"
             >
-                Create new host
+                {t('header-action-buttons.feature.create-new-host')}
             </Button>
         </Group>
     )

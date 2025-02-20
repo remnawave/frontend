@@ -17,6 +17,7 @@ import {
 } from '@mantine/core'
 import { CreateNodeCommand, UpdateNodeCommand } from '@remnawave/backend-contract'
 import { PiCheckDuotone, PiFloppyDiskDuotone, PiXDuotone } from 'react-icons/pi'
+import { useTranslation } from 'react-i18next'
 import { useMemo } from 'react'
 
 import { ToggleNodeStatusButtonFeature } from '@features/ui/dashboard/nodes/toggle-node-status-button'
@@ -43,6 +44,8 @@ export const BaseNodeForm = <T extends CreateNodeCommand.Request | UpdateNodeCom
         inbounds
     } = props
 
+    const { t } = useTranslation()
+
     const includedInbounds = useMemo(() => {
         const excluded = form.getValues().excludedInbounds || []
         const allInboundUuids = inbounds?.map((inbound) => inbound.uuid) || []
@@ -66,17 +69,17 @@ export const BaseNodeForm = <T extends CreateNodeCommand.Request | UpdateNodeCom
 
                 <Select
                     key={form.key('countryCode')}
-                    label="Country"
+                    label={t('base-node-form.country')}
                     {...form.getInputProps('countryCode')}
                     data={COUNTRIES}
-                    placeholder="Select country"
+                    placeholder={t('base-node-form.select-country')}
                     required
                     searchable
                 />
 
                 <TextInput
                     key={form.key('name')}
-                    label="Internal name"
+                    label={t('base-node-form.internal-name')}
                     {...form.getInputProps('name')}
                     required
                 />
@@ -91,16 +94,16 @@ export const BaseNodeForm = <T extends CreateNodeCommand.Request | UpdateNodeCom
                     >
                         <TextInput
                             key={form.key('address')}
-                            label="Address"
+                            label={t('base-node-form.address')}
                             {...form.getInputProps('address')}
-                            placeholder="e.g. example.com"
+                            placeholder={t('base-node-form.e-g-example-com')}
                             required
                             w="75%"
                         />
 
                         <NumberInput
                             key={form.key('port')}
-                            label="Port"
+                            label={t('base-node-form.port')}
                             {...form.getInputProps('port')}
                             allowDecimal={false}
                             allowNegative={false}
@@ -108,14 +111,14 @@ export const BaseNodeForm = <T extends CreateNodeCommand.Request | UpdateNodeCom
                             decimalScale={0}
                             hideControls
                             max={65535}
-                            placeholder="e.g. 443"
+                            placeholder={t('base-node-form.e-g-443')}
                             required
                             w="20%"
                         />
 
                         <Stack gap="xs" mb={10}>
                             <Text fw={600} size="sm">
-                                Consumption multiplier
+                                {t('base-node-form.consumption-multiplier')}
                             </Text>
                             <Slider
                                 key={form.key('consumptionMultiplier')}
@@ -140,7 +143,7 @@ export const BaseNodeForm = <T extends CreateNodeCommand.Request | UpdateNodeCom
                         {...form.getInputProps('isTrafficTrackingActive', {
                             type: 'checkbox'
                         })}
-                        label="Traffic tracking"
+                        label={t('base-node-form.traffic-tracking')}
                         onClick={() => setAdvancedOpened(!advancedOpened)}
                         size="md"
                         thumbIcon={
@@ -172,7 +175,7 @@ export const BaseNodeForm = <T extends CreateNodeCommand.Request | UpdateNodeCom
                                 defaultValue={0}
                                 hideControls
                                 key={form.key('trafficLimitBytes')}
-                                label="Limit"
+                                label={t('base-node-form.limit')}
                                 leftSection={
                                     <>
                                         <Text
@@ -193,7 +196,7 @@ export const BaseNodeForm = <T extends CreateNodeCommand.Request | UpdateNodeCom
 
                             <NumberInput
                                 key={form.key('trafficResetDay')}
-                                label="Reset day"
+                                label={t('base-node-form.reset-day')}
                                 {...form.getInputProps('trafficResetDay')}
                                 allowDecimal={false}
                                 allowNegative={false}
@@ -202,13 +205,13 @@ export const BaseNodeForm = <T extends CreateNodeCommand.Request | UpdateNodeCom
                                 hideControls
                                 max={31}
                                 min={1}
-                                placeholder="e.g. 1-31"
+                                placeholder={t('base-node-form.e-g-1-31')}
                                 w={'30%'}
                             />
 
                             <NumberInput
                                 key={form.key('notifyPercent')}
-                                label="Notify percent"
+                                label={t('base-node-form.notify-percent')}
                                 {...form.getInputProps('notifyPercent')}
                                 allowDecimal={false}
                                 allowNegative={false}
@@ -216,16 +219,16 @@ export const BaseNodeForm = <T extends CreateNodeCommand.Request | UpdateNodeCom
                                 decimalScale={0}
                                 hideControls
                                 max={100}
-                                placeholder="e.g. 50"
+                                placeholder={t('base-node-form.e-g-50')}
                                 w={'30%'}
                             />
                         </Group>
                     </Collapse>
 
                     <Checkbox.Group
-                        description="Select active inbounds for this node"
+                        description={t('base-node-form.select-active-inbounds-for-this-node')}
                         key={form.key('excludedInbounds')}
-                        label="Inbounds"
+                        label={t('base-node-form.inbounds')}
                         onChange={handleIncludedInboundsChange}
                         value={includedInbounds}
                     >
@@ -264,7 +267,7 @@ export const BaseNodeForm = <T extends CreateNodeCommand.Request | UpdateNodeCom
                         type="submit"
                         variant="outline"
                     >
-                        Save
+                        {t('base-node-form.save')}
                     </Button>
                 </Group>
             </Group>

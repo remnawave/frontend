@@ -1,0 +1,344 @@
+{
+    "constants": {
+        "dashboard": "Dashboard",
+        "api-tokens": "API Tokens",
+        "config": "Config",
+        "home": "Home",
+        "hosts": "Hosts",
+        "nodes": "Nodes",
+        "nodes-bandwidth-table": "Nodes bandwidth table",
+        "nodes-statistics": "Nodes statistics",
+        "users": "Users",
+        "overview": "Overview",
+        "management": "Management",
+        "statistics": "Statistics"
+    },
+    "bandwidth-metrics": {
+        "current-year": "Current year",
+        "from-last-year": "from last year",
+        "calendar-month": "Calendar month",
+        "from-last-month-0": "from last month",
+        "last-30-days": "Last 30 days",
+        "from-last-month": "from last month",
+        "last-7-days": "Last 7 days",
+        "from-last-week": "from last week",
+        "today": "Today",
+        "from-yesterday": "from yesterday"
+    },
+    "online-metrics": {
+        "never-online": "Never online",
+        "online-this-week": "Online this week",
+        "online-today": "Online today",
+        "online-now": "Online now"
+    },
+    "simple-metrics": {
+        "system-uptime": "System uptime",
+        "ram-usage": "RAM usage",
+        "total-traffic": "Total traffic"
+    },
+    "users-metrics": {
+        "disabled-users": "Disabled users",
+        "limited-users": "Limited users",
+        "expired-users": "Expired users",
+        "active-users": "Active users",
+        "total-users": "Total users"
+    },
+    "config-editor-actions": {
+        "feature": {
+            "save": "Save",
+            "format": "Format"
+        }
+    },
+    "use-bandwidth-table-columns": {
+        "traffic-limit": "Traffic limit",
+        "traffic": "Traffic",
+        "traffic-cycle": "Traffic cycle",
+        "node-name": "Node name"
+    },
+    "action-group": {
+        "feature": {
+            "new-user": "New user",
+            "reset-table": "Reset table",
+            "clear-filters": "Clear filters",
+            "update": "Update"
+        }
+    },
+    "use-table-columns": {
+        "username": "Username",
+        "status": "Status",
+        "last-connected-node": "Last connected node",
+        "expire-at": "Expire at",
+        "data-usage": "Data usage",
+        "sub-link": "Sub-link",
+        "description": "Description",
+        "traffic-reset": "Traffic reset",
+        "never": "Never",
+        "online-at": "Online at",
+        "last-ua": "Last UA",
+        "lifetime-used": "Lifetime used",
+        "sub-link-revoked-at": "Sub-link revoked at",
+        "created-at": "Created at"
+    },
+    "api-tokens-header-action-buttons": {
+        "feature": {
+            "create-new-api-token": "Create new API token"
+        }
+    },
+    "header-buttons": {
+        "feature": {
+            "logout": "Logout"
+        }
+    },
+    "delete-host": {
+        "feature": {
+            "delete-host": "Delete host"
+        }
+    },
+    "header-action-buttons": {
+        "feature": {
+            "create-new-host": "Create new host",
+            "update": "Update",
+            "all": "All"
+        }
+    },
+    "delete-node": {
+        "feature": {
+            "delete-node": "Delete node"
+        }
+    },
+    "nodes-header-action-buttons": {
+        "feature": {
+            "update": "Update",
+            "create-new-node": "Create new node",
+            "restart-all-nodes": "Restart all nodes"
+        }
+    },
+    "toggle-node-status-button": {
+        "feature": {
+            "disable": "Disable",
+            "enable": "Enable"
+        }
+    },
+    "api-token-card": {
+        "widget": {
+            "delete": "Delete",
+            "copy-token": "Copy token",
+            "copied": "Copied",
+            "apitoken-tokenname-copied-to-clipboard": "{{apiTokenName}} copied to clipboard"
+        }
+    },
+    "api-tokens-documentation": {
+        "widget": {
+            "open-swagger": "Open Swagger",
+            "open-scalar": "Open Scalar",
+            "doc-description-line-2": "Both provide comprehensive details about available endpoints, request/response formats, and authentication methods.",
+            "doc-description-line-1": "Explore API documentation using either Scalar or Swagger UI.",
+            "api-documentation": "API Documentation"
+        }
+    },
+    "api-tokens-page-header": {
+        "widget": {
+            "list-of-all-api-tokens": "List of all API tokens"
+        }
+    },
+    "create-api-token-modal": {
+        "widget": {
+            "create-token": "Create token"
+        }
+    },
+    "config-editor": {
+        "widget": {
+            "loading-editor": "Loading editor..."
+        }
+    },
+    "keypair": {
+        "widget": {
+            "public-key": "Public Key",
+            "private-key": "Private Key",
+            "generate-key-pair": "Generate Key Pair"
+        }
+    },
+    "create-host-modal": {
+        "widget": {
+            "new-host": "New host"
+        }
+    },
+    "edit-host-modal": {
+        "widget": {
+            "edit-host": "Edit host"
+        }
+    },
+    "hosts-page-header": {
+        "widget": {
+            "list-of-all-hosts": "List of all hosts"
+        }
+    },
+    "remark-info": {
+        "widget": {
+            "supports-templates": "Supports templates.",
+            "remark-description": "This is the name of the host that will be displayed in the dashboard."
+        }
+    },
+    "create-node-modal": {
+        "widget": {
+            "create-node": "Create node"
+        }
+    },
+    "edit-node-modal": {
+        "widget": {
+            "edit-node": "Edit node"
+        }
+    },
+    "error-accordeon": {
+        "widget": {
+            "last-error-message": "Last error message",
+            "important-note-description": "In order to connect node, you need to run Remnawave Node with the following",
+            "important-note": "Important note"
+        }
+    },
+    "node-card": {
+        "widget": {
+            "copied": "Copied"
+        }
+    },
+    "node-status-badge": {
+        "widget": {
+            "connected": "connected",
+            "connecting": "connecting",
+            "disabled": "disabled",
+            "disconnected": "disconnected"
+        }
+    },
+    "nodes-page-header": {
+        "widget": {
+            "list-of-all-nodes": "List of all nodes"
+        }
+    },
+    "table": {
+        "widget": {
+            "only-active-nodes": "Only nodes with active traffic tracking are displayed",
+            "today": "Today"
+        }
+    },
+    "create-user-modal": {
+        "widget": {
+            "inbounds": "Inbounds",
+            "inbounds-description": "Select available inbounds for this user",
+            "user-description": "User description",
+            "expiry-date": "Expiry Date",
+            "pick-value": "Pick value",
+            "traffic-reset-strategy": "Traffic reset strategy",
+            "traffic-reset-strategy-description": "How often the user's traffic should be reset",
+            "data-limit": "Data Limit",
+            "data-limit-description": "Enter data limit in GB, 0 for unlimited",
+            "username-cannot-be-changed-later": "Username cannot be changed later",
+            "loading-user-creation": "Loading user creation...",
+            "create-user": "Create user"
+        }
+    },
+    "login-form-feature": {
+        "username": "Username"
+    },
+    "home-page": {
+        "users": "Users"
+    },
+    "user-table": {
+        "widget": {
+            "list-of-all-users": "List of all users",
+            "error-loading-data": "Error loading data",
+            "table-title": "Users"
+        }
+    },
+    "view-user-modal": {
+        "widget": {
+            "connection-details": "Connection Details",
+            "last-traffic-reset-at": "Last traffic reset at",
+            "subscription-url": "Subscription url",
+            "subscription-short-uuid": "Subscription short uuid",
+            "username-cannot-be-changed": "Username cannot be changed",
+            "user-details": "User details",
+            "loading-user-data": "Loading user data...",
+            "edit-user": "Edit user",
+            "never": "Never"
+        }
+    },
+    "base-api-token-form": {
+        "create": "Create",
+        "token-description": "Token description",
+        "token-name": "Token name"
+    },
+    "empty-page": {
+        "layout": {
+            "nothing-found": "Nothing found"
+        }
+    },
+    "base-host-form": {
+        "remark": "Remark",
+        "address": "Address",
+        "port": "Port",
+        "inbound": "Inbound",
+        "select-inbound": "Select inbound",
+        "advanced-options": "Advanced options",
+        "host": "Host",
+        "path": "Path",
+        "alpn-e-g-h2": "ALPN (e.g. h2)",
+        "fingerprint": "Fingerprint",
+        "fingerprint-e-g-chrome": "Fingerprint (e.g. chrome)",
+        "save": "Save",
+        "sni-e-g-example-com": "SNI (e.g. example.com)",
+        "host-e-g-example-com": "Host (e.g. example.com)",
+        "e-g-example-com": "e.g. example.com",
+        "e-g-443": "e.g. 443",
+        "path-e-g-ws": "path (e.g. /ws)"
+    },
+    "base-node-form": {
+        "country": "Country",
+        "select-country": "Select country",
+        "internal-name": "Internal name",
+        "address": "Address",
+        "e-g-example-com": "e.g. example.com",
+        "port": "Port",
+        "e-g-443": "e.g. 443",
+        "consumption-multiplier": "Consumption multiplier",
+        "traffic-tracking": "Traffic tracking",
+        "limit": "Limit",
+        "reset-day": "Reset day",
+        "e-g-1-31": "e.g. 1-31",
+        "notify-percent": "Notify percent",
+        "e-g-50": "e.g. 50",
+        "select-active-inbounds-for-this-node": "Select active inbounds for this node",
+        "inbounds": "Inbounds",
+        "save": "Save"
+    },
+    "home": {
+        "page": {
+            "online-stats": "Online stats",
+            "system": "System",
+            "bandwidth": "Bandwidth",
+            "short-stats": "Short stats"
+        }
+    },
+    "login-form": {
+        "feature": {
+            "sign-in": "Sign in",
+            "your-password": "Your password",
+            "password": "Password",
+            "username": "Username"
+        }
+    },
+    "statistic-nodes": {
+        "component": {
+            "last-7-days-by-nodes": "Last 7 days by nodes",
+            "filter-nodes": "Filter nodes",
+            "bar": "Bar",
+            "line": "Line"
+        }
+    },
+    "get-expiration-text": {
+        "util": {
+            "expires-in": "Expires in {{expiration}}",
+            "expired": "Expired {{expiration}}",
+            "unknown": "Unknown"
+        }
+    }
+}

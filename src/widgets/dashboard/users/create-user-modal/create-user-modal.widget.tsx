@@ -21,6 +21,7 @@ import {
 import { CreateUserCommand, USERS_STATUS } from '@remnawave/backend-contract'
 import { useForm, zodResolver } from '@mantine/form'
 import { DateTimePicker } from '@mantine/dates'
+import { useTranslation } from 'react-i18next'
 import { useEffect } from 'react'
 
 import {
@@ -35,6 +36,8 @@ import { gbToBytesUtil } from '@shared/utils/bytes'
 import { InboundCheckboxCardWidget } from '../inbound-checkbox-card'
 
 export const CreateUserModalWidget = () => {
+    const { t } = useTranslation()
+
     const isModalOpen = useUserCreationModalStoreIsModalOpen()
     const actions = useUserCreationModalStoreActions()
 
@@ -90,17 +93,27 @@ export const CreateUserModalWidget = () => {
     })
 
     return (
-        <Modal centered onClose={handleCloseModal} opened={isModalOpen} title="Create user">
+        <Modal
+            centered
+            onClose={handleCloseModal}
+            opened={isModalOpen}
+            title={t('create-user-modal.widget.create-user')}
+        >
             {isLoading ? (
-                <LoaderModalShared h="500" text="Loading user creation..." />
+                <LoaderModalShared
+                    h="500"
+                    text={t('create-user-modal.widget.loading-user-creation')}
+                />
             ) : (
                 <form onSubmit={handleSubmit}>
                     <Group align="flex-start" grow={false}>
                         <Stack gap="md" w={400}>
                             <TextInput
-                                description="Username cannot be changed later"
+                                description={t(
+                                    'create-user-modal.widget.username-cannot-be-changed-later'
+                                )}
                                 key={form.key('username')}
-                                label="Username"
+                                label={t('login-form-feature.username')}
                                 {...form.getInputProps('username')}
                                 leftSection={<PiUserDuotone size="1rem" />}
                             />
@@ -109,9 +122,9 @@ export const CreateUserModalWidget = () => {
                                 allowDecimal={false}
                                 decimalScale={0}
                                 defaultValue={0}
-                                description="Enter data limit in GB, 0 for unlimited"
+                                description={t('create-user-modal.widget.data-limit-description')}
                                 key={form.key('trafficLimitBytes')}
-                                label="Data Limit"
+                                label={t('create-user-modal.widget.data-limit')}
                                 leftSection={
                                     <>
                                         <Text
@@ -133,26 +146,28 @@ export const CreateUserModalWidget = () => {
                                 allowDeselect={false}
                                 data={resetDataStrategy}
                                 defaultValue={form.values.trafficLimitStrategy}
-                                description="How often the user's traffic should be reset"
+                                description={t(
+                                    'create-user-modal.widget.traffic-reset-strategy-description'
+                                )}
                                 key={form.key('trafficLimitStrategy')}
-                                label="Traffic reset strategy"
+                                label={t('create-user-modal.widget.traffic-reset-strategy')}
                                 leftSection={<PiClockDuotone size="1rem" />}
-                                placeholder="Pick value"
+                                placeholder={t('create-user-modal.widget.pick-value')}
                                 {...form.getInputProps('trafficLimitStrategy')}
                             />
 
                             <DateTimePicker
                                 key={form.key('expireAt')}
-                                label="Expiry Date"
+                                label={t('create-user-modal.widget.expiry-date')}
                                 valueFormat="MMMM D, YYYY - HH:mm"
                                 {...form.getInputProps('expireAt')}
                                 leftSection={<PiCalendarDuotone size="1rem" />}
                             />
 
                             <Textarea
-                                description="User description"
+                                description={t('create-user-modal.widget.user-description')}
                                 key={form.key('description')}
-                                label="Description"
+                                label={t('use-table-columns.description')}
                                 resize="vertical"
                                 {...form.getInputProps('description')}
                             />
@@ -160,8 +175,8 @@ export const CreateUserModalWidget = () => {
                             <Checkbox.Group
                                 key={form.key('activeUserInbounds')}
                                 {...form.getInputProps('activeUserInbounds')}
-                                description="Select available inbounds for this user"
-                                label="Inbounds"
+                                description={t('create-user-modal.widget.inbounds-description')}
+                                label={t('create-user-modal.widget.inbounds')}
                             >
                                 <SimpleGrid
                                     cols={{
@@ -192,7 +207,7 @@ export const CreateUserModalWidget = () => {
                             type="submit"
                             variant="outline"
                         >
-                            Create user
+                            {t('create-user-modal.widget.create-user')}
                         </Button>
                     </Group>
                 </form>

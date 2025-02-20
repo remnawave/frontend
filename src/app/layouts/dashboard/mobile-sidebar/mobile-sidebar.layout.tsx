@@ -1,10 +1,12 @@
-import { ActionIcon, Code, Drawer } from '@mantine/core'
+import { ActionIcon, Code, Divider, Drawer, Image, Stack } from '@mantine/core'
+import { PiLink, PiSquareHalf } from 'react-icons/pi'
 import { useDisclosure } from '@mantine/hooks'
 import { useLocation } from 'react-router-dom'
-import { PiSquareHalf } from 'react-icons/pi'
 import { useEffect } from 'react'
 
+import { LanguagePicker } from '@shared/ui/language-picker/language-picker.shared'
 import { Logo } from '@shared/ui/logo'
+import { app } from 'src/config'
 
 import { SidebarLayout } from '../sidebar/sidebar.layout'
 import packageJson from '../../../../../package.json'
@@ -28,8 +30,40 @@ export function MobileSidebarLayout() {
                             {`v${packageJson.version}`}
                         </Code>
                     </Drawer.Header>
-                    <Drawer.Body>
+                    <Drawer.Body
+                        style={{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            justifyContent: 'space-between',
+                            height: '100%'
+                        }}
+                    >
                         <SidebarLayout />
+
+                        <Stack gap={0}>
+                            {' '}
+                            {/* Группируем divider и нижние элементы */}
+                            <Divider
+                                label={
+                                    <PiLink color={'var(--mantine-color-cyan-6)'} size={'1.4rem'} />
+                                }
+                                labelPosition="center"
+                                mb="xs"
+                                variant="dashed"
+                            />
+                            <Stack align="center" gap="xs">
+                                <Image
+                                    h="auto"
+                                    onClick={() => window.open(app.githubOrg, '_blank')}
+                                    radius="lg"
+                                    src="https://badges.remna.st/remnawave"
+                                    style={{ cursor: 'pointer' }}
+                                    w="10rem"
+                                />
+
+                                <LanguagePicker />
+                            </Stack>
+                        </Stack>
                     </Drawer.Body>
                 </Drawer.Content>
             </Drawer.Root>

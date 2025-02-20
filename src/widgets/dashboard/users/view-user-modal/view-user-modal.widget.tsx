@@ -28,6 +28,7 @@ import {
 import { UpdateUserCommand } from '@remnawave/backend-contract'
 import { useForm, zodResolver } from '@mantine/form'
 import { DateTimePicker } from '@mantine/dates'
+import { useTranslation } from 'react-i18next'
 import { useEffect, useMemo } from 'react'
 import dayjs from 'dayjs'
 
@@ -51,6 +52,8 @@ import { InboundCheckboxCardWidget } from '../inbound-checkbox-card'
 import { IFormValues } from './interfaces'
 
 export const ViewUserModal = () => {
+    const { t } = useTranslation()
+
     const isViewUserModalOpen = useUserModalStoreIsModalOpen()
     const actions = useUserModalStoreActions()
     const selectedUser = useUserModalStoreUserUuid()
@@ -150,10 +153,10 @@ export const ViewUserModal = () => {
             onClose={handleClose}
             opened={isViewUserModalOpen}
             size="900px"
-            title="Edit user"
+            title={t('view-user-modal.widget.edit-user')}
         >
             {isUserLoading ? (
-                <LoaderModalShared h="400" text="Loading user data..." />
+                <LoaderModalShared h="400" text={t('view-user-modal.widget.loading-user-data')} />
             ) : (
                 <form key="view-user-form" onSubmit={handleSubmit}>
                     <Group align="flex-start" grow={false}>
@@ -161,7 +164,7 @@ export const ViewUserModal = () => {
                         <Stack gap="md" key="view-user-details-stack" w={400}>
                             <Group gap="xs" justify="space-between" w="100%">
                                 <Text fw={500} key="view-user-details-text">
-                                    User details
+                                    {t('view-user-modal.widget.user-details')}
                                 </Text>
                                 {user && (
                                     <UserStatusBadge
@@ -172,9 +175,9 @@ export const ViewUserModal = () => {
                             </Group>
 
                             <TextInput
-                                description="Username cannot be changed"
+                                description={t('view-user-modal.widget.username-cannot-be-changed')}
                                 key={form.key('username')}
-                                label="Username"
+                                label={t('login-form-feature.username')}
                                 {...form.getInputProps('username')}
                                 disabled
                                 leftSection={<PiUserDuotone size="1rem" />}
@@ -199,7 +202,7 @@ export const ViewUserModal = () => {
 
                             <TextInput
                                 key={form.key('shortUuid')}
-                                label="Subscription short uuid"
+                                label={t('view-user-modal.widget.subscription-short-uuid')}
                                 {...form.getInputProps('shortUuid')}
                                 disabled
                                 leftSection={<PiLinkDuotone size="1rem" />}
@@ -224,7 +227,7 @@ export const ViewUserModal = () => {
 
                             <TextInput
                                 disabled
-                                label="Subscription url"
+                                label={t('view-user-modal.widget.subscription-url')}
                                 leftSection={<PiLinkDuotone size="1rem" />}
                                 rightSection={
                                     <CopyButton
@@ -251,7 +254,7 @@ export const ViewUserModal = () => {
 
                             <TextInput
                                 disabled
-                                label="Created at"
+                                label={t('use-table-columns.created-at')}
                                 leftSection={<PiCalendarDuotone size="1rem" />}
                                 value={
                                     user?.createdAt
@@ -262,19 +265,19 @@ export const ViewUserModal = () => {
 
                             <TextInput
                                 disabled
-                                label="Last traffic reset at"
+                                label={t('view-user-modal.widget.last-traffic-reset-at')}
                                 leftSection={<PiCalendarDuotone size="1rem" />}
                                 value={
                                     user?.lastTrafficResetAt
                                         ? dayjs(user.lastTrafficResetAt).format('DD/MM/YYYY HH:mm')
-                                        : 'Never'
+                                        : t('view-user-modal.widget.never')
                                 }
                             />
 
                             <Textarea
-                                description="User description"
+                                description={t('create-user-modal.widget.user-description')}
                                 key={form.key('description')}
-                                label="Description"
+                                label={t('use-table-columns.description')}
                                 resize="vertical"
                                 {...form.getInputProps('description')}
                             />
@@ -284,14 +287,14 @@ export const ViewUserModal = () => {
 
                         {/* Right Section - Connection Details */}
                         <Stack gap="md" w={400}>
-                            <Text fw={500}>Connection Details</Text>
+                            <Text fw={500}>{t('view-user-modal.widget.connection-details')}</Text>
 
                             <NumberInput
                                 allowDecimal={false}
                                 decimalScale={0}
-                                description="Enter data limit in GB, 0 for unlimited"
+                                description={t('create-user-modal.widget.data-limit-description')}
                                 key={form.key('trafficLimitBytes')}
-                                label="Data Limit"
+                                label={t('create-user-modal.widget.data-limit')}
                                 leftSection={
                                     <>
                                         <Text
@@ -327,17 +330,19 @@ export const ViewUserModal = () => {
                                 allowDeselect={false}
                                 data={resetDataStrategy}
                                 defaultValue={form.values.trafficLimitStrategy}
-                                description="How often the user's traffic should be reset"
+                                description={t(
+                                    'create-user-modal.widget.traffic-reset-strategy-description'
+                                )}
                                 key={form.key('trafficLimitStrategy')}
-                                label="Traffic reset strategy"
+                                label={t('create-user-modal.widget.traffic-reset-strategy')}
                                 leftSection={<PiClockDuotone size="1rem" />}
-                                placeholder="Pick value"
+                                placeholder={t('create-user-modal.widget.pick-value')}
                                 {...form.getInputProps('trafficLimitStrategy')}
                             />
 
                             <DateTimePicker
                                 key={form.key('expireAt')}
-                                label="Expiry Date"
+                                label={t('create-user-modal.widget.expiry-date')}
                                 valueFormat="MMMM D, YYYY - HH:mm"
                                 {...form.getInputProps('expireAt')}
                                 leftSection={<PiCalendarDuotone size="1rem" />}
@@ -346,8 +351,8 @@ export const ViewUserModal = () => {
                             <Checkbox.Group
                                 key={form.key('activeUserInbounds')}
                                 {...form.getInputProps('activeUserInbounds')}
-                                description="Select available inbounds for this user"
-                                label="Inbounds"
+                                description={t('create-user-modal.widget.inbounds-description')}
+                                label={t('create-user-modal.widget.inbounds')}
                             >
                                 <SimpleGrid
                                     cols={{
@@ -387,7 +392,7 @@ export const ViewUserModal = () => {
                                 type="submit"
                                 variant="outline"
                             >
-                                Edit user
+                                {t('view-user-modal.widget.edit-user')}
                             </Button>
                         </Group>
                     </Group>

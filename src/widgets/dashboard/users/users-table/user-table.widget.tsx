@@ -7,6 +7,7 @@ import {
     MRT_SortingState,
     useMantineReactTable
 } from 'mantine-react-table'
+import { useTranslation } from 'react-i18next'
 import { useState } from 'react'
 
 import {
@@ -24,6 +25,8 @@ import { useGetUsersV2 } from '@shared/api/hooks'
 import { customIcons } from './constants'
 
 export function UserTableWidget() {
+    const { t } = useTranslation()
+
     const tableColumns = useUserTableColumns()
 
     const actions = useUsersTableStoreActions()
@@ -93,7 +96,7 @@ export function UserTableWidget() {
         /* prettier-ignore */
         mantineToolbarAlertBannerProps: isError ? {
             color: 'red',
-            children: 'Error loading data'
+            children: t('user-table.widget.error-loading-data')
         } : undefined,
 
         onColumnFilterFnsChange: setColumnFilterFns,
@@ -140,8 +143,8 @@ export function UserTableWidget() {
                 actions={
                     <UserActionGroupFeature isLoading={isLoading} refetch={refetch} table={table} />
                 }
-                description="List of all users"
-                title="Users"
+                description={t('user-table.widget.list-of-all-users')}
+                title={t('user-table.widget.table-title')}
             />
 
             <DataTableShared.Content>

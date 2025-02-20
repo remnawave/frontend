@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { Grid } from '@mantine/core'
 
 import { ApiTokensDocumentationWidget } from '@widgets/dashboard/api-tokens/api-tokens-documentation'
@@ -5,16 +6,27 @@ import { ApiTokensPageHeaderWidget } from '@widgets/dashboard/api-tokens/api-tok
 import { CreateApiTokenModalWidget } from '@widgets/dashboard/api-tokens/create-api-token-modal'
 import { ApiTokensTableWidget } from '@widgets/dashboard/api-tokens/api-tokens-table'
 import { LoadingScreen, Page, PageHeader } from '@shared/ui'
+import { ROUTES } from '@shared/constants'
 
-import { BREADCRUMBS } from './constants'
 import { IProps } from './interfaces'
 
 export default function ApiTokensPageComponent(props: IProps) {
+    const { t } = useTranslation()
+
     const { apiTokens, isLoading, docs } = props
 
     return (
-        <Page title="API Tokens">
-            <PageHeader breadcrumbs={BREADCRUMBS} title="API Tokens" />
+        <Page title={t('constants.api-tokens')}>
+            <PageHeader
+                breadcrumbs={[
+                    { label: t('constants.dashboard'), href: ROUTES.DASHBOARD.HOME },
+                    {
+                        label: t('constants.api-tokens'),
+                        href: ROUTES.DASHBOARD.API_TOKENS
+                    }
+                ]}
+                title={t('constants.api-tokens')}
+            />
 
             <Grid>
                 <Grid.Col span={12}>

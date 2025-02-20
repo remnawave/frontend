@@ -1,4 +1,5 @@
 import { PiArrowsClockwise, PiExcludeSquare, PiPlus } from 'react-icons/pi'
+import { useTranslation } from 'react-i18next'
 import { Button, Group } from '@mantine/core'
 
 import { useUserCreationModalStoreActions } from '@entities/dashboard/user-creation-modal-store'
@@ -7,6 +8,8 @@ import { useUsersTableStoreActions } from '@entities/dashboard/users/users-table
 import { IProps } from './interfaces'
 
 export const UserActionGroupFeature = (props: IProps) => {
+    const { t } = useTranslation()
+
     const { isLoading, refetch, table } = props
     const actions = useUsersTableStoreActions()
 
@@ -60,7 +63,7 @@ export const UserActionGroupFeature = (props: IProps) => {
                 size="xs"
                 variant="default"
             >
-                Update
+                {t('action-group.feature.update')}
             </Button>
             <Button
                 color="gray"
@@ -70,7 +73,7 @@ export const UserActionGroupFeature = (props: IProps) => {
                 size="xs"
                 variant="outline"
             >
-                Clear filters
+                {t('action-group.feature.clear-filters')}
             </Button>
 
             <Button
@@ -80,7 +83,7 @@ export const UserActionGroupFeature = (props: IProps) => {
                 size="xs"
                 variant="outline"
             >
-                Reset table
+                {t('action-group.feature.reset-table')}
             </Button>
 
             <Button
@@ -89,7 +92,7 @@ export const UserActionGroupFeature = (props: IProps) => {
                 size="xs"
                 variant="default"
             >
-                New user
+                {t('action-group.feature.new-user')}
             </Button>
         </Group>
     )

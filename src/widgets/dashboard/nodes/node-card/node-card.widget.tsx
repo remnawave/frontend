@@ -1,5 +1,6 @@
 import { PiArrowsCounterClockwise, PiDotsSixVertical, PiUsersDuotone } from 'react-icons/pi'
 import { Badge, Box, Group, Paper, Progress, Text } from '@mantine/core'
+import { useTranslation } from 'node_modules/react-i18next'
 import { notifications } from '@mantine/notifications'
 import ReactCountryFlag from 'react-country-flag'
 import { useClipboard } from '@mantine/hooks'
@@ -17,6 +18,8 @@ import classes from './NodeCard.module.css'
 import { IProps } from './interfaces'
 
 export function NodeCardWidget(props: IProps) {
+    const { t } = useTranslation()
+
     const { node, index } = props
 
     const [isHovered, setIsHovered] = useState(false)
@@ -46,7 +49,7 @@ export function NodeCardWidget(props: IProps) {
         clipboard.copy(`${node.address}`)
         notifications.show({
             message: `${node.address}`,
-            title: 'Copied',
+            title: t('node-card.widget.copied'),
             color: 'teal'
         })
     }

@@ -1,10 +1,14 @@
 import { PiChartBarDuotone, PiClockDuotone, PiMemoryDuotone } from 'react-icons/pi'
 import { GetStatsCommand } from '@remnawave/backend-contract'
+import { TFunction } from 'i18next'
 import dayjs from 'dayjs'
 
 import { prettyBytesUtil } from '@shared/utils/bytes'
 
-export const getSimpleMetrics = (systemInfo: GetStatsCommand.Response['response']) => {
+export const getSimpleMetrics = (
+    systemInfo: GetStatsCommand.Response['response'],
+    t: TFunction
+) => {
     const { memory, users } = systemInfo
 
     const totalRamGB = prettyBytesUtil(memory.total) ?? 0
@@ -14,18 +18,18 @@ export const getSimpleMetrics = (systemInfo: GetStatsCommand.Response['response'
         {
             value: prettyBytesUtil(Number(users.totalTrafficBytes)) ?? 0,
             icon: PiChartBarDuotone,
-            title: 'Total traffic',
+            title: t('simple-metrics.total-traffic'),
             color: 'green'
         },
         {
             value: `${usedRamGB} / ${totalRamGB}`,
             icon: PiMemoryDuotone,
-            title: 'RAM usage',
+            title: t('simple-metrics.ram-usage'),
             color: 'cyan'
         },
         {
             value: dayjs.duration(systemInfo.uptime, 'seconds').humanize(false),
-            title: 'System uptime',
+            title: t('simple-metrics.system-uptime'),
             icon: PiClockDuotone,
             color: 'gray'
         }

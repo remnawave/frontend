@@ -1,5 +1,6 @@
 import { UpdateHostCommand } from '@remnawave/backend-contract'
 import { useForm, zodResolver } from '@mantine/form'
+import { useTranslation } from 'react-i18next'
 import { Modal, Text } from '@mantine/core'
 import { useEffect, useState } from 'react'
 
@@ -12,6 +13,8 @@ import { BaseHostForm } from '@shared/ui/forms/hosts/base-host-form'
 import { useGetInbounds, useUpdateHost } from '@shared/api/hooks'
 
 export const EditHostModalWidget = () => {
+    const { t } = useTranslation()
+
     const [advancedOpened, setAdvancedOpened] = useState(false)
 
     const isModalOpen = useHostsStoreEditModalIsOpen()
@@ -79,7 +82,7 @@ export const EditHostModalWidget = () => {
             centered
             onClose={handleClose}
             opened={isModalOpen}
-            title={<Text fw={500}>Edit host</Text>}
+            title={<Text fw={500}>{t('edit-host-modal.widget.edit-host')}</Text>}
         >
             <BaseHostForm
                 advancedOpened={advancedOpened}

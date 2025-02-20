@@ -1,10 +1,13 @@
 import { PiArrowsClockwise, PiPlus, PiSpiral } from 'react-icons/pi'
+import { useTranslation } from 'react-i18next'
 import { Button, Group } from '@mantine/core'
 
 import { useNodesStoreActions } from '@entities/dashboard/nodes/nodes-store/nodes-store'
 import { useGetNodes, useRestartAllNodes } from '@shared/api/hooks'
 
 export const NodesHeaderActionButtonsFeature = () => {
+    const { t } = useTranslation()
+
     const actions = useNodesStoreActions()
 
     const handleCreate = () => {
@@ -28,7 +31,7 @@ export const NodesHeaderActionButtonsFeature = () => {
                 size="xs"
                 variant="default"
             >
-                Update
+                {t('nodes-header-action-buttons.feature.update')}
             </Button>
 
             <Button
@@ -39,7 +42,7 @@ export const NodesHeaderActionButtonsFeature = () => {
                 size="xs"
                 variant="default"
             >
-                Restart all nodes
+                {t('nodes-header-action-buttons.feature.restart-all-nodes')}
             </Button>
 
             <Button
@@ -48,7 +51,7 @@ export const NodesHeaderActionButtonsFeature = () => {
                 size="xs"
                 variant="default"
             >
-                Create new node
+                {t('nodes-header-action-buttons.feature.create-new-node')}
             </Button>
         </Group>
     )

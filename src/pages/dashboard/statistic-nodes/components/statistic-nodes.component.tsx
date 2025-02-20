@@ -1,18 +1,21 @@
 import { Box, Group, MultiSelect, Paper, SegmentedControl, Stack, Text } from '@mantine/core'
 import { GetNodesStatisticsCommand } from '@remnawave/backend-contract'
 import { BarChart, LineChart } from '@mantine/charts'
+import { useTranslation } from 'react-i18next'
 import ColorHash from 'color-hash'
 import { useState } from 'react'
 import dayjs from 'dayjs'
 
 import { prettyBytesToAnyUtil } from '@shared/utils/bytes'
 import { LoadingScreen, PageHeader } from '@shared/ui'
+import { ROUTES } from '@shared/constants'
 import { Page } from '@shared/ui/page'
 
-import { BREADCRUMBS } from './constant'
 import { IProps } from './interfaces'
 
 export const StatisticNodesPage = (props: IProps) => {
+    const { t } = useTranslation()
+
     const { nodesStats } = props
     const ch = new ColorHash()
     const [selectedNodes, setSelectedNodes] = useState<string[]>([])
@@ -60,27 +63,33 @@ export const StatisticNodesPage = (props: IProps) => {
         selectedNodes.length > 0 ? series.filter((s) => selectedNodes.includes(s.name)) : series
 
     return (
-        <Page title="Nodes Statistics">
-            <PageHeader breadcrumbs={BREADCRUMBS} title="Nodes statistics" />
+        <Page title={t('constants.nodes-statistics')}>
+            <PageHeader
+                breadcrumbs={[
+                    { label: t('constants.dashboard'), href: ROUTES.DASHBOARD.HOME },
+                    { label: t('constants.nodes-statistics') }
+                ]}
+                title={t('constants.nodes-statistics')}
+            />
 
             <Stack gap="sm" mb="xl">
                 <Group justify="space-between">
-                    <Text fw={600}>Last 7 days by nodes</Text>
+                    <Text fw={600}>{t('statistic-nodes.component.last-7-days-by-nodes')}</Text>
                     <Group gap="xs" maw={600}>
                         <MultiSelect
                             checkIconPosition="left"
                             clearable
                             data={series.map((s) => ({ value: s.name, label: s.name }))}
                             onChange={setSelectedNodes}
-                            placeholder="Filter nodes"
+                            placeholder={t('statistic-nodes.component.filter-nodes')}
                             searchable
                             value={selectedNodes}
                         />
                     </Group>
                     <SegmentedControl
                         data={[
-                            { label: 'Bar', value: 'bar' },
-                            { label: 'Line', value: 'line' }
+                            { label: t('statistic-nodes.component.bar'), value: 'bar' },
+                            { label: t('statistic-nodes.component.line'), value: 'line' }
                         ]}
                         onChange={(value) => setChartType(value as 'bar' | 'line')}
                         value={chartType}

@@ -1,11 +1,13 @@
 import { NavLink as RouterLink, useLocation } from 'react-router-dom'
 import { NavLink, Stack, Title } from '@mantine/core'
 
+import { useMenuSections } from './menu-sections'
 import classes from './sidebar.module.css'
-import { menu } from './menu-sections'
 
 export function SidebarLayout() {
     const { pathname } = useLocation()
+
+    const menu = useMenuSections()
 
     return (
         <Stack gap="xl">

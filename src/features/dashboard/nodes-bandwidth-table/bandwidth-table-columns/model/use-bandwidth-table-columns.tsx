@@ -2,17 +2,20 @@
 import { GetAllNodesCommand } from '@remnawave/backend-contract'
 import { Group, Progress, Text } from '@mantine/core'
 import { MRT_ColumnDef } from 'mantine-react-table'
+import { useTranslation } from 'react-i18next'
 import { useMemo } from 'react'
 
 import { getNodeResetPeriodUtil } from '@shared/utils/time-utils/get-node-reset-days'
 import { prettyBytesUtil } from '@shared/utils/bytes'
 
 export const useBandwidthTableColumns = () => {
+    const { t } = useTranslation()
+
     return useMemo<MRT_ColumnDef<GetAllNodesCommand.Response['response'][0]>[]>(
         () => [
             {
                 accessorKey: 'name',
-                header: 'Node name',
+                header: t('use-bandwidth-table-columns.node-name'),
                 mantineTableBodyCellProps: {
                     align: 'left'
                 },
@@ -22,7 +25,7 @@ export const useBandwidthTableColumns = () => {
             },
             {
                 accessorKey: 'trafficResetDay',
-                header: 'Traffic cycle',
+                header: t('use-bandwidth-table-columns.traffic-cycle'),
                 Cell: ({ cell }) => (
                     <Text>{getNodeResetPeriodUtil(cell.row.original.trafficResetDay ?? 0)}</Text>
                 ),
@@ -35,7 +38,7 @@ export const useBandwidthTableColumns = () => {
             },
             {
                 accessorKey: 'trafficUsedBytes',
-                header: 'Traffic',
+                header: t('use-bandwidth-table-columns.traffic'),
                 Cell: ({ cell }) => {
                     const node = cell.row.original
                     let percentage = 0
@@ -75,7 +78,7 @@ export const useBandwidthTableColumns = () => {
             },
             {
                 accessorKey: 'trafficLimitBytes',
-                header: 'Traffic limit',
+                header: t('use-bandwidth-table-columns.traffic-limit'),
                 Cell: ({ cell }) => (
                     <Text ff="monospace">
                         {prettyBytesUtil(cell.row.original.trafficLimitBytes || 0) || '0 GB'}

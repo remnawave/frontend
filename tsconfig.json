@@ -53,13 +53,14 @@
       ],
       "@shared/*": [
         "./src/shared/*"
-      ]
+      ],
     }
   },
   "include": [
     "src",
     "client.d.ts",
-    "global.d.ts"
+    "global.d.ts",
+    "@types"
   ],
   "references": [
     {

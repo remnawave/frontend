@@ -1,6 +1,7 @@
 import { Badge, Button, Container, Group, Text } from '@mantine/core'
 import { PiCheck, PiCopy, PiTrash } from 'react-icons/pi'
 import { notifications } from '@mantine/notifications'
+import { useTranslation } from 'react-i18next'
 import { useClipboard } from '@mantine/hooks'
 import { motion } from 'framer-motion'
 import ColorHash from 'color-hash'
@@ -13,6 +14,8 @@ import classes from './ApiTokenCard.module.css'
 import { IProps } from './interfaces'
 
 export function ApiTokenCardWidget(props: IProps) {
+    const { t } = useTranslation()
+
     const { apiToken } = props
 
     const clipboard = useClipboard({ timeout: 500 })
@@ -33,8 +36,10 @@ export function ApiTokenCardWidget(props: IProps) {
         e.stopPropagation()
         clipboard.copy(`${apiToken.token}`)
         notifications.show({
-            message: `${apiToken.tokenName} copied to clipboard`,
-            title: 'Copied',
+            message: t('api-token-card.widget.apitoken-tokenname-copied-to-clipboard', {
+                apiTokenName: apiToken.tokenName
+            }),
+            title: t('api-token-card.widget.copied'),
             color: 'teal'
         })
     }
@@ -82,7 +87,7 @@ export function ApiTokenCardWidget(props: IProps) {
                         size="xs"
                         variant="outline"
                     >
-                        Copy token
+                        {t('api-token-card.widget.copy-token')}
                     </Button>
                     <Button
                         color="red"
@@ -92,7 +97,7 @@ export function ApiTokenCardWidget(props: IProps) {
                         size="xs"
                         variant="outline"
                     >
-                        Delete
+                        {t('api-token-card.widget.delete')}
                     </Button>
                 </Group>
             </Container>

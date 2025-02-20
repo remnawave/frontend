@@ -1,4 +1,5 @@
 import { CreateApiTokenCommand } from '@remnawave/backend-contract'
+import { useTranslation } from 'node_modules/react-i18next'
 import { useForm, zodResolver } from '@mantine/form'
 import { Group, Modal, Text } from '@mantine/core'
 
@@ -10,6 +11,8 @@ import { BaseApiTokenForm } from '@shared/ui/forms/api-tokens/base-api-token-for
 import { useCreateApiToken } from '@shared/api/hooks'
 
 export const CreateApiTokenModalWidget = () => {
+    const { t } = useTranslation()
+
     const isModalOpen = useApiTokensStoreCreateModalIsOpen()
     const actions = useApiTokensStoreActions()
 
@@ -52,7 +55,7 @@ export const CreateApiTokenModalWidget = () => {
             opened={isModalOpen}
             title={
                 <Group gap="xl" justify="space-between">
-                    <Text fw={500}>Create token</Text>
+                    <Text fw={500}>{t('create-api-token-modal.widget.create-token')}</Text>
                 </Group>
             }
         >

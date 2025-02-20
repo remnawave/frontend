@@ -16,6 +16,7 @@ import {
     UpdateHostCommand
 } from '@remnawave/backend-contract'
 import { PiCaretDown, PiCaretUp, PiFloppyDiskDuotone } from 'react-icons/pi'
+import { useTranslation } from 'react-i18next'
 
 import { DeleteHostFeature } from '@features/ui/dashboard/hosts/delete-host'
 import { RemarkInfoPopoverWidget } from '@widgets/dashboard/hosts/popovers'
@@ -28,12 +29,14 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
     const { form, advancedOpened, handleSubmit, host, inbounds, setAdvancedOpened, isSubmitting } =
         props
 
+    const { t } = useTranslation()
+
     return (
         <form onSubmit={handleSubmit}>
             <Stack gap="md">
                 <TextInput
                     key={form.key('remark')}
-                    label="Remark"
+                    label={t('base-host-form.remark')}
                     {...form.getInputProps('remark')}
                     leftSection={<RemarkInfoPopoverWidget />}
                     required
@@ -49,16 +52,16 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
                     >
                         <TextInput
                             key={form.key('address')}
-                            label="Address"
+                            label={t('base-host-form.address')}
                             {...form.getInputProps('address')}
-                            placeholder="e.g. example.com"
+                            placeholder={t('base-host-form.e-g-example-com')}
                             required
                             w="75%"
                         />
 
                         <NumberInput
                             key={form.key('port')}
-                            label="Port"
+                            label={t('base-host-form.port')}
                             {...form.getInputProps('port')}
                             allowDecimal={false}
                             allowNegative={false}
@@ -67,7 +70,7 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
                             hideControls
                             max={65535}
                             min={1}
-                            placeholder="e.g. 443"
+                            placeholder={t('base-host-form.e-g-443')}
                             required
                             w="20%"
                         />
@@ -86,11 +89,11 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
                                 value: inbound.uuid
                             }))}
                             key={form.key('inboundUuid')}
-                            label="Inbound"
+                            label={t('base-host-form.inbound')}
                             {...form.getInputProps('inboundUuid')}
                             allowDeselect={false}
                             defaultValue={host?.inboundUuid ?? undefined}
-                            placeholder="Select inbound"
+                            placeholder={t('base-host-form.select-inbound')}
                             required
                             w="75%"
                         />
@@ -113,7 +116,7 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
                         }
                         variant="subtle"
                     >
-                        Advanced options
+                        {t('base-host-form.advanced-options')}
                     </Button>
 
                     <Collapse in={advancedOpened}>
@@ -121,21 +124,21 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
                             <TextInput
                                 key={form.key('sni')}
                                 label="SNI"
-                                placeholder="SNI (e.g. example.com)"
+                                placeholder={t('base-host-form.sni-e-g-example-com')}
                                 {...form.getInputProps('sni')}
                             />
 
                             <TextInput
                                 key={form.key('host')}
-                                label="Host"
-                                placeholder="Host (e.g. example.com)"
+                                label={t('base-host-form.host')}
+                                placeholder={t('base-host-form.host-e-g-example-com')}
                                 {...form.getInputProps('host')}
                             />
 
                             <TextInput
                                 key={form.key('path')}
-                                label="Path"
-                                placeholder="path (e.g. /ws)"
+                                label={t('base-host-form.path')}
+                                placeholder={t('base-host-form.path-e-g-ws')}
                                 {...form.getInputProps('path')}
                             />
 
@@ -147,7 +150,7 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
                                 }))}
                                 key={form.key('alpn')}
                                 label="ALPN"
-                                placeholder="ALPN (e.g. h2)"
+                                placeholder={t('base-host-form.alpn-e-g-h2')}
                                 {...form.getInputProps('alpn')}
                             />
 
@@ -158,8 +161,8 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
                                     value: fingerprint
                                 }))}
                                 key={form.key('fingerprint')}
-                                label="Fingerprint"
-                                placeholder="Fingerprint (e.g. chrome)"
+                                label={t('base-host-form.fingerprint')}
+                                placeholder={t('base-host-form.fingerprint-e-g-chrome')}
                                 {...form.getInputProps('fingerprint')}
                             />
                         </Stack>
@@ -181,7 +184,7 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
                     type="submit"
                     variant="outline"
                 >
-                    Save
+                    {t('base-host-form.save')}
                 </Button>
             </Group>
         </form>

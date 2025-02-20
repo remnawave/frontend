@@ -1,6 +1,7 @@
 /* eslint-disable camelcase */
 import { GetAllUsersV2Command } from '@remnawave/backend-contract'
 import { MRT_ColumnDef } from 'mantine-react-table'
+import { useTranslation } from 'react-i18next'
 import { useMemo } from 'react'
 import dayjs from 'dayjs'
 
@@ -12,11 +13,13 @@ import { DataUsageColumnEntity } from '@entities/dashboard/users/ui'
 import { prettyBytesToAnyUtil } from '@shared/utils/bytes'
 
 export const useUserTableColumns = () => {
+    const { t } = useTranslation()
+
     return useMemo<MRT_ColumnDef<GetAllUsersV2Command.Response['response']['users'][0]>[]>(
         () => [
             {
                 accessorKey: 'username',
-                header: 'Username',
+                header: t('use-table-columns.username'),
                 Cell: ({ cell }) => <UsernameColumnEntity user={cell.row.original} />,
                 mantineTableBodyCellProps: {
                     align: 'left'
@@ -27,7 +30,7 @@ export const useUserTableColumns = () => {
             },
             {
                 accessorKey: 'status',
-                header: 'Status',
+                header: t('use-table-columns.status'),
                 Cell: ({ cell }) => <StatusColumnEntity need="badge" user={cell.row.original} />,
                 filterVariant: 'select',
                 enableColumnFilterModes: false,
@@ -41,7 +44,7 @@ export const useUserTableColumns = () => {
             },
             {
                 accessorKey: 'nodeName',
-                header: 'Last connected node',
+                header: t('use-table-columns.last-connected-node'),
                 Cell: ({ cell }) => (
                     <ConnectedNodeColumnEntity
                         nodeName={cell.row.original.lastConnectedNode?.nodeName}
@@ -58,14 +61,14 @@ export const useUserTableColumns = () => {
             },
             {
                 accessorKey: 'expireAt',
-                header: 'Expire at',
+                header: t('use-table-columns.expire-at'),
                 Cell: ({ cell }) => <StatusColumnEntity need="date" user={cell.row.original} />,
                 enableColumnFilterModes: false,
                 enableColumnFilter: false
             },
             {
                 accessorKey: 'usedTrafficBytes',
-                header: 'Data usage',
+                header: t('use-table-columns.data-usage'),
                 Cell: ({ cell }) => <DataUsageColumnEntity user={cell.row.original} />,
                 mantineTableBodyCellProps: {
                     align: 'center'
@@ -78,7 +81,7 @@ export const useUserTableColumns = () => {
             },
             {
                 accessorKey: 'shortUuid',
-                header: 'Sub-link',
+                header: t('use-table-columns.sub-link'),
 
                 Cell: ({ cell }) => <ShortUuidColumnEntity user={cell.row.original} />,
                 minSize: 140,
@@ -92,7 +95,7 @@ export const useUserTableColumns = () => {
 
             {
                 accessorKey: 'description',
-                header: 'Description',
+                header: t('use-table-columns.description'),
                 accessorFn: (originalRow) => originalRow.description || '–',
                 minSize: 250,
                 size: 400,
@@ -104,11 +107,11 @@ export const useUserTableColumns = () => {
 
             {
                 accessorKey: 'lastTrafficResetAt',
-                header: 'Traffic reset',
+                header: t('use-table-columns.traffic-reset'),
                 accessorFn: (originalRow) =>
                     originalRow.lastTrafficResetAt
                         ? dayjs(originalRow.lastTrafficResetAt).format('DD/MM/YYYY, HH:mm')
-                        : 'Never',
+                        : t('use-table-columns.never'),
                 minSize: 170,
                 maxSize: 400,
                 size: 170,
@@ -120,11 +123,11 @@ export const useUserTableColumns = () => {
             },
             {
                 accessorKey: 'onlineAt',
-                header: 'Online at',
+                header: t('use-table-columns.online-at'),
                 accessorFn: (originalRow) =>
                     originalRow.onlineAt
                         ? dayjs(originalRow.onlineAt).format('DD/MM/YYYY, HH:mm')
-                        : 'Never',
+                        : t('use-table-columns.never'),
                 minSize: 170,
                 maxSize: 400,
                 size: 170,
@@ -136,7 +139,7 @@ export const useUserTableColumns = () => {
             },
             {
                 accessorKey: 'subLastUserAgent',
-                header: 'Last UA',
+                header: t('use-table-columns.last-ua'),
                 accessorFn: (originalRow) => originalRow.subLastUserAgent || '–',
                 minSize: 250,
                 size: 400,
@@ -147,7 +150,7 @@ export const useUserTableColumns = () => {
             },
             {
                 accessorKey: 'lifetimeUsedTrafficBytes',
-                header: 'Lifetime used',
+                header: t('use-table-columns.lifetime-used'),
                 accessorFn: (originalRow) =>
                     prettyBytesToAnyUtil(originalRow.lifetimeUsedTrafficBytes) || '–',
                 minSize: 170,
@@ -161,11 +164,11 @@ export const useUserTableColumns = () => {
             },
             {
                 accessorKey: 'subRevokedAt',
-                header: 'Sub-link revoked at',
+                header: t('use-table-columns.sub-link-revoked-at'),
                 accessorFn: (originalRow) =>
                     originalRow.subRevokedAt
                         ? dayjs(originalRow.subRevokedAt).format('DD/MM/YYYY, HH:mm')
-                        : 'Never',
+                        : t('use-table-columns.never'),
                 minSize: 170,
                 maxSize: 170,
                 size: 170,
@@ -177,7 +180,7 @@ export const useUserTableColumns = () => {
             },
             {
                 accessorKey: 'createdAt',
-                header: 'Created at',
+                header: t('use-table-columns.created-at'),
                 accessorFn: (originalRow) =>
                     dayjs(originalRow.createdAt).format('DD/MM/YYYY, HH:mm'),
                 minSize: 170,

@@ -1,6 +1,7 @@
 /* eslint-disable camelcase */
 import { MantineReactTable, MRT_SortingState, useMantineReactTable } from 'mantine-react-table'
 import { GetAllNodesCommand } from '@remnawave/backend-contract'
+import { useTranslation } from 'react-i18next'
 import { useState } from 'react'
 import dayjs from 'dayjs'
 
@@ -24,6 +25,8 @@ export function NodesBandwidthTableWidget() {
             }
         }
     })
+    const { t } = useTranslation()
+
     const tableColumns = useBandwidthTableColumns()
 
     const [sorting, setSorting] = useState<MRT_SortingState>([])
@@ -72,8 +75,8 @@ export function NodesBandwidthTableWidget() {
     return (
         <DataTableShared.Container>
             <DataTableShared.Title
-                description="Only nodes with active traffic tracking are displayed"
-                title={`Today: ${dayjs().format('DD MMMM')}`}
+                description={t('table.widget.only-active-nodes')}
+                title={`${t('table.widget.today')}: ${dayjs().format('DD MMMM')}`}
             />
             <DataTableShared.Content>
                 <MantineReactTable table={table} />

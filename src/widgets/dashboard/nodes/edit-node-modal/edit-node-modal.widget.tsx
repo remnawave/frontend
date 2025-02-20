@@ -1,6 +1,7 @@
 import { UpdateNodeCommand } from '@remnawave/backend-contract'
 import { useForm, zodResolver } from '@mantine/form'
 import { Group, Modal, Text } from '@mantine/core'
+import { useTranslation } from 'react-i18next'
 import { useEffect, useState } from 'react'
 
 import {
@@ -22,6 +23,8 @@ import { queryClient } from '@shared/api'
 import { NodeStatusBadgeWidget } from '../node-status-badge/node-status-badge.widget'
 
 export const EditNodeModalConnectorWidget = () => {
+    const { t } = useTranslation()
+
     const isModalOpen = useNodesStoreEditModalIsOpen()
     const actions = useNodesStoreActions()
     const node = useNodesStoreEditModalNode()
@@ -106,7 +109,7 @@ export const EditNodeModalConnectorWidget = () => {
             opened={isModalOpen}
             title={
                 <Group gap="xl" justify="space-between">
-                    <Text fw={500}>Edit node</Text>
+                    <Text fw={500}>{t('edit-node-modal.widget.edit-node')}</Text>
                     {node && <NodeStatusBadgeWidget fetchedNode={fetchedNode} node={node} />}
                 </Group>
             }

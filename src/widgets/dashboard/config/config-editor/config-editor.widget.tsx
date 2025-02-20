@@ -1,6 +1,7 @@
 import Editor, { Monaco } from '@monaco-editor/react'
 import { useEffect, useRef, useState } from 'react'
 import { Box, Code, Paper } from '@mantine/core'
+import { useTranslation } from 'react-i18next'
 
 import { ConfigEditorActionsFeature } from '@features/dashboard/config/config-editor-actions'
 import { ConfigValidationFeature } from '@features/dashboard/config/config-validation'
@@ -11,6 +12,8 @@ import styles from './ConfigEditor.module.css'
 import { Props } from './interfaces'
 
 export function ConfigEditorWidget(props: Props) {
+    const { t } = useTranslation()
+
     const { config } = props
     const [result, setResult] = useState('')
     const [isConfigValid, setIsConfigValid] = useState(false)
@@ -46,7 +49,7 @@ export function ConfigEditorWidget(props: Props) {
                     beforeMount={handleEditorDidMount}
                     className={styles.monacoEditor}
                     defaultLanguage="json"
-                    loading={'Loading editor...'}
+                    loading={t('config-editor.widget.loading-editor')}
                     onChange={() =>
                         ConfigValidationFeature.validate(
                             editorRef,

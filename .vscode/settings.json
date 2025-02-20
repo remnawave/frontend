@@ -6,5 +6,72 @@
     "**/*.sass",
     "**/*.less",
     "node_modules/@mantine/core/styles.css"
-  ]
+  ],
+  "i18n-ally.localesPaths": [
+    "public/locales",
+    "src/app/i18n"
+  ],
+  "i18n-ally.displayLanguage": "en",
+  "i18n-ally.refactor.templates": [
+    {
+      // affect scope (optional)
+      // see https://github.com/lokalise/i18n-ally/blob/master/src/core/types.ts#L156-L156
+      "source": "html-attribute",
+      "templates": [
+        "t('{key}'{args})",
+      ],
+      "include": [
+        "src/**/*.{ts,tsx}",
+      ],
+    },
+    {
+      // affect scope (optional)
+      // see https://github.com/lokalise/i18n-ally/blob/master/src/core/types.ts#L156-L156
+      "source": "js-string",
+      "templates": [
+        "t('{key}'{args})",
+      ],
+      "include": [
+        "src/**/*.{ts,tsx}",
+      ],
+    },
+    {
+      // affect scope (optional)
+      // see https://github.com/lokalise/i18n-ally/blob/master/src/core/types.ts#L156-L156
+      "source": "js-template",
+      "templates": [
+        "{t('{key}'{args})}",
+      ],
+      "include": [
+        "src/**/*.{ts,tsx}",
+      ],
+    },
+    {
+      // affect scope (optional)
+      // see https://github.com/lokalise/i18n-ally/blob/master/src/core/types.ts#L156-L156
+      "source": "html-inline",
+      "templates": [
+        "{t('{key}'{args})}",
+      ],
+      "include": [
+        "src/**/*.{ts,tsx}",
+      ],
+    },
+    {
+      // affect scope (optional)
+      // see https://github.com/lokalise/i18n-ally/blob/master/src/core/types.ts#L156-L156
+      "source": "jsx-text",
+      "templates": [
+        "{t('{key}'{args})}",
+      ],
+      "include": [
+        "src/**/*.{ts,tsx}",
+      ],
+    },
+  ],
+  "i18n-ally.keystyle": "nested",
+  "i18n-ally.indent": 4,
+  "i18n-ally.extract.keygenStrategy": "slug",
+  "i18n-ally.extract.keygenStyle": "default",
+  "i18n-ally.extract.keyPrefix": "{fileNameWithoutExt}."
 }

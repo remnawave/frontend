@@ -1,5 +1,6 @@
 import { CreateHostCommand } from '@remnawave/backend-contract'
 import { useForm, zodResolver } from '@mantine/form'
+import { useTranslation } from 'react-i18next'
 import { Modal, Text } from '@mantine/core'
 import { useState } from 'react'
 
@@ -8,6 +9,8 @@ import { BaseHostForm } from '@shared/ui/forms/hosts/base-host-form'
 import { useCreateHost, useGetInbounds } from '@shared/api/hooks'
 
 export const CreateHostModalWidget = () => {
+    const { t } = useTranslation()
+
     const isModalOpen = useHostsStoreCreateModalIsOpen()
     const actions = useHostsStoreActions()
 
@@ -59,7 +62,7 @@ export const CreateHostModalWidget = () => {
             centered
             onClose={handleClose}
             opened={isModalOpen}
-            title={<Text fw={500}>New host</Text>}
+            title={<Text fw={500}>{t('create-host-modal.widget.new-host')}</Text>}
         >
             <BaseHostForm
                 advancedOpened={advancedOpened}

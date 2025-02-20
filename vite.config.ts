@@ -22,6 +22,9 @@ export default defineConfig({
         //     exclude: ['node_modules/**', /\.md$/i, 'public/**', 'dist/**', '.git/**', '.vscode/**']
         // })
     ],
+    optimizeDeps: {
+        include: ['html-parse-stringify']
+    },
     build: {
         target: 'esNext',
         outDir: 'dist',

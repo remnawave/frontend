@@ -1,10 +1,13 @@
 import { Button, Group, Paper, Stack, Text, Title } from '@mantine/core'
 import { PiBookOpenTextDuotone, PiCodeDuotone } from 'react-icons/pi'
+import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 
 import { IProps } from './interfaces'
 
 export function ApiTokensDocumentationWidget(props: IProps) {
+    const { t } = useTranslation()
+
     const { docs } = props
 
     if (!docs || !docs.isDocsEnabled) {
@@ -14,12 +17,11 @@ export function ApiTokensDocumentationWidget(props: IProps) {
     return (
         <Paper mb="lg" p="md" radius="md" withBorder>
             <Stack gap="md">
-                <Title order={4}>API Documentation</Title>
+                <Title order={4}>{t('api-tokens-documentation.widget.api-documentation')}</Title>
 
                 <Text c="dimmed" size="sm">
-                    Explore API documentation using either Scalar or Swagger UI. <br />
-                    Both provide comprehensive details about available endpoints, request/response
-                    formats, and authentication methods.
+                    {t('api-tokens-documentation.widget.doc-description-line-1')} <br />
+                    {t('api-tokens-documentation.widget.doc-description-line-2')}
                 </Text>
 
                 <Group>
@@ -31,7 +33,7 @@ export function ApiTokensDocumentationWidget(props: IProps) {
                         to={docs.scalarPath!}
                         variant="light"
                     >
-                        Open Scalar
+                        {t('api-tokens-documentation.widget.open-scalar')}
                     </Button>
 
                     <Button
@@ -43,7 +45,7 @@ export function ApiTokensDocumentationWidget(props: IProps) {
                         to={docs.swaggerPath!}
                         variant="light"
                     >
-                        Open Swagger
+                        {t('api-tokens-documentation.widget.open-swagger')}
                     </Button>
                 </Group>
             </Stack>

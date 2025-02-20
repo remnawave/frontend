@@ -11,11 +11,12 @@ import 'mantine-react-table/styles.css'
 import './global.css'
 
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import { DirectionProvider, MantineProvider } from '@mantine/core'
 import { QueryClientProvider } from '@tanstack/react-query'
 import { NavigationProgress } from '@mantine/nprogress'
 import { Notifications } from '@mantine/notifications'
 import { ModalsProvider } from '@mantine/modals'
-import { MantineProvider } from '@mantine/core'
+import { I18nextProvider } from 'react-i18next'
 import { useMediaQuery } from '@mantine/hooks'
 
 // import { StrictMode } from 'react'
@@ -24,6 +25,7 @@ import { theme } from '@shared/constants'
 
 import { Router } from './app/router/router'
 import { queryClient } from './shared/api'
+import i18n from './app/i18n/i18n'
 
 export function App() {
     const mq = useMediaQuery('(min-width: 40em)')
@@ -31,19 +33,23 @@ export function App() {
 
     return (
         // <StrictMode>
-        <QueryClientProvider client={queryClient}>
-            {isDev && <ReactQueryDevtools initialIsOpen={false} />}
-            <AuthProvider>
-                <MantineProvider defaultColorScheme="dark" theme={theme}>
-                    <ModalsProvider>
-                        <Notifications position={mq ? 'top-right' : 'bottom-right'} />
-                        <NavigationProgress />
+        <I18nextProvider defaultNS={''} i18n={i18n}>
+            <QueryClientProvider client={queryClient}>
+                {isDev && <ReactQueryDevtools initialIsOpen={false} />}
+                <AuthProvider>
+                    <DirectionProvider>
+                        <MantineProvider defaultColorScheme="dark" theme={theme}>
+                            <ModalsProvider>
+                                <Notifications position={mq ? 'top-right' : 'bottom-right'} />
+                                <NavigationProgress />
 
-                        <Router />
-                    </ModalsProvider>
-                </MantineProvider>
-            </AuthProvider>
-        </QueryClientProvider>
+                                <Router />
+                            </ModalsProvider>
+                        </MantineProvider>
+                    </DirectionProvider>
+                </AuthProvider>
+            </QueryClientProvider>
+        </I18nextProvider>
         // </StrictMode>
     )
 }

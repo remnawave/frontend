@@ -1,6 +1,7 @@
 import { CreateNodeCommand } from '@remnawave/backend-contract'
 import { useForm, zodResolver } from '@mantine/form'
 import { Group, Modal, Text } from '@mantine/core'
+import { useTranslation } from 'react-i18next'
 import { useState } from 'react'
 
 import { useNodesStoreActions, useNodesStoreCreateModalIsOpen } from '@entities/dashboard/nodes'
@@ -9,6 +10,8 @@ import { useCreateNode, useGetInbounds, useGetPubKey } from '@shared/api/hooks'
 import { gbToBytesUtil } from '@shared/utils/bytes'
 
 export const CreateNodeModalWidget = () => {
+    const { t } = useTranslation()
+
     const isModalOpen = useNodesStoreCreateModalIsOpen()
     const actions = useNodesStoreActions()
 
@@ -58,7 +61,7 @@ export const CreateNodeModalWidget = () => {
             opened={isModalOpen}
             title={
                 <Group gap="xl" justify="space-between">
-                    <Text fw={500}>Create node</Text>
+                    <Text fw={500}>{t('create-node-modal.widget.create-node')}</Text>
                 </Group>
             }
         >

@@ -6,48 +6,64 @@ import {
     PiStarDuotone,
     PiUsersDuotone
 } from 'react-icons/pi'
+import { useTranslation } from 'react-i18next'
 
 import { ROUTES } from '@shared/constants'
 
 import { MenuItem } from './interfaces'
 
-export const menu: MenuItem[] = [
-    {
-        header: 'Overview',
-        section: [
-            {
-                name: 'Home',
-                href: ROUTES.DASHBOARD.HOME,
-                icon: PiStarDuotone
-            }
-        ]
-    },
-    {
-        header: 'Management',
-        section: [
-            { name: 'Users', href: ROUTES.DASHBOARD.USERS, icon: PiUsersDuotone },
-            { name: 'Hosts', href: ROUTES.DASHBOARD.HOSTS, icon: PiBookmarksDuotone },
-            {
-                name: 'Nodes',
-                href: ROUTES.DASHBOARD.NODES,
-                icon: PiComputerTowerDuotone,
-                dropdownItems: [
-                    { name: 'Management', href: ROUTES.DASHBOARD.NODES },
-                    { name: 'Bandwidth table', href: ROUTES.DASHBOARD.NODES_BANDWIDTH_TABLE }
-                ]
-            },
-            { name: 'Config', href: ROUTES.DASHBOARD.CONFIG, icon: PiGearDuotone },
-            { name: 'API Keys', href: ROUTES.DASHBOARD.API_TOKENS, icon: PiCookie }
-        ]
-    },
-    {
-        header: 'Statistics',
-        section: [
-            {
-                name: 'Nodes',
-                href: ROUTES.DASHBOARD.NODES_STATS,
-                icon: PiComputerTowerDuotone
-            }
-        ]
-    }
-]
+export const useMenuSections = (): MenuItem[] => {
+    const { t } = useTranslation()
+
+    return [
+        {
+            header: t('constants.overview'),
+            section: [
+                {
+                    name: t('constants.home'),
+                    href: ROUTES.DASHBOARD.HOME,
+                    icon: PiStarDuotone
+                }
+            ]
+        },
+        {
+            header: t('constants.management'),
+            section: [
+                { name: t('constants.users'), href: ROUTES.DASHBOARD.USERS, icon: PiUsersDuotone },
+                {
+                    name: t('constants.hosts'),
+                    href: ROUTES.DASHBOARD.HOSTS,
+                    icon: PiBookmarksDuotone
+                },
+                {
+                    name: t('constants.nodes'),
+                    href: ROUTES.DASHBOARD.NODES,
+                    icon: PiComputerTowerDuotone,
+                    dropdownItems: [
+                        { name: t('constants.management'), href: ROUTES.DASHBOARD.NODES },
+                        {
+                            name: t('constants.nodes-bandwidth-table'),
+                            href: ROUTES.DASHBOARD.NODES_BANDWIDTH_TABLE
+                        }
+                    ]
+                },
+                { name: t('constants.config'), href: ROUTES.DASHBOARD.CONFIG, icon: PiGearDuotone },
+                {
+                    name: t('constants.api-tokens'),
+                    href: ROUTES.DASHBOARD.API_TOKENS,
+                    icon: PiCookie
+                }
+            ]
+        },
+        {
+            header: t('constants.statistics'),
+            section: [
+                {
+                    name: t('constants.nodes-statistics'),
+                    href: ROUTES.DASHBOARD.NODES_STATS,
+                    icon: PiComputerTowerDuotone
+                }
+            ]
+        }
+    ]
+}

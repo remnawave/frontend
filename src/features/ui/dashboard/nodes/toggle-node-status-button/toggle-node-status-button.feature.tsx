@@ -1,4 +1,5 @@
 import { PiCellSignalFullDuotone, PiCellSignalSlashDuotone, PiTrashDuotone } from 'react-icons/pi'
+import { useTranslation } from 'react-i18next'
 import { Button } from '@mantine/core'
 
 import { useDisableNode, useEnableNode } from '@shared/api/hooks'
@@ -6,6 +7,8 @@ import { useDisableNode, useEnableNode } from '@shared/api/hooks'
 import { IProps } from './interfaces'
 
 export function ToggleNodeStatusButtonFeature(props: IProps) {
+    const { t } = useTranslation()
+
     const { handleClose, node } = props
 
     const mutationParams = {
@@ -30,11 +33,11 @@ export function ToggleNodeStatusButtonFeature(props: IProps) {
 
     if (node.isDisabled) {
         color = 'green'
-        buttonLabel = 'Enable'
+        buttonLabel = t('toggle-node-status-button.feature.enable')
         icon = <PiCellSignalFullDuotone size="1rem" />
     } else {
         color = 'red'
-        buttonLabel = 'Disable'
+        buttonLabel = t('toggle-node-status-button.feature.disable')
         icon = <PiCellSignalSlashDuotone size="1rem" />
     }
 

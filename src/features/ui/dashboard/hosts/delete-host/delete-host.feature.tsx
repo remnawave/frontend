@@ -1,10 +1,13 @@
 import { ActionIcon, Tooltip } from '@mantine/core'
 import { PiTrashDuotone } from 'react-icons/pi'
+import { useTranslation } from 'react-i18next'
 
 import { useHostsStoreActions, useHostsStoreEditModalHost } from '@entities/dashboard'
 import { useDeleteHost } from '@shared/api/hooks'
 
 export function DeleteHostFeature() {
+    const { t } = useTranslation()
+
     const actions = useHostsStoreActions()
     const host = useHostsStoreEditModalHost()
 
@@ -23,7 +26,7 @@ export function DeleteHostFeature() {
     }
 
     return (
-        <Tooltip label="Delete host">
+        <Tooltip label={t('delete-host.feature.delete-host')}>
             <ActionIcon
                 color="red"
                 loading={isDeleteHostPending}

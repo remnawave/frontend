@@ -6,39 +6,43 @@ import {
     PiUsersDuotone
 } from 'react-icons/pi'
 import { GetStatsCommand } from '@remnawave/backend-contract'
+import { TFunction } from 'i18next'
 
 import { formatInt } from '@shared/utils/misc'
 
-export const getUsersMetrics = (users: GetStatsCommand.Response['response']['users']) => {
+export const getUsersMetrics = (
+    users: GetStatsCommand.Response['response']['users'],
+    t: TFunction
+) => {
     return [
         {
             value: formatInt(users.totalUsers) ?? 0,
             icon: PiUsersDuotone,
-            title: 'Total users',
+            title: t('users-metrics.total-users'),
             color: 'blue'
         },
         {
             value: formatInt(users.statusCounts.ACTIVE) ?? 0,
-            title: 'Active users',
+            title: t('users-metrics.active-users'),
             icon: PiPulseDuotone,
             color: 'teal'
         },
         {
             value: formatInt(users.statusCounts.EXPIRED) ?? 0,
             icon: PiClockUserDuotone,
-            title: 'Expired users',
+            title: t('users-metrics.expired-users'),
             color: 'red'
         },
         {
             value: formatInt(users.statusCounts.LIMITED) ?? 0,
             icon: PiClockCountdownDuotone,
-            title: 'Limited users',
+            title: t('users-metrics.limited-users'),
             color: 'orange'
         },
         {
             value: formatInt(users.statusCounts.DISABLED) ?? 0,
             icon: PiProhibitDuotone,
-            title: 'Disabled users',
+            title: t('users-metrics.disabled-users'),
             color: 'gray'
         }
     ]

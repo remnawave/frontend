@@ -1,17 +1,26 @@
+import { useTranslation } from 'react-i18next'
 import { Grid } from '@mantine/core'
 
 import { CreateUserModalWidget } from '@widgets/dashboard/users/create-user-modal'
-import { BREADCRUMBS } from '@pages/dashboard/users/ui/components/constants'
 import { ViewUserModal } from '@widgets/dashboard/users/view-user-modal'
 import { UserTableWidget } from '@widgets/dashboard/users/users-table'
 import { UsersMetrics } from '@widgets/dashboard/users/users-metrics'
 import { PageHeader } from '@shared/ui/page-header'
+import { ROUTES } from '@shared/constants'
 import { Page } from '@shared/ui/page'
 
 export default function UsersPageComponent() {
+    const { t } = useTranslation()
+
     return (
-        <Page title="Users">
-            <PageHeader breadcrumbs={BREADCRUMBS} title="Users" />
+        <Page title={t('constants.users')}>
+            <PageHeader
+                breadcrumbs={[
+                    { label: t('constants.dashboard'), href: ROUTES.DASHBOARD.HOME },
+                    { label: t('constants.users') }
+                ]}
+                title={t('constants.users')}
+            />
 
             <Grid>
                 <Grid.Col span={12}>

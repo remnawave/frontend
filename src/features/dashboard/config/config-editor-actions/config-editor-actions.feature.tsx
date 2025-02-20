@@ -1,4 +1,5 @@
 import { PiCheckSquareOffset, PiFloppyDisk } from 'react-icons/pi'
+import { useTranslation } from 'react-i18next'
 import { Button, Group } from '@mantine/core'
 
 import { useUpdateConfig } from '@shared/api/hooks'
@@ -7,6 +8,7 @@ import { Props } from './interfaces'
 
 export function ConfigEditorActionsFeature(props: Props) {
     const { editorRef, monacoRef, isConfigValid, setResult } = props
+    const { t } = useTranslation()
 
     const { mutate: updateConfig, isPending: isUpdating } = useUpdateConfig()
 
@@ -48,7 +50,7 @@ export function ConfigEditorActionsFeature(props: Props) {
                 mb="md"
                 onClick={formatDocument}
             >
-                Format
+                {t('config-editor-actions.feature.format')}
             </Button>
             <Button
                 disabled={!isConfigValid}
@@ -57,7 +59,7 @@ export function ConfigEditorActionsFeature(props: Props) {
                 mb="md"
                 onClick={handleSave}
             >
-                Save
+                {t('config-editor-actions.feature.save')}
             </Button>
         </Group>
     )
