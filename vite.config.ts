@@ -44,6 +44,9 @@ export default defineConfig({
                         '@mantine/notifications',
                         '@mantine/modals'
                     ],
+                    remnawave: ['@remnawave/backend-contract'],
+                    consola: ['consola'],
+                    i18n: ['i18next', 'i18next-http-backend', 'i18next-browser-languagedetector'],
                     motion: ['framer-motion'],
                     crypto: ['crypto-js', '@stablelib/base64', '@stablelib/x25519'],
                     recharts: ['recharts'],

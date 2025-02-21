@@ -46,7 +46,8 @@
     "config-editor-actions": {
         "feature": {
             "save": "Сохранить",
-            "format": "Форматировать"
+            "format": "Форматировать",
+            "copy-config": "Скорировать"
         }
     },
     "use-bandwidth-table-columns": {
@@ -150,7 +151,8 @@
         "widget": {
             "public-key": "Публичный ключ",
             "private-key": "Приватный ключ",
-            "generate-key-pair": "Сгенерировать пару ключей"
+            "generate-key-pair": "Сгенерировать пару ключей",
+            "both-keys": "Пара ключей"
         }
     },
     "create-host-modal": {
@@ -355,6 +357,17 @@
         "util": {
             "invalid-date": "Неверная дата",
             "not-connected-yet": "Не подключался"
+        }
+    },
+    "toggle-user-status-button": {
+        "feature": {
+            "enable": "Включить польз.",
+            "disable": "Выключить польз."
+        }
+    },
+    "create-api-token-modal": {
+        "widget": {
+            "create-token": "Создать токен"
         }
     }
 }

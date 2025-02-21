@@ -43,6 +43,25 @@ export const KeypairWidget = () => {
 
                 <Group gap="xs">
                     <Text c="dimmed" fw={500} size="sm" w="9ch">
+                        {t('keypair.widget.public-key')}
+                    </Text>
+                    <CopyButton value={keyPair.publicKey}>
+                        {({ copied, copy }) => (
+                            <ActionIcon
+                                color={copied ? 'teal' : 'gray'}
+                                ml="xs"
+                                onClick={copy}
+                                variant="subtle"
+                            >
+                                {copied ? <PiCheck size="1rem" /> : <PiCopy size="1rem" />}
+                            </ActionIcon>
+                        )}
+                    </CopyButton>
+                    <Code p="xs">{keyPair.publicKey}</Code>
+                </Group>
+
+                <Group gap="xs">
+                    <Text c="dimmed" fw={500} size="sm" w="9ch">
                         {t('keypair.widget.private-key')}
                     </Text>
                     <CopyButton value={keyPair.privateKey}>
@@ -62,9 +81,12 @@ export const KeypairWidget = () => {
 
                 <Group gap="xs">
                     <Text c="dimmed" fw={500} size="sm" w="9ch">
-                        {t('keypair.widget.public-key')}
+                        {t('keypair.widget.both-keys')}
                     </Text>
-                    <CopyButton value={keyPair.publicKey}>
+                    <CopyButton
+                        value={`"publicKey": "${keyPair.publicKey}",
+"privateKey": "${keyPair.privateKey}",`}
+                    >
                         {({ copied, copy }) => (
                             <ActionIcon
                                 color={copied ? 'teal' : 'gray'}
@@ -76,7 +98,10 @@ export const KeypairWidget = () => {
                             </ActionIcon>
                         )}
                     </CopyButton>
-                    <Code p="xs">{keyPair.publicKey}</Code>
+                    <Code component="pre">
+                        {`"publicKey": "${keyPair.publicKey}",
+"privateKey": "${keyPair.privateKey}",`}
+                    </Code>
                 </Group>
             </Stack>
         </Paper>

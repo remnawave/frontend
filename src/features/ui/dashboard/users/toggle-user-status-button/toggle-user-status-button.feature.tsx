@@ -1,5 +1,6 @@
 import { PiCellSignalFullDuotone, PiCellSignalSlashDuotone, PiTrashDuotone } from 'react-icons/pi'
 import { USERS_STATUS } from '@remnawave/backend-contract'
+import { useTranslation } from 'react-i18next'
 import { Button } from '@mantine/core'
 
 import { useDisableUser, useEnableUser, usersQueryKeys } from '@shared/api/hooks'
@@ -8,6 +9,8 @@ import { queryClient } from '@shared/api'
 import { IProps } from './interfaces'
 
 export function ToggleUserStatusButtonFeature(props: IProps) {
+    const { t } = useTranslation()
+
     const { user } = props
     const { uuid } = user
 
@@ -33,11 +36,11 @@ export function ToggleUserStatusButtonFeature(props: IProps) {
 
     if (user.status === USERS_STATUS.DISABLED) {
         color = 'green'
-        buttonLabel = 'Enable'
+        buttonLabel = t('toggle-user-status-button.feature.enable')
         icon = <PiCellSignalFullDuotone size="1rem" />
     } else {
         color = 'red'
-        buttonLabel = 'Disable'
+        buttonLabel = t('toggle-user-status-button.feature.disable')
         icon = <PiCellSignalSlashDuotone size="1rem" />
     }
 
@@ -58,7 +61,7 @@ export function ToggleUserStatusButtonFeature(props: IProps) {
             size="md"
             type="button"
         >
-            {buttonLabel} user
+            {buttonLabel}
         </Button>
     )
 }

@@ -46,7 +46,8 @@
     "config-editor-actions": {
         "feature": {
             "save": "Save",
-            "format": "Format"
+            "format": "Format",
+            "copy-config": "Copy config"
         }
     },
     "use-bandwidth-table-columns": {
@@ -141,11 +142,6 @@
             "list-of-all-api-tokens": "List of all API tokens"
         }
     },
-    "create-api-token-modal": {
-        "widget": {
-            "create-token": "Create token"
-        }
-    },
     "config-editor": {
         "widget": {
             "loading-editor": "Loading editor..."
@@ -155,7 +151,8 @@
         "widget": {
             "public-key": "Public Key",
             "private-key": "Private Key",
-            "generate-key-pair": "Generate Key Pair"
+            "generate-key-pair": "Generate Key Pair",
+            "both-keys": "Both keys"
         }
     },
     "create-host-modal": {
@@ -360,6 +357,17 @@
         "util": {
             "invalid-date": "Invalid Date",
             "not-connected-yet": "Not connected yet"
+        }
+    },
+    "toggle-user-status-button": {
+        "feature": {
+            "enable": "Enable user",
+            "disable": "Disable user"
+        }
+    },
+    "create-api-token-modal": {
+        "widget": {
+            "create-token": "Create token"
         }
     }
 }

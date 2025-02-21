@@ -1,6 +1,7 @@
-import { PiCheckSquareOffset, PiFloppyDisk } from 'react-icons/pi'
+import { PiCheck, PiCheckSquareOffset, PiCopy, PiFloppyDisk } from 'react-icons/pi'
 import { useTranslation } from 'react-i18next'
 import { Button, Group } from '@mantine/core'
+import { useClipboard } from '@mantine/hooks'
 
 import { useUpdateConfig } from '@shared/api/hooks'
 
@@ -11,6 +12,7 @@ export function ConfigEditorActionsFeature(props: Props) {
     const { t } = useTranslation()
 
     const { mutate: updateConfig, isPending: isUpdating } = useUpdateConfig()
+    const clipboard = useClipboard({ timeout: 500 })
 
     const handleSave = () => {
         if (!editorRef.current) return
@@ -34,6 +36,16 @@ export function ConfigEditorActionsFeature(props: Props) {
         }
     }
 
+    const handleCopyConfig = () => {
+        if (!editorRef.current) return
+        if (typeof editorRef.current !== 'object') return
+        if (!('getValue' in editorRef.current)) return
+        if (typeof editorRef.current.getValue !== 'function') return
+
+        const currentValue = editorRef.current.getValue()
+        clipboard.copy(currentValue)
+    }
+
     const formatDocument = () => {
         if (!editorRef.current) return
         if (typeof editorRef.current !== 'object') return
@@ -51,6 +63,17 @@ export function ConfigEditorActionsFeature(props: Props) {
                 onClick={formatDocument}
             >
                 {t('config-editor-actions.feature.format')}
+            </Button>
+            <Button
+                color={clipboard.copied ? 'teal' : 'gray'}
+                leftSection={
+                    clipboard.copied ? <PiCheck size={'1.25rem'} /> : <PiCopy size={'1.25rem'} />
+                }
+                mb="md"
+                onClick={handleCopyConfig}
+                variant="outline"
+            >
+                {t('config-editor-actions.feature.copy-config')}
             </Button>
             <Button
                 disabled={!isConfigValid}

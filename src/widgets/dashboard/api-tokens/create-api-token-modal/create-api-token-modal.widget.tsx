@@ -1,7 +1,7 @@
 import { CreateApiTokenCommand } from '@remnawave/backend-contract'
-import { useTranslation } from 'node_modules/react-i18next'
 import { useForm, zodResolver } from '@mantine/form'
 import { Group, Modal, Text } from '@mantine/core'
+import { useTranslation } from 'react-i18next'
 
 import {
     useApiTokensStoreActions,

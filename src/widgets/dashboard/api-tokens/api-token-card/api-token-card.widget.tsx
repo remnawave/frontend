@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next'
 import { useClipboard } from '@mantine/hooks'
 import { motion } from 'framer-motion'
 import ColorHash from 'color-hash'
+import { forwardRef } from 'react'
 import dayjs from 'dayjs'
 
 import { QueryKeys, useDeleteApiToken } from '@shared/api/hooks'
@@ -13,7 +14,7 @@ import { queryClient } from '@shared/api'
 import classes from './ApiTokenCard.module.css'
 import { IProps } from './interfaces'
 
-export function ApiTokenCardWidget(props: IProps) {
+export const ApiTokenCardWidget = forwardRef((props: IProps) => {
     const { t } = useTranslation()
 
     const { apiToken } = props
@@ -103,4 +104,4 @@ export function ApiTokenCardWidget(props: IProps) {
             </Container>
         </motion.div>
     )
-}
+})
