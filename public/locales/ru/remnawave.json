@@ -61,7 +61,8 @@
             "new-user": "Новый пользователь",
             "reset-table": "Сбросить таблицу",
             "clear-filters": "Очистить фильтры",
-            "update": "Обновить"
+            "update": "Обновить",
+            "bulk-actions": "Массовые действия"
         }
     },
     "use-table-columns": {
@@ -368,6 +369,16 @@
     "create-api-token-modal": {
         "widget": {
             "create-token": "Создать токен"
+        }
+    },
+    "bulk-user-actioins-modal": {
+        "widget": {
+            "cancel": "Отмена",
+            "confirm-action-description": "Вы уверены, что хотите удалить выбранных пользователей?",
+            "confirm-action-irreversible": "Это действие необратимо.",
+            "delete-users": "Удалить пользователей",
+            "select-status": "Удалить по статусу",
+            "user-deletion-description": "Удалить всех пользователей с выбранным статусом. \nЕсли вы удалите пользователей со статусом «ACTIVE», вы должны перезапустить все ноды, чтобы применить изменения."
         }
     }
 }

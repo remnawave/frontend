@@ -1,8 +1,10 @@
-import { PiArrowsClockwise, PiExcludeSquare, PiPlus } from 'react-icons/pi'
+import { PiAnchorSimpleDuotone, PiArrowsClockwise, PiExcludeSquare, PiPlus } from 'react-icons/pi'
 import { useTranslation } from 'react-i18next'
 import { Button, Group } from '@mantine/core'
+import { modals } from '@mantine/modals'
 
 import { useUserCreationModalStoreActions } from '@entities/dashboard/user-creation-modal-store'
+import { BulkUserActionsModalWidget } from '@widgets/dashboard/users/bulk-user-actioins-modal'
 import { useUsersTableStoreActions } from '@entities/dashboard/users/users-table-store'
 
 import { IProps } from './interfaces'
@@ -50,6 +52,14 @@ export const UserActionGroupFeature = (props: IProps) => {
         }
     }
 
+    const handleBulkActionsModal = () => {
+        modals.open({
+            title: t('action-group.feature.bulk-actions'),
+            centered: true,
+            children: <BulkUserActionsModalWidget />
+        })
+    }
+
     if (!table || !refetch) {
         return null
     }
@@ -84,6 +94,17 @@ export const UserActionGroupFeature = (props: IProps) => {
                 variant="outline"
             >
                 {t('action-group.feature.reset-table')}
+            </Button>
+
+            <Button
+                color="red"
+                leftSection={<PiAnchorSimpleDuotone size="1rem" />}
+                loading={isLoading}
+                onClick={handleBulkActionsModal}
+                size="xs"
+                variant="outline"
+            >
+                {t('action-group.feature.bulk-actions')}
             </Button>
 
             <Button

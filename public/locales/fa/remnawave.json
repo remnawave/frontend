@@ -61,7 +61,8 @@
             "new-user": "New user",
             "reset-table": "Reset table",
             "clear-filters": "Clear filters",
-            "update": "Update"
+            "update": "Update",
+            "bulk-actions": "Bulk Actions"
         }
     },
     "use-table-columns": {
@@ -368,6 +369,16 @@
     "create-api-token-modal": {
         "widget": {
             "create-token": "Create token"
+        }
+    },
+    "bulk-user-actioins-modal": {
+        "widget": {
+            "delete-users": "Delete users",
+            "confirm-action-description": "Are you sure you want to delete selected users?",
+            "confirm-action-irreversible": "This action is irreversible.",
+            "cancel": "Cancel",
+            "user-deletion-description": "Delete all users with selected status. If you will delete users with \"Active\" status, you should restart all nodes to apply changes.",
+            "select-status": "Delete by status"
         }
     }
 }

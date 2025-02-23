@@ -1,4 +1,5 @@
 import {
+    BulkDeleteUsersByStatusCommand,
     CreateUserCommand,
     DeleteUserCommand,
     DisableUserCommand,
@@ -174,4 +175,10 @@ export const useResetUserTraffic = createPatchMutationHook({
             })
         }
     }
+})
+
+export const useBulkDeleteUsersByStatus = createPostMutationHook({
+    endpoint: BulkDeleteUsersByStatusCommand.TSQ_url,
+    bodySchema: BulkDeleteUsersByStatusCommand.RequestSchema,
+    responseSchema: BulkDeleteUsersByStatusCommand.ResponseSchema
 })
