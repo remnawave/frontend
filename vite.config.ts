@@ -1,10 +1,11 @@
 /* eslint-disable indent */
 import removeConsole from 'vite-plugin-remove-console'
-import { visualizer } from 'rollup-plugin-visualizer'
-import { defineConfig, PluginOption } from 'vite'
+// import { visualizer } from 'rollup-plugin-visualizer'
+import webfontDownload from 'vite-plugin-webfont-dl'
 import tsconfigPaths from 'vite-tsconfig-paths'
 import { fileURLToPath, URL } from 'node:url'
 import react from '@vitejs/plugin-react-swc'
+import { defineConfig } from 'vite'
 // import deadFile from 'vite-plugin-deadfile'
 import * as dotenv from 'dotenv'
 
@@ -15,8 +16,8 @@ export default defineConfig({
         react(),
         tsconfigPaths(),
         removeConsole(),
-        visualizer() as PluginOption
-
+        webfontDownload()
+        // visualizer() as PluginOption
         // deadFile({
         //     include: ['src/**/*.{js,jsx,ts,tsx}'],
         //     exclude: ['node_modules/**', /\.md$/i, 'public/**', 'dist/**', '.git/**', '.vscode/**']
