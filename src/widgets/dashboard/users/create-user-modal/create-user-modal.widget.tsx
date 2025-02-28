@@ -23,6 +23,7 @@ import { useForm, zodResolver } from '@mantine/form'
 import { DateTimePicker } from '@mantine/dates'
 import { useTranslation } from 'react-i18next'
 import { useEffect } from 'react'
+import dayjs from 'dayjs'
 
 import {
     useUserCreationModalStoreActions,
@@ -52,7 +53,8 @@ export const CreateUserModalWidget = () => {
     const form = useForm<CreateUserCommand.Request>({
         name: 'create-user-form',
         mode: 'uncontrolled',
-        validate: zodResolver(CreateUserCommand.RequestSchema),
+        validate: zodResolver(CreateUserCommand.RequestSchema.omit({ expireAt: true })),
+
         initialValues: {
             status: USERS_STATUS.ACTIVE,
             username: '',
@@ -84,7 +86,8 @@ export const CreateUserModalWidget = () => {
                 username: values.username,
                 trafficLimitStrategy: values.trafficLimitStrategy,
                 trafficLimitBytes: gbToBytesUtil(values.trafficLimitBytes),
-                expireAt: values.expireAt,
+                // @ts-expect-error - TODO: fix ZOD schema
+                expireAt: dayjs(values.expireAt).toISOString(),
                 activeUserInbounds: values.activeUserInbounds,
                 status: values.status,
                 description: values.description
@@ -159,6 +162,7 @@ export const CreateUserModalWidget = () => {
                             <DateTimePicker
                                 key={form.key('expireAt')}
                                 label={t('create-user-modal.widget.expiry-date')}
+                                minDate={new Date()}
                                 valueFormat="MMMM D, YYYY - HH:mm"
                                 {...form.getInputProps('expireAt')}
                                 leftSection={<PiCalendarDuotone size="1rem" />}

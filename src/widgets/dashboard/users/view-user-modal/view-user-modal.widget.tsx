@@ -76,7 +76,7 @@ export const ViewUserModal = () => {
     const form = useForm<IFormValues>({
         name: 'edit-user-form',
         mode: 'uncontrolled',
-        validate: zodResolver(UpdateUserCommand.RequestSchema)
+        validate: zodResolver(UpdateUserCommand.RequestSchema.omit({ expireAt: true }))
     })
 
     const {
@@ -118,17 +118,16 @@ export const ViewUserModal = () => {
     const totalUsedTraffic = prettyBytesUtil(user?.usedTrafficBytes, true)
 
     const handleSubmit = form.onSubmit(async (values) => {
-        const updateData = {
-            uuid: values.uuid,
-            trafficLimitStrategy: values.trafficLimitStrategy,
-            trafficLimitBytes: gbToBytesUtil(values.trafficLimitBytes),
-            expireAt: values.expireAt,
-            activeUserInbounds: values.activeUserInbounds,
-            description: values.description
-        }
-
         updateUser({
-            variables: updateData
+            variables: {
+                uuid: values.uuid,
+                trafficLimitStrategy: values.trafficLimitStrategy,
+                trafficLimitBytes: gbToBytesUtil(values.trafficLimitBytes),
+                // @ts-expect-error - TODO: fix ZOD schema
+                expireAt: dayjs(values.expireAt).toISOString(),
+                activeUserInbounds: values.activeUserInbounds,
+                description: values.description
+            }
         })
     })
 
@@ -343,6 +342,7 @@ export const ViewUserModal = () => {
                             <DateTimePicker
                                 key={form.key('expireAt')}
                                 label={t('create-user-modal.widget.expiry-date')}
+                                minDate={new Date()}
                                 valueFormat="MMMM D, YYYY - HH:mm"
                                 {...form.getInputProps('expireAt')}
                                 leftSection={<PiCalendarDuotone size="1rem" />}
