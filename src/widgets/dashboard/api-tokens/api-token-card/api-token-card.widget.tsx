@@ -1,11 +1,11 @@
 import { Badge, Button, Container, Group, Text } from '@mantine/core'
 import { PiCheck, PiCopy, PiTrash } from 'react-icons/pi'
 import { notifications } from '@mantine/notifications'
+import { ForwardedRef, forwardRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useClipboard } from '@mantine/hooks'
 import { motion } from 'framer-motion'
 import ColorHash from 'color-hash'
-import { forwardRef } from 'react'
 import dayjs from 'dayjs'
 
 import { QueryKeys, useDeleteApiToken } from '@shared/api/hooks'
@@ -14,7 +14,7 @@ import { queryClient } from '@shared/api'
 import classes from './ApiTokenCard.module.css'
 import { IProps } from './interfaces'
 
-export const ApiTokenCardWidget = forwardRef((props: IProps) => {
+export const ApiTokenCardWidget = forwardRef((props: IProps, ref: ForwardedRef<HTMLDivElement>) => {
     const { t } = useTranslation()
 
     const { apiToken } = props
@@ -54,6 +54,7 @@ export const ApiTokenCardWidget = forwardRef((props: IProps) => {
             animate={{ opacity: 1, rotateX: 0, y: 0 }}
             exit={{ opacity: 0, rotateX: 80, y: 100 }}
             initial={{ opacity: 0, rotateX: -80, y: -100 }}
+            ref={ref}
             style={{ perspective: 1000 }}
             transition={{
                 duration: 0.4,

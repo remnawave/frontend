@@ -8,7 +8,7 @@ i18n.use(initReactI18next)
     .use(HttpApi)
     .init({
         fallbackLng: 'en',
-        debug: true,
+        debug: process.env.NODE_ENV === 'development',
         defaultNS: ['remnawave'],
         ns: ['remnawave'],
         detection: {

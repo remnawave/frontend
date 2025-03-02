@@ -1,9 +1,9 @@
 import {
     Button,
     Container,
-    Group,
     Paper,
     PasswordInput,
+    Stack,
     Text,
     TextInput,
     Title
@@ -117,7 +117,7 @@ export const RegisterFormFeature = () => {
                         {...form.getInputProps('username')}
                     />
 
-                    <Group align="flex-end" mt="md">
+                    <Stack mt="md">
                         <PasswordInput
                             label={t('register-form.feature.password')}
                             placeholder="soy_t5Px5`Gm4j0@Hf&Dd7iU"
@@ -126,27 +126,27 @@ export const RegisterFormFeature = () => {
                             style={{ flex: 1 }}
                             {...form.getInputProps('password')}
                         />
-                    </Group>
 
-                    <PasswordInput
-                        label={t('register-form.feature.confirm-password')}
-                        mt="md"
-                        placeholder="soy_t5Px5`Gm4j0@Hf&Dd7iU"
-                        required
-                        size="md"
-                        {...form.getInputProps('confirmPassword')}
-                    />
+                        <PasswordInput
+                            label={t('register-form.feature.confirm-password')}
+                            mt="md"
+                            placeholder="soy_t5Px5`Gm4j0@Hf&Dd7iU"
+                            required
+                            size="md"
+                            {...form.getInputProps('confirmPassword')}
+                        />
 
-                    <Button
-                        fullWidth
-                        leftSection={<PiShuffleDuotone size="1rem" />}
-                        mt="xl"
-                        onClick={handleGeneratePassword}
-                        size="md"
-                        variant="light"
-                    >
-                        {t('register-form.feature.generate')}
-                    </Button>
+                        <Button
+                            fullWidth
+                            leftSection={<PiShuffleDuotone size="1rem" />}
+                            mt="xl"
+                            onClick={handleGeneratePassword}
+                            size="md"
+                            variant="light"
+                        >
+                            {t('register-form.feature.generate')}
+                        </Button>
+                    </Stack>
 
                     <Button
                         fullWidth
