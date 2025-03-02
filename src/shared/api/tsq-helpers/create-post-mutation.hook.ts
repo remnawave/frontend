@@ -81,8 +81,10 @@ export function createPostMutationHook<
                 rMutationParams?.onSuccess?.(data, variables, context, queryClient)
                 params?.mutationFns?.onSuccess?.(data, variables, context, queryClient)
             },
-            onError: (error, variables, context) =>
-                rMutationParams?.onError?.(error, variables, context, queryClient),
+            onError: (error, variables, context) => {
+                rMutationParams?.onError?.(error, variables, context, queryClient)
+                params?.mutationFns?.onError?.(error, variables, context, queryClient)
+            },
             onSettled: (data, error, variables, context) =>
                 rMutationParams?.onSettled?.(data, error, variables, context, queryClient)
         })

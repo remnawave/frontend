@@ -7,6 +7,7 @@ import { configQueryKeys } from './config/config.query.hooks'
 import { usersQueryKeys } from './users/users.query.hooks'
 import { hostsQueryKeys } from './hosts/hosts.query.hooks'
 import { nodesQueryKeys } from './nodes/nodes.query.hooks'
+import { authQueryKeys } from './auth/auth.query.hooks'
 
 export const QueryKeys = mergeQueryKeys(
     usersQueryKeys,
@@ -15,7 +16,8 @@ export const QueryKeys = mergeQueryKeys(
     hostsQueryKeys,
     nodesQueryKeys,
     configQueryKeys,
-    apiTokensQueryKeys
+    apiTokensQueryKeys,
+    authQueryKeys
 )
 
 export type TQueryKeys = inferQueryKeyStore<typeof QueryKeys>

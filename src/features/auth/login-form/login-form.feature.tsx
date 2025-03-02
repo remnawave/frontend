@@ -3,13 +3,12 @@ import { LoginCommand } from '@remnawave/backend-contract'
 import { useForm, zodResolver } from '@mantine/form'
 import { PiSignInDuotone } from 'react-icons/pi'
 import { useTranslation } from 'react-i18next'
-import MD5 from 'crypto-js/md5'
 
 import { handleFormErrors } from '@shared/utils/misc'
 import { useAuth } from '@shared/hooks/use-auth'
 import { useLogin } from '@shared/api/hooks'
 
-export const LoginForm = () => {
+export const LoginFormFeature = () => {
     const { t } = useTranslation()
 
     const { setIsAuthenticated } = useAuth()
@@ -27,7 +26,7 @@ export const LoginForm = () => {
             {
                 variables: {
                     username: variables.username,
-                    password: MD5(variables.password).toString()
+                    password: variables.password
                 }
             },
             {

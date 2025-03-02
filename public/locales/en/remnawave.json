@@ -380,5 +380,21 @@
             "user-deletion-description": "Delete all users with selected status. If you will delete users with \"Active\" status, you should restart all nodes to apply changes.",
             "select-status": "Delete by status"
         }
+    },
+    "register-form": {
+        "feature": {
+            "username": "Username",
+            "password": "Password",
+            "generate": "Generate & Copy",
+            "confirm-password": "Confirm password",
+            "sign-up": "Sign up",
+            "password-copied": "Password copied",
+            "password-copied-message": "Password copied to clipboard",
+            "password-copied-error": "Failed to copy password to clipboard",
+            "error": "Error",
+            "passwords-do-not-match": "Passwords do not match",
+            "password-too-short": "Minimum 12 characters",
+            "register-description": "Create a super-admin account to get started"
+        }
     }
 }

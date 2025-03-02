@@ -380,5 +380,21 @@
             "user-deletion-description": "حذف تمامی کاربران با وضعیت انتخاب شده. اگر کاربران با وضعیت \"Active\" را حذف می‌کنید، باید تمامی گره‌ها را برای اعمال تغییرات مجدداً راه‌اندازی کنید.",
             "select-status": "حذف بر اساس وضعیت"
         }
+    },
+    "register-form": {
+        "feature": {
+            "username": "Username",
+            "password": "Password",
+            "generate": "Generate & Copy",
+            "confirm-password": "Confirm password",
+            "sign-up": "Sign up",
+            "password-copied": "Password copied",
+            "password-copied-message": "Password copied to clipboard",
+            "password-copied-error": "Failed to copy password to clipboard",
+            "error": "Error",
+            "passwords-do-not-match": "Passwords do not match",
+            "password-too-short": "Minimum 12 characters",
+            "register-description": "Create a super-admin account to get started"
+        }
     }
 }
