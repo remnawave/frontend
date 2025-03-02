@@ -393,7 +393,7 @@
             "password-copied-error": "کپی کردن گذرواژه به کلیپ‌بورد ناموفق بود",
             "error": "خطا",
             "passwords-do-not-match": "پسوردها مطابقت ندارند",
-            "password-too-short": "حداقل 12 کاراکتر",
+            "password-too-short": "حداقل 24 کاراکتر",
             "register-description": "برای شروع یک اکانت سوپرادمین ایجاد کنید"
         }
     }

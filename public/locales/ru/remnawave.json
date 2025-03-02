@@ -390,7 +390,7 @@
             "password-copied": "Пароль скопирован",
             "password-copied-error": "Не удалось скопировать пароль в буфер обмена",
             "password-copied-message": "Пароль скопирован в буфер обмена",
-            "password-too-short": "Минимум 12 символов",
+            "password-too-short": "Минимум 24 символа",
             "passwords-do-not-match": "Пароли не совпадают",
             "register-description": "Создайте аккаунт супер-админа, чтобы начать",
             "sign-up": "Зарегистрироваться",
