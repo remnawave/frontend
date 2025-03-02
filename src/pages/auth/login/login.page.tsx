@@ -1,4 +1,4 @@
-import { Box, Group, Loader, Stack, Text, Title } from '@mantine/core'
+import { Badge, Box, Group, Loader, Stack, Text, Title } from '@mantine/core'
 
 import { useGetAuthStatus } from '@shared/api/hooks/auth/auth.query.hooks'
 import { RegisterFormFeature } from '@features/auth/register-form'
@@ -34,7 +34,11 @@ export const LoginPage = () => {
                     </Title>
                 </Group>
 
-                {!authStatus && <></>}
+                {!authStatus && (
+                    <Badge color="cyan" mt={10} size="lg" variant="filled">
+                        Server is not responding. Check logs.
+                    </Badge>
+                )}
 
                 {authStatus?.isLoginAllowed && !authStatus?.isRegisterAllowed && (
                     <Box maw={800} w={{ base: 440, sm: 500, md: 500 }}>
