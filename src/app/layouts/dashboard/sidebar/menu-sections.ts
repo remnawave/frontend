@@ -72,7 +72,8 @@ export const useMenuSections = (): MenuItem[] => {
                 {
                     name: 'Queues',
                     href: '/api/queues',
-                    icon: PiAirTrafficControlDuotone
+                    icon: PiAirTrafficControlDuotone,
+                    newTab: true
                 }
             ]
         }

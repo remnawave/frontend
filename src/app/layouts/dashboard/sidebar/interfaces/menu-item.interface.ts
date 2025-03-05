@@ -11,5 +11,6 @@ export interface MenuItem {
         href: string
         icon: ElementType
         name: string
+        newTab?: boolean
     }[]
 }
