@@ -1,4 +1,5 @@
 import {
+    PiAirTrafficControlDuotone,
     PiBookmarksDuotone,
     PiComputerTowerDuotone,
     PiCookie,
@@ -62,6 +63,16 @@ export const useMenuSections = (): MenuItem[] => {
                     name: t('constants.nodes-statistics'),
                     href: ROUTES.DASHBOARD.NODES_STATS,
                     icon: PiComputerTowerDuotone
+                }
+            ]
+        },
+        {
+            header: 'Superadmin',
+            section: [
+                {
+                    name: 'Queues',
+                    href: '/api/queues',
+                    icon: PiAirTrafficControlDuotone
                 }
             ]
         }
