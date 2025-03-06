@@ -1,4 +1,9 @@
-import { PiProhibitDuotone, PiPulseDuotone, PiWarningCircle } from 'react-icons/pi'
+import {
+    PiDownloadDuotone,
+    PiProhibitDuotone,
+    PiPulseDuotone,
+    PiWarningCircle
+} from 'react-icons/pi'
 import { useTranslation } from 'react-i18next'
 import { Badge } from '@mantine/core'
 
@@ -18,8 +23,8 @@ export function NodeStatusBadgeWidget({ node, fetchedNode, ...rest }: IProps) {
         color = 'teal'
         status = t('node-status-badge.widget.connected')
     } else if (nodeData.isConnecting) {
-        icon = <PiPulseDuotone size={18} style={{ color: 'var(--mantine-color-teal-6)' }} />
-        color = 'teal'
+        icon = <PiDownloadDuotone size={18} style={{ color: 'var(--mantine-color-orange-3)' }} />
+        color = 'orange'
         status = t('node-status-badge.widget.connecting')
     } else if (nodeData.isDisabled) {
         icon = <PiProhibitDuotone size={18} style={{ color: 'var(--mantine-color-gray-6)' }} />
