@@ -1,5 +1,5 @@
-import { PiArrowsCounterClockwise, PiDotsSixVertical, PiUsersDuotone } from 'react-icons/pi'
-import { Badge, Box, Group, Paper, Progress, Text } from '@mantine/core'
+import { PiArrowsCounterClockwise, PiCpu, PiDotsSixVertical, PiUsersDuotone } from 'react-icons/pi'
+import { Badge, Box, Group, Paper, Progress, Stack, Text } from '@mantine/core'
 import { notifications } from '@mantine/notifications'
 import ReactCountryFlag from 'react-country-flag'
 import { useTranslation } from 'react-i18next'
@@ -9,8 +9,8 @@ import ColorHash from 'color-hash'
 import { useState } from 'react'
 import clsx from 'clsx'
 
+import { getNodeResetDaysUtil, getXrayUptimeUtil } from '@shared/utils/time-utils'
 import { useNodesStoreActions } from '@entities/dashboard/nodes'
-import { getNodeResetDaysUtil } from '@shared/utils/time-utils'
 import { prettyBytesToAnyUtil } from '@shared/utils/bytes'
 
 import { NodeStatusBadgeWidget } from '../node-status-badge'
@@ -95,7 +95,12 @@ export function NodeCardWidget(props: IProps) {
                                 {node.usersOnline}
                             </Badge>
 
-                            <Paper miw={'30ch'}>
+                            <Paper
+                                miw={{
+                                    base: '15ch',
+                                    sm: '30ch'
+                                }}
+                            >
                                 <Badge
                                     autoContrast
                                     color={ch.hex(node.uuid)}
@@ -124,58 +129,78 @@ export function NodeCardWidget(props: IProps) {
                             </Paper>
 
                             <Paper miw={'22ch'}>
-                                <Text
-                                    className={classes.hostInfoLabel}
-                                    maw={'22ch'}
-                                    miw={'22ch'}
-                                    onClick={handleCopy}
-                                    style={{ cursor: 'copy' }}
-                                    truncate="end"
-                                >
-                                    {node.address}
-                                    {node.port ? `:${node.port}` : ''}
-                                </Text>
+                                <Stack align="stretch" gap="xs">
+                                    <Text
+                                        className={classes.hostInfoLabel}
+                                        maw={'22ch'}
+                                        miw={'22ch'}
+                                        onClick={handleCopy}
+                                        style={{ cursor: 'copy' }}
+                                        truncate="end"
+                                    >
+                                        {node.address}
+                                        {node.port ? `:${node.port}` : ''}
+                                    </Text>
+
+                                    {node.xrayUptime !== '0' && (
+                                        <Badge
+                                            color="gray"
+                                            leftSection={<PiCpu size={18} />}
+                                            maw={'20ch'}
+                                            radius="md"
+                                            size="lg"
+                                            style={{ cursor: 'pointer' }}
+                                            variant="outline"
+                                        >
+                                            {getXrayUptimeUtil(node.xrayUptime)}
+                                        </Badge>
+                                    )}
+                                </Stack>
                             </Paper>
 
-                            <Badge
-                                autoContrast
-                                color={'gray'}
-                                ff={'monospace'}
-                                maw={'40ch'}
-                                miw={'25ch'}
-                                radius="md"
-                                size="lg"
-                                style={{ cursor: 'pointer' }}
-                                variant="outline"
-                            >
-                                {`${prettyUsedData} / ${maxData}`}
-                            </Badge>
-
-                            {percentage >= 0 && node.isTrafficTrackingActive && (
-                                <Progress
-                                    color={percentage > 95 ? 'red.9' : 'teal.9'}
-                                    maw={'30ch'}
-                                    radius="md"
-                                    size="25"
-                                    striped
-                                    value={percentage}
-                                    w={'10ch'}
-                                />
-                            )}
-
-                            {node.isTrafficTrackingActive && (
+                            <Stack align="stretch" gap="xs">
                                 <Badge
-                                    color="gray"
-                                    leftSection={<PiArrowsCounterClockwise size={18} />}
-                                    maw={'20ch'}
+                                    autoContrast
+                                    color={'gray'}
+                                    ff={'monospace'}
+                                    maw={'40ch'}
+                                    miw={'25ch'}
                                     radius="md"
                                     size="lg"
                                     style={{ cursor: 'pointer' }}
                                     variant="outline"
                                 >
-                                    {getNodeResetDaysUtil(node.trafficResetDay ?? 1)}
+                                    {`${prettyUsedData} / ${maxData}`}
                                 </Badge>
-                            )}
+
+                                {node.isTrafficTrackingActive && (
+                                    <Group>
+                                        {percentage >= 0 && (
+                                            <Progress
+                                                color={percentage > 95 ? 'red.9' : 'teal.9'}
+                                                maw={'30ch'}
+                                                radius="md"
+                                                size="25"
+                                                striped
+                                                value={percentage}
+                                                w={'10ch'}
+                                            />
+                                        )}
+
+                                        <Badge
+                                            color="gray"
+                                            leftSection={<PiArrowsCounterClockwise size={18} />}
+                                            maw={'20ch'}
+                                            radius="md"
+                                            size="lg"
+                                            style={{ cursor: 'pointer' }}
+                                            variant="outline"
+                                        >
+                                            {getNodeResetDaysUtil(node.trafficResetDay ?? 1)}
+                                        </Badge>
+                                    </Group>
+                                )}
+                            </Stack>
                         </Group>
                     </Box>
                 </Box>
