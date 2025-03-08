@@ -1,6 +1,7 @@
 import {
     PiAirTrafficControlDuotone,
     PiBookmarksDuotone,
+    PiBracketsCurly,
     PiComputerTowerDuotone,
     PiCookie,
     PiGearDuotone,
@@ -63,6 +64,34 @@ export const useMenuSections = (): MenuItem[] => {
                     name: t('constants.nodes-statistics'),
                     href: ROUTES.DASHBOARD.NODES_STATS,
                     icon: PiComputerTowerDuotone
+                }
+            ]
+        },
+        {
+            header: 'Templates',
+            section: [
+                {
+                    name: 'Subscription',
+                    href: ROUTES.DASHBOARD.NODES,
+                    icon: PiBracketsCurly,
+                    dropdownItems: [
+                        {
+                            name: 'Mihomo',
+                            href: ROUTES.DASHBOARD.TEMPLATES.MIHOMO
+                        },
+                        {
+                            name: 'Stash',
+                            href: ROUTES.DASHBOARD.TEMPLATES.STASH
+                        },
+                        {
+                            name: 'Singbox',
+                            href: ROUTES.DASHBOARD.TEMPLATES.SINGBOX
+                        },
+                        {
+                            name: 'Singbox legacy',
+                            href: ROUTES.DASHBOARD.TEMPLATES.SINGBOX_LEGACY
+                        }
+                    ]
                 }
             ]
         },

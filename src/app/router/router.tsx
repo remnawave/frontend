@@ -5,7 +5,9 @@ import {
     Route,
     RouterProvider
 } from 'react-router-dom'
+import { SUBSCRIPTION_TEMPLATE_TYPE } from '@remnawave/backend-contract'
 
+import { TemplateBasePageConnector } from '@pages/dashboard/templates/ui/connectors/template-base-page.connector'
 import { NodesBandwidthTablePageConnector } from '@pages/dashboard/nodes-bandwidth-table/ui/connectors'
 import { StatisticNodesConnector } from '@pages/dashboard/statistic-nodes/connectors'
 import { ApiTokensPageConnector } from '@pages/dashboard/api-tokens/ui/connectors'
@@ -52,6 +54,47 @@ const router = createBrowserRouter(
                     <Route
                         element={<StatisticNodesConnector />}
                         path={ROUTES.DASHBOARD.NODES_STATS}
+                    />
+                    {/* Subscription templates */}
+                    <Route
+                        element={
+                            <TemplateBasePageConnector
+                                language="yaml"
+                                templateType={SUBSCRIPTION_TEMPLATE_TYPE.MIHOMO}
+                                title="Mihomo"
+                            />
+                        }
+                        path={ROUTES.DASHBOARD.TEMPLATES.MIHOMO}
+                    />
+                    <Route
+                        element={
+                            <TemplateBasePageConnector
+                                language="yaml"
+                                templateType={SUBSCRIPTION_TEMPLATE_TYPE.STASH}
+                                title="Stash"
+                            />
+                        }
+                        path={ROUTES.DASHBOARD.TEMPLATES.STASH}
+                    />
+                    <Route
+                        element={
+                            <TemplateBasePageConnector
+                                language="json"
+                                templateType={SUBSCRIPTION_TEMPLATE_TYPE.SINGBOX}
+                                title="Singbox"
+                            />
+                        }
+                        path={ROUTES.DASHBOARD.TEMPLATES.SINGBOX}
+                    />
+                    <Route
+                        element={
+                            <TemplateBasePageConnector
+                                language="json"
+                                templateType={SUBSCRIPTION_TEMPLATE_TYPE.SINGBOX_LEGACY}
+                                title="Singbox legacy"
+                            />
+                        }
+                        path={ROUTES.DASHBOARD.TEMPLATES.SINGBOX_LEGACY}
                     />
                 </Route>
 

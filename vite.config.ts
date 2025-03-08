@@ -46,6 +46,7 @@ export default defineConfig({
                         '@mantine/modals'
                     ],
                     remnawave: ['@remnawave/backend-contract'],
+                    buffer: ['buffer'],
                     consola: ['consola'],
                     i18n: ['i18next', 'i18next-http-backend', 'i18next-browser-languagedetector'],
                     motion: ['framer-motion'],
@@ -53,6 +54,8 @@ export default defineConfig({
                     recharts: ['recharts'],
                     dnd: ['@hello-pangea/dnd'],
                     mantinetable: ['mantine-react-table'],
+                    prettier: ['prettier', 'vscode-languageserver-types'],
+                    monaco: ['monaco-editor', 'monaco-yaml'],
                     tanstack: ['@tanstack/react-query', '@tanstack/react-table']
                 }
             }

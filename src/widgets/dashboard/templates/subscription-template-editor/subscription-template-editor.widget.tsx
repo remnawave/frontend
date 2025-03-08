@@ -1,36 +1,42 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import Editor, { Monaco } from '@monaco-editor/react'
-import { useEffect, useRef, useState } from 'react'
-import { Box, Code, Paper } from '@mantine/core'
 import { useTranslation } from 'react-i18next'
+import { Box, Paper } from '@mantine/core'
+import 'monaco-yaml/yaml.worker.js'
+import { useRef } from 'react'
 
-import { ConfigEditorActionsFeature } from '@features/dashboard/config/config-editor-actions'
-import { ConfigValidationFeature } from '@features/dashboard/config/config-validation'
-import { MonacoSetupFeature } from '@features/dashboard/config/monaco-setup'
+import { TemplateEditorActionsFeature } from '@features/dashboard/subscription-templates/template-editor-actions'
 import { monacoTheme } from '@shared/constants/monaco-theme/monaco-theme'
 
-import styles from './ConfigEditor.module.css'
+import { configureMonaco } from './utils/setup-template-monaco'
+import styles from './SubscriptionTemplateEditor.module.css'
 import { Props } from './interfaces'
 
-export function ConfigEditorWidget(props: Props) {
+export function SubscriptionTemplateEditorWidget(props: Props) {
     const { t } = useTranslation()
-
-    const { config } = props
-    const [result, setResult] = useState('')
-    const [isConfigValid, setIsConfigValid] = useState(false)
+    const { encodedTemplateYaml, templateType, language, templateJson } = props
 
     const editorRef = useRef<unknown>(null)
     const monacoRef = useRef<unknown>(null)
 
-    useEffect(() => {
-        if (!monacoRef.current) return
-        MonacoSetupFeature.setup(monacoRef.current as Monaco)
-    }, [monacoRef.current])
+    const getConfig = () => {
+        if (language === 'yaml') {
+            return encodedTemplateYaml ? Buffer.from(encodedTemplateYaml, 'base64').toString() : ''
+        }
+        return JSON.stringify(templateJson, null, 2)
+    }
 
-    const handleEditorDidMount = (monaco: Monaco) => {
+    const handleEditorWillMount = (monaco: Monaco) => {
         monaco.editor.defineTheme('GithubDark', {
             ...monacoTheme,
             base: 'vs-dark'
         })
+        configureMonaco(monaco, language)
+    }
+
+    const handleEditorDidMount = (editor: any, monaco: Monaco) => {
+        editorRef.current = editor
+        monacoRef.current = monaco
     }
 
     return (
@@ -47,28 +53,11 @@ export function ConfigEditorWidget(props: Props) {
                 withBorder
             >
                 <Editor
-                    beforeMount={handleEditorDidMount}
+                    beforeMount={handleEditorWillMount}
                     className={styles.monacoEditor}
-                    defaultLanguage="json"
+                    defaultLanguage={language}
                     loading={t('config-editor.widget.loading-editor')}
-                    onChange={() =>
-                        ConfigValidationFeature.validate(
-                            editorRef,
-                            monacoRef,
-                            setResult,
-                            setIsConfigValid
-                        )
-                    }
-                    onMount={(editor, monaco) => {
-                        editorRef.current = editor
-                        monacoRef.current = monaco
-                        ConfigValidationFeature.validate(
-                            editorRef,
-                            monacoRef,
-                            setResult,
-                            setIsConfigValid
-                        )
-                    }}
+                    onMount={handleEditorDidMount}
                     options={{
                         autoClosingBrackets: 'always',
                         autoClosingQuotes: 'always',
@@ -90,27 +79,28 @@ export function ConfigEditorWidget(props: Props) {
                         },
                         insertSpaces: true,
                         minimap: { enabled: true },
-                        quickSuggestions: true,
                         scrollBeyondLastLine: false,
-                        tabSize: 2
+                        tabSize: 2,
+                        renderValidationDecorations: 'on',
+                        quickSuggestions: {
+                            strings: true,
+                            comments: true,
+                            other: true
+                        },
+                        padding: {
+                            top: 33
+                        }
                     }}
                     theme={'GithubDark'}
-                    value={JSON.stringify(config, null, 2)}
+                    value={getConfig() || ''}
                 />
             </Paper>
-
-            <ConfigEditorActionsFeature
+            <TemplateEditorActionsFeature
                 editorRef={editorRef}
-                isConfigValid={isConfigValid}
+                language={language}
                 monacoRef={monacoRef}
-                setResult={setResult}
+                templateType={templateType}
             />
-
-            {result && (
-                <Code block p="md">
-                    {result}
-                </Code>
-            )}
         </Box>
     )
 }
