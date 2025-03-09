@@ -96,6 +96,16 @@ const router = createBrowserRouter(
                         }
                         path={ROUTES.DASHBOARD.TEMPLATES.SINGBOX_LEGACY}
                     />
+                    <Route
+                        element={
+                            <TemplateBasePageConnector
+                                language="json"
+                                templateType={SUBSCRIPTION_TEMPLATE_TYPE.XRAY_JSON}
+                                title="Xray JSON"
+                            />
+                        }
+                        path={ROUTES.DASHBOARD.TEMPLATES.XRAY_JSON}
+                    />
                 </Route>
 
                 <Route element={<NotFoundPageComponent />} path="*" />

@@ -1,6 +1,5 @@
 import { TSubscriptionTemplateType } from '@remnawave/backend-contract'
 import { useTranslation } from 'react-i18next'
-import { Divider } from '@mantine/core'
 
 import { SubscriptionTemplateEditorWidget } from '@widgets/dashboard/templates/subscription-template-editor'
 import { ROUTES } from '@shared/constants'
@@ -37,7 +36,6 @@ export const TemplateBasePageComponent = (props: Props) => {
                 templateJson={templateJson}
                 templateType={templateType}
             />
-            <Divider mb="md" mt="md" size="md" />
         </Page>
     )
 }

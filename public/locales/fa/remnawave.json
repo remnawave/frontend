@@ -396,5 +396,12 @@
             "password-too-short": "حداقل 24 کاراکتر",
             "register-description": "برای شروع یک اکانت سوپرادمین ایجاد کنید"
         }
+    },
+    "xray-json-template-description": {
+        "widget": {
+            "description-line-1": "برای استفاده از این اشتراک ، فقط اضافه کنید",
+            "description-line-2": "در انتهای لینک اشتراک خود. \nاطمینان حاصل کنید که از یکی از برنامه های پشتیبانی شده ذکر شده در جدول زیر استفاده می کنید.",
+            "importing-json-subscription": "وارد کردن اشتراک JSON"
+        }
     }
 }

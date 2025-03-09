@@ -396,5 +396,12 @@
             "password-too-short": "Minimum 24 characters",
             "register-description": "Create a super-admin account to get started"
         }
+    },
+    "xray-json-template-description": {
+        "widget": {
+            "importing-json-subscription": "Importing JSON subscription",
+            "description-line-1": "To use this subscription, just add",
+            "description-line-2": "at the end of your subscription link. Make sure you're using one of the supported apps listed in the table below. Otherwise, subscription will work as usual for requsted client. (e.g. Base64, Mihomo)"
+        }
     }
 }

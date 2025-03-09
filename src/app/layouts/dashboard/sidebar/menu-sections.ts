@@ -76,6 +76,10 @@ export const useMenuSections = (): MenuItem[] => {
                     icon: PiBracketsCurly,
                     dropdownItems: [
                         {
+                            name: 'Xray JSON',
+                            href: ROUTES.DASHBOARD.TEMPLATES.XRAY_JSON
+                        },
+                        {
                             name: 'Mihomo',
                             href: ROUTES.DASHBOARD.TEMPLATES.MIHOMO
                         },
