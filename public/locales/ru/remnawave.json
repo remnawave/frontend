@@ -257,7 +257,10 @@
             "user-details": "Информация о пользователе",
             "loading-user-data": "Загрузка данных пользователя...",
             "edit-user": "Редактировать пользователя",
-            "never": "Никогда"
+            "never": "Никогда",
+            "close": "Закрыть",
+            "show-qr": "Показать QR",
+            "subscription-qr-code": "QR-код ссылки-подписки"
         }
     },
     "base-api-token-form": {

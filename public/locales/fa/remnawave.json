@@ -257,7 +257,10 @@
             "user-details": "جزئیات کاربر",
             "loading-user-data": "در حال بارگذاری اطلاعات کاربر...",
             "edit-user": "ویرایش کاربر",
-            "never": "هرگز"
+            "never": "هرگز",
+            "close": "نزدیک",
+            "show-qr": "نمایش QR",
+            "subscription-qr-code": "اشتراک کد QR"
         }
     },
     "base-api-token-form": {

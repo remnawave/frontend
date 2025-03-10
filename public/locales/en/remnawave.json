@@ -257,7 +257,10 @@
             "user-details": "User details",
             "loading-user-data": "Loading user data...",
             "edit-user": "Edit user",
-            "never": "Never"
+            "never": "Never",
+            "show-qr": "Show QR",
+            "subscription-qr-code": "Subscription QR Code",
+            "close": "Close"
         }
     },
     "base-api-token-form": {

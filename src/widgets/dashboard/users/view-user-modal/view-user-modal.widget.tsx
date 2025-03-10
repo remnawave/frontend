@@ -23,6 +23,7 @@ import {
     PiCopy,
     PiFloppyDiskDuotone,
     PiLinkDuotone,
+    PiQrCodeDuotone,
     PiUserDuotone
 } from 'react-icons/pi'
 import { UpdateUserCommand } from '@remnawave/backend-contract'
@@ -30,6 +31,8 @@ import { useForm, zodResolver } from '@mantine/form'
 import { DateTimePicker } from '@mantine/dates'
 import { useTranslation } from 'react-i18next'
 import { useEffect, useMemo } from 'react'
+import { modals } from '@mantine/modals'
+import { renderSVG } from 'uqr'
 import dayjs from 'dayjs'
 
 import {
@@ -383,6 +386,41 @@ export const ViewUserModal = () => {
                             </ActionIcon.Group>
                         </Group>
                         <Group>
+                            <Button
+                                leftSection={<PiQrCodeDuotone size="1rem" />}
+                                onClick={() => {
+                                    const subscriptionQrCode = renderSVG(
+                                        user?.subscriptionUrl ?? '',
+                                        {
+                                            whiteColor: '#161B22',
+                                            blackColor: '#3CC9DB'
+                                        }
+                                    )
+                                    modals.open({
+                                        centered: true,
+                                        title: t('view-user-modal.widget.subscription-qr-code'),
+                                        children: (
+                                            <>
+                                                <div
+                                                    dangerouslySetInnerHTML={{
+                                                        __html: subscriptionQrCode
+                                                    }}
+                                                />
+                                                <Button
+                                                    fullWidth
+                                                    mt="md"
+                                                    onClick={() => modals.closeAll()}
+                                                >
+                                                    {t('view-user-modal.widget.close')}
+                                                </Button>
+                                            </>
+                                        )
+                                    })
+                                }}
+                                size="md"
+                            >
+                                {t('view-user-modal.widget.show-qr')}
+                            </Button>
                             {user && <ToggleUserStatusButtonFeature user={user} />}
                             <Button
                                 color="blue"
