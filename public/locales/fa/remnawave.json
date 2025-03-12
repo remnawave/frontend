@@ -263,7 +263,7 @@
             "loading-user-data": "در حال بارگذاری اطلاعات کاربر...",
             "edit-user": "ویرایش کاربر",
             "never": "هرگز",
-            "close": "نزدیک",
+            "close": "بستن",
             "show-qr": "نمایش QR",
             "subscription-qr-code": "اشتراک کد QR"
         }
@@ -407,9 +407,9 @@
     },
     "xray-json-template-description": {
         "widget": {
-            "description-line-1": "برای استفاده از این اشتراک ، فقط اضافه کنید",
-            "description-line-2": "در انتهای لینک اشتراک خود. \nاطمینان حاصل کنید که از یکی از برنامه های پشتیبانی شده ذکر شده در جدول زیر استفاده می کنید.",
-            "importing-json-subscription": "وارد کردن اشتراک JSON"
+            "description-line-1": "برای استفاده از این اشتراک، کافی است",
+            "description-line-2": "را به انتهای لینک اشتراک خود اضافه کنید. درصورتی که از کلاینت‌های پشتیبانی شده جدول زیر استفاده نشود اشتراک‌ها مانند قبل، مثلا به صورت base64 یا mihomo، ارسال خواهند شد",
+            "importing-json-subscription": "درحال وارد کردن اشتراک JSON"
         }
     },
     "happ-routing-builder": {
