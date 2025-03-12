@@ -19,6 +19,10 @@ export const ROUTES = {
             SINGBOX_LEGACY: '/dashboard/templates/sg-legacy',
             SINGBOX: '/dashboard/templates/singbox',
             STASH: '/dashboard/templates/stash'
+        },
+        SUBSCRIPTION_SETTINGS: '/dashboard/subscription-settings',
+        UTILS: {
+            HAPP_ROUTING_BUILDER: '/dashboard/utils/happ-routing-builder'
         }
     }
 } as const

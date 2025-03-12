@@ -11,7 +11,12 @@
         "users": "کاربرها",
         "overview": "نمای کلی",
         "management": "مدیریت",
-        "statistics": "آمار"
+        "statistics": "آمار",
+        "subscription-settings": "Subscription settings",
+        "utils": "Utils",
+        "happ-routing-builder": "Happ Routing Builder",
+        "templates": "Templates",
+        "subscription": "Subscription"
     },
     "bandwidth-metrics": {
         "current-year": "امسال",
@@ -405,6 +410,106 @@
             "description-line-1": "برای استفاده از این اشتراک ، فقط اضافه کنید",
             "description-line-2": "در انتهای لینک اشتراک خود. \nاطمینان حاصل کنید که از یکی از برنامه های پشتیبانی شده ذکر شده در جدول زیر استفاده می کنید.",
             "importing-json-subscription": "وارد کردن اشتراک JSON"
+        }
+    },
+    "happ-routing-builder": {
+        "widget": {
+            "copy-link": "Copy link",
+            "visual-editor": "Visual Editor",
+            "code-viewer": "Code Viewer",
+            "encode-happ-link": "Encode Happ Link",
+            "enter-the-configuration-name": "Enter the configuration name",
+            "name": "Name",
+            "russia": "Russia",
+            "proxy-all-traffic-except-rules": "Proxy all traffic except rules",
+            "direct-all-traffic-except-rules": "Direct all traffic except rules",
+            "proxy-all-traffic-except-rules-or-direct-all-traffic-except-rules": "Proxy all traffic except rules, or direct all traffic except rules",
+            "enable": "Enable",
+            "disable": "Disable",
+            "fake-dns-description": "Enable or disable FakeDNS. Recommended to activate when using DoU.",
+            "choose-doh-dns-over-https-or-dou-dns-over-udp": "Choose DoH (DNS over HTTPS) or DoU (DNS over UDP)",
+            "remote-dns-type": "Remote DNS type",
+            "domain-name-for-doh": "Domain name for DoH",
+            "remote-dns-domain": "Remote DNS Domain",
+            "server-ip-for-doh-or-dou": "Server IP for DoH or DoU",
+            "remote-dns-ip": "Remote DNS IP",
+            "domenstic-dns-type-description": "Choose DoH (DNS over HTTPS) or DoU (DNS over UDP)",
+            "domestic-dns-type": "Domestic DNS Type",
+            "domain-name-for-doh-0": "Domain name for DoH",
+            "domestic-dns-domain": "Domestic DNS Domain",
+            "server-ip-for-doh-or-dou-0": "Server IP for DoH or DoU",
+            "domestic-dns-ip": "Domestic DNS IP",
+            "geoip-description": "Link to the geoip.dat file. Leave this field empty if you want to use the default file.",
+            "geoip-url": "GeoIP URL",
+            "geosite-description": "Link to the geosite.dat file. Leave this field empty if you want to use the default file.",
+            "geosite-url": "GeoSite URL",
+            "unix-timestamp-description": "Enter the Unix timestamp of the last update to the geoip and geosite files. Leave empty if not available.",
+            "last-updated": "Last updated",
+            "select-the-domain-processing-strategy": "Select the domain processing strategy.",
+            "domain-strategy": "Domain strategy",
+            "dns-hosts-description": "Enter the DNS hosts in the format: { \"example.com\": \"1.2.3.4\", \"test.org\": \"8.8.8.8\" }",
+            "dns-hosts": "DNS hosts",
+            "sites-that-will-use-direct-connection": "Sites that will use direct connection.",
+            "direct-sites": "Direct sites",
+            "ip-addresses-that-will-use-direct-connection": "IP addresses that will use direct connection.",
+            "direct-ip": "Direct IP",
+            "sites-that-will-be-proxied": "Sites that will be proxied.",
+            "proxy-sites": "Proxy sites",
+            "ip-addresses-that-will-be-proxied": "IP addresses that will be proxied.",
+            "proxy-ip": "Proxy IP",
+            "sites-that-will-be-blocked": "Sites that will be blocked.",
+            "blocked-sites": "Blocked sites",
+            "ip-addresses-that-will-be-blocked": "IP addresses that will be blocked.",
+            "blocked-ips": "Blocked IPs",
+            "encoded-happ-link": "Encoded Happ Link",
+            "copied": "Copied",
+            "show-qr": "Show QR",
+            "close": "Close"
+        },
+        "page": {
+            "component": {
+                "about-happ": "About Happ",
+                "happ-is-multiplatform-xray-client": "Happ is multiplatform XRay client.",
+                "about-happ-description-line-2": "Here you can configure routing rules, which you can pass to Happ client.",
+                "about-happ-description-line-3": "Check out \"Subscription settings\" and check \"Happ Routing\".",
+                "check-out-happ-website": "Check out Happ website"
+            }
+        }
+    },
+    "remarks-manager": {
+        "widget": {
+            "enter-remark": "Enter remark",
+            "add-remark": "Add remark"
+        }
+    },
+    "subscription-settings": {
+        "widget": {
+            "validation-error": "Validation error",
+            "you-must-add-at-least-one-remark-with-text": "You must add at least one remark with text",
+            "subscription-info": "Subscription info",
+            "this-title-will-be-displayed-as-subscription-name": "This title will be displayed as subscription name.",
+            "profile-title": "Profile title",
+            "enter-profile-title": "Enter profile title",
+            "auto-update-description": "Some of clients may use this interval to auto-update subscription.",
+            "auto-update-interval-hours": "Auto-Update interval (hours)",
+            "support-link-description": "Some of clients may show this link in the subscription page, which should leads to the support page.",
+            "support-link": "Support link",
+            "happ-settings": "Happ settings",
+            "happ-announce-description": "Enter Happ Announce, max. 200 characters. Will be displayed in the subscription page.",
+            "happ-announce": "Happ Announce",
+            "enter-happ-announce-max-200-characters": "Enter Happ Announce, max. 200 characters",
+            "happ-routing-description": "Happ routing is a feature that allows you to configure the routing.",
+            "happ-routing-description-line-2": "Routing must be configured via Happ Routing Builder. Use button below to configure routing.",
+            "configure-happ-routing": "Configure Happ Routing",
+            "happ-routing": "Happ routing",
+            "user-status-remarks": "User status remarks",
+            "user-status-remarks-description": "This values will be displayed in the subscription page if user is expired, limited or disabled.",
+            "user-status-remarks-description-line-2": "You can add multiple remarks for each status.",
+            "user-status-remarks-description-line-3": "Cause expired, limited and disabled users are not able to connect to the server, they will see this remarks instead of empty subscription.",
+            "expired-users-remarks": "Expired users remarks",
+            "limited-users-remarks": "Limited users remarks",
+            "disabled-users-remarks": "Disabled users remarks",
+            "update-settings": "Update settings"
         }
     }
 }

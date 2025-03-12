@@ -6,7 +6,7 @@ import { sToMs } from '@shared/utils/time-utils'
 
 import { createGetQueryHook } from '../../tsq-helpers'
 
-export const subscriptionTemplateQueryKeys = createQueryKeys('subscription-template', {
+export const subscriptionTemplateQueryKeys = createQueryKeys('subscriptionTemplate', {
     getSubscriptionTemplate: (route: GetSubscriptionTemplateCommand.Request) => ({
         queryKey: [route]
     })

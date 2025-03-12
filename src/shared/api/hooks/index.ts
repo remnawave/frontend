@@ -16,6 +16,9 @@ export * from './keys-factory'
 export * from './nodes/nodes.mutation.hooks'
 export * from './nodes/nodes.query.hooks'
 
+export * from './subscription-settings/subscription-settings.mutation.hooks'
+export * from './subscription-settings/subscription-settings.query.hooks'
+
 export * from './subscription-template/subscription-template.mutation.hooks'
 export * from './subscription-template/subscription-template.query.hooks'
 

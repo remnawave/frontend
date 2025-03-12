@@ -1,6 +1,7 @@
 import { inferQueryKeyStore, mergeQueryKeys } from '@lukemorales/query-key-factory'
 
 import { subscriptionTemplateQueryKeys } from './subscription-template/subscription-template.query.hooks'
+import { subscriptionSettingsQueryKeys } from './subscription-settings/subscription-settings.query.hooks'
 import { apiTokensQueryKeys } from './api-tokens/api-tokens.query.hooks'
 import { systemQueryKeys } from './system/system.query.hooks'
 import { inboundsQueryKeys } from './inbounds/inbounds.query'
@@ -19,7 +20,8 @@ export const QueryKeys = mergeQueryKeys(
     configQueryKeys,
     apiTokensQueryKeys,
     authQueryKeys,
-    subscriptionTemplateQueryKeys
+    subscriptionTemplateQueryKeys,
+    subscriptionSettingsQueryKeys
 )
 
 export type TQueryKeys = inferQueryKeyStore<typeof QueryKeys>
