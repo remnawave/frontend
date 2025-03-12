@@ -4,6 +4,7 @@ import {
     Group,
     NumberInput,
     Paper,
+    Select,
     Stack,
     Text,
     Textarea,
@@ -38,7 +39,11 @@ export const SubscriptionSettingsWidget = (props: IProps) => {
     const form = useForm<UpdateSubscriptionSettingsCommand.Request>({
         name: 'edit-subscription-settings-form',
         mode: 'uncontrolled',
-        validate: zodResolver(UpdateSubscriptionSettingsCommand.RequestSchema)
+        validate: zodResolver(
+            UpdateSubscriptionSettingsCommand.RequestSchema.omit({
+                isProfileWebpageUrlEnabled: true
+            })
+        )
     })
 
     const updateExpiredRemarks = useCallback((newRemarks: string[]) => {
@@ -82,6 +87,12 @@ export const SubscriptionSettingsWidget = (props: IProps) => {
                 profileUpdateInterval: subscriptionSettings.profileUpdateInterval,
                 happAnnounce: subscriptionSettings.happAnnounce,
                 happRouting: subscriptionSettings.happRouting,
+
+                // @ts-expect-error - TODO: fix this
+                isProfileWebpageUrlEnabled: subscriptionSettings.isProfileWebpageUrlEnabled
+                    ? 'true'
+                    : 'false',
+
                 expiredUsersRemarks: subscriptionSettings.expiredUsersRemarks,
                 limitedUsersRemarks: subscriptionSettings.limitedUsersRemarks,
                 disabledUsersRemarks: subscriptionSettings.disabledUsersRemarks
@@ -109,10 +120,15 @@ export const SubscriptionSettingsWidget = (props: IProps) => {
             })
             return
         }
+
+        const isProfileWebpageUrlEnabled =
+            (values.isProfileWebpageUrlEnabled as unknown as string) === 'true'
+
         updateSubscriptionSettings({
             variables: {
                 ...values,
                 uuid: values.uuid,
+                isProfileWebpageUrlEnabled,
                 expiredUsersRemarks: expiredFiltered,
                 limitedUsersRemarks: limitedFiltered,
                 disabledUsersRemarks: disabledFiltered
@@ -166,6 +182,25 @@ export const SubscriptionSettingsWidget = (props: IProps) => {
                                     label={t('subscription-settings.widget.support-link')}
                                     placeholder="https://support.example.com"
                                     {...form.getInputProps('supportLink')}
+                                />
+                            </Grid.Col>
+
+                            <Grid.Col span={{ xs: 12, sm: 6 }}>
+                                <Select
+                                    allowDeselect={false}
+                                    comboboxProps={{
+                                        transitionProps: { transition: 'pop', duration: 200 }
+                                    }}
+                                    data={[
+                                        { label: 'Enabled', value: 'true' },
+                                        { label: 'Disabled', value: 'false' }
+                                    ]}
+                                    description={
+                                        'Used by some clients. Enabled by default, domain resolved from SUB_PUBLIC_DOMAIN .env variable.'
+                                    }
+                                    key={form.key('isProfileWebpageUrlEnabled')}
+                                    label={'Profile Webpage URL'}
+                                    {...form.getInputProps('isProfileWebpageUrlEnabled')}
                                 />
                             </Grid.Col>
                         </Grid>
