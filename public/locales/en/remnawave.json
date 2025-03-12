@@ -509,7 +509,11 @@
             "expired-users-remarks": "Expired users remarks",
             "limited-users-remarks": "Limited users remarks",
             "disabled-users-remarks": "Disabled users remarks",
-            "update-settings": "Update settings"
+            "update-settings": "Update settings",
+            "enabled": "Enabled",
+            "disabled": "Disabled",
+            "profile-webpage-url-description": "Used by some clients. Enabled by default, domain resolved from SUB_PUBLIC_DOMAIN .env variable.",
+            "profile-webpage-url": "Profile Webpage URL"
         }
     }
 }

@@ -192,14 +192,20 @@ export const SubscriptionSettingsWidget = (props: IProps) => {
                                         transitionProps: { transition: 'pop', duration: 200 }
                                     }}
                                     data={[
-                                        { label: 'Enabled', value: 'true' },
-                                        { label: 'Disabled', value: 'false' }
+                                        {
+                                            label: t('subscription-settings.widget.enabled'),
+                                            value: 'true'
+                                        },
+                                        {
+                                            label: t('subscription-settings.widget.disabled'),
+                                            value: 'false'
+                                        }
                                     ]}
-                                    description={
-                                        'Used by some clients. Enabled by default, domain resolved from SUB_PUBLIC_DOMAIN .env variable.'
-                                    }
+                                    description={t(
+                                        'subscription-settings.widget.profile-webpage-url-description'
+                                    )}
                                     key={form.key('isProfileWebpageUrlEnabled')}
-                                    label={'Profile Webpage URL'}
+                                    label={t('subscription-settings.widget.profile-webpage-url')}
                                     {...form.getInputProps('isProfileWebpageUrlEnabled')}
                                 />
                             </Grid.Col>

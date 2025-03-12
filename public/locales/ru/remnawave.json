@@ -509,7 +509,11 @@
             "expired-users-remarks": "Expired users remarks",
             "limited-users-remarks": "Limited users remarks",
             "disabled-users-remarks": "Disabled users remarks",
-            "update-settings": "Update settings"
+            "update-settings": "Update settings",
+            "disabled": "Выключено",
+            "enabled": "Включено",
+            "profile-webpage-url": "Profile Webpage URL",
+            "profile-webpage-url-description": "Используется некоторыми клиентами. \nВключено по умолчанию, домен резволится из SUB_PUBLIC_DOMAIN .env переменной."
         }
     }
 }
