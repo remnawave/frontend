@@ -119,7 +119,7 @@ export const HappRoutingBuilderWidget = () => {
     const generateBase64 = () => {
         const formattedData = formatJsonData()
         const jsonString = JSON.stringify(formattedData)
-        return btoa(jsonString)
+        return Buffer.from(jsonString, 'utf8').toString('base64')
     }
 
     const handleSave = () => {
