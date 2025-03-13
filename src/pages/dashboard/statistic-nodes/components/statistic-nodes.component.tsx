@@ -69,7 +69,7 @@ export const StatisticNodesPage = () => {
         }
     }
 
-    const { data, series } = formatDataForChart(nodesStats!)
+    const { data, series } = formatDataForChart(nodesStats ?? [])
 
     const filteredSeries =
         selectedNodes.length > 0 ? series.filter((s) => selectedNodes.includes(s.name)) : series
