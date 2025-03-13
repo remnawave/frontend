@@ -12,11 +12,11 @@
         "overview": "Обзор",
         "management": "Управление",
         "statistics": "Статистика",
-        "subscription-settings": "Subscription settings",
-        "utils": "Utils",
-        "happ-routing-builder": "Happ Routing Builder",
-        "templates": "Templates",
-        "subscription": "Subscription"
+        "subscription-settings": "Настройки подписки",
+        "utils": "Утилиты",
+        "happ-routing-builder": "Конструктор маршрутизации Happ",
+        "templates": "Шаблоны",
+        "subscription": "Подписка"
     },
     "bandwidth-metrics": {
         "current-year": "Текущий год",
