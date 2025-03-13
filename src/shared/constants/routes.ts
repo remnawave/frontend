@@ -14,6 +14,7 @@ export const ROUTES = {
         NODES_STATS: '/dashboard/stats/nodes',
         API_TOKENS: '/dashboard/api-tokens',
         TEMPLATES: {
+            ROOT: '/dashboard/templates',
             XRAY_JSON: '/dashboard/templates/xray-json',
             MIHOMO: '/dashboard/templates/mihomo',
             SINGBOX_LEGACY: '/dashboard/templates/sg-legacy',

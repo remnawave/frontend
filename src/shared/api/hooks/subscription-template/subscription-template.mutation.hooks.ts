@@ -1,7 +1,4 @@
-import {
-    UpdateSubscriptionTemplateCommand,
-    UpdateXrayConfigCommand
-} from '@remnawave/backend-contract'
+import { UpdateSubscriptionTemplateCommand } from '@remnawave/backend-contract'
 import { notifications } from '@mantine/notifications'
 
 import { createPostMutationHook } from '../../tsq-helpers'
@@ -20,7 +17,7 @@ export const useUpdateSubscriptionTemplate = createPostMutationHook({
         },
         onError: (error) => {
             notifications.show({
-                title: `${UpdateXrayConfigCommand.TSQ_url}`,
+                title: `${UpdateSubscriptionTemplateCommand.TSQ_url}`,
                 message:
                     error instanceof Error ? error.message : `Request failed with unknown error.`,
                 color: 'red'

@@ -24,7 +24,7 @@ export const HappRoutingBuilderPageComponent = () => {
                     <Title order={4}>{t('happ-routing-builder.page.component.about-happ')}</Title>
 
                     <Text c="dimmed" size="sm">
-                        {t('happ-routing-builder.page.component.happ-is-multiplatform-xray-client')}{' '}
+                        {t('happ-routing-builder.page.component.happ-is-multiplatform-xray-client')}
                         <br />
                         {t('happ-routing-builder.page.component.about-happ-description-line-2')}
                         <br />

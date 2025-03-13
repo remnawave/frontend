@@ -2,7 +2,7 @@ import { configureMonacoYaml } from 'monaco-yaml'
 import { Monaco } from '@monaco-editor/react'
 import consola from 'consola'
 
-export const configureMonaco = async (monaco: Monaco, language: 'json' | 'yaml') => {
+export const configureMonaco = (monaco: Monaco, language: 'json' | 'yaml') => {
     try {
         if (language === 'yaml') {
             configureMonacoYaml(monaco, {

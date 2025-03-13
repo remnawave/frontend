@@ -18,23 +18,29 @@ export const SubscriptionSettingsPageComponent = (props: IProps) => {
     }
 
     return (
-        <Page title={'Subscription settings'}>
+        <Page title={t('constants.subscription-settings')}>
             <PageHeader
                 breadcrumbs={[
                     { label: t('constants.dashboard'), href: ROUTES.DASHBOARD.HOME },
-                    { label: 'Subscription settings' }
+                    { label: t('constants.subscription-settings') }
                 ]}
-                title={'Subscription settings'}
+                title={t('constants.subscription-settings')}
             />
 
             <Paper mb="lg" p="md" radius="md" withBorder>
                 <Stack gap="md">
-                    <Title order={4}>What is subscription settings?</Title>
+                    <Title order={4}>
+                        {t('subscription-settings.page.component.what-is-subscription-settings')}
+                    </Title>
 
                     <Text c="dimmed" size="sm">
-                        Settings below is mostly used by clients apps (i.e. Happ, V2RayNG Streisand,
-                        etc.) <br />
-                        It is reccomended to change this values to match your service.
+                        {t(
+                            'subscription-settings.page.component.subscription-settings-description'
+                        )}{' '}
+                        <br />
+                        {t(
+                            'subscription-settings.page.component.subscription-settings-description-line-2'
+                        )}
                     </Text>
                 </Stack>
             </Paper>

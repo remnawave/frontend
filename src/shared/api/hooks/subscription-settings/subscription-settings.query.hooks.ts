@@ -1,7 +1,4 @@
-import {
-    GetSubscriptionSettingsCommand,
-    GetSubscriptionTemplateCommand
-} from '@remnawave/backend-contract'
+import { GetSubscriptionSettingsCommand } from '@remnawave/backend-contract'
 import { createQueryKeys } from '@lukemorales/query-key-factory'
 import { notifications } from '@mantine/notifications'
 
@@ -25,7 +22,7 @@ export const useGetSubscriptionSettings = createGetQueryHook({
     },
     errorHandler: (error) => {
         notifications.show({
-            title: `${GetSubscriptionTemplateCommand.url}`,
+            title: `${GetSubscriptionSettingsCommand.url}`,
             message: error instanceof Error ? error.message : `Request failed with unknown error.`,
             color: 'red'
         })

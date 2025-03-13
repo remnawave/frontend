@@ -100,7 +100,7 @@ export const SubscriptionSettingsWidget = (props: IProps) => {
         }
     }, [subscriptionSettings])
 
-    const handleSubmit = form.onSubmit(async (values) => {
+    const handleSubmit = form.onSubmit((values) => {
         const filterEmptyStrings = (arr: string[]): string[] => {
             const filtered = arr.filter((item) => item.trim() !== '')
             return filtered.length > 0 ? filtered : ['']

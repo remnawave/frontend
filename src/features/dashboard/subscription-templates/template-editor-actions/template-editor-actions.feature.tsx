@@ -22,7 +22,7 @@ export function TemplateEditorActionsFeature(props: Props) {
 
         const currentValue = editorRef.current.getValue()
 
-        if (currentValue) {
+        if (currentValue && currentValue.trim()) {
             if (language === 'yaml') {
                 updateConfig({
                     variables: {

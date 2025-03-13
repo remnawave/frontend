@@ -414,7 +414,7 @@
         "widget": {
             "importing-json-subscription": "Importing JSON subscription",
             "description-line-1": "To use this subscription, just add",
-            "description-line-2": "at the end of your subscription link. Make sure you're using one of the supported apps listed in the table below. Otherwise, subscription will work as usual for requsted client. (e.g. Base64, Mihomo)"
+            "description-line-2": "at the end of your subscription link. Make sure you're using one of the supported apps listed in the table below. Otherwise, subscription will work as usual for requested client. (e.g. Base64, Mihomo)"
         }
     },
     "happ-routing-builder": {
@@ -497,7 +497,7 @@
             "enter-profile-title": "Enter profile title",
             "auto-update-description": "Some of clients may use this interval to auto-update subscription.",
             "auto-update-interval-hours": "Auto-Update interval (hours)",
-            "support-link-description": "Some of clients may show this link in the subscription page, which should leads to the support page.",
+            "support-link-description": "Some of clients may show this link in the subscription page, which should lead to the support page.",
             "support-link": "Support link",
             "happ-settings": "Happ settings",
             "happ-announce-description": "Enter Happ Announce, max. 200 characters. Will be displayed in the subscription page.",
@@ -510,7 +510,7 @@
             "user-status-remarks": "User status remarks",
             "user-status-remarks-description": "This values will be displayed in the subscription page if user is expired, limited or disabled.",
             "user-status-remarks-description-line-2": "You can add multiple remarks for each status.",
-            "user-status-remarks-description-line-3": "Cause expired, limited and disabled users are not able to connect to the server, they will see this remarks instead of empty subscription.",
+            "user-status-remarks-description-line-3": "Because expired, limited and disabled users are not able to connect to the server, they will see this remarks instead of empty subscription.",
             "expired-users-remarks": "Expired users remarks",
             "limited-users-remarks": "Limited users remarks",
             "disabled-users-remarks": "Disabled users remarks",
@@ -519,6 +519,13 @@
             "disabled": "Disabled",
             "profile-webpage-url-description": "Used by some clients. Enabled by default, domain resolved from SUB_PUBLIC_DOMAIN .env variable.",
             "profile-webpage-url": "Profile Webpage URL"
+        },
+        "page": {
+            "component": {
+                "what-is-subscription-settings": "What is subscription settings?",
+                "subscription-settings-description": "Settings below is mostly used by clients apps (i.e. Happ, V2RayNG Streisand, etc.)",
+                "subscription-settings-description-line-2": "It is reccomended to change this values to match your service."
+            }
         }
     }
 }

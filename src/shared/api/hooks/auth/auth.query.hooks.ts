@@ -19,7 +19,7 @@ export const useGetAuthStatus = createGetQueryHook({
     },
     errorHandler: (error) => {
         notifications.show({
-            title: `${GetStatusCommand.url}`,
+            title: 'Authentication Error',
             message: error instanceof Error ? error.message : `Request failed with unknown error.`,
             color: 'red'
         })

@@ -17,7 +17,7 @@ export const useUpdateSubscriptionSettings = createPostMutationHook({
         },
         onError: (error) => {
             notifications.show({
-                title: `${UpdateSubscriptionSettingsCommand.TSQ_url}`,
+                title: 'Error updating subscription settings',
                 message:
                     error instanceof Error ? error.message : `Request failed with unknown error.`,
                 color: 'red'

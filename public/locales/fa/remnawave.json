@@ -519,6 +519,13 @@
             "enabled": "فعال",
             "profile-webpage-url": "URL صفحه وب مشخصات",
             "profile-webpage-url-description": "توسط برخی از مشتری ها استفاده می شود. \nبه طور پیش فرض فعال شده ، دامنه از متغیر SUB_PUBLIC_DOMAIN .env حل شده است."
+        },
+        "page": {
+            "component": {
+                "subscription-settings-description": "تنظیمات زیر بیشتر توسط برنامه های مشتری استفاده می شود (یعنی Happ ، v2rayng Streisand و غیره)",
+                "subscription-settings-description-line-2": "توصیه می شود این مقادیر را برای مطابقت با خدمات خود تغییر دهید.",
+                "what-is-subscription-settings": "تنظیمات اشتراک چیست؟"
+            }
         }
     }
 }

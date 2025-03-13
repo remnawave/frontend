@@ -73,7 +73,7 @@ export const useMenuSections = (): MenuItem[] => {
             section: [
                 {
                     name: t('constants.subscription'),
-                    href: ROUTES.DASHBOARD.NODES,
+                    href: ROUTES.DASHBOARD.TEMPLATES.ROOT,
                     icon: PiBracketsCurly,
                     dropdownItems: [
                         {
@@ -115,6 +115,7 @@ export const useMenuSections = (): MenuItem[] => {
             section: [
                 {
                     name: 'Queues',
+                    // TODO: remove this after testing
                     href: '/api/queues',
                     icon: PiAirTrafficControlDuotone,
                     newTab: true

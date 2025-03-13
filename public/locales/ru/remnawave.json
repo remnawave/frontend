@@ -519,6 +519,13 @@
             "enabled": "Включено",
             "profile-webpage-url": "Profile Webpage URL",
             "profile-webpage-url-description": "Используется некоторыми клиентами. \nВключено по умолчанию, домен резволится из SUB_PUBLIC_DOMAIN .env переменной."
+        },
+        "page": {
+            "component": {
+                "subscription-settings-description": "Настройки ниже в основном используются приложениями клиентов (то есть Happ, V2rayng Streisand и т. Д.)",
+                "subscription-settings-description-line-2": "Рекализуется изменение этих значений в соответствии с вашим услугами.",
+                "what-is-subscription-settings": "Что такое настройки подписки?"
+            }
         }
     }
 }

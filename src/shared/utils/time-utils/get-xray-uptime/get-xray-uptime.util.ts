@@ -1,5 +1,3 @@
-/* eslint-disable no-nested-ternary */
-/* eslint-disable indent */
 import dayjs from 'dayjs'
 
 export function getXrayUptimeUtil(uptimeInSeconds: string): string {

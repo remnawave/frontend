@@ -51,6 +51,10 @@ export const LoginPage = () => {
                         <RegisterFormFeature />
                     </Box>
                 )}
+
+                <Badge color="cyan" mt={10} size="lg" variant="filled">
+                    Unknown error.
+                </Badge>
             </Stack>
         </Page>
     )

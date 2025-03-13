@@ -37,6 +37,13 @@ export const useRegister = createPostMutationHook({
                 color: 'green'
             })
             setToken({ token: data.accessToken })
+        },
+        onError: (error) => {
+            notifications.show({
+                title: 'Register',
+                message: error.message,
+                color: 'red'
+            })
         }
     }
 })

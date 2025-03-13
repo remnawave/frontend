@@ -37,7 +37,7 @@ export const StatisticNodesPage = () => {
         setDateRange([start, end])
     }, [period])
 
-    if (isLoading && !nodesStats) {
+    if (isLoading) {
         return <LoadingScreen />
     }
 
