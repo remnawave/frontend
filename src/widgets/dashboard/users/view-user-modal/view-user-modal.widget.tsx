@@ -112,7 +112,9 @@ export const ViewUserModal = () => {
                 activeUserInbounds: activeInboundUuids,
                 shortUuid: user.shortUuid,
                 trojanPassword: user.trojanPassword,
-                description: user.description ?? ''
+                description: user.description ?? '',
+                telegramId: user.telegramId ?? undefined,
+                email: user.email ?? undefined
             })
         }
     }, [user, inbounds])
@@ -129,7 +131,9 @@ export const ViewUserModal = () => {
                 // @ts-expect-error - TODO: fix ZOD schema
                 expireAt: dayjs(values.expireAt).toISOString(),
                 activeUserInbounds: values.activeUserInbounds,
-                description: values.description
+                description: values.description,
+                telegramId: values.telegramId,
+                email: values.email
             }
         })
     })
@@ -274,6 +278,18 @@ export const ViewUserModal = () => {
                                         ? dayjs(user.lastTrafficResetAt).format('DD/MM/YYYY HH:mm')
                                         : t('view-user-modal.widget.never')
                                 }
+                            />
+
+                            <NumberInput
+                                key={form.key('telegramId')}
+                                label="Telegram ID"
+                                {...form.getInputProps('telegramId')}
+                            />
+
+                            <TextInput
+                                key={form.key('email')}
+                                label="Email"
+                                {...form.getInputProps('email')}
                             />
 
                             <Textarea
