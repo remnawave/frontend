@@ -337,7 +337,12 @@
             "last-7-days-by-nodes": "Последние 7 дней по нодам",
             "filter-nodes": "Фильтр нод",
             "bar": "Столбчатая",
-            "line": "Линейная"
+            "line": "Линейная",
+            "last-7-days": "Last 7 day",
+            "last-14-days": "Last 14 days",
+            "last-30-days": "Last 30 days",
+            "last-60-days": "Last 60 days",
+            "last-90-days": "Last 90 days"
         }
     },
     "get-expiration-text": {

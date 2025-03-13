@@ -337,7 +337,12 @@
             "last-7-days-by-nodes": "7 روز اخیر بر اساس نودها",
             "filter-nodes": "فیلتر کردن نودها",
             "bar": "میله",
-            "line": "خط"
+            "line": "خط",
+            "last-7-days": "Last 7 day",
+            "last-14-days": "Last 14 days",
+            "last-30-days": "Last 30 days",
+            "last-60-days": "Last 60 days",
+            "last-90-days": "Last 90 days"
         }
     },
     "get-expiration-text": {

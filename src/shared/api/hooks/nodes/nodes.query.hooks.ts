@@ -1,5 +1,6 @@
 import {
     GetAllNodesCommand,
+    GetNodesUsageByRangeCommand,
     GetOneNodeCommand,
     GetPubKeyCommand
 } from '@remnawave/backend-contract'
@@ -20,7 +21,10 @@ export const nodesQueryKeys = createQueryKeys('nodes', {
     }),
     getPubKey: {
         queryKey: null
-    }
+    },
+    getNodesUsageByRangeCommand: (filters: GetNodesUsageByRangeCommand.RequestQuery) => ({
+        queryKey: [filters]
+    })
 })
 
 export const useGetNodes = createGetQueryHook({
@@ -70,6 +74,23 @@ export const useGetPubKey = createGetQueryHook({
     errorHandler: (error) => {
         notifications.show({
             title: `${GetPubKeyCommand.url}`,
+            message: error instanceof Error ? error.message : `Request failed with unknown error.`,
+            color: 'red'
+        })
+    }
+})
+
+export const useGetNodesUsageByRangeCommand = createGetQueryHook({
+    endpoint: GetNodesUsageByRangeCommand.TSQ_url,
+    responseSchema: GetNodesUsageByRangeCommand.ResponseSchema,
+    requestQuerySchema: GetNodesUsageByRangeCommand.RequestQuerySchema,
+    getQueryKey: ({ query }) => nodesQueryKeys.getNodesUsageByRangeCommand(query!).queryKey,
+    rQueryParams: {
+        staleTime: sToMs(5)
+    },
+    errorHandler: (error) => {
+        notifications.show({
+            title: `${GetNodesUsageByRangeCommand.url}`,
             message: error instanceof Error ? error.message : `Request failed with unknown error.`,
             color: 'red'
         })
