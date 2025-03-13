@@ -3,7 +3,7 @@ import { GetStatsCommand } from '@remnawave/backend-contract'
 import { TFunction } from 'i18next'
 import dayjs from 'dayjs'
 
-import { prettyBytesUtil } from '@shared/utils/bytes'
+import { prettyBytesUtil, prettyBytesUtilWithoutPrefix } from '@shared/utils/bytes'
 
 export const getSimpleMetrics = (
     systemInfo: GetStatsCommand.Response['response'],
@@ -16,7 +16,7 @@ export const getSimpleMetrics = (
 
     return [
         {
-            value: prettyBytesUtil(Number(users.totalTrafficBytes)) ?? 0,
+            value: prettyBytesUtilWithoutPrefix(Number(users.totalTrafficBytes)) ?? 0,
             icon: PiChartBarDuotone,
             title: t('simple-metrics.total-traffic'),
             color: 'green'

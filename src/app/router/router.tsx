@@ -5,8 +5,12 @@ import {
     Route,
     RouterProvider
 } from 'react-router-dom'
+import { SUBSCRIPTION_TEMPLATE_TYPE } from '@remnawave/backend-contract'
 
+import { HappRoutingBuilderPageConnector } from '@pages/dashboard/utils/happ-routing-builder/ui/connectors/happ-routing-builder.page.connector'
+import { TemplateBasePageConnector } from '@pages/dashboard/templates/ui/connectors/template-base-page.connector'
 import { NodesBandwidthTablePageConnector } from '@pages/dashboard/nodes-bandwidth-table/ui/connectors'
+import { SubscriptionSettingsConnector } from '@pages/dashboard/subscription-settings/connectors'
 import { StatisticNodesConnector } from '@pages/dashboard/statistic-nodes/connectors'
 import { ApiTokensPageConnector } from '@pages/dashboard/api-tokens/ui/connectors'
 import { ConfigPageConnector } from '@pages/dashboard/config/ui/connectors'
@@ -52,6 +56,65 @@ const router = createBrowserRouter(
                     <Route
                         element={<StatisticNodesConnector />}
                         path={ROUTES.DASHBOARD.NODES_STATS}
+                    />
+                    {/* Subscription templates */}
+                    <Route
+                        element={
+                            <TemplateBasePageConnector
+                                language="yaml"
+                                templateType={SUBSCRIPTION_TEMPLATE_TYPE.MIHOMO}
+                                title="Mihomo"
+                            />
+                        }
+                        path={ROUTES.DASHBOARD.TEMPLATES.MIHOMO}
+                    />
+                    <Route
+                        element={
+                            <TemplateBasePageConnector
+                                language="yaml"
+                                templateType={SUBSCRIPTION_TEMPLATE_TYPE.STASH}
+                                title="Stash"
+                            />
+                        }
+                        path={ROUTES.DASHBOARD.TEMPLATES.STASH}
+                    />
+                    <Route
+                        element={
+                            <TemplateBasePageConnector
+                                language="json"
+                                templateType={SUBSCRIPTION_TEMPLATE_TYPE.SINGBOX}
+                                title="Singbox"
+                            />
+                        }
+                        path={ROUTES.DASHBOARD.TEMPLATES.SINGBOX}
+                    />
+                    <Route
+                        element={
+                            <TemplateBasePageConnector
+                                language="json"
+                                templateType={SUBSCRIPTION_TEMPLATE_TYPE.SINGBOX_LEGACY}
+                                title="Singbox legacy"
+                            />
+                        }
+                        path={ROUTES.DASHBOARD.TEMPLATES.SINGBOX_LEGACY}
+                    />
+                    <Route
+                        element={
+                            <TemplateBasePageConnector
+                                language="json"
+                                templateType={SUBSCRIPTION_TEMPLATE_TYPE.XRAY_JSON}
+                                title="Xray JSON"
+                            />
+                        }
+                        path={ROUTES.DASHBOARD.TEMPLATES.XRAY_JSON}
+                    />
+                    <Route
+                        element={<HappRoutingBuilderPageConnector />}
+                        path={ROUTES.DASHBOARD.UTILS.HAPP_ROUTING_BUILDER}
+                    />
+                    <Route
+                        element={<SubscriptionSettingsConnector />}
+                        path={ROUTES.DASHBOARD.SUBSCRIPTION_SETTINGS}
                     />
                 </Route>
 

@@ -28,7 +28,8 @@ export function ConfigEditorWidget(props: Props) {
 
     const handleEditorDidMount = (monaco: Monaco) => {
         monaco.editor.defineTheme('GithubDark', {
-            ...monacoTheme
+            ...monacoTheme,
+            base: 'vs-dark'
         })
     }
 
@@ -73,7 +74,10 @@ export function ConfigEditorWidget(props: Props) {
                         autoClosingQuotes: 'always',
                         autoIndent: 'full',
                         automaticLayout: true,
-                        bracketPairColorization: true,
+                        bracketPairColorization: {
+                            enabled: true,
+                            independentColorPoolPerBracketType: true
+                        },
                         detectIndentation: true,
                         folding: true,
                         foldingStrategy: 'indentation',

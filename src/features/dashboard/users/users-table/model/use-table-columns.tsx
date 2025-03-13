@@ -106,6 +106,30 @@ export const useUserTableColumns = () => {
             },
 
             {
+                accessorKey: 'telegramId',
+                header: 'Telegram ID',
+                accessorFn: (originalRow) => originalRow.telegramId || '–',
+                minSize: 250,
+                size: 400,
+
+                mantineTableBodyCellProps: {
+                    align: 'center'
+                }
+            },
+
+            {
+                accessorKey: 'email',
+                header: 'Email',
+                accessorFn: (originalRow) => originalRow.email || '–',
+                minSize: 250,
+                size: 400,
+
+                mantineTableBodyCellProps: {
+                    align: 'center'
+                }
+            },
+
+            {
                 accessorKey: 'lastTrafficResetAt',
                 header: t('use-table-columns.traffic-reset'),
                 accessorFn: (originalRow) =>

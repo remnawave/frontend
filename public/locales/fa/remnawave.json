@@ -1,17 +1,22 @@
 {
     "constants": {
         "dashboard": "داشبورد",
-        "api-tokens": "توکن های API",
+        "api-tokens": "توکن‌های API",
         "config": "کانفیگ",
         "home": "خانه",
-        "hosts": "هاست ها",
-        "nodes": "نود ها",
-        "nodes-bandwidth-table": "جدول مصرف نود ها",
-        "nodes-statistics": "آمار نود ها",
-        "users": "کاربر ها",
+        "hosts": "هاست‌ها",
+        "nodes": "نودها",
+        "nodes-bandwidth-table": "جدول مصرف نودها",
+        "nodes-statistics": "آمار نودها",
+        "users": "کاربرها",
         "overview": "نمای کلی",
         "management": "مدیریت",
-        "statistics": "آمار"
+        "statistics": "آمار",
+        "subscription-settings": "Subscription settings",
+        "utils": "Utils",
+        "happ-routing-builder": "Happ Routing Builder",
+        "templates": "Templates",
+        "subscription": "Subscription"
     },
     "bandwidth-metrics": {
         "current-year": "امسال",
@@ -60,7 +65,7 @@
         "feature": {
             "new-user": "کاربر جدید",
             "reset-table": "ریست جدول",
-            "clear-filters": "حذف فیلتر ها",
+            "clear-filters": "حذف فیلترها",
             "update": "بروزرسانی",
             "bulk-actions": "عملیات جمعی"
         }
@@ -76,7 +81,7 @@
         "traffic-reset": "ریست ترافیک",
         "never": "هرگز",
         "online-at": "متصل در",
-        "last-ua": "آخرین عامل کاربری",
+        "last-ua": "آخرین عامل کاربری (User-Agent)",
         "lifetime-used": "مصرف کل",
         "sub-link-revoked-at": "ساب لینک لفو شده در",
         "created-at": "ساخته شده در"
@@ -112,7 +117,7 @@
         "feature": {
             "update": "بروزرسانی",
             "create-new-node": "ساخت نود جدید",
-            "restart-all-nodes": "ریبوت تمامی نود ها"
+            "restart-all-nodes": "ریبوت تمامی نودها"
         }
     },
     "toggle-node-status-button": {
@@ -145,7 +150,7 @@
     },
     "config-editor": {
         "widget": {
-            "loading-editor": "بارگذاری ویرایشگر..."
+            "loading-editor": "در حال بارگذاری ویرایشگر..."
         }
     },
     "keypair": {
@@ -168,7 +173,7 @@
     },
     "hosts-page-header": {
         "widget": {
-            "list-of-all-hosts": "فهرست تمامی هاست ها"
+            "list-of-all-hosts": "فهرست تمامی هاست‌ها"
         }
     },
     "remark-info": {
@@ -190,7 +195,7 @@
     "error-accordeon": {
         "widget": {
             "last-error-message": "آخرین پیام خطا",
-            "important-note-description": "برای اتصال نود، شما نیاز دارید که Remnawave Node را با موارد زیر اجرا کنید",
+            "important-note-description": "برای اتصال نود، شما نیاز دارید که Remnanode را با موارد زیر اجرا کنید",
             "important-note": "یادداشت مهم"
         }
     },
@@ -209,27 +214,27 @@
     },
     "nodes-page-header": {
         "widget": {
-            "list-of-all-nodes": "فهرست تمامی نود ها"
+            "list-of-all-nodes": "فهرست تمامی نودها"
         }
     },
     "table": {
         "widget": {
-            "only-active-nodes": "فقط نود هایی که ردیابی ترافیک فعال دارند نمایش داده می‌شوند.",
+            "only-active-nodes": "فقط نودهایی که ردیابی ترافیک فعال دارند نمایش داده می‌شوند.",
             "today": "امروز"
         }
     },
     "create-user-modal": {
         "widget": {
-            "inbounds": "اینباند ها",
-            "inbounds-description": "اینباند های موجود برای این کاربر را انتخاب کنید.",
+            "inbounds": "اینباندها",
+            "inbounds-description": "اینباندهای موجود برای این کاربر را انتخاب کنید.",
             "user-description": "توضیحات کاربر",
             "expiry-date": "تاریخ انقضا",
             "pick-value": "انتخاب مقدار",
-            "traffic-reset-strategy": "استراتژی ریست ترافیک.",
-            "traffic-reset-strategy-description": "هر چه مدت باید ترافیک کاربر بازنشانی شود",
+            "traffic-reset-strategy": "استراتژی ریست ترافیک",
+            "traffic-reset-strategy-description": "هر چه مدت ترافیک کاربر بازنشانی شود",
             "data-limit": "محدودیت ترافیک",
-            "data-limit-description": "محدودیت ترافیک را در گیگابیت وارد کنید، صفر به معنی نامحدود است.",
-            "username-cannot-be-changed-later": "نام کاربری نمی تواند بعدا تغییر داده شود.",
+            "data-limit-description": "محدودیت ترافیک را در گیگابیت وارد کنید، صفر به معنی نامحدود است",
+            "username-cannot-be-changed-later": "نام کاربری نمی تواند بعدا تغییر داده شود",
             "loading-user-creation": "در حال بارگذاری صفحه ساخت کاربر",
             "create-user": "ساخت کاربر"
         }
@@ -238,13 +243,13 @@
         "username": "نام کاربری"
     },
     "home-page": {
-        "users": "کاربر ها"
+        "users": "کاربرها"
     },
     "user-table": {
         "widget": {
             "list-of-all-users": "فهرست تمامی کاربران",
-            "error-loading-data": "ارور در لود کردن اظلاعات",
-            "table-title": "کاربر ها"
+            "error-loading-data": "خطا در لود کردن اطلاعات",
+            "table-title": "کاربرها"
         }
     },
     "view-user-modal": {
@@ -253,11 +258,14 @@
             "last-traffic-reset-at": "آخرین زمان ریست شدن ترافیک",
             "subscription-url": "لینک سابسکریپشن",
             "subscription-short-uuid": "UUID کوتاه سابسکریپشن",
-            "username-cannot-be-changed": "نام کاربری قابل تغییر نمی باشد.",
+            "username-cannot-be-changed": "نام کاربری قابل تغییر نمی‌باشد",
             "user-details": "جزئیات کاربر",
             "loading-user-data": "در حال بارگذاری اطلاعات کاربر...",
             "edit-user": "ویرایش کاربر",
-            "never": "هرگز"
+            "never": "هرگز",
+            "close": "بستن",
+            "show-qr": "نمایش QR",
+            "subscription-qr-code": "اشتراک کد QR"
         }
     },
     "base-api-token-form": {
@@ -276,7 +284,7 @@
         "port": "پورت",
         "inbound": "اینباند",
         "select-inbound": "انتخاب اینباند",
-        "advanced-options": "گزینه های پیشرفته",
+        "advanced-options": "گزینه‌های پیشرفته",
         "host": "هاست",
         "path": "مسیر",
         "alpn-e-g-h2": "ALPN (به طور مثال h2)",
@@ -326,10 +334,15 @@
     },
     "statistic-nodes": {
         "component": {
-            "last-7-days-by-nodes": "7 روز اخیر بر اساس نود ها",
-            "filter-nodes": "فیلتر کردن نود ها",
+            "last-7-days-by-nodes": "7 روز اخیر بر اساس نودها",
+            "filter-nodes": "فیلتر کردن نودها",
             "bar": "میله",
-            "line": "خط"
+            "line": "خط",
+            "last-7-days": "7 روز گذشته",
+            "last-14-days": "14 روز گذشته",
+            "last-30-days": "30 روز گذشته",
+            "last-60-days": "60 روز گذشته",
+            "last-90-days": "90 روز گذشته"
         }
     },
     "get-expiration-text": {
@@ -375,10 +388,144 @@
         "widget": {
             "delete-users": "حذف کاربران",
             "confirm-action-description": "آیا مطمئن هستید که می‌خواهید کاربران انتخاب شده را حذف کنید؟",
-            "confirm-action-irreversible": "این عملیات برگشت‌ناپذیر است.",
+            "confirm-action-irreversible": "این عملیات برگشت‌ناپذیر است",
             "cancel": "انصراف",
-            "user-deletion-description": "حذف تمامی کاربران با وضعیت انتخاب شده. اگر کاربران با وضعیت \"Active\" را حذف می‌کنید، باید تمامی گره‌ها را برای اعمال تغییرات مجدداً راه‌اندازی کنید.",
+            "user-deletion-description": "حذف تمامی کاربران با وضعیت انتخاب شده. اگر کاربران با وضعیت \"فعال یا Active\" را حذف می‌کنید، باید تمامی نودها را برای اعمال تغییرات مجدداً راه‌اندازی کنید",
             "select-status": "حذف بر اساس وضعیت"
+        }
+    },
+    "register-form": {
+        "feature": {
+            "username": "نام کاربری",
+            "password": "گذرواژه",
+            "generate": "ایجاد و کپی",
+            "confirm-password": "تایید گذرواژه",
+            "sign-up": "ثبت نام",
+            "password-copied": "گذرواژه کپی شد",
+            "password-copied-message": "گذرواژه در کلیپ‌بورد کپی شد",
+            "password-copied-error": "کپی کردن گذرواژه به کلیپ‌بورد ناموفق بود",
+            "error": "خطا",
+            "passwords-do-not-match": "پسوردها مطابقت ندارند",
+            "password-too-short": "حداقل 24 کاراکتر",
+            "register-description": "برای شروع یک اکانت سوپرادمین ایجاد کنید"
+        }
+    },
+    "xray-json-template-description": {
+        "widget": {
+            "description-line-1": "برای استفاده از این اشتراک، کافی است",
+            "description-line-2": "را به انتهای لینک اشتراک خود اضافه کنید. درصورتی که از کلاینت‌های پشتیبانی شده جدول زیر استفاده نشود اشتراک‌ها مانند قبل، مثلا به صورت base64 یا mihomo، ارسال خواهند شد",
+            "importing-json-subscription": "درحال وارد کردن اشتراک JSON"
+        }
+    },
+    "happ-routing-builder": {
+        "widget": {
+            "copy-link": "Copy link",
+            "visual-editor": "Visual Editor",
+            "code-viewer": "Code Viewer",
+            "encode-happ-link": "Encode Happ Link",
+            "enter-the-configuration-name": "Enter the configuration name",
+            "name": "Name",
+            "russia": "Russia",
+            "proxy-all-traffic-except-rules": "Proxy all traffic except rules",
+            "direct-all-traffic-except-rules": "Direct all traffic except rules",
+            "proxy-all-traffic-except-rules-or-direct-all-traffic-except-rules": "Proxy all traffic except rules, or direct all traffic except rules",
+            "enable": "Enable",
+            "disable": "Disable",
+            "fake-dns-description": "Enable or disable FakeDNS. Recommended to activate when using DoU.",
+            "choose-doh-dns-over-https-or-dou-dns-over-udp": "Choose DoH (DNS over HTTPS) or DoU (DNS over UDP)",
+            "remote-dns-type": "Remote DNS type",
+            "domain-name-for-doh": "Domain name for DoH",
+            "remote-dns-domain": "Remote DNS Domain",
+            "server-ip-for-doh-or-dou": "Server IP for DoH or DoU",
+            "remote-dns-ip": "Remote DNS IP",
+            "domenstic-dns-type-description": "Choose DoH (DNS over HTTPS) or DoU (DNS over UDP)",
+            "domestic-dns-type": "Domestic DNS Type",
+            "domain-name-for-doh-0": "Domain name for DoH",
+            "domestic-dns-domain": "Domestic DNS Domain",
+            "server-ip-for-doh-or-dou-0": "Server IP for DoH or DoU",
+            "domestic-dns-ip": "Domestic DNS IP",
+            "geoip-description": "Link to the geoip.dat file. Leave this field empty if you want to use the default file.",
+            "geoip-url": "GeoIP URL",
+            "geosite-description": "Link to the geosite.dat file. Leave this field empty if you want to use the default file.",
+            "geosite-url": "GeoSite URL",
+            "unix-timestamp-description": "Enter the Unix timestamp of the last update to the geoip and geosite files. Leave empty if not available.",
+            "last-updated": "Last updated",
+            "select-the-domain-processing-strategy": "Select the domain processing strategy.",
+            "domain-strategy": "Domain strategy",
+            "dns-hosts-description": "Enter the DNS hosts in the format: { \"example.com\": \"1.2.3.4\", \"test.org\": \"8.8.8.8\" }",
+            "dns-hosts": "DNS hosts",
+            "sites-that-will-use-direct-connection": "Sites that will use direct connection.",
+            "direct-sites": "Direct sites",
+            "ip-addresses-that-will-use-direct-connection": "IP addresses that will use direct connection.",
+            "direct-ip": "Direct IP",
+            "sites-that-will-be-proxied": "Sites that will be proxied.",
+            "proxy-sites": "Proxy sites",
+            "ip-addresses-that-will-be-proxied": "IP addresses that will be proxied.",
+            "proxy-ip": "Proxy IP",
+            "sites-that-will-be-blocked": "Sites that will be blocked.",
+            "blocked-sites": "Blocked sites",
+            "ip-addresses-that-will-be-blocked": "IP addresses that will be blocked.",
+            "blocked-ips": "Blocked IPs",
+            "encoded-happ-link": "Encoded Happ Link",
+            "copied": "Copied",
+            "show-qr": "Show QR",
+            "close": "Close"
+        },
+        "page": {
+            "component": {
+                "about-happ": "About Happ",
+                "happ-is-multiplatform-xray-client": "Happ is multiplatform XRay client.",
+                "about-happ-description-line-2": "Here you can configure routing rules, which you can pass to Happ client.",
+                "about-happ-description-line-3": "Check out \"Subscription settings\" and check \"Happ Routing\".",
+                "check-out-happ-website": "Check out Happ website"
+            }
+        }
+    },
+    "remarks-manager": {
+        "widget": {
+            "enter-remark": "Enter remark",
+            "add-remark": "Add remark"
+        }
+    },
+    "subscription-settings": {
+        "widget": {
+            "validation-error": "Validation error",
+            "you-must-add-at-least-one-remark-with-text": "You must add at least one remark with text",
+            "subscription-info": "Subscription info",
+            "this-title-will-be-displayed-as-subscription-name": "This title will be displayed as subscription name.",
+            "profile-title": "Profile title",
+            "enter-profile-title": "Enter profile title",
+            "auto-update-description": "Some of clients may use this interval to auto-update subscription.",
+            "auto-update-interval-hours": "Auto-Update interval (hours)",
+            "support-link-description": "Some of clients may show this link in the subscription page, which should leads to the support page.",
+            "support-link": "Support link",
+            "happ-settings": "Happ settings",
+            "happ-announce-description": "Enter Happ Announce, max. 200 characters. Will be displayed in the subscription page.",
+            "happ-announce": "Happ Announce",
+            "enter-happ-announce-max-200-characters": "Enter Happ Announce, max. 200 characters",
+            "happ-routing-description": "Happ routing is a feature that allows you to configure the routing.",
+            "happ-routing-description-line-2": "Routing must be configured via Happ Routing Builder. Use button below to configure routing.",
+            "configure-happ-routing": "Configure Happ Routing",
+            "happ-routing": "Happ routing",
+            "user-status-remarks": "User status remarks",
+            "user-status-remarks-description": "This values will be displayed in the subscription page if user is expired, limited or disabled.",
+            "user-status-remarks-description-line-2": "You can add multiple remarks for each status.",
+            "user-status-remarks-description-line-3": "Cause expired, limited and disabled users are not able to connect to the server, they will see this remarks instead of empty subscription.",
+            "expired-users-remarks": "Expired users remarks",
+            "limited-users-remarks": "Limited users remarks",
+            "disabled-users-remarks": "Disabled users remarks",
+            "update-settings": "Update settings",
+            "disabled": "غیرفعال",
+            "enabled": "فعال",
+            "profile-webpage-url": "URL صفحه وب مشخصات",
+            "profile-webpage-url-description": "توسط برخی از مشتری ها استفاده می شود. \nبه طور پیش فرض فعال شده ، دامنه از متغیر SUB_PUBLIC_DOMAIN .env حل شده است."
+        },
+        "page": {
+            "component": {
+                "subscription-settings-description": "تنظیمات زیر بیشتر توسط برنامه های مشتری استفاده می شود (یعنی Happ ، v2rayng Streisand و غیره)",
+                "subscription-settings-description-line-2": "توصیه می شود این مقادیر را برای مطابقت با خدمات خود تغییر دهید.",
+                "what-is-subscription-settings": "تنظیمات اشتراک چیست؟"
+            }
         }
     }
 }

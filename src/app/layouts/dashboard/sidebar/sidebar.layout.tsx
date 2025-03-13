@@ -50,6 +50,9 @@ export function SidebarLayout() {
                                 leftSection={subItem.icon && <subItem.icon />}
                                 to={subItem.href}
                                 variant="subtle"
+                                {...(subItem.newTab
+                                    ? { target: '_blank', rel: 'noopener noreferrer' }
+                                    : {})}
                             />
                         )
                     )}

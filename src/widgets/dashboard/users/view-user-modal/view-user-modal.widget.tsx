@@ -23,6 +23,7 @@ import {
     PiCopy,
     PiFloppyDiskDuotone,
     PiLinkDuotone,
+    PiQrCodeDuotone,
     PiUserDuotone
 } from 'react-icons/pi'
 import { UpdateUserCommand } from '@remnawave/backend-contract'
@@ -30,6 +31,8 @@ import { useForm, zodResolver } from '@mantine/form'
 import { DateTimePicker } from '@mantine/dates'
 import { useTranslation } from 'react-i18next'
 import { useEffect, useMemo } from 'react'
+import { modals } from '@mantine/modals'
+import { renderSVG } from 'uqr'
 import dayjs from 'dayjs'
 
 import {
@@ -76,7 +79,7 @@ export const ViewUserModal = () => {
     const form = useForm<IFormValues>({
         name: 'edit-user-form',
         mode: 'uncontrolled',
-        validate: zodResolver(UpdateUserCommand.RequestSchema)
+        validate: zodResolver(UpdateUserCommand.RequestSchema.omit({ expireAt: true }))
     })
 
     const {
@@ -109,7 +112,9 @@ export const ViewUserModal = () => {
                 activeUserInbounds: activeInboundUuids,
                 shortUuid: user.shortUuid,
                 trojanPassword: user.trojanPassword,
-                description: user.description ?? ''
+                description: user.description ?? '',
+                telegramId: user.telegramId ?? undefined,
+                email: user.email ?? undefined
             })
         }
     }, [user, inbounds])
@@ -118,17 +123,18 @@ export const ViewUserModal = () => {
     const totalUsedTraffic = prettyBytesUtil(user?.usedTrafficBytes, true)
 
     const handleSubmit = form.onSubmit(async (values) => {
-        const updateData = {
-            uuid: values.uuid,
-            trafficLimitStrategy: values.trafficLimitStrategy,
-            trafficLimitBytes: gbToBytesUtil(values.trafficLimitBytes),
-            expireAt: values.expireAt,
-            activeUserInbounds: values.activeUserInbounds,
-            description: values.description
-        }
-
         updateUser({
-            variables: updateData
+            variables: {
+                uuid: values.uuid,
+                trafficLimitStrategy: values.trafficLimitStrategy,
+                trafficLimitBytes: gbToBytesUtil(values.trafficLimitBytes),
+                // @ts-expect-error - TODO: fix ZOD schema
+                expireAt: dayjs(values.expireAt).toISOString(),
+                activeUserInbounds: values.activeUserInbounds,
+                description: values.description,
+                telegramId: values.telegramId,
+                email: values.email
+            }
         })
     })
 
@@ -274,6 +280,18 @@ export const ViewUserModal = () => {
                                 }
                             />
 
+                            <NumberInput
+                                key={form.key('telegramId')}
+                                label="Telegram ID"
+                                {...form.getInputProps('telegramId')}
+                            />
+
+                            <TextInput
+                                key={form.key('email')}
+                                label="Email"
+                                {...form.getInputProps('email')}
+                            />
+
                             <Textarea
                                 description={t('create-user-modal.widget.user-description')}
                                 key={form.key('description')}
@@ -343,6 +361,7 @@ export const ViewUserModal = () => {
                             <DateTimePicker
                                 key={form.key('expireAt')}
                                 label={t('create-user-modal.widget.expiry-date')}
+                                minDate={new Date()}
                                 valueFormat="MMMM D, YYYY - HH:mm"
                                 {...form.getInputProps('expireAt')}
                                 leftSection={<PiCalendarDuotone size="1rem" />}
@@ -383,6 +402,41 @@ export const ViewUserModal = () => {
                             </ActionIcon.Group>
                         </Group>
                         <Group>
+                            <Button
+                                leftSection={<PiQrCodeDuotone size="1rem" />}
+                                onClick={() => {
+                                    const subscriptionQrCode = renderSVG(
+                                        user?.subscriptionUrl ?? '',
+                                        {
+                                            whiteColor: '#161B22',
+                                            blackColor: '#3CC9DB'
+                                        }
+                                    )
+                                    modals.open({
+                                        centered: true,
+                                        title: t('view-user-modal.widget.subscription-qr-code'),
+                                        children: (
+                                            <>
+                                                <div
+                                                    dangerouslySetInnerHTML={{
+                                                        __html: subscriptionQrCode
+                                                    }}
+                                                />
+                                                <Button
+                                                    fullWidth
+                                                    mt="md"
+                                                    onClick={() => modals.closeAll()}
+                                                >
+                                                    {t('view-user-modal.widget.close')}
+                                                </Button>
+                                            </>
+                                        )
+                                    })
+                                }}
+                                size="md"
+                            >
+                                {t('view-user-modal.widget.show-qr')}
+                            </Button>
                             {user && <ToggleUserStatusButtonFeature user={user} />}
                             <Button
                                 color="blue"

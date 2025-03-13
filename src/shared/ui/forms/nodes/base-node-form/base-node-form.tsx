@@ -260,7 +260,7 @@ export const BaseNodeForm = <T extends CreateNodeCommand.Request | UpdateNodeCom
                     )}
                     <Button
                         color="blue"
-                        disabled={!form.isValid() || !form.isDirty() || !form.isTouched()}
+                        disabled={!form.isDirty() || !form.isTouched()}
                         leftSection={<PiFloppyDiskDuotone size="1rem" />}
                         loading={isUpdateNodePending}
                         size="md"

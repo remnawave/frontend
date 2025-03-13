@@ -31,6 +31,14 @@
     </head>
     <body>
         <div id="root"></div>
+        <script>
+            window.global = window
+        </script>
+        <script type="module">
+            import { Buffer } from 'buffer'
+
+            window.Buffer = Buffer
+        </script>
         <script type="module" src="/src/main.tsx"></script>
     </body>
 </html>

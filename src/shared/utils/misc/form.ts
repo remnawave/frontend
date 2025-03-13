@@ -3,6 +3,22 @@ import { notifications } from '@mantine/notifications'
 import { UseFormReturnType } from '@mantine/form'
 
 export function handleFormErrors(form: UseFormReturnType<any>, errors: unknown) {
+    if (
+        errors &&
+        typeof errors === 'object' &&
+        'errors' in errors &&
+        Array.isArray(errors.errors)
+    ) {
+        errors.errors.forEach((error) => {
+            if (error.path?.[0]) {
+                form.setFieldError(error.path[0], error.message)
+            } else {
+                notifications.show({ message: error.message, color: 'red' })
+            }
+        })
+        return
+    }
+
     if (!errors || typeof errors !== 'object') {
         return
     }

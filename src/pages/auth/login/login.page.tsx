@@ -1,12 +1,19 @@
-import { Box, Group, Stack, Text, Title } from '@mantine/core'
+import { Badge, Box, Group, Loader, Stack, Text, Title } from '@mantine/core'
 
+import { useGetAuthStatus } from '@shared/api/hooks/auth/auth.query.hooks'
+import { RegisterFormFeature } from '@features/auth/register-form'
+import { LoginFormFeature } from '@features/auth/login-form'
 import { UnderlineShape } from '@shared/ui/underline-shape'
 import { Logo } from '@shared/ui/logo'
 import { Page } from '@shared/ui/page'
 
-import { LoginForm } from '../../../features/auth'
-
 export const LoginPage = () => {
+    const { data: authStatus, isLoading } = useGetAuthStatus()
+
+    if (isLoading) {
+        return <Loader />
+    }
+
     return (
         <Page title="Login">
             <Stack align="center" gap="xl">
@@ -27,9 +34,27 @@ export const LoginPage = () => {
                     </Title>
                 </Group>
 
-                <Box maw={800} w={{ base: 440, sm: 500, md: 500 }}>
-                    <LoginForm />
-                </Box>
+                {!authStatus && (
+                    <Badge color="cyan" mt={10} size="lg" variant="filled">
+                        Server is not responding. Check logs.
+                    </Badge>
+                )}
+
+                {authStatus?.isLoginAllowed && !authStatus?.isRegisterAllowed && (
+                    <Box maw={800} w={{ base: 440, sm: 500, md: 500 }}>
+                        <LoginFormFeature />
+                    </Box>
+                )}
+
+                {!authStatus?.isLoginAllowed && authStatus?.isRegisterAllowed && (
+                    <Box maw={800} w={{ base: 440, sm: 500, md: 500 }}>
+                        <RegisterFormFeature />
+                    </Box>
+                )}
+
+                <Badge color="cyan" mt={10} size="lg" variant="filled">
+                    Unknown error.
+                </Badge>
             </Stack>
         </Page>
     )

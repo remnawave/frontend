@@ -1,35 +1,47 @@
 import { Box, Group, MultiSelect, Paper, SegmentedControl, Stack, Text } from '@mantine/core'
-import { GetNodesStatisticsCommand } from '@remnawave/backend-contract'
-import { BarChart, LineChart } from '@mantine/charts'
+import { GetNodesUsageByRangeCommand } from '@remnawave/backend-contract'
 import { useTranslation } from 'react-i18next'
+import { useEffect, useState } from 'react'
+import { BarChart } from '@mantine/charts'
 import ColorHash from 'color-hash'
-import { useState } from 'react'
 import dayjs from 'dayjs'
 
+import { useGetNodesUsageByRangeCommand } from '@shared/api/hooks'
 import { prettyBytesToAnyUtil } from '@shared/utils/bytes'
 import { LoadingScreen, PageHeader } from '@shared/ui'
 import { ROUTES } from '@shared/constants'
 import { Page } from '@shared/ui/page'
 
-import { IProps } from './interfaces'
-
-export const StatisticNodesPage = (props: IProps) => {
+export const StatisticNodesPage = () => {
     const { t } = useTranslation()
 
-    const { nodesStats } = props
+    const [period, setPeriod] = useState<'7' | '14' | '30' | '60' | '90'>('7')
+    const [dateRange, setDateRange] = useState<[Date, Date]>([
+        dayjs().utc().subtract(7, 'day').startOf('hour').toDate(),
+        dayjs().utc().startOf('hour').toDate()
+    ])
+
+    const { data: nodesStats, isLoading } = useGetNodesUsageByRangeCommand({
+        query: {
+            start: dateRange[0].toISOString(),
+            end: dateRange[1].toISOString()
+        }
+    })
+
     const ch = new ColorHash()
     const [selectedNodes, setSelectedNodes] = useState<string[]>([])
-    const [chartType, setChartType] = useState<'bar' | 'line'>('bar')
 
-    if (!nodesStats) {
+    useEffect(() => {
+        const end = dayjs().utc().startOf('hour').toDate()
+        const start = dayjs().utc().subtract(Number(period), 'day').startOf('hour').toDate()
+        setDateRange([start, end])
+    }, [period])
+
+    if (isLoading) {
         return <LoadingScreen />
     }
 
-    const { lastSevenDays } = nodesStats
-
-    const formatDataForChart = (
-        dbData: GetNodesStatisticsCommand.Response['response']['lastSevenDays']
-    ) => {
+    const formatDataForChart = (dbData: GetNodesUsageByRangeCommand.Response['response']) => {
         interface ChartData {
             [key: string]: number | string
             date: string
@@ -38,13 +50,13 @@ export const StatisticNodesPage = (props: IProps) => {
         const groupedData: Record<string, ChartData> = {}
         const seriesSet = new Set<string>()
 
-        dbData.forEach(({ nodeName, totalBytes, date }) => {
+        dbData.forEach(({ nodeName, total, date }) => {
             const formattedDate = dayjs(date).format('MMM D')
             if (!groupedData[formattedDate]) {
                 groupedData[formattedDate] = { date: formattedDate }
             }
 
-            groupedData[formattedDate][nodeName] = totalBytes
+            groupedData[formattedDate][nodeName] = total
             seriesSet.add(nodeName)
         })
 
@@ -57,7 +69,7 @@ export const StatisticNodesPage = (props: IProps) => {
         }
     }
 
-    const { data, series } = formatDataForChart(lastSevenDays)
+    const { data, series } = formatDataForChart(nodesStats ?? [])
 
     const filteredSeries =
         selectedNodes.length > 0 ? series.filter((s) => selectedNodes.includes(s.name)) : series
@@ -73,8 +85,21 @@ export const StatisticNodesPage = (props: IProps) => {
             />
 
             <Stack gap="sm" mb="xl">
-                <Group justify="space-between">
+                <Group align="center" justify="space-between">
                     <Text fw={600}>{t('statistic-nodes.component.last-7-days-by-nodes')}</Text>
+                    <SegmentedControl
+                        data={[
+                            { label: t('statistic-nodes.component.last-7-days'), value: '7' },
+                            { label: t('statistic-nodes.component.last-14-days'), value: '14' },
+                            { label: t('statistic-nodes.component.last-30-days'), value: '30' },
+                            { label: t('statistic-nodes.component.last-60-days'), value: '60' },
+                            { label: t('statistic-nodes.component.last-90-days'), value: '90' }
+                        ]}
+                        onChange={(value) => setPeriod(value as '7' | '14' | '30' | '60' | '90')}
+                        value={period}
+                    />
+                </Group>
+                <Group align="center" justify="center">
                     <Group gap="xs" maw={600}>
                         <MultiSelect
                             checkIconPosition="left"
@@ -86,131 +111,66 @@ export const StatisticNodesPage = (props: IProps) => {
                             value={selectedNodes}
                         />
                     </Group>
-                    <SegmentedControl
-                        data={[
-                            { label: t('statistic-nodes.component.bar'), value: 'bar' },
-                            { label: t('statistic-nodes.component.line'), value: 'line' }
-                        ]}
-                        onChange={(value) => setChartType(value as 'bar' | 'line')}
-                        value={chartType}
-                    />
                 </Group>
+                <BarChart
+                    barProps={{ radius: 0 }}
+                    data={data}
+                    dataKey="date"
+                    h={'800px'}
+                    legendProps={{
+                        verticalAlign: 'bottom'
+                    }}
+                    maxBarWidth={40}
+                    orientation="vertical"
+                    series={filteredSeries}
+                    tooltipAnimationDuration={200}
+                    tooltipProps={{
+                        content: ({ payload, active }) => {
+                            if (!payload || !active) return null
 
-                {chartType === 'bar' ? (
-                    <BarChart
-                        barProps={{ radius: 0 }}
-                        data={data}
-                        dataKey="date"
-                        gridAxis="xy"
-                        h={300}
-                        legendProps={{
-                            verticalAlign: 'bottom'
-                        }}
-                        orientation="vertical"
-                        series={filteredSeries}
-                        tickLine="y"
-                        tooltipAnimationDuration={200}
-                        tooltipProps={{
-                            content: ({ payload, active }) => {
-                                if (!payload || !active) return null
+                            const date = payload[0]?.payload.date
+                            const sortedPayload = [...payload].sort((a, b) => b.value - a.value)
+                            const totalForDay = payload.reduce((sum, entry) => {
+                                const value = Number(entry.value) || 0
+                                return sum + value
+                            }, 0)
 
-                                const date = payload[0]?.payload.date
-                                const sortedPayload = [...payload].sort((a, b) => b.value - a.value)
-                                const totalForDay = payload.reduce((sum, entry) => {
-                                    const value = Number(entry.value) || 0
-                                    return sum + value
-                                }, 0)
-
-                                return (
-                                    <Paper px="md" py="sm" radius="md" shadow="md" withBorder>
-                                        <Group justify="space-between" mb={8}>
-                                            <Text fw={600}>{date}</Text>
-                                            <Text c="dimmed" fz="sm">
-                                                Σ {prettyBytesToAnyUtil(totalForDay)}
-                                            </Text>
-                                        </Group>
-                                        {sortedPayload.map((entry) => (
-                                            <Stack gap={4} key={entry.dataKey}>
-                                                <Group justify="space-between">
-                                                    <Group gap={8}>
-                                                        <Box
-                                                            h={10}
-                                                            style={{
-                                                                backgroundColor: entry.color,
-                                                                borderRadius: '50%'
-                                                            }}
-                                                            w={10}
-                                                        />
-                                                        <Text fz="sm">{entry.name}</Text>
-                                                    </Group>
-                                                    <Text fw={500} fz="sm">
-                                                        {prettyBytesToAnyUtil(entry.value)}
-                                                    </Text>
+                            return (
+                                <Paper px="md" py="sm" radius="md" shadow="md" withBorder>
+                                    <Group justify="space-between" mb={8}>
+                                        <Text fw={600}>{date}</Text>
+                                        <Text c="dimmed" fz="sm">
+                                            Σ {prettyBytesToAnyUtil(totalForDay)}
+                                        </Text>
+                                    </Group>
+                                    {sortedPayload.map((entry) => (
+                                        <Stack gap={4} key={entry.dataKey}>
+                                            <Group justify="space-between">
+                                                <Group gap={8}>
+                                                    <Box
+                                                        h={10}
+                                                        style={{
+                                                            backgroundColor: entry.color,
+                                                            borderRadius: '50%'
+                                                        }}
+                                                        w={10}
+                                                    />
+                                                    <Text fz="sm">{entry.name}</Text>
                                                 </Group>
-                                            </Stack>
-                                        ))}
-                                    </Paper>
-                                )
-                            }
-                        }}
-                        type="stacked"
-                        valueFormatter={(value) => prettyBytesToAnyUtil(value) ?? ''}
-                        withLegend
-                    />
-                ) : (
-                    <LineChart
-                        data={data}
-                        dataKey="date"
-                        h={300}
-                        series={filteredSeries}
-                        tickLine="y"
-                        tooltipAnimationDuration={200}
-                        tooltipProps={{
-                            content: ({ payload, active }) => {
-                                if (!payload || !active) return null
-
-                                const date = payload[0]?.payload.date
-                                const sortedPayload = [...payload].sort((a, b) => b.value - a.value)
-                                const totalForDay = payload.reduce((sum, entry) => {
-                                    const value = Number(entry.value) || 0
-                                    return sum + value
-                                }, 0)
-
-                                return (
-                                    <Paper px="md" py="sm" radius="md" shadow="md" withBorder>
-                                        <Group justify="space-between" mb={8}>
-                                            <Text fw={600}>{date}</Text>
-                                            <Text c="dimmed" fz="sm">
-                                                Σ {prettyBytesToAnyUtil(totalForDay)}
-                                            </Text>
-                                        </Group>
-                                        {sortedPayload.map((entry) => (
-                                            <Stack gap={4} key={entry.dataKey}>
-                                                <Group justify="space-between">
-                                                    <Group gap={8}>
-                                                        <Box
-                                                            h={10}
-                                                            style={{
-                                                                backgroundColor: entry.color,
-                                                                borderRadius: '50%'
-                                                            }}
-                                                            w={10}
-                                                        />
-                                                        <Text fz="sm">{entry.name}</Text>
-                                                    </Group>
-                                                    <Text fw={500} fz="sm">
-                                                        {prettyBytesToAnyUtil(entry.value)}
-                                                    </Text>
-                                                </Group>
-                                            </Stack>
-                                        ))}
-                                    </Paper>
-                                )
-                            }
-                        }}
-                        valueFormatter={(value) => prettyBytesToAnyUtil(value) ?? ''}
-                    />
-                )}
+                                                <Text fw={500} fz="sm">
+                                                    {prettyBytesToAnyUtil(entry.value)}
+                                                </Text>
+                                            </Group>
+                                        </Stack>
+                                    ))}
+                                </Paper>
+                            )
+                        }
+                    }}
+                    type="stacked"
+                    valueFormatter={(value) => prettyBytesToAnyUtil(value) ?? ''}
+                    withLegend
+                />
             </Stack>
         </Page>
     )

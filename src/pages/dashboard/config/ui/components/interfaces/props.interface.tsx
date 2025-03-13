@@ -1,3 +1,3 @@
 export interface Props {
-    config: Record<string, unknown> | string
+    config: Record<string, unknown> | string | {}
 }

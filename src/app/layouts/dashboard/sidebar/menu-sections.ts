@@ -1,8 +1,12 @@
 import {
+    PiAirTrafficControlDuotone,
+    PiBarcodeDuotone,
     PiBookmarksDuotone,
+    PiBracketsCurly,
     PiComputerTowerDuotone,
     PiCookie,
     PiGearDuotone,
+    PiLinkDuotone,
     PiStarDuotone,
     PiUsersDuotone
 } from 'react-icons/pi'
@@ -44,10 +48,19 @@ export const useMenuSections = (): MenuItem[] => {
                         {
                             name: t('constants.nodes-bandwidth-table'),
                             href: ROUTES.DASHBOARD.NODES_BANDWIDTH_TABLE
+                        },
+                        {
+                            name: t('constants.nodes-statistics'),
+                            href: ROUTES.DASHBOARD.NODES_STATS
                         }
                     ]
                 },
                 { name: t('constants.config'), href: ROUTES.DASHBOARD.CONFIG, icon: PiGearDuotone },
+                {
+                    name: t('constants.subscription-settings'),
+                    href: ROUTES.DASHBOARD.SUBSCRIPTION_SETTINGS,
+                    icon: PiBarcodeDuotone
+                },
                 {
                     name: t('constants.api-tokens'),
                     href: ROUTES.DASHBOARD.API_TOKENS,
@@ -56,12 +69,56 @@ export const useMenuSections = (): MenuItem[] => {
             ]
         },
         {
-            header: t('constants.statistics'),
+            header: t('constants.templates'),
             section: [
                 {
-                    name: t('constants.nodes-statistics'),
-                    href: ROUTES.DASHBOARD.NODES_STATS,
-                    icon: PiComputerTowerDuotone
+                    name: t('constants.subscription'),
+                    href: ROUTES.DASHBOARD.TEMPLATES.ROOT,
+                    icon: PiBracketsCurly,
+                    dropdownItems: [
+                        {
+                            name: 'Xray JSON',
+                            href: ROUTES.DASHBOARD.TEMPLATES.XRAY_JSON
+                        },
+                        {
+                            name: 'Mihomo',
+                            href: ROUTES.DASHBOARD.TEMPLATES.MIHOMO
+                        },
+                        {
+                            name: 'Stash',
+                            href: ROUTES.DASHBOARD.TEMPLATES.STASH
+                        },
+                        {
+                            name: 'Singbox',
+                            href: ROUTES.DASHBOARD.TEMPLATES.SINGBOX
+                        },
+                        {
+                            name: 'Singbox legacy',
+                            href: ROUTES.DASHBOARD.TEMPLATES.SINGBOX_LEGACY
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            header: t('constants.utils'),
+            section: [
+                {
+                    name: t('constants.happ-routing-builder'),
+                    href: ROUTES.DASHBOARD.UTILS.HAPP_ROUTING_BUILDER,
+                    icon: PiLinkDuotone
+                }
+            ]
+        },
+        {
+            header: 'Superadmin',
+            section: [
+                {
+                    name: 'Queues',
+                    // TODO: remove this after testing
+                    href: '/api/queues',
+                    icon: PiAirTrafficControlDuotone,
+                    newTab: true
                 }
             ]
         }
