@@ -338,11 +338,11 @@
             "filter-nodes": "Фильтр нод",
             "bar": "Столбчатая",
             "line": "Линейная",
-            "last-7-days": "Last 7 day",
-            "last-14-days": "Last 14 days",
-            "last-30-days": "Last 30 days",
-            "last-60-days": "Last 60 days",
-            "last-90-days": "Last 90 days"
+            "last-7-days": "7 дней",
+            "last-14-days": "14 дней",
+            "last-30-days": "30 дней",
+            "last-60-days": "60 дней",
+            "last-90-days": "90 дней"
         }
     },
     "get-expiration-text": {

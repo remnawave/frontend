@@ -338,11 +338,11 @@
             "filter-nodes": "فیلتر کردن نودها",
             "bar": "میله",
             "line": "خط",
-            "last-7-days": "Last 7 day",
-            "last-14-days": "Last 14 days",
-            "last-30-days": "Last 30 days",
-            "last-60-days": "Last 60 days",
-            "last-90-days": "Last 90 days"
+            "last-7-days": "7 روز گذشته",
+            "last-14-days": "14 روز گذشته",
+            "last-30-days": "30 روز گذشته",
+            "last-60-days": "60 روز گذشته",
+            "last-90-days": "90 روز گذشته"
         }
     },
     "get-expiration-text": {
