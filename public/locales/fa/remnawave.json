@@ -515,7 +515,7 @@
             "limited-users-remarks": "Limited users remarks",
             "disabled-users-remarks": "Disabled users remarks",
             "update-settings": "Update settings",
-            "disabled": "معلول",
+            "disabled": "غیرفعال",
             "enabled": "فعال",
             "profile-webpage-url": "URL صفحه وب مشخصات",
             "profile-webpage-url-description": "توسط برخی از مشتری ها استفاده می شود. \nبه طور پیش فرض فعال شده ، دامنه از متغیر SUB_PUBLIC_DOMAIN .env حل شده است."
