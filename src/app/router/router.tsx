@@ -109,6 +109,16 @@ const router = createBrowserRouter(
                         path={ROUTES.DASHBOARD.TEMPLATES.XRAY_JSON}
                     />
                     <Route
+                        element={
+                            <TemplateBasePageConnector
+                                language="yaml"
+                                templateType={SUBSCRIPTION_TEMPLATE_TYPE.CLASH}
+                                title="Clash"
+                            />
+                        }
+                        path={ROUTES.DASHBOARD.TEMPLATES.CLASH}
+                    />
+                    <Route
                         element={<HappRoutingBuilderPageConnector />}
                         path={ROUTES.DASHBOARD.UTILS.HAPP_ROUTING_BUILDER}
                     />

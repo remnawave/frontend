@@ -520,7 +520,11 @@
             "disabled": "غیرفعال",
             "enabled": "فعال",
             "profile-webpage-url": "URL صفحه وب مشخصات",
-            "profile-webpage-url-description": "توسط برخی از مشتری ها استفاده می شود. \nبه طور پیش فرض فعال شده ، دامنه از متغیر SUB_PUBLIC_DOMAIN .env حل شده است."
+            "profile-webpage-url-description": "توسط برخی از مشتری ها استفاده می شود. \nبه طور پیش فرض فعال شده ، دامنه از متغیر SUB_PUBLIC_DOMAIN .env حل شده است.",
+            "serve-json-at-base-subscription": "Serve JSON at base subscription",
+            "serve-json-description": "This will allow you to serve JSON subscription at the base subscription path. If requested client supports it, it will be served as JSON, otherwise it will be served as usual.",
+            "add-username-to-base-subscription": "Add #username to base subscription",
+            "add-username-description": "This will add #username to the base subscription path at the subscription route."
         },
         "page": {
             "component": {

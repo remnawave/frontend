@@ -207,19 +207,7 @@ export const BaseNodeForm = <T extends CreateNodeCommand.Request | UpdateNodeCom
                     </Stack>
                 </Stack>
 
-                <Divider
-                    className="responsive-divider"
-                    orientation="vertical"
-                    styles={{
-                        root: {
-                            '@media (max-width: 48em)': {
-                                width: '100%',
-                                height: '1px',
-                                margin: '10px 0'
-                            }
-                        }
-                    }}
-                />
+                <Divider className="responsive-divider" orientation="vertical" visibleFrom="md" />
 
                 <Stack gap="md" style={{ flex: '1 1 350px' }}>
                     <Stack gap="xs" mb={10}>

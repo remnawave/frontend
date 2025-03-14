@@ -520,7 +520,11 @@
             "disabled": "Выключено",
             "enabled": "Включено",
             "profile-webpage-url": "Profile Webpage URL",
-            "profile-webpage-url-description": "Используется некоторыми клиентами. \nВключено по умолчанию, домен резволится из SUB_PUBLIC_DOMAIN .env переменной."
+            "profile-webpage-url-description": "Используется некоторыми клиентами. \nВключено по умолчанию, домен резволится из SUB_PUBLIC_DOMAIN .env переменной.",
+            "serve-json-at-base-subscription": "Serve JSON at base subscription",
+            "serve-json-description": "This will allow you to serve JSON subscription at the base subscription path. If requested client supports it, it will be served as JSON, otherwise it will be served as usual.",
+            "add-username-to-base-subscription": "Add #username to base subscription",
+            "add-username-description": "This will add #username to the base subscription path at the subscription route."
         },
         "page": {
             "component": {

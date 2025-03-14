@@ -89,6 +89,10 @@ export const useMenuSections = (): MenuItem[] => {
                             href: ROUTES.DASHBOARD.TEMPLATES.STASH
                         },
                         {
+                            name: 'Clash',
+                            href: ROUTES.DASHBOARD.TEMPLATES.CLASH
+                        },
+                        {
                             name: 'Singbox',
                             href: ROUTES.DASHBOARD.TEMPLATES.SINGBOX
                         },
