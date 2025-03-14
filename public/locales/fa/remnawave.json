@@ -236,7 +236,9 @@
             "data-limit-description": "محدودیت ترافیک را در گیگابیت وارد کنید، صفر به معنی نامحدود است",
             "username-cannot-be-changed-later": "نام کاربری نمی تواند بعدا تغییر داده شود",
             "loading-user-creation": "در حال بارگذاری صفحه ساخت کاربر",
-            "create-user": "ساخت کاربر"
+            "create-user": "ساخت کاربر",
+            "email-of-a-user": "ایمیل یک کاربر",
+            "telegram-id-of-a-user-in-telegram": "شناسه تلگرام یک کاربر در تلگرام"
         }
     },
     "login-form-feature": {

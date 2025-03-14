@@ -236,7 +236,9 @@
             "data-limit-description": "Enter data limit in GB, 0 for unlimited",
             "username-cannot-be-changed-later": "Username cannot be changed later",
             "loading-user-creation": "Loading user creation...",
-            "create-user": "Create user"
+            "create-user": "Create user",
+            "telegram-id-of-a-user-in-telegram": "Telegram ID of a user in Telegram",
+            "email-of-a-user": "Email of a user"
         }
     },
     "login-form-feature": {

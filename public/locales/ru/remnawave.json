@@ -236,7 +236,9 @@
             "data-limit-description": "Введите лимит данных в ГБ, 0 – безлимит.",
             "username-cannot-be-changed-later": "Имя пользователя нельзя будет изменить позже",
             "loading-user-creation": "Загрузка создания пользователя...",
-            "create-user": "Создать пользователя"
+            "create-user": "Создать пользователя",
+            "email-of-a-user": "Электронная почта пользователя",
+            "telegram-id-of-a-user-in-telegram": "Телеграмма идентификатор пользователя в Telegram"
         }
     },
     "login-form-feature": {
@@ -483,8 +485,8 @@
     },
     "remarks-manager": {
         "widget": {
-            "enter-remark": "Enter remark",
-            "add-remark": "Add remark"
+            "enter-remark": "Введите примечание",
+            "add-remark": "Добавить примечание"
         }
     },
     "subscription-settings": {
@@ -522,8 +524,8 @@
         },
         "page": {
             "component": {
-                "subscription-settings-description": "Настройки ниже в основном используются приложениями клиентов (то есть Happ, V2rayng Streisand и т. Д.)",
-                "subscription-settings-description-line-2": "Рекализуется изменение этих значений в соответствии с вашим услугами.",
+                "subscription-settings-description": "Настройки ниже в основном используются приложениями клиентов (то есть Happ, V2rayng Streisand и т.д.)",
+                "subscription-settings-description-line-2": "Вы можете изменить их на значения, которые будут соотвествовать вашему сервису.",
                 "what-is-subscription-settings": "Что такое настройки подписки?"
             }
         }

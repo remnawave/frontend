@@ -22,7 +22,7 @@
     font-family: var(--mantine-font-family-monospace);
     font-weight: bold;
     font-size: var(--mantine-font-size-md);
-    line-height: 1.3;
+    line-height: 1.2;
     color: var(--mantine-color-bright);
     max-width: 13ch;
 }

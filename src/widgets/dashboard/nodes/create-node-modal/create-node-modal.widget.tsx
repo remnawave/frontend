@@ -59,6 +59,7 @@ export const CreateNodeModalWidget = () => {
             centered
             onClose={handleClose}
             opened={isModalOpen}
+            size="900px"
             title={
                 <Group gap="xl" justify="space-between">
                     <Text fw={500}>{t('create-node-modal.widget.create-node')}</Text>
