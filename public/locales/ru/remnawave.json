@@ -237,8 +237,8 @@
             "username-cannot-be-changed-later": "Имя пользователя нельзя будет изменить позже",
             "loading-user-creation": "Загрузка создания пользователя...",
             "create-user": "Создать пользователя",
-            "email-of-a-user": "Электронная почта пользователя",
-            "telegram-id-of-a-user-in-telegram": "Телеграмма идентификатор пользователя в Telegram"
+            "email-of-a-user": "Email пользователя",
+            "telegram-id-of-a-user-in-telegram": "Telegram ID пользователя в Telegram"
         }
     },
     "login-form-feature": {
