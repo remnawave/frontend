@@ -309,11 +309,11 @@ export const SubscriptionSettingsWidget = (props: IProps) => {
                         </Title>
 
                         <Text c="dimmed" component="div" size="sm">
-                            {t('subscription-settings.widget.user-status-remarks-description')}{' '}
+                            {t('subscription-settings.widget.user-status-remarks-description')}
                             <br />
                             {t(
                                 'subscription-settings.widget.user-status-remarks-description-line-2'
-                            )}{' '}
+                            )}
                             <br />
                             {t(
                                 'subscription-settings.widget.user-status-remarks-description-line-3'
