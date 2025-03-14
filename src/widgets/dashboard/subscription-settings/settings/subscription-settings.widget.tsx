@@ -320,23 +320,31 @@ export const SubscriptionSettingsWidget = (props: IProps) => {
                             )}
                         </Text>
 
-                        <RemarksManager
-                            initialRemarks={remarks.expired}
-                            onChange={updateExpiredRemarks}
-                            title={t('subscription-settings.widget.expired-users-remarks')}
-                        />
+                        <Grid>
+                            <Grid.Col span={{ xs: 12, sm: 6, md: 4 }}>
+                                <RemarksManager
+                                    initialRemarks={remarks.expired}
+                                    onChange={updateExpiredRemarks}
+                                    title={t('subscription-settings.widget.expired-users-remarks')}
+                                />
+                            </Grid.Col>
 
-                        <RemarksManager
-                            initialRemarks={remarks.limited}
-                            onChange={updateLimitedRemarks}
-                            title={t('subscription-settings.widget.limited-users-remarks')}
-                        />
+                            <Grid.Col span={{ xs: 12, sm: 6, md: 4 }}>
+                                <RemarksManager
+                                    initialRemarks={remarks.limited}
+                                    onChange={updateLimitedRemarks}
+                                    title={t('subscription-settings.widget.limited-users-remarks')}
+                                />
+                            </Grid.Col>
 
-                        <RemarksManager
-                            initialRemarks={remarks.disabled}
-                            onChange={updateDisabledRemarks}
-                            title={t('subscription-settings.widget.disabled-users-remarks')}
-                        />
+                            <Grid.Col span={{ xs: 12, sm: 6, md: 4 }}>
+                                <RemarksManager
+                                    initialRemarks={remarks.disabled}
+                                    onChange={updateDisabledRemarks}
+                                    title={t('subscription-settings.widget.disabled-users-remarks')}
+                                />
+                            </Grid.Col>
+                        </Grid>
                     </Stack>
                 </Paper>
 
