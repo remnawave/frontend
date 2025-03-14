@@ -6,7 +6,7 @@ import { IProps } from './interfaces'
 export function InboundCheckboxCardWidget(props: IProps) {
     const { inbound } = props
     return (
-        <Tooltip label={`${inbound.tag}`}>
+        <Tooltip label={inbound.tag}>
             <Checkbox.Card
                 className={classes.root}
                 key={inbound.uuid}
