@@ -1,5 +1,7 @@
 import {
+    Box,
     Button,
+    Checkbox,
     Grid,
     Group,
     NumberInput,
@@ -95,7 +97,9 @@ export const SubscriptionSettingsWidget = (props: IProps) => {
 
                 expiredUsersRemarks: subscriptionSettings.expiredUsersRemarks,
                 limitedUsersRemarks: subscriptionSettings.limitedUsersRemarks,
-                disabledUsersRemarks: subscriptionSettings.disabledUsersRemarks
+                disabledUsersRemarks: subscriptionSettings.disabledUsersRemarks,
+                serveJsonAtBaseSubscription: subscriptionSettings.serveJsonAtBaseSubscription,
+                addUsernameToBaseSubscription: subscriptionSettings.addUsernameToBaseSubscription
             })
         }
     }, [subscriptionSettings])
@@ -209,6 +213,40 @@ export const SubscriptionSettingsWidget = (props: IProps) => {
                                     {...form.getInputProps('isProfileWebpageUrlEnabled')}
                                 />
                             </Grid.Col>
+
+                            <Grid.Col span={{ xs: 12, sm: 6 }}>
+                                <Box mb="md">
+                                    <Checkbox
+                                        key={form.key('serveJsonAtBaseSubscription')}
+                                        label={t(
+                                            'subscription-settings.widget.serve-json-at-base-subscription'
+                                        )}
+                                        {...form.getInputProps('serveJsonAtBaseSubscription', {
+                                            type: 'checkbox'
+                                        })}
+                                    />
+                                    <Text c="dimmed" component="div" ml={30} size="sm">
+                                        {t('subscription-settings.widget.serve-json-description')}
+                                    </Text>
+                                </Box>
+                            </Grid.Col>
+
+                            <Grid.Col span={{ xs: 12, sm: 6 }}>
+                                <Box>
+                                    <Checkbox
+                                        key={form.key('addUsernameToBaseSubscription')}
+                                        label={t(
+                                            'subscription-settings.widget.add-username-to-base-subscription'
+                                        )}
+                                        {...form.getInputProps('addUsernameToBaseSubscription', {
+                                            type: 'checkbox'
+                                        })}
+                                    />
+                                    <Text c="dimmed" component="div" ml={30} size="sm">
+                                        {t('subscription-settings.widget.add-username-description')}
+                                    </Text>
+                                </Box>
+                            </Grid.Col>
                         </Grid>
                     </Stack>
                 </Paper>
@@ -232,19 +270,18 @@ export const SubscriptionSettingsWidget = (props: IProps) => {
 
                         <Textarea
                             description={
-                                <Stack>
-                                    <Text c="dimmed" size="sm">
-                                        {t('subscription-settings.widget.happ-routing-description')}{' '}
-                                        <br />
-                                        {t(
-                                            'subscription-settings.widget.happ-routing-description-line-2'
-                                        )}
-                                        <br />
-                                    </Text>
+                                <>
+                                    {t('subscription-settings.widget.happ-routing-description')}{' '}
+                                    <br />
+                                    {t(
+                                        'subscription-settings.widget.happ-routing-description-line-2'
+                                    )}
+                                    <br />
                                     <Button
                                         color="grape"
                                         leftSection={<PiGear size="1.2rem" />}
                                         mb="md"
+                                        mt={'md'}
                                         onClick={() => {
                                             navigate(ROUTES.DASHBOARD.UTILS.HAPP_ROUTING_BUILDER)
                                         }}
@@ -254,7 +291,7 @@ export const SubscriptionSettingsWidget = (props: IProps) => {
                                     >
                                         {t('subscription-settings.widget.configure-happ-routing')}
                                     </Button>
-                                </Stack>
+                                </>
                             }
                             key={form.key('happRouting')}
                             label={t('subscription-settings.widget.happ-routing')}
@@ -271,35 +308,43 @@ export const SubscriptionSettingsWidget = (props: IProps) => {
                             {t('subscription-settings.widget.user-status-remarks')}
                         </Title>
 
-                        <Text c="dimmed" size="sm">
-                            {t('subscription-settings.widget.user-status-remarks-description')}{' '}
+                        <Text c="dimmed" component="div" size="sm">
+                            {t('subscription-settings.widget.user-status-remarks-description')}
                             <br />
                             {t(
                                 'subscription-settings.widget.user-status-remarks-description-line-2'
-                            )}{' '}
+                            )}
                             <br />
                             {t(
                                 'subscription-settings.widget.user-status-remarks-description-line-3'
                             )}
                         </Text>
 
-                        <RemarksManager
-                            initialRemarks={remarks.expired}
-                            onChange={updateExpiredRemarks}
-                            title={t('subscription-settings.widget.expired-users-remarks')}
-                        />
+                        <Grid>
+                            <Grid.Col span={{ xs: 12, sm: 6, md: 4 }}>
+                                <RemarksManager
+                                    initialRemarks={remarks.expired}
+                                    onChange={updateExpiredRemarks}
+                                    title={t('subscription-settings.widget.expired-users-remarks')}
+                                />
+                            </Grid.Col>
 
-                        <RemarksManager
-                            initialRemarks={remarks.limited}
-                            onChange={updateLimitedRemarks}
-                            title={t('subscription-settings.widget.limited-users-remarks')}
-                        />
+                            <Grid.Col span={{ xs: 12, sm: 6, md: 4 }}>
+                                <RemarksManager
+                                    initialRemarks={remarks.limited}
+                                    onChange={updateLimitedRemarks}
+                                    title={t('subscription-settings.widget.limited-users-remarks')}
+                                />
+                            </Grid.Col>
 
-                        <RemarksManager
-                            initialRemarks={remarks.disabled}
-                            onChange={updateDisabledRemarks}
-                            title={t('subscription-settings.widget.disabled-users-remarks')}
-                        />
+                            <Grid.Col span={{ xs: 12, sm: 6, md: 4 }}>
+                                <RemarksManager
+                                    initialRemarks={remarks.disabled}
+                                    onChange={updateDisabledRemarks}
+                                    title={t('subscription-settings.widget.disabled-users-remarks')}
+                                />
+                            </Grid.Col>
+                        </Grid>
                     </Stack>
                 </Paper>
 

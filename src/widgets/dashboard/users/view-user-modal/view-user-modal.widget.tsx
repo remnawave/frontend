@@ -309,15 +309,7 @@ export const ViewUserModal = () => {
                         <Divider
                             className="responsive-divider"
                             orientation="vertical"
-                            styles={{
-                                root: {
-                                    '@media (max-width: 48em)': {
-                                        width: '100%',
-                                        height: '1px',
-                                        margin: '10px 0'
-                                    }
-                                }
-                            }}
+                            visibleFrom="md"
                         />
 
                         {/* Right Section - Connection Details */}

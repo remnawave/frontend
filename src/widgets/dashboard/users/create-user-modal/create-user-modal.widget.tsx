@@ -66,7 +66,7 @@ export const CreateUserModalWidget = () => {
             activeUserInbounds: [],
             description: '',
             telegramId: undefined,
-            email: ''
+            email: undefined
         }
     })
 
@@ -189,15 +189,7 @@ export const CreateUserModalWidget = () => {
                         <Divider
                             className="responsive-divider"
                             orientation="vertical"
-                            styles={{
-                                root: {
-                                    '@media (max-width: 48em)': {
-                                        width: '100%',
-                                        height: '1px',
-                                        margin: '10px 0'
-                                    }
-                                }
-                            }}
+                            visibleFrom="md"
                         />
 
                         <Stack gap="md" style={{ flex: '1 1 350px' }}>

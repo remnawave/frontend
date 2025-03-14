@@ -19,7 +19,8 @@ export const ROUTES = {
             MIHOMO: '/dashboard/templates/mihomo',
             SINGBOX_LEGACY: '/dashboard/templates/sg-legacy',
             SINGBOX: '/dashboard/templates/singbox',
-            STASH: '/dashboard/templates/stash'
+            STASH: '/dashboard/templates/stash',
+            CLASH: '/dashboard/templates/clash'
         },
         SUBSCRIPTION_SETTINGS: '/dashboard/subscription-settings',
         UTILS: {
