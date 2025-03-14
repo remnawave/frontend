@@ -530,7 +530,7 @@
             "component": {
                 "what-is-subscription-settings": "What is subscription settings?",
                 "subscription-settings-description": "The settings below apply to subscription link details used and displayed by clients apps such as Happ, V2RayNG, Streisand, etc.",
-                "subscription-settings-description-line-2": "It is reccomended to change the values to match your specific needs and circumstances."
+                "subscription-settings-description-line-2": "It is recommended to change the values to match your specific needs and circumstances."
             }
         }
     }
