@@ -196,7 +196,8 @@
         "widget": {
             "last-error-message": "آخرین پیام خطا",
             "important-note-description": "برای اتصال نود، شما نیاز دارید که Remnanode را با موارد زیر اجرا کنید",
-            "important-note": "یادداشت مهم"
+            "important-note": "یادداشت مهم",
+            "important-note-description-value": "ارزش \nکپی و چسباندن آن در Remnanode"
         }
     },
     "node-card": {

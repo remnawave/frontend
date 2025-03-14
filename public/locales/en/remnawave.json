@@ -196,6 +196,7 @@
         "widget": {
             "last-error-message": "Last error message",
             "important-note-description": "In order to connect node, you need to run Remnawave Node with the following",
+            "important-note-description-value": "value. Copy and paste it into the Remnanode ",
             "important-note": "Important note"
         }
     },

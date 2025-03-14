@@ -25,16 +25,18 @@ export const ModalAccordionWidget = (props: IProps) => {
     return (
         <Accordion defaultValue={accordionValue} key={node?.uuid} radius="md" variant="contained">
             <Accordion.Item value="info">
-                <Accordion.Control icon={<PiInfo color="gray" size={'1.50rem'} />}>
+                <Accordion.Control icon={<PiInfo color="red" size={'1.50rem'} />}>
                     {t('error-accordeon.widget.important-note')}
                 </Accordion.Control>
                 <Accordion.Panel>
                     <Stack gap={'0'}>
                         <Text>
-                            {t('error-accordeon.widget.important-note-description')}{' '}
-                            <Code color="var(--mantine-color-blue-light)">.env</Code> value.
+                            {t('error-accordeon.widget.important-note-description')}
+                            <Code color="var(--mantine-color-blue-light)">.env</Code>
+                            {t('error-accordeon.widget.important-note-description-value')}
+                            <Code color="var(--mantine-color-blue-light)">.env</Code>
                         </Text>
-                        <Group justify="flex-end">
+                        <Group justify="flex-end" mt="md">
                             <CopyButton value={`SSL_CERT="${pubKey?.pubKey.trimEnd()}"`}>
                                 {({ copied, copy }) => (
                                     <ActionIcon

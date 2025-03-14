@@ -196,7 +196,8 @@
         "widget": {
             "last-error-message": "Последнее сообщение об ошибке",
             "important-note-description": "Чтобы подключить ноду, Вам нужно запустить Remnawave Node со следующим",
-            "important-note": "Важно"
+            "important-note": "Важная информация",
+            "important-note-description-value": "значением. \nСкопируйте и вставьте его в Remnanode "
         }
     },
     "node-card": {
