@@ -107,6 +107,7 @@ export const EditNodeModalConnectorWidget = () => {
             centered
             onClose={handleClose}
             opened={isModalOpen}
+            size="900px"
             title={
                 <Group gap="xl" justify="space-between">
                     <Text fw={500}>{t('edit-node-modal.widget.edit-node')}</Text>

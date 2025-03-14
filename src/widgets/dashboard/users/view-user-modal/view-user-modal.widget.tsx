@@ -21,9 +21,11 @@ import {
     PiCheck,
     PiClockDuotone,
     PiCopy,
+    PiEnvelopeDuotone,
     PiFloppyDiskDuotone,
     PiLinkDuotone,
     PiQrCodeDuotone,
+    PiTelegramLogoDuotone,
     PiUserDuotone
 } from 'react-icons/pi'
 import { UpdateUserCommand } from '@remnawave/backend-contract'
@@ -165,9 +167,9 @@ export const ViewUserModal = () => {
                 <LoaderModalShared h="400" text={t('view-user-modal.widget.loading-user-data')} />
             ) : (
                 <form key="view-user-form" onSubmit={handleSubmit}>
-                    <Group align="flex-start" grow={false}>
+                    <Group align="flex-start" gap="md" grow={false} wrap="wrap">
                         {/* Left Section - User Settings */}
-                        <Stack gap="md" key="view-user-details-stack" w={400}>
+                        <Stack gap="md" style={{ flex: '1 1 350px' }}>
                             <Group gap="xs" justify="space-between" w="100%">
                                 <Text fw={500} key="view-user-details-text">
                                     {t('view-user-modal.widget.user-details')}
@@ -281,14 +283,17 @@ export const ViewUserModal = () => {
                             />
 
                             <NumberInput
+                                allowDecimal={false}
                                 key={form.key('telegramId')}
                                 label="Telegram ID"
+                                leftSection={<PiTelegramLogoDuotone size="1rem" />}
                                 {...form.getInputProps('telegramId')}
                             />
 
                             <TextInput
                                 key={form.key('email')}
                                 label="Email"
+                                leftSection={<PiEnvelopeDuotone size="1rem" />}
                                 {...form.getInputProps('email')}
                             />
 
@@ -301,10 +306,22 @@ export const ViewUserModal = () => {
                             />
                         </Stack>
 
-                        <Divider orientation="vertical" />
+                        <Divider
+                            className="responsive-divider"
+                            orientation="vertical"
+                            styles={{
+                                root: {
+                                    '@media (max-width: 48em)': {
+                                        width: '100%',
+                                        height: '1px',
+                                        margin: '10px 0'
+                                    }
+                                }
+                            }}
+                        />
 
                         {/* Right Section - Connection Details */}
-                        <Stack gap="md" w={400}>
+                        <Stack gap="md" style={{ flex: '1 1 350px' }}>
                             <Text fw={500}>{t('view-user-modal.widget.connection-details')}</Text>
 
                             <NumberInput

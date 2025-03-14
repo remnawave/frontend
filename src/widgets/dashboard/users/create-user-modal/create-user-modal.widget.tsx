@@ -15,7 +15,9 @@ import {
 import {
     PiCalendarDuotone,
     PiClockDuotone,
+    PiEnvelopeDuotone,
     PiFloppyDiskDuotone,
+    PiTelegramLogoDuotone,
     PiUserDuotone
 } from 'react-icons/pi'
 import { CreateUserCommand, USERS_STATUS } from '@remnawave/backend-contract'
@@ -62,7 +64,9 @@ export const CreateUserModalWidget = () => {
             expireAt: new Date(Date.now() + 24 * 60 * 60 * 1000),
             trafficLimitBytes: 0,
             activeUserInbounds: [],
-            description: ''
+            description: '',
+            telegramId: undefined,
+            email: ''
         }
     })
 
@@ -90,7 +94,9 @@ export const CreateUserModalWidget = () => {
                 expireAt: dayjs(values.expireAt).toISOString(),
                 activeUserInbounds: values.activeUserInbounds,
                 status: values.status,
-                description: values.description
+                description: values.description,
+                telegramId: values.telegramId,
+                email: values.email
             }
         })
     })
@@ -100,6 +106,7 @@ export const CreateUserModalWidget = () => {
             centered
             onClose={handleCloseModal}
             opened={isModalOpen}
+            size="900px"
             title={t('create-user-modal.widget.create-user')}
         >
             {isLoading ? (
@@ -109,14 +116,15 @@ export const CreateUserModalWidget = () => {
                 />
             ) : (
                 <form onSubmit={handleSubmit}>
-                    <Group align="flex-start" grow={false}>
-                        <Stack gap="md" w={400}>
+                    <Group align="flex-start" gap="md" grow={false} wrap="wrap">
+                        <Stack gap="md" style={{ flex: '1 1 350px' }}>
                             <TextInput
                                 description={t(
                                     'create-user-modal.widget.username-cannot-be-changed-later'
                                 )}
                                 key={form.key('username')}
                                 label={t('login-form-feature.username')}
+                                required
                                 {...form.getInputProps('username')}
                                 leftSection={<PiUserDuotone size="1rem" />}
                             />
@@ -163,6 +171,7 @@ export const CreateUserModalWidget = () => {
                                 key={form.key('expireAt')}
                                 label={t('create-user-modal.widget.expiry-date')}
                                 minDate={new Date()}
+                                required
                                 valueFormat="MMMM D, YYYY - HH:mm"
                                 {...form.getInputProps('expireAt')}
                                 leftSection={<PiCalendarDuotone size="1rem" />}
@@ -174,6 +183,41 @@ export const CreateUserModalWidget = () => {
                                 label={t('use-table-columns.description')}
                                 resize="vertical"
                                 {...form.getInputProps('description')}
+                            />
+                        </Stack>
+
+                        <Divider
+                            className="responsive-divider"
+                            orientation="vertical"
+                            styles={{
+                                root: {
+                                    '@media (max-width: 48em)': {
+                                        width: '100%',
+                                        height: '1px',
+                                        margin: '10px 0'
+                                    }
+                                }
+                            }}
+                        />
+
+                        <Stack gap="md" style={{ flex: '1 1 350px' }}>
+                            <NumberInput
+                                allowDecimal={false}
+                                description={t(
+                                    'create-user-modal.widget.telegram-id-of-a-user-in-telegram'
+                                )}
+                                key={form.key('telegramId')}
+                                label="Telegram ID"
+                                leftSection={<PiTelegramLogoDuotone size="1rem" />}
+                                {...form.getInputProps('telegramId')}
+                            />
+
+                            <TextInput
+                                description={t('create-user-modal.widget.email-of-a-user')}
+                                key={form.key('email')}
+                                label="Email"
+                                leftSection={<PiEnvelopeDuotone size="1rem" />}
+                                {...form.getInputProps('email')}
                             />
 
                             <Checkbox.Group
