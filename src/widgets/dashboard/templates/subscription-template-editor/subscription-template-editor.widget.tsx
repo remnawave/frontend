@@ -55,7 +55,8 @@ export function SubscriptionTemplateEditorWidget(props: Props) {
                 style={{
                     resize: 'vertical',
                     overflow: 'hidden',
-                    height: '700px'
+                    height: '700px',
+                    direction: 'ltr'
                 }}
                 withBorder
             >
