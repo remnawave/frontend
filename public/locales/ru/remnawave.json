@@ -298,7 +298,12 @@
         "host-e-g-example-com": "Хост (например, example.com)",
         "e-g-example-com": "например, example.com",
         "e-g-443": "например, 443",
-        "path-e-g-ws": "путь (например, /ws)"
+        "path-e-g-ws": "путь (например, /ws)",
+        "here-you-can-override-security-settings-from-xtls-config": "Здесь вы можете переопределить настройки безопасности из конфигурации XTLS.",
+        "inbounds-default": "По умолчанию",
+        "none": "None",
+        "security-layer": "Security Layer",
+        "tls-transport-layer-security": "TLS"
     },
     "base-node-form": {
         "country": "Страна",

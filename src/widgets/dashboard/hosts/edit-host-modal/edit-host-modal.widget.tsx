@@ -52,6 +52,7 @@ export const EditHostModalWidget = () => {
                 address: host.address,
                 port: host.port,
                 inboundUuid: host.inboundUuid,
+                securityLayer: host.securityLayer,
                 isDisabled: !host.isDisabled,
                 sni: host.sni ?? undefined,
                 host: host.host ?? undefined,

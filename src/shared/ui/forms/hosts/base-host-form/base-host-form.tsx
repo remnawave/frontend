@@ -7,15 +7,17 @@ import {
     Select,
     Stack,
     Switch,
-    TextInput
+    TextInput,
+    Tooltip
 } from '@mantine/core'
 import {
     ALPN,
     CreateHostCommand,
     FINGERPRINTS,
+    SECURITY_LAYERS,
     UpdateHostCommand
 } from '@remnawave/backend-contract'
-import { PiCaretDown, PiCaretUp, PiFloppyDiskDuotone } from 'react-icons/pi'
+import { PiCaretDown, PiCaretUp, PiFloppyDiskDuotone, PiInfo } from 'react-icons/pi'
 import { useTranslation } from 'react-i18next'
 
 import { DeleteHostFeature } from '@features/ui/dashboard/hosts/delete-host'
@@ -30,6 +32,12 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
         props
 
     const { t } = useTranslation()
+
+    const securityLayerLabels = {
+        [SECURITY_LAYERS.TLS]: t('base-host-form.tls-transport-layer-security'),
+        [SECURITY_LAYERS.NONE]: t('base-host-form.none'),
+        [SECURITY_LAYERS.DEFAULT]: t('base-host-form.inbounds-default')
+    }
 
     return (
         <form onSubmit={handleSubmit}>
@@ -140,6 +148,41 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
                                 label={t('base-host-form.path')}
                                 placeholder={t('base-host-form.path-e-g-ws')}
                                 {...form.getInputProps('path')}
+                            />
+
+                            <Select
+                                allowDeselect={false}
+                                clearable={false}
+                                data={Object.values(SECURITY_LAYERS).map((securityLayer) => ({
+                                    label: securityLayerLabels[securityLayer] || securityLayer,
+                                    value: securityLayer
+                                }))}
+                                key={form.key('securityLayer')}
+                                label={t('base-host-form.security-layer')}
+                                leftSection={
+                                    <Tooltip
+                                        events={{ hover: true, focus: true, touch: false }}
+                                        label={t(
+                                            'base-host-form.here-you-can-override-security-settings-from-xtls-config'
+                                        )}
+                                        multiline
+                                        offset={10}
+                                        transitionProps={{ duration: 200 }}
+                                        w={220}
+                                        withArrow
+                                    >
+                                        <span
+                                            style={{
+                                                cursor: 'pointer',
+                                                display: 'flex',
+                                                alignItems: 'center'
+                                            }}
+                                        >
+                                            <PiInfo size="1.25rem" />
+                                        </span>
+                                    </Tooltip>
+                                }
+                                {...form.getInputProps('securityLayer')}
                             />
 
                             <Select

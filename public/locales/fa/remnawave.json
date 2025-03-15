@@ -298,7 +298,12 @@
         "host-e-g-example-com": "هاست (مثلا example.com)",
         "e-g-example-com": "مثلا example.com",
         "e-g-443": "مثلا 443",
-        "path-e-g-ws": "مسیر (مثلا /ws)"
+        "path-e-g-ws": "مسیر (مثلا /ws)",
+        "here-you-can-override-security-settings-from-xtls-config": "در اینجا می توانید تنظیمات امنیتی را از پیکربندی XTLS نادیده بگیرید.",
+        "inbounds-default": "پیش فرض ورودی",
+        "none": "هیچ کدام",
+        "security-layer": "لایه امنیتی",
+        "tls-transport-layer-security": "TLS (امنیت لایه حمل و نقل)"
     },
     "base-node-form": {
         "country": "کشور",
