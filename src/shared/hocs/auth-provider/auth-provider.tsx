@@ -1,7 +1,6 @@
 import { createContext, ReactNode, useEffect, useMemo, useState } from 'react'
 
 import { resetAllStores } from '@shared/hocs/store-wrapper'
-import { clearQueryClient } from '@shared/api/query-client'
 import { removeToken, useToken } from '@entities/auth'
 import { logoutEvents } from '@shared/emitters'
 
@@ -21,13 +20,22 @@ interface AuthProviderProps {
 export function AuthProvider({ children }: AuthProviderProps) {
     const [isAuthenticated, setIsAuthenticated] = useState(false)
     const [isInitialized, setIsInitialized] = useState(false)
+    const [isLoggedOut, setIsLoggedOut] = useState(false)
     const token = useToken()
 
     const logoutUser = () => {
-        setIsAuthenticated(false)
-        removeToken()
-        resetAllStores()
-        clearQueryClient()
+        if (isLoggedOut) {
+            return
+        }
+
+        try {
+            setIsLoggedOut(true)
+            setIsAuthenticated(false)
+            removeToken()
+            resetAllStores()
+        } finally {
+            setIsLoggedOut(false)
+        }
     }
 
     useEffect(() => {
@@ -48,6 +56,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
             try {
                 setIsAuthenticated(true)
+                setIsLoggedOut(false)
             } catch (error) {
                 logoutUser()
             } finally {

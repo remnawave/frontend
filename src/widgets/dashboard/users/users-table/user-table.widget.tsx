@@ -112,6 +112,17 @@ export function UserTableWidget() {
             withBorder: false
         },
         rowCount: totalRowCount,
+        enableRowSelection: true,
+        mantineSelectCheckboxProps: {
+            size: 'md',
+            color: 'cyan',
+            variant: 'outline'
+        },
+        mantineSelectAllCheckboxProps: {
+            size: 'md',
+            color: 'cyan',
+            variant: 'outline'
+        },
         enableColumnPinning: true,
         state: {
             columnFilterFns,

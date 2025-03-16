@@ -14,11 +14,13 @@ const DEFAULT_VISIBILITY: MRT_VisibilityState = {
     onlineAt: false,
     subLastUserAgent: false,
     lifetimeUsedTrafficBytes: false,
-    description: false
+    description: false,
+    telegramId: false,
+    email: false
 }
 
 const DEFAULT_PINNING: MRT_ColumnPinningState = {
-    left: ['mrt-row-actions', 'username'],
+    left: ['mrt-row-actions', 'mrt-row-select', 'username'],
     right: []
 }
 
@@ -58,7 +60,7 @@ export const useUsersTableStore = create<IActions & IState>()(
         }),
 
         {
-            name: 'users-table-storage',
+            name: 'users-column-storage',
             version: 1,
             storage: createJSONStorage(() => localStorage),
             partialize: (state) => ({

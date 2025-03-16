@@ -1,4 +1,3 @@
-import { notifications } from '@mantine/notifications'
 import consola from 'consola/browser'
 import axios from 'axios'
 
@@ -51,10 +50,10 @@ instance.interceptors.response.use(
                     consola.log('error', error)
                 }
 
-                notifications.show({
-                    title: 'Unauthorized',
-                    message: 'You are not authorized to access this resource.'
-                })
+                // notifications.show({
+                //     title: 'Unauthorized',
+                //     message: 'You are not authorized to access this resource.'
+                // })
             }
         }
         return Promise.reject(error)
