@@ -136,19 +136,28 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
                                 {...form.getInputProps('sni')}
                             />
 
-                            <TextInput
-                                key={form.key('host')}
-                                label={t('base-host-form.host')}
-                                placeholder={t('base-host-form.host-e-g-example-com')}
-                                {...form.getInputProps('host')}
-                            />
-
-                            <TextInput
-                                key={form.key('path')}
-                                label={t('base-host-form.path')}
-                                placeholder={t('base-host-form.path-e-g-ws')}
-                                {...form.getInputProps('path')}
-                            />
+                            <Group
+                                gap="xs"
+                                grow
+                                justify="space-between"
+                                preventGrowOverflow={false}
+                                w="100%"
+                            >
+                                <TextInput
+                                    key={form.key('host')}
+                                    label={t('base-host-form.host')}
+                                    placeholder={t('base-host-form.host-e-g-example-com')}
+                                    {...form.getInputProps('host')}
+                                    w="55%"
+                                />
+                                <TextInput
+                                    key={form.key('path')}
+                                    label={t('base-host-form.path')}
+                                    placeholder={t('base-host-form.path-e-g-ws')}
+                                    {...form.getInputProps('path')}
+                                    w="40%"
+                                />
+                            </Group>
 
                             <Select
                                 allowDeselect={false}
@@ -185,29 +194,39 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
                                 {...form.getInputProps('securityLayer')}
                             />
 
-                            <Select
-                                clearable
-                                data={Object.values(ALPN).map((alpn) => ({
-                                    label: alpn,
-                                    value: alpn
-                                }))}
-                                key={form.key('alpn')}
-                                label="ALPN"
-                                placeholder={t('base-host-form.alpn-e-g-h2')}
-                                {...form.getInputProps('alpn')}
-                            />
+                            <Group
+                                gap="xs"
+                                grow
+                                justify="space-between"
+                                preventGrowOverflow={false}
+                                w="100%"
+                            >
+                                <Select
+                                    clearable
+                                    data={Object.values(ALPN).map((alpn) => ({
+                                        label: alpn,
+                                        value: alpn
+                                    }))}
+                                    key={form.key('alpn')}
+                                    label="ALPN"
+                                    placeholder={t('base-host-form.alpn-e-g-h2')}
+                                    {...form.getInputProps('alpn')}
+                                    w="40%"
+                                />
 
-                            <Select
-                                clearable
-                                data={Object.values(FINGERPRINTS).map((fingerprint) => ({
-                                    label: fingerprint,
-                                    value: fingerprint
-                                }))}
-                                key={form.key('fingerprint')}
-                                label={t('base-host-form.fingerprint')}
-                                placeholder={t('base-host-form.fingerprint-e-g-chrome')}
-                                {...form.getInputProps('fingerprint')}
-                            />
+                                <Select
+                                    clearable
+                                    data={Object.values(FINGERPRINTS).map((fingerprint) => ({
+                                        label: fingerprint,
+                                        value: fingerprint
+                                    }))}
+                                    key={form.key('fingerprint')}
+                                    label={t('base-host-form.fingerprint')}
+                                    placeholder={t('base-host-form.fingerprint-e-g-chrome')}
+                                    {...form.getInputProps('fingerprint')}
+                                    w="55%"
+                                />
+                            </Group>
                         </Stack>
                     </Collapse>
                 </Stack>
