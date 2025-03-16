@@ -545,7 +545,7 @@
         "widget": {
             "list-of-all-inbounds": "List of all inbounds",
             "inbounds": "Inbounds",
-            "impotant-note": "Impotant note",
+            "important-note": "Important note",
             "important-note-description-line-1": "All bulk operations require a complete restart of all nodes.",
             "important-note-description-line-2": "Please avoid making too many requests in a short period of time.",
             "important-note-description-line-3": "After saving changes, it may take up to 30 seconds for them to be applied across all nodes."
