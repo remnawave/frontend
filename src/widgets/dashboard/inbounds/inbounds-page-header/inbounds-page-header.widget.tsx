@@ -21,7 +21,7 @@ export function InboundsPageHeaderWidget() {
                         <Accordion.Control
                             icon={<PiInfoDuotone color="var(--mantine-color-red-6)" size={20} />}
                         >
-                            {t('inbounds-page-header.widget.impotant-note')}
+                            {t('inbounds-page-header.widget.important-note')}
                         </Accordion.Control>
                         <Accordion.Panel>
                             {t('inbounds-page-header.widget.important-note-description-line-1')}{' '}
