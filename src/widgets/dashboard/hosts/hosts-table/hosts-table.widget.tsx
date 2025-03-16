@@ -1,7 +1,8 @@
 import { DragDropContext, Droppable, DropResult } from '@hello-pangea/dnd'
 import { useListState } from '@mantine/hooks'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
+import { MultiSelectHostsFeature } from '@features/dashboard/hosts/multi-select-hosts/multi-select-hosts.feature'
 import { HostCardWidget } from '@widgets/dashboard/hosts/host-card'
 import { EmptyPageLayout } from '@shared/ui/layouts/empty-page'
 import { useReorderHosts } from '@shared/api/hooks'
@@ -12,6 +13,8 @@ export function HostsTableWidget(props: IProps) {
     const { inbounds, hosts } = props
 
     const [state, handlers] = useListState(hosts || [])
+    const [selectedHosts, setSelectedHosts] = useState<string[]>([])
+
     const { mutate: reorderHosts } = useReorderHosts()
 
     useEffect(() => {
@@ -50,23 +53,41 @@ export function HostsTableWidget(props: IProps) {
         handlers.reorder({ from: source.index, to: destination?.index || 0 })
     }
 
+    const toggleHostSelection = (hostId: string) => {
+        setSelectedHosts((prev) =>
+            prev.includes(hostId) ? prev.filter((id) => id !== hostId) : [...prev, hostId]
+        )
+    }
+
     return (
-        <DragDropContext onDragEnd={handleDragEnd}>
-            <Droppable direction="vertical" droppableId="dnd-list">
-                {(provided) => (
-                    <div {...provided.droppableProps} ref={provided.innerRef}>
-                        {state.map((item, index) => (
-                            <HostCardWidget
-                                inbounds={inbounds}
-                                index={index}
-                                item={item}
-                                key={item.uuid}
-                            />
-                        ))}
-                        {provided.placeholder}
-                    </div>
-                )}
-            </Droppable>
-        </DragDropContext>
+        <>
+            <DragDropContext onDragEnd={handleDragEnd}>
+                <Droppable direction="vertical" droppableId="dnd-list">
+                    {(provided) => (
+                        <div {...provided.droppableProps} ref={provided.innerRef}>
+                            {state.map((item, index) => (
+                                <div key={item.uuid} style={{ position: 'relative' }}>
+                                    <HostCardWidget
+                                        inbounds={inbounds}
+                                        index={index}
+                                        isSelected={selectedHosts.includes(item.uuid)}
+                                        item={item}
+                                        onSelect={() => toggleHostSelection(item.uuid)}
+                                    />
+                                </div>
+                            ))}
+                            {provided.placeholder}
+                        </div>
+                    )}
+                </Droppable>
+            </DragDropContext>
+
+            <MultiSelectHostsFeature
+                hosts={hosts}
+                inbounds={inbounds}
+                selectedHosts={selectedHosts}
+                setSelectedHosts={setSelectedHosts}
+            />
+        </>
     )
 }

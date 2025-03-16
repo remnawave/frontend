@@ -2,6 +2,7 @@ import {
     PiAirTrafficControlDuotone,
     PiBarcodeDuotone,
     PiBookmarksDuotone,
+    PiBoundingBoxDuotone,
     PiBracketsCurly,
     PiComputerTowerDuotone,
     PiCookie,
@@ -38,6 +39,11 @@ export const useMenuSections = (): MenuItem[] => {
                     name: t('constants.hosts'),
                     href: ROUTES.DASHBOARD.HOSTS,
                     icon: PiBookmarksDuotone
+                },
+                {
+                    name: t('constants.inbounds'),
+                    href: ROUTES.DASHBOARD.INBOUNDS,
+                    icon: PiBoundingBoxDuotone
                 },
                 {
                     name: t('constants.nodes'),

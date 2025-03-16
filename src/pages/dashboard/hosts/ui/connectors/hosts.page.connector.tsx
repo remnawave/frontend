@@ -5,11 +5,11 @@ import {
     useHostsStoreEditModalIsOpen
 } from '@entities/dashboard/hosts/hosts-store'
 import HostsPageComponent from '@pages/dashboard/hosts/ui/components/hosts.page.component'
-import { QueryKeys, useGetHosts, useGetInbounds } from '@shared/api/hooks'
+import { QueryKeys, useGetFullInbounds, useGetHosts } from '@shared/api/hooks'
 import { queryClient } from '@shared/api'
 
 export function HostsPageConnector() {
-    const { data: inbounds } = useGetInbounds()
+    const { data: inbounds } = useGetFullInbounds()
     const {
         data: hosts,
 

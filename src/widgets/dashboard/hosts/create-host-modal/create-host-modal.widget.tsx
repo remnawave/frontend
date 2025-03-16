@@ -5,8 +5,8 @@ import { Modal, Text } from '@mantine/core'
 import { useEffect, useState } from 'react'
 
 import { useHostsStoreActions, useHostsStoreCreateModalIsOpen } from '@entities/dashboard'
+import { useCreateHost, useGetFullInbounds } from '@shared/api/hooks'
 import { BaseHostForm } from '@shared/ui/forms/hosts/base-host-form'
-import { useCreateHost, useGetInbounds } from '@shared/api/hooks'
 
 export const CreateHostModalWidget = () => {
     const { t } = useTranslation()
@@ -14,7 +14,7 @@ export const CreateHostModalWidget = () => {
     const isModalOpen = useHostsStoreCreateModalIsOpen()
     const actions = useHostsStoreActions()
 
-    const { data: inbounds } = useGetInbounds()
+    const { data: inbounds } = useGetFullInbounds()
 
     const [advancedOpened, setAdvancedOpened] = useState(false)
 
@@ -22,6 +22,13 @@ export const CreateHostModalWidget = () => {
         mode: 'uncontrolled',
         name: 'create-host-form',
         validate: zodResolver(CreateHostCommand.RequestSchema)
+    })
+
+    form.watch('inboundUuid', ({ value }) => {
+        const inbound = inbounds?.find((inbound) => inbound.uuid === value)
+        if (inbound) {
+            form.setFieldValue('port', inbound.port)
+        }
     })
 
     const handleClose = () => {

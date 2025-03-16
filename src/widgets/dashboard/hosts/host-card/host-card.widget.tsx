@@ -1,5 +1,5 @@
 import { PiDotsSixVertical, PiLock, PiProhibit, PiPulse } from 'react-icons/pi'
-import { ActionIcon, Badge, Box, Group, Text } from '@mantine/core'
+import { ActionIcon, Badge, Box, Checkbox, Group, Text } from '@mantine/core'
 import { Draggable } from '@hello-pangea/dnd'
 import ColorHash from 'color-hash'
 import { useState } from 'react'
@@ -11,7 +11,8 @@ import classes from './HostCard.module.css'
 import { IProps } from './interfaces'
 
 export function HostCardWidget(props: IProps) {
-    const { item, index, inbounds } = props
+    const { item, index, inbounds, isSelected, onSelect } = props
+
     const selectedInboundTag = useHostsStoreSelectedInboundTag()
     const actions = useHostsStoreActions()
     const [isHovered, setIsHovered] = useState(false)
@@ -46,17 +47,22 @@ export function HostCardWidget(props: IProps) {
                 <Box
                     className={cx(classes.item, {
                         [classes.itemDragging]: snapshot.isDragging || isHovered,
-                        [classes.filteredItem]: isFiltered
+                        [classes.filteredItem]: isFiltered,
+                        [classes.selectedItem]: isSelected
                     })}
                     ref={provided.innerRef}
                     {...provided.draggableProps}
                 >
-                    <div {...provided.dragHandleProps} className={classes.dragHandle}>
-                        {!isFiltered && <PiDotsSixVertical color="white" size="2rem" />}
-                        {isFiltered && (
-                            <PiLock color="white" size="2rem" style={{ opacity: 0.5 }} />
-                        )}
-                    </div>
+                    <Group gap="xs">
+                        <Checkbox checked={isSelected} onChange={onSelect} size="md" />
+
+                        <div {...provided.dragHandleProps} className={classes.dragHandle}>
+                            {!isFiltered && <PiDotsSixVertical color="white" size="2rem" />}
+                            {isFiltered && (
+                                <PiLock color="white" size="2rem" style={{ opacity: 0.5 }} />
+                            )}
+                        </div>
+                    </Group>
 
                     <Box
                         onClick={handleEdit}

@@ -133,3 +133,6 @@ dist
 .vercel
 stats.html
 fsd-high-level-dependencies.html
+
+wip/**
+wip/

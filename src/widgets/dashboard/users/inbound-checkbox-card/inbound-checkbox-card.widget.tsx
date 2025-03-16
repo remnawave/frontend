@@ -23,14 +23,24 @@ export function InboundCheckboxCardWidget(props: IProps) {
                         >
                             {inbound.tag}
                         </Text>
-                        <Badge
-                            color="gray"
-                            key={`${inbound.uuid}-badge`}
-                            size="xs"
-                            variant="outline"
-                        >
-                            {inbound.type}
-                        </Badge>
+                        <Group gap="xs" mt="sm">
+                            <Badge
+                                color="gray"
+                                key={`${inbound.uuid}-badge`}
+                                size="xs"
+                                variant="outline"
+                            >
+                                {inbound.type}
+                            </Badge>
+                            <Badge
+                                color="teal"
+                                key={`${inbound.uuid}-badge-2`}
+                                size="xs"
+                                variant="outline"
+                            >
+                                {inbound.port}
+                            </Badge>
+                        </Group>
                     </div>
                 </Group>
             </Checkbox.Card>

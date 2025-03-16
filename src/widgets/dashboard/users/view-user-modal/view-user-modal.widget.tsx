@@ -42,9 +42,14 @@ import {
     useUserModalStoreIsModalOpen,
     useUserModalStoreUserUuid
 } from '@entities/dashboard/user-modal-store/user-modal-store'
+import {
+    useGetFullInbounds,
+    useGetUserByUuid,
+    usersQueryKeys,
+    useUpdateUser
+} from '@shared/api/hooks'
 import { ToggleUserStatusButtonFeature } from '@features/ui/dashboard/users/toggle-user-status-button'
 import { RevokeSubscriptionUserFeature } from '@features/ui/dashboard/users/revoke-subscription-user'
-import { useGetInbounds, useGetUserByUuid, usersQueryKeys, useUpdateUser } from '@shared/api/hooks'
 import { ResetUsageUserFeature } from '@features/ui/dashboard/users/reset-usage-user'
 import { bytesToGbUtil, gbToBytesUtil, prettyBytesUtil } from '@shared/utils/bytes'
 import { DeleteUserFeature } from '@features/ui/dashboard/users/delete-user'
@@ -63,7 +68,7 @@ export const ViewUserModal = () => {
     const actions = useUserModalStoreActions()
     const selectedUser = useUserModalStoreUserUuid()
 
-    const { data: inbounds } = useGetInbounds()
+    const { data: inbounds } = useGetFullInbounds()
 
     const {
         data: user,

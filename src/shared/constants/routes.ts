@@ -8,6 +8,7 @@ export const ROUTES = {
         HOME: '/dashboard/home',
         USERS: '/dashboard/users',
         HOSTS: '/dashboard/hosts',
+        INBOUNDS: '/dashboard/inbounds',
         NODES: '/dashboard/nodes',
         NODES_BANDWIDTH_TABLE: '/dashboard/bandwidth-table',
         CONFIG: '/dashboard/config',

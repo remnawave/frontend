@@ -11,7 +11,7 @@ import {
 } from '@entities/dashboard/nodes'
 import {
     nodesQueryKeys,
-    useGetInbounds,
+    useGetFullInbounds,
     useGetNode,
     useGetPubKey,
     useUpdateNode
@@ -38,7 +38,7 @@ export const EditNodeModalConnectorWidget = () => {
     })
 
     const { data: pubKey } = useGetPubKey()
-    const { data: inbounds } = useGetInbounds()
+    const { data: inbounds } = useGetFullInbounds()
 
     const { data: fetchedNode } = useGetNode({
         route: {

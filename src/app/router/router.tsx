@@ -13,6 +13,7 @@ import { NodesBandwidthTablePageConnector } from '@pages/dashboard/nodes-bandwid
 import { SubscriptionSettingsConnector } from '@pages/dashboard/subscription-settings/connectors'
 import { StatisticNodesConnector } from '@pages/dashboard/statistic-nodes/connectors'
 import { ApiTokensPageConnector } from '@pages/dashboard/api-tokens/ui/connectors'
+import { InboundsPageConnector } from '@pages/dashboard/inbounds/ui/connectors'
 import { ConfigPageConnector } from '@pages/dashboard/config/ui/connectors'
 import { HostsPageConnector } from '@pages/dashboard/hosts/ui/connectors'
 import { UsersPageConnector } from '@pages/dashboard/users/ui/connectors'
@@ -42,6 +43,7 @@ const router = createBrowserRouter(
                     <Route element={<Navigate replace to={ROUTES.DASHBOARD.HOME} />} index />
                     <Route element={<HomePageConnector />} path={ROUTES.DASHBOARD.HOME} />
                     <Route element={<UsersPageConnector />} path={ROUTES.DASHBOARD.USERS} />
+                    <Route element={<InboundsPageConnector />} path={ROUTES.DASHBOARD.INBOUNDS} />
                     <Route element={<HostsPageConnector />} path={ROUTES.DASHBOARD.HOSTS} />
                     <Route element={<NodesPageConnector />} path={ROUTES.DASHBOARD.NODES} />
                     <Route

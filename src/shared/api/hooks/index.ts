@@ -9,6 +9,7 @@ export * from './config/config.query.hooks'
 export * from './hosts/hosts.mutation.hooks'
 export * from './hosts/hosts.query.hooks'
 
+export * from './inbounds/inbounds.mutation.hooks'
 export * from './inbounds/inbounds.query'
 
 export * from './keys-factory'

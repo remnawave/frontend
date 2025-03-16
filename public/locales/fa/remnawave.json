@@ -5,6 +5,7 @@
         "config": "کانفیگ",
         "home": "خانه",
         "hosts": "هاست‌ها",
+        "inbounds": "Inbounds",
         "nodes": "نودها",
         "nodes-bandwidth-table": "جدول مصرف نودها",
         "nodes-statistics": "آمار نودها",
@@ -538,6 +539,57 @@
                 "subscription-settings-description-line-2": "پیشنهاد می‌شود این تنظیمات را با توجه به شرایط و نیازهای خود تغییر دهید",
                 "what-is-subscription-settings": "تنظیمات اشتراک چیست؟"
             }
+        }
+    },
+    "inbounds-page-header": {
+        "widget": {
+            "list-of-all-inbounds": "List of all inbounds",
+            "inbounds": "Inbounds",
+            "impotant-note": "Impotant note",
+            "important-note-description-line-1": "All bulk operations require a complete restart of all nodes.",
+            "important-note-description-line-2": "Please avoid making too many requests in a short period of time.",
+            "important-note-description-line-3": "After saving changes, it may take up to 30 seconds for them to be applied across all nodes."
+        }
+    },
+    "inbounds-card": {
+        "widget": {
+            "nodes": "Nodes",
+            "enabled-nodes": "Nodes with this inbound enabled",
+            "disabled-nodes": "Nodes with this inbound disabled",
+            "remove": "Remove",
+            "add": "Add",
+            "cancel": "Cancel",
+            "users": "Users",
+            "enabled-users": "Users with this inbound enabled",
+            "disabled-users": "Users with this inbound disabled",
+            "show-raw-inbound": "Show raw inbound",
+            "raw-inbound": "Raw inbound",
+            "are-you-sure": "Are you sure?",
+            "add-users-to-inbound-line-1": "Are you sure you want to add this inbound to users?",
+            "add-users-to-inbound-line-2": "This action will add the inbound to all users.",
+            "remove-users-from-inbound-line-1": "Are you sure you want to remove this inbound from users?",
+            "remove-users-from-inbound-line-2": "This action will remove the inbound from all users.",
+            "add-nodes-to-inbound-line-1": "Are you sure you want to add this inbound to nodes?",
+            "add-nodes-to-inbound-line-2": "This action will add the inbound to all nodes.",
+            "remove-nodes-from-inbound-line-1": "Are you sure you want to remove this inbound from nodes?",
+            "remove-nodes-from-inbound-line-2": "This action will remove the inbound from all nodes."
+        }
+    },
+    "multi-select-hosts": {
+        "feature": {
+            "delete-hosts": "Delete hosts",
+            "are-you-sure-you-want-to-delete-these-hosts": "Are you sure you want to delete these hosts?",
+            "delete": "Delete",
+            "cancel": "Cancel",
+            "set-inbound": "Set inbound",
+            "inbound": "Inbound",
+            "set-port": "Set Port",
+            "port": "Port",
+            "clear-selection": "Clear selection",
+            "select-all": "Select all",
+            "enable": "Enable",
+            "disable": "Disable",
+            "set-port-0": "Set port"
         }
     }
 }

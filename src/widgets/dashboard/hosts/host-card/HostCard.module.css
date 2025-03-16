@@ -19,6 +19,16 @@
     opacity: 0.5;
 }
 
+.selectedItem {
+    display: flex;
+    align-items: center;
+    border-radius: var(--mantine-radius-md);
+    border: 1px solid light-dark(var(--mantine-color-gray-2), var(--mantine-color-blue-5));
+    padding: var(--mantine-spacing-sm) var(--mantine-spacing-xl);
+    padding-left: calc(var(--mantine-spacing-xl) - var(--mantine-spacing-md));
+    margin-bottom: var(--mantine-spacing-sm);
+}
+
 .itemDragging {
     border: 1px solid light-dark(var(--mantine-color-blue-5), var(--mantine-color-teal-5));
     box-shadow: var(--mantine-shadow-xl);
