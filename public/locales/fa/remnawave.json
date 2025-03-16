@@ -1,537 +1,595 @@
 {
-   "constants":{
-      "dashboard":"داشبورد",
-      "api-tokens":"توکن‌های API",
-      "config":"کانفیگ",
-      "home":"خانه",
-      "hosts":"هاست‌ها",
-      "nodes":"نودها",
-      "nodes-bandwidth-table":"جدول مصرف نودها",
-      "nodes-statistics":"آمار نودها",
-      "users":"کاربرها",
-      "overview":"نمای کلی",
-      "management":"مدیریت",
-      "statistics":"آمار",
-      "subscription-settings":"تنظیمات سابسکریپشن",
-      "utils":"ابزارها",
-      "happ-routing-builder":"مسیرساز برای Happ",
-      "templates":"قالب‌ها",
-      "subscription":"سابسکریپشن"
-   },
-   "bandwidth-metrics":{
-      "current-year":"امسال",
-      "from-last-year":"سال پیش",
-      "calendar-month":"این ماه تقویمی",
-      "from-last-month-0":"ماه پیش",
-      "last-30-days":"سی روز پیش",
-      "from-last-month":"ماه پیش",
-      "last-7-days":"هفت روز پیش",
-      "from-last-week":"هفته پیش",
-      "today":"امروز",
-      "from-yesterday":"دیروز"
-   },
-   "online-metrics":{
-      "never-online":"آنلاین نشده",
-      "online-this-week":"آنلاین در این هفته",
-      "online-today":"آنلاین در امروز",
-      "online-now":"آنلاین"
-   },
-   "simple-metrics":{
-      "system-uptime":"آپتایم سیستم",
-      "ram-usage":"مصرف رم",
-      "total-traffic":"مصرف کل ترافیک"
-   },
-   "users-metrics":{
-      "disabled-users":"کاربران غیرفعال",
-      "limited-users":"کاربران محدود شده",
-      "expired-users":"کاربران منقضی",
-      "active-users":"کاربران فعال",
-      "total-users":"کل کاربران"
-   },
-   "config-editor-actions":{
-      "feature":{
-         "save":"ذخیره",
-         "format":"فرمت",
-         "copy-config":"کپی"
-      }
-   },
-   "use-bandwidth-table-columns":{
-      "traffic-limit":"محدودیت ترافیک",
-      "traffic":"ترافیک",
-      "traffic-cycle":"دوره ترافیک",
-      "node-name":"نام نود"
-   },
-   "action-group":{
-      "feature":{
-         "new-user":"کاربر جدید",
-         "reset-table":"ریست جدول",
-         "clear-filters":"پاک کردن فیلترها",
-         "update":"بروزرسانی",
-         "bulk-actions":"عملیات جمعی"
-      }
-   },
-   "use-table-columns":{
-      "username":"نام کاربر",
-      "status":"وضعیت",
-      "last-connected-node":"آخرین نود متصل شده",
-      "expire-at":"تاریخ انقضا",
-      "data-usage":"مصرف داده",
-      "sub-link":"لینک ساب",
-      "description":"توضیحات",
-      "traffic-reset":"ریست ترافیک",
-      "never":"هرگز",
-      "online-at":"متصل در",
-      "last-ua":"آخرین عامل کاربری (User-Agent)",
-      "lifetime-used":"مصرف کل",
-      "sub-link-revoked-at":"ساب لینک لفو شده در",
-      "created-at":"ساخته شده در"
-   },
-   "api-tokens-header-action-buttons":{
-      "feature":{
-         "create-new-api-token":"ساخت توکن API جدید"
-      }
-   },
-   "header-buttons":{
-      "feature":{
-         "logout":"خروج"
-      }
-   },
-   "delete-host":{
-      "feature":{
-         "delete-host":"حذف کردن هاست"
-      }
-   },
-   "header-action-buttons":{
-      "feature":{
-         "create-new-host":"ساخت هاست جدید",
-         "update":"بروزرسانی",
-         "all":"همه"
-      }
-   },
-   "delete-node":{
-      "feature":{
-         "delete-node":"حذف کردن نود"
-      }
-   },
-   "nodes-header-action-buttons":{
-      "feature":{
-         "update":"بروزرسانی",
-         "create-new-node":"ساخت نود جدید",
-         "restart-all-nodes":"ریستارت کردن تمامی نودها"
-      }
-   },
-   "toggle-node-status-button":{
-      "feature":{
-         "disable":"غیرفعالسازی",
-         "enable":"فعالسازی"
-      }
-   },
-   "api-token-card":{
-      "widget":{
-         "delete":"حذف",
-         "copy-token":"کپی کردن توکن",
-         "copied":"کپی شد",
-         "apitoken-tokenname-copied-to-clipboard":"توکن {{apiTokenName}} در کلیپ‌بورد کپی شد"
-      }
-   },
-   "api-tokens-documentation":{
-      "widget":{
-         "open-swagger":"باز کردن Swagger",
-         "open-scalar":"باز کردن Scalar",
-         "doc-description-line-2":"هر دو جزئیات کاملی از نقطه‌های انتهایی موجود، فرمت‌های درخواست/پاسخ و روش‌های احراز هویت را ارائه می‌دهند.",
-         "doc-description-line-1":"مستندات API را با استفاده از Scalar یا Swagger UI بررسی کنید.",
-         "api-documentation":"مستندات API"
-      }
-   },
-   "api-tokens-page-header":{
-      "widget":{
-         "list-of-all-api-tokens":"فهرست تمامی توکن‌های API"
-      }
-   },
-   "config-editor":{
-      "widget":{
-         "loading-editor":"در حال بارگذاری ویرایشگر..."
-      }
-   },
-   "keypair":{
-      "widget":{
-         "public-key":"(معادل password) Public Key",
-         "private-key":"کلید خصوصی (Private Key)",
-         "generate-key-pair":"ایجاد جفت کلید",
-         "both-keys":"هر دو"
-      }
-   },
-   "create-host-modal":{
-      "widget":{
-         "new-host":"هاست جدید"
-      }
-   },
-   "edit-host-modal":{
-      "widget":{
-         "edit-host":"ویرایش هاست"
-      }
-   },
-   "hosts-page-header":{
-      "widget":{
-         "list-of-all-hosts":"فهرست تمامی هاست‌ها"
-      }
-   },
-   "remark-info":{
-      "widget":{
-         "supports-templates":"از تمپلیت‌ها پشتیبانی می‌کند.",
-         "remark-description":"این نام هاستی است که در داشبورد کاربر نشان داده می شود."
-      }
-   },
-   "create-node-modal":{
-      "widget":{
-         "create-node":"ساخت نود"
-      }
-   },
-   "edit-node-modal":{
-      "widget":{
-         "edit-node":"ویرایش نود"
-      }
-   },
-   "error-accordeon":{
-      "widget":{
-         "last-error-message":"آخرین پیام خطا",
-         "important-note-description":"برای اتصال به نود باید این مقدار (سرتیفیکت) را در فایل قرار دهید",
-         "important-note":"نکته مهم"
-      }
-   },
-   "node-card":{
-      "widget":{
-         "copied":"کپی شد"
-      }
-   },
-   "node-status-badge":{
-      "widget":{
-         "connected":"متصل",
-         "connecting":"در حال اتصال",
-         "disabled":"غیرفعال",
-         "disconnected":"قطع شده"
-      }
-   },
-   "nodes-page-header":{
-      "widget":{
-         "list-of-all-nodes":"فهرست تمامی نودها"
-      }
-   },
-   "table":{
-      "widget":{
-         "only-active-nodes":"فقط نودهایی که ردیابی ترافیک فعال دارند نمایش داده می‌شوند.",
-         "today":"امروز"
-      }
-   },
-   "create-user-modal":{
-      "widget":{
-         "inbounds":"اینباندها",
-         "inbounds-description":"اینباندهای قابل دسترسی برای این کاربر را انتخاب کنید.",
-         "user-description":"توضیحات کاربر",
-         "expiry-date":"تاریخ انقضا",
-         "pick-value":"انتخاب مقدار",
-         "traffic-reset-strategy":"دوره ریست ترافیک",
-         "traffic-reset-strategy-description":"هر چند وقت یک بار ترافیک کاربر بازنشانی شود",
-         "data-limit":"محدودیت ترافیک",
-         "data-limit-description":"محدودیت ترافیک را به گیگابایت وارد کنید، صفر به معنی نامحدود است",
-         "username-cannot-be-changed-later":"نام کاربری نمی تواند بعدا تغییر داده شود",
-         "loading-user-creation":"در حال بارگذاری صفحه ساخت کاربر",
-         "create-user":"ساخت کاربر",
-         "email-of-a-user":"ایمیل کاربر",
-         "telegram-id-of-a-user-in-telegram":"آیدی عددی تلگرام کاربر"
-      }
-   },
-   "login-form-feature":{
-      "username":"نام کاربری"
-   },
-   "home-page":{
-      "users":"کاربرها"
-   },
-   "user-table":{
-      "widget":{
-         "list-of-all-users":"فهرست تمامی کاربران",
-         "error-loading-data":"خطا در لود کردن اطلاعات",
-         "table-title":"کاربرها"
-      }
-   },
-   "view-user-modal":{
-      "widget":{
-         "connection-details":"جزئیات اتصال",
-         "last-traffic-reset-at":"آخرین زمان ریست شدن ترافیک",
-         "subscription-url":"لینک سابسکریپشن",
-         "subscription-short-uuid":"UUID کوتاه سابسکریپشن",
-         "username-cannot-be-changed":"نام کاربری قابل تغییر نمی‌باشد",
-         "user-details":"مشخصات کاربر",
-         "loading-user-data":"در حال بارگذاری اطلاعات کاربر...",
-         "edit-user":"ویرایش کاربر",
-         "never":"هرگز",
-         "close":"بستن",
-         "show-qr":"نمایش QR",
-         "subscription-qr-code":"اشتراک کد QR"
-      }
-   },
-   "base-api-token-form":{
-      "create":"ایجاد",
-      "token-description":"توضیحات توکن",
-      "token-name":"نام توکن"
-   },
-   "empty-page":{
-      "layout":{
-         "nothing-found":"چیزی یافت نشد"
-      }
-   },
-   "base-host-form":{
-      "remark":"نام",
-      "address":"آدرس",
-      "port":"پورت",
-      "inbound":"اینباند",
-      "select-inbound":"انتخاب اینباند",
-      "advanced-options":"گزینه‌های پیشرفته",
-      "host":"هاست",
-      "path":"مسیر",
-      "alpn-e-g-h2":"ALPN (به طور مثال h2)",
-      "fingerprint":"اثر انگشت",
-      "fingerprint-e-g-chrome":" اثر انگشت (مثلا chrome)",
-      "save":"ذخیره",
-      "sni-e-g-example-com":"SNI (مثلا example.com)",
-      "host-e-g-example-com":"هاست (مثلا example.com)",
-      "e-g-example-com":"مثلا example.com",
-      "e-g-443":"مثلا 443",
-      "path-e-g-ws":"مسیر (مثلا /ws)"
-   },
-   "base-node-form":{
-      "country":"کشور",
-      "select-country":"انتخاب کشور",
-      "internal-name":"نام داخلی",
-      "address":"آدرس",
-      "e-g-example-com":"مثلا example.com",
-      "port":"پورت",
-      "e-g-443":"مثلا 443",
-      "consumption-multiplier":"ضریب مصرف ترافیک",
-      "traffic-tracking":"ثبت مصرف ترافیک",
-      "limit":"حد مصرف",
-      "reset-day":"روز صفر کردن ترافیک",
-      "e-g-1-31":"مثلا 1-31",
-      "notify-percent":"اطلاع‌رسانی در چند درصد",
-      "e-g-50":"مثلا 50",
-      "select-active-inbounds-for-this-node":"اینباندهای فعال برای این نود را انتخاب کنید",
-      "inbounds":"اینباندها",
-      "save":"ذخیره"
-   },
-   "home":{
-      "page":{
-         "online-stats":"آمار آنلاین شدن کاربرها",
-         "system":"سیستم",
-         "bandwidth":"پهنای باند",
-         "short-stats":"آمار مختصر"
-      }
-   },
-   "login-form":{
-      "feature":{
-         "sign-in":"ورود",
-         "your-password":"گذرواژه شما",
-         "password":"گذرواژه",
-         "username":"نام کاربری"
-      }
-   },
-   "statistic-nodes":{
-      "component":{
-         "last-7-days-by-nodes":"7 روز اخیر بر اساس نودها",
-         "filter-nodes":"فیلتر کردن نودها",
-         "bar":"میله",
-         "line":"خط",
-         "last-7-days":"7 روز گذشته",
-         "last-14-days":"14 روز گذشته",
-         "last-30-days":"30 روز گذشته",
-         "last-60-days":"60 روز گذشته",
-         "last-90-days":"90 روز گذشته"
-      }
-   },
-   "get-expiration-text":{
-      "util":{
-         "expires-in":"در {{expiration}} منقضی می‌شود",
-         "expired":"در {{expiration}} منقضی شده",
-         "unknown":"نامعلوم"
-      }
-   },
-   "reset-data":{
-      "constants":{
-         "reset-monthly":"ریست ماهانه",
-         "reset-weekly":"ریست هفتگی",
-         "reset-daily":"ریست روزانه",
-         "never-reset":"هیچ‌گاه ریست نشود"
-      }
-   },
-   "data-usage":{
-      "column":{
-         "monthly":"ماهانه",
-         "weekly":"هفتگی",
-         "daily":"روزانه"
-      }
-   },
-   "get-time-ago":{
-      "util":{
-         "invalid-date":"تاریخ نامعتبر",
-         "not-connected-yet":"هنوز متصل نشده"
-      }
-   },
-   "toggle-user-status-button":{
-      "feature":{
-         "enable":"فعال‌سازی کاربر",
-         "disable":"غیرفعال‌سازی کاربر"
-      }
-   },
-   "create-api-token-modal":{
-      "widget":{
-         "create-token":"ایجاد توکن"
-      }
-   },
-   "bulk-user-actioins-modal":{
-      "widget":{
-         "delete-users":"حذف کردن کاربرها",
-         "confirm-action-description":"آیا مطمئن هستید که می‌خواهید کاربران انتخاب شده را حذف کنید؟",
-         "confirm-action-irreversible":"این عملیات برگشت‌ناپذیر است",
-         "cancel":"انصراف",
-         "user-deletion-description":"حذف تمامی کاربران با وضعیت انتخاب شده. اگر کاربران با وضعیت \"فعال یا Active\" را حذف می‌کنید، باید تمامی نودها را برای اعمال تغییرات مجدداً راه‌اندازی کنید",
-         "select-status":"حذف کردن بر اساس وضعیت"
-      }
-   },
-   "register-form":{
-      "feature":{
-         "username":"نام کاربری",
-         "password":"گذرواژه",
-         "generate":"ایجاد و کپی کردن رمز",
-         "confirm-password":"تایید گذرواژه",
-         "sign-up":"ثبت نام",
-         "password-copied":"گذرواژه کپی شد",
-         "password-copied-message":"گذرواژه در کلیپ‌بورد کپی شد",
-         "password-copied-error":"کپی کردن گذرواژه به کلیپ‌بورد ناموفق بود",
-         "error":"خطا",
-         "passwords-do-not-match":"پسوردها مطابقت ندارند",
-         "password-too-short":"حداقل 24 کاراکتر",
-         "register-description":"برای شروع یک اکانت سوپرادمین ایجاد کنید"
-      }
-   },
-   "xray-json-template-description":{
-      "widget":{
-         "description-line-1":"برای استفاده از این اشتراک، کافی است",
-         "description-line-2":"را به انتهای لینک اشتراک خود اضافه کنید. درصورتی که از کلاینت‌های پشتیبانی شده جدول زیر استفاده نشود اشتراک‌ها مانند قبل، مثلا به صورت base64 یا mihomo، ارسال خواهند شد",
-         "importing-json-subscription":"نحوه استفاده از اشتراک‌های JSON"
-      }
-   },
-   "happ-routing-builder":{
-      "widget":{
-         "copy-link":"کپی کردن لینک",
-         "visual-editor":"ویرایشگر بصری",
-         "code-viewer":"نمایشگر کد",
-         "encode-happ-link":"ایجاد لینک روتینگ Happ",
-         "enter-the-configuration-name":"اسم تنظیمات روتینگ را وارد کنید",
-         "name":"نام",
-         "russia":"روسیه",
-         "proxy-all-traffic-except-rules":"پروکسی کردن همه ترافیک به جز قوانین مشخص شده",
-         "direct-all-traffic-except-rules":"مسیریابی مستقیم همه ترافیک به جز قوانین مشخص شده",
-         "proxy-all-traffic-except-rules-or-direct-all-traffic-except-rules":"قوانین مشخص شده به چه صورت اعمال شوند؟",
-         "enable":"فعالسازی",
-         "disable":"غیرفعالسازی",
-         "fake-dns-description":"فعالسازی یا غیرفعالسازی FakeDNS. پیشنهاد می‌شود درصورت استفاده از DoU این مورد را فعال کنید",
-         "choose-doh-dns-over-https-or-dou-dns-over-udp":"استفاده از DoU یا DoH برای سرور DNS ریموت",
-         "remote-dns-type":"نوع DNS ریموت",
-         "domain-name-for-doh":"دامنه سرور DoH",
-         "remote-dns-domain":"دامنه سرور DNS ریموت",
-         "server-ip-for-doh-or-dou":"آدرس آیپی برای DoH یا DoU",
-         "remote-dns-ip":"آیپی DNS ریموت",
-         "domenstic-dns-type-description":"استفاده از DoU یا DoH برای سرور DNS محلی",
-         "domestic-dns-type":"نوع DNS محلی",
-         "domain-name-for-doh-0":"دامنه سرور DoH",
-         "domestic-dns-domain":"دامنه سرور DNS محلی",
-         "server-ip-for-doh-or-dou-0":"آیپی سرور DNS محلی برای DoU یا DoH",
-         "domestic-dns-ip":"آیپی DNS محلی",
-         "geoip-description":"لینک فایل geoip.dat. درصورت تمایل به استفاده از فایل پیشفرض، خالی بگذارید.",
-         "geoip-url":"لینک GeoIP",
-         "geosite-description":"لینک فایل geosite.dat. درصورت تمایل به استفاده از فایل پیشفرض، خالی بگذارید.",
-         "geosite-url":"لینک GeoSite",
-         "unix-timestamp-description":"تایم استمپ آخرین بروزرسانی فایل‌های GeoIP و GeoSite. درصورت در دسترس نبودن خالی بگذارید.",
-         "last-updated":"آخرین بروزرسانی",
-         "select-the-domain-processing-strategy":"استراتژی پردازش دامنه را انتخاب کنید",
-         "domain-strategy":"استراتژی دامنه",
-         "dns-hosts-description":"مقادیر دستی DNS مورد نظر را به این صورت وارد نمایید: { \"example.com\": \"1.2.3.4\", \"test.org\": \"8.8.8.8\" }",
-         "dns-hosts":"DNS hosts",
-         "sites-that-will-use-direct-connection":"دامنه‌هایی که به صورت مستقیم وصل خواهند شد",
-         "direct-sites":"دامنه‌های مستقیم",
-         "ip-addresses-that-will-use-direct-connection":"آیپی‌هایی که به صورت مستقیم وصل خواهند شد",
-         "direct-ip":"آیپی‌های مستقیم",
-         "sites-that-will-be-proxied":"دامنه‌هایی که پروکسی خواهند شد",
-         "proxy-sites":"دامنه‌های پروکسی‌شده",
-         "ip-addresses-that-will-be-proxied":"آیپی‌هایی که پروکسی خواهند شد",
-         "proxy-ip":"آیپی‌های پروکسی‌شده",
-         "sites-that-will-be-blocked":"دامنه‌هایی که باید بلاک شوند",
-         "blocked-sites":"دامنه‌های بلاک شده",
-         "ip-addresses-that-will-be-blocked":"آیپی‌هایی که باید بلاک شوند",
-         "blocked-ips":"آیپی‌های بلاک شده",
-         "encoded-happ-link":"لینک Happ ایجاد شده",
-         "copied":"کپی شد",
-         "show-qr":"نمایش QR",
-         "close":"بستن"
-      },
-      "page":{
-         "component":{
-            "about-happ":"درباره Happ",
-            "happ-is-multiplatform-xray-client":"Happ یک کلاینت چندسکویی برای Xray می‌باشد.",
-            "about-happ-description-line-2":"در این بخش می‌توانید قوانین مسیریابی را تنظیم کرده و به صورت لینک Happ استخراج کنید",
-            "about-happ-description-line-3":"در تنظیمات سابسکریپشن می‌توانید در قسمت مسیریابی Happ این لینک را وارد نمایید.",
-            "check-out-happ-website":"وبسایت Happ"
-         }
-      }
-   },
-   "remarks-manager":{
-      "widget":{
-         "enter-remark":"ریمارک را وارد نمایید",
-         "add-remark":"افزودن ریمارک"
-      }
-   },
-   "subscription-settings":{
-      "widget":{
-         "validation-error":"خطای اعتبارسنجی",
-         "you-must-add-at-least-one-remark-with-text":"باید حداقل یک ریمارک وارد نمایید",
-         "subscription-info":"مشخصات سابسکریپشن",
-         "this-title-will-be-displayed-as-subscription-name":"عنوان لینک اشتراک در نرم افزار",
-         "profile-title":"عنوان پروفایل",
-         "enter-profile-title":"عنوان پروفایل را وارد نمایید",
-         "auto-update-description":"بعضی نرم‌افزارها براساس این بازه زمانی لینک را به صورت خودکار بروزرسانی خواهند کرد",
-         "auto-update-interval-hours":"بازه آپدیت خودکار لینک اشتراک (ساعت)",
-         "support-link-description":"لینک صفحه پشتیبانی که بعضی از نرم‌افزارها آن را در مشخصات سابسکریپشن نشان می‌دهند",
-         "support-link":"لینک پشتیبانی",
-         "happ-settings":"تنظیمات Happ",
-         "happ-announce-description":"اعلامیه Happ که زیر عنوان سابسکریپشن نشان داده می‌شود. حداکثر 200 کاراکتر.",
-         "happ-announce":"اعلامیه Happ",
-         "enter-happ-announce-max-200-characters":"اعلامیه Happ را وارد نمایید. حداکثر 200 کاراکتر.",
-         "happ-routing-description":"به کمک این ویژگی می‌توانید قوانین مسیریابی هسته را در لینک سابسکریپشن مشخص کنید",
-         "happ-routing-description-line-2":"برای ایجاد لینک مسیریابی می‌توانید از بخش مربوطه در پنل استفاده کنید",
-         "configure-happ-routing":"ساخت لینک مسیریابی Happ",
-         "happ-routing":"مسیریابی Happ",
-         "user-status-remarks":"ریمارک‌های وضعیت کاربر",
-         "user-status-remarks-description":"درصورتی که کاربر منقضی، محدود یا غیرفعال شده باشد مقادیر زیر در سابسکریپشن او نمایش داده خواهند شد",
-         "user-status-remarks-description-line-2":"می‌توانید برای هر وضعیت چند ریمارک ایجاد کنید",
-         "user-status-remarks-description-line-3":"چون کاربرهای منقضی، محدود یا غیرفعال توانایی اتصال به سرورها را ندارند، به جای دریافت لینک خالی این مقادیر را در نرم افزار خواهند دید",
-         "expired-users-remarks":"ریمارک‌های کاربر منقضی شده",
-         "limited-users-remarks":"ریمارک‌های کاربر محدود شده",
-         "disabled-users-remarks":"ریمارک‌های کاربر غیرفعال شده",
-         "update-settings":"بروزرسانی تنظیمات",
-         "disabled":"غیرفعال",
-         "enabled":"فعال",
-         "profile-webpage-url":"URL صفحه وب مشخصات",
-         "profile-webpage-url-description":"توسط برخی از نرم‌افزارها استفاده می‌شود. \nبه طور پیش فرض فعال شده ، دامنه از متغیر SUB_PUBLIC_DOMAIN .env دریافت می‌شود",
-         "serve-json-at-base-subscription":"ارائه JSON در لینک پایه پیشفرض",
-         "serve-json-description":"درصورت پشتیبانی نرم افزار، بدون نیاز به قرار دادن /json در انتهای لینک، اشتراک JSON برای آن ارسال خواهد شد",
-         "add-username-to-base-subscription":"افزودن #username به انتهای لینک اشتراک",
-         "add-username-description":"با فعال کردن این گزینه #username به انتهای لینک‌های اشتراک اضافه خواهد شد."
-      },
-      "page":{
-         "component":{
-            "subscription-settings-description":"تنظیمات زیر مربوط به مشخصات لینک اشتراک می‌باشد که در بعضی از نرم‌افزارها نمایش داده شده و استفاده می‌شوند.",
-            "subscription-settings-description-line-2":"پیشنهاد می‌شود این تنظیمات را با توجه به شرایط و نیازهای خود تغییر دهید",
-            "what-is-subscription-settings":"تنظیمات اشتراک چیست؟"
-         }
-      }
-   }
+    "constants": {
+        "dashboard": "داشبورد",
+        "api-tokens": "توکن‌های API",
+        "config": "کانفیگ",
+        "home": "خانه",
+        "hosts": "هاست‌ها",
+        "inbounds": "اینباندها",
+        "nodes": "نودها",
+        "nodes-bandwidth-table": "جدول مصرف نودها",
+        "nodes-statistics": "آمار نودها",
+        "users": "کاربرها",
+        "overview": "نمای کلی",
+        "management": "مدیریت",
+        "statistics": "آمار",
+        "subscription-settings": "تنظیمات سابسکریپشن",
+        "utils": "ابزارها",
+        "happ-routing-builder": "مسیرساز برای Happ",
+        "templates": "قالب‌ها",
+        "subscription": "سابسکریپشن"
+    },
+    "bandwidth-metrics": {
+        "current-year": "امسال",
+        "from-last-year": "سال پیش",
+        "calendar-month": "این ماه تقویمی",
+        "from-last-month-0": "ماه پیش",
+        "last-30-days": "سی روز پیش",
+        "from-last-month": "ماه پیش",
+        "last-7-days": "هفت روز پیش",
+        "from-last-week": "هفته پیش",
+        "today": "امروز",
+        "from-yesterday": "دیروز"
+    },
+    "online-metrics": {
+        "never-online": "آنلاین نشده",
+        "online-this-week": "آنلاین در این هفته",
+        "online-today": "آنلاین در امروز",
+        "online-now": "آنلاین"
+    },
+    "simple-metrics": {
+        "system-uptime": "آپتایم سیستم",
+        "ram-usage": "مصرف رم",
+        "total-traffic": "مصرف کل ترافیک"
+    },
+    "users-metrics": {
+        "disabled-users": "کاربران غیرفعال",
+        "limited-users": "کاربران محدود شده",
+        "expired-users": "کاربران منقضی",
+        "active-users": "کاربران فعال",
+        "total-users": "کل کاربران"
+    },
+    "config-editor-actions": {
+        "feature": {
+            "save": "ذخیره",
+            "format": "فرمت",
+            "copy-config": "کپی"
+        }
+    },
+    "use-bandwidth-table-columns": {
+        "traffic-limit": "محدودیت ترافیک",
+        "traffic": "ترافیک",
+        "traffic-cycle": "دوره ترافیک",
+        "node-name": "نام نود"
+    },
+    "action-group": {
+        "feature": {
+            "new-user": "کاربر جدید",
+            "reset-table": "ریست جدول",
+            "clear-filters": "پاک کردن فیلترها",
+            "update": "بروزرسانی",
+            "bulk-actions": "عملیات جمعی"
+        }
+    },
+    "use-table-columns": {
+        "username": "نام کاربر",
+        "status": "وضعیت",
+        "last-connected-node": "آخرین نود متصل شده",
+        "expire-at": "تاریخ انقضا",
+        "data-usage": "مصرف داده",
+        "sub-link": "لینک ساب",
+        "description": "توضیحات",
+        "traffic-reset": "ریست ترافیک",
+        "never": "هرگز",
+        "online-at": "متصل در",
+        "last-ua": "آخرین عامل کاربری (User-Agent)",
+        "lifetime-used": "مصرف کل",
+        "sub-link-revoked-at": "ساب لینک لفو شده در",
+        "created-at": "ساخته شده در"
+    },
+    "api-tokens-header-action-buttons": {
+        "feature": {
+            "create-new-api-token": "ساخت توکن API جدید"
+        }
+    },
+    "header-buttons": {
+        "feature": {
+            "logout": "خروج"
+        }
+    },
+    "delete-host": {
+        "feature": {
+            "delete-host": "حذف کردن هاست"
+        }
+    },
+    "header-action-buttons": {
+        "feature": {
+            "create-new-host": "ساخت هاست جدید",
+            "update": "بروزرسانی",
+            "all": "همه"
+        }
+    },
+    "delete-node": {
+        "feature": {
+            "delete-node": "حذف کردن نود"
+        }
+    },
+    "nodes-header-action-buttons": {
+        "feature": {
+            "update": "بروزرسانی",
+            "create-new-node": "ساخت نود جدید",
+            "restart-all-nodes": "ریستارت کردن تمامی نودها"
+        }
+    },
+    "toggle-node-status-button": {
+        "feature": {
+            "disable": "غیرفعالسازی",
+            "enable": "فعالسازی"
+        }
+    },
+    "api-token-card": {
+        "widget": {
+            "delete": "حذف",
+            "copy-token": "کپی کردن توکن",
+            "copied": "کپی شد",
+            "apitoken-tokenname-copied-to-clipboard": "توکن {{apiTokenName}} در کلیپ‌بورد کپی شد"
+        }
+    },
+    "api-tokens-documentation": {
+        "widget": {
+            "open-swagger": "باز کردن Swagger",
+            "open-scalar": "باز کردن Scalar",
+            "doc-description-line-2": "هر دو جزئیات کاملی از نقطه‌های انتهایی موجود، فرمت‌های درخواست/پاسخ و روش‌های احراز هویت را ارائه می‌دهند.",
+            "doc-description-line-1": "مستندات API را با استفاده از Scalar یا Swagger UI بررسی کنید.",
+            "api-documentation": "مستندات API"
+        }
+    },
+    "api-tokens-page-header": {
+        "widget": {
+            "list-of-all-api-tokens": "فهرست تمامی توکن‌های API"
+        }
+    },
+    "config-editor": {
+        "widget": {
+            "loading-editor": "در حال بارگذاری ویرایشگر..."
+        }
+    },
+    "keypair": {
+        "widget": {
+            "public-key": "(معادل password) Public Key",
+            "private-key": "کلید خصوصی (Private Key)",
+            "generate-key-pair": "ایجاد جفت کلید",
+            "both-keys": "هر دو"
+        }
+    },
+    "create-host-modal": {
+        "widget": {
+            "new-host": "هاست جدید"
+        }
+    },
+    "edit-host-modal": {
+        "widget": {
+            "edit-host": "ویرایش هاست"
+        }
+    },
+    "hosts-page-header": {
+        "widget": {
+            "list-of-all-hosts": "فهرست تمامی هاست‌ها"
+        }
+    },
+    "remark-info": {
+        "widget": {
+            "supports-templates": "از تمپلیت‌ها پشتیبانی می‌کند.",
+            "remark-description": "این نام هاستی است که در داشبورد کاربر نشان داده می شود."
+        }
+    },
+    "create-node-modal": {
+        "widget": {
+            "create-node": "ساخت نود"
+        }
+    },
+    "edit-node-modal": {
+        "widget": {
+            "edit-node": "ویرایش نود"
+        }
+    },
+    "error-accordeon": {
+        "widget": {
+            "last-error-message": "آخرین پیام خطا",
+            "important-note-description": "برای اتصال به نود باید این مقدار (سرتیفیکت) را در فایل قرار دهید",
+            "important-note": "نکته مهم",
+            "important-note-description-value": "ارزش \nکپی و چسباندن آن در Remnanode"
+        }
+    },
+    "node-card": {
+        "widget": {
+            "copied": "کپی شد"
+        }
+    },
+    "node-status-badge": {
+        "widget": {
+            "connected": "متصل",
+            "connecting": "در حال اتصال",
+            "disabled": "غیرفعال",
+            "disconnected": "قطع شده"
+        }
+    },
+    "nodes-page-header": {
+        "widget": {
+            "list-of-all-nodes": "فهرست تمامی نودها"
+        }
+    },
+    "table": {
+        "widget": {
+            "only-active-nodes": "فقط نودهایی که ردیابی ترافیک فعال دارند نمایش داده می‌شوند.",
+            "today": "امروز"
+        }
+    },
+    "create-user-modal": {
+        "widget": {
+            "inbounds": "اینباندها",
+            "inbounds-description": "اینباندهای قابل دسترسی برای این کاربر را انتخاب کنید.",
+            "user-description": "توضیحات کاربر",
+            "expiry-date": "تاریخ انقضا",
+            "pick-value": "انتخاب مقدار",
+            "traffic-reset-strategy": "دوره ریست ترافیک",
+            "traffic-reset-strategy-description": "هر چند وقت یک بار ترافیک کاربر بازنشانی شود",
+            "data-limit": "محدودیت ترافیک",
+            "data-limit-description": "محدودیت ترافیک را به گیگابایت وارد کنید، صفر به معنی نامحدود است",
+            "username-cannot-be-changed-later": "نام کاربری نمی تواند بعدا تغییر داده شود",
+            "loading-user-creation": "در حال بارگذاری صفحه ساخت کاربر",
+            "create-user": "ساخت کاربر",
+            "email-of-a-user": "ایمیل کاربر",
+            "telegram-id-of-a-user-in-telegram": "آیدی عددی تلگرام کاربر"
+        }
+    },
+    "login-form-feature": {
+        "username": "نام کاربری"
+    },
+    "home-page": {
+        "users": "کاربرها"
+    },
+    "user-table": {
+        "widget": {
+            "list-of-all-users": "فهرست تمامی کاربران",
+            "error-loading-data": "خطا در لود کردن اطلاعات",
+            "table-title": "کاربرها"
+        }
+    },
+    "view-user-modal": {
+        "widget": {
+            "connection-details": "جزئیات اتصال",
+            "last-traffic-reset-at": "آخرین زمان ریست شدن ترافیک",
+            "subscription-url": "لینک سابسکریپشن",
+            "subscription-short-uuid": "UUID کوتاه سابسکریپشن",
+            "username-cannot-be-changed": "نام کاربری قابل تغییر نمی‌باشد",
+            "user-details": "مشخصات کاربر",
+            "loading-user-data": "در حال بارگذاری اطلاعات کاربر...",
+            "edit-user": "ویرایش کاربر",
+            "never": "هرگز",
+            "close": "بستن",
+            "show-qr": "نمایش QR",
+            "subscription-qr-code": "اشتراک کد QR"
+        }
+    },
+    "base-api-token-form": {
+        "create": "ایجاد",
+        "token-description": "توضیحات توکن",
+        "token-name": "نام توکن"
+    },
+    "empty-page": {
+        "layout": {
+            "nothing-found": "چیزی یافت نشد"
+        }
+    },
+    "base-host-form": {
+        "remark": "نام",
+        "address": "آدرس",
+        "port": "پورت",
+        "inbound": "اینباند",
+        "select-inbound": "انتخاب اینباند",
+        "advanced-options": "گزینه‌های پیشرفته",
+        "host": "هاست",
+        "path": "مسیر",
+        "alpn-e-g-h2": "ALPN (به طور مثال h2)",
+        "fingerprint": "اثر انگشت",
+        "fingerprint-e-g-chrome": " اثر انگشت (مثلا chrome)",
+        "save": "ذخیره",
+        "sni-e-g-example-com": "SNI (مثلا example.com)",
+        "host-e-g-example-com": "هاست (مثلا example.com)",
+        "e-g-example-com": "مثلا example.com",
+        "e-g-443": "مثلا 443",
+        "path-e-g-ws": "مسیر (مثلا /ws)",
+        "here-you-can-override-security-settings-from-xtls-config": "در اینجا می توانید تنظیمات امنیتی را از پیکربندی XTLS نادیده بگیرید.",
+        "inbounds-default": "پیش فرض ورودی",
+        "none": "هیچ کدام",
+        "security-layer": "لایه امنیتی",
+        "tls-transport-layer-security": "TLS (امنیت لایه حمل و نقل)"
+    },
+    "base-node-form": {
+        "country": "کشور",
+        "select-country": "انتخاب کشور",
+        "internal-name": "نام داخلی",
+        "address": "آدرس",
+        "e-g-example-com": "مثلا example.com",
+        "port": "پورت",
+        "e-g-443": "مثلا 443",
+        "consumption-multiplier": "ضریب مصرف ترافیک",
+        "traffic-tracking": "ثبت مصرف ترافیک",
+        "limit": "حد مصرف",
+        "reset-day": "روز صفر کردن ترافیک",
+        "e-g-1-31": "مثلا 1-31",
+        "notify-percent": "اطلاع‌رسانی در چند درصد",
+        "e-g-50": "مثلا 50",
+        "select-active-inbounds-for-this-node": "اینباندهای فعال برای این نود را انتخاب کنید",
+        "inbounds": "اینباندها",
+        "save": "ذخیره"
+    },
+    "home": {
+        "page": {
+            "online-stats": "آمار آنلاین شدن کاربرها",
+            "system": "سیستم",
+            "bandwidth": "پهنای باند",
+            "short-stats": "آمار مختصر"
+        }
+    },
+    "login-form": {
+        "feature": {
+            "sign-in": "ورود",
+            "your-password": "گذرواژه شما",
+            "password": "گذرواژه",
+            "username": "نام کاربری"
+        }
+    },
+    "statistic-nodes": {
+        "component": {
+            "last-7-days-by-nodes": "7 روز اخیر بر اساس نودها",
+            "filter-nodes": "فیلتر کردن نودها",
+            "bar": "میله",
+            "line": "خط",
+            "last-7-days": "7 روز گذشته",
+            "last-14-days": "14 روز گذشته",
+            "last-30-days": "30 روز گذشته",
+            "last-60-days": "60 روز گذشته",
+            "last-90-days": "90 روز گذشته"
+        }
+    },
+    "get-expiration-text": {
+        "util": {
+            "expires-in": "در {{expiration}} منقضی می‌شود",
+            "expired": "در {{expiration}} منقضی شده",
+            "unknown": "نامعلوم"
+        }
+    },
+    "reset-data": {
+        "constants": {
+            "reset-monthly": "ریست ماهانه",
+            "reset-weekly": "ریست هفتگی",
+            "reset-daily": "ریست روزانه",
+            "never-reset": "هیچ‌گاه ریست نشود"
+        }
+    },
+    "data-usage": {
+        "column": {
+            "monthly": "ماهانه",
+            "weekly": "هفتگی",
+            "daily": "روزانه"
+        }
+    },
+    "get-time-ago": {
+        "util": {
+            "invalid-date": "تاریخ نامعتبر",
+            "not-connected-yet": "هنوز متصل نشده"
+        }
+    },
+    "toggle-user-status-button": {
+        "feature": {
+            "enable": "فعال‌سازی کاربر",
+            "disable": "غیرفعال‌سازی کاربر"
+        }
+    },
+    "create-api-token-modal": {
+        "widget": {
+            "create-token": "ایجاد توکن"
+        }
+    },
+    "bulk-user-actioins-modal": {
+        "widget": {
+            "delete-users": "حذف کردن کاربرها",
+            "confirm-action-description": "آیا مطمئن هستید که می‌خواهید کاربران انتخاب شده را حذف کنید؟",
+            "confirm-action-irreversible": "این عملیات برگشت‌ناپذیر است",
+            "cancel": "انصراف",
+            "user-deletion-description": "حذف تمامی کاربران با وضعیت انتخاب شده. اگر کاربران با وضعیت \"فعال یا Active\" را حذف می‌کنید، باید تمامی نودها را برای اعمال تغییرات مجدداً راه‌اندازی کنید",
+            "select-status": "حذف کردن بر اساس وضعیت"
+        }
+    },
+    "register-form": {
+        "feature": {
+            "username": "نام کاربری",
+            "password": "گذرواژه",
+            "generate": "ایجاد و کپی کردن رمز",
+            "confirm-password": "تایید گذرواژه",
+            "sign-up": "ثبت نام",
+            "password-copied": "گذرواژه کپی شد",
+            "password-copied-message": "گذرواژه در کلیپ‌بورد کپی شد",
+            "password-copied-error": "کپی کردن گذرواژه به کلیپ‌بورد ناموفق بود",
+            "error": "خطا",
+            "passwords-do-not-match": "پسوردها مطابقت ندارند",
+            "password-too-short": "حداقل 24 کاراکتر",
+            "register-description": "برای شروع یک اکانت سوپرادمین ایجاد کنید"
+        }
+    },
+    "xray-json-template-description": {
+        "widget": {
+            "description-line-1": "برای استفاده از این اشتراک، کافی است",
+            "description-line-2": "را به انتهای لینک اشتراک خود اضافه کنید. درصورتی که از کلاینت‌های پشتیبانی شده جدول زیر استفاده نشود اشتراک‌ها مانند قبل، مثلا به صورت base64 یا mihomo، ارسال خواهند شد",
+            "importing-json-subscription": "نحوه استفاده از اشتراک‌های JSON"
+        }
+    },
+    "happ-routing-builder": {
+        "widget": {
+            "copy-link": "کپی کردن لینک",
+            "visual-editor": "ویرایشگر بصری",
+            "code-viewer": "نمایشگر کد",
+            "encode-happ-link": "ایجاد لینک روتینگ Happ",
+            "enter-the-configuration-name": "اسم تنظیمات روتینگ را وارد کنید",
+            "name": "نام",
+            "russia": "روسیه",
+            "proxy-all-traffic-except-rules": "پروکسی کردن همه ترافیک به جز قوانین مشخص شده",
+            "direct-all-traffic-except-rules": "مسیریابی مستقیم همه ترافیک به جز قوانین مشخص شده",
+            "proxy-all-traffic-except-rules-or-direct-all-traffic-except-rules": "قوانین مشخص شده به چه صورت اعمال شوند؟",
+            "enable": "فعالسازی",
+            "disable": "غیرفعالسازی",
+            "fake-dns-description": "فعالسازی یا غیرفعالسازی FakeDNS. پیشنهاد می‌شود درصورت استفاده از DoU این مورد را فعال کنید",
+            "choose-doh-dns-over-https-or-dou-dns-over-udp": "استفاده از DoU یا DoH برای سرور DNS ریموت",
+            "remote-dns-type": "نوع DNS ریموت",
+            "domain-name-for-doh": "دامنه سرور DoH",
+            "remote-dns-domain": "دامنه سرور DNS ریموت",
+            "server-ip-for-doh-or-dou": "آدرس آیپی برای DoH یا DoU",
+            "remote-dns-ip": "آیپی DNS ریموت",
+            "domenstic-dns-type-description": "استفاده از DoU یا DoH برای سرور DNS محلی",
+            "domestic-dns-type": "نوع DNS محلی",
+            "domain-name-for-doh-0": "دامنه سرور DoH",
+            "domestic-dns-domain": "دامنه سرور DNS محلی",
+            "server-ip-for-doh-or-dou-0": "آیپی سرور DNS محلی برای DoU یا DoH",
+            "domestic-dns-ip": "آیپی DNS محلی",
+            "geoip-description": "لینک فایل geoip.dat. درصورت تمایل به استفاده از فایل پیشفرض، خالی بگذارید.",
+            "geoip-url": "لینک GeoIP",
+            "geosite-description": "لینک فایل geosite.dat. درصورت تمایل به استفاده از فایل پیشفرض، خالی بگذارید.",
+            "geosite-url": "لینک GeoSite",
+            "unix-timestamp-description": "تایم استمپ آخرین بروزرسانی فایل‌های GeoIP و GeoSite. درصورت در دسترس نبودن خالی بگذارید.",
+            "last-updated": "آخرین بروزرسانی",
+            "select-the-domain-processing-strategy": "استراتژی پردازش دامنه را انتخاب کنید",
+            "domain-strategy": "استراتژی دامنه",
+            "dns-hosts-description": "مقادیر دستی DNS مورد نظر را به این صورت وارد نمایید: { \"example.com\": \"1.2.3.4\", \"test.org\": \"8.8.8.8\" }",
+            "dns-hosts": "DNS hosts",
+            "sites-that-will-use-direct-connection": "دامنه‌هایی که به صورت مستقیم وصل خواهند شد",
+            "direct-sites": "دامنه‌های مستقیم",
+            "ip-addresses-that-will-use-direct-connection": "آیپی‌هایی که به صورت مستقیم وصل خواهند شد",
+            "direct-ip": "آیپی‌های مستقیم",
+            "sites-that-will-be-proxied": "دامنه‌هایی که پروکسی خواهند شد",
+            "proxy-sites": "دامنه‌های پروکسی‌شده",
+            "ip-addresses-that-will-be-proxied": "آیپی‌هایی که پروکسی خواهند شد",
+            "proxy-ip": "آیپی‌های پروکسی‌شده",
+            "sites-that-will-be-blocked": "دامنه‌هایی که باید بلاک شوند",
+            "blocked-sites": "دامنه‌های بلاک شده",
+            "ip-addresses-that-will-be-blocked": "آیپی‌هایی که باید بلاک شوند",
+            "blocked-ips": "آیپی‌های بلاک شده",
+            "encoded-happ-link": "لینک Happ ایجاد شده",
+            "copied": "کپی شد",
+            "show-qr": "نمایش QR",
+            "close": "بستن"
+        },
+        "page": {
+            "component": {
+                "about-happ": "درباره Happ",
+                "happ-is-multiplatform-xray-client": "Happ یک کلاینت چندسکویی برای Xray می‌باشد.",
+                "about-happ-description-line-2": "در این بخش می‌توانید قوانین مسیریابی را تنظیم کرده و به صورت لینک Happ استخراج کنید",
+                "about-happ-description-line-3": "در تنظیمات سابسکریپشن می‌توانید در قسمت مسیریابی Happ این لینک را وارد نمایید.",
+                "check-out-happ-website": "وبسایت Happ"
+            }
+        }
+    },
+    "remarks-manager": {
+        "widget": {
+            "enter-remark": "ریمارک را وارد نمایید",
+            "add-remark": "افزودن ریمارک"
+        }
+    },
+    "subscription-settings": {
+        "widget": {
+            "validation-error": "خطای اعتبارسنجی",
+            "you-must-add-at-least-one-remark-with-text": "باید حداقل یک ریمارک وارد نمایید",
+            "subscription-info": "مشخصات سابسکریپشن",
+            "this-title-will-be-displayed-as-subscription-name": "عنوان لینک اشتراک در نرم افزار",
+            "profile-title": "عنوان پروفایل",
+            "enter-profile-title": "عنوان پروفایل را وارد نمایید",
+            "auto-update-description": "بعضی نرم‌افزارها براساس این بازه زمانی لینک را به صورت خودکار بروزرسانی خواهند کرد",
+            "auto-update-interval-hours": "بازه آپدیت خودکار لینک اشتراک (ساعت)",
+            "support-link-description": "لینک صفحه پشتیبانی که بعضی از نرم‌افزارها آن را در مشخصات سابسکریپشن نشان می‌دهند",
+            "support-link": "لینک پشتیبانی",
+            "happ-settings": "تنظیمات Happ",
+            "happ-announce-description": "اعلامیه Happ که زیر عنوان سابسکریپشن نشان داده می‌شود. حداکثر 200 کاراکتر.",
+            "happ-announce": "اعلامیه Happ",
+            "enter-happ-announce-max-200-characters": "اعلامیه Happ را وارد نمایید. حداکثر 200 کاراکتر.",
+            "happ-routing-description": "به کمک این ویژگی می‌توانید قوانین مسیریابی هسته را در لینک سابسکریپشن مشخص کنید",
+            "happ-routing-description-line-2": "برای ایجاد لینک مسیریابی می‌توانید از بخش مربوطه در پنل استفاده کنید",
+            "configure-happ-routing": "ساخت لینک مسیریابی Happ",
+            "happ-routing": "مسیریابی Happ",
+            "user-status-remarks": "ریمارک‌های وضعیت کاربر",
+            "user-status-remarks-description": "درصورتی که کاربر منقضی، محدود یا غیرفعال شده باشد مقادیر زیر در سابسکریپشن او نمایش داده خواهند شد",
+            "user-status-remarks-description-line-2": "می‌توانید برای هر وضعیت چند ریمارک ایجاد کنید",
+            "user-status-remarks-description-line-3": "چون کاربرهای منقضی، محدود یا غیرفعال توانایی اتصال به سرورها را ندارند، به جای دریافت لینک خالی این مقادیر را در نرم افزار خواهند دید",
+            "expired-users-remarks": "ریمارک‌های کاربر منقضی شده",
+            "limited-users-remarks": "ریمارک‌های کاربر محدود شده",
+            "disabled-users-remarks": "ریمارک‌های کاربر غیرفعال شده",
+            "update-settings": "بروزرسانی تنظیمات",
+            "disabled": "غیرفعال",
+            "enabled": "فعال",
+            "profile-webpage-url": "URL صفحه وب مشخصات",
+            "profile-webpage-url-description": "توسط برخی از نرم‌افزارها استفاده می‌شود. \nبه طور پیش فرض فعال شده ، دامنه از متغیر SUB_PUBLIC_DOMAIN .env دریافت می‌شود",
+            "serve-json-at-base-subscription": "ارائه JSON در لینک پایه پیشفرض",
+            "serve-json-description": "درصورت پشتیبانی نرم افزار، بدون نیاز به قرار دادن /json در انتهای لینک، اشتراک JSON برای آن ارسال خواهد شد",
+            "add-username-to-base-subscription": "افزودن #username به انتهای لینک اشتراک",
+            "add-username-description": "با فعال کردن این گزینه #username به انتهای لینک‌های اشتراک اضافه خواهد شد."
+        },
+        "page": {
+            "component": {
+                "subscription-settings-description": "تنظیمات زیر مربوط به مشخصات لینک اشتراک می‌باشد که در بعضی از نرم‌افزارها نمایش داده شده و استفاده می‌شوند.",
+                "subscription-settings-description-line-2": "پیشنهاد می‌شود این تنظیمات را با توجه به شرایط و نیازهای خود تغییر دهید",
+                "what-is-subscription-settings": "تنظیمات اشتراک چیست؟"
+            }
+        }
+    },
+    "inbounds-page-header": {
+        "widget": {
+            "list-of-all-inbounds": "لیست همه اینباندها",
+            "inbounds": "اینباندها",
+            "impotant-note": "نکته مهم",
+            "important-note-description-line-1": "همه عملیات‌های گروهی نیاز به ریستارت کامل همه نودها دارند",
+            "important-note-description-line-2": "لطفاً از ارسال درخواست‌های متعدد در مدت زمان کوتاه خودداری کنید",
+            "important-note-description-line-3": "پس از ذخیره تغییرات، ممکن است تا ۳۰ ثانیه طول بکشد تا تغییرات در همه نودها اعمال شوند"
+        }
+    },
+    "inbounds-card": {
+        "widget": {
+            "nodes": "نودها",
+            "enabled-nodes": "نودهایی که این اینباند در آن‌ها فعال است",
+            "disabled-nodes": "نودهایی که این اینباند در آن‌ها غیرفعال است",
+            "remove": "حذف",
+            "add": "افزودن",
+            "cancel": "لغو",
+            "users": "کاربرها",
+            "enabled-users": "کاربرانی که این اینباند برای آن‌ها فعال است",
+            "disabled-users": "کاربرانی که این اینباند برای آن‌ها غیرفعال است",
+            "show-raw-inbound": "نمایش اینباند خام",
+            "raw-inbound": "اینباند خام",
+            "are-you-sure": "آیا مطمئن هستید؟",
+            "add-users-to-inbound-line-1": "آیا مطمئن هستید که می‌خواهید این اینباند را به کاربران اضافه کنید؟",
+            "add-users-to-inbound-line-2": "این اقدام اینباند را به همه کاربران اضافه خواهد کرد",
+            "remove-users-from-inbound-line-1": "آیا مطمئن هستید که می‌خواهید این اینباند را برای کاربران حذف کنید؟",
+            "remove-users-from-inbound-line-2": "این اقدام اینباند را برای همه کاربران حذف خواهد کرد.",
+            "add-nodes-to-inbound-line-1": "آیا مطمئن هستید که می‌خواهید این اینباند را به نودها اضافه کنید؟",
+            "add-nodes-to-inbound-line-2": "این اقدام اینباند را به همه نودها اضافه خواهد کرد.",
+            "remove-nodes-from-inbound-line-1": "آیا مطمئن هستید که می‌خواهید این اینباند را از نودها حذف کنید؟",
+            "remove-nodes-from-inbound-line-2": "این اقدام اینباند را از همه نودها حذف خواهد کرد."
+        }
+    },
+    "multi-select-hosts": {
+        "feature": {
+            "delete-hosts": "حذف هاست‌ها",
+            "are-you-sure-you-want-to-delete-these-hosts": "آیا مطمئن هستید که می‌خواهید این هاست‌ها را حذف کنید؟",
+            "delete": "حذف",
+            "cancel": "لغو",
+            "set-inbound": "تنظیم اینباند",
+            "inbound": "اینباند",
+            "set-port": "تنظیم پورت",
+            "port": "پورت",
+            "clear-selection": "پاک کردن انتخاب",
+            "select-all": "انتخاب همه",
+            "enable": "فعال کردن",
+            "disable": "غیرفعال کردن",
+            "set-port-0": "تنظیم پورت"
+        }
+    }
 }
