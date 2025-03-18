@@ -5,7 +5,7 @@
         "config": "Конфиг",
         "home": "Главная",
         "hosts": "Хосты",
-        "inbounds": "Inbounds",
+        "inbounds": "Инбаунды",
         "nodes": "Ноды",
         "nodes-bandwidth-table": "Использование трафика",
         "nodes-statistics": "Статистика нод",
