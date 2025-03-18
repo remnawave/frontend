@@ -9,8 +9,8 @@ import {
     useHostsStoreEditModalHost,
     useHostsStoreEditModalIsOpen
 } from '@entities/dashboard'
-import { useGetFullInbounds, useUpdateHost } from '@shared/api/hooks'
 import { BaseHostForm } from '@shared/ui/forms/hosts/base-host-form'
+import { useGetInbounds, useUpdateHost } from '@shared/api/hooks'
 
 export const EditHostModalWidget = () => {
     const { t } = useTranslation()
@@ -21,7 +21,7 @@ export const EditHostModalWidget = () => {
     const actions = useHostsStoreActions()
     const host = useHostsStoreEditModalHost()
 
-    const { data: inbounds } = useGetFullInbounds()
+    const { data: inbounds } = useGetInbounds()
 
     const form = useForm<UpdateHostCommand.Request>({
         name: 'edit-host-form',

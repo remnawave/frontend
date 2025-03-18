@@ -5,8 +5,8 @@ import { useTranslation } from 'react-i18next'
 import { useState } from 'react'
 
 import { useNodesStoreActions, useNodesStoreCreateModalIsOpen } from '@entities/dashboard/nodes'
-import { useCreateNode, useGetFullInbounds, useGetPubKey } from '@shared/api/hooks'
 import { BaseNodeForm } from '@shared/ui/forms/nodes/base-node-form/base-node-form'
+import { useCreateNode, useGetInbounds, useGetPubKey } from '@shared/api/hooks'
 import { gbToBytesUtil } from '@shared/utils/bytes'
 
 export const CreateNodeModalWidget = () => {
@@ -16,7 +16,7 @@ export const CreateNodeModalWidget = () => {
     const actions = useNodesStoreActions()
 
     const { data: pubKey } = useGetPubKey()
-    const { data: inbounds } = useGetFullInbounds()
+    const { data: inbounds } = useGetInbounds()
 
     const [advancedOpened, setAdvancedOpened] = useState(false)
 

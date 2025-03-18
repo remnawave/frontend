@@ -1,5 +1,5 @@
-import { GetFullInboundsCommand } from '@remnawave/backend-contract'
+import { GetInboundsCommand } from '@remnawave/backend-contract'
 
 export interface IProps {
-    inbound: GetFullInboundsCommand.Response['response'][number]
+    inbound: GetInboundsCommand.Response['response'][number]
 }

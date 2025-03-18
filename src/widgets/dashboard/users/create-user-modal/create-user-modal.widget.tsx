@@ -31,7 +31,7 @@ import {
     useUserCreationModalStoreActions,
     useUserCreationModalStoreIsModalOpen
 } from '@entities/dashboard/user-creation-modal-store/user-creation-modal-store'
-import { useCreateUser, useGetFullInbounds } from '@shared/api/hooks'
+import { useCreateUser, useGetInbounds } from '@shared/api/hooks'
 import { LoaderModalShared } from '@shared/ui/loader-modal'
 import { resetDataStrategy } from '@shared/constants'
 import { gbToBytesUtil } from '@shared/utils/bytes'
@@ -44,7 +44,7 @@ export const CreateUserModalWidget = () => {
     const isModalOpen = useUserCreationModalStoreIsModalOpen()
     const actions = useUserCreationModalStoreActions()
 
-    const { data: inbounds, isLoading } = useGetFullInbounds()
+    const { data: inbounds, isLoading } = useGetInbounds()
 
     const {
         mutate: createUser,

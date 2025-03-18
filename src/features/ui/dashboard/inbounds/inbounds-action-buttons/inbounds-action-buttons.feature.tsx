@@ -2,12 +2,12 @@ import { PiArrowsClockwise } from 'react-icons/pi'
 import { useTranslation } from 'react-i18next'
 import { Button, Group } from '@mantine/core'
 
-import { useGetFullInbounds } from '@shared/api/hooks'
+import { useGetInbounds } from '@shared/api/hooks'
 
 export const InboundsActionButtonsFeature = () => {
     const { t } = useTranslation()
 
-    const { isFetching, refetch } = useGetFullInbounds()
+    const { isFetching, refetch } = useGetInbounds()
 
     const handleUpdate = async () => {
         await refetch()
