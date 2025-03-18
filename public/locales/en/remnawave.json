@@ -617,7 +617,7 @@
                     "user-status": "User status",
                     "status": "Status",
                     "select-status": "Select status",
-                    "expire-date": "Expire Date",
+                    "expire-date": "Expiry Date",
                     "select-expiration-date": "Select expiration date",
                     "close": "Close",
                     "update-users": "Update Users"
@@ -703,7 +703,7 @@
                     "user-status": "User status",
                     "status": "Status",
                     "select-status": "Select status",
-                    "expire-date": "Expire Date",
+                    "expire-date": "Expiry Date",
                     "select-expiration-date": "Select expiration date",
                     "close": "Close",
                     "update-users": "Update Users"

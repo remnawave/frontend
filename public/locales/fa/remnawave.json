@@ -65,9 +65,9 @@
     "action-group": {
         "feature": {
             "new-user": "کاربر جدید",
-            "reset-table": "ریست جدول",
+            "reset-table": "بازنشانی جدول",
             "clear-filters": "پاک کردن فیلترها",
-            "update": "بروزرسانی",
+            "update": "به‌روزرسانی",
             "bulk-actions": "عملیات جمعی"
         }
     },
@@ -79,7 +79,7 @@
         "data-usage": "مصرف داده",
         "sub-link": "لینک ساب",
         "description": "توضیحات",
-        "traffic-reset": "ریست ترافیک",
+        "traffic-reset": "بازنشانی ترافیک",
         "never": "هرگز",
         "online-at": "متصل در",
         "last-ua": "آخرین عامل کاربری (User-Agent)",
@@ -105,7 +105,7 @@
     "header-action-buttons": {
         "feature": {
             "create-new-host": "ساخت هاست جدید",
-            "update": "بروزرسانی",
+            "update": "به‌روزرسانی",
             "all": "همه"
         }
     },
@@ -116,7 +116,7 @@
     },
     "nodes-header-action-buttons": {
         "feature": {
-            "update": "بروزرسانی",
+            "update": "به‌روزرسانی",
             "create-new-node": "ساخت نود جدید",
             "restart-all-nodes": "ریستارت کردن تمامی نودها"
         }
@@ -232,7 +232,7 @@
             "user-description": "توضیحات کاربر",
             "expiry-date": "تاریخ انقضا",
             "pick-value": "انتخاب مقدار",
-            "traffic-reset-strategy": "دوره ریست ترافیک",
+            "traffic-reset-strategy": "دوره بازنشانی ترافیک",
             "traffic-reset-strategy-description": "هر چند وقت یک بار ترافیک کاربر بازنشانی شود",
             "data-limit": "محدودیت ترافیک",
             "data-limit-description": "محدودیت ترافیک را به گیگابایت وارد کنید، صفر به معنی نامحدود است",
@@ -259,7 +259,7 @@
     "view-user-modal": {
         "widget": {
             "connection-details": "جزئیات اتصال",
-            "last-traffic-reset-at": "آخرین زمان ریست شدن ترافیک",
+            "last-traffic-reset-at": "آخرین زمان بازنشانی ترافیک",
             "subscription-url": "لینک سابسکریپشن",
             "subscription-short-uuid": "UUID کوتاه سابسکریپشن",
             "username-cannot-be-changed": "نام کاربری قابل تغییر نمی‌باشد",
@@ -363,10 +363,10 @@
     },
     "reset-data": {
         "constants": {
-            "reset-monthly": "ریست ماهانه",
-            "reset-weekly": "ریست هفتگی",
-            "reset-daily": "ریست روزانه",
-            "never-reset": "هیچ‌گاه ریست نشود"
+            "reset-monthly": "بازنشانی ماهانه",
+            "reset-weekly": "بازنشانی هفتگی",
+            "reset-daily": "بازنشانی روزانه",
+            "never-reset": "هیچ‌گاه بازنشانی نشود"
         }
     },
     "data-usage": {
@@ -457,8 +457,8 @@
             "geoip-url": "لینک GeoIP",
             "geosite-description": "لینک فایل geosite.dat. درصورت تمایل به استفاده از فایل پیشفرض، خالی بگذارید.",
             "geosite-url": "لینک GeoSite",
-            "unix-timestamp-description": "تایم استمپ آخرین بروزرسانی فایل‌های GeoIP و GeoSite. درصورت در دسترس نبودن خالی بگذارید.",
-            "last-updated": "آخرین بروزرسانی",
+            "unix-timestamp-description": "تایم استمپ آخرین به‌روزرسانی فایل‌های GeoIP و GeoSite. درصورت در دسترس نبودن خالی بگذارید.",
+            "last-updated": "آخرین به‌روزرسانی",
             "select-the-domain-processing-strategy": "استراتژی پردازش دامنه را انتخاب کنید",
             "domain-strategy": "استراتژی دامنه",
             "dns-hosts-description": "مقادیر دستی DNS مورد نظر را به این صورت وارد نمایید: { \"example.com\": \"1.2.3.4\", \"test.org\": \"8.8.8.8\" }",
@@ -504,7 +504,7 @@
             "this-title-will-be-displayed-as-subscription-name": "عنوان لینک اشتراک در نرم افزار",
             "profile-title": "عنوان پروفایل",
             "enter-profile-title": "عنوان پروفایل را وارد نمایید",
-            "auto-update-description": "بعضی نرم‌افزارها براساس این بازه زمانی لینک را به صورت خودکار بروزرسانی خواهند کرد",
+            "auto-update-description": "بعضی نرم‌افزارها براساس این بازه زمانی لینک را به صورت خودکار به‌روزرسانی خواهند کرد",
             "auto-update-interval-hours": "بازه آپدیت خودکار لینک اشتراک (ساعت)",
             "support-link-description": "لینک صفحه پشتیبانی که بعضی از نرم‌افزارها آن را در مشخصات سابسکریپشن نشان می‌دهند",
             "support-link": "لینک پشتیبانی",
@@ -523,7 +523,7 @@
             "expired-users-remarks": "ریمارک‌های کاربر منقضی شده",
             "limited-users-remarks": "ریمارک‌های کاربر محدود شده",
             "disabled-users-remarks": "ریمارک‌های کاربر غیرفعال شده",
-            "update-settings": "بروزرسانی تنظیمات",
+            "update-settings": "به‌روزرسانی تنظیمات",
             "disabled": "غیرفعال",
             "enabled": "فعال",
             "profile-webpage-url": "URL صفحه وب مشخصات",
@@ -594,129 +594,129 @@
     },
     "bulk-user-actions-drawer": {
         "widget": {
-            "bulk-user-actions": "Bulk User Actions",
-            "users": "users",
-            "update": "Update",
-            "actions": "Actions",
-            "danger": "Danger"
+            "bulk-user-actions": "اقدامات دسته‌جمعی کاربران",
+            "users": "کاربران",
+            "update": "به‌روزرسانی",
+            "actions": "اقدامات",
+            "danger": "خطر"
         }
     },
     "delete-all-users-by-status": {
         "feature": {
-            "processing": "Processing",
-            "deleting-users": "Deleting users...",
-            "success": "Success",
-            "deleted-data-affectedrows-users": "Deleted {{count}} users"
+            "processing": "در حال پردازش",
+            "deleting-users": "در حال حذف کاربران...",
+            "success": "موفقیت",
+            "deleted-data-affectedrows-users": "{{count}} کاربر حذف شد"
         }
     },
     "bulk-all-user-actions-tabs": {
         "update": {
             "tab": {
                 "feature": {
-                    "update-fields-for-all-users": "Update fields for all users",
-                    "user-status": "User status",
-                    "status": "Status",
-                    "select-status": "Select status",
-                    "expire-date": "Expire Date",
-                    "select-expiration-date": "Select expiration date",
-                    "close": "Close",
-                    "update-users": "Update Users"
+                    "update-fields-for-all-users": "به‌روزرسانی فیلدها برای همه کاربران",
+                    "user-status": "وضعیت کاربر",
+                    "status": "وضعیت",
+                    "select-status": "انتخاب وضعیت",
+                    "expire-date": "تاریخ انقضا",
+                    "select-expiration-date": "انتخاب تاریخ انقضا",
+                    "close": "بستن",
+                    "update-users": "به‌روزرسانی کاربران"
                 }
             }
         },
         "actions": {
             "tab": {
                 "feature": {
-                    "confirm-action": "Confirm Action",
-                    "reset-traffic-confirmation": "Are you sure you want to reset the traffic for all selected users?",
-                    "reset": "Reset",
-                    "cancel": "Cancel",
-                    "perform-actions-on-all-users": "Perform actions on all users",
-                    "reset-traffic": "Reset Traffic",
-                    "reset-traffic-description": "Resets the traffic usage to zero for all selected users"
+                    "confirm-action": "تأیید اقدام",
+                    "reset-traffic-confirmation": "آیا مطمئن هستید که می‌خواهید ترافیک همه کاربران انتخاب‌شده را بازنشانی کنید؟",
+                    "reset": "بازنشانی",
+                    "cancel": "لغو",
+                    "perform-actions-on-all-users": "انجام اقدامات برای همه کاربران",
+                    "reset-traffic": "بازنشانی ترافیک",
+                    "reset-traffic-description": "ترافیک مصرفی را برای همه کاربران انتخاب‌شده به صفر بازنشانی می‌کند"
                 }
             }
         },
         "danger": {
             "tab": {
                 "feature": {
-                    "danger-zone": "Danger Zone",
-                    "danger-zone-description": "These actions are irreversible and can result in permanent data loss.",
-                    "delete-users-by-status": "Delete Users By Status",
-                    "delete": "Delete",
-                    "delete-users-by-status-description": "Permanently deletes all users with the selected status"
+                    "danger-zone": "منطقه خطر",
+                    "danger-zone-description": "این اقدامات غیرقابل بازگشت هستند و ممکن است منجر به از دست رفتن دائمی داده‌ها شوند.",
+                    "delete-users-by-status": "حذف کاربران بر اساس وضعیت",
+                    "delete": "حذف",
+                    "delete-users-by-status-description": "همه کاربران با وضعیت انتخاب‌شده را به‌طور دائم حذف می‌کند"
                 }
             }
         }
     },
     "bulk-all-user-actions-drawer": {
         "widget": {
-            "bulk-all-user-actions": "Bulk All User Actions",
-            "all-users": "All users",
-            "update": "Update",
-            "actions": "Actions",
-            "danger": "Danger"
+            "bulk-all-user-actions": "اقدامات دسته‌جمعی برای همه کاربران",
+            "all-users": "همه کاربران",
+            "update": "به‌روزرسانی",
+            "actions": "اقدامات",
+            "danger": "خطر"
         }
     },
     "bulk-user-actions": {
         "actions": {
             "tab": {
                 "feature": {
-                    "revoke-subscription": "Revoke Subscription",
-                    "revoke-confirmation-line-1": "Are you sure you want to revoke subscription for {{usersCount}} user(s)?",
-                    "revoke-confirmation-line-2": "This action cannot be undone.",
-                    "revoke": "Revoke",
-                    "cancel": "Cancel",
-                    "reset-traffic": "Reset Traffic",
-                    "reset-traffic-confirmation-line-1": "Are you sure you want to reset traffic for {{usersCount}} user(s)?",
-                    "reset-traffic-confirmation-line-2": "This will set their usage to zero.",
-                    "reset": "Reset",
-                    "change-active-inbounds": "Change Active Inbounds",
-                    "change": "Change",
-                    "no-inbounds-selected": "No inbounds selected",
-                    "please-select-at-least-one-inbound": "Please select at least one inbound",
-                    "perform-action-on-users": "Perform actions on {{usersCount}} selected users",
-                    "changes-the-active-inbounds-for-all-selected-users": "Changes the active inbounds for all selected users",
-                    "resets-the-traffic-usage-to-zero-for-all-selected-users": "Resets the traffic usage to zero for all selected users",
-                    "revokes-subscription-for-all-selected-users": "Revokes subscription for all selected users"
+                    "revoke-subscription": "لغو اشتراک",
+                    "revoke-confirmation-line-1": "آیا مطمئن هستید که می‌خواهید اشتراک {{usersCount}} کاربر را لغو کنید؟",
+                    "revoke-confirmation-line-2": "این اقدام قابل بازگشت نیست.",
+                    "revoke": "لغو اشتراک",
+                    "cancel": "انصراف",
+                    "reset-traffic": "بازنشانی ترافیک",
+                    "reset-traffic-confirmation-line-1": "آیا مطمئن هستید که می‌خواهید ترافیک {{usersCount}} کاربر را بازنشانی کنید؟",
+                    "reset-traffic-confirmation-line-2": "این اقدام مصرف کاربران را به صفر تنظیم می‌کند.",
+                    "reset": "بازنشانی",
+                    "change-active-inbounds": "تغییر اینباندهای فعال",
+                    "change": "تغییر",
+                    "no-inbounds-selected": "هیچ اینباند انتخاب نشده است",
+                    "please-select-at-least-one-inbound": "لطفاً حداقل یک اینباند انتخاب کنید",
+                    "perform-action-on-users": "انجام اقدامات برای {{usersCount}} کاربر انتخاب‌شده",
+                    "changes-the-active-inbounds-for-all-selected-users": "ورودی‌های فعال را برای همه کاربران انتخاب‌شده تغییر می‌دهد",
+                    "resets-the-traffic-usage-to-zero-for-all-selected-users": "ترافیک مصرفی را برای همه کاربران انتخاب‌شده به صفر بازنشانی می‌کند",
+                    "revokes-subscription-for-all-selected-users": "اشتراک را برای همه کاربران انتخاب‌شده لغو می‌کند"
                 }
             }
         },
         "danger": {
             "tab": {
                 "feature": {
-                    "delete-users": "Delete Users",
-                    "delete-confirmation-line-1": "Are you sure you want to delete {{usersCount}} user(s)?",
-                    "delete-confirmation-line-2": "This action cannot be undone and all data will be permanently lost.",
-                    "delete": "Delete",
-                    "cancel": "Cancel",
-                    "danger-zone": "Danger Zone",
-                    "these-actions-are-irreversible-and-can-result-in-permanent-data-loss": "These actions are irreversible and can result in permanent data loss.",
-                    "permanently-deletes-all-selected-users-and-their-data": "Permanently deletes all selected users and their data"
+                    "delete-users": "حذف کاربران",
+                    "delete-confirmation-line-1": "آیا مطمئن هستید که می‌خواهید {{usersCount}} کاربر را حذف کنید؟",
+                    "delete-confirmation-line-2": "این اقدام قابل بازگشت نیست و تمام داده‌ها به‌طور دائم از بین خواهند رفت.",
+                    "delete": "حذف",
+                    "cancel": "لغو",
+                    "danger-zone": "منطقه خطر",
+                    "these-actions-are-irreversible-and-can-result-in-permanent-data-loss": "این اقدامات غیرقابل بازگشت هستند و ممکن است منجر به از دست رفتن دائمی داده‌ها شوند.",
+                    "permanently-deletes-all-selected-users-and-their-data": "همه کاربران انتخاب‌شده و داده‌های آنها را به‌طور دائم حذف می‌کند"
                 }
             }
         },
         "update": {
             "tab": {
                 "feature": {
-                    "update-fields-counter": "Update fields for {{usersCount}} selected users",
-                    "user-status": "User status",
-                    "status": "Status",
-                    "select-status": "Select status",
-                    "expire-date": "Expire Date",
-                    "select-expiration-date": "Select expiration date",
-                    "close": "Close",
-                    "update-users": "Update Users"
+                    "update-fields-counter": "به‌روزرسانی فیلدها برای {{usersCount}} کاربر انتخاب‌شده",
+                    "user-status": "وضعیت کاربر",
+                    "status": "وضعیت",
+                    "select-status": "انتخاب وضعیت",
+                    "expire-date": "تاریخ انقضا",
+                    "select-expiration-date": "انتخاب تاریخ انقضا",
+                    "close": "بستن",
+                    "update-users": "به‌روزرسانی کاربران"
                 }
             }
         }
     },
     "users-table-selection": {
         "feature": {
-            "row-s-selected": "row(s) selected",
-            "clear-selection": "Clear selection",
-            "select-all": "Select all",
-            "bulk-actions": "Bulk actions"
+            "row-s-selected": "ردیف انتخاب شده",
+            "clear-selection": "لغو انتخاب",
+            "select-all": "انتخاب همه",
+            "bulk-actions": "اقدامات دسته‌جمعی"
         }
     }
 }
