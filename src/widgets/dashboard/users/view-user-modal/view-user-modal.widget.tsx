@@ -86,7 +86,9 @@ export const ViewUserModal = () => {
     const form = useForm<IFormValues>({
         name: 'edit-user-form',
         mode: 'uncontrolled',
-        validate: zodResolver(UpdateUserCommand.RequestSchema.omit({ expireAt: true }))
+        validate: zodResolver(
+            UpdateUserCommand.RequestSchema.omit({ expireAt: true, email: true, telegramId: true })
+        )
     })
 
     const {
@@ -139,8 +141,9 @@ export const ViewUserModal = () => {
                 expireAt: dayjs(values.expireAt).toISOString(),
                 activeUserInbounds: values.activeUserInbounds,
                 description: values.description,
-                telegramId: values.telegramId,
-                email: values.email
+                // @ts-expect-error - TODO: fix ZOD schema
+                telegramId: values.telegramId === '' ? null : values.telegramId,
+                email: values.email === '' ? null : values.email
             }
         })
     })

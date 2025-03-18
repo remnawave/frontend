@@ -10,8 +10,8 @@ import 'mantine-react-table/styles.css'
 
 import './global.css'
 
+import { Center, DirectionProvider, Loader, MantineProvider } from '@mantine/core'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
-import { DirectionProvider, MantineProvider } from '@mantine/core'
 import customParseFormat from 'dayjs/plugin/customParseFormat'
 import { QueryClientProvider } from '@tanstack/react-query'
 import { NavigationProgress } from '@mantine/nprogress'
@@ -19,6 +19,7 @@ import { Notifications } from '@mantine/notifications'
 import { ModalsProvider } from '@mantine/modals'
 import { I18nextProvider } from 'react-i18next'
 import { useMediaQuery } from '@mantine/hooks'
+import { Suspense } from 'react'
 import dayjs from 'dayjs'
 
 // import { StrictMode } from 'react'
@@ -46,8 +47,15 @@ export function App() {
                             <ModalsProvider>
                                 <Notifications position={mq ? 'top-right' : 'bottom-right'} />
                                 <NavigationProgress />
-
-                                <Router />
+                                <Suspense
+                                    fallback={
+                                        <Center h={'100%'}>
+                                            <Loader />
+                                        </Center>
+                                    }
+                                >
+                                    <Router />
+                                </Suspense>
                             </ModalsProvider>
                         </MantineProvider>
                     </DirectionProvider>

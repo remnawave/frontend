@@ -8,18 +8,21 @@ import { modals } from '@mantine/modals'
 import { useState } from 'react'
 
 import { userStatusValues } from '@shared/constants/forms/user-status.constants'
-import { QueryKeys, useBulkDeleteUsersByStatus } from '@shared/api/hooks'
-import { queryClient } from '@shared/api'
+import { useBulkDeleteUsersByStatus } from '@shared/api/hooks'
 
-export const BulkUserActionsModalWidget = () => {
+import { IProps } from './interfaces/props.interface'
+
+export const DeleteAllUsersByStatusFeature = (props: IProps) => {
+    const { cleanUpDrawer } = props
     const { t } = useTranslation()
+
     const [selectedStatus, setSelectedStatus] = useState<null | TUsersStatus>(null)
     const { mutate: deleteUsersByStatus } = useBulkDeleteUsersByStatus({
         mutationFns: {
             onMutate: () => {
                 const notificationId = notifications.show({
-                    title: 'Processing',
-                    message: 'Deleting users...',
+                    title: t('delete-all-users-by-status.feature.processing'),
+                    message: t('delete-all-users-by-status.feature.deleting-users'),
                     loading: true,
                     autoClose: false,
                     withCloseButton: false,
@@ -27,6 +30,7 @@ export const BulkUserActionsModalWidget = () => {
                 })
 
                 modals.closeAll()
+                cleanUpDrawer()
 
                 return { notificationId }
             },
@@ -35,14 +39,17 @@ export const BulkUserActionsModalWidget = () => {
                     notifications.update({
                         icon: <IconCheck size={18} />,
                         id: context.notificationId as string,
-                        title: 'Success',
-                        message: `Deleted ${data.affectedRows} users`,
+                        title: t('delete-all-users-by-status.feature.success'),
+                        message: t(
+                            'delete-all-users-by-status.feature.deleted-data-affectedrows-users',
+                            {
+                                count: data.affectedRows
+                            }
+                        ),
                         color: 'teal',
                         loading: false,
                         autoClose: 2000
                     })
-
-                    queryClient.refetchQueries({ queryKey: QueryKeys.users.getAllUsers._def })
                 }
             },
             onError: (error, variables, context: unknown) => {

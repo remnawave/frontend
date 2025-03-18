@@ -1,5 +1,12 @@
 import {
+    BulkAllResetTrafficUsersCommand,
+    BulkAllUpdateUsersCommand,
     BulkDeleteUsersByStatusCommand,
+    BulkDeleteUsersCommand,
+    BulkResetTrafficUsersCommand,
+    BulkRevokeUsersSubscriptionCommand,
+    BulkUpdateUsersCommand,
+    BulkUpdateUsersInboundsCommand,
     CreateUserCommand,
     DeleteUserCommand,
     DisableUserCommand,
@@ -181,4 +188,164 @@ export const useBulkDeleteUsersByStatus = createPostMutationHook({
     endpoint: BulkDeleteUsersByStatusCommand.TSQ_url,
     bodySchema: BulkDeleteUsersByStatusCommand.RequestSchema,
     responseSchema: BulkDeleteUsersByStatusCommand.ResponseSchema
+})
+
+export const useBulkUpdateUsers = createPostMutationHook({
+    endpoint: BulkUpdateUsersCommand.TSQ_url,
+    bodySchema: BulkUpdateUsersCommand.RequestSchema,
+    responseSchema: BulkUpdateUsersCommand.ResponseSchema,
+    rMutationParams: {
+        onSuccess: () => {
+            notifications.show({
+                title: 'Success',
+                message: 'Task added to queue successfully',
+                color: 'teal'
+            })
+        },
+        onError: (error) => {
+            notifications.show({
+                title: `${BulkUpdateUsersCommand.TSQ_url}`,
+                message:
+                    error instanceof Error ? error.message : `Request failed with unknown error.`,
+                color: 'red'
+            })
+        }
+    }
+})
+
+export const useBulkResetTraffic = createPostMutationHook({
+    endpoint: BulkResetTrafficUsersCommand.TSQ_url,
+    bodySchema: BulkResetTrafficUsersCommand.RequestSchema,
+    responseSchema: BulkResetTrafficUsersCommand.ResponseSchema,
+    rMutationParams: {
+        onSuccess: () => {
+            notifications.show({
+                title: 'Success',
+                message: 'Task added to queue successfully',
+                color: 'teal'
+            })
+        },
+        onError: (error) => {
+            notifications.show({
+                title: `${BulkResetTrafficUsersCommand.TSQ_url}`,
+                message:
+                    error instanceof Error ? error.message : `Request failed with unknown error.`,
+                color: 'red'
+            })
+        }
+    }
+})
+
+export const useBulkRevokeUsersSubscription = createPostMutationHook({
+    endpoint: BulkRevokeUsersSubscriptionCommand.TSQ_url,
+    bodySchema: BulkRevokeUsersSubscriptionCommand.RequestSchema,
+    responseSchema: BulkRevokeUsersSubscriptionCommand.ResponseSchema,
+    rMutationParams: {
+        onSuccess: () => {
+            notifications.show({
+                title: 'Success',
+                message: 'Task added to queue successfully',
+                color: 'teal'
+            })
+        },
+        onError: (error) => {
+            notifications.show({
+                title: `${BulkRevokeUsersSubscriptionCommand.TSQ_url}`,
+                message:
+                    error instanceof Error ? error.message : `Request failed with unknown error.`,
+                color: 'red'
+            })
+        }
+    }
+})
+
+export const useBulkDeleteUsers = createPostMutationHook({
+    endpoint: BulkDeleteUsersCommand.TSQ_url,
+    bodySchema: BulkDeleteUsersCommand.RequestSchema,
+    responseSchema: BulkDeleteUsersCommand.ResponseSchema,
+    rMutationParams: {
+        onSuccess: () => {
+            notifications.show({
+                title: 'Success',
+                message: 'Task added to queue successfully',
+                color: 'teal'
+            })
+        },
+        onError: (error) => {
+            notifications.show({
+                title: `${BulkDeleteUsersCommand.TSQ_url}`,
+                message:
+                    error instanceof Error ? error.message : `Request failed with unknown error.`,
+                color: 'red'
+            })
+        }
+    }
+})
+
+export const useBulkSetActiveInbounds = createPostMutationHook({
+    endpoint: BulkUpdateUsersInboundsCommand.TSQ_url,
+    bodySchema: BulkUpdateUsersInboundsCommand.RequestSchema,
+    responseSchema: BulkUpdateUsersInboundsCommand.ResponseSchema,
+    rMutationParams: {
+        onSuccess: () => {
+            notifications.show({
+                title: 'Success',
+                message: 'Task added to queue successfully',
+                color: 'teal'
+            })
+        },
+        onError: (error) => {
+            notifications.show({
+                title: `${BulkUpdateUsersInboundsCommand.TSQ_url}`,
+                message:
+                    error instanceof Error ? error.message : `Request failed with unknown error.`,
+                color: 'red'
+            })
+        }
+    }
+})
+
+export const useBulkAllUpdateUsers = createPostMutationHook({
+    endpoint: BulkAllUpdateUsersCommand.TSQ_url,
+    bodySchema: BulkAllUpdateUsersCommand.RequestSchema,
+    responseSchema: BulkAllUpdateUsersCommand.ResponseSchema,
+    rMutationParams: {
+        onSuccess: () => {
+            notifications.show({
+                title: 'Success',
+                message: 'Task added to queue successfully',
+                color: 'teal'
+            })
+        },
+        onError: (error) => {
+            notifications.show({
+                title: `${BulkAllUpdateUsersCommand.TSQ_url}`,
+                message:
+                    error instanceof Error ? error.message : `Request failed with unknown error.`,
+                color: 'red'
+            })
+        }
+    }
+})
+
+export const useBulkAllResetTrafficUsers = createPatchMutationHook({
+    endpoint: BulkAllResetTrafficUsersCommand.TSQ_url,
+    responseSchema: BulkAllResetTrafficUsersCommand.ResponseSchema,
+    rMutationParams: {
+        onSuccess: () => {
+            notifications.show({
+                title: 'Success',
+                message: 'Task added to queue successfully',
+                color: 'teal'
+            })
+        },
+        onError: (error) => {
+            notifications.show({
+                title: `${BulkAllResetTrafficUsersCommand.TSQ_url}`,
+                message:
+                    error instanceof Error ? error.message : `Request failed with unknown error.`,
+                color: 'red'
+            })
+        }
+    }
 })

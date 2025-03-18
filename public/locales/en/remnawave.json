@@ -591,5 +591,132 @@
             "disable": "Disable",
             "set-port-0": "Set port"
         }
+    },
+    "bulk-user-actions-drawer": {
+        "widget": {
+            "bulk-user-actions": "Bulk User Actions",
+            "users": "users",
+            "update": "Update",
+            "actions": "Actions",
+            "danger": "Danger"
+        }
+    },
+    "delete-all-users-by-status": {
+        "feature": {
+            "processing": "Processing",
+            "deleting-users": "Deleting users...",
+            "success": "Success",
+            "deleted-data-affectedrows-users": "Deleted {{count}} users"
+        }
+    },
+    "bulk-all-user-actions-tabs": {
+        "update": {
+            "tab": {
+                "feature": {
+                    "update-fields-for-all-users": "Update fields for all users",
+                    "user-status": "User status",
+                    "status": "Status",
+                    "select-status": "Select status",
+                    "expire-date": "Expire Date",
+                    "select-expiration-date": "Select expiration date",
+                    "close": "Close",
+                    "update-users": "Update Users"
+                }
+            }
+        },
+        "actions": {
+            "tab": {
+                "feature": {
+                    "confirm-action": "Confirm Action",
+                    "reset-traffic-confirmation": "Are you sure you want to reset the traffic for all selected users?",
+                    "reset": "Reset",
+                    "cancel": "Cancel",
+                    "perform-actions-on-all-users": "Perform actions on all users",
+                    "reset-traffic": "Reset Traffic",
+                    "reset-traffic-description": "Resets the traffic usage to zero for all selected users"
+                }
+            }
+        },
+        "danger": {
+            "tab": {
+                "feature": {
+                    "danger-zone": "Danger Zone",
+                    "danger-zone-description": "These actions are irreversible and can result in permanent data loss.",
+                    "delete-users-by-status": "Delete Users By Status",
+                    "delete": "Delete",
+                    "delete-users-by-status-description": "Permanently deletes all users with the selected status"
+                }
+            }
+        }
+    },
+    "bulk-all-user-actions-drawer": {
+        "widget": {
+            "bulk-all-user-actions": "Bulk All User Actions",
+            "all-users": "All users",
+            "update": "Update",
+            "actions": "Actions",
+            "danger": "Danger"
+        }
+    },
+    "bulk-user-actions": {
+        "actions": {
+            "tab": {
+                "feature": {
+                    "revoke-subscription": "Revoke Subscription",
+                    "revoke-confirmation-line-1": "Are you sure you want to revoke subscription for {{usersCount}} user(s)?",
+                    "revoke-confirmation-line-2": "This action cannot be undone.",
+                    "revoke": "Revoke",
+                    "cancel": "Cancel",
+                    "reset-traffic": "Reset Traffic",
+                    "reset-traffic-confirmation-line-1": "Are you sure you want to reset traffic for {{usersCount}} user(s)?",
+                    "reset-traffic-confirmation-line-2": "This will set their usage to zero.",
+                    "reset": "Reset",
+                    "change-active-inbounds": "Change Active Inbounds",
+                    "change": "Change",
+                    "no-inbounds-selected": "No inbounds selected",
+                    "please-select-at-least-one-inbound": "Please select at least one inbound",
+                    "perform-action-on-users": "Perform actions on {{usersCount}} selected users",
+                    "changes-the-active-inbounds-for-all-selected-users": "Changes the active inbounds for all selected users",
+                    "resets-the-traffic-usage-to-zero-for-all-selected-users": "Resets the traffic usage to zero for all selected users",
+                    "revokes-subscription-for-all-selected-users": "Revokes subscription for all selected users"
+                }
+            }
+        },
+        "danger": {
+            "tab": {
+                "feature": {
+                    "delete-users": "Delete Users",
+                    "delete-confirmation-line-1": "Are you sure you want to delete {{usersCount}} user(s)?",
+                    "delete-confirmation-line-2": "This action cannot be undone and all data will be permanently lost.",
+                    "delete": "Delete",
+                    "cancel": "Cancel",
+                    "danger-zone": "Danger Zone",
+                    "these-actions-are-irreversible-and-can-result-in-permanent-data-loss": "These actions are irreversible and can result in permanent data loss.",
+                    "permanently-deletes-all-selected-users-and-their-data": "Permanently deletes all selected users and their data"
+                }
+            }
+        },
+        "update": {
+            "tab": {
+                "feature": {
+                    "update-fields-counter": "Update fields for {{usersCount}} selected users",
+                    "user-status": "User status",
+                    "status": "Status",
+                    "select-status": "Select status",
+                    "expire-date": "Expire Date",
+                    "select-expiration-date": "Select expiration date",
+                    "close": "Close",
+                    "update-users": "Update Users"
+                }
+            }
+        }
+    },
+    "users-table-selection": {
+        "feature": {
+            "row-s-selected": "row(s) selected",
+            "clear-selection": "Clear selection",
+            "select-all": "Select all",
+            "bulk-actions": "Bulk actions"
+        }
     }
 }

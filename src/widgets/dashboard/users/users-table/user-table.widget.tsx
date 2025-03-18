@@ -16,18 +16,27 @@ import {
     useUsersTableStoreColumnVisibility,
     useUsersTableStoreShowColumnFilters
 } from '@entities/dashboard/users/users-table-store'
+import {
+    useBulkUsersActionsStoreActions,
+    useBulkUsersActionsStoreTableSelection
+} from '@entities/dashboard/users/bulk-users-actions-store'
+import { UsersTableSelectionFeature } from '@features/ui/dashboard/users/users-table-selection/users-table-selection.feature'
 import { useUserTableColumns } from '@features/dashboard/users/users-table/model/use-table-columns'
 import { UserActionGroupFeature } from '@features/dashboard/users/users-action-group'
 import { UserActionsFeature } from '@features/ui/dashboard/users/user-actions'
 import { DataTableShared } from '@shared/ui/table'
 import { useGetUsersV2 } from '@shared/api/hooks'
+import { sToMs } from '@shared/utils/time-utils'
 
+import { BulkUserActionsDrawerWidget } from '../bulk-user-actions-drawer/bulk-user-actions-drawer.widget'
 import { customIcons } from './constants'
 
 export function UserTableWidget() {
     const { t } = useTranslation()
 
     const tableColumns = useUserTableColumns()
+    const bulkUsersActionsStoreActions = useBulkUsersActionsStoreActions()
+    const tableSelection = useBulkUsersActionsStoreTableSelection()
 
     const actions = useUsersTableStoreActions()
 
@@ -55,18 +64,31 @@ export function UserTableWidget() {
         sorting
     }
 
-    const { data, isError, isFetching, isLoading, refetch } = useGetUsersV2({
-        query: params
+    const {
+        data: usersResponse,
+        isError,
+        isFetching,
+        isLoading,
+        refetch
+    } = useGetUsersV2({
+        query: params,
+        rQueryParams: {
+            // enabled: bulkUsersActionsStoreActions.getUuidLenght() === 0,
+            refetchInterval: bulkUsersActionsStoreActions.getUuidLenght() === 0 ? sToMs(25) : false
+        }
     })
 
-    const { users, total } = data ?? {}
+    // const { users, total } = data ?? {}
 
-    const fetchedUsers = users ?? []
-    const totalRowCount = total ?? 0
+    // const fetchedUsers = users ?? []
+
+    // const filteredData = useMemo(() => usersResponse, [usersResponse])
+
+    // const totalRowCount = filteredData?.total ?? 0
 
     const table = useMantineReactTable({
         columns: tableColumns,
-        data: fetchedUsers,
+        data: usersResponse?.users ?? [],
         enableFullScreenToggle: true,
         enableSortingRemoval: true,
         enableGlobalFilter: false,
@@ -111,7 +133,7 @@ export function UserTableWidget() {
             style: { '--paper-radius': 'var(--mantine-radius-xs)' },
             withBorder: false
         },
-        rowCount: totalRowCount,
+        rowCount: usersResponse?.total ?? 0,
         enableRowSelection: true,
         mantineSelectCheckboxProps: {
             size: 'md',
@@ -124,6 +146,16 @@ export function UserTableWidget() {
             variant: 'outline'
         },
         enableColumnPinning: true,
+        positionToolbarAlertBanner: 'top',
+        renderToolbarAlertBannerContent: ({ table }) => {
+            return (
+                <UsersTableSelectionFeature
+                    resetRowSelection={table.resetRowSelection}
+                    toggleAllPageRowsSelected={table.toggleAllPageRowsSelected}
+                />
+            )
+        },
+        selectAllMode: 'page',
         state: {
             columnFilterFns,
             columnFilters,
@@ -134,10 +166,12 @@ export function UserTableWidget() {
             showColumnFilters,
             sorting,
             columnVisibility,
-            columnPinning
+            columnPinning,
+            rowSelection: tableSelection
         },
-
         enableRowActions: true,
+        onRowSelectionChange: bulkUsersActionsStoreActions.setTableSelection,
+        getRowId: (originalRow) => originalRow.uuid,
         renderRowActions: ({ row }) => (
             <UserActionsFeature
                 subscriptionUrl={row.original.subscriptionUrl}
@@ -161,6 +195,8 @@ export function UserTableWidget() {
             <DataTableShared.Content>
                 <MantineReactTable table={table} />
             </DataTableShared.Content>
+
+            <BulkUserActionsDrawerWidget resetRowSelection={table.resetRowSelection} />
         </DataTableShared.Container>
     )
 }
