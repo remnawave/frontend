@@ -1,4 +1,4 @@
-import { Badge, Box, Group, Loader, Stack, Text, Title } from '@mantine/core'
+import { Badge, Box, Group, Stack, Text, Title } from '@mantine/core'
 import { useLayoutEffect } from 'react'
 
 import { useGetAuthStatus } from '@shared/api/hooks/auth/auth.query.hooks'
@@ -6,6 +6,7 @@ import { RegisterFormFeature } from '@features/auth/register-form'
 import { LoginFormFeature } from '@features/auth/login-form'
 import { UnderlineShape } from '@shared/ui/underline-shape'
 import { clearQueryClient } from '@shared/api/query-client'
+import { LoadingScreen } from '@shared/ui'
 import { Logo } from '@shared/ui/logo'
 import { Page } from '@shared/ui/page'
 
@@ -17,7 +18,7 @@ export const LoginPage = () => {
     }, [])
 
     if (isFetching) {
-        return <Loader />
+        return <LoadingScreen height="60vh" />
     }
 
     return (

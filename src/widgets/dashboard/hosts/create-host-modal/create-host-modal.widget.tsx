@@ -5,8 +5,8 @@ import { Modal, Text } from '@mantine/core'
 import { useEffect, useState } from 'react'
 
 import { useHostsStoreActions, useHostsStoreCreateModalIsOpen } from '@entities/dashboard'
-import { useCreateHost, useGetFullInbounds } from '@shared/api/hooks'
 import { BaseHostForm } from '@shared/ui/forms/hosts/base-host-form'
+import { useCreateHost, useGetInbounds } from '@shared/api/hooks'
 
 export const CreateHostModalWidget = () => {
     const { t } = useTranslation()
@@ -14,7 +14,7 @@ export const CreateHostModalWidget = () => {
     const isModalOpen = useHostsStoreCreateModalIsOpen()
     const actions = useHostsStoreActions()
 
-    const { data: inbounds } = useGetFullInbounds()
+    const { data: inbounds } = useGetInbounds()
 
     const [advancedOpened, setAdvancedOpened] = useState(false)
 

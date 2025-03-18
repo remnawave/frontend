@@ -10,7 +10,7 @@ import 'mantine-react-table/styles.css'
 
 import './global.css'
 
-import { Center, DirectionProvider, Loader, MantineProvider } from '@mantine/core'
+import { Center, DirectionProvider, MantineProvider } from '@mantine/core'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import customParseFormat from 'dayjs/plugin/customParseFormat'
 import { QueryClientProvider } from '@tanstack/react-query'
@@ -24,6 +24,7 @@ import dayjs from 'dayjs'
 
 // import { StrictMode } from 'react'
 import { AuthProvider } from '@shared/hocs/auth-provider'
+import { LoadingScreen } from '@shared/ui'
 import { theme } from '@shared/constants'
 
 import { Router } from './app/router/router'
@@ -50,7 +51,7 @@ export function App() {
                                 <Suspense
                                     fallback={
                                         <Center h={'100%'}>
-                                            <Loader />
+                                            <LoadingScreen height="60vh" />
                                         </Center>
                                     }
                                 >

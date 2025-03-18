@@ -8,7 +8,7 @@ import {
     useBulkResetTraffic,
     useBulkRevokeUsersSubscription,
     useBulkSetActiveInbounds,
-    useGetFullInbounds
+    useGetInbounds
 } from '@shared/api/hooks'
 import { useBulkUsersActionsStoreActions } from '@entities/dashboard/users/bulk-users-actions-store'
 import { InboundCheckboxCardWidget } from '@widgets/dashboard/users/inbound-checkbox-card'
@@ -23,7 +23,7 @@ export const BulkUserActionsActionsTabFeature = (props: IProps) => {
     const uuids = actions.getUuids()
     const { cleanUpDrawer } = props
 
-    const { data: inbounds } = useGetFullInbounds()
+    const { data: inbounds } = useGetInbounds()
 
     const { mutate: revokeUsersSubscription, isPending: isRevokePending } =
         useBulkRevokeUsersSubscription({

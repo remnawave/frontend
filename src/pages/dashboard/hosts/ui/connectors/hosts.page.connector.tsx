@@ -5,16 +5,12 @@ import {
     useHostsStoreEditModalIsOpen
 } from '@entities/dashboard/hosts/hosts-store'
 import HostsPageComponent from '@pages/dashboard/hosts/ui/components/hosts.page.component'
-import { QueryKeys, useGetFullInbounds, useGetHosts } from '@shared/api/hooks'
+import { QueryKeys, useGetHosts, useGetInbounds } from '@shared/api/hooks'
 import { queryClient } from '@shared/api'
 
 export function HostsPageConnector() {
-    const { data: inbounds } = useGetFullInbounds()
-    const {
-        data: hosts,
-
-        isLoading: isHostsLoading
-    } = useGetHosts()
+    const { data: inbounds, isLoading: isInboundsLoading } = useGetInbounds()
+    const { data: hosts, isLoading: isHostsLoading } = useGetHosts()
 
     const isCreateModalOpen = useHostsStoreCreateModalIsOpen()
     const isEditModalOpen = useHostsStoreEditModalIsOpen()
@@ -26,5 +22,12 @@ export function HostsPageConnector() {
         })()
     }, [isCreateModalOpen, isEditModalOpen])
 
-    return <HostsPageComponent hosts={hosts} inbounds={inbounds} isHostsLoading={isHostsLoading} />
+    return (
+        <HostsPageComponent
+            hosts={hosts}
+            inbounds={inbounds}
+            isHostsLoading={isHostsLoading}
+            isInboundsLoading={isInboundsLoading}
+        />
+    )
 }

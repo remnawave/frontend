@@ -1,93 +1,89 @@
 import { DragDropContext, Droppable, DropResult } from '@hello-pangea/dnd'
+import { memo, useCallback, useEffect, useMemo } from 'react'
 import { useListState } from '@mantine/hooks'
-import { useEffect, useState } from 'react'
 
-import { MultiSelectHostsFeature } from '@features/dashboard/hosts/multi-select-hosts/multi-select-hosts.feature'
 import { HostCardWidget } from '@widgets/dashboard/hosts/host-card'
 import { EmptyPageLayout } from '@shared/ui/layouts/empty-page'
 import { useReorderHosts } from '@shared/api/hooks'
 
 import { IProps } from './interfaces'
 
-export function HostsTableWidget(props: IProps) {
-    const { inbounds, hosts } = props
+const MemoizedHostCard = memo(HostCardWidget)
 
+export function HostsTableWidget(props: IProps) {
+    const { inbounds, hosts, selectedHosts, setSelectedHosts } = props
     const [state, handlers] = useListState(hosts || [])
-    const [selectedHosts, setSelectedHosts] = useState<string[]>([])
 
     const { mutate: reorderHosts } = useReorderHosts()
 
-    useEffect(() => {
-        ;(async () => {
-            if (!hosts || !state) {
-                return
-            }
+    const checkOrderAndReorder = useCallback(() => {
+        if (!hosts || !state) return
 
+        const hasOrderChanged = hosts.some((host, index) => state[index]?.uuid !== host.uuid)
+
+        if (hasOrderChanged) {
             const updatedHosts = hosts.map((host) => ({
                 uuid: host.uuid,
                 viewPosition: state.findIndex((stateItem) => stateItem.uuid === host.uuid)
             }))
 
-            const hasOrderChanged = hosts?.some((host, index) => host.uuid !== state[index].uuid)
+            reorderHosts({ variables: { hosts: updatedHosts } })
+        }
+    }, [hosts, state, reorderHosts])
 
-            if (hasOrderChanged) {
-                reorderHosts({ variables: { hosts: updatedHosts } })
-            }
-        })()
-    }, [state])
+    useEffect(() => {
+        checkOrderAndReorder()
+    }, [checkOrderAndReorder])
 
     useEffect(() => {
         handlers.setState(hosts || [])
     }, [hosts])
 
-    if (!hosts || !inbounds) {
-        return null
-    }
+    const toggleHostSelection = useCallback(
+        (hostId: string) => {
+            setSelectedHosts((prev) =>
+                prev.includes(hostId) ? prev.filter((id) => id !== hostId) : [...prev, hostId]
+            )
+        },
+        [setSelectedHosts]
+    )
 
-    if (hosts.length === 0) {
-        return <EmptyPageLayout />
-    }
+    const handleDragEnd = useCallback(
+        async (result: DropResult) => {
+            const { destination, source } = result
+            handlers.reorder({ from: source.index, to: destination?.index || 0 })
+        },
+        [handlers]
+    )
 
-    const handleDragEnd = async (result: DropResult) => {
-        const { destination, source } = result
-        handlers.reorder({ from: source.index, to: destination?.index || 0 })
-    }
+    const selectedHostsMap = useMemo(() => {
+        const map = new Set(selectedHosts)
+        return map
+    }, [selectedHosts])
 
-    const toggleHostSelection = (hostId: string) => {
-        setSelectedHosts((prev) =>
-            prev.includes(hostId) ? prev.filter((id) => id !== hostId) : [...prev, hostId]
-        )
-    }
+    if (!hosts || !inbounds) return null
+    if (hosts.length === 0) return <EmptyPageLayout />
 
     return (
-        <>
-            <DragDropContext onDragEnd={handleDragEnd}>
-                <Droppable direction="vertical" droppableId="dnd-list">
-                    {(provided) => (
-                        <div {...provided.droppableProps} ref={provided.innerRef}>
-                            {state.map((item, index) => (
-                                <div key={item.uuid} style={{ position: 'relative' }}>
-                                    <HostCardWidget
-                                        inbounds={inbounds}
-                                        index={index}
-                                        isSelected={selectedHosts.includes(item.uuid)}
-                                        item={item}
-                                        onSelect={() => toggleHostSelection(item.uuid)}
-                                    />
-                                </div>
-                            ))}
-                            {provided.placeholder}
-                        </div>
-                    )}
-                </Droppable>
-            </DragDropContext>
-
-            <MultiSelectHostsFeature
-                hosts={hosts}
-                inbounds={inbounds}
-                selectedHosts={selectedHosts}
-                setSelectedHosts={setSelectedHosts}
-            />
-        </>
+        <DragDropContext onDragEnd={handleDragEnd}>
+            <Droppable direction="vertical" droppableId="dnd-list">
+                {(provided) => (
+                    <div {...provided.droppableProps} ref={provided.innerRef}>
+                        {state.map((item, index) => (
+                            <div key={item.uuid} style={{ position: 'relative' }}>
+                                <MemoizedHostCard
+                                    inbounds={inbounds}
+                                    index={index}
+                                    isSelected={selectedHostsMap.has(item.uuid)}
+                                    item={item}
+                                    onSelect={() => toggleHostSelection(item.uuid)}
+                                />
+                            </div>
+                        ))}
+                        {provided.placeholder}
+                    </div>
+                )}
+            </Droppable>
+        </DragDropContext>
     )
 }
