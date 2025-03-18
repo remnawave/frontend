@@ -57,9 +57,11 @@ export const EditNodeModalConnectorWidget = () => {
             queryKey: nodesQueryKeys.getNode({ uuid: node?.uuid ?? '' }).queryKey
         })
 
-        form.reset()
-        form.resetDirty()
-        form.resetTouched()
+        setTimeout(() => {
+            form.reset()
+            form.resetDirty()
+            form.resetTouched()
+        }, 200)
     }
 
     const { mutate: updateNode, isPending: isUpdateNodePending } = useUpdateNode({

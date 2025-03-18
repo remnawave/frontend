@@ -1,8 +1,8 @@
 import { UpdateHostCommand } from '@remnawave/backend-contract'
 import { useForm, zodResolver } from '@mantine/form'
 import { useTranslation } from 'react-i18next'
-import { Modal, Text } from '@mantine/core'
 import { useEffect, useState } from 'react'
+import { Modal, Text } from '@mantine/core'
 
 import {
     useHostsStoreActions,
@@ -29,19 +29,14 @@ export const EditHostModalWidget = () => {
         validate: zodResolver(UpdateHostCommand.RequestSchema.omit({ uuid: true }))
     })
 
-    form.watch('inboundUuid', ({ value }) => {
-        const inbound = inbounds?.find((inbound) => inbound.uuid === value)
-        if (inbound) {
-            form.setFieldValue('port', inbound.port)
-        }
-    })
-
     const handleClose = () => {
         actions.toggleEditModal(false)
 
-        form.reset()
-        form.resetDirty()
-        form.resetTouched()
+        setTimeout(() => {
+            form.reset()
+            form.resetDirty()
+            form.resetTouched()
+        }, 200)
     }
 
     const { mutate: updateHost, isPending: isUpdateHostPending } = useUpdateHost({
@@ -70,6 +65,13 @@ export const EditHostModalWidget = () => {
             })
         }
     }, [host, inbounds])
+
+    form.watch('inboundUuid', ({ value }) => {
+        const inbound = inbounds?.find((inbound) => inbound.uuid === value)
+        if (inbound) {
+            form.setFieldValue('port', inbound.port)
+        }
+    })
 
     const handleSubmit = form.onSubmit(async (values) => {
         if (!host) {

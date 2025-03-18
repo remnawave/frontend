@@ -25,7 +25,9 @@ export const ModalAccordionWidget = (props: IProps) => {
     return (
         <Accordion defaultValue={accordionValue} key={node?.uuid} radius="md" variant="contained">
             <Accordion.Item value="info">
-                <Accordion.Control icon={<PiInfo color="red" size={'1.50rem'} />}>
+                <Accordion.Control
+                    icon={<PiInfo color="var(--mantine-color-red-7)" size={'1.50rem'} />}
+                >
                     {t('error-accordeon.widget.important-note')}
                 </Accordion.Control>
                 <Accordion.Panel>
