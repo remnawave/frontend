@@ -1,3 +1,4 @@
+import { AnimatePresence, motion } from 'motion/react'
 import { useTranslation } from 'react-i18next'
 import { Grid } from '@mantine/core'
 
@@ -13,6 +14,17 @@ import { IProps } from './interfaces'
 export default function HostsPageComponent(props: IProps) {
     const { t } = useTranslation()
     const { inbounds, hosts, isHostsLoading } = props
+
+    const containerVariants = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: {
+                when: 'beforeChildren',
+                staggerChildren: 0.1
+            }
+        }
+    }
 
     return (
         <Page title={t('constants.hosts')}>
@@ -31,7 +43,16 @@ export default function HostsPageComponent(props: IProps) {
                     {isHostsLoading ? (
                         <LoadingScreen height="60vh" />
                     ) : (
-                        <HostsTableWidget hosts={hosts} inbounds={inbounds} />
+                        <AnimatePresence>
+                            <motion.div
+                                animate="visible"
+                                exit={{ opacity: 0 }}
+                                initial="hidden"
+                                variants={containerVariants}
+                            >
+                                <HostsTableWidget hosts={hosts} inbounds={inbounds} />
+                            </motion.div>
+                        </AnimatePresence>
                     )}
                 </Grid.Col>
             </Grid>
