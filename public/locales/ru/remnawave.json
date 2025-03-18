@@ -447,7 +447,7 @@
             "remote-dns-domain": "Домен удаленного DNS",
             "server-ip-for-doh-or-dou": "IP сервера для DoH или DoU",
             "remote-dns-ip": "IP удаленного DNS",
-            "domenstic-dns-type-description": "Выберите DoH (DNS через HTTPS) или DoU (DNS через UDP)",
+            "domestic-dns-type-description": "Выберите DoH (DNS через HTTPS) или DoU (DNS через UDP)",
             "domestic-dns-type": "Тип локального DNS",
             "domain-name-for-doh-0": "Доменное имя для DoH",
             "domestic-dns-domain": "Домен локального DNS",

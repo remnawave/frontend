@@ -305,7 +305,7 @@ export const HappRoutingBuilderWidget = () => {
                                             { value: 'DoU', label: 'DoU' }
                                         ]}
                                         description={t(
-                                            'happ-routing-builder.widget.domenstic-dns-type-description'
+                                            'happ-routing-builder.widget.domestic-dns-type-description'
                                         )}
                                         label={t('happ-routing-builder.widget.domestic-dns-type')}
                                         onChange={(value) =>
