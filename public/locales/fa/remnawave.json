@@ -196,9 +196,9 @@
     "error-accordeon": {
         "widget": {
             "last-error-message": "آخرین پیام خطا",
-            "important-note-description": "برای اتصال به نود باید این مقدار (سرتیفیکت) را در فایل قرار دهید",
+            "important-note-description": "برای اتصال به نود باید این سرتیفیکت را در فایل قرار دهید",
             "important-note": "نکته مهم",
-            "important-note-description-value": "ارزش \nکپی و چسباندن آن در Remnanode"
+            "important-note-description-value": "سرتیفیکت \nکپی و چسباندن آن در Remnanode"
         }
     },
     "node-card": {
@@ -447,7 +447,7 @@
             "remote-dns-domain": "دامنه سرور DNS ریموت",
             "server-ip-for-doh-or-dou": "آدرس آیپی برای DoH یا DoU",
             "remote-dns-ip": "آیپی DNS ریموت",
-            "domenstic-dns-type-description": "استفاده از DoU یا DoH برای سرور DNS محلی",
+            "domestic-dns-type-description": "استفاده از DoU یا DoH برای سرور DNS محلی",
             "domestic-dns-type": "نوع DNS محلی",
             "domain-name-for-doh-0": "دامنه سرور DoH",
             "domestic-dns-domain": "دامنه سرور DNS محلی",

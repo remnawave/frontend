@@ -447,7 +447,7 @@
             "remote-dns-domain": "Remote DNS Domain",
             "server-ip-for-doh-or-dou": "Server IP for DoH or DoU",
             "remote-dns-ip": "Remote DNS IP",
-            "domenstic-dns-type-description": "Choose DoH (DNS over HTTPS) or DoU (DNS over UDP)",
+            "domestic-dns-type-description": "Choose DoH (DNS over HTTPS) or DoU (DNS over UDP)",
             "domestic-dns-type": "Domestic DNS Type",
             "domain-name-for-doh-0": "Domain name for DoH",
             "domestic-dns-domain": "Domestic DNS Domain",
