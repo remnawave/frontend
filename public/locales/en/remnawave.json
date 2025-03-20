@@ -572,7 +572,9 @@
             "add-nodes-to-inbound-line-1": "Are you sure you want to add this inbound to nodes?",
             "add-nodes-to-inbound-line-2": "This action will add the inbound to all nodes.",
             "remove-nodes-from-inbound-line-1": "Are you sure you want to remove this inbound from nodes?",
-            "remove-nodes-from-inbound-line-2": "This action will remove the inbound from all nodes."
+            "remove-nodes-from-inbound-line-2": "This action will remove the inbound from all nodes.",
+            "copied": "Copied",
+            "copy-uuid": "Copy UUID"
         }
     },
     "multi-select-hosts": {

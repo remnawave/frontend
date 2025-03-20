@@ -572,7 +572,9 @@
             "add-nodes-to-inbound-line-1": "Вы уверены, что хотите добавить этот инбаунд нодам?",
             "add-nodes-to-inbound-line-2": "Это действие добавит инбаунд всем нодам.",
             "remove-nodes-from-inbound-line-1": "Вы уверены, что хотите удалить этот инбаунд у нод?",
-            "remove-nodes-from-inbound-line-2": "Это действие удалит инбаунд у всех нод."
+            "remove-nodes-from-inbound-line-2": "Это действие удалит инбаунд у всех нод.",
+            "copied": "Скопированный",
+            "copy-uuid": "Копировать uuid"
         }
     },
     "multi-select-hosts": {

@@ -2,6 +2,7 @@ import {
     Badge,
     Button,
     Card,
+    CopyButton,
     Divider,
     Group,
     JsonInput,
@@ -12,7 +13,9 @@ import {
     Tooltip
 } from '@mantine/core'
 import {
+    PiCheck,
     PiCode,
+    PiCopy,
     PiCpu,
     PiDoorOpen,
     PiGlobe,
@@ -346,6 +349,21 @@ export function InboundsCardWidget(props: IProps) {
                 >
                     {t('inbounds-card.widget.show-raw-inbound')}
                 </Button>
+                <CopyButton timeout={2000} value={inbound.uuid}>
+                    {({ copied, copy }) => (
+                        <Button
+                            color={copied ? 'teal' : 'gray'}
+                            leftSection={copied ? <PiCheck size="1rem" /> : <PiCopy size="1rem" />}
+                            onClick={copy}
+                            size="sm"
+                            variant="subtle"
+                        >
+                            {copied
+                                ? t('inbounds-card.widget.copied')
+                                : t('inbounds-card.widget.copy-uuid')}
+                        </Button>
+                    )}
+                </CopyButton>
             </Group>
         </Paper>
     )

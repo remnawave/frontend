@@ -572,7 +572,9 @@
             "add-nodes-to-inbound-line-1": "آیا مطمئن هستید که می‌خواهید این اینباند را به نودها اضافه کنید؟",
             "add-nodes-to-inbound-line-2": "این اقدام اینباند را به همه نودها اضافه خواهد کرد.",
             "remove-nodes-from-inbound-line-1": "آیا مطمئن هستید که می‌خواهید این اینباند را از نودها حذف کنید؟",
-            "remove-nodes-from-inbound-line-2": "این اقدام اینباند را از همه نودها حذف خواهد کرد."
+            "remove-nodes-from-inbound-line-2": "این اقدام اینباند را از همه نودها حذف خواهد کرد.",
+            "copied": "کپی شده",
+            "copy-uuid": "کپی UUID"
         }
     },
     "multi-select-hosts": {
