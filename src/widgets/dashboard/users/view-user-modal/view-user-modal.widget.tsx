@@ -66,6 +66,16 @@ export const ViewUserModal = () => {
 
     const { data: inbounds } = useGetInbounds()
 
+    const form = useForm<IFormValues>({
+        name: 'edit-user-form',
+        mode: 'uncontrolled',
+        validate: zodResolver(
+            UpdateUserCommand.RequestSchema.omit({ expireAt: true, email: true, telegramId: true })
+        )
+    })
+
+    const isQueryEnabled = !!selectedUser && !form.isTouched()
+
     const {
         data: user,
         isLoading: isUserLoading,
@@ -75,16 +85,8 @@ export const ViewUserModal = () => {
             uuid: selectedUser ?? ''
         },
         rQueryParams: {
-            enabled: !!selectedUser
+            enabled: isQueryEnabled
         }
-    })
-
-    const form = useForm<IFormValues>({
-        name: 'edit-user-form',
-        mode: 'uncontrolled',
-        validate: zodResolver(
-            UpdateUserCommand.RequestSchema.omit({ expireAt: true, email: true, telegramId: true })
-        )
     })
 
     const {

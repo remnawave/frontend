@@ -725,7 +725,8 @@
         "feature": {
             "loading-subscription-links": "بارگیری پیوندهای اشتراک ...",
             "show-links": "نشان دادن پیوندها",
-            "subscription-links": "پیوندهای اشتراک"
+            "subscription-links": "پیوندهای اشتراک",
+            "no-available-hosts-found-for-this-user": "هیچ میزبان موجود برای این کاربر یافت نمی شود"
         }
     }
 }

@@ -725,7 +725,8 @@
         "feature": {
             "subscription-links": "Subscription links",
             "loading-subscription-links": "Loading subscription links...",
-            "show-links": "Show links"
+            "show-links": "Show links",
+            "no-available-hosts-found-for-this-user": "No available hosts found for this user"
         }
     }
 }

@@ -725,7 +725,8 @@
         "feature": {
             "loading-subscription-links": "Загрузка ссылок на подписку ...",
             "show-links": "Показать ссылки",
-            "subscription-links": "Подписные ссылки"
+            "subscription-links": "Подписные ссылки",
+            "no-available-hosts-found-for-this-user": "Для этого пользователя не найдено доступных хостов"
         }
     }
 }
