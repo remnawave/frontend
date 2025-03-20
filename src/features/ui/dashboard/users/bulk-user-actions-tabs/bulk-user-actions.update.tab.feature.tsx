@@ -164,6 +164,8 @@ export const BulkUserActionsUpdateTabFeature = (props: IProps) => {
 
                 <NumberInput
                     allowDecimal={false}
+                    allowNegative={false}
+                    hideControls
                     key={form.key('fields.telegramId')}
                     label="Telegram ID"
                     leftSection={<PiTelegramLogoDuotone size="1rem" />}

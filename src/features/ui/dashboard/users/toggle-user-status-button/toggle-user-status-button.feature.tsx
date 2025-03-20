@@ -1,7 +1,7 @@
 import { PiCellSignalFullDuotone, PiCellSignalSlashDuotone, PiTrashDuotone } from 'react-icons/pi'
 import { USERS_STATUS } from '@remnawave/backend-contract'
+import { ActionIcon, Tooltip } from '@mantine/core'
 import { useTranslation } from 'react-i18next'
-import { Button } from '@mantine/core'
 
 import { useDisableUser, useEnableUser, usersQueryKeys } from '@shared/api/hooks'
 import { queryClient } from '@shared/api'
@@ -39,7 +39,7 @@ export function ToggleUserStatusButtonFeature(props: IProps) {
         buttonLabel = t('toggle-user-status-button.feature.enable')
         icon = <PiCellSignalFullDuotone size="1rem" />
     } else {
-        color = 'red'
+        color = 'var(--mantine-color-red-5)'
         buttonLabel = t('toggle-user-status-button.feature.disable')
         icon = <PiCellSignalSlashDuotone size="1rem" />
     }
@@ -53,15 +53,15 @@ export function ToggleUserStatusButtonFeature(props: IProps) {
     }
 
     return (
-        <Button
-            color={color}
-            leftSection={icon}
-            loading={isDisableUserPending || isEnableUserPending}
-            onClick={handleToggleUserStatus}
-            size="md"
-            type="button"
-        >
-            {buttonLabel}
-        </Button>
+        <Tooltip label={buttonLabel}>
+            <ActionIcon
+                color={color}
+                loading={isDisableUserPending || isEnableUserPending}
+                onClick={handleToggleUserStatus}
+                size="xl"
+            >
+                {icon}
+            </ActionIcon>
+        </Tooltip>
     )
 }

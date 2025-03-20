@@ -42,6 +42,7 @@ import {
     useUserModalStoreIsModalOpen,
     useUserModalStoreUserUuid
 } from '@entities/dashboard/user-modal-store/user-modal-store'
+import { GetUserSubscriptionLinksFeature } from '@features/ui/dashboard/users/get-user-subscription-links'
 import { ToggleUserStatusButtonFeature } from '@features/ui/dashboard/users/toggle-user-status-button'
 import { RevokeSubscriptionUserFeature } from '@features/ui/dashboard/users/revoke-subscription-user'
 import { useGetInbounds, useGetUserByUuid, usersQueryKeys, useUpdateUser } from '@shared/api/hooks'
@@ -287,9 +288,12 @@ export const ViewUserModal = () => {
 
                             <NumberInput
                                 allowDecimal={false}
+                                allowNegative={false}
+                                hideControls
                                 key={form.key('telegramId')}
                                 label="Telegram ID"
                                 leftSection={<PiTelegramLogoDuotone size="1rem" />}
+                                placeholder="Enter user's Telegram ID (optional)"
                                 {...form.getInputProps('telegramId')}
                             />
 
@@ -297,6 +301,7 @@ export const ViewUserModal = () => {
                                 key={form.key('email')}
                                 label="Email"
                                 leftSection={<PiEnvelopeDuotone size="1rem" />}
+                                placeholder="Enter user's email (optional)"
                                 {...form.getInputProps('email')}
                             />
 
@@ -411,6 +416,7 @@ export const ViewUserModal = () => {
                                 <DeleteUserFeature userUuid={user?.uuid ?? ''} />
                                 <ResetUsageUserFeature userUuid={user?.uuid ?? ''} />
                                 <RevokeSubscriptionUserFeature userUuid={user?.uuid ?? ''} />
+                                {user && <ToggleUserStatusButtonFeature user={user} />}
                             </ActionIcon.Group>
                         </Group>
                         <Group>
@@ -449,7 +455,7 @@ export const ViewUserModal = () => {
                             >
                                 {t('view-user-modal.widget.show-qr')}
                             </Button>
-                            {user && <ToggleUserStatusButtonFeature user={user} />}
+                            {user && <GetUserSubscriptionLinksFeature shortUuid={user.shortUuid} />}
                             <Button
                                 color="blue"
                                 leftSection={<PiFloppyDiskDuotone size="1rem" />}

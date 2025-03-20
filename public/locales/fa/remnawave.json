@@ -720,5 +720,12 @@
             "select-all": "انتخاب همه",
             "bulk-actions": "اقدامات دسته‌جمعی"
         }
+    },
+    "get-user-subscription-links": {
+        "feature": {
+            "loading-subscription-links": "بارگیری پیوندهای اشتراک ...",
+            "show-links": "نشان دادن پیوندها",
+            "subscription-links": "پیوندهای اشتراک"
+        }
     }
 }

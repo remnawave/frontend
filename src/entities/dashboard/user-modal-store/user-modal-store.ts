@@ -18,11 +18,15 @@ export const useUserModalStore = create<IActions & IState>()(
                     set(() => ({ isModalOpen: modalState }))
                     if (!modalState) {
                         set(() => ({
-                            userUuid: null,
                             isModalOpen: false
                         }))
 
-                        getState().actions.resetState()
+                        setTimeout(() => {
+                            set(() => ({
+                                userUuid: null
+                            }))
+                            getState().actions.resetState()
+                        }, 300)
                     }
                 },
                 setUserUuid: async (userUuid: string): Promise<void> => {

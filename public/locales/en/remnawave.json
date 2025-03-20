@@ -720,5 +720,12 @@
             "select-all": "Select all",
             "bulk-actions": "Bulk actions"
         }
+    },
+    "get-user-subscription-links": {
+        "feature": {
+            "subscription-links": "Subscription links",
+            "loading-subscription-links": "Loading subscription links...",
+            "show-links": "Show links"
+        }
     }
 }

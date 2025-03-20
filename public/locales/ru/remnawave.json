@@ -720,5 +720,12 @@
             "select-all": "Выбрать все",
             "bulk-actions": "Массовые действия"
         }
+    },
+    "get-user-subscription-links": {
+        "feature": {
+            "loading-subscription-links": "Загрузка ссылок на подписку ...",
+            "show-links": "Показать ссылки",
+            "subscription-links": "Подписные ссылки"
+        }
     }
 }

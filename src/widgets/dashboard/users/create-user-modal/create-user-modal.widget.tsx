@@ -195,9 +195,11 @@ export const CreateUserModalWidget = () => {
                         <Stack gap="md" style={{ flex: '1 1 350px' }}>
                             <NumberInput
                                 allowDecimal={false}
+                                allowNegative={false}
                                 description={t(
                                     'create-user-modal.widget.telegram-id-of-a-user-in-telegram'
                                 )}
+                                hideControls
                                 key={form.key('telegramId')}
                                 label="Telegram ID"
                                 leftSection={<PiTelegramLogoDuotone size="1rem" />}

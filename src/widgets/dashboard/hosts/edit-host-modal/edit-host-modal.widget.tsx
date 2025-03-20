@@ -36,6 +36,7 @@ export const EditHostModalWidget = () => {
             form.reset()
             form.resetDirty()
             form.resetTouched()
+            setAdvancedOpened(false)
         }, 200)
     }
 
