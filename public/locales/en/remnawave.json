@@ -304,7 +304,13 @@
         "tls-transport-layer-security": "TLS (Transport Layer Security)",
         "none": "None",
         "inbounds-default": "Inbound's default",
-        "here-you-can-override-security-settings-from-xtls-config": "Here you can override security settings from XTLS Config."
+        "here-you-can-override-security-settings-from-xtls-config": "Here you can override security settings from XTLS Config.",
+        "extra-xhttp": "Extra xHTTP",
+        "xhttp-extra-params": "xHTTP extra params",
+        "extra-xhttp-description": "This extra params will work only with xHTTP protocol. Pass object \"extra\" to the client. This JSON input is not validated, be sure to paste the correct extra params. Use the button below to copy the basic extra params, then paste it into the JSON input.",
+        "invalid-json": "Invalid JSON",
+        "fill-with-sample-xhttp-extra-params": "Fill with sample xHTTP extra params",
+        "close": "Close"
     },
     "base-node-form": {
         "country": "Country",

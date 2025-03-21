@@ -2,14 +2,25 @@ import {
     ActionIcon,
     Button,
     Collapse,
+    Drawer,
     Group,
+    JsonInput,
     NumberInput,
     Select,
     Stack,
     Switch,
+    Text,
     TextInput,
     Tooltip
 } from '@mantine/core'
+import {
+    PiArrowUpDuotone,
+    PiCaretDown,
+    PiCaretUp,
+    PiFloppyDiskDuotone,
+    PiInfo,
+    PiPencilDuotone
+} from 'react-icons/pi'
 import {
     ALPN,
     CreateHostCommand,
@@ -17,13 +28,59 @@ import {
     SECURITY_LAYERS,
     UpdateHostCommand
 } from '@remnawave/backend-contract'
-import { PiCaretDown, PiCaretUp, PiFloppyDiskDuotone, PiInfo } from 'react-icons/pi'
+import { useDisclosure } from '@mantine/hooks'
 import { useTranslation } from 'react-i18next'
 
 import { DeleteHostFeature } from '@features/ui/dashboard/hosts/delete-host'
 import { RemarkInfoPopoverWidget } from '@widgets/dashboard/hosts/popovers'
 
 import { IProps } from './interfaces'
+
+const basicXHttpExtraParams = `{
+  "headers": {},
+  "xPaddingBytes": "100-1000",
+  "noGRPCHeader": false,
+  "scMaxEachPostBytes": 1000000,
+  "scMinPostsIntervalMs": 30,
+  "scStreamUpServerSecs": "20-80",
+  "xmux": {
+    "maxConcurrency": "16-32",
+    "maxConnections": 0,
+    "cMaxReuseTimes": 0,
+    "hMaxRequestTimes": "600-900",
+    "hMaxReusableSecs": "1800-3000",
+    "hKeepAlivePeriod": 0
+  },
+  "downloadSettings": {
+    "address": "",
+    "port": 443,
+    "network": "xhttp",
+    "security": "tls",
+    "tlsSettings": {},
+    "xhttpSettings": {
+      "path": "/yourpath"
+    },
+    "sockopt": {}
+  }
+}`
+
+const pasteBasicXHttpExtraParams = `{
+  "headers": {},
+  "xPaddingBytes": "100-1000",
+  "noGRPCHeader": false,
+  "scMaxEachPostBytes": 1000000,
+  "scMinPostsIntervalMs": 30,
+  "scStreamUpServerSecs": "20-80",
+  "xmux": {
+    "maxConcurrency": "16-32",
+    "maxConnections": 0,
+    "cMaxReuseTimes": 0,
+    "hMaxRequestTimes": "600-900",
+    "hMaxReusableSecs": "1800-3000",
+    "hKeepAlivePeriod": 0
+  }
+}
+`
 
 export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCommand.Request>(
     props: IProps<T>
@@ -32,11 +89,23 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
         props
 
     const { t } = useTranslation()
+    const [opened, { open, close }] = useDisclosure(false)
 
     const securityLayerLabels = {
         [SECURITY_LAYERS.TLS]: t('base-host-form.tls-transport-layer-security'),
         [SECURITY_LAYERS.NONE]: t('base-host-form.none'),
         [SECURITY_LAYERS.DEFAULT]: t('base-host-form.inbounds-default')
+    }
+
+    const isXhttpExtraButtonDisabled = () => {
+        return (
+            !inbounds ||
+            !form.getValues().inboundUuid ||
+            !inbounds.some(
+                (inbound) =>
+                    inbound.uuid === form.getValues().inboundUuid && inbound.network === 'xhttp'
+            )
+        )
     }
 
     return (
@@ -226,6 +295,17 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
                                     {...form.getInputProps('fingerprint')}
                                     w="55%"
                                 />
+
+                                <Button
+                                    color="pink"
+                                    disabled={isXhttpExtraButtonDisabled()}
+                                    leftSection={<PiPencilDuotone />}
+                                    mt={'xs'}
+                                    onClick={open}
+                                    variant="light"
+                                >
+                                    {t('base-host-form.extra-xhttp')}
+                                </Button>
                             </Group>
                         </Stack>
                     </Collapse>
@@ -249,6 +329,43 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
                     {t('base-host-form.save')}
                 </Button>
             </Group>
+
+            <Drawer
+                onClose={close}
+                opened={opened}
+                overlayProps={{ backgroundOpacity: 0.6, blur: 0 }}
+                padding="lg"
+                position="right"
+                size="lg"
+                title={t('base-host-form.xhttp-extra-params')}
+            >
+                <Stack gap="md">
+                    <Text size="sm">{t('base-host-form.extra-xhttp-description')}</Text>
+                    <JsonInput
+                        autosize
+                        formatOnBlur
+                        key={form.key('xHttpExtraParams')}
+                        minRows={15}
+                        placeholder={basicXHttpExtraParams}
+                        validationError={t('base-host-form.invalid-json')}
+                        {...form.getInputProps('xHttpExtraParams')}
+                    />
+
+                    <Button
+                        color="gray"
+                        leftSection={<PiArrowUpDuotone size="1.2rem" />}
+                        onClick={() => {
+                            // @ts-expect-error -- TODO: fix this
+                            form.setFieldValue('xHttpExtraParams', pasteBasicXHttpExtraParams)
+                        }}
+                        variant="light"
+                    >
+                        {t('base-host-form.fill-with-sample-xhttp-extra-params')}
+                    </Button>
+
+                    <Button onClick={close}>{t('base-host-form.close')}</Button>
+                </Stack>
+            </Drawer>
         </form>
     )
 }

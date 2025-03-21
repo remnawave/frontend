@@ -26,7 +26,9 @@ export const EditHostModalWidget = () => {
     const form = useForm<UpdateHostCommand.Request>({
         name: 'edit-host-form',
         mode: 'uncontrolled',
-        validate: zodResolver(UpdateHostCommand.RequestSchema.omit({ uuid: true }))
+        validate: zodResolver(
+            UpdateHostCommand.RequestSchema.omit({ uuid: true, xHttpExtraParams: true })
+        )
     })
 
     const handleClose = () => {
@@ -50,6 +52,14 @@ export const EditHostModalWidget = () => {
 
     useEffect(() => {
         if (host && inbounds) {
+            let xHttpExtraParamsParsed: null | object | string
+
+            if (typeof host.xHttpExtraParams === 'object' && host.xHttpExtraParams !== null) {
+                xHttpExtraParamsParsed = JSON.stringify(host.xHttpExtraParams, null, 2)
+            } else {
+                xHttpExtraParamsParsed = ''
+            }
+
             form.setValues({
                 remark: host.remark,
                 address: host.address,
@@ -61,6 +71,7 @@ export const EditHostModalWidget = () => {
                 host: host.host ?? undefined,
                 path: host.path ?? undefined,
                 alpn: (host.alpn as UpdateHostCommand.Request['alpn']) ?? undefined,
+                xHttpExtraParams: xHttpExtraParamsParsed,
                 fingerprint:
                     (host.fingerprint as UpdateHostCommand.Request['fingerprint']) ?? undefined
             })
@@ -79,11 +90,25 @@ export const EditHostModalWidget = () => {
             return
         }
 
+        let xHttpExtraParams
+
+        try {
+            if (values.xHttpExtraParams === '') {
+                xHttpExtraParams = null
+            } else {
+                xHttpExtraParams = JSON.parse(values.xHttpExtraParams as unknown as string)
+            }
+        } catch (error) {
+            xHttpExtraParams = null
+            // silence
+        }
+
         updateHost({
             variables: {
                 ...values,
                 isDisabled: !values.isDisabled,
-                uuid: host.uuid
+                uuid: host.uuid,
+                xHttpExtraParams
             }
         })
     })
