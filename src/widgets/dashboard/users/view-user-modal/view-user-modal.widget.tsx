@@ -14,7 +14,8 @@ import {
     Stack,
     Text,
     Textarea,
-    TextInput
+    TextInput,
+    Tooltip
 } from '@mantine/core'
 import {
     PiCalendarDuotone,
@@ -48,6 +49,7 @@ import { RevokeSubscriptionUserFeature } from '@features/ui/dashboard/users/revo
 import { useGetInbounds, useGetUserByUuid, usersQueryKeys, useUpdateUser } from '@shared/api/hooks'
 import { ResetUsageUserFeature } from '@features/ui/dashboard/users/reset-usage-user'
 import { bytesToGbUtil, gbToBytesUtil, prettyBytesUtil } from '@shared/utils/bytes'
+import { GetUserUsageFeature } from '@features/ui/dashboard/users/get-user-usage'
 import { DeleteUserFeature } from '@features/ui/dashboard/users/delete-user'
 import { UserStatusBadge } from '@widgets/dashboard/users/user-status-badge'
 import { LoaderModalShared } from '@shared/ui/loader-modal'
@@ -422,42 +424,51 @@ export const ViewUserModal = () => {
                             </ActionIcon.Group>
                         </Group>
                         <Group>
-                            <Button
-                                leftSection={<PiQrCodeDuotone size="1rem" />}
-                                onClick={() => {
-                                    const subscriptionQrCode = renderSVG(
-                                        user?.subscriptionUrl ?? '',
-                                        {
-                                            whiteColor: '#161B22',
-                                            blackColor: '#3CC9DB'
-                                        }
-                                    )
-                                    modals.open({
-                                        centered: true,
-                                        title: t('view-user-modal.widget.subscription-qr-code'),
-                                        children: (
-                                            <>
-                                                <div
-                                                    dangerouslySetInnerHTML={{
-                                                        __html: subscriptionQrCode
-                                                    }}
-                                                />
-                                                <Button
-                                                    fullWidth
-                                                    mt="md"
-                                                    onClick={() => modals.closeAll()}
-                                                >
-                                                    {t('view-user-modal.widget.close')}
-                                                </Button>
-                                            </>
-                                        )
-                                    })
-                                }}
-                                size="md"
-                            >
-                                {t('view-user-modal.widget.show-qr')}
-                            </Button>
-                            {user && <GetUserSubscriptionLinksFeature shortUuid={user.shortUuid} />}
+                            <ActionIcon.Group>
+                                <Tooltip label={t('view-user-modal.widget.subscription-qr-code')}>
+                                    <ActionIcon
+                                        color="cyan"
+                                        onClick={() => {
+                                            const subscriptionQrCode = renderSVG(
+                                                user?.subscriptionUrl ?? '',
+                                                {
+                                                    whiteColor: '#161B22',
+                                                    blackColor: '#3CC9DB'
+                                                }
+                                            )
+                                            modals.open({
+                                                centered: true,
+                                                title: t(
+                                                    'view-user-modal.widget.subscription-qr-code'
+                                                ),
+                                                children: (
+                                                    <>
+                                                        <div
+                                                            dangerouslySetInnerHTML={{
+                                                                __html: subscriptionQrCode
+                                                            }}
+                                                        />
+                                                        <Button
+                                                            fullWidth
+                                                            mt="md"
+                                                            onClick={() => modals.closeAll()}
+                                                        >
+                                                            {t('view-user-modal.widget.close')}
+                                                        </Button>
+                                                    </>
+                                                )
+                                            })
+                                        }}
+                                        size="xl"
+                                    >
+                                        <PiQrCodeDuotone size="1.5rem" />
+                                    </ActionIcon>
+                                </Tooltip>
+                                {user && (
+                                    <GetUserSubscriptionLinksFeature shortUuid={user.shortUuid} />
+                                )}
+                            </ActionIcon.Group>
+                            {user && <GetUserUsageFeature userUuid={user.uuid} />}
                             <Button
                                 color="blue"
                                 leftSection={<PiFloppyDiskDuotone size="1rem" />}

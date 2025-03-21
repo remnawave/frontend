@@ -728,5 +728,41 @@
             "subscription-links": "Подписные ссылки",
             "no-available-hosts-found-for-this-user": "Для этого пользователя не найдено доступных хостов"
         }
+    },
+    "delete-user": {
+        "feature": {
+            "delete-user": "Delete user",
+            "are-you-sure": "Are you sure you want to delete the user? This action is irreversible.",
+            "delete": "Delete",
+            "cancel": "Cancel"
+        }
+    },
+    "user-usage-modal": {
+        "widget": {
+            "no-data-available-for-the-selected-period": "No data available for the selected period",
+            "no-data-available": "No data available",
+            "click-to-show-all": "Click to show all",
+            "click-to-highlight-only-this-node": "Click to highlight only this node",
+            "traffic-statistics": "Traffic statistics",
+            "usage-by-period": "Usage by period",
+            "7-days": "7 days",
+            "14-days": "14 days",
+            "30-days": "30 days",
+            "60-days": "60 days",
+            "90-days": "90 days",
+            "180-days": "180 days",
+            "365-days": "365 days",
+            "total-traffic": "Total traffic",
+            "top-nodes": "Top nodes",
+            "stacked": "Stacked",
+            "grouped": "Grouped",
+            "filter-nodes": "Filter nodes",
+            "bar-chart": "Bar chart"
+        }
+    },
+    "get-user-usage": {
+        "feature": {
+            "show-usage": "Show usage"
+        }
     }
 }

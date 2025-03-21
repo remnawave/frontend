@@ -1,6 +1,5 @@
 import {
     ActionIcon,
-    Button,
     Center,
     CopyButton,
     Drawer,
@@ -22,6 +21,7 @@ import { IProps } from './interfaces'
 export function GetUserSubscriptionLinksFeature(props: IProps) {
     const { shortUuid } = props
     const { t } = useTranslation()
+
     const [opened, handlers] = useDisclosure(false)
 
     const {
@@ -103,15 +103,9 @@ export function GetUserSubscriptionLinksFeature(props: IProps) {
                 )}
             </Drawer>
             <Tooltip label={t('get-user-subscription-links.feature.subscription-links')}>
-                <Button
-                    color="green"
-                    leftSection={<PiLinkBreakDuotone size="1.5rem" />}
-                    onClick={handlers.open}
-                    size="md"
-                    type="button"
-                >
-                    {t('get-user-subscription-links.feature.show-links')}
-                </Button>
+                <ActionIcon color="teal.5" onClick={handlers.open} size="xl">
+                    <PiLinkBreakDuotone size="1.5rem" />
+                </ActionIcon>
             </Tooltip>
         </>
     )
