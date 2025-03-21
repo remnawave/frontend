@@ -128,7 +128,6 @@ export function UserTableWidget() {
         onColumnPinningChange: actions.setColumnPinning,
         onColumnVisibilityChange: actions.setColumnVisibility,
         onShowColumnFiltersChange: actions.setShowColumnFilters,
-
         mantinePaperProps: {
             style: { '--paper-radius': 'var(--mantine-radius-xs)' },
             withBorder: false
@@ -178,8 +177,9 @@ export function UserTableWidget() {
                 userUuid={row.original.uuid}
             />
         ),
-
-        displayColumnDefOptions: { 'mrt-row-actions': { size: 150 } }
+        displayColumnDefOptions: {
+            'mrt-row-actions': { size: 170 }
+        }
     })
 
     return (

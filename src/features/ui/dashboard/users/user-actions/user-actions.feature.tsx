@@ -1,5 +1,5 @@
-import { Button, CopyButton, Group, Tooltip } from '@mantine/core'
-import { PiCheck, PiCopy, PiEyeDuotone } from 'react-icons/pi'
+import { PiArticleDuotone, PiCheck, PiCopy, PiEyeDuotone } from 'react-icons/pi'
+import { ActionIcon, CopyButton, Group, Tooltip } from '@mantine/core'
 
 import { useUserModalStoreActions } from '@entities/dashboard/user-modal-store/user-modal-store'
 
@@ -15,30 +15,52 @@ export function UserActionsFeature(props: IProps) {
         actions.changeModalState(true)
     }
 
+    const handleOpenDetailedUserInfoDrawer = async () => {
+        await actions.setDrawerUserUuid(userUuid)
+        actions.changeDetailedUserInfoDrawerState(true)
+    }
+
     return (
         <Group gap={'xs'} justify={'center'} wrap={'nowrap'}>
-            <CopyButton timeout={2000} value={subscriptionUrl}>
-                {({ copied, copy }) => (
-                    <Tooltip label={copied ? 'Copied!' : 'Copy subscription URL'}>
-                        <Button
-                            color={copied ? 'teal' : 'cyan'}
-                            onClick={copy}
-                            radius="md"
-                            size="xs"
-                            variant={copied ? 'light' : 'outline'}
-                        >
-                            {copied ? (
-                                <PiCheck style={{ width: '1.2rem', height: '1.2rem' }} />
-                            ) : (
-                                <PiCopy style={{ width: '1.2rem', height: '1.2rem' }} />
-                            )}
-                        </Button>
-                    </Tooltip>
-                )}
-            </CopyButton>
-            <Button onClick={handleOpenModal} radius="md" size="xs" type="button">
-                <PiEyeDuotone size={'1.5rem'} />
-            </Button>
+            <ActionIcon.Group>
+                <CopyButton timeout={2000} value={subscriptionUrl}>
+                    {({ copied, copy }) => (
+                        <Tooltip label={copied ? 'Copied!' : 'Copy subscription URL'}>
+                            <ActionIcon
+                                color={copied ? 'teal' : 'blue'}
+                                onClick={copy}
+                                radius="md"
+                                size="xl"
+                                variant={copied ? 'light' : 'outline'}
+                            >
+                                {copied ? (
+                                    <PiCheck style={{ width: '1.5rem', height: '1.5rem' }} />
+                                ) : (
+                                    <PiCopy style={{ width: '1.5rem', height: '1.5rem' }} />
+                                )}
+                            </ActionIcon>
+                        </Tooltip>
+                    )}
+                </CopyButton>
+                <ActionIcon
+                    color="grape"
+                    onClick={handleOpenDetailedUserInfoDrawer}
+                    radius="md"
+                    size="xl"
+                    variant="outline"
+                >
+                    <PiArticleDuotone size={'1.5rem'} />
+                </ActionIcon>
+                <ActionIcon
+                    color="cyan"
+                    onClick={handleOpenModal}
+                    radius="md"
+                    size="xl"
+                    variant="outline"
+                >
+                    <PiEyeDuotone size={'1.5rem'} />
+                </ActionIcon>
+            </ActionIcon.Group>
         </Group>
     )
 }

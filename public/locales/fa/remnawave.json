@@ -764,5 +764,42 @@
         "feature": {
             "show-usage": "Show usage"
         }
+    },
+    "detailed-user-info-drawer": {
+        "widget": {
+            "copied": "Copied",
+            "detailed-user-info": "Detailed User Info",
+            "copy": "Copy",
+            "loading-user-info": "Loading user info...",
+            "user-information": "User Information",
+            "short-uuid": "Short UUID",
+            "username": "Username",
+            "email": "Email",
+            "telegram-id": "Telegram ID",
+            "description": "Description",
+            "traffic-information": "Traffic Information",
+            "used-traffic": "Used Traffic",
+            "lifetime-used-traffic": "Lifetime Used Traffic",
+            "traffic-limit": "Traffic Limit",
+            "traffic-limit-strategy": "Traffic Limit Strategy",
+            "last-traffic-reset": "Last Traffic Reset",
+            "subscription-information": "Subscription Information",
+            "subscription-uuid": "Subscription UUID",
+            "subscription-url": "Subscription URL",
+            "expires-at": "Expires At",
+            "last-opened-at": "Last Opened At",
+            "last-user-agent": "Last User Agent",
+            "revoked-at": "Revoked At",
+            "connection-information": "Connection Information",
+            "trojan-password": "Trojan Password",
+            "vless-uuid": "VLESS UUID",
+            "ss-password": "SS Password",
+            "last-online": "Last Online",
+            "last-connected-node": "Last Connected Node",
+            "active-inbounds": "Active Inbounds",
+            "timestamps": "Timestamps",
+            "created-at": "Created At",
+            "updated-at": "Updated At"
+        }
     }
 }
