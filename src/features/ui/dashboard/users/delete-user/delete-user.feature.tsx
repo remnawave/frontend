@@ -33,7 +33,7 @@ export function DeleteUserFeature(props: IProps) {
     const openModal = () =>
         modals.openConfirmModal({
             title: t('delete-user.feature.delete-user'),
-            children: <Text size="sm">t('delete-user.feature.are-you-sure')</Text>,
+            children: <Text size="sm">{t('delete-user.feature.are-you-sure')}</Text>,
             labels: {
                 confirm: t('delete-user.feature.delete'),
                 cancel: t('delete-user.feature.cancel')
