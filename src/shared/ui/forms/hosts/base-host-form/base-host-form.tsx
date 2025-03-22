@@ -17,6 +17,7 @@ import {
     PiArrowUpDuotone,
     PiCaretDown,
     PiCaretUp,
+    PiCopyDuotone,
     PiFloppyDiskDuotone,
     PiInfo,
     PiPencilDuotone
@@ -85,8 +86,16 @@ const pasteBasicXHttpExtraParams = `{
 export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCommand.Request>(
     props: IProps<T>
 ) => {
-    const { form, advancedOpened, handleSubmit, host, inbounds, setAdvancedOpened, isSubmitting } =
-        props
+    const {
+        form,
+        advancedOpened,
+        handleSubmit,
+        host,
+        inbounds,
+        setAdvancedOpened,
+        isSubmitting,
+        handleCloneHost
+    } = props
 
     const { t } = useTranslation()
     const [opened, { open, close }] = useDisclosure(false)
@@ -317,17 +326,32 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
                     <DeleteHostFeature />
                 </ActionIcon.Group>
 
-                <Button
-                    color="blue"
-                    disabled={!form.isValid() || !form.isDirty() || !form.isTouched()}
-                    leftSection={<PiFloppyDiskDuotone size="1rem" />}
-                    loading={isSubmitting}
-                    size="md"
-                    type="submit"
-                    variant="outline"
-                >
-                    {t('base-host-form.save')}
-                </Button>
+                <Group gap="xs">
+                    {handleCloneHost && (
+                        <Button
+                            color="blue"
+                            leftSection={<PiCopyDuotone size="1rem" />}
+                            loading={isSubmitting}
+                            onClick={handleCloneHost}
+                            size="md"
+                            variant="light"
+                        >
+                            {t('base-host-form.clone')}
+                        </Button>
+                    )}
+
+                    <Button
+                        color="blue"
+                        disabled={!form.isValid() || !form.isDirty() || !form.isTouched()}
+                        leftSection={<PiFloppyDiskDuotone size="1rem" />}
+                        loading={isSubmitting}
+                        size="md"
+                        type="submit"
+                        variant="outline"
+                    >
+                        {t('base-host-form.save')}
+                    </Button>
+                </Group>
             </Group>
 
             <Drawer

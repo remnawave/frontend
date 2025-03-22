@@ -9,8 +9,8 @@ import {
     useHostsStoreEditModalHost,
     useHostsStoreEditModalIsOpen
 } from '@entities/dashboard'
+import { useCreateHost, useGetInbounds, useUpdateHost } from '@shared/api/hooks'
 import { BaseHostForm } from '@shared/ui/forms/hosts/base-host-form'
-import { useGetInbounds, useUpdateHost } from '@shared/api/hooks'
 
 export const EditHostModalWidget = () => {
     const { t } = useTranslation()
@@ -43,6 +43,14 @@ export const EditHostModalWidget = () => {
     }
 
     const { mutate: updateHost, isPending: isUpdateHostPending } = useUpdateHost({
+        mutationFns: {
+            onSuccess: async () => {
+                handleClose()
+            }
+        }
+    })
+
+    const { mutate: createHost } = useCreateHost({
         mutationFns: {
             onSuccess: async () => {
                 handleClose()
@@ -113,6 +121,29 @@ export const EditHostModalWidget = () => {
         })
     })
 
+    const handleCloneHost = () => {
+        if (!host) {
+            return
+        }
+
+        createHost({
+            variables: {
+                ...host,
+                remark: `Clone #${Math.random().toString(36).substring(2, 15)}`,
+                port: host.port,
+                inboundUuid: host.inboundUuid,
+                isDisabled: true,
+                path: host.path ?? undefined,
+                sni: host.sni ?? undefined,
+                host: host.host ?? undefined,
+                alpn: (host.alpn as UpdateHostCommand.Request['alpn']) ?? undefined,
+                xHttpExtraParams: host.xHttpExtraParams ?? undefined,
+                fingerprint:
+                    (host.fingerprint as UpdateHostCommand.Request['fingerprint']) ?? undefined
+            }
+        })
+    }
+
     return (
         <Modal
             centered
@@ -123,6 +154,7 @@ export const EditHostModalWidget = () => {
             <BaseHostForm
                 advancedOpened={advancedOpened}
                 form={form}
+                handleCloneHost={handleCloneHost}
                 handleSubmit={handleSubmit}
                 host={host!}
                 inbounds={inbounds ?? []}
