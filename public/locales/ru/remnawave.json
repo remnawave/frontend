@@ -53,7 +53,13 @@
         "feature": {
             "save": "Сохранить",
             "format": "Форматировать",
-            "copy-config": "Скопировать"
+            "copy-config": "Скопировать",
+            "save-anyway-description": "Are you sure you want to save invalid XRay config? This action\n                                    can lead to unexpected behavior. Continue only if you know what\n                                    you are doing.",
+            "cancel": "Cancel",
+            "save-anyway-title": "Confirm action",
+            "error": "Error",
+            "failed-to-save-invalid-json": "Failed to save, invalid JSON.",
+            "save-anyway": "Save anyway"
         }
     },
     "use-bandwidth-table-columns": {

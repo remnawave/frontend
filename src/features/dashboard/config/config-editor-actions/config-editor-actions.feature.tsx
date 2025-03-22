@@ -1,7 +1,9 @@
 import { PiCheck, PiCheckSquareOffset, PiCopy, PiFloppyDisk } from 'react-icons/pi'
+import { notifications } from '@mantine/notifications'
+import { Button, Group, Text } from '@mantine/core'
 import { useTranslation } from 'react-i18next'
-import { Button, Group } from '@mantine/core'
 import { useClipboard } from '@mantine/hooks'
+import { modals } from '@mantine/modals'
 
 import { useUpdateConfig } from '@shared/api/hooks'
 
@@ -23,6 +25,17 @@ export function ConfigEditorActionsFeature(props: Props) {
         if (typeof editorRef.current.getValue !== 'function') return
 
         const currentValue = editorRef.current.getValue()
+
+        try {
+            JSON.parse(currentValue)
+        } catch (error) {
+            notifications.show({
+                color: 'red',
+                message: t('config-editor-actions.feature.failed-to-save-invalid-json'),
+                title: t('config-editor-actions.feature.error')
+            })
+            return
+        }
 
         if (currentValue) {
             updateConfig({
@@ -83,6 +96,35 @@ export function ConfigEditorActionsFeature(props: Props) {
                 onClick={handleSave}
             >
                 {t('config-editor-actions.feature.save')}
+            </Button>
+
+            <Button
+                color="red"
+                disabled={isConfigValid || isUpdating}
+                leftSection={<PiFloppyDisk size={16} />}
+                loading={isUpdating}
+                mb="md"
+                onClick={() => {
+                    modals.openConfirmModal({
+                        title: t('config-editor-actions.feature.save-anyway-title'),
+                        children: (
+                            <Text>
+                                {t('config-editor-actions.feature.save-anyway-description')}
+                            </Text>
+                        ),
+                        centered: true,
+                        labels: {
+                            confirm: t('config-editor-actions.feature.save'),
+                            cancel: t('config-editor-actions.feature.cancel')
+                        },
+                        confirmProps: {
+                            color: 'red'
+                        },
+                        onConfirm: handleSave
+                    })
+                }}
+            >
+                {t('config-editor-actions.feature.save-anyway')}
             </Button>
         </Group>
     )
