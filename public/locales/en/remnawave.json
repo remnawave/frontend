@@ -559,7 +559,10 @@
             "serve-json-at-base-subscription": "Serve JSON at base subscription",
             "serve-json-description": "This will allow you to serve JSON subscriptions at the base subscription path (without /json). If the client supports it, it will be served as JSON, otherwise it will be served as usual.",
             "add-username-to-base-subscription": "Add #username to base subscription",
-            "add-username-description": "Add #username to the base subscription path at the subscription route."
+            "add-username-description": "Add #username to the base subscription path at the subscription route.",
+            "subscription-info-description": "This settings is supprted by many clients apps such as Happ, V2RayNG, Streisand, etc.",
+            "happ-description-line-1": "Here you can configure the Happ settings for the subscription.",
+            "happ-description-line-2": "This settings will be used only if the subscription is used in Happ."
         },
         "page": {
             "component": {

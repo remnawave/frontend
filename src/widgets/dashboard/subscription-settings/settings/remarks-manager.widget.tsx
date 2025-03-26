@@ -1,5 +1,5 @@
-import { ActionIcon, Box, Button, Group, Text, TextInput } from '@mantine/core'
-import { PiPlus, PiTrash } from 'react-icons/pi'
+import { ActionIcon, Button, Group, Paper, Text, TextInput, ThemeIcon } from '@mantine/core'
+import { PiNotePencil, PiPlus, PiTrash } from 'react-icons/pi'
 import { useTranslation } from 'react-i18next'
 import { useEffect, useState } from 'react'
 
@@ -47,17 +47,25 @@ export const RemarksManager = ({
     }
 
     return (
-        <Box>
-            <Text fw={500} mb="xs">
-                {title}
-            </Text>
+        <Paper p="sm" radius="md" shadow="xs" withBorder>
+            <Group align="center" gap="xs" justify="flex-start" mb="md">
+                <ThemeIcon color="blue" radius="md" size="md" variant="light">
+                    <PiNotePencil size="1rem" />
+                </ThemeIcon>
+                <Text fw={600} size="sm">
+                    {title}
+                </Text>
+            </Group>
+
             {localRemarks.map((remark, index) => (
                 <Group align="flex-start" gap="sm" key={index} mb="xs">
                     <ActionIcon
                         color="red"
                         disabled={localRemarks.length === 1}
                         onClick={() => removeLocalRemark(index)}
+                        radius="md"
                         size="lg"
+                        variant="light"
                     >
                         <PiTrash size="1rem" />
                     </ActionIcon>
@@ -78,6 +86,6 @@ export const RemarksManager = ({
             >
                 {t('remarks-manager.widget.add-remark')}
             </Button>
-        </Box>
+        </Paper>
     )
 }

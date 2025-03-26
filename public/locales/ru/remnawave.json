@@ -559,7 +559,10 @@
             "serve-json-at-base-subscription": "Использовать JSON в базовой подписке",
             "serve-json-description": "Это позволит вам сервить JSON подписку в базовом пути подписки. Если запрошенный клиент поддерживает его, он будет сервиться как JSON, в противном случае он будет сервиться как обычно.",
             "add-username-to-base-subscription": "Добавить #username в базовую подписку",
-            "add-username-description": "Это добавит #username в путь подписки на базовой подписке."
+            "add-username-description": "Это добавит #username в путь подписки на базовой подписке.",
+            "happ-description-line-1": "Here you can configure the Happ settings for the subscription.",
+            "happ-description-line-2": "This settings will be used only if the subscription is used in Happ.",
+            "subscription-info-description": "This settings is supprted by many clients apps such as Happ, V2RayNG, Streisand, etc."
         },
         "page": {
             "component": {

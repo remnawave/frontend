@@ -559,7 +559,10 @@
             "serve-json-at-base-subscription": "ارائه JSON در لینک پایه پیشفرض",
             "serve-json-description": "درصورت پشتیبانی نرم افزار، بدون نیاز به قرار دادن /json در انتهای لینک، اشتراک JSON برای آن ارسال خواهد شد",
             "add-username-to-base-subscription": "افزودن #username به انتهای لینک اشتراک",
-            "add-username-description": "با فعال کردن این گزینه #username به انتهای لینک‌های اشتراک اضافه خواهد شد."
+            "add-username-description": "با فعال کردن این گزینه #username به انتهای لینک‌های اشتراک اضافه خواهد شد.",
+            "happ-description-line-1": "Here you can configure the Happ settings for the subscription.",
+            "happ-description-line-2": "This settings will be used only if the subscription is used in Happ.",
+            "subscription-info-description": "This settings is supprted by many clients apps such as Happ, V2RayNG, Streisand, etc."
         },
         "page": {
             "component": {
