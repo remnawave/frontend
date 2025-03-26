@@ -63,7 +63,7 @@ export const ModalAccordionWidget = (props: IProps) => {
                         <Text fw={600}>{t('error-accordeon.widget.last-error-message')}</Text>
                     </Accordion.Control>
                     <Accordion.Panel>
-                        <Code block>{localStatusMessage}</Code>
+                        <Code color="var(--mantine-color-red-light)">{localStatusMessage}</Code>
                     </Accordion.Panel>
                 </Accordion.Item>
             )}
