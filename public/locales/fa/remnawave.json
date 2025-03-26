@@ -491,7 +491,22 @@
             "encoded-happ-link": "لینک Happ ایجاد شده",
             "copied": "کپی شد",
             "show-qr": "نمایش QR",
-            "close": "بستن"
+            "close": "بستن",
+            "basic-configuration": "Basic Configuration",
+            "block-routing": "Block Routing",
+            "code-editor": "Code Editor",
+            "decode": "Decode",
+            "direct-routing": "Direct Routing",
+            "dns-hosts-0": "DNS Hosts",
+            "domestic-dns-settings": "Domestic DNS Settings",
+            "encoded-link": "Encoded Link",
+            "import-configuration": "Import Configuration",
+            "import-from-base64": "Import from Base64",
+            "invalid-base64-or-happ-link": "Invalid Base64 or Happ Link",
+            "paste-a-happ-routing-link-or-base64-encoded-config": "Paste a Happ routing link or Base64 encoded config",
+            "paste-base64-or-happ-link-here": "Paste Base64 or Happ Link here",
+            "proxy-routing": "Proxy Routing",
+            "remote-dns-settings": "Remote DNS Settings"
         },
         "page": {
             "component": {
