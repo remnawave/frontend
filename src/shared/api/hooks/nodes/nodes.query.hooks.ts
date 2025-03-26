@@ -69,7 +69,8 @@ export const useGetPubKey = createGetQueryHook({
     rQueryParams: {
         placeholderData: keepPreviousData,
         refetchOnMount: true,
-        staleTime: sToMs(60)
+        staleTime: sToMs(5),
+        refetchInterval: sToMs(5)
     },
     errorHandler: (error) => {
         notifications.show({
