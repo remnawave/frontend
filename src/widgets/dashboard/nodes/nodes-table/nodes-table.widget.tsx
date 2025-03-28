@@ -1,6 +1,7 @@
 import { DragDropContext, Droppable, DropResult } from '@hello-pangea/dnd'
 import { useListState } from '@mantine/hooks'
 import { useEffect, useState } from 'react'
+import { Container } from '@mantine/core'
 
 import { nodesQueryKeys, useGetNodes, useReorderNodes } from '@shared/api/hooks'
 import { EmptyPageLayout } from '@shared/ui/layouts/empty-page'
@@ -82,12 +83,17 @@ export function NodesTableWidget(props: IProps) {
         <DragDropContext onDragEnd={handleDragEnd} onDragStart={handleDragStart}>
             <Droppable direction="vertical" droppableId="dnd-list">
                 {(provided) => (
-                    <div {...provided.droppableProps} ref={provided.innerRef}>
+                    <Container
+                        p={0}
+                        size={'lg'}
+                        {...provided.droppableProps}
+                        ref={provided.innerRef}
+                    >
                         {state.map((item, index) => (
                             <NodeCardWidget index={index} key={item.uuid} node={item} />
                         ))}
                         {provided.placeholder}
-                    </div>
+                    </Container>
                 )}
             </Droppable>
         </DragDropContext>

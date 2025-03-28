@@ -332,7 +332,7 @@
         "limit": "Limit",
         "reset-day": "Reset day",
         "e-g-1-31": "e.g. 1-31",
-        "notify-percent": "Notification threshold (%)",
+        "notify-percent": "Notification %",
         "e-g-50": "e.g. 50",
         "select-active-inbounds-for-this-node": "Select active inbounds for this node",
         "inbounds": "Inbounds",

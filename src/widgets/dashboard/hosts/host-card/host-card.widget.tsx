@@ -1,5 +1,5 @@
+import { ActionIcon, Badge, Box, Checkbox, Grid, Group, Text } from '@mantine/core'
 import { PiDotsSixVertical, PiLock, PiProhibit, PiPulse } from 'react-icons/pi'
-import { ActionIcon, Badge, Box, Checkbox, Group, Text } from '@mantine/core'
 import { Draggable } from '@hello-pangea/dnd'
 import ColorHash from 'color-hash'
 import { useState } from 'react'
@@ -29,7 +29,7 @@ export function HostCardWidget(props: IProps) {
     const isFiltered = selectedInboundTag !== 'ALL' && inbound.tag !== selectedInboundTag
     const isHostActive = !item.isDisabled
 
-    const ch = new ColorHash()
+    const ch = new ColorHash({ lightness: [0.65, 0.65, 0.65] })
 
     const handleEdit = () => {
         actions.setHost(item)
@@ -53,66 +53,101 @@ export function HostCardWidget(props: IProps) {
                     ref={provided.innerRef}
                     {...provided.draggableProps}
                 >
-                    <Group gap="xs">
-                        <Checkbox checked={isSelected} onChange={onSelect} size="md" />
+                    <Grid align="center" gutter="md">
+                        <Grid.Col span={{ base: 2, xs: 2, sm: 1 }}>
+                            <Group gap="xs" wrap="nowrap">
+                                <Checkbox checked={isSelected} onChange={onSelect} size="md" />
 
-                        <div {...provided.dragHandleProps} className={classes.dragHandle}>
-                            {!isFiltered && <PiDotsSixVertical color="white" size="2rem" />}
-                            {isFiltered && (
-                                <PiLock color="white" size="2rem" style={{ opacity: 0.5 }} />
-                            )}
-                        </div>
-                    </Group>
-
+                                <Box {...provided.dragHandleProps} className={classes.dragHandle}>
+                                    {!isFiltered && <PiDotsSixVertical color="white" size="2rem" />}
+                                    {isFiltered && (
+                                        <PiLock
+                                            color="white"
+                                            size="2rem"
+                                            style={{ opacity: 0.5 }}
+                                        />
+                                    )}
+                                </Box>
+                            </Group>
+                        </Grid.Col>
+                    </Grid>
                     <Box
                         onClick={handleEdit}
                         onMouseEnter={() => setIsHovered(true)}
                         onMouseLeave={() => setIsHovered(false)}
-                        style={{ cursor: 'pointer' }}
+                        style={{ cursor: 'pointer', width: '100%' }}
                     >
-                        <Group gap="xs">
-                            <ActionIcon
-                                color={isHostActive ? 'teal' : 'gray'}
-                                radius="md"
-                                variant="light"
-                            >
-                                {isHostActive ? (
-                                    <PiPulse
-                                        size={18}
+                        <Grid align="center" gutter="md">
+                            <Grid.Col span={{ base: 12, xs: 12, sm: 6, md: 4 }}>
+                                <Group>
+                                    <ActionIcon
+                                        color={isHostActive ? 'teal' : 'gray'}
+                                        radius="md"
+                                        variant="light"
+                                    >
+                                        {isHostActive ? (
+                                            <PiPulse
+                                                size={18}
+                                                style={{
+                                                    color: 'var(--mantine-color-teal-6)'
+                                                }}
+                                            />
+                                        ) : (
+                                            <PiProhibit
+                                                size={18}
+                                                style={{
+                                                    color: 'var(--mantine-color-gray-6)'
+                                                }}
+                                            />
+                                        )}
+                                    </ActionIcon>
+
+                                    <Badge
+                                        autoContrast
+                                        color={ch.hex(item.inboundUuid)}
+                                        radius="md"
+                                        size="lg"
                                         style={{
-                                            color: 'var(--mantine-color-teal-6)'
+                                            width: '100%',
+                                            maxWidth: '200px',
+                                            overflow: 'hidden',
+                                            textOverflow: 'ellipsis'
                                         }}
-                                    />
-                                ) : (
-                                    <PiProhibit
-                                        size={18}
-                                        style={{
-                                            color: 'var(--mantine-color-gray-6)'
-                                        }}
-                                    />
-                                )}
-                            </ActionIcon>
+                                        variant="light"
+                                    >
+                                        {inbound.tag}
+                                    </Badge>
+                                </Group>
+                            </Grid.Col>
 
-                            <Badge
-                                autoContrast
-                                color={ch.hex(item.inboundUuid)}
-                                miw={'15ch'}
-                                radius="md"
-                                size="lg"
-                                variant="light"
-                            >
-                                {inbound.tag}
-                            </Badge>
+                            <Grid.Col span={{ base: 12, xs: 12, sm: 6, md: 4 }}>
+                                <Text
+                                    className={classes.label}
+                                    fw={400}
+                                    style={{
+                                        overflow: 'hidden',
+                                        textOverflow: 'ellipsis',
+                                        whiteSpace: 'nowrap'
+                                    }}
+                                >
+                                    {item.remark}
+                                </Text>
+                            </Grid.Col>
 
-                            <Text className={classes.label} fw={400} miw={'40ch'}>
-                                {item.remark}
-                            </Text>
-
-                            <Text className={classes.hostInfoLabel} miw={'40ch'}>
-                                {item.address}
-                                {item.port ? `:${item.port}` : ''}
-                            </Text>
-                        </Group>
+                            <Grid.Col span={{ base: 12, xs: 12, sm: 12, md: 3 }}>
+                                <Text
+                                    className={classes.hostInfoLabel}
+                                    style={{
+                                        overflow: 'hidden',
+                                        textOverflow: 'ellipsis',
+                                        whiteSpace: 'nowrap'
+                                    }}
+                                >
+                                    {item.address}
+                                    {item.port ? `:${item.port}` : ''}
+                                </Text>
+                            </Grid.Col>
+                        </Grid>
                     </Box>
                 </Box>
             )}

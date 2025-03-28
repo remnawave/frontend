@@ -1,5 +1,6 @@
 import { DragDropContext, Droppable, DropResult } from '@hello-pangea/dnd'
 import { useListState } from '@mantine/hooks'
+import { Container } from '@mantine/core'
 import { useEffect } from 'react'
 
 import { HostCardWidget } from '@widgets/dashboard/hosts/host-card'
@@ -64,7 +65,12 @@ export function HostsTableWidget(props: IProps) {
         <DragDropContext onDragEnd={handleDragEnd}>
             <Droppable direction="vertical" droppableId="dnd-list">
                 {(provided) => (
-                    <div {...provided.droppableProps} ref={provided.innerRef}>
+                    <Container
+                        p={0}
+                        size={'lg'}
+                        {...provided.droppableProps}
+                        ref={provided.innerRef}
+                    >
                         {state.map((item, index) => (
                             <div key={item.uuid} style={{ position: 'relative' }}>
                                 <HostCardWidget
@@ -77,7 +83,7 @@ export function HostsTableWidget(props: IProps) {
                             </div>
                         ))}
                         {provided.placeholder}
-                    </div>
+                    </Container>
                 )}
             </Droppable>
         </DragDropContext>
