@@ -142,7 +142,7 @@ export function NodeCardWidget(props: IProps) {
                                         {node.port ? `:${node.port}` : ''}
                                     </Text>
 
-                                    {node.xrayUptime !== '0' && (
+                                    {node.xrayUptime !== '0' && node.isConnected && (
                                         <Badge
                                             color="gray"
                                             leftSection={<PiCpu size={18} />}
