@@ -140,6 +140,8 @@ export function NodeCardWidget(props: IProps) {
 
                                     <Text
                                         className={classes.hostInfoLabel}
+                                        display="inline-block"
+                                        maw="max-content"
                                         onClick={handleCopy}
                                         style={{ cursor: 'copy' }}
                                         truncate="end"
