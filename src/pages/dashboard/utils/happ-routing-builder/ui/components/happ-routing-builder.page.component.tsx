@@ -58,7 +58,7 @@ export const HappRoutingBuilderPageComponent = () => {
             <Container fluid p={0} size="xl">
                 <Paper mb="xl" p="md" radius="md" shadow="sm" withBorder>
                     <Group align="flex-start" wrap="nowrap">
-                        <Avatar radius="md" size="lg" variant="transparent">
+                        <Avatar radius="md" size="lg" variant="transparent" visibleFrom="sm">
                             <HappLogo />
                         </Avatar>
 

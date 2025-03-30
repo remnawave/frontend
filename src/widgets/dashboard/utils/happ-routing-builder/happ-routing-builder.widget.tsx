@@ -292,82 +292,70 @@ export const HappRoutingBuilderWidget = () => {
                 </Paper>
 
                 <Paper mb="md" p="md" withBorder>
-                    <Text fw={700} mb="md" size="lg">
-                        {t('happ-routing-builder.widget.encoded-link')}
-                    </Text>
-                    <Box>
-                        <Group mb="xs">
-                            <Text fw={500}>
-                                {t('happ-routing-builder.widget.encoded-happ-link')}
-                            </Text>
-                            <CopyButton timeout={2000} value={generateHappLink()}>
-                                {({ copied, copy }) => (
-                                    <Button
-                                        color={copied ? 'teal' : 'blue'}
-                                        leftSection={
-                                            copied ? (
-                                                <PiCheck size="1rem" />
-                                            ) : (
-                                                <PiCopy size="1rem" />
-                                            )
-                                        }
-                                        onClick={copy}
-                                        size="sm"
-                                        variant="light"
-                                    >
-                                        {copied
-                                            ? t('happ-routing-builder.widget.copied')
-                                            : copiedText}
-                                    </Button>
-                                )}
-                            </CopyButton>
-                            <Button
-                                leftSection={<PiQrCodeDuotone size="1rem" />}
-                                onClick={() => {
-                                    const happLinkQrCode = renderSVG(generateHappLink(), {
-                                        whiteColor: '#161B22',
-                                        blackColor: '#3CC9DB'
-                                    })
-                                    modals.open({
-                                        centered: true,
-                                        title: 'Happ Routing QR Code',
-                                        children: (
-                                            <>
-                                                <div
-                                                    dangerouslySetInnerHTML={{
-                                                        __html: happLinkQrCode
-                                                    }}
-                                                />
-                                                <Button
-                                                    fullWidth
-                                                    mt="md"
-                                                    onClick={() => modals.closeAll()}
-                                                >
-                                                    {t('happ-routing-builder.widget.close')}
-                                                </Button>
-                                            </>
-                                        )
-                                    })
-                                }}
-                                size="sm"
-                                variant="light"
-                            >
-                                {t('happ-routing-builder.widget.show-qr')}
-                            </Button>
-                        </Group>
-                        <Textarea
-                            autosize
-                            minRows={3}
-                            readOnly
-                            styles={{
-                                input: {
-                                    fontFamily: 'monospace',
-                                    wordBreak: 'break-all'
-                                }
+                    <Group mb="md">
+                        <Text fw={700}>{t('happ-routing-builder.widget.encoded-happ-link')}</Text>
+                        <CopyButton timeout={2000} value={generateHappLink()}>
+                            {({ copied, copy }) => (
+                                <Button
+                                    color={copied ? 'teal' : 'blue'}
+                                    leftSection={
+                                        copied ? <PiCheck size="1rem" /> : <PiCopy size="1rem" />
+                                    }
+                                    onClick={copy}
+                                    size="sm"
+                                    variant="light"
+                                >
+                                    {copied ? t('happ-routing-builder.widget.copied') : copiedText}
+                                </Button>
+                            )}
+                        </CopyButton>
+                        <Button
+                            leftSection={<PiQrCodeDuotone size="1rem" />}
+                            onClick={() => {
+                                const happLinkQrCode = renderSVG(generateHappLink(), {
+                                    whiteColor: '#161B22',
+                                    blackColor: '#3CC9DB'
+                                })
+                                modals.open({
+                                    centered: true,
+                                    title: 'Happ Routing QR Code',
+                                    children: (
+                                        <>
+                                            <div
+                                                dangerouslySetInnerHTML={{
+                                                    __html: happLinkQrCode
+                                                }}
+                                            />
+                                            <Button
+                                                fullWidth
+                                                mt="md"
+                                                onClick={() => modals.closeAll()}
+                                            >
+                                                {t('happ-routing-builder.widget.close')}
+                                            </Button>
+                                        </>
+                                    )
+                                })
                             }}
-                            value={generateHappLink()}
-                        />
-                    </Box>
+                            size="sm"
+                            variant="light"
+                        >
+                            {t('happ-routing-builder.widget.show-qr')}
+                        </Button>
+                    </Group>
+
+                    <Textarea
+                        autosize
+                        minRows={3}
+                        readOnly
+                        styles={{
+                            input: {
+                                fontFamily: 'monospace',
+                                wordBreak: 'break-all'
+                            }
+                        }}
+                        value={generateHappLink()}
+                    />
                 </Paper>
 
                 <Grid gutter="md">
