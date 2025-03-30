@@ -793,7 +793,7 @@
     },
     "get-user-usage": {
         "feature": {
-            "show-usage": "Show usage"
+            "show-usage": "Показать статистику использования"
         }
     },
     "detailed-user-info-drawer": {
