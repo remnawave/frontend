@@ -169,6 +169,20 @@ export function NodeCardWidget(props: IProps) {
                                             </Badge>
                                         )}
 
+                                        {(!node.isConnected || node.xrayUptime === '0') && (
+                                            <Badge
+                                                color="red"
+                                                leftSection={<PiCpu size={18} />}
+                                                maw={'20ch'}
+                                                radius="md"
+                                                size="lg"
+                                                style={{ cursor: 'pointer' }}
+                                                variant="outline"
+                                            >
+                                                offline
+                                            </Badge>
+                                        )}
+
                                         <Badge
                                             autoContrast
                                             color={'gray'}
