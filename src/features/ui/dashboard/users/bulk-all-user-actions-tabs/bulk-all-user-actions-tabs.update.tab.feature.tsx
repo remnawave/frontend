@@ -1,14 +1,7 @@
 import {
-    PiCalendar,
-    PiClockDuotone,
-    PiEnvelopeDuotone,
-    PiPencil,
-    PiTelegramLogoDuotone,
-    PiX
-} from 'react-icons/pi'
-import {
     Button,
     Divider,
+    Group,
     NumberInput,
     Select,
     Stack,
@@ -16,6 +9,14 @@ import {
     Textarea,
     TextInput
 } from '@mantine/core'
+import {
+    PiCalendar,
+    PiClockDuotone,
+    PiEnvelopeDuotone,
+    PiPencil,
+    PiTelegramLogoDuotone,
+    PiX
+} from 'react-icons/pi'
 import { BulkAllUpdateUsersCommand } from '@remnawave/backend-contract'
 import { useForm, zodResolver } from '@mantine/form'
 import { DateTimePicker } from '@mantine/dates'
@@ -135,6 +136,7 @@ export const BulkAllUserActionsUpdateTabFeature = (props: IProps) => {
 
                 <DateTimePicker
                     clearable
+                    key={form.key('expireAt')}
                     label={t('bulk-all-user-actions-tabs.update.tab.feature.expire-date')}
                     leftSection={<PiCalendar size="1rem" />}
                     placeholder={t(
@@ -142,10 +144,63 @@ export const BulkAllUserActionsUpdateTabFeature = (props: IProps) => {
                     )}
                     valueFormat="MMMM D, YYYY - HH:mm"
                     {...form.getInputProps('expireAt')}
+                    description={
+                        <Group gap="xs" mb="xs" mt="xs">
+                            <Button
+                                onClick={() => {
+                                    const currentDate = new Date()
+                                    const newDate = new Date(currentDate)
+                                    newDate.setMonth(newDate.getMonth() + 1)
+                                    form.setFieldValue('expireAt', newDate)
+                                }}
+                                size="compact-xs"
+                                variant="light"
+                            >
+                                {t('create-user-modal.widget.1-month')}
+                            </Button>
+                            <Button
+                                onClick={() => {
+                                    const currentDate = new Date()
+                                    const newDate = new Date(currentDate)
+                                    newDate.setMonth(newDate.getMonth() + 3)
+                                    form.setFieldValue('expireAt', newDate)
+                                }}
+                                size="compact-xs"
+                                variant="light"
+                            >
+                                {t('create-user-modal.widget.3-months')}
+                            </Button>
+                            <Button
+                                onClick={() => {
+                                    const currentDate = new Date()
+                                    const newDate = new Date(currentDate)
+                                    newDate.setFullYear(newDate.getFullYear() + 1)
+                                    form.setFieldValue('expireAt', newDate)
+                                }}
+                                size="compact-xs"
+                                variant="light"
+                            >
+                                {t('create-user-modal.widget.1-year')}
+                            </Button>
+                            <Button
+                                onClick={() => {
+                                    const newDate = new Date()
+                                    newDate.setFullYear(2099)
+                                    form.setFieldValue('expireAt', newDate)
+                                }}
+                                size="compact-xs"
+                                variant="light"
+                            >
+                                {t('create-user-modal.widget.2099-year')}
+                            </Button>
+                        </Group>
+                    }
+                    highlightToday
                 />
 
                 <NumberInput
                     allowDecimal={false}
+                    hideControls
                     key={form.key('telegramId')}
                     label="Telegram ID"
                     leftSection={<PiTelegramLogoDuotone size="1rem" />}

@@ -246,7 +246,11 @@
             "loading-user-creation": "Загрузка создания пользователя...",
             "create-user": "Создать пользователя",
             "email-of-a-user": "Email пользователя",
-            "telegram-id-of-a-user-in-telegram": "Telegram ID пользователя в Telegram"
+            "telegram-id-of-a-user-in-telegram": "Telegram ID пользователя в Telegram",
+            "1-month": "+1 мес.",
+            "1-year": "+1 год",
+            "2099-year": "2099 год",
+            "3-months": "+3 мес."
         }
     },
     "login-form-feature": {

@@ -246,7 +246,11 @@
             "loading-user-creation": "در حال بارگذاری صفحه ساخت کاربر",
             "create-user": "ساخت کاربر",
             "email-of-a-user": "ایمیل کاربر",
-            "telegram-id-of-a-user-in-telegram": "آیدی عددی تلگرام کاربر"
+            "telegram-id-of-a-user-in-telegram": "آیدی عددی تلگرام کاربر",
+            "1-month": "+1 month",
+            "1-year": "+1 year",
+            "2099-year": "2099 year",
+            "3-months": "+3 months"
         }
     },
     "login-form-feature": {

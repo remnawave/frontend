@@ -19,7 +19,7 @@ export const theme = createTheme({
     },
     scale: 1,
     fontSmoothing: true,
-    focusRing: 'auto',
+    focusRing: 'never',
     white: '#ffffff',
     black: '#24292f',
     colors: {

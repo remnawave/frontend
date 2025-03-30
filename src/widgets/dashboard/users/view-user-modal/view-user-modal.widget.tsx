@@ -279,17 +279,6 @@ export const ViewUserModal = () => {
                                 }
                             />
 
-                            <TextInput
-                                disabled
-                                label={t('view-user-modal.widget.last-traffic-reset-at')}
-                                leftSection={<PiCalendarDuotone size="1rem" />}
-                                value={
-                                    user?.lastTrafficResetAt
-                                        ? dayjs(user.lastTrafficResetAt).format('DD/MM/YYYY HH:mm')
-                                        : t('view-user-modal.widget.never')
-                                }
-                            />
-
                             <NumberInput
                                 allowDecimal={false}
                                 allowNegative={false}
@@ -380,11 +369,66 @@ export const ViewUserModal = () => {
                             />
 
                             <DateTimePicker
+                                highlightToday
                                 key={form.key('expireAt')}
                                 label={t('create-user-modal.widget.expiry-date')}
                                 minDate={new Date()}
                                 valueFormat="MMMM D, YYYY - HH:mm"
                                 {...form.getInputProps('expireAt')}
+                                description={
+                                    <Group gap="xs" mb="xs" mt="xs">
+                                        <Button
+                                            onClick={() => {
+                                                const currentDate =
+                                                    form.values.expireAt || new Date()
+                                                const newDate = new Date(currentDate)
+                                                newDate.setMonth(newDate.getMonth() + 1)
+                                                form.setFieldValue('expireAt', newDate)
+                                            }}
+                                            size="compact-xs"
+                                            variant="light"
+                                        >
+                                            {t('create-user-modal.widget.1-month')}
+                                        </Button>
+                                        <Button
+                                            onClick={() => {
+                                                const currentDate =
+                                                    form.values.expireAt || new Date()
+                                                const newDate = new Date(currentDate)
+                                                newDate.setMonth(newDate.getMonth() + 3)
+                                                form.setFieldValue('expireAt', newDate)
+                                            }}
+                                            size="compact-xs"
+                                            variant="light"
+                                        >
+                                            {t('create-user-modal.widget.3-months')}
+                                        </Button>
+                                        <Button
+                                            onClick={() => {
+                                                const currentDate =
+                                                    form.values.expireAt || new Date()
+                                                const newDate = new Date(currentDate)
+                                                newDate.setFullYear(newDate.getFullYear() + 1)
+                                                form.setFieldValue('expireAt', newDate)
+                                            }}
+                                            size="compact-xs"
+                                            variant="light"
+                                        >
+                                            {t('create-user-modal.widget.1-year')}
+                                        </Button>
+                                        <Button
+                                            onClick={() => {
+                                                const newDate = new Date()
+                                                newDate.setFullYear(2099)
+                                                form.setFieldValue('expireAt', newDate)
+                                            }}
+                                            size="compact-xs"
+                                            variant="light"
+                                        >
+                                            {t('create-user-modal.widget.2099-year')}
+                                        </Button>
+                                    </Group>
+                                }
                                 leftSection={<PiCalendarDuotone size="1rem" />}
                             />
 

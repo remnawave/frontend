@@ -246,7 +246,11 @@
             "loading-user-creation": "Loading user creation modal ...",
             "create-user": "Create user",
             "telegram-id-of-a-user-in-telegram": "Numeric ID of the user in Telegram messenger",
-            "email-of-a-user": "Email address of the user"
+            "email-of-a-user": "Email address of the user",
+            "1-month": "+1 month",
+            "3-months": "+3 months",
+            "1-year": "+1 year",
+            "2099-year": "2099 year"
         }
     },
     "login-form-feature": {

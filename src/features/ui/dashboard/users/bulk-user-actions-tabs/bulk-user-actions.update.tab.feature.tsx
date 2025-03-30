@@ -1,14 +1,7 @@
 import {
-    PiCalendar,
-    PiClockDuotone,
-    PiEnvelopeDuotone,
-    PiPencil,
-    PiTelegramLogoDuotone,
-    PiX
-} from 'react-icons/pi'
-import {
     Button,
     Divider,
+    Group,
     NumberInput,
     Select,
     Stack,
@@ -16,6 +9,14 @@ import {
     Textarea,
     TextInput
 } from '@mantine/core'
+import {
+    PiCalendar,
+    PiClockDuotone,
+    PiEnvelopeDuotone,
+    PiPencil,
+    PiTelegramLogoDuotone,
+    PiX
+} from 'react-icons/pi'
 import { BulkUpdateUsersCommand } from '@remnawave/backend-contract'
 import { useForm, zodResolver } from '@mantine/form'
 import { DateTimePicker } from '@mantine/dates'
@@ -155,6 +156,59 @@ export const BulkUserActionsUpdateTabFeature = (props: IProps) => {
 
                 <DateTimePicker
                     clearable
+                    description={
+                        <Group gap="xs" mb="xs" mt="xs">
+                            <Button
+                                onClick={() => {
+                                    const currentDate = new Date()
+                                    const newDate = new Date(currentDate)
+                                    newDate.setMonth(newDate.getMonth() + 1)
+                                    form.setFieldValue('fields.expireAt', newDate)
+                                }}
+                                size="compact-xs"
+                                variant="light"
+                            >
+                                {t('create-user-modal.widget.1-month')}
+                            </Button>
+                            <Button
+                                onClick={() => {
+                                    const currentDate = new Date()
+                                    const newDate = new Date(currentDate)
+                                    newDate.setMonth(newDate.getMonth() + 3)
+                                    form.setFieldValue('fields.expireAt', newDate)
+                                }}
+                                size="compact-xs"
+                                variant="light"
+                            >
+                                {t('create-user-modal.widget.3-months')}
+                            </Button>
+                            <Button
+                                onClick={() => {
+                                    const currentDate = new Date()
+                                    const newDate = new Date(currentDate)
+                                    newDate.setFullYear(newDate.getFullYear() + 1)
+                                    form.setFieldValue('fields.expireAt', newDate)
+                                }}
+                                size="compact-xs"
+                                variant="light"
+                            >
+                                {t('create-user-modal.widget.1-year')}
+                            </Button>
+                            <Button
+                                onClick={() => {
+                                    const newDate = new Date()
+                                    newDate.setFullYear(2099)
+                                    form.setFieldValue('fields.expireAt', newDate)
+                                }}
+                                size="compact-xs"
+                                variant="light"
+                            >
+                                {t('create-user-modal.widget.2099-year')}
+                            </Button>
+                        </Group>
+                    }
+                    highlightToday
+                    key={form.key('fields.expireAt')}
                     label={t('bulk-user-actions.update.tab.feature.expire-date')}
                     leftSection={<PiCalendar size="1rem" />}
                     placeholder={t('bulk-user-actions.update.tab.feature.select-expiration-date')}
