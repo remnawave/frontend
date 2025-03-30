@@ -762,10 +762,10 @@
     },
     "delete-user": {
         "feature": {
-            "delete-user": "Delete user",
-            "are-you-sure": "Are you sure you want to delete the user? This action is irreversible.",
-            "delete": "Delete",
-            "cancel": "Cancel"
+            "delete-user": "Удалить пользователя",
+            "are-you-sure": "Вы уверены, что хотите удалить пользователя? Это действие необратимо.",
+            "delete": "Удалить",
+            "cancel": "Отмена"
         }
     },
     "user-usage-modal": {
