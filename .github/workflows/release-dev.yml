@@ -47,12 +47,13 @@ jobs:
               run: |
                   git config user.name "github-actions"
                   git config user.email "github-actions@github.com"
-                  git tag -f dev
-                  git push origin dev --force
+                  git tag -f dev-build
+                  git push origin refs/tags/dev-build --force
+
             - name: Create or update GitHub Release for dev
               uses: softprops/action-gh-release@v1
               with:
-                  tag_name: dev
+                  tag_name: dev-build
                   name: Dev Build
                   prerelease: true
                   files: |
