@@ -29,7 +29,6 @@ import { useGetUsersV2 } from '@shared/api/hooks'
 import { sToMs } from '@shared/utils/time-utils'
 
 import { BulkUserActionsDrawerWidget } from '../bulk-user-actions-drawer/bulk-user-actions-drawer.widget'
-import { customIcons } from './constants'
 
 export function UserTableWidget() {
     const { t } = useTranslation()
@@ -112,7 +111,7 @@ export function UserTableWidget() {
         //     rowsPerPageOptions: ['25', '50', '100']
         // },
 
-        icons: customIcons,
+        // icons: customIcons,
         enableColumnResizing: true,
 
         /* prettier-ignore */
