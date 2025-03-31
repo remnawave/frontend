@@ -17,7 +17,8 @@
         "utils": "Утилиты",
         "happ-routing-builder": "Конструктор маршрутизации Happ",
         "templates": "Шаблоны",
-        "subscription": "Подписка"
+        "subscription": "Подписка",
+        "subscription-page-builder": "Sub Page Builder"
     },
     "bandwidth-metrics": {
         "current-year": "Текущий год",
@@ -836,5 +837,60 @@
             "created-at": "Дата создания",
             "updated-at": "Дата обновления"
         }
+    },
+    "subscription-page-builder-header": {
+        "widget": {
+            "load-default": "Load Default",
+            "export-config": "Export Config",
+            "upload-config": "Upload Config",
+            "subscription-page-builder": "Subscription Page Builder",
+            "how-to-use-it": "How to use it?",
+            "description-line-1": "You can use this builder to configure available clients and guides for Remnawave Subscription Page.",
+            "description-line-2": "After creating your first configuration, you can download it and mount to subscription-page container.",
+            "description-line-3": "Click \"Load Default\" to get the reference configuration from the GitHub repository.",
+            "learn-more": "Learn more"
+        }
+    },
+    "subscription-page-builder": {
+        "page": {
+            "component": {
+                "failed-to-parse-config": "Failed to parse config file. Check the file format.",
+                "failed-to-load-default-config-check-your-internet-connection": "Failed to load default config. Check your internet connection.",
+                "no-apps-configured-for-this-platform": "No apps configured for this platform",
+                "add-app": "Add app",
+                "select-an-app-from-the-sidebar-or-add-a-new-one": "Select an app from the sidebar or add a new one",
+                "validation-errors": "Validation errors",
+                "invalid-configuration": "Invalid configuration",
+                "the-configuration-did-not-pass-validation": "The configuration did not pass validation.",
+                "close": "Close"
+            }
+        }
+    },
+    "app-form": {
+        "component": {
+            "delete-app": "Delete App",
+            "app-id": "App ID",
+            "app-name": "App Name",
+            "url-scheme": "URL Scheme",
+            "featured-app": "Featured App",
+            "need-base64-encoding": "Need Base64 Encoding",
+            "installation-step": "Installation Step",
+            "description": "Description",
+            "buttons": "Buttons",
+            "additional-before-subscription-step": "Additional Before Subscription Step",
+            "remove-step": "Remove Step",
+            "add-step": "Add Step",
+            "title": "Title",
+            "add-subscription-step": "Add Subscription Step",
+            "additional-after-subscription-step": "Additional After Subscription Step",
+            "connect-and-use-step": "Connect and Use Step"
+        }
+    },
+    "button-fields": {
+        "button": "Button",
+        "add-button": "Add button",
+        "remove-button": "Remove button",
+        "button-link": "Button Link",
+        "button-text": "Button Text"
     }
 }

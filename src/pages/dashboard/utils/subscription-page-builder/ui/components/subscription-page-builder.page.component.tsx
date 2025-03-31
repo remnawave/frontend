@@ -42,8 +42,6 @@ export const SubscriptionPageBuilderComponent = () => {
     const [validationErrors, setValidationErrors] = useState<string[]>([])
     const [opened, { open, close }] = useDisclosure(false)
 
-    const title = 'Subscription Page Builder'
-
     const addNewApp = () => {
         const newApp = createEmptyApp(activeTab)
         const updatedConfig = { ...config }
@@ -133,7 +131,9 @@ export const SubscriptionPageBuilderComponent = () => {
                 }
             } catch (error) {
                 consola.error('Failed to parse config file', error)
-                setValidationErrors(['Failed to parse config file. Check the file format.'])
+                setValidationErrors([
+                    t('subscription-page-builder.page.component.failed-to-parse-config')
+                ])
                 open()
             } finally {
                 setLoading(false)
@@ -161,7 +161,11 @@ export const SubscriptionPageBuilderComponent = () => {
             }
         } catch (error) {
             consola.error('Failed to load default config', error)
-            setValidationErrors(['Failed to load default config. Check your internet connection.'])
+            setValidationErrors([
+                t(
+                    'subscription-page-builder.page.component.failed-to-load-default-config-check-your-internet-connection'
+                )
+            ])
             open()
         } finally {
             setLoading(false)
@@ -171,10 +175,14 @@ export const SubscriptionPageBuilderComponent = () => {
     const selectedApp = config[activeTab].find((app) => app.id === selectedAppId)
 
     return (
-        <Page title={title}>
+        <Page title={t('constants.subscription-page-builder')}>
             <PageHeader
-                breadcrumbs={[{ label: t('constants.dashboard'), href: ROUTES.DASHBOARD.HOME }]}
-                title={title}
+                breadcrumbs={[
+                    { label: t('constants.dashboard'), href: ROUTES.DASHBOARD.HOME },
+                    { label: t('constants.utils') },
+                    { label: t('constants.subscription-page-builder') }
+                ]}
+                title={t('constants.subscription-page-builder')}
             />
             <Container fluid p={0} pos="relative" size="xl">
                 <LoadingOverlay visible={loading} />
@@ -210,7 +218,9 @@ export const SubscriptionPageBuilderComponent = () => {
                             <Stack mt="md">
                                 {config[activeTab].length === 0 ? (
                                     <Text c="dimmed" py="xl" ta="center">
-                                        No apps configured for this platform
+                                        {t(
+                                            'subscription-page-builder.page.component.no-apps-configured-for-this-platform'
+                                        )}
                                     </Text>
                                 ) : (
                                     config[activeTab].map((app) => (
@@ -243,7 +253,7 @@ export const SubscriptionPageBuilderComponent = () => {
                                     mt="md"
                                     onClick={addNewApp}
                                 >
-                                    Add app
+                                    {t('subscription-page-builder.page.component.add-app')}
                                 </Button>
                             </Stack>
                         </Paper>
@@ -260,7 +270,9 @@ export const SubscriptionPageBuilderComponent = () => {
                             ) : (
                                 <Flex align="center" h={400} justify="center">
                                     <Text c="dimmed" ta="center">
-                                        Select an app from the sidebar or add a new one
+                                        {t(
+                                            'subscription-page-builder.page.component.select-an-app-from-the-sidebar-or-add-a-new-one'
+                                        )}
                                     </Text>
                                 </Flex>
                             )}
@@ -268,14 +280,22 @@ export const SubscriptionPageBuilderComponent = () => {
                     </Grid.Col>
                 </Grid>
 
-                <Modal centered onClose={close} opened={opened} size="lg" title="Validation errors">
+                <Modal
+                    centered
+                    onClose={close}
+                    opened={opened}
+                    size="lg"
+                    title={t('subscription-page-builder.page.component.validation-errors')}
+                >
                     <Alert
                         color="red"
                         icon={<IconAlertCircle size="1rem" />}
                         mb="md"
-                        title="Invalid configuration"
+                        title={t('subscription-page-builder.page.component.invalid-configuration')}
                     >
-                        The configuration did not pass validation.
+                        {t(
+                            'subscription-page-builder.page.component.the-configuration-did-not-pass-validation'
+                        )}
                     </Alert>
                     <ScrollArea h={300} offsetScrollbars>
                         <Stack gap="xs">
@@ -290,7 +310,7 @@ export const SubscriptionPageBuilderComponent = () => {
                     </ScrollArea>
                     <Flex justify="flex-end" mt="lg">
                         <Button onClick={close} variant="outline">
-                            Close
+                            {t('subscription-page-builder.page.component.close')}
                         </Button>
                     </Flex>
                 </Modal>

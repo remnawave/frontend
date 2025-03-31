@@ -52,7 +52,11 @@ export const HappRoutingBuilderPageComponent = () => {
     return (
         <Page title={title}>
             <PageHeader
-                breadcrumbs={[{ label: t('constants.dashboard'), href: ROUTES.DASHBOARD.HOME }]}
+                breadcrumbs={[
+                    { label: t('constants.dashboard'), href: ROUTES.DASHBOARD.HOME },
+                    { label: t('constants.utils') },
+                    { label: title }
+                ]}
                 title={title}
             />
             <Container fluid p={0} size="xl">

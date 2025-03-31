@@ -17,6 +17,7 @@ export default function InboundsPageComponent(props: IProps) {
             <PageHeader
                 breadcrumbs={[
                     { label: t('constants.dashboard'), href: ROUTES.DASHBOARD.HOME },
+                    { label: t('constants.management') },
                     { label: t('constants.inbounds') }
                 ]}
                 title={t('constants.inbounds')}

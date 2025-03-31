@@ -18,6 +18,7 @@ export const ConfigPageComponent = (props: Props) => {
             <PageHeader
                 breadcrumbs={[
                     { label: t('constants.dashboard'), href: ROUTES.DASHBOARD.HOME },
+                    { label: t('constants.management') },
                     { label: t('constants.config'), href: ROUTES.DASHBOARD.MANAGEMENT.CONFIG }
                 ]}
                 title={t('constants.config')}

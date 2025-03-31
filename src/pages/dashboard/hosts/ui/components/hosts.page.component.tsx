@@ -23,6 +23,7 @@ export default function HostsPageComponent(props: IProps) {
             <PageHeader
                 breadcrumbs={[
                     { label: t('constants.dashboard'), href: ROUTES.DASHBOARD.HOME },
+                    { label: t('constants.management') },
                     { label: t('constants.hosts') }
                 ]}
                 title={t('constants.hosts')}

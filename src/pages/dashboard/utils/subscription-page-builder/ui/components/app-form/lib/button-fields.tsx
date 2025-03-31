@@ -12,12 +12,14 @@ import {
     Tooltip
 } from '@mantine/core'
 import { PiLink, PiPlus, PiTrash } from 'react-icons/pi'
+import { useTranslation } from 'react-i18next'
 
 import { addButton, removeButton, updateButtonField, updateButtonText } from './button-fields.utils'
 import { ButtonFieldsProps } from '../interfaces'
 
 export const ButtonFields = (props: ButtonFieldsProps) => {
     const { buttons, localApp, section, updateApp } = props
+    const { t } = useTranslation()
 
     return (
         <Box>
@@ -25,9 +27,11 @@ export const ButtonFields = (props: ButtonFieldsProps) => {
                 <Card key={index} mb="lg" padding="md" radius="md" withBorder>
                     <Card.Section p="md" withBorder>
                         <Flex align="center" justify="space-between">
-                            <Title order={5}>Button {index + 1}</Title>
+                            <Title order={5}>
+                                {t('button-fields.button')} {index + 1}
+                            </Title>
                             <ActionIconGroup>
-                                <Tooltip label="Add button" withArrow>
+                                <Tooltip label={t('button-fields.add-button')} withArrow>
                                     <ActionIcon
                                         color="teal"
                                         onClick={() => addButton(localApp, section, updateApp)}
@@ -37,7 +41,7 @@ export const ButtonFields = (props: ButtonFieldsProps) => {
                                         <PiPlus size="1.2rem" />
                                     </ActionIcon>
                                 </Tooltip>
-                                <Tooltip label="Remove button" withArrow>
+                                <Tooltip label={t('button-fields.remove-button')} withArrow>
                                     <ActionIcon
                                         color="red"
                                         onClick={() =>
@@ -55,7 +59,7 @@ export const ButtonFields = (props: ButtonFieldsProps) => {
 
                     <Box p="md">
                         <TextInput
-                            label="Button Link"
+                            label={t('button-fields.button-link')}
                             leftSection={<PiLink />}
                             mb="md"
                             onChange={(e) =>
@@ -72,7 +76,11 @@ export const ButtonFields = (props: ButtonFieldsProps) => {
                             value={button.buttonLink}
                         />
 
-                        <Divider label="Button Text" labelPosition="center" my="md" />
+                        <Divider
+                            label={t('button-fields.button-text')}
+                            labelPosition="center"
+                            my="md"
+                        />
 
                         <Tabs defaultValue="en" variant="default">
                             <Tabs.List grow>
@@ -145,7 +153,7 @@ export const ButtonFields = (props: ButtonFieldsProps) => {
                         onClick={() => addButton(localApp, section, updateApp)}
                         variant="outline"
                     >
-                        Add button
+                        {t('button-fields.add-button')}
                     </Button>
                 </Flex>
             )}

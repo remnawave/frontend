@@ -1,6 +1,7 @@
 import { IconCloudDownload, IconDownload, IconUpload } from '@tabler/icons-react'
 import { Accordion, Button, FileInput, Group, Text } from '@mantine/core'
 import { PiInfoDuotone } from 'react-icons/pi'
+import { useTranslation } from 'react-i18next'
 
 import { DataTableShared } from '@shared/ui/table'
 
@@ -10,7 +11,7 @@ export function SubscriptionPageBuilderHeaderWidget(props: {
     loadDefaultConfig: () => Promise<void>
 }) {
     const { exportConfig, importConfig, loadDefaultConfig } = props
-
+    const { t } = useTranslation()
     return (
         <DataTableShared.Container mb="xl">
             <DataTableShared.Title
@@ -21,11 +22,11 @@ export function SubscriptionPageBuilderHeaderWidget(props: {
                             onClick={loadDefaultConfig}
                             variant="light"
                         >
-                            Load Default
+                            {t('subscription-page-builder-header.widget.load-default')}
                         </Button>
 
                         <Button leftSection={<IconDownload size="1rem" />} onClick={exportConfig}>
-                            Export Config
+                            {t('subscription-page-builder-header.widget.export-config')}
                         </Button>
 
                         <FileInput
@@ -33,12 +34,12 @@ export function SubscriptionPageBuilderHeaderWidget(props: {
                             clearable
                             leftSection={<IconUpload size="1rem" />}
                             onChange={importConfig}
-                            placeholder="Upload Config"
+                            placeholder={t('subscription-page-builder-header.widget.upload-config')}
                             radius="lg"
                         />
                     </Group>
                 }
-                title="Subscription Page Builder"
+                title={t('subscription-page-builder-header.widget.subscription-page-builder')}
             />
             <DataTableShared.Content>
                 <Accordion radius="xs" variant="filled">
@@ -46,20 +47,17 @@ export function SubscriptionPageBuilderHeaderWidget(props: {
                         <Accordion.Control
                             icon={<PiInfoDuotone color="var(--mantine-color-gray-6)" size={20} />}
                         >
-                            How to use it?
+                            {t('subscription-page-builder-header.widget.how-to-use-it')}
                         </Accordion.Control>
                         <Accordion.Panel>
                             <Text fw={500} fz={'md'}>
-                                You can use this builder to configure available clients and guides
-                                for Remnawave Subscription Page.
+                                {t('subscription-page-builder-header.widget.description-line-1')}
                             </Text>
                             <Text fw={500} fz={'md'} mt={'xs'}>
-                                After creating your first configuration, you can download it and
-                                mount to subscription-page container.
+                                {t('subscription-page-builder-header.widget.description-line-2')}
                             </Text>
                             <Text c="dimmed" fz="sm" mt="xs">
-                                Click "Load Default" to get the reference configuration from the
-                                GitHub repository.
+                                {t('subscription-page-builder-header.widget.description-line-3')}
                             </Text>
                             <Button
                                 component="a"
@@ -67,7 +65,7 @@ export function SubscriptionPageBuilderHeaderWidget(props: {
                                 mt={'xs'}
                                 target="_blank"
                             >
-                                Learn more
+                                {t('subscription-page-builder-header.widget.learn-more')}
                             </Button>
                         </Accordion.Panel>
                     </Accordion.Item>

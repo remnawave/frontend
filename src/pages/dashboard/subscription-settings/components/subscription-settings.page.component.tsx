@@ -37,6 +37,7 @@ export const SubscriptionSettingsPageComponent = (props: IProps) => {
             <PageHeader
                 breadcrumbs={[
                     { label: t('constants.dashboard'), href: ROUTES.DASHBOARD.HOME },
+                    { label: t('constants.management') },
                     { label: t('constants.subscription-settings') }
                 ]}
                 title={t('constants.subscription-settings')}

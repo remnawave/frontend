@@ -18,6 +18,7 @@ import {
     TextInput,
     Title
 } from '@mantine/core'
+import { useTranslation } from 'react-i18next'
 import { useEffect, useState } from 'react'
 
 import { updateLocalizedField } from './lib/localized-fields.utils'
@@ -29,6 +30,7 @@ import { AppFormProps } from './interfaces'
 
 export const AppForm = (props: AppFormProps) => {
     const { app, onChange, onDelete } = props
+    const { t } = useTranslation()
     const [localApp, setLocalApp] = useState<AppConfig>(app)
 
     useEffect(() => {
@@ -56,26 +58,26 @@ export const AppForm = (props: AppFormProps) => {
                 <Title order={3}>{localApp.name}</Title>
                 {onDelete && (
                     <Button color="red" onClick={onDelete} variant="outline">
-                        Delete App
+                        {t('app-form.component.delete-app')}
                     </Button>
                 )}
             </Group>
 
             <Stack gap="sm">
                 <TextInput
-                    label="App ID"
+                    label={t('app-form.component.app-id')}
                     onChange={(e) => updateApp({ id: e.target.value as `${Lowercase<string>}` })}
                     value={localApp.id}
                 />
 
                 <TextInput
-                    label="App Name"
+                    label={t('app-form.component.app-name')}
                     onChange={(e) => updateApp({ name: e.target.value })}
                     value={localApp.name}
                 />
 
                 <TextInput
-                    label="URL Scheme"
+                    label={t('app-form.component.url-scheme')}
                     onChange={(e) => updateApp({ urlScheme: e.target.value })}
                     value={localApp.urlScheme}
                 />
@@ -83,13 +85,13 @@ export const AppForm = (props: AppFormProps) => {
                 <Group>
                     <Checkbox
                         checked={localApp.isFeatured}
-                        label="Featured App"
+                        label={t('app-form.component.featured-app')}
                         onChange={(e) => updateApp({ isFeatured: e.target.checked })}
                     />
 
                     <Checkbox
                         checked={!!localApp.isNeedBase64Encoding}
-                        label="Need Base64 Encoding"
+                        label={t('app-form.component.need-base64-encoding')}
                         onChange={(e) => updateApp({ isNeedBase64Encoding: e.target.checked })}
                     />
                 </Group>
@@ -100,12 +102,12 @@ export const AppForm = (props: AppFormProps) => {
                     <Accordion.Control>
                         <Flex align="center" gap="xs">
                             <PiDownloadBold size="1.5rem" />
-                            Installation Step
+                            {t('app-form.component.installation-step')}
                         </Flex>
                     </Accordion.Control>
                     <Accordion.Panel>
                         <Title mb="md" order={4}>
-                            Description
+                            {t('app-form.component.description')}
                         </Title>
                         <LocalizedFields
                             field="description"
@@ -116,7 +118,7 @@ export const AppForm = (props: AppFormProps) => {
                         />
 
                         <Title mb="md" mt="lg" order={4}>
-                            Buttons
+                            {t('app-form.component.buttons')}
                         </Title>
                         <ButtonFields
                             buttons={localApp.installationStep.buttons}
@@ -131,7 +133,7 @@ export const AppForm = (props: AppFormProps) => {
                     <Accordion.Control>
                         <Flex align="center" gap="xs">
                             <PiInfoBold size="1.5rem" />
-                            Additional Before Subscription Step
+                            {t('app-form.component.additional-before-subscription-step')}
                             {localApp.additionalBeforeAddSubscriptionStep && (
                                 <Button
                                     color="red"
@@ -145,7 +147,7 @@ export const AppForm = (props: AppFormProps) => {
                                     size="xs"
                                     variant="outline"
                                 >
-                                    Remove Step
+                                    {t('app-form.component.remove-step')}
                                 </Button>
                             )}
                             {!localApp.additionalBeforeAddSubscriptionStep && (
@@ -164,7 +166,7 @@ export const AppForm = (props: AppFormProps) => {
                                     size="xs"
                                     variant="outline"
                                 >
-                                    Add Step
+                                    {t('app-form.component.add-step')}
                                 </Button>
                             )}
                         </Flex>
@@ -173,7 +175,7 @@ export const AppForm = (props: AppFormProps) => {
                         {localApp.additionalBeforeAddSubscriptionStep && (
                             <>
                                 <Title mb="md" order={4}>
-                                    Title
+                                    {t('app-form.component.title')}
                                 </Title>
                                 <LocalizedFields
                                     field="title"
@@ -183,7 +185,7 @@ export const AppForm = (props: AppFormProps) => {
                                 />
 
                                 <Title mb="md" mt="lg" order={4}>
-                                    Description
+                                    {t('app-form.component.description')}
                                 </Title>
                                 <LocalizedFields
                                     field="description"
@@ -194,7 +196,7 @@ export const AppForm = (props: AppFormProps) => {
                                 />
 
                                 <Title mb="md" mt="lg" order={4}>
-                                    Buttons
+                                    {t('app-form.component.buttons')}
                                 </Title>
                                 <ButtonFields
                                     buttons={localApp.additionalBeforeAddSubscriptionStep.buttons}
@@ -211,12 +213,12 @@ export const AppForm = (props: AppFormProps) => {
                     <Accordion.Control>
                         <Flex align="center" gap="xs">
                             <PiCloudArrowDownBold size="1.5rem" />
-                            Add Subscription Step
+                            {t('app-form.component.add-subscription-step')}
                         </Flex>
                     </Accordion.Control>
                     <Accordion.Panel>
                         <Title mb="md" order={4}>
-                            Description
+                            {t('app-form.component.description')}
                         </Title>
                         <LocalizedFields
                             field="description"
@@ -232,7 +234,7 @@ export const AppForm = (props: AppFormProps) => {
                     <Accordion.Control>
                         <Flex align="center" gap="xs">
                             <PiStarBold size="1.5rem" />
-                            Additional After Subscription Step
+                            {t('app-form.component.additional-after-subscription-step')}
                             {localApp.additionalAfterAddSubscriptionStep && (
                                 <Button
                                     color="red"
@@ -246,7 +248,7 @@ export const AppForm = (props: AppFormProps) => {
                                     size="xs"
                                     variant="outline"
                                 >
-                                    Remove Step
+                                    {t('app-form.component.remove-step')}
                                 </Button>
                             )}
                             {!localApp.additionalAfterAddSubscriptionStep && (
@@ -265,7 +267,7 @@ export const AppForm = (props: AppFormProps) => {
                                     size="xs"
                                     variant="outline"
                                 >
-                                    Add Step
+                                    {t('app-form.component.add-step')}
                                 </Button>
                             )}
                         </Flex>
@@ -274,7 +276,7 @@ export const AppForm = (props: AppFormProps) => {
                         {localApp.additionalAfterAddSubscriptionStep && (
                             <>
                                 <Title mb="md" order={4}>
-                                    Title
+                                    {t('app-form.component.title')}
                                 </Title>
                                 <LocalizedFields
                                     field="title"
@@ -284,7 +286,7 @@ export const AppForm = (props: AppFormProps) => {
                                 />
 
                                 <Title mb="md" mt="lg" order={4}>
-                                    Description
+                                    {t('app-form.component.description')}
                                 </Title>
                                 <LocalizedFields
                                     field="description"
@@ -295,7 +297,7 @@ export const AppForm = (props: AppFormProps) => {
                                 />
 
                                 <Title mb="md" mt="lg" order={4}>
-                                    Buttons
+                                    {t('app-form.component.buttons')}
                                 </Title>
                                 <ButtonFields
                                     buttons={localApp.additionalAfterAddSubscriptionStep.buttons}
@@ -312,12 +314,12 @@ export const AppForm = (props: AppFormProps) => {
                     <Accordion.Control>
                         <Flex align="center" gap="xs">
                             <PiCheckBold size="1.5rem" />
-                            Connect and Use Step
+                            {t('app-form.component.connect-and-use-step')}
                         </Flex>
                     </Accordion.Control>
                     <Accordion.Panel>
                         <Title mb="md" order={4}>
-                            Description
+                            {t('app-form.component.description')}
                         </Title>
                         <LocalizedFields
                             field="description"
