@@ -1,4 +1,5 @@
 import { createContext, ReactNode, useEffect, useMemo, useState } from 'react'
+import consola from 'consola/browser'
 
 import { resetAllStores } from '@shared/hocs/store-wrapper'
 import { removeToken, useToken } from '@entities/auth'
@@ -58,6 +59,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
                 setIsAuthenticated(true)
                 setIsLoggedOut(false)
             } catch (error) {
+                consola.error(error)
                 logoutUser()
             } finally {
                 setIsInitialized(true)

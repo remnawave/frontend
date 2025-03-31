@@ -4,6 +4,7 @@ import { Button, Group, Text } from '@mantine/core'
 import { useTranslation } from 'react-i18next'
 import { useClipboard } from '@mantine/hooks'
 import { modals } from '@mantine/modals'
+import consola from 'consola/browser'
 
 import { useUpdateConfig } from '@shared/api/hooks'
 
@@ -29,6 +30,7 @@ export function ConfigEditorActionsFeature(props: Props) {
         try {
             JSON.parse(currentValue)
         } catch (error) {
+            consola.error(error)
             notifications.show({
                 color: 'red',
                 message: t('config-editor-actions.feature.failed-to-save-invalid-json'),

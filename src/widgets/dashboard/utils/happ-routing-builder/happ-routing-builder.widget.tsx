@@ -28,6 +28,7 @@ import {
 import { useTranslation } from 'react-i18next'
 import { useEffect, useState } from 'react'
 import { modals } from '@mantine/modals'
+import consola from 'consola/browser'
 import { renderSVG } from 'uqr'
 
 interface HappRoutingData {
@@ -93,6 +94,7 @@ export const HappRoutingBuilderWidget = () => {
             try {
                 dnsHostsObj = JSON.parse(formData.dnsHosts)
             } catch (e) {
+                consola.error(e)
                 // silence
                 // console.error('Failed to parse DNS Hosts JSON:', e)
             }
@@ -135,6 +137,7 @@ export const HappRoutingBuilderWidget = () => {
 
             return formattedData
         } catch (error) {
+            consola.error(error)
             return {}
         }
     }
@@ -203,6 +206,7 @@ export const HappRoutingBuilderWidget = () => {
 
             setFormData(newFormData)
         } catch (error) {
+            consola.error(error)
             // Failed to update form data
         }
     }
@@ -213,6 +217,7 @@ export const HappRoutingBuilderWidget = () => {
             const jsonData = JSON.parse(value) as HappRoutingData
             updateFormDataFromJson(jsonData)
         } catch (error) {
+            consola.error(error)
             // Invalid JSON, do nothing
         }
     }
@@ -229,6 +234,7 @@ export const HappRoutingBuilderWidget = () => {
 
             updateFormDataFromJson(jsonData)
         } catch (error) {
+            consola.error(error)
             modals.open({
                 title: t('happ-routing-builder.widget.close'),
                 centered: true,

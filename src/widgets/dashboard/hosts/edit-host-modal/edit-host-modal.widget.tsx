@@ -3,6 +3,7 @@ import { useForm, zodResolver } from '@mantine/form'
 import { useTranslation } from 'react-i18next'
 import { useEffect, useState } from 'react'
 import { Modal, Text } from '@mantine/core'
+import consola from 'consola/browser'
 
 import {
     useHostsStoreActions,
@@ -107,6 +108,7 @@ export const EditHostModalWidget = () => {
                 xHttpExtraParams = JSON.parse(values.xHttpExtraParams as unknown as string)
             }
         } catch (error) {
+            consola.error(error)
             xHttpExtraParams = null
             // silence
         }

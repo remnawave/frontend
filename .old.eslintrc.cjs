@@ -37,7 +37,6 @@ module.exports = {
                 partitionByComment: false,
                 partitionByNewLine: false,
                 newlinesBetween: 'always',
-                maxLineLength: undefined,
                 groups: [
                     'type',
                     ['builtin', 'external'],
