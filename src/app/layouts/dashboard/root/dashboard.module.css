@@ -61,6 +61,7 @@
     bottom: 0;
     z-index: 50;
     height: 100%;
+
     padding-bottom: var(--mantine-spacing-md);
 
     @media (min-width: $mantine-breakpoint-xl) {
@@ -75,6 +76,6 @@
 }
 
 .logoWrapper {
-    padding: var(--mantine-spacing-xl) var(--mantine-spacing-xl);
-    margin-bottom: var(--mantine-spacing-md);
+    padding: var(--mantine-spacing-md) var(--mantine-spacing-xl) var(--mantine-spacing-xs)
+        var(--mantine-spacing-xl);
 }

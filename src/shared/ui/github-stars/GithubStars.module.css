@@ -1,0 +1,46 @@
+.container {
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    border-radius: 50px;
+    user-select: none;
+    max-width: 200px;
+    cursor: pointer;
+    background: var(--mantine-color-dark-6);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.container:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.iconSection {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 11px 15px;
+    color: var(--mantine-color-white);
+    background-color: var(--mantine-color-dark-8);
+}
+
+.countSection {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 90px;
+    padding: 10px 20px;
+    color: var(--mantine-color-white);
+    height: 100%;
+}
+
+.githubIcon {
+    color: var(--mantine-color-white);
+}
+
+.starIcon {
+    color: gold;
+}

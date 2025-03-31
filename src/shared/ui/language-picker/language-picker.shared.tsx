@@ -1,20 +1,15 @@
-import { Group, Menu, Text, UnstyledButton, useDirection } from '@mantine/core'
-import { IconChevronDown } from '@tabler/icons-react'
+import { ActionIcon, Menu, Text, useDirection } from '@mantine/core'
 import { useTranslation } from 'react-i18next'
-import { useEffect, useState } from 'react'
-
-import classes from './LanguagePicker.module.css'
+import { useEffect } from 'react'
 
 const data = [
-    { label: 'English', emoji: '🇺🇸', value: 'en' },
+    { label: 'English', emoji: '🇬🇧', value: 'en' },
     { label: 'Русский', emoji: '🇷🇺', value: 'ru' },
     { label: 'فارسی', emoji: '🇮🇷', value: 'fa' }
 ]
 
 export function LanguagePicker() {
-    const [opened, setOpened] = useState(false)
     const { toggleDirection, dir } = useDirection()
-
     const { i18n } = useTranslation()
 
     useEffect(() => {
@@ -55,21 +50,11 @@ export function LanguagePicker() {
     ))
 
     return (
-        <Menu
-            onClose={() => setOpened(false)}
-            onOpen={() => setOpened(true)}
-            radius="md"
-            width="target"
-            withinPortal
-        >
+        <Menu position="bottom-end" width={150} withinPortal>
             <Menu.Target>
-                <UnstyledButton className={classes.control} data-expanded={opened || undefined}>
-                    <Group gap="xs">
-                        <Text>{selected.emoji}</Text>
-                        <span className={classes.label}>{selected.label}</span>
-                    </Group>
-                    <IconChevronDown className={classes.icon} size={16} stroke={1.5} />
-                </UnstyledButton>
+                <ActionIcon color="gray" size="xl">
+                    <Text size="xl">{selected.emoji}</Text>
+                </ActionIcon>
             </Menu.Target>
             <Menu.Dropdown>{items}</Menu.Dropdown>
         </Menu>

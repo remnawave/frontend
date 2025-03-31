@@ -1,8 +1,9 @@
 import { PiArrowsClockwise, PiSignOutDuotone } from 'react-icons/pi'
-import { ActionIcon, Button, Menu } from '@mantine/core'
+import { ActionIcon, Button, Group } from '@mantine/core'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 
+import { LanguagePicker } from '@shared/ui/language-picker/language-picker.shared'
 import { resetAllStores } from '@shared/hocs/store-wrapper'
 import { clearQueryClient } from '@shared/api'
 import { removeToken } from '@entities/auth'
@@ -30,7 +31,9 @@ export const HeaderButtons = () => {
     }
 
     return (
-        <Menu>
+        <Group gap="sm">
+            <LanguagePicker />
+
             <ActionIcon color="gray" onClick={handleRefresh} size="xl">
                 <PiArrowsClockwise size="1.5rem" />
             </ActionIcon>
@@ -38,6 +41,6 @@ export const HeaderButtons = () => {
             <Button leftSection={<PiSignOutDuotone size="1rem" />} onClick={handleLogout} size="md">
                 {t('header-buttons.feature.logout')}
             </Button>
-        </Menu>
+        </Group>
     )
 }

@@ -10,7 +10,7 @@ export function SidebarLayout() {
     const menu = useMenuSections()
 
     return (
-        <Stack gap="xl">
+        <Stack gap="lg">
             {menu.map((item) => (
                 <div key={item.header}>
                     <Title className={classes.sectionTitle} order={6}>
