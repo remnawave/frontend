@@ -63,8 +63,11 @@ jobs:
                   COMMIT_URL="https://github.com/${{ github.repository }}/commit/${{ github.sha }}"
                   DATE=$(date -u +'%Y-%m-%d %H:%M:%S UTC')
 
-                  gh release edit dev-build \
-                  --notes "🔄 Updated build\n\n🔗 [Commit]($COMMIT_URL)\n📅 Built: $DATE"
+                  gh release edit dev-build --notes-file - <<EOF
+                  🔄 Updated development build
+                  🔗 [Commit]($COMMIT_URL)  
+                  📅 Built: $DATE
+                  EOF
 
     send-telegram-message:
         name: Send Telegram message
