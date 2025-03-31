@@ -1,6 +1,6 @@
 ## Remnawave Frontend
 
-Frontend for Remnawave Panel.
+Frontend for Remnawave Panel..
 
 Learn more about Remnawave Panel [here](https://remna.st/).
 
