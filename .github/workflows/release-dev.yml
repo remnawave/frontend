@@ -43,23 +43,16 @@ jobs:
               run: |
                   zip -r remnawave-frontend.zip ./dist
 
-            - name: Create or update dev tag
-              run: |
-                  git config user.name "github-actions"
-                  git config user.email "github-actions@github.com"
-                  git tag -f dev-build
-                  git push origin refs/tags/dev-build --force
-
-            - name: Create or update GitHub Release for dev
-              uses: softprops/action-gh-release@v1
-              with:
-                  tag_name: dev-build
-                  name: Dev Build
-                  prerelease: true
-                  files: |
-                      remnawave-frontend.zip
+            - name: Upload release to GitHub
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              run: |
+                  gh release delete dev-build -y || true
+                  gh release create dev-build \
+                    --notes "Dev release" \
+                    --prerelease \
+                    --target ${{ github.sha }} \
+                    remnawave-frontend.zip
 
     send-telegram-message:
         name: Send Telegram message
