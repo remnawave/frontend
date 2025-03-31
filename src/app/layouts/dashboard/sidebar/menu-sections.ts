@@ -117,6 +117,11 @@ export const useMenuSections = (): MenuItem[] => {
                     name: t('constants.happ-routing-builder'),
                     href: ROUTES.DASHBOARD.UTILS.HAPP_ROUTING_BUILDER,
                     icon: PiLinkDuotone
+                },
+                {
+                    name: 'Sub Page Builder',
+                    href: ROUTES.DASHBOARD.UTILS.SUBSCRIPTION_PAGE_BUILDER,
+                    icon: PiLinkDuotone
                 }
             ]
         },

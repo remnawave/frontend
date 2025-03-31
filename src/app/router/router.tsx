@@ -7,6 +7,7 @@ import {
 } from 'react-router-dom'
 import { SUBSCRIPTION_TEMPLATE_TYPE } from '@remnawave/backend-contract'
 
+import { SubscriptionPageBuilderConnector } from '@pages/dashboard/utils/subscription-page-builder/ui/connectors/subscription-page-builder.page.connector'
 import { HappRoutingBuilderPageConnector } from '@pages/dashboard/utils/happ-routing-builder/ui/connectors/happ-routing-builder.page.connector'
 import { TemplateBasePageConnector } from '@pages/dashboard/templates/ui/connectors/template-base-page.connector'
 import { NodesBandwidthTablePageConnector } from '@pages/dashboard/nodes-bandwidth-table/ui/connectors'
@@ -123,6 +124,10 @@ const router = createBrowserRouter(
                     <Route
                         element={<HappRoutingBuilderPageConnector />}
                         path={ROUTES.DASHBOARD.UTILS.HAPP_ROUTING_BUILDER}
+                    />
+                    <Route
+                        element={<SubscriptionPageBuilderConnector />}
+                        path={ROUTES.DASHBOARD.UTILS.SUBSCRIPTION_PAGE_BUILDER}
                     />
                     <Route
                         element={<SubscriptionSettingsConnector />}

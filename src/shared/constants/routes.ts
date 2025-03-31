@@ -25,7 +25,8 @@ export const ROUTES = {
         },
         SUBSCRIPTION_SETTINGS: '/dashboard/subscription-settings',
         UTILS: {
-            HAPP_ROUTING_BUILDER: '/dashboard/utils/happ-routing-builder'
+            HAPP_ROUTING_BUILDER: '/dashboard/utils/happ-routing-builder',
+            SUBSCRIPTION_PAGE_BUILDER: '/dashboard/utils/subscription-page-builder'
         }
     }
 } as const
