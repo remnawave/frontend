@@ -18,25 +18,25 @@ export const getOnlineMetrics = (
             value: formatInt(onlineStats.onlineNow) ?? 0,
             icon: PiPulseDuotone,
             title: t('online-metrics.online-now'),
-            color: 'teal'
+            color: 'var(--mantine-color-teal-4)'
         },
         {
             value: formatInt(onlineStats.lastDay) ?? 0,
             icon: PiClockCountdownDuotone,
             title: t('online-metrics.online-today'),
-            color: 'blue'
+            color: 'var(--mantine-color-blue-4)'
         },
         {
             value: formatInt(onlineStats.lastWeek) ?? 0,
             icon: PiUsersDuotone,
             title: t('online-metrics.online-this-week'),
-            color: 'indigo'
+            color: 'var(--mantine-color-indigo-4)'
         },
         {
             value: formatInt(onlineStats.neverOnline) ?? 0,
             icon: PiProhibitDuotone,
             title: t('online-metrics.never-online'),
-            color: 'red'
+            color: 'var(--mantine-color-red-4)'
         }
     ]
 }

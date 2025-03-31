@@ -178,7 +178,7 @@ export function UserTableWidget() {
             />
         ),
         displayColumnDefOptions: {
-            'mrt-row-actions': { size: 170 }
+            'mrt-row-actions': { size: 140 }
         }
     })
 

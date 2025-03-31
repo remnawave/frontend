@@ -27,10 +27,10 @@ export function UserActionsFeature(props: IProps) {
                     {({ copied, copy }) => (
                         <Tooltip label={copied ? 'Copied!' : 'Copy subscription URL'}>
                             <ActionIcon
-                                color={copied ? 'teal' : 'blue'}
+                                color={copied ? 'teal.5' : 'blue.5'}
                                 onClick={copy}
                                 radius="md"
-                                size="xl"
+                                size="input-sm"
                                 variant={copied ? 'light' : 'outline'}
                             >
                                 {copied ? (
@@ -43,19 +43,19 @@ export function UserActionsFeature(props: IProps) {
                     )}
                 </CopyButton>
                 <ActionIcon
-                    color="grape"
+                    color="grape.5"
                     onClick={handleOpenDetailedUserInfoDrawer}
                     radius="md"
-                    size="xl"
+                    size="input-sm"
                     variant="outline"
                 >
                     <PiArticleDuotone size={'1.5rem'} />
                 </ActionIcon>
                 <ActionIcon
-                    color="cyan"
+                    color="cyan.5"
                     onClick={handleOpenModal}
                     radius="md"
-                    size="xl"
+                    size="input-sm"
                     variant="outline"
                 >
                     <PiEyeDuotone size={'1.5rem'} />
