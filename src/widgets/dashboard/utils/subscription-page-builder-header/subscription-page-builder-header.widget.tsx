@@ -1,12 +1,12 @@
 import { IconCloudDownload, IconDownload, IconUpload } from '@tabler/icons-react'
-import { Accordion, Button, Group, Text } from '@mantine/core'
+import { Accordion, Button, FileInput, Group, Text } from '@mantine/core'
 import { PiInfoDuotone } from 'react-icons/pi'
 
 import { DataTableShared } from '@shared/ui/table'
 
 export function SubscriptionPageBuilderHeaderWidget(props: {
     exportConfig: () => void
-    importConfig: (event: React.ChangeEvent<HTMLInputElement>) => void
+    importConfig: (file: File | null) => void
     loadDefaultConfig: () => Promise<void>
 }) {
     const { exportConfig, importConfig, loadDefaultConfig } = props
@@ -28,15 +28,14 @@ export function SubscriptionPageBuilderHeaderWidget(props: {
                             Export Config
                         </Button>
 
-                        <Button component="label" leftSection={<IconUpload size="1rem" />}>
-                            Import Config
-                            <input
-                                accept=".json"
-                                onChange={importConfig}
-                                style={{ display: 'none' }}
-                                type="file"
-                            />
-                        </Button>
+                        <FileInput
+                            accept="application/json,.json"
+                            clearable
+                            leftSection={<IconUpload size="1rem" />}
+                            onChange={importConfig}
+                            placeholder="Upload Config"
+                            radius="lg"
+                        />
                     </Group>
                 }
                 title="Subscription Page Builder"

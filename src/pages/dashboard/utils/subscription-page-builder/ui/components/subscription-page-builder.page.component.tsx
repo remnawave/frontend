@@ -115,14 +115,12 @@ export const SubscriptionPageBuilderComponent = () => {
         linkElement.click()
     }
 
-    const importConfig = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setLoading(true)
-
-        const file = event.target.files?.[0]
+    const importConfig = (file: File | null) => {
         if (!file) {
-            setLoading(false)
             return
         }
+
+        setLoading(true)
 
         const reader = new FileReader()
         reader.onload = (e) => {
@@ -270,14 +268,14 @@ export const SubscriptionPageBuilderComponent = () => {
                     </Grid.Col>
                 </Grid>
 
-                <Modal onClose={close} opened={opened} size="lg" title="Validation errors">
+                <Modal centered onClose={close} opened={opened} size="lg" title="Validation errors">
                     <Alert
                         color="red"
                         icon={<IconAlertCircle size="1rem" />}
                         mb="md"
                         title="Invalid configuration"
                     >
-                        The configuration did not pass validation. The following errors are listed.
+                        The configuration did not pass validation.
                     </Alert>
                     <ScrollArea h={300} offsetScrollbars>
                         <Stack gap="xs">
