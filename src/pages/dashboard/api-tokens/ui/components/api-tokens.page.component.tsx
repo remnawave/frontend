@@ -22,7 +22,7 @@ export default function ApiTokensPageComponent(props: IProps) {
                     { label: t('constants.dashboard'), href: ROUTES.DASHBOARD.HOME },
                     {
                         label: t('constants.api-tokens'),
-                        href: ROUTES.DASHBOARD.API_TOKENS
+                        href: ROUTES.DASHBOARD.MANAGEMENT.API_TOKENS
                     }
                 ]}
                 title={t('constants.api-tokens')}
