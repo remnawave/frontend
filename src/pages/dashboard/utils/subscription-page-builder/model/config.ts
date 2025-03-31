@@ -1,9 +1,5 @@
 import { AppConfig, LocalizedText, PlatformConfig, Step, TitleStep } from './types'
 
-/**
- * Пустые шаблоны для создания новых объектов
- */
-
 export const emptyLocalizedText: LocalizedText = {
     en: '',
     fa: '',
@@ -20,9 +16,6 @@ export const emptyTitleStep: TitleStep = {
     buttons: []
 }
 
-/**
- * Создает пустое приложение для указанной платформы
- */
 export const createEmptyApp = (platform: 'android' | 'ios' | 'pc'): AppConfig => ({
     id: `new-app-${platform}-${Date.now()}`.toLowerCase() as `${Lowercase<string>}`,
     name: 'New App',
@@ -36,9 +29,6 @@ export const createEmptyApp = (platform: 'android' | 'ios' | 'pc'): AppConfig =>
     connectAndUseStep: { ...emptyStep }
 })
 
-/**
- * Пустая конфигурация платформ
- */
 export const emptyConfig: PlatformConfig = {
     ios: [],
     android: [],
