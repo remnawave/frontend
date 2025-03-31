@@ -51,7 +51,7 @@ jobs:
 
                   COMMIT_URL="https://github.com/${{ github.repository }}/commit/$SHORT_SHA"
 
-                  cat <<EOF > build-info.json
+                  cat <<EOF > build.info.json
                   {
                   "buildTime": "$BUILD_TIME",
                   "commitFull": "$FULL_SHA",
