@@ -24,6 +24,7 @@ jobs:
                   title: 'Build frontend:dev build started'
 
     build-and-release:
+        name: Build and release
         runs-on: ubuntu-latest
         steps:
             - name: Checkout
@@ -43,16 +44,27 @@ jobs:
               run: |
                   zip -r remnawave-frontend.zip ./dist
 
-            - name: Upload release to GitHub
+            - name: Remove previous ZIP from release (if exists)
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               run: |
-                  gh release delete dev-build -y || true
-                  gh release create dev-build \
-                    --notes "Dev release" \
-                    --prerelease \
-                    --target ${{ github.sha }} \
-                    remnawave-frontend.zip
+                  gh release delete-asset dev-build remnawave-frontend.zip || true
+
+            - name: Upload new ZIP to release
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              run: |
+                  gh release upload dev-build remnawave-frontend.zip --clobber
+
+            - name: Update release notes
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              run: |
+                  COMMIT_URL="https://github.com/${{ github.repository }}/commit/${{ github.sha }}"
+                  DATE=$(date -u +'%Y-%m-%d %H:%M:%S UTC')
+
+                  gh release edit dev-build \
+                  --notes "🔄 Updated build\n\n🔗 [Commit]($COMMIT_URL)\n📅 Built: $DATE"
 
     send-telegram-message:
         name: Send Telegram message
