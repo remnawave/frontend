@@ -1,20 +1,20 @@
 .root {
-  position: sticky;
-  top: 0;
-  z-index: 199;
-  display: flex;
-  align-items: center;
-  padding: var(--mantine-spacing-md);
+    position: sticky;
+    top: 0;
+    z-index: 199;
+    display: flex;
+    align-items: center;
+    padding: var(--mantine-spacing-md);
 
-  backdrop-filter: blur(24px);
+    backdrop-filter: blur(24px);
 
-  @media (min-width: $mantine-breakpoint-md) {
-    padding-left: 1.25rem;
-    padding-right: 1.25rem;
-  }
+    @media (min-width: $mantine-breakpoint-md) {
+        padding-left: 1.25rem;
+        padding-right: 1.25rem;
+    }
 
-  @media (min-width: $mantine-breakpoint-lg) {
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
-  }
+    @media (min-width: $mantine-breakpoint-lg) {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+    }
 }

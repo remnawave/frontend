@@ -2,10 +2,21 @@
     z-index: 198;
     display: flex;
     justify-content: space-between;
+    width: 100vw;
+    left: 0;
+    margin-left: calc(var(--mantine-spacing-md) * -1);
+    backdrop-filter: blur(24px);
 
     @media (min-width: $mantine-breakpoint-xl) {
         padding-top: 1.25rem;
         padding-bottom: 1.25rem;
+        width: 100vw;
+        left: 0;
+        margin-left: calc(-1 * (var(--mantine-spacing-md) + var(--sidebar-width-xl)));
+    }
+
+    @media (min-width: $mantine-breakpoint-2xl) {
+        margin-left: calc(-1 * (var(--mantine-spacing-md) + var(--sidebar-width-2xl)));
     }
 }
 

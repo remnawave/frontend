@@ -43,96 +43,132 @@ const router = createBrowserRouter(
                 <Route element={<DashboardLayout />} path={ROUTES.DASHBOARD.ROOT}>
                     <Route element={<Navigate replace to={ROUTES.DASHBOARD.HOME} />} index />
                     <Route element={<HomePageConnector />} path={ROUTES.DASHBOARD.HOME} />
-                    <Route element={<UsersPageConnector />} path={ROUTES.DASHBOARD.USERS} />
-                    <Route element={<InboundsPageConnector />} path={ROUTES.DASHBOARD.INBOUNDS} />
-                    <Route element={<HostsPageConnector />} path={ROUTES.DASHBOARD.HOSTS} />
-                    <Route element={<NodesPageConnector />} path={ROUTES.DASHBOARD.NODES} />
-                    <Route
-                        element={<NodesBandwidthTablePageConnector />}
-                        path={ROUTES.DASHBOARD.NODES_BANDWIDTH_TABLE}
-                    />
-                    <Route element={<ConfigPageConnector />} path={ROUTES.DASHBOARD.CONFIG} />
-                    <Route
-                        element={<ApiTokensPageConnector />}
-                        path={ROUTES.DASHBOARD.API_TOKENS}
-                    />
-                    <Route
-                        element={<StatisticNodesConnector />}
-                        path={ROUTES.DASHBOARD.NODES_STATS}
-                    />
-                    {/* Subscription templates */}
-                    <Route
-                        element={
-                            <TemplateBasePageConnector
-                                language="yaml"
-                                templateType={SUBSCRIPTION_TEMPLATE_TYPE.MIHOMO}
-                                title="Mihomo"
-                            />
-                        }
-                        path={ROUTES.DASHBOARD.TEMPLATES.MIHOMO}
-                    />
-                    <Route
-                        element={
-                            <TemplateBasePageConnector
-                                language="yaml"
-                                templateType={SUBSCRIPTION_TEMPLATE_TYPE.STASH}
-                                title="Stash"
-                            />
-                        }
-                        path={ROUTES.DASHBOARD.TEMPLATES.STASH}
-                    />
-                    <Route
-                        element={
-                            <TemplateBasePageConnector
-                                language="json"
-                                templateType={SUBSCRIPTION_TEMPLATE_TYPE.SINGBOX}
-                                title="Singbox"
-                            />
-                        }
-                        path={ROUTES.DASHBOARD.TEMPLATES.SINGBOX}
-                    />
-                    <Route
-                        element={
-                            <TemplateBasePageConnector
-                                language="json"
-                                templateType={SUBSCRIPTION_TEMPLATE_TYPE.SINGBOX_LEGACY}
-                                title="Singbox legacy"
-                            />
-                        }
-                        path={ROUTES.DASHBOARD.TEMPLATES.SINGBOX_LEGACY}
-                    />
-                    <Route
-                        element={
-                            <TemplateBasePageConnector
-                                language="json"
-                                templateType={SUBSCRIPTION_TEMPLATE_TYPE.XRAY_JSON}
-                                title="Xray JSON"
-                            />
-                        }
-                        path={ROUTES.DASHBOARD.TEMPLATES.XRAY_JSON}
-                    />
-                    <Route
-                        element={
-                            <TemplateBasePageConnector
-                                language="yaml"
-                                templateType={SUBSCRIPTION_TEMPLATE_TYPE.CLASH}
-                                title="Clash"
-                            />
-                        }
-                        path={ROUTES.DASHBOARD.TEMPLATES.CLASH}
-                    />
-                    <Route
-                        element={<HappRoutingBuilderPageConnector />}
-                        path={ROUTES.DASHBOARD.UTILS.HAPP_ROUTING_BUILDER}
-                    />
-                    <Route
-                        element={<SubscriptionPageBuilderConnector />}
-                        path={ROUTES.DASHBOARD.UTILS.SUBSCRIPTION_PAGE_BUILDER}
-                    />
-                    <Route
-                        element={<SubscriptionSettingsConnector />}
-                        path={ROUTES.DASHBOARD.SUBSCRIPTION_SETTINGS}
-                    />
+
+                    <Route path={ROUTES.DASHBOARD.MANAGEMENT.ROOT}>
+                        <Route
+                            element={<Navigate replace to={ROUTES.DASHBOARD.MANAGEMENT.USERS} />}
+                            index
+                        />
+                        <Route
+                            element={<UsersPageConnector />}
+                            path={ROUTES.DASHBOARD.MANAGEMENT.USERS}
+                        />
+                        <Route
+                            element={<InboundsPageConnector />}
+                            path={ROUTES.DASHBOARD.MANAGEMENT.INBOUNDS}
+                        />
+                        <Route
+                            element={<HostsPageConnector />}
+                            path={ROUTES.DASHBOARD.MANAGEMENT.HOSTS}
+                        />
+                        <Route
+                            element={<NodesPageConnector />}
+                            path={ROUTES.DASHBOARD.MANAGEMENT.NODES}
+                        />
+                        <Route
+                            element={<NodesBandwidthTablePageConnector />}
+                            path={ROUTES.DASHBOARD.MANAGEMENT.NODES_BANDWIDTH_TABLE}
+                        />
+                        <Route
+                            element={<StatisticNodesConnector />}
+                            path={ROUTES.DASHBOARD.MANAGEMENT.NODES_STATS}
+                        />
+                        <Route
+                            element={<ConfigPageConnector />}
+                            path={ROUTES.DASHBOARD.MANAGEMENT.CONFIG}
+                        />
+                        <Route
+                            element={<ApiTokensPageConnector />}
+                            path={ROUTES.DASHBOARD.MANAGEMENT.API_TOKENS}
+                        />
+                        <Route
+                            element={<SubscriptionSettingsConnector />}
+                            path={ROUTES.DASHBOARD.MANAGEMENT.SUBSCRIPTION_SETTINGS}
+                        />
+                    </Route>
+
+                    <Route path={ROUTES.DASHBOARD.TEMPLATES.ROOT}>
+                        <Route
+                            element={
+                                <TemplateBasePageConnector
+                                    language="yaml"
+                                    templateType={SUBSCRIPTION_TEMPLATE_TYPE.MIHOMO}
+                                    title="Mihomo"
+                                />
+                            }
+                            path={ROUTES.DASHBOARD.TEMPLATES.MIHOMO}
+                        />
+                        <Route
+                            element={
+                                <TemplateBasePageConnector
+                                    language="yaml"
+                                    templateType={SUBSCRIPTION_TEMPLATE_TYPE.STASH}
+                                    title="Stash"
+                                />
+                            }
+                            path={ROUTES.DASHBOARD.TEMPLATES.STASH}
+                        />
+                        <Route
+                            element={
+                                <TemplateBasePageConnector
+                                    language="json"
+                                    templateType={SUBSCRIPTION_TEMPLATE_TYPE.SINGBOX}
+                                    title="Singbox"
+                                />
+                            }
+                            path={ROUTES.DASHBOARD.TEMPLATES.SINGBOX}
+                        />
+                        <Route
+                            element={
+                                <TemplateBasePageConnector
+                                    language="json"
+                                    templateType={SUBSCRIPTION_TEMPLATE_TYPE.SINGBOX_LEGACY}
+                                    title="Singbox legacy"
+                                />
+                            }
+                            path={ROUTES.DASHBOARD.TEMPLATES.SINGBOX_LEGACY}
+                        />
+                        <Route
+                            element={
+                                <TemplateBasePageConnector
+                                    language="json"
+                                    templateType={SUBSCRIPTION_TEMPLATE_TYPE.XRAY_JSON}
+                                    title="Xray JSON"
+                                />
+                            }
+                            path={ROUTES.DASHBOARD.TEMPLATES.XRAY_JSON}
+                        />
+                        <Route
+                            element={
+                                <TemplateBasePageConnector
+                                    language="yaml"
+                                    templateType={SUBSCRIPTION_TEMPLATE_TYPE.CLASH}
+                                    title="Clash"
+                                />
+                            }
+                            path={ROUTES.DASHBOARD.TEMPLATES.CLASH}
+                        />
+                    </Route>
+
+                    <Route path={ROUTES.DASHBOARD.UTILS.ROOT}>
+                        <Route
+                            element={
+                                <Navigate
+                                    replace
+                                    to={ROUTES.DASHBOARD.UTILS.HAPP_ROUTING_BUILDER}
+                                />
+                            }
+                            index
+                        />
+                        <Route
+                            element={<HappRoutingBuilderPageConnector />}
+                            path={ROUTES.DASHBOARD.UTILS.HAPP_ROUTING_BUILDER}
+                        />
+                        <Route
+                            element={<SubscriptionPageBuilderConnector />}
+                            path={ROUTES.DASHBOARD.UTILS.SUBSCRIPTION_PAGE_BUILDER}
+                        />
+                    </Route>
                 </Route>
 
                 <Route element={<NotFoundPageComponent />} path="*" />

@@ -6,14 +6,18 @@ export const ROUTES = {
     DASHBOARD: {
         ROOT: '/dashboard',
         HOME: '/dashboard/home',
-        USERS: '/dashboard/users',
-        HOSTS: '/dashboard/hosts',
-        INBOUNDS: '/dashboard/inbounds',
-        NODES: '/dashboard/nodes',
-        NODES_BANDWIDTH_TABLE: '/dashboard/bandwidth-table',
-        CONFIG: '/dashboard/config',
-        NODES_STATS: '/dashboard/stats/nodes',
-        API_TOKENS: '/dashboard/api-tokens',
+        MANAGEMENT: {
+            ROOT: '/dashboard/management',
+            USERS: '/dashboard/management/users',
+            HOSTS: '/dashboard/management/hosts',
+            INBOUNDS: '/dashboard/management/inbounds',
+            NODES: '/dashboard/management/nodes',
+            NODES_BANDWIDTH_TABLE: '/dashboard/management/bandwidth-table',
+            CONFIG: '/dashboard/management/config',
+            NODES_STATS: '/dashboard/management/stats/nodes',
+            API_TOKENS: '/dashboard/management/api-tokens',
+            SUBSCRIPTION_SETTINGS: '/dashboard/management/subscription-settings'
+        },
         TEMPLATES: {
             ROOT: '/dashboard/templates',
             XRAY_JSON: '/dashboard/templates/xray-json',
@@ -23,8 +27,8 @@ export const ROUTES = {
             STASH: '/dashboard/templates/stash',
             CLASH: '/dashboard/templates/clash'
         },
-        SUBSCRIPTION_SETTINGS: '/dashboard/subscription-settings',
         UTILS: {
+            ROOT: '/dashboard/utils',
             HAPP_ROUTING_BUILDER: '/dashboard/utils/happ-routing-builder',
             SUBSCRIPTION_PAGE_BUILDER: '/dashboard/utils/subscription-page-builder'
         }

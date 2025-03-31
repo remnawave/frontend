@@ -17,7 +17,7 @@ export function DashboardLayout() {
 
     return (
         <div className={classes.root}>
-            <Paper className={classes.sidebarWrapper} radius="md" withBorder>
+            <Paper className={classes.sidebarWrapper} radius="md">
                 <Stack gap="md" pb="md" pt="md">
                     <Group className={classes.logoWrapper} justify="space-between">
                         <Logo c="cyan" color="red" w="3rem" />
@@ -42,9 +42,9 @@ export function DashboardLayout() {
                     <SidebarLayout />
                 </ScrollArea>
             </Paper>
+
             <div className={classes.content}>
                 <Header />
-
                 <main className={classes.main}>
                     <Outlet />
                 </main>

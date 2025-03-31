@@ -15,7 +15,7 @@ export function SubscriptionPageBuilderHeaderWidget(props: {
         <DataTableShared.Container mb="xl">
             <DataTableShared.Title
                 actions={
-                    <Group>
+                    <Group grow preventGrowOverflow={false} wrap="wrap">
                         <Button
                             leftSection={<IconCloudDownload size="1rem" />}
                             onClick={loadDefaultConfig}

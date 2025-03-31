@@ -58,7 +58,7 @@ export const UserActionGroupFeature = (props: IProps) => {
     }
 
     return (
-        <Group>
+        <Group grow preventGrowOverflow={false} wrap="wrap">
             <Button
                 leftSection={<PiArrowsClockwise size="1rem" />}
                 loading={isLoading}

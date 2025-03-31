@@ -31,7 +31,7 @@ export const HeaderButtons = () => {
     }
 
     return (
-        <Group gap="sm">
+        <Group grow preventGrowOverflow={false} wrap="wrap">
             <LanguagePicker />
 
             <ActionIcon color="gray" onClick={handleRefresh} size="xl">

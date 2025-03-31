@@ -8,13 +8,13 @@ import { ROUTES } from '@shared/constants'
 import { PageHeader } from '@shared/ui'
 import { Page } from '@shared/ui/page'
 
-const HappLogo = () => (
+export const HappLogo = ({ size = 48 }: { size?: number }) => (
     <svg
-        height="48"
+        height={size}
         preserveAspectRatio="xMidYMid meet"
         style={{ borderRadius: '8px', overflow: 'hidden' }}
         viewBox="0 0 460 460"
-        width="48"
+        width={size}
         xmlns="http://www.w3.org/2000/svg"
     >
         <g

@@ -99,6 +99,8 @@ export const EditNodeModalConnectorWidget = () => {
             variables: {
                 ...values,
                 uuid: node.uuid,
+                name: values.name?.trim(),
+                address: values.address?.trim(),
                 trafficLimitBytes: gbToBytesUtil(values.trafficLimitBytes)
             }
         })

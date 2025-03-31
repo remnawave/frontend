@@ -30,6 +30,7 @@
     flex-grow: 1;
     flex-direction: column;
     padding: 0.5rem 1rem 1.5rem;
+    margin-left: 0.25rem;
 
     @media (min-width: $mantine-breakpoint-md) {
         padding-left: 1.25rem;
@@ -59,8 +60,14 @@
     position: fixed;
     display: none;
     bottom: 0;
-    z-index: 50;
-    height: 100%;
+    top: 0;
+    z-index: 200;
+    margin-left: 0.75rem;
+    margin-bottom: 0.75rem;
+    margin-top: 0.75rem;
+
+    background-color: light-dark(var(--mantine-color-gray-1), var(--mantine-color-dark-8));
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.5);
 
     padding-bottom: var(--mantine-spacing-md);
 

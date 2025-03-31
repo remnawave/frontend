@@ -1,5 +1,6 @@
 import {
     PiAirTrafficControlDuotone,
+    PiArrowsInCardinalFill,
     PiBarcodeDuotone,
     PiBookmarksDuotone,
     PiBoundingBoxDuotone,
@@ -7,12 +8,12 @@ import {
     PiComputerTowerDuotone,
     PiCookie,
     PiGearDuotone,
-    PiLinkDuotone,
     PiStarDuotone,
     PiUsersDuotone
 } from 'react-icons/pi'
 import { useTranslation } from 'react-i18next'
 
+import { HappLogo } from '@pages/dashboard/utils/happ-routing-builder/ui/components/happ-routing-builder.page.component'
 import { ROUTES } from '@shared/constants'
 
 import { MenuItem } from './interfaces'
@@ -34,42 +35,53 @@ export const useMenuSections = (): MenuItem[] => {
         {
             header: t('constants.management'),
             section: [
-                { name: t('constants.users'), href: ROUTES.DASHBOARD.USERS, icon: PiUsersDuotone },
+                {
+                    name: t('constants.users'),
+                    href: ROUTES.DASHBOARD.MANAGEMENT.USERS,
+                    icon: PiUsersDuotone
+                },
                 {
                     name: t('constants.hosts'),
-                    href: ROUTES.DASHBOARD.HOSTS,
+                    href: ROUTES.DASHBOARD.MANAGEMENT.HOSTS,
                     icon: PiBookmarksDuotone
                 },
                 {
                     name: t('constants.inbounds'),
-                    href: ROUTES.DASHBOARD.INBOUNDS,
+                    href: ROUTES.DASHBOARD.MANAGEMENT.INBOUNDS,
                     icon: PiBoundingBoxDuotone
                 },
                 {
                     name: t('constants.nodes'),
-                    href: ROUTES.DASHBOARD.NODES,
+                    href: ROUTES.DASHBOARD.MANAGEMENT.NODES,
                     icon: PiComputerTowerDuotone,
                     dropdownItems: [
-                        { name: t('constants.management'), href: ROUTES.DASHBOARD.NODES },
+                        {
+                            name: t('constants.management'),
+                            href: ROUTES.DASHBOARD.MANAGEMENT.NODES
+                        },
                         {
                             name: t('constants.nodes-bandwidth-table'),
-                            href: ROUTES.DASHBOARD.NODES_BANDWIDTH_TABLE
+                            href: ROUTES.DASHBOARD.MANAGEMENT.NODES_BANDWIDTH_TABLE
                         },
                         {
                             name: t('constants.nodes-statistics'),
-                            href: ROUTES.DASHBOARD.NODES_STATS
+                            href: ROUTES.DASHBOARD.MANAGEMENT.NODES_STATS
                         }
                     ]
                 },
-                { name: t('constants.config'), href: ROUTES.DASHBOARD.CONFIG, icon: PiGearDuotone },
+                {
+                    name: t('constants.config'),
+                    href: ROUTES.DASHBOARD.MANAGEMENT.CONFIG,
+                    icon: PiGearDuotone
+                },
                 {
                     name: t('constants.subscription-settings'),
-                    href: ROUTES.DASHBOARD.SUBSCRIPTION_SETTINGS,
+                    href: ROUTES.DASHBOARD.MANAGEMENT.SUBSCRIPTION_SETTINGS,
                     icon: PiBarcodeDuotone
                 },
                 {
                     name: t('constants.api-tokens'),
-                    href: ROUTES.DASHBOARD.API_TOKENS,
+                    href: ROUTES.DASHBOARD.MANAGEMENT.API_TOKENS,
                     icon: PiCookie
                 }
             ]
@@ -116,12 +128,12 @@ export const useMenuSections = (): MenuItem[] => {
                 {
                     name: t('constants.happ-routing-builder'),
                     href: ROUTES.DASHBOARD.UTILS.HAPP_ROUTING_BUILDER,
-                    icon: PiLinkDuotone
+                    icon: HappLogo
                 },
                 {
                     name: 'Sub Page Builder',
                     href: ROUTES.DASHBOARD.UTILS.SUBSCRIPTION_PAGE_BUILDER,
-                    icon: PiLinkDuotone
+                    icon: PiArrowsInCardinalFill
                 }
             ]
         },
