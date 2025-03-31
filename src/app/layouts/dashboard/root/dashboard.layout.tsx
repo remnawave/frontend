@@ -21,7 +21,12 @@ export function DashboardLayout() {
                 <Stack gap="md" pb="md" pt="md">
                     <Group className={classes.logoWrapper} justify="space-between">
                         <Logo c="cyan" color="red" w="3rem" />
-                        <Code c="cyan" fw={700} onClick={() => setBuildInfoModalOpened(true)}>
+                        <Code
+                            c="cyan"
+                            fw={700}
+                            onClick={() => setBuildInfoModalOpened(true)}
+                            style={{ cursor: 'pointer' }}
+                        >
                             {`v${packageJson.version}`}
                         </Code>
                     </Group>

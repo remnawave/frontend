@@ -34,6 +34,7 @@ export function MobileSidebarLayout() {
                                     c="cyan"
                                     fw={700}
                                     onClick={() => setBuildInfoModalOpened(true)}
+                                    style={{ cursor: 'pointer' }}
                                 >
                                     {`v${packageJson.version}`}
                                 </Code>
