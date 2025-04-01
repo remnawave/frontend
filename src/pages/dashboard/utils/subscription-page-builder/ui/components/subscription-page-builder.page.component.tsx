@@ -46,16 +46,42 @@ export const SubscriptionPageBuilderComponent = () => {
         const newApp = createEmptyApp(activeTab)
         const updatedConfig = { ...config }
         updatedConfig[activeTab] = [...updatedConfig[activeTab], newApp]
+
         setConfig(updatedConfig)
-        setSelectedAppId(newApp.id)
+
+        setTimeout(() => {
+            setSelectedAppId(newApp.id)
+        }, 10)
     }
 
-    const updateApp = (updatedApp: AppConfig) => {
+    const updateApp = (updatedApp: AppConfig & { _oldId?: string }) => {
         const updatedConfig = { ...config }
-        const appIndex = updatedConfig[activeTab].findIndex((app) => app.id === updatedApp.id)
-        if (appIndex !== -1) {
-            updatedConfig[activeTab][appIndex] = updatedApp
-            setConfig(updatedConfig)
+
+        if (updatedApp._oldId && updatedApp._oldId !== updatedApp.id) {
+            const appIndex = updatedConfig[activeTab].findIndex(
+                (app) => app.id === updatedApp._oldId
+            )
+            if (appIndex !== -1) {
+                const appWithoutOldId = { ...updatedApp } as AppConfig
+                delete (appWithoutOldId as AppConfig & { _oldId?: string })._oldId
+                updatedConfig[activeTab][appIndex] = appWithoutOldId
+
+                if (selectedAppId === updatedApp._oldId) {
+                    setSelectedAppId(updatedApp.id)
+                }
+
+                setConfig(updatedConfig)
+            }
+        } else {
+            const appIndex = updatedConfig[activeTab].findIndex((app) => app.id === updatedApp.id)
+            if (appIndex !== -1) {
+                const appWithoutOldId = { ...updatedApp } as AppConfig
+                if ((updatedApp as AppConfig & { _oldId?: string })._oldId) {
+                    delete (appWithoutOldId as AppConfig & { _oldId?: string })._oldId
+                }
+                updatedConfig[activeTab][appIndex] = appWithoutOldId
+                setConfig(updatedConfig)
+            }
         }
     }
 

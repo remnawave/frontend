@@ -66,7 +66,19 @@ export const AppForm = (props: AppFormProps) => {
             <Stack gap="sm">
                 <TextInput
                     label={t('app-form.component.app-id')}
-                    onChange={(e) => updateApp({ id: e.target.value as `${Lowercase<string>}` })}
+                    onChange={(e) => {
+                        const oldId = localApp.id
+                        const newId = e.target.value as `${Lowercase<string>}`
+
+                        const updatedApp: AppConfig = {
+                            ...localApp,
+                            id: newId
+                        }
+
+                        setLocalApp(updatedApp)
+
+                        onChange({ ...updatedApp, _oldId: oldId } as AppConfig)
+                    }}
                     value={localApp.id}
                 />
 
