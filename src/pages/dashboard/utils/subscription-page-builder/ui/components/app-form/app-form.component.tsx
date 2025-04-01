@@ -149,6 +149,7 @@ export const AppForm = (props: AppFormProps) => {
                             {localApp.additionalBeforeAddSubscriptionStep && (
                                 <Button
                                     color="red"
+                                    component="p"
                                     leftSection={<PiMinus size="1.25rem" />}
                                     ml={'xs'}
                                     onClick={() =>
@@ -164,6 +165,7 @@ export const AppForm = (props: AppFormProps) => {
                             )}
                             {!localApp.additionalBeforeAddSubscriptionStep && (
                                 <Button
+                                    component="p"
                                     leftSection={<PiPlus size="1.25rem" />}
                                     ml={'xs'}
                                     onClick={() =>
@@ -250,6 +252,7 @@ export const AppForm = (props: AppFormProps) => {
                             {localApp.additionalAfterAddSubscriptionStep && (
                                 <Button
                                     color="red"
+                                    component="p"
                                     leftSection={<PiMinus size="1.25rem" />}
                                     ml={'xs'}
                                     onClick={() =>
@@ -265,6 +268,7 @@ export const AppForm = (props: AppFormProps) => {
                             )}
                             {!localApp.additionalAfterAddSubscriptionStep && (
                                 <Button
+                                    component="p"
                                     leftSection={<PiPlus size="1.25rem" />}
                                     ml={'xs'}
                                     onClick={() =>
