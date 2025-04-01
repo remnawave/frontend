@@ -66,25 +66,25 @@ export function InboundsCardWidget(props: IProps) {
             <Group justify="space-between" mb="md">
                 <Group gap="xs">
                     <PiTag size="1.2rem" />
-                    <Text fw={600} size="lg">
+                    <Text fw={600} size="md">
                         {inbound.tag}
                     </Text>
                 </Group>
 
                 <Group gap="xs">
-                    <Badge color={inbound.nodes.enabled > 0 ? 'green' : 'red'} size="lg">
+                    <Badge color={inbound.nodes.enabled > 0 ? 'teal' : 'red'} size="md">
                         {inbound.type}
                     </Badge>
-                    <Badge leftSection={<PiDoorOpen size="1.1rem" />} size="lg">
+                    <Badge leftSection={<PiDoorOpen size="1.1rem" />} size="md">
                         {inbound.port}
                     </Badge>
                     {inbound.network && (
-                        <Badge color="grape" leftSection={<PiGlobe size="1.1rem" />} size="lg">
+                        <Badge color="grape" leftSection={<PiGlobe size="1.1rem" />} size="md">
                             {inbound.network}
                         </Badge>
                     )}
                     {inbound.security && (
-                        <Badge color="gray" leftSection={<PiLockSimple size="1.1rem" />} size="lg">
+                        <Badge color="gray" leftSection={<PiLockSimple size="1.1rem" />} size="md">
                             {inbound.security}
                         </Badge>
                     )}
@@ -103,7 +103,7 @@ export function InboundsCardWidget(props: IProps) {
 
                         <Group gap="xs">
                             <Tooltip label={t('inbounds-card.widget.enabled-nodes')}>
-                                <Badge color="green" size="lg">
+                                <Badge color="teal" size="lg">
                                     <NumberFormatter
                                         thousandSeparator
                                         value={inbound.nodes.enabled}
@@ -164,7 +164,7 @@ export function InboundsCardWidget(props: IProps) {
                             {t('inbounds-card.widget.remove')}
                         </Button>
                         <Button
-                            color="green"
+                            color="teal"
                             disabled={inbound.nodes.disabled === 0}
                             leftSection={<PiPlus size="0.9rem" />}
                             onClick={() => {
@@ -189,7 +189,7 @@ export function InboundsCardWidget(props: IProps) {
                                         confirm: t('inbounds-card.widget.add'),
                                         cancel: 'Cancel'
                                     },
-                                    confirmProps: { color: 'green' },
+                                    confirmProps: { color: 'teal' },
                                     onConfirm: () => {
                                         addInboundToNodes({
                                             variables: {
@@ -217,7 +217,7 @@ export function InboundsCardWidget(props: IProps) {
 
                         <Group gap="xs">
                             <Tooltip label={t('inbounds-card.widget.enabled-users')}>
-                                <Badge color="green" size="lg">
+                                <Badge color="teal" size="lg">
                                     <NumberFormatter
                                         thousandSeparator
                                         value={inbound.users.enabled}
@@ -278,7 +278,7 @@ export function InboundsCardWidget(props: IProps) {
                             {t('inbounds-card.widget.remove')}
                         </Button>
                         <Button
-                            color="green"
+                            color="teal"
                             disabled={inbound.users.disabled === 0}
                             leftSection={<PiPlus size="0.9rem" />}
                             onClick={() => {
@@ -303,7 +303,7 @@ export function InboundsCardWidget(props: IProps) {
                                         confirm: t('inbounds-card.widget.add'),
                                         cancel: t('inbounds-card.widget.cancel')
                                     },
-                                    confirmProps: { color: 'green' },
+                                    confirmProps: { color: 'teal' },
                                     onConfirm: () => {
                                         addInboundToUsers({
                                             variables: {
