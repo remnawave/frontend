@@ -1,5 +1,3 @@
-'use client'
-
 import { AppShell, Badge, Burger, Code, Container, Group, ScrollArea, Text } from '@mantine/core'
 import { useClickOutside, useDisclosure, useMediaQuery } from '@mantine/hooks'
 import { useQuery } from '@tanstack/react-query'
