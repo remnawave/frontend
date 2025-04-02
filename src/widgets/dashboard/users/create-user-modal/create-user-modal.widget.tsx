@@ -175,8 +175,9 @@ export const CreateUserModalWidget = () => {
                                 valueFormat="MMMM D, YYYY - HH:mm"
                                 {...form.getInputProps('expireAt')}
                                 description={
-                                    <Group gap="xs" mb="xs" mt="xs">
+                                    <Group component="span" gap="xs" mb="xs" mt="xs">
                                         <Button
+                                            component="span"
                                             onClick={() => {
                                                 const currentDate =
                                                     form.values.expireAt || new Date()
@@ -190,6 +191,7 @@ export const CreateUserModalWidget = () => {
                                             {t('create-user-modal.widget.1-month')}
                                         </Button>
                                         <Button
+                                            component="span"
                                             onClick={() => {
                                                 const currentDate =
                                                     form.values.expireAt || new Date()
@@ -203,6 +205,7 @@ export const CreateUserModalWidget = () => {
                                             {t('create-user-modal.widget.3-months')}
                                         </Button>
                                         <Button
+                                            component="span"
                                             onClick={() => {
                                                 const currentDate =
                                                     form.values.expireAt || new Date()
@@ -216,6 +219,7 @@ export const CreateUserModalWidget = () => {
                                             {t('create-user-modal.widget.1-year')}
                                         </Button>
                                         <Button
+                                            component="span"
                                             onClick={() => {
                                                 const newDate = new Date()
                                                 newDate.setFullYear(2099)

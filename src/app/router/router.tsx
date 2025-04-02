@@ -26,7 +26,7 @@ import { ErrorPageComponent } from '@pages/errors/5xx-error'
 import { AuthGuard } from '@shared/hocs/guards/auth-guard'
 import { LoginPage } from '@pages/auth/login'
 
-import { DashboardLayout } from '../layouts/dashboard'
+import { MainLayout } from '../layouts/dashboard/main-layout/main.layout'
 import { ROUTES } from '../../shared/constants'
 import { AuthLayout } from '../layouts/auth'
 
@@ -40,7 +40,7 @@ const router = createBrowserRouter(
                     <Route element={<LoginPage />} path={ROUTES.AUTH.LOGIN} />
                 </Route>
 
-                <Route element={<DashboardLayout />} path={ROUTES.DASHBOARD.ROOT}>
+                <Route element={<MainLayout />} path={ROUTES.DASHBOARD.ROOT}>
                     <Route element={<Navigate replace to={ROUTES.DASHBOARD.HOME} />} index />
                     <Route element={<HomePageConnector />} path={ROUTES.DASHBOARD.HOME} />
 

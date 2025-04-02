@@ -13,8 +13,8 @@ import {
     Tabs,
     Text
 } from '@mantine/core'
+import { TbAlertCircle as IconAlertCircle, TbPlus as IconPlus } from 'react-icons/tb'
 import { PiAndroidLogo, PiAppleLogo, PiWindowsLogo } from 'react-icons/pi'
-import { IconAlertCircle, IconPlus } from '@tabler/icons-react'
 import { useTranslation } from 'react-i18next'
 import { useDisclosure } from '@mantine/hooks'
 import { consola } from 'consola/browser'
@@ -323,7 +323,7 @@ export const SubscriptionPageBuilderComponent = () => {
                             'subscription-page-builder.page.component.the-configuration-did-not-pass-validation'
                         )}
                     </Alert>
-                    <ScrollArea h={300} offsetScrollbars>
+                    <ScrollArea h={300} offsetScrollbars="present">
                         <Stack gap="xs">
                             <Code block>
                                 {validationErrors.map((error, index) => (

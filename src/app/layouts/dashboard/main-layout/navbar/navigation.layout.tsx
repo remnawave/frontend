@@ -1,10 +1,16 @@
 import { NavLink as RouterLink, useLocation } from 'react-router-dom'
-import { NavLink, Stack, Title } from '@mantine/core'
+import { Box, NavLink, Stack, Title } from '@mantine/core'
+import { PiArrowRight } from 'react-icons/pi'
 
-import { useMenuSections } from './menu-sections'
-import classes from './sidebar.module.css'
+import { useMenuSections } from '../menu-sections/menu-sections'
+import classes from './Navigation.module.css'
 
-export function SidebarLayout() {
+interface NavigationProps {
+    isMobile?: boolean
+    onClose?: () => void
+}
+
+export const Navigation = ({ isMobile, onClose }: NavigationProps) => {
     const { pathname } = useLocation()
 
     const menu = useMenuSections()
@@ -12,7 +18,7 @@ export function SidebarLayout() {
     return (
         <Stack gap="lg">
             {menu.map((item) => (
-                <div key={item.header}>
+                <Box key={item.header}>
                     <Title className={classes.sectionTitle} order={6}>
                         {item.header}
                     </Title>
@@ -20,13 +26,13 @@ export function SidebarLayout() {
                     {item.section.map((subItem) =>
                         subItem.dropdownItems ? (
                             <NavLink
-                                active={pathname.includes(subItem.href)}
+                                active={false}
                                 childrenOffset={0}
                                 className={classes.sectionLink}
                                 key={subItem.name}
                                 label={subItem.name}
                                 leftSection={subItem.icon && <subItem.icon />}
-                                variant="subtle"
+                                variant="light"
                             >
                                 {subItem.dropdownItems?.map((dropdownItem) => (
                                     <NavLink
@@ -35,7 +41,8 @@ export function SidebarLayout() {
                                         component={RouterLink}
                                         key={dropdownItem.name}
                                         label={dropdownItem.name}
-                                        leftSection={<span className="dot" />}
+                                        leftSection={<PiArrowRight />}
+                                        onClick={isMobile ? onClose : undefined}
                                         to={dropdownItem.href}
                                         variant="subtle"
                                     />
@@ -48,6 +55,7 @@ export function SidebarLayout() {
                                 key={subItem.name}
                                 label={subItem.name}
                                 leftSection={subItem.icon && <subItem.icon />}
+                                onClick={isMobile ? onClose : undefined}
                                 to={subItem.href}
                                 variant="subtle"
                                 {...(subItem.newTab
@@ -56,7 +64,7 @@ export function SidebarLayout() {
                             />
                         )
                     )}
-                </div>
+                </Box>
             ))}
         </Stack>
     )

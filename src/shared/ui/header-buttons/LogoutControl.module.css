@@ -1,0 +1,13 @@
+.logout {
+    @mixin light {
+        color: var(--mantine-color-cyan-7);
+        border-color: var(--mantine-color-cyan-7);
+        background-color: transparent;
+    }
+
+    @mixin dark {
+        color: var(--mantine-color-cyan-4);
+        background-color: transparent;
+        border-color: var(--mantine-color-cyan-4);
+    }
+}

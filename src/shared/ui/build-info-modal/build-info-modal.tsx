@@ -1,24 +1,24 @@
 import {
-    IconBrandGithub,
-    IconBrandTelegram,
-    IconCalendar,
-    IconCheck,
-    IconCopy,
-    IconGitBranch,
-    IconHash
-} from '@tabler/icons-react'
+    TbBrandGithub as IconBrandGithub,
+    TbBrandTelegram as IconBrandTelegram,
+    TbCalendar as IconCalendar,
+    TbCheck as IconCheck,
+    TbCopy as IconCopy,
+    TbGitBranch as IconGitBranch,
+    TbHash as IconHash
+} from 'react-icons/tb'
 import { Badge, Box, Button, Code, Group, Modal, Stack, Text, Title, Tooltip } from '@mantine/core'
 import { useClipboard } from '@mantine/hooks'
 
-import { getBuildInfo } from '@shared/utils/get-build-info/get-build-info.util'
+import { IBuildInfo } from '@shared/utils/get-build-info/interfaces/build-info.interface'
 
 interface BuildInfoModalProps {
+    buildInfo: IBuildInfo
     onClose: () => void
     opened: boolean
 }
 
-export function BuildInfoModal({ opened, onClose }: BuildInfoModalProps) {
-    const buildInfo = getBuildInfo()
+export function BuildInfoModal({ opened, onClose, buildInfo }: BuildInfoModalProps) {
     const buildDate = new Date(buildInfo.buildTime).toLocaleString()
     const clipboard = useClipboard({ timeout: 1000 })
 
@@ -87,7 +87,14 @@ export function BuildInfoModal({ opened, onClose }: BuildInfoModalProps) {
                     </Box>
                 </Group>
 
-                <Group gap="md" justify="center" mt="lg">
+                <Group
+                    gap="md"
+                    grow
+                    justify="center"
+                    mt="lg"
+                    preventGrowOverflow={false}
+                    wrap="wrap"
+                >
                     <Button
                         component="a"
                         href={buildInfo.commitUrl}
@@ -108,7 +115,7 @@ export function BuildInfoModal({ opened, onClose }: BuildInfoModalProps) {
                         target="_blank"
                         variant="outline"
                     >
-                        Join Community
+                        Ask Community
                     </Button>
                 </Group>
             </Stack>

@@ -376,8 +376,9 @@ export const ViewUserModal = () => {
                                 valueFormat="MMMM D, YYYY - HH:mm"
                                 {...form.getInputProps('expireAt')}
                                 description={
-                                    <Group gap="xs" mb="xs" mt="xs">
+                                    <Group component="span" gap="xs" mb="xs" mt="xs">
                                         <Button
+                                            component="span"
                                             onClick={() => {
                                                 const currentDate =
                                                     form.values.expireAt || new Date()
@@ -391,6 +392,7 @@ export const ViewUserModal = () => {
                                             {t('create-user-modal.widget.1-month')}
                                         </Button>
                                         <Button
+                                            component="span"
                                             onClick={() => {
                                                 const currentDate =
                                                     form.values.expireAt || new Date()
@@ -404,6 +406,7 @@ export const ViewUserModal = () => {
                                             {t('create-user-modal.widget.3-months')}
                                         </Button>
                                         <Button
+                                            component="span"
                                             onClick={() => {
                                                 const currentDate =
                                                     form.values.expireAt || new Date()
@@ -417,6 +420,7 @@ export const ViewUserModal = () => {
                                             {t('create-user-modal.widget.1-year')}
                                         </Button>
                                         <Button
+                                            component="span"
                                             onClick={() => {
                                                 const newDate = new Date()
                                                 newDate.setFullYear(2099)
@@ -467,7 +471,7 @@ export const ViewUserModal = () => {
                                 {user && <ToggleUserStatusButtonFeature user={user} />}
                             </ActionIcon.Group>
                         </Group>
-                        <Group>
+                        <Group grow preventGrowOverflow={false} wrap="wrap">
                             <ActionIcon.Group>
                                 <Tooltip label={t('view-user-modal.widget.subscription-qr-code')}>
                                     <ActionIcon

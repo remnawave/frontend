@@ -1,4 +1,8 @@
-import { IconCloudDownload, IconDownload, IconUpload } from '@tabler/icons-react'
+import {
+    TbCloudDownload as IconCloudDownload,
+    TbDownload as IconDownload,
+    TbUpload as IconUpload
+} from 'react-icons/tb'
 import { Accordion, Button, FileInput, Group, Text } from '@mantine/core'
 import { PiInfoDuotone } from 'react-icons/pi'
 import { useTranslation } from 'react-i18next'

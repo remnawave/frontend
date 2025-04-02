@@ -1,5 +1,6 @@
 import {
     Affix,
+    Badge,
     Button,
     ComboboxItem,
     Group,
@@ -242,23 +243,30 @@ export const MultiSelectHostsFeature = (props: IProps) => {
                         shadow="md"
                         style={{
                             ...styles,
+                            width: '300px',
                             maxWidth: '1200px',
                             margin: '0 auto'
                         }}
                         withBorder
                     >
-                        <Group justify="apart">
-                            <Group>
-                                <Text size="sm">Selected: {selectedHosts.length}</Text>
-                                <Button onClick={clearSelection} variant="subtle">
-                                    {t('multi-select-hosts.feature.clear-selection')}
-                                </Button>
-                                <Button onClick={selectAllHosts} variant="subtle">
-                                    {t('multi-select-hosts.feature.select-all')}
-                                </Button>
+                        <Stack>
+                            <Group justify="flex-start">
+                                <Group justify="center" w="100%">
+                                    <Badge color="blue" size="lg">
+                                        Selected: {selectedHosts.length}
+                                    </Badge>
+                                </Group>
+                                <Group grow justify="apart" preventGrowOverflow={false} wrap="wrap">
+                                    <Button onClick={clearSelection} variant="subtle">
+                                        {t('multi-select-hosts.feature.clear-selection')}
+                                    </Button>
+                                    <Button onClick={selectAllHosts} variant="subtle">
+                                        {t('multi-select-hosts.feature.select-all')}
+                                    </Button>
+                                </Group>
                             </Group>
 
-                            <Group>
+                            <Group grow justify="apart" preventGrowOverflow={false} wrap="wrap">
                                 <Button
                                     color="green"
                                     leftSection={<PiPulseDuotone />}
@@ -295,7 +303,7 @@ export const MultiSelectHostsFeature = (props: IProps) => {
                                     {t('multi-select-hosts.feature.delete')}
                                 </Button>
                             </Group>
-                        </Group>
+                        </Stack>
                     </Paper>
                 )}
             </Transition>

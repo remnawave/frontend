@@ -108,7 +108,6 @@ export function HostCardWidget(props: IProps) {
                                         radius="md"
                                         size="lg"
                                         style={{
-                                            width: '100%',
                                             maxWidth: '200px',
                                             overflow: 'hidden',
                                             textOverflow: 'ellipsis'
@@ -125,6 +124,7 @@ export function HostCardWidget(props: IProps) {
                                     className={classes.label}
                                     fw={400}
                                     style={{
+                                        maxWidth: '200px',
                                         overflow: 'hidden',
                                         textOverflow: 'ellipsis',
                                         whiteSpace: 'nowrap'
@@ -138,6 +138,7 @@ export function HostCardWidget(props: IProps) {
                                 <Text
                                     className={classes.hostInfoLabel}
                                     style={{
+                                        maxWidth: '200px',
                                         overflow: 'hidden',
                                         textOverflow: 'ellipsis',
                                         whiteSpace: 'nowrap'

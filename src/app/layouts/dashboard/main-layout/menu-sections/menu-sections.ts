@@ -2,12 +2,12 @@ import {
     PiAirTrafficControlDuotone,
     PiArrowsInCardinalFill,
     PiBarcodeDuotone,
-    PiBookmarksDuotone,
     PiBoundingBoxDuotone,
     PiBracketsCurly,
-    PiComputerTowerDuotone,
     PiCookie,
+    PiCpu,
     PiGearDuotone,
+    PiListChecks,
     PiStarDuotone,
     PiUsersDuotone
 } from 'react-icons/pi'
@@ -43,7 +43,7 @@ export const useMenuSections = (): MenuItem[] => {
                 {
                     name: t('constants.hosts'),
                     href: ROUTES.DASHBOARD.MANAGEMENT.HOSTS,
-                    icon: PiBookmarksDuotone
+                    icon: PiListChecks
                 },
                 {
                     name: t('constants.inbounds'),
@@ -53,7 +53,7 @@ export const useMenuSections = (): MenuItem[] => {
                 {
                     name: t('constants.nodes'),
                     href: ROUTES.DASHBOARD.MANAGEMENT.NODES,
-                    icon: PiComputerTowerDuotone,
+                    icon: PiCpu,
                     dropdownItems: [
                         {
                             name: t('constants.management'),
@@ -131,7 +131,7 @@ export const useMenuSections = (): MenuItem[] => {
                     icon: HappLogo
                 },
                 {
-                    name: 'Sub Page Builder',
+                    name: 'Subscription Page',
                     href: ROUTES.DASHBOARD.UTILS.SUBSCRIPTION_PAGE_BUILDER,
                     icon: PiArrowsInCardinalFill
                 }

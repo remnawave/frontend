@@ -1,5 +1,5 @@
 import { notifications } from '@mantine/notifications'
-import { IconCheck } from '@tabler/icons-react'
+import { TbCheck as IconCheck } from 'react-icons/tb'
 
 export const baseNotificationsMutations = (id: string, refetch: () => void) => {
     return {

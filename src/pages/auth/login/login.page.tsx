@@ -24,20 +24,25 @@ export const LoginPage = () => {
     return (
         <Page title="Login">
             <Stack align="center" gap="xl">
-                <Group align="center" justify="center">
+                <Group align="center" gap={4} justify="center">
                     <Logo c="cyan" w="3rem" />
-                    <Title order={1}>
-                        <Text component="span" fw="inherit" fz="inherit" pos="relative">
-                            Remnawave
-                            <UnderlineShape
-                                bottom="-1rem"
-                                c="cyan"
-                                h="0.625rem"
-                                left="0"
-                                pos="absolute"
-                                w="7.852rem"
-                            />
+                    <Title order={1} pos="relative">
+                        <Text c="cyan" component="span" fw="inherit" fz="inherit" pos="relative">
+                            Remna
                         </Text>
+                        <Text c="white" component="span" fw="inherit" fz="inherit" pos="relative">
+                            wave
+                        </Text>
+
+                        <UnderlineShape
+                            bottom="-1rem"
+                            c="cyan"
+                            h="0.625rem"
+                            left="0"
+                            pos="absolute"
+                            style={{ zIndex: 1 }}
+                            w="7.852rem"
+                        />
                     </Title>
                 </Group>
 

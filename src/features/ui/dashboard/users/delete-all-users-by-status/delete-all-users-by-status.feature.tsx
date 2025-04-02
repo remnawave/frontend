@@ -1,6 +1,6 @@
 import { BulkDeleteUsersByStatusCommand, TUsersStatus } from '@remnawave/backend-contract'
+import { TbCheck as IconCheck, TbX as IconX } from 'react-icons/tb'
 import { Button, Group, Select, Stack, Text } from '@mantine/core'
-import { IconCheck, IconX } from '@tabler/icons-react'
 import { notifications } from '@mantine/notifications'
 import { PiClockDuotone } from 'react-icons/pi'
 import { useTranslation } from 'react-i18next'

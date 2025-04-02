@@ -1,0 +1,23 @@
+.sidebarWrapper {
+    z-index: 200;
+    margin-left: 0.75rem;
+    margin-bottom: 0.75rem;
+    margin-top: 0.75rem;
+    height: calc(100vh - 1.5rem);
+
+    background-color: light-dark(var(--mantine-color-gray-1), var(--mantine-color-dark-8));
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.5);
+    border-radius: var(--mantine-radius-md);
+}
+
+.logoWrapper {
+    padding: var(--mantine-spacing-md) var(--mantine-spacing-xl) var(--mantine-spacing-xs)
+        var(--mantine-spacing-xl);
+}
+
+.header {
+    backdrop-filter: blur(7px);
+    margin-left: -300px;
+    padding-left: 300px;
+    background-color: transparent;
+}

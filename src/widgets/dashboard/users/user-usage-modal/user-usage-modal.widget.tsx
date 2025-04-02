@@ -16,9 +16,9 @@ import {
     Tooltip
 } from '@mantine/core'
 import { GetUserUsageByRangeCommand } from '@remnawave/backend-contract'
+import { TbChartBar as IconChartBar } from 'react-icons/tb'
 import { BarChart, Sparkline } from '@mantine/charts'
 import { useEffect, useMemo, useState } from 'react'
-import { IconChartBar } from '@tabler/icons-react'
 import { useTranslation } from 'react-i18next'
 import { PiEmpty } from 'react-icons/pi'
 import ColorHash from 'color-hash'

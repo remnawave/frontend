@@ -157,8 +157,9 @@ export const BulkUserActionsUpdateTabFeature = (props: IProps) => {
                 <DateTimePicker
                     clearable
                     description={
-                        <Group gap="xs" mb="xs" mt="xs">
+                        <Group component="span" gap="xs" mb="xs" mt="xs">
                             <Button
+                                component="span"
                                 onClick={() => {
                                     const currentDate = new Date()
                                     const newDate = new Date(currentDate)
@@ -171,6 +172,7 @@ export const BulkUserActionsUpdateTabFeature = (props: IProps) => {
                                 {t('create-user-modal.widget.1-month')}
                             </Button>
                             <Button
+                                component="span"
                                 onClick={() => {
                                     const currentDate = new Date()
                                     const newDate = new Date(currentDate)
@@ -183,6 +185,7 @@ export const BulkUserActionsUpdateTabFeature = (props: IProps) => {
                                 {t('create-user-modal.widget.3-months')}
                             </Button>
                             <Button
+                                component="span"
                                 onClick={() => {
                                     const currentDate = new Date()
                                     const newDate = new Date(currentDate)
@@ -195,6 +198,7 @@ export const BulkUserActionsUpdateTabFeature = (props: IProps) => {
                                 {t('create-user-modal.widget.1-year')}
                             </Button>
                             <Button
+                                component="span"
                                 onClick={() => {
                                     const newDate = new Date()
                                     newDate.setFullYear(2099)
