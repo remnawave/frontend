@@ -386,6 +386,40 @@ export const SubscriptionTabs = ({
                                 </Group>
                             </Card.Section>
 
+                            <Card.Section p="md" pt="xl" withBorder>
+                                <Grid>
+                                    <Grid.Col span={{ xs: 12, sm: 6 }}>
+                                        <Box mb="md">
+                                            <Checkbox
+                                                key={form.key('isShowCustomRemarks')}
+                                                label={t(
+                                                    'subscription-tabs.widget.show-custom-remarks'
+                                                )}
+                                                size="md"
+                                                {...form.getInputProps('isShowCustomRemarks', {
+                                                    type: 'checkbox'
+                                                })}
+                                            />
+                                            <Text
+                                                c="dimmed"
+                                                component="div"
+                                                ml={30}
+                                                pl={'0.4rem'}
+                                                size="sm"
+                                            >
+                                                {t(
+                                                    'subscription-tabs.widget.show-custom-remark-description-line-1'
+                                                )}
+                                                <br />
+                                                {t(
+                                                    'subscription-tabs.widget.show-custom-remark-description-line-2'
+                                                )}
+                                            </Text>
+                                        </Box>
+                                    </Grid.Col>
+                                </Grid>
+                            </Card.Section>
+
                             <Card.Section p="md" pt="xl">
                                 <Grid>
                                     <Grid.Col span={{ xs: 12, sm: 6, md: 4 }}>

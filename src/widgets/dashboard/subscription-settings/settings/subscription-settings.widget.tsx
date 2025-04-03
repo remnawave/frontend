@@ -80,7 +80,8 @@ export const SubscriptionSettingsWidget = (props: IProps) => {
                 limitedUsersRemarks: subscriptionSettings.limitedUsersRemarks,
                 disabledUsersRemarks: subscriptionSettings.disabledUsersRemarks,
                 serveJsonAtBaseSubscription: subscriptionSettings.serveJsonAtBaseSubscription,
-                addUsernameToBaseSubscription: subscriptionSettings.addUsernameToBaseSubscription
+                addUsernameToBaseSubscription: subscriptionSettings.addUsernameToBaseSubscription,
+                isShowCustomRemarks: subscriptionSettings.isShowCustomRemarks
             })
         }
     }, [subscriptionSettings])
