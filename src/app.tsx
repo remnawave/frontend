@@ -11,6 +11,7 @@ import 'mantine-react-table/styles.css'
 import './global.css'
 
 import { Center, DirectionProvider, MantineProvider } from '@mantine/core'
+import { polyfillCountryFlagEmojis } from 'country-flag-emoji-polyfill'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import customParseFormat from 'dayjs/plugin/customParseFormat'
 import { QueryClientProvider } from '@tanstack/react-query'
@@ -32,6 +33,8 @@ import { queryClient } from './shared/api'
 import i18n from './app/i18n/i18n'
 
 dayjs.extend(customParseFormat)
+
+polyfillCountryFlagEmojis()
 
 export function App() {
     const mq = useMediaQuery('(min-width: 40em)')
