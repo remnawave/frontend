@@ -892,5 +892,12 @@
         "remove-button": "Remove button",
         "button-link": "Button Link",
         "button-text": "Button Text"
+    },
+    "subscription-tabs": {
+        "widget": {
+            "show-custom-remark-description-line-1": "Только для EXPIRED, LIMITED, DISABLED пользователей.",
+            "show-custom-remark-description-line-2": "Если эта настройка отключена – EXPIRED, LIMITED, DISABLED пользователи получат актуальный список хостов, вместо кастомных примечаний ниже.",
+            "show-custom-remarks": "Отображать кастомное примечание"
+        }
     }
 }

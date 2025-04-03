@@ -892,5 +892,12 @@
         "remove-button": "Remove button",
         "button-link": "Button Link",
         "button-text": "Button Text"
+    },
+    "subscription-tabs": {
+        "widget": {
+            "show-custom-remarks": "Show custom remarks",
+            "show-custom-remark-description-line-1": "Only for EXPIRED, LIMITED, DISABLED users.",
+            "show-custom-remark-description-line-2": "If this setting is disabled – EXPIRED, LIMITED, DISABLED users will recieve acutal host list, instead of custom remark below."
+        }
     }
 }
