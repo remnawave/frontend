@@ -840,57 +840,57 @@
     },
     "subscription-page-builder-header": {
         "widget": {
-            "load-default": "Загрузить по умолчанию"
-            "export-config": "Экспортировать конфигурацию"
-            "upload-config": "Загрузить конфигурацию"
-            "subscription-page-builder": "Конструктор страницы подписки"
-            "how-to-use-it": "Как это использовать?"
-            "description-line-1": "Вы можете использовать этот конструктор для настройки доступных клиентов и руководств для страницы подписки Remnawave."
-            "description-line-2": "После создания первой конфигурации вы можете скачать её и подключить к контейнеру страницы подписки."
-            "description-line-3": "Нажмите «Загрузить по умолчанию», чтобы получить эталонную конфигурацию из репозитория GitHub."
+            "load-default": "Загрузить по умолчанию",
+            "export-config": "Экспортировать конфигурацию",
+            "upload-config": "Загрузить конфигурацию",
+            "subscription-page-builder": "Конструктор страницы подписки",
+            "how-to-use-it": "Как это использовать?",
+            "description-line-1": "Вы можете использовать этот конструктор для настройки доступных клиентов и руководств для страницы подписки Remnawave.",
+            "description-line-2": "После создания первой конфигурации вы можете скачать её и подключить к контейнеру страницы подписки.",
+            "description-line-3": "Нажмите «Загрузить по умолчанию», чтобы получить эталонную конфигурацию из репозитория GitHub.",
             "learn-more": "Узнать больше"
         }
     },
     "subscription-page-builder": {
         "page": {
             "component": {
-                "failed-to-parse-config": "Не удалось разобрать файл конфигурации. Проверьте формат файла."
-                "failed-to-load-default-config-check-your-internet-connection": "Не удалось загрузить конфигурацию по умолчанию. Проверьте подключение к интернету."
-                "no-apps-configured-for-this-platform": "Для этой платформы не настроено ни одного приложения."
-                "add-app": "Добавить приложение"
-                "select-an-app-from-the-sidebar-or-add-a-new-one": "Выберите приложение из боковой панели или добавьте новое."
-                "validation-errors": "Ошибки валидации"
-                "invalid-configuration": "Недействительная конфигурация"
-                "the-configuration-did-not-pass-validation": "Конфигурация не прошла проверку."
+                "failed-to-parse-config": "Не удалось разобрать файл конфигурации. Проверьте формат файла.",
+                "failed-to-load-default-config-check-your-internet-connection": "Не удалось загрузить конфигурацию по умолчанию. Проверьте подключение к интернету.",
+                "no-apps-configured-for-this-platform": "Для этой платформы не настроено ни одного приложения.",
+                "add-app": "Добавить приложение",
+                "select-an-app-from-the-sidebar-or-add-a-new-one": "Выберите приложение из боковой панели или добавьте новое.",
+                "validation-errors": "Ошибки валидации",
+                "invalid-configuration": "Недействительная конфигурация",
+                "the-configuration-did-not-pass-validation": "Конфигурация не прошла проверку.",
                 "close": "Закрыть"
             }
         }
     },
     "app-form": {
         "component": {
-            "delete-app": "Удалить приложение"
-            "app-id": "ID приложения"
-            "app-name": "Название приложения"
-            "url-scheme": "Схема URL"
-            "featured-app": "Рекомендуемое приложение"
-            "need-base64-encoding": "Требуется кодирование Base64"
-            "installation-step": "Шаг установки"
-            "description": "Описание"
-            "buttons": "Кнопки"
-            "additional-before-subscription-step": "Дополнительно перед шагом подписки"
-            "remove-step": "Удалить шаг"
-            "add-step": "Добавить шаг"
-            "title": "Заголовок"
-            "add-subscription-step": "Добавить шаг подписки"
-            "additional-after-subscription-step": "Дополнительно после шага подписки"
+            "delete-app": "Удалить приложение",
+            "app-id": "ID приложения",
+            "app-name": "Название приложения",
+            "url-scheme": "Схема URL",
+            "featured-app": "Рекомендуемое приложение",
+            "need-base64-encoding": "Требуется кодирование Base64",
+            "installation-step": "Шаг установки",
+            "description": "Описание",
+            "buttons": "Кнопки",
+            "additional-before-subscription-step": "Дополнительно перед шагом подписки",
+            "remove-step": "Удалить шаг",
+            "add-step": "Добавить шаг",
+            "title": "Заголовок",
+            "add-subscription-step": "Добавить шаг подписки",
+            "additional-after-subscription-step": "Дополнительно после шага подписки",
             "connect-and-use-step": "Шаг подключения и использования"
         }
     },
     "button-fields": {
-        "button": "Кнопка"
-        "add-button": "Добавить кнопку"
-        "remove-button": "Удалить кнопку"
-        "button-link": "Ссылка кнопки"
+        "button": "Кнопка",
+        "add-button": "Добавить кнопку",
+        "remove-button": "Удалить кнопку",
+        "button-link": "Ссылка кнопки",
         "button-text": "Текст кнопки"
     }
 }
