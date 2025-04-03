@@ -840,29 +840,29 @@
     },
     "subscription-page-builder-header": {
         "widget": {
-            "load-default": "Load Default",
-            "export-config": "Export Config",
-            "upload-config": "Upload Config",
-            "subscription-page-builder": "Subscription Page Builder",
-            "how-to-use-it": "How to use it?",
-            "description-line-1": "You can use this builder to configure available clients and guides for Remnawave Subscription Page.",
-            "description-line-2": "After creating your first configuration, you can download it and mount to subscription-page container.",
-            "description-line-3": "Click \"Load Default\" to get the reference configuration from the GitHub repository.",
-            "learn-more": "Learn more"
+            "load-default": "Загрузить по умолчанию"
+            "export-config": "Экспортировать конфигурацию"
+            "upload-config": "Загрузить конфигурацию"
+            "subscription-page-builder": "Конструктор страницы подписки"
+            "how-to-use-it": "Как это использовать?"
+            "description-line-1": "Вы можете использовать этот конструктор для настройки доступных клиентов и руководств для страницы подписки Remnawave."
+            "description-line-2": "После создания первой конфигурации вы можете скачать её и подключить к контейнеру страницы подписки."
+            "description-line-3": "Нажмите «Загрузить по умолчанию», чтобы получить эталонную конфигурацию из репозитория GitHub."
+            "learn-more": "Узнать больше"
         }
     },
     "subscription-page-builder": {
         "page": {
             "component": {
-                "failed-to-parse-config": "Failed to parse config file. Check the file format.",
-                "failed-to-load-default-config-check-your-internet-connection": "Failed to load default config. Check your internet connection.",
-                "no-apps-configured-for-this-platform": "No apps configured for this platform",
-                "add-app": "Add app",
-                "select-an-app-from-the-sidebar-or-add-a-new-one": "Select an app from the sidebar or add a new one",
-                "validation-errors": "Validation errors",
-                "invalid-configuration": "Invalid configuration",
-                "the-configuration-did-not-pass-validation": "The configuration did not pass validation.",
-                "close": "Close"
+                "failed-to-parse-config": "Не удалось разобрать файл конфигурации. Проверьте формат файла."
+                "failed-to-load-default-config-check-your-internet-connection": "Не удалось загрузить конфигурацию по умолчанию. Проверьте подключение к интернету."
+                "no-apps-configured-for-this-platform": "Для этой платформы не настроено ни одного приложения."
+                "add-app": "Добавить приложение"
+                "select-an-app-from-the-sidebar-or-add-a-new-one": "Выберите приложение из боковой панели или добавьте новое."
+                "validation-errors": "Ошибки валидации"
+                "invalid-configuration": "Недействительная конфигурация"
+                "the-configuration-did-not-pass-validation": "Конфигурация не прошла проверку."
+                "close": "Закрыть"
             }
         }
     },
