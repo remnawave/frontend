@@ -868,29 +868,29 @@
     },
     "app-form": {
         "component": {
-            "delete-app": "Delete App",
-            "app-id": "App ID",
-            "app-name": "App Name",
-            "url-scheme": "URL Scheme",
-            "featured-app": "Featured App",
-            "need-base64-encoding": "Need Base64 Encoding",
-            "installation-step": "Installation Step",
-            "description": "Description",
-            "buttons": "Buttons",
-            "additional-before-subscription-step": "Additional Before Subscription Step",
-            "remove-step": "Remove Step",
-            "add-step": "Add Step",
-            "title": "Title",
-            "add-subscription-step": "Add Subscription Step",
-            "additional-after-subscription-step": "Additional After Subscription Step",
-            "connect-and-use-step": "Connect and Use Step"
+            "delete-app": "Удалить приложение"
+            "app-id": "ID приложения"
+            "app-name": "Название приложения"
+            "url-scheme": "Схема URL"
+            "featured-app": "Рекомендуемое приложение"
+            "need-base64-encoding": "Требуется кодирование Base64"
+            "installation-step": "Шаг установки"
+            "description": "Описание"
+            "buttons": "Кнопки"
+            "additional-before-subscription-step": "Дополнительно перед шагом подписки"
+            "remove-step": "Удалить шаг"
+            "add-step": "Добавить шаг"
+            "title": "Заголовок"
+            "add-subscription-step": "Добавить шаг подписки"
+            "additional-after-subscription-step": "Дополнительно после шага подписки"
+            "connect-and-use-step": "Шаг подключения и использования"
         }
     },
     "button-fields": {
-        "button": "Button",
-        "add-button": "Add button",
-        "remove-button": "Remove button",
-        "button-link": "Button Link",
-        "button-text": "Button Text"
+        "button": "Кнопка"
+        "add-button": "Добавить кнопку"
+        "remove-button": "Удалить кнопку"
+        "button-link": "Ссылка кнопки"
+        "button-text": "Текст кнопки"
     }
 }
