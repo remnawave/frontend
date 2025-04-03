@@ -276,7 +276,7 @@
             "username-cannot-be-changed": "Имя пользователя не может быть изменено",
             "user-details": "Информация о пользователе",
             "loading-user-data": "Загрузка данных пользователя...",
-            "edit-user": "Редактировать пользователя",
+            "edit-user": "Сохранить",
             "never": "Никогда",
             "close": "Закрыть",
             "show-qr": "Показать QR",
@@ -798,7 +798,7 @@
     },
     "get-user-usage": {
         "feature": {
-            "show-usage": "Показать статистику использования"
+            "show-usage": "Статистика"
         }
     },
     "detailed-user-info-drawer": {
