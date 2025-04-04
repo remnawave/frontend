@@ -54,9 +54,6 @@ export const EditNodeModalConnectorWidget = () => {
             actions.toggleEditModal(false)
         }
 
-        actions.clearEditModal()
-        setAdvancedOpened(false)
-
         queryClient.removeQueries({
             queryKey: nodesQueryKeys.getNode({ uuid: node?.uuid ?? '' }).queryKey
         })
@@ -64,6 +61,11 @@ export const EditNodeModalConnectorWidget = () => {
         form.reset()
         form.resetDirty()
         form.resetTouched()
+
+        setTimeout(() => {
+            actions.clearEditModal()
+            setAdvancedOpened(false)
+        }, 300)
     }
 
     const { mutate: updateNode, isPending: isUpdateNodePending } = useUpdateNode({
@@ -126,7 +128,7 @@ export const EditNodeModalConnectorWidget = () => {
                 advancedOpened={advancedOpened}
                 fetchedNode={fetchedNode}
                 form={form}
-                handleClose={handleClose}
+                handleClose={() => handleClose(true)}
                 handleSubmit={handleSubmit}
                 inbounds={inbounds}
                 isUpdateNodePending={isUpdateNodePending}
