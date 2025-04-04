@@ -2,7 +2,6 @@
 import {
     MantineReactTable,
     MRT_ColumnFilterFnsState,
-    MRT_ColumnFiltersState,
     MRT_PaginationState,
     MRT_SortingState,
     MRT_TableOptions,
@@ -13,6 +12,7 @@ import { useTranslation } from 'react-i18next'
 
 import {
     useUsersTableStoreActions,
+    useUsersTableStoreColumnFilter,
     useUsersTableStoreColumnPinning,
     useUsersTableStoreColumnVisibility,
     useUsersTableStoreShowColumnFilters
@@ -44,6 +44,7 @@ export function UserTableWidget() {
     const columnVisibility = useUsersTableStoreColumnVisibility()
     const columnPinning = useUsersTableStoreColumnPinning()
     const showColumnFilters = useUsersTableStoreShowColumnFilters()
+    const columnFilter = useUsersTableStoreColumnFilter()
 
     const [sorting, setSorting] = useState<MRT_SortingState>([])
 
@@ -52,7 +53,6 @@ export function UserTableWidget() {
         pageSize: 25
     })
 
-    const [columnFilters, setColumnFilters] = useState<MRT_ColumnFiltersState>([])
     const [columnFilterFns, setColumnFilterFns] = useState<MRT_ColumnFilterFnsState>(
         Object.fromEntries(tableColumns.map(({ accessorKey }) => [accessorKey, 'contains']))
     )
@@ -60,7 +60,7 @@ export function UserTableWidget() {
     const params = {
         start: pagination.pageIndex * pagination.pageSize,
         size: pagination.pageSize,
-        filters: columnFilters,
+        filters: columnFilter,
         filterModes: columnFilterFns,
         sorting
     }
@@ -117,7 +117,7 @@ export function UserTableWidget() {
         } : undefined,
 
         onColumnFilterFnsChange: setColumnFilterFns,
-        onColumnFiltersChange: setColumnFilters,
+        onColumnFiltersChange: actions.setColumnFilter,
         onPaginationChange: setPagination,
         onSortingChange: setSorting,
         onColumnPinningChange: actions.setColumnPinning,
@@ -154,7 +154,7 @@ export function UserTableWidget() {
         selectAllMode: 'page',
         state: {
             columnFilterFns,
-            columnFilters,
+            columnFilters: columnFilter,
             isLoading,
             pagination,
             showAlertBanner: isError,
