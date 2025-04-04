@@ -20,7 +20,12 @@ import {
     Text,
     Tooltip
 } from '@mantine/core'
-import { TbChartBar as IconChartBar, TbChevronLeft, TbChevronRight } from 'react-icons/tb'
+import {
+    TbChartBar as IconChartBar,
+    TbChevronLeft,
+    TbChevronRight,
+    TbRefresh
+} from 'react-icons/tb'
 import { GetUserUsageByRangeCommand } from '@remnawave/backend-contract'
 import { PiEmpty, PiListBullets } from 'react-icons/pi'
 import { BarChart, Sparkline } from '@mantine/charts'
@@ -75,7 +80,12 @@ export const UserUsageModalWidget = (props: IProps) => {
         setDateRange([start, end])
     }, [period])
 
-    const { data: userUsage, isLoading } = useGetUserUsageByRange({
+    const {
+        data: userUsage,
+        isLoading,
+        refetch,
+        isRefetching
+    } = useGetUserUsageByRange({
         route: {
             uuid: userUuid
         },
@@ -522,6 +532,14 @@ export const UserUsageModalWidget = (props: IProps) => {
                         value={period}
                         w={{ base: 130 }}
                     />
+                    <ActionIcon
+                        loading={isRefetching}
+                        onClick={() => refetch()}
+                        size="input-sm"
+                        variant="subtle"
+                    >
+                        <TbRefresh size={20} />
+                    </ActionIcon>
                 </Group>
 
                 <SimpleGrid cols={{ base: 1, sm: 2 }} spacing="md">
