@@ -22,14 +22,14 @@ export const useUserModalStore = create<IActions & IState>()(
                         set(() => ({
                             isModalOpen: false
                         }))
-
-                        setTimeout(() => {
-                            set(() => ({
-                                userUuid: null
-                            }))
-                            getState().actions.resetState()
-                        }, 300)
                     }
+                },
+                clearModalState: () => {
+                    set(() => ({
+                        isModalOpen: false,
+                        userUuid: null
+                    }))
+                    getState().actions.resetState()
                 },
                 changeDetailedUserInfoDrawerState: (detailedUserInfoDrawerState: boolean) => {
                     set(() => ({ isDetailedUserInfoDrawerOpen: detailedUserInfoDrawerState }))

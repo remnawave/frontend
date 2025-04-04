@@ -155,6 +155,31 @@ export function NodeCardWidget(props: IProps) {
                             <Grid.Col order={{ base: 4, xs: 4 }} span={{ base: 12, xs: 'content' }}>
                                 <Stack gap="xs">
                                     <Group>
+                                        <Badge
+                                            autoContrast
+                                            color={'gray'}
+                                            ff={'monospace'}
+                                            radius="md"
+                                            size="lg"
+                                            style={{ cursor: 'pointer' }}
+                                            variant="outline"
+                                        >
+                                            {`${prettyUsedData} / ${maxData}`}
+                                        </Badge>
+
+                                        {node.isTrafficTrackingActive && (
+                                            <Badge
+                                                color="gray"
+                                                leftSection={<PiArrowsCounterClockwise size={16} />}
+                                                radius="md"
+                                                size="lg"
+                                                style={{ cursor: 'pointer' }}
+                                                variant="outline"
+                                            >
+                                                {getNodeResetDaysUtil(node.trafficResetDay ?? 1)}
+                                            </Badge>
+                                        )}
+
                                         {node.xrayUptime !== '0' && node.isConnected && (
                                             <Badge
                                                 color="gray"
@@ -180,31 +205,6 @@ export function NodeCardWidget(props: IProps) {
                                                 variant="outline"
                                             >
                                                 offline
-                                            </Badge>
-                                        )}
-
-                                        <Badge
-                                            autoContrast
-                                            color={'gray'}
-                                            ff={'monospace'}
-                                            radius="md"
-                                            size="lg"
-                                            style={{ cursor: 'pointer' }}
-                                            variant="outline"
-                                        >
-                                            {`${prettyUsedData} / ${maxData}`}
-                                        </Badge>
-
-                                        {node.isTrafficTrackingActive && (
-                                            <Badge
-                                                color="gray"
-                                                leftSection={<PiArrowsCounterClockwise size={16} />}
-                                                radius="md"
-                                                size="lg"
-                                                style={{ cursor: 'pointer' }}
-                                                variant="outline"
-                                            >
-                                                {getNodeResetDaysUtil(node.trafficResetDay ?? 1)}
                                             </Badge>
                                         )}
                                     </Group>

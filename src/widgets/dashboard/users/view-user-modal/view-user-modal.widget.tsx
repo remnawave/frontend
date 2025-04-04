@@ -11,6 +11,7 @@ import {
     Progress,
     Select,
     SimpleGrid,
+    Skeleton,
     Stack,
     Text,
     Textarea,
@@ -52,7 +53,6 @@ import { bytesToGbUtil, gbToBytesUtil, prettyBytesUtil } from '@shared/utils/byt
 import { GetUserUsageFeature } from '@features/ui/dashboard/users/get-user-usage'
 import { DeleteUserFeature } from '@features/ui/dashboard/users/delete-user'
 import { UserStatusBadge } from '@widgets/dashboard/users/user-status-badge'
-import { LoaderModalShared } from '@shared/ui/loader-modal'
 import { resetDataStrategy } from '@shared/constants'
 import { queryClient } from '@shared/api'
 
@@ -148,14 +148,16 @@ export const ViewUserModal = () => {
         })
     })
 
-    const handleClose = () => {
-        actions.changeModalState(false)
+    const handleClose = (closeModal: boolean = false) => {
+        if (closeModal) {
+            actions.changeModalState(false)
+        }
 
-        setTimeout(() => {
-            form.reset()
-            form.resetDirty()
-            form.resetTouched()
-        }, 300)
+        actions.clearModalState()
+
+        form.reset()
+        form.resetDirty()
+        form.resetTouched()
     }
 
     const userSubscriptionUrlMemo = useMemo(
@@ -166,13 +168,51 @@ export const ViewUserModal = () => {
     return (
         <Modal
             centered
-            onClose={handleClose}
+            onClose={() => actions.changeModalState(false)}
+            onExitTransitionEnd={handleClose}
             opened={isViewUserModalOpen}
             size="900px"
             title={t('view-user-modal.widget.edit-user')}
         >
             {isUserLoading ? (
-                <LoaderModalShared h="400" text={t('view-user-modal.widget.loading-user-data')} />
+                <Stack>
+                    <Group align="flex-start" gap="md" grow={false} wrap="wrap">
+                        <Stack gap="md" style={{ flex: '1 1 350px' }}>
+                            <Group gap="xs" justify="space-between" w="100%">
+                                <Skeleton height={26} width={150} />
+                                <Skeleton height={26} width={80} />
+                            </Group>
+                            <Skeleton height={80} />
+                            <Skeleton height={80} />
+                            <Skeleton height={80} />
+                            <Skeleton height={80} />
+                            <Skeleton height={80} />
+                            <Skeleton height={80} />
+                            <Skeleton height={100} />
+                        </Stack>
+
+                        <Divider
+                            className="responsive-divider"
+                            orientation="vertical"
+                            visibleFrom="md"
+                        />
+
+                        <Stack gap="md" style={{ flex: '1 1 350px' }}>
+                            <Skeleton height={24} width={150} />
+                            <Skeleton height={80} />
+                            <Skeleton height={36} />
+                            <Skeleton height={80} />
+                            <Skeleton height={102} />
+                            <Skeleton height={102} />
+                            <Skeleton height={180} />
+                        </Stack>
+                    </Group>
+
+                    <Group justify="space-between" mt="xl">
+                        <Skeleton height={40} width={150} />
+                        <Skeleton height={40} width={250} />
+                    </Group>
+                </Stack>
             ) : (
                 <form key="view-user-form" onSubmit={handleSubmit}>
                     <Group align="flex-start" gap="md" grow={false} wrap="wrap">

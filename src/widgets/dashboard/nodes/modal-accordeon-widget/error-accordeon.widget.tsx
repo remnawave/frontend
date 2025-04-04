@@ -12,7 +12,7 @@ export const ModalAccordionWidget = (props: IProps) => {
 
     const [localStatusMessage, setLocalStatusMessage] = useState<null | string>(null)
 
-    const accordionValue = localStatusMessage ? 'error' : 'none'
+    let accordionValue = localStatusMessage ? 'error' : 'none'
 
     useEffect(() => {
         if (fetchedNode) {
@@ -22,8 +22,12 @@ export const ModalAccordionWidget = (props: IProps) => {
         }
     }, [fetchedNode])
 
+    if (!fetchedNode && !node) {
+        accordionValue = 'info'
+    }
+
     return (
-        <Accordion defaultValue={accordionValue} key={node?.uuid} radius="md" variant="contained">
+        <Accordion defaultValue={accordionValue} key={node?.uuid} radius="md" variant="separated">
             <Accordion.Item value="info">
                 <Accordion.Control
                     icon={<PiInfo color="var(--mantine-color-red-7)" size={'1.50rem'} />}

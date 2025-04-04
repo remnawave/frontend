@@ -49,25 +49,27 @@ export const EditNodeModalConnectorWidget = () => {
         }
     })
 
-    const handleClose = () => {
-        actions.toggleEditModal(false)
+    const handleClose = (closeModal: boolean = false) => {
+        if (closeModal) {
+            actions.toggleEditModal(false)
+        }
+
+        actions.clearEditModal()
         setAdvancedOpened(false)
 
         queryClient.removeQueries({
             queryKey: nodesQueryKeys.getNode({ uuid: node?.uuid ?? '' }).queryKey
         })
 
-        setTimeout(() => {
-            form.reset()
-            form.resetDirty()
-            form.resetTouched()
-        }, 200)
+        form.reset()
+        form.resetDirty()
+        form.resetTouched()
     }
 
     const { mutate: updateNode, isPending: isUpdateNodePending } = useUpdateNode({
         mutationFns: {
             onSuccess: async () => {
-                handleClose()
+                handleClose(true)
             }
         }
     })
@@ -109,7 +111,8 @@ export const EditNodeModalConnectorWidget = () => {
     return (
         <Modal
             centered
-            onClose={handleClose}
+            onClose={() => actions.toggleEditModal(false)}
+            onExitTransitionEnd={() => handleClose}
             opened={isModalOpen}
             size="900px"
             title={
