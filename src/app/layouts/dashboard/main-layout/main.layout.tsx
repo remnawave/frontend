@@ -1,8 +1,8 @@
 import { AppShell, Badge, Burger, Code, Container, Group, ScrollArea, Text } from '@mantine/core'
 import { useClickOutside, useDisclosure, useMediaQuery } from '@mantine/hooks'
 import { useQuery } from '@tanstack/react-query'
+import { useEffect, useState } from 'react'
 import { Outlet } from 'react-router-dom'
-import { useState } from 'react'
 import axios from 'axios'
 
 import { getBuildInfo } from '@shared/utils/get-build-info/get-build-info.util'
@@ -19,11 +19,20 @@ export function MainLayout() {
     const [mobileOpened, { toggle: toggleMobile }] = useDisclosure()
     const [desktopOpened, { toggle: toggleDesktop }] = useDisclosure(true)
     const [buildInfoModalOpened, setBuildInfoModalOpened] = useState(false)
+    const [isMediaQueryReady, setIsMediaQueryReady] = useState(false)
 
     const buildInfo = getBuildInfo()
 
-    const isMobile = useMediaQuery(`(max-width: 64rem)`)
-    const isSocialButton = useMediaQuery(`(max-width: 40rem)`)
+    const isMobile = useMediaQuery(`(max-width: 64rem)`, undefined, {
+        getInitialValueInEffect: false
+    })
+    const isSocialButton = useMediaQuery(`(max-width: 40rem)`, undefined, {
+        getInitialValueInEffect: false
+    })
+
+    useEffect(() => {
+        setIsMediaQueryReady(true)
+    }, [isMobile, isSocialButton])
 
     const ref = useClickOutside(() => {
         if (isMobile && mobileOpened) {
@@ -43,7 +52,7 @@ export function MainLayout() {
         }
     })
 
-    return (
+    return isMediaQueryReady ? (
         <AppShell
             header={{ height: 64 }}
             layout="alt"
@@ -170,5 +179,7 @@ export function MainLayout() {
                 opened={buildInfoModalOpened}
             />
         </AppShell>
+    ) : (
+        <div style={{ height: '100vh' }}></div>
     )
 }
