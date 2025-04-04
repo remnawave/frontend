@@ -1,4 +1,4 @@
-import { Menu, Text, useDirection } from '@mantine/core'
+import { ActionIcon, Menu, Text, useDirection } from '@mantine/core'
 import { useTranslation } from 'react-i18next'
 import { useEffect } from 'react'
 
@@ -52,9 +52,9 @@ export function LanguagePicker() {
     return (
         <Menu position="bottom-end" width={150} withinPortal>
             <Menu.Target>
-                {/* <ActionIcon color="gray" size="xl"> */}
-                <Text size="xl">{selected.emoji}</Text>
-                {/* </ActionIcon> */}
+                <ActionIcon color="gray" size="xl" style={{ borderColor: 'transparent' }}>
+                    <Text size="xl">{selected.emoji}</Text>
+                </ActionIcon>
             </Menu.Target>
             <Menu.Dropdown>{items}</Menu.Dropdown>
         </Menu>

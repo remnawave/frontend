@@ -793,7 +793,9 @@
             "stacked": "Stacked",
             "grouped": "Grouped",
             "filter-nodes": "Filter nodes",
-            "bar-chart": "Bar chart"
+            "bar-chart": "Bar chart",
+            "show-nodes": "Show nodes",
+            "click-to-see-all": "Click to see all"
         }
     },
     "get-user-usage": {

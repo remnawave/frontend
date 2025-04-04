@@ -793,7 +793,9 @@
             "stacked": "Сложить",
             "grouped": "Сгруппировать",
             "filter-nodes": "Фильтр по нодам",
-            "bar-chart": "Столбчатая диаграмма"
+            "bar-chart": "Столбчатая диаграмма",
+            "show-nodes": "Show nodes",
+            "click-to-see-all": "Показать все"
         }
     },
     "get-user-usage": {
