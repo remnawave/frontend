@@ -678,7 +678,7 @@
         "danger": {
             "tab": {
                 "feature": {
-                    "danger-zone": "منطقه خطر",
+                    "danger-zone": "هشدار",
                     "danger-zone-description": "این اقدامات غیرقابل بازگشت هستند و ممکن است منجر به از دست رفتن دائمی داده‌ها شوند.",
                     "delete-users-by-status": "حذف کاربران بر اساس وضعیت",
                     "delete": "حذف",
@@ -759,147 +759,147 @@
     },
     "get-user-subscription-links": {
         "feature": {
-            "loading-subscription-links": "بارگیری پیوندهای اشتراک ...",
-            "show-links": "نشان دادن پیوندها",
-            "subscription-links": "پیوندهای اشتراک",
-            "no-available-hosts-found-for-this-user": "هیچ میزبان موجود برای این کاربر یافت نمی شود"
+            "subscription-links": "لینک‌های اشتراک",
+            "loading-subscription-links": "درحال بارگذاری لینک‌های اشتراک ...",
+            "show-links": "نشان دادن لینک‌ها",
+            "no-available-hosts-found-for-this-user": "هیچ هاست موجودی برای این کاربر یافت نشد"
         }
     },
     "delete-user": {
         "feature": {
-            "delete-user": "Delete user",
-            "are-you-sure": "Are you sure you want to delete the user? This action is irreversible.",
-            "delete": "Delete",
-            "cancel": "Cancel"
+            "delete-user": "حذف کاربر",
+            "are-you-sure": "آیا مطمئن هستید که می‌خواهید کاربر را حذف کنید؟ این اقدام غیرقابل بازگشت است.",
+            "delete": "حذف",
+            "cancel": "لغو"
         }
     },
     "user-usage-modal": {
         "widget": {
-            "no-data-available-for-the-selected-period": "No data available for the selected period",
-            "no-data-available": "No data available",
-            "click-to-show-all": "Click to show all",
-            "click-to-highlight-only-this-node": "Click to highlight only this node",
-            "traffic-statistics": "Traffic statistics",
-            "usage-by-period": "Usage by period",
-            "7-days": "7 days",
-            "14-days": "14 days",
-            "30-days": "30 days",
-            "60-days": "60 days",
-            "90-days": "90 days",
-            "180-days": "180 days",
-            "365-days": "365 days",
-            "total-traffic": "Total traffic",
-            "top-nodes": "Top nodes",
-            "stacked": "Stacked",
-            "grouped": "Grouped",
-            "filter-nodes": "Filter nodes",
-            "bar-chart": "Bar chart",
-            "show-nodes": "Show nodes",
-            "click-to-see-all": "Click to see all"
+            "no-data-available-for-the-selected-period": "داده‌ای برای دوره انتخاب‌شده در دسترس نیست",
+            "no-data-available": "داده‌ای در دسترس نیست",
+            "click-to-show-all": "برای نمایش همه کلیک کنید",
+            "click-to-highlight-only-this-node": "کلیک کنید تا فقط این نود برجسته شود",
+            "traffic-statistics": "آمار ترافیک",
+            "usage-by-period": "استفاده بر اساس دوره",
+            "7-days": "۷ روز",
+            "14-days": "۱۴ روز",
+            "30-days": "۳۰ روز",
+            "60-days": "۶۰ روز",
+            "90-days": "۹۰ روز",
+            "180-days": "۱۸۰ روز",
+            "365-days": "۳۶۵ روز",
+            "total-traffic": "ترافیک کل",
+            "top-nodes": "نودهای پرمصرف",
+            "stacked": "انباشته",
+            "grouped": "گروه‌بندی‌شده",
+            "filter-nodes": "فیلتر کردن نودها",
+            "bar-chart": "نمودار میله‌ای",
+            "show-nodes": "نمایش نودها",
+            "click-to-see-all": "کلیک کنید تا همه را ببینید"
         }
     },
     "get-user-usage": {
         "feature": {
-            "show-usage": "Show usage"
+            "show-usage": "نمایش مصرف"
         }
     },
     "detailed-user-info-drawer": {
         "widget": {
-            "copied": "Copied",
-            "detailed-user-info": "Detailed User Info",
-            "copy": "Copy",
-            "loading-user-info": "Loading user info...",
-            "user-information": "User Information",
-            "short-uuid": "Short UUID",
-            "username": "Username",
-            "email": "Email",
-            "telegram-id": "Telegram ID",
-            "description": "Description",
-            "traffic-information": "Traffic Information",
-            "used-traffic": "Used Traffic",
-            "lifetime-used-traffic": "Lifetime Used Traffic",
-            "traffic-limit": "Traffic Limit",
-            "traffic-limit-strategy": "Traffic Limit Strategy",
-            "last-traffic-reset": "Last Traffic Reset",
-            "subscription-information": "Subscription Information",
-            "subscription-uuid": "Subscription UUID",
-            "subscription-url": "Subscription URL",
-            "expires-at": "Expires At",
-            "last-opened-at": "Last Opened At",
-            "last-user-agent": "Last User Agent",
-            "revoked-at": "Revoked At",
-            "connection-information": "Connection Information",
-            "trojan-password": "Trojan Password",
-            "vless-uuid": "VLESS UUID",
-            "ss-password": "SS Password",
-            "last-online": "Last Online",
-            "last-connected-node": "Last Connected Node",
-            "active-inbounds": "Active Inbounds",
-            "timestamps": "Timestamps",
-            "created-at": "Created At",
-            "updated-at": "Updated At"
+            "copied": "کپی شد",
+            "detailed-user-info": "اطلاعات دقیق کاربر",
+            "copy": "کپی",
+            "loading-user-info": "در حال بارگذاری اطلاعات کاربر...",
+            "user-information": "اطلاعات کاربر",
+            "short-uuid": "شناسه (UUID) کوتاه",
+            "username": "نام کاربری",
+            "email": "ایمیل",
+            "telegram-id": "آیدی عددی تلگرام",
+            "description": "توضیحات",
+            "traffic-information": "اطلاعات ترافیک",
+            "used-traffic": "ترافیک استفاده‌شده",
+            "lifetime-used-traffic": "ترافیک استفاده‌شده در طول عمر",
+            "traffic-limit": "محدودیت ترافیک",
+            "traffic-limit-strategy": "استراتژی محدودیت ترافیک",
+            "last-traffic-reset": "آخرین بازنشانی ترافیک",
+            "subscription-information": "اطلاعات اشتراک",
+            "subscription-uuid": "شناسه (UUID) اشتراک",
+            "subscription-url": "آدرس URL اشتراک",
+            "expires-at": "منقضی می‌شود در",
+            "last-opened-at": "آخرین بار باز شده در",
+            "last-user-agent": "آخرین عامل کاربری",
+            "revoked-at": "لغو شده در",
+            "connection-information": "اطلاعات اتصال",
+            "trojan-password": "رمز عبور تروجان",
+            "vless-uuid": "(UUID) شناسه VLESS",
+            "ss-password": "رمز عبور SS",
+            "last-online": "آخرین آنلاین",
+            "last-connected-node": "آخرین نود متصل‌شده",
+            "active-inbounds": "اینباندهای فعال",
+            "timestamps": "مهرهای زمانی",
+            "created-at": "ایجاد شده در",
+            "updated-at": "به‌روزرسانی شده در"
         }
     },
     "subscription-page-builder-header": {
         "widget": {
-            "load-default": "Load Default",
-            "export-config": "Export Config",
-            "upload-config": "Upload Config",
-            "subscription-page-builder": "Subscription Page Builder",
-            "how-to-use-it": "How to use it?",
-            "description-line-1": "You can use this builder to configure available clients and guides for Remnawave Subscription Page.",
-            "description-line-2": "After creating your first configuration, you can download it and mount to subscription-page container.",
-            "description-line-3": "Click \"Load Default\" to get the reference configuration from the GitHub repository.",
-            "learn-more": "Learn more"
+            "load-default": "بارگذاری پیش‌فرض",
+            "export-config": "صادر کردن پیکربندی",
+            "upload-config": "بارگذاری پیکربندی",
+            "subscription-page-builder": "سازنده صفحه اشتراک",
+            "how-to-use-it": "چگونه از این ابزار استفاده کنیم؟",
+            "description-line-1": "می‌توانید از این سازنده برای پیکربندی کلاینت‌ها و راهنماهای موجود برای صفحه اشتراک Remnawave استفاده کنید.",
+            "description-line-2": "پس از ایجاد اولین پیکربندی خود، می‌توانید آن را دانلود کرده و به کانتینر صفحه اشتراک متصل کنید.",
+            "description-line-3": "روی «بارگذاری پیش‌فرض» کلیک کنید تا پیکربندی مرجع را از مخزن GitHub دریافت کنید.",
+            "learn-more": "بیشتر بدانید"
         }
     },
     "subscription-page-builder": {
         "page": {
             "component": {
-                "failed-to-parse-config": "Failed to parse config file. Check the file format.",
-                "failed-to-load-default-config-check-your-internet-connection": "Failed to load default config. Check your internet connection.",
-                "no-apps-configured-for-this-platform": "No apps configured for this platform",
-                "add-app": "Add app",
-                "select-an-app-from-the-sidebar-or-add-a-new-one": "Select an app from the sidebar or add a new one",
-                "validation-errors": "Validation errors",
-                "invalid-configuration": "Invalid configuration",
-                "the-configuration-did-not-pass-validation": "The configuration did not pass validation.",
-                "close": "Close"
+                "failed-to-parse-config": "تجزیه فایل پیکربندی ناموفق بود. فرمت فایل را بررسی کنید.",
+                "failed-to-load-default-config-check-your-internet-connection": "بارگذاری پیکربندی پیش‌فرض ناموفق بود. اتصال اینترنت خود را بررسی کنید.",
+                "no-apps-configured-for-this-platform": "هیچ برنامه‌ای برای این پلتفرم اضافه نشده است",
+                "add-app": "افزودن برنامه",
+                "select-an-app-from-the-sidebar-or-add-a-new-one": "یک برنامه را از نوار کناری انتخاب کنید یا یک برنامه جدید اضافه کنید",
+                "validation-errors": "خطاهای اعتبارسنجی",
+                "invalid-configuration": "پیکربندی نامعتبر",
+                "the-configuration-did-not-pass-validation": "پیکربندی از اعتبارسنجی عبور نکرد.",
+                "close": "بستن"
             }
         }
     },
     "app-form": {
         "component": {
-            "delete-app": "Delete App",
-            "app-id": "App ID",
-            "app-name": "App Name",
-            "url-scheme": "URL Scheme",
-            "featured-app": "Featured App",
-            "need-base64-encoding": "Need Base64 Encoding",
-            "installation-step": "Installation Step",
-            "description": "Description",
-            "buttons": "Buttons",
-            "additional-before-subscription-step": "Additional Before Subscription Step",
-            "remove-step": "Remove Step",
-            "add-step": "Add Step",
-            "title": "Title",
-            "add-subscription-step": "Add Subscription Step",
-            "additional-after-subscription-step": "Additional After Subscription Step",
-            "connect-and-use-step": "Connect and Use Step"
+            "delete-app": "حذف برنامه",
+            "app-id": "شناسه برنامه",
+            "app-name": "اسم برنامه",
+            "url-scheme": "طرح URL",
+            "featured-app": "برنامه ویژه",
+            "need-base64-encoding": "نیاز به رمزنگاری Base64",
+            "installation-step": "مرحله نصب",
+            "description": "توضیحات",
+            "buttons": "دکمه‌ها",
+            "additional-before-subscription-step": "مرحله اضافی قبل از اشتراک",
+            "remove-step": "حذف مرحله",
+            "add-step": "افزودن مرحله",
+            "title": "عنوان",
+            "add-subscription-step": "افزودن مرحله اشتراک",
+            "additional-after-subscription-step": "مرحله اضافی پس از اشتراک",
+            "connect-and-use-step": "مرحله اتصال و استفاده"
         }
     },
     "button-fields": {
-        "button": "Button",
-        "add-button": "Add button",
-        "remove-button": "Remove button",
-        "button-link": "Button Link",
-        "button-text": "Button Text"
+        "button": "دکمه",
+        "add-button": "افزودن دکمه",
+        "remove-button": "حذف دکمه",
+        "button-link": "لینک دکمه",
+        "button-text": "متن دکمه"
     },
     "subscription-tabs": {
         "widget": {
-            "show-custom-remark-description-line-1": "Only for EXPIRED, LIMITED, DISABLED users.",
-            "show-custom-remark-description-line-2": "If this setting is disabled – EXPIRED, LIMITED, DISABLED users will recieve acutal host list, instead of custom remark below.",
-            "show-custom-remarks": "Show custom remarks"
+            "show-custom-remarks": "نمایش توضیحات سفارشی",
+            "show-custom-remark-description-line-1": "فقط برای کاربران منقضی‌شده، محدودشده و غیرفعال.",
+            "show-custom-remark-description-line-2": "اگر این تنظیم غیرفعال باشد - کاربران منقضی‌شده، محدودشده و غیرفعال به جای توضیحات سفارشی زیر، لیست واقعی هاست‌ها را دریافت خواهند کرد."
         }
     }
 }

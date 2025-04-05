@@ -847,8 +847,8 @@
             "upload-config": "Upload Config",
             "subscription-page-builder": "Subscription Page Builder",
             "how-to-use-it": "How to use it?",
-            "description-line-1": "You can use this builder to configure available clients and guides for Remnawave Subscription Page.",
-            "description-line-2": "After creating your first configuration, you can download it and mount to subscription-page container.",
+            "description-line-1": "You can use this builder to configure available clients and usage guides for Remnawave Subscription Pages.",
+            "description-line-2": "After creating your desired configuration, you can export and download it and mount the configuration file to your subscription-page container.",
             "description-line-3": "Click \"Load Default\" to get the reference configuration from the GitHub repository.",
             "learn-more": "Learn more"
         }
@@ -898,8 +898,8 @@
     "subscription-tabs": {
         "widget": {
             "show-custom-remarks": "Show custom remarks",
-            "show-custom-remark-description-line-1": "Only for EXPIRED, LIMITED, DISABLED users.",
-            "show-custom-remark-description-line-2": "If this setting is disabled – EXPIRED, LIMITED, DISABLED users will recieve acutal host list, instead of custom remark below."
+            "show-custom-remark-description-line-1": "Only for EXPIRED, LIMITED and DISABLED users.",
+            "show-custom-remark-description-line-2": "If this setting is disabled – EXPIRED, LIMITED and DISABLED users will recieve an actual host list, instead of the custom remarks below."
         }
     }
 }
