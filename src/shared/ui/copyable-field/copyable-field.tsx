@@ -5,11 +5,13 @@ export const CopyableFieldShared = ({
     label,
     value,
     copyText,
-    copiedText
+    copiedText,
+    truncate = false
 }: {
     copiedText: string
     copyText: string
     label: string
+    truncate?: boolean
     value: string
 }) => {
     if (!value) return null
@@ -21,7 +23,7 @@ export const CopyableFieldShared = ({
             </Text>
             <Group gap={'xs'}>
                 <Text size="sm" style={{ wordBreak: 'break-all' }}>
-                    {value}
+                    {truncate ? `${value.slice(0, 30)}...` : value}
                 </Text>
                 <CopyButton timeout={2000} value={value}>
                     {({ copied, copy }) => (

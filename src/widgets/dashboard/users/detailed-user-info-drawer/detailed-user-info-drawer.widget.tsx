@@ -199,6 +199,13 @@ export const DetailedUserInfoDrawerWidget = () => {
                                 label={t('detailed-user-info-drawer.widget.subscription-url')}
                                 value={user.subscriptionUrl}
                             />
+                            <CopyableFieldShared
+                                copiedText={t('detailed-user-info-drawer.widget.copied')}
+                                copyText={t('detailed-user-info-drawer.widget.copy')}
+                                label={'Happ Crypto Link'}
+                                truncate={true}
+                                value={user.happ.cryptoLink}
+                            />
                             <InfoFieldShared
                                 label={t('detailed-user-info-drawer.widget.expires-at')}
                                 value={formatDate(user.expireAt)}
