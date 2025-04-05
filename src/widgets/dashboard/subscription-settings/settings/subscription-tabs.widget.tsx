@@ -19,10 +19,13 @@ import {
 } from '@mantine/core'
 import {
     PiChatsCircle,
+    PiClockCountdown,
+    PiClockUser,
     PiDeviceMobile,
     PiFloppyDisk,
     PiGear,
     PiInfo,
+    PiProhibit,
     PiUserCircle
 } from 'react-icons/pi'
 import { UpdateSubscriptionSettingsCommand } from '@remnawave/backend-contract'
@@ -30,6 +33,7 @@ import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { useForm } from '@mantine/form'
 
+import { TemplateInfoPopoverShared } from '@shared/ui/popovers/template-info-popover/template-info-popover.shared'
 import { ROUTES } from '@shared/constants'
 
 import { RemarksManager } from './remarks-manager.widget'
@@ -133,6 +137,11 @@ export const SubscriptionTabs = ({
                                             )}
                                             key={form.key('profileTitle')}
                                             label={t('subscription-settings.widget.profile-title')}
+                                            leftSection={
+                                                <TemplateInfoPopoverShared
+                                                    showHostDescription={false}
+                                                />
+                                            }
                                             placeholder={t(
                                                 'subscription-settings.widget.enter-profile-title'
                                             )}
@@ -424,6 +433,8 @@ export const SubscriptionTabs = ({
                                 <Grid>
                                     <Grid.Col span={{ xs: 12, sm: 6, md: 4 }}>
                                         <RemarksManager
+                                            icon={<PiClockUser size="1rem" />}
+                                            iconColor="red"
                                             initialRemarks={remarks.expired}
                                             onChange={updateExpiredRemarks}
                                             title={t(
@@ -434,6 +445,8 @@ export const SubscriptionTabs = ({
 
                                     <Grid.Col span={{ xs: 12, sm: 6, md: 4 }}>
                                         <RemarksManager
+                                            icon={<PiClockCountdown size="1rem" />}
+                                            iconColor="orange"
                                             initialRemarks={remarks.limited}
                                             onChange={updateLimitedRemarks}
                                             title={t(
@@ -444,6 +457,8 @@ export const SubscriptionTabs = ({
 
                                     <Grid.Col span={{ xs: 12, sm: 6, md: 4 }}>
                                         <RemarksManager
+                                            icon={<PiProhibit size="1rem" />}
+                                            iconColor="gray"
                                             initialRemarks={remarks.disabled}
                                             onChange={updateDisabledRemarks}
                                             title={t(
@@ -457,7 +472,7 @@ export const SubscriptionTabs = ({
                     </Tabs.Panel>
                 </Tabs>
 
-                <Group justify="flex-start">
+                <Group justify="flex-start" mb="xl">
                     <Button
                         color="blue"
                         leftSection={<PiFloppyDisk size="1.2rem" />}

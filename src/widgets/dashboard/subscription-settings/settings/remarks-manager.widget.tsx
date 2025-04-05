@@ -1,13 +1,28 @@
-import { ActionIcon, Button, Group, Paper, Text, TextInput, ThemeIcon } from '@mantine/core'
-import { PiNotePencil, PiPlus, PiTrash } from 'react-icons/pi'
+import {
+    ActionIcon,
+    Button,
+    DefaultMantineColor,
+    Group,
+    Paper,
+    Text,
+    TextInput,
+    ThemeIcon
+} from '@mantine/core'
+import { PiPlus, PiTrash } from 'react-icons/pi'
 import { useTranslation } from 'react-i18next'
 import { useEffect, useState } from 'react'
+
+import { TemplateInfoPopoverShared } from '@shared/ui/popovers/template-info-popover/template-info-popover.shared'
 
 export const RemarksManager = ({
     initialRemarks = [''],
     title,
-    onChange
+    onChange,
+    icon,
+    iconColor
 }: {
+    icon: React.ReactNode
+    iconColor: DefaultMantineColor
     initialRemarks?: string[]
     onChange: (remarks: string[]) => void
     title: string
@@ -49,8 +64,8 @@ export const RemarksManager = ({
     return (
         <Paper p="sm" radius="md" shadow="xs" withBorder>
             <Group align="center" gap="xs" justify="flex-start" mb="md">
-                <ThemeIcon color="blue" radius="md" size="md" variant="light">
-                    <PiNotePencil size="1rem" />
+                <ThemeIcon color={iconColor} radius="md" size="md" variant="light">
+                    {icon}
                 </ThemeIcon>
                 <Text fw={600} size="sm">
                     {title}
@@ -70,6 +85,7 @@ export const RemarksManager = ({
                         <PiTrash size="1rem" />
                     </ActionIcon>
                     <TextInput
+                        leftSection={<TemplateInfoPopoverShared showHostDescription={false} />}
                         onChange={(e) => updateLocalRemark(index, e.target.value)}
                         placeholder={t('remarks-manager.widget.enter-remark')}
                         style={{ flex: 1 }}

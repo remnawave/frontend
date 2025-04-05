@@ -33,7 +33,7 @@ import { useDisclosure } from '@mantine/hooks'
 import { useTranslation } from 'react-i18next'
 
 import { DeleteHostFeature } from '@features/ui/dashboard/hosts/delete-host'
-import { RemarkInfoPopoverWidget } from '@widgets/dashboard/hosts/popovers'
+import { TemplateInfoPopoverShared } from '@shared/ui/popovers'
 
 import { IProps } from './interfaces'
 
@@ -124,7 +124,7 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
                     key={form.key('remark')}
                     label={t('base-host-form.remark')}
                     {...form.getInputProps('remark')}
-                    leftSection={<RemarkInfoPopoverWidget />}
+                    leftSection={<TemplateInfoPopoverShared />}
                     required
                 />
 
