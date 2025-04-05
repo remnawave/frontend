@@ -15,7 +15,7 @@ export const BulkUserActionsDangerTabFeature = (props: IProps) => {
     const actions = useBulkUsersActionsStoreActions()
 
     const uuids = actions.getUuids()
-    const uuidsLength = actions.getUuidLenght()
+    const uuidsLength = actions.getUuidLength()
 
     const { mutate: deleteUsers, isPending: isDeletePending } = useBulkDeleteUsers({
         mutationFns: {

@@ -24,7 +24,7 @@ export const BulkUserActionsDrawerWidget = (props: IProps) => {
     const handlers = useBulkUsersActionsStoreActions()
     const [activeTab, setActiveTab] = useState<null | string>('update')
 
-    const uuidsLength = handlers.getUuidLenght()
+    const uuidsLength = handlers.getUuidLength()
 
     const cleanUpDrawer = async () => {
         handlers.setIsDrawerOpen(false)

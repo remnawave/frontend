@@ -100,7 +100,7 @@ export const BulkUserActionsUpdateTabFeature = (props: IProps) => {
             <Stack gap="md">
                 <Text c="dimmed" size="sm">
                     {t('bulk-user-actions.update.tab.feature.update-fields-counter', {
-                        usersCount: actions.getUuidLenght()
+                        usersCount: actions.getUuidLength()
                     })}
                 </Text>
 

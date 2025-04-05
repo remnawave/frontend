@@ -4,7 +4,7 @@ import { MRT_RowSelectionState } from 'mantine-react-table'
 
 export interface IActions {
     actions: {
-        getUuidLenght: () => number
+        getUuidLength: () => number
         getUuids: () => string[]
         resetState: () => void
         setIsDrawerOpen: (isDrawerOpen: boolean) => void

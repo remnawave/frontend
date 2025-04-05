@@ -74,8 +74,8 @@ export function UserTableWidget() {
     } = useGetUsersV2({
         query: params,
         rQueryParams: {
-            // enabled: bulkUsersActionsStoreActions.getUuidLenght() === 0,
-            refetchInterval: bulkUsersActionsStoreActions.getUuidLenght() === 0 ? sToMs(25) : false
+            // enabled: bulkUsersActionsStoreActions.getUuidLength() === 0,
+            refetchInterval: bulkUsersActionsStoreActions.getUuidLength() === 0 ? sToMs(25) : false
         }
     })
 

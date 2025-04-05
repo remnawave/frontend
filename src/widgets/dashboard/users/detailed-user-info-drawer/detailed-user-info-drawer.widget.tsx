@@ -35,7 +35,7 @@ import { LoaderModalShared } from '@shared/ui/loader-modal'
 import { prettyBytesToAnyUtil } from '@shared/utils/bytes'
 import { useGetUserByUuid } from '@shared/api/hooks'
 
-export const DetailerUserInfoDrawerWidget = () => {
+export const DetailedUserInfoDrawerWidget = () => {
     const { t } = useTranslation()
 
     const actions = useUserModalStoreActions()

@@ -33,7 +33,7 @@ export const useBulkUsersActionsStore = create<IActions & IState>()(
                                 : tableSelectionOrUpdater
                     }))
                 },
-                getUuidLenght: () => {
+                getUuidLength: () => {
                     return Object.keys(get().tableSelection).length
                 },
                 getUuids: (): string[] => {

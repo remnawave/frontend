@@ -19,7 +19,7 @@ export const BulkUserActionsActionsTabFeature = (props: IProps) => {
     const { t } = useTranslation()
 
     const actions = useBulkUsersActionsStoreActions()
-    const uuidsLength = actions.getUuidLenght()
+    const uuidsLength = actions.getUuidLength()
     const uuids = actions.getUuids()
     const { cleanUpDrawer } = props
 
@@ -162,7 +162,7 @@ export const BulkUserActionsActionsTabFeature = (props: IProps) => {
         <Stack gap="md">
             <Text c="dimmed" size="sm">
                 {t('bulk-user-actions.actions.tab.feature.perform-action-on-users', {
-                    usersCount: actions.getUuidLenght()
+                    usersCount: actions.getUuidLength()
                 })}
             </Text>
 

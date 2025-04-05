@@ -27,7 +27,7 @@ export function InboundsPageHeaderWidget() {
                             {t('inbounds-page-header.widget.important-note-description-line-1')}{' '}
                             <br />
                             {t('inbounds-page-header.widget.important-note-description-line-2')}
-                            <br></br>
+                            <br />
                             {t('inbounds-page-header.widget.important-note-description-line-3')}
                         </Accordion.Panel>
                     </Accordion.Item>
