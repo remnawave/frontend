@@ -899,7 +899,7 @@
         "widget": {
             "show-custom-remarks": "Show custom remarks",
             "show-custom-remark-description-line-1": "Only for EXPIRED, LIMITED and DISABLED users.",
-            "show-custom-remark-description-line-2": "If this setting is disabled – EXPIRED, LIMITED and DISABLED users will recieve an actual host list, instead of the custom remarks below."
+            "show-custom-remark-description-line-2": "If this setting is disabled – EXPIRED, LIMITED and DISABLED users will receive an actual host list, instead of the custom remarks below."
         }
     }
 }
