@@ -188,7 +188,7 @@ export const ViewUserModal = () => {
                             <Skeleton height={80} />
                             <Skeleton height={80} />
                             <Skeleton height={80} />
-                            <Skeleton height={100} />
+                            <Skeleton height={80} />
                         </Stack>
 
                         <Divider
@@ -208,7 +208,7 @@ export const ViewUserModal = () => {
                         </Stack>
                     </Group>
 
-                    <Group justify="space-between" mt="xl">
+                    <Group justify="space-between" mt={0}>
                         <Skeleton height={40} width={150} />
                         <Skeleton height={40} width={250} />
                     </Group>
