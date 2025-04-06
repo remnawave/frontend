@@ -14,7 +14,7 @@ export const ApiTokensHeaderActionButtonsFeature = () => {
     }
 
     return (
-        <Group>
+        <Group grow preventGrowOverflow={false} wrap="wrap">
             <Button
                 leftSection={<PiPlus size="1rem" />}
                 onClick={handleCreate}

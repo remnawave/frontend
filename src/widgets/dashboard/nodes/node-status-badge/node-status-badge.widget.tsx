@@ -1,5 +1,5 @@
 import {
-    PiDownloadDuotone,
+    PiCloudArrowUpDuotone,
     PiProhibitDuotone,
     PiPulseDuotone,
     PiWarningCircle
@@ -23,8 +23,10 @@ export function NodeStatusBadgeWidget({ node, fetchedNode, ...rest }: IProps) {
         color = 'teal'
         status = t('node-status-badge.widget.connected')
     } else if (nodeData.isConnecting) {
-        icon = <PiDownloadDuotone size={18} style={{ color: 'var(--mantine-color-orange-3)' }} />
-        color = 'orange'
+        icon = (
+            <PiCloudArrowUpDuotone size={18} style={{ color: 'var(--mantine-color-yellow-3)' }} />
+        )
+        color = 'var(--mantine-color-yellow-3)'
         status = t('node-status-badge.widget.connecting')
     } else if (nodeData.isDisabled) {
         icon = <PiProhibitDuotone size={18} style={{ color: 'var(--mantine-color-gray-6)' }} />

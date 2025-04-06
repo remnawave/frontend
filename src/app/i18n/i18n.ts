@@ -21,6 +21,9 @@ i18n.use(initReactI18next)
         },
         interpolation: {
             escapeValue: false
+        },
+        react: {
+            useSuspense: true
         }
     })
 

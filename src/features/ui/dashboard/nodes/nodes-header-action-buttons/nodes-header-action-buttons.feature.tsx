@@ -23,7 +23,7 @@ export const NodesHeaderActionButtonsFeature = () => {
     const { mutate: restartAllNodes, isPending: isRestartAllNodesPending } = useRestartAllNodes()
 
     return (
-        <Group>
+        <Group grow preventGrowOverflow={false} wrap="wrap">
             <Button
                 leftSection={<PiArrowsClockwise size="1rem" />}
                 loading={isGetNodesPending || isPending || isRefetching}

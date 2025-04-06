@@ -5,7 +5,7 @@ import components from './overrides'
 export const theme = createTheme({
     components,
     cursorType: 'pointer',
-    fontFamily: 'Montserrat, sans-serif',
+    fontFamily: 'Montserrat, Twemoji Country Flags, sans-serif',
     fontFamilyMonospace: 'Fira Mono, monospace',
     breakpoints: {
         xs: '30em',
@@ -19,7 +19,7 @@ export const theme = createTheme({
     },
     scale: 1,
     fontSmoothing: true,
-    focusRing: 'auto',
+    focusRing: 'never',
     white: '#ffffff',
     black: '#24292f',
     colors: {

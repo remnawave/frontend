@@ -49,9 +49,10 @@ export const EditNodeModalConnectorWidget = () => {
         }
     })
 
-    const handleClose = () => {
-        actions.toggleEditModal(false)
-        setAdvancedOpened(false)
+    const handleClose = (closeModal: boolean = false) => {
+        if (closeModal) {
+            actions.toggleEditModal(false)
+        }
 
         queryClient.removeQueries({
             queryKey: nodesQueryKeys.getNode({ uuid: node?.uuid ?? '' }).queryKey
@@ -60,12 +61,17 @@ export const EditNodeModalConnectorWidget = () => {
         form.reset()
         form.resetDirty()
         form.resetTouched()
+
+        setTimeout(() => {
+            actions.clearEditModal()
+            setAdvancedOpened(false)
+        }, 300)
     }
 
     const { mutate: updateNode, isPending: isUpdateNodePending } = useUpdateNode({
         mutationFns: {
             onSuccess: async () => {
-                handleClose()
+                handleClose(true)
             }
         }
     })
@@ -97,6 +103,8 @@ export const EditNodeModalConnectorWidget = () => {
             variables: {
                 ...values,
                 uuid: node.uuid,
+                name: values.name?.trim(),
+                address: values.address?.trim(),
                 trafficLimitBytes: gbToBytesUtil(values.trafficLimitBytes)
             }
         })
@@ -105,7 +113,8 @@ export const EditNodeModalConnectorWidget = () => {
     return (
         <Modal
             centered
-            onClose={handleClose}
+            onClose={() => actions.toggleEditModal(false)}
+            onExitTransitionEnd={() => handleClose}
             opened={isModalOpen}
             size="900px"
             title={
@@ -119,7 +128,7 @@ export const EditNodeModalConnectorWidget = () => {
                 advancedOpened={advancedOpened}
                 fetchedNode={fetchedNode}
                 form={form}
-                handleClose={handleClose}
+                handleClose={() => handleClose(true)}
                 handleSubmit={handleSubmit}
                 inbounds={inbounds}
                 isUpdateNodePending={isUpdateNodePending}

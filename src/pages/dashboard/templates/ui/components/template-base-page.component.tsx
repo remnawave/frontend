@@ -27,7 +27,11 @@ export const TemplateBasePageComponent = (props: Props) => {
     return (
         <Page title={title}>
             <PageHeader
-                breadcrumbs={[{ label: t('constants.dashboard'), href: ROUTES.DASHBOARD.HOME }]}
+                breadcrumbs={[
+                    { label: t('constants.dashboard'), href: ROUTES.DASHBOARD.HOME },
+                    { label: t('constants.templates') },
+                    { label: title }
+                ]}
                 title={title}
             />
             <SubscriptionTemplateEditorWidget

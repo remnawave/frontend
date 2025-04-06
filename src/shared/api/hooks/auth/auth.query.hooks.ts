@@ -15,7 +15,7 @@ export const useGetAuthStatus = createGetQueryHook({
     responseSchema: GetStatusCommand.ResponseSchema,
     getQueryKey: () => authQueryKeys.getAuthStatus.queryKey,
     rQueryParams: {
-        refetchOnMount: true
+        refetchOnMount: false
     },
     errorHandler: (error) => {
         notifications.show({

@@ -174,6 +174,65 @@ export const CreateUserModalWidget = () => {
                                 required
                                 valueFormat="MMMM D, YYYY - HH:mm"
                                 {...form.getInputProps('expireAt')}
+                                description={
+                                    <Group component="span" gap="xs" mb="xs" mt="xs">
+                                        <Button
+                                            component="span"
+                                            onClick={() => {
+                                                const currentDate =
+                                                    form.values.expireAt || new Date()
+                                                const newDate = new Date(currentDate)
+                                                newDate.setMonth(newDate.getMonth() + 1)
+                                                form.setFieldValue('expireAt', newDate)
+                                            }}
+                                            size="compact-xs"
+                                            variant="light"
+                                        >
+                                            {t('create-user-modal.widget.1-month')}
+                                        </Button>
+                                        <Button
+                                            component="span"
+                                            onClick={() => {
+                                                const currentDate =
+                                                    form.values.expireAt || new Date()
+                                                const newDate = new Date(currentDate)
+                                                newDate.setMonth(newDate.getMonth() + 3)
+                                                form.setFieldValue('expireAt', newDate)
+                                            }}
+                                            size="compact-xs"
+                                            variant="light"
+                                        >
+                                            {t('create-user-modal.widget.3-months')}
+                                        </Button>
+                                        <Button
+                                            component="span"
+                                            onClick={() => {
+                                                const currentDate =
+                                                    form.values.expireAt || new Date()
+                                                const newDate = new Date(currentDate)
+                                                newDate.setFullYear(newDate.getFullYear() + 1)
+                                                form.setFieldValue('expireAt', newDate)
+                                            }}
+                                            size="compact-xs"
+                                            variant="light"
+                                        >
+                                            {t('create-user-modal.widget.1-year')}
+                                        </Button>
+                                        <Button
+                                            component="span"
+                                            onClick={() => {
+                                                const newDate = new Date()
+                                                newDate.setFullYear(2099)
+                                                form.setFieldValue('expireAt', newDate)
+                                            }}
+                                            size="compact-xs"
+                                            variant="light"
+                                        >
+                                            {t('create-user-modal.widget.2099-year')}
+                                        </Button>
+                                    </Group>
+                                }
+                                highlightToday
                                 leftSection={<PiCalendarDuotone size="1rem" />}
                             />
 
@@ -195,9 +254,11 @@ export const CreateUserModalWidget = () => {
                         <Stack gap="md" style={{ flex: '1 1 350px' }}>
                             <NumberInput
                                 allowDecimal={false}
+                                allowNegative={false}
                                 description={t(
                                     'create-user-modal.widget.telegram-id-of-a-user-in-telegram'
                                 )}
+                                hideControls
                                 key={form.key('telegramId')}
                                 label="Telegram ID"
                                 leftSection={<PiTelegramLogoDuotone size="1rem" />}

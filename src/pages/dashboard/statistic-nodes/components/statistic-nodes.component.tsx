@@ -79,6 +79,8 @@ export const StatisticNodesPage = () => {
             <PageHeader
                 breadcrumbs={[
                     { label: t('constants.dashboard'), href: ROUTES.DASHBOARD.HOME },
+                    { label: t('constants.management') },
+                    { label: t('constants.nodes'), href: ROUTES.DASHBOARD.MANAGEMENT.NODES },
                     { label: t('constants.nodes-statistics') }
                 ]}
                 title={t('constants.nodes-statistics')}

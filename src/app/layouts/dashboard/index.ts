@@ -1,2 +1,1 @@
-export * from './root/dashboard.layout'
-export * from './sidebar/sidebar.layout'
+export * from './main-layout/main.layout'

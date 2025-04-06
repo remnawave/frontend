@@ -2,38 +2,49 @@
 import {
     MantineReactTable,
     MRT_ColumnFilterFnsState,
-    MRT_ColumnFiltersState,
     MRT_PaginationState,
     MRT_SortingState,
+    MRT_TableOptions,
     useMantineReactTable
 } from 'mantine-react-table'
+import { useCallback, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useState } from 'react'
 
 import {
     useUsersTableStoreActions,
+    useUsersTableStoreColumnFilter,
     useUsersTableStoreColumnPinning,
     useUsersTableStoreColumnVisibility,
     useUsersTableStoreShowColumnFilters
 } from '@entities/dashboard/users/users-table-store'
+import {
+    useBulkUsersActionsStoreActions,
+    useBulkUsersActionsStoreTableSelection
+} from '@entities/dashboard/users/bulk-users-actions-store'
+import { UsersTableSelectionFeature } from '@features/ui/dashboard/users/users-table-selection/users-table-selection.feature'
 import { useUserTableColumns } from '@features/dashboard/users/users-table/model/use-table-columns'
 import { UserActionGroupFeature } from '@features/dashboard/users/users-action-group'
 import { UserActionsFeature } from '@features/ui/dashboard/users/user-actions'
+import { User } from '@entities/dashboard/users/models'
 import { DataTableShared } from '@shared/ui/table'
 import { useGetUsersV2 } from '@shared/api/hooks'
+import { sToMs } from '@shared/utils/time-utils'
 
-import { customIcons } from './constants'
+import { BulkUserActionsDrawerWidget } from '../bulk-user-actions-drawer/bulk-user-actions-drawer.widget'
 
 export function UserTableWidget() {
     const { t } = useTranslation()
 
     const tableColumns = useUserTableColumns()
+    const bulkUsersActionsStoreActions = useBulkUsersActionsStoreActions()
+    const tableSelection = useBulkUsersActionsStoreTableSelection()
 
     const actions = useUsersTableStoreActions()
 
     const columnVisibility = useUsersTableStoreColumnVisibility()
     const columnPinning = useUsersTableStoreColumnPinning()
     const showColumnFilters = useUsersTableStoreShowColumnFilters()
+    const columnFilter = useUsersTableStoreColumnFilter()
 
     const [sorting, setSorting] = useState<MRT_SortingState>([])
 
@@ -42,7 +53,6 @@ export function UserTableWidget() {
         pageSize: 25
     })
 
-    const [columnFilters, setColumnFilters] = useState<MRT_ColumnFiltersState>([])
     const [columnFilterFns, setColumnFilterFns] = useState<MRT_ColumnFilterFnsState>(
         Object.fromEntries(tableColumns.map(({ accessorKey }) => [accessorKey, 'contains']))
     )
@@ -50,23 +60,30 @@ export function UserTableWidget() {
     const params = {
         start: pagination.pageIndex * pagination.pageSize,
         size: pagination.pageSize,
-        filters: columnFilters,
+        filters: columnFilter,
         filterModes: columnFilterFns,
         sorting
     }
 
-    const { data, isError, isFetching, isLoading, refetch } = useGetUsersV2({
-        query: params
+    const {
+        data: usersResponse,
+        isError,
+        isFetching,
+        isLoading,
+        refetch
+    } = useGetUsersV2({
+        query: params,
+        rQueryParams: {
+            // enabled: bulkUsersActionsStoreActions.getUuidLength() === 0,
+            refetchInterval: bulkUsersActionsStoreActions.getUuidLength() === 0 ? sToMs(25) : false
+        }
     })
 
-    const { users, total } = data ?? {}
-
-    const fetchedUsers = users ?? []
-    const totalRowCount = total ?? 0
+    const filteredData = useMemo(() => usersResponse, [usersResponse])
 
     const table = useMantineReactTable({
         columns: tableColumns,
-        data: fetchedUsers,
+        data: filteredData?.users ?? [],
         enableFullScreenToggle: true,
         enableSortingRemoval: true,
         enableGlobalFilter: false,
@@ -90,7 +107,7 @@ export function UserTableWidget() {
         //     rowsPerPageOptions: ['25', '50', '100']
         // },
 
-        icons: customIcons,
+        // icons: customIcons,
         enableColumnResizing: true,
 
         /* prettier-ignore */
@@ -100,22 +117,44 @@ export function UserTableWidget() {
         } : undefined,
 
         onColumnFilterFnsChange: setColumnFilterFns,
-        onColumnFiltersChange: setColumnFilters,
+        onColumnFiltersChange: actions.setColumnFilter,
         onPaginationChange: setPagination,
         onSortingChange: setSorting,
         onColumnPinningChange: actions.setColumnPinning,
         onColumnVisibilityChange: actions.setColumnVisibility,
         onShowColumnFiltersChange: actions.setShowColumnFilters,
-
         mantinePaperProps: {
             style: { '--paper-radius': 'var(--mantine-radius-xs)' },
             withBorder: false
         },
-        rowCount: totalRowCount,
+        rowCount: filteredData?.total ?? 0,
+        enableRowSelection: true,
+        mantineSelectCheckboxProps: {
+            size: 'md',
+            color: 'cyan',
+            variant: 'outline'
+        },
+        mantineSelectAllCheckboxProps: {
+            size: 'md',
+            color: 'cyan',
+            variant: 'outline'
+        },
         enableColumnPinning: true,
+        positionToolbarAlertBanner: 'top',
+        renderToolbarAlertBannerContent: useCallback<
+            Required<MRT_TableOptions<User>>['renderToolbarAlertBannerContent']
+        >(({ table }) => {
+            return (
+                <UsersTableSelectionFeature
+                    resetRowSelection={table.resetRowSelection}
+                    toggleAllPageRowsSelected={table.toggleAllPageRowsSelected}
+                />
+            )
+        }, []),
+        selectAllMode: 'page',
         state: {
             columnFilterFns,
-            columnFilters,
+            columnFilters: columnFilter,
             isLoading,
             pagination,
             showAlertBanner: isError,
@@ -123,18 +162,27 @@ export function UserTableWidget() {
             showColumnFilters,
             sorting,
             columnVisibility,
-            columnPinning
+            columnPinning,
+            rowSelection: tableSelection
         },
-
         enableRowActions: true,
-        renderRowActions: ({ row }) => (
-            <UserActionsFeature
-                subscriptionUrl={row.original.subscriptionUrl}
-                userUuid={row.original.uuid}
-            />
+        onRowSelectionChange: bulkUsersActionsStoreActions.setTableSelection,
+        getRowId: useCallback<Required<MRT_TableOptions<User>>['getRowId']>(
+            (originalRow) => originalRow.uuid,
+            []
         ),
-
-        displayColumnDefOptions: { 'mrt-row-actions': { size: 150 } }
+        renderRowActions: useCallback<Required<MRT_TableOptions<User>>['renderRowActions']>(
+            ({ row }) => (
+                <UserActionsFeature
+                    subscriptionUrl={row.original.subscriptionUrl}
+                    userUuid={row.original.uuid}
+                />
+            ),
+            []
+        ),
+        displayColumnDefOptions: {
+            'mrt-row-actions': { size: 140 }
+        }
     })
 
     return (
@@ -150,6 +198,8 @@ export function UserTableWidget() {
             <DataTableShared.Content>
                 <MantineReactTable table={table} />
             </DataTableShared.Content>
+
+            <BulkUserActionsDrawerWidget resetRowSelection={table.resetRowSelection} />
         </DataTableShared.Container>
     )
 }

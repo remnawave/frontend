@@ -29,7 +29,7 @@ export const HeaderActionButtonsFeature = (props: IProps) => {
     }
 
     return (
-        <Group>
+        <Group grow preventGrowOverflow={false} wrap="wrap">
             <Select
                 data={[
                     { value: 'ALL', label: t('header-action-buttons.feature.all') },

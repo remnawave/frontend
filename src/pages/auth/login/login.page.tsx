@@ -1,36 +1,48 @@
-import { Badge, Box, Group, Loader, Stack, Text, Title } from '@mantine/core'
+import { Badge, Box, Group, Stack, Text, Title } from '@mantine/core'
+import { useLayoutEffect } from 'react'
 
 import { useGetAuthStatus } from '@shared/api/hooks/auth/auth.query.hooks'
 import { RegisterFormFeature } from '@features/auth/register-form'
 import { LoginFormFeature } from '@features/auth/login-form'
 import { UnderlineShape } from '@shared/ui/underline-shape'
+import { clearQueryClient } from '@shared/api/query-client'
+import { LoadingScreen } from '@shared/ui'
 import { Logo } from '@shared/ui/logo'
 import { Page } from '@shared/ui/page'
 
 export const LoginPage = () => {
-    const { data: authStatus, isLoading } = useGetAuthStatus()
+    const { data: authStatus, isFetching } = useGetAuthStatus()
 
-    if (isLoading) {
-        return <Loader />
+    useLayoutEffect(() => {
+        clearQueryClient()
+    }, [])
+
+    if (isFetching) {
+        return <LoadingScreen height="60vh" />
     }
 
     return (
         <Page title="Login">
             <Stack align="center" gap="xl">
-                <Group align="center" justify="center">
+                <Group align="center" gap={4} justify="center">
                     <Logo c="cyan" w="3rem" />
-                    <Title order={1}>
-                        <Text component="span" fw="inherit" fz="inherit" pos="relative">
-                            Remnawave
-                            <UnderlineShape
-                                bottom="-1rem"
-                                c="cyan"
-                                h="0.625rem"
-                                left="0"
-                                pos="absolute"
-                                w="7.852rem"
-                            />
+                    <Title order={1} pos="relative">
+                        <Text c="cyan" component="span" fw="inherit" fz="inherit" pos="relative">
+                            Remna
                         </Text>
+                        <Text c="white" component="span" fw="inherit" fz="inherit" pos="relative">
+                            wave
+                        </Text>
+
+                        <UnderlineShape
+                            bottom="-1rem"
+                            c="cyan"
+                            h="0.625rem"
+                            left="0"
+                            pos="absolute"
+                            style={{ zIndex: 1 }}
+                            w="7.852rem"
+                        />
                     </Title>
                 </Group>
 

@@ -6,7 +6,6 @@ import { useMemo } from 'react'
 import dayjs from 'dayjs'
 
 import { ConnectedNodeColumnEntity } from '@entities/dashboard/users/ui/table-columns/connected-node'
-import { ShortUuidColumnEntity } from '@entities/dashboard/users/ui/table-columns/short-uuid'
 import { UsernameColumnEntity } from '@entities/dashboard/users/ui/table-columns/username'
 import { StatusColumnEntity } from '@entities/dashboard/users/ui/table-columns/status'
 import { DataUsageColumnEntity } from '@entities/dashboard/users/ui'
@@ -15,7 +14,7 @@ import { prettyBytesToAnyUtil } from '@shared/utils/bytes'
 export const useUserTableColumns = () => {
     const { t } = useTranslation()
 
-    return useMemo<MRT_ColumnDef<GetAllUsersV2Command.Response['response']['users'][0]>[]>(
+    return useMemo<MRT_ColumnDef<GetAllUsersV2Command.Response['response']['users'][number]>[]>(
         () => [
             {
                 accessorKey: 'username',
@@ -24,6 +23,7 @@ export const useUserTableColumns = () => {
                 mantineTableBodyCellProps: {
                     align: 'left'
                 },
+                enableClickToCopy: false,
                 minSize: 150,
                 maxSize: 300,
                 size: 220
@@ -38,6 +38,7 @@ export const useUserTableColumns = () => {
                 mantineFilterSelectProps: {
                     data: ['ACTIVE', 'DISABLED', 'LIMITED', 'EXPIRED']
                 },
+                enableClickToCopy: false,
                 mantineTableBodyCellProps: {
                     align: 'center'
                 }
@@ -55,6 +56,8 @@ export const useUserTableColumns = () => {
                 enableColumnFilterModes: false,
                 enableColumnFilter: false,
                 enableSorting: false,
+                enableClickToCopy: false,
+
                 mantineTableBodyCellProps: {
                     align: 'center'
                 }
@@ -64,7 +67,8 @@ export const useUserTableColumns = () => {
                 header: t('use-table-columns.expire-at'),
                 Cell: ({ cell }) => <StatusColumnEntity need="date" user={cell.row.original} />,
                 enableColumnFilterModes: false,
-                enableColumnFilter: false
+                enableColumnFilter: false,
+                enableClickToCopy: false
             },
             {
                 accessorKey: 'usedTrafficBytes',
@@ -76,17 +80,17 @@ export const useUserTableColumns = () => {
                 minSize: 150,
                 enableColumnFilterModes: false,
                 enableColumnFilter: false,
+                enableClickToCopy: false,
+
                 maxSize: 400,
                 size: 300
             },
             {
                 accessorKey: 'shortUuid',
                 header: t('use-table-columns.sub-link'),
-
-                Cell: ({ cell }) => <ShortUuidColumnEntity user={cell.row.original} />,
-                minSize: 140,
-                maxSize: 400,
-                size: 140,
+                accessorFn: (originalRow) => originalRow.shortUuid,
+                minSize: 400,
+                maxSize: 800,
 
                 mantineTableBodyCellProps: {
                     align: 'center'
@@ -139,6 +143,8 @@ export const useUserTableColumns = () => {
                 minSize: 170,
                 maxSize: 400,
                 size: 170,
+                enableClickToCopy: false,
+
                 enableColumnFilterModes: false,
                 enableColumnFilter: false,
                 mantineTableBodyCellProps: {
@@ -155,6 +161,8 @@ export const useUserTableColumns = () => {
                 minSize: 170,
                 maxSize: 400,
                 size: 170,
+                enableClickToCopy: false,
+
                 enableColumnFilterModes: false,
                 enableColumnFilter: false,
                 mantineTableBodyCellProps: {
@@ -180,6 +188,8 @@ export const useUserTableColumns = () => {
                 minSize: 170,
                 maxSize: 300,
                 size: 170,
+                enableClickToCopy: false,
+
                 enableColumnFilterModes: false,
                 enableColumnFilter: false,
                 mantineTableBodyCellProps: {
@@ -196,6 +206,8 @@ export const useUserTableColumns = () => {
                 minSize: 170,
                 maxSize: 170,
                 size: 170,
+                enableClickToCopy: false,
+
                 enableColumnFilterModes: false,
                 enableColumnFilter: false,
                 mantineTableBodyCellProps: {
@@ -210,6 +222,8 @@ export const useUserTableColumns = () => {
                 minSize: 170,
                 maxSize: 170,
                 size: 170,
+                enableClickToCopy: false,
+
                 enableColumnFilterModes: false,
                 enableColumnFilter: false,
                 mantineTableBodyCellProps: {

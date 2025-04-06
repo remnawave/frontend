@@ -49,6 +49,8 @@ export const CreateNodeModalWidget = () => {
         createNode({
             variables: {
                 ...values,
+                name: values.name.trim(),
+                address: values.address.trim(),
                 trafficLimitBytes: gbToBytesUtil(values.trafficLimitBytes)
             }
         })

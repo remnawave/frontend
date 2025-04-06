@@ -9,12 +9,8 @@ import { QueryKeys, useGetHosts, useGetInbounds } from '@shared/api/hooks'
 import { queryClient } from '@shared/api'
 
 export function HostsPageConnector() {
-    const { data: inbounds } = useGetInbounds()
-    const {
-        data: hosts,
-
-        isLoading: isHostsLoading
-    } = useGetHosts()
+    const { data: inbounds, isLoading: isInboundsLoading } = useGetInbounds()
+    const { data: hosts, isLoading: isHostsLoading } = useGetHosts()
 
     const isCreateModalOpen = useHostsStoreCreateModalIsOpen()
     const isEditModalOpen = useHostsStoreEditModalIsOpen()
@@ -26,5 +22,12 @@ export function HostsPageConnector() {
         })()
     }, [isCreateModalOpen, isEditModalOpen])
 
-    return <HostsPageComponent hosts={hosts} inbounds={inbounds} isHostsLoading={isHostsLoading} />
+    return (
+        <HostsPageComponent
+            hosts={hosts}
+            inbounds={inbounds}
+            isHostsLoading={isHostsLoading}
+            isInboundsLoading={isInboundsLoading}
+        />
+    )
 }

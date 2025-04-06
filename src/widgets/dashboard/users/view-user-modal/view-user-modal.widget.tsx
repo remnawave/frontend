@@ -11,10 +11,12 @@ import {
     Progress,
     Select,
     SimpleGrid,
+    Skeleton,
     Stack,
     Text,
     Textarea,
-    TextInput
+    TextInput,
+    Tooltip
 } from '@mantine/core'
 import {
     PiCalendarDuotone,
@@ -42,14 +44,15 @@ import {
     useUserModalStoreIsModalOpen,
     useUserModalStoreUserUuid
 } from '@entities/dashboard/user-modal-store/user-modal-store'
+import { GetUserSubscriptionLinksFeature } from '@features/ui/dashboard/users/get-user-subscription-links'
 import { ToggleUserStatusButtonFeature } from '@features/ui/dashboard/users/toggle-user-status-button'
 import { RevokeSubscriptionUserFeature } from '@features/ui/dashboard/users/revoke-subscription-user'
 import { useGetInbounds, useGetUserByUuid, usersQueryKeys, useUpdateUser } from '@shared/api/hooks'
 import { ResetUsageUserFeature } from '@features/ui/dashboard/users/reset-usage-user'
 import { bytesToGbUtil, gbToBytesUtil, prettyBytesUtil } from '@shared/utils/bytes'
+import { GetUserUsageFeature } from '@features/ui/dashboard/users/get-user-usage'
 import { DeleteUserFeature } from '@features/ui/dashboard/users/delete-user'
 import { UserStatusBadge } from '@widgets/dashboard/users/user-status-badge'
-import { LoaderModalShared } from '@shared/ui/loader-modal'
 import { resetDataStrategy } from '@shared/constants'
 import { queryClient } from '@shared/api'
 
@@ -65,6 +68,16 @@ export const ViewUserModal = () => {
 
     const { data: inbounds } = useGetInbounds()
 
+    const form = useForm<IFormValues>({
+        name: 'edit-user-form',
+        mode: 'uncontrolled',
+        validate: zodResolver(
+            UpdateUserCommand.RequestSchema.omit({ expireAt: true, email: true, telegramId: true })
+        )
+    })
+
+    const isQueryEnabled = !!selectedUser && !form.isTouched()
+
     const {
         data: user,
         isLoading: isUserLoading,
@@ -74,14 +87,8 @@ export const ViewUserModal = () => {
             uuid: selectedUser ?? ''
         },
         rQueryParams: {
-            enabled: !!selectedUser
+            enabled: isQueryEnabled
         }
-    })
-
-    const form = useForm<IFormValues>({
-        name: 'edit-user-form',
-        mode: 'uncontrolled',
-        validate: zodResolver(UpdateUserCommand.RequestSchema.omit({ expireAt: true }))
     })
 
     const {
@@ -134,20 +141,23 @@ export const ViewUserModal = () => {
                 expireAt: dayjs(values.expireAt).toISOString(),
                 activeUserInbounds: values.activeUserInbounds,
                 description: values.description,
-                telegramId: values.telegramId,
-                email: values.email
+                // @ts-expect-error - TODO: fix ZOD schema
+                telegramId: values.telegramId === '' ? null : values.telegramId,
+                email: values.email === '' ? null : values.email
             }
         })
     })
 
-    const handleClose = () => {
-        actions.changeModalState(false)
+    const handleClose = (closeModal: boolean = false) => {
+        if (closeModal) {
+            actions.changeModalState(false)
+        }
 
-        setTimeout(() => {
-            form.reset()
-            form.resetDirty()
-            form.resetTouched()
-        }, 300)
+        actions.clearModalState()
+
+        form.reset()
+        form.resetDirty()
+        form.resetTouched()
     }
 
     const userSubscriptionUrlMemo = useMemo(
@@ -158,13 +168,51 @@ export const ViewUserModal = () => {
     return (
         <Modal
             centered
-            onClose={handleClose}
+            onClose={() => actions.changeModalState(false)}
+            onExitTransitionEnd={handleClose}
             opened={isViewUserModalOpen}
             size="900px"
             title={t('view-user-modal.widget.edit-user')}
         >
             {isUserLoading ? (
-                <LoaderModalShared h="400" text={t('view-user-modal.widget.loading-user-data')} />
+                <Stack>
+                    <Group align="flex-start" gap="md" grow={false} wrap="wrap">
+                        <Stack gap="md" style={{ flex: '1 1 350px' }}>
+                            <Group gap="xs" justify="space-between" w="100%">
+                                <Skeleton height={26} width={150} />
+                                <Skeleton height={26} width={80} />
+                            </Group>
+                            <Skeleton height={80} />
+                            <Skeleton height={80} />
+                            <Skeleton height={80} />
+                            <Skeleton height={80} />
+                            <Skeleton height={80} />
+                            <Skeleton height={80} />
+                            <Skeleton height={80} />
+                        </Stack>
+
+                        <Divider
+                            className="responsive-divider"
+                            orientation="vertical"
+                            visibleFrom="md"
+                        />
+
+                        <Stack gap="md" style={{ flex: '1 1 350px' }}>
+                            <Skeleton height={24} width={150} />
+                            <Skeleton height={80} />
+                            <Skeleton height={36} />
+                            <Skeleton height={80} />
+                            <Skeleton height={102} />
+                            <Skeleton height={102} />
+                            <Skeleton height={180} />
+                        </Stack>
+                    </Group>
+
+                    <Group justify="space-between" mt={0}>
+                        <Skeleton height={40} width={150} />
+                        <Skeleton height={40} width={250} />
+                    </Group>
+                </Stack>
             ) : (
                 <form key="view-user-form" onSubmit={handleSubmit}>
                     <Group align="flex-start" gap="md" grow={false} wrap="wrap">
@@ -271,22 +319,14 @@ export const ViewUserModal = () => {
                                 }
                             />
 
-                            <TextInput
-                                disabled
-                                label={t('view-user-modal.widget.last-traffic-reset-at')}
-                                leftSection={<PiCalendarDuotone size="1rem" />}
-                                value={
-                                    user?.lastTrafficResetAt
-                                        ? dayjs(user.lastTrafficResetAt).format('DD/MM/YYYY HH:mm')
-                                        : t('view-user-modal.widget.never')
-                                }
-                            />
-
                             <NumberInput
                                 allowDecimal={false}
+                                allowNegative={false}
+                                hideControls
                                 key={form.key('telegramId')}
                                 label="Telegram ID"
                                 leftSection={<PiTelegramLogoDuotone size="1rem" />}
+                                placeholder="Enter user's Telegram ID (optional)"
                                 {...form.getInputProps('telegramId')}
                             />
 
@@ -294,6 +334,7 @@ export const ViewUserModal = () => {
                                 key={form.key('email')}
                                 label="Email"
                                 leftSection={<PiEnvelopeDuotone size="1rem" />}
+                                placeholder="Enter user's email (optional)"
                                 {...form.getInputProps('email')}
                             />
 
@@ -368,11 +409,70 @@ export const ViewUserModal = () => {
                             />
 
                             <DateTimePicker
+                                highlightToday
                                 key={form.key('expireAt')}
                                 label={t('create-user-modal.widget.expiry-date')}
                                 minDate={new Date()}
                                 valueFormat="MMMM D, YYYY - HH:mm"
                                 {...form.getInputProps('expireAt')}
+                                description={
+                                    <Group component="span" gap="xs" mb="xs" mt="xs">
+                                        <Button
+                                            component="span"
+                                            onClick={() => {
+                                                const currentDate =
+                                                    form.values.expireAt || new Date()
+                                                const newDate = new Date(currentDate)
+                                                newDate.setMonth(newDate.getMonth() + 1)
+                                                form.setFieldValue('expireAt', newDate)
+                                            }}
+                                            size="compact-xs"
+                                            variant="light"
+                                        >
+                                            {t('create-user-modal.widget.1-month')}
+                                        </Button>
+                                        <Button
+                                            component="span"
+                                            onClick={() => {
+                                                const currentDate =
+                                                    form.values.expireAt || new Date()
+                                                const newDate = new Date(currentDate)
+                                                newDate.setMonth(newDate.getMonth() + 3)
+                                                form.setFieldValue('expireAt', newDate)
+                                            }}
+                                            size="compact-xs"
+                                            variant="light"
+                                        >
+                                            {t('create-user-modal.widget.3-months')}
+                                        </Button>
+                                        <Button
+                                            component="span"
+                                            onClick={() => {
+                                                const currentDate =
+                                                    form.values.expireAt || new Date()
+                                                const newDate = new Date(currentDate)
+                                                newDate.setFullYear(newDate.getFullYear() + 1)
+                                                form.setFieldValue('expireAt', newDate)
+                                            }}
+                                            size="compact-xs"
+                                            variant="light"
+                                        >
+                                            {t('create-user-modal.widget.1-year')}
+                                        </Button>
+                                        <Button
+                                            component="span"
+                                            onClick={() => {
+                                                const newDate = new Date()
+                                                newDate.setFullYear(2099)
+                                                form.setFieldValue('expireAt', newDate)
+                                            }}
+                                            size="compact-xs"
+                                            variant="light"
+                                        >
+                                            {t('create-user-modal.widget.2099-year')}
+                                        </Button>
+                                    </Group>
+                                }
                                 leftSection={<PiCalendarDuotone size="1rem" />}
                             />
 
@@ -408,45 +508,55 @@ export const ViewUserModal = () => {
                                 <DeleteUserFeature userUuid={user?.uuid ?? ''} />
                                 <ResetUsageUserFeature userUuid={user?.uuid ?? ''} />
                                 <RevokeSubscriptionUserFeature userUuid={user?.uuid ?? ''} />
+                                {user && <ToggleUserStatusButtonFeature user={user} />}
                             </ActionIcon.Group>
                         </Group>
-                        <Group>
-                            <Button
-                                leftSection={<PiQrCodeDuotone size="1rem" />}
-                                onClick={() => {
-                                    const subscriptionQrCode = renderSVG(
-                                        user?.subscriptionUrl ?? '',
-                                        {
-                                            whiteColor: '#161B22',
-                                            blackColor: '#3CC9DB'
-                                        }
-                                    )
-                                    modals.open({
-                                        centered: true,
-                                        title: t('view-user-modal.widget.subscription-qr-code'),
-                                        children: (
-                                            <>
-                                                <div
-                                                    dangerouslySetInnerHTML={{
-                                                        __html: subscriptionQrCode
-                                                    }}
-                                                />
-                                                <Button
-                                                    fullWidth
-                                                    mt="md"
-                                                    onClick={() => modals.closeAll()}
-                                                >
-                                                    {t('view-user-modal.widget.close')}
-                                                </Button>
-                                            </>
-                                        )
-                                    })
-                                }}
-                                size="md"
-                            >
-                                {t('view-user-modal.widget.show-qr')}
-                            </Button>
-                            {user && <ToggleUserStatusButtonFeature user={user} />}
+                        <Group grow preventGrowOverflow={false} wrap="wrap">
+                            <ActionIcon.Group>
+                                <Tooltip label={t('view-user-modal.widget.subscription-qr-code')}>
+                                    <ActionIcon
+                                        color="cyan"
+                                        onClick={() => {
+                                            const subscriptionQrCode = renderSVG(
+                                                user?.subscriptionUrl ?? '',
+                                                {
+                                                    whiteColor: '#161B22',
+                                                    blackColor: '#3CC9DB'
+                                                }
+                                            )
+                                            modals.open({
+                                                centered: true,
+                                                title: t(
+                                                    'view-user-modal.widget.subscription-qr-code'
+                                                ),
+                                                children: (
+                                                    <>
+                                                        <div
+                                                            dangerouslySetInnerHTML={{
+                                                                __html: subscriptionQrCode
+                                                            }}
+                                                        />
+                                                        <Button
+                                                            fullWidth
+                                                            mt="md"
+                                                            onClick={() => modals.closeAll()}
+                                                        >
+                                                            {t('view-user-modal.widget.close')}
+                                                        </Button>
+                                                    </>
+                                                )
+                                            })
+                                        }}
+                                        size="xl"
+                                    >
+                                        <PiQrCodeDuotone size="1.5rem" />
+                                    </ActionIcon>
+                                </Tooltip>
+                                {user && (
+                                    <GetUserSubscriptionLinksFeature shortUuid={user.shortUuid} />
+                                )}
+                            </ActionIcon.Group>
+                            {user && <GetUserUsageFeature userUuid={user.uuid} />}
                             <Button
                                 color="blue"
                                 leftSection={<PiFloppyDiskDuotone size="1rem" />}

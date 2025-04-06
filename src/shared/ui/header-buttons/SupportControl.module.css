@@ -1,0 +1,25 @@
+.support {
+    @mixin light {
+        color: var(--mantine-color-red-8);
+    }
+
+    @mixin dark {
+        color: var(--mantine-color-white);
+        background-color: var(--mantine-color-red-9);
+        border-color: var(--mantine-color-red-9);
+
+        @mixin hover {
+            border-color: var(--mantine-color-red-8);
+
+            svg {
+                color: var(--mantine-color-red-8) !important;
+            }
+        }
+    }
+
+    svg {
+        color: var(--mantine-color-white);
+        width: rem(22);
+        height: rem(22);
+    }
+}

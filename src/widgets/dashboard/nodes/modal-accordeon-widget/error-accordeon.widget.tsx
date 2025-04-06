@@ -12,7 +12,7 @@ export const ModalAccordionWidget = (props: IProps) => {
 
     const [localStatusMessage, setLocalStatusMessage] = useState<null | string>(null)
 
-    const accordionValue = localStatusMessage ? 'error' : 'none'
+    let accordionValue = localStatusMessage ? 'error' : 'none'
 
     useEffect(() => {
         if (fetchedNode) {
@@ -22,19 +22,27 @@ export const ModalAccordionWidget = (props: IProps) => {
         }
     }, [fetchedNode])
 
+    if (!fetchedNode && !node) {
+        accordionValue = 'info'
+    }
+
     return (
-        <Accordion defaultValue={accordionValue} key={node?.uuid} radius="md" variant="contained">
+        <Accordion defaultValue={accordionValue} key={node?.uuid} radius="md" variant="separated">
             <Accordion.Item value="info">
-                <Accordion.Control icon={<PiInfo color="gray" size={'1.50rem'} />}>
+                <Accordion.Control
+                    icon={<PiInfo color="var(--mantine-color-red-7)" size={'1.50rem'} />}
+                >
                     {t('error-accordeon.widget.important-note')}
                 </Accordion.Control>
                 <Accordion.Panel>
                     <Stack gap={'0'}>
                         <Text>
-                            {t('error-accordeon.widget.important-note-description')}{' '}
-                            <Code color="var(--mantine-color-blue-light)">.env</Code> value.
+                            {t('error-accordeon.widget.important-note-description')}
+                            <Code color="var(--mantine-color-blue-light)">.env</Code>
+                            {t('error-accordeon.widget.important-note-description-value')}
+                            <Code color="var(--mantine-color-blue-light)">.env</Code>
                         </Text>
-                        <Group justify="flex-end">
+                        <Group justify="flex-end" mt="md">
                             <CopyButton value={`SSL_CERT="${pubKey?.pubKey.trimEnd()}"`}>
                                 {({ copied, copy }) => (
                                     <ActionIcon
@@ -59,7 +67,7 @@ export const ModalAccordionWidget = (props: IProps) => {
                         <Text fw={600}>{t('error-accordeon.widget.last-error-message')}</Text>
                     </Accordion.Control>
                     <Accordion.Panel>
-                        <Code block>{localStatusMessage}</Code>
+                        <Code color="var(--mantine-color-red-light)">{localStatusMessage}</Code>
                     </Accordion.Panel>
                 </Accordion.Item>
             )}

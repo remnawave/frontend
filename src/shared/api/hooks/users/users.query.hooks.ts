@@ -1,4 +1,9 @@
-import { GetAllUsersV2Command, GetUserByUuidCommand } from '@remnawave/backend-contract'
+import {
+    GetAllUsersV2Command,
+    GetSubscriptionInfoByShortUuidCommand,
+    GetUserByUuidCommand,
+    GetUserUsageByRangeCommand
+} from '@remnawave/backend-contract'
 import { createQueryKeys } from '@lukemorales/query-key-factory'
 import { keepPreviousData } from '@tanstack/react-query'
 import { notifications } from '@mantine/notifications'
@@ -12,6 +17,14 @@ export const usersQueryKeys = createQueryKeys('users', {
     }),
     getUserByUuid: (route: GetUserByUuidCommand.Request) => ({
         queryKey: [route]
+    }),
+    getSubscriptionInfoByShortUuid: (route: GetSubscriptionInfoByShortUuidCommand.Request) => ({
+        queryKey: [route]
+    }),
+    getUserUsageByRange: (
+        query: GetUserUsageByRangeCommand.Request & GetUserUsageByRangeCommand.RequestQuery
+    ) => ({
+        queryKey: [query]
     })
 })
 
@@ -47,6 +60,42 @@ export const useGetUsersV2 = createGetQueryHook({
     errorHandler: (error) => {
         notifications.show({
             title: `${GetAllUsersV2Command.url}`,
+            message: error instanceof Error ? error.message : `Request failed with unknown error.`,
+            color: 'red'
+        })
+    }
+})
+
+export const useGetSubscriptionInfoByShortUuid = createGetQueryHook({
+    endpoint: GetSubscriptionInfoByShortUuidCommand.TSQ_url,
+    responseSchema: GetSubscriptionInfoByShortUuidCommand.ResponseSchema,
+    routeParamsSchema: GetSubscriptionInfoByShortUuidCommand.RequestSchema,
+    getQueryKey: ({ route }) => usersQueryKeys.getSubscriptionInfoByShortUuid(route!).queryKey,
+    rQueryParams: {
+        staleTime: sToMs(40)
+    },
+    errorHandler: (error) => {
+        notifications.show({
+            title: `${GetSubscriptionInfoByShortUuidCommand.url}`,
+            message: error instanceof Error ? error.message : `Request failed with unknown error.`,
+            color: 'red'
+        })
+    }
+})
+
+export const useGetUserUsageByRange = createGetQueryHook({
+    endpoint: GetUserUsageByRangeCommand.TSQ_url,
+    responseSchema: GetUserUsageByRangeCommand.ResponseSchema,
+    requestQuerySchema: GetUserUsageByRangeCommand.RequestQuerySchema,
+    routeParamsSchema: GetUserUsageByRangeCommand.RequestSchema,
+    getQueryKey: ({ route, query }) =>
+        usersQueryKeys.getUserUsageByRange({ ...route!, ...query! }).queryKey,
+    rQueryParams: {
+        staleTime: sToMs(15)
+    },
+    errorHandler: (error) => {
+        notifications.show({
+            title: `${GetUserUsageByRangeCommand.url}`,
             message: error instanceof Error ? error.message : `Request failed with unknown error.`,
             color: 'red'
         })

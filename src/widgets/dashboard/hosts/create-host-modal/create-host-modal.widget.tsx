@@ -1,8 +1,8 @@
-import { CreateHostCommand } from '@remnawave/backend-contract'
+import { CreateHostCommand, SECURITY_LAYERS } from '@remnawave/backend-contract'
 import { useForm, zodResolver } from '@mantine/form'
 import { useTranslation } from 'react-i18next'
 import { Modal, Text } from '@mantine/core'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { useHostsStoreActions, useHostsStoreCreateModalIsOpen } from '@entities/dashboard'
 import { BaseHostForm } from '@shared/ui/forms/hosts/base-host-form'
@@ -22,6 +22,13 @@ export const CreateHostModalWidget = () => {
         mode: 'uncontrolled',
         name: 'create-host-form',
         validate: zodResolver(CreateHostCommand.RequestSchema)
+    })
+
+    form.watch('inboundUuid', ({ value }) => {
+        const inbound = inbounds?.find((inbound) => inbound.uuid === value)
+        if (inbound) {
+            form.setFieldValue('port', inbound.port)
+        }
     })
 
     const handleClose = () => {
@@ -56,6 +63,10 @@ export const CreateHostModalWidget = () => {
 
         return null
     })
+
+    useEffect(() => {
+        form.setFieldValue('securityLayer', SECURITY_LAYERS.DEFAULT)
+    }, [form])
 
     return (
         <Modal

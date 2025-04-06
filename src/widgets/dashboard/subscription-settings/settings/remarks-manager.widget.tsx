@@ -1,13 +1,28 @@
-import { ActionIcon, Box, Button, Group, Text, TextInput } from '@mantine/core'
+import {
+    ActionIcon,
+    Button,
+    DefaultMantineColor,
+    Group,
+    Paper,
+    Text,
+    TextInput,
+    ThemeIcon
+} from '@mantine/core'
 import { PiPlus, PiTrash } from 'react-icons/pi'
 import { useTranslation } from 'react-i18next'
 import { useEffect, useState } from 'react'
 
+import { TemplateInfoPopoverShared } from '@shared/ui/popovers/template-info-popover/template-info-popover.shared'
+
 export const RemarksManager = ({
     initialRemarks = [''],
     title,
-    onChange
+    onChange,
+    icon,
+    iconColor
 }: {
+    icon: React.ReactNode
+    iconColor: DefaultMantineColor
     initialRemarks?: string[]
     onChange: (remarks: string[]) => void
     title: string
@@ -47,21 +62,30 @@ export const RemarksManager = ({
     }
 
     return (
-        <Box>
-            <Text fw={500} mb="xs">
-                {title}
-            </Text>
+        <Paper p="sm" radius="md" shadow="xs" withBorder>
+            <Group align="center" gap="xs" justify="flex-start" mb="md">
+                <ThemeIcon color={iconColor} radius="md" size="md" variant="light">
+                    {icon}
+                </ThemeIcon>
+                <Text fw={600} size="sm">
+                    {title}
+                </Text>
+            </Group>
+
             {localRemarks.map((remark, index) => (
                 <Group align="flex-start" gap="sm" key={index} mb="xs">
                     <ActionIcon
                         color="red"
                         disabled={localRemarks.length === 1}
                         onClick={() => removeLocalRemark(index)}
+                        radius="md"
                         size="lg"
+                        variant="light"
                     >
                         <PiTrash size="1rem" />
                     </ActionIcon>
                     <TextInput
+                        leftSection={<TemplateInfoPopoverShared showHostDescription={false} />}
                         onChange={(e) => updateLocalRemark(index, e.target.value)}
                         placeholder={t('remarks-manager.widget.enter-remark')}
                         style={{ flex: 1 }}
@@ -78,6 +102,6 @@ export const RemarksManager = ({
             >
                 {t('remarks-manager.widget.add-remark')}
             </Button>
-        </Box>
+        </Paper>
     )
 }

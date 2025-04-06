@@ -26,11 +26,11 @@ export const useNodesStore = create<IActions & IState>()(
                     set((state) => ({
                         editModal: { ...state.editModal, isOpen }
                     }))
-                    if (!isOpen) {
-                        set((state) => ({
-                            editModal: { ...state.editModal, node: null, isLoading: false }
-                        }))
-                    }
+                },
+                clearEditModal: () => {
+                    set((state) => ({
+                        editModal: { ...state.editModal, node: null, isLoading: false }
+                    }))
                 },
                 toggleCreateModal: (isOpen: boolean) => {
                     set((state) => ({

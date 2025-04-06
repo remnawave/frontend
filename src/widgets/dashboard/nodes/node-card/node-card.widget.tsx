@@ -1,5 +1,5 @@
 import { PiArrowsCounterClockwise, PiCpu, PiDotsSixVertical, PiUsersDuotone } from 'react-icons/pi'
-import { Badge, Box, Group, Paper, Progress, Stack, Text } from '@mantine/core'
+import { Badge, Box, Grid, Group, Progress, Stack, Text } from '@mantine/core'
 import { notifications } from '@mantine/notifications'
 import ReactCountryFlag from 'react-country-flag'
 import { useTranslation } from 'react-i18next'
@@ -73,67 +73,75 @@ export function NodeCardWidget(props: IProps) {
                     <div {...provided.dragHandleProps} className={classes.dragHandle}>
                         <PiDotsSixVertical color="white" size="2rem" />
                     </div>
-
                     <Box
                         onClick={handleViewNode}
                         onMouseEnter={() => setIsHovered(true)}
                         onMouseLeave={() => setIsHovered(false)}
                         style={{ cursor: 'pointer' }}
+                        w={'100%'}
                     >
-                        <Group gap="xs" preventGrowOverflow={true}>
-                            <NodeStatusBadgeWidget node={node} style={{ cursor: 'pointer' }} />
-
-                            <Badge
-                                color={node.usersOnline! > 0 ? 'teal' : 'gray'}
-                                leftSection={<PiUsersDuotone size={18} />}
-                                miw={'8ch'}
-                                radius="md"
-                                size="lg"
-                                style={{ cursor: 'pointer' }}
-                                variant="outline"
+                        <Grid align="center" gutter={{ base: 'xs', sm: 'md' }}>
+                            <Grid.Col
+                                order={{ base: 1, xs: 1 }}
+                                span={{ base: 'content', xs: 'content' }}
                             >
-                                {node.usersOnline}
-                            </Badge>
+                                <NodeStatusBadgeWidget node={node} style={{ cursor: 'pointer' }} />
+                            </Grid.Col>
 
-                            <Paper
-                                miw={{
-                                    base: '15ch',
-                                    sm: '30ch'
-                                }}
+                            <Grid.Col
+                                order={{ base: 2, xs: 2 }}
+                                span={{ base: 'content', xs: 'content' }}
                             >
                                 <Badge
-                                    autoContrast
-                                    color={ch.hex(node.uuid)}
-                                    leftSection={
-                                        node.countryCode &&
-                                        node.countryCode !== 'XX' && (
-                                            <ReactCountryFlag
-                                                className="emojiFlag"
-                                                countryCode={node.countryCode}
-                                                style={{
-                                                    fontSize: '2em',
-                                                    lineHeight: '1.5em'
-                                                }}
-                                            />
-                                        )
-                                    }
-                                    maw={'30ch'}
+                                    color={node.usersOnline! > 0 ? 'teal' : 'gray'}
+                                    leftSection={<PiUsersDuotone size={18} />}
+                                    miw={'8ch'}
                                     radius="md"
                                     size="lg"
                                     style={{ cursor: 'pointer' }}
-                                    variant="light"
-                                    // w={'100%'}
+                                    variant="outline"
                                 >
-                                    {node.name}
+                                    {node.usersOnline}
                                 </Badge>
-                            </Paper>
+                            </Grid.Col>
 
-                            <Paper miw={'22ch'}>
-                                <Stack align="stretch" gap="xs">
+                            <Grid.Col
+                                order={{ base: 3, xs: 3 }}
+                                span={{ base: 12, xs: 'auto', sm: 'auto' }}
+                            >
+                                <Stack align="stretch" gap={'xs'}>
+                                    <Badge
+                                        autoContrast
+                                        color={ch.hex(node.uuid)}
+                                        leftSection={
+                                            node.countryCode &&
+                                            node.countryCode !== 'XX' && (
+                                                <ReactCountryFlag
+                                                    className="emojiFlag"
+                                                    countryCode={node.countryCode}
+                                                    style={{
+                                                        fontSize: '2em',
+                                                        lineHeight: '1.5em'
+                                                    }}
+                                                />
+                                            )
+                                        }
+                                        miw={{
+                                            base: '20ch',
+                                            xs: '10ch'
+                                        }}
+                                        radius="md"
+                                        size="lg"
+                                        style={{ cursor: 'pointer', textAlign: 'left' }}
+                                        variant="light"
+                                    >
+                                        {node.name}
+                                    </Badge>
+
                                     <Text
                                         className={classes.hostInfoLabel}
-                                        maw={'22ch'}
-                                        miw={'22ch'}
+                                        display="inline-block"
+                                        maw="max-content"
                                         onClick={handleCopy}
                                         style={{ cursor: 'copy' }}
                                         truncate="end"
@@ -141,67 +149,79 @@ export function NodeCardWidget(props: IProps) {
                                         {node.address}
                                         {node.port ? `:${node.port}` : ''}
                                     </Text>
+                                </Stack>
+                            </Grid.Col>
 
-                                    {node.xrayUptime !== '0' && (
+                            <Grid.Col order={{ base: 4, xs: 4 }} span={{ base: 12, xs: 'content' }}>
+                                <Stack gap="xs">
+                                    <Group>
                                         <Badge
-                                            color="gray"
-                                            leftSection={<PiCpu size={18} />}
-                                            maw={'20ch'}
+                                            autoContrast
+                                            color={'gray'}
+                                            ff={'monospace'}
                                             radius="md"
                                             size="lg"
                                             style={{ cursor: 'pointer' }}
                                             variant="outline"
                                         >
-                                            {getXrayUptimeUtil(node.xrayUptime)}
+                                            {`${prettyUsedData} / ${maxData}`}
                                         </Badge>
-                                    )}
-                                </Stack>
-                            </Paper>
 
-                            <Stack align="stretch" gap="xs">
-                                <Badge
-                                    autoContrast
-                                    color={'gray'}
-                                    ff={'monospace'}
-                                    maw={'40ch'}
-                                    miw={'25ch'}
-                                    radius="md"
-                                    size="lg"
-                                    style={{ cursor: 'pointer' }}
-                                    variant="outline"
-                                >
-                                    {`${prettyUsedData} / ${maxData}`}
-                                </Badge>
-
-                                {node.isTrafficTrackingActive && (
-                                    <Group>
-                                        {percentage >= 0 && (
-                                            <Progress
-                                                color={percentage > 95 ? 'red.9' : 'teal.9'}
-                                                maw={'30ch'}
+                                        {node.isTrafficTrackingActive && (
+                                            <Badge
+                                                color="gray"
+                                                leftSection={<PiArrowsCounterClockwise size={16} />}
                                                 radius="md"
-                                                size="25"
-                                                striped
-                                                value={percentage}
-                                                w={'10ch'}
-                                            />
+                                                size="lg"
+                                                style={{ cursor: 'pointer' }}
+                                                variant="outline"
+                                            >
+                                                {getNodeResetDaysUtil(node.trafficResetDay ?? 1)}
+                                            </Badge>
                                         )}
 
-                                        <Badge
-                                            color="gray"
-                                            leftSection={<PiArrowsCounterClockwise size={18} />}
-                                            maw={'20ch'}
+                                        {node.xrayUptime !== '0' && node.isConnected && (
+                                            <Badge
+                                                color="gray"
+                                                leftSection={<PiCpu size={18} />}
+                                                maw={'20ch'}
+                                                radius="md"
+                                                size="lg"
+                                                style={{ cursor: 'pointer' }}
+                                                variant="outline"
+                                            >
+                                                {getXrayUptimeUtil(node.xrayUptime)}
+                                            </Badge>
+                                        )}
+
+                                        {(!node.isConnected || node.xrayUptime === '0') && (
+                                            <Badge
+                                                color="red"
+                                                leftSection={<PiCpu size={18} />}
+                                                maw={'20ch'}
+                                                radius="md"
+                                                size="lg"
+                                                style={{ cursor: 'pointer' }}
+                                                variant="outline"
+                                            >
+                                                offline
+                                            </Badge>
+                                        )}
+                                    </Group>
+
+                                    {node.isTrafficTrackingActive && percentage >= 0 && (
+                                        <Progress
+                                            color={percentage > 95 ? 'red.9' : 'teal.9'}
                                             radius="md"
                                             size="lg"
-                                            style={{ cursor: 'pointer' }}
-                                            variant="outline"
-                                        >
-                                            {getNodeResetDaysUtil(node.trafficResetDay ?? 1)}
-                                        </Badge>
-                                    </Group>
-                                )}
-                            </Stack>
-                        </Group>
+                                            striped
+                                            value={percentage}
+                                            w="100%"
+                                        />
+                                    )}
+                                </Stack>
+                            </Grid.Col>
+                        </Grid>
                     </Box>
                 </Box>
             )}

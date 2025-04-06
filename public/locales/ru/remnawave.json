@@ -5,18 +5,20 @@
         "config": "Конфиг",
         "home": "Главная",
         "hosts": "Хосты",
+        "inbounds": "Инбаунды",
         "nodes": "Ноды",
-        "nodes-bandwidth-table": "Использование трафика",
-        "nodes-statistics": "Статистика нод",
+        "nodes-bandwidth-table": "Расход трафика",
+        "nodes-statistics": "Статистика",
         "users": "Пользователи",
         "overview": "Обзор",
         "management": "Управление",
         "statistics": "Статистика",
         "subscription-settings": "Настройки подписки",
         "utils": "Утилиты",
-        "happ-routing-builder": "Конструктор маршрутизации Happ",
+        "happ-routing-builder": "Happ-роутинг",
         "templates": "Шаблоны",
-        "subscription": "Подписка"
+        "subscription": "Подписка",
+        "subscription-page-builder": "Sub Page Builder"
     },
     "bandwidth-metrics": {
         "current-year": "Текущий год",
@@ -52,7 +54,13 @@
         "feature": {
             "save": "Сохранить",
             "format": "Форматировать",
-            "copy-config": "Скорировать"
+            "copy-config": "Скопировать",
+            "save-anyway-description": "Вы уверены, что хотите сохранить невалидную конфигурацию xRay? Это действие\n                                    может привести к неожиданному поведению. Продолжите только если вы знаете, что\n                                    делаете.",
+            "cancel": "Отмена",
+            "save-anyway-title": "Подтвердить действие",
+            "error": "Ошибка",
+            "failed-to-save-invalid-json": "Не удалось сохранить, невалидный JSON.",
+            "save-anyway": "Сохранить все равно"
         }
     },
     "use-bandwidth-table-columns": {
@@ -196,7 +204,8 @@
         "widget": {
             "last-error-message": "Последнее сообщение об ошибке",
             "important-note-description": "Чтобы подключить ноду, Вам нужно запустить Remnawave Node со следующим",
-            "important-note": "Важно"
+            "important-note": "Важная информация",
+            "important-note-description-value": "значением. \nСкопируйте и вставьте его в Remnanode "
         }
     },
     "node-card": {
@@ -238,7 +247,11 @@
             "loading-user-creation": "Загрузка создания пользователя...",
             "create-user": "Создать пользователя",
             "email-of-a-user": "Email пользователя",
-            "telegram-id-of-a-user-in-telegram": "Telegram ID пользователя в Telegram"
+            "telegram-id-of-a-user-in-telegram": "Telegram ID пользователя в Telegram",
+            "1-month": "+1 мес.",
+            "1-year": "+1 год",
+            "2099-year": "2099 год",
+            "3-months": "+3 мес."
         }
     },
     "login-form-feature": {
@@ -263,7 +276,7 @@
             "username-cannot-be-changed": "Имя пользователя не может быть изменено",
             "user-details": "Информация о пользователе",
             "loading-user-data": "Загрузка данных пользователя...",
-            "edit-user": "Редактировать пользователя",
+            "edit-user": "Сохранить",
             "never": "Никогда",
             "close": "Закрыть",
             "show-qr": "Показать QR",
@@ -297,7 +310,19 @@
         "host-e-g-example-com": "Хост (например, example.com)",
         "e-g-example-com": "например, example.com",
         "e-g-443": "например, 443",
-        "path-e-g-ws": "путь (например, /ws)"
+        "path-e-g-ws": "путь (например, /ws)",
+        "here-you-can-override-security-settings-from-xtls-config": "Здесь вы можете переопределить настройки безопасности из конфигурации XTLS.",
+        "inbounds-default": "По умолчанию",
+        "none": "None",
+        "security-layer": "Security Layer",
+        "tls-transport-layer-security": "TLS",
+        "extra-xhttp": "Extra xHTTP",
+        "xhttp-extra-params": "xHTTP extra params",
+        "extra-xhttp-description": "This extra params will work only with xHTTP protocol. Pass object \"extra\" to the client. This JSON input is not validated, be sure to paste the correct extra params. Use the button below to copy the basic extra params, then paste it into the JSON input.",
+        "invalid-json": "Invalid JSON",
+        "fill-with-sample-xhttp-extra-params": "Fill with sample xHTTP extra params",
+        "close": "Close",
+        "clone": "Clone"
     },
     "base-node-form": {
         "country": "Страна",
@@ -421,65 +446,80 @@
     },
     "happ-routing-builder": {
         "widget": {
-            "copy-link": "Copy link",
-            "visual-editor": "Visual Editor",
-            "code-viewer": "Code Viewer",
-            "encode-happ-link": "Encode Happ Link",
-            "enter-the-configuration-name": "Enter the configuration name",
-            "name": "Name",
-            "russia": "Russia",
-            "proxy-all-traffic-except-rules": "Proxy all traffic except rules",
-            "direct-all-traffic-except-rules": "Direct all traffic except rules",
-            "proxy-all-traffic-except-rules-or-direct-all-traffic-except-rules": "Proxy all traffic except rules, or direct all traffic except rules",
-            "enable": "Enable",
-            "disable": "Disable",
-            "fake-dns-description": "Enable or disable FakeDNS. Recommended to activate when using DoU.",
-            "choose-doh-dns-over-https-or-dou-dns-over-udp": "Choose DoH (DNS over HTTPS) or DoU (DNS over UDP)",
-            "remote-dns-type": "Remote DNS type",
-            "domain-name-for-doh": "Domain name for DoH",
-            "remote-dns-domain": "Remote DNS Domain",
-            "server-ip-for-doh-or-dou": "Server IP for DoH or DoU",
-            "remote-dns-ip": "Remote DNS IP",
-            "domenstic-dns-type-description": "Choose DoH (DNS over HTTPS) or DoU (DNS over UDP)",
-            "domestic-dns-type": "Domestic DNS Type",
-            "domain-name-for-doh-0": "Domain name for DoH",
-            "domestic-dns-domain": "Domestic DNS Domain",
-            "server-ip-for-doh-or-dou-0": "Server IP for DoH or DoU",
-            "domestic-dns-ip": "Domestic DNS IP",
-            "geoip-description": "Link to the geoip.dat file. Leave this field empty if you want to use the default file.",
-            "geoip-url": "GeoIP URL",
-            "geosite-description": "Link to the geosite.dat file. Leave this field empty if you want to use the default file.",
-            "geosite-url": "GeoSite URL",
-            "unix-timestamp-description": "Enter the Unix timestamp of the last update to the geoip and geosite files. Leave empty if not available.",
-            "last-updated": "Last updated",
-            "select-the-domain-processing-strategy": "Select the domain processing strategy.",
-            "domain-strategy": "Domain strategy",
-            "dns-hosts-description": "Enter the DNS hosts in the format: { \"example.com\": \"1.2.3.4\", \"test.org\": \"8.8.8.8\" }",
-            "dns-hosts": "DNS hosts",
-            "sites-that-will-use-direct-connection": "Sites that will use direct connection.",
-            "direct-sites": "Direct sites",
-            "ip-addresses-that-will-use-direct-connection": "IP addresses that will use direct connection.",
-            "direct-ip": "Direct IP",
-            "sites-that-will-be-proxied": "Sites that will be proxied.",
-            "proxy-sites": "Proxy sites",
-            "ip-addresses-that-will-be-proxied": "IP addresses that will be proxied.",
-            "proxy-ip": "Proxy IP",
-            "sites-that-will-be-blocked": "Sites that will be blocked.",
-            "blocked-sites": "Blocked sites",
-            "ip-addresses-that-will-be-blocked": "IP addresses that will be blocked.",
-            "blocked-ips": "Blocked IPs",
-            "encoded-happ-link": "Encoded Happ Link",
-            "copied": "Copied",
-            "show-qr": "Show QR",
-            "close": "Close"
+            "copy-link": "Копировать ссылку",
+            "visual-editor": "Визуальный редактор",
+            "code-viewer": "Редактор кода",
+            "encode-happ-link": "Кодировать Happ ссылку",
+            "enter-the-configuration-name": "Введите имя конфигурации",
+            "name": "Имя",
+            "russia": "Россия",
+            "proxy-all-traffic-except-rules": "Проксировать весь трафик, кроме правил",
+            "direct-all-traffic-except-rules": "Прямое соединение для всего трафика, кроме правил",
+            "proxy-all-traffic-except-rules-or-direct-all-traffic-except-rules": "Проксировать весь трафик, кроме правил, или прямое соединение для всего трафика, кроме правил",
+            "enable": "Включить",
+            "disable": "Отключить",
+            "fake-dns-description": "Включить или отключить FakeDNS. Рекомендуется активировать при использовании DoU.",
+            "choose-doh-dns-over-https-or-dou-dns-over-udp": "Выберите DoH (DNS через HTTPS) или DoU (DNS через UDP)",
+            "remote-dns-type": "Тип удаленного DNS",
+            "domain-name-for-doh": "Доменное имя для DoH",
+            "remote-dns-domain": "Домен удаленного DNS",
+            "server-ip-for-doh-or-dou": "IP сервера для DoH или DoU",
+            "remote-dns-ip": "IP удаленного DNS",
+            "domestic-dns-type-description": "Выберите DoH (DNS через HTTPS) или DoU (DNS через UDP)",
+            "domestic-dns-type": "Тип локального DNS",
+            "domain-name-for-doh-0": "Доменное имя для DoH",
+            "domestic-dns-domain": "Домен локального DNS",
+            "server-ip-for-doh-or-dou-0": "IP сервера для DoH или DoU",
+            "domestic-dns-ip": "IP локального DNS",
+            "geoip-description": "Ссылка на файл geoip.dat. Оставьте это поле пустым, если хотите использовать файл по умолчанию.",
+            "geoip-url": "URL GeoIP",
+            "geosite-description": "Ссылка на файл geosite.dat. Оставьте это поле пустым, если хотите использовать файл по умолчанию.",
+            "geosite-url": "URL GeoSite",
+            "unix-timestamp-description": "Введите Unix-метку времени последнего обновления файлов geoip и geosite. Оставьте пустым, если недоступно.",
+            "last-updated": "Последнее обновление",
+            "select-the-domain-processing-strategy": "Выберите стратегию обработки доменов.",
+            "domain-strategy": "Стратегия доменов",
+            "dns-hosts-description": "Введите DNS-хосты в формате: { \"example.com\": \"1.2.3.4\", \"test.org\": \"8.8.8.8\" }",
+            "dns-hosts": "DNS хосты",
+            "sites-that-will-use-direct-connection": "Сайты, которые будут использовать прямое соединение.",
+            "direct-sites": "Прямые сайты",
+            "ip-addresses-that-will-use-direct-connection": "IP-адреса, которые будут использовать прямое соединение.",
+            "direct-ip": "Прямые IP",
+            "sites-that-will-be-proxied": "Сайты, которые будут проксироваться.",
+            "proxy-sites": "Прокси-сайты",
+            "ip-addresses-that-will-be-proxied": "IP-адреса, которые будут проксироваться.",
+            "proxy-ip": "Прокси-IP",
+            "sites-that-will-be-blocked": "Сайты, которые будут заблокированы.",
+            "blocked-sites": "Заблокированные сайты",
+            "ip-addresses-that-will-be-blocked": "IP-адреса, которые будут заблокированы.",
+            "blocked-ips": "Заблокированные IP",
+            "encoded-happ-link": "Кодированная Happ ссылка",
+            "copied": "Скопировано",
+            "show-qr": "Показать QR",
+            "close": "Закрыть",
+            "basic-configuration": "Базовая конфигурация",
+            "block-routing": "Block Routing",
+            "code-editor": "Редактор кода",
+            "decode": "Расшифровать",
+            "direct-routing": "Direct Routing",
+            "dns-hosts-0": "DNS Hosts",
+            "domestic-dns-settings": "Domestic DNS Settings",
+            "encoded-link": "Закодированная ссылка",
+            "import-configuration": "Импорт конфигурации",
+            "import-from-base64": "Импорт из Base64",
+            "invalid-base64-or-happ-link": "Невалидная ссылка Base64 или Happ",
+            "paste-a-happ-routing-link-or-base64-encoded-config": "Вставьте ссылку маршрутизации Happ или конфигурацию в кодировке Base64",
+            "paste-base64-or-happ-link-here": "Вставьте сюда Base64 или Happ ссылку",
+            "proxy-routing": "Proxy Routing",
+            "remote-dns-settings": "Remote DNS Settings"
         },
         "page": {
             "component": {
-                "about-happ": "About Happ",
-                "happ-is-multiplatform-xray-client": "Happ is multiplatform XRay client.",
-                "about-happ-description-line-2": "Here you can configure routing rules, which you can pass to Happ client.",
-                "about-happ-description-line-3": "Check out \"Subscription settings\" and check \"Happ Routing\".",
-                "check-out-happ-website": "Check out Happ website"
+                "about-happ": "О Happ",
+                "happ-is-multiplatform-xray-client": "Happ — это многоплатформенный клиент XRay.",
+                "about-happ-description-line-2": "Здесь вы можете настроить правила маршрутизации, которые можно передать клиенту Happ.",
+                "about-happ-description-line-3": "Проверьте \"Настройки подписки\" и проверьте \"Happ Routing\".",
+                "check-out-happ-website": "Проверьте сайт Happ"
             }
         }
     },
@@ -491,40 +531,43 @@
     },
     "subscription-settings": {
         "widget": {
-            "validation-error": "Validation error",
-            "you-must-add-at-least-one-remark-with-text": "You must add at least one remark with text",
-            "subscription-info": "Subscription info",
-            "this-title-will-be-displayed-as-subscription-name": "This title will be displayed as subscription name.",
-            "profile-title": "Profile title",
-            "enter-profile-title": "Enter profile title",
-            "auto-update-description": "Some of clients may use this interval to auto-update subscription.",
-            "auto-update-interval-hours": "Auto-Update interval (hours)",
-            "support-link-description": "Some of clients may show this link in the subscription page, which should leads to the support page.",
-            "support-link": "Support link",
-            "happ-settings": "Happ settings",
-            "happ-announce-description": "Enter Happ Announce, max. 200 characters. Will be displayed in the subscription page.",
+            "validation-error": "Ошибка валидации",
+            "you-must-add-at-least-one-remark-with-text": "Вы должны добавить хотя бы одно примечание с текстом",
+            "subscription-info": "Информация о подписке",
+            "this-title-will-be-displayed-as-subscription-name": "Этот заголовок будет отображаться как имя подписки.",
+            "profile-title": "Заголовок профиля",
+            "enter-profile-title": "Введите заголовок профиля",
+            "auto-update-description": "Некоторые клиенты могут использовать этот интервал для автоматического обновления подписки.",
+            "auto-update-interval-hours": "Интервал авто-обновления (часы)",
+            "support-link-description": "Некоторые клиенты могут отображать эту ссылку в странице подписки, которая должна вести на страницу поддержки.",
+            "support-link": "Ссылка на поддержку",
+            "happ-settings": "Настройки Happ",
+            "happ-announce-description": "Введите Happ Announce, максимум 200 символов. Будет отображаться в странице подписки.",
             "happ-announce": "Happ Announce",
-            "enter-happ-announce-max-200-characters": "Enter Happ Announce, max. 200 characters",
-            "happ-routing-description": "Happ routing is a feature that allows you to configure the routing.",
-            "happ-routing-description-line-2": "Routing must be configured via Happ Routing Builder. Use button below to configure routing.",
-            "configure-happ-routing": "Configure Happ Routing",
+            "enter-happ-announce-max-200-characters": "Введите Happ Announce, максимум 200 символов",
+            "happ-routing-description": "Happ routing — это функция, которая позволяет настроить маршрутизацию.",
+            "happ-routing-description-line-2": "Маршрутизация должна быть настроена через Happ Routing Builder. Используйте кнопку ниже для настройки маршрутизации.",
+            "configure-happ-routing": "Настроить Happ Routing",
             "happ-routing": "Happ routing",
-            "user-status-remarks": "User status remarks",
-            "user-status-remarks-description": "This values will be displayed in the subscription page if user is expired, limited or disabled.",
-            "user-status-remarks-description-line-2": "You can add multiple remarks for each status.",
-            "user-status-remarks-description-line-3": "Cause expired, limited and disabled users are not able to connect to the server, they will see this remarks instead of empty subscription.",
-            "expired-users-remarks": "Expired users remarks",
-            "limited-users-remarks": "Limited users remarks",
-            "disabled-users-remarks": "Disabled users remarks",
-            "update-settings": "Update settings",
+            "user-status-remarks": "Примечания по статусу пользователя",
+            "user-status-remarks-description": "Эти значения будут отображаться в странице подписки, если пользователь просрочен, ограничен или отключен.",
+            "user-status-remarks-description-line-2": "Вы можете добавить несколько примечаний для каждого статуса.",
+            "user-status-remarks-description-line-3": "Поскольку просроченные, ограниченные и отключенные пользователи не могут подключиться к серверу, они увидят эти примечания вместо пустой подписки.",
+            "expired-users-remarks": "Примечания для просроченных пользователей",
+            "limited-users-remarks": "Примечания для ограниченных пользователей",
+            "disabled-users-remarks": "Примечания для отключенных пользователей",
+            "update-settings": "Обновить настройки",
             "disabled": "Выключено",
             "enabled": "Включено",
-            "profile-webpage-url": "Profile Webpage URL",
+            "profile-webpage-url": "URL страницы профиля",
             "profile-webpage-url-description": "Используется некоторыми клиентами. \nВключено по умолчанию, домен резволится из SUB_PUBLIC_DOMAIN .env переменной.",
-            "serve-json-at-base-subscription": "Serve JSON at base subscription",
-            "serve-json-description": "This will allow you to serve JSON subscription at the base subscription path. If requested client supports it, it will be served as JSON, otherwise it will be served as usual.",
-            "add-username-to-base-subscription": "Add #username to base subscription",
-            "add-username-description": "This will add #username to the base subscription path at the subscription route."
+            "serve-json-at-base-subscription": "Использовать JSON в базовой подписке",
+            "serve-json-description": "Это позволит вам сервить JSON подписку в базовом пути подписки. Если запрошенный клиент поддерживает его, он будет сервиться как JSON, в противном случае он будет сервиться как обычно.",
+            "add-username-to-base-subscription": "Добавить #username в базовую подписку",
+            "add-username-description": "Это добавит #username в путь подписки на базовой подписке.",
+            "happ-description-line-1": "Здесь вы можете сконфигурировать настройки Happ для подписки.",
+            "happ-description-line-2": "Эти настройки будут использоваться только в том случае, если подписка используется в Happ.",
+            "subscription-info-description": "Эти настройки поддерживаются многими клиентами, такими как Happ, V2RayNG, Streisand и т.д."
         },
         "page": {
             "component": {
@@ -532,6 +575,331 @@
                 "subscription-settings-description-line-2": "Вы можете изменить их на значения, которые будут соотвествовать вашему сервису.",
                 "what-is-subscription-settings": "Что такое настройки подписки?"
             }
+        }
+    },
+    "inbounds-page-header": {
+        "widget": {
+            "list-of-all-inbounds": "Список всех инбаундов",
+            "inbounds": "Инбаунды",
+            "important-note": "Важное примечание",
+            "important-note-description-line-1": "Все массовые операции требуют полного перезапуска всех нод.",
+            "important-note-description-line-2": "Пожалуйста, избегайте слишком частых запросов за короткий период времени.",
+            "important-note-description-line-3": "После сохранения изменений может потребоваться до 30 секунд для их применения на всех нодах."
+        }
+    },
+    "inbounds-card": {
+        "widget": {
+            "nodes": "Ноды",
+            "enabled-nodes": "Ноды с включенным инбаундом",
+            "disabled-nodes": "Ноды с отключенным инбаундом",
+            "remove": "Удалить",
+            "add": "Добавить",
+            "cancel": "Отмена",
+            "users": "Пользователи",
+            "enabled-users": "Пользователи с включенным инбаундом",
+            "disabled-users": "Пользователи с отключенным инбаундом",
+            "show-raw-inbound": "Показать исходный инбаунд",
+            "raw-inbound": "Исходный инбаунд",
+            "are-you-sure": "Вы уверены?",
+            "add-users-to-inbound-line-1": "Вы уверены, что хотите добавить этот инбаунд пользователям?",
+            "add-users-to-inbound-line-2": "Это действие добавит инбаунд всем пользователям.",
+            "remove-users-from-inbound-line-1": "Вы уверены, что хотите удалить этот инбаунд у пользователей?",
+            "remove-users-from-inbound-line-2": "Это действие удалит инбаунд у всех пользователей.",
+            "add-nodes-to-inbound-line-1": "Вы уверены, что хотите добавить этот инбаунд нодам?",
+            "add-nodes-to-inbound-line-2": "Это действие добавит инбаунд всем нодам.",
+            "remove-nodes-from-inbound-line-1": "Вы уверены, что хотите удалить этот инбаунд у нод?",
+            "remove-nodes-from-inbound-line-2": "Это действие удалит инбаунд у всех нод.",
+            "copied": "Скопированный",
+            "copy-uuid": "Копировать uuid"
+        }
+    },
+    "multi-select-hosts": {
+        "feature": {
+            "delete-hosts": "Удалить хосты",
+            "are-you-sure-you-want-to-delete-these-hosts": "Вы уверены, что хотите удалить эти хосты?",
+            "delete": "Удалить",
+            "cancel": "Отмена",
+            "set-inbound": "Установить инбаунд",
+            "inbound": "Инбаунд",
+            "set-port": "Установить порт",
+            "port": "Порт",
+            "clear-selection": "Очистить выбор",
+            "select-all": "Выбрать все",
+            "enable": "Включить",
+            "disable": "Отключить",
+            "set-port-0": "Установить порт"
+        }
+    },
+    "bulk-user-actions-drawer": {
+        "widget": {
+            "bulk-user-actions": "Массовые действия с пользователями",
+            "users": "пользователей",
+            "update": "Обновить",
+            "actions": "Действия",
+            "danger": "Опасно"
+        }
+    },
+    "delete-all-users-by-status": {
+        "feature": {
+            "processing": "Обработка",
+            "deleting-users": "Удаление пользователей...",
+            "success": "Успешно",
+            "deleted-data-affectedrows-users": "Удалено {{count}} пользователей"
+        }
+    },
+    "bulk-all-user-actions-tabs": {
+        "update": {
+            "tab": {
+                "feature": {
+                    "update-fields-for-all-users": "Обновить поля для всех пользователей",
+                    "user-status": "Статус пользователя",
+                    "status": "Статус",
+                    "select-status": "Выберите статус",
+                    "expire-date": "Дата истечения",
+                    "select-expiration-date": "Выберите дату истечения",
+                    "close": "Закрыть",
+                    "update-users": "Обновить пользователей"
+                }
+            }
+        },
+        "actions": {
+            "tab": {
+                "feature": {
+                    "confirm-action": "Подтвердить действие",
+                    "reset-traffic-confirmation": "Вы уверены, что хотите сбросить трафик для всех выбранных пользователей?",
+                    "reset": "Сбросить",
+                    "cancel": "Отмена",
+                    "perform-actions-on-all-users": "Выполнить действия для всех пользователей",
+                    "reset-traffic": "Сбросить трафик",
+                    "reset-traffic-description": "Сбрасывает использование трафика до нуля для всех выбранных пользователей"
+                }
+            }
+        },
+        "danger": {
+            "tab": {
+                "feature": {
+                    "danger-zone": "Опасная зона",
+                    "danger-zone-description": "Эти действия необратимы и могут привести к постоянной потере данных.",
+                    "delete-users-by-status": "Удалить пользователей по статусу",
+                    "delete": "Удалить",
+                    "delete-users-by-status-description": "Навсегда удаляет всех пользователей с выбранным статусом"
+                }
+            }
+        }
+    },
+    "bulk-all-user-actions-drawer": {
+        "widget": {
+            "bulk-all-user-actions": "Массовые действия со всеми пользователями",
+            "all-users": "Все пользователи",
+            "update": "Обновить",
+            "actions": "Действия",
+            "danger": "Опасно"
+        }
+    },
+    "bulk-user-actions": {
+        "actions": {
+            "tab": {
+                "feature": {
+                    "revoke-subscription": "Отозвать подписку",
+                    "revoke-confirmation-line-1": "Вы уверены, что хотите отозвать подписку для {{usersCount}} пользователя(ей)?",
+                    "revoke-confirmation-line-2": "Это действие нельзя отменить.",
+                    "revoke": "Отозвать",
+                    "cancel": "Отмена",
+                    "reset-traffic": "Сбросить трафик",
+                    "reset-traffic-confirmation-line-1": "Вы уверены, что хотите сбросить трафик для {{usersCount}} пользователя(ей)?",
+                    "reset-traffic-confirmation-line-2": "Это установит их использование на ноль.",
+                    "reset": "Сбросить",
+                    "change-active-inbounds": "Изменить активные инбаунды",
+                    "change": "Изменить",
+                    "no-inbounds-selected": "Не выбрано ни одного инбаунда",
+                    "please-select-at-least-one-inbound": "Пожалуйста, выберите хотя бы один инбаунд",
+                    "perform-action-on-users": "Выполнить действия для {{usersCount}} выбранных пользователей",
+                    "changes-the-active-inbounds-for-all-selected-users": "Изменяет активные инбаунды для всех выбранных пользователей",
+                    "resets-the-traffic-usage-to-zero-for-all-selected-users": "Сбрасывает использование трафика до нуля для всех выбранных пользователей",
+                    "revokes-subscription-for-all-selected-users": "Отзывает подписку для всех выбранных пользователей"
+                }
+            }
+        },
+        "danger": {
+            "tab": {
+                "feature": {
+                    "delete-users": "Удалить пользователей",
+                    "delete-confirmation-line-1": "Вы уверены, что хотите удалить {{usersCount}} пользователя(ей)?",
+                    "delete-confirmation-line-2": "Это действие нельзя отменить, и все данные будут безвозвратно потеряны.",
+                    "delete": "Удалить",
+                    "cancel": "Отмена",
+                    "danger-zone": "Опасная зона",
+                    "these-actions-are-irreversible-and-can-result-in-permanent-data-loss": "Эти действия необратимы и могут привести к постоянной потере данных.",
+                    "permanently-deletes-all-selected-users-and-their-data": "Навсегда удаляет всех выбранных пользователей и их данные"
+                }
+            }
+        },
+        "update": {
+            "tab": {
+                "feature": {
+                    "update-fields-counter": "Обновить поля для {{usersCount}} выбранных пользователей",
+                    "user-status": "Статус пользователя",
+                    "status": "Статус",
+                    "select-status": "Выберите статус",
+                    "expire-date": "Дата истечения",
+                    "select-expiration-date": "Выберите дату истечения",
+                    "close": "Закрыть",
+                    "update-users": "Обновить пользователей"
+                }
+            }
+        }
+    },
+    "users-table-selection": {
+        "feature": {
+            "row-s-selected": "строк(а) выбрано",
+            "clear-selection": "Очистить выбор",
+            "select-all": "Выбрать все",
+            "bulk-actions": "Массовые действия"
+        }
+    },
+    "get-user-subscription-links": {
+        "feature": {
+            "loading-subscription-links": "Загрузка ссылок на подписку ...",
+            "show-links": "Показать ссылки",
+            "subscription-links": "Подписные ссылки",
+            "no-available-hosts-found-for-this-user": "Для этого пользователя не найдено доступных хостов"
+        }
+    },
+    "delete-user": {
+        "feature": {
+            "delete-user": "Удалить пользователя",
+            "are-you-sure": "Вы уверены, что хотите удалить пользователя? Это действие необратимо.",
+            "delete": "Удалить",
+            "cancel": "Отмена"
+        }
+    },
+    "user-usage-modal": {
+        "widget": {
+            "no-data-available-for-the-selected-period": "Нет доступных данных за выбранный период",
+            "no-data-available": "Нет доступных данных",
+            "click-to-show-all": "Нажмите, чтобы показать все",
+            "click-to-highlight-only-this-node": "Нажмите, чтобы показать только эту ноду",
+            "traffic-statistics": "Статистика трафика",
+            "usage-by-period": "Использовано за период",
+            "7-days": "7 дней",
+            "14-days": "14 дней",
+            "30-days": "30 дней",
+            "60-days": "60 дней",
+            "90-days": "90 дней",
+            "180-days": "180 дней",
+            "365-days": "365 дней",
+            "total-traffic": "Общий трафик",
+            "top-nodes": "Наиболее используемые ноды",
+            "stacked": "Сложить",
+            "grouped": "Сгруппировать",
+            "filter-nodes": "Фильтр по нодам",
+            "bar-chart": "Столбчатая диаграмма",
+            "show-nodes": "Show nodes",
+            "click-to-see-all": "Показать все"
+        }
+    },
+    "get-user-usage": {
+        "feature": {
+            "show-usage": "Статистика"
+        }
+    },
+    "detailed-user-info-drawer": {
+        "widget": {
+            "copied": "Скопировано",
+            "detailed-user-info": "Подробная информация о пользователе",
+            "copy": "Копировать",
+            "loading-user-info": "Загрузка информации о пользователе...",
+            "user-information": "Информация о пользователе",
+            "short-uuid": "Short UUID",
+            "username": "Имя пользователя",
+            "email": "Email",
+            "telegram-id": "Telegram ID",
+            "description": "Описание",
+            "traffic-information": "Информация о трафике",
+            "used-traffic": "Использовано трафика",
+            "lifetime-used-traffic": "Использовано трафика за все время",
+            "traffic-limit": "Лимит трафика",
+            "traffic-limit-strategy": "Стратегия сброса трафика",
+            "last-traffic-reset": "Последний сброс трафика",
+            "subscription-information": "Информация о подписке",
+            "subscription-uuid": "UUID подписки",
+            "subscription-url": "URL-адрес подписки",
+            "expires-at": "Дата истечения",
+            "last-opened-at": "Дата последнего открытия",
+            "last-user-agent": "Последний User Agent",
+            "revoked-at": "Дата отзыва",
+            "connection-information": "Информация о подключении",
+            "trojan-password": "Trojan Password",
+            "vless-uuid": "VLESS UUID",
+            "ss-password": "SS Password",
+            "last-online": "Последний раз в сети",
+            "last-connected-node": "Последняя подключенная нода",
+            "active-inbounds": "Активные инбаунды",
+            "timestamps": "Временные метки",
+            "created-at": "Дата создания",
+            "updated-at": "Дата обновления"
+        }
+    },
+    "subscription-page-builder-header": {
+        "widget": {
+            "load-default": "Загрузить по умолчанию",
+            "export-config": "Экспортировать конфигурацию",
+            "upload-config": "Загрузить конфигурацию",
+            "subscription-page-builder": "Конструктор страницы подписки",
+            "how-to-use-it": "Как это использовать?",
+            "description-line-1": "Вы можете использовать этот конструктор для настройки доступных клиентов и руководств для страницы подписки Remnawave.",
+            "description-line-2": "После создания первой конфигурации вы можете скачать её и подключить к контейнеру страницы подписки.",
+            "description-line-3": "Нажмите «Загрузить по умолчанию», чтобы получить эталонную конфигурацию из репозитория GitHub.",
+            "learn-more": "Узнать больше"
+        }
+    },
+    "subscription-page-builder": {
+        "page": {
+            "component": {
+                "failed-to-parse-config": "Не удалось разобрать файл конфигурации. Проверьте формат файла.",
+                "failed-to-load-default-config-check-your-internet-connection": "Не удалось загрузить конфигурацию по умолчанию. Проверьте подключение к интернету.",
+                "no-apps-configured-for-this-platform": "Для этой платформы не настроено ни одного приложения.",
+                "add-app": "Добавить приложение",
+                "select-an-app-from-the-sidebar-or-add-a-new-one": "Выберите приложение из боковой панели или добавьте новое.",
+                "validation-errors": "Ошибки валидации",
+                "invalid-configuration": "Недействительная конфигурация",
+                "the-configuration-did-not-pass-validation": "Конфигурация не прошла проверку.",
+                "close": "Закрыть"
+            }
+        }
+    },
+    "app-form": {
+        "component": {
+            "delete-app": "Удалить приложение",
+            "app-id": "ID приложения",
+            "app-name": "Название приложения",
+            "url-scheme": "Схема URL",
+            "featured-app": "Рекомендуемое приложение",
+            "need-base64-encoding": "Требуется кодирование Base64",
+            "installation-step": "Шаг установки",
+            "description": "Описание",
+            "buttons": "Кнопки",
+            "additional-before-subscription-step": "Дополнительно перед шагом подписки",
+            "remove-step": "Удалить шаг",
+            "add-step": "Добавить шаг",
+            "title": "Заголовок",
+            "add-subscription-step": "Добавить шаг подписки",
+            "additional-after-subscription-step": "Дополнительно после шага подписки",
+            "connect-and-use-step": "Шаг подключения и использования"
+        }
+    },
+    "button-fields": {
+        "button": "Кнопка",
+        "add-button": "Добавить кнопку",
+        "remove-button": "Удалить кнопку",
+        "button-link": "Ссылка кнопки",
+        "button-text": "Текст кнопки"
+    },
+    "subscription-tabs": {
+        "widget": {
+            "show-custom-remark-description-line-1": "Только для EXPIRED, LIMITED, DISABLED пользователей.",
+            "show-custom-remark-description-line-2": "Если эта настройка отключена – EXPIRED, LIMITED, DISABLED пользователи получат актуальный список хостов, вместо кастомных примечаний ниже.",
+            "show-custom-remarks": "Отображать кастомное примечание"
         }
     }
 }

@@ -1,10 +1,10 @@
 import { PiAnchorSimpleDuotone, PiArrowsClockwise, PiExcludeSquare, PiPlus } from 'react-icons/pi'
 import { useTranslation } from 'react-i18next'
+import { useDisclosure } from '@mantine/hooks'
 import { Button, Group } from '@mantine/core'
-import { modals } from '@mantine/modals'
 
+import { BulkAllUserActionsDrawerWidget } from '@widgets/dashboard/users/bulk-all-user-actions-drawer/bulk-all-user-actions-drawer.widget'
 import { useUserCreationModalStoreActions } from '@entities/dashboard/user-creation-modal-store'
-import { BulkUserActionsModalWidget } from '@widgets/dashboard/users/bulk-user-actioins-modal'
 import { useUsersTableStoreActions } from '@entities/dashboard/users/users-table-store'
 
 import { IProps } from './interfaces'
@@ -14,6 +14,7 @@ export const UserActionGroupFeature = (props: IProps) => {
 
     const { isLoading, refetch, table } = props
     const actions = useUsersTableStoreActions()
+    const [isBulkAllUserActionsDrawerOpen, bulkAllDrawerHandlers] = useDisclosure(false)
 
     const userCreationModalActions = useUserCreationModalStoreActions()
 
@@ -52,20 +53,12 @@ export const UserActionGroupFeature = (props: IProps) => {
         }
     }
 
-    const handleBulkActionsModal = () => {
-        modals.open({
-            title: t('action-group.feature.bulk-actions'),
-            centered: true,
-            children: <BulkUserActionsModalWidget />
-        })
-    }
-
     if (!table || !refetch) {
         return null
     }
 
     return (
-        <Group>
+        <Group grow preventGrowOverflow={false} wrap="wrap">
             <Button
                 leftSection={<PiArrowsClockwise size="1rem" />}
                 loading={isLoading}
@@ -100,7 +93,7 @@ export const UserActionGroupFeature = (props: IProps) => {
                 color="red"
                 leftSection={<PiAnchorSimpleDuotone size="1rem" />}
                 loading={isLoading}
-                onClick={handleBulkActionsModal}
+                onClick={bulkAllDrawerHandlers.open}
                 size="xs"
                 variant="outline"
             >
@@ -115,6 +108,10 @@ export const UserActionGroupFeature = (props: IProps) => {
             >
                 {t('action-group.feature.new-user')}
             </Button>
+            <BulkAllUserActionsDrawerWidget
+                handlers={bulkAllDrawerHandlers}
+                isDrawerOpen={isBulkAllUserActionsDrawerOpen}
+            />
         </Group>
     )
 }

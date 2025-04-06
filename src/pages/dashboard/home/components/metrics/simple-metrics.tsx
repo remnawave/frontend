@@ -19,19 +19,19 @@ export const getSimpleMetrics = (
             value: prettyBytesUtilWithoutPrefix(Number(users.totalTrafficBytes)) ?? 0,
             icon: PiChartBarDuotone,
             title: t('simple-metrics.total-traffic'),
-            color: 'green'
+            color: 'var(--mantine-color-green-4)'
         },
         {
             value: `${usedRamGB} / ${totalRamGB}`,
             icon: PiMemoryDuotone,
             title: t('simple-metrics.ram-usage'),
-            color: 'cyan'
+            color: 'var(--mantine-color-cyan-4)'
         },
         {
             value: dayjs.duration(systemInfo.uptime, 'seconds').humanize(false),
             title: t('simple-metrics.system-uptime'),
             icon: PiClockDuotone,
-            color: 'gray'
+            color: 'var(--mantine-color-gray-4)'
         }
     ]
 }

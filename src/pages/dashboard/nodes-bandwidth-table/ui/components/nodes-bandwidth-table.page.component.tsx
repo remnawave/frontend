@@ -18,7 +18,8 @@ export default function NodesBandwidthTablePageComponent(props: IProps) {
             <PageHeader
                 breadcrumbs={[
                     { label: t('constants.dashboard'), href: ROUTES.DASHBOARD.HOME },
-                    { label: t('constants.nodes'), href: ROUTES.DASHBOARD.NODES },
+                    { label: t('constants.management') },
+                    { label: t('constants.nodes'), href: ROUTES.DASHBOARD.MANAGEMENT.NODES },
                     { label: t('constants.nodes-bandwidth-table') }
                 ]}
                 title={t('constants.nodes-bandwidth-table')}

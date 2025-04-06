@@ -1,0 +1,30 @@
+.telegram {
+    --telegram-color: #0088cc;
+    --telegram-color-hover: #0088cc;
+
+    @mixin light {
+        background-color: var(--telegram-color);
+        border-color: var(--telegram-color);
+        color: var(--mantine-color-white);
+    }
+
+    @mixin dark {
+        background-color: var(--telegram-color);
+        border-color: var(--telegram-color);
+        color: var(--mantine-color-white);
+
+        @mixin hover {
+            border-color: var(--telegram-color-hover);
+
+            svg {
+                color: var(--telegram-color);
+            }
+        }
+    }
+
+    svg {
+        color: var(--mantine-color-white);
+        width: rem(22);
+        height: rem(22);
+    }
+}

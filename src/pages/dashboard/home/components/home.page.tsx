@@ -28,6 +28,7 @@ export const HomePage = (props: IProps) => {
             <PageHeader
                 breadcrumbs={[
                     { label: t('constants.dashboard'), href: '/' },
+                    { label: t('constants.overview'), href: '/' },
                     { label: t('constants.home') }
                 ]}
                 title={t('home.page.short-stats')}

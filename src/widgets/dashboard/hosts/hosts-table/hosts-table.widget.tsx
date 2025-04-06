@@ -1,5 +1,6 @@
 import { DragDropContext, Droppable, DropResult } from '@hello-pangea/dnd'
 import { useListState } from '@mantine/hooks'
+import { Container } from '@mantine/core'
 import { useEffect } from 'react'
 
 import { HostCardWidget } from '@widgets/dashboard/hosts/host-card'
@@ -9,9 +10,10 @@ import { useReorderHosts } from '@shared/api/hooks'
 import { IProps } from './interfaces'
 
 export function HostsTableWidget(props: IProps) {
-    const { inbounds, hosts } = props
+    const { inbounds, hosts, selectedHosts, setSelectedHosts } = props
 
     const [state, handlers] = useListState(hosts || [])
+
     const { mutate: reorderHosts } = useReorderHosts()
 
     useEffect(() => {
@@ -50,21 +52,38 @@ export function HostsTableWidget(props: IProps) {
         handlers.reorder({ from: source.index, to: destination?.index || 0 })
     }
 
+    const toggleHostSelection = (hostId: string) => {
+        setSelectedHosts((prev) =>
+            prev.includes(hostId) ? prev.filter((id) => id !== hostId) : [...prev, hostId]
+        )
+    }
+
+    if (!hosts || !inbounds) return null
+    if (hosts.length === 0) return <EmptyPageLayout />
+
     return (
         <DragDropContext onDragEnd={handleDragEnd}>
             <Droppable direction="vertical" droppableId="dnd-list">
                 {(provided) => (
-                    <div {...provided.droppableProps} ref={provided.innerRef}>
+                    <Container
+                        p={0}
+                        size={'lg'}
+                        {...provided.droppableProps}
+                        ref={provided.innerRef}
+                    >
                         {state.map((item, index) => (
-                            <HostCardWidget
-                                inbounds={inbounds}
-                                index={index}
-                                item={item}
-                                key={item.uuid}
-                            />
+                            <div key={item.uuid} style={{ position: 'relative' }}>
+                                <HostCardWidget
+                                    inbounds={inbounds}
+                                    index={index}
+                                    isSelected={selectedHosts.includes(item.uuid)}
+                                    item={item}
+                                    onSelect={() => toggleHostSelection(item.uuid)}
+                                />
+                            </div>
                         ))}
                         {provided.placeholder}
-                    </div>
+                    </Container>
                 )}
             </Droppable>
         </DragDropContext>

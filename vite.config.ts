@@ -1,12 +1,11 @@
-/* eslint-disable indent */
 import removeConsole from 'vite-plugin-remove-console'
 // import { visualizer } from 'rollup-plugin-visualizer'
 import webfontDownload from 'vite-plugin-webfont-dl'
 import tsconfigPaths from 'vite-tsconfig-paths'
 import { fileURLToPath, URL } from 'node:url'
 import react from '@vitejs/plugin-react-swc'
-import { defineConfig } from 'vite'
 // import deadFile from 'vite-plugin-deadfile'
+import { defineConfig } from 'vite'
 import * as dotenv from 'dotenv'
 
 dotenv.config({ path: `${__dirname}/.env` })
@@ -17,7 +16,11 @@ export default defineConfig({
         tsconfigPaths(),
         removeConsole(),
         webfontDownload()
-        // visualizer() as PluginOption
+        // visualizer({
+        //     open: true,
+        //     gzipSize: true,
+        //     brotliSize: true
+        // })
         // deadFile({
         //     include: ['src/**/*.{js,jsx,ts,tsx}'],
         //     exclude: ['node_modules/**', /\.md$/i, 'public/**', 'dist/**', '.git/**', '.vscode/**']
@@ -29,6 +32,7 @@ export default defineConfig({
     build: {
         target: 'esNext',
         outDir: 'dist',
+        chunkSizeWarningLimit: 1000000,
         rollupOptions: {
             output: {
                 manualChunks: {
