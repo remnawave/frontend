@@ -316,11 +316,11 @@
         "none": "None",
         "inbounds-default": "Inbound's default",
         "here-you-can-override-security-settings-from-xtls-config": "Here you can override security settings from XTLS Config.",
-        "extra-xhttp": "Extra xHTTP",
-        "xhttp-extra-params": "xHTTP extra params",
-        "extra-xhttp-description": "This extra params will work only with xHTTP protocol. Pass object \"extra\" to the client. This JSON input is not validated, be sure to paste the correct extra params. Use the button below to copy the basic extra params, then paste it into the JSON input.",
+        "extra-xhttp": "XHTTP Extra",
+        "xhttp-extra-params": "XHTTP extra parameters",
+        "extra-xhttp-description": "This setting will only work with the XHTTP protocol. An \"extra\" object JSON will be passed to the client. The JSON input is not validated, be sure to enter a valid configuration. You can use the button below to copy the basic extra settings and paste it into the JSON input.",
         "invalid-json": "Invalid JSON",
-        "fill-with-sample-xhttp-extra-params": "Fill with sample xHTTP extra params",
+        "fill-with-sample-xhttp-extra-params": "Fill with sample XHTTP extra options",
         "close": "Close",
         "clone": "Clone"
     },
@@ -566,8 +566,8 @@
             "add-username-to-base-subscription": "Add #username to base subscription",
             "add-username-description": "Add #username to the base subscription path at the subscription route.",
             "subscription-info-description": "This setting is supported by many client apps such as Happ, V2RayNG, Streisand, etc.",
-            "happ-description-line-1": "Here you can configure the Happ settings for the subscription.",
-            "happ-description-line-2": "This settings will be used only if the subscription is used in Happ."
+            "happ-description-line-1": "Here you can configure Happ settings for the subscription.",
+            "happ-description-line-2": "This settings will only be used in Happ."
         },
         "page": {
             "component": {
@@ -847,8 +847,8 @@
             "upload-config": "Upload Config",
             "subscription-page-builder": "Subscription Page Builder",
             "how-to-use-it": "How to use it?",
-            "description-line-1": "You can use this builder to configure available clients and guides for Remnawave Subscription Page.",
-            "description-line-2": "After creating your first configuration, you can download it and mount to subscription-page container.",
+            "description-line-1": "You can use this builder to configure available clients and usage guides for Remnawave Subscription Pages.",
+            "description-line-2": "After creating your desired configuration, you can export and download it and mount the configuration file to your subscription-page container.",
             "description-line-3": "Click \"Load Default\" to get the reference configuration from the GitHub repository.",
             "learn-more": "Learn more"
         }
@@ -898,8 +898,8 @@
     "subscription-tabs": {
         "widget": {
             "show-custom-remarks": "Show custom remarks",
-            "show-custom-remark-description-line-1": "Only for EXPIRED, LIMITED, DISABLED users.",
-            "show-custom-remark-description-line-2": "If this setting is disabled – EXPIRED, LIMITED, DISABLED users will recieve acutal host list, instead of custom remark below."
+            "show-custom-remark-description-line-1": "Only for EXPIRED, LIMITED and DISABLED users.",
+            "show-custom-remark-description-line-2": "If this setting is disabled – EXPIRED, LIMITED and DISABLED users will receive an actual host list, instead of the custom remarks below."
         }
     }
 }
