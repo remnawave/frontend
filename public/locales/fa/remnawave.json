@@ -18,7 +18,7 @@
         "happ-routing-builder": "مسیرساز برای Happ",
         "templates": "قالب‌ها",
         "subscription": "سابسکریپشن",
-        "subscription-page-builder": "Sub Page Builder"
+        "subscription-page-builder": "سازنده صفحه اشتراک"
     },
     "bandwidth-metrics": {
         "current-year": "امسال",
@@ -55,12 +55,12 @@
             "save": "ذخیره",
             "format": "فرمت",
             "copy-config": "کپی",
-            "save-anyway-description": "Are you sure you want to save invalid XRay config? This action\n                                    can lead to unexpected behavior. Continue only if you know what\n                                    you are doing.",
-            "cancel": "Cancel",
-            "save-anyway-title": "Confirm action",
-            "error": "Error",
-            "failed-to-save-invalid-json": "Failed to save, invalid JSON.",
-            "save-anyway": "Save anyway"
+            "save-anyway-description": "این آیا از ذخیره کانفیگ نامعتبر مطمئن هستید؟ این عملیات ممکن است باعث بروز مشکلاتی در نرم‌افزار شود. اگر مطمئن هستید، روی \"ذخیره کانفیگ نامعتبر\" کلیک کنید.",
+            "cancel": "لغو",
+            "save-anyway-title": "تایید عملیات",
+            "error": "خطا",
+            "failed-to-save-invalid-json": "به دلیل JSON نامتعتبر ذخیره نشد",
+            "save-anyway": "ذخیره کانفیگ نامعتبر"
         }
     },
     "use-bandwidth-table-columns": {
@@ -203,9 +203,9 @@
     "error-accordeon": {
         "widget": {
             "last-error-message": "آخرین پیام خطا",
-            "important-note-description": "برای اتصال به نود باید این سرتیفیکت را در فایل قرار دهید",
-            "important-note": "نکته مهم",
-            "important-note-description-value": "سرتیفیکت \nکپی و چسباندن آن در Remnanode"
+            "important-note-description": "برای اتصال به نود باید این سرتیفیکت را در فایل داکر نود قرار دهید",
+            "important-note-description-value": "سرتیفیکت را کپی کرده و وارد Remnanode کنید",
+            "important-note": "نکته مهم"
         }
     },
     "node-card": {
@@ -248,10 +248,10 @@
             "create-user": "ساخت کاربر",
             "email-of-a-user": "ایمیل کاربر",
             "telegram-id-of-a-user-in-telegram": "آیدی عددی تلگرام کاربر",
-            "1-month": "+1 month",
-            "1-year": "+1 year",
-            "2099-year": "2099 year",
-            "3-months": "+3 months"
+            "1-month": "+1 ماه",
+            "1-year": "+1 سال",
+            "2099-year": "2099 سال",
+            "3-months": "+3 ماه"
         }
     },
     "login-form-feature": {
@@ -312,17 +312,17 @@
         "e-g-443": "مثلا 443",
         "path-e-g-ws": "مسیر (مثلا /ws)",
         "here-you-can-override-security-settings-from-xtls-config": "در اینجا می توانید تنظیمات امنیتی را از پیکربندی XTLS نادیده بگیرید.",
-        "inbounds-default": "پیش فرض ورودی",
+        "inbounds-default": "پیش فرض اینباند",
         "none": "هیچ کدام",
         "security-layer": "لایه امنیتی",
         "tls-transport-layer-security": "TLS (امنیت لایه حمل و نقل)",
-        "extra-xhttp": "Extra xHTTP",
-        "xhttp-extra-params": "xHTTP extra params",
-        "extra-xhttp-description": "This extra params will work only with xHTTP protocol. Pass object \"extra\" to the client. This JSON input is not validated, be sure to paste the correct extra params. Use the button below to copy the basic extra params, then paste it into the JSON input.",
-        "invalid-json": "Invalid JSON",
-        "fill-with-sample-xhttp-extra-params": "Fill with sample xHTTP extra params",
-        "close": "Close",
-        "clone": "Clone"
+        "extra-xhttp": "تنظیمات Extra XHTTP",
+        "xhttp-extra-params": "XHTTP Extra پارامترهای",
+        "extra-xhttp-description": "این تنظیمات فقط برای کانفیگ‌های XHTTP استفاده می‌شود. یک شی JSON به اسم extra به نرم‌افزار کلاینت ارسال خواهد شد. به کمک دکمه زیر می‌توانید تنظیمات نمونه را کپی کرده و استفاده کنید",
+        "invalid-json": "JSON نامعتبر",
+        "fill-with-sample-xhttp-extra-params": "پر کردن با پارامترهای نمونه XHTTP Extra",
+        "close": "بستن",
+        "clone": "همانندسازی"
     },
     "base-node-form": {
         "country": "کشور",
@@ -497,21 +497,21 @@
             "copied": "کپی شد",
             "show-qr": "نمایش QR",
             "close": "بستن",
-            "basic-configuration": "Basic Configuration",
-            "block-routing": "Block Routing",
-            "code-editor": "Code Editor",
-            "decode": "Decode",
-            "direct-routing": "Direct Routing",
-            "dns-hosts-0": "DNS Hosts",
-            "domestic-dns-settings": "Domestic DNS Settings",
-            "encoded-link": "Encoded Link",
-            "import-configuration": "Import Configuration",
-            "import-from-base64": "Import from Base64",
-            "invalid-base64-or-happ-link": "Invalid Base64 or Happ Link",
-            "paste-a-happ-routing-link-or-base64-encoded-config": "Paste a Happ routing link or Base64 encoded config",
-            "paste-base64-or-happ-link-here": "Paste Base64 or Happ Link here",
-            "proxy-routing": "Proxy Routing",
-            "remote-dns-settings": "Remote DNS Settings"
+            "basic-configuration": "تنظیمات پایه",
+            "block-routing": "روتینگ بلاک (مسدودسازی ترافیک)",
+            "code-editor": "ویرایشگر کد",
+            "decode": "رمزگشایی",
+            "direct-routing": "روتینگ مستقیم",
+            "dns-hosts-0": "هاست‌های DNS",
+            "domestic-dns-settings": "تنظیمات DNS محلی",
+            "encoded-link": "لینک رمزنگاری شده",
+            "import-configuration": "وارد کردن تنظیمات",
+            "import-from-base64": "وارد کردن از Base64",
+            "invalid-base64-or-happ-link": "لینک Happ یا Base64 نامعتبر است",
+            "paste-a-happ-routing-link-or-base64-encoded-config": "لینک Happ یا تنظیمات رمزنگاری شده Base64 را وارد کنید",
+            "paste-base64-or-happ-link-here": "اینجا لینک Happ یا Base64 را وارد کنید",
+            "proxy-routing": "روتینگ پروکسی",
+            "remote-dns-settings": "تنظیمات DNS ریموت (خارج)"
         },
         "page": {
             "component": {
@@ -534,7 +534,7 @@
             "validation-error": "خطای اعتبارسنجی",
             "you-must-add-at-least-one-remark-with-text": "باید حداقل یک ریمارک وارد نمایید",
             "subscription-info": "مشخصات سابسکریپشن",
-            "this-title-will-be-displayed-as-subscription-name": "عنوان لینک اشتراک در نرم افزار",
+            "this-title-will-be-displayed-as-subscription-name": "عنوان لینک اشتراک در نرم‌افزار",
             "profile-title": "عنوان پروفایل",
             "enter-profile-title": "عنوان پروفایل را وارد نمایید",
             "auto-update-description": "بعضی نرم‌افزارها براساس این بازه زمانی لینک را به صورت خودکار به‌روزرسانی خواهند کرد",
@@ -552,7 +552,7 @@
             "user-status-remarks": "ریمارک‌های وضعیت کاربر",
             "user-status-remarks-description": "درصورتی که کاربر منقضی، محدود یا غیرفعال شده باشد مقادیر زیر در سابسکریپشن او نمایش داده خواهند شد",
             "user-status-remarks-description-line-2": "می‌توانید برای هر وضعیت چند ریمارک ایجاد کنید",
-            "user-status-remarks-description-line-3": "چون کاربرهای منقضی، محدود یا غیرفعال توانایی اتصال به سرورها را ندارند، به جای دریافت لینک خالی این مقادیر را در نرم افزار خواهند دید",
+            "user-status-remarks-description-line-3": "چون کاربرهای منقضی، محدود یا غیرفعال توانایی اتصال به سرورها را ندارند، به جای دریافت لینک خالی این مقادیر را در نرم‌افزار خواهند دید",
             "expired-users-remarks": "ریمارک‌های کاربر منقضی شده",
             "limited-users-remarks": "ریمارک‌های کاربر محدود شده",
             "disabled-users-remarks": "ریمارک‌های کاربر غیرفعال شده",
@@ -562,12 +562,12 @@
             "profile-webpage-url": "URL صفحه وب مشخصات",
             "profile-webpage-url-description": "توسط برخی از نرم‌افزارها استفاده می‌شود. \nبه طور پیش فرض فعال شده ، دامنه از متغیر SUB_PUBLIC_DOMAIN .env دریافت می‌شود",
             "serve-json-at-base-subscription": "ارائه JSON در لینک پایه پیشفرض",
-            "serve-json-description": "درصورت پشتیبانی نرم افزار، بدون نیاز به قرار دادن /json در انتهای لینک، اشتراک JSON برای آن ارسال خواهد شد",
+            "serve-json-description": "درصورت پشتیبانی نرم‌افزار، بدون نیاز به قرار دادن /json در انتهای لینک، اشتراک JSON برای آن ارسال خواهد شد",
             "add-username-to-base-subscription": "افزودن #username به انتهای لینک اشتراک",
             "add-username-description": "با فعال کردن این گزینه #username به انتهای لینک‌های اشتراک اضافه خواهد شد.",
-            "happ-description-line-1": "Here you can configure the Happ settings for the subscription.",
-            "happ-description-line-2": "This settings will be used only if the subscription is used in Happ.",
-            "subscription-info-description": "This settings is supprted by many clients apps such as Happ, V2RayNG, Streisand, etc."
+            "happ-description-line-1": "",
+            "happ-description-line-2": "این تنظیمات فقط در نرم‌افزار Happ استفاده خواهد شد",
+            "subscription-info-description": "این تنظیمات توسط نرم‌افزارهایی مثل Happ, V2RayNG, Streisand و..و استفاده می‌شود"
         },
         "page": {
             "component": {
@@ -714,7 +714,7 @@
                     "no-inbounds-selected": "هیچ اینباند انتخاب نشده است",
                     "please-select-at-least-one-inbound": "لطفاً حداقل یک اینباند انتخاب کنید",
                     "perform-action-on-users": "انجام اقدامات برای {{usersCount}} کاربر انتخاب‌شده",
-                    "changes-the-active-inbounds-for-all-selected-users": "ورودی‌های فعال را برای همه کاربران انتخاب‌شده تغییر می‌دهد",
+                    "changes-the-active-inbounds-for-all-selected-users": "اینباند‌های فعال را برای همه کاربران انتخاب‌شده تغییر می‌دهد",
                     "resets-the-traffic-usage-to-zero-for-all-selected-users": "ترافیک مصرفی را برای همه کاربران انتخاب‌شده به صفر بازنشانی می‌کند",
                     "revokes-subscription-for-all-selected-users": "اشتراک را برای همه کاربران انتخاب‌شده لغو می‌کند"
                 }
