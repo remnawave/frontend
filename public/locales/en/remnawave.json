@@ -929,7 +929,7 @@
             "90-days": "90 days",
             "180-days": "180 days",
             "365-days": "365 days",
-            "performance-line-1": "Some of the data might be hidden due to improve performance.",
+            "performance-line-1": "Some of the data might be hidden to improve performance.",
             "performance-line-2": "Use Grafana or any other relevant tool to view all data.",
             "total-traffic": "Total traffic",
             "top-users": "Top users",
