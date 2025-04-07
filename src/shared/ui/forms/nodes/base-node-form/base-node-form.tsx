@@ -21,6 +21,7 @@ import { useTranslation } from 'react-i18next'
 import { useMemo } from 'react'
 
 import { ToggleNodeStatusButtonFeature } from '@features/ui/dashboard/nodes/toggle-node-status-button'
+import { GetNodeUsersUsageFeature } from '@features/ui/dashboard/nodes/get-node-users-usage'
 import { InboundCheckboxCardWidget } from '@widgets/dashboard/users/inbound-checkbox-card'
 import { ModalAccordionWidget } from '@widgets/dashboard/nodes/modal-accordeon-widget'
 import { DeleteNodeFeature } from '@features/ui/dashboard/nodes/delete-node'
@@ -260,9 +261,12 @@ export const BaseNodeForm = <T extends CreateNodeCommand.Request | UpdateNodeCom
                     {node && <DeleteNodeFeature handleClose={handleClose} node={node} />}
                 </ActionIcon.Group>
 
-                <Group>
+                <Group grow preventGrowOverflow={false} wrap="wrap">
                     {node && (
-                        <ToggleNodeStatusButtonFeature handleClose={handleClose} node={node} />
+                        <>
+                            <GetNodeUsersUsageFeature nodeUuid={node.uuid} />
+                            <ToggleNodeStatusButtonFeature handleClose={handleClose} node={node} />
+                        </>
                     )}
                     <Button
                         color="blue"

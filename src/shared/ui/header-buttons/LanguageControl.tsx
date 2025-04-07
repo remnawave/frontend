@@ -4,7 +4,7 @@ import { HeaderControl } from './HeaderControl'
 
 export function LanguageControl() {
     return (
-        <HeaderControl>
+        <HeaderControl component="div">
             <LanguagePicker />
         </HeaderControl>
     )

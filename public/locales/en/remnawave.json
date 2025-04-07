@@ -901,5 +901,50 @@
             "show-custom-remark-description-line-1": "Only for EXPIRED, LIMITED and DISABLED users.",
             "show-custom-remark-description-line-2": "If this setting is disabled – EXPIRED, LIMITED and DISABLED users will receive an actual host list, instead of the custom remarks below."
         }
+    },
+    "nodes-realtime-metrics": {
+        "widget": {
+            "total-upload": "Total upload",
+            "total-download": "Total download",
+            "average-bps": "Average BPS",
+            "active-nodes": "Active nodes",
+            "current-hour": "Current hour"
+        }
+    },
+    "node-users-usage-drawer": {
+        "widget": {
+            "no-data-available-for-the-selected-period": "No data available for the selected period",
+            "click-to-see-all-users": "Click to see all users",
+            "click-on-bars-to-view-details": "Click on bars to view details",
+            "no-data-available": "No data available",
+            "click-to-show-all-users": "Click to show all users",
+            "click-to-highlight-only-this-user": "Click to highlight only this user",
+            "users-accordeon": "Users (showing top {{displayedUserCount}} of {{significantUserCount}} active out of {{userCount}} total)",
+            "user-traffic-statistics": "User Traffic Statistics",
+            "usage-by-period": "Usage by period",
+            "7-days": "7 days",
+            "14-days": "14 days",
+            "30-days": "30 days",
+            "60-days": "60 days",
+            "90-days": "90 days",
+            "180-days": "180 days",
+            "365-days": "365 days",
+            "performance-line-1": "Some of data can be hidden due to performance reasons.",
+            "performance-line-2": "Use Grafana or any other tools to view all data.",
+            "total-traffic": "Total traffic",
+            "top-users": "Top users",
+            "stacked": "Stacked",
+            "grouped": "Grouped",
+            "filter-users": "Filter users",
+            "bar-chart": "Bar Chart",
+            "previous-day": "Previous day",
+            "next-day": "Next day",
+            "hidden-users": "({{hiddenCount}} users with <100 KB hidden)",
+            "total-traffic-prettybytestoanyutil": "Total traffic: {{totalTraffic}}",
+            "user": "User",
+            "traffic": "Traffic",
+            "no-users-with-traffic-100-kb": "No users with traffic ≥ 100 KB",
+            "users-hidden-with-less-than-100-kb": "{{usersCount}} users hidden with less than 100 KB ({{totalTraffic}} total)"
+        }
     }
 }

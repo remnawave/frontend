@@ -1,4 +1,4 @@
-import { Group } from '@mantine/core'
+import { Box, Group } from '@mantine/core'
 
 import { MetricCard } from '@shared/ui/metrics/metric-card'
 
@@ -8,15 +8,17 @@ export const MetricWithTrend = (props: IProps) => {
     const { title, value, difference, period, icon } = props
     return (
         <MetricCard.Root key={title}>
-            <Group>
+            <Group wrap="nowrap">
                 <MetricCard.Icon>{icon}</MetricCard.Icon>
-                <div>
-                    <MetricCard.TextMuted>{title}</MetricCard.TextMuted>
-                    <MetricCard.TextEmphasis ff={'monospace'}>{value}</MetricCard.TextEmphasis>
-                    <MetricCard.TextTrend value={difference}>
+                <Box miw={0} w={'100%'}>
+                    <MetricCard.TextMuted truncate>{title}</MetricCard.TextMuted>
+                    <MetricCard.TextEmphasis ff={'monospace'} truncate>
+                        {value}
+                    </MetricCard.TextEmphasis>
+                    <MetricCard.TextTrend truncate value={difference}>
                         {period ?? 'last month'}
                     </MetricCard.TextTrend>
-                </div>
+                </Box>
             </Group>
         </MetricCard.Root>
     )
