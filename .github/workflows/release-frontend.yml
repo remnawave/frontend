@@ -44,7 +44,7 @@ jobs:
               run: |
                   SHORT_SHA=$(echo "${{ github.sha }}" | cut -c1-8)
                   BUILD_TIME=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
-                  BRANCH="${{ github.ref_name }}"
+                  BRANCH="main"
                   FULL_SHA="${{ github.sha }}"
                   TAG="null"
 
@@ -75,18 +75,22 @@ jobs:
                   zip -r remnawave-frontend.zip ./dist
 
             - name: Upload Release Asset
-              uses: svenstaro/upload-release-action@v2
+              uses: softprops/action-gh-release@v2
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
               with:
-                  repo_token: ${{ secrets.GH_TOKEN }}
-                  file: remnawave-frontend.zip
-                  asset_name: remnawave-frontend.zip
-                  tag: ${{ github.ref_name }}
-                  release_name: ${{ github.ref_name }}
+                  files: remnawave-frontend.zip
+                  tag_name: ${{ github.ref_name }}
+                  generate_release_notes: true
+                  append_body: true
+                  make_latest: true
+                  draft: false
+                  prerelease: false
+                  name: ${{ github.ref_name }}
                   body: |
                       🎉 Automatic release of Remnawave Frontend, v${{ github.ref_name }}
 
                       This release was automatically created through GitHub Actions.
-
 
                       ### 📝 Changes
 
