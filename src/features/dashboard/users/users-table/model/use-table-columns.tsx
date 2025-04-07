@@ -105,7 +105,8 @@ export const useUserTableColumns = () => {
                 size: 400,
 
                 mantineTableBodyCellProps: {
-                    align: 'center'
+                    align: 'center',
+                    style: { whiteSpace: 'normal', wordBreak: 'break-word' }
                 }
             },
 

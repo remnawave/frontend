@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next'
-import { Grid } from '@mantine/core'
+import { Grid, Stack } from '@mantine/core'
 
+import { NodesRealtimeUsageMetrics } from '@widgets/dashboard/nodes/nodes-realtime-metrics'
 import { EditNodeModalConnectorWidget } from '@widgets/dashboard/nodes/edit-node-modal'
 import { CreateNodeModalWidget } from '@widgets/dashboard/nodes/create-node-modal'
 import { NodesPageHeaderWidget } from '@widgets/dashboard/nodes/nodes-page-header'
@@ -27,7 +28,10 @@ export default function NodesPageComponent(props: IProps) {
 
             <Grid>
                 <Grid.Col span={12}>
-                    <NodesPageHeaderWidget />
+                    <Stack>
+                        <NodesRealtimeUsageMetrics />
+                        <NodesPageHeaderWidget />
+                    </Stack>
 
                     {isLoading ? (
                         <LoadingScreen height="60vh" />

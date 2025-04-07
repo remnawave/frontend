@@ -1,6 +1,8 @@
 import {
     GetAllNodesCommand,
+    GetNodesRealtimeUsageCommand,
     GetNodesUsageByRangeCommand,
+    GetNodeUserUsageByRangeCommand,
     GetOneNodeCommand,
     GetPubKeyCommand
 } from '@remnawave/backend-contract'
@@ -24,7 +26,15 @@ export const nodesQueryKeys = createQueryKeys('nodes', {
     },
     getNodesUsageByRangeCommand: (filters: GetNodesUsageByRangeCommand.RequestQuery) => ({
         queryKey: [filters]
-    })
+    }),
+    getNodeUserUsage: (
+        query: GetNodeUserUsageByRangeCommand.Request & GetNodeUserUsageByRangeCommand.RequestQuery
+    ) => ({
+        queryKey: [query]
+    }),
+    getNodeUserUsageByRange: {
+        queryKey: null
+    }
 })
 
 export const useGetNodes = createGetQueryHook({
@@ -92,6 +102,42 @@ export const useGetNodesUsageByRangeCommand = createGetQueryHook({
     errorHandler: (error) => {
         notifications.show({
             title: `${GetNodesUsageByRangeCommand.url}`,
+            message: error instanceof Error ? error.message : `Request failed with unknown error.`,
+            color: 'red'
+        })
+    }
+})
+
+export const useGetNodeUsersUsageByRange = createGetQueryHook({
+    endpoint: GetNodeUserUsageByRangeCommand.TSQ_url,
+    responseSchema: GetNodeUserUsageByRangeCommand.ResponseSchema,
+    requestQuerySchema: GetNodeUserUsageByRangeCommand.RequestQuerySchema,
+    routeParamsSchema: GetNodeUserUsageByRangeCommand.RequestSchema,
+    getQueryKey: ({ route, query }) =>
+        nodesQueryKeys.getNodeUserUsage({ ...route!, ...query! }).queryKey,
+    rQueryParams: {
+        staleTime: sToMs(15)
+    },
+    errorHandler: (error) => {
+        notifications.show({
+            title: `Error fetching node users usage`,
+            message: error instanceof Error ? error.message : `Request failed with unknown error.`,
+            color: 'red'
+        })
+    }
+})
+
+export const useGetNodesRealtimeUsage = createGetQueryHook({
+    endpoint: GetNodesRealtimeUsageCommand.TSQ_url,
+    responseSchema: GetNodesRealtimeUsageCommand.ResponseSchema,
+    getQueryKey: () => nodesQueryKeys.getNodeUserUsageByRange.queryKey,
+    rQueryParams: {
+        staleTime: sToMs(5),
+        refetchInterval: sToMs(5)
+    },
+    errorHandler: (error) => {
+        notifications.show({
+            title: `Error fetching nodes realtime usage`,
             message: error instanceof Error ? error.message : `Request failed with unknown error.`,
             color: 'red'
         })
