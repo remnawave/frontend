@@ -322,7 +322,13 @@
         "invalid-json": "Invalid JSON",
         "fill-with-sample-xhttp-extra-params": "Fill with sample xHTTP extra params",
         "close": "Close",
-        "clone": "Clone"
+        "clone": "Clone",
+        "address-description-line-1": "Address must be an IP address or a domain name of connection destination.",
+        "address-description-line-2": "In most cases, it should points to the one of connected nodes.",
+        "port-description-line-1": "Connection port.",
+        "port-description-line-2": "In most cases, must match the port of selected inbound.",
+        "sni-description-line-1": "SNI is a server name indication.",
+        "sni-description-line-2": "If not specified, value from config's inbound will be used."
     },
     "base-node-form": {
         "country": "Страна",
