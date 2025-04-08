@@ -168,7 +168,7 @@ export const NodeUsersUsageDrawer = (props: IProps) => {
 
         const significantUsers = significantUsersData.map((item) => item.name)
 
-        const MAX_DISPLAYED_USERS = 5_00
+        const MAX_DISPLAYED_USERS = 100
         const topSignificantUsers = significantUsers.slice(0, MAX_DISPLAYED_USERS)
 
         const allUserCount = seriesSet.size
