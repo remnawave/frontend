@@ -181,7 +181,22 @@
     },
     "hosts-page-header": {
         "widget": {
-            "list-of-all-hosts": "List of all hosts"
+            "list-of-all-hosts": "List of all hosts",
+            "about-hosts": "About hosts",
+            "header-description-line-1": "A host is an entry point for a user. A group of hosts forms a so-called \"subscription\".",
+            "header-description-line-2": "Each host can optionally refer to one server.",
+            "remark": "Remark",
+            "remark-description-line-1": "The host name can be anything, but must be unique within a single subscription.",
+            "remark-description-line-2": "The note will be displayed in the list of available servers in the end client.",
+            "inbound": "Inbound",
+            "inbound-line-1": "It is necessary to select one of the inbounds to which a specific host will be bound.",
+            "inbound-line-2": "The list of inbounds is formed in the \"Xray config\" section.",
+            "address-and-port": "Address and port",
+            "address-and-port-line-1": "In most cases, the IP/domain should point to one of the connected nodes.",
+            "address-and-port-line-2": "The port must be open and accessible for incoming connections.",
+            "address-and-port-line-3": "Typically the port should match the inbound port from the Xray configuration.",
+            "advanced-settings": "\"Advanced Settings\" are additional settings that can be used to further customize the host.",
+            "advanced-settings-2": "Anything specified in \"Advanced Settings\" has a higher priority than the settings specified in the Xray configuration."
         }
     },
     "remark-info": {
@@ -322,7 +337,13 @@
         "invalid-json": "Invalid JSON",
         "fill-with-sample-xhttp-extra-params": "Fill with sample XHTTP extra options",
         "close": "Close",
-        "clone": "Clone"
+        "clone": "Clone",
+        "address-description-line-1": "Address must be an IP address or a domain name of connection destination.",
+        "address-description-line-2": "In most cases, it should points to the one of connected nodes.",
+        "port-description-line-1": "Connection port.",
+        "port-description-line-2": "In most cases, must match the port of selected inbound.",
+        "sni-description-line-1": "SNI is a server name indication.",
+        "sni-description-line-2": "If not specified, value from config's inbound will be used."
     },
     "base-node-form": {
         "country": "Country",
@@ -929,8 +950,8 @@
             "90-days": "90 days",
             "180-days": "180 days",
             "365-days": "365 days",
-            "performance-line-1": "Some of data can be hidden due to performance reasons.",
-            "performance-line-2": "Use Grafana or any other tools to view all data.",
+            "performance-line-1": "Some of the data might be hidden to improve performance.",
+            "performance-line-2": "Use Grafana or any other relevant tool to view all data.",
             "total-traffic": "Total traffic",
             "top-users": "Top users",
             "stacked": "Stacked",

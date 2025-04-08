@@ -32,6 +32,7 @@ import {
 import { useDisclosure } from '@mantine/hooks'
 import { useTranslation } from 'react-i18next'
 
+import { PopoverWithInfoShared } from '@shared/ui/popovers/popover-with-info'
 import { DeleteHostFeature } from '@features/ui/dashboard/hosts/delete-host'
 import { TemplateInfoPopoverShared } from '@shared/ui/popovers'
 
@@ -128,6 +129,33 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
                     required
                 />
 
+                <Group gap="xs" grow justify="space-between" preventGrowOverflow={false} w="100%">
+                    <Select
+                        data={Object.values(inbounds ?? {}).map((inbound) => ({
+                            label: inbound.tag,
+                            value: inbound.uuid
+                        }))}
+                        key={form.key('inboundUuid')}
+                        label={t('base-host-form.inbound')}
+                        {...form.getInputProps('inboundUuid')}
+                        allowDeselect={false}
+                        defaultValue={host?.inboundUuid ?? undefined}
+                        placeholder={t('base-host-form.select-inbound')}
+                        required
+                        w="75%"
+                    />
+
+                    <Switch
+                        color="teal.8"
+                        key={form.key('isDisabled')}
+                        mt={25}
+                        radius="md"
+                        size="xl"
+                        w="20%"
+                        {...form.getInputProps('isDisabled', { type: 'checkbox' })}
+                    />
+                </Group>
+
                 <Stack gap="md">
                     <Group
                         gap="xs"
@@ -139,6 +167,17 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
                         <TextInput
                             key={form.key('address')}
                             label={t('base-host-form.address')}
+                            leftSection={
+                                <PopoverWithInfoShared
+                                    text={
+                                        <>
+                                            {t('base-host-form.address-description-line-1')}
+                                            <br />
+                                            {t('base-host-form.address-description-line-2')}
+                                        </>
+                                    }
+                                />
+                            }
                             {...form.getInputProps('address')}
                             placeholder={t('base-host-form.e-g-example-com')}
                             required
@@ -154,44 +193,23 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
                             clampBehavior="strict"
                             decimalScale={0}
                             hideControls
+                            leftSection={
+                                <PopoverWithInfoShared
+                                    text={
+                                        <>
+                                            {t('base-host-form.port-description-line-1')}
+                                            <br />
+                                            <br />
+                                            {t('base-host-form.port-description-line-2')}
+                                        </>
+                                    }
+                                />
+                            }
                             max={65535}
                             min={1}
                             placeholder={t('base-host-form.e-g-443')}
                             required
                             w="20%"
-                        />
-                    </Group>
-
-                    <Group
-                        gap="xs"
-                        grow
-                        justify="space-between"
-                        preventGrowOverflow={false}
-                        w="100%"
-                    >
-                        <Select
-                            data={Object.values(inbounds ?? {}).map((inbound) => ({
-                                label: inbound.tag,
-                                value: inbound.uuid
-                            }))}
-                            key={form.key('inboundUuid')}
-                            label={t('base-host-form.inbound')}
-                            {...form.getInputProps('inboundUuid')}
-                            allowDeselect={false}
-                            defaultValue={host?.inboundUuid ?? undefined}
-                            placeholder={t('base-host-form.select-inbound')}
-                            required
-                            w="75%"
-                        />
-
-                        <Switch
-                            color="teal.8"
-                            key={form.key('isDisabled')}
-                            mt={25}
-                            radius="md"
-                            size="xl"
-                            w="20%"
-                            {...form.getInputProps('isDisabled', { type: 'checkbox' })}
                         />
                     </Group>
 
@@ -210,6 +228,18 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
                             <TextInput
                                 key={form.key('sni')}
                                 label="SNI"
+                                leftSection={
+                                    <PopoverWithInfoShared
+                                        text={
+                                            <>
+                                                {t('base-host-form.sni-description-line-1')}
+                                                <br />
+                                                <br />
+                                                {t('base-host-form.sni-description-line-2')}
+                                            </>
+                                        }
+                                    />
+                                }
                                 placeholder={t('base-host-form.sni-e-g-example-com')}
                                 {...form.getInputProps('sni')}
                             />
