@@ -70,7 +70,7 @@ jobs:
             - name: Generate changelog
               id: changelog
               run: |
-                  CHANGELOG=$(npx changelogen --from=${{ steps.tag.outputs.previousTag }} --to=${{ steps.tag.outputs.latestTag }})
+                  CHANGELOG=$(npx changelogen --from=${{ steps.tag.outputs.previousTag }} --to=${{ steps.tag.outputs.latestTag }} | sed '/^\[log\]/d')
                   echo "CHANGELOG<<EOF" >> $GITHUB_ENV
                   echo "$CHANGELOG" >> $GITHUB_ENV
                   echo "EOF" >> $GITHUB_ENV
@@ -98,15 +98,13 @@ jobs:
                   prerelease: false
                   name: ${{ github.ref_name }}
                   body: |
-                      🌊 Remnawave Frontend v${{ github.ref_name }}
+                      # 🌊 Remnawave Frontend v${{ github.ref_name }}
 
                       <p align="center">
                       <a href="https://t.me/remnawave" target="_blank" rel="noopener noreferrer">
                         <img src="https://img.shields.io/badge/Join%20community-Telegram-26A5E4?style=for-the-badge&logo=telegram&logoColor=white" alt="Join community on Telegram" width="220" height="auto">
                       </a>
                       </p>
-
-                      📝 Compare changes: [${{ steps.tag.outputs.previousTag }}...${{ steps.tag.outputs.latestTag }}](https://github.com/${{ github.repository }}/compare/${{ steps.tag.outputs.previousTag }}...${{ steps.tag.outputs.latestTag }})
 
                       ${{ env.CHANGELOG }}
 
