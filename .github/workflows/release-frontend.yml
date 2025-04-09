@@ -65,6 +65,14 @@ jobs:
                   }
                   EOF
 
+            - name: Generate changelog
+              id: changelog
+              run: |
+                  CHANGELOG=$(npx changelogen --from=${{ steps.tag.outputs.previousTag }} --to=${{ steps.tag.outputs.latestTag }})
+                  echo "CHANGELOG<<EOF" >> $GITHUB_ENV
+                  echo "$CHANGELOG" >> $GITHUB_ENV
+                  echo "EOF" >> $GITHUB_ENV
+
             - name: Install dependencies and build
               run: |
                   npm install
@@ -88,13 +96,17 @@ jobs:
                   prerelease: false
                   name: ${{ github.ref_name }}
                   body: |
-                      🎉 Automatic release of Remnawave Frontend, v${{ github.ref_name }}
+                      🌊 Remnawave Frontend v${{ github.ref_name }}
 
-                      This release was automatically created through GitHub Actions.
+                      <p align="center">
+                      <a href="https://t.me/remnawave" target="_blank" rel="noopener noreferrer">
+                        <img src="https://img.shields.io/badge/Join%20community-Telegram-26A5E4?style=for-the-badge&logo=telegram&logoColor=white" alt="Join community on Telegram" width="220" height="auto">
+                      </a>
+                      </p>
 
-                      ### 📝 Changes
+                      📝 Compare changes: [${{ steps.tag.outputs.previousTag }}...${{ steps.tag.outputs.latestTag }}](https://github.com/${{ github.repository }}/compare/${{ steps.tag.outputs.previousTag }}...${{ steps.tag.outputs.latestTag }})
 
-                      ✏️ Compare: [${{ steps.tag.outputs.previousTag }}...${{ steps.tag.outputs.latestTag }}](https://github.com/${{ github.repository }}/compare/${{ steps.tag.outputs.previousTag }}...${{ steps.tag.outputs.latestTag }})
+                      ${{ env.CHANGELOG }}
 
                       ### 📦 Artifacts
                       - remnawave-frontend.zip - archive with built frontend

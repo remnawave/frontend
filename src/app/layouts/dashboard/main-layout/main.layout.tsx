@@ -1,8 +1,19 @@
-import { AppShell, Badge, Burger, Code, Container, Group, ScrollArea, Text } from '@mantine/core'
+import {
+    AppShell,
+    Badge,
+    Burger,
+    Code,
+    Container,
+    Group,
+    Indicator,
+    ScrollArea,
+    Text
+} from '@mantine/core'
 import { useClickOutside, useDisclosure, useMediaQuery } from '@mantine/hooks'
 import { useQuery } from '@tanstack/react-query'
 import { useEffect, useState } from 'react'
 import { Outlet } from 'react-router-dom'
+import semver from 'semver'
 import axios from 'axios'
 
 import { getBuildInfo } from '@shared/utils/get-build-info/get-build-info.util'
@@ -20,6 +31,15 @@ export function MainLayout() {
     const [desktopOpened, { toggle: toggleDesktop }] = useDisclosure(true)
     const [buildInfoModalOpened, setBuildInfoModalOpened] = useState(false)
     const [isMediaQueryReady, setIsMediaQueryReady] = useState(false)
+
+    const [versions, setVersions] = useState<{
+        currentVersion: string
+        latestVersion: string
+    }>({
+        currentVersion: '0.0.0',
+        latestVersion: '0.0.0'
+    })
+    const [isNewVersionAvailable, setIsNewVersionAvailable] = useState(false)
 
     const buildInfo = getBuildInfo()
 
@@ -51,6 +71,31 @@ export function MainLayout() {
             return response.data
         }
     })
+
+    const { data: latestVersion } = useQuery({
+        queryKey: ['github-latest-version'],
+        staleTime: sToMs(3600),
+        refetchInterval: sToMs(3600),
+        queryFn: async () => {
+            const response = await axios.get<{
+                release: {
+                    tag: string
+                }
+            }>('https://ungh.cc/repos/remnawave/panel/releases/latest')
+            return response.data.release.tag
+        }
+    })
+
+    useEffect(() => {
+        setVersions({
+            currentVersion: buildInfo.tag ?? '0.0.0',
+            latestVersion: latestVersion ?? '0.0.0'
+        })
+    }, [latestVersion, buildInfo.tag])
+
+    useEffect(() => {
+        setIsNewVersionAvailable(semver.gt(versions.latestVersion, versions.currentVersion))
+    }, [versions])
 
     return isMediaQueryReady ? (
         <AppShell
@@ -116,27 +161,41 @@ export function MainLayout() {
                                 </Text>
                             </Group>
                             {buildInfo.branch === 'dev' && (
-                                <Badge
-                                    color="red"
-                                    onClick={() => setBuildInfoModalOpened(true)}
-                                    radius="sm"
-                                    size="lg"
-                                    style={{ cursor: 'help', marginLeft: 'auto' }}
-                                    variant="light"
+                                <Indicator
+                                    color="cyan"
+                                    disabled={!isNewVersionAvailable}
+                                    processing
+                                    size={11}
                                 >
-                                    dev
-                                </Badge>
+                                    <Badge
+                                        color="red"
+                                        onClick={() => setBuildInfoModalOpened(true)}
+                                        radius="sm"
+                                        size="lg"
+                                        style={{ cursor: 'help', marginLeft: 'auto' }}
+                                        variant="light"
+                                    >
+                                        dev
+                                    </Badge>
+                                </Indicator>
                             )}
 
                             {buildInfo.branch !== 'dev' && (
-                                <Code
-                                    c="cyan"
-                                    fw={700}
-                                    onClick={() => setBuildInfoModalOpened(true)}
-                                    style={{ cursor: 'pointer', marginLeft: 'auto' }}
+                                <Indicator
+                                    color="cyan"
+                                    disabled={!isNewVersionAvailable}
+                                    processing
+                                    size={11}
                                 >
-                                    {`v${packageJson.version}`}
-                                </Code>
+                                    <Code
+                                        c="cyan"
+                                        fw={700}
+                                        onClick={() => setBuildInfoModalOpened(true)}
+                                        style={{ cursor: 'pointer', marginLeft: 'auto' }}
+                                    >
+                                        {`v${packageJson.version}`}
+                                    </Code>
+                                </Indicator>
                             )}
 
                             {isSocialButton && (
@@ -175,6 +234,7 @@ export function MainLayout() {
 
             <BuildInfoModal
                 buildInfo={buildInfo}
+                isNewVersionAvailable={isNewVersionAvailable}
                 onClose={() => setBuildInfoModalOpened(false)}
                 opened={buildInfoModalOpened}
             />
