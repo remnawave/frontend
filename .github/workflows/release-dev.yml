@@ -43,11 +43,7 @@ jobs:
                   BUILD_TIME=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
                   BRANCH="${{ github.ref_name }}"
                   FULL_SHA="${{ github.sha }}"
-                  TAG="null"
-
-                  if [[ "${{ github.ref }}" == refs/tags/* ]]; then
-                  TAG="${{ github.ref_name }}"
-                  fi
+                  TAG=$(grep -m1 '"version":' package.json | cut -d'"' -f4)
 
                   COMMIT_URL="https://github.com/${{ github.repository }}/commit/$SHORT_SHA"
 
