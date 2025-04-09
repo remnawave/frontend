@@ -5,20 +5,39 @@ import {
     TbCheck as IconCheck,
     TbCopy as IconCopy,
     TbGitBranch as IconGitBranch,
-    TbHash as IconHash
+    TbHash as IconHash,
+    TbRipple
 } from 'react-icons/tb'
-import { Badge, Box, Button, Code, Group, Modal, Stack, Text, Title, Tooltip } from '@mantine/core'
+import {
+    Alert,
+    Badge,
+    Box,
+    Button,
+    Code,
+    Group,
+    Modal,
+    Stack,
+    Text,
+    Title,
+    Tooltip
+} from '@mantine/core'
 import { useClipboard } from '@mantine/hooks'
 
 import { IBuildInfo } from '@shared/utils/get-build-info/interfaces/build-info.interface'
 
 interface BuildInfoModalProps {
     buildInfo: IBuildInfo
+    isNewVersionAvailable: boolean
     onClose: () => void
     opened: boolean
 }
 
-export function BuildInfoModal({ opened, onClose, buildInfo }: BuildInfoModalProps) {
+export function BuildInfoModal({
+    opened,
+    onClose,
+    buildInfo,
+    isNewVersionAvailable
+}: BuildInfoModalProps) {
     const buildDate = new Date(buildInfo.buildTime).toLocaleString()
     const clipboard = useClipboard({ timeout: 1000 })
 
@@ -54,6 +73,28 @@ export function BuildInfoModal({ opened, onClose, buildInfo }: BuildInfoModalPro
             withCloseButton
         >
             <Stack gap="md">
+                {isNewVersionAvailable && (
+                    <Alert
+                        color="teal"
+                        icon={<TbRipple size={22} />}
+                        title="Update available"
+                        variant="outline"
+                    >
+                        <Text size="sm">A new version of Remnawave is available.</Text>
+                        <Button
+                            color="cyan"
+                            component="a"
+                            href={'https://github.com/remnawave/panel/releases/latest'}
+                            mt="xs"
+                            size="xs"
+                            target="_blank"
+                            variant="outline"
+                        >
+                            Check out
+                        </Button>
+                    </Alert>
+                )}
+
                 <Group align="flex-start">
                     <IconCalendar size={20} />
                     <Box>
