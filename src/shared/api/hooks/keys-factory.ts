@@ -2,6 +2,7 @@ import { inferQueryKeyStore, mergeQueryKeys } from '@lukemorales/query-key-facto
 
 import { subscriptionTemplateQueryKeys } from './subscription-template/subscription-template.query.hooks'
 import { subscriptionSettingsQueryKeys } from './subscription-settings/subscription-settings.query.hooks'
+import { hwidUserDevicesQueryKeys } from './hwid-user-devices/hwid-user-devices.query.hooks'
 import { apiTokensQueryKeys } from './api-tokens/api-tokens.query.hooks'
 import { systemQueryKeys } from './system/system.query.hooks'
 import { inboundsQueryKeys } from './inbounds/inbounds.query'
@@ -21,7 +22,8 @@ export const QueryKeys = mergeQueryKeys(
     apiTokensQueryKeys,
     authQueryKeys,
     subscriptionTemplateQueryKeys,
-    subscriptionSettingsQueryKeys
+    subscriptionSettingsQueryKeys,
+    hwidUserDevicesQueryKeys
 )
 
 export type TQueryKeys = inferQueryKeyStore<typeof QueryKeys>

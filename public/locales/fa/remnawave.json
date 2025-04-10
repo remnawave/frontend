@@ -266,7 +266,12 @@
             "1-month": "+1 ماه",
             "1-year": "+1 سال",
             "2099-year": "2099 سال",
-            "3-months": "+3 ماه"
+            "3-months": "+3 ماه",
+            "disable-hwid-limit": "Disable HWID Limit",
+            "hwid-device-limit": "HWID Device Limit",
+            "hwid-user-limit-line-1": "This feature only work if",
+            "hwid-user-limit-line-2": ".env variable is set to",
+            "hwid-user-limit-line-3": "Learn more."
         }
     },
     "login-form-feature": {
@@ -966,6 +971,33 @@
             "traffic": "ترافیک",
             "no-users-with-traffic-100-kb": "هیچ کاربری با ترافیک ≥ 100 کیلوبایت وجود ندارد",
             "users-hidden-with-less-than-100-kb": "{{usersCount}} کاربر با کمتر از 100 کیلوبایت مخفی شده‌اند ({{totalTraffic}} کل)"
+        }
+    },
+    "get-hwid-user-devices": {
+        "feature": {
+            "created": "Created",
+            "delete-device": "Delete Device",
+            "device": "Device",
+            "devices": "Devices",
+            "enter-hwid-to-filter-devices": "Enter HWID to filter devices...",
+            "hwid-devices": "HWID Devices",
+            "important-note": "Important note",
+            "important-note-line-1": "This feature is only available with the",
+            "important-note-line-2": ".env value.",
+            "important-note-line-3": "Not all applications support this feature.",
+            "important-note-line-4": "If user HWID Device Limit is empty –",
+            "important-note-line-5": "will be used.",
+            "important-note-line-6": "Please, review documentation for more information.",
+            "important-note-line-7": "Learn more.",
+            "loading-hwid-devices": "Loading HWID Devices...",
+            "model": "Model",
+            "no-devices-found": "No devices found",
+            "no-devices-match-your-search": "No devices match your search",
+            "os-version": "OS Version",
+            "platform": "Platform",
+            "search-by-hwid": "Search by HWID",
+            "unknown": "Unknown",
+            "user-agent": "User Agent"
         }
     }
 }

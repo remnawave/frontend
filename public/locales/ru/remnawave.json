@@ -266,7 +266,12 @@
             "1-month": "+1 мес.",
             "1-year": "+1 год",
             "2099-year": "2099 год",
-            "3-months": "+3 мес."
+            "3-months": "+3 мес.",
+            "disable-hwid-limit": "Отключить лимит HWID",
+            "hwid-device-limit": "Ограничение HWID устройств",
+            "hwid-user-limit-line-1": "Эта функция доступна только если",
+            "hwid-user-limit-line-2": ".env переменная установлена в ",
+            "hwid-user-limit-line-3": "Подробнее."
         }
     },
     "login-form-feature": {
@@ -966,6 +971,33 @@
             "traffic": "Трафик",
             "no-users-with-traffic-100-kb": "Нет пользователей с трафиком ≥ 100 KB",
             "users-hidden-with-less-than-100-kb": "{{usersCount}} пользователей с трафиком <100 KB, ({{totalTraffic}} всего)"
+        }
+    },
+    "get-hwid-user-devices": {
+        "feature": {
+            "created": "Создан",
+            "delete-device": "Удалить устройство",
+            "device": "Устройство",
+            "devices": "Устройств",
+            "enter-hwid-to-filter-devices": "Введите HWID для поиска...",
+            "hwid-devices": "HWID Устройства",
+            "important-note": "Важная информация",
+            "important-note-line-1": "Эта функция доступна только с",
+            "important-note-line-2": ".env переменной.",
+            "important-note-line-3": "Не все приложения поддерживают эту функцию.",
+            "important-note-line-4": "Если HWID лимит пользователь пустой –",
+            "important-note-line-5": "будет использован.",
+            "important-note-line-6": "Пожалуйста, ознакомьтесь с документацией для получения более подробной информации.",
+            "important-note-line-7": "Подробнее.",
+            "loading-hwid-devices": "Загружаем HWID устройства...",
+            "model": "Модель",
+            "no-devices-found": "Устройства не найдены",
+            "no-devices-match-your-search": "Устройства не найдены",
+            "os-version": "Версия OS",
+            "platform": "Платформа",
+            "search-by-hwid": "Поиск по HWID",
+            "unknown": "Неизвестно",
+            "user-agent": "Юзер-агент"
         }
     }
 }
