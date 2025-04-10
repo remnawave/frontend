@@ -7,6 +7,7 @@ import { useTranslation } from 'react-i18next'
 import { useUpdateSubscriptionSettings } from '@shared/api/hooks'
 
 import { SubscriptionTabs } from './subscription-tabs.widget'
+import { HeaderItem } from './headers-manager.widget'
 import { IProps } from './interfaces'
 
 export const SubscriptionSettingsWidget = (props: IProps) => {
@@ -18,6 +19,8 @@ export const SubscriptionSettingsWidget = (props: IProps) => {
         limited: [''],
         disabled: ['']
     })
+
+    const [headers, setHeaders] = useState<HeaderItem[]>([])
 
     const form = useForm<UpdateSubscriptionSettingsCommand.Request>({
         name: 'edit-subscription-settings-form',
@@ -39,6 +42,10 @@ export const SubscriptionSettingsWidget = (props: IProps) => {
 
     const updateDisabledRemarks = useCallback((newRemarks: string[]) => {
         setRemarks((prev) => ({ ...prev, disabled: newRemarks }))
+    }, [])
+
+    const updateHeaders = useCallback((newHeaders: HeaderItem[]) => {
+        setHeaders(newHeaders)
     }, [])
 
     const { mutate: updateSubscriptionSettings, isPending: isUpdateSubscriptionSettingsPending } =
@@ -63,6 +70,19 @@ export const SubscriptionSettingsWidget = (props: IProps) => {
                 disabled: processRemarks(subscriptionSettings.disabledUsersRemarks)
             })
 
+            if (
+                subscriptionSettings.customResponseHeaders &&
+                typeof subscriptionSettings.customResponseHeaders === 'object' &&
+                subscriptionSettings.customResponseHeaders !== null
+            ) {
+                const headerItems = Object.entries(subscriptionSettings.customResponseHeaders).map(
+                    ([key, value]) => ({ key, value })
+                )
+                setHeaders(headerItems)
+            } else {
+                setHeaders([])
+            }
+
             form.setValues({
                 uuid: subscriptionSettings.uuid,
                 profileTitle: subscriptionSettings.profileTitle,
@@ -81,7 +101,8 @@ export const SubscriptionSettingsWidget = (props: IProps) => {
                 disabledUsersRemarks: subscriptionSettings.disabledUsersRemarks,
                 serveJsonAtBaseSubscription: subscriptionSettings.serveJsonAtBaseSubscription,
                 addUsernameToBaseSubscription: subscriptionSettings.addUsernameToBaseSubscription,
-                isShowCustomRemarks: subscriptionSettings.isShowCustomRemarks
+                isShowCustomRemarks: subscriptionSettings.isShowCustomRemarks,
+                customResponseHeaders: subscriptionSettings.customResponseHeaders || undefined
             })
         }
     }, [subscriptionSettings])
@@ -107,6 +128,13 @@ export const SubscriptionSettingsWidget = (props: IProps) => {
             return
         }
 
+        const headersFiltered = headers.filter((header) => header.key.trim() !== '')
+
+        const customResponseHeaders: Record<string, string> = {}
+        headersFiltered.forEach((header) => {
+            customResponseHeaders[header.key] = header.value
+        })
+
         const isProfileWebpageUrlEnabled =
             (values.isProfileWebpageUrlEnabled as unknown as string) === 'true'
 
@@ -117,7 +145,8 @@ export const SubscriptionSettingsWidget = (props: IProps) => {
                 isProfileWebpageUrlEnabled,
                 expiredUsersRemarks: expiredFiltered,
                 limitedUsersRemarks: limitedFiltered,
-                disabledUsersRemarks: disabledFiltered
+                disabledUsersRemarks: disabledFiltered,
+                customResponseHeaders
             }
         })
     })
@@ -126,10 +155,12 @@ export const SubscriptionSettingsWidget = (props: IProps) => {
         <SubscriptionTabs
             form={form}
             handleSubmit={handleSubmit}
+            headers={headers}
             isUpdateSubscriptionSettingsPending={isUpdateSubscriptionSettingsPending}
             remarks={remarks}
             updateDisabledRemarks={updateDisabledRemarks}
             updateExpiredRemarks={updateExpiredRemarks}
+            updateHeaders={updateHeaders}
             updateLimitedRemarks={updateLimitedRemarks}
         />
     )
