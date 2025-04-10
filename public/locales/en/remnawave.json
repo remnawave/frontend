@@ -58,7 +58,7 @@
             "failed-to-save-invalid-json": "Failed to save, invalid JSON.",
             "error": "Error",
             "save-anyway": "Save anyway",
-            "save-anyway-description": "Are you sure you want to save invalid XRay config? This action\n                                    can lead to unexpected behavior. Continue only if you know what\n                                    you are doing.",
+            "save-anyway-description": "Are you sure you want to save invalid Xray config? This action\n                                    can lead to unexpected behavior. Continue only if you know what\n                                    you are doing.",
             "cancel": "Cancel",
             "save-anyway-title": "Confirm action"
         }
@@ -338,12 +338,12 @@
         "fill-with-sample-xhttp-extra-params": "Fill with sample XHTTP extra options",
         "close": "Close",
         "clone": "Clone",
-        "address-description-line-1": "Address must be an IP address or a domain name of connection destination.",
+        "address-description-line-1": "Address must be the IP address or a domain name pointing to the connection destination.",
         "address-description-line-2": "In most cases, it should points to the one of connected nodes.",
         "port-description-line-1": "Connection port.",
         "port-description-line-2": "In most cases, must match the port of selected inbound.",
-        "sni-description-line-1": "SNI is a server name indication.",
-        "sni-description-line-2": "If not specified, value from config's inbound will be used."
+        "sni-description-line-1": "SNI stands for Server Name Indication.",
+        "sni-description-line-2": "If not specified, the value from config's inbound will be used."
     },
     "base-node-form": {
         "country": "Country",
