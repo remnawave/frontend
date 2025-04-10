@@ -925,7 +925,9 @@
         "widget": {
             "show-custom-remarks": "نمایش توضیحات سفارشی",
             "show-custom-remark-description-line-1": "فقط برای کاربران منقضی‌شده، محدودشده و غیرفعال.",
-            "show-custom-remark-description-line-2": "اگر این گزینه غیرفعال باشد - کاربران منقضی‌شده، محدودشده و غیرفعال به جای توضیحات سفارشی زیر، لیست واقعی هاست‌ها را دریافت خواهند کرد."
+            "show-custom-remark-description-line-2": "اگر این گزینه غیرفعال باشد - کاربران منقضی‌شده، محدودشده و غیرفعال به جای توضیحات سفارشی زیر، لیست واقعی هاست‌ها را دریافت خواهند کرد.",
+            "additional-response-headers": "Additional response headers",
+            "headers-that-will-be-sent-with-subscription-content": "Headers that will be sent with subscription content."
         }
     },
     "nodes-realtime-metrics": {
@@ -998,6 +1000,13 @@
             "search-by-hwid": "Search by HWID",
             "unknown": "Unknown",
             "user-agent": "User Agent"
+        }
+    },
+    "headers-manager": {
+        "widget": {
+            "add-header": "Add header",
+            "key": "Key",
+            "value": "Value"
         }
     }
 }
