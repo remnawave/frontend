@@ -2,7 +2,7 @@
     "constants": {
         "dashboard": "داشبورد",
         "api-tokens": "توکن‌های API",
-        "config": "کانفیگ",
+        "config": "Xray کانفیگ",
         "home": "خانه",
         "hosts": "هاست‌ها",
         "inbounds": "اینباندها",
@@ -182,21 +182,21 @@
     "hosts-page-header": {
         "widget": {
             "list-of-all-hosts": "فهرست تمامی هاست‌ها",
-            "about-hosts": "About hosts",
-            "address-and-port": "Address and port",
-            "address-and-port-line-1": "In most cases, the IP/domain should point to one of the connected nodes.",
-            "address-and-port-line-2": "The port must be open and accessible for incoming connections.",
-            "address-and-port-line-3": "Typically the port should match the inbound port from the Xray configuration.",
-            "advanced-settings": "\"Advanced Settings\" are additional settings that can be used to further customize the host.",
-            "advanced-settings-2": "Anything specified in \"Advanced Settings\" has a higher priority than the settings specified in the Xray configuration.",
-            "header-description-line-1": "A host is an entry point for a user. A group of hosts forms a so-called \"subscription\".",
-            "header-description-line-2": "Each host can optionally refer to one server.",
-            "inbound": "Inbound",
-            "inbound-line-1": "It is necessary to select one of the inbounds to which a specific host will be bound.",
-            "inbound-line-2": "The list of inbounds is formed in the \"Xray config\" section.",
-            "remark": "Remark",
-            "remark-description-line-1": "The host name can be anything, but must be unique within a single subscription.",
-            "remark-description-line-2": "The note will be displayed in the list of available servers in the end client."
+            "about-hosts": "درباره هاست‌ها",
+            "header-description-line-1": "هر هاست یک نقطه ورودی برای کاربر است. گروهی از هاست‌ها یک «اشتراک» را تشکیل می‌دهند.",
+            "header-description-line-2": "هر هاست می‌تواند به‌صورت اختیاری به یک سرور اشاره کند.",
+            "remark": "ریمارک",
+            "remark-description-line-1": "نام هاست می‌تواند هر چیزی باشد، اما باید در یک اشتراک واحد منحصربه‌فرد باشد.",
+            "remark-description-line-2": "ریمارک در فهرست سرورهای موجود در کلاینت نمایش داده خواهد شد.",
+            "inbound": "اینباند",
+            "inbound-line-1": "لازم است یکی از اینباندها انتخاب شود که هاست خاصی به آن متصل خواهد شد.",
+            "inbound-line-2": "فهرست اینباندها در بخش «کانفیگ Xray» تشکیل می‌شود.",
+            "address-and-port": "آدرس و پورت",
+            "address-and-port-line-1": "در بیشتر موارد، IP/دامنه باید به یکی از نودهای متصل اشاره کند.",
+            "address-and-port-line-2": "پورت باید باز و برای اتصالات ورودی قابل دسترسی باشد.",
+            "address-and-port-line-3": "معمولاً پورت باید با پورت اینباند از تنظیمات Xray مطابقت داشته باشد.",
+            "advanced-settings": "«تنظیمات پیشرفته» تنظیمات اضافی هستند که می‌توانند برای سفارشی‌سازی بیشتر هاست استفاده شوند.",
+            "advanced-settings-2": "هر چیزی که در «تنظیمات پیشرفته» مشخص شود، اولویت بالاتری نسبت به تنظیمات مشخص‌شده در کانفیگ Xray دارد."
         }
     },
     "remark-info": {
@@ -338,12 +338,12 @@
         "fill-with-sample-xhttp-extra-params": "پر کردن با پارامترهای نمونه XHTTP Extra",
         "close": "بستن",
         "clone": "همانندسازی",
-        "address-description-line-1": "Address must be an IP address or a domain name of connection destination.",
-        "address-description-line-2": "In most cases, it should points to the one of connected nodes.",
-        "port-description-line-1": "Connection port.",
-        "port-description-line-2": "In most cases, must match the port of selected inbound.",
-        "sni-description-line-1": "SNI is a server name indication.",
-        "sni-description-line-2": "If not specified, value from config's inbound will be used."
+        "address-description-line-1": "آدرس باید یک آدرس IP یا دامنه برای مقصد اتصال باشد.",
+        "address-description-line-2": "در بیشتر موارد، باید به یکی از نود‌های متصل اشاره کند.",
+        "port-description-line-1": "پورت اتصال.",
+        "port-description-line-2": "در بیشتر موارد، باید با پورت ورودی انتخاب‌شده مطابقت داشته باشد.",
+        "sni-description-line-1": "SNI نشان‌دهنده نام سرور است.",
+        "sni-description-line-2": "اگر مشخص نشود، مقدار از کانفیگ اینباند استخراج خواهد شد."
     },
     "base-node-form": {
         "country": "کشور",
