@@ -4,26 +4,33 @@ import {
     TbCalendar as IconCalendar,
     TbCheck as IconCheck,
     TbCopy as IconCopy,
-    TbGitBranch as IconGitBranch,
-    TbHash as IconHash,
-    TbRipple
+    TbGitBranch,
+    TbHash
 } from 'react-icons/tb'
 import {
-    Alert,
     Badge,
     Box,
     Button,
+    Card,
     Code,
+    Divider,
+    Flex,
     Group,
     Modal,
+    Paper,
     Stack,
     Text,
+    ThemeIcon,
     Title,
-    Tooltip
+    Tooltip,
+    useMantineTheme
 } from '@mantine/core'
 import { useClipboard } from '@mantine/hooks'
+import dayjs from 'dayjs'
 
 import { IBuildInfo } from '@shared/utils/get-build-info/interfaces/build-info.interface'
+
+import { Logo } from '../logo'
 
 interface BuildInfoModalProps {
     buildInfo: IBuildInfo
@@ -40,6 +47,7 @@ export function BuildInfoModal({
 }: BuildInfoModalProps) {
     const buildDate = new Date(buildInfo.buildTime).toLocaleString()
     const clipboard = useClipboard({ timeout: 1000 })
+    const theme = useMantineTheme()
 
     const copyBuildInfo = () => {
         clipboard.copy(JSON.stringify(buildInfo, null, 2))
@@ -51,10 +59,12 @@ export function BuildInfoModal({
             onClose={onClose}
             opened={opened}
             padding="xl"
-            size="md"
+            radius="lg"
             title={
                 <Group justify="space-between" w="100%">
-                    <Title order={3}>Build Info</Title>
+                    <Title c={theme.primaryColor} fw={700} order={3}>
+                        Build Info
+                    </Title>
                     <Tooltip label={clipboard.copied ? 'Copied!' : 'Copy build info'}>
                         <Button
                             color={clipboard.copied ? 'green' : 'gray'}
@@ -62,8 +72,9 @@ export function BuildInfoModal({
                                 clipboard.copied ? <IconCheck size={16} /> : <IconCopy size={16} />
                             }
                             onClick={copyBuildInfo}
+                            radius="xl"
                             size="compact-sm"
-                            variant="subtle"
+                            variant="light"
                         >
                             Copy
                         </Button>
@@ -72,75 +83,144 @@ export function BuildInfoModal({
             }
             withCloseButton
         >
-            <Stack gap="md">
+            <Stack gap="xl">
                 {isNewVersionAvailable && (
-                    <Alert
-                        color="teal"
-                        icon={<TbRipple size={22} />}
-                        title="Update available"
-                        variant="outline"
+                    <Paper
+                        bg="rgba(0, 180, 160, 0.05)"
+                        p="lg"
+                        radius="lg"
+                        style={{ border: `1px solid ${theme.colors.teal[3]}` }}
+                        withBorder
                     >
-                        <Text size="sm">A new version of Remnawave is available.</Text>
-                        <Button
-                            color="cyan"
-                            component="a"
-                            href={'https://github.com/remnawave/panel/releases/latest'}
-                            mt="xs"
-                            size="xs"
-                            target="_blank"
-                            variant="outline"
-                        >
-                            Check out
-                        </Button>
-                    </Alert>
+                        <Group align="flex-start" gap="md">
+                            <ThemeIcon color="cyan" radius="xl" size={48} variant="outline">
+                                <Logo size={24} />
+                            </ThemeIcon>
+                            <Stack gap="xs" style={{ flex: 1 }}>
+                                <Text c="teal.5" fw={700} size="md">
+                                    Update available
+                                </Text>
+                                <Text c="dimmed" size="md">
+                                    A new version is available.
+                                </Text>
+                                <Button
+                                    color="teal"
+                                    component="a"
+                                    fullWidth={false}
+                                    href={'https://github.com/remnawave/panel/releases/latest'}
+                                    leftSection={<IconBrandGithub size={16} />}
+                                    mt="sm"
+                                    radius="md"
+                                    size="sm"
+                                    style={{ alignSelf: 'flex-start' }}
+                                    target="_blank"
+                                    variant="light"
+                                >
+                                    Check out
+                                </Button>
+                            </Stack>
+                        </Group>
+                    </Paper>
                 )}
 
-                <Group align="flex-start">
-                    <IconCalendar size={20} />
-                    <Box>
-                        <Text fw={500}>Build Time</Text>
-                        <Text c="dimmed" size="sm">
-                            {buildDate}
-                        </Text>
-                    </Box>
-                </Group>
+                <Card padding="lg" radius="lg" shadow="sm" withBorder>
+                    <Stack gap="lg">
+                        <Group align="center" gap="lg">
+                            <ThemeIcon
+                                color={theme.primaryColor}
+                                radius="xl"
+                                size={48}
+                                style={{
+                                    border: `1px solid ${theme.colors[theme.primaryColor][5]}`
+                                }}
+                                variant="light"
+                            >
+                                <IconCalendar size={24} />
+                            </ThemeIcon>
+                            <Box style={{ flex: 1 }}>
+                                <Text fw={700} size="md">
+                                    Build Time
+                                </Text>
+                                <Text c="dimmed" mt={4} size="sm">
+                                    {dayjs(buildDate).format('DD/MM/YYYY HH:mm:ss')}
+                                </Text>
+                            </Box>
+                        </Group>
 
-                <Group align="flex-start">
-                    <IconGitBranch size={20} />
-                    <Box>
-                        <Text fw={500}>Branch</Text>
-                        <Badge color="blue" variant="light">
-                            {buildInfo.branch}
-                        </Badge>
-                        {buildInfo.tag && (
-                            <Badge color="green" ml="xs" variant="light">
-                                {buildInfo.tag}
-                            </Badge>
-                        )}
-                    </Box>
-                </Group>
+                        <Divider variant="dashed" />
 
-                <Group align="flex-start">
-                    <IconHash size={20} />
-                    <Box>
-                        <Text fw={500}>Commit</Text>
-                        <Code>{buildInfo.commit}</Code>
-                    </Box>
-                </Group>
+                        <Group align="center" gap="lg">
+                            <ThemeIcon
+                                color={theme.primaryColor}
+                                radius="xl"
+                                size={48}
+                                style={{
+                                    border: `1px solid ${theme.colors[theme.primaryColor][5]}`
+                                }}
+                                variant="light"
+                            >
+                                <TbGitBranch size={24} />
+                            </ThemeIcon>
+                            <Box style={{ flex: 1 }}>
+                                <Text fw={700} size="md">
+                                    Branch
+                                </Text>
+                                <Flex gap="xs" mt={6}>
+                                    <Badge
+                                        color="blue"
+                                        px="md"
+                                        radius="xl"
+                                        size="lg"
+                                        variant="light"
+                                    >
+                                        {buildInfo.branch}
+                                    </Badge>
+                                    {buildInfo.tag && (
+                                        <Badge
+                                            color="green"
+                                            px="md"
+                                            radius="xl"
+                                            size="lg"
+                                            variant="light"
+                                        >
+                                            {buildInfo.tag}
+                                        </Badge>
+                                    )}
+                                </Flex>
+                            </Box>
+                        </Group>
 
-                <Group
-                    gap="md"
-                    grow
-                    justify="center"
-                    mt="lg"
-                    preventGrowOverflow={false}
-                    wrap="wrap"
-                >
+                        <Divider variant="dashed" />
+
+                        <Group align="center" gap="lg">
+                            <ThemeIcon
+                                color={theme.primaryColor}
+                                radius="xl"
+                                size={48}
+                                style={{
+                                    border: `1px solid ${theme.colors[theme.primaryColor][5]}`
+                                }}
+                                variant="light"
+                            >
+                                <TbHash size={24} />
+                            </ThemeIcon>
+                            <Box style={{ flex: 1 }}>
+                                <Text fw={700} size="md">
+                                    Commit
+                                </Text>
+                                <Code fz={'sm'}>{buildInfo.commit}</Code>
+                            </Box>
+                        </Group>
+                    </Stack>
+                </Card>
+
+                <Group gap="md" grow preventGrowOverflow={false} wrap="wrap">
                     <Button
                         component="a"
                         href={buildInfo.commitUrl}
-                        leftSection={<IconBrandGithub size={16} />}
-                        size="sm"
+                        leftSection={<IconBrandGithub size={18} />}
+                        radius="md"
+                        size="md"
                         target="_blank"
                         variant="outline"
                     >
@@ -148,13 +228,14 @@ export function BuildInfoModal({
                     </Button>
 
                     <Button
-                        c="cyan"
+                        color="cyan"
                         component="a"
                         href={'https://t.me/remnawave'}
-                        leftSection={<IconBrandTelegram size={16} />}
-                        size="sm"
+                        leftSection={<IconBrandTelegram size={18} />}
+                        radius="md"
+                        size="md"
                         target="_blank"
-                        variant="outline"
+                        variant="light"
                     >
                         Ask Community
                     </Button>

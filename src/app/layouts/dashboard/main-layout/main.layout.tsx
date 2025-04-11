@@ -2,7 +2,6 @@ import {
     AppShell,
     Badge,
     Burger,
-    Code,
     Container,
     Group,
     Indicator,
@@ -162,15 +161,16 @@ export function MainLayout() {
                             </Group>
                             {buildInfo.branch === 'dev' && (
                                 <Indicator
-                                    color="cyan"
+                                    color="cyan.6"
                                     disabled={!isNewVersionAvailable}
+                                    offset={3}
                                     processing
                                     size={11}
                                 >
                                     <Badge
                                         color="red"
                                         onClick={() => setBuildInfoModalOpened(true)}
-                                        radius="sm"
+                                        radius="xl"
                                         size="lg"
                                         style={{ cursor: 'help', marginLeft: 'auto' }}
                                         variant="light"
@@ -182,19 +182,22 @@ export function MainLayout() {
 
                             {buildInfo.branch !== 'dev' && (
                                 <Indicator
-                                    color="cyan"
+                                    color="cyan.6"
                                     disabled={!isNewVersionAvailable}
+                                    offset={3}
                                     processing
                                     size={11}
                                 >
-                                    <Code
-                                        c="cyan"
-                                        fw={700}
+                                    <Badge
+                                        color="cyan"
                                         onClick={() => setBuildInfoModalOpened(true)}
+                                        radius="xl"
+                                        size="lg"
                                         style={{ cursor: 'pointer', marginLeft: 'auto' }}
+                                        variant="light"
                                     >
-                                        {`v${packageJson.version}`}
-                                    </Code>
+                                        {`${packageJson.version}`}
+                                    </Badge>
                                 </Indicator>
                             )}
 
