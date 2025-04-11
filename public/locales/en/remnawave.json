@@ -387,15 +387,26 @@
     },
     "statistic-nodes": {
         "component": {
-            "last-7-days-by-nodes": "Bandwidth usage",
-            "filter-nodes": "Filter nodes",
-            "bar": "Bar",
-            "line": "Line",
-            "last-7-days": "Last 7 day",
-            "last-14-days": "Last 14 days",
-            "last-30-days": "Last 30 days",
-            "last-60-days": "Last 60 days",
-            "last-90-days": "Last 90 days"
+            "no-data-available-for-the-selected-period": "No data available for the selected period",
+            "click-to-see-all": "Click to see all",
+            "show-nodes": "Show Nodes",
+            "no-data-available": "No data available",
+            "click-to-show-all": "Click to show all",
+            "click-to-highlight-only-this-node": "Click to highlight only this node",
+            "usage-by-period": "Usage by Period",
+            "7-days": "7 days",
+            "14-days": "14 days",
+            "30-days": "30 days",
+            "60-days": "60 days",
+            "90-days": "90 days",
+            "180-days": "180 days",
+            "total-traffic": "Total Traffic",
+            "top-nodes": "Top Nodes",
+            "filter-nodes": "Filter Nodes",
+            "previous-day": "Previous day",
+            "next-day": "Next day",
+            "node": "Node",
+            "traffic": "Traffic"
         }
     },
     "get-expiration-text": {
