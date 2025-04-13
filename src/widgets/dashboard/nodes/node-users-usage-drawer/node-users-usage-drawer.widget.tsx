@@ -87,15 +87,15 @@ export const NodeUsersUsageDrawer = (props: IProps) => {
             setViewType('stacked')
             setPeriod('7')
             setDateRange([
-                dayjs().utc().subtract(7, 'day').startOf('hour').toDate(),
-                dayjs().utc().startOf('hour').toDate()
+                dayjs().utc().subtract(7, 'day').startOf('day').toDate(),
+                dayjs().utc().endOf('day').toDate()
             ])
         }
     }, [opened])
 
     useEffect(() => {
-        const end = dayjs().utc().startOf('hour').toDate()
-        const start = dayjs().utc().subtract(Number(period), 'day').startOf('hour').toDate()
+        const end = dayjs().utc().endOf('day').toDate()
+        const start = dayjs().utc().subtract(Number(period), 'day').startOf('day').toDate()
         setDateRange([start, end])
     }, [period])
 
