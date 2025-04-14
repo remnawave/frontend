@@ -266,7 +266,7 @@
             "1-month": "+1 month",
             "3-months": "+3 months",
             "1-year": "+1 year",
-            "2099-year": "2099 year",
+            "2099-year": "year 2099",
             "hwid-user-limit-line-1": "This feature only work if",
             "hwid-user-limit-line-2": ".env variable is set to",
             "hwid-user-limit-line-3": "Learn more.",
