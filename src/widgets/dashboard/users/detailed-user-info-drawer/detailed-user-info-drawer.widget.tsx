@@ -30,7 +30,6 @@ import {
     useUserModalStoreIsDetailedUserInfoDrawerOpen
 } from '@entities/dashboard/user-modal-store/user-modal-store'
 import { CopyableFieldShared } from '@shared/ui/copyable-field/copyable-field'
-import { InfoFieldShared } from '@shared/ui/info-field/info-field'
 import { LoaderModalShared } from '@shared/ui/loader-modal'
 import { prettyBytesToAnyUtil } from '@shared/utils/bytes'
 import { useGetUserByUuid } from '@shared/api/hooks'
@@ -70,7 +69,7 @@ export const DetailedUserInfoDrawerWidget = () => {
             overlayProps={{ backgroundOpacity: 0.6, blur: 0 }}
             padding="lg"
             position="right"
-            size="xl"
+            size="lg"
             title={
                 <Group>
                     <Text fw={500}>{t('detailed-user-info-drawer.widget.detailed-user-info')}</Text>
@@ -106,38 +105,28 @@ export const DetailedUserInfoDrawerWidget = () => {
                                         {t('detailed-user-info-drawer.widget.user-information')}
                                     </Title>
                                 </Group>
-                                <Badge color={user.status === 'ACTIVE' ? 'green' : 'red'}>
+                                <Badge color={user.status === 'ACTIVE' ? 'teal' : 'red'} size="md">
                                     {user.status}
                                 </Badge>
                             </Group>
 
+                            <CopyableFieldShared label="Uuid" value={user.uuid} />
+                            <CopyableFieldShared label="Short UUID" value={user.shortUuid} />
                             <CopyableFieldShared
-                                copiedText={t('detailed-user-info-drawer.widget.copied')}
-                                copyText={t('detailed-user-info-drawer.widget.copy')}
-                                label="Uuid"
-                                value={user.uuid}
-                            />
-                            <CopyableFieldShared
-                                copiedText={t('detailed-user-info-drawer.widget.copied')}
-                                copyText={t('detailed-user-info-drawer.widget.copy')}
-                                label="Short UUID"
-                                value={user.shortUuid}
-                            />
-                            <InfoFieldShared
                                 label={t('detailed-user-info-drawer.widget.username')}
                                 value={user.username}
                             />
-                            <InfoFieldShared
+                            <CopyableFieldShared
                                 label={t('detailed-user-info-drawer.widget.email')}
-                                value={user.email}
+                                value={user.email || '—'}
                             />
-                            <InfoFieldShared
+                            <CopyableFieldShared
                                 label={t('detailed-user-info-drawer.widget.telegram-id')}
-                                value={user.telegramId}
+                                value={user.telegramId || '—'}
                             />
-                            <InfoFieldShared
+                            <CopyableFieldShared
                                 label={t('detailed-user-info-drawer.widget.description')}
-                                value={user.description}
+                                value={user.description || '—'}
                             />
                         </Stack>
                     </Paper>
@@ -153,23 +142,25 @@ export const DetailedUserInfoDrawerWidget = () => {
                                 </Title>
                             </Group>
 
-                            <InfoFieldShared
+                            <CopyableFieldShared
                                 label={t('detailed-user-info-drawer.widget.used-traffic')}
-                                value={prettyBytesToAnyUtil(user.usedTrafficBytes || 0)}
+                                value={prettyBytesToAnyUtil(user.usedTrafficBytes || 0) || '—'}
                             />
-                            <InfoFieldShared
+                            <CopyableFieldShared
                                 label={t('detailed-user-info-drawer.widget.lifetime-used-traffic')}
-                                value={prettyBytesToAnyUtil(user.lifetimeUsedTrafficBytes || 0)}
+                                value={
+                                    prettyBytesToAnyUtil(user.lifetimeUsedTrafficBytes || 0) || '—'
+                                }
                             />
-                            <InfoFieldShared
+                            <CopyableFieldShared
                                 label={t('detailed-user-info-drawer.widget.traffic-limit')}
-                                value={prettyBytesToAnyUtil(user.trafficLimitBytes || 0)}
+                                value={prettyBytesToAnyUtil(user.trafficLimitBytes || 0) || '—'}
                             />
-                            <InfoFieldShared
+                            <CopyableFieldShared
                                 label={t('detailed-user-info-drawer.widget.traffic-limit-strategy')}
                                 value={user.trafficLimitStrategy}
                             />
-                            <InfoFieldShared
+                            <CopyableFieldShared
                                 label={t('detailed-user-info-drawer.widget.last-traffic-reset')}
                                 value={formatDate(user.lastTrafficResetAt)}
                             />
@@ -188,37 +179,30 @@ export const DetailedUserInfoDrawerWidget = () => {
                             </Group>
 
                             <CopyableFieldShared
-                                copiedText={t('detailed-user-info-drawer.widget.copied')}
-                                copyText={t('detailed-user-info-drawer.widget.copy')}
                                 label={t('detailed-user-info-drawer.widget.subscription-uuid')}
                                 value={user.subscriptionUuid}
                             />
                             <CopyableFieldShared
-                                copiedText={t('detailed-user-info-drawer.widget.copied')}
-                                copyText={t('detailed-user-info-drawer.widget.copy')}
                                 label={t('detailed-user-info-drawer.widget.subscription-url')}
                                 value={user.subscriptionUrl}
                             />
                             <CopyableFieldShared
-                                copiedText={t('detailed-user-info-drawer.widget.copied')}
-                                copyText={t('detailed-user-info-drawer.widget.copy')}
                                 label={'Happ Crypto Link'}
-                                truncate={true}
                                 value={user.happ.cryptoLink}
                             />
-                            <InfoFieldShared
+                            <CopyableFieldShared
                                 label={t('detailed-user-info-drawer.widget.expires-at')}
                                 value={formatDate(user.expireAt)}
                             />
-                            <InfoFieldShared
+                            <CopyableFieldShared
                                 label={t('detailed-user-info-drawer.widget.last-opened-at')}
                                 value={formatDate(user.subLastOpenedAt)}
                             />
-                            <InfoFieldShared
+                            <CopyableFieldShared
                                 label={t('detailed-user-info-drawer.widget.last-user-agent')}
-                                value={user.subLastUserAgent}
+                                value={user.subLastUserAgent || '—'}
                             />
-                            <InfoFieldShared
+                            <CopyableFieldShared
                                 label={t('detailed-user-info-drawer.widget.revoked-at')}
                                 value={formatDate(user.subRevokedAt)}
                             />
@@ -237,28 +221,22 @@ export const DetailedUserInfoDrawerWidget = () => {
                             </Group>
 
                             <CopyableFieldShared
-                                copiedText={t('detailed-user-info-drawer.widget.copied')}
-                                copyText={t('detailed-user-info-drawer.widget.copy')}
                                 label={t('detailed-user-info-drawer.widget.trojan-password')}
                                 value={user.trojanPassword}
                             />
                             <CopyableFieldShared
-                                copiedText={t('detailed-user-info-drawer.widget.copied')}
-                                copyText={t('detailed-user-info-drawer.widget.copy')}
                                 label={t('detailed-user-info-drawer.widget.vless-uuid')}
                                 value={user.vlessUuid}
                             />
                             <CopyableFieldShared
-                                copiedText={t('detailed-user-info-drawer.widget.copied')}
-                                copyText={t('detailed-user-info-drawer.widget.copy')}
                                 label={t('detailed-user-info-drawer.widget.ss-password')}
                                 value={user.ssPassword}
                             />
-                            <InfoFieldShared
+                            <CopyableFieldShared
                                 label={t('detailed-user-info-drawer.widget.last-online')}
                                 value={user.onlineAt ? formatDate(user.onlineAt.toString()) : '—'}
                             />
-                            <InfoFieldShared
+                            <CopyableFieldShared
                                 label={t('detailed-user-info-drawer.widget.last-connected-node')}
                                 value={user.lastConnectedNode?.nodeName || '—'}
                             />
@@ -292,22 +270,22 @@ export const DetailedUserInfoDrawerWidget = () => {
                                     >
                                         <Group justify="space-between">
                                             <Group gap="xs">
-                                                <PiTag size="1.2rem" />
-                                                <Text fw={600} size="md">
+                                                <PiTag size="1rem" />
+                                                <Text fw={600} size="sm">
                                                     {inbound.tag}
                                                 </Text>
                                             </Group>
 
                                             <Group gap="xs">
-                                                <Badge color={'green'} size="lg">
+                                                <Badge color={'green'} size="md">
                                                     {inbound.type}
                                                 </Badge>
 
                                                 {inbound.network && (
                                                     <Badge
                                                         color="grape"
-                                                        leftSection={<PiGlobe size="1.1rem" />}
-                                                        size="lg"
+                                                        leftSection={<PiGlobe size="1rem" />}
+                                                        size="md"
                                                     >
                                                         {inbound.network}
                                                     </Badge>
@@ -315,8 +293,8 @@ export const DetailedUserInfoDrawerWidget = () => {
                                                 {inbound.security && (
                                                     <Badge
                                                         color="gray"
-                                                        leftSection={<PiLockSimple size="1.1rem" />}
-                                                        size="lg"
+                                                        leftSection={<PiLockSimple size="1rem" />}
+                                                        size="md"
                                                     >
                                                         {inbound.security}
                                                     </Badge>
@@ -340,11 +318,11 @@ export const DetailedUserInfoDrawerWidget = () => {
                                 </Title>
                             </Group>
 
-                            <InfoFieldShared
+                            <CopyableFieldShared
                                 label={t('detailed-user-info-drawer.widget.created-at')}
                                 value={formatDate(user.createdAt.toString())}
                             />
-                            <InfoFieldShared
+                            <CopyableFieldShared
                                 label={t('detailed-user-info-drawer.widget.updated-at')}
                                 value={formatDate(user.updatedAt.toString())}
                             />
