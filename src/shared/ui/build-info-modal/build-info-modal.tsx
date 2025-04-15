@@ -26,7 +26,6 @@ import {
     useMantineTheme
 } from '@mantine/core'
 import { useClipboard } from '@mantine/hooks'
-import dayjs from 'dayjs'
 
 import { IBuildInfo } from '@shared/utils/get-build-info/interfaces/build-info.interface'
 
@@ -142,7 +141,7 @@ export function BuildInfoModal({
                                     Build Time
                                 </Text>
                                 <Text c="dimmed" mt={4} size="sm">
-                                    {dayjs(buildDate).format('DD/MM/YYYY HH:mm:ss')}
+                                    {buildDate}
                                 </Text>
                             </Box>
                         </Group>
