@@ -29,8 +29,7 @@ import {
     PiFloppyDiskDuotone,
     PiLinkDuotone,
     PiQrCodeDuotone,
-    PiTelegramLogoDuotone,
-    PiUserDuotone
+    PiTelegramLogoDuotone
 } from 'react-icons/pi'
 import { UpdateUserCommand } from '@remnawave/backend-contract'
 import { useForm, zodResolver } from '@mantine/form'
@@ -232,7 +231,7 @@ export const ViewUserModal = () => {
                         <Stack gap="md" style={{ flex: '1 1 350px' }}>
                             <Group gap="xs" justify="space-between" w="100%">
                                 <Text fw={500} key="view-user-details-text">
-                                    {t('view-user-modal.widget.user-details')}
+                                    {form.getValues().username}
                                 </Text>
                                 {user && (
                                     <UserStatusBadge
@@ -241,32 +240,6 @@ export const ViewUserModal = () => {
                                     />
                                 )}
                             </Group>
-
-                            <TextInput
-                                description={t('view-user-modal.widget.username-cannot-be-changed')}
-                                key={form.key('username')}
-                                label={t('login-form-feature.username')}
-                                {...form.getInputProps('username')}
-                                disabled
-                                leftSection={<PiUserDuotone size="1rem" />}
-                                rightSection={
-                                    <CopyButton timeout={2000} value={form.getValues().username}>
-                                        {({ copied, copy }) => (
-                                            <ActionIcon
-                                                color={copied ? 'teal' : 'gray'}
-                                                onClick={copy}
-                                                variant="subtle"
-                                            >
-                                                {copied ? (
-                                                    <PiCheck size="1rem" />
-                                                ) : (
-                                                    <PiCopy size="1rem" />
-                                                )}
-                                            </ActionIcon>
-                                        )}
-                                    </CopyButton>
-                                }
-                            />
 
                             <TextInput
                                 key={form.key('shortUuid')}
