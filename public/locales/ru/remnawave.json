@@ -988,7 +988,7 @@
     },
     "get-hwid-user-devices": {
         "feature": {
-            "created": "Создан",
+            "added": "Создан",
             "delete-device": "Удалить устройство",
             "device": "Устройство",
             "devices": "Устройств",
