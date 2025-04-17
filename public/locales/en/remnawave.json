@@ -187,7 +187,7 @@
             "header-description-line-2": "Each host can optionally refer to one server.",
             "remark": "Remark",
             "remark-description-line-1": "The host name can be anything, but must be unique within a single subscription.",
-            "remark-description-line-2": "The note will be displayed in the list of available servers in the end client.",
+            "remark-description-line-2": "The remark will be displayed in the list of available servers in the end client.",
             "inbound": "Inbound",
             "inbound-line-1": "It is necessary to select one of the inbounds to which a specific host will be bound.",
             "inbound-line-2": "The list of inbounds is formed in the \"Xray config\" section.",
@@ -266,8 +266,8 @@
             "1-month": "+1 month",
             "3-months": "+3 months",
             "1-year": "+1 year",
-            "2099-year": "2099 year",
-            "hwid-user-limit-line-1": "This feature only work if",
+            "2099-year": "year 2099",
+            "hwid-user-limit-line-1": "This feature only works when",
             "hwid-user-limit-line-2": ".env variable is set to",
             "hwid-user-limit-line-3": "Learn more.",
             "disable-hwid-limit": "Disable HWID Limit",
@@ -936,7 +936,7 @@
         "widget": {
             "show-custom-remarks": "Show custom remarks",
             "show-custom-remark-description-line-1": "Only for EXPIRED, LIMITED and DISABLED users.",
-            "show-custom-remark-description-line-2": "If this setting is disabled – EXPIRED, LIMITED and DISABLED users will receive an actual host list, instead of the custom remarks below.",
+            "show-custom-remark-description-line-2": "If this setting is disabled, EXPIRED, LIMITED and DISABLED users will receive an actual empty host list instead.",
             "additional-response-headers": "Additional response headers",
             "headers-that-will-be-sent-with-subscription-content": "Headers that will be sent with subscription content."
         }
@@ -994,23 +994,22 @@
             "unknown": "Unknown",
             "model": "Model",
             "user-agent": "User Agent",
-            "created": "Created",
+            "added": "Added",
             "os-version": "OS Version",
             "delete-device": "Delete Device",
             "device": "Device",
             "devices": "Devices",
-            "hwid-devices": "HWID Devices",
+            "hwid-devices": "HWIDs and Devices",
             "important-note": "Important note",
             "important-note-line-1": "This feature is only available with the",
             "important-note-line-2": ".env value.",
             "important-note-line-3": "Not all applications support this feature.",
             "important-note-line-4": "If user HWID Device Limit is empty –",
             "important-note-line-5": "will be used.",
-            "important-note-line-6": "Please, review documentation for more information.",
             "important-note-line-7": "Learn more.",
-            "loading-hwid-devices": "Loading HWID Devices...",
+            "loading-hwid-devices": "Loading HWIDs and Devices ...",
             "search-by-hwid": "Search by HWID",
-            "enter-hwid-to-filter-devices": "Enter HWID to filter devices..."
+            "enter-hwid-to-filter-devices": "Enter HWID to filter devices ..."
         }
     },
     "headers-manager": {

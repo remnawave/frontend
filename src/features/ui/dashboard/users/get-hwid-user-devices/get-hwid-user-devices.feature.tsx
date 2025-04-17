@@ -267,7 +267,7 @@ export function GetHwidUserDevicesFeature(props: IProps) {
 
                             <Group gap="xs">
                                 <TextInput
-                                    label={t('get-hwid-user-devices.feature.created')}
+                                    label={t('get-hwid-user-devices.feature.added')}
                                     readOnly
                                     value={dayjs(device.createdAt).format('YYYY-MM-DD HH:mm')}
                                     w={'100%'}
