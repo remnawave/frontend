@@ -13,8 +13,8 @@ export * from './hwid-user-devices/hwid-user-devices.mutation.hooks'
 export * from './hwid-user-devices/hwid-user-devices.query.hooks'
 
 export * from './inbounds/inbounds.mutation.hooks'
+export * from './inbounds/inbounds.query.hooks'
 
-export * from './inbounds/inbounds.query'
 export * from './keys-factory'
 
 export * from './nodes/nodes.mutation.hooks'

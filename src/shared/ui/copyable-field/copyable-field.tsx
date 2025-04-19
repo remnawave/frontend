@@ -28,7 +28,7 @@ export const CopyableFieldShared = ({
                     </CopyButton>
                 }
                 readOnly
-                value={value}
+                value={value.toString()}
                 w={'100%'}
             />
         </Group>

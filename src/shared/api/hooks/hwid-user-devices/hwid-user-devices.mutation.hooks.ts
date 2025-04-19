@@ -17,7 +17,7 @@ export const useDeleteUserHwidDevice = createPostMutationHook({
         },
         onError: (error) => {
             notifications.show({
-                title: `${DeleteUserHwidDeviceCommand.TSQ_url}`,
+                title: 'Delete Device',
                 message:
                     error instanceof Error ? error.message : `Request failed with unknown error.`,
                 color: 'red'

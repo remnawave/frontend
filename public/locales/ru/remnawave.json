@@ -938,7 +938,7 @@
             "show-custom-remark-description-line-2": "Если эта настройка отключена – EXPIRED, LIMITED, DISABLED пользователи получат актуальный список хостов, вместо кастомных примечаний ниже.",
             "show-custom-remarks": "Отображать кастомное примечание",
             "additional-response-headers": "Доп. хэдеры",
-            "headers-that-will-be-sent-with-subscription-content": "Хэдеры будут отправлены вместо с содержимым подписки."
+            "headers-that-will-be-sent-with-subscription-content": "Хэдеры будут отправлены вместе с содержимым подписки."
         }
     },
     "nodes-realtime-metrics": {

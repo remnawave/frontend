@@ -22,7 +22,7 @@ export const useGetUserHwidDevices = createGetQueryHook({
     },
     errorHandler: (error) => {
         notifications.show({
-            title: `${GetUserHwidDevicesCommand.url}`,
+            title: 'Get User HWIDs and Devices',
             message: error instanceof Error ? error.message : `Request failed with unknown error.`,
             color: 'red'
         })

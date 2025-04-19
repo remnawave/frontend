@@ -64,7 +64,7 @@ export function GetHwidUserDevicesFeature(props: IProps) {
         refetch()
     }, [opened])
 
-    const handleDeleteDevice = async (hwid: string) => {
+    const handleDeleteDevice = (hwid: string) => {
         deleteDevice({
             variables: {
                 hwid,

@@ -5,7 +5,7 @@ import { subscriptionSettingsQueryKeys } from './subscription-settings/subscript
 import { hwidUserDevicesQueryKeys } from './hwid-user-devices/hwid-user-devices.query.hooks'
 import { apiTokensQueryKeys } from './api-tokens/api-tokens.query.hooks'
 import { systemQueryKeys } from './system/system.query.hooks'
-import { inboundsQueryKeys } from './inbounds/inbounds.query'
+import { inboundsQueryKeys } from './inbounds/inbounds.query.hooks'
 import { configQueryKeys } from './config/config.query.hooks'
 import { usersQueryKeys } from './users/users.query.hooks'
 import { hostsQueryKeys } from './hosts/hosts.query.hooks'
