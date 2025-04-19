@@ -58,7 +58,7 @@
             "failed-to-save-invalid-json": "Failed to save, invalid JSON.",
             "error": "Error",
             "save-anyway": "Save anyway",
-            "save-anyway-description": "Are you sure you want to save invalid XRay config? This action\n                                    can lead to unexpected behavior. Continue only if you know what\n                                    you are doing.",
+            "save-anyway-description": "Are you sure you want to save invalid Xray config? This action\n                                    can lead to unexpected behavior. Continue only if you know what\n                                    you are doing.",
             "cancel": "Cancel",
             "save-anyway-title": "Confirm action"
         }
@@ -187,7 +187,7 @@
             "header-description-line-2": "Each host can optionally refer to one server.",
             "remark": "Remark",
             "remark-description-line-1": "The host name can be anything, but must be unique within a single subscription.",
-            "remark-description-line-2": "The note will be displayed in the list of available servers in the end client.",
+            "remark-description-line-2": "The remark will be displayed in the list of available servers in the end client.",
             "inbound": "Inbound",
             "inbound-line-1": "It is necessary to select one of the inbounds to which a specific host will be bound.",
             "inbound-line-2": "The list of inbounds is formed in the \"Xray config\" section.",
@@ -266,7 +266,12 @@
             "1-month": "+1 month",
             "3-months": "+3 months",
             "1-year": "+1 year",
-            "2099-year": "2099 year"
+            "2099-year": "year 2099",
+            "hwid-user-limit-line-1": "This feature only works when",
+            "hwid-user-limit-line-2": ".env variable is set to",
+            "hwid-user-limit-line-3": "Learn more.",
+            "disable-hwid-limit": "Disable HWID Limit",
+            "hwid-device-limit": "HWID Device Limit"
         }
     },
     "login-form-feature": {
@@ -338,12 +343,12 @@
         "fill-with-sample-xhttp-extra-params": "Fill with sample XHTTP extra options",
         "close": "Close",
         "clone": "Clone",
-        "address-description-line-1": "Address must be an IP address or a domain name of connection destination.",
+        "address-description-line-1": "Address must be the IP address or a domain name pointing to the connection destination.",
         "address-description-line-2": "In most cases, it should points to the one of connected nodes.",
         "port-description-line-1": "Connection port.",
         "port-description-line-2": "In most cases, must match the port of selected inbound.",
-        "sni-description-line-1": "SNI is a server name indication.",
-        "sni-description-line-2": "If not specified, value from config's inbound will be used."
+        "sni-description-line-1": "SNI stands for Server Name Indication.",
+        "sni-description-line-2": "If not specified, the value from config's inbound will be used."
     },
     "base-node-form": {
         "country": "Country",
@@ -382,15 +387,26 @@
     },
     "statistic-nodes": {
         "component": {
-            "last-7-days-by-nodes": "Bandwidth usage",
-            "filter-nodes": "Filter nodes",
-            "bar": "Bar",
-            "line": "Line",
-            "last-7-days": "Last 7 day",
-            "last-14-days": "Last 14 days",
-            "last-30-days": "Last 30 days",
-            "last-60-days": "Last 60 days",
-            "last-90-days": "Last 90 days"
+            "no-data-available-for-the-selected-period": "No data available for the selected period",
+            "click-to-see-all": "Click to see all",
+            "show-nodes": "Show Nodes",
+            "no-data-available": "No data available",
+            "click-to-show-all": "Click to show all",
+            "click-to-highlight-only-this-node": "Click to highlight only this node",
+            "usage-by-period": "Usage by Period",
+            "7-days": "7 days",
+            "14-days": "14 days",
+            "30-days": "30 days",
+            "60-days": "60 days",
+            "90-days": "90 days",
+            "180-days": "180 days",
+            "total-traffic": "Total Traffic",
+            "top-nodes": "Top Nodes",
+            "filter-nodes": "Filter Nodes",
+            "previous-day": "Previous day",
+            "next-day": "Next day",
+            "node": "Node",
+            "traffic": "Traffic"
         }
     },
     "get-expiration-text": {
@@ -920,7 +936,9 @@
         "widget": {
             "show-custom-remarks": "Show custom remarks",
             "show-custom-remark-description-line-1": "Only for EXPIRED, LIMITED and DISABLED users.",
-            "show-custom-remark-description-line-2": "If this setting is disabled – EXPIRED, LIMITED and DISABLED users will receive an actual host list, instead of the custom remarks below."
+            "show-custom-remark-description-line-2": "If this setting is disabled, EXPIRED, LIMITED and DISABLED users will receive an actual empty host list instead.",
+            "additional-response-headers": "Additional response headers",
+            "headers-that-will-be-sent-with-subscription-content": "Headers that will be sent with subscription content."
         }
     },
     "nodes-realtime-metrics": {
@@ -966,6 +984,40 @@
             "traffic": "Traffic",
             "no-users-with-traffic-100-kb": "No users with traffic ≥ 100 KB",
             "users-hidden-with-less-than-100-kb": "{{usersCount}} users hidden with less than 100 KB ({{totalTraffic}} total)"
+        }
+    },
+    "get-hwid-user-devices": {
+        "feature": {
+            "no-devices-found": "No devices found",
+            "no-devices-match-your-search": "No devices match your search",
+            "platform": "Platform",
+            "unknown": "Unknown",
+            "model": "Model",
+            "user-agent": "User Agent",
+            "added": "Added",
+            "os-version": "OS Version",
+            "delete-device": "Delete Device",
+            "device": "Device",
+            "devices": "Devices",
+            "hwid-devices": "HWIDs and Devices",
+            "important-note": "Important note",
+            "important-note-line-1": "This feature is only available with the",
+            "important-note-line-2": ".env value.",
+            "important-note-line-3": "Not all applications support this feature.",
+            "important-note-line-4": "If user HWID Device Limit is empty –",
+            "important-note-line-5": "will be used.",
+            "important-note-line-6": "Please, review documentation for more information.",
+            "important-note-line-7": "Learn more.",
+            "loading-hwid-devices": "Loading HWIDs and Devices ...",
+            "search-by-hwid": "Search by HWID",
+            "enter-hwid-to-filter-devices": "Enter HWID to filter devices ..."
+        }
+    },
+    "headers-manager": {
+        "widget": {
+            "key": "Key",
+            "value": "Value",
+            "add-header": "Add header"
         }
     }
 }

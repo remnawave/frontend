@@ -1,40 +1,36 @@
-import { ActionIcon, CopyButton, Group, Text, Tooltip } from '@mantine/core'
-import { PiCheck, PiCopyDuotone } from 'react-icons/pi'
+import { ActionIcon, CopyButton, Group, TextInput } from '@mantine/core'
+import { PiCheck, PiCopy } from 'react-icons/pi'
 
 export const CopyableFieldShared = ({
     label,
-    value,
-    copyText,
-    copiedText,
-    truncate = false
+    value
 }: {
-    copiedText: string
-    copyText: string
     label: string
-    truncate?: boolean
-    value: string
+    value: number | string
 }) => {
     if (!value) return null
 
     return (
         <Group align="center" justify="flex-start">
-            <Text c="dimmed" size="sm">
-                {label}
-            </Text>
-            <Group gap={'xs'}>
-                <Text size="sm" style={{ wordBreak: 'break-all' }}>
-                    {truncate ? `${value.slice(0, 30)}...` : value}
-                </Text>
-                <CopyButton timeout={2000} value={value}>
-                    {({ copied, copy }) => (
-                        <Tooltip label={copied ? copiedText : copyText} position="top" withArrow>
-                            <ActionIcon color={copied ? 'teal' : 'gray'} onClick={copy} size="md">
-                                {copied ? <PiCheck size={14} /> : <PiCopyDuotone size={14} />}
+            <TextInput
+                label={label}
+                leftSection={
+                    <CopyButton timeout={2000} value={value.toString()}>
+                        {({ copied, copy }) => (
+                            <ActionIcon
+                                color={copied ? 'teal' : 'gray'}
+                                onClick={copy}
+                                variant="subtle"
+                            >
+                                {copied ? <PiCheck size="1rem" /> : <PiCopy size="1rem" />}
                             </ActionIcon>
-                        </Tooltip>
-                    )}
-                </CopyButton>
-            </Group>
+                        )}
+                    </CopyButton>
+                }
+                readOnly
+                value={value.toString()}
+                w={'100%'}
+            />
         </Group>
     )
 }

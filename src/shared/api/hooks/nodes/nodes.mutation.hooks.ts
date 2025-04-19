@@ -138,7 +138,7 @@ export const useRestartAllNodes = createPatchMutationHook({
         onSuccess: () => {
             notifications.show({
                 title: 'Success',
-                message: 'Please wait while nodes will reconnect',
+                message: 'Please wait for the nodes to reconnect',
                 color: 'teal'
             })
         },

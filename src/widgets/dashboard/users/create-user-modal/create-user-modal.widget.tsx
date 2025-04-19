@@ -1,6 +1,8 @@
 import {
+    Anchor,
     Button,
     Checkbox,
+    Code,
     Divider,
     Group,
     Modal,
@@ -24,6 +26,7 @@ import { CreateUserCommand, USERS_STATUS } from '@remnawave/backend-contract'
 import { useForm, zodResolver } from '@mantine/form'
 import { DateTimePicker } from '@mantine/dates'
 import { useTranslation } from 'react-i18next'
+import { TbDevices2 } from 'react-icons/tb'
 import { useEffect } from 'react'
 import dayjs from 'dayjs'
 
@@ -55,7 +58,9 @@ export const CreateUserModalWidget = () => {
     const form = useForm<CreateUserCommand.Request>({
         name: 'create-user-form',
         mode: 'uncontrolled',
-        validate: zodResolver(CreateUserCommand.RequestSchema.omit({ expireAt: true })),
+        validate: zodResolver(
+            CreateUserCommand.RequestSchema.omit({ expireAt: true, hwidDeviceLimit: true })
+        ),
 
         initialValues: {
             status: USERS_STATUS.ACTIVE,
@@ -66,7 +71,8 @@ export const CreateUserModalWidget = () => {
             activeUserInbounds: [],
             description: '',
             telegramId: undefined,
-            email: undefined
+            email: undefined,
+            hwidDeviceLimit: undefined
         }
     })
 
@@ -96,7 +102,8 @@ export const CreateUserModalWidget = () => {
                 status: values.status,
                 description: values.description,
                 telegramId: values.telegramId,
-                email: values.email
+                email: values.email,
+                hwidDeviceLimit: values.hwidDeviceLimit
             }
         })
     })
@@ -129,6 +136,94 @@ export const CreateUserModalWidget = () => {
                                 leftSection={<PiUserDuotone size="1rem" />}
                             />
 
+                            <NumberInput
+                                allowDecimal={false}
+                                allowNegative={false}
+                                description={t(
+                                    'create-user-modal.widget.telegram-id-of-a-user-in-telegram'
+                                )}
+                                hideControls
+                                key={form.key('telegramId')}
+                                label="Telegram ID"
+                                leftSection={<PiTelegramLogoDuotone size="1rem" />}
+                                {...form.getInputProps('telegramId')}
+                            />
+
+                            <TextInput
+                                description={t('create-user-modal.widget.email-of-a-user')}
+                                key={form.key('email')}
+                                label="Email"
+                                leftSection={<PiEnvelopeDuotone size="1rem" />}
+                                {...form.getInputProps('email')}
+                            />
+
+                            <Stack gap="xs">
+                                <NumberInput
+                                    allowDecimal={false}
+                                    allowNegative={false}
+                                    description={
+                                        <>
+                                            <Text c="dimmed" size="0.75rem">
+                                                {t(
+                                                    'create-user-modal.widget.hwid-user-limit-line-1'
+                                                )}{' '}
+                                                <Code>HWID_DEVICE_LIMIT_ENABLED</Code>{' '}
+                                                {t(
+                                                    'create-user-modal.widget.hwid-user-limit-line-2'
+                                                )}{' '}
+                                                <Code>true</Code>.{' '}
+                                                <Anchor
+                                                    href="https://remna.st/features/hwid-device-limit"
+                                                    target="_blank"
+                                                >
+                                                    {t(
+                                                        'create-user-modal.widget.hwid-user-limit-line-3'
+                                                    )}
+                                                </Anchor>
+                                            </Text>
+                                            <Checkbox
+                                                checked={form.getValues().hwidDeviceLimit === 0}
+                                                label={t(
+                                                    'create-user-modal.widget.disable-hwid-limit'
+                                                )}
+                                                mb={'xs'}
+                                                mt={'xs'}
+                                                onChange={(event) => {
+                                                    const { checked } = event.currentTarget
+                                                    form.setFieldValue(
+                                                        'hwidDeviceLimit',
+                                                        checked ? 0 : undefined
+                                                    )
+                                                }}
+                                            />
+                                        </>
+                                    }
+                                    disabled={form.getValues().hwidDeviceLimit === 0}
+                                    hideControls
+                                    key={form.key('hwidDeviceLimit')}
+                                    label={t('create-user-modal.widget.hwid-device-limit')}
+                                    leftSection={<TbDevices2 size="1rem" />}
+                                    placeholder="100"
+                                    {...form.getInputProps('hwidDeviceLimit')}
+                                />
+                            </Stack>
+
+                            <Textarea
+                                description={t('create-user-modal.widget.user-description')}
+                                key={form.key('description')}
+                                label={t('use-table-columns.description')}
+                                resize="vertical"
+                                {...form.getInputProps('description')}
+                            />
+                        </Stack>
+
+                        <Divider
+                            className="responsive-divider"
+                            orientation="vertical"
+                            visibleFrom="md"
+                        />
+
+                        <Stack gap="md" style={{ flex: '1 1 350px' }}>
                             <NumberInput
                                 allowDecimal={false}
                                 decimalScale={0}
@@ -234,43 +329,6 @@ export const CreateUserModalWidget = () => {
                                 }
                                 highlightToday
                                 leftSection={<PiCalendarDuotone size="1rem" />}
-                            />
-
-                            <Textarea
-                                description={t('create-user-modal.widget.user-description')}
-                                key={form.key('description')}
-                                label={t('use-table-columns.description')}
-                                resize="vertical"
-                                {...form.getInputProps('description')}
-                            />
-                        </Stack>
-
-                        <Divider
-                            className="responsive-divider"
-                            orientation="vertical"
-                            visibleFrom="md"
-                        />
-
-                        <Stack gap="md" style={{ flex: '1 1 350px' }}>
-                            <NumberInput
-                                allowDecimal={false}
-                                allowNegative={false}
-                                description={t(
-                                    'create-user-modal.widget.telegram-id-of-a-user-in-telegram'
-                                )}
-                                hideControls
-                                key={form.key('telegramId')}
-                                label="Telegram ID"
-                                leftSection={<PiTelegramLogoDuotone size="1rem" />}
-                                {...form.getInputProps('telegramId')}
-                            />
-
-                            <TextInput
-                                description={t('create-user-modal.widget.email-of-a-user')}
-                                key={form.key('email')}
-                                label="Email"
-                                leftSection={<PiEnvelopeDuotone size="1rem" />}
-                                {...form.getInputProps('email')}
                             />
 
                             <Checkbox.Group

@@ -1,8 +1,10 @@
 import {
     ActionIcon,
+    Anchor,
     Box,
     Button,
     Checkbox,
+    Code,
     CopyButton,
     Divider,
     Group,
@@ -27,13 +29,13 @@ import {
     PiFloppyDiskDuotone,
     PiLinkDuotone,
     PiQrCodeDuotone,
-    PiTelegramLogoDuotone,
-    PiUserDuotone
+    PiTelegramLogoDuotone
 } from 'react-icons/pi'
 import { UpdateUserCommand } from '@remnawave/backend-contract'
 import { useForm, zodResolver } from '@mantine/form'
 import { DateTimePicker } from '@mantine/dates'
 import { useTranslation } from 'react-i18next'
+import { TbDevices2 } from 'react-icons/tb'
 import { useEffect, useMemo } from 'react'
 import { modals } from '@mantine/modals'
 import { renderSVG } from 'uqr'
@@ -48,6 +50,7 @@ import { GetUserSubscriptionLinksFeature } from '@features/ui/dashboard/users/ge
 import { ToggleUserStatusButtonFeature } from '@features/ui/dashboard/users/toggle-user-status-button'
 import { RevokeSubscriptionUserFeature } from '@features/ui/dashboard/users/revoke-subscription-user'
 import { useGetInbounds, useGetUserByUuid, usersQueryKeys, useUpdateUser } from '@shared/api/hooks'
+import { GetHwidUserDevicesFeature } from '@features/ui/dashboard/users/get-hwid-user-devices'
 import { ResetUsageUserFeature } from '@features/ui/dashboard/users/reset-usage-user'
 import { bytesToGbUtil, gbToBytesUtil, prettyBytesUtil } from '@shared/utils/bytes'
 import { GetUserUsageFeature } from '@features/ui/dashboard/users/get-user-usage'
@@ -72,7 +75,12 @@ export const ViewUserModal = () => {
         name: 'edit-user-form',
         mode: 'uncontrolled',
         validate: zodResolver(
-            UpdateUserCommand.RequestSchema.omit({ expireAt: true, email: true, telegramId: true })
+            UpdateUserCommand.RequestSchema.omit({
+                expireAt: true,
+                email: true,
+                telegramId: true,
+                hwidDeviceLimit: true
+            })
         )
     })
 
@@ -123,7 +131,8 @@ export const ViewUserModal = () => {
                 trojanPassword: user.trojanPassword,
                 description: user.description ?? '',
                 telegramId: user.telegramId ?? undefined,
-                email: user.email ?? undefined
+                email: user.email ?? undefined,
+                hwidDeviceLimit: user.hwidDeviceLimit ?? undefined
             })
         }
     }, [user, inbounds])
@@ -143,7 +152,9 @@ export const ViewUserModal = () => {
                 description: values.description,
                 // @ts-expect-error - TODO: fix ZOD schema
                 telegramId: values.telegramId === '' ? null : values.telegramId,
-                email: values.email === '' ? null : values.email
+                email: values.email === '' ? null : values.email,
+                // @ts-expect-error - TODO: fix ZOD schema
+                hwidDeviceLimit: values.hwidDeviceLimit === '' ? null : values.hwidDeviceLimit
             }
         })
     })
@@ -220,7 +231,7 @@ export const ViewUserModal = () => {
                         <Stack gap="md" style={{ flex: '1 1 350px' }}>
                             <Group gap="xs" justify="space-between" w="100%">
                                 <Text fw={500} key="view-user-details-text">
-                                    {t('view-user-modal.widget.user-details')}
+                                    {form.getValues().username}
                                 </Text>
                                 {user && (
                                     <UserStatusBadge
@@ -229,32 +240,6 @@ export const ViewUserModal = () => {
                                     />
                                 )}
                             </Group>
-
-                            <TextInput
-                                description={t('view-user-modal.widget.username-cannot-be-changed')}
-                                key={form.key('username')}
-                                label={t('login-form-feature.username')}
-                                {...form.getInputProps('username')}
-                                disabled
-                                leftSection={<PiUserDuotone size="1rem" />}
-                                rightSection={
-                                    <CopyButton timeout={2000} value={form.getValues().username}>
-                                        {({ copied, copy }) => (
-                                            <ActionIcon
-                                                color={copied ? 'teal' : 'gray'}
-                                                onClick={copy}
-                                                variant="subtle"
-                                            >
-                                                {copied ? (
-                                                    <PiCheck size="1rem" />
-                                                ) : (
-                                                    <PiCopy size="1rem" />
-                                                )}
-                                            </ActionIcon>
-                                        )}
-                                    </CopyButton>
-                                }
-                            />
 
                             <TextInput
                                 key={form.key('shortUuid')}
@@ -308,17 +293,6 @@ export const ViewUserModal = () => {
                                 value={userSubscriptionUrlMemo || ''}
                             />
 
-                            <TextInput
-                                disabled
-                                label={t('use-table-columns.created-at')}
-                                leftSection={<PiCalendarDuotone size="1rem" />}
-                                value={
-                                    user?.createdAt
-                                        ? dayjs(user.createdAt).format('DD/MM/YYYY HH:mm')
-                                        : ''
-                                }
-                            />
-
                             <NumberInput
                                 allowDecimal={false}
                                 allowNegative={false}
@@ -337,6 +311,57 @@ export const ViewUserModal = () => {
                                 placeholder="Enter user's email (optional)"
                                 {...form.getInputProps('email')}
                             />
+
+                            <Stack gap="xs">
+                                <NumberInput
+                                    allowDecimal={false}
+                                    allowNegative={false}
+                                    description={
+                                        <>
+                                            <Text c="dimmed" size="0.75rem">
+                                                {t(
+                                                    'create-user-modal.widget.hwid-user-limit-line-1'
+                                                )}{' '}
+                                                <Code>HWID_DEVICE_LIMIT_ENABLED</Code>{' '}
+                                                {t(
+                                                    'create-user-modal.widget.hwid-user-limit-line-2'
+                                                )}{' '}
+                                                <Code>true</Code>.{' '}
+                                                <Anchor
+                                                    href="https://remna.st/features/hwid-device-limit"
+                                                    target="_blank"
+                                                >
+                                                    {t(
+                                                        'create-user-modal.widget.hwid-user-limit-line-3'
+                                                    )}
+                                                </Anchor>
+                                            </Text>
+                                            <Checkbox
+                                                checked={form.getValues().hwidDeviceLimit === 0}
+                                                label={t(
+                                                    'create-user-modal.widget.disable-hwid-limit'
+                                                )}
+                                                mb={'xs'}
+                                                mt={'xs'}
+                                                onChange={(event) => {
+                                                    const { checked } = event.currentTarget
+                                                    form.setFieldValue(
+                                                        'hwidDeviceLimit',
+                                                        checked ? 0 : undefined
+                                                    )
+                                                }}
+                                            />
+                                        </>
+                                    }
+                                    disabled={form.getValues().hwidDeviceLimit === 0}
+                                    hideControls
+                                    key={form.key('hwidDeviceLimit')}
+                                    label={t('create-user-modal.widget.hwid-device-limit')}
+                                    leftSection={<TbDevices2 size="1rem" />}
+                                    placeholder="100"
+                                    {...form.getInputProps('hwidDeviceLimit')}
+                                />
+                            </Stack>
 
                             <Textarea
                                 description={t('create-user-modal.widget.user-description')}
@@ -555,6 +580,7 @@ export const ViewUserModal = () => {
                                 {user && (
                                     <GetUserSubscriptionLinksFeature shortUuid={user.shortUuid} />
                                 )}
+                                {user && <GetHwidUserDevicesFeature userUuid={user.uuid} />}
                             </ActionIcon.Group>
                             {user && <GetUserUsageFeature userUuid={user.uuid} />}
                             <Button

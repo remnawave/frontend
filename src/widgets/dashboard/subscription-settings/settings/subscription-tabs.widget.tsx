@@ -29,6 +29,7 @@ import {
     PiUserCircle
 } from 'react-icons/pi'
 import { UpdateSubscriptionSettingsCommand } from '@remnawave/backend-contract'
+import { TbPrescription } from 'react-icons/tb'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { useForm } from '@mantine/form'
@@ -36,15 +37,18 @@ import { useForm } from '@mantine/form'
 import { TemplateInfoPopoverShared } from '@shared/ui/popovers/template-info-popover/template-info-popover.shared'
 import { ROUTES } from '@shared/constants'
 
+import { HeaderItem, HeadersManager } from './headers-manager.widget'
 import { RemarksManager } from './remarks-manager.widget'
 
 interface SubscriptionTabsProps {
     form: ReturnType<typeof useForm<UpdateSubscriptionSettingsCommand.Request>>
     handleSubmit: () => void
+    headers: HeaderItem[]
     isUpdateSubscriptionSettingsPending: boolean
     remarks: Record<string, string[]>
     updateDisabledRemarks: (newRemarks: string[]) => void
     updateExpiredRemarks: (newRemarks: string[]) => void
+    updateHeaders: (newHeaders: HeaderItem[]) => void
     updateLimitedRemarks: (newRemarks: string[]) => void
 }
 
@@ -55,7 +59,9 @@ export const SubscriptionTabs = ({
     updateLimitedRemarks,
     updateDisabledRemarks,
     handleSubmit,
-    isUpdateSubscriptionSettingsPending
+    isUpdateSubscriptionSettingsPending,
+    headers,
+    updateHeaders
 }: SubscriptionTabsProps) => {
     const { t } = useTranslation()
     const theme = useMantineTheme()
@@ -103,6 +109,14 @@ export const SubscriptionTabs = ({
                             value="remarks"
                         >
                             {t('subscription-settings.widget.user-status-remarks')}
+                        </Tabs.Tab>
+                        <Tabs.Tab
+                            leftSection={
+                                <TbPrescription color={theme.colors.indigo[6]} size="1.3rem" />
+                            }
+                            value="additional-response-headers"
+                        >
+                            {t('subscription-tabs.widget.additional-response-headers')}
                         </Tabs.Tab>
                     </Tabs.List>
 
@@ -467,6 +481,36 @@ export const SubscriptionTabs = ({
                                         />
                                     </Grid.Col>
                                 </Grid>
+                            </Card.Section>
+                        </Card>
+                    </Tabs.Panel>
+
+                    <Tabs.Panel value="additional-response-headers">
+                        <Card mt="sm" p="md" radius="md" shadow="sm" withBorder>
+                            <Card.Section inheritPadding p="md" withBorder>
+                                <Group align="flex-start" wrap="nowrap">
+                                    <ThemeIcon color="indigo" radius="md" size="lg" variant="light">
+                                        <TbPrescription size="1.5rem" />
+                                    </ThemeIcon>
+
+                                    <Stack gap="xs">
+                                        <Title fw={600} order={4}>
+                                            {t(
+                                                'subscription-tabs.widget.additional-response-headers'
+                                            )}
+                                        </Title>
+
+                                        <Text c="dimmed" size="sm">
+                                            {t(
+                                                'subscription-tabs.widget.headers-that-will-be-sent-with-subscription-content'
+                                            )}
+                                        </Text>
+                                    </Stack>
+                                </Group>
+                            </Card.Section>
+
+                            <Card.Section p="md" pt="xl">
+                                <HeadersManager initialHeaders={headers} onChange={updateHeaders} />
                             </Card.Section>
                         </Card>
                     </Tabs.Panel>

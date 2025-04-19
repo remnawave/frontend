@@ -2,7 +2,7 @@
     "constants": {
         "dashboard": "داشبورد",
         "api-tokens": "توکن‌های API",
-        "config": "کانفیگ",
+        "config": "Xray کانفیگ",
         "home": "خانه",
         "hosts": "هاست‌ها",
         "inbounds": "اینباندها",
@@ -182,21 +182,21 @@
     "hosts-page-header": {
         "widget": {
             "list-of-all-hosts": "فهرست تمامی هاست‌ها",
-            "about-hosts": "About hosts",
-            "address-and-port": "Address and port",
-            "address-and-port-line-1": "In most cases, the IP/domain should point to one of the connected nodes.",
-            "address-and-port-line-2": "The port must be open and accessible for incoming connections.",
-            "address-and-port-line-3": "Typically the port should match the inbound port from the Xray configuration.",
-            "advanced-settings": "\"Advanced Settings\" are additional settings that can be used to further customize the host.",
-            "advanced-settings-2": "Anything specified in \"Advanced Settings\" has a higher priority than the settings specified in the Xray configuration.",
-            "header-description-line-1": "A host is an entry point for a user. A group of hosts forms a so-called \"subscription\".",
-            "header-description-line-2": "Each host can optionally refer to one server.",
-            "inbound": "Inbound",
-            "inbound-line-1": "It is necessary to select one of the inbounds to which a specific host will be bound.",
-            "inbound-line-2": "The list of inbounds is formed in the \"Xray config\" section.",
-            "remark": "Remark",
-            "remark-description-line-1": "The host name can be anything, but must be unique within a single subscription.",
-            "remark-description-line-2": "The note will be displayed in the list of available servers in the end client."
+            "about-hosts": "درباره هاست‌ها",
+            "header-description-line-1": "هر هاست یک نقطه ورودی برای کاربر است. گروهی از هاست‌ها یک «اشتراک» را تشکیل می‌دهند.",
+            "header-description-line-2": "هر هاست می‌تواند به‌صورت اختیاری به یک سرور اشاره کند.",
+            "remark": "ریمارک",
+            "remark-description-line-1": "نام هاست می‌تواند هر چیزی باشد، اما باید در یک اشتراک واحد منحصربه‌فرد باشد.",
+            "remark-description-line-2": "ریمارک در فهرست سرورهای موجود در کلاینت نمایش داده خواهد شد.",
+            "inbound": "اینباند",
+            "inbound-line-1": "لازم است یکی از اینباندها انتخاب شود که هاست خاصی به آن متصل خواهد شد.",
+            "inbound-line-2": "فهرست اینباندها در بخش «کانفیگ Xray» تشکیل می‌شود.",
+            "address-and-port": "آدرس و پورت",
+            "address-and-port-line-1": "در بیشتر موارد، IP/دامنه باید به یکی از نودهای متصل اشاره کند.",
+            "address-and-port-line-2": "پورت باید باز و برای اتصالات ورودی قابل دسترسی باشد.",
+            "address-and-port-line-3": "معمولاً پورت باید با پورت اینباند از تنظیمات Xray مطابقت داشته باشد.",
+            "advanced-settings": "«تنظیمات پیشرفته» تنظیمات اضافی هستند که می‌توانند برای سفارشی‌سازی بیشتر هاست استفاده شوند.",
+            "advanced-settings-2": "هر چیزی که در «تنظیمات پیشرفته» مشخص شود، اولویت بالاتری نسبت به تنظیمات مشخص‌شده در کانفیگ Xray دارد."
         }
     },
     "remark-info": {
@@ -265,8 +265,13 @@
             "telegram-id-of-a-user-in-telegram": "آیدی عددی تلگرام کاربر",
             "1-month": "+1 ماه",
             "1-year": "+1 سال",
-            "2099-year": "2099 سال",
-            "3-months": "+3 ماه"
+            "2099-year": "سال 2099",
+            "3-months": "+3 ماه",
+            "disable-hwid-limit": "Disable HWID Limit",
+            "hwid-device-limit": "HWID Device Limit",
+            "hwid-user-limit-line-1": "This feature only work if",
+            "hwid-user-limit-line-2": ".env variable is set to",
+            "hwid-user-limit-line-3": "Learn more."
         }
     },
     "login-form-feature": {
@@ -338,12 +343,12 @@
         "fill-with-sample-xhttp-extra-params": "پر کردن با پارامترهای نمونه XHTTP Extra",
         "close": "بستن",
         "clone": "همانندسازی",
-        "address-description-line-1": "Address must be an IP address or a domain name of connection destination.",
-        "address-description-line-2": "In most cases, it should points to the one of connected nodes.",
-        "port-description-line-1": "Connection port.",
-        "port-description-line-2": "In most cases, must match the port of selected inbound.",
-        "sni-description-line-1": "SNI is a server name indication.",
-        "sni-description-line-2": "If not specified, value from config's inbound will be used."
+        "address-description-line-1": "آدرس باید یک آدرس IP یا دامنه برای مقصد اتصال باشد.",
+        "address-description-line-2": "در بیشتر موارد، باید به یکی از نود‌های متصل اشاره کند.",
+        "port-description-line-1": "پورت اتصال.",
+        "port-description-line-2": "در بیشتر موارد، باید با پورت ورودی انتخاب‌شده مطابقت داشته باشد.",
+        "sni-description-line-1": "SNI نشان‌دهنده نام سرور است.",
+        "sni-description-line-2": "اگر مشخص نشود، مقدار از کانفیگ اینباند استخراج خواهد شد."
     },
     "base-node-form": {
         "country": "کشور",
@@ -382,15 +387,26 @@
     },
     "statistic-nodes": {
         "component": {
-            "last-7-days-by-nodes": "7 روز اخیر بر اساس نودها",
+            "7-days": "۷ روز",
+            "14-days": "۱۴ روز",
+            "30-days": "۳۰ روز",
+            "60-days": "۶۰ روز",
+            "90-days": "۹۰ روز",
+            "180-days": "۱۸۰ روز",
+            "click-to-highlight-only-this-node": "کلیک کنید تا فقط این نود برجسته شود",
+            "click-to-see-all": "کلیک کنید تا همه را ببینید",
+            "click-to-show-all": "برای نمایش همه کلیک کنید",
             "filter-nodes": "فیلتر کردن نودها",
-            "bar": "میله",
-            "line": "خط",
-            "last-7-days": "7 روز گذشته",
-            "last-14-days": "14 روز گذشته",
-            "last-30-days": "30 روز گذشته",
-            "last-60-days": "60 روز گذشته",
-            "last-90-days": "90 روز گذشته"
+            "next-day": "روز بعد",
+            "no-data-available": "داده‌ای در دسترس نیست",
+            "no-data-available-for-the-selected-period": "داده‌ای برای دوره انتخاب‌شده در دسترس نیست",
+            "node": "Node",
+            "previous-day": "روز قبل",
+            "show-nodes": "نمایش نودها",
+            "top-nodes": "نودهای پرمصرف",
+            "total-traffic": "ترافیک کل",
+            "traffic": "ترافیک",
+            "usage-by-period": "استفاده بر اساس دوره"
         }
     },
     "get-expiration-text": {
@@ -845,7 +861,7 @@
             "subscription-information": "اطلاعات اشتراک",
             "subscription-uuid": "شناسه (UUID) اشتراک",
             "subscription-url": "آدرس URL اشتراک",
-            "expires-at": "منقضی می‌شود در",
+            "expires-at": "زمان انقضا",
             "last-opened-at": "آخرین بار باز شده در",
             "last-user-agent": "آخرین عامل کاربری",
             "revoked-at": "لغو شده در",
@@ -920,7 +936,9 @@
         "widget": {
             "show-custom-remarks": "نمایش توضیحات سفارشی",
             "show-custom-remark-description-line-1": "فقط برای کاربران منقضی‌شده، محدودشده و غیرفعال.",
-            "show-custom-remark-description-line-2": "اگر این گزینه غیرفعال باشد - کاربران منقضی‌شده، محدودشده و غیرفعال به جای توضیحات سفارشی زیر، لیست واقعی هاست‌ها را دریافت خواهند کرد."
+            "show-custom-remark-description-line-2": "اگر این گزینه غیرفعال باشد - کاربران منقضی‌شده، محدودشده و غیرفعال به جای توضیحات سفارشی زیر، لیست واقعی هاست‌ها را دریافت خواهند کرد.",
+            "additional-response-headers": "Additional response headers",
+            "headers-that-will-be-sent-with-subscription-content": "Headers that will be sent with subscription content."
         }
     },
     "nodes-realtime-metrics": {
@@ -966,6 +984,40 @@
             "traffic": "ترافیک",
             "no-users-with-traffic-100-kb": "هیچ کاربری با ترافیک ≥ 100 کیلوبایت وجود ندارد",
             "users-hidden-with-less-than-100-kb": "{{usersCount}} کاربر با کمتر از 100 کیلوبایت مخفی شده‌اند ({{totalTraffic}} کل)"
+        }
+    },
+    "get-hwid-user-devices": {
+        "feature": {
+            "no-devices-found": "هیچ دستگاهی یافت نشد",
+            "no-devices-match-your-search": "هیچ دستگاهی با جستجوی شما مطابقت ندارد",
+            "platform": "پلتفرم",
+            "unknown": "ناشناخته",
+            "model": "مدل",
+            "user-agent": "عامل کاربر",
+            "added": "اضافه شده در",
+            "os-version": "نسخه سیستم‌عامل",
+            "delete-device": "حذف دستگاه",
+            "device": "دستگاه",
+            "devices": "دستگاه‌ها",
+            "hwid-devices": "HWIDها و دستگاه‌ها",
+            "important-note": "نکته مهم",
+            "important-note-line-1": "این قابلیت تنها با",
+            "important-note-line-2": "مقدار .env در دسترس است.",
+            "important-note-line-3": "همه برنامه‌ها از این قابلیت پشتیبانی نمی‌کنند.",
+            "important-note-line-4": "اگر محدودیت دستگاه HWID کاربر خالی باشد –",
+            "important-note-line-5": "استفاده خواهد شد.",
+            "important-note-line-6": "لطفاً برای اطلاعات بیشتر مستندات را بررسی کنید.",
+            "important-note-line-7": "بیشتر بدانید.",
+            "loading-hwid-devices": "در حال بارگذاری HWIDها و دستگاه‌ها ...",
+            "search-by-hwid": "جستجو بر اساس HWID",
+            "enter-hwid-to-filter-devices": "برای فیلتر کردن دستگاه‌ها HWID را وارد کنید ..."
+        }
+    },
+    "headers-manager": {
+        "widget": {
+            "key": "کلید",
+            "value": "مقدار",
+            "add-header": "افزودن هدر"
         }
     }
 }

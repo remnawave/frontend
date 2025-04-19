@@ -46,11 +46,6 @@ export const useMenuSections = (): MenuItem[] => {
                     icon: PiListChecks
                 },
                 {
-                    name: t('constants.inbounds'),
-                    href: ROUTES.DASHBOARD.MANAGEMENT.INBOUNDS,
-                    icon: PiBoundingBoxDuotone
-                },
-                {
                     name: t('constants.nodes'),
                     href: ROUTES.DASHBOARD.MANAGEMENT.NODES,
                     icon: PiCpu,
@@ -73,6 +68,11 @@ export const useMenuSections = (): MenuItem[] => {
                     name: t('constants.config'),
                     href: ROUTES.DASHBOARD.MANAGEMENT.CONFIG,
                     icon: PiGearDuotone
+                },
+                {
+                    name: t('constants.inbounds'),
+                    href: ROUTES.DASHBOARD.MANAGEMENT.INBOUNDS,
+                    icon: PiBoundingBoxDuotone
                 },
                 {
                     name: t('constants.subscription-settings'),
