@@ -61,12 +61,7 @@ export const HeadersManager = (props: HeadersManagerProps) => {
     return (
         <>
             {localHeaders.map((header, index) => (
-                <Group
-                    align="flex-start"
-                    gap="sm"
-                    key={`${index}-${header.key}-${header.value}`}
-                    mb="xs"
-                >
+                <Group align="flex-start" gap="sm" key={`${index}`} mb="xs">
                     <ActionIcon
                         color="red"
                         onClick={() => removeLocalHeader(index)}

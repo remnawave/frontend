@@ -48,6 +48,13 @@ export function SubscriptionTemplateEditorWidget(props: Props) {
             )}
             <Divider mb="md" mt="md" size="md" />
 
+            <TemplateEditorActionsFeature
+                editorRef={editorRef}
+                language={language}
+                monacoRef={monacoRef}
+                templateType={templateType}
+            />
+
             <Paper
                 mb="md"
                 p={0}
@@ -103,12 +110,6 @@ export function SubscriptionTemplateEditorWidget(props: Props) {
                     value={getConfig() || ''}
                 />
             </Paper>
-            <TemplateEditorActionsFeature
-                editorRef={editorRef}
-                language={language}
-                monacoRef={monacoRef}
-                templateType={templateType}
-            />
         </Box>
     )
 }
