@@ -35,6 +35,13 @@ export function ConfigEditorWidget(props: Props) {
 
     return (
         <Box>
+            <ConfigEditorActionsFeature
+                editorRef={editorRef}
+                isConfigValid={isConfigValid}
+                monacoRef={monacoRef}
+                setResult={setResult}
+            />
+
             <Paper
                 mb="md"
                 p={0}
@@ -99,13 +106,6 @@ export function ConfigEditorWidget(props: Props) {
                     value={JSON.stringify(config, null, 2)}
                 />
             </Paper>
-
-            <ConfigEditorActionsFeature
-                editorRef={editorRef}
-                isConfigValid={isConfigValid}
-                monacoRef={monacoRef}
-                setResult={setResult}
-            />
 
             {result && (
                 <Code block p="md">

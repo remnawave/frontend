@@ -1,6 +1,7 @@
-import { PiCheck, PiCheckSquareOffset, PiCopy, PiFloppyDisk } from 'react-icons/pi'
+import { TbClipboardCopy, TbClipboardText, TbCut, TbSelectAll } from 'react-icons/tb'
+import { PiCheckSquareOffset, PiFloppyDisk } from 'react-icons/pi'
+import { ActionIcon, Button, Group, Text } from '@mantine/core'
 import { notifications } from '@mantine/notifications'
-import { Button, Group, Text } from '@mantine/core'
 import { useTranslation } from 'react-i18next'
 import { useClipboard } from '@mantine/hooks'
 import { modals } from '@mantine/modals'
@@ -61,6 +62,65 @@ export function ConfigEditorActionsFeature(props: Props) {
         clipboard.copy(currentValue)
     }
 
+    const handleSelectAll = () => {
+        if (!editorRef.current) return
+        if (typeof editorRef.current !== 'object') return
+        if (!('getModel' in editorRef.current)) return
+        if (typeof editorRef.current.getModel !== 'function') return
+
+        const model = editorRef.current.getModel()
+        if (!model) return
+
+        editorRef.current.setSelection({
+            startLineNumber: 1,
+            startColumn: 1,
+            endLineNumber: model.getLineCount(),
+            endColumn: model.getLineMaxColumn(model.getLineCount())
+        })
+    }
+
+    const handleCut = () => {
+        if (!editorRef.current) return
+        if (typeof editorRef.current !== 'object') return
+        if (!('getSelection' in editorRef.current)) return
+        if (typeof editorRef.current.getSelection !== 'function') return
+        if (!('getModel' in editorRef.current)) return
+        if (typeof editorRef.current.getModel !== 'function') return
+
+        const selection = editorRef.current.getSelection()
+        const model = editorRef.current.getModel()
+        if (!selection || !model) return
+
+        const selectedText = model.getValueInRange(selection)
+        clipboard.copy(selectedText)
+
+        editorRef.current.executeEdits('', [{ range: selection, text: '' }])
+    }
+
+    const handlePaste = () => {
+        if (!editorRef.current) return
+        if (typeof editorRef.current !== 'object') return
+        if (!('getPosition' in editorRef.current)) return
+        if (typeof editorRef.current.getPosition !== 'function') return
+
+        const position = editorRef.current.getPosition()
+        if (!position) return
+
+        navigator.clipboard.readText().then((text) => {
+            editorRef.current.executeEdits('', [
+                {
+                    range: {
+                        startLineNumber: position.lineNumber,
+                        startColumn: position.column,
+                        endLineNumber: position.lineNumber,
+                        endColumn: position.column
+                    },
+                    text
+                }
+            ])
+        })
+    }
+
     const formatDocument = () => {
         if (!editorRef.current) return
         if (typeof editorRef.current !== 'object') return
@@ -72,62 +132,78 @@ export function ConfigEditorActionsFeature(props: Props) {
 
     return (
         <Group>
-            <Button
-                leftSection={<PiCheckSquareOffset size={16} />}
-                mb="md"
-                onClick={formatDocument}
-            >
-                {t('config-editor-actions.feature.format')}
-            </Button>
-            <Button
-                color={clipboard.copied ? 'teal' : 'gray'}
-                leftSection={
-                    clipboard.copied ? <PiCheck size={'1.25rem'} /> : <PiCopy size={'1.25rem'} />
-                }
-                mb="md"
-                onClick={handleCopyConfig}
-                variant="outline"
-            >
-                {t('config-editor-actions.feature.copy-config')}
-            </Button>
-            <Button
-                disabled={!isConfigValid}
-                leftSection={<PiFloppyDisk size={16} />}
-                loading={isUpdating}
-                mb="md"
-                onClick={handleSave}
-            >
-                {t('config-editor-actions.feature.save')}
-            </Button>
+            <Group grow preventGrowOverflow={false} wrap="wrap">
+                <Button
+                    leftSection={<PiCheckSquareOffset size={16} />}
+                    mb="md"
+                    onClick={formatDocument}
+                >
+                    {t('config-editor-actions.feature.format')}
+                </Button>
 
-            <Button
-                color="red"
-                disabled={isConfigValid || isUpdating}
-                leftSection={<PiFloppyDisk size={16} />}
-                loading={isUpdating}
-                mb="md"
-                onClick={() => {
-                    modals.openConfirmModal({
-                        title: t('config-editor-actions.feature.save-anyway-title'),
-                        children: (
-                            <Text>
-                                {t('config-editor-actions.feature.save-anyway-description')}
-                            </Text>
-                        ),
-                        centered: true,
-                        labels: {
-                            confirm: t('config-editor-actions.feature.save'),
-                            cancel: t('config-editor-actions.feature.cancel')
-                        },
-                        confirmProps: {
-                            color: 'red'
-                        },
-                        onConfirm: handleSave
-                    })
-                }}
-            >
-                {t('config-editor-actions.feature.save-anyway')}
-            </Button>
+                <Button
+                    disabled={!isConfigValid}
+                    leftSection={<PiFloppyDisk size={16} />}
+                    loading={isUpdating}
+                    mb="md"
+                    onClick={handleSave}
+                >
+                    {t('config-editor-actions.feature.save')}
+                </Button>
+
+                <Button
+                    color="red"
+                    disabled={isConfigValid || isUpdating}
+                    leftSection={<PiFloppyDisk size={16} />}
+                    loading={isUpdating}
+                    mb="md"
+                    onClick={() => {
+                        modals.openConfirmModal({
+                            title: t('config-editor-actions.feature.save-anyway-title'),
+                            children: (
+                                <Text>
+                                    {t('config-editor-actions.feature.save-anyway-description')}
+                                </Text>
+                            ),
+                            centered: true,
+                            labels: {
+                                confirm: t('config-editor-actions.feature.save'),
+                                cancel: t('config-editor-actions.feature.cancel')
+                            },
+                            confirmProps: {
+                                color: 'red'
+                            },
+                            onConfirm: handleSave
+                        })
+                    }}
+                >
+                    {t('config-editor-actions.feature.save-anyway')}
+                </Button>
+            </Group>
+            <Group>
+                <ActionIcon.Group mb="md">
+                    <ActionIcon
+                        color={clipboard.copied ? 'teal' : 'cyan'}
+                        onClick={handleCopyConfig}
+                        size="input-sm"
+                        variant="outline"
+                    >
+                        <TbClipboardCopy size={20} />
+                    </ActionIcon>
+
+                    <ActionIcon onClick={handleSelectAll} size="input-sm" variant="outline">
+                        <TbSelectAll size={20} />
+                    </ActionIcon>
+
+                    <ActionIcon onClick={handleCut} size="input-sm" variant="outline">
+                        <TbCut size={20} />
+                    </ActionIcon>
+
+                    <ActionIcon onClick={handlePaste} size="input-sm" variant="outline">
+                        <TbClipboardText size={20} />
+                    </ActionIcon>
+                </ActionIcon.Group>
+            </Group>
         </Group>
     )
 }
