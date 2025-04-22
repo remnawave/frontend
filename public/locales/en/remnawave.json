@@ -190,9 +190,9 @@
             "remark-description-line-2": "The remark will be displayed in the list of available servers in the end client.",
             "inbound": "Inbound",
             "inbound-line-1": "It is necessary to select one of the inbounds to which a specific host will be bound.",
-            "inbound-line-2": "The list of inbounds is formed in the \"Xray config\" section.",
+            "inbound-line-2": "The list of inbounds is derived from the \"Xray Config\".",
             "address-and-port": "Address and port",
-            "address-and-port-line-1": "In most cases, the IP/domain should point to one of the connected nodes.",
+            "address-and-port-line-1": "In most cases, the IP/domain name should point to one of the connected nodes.",
             "address-and-port-line-2": "The port must be open and accessible for incoming connections.",
             "address-and-port-line-3": "Typically the port should match the inbound port from the Xray configuration.",
             "advanced-settings": "\"Advanced Settings\" are additional settings that can be used to further customize the host.",
@@ -602,14 +602,14 @@
             "serve-json-description": "This will allow you to serve JSON subscriptions at the base subscription path (without /json). If the client supports it, it will be served as JSON, otherwise it will be served as usual.",
             "add-username-to-base-subscription": "Add #username to base subscription",
             "add-username-description": "Add #username to the base subscription path at the subscription route.",
-            "subscription-info-description": "This setting is supported by many client apps such as Happ, V2RayNG, Streisand, etc.",
+            "subscription-info-description": "This setting is supported by many client apps such as Happ, v2RayNG, Streisand, etc.",
             "happ-description-line-1": "Here you can configure Happ settings for the subscription.",
             "happ-description-line-2": "This settings will only be used in Happ."
         },
         "page": {
             "component": {
                 "what-is-subscription-settings": "What is subscription settings?",
-                "subscription-settings-description": "The settings below apply to subscription link details used and displayed by clients apps such as Happ, V2RayNG, Streisand, etc.",
+                "subscription-settings-description": "The settings below apply to subscription link details used and displayed by clients apps such as Happ, v2RayNG, Streisand, etc.",
                 "subscription-settings-description-line-2": "It is recommended to change the values to match your specific needs and circumstances."
             }
         }
@@ -1006,7 +1006,7 @@
             "important-note-line-3": "Not all applications support this feature.",
             "important-note-line-4": "If user HWID Device Limit is empty –",
             "important-note-line-5": "will be used.",
-            "important-note-line-6": "Please, review documentation for more information.",
+            "important-note-line-6": "Please check out the documentation for more information.",
             "important-note-line-7": "Learn more.",
             "loading-hwid-devices": "Loading HWIDs and Devices ...",
             "search-by-hwid": "Search by HWID",

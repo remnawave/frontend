@@ -267,11 +267,11 @@
             "1-year": "+1 سال",
             "2099-year": "سال 2099",
             "3-months": "+3 ماه",
-            "disable-hwid-limit": "Disable HWID Limit",
-            "hwid-device-limit": "HWID Device Limit",
-            "hwid-user-limit-line-1": "This feature only work if",
-            "hwid-user-limit-line-2": ".env variable is set to",
-            "hwid-user-limit-line-3": "Learn more."
+            "disable-hwid-limit": "غیرفعالسازی لیمیت HWID",
+            "hwid-device-limit": "لیمیت دستگاه براساس HWID",
+            "hwid-user-limit-line-1": "این ویژگی فقط در صورتی کار می‌‌کند که",
+            "hwid-user-limit-line-2": "در فایل .env این مقدار را داشته باشد:",
+            "hwid-user-limit-line-3": "اطلاعات بیشتر"
         }
     },
     "login-form-feature": {
@@ -400,7 +400,7 @@
             "next-day": "روز بعد",
             "no-data-available": "داده‌ای در دسترس نیست",
             "no-data-available-for-the-selected-period": "داده‌ای برای دوره انتخاب‌شده در دسترس نیست",
-            "node": "Node",
+            "node": "نود",
             "previous-day": "روز قبل",
             "show-nodes": "نمایش نودها",
             "top-nodes": "نودهای پرمصرف",
@@ -604,7 +604,7 @@
             "add-username-description": "با فعال کردن این گزینه #username به انتهای لینک‌های اشتراک اضافه خواهد شد.",
             "happ-description-line-1": "در این قسمت می‌توانید تنظیمات مربوط به نرم‌افزار Happ را برای لینک‌های اشتراک مشخص کنید.",
             "happ-description-line-2": "این تنظیمات فقط در نرم‌افزار Happ استفاده خواهد شد",
-            "subscription-info-description": "این تنظیمات توسط نرم‌افزارهایی مثل Happ, V2RayNG, Streisand و..و استفاده می‌شود"
+            "subscription-info-description": "این تنظیمات توسط نرم‌افزارهایی مثل Happ, v2RayNG, Streisand و..و استفاده می‌شود"
         },
         "page": {
             "component": {
@@ -937,8 +937,8 @@
             "show-custom-remarks": "نمایش توضیحات سفارشی",
             "show-custom-remark-description-line-1": "فقط برای کاربران منقضی‌شده، محدودشده و غیرفعال.",
             "show-custom-remark-description-line-2": "اگر این گزینه غیرفعال باشد - کاربران منقضی‌شده، محدودشده و غیرفعال به جای توضیحات سفارشی زیر، لیست واقعی هاست‌ها را دریافت خواهند کرد.",
-            "additional-response-headers": "Additional response headers",
-            "headers-that-will-be-sent-with-subscription-content": "Headers that will be sent with subscription content."
+            "additional-response-headers": "هدرهای برگشتی اضافی",
+            "headers-that-will-be-sent-with-subscription-content": "هدرهای اضافی که می‌خواهید همراه با محتوای اشتراک ارسال شوند را مشخص کنید."
         }
     },
     "nodes-realtime-metrics": {
