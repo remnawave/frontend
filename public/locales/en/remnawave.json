@@ -604,7 +604,7 @@
             "add-username-description": "Add #username to the base subscription path at the subscription route.",
             "subscription-info-description": "This setting is supported by many client apps such as Happ, v2RayNG, Streisand, etc.",
             "happ-description-line-1": "Here you can configure Happ settings for the subscription.",
-            "happ-description-line-2": "This settings will only be used in Happ."
+            "happ-description-line-2": "These settings will only be used in Happ."
         },
         "page": {
             "component": {
