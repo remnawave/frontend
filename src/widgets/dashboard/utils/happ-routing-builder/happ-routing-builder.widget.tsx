@@ -32,6 +32,7 @@ import consola from 'consola/browser'
 import { renderSVG } from 'uqr'
 
 interface HappRoutingData {
+    [key: string]: unknown
     BlockIp?: string[]
     BlockSites?: string[]
     DirectIp?: string[]
@@ -40,17 +41,22 @@ interface HappRoutingData {
     DomainStrategy?: string
     DomesticDNSDomain?: string
     DomesticDNSIP?: string
+    DomesticDNSIp?: string
     DomesticDNSType?: string
     FakeDNS?: boolean | string
+    FakeDns?: boolean | string
     Geoipurl?: string
+    GeoipUrl?: string
     Geositeurl?: string
+    GeositeUrl?: string
     GlobalProxy?: boolean | string
-    LastUpdated?: string
+    LastUpdated?: number | string
     Name?: string
     ProxyIp?: string[]
     ProxySites?: string[]
     RemoteDNSDomain?: string
     RemoteDNSIP?: string
+    RemoteDNSIp?: string
     RemoteDNSType?: string
 }
 
@@ -163,23 +169,36 @@ export const HappRoutingBuilderWidget = () => {
             if (jsonData.Name !== undefined) newFormData.name = jsonData.Name
             if (jsonData.GlobalProxy !== undefined)
                 newFormData.globalProxy = String(jsonData.GlobalProxy)
+
             if (jsonData.RemoteDNSType !== undefined)
                 newFormData.remoteDnsType = jsonData.RemoteDNSType
             if (jsonData.RemoteDNSDomain !== undefined)
                 newFormData.remoteDnsDomain = jsonData.RemoteDNSDomain
             if (jsonData.RemoteDNSIP !== undefined) newFormData.remoteDnsIp = jsonData.RemoteDNSIP
+            if (jsonData.RemoteDNSIp !== undefined) newFormData.remoteDnsIp = jsonData.RemoteDNSIp
+
             if (jsonData.DomesticDNSType !== undefined)
                 newFormData.domesticDnsType = jsonData.DomesticDNSType
             if (jsonData.DomesticDNSDomain !== undefined)
                 newFormData.domesticDnsDomain = jsonData.DomesticDNSDomain
             if (jsonData.DomesticDNSIP !== undefined)
                 newFormData.domesticDnsIp = jsonData.DomesticDNSIP
+            if (jsonData.DomesticDNSIp !== undefined)
+                newFormData.domesticDnsIp = jsonData.DomesticDNSIp
+
             if (jsonData.Geoipurl !== undefined) newFormData.geoipUrl = jsonData.Geoipurl
+            if (jsonData.GeoipUrl !== undefined) newFormData.geoipUrl = jsonData.GeoipUrl
+
             if (jsonData.Geositeurl !== undefined) newFormData.geositeUrl = jsonData.Geositeurl
-            if (jsonData.LastUpdated !== undefined) newFormData.lastUpdated = jsonData.LastUpdated
+            if (jsonData.GeositeUrl !== undefined) newFormData.geositeUrl = jsonData.GeositeUrl
+
+            if (jsonData.LastUpdated !== undefined)
+                newFormData.lastUpdated = String(jsonData.LastUpdated)
             if (jsonData.DomainStrategy !== undefined)
                 newFormData.domainStrategy = jsonData.DomainStrategy
+
             if (jsonData.FakeDNS !== undefined) newFormData.fakeDns = String(jsonData.FakeDNS)
+            if (jsonData.FakeDns !== undefined) newFormData.fakeDns = String(jsonData.FakeDns)
 
             if (jsonData.DnsHosts !== undefined) {
                 newFormData.dnsHosts = JSON.stringify(jsonData.DnsHosts, null, 2)
