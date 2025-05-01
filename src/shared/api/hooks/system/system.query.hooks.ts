@@ -41,7 +41,7 @@ export const useGetSystemStats = createGetQueryHook({
     },
     errorHandler: (error) => {
         notifications.show({
-            title: `${GetStatsCommand.TSQ_url}`,
+            title: `Get System Stats`,
             message: error instanceof Error ? error.message : `Request failed with unknown error.`,
             color: 'red'
         })
@@ -63,7 +63,7 @@ export const useGetBandwidthStats = createGetQueryHook({
     },
     errorHandler: (error) => {
         notifications.show({
-            title: `${GetStatsCommand.TSQ_url}`,
+            title: `Get Bandwidth Stats`,
             message: error instanceof Error ? error.message : `Request failed with unknown error.`,
             color: 'red'
         })
@@ -85,7 +85,7 @@ export const useGetNodesStatisticsCommand = createGetQueryHook({
     },
     errorHandler: (error) => {
         notifications.show({
-            title: `${GetStatsCommand.TSQ_url}`,
+            title: `Get Nodes Statistics`,
             message: error instanceof Error ? error.message : `Request failed with unknown error.`,
             color: 'red'
         })

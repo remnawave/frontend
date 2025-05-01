@@ -11,12 +11,13 @@ import {
 } from '@remnawave/backend-contract'
 import { notifications } from '@mantine/notifications'
 
-import { createDeleteMutationHook, createPostMutationHook } from '../../tsq-helpers'
+import { createMutationHook } from '../../tsq-helpers'
 
-export const useCreateHost = createPostMutationHook({
+export const useCreateHost = createMutationHook({
     endpoint: CreateHostCommand.TSQ_url,
     bodySchema: CreateHostCommand.RequestSchema,
     responseSchema: CreateHostCommand.ResponseSchema,
+    requestMethod: CreateHostCommand.endpointDetails.REQUEST_METHOD,
     rMutationParams: {
         onSuccess: () => {
             notifications.show({
@@ -27,7 +28,7 @@ export const useCreateHost = createPostMutationHook({
         },
         onError: (error) => {
             notifications.show({
-                title: `${CreateHostCommand.TSQ_url}`,
+                title: `Create Host`,
                 message:
                     error instanceof Error ? error.message : `Request failed with unknown error.`,
                 color: 'red'
@@ -36,10 +37,11 @@ export const useCreateHost = createPostMutationHook({
     }
 })
 
-export const useUpdateHost = createPostMutationHook({
+export const useUpdateHost = createMutationHook({
     endpoint: UpdateHostCommand.TSQ_url,
     bodySchema: UpdateHostCommand.RequestSchema,
     responseSchema: UpdateHostCommand.ResponseSchema,
+    requestMethod: UpdateHostCommand.endpointDetails.REQUEST_METHOD,
     rMutationParams: {
         onSuccess: () => {
             notifications.show({
@@ -50,7 +52,7 @@ export const useUpdateHost = createPostMutationHook({
         },
         onError: (error) => {
             notifications.show({
-                title: `${UpdateHostCommand.TSQ_url}`,
+                title: `Update Host`,
                 message:
                     error instanceof Error ? error.message : `Request failed with unknown error.`,
                 color: 'red'
@@ -59,10 +61,11 @@ export const useUpdateHost = createPostMutationHook({
     }
 })
 
-export const useDeleteHost = createDeleteMutationHook({
+export const useDeleteHost = createMutationHook({
     endpoint: DeleteHostCommand.TSQ_url,
     responseSchema: DeleteHostCommand.ResponseSchema,
     routeParamsSchema: DeleteHostCommand.RequestSchema,
+    requestMethod: DeleteHostCommand.endpointDetails.REQUEST_METHOD,
     rMutationParams: {
         onSuccess: () => {
             notifications.show({
@@ -73,7 +76,7 @@ export const useDeleteHost = createDeleteMutationHook({
         },
         onError: (error) => {
             notifications.show({
-                title: `${DeleteHostCommand.TSQ_url}`,
+                title: `Delete Host`,
                 message:
                     error instanceof Error ? error.message : `Request failed with unknown error.`,
                 color: 'red'
@@ -82,14 +85,15 @@ export const useDeleteHost = createDeleteMutationHook({
     }
 })
 
-export const useReorderHosts = createPostMutationHook({
+export const useReorderHosts = createMutationHook({
     endpoint: ReorderHostCommand.TSQ_url,
     bodySchema: ReorderHostCommand.RequestSchema,
     responseSchema: ReorderHostCommand.ResponseSchema,
+    requestMethod: ReorderHostCommand.endpointDetails.REQUEST_METHOD,
     rMutationParams: {
         onError: (error) => {
             notifications.show({
-                title: `${ReorderHostCommand.TSQ_url}`,
+                title: `Reorder Hosts`,
                 message:
                     error instanceof Error ? error.message : `Request failed with unknown error.`,
                 color: 'red'
@@ -98,10 +102,11 @@ export const useReorderHosts = createPostMutationHook({
     }
 })
 
-export const useBulkDeleteHosts = createPostMutationHook({
+export const useBulkDeleteHosts = createMutationHook({
     endpoint: BulkDeleteHostsCommand.TSQ_url,
     bodySchema: BulkDeleteHostsCommand.RequestSchema,
     responseSchema: BulkDeleteHostsCommand.ResponseSchema,
+    requestMethod: BulkDeleteHostsCommand.endpointDetails.REQUEST_METHOD,
     rMutationParams: {
         onSuccess: () => {
             notifications.show({
@@ -112,7 +117,7 @@ export const useBulkDeleteHosts = createPostMutationHook({
         },
         onError: (error) => {
             notifications.show({
-                title: `${BulkDeleteHostsCommand.TSQ_url}`,
+                title: `Bulk Delete Hosts`,
                 message:
                     error instanceof Error ? error.message : `Request failed with unknown error.`,
                 color: 'red'
@@ -121,10 +126,11 @@ export const useBulkDeleteHosts = createPostMutationHook({
     }
 })
 
-export const useBulkEnableHosts = createPostMutationHook({
+export const useBulkEnableHosts = createMutationHook({
     endpoint: BulkEnableHostsCommand.TSQ_url,
     bodySchema: BulkEnableHostsCommand.RequestSchema,
     responseSchema: BulkEnableHostsCommand.ResponseSchema,
+    requestMethod: BulkEnableHostsCommand.endpointDetails.REQUEST_METHOD,
     rMutationParams: {
         onSuccess: () => {
             notifications.show({
@@ -135,7 +141,7 @@ export const useBulkEnableHosts = createPostMutationHook({
         },
         onError: (error) => {
             notifications.show({
-                title: `${BulkEnableHostsCommand.TSQ_url}`,
+                title: `Bulk Enable Hosts`,
                 message:
                     error instanceof Error ? error.message : `Request failed with unknown error.`,
                 color: 'red'
@@ -144,10 +150,11 @@ export const useBulkEnableHosts = createPostMutationHook({
     }
 })
 
-export const useBulkDisableHosts = createPostMutationHook({
+export const useBulkDisableHosts = createMutationHook({
     endpoint: BulkDisableHostsCommand.TSQ_url,
     bodySchema: BulkDisableHostsCommand.RequestSchema,
     responseSchema: BulkDisableHostsCommand.ResponseSchema,
+    requestMethod: BulkDisableHostsCommand.endpointDetails.REQUEST_METHOD,
     rMutationParams: {
         onSuccess: () => {
             notifications.show({
@@ -158,7 +165,7 @@ export const useBulkDisableHosts = createPostMutationHook({
         },
         onError: (error) => {
             notifications.show({
-                title: `${BulkDisableHostsCommand.TSQ_url}`,
+                title: `Bulk Disable Hosts`,
                 message:
                     error instanceof Error ? error.message : `Request failed with unknown error.`,
                 color: 'red'
@@ -167,10 +174,11 @@ export const useBulkDisableHosts = createPostMutationHook({
     }
 })
 
-export const useSetInboundHosts = createPostMutationHook({
+export const useSetInboundHosts = createMutationHook({
     endpoint: SetInboundToManyHostsCommand.TSQ_url,
     bodySchema: SetInboundToManyHostsCommand.RequestSchema,
     responseSchema: SetInboundToManyHostsCommand.ResponseSchema,
+    requestMethod: SetInboundToManyHostsCommand.endpointDetails.REQUEST_METHOD,
     rMutationParams: {
         onSuccess: () => {
             notifications.show({
@@ -181,7 +189,7 @@ export const useSetInboundHosts = createPostMutationHook({
         },
         onError: (error) => {
             notifications.show({
-                title: `${SetInboundToManyHostsCommand.TSQ_url}`,
+                title: `Set Inbound To Many Hosts`,
                 message:
                     error instanceof Error ? error.message : `Request failed with unknown error.`,
                 color: 'red'
@@ -190,10 +198,11 @@ export const useSetInboundHosts = createPostMutationHook({
     }
 })
 
-export const useSetPortToManyHosts = createPostMutationHook({
+export const useSetPortToManyHosts = createMutationHook({
     endpoint: SetPortToManyHostsCommand.TSQ_url,
     bodySchema: SetPortToManyHostsCommand.RequestSchema,
     responseSchema: SetPortToManyHostsCommand.ResponseSchema,
+    requestMethod: SetPortToManyHostsCommand.endpointDetails.REQUEST_METHOD,
     rMutationParams: {
         onSuccess: () => {
             notifications.show({
@@ -204,7 +213,7 @@ export const useSetPortToManyHosts = createPostMutationHook({
         },
         onError: (error) => {
             notifications.show({
-                title: `${SetPortToManyHostsCommand.TSQ_url}`,
+                title: `Set Port To Many Hosts`,
                 message:
                     error instanceof Error ? error.message : `Request failed with unknown error.`,
                 color: 'red'

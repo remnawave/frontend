@@ -1,12 +1,13 @@
 import { UpdateSubscriptionSettingsCommand } from '@remnawave/backend-contract'
 import { notifications } from '@mantine/notifications'
 
-import { createPostMutationHook } from '../../tsq-helpers'
+import { createMutationHook } from '../../tsq-helpers'
 
-export const useUpdateSubscriptionSettings = createPostMutationHook({
+export const useUpdateSubscriptionSettings = createMutationHook({
     endpoint: UpdateSubscriptionSettingsCommand.TSQ_url,
     bodySchema: UpdateSubscriptionSettingsCommand.RequestSchema,
     responseSchema: UpdateSubscriptionSettingsCommand.ResponseSchema,
+    requestMethod: UpdateSubscriptionSettingsCommand.endpointDetails.REQUEST_METHOD,
     rMutationParams: {
         onSuccess: () => {
             notifications.show({
@@ -17,7 +18,7 @@ export const useUpdateSubscriptionSettings = createPostMutationHook({
         },
         onError: (error) => {
             notifications.show({
-                title: 'Error updating subscription settings',
+                title: 'Update Subscription Settings',
                 message:
                     error instanceof Error ? error.message : `Request failed with unknown error.`,
                 color: 'red'
