@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-import { GetAllUsersV2Command } from '@remnawave/backend-contract'
+import { GetAllUsersCommand } from '@remnawave/backend-contract'
 import { MRT_ColumnDef } from 'mantine-react-table'
 import { useTranslation } from 'react-i18next'
 import { useMemo } from 'react'
@@ -14,7 +14,7 @@ import { prettyBytesToAnyUtil } from '@shared/utils/bytes'
 export const useUserTableColumns = () => {
     const { t } = useTranslation()
 
-    return useMemo<MRT_ColumnDef<GetAllUsersV2Command.Response['response']['users'][number]>[]>(
+    return useMemo<MRT_ColumnDef<GetAllUsersCommand.Response['response']['users'][number]>[]>(
         () => [
             {
                 accessorKey: 'username',

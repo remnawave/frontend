@@ -1,12 +1,13 @@
 import { DeleteUserHwidDeviceCommand } from '@remnawave/backend-contract'
 import { notifications } from '@mantine/notifications'
 
-import { createPostMutationHook } from '../../tsq-helpers'
+import { createMutationHook } from '../../tsq-helpers'
 
-export const useDeleteUserHwidDevice = createPostMutationHook({
+export const useDeleteUserHwidDevice = createMutationHook({
     endpoint: DeleteUserHwidDeviceCommand.TSQ_url,
     bodySchema: DeleteUserHwidDeviceCommand.RequestSchema,
     responseSchema: DeleteUserHwidDeviceCommand.ResponseSchema,
+    requestMethod: DeleteUserHwidDeviceCommand.endpointDetails.REQUEST_METHOD,
     rMutationParams: {
         onSuccess: () => {
             notifications.show({

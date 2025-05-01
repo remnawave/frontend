@@ -1,5 +1,5 @@
 import {
-    GetAllUsersV2Command,
+    GetAllUsersCommand,
     GetSubscriptionInfoByShortUuidCommand,
     GetUserByUuidCommand,
     GetUserUsageByRangeCommand
@@ -12,7 +12,7 @@ import { createGetQueryHook } from '@shared/api/tsq-helpers'
 import { sToMs } from '@shared/utils/time-utils'
 
 export const usersQueryKeys = createQueryKeys('users', {
-    getAllUsers: (filters: GetAllUsersV2Command.RequestQuery) => ({
+    getAllUsers: (filters: GetAllUsersCommand.RequestQuery) => ({
         queryKey: [filters]
     }),
     getUserByUuid: (route: GetUserByUuidCommand.Request) => ({
@@ -39,7 +39,7 @@ export const useGetUserByUuid = createGetQueryHook({
     },
     errorHandler: (error) => {
         notifications.show({
-            title: `${GetUserByUuidCommand.url}`,
+            title: `Get User By UUID`,
             message: error instanceof Error ? error.message : `Request failed with unknown error.`,
             color: 'red'
         })
@@ -47,9 +47,9 @@ export const useGetUserByUuid = createGetQueryHook({
 })
 
 export const useGetUsersV2 = createGetQueryHook({
-    endpoint: GetAllUsersV2Command.TSQ_url,
-    responseSchema: GetAllUsersV2Command.ResponseSchema,
-    requestQuerySchema: GetAllUsersV2Command.RequestQuerySchema,
+    endpoint: GetAllUsersCommand.TSQ_url,
+    responseSchema: GetAllUsersCommand.ResponseSchema,
+    requestQuerySchema: GetAllUsersCommand.RequestQuerySchema,
     getQueryKey: ({ query }) => usersQueryKeys.getAllUsers(query!).queryKey,
     rQueryParams: {
         staleTime: sToMs(20),
@@ -59,7 +59,7 @@ export const useGetUsersV2 = createGetQueryHook({
     },
     errorHandler: (error) => {
         notifications.show({
-            title: `${GetAllUsersV2Command.url}`,
+            title: `Get All Users`,
             message: error instanceof Error ? error.message : `Request failed with unknown error.`,
             color: 'red'
         })
@@ -76,7 +76,7 @@ export const useGetSubscriptionInfoByShortUuid = createGetQueryHook({
     },
     errorHandler: (error) => {
         notifications.show({
-            title: `${GetSubscriptionInfoByShortUuidCommand.url}`,
+            title: `Get Subscription Info By Short UUID`,
             message: error instanceof Error ? error.message : `Request failed with unknown error.`,
             color: 'red'
         })
@@ -95,7 +95,7 @@ export const useGetUserUsageByRange = createGetQueryHook({
     },
     errorHandler: (error) => {
         notifications.show({
-            title: `${GetUserUsageByRangeCommand.url}`,
+            title: `Get User Usage By Range`,
             message: error instanceof Error ? error.message : `Request failed with unknown error.`,
             color: 'red'
         })
