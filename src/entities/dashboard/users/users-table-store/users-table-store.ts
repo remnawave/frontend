@@ -3,6 +3,8 @@
 import {
     MRT_ColumnFiltersState,
     MRT_ColumnPinningState,
+    MRT_ColumnSizingState,
+    MRT_PaginationState,
     MRT_VisibilityState
 } from 'mantine-react-table'
 import { createJSONStorage, persist } from 'zustand/middleware'
@@ -23,9 +25,22 @@ const DEFAULT_VISIBILITY: MRT_VisibilityState = {
     email: false
 }
 
+const DEFAULT_COLUMN_SIZE: MRT_ColumnSizingState = {
+    shortUuid: 100,
+    createdAt: 100,
+    subRevokedAt: 100,
+    totalUsedBytes: 100,
+    onlineAt: 100
+}
+
 const DEFAULT_PINNING: MRT_ColumnPinningState = {
     left: ['mrt-row-actions', 'mrt-row-select', 'username'],
     right: []
+}
+
+const DEFAULT_PAGINATION_STATE: MRT_PaginationState = {
+    pageIndex: 0,
+    pageSize: 25
 }
 
 const DEFAULT_COLUMN_FILTER: MRT_ColumnFiltersState = []
@@ -34,7 +49,9 @@ const initialState: IState = {
     columnVisibility: DEFAULT_VISIBILITY,
     columnPinning: DEFAULT_PINNING,
     showColumnFilters: false,
-    columnFilter: DEFAULT_COLUMN_FILTER
+    columnFilter: DEFAULT_COLUMN_FILTER,
+    columnSize: DEFAULT_COLUMN_SIZE,
+    paginationState: DEFAULT_PAGINATION_STATE
 }
 
 export const useUsersTableStore = create<IActions & IState>()(
@@ -68,19 +85,34 @@ export const useUsersTableStore = create<IActions & IState>()(
                             typeof filter === 'function' ? filter(state.columnFilter) : filter
                     })),
 
-                resetState: () => set({ ...initialState })
+                resetState: () => set({ ...initialState }),
+
+                setColumnSize: (size) =>
+                    set((state) => ({
+                        columnSize: typeof size === 'function' ? size(state.columnSize) : size
+                    })),
+
+                setPaginationState: (pagination) =>
+                    set((state) => ({
+                        paginationState:
+                            typeof pagination === 'function'
+                                ? pagination(state.paginationState)
+                                : pagination
+                    }))
             }
         }),
 
         {
             name: 'rmnw-users-table-store',
-            version: 1,
+            version: 3,
             storage: createJSONStorage(() => localStorage),
             partialize: (state) => ({
                 columnVisibility: state.columnVisibility,
                 columnPinning: state.columnPinning,
                 showColumnFilters: state.showColumnFilters,
-                columnFilter: state.columnFilter
+                columnFilter: state.columnFilter,
+                columnSize: state.columnSize,
+                paginationState: state.paginationState
             })
         }
     )
@@ -95,3 +127,6 @@ export const useUsersTableStoreShowColumnFilters = () =>
     useUsersTableStore((store) => store.showColumnFilters)
 export const useUsersTableStoreColumnFilter = () =>
     useUsersTableStore((store) => store.columnFilter)
+export const useUsersTableStoreColumnSize = () => useUsersTableStore((store) => store.columnSize)
+export const useUsersTableStorePagination = () =>
+    useUsersTableStore((store) => store.paginationState)
