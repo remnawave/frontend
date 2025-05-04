@@ -318,7 +318,7 @@ export const ViewUserModal = () => {
                                     allowNegative={false}
                                     description={
                                         <>
-                                            <Text c="dimmed" size="0.75rem">
+                                            <Text c="dimmed" component="span" size="0.75rem">
                                                 {t(
                                                     'create-user-modal.widget.hwid-user-limit-line-1'
                                                 )}{' '}
@@ -347,7 +347,7 @@ export const ViewUserModal = () => {
                                                     const { checked } = event.currentTarget
                                                     form.setFieldValue(
                                                         'hwidDeviceLimit',
-                                                        checked ? 0 : undefined
+                                                        checked ? 0 : null
                                                     )
                                                 }}
                                             />
@@ -358,7 +358,7 @@ export const ViewUserModal = () => {
                                     key={form.key('hwidDeviceLimit')}
                                     label={t('create-user-modal.widget.hwid-device-limit')}
                                     leftSection={<TbDevices2 size="1rem" />}
-                                    placeholder="100"
+                                    placeholder="HWID_FALLBACK_DEVICE_LIMIT in use"
                                     {...form.getInputProps('hwidDeviceLimit')}
                                 />
                             </Stack>
