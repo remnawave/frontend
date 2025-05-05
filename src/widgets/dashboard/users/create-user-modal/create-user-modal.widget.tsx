@@ -34,9 +34,11 @@ import {
     useUserCreationModalStoreActions,
     useUserCreationModalStoreIsModalOpen
 } from '@entities/dashboard/user-creation-modal-store/user-creation-modal-store'
-import { useCreateUser, useGetInbounds } from '@shared/api/hooks'
+import { CreateableTagInputShared } from '@shared/ui/createable-tag-input/createable-tag-input'
+import { useCreateUser, useGetInbounds, useGetUserTags } from '@shared/api/hooks'
 import { LoaderModalShared } from '@shared/ui/loader-modal'
 import { resetDataStrategy } from '@shared/constants'
+import { handleFormErrors } from '@shared/utils/misc'
 import { gbToBytesUtil } from '@shared/utils/bytes'
 
 import { InboundCheckboxCardWidget } from '../inbound-checkbox-card'
@@ -49,6 +51,8 @@ export const CreateUserModalWidget = () => {
 
     const { data: inbounds, isLoading } = useGetInbounds()
 
+    const { data: tags, isLoading: isTagsLoading } = useGetUserTags()
+
     const {
         mutate: createUser,
         isPending: isDataSubmitting,
@@ -58,8 +62,12 @@ export const CreateUserModalWidget = () => {
     const form = useForm<CreateUserCommand.Request>({
         name: 'create-user-form',
         mode: 'uncontrolled',
+        validateInputOnBlur: true,
         validate: zodResolver(
-            CreateUserCommand.RequestSchema.omit({ expireAt: true, hwidDeviceLimit: true })
+            CreateUserCommand.RequestSchema.omit({
+                expireAt: true,
+                hwidDeviceLimit: true
+            })
         ),
 
         initialValues: {
@@ -72,7 +80,8 @@ export const CreateUserModalWidget = () => {
             description: '',
             telegramId: undefined,
             email: undefined,
-            hwidDeviceLimit: undefined
+            hwidDeviceLimit: undefined,
+            tag: undefined
         }
     })
 
@@ -91,21 +100,27 @@ export const CreateUserModalWidget = () => {
     }, [isUserCreated])
 
     const handleSubmit = form.onSubmit(async (values) => {
-        createUser({
-            variables: {
-                username: values.username,
-                trafficLimitStrategy: values.trafficLimitStrategy,
-                trafficLimitBytes: gbToBytesUtil(values.trafficLimitBytes),
-                // @ts-expect-error - TODO: fix ZOD schema
-                expireAt: dayjs(values.expireAt).toISOString(),
-                activeUserInbounds: values.activeUserInbounds,
-                status: values.status,
-                description: values.description,
-                telegramId: values.telegramId,
-                email: values.email,
-                hwidDeviceLimit: values.hwidDeviceLimit
+        createUser(
+            {
+                variables: {
+                    username: values.username,
+                    trafficLimitStrategy: values.trafficLimitStrategy,
+                    trafficLimitBytes: gbToBytesUtil(values.trafficLimitBytes),
+                    // @ts-expect-error - TODO: fix ZOD schema
+                    expireAt: dayjs(values.expireAt).toISOString(),
+                    activeUserInbounds: values.activeUserInbounds,
+                    status: values.status,
+                    description: values.description,
+                    telegramId: values.telegramId,
+                    email: values.email,
+                    hwidDeviceLimit: values.hwidDeviceLimit,
+                    tag: values.tag
+                }
+            },
+            {
+                onError: (error) => handleFormErrors(form, error)
             }
-        })
+        )
     })
 
     return (
@@ -116,7 +131,7 @@ export const CreateUserModalWidget = () => {
             size="900px"
             title={t('create-user-modal.widget.create-user')}
         >
-            {isLoading ? (
+            {isLoading || isTagsLoading ? (
                 <LoaderModalShared
                     h="500"
                     text={t('create-user-modal.widget.loading-user-creation')}
@@ -163,7 +178,7 @@ export const CreateUserModalWidget = () => {
                                     allowNegative={false}
                                     description={
                                         <>
-                                            <Text c="dimmed" size="0.75rem">
+                                            <Text c="dimmed" component="span" size="0.75rem">
                                                 {t(
                                                     'create-user-modal.widget.hwid-user-limit-line-1'
                                                 )}{' '}
@@ -207,6 +222,13 @@ export const CreateUserModalWidget = () => {
                                     {...form.getInputProps('hwidDeviceLimit')}
                                 />
                             </Stack>
+
+                            <CreateableTagInputShared
+                                key={form.key('tag')}
+                                {...form.getInputProps('tag')}
+                                tags={tags?.tags ?? []}
+                                value={form.getValues().tag}
+                            />
 
                             <Textarea
                                 description={t('create-user-modal.widget.user-description')}

@@ -46,10 +46,17 @@ import {
     useUserModalStoreIsModalOpen,
     useUserModalStoreUserUuid
 } from '@entities/dashboard/user-modal-store/user-modal-store'
+import {
+    useGetInbounds,
+    useGetUserByUuid,
+    useGetUserTags,
+    usersQueryKeys,
+    useUpdateUser
+} from '@shared/api/hooks'
 import { GetUserSubscriptionLinksFeature } from '@features/ui/dashboard/users/get-user-subscription-links'
 import { ToggleUserStatusButtonFeature } from '@features/ui/dashboard/users/toggle-user-status-button'
 import { RevokeSubscriptionUserFeature } from '@features/ui/dashboard/users/revoke-subscription-user'
-import { useGetInbounds, useGetUserByUuid, usersQueryKeys, useUpdateUser } from '@shared/api/hooks'
+import { CreateableTagInputShared } from '@shared/ui/createable-tag-input/createable-tag-input'
 import { GetHwidUserDevicesFeature } from '@features/ui/dashboard/users/get-hwid-user-devices'
 import { ResetUsageUserFeature } from '@features/ui/dashboard/users/reset-usage-user'
 import { bytesToGbUtil, gbToBytesUtil, prettyBytesUtil } from '@shared/utils/bytes'
@@ -99,6 +106,8 @@ export const ViewUserModal = () => {
         }
     })
 
+    const { data: tags, isLoading: isTagsLoading } = useGetUserTags()
+
     const {
         mutate: updateUser,
         isPending: isUpdateUserPending,
@@ -132,7 +141,8 @@ export const ViewUserModal = () => {
                 description: user.description ?? '',
                 telegramId: user.telegramId ?? undefined,
                 email: user.email ?? undefined,
-                hwidDeviceLimit: user.hwidDeviceLimit ?? undefined
+                hwidDeviceLimit: user.hwidDeviceLimit ?? undefined,
+                tag: user.tag ?? undefined
             })
         }
     }, [user, inbounds])
@@ -154,7 +164,8 @@ export const ViewUserModal = () => {
                 telegramId: values.telegramId === '' ? null : values.telegramId,
                 email: values.email === '' ? null : values.email,
                 // @ts-expect-error - TODO: fix ZOD schema
-                hwidDeviceLimit: values.hwidDeviceLimit === '' ? null : values.hwidDeviceLimit
+                hwidDeviceLimit: values.hwidDeviceLimit === '' ? null : values.hwidDeviceLimit,
+                tag: values.tag === '' ? null : values.tag
             }
         })
     })
@@ -185,7 +196,7 @@ export const ViewUserModal = () => {
             size="900px"
             title={t('view-user-modal.widget.edit-user')}
         >
-            {isUserLoading ? (
+            {isUserLoading || isTagsLoading ? (
                 <Stack>
                     <Group align="flex-start" gap="md" grow={false} wrap="wrap">
                         <Stack gap="md" style={{ flex: '1 1 350px' }}>
@@ -360,6 +371,13 @@ export const ViewUserModal = () => {
                                     leftSection={<TbDevices2 size="1rem" />}
                                     placeholder="HWID_FALLBACK_DEVICE_LIMIT in use"
                                     {...form.getInputProps('hwidDeviceLimit')}
+                                />
+
+                                <CreateableTagInputShared
+                                    key={form.key('tag')}
+                                    {...form.getInputProps('tag')}
+                                    tags={tags?.tags ?? []}
+                                    value={form.getValues().tag}
                                 />
                             </Stack>
 

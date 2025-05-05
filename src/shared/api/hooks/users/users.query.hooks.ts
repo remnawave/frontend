@@ -1,4 +1,5 @@
 import {
+    GetAllTagsCommand,
     GetAllUsersCommand,
     GetSubscriptionInfoByShortUuidCommand,
     GetUserByUuidCommand,
@@ -25,7 +26,10 @@ export const usersQueryKeys = createQueryKeys('users', {
         query: GetUserUsageByRangeCommand.Request & GetUserUsageByRangeCommand.RequestQuery
     ) => ({
         queryKey: [query]
-    })
+    }),
+    getUserTags: {
+        queryKey: null
+    }
 })
 
 export const useGetUserByUuid = createGetQueryHook({
@@ -96,6 +100,23 @@ export const useGetUserUsageByRange = createGetQueryHook({
     errorHandler: (error) => {
         notifications.show({
             title: `Get User Usage By Range`,
+            message: error instanceof Error ? error.message : `Request failed with unknown error.`,
+            color: 'red'
+        })
+    }
+})
+
+export const useGetUserTags = createGetQueryHook({
+    endpoint: GetAllTagsCommand.TSQ_url,
+    responseSchema: GetAllTagsCommand.ResponseSchema,
+    getQueryKey: () => usersQueryKeys.getUserTags.queryKey,
+    rQueryParams: {
+        staleTime: sToMs(15),
+        refetchInterval: sToMs(15)
+    },
+    errorHandler: (error) => {
+        notifications.show({
+            title: `Get User Tags`,
             message: error instanceof Error ? error.message : `Request failed with unknown error.`,
             color: 'red'
         })

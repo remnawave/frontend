@@ -24,6 +24,7 @@ export const useCreateUser = createMutationHook({
     bodySchema: CreateUserCommand.RequestSchema,
     responseSchema: CreateUserCommand.ResponseSchema,
     requestMethod: CreateUserCommand.endpointDetails.REQUEST_METHOD,
+
     rMutationParams: {
         onSuccess: () => {
             notifications.show({

@@ -2,6 +2,7 @@
 import { GetAllUsersCommand } from '@remnawave/backend-contract'
 import { MRT_ColumnDef } from 'mantine-react-table'
 import { useTranslation } from 'react-i18next'
+import { Badge } from '@mantine/core'
 import { useMemo } from 'react'
 import dayjs from 'dayjs'
 
@@ -116,6 +117,16 @@ export const useUserTableColumns = () => {
                 accessorFn: (originalRow) => originalRow.telegramId || '–',
                 minSize: 250,
                 size: 400,
+
+                mantineTableBodyCellProps: {
+                    align: 'center'
+                }
+            },
+
+            {
+                accessorKey: 'tag',
+                header: 'Tag',
+                Cell: ({ cell }) => <Badge size="lg">{cell.row.original.tag || '–'}</Badge>,
 
                 mantineTableBodyCellProps: {
                     align: 'center'
