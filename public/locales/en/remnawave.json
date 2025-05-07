@@ -22,15 +22,15 @@
     },
     "bandwidth-metrics": {
         "current-year": "Current year",
-        "from-last-year": "since last year",
+        "from-last-year": "vs last year",
         "calendar-month": "Calendar month",
-        "from-last-month-0": "since last month",
+        "from-last-month-0": "vs last month",
         "last-30-days": "Last 30 days",
-        "from-last-month": "since last month",
+        "from-last-month": "vs last month",
         "last-7-days": "Last 7 days",
-        "from-last-week": "since last week",
+        "from-last-week": "vs last week",
         "today": "Today",
-        "from-yesterday": "since yesterday"
+        "from-yesterday": "vs yesterday"
     },
     "online-metrics": {
         "never-online": "Never online",
@@ -90,7 +90,7 @@
         "never": "Never",
         "online-at": "Online at",
         "last-ua": "Last UA",
-        "lifetime-used": "Lifetime used",
+        "lifetime-used": "Lifetime Usage",
         "sub-link-revoked-at": "Sub-link revoked at",
         "created-at": "Created at"
     },
@@ -146,7 +146,7 @@
         "widget": {
             "open-swagger": "Open Swagger",
             "open-scalar": "Open Scalar",
-            "doc-description-line-2": "Both provide comprehensive details about available endpoints, request/response formats, and authentication methods.",
+            "doc-description-line-2": "Both provide comprehensive details about the available endpoints, request/response formats, and authentication methods.",
             "doc-description-line-1": "Explore API documentation using either Scalar or Swagger UI.",
             "api-documentation": "API Documentation"
         }
@@ -186,17 +186,17 @@
             "header-description-line-1": "A host is an entry point for a user. A group of hosts forms a so-called \"subscription\".",
             "header-description-line-2": "Each host can optionally refer to one server.",
             "remark": "Remark",
-            "remark-description-line-1": "The host name can be anything, but must be unique within a single subscription.",
+            "remark-description-line-1": "The name of the host. It can be anything but must remain unique within a single subscription.",
             "remark-description-line-2": "The remark will be displayed in the list of available servers in the end client.",
             "inbound": "Inbound",
-            "inbound-line-1": "It is necessary to select one of the inbounds to which a specific host will be bound.",
+            "inbound-line-1": "It is necessary to select an inbound to which a host will be bound.",
             "inbound-line-2": "The list of inbounds is derived from the \"Xray Config\".",
             "address-and-port": "Address and port",
-            "address-and-port-line-1": "In most cases, the IP/domain name should point to one of the connected nodes.",
+            "address-and-port-line-1": "In most cases the IP/domain name should point to one of the connected nodes.",
             "address-and-port-line-2": "The port must be open and accessible for incoming connections.",
-            "address-and-port-line-3": "Typically the port should match the inbound port from the Xray configuration.",
-            "advanced-settings": "\"Advanced Settings\" are additional settings that can be used to further customize the host.",
-            "advanced-settings-2": "Anything specified in \"Advanced Settings\" has a higher priority than the settings specified in the Xray configuration."
+            "address-and-port-line-3": "Usually the port should match the inbound port from the Xray configuration.",
+            "advanced-settings": "\"Advanced Settings\" are additional parameters that can be used to further customize the host.",
+            "advanced-settings-2": "Anything specified in \"Advanced Settings\" will take a higher priority than what is specified in the Xray configuration."
         }
     },
     "remark-info": {
@@ -250,14 +250,14 @@
     "create-user-modal": {
         "widget": {
             "inbounds": "Inbounds",
-            "inbounds-description": "Select the inbounds that should be available to this user.",
+            "inbounds-description": "Specify which inbounds the user will have access to.",
             "user-description": "User description",
             "expiry-date": "Expiry Date",
             "pick-value": "Pick value",
             "traffic-reset-strategy": "Traffic reset strategy",
             "traffic-reset-strategy-description": "How often the user's traffic usage statistics should be reset",
             "data-limit": "Data Limit",
-            "data-limit-description": "Enter data limit in GB, 0 for unlimited",
+            "data-limit-description": "Enter data limit in GB (0 for unlimited)",
             "username-cannot-be-changed-later": "Username cannot be changed later",
             "loading-user-creation": "Loading user creation modal ...",
             "create-user": "Create user",
@@ -267,7 +267,7 @@
             "3-months": "+3 months",
             "1-year": "+1 year",
             "2099-year": "year 2099",
-            "hwid-user-limit-line-1": "This feature only works when",
+            "hwid-user-limit-line-1": "This feature will only work if",
             "hwid-user-limit-line-2": ".env variable is set to",
             "hwid-user-limit-line-3": "Learn more.",
             "disable-hwid-limit": "Disable HWID Limit",
@@ -291,7 +291,7 @@
         "widget": {
             "connection-details": "Connection Details",
             "last-traffic-reset-at": "Last traffic reset at",
-            "subscription-url": "Subscription url",
+            "subscription-url": "Subscription URL",
             "subscription-short-uuid": "Subscription short uuid",
             "username-cannot-be-changed": "Username cannot be changed",
             "user-details": "User details",
@@ -412,7 +412,7 @@
     "get-expiration-text": {
         "util": {
             "expires-in": "Expires in {{expiration}}",
-            "expired": "Expired at {{expiration}}",
+            "expired": "Expired {{expiration}}",
             "unknown": "Unknown"
         }
     },
@@ -579,11 +579,11 @@
             "support-link-description": "Some clients will display this link in the subscription information. The link should lead the user to the support page.",
             "support-link": "Support link",
             "happ-settings": "Happ settings",
-            "happ-announce-description": "Maximum 200 characters. Will be displayed under the subscription name in Happ.",
+            "happ-announce-description": "200 characters maximum. Will be displayed under the subscription name in Happ.",
             "happ-announce": "Happ Announce",
             "enter-happ-announce-max-200-characters": "Enter Happ Announce, max. 200 characters",
-            "happ-routing-description": "Happ routing is a feature that allows you to use the subscription link to configure the routing rules that Xray-Core will use.",
-            "happ-routing-description-line-2": "A routing link for Happ can be obtained through Happ Routing Builder. The button below will redirect you to the aforementioned page.",
+            "happ-routing-description": "Happ routing is a feature that allows you to configure the routing rules that Xray-Core will use through the subscription link.",
+            "happ-routing-description-line-2": "A routing link for Happ can be obtained through Remnawave's Happ Routing Builder. The button below will redirect you to the aforementioned page.",
             "configure-happ-routing": "Happ Routing Builder",
             "happ-routing": "Happ routing",
             "user-status-remarks": "User status remarks",
@@ -599,17 +599,17 @@
             "profile-webpage-url-description": "Used by some clients. Enabled by default, domain obtained from SUB_PUBLIC_DOMAIN .env variable.",
             "profile-webpage-url": "Profile Webpage URL",
             "serve-json-at-base-subscription": "Serve JSON at base subscription",
-            "serve-json-description": "This will allow you to serve JSON subscriptions at the base subscription path (without /json). If the client supports it, it will be served as JSON, otherwise it will be served as usual.",
+            "serve-json-description": "Serve JSON configurations at the base subscription path (without having to append /json). If the client supports it, it will be served JSON, otherwise it will be served as usual.",
             "add-username-to-base-subscription": "Add #username to base subscription",
-            "add-username-description": "Add #username to the base subscription path at the subscription route.",
-            "subscription-info-description": "This setting is supported by many client apps such as Happ, v2RayNG, Streisand, etc.",
-            "happ-description-line-1": "Here you can configure Happ settings for the subscription.",
-            "happ-description-line-2": "These settings will only be used in Happ."
+            "add-username-description": "Append #username to the base subscription path at the subscription route.",
+            "subscription-info-description": "Subscription links are supported by many client apps such as Happ, v2RayNG, Streisand, etc.",
+            "happ-description-line-1": "Here you can configure settings specific to Happ.",
+            "happ-description-line-2": "These settings will only apply to subscription links that are imported in Happ."
         },
         "page": {
             "component": {
                 "what-is-subscription-settings": "What is subscription settings?",
-                "subscription-settings-description": "The settings below apply to subscription link details used and displayed by clients apps such as Happ, v2RayNG, Streisand, etc.",
+                "subscription-settings-description": "The settings below apply to subscription link details used and displayed by client apps such as Happ, v2RayNG, Streisand, etc.",
                 "subscription-settings-description-line-2": "It is recommended to change the values to match your specific needs and circumstances."
             }
         }
@@ -621,7 +621,7 @@
             "important-note": "Important note",
             "important-note-description-line-1": "All bulk operations require a complete restart of all nodes.",
             "important-note-description-line-2": "Please avoid making too many requests in a short period of time.",
-            "important-note-description-line-3": "After saving changes, it may take up to 30 seconds for them to be applied across all nodes."
+            "important-note-description-line-3": "After saving changes it may take up to 30 seconds for them to be applied across all nodes."
         }
     },
     "inbounds-card": {
@@ -847,14 +847,15 @@
             "copy": "Copy",
             "loading-user-info": "Loading user info...",
             "user-information": "User Information",
+            "uuid": "UUID",
             "short-uuid": "Short UUID",
             "username": "Username",
             "email": "Email",
             "telegram-id": "Telegram ID",
             "description": "Description",
             "traffic-information": "Traffic Information",
-            "used-traffic": "Used Traffic",
-            "lifetime-used-traffic": "Lifetime Used Traffic",
+            "used-traffic": "Traffic Usage",
+            "lifetime-used-traffic": "Lifetime Traffic Usage",
             "traffic-limit": "Traffic Limit",
             "traffic-limit-strategy": "Traffic Limit Strategy",
             "last-traffic-reset": "Last Traffic Reset",
@@ -938,7 +939,7 @@
             "show-custom-remark-description-line-1": "Only for EXPIRED, LIMITED and DISABLED users.",
             "show-custom-remark-description-line-2": "If this setting is disabled, EXPIRED, LIMITED and DISABLED users will receive an actual empty host list instead.",
             "additional-response-headers": "Additional response headers",
-            "headers-that-will-be-sent-with-subscription-content": "Headers that will be sent with subscription content."
+            "headers-that-will-be-sent-with-subscription-content": "Headers that will be sent with the subscription content."
         }
     },
     "nodes-realtime-metrics": {
@@ -1003,8 +1004,8 @@
             "important-note": "Important note",
             "important-note-line-1": "This feature is only available with the",
             "important-note-line-2": ".env value.",
-            "important-note-line-3": "Not all applications support this feature.",
-            "important-note-line-4": "If user HWID Device Limit is empty –",
+            "important-note-line-3": "Not all client applications support this feature.",
+            "important-note-line-4": "If left empty, ",
             "important-note-line-5": "will be used.",
             "important-note-line-6": "Please check out the documentation for more information.",
             "important-note-line-7": "Learn more.",

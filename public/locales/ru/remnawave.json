@@ -847,6 +847,7 @@
             "copy": "Копировать",
             "loading-user-info": "Загрузка информации о пользователе...",
             "user-information": "Информация о пользователе",
+            "uuid": "UUID",
             "short-uuid": "Short UUID",
             "username": "Имя пользователя",
             "email": "Email",
