@@ -194,14 +194,14 @@
             "address-and-port": "Address and port",
             "address-and-port-line-1": "In most cases the IP/domain name should point to one of the connected nodes.",
             "address-and-port-line-2": "The port must be open and accessible for incoming connections.",
-            "address-and-port-line-3": "Usually the port will match the inbound port from the Xray configuration.",
+            "address-and-port-line-3": "Usually the port should match the inbound port from the Xray configuration.",
             "advanced-settings": "\"Advanced Settings\" are additional parameters that can be used to further customize the host.",
             "advanced-settings-2": "Anything specified in \"Advanced Settings\" will take a higher priority than what is specified in the Xray configuration."
         }
     },
     "remark-info": {
         "widget": {
-            "supports-templates": "Supports placeholders.",
+            "supports-templates": "Supports templates.",
             "remark-description": "This is the name of the host that will be displayed in the dashboard."
         }
     },
@@ -845,7 +845,7 @@
             "copied": "Copied",
             "detailed-user-info": "Detailed User Info",
             "copy": "Copy",
-            "loading-user-info": "Loading user info ...",
+            "loading-user-info": "Loading user info...",
             "user-information": "User Information",
             "uuid": "UUID",
             "short-uuid": "Short UUID",
@@ -884,7 +884,7 @@
             "export-config": "Export Config",
             "upload-config": "Upload Config",
             "subscription-page-builder": "Subscription Page Builder",
-            "how-to-use-it": "How to use",
+            "how-to-use-it": "How to use it?",
             "description-line-1": "You can use this builder to configure available clients and usage guides for Remnawave Subscription Pages.",
             "description-line-2": "After creating your desired configuration, you can export and download it and mount the configuration file to your subscription-page container.",
             "description-line-3": "Click \"Load Default\" to get the reference configuration from the GitHub repository.",
