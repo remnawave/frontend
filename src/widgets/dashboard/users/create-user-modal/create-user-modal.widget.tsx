@@ -227,7 +227,6 @@ export const CreateUserModalWidget = () => {
                                 key={form.key('tag')}
                                 {...form.getInputProps('tag')}
                                 tags={tags?.tags ?? []}
-                                value={form.getValues().tag}
                             />
 
                             <Textarea

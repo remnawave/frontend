@@ -69,13 +69,13 @@ export function CreateableTagInputShared(props: IProps) {
             <Combobox.Target>
                 <InputBase
                     {...restProps}
-                    description={error || 'Create or select a tag'}
-                    error={!!error}
+                    description={'Create or select a tag'}
+                    error={error || restProps.error}
                     label="Tag"
                     leftSection={<PiTagDuotone size="1rem" />}
                     onBlur={() => {
                         combobox.closeDropdown()
-                        onChange?.(search)
+                        onChange?.(search.trim() === '' ? null : search)
                     }}
                     onChange={(event) => {
                         combobox.openDropdown()
