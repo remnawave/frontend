@@ -58,6 +58,8 @@ interface HappRoutingData {
     RemoteDNSIP?: string
     RemoteDNSIp?: string
     RemoteDNSType?: string
+    UseChunkFiles?: string
+    useChunkFiles?: string
 }
 
 export const HappRoutingBuilderWidget = () => {
@@ -84,7 +86,8 @@ export const HappRoutingBuilderWidget = () => {
         blockSites: '',
         blockIp: '',
         domainStrategy: 'IPIfNonMatch',
-        fakeDns: 'false'
+        fakeDns: 'false',
+        useChunkFiles: 'false'
     })
 
     const handleInputChange = (field: string, value: string) => {
@@ -138,7 +141,8 @@ export const HappRoutingBuilderWidget = () => {
                 BlockSites: blockSitesArray,
                 BlockIp: blockIpArray,
                 DomainStrategy: formData.domainStrategy,
-                FakeDNS: formData.fakeDns
+                FakeDNS: formData.fakeDns,
+                UseChunkFiles: formData.useChunkFiles
             }
 
             return formattedData
@@ -199,6 +203,11 @@ export const HappRoutingBuilderWidget = () => {
 
             if (jsonData.FakeDNS !== undefined) newFormData.fakeDns = String(jsonData.FakeDNS)
             if (jsonData.FakeDns !== undefined) newFormData.fakeDns = String(jsonData.FakeDns)
+            if (jsonData.UseChunkFiles !== undefined)
+                newFormData.useChunkFiles = String(jsonData.UseChunkFiles)
+
+            if (jsonData.useChunkFiles !== undefined)
+                newFormData.useChunkFiles = String(jsonData.useChunkFiles)
 
             if (jsonData.DnsHosts !== undefined) {
                 newFormData.dnsHosts = JSON.stringify(jsonData.DnsHosts, null, 2)
@@ -472,6 +481,34 @@ export const HappRoutingBuilderWidget = () => {
                                                     }
                                                     styles={inputStyles}
                                                     value={formData.fakeDns}
+                                                />
+                                            </Grid.Col>
+
+                                            <Grid.Col span={{ xs: 12, sm: 4 }}>
+                                                <Select
+                                                    data={[
+                                                        {
+                                                            value: 'true',
+                                                            label: t(
+                                                                'happ-routing-builder.widget.enable'
+                                                            )
+                                                        },
+                                                        {
+                                                            value: 'false',
+                                                            label: t(
+                                                                'happ-routing-builder.widget.disable'
+                                                            )
+                                                        }
+                                                    ]}
+                                                    label={'useChunkFiles'}
+                                                    onChange={(value) =>
+                                                        handleInputChange(
+                                                            'useChunkFiles',
+                                                            value || 'false'
+                                                        )
+                                                    }
+                                                    styles={inputStyles}
+                                                    value={formData.useChunkFiles}
                                                 />
                                             </Grid.Col>
                                         </Grid>
