@@ -1,12 +1,13 @@
 import { CreateApiTokenCommand, DeleteApiTokenCommand } from '@remnawave/backend-contract'
 import { notifications } from '@mantine/notifications'
 
-import { createDeleteMutationHook, createPostMutationHook } from '../../tsq-helpers'
+import { createMutationHook } from '@shared/api/tsq-helpers/create-mutation-hook'
 
-export const useCreateApiToken = createPostMutationHook({
+export const useCreateApiToken = createMutationHook({
     endpoint: CreateApiTokenCommand.TSQ_url,
     bodySchema: CreateApiTokenCommand.RequestSchema,
     responseSchema: CreateApiTokenCommand.ResponseSchema,
+    requestMethod: CreateApiTokenCommand.endpointDetails.REQUEST_METHOD,
     rMutationParams: {
         onSuccess: () => {
             notifications.show({
@@ -17,7 +18,7 @@ export const useCreateApiToken = createPostMutationHook({
         },
         onError: (error) => {
             notifications.show({
-                title: `${CreateApiTokenCommand.TSQ_url}`,
+                title: `Create Api Token`,
                 message:
                     error instanceof Error ? error.message : `Request failed with unknown error.`,
                 color: 'red'
@@ -26,10 +27,11 @@ export const useCreateApiToken = createPostMutationHook({
     }
 })
 
-export const useDeleteApiToken = createDeleteMutationHook({
+export const useDeleteApiToken = createMutationHook({
     endpoint: DeleteApiTokenCommand.TSQ_url,
     responseSchema: DeleteApiTokenCommand.ResponseSchema,
     routeParamsSchema: DeleteApiTokenCommand.RequestSchema,
+    requestMethod: DeleteApiTokenCommand.endpointDetails.REQUEST_METHOD,
     rMutationParams: {
         onSuccess: () => {
             notifications.show({
@@ -40,7 +42,7 @@ export const useDeleteApiToken = createDeleteMutationHook({
         },
         onError: (error) => {
             notifications.show({
-                title: `${DeleteApiTokenCommand.TSQ_url}`,
+                title: `Delete Api Token`,
                 message:
                     error instanceof Error ? error.message : `Request failed with unknown error.`,
                 color: 'red'

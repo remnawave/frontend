@@ -110,8 +110,14 @@ export const DetailedUserInfoDrawerWidget = () => {
                                 </Badge>
                             </Group>
 
-                            <CopyableFieldShared label="Uuid" value={user.uuid} />
-                            <CopyableFieldShared label="Short UUID" value={user.shortUuid} />
+                            <CopyableFieldShared
+                                label={t('detailed-user-info-drawer.widget.uuid')}
+                                value={user.uuid}
+                            />
+                            <CopyableFieldShared
+                                label={t('detailed-user-info-drawer.widget.short-uuid')}
+                                value={user.shortUuid}
+                            />
                             <CopyableFieldShared
                                 label={t('detailed-user-info-drawer.widget.username')}
                                 value={user.username}

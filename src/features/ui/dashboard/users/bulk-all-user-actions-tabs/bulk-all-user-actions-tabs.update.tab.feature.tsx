@@ -23,9 +23,11 @@ import { DateTimePicker } from '@mantine/dates'
 import { useTranslation } from 'react-i18next'
 import dayjs from 'dayjs'
 
+import { CreateableTagInputShared } from '@shared/ui/createable-tag-input/createable-tag-input'
 import { userStatusValues } from '@shared/constants/forms/user-status.constants'
-import { useBulkAllUpdateUsers } from '@shared/api/hooks'
+import { useBulkAllUpdateUsers, useGetUserTags } from '@shared/api/hooks'
 import { resetDataStrategy } from '@shared/constants'
+import { handleFormErrors } from '@shared/utils/misc'
 import { gbToBytesUtil } from '@shared/utils/bytes'
 
 import { IProps } from './interfaces/props.interface'
@@ -43,7 +45,8 @@ export const BulkAllUserActionsUpdateTabFeature = (props: IProps) => {
             trafficLimitStrategy: undefined,
             expireAt: undefined,
             description: undefined,
-            telegramId: undefined
+            telegramId: undefined,
+            tag: undefined
         },
         validate: zodResolver(
             BulkAllUpdateUsersCommand.RequestSchema.omit({
@@ -63,18 +66,28 @@ export const BulkAllUserActionsUpdateTabFeature = (props: IProps) => {
         }
     })
 
+    const { data: tags } = useGetUserTags()
+
     const handleBulkUpdate = form.onSubmit(async (values) => {
-        updateUsers({
-            variables: {
-                ...values,
-                trafficLimitBytes: gbToBytesUtil(values.trafficLimitBytes),
-                // @ts-expect-error - TODO: fix ZOD schema
-                telegramId: values.telegramId === '' ? null : values.telegramId,
-                email: values.email === '' ? null : values.email,
-                // @ts-expect-error - TODO: fix ZOD schema
-                expireAt: values.expireAt ? dayjs(values.expireAt).toISOString() : undefined
+        updateUsers(
+            {
+                variables: {
+                    ...values,
+                    trafficLimitBytes: gbToBytesUtil(values.trafficLimitBytes),
+                    // @ts-expect-error - TODO: fix ZOD schema
+                    telegramId: values.telegramId === '' ? null : values.telegramId,
+                    email: values.email === '' ? null : values.email,
+                    // @ts-expect-error - TODO: fix ZOD schema
+                    expireAt: values.expireAt ? dayjs(values.expireAt).toISOString() : undefined,
+                    tag: values.tag === '' ? null : values.tag
+                }
+            },
+            {
+                onError: (error) => {
+                    handleFormErrors(form, error)
+                }
             }
-        })
+        )
     })
 
     return (
@@ -217,6 +230,13 @@ export const BulkAllUserActionsUpdateTabFeature = (props: IProps) => {
                     label="Email"
                     leftSection={<PiEnvelopeDuotone size="1rem" />}
                     {...form.getInputProps('email')}
+                />
+
+                <CreateableTagInputShared
+                    key={form.key('tag')}
+                    {...form.getInputProps('tag')}
+                    tags={tags?.tags ?? []}
+                    value={form.getValues().tag}
                 />
 
                 <Textarea

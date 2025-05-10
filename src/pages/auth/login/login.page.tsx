@@ -1,6 +1,7 @@
-import { Badge, Box, Group, Stack, Text, Title } from '@mantine/core'
+import { Badge, Box, Center, Group, Stack, Text, Title } from '@mantine/core'
 import { useLayoutEffect } from 'react'
 
+import { TelegramLoginButtonFeature } from '@features/auth/telegram-login-button/telegram-login-button.feature'
 import { useGetAuthStatus } from '@shared/api/hooks/auth/auth.query.hooks'
 import { RegisterFormFeature } from '@features/auth/register-form'
 import { LoginFormFeature } from '@features/auth/login-form'
@@ -20,6 +21,14 @@ export const LoginPage = () => {
     if (isFetching) {
         return <LoadingScreen height="60vh" />
     }
+
+    const isSimpleLogin =
+        authStatus?.isLoginAllowed && !authStatus?.isRegisterAllowed && !authStatus?.tgAuth
+
+    const isTelegramLogin =
+        authStatus?.isLoginAllowed && !authStatus?.isRegisterAllowed && authStatus?.tgAuth
+
+    const isRegister = !authStatus?.isLoginAllowed && authStatus?.isRegisterAllowed
 
     return (
         <Page title="Login">
@@ -52,13 +61,19 @@ export const LoginPage = () => {
                     </Badge>
                 )}
 
-                {authStatus?.isLoginAllowed && !authStatus?.isRegisterAllowed && (
+                {isSimpleLogin && (
                     <Box maw={800} w={{ base: 440, sm: 500, md: 500 }}>
                         <LoginFormFeature />
                     </Box>
                 )}
 
-                {!authStatus?.isLoginAllowed && authStatus?.isRegisterAllowed && (
+                {isTelegramLogin && (
+                    <Center maw={800} mt={20} w={{ base: 440, sm: 500, md: 500 }}>
+                        <TelegramLoginButtonFeature tgAuth={authStatus.tgAuth} />
+                    </Center>
+                )}
+
+                {isRegister && (
                     <Box maw={800} w={{ base: 440, sm: 500, md: 500 }}>
                         <RegisterFormFeature />
                     </Box>

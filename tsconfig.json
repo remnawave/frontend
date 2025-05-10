@@ -60,7 +60,8 @@
     "src",
     "client.d.ts",
     "global.d.ts",
-    "@types"
+    "@types",
+    "telegram.d.ts"
   ],
   "references": [
     {

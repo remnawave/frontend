@@ -3,6 +3,8 @@ import { PiPlus, PiTrash } from 'react-icons/pi'
 import { useTranslation } from 'react-i18next'
 import { useEffect, useState } from 'react'
 
+import { TemplateInfoPopoverShared } from '@shared/ui/popovers/template-info-popover/template-info-popover.shared'
+
 export interface HeaderItem {
     key: string
     value: string
@@ -78,6 +80,7 @@ export const HeadersManager = (props: HeadersManagerProps) => {
                         value={header.key}
                     />
                     <TextInput
+                        leftSection={<TemplateInfoPopoverShared showHostDescription={false} />}
                         onChange={(e) => updateLocalHeaderValue(index, e.target.value)}
                         placeholder={t('headers-manager.widget.value')}
                         style={{ flex: 1 }}

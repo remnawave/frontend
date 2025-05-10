@@ -21,7 +21,7 @@ export const useGetHosts = createGetQueryHook({
     },
     errorHandler: (error) => {
         notifications.show({
-            title: `${GetAllHostsCommand.url}`,
+            title: `Get All Hosts`,
             message: error instanceof Error ? error.message : `Request failed with unknown error.`,
             color: 'red'
         })

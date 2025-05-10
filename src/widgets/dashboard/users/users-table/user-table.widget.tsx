@@ -2,7 +2,6 @@
 import {
     MantineReactTable,
     MRT_ColumnFilterFnsState,
-    MRT_PaginationState,
     MRT_SortingState,
     MRT_TableOptions,
     useMantineReactTable
@@ -14,7 +13,9 @@ import {
     useUsersTableStoreActions,
     useUsersTableStoreColumnFilter,
     useUsersTableStoreColumnPinning,
+    useUsersTableStoreColumnSize,
     useUsersTableStoreColumnVisibility,
+    useUsersTableStorePagination,
     useUsersTableStoreShowColumnFilters
 } from '@entities/dashboard/users/users-table-store'
 import {
@@ -45,13 +46,10 @@ export function UserTableWidget() {
     const columnPinning = useUsersTableStoreColumnPinning()
     const showColumnFilters = useUsersTableStoreShowColumnFilters()
     const columnFilter = useUsersTableStoreColumnFilter()
+    const columnSize = useUsersTableStoreColumnSize()
+    const pagination = useUsersTableStorePagination()
 
     const [sorting, setSorting] = useState<MRT_SortingState>([])
-
-    const [pagination, setPagination] = useState<MRT_PaginationState>({
-        pageIndex: 0,
-        pageSize: 25
-    })
 
     const [columnFilterFns, setColumnFilterFns] = useState<MRT_ColumnFilterFnsState>(
         Object.fromEntries(tableColumns.map(({ accessorKey }) => [accessorKey, 'contains']))
@@ -98,7 +96,8 @@ export function UserTableWidget() {
             showColumnFilters,
             density: 'xs',
             columnVisibility,
-            columnPinning
+            columnPinning,
+            columnSizing: columnSize
         },
         manualFiltering: true,
         manualPagination: true,
@@ -118,11 +117,12 @@ export function UserTableWidget() {
 
         onColumnFilterFnsChange: setColumnFilterFns,
         onColumnFiltersChange: actions.setColumnFilter,
-        onPaginationChange: setPagination,
+        onPaginationChange: actions.setPaginationState,
         onSortingChange: setSorting,
         onColumnPinningChange: actions.setColumnPinning,
         onColumnVisibilityChange: actions.setColumnVisibility,
         onShowColumnFiltersChange: actions.setShowColumnFilters,
+        onColumnSizingChange: actions.setColumnSize,
         mantinePaperProps: {
             style: { '--paper-radius': 'var(--mantine-radius-xs)' },
             withBorder: false
@@ -163,7 +163,8 @@ export function UserTableWidget() {
             sorting,
             columnVisibility,
             columnPinning,
-            rowSelection: tableSelection
+            rowSelection: tableSelection,
+            columnSizing: columnSize
         },
         enableRowActions: true,
         onRowSelectionChange: bulkUsersActionsStoreActions.setTableSelection,
