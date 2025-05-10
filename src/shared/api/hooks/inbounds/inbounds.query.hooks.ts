@@ -33,7 +33,7 @@ export const useGetInbounds = createGetQueryHook({
     },
     errorHandler: (error) => {
         notifications.show({
-            title: `${GetInboundsCommand.TSQ_url}`,
+            title: `Get Inbounds`,
             message: error instanceof Error ? error.message : `Request failed with unknown error.`,
             color: 'red'
         })

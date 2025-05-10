@@ -1,37 +1,26 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { z } from 'zod'
 
-import { CreatePatchMutationHookArgs } from '../interfaces'
 import { createUrl, handleRequestError } from '../helpers'
+import { CreateMutationHookArgs } from '../interfaces'
 import { instance } from '../axios'
 
-/**
- * Create a custom hook for performing POST requests with react-query and Zod validation
- *
- * @example
- * const useCreateUser = createPostMutationHook({
- *  endpoint: '/api/users',
- *  bodySchema: createUserSchema,
- *  responseSchema: userSchema,
- *  rMutationParams: { onSuccess: () => queryClient.invalidateQueries('getUsers') },
- * });
- */
-export function createPatchMutationHook<
-    ResponseSchema extends z.ZodType,
-    RequestQuerySchema extends z.ZodType,
+export function createMutationHook<
     RouteParamsSchema extends z.ZodType,
-    ErrorHandler extends (error: unknown) => void = (error: unknown) => void
+    RequestQuerySchema extends z.ZodType,
+    BodySchema extends z.ZodType,
+    ResponseSchema extends z.ZodType
 >({
     endpoint,
-    responseSchema,
-    requestQuerySchema,
-    queryParams,
+    requestMethod,
     routeParams,
-    errorHandler,
+    queryParams,
+    requestQuerySchema,
+    bodySchema,
+    responseSchema,
     rMutationParams
-}: CreatePatchMutationHookArgs<ResponseSchema, RequestQuerySchema, RouteParamsSchema>) {
+}: CreateMutationHookArgs<RouteParamsSchema, RequestQuerySchema, BodySchema, ResponseSchema>) {
     return (params?: {
-        errorHandler?: ErrorHandler
         mutationFns?: Partial<typeof rMutationParams>
         query?: z.infer<RequestQuerySchema>
         route?: z.infer<RouteParamsSchema>
@@ -42,17 +31,23 @@ export function createPatchMutationHook<
         const baseUrl = createUrl(endpoint, validatedQuery, params?.route ?? routeParams)
 
         const mutationFn = async ({
+            variables,
             route,
             query
         }: {
             mutationFns?: Partial<typeof rMutationParams>
             query?: z.infer<RequestQuerySchema>
             route?: z.infer<RouteParamsSchema>
+            variables?: z.infer<BodySchema>
         }) => {
             const url = createUrl(baseUrl, query, route)
 
             return instance
-                .patch<z.infer<ResponseSchema>>(url)
+                .request<z.infer<ResponseSchema>>({
+                    method: requestMethod,
+                    url,
+                    data: bodySchema?.parse(variables)
+                })
                 .then(async (response) => {
                     const result = await responseSchema.safeParseAsync(response.data)
                     if (!result.success) {
@@ -60,7 +55,7 @@ export function createPatchMutationHook<
                     }
                     return result.data.response
                 })
-                .catch((error) => errorHandler?.(error) ?? handleRequestError(error))
+                .catch((error) => handleRequestError(error))
         }
 
         return useMutation<
@@ -70,6 +65,7 @@ export function createPatchMutationHook<
                 mutationFns?: Partial<typeof rMutationParams>
                 query?: z.infer<RequestQuerySchema>
                 route?: z.infer<RouteParamsSchema>
+                variables?: z.infer<BodySchema>
             }
         >({
             ...rMutationParams,

@@ -1,5 +1,2 @@
-export { createDeleteMutationHook } from './create-delete-mutation.hook'
 export { createGetQueryHook } from './create-get-query.hook'
-export { createPatchMutationHook } from './create-patch-mutation.hook'
-export { createPostMutationHook } from './create-post-mutation.hook'
-export { createPutMutationHook } from './create-put-mutation.hook'
+export { createMutationHook } from './create-mutation-hook'

@@ -25,9 +25,11 @@ import dayjs from 'dayjs'
 import { z } from 'zod'
 
 import { useBulkUsersActionsStoreActions } from '@entities/dashboard/users/bulk-users-actions-store'
+import { CreateableTagInputShared } from '@shared/ui/createable-tag-input/createable-tag-input'
 import { userStatusValues } from '@shared/constants/forms/user-status.constants'
-import { useBulkUpdateUsers } from '@shared/api/hooks'
+import { useBulkUpdateUsers, useGetUserTags } from '@shared/api/hooks'
 import { resetDataStrategy } from '@shared/constants'
+import { handleFormErrors } from '@shared/utils/misc'
 import { gbToBytesUtil } from '@shared/utils/bytes'
 
 import { IProps } from './interfaces/props.interface'
@@ -61,11 +63,14 @@ export const BulkUserActionsUpdateTabFeature = (props: IProps) => {
                 trafficLimitStrategy: undefined,
                 expireAt: undefined,
                 description: undefined,
-                telegramId: undefined
+                telegramId: undefined,
+                tag: undefined
             }
         },
         validate: zodResolver(customSchema)
     })
+
+    const { data: tags } = useGetUserTags()
 
     const { mutate: updateUsers, isPending: isUpdatePending } = useBulkUpdateUsers({
         mutationFns: {
@@ -77,22 +82,31 @@ export const BulkUserActionsUpdateTabFeature = (props: IProps) => {
     })
 
     const handleBulkUpdate = form.onSubmit(async (values) => {
-        updateUsers({
-            variables: {
-                uuids: actions.getUuids(),
-                fields: {
-                    ...values.fields,
-                    trafficLimitBytes: gbToBytesUtil(values.fields.trafficLimitBytes),
-                    // @ts-expect-error - TODO: fix ZOD schema
-                    telegramId: values.fields.telegramId === '' ? null : values.fields.telegramId,
-                    email: values.fields.email === '' ? null : values.fields.email,
-                    // @ts-expect-error - TODO: fix ZOD schema
-                    expireAt: values.fields.expireAt
-                        ? dayjs(values.fields.expireAt).toISOString()
-                        : undefined
+        updateUsers(
+            {
+                variables: {
+                    uuids: actions.getUuids(),
+                    fields: {
+                        ...values.fields,
+                        trafficLimitBytes: gbToBytesUtil(values.fields.trafficLimitBytes),
+                        telegramId:
+                            // @ts-expect-error - TODO: fix ZOD schema
+                            values.fields.telegramId === '' ? null : values.fields.telegramId,
+                        email: values.fields.email === '' ? null : values.fields.email,
+                        // @ts-expect-error - TODO: fix ZOD schema
+                        expireAt: values.fields.expireAt
+                            ? dayjs(values.fields.expireAt).toISOString()
+                            : undefined,
+                        tag: values.fields.tag === '' ? null : values.fields.tag
+                    }
+                }
+            },
+            {
+                onError: (error) => {
+                    handleFormErrors(form, error)
                 }
             }
-        })
+        )
     })
 
     return (
@@ -236,6 +250,13 @@ export const BulkUserActionsUpdateTabFeature = (props: IProps) => {
                     label="Email"
                     leftSection={<PiEnvelopeDuotone size="1rem" />}
                     {...form.getInputProps('fields.email')}
+                />
+
+                <CreateableTagInputShared
+                    key={form.key('fields.tag')}
+                    {...form.getInputProps('fields.tag')}
+                    tags={tags?.tags ?? []}
+                    value={form.getValues().fields.tag}
                 />
 
                 <Textarea

@@ -326,6 +326,11 @@ export const SubscriptionTabs = ({
                                         )}
                                         key={form.key('happAnnounce')}
                                         label={t('subscription-settings.widget.happ-announce')}
+                                        leftSection={
+                                            <TemplateInfoPopoverShared
+                                                showHostDescription={false}
+                                            />
+                                        }
                                         minRows={4}
                                         placeholder={t(
                                             'subscription-settings.widget.enter-happ-announce-max-200-characters'

@@ -47,7 +47,7 @@ export const useGetNodes = createGetQueryHook({
     },
     errorHandler: (error) => {
         notifications.show({
-            title: `${GetAllNodesCommand.url}`,
+            title: `Get All Nodes`,
             message: error instanceof Error ? error.message : `Request failed with unknown error.`,
             color: 'red'
         })
@@ -66,7 +66,7 @@ export const useGetNode = createGetQueryHook({
     },
     errorHandler: (error) => {
         notifications.show({
-            title: `${GetOneNodeCommand.url}`,
+            title: `Get Node`,
             message: error instanceof Error ? error.message : `Request failed with unknown error.`,
             color: 'red'
         })
@@ -84,7 +84,7 @@ export const useGetPubKey = createGetQueryHook({
     },
     errorHandler: (error) => {
         notifications.show({
-            title: `${GetPubKeyCommand.url}`,
+            title: `Get PubKey`,
             message: error instanceof Error ? error.message : `Request failed with unknown error.`,
             color: 'red'
         })
@@ -101,7 +101,7 @@ export const useGetNodesUsageByRangeCommand = createGetQueryHook({
     },
     errorHandler: (error) => {
         notifications.show({
-            title: `${GetNodesUsageByRangeCommand.url}`,
+            title: `Get Nodes Usage By Range`,
             message: error instanceof Error ? error.message : `Request failed with unknown error.`,
             color: 'red'
         })
@@ -120,7 +120,7 @@ export const useGetNodeUsersUsageByRange = createGetQueryHook({
     },
     errorHandler: (error) => {
         notifications.show({
-            title: `Error fetching node users usage`,
+            title: `Get Node Users Usage By Range`,
             message: error instanceof Error ? error.message : `Request failed with unknown error.`,
             color: 'red'
         })
@@ -137,7 +137,7 @@ export const useGetNodesRealtimeUsage = createGetQueryHook({
     },
     errorHandler: (error) => {
         notifications.show({
-            title: `Error fetching nodes realtime usage`,
+            title: `Get Nodes Realtime Usage`,
             message: error instanceof Error ? error.message : `Request failed with unknown error.`,
             color: 'red'
         })

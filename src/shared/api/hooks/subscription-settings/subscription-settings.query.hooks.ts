@@ -22,7 +22,7 @@ export const useGetSubscriptionSettings = createGetQueryHook({
     },
     errorHandler: (error) => {
         notifications.show({
-            title: `${GetSubscriptionSettingsCommand.url}`,
+            title: `Get Subscription Settings`,
             message: error instanceof Error ? error.message : `Request failed with unknown error.`,
             color: 'red'
         })

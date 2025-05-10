@@ -9,16 +9,13 @@ import {
 } from '@remnawave/backend-contract'
 import { notifications } from '@mantine/notifications'
 
-import {
-    createDeleteMutationHook,
-    createPatchMutationHook,
-    createPostMutationHook
-} from '../../tsq-helpers'
+import { createMutationHook } from '../../tsq-helpers'
 
-export const useCreateNode = createPostMutationHook({
+export const useCreateNode = createMutationHook({
     endpoint: CreateNodeCommand.TSQ_url,
     bodySchema: CreateNodeCommand.RequestSchema,
     responseSchema: CreateNodeCommand.ResponseSchema,
+    requestMethod: CreateNodeCommand.endpointDetails.REQUEST_METHOD,
     rMutationParams: {
         onSuccess: () => {
             notifications.show({
@@ -29,7 +26,7 @@ export const useCreateNode = createPostMutationHook({
         },
         onError: (error) => {
             notifications.show({
-                title: `${CreateNodeCommand.TSQ_url}`,
+                title: `Create Node`,
                 message:
                     error instanceof Error ? error.message : `Request failed with unknown error.`,
                 color: 'red'
@@ -38,10 +35,11 @@ export const useCreateNode = createPostMutationHook({
     }
 })
 
-export const useUpdateNode = createPostMutationHook({
+export const useUpdateNode = createMutationHook({
     endpoint: UpdateNodeCommand.TSQ_url,
     bodySchema: UpdateNodeCommand.RequestSchema,
     responseSchema: UpdateNodeCommand.ResponseSchema,
+    requestMethod: UpdateNodeCommand.endpointDetails.REQUEST_METHOD,
     rMutationParams: {
         onSuccess: () => {
             notifications.show({
@@ -52,7 +50,7 @@ export const useUpdateNode = createPostMutationHook({
         },
         onError: (error) => {
             notifications.show({
-                title: `${UpdateNodeCommand.TSQ_url}`,
+                title: `Update Node`,
                 message:
                     error instanceof Error ? error.message : `Request failed with unknown error.`,
                 color: 'red'
@@ -61,10 +59,11 @@ export const useUpdateNode = createPostMutationHook({
     }
 })
 
-export const useDeleteNode = createDeleteMutationHook({
+export const useDeleteNode = createMutationHook({
     endpoint: DeleteNodeCommand.TSQ_url,
     responseSchema: DeleteNodeCommand.ResponseSchema,
     routeParamsSchema: DeleteNodeCommand.RequestSchema,
+    requestMethod: DeleteNodeCommand.endpointDetails.REQUEST_METHOD,
     rMutationParams: {
         onSuccess: () => {
             notifications.show({
@@ -75,7 +74,7 @@ export const useDeleteNode = createDeleteMutationHook({
         },
         onError: (error) => {
             notifications.show({
-                title: `${DeleteNodeCommand.TSQ_url}`,
+                title: `Delete Node`,
                 message:
                     error instanceof Error ? error.message : `Request failed with unknown error.`,
                 color: 'red'
@@ -84,10 +83,11 @@ export const useDeleteNode = createDeleteMutationHook({
     }
 })
 
-export const useEnableNode = createPatchMutationHook({
+export const useEnableNode = createMutationHook({
     endpoint: EnableNodeCommand.TSQ_url,
     responseSchema: EnableNodeCommand.ResponseSchema,
     routeParamsSchema: EnableNodeCommand.RequestSchema,
+    requestMethod: EnableNodeCommand.endpointDetails.REQUEST_METHOD,
     rMutationParams: {
         onSuccess: () => {
             notifications.show({
@@ -98,7 +98,7 @@ export const useEnableNode = createPatchMutationHook({
         },
         onError: (error) => {
             notifications.show({
-                title: `${EnableNodeCommand.TSQ_url}`,
+                title: `Enable Node`,
                 message:
                     error instanceof Error ? error.message : `Request failed with unknown error.`,
                 color: 'red'
@@ -107,10 +107,11 @@ export const useEnableNode = createPatchMutationHook({
     }
 })
 
-export const useDisableNode = createPatchMutationHook({
+export const useDisableNode = createMutationHook({
     endpoint: DisableNodeCommand.TSQ_url,
     responseSchema: DisableNodeCommand.ResponseSchema,
     routeParamsSchema: DisableNodeCommand.RequestSchema,
+    requestMethod: DisableNodeCommand.endpointDetails.REQUEST_METHOD,
     rMutationParams: {
         onSuccess: () => {
             notifications.show({
@@ -121,7 +122,7 @@ export const useDisableNode = createPatchMutationHook({
         },
         onError: (error) => {
             notifications.show({
-                title: `${DisableNodeCommand.TSQ_url}`,
+                title: `Disable Node`,
                 message:
                     error instanceof Error ? error.message : `Request failed with unknown error.`,
                 color: 'red'
@@ -130,10 +131,10 @@ export const useDisableNode = createPatchMutationHook({
     }
 })
 
-export const useRestartAllNodes = createPatchMutationHook({
+export const useRestartAllNodes = createMutationHook({
     endpoint: RestartAllNodesCommand.TSQ_url,
     responseSchema: RestartAllNodesCommand.ResponseSchema,
-
+    requestMethod: RestartAllNodesCommand.endpointDetails.REQUEST_METHOD,
     rMutationParams: {
         onSuccess: () => {
             notifications.show({
@@ -144,7 +145,7 @@ export const useRestartAllNodes = createPatchMutationHook({
         },
         onError: (error) => {
             notifications.show({
-                title: `${RestartAllNodesCommand.TSQ_url}`,
+                title: `Restart All Nodes`,
                 message:
                     error instanceof Error ? error.message : `Request failed with unknown error.`,
                 color: 'red'
@@ -152,14 +153,15 @@ export const useRestartAllNodes = createPatchMutationHook({
         }
     }
 })
-export const useReorderNodes = createPostMutationHook({
+export const useReorderNodes = createMutationHook({
     endpoint: ReorderNodeCommand.TSQ_url,
     bodySchema: ReorderNodeCommand.RequestSchema,
     responseSchema: ReorderNodeCommand.ResponseSchema,
+    requestMethod: ReorderNodeCommand.endpointDetails.REQUEST_METHOD,
     rMutationParams: {
         onError: (error) => {
             notifications.show({
-                title: `${ReorderNodeCommand.TSQ_url}`,
+                title: `Reorder Nodes`,
                 message:
                     error instanceof Error ? error.message : `Request failed with unknown error.`,
                 color: 'red'

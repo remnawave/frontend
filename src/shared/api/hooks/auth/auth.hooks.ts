@@ -1,16 +1,17 @@
-import { LoginCommand, RegisterCommand } from '@remnawave/backend-contract'
+import { LoginCommand, RegisterCommand, TelegramCallbackCommand } from '@remnawave/backend-contract'
 import { notifications } from '@mantine/notifications'
 
 import { setToken } from '@entities/auth/session-store'
 
-import { createPostMutationHook } from '../../tsq-helpers'
+import { createMutationHook } from '../../tsq-helpers'
 
 export const AUTH_QUERY_KEY = 'auth'
 
-export const useLogin = createPostMutationHook({
+export const useLogin = createMutationHook({
     endpoint: LoginCommand.TSQ_url,
     bodySchema: LoginCommand.RequestSchema,
     responseSchema: LoginCommand.ResponseSchema,
+    requestMethod: LoginCommand.endpointDetails.REQUEST_METHOD,
     rMutationParams: {
         onSuccess: (data) => {
             setToken({ token: data.accessToken })
@@ -25,10 +26,11 @@ export const useLogin = createPostMutationHook({
     }
 })
 
-export const useRegister = createPostMutationHook({
+export const useRegister = createMutationHook({
     endpoint: RegisterCommand.TSQ_url,
     bodySchema: RegisterCommand.RequestSchema,
     responseSchema: RegisterCommand.ResponseSchema,
+    requestMethod: RegisterCommand.endpointDetails.REQUEST_METHOD,
     rMutationParams: {
         onSuccess: (data) => {
             notifications.show({
@@ -44,6 +46,18 @@ export const useRegister = createPostMutationHook({
                 message: error.message,
                 color: 'red'
             })
+        }
+    }
+})
+
+export const useTelegramCallback = createMutationHook({
+    endpoint: TelegramCallbackCommand.TSQ_url,
+    bodySchema: TelegramCallbackCommand.RequestSchema,
+    responseSchema: TelegramCallbackCommand.ResponseSchema,
+    requestMethod: TelegramCallbackCommand.endpointDetails.REQUEST_METHOD,
+    rMutationParams: {
+        onSuccess: (data) => {
+            setToken({ token: data.accessToken })
         }
     }
 })
