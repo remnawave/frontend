@@ -31,7 +31,7 @@ import { AppConfig, PlatformConfig } from '../../model/types'
 import { AppForm } from './app-form'
 
 const DEFAULT_CONFIG_URL =
-    'https://raw.githubusercontent.com/remnawave/subscription-page/refs/heads/main/public/assets/app-config.json'
+    'https://raw.githubusercontent.com/remnawave/subscription-page/refs/heads/main/frontend/public/assets/app-config.json'
 
 export const SubscriptionPageBuilderComponent = () => {
     const { t } = useTranslation()
