@@ -65,7 +65,7 @@ export function SubscriptionPageBuilderHeaderWidget(props: {
                             </Text>
                             <Button
                                 component="a"
-                                href="https://remna.st/subscription-templating/installation"
+                                href="https://remna.st/docs/install/remnawave-subscription-page#configuring-subscription-page-optional"
                                 mt={'xs'}
                                 target="_blank"
                             >

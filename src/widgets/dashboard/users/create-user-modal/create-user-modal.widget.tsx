@@ -188,7 +188,7 @@ export const CreateUserModalWidget = () => {
                                                 )}{' '}
                                                 <Code>true</Code>.{' '}
                                                 <Anchor
-                                                    href="https://remna.st/features/hwid-device-limit"
+                                                    href="https://remna.st/docs/features/hwid-device-limit"
                                                     target="_blank"
                                                 >
                                                     {t(
