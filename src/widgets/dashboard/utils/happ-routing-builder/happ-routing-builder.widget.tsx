@@ -87,7 +87,7 @@ export const HappRoutingBuilderWidget = () => {
         blockIp: '',
         domainStrategy: 'IPIfNonMatch',
         fakeDns: 'false',
-        useChunkFiles: 'false'
+        useChunkFiles: 'true'
     })
 
     const handleInputChange = (field: string, value: string) => {
@@ -504,7 +504,7 @@ export const HappRoutingBuilderWidget = () => {
                                                     onChange={(value) =>
                                                         handleInputChange(
                                                             'useChunkFiles',
-                                                            value || 'false'
+                                                            value || 'true'
                                                         )
                                                     }
                                                     styles={inputStyles}
