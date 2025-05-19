@@ -64,6 +64,7 @@ import { GetUserUsageFeature } from '@features/ui/dashboard/users/get-user-usage
 import { DeleteUserFeature } from '@features/ui/dashboard/users/delete-user'
 import { UserStatusBadge } from '@widgets/dashboard/users/user-status-badge'
 import { resetDataStrategy } from '@shared/constants'
+import { handleFormErrors } from '@shared/utils/misc'
 import { queryClient } from '@shared/api'
 
 import { InboundCheckboxCardWidget } from '../inbound-checkbox-card'
@@ -112,7 +113,13 @@ export const ViewUserModal = () => {
         mutate: updateUser,
         isPending: isUpdateUserPending,
         isSuccess: isUserUpdated
-    } = useUpdateUser({})
+    } = useUpdateUser({
+        mutationFns: {
+            onError: (error) => {
+                handleFormErrors(form, error)
+            }
+        }
+    })
 
     useEffect(() => {
         if (isUserUpdated) {
@@ -151,21 +158,30 @@ export const ViewUserModal = () => {
     const totalUsedTraffic = prettyBytesUtil(user?.usedTrafficBytes, true)
 
     const handleSubmit = form.onSubmit(async (values) => {
+        const dirtyFields = form.getDirty()
+
         updateUser({
             variables: {
                 uuid: values.uuid,
-                trafficLimitStrategy: values.trafficLimitStrategy,
-                trafficLimitBytes: gbToBytesUtil(values.trafficLimitBytes),
+                trafficLimitStrategy: dirtyFields.trafficLimitStrategy
+                    ? values.trafficLimitStrategy
+                    : undefined,
+                trafficLimitBytes: dirtyFields.trafficLimitBytes
+                    ? gbToBytesUtil(values.trafficLimitBytes)
+                    : undefined,
                 // @ts-expect-error - TODO: fix ZOD schema
-                expireAt: dayjs(values.expireAt).toISOString(),
-                activeUserInbounds: values.activeUserInbounds,
-                description: values.description,
+                expireAt: dirtyFields.expireAt ? dayjs(values.expireAt).toISOString() : undefined,
+                activeUserInbounds: dirtyFields.activeUserInbounds
+                    ? values.activeUserInbounds
+                    : undefined,
+                description: dirtyFields.description ? values.description : undefined,
                 // @ts-expect-error - TODO: fix ZOD schema
                 telegramId: values.telegramId === '' ? null : values.telegramId,
                 email: values.email === '' ? null : values.email,
                 // @ts-expect-error - TODO: fix ZOD schema
                 hwidDeviceLimit: values.hwidDeviceLimit === '' ? null : values.hwidDeviceLimit,
-                tag: values.tag === '' ? null : values.tag
+                // eslint-disable-next-line no-nested-ternary
+                tag: dirtyFields.tag ? (values.tag === '' ? null : values.tag) : undefined
             }
         })
     })

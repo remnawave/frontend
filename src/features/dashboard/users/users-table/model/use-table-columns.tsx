@@ -146,6 +146,21 @@ export const useUserTableColumns = () => {
             },
 
             {
+                accessorKey: 'firstConnectedAt',
+                header: 'First connected at',
+                accessorFn: (originalRow) =>
+                    originalRow.firstConnectedAt
+                        ? dayjs(originalRow.firstConnectedAt).format('DD/MM/YYYY, HH:mm')
+                        : '–',
+                minSize: 250,
+                size: 400,
+
+                mantineTableBodyCellProps: {
+                    align: 'center'
+                }
+            },
+
+            {
                 accessorKey: 'lastTrafficResetAt',
                 header: t('use-table-columns.traffic-reset'),
                 accessorFn: (originalRow) =>
