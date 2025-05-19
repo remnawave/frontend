@@ -939,7 +939,9 @@
             "show-custom-remark-description-line-1": "Only for EXPIRED, LIMITED and DISABLED users.",
             "show-custom-remark-description-line-2": "If this setting is disabled, EXPIRED, LIMITED and DISABLED users will receive an actual empty host list instead.",
             "additional-response-headers": "Additional response headers",
-            "headers-that-will-be-sent-with-subscription-content": "Headers that will be sent with the subscription content."
+            "headers-that-will-be-sent-with-subscription-content": "Headers that will be sent with the subscription content.",
+            "randomize-hosts": "Randomize hosts",
+            "randomize-hosts-description": "Randomize hosts in subscription content"
         }
     },
     "nodes-realtime-metrics": {

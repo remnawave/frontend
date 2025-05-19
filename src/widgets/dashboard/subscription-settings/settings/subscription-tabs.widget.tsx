@@ -287,6 +287,32 @@ export const SubscriptionTabs = ({
                                             </Text>
                                         </Box>
                                     </Grid.Col>
+
+                                    <Grid.Col span={{ xs: 12, sm: 6 }}>
+                                        <Box>
+                                            <Checkbox
+                                                key={form.key('randomizeHosts')}
+                                                label={t(
+                                                    'subscription-tabs.widget.randomize-hosts'
+                                                )}
+                                                size="md"
+                                                {...form.getInputProps('randomizeHosts', {
+                                                    type: 'checkbox'
+                                                })}
+                                            />
+                                            <Text
+                                                c="dimmed"
+                                                component="div"
+                                                ml={30}
+                                                pl={'0.4rem'}
+                                                size="sm"
+                                            >
+                                                {t(
+                                                    'subscription-tabs.widget.randomize-hosts-description'
+                                                )}
+                                            </Text>
+                                        </Box>
+                                    </Grid.Col>
                                 </Grid>
                             </Card.Section>
                         </Card>
