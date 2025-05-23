@@ -102,7 +102,8 @@ export const SubscriptionSettingsWidget = (props: IProps) => {
                 serveJsonAtBaseSubscription: subscriptionSettings.serveJsonAtBaseSubscription,
                 addUsernameToBaseSubscription: subscriptionSettings.addUsernameToBaseSubscription,
                 isShowCustomRemarks: subscriptionSettings.isShowCustomRemarks,
-                customResponseHeaders: subscriptionSettings.customResponseHeaders || undefined
+                customResponseHeaders: subscriptionSettings.customResponseHeaders || undefined,
+                randomizeHosts: subscriptionSettings.randomizeHosts
             })
         }
     }, [subscriptionSettings])
