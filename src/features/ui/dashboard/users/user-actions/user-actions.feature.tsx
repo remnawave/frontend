@@ -1,4 +1,4 @@
-import { PiArticleDuotone, PiCheck, PiCopy, PiEyeDuotone } from 'react-icons/pi'
+import { PiCheck, PiLink, PiPencil, PiUserCircle } from 'react-icons/pi'
 import { ActionIcon, CopyButton, Group, Tooltip } from '@mantine/core'
 
 import { useUserModalStoreActions } from '@entities/dashboard/user-modal-store/user-modal-store'
@@ -36,7 +36,7 @@ export function UserActionsFeature(props: IProps) {
                                 {copied ? (
                                     <PiCheck style={{ width: '1.5rem', height: '1.5rem' }} />
                                 ) : (
-                                    <PiCopy style={{ width: '1.5rem', height: '1.5rem' }} />
+                                    <PiLink style={{ width: '1.5rem', height: '1.5rem' }} />
                                 )}
                             </ActionIcon>
                         </Tooltip>
@@ -49,7 +49,7 @@ export function UserActionsFeature(props: IProps) {
                     size="input-sm"
                     variant="outline"
                 >
-                    <PiArticleDuotone size={'1.5rem'} />
+                    <PiUserCircle size={'1.5rem'} />
                 </ActionIcon>
                 <ActionIcon
                     color="cyan.5"
@@ -58,7 +58,7 @@ export function UserActionsFeature(props: IProps) {
                     size="input-sm"
                     variant="outline"
                 >
-                    <PiEyeDuotone size={'1.5rem'} />
+                    <PiPencil size={'1.5rem'} />
                 </ActionIcon>
             </ActionIcon.Group>
         </Group>
