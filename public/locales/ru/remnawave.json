@@ -60,7 +60,8 @@
             "save-anyway-title": "Подтвердить действие",
             "error": "Ошибка",
             "failed-to-save-invalid-json": "Не удалось сохранить, невалидный JSON.",
-            "save-anyway": "Сохранить все равно"
+            "save-anyway": "Сохранить все равно",
+            "load-from-github": "Скачать с Github"
         }
     },
     "use-bandwidth-table-columns": {
@@ -1022,5 +1023,23 @@
             "key": "Ключ",
             "value": "Значение"
         }
+    },
+    "template-selector": {
+        "author-templates": "Шаблоны от {{author}}",
+        "modal": {
+            "cancel": "Отмена",
+            "load-template": "Загрузить шаблон"
+        },
+        "official-templates": "Официальные шаблоны",
+        "search-templates": "Поиск шаблонов...",
+        "add-template": "Добавить шаблон"
+    },
+    "use-download-template": {
+        "failed-to-load-template": "Не удалось загрузить шаблон",
+        "failed-to-load-template-please-try-again": "Не удалось загрузить шаблон. Пожалуйста, попробуйте снова.",
+        "load-failed": "Не удалось загрузить",
+        "select-template-to-load": "Выберите шаблон для загрузки",
+        "template-loaded": "Шаблон загружен",
+        "template-name-has-been-loaded-into-the-editor": "{{name}} загружен в редактор"
     }
 }

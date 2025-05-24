@@ -1,4 +1,4 @@
-import { TbClipboardCopy, TbClipboardText, TbCut, TbSelectAll } from 'react-icons/tb'
+import { TbClipboardCopy, TbClipboardText, TbCut, TbDownload, TbSelectAll } from 'react-icons/tb'
 import { PiCheckSquareOffset, PiFloppyDisk } from 'react-icons/pi'
 import { ActionIcon, Button, Group, Text } from '@mantine/core'
 import { notifications } from '@mantine/notifications'
@@ -7,6 +7,8 @@ import { useClipboard } from '@mantine/hooks'
 import { modals } from '@mantine/modals'
 import consola from 'consola/browser'
 
+import { useDownloadTemplate } from '@shared/ui/load-templates/use-download-template'
+import { downloadableConfigTemplates } from '@shared/constants/templates'
 import { useUpdateConfig } from '@shared/api/hooks'
 
 import { Props } from './interfaces'
@@ -17,6 +19,12 @@ export function ConfigEditorActionsFeature(props: Props) {
 
     const { mutate: updateConfig, isPending: isUpdating } = useUpdateConfig()
     const clipboard = useClipboard({ timeout: 500 })
+
+    const { openDownloadModal } = useDownloadTemplate(
+        'XRAY_JSON',
+        editorRef,
+        downloadableConfigTemplates
+    )
 
     const handleSave = () => {
         if (!editorRef.current) return
@@ -203,6 +211,18 @@ export function ConfigEditorActionsFeature(props: Props) {
                         <TbClipboardText size={20} />
                     </ActionIcon>
                 </ActionIcon.Group>
+            </Group>
+
+            <Group grow preventGrowOverflow={false} wrap="wrap">
+                <Button
+                    leftSection={<TbDownload size={16} />}
+                    loading={isUpdating}
+                    mb="md"
+                    onClick={openDownloadModal}
+                    variant="light"
+                >
+                    {t('config-editor-actions.feature.load-from-github')}
+                </Button>
             </Group>
         </Group>
     )
