@@ -1,9 +1,11 @@
-import { TbClipboardCopy, TbClipboardText, TbCut, TbSelectAll } from 'react-icons/tb'
+import { TbClipboardCopy, TbClipboardText, TbCut, TbDownload, TbSelectAll } from 'react-icons/tb'
 import { PiCheckSquareOffset, PiFloppyDisk } from 'react-icons/pi'
 import { ActionIcon, Button, Group } from '@mantine/core'
 import { useTranslation } from 'react-i18next'
 import { useClipboard } from '@mantine/hooks'
 
+import { downloadableSubscriptionTemplates } from '@shared/constants/templates/template-list'
+import { useDownloadTemplate } from '@shared/ui/load-templates/use-download-template'
 import { useUpdateSubscriptionTemplate } from '@shared/api/hooks'
 
 import { Props } from './interfaces'
@@ -13,6 +15,12 @@ export function TemplateEditorActionsFeature(props: Props) {
     const { t } = useTranslation()
 
     const { mutate: updateConfig, isPending: isUpdating } = useUpdateSubscriptionTemplate()
+    const { openDownloadModal } = useDownloadTemplate(
+        templateType,
+        editorRef,
+        downloadableSubscriptionTemplates
+    )
+
     const clipboard = useClipboard({ timeout: 500 })
 
     const handleSave = () => {
@@ -167,6 +175,18 @@ export function TemplateEditorActionsFeature(props: Props) {
                         <TbClipboardText size={20} />
                     </ActionIcon>
                 </ActionIcon.Group>
+            </Group>
+
+            <Group grow preventGrowOverflow={false} wrap="wrap">
+                <Button
+                    leftSection={<TbDownload size={16} />}
+                    loading={isUpdating}
+                    mb="md"
+                    onClick={openDownloadModal}
+                    variant="light"
+                >
+                    {t('config-editor-actions.feature.load-from-github')}
+                </Button>
             </Group>
         </Group>
     )

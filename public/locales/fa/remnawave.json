@@ -60,7 +60,8 @@
             "save-anyway-title": "تایید عملیات",
             "error": "خطا",
             "failed-to-save-invalid-json": "به دلیل JSON نامتعتبر ذخیره نشد",
-            "save-anyway": "ذخیره کانفیگ نامعتبر"
+            "save-anyway": "ذخیره کانفیگ نامعتبر",
+            "load-from-github": "Load from GitHub"
         }
     },
     "use-bandwidth-table-columns": {
@@ -1022,5 +1023,23 @@
             "value": "مقدار",
             "add-header": "افزودن هدر"
         }
+    },
+    "template-selector": {
+        "author-templates": "{{author}} Templates",
+        "modal": {
+            "cancel": "Cancel",
+            "load-template": "Load Template"
+        },
+        "official-templates": "Official Templates",
+        "search-templates": "Search templates...",
+        "add-template": "Add template"
+    },
+    "use-download-template": {
+        "failed-to-load-template": "Failed to load template",
+        "failed-to-load-template-please-try-again": "Failed to load template. Please try again.",
+        "load-failed": "Load Failed",
+        "select-template-to-load": "Select Template to Load",
+        "template-loaded": "Template Loaded",
+        "template-name-has-been-loaded-into-the-editor": "{{name}} has been loaded into the editor"
     }
 }

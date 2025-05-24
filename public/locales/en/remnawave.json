@@ -60,7 +60,8 @@
             "save-anyway": "Save anyway",
             "save-anyway-description": "Are you sure you want to save invalid Xray config? This action\n                                    can lead to unexpected behavior. Continue only if you know what\n                                    you are doing.",
             "cancel": "Cancel",
-            "save-anyway-title": "Confirm action"
+            "save-anyway-title": "Confirm action",
+            "load-from-github": "Load from GitHub"
         }
     },
     "use-bandwidth-table-columns": {
@@ -1022,5 +1023,23 @@
             "value": "Value",
             "add-header": "Add header"
         }
+    },
+    "template-selector": {
+        "search-templates": "Search templates...",
+        "official-templates": "Official Templates",
+        "author-templates": "{{author}} Templates",
+        "modal": {
+            "cancel": "Cancel",
+            "load-template": "Load Template"
+        },
+        "add-template": "Add template"
+    },
+    "use-download-template": {
+        "failed-to-load-template": "Failed to load template",
+        "template-loaded": "Template Loaded",
+        "template-name-has-been-loaded-into-the-editor": "{{name}} has been loaded into the editor",
+        "load-failed": "Load Failed",
+        "failed-to-load-template-please-try-again": "Failed to load template. Please try again.",
+        "select-template-to-load": "Select Template to Load"
     }
 }
