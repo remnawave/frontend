@@ -5,6 +5,7 @@ import { useForm, zodResolver } from '@mantine/form'
 import { useTranslation } from 'react-i18next'
 
 import { useUpdateSubscriptionSettings } from '@shared/api/hooks'
+import { handleFormErrors } from '@shared/utils/misc'
 
 import { SubscriptionTabs } from './subscription-tabs.widget'
 import { HeaderItem } from './headers-manager.widget'
@@ -49,7 +50,14 @@ export const SubscriptionSettingsWidget = (props: IProps) => {
     }, [])
 
     const { mutate: updateSubscriptionSettings, isPending: isUpdateSubscriptionSettingsPending } =
-        useUpdateSubscriptionSettings({})
+        useUpdateSubscriptionSettings({
+            mutationFns: {
+                onError(error) {
+                    handleFormErrors(form, error)
+                }
+            }
+        })
+
     useEffect(() => {
         if (subscriptionSettings) {
             const processRemarks = (remarksData: string | string[] | undefined): string[] => {

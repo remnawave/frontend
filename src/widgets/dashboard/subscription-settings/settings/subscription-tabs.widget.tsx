@@ -1,4 +1,5 @@
 import {
+    Alert,
     Box,
     Button,
     Card,
@@ -539,6 +540,17 @@ export const SubscriptionTabs = ({
                                     </Stack>
                                 </Group>
                             </Card.Section>
+
+                            {form.errors.customResponseHeaders && (
+                                <Alert
+                                    color="violet"
+                                    icon={<PiInfo color="violet" />}
+                                    mt="md"
+                                    title="Error"
+                                >
+                                    {form.errors.customResponseHeaders}
+                                </Alert>
+                            )}
 
                             <Card.Section p="md" pt="xl">
                                 <HeadersManager initialHeaders={headers} onChange={updateHeaders} />

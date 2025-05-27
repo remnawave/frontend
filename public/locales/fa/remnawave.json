@@ -301,7 +301,8 @@
             "never": "هرگز",
             "close": "بستن",
             "show-qr": "نمایش QR",
-            "subscription-qr-code": "اشتراک کد QR"
+            "subscription-qr-code": "اشتراک کد QR",
+            "edit-user-headline": "Edit user"
         }
     },
     "base-api-token-form": {
@@ -941,8 +942,8 @@
             "show-custom-remark-description-line-2": "اگر این گزینه غیرفعال باشد - کاربران منقضی‌شده، محدودشده و غیرفعال به جای توضیحات سفارشی زیر، لیست واقعی هاست‌ها را دریافت خواهند کرد.",
             "additional-response-headers": "هدرهای برگشتی اضافی",
             "headers-that-will-be-sent-with-subscription-content": "هدرهای اضافی که می‌خواهید همراه با محتوای اشتراک ارسال شوند را مشخص کنید.",
-            "randomize-hosts": "Randomize hosts",
-            "randomize-hosts-description": "Randomize hosts in subscription content"
+            "randomize-hosts": "هاست رندوم",
+            "randomize-hosts-description": "استفاده از مقادیر رندوم برای هاست در اشتراک‌ها"
         }
     },
     "nodes-realtime-metrics": {
@@ -1025,21 +1026,21 @@
         }
     },
     "template-selector": {
-        "author-templates": "{{author}} Templates",
+        "author-templates": "{{author}} قالب‌های",
         "modal": {
-            "cancel": "Cancel",
-            "load-template": "Load Template"
+            "cancel": "لغو",
+            "load-template": "بارگذاری قالب"
         },
-        "official-templates": "Official Templates",
-        "search-templates": "Search templates...",
-        "add-template": "Add template"
+        "official-templates": "قالب‌های رسمی",
+        "search-templates": "جست‌وجوی قالب‌ها",
+        "add-template": "افزودن قالب"
     },
     "use-download-template": {
-        "failed-to-load-template": "Failed to load template",
-        "failed-to-load-template-please-try-again": "Failed to load template. Please try again.",
-        "load-failed": "Load Failed",
-        "select-template-to-load": "Select Template to Load",
-        "template-loaded": "Template Loaded",
-        "template-name-has-been-loaded-into-the-editor": "{{name}} has been loaded into the editor"
+        "failed-to-load-template": "خطا هنگام بارگذاری قالب",
+        "failed-to-load-template-please-try-again": "بارگذاری قالب ناموفق بود، لطفا مجدد تلاش کنید",
+        "load-failed": "بارگذاری ناموفق",
+        "select-template-to-load": "قالب مورد نظر خود را انتخاب کنید",
+        "template-loaded": "قالب با موفقیت بارگذاری شد",
+        "template-name-has-been-loaded-into-the-editor": "وارد ویرایشگر شده‌است {{name}}"
     }
 }

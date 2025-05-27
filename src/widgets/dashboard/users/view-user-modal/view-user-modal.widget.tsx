@@ -210,7 +210,7 @@ export const ViewUserModal = () => {
             onExitTransitionEnd={handleClose}
             opened={isViewUserModalOpen}
             size="900px"
-            title={t('view-user-modal.widget.edit-user')}
+            title={t('view-user-modal.widget.edit-user-headline')}
         >
             {isUserLoading || isTagsLoading ? (
                 <Stack>

@@ -301,7 +301,8 @@
             "never": "Никогда",
             "close": "Закрыть",
             "show-qr": "Показать QR",
-            "subscription-qr-code": "QR-код ссылки-подписки"
+            "subscription-qr-code": "QR-код ссылки-подписки",
+            "edit-user-headline": "Редактирование"
         }
     },
     "base-api-token-form": {
@@ -941,8 +942,8 @@
             "show-custom-remarks": "Отображать кастомное примечание",
             "additional-response-headers": "Доп. хэдеры",
             "headers-that-will-be-sent-with-subscription-content": "Хэдеры будут отправлены вместе с содержимым подписки.",
-            "randomize-hosts": "Randomize hosts",
-            "randomize-hosts-description": "Randomize hosts in subscription content"
+            "randomize-hosts": "Перемешивать хосты",
+            "randomize-hosts-description": "Хосты в случайном порядке в содержимом подписки"
         }
     },
     "nodes-realtime-metrics": {
