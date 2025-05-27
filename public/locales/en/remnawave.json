@@ -301,7 +301,8 @@
             "never": "Never",
             "show-qr": "Show QR",
             "subscription-qr-code": "Subscription QR Code",
-            "close": "Close"
+            "close": "Close",
+            "edit-user-headline": "Edit user"
         }
     },
     "base-api-token-form": {

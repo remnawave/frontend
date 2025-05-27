@@ -301,7 +301,8 @@
             "never": "Никогда",
             "close": "Закрыть",
             "show-qr": "Показать QR",
-            "subscription-qr-code": "QR-код ссылки-подписки"
+            "subscription-qr-code": "QR-код ссылки-подписки",
+            "edit-user-headline": "Редактирование"
         }
     },
     "base-api-token-form": {

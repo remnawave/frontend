@@ -301,7 +301,8 @@
             "never": "هرگز",
             "close": "بستن",
             "show-qr": "نمایش QR",
-            "subscription-qr-code": "اشتراک کد QR"
+            "subscription-qr-code": "اشتراک کد QR",
+            "edit-user-headline": "Edit user"
         }
     },
     "base-api-token-form": {
