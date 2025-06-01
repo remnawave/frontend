@@ -256,7 +256,7 @@
             "expiry-date": "过期日期",
             "pick-value": "选择值",
             "traffic-reset-strategy": "流量重置策略",
-            "traffic-reset-strategy-description": "How often the user's traffic usage statistics should be reset",
+            "traffic-reset-strategy-description": "用户流量使用统计应多久重置一次",
             "data-limit": "流量限制",
             "data-limit-description": "输入流量限制（GB）（0 表示无限制）",
             "username-cannot-be-changed-later": "用户名之后无法更改",
@@ -481,6 +481,7 @@
             "importing-json-subscription": "导入 JSON 订阅",
             "description-line-1": "要使用此订阅，只需在您的订阅链接末尾添加",
             "description-line-2": "。确保您使用的是下表列出的受支持应用之一。否则，订阅将像往常一样服务于请求的客户端。（例如 Base64, Mihomo）"
+        }
     },
     "happ-routing-builder": {
         "widget": {
@@ -530,7 +531,7 @@
             "sites-that-will-be-blocked": "禁止连接的域名.",
             "blocked-sites": "禁止的站点",
             "ip-addresses-that-will-be-blocked": "禁止连接的 IP 地址.",
-            "blocked-ips": "禁止的 IP ",
+            "blocked-ips": "禁止的 IP",
             "encoded-happ-link": "编码后的 Happ 链接",
             "copied": "已复制",
             "show-qr": "显示二维码",
