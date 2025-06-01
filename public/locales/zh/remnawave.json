@@ -1,1048 +1,1047 @@
 {
     "constants": {
-        "dashboard": "Dashboard",
-        "api-tokens": "API Tokens",
-        "config": "Xray Config",
-        "home": "Home",
-        "hosts": "Hosts",
-        "inbounds": "Inbounds",
-        "nodes": "Nodes",
-        "nodes-bandwidth-table": "Bandwidth",
-        "nodes-statistics": "Statistics",
-        "users": "Users",
-        "overview": "Overview",
-        "management": "Management",
-        "statistics": "Statistics",
-        "subscription-settings": "Subscription Settings",
-        "utils": "Utilities",
-        "happ-routing-builder": "Happ Routing",
-        "templates": "Templates",
-        "subscription": "Subscription",
-        "subscription-page-builder": "Sub Page Builder"
+        "dashboard": "仪表盘",
+        "api-tokens": "API 秘钥",
+        "config": "Xray 配置",
+        "home": "首页",
+        "hosts": "主机",
+        "inbounds": "入站",
+        "nodes": "节点",
+        "nodes-bandwidth-table": "带宽",
+        "nodes-statistics": "统计数据",
+        "users": "用户",
+        "overview": "概述",
+        "management": "管理",
+        "statistics": "统计数据",
+        "subscription-settings": "订阅设置",
+        "utils": "实用工具",
+        "happ-routing-builder": "Happ 路由编辑器",
+        "templates": "模板",
+        "subscription": "订阅",
+        "subscription-page-builder": "订阅应用配置"
     },
     "bandwidth-metrics": {
-        "current-year": "Current year",
-        "from-last-year": "vs last year",
-        "calendar-month": "Calendar month",
-        "from-last-month-0": "vs last month",
-        "last-30-days": "Last 30 days",
-        "from-last-month": "vs last month",
-        "last-7-days": "Last 7 days",
-        "from-last-week": "vs last week",
-        "today": "Today",
-        "from-yesterday": "vs yesterday"
+        "current-year": "今年",
+        "from-last-year": "对比去年",
+        "calendar-month": "日历月份",
+        "from-last-month-0": "对比上月",
+        "last-30-days": "最近 30 天",
+        "from-last-month": "对比上月",
+        "last-7-days": "最近 7 天",
+        "from-last-week": "对比上周",
+        "today": "今日",
+        "from-yesterday": "对比昨日"
     },
     "online-metrics": {
-        "never-online": "Never online",
-        "online-this-week": "Online this week",
-        "online-today": "Online today",
-        "online-now": "Online now"
+        "never-online": "从未上线",
+        "online-this-week": "最近一周上线",
+        "online-today": "今日在线过",
+        "online-now": "当前在线"
     },
     "simple-metrics": {
-        "system-uptime": "System uptime",
-        "ram-usage": "RAM usage",
-        "total-traffic": "Total traffic"
+        "system-uptime": "系统运行时间",
+        "ram-usage": "内存使用率",
+        "total-traffic": "总流量"
     },
     "users-metrics": {
-        "disabled-users": "Disabled users",
-        "limited-users": "Limited users",
-        "expired-users": "Expired users",
-        "active-users": "Active users",
-        "total-users": "Total users"
+        "disabled-users": "禁用用户",
+        "limited-users": "受限用户",
+        "expired-users": "过期用户",
+        "active-users": "活跃用户",
+        "total-users": "总用户数"
     },
     "config-editor-actions": {
         "feature": {
-            "save": "Save",
-            "format": "Format",
-            "copy-config": "Copy config",
-            "failed-to-save-invalid-json": "Failed to save, invalid JSON.",
-            "error": "Error",
-            "save-anyway": "Save anyway",
-            "save-anyway-description": "Are you sure you want to save invalid Xray config? This action\n                                    can lead to unexpected behavior. Continue only if you know what\n                                    you are doing.",
+            "save": "保存",
+            "format": "格式化",
+            "copy-config": "复制配置",
+            "failed-to-save-invalid-json": "保存失败，无效的 JSON。",
+            "error": "错误",
+            "save-anyway": "仍然保存",
+            "save-anyway-description": "您确定要保存无效的 Xray 配置吗？ 此操作\n                                    可能导致意外行为。请仅在您清楚自己在做什么的情况下继续。",
             "cancel": "Cancel",
-            "save-anyway-title": "Confirm action",
-            "load-from-github": "Load from GitHub"
+            "save-anyway-title": "确认操作",
+            "load-from-github": "从 GitHub 加载"
         }
     },
     "use-bandwidth-table-columns": {
-        "traffic-limit": "Traffic limit",
-        "traffic": "Traffic",
-        "traffic-cycle": "Traffic cycle",
-        "node-name": "Node name"
+        "traffic-limit": "流量限制",
+        "traffic": "流量",
+        "traffic-cycle": "流量周期",
+        "node-name": "节点名称"
     },
     "action-group": {
         "feature": {
-            "new-user": "New user",
-            "reset-table": "Reset table",
-            "clear-filters": "Clear filters",
-            "update": "Update",
-            "bulk-actions": "Bulk Actions"
+            "new-user": "新建用户",
+            "reset-table": "重置表格样式",
+            "clear-filters": "清除筛选",
+            "update": "刷新",
+            "bulk-actions": "批量操作"
         }
     },
     "use-table-columns": {
-        "username": "Username",
-        "status": "Status",
-        "last-connected-node": "Last connected node",
-        "expire-at": "Expires at",
-        "data-usage": "Data usage",
-        "sub-link": "Sub-link",
-        "description": "Description",
-        "traffic-reset": "Traffic reset",
-        "never": "Never",
-        "online-at": "Online at",
-        "last-ua": "Last UA",
-        "lifetime-used": "Lifetime Usage",
-        "sub-link-revoked-at": "Sub-link revoked at",
-        "created-at": "Created at"
+        "username": "用户名",
+        "status": "状态",
+        "last-connected-node": "最后连接节点",
+        "expire-at": "过期时间",
+        "data-usage": "数据用量",
+        "sub-link": "订阅链接",
+        "description": "描述",
+        "traffic-reset": "流量重置",
+        "never": "从不",
+        "online-at": "最后在线时间",
+        "last-ua": "最后订阅用UA",
+        "lifetime-used": "累计用量",
+        "sub-link-revoked-at": "订阅链接撤销于",
+        "created-at": "创建于"
     },
     "api-tokens-header-action-buttons": {
         "feature": {
-            "create-new-api-token": "Create new API token"
+            "create-new-api-token": "创建新 API 密钥"
         }
     },
     "header-buttons": {
         "feature": {
-            "logout": "Logout"
+            "logout": "退出登录"
         }
     },
     "delete-host": {
         "feature": {
-            "delete-host": "Delete host"
+            "delete-host": "删除主机"
         }
     },
     "header-action-buttons": {
         "feature": {
-            "create-new-host": "Create new host",
-            "update": "Update",
-            "all": "All"
+            "create-new-host": "创建新主机",
+            "update": "刷新",
+            "all": "全部"
         }
     },
     "delete-node": {
         "feature": {
-            "delete-node": "Delete node"
+            "delete-node": "删除节点"
         }
     },
     "nodes-header-action-buttons": {
         "feature": {
-            "update": "Update",
-            "create-new-node": "Create new node",
-            "restart-all-nodes": "Restart all nodes"
+            "update": "刷新",
+            "create-new-node": "创建新节点",
+            "restart-all-nodes": "重启所有节点"
         }
     },
     "toggle-node-status-button": {
         "feature": {
-            "disable": "Disable",
-            "enable": "Enable"
+            "disable": "禁用",
+            "enable": "启用"
         }
     },
     "api-token-card": {
         "widget": {
-            "delete": "Delete",
-            "copy-token": "Copy token",
-            "copied": "Copied",
-            "apitoken-tokenname-copied-to-clipboard": "{{apiTokenName}} copied to clipboard"
+            "delete": "删除",
+            "copy-token": "复制密钥",
+            "copied": "已复制",
+            "apitoken-tokenname-copied-to-clipboard": "{{apiTokenName}} 已复制到剪贴板"
         }
     },
     "api-tokens-documentation": {
         "widget": {
-            "open-swagger": "Open Swagger",
-            "open-scalar": "Open Scalar",
-            "doc-description-line-2": "Both provide comprehensive details about the available endpoints, request/response formats, and authentication methods.",
-            "doc-description-line-1": "Explore API documentation using either Scalar or Swagger UI.",
-            "api-documentation": "API Documentation"
+            "open-swagger": "打开 Swagger",
+            "open-scalar": "打开 Scalar",
+            "doc-description-line-2": "两者都提供有关可用端点、请求/响应格式和身份验证方法的全面详细信息。",
+            "doc-description-line-1": "使用 Scalar 或 Swagger UI 浏览 API 文档。",
+            "api-documentation": "API 文档"
         }
     },
     "api-tokens-page-header": {
         "widget": {
-            "list-of-all-api-tokens": "List of all API tokens"
+            "list-of-all-api-tokens": "所有 API 密钥列表"
         }
     },
     "config-editor": {
         "widget": {
-            "loading-editor": "Loading editor..."
+            "loading-editor": "正在加载编辑器..."
         }
     },
     "keypair": {
         "widget": {
-            "public-key": "Public Key",
-            "private-key": "Private Key",
-            "generate-key-pair": "Generate Key Pair",
-            "both-keys": "Both keys"
+            "public-key": "公钥",
+            "private-key": "私钥",
+            "generate-key-pair": "生成密钥对",
+            "both-keys": "双钥"
         }
     },
     "create-host-modal": {
         "widget": {
-            "new-host": "New host"
+            "new-host": "新建主机"
         }
     },
     "edit-host-modal": {
         "widget": {
-            "edit-host": "Edit host"
+            "edit-host": "编辑主机"
         }
     },
     "hosts-page-header": {
         "widget": {
-            "list-of-all-hosts": "List of all hosts",
-            "about-hosts": "About hosts",
-            "header-description-line-1": "A host is an entry point for a user. A group of hosts forms a so-called \"subscription\".",
-            "header-description-line-2": "Each host can optionally refer to one server.",
-            "remark": "Remark",
-            "remark-description-line-1": "The name of the host. It can be anything but must remain unique within a single subscription.",
-            "remark-description-line-2": "The remark will be displayed in the list of available servers in the end client.",
-            "inbound": "Inbound",
-            "inbound-line-1": "It is necessary to select an inbound to which a host will be bound.",
-            "inbound-line-2": "The list of inbounds is derived from the \"Xray Config\".",
-            "address-and-port": "Address and port",
-            "address-and-port-line-1": "In most cases the IP/domain name should point to one of the connected nodes.",
-            "address-and-port-line-2": "The port must be open and accessible for incoming connections.",
-            "address-and-port-line-3": "Usually the port should match the inbound port from the Xray configuration.",
-            "advanced-settings": "\"Advanced Settings\" are additional parameters that can be used to further customize the host.",
-            "advanced-settings-2": "Anything specified in \"Advanced Settings\" will take a higher priority than what is specified in the Xray configuration."
+            "list-of-all-hosts": "所有主机列表",
+            "about-hosts": "关于主机",
+            "header-description-line-1": "主机是用户的入口点。一组主机形成一个所谓的“订阅”。",
+            "header-description-line-2": "每个主机可以可选地关联到一个服务器。",
+            "remark": "备注",
+            "remark-description-line-1": "主机的名称。它可以是任何内容，但在单个订阅中必须保持唯一。",
+            "remark-description-line-2": "备注将显示在终端客户端的可用服务器列表中。",
+            "inbound": "入站",
+            "inbound-line-1": "必须选择一个入站来绑定主机。",
+            "inbound-line-2": "入站列表来自“Xray 配置”。",
+            "address-and-port": "地址和端口",
+            "address-and-port-line-1": "在大多数情况下，IP/域名应指向已连接的节点之一。",
+            "address-and-port-line-2": "端口必须开放且可访问以接收传入连接。",
+            "address-and-port-line-3": "通常端口应与 Xray 配置中的入站端口匹配。",
+            "advanced-settings": "“高级设置”是可用于进一步自定义主机的附加参数。",
+            "advanced-settings-2": "在“高级设置”中指定的任何内容将比 Xray 配置中的内容具有更高的优先级。"
         }
     },
     "remark-info": {
         "widget": {
-            "supports-templates": "Supports templates.",
-            "remark-description": "This is the name of the host that will be displayed in the dashboard."
+            "supports-templates": "支持模板。",
+            "remark-description": "这是在仪表盘中显示的主机名称。"
         }
     },
     "create-node-modal": {
         "widget": {
-            "create-node": "Create node"
+            "create-node": "创建节点"
         }
     },
     "edit-node-modal": {
         "widget": {
-            "edit-node": "Edit node"
+            "edit-node": "编辑节点"
         }
     },
     "error-accordeon": {
         "widget": {
-            "last-error-message": "Last error message",
-            "important-note-description": "In order to connect node, you need to run Remnawave Node with the following",
-            "important-note-description-value": "value. Copy and paste it into the Remnanode ",
-            "important-note": "Important note"
+            "last-error-message": "最后错误消息",
+            "important-note-description": "为了连接节点, 您需要运行以下命令运行 Remnawave Node",
+            "important-note-description-value": "将当前值复制粘贴到 Remnawave Node 运行 ",
+            "important-note": "重要提示"
         }
     },
     "node-card": {
         "widget": {
-            "copied": "Copied"
+            "copied": "已复制"
         }
     },
     "node-status-badge": {
         "widget": {
-            "connected": "connected",
-            "connecting": "connecting",
-            "disabled": "disabled",
-            "disconnected": "disconnected"
+            "connected": "已连接",
+            "connecting": "连接中",
+            "disabled": "已禁用",
+            "disconnected": "已断开"
         }
     },
     "nodes-page-header": {
         "widget": {
-            "list-of-all-nodes": "List of all nodes"
+            "list-of-all-nodes": "所有节点列表"
         }
     },
     "table": {
         "widget": {
-            "only-active-nodes": "Only nodes with active traffic tracking are displayed",
-            "today": "Today"
+            "only-active-nodes": "仅显示启用了流量跟踪的节点",
+            "today": "今日"
         }
     },
     "create-user-modal": {
         "widget": {
-            "inbounds": "Inbounds",
-            "inbounds-description": "Specify which inbounds the user will have access to.",
-            "user-description": "User description",
-            "expiry-date": "Expiry Date",
-            "pick-value": "Pick value",
-            "traffic-reset-strategy": "Traffic reset strategy",
+            "inbounds": "入站",
+            "inbounds-description": "指定用户可以使用哪些入站协议。",
+            "user-description": "用户描述",
+            "expiry-date": "过期日期",
+            "pick-value": "选择值",
+            "traffic-reset-strategy": "流量重置策略",
             "traffic-reset-strategy-description": "How often the user's traffic usage statistics should be reset",
-            "data-limit": "Data Limit",
-            "data-limit-description": "Enter data limit in GB (0 for unlimited)",
-            "username-cannot-be-changed-later": "Username cannot be changed later",
-            "loading-user-creation": "Loading user creation modal ...",
-            "create-user": "Create user",
-            "telegram-id-of-a-user-in-telegram": "Numeric ID of the user in Telegram messenger",
-            "email-of-a-user": "Email address of the user",
-            "1-month": "+1 month",
-            "3-months": "+3 months",
-            "1-year": "+1 year",
-            "2099-year": "year 2099",
-            "hwid-user-limit-line-1": "This feature will only work if",
-            "hwid-user-limit-line-2": ".env variable is set to",
-            "hwid-user-limit-line-3": "Learn more.",
-            "disable-hwid-limit": "Disable HWID Limit",
-            "hwid-device-limit": "HWID Device Limit"
+            "data-limit": "流量限制",
+            "data-limit-description": "输入流量限制（GB）（0 表示无限制）",
+            "username-cannot-be-changed-later": "用户名之后无法更改",
+            "loading-user-creation": "正在加载创建用户窗口...",
+            "create-user": "创建用户",
+            "telegram-id-of-a-user-in-telegram": "用户在 Telegram 中的数字 ID",
+            "email-of-a-user": "用户的邮箱地址",
+            "1-month": "+1 个月",
+            "3-months": "+3 个月",
+            "1-year": "+1 年",
+            "2099-year": "2099 年",
+            "hwid-user-limit-line-1": "此功能仅在",
+            "hwid-user-limit-line-2": ".env 变量设置为",
+            "hwid-user-limit-line-3": "时有效。了解更多。",
+            "disable-hwid-limit": "禁用 HWID 限制",
+            "hwid-device-limit": "HWID 设备限制"
         }
     },
     "login-form-feature": {
-        "username": "Username"
+        "username": "用户名"
     },
     "home-page": {
-        "users": "Users"
+        "users": "用户"
     },
     "user-table": {
         "widget": {
-            "list-of-all-users": "List of all users",
-            "error-loading-data": "Error loading data",
-            "table-title": "Users"
+            "list-of-all-users": "所有用户列表",
+            "error-loading-data": "数据加载错误",
+            "table-title": "用户"
         }
     },
     "view-user-modal": {
         "widget": {
-            "connection-details": "Connection Details",
-            "last-traffic-reset-at": "Last traffic reset at",
-            "subscription-url": "Subscription URL",
-            "subscription-short-uuid": "Subscription short uuid",
-            "username-cannot-be-changed": "Username cannot be changed",
-            "user-details": "User details",
-            "loading-user-data": "Loading user data...",
-            "edit-user": "Edit user",
-            "never": "Never",
-            "show-qr": "Show QR",
-            "subscription-qr-code": "Subscription QR Code",
-            "close": "Close",
-            "edit-user-headline": "Edit user"
+            "connection-details": "连接详情",
+            "last-traffic-reset-at": "上次流量重置于",
+            "subscription-url": "订阅 URL",
+            "subscription-short-uuid": "订阅短 UUID",
+            "username-cannot-be-changed": "用户名无法更改",
+            "user-details": "用户详情",
+            "loading-user-data": "正在加载用户数据...",
+            "edit-user": "编辑用户",
+            "never": "从不",
+            "show-qr": "显示二维码",
+            "subscription-qr-code": "订阅二维码",
+            "close": "关闭",
+            "edit-user-headline": "编辑用户"
         }
     },
     "base-api-token-form": {
-        "create": "Create",
-        "token-description": "Token description",
-        "token-name": "Token name"
+        "create": "创建",
+        "token-description": "密钥描述",
+        "token-name": "密钥名称"
     },
     "empty-page": {
         "layout": {
-            "nothing-found": "Nothing found"
+            "nothing-found": "未找到任何内容"
         }
     },
     "base-host-form": {
-        "remark": "Remark",
-        "address": "Address",
-        "port": "Port",
-        "inbound": "Inbound",
-        "select-inbound": "Select inbound",
-        "advanced-options": "Advanced options",
-        "host": "Host",
-        "path": "Path",
-        "alpn-e-g-h2": "ALPN (e.g. h2)",
-        "fingerprint": "Fingerprint",
-        "fingerprint-e-g-chrome": "Fingerprint (e.g. chrome)",
-        "save": "Save",
-        "sni-e-g-example-com": "SNI (e.g. example.com)",
-        "host-e-g-example-com": "Host (e.g. example.com)",
-        "e-g-example-com": "e.g. example.com",
-        "e-g-443": "e.g. 443",
-        "path-e-g-ws": "path (e.g. /ws)",
-        "security-layer": "Security Layer",
-        "tls-transport-layer-security": "TLS (Transport Layer Security)",
+        "remark": "备注",
+        "address": "地址",
+        "port": "端口",
+        "inbound": "入站",
+        "select-inbound": "选择入站",
+        "advanced-options": "高级选项",
+        "host": "主机",
+        "path": "路径",
+        "alpn-e-g-h2": "ALPN (例如 h2)",
+        "fingerprint": "指纹",
+        "fingerprint-e-g-chrome": "指纹 (例如 chrome)",
+        "save": "保存",
+        "sni-e-g-example-com": "SNI (例如 example.com)",
+        "host-e-g-example-com": "主机 (例如 example.com)",
+        "e-g-example-com": "例如 example.com",
+        "e-g-443": "例如 443",
+        "path-e-g-ws": "路径 (例如 /ws)",
+        "security-layer": "安全层",
+        "tls-transport-layer-security": "TLS (传输层安全)",
         "none": "None",
-        "inbounds-default": "Inbound's default",
-        "here-you-can-override-security-settings-from-xtls-config": "Here you can override security settings from XTLS Config.",
-        "extra-xhttp": "XHTTP Extra",
-        "xhttp-extra-params": "XHTTP extra parameters",
-        "extra-xhttp-description": "This setting will only work with the XHTTP protocol. An \"extra\" object JSON will be passed to the client. The JSON input is not validated, be sure to enter a valid configuration. You can use the button below to copy the basic extra settings and paste it into the JSON input.",
-        "invalid-json": "Invalid JSON",
-        "fill-with-sample-xhttp-extra-params": "Fill with sample XHTTP extra options",
-        "close": "Close",
-        "clone": "Clone",
-        "address-description-line-1": "Address must be the IP address or a domain name pointing to the connection destination.",
-        "address-description-line-2": "In most cases, it should points to the one of connected nodes.",
-        "port-description-line-1": "Connection port.",
-        "port-description-line-2": "In most cases, must match the port of selected inbound.",
-        "sni-description-line-1": "SNI stands for Server Name Indication.",
-        "sni-description-line-2": "If not specified, the value from config's inbound will be used."
+        "inbounds-default": "入站默认值",
+        "here-you-can-override-security-settings-from-xtls-config": "您可以在此处覆盖 XTLS 配置中的安全设置。",
+        "extra-xhttp": "XHTTP 额外设置",
+        "xhttp-extra-params": "XHTTP 额外参数",
+        "extra-xhttp-description": "此设置仅适用于 XHTTP 协议。 一个 \"extra\" JSON 将被传递给客户端. 输入的 JSON 不会被验证可用性，请确保输入有效的配置。您可以使用下面的按钮复制基本 \"extra\" 设置并粘贴到 JSON 中。",
+        "invalid-json": "无效的 JSON",
+        "fill-with-sample-xhttp-extra-params": "填充示例 XHTTP 额外选项",
+        "close": "关闭",
+        "clone": "克隆",
+        "address-description-line-1": "地址必须是连接目标的 IP 地址或域名。",
+        "address-description-line-2": "在大多数情况下，它应指向已连接的节点之一。",
+        "port-description-line-1": "连接端口。",
+        "port-description-line-2": "在大多数情况下，必须与所选入站的端口匹配。",
+        "sni-description-line-1": "SNI 代表服务器名称。",
+        "sni-description-line-2": "如果未指定，将使用入站配置中的值。"
     },
     "base-node-form": {
-        "country": "Country",
-        "select-country": "Select country",
-        "internal-name": "Internal name",
-        "address": "Address",
-        "e-g-example-com": "e.g. example.com",
-        "port": "Port",
-        "e-g-443": "e.g. 443",
-        "consumption-multiplier": "Consumption multiplier",
-        "traffic-tracking": "Track traffic usage",
-        "limit": "Limit",
-        "reset-day": "Reset day",
-        "e-g-1-31": "e.g. 1-31",
-        "notify-percent": "Notification %",
-        "e-g-50": "e.g. 50",
-        "select-active-inbounds-for-this-node": "Select active inbounds for this node",
-        "inbounds": "Inbounds",
-        "save": "Save"
+        "country": "国家",
+        "select-country": "选择国家",
+        "internal-name": "内部名称",
+        "address": "地址",
+        "e-g-example-com": "例如 example.com",
+        "port": "端口",
+        "e-g-443": "例如 443",
+        "consumption-multiplier": "流量倍率",
+        "traffic-tracking": "跟踪流量使用",
+        "limit": "限制",
+        "reset-day": "重置日期",
+        "e-g-1-31": "例如 1-31",
+        "notify-percent": "达量通知百分比",
+        "e-g-50": "例如 50",
+        "select-active-inbounds-for-this-node": "为此节点选择活动入站",
+        "inbounds": "入站",
+        "save": "保存"
     },
     "home": {
         "page": {
-            "online-stats": "Online stats",
-            "system": "System",
-            "bandwidth": "Bandwidth",
-            "short-stats": "Short stats"
+            "online-stats": "在线统计",
+            "system": "系统",
+            "bandwidth": "带宽",
+            "short-stats": "简要统计"
         }
     },
     "login-form": {
         "feature": {
-            "sign-in": "Sign in",
-            "your-password": "Your password",
-            "password": "Password",
-            "username": "Username"
+            "sign-in": "登录",
+            "your-password": "您的密码",
+            "password": "密码",
+            "username": "用户名"
         }
     },
     "statistic-nodes": {
         "component": {
-            "no-data-available-for-the-selected-period": "No data available for the selected period",
-            "click-to-see-all": "Click to see all",
-            "show-nodes": "Show Nodes",
-            "no-data-available": "No data available",
-            "click-to-show-all": "Click to show all",
-            "click-to-highlight-only-this-node": "Click to highlight only this node",
-            "usage-by-period": "Usage by Period",
-            "7-days": "7 days",
-            "14-days": "14 days",
-            "30-days": "30 days",
-            "60-days": "60 days",
-            "90-days": "90 days",
-            "180-days": "180 days",
-            "total-traffic": "Total Traffic",
-            "top-nodes": "Top Nodes",
-            "filter-nodes": "Filter Nodes",
-            "previous-day": "Previous day",
-            "next-day": "Next day",
-            "node": "Node",
-            "traffic": "Traffic"
+            "no-data-available-for-the-selected-period": "所选时段无可用数据",
+            "click-to-see-all": "点击查看全部",
+            "show-nodes": "显示节点",
+            "no-data-available": "无可用数据",
+            "click-to-show-all": "点击显示全部",
+            "click-to-highlight-only-this-node": "点击仅高亮此节点",
+            "usage-by-period": "时段用量",
+            "7-days": "7 天",
+            "14-days": "14 天",
+            "30-days": "30 天",
+            "60-days": "60 天",
+            "90-days": "90 天",
+            "180-days": "180 天",
+            "total-traffic": "总流量",
+            "top-nodes": "活跃节点",
+            "filter-nodes": "筛选节点",
+            "previous-day": "前一天",
+            "next-day": "后一天",
+            "node": "节点",
+            "traffic": "流量"
         }
     },
     "get-expiration-text": {
         "util": {
-            "expires-in": "Expires in {{expiration}}",
-            "expired": "Expired {{expiration}}",
-            "unknown": "Unknown"
+            "expires-in": "{{expiration}} 后过期",
+            "expired": "{{expiration}} 前已过期",
+            "unknown": "未知"
         }
     },
     "reset-data": {
         "constants": {
-            "reset-monthly": "Reset monthly",
-            "reset-weekly": "Reset weekly",
-            "reset-daily": "Reset daily",
-            "never-reset": "Never reset"
+            "reset-monthly": "每月重置",
+            "reset-weekly": "每周重置",
+            "reset-daily": "每日重置",
+            "never-reset": "永不重置"
         }
     },
     "data-usage": {
         "column": {
-            "monthly": "Monthly",
-            "weekly": "Weekly",
-            "daily": "Daily"
+            "monthly": "月",
+            "weekly": "周",
+            "daily": "日"
         }
     },
     "get-time-ago": {
         "util": {
-            "invalid-date": "Invalid Date",
-            "not-connected-yet": "Not connected yet"
+            "invalid-date": "无效日期",
+            "not-connected-yet": "尚未连接"
         }
     },
     "toggle-user-status-button": {
         "feature": {
-            "enable": "Enable user",
-            "disable": "Disable user"
+            "enable": "启用用户",
+            "disable": "禁用用户"
         }
     },
     "create-api-token-modal": {
         "widget": {
-            "create-token": "Create token"
+            "create-token": "创建密钥"
         }
     },
     "bulk-user-actioins-modal": {
         "widget": {
-            "delete-users": "Delete users",
-            "confirm-action-description": "Are you sure you want to delete selected users?",
-            "confirm-action-irreversible": "This action is irreversible.",
-            "cancel": "Cancel",
-            "user-deletion-description": "Delete all users with selected status. If you will delete users with \"Active\" status, you should restart all nodes to apply changes.",
-            "select-status": "Delete by status"
+            "delete-users": "删除用户",
+            "confirm-action-description": "您确定要删除选定的用户吗？",
+            "confirm-action-irreversible": "此操作不可逆。",
+            "cancel": "取消",
+            "user-deletion-description": "删除所有具有选定状态的用户。如果您删除状态为“活跃”的用户，应重启所有节点以使更改生效。",
+            "select-status": "按状态删除"
         }
     },
     "register-form": {
         "feature": {
-            "username": "Username",
-            "password": "Password",
-            "generate": "Generate & Copy",
-            "confirm-password": "Confirm password",
-            "sign-up": "Sign up",
-            "password-copied": "Password copied",
-            "password-copied-message": "Password copied to clipboard",
-            "password-copied-error": "Failed to copy password to clipboard",
-            "error": "Error",
-            "passwords-do-not-match": "Passwords do not match",
-            "password-too-short": "Minimum 24 characters",
-            "register-description": "Create a super-admin account to get started"
+            "username": "用户名",
+            "password": "密码",
+            "generate": "生成并复制",
+            "confirm-password": "确认密码",
+            "sign-up": "注册",
+            "password-copied": "密码已复制",
+            "password-copied-message": "密码已复制到剪贴板",
+            "password-copied-error": "复制密码到剪贴板失败",
+            "error": "错误",
+            "passwords-do-not-match": "密码不匹配",
+            "password-too-short": "最少 24 个字符",
+            "register-description": "创建一个超级管理员账户以开始使用"
         }
     },
     "xray-json-template-description": {
         "widget": {
-            "importing-json-subscription": "Importing JSON subscription",
-            "description-line-1": "To use this subscription, just add",
-            "description-line-2": "at the end of your subscription link. Make sure you're using one of the supported apps listed in the table below. Otherwise, subscription will work as usual for requested client. (e.g. Base64, Mihomo)"
-        }
+            "importing-json-subscription": "导入 JSON 订阅",
+            "description-line-1": "要使用此订阅，只需在您的订阅链接末尾添加",
+            "description-line-2": "。确保您使用的是下表列出的受支持应用之一。否则，订阅将像往常一样服务于请求的客户端。（例如 Base64, Mihomo）"
     },
     "happ-routing-builder": {
         "widget": {
-            "copy-link": "Copy link",
-            "visual-editor": "Visual Editor",
-            "code-viewer": "Code Viewer",
-            "encode-happ-link": "Encode Happ Link",
-            "enter-the-configuration-name": "Enter a name for the configuration",
-            "name": "Name",
-            "russia": "Russia",
-            "proxy-all-traffic-except-rules": "Proxy all traffic except the rules",
-            "direct-all-traffic-except-rules": "Direct route all traffic except the rules",
-            "proxy-all-traffic-except-rules-or-direct-all-traffic-except-rules": "Proxy all traffic except the rules, or direct route all traffic except the rules",
-            "enable": "Enable",
-            "disable": "Disable",
-            "fake-dns-description": "Enable or disable FakeDNS. Recommended to activate when using DoU.",
-            "choose-doh-dns-over-https-or-dou-dns-over-udp": "Whether to use DoH (DNS over HTTPS) or DoU (DNS over UDP) for the remote DNS",
-            "remote-dns-type": "Remote DNS type",
-            "domain-name-for-doh": "Domain name for the DNS server (if DoH)",
-            "remote-dns-domain": "Remote DNS Domain",
-            "server-ip-for-doh-or-dou": "DNS Server IP address for DoH or DoU",
-            "remote-dns-ip": "Remote DNS IP address",
-            "domestic-dns-type-description": "Whether to use DoH (DNS over HTTPS) or DoU (DNS over UDP) for the domestic DNS",
-            "domestic-dns-type": "Domestic DNS Type",
-            "domain-name-for-doh-0": "Domain name (if DoH)",
-            "domestic-dns-domain": "Domestic DNS Domain",
-            "server-ip-for-doh-or-dou-0": "DNS Server IP address for DoH or DoU",
-            "domestic-dns-ip": "Domestic DNS IP",
-            "geoip-description": "Link to the geoip.dat file. Leave this field empty if you want to use the default file.",
+            "copy-link": "复制链接",
+            "visual-editor": "可视化编辑器",
+            "code-viewer": "代码查看器",
+            "encode-happ-link": "编码 Happ 链接",
+            "enter-the-configuration-name": "输入配置名称",
+            "name": "名称",
+            "russia": "俄罗斯",
+            "proxy-all-traffic-except-rules": "代理所有流量（规则除外）",
+            "direct-all-traffic-except-rules": "直连所有流量（规则除外）",
+            "proxy-all-traffic-except-rules-or-direct-all-traffic-except-rules": "代理所有流量（规则除外），或直连所有流量（规则除外）",
+            "enable": "启用",
+            "disable": "禁用",
+            "fake-dns-description": "启用或禁用 FakeDNS。使用 DoU 时建议启用。",
+            "choose-doh-dns-over-https-or-dou-dns-over-udp": "远程 DNS 使用 DoH (HTTPS 上的 DNS) 或者 DoU (UDP 上的 DNS)",
+            "remote-dns-type": "远程 DNS 类型",
+            "domain-name-for-doh": "DNS 服务器域名（如果使用 DoH）",
+            "remote-dns-domain": "远程 DNS 域名",
+            "server-ip-for-doh-or-dou": "DoH 或 DoU 的 DNS 服务器 IP 地址",
+            "remote-dns-ip": "远程 DNS IP 地址",
+            "domestic-dns-type-description": "国内 DNS 是使用 DoH (HTTPS 上的 DNS) 还是 DoU (UDP 上的 DNS)",
+            "domestic-dns-type": "国内 DNS 类型",
+            "domain-name-for-doh-0": "域名（如果使用 DoH）",
+            "domestic-dns-domain": "国内 DNS 域名",
+            "server-ip-for-doh-or-dou-0": "DoH 或 DoU 的 DNS 服务器 IP 地址",
+            "domestic-dns-ip": "国内 DNS IP",
+            "geoip-description": "geoip.dat 文件的链接。如果留空，将使用默认文件。",
             "geoip-url": "GeoIP URL",
-            "geosite-description": "Link to the geosite.dat file. Leave this field empty if you want to use the default file.",
+            "geosite-description": "geosite.dat 文件的链接。如果留空，将使用默认文件。",
             "geosite-url": "GeoSite URL",
-            "unix-timestamp-description": "Enter the Unix timestamp of the last update to the geoip and geosite files. Leave empty if not available.",
-            "last-updated": "Last updated",
-            "select-the-domain-processing-strategy": "Select the domain processing strategy.",
-            "domain-strategy": "Domain strategy",
-            "dns-hosts-description": "Enter the DNS hosts in this format: { \"example.com\": \"1.2.3.4\", \"test.org\": \"8.8.8.8\" }",
-            "dns-hosts": "DNS hosts",
-            "sites-that-will-use-direct-connection": "Domain names that shouldn't be proxied and use a direct connection.",
-            "direct-sites": "Direct sites",
-            "ip-addresses-that-will-use-direct-connection": "IP addresses that shouldn't be proxied and use a direct connection.",
-            "direct-ip": "Direct IP",
-            "sites-that-will-be-proxied": "Domain names that should be proxied.",
-            "proxy-sites": "Proxy sites",
-            "ip-addresses-that-will-be-proxied": "IP addresses that should be proxied.",
-            "proxy-ip": "Proxy IP",
-            "sites-that-will-be-blocked": "Domain names that should be blocked.",
-            "blocked-sites": "Blocked sites",
-            "ip-addresses-that-will-be-blocked": "IP addresses that should be blocked.",
-            "blocked-ips": "Blocked IPs",
-            "encoded-happ-link": "Encoded Happ Link",
-            "copied": "Copied",
-            "show-qr": "Show QR",
-            "close": "Close",
-            "invalid-base64-or-happ-link": "Invalid Base64 or Happ Link",
-            "import-configuration": "Import Configuration",
-            "paste-a-happ-routing-link-or-base64-encoded-config": "Paste a Happ routing link or Base64 encoded config",
-            "import-from-base64": "Import from Base64",
-            "paste-base64-or-happ-link-here": "Paste Base64 or Happ Link here",
-            "decode": "Decode",
-            "encoded-link": "Encoded Link",
-            "basic-configuration": "Basic Configuration",
-            "remote-dns-settings": "Remote DNS Settings",
-            "domestic-dns-settings": "Domestic DNS Settings",
-            "dns-hosts-0": "DNS Hosts",
-            "direct-routing": "Direct Routing",
-            "proxy-routing": "Proxy Routing",
-            "block-routing": "Block Routing",
-            "code-editor": "Code Editor"
+            "unix-timestamp-description": "输入 geoip 和 geosite 文件最后更新的 Unix 时间戳。如果不可用请留空。",
+            "last-updated": "最后更新时间",
+            "select-the-domain-processing-strategy": "选择域名处理策略。",
+            "domain-strategy": "域名策略",
+            "dns-hosts-description": "使用此格式输入 DNS 主机：{ \"example.com\": \"1.2.3.4\", \"test.org\": \"8.8.8.8\" }",
+            "dns-hosts": "DNS 主机",
+            "sites-that-will-use-direct-connection": "不走代理且直连的域名.",
+            "direct-sites": "直连域名",
+            "ip-addresses-that-will-use-direct-connection": "不走代理且直连的 IP 地址",
+            "direct-ip": "直连 IP",
+            "sites-that-will-be-proxied": "强制走代理的域名.",
+            "proxy-sites": "走代理的域名",
+            "ip-addresses-that-will-be-proxied": "走代理的 IP 地址.",
+            "proxy-ip": "走代理的 IP",
+            "sites-that-will-be-blocked": "禁止连接的域名.",
+            "blocked-sites": "禁止的站点",
+            "ip-addresses-that-will-be-blocked": "禁止连接的 IP 地址.",
+            "blocked-ips": "禁止的 IP ",
+            "encoded-happ-link": "编码后的 Happ 链接",
+            "copied": "已复制",
+            "show-qr": "显示二维码",
+            "close": "关闭",
+            "invalid-base64-or-happ-link": "无效的 Base64 或 Happ 链接",
+            "import-configuration": "导入配置",
+            "paste-a-happ-routing-link-or-base64-encoded-config": "粘贴一个 Happ 路由链接或 Base64 编码的配置",
+            "import-from-base64": "从 Base64 导入",
+            "paste-base64-or-happ-link-here": "在此处粘贴 Base64 或 Happ 链接",
+            "decode": "解码",
+            "encoded-link": "编码后的链接",
+            "basic-configuration": "基本配置",
+            "remote-dns-settings": "远程 DNS 设置",
+            "domestic-dns-settings": "国内 DNS 设置",
+            "dns-hosts-0": "DNS 主机",
+            "direct-routing": "直连路由",
+            "proxy-routing": "代理路由",
+            "block-routing": "禁止路由",
+            "code-editor": "代码编辑器"
         },
         "page": {
             "component": {
-                "about-happ": "About Happ",
-                "happ-is-multiplatform-xray-client": "Happ is a multiplatform Xray client.",
-                "about-happ-description-line-2": "Here you can configure routing rules, which you can then encode and use as a Happ Link.",
-                "about-happ-description-line-3": "To use a given Happ routing configuration in your subscription links, open \"Subscription settings\" and change the \"Happ Routing\" section.",
-                "check-out-happ-website": "Check out Happ's website"
+                "about-happ": "关于 Happ",
+                "happ-is-multiplatform-xray-client": "Happ 是一个多平台 Xray 客户端。",
+                "about-happ-description-line-2": "您可以在此处配置路由规则，然后进行编码并用作 Happ 链接。",
+                "about-happ-description-line-3": "要在您的订阅链接中使用给定的 Happ 路由配置，请打开“订阅设置”并更改“Happ 路由”部分。",
+                "check-out-happ-website": "访问 Happ 网站"
             }
         }
     },
     "remarks-manager": {
         "widget": {
-            "enter-remark": "Enter remark",
-            "add-remark": "Add remark"
+            "enter-remark": "输入备注",
+            "add-remark": "添加备注"
         }
     },
     "subscription-settings": {
         "widget": {
-            "validation-error": "Validation error",
-            "you-must-add-at-least-one-remark-with-text": "You must add at least one remark with text",
-            "subscription-info": "Subscription info",
-            "this-title-will-be-displayed-as-subscription-name": "This title will be displayed as the subscription name.",
-            "profile-title": "Profile title",
-            "enter-profile-title": "Enter profile title",
-            "auto-update-description": "Some client applications follow this interval to auto-update the subscription.",
-            "auto-update-interval-hours": "Auto-update interval (hours)",
-            "support-link-description": "Some clients will display this link in the subscription information. The link should lead the user to the support page.",
-            "support-link": "Support link",
-            "happ-settings": "Happ settings",
-            "happ-announce-description": "200 characters maximum. Will be displayed under the subscription name in Happ.",
-            "happ-announce": "Happ Announce",
-            "enter-happ-announce-max-200-characters": "Enter Happ Announce, max. 200 characters",
-            "happ-routing-description": "Happ routing is a feature that allows you to configure the routing rules that Xray-Core will use through the subscription link.",
-            "happ-routing-description-line-2": "A routing link for Happ can be obtained through Remnawave's Happ Routing Builder. The button below will redirect you to the aforementioned page.",
-            "configure-happ-routing": "Happ Routing Builder",
-            "happ-routing": "Happ routing",
-            "user-status-remarks": "User status remarks",
-            "user-status-remarks-description": "The following values will be displayed in the subscription page if the user is expired, limited or disabled.",
-            "user-status-remarks-description-line-2": "You can add multiple remarks for each status.",
-            "user-status-remarks-description-line-3": "Because expired, limited and disabled users are not able to connect to the server, they will see these remarks in the client instead of receiving an empty subscription.",
-            "expired-users-remarks": "Expired user remarks",
-            "limited-users-remarks": "Limited user remarks",
-            "disabled-users-remarks": "Disabled user remarks",
-            "update-settings": "Update settings",
-            "enabled": "Enabled",
-            "disabled": "Disabled",
-            "profile-webpage-url-description": "Used by some clients. Enabled by default, domain obtained from SUB_PUBLIC_DOMAIN .env variable.",
-            "profile-webpage-url": "Profile Webpage URL",
-            "serve-json-at-base-subscription": "Serve JSON at base subscription",
-            "serve-json-description": "Serve JSON configurations at the base subscription path (without having to append /json). If the client supports it, it will be served JSON, otherwise it will be served as usual.",
-            "add-username-to-base-subscription": "Add #username to base subscription",
-            "add-username-description": "Append #username to the base subscription path at the subscription route.",
-            "subscription-info-description": "Subscription links are supported by many client apps such as Happ, v2RayNG, Streisand, etc.",
-            "happ-description-line-1": "Here you can configure settings specific to Happ.",
-            "happ-description-line-2": "These settings will only apply to subscription links that are imported in Happ."
+            "validation-error": "验证错误",
+            "you-must-add-at-least-one-remark-with-text": "您必须至少添加一个带有文本的备注",
+            "subscription-info": "订阅信息",
+            "this-title-will-be-displayed-as-subscription-name": "此标题将显示为订阅名称。",
+            "profile-title": "配置标题",
+            "enter-profile-title": "输入配置标题",
+            "auto-update-description": "某些客户端应用遵循此间隔自动更新订阅。",
+            "auto-update-interval-hours": "自动更新间隔（小时）",
+            "support-link-description": "某些客户端会在订阅信息中显示此链接。该链接应将用户引导至支持页面。",
+            "support-link": "支持链接",
+            "happ-settings": "Happ 设置",
+            "happ-announce-description": "最多 200 个字符。将在 Happ 中的订阅名称下显示。",
+            "happ-announce": "Happ 公告",
+            "enter-happ-announce-max-200-characters": "输入 Happ 公告，最多 200 个字符",
+            "happ-routing-description": "Happ 路由是一项功能，允许您通过订阅链接配置 Xray-Core 将使用的路由规则。",
+            "happ-routing-description-line-2": "可以通过 Remnawave 的 Happ 路由编辑器获取 Happ 的路由链接。下面的按钮将重定向到上述页面。",
+            "configure-happ-routing": "Happ 路由编辑器",
+            "happ-routing": "Happ 路由",
+            "user-status-remarks": "用户状态备注",
+            "user-status-remarks-description": "如果用户已过期、受限或禁用，以下值将显示在订阅页面中。",
+            "user-status-remarks-description-line-2": "您可以为每种状态添加多个备注。",
+            "user-status-remarks-description-line-3": "因为过期、受限和禁用的用户无法连接到服务器，他们将在客户端中看到这些备注，而不是收到空的订阅。",
+            "expired-users-remarks": "过期用户备注",
+            "limited-users-remarks": "受限用户备注",
+            "disabled-users-remarks": "禁用用户备注",
+            "update-settings": "更新设置",
+            "enabled": "已启用",
+            "disabled": "已禁用",
+            "profile-webpage-url-description": "某些客户端使用。默认启用，域名来自 SUB_PUBLIC_DOMAIN .env 变量。",
+            "profile-webpage-url": "配置网页 URL",
+            "serve-json-at-base-subscription": "在基础订阅提供 JSON",
+            "serve-json-description": "在基础订阅路径（无需附加 /json）提供 JSON 配置。如果客户端支持，将提供 JSON，否则将照常提供。",
+            "add-username-to-base-subscription": "将 #username 添加到基础订阅",
+            "add-username-description": "在订阅路由的基础订阅路径后附加 #username 。",
+            "subscription-info-description": "订阅链接受许多客户端应用支持，例如 Happ, v2RayNG, Streisand 等。",
+            "happ-description-line-1": "您可以在此处配置仅适用于 Happ 的设置。",
+            "happ-description-line-2": "这些设置仅适用于在 Happ 中导入的订阅链接。"
         },
         "page": {
             "component": {
-                "what-is-subscription-settings": "What is subscription settings?",
-                "subscription-settings-description": "The settings below apply to subscription link details used and displayed by client apps such as Happ, v2RayNG, Streisand, etc.",
-                "subscription-settings-description-line-2": "It is recommended to change the values to match your specific needs and circumstances."
+                "what-is-subscription-settings": "什么是订阅设置？",
+                "subscription-settings-description": "以下设置适用于客户端应用（如 Happ, v2RayNG, Streisand 等）使用和显示的订阅链接详细信息。",
+                "subscription-settings-description-line-2": "建议更改这些值以符合您的特定需求和情况。"
             }
         }
     },
     "inbounds-page-header": {
         "widget": {
-            "list-of-all-inbounds": "List of all inbounds",
-            "inbounds": "Inbounds",
-            "important-note": "Important note",
-            "important-note-description-line-1": "All bulk operations require a complete restart of all nodes.",
-            "important-note-description-line-2": "Please avoid making too many requests in a short period of time.",
-            "important-note-description-line-3": "After saving changes it may take up to 30 seconds for them to be applied across all nodes."
+            "list-of-all-inbounds": "所有入站列表",
+            "inbounds": "入站",
+            "important-note": "重要提示",
+            "important-note-description-line-1": "所有批量操作都需要完全重启所有节点。",
+            "important-note-description-line-2": "请避免在短时间内发出过多请求。",
+            "important-note-description-line-3": "保存更改后，可能需要长达 30 秒才能在所有节点上应用。"
         }
     },
     "inbounds-card": {
         "widget": {
-            "nodes": "Nodes",
-            "enabled-nodes": "Nodes with this inbound enabled",
-            "disabled-nodes": "Nodes with this inbound disabled",
-            "remove": "Remove",
-            "add": "Add",
-            "cancel": "Cancel",
-            "users": "Users",
-            "enabled-users": "Users with this inbound enabled",
-            "disabled-users": "Users with this inbound disabled",
-            "show-raw-inbound": "Show raw inbound",
-            "raw-inbound": "Raw inbound",
-            "are-you-sure": "Are you sure?",
-            "add-users-to-inbound-line-1": "Are you sure you want to add this inbound to users?",
-            "add-users-to-inbound-line-2": "This action will add the inbound to all users.",
-            "remove-users-from-inbound-line-1": "Are you sure you want to remove this inbound from users?",
-            "remove-users-from-inbound-line-2": "This action will remove the inbound from all users.",
-            "add-nodes-to-inbound-line-1": "Are you sure you want to add this inbound to nodes?",
-            "add-nodes-to-inbound-line-2": "This action will add the inbound to all nodes.",
-            "remove-nodes-from-inbound-line-1": "Are you sure you want to remove this inbound from nodes?",
-            "remove-nodes-from-inbound-line-2": "This action will remove the inbound from all nodes.",
-            "copied": "Copied",
-            "copy-uuid": "Copy UUID"
+            "nodes": "节点",
+            "enabled-nodes": "启用此入站的节点",
+            "disabled-nodes": "禁用此入站的节点",
+            "remove": "移除",
+            "add": "添加",
+            "cancel": "取消",
+            "users": "用户",
+            "enabled-users": "启用此入站的用户",
+            "disabled-users": "禁用此入站的用户",
+            "show-raw-inbound": "显示原始入站",
+            "raw-inbound": "原始入站",
+            "are-you-sure": "您确定吗？",
+            "add-users-to-inbound-line-1": "您确定要将此入站添加到用户吗？",
+            "add-users-to-inbound-line-2": "此操作会将入站添加到所有用户。",
+            "remove-users-from-inbound-line-1": "您确定要从此入站移除用户吗？",
+            "remove-users-from-inbound-line-2": "此操作会将入站从所有用户中移除。",
+            "add-nodes-to-inbound-line-1": "您确定要将此入站添加到节点吗？",
+            "add-nodes-to-inbound-line-2": "此操作会将入站添加到所有节点。",
+            "remove-nodes-from-inbound-line-1": "您确定要从此入站移除节点吗？",
+            "remove-nodes-from-inbound-line-2": "此操作会将入站从所有节点中移除。",
+            "copied": "已复制",
+            "copy-uuid": "复制 UUID"
         }
     },
     "multi-select-hosts": {
         "feature": {
-            "delete-hosts": "Delete hosts",
-            "are-you-sure-you-want-to-delete-these-hosts": "Are you sure you want to delete these hosts?",
-            "delete": "Delete",
-            "cancel": "Cancel",
-            "set-inbound": "Set inbound",
-            "inbound": "Inbound",
-            "set-port": "Set Port",
-            "port": "Port",
-            "clear-selection": "Clear selection",
-            "select-all": "Select all",
-            "enable": "Enable",
-            "disable": "Disable",
-            "set-port-0": "Set port"
+            "delete-hosts": "删除主机",
+            "are-you-sure-you-want-to-delete-these-hosts": "您确定要删除这些主机吗？",
+            "delete": "删除",
+            "cancel": "取消",
+            "set-inbound": "设置入站",
+            "inbound": "入站",
+            "set-port": "设置端口",
+            "port": "端口",
+            "clear-selection": "清除选择",
+            "select-all": "全选",
+            "enable": "启用",
+            "disable": "禁用",
+            "set-port-0": "设置端口"
         }
     },
     "bulk-user-actions-drawer": {
         "widget": {
-            "bulk-user-actions": "Bulk User Actions",
-            "users": "users",
-            "update": "Update",
-            "actions": "Actions",
-            "danger": "Danger"
+            "bulk-user-actions": "批量操作用户",
+            "users": "用户",
+            "update": "更新",
+            "actions": "操作",
+            "danger": "危险"
         }
     },
     "delete-all-users-by-status": {
         "feature": {
-            "processing": "Processing",
-            "deleting-users": "Deleting users...",
-            "success": "Success",
-            "deleted-data-affectedrows-users": "Deleted {{count}} users"
+            "processing": "处理中",
+            "deleting-users": "正在删除用户...",
+            "success": "成功",
+            "deleted-data-affectedrows-users": "已删除 {{count}} 个用户"
         }
     },
     "bulk-all-user-actions-tabs": {
         "update": {
             "tab": {
                 "feature": {
-                    "update-fields-for-all-users": "Update fields for all users",
-                    "user-status": "User status",
-                    "status": "Status",
-                    "select-status": "Select status",
-                    "expire-date": "Expiry Date",
-                    "select-expiration-date": "Select expiration date",
-                    "close": "Close",
-                    "update-users": "Update Users"
+                    "update-fields-for-all-users": "更新所有用户的字段",
+                    "user-status": "用户状态",
+                    "status": "状态",
+                    "select-status": "选择状态",
+                    "expire-date": "过期日期",
+                    "select-expiration-date": "选择过期日期",
+                    "close": "关闭",
+                    "update-users": "更新用户"
                 }
             }
         },
         "actions": {
             "tab": {
                 "feature": {
-                    "confirm-action": "Confirm Action",
-                    "reset-traffic-confirmation": "Are you sure you want to reset the traffic for all selected users?",
-                    "reset": "Reset",
-                    "cancel": "Cancel",
-                    "perform-actions-on-all-users": "Perform actions on all users",
-                    "reset-traffic": "Reset Traffic",
-                    "reset-traffic-description": "Resets the traffic usage to zero for all selected users"
+                    "confirm-action": "确认操作",
+                    "reset-traffic-confirmation": "您确定要重置所有选定用户的流量吗？",
+                    "reset": "重置",
+                    "cancel": "取消",
+                    "perform-actions-on-all-users": "对所有用户执行操作",
+                    "reset-traffic": "重置流量",
+                    "reset-traffic-description": "将所有选定用户的流量使用重置为零"
                 }
             }
         },
         "danger": {
             "tab": {
                 "feature": {
-                    "danger-zone": "Danger Zone",
-                    "danger-zone-description": "These actions are irreversible and can result in permanent data loss.",
-                    "delete-users-by-status": "Delete Users By Status",
-                    "delete": "Delete",
-                    "delete-users-by-status-description": "Permanently deletes all users with the selected status"
+                    "danger-zone": "危险区",
+                    "danger-zone-description": "这些操作不可逆，可能导致永久性数据丢失。",
+                    "delete-users-by-status": "按状态删除用户",
+                    "delete": "删除",
+                    "delete-users-by-status-description": "永久删除所有具有选定状态的用户"
                 }
             }
         }
     },
     "bulk-all-user-actions-drawer": {
         "widget": {
-            "bulk-all-user-actions": "Bulk All User Actions",
-            "all-users": "All users",
-            "update": "Update",
-            "actions": "Actions",
-            "danger": "Danger"
+            "bulk-all-user-actions": "批量所有用户操作",
+            "all-users": "所有用户",
+            "update": "更新",
+            "actions": "操作",
+            "danger": "危险区"
         }
     },
     "bulk-user-actions": {
         "actions": {
             "tab": {
                 "feature": {
-                    "revoke-subscription": "Revoke Subscription",
-                    "revoke-confirmation-line-1": "Are you sure you want to revoke subscription for {{usersCount}} user(s)?",
-                    "revoke-confirmation-line-2": "This action cannot be undone.",
-                    "revoke": "Revoke",
-                    "cancel": "Cancel",
-                    "reset-traffic": "Reset Traffic",
-                    "reset-traffic-confirmation-line-1": "Are you sure you want to reset traffic for {{usersCount}} user(s)?",
-                    "reset-traffic-confirmation-line-2": "This will set their usage to zero.",
-                    "reset": "Reset",
-                    "change-active-inbounds": "Change Active Inbounds",
-                    "change": "Change",
-                    "no-inbounds-selected": "No inbounds selected",
-                    "please-select-at-least-one-inbound": "Please select at least one inbound",
-                    "perform-action-on-users": "Perform actions on {{usersCount}} selected users",
-                    "changes-the-active-inbounds-for-all-selected-users": "Changes the active inbounds for all selected users",
-                    "resets-the-traffic-usage-to-zero-for-all-selected-users": "Resets the traffic usage to zero for all selected users",
-                    "revokes-subscription-for-all-selected-users": "Revokes subscription for all selected users"
+                    "revoke-subscription": "撤销订阅",
+                    "revoke-confirmation-line-1": "您确定要撤销 {{usersCount}} 位用户的订阅吗？",
+                    "revoke-confirmation-line-2": "此操作不可撤销。",
+                    "revoke": "撤销",
+                    "cancel": "取消",
+                    "reset-traffic": "重置流量",
+                    "reset-traffic-confirmation-line-1": "您确定要重置 {{usersCount}} 位用户的流量吗？",
+                    "reset-traffic-confirmation-line-2": "这将把他们的用量设为零。",
+                    "reset": "重置",
+                    "change-active-inbounds": "更改活动入站",
+                    "change": "更改",
+                    "no-inbounds-selected": "未选择入站",
+                    "please-select-at-least-one-inbound": "请至少选择一个入站",
+                    "perform-action-on-users": "对 {{usersCount}} 位选定用户执行操作",
+                    "changes-the-active-inbounds-for-all-selected-users": "更改所有选定用户的活动入站",
+                    "resets-the-traffic-usage-to-zero-for-all-selected-users": "将所有选定用户的流量使用重置为0",
+                    "revokes-subscription-for-all-selected-users": "撤销所有选定用户的订阅"
                 }
             }
         },
         "danger": {
             "tab": {
                 "feature": {
-                    "delete-users": "Delete Users",
-                    "delete-confirmation-line-1": "Are you sure you want to delete {{usersCount}} user(s)?",
-                    "delete-confirmation-line-2": "This action cannot be undone and all data will be permanently lost.",
-                    "delete": "Delete",
-                    "cancel": "Cancel",
-                    "danger-zone": "Danger Zone",
-                    "these-actions-are-irreversible-and-can-result-in-permanent-data-loss": "These actions are irreversible and can result in permanent data loss.",
-                    "permanently-deletes-all-selected-users-and-their-data": "Permanently deletes all selected users and their data"
+                    "delete-users": "删除用户",
+                    "delete-confirmation-line-1": "您确定要删除 {{usersCount}} 位用户吗？",
+                    "delete-confirmation-line-2": "此操作不可撤销，所有数据将永久丢失。",
+                    "delete": "删除",
+                    "cancel": "取消",
+                    "danger-zone": "危险区",
+                    "these-actions-are-irreversible-and-can-result-in-permanent-data-loss": "这些操作不可逆，可能导致永久性数据丢失。",
+                    "permanently-deletes-all-selected-users-and-their-data": "永久删除所有选定用户及其数据"
                 }
             }
         },
         "update": {
             "tab": {
                 "feature": {
-                    "update-fields-counter": "Update fields for {{usersCount}} selected users",
-                    "user-status": "User status",
-                    "status": "Status",
-                    "select-status": "Select status",
-                    "expire-date": "Expiry Date",
-                    "select-expiration-date": "Select expiration date",
-                    "close": "Close",
-                    "update-users": "Update Users"
+                    "update-fields-counter": "更新 {{usersCount}} 位选定用户的字段",
+                    "user-status": "用户状态",
+                    "status": "状态",
+                    "select-status": "选择状态",
+                    "expire-date": "过期日期",
+                    "select-expiration-date": "选择过期日期",
+                    "close": "关闭",
+                    "update-users": "更新用户"
                 }
             }
         }
     },
     "users-table-selection": {
         "feature": {
-            "row-s-selected": "row(s) selected",
-            "clear-selection": "Clear selection",
-            "select-all": "Select all",
-            "bulk-actions": "Bulk actions"
+            "row-s-selected": "选定的行",
+            "clear-selection": "清除选择",
+            "select-all": "全选",
+            "bulk-actions": "批量操作"
         }
     },
     "get-user-subscription-links": {
         "feature": {
-            "subscription-links": "Subscription links",
-            "loading-subscription-links": "Loading subscription links...",
-            "show-links": "Show links",
-            "no-available-hosts-found-for-this-user": "No available hosts found for this user"
+            "subscription-links": "订阅链接",
+            "loading-subscription-links": "正在加载订阅链接...",
+            "show-links": "显示链接",
+            "no-available-hosts-found-for-this-user": "未找到此用户的可用主机"
         }
     },
     "delete-user": {
         "feature": {
-            "delete-user": "Delete user",
-            "are-you-sure": "Are you sure you want to delete the user? This action is irreversible.",
-            "delete": "Delete",
-            "cancel": "Cancel"
+            "delete-user": "删除用户",
+            "are-you-sure": "您确定要删除此用户吗？此操作不可逆。",
+            "delete": "删除",
+            "cancel": "取消"
         }
     },
     "user-usage-modal": {
         "widget": {
-            "no-data-available-for-the-selected-period": "No data available for the selected period",
-            "no-data-available": "No data available",
-            "click-to-show-all": "Click to show all",
-            "click-to-highlight-only-this-node": "Click to highlight only this node",
-            "traffic-statistics": "Traffic statistics",
-            "usage-by-period": "Usage by period",
-            "7-days": "7 days",
-            "14-days": "14 days",
-            "30-days": "30 days",
-            "60-days": "60 days",
-            "90-days": "90 days",
-            "180-days": "180 days",
-            "365-days": "365 days",
-            "total-traffic": "Total traffic",
-            "top-nodes": "Top nodes",
-            "stacked": "Stacked",
-            "grouped": "Grouped",
-            "filter-nodes": "Filter nodes",
-            "bar-chart": "Bar chart",
-            "show-nodes": "Show nodes",
-            "click-to-see-all": "Click to see all"
+            "no-data-available-for-the-selected-period": "所选时段无可用数据",
+            "no-data-available": "无可用数据",
+            "click-to-show-all": "点击显示全部",
+            "click-to-highlight-only-this-node": "点击仅高亮此节点",
+            "traffic-statistics": "流量统计",
+            "usage-by-period": "时段用量",
+            "7-days": "7 天",
+            "14-days": "14 天",
+            "30-days": "30 天",
+            "60-days": "60 天",
+            "90-days": "90 天",
+            "180-days": "180 天",
+            "365-days": "365 天",
+            "total-traffic": "总流量",
+            "top-nodes": "活跃节点",
+            "stacked": "堆叠",
+            "grouped": "分组",
+            "filter-nodes": "筛选节点",
+            "bar-chart": "条形图",
+            "show-nodes": "显示节点",
+            "click-to-see-all": "点击查看全部"
         }
     },
     "get-user-usage": {
         "feature": {
-            "show-usage": "Show usage"
+            "show-usage": "显示用量"
         }
     },
     "detailed-user-info-drawer": {
         "widget": {
-            "copied": "Copied",
-            "detailed-user-info": "Detailed User Info",
-            "copy": "Copy",
-            "loading-user-info": "Loading user info...",
-            "user-information": "User Information",
+            "copied": "已复制",
+            "detailed-user-info": "详细用户信息",
+            "copy": "复制",
+            "loading-user-info": "正在加载用户信息...",
+            "user-information": "用户信息",
             "uuid": "UUID",
-            "short-uuid": "Short UUID",
-            "username": "Username",
-            "email": "Email",
+            "short-uuid": "短 UUID",
+            "username": "用户名",
+            "email": "邮箱",
             "telegram-id": "Telegram ID",
-            "description": "Description",
-            "traffic-information": "Traffic Information",
-            "used-traffic": "Traffic Usage",
-            "lifetime-used-traffic": "Lifetime Traffic Usage",
-            "traffic-limit": "Traffic Limit",
-            "traffic-limit-strategy": "Traffic Limit Strategy",
-            "last-traffic-reset": "Last Traffic Reset",
-            "subscription-information": "Subscription Information",
-            "subscription-uuid": "Subscription UUID",
-            "subscription-url": "Subscription URL",
-            "expires-at": "Expires At",
-            "last-opened-at": "Last Opened At",
-            "last-user-agent": "Last User Agent",
-            "revoked-at": "Revoked At",
-            "connection-information": "Connection Information",
-            "trojan-password": "Trojan Password",
+            "description": "描述",
+            "traffic-information": "流量信息",
+            "used-traffic": "已用流量",
+            "lifetime-used-traffic": "累计已用流量",
+            "traffic-limit": "流量限制",
+            "traffic-limit-strategy": "流量限制策略",
+            "last-traffic-reset": "上次流量重置",
+            "subscription-information": "订阅信息",
+            "subscription-uuid": "订阅 UUID",
+            "subscription-url": "订阅 URL",
+            "expires-at": "过期时间",
+            "last-opened-at": "最后打开时间",
+            "last-user-agent": "最后用户代理",
+            "revoked-at": "撤销于",
+            "connection-information": "连接信息",
+            "trojan-password": "Trojan 密码",
             "vless-uuid": "VLESS UUID",
-            "ss-password": "SS Password",
-            "last-online": "Last Online",
-            "last-connected-node": "Last Connected Node",
-            "active-inbounds": "Active Inbounds",
-            "timestamps": "Timestamps",
-            "created-at": "Created At",
-            "updated-at": "Updated At",
-            "first-connected-at": "First connected at",
-            "tag": "Tag"
+            "ss-password": "SS 密码",
+            "last-online": "最后在线",
+            "last-connected-node": "最后连接节点",
+            "active-inbounds": "活动入站",
+            "timestamps": "时间戳",
+            "created-at": "创建于",
+            "updated-at": "更新于",
+            "first-connected-at": "首次连接于",
+            "tag": "标签"
         }
     },
     "subscription-page-builder-header": {
         "widget": {
-            "load-default": "Load Default",
-            "export-config": "Export Config",
-            "upload-config": "Upload Config",
-            "subscription-page-builder": "Subscription Page Builder",
-            "how-to-use-it": "How to use it?",
-            "description-line-1": "You can use this builder to configure available clients and usage guides for Remnawave Subscription Pages.",
-            "description-line-2": "After creating your desired configuration, you can export and download it and mount the configuration file to your subscription-page container.",
-            "description-line-3": "Click \"Load Default\" to get the reference configuration from the GitHub repository.",
-            "learn-more": "Learn more"
+            "load-default": "加载默认配置",
+            "export-config": "导出配置",
+            "upload-config": "上传配置",
+            "subscription-page-builder": "订阅页面编辑器",
+            "how-to-use-it": "如何使用？",
+            "description-line-1": "您可以使用此编辑器为 Remnawave 订阅页面配置可用的客户端和使用指南。",
+            "description-line-2": "创建所需的配置后，您可以导出并下载它，并将配置文件挂载到您的 subscription-page 容器。",
+            "description-line-3": "点击 \"加载默认配置\" 以从 GitHub 仓库获取参考配置。",
+            "learn-more": "了解更多"
         }
     },
     "subscription-page-builder": {
         "page": {
             "component": {
-                "failed-to-parse-config": "Failed to parse config file. Check the file format.",
-                "failed-to-load-default-config-check-your-internet-connection": "Failed to load default config. Check your internet connection.",
-                "no-apps-configured-for-this-platform": "No apps configured for this platform",
-                "add-app": "Add app",
-                "select-an-app-from-the-sidebar-or-add-a-new-one": "Select an app from the sidebar or add a new one",
-                "validation-errors": "Validation errors",
-                "invalid-configuration": "Invalid configuration",
-                "the-configuration-did-not-pass-validation": "The configuration did not pass validation.",
-                "close": "Close"
+                "failed-to-parse-config": "解析配置文件失败。请检查文件格式。",
+                "failed-to-load-default-config-check-your-internet-connection": "加载默认配置失败。请检查您的互联网连接。",
+                "no-apps-configured-for-this-platform": "此平台未配置应用",
+                "add-app": "添加应用",
+                "select-an-app-from-the-sidebar-or-add-a-new-one": "从侧边栏选择一个应用或添加一个新应用",
+                "validation-errors": "校验错误",
+                "invalid-configuration": "无效配置",
+                "the-configuration-did-not-pass-validation": "配置未通过校验。",
+                "close": "关闭"
             }
         }
     },
     "app-form": {
         "component": {
-            "delete-app": "Delete App",
-            "app-id": "App ID",
-            "app-name": "App Name",
-            "url-scheme": "URL Scheme",
-            "featured-app": "Featured App",
-            "need-base64-encoding": "Need Base64 Encoding",
-            "installation-step": "Installation Step",
-            "description": "Description",
-            "buttons": "Buttons",
-            "additional-before-subscription-step": "Additional Before Subscription Step",
-            "remove-step": "Remove Step",
-            "add-step": "Add Step",
-            "title": "Title",
-            "add-subscription-step": "Add Subscription Step",
-            "additional-after-subscription-step": "Additional After Subscription Step",
-            "connect-and-use-step": "Connect and Use Step"
+            "delete-app": "删除应用",
+            "app-id": "应用 ID",
+            "app-name": "应用名称",
+            "url-scheme": "URL 方案",
+            "featured-app": "推荐应用",
+            "need-base64-encoding": "需要 Base64 编码",
+            "installation-step": "安装步骤",
+            "description": "描述",
+            "buttons": "按钮",
+            "additional-before-subscription-step": "订阅前附加步骤",
+            "remove-step": "移除步骤",
+            "add-step": "添加步骤",
+            "title": "标题",
+            "add-subscription-step": "添加订阅步骤",
+            "additional-after-subscription-step": "订阅后附加步骤",
+            "connect-and-use-step": "连接和使用步骤"
         }
     },
     "button-fields": {
-        "button": "Button",
-        "add-button": "Add button",
-        "remove-button": "Remove button",
-        "button-link": "Button Link",
-        "button-text": "Button Text"
+        "button": "按钮",
+        "add-button": "添加按钮",
+        "remove-button": "移除按钮",
+        "button-link": "按钮链接",
+        "button-text": "按钮文本"
     },
     "subscription-tabs": {
         "widget": {
-            "show-custom-remarks": "Show custom remarks",
-            "show-custom-remark-description-line-1": "Only for EXPIRED, LIMITED and DISABLED users.",
-            "show-custom-remark-description-line-2": "If this setting is disabled, EXPIRED, LIMITED and DISABLED users will receive an actual empty host list instead.",
-            "additional-response-headers": "Additional response headers",
-            "headers-that-will-be-sent-with-subscription-content": "Headers that will be sent with the subscription content.",
-            "randomize-hosts": "Randomize hosts",
-            "randomize-hosts-description": "Randomize hosts in subscription content"
+            "show-custom-remarks": "显示自定义备注",
+            "show-custom-remark-description-line-1": "仅适用于过期、受限和禁用用户。",
+            "show-custom-remark-description-line-2": "如果禁用此设置，过期、受限和禁用用户将收到实际为空的主机列表。",
+            "additional-response-headers": "附加响应头",
+            "headers-that-will-be-sent-with-subscription-content": "将与订阅内容一起发送的响应头。",
+            "randomize-hosts": "随机化主机",
+            "randomize-hosts-description": "在订阅内容中随机排序主机"
         }
     },
     "nodes-realtime-metrics": {
         "widget": {
-            "total-upload": "Total upload",
-            "total-download": "Total download",
-            "average-bps": "Average BPS",
-            "active-nodes": "Active nodes",
-            "current-hour": "Current hour"
+            "total-upload": "总上传",
+            "total-download": "总下载",
+            "average-bps": "平均 BPS",
+            "active-nodes": "活动节点",
+            "current-hour": "当前小时"
         }
     },
     "node-users-usage-drawer": {
         "widget": {
-            "no-data-available-for-the-selected-period": "No data available for the selected period",
-            "click-to-see-all-users": "Click to see all users",
-            "click-on-bars-to-view-details": "Click on bars to view details",
-            "no-data-available": "No data available",
-            "click-to-show-all-users": "Click to show all users",
-            "click-to-highlight-only-this-user": "Click to highlight only this user",
-            "users-accordeon": "Users (showing top {{displayedUserCount}} of {{significantUserCount}} active out of {{userCount}} total)",
-            "user-traffic-statistics": "User Traffic Statistics",
-            "usage-by-period": "Usage by period",
-            "7-days": "7 days",
-            "14-days": "14 days",
-            "30-days": "30 days",
-            "60-days": "60 days",
-            "90-days": "90 days",
-            "180-days": "180 days",
-            "365-days": "365 days",
-            "performance-line-1": "Some of the data might be hidden to improve performance.",
-            "performance-line-2": "Use Grafana or any other relevant tool to view all data.",
-            "total-traffic": "Total traffic",
-            "top-users": "Top users",
-            "stacked": "Stacked",
-            "grouped": "Grouped",
-            "filter-users": "Filter users",
-            "bar-chart": "Bar Chart",
-            "previous-day": "Previous day",
-            "next-day": "Next day",
-            "hidden-users": "({{hiddenCount}} users with <100 KB hidden)",
-            "total-traffic-prettybytestoanyutil": "Total traffic: {{totalTraffic}}",
-            "user": "User",
-            "traffic": "Traffic",
-            "no-users-with-traffic-100-kb": "No users with traffic ≥ 100 KB",
-            "users-hidden-with-less-than-100-kb": "{{usersCount}} users hidden with less than 100 KB ({{totalTraffic}} total)"
+            "no-data-available-for-the-selected-period": "所选时段无可用数据",
+            "click-to-see-all-users": "点击查看所有用户",
+            "click-on-bars-to-view-details": "点击柱状图查看详情",
+            "no-data-available": "无可用数据",
+            "click-to-show-all-users": "点击显示所有用户",
+            "click-to-highlight-only-this-user": "点击仅高亮此用户",
+            "users-accordeon": "用户 (显示 {{displayedUserCount}} 个活跃用户中的前 {{significantUserCount}} 个 / 总用户数 {{userCount}})",
+            "user-traffic-statistics": "用户流量统计",
+            "usage-by-period": "时段用量",
+            "7-days": "7 天",
+            "14-days": "14 天",
+            "30-days": "30 天",
+            "60-days": "60 天",
+            "90-days": "90 天",
+            "180-days": "180 天",
+            "365-days": "365 天",
+            "performance-line-1": "为提升性能，部分数据可能被隐藏。",
+            "performance-line-2": "请使用 Grafana 或任何其他相关工具查看所有数据。",
+            "total-traffic": "总流量",
+            "top-users": "活跃用户",
+            "stacked": "堆叠",
+            "grouped": "分组",
+            "filter-users": "筛选用户",
+            "bar-chart": "条形图",
+            "previous-day": "前一天",
+            "next-day": "后一天",
+            "hidden-users": "({{hiddenCount}} 个 <100 KB 的用户已隐藏)",
+            "total-traffic-prettybytestoanyutil": "总流量: {{totalTraffic}}",
+            "user": "用户",
+            "traffic": "流量",
+            "no-users-with-traffic-100-kb": "没有流量 ≥ 100 KB 的用户",
+            "users-hidden-with-less-than-100-kb": "{{usersCount}} 个流量小于 100 KB 的用户已隐藏 (总计 {{totalTraffic}})"
         }
     },
     "get-hwid-user-devices": {
         "feature": {
-            "no-devices-found": "No devices found",
-            "no-devices-match-your-search": "No devices match your search",
-            "platform": "Platform",
-            "unknown": "Unknown",
-            "model": "Model",
+            "no-devices-found": "未找到设备",
+            "no-devices-match-your-search": "没有符合您搜索条件的设备",
+            "platform": "平台",
+            "unknown": "未知",
+            "model": "型号",
             "user-agent": "User Agent",
-            "added": "Added",
-            "os-version": "OS Version",
-            "delete-device": "Delete Device",
-            "device": "Device",
-            "devices": "Devices",
-            "hwid-devices": "HWIDs and Devices",
-            "important-note": "Important note",
-            "important-note-line-1": "This feature is only available with the",
-            "important-note-line-2": ".env value.",
-            "important-note-line-3": "Not all client applications support this feature.",
-            "important-note-line-4": "If left empty, ",
-            "important-note-line-5": "will be used.",
-            "important-note-line-6": "Please check out the documentation for more information.",
-            "important-note-line-7": "Learn more.",
-            "loading-hwid-devices": "Loading HWIDs and Devices ...",
-            "search-by-hwid": "Search by HWID",
-            "enter-hwid-to-filter-devices": "Enter HWID to filter devices ..."
+            "added": "添加时间",
+            "os-version": "操作系统版本",
+            "delete-device": "删除设备",
+            "device": "设备",
+            "devices": "设备",
+            "hwid-devices": "HWID 和设备",
+            "important-note": "重要提示",
+            "important-note-line-1": "此功能仅在",
+            "important-note-line-2": ".env 值存在时可用。",
+            "important-note-line-3": "并非所有客户端应用程序都支持此功能。",
+            "important-note-line-4": "如果留空，",
+            "important-note-line-5": "将被使用。",
+            "important-note-line-6": "请查阅文档以获取更多信息。",
+            "important-note-line-7": "了解更多。",
+            "loading-hwid-devices": "正在加载 HWID 和设备...",
+            "search-by-hwid": "按 HWID 搜索",
+            "enter-hwid-to-filter-devices": "输入 HWID 以筛选设备..."
         }
     },
     "headers-manager": {
         "widget": {
-            "key": "Key",
-            "value": "Value",
-            "add-header": "Add header"
+            "key": "键",
+            "value": "值",
+            "add-header": "添加 header"
         }
     },
     "template-selector": {
-        "search-templates": "Search templates...",
-        "official-templates": "Official Templates",
-        "author-templates": "{{author}} Templates",
+        "search-templates": "搜索模板...",
+        "official-templates": "官方模板",
+        "author-templates": "{{author}} 模板",
         "modal": {
-            "cancel": "Cancel",
-            "load-template": "Load Template"
+            "cancel": "取消",
+            "load-template": "加载模板"
         },
-        "add-template": "Add template"
+        "add-template": "添加模板"
     },
     "use-download-template": {
-        "failed-to-load-template": "Failed to load template",
-        "template-loaded": "Template Loaded",
-        "template-name-has-been-loaded-into-the-editor": "{{name}} has been loaded into the editor",
-        "load-failed": "Load Failed",
-        "failed-to-load-template-please-try-again": "Failed to load template. Please try again.",
-        "select-template-to-load": "Select Template to Load"
+        "failed-to-load-template": "加载模板失败",
+        "template-loaded": "模板已加载",
+        "template-name-has-been-loaded-into-the-editor": "{{name}} 已加载到编辑器中",
+        "load-failed": "加载失败",
+        "failed-to-load-template-please-try-again": "加载模板失败，请重试。",
+        "select-template-to-load": "选择要加载的模板"
     }
 }
