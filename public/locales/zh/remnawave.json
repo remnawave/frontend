@@ -1,0 +1,1046 @@
+{
+    "constants": {
+        "dashboard": "Dashboard",
+        "api-tokens": "API Tokens",
+        "config": "Xray Config",
+        "home": "Home",
+        "hosts": "Hosts",
+        "inbounds": "Inbounds",
+        "nodes": "Nodes",
+        "nodes-bandwidth-table": "Bandwidth",
+        "nodes-statistics": "Statistics",
+        "users": "Users",
+        "overview": "Overview",
+        "management": "Management",
+        "statistics": "Statistics",
+        "subscription-settings": "Subscription Settings",
+        "utils": "Utilities",
+        "happ-routing-builder": "Happ Routing",
+        "templates": "Templates",
+        "subscription": "Subscription",
+        "subscription-page-builder": "Sub Page Builder"
+    },
+    "bandwidth-metrics": {
+        "current-year": "Current year",
+        "from-last-year": "vs last year",
+        "calendar-month": "Calendar month",
+        "from-last-month-0": "vs last month",
+        "last-30-days": "Last 30 days",
+        "from-last-month": "vs last month",
+        "last-7-days": "Last 7 days",
+        "from-last-week": "vs last week",
+        "today": "Today",
+        "from-yesterday": "vs yesterday"
+    },
+    "online-metrics": {
+        "never-online": "Never online",
+        "online-this-week": "Online this week",
+        "online-today": "Online today",
+        "online-now": "Online now"
+    },
+    "simple-metrics": {
+        "system-uptime": "System uptime",
+        "ram-usage": "RAM usage",
+        "total-traffic": "Total traffic"
+    },
+    "users-metrics": {
+        "disabled-users": "Disabled users",
+        "limited-users": "Limited users",
+        "expired-users": "Expired users",
+        "active-users": "Active users",
+        "total-users": "Total users"
+    },
+    "config-editor-actions": {
+        "feature": {
+            "save": "Save",
+            "format": "Format",
+            "copy-config": "Copy config",
+            "failed-to-save-invalid-json": "Failed to save, invalid JSON.",
+            "error": "Error",
+            "save-anyway": "Save anyway",
+            "save-anyway-description": "Are you sure you want to save invalid Xray config? This action\n                                    can lead to unexpected behavior. Continue only if you know what\n                                    you are doing.",
+            "cancel": "Cancel",
+            "save-anyway-title": "Confirm action",
+            "load-from-github": "Load from GitHub"
+        }
+    },
+    "use-bandwidth-table-columns": {
+        "traffic-limit": "Traffic limit",
+        "traffic": "Traffic",
+        "traffic-cycle": "Traffic cycle",
+        "node-name": "Node name"
+    },
+    "action-group": {
+        "feature": {
+            "new-user": "New user",
+            "reset-table": "Reset table",
+            "clear-filters": "Clear filters",
+            "update": "Update",
+            "bulk-actions": "Bulk Actions"
+        }
+    },
+    "use-table-columns": {
+        "username": "Username",
+        "status": "Status",
+        "last-connected-node": "Last connected node",
+        "expire-at": "Expires at",
+        "data-usage": "Data usage",
+        "sub-link": "Sub-link",
+        "description": "Description",
+        "traffic-reset": "Traffic reset",
+        "never": "Never",
+        "online-at": "Online at",
+        "last-ua": "Last UA",
+        "lifetime-used": "Lifetime Usage",
+        "sub-link-revoked-at": "Sub-link revoked at",
+        "created-at": "Created at"
+    },
+    "api-tokens-header-action-buttons": {
+        "feature": {
+            "create-new-api-token": "Create new API token"
+        }
+    },
+    "header-buttons": {
+        "feature": {
+            "logout": "Logout"
+        }
+    },
+    "delete-host": {
+        "feature": {
+            "delete-host": "Delete host"
+        }
+    },
+    "header-action-buttons": {
+        "feature": {
+            "create-new-host": "Create new host",
+            "update": "Update",
+            "all": "All"
+        }
+    },
+    "delete-node": {
+        "feature": {
+            "delete-node": "Delete node"
+        }
+    },
+    "nodes-header-action-buttons": {
+        "feature": {
+            "update": "Update",
+            "create-new-node": "Create new node",
+            "restart-all-nodes": "Restart all nodes"
+        }
+    },
+    "toggle-node-status-button": {
+        "feature": {
+            "disable": "Disable",
+            "enable": "Enable"
+        }
+    },
+    "api-token-card": {
+        "widget": {
+            "delete": "Delete",
+            "copy-token": "Copy token",
+            "copied": "Copied",
+            "apitoken-tokenname-copied-to-clipboard": "{{apiTokenName}} copied to clipboard"
+        }
+    },
+    "api-tokens-documentation": {
+        "widget": {
+            "open-swagger": "Open Swagger",
+            "open-scalar": "Open Scalar",
+            "doc-description-line-2": "Both provide comprehensive details about the available endpoints, request/response formats, and authentication methods.",
+            "doc-description-line-1": "Explore API documentation using either Scalar or Swagger UI.",
+            "api-documentation": "API Documentation"
+        }
+    },
+    "api-tokens-page-header": {
+        "widget": {
+            "list-of-all-api-tokens": "List of all API tokens"
+        }
+    },
+    "config-editor": {
+        "widget": {
+            "loading-editor": "Loading editor..."
+        }
+    },
+    "keypair": {
+        "widget": {
+            "public-key": "Public Key",
+            "private-key": "Private Key",
+            "generate-key-pair": "Generate Key Pair",
+            "both-keys": "Both keys"
+        }
+    },
+    "create-host-modal": {
+        "widget": {
+            "new-host": "New host"
+        }
+    },
+    "edit-host-modal": {
+        "widget": {
+            "edit-host": "Edit host"
+        }
+    },
+    "hosts-page-header": {
+        "widget": {
+            "list-of-all-hosts": "List of all hosts",
+            "about-hosts": "About hosts",
+            "header-description-line-1": "A host is an entry point for a user. A group of hosts forms a so-called \"subscription\".",
+            "header-description-line-2": "Each host can optionally refer to one server.",
+            "remark": "Remark",
+            "remark-description-line-1": "The name of the host. It can be anything but must remain unique within a single subscription.",
+            "remark-description-line-2": "The remark will be displayed in the list of available servers in the end client.",
+            "inbound": "Inbound",
+            "inbound-line-1": "It is necessary to select an inbound to which a host will be bound.",
+            "inbound-line-2": "The list of inbounds is derived from the \"Xray Config\".",
+            "address-and-port": "Address and port",
+            "address-and-port-line-1": "In most cases the IP/domain name should point to one of the connected nodes.",
+            "address-and-port-line-2": "The port must be open and accessible for incoming connections.",
+            "address-and-port-line-3": "Usually the port should match the inbound port from the Xray configuration.",
+            "advanced-settings": "\"Advanced Settings\" are additional parameters that can be used to further customize the host.",
+            "advanced-settings-2": "Anything specified in \"Advanced Settings\" will take a higher priority than what is specified in the Xray configuration."
+        }
+    },
+    "remark-info": {
+        "widget": {
+            "supports-templates": "Supports templates.",
+            "remark-description": "This is the name of the host that will be displayed in the dashboard."
+        }
+    },
+    "create-node-modal": {
+        "widget": {
+            "create-node": "Create node"
+        }
+    },
+    "edit-node-modal": {
+        "widget": {
+            "edit-node": "Edit node"
+        }
+    },
+    "error-accordeon": {
+        "widget": {
+            "last-error-message": "Last error message",
+            "important-note-description": "In order to connect node, you need to run Remnawave Node with the following",
+            "important-note-description-value": "value. Copy and paste it into the Remnanode ",
+            "important-note": "Important note"
+        }
+    },
+    "node-card": {
+        "widget": {
+            "copied": "Copied"
+        }
+    },
+    "node-status-badge": {
+        "widget": {
+            "connected": "connected",
+            "connecting": "connecting",
+            "disabled": "disabled",
+            "disconnected": "disconnected"
+        }
+    },
+    "nodes-page-header": {
+        "widget": {
+            "list-of-all-nodes": "List of all nodes"
+        }
+    },
+    "table": {
+        "widget": {
+            "only-active-nodes": "Only nodes with active traffic tracking are displayed",
+            "today": "Today"
+        }
+    },
+    "create-user-modal": {
+        "widget": {
+            "inbounds": "Inbounds",
+            "inbounds-description": "Specify which inbounds the user will have access to.",
+            "user-description": "User description",
+            "expiry-date": "Expiry Date",
+            "pick-value": "Pick value",
+            "traffic-reset-strategy": "Traffic reset strategy",
+            "traffic-reset-strategy-description": "How often the user's traffic usage statistics should be reset",
+            "data-limit": "Data Limit",
+            "data-limit-description": "Enter data limit in GB (0 for unlimited)",
+            "username-cannot-be-changed-later": "Username cannot be changed later",
+            "loading-user-creation": "Loading user creation modal ...",
+            "create-user": "Create user",
+            "telegram-id-of-a-user-in-telegram": "Numeric ID of the user in Telegram messenger",
+            "email-of-a-user": "Email address of the user",
+            "1-month": "+1 month",
+            "3-months": "+3 months",
+            "1-year": "+1 year",
+            "2099-year": "year 2099",
+            "hwid-user-limit-line-1": "This feature will only work if",
+            "hwid-user-limit-line-2": ".env variable is set to",
+            "hwid-user-limit-line-3": "Learn more.",
+            "disable-hwid-limit": "Disable HWID Limit",
+            "hwid-device-limit": "HWID Device Limit"
+        }
+    },
+    "login-form-feature": {
+        "username": "Username"
+    },
+    "home-page": {
+        "users": "Users"
+    },
+    "user-table": {
+        "widget": {
+            "list-of-all-users": "List of all users",
+            "error-loading-data": "Error loading data",
+            "table-title": "Users"
+        }
+    },
+    "view-user-modal": {
+        "widget": {
+            "connection-details": "Connection Details",
+            "last-traffic-reset-at": "Last traffic reset at",
+            "subscription-url": "Subscription URL",
+            "subscription-short-uuid": "Subscription short uuid",
+            "username-cannot-be-changed": "Username cannot be changed",
+            "user-details": "User details",
+            "loading-user-data": "Loading user data...",
+            "edit-user": "Edit user",
+            "never": "Never",
+            "show-qr": "Show QR",
+            "subscription-qr-code": "Subscription QR Code",
+            "close": "Close",
+            "edit-user-headline": "Edit user"
+        }
+    },
+    "base-api-token-form": {
+        "create": "Create",
+        "token-description": "Token description",
+        "token-name": "Token name"
+    },
+    "empty-page": {
+        "layout": {
+            "nothing-found": "Nothing found"
+        }
+    },
+    "base-host-form": {
+        "remark": "Remark",
+        "address": "Address",
+        "port": "Port",
+        "inbound": "Inbound",
+        "select-inbound": "Select inbound",
+        "advanced-options": "Advanced options",
+        "host": "Host",
+        "path": "Path",
+        "alpn-e-g-h2": "ALPN (e.g. h2)",
+        "fingerprint": "Fingerprint",
+        "fingerprint-e-g-chrome": "Fingerprint (e.g. chrome)",
+        "save": "Save",
+        "sni-e-g-example-com": "SNI (e.g. example.com)",
+        "host-e-g-example-com": "Host (e.g. example.com)",
+        "e-g-example-com": "e.g. example.com",
+        "e-g-443": "e.g. 443",
+        "path-e-g-ws": "path (e.g. /ws)",
+        "security-layer": "Security Layer",
+        "tls-transport-layer-security": "TLS (Transport Layer Security)",
+        "none": "None",
+        "inbounds-default": "Inbound's default",
+        "here-you-can-override-security-settings-from-xtls-config": "Here you can override security settings from XTLS Config.",
+        "extra-xhttp": "XHTTP Extra",
+        "xhttp-extra-params": "XHTTP extra parameters",
+        "extra-xhttp-description": "This setting will only work with the XHTTP protocol. An \"extra\" object JSON will be passed to the client. The JSON input is not validated, be sure to enter a valid configuration. You can use the button below to copy the basic extra settings and paste it into the JSON input.",
+        "invalid-json": "Invalid JSON",
+        "fill-with-sample-xhttp-extra-params": "Fill with sample XHTTP extra options",
+        "close": "Close",
+        "clone": "Clone",
+        "address-description-line-1": "Address must be the IP address or a domain name pointing to the connection destination.",
+        "address-description-line-2": "In most cases, it should points to the one of connected nodes.",
+        "port-description-line-1": "Connection port.",
+        "port-description-line-2": "In most cases, must match the port of selected inbound.",
+        "sni-description-line-1": "SNI stands for Server Name Indication.",
+        "sni-description-line-2": "If not specified, the value from config's inbound will be used."
+    },
+    "base-node-form": {
+        "country": "Country",
+        "select-country": "Select country",
+        "internal-name": "Internal name",
+        "address": "Address",
+        "e-g-example-com": "e.g. example.com",
+        "port": "Port",
+        "e-g-443": "e.g. 443",
+        "consumption-multiplier": "Consumption multiplier",
+        "traffic-tracking": "Track traffic usage",
+        "limit": "Limit",
+        "reset-day": "Reset day",
+        "e-g-1-31": "e.g. 1-31",
+        "notify-percent": "Notification %",
+        "e-g-50": "e.g. 50",
+        "select-active-inbounds-for-this-node": "Select active inbounds for this node",
+        "inbounds": "Inbounds",
+        "save": "Save"
+    },
+    "home": {
+        "page": {
+            "online-stats": "Online stats",
+            "system": "System",
+            "bandwidth": "Bandwidth",
+            "short-stats": "Short stats"
+        }
+    },
+    "login-form": {
+        "feature": {
+            "sign-in": "Sign in",
+            "your-password": "Your password",
+            "password": "Password",
+            "username": "Username"
+        }
+    },
+    "statistic-nodes": {
+        "component": {
+            "no-data-available-for-the-selected-period": "No data available for the selected period",
+            "click-to-see-all": "Click to see all",
+            "show-nodes": "Show Nodes",
+            "no-data-available": "No data available",
+            "click-to-show-all": "Click to show all",
+            "click-to-highlight-only-this-node": "Click to highlight only this node",
+            "usage-by-period": "Usage by Period",
+            "7-days": "7 days",
+            "14-days": "14 days",
+            "30-days": "30 days",
+            "60-days": "60 days",
+            "90-days": "90 days",
+            "180-days": "180 days",
+            "total-traffic": "Total Traffic",
+            "top-nodes": "Top Nodes",
+            "filter-nodes": "Filter Nodes",
+            "previous-day": "Previous day",
+            "next-day": "Next day",
+            "node": "Node",
+            "traffic": "Traffic"
+        }
+    },
+    "get-expiration-text": {
+        "util": {
+            "expires-in": "Expires in {{expiration}}",
+            "expired": "Expired {{expiration}}",
+            "unknown": "Unknown"
+        }
+    },
+    "reset-data": {
+        "constants": {
+            "reset-monthly": "Reset monthly",
+            "reset-weekly": "Reset weekly",
+            "reset-daily": "Reset daily",
+            "never-reset": "Never reset"
+        }
+    },
+    "data-usage": {
+        "column": {
+            "monthly": "Monthly",
+            "weekly": "Weekly",
+            "daily": "Daily"
+        }
+    },
+    "get-time-ago": {
+        "util": {
+            "invalid-date": "Invalid Date",
+            "not-connected-yet": "Not connected yet"
+        }
+    },
+    "toggle-user-status-button": {
+        "feature": {
+            "enable": "Enable user",
+            "disable": "Disable user"
+        }
+    },
+    "create-api-token-modal": {
+        "widget": {
+            "create-token": "Create token"
+        }
+    },
+    "bulk-user-actioins-modal": {
+        "widget": {
+            "delete-users": "Delete users",
+            "confirm-action-description": "Are you sure you want to delete selected users?",
+            "confirm-action-irreversible": "This action is irreversible.",
+            "cancel": "Cancel",
+            "user-deletion-description": "Delete all users with selected status. If you will delete users with \"Active\" status, you should restart all nodes to apply changes.",
+            "select-status": "Delete by status"
+        }
+    },
+    "register-form": {
+        "feature": {
+            "username": "Username",
+            "password": "Password",
+            "generate": "Generate & Copy",
+            "confirm-password": "Confirm password",
+            "sign-up": "Sign up",
+            "password-copied": "Password copied",
+            "password-copied-message": "Password copied to clipboard",
+            "password-copied-error": "Failed to copy password to clipboard",
+            "error": "Error",
+            "passwords-do-not-match": "Passwords do not match",
+            "password-too-short": "Minimum 24 characters",
+            "register-description": "Create a super-admin account to get started"
+        }
+    },
+    "xray-json-template-description": {
+        "widget": {
+            "importing-json-subscription": "Importing JSON subscription",
+            "description-line-1": "To use this subscription, just add",
+            "description-line-2": "at the end of your subscription link. Make sure you're using one of the supported apps listed in the table below. Otherwise, subscription will work as usual for requested client. (e.g. Base64, Mihomo)"
+        }
+    },
+    "happ-routing-builder": {
+        "widget": {
+            "copy-link": "Copy link",
+            "visual-editor": "Visual Editor",
+            "code-viewer": "Code Viewer",
+            "encode-happ-link": "Encode Happ Link",
+            "enter-the-configuration-name": "Enter a name for the configuration",
+            "name": "Name",
+            "russia": "Russia",
+            "proxy-all-traffic-except-rules": "Proxy all traffic except the rules",
+            "direct-all-traffic-except-rules": "Direct route all traffic except the rules",
+            "proxy-all-traffic-except-rules-or-direct-all-traffic-except-rules": "Proxy all traffic except the rules, or direct route all traffic except the rules",
+            "enable": "Enable",
+            "disable": "Disable",
+            "fake-dns-description": "Enable or disable FakeDNS. Recommended to activate when using DoU.",
+            "choose-doh-dns-over-https-or-dou-dns-over-udp": "Whether to use DoH (DNS over HTTPS) or DoU (DNS over UDP) for the remote DNS",
+            "remote-dns-type": "Remote DNS type",
+            "domain-name-for-doh": "Domain name for the DNS server (if DoH)",
+            "remote-dns-domain": "Remote DNS Domain",
+            "server-ip-for-doh-or-dou": "DNS Server IP address for DoH or DoU",
+            "remote-dns-ip": "Remote DNS IP address",
+            "domestic-dns-type-description": "Whether to use DoH (DNS over HTTPS) or DoU (DNS over UDP) for the domestic DNS",
+            "domestic-dns-type": "Domestic DNS Type",
+            "domain-name-for-doh-0": "Domain name (if DoH)",
+            "domestic-dns-domain": "Domestic DNS Domain",
+            "server-ip-for-doh-or-dou-0": "DNS Server IP address for DoH or DoU",
+            "domestic-dns-ip": "Domestic DNS IP",
+            "geoip-description": "Link to the geoip.dat file. Leave this field empty if you want to use the default file.",
+            "geoip-url": "GeoIP URL",
+            "geosite-description": "Link to the geosite.dat file. Leave this field empty if you want to use the default file.",
+            "geosite-url": "GeoSite URL",
+            "unix-timestamp-description": "Enter the Unix timestamp of the last update to the geoip and geosite files. Leave empty if not available.",
+            "last-updated": "Last updated",
+            "select-the-domain-processing-strategy": "Select the domain processing strategy.",
+            "domain-strategy": "Domain strategy",
+            "dns-hosts-description": "Enter the DNS hosts in this format: { \"example.com\": \"1.2.3.4\", \"test.org\": \"8.8.8.8\" }",
+            "dns-hosts": "DNS hosts",
+            "sites-that-will-use-direct-connection": "Domain names that shouldn't be proxied and use a direct connection.",
+            "direct-sites": "Direct sites",
+            "ip-addresses-that-will-use-direct-connection": "IP addresses that shouldn't be proxied and use a direct connection.",
+            "direct-ip": "Direct IP",
+            "sites-that-will-be-proxied": "Domain names that should be proxied.",
+            "proxy-sites": "Proxy sites",
+            "ip-addresses-that-will-be-proxied": "IP addresses that should be proxied.",
+            "proxy-ip": "Proxy IP",
+            "sites-that-will-be-blocked": "Domain names that should be blocked.",
+            "blocked-sites": "Blocked sites",
+            "ip-addresses-that-will-be-blocked": "IP addresses that should be blocked.",
+            "blocked-ips": "Blocked IPs",
+            "encoded-happ-link": "Encoded Happ Link",
+            "copied": "Copied",
+            "show-qr": "Show QR",
+            "close": "Close",
+            "invalid-base64-or-happ-link": "Invalid Base64 or Happ Link",
+            "import-configuration": "Import Configuration",
+            "paste-a-happ-routing-link-or-base64-encoded-config": "Paste a Happ routing link or Base64 encoded config",
+            "import-from-base64": "Import from Base64",
+            "paste-base64-or-happ-link-here": "Paste Base64 or Happ Link here",
+            "decode": "Decode",
+            "encoded-link": "Encoded Link",
+            "basic-configuration": "Basic Configuration",
+            "remote-dns-settings": "Remote DNS Settings",
+            "domestic-dns-settings": "Domestic DNS Settings",
+            "dns-hosts-0": "DNS Hosts",
+            "direct-routing": "Direct Routing",
+            "proxy-routing": "Proxy Routing",
+            "block-routing": "Block Routing",
+            "code-editor": "Code Editor"
+        },
+        "page": {
+            "component": {
+                "about-happ": "About Happ",
+                "happ-is-multiplatform-xray-client": "Happ is a multiplatform Xray client.",
+                "about-happ-description-line-2": "Here you can configure routing rules, which you can then encode and use as a Happ Link.",
+                "about-happ-description-line-3": "To use a given Happ routing configuration in your subscription links, open \"Subscription settings\" and change the \"Happ Routing\" section.",
+                "check-out-happ-website": "Check out Happ's website"
+            }
+        }
+    },
+    "remarks-manager": {
+        "widget": {
+            "enter-remark": "Enter remark",
+            "add-remark": "Add remark"
+        }
+    },
+    "subscription-settings": {
+        "widget": {
+            "validation-error": "Validation error",
+            "you-must-add-at-least-one-remark-with-text": "You must add at least one remark with text",
+            "subscription-info": "Subscription info",
+            "this-title-will-be-displayed-as-subscription-name": "This title will be displayed as the subscription name.",
+            "profile-title": "Profile title",
+            "enter-profile-title": "Enter profile title",
+            "auto-update-description": "Some client applications follow this interval to auto-update the subscription.",
+            "auto-update-interval-hours": "Auto-update interval (hours)",
+            "support-link-description": "Some clients will display this link in the subscription information. The link should lead the user to the support page.",
+            "support-link": "Support link",
+            "happ-settings": "Happ settings",
+            "happ-announce-description": "200 characters maximum. Will be displayed under the subscription name in Happ.",
+            "happ-announce": "Happ Announce",
+            "enter-happ-announce-max-200-characters": "Enter Happ Announce, max. 200 characters",
+            "happ-routing-description": "Happ routing is a feature that allows you to configure the routing rules that Xray-Core will use through the subscription link.",
+            "happ-routing-description-line-2": "A routing link for Happ can be obtained through Remnawave's Happ Routing Builder. The button below will redirect you to the aforementioned page.",
+            "configure-happ-routing": "Happ Routing Builder",
+            "happ-routing": "Happ routing",
+            "user-status-remarks": "User status remarks",
+            "user-status-remarks-description": "The following values will be displayed in the subscription page if the user is expired, limited or disabled.",
+            "user-status-remarks-description-line-2": "You can add multiple remarks for each status.",
+            "user-status-remarks-description-line-3": "Because expired, limited and disabled users are not able to connect to the server, they will see these remarks in the client instead of receiving an empty subscription.",
+            "expired-users-remarks": "Expired user remarks",
+            "limited-users-remarks": "Limited user remarks",
+            "disabled-users-remarks": "Disabled user remarks",
+            "update-settings": "Update settings",
+            "enabled": "Enabled",
+            "disabled": "Disabled",
+            "profile-webpage-url-description": "Used by some clients. Enabled by default, domain obtained from SUB_PUBLIC_DOMAIN .env variable.",
+            "profile-webpage-url": "Profile Webpage URL",
+            "serve-json-at-base-subscription": "Serve JSON at base subscription",
+            "serve-json-description": "Serve JSON configurations at the base subscription path (without having to append /json). If the client supports it, it will be served JSON, otherwise it will be served as usual.",
+            "add-username-to-base-subscription": "Add #username to base subscription",
+            "add-username-description": "Append #username to the base subscription path at the subscription route.",
+            "subscription-info-description": "Subscription links are supported by many client apps such as Happ, v2RayNG, Streisand, etc.",
+            "happ-description-line-1": "Here you can configure settings specific to Happ.",
+            "happ-description-line-2": "These settings will only apply to subscription links that are imported in Happ."
+        },
+        "page": {
+            "component": {
+                "what-is-subscription-settings": "What is subscription settings?",
+                "subscription-settings-description": "The settings below apply to subscription link details used and displayed by client apps such as Happ, v2RayNG, Streisand, etc.",
+                "subscription-settings-description-line-2": "It is recommended to change the values to match your specific needs and circumstances."
+            }
+        }
+    },
+    "inbounds-page-header": {
+        "widget": {
+            "list-of-all-inbounds": "List of all inbounds",
+            "inbounds": "Inbounds",
+            "important-note": "Important note",
+            "important-note-description-line-1": "All bulk operations require a complete restart of all nodes.",
+            "important-note-description-line-2": "Please avoid making too many requests in a short period of time.",
+            "important-note-description-line-3": "After saving changes it may take up to 30 seconds for them to be applied across all nodes."
+        }
+    },
+    "inbounds-card": {
+        "widget": {
+            "nodes": "Nodes",
+            "enabled-nodes": "Nodes with this inbound enabled",
+            "disabled-nodes": "Nodes with this inbound disabled",
+            "remove": "Remove",
+            "add": "Add",
+            "cancel": "Cancel",
+            "users": "Users",
+            "enabled-users": "Users with this inbound enabled",
+            "disabled-users": "Users with this inbound disabled",
+            "show-raw-inbound": "Show raw inbound",
+            "raw-inbound": "Raw inbound",
+            "are-you-sure": "Are you sure?",
+            "add-users-to-inbound-line-1": "Are you sure you want to add this inbound to users?",
+            "add-users-to-inbound-line-2": "This action will add the inbound to all users.",
+            "remove-users-from-inbound-line-1": "Are you sure you want to remove this inbound from users?",
+            "remove-users-from-inbound-line-2": "This action will remove the inbound from all users.",
+            "add-nodes-to-inbound-line-1": "Are you sure you want to add this inbound to nodes?",
+            "add-nodes-to-inbound-line-2": "This action will add the inbound to all nodes.",
+            "remove-nodes-from-inbound-line-1": "Are you sure you want to remove this inbound from nodes?",
+            "remove-nodes-from-inbound-line-2": "This action will remove the inbound from all nodes.",
+            "copied": "Copied",
+            "copy-uuid": "Copy UUID"
+        }
+    },
+    "multi-select-hosts": {
+        "feature": {
+            "delete-hosts": "Delete hosts",
+            "are-you-sure-you-want-to-delete-these-hosts": "Are you sure you want to delete these hosts?",
+            "delete": "Delete",
+            "cancel": "Cancel",
+            "set-inbound": "Set inbound",
+            "inbound": "Inbound",
+            "set-port": "Set Port",
+            "port": "Port",
+            "clear-selection": "Clear selection",
+            "select-all": "Select all",
+            "enable": "Enable",
+            "disable": "Disable",
+            "set-port-0": "Set port"
+        }
+    },
+    "bulk-user-actions-drawer": {
+        "widget": {
+            "bulk-user-actions": "Bulk User Actions",
+            "users": "users",
+            "update": "Update",
+            "actions": "Actions",
+            "danger": "Danger"
+        }
+    },
+    "delete-all-users-by-status": {
+        "feature": {
+            "processing": "Processing",
+            "deleting-users": "Deleting users...",
+            "success": "Success",
+            "deleted-data-affectedrows-users": "Deleted {{count}} users"
+        }
+    },
+    "bulk-all-user-actions-tabs": {
+        "update": {
+            "tab": {
+                "feature": {
+                    "update-fields-for-all-users": "Update fields for all users",
+                    "user-status": "User status",
+                    "status": "Status",
+                    "select-status": "Select status",
+                    "expire-date": "Expiry Date",
+                    "select-expiration-date": "Select expiration date",
+                    "close": "Close",
+                    "update-users": "Update Users"
+                }
+            }
+        },
+        "actions": {
+            "tab": {
+                "feature": {
+                    "confirm-action": "Confirm Action",
+                    "reset-traffic-confirmation": "Are you sure you want to reset the traffic for all selected users?",
+                    "reset": "Reset",
+                    "cancel": "Cancel",
+                    "perform-actions-on-all-users": "Perform actions on all users",
+                    "reset-traffic": "Reset Traffic",
+                    "reset-traffic-description": "Resets the traffic usage to zero for all selected users"
+                }
+            }
+        },
+        "danger": {
+            "tab": {
+                "feature": {
+                    "danger-zone": "Danger Zone",
+                    "danger-zone-description": "These actions are irreversible and can result in permanent data loss.",
+                    "delete-users-by-status": "Delete Users By Status",
+                    "delete": "Delete",
+                    "delete-users-by-status-description": "Permanently deletes all users with the selected status"
+                }
+            }
+        }
+    },
+    "bulk-all-user-actions-drawer": {
+        "widget": {
+            "bulk-all-user-actions": "Bulk All User Actions",
+            "all-users": "All users",
+            "update": "Update",
+            "actions": "Actions",
+            "danger": "Danger"
+        }
+    },
+    "bulk-user-actions": {
+        "actions": {
+            "tab": {
+                "feature": {
+                    "revoke-subscription": "Revoke Subscription",
+                    "revoke-confirmation-line-1": "Are you sure you want to revoke subscription for {{usersCount}} user(s)?",
+                    "revoke-confirmation-line-2": "This action cannot be undone.",
+                    "revoke": "Revoke",
+                    "cancel": "Cancel",
+                    "reset-traffic": "Reset Traffic",
+                    "reset-traffic-confirmation-line-1": "Are you sure you want to reset traffic for {{usersCount}} user(s)?",
+                    "reset-traffic-confirmation-line-2": "This will set their usage to zero.",
+                    "reset": "Reset",
+                    "change-active-inbounds": "Change Active Inbounds",
+                    "change": "Change",
+                    "no-inbounds-selected": "No inbounds selected",
+                    "please-select-at-least-one-inbound": "Please select at least one inbound",
+                    "perform-action-on-users": "Perform actions on {{usersCount}} selected users",
+                    "changes-the-active-inbounds-for-all-selected-users": "Changes the active inbounds for all selected users",
+                    "resets-the-traffic-usage-to-zero-for-all-selected-users": "Resets the traffic usage to zero for all selected users",
+                    "revokes-subscription-for-all-selected-users": "Revokes subscription for all selected users"
+                }
+            }
+        },
+        "danger": {
+            "tab": {
+                "feature": {
+                    "delete-users": "Delete Users",
+                    "delete-confirmation-line-1": "Are you sure you want to delete {{usersCount}} user(s)?",
+                    "delete-confirmation-line-2": "This action cannot be undone and all data will be permanently lost.",
+                    "delete": "Delete",
+                    "cancel": "Cancel",
+                    "danger-zone": "Danger Zone",
+                    "these-actions-are-irreversible-and-can-result-in-permanent-data-loss": "These actions are irreversible and can result in permanent data loss.",
+                    "permanently-deletes-all-selected-users-and-their-data": "Permanently deletes all selected users and their data"
+                }
+            }
+        },
+        "update": {
+            "tab": {
+                "feature": {
+                    "update-fields-counter": "Update fields for {{usersCount}} selected users",
+                    "user-status": "User status",
+                    "status": "Status",
+                    "select-status": "Select status",
+                    "expire-date": "Expiry Date",
+                    "select-expiration-date": "Select expiration date",
+                    "close": "Close",
+                    "update-users": "Update Users"
+                }
+            }
+        }
+    },
+    "users-table-selection": {
+        "feature": {
+            "row-s-selected": "row(s) selected",
+            "clear-selection": "Clear selection",
+            "select-all": "Select all",
+            "bulk-actions": "Bulk actions"
+        }
+    },
+    "get-user-subscription-links": {
+        "feature": {
+            "subscription-links": "Subscription links",
+            "loading-subscription-links": "Loading subscription links...",
+            "show-links": "Show links",
+            "no-available-hosts-found-for-this-user": "No available hosts found for this user"
+        }
+    },
+    "delete-user": {
+        "feature": {
+            "delete-user": "Delete user",
+            "are-you-sure": "Are you sure you want to delete the user? This action is irreversible.",
+            "delete": "Delete",
+            "cancel": "Cancel"
+        }
+    },
+    "user-usage-modal": {
+        "widget": {
+            "no-data-available-for-the-selected-period": "No data available for the selected period",
+            "no-data-available": "No data available",
+            "click-to-show-all": "Click to show all",
+            "click-to-highlight-only-this-node": "Click to highlight only this node",
+            "traffic-statistics": "Traffic statistics",
+            "usage-by-period": "Usage by period",
+            "7-days": "7 days",
+            "14-days": "14 days",
+            "30-days": "30 days",
+            "60-days": "60 days",
+            "90-days": "90 days",
+            "180-days": "180 days",
+            "365-days": "365 days",
+            "total-traffic": "Total traffic",
+            "top-nodes": "Top nodes",
+            "stacked": "Stacked",
+            "grouped": "Grouped",
+            "filter-nodes": "Filter nodes",
+            "bar-chart": "Bar chart",
+            "show-nodes": "Show nodes",
+            "click-to-see-all": "Click to see all"
+        }
+    },
+    "get-user-usage": {
+        "feature": {
+            "show-usage": "Show usage"
+        }
+    },
+    "detailed-user-info-drawer": {
+        "widget": {
+            "copied": "Copied",
+            "detailed-user-info": "Detailed User Info",
+            "copy": "Copy",
+            "loading-user-info": "Loading user info...",
+            "user-information": "User Information",
+            "uuid": "UUID",
+            "short-uuid": "Short UUID",
+            "username": "Username",
+            "email": "Email",
+            "telegram-id": "Telegram ID",
+            "description": "Description",
+            "traffic-information": "Traffic Information",
+            "used-traffic": "Traffic Usage",
+            "lifetime-used-traffic": "Lifetime Traffic Usage",
+            "traffic-limit": "Traffic Limit",
+            "traffic-limit-strategy": "Traffic Limit Strategy",
+            "last-traffic-reset": "Last Traffic Reset",
+            "subscription-information": "Subscription Information",
+            "subscription-uuid": "Subscription UUID",
+            "subscription-url": "Subscription URL",
+            "expires-at": "Expires At",
+            "last-opened-at": "Last Opened At",
+            "last-user-agent": "Last User Agent",
+            "revoked-at": "Revoked At",
+            "connection-information": "Connection Information",
+            "trojan-password": "Trojan Password",
+            "vless-uuid": "VLESS UUID",
+            "ss-password": "SS Password",
+            "last-online": "Last Online",
+            "last-connected-node": "Last Connected Node",
+            "active-inbounds": "Active Inbounds",
+            "timestamps": "Timestamps",
+            "created-at": "Created At",
+            "updated-at": "Updated At"
+        }
+    },
+    "subscription-page-builder-header": {
+        "widget": {
+            "load-default": "Load Default",
+            "export-config": "Export Config",
+            "upload-config": "Upload Config",
+            "subscription-page-builder": "Subscription Page Builder",
+            "how-to-use-it": "How to use it?",
+            "description-line-1": "You can use this builder to configure available clients and usage guides for Remnawave Subscription Pages.",
+            "description-line-2": "After creating your desired configuration, you can export and download it and mount the configuration file to your subscription-page container.",
+            "description-line-3": "Click \"Load Default\" to get the reference configuration from the GitHub repository.",
+            "learn-more": "Learn more"
+        }
+    },
+    "subscription-page-builder": {
+        "page": {
+            "component": {
+                "failed-to-parse-config": "Failed to parse config file. Check the file format.",
+                "failed-to-load-default-config-check-your-internet-connection": "Failed to load default config. Check your internet connection.",
+                "no-apps-configured-for-this-platform": "No apps configured for this platform",
+                "add-app": "Add app",
+                "select-an-app-from-the-sidebar-or-add-a-new-one": "Select an app from the sidebar or add a new one",
+                "validation-errors": "Validation errors",
+                "invalid-configuration": "Invalid configuration",
+                "the-configuration-did-not-pass-validation": "The configuration did not pass validation.",
+                "close": "Close"
+            }
+        }
+    },
+    "app-form": {
+        "component": {
+            "delete-app": "Delete App",
+            "app-id": "App ID",
+            "app-name": "App Name",
+            "url-scheme": "URL Scheme",
+            "featured-app": "Featured App",
+            "need-base64-encoding": "Need Base64 Encoding",
+            "installation-step": "Installation Step",
+            "description": "Description",
+            "buttons": "Buttons",
+            "additional-before-subscription-step": "Additional Before Subscription Step",
+            "remove-step": "Remove Step",
+            "add-step": "Add Step",
+            "title": "Title",
+            "add-subscription-step": "Add Subscription Step",
+            "additional-after-subscription-step": "Additional After Subscription Step",
+            "connect-and-use-step": "Connect and Use Step"
+        }
+    },
+    "button-fields": {
+        "button": "Button",
+        "add-button": "Add button",
+        "remove-button": "Remove button",
+        "button-link": "Button Link",
+        "button-text": "Button Text"
+    },
+    "subscription-tabs": {
+        "widget": {
+            "show-custom-remarks": "Show custom remarks",
+            "show-custom-remark-description-line-1": "Only for EXPIRED, LIMITED and DISABLED users.",
+            "show-custom-remark-description-line-2": "If this setting is disabled, EXPIRED, LIMITED and DISABLED users will receive an actual empty host list instead.",
+            "additional-response-headers": "Additional response headers",
+            "headers-that-will-be-sent-with-subscription-content": "Headers that will be sent with the subscription content.",
+            "randomize-hosts": "Randomize hosts",
+            "randomize-hosts-description": "Randomize hosts in subscription content"
+        }
+    },
+    "nodes-realtime-metrics": {
+        "widget": {
+            "total-upload": "Total upload",
+            "total-download": "Total download",
+            "average-bps": "Average BPS",
+            "active-nodes": "Active nodes",
+            "current-hour": "Current hour"
+        }
+    },
+    "node-users-usage-drawer": {
+        "widget": {
+            "no-data-available-for-the-selected-period": "No data available for the selected period",
+            "click-to-see-all-users": "Click to see all users",
+            "click-on-bars-to-view-details": "Click on bars to view details",
+            "no-data-available": "No data available",
+            "click-to-show-all-users": "Click to show all users",
+            "click-to-highlight-only-this-user": "Click to highlight only this user",
+            "users-accordeon": "Users (showing top {{displayedUserCount}} of {{significantUserCount}} active out of {{userCount}} total)",
+            "user-traffic-statistics": "User Traffic Statistics",
+            "usage-by-period": "Usage by period",
+            "7-days": "7 days",
+            "14-days": "14 days",
+            "30-days": "30 days",
+            "60-days": "60 days",
+            "90-days": "90 days",
+            "180-days": "180 days",
+            "365-days": "365 days",
+            "performance-line-1": "Some of the data might be hidden to improve performance.",
+            "performance-line-2": "Use Grafana or any other relevant tool to view all data.",
+            "total-traffic": "Total traffic",
+            "top-users": "Top users",
+            "stacked": "Stacked",
+            "grouped": "Grouped",
+            "filter-users": "Filter users",
+            "bar-chart": "Bar Chart",
+            "previous-day": "Previous day",
+            "next-day": "Next day",
+            "hidden-users": "({{hiddenCount}} users with <100 KB hidden)",
+            "total-traffic-prettybytestoanyutil": "Total traffic: {{totalTraffic}}",
+            "user": "User",
+            "traffic": "Traffic",
+            "no-users-with-traffic-100-kb": "No users with traffic ≥ 100 KB",
+            "users-hidden-with-less-than-100-kb": "{{usersCount}} users hidden with less than 100 KB ({{totalTraffic}} total)"
+        }
+    },
+    "get-hwid-user-devices": {
+        "feature": {
+            "no-devices-found": "No devices found",
+            "no-devices-match-your-search": "No devices match your search",
+            "platform": "Platform",
+            "unknown": "Unknown",
+            "model": "Model",
+            "user-agent": "User Agent",
+            "added": "Added",
+            "os-version": "OS Version",
+            "delete-device": "Delete Device",
+            "device": "Device",
+            "devices": "Devices",
+            "hwid-devices": "HWIDs and Devices",
+            "important-note": "Important note",
+            "important-note-line-1": "This feature is only available with the",
+            "important-note-line-2": ".env value.",
+            "important-note-line-3": "Not all client applications support this feature.",
+            "important-note-line-4": "If left empty, ",
+            "important-note-line-5": "will be used.",
+            "important-note-line-6": "Please check out the documentation for more information.",
+            "important-note-line-7": "Learn more.",
+            "loading-hwid-devices": "Loading HWIDs and Devices ...",
+            "search-by-hwid": "Search by HWID",
+            "enter-hwid-to-filter-devices": "Enter HWID to filter devices ..."
+        }
+    },
+    "headers-manager": {
+        "widget": {
+            "key": "Key",
+            "value": "Value",
+            "add-header": "Add header"
+        }
+    },
+    "template-selector": {
+        "search-templates": "Search templates...",
+        "official-templates": "Official Templates",
+        "author-templates": "{{author}} Templates",
+        "modal": {
+            "cancel": "Cancel",
+            "load-template": "Load Template"
+        },
+        "add-template": "Add template"
+    },
+    "use-download-template": {
+        "failed-to-load-template": "Failed to load template",
+        "template-loaded": "Template Loaded",
+        "template-name-has-been-loaded-into-the-editor": "{{name}} has been loaded into the editor",
+        "load-failed": "Load Failed",
+        "failed-to-load-template-please-try-again": "Failed to load template. Please try again.",
+        "select-template-to-load": "Select Template to Load"
+    }
+}
