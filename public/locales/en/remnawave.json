@@ -877,7 +877,9 @@
             "active-inbounds": "Active Inbounds",
             "timestamps": "Timestamps",
             "created-at": "Created At",
-            "updated-at": "Updated At"
+            "updated-at": "Updated At",
+            "tag": "Tag",
+            "first-connected-at": "First connected at"
         }
     },
     "subscription-page-builder-header": {

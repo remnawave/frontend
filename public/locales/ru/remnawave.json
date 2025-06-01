@@ -877,7 +877,9 @@
             "active-inbounds": "Активные инбаунды",
             "timestamps": "Временные метки",
             "created-at": "Дата создания",
-            "updated-at": "Дата обновления"
+            "updated-at": "Дата обновления",
+            "first-connected-at": "Первое подключение",
+            "tag": "Тэг"
         }
     },
     "subscription-page-builder-header": {
