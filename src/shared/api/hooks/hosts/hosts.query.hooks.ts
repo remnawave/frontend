@@ -1,6 +1,5 @@
 import { GetAllHostsCommand } from '@remnawave/backend-contract'
 import { createQueryKeys } from '@lukemorales/query-key-factory'
-import { keepPreviousData } from '@tanstack/react-query'
 import { notifications } from '@mantine/notifications'
 
 import { createGetQueryHook } from '../../tsq-helpers'
@@ -16,7 +15,6 @@ export const useGetHosts = createGetQueryHook({
     responseSchema: GetAllHostsCommand.ResponseSchema,
     getQueryKey: () => hostsQueryKeys.getAllHosts.queryKey,
     rQueryParams: {
-        placeholderData: keepPreviousData,
         refetchOnMount: true
     },
     errorHandler: (error) => {
