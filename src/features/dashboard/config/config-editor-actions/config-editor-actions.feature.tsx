@@ -8,7 +8,6 @@ import { modals } from '@mantine/modals'
 import consola from 'consola/browser'
 
 import { useDownloadTemplate } from '@shared/ui/load-templates/use-download-template'
-import { downloadableConfigTemplates } from '@shared/constants/templates'
 import { useUpdateConfig } from '@shared/api/hooks'
 
 import { Props } from './interfaces'
@@ -20,11 +19,7 @@ export function ConfigEditorActionsFeature(props: Props) {
     const { mutate: updateConfig, isPending: isUpdating } = useUpdateConfig()
     const clipboard = useClipboard({ timeout: 500 })
 
-    const { openDownloadModal } = useDownloadTemplate(
-        'XRAY_JSON',
-        editorRef,
-        downloadableConfigTemplates
-    )
+    const { openDownloadModal } = useDownloadTemplate('XRAY_JSON', editorRef, 'XRAY_CORE')
 
     const handleSave = () => {
         if (!editorRef.current) return

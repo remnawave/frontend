@@ -4,7 +4,6 @@ import { ActionIcon, Button, Group } from '@mantine/core'
 import { useTranslation } from 'react-i18next'
 import { useClipboard } from '@mantine/hooks'
 
-import { downloadableSubscriptionTemplates } from '@shared/constants/templates/template-list'
 import { useDownloadTemplate } from '@shared/ui/load-templates/use-download-template'
 import { useUpdateSubscriptionTemplate } from '@shared/api/hooks'
 
@@ -15,11 +14,7 @@ export function TemplateEditorActionsFeature(props: Props) {
     const { t } = useTranslation()
 
     const { mutate: updateConfig, isPending: isUpdating } = useUpdateSubscriptionTemplate()
-    const { openDownloadModal } = useDownloadTemplate(
-        templateType,
-        editorRef,
-        downloadableSubscriptionTemplates
-    )
+    const { openDownloadModal } = useDownloadTemplate(templateType, editorRef, 'SUBSCRIPTION')
 
     const clipboard = useClipboard({ timeout: 500 })
 

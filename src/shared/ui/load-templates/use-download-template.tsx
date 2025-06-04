@@ -3,18 +3,18 @@ import { notifications } from '@mantine/notifications'
 import { useTranslation } from 'react-i18next'
 import { modals } from '@mantine/modals'
 
-import { DownloadableSubscriptionTemplate } from '@shared/constants/templates/template-list'
+import { IDownloadableSubscriptionTemplate } from '@shared/constants/templates'
 
 import { TemplateDownloadModal } from './template-selector.modal'
 
 export const useDownloadTemplate = (
     templateType: TSubscriptionTemplateType,
     editorRef: React.RefObject<unknown>,
-    templates: DownloadableSubscriptionTemplate[]
+    editorType: 'SUBSCRIPTION' | 'XRAY_CORE'
 ) => {
     const { t } = useTranslation()
 
-    const loadTemplate = async (template: DownloadableSubscriptionTemplate) => {
+    const loadTemplate = async (template: IDownloadableSubscriptionTemplate) => {
         try {
             const response = await fetch(template.url)
 
@@ -56,12 +56,12 @@ export const useDownloadTemplate = (
             size: 'lg',
             children: (
                 <TemplateDownloadModal
+                    editorType={editorType}
                     onCancel={() => modals.close(modalId)}
                     onLoadTemplate={async (template) => {
                         await loadTemplate(template)
                         modals.close(modalId)
                     }}
-                    templates={templates}
                     templateType={templateType}
                 />
             )

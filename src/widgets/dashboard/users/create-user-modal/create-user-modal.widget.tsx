@@ -23,6 +23,7 @@ import {
     PiUserDuotone
 } from 'react-icons/pi'
 import { CreateUserCommand, USERS_STATUS } from '@remnawave/backend-contract'
+import { notifications } from '@mantine/notifications'
 import { useForm, zodResolver } from '@mantine/form'
 import { DateTimePicker } from '@mantine/dates'
 import { useTranslation } from 'react-i18next'
@@ -350,6 +351,20 @@ export const CreateUserModalWidget = () => {
                                 }
                                 highlightToday
                                 leftSection={<PiCalendarDuotone size="1rem" />}
+                                onChange={(date) => {
+                                    if (date === 'Invalid Date') {
+                                        notifications.show({
+                                            title: 'Invalid date',
+                                            message:
+                                                'Please select a valid date. Defaulting to 1 month from now.',
+                                            color: 'red'
+                                        })
+                                        const currentDate = form.values.expireAt || new Date()
+                                        const newDate = new Date(currentDate)
+                                        newDate.setMonth(newDate.getMonth() + 1)
+                                        form.setFieldValue('expireAt', newDate)
+                                    }
+                                }}
                             />
 
                             <Checkbox.Group
