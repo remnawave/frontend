@@ -877,7 +877,9 @@
             "active-inbounds": "اینباندهای فعال",
             "timestamps": "مهرهای زمانی",
             "created-at": "ایجاد شده در",
-            "updated-at": "به‌روزرسانی شده در"
+            "updated-at": "به‌روزرسانی شده در",
+            "first-connected-at": "First connected at",
+            "tag": "Tag"
         }
     },
     "subscription-page-builder-header": {

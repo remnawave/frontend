@@ -134,6 +134,11 @@ export const DetailedUserInfoDrawerWidget = () => {
                                 label={t('detailed-user-info-drawer.widget.description')}
                                 value={user.description || '—'}
                             />
+
+                            <CopyableFieldShared
+                                label={t('detailed-user-info-drawer.widget.tag')}
+                                value={user.tag || '—'}
+                            />
                         </Stack>
                     </Paper>
 
@@ -200,6 +205,7 @@ export const DetailedUserInfoDrawerWidget = () => {
                                 label={t('detailed-user-info-drawer.widget.expires-at')}
                                 value={formatDate(user.expireAt)}
                             />
+
                             <CopyableFieldShared
                                 label={t('detailed-user-info-drawer.widget.last-opened-at')}
                                 value={formatDate(user.subLastOpenedAt)}
@@ -237,6 +243,10 @@ export const DetailedUserInfoDrawerWidget = () => {
                             <CopyableFieldShared
                                 label={t('detailed-user-info-drawer.widget.ss-password')}
                                 value={user.ssPassword}
+                            />
+                            <CopyableFieldShared
+                                label={t('detailed-user-info-drawer.widget.first-connected-at')}
+                                value={formatDate(user.firstConnectedAt)}
                             />
                             <CopyableFieldShared
                                 label={t('detailed-user-info-drawer.widget.last-online')}

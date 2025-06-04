@@ -5,7 +5,8 @@ import { useEffect } from 'react'
 const data = [
     { label: 'English', emoji: '🇬🇧', value: 'en' },
     { label: 'Русский', emoji: '🇷🇺', value: 'ru' },
-    { label: 'فارسی', emoji: '🇮🇷', value: 'fa' }
+    { label: 'فارسی', emoji: '🇮🇷', value: 'fa' },
+    { label: '简体中文', emoji: '🇨🇳', value: 'zh' }
 ]
 
 export function LanguagePicker() {

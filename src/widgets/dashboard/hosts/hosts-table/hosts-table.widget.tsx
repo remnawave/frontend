@@ -1,7 +1,7 @@
 import { DragDropContext, Droppable, DropResult } from '@hello-pangea/dnd'
 import { useListState } from '@mantine/hooks'
 import { Container } from '@mantine/core'
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 
 import { HostCardWidget } from '@widgets/dashboard/hosts/host-card'
 import { EmptyPageLayout } from '@shared/ui/layouts/empty-page'
@@ -13,30 +13,38 @@ export function HostsTableWidget(props: IProps) {
     const { inbounds, hosts, selectedHosts, setSelectedHosts } = props
 
     const [state, handlers] = useListState(hosts || [])
+    const prevStateRef = useRef(state)
 
     const { mutate: reorderHosts } = useReorderHosts()
 
     useEffect(() => {
         ;(async () => {
-            if (!hosts || !state) {
+            if (!state || state.length === 0) {
                 return
             }
 
-            const updatedHosts = hosts.map((host) => ({
+            const updatedHosts = state.map((host, index) => ({
                 uuid: host.uuid,
-                viewPosition: state.findIndex((stateItem) => stateItem.uuid === host.uuid)
+                viewPosition: index
             }))
 
-            const hasOrderChanged = hosts?.some((host, index) => host.uuid !== state[index].uuid)
+            const hasOrderChanged = prevStateRef.current?.some(
+                (host, index) => host.uuid !== state[index].uuid
+            )
 
             if (hasOrderChanged) {
-                reorderHosts({ variables: { hosts: updatedHosts } })
+                reorderHosts({
+                    variables: { hosts: updatedHosts }
+                })
             }
+
+            prevStateRef.current = state
         })()
     }, [state])
 
     useEffect(() => {
         handlers.setState(hosts || [])
+        prevStateRef.current = hosts || []
     }, [hosts])
 
     if (!hosts || !inbounds) {

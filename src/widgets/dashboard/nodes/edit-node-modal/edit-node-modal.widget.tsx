@@ -1,8 +1,9 @@
 import { UpdateNodeCommand } from '@remnawave/backend-contract'
-import { useForm, zodResolver } from '@mantine/form'
+import { zodResolver } from 'mantine-form-zod-resolver'
 import { Group, Modal, Text } from '@mantine/core'
 import { useTranslation } from 'react-i18next'
 import { useEffect, useState } from 'react'
+import { useForm } from '@mantine/form'
 
 import {
     useNodesStoreActions,
@@ -20,6 +21,7 @@ import { BaseNodeForm } from '@shared/ui/forms/nodes/base-node-form/base-node-fo
 import { bytesToGbUtil, gbToBytesUtil } from '@shared/utils/bytes'
 import { queryClient } from '@shared/api'
 
+import { NodeXrayVersionBadgeWidget } from '../node-xray-version-badge/node-xray-version-badge.widget'
 import { NodeStatusBadgeWidget } from '../node-status-badge/node-status-badge.widget'
 
 export const EditNodeModalConnectorWidget = () => {
@@ -121,6 +123,9 @@ export const EditNodeModalConnectorWidget = () => {
                 <Group gap="xl" justify="space-between">
                     <Text fw={500}>{t('edit-node-modal.widget.edit-node')}</Text>
                     {node && <NodeStatusBadgeWidget fetchedNode={fetchedNode} node={node} />}
+                    {node?.isConnected && (
+                        <NodeXrayVersionBadgeWidget fetchedNode={fetchedNode} node={node} />
+                    )}
                 </Group>
             }
         >

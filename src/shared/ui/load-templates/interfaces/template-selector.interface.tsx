@@ -1,10 +1,14 @@
 import { TSubscriptionTemplateType } from '@remnawave/backend-contract'
 
-import { DownloadableSubscriptionTemplate } from '@shared/constants/templates/template-list'
+import {
+    IDownloadableSubscriptionTemplate,
+    IDownloadableSubscriptionTemplateList
+} from '@shared/constants/templates'
 
 export interface TemplateSelectorProps {
-    onSelect: (template: DownloadableSubscriptionTemplate) => void
-    selectedTemplate?: DownloadableSubscriptionTemplate
-    templates: DownloadableSubscriptionTemplate[]
+    editorType: 'SUBSCRIPTION' | 'XRAY_CORE'
+    onSelect: (template: IDownloadableSubscriptionTemplate) => void
+    selectedTemplate?: IDownloadableSubscriptionTemplate
+    templates: IDownloadableSubscriptionTemplateList['templates']
     templateType: TSubscriptionTemplateType
 }

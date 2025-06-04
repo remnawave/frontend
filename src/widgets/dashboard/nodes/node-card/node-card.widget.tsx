@@ -1,4 +1,4 @@
-import { PiArrowsCounterClockwise, PiCpu, PiDotsSixVertical, PiUsersDuotone } from 'react-icons/pi'
+import { PiArrowsCounterClockwise, PiDotsSixVertical, PiUsersDuotone } from 'react-icons/pi'
 import { Badge, Box, Grid, Group, Progress, Stack, Text } from '@mantine/core'
 import { notifications } from '@mantine/notifications'
 import ReactCountryFlag from 'react-country-flag'
@@ -12,6 +12,7 @@ import clsx from 'clsx'
 import { getNodeResetDaysUtil, getXrayUptimeUtil } from '@shared/utils/time-utils'
 import { useNodesStoreActions } from '@entities/dashboard/nodes'
 import { prettyBytesToAnyUtil } from '@shared/utils/bytes'
+import { XtlsLogo } from '@shared/ui/logos/xtls-logo'
 
 import { NodeStatusBadgeWidget } from '../node-status-badge'
 import classes from './NodeCard.module.css'
@@ -183,7 +184,7 @@ export function NodeCardWidget(props: IProps) {
                                         {node.xrayUptime !== '0' && node.isConnected && (
                                             <Badge
                                                 color="gray"
-                                                leftSection={<PiCpu size={18} />}
+                                                leftSection={<XtlsLogo height={18} width={18} />}
                                                 maw={'20ch'}
                                                 radius="md"
                                                 size="lg"
@@ -197,7 +198,7 @@ export function NodeCardWidget(props: IProps) {
                                         {(!node.isConnected || node.xrayUptime === '0') && (
                                             <Badge
                                                 color="red"
-                                                leftSection={<PiCpu size={18} />}
+                                                leftSection={<XtlsLogo height={18} width={18} />}
                                                 maw={'20ch'}
                                                 radius="md"
                                                 size="lg"

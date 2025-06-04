@@ -15,7 +15,7 @@ import { useTranslation } from 'react-i18next'
 import ColorHash from 'color-hash'
 import { useState } from 'react'
 
-import type { DownloadableSubscriptionTemplate } from '@shared/constants/templates/template-list'
+import { IDownloadableSubscriptionTemplate } from '@shared/constants/templates'
 
 import { TemplateSelectorProps } from './interfaces'
 
@@ -49,7 +49,7 @@ export const TemplateSelector = (props: TemplateSelectorProps) => {
             acc[template.author].push(template)
             return acc
         },
-        {} as Record<string, DownloadableSubscriptionTemplate[]>
+        {} as Record<string, IDownloadableSubscriptionTemplate[]>
     )
 
     return (
