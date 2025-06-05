@@ -5,7 +5,8 @@ import { useEffect, useState } from 'react'
 import type { IProps } from './interfaces/props.interface'
 
 export function CreateableTagInputShared(props: IProps) {
-    const { tags, value, onChange, ...restProps } = props
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { tags, value, onChange, defaultValue, ...restProps } = props
     const combobox = useCombobox({
         onDropdownClose: () => combobox.resetSelectedOption()
     })
@@ -105,7 +106,7 @@ export function CreateableTagInputShared(props: IProps) {
                         (value === null || value === undefined) && !search ? 'none' : 'all'
                     }
                     value={search}
-                ></InputBase>
+                />
             </Combobox.Target>
 
             <Combobox.Dropdown>
