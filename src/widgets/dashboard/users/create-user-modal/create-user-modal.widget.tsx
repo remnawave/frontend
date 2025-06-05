@@ -352,6 +352,11 @@ export const CreateUserModalWidget = () => {
                                 highlightToday
                                 leftSection={<PiCalendarDuotone size="1rem" />}
                                 onChange={(date) => {
+                                    const formInputProps = form.getInputProps('expireAt')
+                                    if (formInputProps.onChange) {
+                                        formInputProps.onChange(date)
+                                    }
+
                                     if (date === 'Invalid Date') {
                                         notifications.show({
                                             title: 'Invalid date',

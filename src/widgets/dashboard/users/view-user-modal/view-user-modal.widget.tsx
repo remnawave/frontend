@@ -32,13 +32,14 @@ import {
     PiTelegramLogoDuotone
 } from 'react-icons/pi'
 import { UpdateUserCommand } from '@remnawave/backend-contract'
+import { zodResolver } from 'mantine-form-zod-resolver'
 import { notifications } from '@mantine/notifications'
-import { useForm, zodResolver } from '@mantine/form'
 import { DateTimePicker } from '@mantine/dates'
 import { useTranslation } from 'react-i18next'
 import { TbDevices2 } from 'react-icons/tb'
 import { useEffect, useMemo } from 'react'
 import { modals } from '@mantine/modals'
+import { useForm } from '@mantine/form'
 import { renderSVG } from 'uqr'
 import dayjs from 'dayjs'
 
@@ -69,7 +70,6 @@ import { handleFormErrors } from '@shared/utils/misc'
 import { queryClient } from '@shared/api'
 
 import { InboundCheckboxCardWidget } from '../inbound-checkbox-card'
-import { IFormValues } from './interfaces'
 
 export const ViewUserModal = () => {
     const { t } = useTranslation()
@@ -80,7 +80,7 @@ export const ViewUserModal = () => {
 
     const { data: inbounds } = useGetInbounds()
 
-    const form = useForm<IFormValues>({
+    const form = useForm<UpdateUserCommand.Request>({
         name: 'edit-user-form',
         mode: 'uncontrolled',
         validate: zodResolver(
@@ -139,13 +139,10 @@ export const ViewUserModal = () => {
             const activeInboundUuids = user.activeUserInbounds.map((inbound) => inbound.uuid)
             form.setValues({
                 uuid: user.uuid,
-                username: user.username,
                 trafficLimitBytes: bytesToGbUtil(user.trafficLimitBytes),
                 trafficLimitStrategy: user.trafficLimitStrategy,
                 expireAt: user.expireAt ? new Date(user.expireAt) : new Date(),
                 activeUserInbounds: activeInboundUuids,
-                shortUuid: user.shortUuid,
-                trojanPassword: user.trojanPassword,
                 description: user.description ?? '',
                 telegramId: user.telegramId ?? undefined,
                 email: user.email ?? undefined,
@@ -213,7 +210,7 @@ export const ViewUserModal = () => {
             size="900px"
             title={t('view-user-modal.widget.edit-user-headline')}
         >
-            {isUserLoading || isTagsLoading ? (
+            {isUserLoading || isTagsLoading || !user ? (
                 <Stack>
                     <Group align="flex-start" gap="md" grow={false} wrap="wrap">
                         <Stack gap="md" style={{ flex: '1 1 350px' }}>
@@ -259,24 +256,21 @@ export const ViewUserModal = () => {
                         <Stack gap="md" style={{ flex: '1 1 350px' }}>
                             <Group gap="xs" justify="space-between" w="100%">
                                 <Text fw={500} key="view-user-details-text">
-                                    {form.getValues().username}
+                                    {user.username}
                                 </Text>
-                                {user && (
-                                    <UserStatusBadge
-                                        key="view-user-status-badge"
-                                        status={user.status}
-                                    />
-                                )}
+
+                                <UserStatusBadge
+                                    key="view-user-status-badge"
+                                    status={user.status}
+                                />
                             </Group>
 
                             <TextInput
-                                key={form.key('shortUuid')}
-                                label={t('view-user-modal.widget.subscription-short-uuid')}
-                                {...form.getInputProps('shortUuid')}
                                 disabled
+                                label={t('view-user-modal.widget.subscription-short-uuid')}
                                 leftSection={<PiLinkDuotone size="1rem" />}
                                 rightSection={
-                                    <CopyButton timeout={2000} value={form.getValues().shortUuid}>
+                                    <CopyButton timeout={2000} value={user.shortUuid}>
                                         {({ copied, copy }) => (
                                             <ActionIcon
                                                 color={copied ? 'teal' : 'gray'}
@@ -292,6 +286,7 @@ export const ViewUserModal = () => {
                                         )}
                                     </CopyButton>
                                 }
+                                value={user.shortUuid}
                             />
 
                             <TextInput
@@ -535,6 +530,11 @@ export const ViewUserModal = () => {
                                 }
                                 leftSection={<PiCalendarDuotone size="1rem" />}
                                 onChange={(date) => {
+                                    const formInputProps = form.getInputProps('expireAt')
+                                    if (formInputProps.onChange) {
+                                        formInputProps.onChange(date)
+                                    }
+
                                     if (date === 'Invalid Date') {
                                         notifications.show({
                                             title: 'Invalid date',
@@ -592,7 +592,7 @@ export const ViewUserModal = () => {
                                         color="cyan"
                                         onClick={() => {
                                             const subscriptionQrCode = renderSVG(
-                                                user?.subscriptionUrl ?? '',
+                                                user.subscriptionUrl,
                                                 {
                                                     whiteColor: '#161B22',
                                                     blackColor: '#3CC9DB'
