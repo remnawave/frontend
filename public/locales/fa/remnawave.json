@@ -61,7 +61,7 @@
             "error": "خطا",
             "failed-to-save-invalid-json": "به دلیل JSON نامتعتبر ذخیره نشد",
             "save-anyway": "ذخیره کانفیگ نامعتبر",
-            "load-from-github": "Load from GitHub"
+            "load-from-github": "بارگذاری از گیت‌هاب"
         }
     },
     "use-bandwidth-table-columns": {
@@ -302,7 +302,7 @@
             "close": "بستن",
             "show-qr": "نمایش QR",
             "subscription-qr-code": "اشتراک کد QR",
-            "edit-user-headline": "Edit user"
+            "edit-user-headline": "ویرایش کاربر"
         }
     },
     "base-api-token-form": {
@@ -878,8 +878,8 @@
             "timestamps": "مهرهای زمانی",
             "created-at": "ایجاد شده در",
             "updated-at": "به‌روزرسانی شده در",
-            "first-connected-at": "First connected at",
-            "tag": "Tag"
+            "first-connected-at": "اولین اتصال",
+            "tag": "تگ"
         }
     },
     "subscription-page-builder-header": {
