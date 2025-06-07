@@ -19,7 +19,7 @@ import classes from './NodeCard.module.css'
 import { IProps } from './interfaces'
 
 export function NodeCardWidget(props: IProps) {
-    const { t } = useTranslation()
+    const { t, i18n } = useTranslation()
 
     const { node, index } = props
 
@@ -191,7 +191,7 @@ export function NodeCardWidget(props: IProps) {
                                                 style={{ cursor: 'pointer' }}
                                                 variant="outline"
                                             >
-                                                {getXrayUptimeUtil(node.xrayUptime)}
+                                                {getXrayUptimeUtil(node.xrayUptime, i18n)}
                                             </Badge>
                                         )}
 

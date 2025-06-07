@@ -3,6 +3,9 @@ import duration from 'dayjs/plugin/duration'
 import timezone from 'dayjs/plugin/timezone'
 import utc from 'dayjs/plugin/utc'
 import dayjs from 'dayjs'
+import 'dayjs/locale/ru'
+import 'dayjs/locale/fa'
+import 'dayjs/locale/zh'
 
 dayjs.extend(relativeTime)
 dayjs.extend(utc)

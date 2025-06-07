@@ -10,7 +10,7 @@ import { getBandwidthMetrics, getOnlineMetrics, getSimpleMetrics, getUsersMetric
 import { IProps } from './interfaces'
 
 export const HomePage = (props: IProps) => {
-    const { t } = useTranslation()
+    const { t, i18n } = useTranslation()
 
     const { systemInfo, bandwidthStats } = props
 
@@ -19,7 +19,7 @@ export const HomePage = (props: IProps) => {
     }
 
     const bandwidthMetrics = getBandwidthMetrics(bandwidthStats, t)
-    const simpleMetrics = getSimpleMetrics(systemInfo, t)
+    const simpleMetrics = getSimpleMetrics(systemInfo, t, i18n)
     const usersMetrics = getUsersMetrics(systemInfo.users, t)
     const onlineMetrics = getOnlineMetrics(systemInfo.onlineStats, t)
 
