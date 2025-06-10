@@ -61,7 +61,8 @@
             "save-anyway-description": "Are you sure you want to save invalid Xray config? This action\n                                    can lead to unexpected behavior. Continue only if you know what\n                                    you are doing.",
             "cancel": "Cancel",
             "save-anyway-title": "Confirm action",
-            "load-from-github": "Load from GitHub"
+            "load-from-github": "Load from GitHub",
+            "tools": "Tools"
         }
     },
     "use-bandwidth-table-columns": {
@@ -272,7 +273,8 @@
             "hwid-user-limit-line-2": ".env variable is set to",
             "hwid-user-limit-line-3": "Learn more.",
             "disable-hwid-limit": "Disable HWID Limit",
-            "hwid-device-limit": "HWID Device Limit"
+            "hwid-device-limit": "HWID Device Limit",
+            "expire-at-description": "The date and time when the user's subscription will expire."
         }
     },
     "login-form-feature": {

@@ -61,7 +61,8 @@
             "save-anyway-description": "您确定要保存无效的 Xray 配置吗？ 此操作\n                                    可能导致意外行为。请仅在您清楚自己在做什么的情况下继续。",
             "cancel": "取消",
             "save-anyway-title": "确认操作",
-            "load-from-github": "从 GitHub 加载"
+            "load-from-github": "从 GitHub 加载",
+            "tools": "Tools"
         }
     },
     "use-bandwidth-table-columns": {
@@ -272,7 +273,8 @@
             "hwid-user-limit-line-2": ".env 变量设置为",
             "hwid-user-limit-line-3": "时有效。了解更多。",
             "disable-hwid-limit": "禁用 HWID 限制",
-            "hwid-device-limit": "HWID 设备限制"
+            "hwid-device-limit": "HWID 设备限制",
+            "expire-at-description": "The date and time when the user's subscription will expire."
         }
     },
     "login-form-feature": {

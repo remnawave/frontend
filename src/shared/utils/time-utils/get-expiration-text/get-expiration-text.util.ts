@@ -1,7 +1,5 @@
 import { i18n, TFunction } from 'i18next'
 import dayjs from 'dayjs'
-import 'dayjs/locale/ru'
-import 'dayjs/locale/fa'
 
 export function getExpirationTextUtil(
     expireAt: Date | null | string,

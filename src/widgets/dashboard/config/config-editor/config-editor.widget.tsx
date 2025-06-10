@@ -42,6 +42,32 @@ export function ConfigEditorWidget(props: Props) {
                 setResult={setResult}
             />
 
+            {result && (
+                <Paper
+                    mb="md"
+                    p="md"
+                    radius="sm"
+                    style={{
+                        backgroundColor: isConfigValid
+                            ? 'rgba(51, 171, 132, 0.1)'
+                            : 'rgba(241, 65, 65, 0.1)',
+                        border: `1px solid ${isConfigValid ? 'rgb(51, 171, 132)' : 'rgb(241, 65, 65)'}`
+                    }}
+                >
+                    <Code
+                        block
+                        color={isConfigValid ? 'teal' : 'red'}
+                        style={{
+                            backgroundColor: 'transparent',
+                            fontSize: '0.9rem',
+                            padding: 0
+                        }}
+                    >
+                        {result}
+                    </Code>
+                </Paper>
+            )}
+
             <Paper
                 mb="md"
                 p={0}
@@ -106,12 +132,6 @@ export function ConfigEditorWidget(props: Props) {
                     value={JSON.stringify(config, null, 2)}
                 />
             </Paper>
-
-            {result && (
-                <Code block p="md">
-                    {result}
-                </Code>
-            )}
         </Box>
     )
 }

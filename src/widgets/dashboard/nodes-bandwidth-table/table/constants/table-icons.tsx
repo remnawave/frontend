@@ -31,6 +31,7 @@ import {
 } from 'react-icons/pi'
 import { MRT_Icons } from 'mantine-react-table'
 import { IconBaseProps } from 'react-icons/lib'
+import { JSX } from 'react/jsx-runtime'
 
 export const customIcons: Partial<MRT_Icons> = {
     IconArrowAutofitContent: (props: IconBaseProps & JSX.IntrinsicAttributes) => (

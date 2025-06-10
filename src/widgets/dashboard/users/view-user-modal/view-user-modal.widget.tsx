@@ -470,64 +470,7 @@ export const ViewUserModal = () => {
                                 minDate={new Date()}
                                 valueFormat="MMMM D, YYYY - HH:mm"
                                 {...form.getInputProps('expireAt')}
-                                description={
-                                    <Group component="span" gap="xs" mb="xs" mt="xs">
-                                        <Button
-                                            component="span"
-                                            onClick={() => {
-                                                const currentDate =
-                                                    form.values.expireAt || new Date()
-                                                const newDate = new Date(currentDate)
-                                                newDate.setMonth(newDate.getMonth() + 1)
-                                                form.setFieldValue('expireAt', newDate)
-                                            }}
-                                            size="compact-xs"
-                                            variant="light"
-                                        >
-                                            {t('create-user-modal.widget.1-month')}
-                                        </Button>
-                                        <Button
-                                            component="span"
-                                            onClick={() => {
-                                                const currentDate =
-                                                    form.values.expireAt || new Date()
-                                                const newDate = new Date(currentDate)
-                                                newDate.setMonth(newDate.getMonth() + 3)
-                                                form.setFieldValue('expireAt', newDate)
-                                            }}
-                                            size="compact-xs"
-                                            variant="light"
-                                        >
-                                            {t('create-user-modal.widget.3-months')}
-                                        </Button>
-                                        <Button
-                                            component="span"
-                                            onClick={() => {
-                                                const currentDate =
-                                                    form.values.expireAt || new Date()
-                                                const newDate = new Date(currentDate)
-                                                newDate.setFullYear(newDate.getFullYear() + 1)
-                                                form.setFieldValue('expireAt', newDate)
-                                            }}
-                                            size="compact-xs"
-                                            variant="light"
-                                        >
-                                            {t('create-user-modal.widget.1-year')}
-                                        </Button>
-                                        <Button
-                                            component="span"
-                                            onClick={() => {
-                                                const newDate = new Date()
-                                                newDate.setFullYear(2099)
-                                                form.setFieldValue('expireAt', newDate)
-                                            }}
-                                            size="compact-xs"
-                                            variant="light"
-                                        >
-                                            {t('create-user-modal.widget.2099-year')}
-                                        </Button>
-                                    </Group>
-                                }
+                                description={t('create-user-modal.widget.expire-at-description')}
                                 leftSection={<PiCalendarDuotone size="1rem" />}
                                 onChange={(date) => {
                                     const formInputProps = form.getInputProps('expireAt')
@@ -548,6 +491,28 @@ export const ViewUserModal = () => {
                                         form.setFieldValue('expireAt', newDate)
                                     }
                                 }}
+                                presets={[
+                                    {
+                                        value: dayjs()
+                                            .add(1, 'month')
+                                            .format('YYYY-MM-DD HH:mm:ss'),
+                                        label: t('create-user-modal.widget.1-month')
+                                    },
+                                    {
+                                        value: dayjs()
+                                            .add(3, 'months')
+                                            .format('YYYY-MM-DD HH:mm:ss'),
+                                        label: t('create-user-modal.widget.3-months')
+                                    },
+                                    {
+                                        value: dayjs().add(1, 'year').format('YYYY-MM-DD HH:mm:ss'),
+                                        label: t('create-user-modal.widget.1-year')
+                                    },
+                                    {
+                                        value: dayjs().year(2099).format('YYYY-MM-DD HH:mm:ss'),
+                                        label: t('create-user-modal.widget.2099-year')
+                                    }
+                                ]}
                             />
 
                             <Checkbox.Group

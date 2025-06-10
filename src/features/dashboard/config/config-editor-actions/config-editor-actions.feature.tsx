@@ -1,4 +1,11 @@
-import { TbClipboardCopy, TbClipboardText, TbCut, TbDownload, TbSelectAll } from 'react-icons/tb'
+import {
+    TbClipboardCopy,
+    TbClipboardText,
+    TbCut,
+    TbDownload,
+    TbSelectAll,
+    TbTools
+} from 'react-icons/tb'
 import { PiCheckSquareOffset, PiFloppyDisk } from 'react-icons/pi'
 import { ActionIcon, Button, Group, Text } from '@mantine/core'
 import { notifications } from '@mantine/notifications'
@@ -8,6 +15,7 @@ import { modals } from '@mantine/modals'
 import consola from 'consola/browser'
 
 import { useDownloadTemplate } from '@shared/ui/load-templates/use-download-template'
+import { KeypairWidget } from '@widgets/dashboard/config/keypair'
 import { useUpdateConfig } from '@shared/api/hooks'
 
 import { Props } from './interfaces'
@@ -181,6 +189,20 @@ export function ConfigEditorActionsFeature(props: Props) {
                     }}
                 >
                     {t('config-editor-actions.feature.save-anyway')}
+                </Button>
+
+                <Button
+                    leftSection={<TbTools size={16} />}
+                    mb="md"
+                    onClick={() => {
+                        modals.open({
+                            title: t('config-editor-actions.feature.tools'),
+                            centered: true,
+                            children: <KeypairWidget />
+                        })
+                    }}
+                >
+                    {t('config-editor-actions.feature.tools')}
                 </Button>
             </Group>
             <Group>
