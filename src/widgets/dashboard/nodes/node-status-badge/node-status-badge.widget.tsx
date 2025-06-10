@@ -4,12 +4,12 @@ import {
     PiPulseDuotone,
     PiWarningCircle
 } from 'react-icons/pi'
+import { ActionIcon, Badge } from '@mantine/core'
 import { useTranslation } from 'react-i18next'
-import { Badge } from '@mantine/core'
 
 import { IProps } from './interface'
 
-export function NodeStatusBadgeWidget({ node, fetchedNode, ...rest }: IProps) {
+export function NodeStatusBadgeWidget({ node, fetchedNode, withText = true, ...rest }: IProps) {
     const { t } = useTranslation()
 
     let icon: React.ReactNode
@@ -36,6 +36,14 @@ export function NodeStatusBadgeWidget({ node, fetchedNode, ...rest }: IProps) {
         icon = <PiWarningCircle size={18} style={{ color: 'var(--mantine-color-red-3)' }} />
         color = 'red'
         status = t('node-status-badge.widget.disconnected')
+    }
+
+    if (!withText) {
+        return (
+            <ActionIcon color={color} radius="md" size="md" {...rest}>
+                {icon}
+            </ActionIcon>
+        )
     }
 
     return (

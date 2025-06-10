@@ -88,6 +88,7 @@ export function NodesTableWidget(props: IProps) {
                         size={'lg'}
                         {...provided.droppableProps}
                         ref={provided.innerRef}
+                        style={{ minHeight: '100px' }}
                     >
                         {state.map((item, index) => (
                             <NodeCardWidget index={index} key={item.uuid} node={item} />
