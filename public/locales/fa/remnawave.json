@@ -273,7 +273,8 @@
             "hwid-device-limit": "لیمیت دستگاه براساس HWID",
             "hwid-user-limit-line-1": "این ویژگی فقط در صورتی کار می‌‌کند که",
             "hwid-user-limit-line-2": "در فایل .env این مقدار را داشته باشد:",
-            "hwid-user-limit-line-3": "اطلاعات بیشتر"
+            "hwid-user-limit-line-3": "اطلاعات بیشتر",
+            "expire-at-description": "The date and time when the user's subscription will expire."
         }
     },
     "login-form-feature": {

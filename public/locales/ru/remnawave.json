@@ -273,7 +273,8 @@
             "hwid-device-limit": "Ограничение HWID устройств",
             "hwid-user-limit-line-1": "Эта функция доступна только если",
             "hwid-user-limit-line-2": ".env переменная установлена в ",
-            "hwid-user-limit-line-3": "Подробнее."
+            "hwid-user-limit-line-3": "Подробнее.",
+            "expire-at-description": "The date and time when the user's subscription will expire."
         }
     },
     "login-form-feature": {

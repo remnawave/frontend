@@ -273,7 +273,8 @@
             "hwid-user-limit-line-2": ".env 变量设置为",
             "hwid-user-limit-line-3": "时有效。了解更多。",
             "disable-hwid-limit": "禁用 HWID 限制",
-            "hwid-device-limit": "HWID 设备限制"
+            "hwid-device-limit": "HWID 设备限制",
+            "expire-at-description": "The date and time when the user's subscription will expire."
         }
     },
     "login-form-feature": {

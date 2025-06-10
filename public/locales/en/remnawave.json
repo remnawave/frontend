@@ -273,7 +273,8 @@
             "hwid-user-limit-line-2": ".env variable is set to",
             "hwid-user-limit-line-3": "Learn more.",
             "disable-hwid-limit": "Disable HWID Limit",
-            "hwid-device-limit": "HWID Device Limit"
+            "hwid-device-limit": "HWID Device Limit",
+            "expire-at-description": "The date and time when the user's subscription will expire."
         }
     },
     "login-form-feature": {
