@@ -196,7 +196,7 @@ export function ConfigEditorActionsFeature(props: Props) {
                     mb="md"
                     onClick={() => {
                         modals.open({
-                            title: 'Tools',
+                            title: t('config-editor-actions.feature.tools'),
                             centered: true,
                             children: <KeypairWidget />
                         })
