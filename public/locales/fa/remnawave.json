@@ -61,7 +61,8 @@
             "error": "خطا",
             "failed-to-save-invalid-json": "به دلیل JSON نامتعتبر ذخیره نشد",
             "save-anyway": "ذخیره کانفیگ نامعتبر",
-            "load-from-github": "بارگذاری از گیت‌هاب"
+            "load-from-github": "بارگذاری از گیت‌هاب",
+            "tools": "Tools"
         }
     },
     "use-bandwidth-table-columns": {

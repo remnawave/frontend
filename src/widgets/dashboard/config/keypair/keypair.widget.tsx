@@ -1,4 +1,4 @@
-import { ActionIcon, Button, Code, CopyButton, Group, Paper, Stack, Text } from '@mantine/core'
+import { ActionIcon, Button, Code, CopyButton, Divider, Group, Stack, Text } from '@mantine/core'
 import { PiCheck, PiCopy, PiKey } from 'react-icons/pi'
 import { generateKeyPair } from '@stablelib/x25519'
 import { encodeURLSafe } from '@stablelib/base64'
@@ -29,81 +29,119 @@ export const KeypairWidget = () => {
     }, [])
 
     return (
-        <Paper p="md" radius="xs">
+        <Stack gap="lg">
+            <Button
+                fullWidth
+                gradient={{ from: 'blue', to: 'cyan' }}
+                leftSection={<PiKey size="1.2rem" />}
+                onClick={generatePublicAndPrivate}
+                size="sm"
+                variant="outline"
+            >
+                {t('keypair.widget.generate-key-pair')}
+            </Button>
+
+            <Divider />
+
             <Stack gap="md">
-                <Button
-                    leftSection={<PiKey size="1.2rem" />}
-                    onClick={generatePublicAndPrivate}
-                    size="sm"
-                    variant="outline"
-                    w="320px"
-                >
-                    {t('keypair.widget.generate-key-pair')}
-                </Button>
-
-                <Group gap="xs">
-                    <Text c="dimmed" fw={500} size="sm" w="9ch">
-                        {t('keypair.widget.public-key')}
-                    </Text>
-                    <CopyButton value={keyPair.publicKey}>
-                        {({ copied, copy }) => (
-                            <ActionIcon
-                                color={copied ? 'teal' : 'gray'}
-                                ml="xs"
-                                onClick={copy}
-                                variant="subtle"
-                            >
-                                {copied ? <PiCheck size="1rem" /> : <PiCopy size="1rem" />}
-                            </ActionIcon>
-                        )}
-                    </CopyButton>
-                    <Code p="xs">{keyPair.publicKey}</Code>
-                </Group>
-
-                <Group gap="xs">
-                    <Text c="dimmed" fw={500} size="sm" w="9ch">
-                        {t('keypair.widget.private-key')}
-                    </Text>
-                    <CopyButton value={keyPair.privateKey}>
-                        {({ copied, copy }) => (
-                            <ActionIcon
-                                color={copied ? 'teal' : 'gray'}
-                                ml="xs"
-                                onClick={copy}
-                                variant="subtle"
-                            >
-                                {copied ? <PiCheck size="1rem" /> : <PiCopy size="1rem" />}
-                            </ActionIcon>
-                        )}
-                    </CopyButton>
-                    <Code p="xs">{keyPair.privateKey}</Code>
-                </Group>
-
-                <Group gap="xs">
-                    <Text c="dimmed" fw={500} size="sm" w="9ch">
-                        {t('keypair.widget.both-keys')}
-                    </Text>
-                    <CopyButton
-                        value={`"publicKey": "${keyPair.publicKey}",
-"privateKey": "${keyPair.privateKey}",`}
+                <Stack gap="xs">
+                    <Group align="center" justify="space-between">
+                        <Text fw={600} size="sm">
+                            {t('keypair.widget.public-key')}
+                        </Text>
+                        <CopyButton value={keyPair.publicKey}>
+                            {({ copied, copy }) => (
+                                <ActionIcon
+                                    color={copied ? 'teal' : 'blue'}
+                                    onClick={copy}
+                                    size="sm"
+                                    variant="light"
+                                >
+                                    {copied ? <PiCheck size="1rem" /> : <PiCopy size="1rem" />}
+                                </ActionIcon>
+                            )}
+                        </CopyButton>
+                    </Group>
+                    <Code
+                        block
+                        p="sm"
+                        style={{
+                            wordBreak: 'break-all',
+                            fontSize: '12px',
+                            lineHeight: 1.4
+                        }}
                     >
-                        {({ copied, copy }) => (
-                            <ActionIcon
-                                color={copied ? 'teal' : 'gray'}
-                                ml="xs"
-                                onClick={copy}
-                                variant="subtle"
-                            >
-                                {copied ? <PiCheck size="1rem" /> : <PiCopy size="1rem" />}
-                            </ActionIcon>
-                        )}
-                    </CopyButton>
-                    <Code component="pre">
+                        {keyPair.publicKey}
+                    </Code>
+                </Stack>
+
+                <Stack gap="xs">
+                    <Group align="center" justify="space-between">
+                        <Text fw={600} size="sm">
+                            {t('keypair.widget.private-key')}
+                        </Text>
+                        <CopyButton value={keyPair.privateKey}>
+                            {({ copied, copy }) => (
+                                <ActionIcon
+                                    color={copied ? 'teal' : 'blue'}
+                                    onClick={copy}
+                                    size="sm"
+                                    variant="light"
+                                >
+                                    {copied ? <PiCheck size="1rem" /> : <PiCopy size="1rem" />}
+                                </ActionIcon>
+                            )}
+                        </CopyButton>
+                    </Group>
+                    <Code
+                        block
+                        p="sm"
+                        style={{
+                            wordBreak: 'break-all',
+                            fontSize: '12px',
+                            lineHeight: 1.4
+                        }}
+                    >
+                        {keyPair.privateKey}
+                    </Code>
+                </Stack>
+
+                <Divider />
+
+                <Stack gap="xs">
+                    <Group align="center" justify="space-between">
+                        <Text fw={600} size="sm">
+                            {t('keypair.widget.both-keys')}
+                        </Text>
+                        <CopyButton
+                            value={`"publicKey": "${keyPair.publicKey}",
+"privateKey": "${keyPair.privateKey}",`}
+                        >
+                            {({ copied, copy }) => (
+                                <ActionIcon
+                                    color={copied ? 'teal' : 'blue'}
+                                    onClick={copy}
+                                    size="sm"
+                                    variant="light"
+                                >
+                                    {copied ? <PiCheck size="1rem" /> : <PiCopy size="1rem" />}
+                                </ActionIcon>
+                            )}
+                        </CopyButton>
+                    </Group>
+                    <Code
+                        block
+                        p="sm"
+                        style={{
+                            fontSize: '11px',
+                            lineHeight: 1.3
+                        }}
+                    >
                         {`"publicKey": "${keyPair.publicKey}",
 "privateKey": "${keyPair.privateKey}",`}
                     </Code>
-                </Group>
+                </Stack>
             </Stack>
-        </Paper>
+        </Stack>
     )
 }

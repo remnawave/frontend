@@ -1,8 +1,6 @@
 import { useTranslation } from 'react-i18next'
-import { Divider } from '@mantine/core'
 
 import { ConfigEditorWidget } from '@widgets/dashboard/config/config-editor/config-editor.widget'
-import { KeypairWidget } from '@widgets/dashboard/config/keypair'
 import { ROUTES } from '@shared/constants'
 import { PageHeader } from '@shared/ui'
 import { Page } from '@shared/ui/page'
@@ -24,8 +22,6 @@ export const ConfigPageComponent = (props: Props) => {
                 title={t('constants.config')}
             />
             <ConfigEditorWidget config={config} />
-            <Divider mb="md" mt="md" size="md" />
-            <KeypairWidget />
         </Page>
     )
 }

@@ -61,7 +61,8 @@
             "error": "Ошибка",
             "failed-to-save-invalid-json": "Не удалось сохранить, невалидный JSON.",
             "save-anyway": "Сохранить все равно",
-            "load-from-github": "Скачать с Github"
+            "load-from-github": "Скачать с Github",
+            "tools": "Инструменты"
         }
     },
     "use-bandwidth-table-columns": {
@@ -558,7 +559,7 @@
                 "happ-is-multiplatform-xray-client": "Happ — это многоплатформенный клиент XRay.",
                 "about-happ-description-line-2": "Здесь вы можете настроить правила маршрутизации, которые можно передать клиенту Happ.",
                 "about-happ-description-line-3": "Проверьте \"Настройки подписки\" и проверьте \"Happ Routing\".",
-                "check-out-happ-website": "Проверьте сайт Happ"
+                "check-out-happ-website": "Открыть сайт Happ"
             }
         }
     },

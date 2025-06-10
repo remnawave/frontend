@@ -61,7 +61,8 @@
             "save-anyway-description": "您确定要保存无效的 Xray 配置吗？ 此操作\n                                    可能导致意外行为。请仅在您清楚自己在做什么的情况下继续。",
             "cancel": "取消",
             "save-anyway-title": "确认操作",
-            "load-from-github": "从 GitHub 加载"
+            "load-from-github": "从 GitHub 加载",
+            "tools": "Tools"
         }
     },
     "use-bandwidth-table-columns": {

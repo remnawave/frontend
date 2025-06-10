@@ -61,7 +61,8 @@
             "save-anyway-description": "Are you sure you want to save invalid Xray config? This action\n                                    can lead to unexpected behavior. Continue only if you know what\n                                    you are doing.",
             "cancel": "Cancel",
             "save-anyway-title": "Confirm action",
-            "load-from-github": "Load from GitHub"
+            "load-from-github": "Load from GitHub",
+            "tools": "Tools"
         }
     },
     "use-bandwidth-table-columns": {
