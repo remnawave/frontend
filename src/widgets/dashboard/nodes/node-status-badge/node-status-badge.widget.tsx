@@ -18,7 +18,7 @@ export const NodeStatusBadgeWidget = memo(
 
         const { icon, color, status } = useMemo(() => {
             let icon: React.ReactNode
-            let color = ''
+            let color = 'red'
             let status = ''
 
             if (nodeData.isConnected) {
@@ -40,7 +40,7 @@ export const NodeStatusBadgeWidget = memo(
                 )
                 color = 'gray'
                 status = t('node-status-badge.widget.disabled')
-            } else if (!nodeData.isConnected) {
+            } else {
                 icon = <PiWarningCircle size={18} style={{ color: 'var(--mantine-color-red-3)' }} />
                 color = 'red'
                 status = t('node-status-badge.widget.disconnected')

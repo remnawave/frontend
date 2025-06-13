@@ -402,8 +402,6 @@ export const ViewUserModal = () => {
                                     {...form.getInputProps('hwidDeviceLimit')}
                                 />
 
-                                <Stack gap="xs"></Stack>
-
                                 <CreateableTagInputShared
                                     key={form.key('tag')}
                                     {...form.getInputProps('tag')}
