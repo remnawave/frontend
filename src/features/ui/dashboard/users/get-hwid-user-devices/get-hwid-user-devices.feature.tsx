@@ -73,12 +73,12 @@ export function GetHwidUserDevicesFeature(props: IProps) {
         })
     }
 
-    const filteredDevices = devices?.filter((device) =>
+    const filteredDevices = devices?.devices.filter((device) =>
         device.hwid.toLowerCase().includes(searchQuery.toLowerCase())
     )
 
     const renderDevices = () => {
-        if (!devices?.length) {
+        if (!devices?.total) {
             return (
                 <Center py="xl">
                     <Stack align="center" gap="xs">
@@ -306,8 +306,8 @@ export function GetHwidUserDevicesFeature(props: IProps) {
                     <Group>
                         <Text fw={500}>{t('get-hwid-user-devices.feature.hwid-devices')}</Text>
                         <Badge color="blue" size="sm">
-                            {devices?.length || 0}{' '}
-                            {devices?.length === 1
+                            {devices?.total || 0}{' '}
+                            {devices?.total === 1
                                 ? t('get-hwid-user-devices.feature.device')
                                 : t('get-hwid-user-devices.feature.devices')}
                         </Badge>

@@ -1,14 +1,12 @@
 import {
     ActionIcon,
     Button,
-    Checkbox,
     Collapse,
     Divider,
     Group,
     NumberInput,
     rem,
     Select,
-    SimpleGrid,
     Slider,
     Stack,
     Switch,
@@ -17,14 +15,14 @@ import {
 } from '@mantine/core'
 import { CreateNodeCommand, UpdateNodeCommand } from '@remnawave/backend-contract'
 import { PiCheckDuotone, PiFloppyDiskDuotone, PiXDuotone } from 'react-icons/pi'
+import { useCallback, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useMemo } from 'react'
 
 import { ToggleNodeStatusButtonFeature } from '@features/ui/dashboard/nodes/toggle-node-status-button'
 import { GetNodeUsersUsageFeature } from '@features/ui/dashboard/nodes/get-node-users-usage'
-import { InboundCheckboxCardWidget } from '@widgets/dashboard/users/inbound-checkbox-card'
 import { ModalAccordionWidget } from '@widgets/dashboard/nodes/modal-accordeon-widget'
 import { DeleteNodeFeature } from '@features/ui/dashboard/nodes/delete-node'
+import { InboundsListWidget } from '@widgets/dashboard/users/inbounds-list'
 
 import { COUNTRIES } from './constants'
 import { IProps } from './interfaces'
@@ -46,22 +44,37 @@ export const BaseNodeForm = <T extends CreateNodeCommand.Request | UpdateNodeCom
     } = props
 
     const { t } = useTranslation()
+    const [searchQuery, setSearchQuery] = useState('')
+
+    const excludedInbounds = form.getValues().excludedInbounds || []
+
+    const filteredInbounds = useMemo(() => {
+        const allInbounds = inbounds || []
+        if (!searchQuery.trim()) return allInbounds
+
+        const query = searchQuery.toLowerCase().trim()
+        return allInbounds.filter(
+            (inbound) =>
+                inbound.tag?.toLowerCase().includes(query) ||
+                inbound.type?.toLowerCase().includes(query) ||
+                inbound.port?.toString().includes(query)
+        )
+    }, [inbounds, searchQuery])
 
     const includedInbounds = useMemo(() => {
-        const excluded = form.getValues().excludedInbounds || []
-        const allInboundUuids = inbounds?.map((inbound) => inbound.uuid) || []
+        const allInboundUuids = filteredInbounds.map((inbound) => inbound.uuid)
+        return allInboundUuids.filter((uuid) => !excludedInbounds.includes(uuid))
+    }, [filteredInbounds, excludedInbounds])
 
-        const included = allInboundUuids.filter((uuid) => !excluded.includes(uuid))
-        return included
-    }, [inbounds, form.getValues().excludedInbounds])
-
-    const handleIncludedInboundsChange = (values: string[]) => {
-        const allInboundUuids = inbounds?.map((inbound) => inbound.uuid) || []
-        const newExcludedInbounds = allInboundUuids.filter((uuid) => !values.includes(uuid))
-
-        // @ts-expect-error unknown error
-        form.setFieldValue('excludedInbounds', newExcludedInbounds)
-    }
+    const handleIncludedInboundsChange = useCallback(
+        (values: string[]) => {
+            const allInboundUuids = filteredInbounds.map((inbound) => inbound.uuid)
+            const newExcludedInbounds = allInboundUuids.filter((uuid) => !values.includes(uuid))
+            // @ts-expect-error - Type issue with generic form field
+            form.setFieldValue('excludedInbounds', newExcludedInbounds)
+        },
+        [filteredInbounds, form]
+    )
 
     return (
         <form onSubmit={handleSubmit}>
@@ -232,27 +245,17 @@ export const BaseNodeForm = <T extends CreateNodeCommand.Request | UpdateNodeCom
                         />
                     </Stack>
 
-                    <Checkbox.Group
+                    <InboundsListWidget
+                        checkboxLogic="exclude"
                         description={t('base-node-form.select-active-inbounds-for-this-node')}
-                        key={form.key('excludedInbounds')}
+                        filteredInbounds={filteredInbounds}
+                        formKey={form.key('excludedInbounds')}
+                        handleIncludedInboundsChange={handleIncludedInboundsChange}
+                        includedInbounds={includedInbounds}
                         label={t('base-node-form.inbounds')}
-                        onChange={handleIncludedInboundsChange}
-                        value={includedInbounds}
-                    >
-                        <SimpleGrid
-                            cols={{
-                                base: 1,
-                                sm: 1,
-                                md: 2
-                            }}
-                            key="node-inbounds-grid"
-                            pt="md"
-                        >
-                            {inbounds?.map((inbound) => (
-                                <InboundCheckboxCardWidget inbound={inbound} key={inbound.uuid} />
-                            ))}
-                        </SimpleGrid>
-                    </Checkbox.Group>
+                        searchQuery={searchQuery}
+                        setSearchQuery={setSearchQuery}
+                    />
                 </Stack>
             </Group>
 

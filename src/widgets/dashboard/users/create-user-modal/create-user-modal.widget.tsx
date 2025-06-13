@@ -8,7 +8,6 @@ import {
     Modal,
     NumberInput,
     Select,
-    SimpleGrid,
     Stack,
     Text,
     Textarea,
@@ -25,10 +24,10 @@ import {
 import { CreateUserCommand, USERS_STATUS } from '@remnawave/backend-contract'
 import { notifications } from '@mantine/notifications'
 import { useForm, zodResolver } from '@mantine/form'
+import { useEffect, useMemo, useState } from 'react'
 import { DateTimePicker } from '@mantine/dates'
 import { useTranslation } from 'react-i18next'
 import { TbDevices2 } from 'react-icons/tb'
-import { useEffect } from 'react'
 import dayjs from 'dayjs'
 
 import {
@@ -42,10 +41,12 @@ import { resetDataStrategy } from '@shared/constants'
 import { handleFormErrors } from '@shared/utils/misc'
 import { gbToBytesUtil } from '@shared/utils/bytes'
 
-import { InboundCheckboxCardWidget } from '../inbound-checkbox-card'
+import { InboundsListWidget } from '../inbounds-list'
 
 export const CreateUserModalWidget = () => {
     const { t } = useTranslation()
+
+    const [searchQuery, setSearchQuery] = useState('')
 
     const isModalOpen = useUserCreationModalStoreIsModalOpen()
     const actions = useUserCreationModalStoreActions()
@@ -123,6 +124,19 @@ export const CreateUserModalWidget = () => {
             }
         )
     })
+
+    const filteredInbounds = useMemo(() => {
+        const allInbounds = inbounds || []
+        if (!searchQuery.trim()) return allInbounds
+
+        const query = searchQuery.toLowerCase().trim()
+        return allInbounds.filter(
+            (inbound) =>
+                inbound.tag?.toLowerCase().includes(query) ||
+                inbound.type?.toLowerCase().includes(query) ||
+                inbound.port?.toString().includes(query)
+        )
+    }, [inbounds, searchQuery])
 
     return (
         <Modal
@@ -214,6 +228,9 @@ export const CreateUserModalWidget = () => {
                                             />
                                         </>
                                     }
+                                    descriptionProps={{
+                                        component: 'div'
+                                    }}
                                     disabled={form.getValues().hwidDeviceLimit === 0}
                                     hideControls
                                     key={form.key('hwidDeviceLimit')}
@@ -337,29 +354,18 @@ export const CreateUserModalWidget = () => {
                                 ]}
                             />
 
-                            <Checkbox.Group
-                                key={form.key('activeUserInbounds')}
-                                {...form.getInputProps('activeUserInbounds')}
+                            <InboundsListWidget
+                                checkboxLogic="include"
                                 description={t('create-user-modal.widget.inbounds-description')}
+                                filteredInbounds={filteredInbounds}
+                                formKey={form.key('activeUserInbounds')}
+                                handleIncludedInboundsChange={() => {}}
+                                includedInbounds={inbounds?.map((inbound) => inbound.uuid) ?? []}
                                 label={t('create-user-modal.widget.inbounds')}
-                            >
-                                <SimpleGrid
-                                    cols={{
-                                        base: 1,
-                                        sm: 1,
-                                        md: 2
-                                    }}
-                                    key="create-user-inbounds-grid"
-                                    pt="md"
-                                >
-                                    {inbounds?.map((inbound) => (
-                                        <InboundCheckboxCardWidget
-                                            inbound={inbound}
-                                            key={inbound.uuid}
-                                        />
-                                    ))}
-                                </SimpleGrid>
-                            </Checkbox.Group>
+                                searchQuery={searchQuery}
+                                setSearchQuery={setSearchQuery}
+                                {...form.getInputProps('activeUserInbounds')}
+                            />
                         </Stack>
                     </Group>
 
