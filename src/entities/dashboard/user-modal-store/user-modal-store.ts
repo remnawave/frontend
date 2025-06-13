@@ -1,6 +1,8 @@
 import { devtools } from 'zustand/middleware'
 
 import { create } from '@shared/hocs/store-wrapper'
+import { QueryKeys } from '@shared/api/hooks'
+import { queryClient } from '@shared/api'
 
 import { IActions, IState } from './interfaces'
 
@@ -16,19 +18,29 @@ export const useUserModalStore = create<IActions & IState>()(
         (set, getState) => ({
             ...initialState,
             actions: {
-                changeModalState: (modalState: boolean) => {
+                changeModalState: async (modalState: boolean) => {
                     set(() => ({ isModalOpen: modalState }))
                     if (!modalState) {
+                        await queryClient.refetchQueries({
+                            queryKey: QueryKeys.users.getAllUsers._def
+                        })
+                        await queryClient.refetchQueries({ queryKey: QueryKeys.system._def })
                         set(() => ({
                             isModalOpen: false
                         }))
                     }
                 },
-                clearModalState: () => {
+                clearModalState: async () => {
                     set(() => ({
                         isModalOpen: false,
                         userUuid: null
                     }))
+
+                    await queryClient.refetchQueries({
+                        queryKey: QueryKeys.users.getAllUsers._def
+                    })
+                    await queryClient.refetchQueries({ queryKey: QueryKeys.system._def })
+
                     getState().actions.resetState()
                 },
                 changeDetailedUserInfoDrawerState: (detailedUserInfoDrawerState: boolean) => {

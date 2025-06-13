@@ -1,10 +1,11 @@
 import { Badge, Group } from '@mantine/core'
+import { memo } from 'react'
 
 import { XtlsLogo } from '@shared/ui/logos/xtls-logo'
 
 import { IProps } from './interface'
 
-export function NodeXrayVersionBadgeWidget({ node, fetchedNode, ...rest }: IProps) {
+export const NodeXrayVersionBadgeWidget = memo(({ node, fetchedNode, ...rest }: IProps) => {
     const nodeData = fetchedNode || node
 
     return (
@@ -19,4 +20,4 @@ export function NodeXrayVersionBadgeWidget({ node, fetchedNode, ...rest }: IProp
             </Badge>
         </Group>
     )
-}
+})

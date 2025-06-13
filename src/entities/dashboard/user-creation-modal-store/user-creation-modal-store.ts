@@ -1,6 +1,8 @@
 import { devtools } from 'zustand/middleware'
 
 import { create } from '@shared/hocs/store-wrapper'
+import { QueryKeys } from '@shared/api/hooks'
+import { queryClient } from '@shared/api'
 
 import { IActions, IState } from './interfaces'
 
@@ -24,6 +26,11 @@ export const useUserCreationModalStore = create<IActions & IState>()(
                     return initialState
                 },
                 resetState: async (): Promise<void> => {
+                    await queryClient.refetchQueries({
+                        queryKey: QueryKeys.users.getAllUsers._def
+                    })
+                    await queryClient.refetchQueries({ queryKey: QueryKeys.system._def })
+
                     set({ ...initialState })
                 }
             }

@@ -1,6 +1,6 @@
 import { DragDropContext, Droppable, DropResult } from '@hello-pangea/dnd'
+import { memo, useCallback, useEffect, useState } from 'react'
 import { useListState } from '@mantine/hooks'
-import { useEffect, useState } from 'react'
 import { Container } from '@mantine/core'
 
 import { nodesQueryKeys, useGetNodes, useReorderNodes } from '@shared/api/hooks'
@@ -11,7 +11,7 @@ import { queryClient } from '@shared/api'
 import { NodeCardWidget } from '../node-card'
 import { IProps } from './interfaces'
 
-export function NodesTableWidget(props: IProps) {
+export const NodesTableWidget = memo((props: IProps) => {
     const { nodes } = props
     const [state, handlers] = useListState(nodes || [])
     const [isPollingEnabled, setIsPollingEnabled] = useState(true)
@@ -61,22 +61,27 @@ export function NodesTableWidget(props: IProps) {
         handlers.setState(nodes || [])
     }, [nodes])
 
+    const handleDragEnd = useCallback(
+        async (result: DropResult) => {
+            const { destination, source } = result
+            if (!destination) return
+
+            handlers.reorder({ from: source.index, to: destination.index })
+            setIsPollingEnabled(true)
+        },
+        [handlers]
+    )
+
+    const handleDragStart = useCallback(() => {
+        setIsPollingEnabled(false)
+    }, [])
+
     if (!nodes) {
         return null
     }
 
     if (nodes.length === 0) {
         return <EmptyPageLayout />
-    }
-
-    const handleDragEnd = async (result: DropResult) => {
-        const { destination, source } = result
-        handlers.reorder({ from: source.index, to: destination?.index || 0 })
-        setIsPollingEnabled(true)
-    }
-
-    const handleDragStart = () => {
-        setIsPollingEnabled(false)
     }
 
     return (
@@ -99,4 +104,4 @@ export function NodesTableWidget(props: IProps) {
             </Droppable>
         </DragDropContext>
     )
-}
+})

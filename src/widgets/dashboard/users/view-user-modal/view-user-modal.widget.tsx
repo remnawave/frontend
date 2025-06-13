@@ -12,7 +12,6 @@ import {
     NumberInput,
     Progress,
     Select,
-    SimpleGrid,
     Skeleton,
     Stack,
     Text,
@@ -34,10 +33,10 @@ import {
 import { UpdateUserCommand } from '@remnawave/backend-contract'
 import { zodResolver } from 'mantine-form-zod-resolver'
 import { notifications } from '@mantine/notifications'
+import { useEffect, useMemo, useState } from 'react'
 import { DateTimePicker } from '@mantine/dates'
 import { useTranslation } from 'react-i18next'
 import { TbDevices2 } from 'react-icons/tb'
-import { useEffect, useMemo } from 'react'
 import { modals } from '@mantine/modals'
 import { useForm } from '@mantine/form'
 import { renderSVG } from 'uqr'
@@ -69,10 +68,12 @@ import { resetDataStrategy } from '@shared/constants'
 import { handleFormErrors } from '@shared/utils/misc'
 import { queryClient } from '@shared/api'
 
-import { InboundCheckboxCardWidget } from '../inbound-checkbox-card'
+import { InboundsListWidget } from '../inbounds-list'
 
 export const ViewUserModal = () => {
     const { t } = useTranslation()
+
+    const [searchQuery, setSearchQuery] = useState('')
 
     const isViewUserModalOpen = useUserModalStoreIsModalOpen()
     const actions = useUserModalStoreActions()
@@ -200,6 +201,19 @@ export const ViewUserModal = () => {
         () => user?.subscriptionUrl || '',
         [user?.subscriptionUrl]
     )
+
+    const filteredInbounds = useMemo(() => {
+        const allInbounds = inbounds || []
+        if (!searchQuery.trim()) return allInbounds
+
+        const query = searchQuery.toLowerCase().trim()
+        return allInbounds.filter(
+            (inbound) =>
+                inbound.tag?.toLowerCase().includes(query) ||
+                inbound.type?.toLowerCase().includes(query) ||
+                inbound.port?.toString().includes(query)
+        )
+    }, [inbounds, searchQuery])
 
     return (
         <Modal
@@ -341,7 +355,7 @@ export const ViewUserModal = () => {
                                     allowNegative={false}
                                     description={
                                         <>
-                                            <Text c="dimmed" component="span" size="0.75rem">
+                                            <Text c="dimmed" size="0.75rem">
                                                 {t(
                                                     'create-user-modal.widget.hwid-user-limit-line-1'
                                                 )}{' '}
@@ -376,6 +390,9 @@ export const ViewUserModal = () => {
                                             />
                                         </>
                                     }
+                                    descriptionProps={{
+                                        component: 'div'
+                                    }}
                                     disabled={form.getValues().hwidDeviceLimit === 0}
                                     hideControls
                                     key={form.key('hwidDeviceLimit')}
@@ -384,6 +401,8 @@ export const ViewUserModal = () => {
                                     placeholder="HWID_FALLBACK_DEVICE_LIMIT in use"
                                     {...form.getInputProps('hwidDeviceLimit')}
                                 />
+
+                                <Stack gap="xs"></Stack>
 
                                 <CreateableTagInputShared
                                     key={form.key('tag')}
@@ -515,29 +534,18 @@ export const ViewUserModal = () => {
                                 ]}
                             />
 
-                            <Checkbox.Group
-                                key={form.key('activeUserInbounds')}
-                                {...form.getInputProps('activeUserInbounds')}
+                            <InboundsListWidget
+                                checkboxLogic="include"
                                 description={t('create-user-modal.widget.inbounds-description')}
+                                filteredInbounds={filteredInbounds}
+                                formKey={form.key('activeUserInbounds')}
+                                handleIncludedInboundsChange={() => {}}
+                                includedInbounds={inbounds?.map((inbound) => inbound.uuid) ?? []}
                                 label={t('create-user-modal.widget.inbounds')}
-                            >
-                                <SimpleGrid
-                                    cols={{
-                                        base: 1,
-                                        sm: 1,
-                                        md: 2
-                                    }}
-                                    key={'view-user-inbounds-grid'}
-                                    pt="md"
-                                >
-                                    {inbounds?.map((inbound) => (
-                                        <InboundCheckboxCardWidget
-                                            inbound={inbound}
-                                            key={inbound.uuid}
-                                        />
-                                    ))}
-                                </SimpleGrid>
-                            </Checkbox.Group>
+                                searchQuery={searchQuery}
+                                setSearchQuery={setSearchQuery}
+                                {...form.getInputProps('activeUserInbounds')}
+                            />
                         </Stack>
                     </Group>
 

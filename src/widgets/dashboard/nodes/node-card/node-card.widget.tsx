@@ -6,11 +6,11 @@ import {
 } from 'react-icons/pi'
 import { Badge, Box, Flex, Grid, Progress, Text } from '@mantine/core'
 import { notifications } from '@mantine/notifications'
+import { memo, useCallback, useMemo } from 'react'
 import ReactCountryFlag from 'react-country-flag'
 import { useTranslation } from 'react-i18next'
 import { useClipboard } from '@mantine/hooks'
 import { Draggable } from '@hello-pangea/dnd'
-import { useState } from 'react'
 import clsx from 'clsx'
 
 import { getNodeResetDaysUtil, getXrayUptimeUtil } from '@shared/utils/time-utils'
@@ -22,64 +22,69 @@ import { NodeStatusBadgeWidget } from '../node-status-badge'
 import classes from './NodeCard.module.css'
 import { IProps } from './interfaces'
 
-export function NodeCardWidget(props: IProps) {
+export const NodeCardWidget = memo((props: IProps) => {
     const { t, i18n } = useTranslation()
     const { node, index } = props
-    const [isHovered, setIsHovered] = useState(false)
     const actions = useNodesStoreActions()
     const clipboard = useClipboard({ timeout: 500 })
 
-    let maxData = '∞'
-    let percentage = 0
-    const prettyUsedData = prettyBytesToAnyUtil(node.trafficUsedBytes || 0) || '0 B'
+    const trafficData = useMemo(() => {
+        let maxData = '∞'
+        let percentage = 0
+        const prettyUsedData = prettyBytesToAnyUtil(node.trafficUsedBytes || 0) || '0 B'
 
-    if (node.isTrafficTrackingActive) {
-        maxData = prettyBytesToAnyUtil(node.trafficLimitBytes || 0) || '∞'
-        if (node.trafficLimitBytes === 0) {
-            percentage = 100
-        } else {
-            percentage = Math.floor(
-                ((node.trafficUsedBytes ?? 0) * 100) / (node.trafficLimitBytes ?? 0)
-            )
+        if (node.isTrafficTrackingActive) {
+            maxData = prettyBytesToAnyUtil(node.trafficLimitBytes || 0) || '∞'
+            if (node.trafficLimitBytes === 0) {
+                percentage = 100
+            } else {
+                percentage = Math.floor(
+                    ((node.trafficUsedBytes ?? 0) * 100) / (node.trafficLimitBytes ?? 0)
+                )
+            }
         }
-    }
 
-    const handleCopy = (e: React.MouseEvent) => {
-        e.stopPropagation()
-        clipboard.copy(`${node.address}`)
-        notifications.show({
-            message: `${node.address}`,
-            title: t('node-card.widget.copied'),
-            color: 'teal'
-        })
-    }
+        return { maxData, percentage, prettyUsedData }
+    }, [node.trafficUsedBytes, node.trafficLimitBytes, node.isTrafficTrackingActive])
 
-    const handleViewNode = () => {
+    const isOnline = useMemo(() => {
+        return node.isConnected && node.xrayUptime !== '0'
+    }, [node.isConnected, node.xrayUptime])
+
+    const getProgressColor = useCallback(() => {
+        if (trafficData.percentage > 95) return 'red.6'
+        if (trafficData.percentage > 80) return 'yellow.6'
+        return 'teal.6'
+    }, [trafficData.percentage])
+
+    const handleCopy = useCallback(
+        (e: React.MouseEvent) => {
+            e.stopPropagation()
+            clipboard.copy(`${node.address}`)
+            notifications.show({
+                message: `${node.address}`,
+                title: t('node-card.widget.copied'),
+                color: 'teal'
+            })
+        },
+        [clipboard, node.address, t]
+    )
+
+    const handleViewNode = useCallback(() => {
         actions.setNode(node)
         actions.toggleEditModal(true)
-    }
-
-    const isOnline = node.isConnected && node.xrayUptime !== '0'
-
-    const getProgressColor = () => {
-        if (percentage > 95) return 'red.6'
-        if (percentage > 80) return 'yellow.6'
-        return 'teal.6'
-    }
+    }, [actions, node])
 
     return (
         <Draggable draggableId={node.uuid} index={index} key={node.uuid}>
             {(provided, snapshot) => (
                 <Box
                     className={clsx(classes.nodeRow, {
-                        [classes.nodeRowDragging]: snapshot.isDragging,
-                        [classes.nodeRowHovered]: isHovered
+                        [classes.nodeRowDragging]: snapshot.isDragging
                     })}
                     ref={provided.innerRef}
                     {...provided.draggableProps}
                     onClick={handleViewNode}
-                    onMouseEnter={() => setIsHovered(true)}
-                    onMouseLeave={() => setIsHovered(false)}
                 >
                     <Box {...provided.dragHandleProps} className={classes.dragHandle}>
                         <PiDotsSixVertical color="white" size="1.5rem" />
@@ -137,10 +142,10 @@ export function NodeCardWidget(props: IProps) {
                                 <Flex direction="column" gap={4}>
                                     <Flex align="center" justify="space-between">
                                         <Text c="dimmed" ff="monospace" fw={600} size="sm">
-                                            {prettyUsedData}
+                                            {trafficData.prettyUsedData}
                                         </Text>
                                         <Text c="dimmed" size="xs">
-                                            {maxData}
+                                            {trafficData.maxData}
                                         </Text>
                                     </Flex>
                                     <Progress
@@ -151,7 +156,11 @@ export function NodeCardWidget(props: IProps) {
                                         }
                                         radius="sm"
                                         size="sm"
-                                        value={node.isTrafficTrackingActive ? percentage : 100}
+                                        value={
+                                            node.isTrafficTrackingActive
+                                                ? trafficData.percentage
+                                                : 100
+                                        }
                                     />
                                 </Flex>
                             </Box>
@@ -220,28 +229,14 @@ export function NodeCardWidget(props: IProps) {
                             </Flex>
                         </Flex>
 
-                        {/* <Flex align="center" gap="xs" mb="xs">
-                            <PiGlobeSimple className={classes.icon} size={14} />
-                            <Text
-                                c="dimmed"
-                                className={classes.addressText}
-                                onClick={handleCopy}
-                                size="sm"
-                                style={{ flex: 1, minWidth: 0 }}
-                            >
-                                {node.address}
-                                {node.port ? `:${node.port}` : ''}
-                            </Text>
-                        </Flex> */}
-
                         <Box mb="xs">
                             <Flex direction="column" gap={2}>
                                 <Flex align="center" justify="space-between">
                                     <Text c="dimmed" ff="monospace" fw={600} size="sm">
-                                        {prettyUsedData}
+                                        {trafficData.prettyUsedData}
                                     </Text>
                                     <Text c="dimmed" size="xs">
-                                        {node.isTrafficTrackingActive ? maxData : '∞'}
+                                        {node.isTrafficTrackingActive ? trafficData.maxData : '∞'}
                                     </Text>
                                 </Flex>
                             </Flex>
@@ -249,14 +244,16 @@ export function NodeCardWidget(props: IProps) {
 
                         <Progress
                             color={
-                                node.isTrafficTrackingActive && percentage >= 0
+                                node.isTrafficTrackingActive && trafficData.percentage >= 0
                                     ? getProgressColor()
                                     : 'teal'
                             }
                             radius="sm"
                             size="xs"
                             value={
-                                node.isTrafficTrackingActive && percentage >= 0 ? percentage : 100
+                                node.isTrafficTrackingActive && trafficData.percentage >= 0
+                                    ? trafficData.percentage
+                                    : 100
                             }
                         />
 
@@ -290,4 +287,4 @@ export function NodeCardWidget(props: IProps) {
             )}
         </Draggable>
     )
-}
+})
