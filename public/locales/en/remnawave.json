@@ -41,7 +41,8 @@
     "simple-metrics": {
         "system-uptime": "System uptime",
         "ram-usage": "RAM usage",
-        "total-traffic": "Total traffic"
+        "total-traffic": "Total traffic",
+        "total-online-on-nodes": "Total online on nodes"
     },
     "users-metrics": {
         "disabled-users": "Disabled users",
@@ -378,7 +379,9 @@
             "online-stats": "Online stats",
             "system": "System",
             "bandwidth": "Bandwidth",
-            "short-stats": "Short stats"
+            "short-stats": "Short stats",
+            "remnawave-usage": "Remnawave Usage",
+            "process-details": "Process Details"
         }
     },
     "login-form": {
@@ -1046,5 +1049,11 @@
         "load-failed": "Load Failed",
         "failed-to-load-template-please-try-again": "Failed to load template. Please try again.",
         "select-template-to-load": "Select Template to Load"
+    },
+    "pm2-metrics": {
+        "total-processes": "Total Processes",
+        "total-memory": "Total Memory",
+        "average-cpu": "Average CPU",
+        "heaviest-process": "Heaviest Process"
     }
 }

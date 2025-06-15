@@ -41,7 +41,8 @@
     "simple-metrics": {
         "system-uptime": "آپتایم سیستم",
         "ram-usage": "مصرف رم",
-        "total-traffic": "مصرف کل ترافیک"
+        "total-traffic": "مصرف کل ترافیک",
+        "total-online-on-nodes": "Total online on nodes"
     },
     "users-metrics": {
         "disabled-users": "کاربران غیرفعال",
@@ -378,7 +379,9 @@
             "online-stats": "آمار آنلاین شدن کاربرها",
             "system": "سیستم",
             "bandwidth": "پهنای باند",
-            "short-stats": "آمار مختصر"
+            "short-stats": "آمار مختصر",
+            "process-details": "Process Details",
+            "remnawave-usage": "Remnawave Usage"
         }
     },
     "login-form": {
@@ -1046,5 +1049,11 @@
         "select-template-to-load": "قالب مورد نظر خود را انتخاب کنید",
         "template-loaded": "قالب با موفقیت بارگذاری شد",
         "template-name-has-been-loaded-into-the-editor": "وارد ویرایشگر شده‌است {{name}}"
+    },
+    "pm2-metrics": {
+        "average-cpu": "Average CPU",
+        "heaviest-process": "Heaviest Process",
+        "total-memory": "Total Memory",
+        "total-processes": "Total Processes"
     }
 }

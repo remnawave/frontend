@@ -1,21 +1,25 @@
-import { PiChartBarDuotone, PiClockDuotone, PiMemoryDuotone } from 'react-icons/pi'
+import { PiChartBarDuotone, PiCpuDuotone, PiMemoryDuotone } from 'react-icons/pi'
 import { GetStatsCommand } from '@remnawave/backend-contract'
-import { i18n, TFunction } from 'i18next'
-import dayjs from 'dayjs'
+import { TFunction } from 'i18next'
 
 import { prettyBytesUtil, prettyBytesUtilWithoutPrefix } from '@shared/utils/bytes'
 
 export const getSimpleMetrics = (
     systemInfo: GetStatsCommand.Response['response'],
-    t: TFunction,
-    i18n: i18n
+    t: TFunction
 ) => {
-    const { memory, users } = systemInfo
+    const { memory, users, nodes } = systemInfo
 
     const totalRamGB = prettyBytesUtil(memory.total) ?? 0
     const usedRamGB = prettyBytesUtil(memory.active) ?? 0
 
     return [
+        {
+            value: nodes.totalOnline,
+            icon: PiCpuDuotone,
+            title: t('simple-metrics.total-online-on-nodes'),
+            color: 'var(--mantine-color-blue-4)'
+        },
         {
             value: prettyBytesUtilWithoutPrefix(Number(users.totalTrafficBytes)) ?? 0,
             icon: PiChartBarDuotone,
@@ -27,15 +31,15 @@ export const getSimpleMetrics = (
             icon: PiMemoryDuotone,
             title: t('simple-metrics.ram-usage'),
             color: 'var(--mantine-color-cyan-4)'
-        },
-        {
-            value: dayjs
-                .duration(systemInfo.uptime, 'seconds')
-                .locale(i18n.language)
-                .humanize(false),
-            title: t('simple-metrics.system-uptime'),
-            icon: PiClockDuotone,
-            color: 'var(--mantine-color-gray-4)'
         }
+        // {
+        //     value: dayjs
+        //         .duration(systemInfo.uptime, 'seconds')
+        //         .locale(i18n.language)
+        //         .humanize(false),
+        //     title: t('simple-metrics.system-uptime'),
+        //     icon: PiClockDuotone,
+        //     color: 'var(--mantine-color-gray-4)'
+        // }
     ]
 }

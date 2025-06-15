@@ -1,6 +1,7 @@
 import {
     GetBandwidthStatsCommand,
     GetNodesStatisticsCommand,
+    GetRemnawaveHealthCommand,
     GetStatsCommand
 } from '@remnawave/backend-contract'
 import { createQueryKeys } from '@lukemorales/query-key-factory'
@@ -22,6 +23,9 @@ export const systemQueryKeys = createQueryKeys('system', {
         queryKey: null
     },
     getNodesStatistics: {
+        queryKey: null
+    },
+    getRemnawaveHealth: {
         queryKey: null
     }
 })
@@ -86,6 +90,24 @@ export const useGetNodesStatisticsCommand = createGetQueryHook({
     errorHandler: (error) => {
         notifications.show({
             title: `Get Nodes Statistics`,
+            message: error instanceof Error ? error.message : `Request failed with unknown error.`,
+            color: 'red'
+        })
+    }
+})
+
+export const useGetRemnawaveHealth = createGetQueryHook({
+    endpoint: GetRemnawaveHealthCommand.TSQ_url,
+    responseSchema: GetRemnawaveHealthCommand.ResponseSchema,
+    getQueryKey: () => systemQueryKeys.getRemnawaveHealth.queryKey,
+    rQueryParams: {
+        placeholderData: keepPreviousData,
+        staleTime: sToMs(10),
+        refetchInterval: sToMs(10)
+    },
+    errorHandler: (error) => {
+        notifications.show({
+            title: `Get Remnawave Health`,
             message: error instanceof Error ? error.message : `Request failed with unknown error.`,
             color: 'red'
         })
