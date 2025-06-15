@@ -44,21 +44,26 @@ export const HomePage = (props: IProps) => {
             />
 
             <Stack gap="sm" mb="xl" pb="xl">
-                <Text fw={600}>{t('home.page.remnawave-usage')}</Text>
-                <SimpleGrid cols={{ base: 1, sm: 2, xl: 4 }}>
-                    {pm2SummaryMetrics.map((metric) => (
-                        <MetricWithIcon key={metric.title} {...metric} />
-                    ))}
-                </SimpleGrid>
+                {pm2SummaryMetrics.length > 0 && (
+                    <>
+                        <Text fw={600}>{t('home.page.remnawave-usage')}</Text>
 
-                <Text fw={600} mt="md">
-                    {t('home.page.process-details')}
-                </Text>
-                <SimpleGrid cols={{ base: 1, sm: 2, xl: 4 }}>
-                    {pm2ProcessMetrics.map((metric) => (
-                        <MetricWithIcon key={metric.title} {...metric} />
-                    ))}
-                </SimpleGrid>
+                        <SimpleGrid cols={{ base: 1, sm: 2, xl: 4 }}>
+                            {pm2SummaryMetrics.map((metric) => (
+                                <MetricWithIcon key={metric.title} {...metric} />
+                            ))}
+                        </SimpleGrid>
+
+                        <Text fw={600} mt="md">
+                            {t('home.page.process-details')}
+                        </Text>
+                        <SimpleGrid cols={{ base: 1, sm: 2, xl: 4 }}>
+                            {pm2ProcessMetrics.map((metric) => (
+                                <MetricWithIcon key={metric.title} {...metric} />
+                            ))}
+                        </SimpleGrid>
+                    </>
+                )}
 
                 <Text fw={600}>{t('home.page.bandwidth')}</Text>
                 <SimpleGrid cols={{ base: 1, sm: 2, xl: 3 }}>
