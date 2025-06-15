@@ -68,12 +68,26 @@ export const BaseNodeForm = <T extends CreateNodeCommand.Request | UpdateNodeCom
 
     const handleIncludedInboundsChange = useCallback(
         (values: string[]) => {
-            const allInboundUuids = filteredInbounds.map((inbound) => inbound.uuid)
-            const newExcludedInbounds = allInboundUuids.filter((uuid) => !values.includes(uuid))
+            const allInbounds = inbounds || []
+            const filteredInboundUuids = filteredInbounds.map((inbound) => inbound.uuid)
+            const nonFilteredInboundUuids = allInbounds
+                .filter((inbound) => !filteredInboundUuids.includes(inbound.uuid))
+                .map((inbound) => inbound.uuid)
+
+            const preservedExcludedInbounds = excludedInbounds.filter((uuid) =>
+                nonFilteredInboundUuids.includes(uuid)
+            )
+
+            const newlyExcludedFromFiltered = filteredInboundUuids.filter(
+                (uuid) => !values.includes(uuid)
+            )
+
+            const newExcludedInbounds = [...preservedExcludedInbounds, ...newlyExcludedFromFiltered]
+
             // @ts-expect-error - Type issue with generic form field
             form.setFieldValue('excludedInbounds', newExcludedInbounds)
         },
-        [filteredInbounds, form]
+        [filteredInbounds, excludedInbounds, inbounds, form]
     )
 
     return (
