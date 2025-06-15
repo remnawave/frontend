@@ -41,7 +41,8 @@
     "simple-metrics": {
         "system-uptime": "系统运行时间",
         "ram-usage": "内存使用率",
-        "total-traffic": "总流量"
+        "total-traffic": "总流量",
+        "total-online-on-nodes": "Total online on nodes"
     },
     "users-metrics": {
         "disabled-users": "禁用用户",

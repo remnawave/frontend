@@ -41,7 +41,8 @@
     "simple-metrics": {
         "system-uptime": "System uptime",
         "ram-usage": "RAM usage",
-        "total-traffic": "Total traffic"
+        "total-traffic": "Total traffic",
+        "total-online-on-nodes": "Total online on nodes"
     },
     "users-metrics": {
         "disabled-users": "Disabled users",

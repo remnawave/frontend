@@ -41,7 +41,8 @@
     "simple-metrics": {
         "system-uptime": "آپتایم سیستم",
         "ram-usage": "مصرف رم",
-        "total-traffic": "مصرف کل ترافیک"
+        "total-traffic": "مصرف کل ترافیک",
+        "total-online-on-nodes": "Total online on nodes"
     },
     "users-metrics": {
         "disabled-users": "کاربران غیرفعال",
