@@ -379,7 +379,9 @@
             "online-stats": "在线统计",
             "system": "系统",
             "bandwidth": "带宽",
-            "short-stats": "简要统计"
+            "short-stats": "简要统计",
+            "process-details": "Process Details",
+            "remnawave-usage": "Remnawave Usage"
         }
     },
     "login-form": {
@@ -1047,5 +1049,11 @@
         "load-failed": "加载失败",
         "failed-to-load-template-please-try-again": "加载模板失败，请重试。",
         "select-template-to-load": "选择要加载的模板"
+    },
+    "pm2-metrics": {
+        "average-cpu": "Average CPU",
+        "heaviest-process": "Heaviest Process",
+        "total-memory": "Total Memory",
+        "total-processes": "Total Processes"
     }
 }

@@ -379,7 +379,9 @@
             "online-stats": "Онлайн",
             "system": "Система",
             "bandwidth": "Трафик",
-            "short-stats": "Краткая статистика"
+            "short-stats": "Краткая статистика",
+            "process-details": "Process Details",
+            "remnawave-usage": "Remnawave Usage"
         }
     },
     "login-form": {
@@ -1047,5 +1049,11 @@
         "select-template-to-load": "Выберите шаблон для загрузки",
         "template-loaded": "Шаблон загружен",
         "template-name-has-been-loaded-into-the-editor": "{{name}} загружен в редактор"
+    },
+    "pm2-metrics": {
+        "average-cpu": "Average CPU",
+        "heaviest-process": "Heaviest Process",
+        "total-memory": "Total Memory",
+        "total-processes": "Total Processes"
     }
 }
