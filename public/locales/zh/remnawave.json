@@ -275,7 +275,7 @@
             "hwid-user-limit-line-3": "时有效。了解更多。",
             "disable-hwid-limit": "禁用 HWID 限制",
             "hwid-device-limit": "HWID 设备限制",
-            "expire-at-description": "The date and time when the user's subscription will expire."
+            "expire-at-description": "用户的订阅服务将于该时间结束"
         }
     },
     "login-form-feature": {
