@@ -380,8 +380,8 @@
             "system": "系统",
             "bandwidth": "带宽",
             "short-stats": "简要统计",
-            "process-details": "Process Details",
-            "remnawave-usage": "Remnawave Usage"
+            "process-details": "进程详情",
+            "remnawave-usage": "Remnawave 使用情况"
         }
     },
     "login-form": {
