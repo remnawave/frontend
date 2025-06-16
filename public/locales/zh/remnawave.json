@@ -1051,9 +1051,9 @@
         "select-template-to-load": "选择要加载的模板"
     },
     "pm2-metrics": {
-        "average-cpu": "Average CPU",
-        "heaviest-process": "Heaviest Process",
-        "total-memory": "Total Memory",
-        "total-processes": "Total Processes"
+        "average-cpu": "CPU 平均使用率",
+        "heaviest-process": "最耗资源的进程",
+        "total-memory": "总内存使用",
+        "total-processes": "进程总数"
     }
 }
