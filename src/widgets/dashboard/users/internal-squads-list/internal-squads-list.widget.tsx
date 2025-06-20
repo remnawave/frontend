@@ -100,10 +100,7 @@ export const InternalSquadsListWidget = memo((props: IProps) => {
                                         paddingBottom: '0px'
                                     }}
                                 >
-                                    <InternalSquadCheckboxCard
-                                        internalSquad={internalSquad}
-                                        key={internalSquad.uuid}
-                                    />
+                                    <InternalSquadCheckboxCard internalSquad={internalSquad} />
                                 </div>
                             )
                         })}

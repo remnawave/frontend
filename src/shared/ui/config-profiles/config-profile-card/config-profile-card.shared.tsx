@@ -65,7 +65,9 @@ export const ConfigProfileCardShared = memo((props: IProps) => {
                         <ActionIcon
                             color="gray"
                             onClick={(e) => {
+                                e.preventDefault()
                                 e.stopPropagation()
+                                e.nativeEvent.stopImmediatePropagation()
                                 onSelectAllInbounds(profile.uuid)
                             }}
                             size="lg"
@@ -76,7 +78,9 @@ export const ConfigProfileCardShared = memo((props: IProps) => {
                         <ActionIcon
                             color="gray"
                             onClick={(e) => {
+                                e.preventDefault()
                                 e.stopPropagation()
+                                e.nativeEvent.stopImmediatePropagation()
                                 onUnselectAllInbounds(profile.uuid)
                             }}
                             size="lg"
@@ -87,7 +91,10 @@ export const ConfigProfileCardShared = memo((props: IProps) => {
                         <ActionIcon
                             color="gray"
                             onClick={(e) => {
+                                e.preventDefault()
                                 e.stopPropagation()
+                                e.nativeEvent.stopImmediatePropagation()
+
                                 handleShowJson()
                             }}
                             size="lg"
@@ -132,7 +139,10 @@ export const ConfigProfileCardShared = memo((props: IProps) => {
                             color={profile.nodes.length > 0 ? 'teal' : 'cyan'}
                             leftSection={<PiCpu />}
                             onClick={(e) => {
+                                e.preventDefault()
                                 e.stopPropagation()
+                                e.nativeEvent.stopImmediatePropagation()
+
                                 modals.open({
                                     children: <ActiveNodesListModalShared nodes={profile.nodes} />,
                                     title: (

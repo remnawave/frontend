@@ -1,6 +1,6 @@
+import { Box, Center, Checkbox, Text } from '@mantine/core'
 import { useVirtualizer } from '@tanstack/react-virtual'
 import { memo, useEffect, useMemo, useRef } from 'react'
-import { Box, Center, Text } from '@mantine/core'
 
 import type { IProps } from './interfaces/props.interface'
 
@@ -66,32 +66,34 @@ export const VirtualizedFlatInboundsListShared = memo((props: IProps) => {
                     position: 'relative'
                 }}
             >
-                {virtualizer.getVirtualItems().map((virtualItem) => {
-                    const { inbound, profileName } = filteredInbounds[virtualItem.index]
-                    const isSelected = selectedInbounds.has(inbound.uuid)
+                <Checkbox.Group>
+                    {virtualizer.getVirtualItems().map((virtualItem) => {
+                        const { inbound, profileName } = filteredInbounds[virtualItem.index]
+                        const isSelected = selectedInbounds.has(inbound.uuid)
 
-                    return (
-                        <div
-                            key={inbound.uuid}
-                            style={{
-                                position: 'absolute',
-                                top: 0,
-                                left: 0,
-                                width: '100%',
-                                height: `${virtualItem.size}px`,
-                                transform: `translateY(${virtualItem.start}px)`,
-                                paddingBottom: '4px'
-                            }}
-                        >
-                            <FlatInboundCheckboxCardShared
-                                inbound={inbound}
-                                isSelected={isSelected}
-                                onInboundToggle={onInboundToggle}
-                                profileName={profileName}
-                            />
-                        </div>
-                    )
-                })}
+                        return (
+                            <div
+                                key={inbound.uuid}
+                                style={{
+                                    position: 'absolute',
+                                    top: 0,
+                                    left: 0,
+                                    width: '100%',
+                                    height: `${virtualItem.size}px`,
+                                    transform: `translateY(${virtualItem.start}px)`,
+                                    paddingBottom: '4px'
+                                }}
+                            >
+                                <FlatInboundCheckboxCardShared
+                                    inbound={inbound}
+                                    isSelected={isSelected}
+                                    onInboundToggle={onInboundToggle}
+                                    profileName={profileName}
+                                />
+                            </div>
+                        )
+                    })}
+                </Checkbox.Group>
             </Box>
         </Box>
     )

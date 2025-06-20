@@ -65,7 +65,10 @@ export const InboundCheckboxCardShared = (props: IProps) => {
                     <ActionIcon
                         component="a"
                         onClick={(e) => {
+                            e.preventDefault()
                             e.stopPropagation()
+                            e.nativeEvent.stopImmediatePropagation()
+
                             handleShowInboundJson(inbound)
                         }}
                         radius={'md'}

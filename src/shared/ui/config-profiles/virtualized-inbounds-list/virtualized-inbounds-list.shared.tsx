@@ -1,6 +1,6 @@
 import { useVirtualizer } from '@tanstack/react-virtual'
+import { Box, Checkbox } from '@mantine/core'
 import { memo, useRef } from 'react'
-import { Box } from '@mantine/core'
 
 import type { IProps } from './interfaces/props.interface'
 
@@ -38,34 +38,35 @@ export const VirtualizedInboundsListShared = memo((props: IProps) => {
                     position: 'relative'
                 }}
             >
-                {virtualizer.getVirtualItems().map((virtualItem) => {
-                    const inbound = profile.inbounds[virtualItem.index]
-                    const isSelected = selectedInbounds.has(inbound.uuid)
+                <Checkbox.Group>
+                    {virtualizer.getVirtualItems().map((virtualItem) => {
+                        const inbound = profile.inbounds[virtualItem.index]
+                        const isSelected = selectedInbounds.has(inbound.uuid)
 
-                    return (
-                        <div
-                            key={inbound.uuid}
-                            style={{
-                                position: 'absolute',
-                                top: 0,
-                                left: 0,
-
-                                width: '100%',
-                                height: `${virtualItem.size}px`,
-                                transform: `translateY(${virtualItem.start}px)`,
-                                paddingBottom: '0px',
-                                cursor: 'pointer'
-                            }}
-                        >
-                            <InboundCheckboxCardShared
-                                inbound={inbound}
-                                isSelected={isSelected}
+                        return (
+                            <div
                                 key={inbound.uuid}
-                                onInboundToggle={onInboundToggle}
-                            />
-                        </div>
-                    )
-                })}
+                                style={{
+                                    position: 'absolute',
+                                    top: 0,
+                                    left: 0,
+                                    width: '100%',
+                                    height: `${virtualItem.size}px`,
+                                    transform: `translateY(${virtualItem.start}px)`,
+                                    paddingBottom: '0px',
+                                    cursor: 'pointer'
+                                }}
+                            >
+                                <InboundCheckboxCardShared
+                                    inbound={inbound}
+                                    isSelected={isSelected}
+                                    key={inbound.uuid}
+                                    onInboundToggle={onInboundToggle}
+                                />
+                            </div>
+                        )
+                    })}
+                </Checkbox.Group>
             </Box>
         </Box>
     )

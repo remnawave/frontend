@@ -19,12 +19,6 @@ export const InternalSquadCheckboxCard = memo((props: IProps) => {
         return null
     }
 
-    const handleShowInbounds = (e: React.MouseEvent<HTMLElement>) => {
-        e.stopPropagation()
-
-        handlers.open()
-    }
-
     return (
         <>
             <Checkbox.Card
@@ -53,9 +47,7 @@ export const InternalSquadCheckboxCard = memo((props: IProps) => {
                         <Badge
                             color="gray"
                             leftSection={<XtlsLogo size="16" />}
-                            onClick={(e) => handleShowInbounds(e)}
                             size="md"
-                            style={{ cursor: 'pointer' }}
                             variant="outline"
                         >
                             {internalSquad.info.inboundsCount}
@@ -63,7 +55,13 @@ export const InternalSquadCheckboxCard = memo((props: IProps) => {
                         <ActionIcon
                             color="cyan"
                             component="a"
-                            onClick={(e) => handleShowInbounds(e)}
+                            onClick={(e) => {
+                                e.preventDefault()
+                                e.stopPropagation()
+                                e.nativeEvent.stopImmediatePropagation()
+
+                                handlers.open()
+                            }}
                             radius={'md'}
                             size="lg"
                             variant="default"
