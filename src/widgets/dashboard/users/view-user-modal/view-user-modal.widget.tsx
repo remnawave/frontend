@@ -31,12 +31,12 @@ import {
     PiTelegramLogoDuotone
 } from 'react-icons/pi'
 import { UpdateUserCommand } from '@remnawave/backend-contract'
+import { TbDevices2, TbServerCog } from 'react-icons/tb'
 import { zodResolver } from 'mantine-form-zod-resolver'
 import { notifications } from '@mantine/notifications'
 import { useEffect, useMemo, useState } from 'react'
 import { DateTimePicker } from '@mantine/dates'
 import { useTranslation } from 'react-i18next'
-import { TbDevices2 } from 'react-icons/tb'
 import { modals } from '@mantine/modals'
 import { useForm } from '@mantine/form'
 import { renderSVG } from 'uqr'
@@ -64,6 +64,7 @@ import { bytesToGbUtil, gbToBytesUtil, prettyBytesUtil } from '@shared/utils/byt
 import { GetUserUsageFeature } from '@features/ui/dashboard/users/get-user-usage'
 import { DeleteUserFeature } from '@features/ui/dashboard/users/delete-user'
 import { UserStatusBadge } from '@widgets/dashboard/users/user-status-badge'
+import { MODALS, useModalsStore } from '@entities/dashboard/modal-store'
 import { resetDataStrategy } from '@shared/constants'
 import { handleFormErrors } from '@shared/utils/misc'
 import { queryClient } from '@shared/api'
@@ -78,6 +79,8 @@ export const ViewUserModal = () => {
     const isViewUserModalOpen = useUserModalStoreIsModalOpen()
     const actions = useUserModalStoreActions()
     const selectedUser = useUserModalStoreUserUuid()
+
+    const { open: openModal, setInternalData } = useModalsStore()
 
     const { data: internalSquads } = useGetInternalSquads()
 
@@ -598,8 +601,27 @@ export const ViewUserModal = () => {
                                     <GetUserSubscriptionLinksFeature shortUuid={user.shortUuid} />
                                 )}
                                 {user && <GetHwidUserDevicesFeature userUuid={user.uuid} />}
+                                {user && (
+                                    <Tooltip label="View accessible nodes">
+                                        <ActionIcon
+                                            onClick={() => {
+                                                setInternalData({
+                                                    internalState: {
+                                                        userUuid: user.uuid
+                                                    },
+                                                    modalKey: MODALS.USER_ACCESSIBLE_NODES_DRAWER
+                                                })
+                                                openModal(MODALS.USER_ACCESSIBLE_NODES_DRAWER)
+                                            }}
+                                            size="xl"
+                                        >
+                                            <TbServerCog size="1.5rem" />
+                                        </ActionIcon>
+                                    </Tooltip>
+                                )}
                             </ActionIcon.Group>
                             {user && <GetUserUsageFeature userUuid={user.uuid} />}
+
                             <Button
                                 color="blue"
                                 leftSection={<PiFloppyDiskDuotone size="1rem" />}

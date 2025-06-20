@@ -137,6 +137,19 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
     return (
         <form onSubmit={handleSubmit}>
             <Stack gap="md">
+                <Group gap="xs" justify="space-between">
+                    <Text fw={500} size="sm">
+                        Host Visability
+                    </Text>
+                    <Switch
+                        color="teal.8"
+                        key={form.key('isDisabled')}
+                        radius="md"
+                        size="md"
+                        {...form.getInputProps('isDisabled', { type: 'checkbox' })}
+                    />
+                </Group>
+
                 <TextInput
                     key={form.key('remark')}
                     label={t('base-host-form.remark')}
@@ -146,19 +159,6 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
                 />
 
                 <Stack gap="xs">
-                    <Group gap="xs" justify="space-between">
-                        <Text fw={500} size="sm">
-                            Host Visability
-                        </Text>
-                        <Switch
-                            color="teal.8"
-                            key={form.key('isDisabled')}
-                            radius="md"
-                            size="md"
-                            {...form.getInputProps('isDisabled', { type: 'checkbox' })}
-                        />
-                    </Group>
-
                     <HostSelectInboundFeature
                         activeConfigProfileInbound={
                             form.getValues().configProfileInboundUuid ?? undefined
