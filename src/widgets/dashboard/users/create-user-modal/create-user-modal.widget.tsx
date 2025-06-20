@@ -22,12 +22,13 @@ import {
     PiUserDuotone
 } from 'react-icons/pi'
 import { CreateUserCommand, USERS_STATUS } from '@remnawave/backend-contract'
+import { zodResolver } from 'mantine-form-zod-resolver'
 import { notifications } from '@mantine/notifications'
-import { useForm, zodResolver } from '@mantine/form'
 import { useEffect, useMemo, useState } from 'react'
 import { DateTimePicker } from '@mantine/dates'
 import { useTranslation } from 'react-i18next'
 import { TbDevices2 } from 'react-icons/tb'
+import { useForm } from '@mantine/form'
 import dayjs from 'dayjs'
 
 import {
@@ -35,13 +36,13 @@ import {
     useUserCreationModalStoreIsModalOpen
 } from '@entities/dashboard/user-creation-modal-store/user-creation-modal-store'
 import { CreateableTagInputShared } from '@shared/ui/createable-tag-input/createable-tag-input'
-import { useCreateUser, useGetInbounds, useGetUserTags } from '@shared/api/hooks'
+import { useCreateUser, useGetInternalSquads, useGetUserTags } from '@shared/api/hooks'
 import { LoaderModalShared } from '@shared/ui/loader-modal'
 import { resetDataStrategy } from '@shared/constants'
 import { handleFormErrors } from '@shared/utils/misc'
 import { gbToBytesUtil } from '@shared/utils/bytes'
 
-import { InboundsListWidget } from '../inbounds-list'
+import { InternalSquadsListWidget } from '../internal-squads-list'
 
 export const CreateUserModalWidget = () => {
     const { t } = useTranslation()
@@ -51,7 +52,7 @@ export const CreateUserModalWidget = () => {
     const isModalOpen = useUserCreationModalStoreIsModalOpen()
     const actions = useUserCreationModalStoreActions()
 
-    const { data: inbounds, isLoading } = useGetInbounds()
+    const { data: internalSquads, isLoading: isInternalSquadsLoading } = useGetInternalSquads()
 
     const { data: tags, isLoading: isTagsLoading } = useGetUserTags()
 
@@ -78,12 +79,12 @@ export const CreateUserModalWidget = () => {
             trafficLimitStrategy: 'NO_RESET',
             expireAt: new Date(Date.now() + 24 * 60 * 60 * 1000),
             trafficLimitBytes: 0,
-            activeUserInbounds: [],
             description: '',
             telegramId: undefined,
             email: undefined,
             hwidDeviceLimit: undefined,
-            tag: undefined
+            tag: undefined,
+            activeInternalSquads: []
         }
     })
 
@@ -110,13 +111,13 @@ export const CreateUserModalWidget = () => {
                     trafficLimitBytes: gbToBytesUtil(values.trafficLimitBytes),
                     // @ts-expect-error - TODO: fix ZOD schema
                     expireAt: dayjs(values.expireAt).toISOString(),
-                    activeUserInbounds: values.activeUserInbounds,
                     status: values.status,
                     description: values.description,
                     telegramId: values.telegramId,
                     email: values.email,
                     hwidDeviceLimit: values.hwidDeviceLimit,
-                    tag: values.tag
+                    tag: values.tag,
+                    activeInternalSquads: values.activeInternalSquads
                 }
             },
             {
@@ -125,18 +126,15 @@ export const CreateUserModalWidget = () => {
         )
     })
 
-    const filteredInbounds = useMemo(() => {
-        const allInbounds = inbounds || []
-        if (!searchQuery.trim()) return allInbounds
+    const filteredInternalSquads = useMemo(() => {
+        const allInternalSquads = internalSquads?.internalSquads || []
+        if (!searchQuery.trim()) return allInternalSquads
 
         const query = searchQuery.toLowerCase().trim()
-        return allInbounds.filter(
-            (inbound) =>
-                inbound.tag?.toLowerCase().includes(query) ||
-                inbound.type?.toLowerCase().includes(query) ||
-                inbound.port?.toString().includes(query)
+        return allInternalSquads.filter((internalSquad) =>
+            internalSquad.name?.toLowerCase().includes(query)
         )
-    }, [inbounds, searchQuery])
+    }, [internalSquads, searchQuery])
 
     return (
         <Modal
@@ -146,7 +144,7 @@ export const CreateUserModalWidget = () => {
             size="900px"
             title={t('create-user-modal.widget.create-user')}
         >
-            {isLoading || isTagsLoading ? (
+            {isInternalSquadsLoading || isTagsLoading ? (
                 <LoaderModalShared
                     h="500"
                     text={t('create-user-modal.widget.loading-user-creation')}
@@ -354,17 +352,16 @@ export const CreateUserModalWidget = () => {
                                 ]}
                             />
 
-                            <InboundsListWidget
-                                checkboxLogic="include"
-                                description={t('create-user-modal.widget.inbounds-description')}
-                                filteredInbounds={filteredInbounds}
-                                formKey={form.key('activeUserInbounds')}
-                                handleIncludedInboundsChange={() => {}}
-                                includedInbounds={inbounds?.map((inbound) => inbound.uuid) ?? []}
-                                label={t('create-user-modal.widget.inbounds')}
+                            <InternalSquadsListWidget
+                                description={
+                                    'Specify internal squads that will be assigned to the user'
+                                }
+                                filteredInternalSquads={filteredInternalSquads}
+                                formKey={form.key('activeInternalSquads')}
+                                label={'Internal squads'}
                                 searchQuery={searchQuery}
                                 setSearchQuery={setSearchQuery}
-                                {...form.getInputProps('activeUserInbounds')}
+                                {...form.getInputProps('activeInternalSquads')}
                             />
                         </Stack>
                     </Group>

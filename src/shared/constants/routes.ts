@@ -10,13 +10,14 @@ export const ROUTES = {
             ROOT: '/dashboard/management',
             USERS: '/dashboard/management/users',
             HOSTS: '/dashboard/management/hosts',
-            INBOUNDS: '/dashboard/management/inbounds',
             NODES: '/dashboard/management/nodes',
             NODES_BANDWIDTH_TABLE: '/dashboard/management/bandwidth-table',
-            CONFIG: '/dashboard/management/config',
             NODES_STATS: '/dashboard/management/stats/nodes',
             API_TOKENS: '/dashboard/management/api-tokens',
-            SUBSCRIPTION_SETTINGS: '/dashboard/management/subscription-settings'
+            SUBSCRIPTION_SETTINGS: '/dashboard/management/subscription-settings',
+            CONFIG_PROFILES: '/dashboard/management/config-profiles',
+            CONFIG_PROFILE_BY_UUID: '/dashboard/management/config-profiles/:uuid',
+            INTERNAL_SQUADS: '/dashboard/management/internal-squads'
         },
         TEMPLATES: {
             ROOT: '/dashboard/templates',

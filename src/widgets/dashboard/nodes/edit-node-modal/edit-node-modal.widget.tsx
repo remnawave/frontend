@@ -6,17 +6,17 @@ import { useEffect, useState } from 'react'
 import { useForm } from '@mantine/form'
 
 import {
-    useNodesStoreActions,
-    useNodesStoreEditModalIsOpen,
-    useNodesStoreEditModalNode
-} from '@entities/dashboard/nodes'
-import {
+    configProfilesQueryKeys,
     nodesQueryKeys,
-    useGetInbounds,
     useGetNode,
     useGetPubKey,
     useUpdateNode
 } from '@shared/api/hooks'
+import {
+    useNodesStoreActions,
+    useNodesStoreEditModalIsOpen,
+    useNodesStoreEditModalNode
+} from '@entities/dashboard/nodes'
 import { BaseNodeForm } from '@shared/ui/forms/nodes/base-node-form/base-node-form'
 import { bytesToGbUtil, gbToBytesUtil } from '@shared/utils/bytes'
 import { queryClient } from '@shared/api'
@@ -40,7 +40,6 @@ export const EditNodeModalConnectorWidget = () => {
     })
 
     const { data: pubKey } = useGetPubKey()
-    const { data: inbounds } = useGetInbounds()
 
     const { data: fetchedNode } = useGetNode({
         route: {
@@ -73,6 +72,9 @@ export const EditNodeModalConnectorWidget = () => {
     const { mutate: updateNode, isPending: isUpdateNodePending } = useUpdateNode({
         mutationFns: {
             onSuccess: async () => {
+                queryClient.refetchQueries({
+                    queryKey: configProfilesQueryKeys.getConfigProfiles.queryKey
+                })
                 handleClose(true)
             }
         }
@@ -90,8 +92,9 @@ export const EditNodeModalConnectorWidget = () => {
                 trafficLimitBytes: bytesToGbUtil(node.trafficLimitBytes ?? undefined),
                 trafficResetDay: node.trafficResetDay ?? undefined,
                 notifyPercent: node.notifyPercent ?? undefined,
-                excludedInbounds: node.excludedInbounds.map((inbound) => inbound.uuid) ?? [],
-                consumptionMultiplier: node.consumptionMultiplier ?? undefined
+                consumptionMultiplier: node.consumptionMultiplier ?? undefined,
+                activeConfigProfileUuid: node.activeConfigProfileUuid ?? undefined,
+                activeInbounds: node.activeInbounds?.map((inbound) => inbound.uuid) ?? []
             })
         }
     }, [node])
@@ -135,7 +138,6 @@ export const EditNodeModalConnectorWidget = () => {
                 form={form}
                 handleClose={() => handleClose(true)}
                 handleSubmit={handleSubmit}
-                inbounds={inbounds}
                 isUpdateNodePending={isUpdateNodePending}
                 node={node}
                 pubKey={pubKey}

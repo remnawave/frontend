@@ -9,13 +9,14 @@ import { SUBSCRIPTION_TEMPLATE_TYPE } from '@remnawave/backend-contract'
 
 import { SubscriptionPageBuilderConnector } from '@pages/dashboard/utils/subscription-page-builder/ui/connectors/subscription-page-builder.page.connector'
 import { HappRoutingBuilderPageConnector } from '@pages/dashboard/utils/happ-routing-builder/ui/connectors/happ-routing-builder.page.connector'
+import { ConfigProfileByUuidPageConnector } from '@pages/dashboard/config-profiles/connectors/config-profile-by-uuid.page.connector'
+import { InternalSquadsPageConnector } from '@pages/dashboard/internal-squads/connectors/internal-squads.page.connector'
 import { TemplateBasePageConnector } from '@pages/dashboard/templates/ui/connectors/template-base-page.connector'
 import { NodesBandwidthTablePageConnector } from '@pages/dashboard/nodes-bandwidth-table/ui/connectors'
 import { SubscriptionSettingsConnector } from '@pages/dashboard/subscription-settings/connectors'
+import { ConfigProfilesPageConnector } from '@pages/dashboard/config-profiles/connectors'
 import { StatisticNodesConnector } from '@pages/dashboard/statistic-nodes/connectors'
 import { ApiTokensPageConnector } from '@pages/dashboard/api-tokens/ui/connectors'
-import { InboundsPageConnector } from '@pages/dashboard/inbounds/ui/connectors'
-import { ConfigPageConnector } from '@pages/dashboard/config/ui/connectors'
 import { HostsPageConnector } from '@pages/dashboard/hosts/ui/connectors'
 import { UsersPageConnector } from '@pages/dashboard/users/ui/connectors'
 import { NodesPageConnector } from '@pages/dashboard/nodes/ui/connectors'
@@ -54,10 +55,6 @@ const router = createBrowserRouter(
                             path={ROUTES.DASHBOARD.MANAGEMENT.USERS}
                         />
                         <Route
-                            element={<InboundsPageConnector />}
-                            path={ROUTES.DASHBOARD.MANAGEMENT.INBOUNDS}
-                        />
-                        <Route
                             element={<HostsPageConnector />}
                             path={ROUTES.DASHBOARD.MANAGEMENT.HOSTS}
                         />
@@ -74,16 +71,24 @@ const router = createBrowserRouter(
                             path={ROUTES.DASHBOARD.MANAGEMENT.NODES_STATS}
                         />
                         <Route
-                            element={<ConfigPageConnector />}
-                            path={ROUTES.DASHBOARD.MANAGEMENT.CONFIG}
-                        />
-                        <Route
                             element={<ApiTokensPageConnector />}
                             path={ROUTES.DASHBOARD.MANAGEMENT.API_TOKENS}
                         />
                         <Route
                             element={<SubscriptionSettingsConnector />}
                             path={ROUTES.DASHBOARD.MANAGEMENT.SUBSCRIPTION_SETTINGS}
+                        />
+                        <Route
+                            element={<ConfigProfilesPageConnector />}
+                            path={ROUTES.DASHBOARD.MANAGEMENT.CONFIG_PROFILES}
+                        />
+                        <Route
+                            element={<ConfigProfileByUuidPageConnector />}
+                            path={ROUTES.DASHBOARD.MANAGEMENT.CONFIG_PROFILE_BY_UUID}
+                        />
+                        <Route
+                            element={<InternalSquadsPageConnector />}
+                            path={ROUTES.DASHBOARD.MANAGEMENT.INTERNAL_SQUADS}
                         />
                     </Route>
 

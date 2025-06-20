@@ -10,12 +10,12 @@ import { IProps } from './interfaces'
 export function HostsPageHeaderWidget(props: IProps) {
     const { t } = useTranslation()
 
-    const { inbounds } = props
+    const { configProfiles } = props
 
     return (
         <DataTableShared.Container mb="xl">
             <DataTableShared.Title
-                actions={<HeaderActionButtonsFeature inbounds={inbounds || []} />}
+                actions={<HeaderActionButtonsFeature configProfiles={configProfiles || []} />}
                 description={t('hosts-page-header.widget.list-of-all-hosts')}
                 title={t('constants.hosts')}
             />

@@ -48,7 +48,7 @@ import {
     useUserModalStoreUserUuid
 } from '@entities/dashboard/user-modal-store/user-modal-store'
 import {
-    useGetInbounds,
+    useGetInternalSquads,
     useGetUserByUuid,
     useGetUserTags,
     usersQueryKeys,
@@ -68,7 +68,7 @@ import { resetDataStrategy } from '@shared/constants'
 import { handleFormErrors } from '@shared/utils/misc'
 import { queryClient } from '@shared/api'
 
-import { InboundsListWidget } from '../inbounds-list'
+import { InternalSquadsListWidget } from '../internal-squads-list'
 
 export const ViewUserModal = () => {
     const { t } = useTranslation()
@@ -79,7 +79,7 @@ export const ViewUserModal = () => {
     const actions = useUserModalStoreActions()
     const selectedUser = useUserModalStoreUserUuid()
 
-    const { data: inbounds } = useGetInbounds()
+    const { data: internalSquads } = useGetInternalSquads()
 
     const form = useForm<UpdateUserCommand.Request>({
         name: 'edit-user-form',
@@ -136,14 +136,16 @@ export const ViewUserModal = () => {
     }, [isUserUpdated])
 
     useEffect(() => {
-        if (user && inbounds) {
-            const activeInboundUuids = user.activeUserInbounds.map((inbound) => inbound.uuid)
+        if (user && internalSquads) {
+            const activeInternalSquads = user.activeInternalSquads.map(
+                (internalSquad) => internalSquad.uuid
+            )
             form.setValues({
                 uuid: user.uuid,
                 trafficLimitBytes: bytesToGbUtil(user.trafficLimitBytes),
                 trafficLimitStrategy: user.trafficLimitStrategy,
                 expireAt: user.expireAt ? new Date(user.expireAt) : new Date(),
-                activeUserInbounds: activeInboundUuids,
+                activeInternalSquads,
                 description: user.description ?? '',
                 telegramId: user.telegramId ?? undefined,
                 email: user.email ?? undefined,
@@ -151,7 +153,7 @@ export const ViewUserModal = () => {
                 tag: user.tag ?? undefined
             })
         }
-    }, [user, inbounds])
+    }, [user, internalSquads])
 
     const usedTrafficPercentage = user ? (user.usedTrafficBytes / user.trafficLimitBytes) * 100 : 0
     const totalUsedTraffic = prettyBytesUtil(user?.usedTrafficBytes, true)
@@ -170,8 +172,8 @@ export const ViewUserModal = () => {
                     : undefined,
                 // @ts-expect-error - TODO: fix ZOD schema
                 expireAt: dirtyFields.expireAt ? dayjs(values.expireAt).toISOString() : undefined,
-                activeUserInbounds: dirtyFields.activeUserInbounds
-                    ? values.activeUserInbounds
+                activeInternalSquads: dirtyFields.activeInternalSquads
+                    ? values.activeInternalSquads
                     : undefined,
                 description: dirtyFields.description ? values.description : undefined,
                 // @ts-expect-error - TODO: fix ZOD schema
@@ -201,19 +203,15 @@ export const ViewUserModal = () => {
         () => user?.subscriptionUrl || '',
         [user?.subscriptionUrl]
     )
-
-    const filteredInbounds = useMemo(() => {
-        const allInbounds = inbounds || []
-        if (!searchQuery.trim()) return allInbounds
+    const filteredInternalSquads = useMemo(() => {
+        const allInternalSquads = internalSquads?.internalSquads || []
+        if (!searchQuery.trim()) return allInternalSquads
 
         const query = searchQuery.toLowerCase().trim()
-        return allInbounds.filter(
-            (inbound) =>
-                inbound.tag?.toLowerCase().includes(query) ||
-                inbound.type?.toLowerCase().includes(query) ||
-                inbound.port?.toString().includes(query)
+        return allInternalSquads.filter((internalSquad) =>
+            internalSquad.name?.toLowerCase().includes(query)
         )
-    }, [inbounds, searchQuery])
+    }, [internalSquads, searchQuery])
 
     return (
         <Modal
@@ -532,17 +530,16 @@ export const ViewUserModal = () => {
                                 ]}
                             />
 
-                            <InboundsListWidget
-                                checkboxLogic="include"
-                                description={t('create-user-modal.widget.inbounds-description')}
-                                filteredInbounds={filteredInbounds}
-                                formKey={form.key('activeUserInbounds')}
-                                handleIncludedInboundsChange={() => {}}
-                                includedInbounds={inbounds?.map((inbound) => inbound.uuid) ?? []}
-                                label={t('create-user-modal.widget.inbounds')}
+                            <InternalSquadsListWidget
+                                description={
+                                    'Specify internal squads that will be assigned to the user'
+                                }
+                                filteredInternalSquads={filteredInternalSquads}
+                                formKey={form.key('activeInternalSquads')}
+                                label={'Internal squads'}
                                 searchQuery={searchQuery}
                                 setSearchQuery={setSearchQuery}
-                                {...form.getInputProps('activeUserInbounds')}
+                                {...form.getInputProps('activeInternalSquads')}
                             />
                         </Stack>
                     </Group>

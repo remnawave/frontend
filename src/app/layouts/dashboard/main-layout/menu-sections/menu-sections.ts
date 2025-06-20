@@ -2,11 +2,9 @@ import {
     PiAirTrafficControlDuotone,
     PiArrowsInCardinalFill,
     PiBarcodeDuotone,
-    PiBoundingBoxDuotone,
     PiBracketsCurly,
     PiCookie,
     PiCpu,
-    PiGearDuotone,
     PiListChecks,
     PiStarDuotone,
     PiUsersDuotone
@@ -14,6 +12,7 @@ import {
 import { useTranslation } from 'react-i18next'
 
 import { HappLogo } from '@pages/dashboard/utils/happ-routing-builder/ui/components/happ-routing-builder.page.component'
+import { XtlsLogo } from '@shared/ui/logos/xtls-logo'
 import { ROUTES } from '@shared/constants'
 
 import { MenuItem } from './interfaces'
@@ -41,9 +40,19 @@ export const useMenuSections = (): MenuItem[] => {
                     icon: PiUsersDuotone
                 },
                 {
+                    name: 'Config Profiles',
+                    href: ROUTES.DASHBOARD.MANAGEMENT.CONFIG_PROFILES,
+                    icon: XtlsLogo
+                },
+                {
                     name: t('constants.hosts'),
                     href: ROUTES.DASHBOARD.MANAGEMENT.HOSTS,
                     icon: PiListChecks
+                },
+                {
+                    name: 'Internal Squads',
+                    href: ROUTES.DASHBOARD.MANAGEMENT.INTERNAL_SQUADS,
+                    icon: PiUsersDuotone
                 },
                 {
                     name: t('constants.nodes'),
@@ -63,16 +72,6 @@ export const useMenuSections = (): MenuItem[] => {
                             href: ROUTES.DASHBOARD.MANAGEMENT.NODES_STATS
                         }
                     ]
-                },
-                {
-                    name: t('constants.config'),
-                    href: ROUTES.DASHBOARD.MANAGEMENT.CONFIG,
-                    icon: PiGearDuotone
-                },
-                {
-                    name: t('constants.inbounds'),
-                    href: ROUTES.DASHBOARD.MANAGEMENT.INBOUNDS,
-                    icon: PiBoundingBoxDuotone
                 },
                 {
                     name: t('constants.subscription-settings'),
