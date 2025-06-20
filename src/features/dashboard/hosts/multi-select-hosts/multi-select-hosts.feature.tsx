@@ -2,11 +2,10 @@ import {
     Affix,
     Badge,
     Button,
-    ComboboxItem,
+    Drawer,
     Group,
     NumberInput,
     Paper,
-    Select,
     Stack,
     Text,
     Transition
@@ -20,6 +19,7 @@ import {
 } from 'react-icons/pi'
 import { notifications } from '@mantine/notifications'
 import { useTranslation } from 'react-i18next'
+import { useDisclosure } from '@mantine/hooks'
 import { modals } from '@mantine/modals'
 import { useField } from '@mantine/form'
 import { useEffect } from 'react'
@@ -30,18 +30,29 @@ import {
     useSetInboundHosts,
     useSetPortToManyHosts
 } from '@shared/api/hooks/hosts/hosts.mutation.hooks'
+import { HostSelectInboundFeature } from '@features/ui/dashboard/hosts/host-select-inbound/host-select-inbound.feature'
 import { useBulkEnableHosts, useGetHosts } from '@shared/api/hooks'
 
 import { IProps } from './interfaces/props.interface'
 
 export const MultiSelectHostsFeature = (props: IProps) => {
-    const { inbounds, hosts, selectedHosts, setSelectedHosts } = props
+    const { configProfiles, hosts, selectedHosts, setSelectedHosts } = props
+
+    const [opened, handlers] = useDisclosure(false)
 
     const { t } = useTranslation()
 
     const hasSelection = selectedHosts.length > 0
 
     const portField = useField<number | undefined>({
+        initialValue: undefined
+    })
+
+    const inboundField = useField<string | undefined>({
+        initialValue: undefined
+    })
+
+    const configProfileField = useField<string | undefined>({
         initialValue: undefined
     })
 
@@ -131,58 +142,8 @@ export const MultiSelectHostsFeature = (props: IProps) => {
         clearSelection()
     }
 
-    if (!inbounds || !hosts) {
+    if (!configProfiles || !hosts) {
         return null
-    }
-
-    const setInboundSelectedHosts = () => {
-        let localSelectedInbound: ComboboxItem | null = null
-
-        modals.open({
-            title: t('multi-select-hosts.feature.set-inbound'),
-            centered: true,
-            children: (
-                <Stack>
-                    <Select
-                        data={inbounds.map((inbound) => ({
-                            label: inbound.tag,
-                            value: inbound.uuid
-                        }))}
-                        label={t('multi-select-hosts.feature.inbound')}
-                        onChange={(_value, option) => {
-                            localSelectedInbound = option
-                        }}
-                    />
-                    <Group justify="flex-end">
-                        <Button onClick={() => modals.closeAll()} variant="subtle">
-                            {t('multi-select-hosts.feature.cancel')}
-                        </Button>
-                        <Button
-                            onClick={() => {
-                                if (localSelectedInbound) {
-                                    setInboundHosts({
-                                        variables: {
-                                            uuids: selectedHosts,
-                                            inboundUuid: localSelectedInbound.value
-                                        }
-                                    })
-                                    modals.closeAll()
-                                }
-                                if (!localSelectedInbound) {
-                                    notifications.show({
-                                        title: 'Error',
-                                        message: 'Please select an inbound',
-                                        color: 'red'
-                                    })
-                                }
-                            }}
-                        >
-                            {t('multi-select-hosts.feature.set-inbound')}
-                        </Button>
-                    </Group>
-                </Stack>
-            )
-        })
     }
 
     const setPortSelectedHosts = () => {
@@ -284,7 +245,7 @@ export const MultiSelectHostsFeature = (props: IProps) => {
                                 <Button
                                     color="cyan"
                                     leftSection={<PiTagDuotone />}
-                                    onClick={setInboundSelectedHosts}
+                                    onClick={handlers.open}
                                 >
                                     {t('multi-select-hosts.feature.set-inbound')}
                                 </Button>
@@ -307,6 +268,62 @@ export const MultiSelectHostsFeature = (props: IProps) => {
                     </Paper>
                 )}
             </Transition>
+
+            <Drawer
+                keepMounted={false}
+                onClose={handlers.close}
+                opened={opened}
+                overlayProps={{ backgroundOpacity: 0.6, blur: 0 }}
+                padding="md"
+                position="right"
+                size="450px"
+                title="Config Profiles"
+            >
+                <Stack gap="md" h="100%">
+                    <Group justify="center">
+                        <HostSelectInboundFeature
+                            activeConfigProfileInbound={inboundField.getValue() ?? undefined}
+                            activeConfigProfileUuid={configProfileField.getValue() ?? undefined}
+                            configProfiles={configProfiles}
+                            onSaveInbound={(inboundUuid, configProfileUuid) => {
+                                inboundField.setValue(inboundUuid)
+                                configProfileField.setValue(configProfileUuid)
+                            }}
+                        />
+                        <Button onClick={handlers.close} variant="light">
+                            {t('multi-select-hosts.feature.cancel')}
+                        </Button>
+                        <Button
+                            onClick={() => {
+                                if (!configProfileField.getValue() || !inboundField.getValue()) {
+                                    notifications.show({
+                                        title: 'Error',
+                                        message: 'Please select an inbound',
+                                        color: 'red'
+                                    })
+
+                                    return
+                                }
+
+                                const configProfileUuid = configProfileField.getValue()!
+                                const configProfileInboundUuid = inboundField.getValue()!
+
+                                setInboundHosts({
+                                    variables: {
+                                        uuids: selectedHosts,
+                                        configProfileUuid,
+                                        configProfileInboundUuid
+                                    }
+                                })
+                                handlers.close()
+                            }}
+                            variant="outline"
+                        >
+                            {t('multi-select-hosts.feature.set-inbound')}
+                        </Button>
+                    </Group>
+                </Stack>
+            </Drawer>
         </Affix>
     )
 }

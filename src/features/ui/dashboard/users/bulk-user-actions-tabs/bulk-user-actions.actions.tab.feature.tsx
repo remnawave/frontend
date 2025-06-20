@@ -1,17 +1,18 @@
-import { Button, Checkbox, Group, Paper, SimpleGrid, Stack, Text } from '@mantine/core'
 import { PiClockClockwise, PiNotchesDuotone, PiUserMinus } from 'react-icons/pi'
-import { notifications } from '@mantine/notifications'
+import { Button, Group, Paper, Stack, Text } from '@mantine/core'
 import { useTranslation } from 'react-i18next'
+import { useMemo, useState } from 'react'
 import { modals } from '@mantine/modals'
+import { useForm } from '@mantine/form'
 
 import {
     useBulkResetTraffic,
     useBulkRevokeUsersSubscription,
-    useBulkSetActiveInbounds,
-    useGetInbounds
+    useBulkSetActiveInternalSquads,
+    useGetInternalSquads
 } from '@shared/api/hooks'
 import { useBulkUsersActionsStoreActions } from '@entities/dashboard/users/bulk-users-actions-store'
-import { InboundCheckboxCardWidget } from '@widgets/dashboard/users/inbound-checkbox-card'
+import { InternalSquadsListWidget } from '@widgets/dashboard/users/internal-squads-list'
 
 import { IProps } from './interfaces/props.interface'
 
@@ -23,7 +24,17 @@ export const BulkUserActionsActionsTabFeature = (props: IProps) => {
     const uuids = actions.getUuids()
     const { cleanUpDrawer } = props
 
-    const { data: inbounds } = useGetInbounds()
+    const { data: internalSquads } = useGetInternalSquads()
+
+    const form = useForm({
+        name: 'change-active-internal-squads-form',
+        mode: 'uncontrolled',
+        initialValues: {
+            activeInternalSquads: []
+        }
+    })
+
+    const [searchQuery, setSearchQuery] = useState('')
 
     const { mutate: revokeUsersSubscription, isPending: isRevokePending } =
         useBulkRevokeUsersSubscription({
@@ -42,8 +53,8 @@ export const BulkUserActionsActionsTabFeature = (props: IProps) => {
         }
     })
 
-    const { mutate: setActiveInbounds, isPending: isSetActiveInboundsPending } =
-        useBulkSetActiveInbounds({
+    const { mutate: setActiveInternalSquads, isPending: isSetActiveInternalSquadsPending } =
+        useBulkSetActiveInternalSquads({
             mutationFns: {
                 onSuccess: () => {
                     cleanUpDrawer()
@@ -103,60 +114,48 @@ export const BulkUserActionsActionsTabFeature = (props: IProps) => {
         })
     }
 
-    const handleChangeActiveInbounds = () => {
-        let selectedInbounds: string[] = []
+    const filteredInternalSquads = useMemo(() => {
+        const allInternalSquads = internalSquads?.internalSquads || []
+        if (!searchQuery.trim()) return allInternalSquads
 
-        modals.openConfirmModal({
-            title: t('bulk-user-actions.actions.tab.feature.change-active-inbounds'),
-            centered: true,
-            children: (
-                <Checkbox.Group
-                    description={t('create-user-modal.widget.inbounds-description')}
-                    label={t('create-user-modal.widget.inbounds')}
-                    onChange={(value) => {
-                        selectedInbounds = value
-                    }}
-                >
-                    <SimpleGrid
-                        cols={{
-                            base: 1,
-                            sm: 1,
-                            md: 2
-                        }}
-                        key={'view-user-inbounds-grid'}
-                        pt="md"
-                    >
-                        {inbounds?.map((inbound) => (
-                            <InboundCheckboxCardWidget inbound={inbound} key={inbound.uuid} />
-                        ))}
-                    </SimpleGrid>
-                </Checkbox.Group>
-            ),
-            labels: {
-                confirm: t('bulk-user-actions.actions.tab.feature.change'),
-                cancel: t('bulk-user-actioins-modal.widget.cancel')
-            },
-            confirmProps: { color: 'blue' },
-            onConfirm: () => {
-                if (selectedInbounds.length === 0) {
-                    notifications.show({
-                        title: t('bulk-user-actions.actions.tab.feature.no-inbounds-selected'),
-                        message: t(
-                            'bulk-user-actions.actions.tab.feature.please-select-at-least-one-inbound'
-                        ),
-                        color: 'red'
-                    })
-                    return
-                }
-                setActiveInbounds({
-                    variables: {
-                        uuids,
-                        activeUserInbounds: selectedInbounds
-                    }
-                })
-            }
-        })
-    }
+        const query = searchQuery.toLowerCase().trim()
+        return allInternalSquads.filter((internalSquad) =>
+            internalSquad.name?.toLowerCase().includes(query)
+        )
+    }, [internalSquads, searchQuery])
+
+    // const handleChangeActiveInternalSquads = () => {
+    //     const selectedInternalSquads: string[] = []
+
+    //     modals.openConfirmModal({
+    //         title: 'Change Active Internal Squads',
+    //         centered: true,
+    //         children: (
+
+    //         ),
+    //         labels: {
+    //             confirm: t('bulk-user-actions.actions.tab.feature.change'),
+    //             cancel: t('bulk-user-actioins-modal.widget.cancel')
+    //         },
+    //         confirmProps: { color: 'blue' },
+    //         onConfirm: () => {
+    //             if (selectedInternalSquads.length === 0) {
+    //                 notifications.show({
+    //                     title: 'No internal squads selected',
+    //                     message: 'Please select at least one internal squad',
+    //                     color: 'red'
+    //                 })
+    //                 return
+    //             }
+    //             setActiveInternalSquads({
+    //                 variables: {
+    //                     uuids,
+    //                     activeInternalSquads: selectedInternalSquads
+    //                 }
+    //             })
+    //         }
+    //     })
+    // }
 
     return (
         <Stack gap="md">
@@ -171,23 +170,38 @@ export const BulkUserActionsActionsTabFeature = (props: IProps) => {
                     <Group justify="apart">
                         <Group>
                             <PiNotchesDuotone color="cyan" size="1.2rem" />
-                            <Text>
-                                {t('bulk-user-actions.actions.tab.feature.change-active-inbounds')}
-                            </Text>
+                            <Text>Change Active Internal Squads</Text>
                         </Group>
+                        <InternalSquadsListWidget
+                            description={
+                                'Specify internal squads that will be assigned to the user'
+                            }
+                            filteredInternalSquads={filteredInternalSquads}
+                            formKey={form.key('activeInternalSquads')}
+                            label={'Internal squads'}
+                            searchQuery={searchQuery}
+                            setSearchQuery={setSearchQuery}
+                            {...form.getInputProps('activeInternalSquads')}
+                        />
+
                         <Button
                             color="cyan"
-                            loading={isSetActiveInboundsPending}
-                            onClick={handleChangeActiveInbounds}
+                            loading={isSetActiveInternalSquadsPending}
+                            onClick={() => {
+                                setActiveInternalSquads({
+                                    variables: {
+                                        uuids,
+                                        activeInternalSquads: form.values.activeInternalSquads
+                                    }
+                                })
+                            }}
                             variant="light"
                         >
                             {t('bulk-user-actions.actions.tab.feature.change')}
                         </Button>
                     </Group>
                     <Text c="dimmed" size="xs">
-                        {t(
-                            'bulk-user-actions.actions.tab.feature.changes-the-active-inbounds-for-all-selected-users'
-                        )}
+                        Changes the active internal squads for all selected users
                     </Text>
                 </Stack>
             </Paper>

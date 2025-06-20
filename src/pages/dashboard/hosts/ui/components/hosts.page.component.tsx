@@ -15,7 +15,7 @@ import { IProps } from './interfaces'
 
 export default function HostsPageComponent(props: IProps) {
     const { t } = useTranslation()
-    const { inbounds, hosts, isHostsLoading, isInboundsLoading } = props
+    const { configProfiles, hosts, isHostsLoading, isConfigProfilesLoading } = props
     const [selectedHosts, setSelectedHosts] = useState<string[]>([])
 
     return (
@@ -31,9 +31,9 @@ export default function HostsPageComponent(props: IProps) {
 
             <Grid>
                 <Grid.Col span={12}>
-                    <HostsPageHeaderWidget inbounds={inbounds} />
+                    <HostsPageHeaderWidget configProfiles={configProfiles} />
 
-                    {isHostsLoading || isInboundsLoading ? (
+                    {isHostsLoading || isConfigProfilesLoading ? (
                         <LoadingScreen height="60vh" />
                     ) : (
                         <motion.div
@@ -42,8 +42,8 @@ export default function HostsPageComponent(props: IProps) {
                             transition={{ duration: 0.5 }}
                         >
                             <HostsTableWidget
+                                configProfiles={configProfiles}
                                 hosts={hosts}
-                                inbounds={inbounds}
                                 selectedHosts={selectedHosts}
                                 setSelectedHosts={setSelectedHosts}
                             />
@@ -55,8 +55,8 @@ export default function HostsPageComponent(props: IProps) {
             <EditHostModalWidget key="edit-host-modal" />
             <CreateHostModalWidget key="create-host-modal" />
             <MultiSelectHostsFeature
+                configProfiles={configProfiles}
                 hosts={hosts}
-                inbounds={inbounds}
                 selectedHosts={selectedHosts}
                 setSelectedHosts={setSelectedHosts}
             />

@@ -32,6 +32,7 @@ import {
 import { useDisclosure } from '@mantine/hooks'
 import { useTranslation } from 'react-i18next'
 
+import { HostSelectInboundFeature } from '@features/ui/dashboard/hosts/host-select-inbound/host-select-inbound.feature'
 import { PopoverWithInfoShared } from '@shared/ui/popovers/popover-with-info'
 import { DeleteHostFeature } from '@features/ui/dashboard/hosts/delete-host'
 import { TemplateInfoPopoverShared } from '@shared/ui/popovers'
@@ -91,8 +92,7 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
         form,
         advancedOpened,
         handleSubmit,
-        host,
-        inbounds,
+        configProfiles,
         setAdvancedOpened,
         isSubmitting,
         handleCloneHost
@@ -109,13 +109,29 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
 
     const isXhttpExtraButtonDisabled = () => {
         return (
-            !inbounds ||
-            !form.getValues().inboundUuid ||
-            !inbounds.some(
-                (inbound) =>
-                    inbound.uuid === form.getValues().inboundUuid && inbound.network === 'xhttp'
+            !configProfiles ||
+            !form.getValues().configProfileUuid ||
+            !configProfiles.some(
+                (configProfile) =>
+                    configProfile.uuid === form.getValues().configProfileUuid &&
+                    configProfile.inbounds.some((inbound) => inbound.network === 'xhttp')
             )
         )
+    }
+
+    const saveInbound = (inbound: string, configProfileUuid: string) => {
+        form.setValues({
+            configProfileInboundUuid: inbound,
+            configProfileUuid
+        } as Partial<T>)
+        form.setTouched({
+            configProfileInboundUuid: true,
+            configProfileUuid: true
+        })
+        form.setDirty({
+            configProfileInboundUuid: true,
+            configProfileUuid: true
+        })
     }
 
     return (
@@ -129,32 +145,33 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
                     required
                 />
 
-                <Group gap="xs" grow justify="space-between" preventGrowOverflow={false} w="100%">
-                    <Select
-                        data={Object.values(inbounds ?? {}).map((inbound) => ({
-                            label: inbound.tag,
-                            value: inbound.uuid
-                        }))}
-                        key={form.key('inboundUuid')}
-                        label={t('base-host-form.inbound')}
-                        {...form.getInputProps('inboundUuid')}
-                        allowDeselect={false}
-                        defaultValue={host?.inboundUuid ?? undefined}
-                        placeholder={t('base-host-form.select-inbound')}
-                        required
-                        w="75%"
+                <Stack gap="xs">
+                    <Group gap="xs" justify="space-between">
+                        <Text fw={500} size="sm">
+                            Host Visability
+                        </Text>
+                        <Switch
+                            color="teal.8"
+                            key={form.key('isDisabled')}
+                            radius="md"
+                            size="md"
+                            {...form.getInputProps('isDisabled', { type: 'checkbox' })}
+                        />
+                    </Group>
+
+                    <HostSelectInboundFeature
+                        activeConfigProfileInbound={
+                            form.getValues().configProfileInboundUuid ?? undefined
+                        }
+                        activeConfigProfileUuid={form.getValues().configProfileUuid ?? undefined}
+                        configProfiles={configProfiles}
+                        onSaveInbound={saveInbound}
                     />
 
-                    <Switch
-                        color="teal.8"
-                        key={form.key('isDisabled')}
-                        mt={25}
-                        radius="md"
-                        size="xl"
-                        w="20%"
-                        {...form.getInputProps('isDisabled', { type: 'checkbox' })}
-                    />
-                </Group>
+                    <Text c="dimmed" size="xs">
+                        Select one inbound to apply to the host
+                    </Text>
+                </Stack>
 
                 <Stack gap="md">
                     <Group

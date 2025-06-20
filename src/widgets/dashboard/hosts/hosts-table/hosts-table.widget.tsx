@@ -10,7 +10,7 @@ import { useReorderHosts } from '@shared/api/hooks'
 import { IProps } from './interfaces'
 
 export function HostsTableWidget(props: IProps) {
-    const { inbounds, hosts, selectedHosts, setSelectedHosts } = props
+    const { configProfiles, hosts, selectedHosts, setSelectedHosts } = props
 
     const [state, handlers] = useListState(hosts || [])
     const prevStateRef = useRef(state)
@@ -47,7 +47,7 @@ export function HostsTableWidget(props: IProps) {
         prevStateRef.current = hosts || []
     }, [hosts])
 
-    if (!hosts || !inbounds) {
+    if (!hosts || !configProfiles) {
         return null
     }
 
@@ -66,7 +66,7 @@ export function HostsTableWidget(props: IProps) {
         )
     }
 
-    if (!hosts || !inbounds) return null
+    if (!hosts || !configProfiles) return null
     if (hosts.length === 0) return <EmptyPageLayout />
 
     return (
@@ -82,7 +82,7 @@ export function HostsTableWidget(props: IProps) {
                         {state.map((item, index) => (
                             <div key={item.uuid} style={{ position: 'relative' }}>
                                 <HostCardWidget
-                                    inbounds={inbounds}
+                                    configProfiles={configProfiles}
                                     index={index}
                                     isSelected={selectedHosts.includes(item.uuid)}
                                     item={item}

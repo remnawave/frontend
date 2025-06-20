@@ -11,7 +11,7 @@ import { IProps } from './interfaces'
 export const HeaderActionButtonsFeature = (props: IProps) => {
     const { t } = useTranslation()
 
-    const { inbounds } = props
+    const { configProfiles } = props
 
     const actions = useHostsStoreActions()
     const selectedInboundTag = useHostsStoreSelectedInboundTag()
@@ -32,10 +32,10 @@ export const HeaderActionButtonsFeature = (props: IProps) => {
         <Group grow preventGrowOverflow={false} wrap="wrap">
             <Select
                 data={[
-                    { value: 'ALL', label: t('header-action-buttons.feature.all') },
-                    ...inbounds.map((inbound) => ({
-                        value: inbound.tag,
-                        label: inbound.tag
+                    { value: 'ALL', label: 'All Config Profiles' },
+                    ...configProfiles!.map((configProfile) => ({
+                        value: configProfile.uuid,
+                        label: configProfile.name
                     }))
                 ]}
                 defaultValue="ALL"

@@ -7,6 +7,7 @@ import {
     NumberInput,
     rem,
     Select,
+    Skeleton,
     Slider,
     Stack,
     Switch,
@@ -15,14 +16,14 @@ import {
 } from '@mantine/core'
 import { CreateNodeCommand, UpdateNodeCommand } from '@remnawave/backend-contract'
 import { PiCheckDuotone, PiFloppyDiskDuotone, PiXDuotone } from 'react-icons/pi'
-import { useCallback, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
+import { ShowConfigProfilesWithInboundsFeature } from '@features/ui/dashboard/nodes/show-config-profiles-with-inbounds'
 import { ToggleNodeStatusButtonFeature } from '@features/ui/dashboard/nodes/toggle-node-status-button'
 import { GetNodeUsersUsageFeature } from '@features/ui/dashboard/nodes/get-node-users-usage'
 import { ModalAccordionWidget } from '@widgets/dashboard/nodes/modal-accordeon-widget'
 import { DeleteNodeFeature } from '@features/ui/dashboard/nodes/delete-node'
-import { InboundsListWidget } from '@widgets/dashboard/users/inbounds-list'
+import { useGetConfigProfiles } from '@shared/api/hooks'
 
 import { COUNTRIES } from './constants'
 import { IProps } from './interfaces'
@@ -39,56 +40,27 @@ export const BaseNodeForm = <T extends CreateNodeCommand.Request | UpdateNodeCom
         advancedOpened,
         isUpdateNodePending,
         handleSubmit,
-        setAdvancedOpened,
-        inbounds
+        setAdvancedOpened
     } = props
 
     const { t } = useTranslation()
-    const [searchQuery, setSearchQuery] = useState('')
 
-    const excludedInbounds = form.getValues().excludedInbounds || []
+    const { data: configProfiles, isLoading: isConfigProfilesLoading } = useGetConfigProfiles()
 
-    const filteredInbounds = useMemo(() => {
-        const allInbounds = inbounds || []
-        if (!searchQuery.trim()) return allInbounds
-
-        const query = searchQuery.toLowerCase().trim()
-        return allInbounds.filter(
-            (inbound) =>
-                inbound.tag?.toLowerCase().includes(query) ||
-                inbound.type?.toLowerCase().includes(query) ||
-                inbound.port?.toString().includes(query)
-        )
-    }, [inbounds, searchQuery])
-
-    const includedInbounds = useMemo(() => {
-        const allInboundUuids = filteredInbounds.map((inbound) => inbound.uuid)
-        return allInboundUuids.filter((uuid) => !excludedInbounds.includes(uuid))
-    }, [filteredInbounds, excludedInbounds])
-
-    const handleIncludedInboundsChange = useCallback(
-        (values: string[]) => {
-            const allInbounds = inbounds || []
-            const filteredInboundUuids = filteredInbounds.map((inbound) => inbound.uuid)
-            const nonFilteredInboundUuids = allInbounds
-                .filter((inbound) => !filteredInboundUuids.includes(inbound.uuid))
-                .map((inbound) => inbound.uuid)
-
-            const preservedExcludedInbounds = excludedInbounds.filter((uuid) =>
-                nonFilteredInboundUuids.includes(uuid)
-            )
-
-            const newlyExcludedFromFiltered = filteredInboundUuids.filter(
-                (uuid) => !values.includes(uuid)
-            )
-
-            const newExcludedInbounds = [...preservedExcludedInbounds, ...newlyExcludedFromFiltered]
-
-            // @ts-expect-error - Type issue with generic form field
-            form.setFieldValue('excludedInbounds', newExcludedInbounds)
-        },
-        [filteredInbounds, excludedInbounds, inbounds, form]
-    )
+    const saveInbounds = (inbounds: string[], configProfileUuid: string) => {
+        form.setValues({
+            activeInbounds: inbounds,
+            activeConfigProfileUuid: configProfileUuid
+        } as Partial<T>)
+        form.setTouched({
+            activeInbounds: true,
+            activeConfigProfileUuid: true
+        })
+        form.setDirty({
+            activeInbounds: true,
+            activeConfigProfileUuid: true
+        })
+    }
 
     return (
         <form onSubmit={handleSubmit}>
@@ -259,17 +231,27 @@ export const BaseNodeForm = <T extends CreateNodeCommand.Request | UpdateNodeCom
                         />
                     </Stack>
 
-                    <InboundsListWidget
-                        checkboxLogic="exclude"
-                        description={t('base-node-form.select-active-inbounds-for-this-node')}
-                        filteredInbounds={filteredInbounds}
-                        formKey={form.key('excludedInbounds')}
-                        handleIncludedInboundsChange={handleIncludedInboundsChange}
-                        includedInbounds={includedInbounds}
-                        label={t('base-node-form.inbounds')}
-                        searchQuery={searchQuery}
-                        setSearchQuery={setSearchQuery}
-                    />
+                    {isConfigProfilesLoading && (
+                        <Stack gap="md" mt={10}>
+                            <Stack gap="xs">
+                                <Skeleton height={24} width="40%" />
+                                <Skeleton height={16} width="60%" />
+                            </Stack>
+
+                            <Skeleton height={120} radius="md" />
+                            <Skeleton height={36} radius="sm" width="100%" />
+                        </Stack>
+                    )}
+                    {!isConfigProfilesLoading && configProfiles && (
+                        <Stack gap="xs" mb={10}>
+                            <ShowConfigProfilesWithInboundsFeature
+                                activeConfigProfileInbounds={form.getValues().activeInbounds}
+                                activeConfigProfileUuid={form.getValues().activeConfigProfileUuid}
+                                configProfiles={configProfiles.configProfiles}
+                                onSaveInbounds={saveInbounds}
+                            />
+                        </Stack>
+                    )}
                 </Stack>
             </Group>
 

@@ -1,7 +1,7 @@
-import { GetAllHostsCommand, GetInboundsCommand } from '@remnawave/backend-contract'
+import { GetAllHostsCommand, GetConfigProfilesCommand } from '@remnawave/backend-contract'
 
 export interface IProps {
-    inbounds: GetInboundsCommand.Response['response'] | undefined
+    configProfiles: GetConfigProfilesCommand.Response['response']['configProfiles'] | undefined
     index: number
     isSelected?: boolean
     item: GetAllHostsCommand.Response['response'][number]

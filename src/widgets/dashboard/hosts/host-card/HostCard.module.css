@@ -8,6 +8,12 @@
     margin-bottom: var(--mantine-spacing-sm);
 }
 
+.mobileItem {
+    display: block;
+    align-items: stretch;
+    padding: var(--mantine-spacing-md);
+}
+
 .filteredItem {
     display: flex;
     align-items: center;
@@ -24,6 +30,16 @@
     align-items: center;
     border-radius: var(--mantine-radius-md);
     border: 1px solid light-dark(var(--mantine-color-gray-2), var(--mantine-color-blue-5));
+    padding: var(--mantine-spacing-sm) var(--mantine-spacing-xl);
+    padding-left: calc(var(--mantine-spacing-xl) - var(--mantine-spacing-md));
+    margin-bottom: var(--mantine-spacing-sm);
+}
+
+.danglingItem {
+    display: flex;
+    align-items: center;
+    border-radius: var(--mantine-radius-md);
+    border: 1px solid light-dark(var(--mantine-color-gray-2), var(--mantine-color-red-3));
     padding: var(--mantine-spacing-sm) var(--mantine-spacing-xl);
     padding-left: calc(var(--mantine-spacing-xl) - var(--mantine-spacing-md));
     margin-bottom: var(--mantine-spacing-sm);
@@ -56,4 +72,41 @@
     font-size: var(--mantine-font-size-sm);
     line-height: 1.3;
     color: var(--mantine-color-dimmed);
+}
+
+.contentArea {
+    cursor: pointer;
+    width: 100%;
+}
+
+.lockedIcon {
+    opacity: 0.5;
+}
+
+.truncatedBadge {
+    max-width: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.truncatedText {
+    max-width: 180px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.hostAddress {
+    max-width: 160px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-family: var(--mantine-font-family-monospace);
+    font-size: var(--mantine-font-size-sm);
+}
+
+.mobileAddress {
+    font-family: var(--mantine-font-family-monospace);
+    word-break: break-all;
+    line-height: 1.4;
 }

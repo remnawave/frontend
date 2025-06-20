@@ -5,9 +5,10 @@ import { useTranslation } from 'react-i18next'
 import { useState } from 'react'
 
 import { useNodesStoreActions, useNodesStoreCreateModalIsOpen } from '@entities/dashboard/nodes'
+import { configProfilesQueryKeys, useCreateNode, useGetPubKey } from '@shared/api/hooks'
 import { BaseNodeForm } from '@shared/ui/forms/nodes/base-node-form/base-node-form'
-import { useCreateNode, useGetInbounds, useGetPubKey } from '@shared/api/hooks'
 import { gbToBytesUtil } from '@shared/utils/bytes'
+import { queryClient } from '@shared/api'
 
 export const CreateNodeModalWidget = () => {
     const { t } = useTranslation()
@@ -16,7 +17,6 @@ export const CreateNodeModalWidget = () => {
     const actions = useNodesStoreActions()
 
     const { data: pubKey } = useGetPubKey()
-    const { data: inbounds } = useGetInbounds()
 
     const [advancedOpened, setAdvancedOpened] = useState(false)
 
@@ -40,6 +40,9 @@ export const CreateNodeModalWidget = () => {
     const { mutate: createNode, isPending: isCreateNodePending } = useCreateNode({
         mutationFns: {
             onSuccess: () => {
+                queryClient.refetchQueries({
+                    queryKey: configProfilesQueryKeys.getConfigProfiles.queryKey
+                })
                 handleClose()
             }
         }
@@ -74,7 +77,6 @@ export const CreateNodeModalWidget = () => {
                 form={form}
                 handleClose={handleClose}
                 handleSubmit={handleSubmit}
-                inbounds={inbounds}
                 isUpdateNodePending={isCreateNodePending}
                 node={null}
                 pubKey={pubKey}
