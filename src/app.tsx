@@ -7,6 +7,7 @@ import '@mantine/dropzone/styles.css'
 import '@mantine/notifications/styles.css'
 import '@mantine/nprogress/styles.css'
 import 'mantine-react-table/styles.css'
+import 'mantine-datatable/styles.layer.css'
 
 import './global.css'
 

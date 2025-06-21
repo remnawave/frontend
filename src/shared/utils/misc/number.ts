@@ -25,6 +25,14 @@ export function formatCurrency(
     return formatDecimal(value, { ...options, prefix: currency })
 }
 
+export function formatCurrencyWithIntl(amount: number) {
+    return new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+        minimumFractionDigits: 2
+    }).format(amount)
+}
+
 export function formatDecimal(value: number | string, options?: FormatterOptions): string {
     const currentValue = typeof value === 'string' ? parseFloat(value) : value
 

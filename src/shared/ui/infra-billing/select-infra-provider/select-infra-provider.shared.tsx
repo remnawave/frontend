@@ -1,0 +1,114 @@
+import { Avatar, ComboboxItem, Group, Select, Text } from '@mantine/core'
+import { forwardRef, useState } from 'react'
+
+import { LoadingScreen } from '@shared/ui/loading-screen'
+import { useGetInfraProviders } from '@shared/api/hooks'
+import { faviconResolver } from '@shared/utils/misc'
+
+import type { IProps } from './interfaces/props.interface'
+
+interface ItemProps extends ComboboxItem {
+    faviconLink: null | string
+    name: string
+}
+
+const SelectItem = forwardRef<HTMLDivElement, ItemProps>(
+    ({ faviconLink, name, ...others }: ItemProps, ref) => (
+        <div ref={ref} {...others}>
+            <Group gap="sm">
+                <Avatar
+                    alt={name}
+                    color="initials"
+                    name={name}
+                    radius="sm"
+                    size={20}
+                    src={faviconResolver(faviconLink)}
+                />
+                <Text fw={500} size="sm">
+                    {name}
+                </Text>
+            </Group>
+        </div>
+    )
+)
+
+SelectItem.displayName = 'SelectItem'
+
+export const SelectInfraProviderShared = (props: IProps) => {
+    const { selectedInfraProviderUuid, setSelectedInfraProviderUuid } = props
+    const { data: infraProviders, isLoading } = useGetInfraProviders()
+
+    const [selectedValue, setSelectedValue] = useState<null | string>(
+        selectedInfraProviderUuid || null
+    )
+
+    if (isLoading) return <LoadingScreen />
+
+    if (!infraProviders?.providers?.length) {
+        return (
+            <Select
+                data={[]}
+                disabled
+                label="Infrastructure Provider"
+                placeholder="No providers available"
+            />
+        )
+    }
+
+    const selectData: ItemProps[] = infraProviders.providers.map((provider) => ({
+        value: provider.uuid,
+        label: provider.name,
+        name: provider.name,
+        faviconLink: provider.faviconLink
+    }))
+
+    const handleChange = (value: null | string) => {
+        setSelectedValue(value)
+        setSelectedInfraProviderUuid(value)
+    }
+
+    const currentSelectedUuid = selectedValue || selectedInfraProviderUuid
+    const selectedProvider = currentSelectedUuid
+        ? infraProviders.providers.find((provider) => provider.uuid === currentSelectedUuid)
+        : null
+
+    const leftSection = selectedProvider ? (
+        <Avatar
+            alt={selectedProvider.name}
+            color="initials"
+            name={selectedProvider.name}
+            radius="sm"
+            size={16}
+            src={faviconResolver(selectedProvider.faviconLink)}
+            style={{
+                minWidth: 16,
+                minHeight: 16
+            }}
+        />
+    ) : undefined
+
+    return (
+        <Select
+            allowDeselect
+            clearable
+            comboboxProps={{
+                transitionProps: { transition: 'pop', duration: 200 },
+                shadow: 'md'
+            }}
+            data={selectData}
+            description="Select the infrastructure provider."
+            label="Infrastructure Provider"
+            leftSection={leftSection}
+            leftSectionPointerEvents="none"
+            leftSectionWidth={selectedProvider ? 40 : 0}
+            maxDropdownHeight={300}
+            onChange={handleChange}
+            placeholder="Select provider..."
+            renderOption={(item) => {
+                const option = item.option as ItemProps
+                return <SelectItem {...option} />
+            }}
+            value={selectedValue}
+        />
+    )
+}

@@ -125,7 +125,7 @@ export const UserAccessibleNodesModalWidget = () => {
                                         />
                                     )}
                                     <TbServer color="var(--mantine-color-blue-4)" size={24} />
-                                    {node.countryCode && (
+                                    {node.countryCode && node.countryCode !== 'XX' && (
                                         <ReactCountryFlag
                                             countryCode={node.countryCode}
                                             style={{ fontSize: '1.4em' }}

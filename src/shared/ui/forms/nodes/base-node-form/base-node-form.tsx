@@ -19,6 +19,7 @@ import { PiCheckDuotone, PiFloppyDiskDuotone, PiXDuotone } from 'react-icons/pi'
 import { useTranslation } from 'react-i18next'
 
 import { ShowConfigProfilesWithInboundsFeature } from '@features/ui/dashboard/nodes/show-config-profiles-with-inbounds'
+import { SelectInfraProviderShared } from '@shared/ui/infra-billing/select-infra-provider/select-infra-provider.shared'
 import { ToggleNodeStatusButtonFeature } from '@features/ui/dashboard/nodes/toggle-node-status-button'
 import { GetNodeUsersUsageFeature } from '@features/ui/dashboard/nodes/get-node-users-usage'
 import { ModalAccordionWidget } from '@widgets/dashboard/nodes/modal-accordeon-widget'
@@ -229,6 +230,23 @@ export const BaseNodeForm = <T extends CreateNodeCommand.Request | UpdateNodeCom
                             styles={{ thumb: { borderWidth: 2, padding: 3 } }}
                             thumbSize={22}
                         />
+
+                        <Stack gap="md" mb={-10} mt={30}>
+                            <SelectInfraProviderShared
+                                selectedInfraProviderUuid={form.getValues().providerUuid}
+                                setSelectedInfraProviderUuid={(providerUuid) => {
+                                    form.setValues({
+                                        providerUuid
+                                    } as Partial<T>)
+                                    form.setTouched({
+                                        providerUuid: true
+                                    })
+                                    form.setDirty({
+                                        providerUuid: true
+                                    })
+                                }}
+                            />
+                        </Stack>
                     </Stack>
 
                     {isConfigProfilesLoading && (

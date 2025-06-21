@@ -1,6 +1,7 @@
 export * from './boolean'
 export * from './date'
 export * from './factory'
+export * from './favicon-resolver'
 export * from './form'
 export * from './is'
 export * from './match'

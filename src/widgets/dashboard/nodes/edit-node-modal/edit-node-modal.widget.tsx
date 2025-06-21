@@ -59,12 +59,11 @@ export const EditNodeModalConnectorWidget = () => {
             queryKey: nodesQueryKeys.getNode({ uuid: node?.uuid ?? '' }).queryKey
         })
 
-        form.reset()
-        form.resetDirty()
-        form.resetTouched()
-
         setTimeout(() => {
             actions.clearEditModal()
+            form.reset()
+            form.resetDirty()
+            form.resetTouched()
             setAdvancedOpened(false)
         }, 300)
     }
@@ -94,7 +93,8 @@ export const EditNodeModalConnectorWidget = () => {
                 notifyPercent: node.notifyPercent ?? undefined,
                 consumptionMultiplier: node.consumptionMultiplier ?? undefined,
                 activeConfigProfileUuid: node.activeConfigProfileUuid ?? undefined,
-                activeInbounds: node.activeInbounds?.map((inbound) => inbound.uuid) ?? []
+                activeInbounds: node.activeInbounds?.map((inbound) => inbound.uuid) ?? [],
+                providerUuid: node.providerUuid ?? undefined
             })
         }
     }, [node])

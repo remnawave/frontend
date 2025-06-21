@@ -10,6 +10,7 @@ import {
     PiUsersDuotone
 } from 'react-icons/pi'
 import { useTranslation } from 'react-i18next'
+import { FaHornbill } from 'react-icons/fa6'
 
 import { HappLogo } from '@pages/dashboard/utils/happ-routing-builder/ui/components/happ-routing-builder.page.component'
 import { XtlsLogo } from '@shared/ui/logos/xtls-logo'
@@ -118,6 +119,16 @@ export const useMenuSections = (): MenuItem[] => {
                             href: ROUTES.DASHBOARD.TEMPLATES.SINGBOX_LEGACY
                         }
                     ]
+                }
+            ]
+        },
+        {
+            header: 'CRM',
+            section: [
+                {
+                    name: 'Infra Billing',
+                    href: ROUTES.DASHBOARD.CRM.INFRA_BILLING,
+                    icon: FaHornbill
                 }
             ]
         },

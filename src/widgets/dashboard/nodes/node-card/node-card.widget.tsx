@@ -4,7 +4,7 @@ import {
     PiGlobeSimple,
     PiUsersDuotone
 } from 'react-icons/pi'
-import { Badge, Box, Flex, Grid, Progress, Text } from '@mantine/core'
+import { Avatar, Badge, Box, Flex, Grid, Progress, Text } from '@mantine/core'
 import { notifications } from '@mantine/notifications'
 import { memo, useCallback, useMemo } from 'react'
 import ReactCountryFlag from 'react-country-flag'
@@ -17,6 +17,7 @@ import { getNodeResetDaysUtil, getXrayUptimeUtil } from '@shared/utils/time-util
 import { useNodesStoreActions } from '@entities/dashboard/nodes'
 import { prettyBytesToAnyUtil } from '@shared/utils/bytes'
 import { XtlsLogo } from '@shared/ui/logos/xtls-logo'
+import { faviconResolver } from '@shared/utils/misc'
 
 import { NodeStatusBadgeWidget } from '../node-status-badge'
 import classes from './NodeCard.module.css'
@@ -111,7 +112,7 @@ export const NodeCardWidget = memo((props: IProps) => {
                                         <ReactCountryFlag
                                             countryCode={node.countryCode}
                                             style={{
-                                                fontSize: '1.1em',
+                                                fontSize: '1.6em',
                                                 borderRadius: '2px'
                                             }}
                                         />
@@ -119,6 +120,29 @@ export const NodeCardWidget = memo((props: IProps) => {
                                     <Text className={classes.nodeName} fw={600} size="md">
                                         {node.name}
                                     </Text>
+                                </Flex>
+
+                                <Flex align="center" gap="xs">
+                                    {node.provider && (
+                                        <Badge
+                                            color="gray"
+                                            leftSection={
+                                                <Avatar
+                                                    alt={node.provider.name}
+                                                    color="initials"
+                                                    name={node.provider.name}
+                                                    radius="sm"
+                                                    size={16}
+                                                    src={faviconResolver(node.provider.faviconLink)}
+                                                />
+                                            }
+                                            radius="md"
+                                            size="lg"
+                                            variant="light"
+                                        >
+                                            {node.provider.name}
+                                        </Badge>
+                                    )}
                                 </Flex>
                             </Flex>
                         </Grid.Col>
@@ -218,7 +242,7 @@ export const NodeCardWidget = memo((props: IProps) => {
                                     <ReactCountryFlag
                                         countryCode={node.countryCode}
                                         style={{
-                                            fontSize: '1em',
+                                            fontSize: '1.5em',
                                             borderRadius: '2px'
                                         }}
                                     />
@@ -228,6 +252,31 @@ export const NodeCardWidget = memo((props: IProps) => {
                                 </Text>
                             </Flex>
                         </Flex>
+
+                        <Box mb="xs">
+                            <Flex align="center" gap="xs">
+                                {node.provider && (
+                                    <Badge
+                                        color="gray"
+                                        leftSection={
+                                            <Avatar
+                                                alt={node.provider.name}
+                                                color="initials"
+                                                name={node.provider.name}
+                                                radius="sm"
+                                                size={16}
+                                                src={faviconResolver(node.provider.faviconLink)}
+                                            />
+                                        }
+                                        radius="md"
+                                        size="lg"
+                                        variant="light"
+                                    >
+                                        {node.provider.name}
+                                    </Badge>
+                                )}
+                            </Flex>
+                        </Box>
 
                         <Box mb="xs">
                             <Flex direction="column" gap={2}>

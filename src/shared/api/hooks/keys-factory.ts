@@ -5,6 +5,7 @@ import { subscriptionSettingsQueryKeys } from './subscription-settings/subscript
 import { hwidUserDevicesQueryKeys } from './hwid-user-devices/hwid-user-devices.query.hooks'
 import { configProfilesQueryKeys } from './config-profiles/config-profiles.query.hooks'
 import { internalSquadsQueryKeys } from './internal-squads/internal-squads.query.hooks'
+import { infraBillingQueryKeys } from './infra-billing/infra-billing.query.hooks'
 import { apiTokensQueryKeys } from './api-tokens/api-tokens.query.hooks'
 import { systemQueryKeys } from './system/system.query.hooks'
 import { usersQueryKeys } from './users/users.query.hooks'
@@ -23,7 +24,8 @@ export const QueryKeys = mergeQueryKeys(
     subscriptionSettingsQueryKeys,
     hwidUserDevicesQueryKeys,
     configProfilesQueryKeys,
-    internalSquadsQueryKeys
+    internalSquadsQueryKeys,
+    infraBillingQueryKeys
 )
 
 export type TQueryKeys = inferQueryKeyStore<typeof QueryKeys>

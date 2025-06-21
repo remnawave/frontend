@@ -11,6 +11,7 @@ import { SubscriptionPageBuilderConnector } from '@pages/dashboard/utils/subscri
 import { HappRoutingBuilderPageConnector } from '@pages/dashboard/utils/happ-routing-builder/ui/connectors/happ-routing-builder.page.connector'
 import { ConfigProfileByUuidPageConnector } from '@pages/dashboard/config-profiles/connectors/config-profile-by-uuid.page.connector'
 import { InternalSquadsPageConnector } from '@pages/dashboard/internal-squads/connectors/internal-squads.page.connector'
+import { InfraBillingPageConnector } from '@pages/dashboard/crm/infra-billing/connectors/infra-billing.page.connector'
 import { TemplateBasePageConnector } from '@pages/dashboard/templates/ui/connectors/template-base-page.connector'
 import { NodesBandwidthTablePageConnector } from '@pages/dashboard/nodes-bandwidth-table/ui/connectors'
 import { SubscriptionSettingsConnector } from '@pages/dashboard/subscription-settings/connectors'
@@ -152,6 +153,13 @@ const router = createBrowserRouter(
                                 />
                             }
                             path={ROUTES.DASHBOARD.TEMPLATES.CLASH}
+                        />
+                    </Route>
+
+                    <Route path={ROUTES.DASHBOARD.CRM.ROOT}>
+                        <Route
+                            element={<InfraBillingPageConnector />}
+                            path={ROUTES.DASHBOARD.CRM.INFRA_BILLING}
                         />
                     </Route>
 
