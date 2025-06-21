@@ -18,28 +18,6 @@ export function getInfraBillingRecordsColumns(
 >[] {
     return [
         {
-            accessor: 'actions',
-            title: (
-                <Center>
-                    <TbClick size={16} />
-                </Center>
-            ),
-            width: '0%',
-            render: (row) => (
-                <ActionIconGroup>
-                    <ActionIcon
-                        color="gray"
-                        onClick={() => handleDeleteInfraBillingRecord(row.uuid)}
-                        radius={'md'}
-                        size="md"
-                        variant="outline"
-                    >
-                        <TbTrash size={16} />
-                    </ActionIcon>
-                </ActionIconGroup>
-            )
-        },
-        {
             accessor: 'name',
             ellipsis: true,
             title: <InfraProvidersColumnTitle icon={HiOfficeBuilding} title="Hoster name" />,
@@ -82,6 +60,28 @@ export function getInfraBillingRecordsColumns(
                 <Text fw={600} size="sm">
                     {formatCurrencyWithIntl(amount)}
                 </Text>
+            )
+        },
+        {
+            accessor: 'actions',
+            title: (
+                <Center>
+                    <TbClick size={16} />
+                </Center>
+            ),
+            width: '0%',
+            render: (row) => (
+                <ActionIconGroup>
+                    <ActionIcon
+                        color="gray"
+                        onClick={() => handleDeleteInfraBillingRecord(row.uuid)}
+                        radius={'md'}
+                        size="md"
+                        variant="outline"
+                    >
+                        <TbTrash size={16} />
+                    </ActionIcon>
+                </ActionIconGroup>
             )
         }
     ]
