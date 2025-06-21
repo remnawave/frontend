@@ -142,7 +142,7 @@ export function CreateInfraBillingNodeModalWidget() {
                         }
                         highlightToday
                         leftSection={<HiCalendar size="1rem" />}
-                        maxDate={dayjs().add(1, 'day').toDate()}
+                        minDate={dayjs().subtract(1, 'day').toDate()}
                     />
 
                     <Button loading={isCreateInfraBillingNodePending} type="submit">
