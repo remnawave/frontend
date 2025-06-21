@@ -81,7 +81,7 @@ export function ViewInfraProviderDrawerWidget() {
                     />
 
                     <TextInput
-                        description="The favicon link is the link to the favicon of the provider. It is used to display the favicon of the provider in the UI."
+                        description="The favicon link is the link to the favicon of the provider. It is used to display the favicon of the provider in the UI. You can just enter the domain name."
                         label="Favicon Link"
                         placeholder="Enter favicon link"
                         {...form.getInputProps('faviconLink')}

@@ -67,16 +67,18 @@ export function CreateInfraProviderDrawerWidget() {
                     />
 
                     <TextInput
-                        description="The favicon link is the link to the favicon of the provider. It is used to display the favicon of the provider in the UI."
+                        description="The favicon link is the link to the favicon of the provider. It is used to display the favicon of the provider in the UI. You can just enter the domain name."
                         label="Favicon Link"
-                        placeholder="Enter favicon link"
+                        placeholder="https://hetzner.com"
+                        required
                         {...form.getInputProps('faviconLink')}
                     />
 
                     <TextInput
                         description="The login URL is the URL of the login page of the provider. It will help you quickly go to the login page of the provider."
                         label="Login URL"
-                        placeholder="Enter login URL"
+                        placeholder="https://cloud.hetzner.com"
+                        required
                         {...form.getInputProps('loginUrl')}
                     />
 

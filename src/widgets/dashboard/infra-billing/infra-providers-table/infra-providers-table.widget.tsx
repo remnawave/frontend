@@ -1,6 +1,6 @@
 import { GetInfraProvidersCommand } from '@remnawave/backend-contract'
 import { PiArrowsClockwise, PiEmpty, PiPlus } from 'react-icons/pi'
-import { Box, Button, Group, Text } from '@mantine/core'
+import { Box, Button, Group, Stack, Text } from '@mantine/core'
 import { DataTable } from 'mantine-datatable'
 import { modals } from '@mantine/modals'
 import { useMemo } from 'react'
@@ -35,6 +35,16 @@ export function InfraProvidersTableWidget() {
         mutationFns: {
             onSuccess: () => {
                 refetchInfraProviders()
+
+                queryClient.refetchQueries({
+                    queryKey: QueryKeys.infraBilling.getInfraBillingNodes.queryKey
+                })
+                queryClient.refetchQueries({
+                    queryKey: QueryKeys.infraBilling.getInfraBillingHistoryRecords({
+                        start: 0,
+                        size: 50
+                    }).queryKey
+                })
             }
         }
     })
@@ -91,7 +101,7 @@ export function InfraProvidersTableWidget() {
                             size="xs"
                             variant="default"
                         >
-                            Update
+                            Refresh
                         </Button>
 
                         <Button
@@ -100,7 +110,7 @@ export function InfraProvidersTableWidget() {
                                 openModal(MODALS.CREATE_INFRA_PROVIDER_DRAWER)
                             }}
                             size="xs"
-                            variant="default"
+                            variant="outline"
                         >
                             Create Infra Provider
                         </Button>
@@ -117,14 +127,25 @@ export function InfraProvidersTableWidget() {
                     handleOpenModal,
                     handleDeleteInfraProvider
                 )}
+                emptyState={
+                    <Stack align="center" gap="xs">
+                        <Box mb={4} p={4}>
+                            <PiEmpty size={36} strokeWidth={1.5} />
+                        </Box>
+                        <Text c="dimmed" size="sm">
+                            No providers found.
+                        </Text>
+                        <Button
+                            onClick={() => openModal(MODALS.CREATE_INFRA_PROVIDER_DRAWER)}
+                            style={{ pointerEvents: 'all' }}
+                            variant="light"
+                        >
+                            Create Infra Provider
+                        </Button>
+                    </Stack>
+                }
                 fetching={infraProvidersLoading}
                 height={400}
-                noRecordsIcon={
-                    <Box mb={4} p={4}>
-                        <PiEmpty size={36} strokeWidth={1.5} />
-                    </Box>
-                }
-                noRecordsText="No records found"
                 onCellClick={({ record, column }) => {
                     if (record.loginUrl && column.accessor === 'loginUrl') {
                         window.open(record.loginUrl, '_blank', 'noopener,noreferrer')

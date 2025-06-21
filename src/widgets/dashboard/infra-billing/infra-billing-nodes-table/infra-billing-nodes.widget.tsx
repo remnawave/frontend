@@ -1,6 +1,6 @@
 import { GetInfraBillingNodesCommand } from '@remnawave/backend-contract'
 import { PiArrowsClockwise, PiEmpty, PiPlus } from 'react-icons/pi'
-import { Box, Button, Group, Text } from '@mantine/core'
+import { Box, Button, Group, Stack, Text } from '@mantine/core'
 import { useMediaQuery } from '@mantine/hooks'
 import { DataTable } from 'mantine-datatable'
 import { modals } from '@mantine/modals'
@@ -96,7 +96,7 @@ export function InfraBillingNodesTableWidget() {
                             size="xs"
                             variant="outline"
                         >
-                            Create Node
+                            Add Node
                         </Button>
                     </Group>
                 }
@@ -106,14 +106,25 @@ export function InfraBillingNodesTableWidget() {
             <DataTable
                 borderRadius="sm"
                 columns={getInfraBillingNodesColumns(handleDeleteInfraBillingNode)}
-                fetching={infraBillingNodesLoading}
-                height={700}
-                noRecordsIcon={
-                    <Box mb={4} p={4}>
-                        <PiEmpty size={36} strokeWidth={1.5} />
-                    </Box>
+                emptyState={
+                    <Stack align="center" gap="xs">
+                        <Box mb={4} p={4}>
+                            <PiEmpty size={36} strokeWidth={1.5} />
+                        </Box>
+                        <Text c="dimmed" size="sm">
+                            No nodes found.
+                        </Text>
+                        <Button
+                            onClick={() => openModal(MODALS.CREATE_INFRA_BILLING_NODE_MODAL)}
+                            style={{ pointerEvents: 'all' }}
+                            variant="light"
+                        >
+                            Add a node
+                        </Button>
+                    </Stack>
                 }
-                noRecordsText="No records found"
+                fetching={infraBillingNodesLoading}
+                height={600}
                 onCellClick={({ record, column }) => {
                     if (record.provider.loginUrl && column.accessor === 'provider.name') {
                         window.open(record.provider.loginUrl, '_blank', 'noopener,noreferrer')

@@ -1,6 +1,6 @@
 import { PiArrowsClockwise, PiEmpty, PiPlus } from 'react-icons/pi'
+import { Box, Button, Group, Stack, Text } from '@mantine/core'
 import { useHotkeys, useMediaQuery } from '@mantine/hooks'
-import { Box, Button, Group, Text } from '@mantine/core'
 import { DataTable } from 'mantine-datatable'
 import { useMemo, useState } from 'react'
 import { modals } from '@mantine/modals'
@@ -95,24 +95,35 @@ export function InfraBillingRecordsTableWidget() {
                             size="xs"
                             variant="outline"
                         >
-                            Create Record
+                            Create
                         </Button>
                     </Group>
                 }
-                description="List of all infra billing records sorted by date"
+                description="Billing records sorted by date"
                 title="Infra Billing Records"
             />
             <DataTable
                 borderRadius="sm"
                 columns={getInfraBillingRecordsColumns(handleDeleteInfraBillingRecord)}
-                fetching={infraBillingRecordsLoading}
-                height={700}
-                noRecordsIcon={
-                    <Box mb={4} p={4}>
-                        <PiEmpty size={36} strokeWidth={1.5} />
-                    </Box>
+                emptyState={
+                    <Stack align="center" gap="xs">
+                        <Box mb={4} p={4}>
+                            <PiEmpty size={36} strokeWidth={1.5} />
+                        </Box>
+                        <Text c="dimmed" size="sm">
+                            No billing records found.
+                        </Text>
+                        <Button
+                            onClick={() => openModal(MODALS.CREATE_INFRA_BILLING_RECORD_DRAWER)}
+                            style={{ pointerEvents: 'all' }}
+                            variant="light"
+                        >
+                            Create
+                        </Button>
+                    </Stack>
                 }
-                noRecordsText="No records found"
+                fetching={infraBillingRecordsLoading}
+                height={600}
                 onPageChange={(page) => {
                     setPage(page)
                 }}
