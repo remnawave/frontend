@@ -52,6 +52,10 @@ export function CreateInfraBillingRecordDrawerWidget() {
                         queryKey: QueryKeys.infraBilling.getInfraProviders.queryKey
                     })
 
+                    queryClient.refetchQueries({
+                        queryKey: QueryKeys.infraBilling.getInfraBillingNodes.queryKey
+                    })
+
                     form.reset()
 
                     close(MODALS.CREATE_INFRA_BILLING_RECORD_DRAWER)
