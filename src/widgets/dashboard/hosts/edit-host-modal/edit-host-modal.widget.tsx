@@ -1,5 +1,6 @@
 import { UpdateHostCommand } from '@remnawave/backend-contract'
 import { zodResolver } from 'mantine-form-zod-resolver'
+import { notifications } from '@mantine/notifications'
 import { useTranslation } from 'react-i18next'
 import { useEffect, useState } from 'react'
 import { Modal, Text } from '@mantine/core'
@@ -84,20 +85,22 @@ export const EditHostModalWidget = () => {
                 xHttpExtraParams: xHttpExtraParamsParsed,
                 fingerprint:
                     (host.fingerprint as UpdateHostCommand.Request['fingerprint']) ?? undefined,
-                configProfileUuid: host.configProfileUuid ?? undefined,
-                configProfileInboundUuid: host.configProfileInboundUuid ?? undefined
+                inbound: {
+                    configProfileUuid: host.inbound.configProfileUuid ?? '',
+                    configProfileInboundUuid: host.inbound.configProfileInboundUuid ?? ''
+                }
             })
         }
     }, [host, configProfiles])
 
-    form.watch('configProfileInboundUuid', ({ value }) => {
-        const { configProfileUuid } = form.getValues()
-        if (!configProfileUuid) {
+    form.watch('inbound.configProfileInboundUuid', ({ value }) => {
+        const { inbound } = form.getValues()
+        if (!inbound?.configProfileUuid) {
             return
         }
 
         const configProfile = configProfiles?.configProfiles.find(
-            (configProfile) => configProfile.uuid === configProfileUuid
+            (configProfile) => configProfile.uuid === inbound.configProfileUuid
         )
         if (configProfile) {
             form.setFieldValue(
@@ -141,6 +144,16 @@ export const EditHostModalWidget = () => {
             return
         }
 
+        if (!host.inbound.configProfileInboundUuid || !host.inbound.configProfileUuid) {
+            notifications.show({
+                title: 'Error',
+                message: 'Dangling host cannot be cloned',
+                color: 'red'
+            })
+
+            return
+        }
+
         createHost({
             variables: {
                 ...host,
@@ -155,8 +168,10 @@ export const EditHostModalWidget = () => {
                 xHttpExtraParams: host.xHttpExtraParams ?? undefined,
                 fingerprint:
                     (host.fingerprint as UpdateHostCommand.Request['fingerprint']) ?? undefined,
-                configProfileUuid: host.configProfileUuid ?? undefined,
-                configProfileInboundUuid: host.configProfileInboundUuid ?? undefined
+                inbound: {
+                    configProfileUuid: host.inbound.configProfileUuid,
+                    configProfileInboundUuid: host.inbound.configProfileInboundUuid
+                }
             }
         })
     }

@@ -50,16 +50,18 @@ export const BaseNodeForm = <T extends CreateNodeCommand.Request | UpdateNodeCom
 
     const saveInbounds = (inbounds: string[], configProfileUuid: string) => {
         form.setValues({
-            activeInbounds: inbounds,
-            activeConfigProfileUuid: configProfileUuid
+            configProfile: {
+                activeInbounds: inbounds,
+                activeConfigProfileUuid: configProfileUuid
+            }
         } as Partial<T>)
         form.setTouched({
-            activeInbounds: true,
-            activeConfigProfileUuid: true
+            activeConfigProfileUuid: true,
+            activeInbounds: true
         })
         form.setDirty({
-            activeInbounds: true,
-            activeConfigProfileUuid: true
+            activeConfigProfileUuid: true,
+            activeInbounds: true
         })
     }
 
@@ -263,9 +265,14 @@ export const BaseNodeForm = <T extends CreateNodeCommand.Request | UpdateNodeCom
                     {!isConfigProfilesLoading && configProfiles && (
                         <Stack gap="xs" mb={10}>
                             <ShowConfigProfilesWithInboundsFeature
-                                activeConfigProfileInbounds={form.getValues().activeInbounds}
-                                activeConfigProfileUuid={form.getValues().activeConfigProfileUuid}
+                                activeConfigProfileInbounds={
+                                    form.getValues().configProfile?.activeInbounds ?? []
+                                }
+                                activeConfigProfileUuid={
+                                    form.getValues().configProfile?.activeConfigProfileUuid ?? ''
+                                }
                                 configProfiles={configProfiles.configProfiles}
+                                errors={form.errors.configProfile}
                                 onSaveInbounds={saveInbounds}
                             />
                         </Stack>

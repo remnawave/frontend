@@ -26,7 +26,7 @@ export function HostCardWidget(props: IProps) {
     }
 
     const configProfile = configProfiles.find(
-        (configProfile) => configProfile.uuid === item.configProfileUuid
+        (configProfile) => configProfile.uuid === item.inbound.configProfileUuid
     )
 
     const isFiltered = selectedInboundTag !== 'ALL' && configProfile?.uuid !== selectedInboundTag
@@ -122,10 +122,12 @@ export function HostCardWidget(props: IProps) {
                                             {configProfile?.name || 'DANGLING'}
                                         </Badge>
 
-                                        {item.configProfileInboundUuid && (
+                                        {item.inbound.configProfileInboundUuid && (
                                             <Badge
                                                 autoContrast
-                                                color={ch.hex(item.configProfileInboundUuid)}
+                                                color={ch.hex(
+                                                    item.inbound.configProfileInboundUuid
+                                                )}
                                                 leftSection={<PiTag size={16} />}
                                                 radius="md"
                                                 size="lg"
@@ -134,7 +136,7 @@ export function HostCardWidget(props: IProps) {
                                                 {configProfile?.inbounds.find(
                                                     (inbound) =>
                                                         inbound.uuid ===
-                                                        item.configProfileInboundUuid
+                                                        item.inbound.configProfileInboundUuid
                                                 )?.tag || 'UNKNOWN'}
                                             </Badge>
                                         )}
@@ -234,10 +236,12 @@ export function HostCardWidget(props: IProps) {
                                             {configProfile?.name || 'DANGLING'}
                                         </Badge>
 
-                                        {item.configProfileInboundUuid && (
+                                        {item.inbound.configProfileInboundUuid && (
                                             <Badge
                                                 autoContrast
-                                                color={ch.hex(item.configProfileInboundUuid)}
+                                                color={ch.hex(
+                                                    item.inbound.configProfileInboundUuid
+                                                )}
                                                 leftSection={<PiTag size={14} />}
                                                 radius="md"
                                                 size="lg"
@@ -246,7 +250,7 @@ export function HostCardWidget(props: IProps) {
                                                 {configProfile?.inbounds.find(
                                                     (inbound) =>
                                                         inbound.uuid ===
-                                                        item.configProfileInboundUuid
+                                                        item.inbound.configProfileInboundUuid
                                                 )?.tag || 'UNKNOWN'}
                                             </Badge>
                                         )}

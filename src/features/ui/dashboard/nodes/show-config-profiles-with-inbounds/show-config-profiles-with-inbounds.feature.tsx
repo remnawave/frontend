@@ -2,6 +2,7 @@ import { Badge, Button, Flex, Group, Paper, Stack, Text } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
 import { TbFile } from 'react-icons/tb'
 import { useMemo } from 'react'
+import clsx from 'clsx'
 
 import { ConfigProfilesDrawer } from '@widgets/dashboard/nodes/config-profiles-drawer/config-profiles.drawer.widget'
 import { XtlsLogo } from '@shared/ui/logos/xtls-logo'
@@ -9,8 +10,13 @@ import { XtlsLogo } from '@shared/ui/logos/xtls-logo'
 import { IProps } from './interfaces'
 
 export function ShowConfigProfilesWithInboundsFeature(props: IProps) {
-    const { activeConfigProfileInbounds, activeConfigProfileUuid, configProfiles, onSaveInbounds } =
-        props
+    const {
+        activeConfigProfileInbounds,
+        activeConfigProfileUuid,
+        configProfiles,
+        onSaveInbounds,
+        errors
+    } = props
 
     const [opened, handlers] = useDisclosure(false)
 
@@ -49,9 +55,11 @@ export function ShowConfigProfilesWithInboundsFeature(props: IProps) {
                 p="md"
                 radius="md"
                 style={{
-                    borderColor: activeProfile
-                        ? 'var(--mantine-color-cyan-filled)'
-                        : 'var(--mantine-color-gray-4)'
+                    borderColor: clsx(
+                        !activeProfile && !errors && 'var(--mantine-color-gray-4)',
+                        activeProfile && 'var(--mantine-color-cyan-filled)',
+                        errors && 'var(--mantine-color-red-4)'
+                    )
                 }}
                 withBorder
             >

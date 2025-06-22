@@ -108,21 +108,29 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
     }
 
     const isXhttpExtraButtonDisabled = () => {
-        return (
-            !configProfiles ||
-            !form.getValues().configProfileUuid ||
-            !configProfiles.some(
-                (configProfile) =>
-                    configProfile.uuid === form.getValues().configProfileUuid &&
-                    configProfile.inbounds.some((inbound) => inbound.network === 'xhttp')
-            )
+        const { inbound } = form.getValues()
+
+        if (!inbound) {
+            return true
+        }
+
+        if (!configProfiles || !inbound.configProfileInboundUuid || !inbound.configProfileUuid) {
+            return true
+        }
+
+        return !configProfiles.some(
+            (configProfile) =>
+                configProfile.uuid === inbound.configProfileUuid &&
+                configProfile.inbounds.some((inbound) => inbound.network === 'xhttp')
         )
     }
 
     const saveInbound = (inbound: string, configProfileUuid: string) => {
         form.setValues({
-            configProfileInboundUuid: inbound,
-            configProfileUuid
+            inbound: {
+                configProfileInboundUuid: inbound,
+                configProfileUuid
+            }
         } as Partial<T>)
         form.setTouched({
             configProfileInboundUuid: true,
@@ -161,9 +169,11 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
                 <Stack gap="xs">
                     <HostSelectInboundFeature
                         activeConfigProfileInbound={
-                            form.getValues().configProfileInboundUuid ?? undefined
+                            form.getValues().inbound?.configProfileInboundUuid ?? undefined
                         }
-                        activeConfigProfileUuid={form.getValues().configProfileUuid ?? undefined}
+                        activeConfigProfileUuid={
+                            form.getValues().inbound?.configProfileUuid ?? undefined
+                        }
                         configProfiles={configProfiles}
                         onSaveInbound={saveInbound}
                     />

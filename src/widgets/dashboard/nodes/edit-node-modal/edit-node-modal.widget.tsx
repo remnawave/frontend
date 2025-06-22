@@ -92,8 +92,13 @@ export const EditNodeModalConnectorWidget = () => {
                 trafficResetDay: node.trafficResetDay ?? undefined,
                 notifyPercent: node.notifyPercent ?? undefined,
                 consumptionMultiplier: node.consumptionMultiplier ?? undefined,
-                activeConfigProfileUuid: node.activeConfigProfileUuid ?? undefined,
-                activeInbounds: node.activeInbounds?.map((inbound) => inbound.uuid) ?? [],
+
+                configProfile: {
+                    activeConfigProfileUuid: node.configProfile.activeConfigProfileUuid ?? '',
+                    activeInbounds:
+                        node.configProfile.activeInbounds.map((inbound) => inbound.uuid) ?? []
+                },
+
                 providerUuid: node.providerUuid ?? undefined
             })
         }
@@ -110,7 +115,11 @@ export const EditNodeModalConnectorWidget = () => {
                 uuid: node.uuid,
                 name: values.name?.trim(),
                 address: values.address?.trim(),
-                trafficLimitBytes: gbToBytesUtil(values.trafficLimitBytes)
+                trafficLimitBytes: gbToBytesUtil(values.trafficLimitBytes),
+                configProfile: {
+                    activeConfigProfileUuid: values.configProfile?.activeConfigProfileUuid ?? '',
+                    activeInbounds: values.configProfile?.activeInbounds ?? []
+                }
             }
         })
     })

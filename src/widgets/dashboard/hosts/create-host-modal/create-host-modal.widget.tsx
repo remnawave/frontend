@@ -44,7 +44,7 @@ export const CreateHostModalWidget = () => {
     })
 
     const handleSubmit = form.onSubmit(async (values) => {
-        if (!values.configProfileInboundUuid || !values.configProfileUuid) {
+        if (!values.inbound.configProfileInboundUuid || !values.inbound.configProfileUuid) {
             notifications.show({
                 title: 'Error',
                 message: 'Please select the config profile and inbound',
@@ -57,9 +57,11 @@ export const CreateHostModalWidget = () => {
         createHost({
             variables: {
                 ...values,
-                configProfileInboundUuid: values.configProfileInboundUuid,
-                configProfileUuid: values.configProfileUuid,
-                isDisabled: !values.isDisabled
+                isDisabled: !values.isDisabled,
+                inbound: {
+                    configProfileInboundUuid: values.inbound.configProfileInboundUuid,
+                    configProfileUuid: values.inbound.configProfileUuid
+                }
             }
         })
 
@@ -70,8 +72,8 @@ export const CreateHostModalWidget = () => {
         form.setFieldValue('securityLayer', SECURITY_LAYERS.DEFAULT)
     }, [form])
 
-    form.watch('configProfileInboundUuid', ({ value }) => {
-        const { configProfileUuid } = form.getValues()
+    form.watch('inbound.configProfileInboundUuid', ({ value }) => {
+        const { configProfileUuid } = form.getValues().inbound
         if (!configProfileUuid) {
             return
         }
