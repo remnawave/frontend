@@ -4,6 +4,7 @@ import {
     Collapse,
     Divider,
     Group,
+    HoverCard,
     NumberInput,
     rem,
     Select,
@@ -16,6 +17,7 @@ import {
 } from '@mantine/core'
 import { CreateNodeCommand, UpdateNodeCommand } from '@remnawave/backend-contract'
 import { PiCheckDuotone, PiFloppyDiskDuotone, PiXDuotone } from 'react-icons/pi'
+import { HiQuestionMarkCircle } from 'react-icons/hi'
 import { useTranslation } from 'react-i18next'
 import { motion } from 'framer-motion'
 
@@ -215,9 +217,33 @@ export const BaseNodeForm = <T extends CreateNodeCommand.Request | UpdateNodeCom
 
                 <Stack gap="md" style={{ flex: '1 1 350px' }}>
                     <Stack gap="xs" mb={10}>
-                        <Text fw={600} size="sm">
-                            {t('base-node-form.consumption-multiplier')}
-                        </Text>
+                        <Group gap="xs" justify="flex-start" w="100%">
+                            <Text fw={600} size="sm">
+                                {t('base-node-form.consumption-multiplier')}
+                            </Text>
+
+                            <HoverCard shadow="md" width={280} withArrow>
+                                <HoverCard.Target>
+                                    <ActionIcon color="gray" size="xs" variant="subtle">
+                                        <HiQuestionMarkCircle size={20} />
+                                    </ActionIcon>
+                                </HoverCard.Target>
+                                <HoverCard.Dropdown>
+                                    <Stack gap="sm">
+                                        <Text fw={600} size="sm">
+                                            {t('base-node-form.consumption-multiplier')}
+                                        </Text>
+                                        <Text c="dimmed" size="sm">
+                                            {t('base-node-form.consumption-m-line-1')}
+                                        </Text>
+                                        <Text c="dimmed" size="sm">
+                                            {t('base-node-form.consumption-m-line-2')}
+                                        </Text>
+                                    </Stack>
+                                </HoverCard.Dropdown>
+                            </HoverCard>
+                        </Group>
+
                         <Slider
                             key={form.key('consumptionMultiplier')}
                             {...form.getInputProps('consumptionMultiplier')}

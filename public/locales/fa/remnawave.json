@@ -372,7 +372,9 @@
         "e-g-50": "مثلا 50",
         "select-active-inbounds-for-this-node": "اینباندهای فعال برای این نود را انتخاب کنید",
         "inbounds": "اینباندها",
-        "save": "ذخیره"
+        "save": "ذخیره",
+        "consumption-m-line-1": "Applies selected multiplier to user's traffic (1.0 = normal, 0.5 = half, 2.0 = double).",
+        "consumption-m-line-2": "In simple terms, this means that if a user's traffic limit is 1 GiB and the consumption multiplier is 2.0, the user will be able to use only 0.5 GiB of traffic (real usage), but Remnawave will show usage as 1 GiB and the user will be LIMITED."
     },
     "home": {
         "page": {
