@@ -214,56 +214,50 @@ export function HostCardWidget(props: IProps) {
                                         )}
                                     </ActionIcon>
 
-                                    <Group flex={1} gap="xs" miw={0} wrap="nowrap">
-                                        <Badge
-                                            autoContrast
-                                            color={
-                                                configProfile?.uuid
-                                                    ? ch.hex(configProfile.uuid)
-                                                    : 'red'
-                                            }
-                                            leftSection={
-                                                configProfile?.uuid ? (
-                                                    <XtlsLogo size={14} />
-                                                ) : (
-                                                    <TbAlertCircle size={14} />
-                                                )
-                                            }
-                                            radius="md"
-                                            size="lg"
-                                            variant="light"
-                                        >
-                                            {configProfile?.name || 'DANGLING'}
-                                        </Badge>
-
-                                        {item.inbound.configProfileInboundUuid && (
-                                            <Badge
-                                                autoContrast
-                                                color={ch.hex(
-                                                    item.inbound.configProfileInboundUuid
-                                                )}
-                                                leftSection={<PiTag size={14} />}
-                                                radius="md"
-                                                size="lg"
-                                                variant="outline"
-                                            >
-                                                {configProfile?.inbounds.find(
-                                                    (inbound) =>
-                                                        inbound.uuid ===
-                                                        item.inbound.configProfileInboundUuid
-                                                )?.tag || 'UNKNOWN'}
-                                            </Badge>
-                                        )}
+                                    <Group gap="md" style={{ flexShrink: 0 }} wrap="nowrap">
+                                        <Text fw={600}>{item.remark}</Text>
+                                        <Text c="dimmed" className={classes.hostAddress}>
+                                            {item.address}
+                                            {item.port ? `:${item.port}` : ''}
+                                        </Text>
                                     </Group>
                                 </Group>
-
                                 <Group gap="md" style={{ flexShrink: 0 }} wrap="nowrap">
-                                    <Text c="dimmed" className={classes.hostAddress}>
-                                        {item.address}
-                                        {item.port ? `:${item.port}` : ''}
-                                    </Text>
+                                    {item.inbound.configProfileInboundUuid && (
+                                        <Badge
+                                            autoContrast
+                                            color={ch.hex(item.inbound.configProfileInboundUuid)}
+                                            leftSection={<PiTag size={14} />}
+                                            radius="md"
+                                            size="lg"
+                                            variant="outline"
+                                        >
+                                            {configProfile?.inbounds.find(
+                                                (inbound) =>
+                                                    inbound.uuid ===
+                                                    item.inbound.configProfileInboundUuid
+                                            )?.tag || 'UNKNOWN'}
+                                        </Badge>
+                                    )}
 
-                                    <Text fw={600}>{item.remark}</Text>
+                                    <Badge
+                                        autoContrast
+                                        color={
+                                            configProfile?.uuid ? ch.hex(configProfile.uuid) : 'red'
+                                        }
+                                        leftSection={
+                                            configProfile?.uuid ? (
+                                                <XtlsLogo size={14} />
+                                            ) : (
+                                                <TbAlertCircle size={14} />
+                                            )
+                                        }
+                                        radius="md"
+                                        size="lg"
+                                        variant="light"
+                                    >
+                                        {configProfile?.name || 'DANGLING'}
+                                    </Badge>
                                 </Group>
                             </Group>
                         </Box>
