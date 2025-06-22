@@ -15,9 +15,9 @@ import {
 } from '@mantine/core'
 import { IconChevronDown, IconFlag, IconServer } from '@tabler/icons-react'
 import { GetUserAccessibleNodesCommand } from '@remnawave/backend-contract'
+import { TbCirclesRelation, TbServer } from 'react-icons/tb'
 import ReactCountryFlag from 'react-country-flag'
-import { PiTag, PiUsers } from 'react-icons/pi'
-import { TbServer } from 'react-icons/tb'
+import { PiTag } from 'react-icons/pi'
 
 import { MODALS, useModalsStore } from '@entities/dashboard/modal-store'
 import { useGetUserAccessibleNodes } from '@shared/api/hooks'
@@ -147,7 +147,7 @@ export const UserAccessibleNodesModalWidget = () => {
                                     {node.children?.length && (
                                         <Badge
                                             color="violet"
-                                            leftSection={<PiUsers size={22} />}
+                                            leftSection={<TbCirclesRelation size={22} />}
                                             size="lg"
                                             variant="light"
                                         >
@@ -183,7 +183,10 @@ export const UserAccessibleNodesModalWidget = () => {
                                             }}
                                         />
                                     )}
-                                    <PiUsers color="var(--mantine-color-violet-4)" size={22} />
+                                    <TbCirclesRelation
+                                        color="var(--mantine-color-violet-4)"
+                                        size={22}
+                                    />
                                     <Text c="gray.3" fw={500} size="lg">
                                         {node.label}
                                     </Text>
@@ -299,7 +302,7 @@ export const UserAccessibleNodesModalWidget = () => {
 
                         <Badge
                             color="violet"
-                            leftSection={<PiUsers size={22} />}
+                            leftSection={<TbCirclesRelation size={22} />}
                             size="lg"
                             variant="light"
                         >

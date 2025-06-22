@@ -28,6 +28,7 @@ import {
 } from '@shared/api/hooks'
 import { ConfigProfileCardShared } from '@shared/ui/config-profiles/config-profile-card/config-profile-card.shared'
 import { queryClient } from '@shared/api/query-client'
+import { formatInt } from '@shared/utils/misc'
 
 import { IProps } from './interfaces'
 
@@ -236,7 +237,10 @@ export const InternalSquadsDrawer = (props: IProps) => {
                                     size="md"
                                     variant="outline"
                                 >
-                                    {internalSquad.info.membersCount} members
+                                    {formatInt(internalSquad.info.membersCount, {
+                                        thousandSeparator: ','
+                                    })}{' '}
+                                    members
                                 </Badge>
                             </Group>
                         </Group>

@@ -5,6 +5,7 @@ import { TbEdit } from 'react-icons/tb'
 import { memo } from 'react'
 
 import { XtlsLogo } from '@shared/ui/logos/xtls-logo'
+import { formatInt } from '@shared/utils/misc'
 
 import { InternalSquadsDrawer } from '../internal-squads-drawer'
 import classes from './Checkbox.module.css'
@@ -42,7 +43,9 @@ export const InternalSquadCheckboxCard = memo((props: IProps) => {
                             size="md"
                             variant="outline"
                         >
-                            {internalSquad.info.membersCount}
+                            {formatInt(internalSquad.info.membersCount, {
+                                thousandSeparator: ','
+                            })}{' '}
                         </Badge>
                         <Badge
                             color="gray"

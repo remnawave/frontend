@@ -9,6 +9,7 @@ import {
     PiStarDuotone,
     PiUsersDuotone
 } from 'react-icons/pi'
+import { TbCirclesRelation } from 'react-icons/tb'
 import { useTranslation } from 'react-i18next'
 import { FaHornbill } from 'react-icons/fa6'
 
@@ -53,7 +54,7 @@ export const useMenuSections = (): MenuItem[] => {
                 {
                     name: 'Internal Squads',
                     href: ROUTES.DASHBOARD.MANAGEMENT.INTERNAL_SQUADS,
-                    icon: PiUsersDuotone
+                    icon: TbCirclesRelation
                 },
                 {
                     name: t('constants.nodes'),

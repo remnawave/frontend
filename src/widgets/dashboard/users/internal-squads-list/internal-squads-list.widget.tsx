@@ -1,5 +1,6 @@
-import { Checkbox, Stack, Text, TextInput } from '@mantine/core'
+import { Checkbox, Group, Stack, Text, TextInput } from '@mantine/core'
 import { useVirtualizer } from '@tanstack/react-virtual'
+import { TbCirclesRelation } from 'react-icons/tb'
 import { PiEmpty } from 'react-icons/pi'
 import { memo, useRef } from 'react'
 
@@ -29,9 +30,12 @@ export const InternalSquadsListWidget = memo((props: IProps) => {
     return (
         <Stack gap="md" mt={10}>
             <Stack gap={0}>
-                <Text fw={600} size="sm">
-                    {label}
-                </Text>
+                <Group gap={5}>
+                    <TbCirclesRelation size={20} />
+                    <Text fw={600} size="sm">
+                        {label}
+                    </Text>
+                </Group>
 
                 <Text c="dimmed" size="sm">
                     {description}
