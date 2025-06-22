@@ -55,7 +55,7 @@ export const useUserModalStore = create<IActions & IState>()(
                                 userUuid: null
                             }))
                             getState().actions.resetState()
-                        }, 300)
+                        }, 200)
                     }
                 },
                 setUserUuid: async (userUuid: string): Promise<void> => {
