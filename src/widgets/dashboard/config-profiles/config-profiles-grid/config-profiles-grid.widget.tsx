@@ -3,9 +3,9 @@ import {
     Badge,
     Box,
     Button,
-    ButtonGroup,
     Card,
     CopyButton,
+    Divider,
     Grid,
     Group,
     Stack,
@@ -15,16 +15,17 @@ import {
 } from '@mantine/core'
 import {
     PiCheck,
+    PiCircle,
     PiCopy,
     PiCpu,
-    PiDownload,
-    PiEye,
     PiPencilDuotone,
+    PiPulse,
     PiTag,
     PiTrashDuotone
 } from 'react-icons/pi'
 import { githubDarkTheme, JsonEditor } from 'json-edit-react'
 import { generatePath, useNavigate } from 'react-router-dom'
+import { TbDownload, TbEye } from 'react-icons/tb'
 import { modals } from '@mantine/modals'
 
 import { ActiveNodesListModalWithStoreShared } from '@shared/ui/config-profiles/active-nodes-list-modal-with-store/active-nodes-list-with-store.modal.shared'
@@ -32,6 +33,7 @@ import { MODALS, useModalsStore } from '@entities/dashboard/modal-store'
 import { QueryKeys, useDeleteConfigProfile } from '@shared/api/hooks'
 import { queryClient } from '@shared/api/query-client'
 import { XtlsLogo } from '@shared/ui/logos/xtls-logo'
+import { formatInt } from '@shared/utils/misc'
 import { ROUTES } from '@shared/constants'
 
 import { IProps } from './interfaces'
@@ -97,101 +99,164 @@ export function ConfigProfilesGridWidget(props: IProps) {
             {configProfiles.map((profile) => {
                 const nodesCount = profile.nodes.length
                 const inboundsCount = profile.inbounds.length
+                const isActive = nodesCount > 0
 
                 return (
                     <Grid.Col key={profile.uuid} span={{ base: 12, sm: 6, md: 4, lg: 3 }}>
                         <Card
                             h="100%"
-                            padding="md"
+                            onMouseEnter={(e) => {
+                                e.currentTarget.style.transform = 'translateY(-2px)'
+                                e.currentTarget.style.boxShadow = '0 8px 25px rgba(0, 0, 0, 0.15)'
+                            }}
+                            onMouseLeave={(e) => {
+                                e.currentTarget.style.transform = 'translateY(0)'
+                                e.currentTarget.style.boxShadow = '0 1px 3px rgba(0, 0, 0, 0.1)'
+                            }}
+                            padding="lg"
                             radius="md"
                             shadow="sm"
                             style={{
                                 display: 'flex',
-                                flexDirection: 'column'
+                                flexDirection: 'column',
+                                transition: 'all 0.2s ease',
+                                position: 'relative',
+                                overflow: 'hidden'
                             }}
                             withBorder
                         >
+                            <Box
+                                style={{
+                                    position: 'absolute',
+                                    top: 0,
+                                    left: 0,
+                                    right: 0,
+                                    height: '3px',
+                                    backgroundColor: isActive
+                                        ? 'var(--mantine-color-teal-5)'
+                                        : 'var(--mantine-color-gray-5)'
+                                }}
+                            />
+
                             <Stack gap="md" style={{ flex: 1 }}>
                                 <Group gap="xs" justify="space-between" wrap="nowrap">
-                                    <Group gap="xs" miw={0} style={{ flex: 1 }} wrap="nowrap">
-                                        <XtlsLogo size={20} />
-                                        <Text fw={600} lineClamp={2} size="md" title={profile.name}>
-                                            {profile.name}
+                                    <Group gap="sm" style={{ flex: 1, minWidth: 0 }} wrap="nowrap">
+                                        <ActionIcon
+                                            color={isActive ? 'teal' : 'gray'}
+                                            radius="md"
+                                            size="sm"
+                                            variant="light"
+                                        >
+                                            {isActive ? (
+                                                <PiPulse size={14} />
+                                            ) : (
+                                                <PiCircle size={14} />
+                                            )}
+                                        </ActionIcon>
+                                        <Text
+                                            fw={600}
+                                            lineClamp={1}
+                                            size="sm"
+                                            style={{ flex: 1 }}
+                                            title={profile.name}
+                                        >
+                                            <Group gap={6}>
+                                                <XtlsLogo size={20} />
+                                                <Text
+                                                    fw={600}
+                                                    lineClamp={2}
+                                                    size="md"
+                                                    title={profile.name}
+                                                >
+                                                    {profile.name}
+                                                </Text>
+                                            </Group>
                                         </Text>
                                     </Group>
 
-                                    <CopyButton timeout={2000} value={profile.uuid}>
-                                        {({ copied, copy }) => (
-                                            <Tooltip label={copied ? 'Copied!' : 'Copy UUID'}>
-                                                <ActionIcon
-                                                    color={copied ? 'teal' : 'gray'}
-                                                    onClick={copy}
-                                                    size="md"
-                                                    variant="subtle"
-                                                >
-                                                    {copied ? (
-                                                        <PiCheck size={18} />
-                                                    ) : (
-                                                        <PiCopy size={18} />
-                                                    )}
-                                                </ActionIcon>
-                                            </Tooltip>
-                                        )}
-                                    </CopyButton>
+                                    <Group gap={4}>
+                                        <CopyButton timeout={2000} value={profile.uuid}>
+                                            {({ copied, copy }) => (
+                                                <Tooltip label={copied ? 'Copied!' : 'Copy UUID'}>
+                                                    <ActionIcon
+                                                        color={copied ? 'teal' : 'gray'}
+                                                        onClick={copy}
+                                                        size="sm"
+                                                        variant="subtle"
+                                                    >
+                                                        {copied ? (
+                                                            <PiCheck size={14} />
+                                                        ) : (
+                                                            <PiCopy size={14} />
+                                                        )}
+                                                    </ActionIcon>
+                                                </Tooltip>
+                                            )}
+                                        </CopyButton>
 
-                                    <Tooltip label={'Delete'}>
-                                        <ActionIcon
-                                            color="red"
-                                            onClick={() =>
-                                                handleDeleteProfile(profile.uuid, profile.name)
-                                            }
-                                            size="md"
-                                            variant="subtle"
-                                        >
-                                            <PiTrashDuotone size={18} />
-                                        </ActionIcon>
-                                    </Tooltip>
+                                        <Tooltip label="Delete profile">
+                                            <ActionIcon
+                                                color="red"
+                                                onClick={() =>
+                                                    handleDeleteProfile(profile.uuid, profile.name)
+                                                }
+                                                size="sm"
+                                                variant="subtle"
+                                            >
+                                                <PiTrashDuotone size={14} />
+                                            </ActionIcon>
+                                        </Tooltip>
+                                    </Group>
                                 </Group>
 
-                                <Group gap="xs">
-                                    <Tooltip label="Total inbounds in profile" position="bottom">
-                                        <Badge
-                                            color="blue"
-                                            leftSection={<PiTag size={14} />}
-                                            size="lg"
-                                            variant="light"
-                                        >
-                                            {inboundsCount}
-                                        </Badge>
-                                    </Tooltip>
+                                <Stack gap="sm">
+                                    <Group gap="xs" justify="center">
+                                        <Tooltip label="Inbounds">
+                                            <Badge
+                                                color="blue"
+                                                leftSection={<PiTag size={12} />}
+                                                size="lg"
+                                                variant="light"
+                                            >
+                                                {formatInt(inboundsCount, {
+                                                    thousandSeparator: ','
+                                                })}
+                                            </Badge>
+                                        </Tooltip>
 
-                                    <Tooltip label="Active nodes" position="bottom">
-                                        <Badge
-                                            color={nodesCount > 0 ? 'teal' : 'red'}
-                                            leftSection={<PiCpu size={14} />}
-                                            onClick={() => {
-                                                setInternalData({
-                                                    internalState: profile.nodes,
-                                                    modalKey:
-                                                        MODALS.CONFIG_PROFILES_SHOW_ACTIVE_NODE
-                                                })
-                                                open(MODALS.CONFIG_PROFILES_SHOW_ACTIVE_NODE)
-                                            }}
-                                            size="lg"
-                                            style={{
-                                                cursor: 'pointer'
-                                            }}
-                                            variant="light"
-                                        >
-                                            {nodesCount}
-                                        </Badge>
-                                    </Tooltip>
-                                </Group>
+                                        <Tooltip label="Nodes">
+                                            <Badge
+                                                color={isActive ? 'teal' : 'gray'}
+                                                leftSection={<PiCpu size={12} />}
+                                                onClick={() => {
+                                                    setInternalData({
+                                                        internalState: profile.nodes,
+                                                        modalKey:
+                                                            MODALS.CONFIG_PROFILES_SHOW_ACTIVE_NODE
+                                                    })
+                                                    open(MODALS.CONFIG_PROFILES_SHOW_ACTIVE_NODE)
+                                                }}
+                                                size="lg"
+                                                style={{
+                                                    cursor: 'pointer'
+                                                }}
+                                                variant="light"
+                                            >
+                                                {formatInt(nodesCount, {
+                                                    thousandSeparator: ','
+                                                })}
+                                            </Badge>
+                                        </Tooltip>
+                                    </Group>
+                                </Stack>
 
-                                <Group justify="center">
-                                    <ButtonGroup>
+                                <Divider />
+
+                                <Stack gap="xs">
+                                    <Group grow>
                                         <Button
-                                            color="gray"
+                                            color="blue"
+                                            leftSection={<TbDownload size={16} />}
                                             onClick={() => {
                                                 const jsonString = JSON.stringify(
                                                     profile.config,
@@ -210,14 +275,14 @@ export function ConfigProfilesGridWidget(props: IProps) {
                                                 document.body.removeChild(a)
                                                 URL.revokeObjectURL(url)
                                             }}
-                                            size="sm"
-                                            variant="default"
+                                            size="xs"
+                                            variant="light"
                                         >
-                                            <PiDownload size={18} />
+                                            Download
                                         </Button>
-
                                         <Button
-                                            color="gray"
+                                            color="teal"
+                                            leftSection={<TbEye size={16} />}
                                             onClick={() => {
                                                 modals.open({
                                                     children: (
@@ -237,32 +302,33 @@ export function ConfigProfilesGridWidget(props: IProps) {
                                                     size: 'xl'
                                                 })
                                             }}
-                                            size="sm"
-                                            variant="default"
-                                        >
-                                            <PiEye size={18} />
-                                        </Button>
-
-                                        <Button
-                                            leftSection={<PiPencilDuotone size={16} />}
-                                            onClick={() =>
-                                                navigate(
-                                                    generatePath(
-                                                        ROUTES.DASHBOARD.MANAGEMENT
-                                                            .CONFIG_PROFILE_BY_UUID,
-                                                        {
-                                                            uuid: profile.uuid
-                                                        }
-                                                    )
-                                                )
-                                            }
-                                            size="sm"
+                                            size="xs"
                                             variant="light"
                                         >
-                                            Edit XRay Config
+                                            Quick view
                                         </Button>
-                                    </ButtonGroup>
-                                </Group>
+                                    </Group>
+
+                                    <Button
+                                        fullWidth
+                                        leftSection={<PiPencilDuotone size={16} />}
+                                        onClick={() =>
+                                            navigate(
+                                                generatePath(
+                                                    ROUTES.DASHBOARD.MANAGEMENT
+                                                        .CONFIG_PROFILE_BY_UUID,
+                                                    {
+                                                        uuid: profile.uuid
+                                                    }
+                                                )
+                                            )
+                                        }
+                                        size="xs"
+                                        variant="default"
+                                    >
+                                        Edit Xray Config
+                                    </Button>
+                                </Stack>
                             </Stack>
                         </Card>
                     </Grid.Col>

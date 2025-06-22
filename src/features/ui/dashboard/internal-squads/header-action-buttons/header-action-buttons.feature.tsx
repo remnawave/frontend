@@ -92,7 +92,11 @@ export const InternalSquadsHeaderActionButtonsFeature = () => {
                                 Cancel
                             </Button>
 
-                            <Button loading={isPending} type="submit">
+                            <Button
+                                disabled={!!nameField.error || nameField.getValue().length === 0}
+                                loading={isPending}
+                                type="submit"
+                            >
                                 Create
                             </Button>
                         </Group>

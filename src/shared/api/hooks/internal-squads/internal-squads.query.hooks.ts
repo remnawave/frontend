@@ -3,6 +3,7 @@ import {
     GetInternalSquadsCommand
 } from '@remnawave/backend-contract'
 import { createQueryKeys } from '@lukemorales/query-key-factory'
+import { keepPreviousData } from '@tanstack/react-query'
 import { notifications } from '@mantine/notifications'
 
 import { sToMs } from '@shared/utils/time-utils'
@@ -23,9 +24,11 @@ export const useGetInternalSquads = createGetQueryHook({
     responseSchema: GetInternalSquadsCommand.ResponseSchema,
     getQueryKey: () => internalSquadsQueryKeys.getInternalSquads.queryKey,
     rQueryParams: {
+        placeholderData: keepPreviousData,
         refetchOnMount: true,
-        staleTime: sToMs(30)
+        staleTime: sToMs(15)
     },
+
     errorHandler: (error) => {
         notifications.show({
             title: `Get All Internal Squads`,

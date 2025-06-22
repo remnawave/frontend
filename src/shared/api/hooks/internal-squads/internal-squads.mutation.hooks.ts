@@ -1,6 +1,8 @@
 import {
+    AddUsersToInternalSquadCommand,
     CreateInternalSquadCommand,
     DeleteInternalSquadCommand,
+    DeleteUsersFromInternalSquadCommand,
     UpdateInternalSquadCommand
 } from '@remnawave/backend-contract'
 import { notifications } from '@mantine/notifications'
@@ -71,6 +73,40 @@ export const useCreateInternalSquad = createMutationHook({
         onError: (error) => {
             notifications.show({
                 title: `Create Internal Squad`,
+                message:
+                    error instanceof Error ? error.message : `Request failed with unknown error.`,
+                color: 'red'
+            })
+        }
+    }
+})
+
+export const useAddUsersToInternalSquad = createMutationHook({
+    endpoint: AddUsersToInternalSquadCommand.TSQ_url,
+    responseSchema: AddUsersToInternalSquadCommand.ResponseSchema,
+    routeParamsSchema: AddUsersToInternalSquadCommand.RequestSchema,
+    requestMethod: AddUsersToInternalSquadCommand.endpointDetails.REQUEST_METHOD,
+    rMutationParams: {
+        onError: (error) => {
+            notifications.show({
+                title: `Add Users to Internal Squad`,
+                message:
+                    error instanceof Error ? error.message : `Request failed with unknown error.`,
+                color: 'red'
+            })
+        }
+    }
+})
+
+export const useDeleteUsersFromInternalSquad = createMutationHook({
+    endpoint: DeleteUsersFromInternalSquadCommand.TSQ_url,
+    responseSchema: DeleteUsersFromInternalSquadCommand.ResponseSchema,
+    routeParamsSchema: DeleteUsersFromInternalSquadCommand.RequestSchema,
+    requestMethod: DeleteUsersFromInternalSquadCommand.endpointDetails.REQUEST_METHOD,
+    rMutationParams: {
+        onError: (error) => {
+            notifications.show({
+                title: `Remove Users from Internal Squad`,
                 message:
                     error instanceof Error ? error.message : `Request failed with unknown error.`,
                 color: 'red'
