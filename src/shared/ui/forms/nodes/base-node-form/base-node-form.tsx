@@ -17,6 +17,7 @@ import {
 import { CreateNodeCommand, UpdateNodeCommand } from '@remnawave/backend-contract'
 import { PiCheckDuotone, PiFloppyDiskDuotone, PiXDuotone } from 'react-icons/pi'
 import { useTranslation } from 'react-i18next'
+import { motion } from 'framer-motion'
 
 import { ShowConfigProfilesWithInboundsFeature } from '@features/ui/dashboard/nodes/show-config-profiles-with-inbounds'
 import { SelectInfraProviderShared } from '@shared/ui/infra-billing/select-infra-provider/select-infra-provider.shared'
@@ -258,24 +259,34 @@ export const BaseNodeForm = <T extends CreateNodeCommand.Request | UpdateNodeCom
                                 <Skeleton height={16} width="60%" />
                             </Stack>
 
-                            <Skeleton height={120} radius="md" />
-                            <Skeleton height={36} radius="sm" width="100%" />
+                            <Skeleton height={76} radius="md" />
+                            <Skeleton height={25} radius="sm" width="100%" />
                         </Stack>
                     )}
                     {!isConfigProfilesLoading && configProfiles && (
-                        <Stack gap="xs" mb={10}>
-                            <ShowConfigProfilesWithInboundsFeature
-                                activeConfigProfileInbounds={
-                                    form.getValues().configProfile?.activeInbounds ?? []
-                                }
-                                activeConfigProfileUuid={
-                                    form.getValues().configProfile?.activeConfigProfileUuid ?? ''
-                                }
-                                configProfiles={configProfiles.configProfiles}
-                                errors={form.errors.configProfile}
-                                onSaveInbounds={saveInbounds}
-                            />
-                        </Stack>
+                        <motion.div
+                            animate={{ opacity: 1 }}
+                            initial={{ opacity: 0 }}
+                            transition={{
+                                duration: 0.4,
+                                ease: 'easeInOut'
+                            }}
+                        >
+                            <Stack gap="xs" key="123" mb={10}>
+                                <ShowConfigProfilesWithInboundsFeature
+                                    activeConfigProfileInbounds={
+                                        form.getValues().configProfile?.activeInbounds ?? []
+                                    }
+                                    activeConfigProfileUuid={
+                                        form.getValues().configProfile?.activeConfigProfileUuid ??
+                                        ''
+                                    }
+                                    configProfiles={configProfiles.configProfiles}
+                                    errors={form.errors.configProfile}
+                                    onSaveInbounds={saveInbounds}
+                                />
+                            </Stack>
+                        </motion.div>
                     )}
                 </Stack>
             </Group>

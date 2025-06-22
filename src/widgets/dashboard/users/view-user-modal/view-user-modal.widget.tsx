@@ -260,8 +260,8 @@ export const ViewUserModal = () => {
                     </Group>
 
                     <Group justify="space-between" mt={0}>
-                        <Skeleton height={40} width={150} />
-                        <Skeleton height={40} width={250} />
+                        <Skeleton height={60} width={150} />
+                        <Skeleton height={60} width={250} />
                     </Group>
                 </Stack>
             ) : (
