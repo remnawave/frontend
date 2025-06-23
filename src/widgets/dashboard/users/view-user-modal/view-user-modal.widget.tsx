@@ -8,6 +8,7 @@ import {
     CopyButton,
     Divider,
     Group,
+    HoverCard,
     Modal,
     NumberInput,
     Progress,
@@ -34,6 +35,7 @@ import { UpdateUserCommand } from '@remnawave/backend-contract'
 import { TbDevices2, TbServerCog } from 'react-icons/tb'
 import { zodResolver } from 'mantine-form-zod-resolver'
 import { notifications } from '@mantine/notifications'
+import { HiQuestionMarkCircle } from 'react-icons/hi'
 import { useEffect, useMemo, useState } from 'react'
 import { DateTimePicker } from '@mantine/dates'
 import { useTranslation } from 'react-i18next'
@@ -315,7 +317,49 @@ export const ViewUserModal = () => {
 
                                 <TextInput
                                     disabled
-                                    label={t('view-user-modal.widget.subscription-url')}
+                                    label={
+                                        <Group gap={4} justify="flex-start">
+                                            <Text>
+                                                {t('view-user-modal.widget.subscription-url')}
+                                            </Text>
+                                            <HoverCard shadow="md" width={280} withArrow>
+                                                <HoverCard.Target>
+                                                    <ActionIcon
+                                                        color="gray"
+                                                        size="xs"
+                                                        variant="subtle"
+                                                    >
+                                                        <HiQuestionMarkCircle size={20} />
+                                                    </ActionIcon>
+                                                </HoverCard.Target>
+                                                <HoverCard.Dropdown>
+                                                    <Stack gap="sm">
+                                                        <Text fw={600} size="sm">
+                                                            {t(
+                                                                'view-user-modal.widget.subscription-url'
+                                                            )}
+                                                        </Text>
+                                                        <Text c="dimmed" size="sm">
+                                                            {t(
+                                                                'view-user-modal.widget.subscription-url-description-line-1'
+                                                            )}
+                                                            <Code bg="gray.1" c="dark.4" fw={700}>
+                                                                SUB_PUBLIC_DOMAIN
+                                                            </Code>
+                                                            <br />
+                                                            {t(
+                                                                'view-user-modal.widget.subscription-url-description-line-2'
+                                                            )}
+                                                        </Text>
+                                                        <Code bg="gray.1" block c="dark.4" fw={700}>
+                                                            docker compose down && docker compose up
+                                                            -d
+                                                        </Code>
+                                                    </Stack>
+                                                </HoverCard.Dropdown>
+                                            </HoverCard>
+                                        </Group>
+                                    }
                                     leftSection={<PiLinkDuotone size="1rem" />}
                                     rightSection={
                                         <CopyButton

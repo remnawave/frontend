@@ -305,7 +305,9 @@
             "show-qr": "Show QR",
             "subscription-qr-code": "Subscription QR Code",
             "close": "Close",
-            "edit-user-headline": "Edit user"
+            "edit-user-headline": "Edit user",
+            "subscription-url-description-line-1": "Domain and path resolved from .env variable:",
+            "subscription-url-description-line-2": "If you want to change it, please change it in the .env file and restart Remnawave using command:"
         }
     },
     "base-api-token-form": {
