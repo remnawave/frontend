@@ -24,7 +24,7 @@ export const useGetConfigProfiles = createGetQueryHook({
     getQueryKey: () => configProfilesQueryKeys.getConfigProfiles.queryKey,
     rQueryParams: {
         refetchOnMount: true,
-        staleTime: sToMs(30)
+        staleTime: sToMs(5)
     },
     errorHandler: (error) => {
         notifications.show({

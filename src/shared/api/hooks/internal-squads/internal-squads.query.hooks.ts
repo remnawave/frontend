@@ -26,7 +26,7 @@ export const useGetInternalSquads = createGetQueryHook({
     rQueryParams: {
         placeholderData: keepPreviousData,
         refetchOnMount: true,
-        staleTime: sToMs(15)
+        staleTime: sToMs(5)
     },
 
     errorHandler: (error) => {
