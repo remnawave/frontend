@@ -88,7 +88,8 @@ export const EditHostModalWidget = () => {
                 inbound: {
                     configProfileUuid: host.inbound.configProfileUuid ?? '',
                     configProfileInboundUuid: host.inbound.configProfileInboundUuid ?? ''
-                }
+                },
+                serverDescription: host.serverDescription ?? undefined
             })
         }
     }, [host, configProfiles])
@@ -171,7 +172,8 @@ export const EditHostModalWidget = () => {
                 inbound: {
                     configProfileUuid: host.inbound.configProfileUuid,
                     configProfileInboundUuid: host.inbound.configProfileInboundUuid
-                }
+                },
+                serverDescription: host.serverDescription ?? undefined
             }
         })
     }

@@ -355,7 +355,16 @@
         "port-description-line-1": "Connection port.",
         "port-description-line-2": "In most cases, must match the port of selected inbound.",
         "sni-description-line-1": "SNI stands for Server Name Indication.",
-        "sni-description-line-2": "If not specified, the value from config's inbound will be used."
+        "sni-description-line-2": "If not specified, the value from config's inbound will be used.",
+        "host-visability": "Host Visability",
+        "select-one-inbound-to-apply-to-the-host": "Select one inbound to apply to the host",
+        "server-description-description": "Only for Happ.",
+        "server-description-header": "Server Description",
+        "server-description-line-1": "This feature fill only with Happ with ProviderID value. Please, refer to",
+        "server-description-line-2": "Happ documentation",
+        "server-description-line-3": "for more information.",
+        "server-description-line-4": "Remnawave will encode this value to base64. Do not place encoded value here.",
+        "server-description-placeholder": "Maximum 30 characters"
     },
     "base-node-form": {
         "country": "Country",

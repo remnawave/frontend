@@ -4,6 +4,7 @@ import {
     Collapse,
     Drawer,
     Group,
+    HoverCard,
     JsonInput,
     NumberInput,
     Select,
@@ -29,9 +30,12 @@ import {
     SECURITY_LAYERS,
     UpdateHostCommand
 } from '@remnawave/backend-contract'
+import { HiQuestionMarkCircle } from 'react-icons/hi'
 import { useDisclosure } from '@mantine/hooks'
 import { useTranslation } from 'react-i18next'
+import { Link } from 'react-router-dom'
 
+import { HappLogo } from '@pages/dashboard/utils/happ-routing-builder/ui/components/happ-routing-builder.page.component'
 import { HostSelectInboundFeature } from '@features/ui/dashboard/hosts/host-select-inbound/host-select-inbound.feature'
 import { PopoverWithInfoShared } from '@shared/ui/popovers/popover-with-info'
 import { DeleteHostFeature } from '@features/ui/dashboard/hosts/delete-host'
@@ -147,7 +151,7 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
             <Stack gap="md">
                 <Group gap="xs" justify="space-between">
                     <Text fw={500} size="sm">
-                        Host Visability
+                        {t('base-host-form.host-visability')}
                     </Text>
                     <Switch
                         color="teal.8"
@@ -179,7 +183,7 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
                     />
 
                     <Text c="dimmed" size="xs">
-                        Select one inbound to apply to the host
+                        {t('base-host-form.select-one-inbound-to-apply-to-the-host')}
                     </Text>
                 </Stack>
 
@@ -327,6 +331,57 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
                                     </Tooltip>
                                 }
                                 {...form.getInputProps('securityLayer')}
+                            />
+
+                            <TextInput
+                                description={t('base-host-form.server-description-description')}
+                                key={form.key('serverDescription')}
+                                label={
+                                    <Group gap={4} justify="flex-start">
+                                        <Text fw={600} size="sm">
+                                            {t('base-host-form.server-description-header')}
+                                        </Text>
+                                        <HoverCard shadow="md" width={280} withArrow>
+                                            <HoverCard.Target>
+                                                <ActionIcon color="gray" size="xs" variant="subtle">
+                                                    <HiQuestionMarkCircle size={20} />
+                                                </ActionIcon>
+                                            </HoverCard.Target>
+                                            <HoverCard.Dropdown>
+                                                <Stack gap="sm">
+                                                    <Text fw={600} size="sm">
+                                                        {t(
+                                                            'base-host-form.server-description-header'
+                                                        )}
+                                                    </Text>
+                                                    <Text c="dimmed" size="sm">
+                                                        {t(
+                                                            'base-host-form.server-description-line-1'
+                                                        )}{' '}
+                                                        <Link
+                                                            target="_blank"
+                                                            to="https://www.happ.su/main/dev-docs/examples-of-links-and-parameters#serverdescription"
+                                                        >
+                                                            {t(
+                                                                'base-host-form.server-description-line-2'
+                                                            )}
+                                                        </Link>{' '}
+                                                        {t(
+                                                            'base-host-form.server-description-line-3'
+                                                        )}
+                                                        <br />
+                                                        {t(
+                                                            'base-host-form.server-description-line-4'
+                                                        )}
+                                                    </Text>
+                                                </Stack>
+                                            </HoverCard.Dropdown>
+                                        </HoverCard>
+                                    </Group>
+                                }
+                                leftSection={<HappLogo size={20} />}
+                                placeholder={t('base-host-form.server-description-placeholder')}
+                                {...form.getInputProps('serverDescription')}
                             />
 
                             <Group
