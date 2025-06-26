@@ -13,6 +13,7 @@ import { GetInfraProvidersCommand } from '@remnawave/backend-contract'
 import { TbClick, TbEdit, TbSum, TbTrash } from 'react-icons/tb'
 import { DataTableColumn } from 'mantine-datatable'
 import ReactCountryFlag from 'react-country-flag'
+import { TFunction } from 'i18next'
 
 import { faviconResolver, formatCurrencyWithIntl } from '@shared/utils/misc'
 
@@ -25,19 +26,25 @@ export function getInfraProvidersColumns(
     handleOpenModal: (
         row: GetInfraProvidersCommand.Response['response']['providers'][number]
     ) => void,
-    handleDeleteInfraProvider: (uuid: string) => void
+    handleDeleteInfraProvider: (uuid: string) => void,
+    t: TFunction
 ): DataTableColumn<GetInfraProvidersCommand.Response['response']['providers'][number]>[] {
     return [
         {
             accessor: 'name',
             ellipsis: true,
-            title: <InfraProvidersColumnTitle icon={HiOfficeBuilding} title="Hoster name" />,
+            title: (
+                <InfraProvidersColumnTitle
+                    icon={HiOfficeBuilding}
+                    title={t('use-infra-providers-columns.hoster-name')}
+                />
+            ),
             width: 200,
             footer: (
                 <Group align="center" gap="xs">
                     <TbSum size="1.2em" />
                     <Text fw={600} size="sm">
-                        {totalProviders} providers
+                        {totalProviders} {t('use-infra-providers-columns.providers')}
                     </Text>
                 </Group>
             ),
@@ -59,14 +66,24 @@ export function getInfraProvidersColumns(
         },
         {
             accessor: 'loginUrl',
-            title: <InfraProvidersColumnTitle icon={HiLink} title="Login URL" />,
+            title: (
+                <InfraProvidersColumnTitle
+                    icon={HiLink}
+                    title={t('use-infra-providers-columns.login-url')}
+                />
+            ),
             width: 300,
             render: ({ loginUrl }) => <InfraProvidersTableUrlCell url={loginUrl} />
         },
         {
             accessor: 'billingHistory',
             ellipsis: true,
-            title: <InfraProvidersColumnTitle icon={HiCurrencyDollar} title="Total, $" />,
+            title: (
+                <InfraProvidersColumnTitle
+                    icon={HiCurrencyDollar}
+                    title={t('use-infra-providers-columns.total')}
+                />
+            ),
             width: 140,
             textAlign: 'right',
             render: ({ billingHistory }) => (
@@ -86,7 +103,12 @@ export function getInfraProvidersColumns(
         {
             accessor: 'billingNodes',
             ellipsis: true,
-            title: <InfraProvidersColumnTitle icon={HiServer} title="Servers" />,
+            title: (
+                <InfraProvidersColumnTitle
+                    icon={HiServer}
+                    title={t('use-infra-providers-columns.servers')}
+                />
+            ),
             render: ({ billingNodes }) => (
                 <Group gap="xs">
                     {billingNodes.map((node, index) => (
@@ -113,7 +135,7 @@ export function getInfraProvidersColumns(
                     ))}
                     {billingNodes.length === 0 && (
                         <Text c="gray.6" size="xs">
-                            No servers
+                            {t('use-infra-providers-columns.no-servers')}
                         </Text>
                     )}
                 </Group>

@@ -5,20 +5,21 @@
         "config": "Xray 配置",
         "home": "首页",
         "hosts": "主机",
-        "inbounds": "入站",
         "nodes": "节点",
         "nodes-bandwidth-table": "带宽",
         "nodes-statistics": "统计数据",
         "users": "用户",
         "overview": "概述",
         "management": "管理",
-        "statistics": "统计数据",
         "subscription-settings": "订阅设置",
         "utils": "实用工具",
         "happ-routing-builder": "Happ 路由编辑器",
         "templates": "模板",
         "subscription": "订阅",
-        "subscription-page-builder": "订阅应用配置"
+        "subscription-page-builder": "订阅应用配置",
+        "config-profiles": "Config Profiles",
+        "internal-squads": "Internal Squads",
+        "infra-billing": "Infra Billing"
     },
     "bandwidth-metrics": {
         "current-year": "今年",
@@ -55,7 +56,6 @@
         "feature": {
             "save": "保存",
             "format": "格式化",
-            "copy-config": "复制配置",
             "failed-to-save-invalid-json": "保存失败，无效的 JSON。",
             "error": "错误",
             "save-anyway": "仍然保存",
@@ -103,9 +103,7 @@
         }
     },
     "header-buttons": {
-        "feature": {
-            "logout": "退出登录"
-        }
+        "feature": {}
     },
     "delete-host": {
         "feature": {
@@ -115,8 +113,7 @@
     "header-action-buttons": {
         "feature": {
             "create-new-host": "创建新主机",
-            "update": "刷新",
-            "all": "全部"
+            "update": "刷新"
         }
     },
     "delete-node": {
@@ -252,8 +249,6 @@
     },
     "create-user-modal": {
         "widget": {
-            "inbounds": "入站",
-            "inbounds-description": "指定用户可以使用哪些入站协议。",
             "user-description": "用户描述",
             "expiry-date": "过期日期",
             "pick-value": "选择值",
@@ -275,15 +270,15 @@
             "hwid-user-limit-line-3": "时有效。了解更多。",
             "disable-hwid-limit": "禁用 HWID 限制",
             "hwid-device-limit": "HWID 设备限制",
-            "expire-at-description": "用户的订阅服务将于该时间结束"
+            "expire-at-description": "用户的订阅服务将于该时间结束",
+            "internal-squads": "Internal squads",
+            "internal-squads-description": "Specify internal squads that will be assigned to the user"
         }
     },
     "login-form-feature": {
         "username": "用户名"
     },
-    "home-page": {
-        "users": "用户"
-    },
+    "home-page": {},
     "user-table": {
         "widget": {
             "list-of-all-users": "所有用户列表",
@@ -294,18 +289,15 @@
     "view-user-modal": {
         "widget": {
             "connection-details": "连接详情",
-            "last-traffic-reset-at": "上次流量重置于",
             "subscription-url": "订阅 URL",
             "subscription-short-uuid": "订阅短 UUID",
-            "username-cannot-be-changed": "用户名无法更改",
-            "user-details": "用户详情",
-            "loading-user-data": "正在加载用户数据...",
             "edit-user": "编辑用户",
-            "never": "从不",
-            "show-qr": "显示二维码",
             "subscription-qr-code": "订阅二维码",
             "close": "关闭",
-            "edit-user-headline": "编辑用户"
+            "edit-user-headline": "编辑用户",
+            "subscription-url-description-line-2": "If you want to change it, please change it in the .env file and restart Remnawave using command:",
+            "subscription-url-description-line-1": "Domain and path resolved from .env variable:",
+            "view-accessible-nodes": "View accessible nodes"
         }
     },
     "base-api-token-form": {
@@ -322,8 +314,6 @@
         "remark": "备注",
         "address": "地址",
         "port": "端口",
-        "inbound": "入站",
-        "select-inbound": "选择入站",
         "advanced-options": "高级选项",
         "host": "主机",
         "path": "路径",
@@ -353,7 +343,16 @@
         "port-description-line-1": "连接端口。",
         "port-description-line-2": "在大多数情况下，必须与所选入站的端口匹配。",
         "sni-description-line-1": "SNI 代表服务器名称。",
-        "sni-description-line-2": "如果未指定，将使用入站配置中的值。"
+        "sni-description-line-2": "如果未指定，将使用入站配置中的值。",
+        "host-visability": "Host Visability",
+        "server-description-description": "Only for Happ.",
+        "select-one-inbound-to-apply-to-the-host": "Select one inbound to apply to the host",
+        "server-description-header": "Server Description",
+        "server-description-line-1": "This feature fill only with Happ with ProviderID value. Please, refer to",
+        "server-description-line-2": "Happ documentation",
+        "server-description-line-3": "for more information.",
+        "server-description-line-4": "Remnawave will encode this value to base64. Do not place encoded value here.",
+        "server-description-placeholder": "Maximum 30 characters"
     },
     "base-node-form": {
         "country": "国家",
@@ -370,8 +369,6 @@
         "e-g-1-31": "例如 1-31",
         "notify-percent": "达量通知百分比",
         "e-g-50": "例如 50",
-        "select-active-inbounds-for-this-node": "为此节点选择活动入站",
-        "inbounds": "入站",
         "save": "保存",
         "consumption-m-line-1": "Applies selected multiplier to user's traffic (1.0 = normal, 0.5 = half, 2.0 = double).",
         "consumption-m-line-2": "In simple terms, this means that if a user's traffic limit is 1 GiB and the consumption multiplier is 2.0, the user will be able to use only 0.5 GiB of traffic (real usage), but Remnawave will show usage as 1 GiB and the user will be LIMITED."
@@ -494,8 +491,6 @@
         "widget": {
             "copy-link": "复制链接",
             "visual-editor": "可视化编辑器",
-            "code-viewer": "代码查看器",
-            "encode-happ-link": "编码 Happ 链接",
             "enter-the-configuration-name": "输入配置名称",
             "name": "名称",
             "russia": "俄罗斯",
@@ -549,7 +544,6 @@
             "import-from-base64": "从 Base64 导入",
             "paste-base64-or-happ-link-here": "在此处粘贴 Base64 或 Happ 链接",
             "decode": "解码",
-            "encoded-link": "编码后的链接",
             "basic-configuration": "基本配置",
             "remote-dns-settings": "远程 DNS 设置",
             "domestic-dns-settings": "国内 DNS 设置",
@@ -624,40 +618,10 @@
         }
     },
     "inbounds-page-header": {
-        "widget": {
-            "list-of-all-inbounds": "所有入站列表",
-            "inbounds": "入站",
-            "important-note": "重要提示",
-            "important-note-description-line-1": "所有批量操作都需要完全重启所有节点。",
-            "important-note-description-line-2": "请避免在短时间内发出过多请求。",
-            "important-note-description-line-3": "保存更改后，可能需要长达 30 秒才能在所有节点上应用。"
-        }
+        "widget": {}
     },
     "inbounds-card": {
-        "widget": {
-            "nodes": "节点",
-            "enabled-nodes": "启用此入站的节点",
-            "disabled-nodes": "禁用此入站的节点",
-            "remove": "移除",
-            "add": "添加",
-            "cancel": "取消",
-            "users": "用户",
-            "enabled-users": "启用此入站的用户",
-            "disabled-users": "禁用此入站的用户",
-            "show-raw-inbound": "显示原始入站",
-            "raw-inbound": "原始入站",
-            "are-you-sure": "您确定吗？",
-            "add-users-to-inbound-line-1": "您确定要将此入站添加到用户吗？",
-            "add-users-to-inbound-line-2": "此操作会将入站添加到所有用户。",
-            "remove-users-from-inbound-line-1": "您确定要从此入站移除用户吗？",
-            "remove-users-from-inbound-line-2": "此操作会将入站从所有用户中移除。",
-            "add-nodes-to-inbound-line-1": "您确定要将此入站添加到节点吗？",
-            "add-nodes-to-inbound-line-2": "此操作会将入站添加到所有节点。",
-            "remove-nodes-from-inbound-line-1": "您确定要从此入站移除节点吗？",
-            "remove-nodes-from-inbound-line-2": "此操作会将入站从所有节点中移除。",
-            "copied": "已复制",
-            "copy-uuid": "复制 UUID"
-        }
+        "widget": {}
     },
     "multi-select-hosts": {
         "feature": {
@@ -666,7 +630,6 @@
             "delete": "删除",
             "cancel": "取消",
             "set-inbound": "设置入站",
-            "inbound": "入站",
             "set-port": "设置端口",
             "port": "端口",
             "clear-selection": "清除选择",
@@ -755,12 +718,8 @@
                     "reset-traffic-confirmation-line-1": "您确定要重置 {{usersCount}} 位用户的流量吗？",
                     "reset-traffic-confirmation-line-2": "这将把他们的用量设为零。",
                     "reset": "重置",
-                    "change-active-inbounds": "更改活动入站",
                     "change": "更改",
-                    "no-inbounds-selected": "未选择入站",
-                    "please-select-at-least-one-inbound": "请至少选择一个入站",
                     "perform-action-on-users": "对 {{usersCount}} 位选定用户执行操作",
-                    "changes-the-active-inbounds-for-all-selected-users": "更改所有选定用户的活动入站",
                     "resets-the-traffic-usage-to-zero-for-all-selected-users": "将所有选定用户的流量使用重置为0",
                     "revokes-subscription-for-all-selected-users": "撤销所有选定用户的订阅"
                 }
@@ -807,7 +766,6 @@
         "feature": {
             "subscription-links": "订阅链接",
             "loading-subscription-links": "正在加载订阅链接...",
-            "show-links": "显示链接",
             "no-available-hosts-found-for-this-user": "未找到此用户的可用主机"
         }
     },
@@ -823,8 +781,6 @@
         "widget": {
             "no-data-available-for-the-selected-period": "所选时段无可用数据",
             "no-data-available": "无可用数据",
-            "click-to-show-all": "点击显示全部",
-            "click-to-highlight-only-this-node": "点击仅高亮此节点",
             "traffic-statistics": "流量统计",
             "usage-by-period": "时段用量",
             "7-days": "7 天",
@@ -851,9 +807,7 @@
     },
     "detailed-user-info-drawer": {
         "widget": {
-            "copied": "已复制",
             "detailed-user-info": "详细用户信息",
-            "copy": "复制",
             "loading-user-info": "正在加载用户信息...",
             "user-information": "用户信息",
             "uuid": "UUID",
@@ -869,7 +823,6 @@
             "traffic-limit-strategy": "流量限制策略",
             "last-traffic-reset": "上次流量重置",
             "subscription-information": "订阅信息",
-            "subscription-uuid": "订阅 UUID",
             "subscription-url": "订阅 URL",
             "expires-at": "过期时间",
             "last-opened-at": "最后打开时间",
@@ -881,12 +834,12 @@
             "ss-password": "SS 密码",
             "last-online": "最后在线",
             "last-connected-node": "最后连接节点",
-            "active-inbounds": "活动入站",
             "timestamps": "时间戳",
             "created-at": "创建于",
             "updated-at": "更新于",
             "first-connected-at": "首次连接于",
-            "tag": "标签"
+            "tag": "标签",
+            "active-internal-squads": "Active Internal Squads"
         }
     },
     "subscription-page-builder-header": {
@@ -1057,5 +1010,288 @@
         "heaviest-process": "最耗资源的进程",
         "total-memory": "总内存使用",
         "total-processes": "进程总数"
+    },
+    "active-nodes-list-with-store": {
+        "modal": {
+            "shared": {
+                "active-nodes": "Active Nodes"
+            }
+        }
+    },
+    "active-nodes-list": {
+        "modal": {
+            "shared": {
+                "profile-is-active-on": "Profile is active on {{nodeCount}} node{{nodeCount !== 1 ? 's' : ''}}",
+                "this-profile-is-not-active-on-any-nodes": "This profile is not active on any nodes"
+            }
+        }
+    },
+    "config-profile-card": {
+        "shared": {
+            "active-on-nodes": "Active on nodes"
+        }
+    },
+    "config-profile-detail-header": {
+        "widget": {
+            "active-nodes": "Active nodes"
+        }
+    },
+    "config-profiles-grid": {
+        "widget": {
+            "are-you-sure-you-want-to-delete-the-config-profile": "Are you sure you want to delete the config profile \"{{profileName}}\"?",
+            "cancel": "Cancel",
+            "create-your-first-config-profile-to-get-started": "Create your first config profile to get started",
+            "delete": "Delete",
+            "delete-config-profile": "Delete Config Profile",
+            "delete-profile": "Delete profile",
+            "download": "Download",
+            "edit-xray-config": "Edit Xray Config",
+            "inbounds": "Inbounds",
+            "no-config-profiles": "No Config Profiles",
+            "nodes": "Nodes",
+            "quick-view": "Quick view",
+            "this-action-cannot-be-undone": "This action cannot be undone."
+        }
+    },
+    "config-profiles-header": {
+        "widget": {
+            "list-of-all-config-profiles": "List of all config profiles"
+        }
+    },
+    "create-infra-billing-node": {
+        "modal": {
+            "widget": {
+                "billing-node": "Billing Node",
+                "create": "Create",
+                "error": "Error",
+                "next-billing-at": "Next Billing At",
+                "next-billing-at-description": "The date and time when the billing node will be billed. Remnawave will notify you about upcoming billing.",
+                "please-select-a-provider-and-billing-node": "Please select a provider and billing node"
+            }
+        }
+    },
+    "create-infra-billing-record": {
+        "modal": {
+            "widget": {
+                "amount": "Amount",
+                "bill-record": "Bill Record",
+                "billed-at": "Billed At",
+                "create": "Create",
+                "error": "Error",
+                "payment-amount-usd": "Payment amount, USD",
+                "please-select-a-provider": "Please select a provider",
+                "the-date-and-time-when-the-bill-was-paid": "The date and time when the bill was paid."
+            }
+        }
+    },
+    "create-infra-provider": {
+        "drawer": {
+            "widget": {
+                "create": "Create"
+            }
+        }
+    },
+    "flat-inbound-checkbox-card": {
+        "shared": {
+            "inbound-config-inbound-tag": "Inbound Config: {{inboundTag}}"
+        }
+    },
+    "host-select-inbound": {
+        "feature": {
+            "change": "Change",
+            "choose-an-inbound-to-apply-to-the-host": "Choose an inbound to apply to the host",
+            "select": "Select",
+            "no-inbound-selected": "No inbound selected"
+        }
+    },
+    "infra-billing-nodes": {
+        "widget": {
+            "add-a-node": "Add a node",
+            "add-node": "Add Node",
+            "cancel": "Cancel",
+            "delete": "Delete",
+            "delete-infra-billing-node": "Delete Infra Billing Node",
+            "infra-billing-nodes": "Infra Billing Nodes",
+            "delete-infra-billing-node-confirmation": "Are you sure you want to delete this infra billing node?",
+            "list-of-all-infra-billing-nodes": "List of all infra billing nodes sorted by next billing date",
+            "no-nodes-found": "No nodes found.",
+            "refresh": "Refresh",
+            "this-action-is-irreversible": "This action is irreversible."
+        }
+    },
+    "infra-billing-records-table": {
+        "widget": {
+            "billing-records-sorted-by-date": "Billing records sorted by date",
+            "cancel": "Cancel",
+            "create": "Create",
+            "delete": "Delete",
+            "delete-infra-billing-record": "Delete Infra Billing Record",
+            "delete-infra-billing-record-confirmation": "Are you sure you want to delete this infra billing record?",
+            "infra-billing-records": "Infra Billing Records",
+            "no-billing-records-found": "No billing records found.",
+            "refresh": "Refresh",
+            "this-action-is-irreversible": "This action is irreversible."
+        }
+    },
+    "infra-providers-table": {
+        "widget": {
+            "cancel": "Cancel",
+            "create-infra-provider": "Create Infra Provider",
+            "delete": "Delete",
+            "delete-infra-provider": "Delete Infra Provider",
+            "delete-infra-provider-confirmation": "Are you sure you want to delete this infra provider?",
+            "infra-providers": "Infra Providers",
+            "list-of-all-infra-providers": "List of all infra providers",
+            "no-providers-found": "No providers found.",
+            "refresh": "Refresh",
+            "this-action-is-irreversible": "This action is irreversible."
+        }
+    },
+    "internal-squads-grid": {
+        "widget": {
+            "add": "Add",
+            "add-users-to-internal-squad": "Add Users to Internal Squad",
+            "add-users-to-internal-squad-confirmation": "Are you sure you want to add the users to the internal squad \"{{internalSquadName}}\"?",
+            "cancel": "Cancel",
+            "create-your-first-internal-squad-to-get-started": "Create your first internal squad to get started",
+            "delete": "Delete",
+            "delete-internal-squad": "Delete Internal Squad",
+            "delete-internal-squad-confirmation": "Are you sure you want to delete the internal squad \"{{internalSquadName}}\"?",
+            "delete-squad": "Delete squad",
+            "edit-inbounds": "Edit inbounds",
+            "inbounds": "Inbounds",
+            "no-internal-squads": "No Internal Squads",
+            "remove": "Remove",
+            "remove-users-from-internal-squad": "Remove Users from Internal Squad",
+            "remove-users-from-internal-squad-confirmation": "Are you sure you want to remove the users from the internal squad \"{{internalSquadName}}\"?",
+            "this-action-cannot-be-undone": "This action cannot be undone.",
+            "users": "Users"
+        }
+    },
+    "internal-squads-header": {
+        "widget": {
+            "list": "List of all internal squads"
+        }
+    },
+    "internal-squads-list": {
+        "widget": {
+            "no-squads-found": "No squads found",
+            "search-internal-squads": "Search internal squads..."
+        }
+    },
+    "internal-squads": {
+        "drawer": {
+            "widget": {
+                "all": "All",
+                "choose-inbounds-from-any-profiles": "Choose inbounds from any profiles",
+                "config-profiles": "Config Profiles",
+                "flat-list": "Flat List",
+                "no-config-profiles-available": "No config profiles available",
+                "no-inbounds-selected": "No inbounds selected",
+                "no-profiles-or-inbounds-found": "No profiles or inbounds found",
+                "search-profiles-or-inbounds": "Search profiles or inbounds...",
+                "selected": "Selected",
+                "unselected": "Unselected",
+                "selected-from-multiple-profiles": "From multiple profiles",
+                "update-internal-squad": "Update Internal Squad"
+            }
+        }
+    },
+    "next-billing-at-cell": {
+        "date-approaching": "Date approaching",
+        "far-future": "Far future",
+        "today": "Today",
+        "more-than-3-days-ago": "More than 3 days ago",
+        "tomorrow": "Tomorrow",
+        "in-current-month": "In current month",
+        "yesterday": "Yesterday"
+    },
+    "select-billing-node": {
+        "shared": {
+            "billing-node": "Billing Node",
+            "select-billing-node": "Select billing node...",
+            "select-the-billing-node": "Select the billing node.",
+            "no-billing-nodes-available": "No billing nodes available"
+        }
+    },
+    "view-infra-provider": {
+        "drawer": {
+            "widget": {
+                "name-description": "The name of the provider. This is used to identify the provider in the UI.",
+                "name": "Name",
+                "save-changes": "Save Changes",
+                "login-url": "Login URL",
+                "favicon-link-description": "The favicon link is the link to the favicon of the provider. It is used to display the favicon of the provider in the UI. You can just enter the domain name.",
+                "favicon-link": "Favicon Link",
+                "enter-provider-name": "Enter provider name",
+                "infra-provider": "Infra Provider",
+                "enter-favicon-link": "Enter favicon link",
+                "enter-login-url": "Enter login URL",
+                "login-url-description": "The login URL is the URL of the login page of the provider. It will help you quickly go to the login page of the provider."
+            }
+        }
+    },
+    "user-accessible-nodes": {
+        "modal": {
+            "widget": {
+                "user-accessible-nodes": "User Accessible Nodes",
+                "no-accessible-nodes-found-for-this-user": "No accessible nodes found for this user",
+                "loading-accessible-nodes": "Loading accessible nodes...",
+                "access-summary": "Access Summary"
+            }
+        }
+    },
+    "use-infra-billing-records-columns": {
+        "paid": "Paid, $",
+        "hoster-name": "Hoster name",
+        "billed-at": "Billed at"
+    },
+    "use-infra-billing-nodes-columns": {
+        "hoster-name": "Hoster name",
+        "next-billing-at": "Next billing at",
+        "node": "Node"
+    },
+    "update-billing-date-modal": {
+        "widget": {
+            "next-month": "Next Month",
+            "cancel": "Cancel",
+            "new-date": "New Date",
+            "today": "Today",
+            "update-billing-date": "Update Billing Date",
+            "update-date": "Update Date",
+            "tomorrow": "Tomorrow",
+            "current-date": "Current Date"
+        }
+    },
+    "show-config-profiles-with-inbounds": {
+        "feature": {
+            "config-profile": "Config Profile",
+            "change-profile": "Change Profile",
+            "choose-a-profile-to-configure-inbounds-for-this-node": "Choose a profile to configure inbounds for this node",
+            "no-config-profile-selected": "No config profile selected",
+            "select-the-config-profile-that-will-be-applied-to-this-node": "Select the config profile that will be applied to this node",
+            "select-config-profile": "Select Config Profile"
+        }
+    },
+    "select-infra-provider": {
+        "shared": {
+            "select-the-infrastructure-provider": "Select the infrastructure provider.",
+            "select-provider": "Select provider...",
+            "no-providers-available": "No providers available",
+            "infrastructure-provider": "Infrastructure Provider"
+        }
+    },
+    "use-infra-providers-columns": {
+        "hoster-name": "Hoster name",
+        "login-url": "Login URL",
+        "no-servers": "No servers",
+        "servers": "Servers",
+        "providers": "providers",
+        "total": "Total, $"
+    },
+    "virtualized-flat-inbounds-list": {
+        "shared": {
+            "no-inbounds-found": "No inbounds found"
+        }
     }
 }

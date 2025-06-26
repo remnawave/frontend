@@ -1,6 +1,7 @@
 import { UpdateInfraProviderCommand } from '@remnawave/backend-contract'
 import { Button, Drawer, Stack, TextInput } from '@mantine/core'
 import { zodResolver } from 'mantine-form-zod-resolver'
+import { useTranslation } from 'react-i18next'
 import { useForm } from '@mantine/form'
 import { useEffect } from 'react'
 
@@ -14,6 +15,7 @@ export function ViewInfraProviderDrawerWidget() {
         (state) => state.modals[MODALS.VIEW_INFRA_PROVIDER_DRAWER]
     )
     const { close } = useModalsStore()
+    const { t } = useTranslation()
 
     const form = useForm<UpdateInfraProviderCommand.Request>({
         name: 'edit-infra-provider-form',
@@ -68,34 +70,36 @@ export function ViewInfraProviderDrawerWidget() {
             padding="lg"
             position="right"
             size="md"
-            title={'Infra Provider'}
+            title={t('view-infra-provider.drawer.widget.infra-provider')}
         >
             <form onSubmit={handleSubmit}>
                 <Stack>
                     <TextInput
-                        description="The name of the provider. This is used to identify the provider in the UI."
-                        label="Name"
-                        placeholder="Enter provider name"
+                        description={t('view-infra-provider.drawer.widget.name-description')}
+                        label={t('view-infra-provider.drawer.widget.name')}
+                        placeholder={t('view-infra-provider.drawer.widget.enter-provider-name')}
                         required
                         {...form.getInputProps('name')}
                     />
 
                     <TextInput
-                        description="The favicon link is the link to the favicon of the provider. It is used to display the favicon of the provider in the UI. You can just enter the domain name."
-                        label="Favicon Link"
-                        placeholder="Enter favicon link"
+                        description={t(
+                            'view-infra-provider.drawer.widget.favicon-link-description'
+                        )}
+                        label={t('view-infra-provider.drawer.widget.favicon-link')}
+                        placeholder={t('view-infra-provider.drawer.widget.enter-favicon-link')}
                         {...form.getInputProps('faviconLink')}
                     />
 
                     <TextInput
-                        description="The login URL is the URL of the login page of the provider. It will help you quickly go to the login page of the provider."
-                        label="Login URL"
-                        placeholder="Enter login URL"
+                        description={t('view-infra-provider.drawer.widget.login-url-description')}
+                        label={t('view-infra-provider.drawer.widget.login-url')}
+                        placeholder={t('view-infra-provider.drawer.widget.enter-login-url')}
                         {...form.getInputProps('loginUrl')}
                     />
 
                     <Button loading={isUpdateInfraProviderPending} type="submit">
-                        Save Changes
+                        {t('view-infra-provider.drawer.widget.save-changes')}
                     </Button>
                 </Stack>
             </form>

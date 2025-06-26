@@ -4,6 +4,7 @@ import { HiCalendar, HiCurrencyDollar } from 'react-icons/hi'
 import { zodResolver } from 'mantine-form-zod-resolver'
 import { notifications } from '@mantine/notifications'
 import { DatePickerInput } from '@mantine/dates'
+import { useTranslation } from 'react-i18next'
 import { useForm } from '@mantine/form'
 import dayjs from 'dayjs'
 
@@ -19,6 +20,7 @@ export function CreateInfraBillingRecordDrawerWidget() {
     )
 
     const { close } = useModalsStore()
+    const { t } = useTranslation()
 
     const form = useForm<CreateInfraBillingHistoryRecordCommand.Request>({
         name: 'create-infra-billing-record-form',
@@ -69,8 +71,8 @@ export function CreateInfraBillingRecordDrawerWidget() {
     const handleSubmit = form.onSubmit(async (values) => {
         if (!values.providerUuid) {
             notifications.show({
-                title: 'Error',
-                message: 'Please select a provider',
+                title: t('create-infra-billing-record.modal.widget.error'),
+                message: t('create-infra-billing-record.modal.widget.please-select-a-provider'),
                 color: 'red'
             })
 
@@ -101,7 +103,7 @@ export function CreateInfraBillingRecordDrawerWidget() {
             overlayProps={{ backgroundOpacity: 0.6, blur: 0 }}
             padding="lg"
             size="md"
-            title={'Bill Record'}
+            title={t('create-infra-billing-record.modal.widget.bill-record')}
         >
             <form onSubmit={handleSubmit}>
                 <Stack>
@@ -125,11 +127,13 @@ export function CreateInfraBillingRecordDrawerWidget() {
                     <DatePickerInput
                         data-autofocus
                         key={form.key('billedAt')}
-                        label={'Billed At'}
+                        label={t('create-infra-billing-record.modal.widget.billed-at')}
                         required
                         valueFormat="D MMMM, YYYY"
                         {...form.getInputProps('billedAt')}
-                        description={'The date and time when the bill was paid.'}
+                        description={t(
+                            'create-infra-billing-record.modal.widget.the-date-and-time-when-the-bill-was-paid'
+                        )}
                         highlightToday
                         leftSection={<HiCalendar size="1rem" />}
                         maxDate={dayjs().add(1, 'day').toDate()}
@@ -138,10 +142,12 @@ export function CreateInfraBillingRecordDrawerWidget() {
                     <NumberInput
                         allowNegative={false}
                         decimalScale={2}
-                        description="Payment amount, USD"
+                        description={t(
+                            'create-infra-billing-record.modal.widget.payment-amount-usd'
+                        )}
                         fixedDecimalScale
                         key={form.key('amount')}
-                        label="Amount"
+                        label={t('create-infra-billing-record.modal.widget.amount')}
                         leftSection={<HiCurrencyDollar size="1.25rem" />}
                         min={0.01}
                         required
@@ -150,7 +156,7 @@ export function CreateInfraBillingRecordDrawerWidget() {
                     />
 
                     <Button loading={isCreateInfraBillingRecordPending} type="submit">
-                        Create
+                        {t('create-infra-billing-record.modal.widget.create')}
                     </Button>
                 </Stack>
             </form>

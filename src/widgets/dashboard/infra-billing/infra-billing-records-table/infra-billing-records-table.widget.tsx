@@ -1,6 +1,7 @@
 import { PiArrowsClockwise, PiEmpty, PiPlus } from 'react-icons/pi'
 import { Box, Button, Group, Stack, Text } from '@mantine/core'
 import { useHotkeys, useMediaQuery } from '@mantine/hooks'
+import { useTranslation } from 'react-i18next'
 import { DataTable } from 'mantine-datatable'
 import { useMemo, useState } from 'react'
 import { modals } from '@mantine/modals'
@@ -31,6 +32,7 @@ export function InfraBillingRecordsTableWidget() {
         }
     })
     const { open: openModal } = useModalsStore()
+    const { t } = useTranslation()
 
     useHotkeys([['mod + K', () => openModal(MODALS.CREATE_INFRA_BILLING_RECORD_DRAWER)]])
 
@@ -46,17 +48,19 @@ export function InfraBillingRecordsTableWidget() {
 
     const handleDeleteInfraBillingRecord = (uuid: string) =>
         modals.openConfirmModal({
-            title: 'Delete Infra Billing Record',
+            title: t('infra-billing-records-table.widget.delete-infra-billing-record'),
             children: (
                 <Text size="sm">
-                    Are you sure you want to delete this infra billing record?
+                    {t(
+                        'infra-billing-records-table.widget.delete-infra-billing-record-confirmation'
+                    )}
                     <br />
-                    This action is irreversible.
+                    {t('infra-billing-records-table.widget.this-action-is-irreversible')}
                 </Text>
             ),
             labels: {
-                confirm: 'Delete',
-                cancel: 'Cancel'
+                confirm: t('infra-billing-records-table.widget.delete'),
+                cancel: t('infra-billing-records-table.widget.cancel')
             },
 
             centered: true,
@@ -84,7 +88,7 @@ export function InfraBillingRecordsTableWidget() {
                             size="xs"
                             variant="default"
                         >
-                            Refresh
+                            {t('infra-billing-records-table.widget.refresh')}
                         </Button>
 
                         <Button
@@ -95,30 +99,30 @@ export function InfraBillingRecordsTableWidget() {
                             size="xs"
                             variant="outline"
                         >
-                            Create
+                            {t('infra-billing-records-table.widget.create')}
                         </Button>
                     </Group>
                 }
-                description="Billing records sorted by date"
-                title="Infra Billing Records"
+                description={t('infra-billing-records-table.widget.billing-records-sorted-by-date')}
+                title={t('infra-billing-records-table.widget.infra-billing-records')}
             />
             <DataTable
                 borderRadius="sm"
-                columns={getInfraBillingRecordsColumns(handleDeleteInfraBillingRecord)}
+                columns={getInfraBillingRecordsColumns(handleDeleteInfraBillingRecord, t)}
                 emptyState={
                     <Stack align="center" gap="xs">
                         <Box mb={4} p={4}>
                             <PiEmpty size={36} strokeWidth={1.5} />
                         </Box>
                         <Text c="dimmed" size="sm">
-                            No billing records found.
+                            {t('infra-billing-records-table.widget.no-billing-records-found')}
                         </Text>
                         <Button
                             onClick={() => openModal(MODALS.CREATE_INFRA_BILLING_RECORD_DRAWER)}
                             style={{ pointerEvents: 'all' }}
                             variant="light"
                         >
-                            Create
+                            {t('infra-billing-records-table.widget.create')}
                         </Button>
                     </Stack>
                 }

@@ -1,6 +1,7 @@
 import { Checkbox, Group, Stack, Text, TextInput } from '@mantine/core'
 import { useVirtualizer } from '@tanstack/react-virtual'
 import { TbCirclesRelation } from 'react-icons/tb'
+import { useTranslation } from 'react-i18next'
 import { PiEmpty } from 'react-icons/pi'
 import { memo, useRef } from 'react'
 
@@ -17,6 +18,8 @@ export const InternalSquadsListWidget = memo((props: IProps) => {
         description,
         ...rest
     } = props
+
+    const { t } = useTranslation()
 
     const parentRef = useRef<HTMLDivElement>(null)
 
@@ -44,7 +47,7 @@ export const InternalSquadsListWidget = memo((props: IProps) => {
 
             <TextInput
                 onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search internal squads..."
+                placeholder={t('internal-squads-list.widget.search-internal-squads')}
                 value={searchQuery}
             />
 
@@ -84,11 +87,12 @@ export const InternalSquadsListWidget = memo((props: IProps) => {
                                 <Stack align="center" gap="md">
                                     <PiEmpty size={48} />
                                     <Text c="dimmed" size="sm" ta="center">
-                                        No squads found
+                                        {t('internal-squads-list.widget.no-squads-found')}
                                     </Text>
                                 </Stack>
                             </div>
                         )}
+
                         {virtualizer.getVirtualItems().map((virtualRow) => {
                             const internalSquad = filteredInternalSquads[virtualRow.index]
                             return (

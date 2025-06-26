@@ -1,11 +1,14 @@
 import { ActionIcon, Center, CopyButton, Group, Paper, Stack, Text, Tooltip } from '@mantine/core'
 import { PiCheck, PiCopy, PiCpu } from 'react-icons/pi'
 import ReactCountryFlag from 'react-country-flag'
+import { useTranslation } from 'react-i18next'
 
 import type { IProps } from './interfaces/props.interface'
 
 export const ActiveNodesListModalShared = (props: IProps) => {
     const { nodes } = props
+
+    const { t } = useTranslation()
 
     return (
         <Stack gap="md">
@@ -13,8 +16,9 @@ export const ActiveNodesListModalShared = (props: IProps) => {
                 <>
                     <Group align="center" justify="space-between">
                         <Text c="dimmed" fw={600} size="sm">
-                            Profile is active on {nodes.length} node
-                            {nodes.length !== 1 ? 's' : ''}
+                            {t('active-nodes-list.modal.shared.profile-is-active-on', {
+                                nodeCount: nodes.length
+                            })}
                         </Text>
                     </Group>
 
@@ -85,7 +89,9 @@ export const ActiveNodesListModalShared = (props: IProps) => {
                             }}
                         />
                         <Text c="dimmed" size="sm" ta="center">
-                            This profile is not active on any nodes
+                            {t(
+                                'active-nodes-list.modal.shared.this-profile-is-not-active-on-any-nodes'
+                            )}
                         </Text>
                     </Stack>
                 </Center>

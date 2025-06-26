@@ -26,6 +26,7 @@ import {
     Title,
     Tooltip
 } from '@mantine/core'
+import { useTranslation } from 'react-i18next'
 import { modals } from '@mantine/modals'
 
 import {
@@ -46,6 +47,7 @@ import { IProps } from './interfaces'
 
 export function InternalSquadsGridWidget(props: IProps) {
     const { internalSquads } = props
+    const { t } = useTranslation()
 
     const { refetch: refetchInternalSquads } = useGetInternalSquads({
         rQueryParams: {
@@ -84,14 +86,20 @@ export function InternalSquadsGridWidget(props: IProps) {
 
     const handleDeleteInternalSquad = (internalSquadUuid: string, internalSquadName: string) => {
         modals.openConfirmModal({
-            title: 'Delete Internal Squad',
+            title: t('internal-squads-grid.widget.delete-internal-squad'),
             children: (
                 <Text size="sm">
-                    Are you sure you want to delete the internal squad "{internalSquadName}"? This
-                    action cannot be undone.
+                    {t('internal-squads-grid.widget.delete-internal-squad-confirmation', {
+                        internalSquadName
+                    })}
+                    <br />
+                    {t('internal-squads-grid.widget.this-action-cannot-be-undone')}
                 </Text>
             ),
-            labels: { confirm: 'Delete', cancel: 'Cancel' },
+            labels: {
+                confirm: t('internal-squads-grid.widget.delete'),
+                cancel: t('internal-squads-grid.widget.cancel')
+            },
             confirmProps: { color: 'red' },
             centered: true,
             onConfirm: () => {
@@ -106,22 +114,26 @@ export function InternalSquadsGridWidget(props: IProps) {
 
     const handleRemoveFromUsers = (internalSquadUuid: string, internalSquadName: string) => {
         modals.openConfirmModal({
-            title: 'Remove Users from Internal Squad',
+            title: t('internal-squads-grid.widget.remove-users-from-internal-squad'),
             centered: true,
             children: (
                 <Stack gap="xs">
                     <Text fw={800} size="sm">
-                        Are you sure you want to remove the users from the internal squad "
-                        {internalSquadName}"?
+                        {t(
+                            'internal-squads-grid.widget.remove-users-from-internal-squad-confirmation',
+                            {
+                                internalSquadName
+                            }
+                        )}
                     </Text>
                     <Text fw={600} size="sm">
-                        This action cannot be undone.
+                        {t('internal-squads-grid.widget.this-action-cannot-be-undone')}
                     </Text>
                 </Stack>
             ),
             labels: {
-                confirm: 'Remove',
-                cancel: 'Cancel'
+                confirm: t('internal-squads-grid.widget.remove'),
+                cancel: t('internal-squads-grid.widget.cancel')
             },
             confirmProps: { color: 'red' },
             onConfirm: () => {
@@ -136,22 +148,22 @@ export function InternalSquadsGridWidget(props: IProps) {
 
     const handleAddToUsers = (internalSquadUuid: string, internalSquadName: string) => {
         modals.openConfirmModal({
-            title: 'Add Users to Internal Squad',
+            title: t('internal-squads-grid.widget.add-users-to-internal-squad'),
             centered: true,
             children: (
                 <Stack gap="xs">
                     <Text fw={800} size="sm">
-                        Are you sure you want to add the users to the internal squad "
+                        {t('internal-squads-grid.widget.add-users-to-internal-squad-confirmation')}
                         {internalSquadName}"?
                     </Text>
                     <Text fw={600} size="sm">
-                        This action cannot be undone.
+                        {t('internal-squads-grid.widget.this-action-cannot-be-undone')}
                     </Text>
                 </Stack>
             ),
             labels: {
-                confirm: 'Add',
-                cancel: 'Cancel'
+                confirm: t('internal-squads-grid.widget.add'),
+                cancel: t('internal-squads-grid.widget.cancel')
             },
             confirmProps: { color: 'teal' },
             onConfirm: () => {
@@ -171,10 +183,12 @@ export function InternalSquadsGridWidget(props: IProps) {
                     <PiEmpty size={48} style={{ opacity: 0.5 }} />
                     <div>
                         <Title c="dimmed" order={4} ta="center">
-                            No Internal Squads
+                            {t('internal-squads-grid.widget.no-internal-squads')}
                         </Title>
                         <Text c="dimmed" mt="xs" size="sm" ta="center">
-                            Create your first internal squad to get started
+                            {t(
+                                'internal-squads-grid.widget.create-your-first-internal-squad-to-get-started'
+                            )}
                         </Text>
                     </div>
                 </Stack>
@@ -272,7 +286,9 @@ export function InternalSquadsGridWidget(props: IProps) {
                                             )}
                                         </CopyButton>
 
-                                        <Tooltip label="Delete squad">
+                                        <Tooltip
+                                            label={t('internal-squads-grid.widget.delete-squad')}
+                                        >
                                             <ActionIcon
                                                 color="red"
                                                 onClick={() =>
@@ -292,7 +308,7 @@ export function InternalSquadsGridWidget(props: IProps) {
 
                                 <Stack gap="sm">
                                     <Group gap="xs" justify="center">
-                                        <Tooltip label="Inbounds">
+                                        <Tooltip label={t('internal-squads-grid.widget.inbounds')}>
                                             <Badge
                                                 color="blue"
                                                 leftSection={<PiTag size={12} />}
@@ -305,7 +321,7 @@ export function InternalSquadsGridWidget(props: IProps) {
                                             </Badge>
                                         </Tooltip>
 
-                                        <Tooltip label="Users">
+                                        <Tooltip label={t('internal-squads-grid.widget.users')}>
                                             <Badge
                                                 color={isActive ? 'teal' : 'gray'}
                                                 leftSection={<PiUsers size={12} />}
@@ -337,7 +353,7 @@ export function InternalSquadsGridWidget(props: IProps) {
                                             size="xs"
                                             variant="light"
                                         >
-                                            Remove
+                                            {t('internal-squads-grid.widget.remove')}
                                         </Button>
                                         <Button
                                             color="teal"
@@ -351,7 +367,7 @@ export function InternalSquadsGridWidget(props: IProps) {
                                             size="xs"
                                             variant="light"
                                         >
-                                            Add
+                                            {t('internal-squads-grid.widget.add')}
                                         </Button>
                                     </Group>
 
@@ -368,7 +384,7 @@ export function InternalSquadsGridWidget(props: IProps) {
                                         size="xs"
                                         variant="default"
                                     >
-                                        Edit inbounds
+                                        {t('internal-squads-grid.widget.edit-inbounds')}
                                     </Button>
                                 </Stack>
                             </Stack>

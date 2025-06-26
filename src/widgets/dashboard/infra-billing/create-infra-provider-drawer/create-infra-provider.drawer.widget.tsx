@@ -1,6 +1,7 @@
 import { CreateInfraProviderCommand } from '@remnawave/backend-contract'
 import { Button, Drawer, Stack, TextInput } from '@mantine/core'
 import { zodResolver } from 'mantine-form-zod-resolver'
+import { useTranslation } from 'react-i18next'
 import { useForm } from '@mantine/form'
 
 import { MODALS, useModalsStore } from '@entities/dashboard/modal-store'
@@ -10,6 +11,8 @@ import { queryClient } from '@shared/api'
 
 export function CreateInfraProviderDrawerWidget() {
     const { isOpen } = useModalsStore((state) => state.modals[MODALS.CREATE_INFRA_PROVIDER_DRAWER])
+
+    const { t } = useTranslation()
 
     const { close } = useModalsStore()
 
@@ -54,36 +57,38 @@ export function CreateInfraProviderDrawerWidget() {
             padding="lg"
             position="right"
             size="md"
-            title={'Infra Provider'}
+            title={t('view-infra-provider.drawer.widget.infra-provider')}
         >
             <form onSubmit={handleSubmit}>
                 <Stack>
                     <TextInput
-                        description="The name of the provider. This is used to identify the provider in the UI."
-                        label="Name"
-                        placeholder="Enter provider name"
+                        description={t('view-infra-provider.drawer.widget.name-description')}
+                        label={t('view-infra-provider.drawer.widget.name')}
+                        placeholder={t('view-infra-provider.drawer.widget.enter-provider-name')}
                         required
                         {...form.getInputProps('name')}
                     />
 
                     <TextInput
-                        description="The favicon link is the link to the favicon of the provider. It is used to display the favicon of the provider in the UI. You can just enter the domain name."
-                        label="Favicon Link"
+                        description={t(
+                            'view-infra-provider.drawer.widget.favicon-link-description'
+                        )}
+                        label={t('view-infra-provider.drawer.widget.favicon-link')}
                         placeholder="https://hetzner.com"
                         required
                         {...form.getInputProps('faviconLink')}
                     />
 
                     <TextInput
-                        description="The login URL is the URL of the login page of the provider. It will help you quickly go to the login page of the provider."
-                        label="Login URL"
+                        description={t('view-infra-provider.drawer.widget.login-url-description')}
+                        label={t('view-infra-provider.drawer.widget.login-url')}
                         placeholder="https://cloud.hetzner.com"
                         required
                         {...form.getInputProps('loginUrl')}
                     />
 
                     <Button loading={isCreateInfraProviderPending} type="submit">
-                        Create
+                        {t('create-infra-provider.drawer.widget.create')}
                     </Button>
                 </Stack>
             </form>

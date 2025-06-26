@@ -1,4 +1,5 @@
 import { Button, Group, Modal, Stack, TextInput } from '@mantine/core'
+import { useTranslation } from 'react-i18next'
 import { DatePicker } from '@mantine/dates'
 import { useEffect, useState } from 'react'
 import dayjs from 'dayjs'
@@ -15,6 +16,7 @@ export function UpdateBillingDateModalWidget() {
     )
     const { close } = useModalsStore()
     const [selectedDate, setSelectedDate] = useState<Date | null>(null)
+    const { t } = useTranslation()
 
     const { mutate: updateNode, isPending: isLoading } = useUpdateInfraBillingNode({
         mutationFns: {
@@ -64,20 +66,20 @@ export function UpdateBillingDateModalWidget() {
             onClose={handleClose}
             opened={isOpen}
             size="auto"
-            title="Update Billing Date"
+            title={t('update-billing-date-modal.widget.update-billing-date')}
         >
             <Stack gap="md">
                 {billingNode && (
                     <Stack align="center" gap={0} justify="center">
                         <TextInput
-                            label="Current Date"
+                            label={t('update-billing-date-modal.widget.current-date')}
                             mb="xs"
                             value={dayjs(new Date(billingNode.nextBillingAt)).format('D MMMM YYYY')}
                             w="100%"
                         />
 
                         <TextInput
-                            label="New Date"
+                            label={t('update-billing-date-modal.widget.new-date')}
                             mb="xs"
                             value={dayjs(selectedDate).format('D MMMM YYYY')}
                             w="100%"
@@ -89,15 +91,15 @@ export function UpdateBillingDateModalWidget() {
                             onChange={handleDateChange}
                             presets={[
                                 {
-                                    label: 'Today',
+                                    label: t('update-billing-date-modal.widget.today'),
                                     value: dayjs().toISOString()
                                 },
                                 {
-                                    label: 'Tomorrow',
+                                    label: t('update-billing-date-modal.widget.tomorrow'),
                                     value: dayjs().add(1, 'day').toISOString()
                                 },
                                 {
-                                    label: 'Next Month',
+                                    label: t('update-billing-date-modal.widget.next-month'),
                                     value: dayjs(selectedDate ?? dayjs())
                                         .add(1, 'month')
                                         .toISOString()
@@ -110,14 +112,14 @@ export function UpdateBillingDateModalWidget() {
 
                 <Group justify="flex-end" mt="lg">
                     <Button disabled={isLoading} onClick={handleClose} variant="default">
-                        Cancel
+                        {t('update-billing-date-modal.widget.cancel')}
                     </Button>
                     <Button
                         disabled={!selectedDate || !billingNode}
                         loading={isLoading}
                         onClick={handleSave}
                     >
-                        Update Date
+                        {t('update-billing-date-modal.widget.update-date')}
                     </Button>
                 </Group>
             </Stack>

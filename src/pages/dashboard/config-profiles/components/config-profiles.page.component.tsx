@@ -15,14 +15,17 @@ export const ConfigPageComponent = (props: Props) => {
     const { configProfiles } = props
 
     return (
-        <Page title={t('constants.config')}>
+        <Page title={t('constants.config-profiles')}>
             <PageHeader
                 breadcrumbs={[
                     { label: t('constants.dashboard'), href: ROUTES.DASHBOARD.HOME },
                     { label: t('constants.management') },
-                    { label: 'Config Profiles', href: ROUTES.DASHBOARD.MANAGEMENT.CONFIG_PROFILES }
+                    {
+                        label: t('constants.config-profiles'),
+                        href: ROUTES.DASHBOARD.MANAGEMENT.CONFIG_PROFILES
+                    }
                 ]}
-                title="Config Profiles"
+                title={t('constants.config-profiles')}
             />
 
             <Grid>

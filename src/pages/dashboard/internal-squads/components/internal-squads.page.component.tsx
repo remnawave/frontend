@@ -15,14 +15,17 @@ export const InternalSquadsPageComponent = (props: Props) => {
     const { internalSquads } = props
 
     return (
-        <Page title={'Internal Squads'}>
+        <Page title={t('constants.internal-squads')}>
             <PageHeader
                 breadcrumbs={[
                     { label: t('constants.dashboard'), href: ROUTES.DASHBOARD.HOME },
                     { label: t('constants.management') },
-                    { label: 'Internal Squads', href: ROUTES.DASHBOARD.MANAGEMENT.INTERNAL_SQUADS }
+                    {
+                        label: t('constants.internal-squads'),
+                        href: ROUTES.DASHBOARD.MANAGEMENT.INTERNAL_SQUADS
+                    }
                 ]}
-                title="Internal Squads"
+                title={t('constants.internal-squads')}
             />
 
             <Grid>

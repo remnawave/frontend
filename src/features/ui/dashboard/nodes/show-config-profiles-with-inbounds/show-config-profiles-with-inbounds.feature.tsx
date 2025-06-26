@@ -1,5 +1,6 @@
 import { Badge, Button, Flex, Group, Paper, Stack, Text } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
+import { useTranslation } from 'react-i18next'
 import { TbFile } from 'react-icons/tb'
 import { useMemo } from 'react'
 import clsx from 'clsx'
@@ -19,6 +20,7 @@ export function ShowConfigProfilesWithInboundsFeature(props: IProps) {
     } = props
 
     const [opened, handlers] = useDisclosure(false)
+    const { t } = useTranslation()
 
     const activeProfileInboundsPorts = useMemo(() => {
         const activeProfile = configProfiles?.find(
@@ -43,11 +45,13 @@ export function ShowConfigProfilesWithInboundsFeature(props: IProps) {
                 <Group gap="xs">
                     <XtlsLogo size={16} />
                     <Text fw={600} size="sm">
-                        Config Profile
+                        {t('show-config-profiles-with-inbounds.feature.config-profile')}
                     </Text>
                 </Group>
                 <Text c="dimmed" size="xs">
-                    Select the config profile that will be applied to this node
+                    {t(
+                        'show-config-profiles-with-inbounds.feature.select-the-config-profile-that-will-be-applied-to-this-node'
+                    )}
                 </Text>
             </Stack>
 
@@ -103,10 +107,14 @@ export function ShowConfigProfilesWithInboundsFeature(props: IProps) {
                     <Stack align="center" gap="xs" py="sm">
                         <TbFile opacity={0.5} size={24} />
                         <Text c="dimmed" fw={500} size="sm">
-                            No config profile selected
+                            {t(
+                                'show-config-profiles-with-inbounds.feature.no-config-profile-selected'
+                            )}
                         </Text>
                         <Text c="dimmed" size="xs" ta="center">
-                            Choose a profile to configure inbounds for this node
+                            {t(
+                                'show-config-profiles-with-inbounds.feature.choose-a-profile-to-configure-inbounds-for-this-node'
+                            )}
                         </Text>
                     </Stack>
                 )}
@@ -120,7 +128,9 @@ export function ShowConfigProfilesWithInboundsFeature(props: IProps) {
                 size="sm"
                 variant="default"
             >
-                {activeProfile ? 'Change Profile' : 'Select Config Profile'}
+                {activeProfile
+                    ? t('show-config-profiles-with-inbounds.feature.change-profile')
+                    : t('show-config-profiles-with-inbounds.feature.select-config-profile')}
             </Button>
 
             <ConfigProfilesDrawer

@@ -1,6 +1,7 @@
 import { ActionIcon, Button, Group, Stack, Text } from '@mantine/core'
 import { TbFile, TbSettings } from 'react-icons/tb'
 import { useDisclosure } from '@mantine/hooks'
+import { useTranslation } from 'react-i18next'
 import { PiTag } from 'react-icons/pi'
 
 import { HostsConfigProfilesDrawer } from '@widgets/dashboard/hosts/hosts-config-profiles-drawer/hosts-config-profiles.drawer.widget'
@@ -13,6 +14,7 @@ export function HostSelectInboundFeature(props: IProps) {
         props
 
     const [opened, handlers] = useDisclosure(false)
+    const { t } = useTranslation()
 
     const activeProfile = configProfiles.find((profile) => profile.uuid === activeConfigProfileUuid)
     const activeInbound = activeProfile?.inbounds.find(
@@ -56,7 +58,7 @@ export function HostSelectInboundFeature(props: IProps) {
                         size="xs"
                         variant="light"
                     >
-                        Change
+                        {t('host-select-inbound.feature.change')}
                     </Button>
                 </Group>
             ) : (
@@ -68,10 +70,12 @@ export function HostSelectInboundFeature(props: IProps) {
 
                         <Stack gap={2} style={{ flex: 1 }}>
                             <Text c="dimmed" size="sm">
-                                No inbound selected
+                                {t('host-select-inbound.feature.no-inbound-selected')}
                             </Text>
                             <Text c="dimmed" size="xs">
-                                Choose an inbound to apply to the host
+                                {t(
+                                    'host-select-inbound.feature.choose-an-inbound-to-apply-to-the-host'
+                                )}
                             </Text>
                         </Stack>
                     </Group>
@@ -82,7 +86,7 @@ export function HostSelectInboundFeature(props: IProps) {
                         size="xs"
                         variant="light"
                     >
-                        Select
+                        {t('host-select-inbound.feature.select')}
                     </Button>
                 </Group>
             )}

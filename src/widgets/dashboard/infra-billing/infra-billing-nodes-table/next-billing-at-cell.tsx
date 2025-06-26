@@ -7,6 +7,7 @@ import {
     FaExclamationTriangle
 } from 'react-icons/fa'
 import { Box, Group, Text, Tooltip } from '@mantine/core'
+import { TFunction } from 'i18next'
 import dayjs from 'dayjs'
 
 type DateStatus = 'far-future' | 'far-past' | 'near-future' | 'today' | 'tomorrow' | 'yesterday'
@@ -19,6 +20,7 @@ interface DateStatusConfig {
 
 interface Props {
     nextBillingAt: Date
+    t: TFunction
 }
 
 function getDateStatus(date: Date): DateStatus {
@@ -35,56 +37,56 @@ function getDateStatus(date: Date): DateStatus {
     return 'far-future'
 }
 
-function getStatusConfig(status: DateStatus): DateStatusConfig {
+function getStatusConfig(status: DateStatus, t: TFunction): DateStatusConfig {
     switch (status) {
         case 'far-future':
             return {
                 color: 'gray',
                 icon: <FaCalendarAlt size={12} />,
-                tooltipText: 'Far future'
+                tooltipText: t('next-billing-at-cell.far-future')
             }
         case 'far-past':
             return {
                 color: 'red',
                 icon: <FaExclamationTriangle size={12} />,
-                tooltipText: 'More than 3 days ago'
+                tooltipText: t('next-billing-at-cell.more-than-3-days-ago')
             }
         case 'near-future':
             return {
                 color: 'blue',
                 icon: <FaArrowRight size={12} />,
-                tooltipText: 'Date approaching'
+                tooltipText: t('next-billing-at-cell.date-approaching')
             }
         case 'today':
             return {
                 color: 'red',
                 icon: <FaClock size={12} />,
-                tooltipText: 'Today'
+                tooltipText: t('next-billing-at-cell.today')
             }
         case 'tomorrow':
             return {
                 color: 'blue',
                 icon: <FaArrowRight size={12} />,
-                tooltipText: 'Tomorrow'
+                tooltipText: t('next-billing-at-cell.tomorrow')
             }
         case 'yesterday':
             return {
                 color: 'red',
                 icon: <FaExclamationCircle size={12} />,
-                tooltipText: 'Yesterday'
+                tooltipText: t('next-billing-at-cell.yesterday')
             }
         default:
             return {
                 color: 'gray',
                 icon: <FaCalendarAlt size={12} />,
-                tooltipText: 'Far future'
+                tooltipText: t('next-billing-at-cell.far-future')
             }
     }
 }
 
-export function InfraBillingNodesTableNextBillingAtCell({ nextBillingAt }: Props) {
+export function InfraBillingNodesTableNextBillingAtCell({ nextBillingAt, t }: Props) {
     const status = getDateStatus(nextBillingAt)
-    const statusConfig = getStatusConfig(status)
+    const statusConfig = getStatusConfig(status, t)
 
     const isCurrentMonth = dayjs(nextBillingAt).isSame(dayjs(), 'month')
 
@@ -99,7 +101,7 @@ export function InfraBillingNodesTableNextBillingAtCell({ nextBillingAt }: Props
             </Text>
 
             {isCurrentMonth && (
-                <Tooltip label="In current month">
+                <Tooltip label={t('next-billing-at-cell.in-current-month')}>
                     <Box c="grape">
                         <FaCalendarCheck size={10} />
                     </Box>

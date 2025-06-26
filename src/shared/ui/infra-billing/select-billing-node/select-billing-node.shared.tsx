@@ -1,5 +1,6 @@
 import { ComboboxItem, Group, Select, Text } from '@mantine/core'
 import ReactCountryFlag from 'react-country-flag'
+import { useTranslation } from 'react-i18next'
 import { forwardRef, useState } from 'react'
 
 import { useGetInfraBillingNodes } from '@shared/api/hooks'
@@ -40,6 +41,8 @@ export const SelectBillingNodeShared = (props: IProps) => {
     const { selectedBillingNodeUuid, setSelectedBillingNodeUuid } = props
     const { data: infraBillingNodes, isLoading } = useGetInfraBillingNodes()
 
+    const { t } = useTranslation()
+
     const [selectedValue, setSelectedValue] = useState<null | string>(
         selectedBillingNodeUuid || null
     )
@@ -51,8 +54,8 @@ export const SelectBillingNodeShared = (props: IProps) => {
             <Select
                 data={[]}
                 disabled
-                label="Billing Node"
-                placeholder="No billing nodes available"
+                label={t('select-billing-node.shared.billing-node')}
+                placeholder={t('select-billing-node.shared.no-billing-nodes-available')}
             />
         )
     }
@@ -104,14 +107,14 @@ export const SelectBillingNodeShared = (props: IProps) => {
                 shadow: 'md'
             }}
             data={selectData}
-            description="Select the billing node."
-            label="Billing Node"
+            description={t('select-billing-node.shared.select-the-billing-node')}
+            label={t('select-billing-node.shared.billing-node')}
             leftSection={leftSection}
             leftSectionPointerEvents="none"
             leftSectionWidth={selectedBillingNode ? 40 : 0}
             maxDropdownHeight={300}
             onChange={handleChange}
-            placeholder="Select billing node..."
+            placeholder={t('select-billing-node.shared.select-billing-node')}
             renderOption={(item) => {
                 const option = item.option as ItemProps
                 return <SelectItem {...option} />

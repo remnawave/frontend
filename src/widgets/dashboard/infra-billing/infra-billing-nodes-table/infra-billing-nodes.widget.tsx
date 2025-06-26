@@ -2,6 +2,7 @@ import { GetInfraBillingNodesCommand } from '@remnawave/backend-contract'
 import { PiArrowsClockwise, PiEmpty, PiPlus } from 'react-icons/pi'
 import { Box, Button, Group, Stack, Text } from '@mantine/core'
 import { useMediaQuery } from '@mantine/hooks'
+import { useTranslation } from 'react-i18next'
 import { DataTable } from 'mantine-datatable'
 import { modals } from '@mantine/modals'
 import { useMemo } from 'react'
@@ -24,6 +25,7 @@ export function InfraBillingNodesTableWidget() {
     } = useGetInfraBillingNodes()
 
     const { open: openModal, setInternalData } = useModalsStore()
+    const { t } = useTranslation()
 
     const memoizedInfraBillingNodes = useMemo(() => infraBillingNodes, [infraBillingNodes])
 
@@ -37,17 +39,17 @@ export function InfraBillingNodesTableWidget() {
 
     const handleDeleteInfraBillingNode = (uuid: string) =>
         modals.openConfirmModal({
-            title: 'Delete Infra Billing Node',
+            title: t('infra-billing-nodes.widget.delete-infra-billing-node'),
             children: (
                 <Text size="sm">
-                    Are you sure you want to delete this infra billing node?
+                    {t('infra-billing-nodes.widget.delete-infra-billing-node-confirmation')}
                     <br />
-                    This action is irreversible.
+                    {t('infra-billing-nodes.widget.this-action-is-irreversible')}
                 </Text>
             ),
             labels: {
-                confirm: 'Delete',
-                cancel: 'Cancel'
+                confirm: t('infra-billing-nodes.widget.delete'),
+                cancel: t('infra-billing-nodes.widget.cancel')
             },
 
             centered: true,
@@ -85,7 +87,7 @@ export function InfraBillingNodesTableWidget() {
                             size="xs"
                             variant="default"
                         >
-                            Refresh
+                            {t('infra-billing-nodes.widget.refresh')}
                         </Button>
 
                         <Button
@@ -96,30 +98,30 @@ export function InfraBillingNodesTableWidget() {
                             size="xs"
                             variant="outline"
                         >
-                            Add Node
+                            {t('infra-billing-nodes.widget.add-node')}
                         </Button>
                     </Group>
                 }
-                description="List of all infra billing nodes sorted by next billing date"
-                title="Infra Billing Nodes"
+                description={t('infra-billing-nodes.widget.list-of-all-infra-billing-nodes')}
+                title={t('infra-billing-nodes.widget.infra-billing-nodes')}
             />
             <DataTable
                 borderRadius="sm"
-                columns={getInfraBillingNodesColumns(handleDeleteInfraBillingNode)}
+                columns={getInfraBillingNodesColumns(handleDeleteInfraBillingNode, t)}
                 emptyState={
                     <Stack align="center" gap="xs">
                         <Box mb={4} p={4}>
                             <PiEmpty size={36} strokeWidth={1.5} />
                         </Box>
                         <Text c="dimmed" size="sm">
-                            No nodes found.
+                            {t('infra-billing-nodes.widget.no-nodes-found')}
                         </Text>
                         <Button
                             onClick={() => openModal(MODALS.CREATE_INFRA_BILLING_NODE_MODAL)}
                             style={{ pointerEvents: 'all' }}
                             variant="light"
                         >
-                            Add a node
+                            {t('infra-billing-nodes.widget.add-a-node')}
                         </Button>
                     </Stack>
                 }

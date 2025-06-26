@@ -1,4 +1,5 @@
 import { Avatar, ComboboxItem, Group, Select, Text } from '@mantine/core'
+import { useTranslation } from 'react-i18next'
 import { forwardRef, useState } from 'react'
 
 import { LoadingScreen } from '@shared/ui/loading-screen'
@@ -37,6 +38,7 @@ SelectItem.displayName = 'SelectItem'
 export const SelectInfraProviderShared = (props: IProps) => {
     const { selectedInfraProviderUuid, setSelectedInfraProviderUuid } = props
     const { data: infraProviders, isLoading } = useGetInfraProviders()
+    const { t } = useTranslation()
 
     const [selectedValue, setSelectedValue] = useState<null | string>(
         selectedInfraProviderUuid || null
@@ -49,8 +51,8 @@ export const SelectInfraProviderShared = (props: IProps) => {
             <Select
                 data={[]}
                 disabled
-                label="Infrastructure Provider"
-                placeholder="No providers available"
+                label={t('select-infra-provider.shared.infrastructure-provider')}
+                placeholder={t('select-infra-provider.shared.no-providers-available')}
             />
         )
     }
@@ -96,14 +98,14 @@ export const SelectInfraProviderShared = (props: IProps) => {
                 shadow: 'md'
             }}
             data={selectData}
-            description="Select the infrastructure provider."
-            label="Infrastructure Provider"
+            description={t('select-infra-provider.shared.select-the-infrastructure-provider')}
+            label={t('select-infra-provider.shared.infrastructure-provider')}
             leftSection={leftSection}
             leftSectionPointerEvents="none"
             leftSectionWidth={selectedProvider ? 40 : 0}
             maxDropdownHeight={300}
             onChange={handleChange}
-            placeholder="Select provider..."
+            placeholder={t('select-infra-provider.shared.select-provider')}
             renderOption={(item) => {
                 const option = item.option as ItemProps
                 return <SelectItem {...option} />

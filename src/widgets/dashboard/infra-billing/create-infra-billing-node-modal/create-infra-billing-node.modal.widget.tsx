@@ -3,6 +3,7 @@ import { zodResolver } from 'mantine-form-zod-resolver'
 import { notifications } from '@mantine/notifications'
 import { Button, Modal, Stack } from '@mantine/core'
 import { DatePickerInput } from '@mantine/dates'
+import { useTranslation } from 'react-i18next'
 import { HiCalendar } from 'react-icons/hi'
 import { useForm } from '@mantine/form'
 import dayjs from 'dayjs'
@@ -20,6 +21,7 @@ export function CreateInfraBillingNodeModalWidget() {
     )
 
     const { close } = useModalsStore()
+    const { t } = useTranslation()
 
     const form = useForm<CreateInfraBillingNodeCommand.Request>({
         name: 'create-infra-billing-node-form',
@@ -60,8 +62,10 @@ export function CreateInfraBillingNodeModalWidget() {
     const handleSubmit = form.onSubmit(async (values) => {
         if (!values.providerUuid || !values.nodeUuid) {
             notifications.show({
-                title: 'Error',
-                message: 'Please select a provider and billing node',
+                title: t('create-infra-billing-node.modal.widget.error'),
+                message: t(
+                    'create-infra-billing-node.modal.widget.please-select-a-provider-and-billing-node'
+                ),
                 color: 'red'
             })
 
@@ -92,7 +96,7 @@ export function CreateInfraBillingNodeModalWidget() {
             overlayProps={{ backgroundOpacity: 0.6, blur: 0 }}
             padding="lg"
             size="md"
-            title={'Billing Node'}
+            title={t('create-infra-billing-node.modal.widget.billing-node')}
         >
             <form onSubmit={handleSubmit}>
                 <Stack>
@@ -133,20 +137,20 @@ export function CreateInfraBillingNodeModalWidget() {
                     <DatePickerInput
                         data-autofocus
                         key={form.key('nextBillingAt')}
-                        label={'Next Billing At'}
+                        label={t('create-infra-billing-node.modal.widget.next-billing-at')}
                         required
                         valueFormat="D MMMM, YYYY"
                         {...form.getInputProps('nextBillingAt')}
-                        description={
-                            'The date and time when the billing node will be billed. Remnawave will notify you about upcoming billing.'
-                        }
+                        description={t(
+                            'create-infra-billing-node.modal.widget.next-billing-at-description'
+                        )}
                         highlightToday
                         leftSection={<HiCalendar size="1rem" />}
                         minDate={dayjs().subtract(1, 'day').toDate()}
                     />
 
                     <Button loading={isCreateInfraBillingNodePending} type="submit">
-                        Create
+                        {t('create-infra-billing-node.modal.widget.create')}
                     </Button>
                 </Stack>
             </form>

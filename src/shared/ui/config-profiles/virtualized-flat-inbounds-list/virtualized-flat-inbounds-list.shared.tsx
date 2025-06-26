@@ -1,6 +1,7 @@
 import { Box, Center, Checkbox, Text } from '@mantine/core'
 import { useVirtualizer } from '@tanstack/react-virtual'
 import { memo, useEffect, useMemo, useRef } from 'react'
+import { useTranslation } from 'react-i18next'
 
 import type { IProps } from './interfaces/props.interface'
 
@@ -10,6 +11,7 @@ const INBOUND_HEIGHT = 60
 
 export const VirtualizedFlatInboundsListShared = memo((props: IProps) => {
     const { allInbounds, selectedInbounds, onInboundToggle, filterType } = props
+    const { t } = useTranslation()
 
     const filteredInbounds = useMemo(() => {
         switch (filterType) {
@@ -42,7 +44,7 @@ export const VirtualizedFlatInboundsListShared = memo((props: IProps) => {
         return (
             <Center h="100%">
                 <Text c="dimmed" size="sm" ta="center">
-                    No inbounds found
+                    {t('virtualized-flat-inbounds-list.shared.no-inbounds-found')}
                 </Text>
             </Center>
         )

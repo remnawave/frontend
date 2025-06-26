@@ -1,6 +1,7 @@
 import { GetInfraProvidersCommand } from '@remnawave/backend-contract'
 import { PiArrowsClockwise, PiEmpty, PiPlus } from 'react-icons/pi'
 import { Box, Button, Group, Stack, Text } from '@mantine/core'
+import { useTranslation } from 'react-i18next'
 import { DataTable } from 'mantine-datatable'
 import { modals } from '@mantine/modals'
 import { useMemo } from 'react'
@@ -21,6 +22,7 @@ export function InfraProvidersTableWidget() {
         refetch: refetchInfraProviders
     } = useGetInfraProviders()
     const { open: openModal, setInternalData } = useModalsStore()
+    const { t } = useTranslation()
 
     const memoizedInfraProviders = useMemo(() => infraProviders, [infraProviders])
 
@@ -61,17 +63,17 @@ export function InfraProvidersTableWidget() {
 
     const handleDeleteInfraProvider = (uuid: string) =>
         modals.openConfirmModal({
-            title: 'Delete Infra Provider',
+            title: t('infra-providers-table.widget.delete-infra-provider'),
             children: (
                 <Text size="sm">
-                    Are you sure you want to delete this infra provider?
+                    {t('infra-providers-table.widget.delete-infra-provider-confirmation')}
                     <br />
-                    This action is irreversible.
+                    {t('infra-providers-table.widget.this-action-is-irreversible')}
                 </Text>
             ),
             labels: {
-                confirm: 'Delete',
-                cancel: 'Cancel'
+                confirm: t('infra-providers-table.widget.delete'),
+                cancel: t('infra-providers-table.widget.cancel')
             },
 
             centered: true,
@@ -101,7 +103,7 @@ export function InfraProvidersTableWidget() {
                             size="xs"
                             variant="default"
                         >
-                            Refresh
+                            {t('infra-providers-table.widget.refresh')}
                         </Button>
 
                         <Button
@@ -112,12 +114,12 @@ export function InfraProvidersTableWidget() {
                             size="xs"
                             variant="outline"
                         >
-                            Create Infra Provider
+                            {t('infra-providers-table.widget.create-infra-provider')}
                         </Button>
                     </Group>
                 }
-                description="List of all infra providers"
-                title="Infra Providers"
+                description={t('infra-providers-table.widget.list-of-all-infra-providers')}
+                title={t('infra-providers-table.widget.infra-providers')}
             />
             <DataTable
                 borderRadius="sm"
@@ -125,7 +127,8 @@ export function InfraProvidersTableWidget() {
                     memoizedInfraProviders?.total ?? 0,
                     totalAmount ?? 0,
                     handleOpenModal,
-                    handleDeleteInfraProvider
+                    handleDeleteInfraProvider,
+                    t
                 )}
                 emptyState={
                     <Stack align="center" gap="xs">
@@ -133,14 +136,14 @@ export function InfraProvidersTableWidget() {
                             <PiEmpty size={36} strokeWidth={1.5} />
                         </Box>
                         <Text c="dimmed" size="sm">
-                            No providers found.
+                            {t('infra-providers-table.widget.no-providers-found')}
                         </Text>
                         <Button
                             onClick={() => openModal(MODALS.CREATE_INFRA_PROVIDER_DRAWER)}
                             style={{ pointerEvents: 'all' }}
                             variant="light"
                         >
-                            Create Infra Provider
+                            {t('infra-providers-table.widget.create-infra-provider')}
                         </Button>
                     </Stack>
                 }

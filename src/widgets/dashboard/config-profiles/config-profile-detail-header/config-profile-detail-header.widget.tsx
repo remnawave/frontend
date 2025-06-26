@@ -10,6 +10,7 @@ import {
     Tooltip
 } from '@mantine/core'
 import { PiCheck, PiCopy, PiCpu } from 'react-icons/pi'
+import { useTranslation } from 'react-i18next'
 
 import { XtlsLogo } from '@shared/ui/logos/xtls-logo'
 
@@ -17,6 +18,7 @@ import { IProps } from './interfaces/props.interface'
 
 export const ConfigProfileDetailHeaderWidget = (props: IProps) => {
     const { configProfile } = props
+    const { t } = useTranslation()
 
     return (
         <>
@@ -54,7 +56,10 @@ export const ConfigProfileDetailHeaderWidget = (props: IProps) => {
                         </Group>
                     </Stack>
 
-                    <Tooltip label="Active nodes" position="left">
+                    <Tooltip
+                        label={t('config-profile-detail-header.widget.active-nodes')}
+                        position="left"
+                    >
                         <Badge
                             color={configProfile.nodes.length > 0 ? 'teal' : 'red'}
                             leftSection={<PiCpu size={14} />}

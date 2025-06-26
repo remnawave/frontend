@@ -26,6 +26,7 @@ import {
 import { githubDarkTheme, JsonEditor } from 'json-edit-react'
 import { generatePath, useNavigate } from 'react-router-dom'
 import { TbDownload, TbEye } from 'react-icons/tb'
+import { useTranslation } from 'react-i18next'
 import { modals } from '@mantine/modals'
 
 import { ActiveNodesListModalWithStoreShared } from '@shared/ui/config-profiles/active-nodes-list-modal-with-store/active-nodes-list-with-store.modal.shared'
@@ -40,6 +41,7 @@ import { IProps } from './interfaces'
 
 export function ConfigProfilesGridWidget(props: IProps) {
     const { configProfiles } = props
+    const { t } = useTranslation()
 
     const { open, setInternalData } = useModalsStore()
     const navigate = useNavigate()
@@ -56,14 +58,23 @@ export function ConfigProfilesGridWidget(props: IProps) {
 
     const handleDeleteProfile = (profileUuid: string, profileName: string) => {
         modals.openConfirmModal({
-            title: 'Delete Config Profile',
+            title: t('config-profiles-grid.widget.delete-config-profile'),
             children: (
                 <Text size="sm">
-                    Are you sure you want to delete the config profile "{profileName}"? This action
-                    cannot be undone.
+                    {t(
+                        'config-profiles-grid.widget.are-you-sure-you-want-to-delete-the-config-profile',
+                        {
+                            profileName
+                        }
+                    )}
+                    <br />
+                    {t('config-profiles-grid.widget.this-action-cannot-be-undone')}
                 </Text>
             ),
-            labels: { confirm: 'Delete', cancel: 'Cancel' },
+            labels: {
+                confirm: t('config-profiles-grid.widget.delete'),
+                cancel: t('config-profiles-grid.widget.cancel')
+            },
             confirmProps: { color: 'red' },
             centered: true,
             onConfirm: () => {
@@ -83,10 +94,12 @@ export function ConfigProfilesGridWidget(props: IProps) {
                     <XtlsLogo size={48} style={{ opacity: 0.5 }} />
                     <div>
                         <Title c="dimmed" order={4} ta="center">
-                            No Config Profiles
+                            {t('config-profiles-grid.widget.no-config-profiles')}
                         </Title>
                         <Text c="dimmed" mt="xs" size="sm" ta="center">
-                            Create your first config profile to get started
+                            {t(
+                                'config-profiles-grid.widget.create-your-first-config-profile-to-get-started'
+                            )}
                         </Text>
                     </div>
                 </Stack>
@@ -186,7 +199,9 @@ export function ConfigProfilesGridWidget(props: IProps) {
                                             )}
                                         </CopyButton>
 
-                                        <Tooltip label="Delete profile">
+                                        <Tooltip
+                                            label={t('config-profiles-grid.widget.delete-profile')}
+                                        >
                                             <ActionIcon
                                                 color="red"
                                                 onClick={() =>
@@ -203,7 +218,7 @@ export function ConfigProfilesGridWidget(props: IProps) {
 
                                 <Stack gap="sm">
                                     <Group gap="xs" justify="center">
-                                        <Tooltip label="Inbounds">
+                                        <Tooltip label={t('config-profiles-grid.widget.inbounds')}>
                                             <Badge
                                                 color="blue"
                                                 leftSection={<PiTag size={12} />}
@@ -216,7 +231,7 @@ export function ConfigProfilesGridWidget(props: IProps) {
                                             </Badge>
                                         </Tooltip>
 
-                                        <Tooltip label="Nodes">
+                                        <Tooltip label={t('config-profiles-grid.widget.nodes')}>
                                             <Badge
                                                 color={isActive ? 'teal' : 'gray'}
                                                 leftSection={<PiCpu size={12} />}
@@ -270,7 +285,7 @@ export function ConfigProfilesGridWidget(props: IProps) {
                                             size="xs"
                                             variant="light"
                                         >
-                                            Download
+                                            {t('config-profiles-grid.widget.download')}
                                         </Button>
                                         <Button
                                             color="teal"
@@ -297,7 +312,7 @@ export function ConfigProfilesGridWidget(props: IProps) {
                                             size="xs"
                                             variant="light"
                                         >
-                                            Quick view
+                                            {t('config-profiles-grid.widget.quick-view')}
                                         </Button>
                                     </Group>
 
@@ -318,7 +333,7 @@ export function ConfigProfilesGridWidget(props: IProps) {
                                         size="xs"
                                         variant="default"
                                     >
-                                        Edit Xray Config
+                                        {t('config-profiles-grid.widget.edit-xray-config')}
                                     </Button>
                                 </Stack>
                             </Stack>

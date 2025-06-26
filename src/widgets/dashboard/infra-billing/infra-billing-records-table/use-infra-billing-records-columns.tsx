@@ -3,6 +3,7 @@ import { GetInfraBillingHistoryRecordsCommand } from '@remnawave/backend-contrac
 import { HiCalendar, HiCurrencyDollar, HiOfficeBuilding } from 'react-icons/hi'
 import { DataTableColumn } from 'mantine-datatable'
 import { TbClick, TbTrash } from 'react-icons/tb'
+import { TFunction } from 'i18next'
 import dayjs from 'dayjs'
 
 import { faviconResolver, formatCurrencyWithIntl } from '@shared/utils/misc'
@@ -10,7 +11,8 @@ import { faviconResolver, formatCurrencyWithIntl } from '@shared/utils/misc'
 import { InfraProvidersColumnTitle } from './column-title'
 
 export function getInfraBillingRecordsColumns(
-    handleDeleteInfraBillingRecord: (uuid: string) => void
+    handleDeleteInfraBillingRecord: (uuid: string) => void,
+    t: TFunction
 ): DataTableColumn<
     // handleOpenModal: (row: GetInfraBillingHistoryRecordsCommand.Response['response']['records'][number]) => void,
 
@@ -20,7 +22,12 @@ export function getInfraBillingRecordsColumns(
         {
             accessor: 'name',
             ellipsis: true,
-            title: <InfraProvidersColumnTitle icon={HiOfficeBuilding} title="Hoster name" />,
+            title: (
+                <InfraProvidersColumnTitle
+                    icon={HiOfficeBuilding}
+                    title={t('use-infra-billing-records-columns.hoster-name')}
+                />
+            ),
             width: 200,
             render: ({ provider: { name, faviconLink } }) => (
                 <Flex align="center" gap="sm">
@@ -41,7 +48,12 @@ export function getInfraBillingRecordsColumns(
         {
             accessor: 'billedAt',
             ellipsis: true,
-            title: <InfraProvidersColumnTitle icon={HiCalendar} title="Billed at" />,
+            title: (
+                <InfraProvidersColumnTitle
+                    icon={HiCalendar}
+                    title={t('use-infra-billing-records-columns.billed-at')}
+                />
+            ),
             width: 200,
             textAlign: 'right',
             render: ({ billedAt }) => (
@@ -53,7 +65,12 @@ export function getInfraBillingRecordsColumns(
         {
             accessor: 'amount',
             ellipsis: true,
-            title: <InfraProvidersColumnTitle icon={HiCurrencyDollar} title="Paid, $" />,
+            title: (
+                <InfraProvidersColumnTitle
+                    icon={HiCurrencyDollar}
+                    title={t('use-infra-billing-records-columns.paid')}
+                />
+            ),
             width: 150,
             textAlign: 'center',
             render: ({ amount }) => (

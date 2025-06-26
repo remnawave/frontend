@@ -270,7 +270,11 @@ export const DetailedUserInfoDrawerWidget = () => {
                                     >
                                         <PiTagDuotone size={16} />
                                     </ThemeIcon>
-                                    <Title order={5}>Active Internal Squads</Title>
+                                    <Title order={5}>
+                                        {t(
+                                            'detailed-user-info-drawer.widget.active-internal-squads'
+                                        )}
+                                    </Title>
                                 </Group>
 
                                 {user.activeInternalSquads.map((squad) => (

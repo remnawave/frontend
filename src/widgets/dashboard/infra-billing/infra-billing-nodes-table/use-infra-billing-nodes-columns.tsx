@@ -4,6 +4,7 @@ import { HiCalendar, HiOfficeBuilding, HiServer } from 'react-icons/hi'
 import { TbClick, TbExternalLink, TbTrash } from 'react-icons/tb'
 import { DataTableColumn } from 'mantine-datatable'
 import ReactCountryFlag from 'react-country-flag'
+import { TFunction } from 'i18next'
 
 import { faviconResolver } from '@shared/utils/misc'
 
@@ -11,7 +12,8 @@ import { InfraBillingNodesTableNextBillingAtCell } from './next-billing-at-cell'
 import { InfraProvidersColumnTitle } from './column-title'
 
 export function getInfraBillingNodesColumns(
-    handleDeleteInfraBillingNode: (uuid: string) => void
+    handleDeleteInfraBillingNode: (uuid: string) => void,
+    t: TFunction
 ): DataTableColumn<
     // handleOpenModal: (row: GetInfraBillingHistoryRecordsCommand.Response['response']['records'][number]) => void,
 
@@ -43,7 +45,12 @@ export function getInfraBillingNodesColumns(
         {
             accessor: 'provider.name',
             ellipsis: true,
-            title: <InfraProvidersColumnTitle icon={HiOfficeBuilding} title="Hoster name" />,
+            title: (
+                <InfraProvidersColumnTitle
+                    icon={HiOfficeBuilding}
+                    title={t('use-infra-billing-nodes-columns.hoster-name')}
+                />
+            ),
             width: 200,
             render: ({ provider }) => (
                 <Flex
@@ -82,7 +89,12 @@ export function getInfraBillingNodesColumns(
         {
             accessor: 'node',
             ellipsis: true,
-            title: <InfraProvidersColumnTitle icon={HiServer} title="Node" />,
+            title: (
+                <InfraProvidersColumnTitle
+                    icon={HiServer}
+                    title={t('use-infra-billing-nodes-columns.node')}
+                />
+            ),
             width: 150,
             textAlign: 'center',
             render: ({ node }) => (
@@ -110,12 +122,12 @@ export function getInfraBillingNodesColumns(
                 <InfraProvidersColumnTitle
                     icon={HiCalendar}
                     justify="flex-end"
-                    title="Next billing at"
+                    title={t('use-infra-billing-nodes-columns.next-billing-at')}
                 />
             ),
             width: 200,
             render: ({ nextBillingAt }) => (
-                <InfraBillingNodesTableNextBillingAtCell nextBillingAt={nextBillingAt} />
+                <InfraBillingNodesTableNextBillingAtCell nextBillingAt={nextBillingAt} t={t} />
             )
         }
     ]

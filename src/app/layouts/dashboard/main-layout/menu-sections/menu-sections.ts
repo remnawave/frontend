@@ -42,7 +42,7 @@ export const useMenuSections = (): MenuItem[] => {
                     icon: PiUsersDuotone
                 },
                 {
-                    name: 'Config Profiles',
+                    name: t('constants.config-profiles'),
                     href: ROUTES.DASHBOARD.MANAGEMENT.CONFIG_PROFILES,
                     icon: XtlsLogo
                 },
@@ -52,7 +52,7 @@ export const useMenuSections = (): MenuItem[] => {
                     icon: PiListChecks
                 },
                 {
-                    name: 'Internal Squads',
+                    name: t('constants.internal-squads'),
                     href: ROUTES.DASHBOARD.MANAGEMENT.INTERNAL_SQUADS,
                     icon: TbCirclesRelation
                 },
@@ -127,7 +127,7 @@ export const useMenuSections = (): MenuItem[] => {
             header: 'CRM',
             section: [
                 {
-                    name: 'Infra Billing',
+                    name: t('constants.infra-billing'),
                     href: ROUTES.DASHBOARD.CRM.INFRA_BILLING,
                     icon: FaHornbill
                 }

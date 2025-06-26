@@ -353,12 +353,12 @@ export const CreateUserModalWidget = () => {
                             />
 
                             <InternalSquadsListWidget
-                                description={
-                                    'Specify internal squads that will be assigned to the user'
-                                }
+                                description={t(
+                                    'create-user-modal.widget.internal-squads-description'
+                                )}
                                 filteredInternalSquads={filteredInternalSquads}
                                 formKey={form.key('activeInternalSquads')}
-                                label={'Internal squads'}
+                                label={t('create-user-modal.widget.internal-squads')}
                                 searchQuery={searchQuery}
                                 setSearchQuery={setSearchQuery}
                                 {...form.getInputProps('activeInternalSquads')}

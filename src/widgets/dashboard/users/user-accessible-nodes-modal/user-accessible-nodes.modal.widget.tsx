@@ -17,6 +17,7 @@ import { IconChevronDown, IconFlag, IconServer } from '@tabler/icons-react'
 import { GetUserAccessibleNodesCommand } from '@remnawave/backend-contract'
 import { TbCirclesRelation, TbServer } from 'react-icons/tb'
 import ReactCountryFlag from 'react-country-flag'
+import { useTranslation } from 'react-i18next'
 import { PiTag } from 'react-icons/pi'
 
 import { MODALS, useModalsStore } from '@entities/dashboard/modal-store'
@@ -45,6 +46,8 @@ interface RenderTreeNodeProps {
 }
 
 export const UserAccessibleNodesModalWidget = () => {
+    const { t } = useTranslation()
+
     const { isOpen, internalState } = useModalsStore(
         (state) => state.modals[MODALS.USER_ACCESSIBLE_NODES_DRAWER]
     )
@@ -64,7 +67,9 @@ export const UserAccessibleNodesModalWidget = () => {
             <Center h={200}>
                 <Stack align="center" gap="md">
                     <Loader size="lg" />
-                    <Text c="dimmed">Loading accessible nodes...</Text>
+                    <Text c="dimmed">
+                        {t('user-accessible-nodes.modal.widget.loading-accessible-nodes')}
+                    </Text>
                 </Stack>
             </Center>
         )
@@ -273,7 +278,9 @@ export const UserAccessibleNodesModalWidget = () => {
                     <Stack align="center" gap="md">
                         <IconServer color="var(--mantine-color-gray-5)" size={48} />
                         <Text c="dimmed" size="lg" ta="center">
-                            No accessible nodes found for this user
+                            {t(
+                                'user-accessible-nodes.modal.widget.no-accessible-nodes-found-for-this-user'
+                            )}
                         </Text>
                     </Stack>
                 </Center>
@@ -284,12 +291,11 @@ export const UserAccessibleNodesModalWidget = () => {
 
         return (
             <Stack gap="lg">
-                {/* Summary */}
                 <Card p="md" radius="md" withBorder>
                     <Group align="center" gap="md">
                         <IconFlag color="var(--mantine-color-blue-4)" size={20} />
                         <Text c="gray.1" fw={600} size="lg">
-                            Access Summary
+                            {t('user-accessible-nodes.modal.widget.access-summary')}
                         </Text>
                         <Badge
                             color="blue"
@@ -331,7 +337,6 @@ export const UserAccessibleNodesModalWidget = () => {
                     </Group>
                 </Card>
 
-                {/* Tree */}
                 <Box>
                     <Tree data={treeData} levelOffset={20} renderNode={renderTreeNode} />
                 </Box>
@@ -351,7 +356,9 @@ export const UserAccessibleNodesModalWidget = () => {
             title={
                 <Group align="center" gap="sm">
                     <IconServer color="var(--mantine-color-blue-6)" size={24} />
-                    <Title order={3}>User Accessible Nodes</Title>
+                    <Title order={3}>
+                        {t('user-accessible-nodes.modal.widget.user-accessible-nodes')}
+                    </Title>
                 </Group>
             }
         >

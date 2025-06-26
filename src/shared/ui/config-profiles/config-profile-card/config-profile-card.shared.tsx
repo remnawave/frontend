@@ -12,6 +12,7 @@ import {
 } from '@mantine/core'
 import { githubDarkTheme, JsonEditor } from 'json-edit-react'
 import { PiCheckBold, PiCpu, PiXBold } from 'react-icons/pi'
+import { useTranslation } from 'react-i18next'
 import { modals } from '@mantine/modals'
 import { memo } from 'react'
 
@@ -32,6 +33,8 @@ export const ConfigProfileCardShared = memo((props: IProps) => {
 
         isOpen
     } = props
+
+    const { t } = useTranslation()
 
     const handleShowJson = () => {
         if (!profile) return
@@ -134,7 +137,7 @@ export const ConfigProfileCardShared = memo((props: IProps) => {
                         {selectedInboundsFromProfile} / {profile.inbounds.length}
                     </Badge>
 
-                    <Tooltip label="Active on nodes">
+                    <Tooltip label={t('config-profile-card.shared.active-on-nodes')}>
                         <Badge
                             color={profile.nodes.length > 0 ? 'teal' : 'cyan'}
                             leftSection={<PiCpu />}

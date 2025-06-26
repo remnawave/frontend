@@ -5,20 +5,21 @@
         "config": "Xray کانفیگ",
         "home": "خانه",
         "hosts": "هاست‌ها",
-        "inbounds": "اینباندها",
         "nodes": "نودها",
         "nodes-bandwidth-table": "جدول مصرف نودها",
         "nodes-statistics": "آمار نودها",
         "users": "کاربرها",
         "overview": "نمای کلی",
         "management": "مدیریت",
-        "statistics": "آمار",
         "subscription-settings": "تنظیمات اشتراک",
         "utils": "ابزارها",
         "happ-routing-builder": "مسیرساز برای Happ",
         "templates": "قالب‌ها",
         "subscription": "اشتراک",
-        "subscription-page-builder": "سازنده صفحه اشتراک"
+        "subscription-page-builder": "سازنده صفحه اشتراک",
+        "config-profiles": "Config Profiles",
+        "internal-squads": "Internal Squads",
+        "infra-billing": "Infra Billing"
     },
     "bandwidth-metrics": {
         "current-year": "امسال",
@@ -55,7 +56,6 @@
         "feature": {
             "save": "ذخیره",
             "format": "فرمت",
-            "copy-config": "کپی",
             "save-anyway-description": "این آیا از ذخیره کانفیگ نامعتبر مطمئن هستید؟ این عملیات ممکن است باعث بروز مشکلاتی در نرم‌افزار شود. اگر مطمئن هستید، روی \"ذخیره کانفیگ نامعتبر\" کلیک کنید.",
             "cancel": "لغو",
             "save-anyway-title": "تایید عملیات",
@@ -103,9 +103,7 @@
         }
     },
     "header-buttons": {
-        "feature": {
-            "logout": "خروج"
-        }
+        "feature": {}
     },
     "delete-host": {
         "feature": {
@@ -115,8 +113,7 @@
     "header-action-buttons": {
         "feature": {
             "create-new-host": "ساخت هاست جدید",
-            "update": "به‌روزرسانی",
-            "all": "همه"
+            "update": "به‌روزرسانی"
         }
     },
     "delete-node": {
@@ -252,8 +249,6 @@
     },
     "create-user-modal": {
         "widget": {
-            "inbounds": "اینباندها",
-            "inbounds-description": "اینباندهای قابل دسترسی برای این کاربر را انتخاب کنید.",
             "user-description": "توضیحات کاربر",
             "expiry-date": "تاریخ انقضا",
             "pick-value": "انتخاب مقدار",
@@ -275,15 +270,15 @@
             "hwid-user-limit-line-1": "این ویژگی فقط در صورتی کار می‌‌کند که",
             "hwid-user-limit-line-2": "در فایل .env این مقدار را داشته باشد:",
             "hwid-user-limit-line-3": "اطلاعات بیشتر",
-            "expire-at-description": "The date and time when the user's subscription will expire."
+            "expire-at-description": "The date and time when the user's subscription will expire.",
+            "internal-squads": "Internal squads",
+            "internal-squads-description": "Specify internal squads that will be assigned to the user"
         }
     },
     "login-form-feature": {
         "username": "نام کاربری"
     },
-    "home-page": {
-        "users": "کاربرها"
-    },
+    "home-page": {},
     "user-table": {
         "widget": {
             "list-of-all-users": "فهرست تمامی کاربران",
@@ -294,18 +289,15 @@
     "view-user-modal": {
         "widget": {
             "connection-details": "جزئیات اتصال",
-            "last-traffic-reset-at": "آخرین زمان بازنشانی ترافیک",
             "subscription-url": "لینک اشتراک",
             "subscription-short-uuid": "UUID کوتاه اشتراک",
-            "username-cannot-be-changed": "نام کاربری قابل تغییر نمی‌باشد",
-            "user-details": "مشخصات کاربر",
-            "loading-user-data": "در حال بارگذاری اطلاعات کاربر...",
             "edit-user": "ویرایش کاربر",
-            "never": "هرگز",
             "close": "بستن",
-            "show-qr": "نمایش QR",
             "subscription-qr-code": "اشتراک کد QR",
-            "edit-user-headline": "ویرایش کاربر"
+            "edit-user-headline": "ویرایش کاربر",
+            "subscription-url-description-line-2": "If you want to change it, please change it in the .env file and restart Remnawave using command:",
+            "subscription-url-description-line-1": "Domain and path resolved from .env variable:",
+            "view-accessible-nodes": "View accessible nodes"
         }
     },
     "base-api-token-form": {
@@ -322,8 +314,6 @@
         "remark": "نام",
         "address": "آدرس",
         "port": "پورت",
-        "inbound": "اینباند",
-        "select-inbound": "انتخاب اینباند",
         "advanced-options": "گزینه‌های پیشرفته",
         "host": "هاست",
         "path": "مسیر",
@@ -353,7 +343,16 @@
         "port-description-line-1": "پورت اتصال.",
         "port-description-line-2": "در بیشتر موارد، باید با پورت ورودی انتخاب‌شده مطابقت داشته باشد.",
         "sni-description-line-1": "SNI نشان‌دهنده نام سرور است.",
-        "sni-description-line-2": "اگر مشخص نشود، مقدار از کانفیگ اینباند استخراج خواهد شد."
+        "sni-description-line-2": "اگر مشخص نشود، مقدار از کانفیگ اینباند استخراج خواهد شد.",
+        "host-visability": "Host Visability",
+        "server-description-description": "Only for Happ.",
+        "select-one-inbound-to-apply-to-the-host": "Select one inbound to apply to the host",
+        "server-description-header": "Server Description",
+        "server-description-line-1": "This feature fill only with Happ with ProviderID value. Please, refer to",
+        "server-description-line-2": "Happ documentation",
+        "server-description-line-3": "for more information.",
+        "server-description-line-4": "Remnawave will encode this value to base64. Do not place encoded value here.",
+        "server-description-placeholder": "Maximum 30 characters"
     },
     "base-node-form": {
         "country": "کشور",
@@ -370,8 +369,6 @@
         "e-g-1-31": "مثلا 1-31",
         "notify-percent": "اطلاع‌رسانی در چند درصد",
         "e-g-50": "مثلا 50",
-        "select-active-inbounds-for-this-node": "اینباندهای فعال برای این نود را انتخاب کنید",
-        "inbounds": "اینباندها",
         "save": "ذخیره",
         "consumption-m-line-1": "Applies selected multiplier to user's traffic (1.0 = normal, 0.5 = half, 2.0 = double).",
         "consumption-m-line-2": "In simple terms, this means that if a user's traffic limit is 1 GiB and the consumption multiplier is 2.0, the user will be able to use only 0.5 GiB of traffic (real usage), but Remnawave will show usage as 1 GiB and the user will be LIMITED."
@@ -494,8 +491,6 @@
         "widget": {
             "copy-link": "کپی کردن لینک",
             "visual-editor": "ویرایشگر بصری",
-            "code-viewer": "نمایشگر کد",
-            "encode-happ-link": "ایجاد لینک روتینگ Happ",
             "enter-the-configuration-name": "اسم تنظیمات روتینگ را وارد کنید",
             "name": "نام",
             "russia": "روسیه",
@@ -550,7 +545,6 @@
             "direct-routing": "روتینگ مستقیم",
             "dns-hosts-0": "هاست‌های DNS",
             "domestic-dns-settings": "تنظیمات DNS محلی",
-            "encoded-link": "لینک رمزنگاری شده",
             "import-configuration": "وارد کردن تنظیمات",
             "import-from-base64": "وارد کردن از Base64",
             "invalid-base64-or-happ-link": "لینک Happ یا Base64 نامعتبر است",
@@ -624,40 +618,10 @@
         }
     },
     "inbounds-page-header": {
-        "widget": {
-            "list-of-all-inbounds": "لیست همه اینباندها",
-            "inbounds": "اینباندها",
-            "important-note": "نکته مهم",
-            "important-note-description-line-1": "همه عملیات‌های گروهی نیاز به ریستارت کامل همه نودها دارند",
-            "important-note-description-line-2": "لطفاً از ارسال درخواست‌های متعدد در مدت زمان کوتاه خودداری کنید",
-            "important-note-description-line-3": "پس از ذخیره تغییرات، ممکن است تا ۳۰ ثانیه طول بکشد تا تغییرات در همه نودها اعمال شوند"
-        }
+        "widget": {}
     },
     "inbounds-card": {
-        "widget": {
-            "nodes": "نودها",
-            "enabled-nodes": "نودهایی که این اینباند در آن‌ها فعال است",
-            "disabled-nodes": "نودهایی که این اینباند در آن‌ها غیرفعال است",
-            "remove": "حذف",
-            "add": "افزودن",
-            "cancel": "لغو",
-            "users": "کاربرها",
-            "enabled-users": "کاربرانی که این اینباند برای آن‌ها فعال است",
-            "disabled-users": "کاربرانی که این اینباند برای آن‌ها غیرفعال است",
-            "show-raw-inbound": "نمایش اینباند خام",
-            "raw-inbound": "اینباند خام",
-            "are-you-sure": "آیا مطمئن هستید؟",
-            "add-users-to-inbound-line-1": "آیا مطمئن هستید که می‌خواهید این اینباند را به کاربران اضافه کنید؟",
-            "add-users-to-inbound-line-2": "این اقدام اینباند را به همه کاربران اضافه خواهد کرد",
-            "remove-users-from-inbound-line-1": "آیا مطمئن هستید که می‌خواهید این اینباند را برای کاربران حذف کنید؟",
-            "remove-users-from-inbound-line-2": "این اقدام اینباند را برای همه کاربران حذف خواهد کرد.",
-            "add-nodes-to-inbound-line-1": "آیا مطمئن هستید که می‌خواهید این اینباند را به نودها اضافه کنید؟",
-            "add-nodes-to-inbound-line-2": "این اقدام اینباند را به همه نودها اضافه خواهد کرد.",
-            "remove-nodes-from-inbound-line-1": "آیا مطمئن هستید که می‌خواهید این اینباند را از نودها حذف کنید؟",
-            "remove-nodes-from-inbound-line-2": "این اقدام اینباند را از همه نودها حذف خواهد کرد.",
-            "copied": "کپی شده",
-            "copy-uuid": "کپی UUID"
-        }
+        "widget": {}
     },
     "multi-select-hosts": {
         "feature": {
@@ -666,7 +630,6 @@
             "delete": "حذف",
             "cancel": "لغو",
             "set-inbound": "تنظیم اینباند",
-            "inbound": "اینباند",
             "set-port": "تنظیم پورت",
             "port": "پورت",
             "clear-selection": "پاک کردن انتخاب",
@@ -755,12 +718,8 @@
                     "reset-traffic-confirmation-line-1": "آیا مطمئن هستید که می‌خواهید ترافیک {{usersCount}} کاربر را بازنشانی کنید؟",
                     "reset-traffic-confirmation-line-2": "این اقدام مصرف کاربران را به صفر تنظیم می‌کند.",
                     "reset": "بازنشانی",
-                    "change-active-inbounds": "تغییر اینباندهای فعال",
                     "change": "تغییر",
-                    "no-inbounds-selected": "هیچ اینباند انتخاب نشده است",
-                    "please-select-at-least-one-inbound": "لطفاً حداقل یک اینباند انتخاب کنید",
                     "perform-action-on-users": "انجام اقدامات برای {{usersCount}} کاربر انتخاب‌شده",
-                    "changes-the-active-inbounds-for-all-selected-users": "اینباند‌های فعال را برای همه کاربران انتخاب‌شده تغییر می‌دهد",
                     "resets-the-traffic-usage-to-zero-for-all-selected-users": "ترافیک مصرفی را برای همه کاربران انتخاب‌شده به صفر بازنشانی می‌کند",
                     "revokes-subscription-for-all-selected-users": "اشتراک را برای همه کاربران انتخاب‌شده لغو می‌کند"
                 }
@@ -807,7 +766,6 @@
         "feature": {
             "subscription-links": "لینک‌های اشتراک",
             "loading-subscription-links": "درحال بارگذاری لینک‌های اشتراک ...",
-            "show-links": "نشان دادن لینک‌ها",
             "no-available-hosts-found-for-this-user": "هیچ هاست موجودی برای این کاربر یافت نشد"
         }
     },
@@ -823,8 +781,6 @@
         "widget": {
             "no-data-available-for-the-selected-period": "داده‌ای برای دوره انتخاب‌شده در دسترس نیست",
             "no-data-available": "داده‌ای در دسترس نیست",
-            "click-to-show-all": "برای نمایش همه کلیک کنید",
-            "click-to-highlight-only-this-node": "کلیک کنید تا فقط این نود برجسته شود",
             "traffic-statistics": "آمار ترافیک",
             "usage-by-period": "استفاده بر اساس دوره",
             "7-days": "۷ روز",
@@ -851,9 +807,7 @@
     },
     "detailed-user-info-drawer": {
         "widget": {
-            "copied": "کپی شد",
             "detailed-user-info": "اطلاعات دقیق کاربر",
-            "copy": "کپی",
             "loading-user-info": "در حال بارگذاری اطلاعات کاربر...",
             "user-information": "اطلاعات کاربر",
             "uuid": "UUID",
@@ -869,7 +823,6 @@
             "traffic-limit-strategy": "استراتژی محدودیت ترافیک",
             "last-traffic-reset": "آخرین بازنشانی ترافیک",
             "subscription-information": "اطلاعات اشتراک",
-            "subscription-uuid": "شناسه (UUID) اشتراک",
             "subscription-url": "آدرس URL اشتراک",
             "expires-at": "زمان انقضا",
             "last-opened-at": "آخرین بار باز شده در",
@@ -881,12 +834,12 @@
             "ss-password": "رمز عبور SS",
             "last-online": "آخرین آنلاین",
             "last-connected-node": "آخرین نود متصل‌شده",
-            "active-inbounds": "اینباندهای فعال",
             "timestamps": "مهرهای زمانی",
             "created-at": "ایجاد شده در",
             "updated-at": "به‌روزرسانی شده در",
             "first-connected-at": "اولین اتصال",
-            "tag": "تگ"
+            "tag": "تگ",
+            "active-internal-squads": "Active Internal Squads"
         }
     },
     "subscription-page-builder-header": {
@@ -1057,5 +1010,288 @@
         "heaviest-process": "Heaviest Process",
         "total-memory": "Total Memory",
         "total-processes": "Total Processes"
+    },
+    "active-nodes-list-with-store": {
+        "modal": {
+            "shared": {
+                "active-nodes": "Active Nodes"
+            }
+        }
+    },
+    "active-nodes-list": {
+        "modal": {
+            "shared": {
+                "profile-is-active-on": "Profile is active on {{nodeCount}} node{{nodeCount !== 1 ? 's' : ''}}",
+                "this-profile-is-not-active-on-any-nodes": "This profile is not active on any nodes"
+            }
+        }
+    },
+    "config-profile-card": {
+        "shared": {
+            "active-on-nodes": "Active on nodes"
+        }
+    },
+    "config-profile-detail-header": {
+        "widget": {
+            "active-nodes": "Active nodes"
+        }
+    },
+    "config-profiles-grid": {
+        "widget": {
+            "are-you-sure-you-want-to-delete-the-config-profile": "Are you sure you want to delete the config profile \"{{profileName}}\"?",
+            "cancel": "Cancel",
+            "create-your-first-config-profile-to-get-started": "Create your first config profile to get started",
+            "delete": "Delete",
+            "delete-config-profile": "Delete Config Profile",
+            "delete-profile": "Delete profile",
+            "download": "Download",
+            "edit-xray-config": "Edit Xray Config",
+            "inbounds": "Inbounds",
+            "no-config-profiles": "No Config Profiles",
+            "nodes": "Nodes",
+            "quick-view": "Quick view",
+            "this-action-cannot-be-undone": "This action cannot be undone."
+        }
+    },
+    "config-profiles-header": {
+        "widget": {
+            "list-of-all-config-profiles": "List of all config profiles"
+        }
+    },
+    "create-infra-billing-node": {
+        "modal": {
+            "widget": {
+                "billing-node": "Billing Node",
+                "create": "Create",
+                "error": "Error",
+                "next-billing-at": "Next Billing At",
+                "next-billing-at-description": "The date and time when the billing node will be billed. Remnawave will notify you about upcoming billing.",
+                "please-select-a-provider-and-billing-node": "Please select a provider and billing node"
+            }
+        }
+    },
+    "create-infra-billing-record": {
+        "modal": {
+            "widget": {
+                "amount": "Amount",
+                "bill-record": "Bill Record",
+                "billed-at": "Billed At",
+                "create": "Create",
+                "error": "Error",
+                "payment-amount-usd": "Payment amount, USD",
+                "please-select-a-provider": "Please select a provider",
+                "the-date-and-time-when-the-bill-was-paid": "The date and time when the bill was paid."
+            }
+        }
+    },
+    "create-infra-provider": {
+        "drawer": {
+            "widget": {
+                "create": "Create"
+            }
+        }
+    },
+    "flat-inbound-checkbox-card": {
+        "shared": {
+            "inbound-config-inbound-tag": "Inbound Config: {{inboundTag}}"
+        }
+    },
+    "host-select-inbound": {
+        "feature": {
+            "change": "Change",
+            "choose-an-inbound-to-apply-to-the-host": "Choose an inbound to apply to the host",
+            "select": "Select",
+            "no-inbound-selected": "No inbound selected"
+        }
+    },
+    "infra-billing-nodes": {
+        "widget": {
+            "add-a-node": "Add a node",
+            "add-node": "Add Node",
+            "cancel": "Cancel",
+            "delete": "Delete",
+            "delete-infra-billing-node": "Delete Infra Billing Node",
+            "infra-billing-nodes": "Infra Billing Nodes",
+            "delete-infra-billing-node-confirmation": "Are you sure you want to delete this infra billing node?",
+            "list-of-all-infra-billing-nodes": "List of all infra billing nodes sorted by next billing date",
+            "no-nodes-found": "No nodes found.",
+            "refresh": "Refresh",
+            "this-action-is-irreversible": "This action is irreversible."
+        }
+    },
+    "infra-billing-records-table": {
+        "widget": {
+            "billing-records-sorted-by-date": "Billing records sorted by date",
+            "cancel": "Cancel",
+            "create": "Create",
+            "delete": "Delete",
+            "delete-infra-billing-record": "Delete Infra Billing Record",
+            "delete-infra-billing-record-confirmation": "Are you sure you want to delete this infra billing record?",
+            "infra-billing-records": "Infra Billing Records",
+            "no-billing-records-found": "No billing records found.",
+            "refresh": "Refresh",
+            "this-action-is-irreversible": "This action is irreversible."
+        }
+    },
+    "infra-providers-table": {
+        "widget": {
+            "cancel": "Cancel",
+            "create-infra-provider": "Create Infra Provider",
+            "delete": "Delete",
+            "delete-infra-provider": "Delete Infra Provider",
+            "delete-infra-provider-confirmation": "Are you sure you want to delete this infra provider?",
+            "infra-providers": "Infra Providers",
+            "list-of-all-infra-providers": "List of all infra providers",
+            "no-providers-found": "No providers found.",
+            "refresh": "Refresh",
+            "this-action-is-irreversible": "This action is irreversible."
+        }
+    },
+    "internal-squads-grid": {
+        "widget": {
+            "add": "Add",
+            "add-users-to-internal-squad": "Add Users to Internal Squad",
+            "add-users-to-internal-squad-confirmation": "Are you sure you want to add the users to the internal squad \"{{internalSquadName}}\"?",
+            "cancel": "Cancel",
+            "create-your-first-internal-squad-to-get-started": "Create your first internal squad to get started",
+            "delete": "Delete",
+            "delete-internal-squad": "Delete Internal Squad",
+            "delete-internal-squad-confirmation": "Are you sure you want to delete the internal squad \"{{internalSquadName}}\"?",
+            "delete-squad": "Delete squad",
+            "edit-inbounds": "Edit inbounds",
+            "inbounds": "Inbounds",
+            "no-internal-squads": "No Internal Squads",
+            "remove": "Remove",
+            "remove-users-from-internal-squad": "Remove Users from Internal Squad",
+            "remove-users-from-internal-squad-confirmation": "Are you sure you want to remove the users from the internal squad \"{{internalSquadName}}\"?",
+            "this-action-cannot-be-undone": "This action cannot be undone.",
+            "users": "Users"
+        }
+    },
+    "internal-squads-header": {
+        "widget": {
+            "list": "List of all internal squads"
+        }
+    },
+    "internal-squads-list": {
+        "widget": {
+            "no-squads-found": "No squads found",
+            "search-internal-squads": "Search internal squads..."
+        }
+    },
+    "internal-squads": {
+        "drawer": {
+            "widget": {
+                "all": "All",
+                "choose-inbounds-from-any-profiles": "Choose inbounds from any profiles",
+                "config-profiles": "Config Profiles",
+                "flat-list": "Flat List",
+                "no-config-profiles-available": "No config profiles available",
+                "no-inbounds-selected": "No inbounds selected",
+                "no-profiles-or-inbounds-found": "No profiles or inbounds found",
+                "search-profiles-or-inbounds": "Search profiles or inbounds...",
+                "selected": "Selected",
+                "unselected": "Unselected",
+                "selected-from-multiple-profiles": "From multiple profiles",
+                "update-internal-squad": "Update Internal Squad"
+            }
+        }
+    },
+    "next-billing-at-cell": {
+        "date-approaching": "Date approaching",
+        "far-future": "Far future",
+        "today": "Today",
+        "more-than-3-days-ago": "More than 3 days ago",
+        "tomorrow": "Tomorrow",
+        "in-current-month": "In current month",
+        "yesterday": "Yesterday"
+    },
+    "select-billing-node": {
+        "shared": {
+            "billing-node": "Billing Node",
+            "select-billing-node": "Select billing node...",
+            "select-the-billing-node": "Select the billing node.",
+            "no-billing-nodes-available": "No billing nodes available"
+        }
+    },
+    "view-infra-provider": {
+        "drawer": {
+            "widget": {
+                "name-description": "The name of the provider. This is used to identify the provider in the UI.",
+                "name": "Name",
+                "save-changes": "Save Changes",
+                "login-url": "Login URL",
+                "favicon-link-description": "The favicon link is the link to the favicon of the provider. It is used to display the favicon of the provider in the UI. You can just enter the domain name.",
+                "favicon-link": "Favicon Link",
+                "enter-provider-name": "Enter provider name",
+                "infra-provider": "Infra Provider",
+                "enter-favicon-link": "Enter favicon link",
+                "enter-login-url": "Enter login URL",
+                "login-url-description": "The login URL is the URL of the login page of the provider. It will help you quickly go to the login page of the provider."
+            }
+        }
+    },
+    "user-accessible-nodes": {
+        "modal": {
+            "widget": {
+                "user-accessible-nodes": "User Accessible Nodes",
+                "no-accessible-nodes-found-for-this-user": "No accessible nodes found for this user",
+                "loading-accessible-nodes": "Loading accessible nodes...",
+                "access-summary": "Access Summary"
+            }
+        }
+    },
+    "use-infra-billing-records-columns": {
+        "paid": "Paid, $",
+        "hoster-name": "Hoster name",
+        "billed-at": "Billed at"
+    },
+    "use-infra-billing-nodes-columns": {
+        "hoster-name": "Hoster name",
+        "next-billing-at": "Next billing at",
+        "node": "Node"
+    },
+    "update-billing-date-modal": {
+        "widget": {
+            "next-month": "Next Month",
+            "cancel": "Cancel",
+            "new-date": "New Date",
+            "today": "Today",
+            "update-billing-date": "Update Billing Date",
+            "update-date": "Update Date",
+            "tomorrow": "Tomorrow",
+            "current-date": "Current Date"
+        }
+    },
+    "show-config-profiles-with-inbounds": {
+        "feature": {
+            "config-profile": "Config Profile",
+            "change-profile": "Change Profile",
+            "choose-a-profile-to-configure-inbounds-for-this-node": "Choose a profile to configure inbounds for this node",
+            "no-config-profile-selected": "No config profile selected",
+            "select-the-config-profile-that-will-be-applied-to-this-node": "Select the config profile that will be applied to this node",
+            "select-config-profile": "Select Config Profile"
+        }
+    },
+    "select-infra-provider": {
+        "shared": {
+            "select-the-infrastructure-provider": "Select the infrastructure provider.",
+            "select-provider": "Select provider...",
+            "no-providers-available": "No providers available",
+            "infrastructure-provider": "Infrastructure Provider"
+        }
+    },
+    "use-infra-providers-columns": {
+        "hoster-name": "Hoster name",
+        "login-url": "Login URL",
+        "no-servers": "No servers",
+        "servers": "Servers",
+        "providers": "providers",
+        "total": "Total, $"
+    },
+    "virtualized-flat-inbounds-list": {
+        "shared": {
+            "no-inbounds-found": "No inbounds found"
+        }
     }
 }

@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 import {
     Accordion,
     ActionIcon,
@@ -19,6 +20,7 @@ import { PiCheck, PiCopy, PiList, PiTreeView, PiUsers } from 'react-icons/pi'
 import { GetConfigProfilesCommand } from '@remnawave/backend-contract'
 import { TbArrowAutofitDown, TbSearch, TbX } from 'react-icons/tb'
 import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 
 import { VirtualizedFlatInboundsListShared } from '@shared/ui/config-profiles/virtualized-flat-inbounds-list/virtualized-flat-inbounds-list.shared'
 import {
@@ -36,6 +38,7 @@ export const InternalSquadsDrawerWithStore = () => {
         (state) => state.modals[MODALS.INTERNAL_SQUAD_SHOW_INBOUNDS]
     )
     const { close } = useModalsStore()
+    const { t } = useTranslation()
 
     // const { data: internalSquad, isLoading: isInternalSquadLoading } = useGetInternalSquad({
     //     route: {
@@ -264,16 +267,20 @@ export const InternalSquadsDrawerWithStore = () => {
                                         {selectedInbounds.size !== 1 ? 's' : ''} selected
                                     </Text>
                                     <Text c="dimmed" size="xs">
-                                        From multiple profiles
+                                        {t(
+                                            'internal-squads.drawer.widget.selected-from-multiple-profiles'
+                                        )}
                                     </Text>
                                 </>
                             ) : (
                                 <>
                                     <Text fw={700} size="sm">
-                                        No inbounds selected
+                                        {t('internal-squads.drawer.widget.no-inbounds-selected')}
                                     </Text>
                                     <Text c="dimmed" size="xs">
-                                        Choose inbounds from any profiles
+                                        {t(
+                                            'internal-squads.drawer.widget.choose-inbounds-from-any-profiles'
+                                        )}
                                     </Text>
                                 </>
                             )}
@@ -300,14 +307,14 @@ export const InternalSquadsDrawerWithStore = () => {
                         onClick={handleUpdateInternalSquad}
                         size="md"
                     >
-                        Update Internal Squad
+                        {t('internal-squads.drawer.widget.update-internal-squad')}
                     </Button>
                 </Group>
 
                 <TextInput
                     leftSection={<TbSearch size={16} />}
                     onChange={(event) => setSearchQuery(event.currentTarget.value)}
-                    placeholder="Search profiles or inbounds..."
+                    placeholder={t('internal-squads.drawer.widget.search-profiles-or-inbounds')}
                     radius="md"
                     value={searchQuery}
                 />
@@ -319,10 +326,10 @@ export const InternalSquadsDrawerWithStore = () => {
                 >
                     <Tabs.List grow>
                         <Tabs.Tab leftSection={<PiTreeView size={16} />} value="profiles">
-                            Config Profiles
+                            {t('internal-squads.drawer.widget.config-profiles')}
                         </Tabs.Tab>
                         <Tabs.Tab leftSection={<PiList size={16} />} value="flat">
-                            Flat List
+                            {t('internal-squads.drawer.widget.flat-list')}
                         </Tabs.Tab>
                     </Tabs.List>
 
@@ -356,8 +363,12 @@ export const InternalSquadsDrawerWithStore = () => {
                                     {filteredProfiles.length === 0 && (
                                         <Text c="dimmed" py="xl" size="sm" ta="center">
                                             {debouncedSearchQuery
-                                                ? 'No profiles or inbounds found'
-                                                : 'No config profiles available'}
+                                                ? t(
+                                                      'internal-squads.drawer.widget.no-profiles-or-inbounds-found'
+                                                  )
+                                                : t(
+                                                      'internal-squads.drawer.widget.no-config-profiles-available'
+                                                  )}
                                         </Text>
                                     )}
                                 </Accordion>
@@ -369,9 +380,15 @@ export const InternalSquadsDrawerWithStore = () => {
                         <Stack flex={1} gap="sm">
                             <SegmentedControl
                                 data={[
-                                    { label: 'All', value: 'all' },
-                                    { label: 'Selected', value: 'selected' },
-                                    { label: 'Unselected', value: 'unselected' }
+                                    { label: t('internal-squads.drawer.widget.all'), value: 'all' },
+                                    {
+                                        label: t('internal-squads.drawer.widget.selected'),
+                                        value: 'selected'
+                                    },
+                                    {
+                                        label: t('internal-squads.drawer.widget.unselected'),
+                                        value: 'unselected'
+                                    }
                                 ]}
                                 onChange={(value) =>
                                     setFilterType(value as 'all' | 'selected' | 'unselected')

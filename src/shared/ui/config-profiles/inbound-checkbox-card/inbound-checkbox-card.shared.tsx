@@ -1,6 +1,7 @@
 import { ActionIcon, Badge, Checkbox, Group, Text } from '@mantine/core'
 import { GetConfigProfilesCommand } from '@remnawave/backend-contract'
 import { githubDarkTheme, JsonEditor } from 'json-edit-react'
+import { useTranslation } from 'react-i18next'
 import { modals } from '@mantine/modals'
 import { TbCode } from 'react-icons/tb'
 import { useCallback } from 'react'
@@ -11,6 +12,8 @@ import classes from './InboundCheckboxCard.module.css'
 
 export const InboundCheckboxCardShared = (props: IProps) => {
     const { inbound, isSelected, onInboundToggle } = props
+
+    const { t } = useTranslation()
 
     const handleShowInboundJson = useCallback(
         (
@@ -28,7 +31,10 @@ export const InboundCheckboxCardShared = (props: IProps) => {
                         viewOnly
                     />
                 ),
-                title: `Inbound Config: ${inbound.tag}`,
+                title: t('flat-inbound-checkbox-card.shared.inbound-config-inbound-tag', {
+                    inboundTag: inbound.tag
+                }),
+
                 size: 'xl'
             })
         },
