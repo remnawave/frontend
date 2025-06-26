@@ -782,6 +782,8 @@
             "no-data-available-for-the-selected-period": "No data available for the selected period",
             "no-data-available": "No data available",
             "traffic-statistics": "Traffic statistics",
+            "click-to-show-all": "Click to show all",
+            "click-to-highlight-only-this-node": "Click to highlight only this node",
             "usage-by-period": "Usage by period",
             "7-days": "7 days",
             "14-days": "14 days",
