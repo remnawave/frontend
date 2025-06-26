@@ -153,24 +153,16 @@ export function ConfigProfilesGridWidget(props: IProps) {
                                                 <PiCircle size={14} />
                                             )}
                                         </ActionIcon>
+                                        <XtlsLogo size={20} />
                                         <Text
                                             fw={600}
                                             lineClamp={1}
-                                            size="sm"
-                                            style={{ flex: 1 }}
+                                            size="md"
+                                            style={{ flex: 1, minWidth: 0 }}
                                             title={profile.name}
+                                            truncate
                                         >
-                                            <Group gap={6}>
-                                                <XtlsLogo size={20} />
-                                                <Text
-                                                    fw={600}
-                                                    lineClamp={2}
-                                                    size="md"
-                                                    title={profile.name}
-                                                >
-                                                    {profile.name}
-                                                </Text>
-                                            </Group>
+                                            {profile.name}
                                         </Text>
                                     </Group>
 
