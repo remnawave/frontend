@@ -5,7 +5,7 @@ import {
     PiPulseDuotone,
     PiUsersDuotone
 } from 'react-icons/pi'
-import { Box, Group, Loader, SimpleGrid } from '@mantine/core'
+import { Box, Group, Loader, SimpleGrid, Stack } from '@mantine/core'
 import { useTranslation } from 'react-i18next'
 
 import { MetricCard } from '@shared/ui/metrics/metric-card'
@@ -56,19 +56,21 @@ export function UsersMetrics() {
             {cards.map((card) => (
                 <MetricCard.Root key={card.title}>
                     <Group wrap="nowrap">
-                        <MetricCard.Icon c={card.color}>
+                        <MetricCard.Icon c={card.color} p="sm">
                             <card.icon size="2rem" />
                         </MetricCard.Icon>
-                        <Box miw={0}>
+                        <Stack align="self-start" gap="xs" miw={0} w="100%">
                             <MetricCard.TextMuted truncate>{card.title}</MetricCard.TextMuted>
-                            <MetricCard.TextEmphasis ff={'monospace'}>
-                                {isLoading ? (
-                                    <Loader color={card.color} size="xs" />
-                                ) : (
-                                    formatInt(card.value ?? 0)
-                                )}
-                            </MetricCard.TextEmphasis>
-                        </Box>
+                            <Box miw={0} w={'100%'}>
+                                <MetricCard.TextEmphasis ff={'monospace'} truncate>
+                                    {isLoading ? (
+                                        <Loader color={card.color} size="xs" />
+                                    ) : (
+                                        formatInt(card.value ?? 0)
+                                    )}
+                                </MetricCard.TextEmphasis>
+                            </Box>
+                        </Stack>
                     </Group>
                 </MetricCard.Root>
             ))}

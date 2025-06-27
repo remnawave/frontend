@@ -1,34 +1,47 @@
 import { PiTrendDown, PiTrendUp } from 'react-icons/pi'
-import { Flex, Text } from '@mantine/core'
+import { Text } from '@mantine/core'
 
 import { formatPercentage, match } from '@shared/utils/misc'
 
-import { MetricCardTextMuted, MetricCardTextMutedProps } from './metric-card-text-muted'
+import classes from './MetricCard.module.css'
 
-interface MetricCardTextTrendProps extends MetricCardTextMutedProps {
+interface MetricCardTextTrendProps {
+    children: React.ReactNode
     value: number | string
 }
 
-export function MetricCardTextTrend({ value, children, ...props }: MetricCardTextTrendProps) {
+export function MetricCardTextTrend({ value, children }: MetricCardTextTrendProps) {
     let sign = ''
     let color = ''
     let Icon = PiTrendUp
     let valuePrinted = value
+    let isPositive = true
 
     if (typeof value === 'number') {
         const result = match(
             [
                 Number(value) > 0,
-                { sign: '+', color: 'var(--mantine-color-teal-6)', icon: PiTrendUp }
+                {
+                    sign: '+',
+                    color: 'var(--mantine-color-teal-6)',
+                    icon: PiTrendUp,
+                    positive: true
+                }
             ],
             [
                 Number(value) < 0,
-                { sign: '', color: 'var(--mantine-color-red-6)', icon: PiTrendDown }
+                {
+                    sign: '',
+                    color: 'var(--mantine-color-red-6)',
+                    icon: PiTrendDown,
+                    positive: false
+                }
             ]
         )
         sign = result.sign
         color = result.color
         Icon = result.icon
+        isPositive = result.positive
         valuePrinted = formatPercentage(value, {
             prefix: sign,
             precision: 0,
@@ -38,25 +51,26 @@ export function MetricCardTextTrend({ value, children, ...props }: MetricCardTex
         if (value.startsWith('-')) {
             color = 'var(--mantine-color-red-6)'
             Icon = PiTrendDown
+            isPositive = false
             sign = ''
         } else {
             color = 'var(--mantine-color-teal-6)'
             Icon = PiTrendUp
+            isPositive = true
             sign = '+'
         }
-
         valuePrinted = value
     }
 
-    // fz="inherit"
+    const containerClass = `${classes.trendContainer} ${isPositive ? classes.trendPositive : classes.trendNegative}`
 
     return (
-        <Flex align="center" style={{ textWrap: 'nowrap' }}>
-            <Icon color={color} size="1rem" />
-            <Text c={color} component="span" fz="sm" mx="0.25rem">
+        <div className={containerClass}>
+            <Icon color={color} size="0.9rem" />
+            <Text className={classes.trendValue} component="span" style={{ color }}>
                 {valuePrinted}
             </Text>
-            <MetricCardTextMuted {...props}>{children}</MetricCardTextMuted>
-        </Flex>
+            <Text className={classes.trendText}>{children}</Text>
+        </div>
     )
 }

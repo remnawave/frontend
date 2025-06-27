@@ -223,7 +223,9 @@ export function InternalSquadsGridWidget(props: IProps) {
                                 flexDirection: 'column',
                                 transition: 'all 0.2s ease',
                                 position: 'relative',
-                                overflow: 'hidden'
+                                overflow: 'hidden',
+                                background:
+                                    'linear-gradient(280deg, var(--mantine-color-dark-6) 0%, var(--mantine-color-dark-7) 100%)'
                             }}
                             withBorder
                         >

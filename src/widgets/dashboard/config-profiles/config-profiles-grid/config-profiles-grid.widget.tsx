@@ -134,7 +134,9 @@ export function ConfigProfilesGridWidget(props: IProps) {
                                 flexDirection: 'column',
                                 transition: 'all 0.2s ease',
                                 position: 'relative',
-                                overflow: 'hidden'
+                                overflow: 'hidden',
+                                background:
+                                    'linear-gradient(135deg, var(--mantine-color-dark-6) 0%, var(--mantine-color-dark-7) 100%)'
                             }}
                             withBorder
                         >

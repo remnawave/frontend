@@ -1201,7 +1201,7 @@
     "active-nodes-list": {
         "modal": {
             "shared": {
-                "profile-is-active-on": "Profile is active on {{nodeCount}} node{{nodeCount !== 1 ? 's' : ''}}",
+                "profile-is-active-on": "Profile is active on {{nodeCount}} node(s)",
                 "this-profile-is-not-active-on-any-nodes": "This profile is not active on any nodes"
             }
         }
