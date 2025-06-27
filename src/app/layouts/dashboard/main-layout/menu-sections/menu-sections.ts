@@ -42,6 +42,11 @@ export const useMenuSections = (): MenuItem[] => {
                     icon: PiUsersDuotone
                 },
                 {
+                    name: t('constants.internal-squads'),
+                    href: ROUTES.DASHBOARD.MANAGEMENT.INTERNAL_SQUADS,
+                    icon: TbCirclesRelation
+                },
+                {
                     name: t('constants.config-profiles'),
                     href: ROUTES.DASHBOARD.MANAGEMENT.CONFIG_PROFILES,
                     icon: XtlsLogo
@@ -50,11 +55,6 @@ export const useMenuSections = (): MenuItem[] => {
                     name: t('constants.hosts'),
                     href: ROUTES.DASHBOARD.MANAGEMENT.HOSTS,
                     icon: PiListChecks
-                },
-                {
-                    name: t('constants.internal-squads'),
-                    href: ROUTES.DASHBOARD.MANAGEMENT.INTERNAL_SQUADS,
-                    icon: TbCirclesRelation
                 },
                 {
                     name: t('constants.nodes'),
