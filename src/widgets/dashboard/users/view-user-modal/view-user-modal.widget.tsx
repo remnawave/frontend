@@ -123,6 +123,14 @@ export const ViewUserModal = () => {
         isSuccess: isUserUpdated
     } = useUpdateUser({
         mutationFns: {
+            onSuccess: () => {
+                queryClient.refetchQueries({
+                    queryKey: usersQueryKeys.getUserAccessibleNodes({
+                        uuid: selectedUser ?? ''
+                    }).queryKey
+                })
+            },
+
             onError: (error) => {
                 handleFormErrors(form, error)
             }
