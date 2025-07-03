@@ -1,4 +1,4 @@
-import { ActionIcon, Text, Tooltip } from '@mantine/core'
+import { Loader, Menu, Text } from '@mantine/core'
 import { PiKeyDuotone } from 'react-icons/pi'
 import { modals } from '@mantine/modals'
 
@@ -37,10 +37,11 @@ export function RevokeSubscriptionUserFeature(props: IProps) {
         })
 
     return (
-        <Tooltip label="Revoke subscription">
-            <ActionIcon color="green" loading={isPending} onClick={openModal} size="xl">
-                <PiKeyDuotone size="1.5rem" />
-            </ActionIcon>
-        </Tooltip>
+        <Menu.Item
+            leftSection={isPending ? <Loader size={'1rem'} /> : <PiKeyDuotone size="1rem" />}
+            onClick={openModal}
+        >
+            Revoke Subscription
+        </Menu.Item>
     )
 }

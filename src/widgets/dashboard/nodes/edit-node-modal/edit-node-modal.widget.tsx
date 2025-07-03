@@ -21,8 +21,7 @@ import { BaseNodeForm } from '@shared/ui/forms/nodes/base-node-form/base-node-fo
 import { bytesToGbUtil, gbToBytesUtil } from '@shared/utils/bytes'
 import { queryClient } from '@shared/api'
 
-import { NodeXrayVersionBadgeWidget } from '../node-xray-version-badge/node-xray-version-badge.widget'
-import { NodeStatusBadgeWidget } from '../node-status-badge/node-status-badge.widget'
+import { NodeDetailsCardWidget } from '../node-details-card/node-details-card.widget'
 
 export const EditNodeModalConnectorWidget = () => {
     const { t } = useTranslation()
@@ -134,10 +133,6 @@ export const EditNodeModalConnectorWidget = () => {
             title={
                 <Group gap="xl" justify="space-between">
                     <Text fw={500}>{t('edit-node-modal.widget.edit-node')}</Text>
-                    {node && <NodeStatusBadgeWidget fetchedNode={fetchedNode} node={node} />}
-                    {node?.isConnected && (
-                        <NodeXrayVersionBadgeWidget fetchedNode={fetchedNode} node={node} />
-                    )}
                 </Group>
             }
         >
@@ -149,6 +144,9 @@ export const EditNodeModalConnectorWidget = () => {
                 handleSubmit={handleSubmit}
                 isUpdateNodePending={isUpdateNodePending}
                 node={node}
+                nodeDetailsCard={
+                    node && <NodeDetailsCardWidget fetchedNode={fetchedNode} node={node} />
+                }
                 pubKey={pubKey}
                 setAdvancedOpened={setAdvancedOpened}
             />

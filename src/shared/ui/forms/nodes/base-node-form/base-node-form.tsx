@@ -1,11 +1,15 @@
 import {
     ActionIcon,
+    Badge,
     Button,
     Collapse,
     Divider,
+    Fieldset,
     Group,
     HoverCard,
+    Modal,
     NumberInput,
+    Paper,
     rem,
     Select,
     Skeleton,
@@ -13,11 +17,14 @@ import {
     Stack,
     Switch,
     Text,
-    TextInput
+    TextInput,
+    Title
 } from '@mantine/core'
+import { TbChartBar, TbChartLine, TbMapPin, TbUserCheck, TbWorld } from 'react-icons/tb'
 import { CreateNodeCommand, UpdateNodeCommand } from '@remnawave/backend-contract'
 import { PiCheckDuotone, PiFloppyDiskDuotone, PiXDuotone } from 'react-icons/pi'
-import { HiQuestionMarkCircle } from 'react-icons/hi'
+import { HiOutlineServer, HiQuestionMarkCircle } from 'react-icons/hi'
+import { SiSecurityscorecard } from 'react-icons/si'
 import { useTranslation } from 'react-i18next'
 import { motion } from 'framer-motion'
 
@@ -32,6 +39,27 @@ import { useGetConfigProfiles } from '@shared/api/hooks'
 import { COUNTRIES } from './constants'
 import { IProps } from './interfaces'
 
+const MotionWrapper = motion.div
+const MotionStack = motion(Stack)
+
+const containerVariants = {
+    hidden: {},
+    visible: {
+        transition: {
+            staggerChildren: 0.1
+        }
+    }
+}
+
+const cardVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+        opacity: 1,
+        y: 0,
+        transition: { duration: 0.3 }
+    }
+}
+
 export const BaseNodeForm = <T extends CreateNodeCommand.Request | UpdateNodeCommand.Request>(
     props: IProps<T>
 ) => {
@@ -44,7 +72,8 @@ export const BaseNodeForm = <T extends CreateNodeCommand.Request | UpdateNodeCom
         advancedOpened,
         isUpdateNodePending,
         handleSubmit,
-        setAdvancedOpened
+        setAdvancedOpened,
+        nodeDetailsCard
     } = props
 
     const { t } = useTranslation()
@@ -70,278 +99,420 @@ export const BaseNodeForm = <T extends CreateNodeCommand.Request | UpdateNodeCom
 
     return (
         <form onSubmit={handleSubmit}>
-            <Group align="flex-start" gap="md" grow={false} wrap="wrap">
-                <Stack gap="md" style={{ flex: '1 1 350px' }}>
+            <Group align="flex-start" gap="xl" grow={false} wrap="wrap">
+                {/* Left Side */}
+                <MotionStack
+                    animate="visible"
+                    gap="lg"
+                    initial="hidden"
+                    style={{ flex: '1 1 400px' }}
+                    variants={containerVariants}
+                >
                     <ModalAccordionWidget fetchedNode={fetchedNode} node={node} pubKey={pubKey} />
 
-                    <Select
-                        key={form.key('countryCode')}
-                        label={t('base-node-form.country')}
-                        {...form.getInputProps('countryCode')}
-                        data={COUNTRIES}
-                        placeholder={t('base-node-form.select-country')}
-                        required
-                        searchable
-                    />
+                    {nodeDetailsCard && (
+                        <MotionWrapper variants={cardVariants}>{nodeDetailsCard}</MotionWrapper>
+                    )}
 
-                    <TextInput
-                        key={form.key('name')}
-                        label={t('base-node-form.internal-name')}
-                        {...form.getInputProps('name')}
-                        required
-                    />
-
-                    <Stack gap="md">
-                        <Group
-                            gap="xs"
-                            grow
-                            justify="space-between"
-                            preventGrowOverflow={false}
-                            w="100%"
-                        >
-                            <TextInput
-                                key={form.key('address')}
-                                label={t('base-node-form.address')}
-                                {...form.getInputProps('address')}
-                                placeholder={t('base-node-form.e-g-example-com')}
-                                required
-                                w="75%"
-                            />
-
-                            <NumberInput
-                                key={form.key('port')}
-                                label={t('base-node-form.port')}
-                                {...form.getInputProps('port')}
-                                allowDecimal={false}
-                                allowNegative={false}
-                                clampBehavior="strict"
-                                decimalScale={0}
-                                hideControls
-                                max={65535}
-                                placeholder={t('base-node-form.e-g-443')}
-                                required
-                                w="20%"
-                            />
-                        </Group>
-
-                        <Switch
-                            key={form.key('isTrafficTrackingActive')}
-                            {...form.getInputProps('isTrafficTrackingActive', {
-                                type: 'checkbox'
-                            })}
-                            label={t('base-node-form.traffic-tracking')}
-                            onClick={() => setAdvancedOpened(!advancedOpened)}
-                            size="md"
-                            thumbIcon={
-                                advancedOpened ? (
-                                    <PiCheckDuotone
-                                        color={'teal'}
-                                        style={{ width: rem(12), height: rem(12) }}
+                    {/* Node Vitals */}
+                    <MotionWrapper variants={cardVariants}>
+                        <Fieldset
+                            legend={
+                                <Group gap="xs" mb="xs">
+                                    <HiOutlineServer
+                                        size={20}
+                                        style={{
+                                            color: 'var(--mantine-color-blue-4)'
+                                        }}
                                     />
-                                ) : (
-                                    <PiXDuotone
-                                        color="red.6"
-                                        style={{ width: rem(12), height: rem(12) }}
-                                    />
-                                )
+                                    <Title c="blue.4" order={4}>
+                                        Node Vitals
+                                    </Title>
+                                </Group>
                             }
-                        />
-
-                        <Collapse in={advancedOpened}>
-                            <Group
-                                gap="md"
-                                grow
-                                justify="space-between"
-                                preventGrowOverflow={false}
-                                w="100%"
-                            >
-                                <NumberInput
-                                    allowDecimal={false}
-                                    decimalScale={0}
-                                    defaultValue={0}
-                                    hideControls
-                                    key={form.key('trafficLimitBytes')}
-                                    label={t('base-node-form.limit')}
-                                    leftSection={
-                                        <>
-                                            <Text
-                                                display="flex"
-                                                size="0.75rem"
-                                                style={{ justifyContent: 'center' }}
-                                                ta="center"
-                                                w={26}
-                                            >
-                                                GB
-                                            </Text>
-                                            <Divider orientation="vertical" />
-                                        </>
-                                    }
-                                    {...form.getInputProps('trafficLimitBytes')}
-                                    w={'30%'}
+                        >
+                            <Stack gap="md">
+                                <Select
+                                    key={form.key('countryCode')}
+                                    label={t('base-node-form.country')}
+                                    {...form.getInputProps('countryCode')}
+                                    data={COUNTRIES}
+                                    leftSection={<TbMapPin size={16} />}
+                                    placeholder={t('base-node-form.select-country')}
+                                    required
+                                    searchable
+                                    styles={{
+                                        label: { fontWeight: 500 }
+                                    }}
                                 />
 
-                                <NumberInput
-                                    key={form.key('trafficResetDay')}
-                                    label={t('base-node-form.reset-day')}
-                                    {...form.getInputProps('trafficResetDay')}
-                                    allowDecimal={false}
-                                    allowNegative={false}
-                                    clampBehavior="strict"
-                                    decimalScale={0}
-                                    hideControls
-                                    max={31}
-                                    min={1}
-                                    placeholder={t('base-node-form.e-g-1-31')}
-                                    w={'30%'}
+                                <TextInput
+                                    key={form.key('name')}
+                                    label={t('base-node-form.internal-name')}
+                                    {...form.getInputProps('name')}
+                                    leftSection={<TbUserCheck size={16} />}
+                                    required
+                                    styles={{
+                                        label: { fontWeight: 500 }
+                                    }}
                                 />
 
-                                <NumberInput
-                                    key={form.key('notifyPercent')}
-                                    label={t('base-node-form.notify-percent')}
-                                    {...form.getInputProps('notifyPercent')}
-                                    allowDecimal={false}
-                                    allowNegative={false}
-                                    clampBehavior="strict"
-                                    decimalScale={0}
-                                    hideControls
-                                    max={100}
-                                    placeholder={t('base-node-form.e-g-50')}
-                                    w={'30%'}
-                                />
-                            </Group>
-                        </Collapse>
-                    </Stack>
-                </Stack>
+                                <Group gap="xs" grow justify="space-between" w="100%">
+                                    <TextInput
+                                        key={form.key('address')}
+                                        label={t('base-node-form.address')}
+                                        {...form.getInputProps('address')}
+                                        leftSection={<TbWorld size={16} />}
+                                        placeholder={t('base-node-form.e-g-example-com')}
+                                        required
+                                        styles={{
+                                            label: { fontWeight: 500 },
+                                            root: { flex: '1 1 70%' }
+                                        }}
+                                    />
 
-                <Divider className="responsive-divider" orientation="vertical" visibleFrom="md" />
+                                    <NumberInput
+                                        key={form.key('port')}
+                                        label={t('base-node-form.port')}
+                                        {...form.getInputProps('port')}
+                                        allowDecimal={false}
+                                        allowNegative={false}
+                                        clampBehavior="strict"
+                                        decimalScale={0}
+                                        hideControls
+                                        max={65535}
+                                        placeholder={t('base-node-form.e-g-443')}
+                                        required
+                                        styles={{
+                                            label: { fontWeight: 500 },
+                                            root: { flex: '1 1 25%' }
+                                        }}
+                                    />
+                                </Group>
+                            </Stack>
+                        </Fieldset>
+                    </MotionWrapper>
 
-                <Stack gap="md" style={{ flex: '1 1 350px' }}>
-                    <Stack gap="xs" mb={10}>
-                        <Group gap="xs" justify="flex-start" w="100%">
-                            <Text fw={600} size="sm">
-                                {t('base-node-form.consumption-multiplier')}
-                            </Text>
-
-                            <HoverCard shadow="md" width={280} withArrow>
-                                <HoverCard.Target>
-                                    <ActionIcon color="gray" size="xs" variant="subtle">
-                                        <HiQuestionMarkCircle size={20} />
-                                    </ActionIcon>
-                                </HoverCard.Target>
-                                <HoverCard.Dropdown>
-                                    <Stack gap="sm">
-                                        <Text fw={600} size="sm">
+                    {/* Node consumption */}
+                    <MotionWrapper variants={cardVariants}>
+                        <Fieldset
+                            legend={
+                                <Group gap="xs" mb="xs">
+                                    <TbChartLine
+                                        size={20}
+                                        style={{
+                                            color: 'var(--mantine-color-indigo-4)'
+                                        }}
+                                    />
+                                    <Title c="indigo.4" order={4}>
+                                        Consumption
+                                    </Title>
+                                </Group>
+                            }
+                        >
+                            <Stack gap="md">
+                                <Group gap="xs" justify="space-between" w="100%">
+                                    <Group gap="xs">
+                                        <Text fw={500} size="sm">
                                             {t('base-node-form.consumption-multiplier')}
                                         </Text>
-                                        <Text c="dimmed" size="sm">
-                                            {t('base-node-form.consumption-m-line-1')}
-                                        </Text>
-                                        <Text c="dimmed" size="sm">
-                                            {t('base-node-form.consumption-m-line-2')}
-                                        </Text>
-                                    </Stack>
-                                </HoverCard.Dropdown>
-                            </HoverCard>
-                        </Group>
 
-                        <Slider
-                            key={form.key('consumptionMultiplier')}
-                            {...form.getInputProps('consumptionMultiplier')}
-                            defaultValue={node?.consumptionMultiplier ?? 1.0}
-                            marks={[
-                                { value: 10.0, label: '10.0' },
-                                { value: 1.0, label: '1.0' },
-                                { value: 0.1, label: '0.1' }
-                            ]}
-                            max={10.0}
-                            min={0.1}
-                            step={0.1}
-                            styles={{ thumb: { borderWidth: 2, padding: 3 } }}
-                            thumbSize={22}
-                        />
+                                        <HoverCard shadow="md" width={280} withArrow>
+                                            <HoverCard.Target>
+                                                <ActionIcon color="gray" size="xs" variant="subtle">
+                                                    <HiQuestionMarkCircle size={16} />
+                                                </ActionIcon>
+                                            </HoverCard.Target>
+                                            <HoverCard.Dropdown>
+                                                <Stack gap="sm">
+                                                    <Text fw={600} size="sm">
+                                                        {t('base-node-form.consumption-multiplier')}
+                                                    </Text>
+                                                    <Text c="dimmed" size="sm">
+                                                        {t('base-node-form.consumption-m-line-1')}
+                                                    </Text>
+                                                    <Text c="dimmed" size="sm">
+                                                        {t('base-node-form.consumption-m-line-2')}
+                                                    </Text>
+                                                </Stack>
+                                            </HoverCard.Dropdown>
+                                        </HoverCard>
+                                    </Group>
+                                </Group>
 
-                        <Stack gap="md" mb={-10} mt={30}>
-                            <SelectInfraProviderShared
-                                selectedInfraProviderUuid={form.getValues().providerUuid}
-                                setSelectedInfraProviderUuid={(providerUuid) => {
-                                    form.setValues({
-                                        providerUuid
-                                    } as Partial<T>)
-                                    form.setTouched({
-                                        providerUuid: true
-                                    })
-                                    form.setDirty({
-                                        providerUuid: true
-                                    })
-                                }}
-                            />
-                        </Stack>
-                    </Stack>
-
-                    {isConfigProfilesLoading && (
-                        <Stack gap="md" mt={10}>
-                            <Stack gap="xs">
-                                <Skeleton height={24} width="40%" />
-                                <Skeleton height={16} width="60%" />
+                                <Paper p="sm" radius="md">
+                                    <Slider
+                                        key={form.key('consumptionMultiplier')}
+                                        {...form.getInputProps('consumptionMultiplier')}
+                                        defaultValue={node?.consumptionMultiplier ?? 1.0}
+                                        marks={[
+                                            { value: 10.0, label: '10.0' },
+                                            { value: 1.0, label: '1.0' },
+                                            { value: 0.1, label: '0.1' }
+                                        ]}
+                                        max={10.0}
+                                        min={0.1}
+                                        step={0.1}
+                                        styles={{
+                                            thumb: { borderWidth: 2, padding: 3 },
+                                            track: { height: 6 },
+                                            bar: { height: 6 }
+                                        }}
+                                        thumbSize={24}
+                                    />
+                                </Paper>
                             </Stack>
+                        </Fieldset>
+                    </MotionWrapper>
+                </MotionStack>
 
-                            <Skeleton height={76} radius="md" />
-                            <Skeleton height={25} radius="sm" width="100%" />
-                        </Stack>
-                    )}
-                    {!isConfigProfilesLoading && configProfiles && (
-                        <motion.div
-                            animate={{ opacity: 1 }}
-                            initial={{ opacity: 0 }}
-                            transition={{
-                                duration: 0.4,
-                                ease: 'easeInOut'
-                            }}
+                {/* Right Side */}
+                <MotionStack
+                    animate="visible"
+                    gap="lg"
+                    initial="hidden"
+                    style={{ flex: '1 1 400px' }}
+                    variants={containerVariants}
+                >
+                    {/* Config Profiles */}
+                    <MotionWrapper variants={cardVariants}>
+                        <Fieldset
+                            legend={
+                                <Group gap="xs" mb="xs">
+                                    <SiSecurityscorecard
+                                        size={20}
+                                        style={{
+                                            color: 'var(--mantine-color-teal-4)'
+                                        }}
+                                    />
+                                    <Title c="teal.4" order={4}>
+                                        Core configuration
+                                    </Title>
+                                </Group>
+                            }
                         >
-                            <Stack gap="xs" key="123" mb={10}>
-                                <ShowConfigProfilesWithInboundsFeature
-                                    activeConfigProfileInbounds={
-                                        form.getValues().configProfile?.activeInbounds ?? []
-                                    }
-                                    activeConfigProfileUuid={
-                                        form.getValues().configProfile?.activeConfigProfileUuid ??
-                                        ''
-                                    }
-                                    configProfiles={configProfiles.configProfiles}
-                                    errors={form.errors.configProfile}
-                                    onSaveInbounds={saveInbounds}
+                            {isConfigProfilesLoading && (
+                                <Stack gap="md">
+                                    <Skeleton height={24} width="40%" />
+                                    <Skeleton height={16} width="60%" />
+                                    <Skeleton height={76} radius="md" />
+                                    <Skeleton height={25} radius="sm" width="100%" />
+                                </Stack>
+                            )}
+
+                            {!isConfigProfilesLoading && configProfiles && (
+                                <motion.div
+                                    animate={{ opacity: 1 }}
+                                    initial={{ opacity: 0 }}
+                                    transition={{
+                                        duration: 0.4,
+                                        ease: 'easeInOut'
+                                    }}
+                                >
+                                    <ShowConfigProfilesWithInboundsFeature
+                                        activeConfigProfileInbounds={
+                                            form.getValues().configProfile?.activeInbounds ?? []
+                                        }
+                                        activeConfigProfileUuid={
+                                            form.getValues().configProfile
+                                                ?.activeConfigProfileUuid ?? ''
+                                        }
+                                        configProfiles={configProfiles.configProfiles}
+                                        errors={form.errors.configProfile}
+                                        onSaveInbounds={saveInbounds}
+                                    />
+                                </motion.div>
+                            )}
+                        </Fieldset>
+                    </MotionWrapper>
+
+                    {/* Tracking & Billing */}
+                    <MotionWrapper variants={cardVariants}>
+                        <Fieldset
+                            legend={
+                                <Group gap="xs" mb="xs">
+                                    <TbChartBar
+                                        size={20}
+                                        style={{
+                                            color: 'var(--mantine-color-yellow-4)'
+                                        }}
+                                    />
+                                    <Title c="yellow.4" order={4}>
+                                        Tracking & Billing
+                                    </Title>
+                                </Group>
+                            }
+                        >
+                            <Stack gap="md">
+                                <SelectInfraProviderShared
+                                    selectedInfraProviderUuid={form.getValues().providerUuid}
+                                    setSelectedInfraProviderUuid={(providerUuid) => {
+                                        form.setValues({
+                                            providerUuid
+                                        } as Partial<T>)
+                                        form.setTouched({
+                                            providerUuid: true
+                                        })
+                                        form.setDirty({
+                                            providerUuid: true
+                                        })
+                                    }}
                                 />
+
+                                <Stack gap={0}>
+                                    <Group gap="xs" justify="space-between">
+                                        <Group gap="xs">
+                                            <TbChartLine
+                                                size={18}
+                                                style={{ color: 'var(--mantine-color-indigo-6)' }}
+                                            />
+                                            <Text fw={500} size="sm">
+                                                {t('base-node-form.traffic-tracking')}
+                                            </Text>
+                                        </Group>
+                                        <Switch
+                                            key={form.key('isTrafficTrackingActive')}
+                                            {...form.getInputProps('isTrafficTrackingActive', {
+                                                type: 'checkbox'
+                                            })}
+                                            onChange={(event) => {
+                                                form.getInputProps(
+                                                    'isTrafficTrackingActive'
+                                                ).onChange(event)
+                                                setAdvancedOpened(event.currentTarget.checked)
+                                            }}
+                                            size="md"
+                                            thumbIcon={
+                                                form.getValues().isTrafficTrackingActive ? (
+                                                    <PiCheckDuotone
+                                                        color={'teal'}
+                                                        style={{ width: rem(12), height: rem(12) }}
+                                                    />
+                                                ) : (
+                                                    <PiXDuotone
+                                                        color="red.6"
+                                                        style={{ width: rem(12), height: rem(12) }}
+                                                    />
+                                                )
+                                            }
+                                        />
+                                    </Group>
+
+                                    <Collapse in={advancedOpened}>
+                                        <Stack gap="sm" mt="sm">
+                                            <Divider size="xs" />
+                                            <Group gap="md" grow justify="space-between" w="100%">
+                                                <NumberInput
+                                                    allowDecimal={false}
+                                                    decimalScale={0}
+                                                    defaultValue={0}
+                                                    hideControls
+                                                    key={form.key('trafficLimitBytes')}
+                                                    label={t('base-node-form.limit')}
+                                                    leftSection={
+                                                        <Badge
+                                                            color="blue"
+                                                            size="xs"
+                                                            variant="light"
+                                                        >
+                                                            GB
+                                                        </Badge>
+                                                    }
+                                                    {...form.getInputProps('trafficLimitBytes')}
+                                                    styles={{
+                                                        label: { fontWeight: 500 }
+                                                    }}
+                                                />
+
+                                                <NumberInput
+                                                    key={form.key('trafficResetDay')}
+                                                    label={t('base-node-form.reset-day')}
+                                                    {...form.getInputProps('trafficResetDay')}
+                                                    allowDecimal={false}
+                                                    allowNegative={false}
+                                                    clampBehavior="strict"
+                                                    decimalScale={0}
+                                                    hideControls
+                                                    max={31}
+                                                    min={1}
+                                                    placeholder={t('base-node-form.e-g-1-31')}
+                                                    styles={{
+                                                        label: { fontWeight: 500 }
+                                                    }}
+                                                />
+
+                                                <NumberInput
+                                                    key={form.key('notifyPercent')}
+                                                    label={t('base-node-form.notify-percent')}
+                                                    {...form.getInputProps('notifyPercent')}
+                                                    allowDecimal={false}
+                                                    allowNegative={false}
+                                                    clampBehavior="strict"
+                                                    decimalScale={0}
+                                                    hideControls
+                                                    max={100}
+                                                    placeholder={t('base-node-form.e-g-50')}
+                                                    styles={{
+                                                        label: { fontWeight: 500 }
+                                                    }}
+                                                />
+                                            </Group>
+                                        </Stack>
+                                    </Collapse>
+                                </Stack>
                             </Stack>
-                        </motion.div>
-                    )}
-                </Stack>
+                        </Fieldset>
+                    </MotionWrapper>
+                </MotionStack>
             </Group>
 
-            <Group gap="xs" justify="space-between" pt={15} w="100%">
-                <ActionIcon.Group>
-                    {node && <DeleteNodeFeature handleClose={handleClose} node={node} />}
-                </ActionIcon.Group>
+            <Modal.Header
+                bottom={10}
+                component={'footer'}
+                h={'auto'}
+                mt="md"
+                pos={'sticky'}
+                style={{
+                    bottom: 0,
+                    borderTop: 'none',
+                    borderBottom: 'none',
+                    borderRadius: '20px',
+                    background: 'rgba(255, 255, 255, 0.05)',
+                    backdropFilter: 'blur(15px)',
+                    border: '1px solid rgba(255, 255, 255, 0.1)',
+                    boxShadow: '0 -10px 40px rgba(0, 0, 0, 0.3)',
+                    padding: '10px'
+                }}
+            >
+                <Group gap="xs" justify="space-between" w="100%">
+                    <ActionIcon.Group>
+                        {node && <DeleteNodeFeature handleClose={handleClose} node={node} />}
+                    </ActionIcon.Group>
 
-                <Group grow preventGrowOverflow={false} wrap="wrap">
-                    {node && (
-                        <>
-                            <GetNodeUsersUsageFeature nodeUuid={node.uuid} />
-                            <ToggleNodeStatusButtonFeature handleClose={handleClose} node={node} />
-                        </>
-                    )}
-                    <Button
-                        color="blue"
-                        disabled={!form.isDirty() || !form.isTouched()}
-                        leftSection={<PiFloppyDiskDuotone size="1rem" />}
-                        loading={isUpdateNodePending}
-                        size="md"
-                        type="submit"
-                        variant="outline"
-                    >
-                        {t('base-node-form.save')}
-                    </Button>
+                    <Group grow preventGrowOverflow={false} wrap="wrap">
+                        {node && (
+                            <>
+                                <GetNodeUsersUsageFeature nodeUuid={node.uuid} />
+                                <ToggleNodeStatusButtonFeature
+                                    handleClose={handleClose}
+                                    node={node}
+                                />
+                            </>
+                        )}
+                        <Button
+                            color="teal"
+                            disabled={!form.isDirty() || !form.isTouched()}
+                            leftSection={<PiFloppyDiskDuotone size="1rem" />}
+                            loading={isUpdateNodePending}
+                            size="md"
+                            type="submit"
+                            variant="light"
+                        >
+                            {t('base-node-form.save')}
+                        </Button>
+                    </Group>
                 </Group>
-            </Group>
+            </Modal.Header>
         </form>
     )
 }

@@ -1,5 +1,5 @@
 import { PiClockCounterClockwiseDuotone } from 'react-icons/pi'
-import { ActionIcon, Text, Tooltip } from '@mantine/core'
+import { Loader, Menu, Text } from '@mantine/core'
 import { modals } from '@mantine/modals'
 
 import { useUserModalStoreActions } from '@entities/dashboard/user-modal-store'
@@ -42,15 +42,20 @@ export function ResetUsageUserFeature(props: IProps) {
         })
 
     return (
-        <Tooltip label="Reset usage">
-            <ActionIcon
-                color="blue"
-                loading={isResetUserTrafficPending}
-                onClick={openModal}
-                size="xl"
-            >
-                <PiClockCounterClockwiseDuotone size="1.5rem" />
-            </ActionIcon>
-        </Tooltip>
+        <Menu.Item
+            leftSection={
+                isResetUserTrafficPending ? (
+                    <Loader color="var(--mantine-color-blue-5)" size={'1rem'} />
+                ) : (
+                    <PiClockCounterClockwiseDuotone
+                        color="var(--mantine-color-blue-5)"
+                        size="1rem"
+                    />
+                )
+            }
+            onClick={openModal}
+        >
+            Reset usage
+        </Menu.Item>
     )
 }

@@ -10,10 +10,10 @@ import {
     CopyButton,
     Drawer,
     Group,
+    Menu,
     Stack,
     Text,
-    TextInput,
-    Tooltip
+    TextInput
 } from '@mantine/core'
 import { PiCheck, PiCopy, PiEmptyDuotone, PiTrash } from 'react-icons/pi'
 import { TbDevices, TbInfoCircle } from 'react-icons/tb'
@@ -368,11 +368,13 @@ export function GetHwidUserDevicesFeature(props: IProps) {
                     </Stack>
                 )}
             </Drawer>
-            <Tooltip label={t('get-hwid-user-devices.feature.hwid-devices')}>
-                <ActionIcon color="indigo.5" onClick={handlers.open} size="xl">
-                    <TbDevices size="1.5rem" />
-                </ActionIcon>
-            </Tooltip>
+
+            <Menu.Item
+                leftSection={<TbDevices color="var(--mantine-color-indigo-5)" size="1rem" />}
+                onClick={handlers.open}
+            >
+                {t('get-hwid-user-devices.feature.hwid-devices')}
+            </Menu.Item>
         </>
     )
 }
