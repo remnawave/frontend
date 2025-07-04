@@ -1,6 +1,6 @@
 import { PiCellSignalFullDuotone, PiCellSignalSlashDuotone, PiTrashDuotone } from 'react-icons/pi'
 import { useTranslation } from 'react-i18next'
-import { Button } from '@mantine/core'
+import { Loader, Menu } from '@mantine/core'
 
 import { useDisableNode, useEnableNode } from '@shared/api/hooks'
 
@@ -32,7 +32,7 @@ export function ToggleNodeStatusButtonFeature(props: IProps) {
     let icon = <PiTrashDuotone size="1rem" />
 
     if (node.isDisabled) {
-        color = 'green'
+        color = 'teal'
         buttonLabel = t('toggle-node-status-button.feature.enable')
         icon = <PiCellSignalFullDuotone size="1rem" />
     } else {
@@ -50,15 +50,18 @@ export function ToggleNodeStatusButtonFeature(props: IProps) {
     }
 
     return (
-        <Button
+        <Menu.Item
             color={color}
-            leftSection={icon}
-            loading={isDisableNodePending || isEnableNodePending}
+            leftSection={
+                isDisableNodePending || isEnableNodePending ? (
+                    <Loader color={color} size={'1rem'} />
+                ) : (
+                    icon
+                )
+            }
             onClick={handleToggleUserStatus}
-            size="md"
-            type="button"
         >
             {buttonLabel}
-        </Button>
+        </Menu.Item>
     )
 }

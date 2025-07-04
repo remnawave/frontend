@@ -4,9 +4,11 @@ import {
     Button,
     Collapse,
     Divider,
+    em,
     Fieldset,
     Group,
     HoverCard,
+    Menu,
     Modal,
     NumberInput,
     Paper,
@@ -20,12 +22,13 @@ import {
     TextInput,
     Title
 } from '@mantine/core'
-import { TbChartBar, TbChartLine, TbMapPin, TbUserCheck, TbWorld } from 'react-icons/tb'
+import { TbChartBar, TbChartLine, TbDots, TbMapPin, TbUserCheck, TbWorld } from 'react-icons/tb'
 import { CreateNodeCommand, UpdateNodeCommand } from '@remnawave/backend-contract'
 import { PiCheckDuotone, PiFloppyDiskDuotone, PiXDuotone } from 'react-icons/pi'
 import { HiOutlineServer, HiQuestionMarkCircle } from 'react-icons/hi'
 import { SiSecurityscorecard } from 'react-icons/si'
 import { useTranslation } from 'react-i18next'
+import { useMediaQuery } from '@mantine/hooks'
 import { motion } from 'framer-motion'
 
 import { ShowConfigProfilesWithInboundsFeature } from '@features/ui/dashboard/nodes/show-config-profiles-with-inbounds'
@@ -77,6 +80,7 @@ export const BaseNodeForm = <T extends CreateNodeCommand.Request | UpdateNodeCom
     } = props
 
     const { t } = useTranslation()
+    const isMobile = useMediaQuery(`(max-width: ${em(750)})`)
 
     const { data: configProfiles, isLoading: isConfigProfilesLoading } = useGetConfigProfiles()
 
@@ -484,33 +488,51 @@ export const BaseNodeForm = <T extends CreateNodeCommand.Request | UpdateNodeCom
                     padding: '10px'
                 }}
             >
-                <Group gap="xs" justify="space-between" w="100%">
-                    <ActionIcon.Group>
-                        {node && <DeleteNodeFeature handleClose={handleClose} node={node} />}
-                    </ActionIcon.Group>
+                <Group
+                    gap="md"
+                    grow={!!isMobile}
+                    justify="flex-end"
+                    preventGrowOverflow={false}
+                    w="100%"
+                    wrap="wrap"
+                >
+                    {node && (
+                        <Menu keepMounted={true} position="top-end" shadow="md">
+                            <Menu.Target>
+                                <Button
+                                    leftSection={<TbDots size="1.2rem" />}
+                                    size="sm"
+                                    variant="outline"
+                                >
+                                    More Actions
+                                </Button>
+                            </Menu.Target>
 
-                    <Group grow preventGrowOverflow={false} wrap="wrap">
-                        {node && (
-                            <>
+                            <Menu.Dropdown>
+                                <Menu.Label>Quick Actions</Menu.Label>
                                 <GetNodeUsersUsageFeature nodeUuid={node.uuid} />
+                                <Menu.Divider />
+                                <Menu.Label>Management</Menu.Label>
                                 <ToggleNodeStatusButtonFeature
                                     handleClose={handleClose}
                                     node={node}
                                 />
-                            </>
-                        )}
-                        <Button
-                            color="teal"
-                            disabled={!form.isDirty() || !form.isTouched()}
-                            leftSection={<PiFloppyDiskDuotone size="1rem" />}
-                            loading={isUpdateNodePending}
-                            size="md"
-                            type="submit"
-                            variant="light"
-                        >
-                            {t('base-node-form.save')}
-                        </Button>
-                    </Group>
+                                <Menu.Divider />
+                                <DeleteNodeFeature handleClose={handleClose} node={node} />
+                            </Menu.Dropdown>
+                        </Menu>
+                    )}
+                    <Button
+                        color="teal"
+                        disabled={!form.isDirty() || !form.isTouched()}
+                        leftSection={<PiFloppyDiskDuotone size="1rem" />}
+                        loading={isUpdateNodePending}
+                        size="sm"
+                        type="submit"
+                        variant="light"
+                    >
+                        {t('base-node-form.save')}
+                    </Button>
                 </Group>
             </Modal.Header>
         </form>

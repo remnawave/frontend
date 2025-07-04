@@ -547,7 +547,7 @@ export const CreateUserModalWidget = () => {
                                 color="teal"
                                 leftSection={<PiFloppyDiskDuotone size="1rem" />}
                                 loading={isDataSubmitting}
-                                size="md"
+                                size="sm"
                                 type="submit"
                                 variant="outline"
                             >

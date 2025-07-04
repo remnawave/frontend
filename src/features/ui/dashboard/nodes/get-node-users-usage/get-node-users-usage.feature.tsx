@@ -1,7 +1,7 @@
 import { PiChartBarDuotone } from 'react-icons/pi'
 import { useDisclosure } from '@mantine/hooks'
 import { useTranslation } from 'react-i18next'
-import { Button } from '@mantine/core'
+import { Menu } from '@mantine/core'
 
 import { NodeUsersUsageDrawer } from '@widgets/dashboard/nodes/node-users-usage-drawer/node-users-usage-drawer.widget'
 
@@ -15,15 +15,13 @@ export function GetNodeUsersUsageFeature(props: IProps) {
 
     return (
         <>
-            <Button
+            <Menu.Item
                 color="grape"
                 leftSection={<PiChartBarDuotone size="1rem" />}
                 onClick={handlers.open}
-                size="md"
-                variant="outline"
             >
                 {t('get-user-usage.feature.show-usage')}
-            </Button>
+            </Menu.Item>
             <NodeUsersUsageDrawer nodeUuid={nodeUuid} onClose={handlers.close} opened={opened} />
         </>
     )

@@ -854,7 +854,7 @@ export const ViewUserModal = () => {
                                     <Menu.Target>
                                         <Button
                                             leftSection={<TbDots size="1.2rem" />}
-                                            size="md"
+                                            size="sm"
                                             variant="outline"
                                         >
                                             More Actions
@@ -936,7 +936,7 @@ export const ViewUserModal = () => {
                                     color="teal"
                                     leftSection={<PiFloppyDiskDuotone size="1rem" />}
                                     loading={isUpdateUserPending}
-                                    size="md"
+                                    size="sm"
                                     type="submit"
                                     variant="light"
                                 >
