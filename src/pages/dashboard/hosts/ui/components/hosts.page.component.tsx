@@ -7,6 +7,7 @@ import { MultiSelectHostsFeature } from '@features/dashboard/hosts/multi-select-
 import { CreateHostModalWidget } from '@widgets/dashboard/hosts/create-host-modal'
 import { HostsPageHeaderWidget } from '@widgets/dashboard/hosts/hosts-page-header'
 import { EditHostModalWidget } from '@widgets/dashboard/hosts/edit-host-modal'
+import { HostsFiltersFeature } from '@features/dashboard/hosts/hosts-filters'
 import { HostsTableWidget } from '@widgets/dashboard/hosts/hosts-table'
 import { LoadingScreen, Page, PageHeader } from '@shared/ui'
 import { ROUTES } from '@shared/constants'
@@ -31,7 +32,9 @@ export default function HostsPageComponent(props: IProps) {
 
             <Grid>
                 <Grid.Col span={12}>
-                    <HostsPageHeaderWidget configProfiles={configProfiles} />
+                    <HostsPageHeaderWidget />
+
+                    <HostsFiltersFeature configProfiles={configProfiles} />
 
                     {isHostsLoading || isConfigProfilesLoading ? (
                         <LoadingScreen height="60vh" />

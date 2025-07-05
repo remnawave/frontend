@@ -1,13 +1,14 @@
-import { PiDotsSixVertical, PiLock, PiProhibit, PiPulse, PiTag } from 'react-icons/pi'
 import { ActionIcon, Badge, Box, Checkbox, Group, Stack, Text } from '@mantine/core'
+import { PiLock, PiProhibit, PiPulse, PiTag } from 'react-icons/pi'
 import { useMediaQuery } from '@mantine/hooks'
 import { TbAlertCircle } from 'react-icons/tb'
 import { Draggable } from '@hello-pangea/dnd'
+import { RiDraggable } from 'react-icons/ri'
 import ColorHash from 'color-hash'
 import { useState } from 'react'
 import cx from 'clsx'
 
-import { useHostsStoreActions, useHostsStoreSelectedInboundTag } from '@entities/dashboard'
+import { useHostsStoreActions, useHostsStoreFilters } from '@entities/dashboard'
 import { XtlsLogo } from '@shared/ui/logos/xtls-logo'
 
 import classes from './HostCard.module.css'
@@ -16,7 +17,7 @@ import { IProps } from './interfaces'
 export function HostCardWidget(props: IProps) {
     const { item, index, configProfiles, isSelected, onSelect } = props
 
-    const selectedInboundTag = useHostsStoreSelectedInboundTag()
+    const filters = useHostsStoreFilters()
     const actions = useHostsStoreActions()
     const [isHovered, setIsHovered] = useState(false)
     const isMobile = useMediaQuery('(max-width: 768px)')
@@ -29,7 +30,9 @@ export function HostCardWidget(props: IProps) {
         (configProfile) => configProfile.uuid === item.inbound.configProfileUuid
     )
 
-    const isFiltered = selectedInboundTag !== 'ALL' && configProfile?.uuid !== selectedInboundTag
+    const isFiltered =
+        (!!filters.configProfileUuid && configProfile?.uuid !== filters.configProfileUuid) ||
+        (!!filters.inboundUuid && item.inbound.configProfileInboundUuid !== filters.inboundUuid)
     const isHostActive = !item.isDisabled
 
     const ch = new ColorHash({ lightness: [0.65, 0.65, 0.65] })
@@ -58,48 +61,68 @@ export function HostCardWidget(props: IProps) {
                         ref={provided.innerRef}
                         {...provided.draggableProps}
                     >
-                        <Stack gap="sm">
-                            <Group justify="space-between" wrap="nowrap">
-                                <Group gap="xs" wrap="nowrap">
-                                    <Checkbox checked={isSelected} onChange={onSelect} size="lg" />
-                                    <Box
-                                        {...provided.dragHandleProps}
-                                        className={classes.dragHandle}
+                        <Box
+                            className={classes.contentArea}
+                            onClick={(e) => {
+                                e.stopPropagation()
+                                handleEdit()
+                            }}
+                            onTouchEnd={() => setIsHovered(false)}
+                            onTouchStart={() => setIsHovered(true)}
+                        >
+                            <Stack gap="sm">
+                                <Group justify="space-between" wrap="nowrap">
+                                    <Group gap="sm" wrap="nowrap">
+                                        <Checkbox
+                                            checked={isSelected}
+                                            onChange={(e) => {
+                                                e.stopPropagation()
+                                                onSelect?.()
+                                            }}
+                                            size="md"
+                                            styles={{
+                                                input: { cursor: 'pointer' }
+                                            }}
+                                        />
+                                        <Box
+                                            {...provided.dragHandleProps}
+                                            className={classes.mobileDragHandle}
+                                            onClick={(e) => e.stopPropagation()}
+                                        >
+                                            {!isFiltered && <RiDraggable size="1.2rem" />}
+                                            {isFiltered && (
+                                                <PiLock
+                                                    className={classes.lockedIcon}
+                                                    size="1.2rem"
+                                                />
+                                            )}
+                                        </Box>
+                                    </Group>
+
+                                    <ActionIcon
+                                        color={isHostActive ? 'teal' : 'gray'}
+                                        radius="md"
+                                        size="lg"
+                                        variant="light"
                                     >
-                                        {!isFiltered && (
-                                            <PiDotsSixVertical color="white" size="1.5rem" />
+                                        {isHostActive ? (
+                                            <PiPulse size={16} />
+                                        ) : (
+                                            <PiProhibit size={16} />
                                         )}
-                                        {isFiltered && (
-                                            <PiLock
-                                                className={classes.lockedIcon}
-                                                color="white"
-                                                size="1.5rem"
-                                            />
-                                        )}
-                                    </Box>
+                                    </ActionIcon>
                                 </Group>
 
-                                <ActionIcon
-                                    color={isHostActive ? 'teal' : 'gray'}
-                                    radius="md"
-                                    size="xl"
-                                    variant="light"
-                                >
-                                    {isHostActive ? (
-                                        <PiPulse size={20} />
-                                    ) : (
-                                        <PiProhibit size={20} />
-                                    )}
-                                </ActionIcon>
-                            </Group>
-
-                            <Box
-                                className={classes.contentArea}
-                                onClick={handleEdit}
-                                onMouseEnter={() => setIsHovered(true)}
-                                onMouseLeave={() => setIsHovered(false)}
-                            >
                                 <Stack gap="xs">
+                                    <Text className={classes.hostName} fw={600} size="lg">
+                                        {item.remark}
+                                    </Text>
+
+                                    <Text c="dimmed" className={classes.mobileAddress} size="sm">
+                                        {item.address}
+                                        {item.port ? `:${item.port}` : ''}
+                                    </Text>
+
                                     <Group gap="xs" wrap="wrap">
                                         <Badge
                                             autoContrast
@@ -110,13 +133,13 @@ export function HostCardWidget(props: IProps) {
                                             }
                                             leftSection={
                                                 configProfile?.uuid ? (
-                                                    <XtlsLogo size={16} />
+                                                    <XtlsLogo size={12} />
                                                 ) : (
-                                                    <TbAlertCircle size={16} />
+                                                    <TbAlertCircle size={12} />
                                                 )
                                             }
-                                            radius="md"
-                                            size="lg"
+                                            radius="lg"
+                                            size="sm"
                                             variant="light"
                                         >
                                             {configProfile?.name || 'DANGLING'}
@@ -128,9 +151,9 @@ export function HostCardWidget(props: IProps) {
                                                 color={ch.hex(
                                                     item.inbound.configProfileInboundUuid
                                                 )}
-                                                leftSection={<PiTag size={16} />}
-                                                radius="md"
-                                                size="lg"
+                                                leftSection={<PiTag size={12} />}
+                                                radius="lg"
+                                                size="sm"
                                                 variant="outline"
                                             >
                                                 {configProfile?.inbounds.find(
@@ -141,18 +164,9 @@ export function HostCardWidget(props: IProps) {
                                             </Badge>
                                         )}
                                     </Group>
-
-                                    <Text fw={600} size="lg">
-                                        {item.remark}
-                                    </Text>
-
-                                    <Text c="dimmed" className={classes.mobileAddress} size="sm">
-                                        {item.address}
-                                        {item.port ? `:${item.port}` : ''}
-                                    </Text>
                                 </Stack>
-                            </Box>
-                        </Stack>
+                            </Stack>
+                        </Box>
                     </Box>
                 )}
             </Draggable>
@@ -181,7 +195,7 @@ export function HostCardWidget(props: IProps) {
                         <Group gap="xs" wrap="nowrap">
                             <Checkbox checked={isSelected} onChange={onSelect} size="md" />
                             <Box {...provided.dragHandleProps} className={classes.dragHandle}>
-                                {!isFiltered && <PiDotsSixVertical color="white" size="1.5rem" />}
+                                {!isFiltered && <RiDraggable color="white" size="1.5rem" />}
                                 {isFiltered && (
                                     <PiLock
                                         className={classes.lockedIcon}
@@ -204,13 +218,13 @@ export function HostCardWidget(props: IProps) {
                                     <ActionIcon
                                         color={isHostActive ? 'teal' : 'gray'}
                                         radius="md"
-                                        size="lg"
+                                        size="md"
                                         variant="light"
                                     >
                                         {isHostActive ? (
-                                            <PiPulse size={18} />
+                                            <PiPulse size={16} />
                                         ) : (
-                                            <PiProhibit size={18} />
+                                            <PiProhibit size={16} />
                                         )}
                                     </ActionIcon>
 
@@ -227,9 +241,9 @@ export function HostCardWidget(props: IProps) {
                                         <Badge
                                             autoContrast
                                             color={ch.hex(item.inbound.configProfileInboundUuid)}
-                                            leftSection={<PiTag size={14} />}
+                                            leftSection={<PiTag size={12} />}
                                             radius="md"
-                                            size="lg"
+                                            size="md"
                                             variant="outline"
                                         >
                                             {configProfile?.inbounds.find(
@@ -247,13 +261,13 @@ export function HostCardWidget(props: IProps) {
                                         }
                                         leftSection={
                                             configProfile?.uuid ? (
-                                                <XtlsLogo size={14} />
+                                                <XtlsLogo size={12} />
                                             ) : (
-                                                <TbAlertCircle size={14} />
+                                                <TbAlertCircle size={12} />
                                             )
                                         }
                                         radius="md"
-                                        size="lg"
+                                        size="md"
                                         variant="light"
                                     >
                                         {configProfile?.name || 'DANGLING'}

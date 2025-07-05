@@ -76,6 +76,32 @@ export const NodeCardWidget = memo((props: IProps) => {
         actions.toggleEditModal(true)
     }, [actions, node])
 
+    const { backgroundColor, borderColor, boxShadow } = useMemo(() => {
+        let backgroundColor = 'rgba(239, 68, 68, 0.15)'
+        let borderColor = 'rgba(239, 68, 68, 0.3)'
+        let boxShadow = 'rgba(239, 68, 68, 0.2)'
+
+        if (node.isConnected) {
+            backgroundColor = 'rgba(45, 212, 191, 0.15)'
+            borderColor = 'rgba(45, 212, 191, 0.3)'
+            boxShadow = 'rgba(45, 212, 191, 0.2)'
+        } else if (node.isConnecting) {
+            backgroundColor = 'rgba(245, 158, 11, 0.15)'
+            borderColor = 'rgba(245, 158, 11, 0.3)'
+            boxShadow = 'rgba(245, 158, 11, 0.2)'
+        } else if (node.isDisabled) {
+            backgroundColor = 'rgba(107, 114, 128, 0.15)'
+            borderColor = 'rgba(107, 114, 128, 0.3)'
+            boxShadow = 'rgba(107, 114, 128, 0.2)'
+        } else {
+            backgroundColor = 'rgba(239, 68, 68, 0.15)'
+            borderColor = 'rgba(239, 68, 68, 0.3)'
+            boxShadow = 'rgba(239, 68, 68, 0.2)'
+        }
+
+        return { backgroundColor, borderColor, boxShadow }
+    }, [node.isConnected, node.isConnecting, node.isDisabled])
+
     return (
         <Draggable draggableId={node.uuid} index={index} key={node.uuid}>
             {(provided, snapshot) => (
@@ -86,6 +112,15 @@ export const NodeCardWidget = memo((props: IProps) => {
                     ref={provided.innerRef}
                     {...provided.draggableProps}
                     onClick={handleViewNode}
+                    style={{
+                        background: `linear-gradient(
+                            135deg,
+                            ${backgroundColor} 0%,
+                            var(--mantine-color-dark-7) 100%
+                        )`,
+                        borderColor,
+                        boxShadow
+                    }}
                 >
                     <Box {...provided.dragHandleProps} className={classes.dragHandle}>
                         <PiDotsSixVertical color="white" size="1.5rem" />

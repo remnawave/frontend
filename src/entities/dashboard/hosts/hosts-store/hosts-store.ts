@@ -6,7 +6,10 @@ import { create } from '@shared/hocs/store-wrapper'
 import { IActions, IState } from './interfaces'
 
 const initialState: IState = {
-    selectedInboundTag: 'ALL',
+    filters: {
+        configProfileUuid: null,
+        inboundUuid: null
+    },
     editModal: {
         isOpen: false,
         host: null,
@@ -54,11 +57,18 @@ export const useHostsStore = create<IActions & IState>()(
                 resetState: async () => {
                     set({ ...initialState })
                 },
-                setSelectedInboundTag: (tag: string) => {
-                    set({ selectedInboundTag: tag })
+                setConfigProfileFilter: (configProfileUuid: null | string) => {
+                    set((state) => ({
+                        filters: { ...state.filters, configProfileUuid, inboundUuid: null }
+                    }))
                 },
-                resetSelectedInboundTag: () => {
-                    set({ selectedInboundTag: 'ALL' })
+                setInboundFilter: (inboundUuid: null | string) => {
+                    set((state) => ({
+                        filters: { ...state.filters, inboundUuid }
+                    }))
+                },
+                resetFilters: () => {
+                    set({ filters: { configProfileUuid: null, inboundUuid: null } })
                 }
             }
         }),
@@ -71,8 +81,12 @@ export const useHostsStore = create<IActions & IState>()(
 
 export const useHostsStoreActions = () => useHostsStore((store) => store.actions)
 
-export const useHostsStoreSelectedInboundTag = () =>
-    useHostsStore((state) => state.selectedInboundTag)
+export const useHostsStoreFilters = () => useHostsStore((state) => state.filters)
+
+export const useHostsStoreConfigProfileFilter = () =>
+    useHostsStore((state) => state.filters.configProfileUuid)
+
+export const useHostsStoreInboundFilter = () => useHostsStore((state) => state.filters.inboundUuid)
 
 // Edit Modal
 export const useHostsStoreEditModalIsOpen = () => useHostsStore((state) => state.editModal.isOpen)

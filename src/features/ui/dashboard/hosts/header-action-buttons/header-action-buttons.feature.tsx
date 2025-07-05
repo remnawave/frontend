@@ -1,20 +1,15 @@
-import { PiArrowsClockwise, PiBookmarks, PiPlus } from 'react-icons/pi'
-import { Button, Group, Select } from '@mantine/core'
+import { PiArrowsClockwise, PiPlus } from 'react-icons/pi'
 import { useTranslation } from 'react-i18next'
+import { Button, Group } from '@mantine/core'
 
-import { useHostsStoreActions, useHostsStoreSelectedInboundTag } from '@entities/dashboard'
+import { useHostsStoreActions } from '@entities/dashboard'
 import { QueryKeys, useGetHosts } from '@shared/api/hooks'
 import { queryClient } from '@shared/api'
 
-import { IProps } from './interfaces'
-
-export const HeaderActionButtonsFeature = (props: IProps) => {
+export const HeaderActionButtonsFeature = () => {
     const { t } = useTranslation()
 
-    const { configProfiles } = props
-
     const actions = useHostsStoreActions()
-    const selectedInboundTag = useHostsStoreSelectedInboundTag()
 
     const { isFetching } = useGetHosts()
 
@@ -30,22 +25,6 @@ export const HeaderActionButtonsFeature = (props: IProps) => {
 
     return (
         <Group grow preventGrowOverflow={false} wrap="wrap">
-            <Select
-                data={[
-                    { value: 'ALL', label: 'All Config Profiles' },
-                    ...configProfiles!.map((configProfile) => ({
-                        value: configProfile.uuid,
-                        label: configProfile.name
-                    }))
-                ]}
-                defaultValue="ALL"
-                leftSection={<PiBookmarks size="1rem" />}
-                leftSectionPointerEvents="none"
-                onChange={(value) => actions.setSelectedInboundTag(value || 'ALL')}
-                radius="lg"
-                size="xs"
-                value={selectedInboundTag}
-            />
             <Button
                 leftSection={<PiArrowsClockwise size="1rem" />}
                 loading={isFetching}
