@@ -1,5 +1,16 @@
+import {
+    Box,
+    Card,
+    Group,
+    Paper,
+    SimpleGrid,
+    Stack,
+    Text,
+    ThemeIcon,
+    Title,
+    Tooltip
+} from '@mantine/core'
 import { PiCloudArrowUpDuotone, PiUsersDuotone, PiWarningCircle } from 'react-icons/pi'
-import { Box, Card, Group, Paper, Stack, Text, ThemeIcon, Title } from '@mantine/core'
 import { TbWifi, TbWifiOff } from 'react-icons/tb'
 import { HiOutlineServer } from 'react-icons/hi'
 import { useTranslation } from 'react-i18next'
@@ -7,6 +18,7 @@ import { motion } from 'framer-motion'
 import { memo, useMemo } from 'react'
 
 import { XtlsLogo } from '@shared/ui/logos/xtls-logo'
+import { Logo } from '@shared/ui'
 
 import { IProps } from './interface'
 
@@ -87,7 +99,7 @@ export const NodeDetailsCardWidget = memo(({ node, fetchedNode }: IProps) => {
 
             <Stack gap="md" style={{ position: 'relative', zIndex: 1 }}>
                 <Group align="flex-start" justify="space-between">
-                    <Group gap="xs">
+                    <Group gap="xs" mt={5}>
                         <ThemeIcon
                             gradient={{ from: 'violet.4', to: 'purple.6', deg: 45 }}
                             size="sm"
@@ -128,61 +140,89 @@ export const NodeDetailsCardWidget = memo(({ node, fetchedNode }: IProps) => {
                     </motion.div>
                 </Group>
 
-                <Group gap="xs" wrap="nowrap">
-                    <Paper
-                        p="xs"
-                        radius="md"
-                        style={{
-                            background:
-                                nodeData.usersOnline! > 0
-                                    ? 'rgba(45, 212, 191, 0.1)'
-                                    : 'rgba(107, 114, 128, 0.1)',
-                            border: `1px solid ${
-                                nodeData.usersOnline! > 0
-                                    ? 'rgba(45, 212, 191, 0.3)'
-                                    : 'rgba(107, 114, 128, 0.3)'
-                            }`,
-                            flex: 1
+                {nodeData.isConnected && (
+                    <SimpleGrid
+                        cols={{
+                            base: 1,
+                            sm: 2,
+                            md: 3
                         }}
                     >
-                        <Group gap="xs" justify="center">
-                            <PiUsersDuotone
-                                color={
-                                    nodeData.usersOnline! > 0
-                                        ? 'var(--mantine-color-teal-4)'
-                                        : 'var(--mantine-color-gray-5)'
-                                }
-                                size={18}
-                            />
-                            <Text
-                                c={nodeData.usersOnline! > 0 ? 'teal.4' : 'gray.5'}
-                                fw={600}
-                                size="sm"
-                            >
-                                {nodeData.usersOnline}
-                            </Text>
-                        </Group>
-                    </Paper>
-
-                    {nodeData.isConnected && (
                         <Paper
                             p="xs"
                             radius="md"
                             style={{
-                                background: 'rgba(139, 92, 246, 0.1)',
-                                border: '1px solid rgba(139, 92, 246, 0.3)',
-                                flex: 1
+                                background:
+                                    nodeData.usersOnline! > 0
+                                        ? 'rgba(45, 212, 191, 0.1)'
+                                        : 'rgba(107, 114, 128, 0.1)',
+                                border: `1px solid ${
+                                    nodeData.usersOnline! > 0
+                                        ? 'rgba(45, 212, 191, 0.3)'
+                                        : 'rgba(107, 114, 128, 0.3)'
+                                }`
                             }}
                         >
                             <Group gap="xs" justify="center">
-                                <XtlsLogo color="var(--mantine-color-violet-4)" size={18} />
-                                <Text c="violet.4" fw={600} size="sm">
-                                    {nodeData.xrayVersion || '24.12.18'}
+                                <PiUsersDuotone
+                                    color={
+                                        nodeData.usersOnline! > 0
+                                            ? 'var(--mantine-color-teal-4)'
+                                            : 'var(--mantine-color-gray-5)'
+                                    }
+                                    size={18}
+                                />
+                                <Text
+                                    c={nodeData.usersOnline! > 0 ? 'teal.4' : 'gray.5'}
+                                    fw={600}
+                                    size="sm"
+                                >
+                                    {nodeData.usersOnline}
                                 </Text>
                             </Group>
                         </Paper>
-                    )}
-                </Group>
+
+                        {nodeData.xrayVersion && (
+                            <Paper
+                                p="xs"
+                                radius="md"
+                                style={{
+                                    background: 'rgba(139, 92, 246, 0.1)',
+                                    border: '1px solid rgba(139, 92, 246, 0.3)'
+                                }}
+                            >
+                                <Tooltip label="Xray Core Version">
+                                    <Group gap="xs" justify="center">
+                                        <XtlsLogo color="var(--mantine-color-violet-4)" size={18} />
+                                        <Text c="violet.4" fw={600} size="sm">
+                                            {nodeData.xrayVersion || 'N/A'}
+                                        </Text>
+                                    </Group>
+                                </Tooltip>
+                            </Paper>
+                        )}
+
+                        {nodeData.nodeVersion && (
+                            <Paper
+                                p="xs"
+                                radius="md"
+                                style={{
+                                    background: 'rgba(99, 102, 241, 0.1)',
+                                    border: '1px solid rgba(99, 102, 241, 0.3)'
+                                }}
+                            >
+                                <Tooltip label="Node version, @remnawave/node">
+                                    <Group gap="xs" justify="center">
+                                        <Logo color="var(--mantine-color-indigo-4)" size={18} />
+                                        <Text c="indigo.4" fw={600} size="sm">
+                                            {nodeData.nodeVersion || 'N/A'}
+                                        </Text>
+                                    </Group>
+                                </Tooltip>
+                            </Paper>
+                        )}
+                    </SimpleGrid>
+                )}
             </Stack>
         </Card>
     )
