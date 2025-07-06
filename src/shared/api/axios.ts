@@ -1,3 +1,7 @@
+import {
+    REMNAWAVE_CLIENT_TYPE_BROWSER,
+    REMNAWAVE_CLIENT_TYPE_HEADER
+} from '@remnawave/backend-contract'
 import consola from 'consola/browser'
 import axios from 'axios'
 
@@ -23,7 +27,8 @@ export const instance = axios.create({
     baseURL: BASE_DOMAIN,
     headers: {
         'Content-type': 'application/json',
-        Accept: 'application/json'
+        Accept: 'application/json',
+        [REMNAWAVE_CLIENT_TYPE_HEADER]: REMNAWAVE_CLIENT_TYPE_BROWSER
     }
 })
 
