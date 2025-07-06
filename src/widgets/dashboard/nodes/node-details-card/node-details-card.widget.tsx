@@ -44,7 +44,7 @@ export const NodeDetailsCardWidget = memo(({ node, fetchedNode }: IProps) => {
             icon = (
                 <PiCloudArrowUpDuotone
                     size={18}
-                    style={{ color: 'var(--mantine-color-yellow-6)' }}
+                    style={{ color: 'var(--mantine-color-yellow-3)' }}
                 />
             )
             color = 'yellow'
