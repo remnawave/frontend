@@ -2,7 +2,6 @@
 /* eslint-disable indent */
 
 import {
-    IconBolt,
     IconBuilding,
     IconCoins,
     IconCurrencyDollar,
@@ -10,7 +9,6 @@ import {
     IconHeart,
     IconHome,
     IconRefresh,
-    IconServer,
     IconShield,
     IconShieldCheck,
     IconSwords,
@@ -47,27 +45,40 @@ import { ROUTES } from '@shared/constants'
 import classes from './ProxyDefense.module.css'
 
 interface Enemy {
+    buffs?: {
+        healthBoost?: number // Health multiplier
+        speedBoost?: number // Speed multiplier
+    }
+    disabledUntil?: number // Time until tower is disabled
+    hasShield?: boolean
     health: number
     id: string
     lastAttack: number
     maxHealth: number
+    maxShield?: number // Maximum number of shield blocks
+    originalSpeed?: number // original speed
     reward: number
+    shield?: number // Number of remaining shield blocks
+    slowEffect?: number // slowdown effect
     speed: number
-    type: 'ddos' | 'hacker' | 'malware' | 'spider'
+    type: 'ddos' | 'hacker' | 'malware' | 'replicator' | 'shielded' | 'spider' | 'voltage'
     x: number
     y: number
 }
 
 interface Tower {
+    chainTargets?: number
     cooldown: number
     cost: number
     damage: number
+    disabledUntil?: number
     health: number
     id: string
     lastShot: number
     maxHealth: number
     range: number
-    type: 'antivirus' | 'firewall' | 'proxy'
+    slowdownEffect?: number
+    type: 'antivirus' | 'chain' | 'firewall' | 'proxy' | 'slowdown'
     x: number
     y: number
 }
@@ -97,22 +108,31 @@ interface Lightning {
 interface GameState {
     coins: number
     coinsSpent: number
+    dataFloodStartTime: number
     enemies: Enemy[]
     // Statistics
     enemiesKilled: number
+    enemyBuffs: {
+        healthBoost: number
+        speedBoost: number
+    }
     explosions: Explosion[]
     formatStartTime: number
     health: number
     healthLost: number
+    isDataFloodActive: boolean
     isFormatting: boolean
     isGameOver: boolean
     isGameStarted: boolean
     isShaking: boolean
+    lastBuffWave: number
     // Visual effects
     lastDamageTime: number
     lastHealthRegen: number
     lastMoneyRegen: number
     lightnings: Lightning[]
+    // Data flood event
+    nextDataFloodWave: number
     // Disk format event
     nextFormatWave: number
     score: number
@@ -126,7 +146,9 @@ interface GameState {
 const TOWER_TYPES = {
     firewall: { damage: 20, range: 80, cost: 50, cooldown: 1000, health: 100, color: 'blue' },
     antivirus: { damage: 15, range: 60, cost: 30, cooldown: 800, health: 60, color: 'teal' },
-    proxy: { damage: 10, range: 100, cost: 25, cooldown: 600, health: 40, color: 'indigo' }
+    proxy: { damage: 10, range: 100, cost: 25, cooldown: 600, health: 40, color: 'indigo' },
+    slowdown: { damage: 5, range: 120, cost: 35, cooldown: 800, health: 50, color: 'cyan' },
+    chain: { damage: 25, range: 90, cost: 60, cooldown: 1200, health: 70, color: 'purple' }
 }
 
 const ENEMY_TYPES = {
@@ -137,7 +159,13 @@ const ENEMY_TYPES = {
         color: 'red',
         towerDamage: 15,
         attackRange: 50,
-        attackCooldown: 1500
+        attackCooldown: 1500,
+        shield: 0,
+        maxShield: 0,
+        hasShield: false,
+        slowEffect: 1,
+        disabledUntil: 0,
+        buffs: undefined
     },
     ddos: {
         health: 60,
@@ -146,7 +174,13 @@ const ENEMY_TYPES = {
         color: 'orange',
         towerDamage: 25,
         attackRange: 60,
-        attackCooldown: 800
+        attackCooldown: 800,
+        shield: 0,
+        maxShield: 0,
+        hasShield: false,
+        slowEffect: 1,
+        disabledUntil: 0,
+        buffs: undefined
     },
     malware: {
         health: 15,
@@ -155,7 +189,13 @@ const ENEMY_TYPES = {
         color: 'pink',
         towerDamage: 8,
         attackRange: 40,
-        attackCooldown: 1200
+        attackCooldown: 1200,
+        shield: 0,
+        maxShield: 0,
+        hasShield: false,
+        slowEffect: 1,
+        disabledUntil: 0,
+        buffs: undefined
     },
     spider: {
         health: 180,
@@ -164,7 +204,58 @@ const ENEMY_TYPES = {
         color: 'purple',
         towerDamage: 35,
         attackRange: 70,
-        attackCooldown: 600
+        attackCooldown: 600,
+        shield: 0,
+        maxShield: 0,
+        hasShield: false,
+        slowEffect: 1,
+        disabledUntil: 0,
+        buffs: undefined
+    },
+    shielded: {
+        health: 100,
+        speed: 1.5,
+        reward: 50,
+        color: 'green',
+        towerDamage: 20,
+        attackRange: 50,
+        attackCooldown: 1000,
+        shield: 3,
+        maxShield: 3,
+        hasShield: true,
+        slowEffect: 1,
+        disabledUntil: 0,
+        buffs: undefined
+    },
+    voltage: {
+        health: 120,
+        speed: 1.2,
+        reward: 60,
+        color: 'yellow',
+        towerDamage: 25,
+        attackRange: 60,
+        attackCooldown: 800,
+        shield: 0,
+        maxShield: 0,
+        hasShield: false,
+        slowEffect: 1,
+        disabledUntil: 0,
+        buffs: undefined
+    },
+    replicator: {
+        health: 100,
+        speed: 1.0,
+        reward: 80,
+        color: 'pink',
+        towerDamage: 30,
+        attackRange: 70,
+        attackCooldown: 1200,
+        shield: 0,
+        maxShield: 0,
+        hasShield: false,
+        slowEffect: 1,
+        disabledUntil: 0,
+        buffs: undefined
     }
 }
 
@@ -173,7 +264,8 @@ const GAME_CONFIG = {
     boardHeight: 400,
     startHealth: 100,
     startCoins: 100,
-    waveEnemyCount: 5
+    waveEnemyCount: 5,
+    minTowerDistance: 45 // Minimum distance between towers
 }
 
 // Pixel art drawing functions
@@ -922,6 +1014,297 @@ const drawMalwareAttack = (
     }
 }
 
+// functions for drawing enemies (definitions before use)
+const drawShieldedEnemy = (
+    ctx: CanvasRenderingContext2D,
+    x: number,
+    y: number,
+    shield: number,
+    maxShield: number
+) => {
+    const centerX = x + 15
+    const centerY = y + 15
+
+    // Shadow
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.2)'
+    ctx.fillRect(centerX - 8, centerY + 10, 16, 4)
+
+    // Main body
+    ctx.fillStyle = '#4CAF50'
+    ctx.fillRect(centerX - 6, centerY - 2, 12, 8)
+
+    // Arms/weapons
+    ctx.fillStyle = '#2E7D32'
+    ctx.fillRect(centerX - 8, centerY, 4, 4)
+    ctx.fillRect(centerX + 4, centerY, 4, 4)
+
+    // Head
+    ctx.fillStyle = '#66BB6A'
+    ctx.fillRect(centerX - 4, centerY - 6, 8, 6)
+
+    // Eyes
+    ctx.fillStyle = '#1976D2'
+    ctx.fillRect(centerX - 3, centerY - 5, 2, 2)
+    ctx.fillRect(centerX + 1, centerY - 5, 2, 2)
+
+    // Shield effect
+    if (shield > 0) {
+        const shieldAlpha = (shield / maxShield) * 0.8 + 0.2
+        const shieldRadius = 18 + Math.sin(Date.now() * 0.005) * 2
+
+        // Shield barrier
+        ctx.strokeStyle = `rgba(33, 150, 243, ${shieldAlpha})`
+        ctx.lineWidth = 3
+        ctx.beginPath()
+        ctx.arc(centerX, centerY, shieldRadius, 0, Math.PI * 2)
+        ctx.stroke()
+
+        // Shield segments
+        for (let i = 0; i < shield; i++) {
+            const angle = (i / maxShield) * Math.PI * 2
+            const x1 = centerX + Math.cos(angle) * (shieldRadius - 2)
+            const y1 = centerY + Math.sin(angle) * (shieldRadius - 2)
+            const x2 = centerX + Math.cos(angle) * (shieldRadius + 2)
+            const y2 = centerY + Math.sin(angle) * (shieldRadius + 2)
+
+            ctx.strokeStyle = '#2196F3'
+            ctx.lineWidth = 2
+            ctx.beginPath()
+            ctx.moveTo(x1, y1)
+            ctx.lineTo(x2, y2)
+            ctx.stroke()
+        }
+    }
+}
+
+const drawVoltageEnemy = (ctx: CanvasRenderingContext2D, x: number, y: number) => {
+    const centerX = x + 15
+    const centerY = y + 15
+    const time = Date.now() * 0.01
+
+    // Shadow
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.2)'
+    ctx.fillRect(centerX - 8, centerY + 10, 16, 4)
+
+    // Main body - electric core
+    ctx.fillStyle = '#FFC107'
+    ctx.fillRect(centerX - 6, centerY - 4, 12, 8)
+
+    // Inner energy core
+    ctx.fillStyle = '#FF9800'
+    ctx.fillRect(centerX - 4, centerY - 2, 8, 4)
+
+    // Electric arcs
+    for (let i = 0; i < 6; i++) {
+        const angle = (i * Math.PI) / 3 + time
+        const radius = 12 + Math.sin(time * 3 + i) * 4
+        const endX = centerX + Math.cos(angle) * radius
+        const endY = centerY + Math.sin(angle) * radius
+
+        ctx.strokeStyle = '#FFEB3B'
+        ctx.lineWidth = 2
+        ctx.beginPath()
+        ctx.moveTo(centerX, centerY)
+        ctx.lineTo(endX, endY)
+        ctx.stroke()
+
+        // Spark effects
+        ctx.fillStyle = '#FFF176'
+        ctx.fillRect(endX - 1, endY - 1, 2, 2)
+    }
+
+    // Pulsing electric field
+    const pulseRadius = 16 + Math.sin(time * 4) * 3
+    ctx.strokeStyle = `rgba(255, 235, 59, ${0.4 + Math.sin(time * 4) * 0.3})`
+    ctx.lineWidth = 1
+    ctx.beginPath()
+    ctx.arc(centerX, centerY, pulseRadius, 0, Math.PI * 2)
+    ctx.stroke()
+
+    // Central lightning bolt
+    ctx.fillStyle = '#FFEB3B'
+    ctx.beginPath()
+    ctx.moveTo(centerX - 2, centerY - 6)
+    ctx.lineTo(centerX + 1, centerY - 2)
+    ctx.lineTo(centerX - 1, centerY - 2)
+    ctx.lineTo(centerX + 2, centerY + 2)
+    ctx.lineTo(centerX - 1, centerY - 2)
+    ctx.lineTo(centerX + 1, centerY - 2)
+    ctx.closePath()
+    ctx.fill()
+}
+
+const drawReplicatorEnemy = (ctx: CanvasRenderingContext2D, x: number, y: number) => {
+    const centerX = x + 15
+    const centerY = y + 15
+    const time = Date.now() * 0.008
+
+    // Shadow
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.2)'
+    ctx.fillRect(centerX - 8, centerY + 10, 16, 4)
+
+    // Main body
+    ctx.fillStyle = '#E91E63'
+    ctx.fillRect(centerX - 6, centerY - 2, 12, 8)
+
+    // Replication chambers
+    ctx.fillStyle = '#C2185B'
+    ctx.fillRect(centerX - 8, centerY - 1, 3, 6)
+    ctx.fillRect(centerX + 5, centerY - 1, 3, 6)
+
+    // Head/control unit
+    ctx.fillStyle = '#F06292'
+    ctx.fillRect(centerX - 4, centerY - 6, 8, 6)
+
+    // Scanning eyes
+    ctx.fillStyle = '#FF1744'
+    for (let i = 0; i < 3; i++) {
+        const eyeX = centerX - 3 + i * 3
+        ctx.fillRect(eyeX, centerY - 5, 1, 1)
+    }
+
+    // Replication energy fields
+    for (let i = 0; i < 4; i++) {
+        const angle = time + (i * Math.PI) / 2
+        const radius = 10 + Math.sin(time * 2 + i) * 3
+        const fieldX = centerX + Math.cos(angle) * radius
+        const fieldY = centerY + Math.sin(angle) * radius
+
+        ctx.fillStyle = `rgba(233, 30, 99, ${0.5 + Math.sin(time * 3 + i) * 0.3})`
+        ctx.fillRect(fieldX - 2, fieldY - 2, 4, 4)
+    }
+
+    // DNA helix effect
+    for (let i = 0; i < 8; i++) {
+        const helixY = centerY - 4 + i
+        const helixX1 = centerX + Math.sin(time + i * 0.5) * 4
+        const helixX2 = centerX + Math.sin(time + i * 0.5 + Math.PI) * 4
+
+        ctx.fillStyle = '#FF4081'
+        ctx.fillRect(helixX1 - 0.5, helixY, 1, 1)
+        ctx.fillRect(helixX2 - 0.5, helixY, 1, 1)
+    }
+}
+
+// functions for drawing towers (definitions before use)
+const drawSlowdownTower = (ctx: CanvasRenderingContext2D, x: number, y: number) => {
+    const centerX = x + 15
+    const centerY = y + 15
+    const time = Date.now() * 0.003
+
+    // Base
+    ctx.fillStyle = '#006064'
+    ctx.fillRect(centerX - 8, centerY + 6, 16, 8)
+
+    // Main body
+    ctx.fillStyle = '#00BCD4'
+    ctx.fillRect(centerX - 6, centerY - 2, 12, 8)
+
+    // Freeze chamber
+    ctx.fillStyle = '#B3E5FC'
+    ctx.fillRect(centerX - 4, centerY - 6, 8, 6)
+
+    // Ice crystals
+    for (let i = 0; i < 6; i++) {
+        const angle = (i * Math.PI) / 3 + time
+        const crystalX = centerX + Math.cos(angle) * 8
+        const crystalY = centerY + Math.sin(angle) * 8
+
+        ctx.fillStyle = '#E1F5FE'
+        ctx.fillRect(crystalX - 1, crystalY - 1, 2, 2)
+    }
+
+    // Frost waves
+    for (let i = 0; i < 3; i++) {
+        const radius = 15 + i * 8 + Math.sin(time + i) * 3
+        const alpha = 0.3 - i * 0.1
+        ctx.strokeStyle = `rgba(0, 188, 212, ${alpha})`
+        ctx.lineWidth = 1
+        ctx.beginPath()
+        ctx.arc(centerX, centerY, radius, 0, Math.PI * 2)
+        ctx.stroke()
+    }
+
+    // Central snowflake
+    ctx.strokeStyle = '#FFFFFF'
+    ctx.lineWidth = 2
+    ctx.beginPath()
+    ctx.moveTo(centerX, centerY - 4)
+    ctx.lineTo(centerX, centerY + 4)
+    ctx.moveTo(centerX - 4, centerY)
+    ctx.lineTo(centerX + 4, centerY)
+    ctx.moveTo(centerX - 3, centerY - 3)
+    ctx.lineTo(centerX + 3, centerY + 3)
+    ctx.moveTo(centerX - 3, centerY + 3)
+    ctx.lineTo(centerX + 3, centerY - 3)
+    ctx.stroke()
+}
+
+const drawChainTower = (ctx: CanvasRenderingContext2D, x: number, y: number) => {
+    const centerX = x + 15
+    const centerY = y + 15
+    const time = Date.now() * 0.01
+
+    // Base
+    ctx.fillStyle = '#4A148C'
+    ctx.fillRect(centerX - 8, centerY + 6, 16, 8)
+
+    // Main body
+    ctx.fillStyle = '#9C27B0'
+    ctx.fillRect(centerX - 6, centerY - 2, 12, 8)
+
+    // Tesla coil top
+    ctx.fillStyle = '#E1BEE7'
+    ctx.fillRect(centerX - 1, centerY - 8, 2, 6)
+
+    // Coil rings
+    for (let i = 0; i < 4; i++) {
+        ctx.strokeStyle = '#BA68C8'
+        ctx.lineWidth = 1
+        ctx.beginPath()
+        ctx.arc(centerX, centerY - 6 + i, 2 + i, 0, Math.PI * 2)
+        ctx.stroke()
+    }
+
+    // Chain lightning connections
+    for (let i = 0; i < 3; i++) {
+        const angle = time + (i * Math.PI * 2) / 3
+        const radius = 12
+        const endX = centerX + Math.cos(angle) * radius
+        const endY = centerY + Math.sin(angle) * radius
+
+        // Lightning bolt
+        ctx.strokeStyle = '#E91E63'
+        ctx.lineWidth = 2
+        ctx.beginPath()
+        ctx.moveTo(centerX, centerY)
+
+        // Zigzag pattern
+        const segments = 4
+        for (let j = 1; j <= segments; j++) {
+            const t = j / segments
+            const midX = centerX + (endX - centerX) * t
+            const midY = centerY + (endY - centerY) * t
+            const offset = (j % 2 === 0 ? 1 : -1) * 3
+            ctx.lineTo(midX + offset, midY + offset)
+        }
+        ctx.stroke()
+
+        // Connection point
+        ctx.fillStyle = '#FF4081'
+        ctx.fillRect(endX - 1, endY - 1, 2, 2)
+    }
+
+    // Energy core
+    ctx.fillStyle = '#AD7FFF'
+    ctx.fillRect(centerX - 2, centerY - 2, 4, 4)
+
+    // Core pulse
+    const pulseSize = 2 + Math.sin(time * 4) * 1
+    ctx.fillStyle = '#FFFFFF'
+    ctx.fillRect(centerX - pulseSize / 2, centerY - pulseSize / 2, pulseSize, pulseSize)
+}
+
 const drawEnemyAttack = (
     ctx: CanvasRenderingContext2D,
     fromX: number,
@@ -949,6 +1332,144 @@ const drawEnemyAttack = (
     }
 }
 
+// Enemy Sprite for information panel (same as in game)
+const EnemyInfoSprite = ({ type }: { type: Enemy['type'] }) => {
+    const canvasRef = useRef<HTMLCanvasElement>(null)
+    const spriteSize = type === 'spider' ? 50 : 30 // Same size as in game
+
+    useEffect(() => {
+        const canvas = canvasRef.current
+        if (!canvas) return
+
+        const ctx = canvas.getContext('2d')
+        if (!ctx) return
+
+        // Clear canvas
+        ctx.clearRect(0, 0, spriteSize, spriteSize)
+
+        // Create a mock enemy with default stats for rendering
+        const mockEnemy = {
+            ...ENEMY_TYPES[type],
+            id: `mock-${type}`,
+            x: spriteSize / 2,
+            y: spriteSize / 2,
+            lastAttack: 0,
+            shield: ENEMY_TYPES[type].shield,
+            maxShield: ENEMY_TYPES[type].maxShield,
+            hasShield: ENEMY_TYPES[type].hasShield,
+            slowEffect: 1,
+            originalSpeed: ENEMY_TYPES[type].speed,
+            buffs: undefined
+        }
+
+        // Draw enemy based on type (same functions as in game)
+        switch (type) {
+            case 'ddos':
+                drawDDoSEnemy(ctx, 0, 0)
+                break
+            case 'hacker':
+                drawHackerEnemy(ctx, 0, 0)
+                break
+            case 'malware':
+                drawMalwareEnemy(ctx, 0, 0)
+                break
+            case 'replicator':
+                drawReplicatorEnemy(ctx, 0, 0)
+                break
+            case 'shielded':
+                drawShieldedEnemy(ctx, 0, 0, mockEnemy.shield, mockEnemy.maxShield)
+                break
+            case 'spider':
+                drawSpiderEnemy(ctx, 0, 0)
+                break
+            case 'voltage':
+                drawVoltageEnemy(ctx, 0, 0)
+                break
+            default:
+                break
+        }
+    }, [type, spriteSize])
+
+    return (
+        <canvas
+            height={spriteSize}
+            ref={canvasRef}
+            style={{
+                imageRendering: 'pixelated'
+            }}
+            width={spriteSize}
+        />
+    )
+}
+
+// Tower Sprite for information panel (same as in game)
+const TowerInfoSprite = ({ type }: { type: Tower['type'] }) => {
+    const canvasRef = useRef<HTMLCanvasElement>(null)
+    const spriteSize = 30 // Same size as in game
+
+    useEffect(() => {
+        const canvas = canvasRef.current
+        if (!canvas) return
+
+        const ctx = canvas.getContext('2d')
+        if (!ctx) return
+
+        // Clear canvas
+        ctx.clearRect(0, 0, spriteSize, spriteSize)
+
+        // Create a mock tower with default stats for rendering
+        const mockTower = {
+            ...TOWER_TYPES[type],
+            id: `mock-${type}`,
+            x: spriteSize / 2,
+            y: spriteSize / 2,
+            lastShot: 0,
+            type,
+            maxHealth: TOWER_TYPES[type].health,
+            health: TOWER_TYPES[type].health,
+            damage: TOWER_TYPES[type].damage,
+            range: TOWER_TYPES[type].range,
+            cost: TOWER_TYPES[type].cost,
+            cooldown: TOWER_TYPES[type].cooldown,
+            disabledUntil: undefined,
+            slowdownEffect: type === 'slowdown' ? 0.4 : undefined,
+            chainTargets: type === 'chain' ? 2 : undefined
+        }
+
+        // Draw tower based on type (same functions as in game)
+        switch (type) {
+            case 'antivirus':
+                drawAntivirusTower(ctx, 0, 0)
+                break
+            case 'chain':
+                drawChainTower(ctx, 0, 0)
+                break
+            case 'firewall':
+                drawFirewallTower(ctx, 0, 0, mockTower.health, mockTower.maxHealth)
+                break
+            case 'proxy':
+                drawProxyTower(ctx, 0, 0)
+                break
+            case 'slowdown':
+                drawSlowdownTower(ctx, 0, 0)
+                break
+            default:
+                break
+        }
+    }, [type, spriteSize])
+
+    return (
+        <canvas
+            height={spriteSize}
+            ref={canvasRef}
+            style={{
+                imageRendering: 'pixelated'
+            }}
+            width={spriteSize}
+        />
+    )
+}
+
 // Canvas components
 const TowerSprite = ({ tower }: { tower: Tower }) => {
     const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -968,11 +1489,17 @@ const TowerSprite = ({ tower }: { tower: Tower }) => {
             case 'antivirus':
                 drawAntivirusTower(ctx, 0, 0)
                 break
+            case 'chain':
+                drawChainTower(ctx, 0, 0)
+                break
             case 'firewall':
                 drawFirewallTower(ctx, 0, 0, tower.health, tower.maxHealth)
                 break
             case 'proxy':
                 drawProxyTower(ctx, 0, 0)
+                break
+            case 'slowdown':
+                drawSlowdownTower(ctx, 0, 0)
                 break
             default:
                 break
@@ -1020,13 +1547,22 @@ const EnemySprite = ({ enemy }: { enemy: Enemy }) => {
             case 'malware':
                 drawMalwareEnemy(ctx, 0, 0)
                 break
+            case 'replicator':
+                drawReplicatorEnemy(ctx, 0, 0)
+                break
+            case 'shielded':
+                drawShieldedEnemy(ctx, 0, 0, enemy.shield || 0, enemy.maxShield || 0)
+                break
             case 'spider':
                 drawSpiderEnemy(ctx, 0, 0)
+                break
+            case 'voltage':
+                drawVoltageEnemy(ctx, 0, 0)
                 break
             default:
                 break
         }
-    }, [enemy.type, enemy.health, enemy.maxHealth, spriteSize])
+    }, [enemy.type, enemy.health, enemy.maxHealth, enemy.shield, enemy.maxShield, spriteSize])
 
     return (
         <canvas
@@ -1216,6 +1752,7 @@ const HealthIndicator = ({ health, isShaking }: { health: number; isShaking: boo
                     }}
                 />
                 <Text
+                    ff="monospace"
                     fw={700}
                     size="sm"
                     style={{
@@ -1223,7 +1760,58 @@ const HealthIndicator = ({ health, isShaking }: { health: number; isShaking: boo
                         textShadow: '1px 1px 2px rgba(0,0,0,0.8)'
                     }}
                 >
-                    {health}
+                    {Math.floor(health).toString().padStart(3, '0')}
+                </Text>
+            </div>
+        </div>
+    )
+}
+
+const CoinsIndicator = ({ coins, isShaking }: { coins: number; isShaking: boolean }) => {
+    const coinsColor = coins > 70 ? '#fdcb6e' : coins > 30 ? '#fdcb6e' : '#e84393'
+    const isLowCoins = coins <= 30
+
+    return (
+        <div
+            style={{
+                position: 'absolute',
+                top: 10,
+                right: 100,
+                zIndex: 10,
+                pointerEvents: 'none',
+                animation: isShaking ? 'shake 0.5s' : undefined
+            }}
+        >
+            <div
+                style={{
+                    backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                    padding: '8px 12px',
+                    borderRadius: '20px',
+                    border: `2px solid ${coinsColor}`,
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '6px',
+                    boxShadow: isLowCoins ? `0 0 15px ${coinsColor}` : '0 2px 8px rgba(0,0,0,0.3)'
+                }}
+            >
+                <IconCoins
+                    color={coinsColor}
+                    size={16}
+                    style={{
+                        filter: isLowCoins ? 'drop-shadow(0 0 4px #e84393)' : undefined,
+                        animation: isLowCoins ? 'pulse 1s infinite' : undefined
+                    }}
+                />
+                <Text
+                    ff="monospace"
+                    fw={700}
+                    size="sm"
+                    style={{
+                        color: coinsColor,
+                        textShadow: '1px 1px 2px rgba(0,0,0,0.8)'
+                    }}
+                >
+                    {coins.toString().padStart(4, '0')}
                 </Text>
             </div>
         </div>
@@ -1316,9 +1904,48 @@ const LightningSprite = ({ lightning }: { lightning: Lightning }) => {
     )
 }
 
+const TowerExclusionZone = ({ tower }: { tower: Tower }) => {
+    return (
+        <div
+            style={{
+                position: 'absolute',
+                left: tower.x - GAME_CONFIG.minTowerDistance,
+                top: tower.y - GAME_CONFIG.minTowerDistance,
+                width: GAME_CONFIG.minTowerDistance * 2,
+                height: GAME_CONFIG.minTowerDistance * 2,
+                borderRadius: '50%',
+                backgroundColor: 'rgba(255, 0, 0, 0.1)',
+                border: '2px solid rgba(255, 0, 0, 0.3)',
+                pointerEvents: 'none',
+                opacity: 0.7
+            }}
+        />
+    )
+}
+
+const BuildingGuide = ({ x, y, isValid }: { isValid: boolean; x: number; y: number }) => {
+    return (
+        <div
+            style={{
+                position: 'absolute',
+                left: x - 20,
+                top: y - 20,
+                width: 40,
+                height: 40,
+                borderRadius: '50%',
+                backgroundColor: isValid ? 'rgba(0, 255, 0, 0.2)' : 'rgba(255, 0, 0, 0.2)',
+                border: `2px solid ${isValid ? 'rgba(0, 255, 0, 0.6)' : 'rgba(255, 0, 0, 0.6)'}`,
+                pointerEvents: 'none',
+                opacity: 0.8
+            }}
+        />
+    )
+}
+
 export const ProxyDefensePage = () => {
     const navigate = useNavigate()
     const { resetClicks } = useEasterEggStore()
+    const [mousePosition, setMousePosition] = useState<null | { x: number; y: number }>(null)
 
     const [gameState, setGameState] = useState<GameState>({
         health: GAME_CONFIG.startHealth,
@@ -1346,7 +1973,16 @@ export const ProxyDefensePage = () => {
         // Disk format event
         nextFormatWave: 4 + Math.floor(Math.random() * 4), // Random between 4-7
         isFormatting: false,
-        formatStartTime: 0
+        formatStartTime: 0,
+        // Data flood event
+        nextDataFloodWave: 4 + Math.floor(Math.random() * 6), // Random between 4-9
+        isDataFloodActive: false,
+        dataFloodStartTime: 0,
+        enemyBuffs: {
+            speedBoost: 1,
+            healthBoost: 1
+        },
+        lastBuffWave: 0
     })
 
     const spawnWave = useCallback(() => {
@@ -1356,7 +1992,13 @@ export const ProxyDefensePage = () => {
         // Count current spiders on screen
         const currentSpiders = gameState.enemies.filter((enemy) => enemy.type === 'spider').length
 
-        for (let i = 0; i < GAME_CONFIG.waveEnemyCount + gameState.wave; i++) {
+        // Check if data flood is active - double enemy count, reduce health by 40%
+        const { isDataFloodActive } = gameState
+        const baseEnemyCount = GAME_CONFIG.waveEnemyCount + gameState.wave
+        const enemyCount = isDataFloodActive ? baseEnemyCount * 2 : baseEnemyCount
+        const healthMultiplier = isDataFloodActive ? 0.6 : 1 // 40% weaker = 60% health
+
+        for (let i = 0; i < enemyCount; i++) {
             const types = Object.keys(ENEMY_TYPES) as Array<keyof typeof ENEMY_TYPES>
             let randomType: keyof typeof ENEMY_TYPES
 
@@ -1370,23 +2012,51 @@ export const ProxyDefensePage = () => {
             if (shouldSpawnSpider) {
                 randomType = 'spider'
             } else {
-                // Filter out spider from regular spawning
-                const regularTypes = types.filter((type) => type !== 'spider')
-                randomType = regularTypes[Math.floor(Math.random() * regularTypes.length)]
+                // Special enemy spawning logic
+                const rand = Math.random()
+
+                if (gameState.wave >= 2 && rand < 0.1) {
+                    randomType = 'shielded' // 10% chance after wave 2
+                } else if (gameState.wave >= 3 && rand < 0.1) {
+                    randomType = 'voltage' // 10% chance after wave 3
+                } else if (gameState.wave >= 4 && rand < 0.1) {
+                    randomType = 'replicator' // 10% chance after wave 4
+                } else {
+                    // Regular enemy types
+                    const regularTypes = types.filter(
+                        (type) => !['replicator', 'shielded', 'spider', 'voltage'].includes(type)
+                    )
+                    randomType = regularTypes[Math.floor(Math.random() * regularTypes.length)]
+                }
             }
 
             const enemyTemplate = ENEMY_TYPES[randomType]
+
+            // Apply enemy buffs every 5 waves (escalating difficulty)
+            const buffMultiplier = Math.floor(gameState.wave / 5)
+            const healthBoost = 1 + buffMultiplier * 0.2 // +20% health per 5 waves
+            const speedBoost = 1 + buffMultiplier * 0.1 // +10% speed per 5 waves
 
             enemies.push({
                 id: `enemy-${i}-${Date.now()}`,
                 x: -50,
                 y: Math.random() * (GAME_CONFIG.boardHeight - 40) + 20,
-                health: enemyTemplate.health * waveMultiplier,
-                maxHealth: enemyTemplate.health * waveMultiplier,
-                speed: enemyTemplate.speed,
+                health: enemyTemplate.health * waveMultiplier * healthBoost * healthMultiplier,
+                maxHealth: enemyTemplate.health * waveMultiplier * healthBoost * healthMultiplier,
+                speed: enemyTemplate.speed * speedBoost,
                 reward: enemyTemplate.reward,
                 type: randomType,
-                lastAttack: 0
+                lastAttack: 0,
+                shield: enemyTemplate.shield,
+                maxShield: enemyTemplate.maxShield,
+                hasShield: enemyTemplate.hasShield,
+                slowEffect: enemyTemplate.slowEffect,
+                disabledUntil: enemyTemplate.disabledUntil,
+                originalSpeed: enemyTemplate.speed * speedBoost,
+                buffs: {
+                    healthBoost,
+                    speedBoost
+                }
             })
         }
 
@@ -1417,10 +2087,37 @@ export const ProxyDefensePage = () => {
 
             // Update enemies
             newState.enemies = newState.enemies
-                .map((enemy) => ({
-                    ...enemy,
-                    x: enemy.x + enemy.speed
-                }))
+                .map((enemy) => {
+                    // Check if enemy is in range of any alive slowdown tower
+                    const isInSlowdownRange = newState.towers.some((tower) => {
+                        if (tower.type !== 'slowdown' || tower.health <= 0) return false
+                        const distance = Math.sqrt(
+                            (enemy.x - tower.x) ** 2 + (enemy.y - tower.y) ** 2
+                        )
+                        return distance <= TOWER_TYPES[tower.type].range
+                    })
+
+                    // Apply or remove slowdown effect
+                    const updatedEnemy = { ...enemy }
+                    if (isInSlowdownRange) {
+                        // Apply slowdown if not already applied
+                        if (!updatedEnemy.slowEffect || updatedEnemy.slowEffect === 1) {
+                            updatedEnemy.slowEffect = 0.4 // 60% slower
+                            updatedEnemy.speed =
+                                (updatedEnemy.originalSpeed || updatedEnemy.speed) *
+                                updatedEnemy.slowEffect
+                        }
+                    } else if (updatedEnemy.slowEffect && updatedEnemy.slowEffect < 1) {
+                        // Restore original speed if was slowed
+                        updatedEnemy.slowEffect = 1
+                        updatedEnemy.speed = updatedEnemy.originalSpeed || updatedEnemy.speed
+                    }
+
+                    return {
+                        ...updatedEnemy,
+                        x: updatedEnemy.x + updatedEnemy.speed
+                    }
+                })
                 .filter((enemy) => {
                     if (enemy.x > GAME_CONFIG.boardWidth) {
                         newState.health -= 10
@@ -1486,51 +2183,137 @@ export const ProxyDefensePage = () => {
 
             // Tower attacks
             newState.towers.forEach((tower) => {
+                // Check if tower is disabled
+                if (tower.disabledUntil && now < tower.disabledUntil) {
+                    return // Tower is disabled, skip attack
+                }
+
                 if (now - tower.lastShot >= tower.cooldown) {
                     const towerStats = TOWER_TYPES[tower.type]
-                    const target = newState.enemies.find((enemy) => {
-                        const distance = Math.sqrt(
-                            (enemy.x - tower.x) ** 2 + (enemy.y - tower.y) ** 2
-                        )
-                        return distance <= towerStats.range
-                    })
 
-                    if (target) {
-                        target.health -= tower.damage
+                    // Find targets based on tower type
+                    let targets: Enemy[] = []
+
+                    if (tower.type === 'chain') {
+                        // Chain lightning - find multiple targets
+                        const potentialTargets = newState.enemies.filter((enemy) => {
+                            const distance = Math.sqrt(
+                                (enemy.x - tower.x) ** 2 + (enemy.y - tower.y) ** 2
+                            )
+                            return distance <= towerStats.range
+                        })
+                        targets = potentialTargets.slice(0, tower.chainTargets || 3)
+                    } else {
+                        // Normal targeting - find single target
+                        const target = newState.enemies.find((enemy) => {
+                            const distance = Math.sqrt(
+                                (enemy.x - tower.x) ** 2 + (enemy.y - tower.y) ** 2
+                            )
+                            return distance <= towerStats.range
+                        })
+                        if (target) targets = [target]
+                    }
+
+                    if (targets.length > 0) {
                         // eslint-disable-next-line no-param-reassign
                         tower.lastShot = now
 
-                        // Create lightning effect
-                        const lightning: Lightning = {
-                            id: `lightning-${Date.now()}-${Math.random()}`,
-                            fromX: tower.x,
-                            fromY: tower.y,
-                            toX: target.x,
-                            toY: target.y,
-                            startTime: Date.now(),
-                            duration: 300,
-                            towerType: tower.type,
-                            isEnemyAttack: false
-                        }
-                        newState.lightnings.push(lightning)
-
-                        if (target.health <= 0) {
-                            newState.coins += target.reward
-                            newState.score += target.reward * 2
-                            newState.enemiesKilled += 1
-                            newState.totalCoinsEarned += target.reward
-
-                            // Create explosion effect
-                            const explosion: Explosion = {
-                                id: `explosion-${Date.now()}-${Math.random()}`,
-                                x: target.x,
-                                y: target.y,
-                                startTime: Date.now(),
-                                duration: 800,
-                                type: 'enemy_death'
+                        targets.forEach((target) => {
+                            // Handle shield system for shielded enemies
+                            if (target.type === 'shielded' && target.shield && target.shield > 0) {
+                                // eslint-disable-next-line no-param-reassign
+                                target.shield -= 1
+                                // Create shield block effect
+                                const shieldLightning: Lightning = {
+                                    id: `shield-block-${Date.now()}-${Math.random()}`,
+                                    fromX: tower.x,
+                                    fromY: tower.y,
+                                    toX: target.x,
+                                    toY: target.y,
+                                    startTime: Date.now(),
+                                    duration: 200,
+                                    towerType: tower.type,
+                                    isEnemyAttack: false
+                                }
+                                newState.lightnings.push(shieldLightning)
+                                return // Shield blocked the attack
                             }
-                            newState.explosions.push(explosion)
-                        }
+
+                            // Normal damage
+                            // eslint-disable-next-line no-param-reassign
+                            target.health -= tower.damage
+
+                            // Create lightning effect
+                            const lightning: Lightning = {
+                                id: `lightning-${Date.now()}-${Math.random()}`,
+                                fromX: tower.x,
+                                fromY: tower.y,
+                                toX: target.x,
+                                toY: target.y,
+                                startTime: Date.now(),
+                                duration: 300,
+                                towerType: tower.type,
+                                isEnemyAttack: false
+                            }
+                            newState.lightnings.push(lightning)
+
+                            if (target.health <= 0) {
+                                newState.coins += target.reward
+                                newState.score += target.reward * 2
+                                newState.enemiesKilled += 1
+                                newState.totalCoinsEarned += target.reward
+
+                                // Handle special enemy death effects
+                                if (target.type === 'replicator') {
+                                    // Replicator creates 2 copies on death
+                                    for (let i = 0; i < 2; i++) {
+                                        const copy: Enemy = {
+                                            id: `replicator-copy-${Date.now()}-${i}`,
+                                            x: target.x + (Math.random() - 0.5) * 60,
+                                            y: target.y + (Math.random() - 0.5) * 60,
+                                            health: Math.floor(target.maxHealth * 0.6), // Copies have 60% health
+                                            maxHealth: Math.floor(target.maxHealth * 0.6),
+                                            speed: target.speed * 1.2, // Copies are 20% faster
+                                            reward: Math.floor(target.reward * 0.4), // Copies give 40% reward
+                                            type: 'replicator',
+                                            lastAttack: 0,
+                                            shield: 0,
+                                            maxShield: 0,
+                                            hasShield: false,
+                                            slowEffect: 1,
+                                            originalSpeed: target.speed * 1.2
+                                        }
+                                        newState.enemies.push(copy)
+                                    }
+                                }
+
+                                if (target.type === 'voltage') {
+                                    // Voltage enemy disables nearby towers for 3 seconds
+                                    const disableRadius = 100
+                                    newState.towers.forEach((nearbyTower) => {
+                                        const distance = Math.sqrt(
+                                            (target.x - nearbyTower.x) ** 2 +
+                                                (target.y - nearbyTower.y) ** 2
+                                        )
+                                        if (distance <= disableRadius) {
+                                            // eslint-disable-next-line no-param-reassign
+                                            nearbyTower.disabledUntil = now + 3000 // 3 seconds
+                                        }
+                                    })
+                                }
+
+                                // Create explosion effect
+                                const explosion: Explosion = {
+                                    id: `explosion-${Date.now()}-${Math.random()}`,
+                                    x: target.x,
+                                    y: target.y,
+                                    startTime: Date.now(),
+                                    duration: 800,
+                                    type: 'enemy_death'
+                                }
+                                newState.explosions.push(explosion)
+                            }
+                        })
                     }
                 }
             })
@@ -1553,8 +2336,21 @@ export const ProxyDefensePage = () => {
                 // Restore 20 HP on wave completion
                 newState.health = Math.min(newState.health + 20, GAME_CONFIG.startHealth)
 
+                // Check for conflicting events (disk format vs data flood)
+                const shouldFormatActivate =
+                    newState.wave === newState.nextFormatWave && !newState.isFormatting
+                const shouldFloodActivate =
+                    newState.wave === newState.nextDataFloodWave && !newState.isDataFloodActive
+
+                // If both events should activate on same wave, prioritize one and delay the other
+                if (shouldFormatActivate && shouldFloodActivate) {
+                    // Disk format has priority (more dramatic effect)
+                    // Delay data flood to next wave
+                    newState.nextDataFloodWave = newState.wave + 1
+                }
+
                 // Check for disk format event
-                if (newState.wave === newState.nextFormatWave && !newState.isFormatting) {
+                if (shouldFormatActivate && !(shouldFormatActivate && shouldFloodActivate)) {
                     newState.isFormatting = true
                     newState.formatStartTime = Date.now()
                     // Schedule tower destruction after 2 seconds
@@ -1566,6 +2362,32 @@ export const ProxyDefensePage = () => {
                             nextFormatWave: current.wave + 4 + Math.floor(Math.random() * 4) // Next format in 4-7 waves
                         }))
                     }, 2000)
+                } else if (shouldFormatActivate && shouldFloodActivate) {
+                    // Special case: activate format when both events conflict
+                    newState.isFormatting = true
+                    newState.formatStartTime = Date.now()
+                    setTimeout(() => {
+                        setGameState((current) => ({
+                            ...current,
+                            towers: [],
+                            isFormatting: false,
+                            nextFormatWave: current.wave + 4 + Math.floor(Math.random() * 4)
+                        }))
+                    }, 2000)
+                }
+
+                // Check for data flood event (only if no conflict or format wasn't prioritized)
+                if (shouldFloodActivate && !shouldFormatActivate) {
+                    newState.isDataFloodActive = true
+                    newState.dataFloodStartTime = Date.now()
+                    // Schedule next data flood event after 3 seconds
+                    setTimeout(() => {
+                        setGameState((current) => ({
+                            ...current,
+                            isDataFloodActive: false,
+                            nextDataFloodWave: current.wave + 10 + Math.floor(Math.random() * 6) // Next flood in 10-15 waves
+                        }))
+                    }, 3000)
                 }
 
                 setTimeout(() => spawnWave(), 2000)
@@ -1621,8 +2443,43 @@ export const ProxyDefensePage = () => {
             // Disk format event
             nextFormatWave: 4 + Math.floor(Math.random() * 4), // Random between 4-7
             isFormatting: false,
-            formatStartTime: 0
+            formatStartTime: 0,
+            // Data flood event
+            nextDataFloodWave: 10 + Math.floor(Math.random() * 6), // Random between 10-15
+            isDataFloodActive: false,
+            dataFloodStartTime: 0,
+            enemyBuffs: {
+                speedBoost: 1,
+                healthBoost: 1
+            },
+            lastBuffWave: 0
         })
+    }
+
+    const canPlaceTower = (x: number, y: number) => {
+        if (!gameState.selectedTowerType) return false
+
+        const towerType = TOWER_TYPES[gameState.selectedTowerType]
+        if (gameState.coins < towerType.cost) return false
+
+        const tooClose = gameState.towers.some((tower) => {
+            const distance = Math.sqrt((x - tower.x) ** 2 + (y - tower.y) ** 2)
+            return distance < GAME_CONFIG.minTowerDistance
+        })
+
+        if (tooClose) return false
+
+        const margin = 25
+        if (
+            x < margin ||
+            x > GAME_CONFIG.boardWidth - margin ||
+            y < margin ||
+            y > GAME_CONFIG.boardHeight - margin
+        ) {
+            return false
+        }
+
+        return true
     }
 
     const placeTower = (x: number, y: number) => {
@@ -1630,6 +2487,10 @@ export const ProxyDefensePage = () => {
 
         const towerType = TOWER_TYPES[gameState.selectedTowerType]
         if (gameState.coins < towerType.cost) return
+
+        if (!canPlaceTower(x, y)) {
+            return
+        }
 
         const newTower: Tower = {
             id: `tower-${Date.now()}`,
@@ -1642,7 +2503,10 @@ export const ProxyDefensePage = () => {
             cooldown: towerType.cooldown,
             health: towerType.health,
             maxHealth: towerType.health,
-            lastShot: 0
+            lastShot: 0,
+            disabledUntil: undefined,
+            slowdownEffect: gameState.selectedTowerType === 'slowdown' ? 0.4 : undefined,
+            chainTargets: gameState.selectedTowerType === 'chain' ? 2 : undefined
         }
 
         setGameState((prev) => ({
@@ -1661,6 +2525,23 @@ export const ProxyDefensePage = () => {
         const y = event.clientY - rect.top
 
         placeTower(x, y)
+    }
+
+    const handleMouseMove = (event: React.MouseEvent) => {
+        if (!gameState.selectedTowerType) {
+            setMousePosition(null)
+            return
+        }
+
+        const rect = event.currentTarget.getBoundingClientRect()
+        const x = event.clientX - rect.left
+        const y = event.clientY - rect.top
+
+        setMousePosition({ x, y })
+    }
+
+    const handleMouseLeave = () => {
+        setMousePosition(null)
     }
 
     useEffect(() => {
@@ -1786,12 +2667,227 @@ export const ProxyDefensePage = () => {
                     </Badge>
                 </Group>
 
-                {/* Tower Selection */}
-                <Paper bg="gray.9" p="sm" radius="md" shadow="xs" withBorder>
-                    <Grid>
-                        {Object.entries(TOWER_TYPES).map(([type, stats]) => (
-                            <Grid.Col key={type} span={{ base: 12, sm: 4 }}>
-                                <Card
+                {/* Game Board with Tower Selection */}
+                <Group align="flex-start" gap="md" justify="left">
+                    {/* Enemy Tracking Panel */}
+                    <Paper p="md" radius="md" withBorder>
+                        <Title c="red" mb="md" order={5}>
+                            👾 Enemy Tracker
+                        </Title>
+                        <Stack gap="sm">
+                            {Object.entries(ENEMY_TYPES).map(([type, stats]) => {
+                                const count = gameState.enemies.filter(
+                                    (enemy) => enemy.type === type
+                                ).length
+                                return (
+                                    <div
+                                        key={type}
+                                        style={{
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'space-between',
+                                            padding: '8px 12px',
+                                            borderRadius: '8px',
+                                            border: `2px solid ${count > 0 ? stats.color : 'var(--mantine-color-gray-6)'}`,
+
+                                            opacity: count > 0 ? 1 : 0.5,
+                                            transition: 'all 0.3s ease'
+                                        }}
+                                    >
+                                        <div
+                                            style={{
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                justifyContent: 'center',
+                                                width: type === 'spider' ? 50 : 30,
+                                                height: type === 'spider' ? 50 : 30
+                                            }}
+                                        >
+                                            <EnemyInfoSprite type={type as Enemy['type']} />
+                                        </div>
+
+                                        <Badge
+                                            color={count > 0 ? stats.color : 'gray'}
+                                            size="lg"
+                                            style={{
+                                                minWidth: 'auto',
+                                                fontFamily: 'monospace',
+                                                fontSize: '14px'
+                                            }}
+                                            variant={count > 0 ? 'light' : 'outline'}
+                                        >
+                                            {count.toString().padStart(2, '0')}
+                                        </Badge>
+                                    </div>
+                                )
+                            })}
+                        </Stack>
+                    </Paper>
+
+                    <Paper p="md" radius="md" withBorder>
+                        <Box
+                            className={classes.gameBoard}
+                            onClick={handleBoardClick}
+                            onMouseLeave={handleMouseLeave}
+                            onMouseMove={handleMouseMove}
+                            style={{
+                                width: GAME_CONFIG.boardWidth,
+                                height: GAME_CONFIG.boardHeight,
+                                position: 'relative',
+                                background: 'linear-gradient(45deg, #1a1a2e, #16213e)',
+                                border: '2px solid #00d4ff',
+                                borderRadius: '8px',
+                                cursor: gameState.selectedTowerType ? 'crosshair' : 'default',
+                                overflow: 'hidden'
+                            }}
+                        >
+                            {/* Towers */}
+                            {gameState.towers.map((tower) => (
+                                <div key={tower.id}>
+                                    <TowerSprite tower={tower} />
+                                    <HealthBar
+                                        health={tower.health}
+                                        maxHealth={tower.maxHealth}
+                                        x={tower.x}
+                                        y={tower.y}
+                                    />
+                                    <TowerAura tower={tower} />
+                                    {gameState.selectedTowerType && (
+                                        <TowerExclusionZone tower={tower} />
+                                    )}
+                                </div>
+                            ))}
+
+                            {/* Enemies */}
+                            {gameState.enemies.map((enemy) => (
+                                <div key={enemy.id}>
+                                    <EnemySprite enemy={enemy} />
+                                    <HealthBar
+                                        health={enemy.health}
+                                        isEnemy={true}
+                                        maxHealth={enemy.maxHealth}
+                                        x={enemy.x}
+                                        y={enemy.y}
+                                    />
+                                </div>
+                            ))}
+
+                            {/* Explosions */}
+                            {gameState.explosions.map((explosion) => (
+                                <ExplosionSprite explosion={explosion} key={explosion.id} />
+                            ))}
+
+                            {/* Lightnings */}
+                            {gameState.lightnings.map((lightning) => (
+                                <LightningSprite key={lightning.id} lightning={lightning} />
+                            ))}
+
+                            {/* Building Guide - shows if you can build in the current mouse position */}
+                            {mousePosition && gameState.selectedTowerType && (
+                                <BuildingGuide
+                                    isValid={canPlaceTower(mousePosition.x, mousePosition.y)}
+                                    x={mousePosition.x}
+                                    y={mousePosition.y}
+                                />
+                            )}
+
+                            {/* Health Indicator */}
+                            {gameState.isGameStarted && (
+                                <>
+                                    <HealthIndicator
+                                        health={gameState.health}
+                                        isShaking={gameState.isShaking}
+                                    />
+                                    <CoinsIndicator
+                                        coins={gameState.coins}
+                                        isShaking={gameState.isShaking}
+                                    />
+                                </>
+                            )}
+
+                            {/* Critical Health Border Effect */}
+                            {gameState.isGameStarted && gameState.health <= 30 && (
+                                <div className={classes.criticalHealthBorder} />
+                            )}
+
+                            {/* Disk Format Event */}
+                            {gameState.isFormatting && (
+                                <div className={classes.formattedDisplayContainer}>
+                                    <div className={classes.formattedDisplay}>
+                                        <div>💽 DISK FORMATTED 💽</div>
+                                        <div className={classes.formattedDisplayText}>
+                                            All towers destroyed!
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
+
+                            {/* Data Flood Event */}
+                            {gameState.isDataFloodActive && (
+                                <div className={classes.formattedDisplayContainer}>
+                                    <div className={classes.formattedDisplay}>
+                                        <div>🌊 DATA FLOOD 🌊</div>
+                                        <div className={classes.formattedDisplayText}>
+                                            Double enemies, 40% weaker!
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
+
+                            {!gameState.isGameStarted && (
+                                <div
+                                    style={{
+                                        position: 'absolute',
+                                        top: '50%',
+                                        left: '50%',
+                                        transform: 'translate(-50%, -50%)',
+                                        textAlign: 'center',
+                                        color: 'white'
+                                    }}
+                                >
+                                    <Card p="xl" radius="lg" shadow="xl" withBorder>
+                                        <Stack align="center" gap="md">
+                                            <Group align="center" gap="sm">
+                                                <IconShield color="cyan" size={32} />
+                                                <Text c="cyan" fw={700} size="xl">
+                                                    Ready to Defend?
+                                                </Text>
+                                            </Group>
+
+                                            <Text c="white" size="md" ta="center">
+                                                Protect your proxy servers from incoming attacks!
+                                            </Text>
+
+                                            <Button
+                                                color="cyan"
+                                                fullWidth
+                                                leftSection={<IconTarget size={20} />}
+                                                onClick={startGame}
+                                                size="lg"
+                                                variant="filled"
+                                            >
+                                                Start Defense
+                                            </Button>
+                                        </Stack>
+                                    </Card>
+                                </div>
+                            )}
+                        </Box>
+                    </Paper>
+
+                    {/* Tower Selection Panel */}
+                    <Paper p="md" radius="md" withBorder>
+                        <Title c="cyan" mb="md" order={5}>
+                            🏗️ Build Towers
+                        </Title>
+                        <Stack gap="sm">
+                            {Object.entries(TOWER_TYPES).map(([type, stats]) => (
+                                <Button
+                                    color={stats.color}
+                                    disabled={gameState.coins < stats.cost}
+                                    fullWidth
+                                    key={type}
+                                    leftSection={<TowerInfoSprite type={type as Tower['type']} />}
                                     onClick={() => {
                                         if (gameState.coins >= stats.cost) {
                                             setGameState((prev) => ({
@@ -1800,198 +2896,41 @@ export const ProxyDefensePage = () => {
                                             }))
                                         }
                                     }}
-                                    p="md"
-                                    radius="md"
+                                    size="lg"
                                     style={{
-                                        cursor:
-                                            gameState.coins >= stats.cost
-                                                ? 'pointer'
-                                                : 'not-allowed',
-                                        opacity: gameState.coins < stats.cost ? 0.6 : 1,
-                                        border:
-                                            gameState.selectedTowerType === type
-                                                ? `2px solid var(--mantine-color-${stats.color}-5)`
-                                                : `2px solid var(--mantine-color-gray-7)`
+                                        justifyContent: 'flex-start',
+                                        padding: '8px 12px'
                                     }}
+                                    styles={{
+                                        inner: {
+                                            justifyContent: 'flex-start'
+                                        },
+                                        section: {
+                                            marginRight: 8
+                                        }
+                                    }}
+                                    variant={
+                                        gameState.selectedTowerType === type ? 'light' : 'outline'
+                                    }
                                 >
-                                    <Group align="center" gap="sm" mb="sm">
-                                        {type === 'firewall' ? (
-                                            <IconShield color={stats.color} size={20} />
-                                        ) : type === 'antivirus' ? (
-                                            <IconBolt color={stats.color} size={20} />
-                                        ) : (
-                                            <IconServer color={stats.color} size={20} />
-                                        )}
-                                        <Text c={stats.color} fw={600} size="sm">
+                                    <Group justify="space-between" w="100%">
+                                        <Text fw={500} size="sm">
                                             {type.charAt(0).toUpperCase() + type.slice(1)}
                                         </Text>
-                                        {gameState.selectedTowerType === type && (
-                                            <Badge color={stats.color} size="sm" variant="filled">
-                                                Selected
-                                            </Badge>
-                                        )}
-                                    </Group>
-
-                                    <Stack gap="xs">
-                                        <Group justify="space-between">
-                                            <Text c="dimmed" size="xs">
-                                                Cost
-                                            </Text>
-                                            <Badge color="yellow" size="sm" variant="light">
-                                                {stats.cost} coins
-                                            </Badge>
-                                        </Group>
-                                        <Group justify="space-between">
-                                            <Text c="dimmed" size="xs">
-                                                Health
-                                            </Text>
-                                            <Badge color="red" size="sm" variant="light">
-                                                {stats.health} HP
-                                            </Badge>
-                                        </Group>
-                                        <Group justify="space-between">
-                                            <Text c="dimmed" size="xs">
-                                                Damage
-                                            </Text>
-                                            <Badge color="orange" size="sm" variant="light">
-                                                {stats.damage}
-                                            </Badge>
-                                        </Group>
-                                        <Group justify="space-between">
-                                            <Text c="dimmed" size="xs">
-                                                Range
-                                            </Text>
-                                            <Badge color="blue" size="sm" variant="light">
-                                                {stats.range}px
-                                            </Badge>
-                                        </Group>
-                                    </Stack>
-                                </Card>
-                            </Grid.Col>
-                        ))}
-                    </Grid>
-                </Paper>
-
-                {/* Game Board */}
-                <Paper p="md" radius="md" withBorder>
-                    <Box
-                        className={classes.gameBoard}
-                        onClick={handleBoardClick}
-                        style={{
-                            width: GAME_CONFIG.boardWidth,
-                            height: GAME_CONFIG.boardHeight,
-                            position: 'relative',
-                            background: 'linear-gradient(45deg, #1a1a2e, #16213e)',
-                            border: '2px solid #00d4ff',
-                            borderRadius: '8px',
-                            cursor: gameState.selectedTowerType ? 'crosshair' : 'default',
-                            margin: '0 auto',
-                            overflow: 'hidden'
-                        }}
-                    >
-                        {/* Towers */}
-                        {gameState.towers.map((tower) => (
-                            <div key={tower.id}>
-                                <TowerSprite tower={tower} />
-                                <HealthBar
-                                    health={tower.health}
-                                    maxHealth={tower.maxHealth}
-                                    x={tower.x}
-                                    y={tower.y}
-                                />
-                                <TowerAura tower={tower} />
-                            </div>
-                        ))}
-
-                        {/* Enemies */}
-                        {gameState.enemies.map((enemy) => (
-                            <div key={enemy.id}>
-                                <EnemySprite enemy={enemy} />
-                                <HealthBar
-                                    health={enemy.health}
-                                    isEnemy={true}
-                                    maxHealth={enemy.maxHealth}
-                                    x={enemy.x}
-                                    y={enemy.y}
-                                />
-                            </div>
-                        ))}
-
-                        {/* Explosions */}
-                        {gameState.explosions.map((explosion) => (
-                            <ExplosionSprite explosion={explosion} key={explosion.id} />
-                        ))}
-
-                        {/* Lightnings */}
-                        {gameState.lightnings.map((lightning) => (
-                            <LightningSprite key={lightning.id} lightning={lightning} />
-                        ))}
-
-                        {/* Health Indicator */}
-                        {gameState.isGameStarted && (
-                            <HealthIndicator
-                                health={gameState.health}
-                                isShaking={gameState.isShaking}
-                            />
-                        )}
-
-                        {/* Critical Health Border Effect */}
-                        {gameState.isGameStarted && gameState.health <= 30 && (
-                            <div className={classes.criticalHealthBorder} />
-                        )}
-
-                        {/* Disk Format Event */}
-                        {gameState.isFormatting && (
-                            <div className={classes.formattedDisplayContainer}>
-                                <div className={classes.formattedDisplay}>
-                                    <div>💽 DISK FORMATTED 💽</div>
-                                    <div className={classes.formattedDisplayText}>
-                                        All towers destroyed!
-                                    </div>
-                                </div>
-                            </div>
-                        )}
-
-                        {!gameState.isGameStarted && (
-                            <div
-                                style={{
-                                    position: 'absolute',
-                                    top: '50%',
-                                    left: '50%',
-                                    transform: 'translate(-50%, -50%)',
-                                    textAlign: 'center',
-                                    color: 'white'
-                                }}
-                            >
-                                <Card p="xl" radius="lg" shadow="xl" withBorder>
-                                    <Stack align="center" gap="md">
-                                        <Group align="center" gap="sm">
-                                            <IconShield color="cyan" size={32} />
-                                            <Text c="cyan" fw={700} size="xl">
-                                                Ready to Defend?
-                                            </Text>
-                                        </Group>
-
-                                        <Text c="white" size="md" ta="center">
-                                            Protect your proxy servers from incoming attacks!
-                                        </Text>
-
-                                        <Button
-                                            color="cyan"
-                                            fullWidth
-                                            leftSection={<IconTarget size={20} />}
-                                            onClick={startGame}
-                                            size="lg"
-                                            variant="filled"
+                                        <Badge
+                                            color="yellow"
+                                            size="sm"
+                                            style={{ minWidth: 'auto' }}
+                                            variant="light"
                                         >
-                                            Start Defense
-                                        </Button>
-                                    </Stack>
-                                </Card>
-                            </div>
-                        )}
-                    </Box>
-                </Paper>
+                                            {stats.cost}
+                                        </Badge>
+                                    </Group>
+                                </Button>
+                            ))}
+                        </Stack>
+                    </Paper>
+                </Group>
 
                 {/* Game Over Modal */}
                 <Modal
@@ -2502,6 +3441,195 @@ export const ProxyDefensePage = () => {
                     </Paper>
                 )}
 
+                {/* Tower Information Panel */}
+                <Paper
+                    bg="linear-gradient(135deg, var(--mantine-color-dark-6) 0%, var(--mantine-color-dark-7) 100%)"
+                    p="sm"
+                    radius="md"
+                    shadow="xs"
+                    withBorder
+                >
+                    <Title c="cyan" mb="sm" order={4}>
+                        📊 Tower Information
+                    </Title>
+                    <Grid>
+                        {Object.entries(TOWER_TYPES).map(([type, stats]) => (
+                            <Grid.Col key={type} span={{ base: 12, sm: 4 }}>
+                                <Card p="md" radius="md" withBorder>
+                                    <Group align="center" gap="sm" mb="sm">
+                                        <div
+                                            style={{
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                justifyContent: 'center',
+                                                width: 30,
+                                                height: 30
+                                            }}
+                                        >
+                                            <TowerInfoSprite type={type as Tower['type']} />
+                                        </div>
+                                        <Text c={stats.color} fw={600} size="sm">
+                                            {type.charAt(0).toUpperCase() + type.slice(1)}
+                                        </Text>
+                                    </Group>
+
+                                    <Stack gap="xs">
+                                        <Group justify="space-between">
+                                            <Text c="dimmed" size="xs">
+                                                Cost
+                                            </Text>
+                                            <Badge color="yellow" size="sm" variant="light">
+                                                {stats.cost} coins
+                                            </Badge>
+                                        </Group>
+                                        <Group justify="space-between">
+                                            <Text c="dimmed" size="xs">
+                                                Health
+                                            </Text>
+                                            <Badge color="red" size="sm" variant="light">
+                                                {stats.health} HP
+                                            </Badge>
+                                        </Group>
+                                        <Group justify="space-between">
+                                            <Text c="dimmed" size="xs">
+                                                Damage
+                                            </Text>
+                                            <Badge color="orange" size="sm" variant="light">
+                                                {stats.damage}
+                                            </Badge>
+                                        </Group>
+                                        <Group justify="space-between">
+                                            <Text c="dimmed" size="xs">
+                                                Range
+                                            </Text>
+                                            <Badge color="blue" size="sm" variant="light">
+                                                {stats.range}px
+                                            </Badge>
+                                        </Group>
+                                    </Stack>
+                                </Card>
+                            </Grid.Col>
+                        ))}
+                    </Grid>
+                </Paper>
+
+                {/* Enemy Information Panel */}
+                <Paper
+                    bg="linear-gradient(135deg, var(--mantine-color-dark-6) 0%, var(--mantine-color-dark-7) 100%)"
+                    p="sm"
+                    radius="md"
+                    shadow="xs"
+                    withBorder
+                >
+                    <Title c="red" mb="sm" order={4}>
+                        👾 Enemy Information
+                    </Title>
+                    <Grid>
+                        {Object.entries(ENEMY_TYPES).map(([type, stats]) => (
+                            <Grid.Col key={type} span={{ base: 12, sm: 6, md: 4 }}>
+                                <Card p="md" radius="md" withBorder>
+                                    <Group align="center" gap="sm" mb="sm">
+                                        <div
+                                            style={{
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                justifyContent: 'center',
+                                                width: type === 'spider' ? 50 : 30,
+                                                height: type === 'spider' ? 50 : 30
+                                            }}
+                                        >
+                                            <EnemyInfoSprite type={type as Enemy['type']} />
+                                        </div>
+                                        <div>
+                                            <Text c={stats.color} fw={600} size="sm">
+                                                {type.toLocaleUpperCase()}
+                                            </Text>
+                                            {type === 'spider' && (
+                                                <Badge color="purple" size="xs" variant="light">
+                                                    BOSS
+                                                </Badge>
+                                            )}
+                                        </div>
+                                    </Group>
+
+                                    <Stack gap="xs">
+                                        <Group justify="space-between">
+                                            <Text c="dimmed" size="xs">
+                                                Health
+                                            </Text>
+                                            <Badge color="red" size="sm" variant="light">
+                                                {stats.health} HP
+                                            </Badge>
+                                        </Group>
+                                        <Group justify="space-between">
+                                            <Text c="dimmed" size="xs">
+                                                Speed
+                                            </Text>
+                                            <Badge color="blue" size="sm" variant="light">
+                                                {stats.speed}
+                                            </Badge>
+                                        </Group>
+                                        <Group justify="space-between">
+                                            <Text c="dimmed" size="xs">
+                                                Reward
+                                            </Text>
+                                            <Badge color="yellow" size="sm" variant="light">
+                                                {stats.reward} coins
+                                            </Badge>
+                                        </Group>
+                                        <Group justify="space-between">
+                                            <Text c="dimmed" size="xs">
+                                                Damage
+                                            </Text>
+                                            <Badge color="orange" size="sm" variant="light">
+                                                {stats.towerDamage}
+                                            </Badge>
+                                        </Group>
+                                        {stats.hasShield && (
+                                            <Group justify="space-between">
+                                                <Text c="dimmed" size="xs">
+                                                    Shield
+                                                </Text>
+                                                <Badge color="cyan" size="sm" variant="light">
+                                                    {stats.maxShield} blocks
+                                                </Badge>
+                                            </Group>
+                                        )}
+                                        {type === 'spider' && (
+                                            <Group justify="center">
+                                                <Badge color="purple" size="xs" variant="filled">
+                                                    15% spawn chance after wave 3
+                                                </Badge>
+                                            </Group>
+                                        )}
+                                        {type === 'shielded' && (
+                                            <Group justify="center">
+                                                <Badge color="green" size="xs" variant="filled">
+                                                    10% spawn chance after wave 2
+                                                </Badge>
+                                            </Group>
+                                        )}
+                                        {type === 'voltage' && (
+                                            <Group justify="center">
+                                                <Badge color="yellow" size="xs" variant="filled">
+                                                    10% spawn chance after wave 3
+                                                </Badge>
+                                            </Group>
+                                        )}
+                                        {type === 'replicator' && (
+                                            <Group justify="center">
+                                                <Badge color="pink" size="xs" variant="filled">
+                                                    10% spawn chance after wave 4
+                                                </Badge>
+                                            </Group>
+                                        )}
+                                    </Stack>
+                                </Card>
+                            </Grid.Col>
+                        ))}
+                    </Grid>
+                </Paper>
+
                 {/* Detailed Game Mechanics */}
                 <Alert color="cyan" icon={<IconShield />} variant="light">
                     <Text size="sm">
@@ -2518,6 +3646,12 @@ export const ProxyDefensePage = () => {
                         <br />• <strong>Proxy (🔄)</strong> - Support tower with low health (40 HP),
                         light damage (10), long range (100px), fastest cooldown (0.6s). Best
                         against: Multiple weak enemies.
+                        <br />• <strong>Slowdown (❄️)</strong> - Area control tower with medium
+                        health (50 HP), low damage (5), long range (120px), applies 60% slowdown
+                        effect. Best against: Fast enemies and crowd control.
+                        <br />• <strong>Chain Lightning (⚡️)</strong> - Multi-target tower with
+                        good health (70 HP), high damage (25), medium range (90px), hits 2-3 enemies
+                        per shot. Best against: Groups of enemies.
                         <br />
                         <br />
                         <strong>👾 ENEMIES:</strong>
@@ -2533,6 +3667,15 @@ export const ProxyDefensePage = () => {
                         speed (1.8), powerful attacks (35 damage), web-based purple lightning with
                         venom drops. <strong>BOSS ENEMY:</strong> Only spawns after wave 3, 15%
                         chance per wave. High reward (75 coins)!
+                        <br />• <strong>Shielded Bot (🛡️)</strong> - Medium health (100 HP), slow
+                        speed (1.5), blocks first 3 attacks with energy shield. Spawns after wave 2
+                        (10% chance).
+                        <br />• <strong>Voltage Surge (⚡️)</strong> - High health (120 HP), slow
+                        speed (1.2), disables all towers within 100px for 3 seconds when destroyed.
+                        Spawns after wave 3 (10% chance).
+                        <br />• <strong>Replicator (🧬)</strong> - High health (100 HP), slow speed
+                        (1.0), creates 2 weaker copies (60% health, 20% faster) when destroyed.
+                        Spawns after wave 4 (10% chance).
                         <br />
                         <br />
                         <strong>⚔️ COMBAT SYSTEM:</strong>
@@ -2562,15 +3705,39 @@ export const ProxyDefensePage = () => {
                         • Place Antivirus towers behind Firewalls for sustained DPS
                         <br />
                         • Proxy towers are great for covering large areas cheaply
+                        <br />• Slowdown towers are perfect for slowing fast enemies like Malware
+                        <br />• Chain Lightning towers excel against groups of enemies
                         <br />• <strong>CRITICAL:</strong> Keep at least one tower alive - no towers
                         = no healing!
                         <br />
                         • Watch tower health bars - replace destroyed towers quickly!
-                        <br />• Enemy difficulty increases every 5 waves with health multipliers
+                        <br /> • <strong>ESCALATION SYSTEM:</strong> Enemy difficulty increases
+                        every 5 waves: +20% health, +10% speed
                         <br />• <strong>SPIDER STRATEGY:</strong> Focus fire on spiders immediately
                         - they're worth 75 coins but deal massive damage!
+                        <br />• <strong>SHIELDED STRATEGY:</strong> Use rapid-fire towers (Proxy) to
+                        break shields quickly
+                        <br />• <strong>VOLTAGE STRATEGY:</strong> Keep towers spread out to
+                        minimize disable radius
+                        <br />• <strong>REPLICATOR STRATEGY:</strong> Use high-damage towers (Chain
+                        Lightning) to kill before replication
+                        <br />• <strong>DATA FLOOD STRATEGY:</strong> Focus on Chain Lightning and
+                        area-effect towers to handle 2x enemy waves efficiently
                         <br />• Build multiple Firewall towers when facing spiders to absorb their
                         powerful attacks
+                        <br />
+                        <br />
+                        <strong>🏗️ BUILDING RESTRICTIONS:</strong>
+                        <br />
+                        • Towers cannot be placed too close to each other (minimum 45px distance)
+                        <br />
+                        • Red zones around existing towers show where you cannot build
+                        <br />
+                        • Green/Red circle follows your mouse showing valid/invalid placement
+                        <br />
+                        • Towers cannot be placed too close to board edges (25px margin)
+                        <br />
+                        • Plan your tower placement strategically - spacing matters!
                         <br />
                         <br />
                         <strong>💽 DISK FORMAT EVENT:</strong>
@@ -2581,6 +3748,18 @@ export const ProxyDefensePage = () => {
                         <br />
                         • Save coins for quick rebuilding after format events
                         <br />• This adds strategic depth - don't over-invest in one area!
+                        <br />
+                        <br />
+                        <strong>🌊 DATA FLOOD EVENT:</strong>
+                        <br />
+                        • Every 10-15 waves (random), a "DATA FLOOD" event occurs
+                        <br />• <strong>EFFECT:</strong> Wave spawns 2x enemies, but they have 40%
+                        less health
+                        <br />
+                        • Tests your ability to handle multiple targets simultaneously
+                        <br />• Chain Lightning and area-effect towers are most effective during
+                        floods
+                        <br />• Use this opportunity to farm coins with weakened enemies!
                     </Text>
                 </Alert>
             </Stack>
