@@ -1360,12 +1360,12 @@ export const ProxyDefensePage = () => {
             const types = Object.keys(ENEMY_TYPES) as Array<keyof typeof ENEMY_TYPES>
             let randomType: keyof typeof ENEMY_TYPES
 
-            // Spider spawning logic: 15% chance after wave 3, max 2 on screen
+            // Spider spawning logic: 15% chance after wave 3, max 1 on screen
             const shouldSpawnSpider =
                 gameState.wave >= 3 &&
                 Math.random() < 0.15 &&
-                currentSpiders < 2 &&
-                enemies.filter((e) => e.type === 'spider').length < 2
+                currentSpiders < 1 &&
+                enemies.filter((e) => e.type === 'spider').length < 1
 
             if (shouldSpawnSpider) {
                 randomType = 'spider'
@@ -1673,6 +1673,36 @@ export const ProxyDefensePage = () => {
 
     const goHome = () => {
         navigate(ROUTES.DASHBOARD.HOME)
+    }
+
+    const getPerformnaceRating = (
+        score: number
+    ): {
+        color: string
+        rating: string
+    } => {
+        switch (true) {
+            case score > 100_000:
+                return { rating: '👑 DIVINE PROTECTOR', color: 'violet' }
+            case score > 50_000:
+                return { rating: '🌟 LEGENDARY DEFENDER', color: 'green' }
+            case score > 25_000:
+                return { rating: '⚔️ ELITE GUARDIAN', color: 'blue' }
+            case score > 10_000:
+                return { rating: '🛡️ MASTER SENTINEL', color: 'cyan' }
+            case score > 5_000:
+                return { rating: '🥇 VETERAN KEEPER', color: 'teal' }
+            case score > 2_500:
+                return { rating: '🥈 SKILLED PROTECTOR', color: 'yellow' }
+            case score > 1_000:
+                return { rating: '🥉 SEASONED DEFENDER', color: 'orange' }
+            case score > 500:
+                return { rating: '🔰 APPRENTICE GUARDIAN', color: 'red' }
+            case score > 100:
+                return { rating: '🎯 NOVICE SENTINEL', color: 'pink' }
+            default:
+                return { rating: '🌱 ROOKIE ADMIN', color: 'gray' }
+        }
     }
 
     return (
@@ -1984,25 +2014,11 @@ export const ProxyDefensePage = () => {
                                     🎯 Performance Rating
                                 </Text>
                                 <Badge
-                                    color={
-                                        gameState.score > 1000
-                                            ? 'green'
-                                            : gameState.score > 500
-                                              ? 'yellow'
-                                              : gameState.score > 200
-                                                ? 'orange'
-                                                : 'red'
-                                    }
+                                    color={getPerformnaceRating(gameState.score).color}
                                     size="lg"
                                     variant="light"
                                 >
-                                    {gameState.score > 1000
-                                        ? '🥇 LEGENDARY DEFENDER'
-                                        : gameState.score > 500
-                                          ? '🥈 SKILLED PROTECTOR'
-                                          : gameState.score > 200
-                                            ? '🥉 DECENT GUARDIAN'
-                                            : '🔰 ROOKIE ADMIN'}
+                                    {getPerformnaceRating(gameState.score).rating}
                                 </Badge>
                             </Group>
                         </Card>
