@@ -18,6 +18,7 @@ import { SubscriptionSettingsConnector } from '@pages/dashboard/subscription-set
 import { ConfigProfilesPageConnector } from '@pages/dashboard/config-profiles/connectors'
 import { StatisticNodesConnector } from '@pages/dashboard/statistic-nodes/connectors'
 import { ApiTokensPageConnector } from '@pages/dashboard/api-tokens/ui/connectors'
+import { ProxyDefensePageConnector } from '@pages/dashboard/proxy-defense'
 import { HostsPageConnector } from '@pages/dashboard/hosts/ui/connectors'
 import { UsersPageConnector } from '@pages/dashboard/users/ui/connectors'
 import { NodesPageConnector } from '@pages/dashboard/nodes/ui/connectors'
@@ -182,6 +183,12 @@ const router = createBrowserRouter(
                             path={ROUTES.DASHBOARD.UTILS.SUBSCRIPTION_PAGE_BUILDER}
                         />
                     </Route>
+
+                    {/* Easter Egg Routes */}
+                    <Route
+                        element={<ProxyDefensePageConnector />}
+                        path={ROUTES.DASHBOARD.EASTER_EGG.PROXY_DEFENSE}
+                    />
                 </Route>
 
                 <Route element={<NotFoundPageComponent />} path="*" />

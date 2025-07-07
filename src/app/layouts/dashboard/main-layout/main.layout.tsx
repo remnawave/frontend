@@ -2,6 +2,7 @@ import {
     AppShell,
     Badge,
     Burger,
+    Button,
     Container,
     Group,
     Indicator,
@@ -9,16 +10,19 @@ import {
     Text
 } from '@mantine/core'
 import { useClickOutside, useDisclosure, useMediaQuery } from '@mantine/hooks'
+import { Outlet, useNavigate } from 'react-router-dom'
+import { PiGameController } from 'react-icons/pi'
 import { useQuery } from '@tanstack/react-query'
 import { useEffect, useState } from 'react'
-import { Outlet } from 'react-router-dom'
 import semver from 'semver'
 import axios from 'axios'
 
 import { getBuildInfo } from '@shared/utils/get-build-info/get-build-info.util'
 import { BuildInfoModal } from '@shared/ui/build-info-modal/build-info-modal'
+import { useEasterEggStore } from '@entities/dashboard/easter-egg-store'
 import { HeaderControls } from '@shared/ui/header-buttons'
 import { sToMs } from '@shared/utils/time-utils'
+import { ROUTES } from '@shared/constants'
 import { Logo } from '@shared/ui/logo'
 
 import { Navigation } from './navbar/navigation.layout'
@@ -30,6 +34,10 @@ export function MainLayout() {
     const [desktopOpened, { toggle: toggleDesktop }] = useDisclosure(true)
     const [buildInfoModalOpened, setBuildInfoModalOpened] = useState(false)
     const [isMediaQueryReady, setIsMediaQueryReady] = useState(false)
+
+    const navigate = useNavigate()
+    const { incrementClick, isEasterEggUnlocked, isGameModalOpen, closeGameModal } =
+        useEasterEggStore()
 
     const [versions, setVersions] = useState<{
         currentVersion: string
@@ -151,9 +159,31 @@ export function MainLayout() {
                                 size="sm"
                             />
                             <Group gap={4}>
-                                <Logo c="cyan" w="2.5rem" />
+                                {!isEasterEggUnlocked && (
+                                    <Logo
+                                        c="cyan"
+                                        onClick={incrementClick}
+                                        style={{ cursor: 'pointer' }}
+                                        w="2.5rem"
+                                    />
+                                )}
+
+                                {isEasterEggUnlocked && (
+                                    <Logo
+                                        c="pink"
+                                        onClick={() => {
+                                            navigate(ROUTES.DASHBOARD.EASTER_EGG.PROXY_DEFENSE)
+                                        }}
+                                        style={{ cursor: 'pointer' }}
+                                        w="2.5rem"
+                                    />
+                                )}
                                 <Text fw={700} size="lg">
-                                    <Text c="cyan" component="span" fw={700}>
+                                    <Text
+                                        c={isEasterEggUnlocked ? 'pink' : 'cyan'}
+                                        component="span"
+                                        fw={700}
+                                    >
                                         Remna
                                     </Text>
                                     wave
@@ -241,6 +271,59 @@ export function MainLayout() {
                 onClose={() => setBuildInfoModalOpened(false)}
                 opened={buildInfoModalOpened}
             />
+
+            {/* Easter Egg Game Modal */}
+            {isGameModalOpen && (
+                <div
+                    onClick={closeGameModal}
+                    style={{
+                        position: 'fixed',
+                        top: 0,
+                        left: 0,
+                        right: 0,
+                        bottom: 0,
+                        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        zIndex: 1000
+                    }}
+                >
+                    <div
+                        onClick={(e) => e.stopPropagation()}
+                        style={{
+                            background: 'var(--mantine-color-dark-8)',
+                            border: '1px solid var(--mantine-color-gray-6)',
+                            padding: '2rem',
+                            borderRadius: '8px',
+                            textAlign: 'center',
+                            maxWidth: '400px',
+                            width: '90%',
+                            boxShadow: '0 2px 10px rgba(0, 0, 0, 0.1)'
+                        }}
+                    >
+                        <Text fw={700} mb="md" size="xl">
+                            🎉 Easter Egg Found
+                        </Text>
+                        <Text mb="md">You've discovered the hidden Proxy Defense game!</Text>
+                        <Group gap="md" justify="center">
+                            <Button onClick={closeGameModal} size="md" variant="light">
+                                Close
+                            </Button>
+                            <Button
+                                leftSection={<PiGameController size={22} />}
+                                onClick={() => {
+                                    closeGameModal()
+                                    navigate(ROUTES.DASHBOARD.EASTER_EGG.PROXY_DEFENSE)
+                                }}
+                                size="md"
+                            >
+                                Play Game
+                            </Button>
+                        </Group>
+                    </div>
+                </div>
+            )}
         </AppShell>
     ) : (
         <div style={{ height: '100vh' }}></div>
