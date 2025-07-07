@@ -47,6 +47,7 @@ export function MainLayout() {
         latestVersion: '0.0.0'
     })
     const [isNewVersionAvailable, setIsNewVersionAvailable] = useState(false)
+    const [isLogoAnimating, setIsLogoAnimating] = useState(false)
 
     const buildInfo = getBuildInfo()
 
@@ -103,6 +104,15 @@ export function MainLayout() {
     useEffect(() => {
         setIsNewVersionAvailable(semver.gt(versions.latestVersion, versions.currentVersion))
     }, [versions])
+
+    const handleClick = () => {
+        incrementClick()
+
+        setIsLogoAnimating(true)
+        setTimeout(() => {
+            setIsLogoAnimating(false)
+        }, 100)
+    }
 
     return isMediaQueryReady ? (
         <AppShell
@@ -161,8 +171,8 @@ export function MainLayout() {
                             <Group gap={4}>
                                 {!isEasterEggUnlocked && (
                                     <Logo
-                                        c="cyan"
-                                        onClick={incrementClick}
+                                        c={isLogoAnimating ? 'pink' : 'cyan'}
+                                        onClick={handleClick}
                                         style={{ cursor: 'pointer' }}
                                         w="2.5rem"
                                     />
@@ -180,7 +190,7 @@ export function MainLayout() {
                                 )}
                                 <Text fw={700} size="lg">
                                     <Text
-                                        c={isEasterEggUnlocked ? 'pink' : 'cyan'}
+                                        c={isEasterEggUnlocked || isLogoAnimating ? 'pink' : 'cyan'}
                                         component="span"
                                         fw={700}
                                     >
@@ -275,7 +285,6 @@ export function MainLayout() {
             {/* Easter Egg Game Modal */}
             {isGameModalOpen && (
                 <div
-                    onClick={closeGameModal}
                     style={{
                         position: 'fixed',
                         top: 0,

@@ -53,7 +53,7 @@ interface Enemy {
     maxHealth: number
     reward: number
     speed: number
-    type: 'ddos' | 'hacker' | 'malware'
+    type: 'ddos' | 'hacker' | 'malware' | 'spider'
     x: number
     y: number
 }
@@ -156,6 +156,15 @@ const ENEMY_TYPES = {
         towerDamage: 8,
         attackRange: 40,
         attackCooldown: 1200
+    },
+    spider: {
+        health: 180,
+        speed: 1.8,
+        reward: 75,
+        color: 'purple',
+        towerDamage: 35,
+        attackRange: 70,
+        attackCooldown: 600
     }
 }
 
@@ -430,6 +439,181 @@ const drawMalwareEnemy = (ctx: CanvasRenderingContext2D, x: number, y: number) =
         const corruptY = centerY + (Math.random() - 0.5) * 16
         ctx.fillStyle = `rgba(233, 30, 99, ${0.3 + Math.random() * 0.3})`
         ctx.fillRect(corruptX, corruptY, 1, 1)
+    }
+}
+
+const drawSpiderEnemy = (ctx: CanvasRenderingContext2D, x: number, y: number) => {
+    const centerX = x + 25 // Larger center offset for bigger sprite
+    const centerY = y + 25
+
+    // Shadow (larger)
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.4)'
+    ctx.fillRect(centerX - 16, centerY + 18, 32, 8)
+
+    // Spider body segments
+    const time = Date.now() * 0.008
+
+    // Abdomen (back part)
+    ctx.fillStyle = '#4A148C'
+    ctx.fillRect(centerX - 8, centerY + 2, 16, 12)
+    ctx.fillStyle = '#6A1B9A'
+    ctx.fillRect(centerX - 6, centerY + 4, 12, 8)
+
+    // Thorax (middle part)
+    ctx.fillStyle = '#7B1FA2'
+    ctx.fillRect(centerX - 6, centerY - 4, 12, 8)
+    ctx.fillStyle = '#8E24AA'
+    ctx.fillRect(centerX - 4, centerY - 2, 8, 4)
+
+    // Head (front part)
+    ctx.fillStyle = '#9C27B0'
+    ctx.fillRect(centerX - 4, centerY - 8, 8, 6)
+
+    // Eyes (multiple, spider-like)
+    ctx.fillStyle = '#FF1744'
+    ctx.fillRect(centerX - 3, centerY - 7, 2, 2)
+    ctx.fillRect(centerX + 1, centerY - 7, 2, 2)
+    ctx.fillRect(centerX - 1, centerY - 5, 2, 2)
+
+    // Fangs
+    ctx.fillStyle = '#FFF'
+    ctx.fillRect(centerX - 2, centerY - 4, 1, 2)
+    ctx.fillRect(centerX + 1, centerY - 4, 1, 2)
+
+    // Spider legs (8 legs, 4 on each side)
+    const legPositions = [
+        { side: -1, offset: -6 },
+        { side: -1, offset: -2 },
+        { side: -1, offset: 2 },
+        { side: -1, offset: 6 },
+        { side: 1, offset: -6 },
+        { side: 1, offset: -2 },
+        { side: 1, offset: 2 },
+        { side: 1, offset: 6 }
+    ]
+
+    legPositions.forEach((leg, i) => {
+        const legTime = time + i * 0.5
+        const legSway = Math.sin(legTime) * 3
+        const legLength = 12 + Math.sin(legTime * 2) * 2
+
+        // Upper leg segment
+        ctx.fillStyle = '#8E24AA'
+        ctx.fillRect(
+            centerX + leg.side * 8,
+            centerY + leg.offset + legSway,
+            leg.side * legLength * 0.6,
+            2
+        )
+
+        // Lower leg segment
+        ctx.fillStyle = '#7B1FA2'
+        ctx.fillRect(
+            centerX + leg.side * (8 + legLength * 0.6),
+            centerY + leg.offset + legSway + 2,
+            leg.side * legLength * 0.4,
+            2
+        )
+    })
+
+    // Web pattern on abdomen
+    ctx.strokeStyle = '#E1BEE7'
+    ctx.lineWidth = 1
+    ctx.beginPath()
+    ctx.moveTo(centerX - 6, centerY + 4)
+    ctx.lineTo(centerX + 6, centerY + 4)
+    ctx.moveTo(centerX - 6, centerY + 8)
+    ctx.lineTo(centerX + 6, centerY + 8)
+    ctx.moveTo(centerX - 4, centerY + 2)
+    ctx.lineTo(centerX - 4, centerY + 10)
+    ctx.moveTo(centerX + 4, centerY + 2)
+    ctx.lineTo(centerX + 4, centerY + 10)
+    ctx.stroke()
+
+    // Pulsing danger aura
+    const pulseRadius = 20 + Math.sin(time * 3) * 4
+    ctx.strokeStyle = `rgba(156, 39, 176, ${0.4 + Math.sin(time * 3) * 0.3})`
+    ctx.lineWidth = 2
+    ctx.beginPath()
+    ctx.arc(centerX, centerY, pulseRadius, 0, Math.PI * 2)
+    ctx.stroke()
+
+    // Venom drip effect
+    if (Math.floor(time * 4) % 3 === 0) {
+        ctx.fillStyle = '#76FF03'
+        ctx.fillRect(centerX - 1, centerY - 3, 2, 4)
+    }
+}
+
+const drawSpiderAttack = (
+    ctx: CanvasRenderingContext2D,
+    fromX: number,
+    fromY: number,
+    toX: number,
+    toY: number,
+    progress: number
+) => {
+    const alpha = 1 - progress * 0.5
+
+    // Spider web attack - creates web strands
+    const segments = 6
+    const points: { x: number; y: number }[] = []
+
+    points.push({ x: fromX, y: fromY })
+
+    for (let i = 1; i < segments; i++) {
+        const t = i / segments
+        const baseX = fromX + (toX - fromX) * t
+        const baseY = fromY + (toY - fromY) * t
+
+        // Web-like pattern - sticky and curved
+        const waveOffset = Math.sin(t * Math.PI * 2) * 8
+        const perpX = -(toY - fromY)
+        const perpY = toX - fromX
+        const perpLength = Math.sqrt(perpX * perpX + perpY * perpY)
+
+        if (perpLength > 0) {
+            const normalizedPerpX = perpX / perpLength
+            const normalizedPerpY = perpY / perpLength
+
+            points.push({
+                x: baseX + normalizedPerpX * waveOffset,
+                y: baseY + normalizedPerpY * waveOffset
+            })
+        }
+    }
+
+    points.push({ x: toX, y: toY })
+
+    // Draw main web strand
+    ctx.strokeStyle = `rgba(156, 39, 176, ${alpha})`
+    ctx.lineWidth = 4
+    ctx.beginPath()
+    ctx.moveTo(points[0].x, points[0].y)
+    for (let i = 1; i < points.length; i++) {
+        ctx.lineTo(points[i].x, points[i].y)
+    }
+    ctx.stroke()
+
+    // Draw secondary web strands
+    for (let strand = 0; strand < 3; strand++) {
+        const offset = (strand - 1) * 6
+        ctx.strokeStyle = `rgba(156, 39, 176, ${alpha * (0.6 - strand * 0.2)})`
+        ctx.lineWidth = 2 - strand * 0.5
+        ctx.beginPath()
+        ctx.moveTo(fromX + offset, fromY)
+        for (let i = 1; i < points.length; i++) {
+            ctx.lineTo(points[i].x + offset, points[i].y)
+        }
+        ctx.stroke()
+    }
+
+    // Add venom drops
+    for (let i = 0; i < 4; i++) {
+        const dropX = fromX + (toX - fromX) * (0.2 + i * 0.2)
+        const dropY = fromY + (toY - fromY) * (0.2 + i * 0.2)
+        ctx.fillStyle = `rgba(118, 255, 3, ${alpha * 0.8})`
+        ctx.fillRect(dropX - 1, dropY - 1, 2, 2)
     }
 }
 
@@ -757,6 +941,9 @@ const drawEnemyAttack = (
         case 'malware':
             drawMalwareAttack(ctx, fromX, fromY, toX, toY, progress)
             break
+        case 'spider':
+            drawSpiderAttack(ctx, fromX, fromY, toX, toY, progress)
+            break
         default:
             break
     }
@@ -810,6 +997,7 @@ const TowerSprite = ({ tower }: { tower: Tower }) => {
 
 const EnemySprite = ({ enemy }: { enemy: Enemy }) => {
     const canvasRef = useRef<HTMLCanvasElement>(null)
+    const spriteSize = enemy.type === 'spider' ? 50 : 30 // Larger sprite for spider
 
     useEffect(() => {
         const canvas = canvasRef.current
@@ -819,7 +1007,7 @@ const EnemySprite = ({ enemy }: { enemy: Enemy }) => {
         if (!ctx) return
 
         // Clear canvas
-        ctx.clearRect(0, 0, 30, 30)
+        ctx.clearRect(0, 0, spriteSize, spriteSize)
 
         // Draw enemy based on type
         switch (enemy.type) {
@@ -832,22 +1020,25 @@ const EnemySprite = ({ enemy }: { enemy: Enemy }) => {
             case 'malware':
                 drawMalwareEnemy(ctx, 0, 0)
                 break
+            case 'spider':
+                drawSpiderEnemy(ctx, 0, 0)
+                break
             default:
                 break
         }
-    }, [enemy.type, enemy.health, enemy.maxHealth])
+    }, [enemy.type, enemy.health, enemy.maxHealth, spriteSize])
 
     return (
         <canvas
-            height={30}
+            height={spriteSize}
             ref={canvasRef}
             style={{
                 position: 'absolute',
-                left: enemy.x - 15,
-                top: enemy.y - 15,
+                left: enemy.x - spriteSize / 2,
+                top: enemy.y - spriteSize / 2,
                 imageRendering: 'pixelated'
             }}
-            width={30}
+            width={spriteSize}
         />
     )
 }
@@ -921,36 +1112,44 @@ const HealthBar = ({
     maxHealth: number
     x: number
     y: number
-}) => (
-    <div
-        style={{
-            position: 'absolute',
-            top: isEnemy ? y - 23 : y - 25,
-            left: x - 20,
-            right: x + 20,
-            width: 40,
-            height: 4,
-            backgroundColor: 'rgba(255,255,255,0.3)',
-            borderRadius: 2
-        }}
-    >
+}) => {
+    // Make health bar wider for spider
+    const barWidth = isEnemy && maxHealth > 100 ? 60 : 40
+    const barHeight = isEnemy && maxHealth > 100 ? 6 : 4
+    const offsetY = isEnemy ? (maxHealth > 100 ? -28 : -23) : -25
+
+    return (
         <div
             style={{
-                height: '100%',
-                backgroundColor: isEnemy
-                    ? 'red'
-                    : health > maxHealth * 0.5
-                      ? 'green'
-                      : health > maxHealth * 0.25
-                        ? 'yellow'
-                        : 'red',
-                borderRadius: 2,
-                width: `${Math.max(0, (health / maxHealth) * 100)}%`,
-                transition: 'width 0.3s ease'
+                position: 'absolute',
+                top: y + offsetY,
+                left: x - barWidth / 2,
+                width: barWidth,
+                height: barHeight,
+                backgroundColor: 'rgba(255,255,255,0.3)',
+                borderRadius: 2
             }}
-        />
-    </div>
-)
+        >
+            <div
+                style={{
+                    height: '100%',
+                    backgroundColor: isEnemy
+                        ? maxHealth > 100
+                            ? 'purple'
+                            : 'red' // Purple for spider
+                        : health > maxHealth * 0.5
+                          ? 'green'
+                          : health > maxHealth * 0.25
+                            ? 'yellow'
+                            : 'red',
+                    borderRadius: 2,
+                    width: `${Math.max(0, (health / maxHealth) * 100)}%`,
+                    transition: 'width 0.3s ease'
+                }}
+            />
+        </div>
+    )
+}
 
 // Aura component for showing tower range
 const TowerAura = ({ tower }: { tower: Tower }) => {
@@ -1154,9 +1353,28 @@ export const ProxyDefensePage = () => {
         const enemies: Enemy[] = []
         const waveMultiplier = Math.floor(gameState.wave / 5) + 1
 
+        // Count current spiders on screen
+        const currentSpiders = gameState.enemies.filter((enemy) => enemy.type === 'spider').length
+
         for (let i = 0; i < GAME_CONFIG.waveEnemyCount + gameState.wave; i++) {
             const types = Object.keys(ENEMY_TYPES) as Array<keyof typeof ENEMY_TYPES>
-            const randomType = types[Math.floor(Math.random() * types.length)]
+            let randomType: keyof typeof ENEMY_TYPES
+
+            // Spider spawning logic: 15% chance after wave 3, max 2 on screen
+            const shouldSpawnSpider =
+                gameState.wave >= 3 &&
+                Math.random() < 0.15 &&
+                currentSpiders < 2 &&
+                enemies.filter((e) => e.type === 'spider').length < 2
+
+            if (shouldSpawnSpider) {
+                randomType = 'spider'
+            } else {
+                // Filter out spider from regular spawning
+                const regularTypes = types.filter((type) => type !== 'spider')
+                randomType = regularTypes[Math.floor(Math.random() * regularTypes.length)]
+            }
+
             const enemyTemplate = ENEMY_TYPES[randomType]
 
             enemies.push({
@@ -1176,7 +1394,7 @@ export const ProxyDefensePage = () => {
             ...prev,
             enemies: [...prev.enemies, ...enemies]
         }))
-    }, [gameState.wave])
+    }, [gameState.wave, gameState.enemies])
 
     const updateGame = useCallback(() => {
         setGameState((prev) => {
@@ -2295,6 +2513,10 @@ export const ProxyDefensePage = () => {
                         <br />• <strong>Malware (🦠)</strong> - Low health (15 HP), very fast speed
                         (4), weak but frequent attacks, purple viral lightning with organic
                         patterns.
+                        <br />• <strong>Spider (🕷️)</strong> - Very high health (180 HP), medium
+                        speed (1.8), powerful attacks (35 damage), web-based purple lightning with
+                        venom drops. <strong>BOSS ENEMY:</strong> Only spawns after wave 3, 15%
+                        chance per wave. High reward (75 coins)!
                         <br />
                         <br />
                         <strong>⚔️ COMBAT SYSTEM:</strong>
@@ -2329,6 +2551,10 @@ export const ProxyDefensePage = () => {
                         <br />
                         • Watch tower health bars - replace destroyed towers quickly!
                         <br />• Enemy difficulty increases every 5 waves with health multipliers
+                        <br />• <strong>SPIDER STRATEGY:</strong> Focus fire on spiders immediately
+                        - they're worth 75 coins but deal massive damage!
+                        <br />• Build multiple Firewall towers when facing spiders to absorb their
+                        powerful attacks
                         <br />
                         <br />
                         <strong>💽 DISK FORMAT EVENT:</strong>
