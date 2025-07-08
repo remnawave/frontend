@@ -22,7 +22,8 @@ import {
     PiEnvelopeDuotone,
     PiFloppyDiskDuotone,
     PiTelegramLogoDuotone,
-    PiUserDuotone
+    PiUserDuotone,
+    PiXBold
 } from 'react-icons/pi'
 import { TbChartLine, TbDevices2, TbMail, TbSettings, TbShield } from 'react-icons/tb'
 import { CreateUserCommand, USERS_STATUS } from '@remnawave/backend-contract'
@@ -167,10 +168,15 @@ export const CreateUserModalWidget = () => {
     return (
         <Modal
             centered
+            closeButtonProps={{
+                icon: <PiXBold size={26} />
+            }}
+            fullScreen={isMobile}
             onClose={handleCloseModal}
             opened={isModalOpen}
             size="1000px"
             title={t('create-user-modal.widget.create-user')}
+            transitionProps={isMobile ? { transition: 'fade', duration: 200 } : undefined}
         >
             {isInternalSquadsLoading || isTagsLoading ? (
                 <LoaderModalShared

@@ -1,7 +1,9 @@
 import { CreateNodeCommand } from '@remnawave/backend-contract'
+import { em, Group, Modal, Text } from '@mantine/core'
 import { useForm, zodResolver } from '@mantine/form'
-import { Group, Modal, Text } from '@mantine/core'
 import { useTranslation } from 'react-i18next'
+import { useMediaQuery } from '@mantine/hooks'
+import { PiXBold } from 'react-icons/pi'
 import { useState } from 'react'
 
 import { useNodesStoreActions, useNodesStoreCreateModalIsOpen } from '@entities/dashboard/nodes'
@@ -17,6 +19,8 @@ export const CreateNodeModalWidget = () => {
     const actions = useNodesStoreActions()
 
     const { data: pubKey } = useGetPubKey()
+
+    const isMobile = useMediaQuery(`(max-width: ${em(750)})`)
 
     const [advancedOpened, setAdvancedOpened] = useState(false)
 
@@ -62,6 +66,10 @@ export const CreateNodeModalWidget = () => {
     return (
         <Modal
             centered
+            closeButtonProps={{
+                icon: <PiXBold size={26} />
+            }}
+            fullScreen={isMobile}
             onClose={handleClose}
             opened={isModalOpen}
             size="900px"
@@ -70,6 +78,7 @@ export const CreateNodeModalWidget = () => {
                     <Text fw={500}>{t('create-node-modal.widget.create-node')}</Text>
                 </Group>
             }
+            transitionProps={isMobile ? { transition: 'fade', duration: 200 } : undefined}
         >
             <BaseNodeForm
                 advancedOpened={advancedOpened}

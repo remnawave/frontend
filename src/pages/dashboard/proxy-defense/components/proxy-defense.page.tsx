@@ -14,7 +14,6 @@ import {
     IconSwords,
     IconTarget,
     IconTrendingUp,
-    IconTrophy,
     IconUsers
 } from '@tabler/icons-react'
 import {
@@ -23,6 +22,7 @@ import {
     Badge,
     Box,
     Button,
+    ButtonGroup,
     Card,
     Container,
     Grid,
@@ -36,9 +36,11 @@ import {
     Tooltip
 } from '@mantine/core'
 import { useCallback, useEffect, useRef, useState } from 'react'
+import { PiWaveSawtooth } from 'react-icons/pi'
 import { useNavigate } from 'react-router-dom'
 import { HiRefresh } from 'react-icons/hi'
 
+import { MusicPlayer } from '@shared/ui/music-player/music-player.shared'
 import { useEasterEggStore } from '@entities/dashboard/easter-egg-store'
 import { ROUTES } from '@shared/constants'
 
@@ -53,6 +55,7 @@ interface Enemy {
     hasShield?: boolean
     health: number
     id: string
+    isOriginal?: boolean // For replicators - only originals can create copies
     lastAttack: number
     maxHealth: number
     maxShield?: number // Maximum number of shield blocks
@@ -105,10 +108,251 @@ interface Lightning {
     toY: number
 }
 
+// Global Events System
+type GlobalEventType = 'data_flood' | 'disk_format'
+
+interface GlobalEventConfig {
+    canCoexist: GlobalEventType[] // Which events can run simultaneously
+    description: string
+    duration: number // How long the event lasts (ms)
+    icon: string
+    maxWaveInterval: number // Maximum waves between occurrences
+    minWaveInterval: number // Minimum waves between occurrences
+    name: string
+    priority: number // Higher number = higher priority
+    type: GlobalEventType
+}
+
+interface ActiveGlobalEvent {
+    config: GlobalEventConfig
+    duration: number
+    startTime: number
+    startWave: number
+    type: GlobalEventType
+}
+
+interface GlobalEventSchedule {
+    config: GlobalEventConfig
+    scheduledWave: number
+    type: GlobalEventType
+}
+
+interface GlobalEventsState {
+    activeEvents: ActiveGlobalEvent[]
+    lastEventWave: number
+    scheduledEvents: GlobalEventSchedule[]
+}
+
+const GLOBAL_EVENT_CONFIGS: Record<GlobalEventType, GlobalEventConfig> = {
+    disk_format: {
+        type: 'disk_format',
+        name: 'DISK FORMATTED',
+        icon: '💽',
+        description: 'All towers destroyed!',
+        priority: 100, // Highest priority
+        duration: 2000,
+        minWaveInterval: 4,
+        maxWaveInterval: 7,
+        canCoexist: []
+    },
+    data_flood: {
+        type: 'data_flood',
+        name: 'DATA FLOOD',
+        icon: '🌊',
+        description: 'Double enemies, 40% weaker!',
+        priority: 80,
+        duration: 3000,
+        minWaveInterval: 2,
+        maxWaveInterval: 5,
+        canCoexist: []
+    }
+}
+
+class GlobalEventManager {
+    static activateScheduledEvents(
+        currentWave: number,
+        eventsState: GlobalEventsState
+    ): {
+        activatedEvents: GlobalEventConfig[]
+        eventsState: GlobalEventsState
+    } {
+        const newState = { ...eventsState }
+        const activatedEvents: GlobalEventConfig[] = []
+
+        // Find events scheduled for this wave
+        const eventsToActivate = newState.scheduledEvents.filter(
+            (event) => event.scheduledWave === currentWave
+        )
+
+        if (eventsToActivate.length === 0) {
+            return { eventsState: newState, activatedEvents }
+        }
+
+        // Handle conflicts - sort by priority (higher = more important)
+        eventsToActivate.sort((a, b) => b.config.priority - a.config.priority)
+
+        for (const eventToActivate of eventsToActivate) {
+            const canActivate = this.canEventActivate(eventToActivate.config, newState.activeEvents)
+
+            if (canActivate) {
+                // Activate the event
+                newState.activeEvents.push({
+                    type: eventToActivate.config.type,
+                    startWave: currentWave,
+                    startTime: Date.now(),
+                    duration: eventToActivate.config.duration,
+                    config: eventToActivate.config
+                })
+
+                activatedEvents.push(eventToActivate.config)
+                newState.lastEventWave = currentWave
+
+                // Remove higher priority events that can't coexist
+                newState.activeEvents = newState.activeEvents.filter((activeEvent) => {
+                    if (activeEvent.type === eventToActivate.config.type) return true
+                    return (
+                        eventToActivate.config.canCoexist.includes(activeEvent.type) ||
+                        activeEvent.config.canCoexist.includes(eventToActivate.config.type)
+                    )
+                })
+            } else {
+                // Reschedule for later
+                eventToActivate.scheduledWave = currentWave + 2
+            }
+        }
+
+        // Remove activated events from scheduled
+        newState.scheduledEvents = newState.scheduledEvents.filter(
+            (event) => !activatedEvents.some((activated) => activated.type === event.type)
+        )
+
+        return { eventsState: newState, activatedEvents }
+    }
+
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    static applyEventEffects(eventType: GlobalEventType, gameState: GameState): Partial<GameState> {
+        switch (eventType) {
+            case 'data_flood': {
+                // Effects applied in spawnWave and enemy logic
+                return {}
+            }
+
+            case 'disk_format': {
+                return { towers: [] }
+            }
+
+            default: {
+                return {}
+            }
+        }
+    }
+
+    static getActiveEventMultipliers(eventsState: GlobalEventsState): {
+        enemyCountMultiplier: number
+        enemyHealthMultiplier: number
+        enemySpeedMultiplier: number
+    } {
+        let enemyCountMultiplier = 1
+        let enemyHealthMultiplier = 1
+        const enemySpeedMultiplier = 1
+
+        if (this.isEventActive('data_flood', eventsState)) {
+            enemyCountMultiplier = 2
+            enemyHealthMultiplier = 0.6 // 40% weaker
+        }
+
+        return {
+            enemyCountMultiplier,
+            enemyHealthMultiplier,
+            enemySpeedMultiplier
+        }
+    }
+
+    static isEventActive(eventType: GlobalEventType, eventsState: GlobalEventsState): boolean {
+        const now = Date.now()
+        return eventsState.activeEvents.some(
+            (event) => event.type === eventType && now - event.startTime < event.duration
+        )
+    }
+
+    static scheduleNextEvents(
+        currentWave: number,
+        eventsState: GlobalEventsState
+    ): GlobalEventsState {
+        const newState = { ...eventsState }
+
+        // Remove completed events
+        const now = Date.now()
+        newState.activeEvents = newState.activeEvents.filter(
+            (event) => now - event.startTime < event.duration
+        )
+
+        // Schedule events individually for each type to guarantee intervals
+        Object.values(GLOBAL_EVENT_CONFIGS).forEach((eventConfig) => {
+            // Check if this event type is already scheduled
+            const hasScheduledEvent = newState.scheduledEvents.some(
+                (scheduled) => scheduled.type === eventConfig.type
+            )
+
+            // Skip if already scheduled
+            if (hasScheduledEvent) return
+
+            // Find the last wave when this specific event type occurred
+            const lastWaveForThisEvent = Math.max(
+                // Last time this event was active
+                ...newState.activeEvents
+                    .filter((e) => e.type === eventConfig.type)
+                    .map((e) => e.startWave),
+                // Last time this event was scheduled
+                ...newState.scheduledEvents
+                    .filter((e) => e.type === eventConfig.type)
+                    .map((e) => e.scheduledWave),
+                // Fallback to global last event wave
+                eventsState.lastEventWave || 0
+            )
+
+            const wavesSinceLastEvent = currentWave - lastWaveForThisEvent
+
+            // Schedule if enough waves have passed for this specific event
+            if (wavesSinceLastEvent >= eventConfig.minWaveInterval) {
+                const waveOffset =
+                    Math.floor(
+                        Math.random() *
+                            (eventConfig.maxWaveInterval - eventConfig.minWaveInterval + 1)
+                    ) + eventConfig.minWaveInterval
+
+                newState.scheduledEvents.push({
+                    type: eventConfig.type,
+                    scheduledWave: currentWave + waveOffset,
+                    config: eventConfig
+                })
+            }
+        })
+
+        // Sort by wave
+        newState.scheduledEvents.sort((a, b) => a.scheduledWave - b.scheduledWave)
+
+        return newState
+    }
+
+    private static canEventActivate(
+        eventConfig: GlobalEventConfig,
+        activeEvents: ActiveGlobalEvent[]
+    ): boolean {
+        if (activeEvents.length === 0) return true
+
+        // Check if any active event conflicts
+        return activeEvents.every(
+            (activeEvent) =>
+                eventConfig.canCoexist.includes(activeEvent.type) ||
+                activeEvent.config.canCoexist.includes(eventConfig.type)
+        )
+    }
+}
+
 interface GameState {
     coins: number
     coinsSpent: number
-    dataFloodStartTime: number
     enemies: Enemy[]
     // Statistics
     enemiesKilled: number
@@ -117,11 +361,9 @@ interface GameState {
         speedBoost: number
     }
     explosions: Explosion[]
-    formatStartTime: number
+    globalEvents: GlobalEventsState
     health: number
     healthLost: number
-    isDataFloodActive: boolean
-    isFormatting: boolean
     isGameOver: boolean
     isGameStarted: boolean
     isShaking: boolean
@@ -129,15 +371,13 @@ interface GameState {
     // Visual effects
     lastDamageTime: number
     lastHealthRegen: number
+    lastInterestPayment: number // Track interest payments
     lastMoneyRegen: number
     lightnings: Lightning[]
-    // Data flood event
-    nextDataFloodWave: number
-    // Disk format event
-    nextFormatWave: number
     score: number
     selectedTowerType: null | Tower['type']
     totalCoinsEarned: number
+    totalInterestEarned: number // Track total interest earned
     towers: Tower[]
     towersBuilt: number
     wave: number
@@ -256,6 +496,8 @@ const ENEMY_TYPES = {
         slowEffect: 1,
         disabledUntil: 0,
         buffs: undefined
+        // Note: Original replicators spawn with isOriginal: true and can create 2 copies on death
+        // Copies have isOriginal: false and cannot replicate further
     }
 }
 
@@ -265,7 +507,17 @@ const GAME_CONFIG = {
     startHealth: 100,
     startCoins: 100,
     waveEnemyCount: 5,
-    minTowerDistance: 45 // Minimum distance between towers
+    minTowerDistance: 45, // Minimum distance between towers
+    // Economy configuration
+    economy: {
+        basePassiveIncome: 5,
+        waveCompletionBonus: 50,
+        killBonusMultiplier: 1,
+        interestRate: 0.02,
+        interestInterval: 10_000, // milliseconds
+        maxInterestBase: 1000, // Max coins that earn interest (prevents exponential growth)
+        passiveIncomeLimit: 1000 // Passive income stops when player has more than this amount
+    }
 }
 
 // Pixel art drawing functions
@@ -1134,7 +1386,12 @@ const drawVoltageEnemy = (ctx: CanvasRenderingContext2D, x: number, y: number) =
     ctx.fill()
 }
 
-const drawReplicatorEnemy = (ctx: CanvasRenderingContext2D, x: number, y: number) => {
+const drawReplicatorEnemy = (
+    ctx: CanvasRenderingContext2D,
+    x: number,
+    y: number,
+    isOriginal: boolean = true
+) => {
     const centerX = x + 15
     const centerY = y + 15
     const time = Date.now() * 0.008
@@ -1143,17 +1400,17 @@ const drawReplicatorEnemy = (ctx: CanvasRenderingContext2D, x: number, y: number
     ctx.fillStyle = 'rgba(0, 0, 0, 0.2)'
     ctx.fillRect(centerX - 8, centerY + 10, 16, 4)
 
-    // Main body
-    ctx.fillStyle = '#E91E63'
+    // Main body - darker for copies
+    ctx.fillStyle = isOriginal ? '#E91E63' : '#AD1457'
     ctx.fillRect(centerX - 6, centerY - 2, 12, 8)
 
-    // Replication chambers
-    ctx.fillStyle = '#C2185B'
+    // Replication chambers - darker for copies
+    ctx.fillStyle = isOriginal ? '#C2185B' : '#8E0038'
     ctx.fillRect(centerX - 8, centerY - 1, 3, 6)
     ctx.fillRect(centerX + 5, centerY - 1, 3, 6)
 
-    // Head/control unit
-    ctx.fillStyle = '#F06292'
+    // Head/control unit - darker for copies
+    ctx.fillStyle = isOriginal ? '#F06292' : '#C2185B'
     ctx.fillRect(centerX - 4, centerY - 6, 8, 6)
 
     // Scanning eyes
@@ -1359,7 +1616,8 @@ const EnemyInfoSprite = ({ type }: { type: Enemy['type'] }) => {
             hasShield: ENEMY_TYPES[type].hasShield,
             slowEffect: 1,
             originalSpeed: ENEMY_TYPES[type].speed,
-            buffs: undefined
+            buffs: undefined,
+            isOriginal: type === 'replicator' ? true : undefined
         }
 
         // Draw enemy based on type (same functions as in game)
@@ -1374,7 +1632,7 @@ const EnemyInfoSprite = ({ type }: { type: Enemy['type'] }) => {
                 drawMalwareEnemy(ctx, 0, 0)
                 break
             case 'replicator':
-                drawReplicatorEnemy(ctx, 0, 0)
+                drawReplicatorEnemy(ctx, 0, 0, mockEnemy.isOriginal ?? true)
                 break
             case 'shielded':
                 drawShieldedEnemy(ctx, 0, 0, mockEnemy.shield, mockEnemy.maxShield)
@@ -1548,7 +1806,7 @@ const EnemySprite = ({ enemy }: { enemy: Enemy }) => {
                 drawMalwareEnemy(ctx, 0, 0)
                 break
             case 'replicator':
-                drawReplicatorEnemy(ctx, 0, 0)
+                drawReplicatorEnemy(ctx, 0, 0, enemy.isOriginal ?? true)
                 break
             case 'shielded':
                 drawShieldedEnemy(ctx, 0, 0, enemy.shield || 0, enemy.maxShield || 0)
@@ -1562,7 +1820,15 @@ const EnemySprite = ({ enemy }: { enemy: Enemy }) => {
             default:
                 break
         }
-    }, [enemy.type, enemy.health, enemy.maxHealth, enemy.shield, enemy.maxShield, spriteSize])
+    }, [
+        enemy.type,
+        enemy.health,
+        enemy.maxHealth,
+        enemy.shield,
+        enemy.maxShield,
+        enemy.isOriginal,
+        spriteSize
+    ])
 
     return (
         <canvas
@@ -1768,8 +2034,17 @@ const HealthIndicator = ({ health, isShaking }: { health: number; isShaking: boo
 }
 
 const CoinsIndicator = ({ coins, isShaking }: { coins: number; isShaking: boolean }) => {
-    const coinsColor = coins > 70 ? '#fdcb6e' : coins > 30 ? '#fdcb6e' : '#e84393'
+    const isPassiveDisabled = coins > GAME_CONFIG.economy.passiveIncomeLimit
     const isLowCoins = coins <= 30
+
+    // Color logic: red if passive disabled, normal colors otherwise
+    const coinsColor = isPassiveDisabled
+        ? '#e74c3c' // Red when passive income is disabled
+        : coins > 70
+          ? '#fdcb6e'
+          : coins > 30
+            ? '#fdcb6e'
+            : '#e84393'
 
     return (
         <div
@@ -1791,15 +2066,21 @@ const CoinsIndicator = ({ coins, isShaking }: { coins: number; isShaking: boolea
                     display: 'flex',
                     alignItems: 'center',
                     gap: '6px',
-                    boxShadow: isLowCoins ? `0 0 15px ${coinsColor}` : '0 2px 8px rgba(0,0,0,0.3)'
+                    boxShadow:
+                        isLowCoins || isPassiveDisabled
+                            ? `0 0 15px ${coinsColor}`
+                            : '0 2px 8px rgba(0,0,0,0.3)'
                 }}
             >
                 <IconCoins
                     color={coinsColor}
                     size={16}
                     style={{
-                        filter: isLowCoins ? 'drop-shadow(0 0 4px #e84393)' : undefined,
-                        animation: isLowCoins ? 'pulse 1s infinite' : undefined
+                        filter:
+                            isLowCoins || isPassiveDisabled
+                                ? 'drop-shadow(0 0 4px #e84393)'
+                                : undefined,
+                        animation: isLowCoins || isPassiveDisabled ? 'pulse 1s infinite' : undefined
                     }}
                 />
                 <Text
@@ -1812,6 +2093,53 @@ const CoinsIndicator = ({ coins, isShaking }: { coins: number; isShaking: boolea
                     }}
                 >
                     {coins.toString().padStart(4, '0')}
+                </Text>
+            </div>
+        </div>
+    )
+}
+
+const WaveIndicator = ({ waveNumber }: { waveNumber: number }) => {
+    return (
+        <div
+            style={{
+                position: 'absolute',
+                top: 10,
+                right: 200,
+                zIndex: 10,
+                pointerEvents: 'none'
+            }}
+        >
+            <div
+                style={{
+                    backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                    padding: '8px 12px',
+                    borderRadius: '20px',
+                    border: `2px solid var(--mantine-color-indigo-6)`,
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '6px',
+                    boxShadow: `0 0 15px var(--mantine-color-indigo-9)`
+                }}
+            >
+                <PiWaveSawtooth
+                    color="var(--mantine-color-indigo-6)"
+                    size={16}
+                    style={{
+                        filter: 'drop-shadow(0 0 4px #e84393)',
+                        animation: 'pulse 1s infinite'
+                    }}
+                />
+                <Text
+                    ff="monospace"
+                    fw={700}
+                    size="sm"
+                    style={{
+                        color: 'var(--mantine-color-indigo-6)',
+                        textShadow: '1px 1px 2px rgba(0,0,0,0.8)'
+                    }}
+                >
+                    {waveNumber.toString().padStart(4, '0')}
                 </Text>
             </div>
         </div>
@@ -1942,6 +2270,65 @@ const BuildingGuide = ({ x, y, isValid }: { isValid: boolean; x: number; y: numb
     )
 }
 
+// Events Schedule Display
+const EventsScheduleDisplay = ({
+    globalEvents,
+    currentWave
+}: {
+    currentWave: number
+    globalEvents: GlobalEventsState
+}) => {
+    const upcomingEvents = globalEvents.scheduledEvents
+        .filter((event) => event.scheduledWave > currentWave)
+        .slice(0, 3) // Show next 3 events
+        .sort((a, b) => a.scheduledWave - b.scheduledWave)
+
+    if (upcomingEvents.length === 0) return null
+
+    return (
+        <div
+            style={{
+                position: 'absolute',
+                right: 10,
+                bottom: 10,
+                zIndex: 10,
+                pointerEvents: 'none'
+            }}
+        >
+            <div
+                style={{
+                    backgroundColor: 'transparent',
+                    padding: '8px 12px',
+                    borderRadius: '8px',
+                    border: '2px solid var(--mantine-color-orange-6)',
+                    maxWidth: '300px'
+                }}
+            >
+                <Text
+                    c="orange"
+                    fw={600}
+                    size="xs"
+                    style={{ marginBottom: '4px', textShadow: '1px 1px 2px rgba(0,0,0,0.8)' }}
+                >
+                    ⚠️ Upcoming Events
+                </Text>
+                {upcomingEvents.map((event) => (
+                    <div key={event.type} style={{ marginBottom: '2px' }}>
+                        <Text
+                            c="orange"
+                            ff="monospace"
+                            size="xs"
+                            style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.8)' }}
+                        >
+                            Wave {event.scheduledWave}: {event.config.icon} {event.config.name}
+                        </Text>
+                    </div>
+                ))}
+            </div>
+        </div>
+    )
+}
+
 export const ProxyDefensePage = () => {
     const navigate = useNavigate()
     const { resetClicks } = useEasterEggStore()
@@ -1960,6 +2347,7 @@ export const ProxyDefensePage = () => {
         explosions: [],
         lightnings: [],
         lastHealthRegen: 0,
+        lastInterestPayment: 0,
         lastMoneyRegen: 0,
         // Statistics
         enemiesKilled: 0,
@@ -1967,17 +2355,15 @@ export const ProxyDefensePage = () => {
         healthLost: 0,
         coinsSpent: 0,
         totalCoinsEarned: 0,
+        totalInterestEarned: 0,
         // Visual effects
         lastDamageTime: 0,
         isShaking: false,
-        // Disk format event
-        nextFormatWave: 4 + Math.floor(Math.random() * 4), // Random between 4-7
-        isFormatting: false,
-        formatStartTime: 0,
-        // Data flood event
-        nextDataFloodWave: 4 + Math.floor(Math.random() * 6), // Random between 4-9
-        isDataFloodActive: false,
-        dataFloodStartTime: 0,
+        globalEvents: {
+            activeEvents: [],
+            scheduledEvents: [],
+            lastEventWave: 0
+        },
         enemyBuffs: {
             speedBoost: 1,
             healthBoost: 1
@@ -1992,11 +2378,14 @@ export const ProxyDefensePage = () => {
         // Count current spiders on screen
         const currentSpiders = gameState.enemies.filter((enemy) => enemy.type === 'spider').length
 
-        // Check if data flood is active - double enemy count, reduce health by 40%
-        const { isDataFloodActive } = gameState
+        // Get event multipliers
+        const eventMultipliers = GlobalEventManager.getActiveEventMultipliers(
+            gameState.globalEvents
+        )
         const baseEnemyCount = GAME_CONFIG.waveEnemyCount + gameState.wave
-        const enemyCount = isDataFloodActive ? baseEnemyCount * 2 : baseEnemyCount
-        const healthMultiplier = isDataFloodActive ? 0.6 : 1 // 40% weaker = 60% health
+        const enemyCount = Math.floor(baseEnemyCount * eventMultipliers.enemyCountMultiplier)
+        const healthMultiplier = eventMultipliers.enemyHealthMultiplier
+        const speedMultiplier = eventMultipliers.enemySpeedMultiplier
 
         for (let i = 0; i < enemyCount; i++) {
             const types = Object.keys(ENEMY_TYPES) as Array<keyof typeof ENEMY_TYPES>
@@ -2017,10 +2406,10 @@ export const ProxyDefensePage = () => {
 
                 if (gameState.wave >= 2 && rand < 0.1) {
                     randomType = 'shielded' // 10% chance after wave 2
-                } else if (gameState.wave >= 3 && rand < 0.1) {
-                    randomType = 'voltage' // 10% chance after wave 3
-                } else if (gameState.wave >= 4 && rand < 0.1) {
-                    randomType = 'replicator' // 10% chance after wave 4
+                } else if (gameState.wave >= 3 && rand < 0.15) {
+                    randomType = 'voltage' // 15% chance after wave 3
+                } else if (gameState.wave >= 4 && rand < 0.25) {
+                    randomType = 'replicator' // 25% chance after wave 4
                 } else {
                     // Regular enemy types
                     const regularTypes = types.filter(
@@ -2032,18 +2421,22 @@ export const ProxyDefensePage = () => {
 
             const enemyTemplate = ENEMY_TYPES[randomType]
 
-            // Apply enemy buffs every 5 waves (escalating difficulty)
+            // Apply enemy buffs every 5 waves (escalating difficulty) + event multipliers
             const buffMultiplier = Math.floor(gameState.wave / 5)
             const healthBoost = 1 + buffMultiplier * 0.2 // +20% health per 5 waves
             const speedBoost = 1 + buffMultiplier * 0.1 // +10% speed per 5 waves
+
+            // Apply event multipliers
+            const finalHealthBoost = healthBoost * healthMultiplier
+            const finalSpeedBoost = speedBoost * speedMultiplier
 
             enemies.push({
                 id: `enemy-${i}-${Date.now()}`,
                 x: -50,
                 y: Math.random() * (GAME_CONFIG.boardHeight - 40) + 20,
-                health: enemyTemplate.health * waveMultiplier * healthBoost * healthMultiplier,
-                maxHealth: enemyTemplate.health * waveMultiplier * healthBoost * healthMultiplier,
-                speed: enemyTemplate.speed * speedBoost,
+                health: enemyTemplate.health * waveMultiplier * finalHealthBoost,
+                maxHealth: enemyTemplate.health * waveMultiplier * finalHealthBoost,
+                speed: enemyTemplate.speed * finalSpeedBoost,
                 reward: enemyTemplate.reward,
                 type: randomType,
                 lastAttack: 0,
@@ -2052,10 +2445,11 @@ export const ProxyDefensePage = () => {
                 hasShield: enemyTemplate.hasShield,
                 slowEffect: enemyTemplate.slowEffect,
                 disabledUntil: enemyTemplate.disabledUntil,
-                originalSpeed: enemyTemplate.speed * speedBoost,
+                originalSpeed: enemyTemplate.speed * finalSpeedBoost,
+                isOriginal: randomType === 'replicator' ? true : undefined, // Only originals can replicate
                 buffs: {
-                    healthBoost,
-                    speedBoost
+                    healthBoost: finalHealthBoost,
+                    speedBoost: finalSpeedBoost
                 }
             })
         }
@@ -2073,16 +2467,33 @@ export const ProxyDefensePage = () => {
             const newState = { ...prev }
             const now = Date.now()
 
-            // Passive regeneration (0.5 HP per second only with towers, 5 coins per second)
             if (now - newState.lastHealthRegen >= 2000 && newState.towers.length > 0) {
                 newState.health = Math.min(newState.health + 0.5, GAME_CONFIG.startHealth)
                 newState.lastHealthRegen = now
             }
 
-            if (now - newState.lastMoneyRegen >= 1000) {
-                newState.coins += 5
-                newState.totalCoinsEarned += 5
+            // Base passive income (disabled when player has more than limit)
+            if (
+                now - newState.lastMoneyRegen >= 1000 &&
+                newState.coins <= GAME_CONFIG.economy.passiveIncomeLimit
+            ) {
+                newState.coins += GAME_CONFIG.economy.basePassiveIncome
+                newState.totalCoinsEarned += GAME_CONFIG.economy.basePassiveIncome
                 newState.lastMoneyRegen = now
+            }
+
+            // Interest payment system (2% of coins every 10 seconds, capped at 1000 coins base)
+            if (now - newState.lastInterestPayment >= GAME_CONFIG.economy.interestInterval) {
+                const interestBase = Math.min(newState.coins, GAME_CONFIG.economy.maxInterestBase)
+                const interestEarned = Math.floor(interestBase * GAME_CONFIG.economy.interestRate)
+
+                if (interestEarned > 0) {
+                    newState.coins += interestEarned
+                    newState.totalCoinsEarned += interestEarned
+                    newState.totalInterestEarned += interestEarned
+                }
+
+                newState.lastInterestPayment = now
             }
 
             // Update enemies
@@ -2258,14 +2669,18 @@ export const ProxyDefensePage = () => {
                             newState.lightnings.push(lightning)
 
                             if (target.health <= 0) {
-                                newState.coins += target.reward
-                                newState.score += target.reward * 2
+                                // Apply kill bonus multiplier (increased from 1.0 to 1.5)
+                                const bonusReward = Math.floor(
+                                    target.reward * GAME_CONFIG.economy.killBonusMultiplier
+                                )
+                                newState.coins += bonusReward
+                                newState.score += bonusReward * 2
                                 newState.enemiesKilled += 1
-                                newState.totalCoinsEarned += target.reward
+                                newState.totalCoinsEarned += bonusReward
 
                                 // Handle special enemy death effects
-                                if (target.type === 'replicator') {
-                                    // Replicator creates 2 copies on death
+                                if (target.type === 'replicator' && target.isOriginal) {
+                                    // Only original replicators create copies on death
                                     for (let i = 0; i < 2; i++) {
                                         const copy: Enemy = {
                                             id: `replicator-copy-${Date.now()}-${i}`,
@@ -2281,7 +2696,8 @@ export const ProxyDefensePage = () => {
                                             maxShield: 0,
                                             hasShield: false,
                                             slowEffect: 1,
-                                            originalSpeed: target.speed * 1.2
+                                            originalSpeed: target.speed * 1.2,
+                                            isOriginal: false // Copies cannot replicate
                                         }
                                         newState.enemies.push(copy)
                                     }
@@ -2328,67 +2744,46 @@ export const ProxyDefensePage = () => {
                 return elapsed < lightning.duration
             })
 
+            // Update global events - remove expired events
+            newState.globalEvents.activeEvents = newState.globalEvents.activeEvents.filter(
+                (event) => {
+                    const elapsed = now - event.startTime
+                    return elapsed < event.duration
+                }
+            )
+
+            // Check game over
+            if (newState.health <= 0) {
+                newState.isGameOver = true
+            }
+
             // Check if wave is cleared
-            if (newState.enemies.length === 0 && prev.enemies.length > 0) {
+            if (newState.enemies.length === 0 && prev.enemies.length > 0 && !newState.isGameOver) {
                 newState.wave++
-                newState.coins += 50
-                newState.totalCoinsEarned += 50
+                newState.coins += GAME_CONFIG.economy.waveCompletionBonus
+                newState.totalCoinsEarned += GAME_CONFIG.economy.waveCompletionBonus
+
                 // Restore 20 HP on wave completion
                 newState.health = Math.min(newState.health + 20, GAME_CONFIG.startHealth)
 
-                // Check for conflicting events (disk format vs data flood)
-                const shouldFormatActivate =
-                    newState.wave === newState.nextFormatWave && !newState.isFormatting
-                const shouldFloodActivate =
-                    newState.wave === newState.nextDataFloodWave && !newState.isDataFloodActive
+                // Update global events system
+                newState.globalEvents = GlobalEventManager.scheduleNextEvents(
+                    newState.wave,
+                    newState.globalEvents
+                )
 
-                // If both events should activate on same wave, prioritize one and delay the other
-                if (shouldFormatActivate && shouldFloodActivate) {
-                    // Disk format has priority (more dramatic effect)
-                    // Delay data flood to next wave
-                    newState.nextDataFloodWave = newState.wave + 1
-                }
+                // Activate any scheduled events for this wave
+                const { eventsState, activatedEvents } = GlobalEventManager.activateScheduledEvents(
+                    newState.wave,
+                    newState.globalEvents
+                )
+                newState.globalEvents = eventsState
 
-                // Check for disk format event
-                if (shouldFormatActivate && !(shouldFormatActivate && shouldFloodActivate)) {
-                    newState.isFormatting = true
-                    newState.formatStartTime = Date.now()
-                    // Schedule tower destruction after 2 seconds
-                    setTimeout(() => {
-                        setGameState((current) => ({
-                            ...current,
-                            towers: [],
-                            isFormatting: false,
-                            nextFormatWave: current.wave + 4 + Math.floor(Math.random() * 4) // Next format in 4-7 waves
-                        }))
-                    }, 2000)
-                } else if (shouldFormatActivate && shouldFloodActivate) {
-                    // Special case: activate format when both events conflict
-                    newState.isFormatting = true
-                    newState.formatStartTime = Date.now()
-                    setTimeout(() => {
-                        setGameState((current) => ({
-                            ...current,
-                            towers: [],
-                            isFormatting: false,
-                            nextFormatWave: current.wave + 4 + Math.floor(Math.random() * 4)
-                        }))
-                    }, 2000)
-                }
-
-                // Check for data flood event (only if no conflict or format wasn't prioritized)
-                if (shouldFloodActivate && !shouldFormatActivate) {
-                    newState.isDataFloodActive = true
-                    newState.dataFloodStartTime = Date.now()
-                    // Schedule next data flood event after 3 seconds
-                    setTimeout(() => {
-                        setGameState((current) => ({
-                            ...current,
-                            isDataFloodActive: false,
-                            nextDataFloodWave: current.wave + 10 + Math.floor(Math.random() * 6) // Next flood in 10-15 waves
-                        }))
-                    }, 3000)
-                }
+                // Apply immediate effects of activated events
+                activatedEvents.forEach((eventConfig) => {
+                    const effects = GlobalEventManager.applyEventEffects(eventConfig.type, newState)
+                    Object.assign(newState, effects)
+                })
 
                 setTimeout(() => spawnWave(), 2000)
             }
@@ -2396,11 +2791,6 @@ export const ProxyDefensePage = () => {
             // Handle visual effects
             if (newState.isShaking && now - newState.lastDamageTime >= 500) {
                 newState.isShaking = false
-            }
-
-            // Check game over
-            if (newState.health <= 0) {
-                newState.isGameOver = true
             }
 
             return newState
@@ -2411,7 +2801,8 @@ export const ProxyDefensePage = () => {
         setGameState((prev) => ({
             ...prev,
             isGameStarted: true,
-            isGameOver: false
+            isGameOver: false,
+            globalEvents: GlobalEventManager.scheduleNextEvents(1, prev.globalEvents)
         }))
         spawnWave()
     }
@@ -2430,6 +2821,7 @@ export const ProxyDefensePage = () => {
             explosions: [],
             lightnings: [],
             lastHealthRegen: 0,
+            lastInterestPayment: 0,
             lastMoneyRegen: 0,
             // Statistics
             enemiesKilled: 0,
@@ -2437,17 +2829,15 @@ export const ProxyDefensePage = () => {
             healthLost: 0,
             coinsSpent: 0,
             totalCoinsEarned: 0,
+            totalInterestEarned: 0,
             // Visual effects
             lastDamageTime: 0,
             isShaking: false,
-            // Disk format event
-            nextFormatWave: 4 + Math.floor(Math.random() * 4), // Random between 4-7
-            isFormatting: false,
-            formatStartTime: 0,
-            // Data flood event
-            nextDataFloodWave: 10 + Math.floor(Math.random() * 6), // Random between 10-15
-            isDataFloodActive: false,
-            dataFloodStartTime: 0,
+            globalEvents: {
+                activeEvents: [],
+                scheduledEvents: [],
+                lastEventWave: 0
+            },
             enemyBuffs: {
                 speedBoost: 1,
                 healthBoost: 1
@@ -2588,16 +2978,16 @@ export const ProxyDefensePage = () => {
 
     return (
         <Container py="xl" size="xl">
-            <Stack gap="xl">
+            <Stack gap="xs">
                 <Group align="center" justify="space-between">
-                    <div>
+                    <Box>
                         <Title c="cyan" order={1}>
                             🛡️ Proxy Defense
                         </Title>
                         <Text c="dimmed" size="lg">
                             Protect your proxy servers from attacks!
                         </Text>
-                    </div>
+                    </Box>
 
                     <Group>
                         <Tooltip label="Home">
@@ -2618,113 +3008,70 @@ export const ProxyDefensePage = () => {
                     </Group>
                 </Group>
 
-                {/* Game Stats */}
-                <Group gap="xl" justify="center">
-                    <Tooltip
-                        label={
-                            gameState.towers.length > 0
-                                ? 'Health regenerating: +0.5 HP every 2 seconds'
-                                : 'No healing! Build towers to restore health'
-                        }
-                        withArrow
-                    >
-                        <Badge
-                            color="red"
-                            leftSection={<IconHeart size={16} />}
-                            size="lg"
-                            variant="light"
-                        >
-                            HP: {gameState.health} {gameState.towers.length > 0 ? '💊' : '⚠️'}
-                        </Badge>
-                    </Tooltip>
-                    <Badge
-                        color="yellow"
-                        leftSection={<IconCoins size={16} />}
-                        size="lg"
-                        variant="light"
-                    >
-                        Coins: {gameState.coins}
-                    </Badge>
-                    <Badge
-                        color="blue"
-                        leftSection={<IconTrophy size={16} />}
-                        size="lg"
-                        variant="light"
-                    >
-                        Score: {gameState.score}
-                    </Badge>
-                    <Badge color="purple" size="lg" variant="light">
-                        Wave: {gameState.wave}
-                    </Badge>
-                    <Badge color="gray" size="lg" variant="light">
-                        Towers: {gameState.towers.length}
-                    </Badge>
-                    <Badge color="green" size="lg" variant="light">
-                        Kills: {gameState.enemiesKilled}
-                    </Badge>
-                    <Badge color="orange" size="lg" variant="light">
-                        Built: {gameState.towersBuilt}
-                    </Badge>
-                </Group>
+                <Box>
+                    <MusicPlayer />
+                </Box>
+
+                {/* Tower Selection Panel */}
+                <Paper mb={0} radius="md">
+                    <Title c="cyan" mb="md" order={5} ta="center">
+                        🏗️ Build Towers
+                    </Title>
+                    <ButtonGroup>
+                        {Object.entries(TOWER_TYPES).map(([type, stats]) => (
+                            <Button
+                                color={stats.color}
+                                disabled={gameState.coins < stats.cost}
+                                fullWidth
+                                key={type}
+                                leftSection={<TowerInfoSprite type={type as Tower['type']} />}
+                                onClick={() => {
+                                    if (gameState.coins >= stats.cost) {
+                                        setGameState((prev) => ({
+                                            ...prev,
+                                            selectedTowerType: type as Tower['type']
+                                        }))
+                                    }
+                                }}
+                                size="lg"
+                                style={{
+                                    justifyContent: 'flex-start',
+                                    padding: '8px 12px'
+                                }}
+                                styles={{
+                                    inner: {
+                                        justifyContent: 'center'
+                                    },
+                                    section: {
+                                        marginRight: 8
+                                    },
+                                    label: {
+                                        fontFamily: 'monospace'
+                                    }
+                                }}
+                                variant={gameState.selectedTowerType === type ? 'light' : 'outline'}
+                            >
+                                <Group justify="space-between" w="100%">
+                                    <Text fw={500} size="sm">
+                                        {type.charAt(0).toUpperCase() + type.slice(1)}
+                                    </Text>
+                                    <Badge
+                                        color="yellow"
+                                        size="sm"
+                                        style={{ minWidth: 'auto' }}
+                                        variant="light"
+                                    >
+                                        {stats.cost}
+                                    </Badge>
+                                </Group>
+                            </Button>
+                        ))}
+                    </ButtonGroup>
+                </Paper>
 
                 {/* Game Board with Tower Selection */}
-                <Group align="flex-start" gap="md" justify="left">
-                    {/* Enemy Tracking Panel */}
-                    <Paper p="md" radius="md" withBorder>
-                        <Title c="red" mb="md" order={5}>
-                            👾 Enemy Tracker
-                        </Title>
-                        <Stack gap="sm">
-                            {Object.entries(ENEMY_TYPES).map(([type, stats]) => {
-                                const count = gameState.enemies.filter(
-                                    (enemy) => enemy.type === type
-                                ).length
-                                return (
-                                    <div
-                                        key={type}
-                                        style={{
-                                            display: 'flex',
-                                            alignItems: 'center',
-                                            justifyContent: 'space-between',
-                                            padding: '8px 12px',
-                                            borderRadius: '8px',
-                                            border: `2px solid ${count > 0 ? stats.color : 'var(--mantine-color-gray-6)'}`,
-
-                                            opacity: count > 0 ? 1 : 0.5,
-                                            transition: 'all 0.3s ease'
-                                        }}
-                                    >
-                                        <div
-                                            style={{
-                                                display: 'flex',
-                                                alignItems: 'center',
-                                                justifyContent: 'center',
-                                                width: type === 'spider' ? 50 : 30,
-                                                height: type === 'spider' ? 50 : 30
-                                            }}
-                                        >
-                                            <EnemyInfoSprite type={type as Enemy['type']} />
-                                        </div>
-
-                                        <Badge
-                                            color={count > 0 ? stats.color : 'gray'}
-                                            size="lg"
-                                            style={{
-                                                minWidth: 'auto',
-                                                fontFamily: 'monospace',
-                                                fontSize: '14px'
-                                            }}
-                                            variant={count > 0 ? 'light' : 'outline'}
-                                        >
-                                            {count.toString().padStart(2, '0')}
-                                        </Badge>
-                                    </div>
-                                )
-                            })}
-                        </Stack>
-                    </Paper>
-
-                    <Paper p="md" radius="md" withBorder>
+                <Group align="center" gap="md" justify="center">
+                    <Paper p="md" radius="md">
                         <Box
                             className={classes.gameBoard}
                             onClick={handleBoardClick}
@@ -2802,6 +3149,11 @@ export const ProxyDefensePage = () => {
                                         coins={gameState.coins}
                                         isShaking={gameState.isShaking}
                                     />
+                                    <WaveIndicator waveNumber={gameState.wave} />
+                                    <EventsScheduleDisplay
+                                        currentWave={gameState.wave}
+                                        globalEvents={gameState.globalEvents}
+                                    />
                                 </>
                             )}
 
@@ -2810,29 +3162,20 @@ export const ProxyDefensePage = () => {
                                 <div className={classes.criticalHealthBorder} />
                             )}
 
-                            {/* Disk Format Event */}
-                            {gameState.isFormatting && (
-                                <div className={classes.formattedDisplayContainer}>
+                            {/* Global Events Display */}
+                            {gameState.globalEvents.activeEvents.map((event) => (
+                                <div className={classes.formattedDisplayContainer} key={event.type}>
                                     <div className={classes.formattedDisplay}>
-                                        <div>💽 DISK FORMATTED 💽</div>
+                                        <div>
+                                            {event.config.icon} {event.config.name}{' '}
+                                            {event.config.icon}
+                                        </div>
                                         <div className={classes.formattedDisplayText}>
-                                            All towers destroyed!
+                                            {event.config.description}
                                         </div>
                                     </div>
                                 </div>
-                            )}
-
-                            {/* Data Flood Event */}
-                            {gameState.isDataFloodActive && (
-                                <div className={classes.formattedDisplayContainer}>
-                                    <div className={classes.formattedDisplay}>
-                                        <div>🌊 DATA FLOOD 🌊</div>
-                                        <div className={classes.formattedDisplayText}>
-                                            Double enemies, 40% weaker!
-                                        </div>
-                                    </div>
-                                </div>
-                            )}
+                            ))}
 
                             {!gameState.isGameStarted && (
                                 <div
@@ -2874,63 +3217,62 @@ export const ProxyDefensePage = () => {
                             )}
                         </Box>
                     </Paper>
-
-                    {/* Tower Selection Panel */}
-                    <Paper p="md" radius="md" withBorder>
-                        <Title c="cyan" mb="md" order={5}>
-                            🏗️ Build Towers
-                        </Title>
-                        <Stack gap="sm">
-                            {Object.entries(TOWER_TYPES).map(([type, stats]) => (
-                                <Button
-                                    color={stats.color}
-                                    disabled={gameState.coins < stats.cost}
-                                    fullWidth
-                                    key={type}
-                                    leftSection={<TowerInfoSprite type={type as Tower['type']} />}
-                                    onClick={() => {
-                                        if (gameState.coins >= stats.cost) {
-                                            setGameState((prev) => ({
-                                                ...prev,
-                                                selectedTowerType: type as Tower['type']
-                                            }))
-                                        }
-                                    }}
-                                    size="lg"
-                                    style={{
-                                        justifyContent: 'flex-start',
-                                        padding: '8px 12px'
-                                    }}
-                                    styles={{
-                                        inner: {
-                                            justifyContent: 'flex-start'
-                                        },
-                                        section: {
-                                            marginRight: 8
-                                        }
-                                    }}
-                                    variant={
-                                        gameState.selectedTowerType === type ? 'light' : 'outline'
-                                    }
-                                >
-                                    <Group justify="space-between" w="100%">
-                                        <Text fw={500} size="sm">
-                                            {type.charAt(0).toUpperCase() + type.slice(1)}
-                                        </Text>
-                                        <Badge
-                                            color="yellow"
-                                            size="sm"
-                                            style={{ minWidth: 'auto' }}
-                                            variant="light"
-                                        >
-                                            {stats.cost}
-                                        </Badge>
-                                    </Group>
-                                </Button>
-                            ))}
-                        </Stack>
-                    </Paper>
                 </Group>
+
+                {/* Enemy Tracking Panel */}
+                <Paper m={0} p="md" radius="md">
+                    <Title c="red" mb="md" order={5} ta="center">
+                        👾 Enemy Tracker
+                    </Title>
+                    <Group gap="sm" justify="center">
+                        {Object.entries(ENEMY_TYPES).map(([type, stats]) => {
+                            const count = gameState.enemies.filter(
+                                (enemy) => enemy.type === type
+                            ).length
+                            return (
+                                <div
+                                    key={type}
+                                    style={{
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'space-between',
+                                        padding: '8px 12px',
+                                        borderRadius: '8px',
+                                        border: `2px solid ${count > 0 ? stats.color : 'var(--mantine-color-gray-6)'}`,
+                                        opacity: count > 0 ? 1 : 0.5,
+                                        transition: 'all 0.3s ease'
+                                    }}
+                                >
+                                    <div
+                                        style={{
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center',
+                                            width: type === 'spider' ? 50 : 30,
+                                            height: type === 'spider' ? 50 : 30
+                                        }}
+                                    >
+                                        <EnemyInfoSprite type={type as Enemy['type']} />
+                                    </div>
+
+                                    <Badge
+                                        color={count > 0 ? stats.color : 'gray'}
+                                        ml="xs"
+                                        size="lg"
+                                        style={{
+                                            minWidth: 'auto',
+                                            fontFamily: 'monospace',
+                                            fontSize: '14px'
+                                        }}
+                                        variant={count > 0 ? 'light' : 'outline'}
+                                    >
+                                        {count.toString().padStart(2, '0')}
+                                    </Badge>
+                                </div>
+                            )
+                        })}
+                    </Group>
+                </Paper>
 
                 {/* Game Over Modal */}
                 <Modal
@@ -2938,8 +3280,17 @@ export const ProxyDefensePage = () => {
                     onClose={() => {}}
                     opened={gameState.isGameOver}
                     size="lg"
+                    styles={{
+                        title: {
+                            width: '100%',
+                            textAlign: 'center'
+                        },
+                        header: {
+                            justifyContent: 'center'
+                        }
+                    }}
                     title={
-                        <Text c="red" fw={700} size="xl">
+                        <Text c="red.6" fw={700} size="xl">
                             🔥 GAME OVER 🔥
                         </Text>
                     }
@@ -3008,7 +3359,7 @@ export const ProxyDefensePage = () => {
                         </Grid>
 
                         {/* Combat Stats */}
-                        <Text c="cyan" fw={600} size="lg">
+                        <Text c="cyan" fw={600} size="lg" ta="center">
                             ⚔️ Combat Statistics
                         </Text>
                         <Grid>
@@ -3073,7 +3424,7 @@ export const ProxyDefensePage = () => {
                         </Grid>
 
                         {/* Economic Stats */}
-                        <Text c="green" fw={600} size="lg">
+                        <Text c="green" fw={600} size="lg" ta="center">
                             💰 Economic Statistics
                         </Text>
                         <Grid>
@@ -3104,29 +3455,6 @@ export const ProxyDefensePage = () => {
                             </Grid.Col>
                         </Grid>
 
-                        {/* Net Profit */}
-                        <Card p="md" withBorder>
-                            <Group align="center" justify="center">
-                                <Text c="dimmed" fw={500}>
-                                    💎 Net Profit
-                                </Text>
-                                <Text
-                                    c={
-                                        gameState.totalCoinsEarned - gameState.coinsSpent >= 0
-                                            ? 'green'
-                                            : 'red'
-                                    }
-                                    fw={700}
-                                    size="lg"
-                                >
-                                    {(
-                                        gameState.totalCoinsEarned - gameState.coinsSpent
-                                    ).toLocaleString()}{' '}
-                                    coins
-                                </Text>
-                            </Group>
-                        </Card>
-
                         {/* Action Button */}
                         <Button
                             color="cyan"
@@ -3156,9 +3484,30 @@ export const ProxyDefensePage = () => {
                             <Grid.Col span={{ base: 12, sm: 6, lg: 3 }}>
                                 <Card h="100%" p="md" radius="md" withBorder>
                                     <Group align="center" gap="sm" mb="sm">
-                                        <IconCurrencyDollar color="teal" size={20} />
-                                        <Text c="teal" fw={600} size="sm">
-                                            Economics
+                                        <IconCurrencyDollar
+                                            color={
+                                                gameState.coins <=
+                                                GAME_CONFIG.economy.passiveIncomeLimit
+                                                    ? 'teal'
+                                                    : 'red'
+                                            }
+                                            size={20}
+                                        />
+                                        <Text
+                                            c={
+                                                gameState.coins <=
+                                                GAME_CONFIG.economy.passiveIncomeLimit
+                                                    ? 'teal'
+                                                    : 'red'
+                                            }
+                                            fw={600}
+                                            size="sm"
+                                        >
+                                            Economics{' '}
+                                            {gameState.coins >
+                                            GAME_CONFIG.economy.passiveIncomeLimit
+                                                ? '⚠️'
+                                                : ''}
                                         </Text>
                                     </Group>
                                     <Stack gap="xs">
@@ -3172,10 +3521,38 @@ export const ProxyDefensePage = () => {
                                         </Group>
                                         <Group justify="space-between">
                                             <Text c="dimmed" size="xs">
+                                                Interest
+                                            </Text>
+                                            <Badge color="cyan" size="sm" variant="light">
+                                                {gameState.totalInterestEarned.toLocaleString()}
+                                            </Badge>
+                                        </Group>
+                                        <Group justify="space-between">
+                                            <Text c="dimmed" size="xs">
                                                 Spent
                                             </Text>
                                             <Badge color="orange" size="sm" variant="light">
                                                 {gameState.coinsSpent.toLocaleString()}
+                                            </Badge>
+                                        </Group>
+                                        <Group justify="space-between">
+                                            <Text c="dimmed" size="xs">
+                                                Passive Income
+                                            </Text>
+                                            <Badge
+                                                color={
+                                                    gameState.coins <=
+                                                    GAME_CONFIG.economy.passiveIncomeLimit
+                                                        ? 'green'
+                                                        : 'red'
+                                                }
+                                                size="sm"
+                                                variant="light"
+                                            >
+                                                {gameState.coins <=
+                                                GAME_CONFIG.economy.passiveIncomeLimit
+                                                    ? 'ACTIVE'
+                                                    : 'DISABLED'}
                                             </Badge>
                                         </Group>
                                         <Group justify="space-between">
@@ -3437,6 +3814,43 @@ export const ProxyDefensePage = () => {
                                     Next Wave: {GAME_CONFIG.waveEnemyCount + gameState.wave} enemies
                                 </Text>
                             </Group>
+                            <Group align="center" gap="xs">
+                                <IconCoins color="green" size={16} />
+                                <Text c="green" fw={500} size="sm">
+                                    Next Interest:{' '}
+                                    {Math.floor(
+                                        Math.min(
+                                            gameState.coins,
+                                            GAME_CONFIG.economy.maxInterestBase
+                                        ) * GAME_CONFIG.economy.interestRate
+                                    )}{' '}
+                                    coins
+                                </Text>
+                            </Group>
+                            <Group align="center" gap="xs">
+                                <IconTrendingUp
+                                    color={
+                                        gameState.coins <= GAME_CONFIG.economy.passiveIncomeLimit
+                                            ? 'green'
+                                            : 'red'
+                                    }
+                                    size={16}
+                                />
+                                <Text
+                                    c={
+                                        gameState.coins <= GAME_CONFIG.economy.passiveIncomeLimit
+                                            ? 'green'
+                                            : 'red'
+                                    }
+                                    fw={500}
+                                    size="sm"
+                                >
+                                    Passive Income:{' '}
+                                    {gameState.coins <= GAME_CONFIG.economy.passiveIncomeLimit
+                                        ? 'ACTIVE'
+                                        : 'DISABLED'}
+                                </Text>
+                            </Group>
                         </Group>
                     </Paper>
                 )}
@@ -3612,16 +4026,23 @@ export const ProxyDefensePage = () => {
                                         {type === 'voltage' && (
                                             <Group justify="center">
                                                 <Badge color="yellow" size="xs" variant="filled">
-                                                    10% spawn chance after wave 3
+                                                    15% spawn chance after wave 3
                                                 </Badge>
                                             </Group>
                                         )}
                                         {type === 'replicator' && (
-                                            <Group justify="center">
-                                                <Badge color="pink" size="xs" variant="filled">
-                                                    10% spawn chance after wave 4
-                                                </Badge>
-                                            </Group>
+                                            <>
+                                                <Group justify="center">
+                                                    <Badge color="pink" size="xs" variant="filled">
+                                                        25% spawn chance after wave 4
+                                                    </Badge>
+                                                </Group>
+                                                <Group justify="center">
+                                                    <Badge color="gray" size="xs" variant="outline">
+                                                        Only originals can replicate
+                                                    </Badge>
+                                                </Group>
+                                            </>
                                         )}
                                     </Stack>
                                 </Card>
@@ -3675,7 +4096,8 @@ export const ProxyDefensePage = () => {
                         Spawns after wave 3 (10% chance).
                         <br />• <strong>Replicator (🧬)</strong> - High health (100 HP), slow speed
                         (1.0), creates 2 weaker copies (60% health, 20% faster) when destroyed.
-                        Spawns after wave 4 (10% chance).
+                        <strong>Note:</strong> Only original replicators can create copies - copies
+                        cannot replicate! Spawns after wave 4 (10% chance).
                         <br />
                         <br />
                         <strong>⚔️ COMBAT SYSTEM:</strong>
@@ -3692,10 +4114,26 @@ export const ProxyDefensePage = () => {
                         <strong>🔄 PASSIVE REGENERATION:</strong>
                         <br />
                         • +0.5 HP every 2 seconds (only with active towers!)
-                        <br />
-                        • +5 Coins every second (passive income)
+                        <br />• +{GAME_CONFIG.economy.basePassiveIncome} Coins every second (passive
+                        income) -{' '}
+                        <strong>
+                            DISABLED when you have more than{' '}
+                            {GAME_CONFIG.economy.passiveIncomeLimit} coins!
+                        </strong>
+                        <br />• +{GAME_CONFIG.economy.waveCompletionBonus} Coins bonus when
+                        completing each wave
                         <br />
                         • +20 HP bonus when completing each wave
+                        <br />
+                        <br />
+                        <strong>💰 ECONOMIC SYSTEM:</strong>
+                        <br />• <strong>Interest System:</strong> Earn{' '}
+                        {GAME_CONFIG.economy.interestRate * 100}% interest on coins every{' '}
+                        {GAME_CONFIG.economy.interestInterval / 1000} seconds
+                        <br />• <strong>Passive Income Cap:</strong> Passive coin generation stops
+                        when you have more than {GAME_CONFIG.economy.passiveIncomeLimit} coins
+                        <br />• <strong>Strategic Spending:</strong> Keep spending to maintain
+                        passive income flow!
                         <br />
                         <br />
                         <strong>🎯 STRATEGY TIPS:</strong>
@@ -3711,6 +4149,9 @@ export const ProxyDefensePage = () => {
                         = no healing!
                         <br />
                         • Watch tower health bars - replace destroyed towers quickly!
+                        <br />• <strong>ECONOMIC TIP:</strong> Don't hoard coins! Passive income
+                        stops at {GAME_CONFIG.economy.passiveIncomeLimit}+ coins - spend to keep
+                        earning!
                         <br /> • <strong>ESCALATION SYSTEM:</strong> Enemy difficulty increases
                         every 5 waves: +20% health, +10% speed
                         <br />• <strong>SPIDER STRATEGY:</strong> Focus fire on spiders immediately
@@ -3720,7 +4161,8 @@ export const ProxyDefensePage = () => {
                         <br />• <strong>VOLTAGE STRATEGY:</strong> Keep towers spread out to
                         minimize disable radius
                         <br />• <strong>REPLICATOR STRATEGY:</strong> Use high-damage towers (Chain
-                        Lightning) to kill before replication
+                        Lightning) to kill originals quickly. Don't worry about copies - they can't
+                        replicate.
                         <br />• <strong>DATA FLOOD STRATEGY:</strong> Focus on Chain Lightning and
                         area-effect towers to handle 2x enemy waves efficiently
                         <br />• Build multiple Firewall towers when facing spiders to absorb their
@@ -3740,19 +4182,29 @@ export const ProxyDefensePage = () => {
                         • Plan your tower placement strategically - spacing matters!
                         <br />
                         <br />
-                        <strong>💽 DISK FORMAT EVENT:</strong>
+                        <strong>🌍 GLOBAL EVENTS SYSTEM:</strong>
                         <br />
-                        • Every 4-7 waves (random), a "DISK FORMATTED" event occurs
-                        <br />• <strong>WARNING:</strong> All towers are destroyed during this
-                        event!
+                        • Random events occur throughout the game with unique effects
+                        <br />
+                        • Some events can occur simultaneously, others conflict
+                        <br />
+                        <br />
+                        <strong>💽 DISK FORMAT EVENT:</strong>
+                        <br />• <strong>Priority:</strong> 100 (Highest) |{' '}
+                        <strong>Duration:</strong> 2 seconds
+                        <br />• <strong>Interval:</strong> Every 4-7 waves |{' '}
+                        <strong>Conflicts:</strong> All events
+                        <br />• <strong>WARNING:</strong> All towers are instantly destroyed!
                         <br />
                         • Save coins for quick rebuilding after format events
-                        <br />• This adds strategic depth - don't over-invest in one area!
+                        <br />
+                        • Most devastating event - cannot occur with others
                         <br />
                         <br />
                         <strong>🌊 DATA FLOOD EVENT:</strong>
-                        <br />
-                        • Every 10-15 waves (random), a "DATA FLOOD" event occurs
+                        <br />• <strong>Priority:</strong> 80 | <strong>Duration:</strong> 3 seconds
+                        <br />• <strong>Interval:</strong> Every 8-12 waves |{' '}
+                        <strong>Can coexist with:</strong> EMP Surge
                         <br />• <strong>EFFECT:</strong> Wave spawns 2x enemies, but they have 40%
                         less health
                         <br />

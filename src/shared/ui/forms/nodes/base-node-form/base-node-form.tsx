@@ -3,6 +3,7 @@ import {
     Badge,
     Button,
     Collapse,
+    CopyButton,
     Divider,
     em,
     Fieldset,
@@ -22,7 +23,15 @@ import {
     TextInput,
     Title
 } from '@mantine/core'
-import { TbChartBar, TbChartLine, TbDots, TbMapPin, TbUserCheck, TbWorld } from 'react-icons/tb'
+import {
+    TbChartBar,
+    TbChartLine,
+    TbCopy,
+    TbDots,
+    TbMapPin,
+    TbUserCheck,
+    TbWorld
+} from 'react-icons/tb'
 import { CreateNodeCommand, UpdateNodeCommand } from '@remnawave/backend-contract'
 import { PiCheckDuotone, PiFloppyDiskDuotone, PiXDuotone } from 'react-icons/pi'
 import { HiOutlineServer, HiQuestionMarkCircle } from 'react-icons/hi'
@@ -511,6 +520,16 @@ export const BaseNodeForm = <T extends CreateNodeCommand.Request | UpdateNodeCom
                             <Menu.Dropdown>
                                 <Menu.Label>Quick Actions</Menu.Label>
                                 <GetNodeUsersUsageFeature nodeUuid={node.uuid} />
+                                <CopyButton value={node.uuid}>
+                                    {({ copy }) => (
+                                        <Menu.Item
+                                            leftSection={<TbCopy size="1rem" />}
+                                            onClick={copy}
+                                        >
+                                            Copy Node UUID
+                                        </Menu.Item>
+                                    )}
+                                </CopyButton>
                                 <Menu.Divider />
                                 <Menu.Label>Management</Menu.Label>
                                 <ToggleNodeStatusButtonFeature

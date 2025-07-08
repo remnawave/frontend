@@ -4,10 +4,10 @@ import {
     Badge,
     Box,
     Button,
+    Center,
     Checkbox,
     Code,
     CopyButton,
-    Divider,
     em,
     Fieldset,
     Group,
@@ -17,7 +17,6 @@ import {
     NumberInput,
     Progress,
     Select,
-    Skeleton,
     Stack,
     Text,
     Textarea,
@@ -33,7 +32,9 @@ import {
     PiFloppyDiskDuotone,
     PiLinkDuotone,
     PiQrCodeDuotone,
-    PiTelegramLogoDuotone
+    PiTelegramLogoDuotone,
+    PiUserDuotone,
+    PiXBold
 } from 'react-icons/pi'
 import {
     TbChartLine,
@@ -81,6 +82,7 @@ import { GetUserUsageFeature } from '@features/ui/dashboard/users/get-user-usage
 import { DeleteUserFeature } from '@features/ui/dashboard/users/delete-user'
 import { UserStatusBadge } from '@widgets/dashboard/users/user-status-badge'
 import { MODALS, useModalsStore } from '@entities/dashboard/modal-store'
+import { LoaderModalShared } from '@shared/ui/loader-modal'
 import { resetDataStrategy } from '@shared/constants'
 import { handleFormErrors } from '@shared/utils/misc'
 import { queryClient } from '@shared/api'
@@ -266,51 +268,30 @@ export const ViewUserModal = () => {
     return (
         <Modal
             centered
+            closeButtonProps={{
+                icon: <PiXBold size={26} />
+            }}
+            fullScreen={isMobile}
             onClose={() => actions.changeModalState(false)}
             onExitTransitionEnd={handleClose}
             opened={isViewUserModalOpen}
             size="1000px"
             title={t('view-user-modal.widget.edit-user-headline')}
+            transitionProps={isMobile ? { transition: 'fade', duration: 200 } : undefined}
         >
             {isUserLoading || isTagsLoading || !user ? (
-                <Stack>
-                    <Group align="flex-start" gap="md" grow={false} wrap="wrap">
-                        <Stack gap="md" style={{ flex: '1 1 350px' }}>
-                            <Group gap="xs" justify="space-between" w="100%">
-                                <Skeleton height={26} width={150} />
-                                <Skeleton height={26} width={80} />
-                            </Group>
-                            <Skeleton height={80} />
-                            <Skeleton height={80} />
-                            <Skeleton height={80} />
-                            <Skeleton height={80} />
-                            <Skeleton height={80} />
-                            <Skeleton height={80} />
-                            <Skeleton height={80} />
-                        </Stack>
-
-                        <Divider
-                            className="responsive-divider"
-                            orientation="vertical"
-                            visibleFrom="md"
-                        />
-
-                        <Stack gap="md" style={{ flex: '1 1 350px' }}>
-                            <Skeleton height={24} width={150} />
-                            <Skeleton height={80} />
-                            <Skeleton height={36} />
-                            <Skeleton height={80} />
-                            <Skeleton height={102} />
-                            <Skeleton height={102} />
-                            <Skeleton height={180} />
-                        </Stack>
-                    </Group>
-
-                    <Group justify="space-between" mt={0}>
-                        <Skeleton height={60} width={150} />
-                        <Skeleton height={60} width={250} />
-                    </Group>
-                </Stack>
+                <motion.div
+                    animate={{ opacity: 1 }}
+                    initial={{ opacity: 0 }}
+                    style={{ height: '70vh' }}
+                    transition={{ duration: 0.3 }}
+                >
+                    <Center h={'100%'} mt="xl" py="xl" ta="center">
+                        <Box>
+                            <LoaderModalShared text="Fetching user data..." />
+                        </Box>
+                    </Center>
+                </motion.div>
             ) : (
                 <motion.div
                     animate={{ opacity: 1 }}
@@ -339,27 +320,41 @@ export const ViewUserModal = () => {
                                                         color: 'var(--mantine-color-blue-4)'
                                                     }}
                                                 />
-                                                <Title c="blue.4" order={4}>
-                                                    User Identity
-                                                </Title>
-                                            </Group>
-                                        }
-                                    >
-                                        <Stack gap="md">
-                                            <Group gap="xs" justify="space-between" w="100%">
-                                                <Title
-                                                    fw={500}
-                                                    key="view-user-details-text"
-                                                    order={4}
-                                                >
-                                                    {user.username}
-                                                </Title>
 
                                                 <UserStatusBadge
                                                     key="view-user-status-badge"
                                                     status={user.status}
                                                 />
                                             </Group>
+                                        }
+                                    >
+                                        <Stack gap="md">
+                                            <CopyButton timeout={2000} value={user.username}>
+                                                {({ copied, copy }) => (
+                                                    <TextInput
+                                                        label="Username"
+                                                        leftSection={
+                                                            copied ? (
+                                                                <PiCheck
+                                                                    color="var(--mantine-color-teal-6)"
+                                                                    size="1rem"
+                                                                />
+                                                            ) : (
+                                                                <PiUserDuotone size="1rem" />
+                                                            )
+                                                        }
+                                                        onClick={copy}
+                                                        readOnly
+                                                        styles={{
+                                                            input: {
+                                                                cursor: 'copy',
+                                                                fontFamily: 'monospace'
+                                                            }
+                                                        }}
+                                                        value={user.username}
+                                                    />
+                                                )}
+                                            </CopyButton>
 
                                             <TextInput
                                                 disabled
@@ -397,7 +392,7 @@ export const ViewUserModal = () => {
                                                 disabled
                                                 label={
                                                     <Group gap={4} justify="flex-start">
-                                                        <Text fw={500}>
+                                                        <Text fw={500} fz="sm">
                                                             {t(
                                                                 'view-user-modal.widget.subscription-url'
                                                             )}
@@ -410,6 +405,7 @@ export const ViewUserModal = () => {
                                                             <HoverCard.Target>
                                                                 <ActionIcon
                                                                     color="gray"
+                                                                    mb={2}
                                                                     size="xs"
                                                                     variant="subtle"
                                                                 >

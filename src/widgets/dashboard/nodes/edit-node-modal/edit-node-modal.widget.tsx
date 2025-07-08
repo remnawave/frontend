@@ -1,8 +1,10 @@
 import { UpdateNodeCommand } from '@remnawave/backend-contract'
 import { zodResolver } from 'mantine-form-zod-resolver'
-import { Group, Modal, Text } from '@mantine/core'
+import { em, Group, Modal, Text } from '@mantine/core'
 import { useTranslation } from 'react-i18next'
+import { useMediaQuery } from '@mantine/hooks'
 import { useEffect, useState } from 'react'
+import { PiXBold } from 'react-icons/pi'
 import { useForm } from '@mantine/form'
 
 import {
@@ -29,6 +31,8 @@ export const EditNodeModalConnectorWidget = () => {
     const isModalOpen = useNodesStoreEditModalIsOpen()
     const actions = useNodesStoreActions()
     const node = useNodesStoreEditModalNode()
+
+    const isMobile = useMediaQuery(`(max-width: ${em(750)})`)
 
     const [advancedOpened, setAdvancedOpened] = useState(false)
 
@@ -126,6 +130,10 @@ export const EditNodeModalConnectorWidget = () => {
     return (
         <Modal
             centered
+            closeButtonProps={{
+                icon: <PiXBold size={26} />
+            }}
+            fullScreen={isMobile}
             onClose={() => actions.toggleEditModal(false)}
             onExitTransitionEnd={() => handleClose}
             opened={isModalOpen}
@@ -135,6 +143,7 @@ export const EditNodeModalConnectorWidget = () => {
                     <Text fw={500}>{t('edit-node-modal.widget.edit-node')}</Text>
                 </Group>
             }
+            transitionProps={isMobile ? { transition: 'fade', duration: 200 } : undefined}
         >
             <BaseNodeForm
                 advancedOpened={advancedOpened}
