@@ -80,7 +80,7 @@ export const useGetSubscriptionInfoByShortUuid = createGetQueryHook({
     routeParamsSchema: GetSubscriptionInfoByShortUuidCommand.RequestSchema,
     getQueryKey: ({ route }) => usersQueryKeys.getSubscriptionInfoByShortUuid(route!).queryKey,
     rQueryParams: {
-        staleTime: sToMs(40)
+        staleTime: sToMs(4)
     },
     errorHandler: (error) => {
         notifications.show({
