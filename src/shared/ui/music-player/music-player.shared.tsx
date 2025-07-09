@@ -36,9 +36,9 @@ interface PlaylistData {
     playlist: Track[]
 }
 
-const DEFAULT_JSON_URL = 'https://cdn.remna.st/TSUNAMI/TSUNAMI.json'
 const ALBUM_LINKS = {
-    SPOTIFY: 'https://open.spotify.com' // temp
+    JSON_MP3: 'https://cdn.remna.st/TSUNAMI/TSUNAMI.json',
+    SPOTIFY: 'https://open.spotify.com/album/5pjWyuryeDo1i7jIPL5PFj'
 }
 
 export const MusicPlayer = () => {
@@ -94,7 +94,7 @@ export const MusicPlayer = () => {
     }
 
     useEffect(() => {
-        loadJsonPlaylist(DEFAULT_JSON_URL)
+        loadJsonPlaylist(ALBUM_LINKS.JSON_MP3)
     }, [])
 
     const currentTrack = tracks[currentTrackIndex]
@@ -234,7 +234,7 @@ export const MusicPlayer = () => {
                             {error || 'No tracks available'}
                         </Alert>
                         <ActionIcon
-                            onClick={() => loadJsonPlaylist(DEFAULT_JSON_URL)}
+                            onClick={() => loadJsonPlaylist(ALBUM_LINKS.JSON_MP3)}
                             variant="light"
                         >
                             <IconRefresh size={16} />

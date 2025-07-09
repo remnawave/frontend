@@ -1,11 +1,11 @@
 /* eslint-disable no-nested-ternary */
 /* eslint-disable indent */
+/* eslint-disable no-param-reassign */
 
 import {
     IconBuilding,
     IconCoins,
     IconCurrencyDollar,
-    IconFlame,
     IconHeart,
     IconHome,
     IconRefresh,
@@ -13,12 +13,10 @@ import {
     IconShieldCheck,
     IconSwords,
     IconTarget,
-    IconTrendingUp,
-    IconUsers
+    IconTrendingUp
 } from '@tabler/icons-react'
 import {
     ActionIcon,
-    Alert,
     Badge,
     Box,
     Button,
@@ -39,1554 +37,269 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { PiWaveSawtooth } from 'react-icons/pi'
 import { useNavigate } from 'react-router-dom'
 import { HiRefresh } from 'react-icons/hi'
+import { consola } from 'consola/browser'
 
 import { MusicPlayer } from '@shared/ui/music-player/music-player.shared'
 import { useEasterEggStore } from '@entities/dashboard/easter-egg-store'
 import { ROUTES } from '@shared/constants'
 
+import {
+    drawAntivirusTower,
+    drawChainTower,
+    drawDDoSEnemy,
+    drawEnemyAttack,
+    drawExplosion,
+    drawFirewallTower,
+    drawHackerEnemy,
+    drawLightning,
+    drawMalwareEnemy,
+    drawPhoenixEnemy,
+    drawPortalMinerEnemy,
+    drawProxyTower,
+    drawReplicatorEnemy,
+    drawShieldedEnemy,
+    drawSlowdownTower,
+    drawSpiderEnemy,
+    drawVoltageEnemy,
+    drawWormEnemy
+} from './proxy-defense.drawers'
+import {
+    Enemy,
+    Explosion,
+    Formation,
+    GameState,
+    GlobalEventsState,
+    Lightning,
+    Tower,
+    WaveInfo,
+    WaveType
+} from './interfaces'
+import {
+    ENEMY_TYPES,
+    FORMATION_COUNT_MODIFIERS,
+    FORMATION_INFO,
+    GAME_CONFIG,
+    TOWER_TYPES,
+    WAVE_TYPES
+} from './proxy-defense.contants'
+import { GlobalEventManager } from './global-event-manager'
 import classes from './ProxyDefense.module.css'
 
-interface Enemy {
-    buffs?: {
-        healthBoost?: number // Health multiplier
-        speedBoost?: number // Speed multiplier
+const animationStyles = `
+    @keyframes blink {
+        0%, 50% { opacity: 1; }
+        51%, 100% { opacity: 0.3; }
     }
-    disabledUntil?: number // Time until tower is disabled
-    hasShield?: boolean
-    health: number
-    id: string
-    isOriginal?: boolean // For replicators - only originals can create copies
-    lastAttack: number
-    maxHealth: number
-    maxShield?: number // Maximum number of shield blocks
-    originalSpeed?: number // original speed
-    reward: number
-    shield?: number // Number of remaining shield blocks
-    slowEffect?: number // slowdown effect
-    speed: number
-    type: 'ddos' | 'hacker' | 'malware' | 'replicator' | 'shielded' | 'spider' | 'voltage'
-    x: number
-    y: number
+    
+    @keyframes dataFlow {
+        0% { transform: scaleX(0); }
+        50% { transform: scaleX(1); }
+        100% { transform: scaleX(0); }
+    }
+    
+    @keyframes shimmer {
+        0% { opacity: 0.3; }
+        50% { opacity: 0.6; }
+        100% { opacity: 0.3; }
+    }
+    
+    @keyframes dataTransfer {
+        0% { transform: translateX(-100%); opacity: 0; }
+        50% { opacity: 1; }
+        100% { transform: translateX(100%); opacity: 0; }
+    }
+`
+
+if (typeof document !== 'undefined') {
+    const styleSheet = document.createElement('style')
+    styleSheet.textContent = animationStyles
+    document.head.appendChild(styleSheet)
 }
 
-interface Tower {
-    chainTargets?: number
-    cooldown: number
-    cost: number
-    damage: number
-    disabledUntil?: number
-    health: number
-    id: string
-    lastShot: number
-    maxHealth: number
-    range: number
-    slowdownEffect?: number
-    type: 'antivirus' | 'chain' | 'firewall' | 'proxy' | 'slowdown'
-    x: number
-    y: number
-}
-
-interface Explosion {
-    duration: number
-    id: string
-    startTime: number
-    type: 'enemy_death'
-    x: number
-    y: number
-}
-
-interface Lightning {
-    duration: number
-    enemyType?: Enemy['type']
-    fromX: number
-    fromY: number
-    id: string
-    isEnemyAttack: boolean
-    startTime: number
-    towerType?: Tower['type']
-    toX: number
-    toY: number
-}
-
-// Global Events System
-type GlobalEventType = 'data_flood' | 'disk_format'
-
-interface GlobalEventConfig {
-    canCoexist: GlobalEventType[] // Which events can run simultaneously
-    description: string
-    duration: number // How long the event lasts (ms)
-    icon: string
-    maxWaveInterval: number // Maximum waves between occurrences
-    minWaveInterval: number // Minimum waves between occurrences
-    name: string
-    priority: number // Higher number = higher priority
-    type: GlobalEventType
-}
-
-interface ActiveGlobalEvent {
-    config: GlobalEventConfig
-    duration: number
-    startTime: number
-    startWave: number
-    type: GlobalEventType
-}
-
-interface GlobalEventSchedule {
-    config: GlobalEventConfig
-    scheduledWave: number
-    type: GlobalEventType
-}
-
-interface GlobalEventsState {
-    activeEvents: ActiveGlobalEvent[]
-    lastEventWave: number
-    scheduledEvents: GlobalEventSchedule[]
-}
-
-const GLOBAL_EVENT_CONFIGS: Record<GlobalEventType, GlobalEventConfig> = {
-    disk_format: {
-        type: 'disk_format',
-        name: 'DISK FORMATTED',
-        icon: '💽',
-        description: 'All towers destroyed!',
-        priority: 100, // Highest priority
-        duration: 2000,
-        minWaveInterval: 4,
-        maxWaveInterval: 7,
-        canCoexist: []
-    },
-    data_flood: {
-        type: 'data_flood',
-        name: 'DATA FLOOD',
-        icon: '🌊',
-        description: 'Double enemies, 40% weaker!',
-        priority: 80,
-        duration: 3000,
-        minWaveInterval: 2,
-        maxWaveInterval: 5,
-        canCoexist: []
-    }
-}
-
-class GlobalEventManager {
-    static activateScheduledEvents(
-        currentWave: number,
-        eventsState: GlobalEventsState
-    ): {
-        activatedEvents: GlobalEventConfig[]
-        eventsState: GlobalEventsState
-    } {
-        const newState = { ...eventsState }
-        const activatedEvents: GlobalEventConfig[] = []
-
-        // Find events scheduled for this wave
-        const eventsToActivate = newState.scheduledEvents.filter(
-            (event) => event.scheduledWave === currentWave
-        )
-
-        if (eventsToActivate.length === 0) {
-            return { eventsState: newState, activatedEvents }
-        }
-
-        // Handle conflicts - sort by priority (higher = more important)
-        eventsToActivate.sort((a, b) => b.config.priority - a.config.priority)
-
-        for (const eventToActivate of eventsToActivate) {
-            const canActivate = this.canEventActivate(eventToActivate.config, newState.activeEvents)
-
-            if (canActivate) {
-                // Activate the event
-                newState.activeEvents.push({
-                    type: eventToActivate.config.type,
-                    startWave: currentWave,
-                    startTime: Date.now(),
-                    duration: eventToActivate.config.duration,
-                    config: eventToActivate.config
-                })
-
-                activatedEvents.push(eventToActivate.config)
-                newState.lastEventWave = currentWave
-
-                // Remove higher priority events that can't coexist
-                newState.activeEvents = newState.activeEvents.filter((activeEvent) => {
-                    if (activeEvent.type === eventToActivate.config.type) return true
-                    return (
-                        eventToActivate.config.canCoexist.includes(activeEvent.type) ||
-                        activeEvent.config.canCoexist.includes(eventToActivate.config.type)
-                    )
-                })
-            } else {
-                // Reschedule for later
-                eventToActivate.scheduledWave = currentWave + 2
-            }
-        }
-
-        // Remove activated events from scheduled
-        newState.scheduledEvents = newState.scheduledEvents.filter(
-            (event) => !activatedEvents.some((activated) => activated.type === event.type)
-        )
-
-        return { eventsState: newState, activatedEvents }
+const selectFormation = (waveNumber: number): Formation => {
+    // Early waves use simpler formations
+    if (waveNumber <= 3) {
+        return Math.random() < 0.7 ? 'line' : 'group'
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    static applyEventEffects(eventType: GlobalEventType, gameState: GameState): Partial<GameState> {
-        switch (eventType) {
-            case 'data_flood': {
-                // Effects applied in spawnWave and enemy logic
-                return {}
-            }
-
-            case 'disk_format': {
-                return { towers: [] }
-            }
-
-            default: {
-                return {}
-            }
-        }
+    // Mid game introduces more complex formations
+    if (waveNumber <= 10) {
+        const formations: Formation[] = ['line', 'group', 'scattered', 'flanking', 'ambush']
+        return formations[Math.floor(Math.random() * formations.length)]
     }
 
-    static getActiveEventMultipliers(eventsState: GlobalEventsState): {
-        enemyCountMultiplier: number
-        enemyHealthMultiplier: number
-        enemySpeedMultiplier: number
-    } {
-        let enemyCountMultiplier = 1
-        let enemyHealthMultiplier = 1
-        const enemySpeedMultiplier = 1
-
-        if (this.isEventActive('data_flood', eventsState)) {
-            enemyCountMultiplier = 2
-            enemyHealthMultiplier = 0.6 // 40% weaker
-        }
-
-        return {
-            enemyCountMultiplier,
-            enemyHealthMultiplier,
-            enemySpeedMultiplier
-        }
-    }
-
-    static isEventActive(eventType: GlobalEventType, eventsState: GlobalEventsState): boolean {
-        const now = Date.now()
-        return eventsState.activeEvents.some(
-            (event) => event.type === eventType && now - event.startTime < event.duration
-        )
-    }
-
-    static scheduleNextEvents(
-        currentWave: number,
-        eventsState: GlobalEventsState
-    ): GlobalEventsState {
-        const newState = { ...eventsState }
-
-        // Remove completed events
-        const now = Date.now()
-        newState.activeEvents = newState.activeEvents.filter(
-            (event) => now - event.startTime < event.duration
-        )
-
-        // Schedule events individually for each type to guarantee intervals
-        Object.values(GLOBAL_EVENT_CONFIGS).forEach((eventConfig) => {
-            // Check if this event type is already scheduled
-            const hasScheduledEvent = newState.scheduledEvents.some(
-                (scheduled) => scheduled.type === eventConfig.type
-            )
-
-            // Skip if already scheduled
-            if (hasScheduledEvent) return
-
-            // Find the last wave when this specific event type occurred
-            const lastWaveForThisEvent = Math.max(
-                // Last time this event was active
-                ...newState.activeEvents
-                    .filter((e) => e.type === eventConfig.type)
-                    .map((e) => e.startWave),
-                // Last time this event was scheduled
-                ...newState.scheduledEvents
-                    .filter((e) => e.type === eventConfig.type)
-                    .map((e) => e.scheduledWave),
-                // Fallback to global last event wave
-                eventsState.lastEventWave || 0
-            )
-
-            const wavesSinceLastEvent = currentWave - lastWaveForThisEvent
-
-            // Schedule if enough waves have passed for this specific event
-            if (wavesSinceLastEvent >= eventConfig.minWaveInterval) {
-                const waveOffset =
-                    Math.floor(
-                        Math.random() *
-                            (eventConfig.maxWaveInterval - eventConfig.minWaveInterval + 1)
-                    ) + eventConfig.minWaveInterval
-
-                newState.scheduledEvents.push({
-                    type: eventConfig.type,
-                    scheduledWave: currentWave + waveOffset,
-                    config: eventConfig
-                })
-            }
-        })
-
-        // Sort by wave
-        newState.scheduledEvents.sort((a, b) => a.scheduledWave - b.scheduledWave)
-
-        return newState
-    }
-
-    private static canEventActivate(
-        eventConfig: GlobalEventConfig,
-        activeEvents: ActiveGlobalEvent[]
-    ): boolean {
-        if (activeEvents.length === 0) return true
-
-        // Check if any active event conflicts
-        return activeEvents.every(
-            (activeEvent) =>
-                eventConfig.canCoexist.includes(activeEvent.type) ||
-                activeEvent.config.canCoexist.includes(eventConfig.type)
-        )
-    }
-}
-
-interface GameState {
-    coins: number
-    coinsSpent: number
-    enemies: Enemy[]
-    // Statistics
-    enemiesKilled: number
-    enemyBuffs: {
-        healthBoost: number
-        speedBoost: number
-    }
-    explosions: Explosion[]
-    globalEvents: GlobalEventsState
-    health: number
-    healthLost: number
-    isGameOver: boolean
-    isGameStarted: boolean
-    isShaking: boolean
-    lastBuffWave: number
-    // Visual effects
-    lastDamageTime: number
-    lastHealthRegen: number
-    lastInterestPayment: number // Track interest payments
-    lastMoneyRegen: number
-    lightnings: Lightning[]
-    score: number
-    selectedTowerType: null | Tower['type']
-    totalCoinsEarned: number
-    totalInterestEarned: number // Track total interest earned
-    towers: Tower[]
-    towersBuilt: number
-    wave: number
-}
-
-const TOWER_TYPES = {
-    firewall: { damage: 20, range: 80, cost: 50, cooldown: 1000, health: 100, color: 'blue' },
-    antivirus: { damage: 15, range: 60, cost: 30, cooldown: 800, health: 60, color: 'teal' },
-    proxy: { damage: 10, range: 100, cost: 25, cooldown: 600, health: 40, color: 'indigo' },
-    slowdown: { damage: 5, range: 120, cost: 35, cooldown: 800, health: 50, color: 'cyan' },
-    chain: { damage: 25, range: 90, cost: 60, cooldown: 1200, health: 70, color: 'purple' }
-}
-
-const ENEMY_TYPES = {
-    hacker: {
-        health: 30,
-        speed: 2.5,
-        reward: 15,
-        color: 'red',
-        towerDamage: 15,
-        attackRange: 50,
-        attackCooldown: 1500,
-        shield: 0,
-        maxShield: 0,
-        hasShield: false,
-        slowEffect: 1,
-        disabledUntil: 0,
-        buffs: undefined
-    },
-    ddos: {
-        health: 60,
-        speed: 1.5,
-        reward: 30,
-        color: 'orange',
-        towerDamage: 25,
-        attackRange: 60,
-        attackCooldown: 800,
-        shield: 0,
-        maxShield: 0,
-        hasShield: false,
-        slowEffect: 1,
-        disabledUntil: 0,
-        buffs: undefined
-    },
-    malware: {
-        health: 15,
-        speed: 4,
-        reward: 10,
-        color: 'pink',
-        towerDamage: 8,
-        attackRange: 40,
-        attackCooldown: 1200,
-        shield: 0,
-        maxShield: 0,
-        hasShield: false,
-        slowEffect: 1,
-        disabledUntil: 0,
-        buffs: undefined
-    },
-    spider: {
-        health: 180,
-        speed: 1.8,
-        reward: 75,
-        color: 'purple',
-        towerDamage: 35,
-        attackRange: 70,
-        attackCooldown: 600,
-        shield: 0,
-        maxShield: 0,
-        hasShield: false,
-        slowEffect: 1,
-        disabledUntil: 0,
-        buffs: undefined
-    },
-    shielded: {
-        health: 100,
-        speed: 1.5,
-        reward: 50,
-        color: 'green',
-        towerDamage: 20,
-        attackRange: 50,
-        attackCooldown: 1000,
-        shield: 3,
-        maxShield: 3,
-        hasShield: true,
-        slowEffect: 1,
-        disabledUntil: 0,
-        buffs: undefined
-    },
-    voltage: {
-        health: 120,
-        speed: 1.2,
-        reward: 60,
-        color: 'yellow',
-        towerDamage: 25,
-        attackRange: 60,
-        attackCooldown: 800,
-        shield: 0,
-        maxShield: 0,
-        hasShield: false,
-        slowEffect: 1,
-        disabledUntil: 0,
-        buffs: undefined
-    },
-    replicator: {
-        health: 100,
-        speed: 1.0,
-        reward: 80,
-        color: 'pink',
-        towerDamage: 30,
-        attackRange: 70,
-        attackCooldown: 1200,
-        shield: 0,
-        maxShield: 0,
-        hasShield: false,
-        slowEffect: 1,
-        disabledUntil: 0,
-        buffs: undefined
-        // Note: Original replicators spawn with isOriginal: true and can create 2 copies on death
-        // Copies have isOriginal: false and cannot replicate further
-    }
-}
-
-const GAME_CONFIG = {
-    boardWidth: 800,
-    boardHeight: 400,
-    startHealth: 100,
-    startCoins: 100,
-    waveEnemyCount: 5,
-    minTowerDistance: 45, // Minimum distance between towers
-    // Economy configuration
-    economy: {
-        basePassiveIncome: 5,
-        waveCompletionBonus: 50,
-        killBonusMultiplier: 1,
-        interestRate: 0.02,
-        interestInterval: 10_000, // milliseconds
-        maxInterestBase: 1000, // Max coins that earn interest (prevents exponential growth)
-        passiveIncomeLimit: 1000 // Passive income stops when player has more than this amount
-    }
-}
-
-// Pixel art drawing functions
-const drawFirewallTower = (
-    ctx: CanvasRenderingContext2D,
-    x: number,
-    y: number,
-    health: number,
-    maxHealth: number
-) => {
-    const centerX = x + 15
-    const centerY = y + 15
-
-    // Base foundation
-    ctx.fillStyle = '#444444'
-    ctx.fillRect(centerX - 12, centerY + 8, 24, 6)
-
-    // Main tower body (brick pattern)
-    ctx.fillStyle = '#2E3F8F'
-    ctx.fillRect(centerX - 10, centerY - 8, 20, 16)
-
-    // Brick lines
-    ctx.fillStyle = '#4A5BAF'
-    for (let i = 0; i < 3; i++) {
-        ctx.fillRect(centerX - 10, centerY - 8 + i * 6, 20, 1)
-        ctx.fillRect(centerX - 5, centerY - 8 + i * 6, 1, 6)
-    }
-
-    // Shield emblem
-    ctx.fillStyle = '#FFD700'
-    ctx.beginPath()
-    ctx.moveTo(centerX, centerY - 6)
-    ctx.lineTo(centerX - 6, centerY)
-    ctx.lineTo(centerX - 6, centerY + 4)
-    ctx.lineTo(centerX, centerY + 8)
-    ctx.lineTo(centerX + 6, centerY + 4)
-    ctx.lineTo(centerX + 6, centerY)
-    ctx.closePath()
-    ctx.fill()
-
-    // Shield highlight
-    ctx.fillStyle = '#FFF8DC'
-    ctx.fillRect(centerX - 4, centerY - 2, 8, 2)
-
-    // Animated energy shield (if healthy)
-    if (health > maxHealth * 0.7) {
-        const alpha = 0.3 + 0.2 * Math.sin(Date.now() * 0.01)
-        ctx.fillStyle = `rgba(0, 212, 255, ${alpha})`
-        ctx.beginPath()
-        ctx.arc(centerX, centerY, 16, 0, Math.PI * 2)
-        ctx.fill()
-    }
-}
-
-const drawAntivirusTower = (ctx: CanvasRenderingContext2D, x: number, y: number) => {
-    const centerX = x + 15
-    const centerY = y + 15
-
-    // Base
-    ctx.fillStyle = '#2D5A27'
-    ctx.fillRect(centerX - 8, centerY + 6, 16, 8)
-
-    // Main body
-    ctx.fillStyle = '#4CAF50'
-    ctx.fillRect(centerX - 6, centerY - 4, 12, 10)
-
-    // Tech details
-    ctx.fillStyle = '#81C784'
-    ctx.fillRect(centerX - 4, centerY - 2, 8, 1)
-    ctx.fillRect(centerX - 4, centerY + 2, 8, 1)
-
-    // Energy core
-    ctx.fillStyle = '#00E676'
-    ctx.fillRect(centerX - 2, centerY - 6, 4, 4)
-
-    // Lightning bolt
-    ctx.fillStyle = '#FFEB3B'
-    ctx.beginPath()
-    ctx.moveTo(centerX - 1, centerY - 6)
-    ctx.lineTo(centerX + 2, centerY - 2)
-    ctx.lineTo(centerX, centerY - 2)
-    ctx.lineTo(centerX + 1, centerY + 2)
-    ctx.lineTo(centerX - 2, centerY - 2)
-    ctx.lineTo(centerX, centerY - 2)
-    ctx.closePath()
-    ctx.fill()
-
-    // Animated energy rings
-    const time = Date.now() * 0.005
-    for (let i = 0; i < 3; i++) {
-        const radius = 12 + i * 4 + Math.sin(time + i) * 2
-        const alpha = 0.2 - i * 0.05
-        ctx.strokeStyle = `rgba(76, 175, 80, ${alpha})`
-        ctx.lineWidth = 1
-        ctx.beginPath()
-        ctx.arc(centerX, centerY, radius, 0, Math.PI * 2)
-        ctx.stroke()
-    }
-}
-
-const drawProxyTower = (ctx: CanvasRenderingContext2D, x: number, y: number) => {
-    const centerX = x + 15
-    const centerY = y + 15
-
-    // Base
-    ctx.fillStyle = '#4A148C'
-    ctx.fillRect(centerX - 8, centerY + 6, 16, 8)
-
-    // Main body
-    ctx.fillStyle = '#8E24AA'
-    ctx.fillRect(centerX - 6, centerY - 2, 12, 8)
-
-    // Antenna
-    ctx.fillStyle = '#E1BEE7'
-    ctx.fillRect(centerX - 1, centerY - 8, 2, 6)
-
-    // Antenna rings
-    ctx.strokeStyle = '#BA68C8'
-    ctx.lineWidth = 1
-    for (let i = 0; i < 3; i++) {
-        ctx.beginPath()
-        ctx.arc(centerX, centerY - 6, 2 + i * 2, 0, Math.PI * 2)
-        ctx.stroke()
-    }
-
-    // Rotating proxy symbols
-    const time = Date.now() * 0.01
-    for (let i = 0; i < 4; i++) {
-        const angle = time + (i * Math.PI) / 2
-        const radius = 10
-        const symX = centerX + Math.cos(angle) * radius
-        const symY = centerY + Math.sin(angle) * radius
-
-        ctx.fillStyle = '#CE93D8'
-        ctx.fillRect(symX - 1, symY - 1, 2, 2)
-    }
-
-    // Data streams
-    ctx.fillStyle = '#E1BEE7'
-    const stream1 = Math.sin(time) * 4
-    const stream2 = Math.sin(time + 1) * 4
-    ctx.fillRect(centerX - 4, centerY + stream1, 8, 1)
-    ctx.fillRect(centerX - 4, centerY + 2 + stream2, 8, 1)
-}
-
-const drawHackerEnemy = (ctx: CanvasRenderingContext2D, x: number, y: number) => {
-    const centerX = x + 15
-    const centerY = y + 15
-
-    // Shadow
-    ctx.fillStyle = 'rgba(0, 0, 0, 0.2)'
-    ctx.fillRect(centerX - 8, centerY + 10, 16, 4)
-
-    // Body
-    ctx.fillStyle = '#424242'
-    ctx.fillRect(centerX - 6, centerY - 2, 12, 8)
-
-    // Hood
-    ctx.fillStyle = '#212121'
-    ctx.fillRect(centerX - 8, centerY - 8, 16, 8)
-    ctx.fillRect(centerX - 4, centerY - 10, 8, 4)
-
-    // Face (eyes only)
-    ctx.fillStyle = '#FF1744'
-    ctx.fillRect(centerX - 4, centerY - 6, 2, 2)
-    ctx.fillRect(centerX + 2, centerY - 6, 2, 2)
-
-    // Laptop
-    ctx.fillStyle = '#37474F'
-    ctx.fillRect(centerX - 3, centerY + 2, 6, 4)
-
-    // Screen glow
-    ctx.fillStyle = '#4CAF50'
-    ctx.fillRect(centerX - 2, centerY + 3, 4, 2)
-
-    // Animated typing effect
-    const time = Date.now() * 0.02
-    if (Math.floor(time) % 2 === 0) {
-        ctx.fillStyle = '#00E676'
-        ctx.fillRect(centerX - 1, centerY + 4, 1, 1)
-    }
-}
-
-const drawDDoSEnemy = (ctx: CanvasRenderingContext2D, x: number, y: number) => {
-    const centerX = x + 15
-    const centerY = y + 15
-
-    // Core
-    ctx.fillStyle = '#FF5722'
-    ctx.fillRect(centerX - 4, centerY - 4, 8, 8)
-
-    // Inner core
-    ctx.fillStyle = '#FF8A65'
-    ctx.fillRect(centerX - 2, centerY - 2, 4, 4)
-
-    // Animated attack vectors
-    const time = Date.now() * 0.01
-    for (let i = 0; i < 8; i++) {
-        const angle = (i * Math.PI) / 4 + time
-        const length = 8 + Math.sin(time + i) * 4
-        const endX = centerX + Math.cos(angle) * length
-        const endY = centerY + Math.sin(angle) * length
-
-        ctx.strokeStyle = '#FF5722'
-        ctx.lineWidth = 2
-        ctx.beginPath()
-        ctx.moveTo(centerX, centerY)
-        ctx.lineTo(endX, endY)
-        ctx.stroke()
-
-        // Arrow heads
-        ctx.fillStyle = '#FF1744'
-        ctx.fillRect(endX - 1, endY - 1, 2, 2)
-    }
-
-    // Pulsing effect
-    const pulseRadius = 12 + Math.sin(time * 2) * 4
-    ctx.strokeStyle = `rgba(255, 87, 34, ${0.3 + Math.sin(time * 2) * 0.2})`
-    ctx.lineWidth = 1
-    ctx.beginPath()
-    ctx.arc(centerX, centerY, pulseRadius, 0, Math.PI * 2)
-    ctx.stroke()
-}
-
-const drawMalwareEnemy = (ctx: CanvasRenderingContext2D, x: number, y: number) => {
-    const centerX = x + 15
-    const centerY = y + 15
-
-    // Worm body segments
-    const time = Date.now() * 0.01
-    const segments = 5
-
-    for (let i = 0; i < segments; i++) {
-        const segmentX = centerX + Math.sin(time + i * 0.5) * 4
-        const segmentY = centerY + i * 2 - 4
-        const size = 4 - i * 0.5
-
-        // Segment body
-        ctx.fillStyle = `hsl(${300 + i * 10}, 70%, ${60 - i * 5}%)`
-        ctx.fillRect(segmentX - size, segmentY - size, size * 2, size * 2)
-
-        // Segment highlight
-        ctx.fillStyle = `hsl(${300 + i * 10}, 70%, ${80 - i * 5}%)`
-        ctx.fillRect(segmentX - size + 1, segmentY - size + 1, size, 1)
-    }
-
-    // Head (first segment)
-    ctx.fillStyle = '#E91E63'
-    ctx.fillRect(centerX - 4, centerY - 4, 8, 8)
-
-    // Eyes
-    ctx.fillStyle = '#FF1744'
-    ctx.fillRect(centerX - 3, centerY - 3, 2, 2)
-    ctx.fillRect(centerX + 1, centerY - 3, 2, 2)
-
-    // Mouth
-    ctx.fillStyle = '#B71C1C'
-    ctx.fillRect(centerX - 2, centerY, 4, 2)
-
-    // Corruption effect
-    for (let i = 0; i < 3; i++) {
-        const corruptX = centerX + (Math.random() - 0.5) * 16
-        const corruptY = centerY + (Math.random() - 0.5) * 16
-        ctx.fillStyle = `rgba(233, 30, 99, ${0.3 + Math.random() * 0.3})`
-        ctx.fillRect(corruptX, corruptY, 1, 1)
-    }
-}
-
-const drawSpiderEnemy = (ctx: CanvasRenderingContext2D, x: number, y: number) => {
-    const centerX = x + 25 // Larger center offset for bigger sprite
-    const centerY = y + 25
-
-    // Shadow (larger)
-    ctx.fillStyle = 'rgba(0, 0, 0, 0.4)'
-    ctx.fillRect(centerX - 16, centerY + 18, 32, 8)
-
-    // Spider body segments
-    const time = Date.now() * 0.008
-
-    // Abdomen (back part)
-    ctx.fillStyle = '#4A148C'
-    ctx.fillRect(centerX - 8, centerY + 2, 16, 12)
-    ctx.fillStyle = '#6A1B9A'
-    ctx.fillRect(centerX - 6, centerY + 4, 12, 8)
-
-    // Thorax (middle part)
-    ctx.fillStyle = '#7B1FA2'
-    ctx.fillRect(centerX - 6, centerY - 4, 12, 8)
-    ctx.fillStyle = '#8E24AA'
-    ctx.fillRect(centerX - 4, centerY - 2, 8, 4)
-
-    // Head (front part)
-    ctx.fillStyle = '#9C27B0'
-    ctx.fillRect(centerX - 4, centerY - 8, 8, 6)
-
-    // Eyes (multiple, spider-like)
-    ctx.fillStyle = '#FF1744'
-    ctx.fillRect(centerX - 3, centerY - 7, 2, 2)
-    ctx.fillRect(centerX + 1, centerY - 7, 2, 2)
-    ctx.fillRect(centerX - 1, centerY - 5, 2, 2)
-
-    // Fangs
-    ctx.fillStyle = '#FFF'
-    ctx.fillRect(centerX - 2, centerY - 4, 1, 2)
-    ctx.fillRect(centerX + 1, centerY - 4, 1, 2)
-
-    // Spider legs (8 legs, 4 on each side)
-    const legPositions = [
-        { side: -1, offset: -6 },
-        { side: -1, offset: -2 },
-        { side: -1, offset: 2 },
-        { side: -1, offset: 6 },
-        { side: 1, offset: -6 },
-        { side: 1, offset: -2 },
-        { side: 1, offset: 2 },
-        { side: 1, offset: 6 }
+    // Late game can use any formation
+    const allFormations: Formation[] = [
+        'ambush',
+        'line',
+        'group',
+        'scattered',
+        'flanking',
+        'waves',
+        'pincer'
     ]
 
-    legPositions.forEach((leg, i) => {
-        const legTime = time + i * 0.5
-        const legSway = Math.sin(legTime) * 3
-        const legLength = 12 + Math.sin(legTime * 2) * 2
+    // Boss waves (every 3rd wave) prefer more challenging formations
+    if (waveNumber % 3 === 0) {
+        const challengingFormations: Formation[] = [
+            'ambush',
+            'flanking',
+            'waves',
+            'pincer',
+            'scattered'
+        ]
+        return challengingFormations[Math.floor(Math.random() * challengingFormations.length)]
+    }
 
-        // Upper leg segment
-        ctx.fillStyle = '#8E24AA'
-        ctx.fillRect(
-            centerX + leg.side * 8,
-            centerY + leg.offset + legSway,
-            leg.side * legLength * 0.6,
-            2
-        )
+    return allFormations[Math.floor(Math.random() * allFormations.length)]
+}
 
-        // Lower leg segment
-        ctx.fillStyle = '#7B1FA2'
-        ctx.fillRect(
-            centerX + leg.side * (8 + legLength * 0.6),
-            centerY + leg.offset + legSway + 2,
-            leg.side * legLength * 0.4,
-            2
-        )
+const selectWaveType = (waveNumber: number): WaveType => {
+    // Early waves are mostly standard
+    if (waveNumber <= 5) {
+        return Math.random() < 0.8 ? 'standard' : 'swarm'
+    }
+
+    // Boss waves (every 5th wave) prefer elite composition
+    if (waveNumber % 5 === 0) {
+        return Math.random() < 0.6 ? 'elite' : 'standard'
+    }
+
+    // Every 8th wave prefers tsunami
+    if (waveNumber % 8 === 0) {
+        return Math.random() < 0.7 ? 'tsunami' : 'swarm'
+    }
+
+    // Mid-late game can have any type
+    const rand = Math.random()
+    if (rand < 0.5) return 'standard'
+    if (rand < 0.8) return 'swarm'
+    if (rand < 0.9) return 'tsunami'
+    return 'elite'
+}
+
+const applyFormation = (enemies: Enemy[], formation: Formation) => {
+    const { boardHeight } = GAME_CONFIG
+    const boardCenter = boardHeight / 2
+
+    switch (formation) {
+        case 'ambush':
+            // Enemies emerge from coordinated ambush points at different times
+            enemies.forEach((enemy, index) => {
+                const ambushPoint = index % 4 // 4 different ambush points
+                const groupInAmbush = Math.floor(index / 4)
+
+                switch (ambushPoint) {
+                    case 0: // Top-left ambush
+                        enemy.x = -50 - groupInAmbush * 40
+                        enemy.y = 40 + Math.random() * 60
+                        break
+                    case 1: // Bottom-left ambush
+                        enemy.x = -50 - groupInAmbush * 40
+                        enemy.y = boardHeight - 100 + Math.random() * 60
+                        break
+                    case 2: // Mid-left delayed
+                        enemy.x = -50 - (groupInAmbush + 2) * 60 // Extra delay
+                        enemy.y = boardCenter + (Math.random() - 0.5) * 100
+                        break
+                    case 3: // Staggered attack
+                        enemy.x = -50 - groupInAmbush * 30
+                        enemy.y = 80 + (index % 3) * 80 + Math.random() * 40
+                        break
+                    default:
+                        enemy.x = -50 - groupInAmbush * 50
+                        enemy.y = boardCenter
+                        break
+                }
+            })
+            break
+
+        case 'flanking':
+            // Enemies attack from top and bottom simultaneously
+            enemies.forEach((enemy, index) => {
+                enemy.x = -50 - Math.floor(index / 2) * 50 // Pairs spawn together
+                enemy.y = index % 2 === 0 ? 60 : boardHeight - 60 // Top or bottom
+            })
+            break
+
+        case 'group':
+            // Enemies move in compact groups of 3
+            enemies.forEach((enemy, index) => {
+                const groupIndex = Math.floor(index / 3)
+                const positionInGroup = index % 3
+                const groupSpacing = 80
+                const memberSpacing = 35
+
+                enemy.x = -50 - groupIndex * groupSpacing
+                enemy.y = boardCenter + (positionInGroup - 1) * memberSpacing
+            })
+            break
+
+        case 'line':
+            // Enemies march in a straight line with equal intervals
+            enemies.forEach((enemy, index) => {
+                enemy.x = -50 - Math.min(index * 60, 200) // Increased spacing
+                enemy.y = boardCenter + (Math.random() - 0.5) * 40 // Small random variation
+            })
+            break
+
+        case 'pincer':
+            // Enemies attack from multiple angles - top, center, bottom
+            enemies.forEach((enemy, index) => {
+                const lane = index % 3
+                const groupInLane = Math.floor(index / 3)
+
+                enemy.x = -50 - groupInLane * 70
+
+                switch (lane) {
+                    case 0: // Top lane
+                        enemy.y = 50
+                        break
+                    case 1: // Center lane
+                        enemy.y = boardCenter
+                        break
+                    case 2: // Bottom lane
+                        enemy.y = boardHeight - 50
+                        break
+                    default:
+                        enemy.y = boardCenter
+                        break
+                }
+            })
+            break
+
+        case 'scattered':
+            // Enemies spread across the entire battlefield height
+            enemies.forEach((enemy) => {
+                enemy.x = -50 - Math.min(Math.random() * 120, 200) // More spread in timing
+                enemy.y = 30 + Math.random() * (boardHeight - 60) // Full height coverage
+            })
+            break
+
+        case 'waves':
+            // Enemies come in distinct waves with significant delays
+            enemies.forEach((enemy, index) => {
+                const waveIndex = Math.floor(index / 8)
+                const positionInWave = index % 4
+
+                enemy.x = -50 - Math.min(waveIndex * 60, 200)
+                enemy.y = boardCenter + (positionInWave - 1.5) * 30
+            })
+            break
+
+        default:
+            // Fallback to line formation
+            enemies.forEach((enemy, enemyIndex) => {
+                enemy.x = -50 - Math.min(enemyIndex * 60, 200)
+                enemy.y = boardCenter
+            })
+            break
+    }
+
+    // Ensure enemies don't spawn outside board boundaries
+    enemies.forEach((enemy) => {
+        enemy.y = Math.max(20, Math.min(enemy.y, boardHeight - 20))
     })
-
-    // Web pattern on abdomen
-    ctx.strokeStyle = '#E1BEE7'
-    ctx.lineWidth = 1
-    ctx.beginPath()
-    ctx.moveTo(centerX - 6, centerY + 4)
-    ctx.lineTo(centerX + 6, centerY + 4)
-    ctx.moveTo(centerX - 6, centerY + 8)
-    ctx.lineTo(centerX + 6, centerY + 8)
-    ctx.moveTo(centerX - 4, centerY + 2)
-    ctx.lineTo(centerX - 4, centerY + 10)
-    ctx.moveTo(centerX + 4, centerY + 2)
-    ctx.lineTo(centerX + 4, centerY + 10)
-    ctx.stroke()
-
-    // Pulsing danger aura
-    const pulseRadius = 20 + Math.sin(time * 3) * 4
-    ctx.strokeStyle = `rgba(156, 39, 176, ${0.4 + Math.sin(time * 3) * 0.3})`
-    ctx.lineWidth = 2
-    ctx.beginPath()
-    ctx.arc(centerX, centerY, pulseRadius, 0, Math.PI * 2)
-    ctx.stroke()
-
-    // Venom drip effect
-    if (Math.floor(time * 4) % 3 === 0) {
-        ctx.fillStyle = '#76FF03'
-        ctx.fillRect(centerX - 1, centerY - 3, 2, 4)
-    }
-}
-
-const drawSpiderAttack = (
-    ctx: CanvasRenderingContext2D,
-    fromX: number,
-    fromY: number,
-    toX: number,
-    toY: number,
-    progress: number
-) => {
-    const alpha = 1 - progress * 0.5
-
-    // Spider web attack - creates web strands
-    const segments = 6
-    const points: { x: number; y: number }[] = []
-
-    points.push({ x: fromX, y: fromY })
-
-    for (let i = 1; i < segments; i++) {
-        const t = i / segments
-        const baseX = fromX + (toX - fromX) * t
-        const baseY = fromY + (toY - fromY) * t
-
-        // Web-like pattern - sticky and curved
-        const waveOffset = Math.sin(t * Math.PI * 2) * 8
-        const perpX = -(toY - fromY)
-        const perpY = toX - fromX
-        const perpLength = Math.sqrt(perpX * perpX + perpY * perpY)
-
-        if (perpLength > 0) {
-            const normalizedPerpX = perpX / perpLength
-            const normalizedPerpY = perpY / perpLength
-
-            points.push({
-                x: baseX + normalizedPerpX * waveOffset,
-                y: baseY + normalizedPerpY * waveOffset
-            })
-        }
-    }
-
-    points.push({ x: toX, y: toY })
-
-    // Draw main web strand
-    ctx.strokeStyle = `rgba(156, 39, 176, ${alpha})`
-    ctx.lineWidth = 4
-    ctx.beginPath()
-    ctx.moveTo(points[0].x, points[0].y)
-    for (let i = 1; i < points.length; i++) {
-        ctx.lineTo(points[i].x, points[i].y)
-    }
-    ctx.stroke()
-
-    // Draw secondary web strands
-    for (let strand = 0; strand < 3; strand++) {
-        const offset = (strand - 1) * 6
-        ctx.strokeStyle = `rgba(156, 39, 176, ${alpha * (0.6 - strand * 0.2)})`
-        ctx.lineWidth = 2 - strand * 0.5
-        ctx.beginPath()
-        ctx.moveTo(fromX + offset, fromY)
-        for (let i = 1; i < points.length; i++) {
-            ctx.lineTo(points[i].x + offset, points[i].y)
-        }
-        ctx.stroke()
-    }
-
-    // Add venom drops
-    for (let i = 0; i < 4; i++) {
-        const dropX = fromX + (toX - fromX) * (0.2 + i * 0.2)
-        const dropY = fromY + (toY - fromY) * (0.2 + i * 0.2)
-        ctx.fillStyle = `rgba(118, 255, 3, ${alpha * 0.8})`
-        ctx.fillRect(dropX - 1, dropY - 1, 2, 2)
-    }
-}
-
-const drawExplosion = (ctx: CanvasRenderingContext2D, x: number, y: number, progress: number) => {
-    const explosionCenterX = x
-    const explosionCenterY = y
-
-    // Simple explosion for debugging
-    const explosionSize = progress * 30
-    const alpha = 1 - progress
-
-    // Bright white core
-    ctx.fillStyle = `rgba(255, 255, 255, ${alpha})`
-    ctx.fillRect(
-        explosionCenterX - explosionSize / 2,
-        explosionCenterY - explosionSize / 2,
-        explosionSize,
-        explosionSize
-    )
-
-    // Orange fire ring
-    ctx.fillStyle = `rgba(255, 165, 0, ${alpha * 0.8})`
-    ctx.fillRect(
-        explosionCenterX - explosionSize / 3,
-        explosionCenterY - explosionSize / 3,
-        explosionSize * 0.66,
-        explosionSize * 0.66
-    )
-
-    // Red outer ring
-    ctx.fillStyle = `rgba(255, 0, 0, ${alpha * 0.6})`
-    ctx.fillRect(
-        explosionCenterX - explosionSize * 0.4,
-        explosionCenterY - explosionSize * 0.4,
-        explosionSize * 0.8,
-        explosionSize * 0.8
-    )
-
-    // Fire particles in a circle
-    const particleCount = 8
-    for (let i = 0; i < particleCount; i++) {
-        const angle = (i / particleCount) * Math.PI * 2
-        const distance = explosionSize * 0.8
-        const particleX = explosionCenterX + Math.cos(angle) * distance
-        const particleY = explosionCenterY + Math.sin(angle) * distance
-
-        const particleSize = (1 - progress) * 4
-        ctx.fillStyle = `rgba(255, 100, 0, ${alpha * 0.9})`
-        ctx.fillRect(
-            particleX - particleSize / 2,
-            particleY - particleSize / 2,
-            particleSize,
-            particleSize
-        )
-    }
-}
-
-const drawLightning = (
-    ctx: CanvasRenderingContext2D,
-    fromX: number,
-    fromY: number,
-    toX: number,
-    toY: number,
-    progress: number,
-    towerType: Tower['type']
-) => {
-    const alpha = 1 - progress * 0.7
-
-    // Calculate lightning path with some randomness
-    const segments = 8
-    const points: { x: number; y: number }[] = []
-
-    // Start point
-    points.push({ x: fromX, y: fromY })
-
-    // Generate intermediate points with some randomness
-    for (let i = 1; i < segments; i++) {
-        const t = i / segments
-        const baseX = fromX + (toX - fromX) * t
-        const baseY = fromY + (toY - fromY) * t
-
-        // Add some randomness perpendicular to the line
-        const perpX = -(toY - fromY)
-        const perpY = toX - fromX
-        const perpLength = Math.sqrt(perpX * perpX + perpY * perpY)
-        const normalizedPerpX = perpX / perpLength
-        const normalizedPerpY = perpY / perpLength
-
-        const randomOffset = (Math.random() - 0.5) * 15
-        points.push({
-            x: baseX + normalizedPerpX * randomOffset,
-            y: baseY + normalizedPerpY * randomOffset
-        })
-    }
-
-    // End point
-    points.push({ x: toX, y: toY })
-
-    // Draw lightning based on tower type
-    let lightningColor
-    switch (towerType) {
-        case 'antivirus':
-            lightningColor = `rgba(0, 255, 100, ${alpha})`
-            break
-        case 'firewall':
-            lightningColor = `rgba(0, 150, 255, ${alpha})`
-            break
-        case 'proxy':
-            lightningColor = `rgba(200, 100, 255, ${alpha})`
-            break
-        default:
-            lightningColor = `rgba(255, 255, 255, ${alpha})`
-    }
-
-    // Draw main lightning bolt
-    ctx.strokeStyle = lightningColor
-    ctx.lineWidth = 3
-    ctx.beginPath()
-    ctx.moveTo(points[0].x, points[0].y)
-    for (let i = 1; i < points.length; i++) {
-        ctx.lineTo(points[i].x, points[i].y)
-    }
-    ctx.stroke()
-
-    // Draw inner bright core
-    ctx.strokeStyle = `rgba(255, 255, 255, ${alpha * 0.8})`
-    ctx.lineWidth = 1
-    ctx.beginPath()
-    ctx.moveTo(points[0].x, points[0].y)
-    for (let i = 1; i < points.length; i++) {
-        ctx.lineTo(points[i].x, points[i].y)
-    }
-    ctx.stroke()
-}
-
-const drawHackerAttack = (
-    ctx: CanvasRenderingContext2D,
-    fromX: number,
-    fromY: number,
-    toX: number,
-    toY: number,
-    progress: number
-) => {
-    const alpha = 1 - progress * 0.5
-
-    // Digital corruption effect - more chaotic path
-    const segments = 12
-    const points: { x: number; y: number }[] = []
-
-    points.push({ x: fromX, y: fromY })
-
-    for (let i = 1; i < segments; i++) {
-        const t = i / segments
-        const baseX = fromX + (toX - fromX) * t
-        const baseY = fromY + (toY - fromY) * t
-
-        // More aggressive randomness for hacker attacks
-        const randomOffset = (Math.random() - 0.5) * 25
-        const perpX = -(toY - fromY)
-        const perpY = toX - fromX
-        const perpLength = Math.sqrt(perpX * perpX + perpY * perpY)
-
-        if (perpLength > 0) {
-            const normalizedPerpX = perpX / perpLength
-            const normalizedPerpY = perpY / perpLength
-
-            points.push({
-                x: baseX + normalizedPerpX * randomOffset,
-                y: baseY + normalizedPerpY * randomOffset
-            })
-        }
-    }
-
-    points.push({ x: toX, y: toY })
-
-    // Draw red hacker lightning with digital glitches
-    ctx.strokeStyle = `rgba(255, 50, 50, ${alpha})`
-    ctx.lineWidth = 2
-    ctx.beginPath()
-    ctx.moveTo(points[0].x, points[0].y)
-    for (let i = 1; i < points.length; i++) {
-        ctx.lineTo(points[i].x, points[i].y)
-    }
-    ctx.stroke()
-
-    // Add digital glitch effects
-    for (let i = 0; i < 5; i++) {
-        const glitchX = fromX + (toX - fromX) * Math.random()
-        const glitchY = fromY + (toY - fromY) * Math.random()
-        ctx.fillStyle = `rgba(255, 0, 0, ${alpha * 0.6})`
-        ctx.fillRect(glitchX - 2, glitchY - 1, 4, 2)
-    }
-}
-
-const drawDDoSAttack = (
-    ctx: CanvasRenderingContext2D,
-    fromX: number,
-    fromY: number,
-    toX: number,
-    toY: number,
-    progress: number
-) => {
-    const alpha = 1 - progress * 0.6
-
-    // Multiple lightning bolts for DDoS effect
-    const bolts = 3
-
-    for (let bolt = 0; bolt < bolts; bolt++) {
-        const offset = (bolt - 1) * 8 // Spread bolts apart
-        const segments = 6
-        const points: { x: number; y: number }[] = []
-
-        points.push({ x: fromX + offset, y: fromY })
-
-        for (let i = 1; i < segments; i++) {
-            const t = i / segments
-            const baseX = fromX + offset + (toX - fromX) * t
-            const baseY = fromY + (toY - fromY) * t
-
-            const randomOffset = (Math.random() - 0.5) * 12
-            const perpX = -(toY - fromY)
-            const perpY = toX - fromX
-            const perpLength = Math.sqrt(perpX * perpX + perpY * perpY)
-
-            if (perpLength > 0) {
-                const normalizedPerpX = perpX / perpLength
-                const normalizedPerpY = perpY / perpLength
-
-                points.push({
-                    x: baseX + normalizedPerpX * randomOffset,
-                    y: baseY + normalizedPerpY * randomOffset
-                })
-            }
-        }
-
-        points.push({ x: toX + offset, y: toY })
-
-        // Draw orange DDoS lightning
-        ctx.strokeStyle = `rgba(255, 140, 0, ${alpha * (0.8 - bolt * 0.2)})`
-        ctx.lineWidth = 2 - bolt * 0.3
-        ctx.beginPath()
-        ctx.moveTo(points[0].x, points[0].y)
-        for (let i = 1; i < points.length; i++) {
-            ctx.lineTo(points[i].x, points[i].y)
-        }
-        ctx.stroke()
-    }
-}
-
-const drawMalwareAttack = (
-    ctx: CanvasRenderingContext2D,
-    fromX: number,
-    fromY: number,
-    toX: number,
-    toY: number,
-    progress: number
-) => {
-    const alpha = 1 - progress * 0.4
-
-    // Organic, virus-like path
-    const segments = 10
-    const points: { x: number; y: number }[] = []
-
-    points.push({ x: fromX, y: fromY })
-
-    for (let i = 1; i < segments; i++) {
-        const t = i / segments
-        const baseX = fromX + (toX - fromX) * t
-        const baseY = fromY + (toY - fromY) * t
-
-        // Sinusoidal pattern for organic feel
-        const waveOffset = Math.sin(t * Math.PI * 3) * 10
-        const perpX = -(toY - fromY)
-        const perpY = toX - fromX
-        const perpLength = Math.sqrt(perpX * perpX + perpY * perpY)
-
-        if (perpLength > 0) {
-            const normalizedPerpX = perpX / perpLength
-            const normalizedPerpY = perpY / perpLength
-
-            points.push({
-                x: baseX + normalizedPerpX * waveOffset,
-                y: baseY + normalizedPerpY * waveOffset
-            })
-        }
-    }
-
-    points.push({ x: toX, y: toY })
-
-    // Draw dark purple malware lightning
-    ctx.strokeStyle = `rgba(150, 50, 150, ${alpha})`
-    ctx.lineWidth = 3
-    ctx.beginPath()
-    ctx.moveTo(points[0].x, points[0].y)
-    for (let i = 1; i < points.length; i++) {
-        ctx.lineTo(points[i].x, points[i].y)
-    }
-    ctx.stroke()
-
-    // Add corruption particles
-    for (let i = 0; i < 3; i++) {
-        const corruptX = fromX + (toX - fromX) * (0.3 + i * 0.2)
-        const corruptY = fromY + (toY - fromY) * (0.3 + i * 0.2)
-        ctx.fillStyle = `rgba(200, 50, 200, ${alpha * 0.7})`
-        ctx.fillRect(corruptX - 1, corruptY - 1, 2, 2)
-    }
-}
-
-// functions for drawing enemies (definitions before use)
-const drawShieldedEnemy = (
-    ctx: CanvasRenderingContext2D,
-    x: number,
-    y: number,
-    shield: number,
-    maxShield: number
-) => {
-    const centerX = x + 15
-    const centerY = y + 15
-
-    // Shadow
-    ctx.fillStyle = 'rgba(0, 0, 0, 0.2)'
-    ctx.fillRect(centerX - 8, centerY + 10, 16, 4)
-
-    // Main body
-    ctx.fillStyle = '#4CAF50'
-    ctx.fillRect(centerX - 6, centerY - 2, 12, 8)
-
-    // Arms/weapons
-    ctx.fillStyle = '#2E7D32'
-    ctx.fillRect(centerX - 8, centerY, 4, 4)
-    ctx.fillRect(centerX + 4, centerY, 4, 4)
-
-    // Head
-    ctx.fillStyle = '#66BB6A'
-    ctx.fillRect(centerX - 4, centerY - 6, 8, 6)
-
-    // Eyes
-    ctx.fillStyle = '#1976D2'
-    ctx.fillRect(centerX - 3, centerY - 5, 2, 2)
-    ctx.fillRect(centerX + 1, centerY - 5, 2, 2)
-
-    // Shield effect
-    if (shield > 0) {
-        const shieldAlpha = (shield / maxShield) * 0.8 + 0.2
-        const shieldRadius = 18 + Math.sin(Date.now() * 0.005) * 2
-
-        // Shield barrier
-        ctx.strokeStyle = `rgba(33, 150, 243, ${shieldAlpha})`
-        ctx.lineWidth = 3
-        ctx.beginPath()
-        ctx.arc(centerX, centerY, shieldRadius, 0, Math.PI * 2)
-        ctx.stroke()
-
-        // Shield segments
-        for (let i = 0; i < shield; i++) {
-            const angle = (i / maxShield) * Math.PI * 2
-            const x1 = centerX + Math.cos(angle) * (shieldRadius - 2)
-            const y1 = centerY + Math.sin(angle) * (shieldRadius - 2)
-            const x2 = centerX + Math.cos(angle) * (shieldRadius + 2)
-            const y2 = centerY + Math.sin(angle) * (shieldRadius + 2)
-
-            ctx.strokeStyle = '#2196F3'
-            ctx.lineWidth = 2
-            ctx.beginPath()
-            ctx.moveTo(x1, y1)
-            ctx.lineTo(x2, y2)
-            ctx.stroke()
-        }
-    }
-}
-
-const drawVoltageEnemy = (ctx: CanvasRenderingContext2D, x: number, y: number) => {
-    const centerX = x + 15
-    const centerY = y + 15
-    const time = Date.now() * 0.01
-
-    // Shadow
-    ctx.fillStyle = 'rgba(0, 0, 0, 0.2)'
-    ctx.fillRect(centerX - 8, centerY + 10, 16, 4)
-
-    // Main body - electric core
-    ctx.fillStyle = '#FFC107'
-    ctx.fillRect(centerX - 6, centerY - 4, 12, 8)
-
-    // Inner energy core
-    ctx.fillStyle = '#FF9800'
-    ctx.fillRect(centerX - 4, centerY - 2, 8, 4)
-
-    // Electric arcs
-    for (let i = 0; i < 6; i++) {
-        const angle = (i * Math.PI) / 3 + time
-        const radius = 12 + Math.sin(time * 3 + i) * 4
-        const endX = centerX + Math.cos(angle) * radius
-        const endY = centerY + Math.sin(angle) * radius
-
-        ctx.strokeStyle = '#FFEB3B'
-        ctx.lineWidth = 2
-        ctx.beginPath()
-        ctx.moveTo(centerX, centerY)
-        ctx.lineTo(endX, endY)
-        ctx.stroke()
-
-        // Spark effects
-        ctx.fillStyle = '#FFF176'
-        ctx.fillRect(endX - 1, endY - 1, 2, 2)
-    }
-
-    // Pulsing electric field
-    const pulseRadius = 16 + Math.sin(time * 4) * 3
-    ctx.strokeStyle = `rgba(255, 235, 59, ${0.4 + Math.sin(time * 4) * 0.3})`
-    ctx.lineWidth = 1
-    ctx.beginPath()
-    ctx.arc(centerX, centerY, pulseRadius, 0, Math.PI * 2)
-    ctx.stroke()
-
-    // Central lightning bolt
-    ctx.fillStyle = '#FFEB3B'
-    ctx.beginPath()
-    ctx.moveTo(centerX - 2, centerY - 6)
-    ctx.lineTo(centerX + 1, centerY - 2)
-    ctx.lineTo(centerX - 1, centerY - 2)
-    ctx.lineTo(centerX + 2, centerY + 2)
-    ctx.lineTo(centerX - 1, centerY - 2)
-    ctx.lineTo(centerX + 1, centerY - 2)
-    ctx.closePath()
-    ctx.fill()
-}
-
-const drawReplicatorEnemy = (
-    ctx: CanvasRenderingContext2D,
-    x: number,
-    y: number,
-    isOriginal: boolean = true
-) => {
-    const centerX = x + 15
-    const centerY = y + 15
-    const time = Date.now() * 0.008
-
-    // Shadow
-    ctx.fillStyle = 'rgba(0, 0, 0, 0.2)'
-    ctx.fillRect(centerX - 8, centerY + 10, 16, 4)
-
-    // Main body - darker for copies
-    ctx.fillStyle = isOriginal ? '#E91E63' : '#AD1457'
-    ctx.fillRect(centerX - 6, centerY - 2, 12, 8)
-
-    // Replication chambers - darker for copies
-    ctx.fillStyle = isOriginal ? '#C2185B' : '#8E0038'
-    ctx.fillRect(centerX - 8, centerY - 1, 3, 6)
-    ctx.fillRect(centerX + 5, centerY - 1, 3, 6)
-
-    // Head/control unit - darker for copies
-    ctx.fillStyle = isOriginal ? '#F06292' : '#C2185B'
-    ctx.fillRect(centerX - 4, centerY - 6, 8, 6)
-
-    // Scanning eyes
-    ctx.fillStyle = '#FF1744'
-    for (let i = 0; i < 3; i++) {
-        const eyeX = centerX - 3 + i * 3
-        ctx.fillRect(eyeX, centerY - 5, 1, 1)
-    }
-
-    // Replication energy fields
-    for (let i = 0; i < 4; i++) {
-        const angle = time + (i * Math.PI) / 2
-        const radius = 10 + Math.sin(time * 2 + i) * 3
-        const fieldX = centerX + Math.cos(angle) * radius
-        const fieldY = centerY + Math.sin(angle) * radius
-
-        ctx.fillStyle = `rgba(233, 30, 99, ${0.5 + Math.sin(time * 3 + i) * 0.3})`
-        ctx.fillRect(fieldX - 2, fieldY - 2, 4, 4)
-    }
-
-    // DNA helix effect
-    for (let i = 0; i < 8; i++) {
-        const helixY = centerY - 4 + i
-        const helixX1 = centerX + Math.sin(time + i * 0.5) * 4
-        const helixX2 = centerX + Math.sin(time + i * 0.5 + Math.PI) * 4
-
-        ctx.fillStyle = '#FF4081'
-        ctx.fillRect(helixX1 - 0.5, helixY, 1, 1)
-        ctx.fillRect(helixX2 - 0.5, helixY, 1, 1)
-    }
-}
-
-// functions for drawing towers (definitions before use)
-const drawSlowdownTower = (ctx: CanvasRenderingContext2D, x: number, y: number) => {
-    const centerX = x + 15
-    const centerY = y + 15
-    const time = Date.now() * 0.003
-
-    // Base
-    ctx.fillStyle = '#006064'
-    ctx.fillRect(centerX - 8, centerY + 6, 16, 8)
-
-    // Main body
-    ctx.fillStyle = '#00BCD4'
-    ctx.fillRect(centerX - 6, centerY - 2, 12, 8)
-
-    // Freeze chamber
-    ctx.fillStyle = '#B3E5FC'
-    ctx.fillRect(centerX - 4, centerY - 6, 8, 6)
-
-    // Ice crystals
-    for (let i = 0; i < 6; i++) {
-        const angle = (i * Math.PI) / 3 + time
-        const crystalX = centerX + Math.cos(angle) * 8
-        const crystalY = centerY + Math.sin(angle) * 8
-
-        ctx.fillStyle = '#E1F5FE'
-        ctx.fillRect(crystalX - 1, crystalY - 1, 2, 2)
-    }
-
-    // Frost waves
-    for (let i = 0; i < 3; i++) {
-        const radius = 15 + i * 8 + Math.sin(time + i) * 3
-        const alpha = 0.3 - i * 0.1
-        ctx.strokeStyle = `rgba(0, 188, 212, ${alpha})`
-        ctx.lineWidth = 1
-        ctx.beginPath()
-        ctx.arc(centerX, centerY, radius, 0, Math.PI * 2)
-        ctx.stroke()
-    }
-
-    // Central snowflake
-    ctx.strokeStyle = '#FFFFFF'
-    ctx.lineWidth = 2
-    ctx.beginPath()
-    ctx.moveTo(centerX, centerY - 4)
-    ctx.lineTo(centerX, centerY + 4)
-    ctx.moveTo(centerX - 4, centerY)
-    ctx.lineTo(centerX + 4, centerY)
-    ctx.moveTo(centerX - 3, centerY - 3)
-    ctx.lineTo(centerX + 3, centerY + 3)
-    ctx.moveTo(centerX - 3, centerY + 3)
-    ctx.lineTo(centerX + 3, centerY - 3)
-    ctx.stroke()
-}
-
-const drawChainTower = (ctx: CanvasRenderingContext2D, x: number, y: number) => {
-    const centerX = x + 15
-    const centerY = y + 15
-    const time = Date.now() * 0.01
-
-    // Base
-    ctx.fillStyle = '#4A148C'
-    ctx.fillRect(centerX - 8, centerY + 6, 16, 8)
-
-    // Main body
-    ctx.fillStyle = '#9C27B0'
-    ctx.fillRect(centerX - 6, centerY - 2, 12, 8)
-
-    // Tesla coil top
-    ctx.fillStyle = '#E1BEE7'
-    ctx.fillRect(centerX - 1, centerY - 8, 2, 6)
-
-    // Coil rings
-    for (let i = 0; i < 4; i++) {
-        ctx.strokeStyle = '#BA68C8'
-        ctx.lineWidth = 1
-        ctx.beginPath()
-        ctx.arc(centerX, centerY - 6 + i, 2 + i, 0, Math.PI * 2)
-        ctx.stroke()
-    }
-
-    // Chain lightning connections
-    for (let i = 0; i < 3; i++) {
-        const angle = time + (i * Math.PI * 2) / 3
-        const radius = 12
-        const endX = centerX + Math.cos(angle) * radius
-        const endY = centerY + Math.sin(angle) * radius
-
-        // Lightning bolt
-        ctx.strokeStyle = '#E91E63'
-        ctx.lineWidth = 2
-        ctx.beginPath()
-        ctx.moveTo(centerX, centerY)
-
-        // Zigzag pattern
-        const segments = 4
-        for (let j = 1; j <= segments; j++) {
-            const t = j / segments
-            const midX = centerX + (endX - centerX) * t
-            const midY = centerY + (endY - centerY) * t
-            const offset = (j % 2 === 0 ? 1 : -1) * 3
-            ctx.lineTo(midX + offset, midY + offset)
-        }
-        ctx.stroke()
-
-        // Connection point
-        ctx.fillStyle = '#FF4081'
-        ctx.fillRect(endX - 1, endY - 1, 2, 2)
-    }
-
-    // Energy core
-    ctx.fillStyle = '#AD7FFF'
-    ctx.fillRect(centerX - 2, centerY - 2, 4, 4)
-
-    // Core pulse
-    const pulseSize = 2 + Math.sin(time * 4) * 1
-    ctx.fillStyle = '#FFFFFF'
-    ctx.fillRect(centerX - pulseSize / 2, centerY - pulseSize / 2, pulseSize, pulseSize)
-}
-
-const drawEnemyAttack = (
-    ctx: CanvasRenderingContext2D,
-    fromX: number,
-    fromY: number,
-    toX: number,
-    toY: number,
-    progress: number,
-    enemyType: Enemy['type']
-) => {
-    switch (enemyType) {
-        case 'ddos':
-            drawDDoSAttack(ctx, fromX, fromY, toX, toY, progress)
-            break
-        case 'hacker':
-            drawHackerAttack(ctx, fromX, fromY, toX, toY, progress)
-            break
-        case 'malware':
-            drawMalwareAttack(ctx, fromX, fromY, toX, toY, progress)
-            break
-        case 'spider':
-            drawSpiderAttack(ctx, fromX, fromY, toX, toY, progress)
-            break
-        default:
-            break
-    }
 }
 
 // Enemy Sprite for information panel (same as in game)
@@ -1631,6 +344,12 @@ const EnemyInfoSprite = ({ type }: { type: Enemy['type'] }) => {
             case 'malware':
                 drawMalwareEnemy(ctx, 0, 0)
                 break
+            case 'phoenix':
+                drawPhoenixEnemy(ctx, 0, 0, false)
+                break
+            case 'portal_miner':
+                drawPortalMinerEnemy(ctx, 0, 0)
+                break
             case 'replicator':
                 drawReplicatorEnemy(ctx, 0, 0, mockEnemy.isOriginal ?? true)
                 break
@@ -1642,6 +361,9 @@ const EnemyInfoSprite = ({ type }: { type: Enemy['type'] }) => {
                 break
             case 'voltage':
                 drawVoltageEnemy(ctx, 0, 0)
+                break
+            case 'worm':
+                drawWormEnemy(ctx, 0, 0)
                 break
             default:
                 break
@@ -1805,6 +527,12 @@ const EnemySprite = ({ enemy }: { enemy: Enemy }) => {
             case 'malware':
                 drawMalwareEnemy(ctx, 0, 0)
                 break
+            case 'phoenix':
+                drawPhoenixEnemy(ctx, 0, 0, enemy.isReviving ?? false)
+                break
+            case 'portal_miner':
+                drawPortalMinerEnemy(ctx, 0, 0)
+                break
             case 'replicator':
                 drawReplicatorEnemy(ctx, 0, 0, enemy.isOriginal ?? true)
                 break
@@ -1816,6 +544,9 @@ const EnemySprite = ({ enemy }: { enemy: Enemy }) => {
                 break
             case 'voltage':
                 drawVoltageEnemy(ctx, 0, 0)
+                break
+            case 'worm':
+                drawWormEnemy(ctx, 0, 0)
                 break
             default:
                 break
@@ -1991,15 +722,15 @@ const HealthIndicator = ({ health, isShaking }: { health: number; isShaking: boo
             style={{
                 position: 'absolute',
                 top: 10,
-                right: 10,
+                right: 120,
                 zIndex: 10,
                 pointerEvents: 'none',
-                animation: isShaking ? 'shake 0.5s' : undefined
+                animation: isShaking ? 'shake 0.5s' : undefined,
+                background: 'transparent'
             }}
         >
             <div
                 style={{
-                    backgroundColor: 'rgba(0, 0, 0, 0.8)',
                     padding: '8px 12px',
                     borderRadius: '20px',
                     border: `2px solid ${healthColor}`,
@@ -2051,15 +782,15 @@ const CoinsIndicator = ({ coins, isShaking }: { coins: number; isShaking: boolea
             style={{
                 position: 'absolute',
                 top: 10,
-                right: 100,
+                right: 200,
                 zIndex: 10,
                 pointerEvents: 'none',
-                animation: isShaking ? 'shake 0.5s' : undefined
+                animation: isShaking ? 'shake 0.5s' : undefined,
+                background: 'transparent'
             }}
         >
             <div
                 style={{
-                    backgroundColor: 'rgba(0, 0, 0, 0.8)',
                     padding: '8px 12px',
                     borderRadius: '20px',
                     border: `2px solid ${coinsColor}`,
@@ -2105,14 +836,14 @@ const WaveIndicator = ({ waveNumber }: { waveNumber: number }) => {
             style={{
                 position: 'absolute',
                 top: 10,
-                right: 200,
+                right: 290,
                 zIndex: 10,
-                pointerEvents: 'none'
+                pointerEvents: 'none',
+                background: 'transparent'
             }}
         >
             <div
                 style={{
-                    backgroundColor: 'rgba(0, 0, 0, 0.8)',
                     padding: '8px 12px',
                     borderRadius: '20px',
                     border: `2px solid var(--mantine-color-indigo-6)`,
@@ -2159,8 +890,8 @@ const LightningSprite = ({ lightning }: { lightning: Lightning }) => {
         if (!ctx) return
 
         const animate = () => {
-            // Clear canvas
-            ctx.clearRect(0, 0, 800, 400)
+            // Clear canvas (use game config dimensions)
+            ctx.clearRect(0, 0, GAME_CONFIG.boardWidth, GAME_CONFIG.boardHeight)
 
             // Calculate lightning progress (0 to 1)
             const elapsed = Date.now() - lightning.startTime
@@ -2218,7 +949,7 @@ const LightningSprite = ({ lightning }: { lightning: Lightning }) => {
 
     return (
         <canvas
-            height={400}
+            height={GAME_CONFIG.boardHeight}
             ref={canvasRef}
             style={{
                 position: 'absolute',
@@ -2227,7 +958,7 @@ const LightningSprite = ({ lightning }: { lightning: Lightning }) => {
                 imageRendering: 'pixelated',
                 pointerEvents: 'none'
             }}
-            width={800}
+            width={GAME_CONFIG.boardWidth}
         />
     )
 }
@@ -2270,6 +1001,383 @@ const BuildingGuide = ({ x, y, isValid }: { isValid: boolean; x: number; y: numb
     )
 }
 
+const SpawnZone = () => {
+    return (
+        <div
+            style={{
+                position: 'absolute',
+                left: 0,
+                top: 0,
+                width: GAME_CONFIG.spawnZoneWidth,
+                height: GAME_CONFIG.boardHeight,
+                background:
+                    'linear-gradient(90deg, rgba(255, 0, 0, 0.15) 0%, rgba(255, 100, 0, 0.1) 70%, rgba(255, 100, 0, 0.05) 100%)',
+                borderRight: '3px solid rgba(255, 0, 0, 0.6)',
+                pointerEvents: 'none',
+                zIndex: 1
+            }}
+        >
+            {/* Warning stripes pattern */}
+            <div
+                style={{
+                    position: 'absolute',
+                    width: '100%',
+                    height: '100%',
+                    background: `repeating-linear-gradient(
+                        -45deg,
+                        transparent,
+                        transparent 8px,
+                        rgba(255, 0, 0, 0.1) 8px,
+                        rgba(255, 0, 0, 0.1) 16px
+                    )`,
+                    pointerEvents: 'none'
+                }}
+            />
+
+            {/* Animated border */}
+            <div
+                style={{
+                    position: 'absolute',
+                    right: -2,
+                    top: 0,
+                    width: 4,
+                    height: '100%',
+                    background: 'linear-gradient(0deg, #ff0000, #ff6600, #ff0000)',
+                    animation: 'pulse 2s infinite',
+                    pointerEvents: 'none'
+                }}
+            />
+
+            {/* Gradient fade effect at the edge */}
+            <div
+                style={{
+                    position: 'absolute',
+                    right: 0,
+                    top: 0,
+                    width: 30,
+                    height: '100%',
+                    background: 'linear-gradient(90deg, transparent 0%, rgba(255, 0, 0, 0.2) 100%)',
+                    pointerEvents: 'none'
+                }}
+            />
+        </div>
+    )
+}
+
+// Server Zone Component - Protected area on the right
+const ServerZone = ({ gameHealth }: { gameHealth: number }) => {
+    const healthStatus = gameHealth > 70 ? 'healthy' : gameHealth > 30 ? 'warning' : 'critical'
+
+    // Create server racks positions
+    const serverRacks = [
+        { x: 20, y: 30, type: 'main' },
+        { x: 60, y: 50, type: 'proxy' },
+        { x: 20, y: 150, type: 'database' },
+        { x: 60, y: 180, type: 'backup' },
+        { x: 20, y: 280, type: 'firewall' },
+        { x: 60, y: 320, type: 'monitoring' }
+    ]
+
+    return (
+        <div
+            style={{
+                position: 'absolute',
+                right: 0,
+                top: 0,
+                width: GAME_CONFIG.serverZoneWidth,
+                height: GAME_CONFIG.boardHeight,
+                background:
+                    'linear-gradient(270deg, rgba(0, 100, 255, 0.1) 0%, rgba(0, 150, 255, 0.05) 70%, rgba(0, 200, 255, 0.02) 100%)',
+                borderLeft: `3px solid ${healthStatus === 'healthy' ? 'rgba(0, 255, 100, 0.8)' : healthStatus === 'warning' ? 'rgba(255, 200, 0, 0.8)' : 'rgba(255, 50, 50, 0.8)'}`,
+                pointerEvents: 'none',
+                zIndex: 1
+            }}
+        >
+            {/* Circuit board pattern background */}
+            <div
+                style={{
+                    position: 'absolute',
+                    width: '100%',
+                    height: '100%',
+                    background: `repeating-linear-gradient(
+                        0deg,
+                        transparent,
+                        transparent 20px,
+                        rgba(0, 255, 150, 0.05) 20px,
+                        rgba(0, 255, 150, 0.05) 22px
+                    ), repeating-linear-gradient(
+                        90deg,
+                        transparent,
+                        transparent 30px,
+                        rgba(0, 200, 255, 0.03) 30px,
+                        rgba(0, 200, 255, 0.03) 32px
+                    )`,
+                    pointerEvents: 'none'
+                }}
+            />
+
+            {/* Animated data flow border */}
+            <div
+                style={{
+                    position: 'absolute',
+                    left: -2,
+                    top: 0,
+                    width: 4,
+                    height: '100%',
+                    background:
+                        healthStatus === 'healthy'
+                            ? 'linear-gradient(0deg, #00ff64, #00d4ff, #00ff64)'
+                            : healthStatus === 'warning'
+                              ? 'linear-gradient(0deg, #ffb000, #ff6600, #ffb000)'
+                              : 'linear-gradient(0deg, #ff3232, #ff0000, #ff3232)',
+                    animation: 'pulse 1.5s infinite',
+                    pointerEvents: 'none'
+                }}
+            />
+
+            {/* Server Racks  */}
+            {serverRacks.map((rack, index) => (
+                <div
+                    key={`rack-${index}`}
+                    style={{
+                        position: 'absolute',
+                        left: rack.x,
+                        top: rack.y,
+                        width: 32,
+                        height: 40,
+                        pointerEvents: 'none'
+                    }}
+                >
+                    {/* Server rack base */}
+                    <div
+                        style={{
+                            position: 'absolute',
+                            width: 32,
+                            height: 40,
+                            backgroundColor: '#2a2a2a',
+                            border: '1px solid #444',
+                            borderRadius: '2px'
+                        }}
+                    />
+
+                    {/* Server units inside rack */}
+                    {[0, 1, 2, 3].map((unit) => (
+                        <div
+                            key={`unit-${unit}`}
+                            style={{
+                                position: 'absolute',
+                                left: 2,
+                                top: 4 + unit * 8,
+                                width: 28,
+                                height: 6,
+                                backgroundColor:
+                                    healthStatus === 'critical' ? '#ff4444' : '#1a1a1a',
+                                border: '1px solid #555',
+                                borderRadius: '1px'
+                            }}
+                        >
+                            {/* Status LEDs */}
+                            <div
+                                style={{
+                                    position: 'absolute',
+                                    right: 2,
+                                    top: 1,
+                                    width: 3,
+                                    height: 3,
+                                    backgroundColor:
+                                        healthStatus === 'healthy'
+                                            ? '#00ff00'
+                                            : healthStatus === 'warning'
+                                              ? '#ffaa00'
+                                              : '#ff0000',
+                                    borderRadius: '50%',
+                                    animation: 'blink 2s infinite',
+                                    animationDelay: `${index * 0.2 + unit * 0.1}s`
+                                }}
+                            />
+
+                            {/* Activity indicators */}
+                            {healthStatus !== 'critical' && (
+                                <>
+                                    <div
+                                        style={{
+                                            position: 'absolute',
+                                            left: 2,
+                                            top: 2,
+                                            width: 8,
+                                            height: 1,
+                                            backgroundColor: '#00aaff',
+                                            animation: 'dataFlow 1s infinite',
+                                            animationDelay: `${index * 0.3}s`
+                                        }}
+                                    />
+                                    <div
+                                        style={{
+                                            position: 'absolute',
+                                            left: 12,
+                                            top: 2,
+                                            width: 6,
+                                            height: 1,
+                                            backgroundColor: '#00ff88',
+                                            animation: 'dataFlow 0.8s infinite',
+                                            animationDelay: `${index * 0.4}s`
+                                        }}
+                                    />
+                                </>
+                            )}
+                        </div>
+                    ))}
+
+                    {/* Rack ventilation grilles */}
+                    <div
+                        style={{
+                            position: 'absolute',
+                            left: 4,
+                            bottom: 2,
+                            width: 24,
+                            height: 2,
+                            background:
+                                'repeating-linear-gradient(90deg, #333 0px, #333 2px, transparent 2px, transparent 4px)'
+                        }}
+                    />
+                </div>
+            ))}
+
+            {/* Cable management */}
+            <div
+                style={{
+                    position: 'absolute',
+                    left: 10,
+                    top: 0,
+                    width: 2,
+                    height: '100%',
+                    background: 'linear-gradient(0deg, #333, #666, #333)',
+                    pointerEvents: 'none'
+                }}
+            />
+            <div
+                style={{
+                    position: 'absolute',
+                    left: 80,
+                    top: 0,
+                    width: 2,
+                    height: '100%',
+                    background: 'linear-gradient(0deg, #444, #777, #444)',
+                    pointerEvents: 'none'
+                }}
+            />
+
+            {/* Status display */}
+            <div
+                style={{
+                    position: 'absolute',
+                    top: 10,
+                    right: 10,
+                    color:
+                        healthStatus === 'healthy'
+                            ? 'rgba(0, 255, 100, 0.9)'
+                            : healthStatus === 'warning'
+                              ? 'rgba(255, 200, 0, 0.9)'
+                              : 'rgba(255, 50, 50, 0.9)',
+                    fontSize: '10px',
+                    fontWeight: 'bold',
+                    textShadow: '1px 1px 2px rgba(0,0,0,0.8)',
+                    pointerEvents: 'none',
+                    fontFamily: 'monospace'
+                }}
+            >
+                🖥️ SERVERS
+            </div>
+
+            <div
+                style={{
+                    position: 'absolute',
+                    top: 25,
+                    right: 10,
+                    color:
+                        healthStatus === 'healthy'
+                            ? 'rgba(0, 255, 100, 0.8)'
+                            : healthStatus === 'warning'
+                              ? 'rgba(255, 200, 0, 0.8)'
+                              : 'rgba(255, 50, 50, 0.8)',
+                    fontSize: '8px',
+                    fontWeight: 'bold',
+                    textShadow: '1px 1px 2px rgba(0,0,0,0.8)',
+                    pointerEvents: 'none',
+                    fontFamily: 'monospace'
+                }}
+            >
+                {healthStatus === 'healthy'
+                    ? 'ONLINE'
+                    : healthStatus === 'warning'
+                      ? 'DEGRADED'
+                      : 'CRITICAL'}
+            </div>
+
+            {/* Protection field effect */}
+            <div
+                style={{
+                    position: 'absolute',
+                    left: 0,
+                    top: 0,
+                    width: 20,
+                    height: '100%',
+                    background: `linear-gradient(270deg, ${
+                        healthStatus === 'healthy'
+                            ? 'rgba(0, 255, 100, 0.1)'
+                            : healthStatus === 'warning'
+                              ? 'rgba(255, 200, 0, 0.1)'
+                              : 'rgba(255, 50, 50, 0.1)'
+                    } 0%, transparent 100%)`,
+                    animation: 'shimmer 3s infinite',
+                    pointerEvents: 'none'
+                }}
+            />
+
+            {/* Data transmission visualization */}
+            {healthStatus !== 'critical' && (
+                <div
+                    style={{
+                        position: 'absolute',
+                        bottom: 10,
+                        left: 10,
+                        right: 10,
+                        height: 20,
+                        border: '1px solid rgba(0, 200, 255, 0.3)',
+                        borderRadius: '2px',
+                        background: 'rgba(0, 100, 200, 0.05)',
+                        pointerEvents: 'none'
+                    }}
+                >
+                    <div
+                        style={{
+                            position: 'absolute',
+                            left: 2,
+                            top: 2,
+                            width: '100%',
+                            height: 4,
+                            background: 'linear-gradient(90deg, transparent, #00aaff, transparent)',
+                            animation: 'dataTransfer 2s infinite'
+                        }}
+                    />
+                    <div
+                        style={{
+                            position: 'absolute',
+                            left: 2,
+                            bottom: 2,
+                            width: '100%',
+                            height: 4,
+                            background:
+                                'linear-gradient(270deg, transparent, #00ff88, transparent)',
+                            animation: 'dataTransfer 1.5s infinite'
+                        }}
+                    />
+                </div>
+            )}
+        </div>
+    )
+}
+
 // Events Schedule Display
 const EventsScheduleDisplay = ({
     globalEvents,
@@ -2289,7 +1397,7 @@ const EventsScheduleDisplay = ({
         <div
             style={{
                 position: 'absolute',
-                right: 10,
+                right: 120,
                 bottom: 10,
                 zIndex: 10,
                 pointerEvents: 'none'
@@ -2329,6 +1437,155 @@ const EventsScheduleDisplay = ({
     )
 }
 
+interface DifficultyScaling {
+    countMultiplier: number
+    description: string
+    healthMultiplier: number
+    intensityLevel: 'extreme' | 'high' | 'low' | 'medium'
+    rewardMultiplier: number
+    speedMultiplier: number
+}
+
+const calculateAdvancedDifficulty = (wave: number): DifficultyScaling => {
+    const config = GAME_CONFIG.difficulty
+
+    // Logarithmic base progression (smoother than linear)
+    const baseProgress = Math.log(wave + 1) / Math.log(config.logarithmicBase)
+
+    // Cyclical variations - creates peaks and valleys in difficulty
+    const cyclicalOffset = Math.sin((wave * Math.PI * 2) / config.cyclePeriod) * 0.15
+
+    // Plateau periods - every N waves have reduced scaling for breather
+    const plateauFactor = wave % 12 < 4 ? config.plateauReduction : 1.0
+
+    // Random fluctuations for unpredictability
+    const randomSeed = Math.sin(wave * 123.456) // Deterministic "random" based on wave
+    const fluctuation = randomSeed * config.fluctuationIntensity
+
+    // Calculate raw multipliers
+    const healthBase =
+        1 + (baseProgress * config.healthScalingBase + cyclicalOffset + fluctuation) * plateauFactor
+    const speedBase =
+        1 +
+        (baseProgress * config.speedScalingBase + cyclicalOffset * 0.5 + fluctuation * 0.5) *
+            plateauFactor
+    const countBase =
+        1 +
+        (baseProgress * config.countScalingBase + cyclicalOffset * 0.3 + fluctuation * 0.4) *
+            plateauFactor
+    const rewardBase =
+        1 + (baseProgress * config.rewardScalingBase + fluctuation * 0.3) * plateauFactor
+
+    // Apply caps to prevent runaway scaling
+    const healthMultiplier = Math.min(healthBase, config.scalingCap)
+    const speedMultiplier = Math.max(Math.min(speedBase, config.scalingCap * 0.6), 1.0) // Speed caps lower, but never goes below 1.0 (only acceleration, no deceleration)
+    const countMultiplier = Math.min(countBase, config.scalingCap * 0.8) // Count caps at 80% of main cap
+    const rewardMultiplier = Math.max(rewardBase, 1.0) // Rewards never decrease
+
+    // Determine intensity level and description
+    let intensityLevel: DifficultyScaling['intensityLevel'] = 'low'
+    let description = 'Standard difficulty'
+
+    const averageMultiplier = (healthMultiplier + speedMultiplier) / 2
+
+    if (averageMultiplier >= 2.5) {
+        intensityLevel = 'extreme'
+        description = 'Extreme threat level - maximum enemy enhancement!'
+    } else if (averageMultiplier >= 2.0) {
+        intensityLevel = 'high'
+        description = 'High threat level - significantly enhanced enemies'
+    } else if (averageMultiplier >= 1.5) {
+        intensityLevel = 'medium'
+        description = 'Medium threat level - moderately enhanced enemies'
+    } else {
+        intensityLevel = 'low'
+        description = 'Low threat level - slightly enhanced enemies'
+    }
+
+    // Special descriptions for plateau periods
+    if (plateauFactor < 1.0) {
+        description += ' (Breather period - reduced scaling)'
+    }
+
+    // Special descriptions for peak periods
+    if (cyclicalOffset > 0.1) {
+        description += ' (Peak intensity!)'
+    }
+
+    return {
+        healthMultiplier,
+        speedMultiplier,
+        countMultiplier,
+        rewardMultiplier,
+        description,
+        intensityLevel
+    }
+}
+
+// Advanced enemy spawning system with weighted probabilities
+const getEnemySpawnWeights = (wave: number): Record<Enemy['type'], number> => {
+    const weights: Record<Enemy['type'], number> = {
+        // Basic enemies - always available
+        malware: 100,
+        hacker: 80,
+        ddos: 60,
+        worm: 90,
+
+        // Special enemies - unlock based on wave with increasing weights
+        shielded: wave >= 2 ? Math.min(20 + (wave - 2) * 2, 40) : 0,
+        voltage: wave >= 3 ? Math.min(15 + (wave - 3) * 2, 35) : 0,
+        replicator: wave >= 4 ? Math.min(10 + (wave - 4) * 2, 30) : 0,
+        phoenix: wave >= 5 ? Math.min(5 + (wave - 5) * 1, 20) : 0,
+        portal_miner: wave >= 7 ? Math.min(8 + (wave - 7) * 1, 25) : 0,
+
+        // Boss enemy - special rules
+        spider: 0 // Handled separately with strict limits
+    }
+
+    return weights
+}
+
+const selectEnemyType = (wave: number, currentSpiders: number): Enemy['type'] => {
+    // Spider special logic - max 1 on screen, 15% chance after wave 3
+    if (wave >= 3 && currentSpiders === 0 && Math.random() < 0.15) {
+        return 'spider'
+    }
+
+    // Weighted selection for other enemies
+    const weights = getEnemySpawnWeights(wave)
+    const totalWeight = Object.values(weights).reduce((sum, weight) => sum + weight, 0)
+
+    if (totalWeight === 0) {
+        // Fallback to basic enemies
+        const basicEnemies: Enemy['type'][] = ['malware', 'hacker', 'ddos', 'worm']
+        return basicEnemies[Math.floor(Math.random() * basicEnemies.length)]
+    }
+
+    const random = Math.random() * totalWeight
+    let currentWeight = 0
+
+    for (const [enemyType, weight] of Object.entries(weights)) {
+        currentWeight += weight
+        if (random <= currentWeight) {
+            return enemyType as Enemy['type']
+        }
+    }
+
+    // Fallback (should never reach here)
+    return 'malware'
+}
+
+// Enemy spawn limits per wave to prevent spam
+const getEnemySpawnLimits = (wave: number): Partial<Record<Enemy['type'], number>> => {
+    return {
+        spider: 2, // Only 2 spiders max
+        phoenix: Math.min(Math.floor(wave / 5), 2), // Max 2 phoenixes, unlock every 5 waves
+        replicator: Math.min(Math.floor(wave / 4), 3), // Max 3 replicators
+        portal_miner: Math.min(Math.floor(wave / 3), 2), // Max 2 portal miners
+        voltage: Math.min(Math.floor(wave / 2), 4) // Max 4 voltage enemies
+    }
+}
+
 export const ProxyDefensePage = () => {
     const navigate = useNavigate()
     const { resetClicks } = useEasterEggStore()
@@ -2344,6 +1601,7 @@ export const ProxyDefensePage = () => {
         isGameStarted: false,
         isGameOver: false,
         selectedTowerType: null,
+        currentWaveInfo: null,
         explosions: [],
         lightnings: [],
         lastHealthRegen: 0,
@@ -2354,6 +1612,7 @@ export const ProxyDefensePage = () => {
         towersBuilt: 0,
         healthLost: 0,
         coinsSpent: 0,
+        serverDefenseDamageDealt: 0,
         totalCoinsEarned: 0,
         totalInterestEarned: 0,
         // Visual effects
@@ -2362,7 +1621,11 @@ export const ProxyDefensePage = () => {
         globalEvents: {
             activeEvents: [],
             scheduledEvents: [],
-            lastEventWave: 0
+            lastEventWave: 0,
+            lastEventActivations: {
+                disk_format: 0,
+                data_flood: 0
+            }
         },
         enemyBuffs: {
             speedBoost: 1,
@@ -2375,69 +1638,88 @@ export const ProxyDefensePage = () => {
         const enemies: Enemy[] = []
         const waveMultiplier = Math.floor(gameState.wave / 5) + 1
 
-        // Count current spiders on screen
+        // Count current enemies for spawn limits
         const currentSpiders = gameState.enemies.filter((enemy) => enemy.type === 'spider').length
+        const currentEnemyCounts: Partial<Record<Enemy['type'], number>> = {}
+        gameState.enemies.forEach((enemy) => {
+            currentEnemyCounts[enemy.type] = (currentEnemyCounts[enemy.type] || 0) + 1
+        })
 
         // Get event multipliers
         const eventMultipliers = GlobalEventManager.getActiveEventMultipliers(
             gameState.globalEvents
         )
-        const baseEnemyCount = GAME_CONFIG.waveEnemyCount + gameState.wave
-        const enemyCount = Math.floor(baseEnemyCount * eventMultipliers.enemyCountMultiplier)
-        const healthMultiplier = eventMultipliers.enemyHealthMultiplier
-        const speedMultiplier = eventMultipliers.enemySpeedMultiplier
+
+        // Advanced enemy count calculation
+        const difficultyScaling = calculateAdvancedDifficulty(gameState.wave)
+        const formation = selectFormation(gameState.wave)
+        const waveType = selectWaveType(gameState.wave)
+        const waveTypeConfig = WAVE_TYPES[waveType]
+
+        // Calculate final enemy count with all modifiers
+        const baseEnemyCount = GAME_CONFIG.waveEnemyCount + Math.floor(gameState.wave * 0.3)
+        const enemyCount = Math.floor(
+            baseEnemyCount *
+                difficultyScaling.countMultiplier *
+                FORMATION_COUNT_MODIFIERS[formation] *
+                waveTypeConfig.countMultiplier *
+                eventMultipliers.enemyCountMultiplier
+        )
+
+        // Get spawn limits for this wave
+        const spawnLimits = getEnemySpawnLimits(gameState.wave)
+        const waveEnemyCounts: Partial<Record<Enemy['type'], number>> = {}
 
         for (let i = 0; i < enemyCount; i++) {
-            const types = Object.keys(ENEMY_TYPES) as Array<keyof typeof ENEMY_TYPES>
-            let randomType: keyof typeof ENEMY_TYPES
+            // Use improved enemy selection system
+            const selectedType = selectEnemyType(
+                gameState.wave,
+                currentSpiders + (waveEnemyCounts.spider || 0)
+            )
 
-            // Spider spawning logic: 15% chance after wave 3, max 1 on screen
-            const shouldSpawnSpider =
-                gameState.wave >= 3 &&
-                Math.random() < 0.15 &&
-                currentSpiders < 1 &&
-                enemies.filter((e) => e.type === 'spider').length < 1
+            // Check spawn limits
+            const currentCount =
+                (currentEnemyCounts[selectedType] || 0) + (waveEnemyCounts[selectedType] || 0)
+            const limit = spawnLimits[selectedType]
 
-            if (shouldSpawnSpider) {
-                randomType = 'spider'
+            let randomType: Enemy['type']
+            if (limit !== undefined && currentCount >= limit) {
+                // If we hit the limit, fall back to basic enemies
+                const basicEnemies: Enemy['type'][] = ['malware', 'hacker', 'ddos', 'worm']
+                randomType = basicEnemies[Math.floor(Math.random() * basicEnemies.length)]
             } else {
-                // Special enemy spawning logic
-                const rand = Math.random()
-
-                if (gameState.wave >= 2 && rand < 0.1) {
-                    randomType = 'shielded' // 10% chance after wave 2
-                } else if (gameState.wave >= 3 && rand < 0.15) {
-                    randomType = 'voltage' // 15% chance after wave 3
-                } else if (gameState.wave >= 4 && rand < 0.25) {
-                    randomType = 'replicator' // 25% chance after wave 4
-                } else {
-                    // Regular enemy types
-                    const regularTypes = types.filter(
-                        (type) => !['replicator', 'shielded', 'spider', 'voltage'].includes(type)
-                    )
-                    randomType = regularTypes[Math.floor(Math.random() * regularTypes.length)]
-                }
+                randomType = selectedType
             }
+
+            // Track wave spawns for limits
+            waveEnemyCounts[randomType] = (waveEnemyCounts[randomType] || 0) + 1
 
             const enemyTemplate = ENEMY_TYPES[randomType]
 
-            // Apply enemy buffs every 5 waves (escalating difficulty) + event multipliers
-            const buffMultiplier = Math.floor(gameState.wave / 5)
-            const healthBoost = 1 + buffMultiplier * 0.2 // +20% health per 5 waves
-            const speedBoost = 1 + buffMultiplier * 0.1 // +10% speed per 5 waves
+            // Apply advanced difficulty scaling + event multipliers + wave type modifiers
+            const healthBoost = difficultyScaling.healthMultiplier * waveTypeConfig.healthMultiplier
+            const speedBoost = difficultyScaling.speedMultiplier
+            const rewardBoost = difficultyScaling.rewardMultiplier
 
-            // Apply event multipliers
-            const finalHealthBoost = healthBoost * healthMultiplier
-            const finalSpeedBoost = speedBoost * speedMultiplier
+            consola.log(
+                `Wave ${gameState.wave}: ${difficultyScaling.description} | ${waveTypeConfig.name} (Count: ${enemyCount}, Health: ${healthBoost.toFixed(2)}x, Speed: ${speedBoost.toFixed(2)}x)`
+            )
+
+            // Log spawn system statistics
+            const weights = getEnemySpawnWeights(gameState.wave)
+            const limits = getEnemySpawnLimits(gameState.wave)
+            consola.log(`🎲 Spawn Weights (Wave ${gameState.wave}):`, weights)
+            consola.log(`📊 Spawn Limits (Wave ${gameState.wave}):`, limits)
+            consola.log(`👾 Wave Enemy Distribution:`, waveEnemyCounts)
 
             enemies.push({
                 id: `enemy-${i}-${Date.now()}`,
                 x: -50,
                 y: Math.random() * (GAME_CONFIG.boardHeight - 40) + 20,
-                health: enemyTemplate.health * waveMultiplier * finalHealthBoost,
-                maxHealth: enemyTemplate.health * waveMultiplier * finalHealthBoost,
-                speed: enemyTemplate.speed * finalSpeedBoost,
-                reward: enemyTemplate.reward,
+                health: enemyTemplate.health * waveMultiplier * healthBoost,
+                maxHealth: enemyTemplate.health * waveMultiplier * healthBoost,
+                speed: enemyTemplate.speed * speedBoost,
+                reward: Math.floor(enemyTemplate.reward * rewardBoost), // Variable rewards
                 type: randomType,
                 lastAttack: 0,
                 shield: enemyTemplate.shield,
@@ -2445,18 +1727,33 @@ export const ProxyDefensePage = () => {
                 hasShield: enemyTemplate.hasShield,
                 slowEffect: enemyTemplate.slowEffect,
                 disabledUntil: enemyTemplate.disabledUntil,
-                originalSpeed: enemyTemplate.speed * finalSpeedBoost,
-                isOriginal: randomType === 'replicator' ? true : undefined, // Only originals can replicate
+                originalSpeed: enemyTemplate.speed * speedBoost,
+                isOriginal: randomType === 'replicator' ? true : undefined,
                 buffs: {
-                    healthBoost: finalHealthBoost,
-                    speedBoost: finalSpeedBoost
+                    healthBoost,
+                    speedBoost
                 }
             })
         }
 
+        // Apply formation to enemies (formation was selected earlier)
+        const formationInfo = FORMATION_INFO[formation]
+        applyFormation(enemies, formation)
+
+        // Create wave info with both formation and wave type
+        const waveInfo: WaveInfo = {
+            formation,
+            formationName: formationInfo.name,
+            formationDescription: formationInfo.description,
+            waveType,
+            waveTypeName: waveTypeConfig.name,
+            waveTypeDescription: waveTypeConfig.description
+        }
+
         setGameState((prev) => ({
             ...prev,
-            enemies: [...prev.enemies, ...enemies]
+            enemies: [...prev.enemies, ...enemies],
+            currentWaveInfo: waveInfo
         }))
     }, [gameState.wave, gameState.enemies])
 
@@ -2499,6 +1796,31 @@ export const ProxyDefensePage = () => {
             // Update enemies
             newState.enemies = newState.enemies
                 .map((enemy) => {
+                    // Handle Phoenix resurrection
+                    if (
+                        enemy.type === 'phoenix' &&
+                        enemy.isReviving &&
+                        enemy.reviveTime &&
+                        now >= enemy.reviveTime
+                    ) {
+                        // Phoenix revives with 50% health
+                        enemy.health = Math.floor(enemy.maxHealth * 0.5)
+                        enemy.speed = enemy.originalSpeed || ENEMY_TYPES.phoenix.speed
+                        enemy.isReviving = false
+                        enemy.reviveTime = undefined
+
+                        // Create revival effect
+                        const revival: Explosion = {
+                            id: `phoenix-revival-${Date.now()}-${Math.random()}`,
+                            x: enemy.x,
+                            y: enemy.y,
+                            startTime: Date.now(),
+                            duration: 1500,
+                            type: 'enemy_death'
+                        }
+                        newState.explosions.push(revival)
+                    }
+
                     // Check if enemy is in range of any alive slowdown tower
                     const isInSlowdownRange = newState.towers.some((tower) => {
                         if (tower.type !== 'slowdown' || tower.health <= 0) return false
@@ -2524,6 +1846,65 @@ export const ProxyDefensePage = () => {
                         updatedEnemy.speed = updatedEnemy.originalSpeed || updatedEnemy.speed
                     }
 
+                    // Check if enemy is in server zone (defensive systems)
+                    const serverZoneLeft = GAME_CONFIG.boardWidth - GAME_CONFIG.serverZoneWidth
+                    const isInServerZone = updatedEnemy.x >= serverZoneLeft
+
+                    if (isInServerZone) {
+                        // Apply server defense damage with cooldown
+                        if (
+                            !updatedEnemy.lastServerDamage ||
+                            now - updatedEnemy.lastServerDamage >= GAME_CONFIG.serverDefenseInterval
+                        ) {
+                            updatedEnemy.health -= GAME_CONFIG.serverDefenseDamage
+                            updatedEnemy.lastServerDamage = now
+
+                            // Track server defense damage
+                            newState.serverDefenseDamageDealt += GAME_CONFIG.serverDefenseDamage
+
+                            // Create server defense lightning effect
+                            if (updatedEnemy.health > 0) {
+                                // Choose random server rack position for lightning origin
+                                const serverRackPositions = [
+                                    { x: serverZoneLeft + 20, y: 30 },
+                                    { x: serverZoneLeft + 60, y: 50 },
+                                    { x: serverZoneLeft + 20, y: 150 },
+                                    { x: serverZoneLeft + 60, y: 180 },
+                                    { x: serverZoneLeft + 20, y: 280 },
+                                    { x: serverZoneLeft + 60, y: 320 }
+                                ]
+                                const randomRack =
+                                    serverRackPositions[
+                                        Math.floor(Math.random() * serverRackPositions.length)
+                                    ]
+
+                                const serverLightning: Lightning = {
+                                    id: `server-defense-${Date.now()}-${Math.random()}`,
+                                    fromX: randomRack.x + 16, // Center of server rack
+                                    fromY: randomRack.y + 20, // Middle of server rack
+                                    toX: updatedEnemy.x,
+                                    toY: updatedEnemy.y,
+                                    startTime: Date.now(),
+                                    duration: 500, // Increased duration for better visibility
+                                    isEnemyAttack: false,
+                                    towerType: 'antivirus' // Use green lightning for server defense
+                                }
+                                newState.lightnings.push(serverLightning)
+
+                                // Create small explosion effect at server rack for visual feedback
+                                const serverFlash: Explosion = {
+                                    id: `server-flash-${Date.now()}-${Math.random()}`,
+                                    x: randomRack.x + 16,
+                                    y: randomRack.y + 20,
+                                    startTime: Date.now(),
+                                    duration: 300,
+                                    type: 'enemy_death'
+                                }
+                                newState.explosions.push(serverFlash)
+                            }
+                        }
+                    }
+
                     return {
                         ...updatedEnemy,
                         x: updatedEnemy.x + updatedEnemy.speed
@@ -2531,8 +1912,11 @@ export const ProxyDefensePage = () => {
                 })
                 .filter((enemy) => {
                     if (enemy.x > GAME_CONFIG.boardWidth) {
-                        newState.health -= 10
-                        newState.healthLost += 10
+                        // Damage to player health based on enemy strength
+                        const enemyStats = ENEMY_TYPES[enemy.type]
+                        const playerDamage = Math.floor(enemyStats.towerDamage * 1.0) // 100% of tower damage
+                        newState.health -= playerDamage
+                        newState.healthLost += playerDamage
                         // Trigger damage effect
                         newState.lastDamageTime = now
                         newState.isShaking = true
@@ -2569,7 +1953,7 @@ export const ProxyDefensePage = () => {
                     if (rangedTarget) {
                         // Deal damage immediately for ranged attacks
                         rangedTarget.health -= enemyStats.towerDamage
-                        // eslint-disable-next-line no-param-reassign
+
                         enemy.lastAttack = now
 
                         // Create enemy lightning effect
@@ -2606,33 +1990,39 @@ export const ProxyDefensePage = () => {
                     let targets: Enemy[] = []
 
                     if (tower.type === 'chain') {
-                        // Chain lightning - find multiple targets
+                        // Chain lightning - find multiple targets (excluding spawn zone and reviving phoenixes)
                         const potentialTargets = newState.enemies.filter((enemy) => {
                             const distance = Math.sqrt(
                                 (enemy.x - tower.x) ** 2 + (enemy.y - tower.y) ** 2
                             )
-                            return distance <= towerStats.range
+                            return (
+                                distance <= towerStats.range &&
+                                enemy.x >= GAME_CONFIG.spawnZoneWidth &&
+                                !(enemy.type === 'phoenix' && enemy.isReviving) // Phoenix is invulnerable while reviving
+                            )
                         })
                         targets = potentialTargets.slice(0, tower.chainTargets || 3)
                     } else {
-                        // Normal targeting - find single target
+                        // Normal targeting - find single target (excluding spawn zone and reviving phoenixes)
                         const target = newState.enemies.find((enemy) => {
                             const distance = Math.sqrt(
                                 (enemy.x - tower.x) ** 2 + (enemy.y - tower.y) ** 2
                             )
-                            return distance <= towerStats.range
+                            return (
+                                distance <= towerStats.range &&
+                                enemy.x >= GAME_CONFIG.spawnZoneWidth &&
+                                !(enemy.type === 'phoenix' && enemy.isReviving) // Phoenix is invulnerable while reviving
+                            )
                         })
                         if (target) targets = [target]
                     }
 
                     if (targets.length > 0) {
-                        // eslint-disable-next-line no-param-reassign
                         tower.lastShot = now
 
                         targets.forEach((target) => {
                             // Handle shield system for shielded enemies
                             if (target.type === 'shielded' && target.shield && target.shield > 0) {
-                                // eslint-disable-next-line no-param-reassign
                                 target.shield -= 1
                                 // Create shield block effect
                                 const shieldLightning: Lightning = {
@@ -2651,7 +2041,7 @@ export const ProxyDefensePage = () => {
                             }
 
                             // Normal damage
-                            // eslint-disable-next-line no-param-reassign
+
                             target.health -= tower.damage
 
                             // Create lightning effect
@@ -2669,6 +2059,29 @@ export const ProxyDefensePage = () => {
                             newState.lightnings.push(lightning)
 
                             if (target.health <= 0) {
+                                // Handle Phoenix resurrection before death
+                                if (target.type === 'phoenix' && !target.hasRevived) {
+                                    // Phoenix dies but will revive
+                                    target.hasRevived = true
+                                    target.isReviving = true
+                                    target.reviveTime = now + 5000 // Revive after 5 seconds
+                                    target.health = 1 // Keep alive with 1 HP until revive
+                                    target.speed = 0 // Stop moving while reviving
+
+                                    // Create phoenix death effect
+                                    const phoenixDeath: Explosion = {
+                                        id: `phoenix-death-${Date.now()}-${Math.random()}`,
+                                        x: target.x,
+                                        y: target.y,
+                                        startTime: Date.now(),
+                                        duration: 1200,
+                                        type: 'enemy_death'
+                                    }
+                                    newState.explosions.push(phoenixDeath)
+
+                                    return // Don't process normal death
+                                }
+
                                 // Apply kill bonus multiplier (increased from 1.0 to 1.5)
                                 const bonusReward = Math.floor(
                                     target.reward * GAME_CONFIG.economy.killBonusMultiplier
@@ -2683,7 +2096,7 @@ export const ProxyDefensePage = () => {
                                     // Only original replicators create copies on death
                                     for (let i = 0; i < 2; i++) {
                                         const copy: Enemy = {
-                                            id: `replicator-copy-${Date.now()}-${i}`,
+                                            id: `replicator-copy-${target.id}-${Date.now()}-${Math.random().toString(36).substr(2, 9)}-${i}`,
                                             x: target.x + (Math.random() - 0.5) * 60,
                                             y: target.y + (Math.random() - 0.5) * 60,
                                             health: Math.floor(target.maxHealth * 0.6), // Copies have 60% health
@@ -2712,10 +2125,75 @@ export const ProxyDefensePage = () => {
                                                 (target.y - nearbyTower.y) ** 2
                                         )
                                         if (distance <= disableRadius) {
-                                            // eslint-disable-next-line no-param-reassign
                                             nearbyTower.disabledUntil = now + 3000 // 3 seconds
                                         }
                                     })
+                                }
+
+                                if (target.type === 'portal_miner') {
+                                    // Portal Miner creates a portal that spawns 3 random enemies
+                                    const portalExplosion: Explosion = {
+                                        id: `portal-${Date.now()}-${Math.random()}`,
+                                        x: target.x,
+                                        y: target.y,
+                                        startTime: Date.now(),
+                                        duration: 2000, // Longer duration for portal effect
+                                        type: 'enemy_death'
+                                    }
+                                    newState.explosions.push(portalExplosion)
+
+                                    // Spawn 3 random enemies from the portal after a delay
+                                    setTimeout(() => {
+                                        const enemyTypes = [
+                                            'ddos',
+                                            'hacker',
+                                            'malware',
+                                            'worm'
+                                        ] as const
+
+                                        for (let i = 0; i < 3; i++) {
+                                            const randomEnemyType =
+                                                enemyTypes[
+                                                    Math.floor(Math.random() * enemyTypes.length)
+                                                ]
+                                            const enemyStats = ENEMY_TYPES[randomEnemyType]
+
+                                            // Create portal-spawned enemy with reduced health
+                                            const portalEnemy: Enemy = {
+                                                id: `portal-spawn-${Date.now()}-${Math.random().toString(36).substr(2, 9)}-${i}`,
+                                                x: target.x + (Math.random() - 0.5) * 80, // Spawn near portal
+                                                y: target.y + (Math.random() - 0.5) * 80,
+                                                health: Math.floor(enemyStats.health * 0.7), // 70% health
+                                                maxHealth: Math.floor(enemyStats.health * 0.7),
+                                                speed: enemyStats.speed * 1.1, // 10% faster
+                                                reward: Math.floor(enemyStats.reward * 0.8), // 80% reward
+                                                type: randomEnemyType,
+                                                lastAttack: 0,
+                                                shield: 0,
+                                                maxShield: 0,
+                                                hasShield: false,
+                                                slowEffect: 1,
+                                                originalSpeed: enemyStats.speed * 1.1
+                                            }
+
+                                            // Add portal spawn effect
+                                            const spawnEffect: Explosion = {
+                                                id: `portal-spawn-effect-${Date.now()}-${Math.random()}-${i}`,
+                                                x: portalEnemy.x,
+                                                y: portalEnemy.y,
+                                                startTime: Date.now(),
+                                                duration: 800,
+                                                type: 'enemy_death'
+                                            }
+
+                                            // Update game state asynchronously
+                                            setGameState((prevState) => ({
+                                                ...prevState,
+                                                enemies: [...prevState.enemies, portalEnemy],
+                                                explosions: [...prevState.explosions, spawnEffect]
+                                            }))
+                                        }
+                                    }, 1500) // 1.5 second delay for portal opening
                                 }
 
                                 // Create explosion effect
@@ -2818,6 +2296,7 @@ export const ProxyDefensePage = () => {
             isGameStarted: false,
             isGameOver: false,
             selectedTowerType: null,
+            currentWaveInfo: null,
             explosions: [],
             lightnings: [],
             lastHealthRegen: 0,
@@ -2828,6 +2307,7 @@ export const ProxyDefensePage = () => {
             towersBuilt: 0,
             healthLost: 0,
             coinsSpent: 0,
+            serverDefenseDamageDealt: 0,
             totalCoinsEarned: 0,
             totalInterestEarned: 0,
             // Visual effects
@@ -2836,7 +2316,11 @@ export const ProxyDefensePage = () => {
             globalEvents: {
                 activeEvents: [],
                 scheduledEvents: [],
-                lastEventWave: 0
+                lastEventWave: 0,
+                lastEventActivations: {
+                    disk_format: 0,
+                    data_flood: 0
+                }
             },
             enemyBuffs: {
                 speedBoost: 1,
@@ -2851,6 +2335,16 @@ export const ProxyDefensePage = () => {
 
         const towerType = TOWER_TYPES[gameState.selectedTowerType]
         if (gameState.coins < towerType.cost) return false
+
+        // Check if trying to place in spawn zone
+        if (x < GAME_CONFIG.spawnZoneWidth + 50) {
+            return false
+        }
+
+        // Check if trying to place in server zone (protected area)
+        if (x > GAME_CONFIG.boardWidth - GAME_CONFIG.serverZoneWidth) {
+            return false
+        }
 
         const tooClose = gameState.towers.some((tower) => {
             const distance = Math.sqrt((x - tower.x) ** 2 + (y - tower.y) ** 2)
@@ -3088,6 +2582,12 @@ export const ProxyDefensePage = () => {
                                 overflow: 'hidden'
                             }}
                         >
+                            {/* Spawn Zone */}
+                            <SpawnZone />
+
+                            {/* Server Zone */}
+                            <ServerZone gameHealth={gameState.health} />
+
                             {/* Towers */}
                             {gameState.towers.map((tower) => (
                                 <div key={tower.id}>
@@ -3154,6 +2654,52 @@ export const ProxyDefensePage = () => {
                                         currentWave={gameState.wave}
                                         globalEvents={gameState.globalEvents}
                                     />
+
+                                    {/* Wave Info Display */}
+                                    {gameState.currentWaveInfo && (
+                                        <div
+                                            style={{
+                                                position: 'absolute',
+                                                top: 10,
+                                                left: 10,
+                                                zIndex: 10,
+                                                pointerEvents: 'none',
+                                                background: 'transparent'
+                                            }}
+                                        >
+                                            <div
+                                                style={{
+                                                    backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                                                    padding: '8px 12px',
+                                                    borderRadius: '8px',
+                                                    border: '2px solid var(--mantine-color-purple-6)',
+                                                    maxWidth: '280px'
+                                                }}
+                                            >
+                                                <Text
+                                                    c="white"
+                                                    fw={600}
+                                                    size="xs"
+                                                    style={{
+                                                        textShadow: '1px 1px 2px rgba(0,0,0,0.8)',
+                                                        marginBottom: '2px'
+                                                    }}
+                                                >
+                                                    ⚔️ {gameState.currentWaveInfo.formationName}
+                                                </Text>
+                                                <Text
+                                                    c="cyan"
+                                                    fw={500}
+                                                    size="xs"
+                                                    style={{
+                                                        textShadow: '1px 1px 2px rgba(0,0,0,0.8)'
+                                                    }}
+                                                >
+                                                    🎯 {gameState.currentWaveInfo.waveTypeName}
+                                                </Text>
+                                            </div>
+                                        </div>
+                                    )}
                                 </>
                             )}
 
@@ -3417,6 +2963,19 @@ export const ProxyDefensePage = () => {
                                                   ) / 10
                                                 : 0}
                                             /tower
+                                        </Badge>
+                                    </Group>
+                                </Card>
+                            </Grid.Col>
+
+                            <Grid.Col span={6}>
+                                <Card p="sm" withBorder>
+                                    <Group align="center" justify="space-between">
+                                        <Text fw={500} size="sm">
+                                            🖥️ Server Defense
+                                        </Text>
+                                        <Badge color="blue" variant="light">
+                                            {Math.floor(gameState.serverDefenseDamageDealt)} damage
                                         </Badge>
                                     </Group>
                                 </Card>
@@ -3767,6 +3326,14 @@ export const ProxyDefensePage = () => {
                                                     : 'Disabled'}
                                             </Badge>
                                         </Group>
+                                        <Group justify="space-between">
+                                            <Text c="dimmed" size="xs">
+                                                Server Defense
+                                            </Text>
+                                            <Badge color="blue" size="sm" variant="light">
+                                                {Math.floor(gameState.serverDefenseDamageDealt)}
+                                            </Badge>
+                                        </Group>
                                         <Progress
                                             color={
                                                 gameState.health > 70
@@ -3797,23 +3364,7 @@ export const ProxyDefensePage = () => {
                                     %
                                 </Text>
                             </Group>
-                            <Group align="center" gap="xs">
-                                <IconFlame color="orange" size={16} />
-                                <Text c="orange" fw={500} size="sm">
-                                    Threat Level:{' '}
-                                    {gameState.enemies.length > 5
-                                        ? 'High'
-                                        : gameState.enemies.length > 2
-                                          ? 'Medium'
-                                          : 'Low'}
-                                </Text>
-                            </Group>
-                            <Group align="center" gap="xs">
-                                <IconUsers color="violet" size={16} />
-                                <Text c="violet" fw={500} size="sm">
-                                    Next Wave: {GAME_CONFIG.waveEnemyCount + gameState.wave} enemies
-                                </Text>
-                            </Group>
+
                             <Group align="center" gap="xs">
                                 <IconCoins color="green" size={16} />
                                 <Text c="green" fw={500} size="sm">
@@ -3827,30 +3378,23 @@ export const ProxyDefensePage = () => {
                                     coins
                                 </Text>
                             </Group>
-                            <Group align="center" gap="xs">
-                                <IconTrendingUp
-                                    color={
-                                        gameState.coins <= GAME_CONFIG.economy.passiveIncomeLimit
-                                            ? 'green'
-                                            : 'red'
-                                    }
-                                    size={16}
-                                />
-                                <Text
-                                    c={
-                                        gameState.coins <= GAME_CONFIG.economy.passiveIncomeLimit
-                                            ? 'green'
-                                            : 'red'
-                                    }
-                                    fw={500}
-                                    size="sm"
-                                >
-                                    Passive Income:{' '}
-                                    {gameState.coins <= GAME_CONFIG.economy.passiveIncomeLimit
-                                        ? 'ACTIVE'
-                                        : 'DISABLED'}
-                                </Text>
-                            </Group>
+
+                            {gameState.currentWaveInfo && (
+                                <>
+                                    <Group align="center" gap="xs">
+                                        <IconSwords color="purple" size={16} />
+                                        <Text c="purple" fw={500} size="sm">
+                                            Formation: {gameState.currentWaveInfo.formationName}
+                                        </Text>
+                                    </Group>
+                                    <Group align="center" gap="xs">
+                                        <IconTarget color="cyan" size={16} />
+                                        <Text c="cyan" fw={500} size="sm">
+                                            Wave Type: {gameState.currentWaveInfo.waveTypeName}
+                                        </Text>
+                                    </Group>
+                                </>
+                            )}
                         </Group>
                     </Paper>
                 )}
@@ -3963,6 +3507,16 @@ export const ProxyDefensePage = () => {
                                                     BOSS
                                                 </Badge>
                                             )}
+                                            {type === 'phoenix' && (
+                                                <Badge color="gold" size="xs" variant="light">
+                                                    LEGENDARY
+                                                </Badge>
+                                            )}
+                                            {type === 'portal_miner' && (
+                                                <Badge color="violet" size="xs" variant="light">
+                                                    SPECIAL
+                                                </Badge>
+                                            )}
                                         </div>
                                     </Group>
 
@@ -4044,6 +3598,51 @@ export const ProxyDefensePage = () => {
                                                 </Group>
                                             </>
                                         )}
+                                        {type === 'phoenix' && (
+                                            <>
+                                                <Group justify="center">
+                                                    <Badge color="gold" size="xs" variant="outline">
+                                                        5% spawn chance after wave 5
+                                                    </Badge>
+                                                </Group>
+                                                <Group justify="center">
+                                                    <Badge
+                                                        color="orange"
+                                                        size="xs"
+                                                        variant="outline"
+                                                    >
+                                                        Invulnerable during resurrection
+                                                    </Badge>
+                                                </Group>
+                                            </>
+                                        )}
+                                        {type === 'portal_miner' && (
+                                            <>
+                                                <Group justify="center">
+                                                    <Badge
+                                                        color="violet"
+                                                        size="xs"
+                                                        variant="outline"
+                                                    >
+                                                        8% spawn chance after wave 7
+                                                    </Badge>
+                                                </Group>
+                                                <Group justify="center">
+                                                    <Badge
+                                                        color="purple"
+                                                        size="xs"
+                                                        variant="outline"
+                                                    >
+                                                        Spawns 3 random enemies on death
+                                                    </Badge>
+                                                </Group>
+                                                <Group justify="center">
+                                                    <Badge color="gray" size="xs" variant="outline">
+                                                        Portal enemies: 70% HP, 10% faster
+                                                    </Badge>
+                                                </Group>
+                                            </>
+                                        )}
                                     </Stack>
                                 </Card>
                             </Grid.Col>
@@ -4052,168 +3651,594 @@ export const ProxyDefensePage = () => {
                 </Paper>
 
                 {/* Detailed Game Mechanics */}
-                <Alert color="cyan" icon={<IconShield />} variant="light">
-                    <Text size="sm">
-                        <strong>🎮 GAME MECHANICS & STRATEGY GUIDE</strong>
-                        <br />
-                        <br />
-                        <strong>🏰 TOWERS:</strong>
-                        <br />• <strong>Firewall (🛡️)</strong> - Tank tower with high health (100
-                        HP), strong damage (20), medium range (80px), slow cooldown (1s). Best
-                        against: All enemies as frontline defense.
-                        <br />• <strong>Antivirus (⚡)</strong> - Balanced tower with medium health
-                        (60 HP), good damage (15), short range (60px), fast cooldown (0.8s). Best
-                        against: Fast enemies like Malware.
-                        <br />• <strong>Proxy (🔄)</strong> - Support tower with low health (40 HP),
-                        light damage (10), long range (100px), fastest cooldown (0.6s). Best
-                        against: Multiple weak enemies.
-                        <br />• <strong>Slowdown (❄️)</strong> - Area control tower with medium
-                        health (50 HP), low damage (5), long range (120px), applies 60% slowdown
-                        effect. Best against: Fast enemies and crowd control.
-                        <br />• <strong>Chain Lightning (⚡️)</strong> - Multi-target tower with
-                        good health (70 HP), high damage (25), medium range (90px), hits 2-3 enemies
-                        per shot. Best against: Groups of enemies.
-                        <br />
-                        <br />
-                        <strong>👾 ENEMIES:</strong>
-                        <br />• <strong>Hacker (👨‍💻)</strong> - Medium health (30 HP), fast speed
-                        (2.5), melee + ranged attacks (50px range), chaotic red lightning with
-                        digital glitches.
-                        <br />• <strong>DDoS (⚡)</strong> - High health (60 HP), slow speed (1.5),
-                        powerful attacks (25 damage), triple orange lightning bolts simultaneously.
-                        <br />• <strong>Malware (🦠)</strong> - Low health (15 HP), very fast speed
-                        (4), weak but frequent attacks, purple viral lightning with organic
-                        patterns.
-                        <br />• <strong>Spider (🕷️)</strong> - Very high health (180 HP), medium
-                        speed (1.8), powerful attacks (35 damage), web-based purple lightning with
-                        venom drops. <strong>BOSS ENEMY:</strong> Only spawns after wave 3, 15%
-                        chance per wave. High reward (75 coins)!
-                        <br />• <strong>Shielded Bot (🛡️)</strong> - Medium health (100 HP), slow
-                        speed (1.5), blocks first 3 attacks with energy shield. Spawns after wave 2
-                        (10% chance).
-                        <br />• <strong>Voltage Surge (⚡️)</strong> - High health (120 HP), slow
-                        speed (1.2), disables all towers within 100px for 3 seconds when destroyed.
-                        Spawns after wave 3 (10% chance).
-                        <br />• <strong>Replicator (🧬)</strong> - High health (100 HP), slow speed
-                        (1.0), creates 2 weaker copies (60% health, 20% faster) when destroyed.
-                        <strong>Note:</strong> Only original replicators can create copies - copies
-                        cannot replicate! Spawns after wave 4 (10% chance).
-                        <br />
-                        <br />
-                        <strong>⚔️ COMBAT SYSTEM:</strong>
-                        <br />
-                        • Towers automatically attack enemies within range with colored lightning
-                        <br />
-                        • Enemies can attack both in melee (contact) and ranged (lightning)
-                        <br />
-                        • Each enemy type has unique attack patterns and cooldowns
-                        <br />
-                        • Destroyed enemies explode with fire effects and drop coins
-                        <br />
-                        <br />
-                        <strong>🔄 PASSIVE REGENERATION:</strong>
-                        <br />
-                        • +0.5 HP every 2 seconds (only with active towers!)
-                        <br />• +{GAME_CONFIG.economy.basePassiveIncome} Coins every second (passive
-                        income) -{' '}
-                        <strong>
-                            DISABLED when you have more than{' '}
-                            {GAME_CONFIG.economy.passiveIncomeLimit} coins!
-                        </strong>
-                        <br />• +{GAME_CONFIG.economy.waveCompletionBonus} Coins bonus when
-                        completing each wave
-                        <br />
-                        • +20 HP bonus when completing each wave
-                        <br />
-                        <br />
-                        <strong>💰 ECONOMIC SYSTEM:</strong>
-                        <br />• <strong>Interest System:</strong> Earn{' '}
-                        {GAME_CONFIG.economy.interestRate * 100}% interest on coins every{' '}
-                        {GAME_CONFIG.economy.interestInterval / 1000} seconds
-                        <br />• <strong>Passive Income Cap:</strong> Passive coin generation stops
-                        when you have more than {GAME_CONFIG.economy.passiveIncomeLimit} coins
-                        <br />• <strong>Strategic Spending:</strong> Keep spending to maintain
-                        passive income flow!
-                        <br />
-                        <br />
-                        <strong>🎯 STRATEGY TIPS:</strong>
-                        <br />
-                        • Use Firewall towers as frontline tanks to absorb damage
-                        <br />
-                        • Place Antivirus towers behind Firewalls for sustained DPS
-                        <br />
-                        • Proxy towers are great for covering large areas cheaply
-                        <br />• Slowdown towers are perfect for slowing fast enemies like Malware
-                        <br />• Chain Lightning towers excel against groups of enemies
-                        <br />• <strong>CRITICAL:</strong> Keep at least one tower alive - no towers
-                        = no healing!
-                        <br />
-                        • Watch tower health bars - replace destroyed towers quickly!
-                        <br />• <strong>ECONOMIC TIP:</strong> Don't hoard coins! Passive income
-                        stops at {GAME_CONFIG.economy.passiveIncomeLimit}+ coins - spend to keep
-                        earning!
-                        <br /> • <strong>ESCALATION SYSTEM:</strong> Enemy difficulty increases
-                        every 5 waves: +20% health, +10% speed
-                        <br />• <strong>SPIDER STRATEGY:</strong> Focus fire on spiders immediately
-                        - they're worth 75 coins but deal massive damage!
-                        <br />• <strong>SHIELDED STRATEGY:</strong> Use rapid-fire towers (Proxy) to
-                        break shields quickly
-                        <br />• <strong>VOLTAGE STRATEGY:</strong> Keep towers spread out to
-                        minimize disable radius
-                        <br />• <strong>REPLICATOR STRATEGY:</strong> Use high-damage towers (Chain
-                        Lightning) to kill originals quickly. Don't worry about copies - they can't
-                        replicate.
-                        <br />• <strong>DATA FLOOD STRATEGY:</strong> Focus on Chain Lightning and
-                        area-effect towers to handle 2x enemy waves efficiently
-                        <br />• Build multiple Firewall towers when facing spiders to absorb their
-                        powerful attacks
-                        <br />
-                        <br />
-                        <strong>🏗️ BUILDING RESTRICTIONS:</strong>
-                        <br />
-                        • Towers cannot be placed too close to each other (minimum 45px distance)
-                        <br />
-                        • Red zones around existing towers show where you cannot build
-                        <br />
-                        • Green/Red circle follows your mouse showing valid/invalid placement
-                        <br />
-                        • Towers cannot be placed too close to board edges (25px margin)
-                        <br />
-                        • Plan your tower placement strategically - spacing matters!
-                        <br />
-                        <br />
-                        <strong>🌍 GLOBAL EVENTS SYSTEM:</strong>
-                        <br />
-                        • Random events occur throughout the game with unique effects
-                        <br />
-                        • Some events can occur simultaneously, others conflict
-                        <br />
-                        <br />
-                        <strong>💽 DISK FORMAT EVENT:</strong>
-                        <br />• <strong>Priority:</strong> 100 (Highest) |{' '}
-                        <strong>Duration:</strong> 2 seconds
-                        <br />• <strong>Interval:</strong> Every 4-7 waves |{' '}
-                        <strong>Conflicts:</strong> All events
-                        <br />• <strong>WARNING:</strong> All towers are instantly destroyed!
-                        <br />
-                        • Save coins for quick rebuilding after format events
-                        <br />
-                        • Most devastating event - cannot occur with others
-                        <br />
-                        <br />
-                        <strong>🌊 DATA FLOOD EVENT:</strong>
-                        <br />• <strong>Priority:</strong> 80 | <strong>Duration:</strong> 3 seconds
-                        <br />• <strong>Interval:</strong> Every 8-12 waves |{' '}
-                        <strong>Can coexist with:</strong> EMP Surge
-                        <br />• <strong>EFFECT:</strong> Wave spawns 2x enemies, but they have 40%
-                        less health
-                        <br />
-                        • Tests your ability to handle multiple targets simultaneously
-                        <br />• Chain Lightning and area-effect towers are most effective during
-                        floods
-                        <br />• Use this opportunity to farm coins with weakened enemies!
-                    </Text>
-                </Alert>
+                <Stack gap="md">
+                    {/* Tower Defense Guide */}
+                    <Paper p="lg" radius="md" withBorder>
+                        <Title c="cyan" mb="md" order={3}>
+                            🏰 Defense Arsenal
+                        </Title>
+
+                        <Grid>
+                            <Grid.Col span={6}>
+                                <Card h="100%" p="md" radius="md" withBorder>
+                                    <Title c="blue" mb="sm" order={5}>
+                                        🛡️ Tank Towers
+                                    </Title>
+                                    <Stack gap="xs">
+                                        <Text size="sm">
+                                            <strong>Firewall</strong> - Frontline defense
+                                        </Text>
+                                        <Text c="dimmed" size="xs">
+                                            • 100 HP • 25 DMG • 80 Range • 1.0s Cooldown
+                                        </Text>
+                                        <Text c="dimmed" size="xs">
+                                            • Best against: All enemies as main tank
+                                        </Text>
+                                    </Stack>
+                                </Card>
+                            </Grid.Col>
+
+                            <Grid.Col span={6}>
+                                <Card h="100%" p="md" radius="md" withBorder>
+                                    <Title c="teal" mb="sm" order={5}>
+                                        ⚡ DPS Towers
+                                    </Title>
+                                    <Stack gap="xs">
+                                        <Text size="sm">
+                                            <strong>Antivirus</strong> - Balanced damage
+                                        </Text>
+                                        <Text c="dimmed" size="xs">
+                                            • 100 HP • 15 DMG • 60 Range • 0.8s Cooldown
+                                        </Text>
+                                        <Text c="dimmed" size="xs">
+                                            • Best against: Fast enemies (Malware, Worm)
+                                        </Text>
+                                    </Stack>
+                                </Card>
+                            </Grid.Col>
+
+                            <Grid.Col span={6}>
+                                <Card h="100%" p="md" radius="md" withBorder>
+                                    <Title c="indigo" mb="sm" order={5}>
+                                        🔄 Support Towers
+                                    </Title>
+                                    <Stack gap="xs">
+                                        <Text size="sm">
+                                            <strong>Proxy</strong> - Wide coverage
+                                        </Text>
+                                        <Text c="dimmed" size="xs">
+                                            • 50 HP • 10 DMG • 100 Range • 0.6s Cooldown
+                                        </Text>
+                                        <Text c="dimmed" size="xs">
+                                            • Best against: Multiple weak enemies
+                                        </Text>
+                                    </Stack>
+                                </Card>
+                            </Grid.Col>
+
+                            <Grid.Col span={6}>
+                                <Card h="100%" p="md" radius="md" withBorder>
+                                    <Title c="cyan" mb="sm" order={5}>
+                                        ❄️ Control Towers
+                                    </Title>
+                                    <Stack gap="xs">
+                                        <Text size="sm">
+                                            <strong>Slowdown</strong> - Crowd control
+                                        </Text>
+                                        <Text c="dimmed" size="xs">
+                                            • 60 HP • 5 DMG • 120 Range • 0.8s Cooldown
+                                        </Text>
+                                        <Text c="dimmed" size="xs">
+                                            • Special: 60% slowdown effect
+                                        </Text>
+                                    </Stack>
+                                </Card>
+                            </Grid.Col>
+
+                            <Grid.Col span={12}>
+                                <Card p="md" radius="md" withBorder>
+                                    <Title c="purple" mb="sm" order={5}>
+                                        ⚡️ Special Towers
+                                    </Title>
+                                    <Text size="sm">
+                                        <strong>Chain Lightning</strong> - Multi-target powerhouse
+                                    </Text>
+                                    <Text c="dimmed" size="xs">
+                                        • 70 HP • 25 DMG • 90 Range • 1.2s Cooldown • Hits 2-3
+                                        enemies
+                                    </Text>
+                                    <Text c="dimmed" size="xs">
+                                        • Best against: Groups of enemies, swarm waves
+                                    </Text>
+                                </Card>
+                            </Grid.Col>
+                        </Grid>
+                    </Paper>
+
+                    {/* Enemy Threats */}
+                    <Paper p="lg" radius="md" withBorder>
+                        <Title c="red" mb="md" order={3}>
+                            👾 Enemy Threats
+                        </Title>
+
+                        <Grid>
+                            <Grid.Col span={6}>
+                                <Card h="100%" p="md" radius="md" withBorder>
+                                    <Title c="pink" mb="sm" order={5}>
+                                        🏃 Basic Enemies
+                                    </Title>
+                                    <Stack gap="xs">
+                                        <Text size="xs">
+                                            <strong>Malware</strong> - 15 HP, 4.0 spd, 8 dmg
+                                        </Text>
+                                        <Text size="xs">
+                                            <strong>Worm</strong> - 20 HP, 3.5 spd, 10 dmg
+                                        </Text>
+                                        <Text size="xs">
+                                            <strong>Hacker</strong> - 30 HP, 2.5 spd, 15 dmg
+                                        </Text>
+                                        <Text size="xs">
+                                            <strong>DDoS</strong> - 60 HP, 1.5 spd, 25 dmg
+                                        </Text>
+                                    </Stack>
+                                </Card>
+                            </Grid.Col>
+
+                            <Grid.Col span={6}>
+                                <Card h="100%" p="md" radius="md" withBorder>
+                                    <Title c="green" mb="sm" order={5}>
+                                        🛡️ Special Enemies
+                                    </Title>
+                                    <Stack gap="xs">
+                                        <Text size="xs">
+                                            <strong>Shielded</strong> - 100 HP, 3-hit shield
+                                        </Text>
+                                        <Text size="xs">
+                                            <strong>Voltage</strong> - 120 HP, disables towers
+                                        </Text>
+                                        <Text size="xs">
+                                            <strong>Replicator</strong> - 100 HP, creates copies
+                                        </Text>
+                                        <Text size="xs">
+                                            <strong>Portal Miner</strong> - 80 HP, spawns 3 enemies
+                                        </Text>
+                                    </Stack>
+                                </Card>
+                            </Grid.Col>
+
+                            <Grid.Col span={6}>
+                                <Card h="100%" p="md" radius="md" withBorder>
+                                    <Title c="purple" mb="sm" order={5}>
+                                        🕷️ Boss Enemies
+                                    </Title>
+                                    <Stack gap="xs">
+                                        <Text size="xs">
+                                            <strong>Spider</strong> - 180 HP, 35 dmg, 75 coins
+                                        </Text>
+                                        <Text c="dimmed" size="xs">
+                                            • 15% spawn chance after wave 3
+                                        </Text>
+                                        <Text c="dimmed" size="xs">
+                                            • Max 2 on screen simultaneously
+                                        </Text>
+                                    </Stack>
+                                </Card>
+                            </Grid.Col>
+
+                            <Grid.Col span={6}>
+                                <Card h="100%" p="md" radius="md" withBorder>
+                                    <Title c="gold" mb="sm" order={5}>
+                                        🔥 Legendary Enemies
+                                    </Title>
+                                    <Stack gap="xs">
+                                        <Text size="xs">
+                                            <strong>Phoenix</strong> - 140 HP, resurrects once
+                                        </Text>
+                                        <Text c="dimmed" size="xs">
+                                            • 5% spawn chance after wave 5
+                                        </Text>
+                                        <Text c="dimmed" size="xs">
+                                            • Invulnerable during revival (5s)
+                                        </Text>
+                                    </Stack>
+                                </Card>
+                            </Grid.Col>
+                        </Grid>
+                    </Paper>
+
+                    {/* Wave System */}
+                    <Paper p="lg" radius="md" withBorder>
+                        <Title c="indigo" mb="md" order={3}>
+                            🌊 Wave System
+                        </Title>
+
+                        <Grid>
+                            <Grid.Col span={6}>
+                                <Card h="100%" p="md" radius="md" withBorder>
+                                    <Title c="blue" mb="sm" order={5}>
+                                        📊 Wave Types
+                                    </Title>
+                                    <Stack gap="xs">
+                                        <Text size="xs">
+                                            <strong>Standard</strong> - Balanced (1.0x count, 1.0x
+                                            HP)
+                                        </Text>
+                                        <Text size="xs">
+                                            <strong>Swarm</strong> - Many weak (1.8x count, 0.7x HP)
+                                        </Text>
+                                        <Text size="xs">
+                                            <strong>Elite</strong> - Few strong (0.8x count, 1.2x
+                                            HP)
+                                        </Text>
+                                        <Text size="xs">
+                                            <strong>Tsunami</strong> - Massive wave (3.0x count,
+                                            0.5x HP)
+                                        </Text>
+                                        <Text c="orange" size="xs">
+                                            • Tsunami appears every 8th wave (70% chance)
+                                        </Text>
+                                    </Stack>
+                                </Card>
+                            </Grid.Col>
+
+                            <Grid.Col span={6}>
+                                <Card h="100%" p="md" radius="md" withBorder>
+                                    <Title c="purple" mb="sm" order={5}>
+                                        ⚔️ Formations
+                                    </Title>
+                                    <Stack gap="xs">
+                                        <Text size="xs">
+                                            <strong>Single File</strong> - Predictable line
+                                        </Text>
+                                        <Text size="xs">
+                                            <strong>Tight Formation</strong> - Compact groups (+20%)
+                                        </Text>
+                                        <Text size="xs">
+                                            <strong>Guerrilla</strong> - Scattered (+40%)
+                                        </Text>
+                                        <Text size="xs">
+                                            <strong>Ambush</strong> - Coordinated strikes (+30%)
+                                        </Text>
+                                        <Text size="xs">
+                                            <strong>Pincer/Wave/Encirclement</strong> - Advanced
+                                            tactics
+                                        </Text>
+                                    </Stack>
+                                </Card>
+                            </Grid.Col>
+                        </Grid>
+                    </Paper>
+
+                    {/* Advanced Systems */}
+                    <Paper p="lg" radius="md" withBorder>
+                        <Title c="cyan" mb="md" order={3}>
+                            🎯 Advanced Systems
+                        </Title>
+
+                        <Grid>
+                            <Grid.Col span={4}>
+                                <Card h="100%" p="md" radius="md" withBorder>
+                                    <Title c="green" mb="sm" order={5}>
+                                        💰 Economy
+                                    </Title>
+                                    <Stack gap="xs">
+                                        <Text size="xs">
+                                            • Passive: +{GAME_CONFIG.economy.basePassiveIncome}{' '}
+                                            coins/sec
+                                        </Text>
+                                        <Text size="xs">
+                                            • Interest: {GAME_CONFIG.economy.interestRate * 100}%
+                                            every {GAME_CONFIG.economy.interestInterval / 1000}s
+                                        </Text>
+                                        <Text size="xs">
+                                            • Wave bonus: +{GAME_CONFIG.economy.waveCompletionBonus}{' '}
+                                            coins
+                                        </Text>
+                                        <Text size="xs">
+                                            • Kill bonus: {GAME_CONFIG.economy.killBonusMultiplier}x
+                                            multiplier
+                                        </Text>
+                                        <Text c="orange" size="xs">
+                                            • Passive disabled at{' '}
+                                            {GAME_CONFIG.economy.passiveIncomeLimit}+ coins
+                                        </Text>
+                                    </Stack>
+                                </Card>
+                            </Grid.Col>
+
+                            <Grid.Col span={4}>
+                                <Card h="100%" p="md" radius="md" withBorder>
+                                    <Title c="teal" mb="sm" order={5}>
+                                        🔄 Regeneration
+                                    </Title>
+                                    <Stack gap="xs">
+                                        <Text size="xs">• Health: +0.5 HP/2s</Text>
+                                        <Text size="xs">• Wave complete: +20 HP</Text>
+                                        <Text size="xs">
+                                            • Server defense: {GAME_CONFIG.serverDefenseDamage} DPS
+                                        </Text>
+                                        <Text c="red" size="xs">
+                                            • Requires at least 1 tower
+                                        </Text>
+                                    </Stack>
+                                </Card>
+                            </Grid.Col>
+
+                            <Grid.Col span={4}>
+                                <Card h="100%" p="md" radius="md" withBorder>
+                                    <Title c="orange" mb="sm" order={5}>
+                                        🎲 Spawn Limits
+                                    </Title>
+                                    <Stack gap="xs">
+                                        <Text size="xs">• Spider: 2 max</Text>
+                                        <Text size="xs">• Phoenix: wave/5 (max 2)</Text>
+                                        <Text size="xs">• Replicator: wave/4 (max 3)</Text>
+                                        <Text size="xs">• Portal Miner: wave/3 (max 2)</Text>
+                                        <Text size="xs">• Voltage: wave/2 (max 4)</Text>
+                                    </Stack>
+                                </Card>
+                            </Grid.Col>
+                        </Grid>
+                    </Paper>
+
+                    {/* Strategy Guide */}
+                    <Paper p="lg" radius="md" withBorder>
+                        <Title c="yellow" mb="md" order={3}>
+                            🎯 Master Strategy Guide
+                        </Title>
+
+                        <Grid>
+                            <Grid.Col span={6}>
+                                <Card h="100%" p="md" radius="md" withBorder>
+                                    <Title c="blue" mb="sm" order={5}>
+                                        🏗️ Build Strategy
+                                    </Title>
+                                    <Stack gap="xs">
+                                        <Text size="xs">
+                                            • <strong>Firewall</strong> frontline tanks
+                                        </Text>
+                                        <Text size="xs">
+                                            • <strong>Antivirus</strong> behind tanks for DPS
+                                        </Text>
+                                        <Text size="xs">
+                                            • <strong>Proxy</strong> for wide area coverage
+                                        </Text>
+                                        <Text size="xs">
+                                            • <strong>Slowdown</strong> for crowd control
+                                        </Text>
+                                        <Text size="xs">
+                                            • <strong>Chain Lightning</strong> for groups
+                                        </Text>
+                                        <Text c="red" size="xs">
+                                            • Keep minimum {GAME_CONFIG.minTowerDistance}px distance
+                                        </Text>
+                                    </Stack>
+                                </Card>
+                            </Grid.Col>
+
+                            <Grid.Col span={6}>
+                                <Card h="100%" p="md" radius="md" withBorder>
+                                    <Title c="red" mb="sm" order={5}>
+                                        ⚡ Priority Targeting
+                                    </Title>
+                                    <Stack gap="xs">
+                                        <Text size="xs">
+                                            1. <strong>Portal Miner</strong> - spawns 3 enemies
+                                        </Text>
+                                        <Text size="xs">
+                                            2. <strong>Spider</strong> - 35 damage, high reward
+                                        </Text>
+                                        <Text size="xs">
+                                            3. <strong>Phoenix</strong> - resurrects once
+                                        </Text>
+                                        <Text size="xs">
+                                            4. <strong>Replicator</strong> - creates copies
+                                        </Text>
+                                        <Text size="xs">
+                                            5. <strong>Voltage</strong> - disables towers
+                                        </Text>
+                                        <Text c="orange" size="xs">
+                                            • Focus fire on threats first!
+                                        </Text>
+                                    </Stack>
+                                </Card>
+                            </Grid.Col>
+
+                            <Grid.Col span={6}>
+                                <Card h="100%" p="md" radius="md" withBorder>
+                                    <Title c="purple" mb="sm" order={5}>
+                                        🌊 Wave-Specific Tips
+                                    </Title>
+                                    <Stack gap="xs">
+                                        <Text size="xs">
+                                            • <strong>Tsunami</strong>: Chain Lightning + wide
+                                            coverage
+                                        </Text>
+                                        <Text size="xs">
+                                            • <strong>Swarm</strong>: Area damage towers
+                                        </Text>
+                                        <Text size="xs">
+                                            • <strong>Elite</strong>: High-damage focus fire
+                                        </Text>
+                                        <Text size="xs">
+                                            • <strong>Ambush</strong>: Overlapping coverage
+                                        </Text>
+                                        <Text size="xs">
+                                            • <strong>Guerrilla</strong>: Proxy towers
+                                        </Text>
+                                        <Text c="orange" size="xs">
+                                            • Adapt to formation types!
+                                        </Text>
+                                    </Stack>
+                                </Card>
+                            </Grid.Col>
+
+                            <Grid.Col span={6}>
+                                <Card h="100%" p="md" radius="md" withBorder>
+                                    <Title c="green" mb="sm" order={5}>
+                                        💰 Economic Tips
+                                    </Title>
+                                    <Stack gap="xs">
+                                        <Text size="xs">
+                                            • Don't hoard coins (passive stops at{' '}
+                                            {GAME_CONFIG.economy.passiveIncomeLimit}+)
+                                        </Text>
+                                        <Text size="xs">• Spend regularly to maintain income</Text>
+                                        <Text size="xs">• Save coins for emergency rebuilds</Text>
+                                        <Text size="xs">
+                                            • Interest maxes at{' '}
+                                            {GAME_CONFIG.economy.maxInterestBase} coin base
+                                        </Text>
+                                        <Text c="orange" size="xs">
+                                            • Balance spending vs saving
+                                        </Text>
+                                    </Stack>
+                                </Card>
+                            </Grid.Col>
+                        </Grid>
+                    </Paper>
+
+                    {/* Global Events */}
+                    <Paper p="lg" radius="md" withBorder>
+                        <Title c="orange" mb="md" order={3}>
+                            🌍 Global Events
+                        </Title>
+
+                        <Grid>
+                            <Grid.Col span={6}>
+                                <Card h="100%" p="md" radius="md" withBorder>
+                                    <Title c="red" mb="sm" order={5}>
+                                        💽 Disk Format
+                                    </Title>
+                                    <Stack gap="xs">
+                                        <Text size="xs">
+                                            • <strong>Effect:</strong> All towers destroyed
+                                        </Text>
+                                        <Text size="xs">
+                                            • <strong>Duration:</strong> 2 seconds
+                                        </Text>
+                                        <Text size="xs">
+                                            • <strong>Frequency:</strong> Every 4-7 waves
+                                        </Text>
+                                        <Text size="xs">
+                                            • <strong>Priority:</strong> 100 (Highest)
+                                        </Text>
+                                        <Text c="orange" size="xs">
+                                            • Save coins for emergency rebuild!
+                                        </Text>
+                                    </Stack>
+                                </Card>
+                            </Grid.Col>
+
+                            <Grid.Col span={6}>
+                                <Card h="100%" p="md" radius="md" withBorder>
+                                    <Title c="blue" mb="sm" order={5}>
+                                        🌊 Data Flood
+                                    </Title>
+                                    <Stack gap="xs">
+                                        <Text size="xs">
+                                            • <strong>Effect:</strong> 2x enemies, 40% weaker
+                                        </Text>
+                                        <Text size="xs">
+                                            • <strong>Duration:</strong> 3 seconds
+                                        </Text>
+                                        <Text size="xs">
+                                            • <strong>Frequency:</strong> Every 8-12 waves
+                                        </Text>
+                                        <Text size="xs">
+                                            • <strong>Priority:</strong> 80
+                                        </Text>
+                                        <Text c="green" size="xs">
+                                            • Great for farming coins!
+                                        </Text>
+                                    </Stack>
+                                </Card>
+                            </Grid.Col>
+                        </Grid>
+                    </Paper>
+
+                    {/* Quick Reference */}
+                    <Paper p="lg" radius="md" withBorder>
+                        <Title c="violet" mb="md" order={3}>
+                            ⚡ Quick Reference
+                        </Title>
+
+                        <Grid>
+                            <Grid.Col span={3}>
+                                <Card h="100%" p="md" radius="md" withBorder>
+                                    <Title c="red" mb="sm" order={6}>
+                                        🚨 Critical Rules
+                                    </Title>
+                                    <Stack gap="xs">
+                                        <Text size="xs">• Keep 1+ towers alive</Text>
+                                        <Text size="xs">
+                                            • Don't hoard {GAME_CONFIG.economy.passiveIncomeLimit}+
+                                            coins
+                                        </Text>
+                                        <Text size="xs">• Target special enemies first</Text>
+                                        <Text size="xs">• Watch for global events</Text>
+                                    </Stack>
+                                </Card>
+                            </Grid.Col>
+
+                            <Grid.Col span={3}>
+                                <Card h="100%" p="md" radius="md" withBorder>
+                                    <Title c="blue" mb="sm" order={6}>
+                                        🎯 Zones
+                                    </Title>
+                                    <Stack gap="xs">
+                                        <Text size="xs">• Red spawn zone (left)</Text>
+                                        <Text size="xs">• Blue server zone (right)</Text>
+                                        <Text size="xs">• Build in middle area</Text>
+                                        <Text size="xs">
+                                            • {GAME_CONFIG.minTowerDistance}px minimum distance
+                                        </Text>
+                                    </Stack>
+                                </Card>
+                            </Grid.Col>
+
+                            <Grid.Col span={3}>
+                                <Card h="100%" p="md" radius="md" withBorder>
+                                    <Title c="green" mb="sm" order={6}>
+                                        💰 Economy
+                                    </Title>
+                                    <Stack gap="xs">
+                                        <Text size="xs">
+                                            • +{GAME_CONFIG.economy.basePassiveIncome} coins/sec
+                                            passive
+                                        </Text>
+                                        <Text size="xs">
+                                            • +{GAME_CONFIG.economy.waveCompletionBonus} coins/wave
+                                        </Text>
+                                        <Text size="xs">
+                                            • {GAME_CONFIG.economy.interestRate * 100}% interest/
+                                            {GAME_CONFIG.economy.interestInterval / 1000}s
+                                        </Text>
+                                        <Text size="xs">
+                                            • {GAME_CONFIG.economy.killBonusMultiplier}x kill bonus
+                                        </Text>
+                                    </Stack>
+                                </Card>
+                            </Grid.Col>
+
+                            <Grid.Col span={3}>
+                                <Card h="100%" p="md" radius="md" withBorder>
+                                    <Title c="orange" mb="sm" order={6}>
+                                        🏥 Health
+                                    </Title>
+                                    <Stack gap="xs">
+                                        <Text size="xs">• +0.5 HP/2s regen</Text>
+                                        <Text size="xs">• +20 HP/wave</Text>
+                                        <Text size="xs">
+                                            • Server defense: {GAME_CONFIG.serverDefenseDamage} DPS
+                                        </Text>
+                                        <Text size="xs">• Requires active towers</Text>
+                                    </Stack>
+                                </Card>
+                            </Grid.Col>
+                        </Grid>
+                    </Paper>
+                </Stack>
             </Stack>
         </Container>
     )
