@@ -94,7 +94,7 @@
 .sectionDropdownItemLink {
     border-radius: var(--mantine-radius-md);
     margin-bottom: 2px;
-    margin-left: 4px;
+    margin-left: 2px;
     position: relative;
     transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 
@@ -121,8 +121,7 @@
 
     &:hover {
         background: light-dark(rgba(6, 182, 212, 0.05), rgba(6, 182, 212, 0.1));
-        transform: translateX(8px);
-        padding-left: calc(var(--mantine-spacing-md) + 4px);
+        transform: translateX(4px);
     }
 
     &[data-active='true'] {

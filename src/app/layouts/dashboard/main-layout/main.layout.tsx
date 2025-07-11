@@ -279,7 +279,7 @@ export function MainLayout() {
                     component={ScrollArea}
                     flex={1}
                     offsetScrollbars="present"
-                    scrollbarSize={'0.4rem'}
+                    scrollbarSize={'0.2rem'}
                     type="hover"
                 >
                     <Navigation isMobile={isMobile} onClose={toggleMobile} />
