@@ -5,10 +5,10 @@ import {
 } from '@remnawave/backend-contract'
 import { ForwardRefComponent, HTMLMotionProps, Variants } from 'motion/react'
 import { Fieldset, Group, Stack, Title } from '@mantine/core'
+import { DateTimePicker, getTimeRange } from '@mantine/dates'
 import { notifications } from '@mantine/notifications'
 import { PiCalendarDuotone } from 'react-icons/pi'
 import { UseFormReturnType } from '@mantine/form'
-import { DateTimePicker } from '@mantine/dates'
 import { useTranslation } from 'react-i18next'
 import { TbShield } from 'react-icons/tb'
 import { useMemo, useState } from 'react'
@@ -63,10 +63,35 @@ export const AccessSettingsCard = <T extends CreateUserCommand.Request | UpdateU
             >
                 <Stack gap="md">
                     <DateTimePicker
+                        dropdownType="modal"
+                        headerControlsOrder={['previous', 'next', 'level']}
                         highlightToday
                         key={form.key('expireAt')}
                         label={t('create-user-modal.widget.expiry-date')}
                         minDate={new Date()}
+                        modalProps={{
+                            centered: true
+                        }}
+                        styles={{
+                            calendarHeaderLevel: {
+                                justifyContent: 'flex-start',
+                                paddingInlineStart: 8
+                            },
+                            label: { fontWeight: 500 }
+                        }}
+                        submitButtonProps={{
+                            style: {
+                                width: '30%'
+                            }
+                        }}
+                        timePickerProps={{
+                            withDropdown: true,
+                            presets: getTimeRange({
+                                startTime: '06:00:00',
+                                endTime: '18:00:00',
+                                interval: '01:30:00'
+                            })
+                        }}
                         valueFormat="MMMM D, YYYY - HH:mm"
                         {...form.getInputProps('expireAt')}
                         description={t('create-user-modal.widget.expire-at-description')}
@@ -110,9 +135,6 @@ export const AccessSettingsCard = <T extends CreateUserCommand.Request | UpdateU
                                 label: t('create-user-modal.widget.2099-year')
                             }
                         ]}
-                        styles={{
-                            label: { fontWeight: 500 }
-                        }}
                     />
 
                     <InternalSquadsListWidget
