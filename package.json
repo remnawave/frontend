@@ -141,16 +141,18 @@
     "steiger": "^0.5.7",
     "stylelint": "^16.19.1",
     "stylelint-config-standard-scss": "^14.0.0",
+    "terser": "^5.43.1",
     "typesafe-i18n": "^5.26.2",
     "typescript": "^5.8.3",
     "typescript-eslint": "^8.33.1",
-    "vite": "6.3.5",
+    "vite": "7.0.4",
     "vite-plugin-javascript-obfuscator": "^3.1.0",
     "vite-plugin-preload": "^0.4.2",
     "vite-plugin-remove-console": "^2.2.0",
-    "vite-plugin-wasm": "^3.4.1",
-    "vite-plugin-webfont-dl": "^3.10.5",
-    "vite-tsconfig-paths": "^5.1.4"
+    "vite-plugin-wasm": "^3.5.0",
+    "vite-plugin-webfont-dl": "^3.11.0",
+    "vite-tsconfig-paths": "^5.1.4",
+    "vite-plugin-svgr": "^4.3.0"
   },
   "commitlint": {
     "extends": [

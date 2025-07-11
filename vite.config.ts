@@ -33,98 +33,46 @@ export default defineConfig({
         target: 'esNext',
         outDir: 'dist',
         chunkSizeWarningLimit: 1000000,
+        // minify: 'terser',
         rollupOptions: {
             output: {
-                manualChunks(id) {
-                    if (id.includes('node_modules')) {
-                        if (id.includes('monaco-editor')) return 'monaco-editor'
-                        if (
-                            id.includes('monaco-languageserver-types') ||
-                            id.includes('monaco-worker-manager') ||
-                            id.includes('monaco-marker-data-provider') ||
-                            id.includes('monaco-yaml') ||
-                            id.includes('vscode-languageserver-types') ||
-                            id.includes('vscode-languageserver-textdocument')
-                        ) {
-                            return 'monaco-ext'
-                        }
-
-                        if (id.includes('recharts') || id.includes('d3')) {
-                            return 'charts'
-                        }
-
-                        if (id.includes('@dnd-kit')) {
-                            return 'dnd-kit'
-                        }
-
-                        if (
-                            id.includes('react') ||
-                            id.includes('react-dom') ||
-                            id.includes('react-router-dom') ||
-                            id.includes('react-transition-group') ||
-                            id.includes('react-error-boundary') ||
-                            id.includes('zustand')
-                        ) {
-                            return 'react'
-                        }
-
-                        if (
-                            id.includes('axios') ||
-                            id.includes('dayjs') ||
-                            id.includes('js-yaml') ||
-                            id.includes('nanoid') ||
-                            id.includes('zod') ||
-                            id.includes('ufo') ||
-                            id.includes('base64-js') ||
-                            id.includes('buffer') ||
-                            id.includes('consola') ||
-                            id.includes('country-flag-emoji-polyfill') ||
-                            id.includes('crypto-js') ||
-                            id.includes('@remnawave') ||
-                            id.includes('generate-password-ts')
-                        ) {
-                            return 'utils'
-                        }
-
-                        if (id.includes('@tanstack')) {
-                            return 'tanstack'
-                        }
-
-                        if (
-                            id.includes('i18next') ||
-                            id.includes('i18next-http-backend') ||
-                            id.includes('i18next-browser-languagedetector')
-                        ) {
-                            return 'i18n'
-                        }
-
-                        if (id.includes('@stablelib') || id.includes('crypto-js')) {
-                            return 'crypto'
-                        }
-
-                        if (id.includes('@mantine') || id.includes('mantine-datatable')) {
-                            return 'mantine'
-                        }
-
-                        if (id.includes('@tabler') || id.includes('react-icons')) {
-                            return 'icons'
-                        }
-
-                        if (
-                            id.includes('framer-motion') ||
-                            id.includes('motion-dom') ||
-                            id.includes('motion-utils')
-                        ) {
-                            return 'motion'
-                        }
-
-                        const pkg = id.match(/node_modules\/([^/]+)/)?.[1]
-                        if (pkg && pkg.length < 8) return 'small-vendors'
-
-                        return 'large-vendor'
-                    }
-
-                    return 'unknown'
+                manualChunks: {
+                    react: ['react', 'react-dom', 'react-router-dom', 'react-error-boundary'],
+                    icons: ['react-icons/pi', 'react-icons/fa', 'react-icons/tb'],
+                    date: ['dayjs'],
+                    zod: ['axios', 'zod', 'zustand', 'xbytes'],
+                    utils: [
+                        'nanoid',
+                        'ufo',
+                        'base64-js',
+                        'buffer',
+                        'consola',
+                        'semver',
+                        'jsonc-parser',
+                        'json-edit-react'
+                    ],
+                    mantine: [
+                        '@mantine/core',
+                        '@mantine/hooks',
+                        '@mantine/dates',
+                        '@mantine/nprogress',
+                        '@mantine/notifications',
+                        '@mantine/modals'
+                    ],
+                    remnawave: ['@remnawave/backend-contract'],
+                    i18n: ['i18next', 'i18next-http-backend', 'i18next-browser-languagedetector'],
+                    motion: ['framer-motion', 'motion-dom', 'motion-utils', 'motion'],
+                    crypto: ['crypto-js', '@stablelib/base64', '@stablelib/x25519'],
+                    recharts: ['recharts'],
+                    dnd: ['@dnd-kit/core', '@dnd-kit/sortable', '@dnd-kit/utilities'],
+                    mantinetable: ['mantine-react-table', 'mantine-datatable'],
+                    prettier: ['prettier', 'vscode-languageserver-types', 'prettier/plugins/yaml'],
+                    monaco: ['monaco-editor', 'monaco-yaml', 'yaml'],
+                    tanstack: [
+                        '@tanstack/react-query',
+                        '@tanstack/react-table',
+                        '@tanstack/react-virtual'
+                    ]
                 }
             }
         }
