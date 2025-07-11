@@ -15,7 +15,6 @@ import { TbCirclesRelation } from 'react-icons/tb'
 import { useTranslation } from 'react-i18next'
 
 import { HappLogo } from '@pages/dashboard/utils/happ-routing-builder/ui/components/happ-routing-builder.page.component'
-import { MihomoLogo } from '@shared/ui/logos/mihomo-logo'
 import { XtlsLogo } from '@shared/ui/logos/xtls-logo'
 import { ROUTES } from '@shared/constants'
 
@@ -109,13 +108,11 @@ export const useMenuSections = (): MenuItem[] => {
                     dropdownItems: [
                         {
                             name: 'Xray JSON',
-                            href: ROUTES.DASHBOARD.TEMPLATES.XRAY_JSON,
-                            icon: XtlsLogo
+                            href: ROUTES.DASHBOARD.TEMPLATES.XRAY_JSON
                         },
                         {
                             name: 'Mihomo',
-                            href: ROUTES.DASHBOARD.TEMPLATES.MIHOMO,
-                            icon: MihomoLogo
+                            href: ROUTES.DASHBOARD.TEMPLATES.MIHOMO
                         },
                         {
                             name: 'Stash',
