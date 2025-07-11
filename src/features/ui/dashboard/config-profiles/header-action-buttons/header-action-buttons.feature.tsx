@@ -3,7 +3,6 @@ import { CreateConfigProfileCommand } from '@remnawave/backend-contract'
 import { generatePath, useNavigate } from 'react-router-dom'
 import { PiArrowsClockwise, PiPlus } from 'react-icons/pi'
 import { useDisclosure } from '@mantine/hooks'
-import { modals } from '@mantine/modals'
 import { useField } from '@mantine/form'
 
 import { QueryKeys, useCreateConfigProfile, useGetConfigProfiles } from '@shared/api/hooks'
@@ -117,7 +116,7 @@ export const ConfigProfilesHeaderActionButtonsFeature = () => {
                         {...nameField.getInputProps()}
                     />
                     <Group justify="flex-end">
-                        <Button onClick={() => modals.closeAll()} variant="default">
+                        <Button onClick={close} variant="default">
                             Cancel
                         </Button>
 
