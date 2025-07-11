@@ -3,17 +3,19 @@ import {
     PiArrowsInCardinalFill,
     PiBarcodeDuotone,
     PiBracketsCurly,
+    PiChartLine,
     PiCookie,
     PiCpu,
     PiListChecks,
     PiStarDuotone,
     PiUsersDuotone
 } from 'react-icons/pi'
+import { HiChartPie, HiCurrencyDollar, HiServer } from 'react-icons/hi'
 import { TbCirclesRelation } from 'react-icons/tb'
 import { useTranslation } from 'react-i18next'
-import { FaHornbill } from 'react-icons/fa6'
 
 import { HappLogo } from '@pages/dashboard/utils/happ-routing-builder/ui/components/happ-routing-builder.page.component'
+import { MihomoLogo } from '@shared/ui/logos/mihomo-logo'
 import { XtlsLogo } from '@shared/ui/logos/xtls-logo'
 import { ROUTES } from '@shared/constants'
 
@@ -63,23 +65,28 @@ export const useMenuSections = (): MenuItem[] => {
                     dropdownItems: [
                         {
                             name: t('constants.management'),
-                            href: ROUTES.DASHBOARD.MANAGEMENT.NODES
+                            href: ROUTES.DASHBOARD.MANAGEMENT.NODES,
+                            icon: HiServer
+                        },
+
+                        {
+                            name: t('constants.nodes-statistics'),
+                            href: ROUTES.DASHBOARD.MANAGEMENT.NODES_STATS,
+                            icon: HiChartPie
+                        },
+                        {
+                            name: t('constants.infra-billing'),
+                            href: ROUTES.DASHBOARD.CRM.INFRA_BILLING,
+                            icon: HiCurrencyDollar
                         },
                         {
                             name: t('constants.nodes-bandwidth-table'),
-                            href: ROUTES.DASHBOARD.MANAGEMENT.NODES_BANDWIDTH_TABLE
-                        },
-                        {
-                            name: t('constants.nodes-statistics'),
-                            href: ROUTES.DASHBOARD.MANAGEMENT.NODES_STATS
+                            href: ROUTES.DASHBOARD.MANAGEMENT.NODES_BANDWIDTH_TABLE,
+                            icon: PiChartLine
                         }
                     ]
                 },
-                {
-                    name: t('constants.subscription-settings'),
-                    href: ROUTES.DASHBOARD.MANAGEMENT.SUBSCRIPTION_SETTINGS,
-                    icon: PiBarcodeDuotone
-                },
+
                 {
                     name: t('constants.api-tokens'),
                     href: ROUTES.DASHBOARD.MANAGEMENT.API_TOKENS,
@@ -88,48 +95,45 @@ export const useMenuSections = (): MenuItem[] => {
             ]
         },
         {
-            header: t('constants.templates'),
+            header: t('constants.subscription'),
             section: [
                 {
-                    name: t('constants.subscription'),
+                    name: t('constants.subscription-settings'),
+                    href: ROUTES.DASHBOARD.MANAGEMENT.SUBSCRIPTION_SETTINGS,
+                    icon: PiBarcodeDuotone
+                },
+                {
+                    name: t('constants.templates'),
                     href: ROUTES.DASHBOARD.TEMPLATES.ROOT,
                     icon: PiBracketsCurly,
                     dropdownItems: [
                         {
                             name: 'Xray JSON',
-                            href: ROUTES.DASHBOARD.TEMPLATES.XRAY_JSON
+                            href: ROUTES.DASHBOARD.TEMPLATES.XRAY_JSON,
+                            icon: XtlsLogo
                         },
                         {
                             name: 'Mihomo',
-                            href: ROUTES.DASHBOARD.TEMPLATES.MIHOMO
+                            href: ROUTES.DASHBOARD.TEMPLATES.MIHOMO,
+                            icon: MihomoLogo
                         },
                         {
                             name: 'Stash',
                             href: ROUTES.DASHBOARD.TEMPLATES.STASH
                         },
                         {
-                            name: 'Clash',
-                            href: ROUTES.DASHBOARD.TEMPLATES.CLASH
-                        },
-                        {
                             name: 'Singbox',
                             href: ROUTES.DASHBOARD.TEMPLATES.SINGBOX
+                        },
+                        {
+                            name: 'Clash',
+                            href: ROUTES.DASHBOARD.TEMPLATES.CLASH
                         },
                         {
                             name: 'Singbox legacy',
                             href: ROUTES.DASHBOARD.TEMPLATES.SINGBOX_LEGACY
                         }
                     ]
-                }
-            ]
-        },
-        {
-            header: 'CRM',
-            section: [
-                {
-                    name: t('constants.infra-billing'),
-                    href: ROUTES.DASHBOARD.CRM.INFRA_BILLING,
-                    icon: FaHornbill
                 }
             ]
         },

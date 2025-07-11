@@ -1,6 +1,7 @@
 import {
     AppShell,
     Badge,
+    Box,
     Burger,
     Button,
     Container,
@@ -114,6 +115,85 @@ export function MainLayout() {
         }, 100)
     }
 
+    const logoElement = !isEasterEggUnlocked ? (
+        <Logo
+            c={isLogoAnimating ? 'pink' : 'cyan'}
+            onClick={handleClick}
+            style={{ cursor: 'pointer' }}
+            w="2.5rem"
+        />
+    ) : (
+        <Logo
+            c="pink"
+            onClick={() => {
+                navigate(ROUTES.DASHBOARD.EASTER_EGG.PROXY_DEFENSE)
+            }}
+            style={{ cursor: 'pointer' }}
+            w="2.5rem"
+        />
+    )
+
+    const titleElement = (
+        <Text
+            fw={700}
+            size="lg"
+            style={{
+                userSelect: 'none',
+                WebkitUserSelect: 'none'
+            }}
+        >
+            <Text
+                c={isEasterEggUnlocked || isLogoAnimating ? 'pink' : 'cyan'}
+                component="span"
+                fw={700}
+            >
+                Remna
+            </Text>
+            wave
+        </Text>
+    )
+
+    const versionBadge =
+        buildInfo.branch === 'dev' ? (
+            <Indicator
+                color="cyan.6"
+                disabled={!isNewVersionAvailable}
+                offset={3}
+                processing
+                size={11}
+            >
+                <Badge
+                    color="red"
+                    onClick={() => setBuildInfoModalOpened(true)}
+                    radius="xl"
+                    size="lg"
+                    style={{ cursor: 'help' }}
+                    variant="light"
+                >
+                    dev
+                </Badge>
+            </Indicator>
+        ) : (
+            <Indicator
+                color="cyan.6"
+                disabled={!isNewVersionAvailable}
+                offset={3}
+                processing
+                size={11}
+            >
+                <Badge
+                    color="cyan"
+                    onClick={() => setBuildInfoModalOpened(true)}
+                    radius="xl"
+                    size="lg"
+                    style={{ cursor: 'pointer' }}
+                    variant="light"
+                >
+                    {`${packageJson.version}`}
+                </Badge>
+            </Indicator>
+        )
+
     return isMediaQueryReady ? (
         <AppShell
             header={{ height: 64 }}
@@ -159,103 +239,41 @@ export function MainLayout() {
                 w={300}
                 withBorder={false}
             >
-                <AppShell.Section>
-                    <Group align="center" mb="md">
-                        <Group gap="xs" justify="space-around" w="100%">
-                            <Burger
-                                hiddenFrom="lg"
-                                onClick={isMobile ? toggleMobile : toggleDesktop}
-                                opened={isMobile ? mobileOpened : desktopOpened}
-                                size="sm"
-                            />
-                            <Group gap={4}>
-                                {!isEasterEggUnlocked && (
-                                    <Logo
-                                        c={isLogoAnimating ? 'pink' : 'cyan'}
-                                        onClick={handleClick}
-                                        style={{ cursor: 'pointer' }}
-                                        w="2.5rem"
-                                    />
-                                )}
+                <AppShell.Section className={classes.logoSection}>
+                    <Box style={{ position: 'absolute', left: '0' }}>
+                        <Burger
+                            hiddenFrom="lg"
+                            onClick={isMobile ? toggleMobile : toggleDesktop}
+                            opened={isMobile ? mobileOpened : desktopOpened}
+                            size="sm"
+                        />
+                    </Box>
 
-                                {isEasterEggUnlocked && (
-                                    <Logo
-                                        c="pink"
-                                        onClick={() => {
-                                            navigate(ROUTES.DASHBOARD.EASTER_EGG.PROXY_DEFENSE)
-                                        }}
-                                        style={{ cursor: 'pointer' }}
-                                        w="2.5rem"
-                                    />
-                                )}
-                                <Text fw={700} size="lg">
-                                    <Text
-                                        c={isEasterEggUnlocked || isLogoAnimating ? 'pink' : 'cyan'}
-                                        component="span"
-                                        fw={700}
-                                    >
-                                        Remna
-                                    </Text>
-                                    wave
-                                </Text>
-                            </Group>
-                            {buildInfo.branch === 'dev' && (
-                                <Indicator
-                                    color="cyan.6"
-                                    disabled={!isNewVersionAvailable}
-                                    offset={3}
-                                    processing
-                                    size={11}
-                                >
-                                    <Badge
-                                        color="red"
-                                        onClick={() => setBuildInfoModalOpened(true)}
-                                        radius="xl"
-                                        size="lg"
-                                        style={{ cursor: 'help', marginLeft: 'auto' }}
-                                        variant="light"
-                                    >
-                                        dev
-                                    </Badge>
-                                </Indicator>
-                            )}
-
-                            {buildInfo.branch !== 'dev' && (
-                                <Indicator
-                                    color="cyan.6"
-                                    disabled={!isNewVersionAvailable}
-                                    offset={3}
-                                    processing
-                                    size={11}
-                                >
-                                    <Badge
-                                        color="cyan"
-                                        onClick={() => setBuildInfoModalOpened(true)}
-                                        radius="xl"
-                                        size="lg"
-                                        style={{ cursor: 'pointer', marginLeft: 'auto' }}
-                                        variant="light"
-                                    >
-                                        {`${packageJson.version}`}
-                                    </Badge>
-                                </Indicator>
-                            )}
-
-                            {isSocialButton && (
-                                <Group style={{ flexShrink: 0 }}>
-                                    <HeaderControls
-                                        githubLink="https://github.com/remnawave/panel"
-                                        isGithubLoading={isGithubLoading}
-                                        stars={data?.totalStars}
-                                        telegramLink="https://t.me/remnawave"
-                                        withLanguage={false}
-                                        withLogout={false}
-                                        withRefresh={false}
-                                    />
-                                </Group>
-                            )}
-                        </Group>
+                    <Group gap="xs" justify="center" w="100%">
+                        {logoElement}
+                        {titleElement}
+                        {!isMobile && versionBadge}
                     </Group>
+
+                    {isMobile && (
+                        <Group gap="xs" justify="center">
+                            {versionBadge}
+                        </Group>
+                    )}
+
+                    {isSocialButton && (
+                        <Group justify="center" mt="md" style={{ flexShrink: 0 }}>
+                            <HeaderControls
+                                githubLink="https://github.com/remnawave/panel"
+                                isGithubLoading={isGithubLoading}
+                                stars={data?.totalStars}
+                                telegramLink="https://t.me/remnawave"
+                                withLanguage={false}
+                                withLogout={false}
+                                withRefresh={false}
+                            />
+                        </Group>
+                    )}
                 </AppShell.Section>
                 <AppShell.Section
                     component={ScrollArea}
@@ -282,7 +300,6 @@ export function MainLayout() {
                 opened={buildInfoModalOpened}
             />
 
-            {/* Easter Egg Game Modal */}
             {isGameModalOpen && (
                 <div
                     style={{
