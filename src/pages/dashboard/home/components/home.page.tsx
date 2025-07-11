@@ -1,4 +1,5 @@
-import { SimpleGrid, Stack, Text } from '@mantine/core'
+import { SimpleGrid, Stack, Title, TitleProps } from '@mantine/core'
+import { motion, Variants } from 'motion/react'
 import { useTranslation } from 'react-i18next'
 
 import { MetricWithIcon } from '@widgets/dashboard/home/metric-with-icons'
@@ -15,6 +16,72 @@ import {
     getUsersMetrics
 } from './metrics'
 import { IProps } from './interfaces'
+
+const MotionWrapper = motion.div
+const MotionStack = motion(Stack)
+const MotionGrid = motion(SimpleGrid)
+
+interface IAnimatedTitleProps extends TitleProps {
+    children: React.ReactNode
+    variants: Variants
+}
+
+const AnimatedTitle = (props: IAnimatedTitleProps) => (
+    <motion.div variants={props.variants}>
+        <Title {...props}>{props.children}</Title>
+    </motion.div>
+)
+
+const containerVariants = {
+    hidden: {},
+    visible: {
+        transition: {
+            staggerChildren: 0.15
+        }
+    }
+}
+
+const sectionVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+        opacity: 1,
+        y: 0,
+        transition: {
+            duration: 0.4,
+            staggerChildren: 0.03
+        }
+    }
+}
+
+const titleVariants = {
+    hidden: { opacity: 0, x: -20 },
+    visible: {
+        opacity: 1,
+        x: 0,
+        transition: { duration: 0.3 }
+    }
+}
+
+const gridVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+        opacity: 1,
+        transition: {
+            duration: 0.2,
+            staggerChildren: 0.03
+        }
+    }
+}
+
+const cardVariants = {
+    hidden: { opacity: 0, y: 10, scale: 0.95 },
+    visible: {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        transition: { duration: 0.25 }
+    }
+}
 
 export const HomePage = (props: IProps) => {
     const { t } = useTranslation()
@@ -43,56 +110,97 @@ export const HomePage = (props: IProps) => {
                 title={t('home.page.short-stats')}
             />
 
-            <Stack gap="sm" mb="xl" pb="xl">
+            <MotionStack
+                animate="visible"
+                gap="sm"
+                initial="hidden"
+                mb="xl"
+                pb="xl"
+                variants={containerVariants}
+            >
                 {pm2SummaryMetrics.length > 0 && (
-                    <>
-                        <Text fw={600}>{t('home.page.remnawave-usage')}</Text>
+                    <MotionWrapper variants={sectionVariants}>
+                        <AnimatedTitle m={'xs'} ml={0} order={4} variants={titleVariants}>
+                            {t('home.page.remnawave-usage')}
+                        </AnimatedTitle>
 
-                        <SimpleGrid cols={{ base: 1, sm: 2, xl: 4 }}>
+                        <MotionGrid cols={{ base: 1, sm: 2, xl: 4 }} variants={gridVariants}>
                             {pm2SummaryMetrics.map((metric) => (
-                                <MetricWithIcon key={metric.title} {...metric} />
+                                <MotionWrapper key={metric.title} variants={cardVariants}>
+                                    <MetricWithIcon {...metric} />
+                                </MotionWrapper>
                             ))}
-                        </SimpleGrid>
-
-                        <Text fw={600} mt="md">
-                            {t('home.page.process-details')}
-                        </Text>
-                        <SimpleGrid cols={{ base: 1, sm: 2, xl: 4 }}>
-                            {pm2ProcessMetrics.map((metric) => (
-                                <MetricWithIcon key={metric.title} {...metric} />
-                            ))}
-                        </SimpleGrid>
-                    </>
+                        </MotionGrid>
+                    </MotionWrapper>
                 )}
 
-                <Text fw={600}>{t('home.page.bandwidth')}</Text>
-                <SimpleGrid cols={{ base: 1, sm: 2, xl: 3 }}>
-                    {bandwidthMetrics.map((metric) => (
-                        <MetricWithTrend key={metric.title} {...metric} />
-                    ))}
-                </SimpleGrid>
+                {pm2ProcessMetrics.length > 0 && (
+                    <MotionWrapper variants={sectionVariants}>
+                        <AnimatedTitle m={'xs'} ml={0} order={4} variants={titleVariants}>
+                            {t('home.page.process-details')}
+                        </AnimatedTitle>
+                        <MotionGrid cols={{ base: 1, sm: 2, xl: 4 }} variants={gridVariants}>
+                            {pm2ProcessMetrics.map((metric) => (
+                                <MotionWrapper key={metric.title} variants={cardVariants}>
+                                    <MetricWithIcon {...metric} />
+                                </MotionWrapper>
+                            ))}
+                        </MotionGrid>
+                    </MotionWrapper>
+                )}
 
-                <Text fw={600}>{t('home.page.system')}</Text>
-                <SimpleGrid cols={{ base: 1, sm: 2, xl: 3 }}>
-                    {simpleMetrics.map((metric) => (
-                        <MetricWithIcon key={metric.title} {...metric} />
-                    ))}
-                </SimpleGrid>
+                <MotionWrapper variants={sectionVariants}>
+                    <AnimatedTitle m={'xs'} ml={0} order={4} variants={titleVariants}>
+                        {t('home.page.bandwidth')}
+                    </AnimatedTitle>
+                    <MotionGrid cols={{ base: 1, sm: 2, xl: 3 }} variants={gridVariants}>
+                        {bandwidthMetrics.map((metric) => (
+                            <MotionWrapper key={metric.title} variants={cardVariants}>
+                                <MetricWithTrend {...metric} />
+                            </MotionWrapper>
+                        ))}
+                    </MotionGrid>
+                </MotionWrapper>
 
-                <Text fw={600}>{t('home.page.online-stats')}</Text>
-                <SimpleGrid cols={{ base: 1, sm: 2, xl: 4 }}>
-                    {onlineMetrics.map((metric) => (
-                        <MetricWithIcon key={metric.title} {...metric} />
-                    ))}
-                </SimpleGrid>
+                <MotionWrapper variants={sectionVariants}>
+                    <AnimatedTitle m={'xs'} ml={0} order={4} variants={titleVariants}>
+                        {t('home.page.system')}
+                    </AnimatedTitle>
+                    <MotionGrid cols={{ base: 1, sm: 2, xl: 3 }} variants={gridVariants}>
+                        {simpleMetrics.map((metric) => (
+                            <MotionWrapper key={metric.title} variants={cardVariants}>
+                                <MetricWithIcon {...metric} />
+                            </MotionWrapper>
+                        ))}
+                    </MotionGrid>
+                </MotionWrapper>
 
-                <Text fw={600}>{t('user-table.widget.table-title')}</Text>
-                <SimpleGrid cols={{ base: 1, sm: 2, xl: 4 }}>
-                    {usersMetrics.map((metric) => (
-                        <MetricWithIcon key={metric.title} {...metric} />
-                    ))}
-                </SimpleGrid>
-            </Stack>
+                <MotionWrapper variants={sectionVariants}>
+                    <AnimatedTitle m={'xs'} ml={0} order={4} variants={titleVariants}>
+                        {t('home.page.online-stats')}
+                    </AnimatedTitle>
+                    <MotionGrid cols={{ base: 1, sm: 2, xl: 4 }} variants={gridVariants}>
+                        {onlineMetrics.map((metric) => (
+                            <MotionWrapper key={metric.title} variants={cardVariants}>
+                                <MetricWithIcon {...metric} />
+                            </MotionWrapper>
+                        ))}
+                    </MotionGrid>
+                </MotionWrapper>
+
+                <MotionWrapper variants={sectionVariants}>
+                    <AnimatedTitle m={'xs'} ml={0} order={4} variants={titleVariants}>
+                        {t('user-table.widget.table-title')}
+                    </AnimatedTitle>
+                    <MotionGrid cols={{ base: 1, sm: 2, xl: 4 }} variants={gridVariants}>
+                        {usersMetrics.map((metric) => (
+                            <MotionWrapper key={metric.title} variants={cardVariants}>
+                                <MetricWithIcon {...metric} />
+                            </MotionWrapper>
+                        ))}
+                    </MotionGrid>
+                </MotionWrapper>
+            </MotionStack>
         </Page>
     )
 }

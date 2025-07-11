@@ -34,8 +34,6 @@ export default function HostsPageComponent(props: IProps) {
                 <Grid.Col span={12}>
                     <HostsPageHeaderWidget />
 
-                    <HostsFiltersFeature configProfiles={configProfiles} />
-
                     {isHostsLoading || isConfigProfilesLoading ? (
                         <LoadingScreen height="60vh" />
                     ) : (
@@ -44,6 +42,7 @@ export default function HostsPageComponent(props: IProps) {
                             initial={{ opacity: 0 }}
                             transition={{ duration: 0.5 }}
                         >
+                            <HostsFiltersFeature configProfiles={configProfiles} />
                             <HostsTableWidget
                                 configProfiles={configProfiles}
                                 hosts={hosts}

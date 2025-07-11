@@ -2,7 +2,7 @@ import { GetAllHostsCommand, GetConfigProfilesCommand } from '@remnawave/backend
 
 export interface IProps {
     configProfiles: GetConfigProfilesCommand.Response['response']['configProfiles'] | undefined
-    index: number
+    isDragOverlay?: boolean
     isSelected?: boolean
     item: GetAllHostsCommand.Response['response'][number]
     onSelect?: () => void

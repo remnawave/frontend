@@ -18,7 +18,7 @@ const DeferredUserTableWidget = () => {
     const [shouldRender, setShouldRender] = useState(false)
 
     useEffect(() => {
-        const timer = setTimeout(() => setShouldRender(true), 200)
+        const timer = setTimeout(() => setShouldRender(true), 300)
         return () => clearTimeout(timer)
     }, [])
 
@@ -30,7 +30,7 @@ const DeferredUserTableWidget = () => {
         <motion.div
             animate={{ opacity: 1 }}
             initial={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
+            transition={{ duration: 0.5, ease: [0, 0.71, 0.2, 1.01] }}
         >
             <UserTableWidget />
         </motion.div>

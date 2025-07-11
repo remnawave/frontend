@@ -10,7 +10,6 @@
     padding: 12px 48px 12px 16px;
     margin-bottom: 8px;
     cursor: pointer;
-    transition: all 0.15s ease;
 }
 
 .nodeRow:hover {
@@ -38,7 +37,7 @@
     padding: 8px;
     border-radius: 4px;
     transition: all 0.15s ease;
-    opacity: 0;
+    opacity: 1;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -55,6 +54,21 @@
 
 .dragHandle:active {
     cursor: grabbing;
+}
+
+.dragHandleActive {
+    color: var(--mantine-color-gray-7);
+    background: light-dark(var(--mantine-color-gray-1), var(--mantine-color-dark-5));
+    opacity: 1 !important;
+    cursor: grabbing;
+}
+
+/* DragOverlay styles */
+.nodeRow[data-dnd-overlay='true'] {
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
+    border-color: light-dark(var(--mantine-color-blue-4), var(--mantine-color-blue-4));
+    z-index: 9999;
+    background: light-dark(var(--mantine-color-white), var(--mantine-color-dark-6));
 }
 
 .desktopGrid {
@@ -119,6 +133,16 @@
     background: var(--mantine-color-dark-5);
 }
 
+[data-mantine-color-scheme='dark'] .dragHandleActive {
+    color: var(--mantine-color-gray-3);
+}
+
+[data-mantine-color-scheme='dark'] .nodeRow[data-dnd-overlay='true'] {
+    border-color: var(--mantine-color-blue-4);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+    background: var(--mantine-color-dark-6);
+}
+
 [data-mantine-color-scheme='dark'] .iconActive {
     color: var(--mantine-color-teal-4);
 }
@@ -141,6 +165,10 @@
         right: 8px;
         padding: 6px;
         opacity: 1;
+    }
+
+    .dragHandleActive {
+        opacity: 1 !important;
     }
 
     .nodeName {

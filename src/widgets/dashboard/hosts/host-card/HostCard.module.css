@@ -89,6 +89,15 @@
 .itemDragging {
     border: 1px solid light-dark(var(--mantine-color-blue-5), var(--mantine-color-teal-5));
     box-shadow: var(--mantine-shadow-xl);
+    z-index: 1000;
+}
+
+/* DragOverlay styles */
+.item[data-dnd-overlay='true'] {
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
+    border-color: light-dark(var(--mantine-color-blue-4), var(--mantine-color-blue-4));
+    z-index: 9999;
+    background: light-dark(var(--mantine-color-white), var(--mantine-color-dark-6));
 }
 
 .dragHandle {
@@ -98,6 +107,18 @@
     height: 100%;
     color: var(--mantine-color-dark-1);
     cursor: grab;
+    transition: all 0.15s ease;
+    opacity: 1;
+    border-radius: 4px;
+}
+
+.dragHandle:hover {
+    color: var(--mantine-color-gray-7);
+    background: light-dark(var(--mantine-color-gray-1), var(--mantine-color-dark-5));
+}
+
+.dragHandle:active {
+    cursor: grabbing;
 }
 
 .label {
@@ -140,7 +161,7 @@
 }
 
 .hostAddress {
-    max-width: 160px;
+    max-width: 200px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -216,4 +237,24 @@
         font-size: 0.875rem;
         opacity: 0.8;
     }
+}
+
+[data-mantine-color-scheme='dark'] .itemDragging {
+    border-color: var(--mantine-color-blue-4);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+[data-mantine-color-scheme='dark'] .dragHandle {
+    color: var(--mantine-color-dark-2);
+}
+
+[data-mantine-color-scheme='dark'] .dragHandle:hover {
+    color: var(--mantine-color-gray-3);
+    background: var(--mantine-color-dark-5);
+}
+
+[data-mantine-color-scheme='dark'] .item[data-dnd-overlay='true'] {
+    border-color: var(--mantine-color-blue-4);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+    background: var(--mantine-color-dark-6);
 }

@@ -1,11 +1,12 @@
 import { ActionIcon, Badge, Box, Checkbox, Group, Stack, Text } from '@mantine/core'
 import { PiLock, PiProhibit, PiPulse, PiTag } from 'react-icons/pi'
+import { CSSProperties, useState } from 'react'
+import { useSortable } from '@dnd-kit/sortable'
 import { useMediaQuery } from '@mantine/hooks'
 import { TbAlertCircle } from 'react-icons/tb'
-import { Draggable } from '@hello-pangea/dnd'
 import { RiDraggable } from 'react-icons/ri'
+import { CSS } from '@dnd-kit/utilities'
 import ColorHash from 'color-hash'
-import { useState } from 'react'
 import cx from 'clsx'
 
 import { useHostsStoreActions, useHostsStoreFilters } from '@entities/dashboard'
@@ -15,12 +16,25 @@ import classes from './HostCard.module.css'
 import { IProps } from './interfaces'
 
 export function HostCardWidget(props: IProps) {
-    const { item, index, configProfiles, isSelected, onSelect } = props
+    const { item, configProfiles, isSelected, onSelect, isDragOverlay = false } = props
 
     const filters = useHostsStoreFilters()
     const actions = useHostsStoreActions()
     const [isHovered, setIsHovered] = useState(false)
     const isMobile = useMediaQuery('(max-width: 768px)')
+
+    const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
+        id: item.uuid,
+        disabled: isDragOverlay
+    })
+
+    const style: CSSProperties = {
+        transform: CSS.Transform.toString(transform),
+        transition,
+        opacity: isDragging ? 0 : 1,
+        zIndex: isDragging ? 1000 : 'auto',
+        position: 'relative'
+    }
 
     if (!configProfiles) {
         return null
@@ -44,240 +58,205 @@ export function HostCardWidget(props: IProps) {
 
     if (isMobile) {
         return (
-            <Draggable
-                draggableId={item.uuid}
-                index={index}
-                isDragDisabled={isFiltered}
-                key={item.uuid}
+            <Box
+                className={cx(classes.item, classes.mobileItem, {
+                    [classes.itemDragging]: isDragging || isHovered,
+                    [classes.filteredItem]: isFiltered,
+                    [classes.selectedItem]: isSelected,
+                    [classes.danglingItem]: !configProfile?.uuid
+                })}
+                data-dnd-overlay={isDragOverlay}
+                ref={isDragOverlay ? undefined : setNodeRef}
+                style={style}
             >
-                {(provided, snapshot) => (
-                    <Box
-                        className={cx(classes.item, classes.mobileItem, {
-                            [classes.itemDragging]: snapshot.isDragging || isHovered,
-                            [classes.filteredItem]: isFiltered,
-                            [classes.selectedItem]: isSelected,
-                            [classes.danglingItem]: !configProfile?.uuid
-                        })}
-                        ref={provided.innerRef}
-                        {...provided.draggableProps}
-                    >
-                        <Box
-                            className={classes.contentArea}
-                            onClick={(e) => {
-                                e.stopPropagation()
-                                handleEdit()
-                            }}
-                            onTouchEnd={() => setIsHovered(false)}
-                            onTouchStart={() => setIsHovered(true)}
-                        >
-                            <Stack gap="sm">
-                                <Group justify="space-between" wrap="nowrap">
-                                    <Group gap="sm" wrap="nowrap">
-                                        <Checkbox
-                                            checked={isSelected}
-                                            onChange={(e) => {
-                                                e.stopPropagation()
-                                                onSelect?.()
-                                            }}
-                                            size="md"
-                                            styles={{
-                                                input: { cursor: 'pointer' }
-                                            }}
-                                        />
-                                        <Box
-                                            {...provided.dragHandleProps}
-                                            className={classes.mobileDragHandle}
-                                            onClick={(e) => e.stopPropagation()}
-                                        >
-                                            {!isFiltered && <RiDraggable size="1.2rem" />}
-                                            {isFiltered && (
-                                                <PiLock
-                                                    className={classes.lockedIcon}
-                                                    size="1.2rem"
-                                                />
-                                            )}
-                                        </Box>
-                                    </Group>
+                <Box
+                    className={classes.contentArea}
+                    onClick={(e) => {
+                        e.stopPropagation()
+                        handleEdit()
+                    }}
+                    onTouchEnd={() => setIsHovered(false)}
+                    onTouchStart={() => setIsHovered(true)}
+                >
+                    <Stack gap="sm">
+                        <Group justify="space-between" wrap="nowrap">
+                            <Group gap="sm" wrap="nowrap">
+                                <Checkbox
+                                    checked={isSelected}
+                                    onChange={(e) => {
+                                        e.stopPropagation()
+                                        onSelect?.()
+                                    }}
+                                    size="md"
+                                    styles={{
+                                        input: { cursor: 'pointer' }
+                                    }}
+                                />
+                                <Box
+                                    {...(isDragOverlay ? {} : attributes)}
+                                    {...(isDragOverlay ? {} : listeners)}
+                                    className={classes.mobileDragHandle}
+                                    onClick={(e) => e.stopPropagation()}
+                                >
+                                    {!isFiltered && <RiDraggable size="1.2rem" />}
+                                    {isFiltered && (
+                                        <PiLock className={classes.lockedIcon} size="1.2rem" />
+                                    )}
+                                </Box>
+                            </Group>
 
-                                    <ActionIcon
-                                        color={isHostActive ? 'teal' : 'gray'}
-                                        radius="md"
-                                        size="lg"
-                                        variant="light"
-                                    >
-                                        {isHostActive ? (
-                                            <PiPulse size={16} />
+                            <ActionIcon
+                                color={isHostActive ? 'teal' : 'gray'}
+                                radius="md"
+                                size="lg"
+                                variant="light"
+                            >
+                                {isHostActive ? <PiPulse size={16} /> : <PiProhibit size={16} />}
+                            </ActionIcon>
+                        </Group>
+
+                        <Stack gap="xs">
+                            <Text className={classes.hostName} fw={600} size="lg">
+                                {item.remark}
+                            </Text>
+
+                            <Text c="dimmed" className={classes.mobileAddress} size="sm">
+                                {item.address}
+                                {item.port ? `:${item.port}` : ''}
+                            </Text>
+
+                            <Group gap="xs" wrap="wrap">
+                                <Badge
+                                    autoContrast
+                                    color={configProfile?.uuid ? ch.hex(configProfile.uuid) : 'red'}
+                                    leftSection={
+                                        configProfile?.uuid ? (
+                                            <XtlsLogo size={12} />
                                         ) : (
-                                            <PiProhibit size={16} />
-                                        )}
-                                    </ActionIcon>
-                                </Group>
+                                            <TbAlertCircle size={12} />
+                                        )
+                                    }
+                                    radius="lg"
+                                    size="sm"
+                                    variant="light"
+                                >
+                                    {configProfile?.name || 'DANGLING'}
+                                </Badge>
 
-                                <Stack gap="xs">
-                                    <Text className={classes.hostName} fw={600} size="lg">
-                                        {item.remark}
-                                    </Text>
-
-                                    <Text c="dimmed" className={classes.mobileAddress} size="sm">
-                                        {item.address}
-                                        {item.port ? `:${item.port}` : ''}
-                                    </Text>
-
-                                    <Group gap="xs" wrap="wrap">
-                                        <Badge
-                                            autoContrast
-                                            color={
-                                                configProfile?.uuid
-                                                    ? ch.hex(configProfile.uuid)
-                                                    : 'red'
-                                            }
-                                            leftSection={
-                                                configProfile?.uuid ? (
-                                                    <XtlsLogo size={12} />
-                                                ) : (
-                                                    <TbAlertCircle size={12} />
-                                                )
-                                            }
-                                            radius="lg"
-                                            size="sm"
-                                            variant="light"
-                                        >
-                                            {configProfile?.name || 'DANGLING'}
-                                        </Badge>
-
-                                        {item.inbound.configProfileInboundUuid && (
-                                            <Badge
-                                                autoContrast
-                                                color={ch.hex(
-                                                    item.inbound.configProfileInboundUuid
-                                                )}
-                                                leftSection={<PiTag size={12} />}
-                                                radius="lg"
-                                                size="sm"
-                                                variant="outline"
-                                            >
-                                                {configProfile?.inbounds.find(
-                                                    (inbound) =>
-                                                        inbound.uuid ===
-                                                        item.inbound.configProfileInboundUuid
-                                                )?.tag || 'UNKNOWN'}
-                                            </Badge>
-                                        )}
-                                    </Group>
-                                </Stack>
-                            </Stack>
-                        </Box>
-                    </Box>
-                )}
-            </Draggable>
+                                {item.inbound.configProfileInboundUuid && (
+                                    <Badge
+                                        autoContrast
+                                        color={ch.hex(item.inbound.configProfileInboundUuid)}
+                                        leftSection={<PiTag size={12} />}
+                                        radius="lg"
+                                        size="sm"
+                                        variant="outline"
+                                    >
+                                        {configProfile?.inbounds.find(
+                                            (inbound) =>
+                                                inbound.uuid ===
+                                                item.inbound.configProfileInboundUuid
+                                        )?.tag || 'UNKNOWN'}
+                                    </Badge>
+                                )}
+                            </Group>
+                        </Stack>
+                    </Stack>
+                </Box>
+            </Box>
         )
     }
 
     return (
-        <Draggable
-            draggableId={item.uuid}
-            index={index}
-            isDragDisabled={isFiltered}
-            key={item.uuid}
+        <Box
+            className={cx(classes.item, {
+                [classes.itemDragging]: isDragging || isHovered,
+                [classes.filteredItem]: isFiltered,
+                [classes.selectedItem]: isSelected,
+                [classes.danglingItem]: !configProfile?.uuid
+            })}
+            data-dnd-overlay={isDragOverlay}
+            ref={isDragOverlay ? undefined : setNodeRef}
+            style={style}
         >
-            {(provided, snapshot) => (
+            <Group gap="md" w="100%" wrap="nowrap">
+                <Group gap="xs" wrap="nowrap">
+                    <Checkbox checked={isSelected} onChange={onSelect} size="md" />
+                    <Box
+                        {...(isDragOverlay ? {} : attributes)}
+                        {...(isDragOverlay ? {} : listeners)}
+                        className={classes.dragHandle}
+                    >
+                        {!isFiltered && <RiDraggable color="white" size="1.5rem" />}
+                        {isFiltered && (
+                            <PiLock className={classes.lockedIcon} color="white" size="1.5rem" />
+                        )}
+                    </Box>
+                </Group>
+
                 <Box
-                    className={cx(classes.item, {
-                        [classes.itemDragging]: snapshot.isDragging || isHovered,
-                        [classes.filteredItem]: isFiltered,
-                        [classes.selectedItem]: isSelected,
-                        [classes.danglingItem]: !configProfile?.uuid
-                    })}
-                    ref={provided.innerRef}
-                    {...provided.draggableProps}
+                    className={classes.contentArea}
+                    flex={1}
+                    onClick={handleEdit}
+                    onMouseEnter={() => setIsHovered(true)}
+                    onMouseLeave={() => setIsHovered(false)}
                 >
-                    <Group gap="md" w="100%" wrap="nowrap">
-                        <Group gap="xs" wrap="nowrap">
-                            <Checkbox checked={isSelected} onChange={onSelect} size="md" />
-                            <Box {...provided.dragHandleProps} className={classes.dragHandle}>
-                                {!isFiltered && <RiDraggable color="white" size="1.5rem" />}
-                                {isFiltered && (
-                                    <PiLock
-                                        className={classes.lockedIcon}
-                                        color="white"
-                                        size="1.5rem"
-                                    />
-                                )}
-                            </Box>
-                        </Group>
+                    <Group gap="md" justify="space-between" wrap="nowrap">
+                        <Group flex={1} gap="sm" miw={0} wrap="nowrap">
+                            <ActionIcon
+                                color={isHostActive ? 'teal' : 'gray'}
+                                radius="md"
+                                size="md"
+                                variant="light"
+                            >
+                                {isHostActive ? <PiPulse size={16} /> : <PiProhibit size={16} />}
+                            </ActionIcon>
 
-                        <Box
-                            className={classes.contentArea}
-                            flex={1}
-                            onClick={handleEdit}
-                            onMouseEnter={() => setIsHovered(true)}
-                            onMouseLeave={() => setIsHovered(false)}
-                        >
-                            <Group gap="md" justify="space-between" wrap="nowrap">
-                                <Group flex={1} gap="sm" miw={0} wrap="nowrap">
-                                    <ActionIcon
-                                        color={isHostActive ? 'teal' : 'gray'}
-                                        radius="md"
-                                        size="md"
-                                        variant="light"
-                                    >
-                                        {isHostActive ? (
-                                            <PiPulse size={16} />
-                                        ) : (
-                                            <PiProhibit size={16} />
-                                        )}
-                                    </ActionIcon>
-
-                                    <Group gap="md" style={{ flexShrink: 0 }} wrap="nowrap">
-                                        <Text fw={600}>{item.remark}</Text>
-                                        <Text c="dimmed" className={classes.hostAddress}>
-                                            {item.address}
-                                            {item.port ? `:${item.port}` : ''}
-                                        </Text>
-                                    </Group>
-                                </Group>
-                                <Group gap="md" style={{ flexShrink: 0 }} wrap="nowrap">
-                                    {item.inbound.configProfileInboundUuid && (
-                                        <Badge
-                                            autoContrast
-                                            color={ch.hex(item.inbound.configProfileInboundUuid)}
-                                            leftSection={<PiTag size={12} />}
-                                            radius="md"
-                                            size="md"
-                                            variant="outline"
-                                        >
-                                            {configProfile?.inbounds.find(
-                                                (inbound) =>
-                                                    inbound.uuid ===
-                                                    item.inbound.configProfileInboundUuid
-                                            )?.tag || 'UNKNOWN'}
-                                        </Badge>
-                                    )}
-
-                                    <Badge
-                                        autoContrast
-                                        color={
-                                            configProfile?.uuid ? ch.hex(configProfile.uuid) : 'red'
-                                        }
-                                        leftSection={
-                                            configProfile?.uuid ? (
-                                                <XtlsLogo size={12} />
-                                            ) : (
-                                                <TbAlertCircle size={12} />
-                                            )
-                                        }
-                                        radius="md"
-                                        size="md"
-                                        variant="light"
-                                    >
-                                        {configProfile?.name || 'DANGLING'}
-                                    </Badge>
-                                </Group>
+                            <Group gap="md" style={{ flexShrink: 0 }} wrap="nowrap">
+                                <Text fw={600}>{item.remark}</Text>
+                                <Text c="dimmed" className={classes.hostAddress}>
+                                    {item.address}
+                                    {item.port ? `:${item.port}` : ''}
+                                </Text>
                             </Group>
-                        </Box>
+                        </Group>
+                        <Group gap="md" style={{ flexShrink: 0 }} wrap="nowrap">
+                            {item.inbound.configProfileInboundUuid && (
+                                <Badge
+                                    autoContrast
+                                    color={ch.hex(item.inbound.configProfileInboundUuid)}
+                                    leftSection={<PiTag size={12} />}
+                                    radius="md"
+                                    size="md"
+                                    variant="outline"
+                                >
+                                    {configProfile?.inbounds.find(
+                                        (inbound) =>
+                                            inbound.uuid === item.inbound.configProfileInboundUuid
+                                    )?.tag || 'UNKNOWN'}
+                                </Badge>
+                            )}
+
+                            <Badge
+                                autoContrast
+                                color={configProfile?.uuid ? ch.hex(configProfile.uuid) : 'red'}
+                                leftSection={
+                                    configProfile?.uuid ? (
+                                        <XtlsLogo size={12} />
+                                    ) : (
+                                        <TbAlertCircle size={12} />
+                                    )
+                                }
+                                radius="md"
+                                size="md"
+                                variant="light"
+                            >
+                                {configProfile?.name || 'DANGLING'}
+                            </Badge>
+                        </Group>
                     </Group>
                 </Box>
-            )}
-        </Draggable>
+            </Group>
+        </Box>
     )
 }

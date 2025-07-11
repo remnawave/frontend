@@ -1,5 +1,6 @@
 import { ActionIcon, Card, Group, Select, Stack, Title } from '@mantine/core'
 import { PiBookmarks, PiTag, PiX } from 'react-icons/pi'
+import { HiFilter } from 'react-icons/hi'
 import { useMemo } from 'react'
 
 import {
@@ -63,7 +64,18 @@ export const HostsFiltersFeature = (props: IProps) => {
         <Card mb="xl" padding="lg" radius="md" shadow="sm" withBorder>
             <Stack gap="md">
                 <Group justify="space-between">
-                    <Title order={5}>Filters</Title>
+                    <Group gap="xs">
+                        <ActionIcon
+                            color="gray"
+                            onClick={handleResetFilters}
+                            size="sm"
+                            variant="subtle"
+                        >
+                            <HiFilter size={16} />
+                        </ActionIcon>
+                        <Title order={5}>Filters</Title>
+                    </Group>
+
                     {hasActiveFilters && (
                         <ActionIcon
                             color="gray"
