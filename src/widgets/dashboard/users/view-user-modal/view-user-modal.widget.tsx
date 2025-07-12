@@ -42,6 +42,7 @@ import { MODALS, useModalsStore } from '@entities/dashboard/modal-store'
 import { bytesToGbUtil, gbToBytesUtil } from '@shared/utils/bytes'
 import { LoaderModalShared } from '@shared/ui/loader-modal'
 import { handleFormErrors } from '@shared/utils/misc'
+import { ModalFooter } from '@shared/ui/modal-footer'
 import { queryClient } from '@shared/api'
 
 const MotionWrapper = motion.div
@@ -331,126 +332,98 @@ export const ViewUserModal = () => {
                             </Group>
                         )}
 
-                        <Modal.Header
-                            bottom={10}
-                            component={'footer'}
-                            h={'auto'}
-                            mt="md"
-                            pos={'sticky'}
-                            style={{
-                                bottom: 0,
-                                borderTop: 'none',
-                                borderBottom: 'none',
-                                borderRadius: '20px',
-                                background: 'rgba(255, 255, 255, 0.05)',
-                                backdropFilter: 'blur(15px)',
-                                border: '1px solid rgba(255, 255, 255, 0.1)',
-                                boxShadow: '0 -10px 40px rgba(0, 0, 0, 0.3)',
-                                padding: '10px'
-                            }}
-                        >
-                            <Group
-                                gap="md"
-                                grow={!!isMobile}
-                                justify="flex-end"
-                                preventGrowOverflow={false}
-                                w="100%"
-                                wrap="wrap"
-                            >
-                                <Menu keepMounted={true} position="top-end" shadow="md">
-                                    <Menu.Target>
-                                        <Button
-                                            leftSection={<TbDots size="1.2rem" />}
-                                            size="sm"
-                                            variant="outline"
-                                        >
-                                            More Actions
-                                        </Button>
-                                    </Menu.Target>
+                        <ModalFooter>
+                            <Menu keepMounted={true} position="top-end" shadow="md">
+                                <Menu.Target>
+                                    <Button
+                                        leftSection={<TbDots size="1.2rem" />}
+                                        size="sm"
+                                        variant="outline"
+                                    >
+                                        More Actions
+                                    </Button>
+                                </Menu.Target>
 
-                                    <Menu.Dropdown>
-                                        <Menu.Label>Quick Actions</Menu.Label>
-                                        <Menu.Item
-                                            leftSection={<PiQrCodeDuotone size={14} />}
-                                            onClick={() => {
-                                                const subscriptionQrCode = renderSVG(
-                                                    user.subscriptionUrl,
-                                                    {
-                                                        whiteColor: '#161B22',
-                                                        blackColor: '#3CC9DB'
-                                                    }
+                                <Menu.Dropdown>
+                                    <Menu.Label>Quick Actions</Menu.Label>
+                                    <Menu.Item
+                                        leftSection={<PiQrCodeDuotone size={14} />}
+                                        onClick={() => {
+                                            const subscriptionQrCode = renderSVG(
+                                                user.subscriptionUrl,
+                                                {
+                                                    whiteColor: '#161B22',
+                                                    blackColor: '#3CC9DB'
+                                                }
+                                            )
+                                            modals.open({
+                                                centered: true,
+                                                title: t(
+                                                    'view-user-modal.widget.subscription-qr-code'
+                                                ),
+                                                children: (
+                                                    <>
+                                                        <div
+                                                            dangerouslySetInnerHTML={{
+                                                                __html: subscriptionQrCode
+                                                            }}
+                                                        />
+                                                        <Button
+                                                            fullWidth
+                                                            mt="md"
+                                                            onClick={() => modals.closeAll()}
+                                                        >
+                                                            {t('view-user-modal.widget.close')}
+                                                        </Button>
+                                                    </>
                                                 )
-                                                modals.open({
-                                                    centered: true,
-                                                    title: t(
-                                                        'view-user-modal.widget.subscription-qr-code'
-                                                    ),
-                                                    children: (
-                                                        <>
-                                                            <div
-                                                                dangerouslySetInnerHTML={{
-                                                                    __html: subscriptionQrCode
-                                                                }}
-                                                            />
-                                                            <Button
-                                                                fullWidth
-                                                                mt="md"
-                                                                onClick={() => modals.closeAll()}
-                                                            >
-                                                                {t('view-user-modal.widget.close')}
-                                                            </Button>
-                                                        </>
-                                                    )
-                                                })
-                                            }}
-                                        >
-                                            {t('view-user-modal.widget.subscription-qr-code')}
-                                        </Menu.Item>
-                                        <GetUserSubscriptionLinksFeature
-                                            shortUuid={user.shortUuid}
-                                        />
-                                        <GetHwidUserDevicesFeature userUuid={user.uuid} />
-                                        <GetUserUsageFeature userUuid={user.uuid} />
-                                        <Menu.Item
-                                            leftSection={<TbServerCog size={14} />}
-                                            onClick={() => {
-                                                setInternalData({
-                                                    internalState: {
-                                                        userUuid: user.uuid
-                                                    },
-                                                    modalKey: MODALS.USER_ACCESSIBLE_NODES_DRAWER
-                                                })
-                                                openModal(MODALS.USER_ACCESSIBLE_NODES_DRAWER)
-                                            }}
-                                        >
-                                            {t('view-user-modal.widget.view-accessible-nodes')}
-                                        </Menu.Item>
+                                            })
+                                        }}
+                                    >
+                                        {t('view-user-modal.widget.subscription-qr-code')}
+                                    </Menu.Item>
+                                    <GetUserSubscriptionLinksFeature shortUuid={user.shortUuid} />
+                                    <GetHwidUserDevicesFeature userUuid={user.uuid} />
+                                    <GetUserUsageFeature userUuid={user.uuid} />
+                                    <Menu.Item
+                                        leftSection={<TbServerCog size={14} />}
+                                        onClick={() => {
+                                            setInternalData({
+                                                internalState: {
+                                                    userUuid: user.uuid
+                                                },
+                                                modalKey: MODALS.USER_ACCESSIBLE_NODES_DRAWER
+                                            })
+                                            openModal(MODALS.USER_ACCESSIBLE_NODES_DRAWER)
+                                        }}
+                                    >
+                                        {t('view-user-modal.widget.view-accessible-nodes')}
+                                    </Menu.Item>
 
-                                        <Menu.Divider />
-                                        <Menu.Label>Management</Menu.Label>
+                                    <Menu.Divider />
+                                    <Menu.Label>Management</Menu.Label>
 
-                                        <ResetUsageUserFeature userUuid={user.uuid} />
+                                    <ResetUsageUserFeature userUuid={user.uuid} />
 
-                                        <RevokeSubscriptionUserFeature userUuid={user.uuid} />
+                                    <RevokeSubscriptionUserFeature userUuid={user.uuid} />
 
-                                        <ToggleUserStatusButtonFeature user={user} />
+                                    <ToggleUserStatusButtonFeature user={user} />
 
-                                        <Menu.Divider />
-                                        <DeleteUserFeature userUuid={user.uuid} />
-                                    </Menu.Dropdown>
-                                </Menu>
-                                <Button
-                                    color="teal"
-                                    leftSection={<PiFloppyDiskDuotone size="1rem" />}
-                                    loading={isUpdateUserPending}
-                                    size="sm"
-                                    type="submit"
-                                    variant="light"
-                                >
-                                    {t('view-user-modal.widget.edit-user')}
-                                </Button>
-                            </Group>
-                        </Modal.Header>
+                                    <Menu.Divider />
+                                    <DeleteUserFeature userUuid={user.uuid} />
+                                </Menu.Dropdown>
+                            </Menu>
+                            <Button
+                                color="teal"
+                                leftSection={<PiFloppyDiskDuotone size="1rem" />}
+                                loading={isUpdateUserPending}
+                                size="sm"
+                                type="submit"
+                                variant="light"
+                            >
+                                {t('view-user-modal.widget.edit-user')}
+                            </Button>
+                        </ModalFooter>
                     </form>
                 </motion.div>
             )}

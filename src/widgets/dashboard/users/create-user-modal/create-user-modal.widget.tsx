@@ -23,6 +23,7 @@ import {
 import { useCreateUser, useGetInternalSquads, useGetUserTags } from '@shared/api/hooks'
 import { LoaderModalShared } from '@shared/ui/loader-modal'
 import { handleFormErrors } from '@shared/utils/misc'
+import { ModalFooter } from '@shared/ui/modal-footer'
 import { gbToBytesUtil } from '@shared/utils/bytes'
 
 const MotionWrapper = motion.div
@@ -245,43 +246,18 @@ export const CreateUserModalWidget = () => {
                         </Group>
                     )}
 
-                    <Modal.Header
-                        bottom={10}
-                        component={'footer'}
-                        h={'auto'}
-                        pos={'sticky'}
-                        style={{
-                            bottom: 0,
-                            borderTop: 'none',
-                            borderBottom: 'none',
-                            borderRadius: '20px',
-                            background: 'rgba(255, 255, 255, 0.05)',
-                            backdropFilter: 'blur(15px)',
-                            border: '1px solid rgba(255, 255, 255, 0.1)',
-                            boxShadow: '0 -10px 40px rgba(0, 0, 0, 0.3)',
-                            padding: '10px'
-                        }}
-                    >
-                        <Group
-                            gap="md"
-                            grow={!!isMobile}
-                            justify="flex-end"
-                            preventGrowOverflow={false}
-                            w="100%"
-                            wrap="wrap"
+                    <ModalFooter>
+                        <Button
+                            color="teal"
+                            leftSection={<PiFloppyDiskDuotone size="1rem" />}
+                            loading={isDataSubmitting}
+                            size="sm"
+                            type="submit"
+                            variant="outline"
                         >
-                            <Button
-                                color="teal"
-                                leftSection={<PiFloppyDiskDuotone size="1rem" />}
-                                loading={isDataSubmitting}
-                                size="sm"
-                                type="submit"
-                                variant="outline"
-                            >
-                                {t('create-user-modal.widget.create-user')}
-                            </Button>
-                        </Group>
-                    </Modal.Header>
+                            {t('create-user-modal.widget.create-user')}
+                        </Button>
+                    </ModalFooter>
                 </form>
             )}
         </Modal>

@@ -5,12 +5,10 @@ import {
     Collapse,
     CopyButton,
     Divider,
-    em,
     Fieldset,
     Group,
     HoverCard,
     Menu,
-    Modal,
     NumberInput,
     Paper,
     rem,
@@ -37,7 +35,6 @@ import { PiCheckDuotone, PiFloppyDiskDuotone, PiXDuotone } from 'react-icons/pi'
 import { HiOutlineServer, HiQuestionMarkCircle } from 'react-icons/hi'
 import { SiSecurityscorecard } from 'react-icons/si'
 import { useTranslation } from 'react-i18next'
-import { useMediaQuery } from '@mantine/hooks'
 import { motion } from 'framer-motion'
 
 import { ShowConfigProfilesWithInboundsFeature } from '@features/ui/dashboard/nodes/show-config-profiles-with-inbounds'
@@ -47,6 +44,7 @@ import { GetNodeUsersUsageFeature } from '@features/ui/dashboard/nodes/get-node-
 import { ModalAccordionWidget } from '@widgets/dashboard/nodes/modal-accordeon-widget'
 import { DeleteNodeFeature } from '@features/ui/dashboard/nodes/delete-node'
 import { useGetConfigProfiles } from '@shared/api/hooks'
+import { ModalFooter } from '@shared/ui/modal-footer'
 
 import { COUNTRIES } from './constants'
 import { IProps } from './interfaces'
@@ -89,7 +87,6 @@ export const BaseNodeForm = <T extends CreateNodeCommand.Request | UpdateNodeCom
     } = props
 
     const { t } = useTranslation()
-    const isMobile = useMediaQuery(`(max-width: ${em(750)})`)
 
     const { data: configProfiles, isLoading: isConfigProfilesLoading } = useGetConfigProfiles()
 
@@ -479,81 +476,49 @@ export const BaseNodeForm = <T extends CreateNodeCommand.Request | UpdateNodeCom
                 </MotionStack>
             </Group>
 
-            <Modal.Header
-                bottom={10}
-                component={'footer'}
-                h={'auto'}
-                mt="md"
-                pos={'sticky'}
-                style={{
-                    bottom: 0,
-                    borderTop: 'none',
-                    borderBottom: 'none',
-                    borderRadius: '20px',
-                    background: 'rgba(255, 255, 255, 0.05)',
-                    backdropFilter: 'blur(15px)',
-                    border: '1px solid rgba(255, 255, 255, 0.1)',
-                    boxShadow: '0 -10px 40px rgba(0, 0, 0, 0.3)',
-                    padding: '10px'
-                }}
-            >
-                <Group
-                    gap="md"
-                    grow={!!isMobile}
-                    justify="flex-end"
-                    preventGrowOverflow={false}
-                    w="100%"
-                    wrap="wrap"
-                >
-                    {node && (
-                        <Menu keepMounted={true} position="top-end" shadow="md">
-                            <Menu.Target>
-                                <Button
-                                    leftSection={<TbDots size="1.2rem" />}
-                                    size="sm"
-                                    variant="outline"
-                                >
-                                    More Actions
-                                </Button>
-                            </Menu.Target>
+            <ModalFooter>
+                {node && (
+                    <Menu keepMounted={true} position="top-end" shadow="md">
+                        <Menu.Target>
+                            <Button
+                                leftSection={<TbDots size="1.2rem" />}
+                                size="sm"
+                                variant="outline"
+                            >
+                                More Actions
+                            </Button>
+                        </Menu.Target>
 
-                            <Menu.Dropdown>
-                                <Menu.Label>Quick Actions</Menu.Label>
-                                <GetNodeUsersUsageFeature nodeUuid={node.uuid} />
-                                <CopyButton value={node.uuid}>
-                                    {({ copy }) => (
-                                        <Menu.Item
-                                            leftSection={<TbCopy size="1rem" />}
-                                            onClick={copy}
-                                        >
-                                            Copy Node UUID
-                                        </Menu.Item>
-                                    )}
-                                </CopyButton>
-                                <Menu.Divider />
-                                <Menu.Label>Management</Menu.Label>
-                                <ToggleNodeStatusButtonFeature
-                                    handleClose={handleClose}
-                                    node={node}
-                                />
-                                <Menu.Divider />
-                                <DeleteNodeFeature handleClose={handleClose} node={node} />
-                            </Menu.Dropdown>
-                        </Menu>
-                    )}
-                    <Button
-                        color="teal"
-                        disabled={!form.isDirty() || !form.isTouched()}
-                        leftSection={<PiFloppyDiskDuotone size="1rem" />}
-                        loading={isUpdateNodePending}
-                        size="sm"
-                        type="submit"
-                        variant="light"
-                    >
-                        {t('base-node-form.save')}
-                    </Button>
-                </Group>
-            </Modal.Header>
+                        <Menu.Dropdown>
+                            <Menu.Label>Quick Actions</Menu.Label>
+                            <GetNodeUsersUsageFeature nodeUuid={node.uuid} />
+                            <CopyButton value={node.uuid}>
+                                {({ copy }) => (
+                                    <Menu.Item leftSection={<TbCopy size="1rem" />} onClick={copy}>
+                                        Copy Node UUID
+                                    </Menu.Item>
+                                )}
+                            </CopyButton>
+                            <Menu.Divider />
+                            <Menu.Label>Management</Menu.Label>
+                            <ToggleNodeStatusButtonFeature handleClose={handleClose} node={node} />
+                            <Menu.Divider />
+                            <DeleteNodeFeature handleClose={handleClose} node={node} />
+                        </Menu.Dropdown>
+                    </Menu>
+                )}
+                <Button
+                    color="teal"
+                    disabled={!form.isDirty() || !form.isTouched()}
+                    leftSection={<PiFloppyDiskDuotone size="1rem" />}
+                    loading={isUpdateNodePending}
+                    size="sm"
+                    type="submit"
+                    variant="light"
+                >
+                    {t('base-node-form.save')}
+                </Button>
+            </ModalFooter>
         </form>
     )
 }
