@@ -19,7 +19,8 @@
         "subscription-page-builder": "订阅应用配置",
         "config-profiles": "Config Profiles",
         "internal-squads": "Internal Squads",
-        "infra-billing": "Infra Billing"
+        "infra-billing": "Infra Billing",
+        "nodes-metrics": "Metrics"
     },
     "bandwidth-metrics": {
         "current-year": "今年",

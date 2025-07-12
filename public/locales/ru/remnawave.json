@@ -19,7 +19,8 @@
         "subscription-page-builder": "Sub Page Builder",
         "config-profiles": "Config Profiles",
         "internal-squads": "Internal Squads",
-        "infra-billing": "Infra Billing"
+        "infra-billing": "Infra Billing",
+        "nodes-metrics": "Metrics"
     },
     "bandwidth-metrics": {
         "current-year": "Текущий год",

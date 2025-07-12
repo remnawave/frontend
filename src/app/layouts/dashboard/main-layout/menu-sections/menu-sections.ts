@@ -11,7 +11,7 @@ import {
     PiUsersDuotone
 } from 'react-icons/pi'
 import { HiChartPie, HiCurrencyDollar, HiServer } from 'react-icons/hi'
-import { TbCirclesRelation } from 'react-icons/tb'
+import { TbChartArcs, TbCirclesRelation } from 'react-icons/tb'
 import { useTranslation } from 'react-i18next'
 
 import { HappLogo } from '@pages/dashboard/utils/happ-routing-builder/ui/components/happ-routing-builder.page.component'
@@ -81,6 +81,11 @@ export const useMenuSections = (): MenuItem[] => {
                         {
                             name: t('constants.nodes-bandwidth-table'),
                             href: ROUTES.DASHBOARD.MANAGEMENT.NODES_BANDWIDTH_TABLE,
+                            icon: TbChartArcs
+                        },
+                        {
+                            name: t('constants.nodes-metrics'),
+                            href: ROUTES.DASHBOARD.MANAGEMENT.NODES_METRICS,
                             icon: PiChartLine
                         }
                     ]

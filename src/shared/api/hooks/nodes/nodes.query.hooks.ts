@@ -82,6 +82,7 @@ export const useGetPubKey = createGetQueryHook({
         staleTime: sToMs(5),
         refetchInterval: sToMs(5)
     },
+
     errorHandler: (error) => {
         notifications.show({
             title: `Get PubKey`,

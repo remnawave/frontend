@@ -1,8 +1,7 @@
-import { Avatar, ComboboxItem, Group, Select, Text } from '@mantine/core'
+import { Avatar, ComboboxItem, Group, Select, Skeleton, Stack, Text } from '@mantine/core'
+import { forwardRef, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { forwardRef, useState } from 'react'
 
-import { LoadingScreen } from '@shared/ui/loading-screen'
 import { useGetInfraProviders } from '@shared/api/hooks'
 import { faviconResolver } from '@shared/utils/misc'
 
@@ -44,7 +43,21 @@ export const SelectInfraProviderShared = (props: IProps) => {
         selectedInfraProviderUuid || null
     )
 
-    if (isLoading) return <LoadingScreen />
+    useEffect(() => {
+        setSelectedValue(selectedInfraProviderUuid || null)
+    }, [selectedInfraProviderUuid])
+
+    if (isLoading) {
+        return (
+            <Group gap="xs">
+                <Stack gap={4} w="100%">
+                    <Skeleton height={20} width="40%" />
+                    <Skeleton height={15} width="80%" />
+                    <Skeleton height={37} width="100%" />
+                </Stack>
+            </Group>
+        )
+    }
 
     if (!infraProviders?.providers?.length) {
         return (

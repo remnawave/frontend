@@ -13,6 +13,7 @@ export const ROUTES = {
             NODES: '/dashboard/management/nodes',
             NODES_BANDWIDTH_TABLE: '/dashboard/management/bandwidth-table',
             NODES_STATS: '/dashboard/management/stats/nodes',
+            NODES_METRICS: '/dashboard/management/metrics/nodes',
             API_TOKENS: '/dashboard/management/api-tokens',
             SUBSCRIPTION_SETTINGS: '/dashboard/management/subscription-settings',
             CONFIG_PROFILES: '/dashboard/management/config-profiles',

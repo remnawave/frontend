@@ -16,6 +16,7 @@ import { TemplateBasePageConnector } from '@pages/dashboard/templates/ui/connect
 import { NodesBandwidthTablePageConnector } from '@pages/dashboard/nodes-bandwidth-table/ui/connectors'
 import { SubscriptionSettingsConnector } from '@pages/dashboard/subscription-settings/connectors'
 import { ConfigProfilesPageConnector } from '@pages/dashboard/config-profiles/connectors'
+import { NodesMetricsPageConnector } from '@pages/dashboard/nodes-metrics/ui/connectors'
 import { StatisticNodesConnector } from '@pages/dashboard/statistic-nodes/connectors'
 import { ApiTokensPageConnector } from '@pages/dashboard/api-tokens/ui/connectors'
 import { ProxyDefensePageConnector } from '@pages/dashboard/proxy-defense'
@@ -91,6 +92,10 @@ const router = createBrowserRouter(
                         <Route
                             element={<InternalSquadsPageConnector />}
                             path={ROUTES.DASHBOARD.MANAGEMENT.INTERNAL_SQUADS}
+                        />
+                        <Route
+                            element={<NodesMetricsPageConnector />}
+                            path={ROUTES.DASHBOARD.MANAGEMENT.NODES_METRICS}
                         />
                     </Route>
 
