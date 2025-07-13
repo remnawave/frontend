@@ -149,10 +149,10 @@
     "vite-plugin-javascript-obfuscator": "^3.1.0",
     "vite-plugin-preload": "^0.4.2",
     "vite-plugin-remove-console": "^2.2.0",
+    "vite-plugin-svgr": "^4.3.0",
     "vite-plugin-wasm": "^3.5.0",
     "vite-plugin-webfont-dl": "^3.11.0",
-    "vite-tsconfig-paths": "^5.1.4",
-    "vite-plugin-svgr": "^4.3.0"
+    "vite-tsconfig-paths": "^5.1.4"
   },
   "commitlint": {
     "extends": [

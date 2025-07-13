@@ -1,10 +1,12 @@
 import { useTranslation } from 'react-i18next'
+import { useMediaQuery } from '@mantine/hooks'
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import { Stack } from '@mantine/core'
 
 import { UserAccessibleNodesModalWidget } from '@widgets/dashboard/users/user-accessible-nodes-modal/user-accessible-nodes.modal.widget'
 import { DetailedUserInfoDrawerWidget } from '@widgets/dashboard/users/detailed-user-info-drawer/detailed-user-info-drawer.widget'
+import { MobileWarningOverlay } from '@shared/ui/mobile-warning-overlay/mobile-warning-overlay'
 import { CreateUserModalWidget } from '@widgets/dashboard/users/create-user-modal'
 import { ViewUserModal } from '@widgets/dashboard/users/view-user-modal'
 import { UserTableWidget } from '@widgets/dashboard/users/users-table'
@@ -39,6 +41,7 @@ const DeferredUserTableWidget = () => {
 
 export default function UsersPageComponent() {
     const { t } = useTranslation()
+    const isMobile = useMediaQuery('(max-width: 500px)')
 
     return (
         <Page title={t('constants.users')}>
@@ -52,6 +55,7 @@ export default function UsersPageComponent() {
             />
 
             <Stack>
+                {isMobile && <MobileWarningOverlay />}
                 <UsersMetrics />
 
                 <DeferredUserTableWidget />
