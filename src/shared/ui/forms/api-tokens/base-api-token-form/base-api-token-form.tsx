@@ -1,5 +1,5 @@
-import { Button, Group, Stack, Textarea, TextInput } from '@mantine/core'
 import { CreateApiTokenCommand } from '@remnawave/backend-contract'
+import { Button, Group, Stack, TextInput } from '@mantine/core'
 import { PiFloppyDiskDuotone } from 'react-icons/pi'
 import { useTranslation } from 'react-i18next'
 
@@ -17,13 +17,6 @@ export const BaseApiTokenForm = <T extends CreateApiTokenCommand.Request>(props:
                     key={form.key('tokenName')}
                     label={t('base-api-token-form.token-name')}
                     {...form.getInputProps('tokenName')}
-                    required
-                />
-
-                <Textarea
-                    key={form.key('tokenDescription')}
-                    label={t('base-api-token-form.token-description')}
-                    {...form.getInputProps('tokenDescription')}
                     required
                 />
             </Stack>
