@@ -68,6 +68,15 @@ export const CreateUserModalWidget = () => {
         name: 'create-user-form',
         mode: 'uncontrolled',
         validateInputOnBlur: true,
+
+        onValuesChange: (values) => {
+            if (typeof values.telegramId === 'string' && values.telegramId === '') {
+                form.setFieldValue('telegramId', null)
+            }
+            if (typeof values.email === 'string' && values.email === '') {
+                form.setFieldValue('email', null)
+            }
+        },
         validate: zodResolver(
             CreateUserCommand.RequestSchema.omit({
                 expireAt: true,
@@ -118,8 +127,9 @@ export const CreateUserModalWidget = () => {
                     expireAt: dayjs(values.expireAt).toISOString(),
                     status: values.status,
                     description: values.description,
-                    telegramId: values.telegramId,
-                    email: values.email,
+                    // @ts-expect-error - TODO: fix ZOD schema
+                    telegramId: values.telegramId === '' ? undefined : values.telegramId,
+                    email: values.email === '' ? undefined : values.email,
                     // @ts-expect-error - TODO: fix ZOD schema
                     hwidDeviceLimit: values.hwidDeviceLimit === '' ? null : values.hwidDeviceLimit,
                     tag: values.tag,

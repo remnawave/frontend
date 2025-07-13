@@ -163,7 +163,6 @@ export function InfraProvidersTableWidget() {
                 withColumnBorders
                 withTableBorder={false}
             />
-            <DataTableShared.Content />
         </DataTableShared.Container>
     )
 }

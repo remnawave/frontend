@@ -13,7 +13,6 @@ export function InternalSquadsHeaderWidget() {
                 description={t('internal-squads-header.widget.list')}
                 title={t('constants.internal-squads')}
             />
-            <DataTableShared.Content />
         </DataTableShared.Container>
     )
 }

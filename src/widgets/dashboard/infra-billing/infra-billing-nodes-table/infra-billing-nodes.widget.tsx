@@ -143,7 +143,6 @@ export function InfraBillingNodesTableWidget() {
                 withColumnBorders
                 withTableBorder={false}
             />
-            <DataTableShared.Content />
         </DataTableShared.Container>
     )
 }

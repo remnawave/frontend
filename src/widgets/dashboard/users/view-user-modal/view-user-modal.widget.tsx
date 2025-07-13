@@ -82,11 +82,17 @@ export const ViewUserModal = () => {
     const form = useForm<UpdateUserCommand.Request>({
         name: 'edit-user-form',
         mode: 'uncontrolled',
+        onValuesChange: (values) => {
+            if (typeof values.telegramId === 'string' && values.telegramId === '') {
+                form.setFieldValue('telegramId', null)
+            }
+            if (typeof values.email === 'string' && values.email === '') {
+                form.setFieldValue('email', null)
+            }
+        },
         validate: zodResolver(
             UpdateUserCommand.RequestSchema.omit({
                 expireAt: true,
-                email: true,
-                telegramId: true,
                 hwidDeviceLimit: true
             })
         )

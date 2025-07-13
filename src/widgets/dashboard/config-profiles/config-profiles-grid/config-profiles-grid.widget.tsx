@@ -10,6 +10,7 @@ import {
     Group,
     Stack,
     Text,
+    ThemeIcon,
     Title,
     Tooltip
 } from '@mantine/core'
@@ -19,7 +20,6 @@ import {
     PiCopy,
     PiCpu,
     PiPencilDuotone,
-    PiPulse,
     PiTag,
     PiTrashDuotone
 } from 'react-icons/pi'
@@ -27,7 +27,9 @@ import { githubDarkTheme, JsonEditor } from 'json-edit-react'
 import { generatePath, useNavigate } from 'react-router-dom'
 import { TbDownload, TbEye } from 'react-icons/tb'
 import { useTranslation } from 'react-i18next'
+import { useMediaQuery } from '@mantine/hooks'
 import { modals } from '@mantine/modals'
+import { motion } from 'framer-motion'
 
 import { ActiveNodesListModalWithStoreShared } from '@shared/ui/config-profiles/active-nodes-list-modal-with-store/active-nodes-list-with-store.modal.shared'
 import { MODALS, useModalsStore } from '@entities/dashboard/modal-store'
@@ -42,6 +44,7 @@ import { IProps } from './interfaces'
 export function ConfigProfilesGridWidget(props: IProps) {
     const { configProfiles } = props
     const { t } = useTranslation()
+    const isMobile = useMediaQuery('(max-width: 768px)')
 
     const { open, setInternalData } = useModalsStore()
     const navigate = useNavigate()
@@ -109,237 +112,264 @@ export function ConfigProfilesGridWidget(props: IProps) {
 
     return (
         <Grid>
-            {configProfiles.map((profile) => {
+            {configProfiles.map((profile, index) => {
                 const nodesCount = profile.nodes.length
                 const inboundsCount = profile.inbounds.length
                 const isActive = nodesCount > 0
 
                 return (
-                    <Grid.Col key={profile.uuid} span={{ base: 12, sm: 6, md: 4, lg: 3 }}>
-                        <Card
-                            h="100%"
-                            onMouseEnter={(e) => {
-                                e.currentTarget.style.transform = 'translateY(-2px)'
-                                e.currentTarget.style.boxShadow = '0 8px 25px rgba(0, 0, 0, 0.15)'
+                    <Grid.Col key={profile.uuid} span={{ base: 12, sm: 6, md: 6, lg: 6, xl: 3 }}>
+                        <motion.div
+                            animate={{ opacity: 1, y: 0 }}
+                            initial={{ opacity: 0, y: 20 }}
+                            transition={{
+                                duration: 0.4,
+                                delay: index * 0.1,
+                                ease: 'easeOut'
                             }}
-                            onMouseLeave={(e) => {
-                                e.currentTarget.style.transform = 'translateY(0)'
-                                e.currentTarget.style.boxShadow = '0 1px 3px rgba(0, 0, 0, 0.1)'
-                            }}
-                            padding="lg"
-                            radius="md"
-                            shadow="sm"
-                            style={{
-                                display: 'flex',
-                                flexDirection: 'column',
-                                transition: 'all 0.2s ease',
-                                position: 'relative',
-                                overflow: 'hidden',
-                                background:
-                                    'linear-gradient(135deg, var(--mantine-color-dark-6) 0%, var(--mantine-color-dark-7) 100%)'
-                            }}
-                            withBorder
+                            whileHover={{ y: -4 }}
                         >
-                            <Box
+                            <Card
+                                h="100%"
+                                p={isMobile ? 'md' : 'lg'}
+                                radius="lg"
+                                shadow="xs"
                                 style={{
-                                    position: 'absolute',
-                                    top: 0,
-                                    left: 0,
-                                    right: 0,
-                                    height: '3px',
-                                    backgroundColor: isActive
-                                        ? 'var(--mantine-color-teal-5)'
-                                        : 'var(--mantine-color-gray-5)'
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    position: 'relative',
+                                    overflow: 'hidden',
+                                    background:
+                                        'linear-gradient(135deg, var(--mantine-color-dark-6) 0%, var(--mantine-color-dark-7) 100%)',
+                                    border: '1px solid rgba(148, 163, 184, 0.1)'
                                 }}
-                            />
+                            >
+                                <Box
+                                    style={{
+                                        position: 'absolute',
+                                        top: 0,
+                                        left: 0,
+                                        right: 0,
+                                        height: '3px',
+                                        backgroundColor: isActive
+                                            ? 'var(--mantine-color-teal-5)'
+                                            : 'var(--mantine-color-gray-5)'
+                                    }}
+                                />
 
-                            <Stack gap="md" style={{ flex: 1 }}>
-                                <Group gap="xs" justify="space-between" wrap="nowrap">
-                                    <Group gap="sm" style={{ flex: 1, minWidth: 0 }} wrap="nowrap">
-                                        <ActionIcon
-                                            color={isActive ? 'teal' : 'gray'}
-                                            radius="md"
-                                            size="sm"
-                                            variant="light"
-                                        >
-                                            {isActive ? (
-                                                <PiPulse size={14} />
-                                            ) : (
-                                                <PiCircle size={14} />
-                                            )}
-                                        </ActionIcon>
-                                        <XtlsLogo size={20} />
-                                        <Text
-                                            fw={600}
-                                            lineClamp={1}
-                                            size="md"
+                                <Stack gap="md" style={{ flex: 1 }}>
+                                    <Group gap="xs" justify="space-between" wrap="nowrap">
+                                        <Group
+                                            gap="sm"
                                             style={{ flex: 1, minWidth: 0 }}
-                                            title={profile.name}
-                                            truncate
+                                            wrap="nowrap"
                                         >
-                                            {profile.name}
-                                        </Text>
-                                    </Group>
-
-                                    <Group gap={4}>
-                                        <CopyButton timeout={2000} value={profile.uuid}>
-                                            {({ copied, copy }) => (
-                                                <Tooltip label={copied ? 'Copied!' : 'Copy UUID'}>
-                                                    <ActionIcon
-                                                        color={copied ? 'teal' : 'gray'}
-                                                        onClick={copy}
-                                                        size="sm"
-                                                        variant="subtle"
-                                                    >
-                                                        {copied ? (
-                                                            <PiCheck size={14} />
-                                                        ) : (
-                                                            <PiCopy size={14} />
-                                                        )}
-                                                    </ActionIcon>
-                                                </Tooltip>
-                                            )}
-                                        </CopyButton>
-
-                                        <Tooltip
-                                            label={t('config-profiles-grid.widget.delete-profile')}
-                                        >
-                                            <ActionIcon
-                                                color="red"
-                                                onClick={() =>
-                                                    handleDeleteProfile(profile.uuid, profile.name)
-                                                }
-                                                size="sm"
-                                                variant="subtle"
-                                            >
-                                                <PiTrashDuotone size={14} />
-                                            </ActionIcon>
-                                        </Tooltip>
-                                    </Group>
-                                </Group>
-
-                                <Stack gap="sm">
-                                    <Group gap="xs" justify="center">
-                                        <Tooltip label={t('config-profiles-grid.widget.inbounds')}>
-                                            <Badge
-                                                color="blue"
-                                                leftSection={<PiTag size={12} />}
-                                                size="lg"
-                                                variant="light"
-                                            >
-                                                {formatInt(inboundsCount, {
-                                                    thousandSeparator: ','
-                                                })}
-                                            </Badge>
-                                        </Tooltip>
-
-                                        <Tooltip label={t('config-profiles-grid.widget.nodes')}>
-                                            <Badge
+                                            <ThemeIcon
                                                 color={isActive ? 'teal' : 'gray'}
-                                                leftSection={<PiCpu size={12} />}
-                                                onClick={() => {
-                                                    setInternalData({
-                                                        internalState: profile.nodes,
-                                                        modalKey:
+                                                radius="md"
+                                                size="md"
+                                                variant={isActive ? 'light' : 'subtle'}
+                                            >
+                                                {isActive ? (
+                                                    <XtlsLogo size={16} />
+                                                ) : (
+                                                    <PiCircle size={16} />
+                                                )}
+                                            </ThemeIcon>
+                                            <Box>
+                                                <Text
+                                                    fw={600}
+                                                    lineClamp={1}
+                                                    size={isMobile ? 'sm' : 'md'}
+                                                    style={{
+                                                        color: 'white',
+                                                        textShadow: '0 1px 2px rgba(0, 0, 0, 0.3)'
+                                                    }}
+                                                    title={profile.name}
+                                                >
+                                                    {profile.name}
+                                                </Text>
+                                            </Box>
+                                        </Group>
+
+                                        <Group gap={4}>
+                                            <CopyButton timeout={2000} value={profile.uuid}>
+                                                {({ copied, copy }) => (
+                                                    <Tooltip
+                                                        label={copied ? 'Copied!' : 'Copy UUID'}
+                                                    >
+                                                        <ActionIcon
+                                                            color={copied ? 'teal' : 'gray'}
+                                                            onClick={(e) => {
+                                                                e.stopPropagation()
+                                                                copy()
+                                                            }}
+                                                            size="sm"
+                                                            variant="subtle"
+                                                        >
+                                                            {copied ? (
+                                                                <PiCheck size={14} />
+                                                            ) : (
+                                                                <PiCopy size={14} />
+                                                            )}
+                                                        </ActionIcon>
+                                                    </Tooltip>
+                                                )}
+                                            </CopyButton>
+
+                                            <Tooltip
+                                                label={t(
+                                                    'config-profiles-grid.widget.delete-profile'
+                                                )}
+                                            >
+                                                <ActionIcon
+                                                    color="red"
+                                                    onClick={(e) => {
+                                                        e.stopPropagation()
+                                                        handleDeleteProfile(
+                                                            profile.uuid,
+                                                            profile.name
+                                                        )
+                                                    }}
+                                                    size="sm"
+                                                    variant="subtle"
+                                                >
+                                                    <PiTrashDuotone size={14} />
+                                                </ActionIcon>
+                                            </Tooltip>
+                                        </Group>
+                                    </Group>
+
+                                    <Stack gap="sm">
+                                        <Group gap="xs" justify="center">
+                                            <Tooltip
+                                                label={t('config-profiles-grid.widget.inbounds')}
+                                            >
+                                                <Badge
+                                                    color="blue"
+                                                    leftSection={<PiTag size={12} />}
+                                                    size="lg"
+                                                    variant="light"
+                                                >
+                                                    {formatInt(inboundsCount, {
+                                                        thousandSeparator: ','
+                                                    })}
+                                                </Badge>
+                                            </Tooltip>
+
+                                            <Tooltip label={t('config-profiles-grid.widget.nodes')}>
+                                                <Badge
+                                                    color={isActive ? 'teal' : 'gray'}
+                                                    leftSection={<PiCpu size={12} />}
+                                                    onClick={() => {
+                                                        setInternalData({
+                                                            internalState: profile.nodes,
+                                                            modalKey:
+                                                                MODALS.CONFIG_PROFILES_SHOW_ACTIVE_NODE
+                                                        })
+                                                        open(
                                                             MODALS.CONFIG_PROFILES_SHOW_ACTIVE_NODE
+                                                        )
+                                                    }}
+                                                    size="lg"
+                                                    style={{
+                                                        cursor: 'pointer'
+                                                    }}
+                                                    variant="light"
+                                                >
+                                                    {formatInt(nodesCount, {
+                                                        thousandSeparator: ','
+                                                    })}
+                                                </Badge>
+                                            </Tooltip>
+                                        </Group>
+                                    </Stack>
+
+                                    <Divider variant="dashed" />
+
+                                    <Stack gap="xs">
+                                        <Group grow>
+                                            <Button
+                                                color="blue"
+                                                leftSection={<TbDownload size={16} />}
+                                                onClick={(e) => {
+                                                    e.stopPropagation()
+                                                    const jsonString = JSON.stringify(
+                                                        profile.config,
+                                                        null,
+                                                        2
+                                                    )
+                                                    const blob = new Blob([jsonString], {
+                                                        type: 'application/json'
                                                     })
-                                                    open(MODALS.CONFIG_PROFILES_SHOW_ACTIVE_NODE)
+                                                    const url = URL.createObjectURL(blob)
+                                                    const a = document.createElement('a')
+                                                    a.href = url
+                                                    a.download = `${profile.name}.json`
+                                                    document.body.appendChild(a)
+                                                    a.click()
+                                                    document.body.removeChild(a)
+                                                    URL.revokeObjectURL(url)
                                                 }}
-                                                size="lg"
-                                                style={{
-                                                    cursor: 'pointer'
-                                                }}
+                                                size="xs"
                                                 variant="light"
                                             >
-                                                {formatInt(nodesCount, {
-                                                    thousandSeparator: ','
-                                                })}
-                                            </Badge>
-                                        </Tooltip>
-                                    </Group>
-                                </Stack>
+                                                {t('config-profiles-grid.widget.download')}
+                                            </Button>
+                                            <Button
+                                                color="teal"
+                                                leftSection={<TbEye size={16} />}
+                                                onClick={(e) => {
+                                                    e.stopPropagation()
+                                                    modals.open({
+                                                        children: (
+                                                            <Box>
+                                                                <JsonEditor
+                                                                    collapse={3}
+                                                                    data={profile.config as object}
+                                                                    indent={4}
+                                                                    maxWidth="100%"
+                                                                    rootName=""
+                                                                    theme={githubDarkTheme}
+                                                                    viewOnly
+                                                                />
+                                                            </Box>
+                                                        ),
+                                                        title: profile.name,
+                                                        size: 'xl'
+                                                    })
+                                                }}
+                                                size="xs"
+                                                variant="light"
+                                            >
+                                                {t('config-profiles-grid.widget.quick-view')}
+                                            </Button>
+                                        </Group>
 
-                                <Divider />
-
-                                <Stack gap="xs">
-                                    <Group grow>
                                         <Button
-                                            color="blue"
-                                            leftSection={<TbDownload size={16} />}
-                                            onClick={() => {
-                                                const jsonString = JSON.stringify(
-                                                    profile.config,
-                                                    null,
-                                                    2
+                                            fullWidth
+                                            leftSection={<PiPencilDuotone size={16} />}
+                                            onClick={(e) => {
+                                                e.stopPropagation()
+                                                navigate(
+                                                    generatePath(
+                                                        ROUTES.DASHBOARD.MANAGEMENT
+                                                            .CONFIG_PROFILE_BY_UUID,
+                                                        {
+                                                            uuid: profile.uuid
+                                                        }
+                                                    )
                                                 )
-                                                const blob = new Blob([jsonString], {
-                                                    type: 'application/json'
-                                                })
-                                                const url = URL.createObjectURL(blob)
-                                                const a = document.createElement('a')
-                                                a.href = url
-                                                a.download = `${profile.name}.json`
-                                                document.body.appendChild(a)
-                                                a.click()
-                                                document.body.removeChild(a)
-                                                URL.revokeObjectURL(url)
                                             }}
                                             size="xs"
-                                            variant="light"
+                                            variant="default"
                                         >
-                                            {t('config-profiles-grid.widget.download')}
+                                            {t('config-profiles-grid.widget.edit-xray-config')}
                                         </Button>
-                                        <Button
-                                            color="teal"
-                                            leftSection={<TbEye size={16} />}
-                                            onClick={() => {
-                                                modals.open({
-                                                    children: (
-                                                        <Box>
-                                                            <JsonEditor
-                                                                collapse={3}
-                                                                data={profile.config as object}
-                                                                indent={4}
-                                                                maxWidth="100%"
-                                                                rootName=""
-                                                                theme={githubDarkTheme}
-                                                                viewOnly
-                                                            />
-                                                        </Box>
-                                                    ),
-                                                    title: profile.name,
-                                                    size: 'xl'
-                                                })
-                                            }}
-                                            size="xs"
-                                            variant="light"
-                                        >
-                                            {t('config-profiles-grid.widget.quick-view')}
-                                        </Button>
-                                    </Group>
-
-                                    <Button
-                                        fullWidth
-                                        leftSection={<PiPencilDuotone size={16} />}
-                                        onClick={() =>
-                                            navigate(
-                                                generatePath(
-                                                    ROUTES.DASHBOARD.MANAGEMENT
-                                                        .CONFIG_PROFILE_BY_UUID,
-                                                    {
-                                                        uuid: profile.uuid
-                                                    }
-                                                )
-                                            )
-                                        }
-                                        size="xs"
-                                        variant="default"
-                                    >
-                                        {t('config-profiles-grid.widget.edit-xray-config')}
-                                    </Button>
+                                    </Stack>
                                 </Stack>
-                            </Stack>
-                        </Card>
+                            </Card>
+                        </motion.div>
                     </Grid.Col>
                 )
             })}

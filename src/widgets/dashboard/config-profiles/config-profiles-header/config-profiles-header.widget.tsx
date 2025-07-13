@@ -13,7 +13,6 @@ export function ConfigProfilesHeaderWidget() {
                 description={t('config-profiles-header.widget.list-of-all-config-profiles')}
                 title={t('constants.config-profiles')}
             />
-            <DataTableShared.Content />
         </DataTableShared.Container>
     )
 }
