@@ -1,8 +1,7 @@
-/* eslint-disable camelcase */
-import { MantineReactTable, MRT_SortingState, useMantineReactTable } from 'mantine-react-table'
+import { ListViewTable } from '@gfazioli/mantine-list-view-table'
 import { GetAllNodesCommand } from '@remnawave/backend-contract'
 import { useTranslation } from 'react-i18next'
-import { useState } from 'react'
+import { Table } from '@mantine/core'
 import dayjs from 'dayjs'
 
 import { useBandwidthTableColumns } from '@features/dashboard/nodes-bandwidth-table/bandwidth-table-columns/model/use-bandwidth-table-columns'
@@ -10,12 +9,7 @@ import { DataTableShared } from '@shared/ui/table'
 import { useGetNodes } from '@shared/api/hooks'
 
 export function NodesBandwidthTableWidget() {
-    const {
-        data: nodes,
-        isFetching,
-        isError,
-        isLoading
-    } = useGetNodes({
+    const { data: nodes, isLoading } = useGetNodes({
         rQueryParams: {
             select: (data: unknown) => {
                 const nodes = data as GetAllNodesCommand.Response['response']
@@ -27,47 +21,6 @@ export function NodesBandwidthTableWidget() {
 
     const tableColumns = useBandwidthTableColumns()
 
-    const [sorting, setSorting] = useState<MRT_SortingState>([])
-
-    const table = useMantineReactTable({
-        columns: tableColumns,
-        data: nodes ?? [],
-        enableFullScreenToggle: true,
-        enableSortingRemoval: true,
-        enableGlobalFilter: false,
-        enableColumnFilterModes: false,
-
-        initialState: {
-            showColumnFilters: false,
-            density: 'xs',
-            pagination: {
-                pageIndex: 0,
-                pageSize: 300
-            }
-        },
-        enableColumnResizing: true,
-
-        /* prettier-ignore */
-        mantineToolbarAlertBannerProps: isError ? {
-            color: 'red',
-            children: 'Error loading data'
-        } : undefined,
-
-        onSortingChange: setSorting,
-        mantinePaperProps: {
-            style: { '--paper-radius': 'var(--mantine-radius-xs)' },
-            withBorder: false
-        },
-        enableColumnPinning: true,
-        enablePagination: false,
-        state: {
-            isLoading,
-            showAlertBanner: isError,
-            showProgressBars: isFetching,
-            sorting
-        }
-    })
-
     return (
         <DataTableShared.Container>
             <DataTableShared.Title
@@ -75,7 +28,18 @@ export function NodesBandwidthTableWidget() {
                 title={`${t('table.widget.today')}: ${dayjs().format('DD MMMM')}`}
             />
             <DataTableShared.Content>
-                <MantineReactTable table={table} />
+                <Table.ScrollContainer minWidth={1200}>
+                    <ListViewTable
+                        columns={tableColumns}
+                        data={nodes ?? []}
+                        emptyText="Nodes with active traffic tracking not found."
+                        highlightOnHover
+                        loading={isLoading}
+                        rowKey="uuid"
+                        stripedColor="cyan"
+                        withColumnBorders={false}
+                    />
+                </Table.ScrollContainer>
             </DataTableShared.Content>
         </DataTableShared.Container>
     )
