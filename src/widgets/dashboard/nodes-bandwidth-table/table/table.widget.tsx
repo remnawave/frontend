@@ -9,8 +9,6 @@ import { useBandwidthTableColumns } from '@features/dashboard/nodes-bandwidth-ta
 import { DataTableShared } from '@shared/ui/table'
 import { useGetNodes } from '@shared/api/hooks'
 
-import { customIcons } from './constants'
-
 export function NodesBandwidthTableWidget() {
     const {
         data: nodes,
@@ -47,8 +45,6 @@ export function NodesBandwidthTableWidget() {
                 pageSize: 300
             }
         },
-
-        icons: customIcons,
         enableColumnResizing: true,
 
         /* prettier-ignore */

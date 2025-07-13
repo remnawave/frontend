@@ -153,8 +153,9 @@ export function InternalSquadsGridWidget(props: IProps) {
             children: (
                 <Stack gap="xs">
                     <Text fw={800} size="sm">
-                        {t('internal-squads-grid.widget.add-users-to-internal-squad-confirmation')}
-                        {internalSquadName}"?
+                        {t('internal-squads-grid.widget.add-users-to-internal-squad-confirmation', {
+                            internalSquadName
+                        })}
                     </Text>
                     <Text fw={600} size="sm">
                         {t('internal-squads-grid.widget.this-action-cannot-be-undone')}
