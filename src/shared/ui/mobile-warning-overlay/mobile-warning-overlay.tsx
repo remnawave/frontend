@@ -1,25 +1,23 @@
 import { Button, Center, Divider, Group, Modal, Stack, Text, ThemeIcon, Title } from '@mantine/core'
 import { TbBaselineDensitySmall, TbColumns, TbMaximize, TbRotate2 } from 'react-icons/tb'
 import { PiDeviceMobile, PiMonitor, PiWarning } from 'react-icons/pi'
-import { useLocalStorage } from '@mantine/hooks'
 import { useEffect, useState } from 'react'
+import { useMiscStoreActions, useMobileWarningClosed } from '@entities/dashboard/misc-store'
 
 export function MobileWarningOverlay() {
     const [opened, setOpened] = useState(false)
 
-    const [value, setValue] = useLocalStorage({
-        key: 'user-table-mobile-warning-dismissed',
-        defaultValue: false
-    })
+    const mobileWarningClosed = useMobileWarningClosed()
+    const actions = useMiscStoreActions()
 
     useEffect(() => {
-        if (!value) {
+        if (!mobileWarningClosed) {
             setOpened(true)
         }
     }, [])
 
     const handleClose = () => {
-        setValue(true)
+        actions.setMobileWarningClosed(true)
         setOpened(false)
     }
 
