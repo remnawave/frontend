@@ -1,7 +1,6 @@
 .root {
     padding: var(--mantine-spacing-lg);
     border-radius: var(--mantine-radius-md);
-    transition: all 0.2s ease-in-out;
     cursor: default;
     position: relative;
     overflow: hidden;
@@ -36,7 +35,6 @@
     height: 3px;
     background: linear-gradient(90deg, var(--mantine-color-blue-5), var(--mantine-color-cyan-5));
     opacity: 0;
-    transition: opacity 0.2s ease-in-out;
 }
 
 .root:hover {
@@ -60,7 +58,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.2s ease-in-out;
     position: relative;
     overflow: hidden;
     min-width: 56px;

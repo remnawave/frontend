@@ -230,7 +230,6 @@ export function InternalSquadsGridWidget(props: IProps) {
                                 style={{
                                     display: 'flex',
                                     flexDirection: 'column',
-                                    transition: 'all 0.2s ease',
                                     position: 'relative',
                                     overflow: 'hidden',
                                     background:
