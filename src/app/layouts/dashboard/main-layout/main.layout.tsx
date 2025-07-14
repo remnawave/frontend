@@ -19,6 +19,7 @@ import semver from 'semver'
 import axios from 'axios'
 
 import { getBuildInfo } from '@shared/utils/get-build-info/get-build-info.util'
+import { ScrollToTopWrapper } from '@shared/hocs/scroll-to-top/scroll-to-top'
 import { BuildInfoModal } from '@shared/ui/build-info-modal/build-info-modal'
 import { useEasterEggStore } from '@entities/dashboard/easter-egg-store'
 import { HeaderControls } from '@shared/ui/header-buttons'
@@ -290,7 +291,9 @@ export function MainLayout() {
                     height: '100dvh'
                 }}
             >
-                <Outlet />
+                <ScrollToTopWrapper>
+                    <Outlet />
+                </ScrollToTopWrapper>
             </AppShell.Main>
 
             <BuildInfoModal
