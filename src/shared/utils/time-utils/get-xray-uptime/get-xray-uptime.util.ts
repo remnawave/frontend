@@ -1,10 +1,29 @@
-import { i18n } from 'i18next'
+import relativeTime from 'dayjs/plugin/relativeTime'
+import duration from 'dayjs/plugin/duration'
 import dayjs from 'dayjs'
 
-export function getXrayUptimeUtil(uptimeInSeconds: string, i18n: i18n): null | string {
-    const totalSeconds = parseInt(uptimeInSeconds, 10)
+dayjs.extend(duration)
+dayjs.extend(relativeTime)
 
+export function getXrayUptimeUtil(uptimeInSeconds: string): string {
+    const totalSeconds = parseInt(uptimeInSeconds, 10)
     const duration = dayjs.duration(totalSeconds, 'seconds')
 
-    return duration.locale(i18n.language).humanize(false)
+    if (duration.asDays() >= 1) {
+        return `${duration.asDays().toFixed(0)}d`
+    }
+
+    if (duration.asHours() >= 1) {
+        return `${duration.asHours().toFixed(0)}h`
+    }
+
+    if (duration.asMinutes() >= 1) {
+        return `${duration.asMinutes().toFixed(0)}m`
+    }
+
+    if (duration.asSeconds() < 1) {
+        return `${duration.asSeconds().toFixed(0)}s`
+    }
+
+    return '0s'
 }

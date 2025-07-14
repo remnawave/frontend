@@ -44,7 +44,7 @@ import { IProps } from './interfaces'
 export function ConfigProfilesGridWidget(props: IProps) {
     const { configProfiles } = props
     const { t } = useTranslation()
-    const isMobile = useMediaQuery('(max-width: 768px)')
+    const isMobile = useMediaQuery('(max-width: 48em)')
 
     const { open, setInternalData } = useModalsStore()
     const navigate = useNavigate()

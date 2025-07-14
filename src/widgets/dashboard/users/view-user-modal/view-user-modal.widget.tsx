@@ -73,7 +73,7 @@ export const ViewUserModal = () => {
     const actions = useUserModalStoreActions()
     const selectedUser = useUserModalStoreUserUuid()
 
-    const isMobile = useMediaQuery(`(max-width: ${em(750)})`)
+    const isMobile = useMediaQuery(`(max-width: ${em(768)})`)
 
     const { open: openModal, setInternalData } = useModalsStore()
 

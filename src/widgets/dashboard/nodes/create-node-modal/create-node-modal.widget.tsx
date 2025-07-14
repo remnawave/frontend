@@ -20,7 +20,7 @@ export const CreateNodeModalWidget = () => {
 
     const { data: pubKey } = useGetPubKey()
 
-    const isMobile = useMediaQuery(`(max-width: ${em(750)})`)
+    const isMobile = useMediaQuery(`(max-width: ${em(768)})`)
 
     const [advancedOpened, setAdvancedOpened] = useState(false)
 

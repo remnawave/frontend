@@ -16,7 +16,7 @@ import { getInfraBillingNodesColumns } from './use-infra-billing-nodes-columns'
 const PAGE_SIZE = 500
 
 export function InfraBillingNodesTableWidget() {
-    const isMobile = useMediaQuery('(max-width: 768px)')
+    const isMobile = useMediaQuery('(max-width: 48em)')
 
     const {
         data: infraBillingNodes,

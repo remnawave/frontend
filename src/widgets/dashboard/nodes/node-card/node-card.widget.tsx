@@ -25,11 +25,11 @@ import classes from './NodeCard.module.css'
 import { IProps } from './interfaces'
 
 export const NodeCardWidget = memo((props: IProps) => {
-    const { t, i18n } = useTranslation()
+    const { t } = useTranslation()
     const { node, isDragOverlay = false } = props
     const actions = useNodesStoreActions()
     const clipboard = useClipboard({ timeout: 500 })
-    const isMobile = useMediaQuery(`(max-width: ${em(750)})`)
+    const isMobile = useMediaQuery(`(max-width: ${em(768)})`)
 
     const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
         id: node.uuid
@@ -39,8 +39,7 @@ export const NodeCardWidget = memo((props: IProps) => {
         transform: CSS.Transform.toString(transform),
         transition,
         opacity: isDragging ? 0 : 1,
-        zIndex: isDragging ? 1000 : 'auto',
-        position: 'relative'
+        zIndex: isDragging ? 1000 : 'auto'
     }
 
     const trafficData = useMemo(() => {
@@ -193,6 +192,13 @@ export const NodeCardWidget = memo((props: IProps) => {
                                         }
                                         radius="md"
                                         size="lg"
+                                        style={{
+                                            maxWidth: '20ch',
+                                            overflow: 'hidden',
+                                            textOverflow: 'ellipsis',
+                                            whiteSpace: 'nowrap',
+                                            cursor: 'pointer'
+                                        }}
                                         variant="light"
                                     >
                                         {node.provider.name}
@@ -220,10 +226,10 @@ export const NodeCardWidget = memo((props: IProps) => {
                         <Box>
                             <Flex direction="column" gap={4}>
                                 <Flex align="center" justify="space-between">
-                                    <Text c="dimmed" ff="monospace" fw={600} size="sm">
+                                    <Text c="dimmed" ff="monospace" fw={600} size="sm" truncate>
                                         {trafficData.prettyUsedData}
                                     </Text>
-                                    <Text c="dimmed" size="xs">
+                                    <Text c="dimmed" size="xs" truncate>
                                         {trafficData.maxData}
                                     </Text>
                                 </Flex>
@@ -254,25 +260,26 @@ export const NodeCardWidget = memo((props: IProps) => {
                                 <Box />
                             )}
 
-                            <Flex align="center" gap={4}>
-                                <XtlsLogo height={14} width={14} />
-                                <Text
-                                    c={isOnline ? 'teal' : 'red'}
-                                    fw={isOnline ? 600 : 500}
-                                    size="sm"
-                                >
-                                    {isOnline
-                                        ? getXrayUptimeUtil(node.xrayUptime, i18n)
-                                        : 'offline'}
-                                </Text>
-                            </Flex>
+                            {isOnline && (
+                                <Flex align="center" gap={4}>
+                                    <XtlsLogo height={14} width={14} />
+                                    <Text
+                                        c={isOnline ? 'teal' : 'red'}
+                                        fw={isOnline ? 600 : 500}
+                                        size="sm"
+                                        truncate
+                                    >
+                                        {getXrayUptimeUtil(node.xrayUptime)}
+                                    </Text>
+                                </Flex>
+                            )}
                         </Flex>
                     </Grid.Col>
                 </Grid>
             )}
 
             {isMobile && (
-                <Box className={classes.mobileLayout}>
+                <Box>
                     <Flex align="center" gap="sm" mb="xs">
                         <NodeStatusBadgeWidget node={node} withText={false} />
 
@@ -325,13 +332,36 @@ export const NodeCardWidget = memo((props: IProps) => {
                                     {node.provider.name}
                                 </Badge>
                             )}
+
+                            {!node.provider && (
+                                <Badge
+                                    color="gray"
+                                    leftSection={
+                                        <Avatar
+                                            alt={'Unknown'}
+                                            color="initials"
+                                            name={'Unknown'}
+                                            radius="sm"
+                                            size={16}
+                                        />
+                                    }
+                                    radius="md"
+                                    size="lg"
+                                    style={{
+                                        visibility: 'hidden'
+                                    }}
+                                    variant="light"
+                                >
+                                    Unknown
+                                </Badge>
+                            )}
                         </Flex>
                     </Box>
 
                     <Box mb="xs">
                         <Flex direction="column" gap={2}>
                             <Flex align="center" justify="space-between">
-                                <Text c="dimmed" ff="monospace" fw={600} size="sm">
+                                <Text c="dimmed" ff="monospace" fw={600} size="sm" truncate>
                                     {trafficData.prettyUsedData}
                                 </Text>
                                 <Text c="dimmed" size="xs">
@@ -375,7 +405,7 @@ export const NodeCardWidget = memo((props: IProps) => {
                                 fw={isOnline ? 600 : 500}
                                 size="xs"
                             >
-                                {isOnline ? getXrayUptimeUtil(node.xrayUptime, i18n) : 'offline'}
+                                {isOnline ? getXrayUptimeUtil(node.xrayUptime) : 'offline'}
                             </Text>
                         </Flex>
                     </Flex>

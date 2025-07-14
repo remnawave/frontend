@@ -9,7 +9,7 @@ interface IProps {
 
 export function ModalFooter(props: IProps) {
     const { children } = props
-    const isMobile = useMediaQuery(`(max-width: ${em(750)})`)
+    const isMobile = useMediaQuery(`(max-width: ${em(768)})`)
 
     return (
         <Modal.Header

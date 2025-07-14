@@ -50,7 +50,7 @@ import { IProps } from './interfaces'
 export function InternalSquadsGridWidget(props: IProps) {
     const { internalSquads } = props
     const { t } = useTranslation()
-    const isMobile = useMediaQuery('(max-width: 768px)')
+    const isMobile = useMediaQuery('(max-width: 48em)')
 
     const { refetch: refetchInternalSquads } = useGetInternalSquads({
         rQueryParams: {

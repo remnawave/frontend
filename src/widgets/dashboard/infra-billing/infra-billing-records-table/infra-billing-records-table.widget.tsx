@@ -19,7 +19,7 @@ const PAGE_SIZE = 50
 
 export function InfraBillingRecordsTableWidget() {
     const [page, setPage] = useState(1)
-    const isMobile = useMediaQuery('(max-width: 768px)')
+    const isMobile = useMediaQuery('(max-width: 48em)')
 
     const {
         data: infraBillingRecords,

@@ -20,6 +20,7 @@
     padding: var(--mantine-spacing-md);
     border-radius: var(--mantine-radius-lg);
     transition: all 0.2s ease;
+    height: 190px;
     background: linear-gradient(
         135deg,
         var(--mantine-color-dark-6) 0%,
@@ -38,52 +39,19 @@
 }
 
 .filteredItem {
-    display: flex;
-    align-items: center;
-    border-radius: var(--mantine-radius-md);
-    border: 1px solid light-dark(var(--mantine-color-gray-2), var(--mantine-color-dark-5));
-    padding: var(--mantine-spacing-xs) var(--mantine-spacing-md);
-    margin-bottom: var(--mantine-spacing-xs);
-    opacity: 0.5;
-
-    background: linear-gradient(
-        135deg,
-        var(--mantine-color-dark-6) 0%,
-        var(--mantine-color-dark-7) 100%
-    );
-    box-shadow: var(--mantine-shadow-sm);
+    opacity: 0.5 !important;
 }
 
 .selectedItem {
-    display: flex;
-    align-items: center;
-    border-radius: var(--mantine-radius-md);
     border: 1px solid light-dark(var(--mantine-color-gray-2), var(--mantine-color-blue-5));
-    padding: var(--mantine-spacing-xs) var(--mantine-spacing-md);
-    margin-bottom: var(--mantine-spacing-xs);
+}
 
-    background: linear-gradient(
-        135deg,
-        var(--mantine-color-dark-6) 0%,
-        var(--mantine-color-dark-7) 100%
-    );
-    box-shadow: var(--mantine-shadow-sm);
+.highlightedItem {
+    border: 1px solid light-dark(var(--mantine-color-indigo-5), var(--mantine-color-indigo-5));
 }
 
 .danglingItem {
-    display: flex;
-    align-items: center;
-    border-radius: var(--mantine-radius-md);
     border: 1px solid light-dark(var(--mantine-color-gray-2), var(--mantine-color-red-3));
-    padding: var(--mantine-spacing-xs) var(--mantine-spacing-md);
-    margin-bottom: var(--mantine-spacing-xs);
-
-    background: linear-gradient(
-        135deg,
-        var(--mantine-color-dark-6) 0%,
-        var(--mantine-color-dark-7) 100%
-    );
-    box-shadow: var(--mantine-shadow-sm);
 }
 
 .itemDragging {
@@ -144,7 +112,8 @@
 }
 
 .lockedIcon {
-    opacity: 0.5;
+    opacity: 0.5 !important;
+    cursor: not-allowed;
 }
 
 .truncatedBadge {
@@ -216,9 +185,12 @@
     line-height: 1.3;
     color: var(--mantine-color-bright);
     margin-bottom: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 48em) {
     .item {
         margin-bottom: var(--mantine-spacing-sm);
     }
@@ -236,6 +208,9 @@
     .mobileAddress {
         font-size: 0.875rem;
         opacity: 0.8;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 }
 

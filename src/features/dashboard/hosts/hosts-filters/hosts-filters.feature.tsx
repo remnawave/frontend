@@ -1,5 +1,5 @@
 import { ActionIcon, Card, Group, Select, Stack, Title } from '@mantine/core'
-import { PiBookmarks, PiTag, PiX } from 'react-icons/pi'
+import { PiBookmarks, PiMagnifyingGlass, PiTag, PiX } from 'react-icons/pi'
 import { HiFilter } from 'react-icons/hi'
 import { useMemo } from 'react'
 
@@ -12,7 +12,15 @@ import {
 import { IProps } from './interfaces'
 
 export const HostsFiltersFeature = (props: IProps) => {
-    const { configProfiles } = props
+    const {
+        configProfiles,
+        handleSearchAddressSelect,
+        handleSearchSelect,
+        searchAddressValue,
+        searchOptions,
+        searchValue,
+        searchAddressData
+    } = props
 
     const actions = useHostsStoreActions()
     const configProfileFilter = useHostsStoreConfigProfileFilter()
@@ -112,6 +120,28 @@ export const HostsFiltersFeature = (props: IProps) => {
                         radius="md"
                         size="sm"
                         value={inboundFilter || ''}
+                    />
+                </Group>
+
+                <Group grow preventGrowOverflow={false} wrap="wrap">
+                    <Select
+                        clearable
+                        data={searchOptions}
+                        leftSection={<PiMagnifyingGlass size={16} />}
+                        onChange={handleSearchSelect}
+                        placeholder="Search by remark..."
+                        searchable
+                        value={searchValue}
+                    />
+
+                    <Select
+                        clearable
+                        data={searchAddressData}
+                        leftSection={<PiMagnifyingGlass size={16} />}
+                        onChange={handleSearchAddressSelect}
+                        placeholder="Address"
+                        searchable
+                        value={searchAddressValue}
                     />
                 </Group>
             </Stack>

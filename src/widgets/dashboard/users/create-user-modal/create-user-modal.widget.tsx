@@ -56,7 +56,7 @@ export const CreateUserModalWidget = () => {
     const { data: internalSquads, isLoading: isInternalSquadsLoading } = useGetInternalSquads()
 
     const { data: tags, isLoading: isTagsLoading } = useGetUserTags()
-    const isMobile = useMediaQuery(`(max-width: ${em(750)})`)
+    const isMobile = useMediaQuery(`(max-width: ${em(768)})`)
 
     const {
         mutate: createUser,

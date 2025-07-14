@@ -15,9 +15,9 @@ import { arrayMove, SortableContext, verticalListSortingStrategy } from '@dnd-ki
 import { memo, useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { GetAllNodesCommand } from '@remnawave/backend-contract'
 import { useWindowVirtualizer } from '@tanstack/react-virtual'
+import { useListState, useMediaQuery } from '@mantine/hooks'
 import { restrictToVerticalAxis } from '@dnd-kit/modifiers'
-import { Box, Container } from '@mantine/core'
-import { useListState } from '@mantine/hooks'
+import { Box, Container, em, Stack } from '@mantine/core'
 import { motion } from 'framer-motion'
 
 import { nodesQueryKeys, useGetNodes, useReorderNodes } from '@shared/api/hooks'
@@ -38,6 +38,7 @@ export const NodesTableWidget = memo((props: IProps) => {
     const listRef = useRef<HTMLDivElement | null>(null)
     const parentOffsetRef = useRef(0)
     const prevStateRef = useRef(state)
+    const isMobile = useMediaQuery(`(max-width: ${em(768)})`)
 
     useGetNodes({
         rQueryParams: {
@@ -59,11 +60,8 @@ export const NodesTableWidget = memo((props: IProps) => {
 
     const virtualizer = useWindowVirtualizer({
         count: state.length,
-        estimateSize: () => 70,
+        estimateSize: () => (isMobile ? 169 : 64),
         overscan: 5,
-        measureElement: (element) => {
-            return element?.getBoundingClientRect().height ?? 70
-        },
         scrollMargin: parentOffsetRef.current,
         getItemKey: (index) => state[index].uuid
     })
@@ -173,12 +171,13 @@ export const NodesTableWidget = memo((props: IProps) => {
             onDragStart={handleDragStart}
             sensors={sensors}
         >
-            <div ref={listRef}>
+            <div ref={listRef} style={{ overflowAnchor: 'none' }}>
                 <div
                     style={{
                         height: `${virtualizer.getTotalSize()}px`,
                         width: '100%',
-                        position: 'relative'
+                        position: 'relative',
+                        overflowAnchor: 'none'
                     }}
                 >
                     <SortableContext items={dataIds.current} strategy={verticalListSortingStrategy}>
@@ -186,40 +185,44 @@ export const NodesTableWidget = memo((props: IProps) => {
                             p={0}
                             size={'lg'}
                             style={{
+                                overflowAnchor: 'none',
                                 position: 'relative',
                                 minHeight: '100px'
                             }}
                         >
-                            {virtualizer.getVirtualItems().map((virtualItem) => {
-                                const item = state[virtualItem.index]
-                                if (!item) return null
+                            <Stack gap={0}>
+                                {virtualizer.getVirtualItems().map((virtualItem) => {
+                                    const item = state[virtualItem.index]
+                                    if (!item) return null
 
-                                return (
-                                    <Box
-                                        data-index={virtualItem.index}
-                                        key={item.uuid}
-                                        ref={virtualizer.measureElement}
-                                        style={{
-                                            position: 'absolute',
-                                            top: 0,
-                                            left: 0,
-                                            right: 0,
-                                            transform: `translateY(${
-                                                virtualItem.start - virtualizer.options.scrollMargin
-                                            }px)`
-                                        }}
-                                    >
-                                        <motion.div
-                                            animate={{ opacity: 1 }}
-                                            exit={{ opacity: 0 }}
-                                            initial={{ opacity: 0 }}
-                                            transition={{ duration: 0.1 }}
+                                    return (
+                                        <Box
+                                            data-index={virtualItem.index}
+                                            key={item.uuid}
+                                            style={{
+                                                position: 'absolute',
+                                                top: 0,
+                                                left: 0,
+                                                right: 0,
+                                                transform: `translateY(${
+                                                    virtualItem.start -
+                                                    virtualizer.options.scrollMargin
+                                                }px)`,
+                                                overflowAnchor: 'none'
+                                            }}
                                         >
-                                            <NodeCardWidget node={item} />
-                                        </motion.div>
-                                    </Box>
-                                )
-                            })}
+                                            <motion.div
+                                                animate={{ opacity: 1 }}
+                                                exit={{ opacity: 0 }}
+                                                initial={{ opacity: 0 }}
+                                                transition={{ duration: 0.1 }}
+                                            >
+                                                <NodeCardWidget node={item} />
+                                            </motion.div>
+                                        </Box>
+                                    )
+                                })}
+                            </Stack>
                         </Container>
                     </SortableContext>
                 </div>

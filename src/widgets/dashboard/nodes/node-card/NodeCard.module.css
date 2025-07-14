@@ -13,10 +13,7 @@
 }
 
 .nodeRow:hover {
-    background: light-dark(var(--mantine-color-blue-0), var(--mantine-color-dark-6));
-    border-color: light-dark(var(--mantine-color-blue-3), var(--mantine-color-dark-3));
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    border-color: light-dark(var(--mantine-color-blue-3), var(--mantine-color-blue-5)) !important;
 }
 
 .nodeRowDragging {
@@ -114,11 +111,6 @@
     color: var(--mantine-color-teal-6);
 }
 
-[data-mantine-color-scheme='dark'] .nodeRow:hover {
-    border-color: var(--mantine-color-dark-3);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-}
-
 [data-mantine-color-scheme='dark'] .nodeRowDragging {
     border-color: var(--mantine-color-blue-4);
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
@@ -148,7 +140,7 @@
 }
 
 /* Mobile Layout */
-@media (max-width: 768px) {
+@media (max-width: 48em) {
     .desktopGrid {
         display: none;
     }
@@ -158,7 +150,8 @@
     }
 
     .nodeRow {
-        padding: 12px 40px 12px 12px;
+        padding: 10px 36px 10px 10px;
+        margin-bottom: 6px;
     }
 
     .dragHandle {

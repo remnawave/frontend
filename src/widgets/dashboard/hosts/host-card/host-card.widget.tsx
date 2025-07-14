@@ -16,16 +16,31 @@ import classes from './HostCard.module.css'
 import { IProps } from './interfaces'
 
 export function HostCardWidget(props: IProps) {
-    const { item, configProfiles, isSelected, onSelect, isDragOverlay = false } = props
+    const {
+        item,
+        configProfiles,
+        isSelected,
+        onSelect,
+        isDragOverlay = false,
+        isHighlighted = false
+    } = props
 
     const filters = useHostsStoreFilters()
     const actions = useHostsStoreActions()
     const [isHovered, setIsHovered] = useState(false)
-    const isMobile = useMediaQuery('(max-width: 768px)')
+    const isMobile = useMediaQuery('(max-width: 48em)')
+
+    const configProfile = configProfiles?.find(
+        (configProfile) => configProfile.uuid === item.inbound.configProfileUuid
+    )
+
+    const isFiltered =
+        (!!filters.configProfileUuid && configProfile?.uuid !== filters.configProfileUuid) ||
+        (!!filters.inboundUuid && item.inbound.configProfileInboundUuid !== filters.inboundUuid)
 
     const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
         id: item.uuid,
-        disabled: isDragOverlay
+        disabled: isDragOverlay || isFiltered
     })
 
     const style: CSSProperties = {
@@ -40,13 +55,6 @@ export function HostCardWidget(props: IProps) {
         return null
     }
 
-    const configProfile = configProfiles.find(
-        (configProfile) => configProfile.uuid === item.inbound.configProfileUuid
-    )
-
-    const isFiltered =
-        (!!filters.configProfileUuid && configProfile?.uuid !== filters.configProfileUuid) ||
-        (!!filters.inboundUuid && item.inbound.configProfileInboundUuid !== filters.inboundUuid)
     const isHostActive = !item.isDisabled
 
     const ch = new ColorHash({ lightness: [0.65, 0.65, 0.65] })
@@ -60,6 +68,7 @@ export function HostCardWidget(props: IProps) {
         return (
             <Box
                 className={cx(classes.item, classes.mobileItem, {
+                    [classes.highlightedItem]: isHighlighted,
                     [classes.itemDragging]: isDragging || isHovered,
                     [classes.filteredItem]: isFiltered,
                     [classes.selectedItem]: isSelected,
@@ -125,7 +134,7 @@ export function HostCardWidget(props: IProps) {
                                 {item.port ? `:${item.port}` : ''}
                             </Text>
 
-                            <Group gap="xs" wrap="wrap">
+                            <Stack gap="xs">
                                 <Badge
                                     autoContrast
                                     color={configProfile?.uuid ? ch.hex(configProfile.uuid) : 'red'}
@@ -143,23 +152,22 @@ export function HostCardWidget(props: IProps) {
                                     {configProfile?.name || 'DANGLING'}
                                 </Badge>
 
-                                {item.inbound.configProfileInboundUuid && (
-                                    <Badge
-                                        autoContrast
-                                        color={ch.hex(item.inbound.configProfileInboundUuid)}
-                                        leftSection={<PiTag size={12} />}
-                                        radius="lg"
-                                        size="sm"
-                                        variant="outline"
-                                    >
-                                        {configProfile?.inbounds.find(
-                                            (inbound) =>
-                                                inbound.uuid ===
-                                                item.inbound.configProfileInboundUuid
-                                        )?.tag || 'UNKNOWN'}
-                                    </Badge>
-                                )}
-                            </Group>
+                                <Badge
+                                    autoContrast
+                                    color={ch.hex(
+                                        item.inbound.configProfileInboundUuid || 'dangling'
+                                    )}
+                                    leftSection={<PiTag size={12} />}
+                                    radius="lg"
+                                    size="sm"
+                                    variant="outline"
+                                >
+                                    {configProfile?.inbounds.find(
+                                        (inbound) =>
+                                            inbound.uuid === item.inbound.configProfileInboundUuid
+                                    )?.tag || 'UNKNOWN'}
+                                </Badge>
+                            </Stack>
                         </Stack>
                     </Stack>
                 </Box>
@@ -173,7 +181,8 @@ export function HostCardWidget(props: IProps) {
                 [classes.itemDragging]: isDragging || isHovered,
                 [classes.filteredItem]: isFiltered,
                 [classes.selectedItem]: isSelected,
-                [classes.danglingItem]: !configProfile?.uuid
+                [classes.danglingItem]: !configProfile?.uuid,
+                [classes.highlightedItem]: isHighlighted
             })}
             data-dnd-overlay={isDragOverlay}
             ref={isDragOverlay ? undefined : setNodeRef}
@@ -202,19 +211,33 @@ export function HostCardWidget(props: IProps) {
                     onMouseLeave={() => setIsHovered(false)}
                 >
                     <Group gap="md" justify="space-between" wrap="nowrap">
-                        <Group flex={1} gap="sm" miw={0} wrap="nowrap">
+                        <Group
+                            flex={1}
+                            gap="sm"
+                            miw={0}
+                            style={{ overflow: 'hidden' }}
+                            wrap="nowrap"
+                        >
                             <ActionIcon
                                 color={isHostActive ? 'teal' : 'gray'}
                                 radius="md"
                                 size="md"
+                                style={{ flexShrink: 0 }}
                                 variant="light"
                             >
                                 {isHostActive ? <PiPulse size={16} /> : <PiProhibit size={16} />}
                             </ActionIcon>
 
-                            <Group gap="md" style={{ flexShrink: 0 }} wrap="nowrap">
-                                <Text fw={600}>{item.remark}</Text>
-                                <Text c="dimmed" className={classes.hostAddress}>
+                            <Group gap="md" style={{ flexShrink: 1, minWidth: 0 }} wrap="nowrap">
+                                <Text fw={600} style={{ flexShrink: 0 }} truncate>
+                                    {item.remark}
+                                </Text>
+                                <Text
+                                    c="dimmed"
+                                    className={classes.hostAddress}
+                                    style={{ flexShrink: 1, minWidth: 0 }}
+                                    truncate
+                                >
                                     {item.address}
                                     {item.port ? `:${item.port}` : ''}
                                 </Text>

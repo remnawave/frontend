@@ -21,7 +21,7 @@ import { IProps } from './interfaces/props.interface'
 export const ConfigProfileDetailHeaderWidget = (props: IProps) => {
     const { configProfile } = props
     const { t } = useTranslation()
-    const isMobile = useMediaQuery('(max-width: 768px)')
+    const isMobile = useMediaQuery('(max-width: 48em)')
 
     if (isMobile) {
         return (
