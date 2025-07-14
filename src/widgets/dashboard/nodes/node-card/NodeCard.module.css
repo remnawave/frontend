@@ -17,7 +17,6 @@
 }
 
 .nodeRowDragging {
-    transform: rotate(1deg) scale(1.02);
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
     border-color: light-dark(var(--mantine-color-blue-4), var(--mantine-color-blue-4));
     z-index: 1000;
