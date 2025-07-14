@@ -21,7 +21,7 @@ export function getXrayUptimeUtil(uptimeInSeconds: string): string {
         return `${duration.asMinutes().toFixed(0)}m`
     }
 
-    if (duration.asSeconds() < 1) {
+    if (duration.asSeconds() >= 1) {
         return `${duration.asSeconds().toFixed(0)}s`
     }
 
