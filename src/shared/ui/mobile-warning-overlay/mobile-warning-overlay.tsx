@@ -2,6 +2,7 @@ import { Button, Center, Divider, Group, Modal, Stack, Text, ThemeIcon, Title } 
 import { TbBaselineDensitySmall, TbColumns, TbMaximize, TbRotate2 } from 'react-icons/tb'
 import { PiDeviceMobile, PiMonitor, PiWarning } from 'react-icons/pi'
 import { useEffect, useState } from 'react'
+
 import { useMiscStoreActions, useMobileWarningClosed } from '@entities/dashboard/misc-store'
 
 export function MobileWarningOverlay() {
