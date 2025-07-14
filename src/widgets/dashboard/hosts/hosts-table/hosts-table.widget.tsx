@@ -234,8 +234,7 @@ export const HostsTableWidget = memo((props: IProps) => {
                         style={{
                             height: `${virtualizer.getTotalSize()}px`,
                             width: '100%',
-                            position: 'relative',
-                            overflowAnchor: 'none'
+                            position: 'relative'
                         }}
                     >
                         <SortableContext
@@ -247,8 +246,7 @@ export const HostsTableWidget = memo((props: IProps) => {
                                 size={'lg'}
                                 style={{
                                     position: 'relative',
-                                    minHeight: '100px',
-                                    overflowAnchor: 'none'
+                                    minHeight: '100px'
                                 }}
                             >
                                 <Stack gap={0}>
@@ -264,7 +262,6 @@ export const HostsTableWidget = memo((props: IProps) => {
                                                     position: 'absolute',
                                                     top: 0,
                                                     left: 0,
-                                                    overflowAnchor: 'none',
                                                     right: 0,
                                                     transform: `translateY(${
                                                         virtualItem.start -
@@ -276,7 +273,6 @@ export const HostsTableWidget = memo((props: IProps) => {
                                                     animate={{ opacity: 1 }}
                                                     exit={{ opacity: 0 }}
                                                     initial={{ opacity: 0 }}
-                                                    style={{ overflowAnchor: 'none' }}
                                                     transition={{ duration: 0.1 }}
                                                 >
                                                     <HostCardWidget

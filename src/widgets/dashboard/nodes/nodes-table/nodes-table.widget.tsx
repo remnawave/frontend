@@ -171,13 +171,12 @@ export const NodesTableWidget = memo((props: IProps) => {
             onDragStart={handleDragStart}
             sensors={sensors}
         >
-            <div ref={listRef} style={{ overflowAnchor: 'none' }}>
+            <div ref={listRef}>
                 <div
                     style={{
                         height: `${virtualizer.getTotalSize()}px`,
                         width: '100%',
-                        position: 'relative',
-                        overflowAnchor: 'none'
+                        position: 'relative'
                     }}
                 >
                     <SortableContext items={dataIds.current} strategy={verticalListSortingStrategy}>
@@ -185,7 +184,6 @@ export const NodesTableWidget = memo((props: IProps) => {
                             p={0}
                             size={'lg'}
                             style={{
-                                overflowAnchor: 'none',
                                 position: 'relative',
                                 minHeight: '100px'
                             }}
@@ -207,8 +205,7 @@ export const NodesTableWidget = memo((props: IProps) => {
                                                 transform: `translateY(${
                                                     virtualItem.start -
                                                     virtualizer.options.scrollMargin
-                                                }px)`,
-                                                overflowAnchor: 'none'
+                                                }px)`
                                             }}
                                         >
                                             <motion.div
