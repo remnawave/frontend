@@ -20,15 +20,6 @@ export const useUserModalStore = create<IActions & IState>()(
             actions: {
                 changeModalState: async (modalState: boolean) => {
                     set(() => ({ isModalOpen: modalState }))
-                    if (!modalState) {
-                        await queryClient.refetchQueries({
-                            queryKey: QueryKeys.users.getAllUsers._def
-                        })
-                        await queryClient.refetchQueries({ queryKey: QueryKeys.system._def })
-                        set(() => ({
-                            isModalOpen: false
-                        }))
-                    }
                 },
                 clearModalState: async () => {
                     set(() => ({
@@ -36,10 +27,10 @@ export const useUserModalStore = create<IActions & IState>()(
                         userUuid: null
                     }))
 
-                    await queryClient.refetchQueries({
+                    queryClient.refetchQueries({
                         queryKey: QueryKeys.users.getAllUsers._def
                     })
-                    await queryClient.refetchQueries({ queryKey: QueryKeys.system._def })
+                    queryClient.refetchQueries({ queryKey: QueryKeys.system._def })
 
                     getState().actions.resetState()
                 },

@@ -138,3 +138,7 @@ wip/**
 wip/
 
 build.info.json
+
+public/wasm_exec.js
+public/xray.schema.json
+public/main.wasm
