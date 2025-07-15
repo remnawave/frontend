@@ -11,6 +11,7 @@ import {
     Menu,
     NumberInput,
     Paper,
+    px,
     rem,
     Select,
     Skeleton,
@@ -481,7 +482,7 @@ export const BaseNodeForm = <T extends CreateNodeCommand.Request | UpdateNodeCom
                     <Menu keepMounted={true} position="top-end" shadow="md">
                         <Menu.Target>
                             <Button
-                                leftSection={<TbDots size="1.2rem" />}
+                                leftSection={<TbDots size={px('1.2rem')} />}
                                 size="sm"
                                 variant="outline"
                             >
@@ -494,7 +495,7 @@ export const BaseNodeForm = <T extends CreateNodeCommand.Request | UpdateNodeCom
                             <GetNodeUsersUsageFeature nodeUuid={node.uuid} />
                             <CopyButton value={node.uuid}>
                                 {({ copy }) => (
-                                    <Menu.Item leftSection={<TbCopy size="1rem" />} onClick={copy}>
+                                    <Menu.Item leftSection={<TbCopy size="16px" />} onClick={copy}>
                                         Copy Node UUID
                                     </Menu.Item>
                                 )}
@@ -510,7 +511,7 @@ export const BaseNodeForm = <T extends CreateNodeCommand.Request | UpdateNodeCom
                 <Button
                     color="teal"
                     disabled={!form.isDirty() || !form.isTouched()}
-                    leftSection={<PiFloppyDiskDuotone size="1rem" />}
+                    leftSection={<PiFloppyDiskDuotone size="16px" />}
                     loading={isUpdateNodePending}
                     size="sm"
                     type="submit"

@@ -8,6 +8,7 @@ import {
     Grid,
     Group,
     NumberInput,
+    px,
     Stack,
     Tabs,
     Text,
@@ -80,17 +81,23 @@ export const SubscriptionTabs = ({
                         }}
                     >
                         <Tabs.List>
-                            <Tabs.Tab leftSection={<PiInfo size="1.2rem" />} value="general">
+                            <Tabs.Tab leftSection={<PiInfo size={px('1.2rem')} />} value="general">
                                 {t('subscription-settings.widget.subscription-info')}
                             </Tabs.Tab>
-                            <Tabs.Tab leftSection={<PiDeviceMobile size="1.2rem" />} value="happ">
+                            <Tabs.Tab
+                                leftSection={<PiDeviceMobile size={px('1.2rem')} />}
+                                value="happ"
+                            >
                                 {t('subscription-settings.widget.happ-settings')}
                             </Tabs.Tab>
-                            <Tabs.Tab leftSection={<PiChatsCircle size="1.2rem" />} value="remarks">
+                            <Tabs.Tab
+                                leftSection={<PiChatsCircle size={px('1.2rem')} />}
+                                value="remarks"
+                            >
                                 {t('subscription-settings.widget.user-status-remarks')}
                             </Tabs.Tab>
                             <Tabs.Tab
-                                leftSection={<TbPrescription size="1.2rem" />}
+                                leftSection={<TbPrescription size={px('1.2rem')} />}
                                 value="additional-response-headers"
                             >
                                 {t('subscription-tabs.widget.additional-response-headers')}
@@ -158,7 +165,7 @@ export const SubscriptionTabs = ({
                                                     label={t(
                                                         'subscription-settings.widget.auto-update-interval-hours'
                                                     )}
-                                                    leftSection={<PiClock size="1.2rem" />}
+                                                    leftSection={<PiClock size={px('1.2rem')} />}
                                                     min={1}
                                                     placeholder="60"
                                                     radius="md"
@@ -175,7 +182,7 @@ export const SubscriptionTabs = ({
                                                     label={t(
                                                         'subscription-settings.widget.support-link'
                                                     )}
-                                                    leftSection={<PiLink size="1.2rem" />}
+                                                    leftSection={<PiLink size={px('1.2rem')} />}
                                                     placeholder="https://support.example.com"
                                                     radius="md"
                                                     size="sm"
@@ -353,7 +360,7 @@ export const SubscriptionTabs = ({
                                                     </Text>
                                                     <Button
                                                         color="grape"
-                                                        leftSection={<PiGear size="1.2rem" />}
+                                                        leftSection={<PiGear size={px('1.2rem')} />}
                                                         mb="xs"
                                                         mt="xs"
                                                         onClick={() => {
@@ -397,7 +404,7 @@ export const SubscriptionTabs = ({
                                                 size={40}
                                                 variant="light"
                                             >
-                                                <PiChatsCircle size="1.5rem" />
+                                                <PiChatsCircle size="24px" />
                                             </ThemeIcon>
                                             <Stack gap={4}>
                                                 <Title fw={600} mb={2} order={4}>
@@ -452,7 +459,7 @@ export const SubscriptionTabs = ({
                                         <Grid>
                                             <Grid.Col span={{ xs: 12, sm: 6, md: 4 }}>
                                                 <RemarksManager
-                                                    icon={<PiClockUser size="1rem" />}
+                                                    icon={<PiClockUser size="16px" />}
                                                     iconColor="red"
                                                     initialRemarks={remarks.expired}
                                                     onChange={updateExpiredRemarks}
@@ -464,7 +471,7 @@ export const SubscriptionTabs = ({
 
                                             <Grid.Col span={{ xs: 12, sm: 6, md: 4 }}>
                                                 <RemarksManager
-                                                    icon={<PiClockCountdown size="1rem" />}
+                                                    icon={<PiClockCountdown size="16px" />}
                                                     iconColor="orange"
                                                     initialRemarks={remarks.limited}
                                                     onChange={updateLimitedRemarks}
@@ -476,7 +483,7 @@ export const SubscriptionTabs = ({
 
                                             <Grid.Col span={{ xs: 12, sm: 6, md: 4 }}>
                                                 <RemarksManager
-                                                    icon={<PiProhibit size="1rem" />}
+                                                    icon={<PiProhibit size="16px" />}
                                                     iconColor="gray"
                                                     initialRemarks={remarks.disabled}
                                                     onChange={updateDisabledRemarks}
@@ -501,7 +508,7 @@ export const SubscriptionTabs = ({
                                             size={40}
                                             variant="light"
                                         >
-                                            <TbPrescription size="1.5rem" />
+                                            <TbPrescription size="24px" />
                                         </ThemeIcon>
                                         <Stack gap={4}>
                                             <Title fw={600} mb={2} order={4}>
@@ -554,7 +561,7 @@ export const SubscriptionTabs = ({
                                 </Box>
                                 <Button
                                     color="blue"
-                                    leftSection={<PiFloppyDisk size="1.2rem" />}
+                                    leftSection={<PiFloppyDisk size={px('1.2rem')} />}
                                     loading={isUpdateSubscriptionSettingsPending}
                                     radius="md"
                                     size="md"

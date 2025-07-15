@@ -96,7 +96,7 @@ export function DeviceTagSettingsCard<
                         hideControls
                         key={form.key('hwidDeviceLimit')}
                         label={t('create-user-modal.widget.hwid-device-limit')}
-                        leftSection={<TbDevices2 size="1rem" />}
+                        leftSection={<TbDevices2 size="16px" />}
                         placeholder="HWID_FALLBACK_DEVICE_LIMIT in use"
                         {...form.getInputProps('hwidDeviceLimit')}
                         styles={{

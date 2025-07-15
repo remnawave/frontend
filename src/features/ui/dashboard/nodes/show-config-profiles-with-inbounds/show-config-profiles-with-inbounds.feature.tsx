@@ -123,7 +123,7 @@ export function ShowConfigProfilesWithInboundsFeature(props: IProps) {
             <Button
                 color="blue"
                 fullWidth
-                leftSection={<TbFile size="1rem" />}
+                leftSection={<TbFile size="16px" />}
                 onClick={handlers.open}
                 size="sm"
                 variant="default"

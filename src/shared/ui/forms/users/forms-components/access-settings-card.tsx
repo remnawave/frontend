@@ -95,7 +95,7 @@ export const AccessSettingsCard = <T extends CreateUserCommand.Request | UpdateU
                         valueFormat="MMMM D, YYYY - HH:mm"
                         {...form.getInputProps('expireAt')}
                         description={t('create-user-modal.widget.expire-at-description')}
-                        leftSection={<PiCalendarDuotone size="1rem" />}
+                        leftSection={<PiCalendarDuotone size="16px" />}
                         onChange={(date) => {
                             const formInputProps = form.getInputProps('expireAt')
                             if (formInputProps.onChange) {

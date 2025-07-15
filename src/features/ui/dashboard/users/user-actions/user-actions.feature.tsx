@@ -34,9 +34,9 @@ export function UserActionsFeature(props: IProps) {
                                 variant={copied ? 'light' : 'outline'}
                             >
                                 {copied ? (
-                                    <PiCheck style={{ width: '1.5rem', height: '1.5rem' }} />
+                                    <PiCheck style={{ width: '24px', height: '24px' }} />
                                 ) : (
-                                    <PiLink style={{ width: '1.5rem', height: '1.5rem' }} />
+                                    <PiLink style={{ width: '24px', height: '24px' }} />
                                 )}
                             </ActionIcon>
                         </Tooltip>
@@ -49,7 +49,7 @@ export function UserActionsFeature(props: IProps) {
                     size="input-sm"
                     variant="outline"
                 >
-                    <PiUserCircle size={'1.5rem'} />
+                    <PiUserCircle size="24px" />
                 </ActionIcon>
                 <ActionIcon
                     color="cyan.5"
@@ -58,7 +58,7 @@ export function UserActionsFeature(props: IProps) {
                     size="input-sm"
                     variant="outline"
                 >
-                    <PiPencil size={'1.5rem'} />
+                    <PiPencil size="24px" />
                 </ActionIcon>
             </ActionIcon.Group>
         </Group>

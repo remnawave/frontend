@@ -22,7 +22,7 @@ export const CopyableFieldShared = ({
                                 onClick={copy}
                                 variant="subtle"
                             >
-                                {copied ? <PiCheck size="1rem" /> : <PiCopy size="1rem" />}
+                                {copied ? <PiCheck size="16px" /> : <PiCopy size="16px" />}
                             </ActionIcon>
                         )}
                     </CopyButton>

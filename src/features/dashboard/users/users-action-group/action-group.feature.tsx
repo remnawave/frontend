@@ -75,7 +75,7 @@ export const UserActionGroupFeature = (props: IProps) => {
             <Group grow preventGrowOverflow={false} wrap="wrap">
                 <Button
                     color="lime"
-                    leftSection={<TbQuestionMark size="1.25rem" />}
+                    leftSection={<TbQuestionMark size="20px" />}
                     onClick={helpDrawerHandlers.open}
                     size="xs"
                     variant="light"
@@ -83,7 +83,7 @@ export const UserActionGroupFeature = (props: IProps) => {
                     Help
                 </Button>
                 <Button
-                    leftSection={<PiArrowsClockwise size="1rem" />}
+                    leftSection={<PiArrowsClockwise size="16px" />}
                     loading={isLoading}
                     onClick={handleRefetch}
                     size="xs"
@@ -93,7 +93,7 @@ export const UserActionGroupFeature = (props: IProps) => {
                 </Button>
                 <Button
                     color="gray"
-                    leftSection={<PiExcludeSquare size="1rem" />}
+                    leftSection={<PiExcludeSquare size="16px" />}
                     loading={isLoading}
                     onClick={handleClearFilters}
                     size="xs"
@@ -103,7 +103,7 @@ export const UserActionGroupFeature = (props: IProps) => {
                 </Button>
 
                 <Button
-                    leftSection={<PiArrowsClockwise size="1rem" />}
+                    leftSection={<PiArrowsClockwise size="16px" />}
                     loading={isLoading}
                     onClick={handleResetTable}
                     size="xs"
@@ -114,7 +114,7 @@ export const UserActionGroupFeature = (props: IProps) => {
 
                 <Button
                     color="red"
-                    leftSection={<PiAnchorSimpleDuotone size="1rem" />}
+                    leftSection={<PiAnchorSimpleDuotone size="16px" />}
                     loading={isLoading}
                     onClick={bulkAllDrawerHandlers.open}
                     size="xs"
@@ -124,7 +124,7 @@ export const UserActionGroupFeature = (props: IProps) => {
                 </Button>
 
                 <Button
-                    leftSection={<PiPlus size="1rem" />}
+                    leftSection={<PiPlus size="16px" />}
                     onClick={handleOpenCreateUserModal}
                     size="xs"
                     variant="default"
@@ -164,24 +164,24 @@ export const UserActionGroupFeature = (props: IProps) => {
                             <Table.Tr>
                                 <Table.Td>
                                     <Group gap="xs">
-                                        <TbFilter size="1.5rem" />
-                                        <TbFilterOff size="1.5rem" />
+                                        <TbFilter size="24px" />
+                                        <TbFilterOff size="24px" />
                                     </Group>
                                 </Table.Td>
                                 <Table.Td>Toggle column filters to search and filter data</Table.Td>
                             </Table.Tr>
                             <Table.Tr>
                                 <Table.Td>
-                                    <TbColumns size="1.5rem" />
+                                    <TbColumns size="24px" />
                                 </Table.Td>
                                 <Table.Td>Show or hide specific columns</Table.Td>
                             </Table.Tr>
                             <Table.Tr>
                                 <Table.Td>
                                     <Group gap="xs">
-                                        <TbBaselineDensitySmall size="1.5rem" />
-                                        <TbBaselineDensityMedium size="1.5rem" />
-                                        <TbBaselineDensityLarge size="1.5rem" />
+                                        <TbBaselineDensitySmall size="24px" />
+                                        <TbBaselineDensityMedium size="24px" />
+                                        <TbBaselineDensityLarge size="24px" />
                                     </Group>
                                 </Table.Td>
                                 <Table.Td>Adjust row spacing density</Table.Td>
@@ -189,8 +189,8 @@ export const UserActionGroupFeature = (props: IProps) => {
                             <Table.Tr>
                                 <Table.Td>
                                     <Group gap="xs">
-                                        <TbMaximize size="1.5rem" />
-                                        <TbMinimize size="1.5rem" />
+                                        <TbMaximize size="24px" />
+                                        <TbMinimize size="24px" />
                                     </Group>
                                 </Table.Td>
                                 <Table.Td>Toggle fullscreen table view</Table.Td>

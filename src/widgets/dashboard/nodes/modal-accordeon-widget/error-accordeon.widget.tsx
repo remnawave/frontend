@@ -29,9 +29,7 @@ export const ModalAccordionWidget = (props: IProps) => {
     return (
         <Accordion defaultValue={accordionValue} key={node?.uuid} radius="md" variant="separated">
             <Accordion.Item value="info">
-                <Accordion.Control
-                    icon={<PiInfo color="var(--mantine-color-red-7)" size={'1.50rem'} />}
-                >
+                <Accordion.Control icon={<PiInfo color="var(--mantine-color-red-7)" size="24px" />}>
                     {t('error-accordeon.widget.important-note')}
                 </Accordion.Control>
                 <Accordion.Panel>
@@ -52,7 +50,7 @@ export const ModalAccordionWidget = (props: IProps) => {
                                         size="lg"
                                         variant="outline"
                                     >
-                                        {copied ? <PiCheck size="1rem" /> : <PiCopy size="1rem" />}
+                                        {copied ? <PiCheck size="16px" /> : <PiCopy size="16px" />}
                                     </ActionIcon>
                                 )}
                             </CopyButton>
@@ -63,7 +61,7 @@ export const ModalAccordionWidget = (props: IProps) => {
 
             {localStatusMessage && (
                 <Accordion.Item value="error">
-                    <Accordion.Control icon={<PiNetworkSlash color="#FF8787" size={'1.50rem'} />}>
+                    <Accordion.Control icon={<PiNetworkSlash color="#FF8787" size="24px" />}>
                         <Text fw={600}>{t('error-accordeon.widget.last-error-message')}</Text>
                     </Accordion.Control>
                     <Accordion.Panel>

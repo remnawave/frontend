@@ -141,7 +141,7 @@ export const NodeCardWidget = memo((props: IProps) => {
                     [classes.dragHandleActive]: isDragging
                 })}
             >
-                <PiDotsSixVertical color="white" size="1.5rem" />
+                <PiDotsSixVertical color="white" size="24px" />
             </Box>
 
             {!isMobile && (

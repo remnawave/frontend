@@ -42,7 +42,7 @@ export const UserIndentityCreationCard = (props: IProps) => {
                     label={t('login-form-feature.username')}
                     required
                     {...form.getInputProps('username')}
-                    leftSection={<PiUserDuotone size="1rem" />}
+                    leftSection={<PiUserDuotone size="16px" />}
                 />
             </Fieldset>
         </MotionWrapper>

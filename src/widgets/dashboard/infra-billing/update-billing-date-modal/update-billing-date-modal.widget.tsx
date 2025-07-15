@@ -74,6 +74,7 @@ export function UpdateBillingDateModalWidget() {
                         <TextInput
                             label={t('update-billing-date-modal.widget.current-date')}
                             mb="xs"
+                            readOnly
                             value={dayjs(new Date(billingNode.nextBillingAt)).format('D MMMM YYYY')}
                             w="100%"
                         />
@@ -81,6 +82,7 @@ export function UpdateBillingDateModalWidget() {
                         <TextInput
                             label={t('update-billing-date-modal.widget.new-date')}
                             mb="xs"
+                            readOnly
                             value={dayjs(selectedDate).format('D MMMM YYYY')}
                             w="100%"
                         />

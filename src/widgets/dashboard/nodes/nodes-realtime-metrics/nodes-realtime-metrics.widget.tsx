@@ -59,6 +59,7 @@ export function NodesRealtimeUsageMetrics() {
                 <motion.div
                     animate={{ opacity: 1, y: 0 }}
                     initial={{ opacity: 0, y: 0 }}
+                    key={card.title}
                     transition={{
                         duration: 0.3,
                         delay: index * 0.07,
@@ -69,7 +70,7 @@ export function NodesRealtimeUsageMetrics() {
                     <MetricCard.Root key={card.title}>
                         <Group wrap="nowrap">
                             <MetricCard.Icon c={card.color}>
-                                <card.icon size="2rem" />
+                                <card.icon size="32px" />
                             </MetricCard.Icon>
                             <Box miw={0}>
                                 <MetricCard.TextMuted truncate>{card.title}</MetricCard.TextMuted>

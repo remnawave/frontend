@@ -57,7 +57,7 @@ export function UsersMetrics() {
                 <MetricCard.Root key={card.title}>
                     <Group wrap="nowrap">
                         <MetricCard.Icon c={card.color} p="sm">
-                            <card.icon size="2rem" />
+                            <card.icon size="32px" />
                         </MetricCard.Icon>
                         <Stack align="self-start" gap="xs" miw={0} w="100%">
                             <MetricCard.TextMuted truncate>{card.title}</MetricCard.TextMuted>

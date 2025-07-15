@@ -287,7 +287,7 @@ export const DetailedUserInfoDrawerWidget = () => {
                                     >
                                         <Group justify="space-between">
                                             <Group gap="xs">
-                                                <PiTag size="1rem" />
+                                                <PiTag size="16px" />
                                                 <Text fw={600} size="sm">
                                                     {squad.name}
                                                 </Text>

@@ -79,7 +79,7 @@ export function InfraBillingNodesTableWidget() {
                 actions={
                     <Group grow preventGrowOverflow={false} wrap="wrap">
                         <Button
-                            leftSection={<PiArrowsClockwise size="1rem" />}
+                            leftSection={<PiArrowsClockwise size="16px" />}
                             loading={infraBillingNodesLoading}
                             onClick={() => {
                                 refetchInfraBillingNodes()
@@ -91,7 +91,7 @@ export function InfraBillingNodesTableWidget() {
                         </Button>
 
                         <Button
-                            leftSection={<PiPlus size="1rem" />}
+                            leftSection={<PiPlus size="16px" />}
                             onClick={() => {
                                 openModal(MODALS.CREATE_INFRA_BILLING_NODE_MODAL)
                             }}

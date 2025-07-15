@@ -1,4 +1,4 @@
-import { ActionIcon, Badge, Box, Checkbox, Group, Stack, Text } from '@mantine/core'
+import { ActionIcon, Badge, Box, Checkbox, Group, px, Stack, Text } from '@mantine/core'
 import { PiLock, PiProhibit, PiPulse, PiTag } from 'react-icons/pi'
 import { CSSProperties, useState } from 'react'
 import { useSortable } from '@dnd-kit/sortable'
@@ -107,9 +107,12 @@ export function HostCardWidget(props: IProps) {
                                     className={classes.mobileDragHandle}
                                     onClick={(e) => e.stopPropagation()}
                                 >
-                                    {!isFiltered && <RiDraggable size="1.2rem" />}
+                                    {!isFiltered && <RiDraggable size={px('1.2rem')} />}
                                     {isFiltered && (
-                                        <PiLock className={classes.lockedIcon} size="1.2rem" />
+                                        <PiLock
+                                            className={classes.lockedIcon}
+                                            size={px('1.2rem')}
+                                        />
                                     )}
                                 </Box>
                             </Group>
@@ -196,9 +199,9 @@ export function HostCardWidget(props: IProps) {
                         {...(isDragOverlay ? {} : listeners)}
                         className={classes.dragHandle}
                     >
-                        {!isFiltered && <RiDraggable color="white" size="1.5rem" />}
+                        {!isFiltered && <RiDraggable color="white" size="24px" />}
                         {isFiltered && (
-                            <PiLock className={classes.lockedIcon} color="white" size="1.5rem" />
+                            <PiLock className={classes.lockedIcon} color="white" size="24px" />
                         )}
                     </Box>
                 </Group>

@@ -145,7 +145,7 @@ export function CreateInfraBillingNodeModalWidget() {
                             'create-infra-billing-node.modal.widget.next-billing-at-description'
                         )}
                         highlightToday
-                        leftSection={<HiCalendar size="1rem" />}
+                        leftSection={<HiCalendar size="16px" />}
                         minDate={dayjs().subtract(1, 'day').toDate()}
                     />
 

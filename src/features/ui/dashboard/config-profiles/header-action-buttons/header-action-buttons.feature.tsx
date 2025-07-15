@@ -87,7 +87,7 @@ export const ConfigProfilesHeaderActionButtonsFeature = () => {
     return (
         <Group grow preventGrowOverflow={false} wrap="wrap">
             <Button
-                leftSection={<PiArrowsClockwise size="1rem" />}
+                leftSection={<PiArrowsClockwise size="16px" />}
                 loading={isFetching}
                 onClick={handleUpdate}
                 size="xs"
@@ -96,7 +96,7 @@ export const ConfigProfilesHeaderActionButtonsFeature = () => {
                 Update
             </Button>
 
-            <Button leftSection={<PiPlus size="1rem" />} onClick={open} size="xs" variant="default">
+            <Button leftSection={<PiPlus size="16px" />} onClick={open} size="xs" variant="default">
                 Create Config Profile
             </Button>
 

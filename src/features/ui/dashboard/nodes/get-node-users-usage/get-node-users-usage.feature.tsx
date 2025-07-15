@@ -17,7 +17,7 @@ export function GetNodeUsersUsageFeature(props: IProps) {
         <>
             <Menu.Item
                 color="grape"
-                leftSection={<PiChartBarDuotone size="1rem" />}
+                leftSection={<PiChartBarDuotone size="16px" />}
                 onClick={handlers.open}
             >
                 {t('get-user-usage.feature.show-usage')}

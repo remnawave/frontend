@@ -1,5 +1,5 @@
 import { PiTrendDown, PiTrendUp } from 'react-icons/pi'
-import { Text } from '@mantine/core'
+import { px, Text } from '@mantine/core'
 
 import { formatPercentage, match } from '@shared/utils/misc'
 
@@ -66,7 +66,7 @@ export function MetricCardTextTrend({ value, children }: MetricCardTextTrendProp
 
     return (
         <div className={containerClass}>
-            <Icon color={color} size="0.9rem" />
+            <Icon color={color} size={px('0.9rem')} />
             <Text className={classes.trendValue} component="span" style={{ color }}>
                 {valuePrinted}
             </Text>

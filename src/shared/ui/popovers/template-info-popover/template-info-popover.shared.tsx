@@ -19,7 +19,7 @@ export const TemplateInfoPopoverShared = (props: IProps) => {
                         alignItems: 'center'
                     }}
                 >
-                    <PiInfo size="1.25rem" />
+                    <PiInfo size="20px" />
                 </span>
             </Popover.Target>
             <Popover.Dropdown>
@@ -38,9 +38,9 @@ export const TemplateInfoPopoverShared = (props: IProps) => {
                                         key={key}
                                         leftSection={
                                             copied ? (
-                                                <PiCheck size="1rem" />
+                                                <PiCheck size="16px" />
                                             ) : (
-                                                <PiCopy size="1rem" />
+                                                <PiCopy size="16px" />
                                             )
                                         }
                                         onClick={copy}

@@ -472,7 +472,7 @@ export const StatisticNodesPage = () => {
                                     }}
                                 >
                                     <Stack align="center" gap={8}>
-                                        <PiEmpty size="1.5rem" />
+                                        <PiEmpty size="24px" />
                                         <Text c="dimmed" size="sm">
                                             {t('statistic-nodes.component.no-data-available')}
                                         </Text>
@@ -640,7 +640,7 @@ export const StatisticNodesPage = () => {
                             ) : (
                                 <Center>
                                     <Stack align="center" gap={5}>
-                                        <PiEmpty size="1.5rem" />
+                                        <PiEmpty size="24px" />
                                         <Text c="dimmed" size="sm">
                                             {t('statistic-nodes.component.no-data-available')}
                                         </Text>

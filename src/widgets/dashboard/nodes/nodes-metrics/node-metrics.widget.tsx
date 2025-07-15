@@ -8,6 +8,7 @@ import {
     Indicator,
     Loader,
     Paper,
+    px,
     SimpleGrid,
     Stack,
     Text,
@@ -48,7 +49,7 @@ const StatCard = memo(
         <MetricCard.Root>
             <Group wrap="nowrap">
                 <MetricCard.Icon c={color} p="sm">
-                    <Icon size="2rem" />
+                    <Icon size="32px" />
                 </MetricCard.Icon>
                 <Stack align="self-start" gap="xs" miw={0} w="100%">
                     <MetricCard.TextMuted truncate>{title}</MetricCard.TextMuted>
@@ -99,7 +100,7 @@ export const NodeMetricsWidget = () => {
                 <Center>
                     <Stack align="center" gap="md">
                         <ThemeIcon color="gray" size="xl" variant="light">
-                            <PiProhibitDuotone size="2rem" />
+                            <PiProhibitDuotone size="32px" />
                         </ThemeIcon>
                         <Text c="gray.5" size="lg">
                             No nodes metrics available
@@ -125,7 +126,7 @@ export const NodeMetricsWidget = () => {
                         <HoverCard position="bottom" shadow="lg" width={320} withArrow>
                             <HoverCard.Target>
                                 <ThemeIcon color="teal" size="md" variant="light">
-                                    <PiInfo size="1.2rem" />
+                                    <PiInfo size={px('1.2rem')} />
                                 </ThemeIcon>
                             </HoverCard.Target>
                             <HoverCard.Dropdown>
@@ -170,7 +171,7 @@ export const NodeMetricsWidget = () => {
             <Box>
                 <Group align="center" gap="md" mb="lg" wrap="nowrap">
                     <ThemeIcon color="indigo" size="lg" variant="light">
-                        <PiSpeedometer size="1.5rem" />
+                        <PiSpeedometer size="24px" />
                     </ThemeIcon>
                     <Title
                         c="white"
@@ -220,7 +221,7 @@ export const NodeMetricsWidget = () => {
             <Box>
                 <Group align="center" gap="md" mb="lg">
                     <ThemeIcon color="teal" size="lg" variant="light">
-                        <TbServer2 size="1.5rem" />
+                        <TbServer2 size="24px" />
                     </ThemeIcon>
                     <Title c="white" order={2}>
                         Node Details

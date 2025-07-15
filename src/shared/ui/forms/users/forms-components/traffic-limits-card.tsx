@@ -108,7 +108,7 @@ export const TrafficLimitsCard = <T extends CreateUserCommand.Request | UpdateUs
                         )}
                         key={form.key('trafficLimitStrategy')}
                         label={t('create-user-modal.widget.traffic-reset-strategy')}
-                        leftSection={<PiClockDuotone size="1rem" />}
+                        leftSection={<PiClockDuotone size="16px" />}
                         placeholder={t('create-user-modal.widget.pick-value')}
                         {...form.getInputProps('trafficLimitStrategy')}
                         styles={{

@@ -1,4 +1,4 @@
-import { Box, Button, Center, em, Group, Menu, Modal, Stack } from '@mantine/core'
+import { Box, Button, Center, em, Group, Menu, Modal, px, Stack } from '@mantine/core'
 import { PiFloppyDiskDuotone, PiQrCodeDuotone, PiXBold } from 'react-icons/pi'
 import { UpdateUserCommand } from '@remnawave/backend-contract'
 import { zodResolver } from 'mantine-form-zod-resolver'
@@ -342,7 +342,7 @@ export const ViewUserModal = () => {
                             <Menu keepMounted={true} position="top-end" shadow="md">
                                 <Menu.Target>
                                     <Button
-                                        leftSection={<TbDots size="1.2rem" />}
+                                        leftSection={<TbDots size={px('1.2rem')} />}
                                         size="sm"
                                         variant="outline"
                                     >
@@ -421,7 +421,7 @@ export const ViewUserModal = () => {
                             </Menu>
                             <Button
                                 color="teal"
-                                leftSection={<PiFloppyDiskDuotone size="1rem" />}
+                                leftSection={<PiFloppyDiskDuotone size="16px" />}
                                 loading={isUpdateUserPending}
                                 size="sm"
                                 type="submit"

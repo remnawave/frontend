@@ -6,6 +6,7 @@ import {
     Divider,
     Group,
     Paper,
+    px,
     SimpleGrid,
     Stack,
     Text,
@@ -57,7 +58,7 @@ export const NodeDetailsCard = memo(
                                 variant="light"
                             >
                                 <TbServer2
-                                    size="1.5rem"
+                                    size="24px"
                                     style={{
                                         filter: 'drop-shadow(0 1px 2px rgba(0,0,0,0.1))'
                                     }}
@@ -79,7 +80,7 @@ export const NodeDetailsCard = memo(
 
                         <Badge
                             color="teal"
-                            leftSection={<PiUsersDuotone size="0.9rem" />}
+                            leftSection={<PiUsersDuotone size={px('0.9rem')} />}
                             size="lg"
                             variant="light"
                         >
@@ -98,7 +99,7 @@ export const NodeDetailsCard = memo(
                             <Group align="center" gap="xs" mb="xs">
                                 <PiArrowDownDuotone
                                     color="var(--mantine-color-teal-4)"
-                                    size="1rem"
+                                    size="16px"
                                 />
                                 <Text c="teal.4" fw={500} size="sm">
                                     Inbound Traffic
@@ -111,7 +112,7 @@ export const NodeDetailsCard = memo(
                                         <Group align="center" justify="space-between" mb="xs">
                                             <Badge
                                                 color="teal"
-                                                leftSection={<PiTag size="0.8rem" />}
+                                                leftSection={<PiTag size={px('0.8rem')} />}
                                                 size="sm"
                                                 variant="outline"
                                             >
@@ -186,7 +187,7 @@ export const NodeDetailsCard = memo(
                             style={{ backgroundColor: 'rgba(59, 130, 246, 0.1)' }}
                         >
                             <Group align="center" gap="xs" mb="xs">
-                                <PiArrowUpDuotone color="var(--mantine-color-blue-4)" size="1rem" />
+                                <PiArrowUpDuotone color="var(--mantine-color-blue-4)" size="16px" />
                                 <Text c="blue.4" fw={500} size="sm">
                                     Outbound Traffic
                                 </Text>
@@ -197,7 +198,7 @@ export const NodeDetailsCard = memo(
                                         <Group align="center" justify="space-between" mb="xs">
                                             <Badge
                                                 color="blue"
-                                                leftSection={<PiTag size="0.8rem" />}
+                                                leftSection={<PiTag size={px('0.8rem')} />}
                                                 size="sm"
                                                 variant="outline"
                                             >

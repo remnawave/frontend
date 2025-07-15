@@ -1,4 +1,15 @@
-import { Button, Center, Divider, Group, Modal, Stack, Text, ThemeIcon, Title } from '@mantine/core'
+import {
+    Button,
+    Center,
+    Divider,
+    Group,
+    Modal,
+    px,
+    Stack,
+    Text,
+    ThemeIcon,
+    Title
+} from '@mantine/core'
 import { TbBaselineDensitySmall, TbColumns, TbMaximize, TbRotate2 } from 'react-icons/tb'
 import { PiDeviceMobile, PiMonitor, PiWarning } from 'react-icons/pi'
 import { useEffect, useState } from 'react'
@@ -43,7 +54,7 @@ export function MobileWarningOverlay() {
                         }}
                         variant="light"
                     >
-                        <PiWarning size="2rem" />
+                        <PiWarning size="32px" />
                     </ThemeIcon>
 
                     <Stack align="center" gap="sm">
@@ -62,7 +73,7 @@ export function MobileWarningOverlay() {
                         </Text>
 
                         <Group gap="xs">
-                            <TbColumns color="var(--mantine-color-gray-4)" size="1.2rem" />
+                            <TbColumns color="var(--mantine-color-gray-4)" size={px('1.2rem')} />
                             <Text c="gray.4" size="xs">
                                 Show or hide columns
                             </Text>
@@ -71,7 +82,7 @@ export function MobileWarningOverlay() {
                         <Group gap="xs">
                             <TbBaselineDensitySmall
                                 color="var(--mantine-color-gray-4)"
-                                size="1.2rem"
+                                size={px('1.2rem')}
                             />
                             <Text c="gray.4" size="xs">
                                 Adjust row spacing density
@@ -79,7 +90,7 @@ export function MobileWarningOverlay() {
                         </Group>
 
                         <Group gap="xs">
-                            <TbMaximize color="var(--mantine-color-gray-4)" size="1.2rem" />
+                            <TbMaximize color="var(--mantine-color-gray-4)" size={px('1.2rem')} />
                             <Text c="gray.4" size="xs">
                                 Toggle fullscreen table view
                             </Text>
@@ -91,7 +102,10 @@ export function MobileWarningOverlay() {
                     <Stack gap="sm" w="100%">
                         <Group gap="md" justify="center">
                             <Group gap="xs">
-                                <PiMonitor color="var(--mantine-color-blue-4)" size="1.2rem" />
+                                <PiMonitor
+                                    color="var(--mantine-color-blue-4)"
+                                    size={px('1.2rem')}
+                                />
                                 <Text c="blue.4" size="xs">
                                     Desktop recommended
                                 </Text>
@@ -102,7 +116,10 @@ export function MobileWarningOverlay() {
                             </Text>
 
                             <Group gap="xs">
-                                <TbRotate2 color="var(--mantine-color-teal-4)" size="1.2rem" />
+                                <TbRotate2
+                                    color="var(--mantine-color-teal-4)"
+                                    size={px('1.2rem')}
+                                />
                                 <Text c="teal.4" size="xs">
                                     Rotate device
                                 </Text>
@@ -113,7 +130,7 @@ export function MobileWarningOverlay() {
                     <Button
                         color="orange"
                         fullWidth
-                        leftSection={<PiDeviceMobile size="1rem" />}
+                        leftSection={<PiDeviceMobile size="16px" />}
                         onClick={handleClose}
                         size="md"
                         variant="light"

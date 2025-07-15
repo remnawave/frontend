@@ -421,7 +421,7 @@ export const UserUsageModalWidget = (props: IProps) => {
                         }}
                     >
                         <Stack align="center" gap={8}>
-                            <PiEmpty size="1.5rem" />
+                            <PiEmpty size="24px" />
                             <Text c="dimmed" size="sm">
                                 {t('user-usage-modal.widget.no-data-available')}
                             </Text>
@@ -620,7 +620,7 @@ export const UserUsageModalWidget = (props: IProps) => {
                             {!isLoading && !topNodesWithUsage.length && (
                                 <Center>
                                     <Stack align="center" gap={5}>
-                                        <PiEmpty size="1.5rem" />
+                                        <PiEmpty size="24px" />
                                         <Text c="dimmed" size="sm">
                                             {t('user-usage-modal.widget.no-data-available')}
                                         </Text>

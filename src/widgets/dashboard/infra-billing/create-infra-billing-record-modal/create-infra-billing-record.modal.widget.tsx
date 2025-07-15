@@ -135,7 +135,7 @@ export function CreateInfraBillingRecordDrawerWidget() {
                             'create-infra-billing-record.modal.widget.the-date-and-time-when-the-bill-was-paid'
                         )}
                         highlightToday
-                        leftSection={<HiCalendar size="1rem" />}
+                        leftSection={<HiCalendar size="16px" />}
                         maxDate={dayjs().add(1, 'day').toDate()}
                     />
 
@@ -148,7 +148,7 @@ export function CreateInfraBillingRecordDrawerWidget() {
                         fixedDecimalScale
                         key={form.key('amount')}
                         label={t('create-infra-billing-record.modal.widget.amount')}
-                        leftSection={<HiCurrencyDollar size="1.25rem" />}
+                        leftSection={<HiCurrencyDollar size="20px" />}
                         min={0.01}
                         required
                         thousandSeparator=","

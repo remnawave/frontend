@@ -222,9 +222,9 @@ export const InternalSquadsDrawer = (props: IProps) => {
                                             variant="subtle"
                                         >
                                             {copied ? (
-                                                <PiCheck size="1rem" />
+                                                <PiCheck size="16px" />
                                             ) : (
-                                                <PiCopy size="1rem" />
+                                                <PiCopy size="16px" />
                                             )}
                                         </ActionIcon>
                                     )}

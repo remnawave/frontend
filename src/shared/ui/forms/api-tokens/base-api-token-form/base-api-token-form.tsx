@@ -24,7 +24,7 @@ export const BaseApiTokenForm = <T extends CreateApiTokenCommand.Request>(props:
             <Group gap="xs" justify="end" pt={15} w="100%">
                 <Button
                     color="blue"
-                    leftSection={<PiFloppyDiskDuotone size="1rem" />}
+                    leftSection={<PiFloppyDiskDuotone size="16px" />}
                     loading={isCreateApiTokenPending}
                     size="md"
                     type="submit"

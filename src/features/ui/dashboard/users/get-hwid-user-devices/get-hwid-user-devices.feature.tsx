@@ -148,9 +148,9 @@ export function GetHwidUserDevicesFeature(props: IProps) {
                                                     variant="subtle"
                                                 >
                                                     {copied ? (
-                                                        <PiCheck size="1rem" />
+                                                        <PiCheck size="16px" />
                                                     ) : (
-                                                        <PiCopy size="1rem" />
+                                                        <PiCopy size="16px" />
                                                     )}
                                                 </ActionIcon>
                                             )}
@@ -179,9 +179,9 @@ export function GetHwidUserDevicesFeature(props: IProps) {
                                                     variant="subtle"
                                                 >
                                                     {copied ? (
-                                                        <PiCheck size="1rem" />
+                                                        <PiCheck size="16px" />
                                                     ) : (
-                                                        <PiCopy size="1rem" />
+                                                        <PiCopy size="16px" />
                                                     )}
                                                 </ActionIcon>
                                             )}
@@ -213,9 +213,9 @@ export function GetHwidUserDevicesFeature(props: IProps) {
                                                     variant="subtle"
                                                 >
                                                     {copied ? (
-                                                        <PiCheck size="1rem" />
+                                                        <PiCheck size="16px" />
                                                     ) : (
-                                                        <PiCopy size="1rem" />
+                                                        <PiCopy size="16px" />
                                                     )}
                                                 </ActionIcon>
                                             )}
@@ -248,9 +248,9 @@ export function GetHwidUserDevicesFeature(props: IProps) {
                                                     variant="subtle"
                                                 >
                                                     {copied ? (
-                                                        <PiCheck size="1rem" />
+                                                        <PiCheck size="16px" />
                                                     ) : (
-                                                        <PiCopy size="1rem" />
+                                                        <PiCopy size="16px" />
                                                     )}
                                                 </ActionIcon>
                                             )}
@@ -279,7 +279,7 @@ export function GetHwidUserDevicesFeature(props: IProps) {
                             <Button
                                 color="red"
                                 fullWidth
-                                leftSection={<PiTrash size="1rem" />}
+                                leftSection={<PiTrash size="16px" />}
                                 onClick={() => handleDeleteDevice(device.hwid)}
                                 variant="light"
                             >
@@ -317,7 +317,7 @@ export function GetHwidUserDevicesFeature(props: IProps) {
                 <Accordion mb="md" variant="separated">
                     <Accordion.Item value="devices">
                         <Accordion.Control
-                            icon={<TbInfoCircle color="var(--mantine-color-red-5)" size="1.5rem" />}
+                            icon={<TbInfoCircle color="var(--mantine-color-red-5)" size="24px" />}
                         >
                             <Text fw={500}>
                                 {t('get-hwid-user-devices.feature.important-note')}
@@ -370,7 +370,7 @@ export function GetHwidUserDevicesFeature(props: IProps) {
             </Drawer>
 
             <Menu.Item
-                leftSection={<TbDevices color="var(--mantine-color-indigo-5)" size="1rem" />}
+                leftSection={<TbDevices color="var(--mantine-color-indigo-5)" size="16px" />}
                 onClick={handlers.open}
             >
                 {t('get-hwid-user-devices.feature.hwid-devices')}

@@ -71,7 +71,7 @@ export const HeadersManager = (props: HeadersManagerProps) => {
                         size="lg"
                         variant="light"
                     >
-                        <PiTrash size="1rem" />
+                        <PiTrash size="16px" />
                     </ActionIcon>
                     <TextInput
                         onChange={(e) => updateLocalHeaderKey(index, e.target.value)}
@@ -89,7 +89,7 @@ export const HeadersManager = (props: HeadersManagerProps) => {
                 </Group>
             ))}
             <Button
-                leftSection={<PiPlus size="1rem" />}
+                leftSection={<PiPlus size="16px" />}
                 mt="xs"
                 onClick={addLocalHeader}
                 size="sm"

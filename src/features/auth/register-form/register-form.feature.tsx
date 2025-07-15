@@ -138,7 +138,7 @@ export const RegisterFormFeature = () => {
 
                         <Button
                             fullWidth
-                            leftSection={<PiShuffleDuotone size="1rem" />}
+                            leftSection={<PiShuffleDuotone size="16px" />}
                             mt="xl"
                             onClick={handleGeneratePassword}
                             size="md"
@@ -150,7 +150,7 @@ export const RegisterFormFeature = () => {
 
                     <Button
                         fullWidth
-                        leftSection={<PiSignpostDuotone size="1rem" />}
+                        leftSection={<PiSignpostDuotone size="16px" />}
                         loading={isLoading}
                         mt="xl"
                         size="md"

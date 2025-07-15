@@ -61,7 +61,7 @@ export function GetUserSubscriptionLinksFeature(props: IProps) {
                                     onClick={copy}
                                     variant="subtle"
                                 >
-                                    {copied ? <PiCheck size="1rem" /> : <PiCopy size="1rem" />}
+                                    {copied ? <PiCheck size="16px" /> : <PiCopy size="16px" />}
                                 </ActionIcon>
                             )}
                         </CopyButton>
@@ -95,7 +95,7 @@ export function GetUserSubscriptionLinksFeature(props: IProps) {
             </Drawer>
 
             <Menu.Item
-                leftSection={<PiLinkBreakDuotone color="var(--mantine-color-teal-5)" size="1rem" />}
+                leftSection={<PiLinkBreakDuotone color="var(--mantine-color-teal-5)" size="16px" />}
                 onClick={handlers.open}
             >
                 {t('get-user-subscription-links.feature.subscription-links')}

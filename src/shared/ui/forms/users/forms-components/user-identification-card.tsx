@@ -53,9 +53,9 @@ export const UserIdentificationCard = (props: IProps) => {
                                 label="Username"
                                 leftSection={
                                     copied ? (
-                                        <PiCheck color="var(--mantine-color-teal-6)" size="1rem" />
+                                        <PiCheck color="var(--mantine-color-teal-6)" size="16px" />
                                     ) : (
-                                        <PiUserDuotone size="1rem" />
+                                        <PiUserDuotone size="16px" />
                                     )
                                 }
                                 onClick={copy}
@@ -74,7 +74,7 @@ export const UserIdentificationCard = (props: IProps) => {
                     <TextInput
                         disabled
                         label={t('view-user-modal.widget.subscription-short-uuid')}
-                        leftSection={<PiLinkDuotone size="1rem" />}
+                        leftSection={<PiLinkDuotone size="16px" />}
                         rightSection={
                             <CopyButton timeout={2000} value={user.shortUuid}>
                                 {({ copied, copy }) => (
@@ -83,7 +83,7 @@ export const UserIdentificationCard = (props: IProps) => {
                                         onClick={copy}
                                         variant="subtle"
                                     >
-                                        {copied ? <PiCheck size="1rem" /> : <PiCopy size="1rem" />}
+                                        {copied ? <PiCheck size="16px" /> : <PiCopy size="16px" />}
                                     </ActionIcon>
                                 )}
                             </CopyButton>
@@ -132,7 +132,7 @@ export const UserIdentificationCard = (props: IProps) => {
                                 </HoverCard>
                             </Group>
                         }
-                        leftSection={<PiLinkDuotone size="1rem" />}
+                        leftSection={<PiLinkDuotone size="16px" />}
                         rightSection={
                             <CopyButton timeout={2000} value={userSubscriptionUrlMemo || ''}>
                                 {({ copied, copy }) => (
@@ -141,7 +141,7 @@ export const UserIdentificationCard = (props: IProps) => {
                                         onClick={copy}
                                         variant="subtle"
                                     >
-                                        {copied ? <PiCheck size="1rem" /> : <PiCopy size="1rem" />}
+                                        {copied ? <PiCheck size="16px" /> : <PiCopy size="16px" />}
                                     </ActionIcon>
                                 )}
                             </CopyButton>

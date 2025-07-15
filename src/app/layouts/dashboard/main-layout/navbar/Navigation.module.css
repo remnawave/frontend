@@ -81,8 +81,8 @@
     }
 
     & svg {
-        height: 1.25rem;
-        width: 1.25rem;
+        height: 20px;
+        width: 20px;
         transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     }
 

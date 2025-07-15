@@ -259,7 +259,7 @@ export const CreateUserModalWidget = () => {
                     <ModalFooter>
                         <Button
                             color="teal"
-                            leftSection={<PiFloppyDiskDuotone size="1rem" />}
+                            leftSection={<PiFloppyDiskDuotone size="16px" />}
                             loading={isDataSubmitting}
                             size="sm"
                             type="submit"

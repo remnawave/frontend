@@ -159,7 +159,7 @@ export const EditNodeByUuidModalWidget = () => {
                     <ModalFooter>
                         <Button
                             color="teal"
-                            leftSection={<PiXBold size="1rem" />}
+                            leftSection={<PiXBold size="16px" />}
                             onClick={() => handleClose(true)}
                             size="sm"
                             variant="outline"

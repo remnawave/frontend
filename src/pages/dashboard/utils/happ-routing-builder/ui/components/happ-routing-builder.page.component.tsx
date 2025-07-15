@@ -1,4 +1,4 @@
-import { Avatar, Button, Container, Group, Paper, Stack, Text, Title } from '@mantine/core'
+import { Avatar, Button, Container, Group, Paper, px, Stack, Text, Title } from '@mantine/core'
 import { PiBookOpenTextDuotone } from 'react-icons/pi'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
@@ -90,7 +90,7 @@ export const HappRoutingBuilderPageComponent = () => {
                             <Group>
                                 <Button
                                     component={Link}
-                                    leftSection={<PiBookOpenTextDuotone size="1.2rem" />}
+                                    leftSection={<PiBookOpenTextDuotone size={px('1.2rem')} />}
                                     rel="noopener noreferrer"
                                     target="_blank"
                                     to={'https://www.happ.su/main/developer-documentation/routing'}

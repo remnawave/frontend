@@ -100,7 +100,7 @@ export const HostsFiltersFeature = (props: IProps) => {
                     <Select
                         clearable
                         data={configProfileOptions}
-                        leftSection={<PiBookmarks size="1rem" />}
+                        leftSection={<PiBookmarks size="16px" />}
                         leftSectionPointerEvents="none"
                         onChange={handleConfigProfileChange}
                         placeholder="Select config profile"
@@ -113,7 +113,7 @@ export const HostsFiltersFeature = (props: IProps) => {
                         clearable
                         data={inboundOptions}
                         disabled={!configProfileFilter}
-                        leftSection={<PiTag size="1rem" />}
+                        leftSection={<PiTag size="16px" />}
                         leftSectionPointerEvents="none"
                         onChange={handleInboundChange}
                         placeholder="Select inbound"

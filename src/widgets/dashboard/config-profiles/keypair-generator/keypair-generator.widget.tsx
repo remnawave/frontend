@@ -1,4 +1,14 @@
-import { ActionIcon, Button, Code, CopyButton, Divider, Group, Stack, Text } from '@mantine/core'
+import {
+    ActionIcon,
+    Button,
+    Code,
+    CopyButton,
+    Divider,
+    Group,
+    px,
+    Stack,
+    Text
+} from '@mantine/core'
 import { PiCheck, PiCopy, PiKey } from 'react-icons/pi'
 import { generateKeyPair } from '@stablelib/x25519'
 import { encodeURLSafe } from '@stablelib/base64'
@@ -33,7 +43,7 @@ export const KeypairGeneratorWidget = () => {
             <Button
                 fullWidth
                 gradient={{ from: 'blue', to: 'cyan' }}
-                leftSection={<PiKey size="1.2rem" />}
+                leftSection={<PiKey size={px('1.2rem')} />}
                 onClick={generatePublicAndPrivate}
                 size="sm"
                 variant="outline"
@@ -57,7 +67,7 @@ export const KeypairGeneratorWidget = () => {
                                     size="sm"
                                     variant="light"
                                 >
-                                    {copied ? <PiCheck size="1rem" /> : <PiCopy size="1rem" />}
+                                    {copied ? <PiCheck size="16px" /> : <PiCopy size="16px" />}
                                 </ActionIcon>
                             )}
                         </CopyButton>
@@ -88,7 +98,7 @@ export const KeypairGeneratorWidget = () => {
                                     size="sm"
                                     variant="light"
                                 >
-                                    {copied ? <PiCheck size="1rem" /> : <PiCopy size="1rem" />}
+                                    {copied ? <PiCheck size="16px" /> : <PiCopy size="16px" />}
                                 </ActionIcon>
                             )}
                         </CopyButton>
@@ -124,7 +134,7 @@ export const KeypairGeneratorWidget = () => {
                                     size="sm"
                                     variant="light"
                                 >
-                                    {copied ? <PiCheck size="1rem" /> : <PiCopy size="1rem" />}
+                                    {copied ? <PiCheck size="16px" /> : <PiCopy size="16px" />}
                                 </ActionIcon>
                             )}
                         </CopyButton>

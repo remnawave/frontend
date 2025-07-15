@@ -16,7 +16,7 @@ export function GetUserUsageFeature(props: IProps) {
     return (
         <>
             <Menu.Item
-                leftSection={<PiChartBarDuotone color="var(--mantine-color-blue-5)" size="1rem" />}
+                leftSection={<PiChartBarDuotone color="var(--mantine-color-blue-5)" size="16px" />}
                 onClick={handlers.open}
             >
                 {t('get-user-usage.feature.show-usage')}

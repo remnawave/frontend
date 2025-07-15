@@ -44,7 +44,7 @@ export function ContactInformationCard<
                         hideControls
                         key={form.key('telegramId')}
                         label="Telegram ID"
-                        leftSection={<PiTelegramLogoDuotone size="1rem" />}
+                        leftSection={<PiTelegramLogoDuotone size="16px" />}
                         placeholder="Enter user's Telegram ID (optional)"
                         {...form.getInputProps('telegramId')}
                         styles={{
@@ -55,7 +55,7 @@ export function ContactInformationCard<
                     <TextInput
                         key={form.key('email')}
                         label="Email"
-                        leftSection={<PiEnvelopeDuotone size="1rem" />}
+                        leftSection={<PiEnvelopeDuotone size="16px" />}
                         placeholder="Enter user's email (optional)"
                         {...form.getInputProps('email')}
                         styles={{

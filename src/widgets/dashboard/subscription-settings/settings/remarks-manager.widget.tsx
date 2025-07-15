@@ -82,7 +82,7 @@ export const RemarksManager = ({
                         size="lg"
                         variant="light"
                     >
-                        <PiTrash size="1rem" />
+                        <PiTrash size="16px" />
                     </ActionIcon>
                     <TextInput
                         leftSection={<TemplateInfoPopoverShared showHostDescription={false} />}
@@ -94,7 +94,7 @@ export const RemarksManager = ({
                 </Group>
             ))}
             <Button
-                leftSection={<PiPlus size="1rem" />}
+                leftSection={<PiPlus size="16px" />}
                 mt="xs"
                 onClick={addLocalRemark}
                 size="sm"

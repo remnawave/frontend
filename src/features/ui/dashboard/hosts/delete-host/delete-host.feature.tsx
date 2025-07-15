@@ -33,7 +33,7 @@ export function DeleteHostFeature() {
                 onClick={handleDeleteHost}
                 size="xl"
             >
-                <PiTrashDuotone size="1.5rem" />
+                <PiTrashDuotone size="24px" />
             </ActionIcon>
         </Tooltip>
     )

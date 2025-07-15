@@ -7,6 +7,7 @@ import {
     HoverCard,
     JsonInput,
     NumberInput,
+    px,
     Select,
     Stack,
     Switch,
@@ -247,7 +248,7 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
                     <Button
                         onClick={() => setAdvancedOpened(!advancedOpened)}
                         rightSection={
-                            advancedOpened ? <PiCaretUp size="1rem" /> : <PiCaretDown size="1rem" />
+                            advancedOpened ? <PiCaretUp size="16px" /> : <PiCaretDown size="16px" />
                         }
                         variant="subtle"
                     >
@@ -326,7 +327,7 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
                                                 alignItems: 'center'
                                             }}
                                         >
-                                            <PiInfo size="1.25rem" />
+                                            <PiInfo size="20px" />
                                         </span>
                                     </Tooltip>
                                 }
@@ -442,7 +443,7 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
                     {handleCloneHost && (
                         <Button
                             color="blue"
-                            leftSection={<PiCopyDuotone size="1rem" />}
+                            leftSection={<PiCopyDuotone size="16px" />}
                             loading={isSubmitting}
                             onClick={handleCloneHost}
                             size="md"
@@ -455,7 +456,7 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
                     <Button
                         color="blue"
                         disabled={!form.isValid() || !form.isDirty() || !form.isTouched()}
-                        leftSection={<PiFloppyDiskDuotone size="1rem" />}
+                        leftSection={<PiFloppyDiskDuotone size="16px" />}
                         loading={isSubmitting}
                         size="md"
                         type="submit"
@@ -489,7 +490,7 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
 
                     <Button
                         color="gray"
-                        leftSection={<PiArrowUpDuotone size="1.2rem" />}
+                        leftSection={<PiArrowUpDuotone size={px('1.2rem')} />}
                         onClick={() => {
                             // @ts-expect-error -- TODO: fix this
                             form.setFieldValue('xHttpExtraParams', pasteBasicXHttpExtraParams)

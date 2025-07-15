@@ -55,6 +55,7 @@ export function StatsWidget() {
                         color={stat.color}
                         icon={stat.icon}
                         isLoading={isLoading}
+                        key={index}
                         subtitle={stat.subtitle}
                         title={stat.title}
                         value={stat.value}

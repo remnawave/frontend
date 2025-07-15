@@ -79,11 +79,7 @@ export const ApiTokenCardWidget = forwardRef((props: IProps, ref: ForwardedRef<H
                     <Button
                         color={clipboard.copied ? 'teal' : 'gray'}
                         leftSection={
-                            clipboard.copied ? (
-                                <PiCheck size={'1.25rem'} />
-                            ) : (
-                                <PiCopy size={'1.25rem'} />
-                            )
+                            clipboard.copied ? <PiCheck size="20px" /> : <PiCopy size="20px" />
                         }
                         onClick={handleCopy}
                         size="xs"
@@ -93,7 +89,7 @@ export const ApiTokenCardWidget = forwardRef((props: IProps, ref: ForwardedRef<H
                     </Button>
                     <Button
                         color="red"
-                        leftSection={<PiTrash size={'1.25rem'} />}
+                        leftSection={<PiTrash size="20px" />}
                         loading={isDeletingApiToken}
                         onClick={handleDelete}
                         size="xs"

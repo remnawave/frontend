@@ -29,16 +29,16 @@ export function ToggleNodeStatusButtonFeature(props: IProps) {
 
     let buttonLabel = ''
     let color = 'blue'
-    let icon = <PiTrashDuotone size="1rem" />
+    let icon = <PiTrashDuotone size="16px" />
 
     if (node.isDisabled) {
         color = 'teal'
         buttonLabel = t('toggle-node-status-button.feature.enable')
-        icon = <PiCellSignalFullDuotone size="1rem" />
+        icon = <PiCellSignalFullDuotone size="16px" />
     } else {
         color = 'red'
         buttonLabel = t('toggle-node-status-button.feature.disable')
-        icon = <PiCellSignalSlashDuotone size="1rem" />
+        icon = <PiCellSignalSlashDuotone size="16px" />
     }
 
     const handleToggleUserStatus = async () => {

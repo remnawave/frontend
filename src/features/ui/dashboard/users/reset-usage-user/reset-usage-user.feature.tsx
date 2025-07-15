@@ -49,7 +49,7 @@ export function ResetUsageUserFeature(props: IProps) {
                 ) : (
                     <PiClockCounterClockwiseDuotone
                         color="var(--mantine-color-blue-5)"
-                        size="1rem"
+                        size="16px"
                     />
                 )
             }

@@ -1,5 +1,5 @@
 import { PiClockClockwise, PiNotchesDuotone, PiUserMinus } from 'react-icons/pi'
-import { Button, Group, Paper, Stack, Text } from '@mantine/core'
+import { Button, Group, Paper, px, Stack, Text } from '@mantine/core'
 import { useTranslation } from 'react-i18next'
 import { useMemo, useState } from 'react'
 import { modals } from '@mantine/modals'
@@ -169,7 +169,7 @@ export const BulkUserActionsActionsTabFeature = (props: IProps) => {
                 <Stack>
                     <Group justify="apart">
                         <Group>
-                            <PiNotchesDuotone color="cyan" size="1.2rem" />
+                            <PiNotchesDuotone color="cyan" size={px('1.2rem')} />
                             <Text>Change Active Internal Squads</Text>
                         </Group>
                         <InternalSquadsListWidget
@@ -210,7 +210,7 @@ export const BulkUserActionsActionsTabFeature = (props: IProps) => {
                 <Stack>
                     <Group justify="apart">
                         <Group>
-                            <PiClockClockwise color="cyan" size="1.2rem" />
+                            <PiClockClockwise color="cyan" size={px('1.2rem')} />
                             <Text>{t('bulk-user-actions.actions.tab.feature.reset-traffic')}</Text>
                         </Group>
                         <Button
@@ -234,7 +234,7 @@ export const BulkUserActionsActionsTabFeature = (props: IProps) => {
                 <Stack>
                     <Group justify="apart">
                         <Group>
-                            <PiUserMinus color="orange" size="1.2rem" />
+                            <PiUserMinus color="orange" size={px('1.2rem')} />
                             <Text>
                                 {t('bulk-user-actions.actions.tab.feature.revoke-subscription')}
                             </Text>

@@ -26,7 +26,7 @@ export const HeaderActionButtonsFeature = () => {
     return (
         <Group grow preventGrowOverflow={false} wrap="wrap">
             <Button
-                leftSection={<PiArrowsClockwise size="1rem" />}
+                leftSection={<PiArrowsClockwise size="16px" />}
                 loading={isFetching}
                 onClick={handleUpdate}
                 size="xs"
@@ -36,7 +36,7 @@ export const HeaderActionButtonsFeature = () => {
             </Button>
 
             <Button
-                leftSection={<PiPlus size="1rem" />}
+                leftSection={<PiPlus size="16px" />}
                 onClick={handleCreate}
                 size="xs"
                 variant="default"
