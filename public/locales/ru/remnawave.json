@@ -345,7 +345,7 @@
         "port-description-line-2": "In most cases, must match the port of selected inbound.",
         "sni-description-line-1": "SNI is a server name indication.",
         "sni-description-line-2": "If not specified, value from config's inbound will be used.",
-        "host-visability": "Host Visability",
+        "host-visibility": "Host Visibility",
         "server-description-description": "Только для приложения Happ.",
         "select-one-inbound-to-apply-to-the-host": "Select one inbound to apply to the host",
         "server-description-header": "Server Description",

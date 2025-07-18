@@ -272,8 +272,8 @@
             "disable-hwid-limit": "Disable HWID Limit",
             "hwid-device-limit": "HWID Device Limit",
             "expire-at-description": "The date and time when the user's subscription will expire.",
-            "internal-squads-description": "Specify internal squads that will be assigned to the user",
-            "internal-squads": "Internal squads"
+            "internal-squads": "Internal squads",
+            "internal-squads-description": "Specify which internal squads the user will be a member of."
         }
     },
     "login-form-feature": {
@@ -345,11 +345,11 @@
         "port-description-line-2": "In most cases, must match the port of selected inbound.",
         "sni-description-line-1": "SNI stands for Server Name Indication.",
         "sni-description-line-2": "If not specified, the value from config's inbound will be used.",
-        "host-visability": "Host Visability",
-        "select-one-inbound-to-apply-to-the-host": "Select one inbound to apply to the host",
+        "host-visibility": "Host Visibility",
         "server-description-description": "Only for Happ.",
+        "select-one-inbound-to-apply-to-the-host": "Select an inbound to apply to the host",
         "server-description-header": "Server Description",
-        "server-description-line-1": "This feature fill only with Happ with ProviderID value. Please, refer to",
+        "server-description-line-1": "This feature works only with Happ with the ProviderID value. Please, refer to",
         "server-description-line-2": "Happ documentation",
         "server-description-line-3": "for more information.",
         "server-description-line-4": "Remnawave will encode this value to base64. Do not place encoded value here.",
@@ -600,8 +600,8 @@
             "update-settings": "Update settings",
             "enabled": "Enabled",
             "disabled": "Disabled",
-            "profile-webpage-url-description": "Used by some clients. Enabled by default, domain obtained from SUB_PUBLIC_DOMAIN .env variable.",
             "profile-webpage-url": "Profile Webpage URL",
+            "profile-webpage-url-description": "Used by some clients. Enabled by default, domain obtained from SUB_PUBLIC_DOMAIN .env variable.",
             "serve-json-at-base-subscription": "Serve JSON at base subscription",
             "serve-json-description": "Serve JSON configurations at the base subscription path (without having to append /json). If the client supports it, it will be served JSON, otherwise it will be served as usual.",
             "add-username-to-base-subscription": "Add #username to base subscription",
@@ -1076,10 +1076,10 @@
                 "enter-provider-name": "Enter provider name",
                 "favicon-link": "Favicon Link",
                 "enter-favicon-link": "Enter favicon link",
-                "favicon-link-description": "The favicon link is the link to the favicon of the provider. It is used to display the favicon of the provider in the UI. You can just enter the domain name.",
+                "favicon-link-description": "A link to the favicon of the provider. It is used to display the favicon of the provider in the UI. You can enter only the domain name.",
                 "login-url": "Login URL",
                 "enter-login-url": "Enter login URL",
-                "login-url-description": "The login URL is the URL of the login page of the provider. It will help you quickly go to the login page of the provider.",
+                "login-url-description": "The URL of the login page of the provider. It will help you to quickly move to the login page of the provider.",
                 "save-changes": "Save Changes"
             }
         }
@@ -1105,8 +1105,8 @@
             "cancel": "Cancel",
             "refresh": "Refresh",
             "create-infra-provider": "Create Infra Provider",
-            "list-of-all-infra-providers": "List of all infra providers",
             "infra-providers": "Infra Providers",
+            "list-of-all-infra-providers": "List of all infra providers",
             "no-providers-found": "No providers found."
         }
     },
@@ -1194,7 +1194,7 @@
                 "please-select-a-provider-and-billing-node": "Please select a provider and billing node",
                 "billing-node": "Billing Node",
                 "next-billing-at": "Next Billing At",
-                "next-billing-at-description": "The date and time when the billing node will be billed. Remnawave will notify you about upcoming billing.",
+                "next-billing-at-description": "The date and time for the next billing of this node. Remnawave will notify you about upcoming billing.",
                 "create": "Create"
             }
         }

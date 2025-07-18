@@ -345,7 +345,7 @@
         "port-description-line-2": "在大多数情况下，必须与所选入站的端口匹配。",
         "sni-description-line-1": "SNI 代表服务器名称。",
         "sni-description-line-2": "如果未指定，将使用入站配置中的值。",
-        "host-visability": "Host Visability",
+        "host-visibility": "Host Visibility",
         "server-description-description": "Only for Happ.",
         "select-one-inbound-to-apply-to-the-host": "Select one inbound to apply to the host",
         "server-description-header": "Server Description",
