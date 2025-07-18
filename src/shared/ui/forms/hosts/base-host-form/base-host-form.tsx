@@ -152,7 +152,7 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
             <Stack gap="md">
                 <Group gap="xs" justify="space-between">
                     <Text fw={500} size="sm">
-                        {t('base-host-form.host-visability')}
+                        {t('base-host-form.host-visibility')}
                     </Text>
                     <Switch
                         color="teal.8"
