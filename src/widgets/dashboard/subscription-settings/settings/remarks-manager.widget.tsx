@@ -8,9 +8,10 @@ import {
     TextInput,
     ThemeIcon
 } from '@mantine/core'
+import { useCallback, useEffect, useState } from 'react'
+import { useDebouncedValue } from '@mantine/hooks'
 import { PiPlus, PiTrash } from 'react-icons/pi'
 import { useTranslation } from 'react-i18next'
-import { useEffect, useState } from 'react'
 
 import { TemplateInfoPopoverShared } from '@shared/ui/popovers/template-info-popover/template-info-popover.shared'
 
@@ -28,38 +29,37 @@ export const RemarksManager = ({
     title: string
 }) => {
     const [localRemarks, setLocalRemarks] = useState<string[]>(initialRemarks)
+    const [debouncedRemarks] = useDebouncedValue(localRemarks, 300)
     const { t } = useTranslation()
 
     useEffect(() => {
-        if (JSON.stringify(initialRemarks) !== JSON.stringify(localRemarks)) {
-            setLocalRemarks(initialRemarks)
-        }
+        setLocalRemarks(initialRemarks)
     }, [initialRemarks])
 
     useEffect(() => {
-        onChange(localRemarks)
-    }, [localRemarks, onChange])
+        onChange(debouncedRemarks)
+    }, [debouncedRemarks, onChange])
 
-    const addLocalRemark = () => {
+    const addLocalRemark = useCallback(() => {
         setLocalRemarks((prev) => [...prev, ''])
-    }
+    }, [])
 
-    const removeLocalRemark = (index: number) => {
+    const removeLocalRemark = useCallback((index: number) => {
         setLocalRemarks((prev) => {
             const newRemarks = [...prev]
             newRemarks.splice(index, 1)
             if (newRemarks.length === 0) newRemarks.push('')
             return newRemarks
         })
-    }
+    }, [])
 
-    const updateLocalRemark = (index: number, value: string) => {
+    const updateLocalRemark = useCallback((index: number, value: string) => {
         setLocalRemarks((prev) => {
             const newRemarks = [...prev]
             newRemarks[index] = value
             return newRemarks
         })
-    }
+    }, [])
 
     return (
         <Paper p="sm" radius="md" shadow="xs" withBorder>

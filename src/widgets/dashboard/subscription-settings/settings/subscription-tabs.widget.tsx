@@ -70,7 +70,7 @@ export const SubscriptionTabs = ({
 
     return (
         <form key="subscription-settings-form" onSubmit={handleSubmit}>
-            <Container p={0} size="xl">
+            <Container p={0} pb="lg" size="xl">
                 <Stack gap="xl">
                     <Tabs
                         color="cyan"
