@@ -298,7 +298,8 @@ export const MultiSelectHostsFeature = (props: IProps) => {
                                 if (!configProfileField.getValue() || !inboundField.getValue()) {
                                     notifications.show({
                                         title: 'Error',
-                                        message: 'Please select an inbound',
+                                        message:
+                                            'Please select both a config profile and an inbound',
                                         color: 'red'
                                     })
 

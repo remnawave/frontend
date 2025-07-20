@@ -56,7 +56,7 @@ export const AccessSettingsCard = <T extends CreateUserCommand.Request | UpdateU
                             }}
                         />
                         <Title c="purple.6" order={4}>
-                            Access Settings
+                            {t('access-settings-card.access-settings')}
                         </Title>
                     </Group>
                 }

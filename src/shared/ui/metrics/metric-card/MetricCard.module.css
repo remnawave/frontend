@@ -90,8 +90,8 @@
 }
 
 .trendPositive {
-    background: var(--mantine-color-green-6) 15;
-    border: 1px solid var(--mantine-color-green-6) 30;
+    background: rgba(var(--mantine-color-green-6-rgb), 0.15);
+    border: 1px solid rgba(var(--mantine-color-green-6-rgb), 0.3);
 }
 
 .trendNegative {

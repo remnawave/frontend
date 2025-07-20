@@ -245,7 +245,8 @@
     "table": {
         "widget": {
             "only-active-nodes": "仅显示启用了流量跟踪的节点",
-            "today": "今日"
+            "today": "今日",
+            "nodes-with-active-traffic-tracking-not-found": "Nodes with active traffic tracking not found."
         }
     },
     "create-user-modal": {
@@ -722,7 +723,11 @@
                     "change": "更改",
                     "perform-action-on-users": "对 {{usersCount}} 位选定用户执行操作",
                     "resets-the-traffic-usage-to-zero-for-all-selected-users": "将所有选定用户的流量使用重置为0",
-                    "revokes-subscription-for-all-selected-users": "撤销所有选定用户的订阅"
+                    "revokes-subscription-for-all-selected-users": "撤销所有选定用户的订阅",
+                    "change-active-internal-squads": "Change Active Internal Squads",
+                    "internal-squads": "Internal squads",
+                    "specify-internal-squads-that-will-be-assigned-to-the-user": "Specify internal squads that will be assigned to the user",
+                    "changes-the-active-internal-squads-for-all-selected-users": "Changes the active internal squads for all selected users"
                 }
             }
         },
@@ -1296,5 +1301,48 @@
         "shared": {
             "no-inbounds-found": "No inbounds found"
         }
+    },
+    "access-settings-card": {
+        "access-settings": "Access Settings"
+    },
+    "stats": {
+        "widget": {
+            "total-spent": "Total Spent",
+            "payments-in": "Payments in {{month}}",
+            "lifetime-spending": "lifetime spending",
+            "current-date": "Current Date",
+            "nodes-pending-payment": "nodes pending payment",
+            "total-payments-made": "total payments made",
+            "upcoming-in": "Upcoming in {{month}}"
+        }
+    },
+    "hosts-config-profiles": {
+        "drawer": {
+            "widget": {
+                "selected": "selected",
+                "no-profile-selected": "No profile selected",
+                "no-profiles-or-inbounds-found": "No profiles or inbounds found",
+                "not-supported": "Not supported",
+                "search-profiles-or-inbounds": "Search profiles or inbounds...",
+                "unknown-inbound": "Unknown inbound",
+                "choose-an-inbound-to-apply-to-the-host": "Choose an inbound to apply to the host.",
+                "apply-changes": "Apply changes",
+                "hosts-do-not-support-multiple-inbounds": "Hosts do not support multiple inbounds",
+                "no-config-profiles-available": "No config profiles available",
+                "no-inbound-selected": "No inbound selected"
+            }
+        }
+    },
+    "edit-node-by-uuid-modal": {
+        "widget": {
+            "close": "Close",
+            "loading-node": "Loading node..."
+        }
+    },
+    "user-indentity-creation-card": {
+        "user-identity": "User Identity"
+    },
+    "device-tag-settings-card": {
+        "device-and-tag-settings": "Device & Tag Settings"
     }
 }

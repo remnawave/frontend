@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 import {
     Accordion,
     ActionIcon,
@@ -15,6 +16,7 @@ import { GetConfigProfilesCommand } from '@remnawave/backend-contract'
 import { TbArrowAutofitDown, TbSearch, TbX } from 'react-icons/tb'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { notifications } from '@mantine/notifications'
+import { useTranslation } from 'react-i18next'
 
 import { ConfigProfileCardShared } from '@shared/ui/config-profiles/config-profile-card/config-profile-card.shared'
 import { useGetConfigProfiles } from '@shared/api/hooks'
@@ -22,6 +24,7 @@ import { useGetConfigProfiles } from '@shared/api/hooks'
 import { IProps } from './interfaces'
 
 export const HostsConfigProfilesDrawer = (props: IProps) => {
+    const { t } = useTranslation()
     const { opened, onClose, activeConfigProfileInbound, activeConfigProfileUuid, onSaveInbound } =
         props
 
@@ -91,7 +94,7 @@ export const HostsConfigProfilesDrawer = (props: IProps) => {
             setSelectedInbound(inbound.uuid)
             setSelectedProfileUuid(profileUuid)
         },
-        [selectedInbound]
+        [selectedInbound, selectedProfileUuid]
     )
 
     const clearSelection = useCallback(() => {
@@ -120,7 +123,7 @@ export const HostsConfigProfilesDrawer = (props: IProps) => {
             padding="md"
             position="right"
             size="480px"
-            title="Config Profiles"
+            title={t('constants.config-profiles')}
         >
             <Stack gap="md" h="100%">
                 <Paper mb="sm" p="sm" radius={'md'} shadow="xs" withBorder>
@@ -131,23 +134,33 @@ export const HostsConfigProfilesDrawer = (props: IProps) => {
                                     <Text fw={700} size="sm">
                                         {filteredProfiles.find(
                                             (p) => p.uuid === selectedProfileUuid
-                                        )?.name || 'No profile selected'}
+                                        )?.name ||
+                                            t(
+                                                'hosts-config-profiles.drawer.widget.no-profile-selected'
+                                            )}
                                     </Text>
                                     <Text c="dimmed" size="xs">
                                         {filteredProfiles
                                             .find((p) => p.uuid === selectedProfileUuid)
                                             ?.inbounds.find((i) => i.uuid === selectedInbound)
-                                            ?.tag || 'Unknown inbound'}{' '}
-                                        selected
+                                            ?.tag ||
+                                            t(
+                                                'hosts-config-profiles.drawer.widget.unknown-inbound'
+                                            )}{' '}
+                                        {t('hosts-config-profiles.drawer.widget.selected')}
                                     </Text>
                                 </>
                             ) : (
                                 <>
                                     <Text fw={700} size="sm">
-                                        No inbound selected
+                                        {t(
+                                            'hosts-config-profiles.drawer.widget.no-inbound-selected'
+                                        )}
                                     </Text>
                                     <Text c="dimmed" size="xs">
-                                        Choose an inbound to apply to the host.
+                                        {t(
+                                            'hosts-config-profiles.drawer.widget.choose-an-inbound-to-apply-to-the-host'
+                                        )}
                                     </Text>
                                 </>
                             )}
@@ -173,14 +186,16 @@ export const HostsConfigProfilesDrawer = (props: IProps) => {
                         onClick={handleSaveInbound}
                         size="md"
                     >
-                        Apply changes
+                        {t('hosts-config-profiles.drawer.widget.apply-changes')}
                     </Button>
                 </Group>
 
                 <TextInput
                     leftSection={<TbSearch size={16} />}
                     onChange={(event) => setSearchQuery(event.currentTarget.value)}
-                    placeholder="Search profiles or inbounds..."
+                    placeholder={t(
+                        'hosts-config-profiles.drawer.widget.search-profiles-or-inbounds'
+                    )}
                     radius="md"
                     value={searchQuery}
                 />
@@ -205,17 +220,25 @@ export const HostsConfigProfilesDrawer = (props: IProps) => {
                                         onInboundToggle={handleInboundToggle}
                                         onSelectAllInbounds={() => {
                                             notifications.show({
-                                                message: 'Hosts do not support multiple inbounds',
+                                                message: t(
+                                                    'hosts-config-profiles.drawer.widget.hosts-do-not-support-multiple-inbounds'
+                                                ),
                                                 color: 'red',
-                                                title: 'Not supported',
+                                                title: t(
+                                                    'hosts-config-profiles.drawer.widget.not-supported'
+                                                ),
                                                 autoClose: 2000
                                             })
                                         }}
                                         onUnselectAllInbounds={() => {
                                             notifications.show({
-                                                message: 'Hosts do not support multiple inbounds',
+                                                message: t(
+                                                    'hosts-config-profiles.drawer.widget.hosts-do-not-support-multiple-inbounds'
+                                                ),
                                                 color: 'red',
-                                                title: 'Not supported',
+                                                title: t(
+                                                    'hosts-config-profiles.drawer.widget.not-supported'
+                                                ),
                                                 autoClose: 2000
                                             })
                                         }}
@@ -228,8 +251,12 @@ export const HostsConfigProfilesDrawer = (props: IProps) => {
                             {filteredProfiles.length === 0 && (
                                 <Text c="dimmed" py="xl" size="sm" ta="center">
                                     {debouncedSearchQuery
-                                        ? 'No profiles or inbounds found'
-                                        : 'No config profiles available'}
+                                        ? t(
+                                              'hosts-config-profiles.drawer.widget.no-profiles-or-inbounds-found'
+                                          )
+                                        : t(
+                                              'hosts-config-profiles.drawer.widget.no-config-profiles-available'
+                                          )}
                                 </Text>
                             )}
                         </Accordion>

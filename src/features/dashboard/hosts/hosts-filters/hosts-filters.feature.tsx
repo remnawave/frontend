@@ -66,7 +66,8 @@ export const HostsFiltersFeature = (props: IProps) => {
         actions.resetFilters()
     }
 
-    const hasActiveFilters = configProfileFilter || inboundFilter
+    const hasActiveFilters =
+        configProfileFilter || inboundFilter || searchValue || searchAddressValue
 
     return (
         <Card mb="xl" padding="lg" radius="md" shadow="sm" withBorder>

@@ -69,7 +69,6 @@ export const ConfigProfileDetailHeaderWidget = (props: IProps) => {
                         </Tooltip>
                     </Group>
 
-                    {/* UUID and XTLS row */}
                     <Group gap="xs">
                         <Group
                             gap="xs"
@@ -197,13 +196,8 @@ export const ConfigProfileDetailHeaderWidget = (props: IProps) => {
                                         <ActionIcon
                                             color={copied ? 'teal' : 'gray'}
                                             onClick={copy}
+                                            radius="sm"
                                             size="xs"
-                                            style={{
-                                                borderRadius: '6px',
-                                                '&:hover': {
-                                                    backgroundColor: 'rgba(148, 163, 184, 0.1)'
-                                                }
-                                            }}
                                             variant="subtle"
                                         >
                                             {copied ? <PiCheck size={12} /> : <PiCopy size={12} />}

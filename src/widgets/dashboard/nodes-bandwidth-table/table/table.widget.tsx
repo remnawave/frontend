@@ -32,7 +32,7 @@ export function NodesBandwidthTableWidget() {
                     <ListViewTable
                         columns={tableColumns}
                         data={nodes ?? []}
-                        emptyText="Nodes with active traffic tracking not found."
+                        emptyText={t('table.widget.nodes-with-active-traffic-tracking-not-found')}
                         highlightOnHover
                         loading={isLoading}
                         rowKey="uuid"

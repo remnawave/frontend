@@ -12,7 +12,7 @@ interface IProps {
     motionWrapper: ForwardRefComponent<HTMLDivElement, HTMLMotionProps<'div'>>
 }
 
-export const UserIndentityCreationCard = (props: IProps) => {
+export const UserIdentityCreationCard = (props: IProps) => {
     const { t } = useTranslation()
 
     const { cardVariants, motionWrapper, form } = props
@@ -31,7 +31,7 @@ export const UserIndentityCreationCard = (props: IProps) => {
                             }}
                         />
                         <Title c="blue.4" order={4}>
-                            User Identity
+                            {t('user-indentity-creation-card.user-identity')}
                         </Title>
                     </Group>
                 }

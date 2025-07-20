@@ -245,7 +245,8 @@
     "table": {
         "widget": {
             "only-active-nodes": "Only nodes with active traffic tracking are displayed",
-            "today": "Today"
+            "today": "Today",
+            "nodes-with-active-traffic-tracking-not-found": "Nodes with active traffic tracking not found."
         }
     },
     "create-user-modal": {
@@ -722,7 +723,11 @@
                     "change": "Change",
                     "perform-action-on-users": "Perform actions on {{usersCount}} selected users",
                     "resets-the-traffic-usage-to-zero-for-all-selected-users": "Resets the traffic usage to zero for all selected users",
-                    "revokes-subscription-for-all-selected-users": "Revokes subscription for all selected users"
+                    "revokes-subscription-for-all-selected-users": "Revokes subscription for all selected users",
+                    "change-active-internal-squads": "Change Active Internal Squads",
+                    "specify-internal-squads-that-will-be-assigned-to-the-user": "Specify internal squads that will be assigned to the user",
+                    "internal-squads": "Internal squads",
+                    "changes-the-active-internal-squads-for-all-selected-users": "Changes the active internal squads for all selected users"
                 }
             }
         },
@@ -1295,6 +1300,49 @@
             "choose-a-profile-to-configure-inbounds-for-this-node": "Choose a profile to configure inbounds for this node",
             "change-profile": "Change Profile",
             "select-config-profile": "Select Config Profile"
+        }
+    },
+    "access-settings-card": {
+        "access-settings": "Access Settings"
+    },
+    "device-tag-settings-card": {
+        "device-and-tag-settings": "Device & Tag Settings"
+    },
+    "user-indentity-creation-card": {
+        "user-identity": "User Identity"
+    },
+    "hosts-config-profiles": {
+        "drawer": {
+            "widget": {
+                "no-profile-selected": "No profile selected",
+                "unknown-inbound": "Unknown inbound",
+                "selected": "selected",
+                "no-inbound-selected": "No inbound selected",
+                "choose-an-inbound-to-apply-to-the-host": "Choose an inbound to apply to the host.",
+                "apply-changes": "Apply changes",
+                "search-profiles-or-inbounds": "Search profiles or inbounds...",
+                "hosts-do-not-support-multiple-inbounds": "Hosts do not support multiple inbounds",
+                "not-supported": "Not supported",
+                "no-profiles-or-inbounds-found": "No profiles or inbounds found",
+                "no-config-profiles-available": "No config profiles available"
+            }
+        }
+    },
+    "stats": {
+        "widget": {
+            "current-date": "Current Date",
+            "upcoming-in": "Upcoming in {{month}}",
+            "nodes-pending-payment": "nodes pending payment",
+            "payments-in": "Payments in {{month}}",
+            "total-payments-made": "total payments made",
+            "total-spent": "Total Spent",
+            "lifetime-spending": "lifetime spending"
+        }
+    },
+    "edit-node-by-uuid-modal": {
+        "widget": {
+            "loading-node": "Loading node...",
+            "close": "Close"
         }
     }
 }

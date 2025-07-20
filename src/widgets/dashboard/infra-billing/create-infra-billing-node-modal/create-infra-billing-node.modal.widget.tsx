@@ -108,10 +108,10 @@ export function CreateInfraBillingNodeModalWidget() {
                                     nodeUuid: nodeUuid ?? undefined
                                 })
                                 form.setTouched({
-                                    providerUuid: true
+                                    nodeUuid: true
                                 })
                                 form.setDirty({
-                                    providerUuid: true
+                                    nodeUuid: true
                                 })
                             }}
                         />

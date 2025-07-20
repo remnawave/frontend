@@ -104,6 +104,7 @@
     "@eslint/eslintrc": "^3.3.1",
     "@eslint/js": "^9.28.0",
     "@ianvs/prettier-plugin-sort-imports": "^4.4.2",
+    "@swc/core": "^1.12.14",
     "@types/byte-size": "^8.1.2",
     "@types/bytes": "^3.1.5",
     "@types/color-hash": "^2.0.0",
@@ -153,8 +154,7 @@
     "vite-plugin-svgr": "^4.3.0",
     "vite-plugin-wasm": "^3.5.0",
     "vite-plugin-webfont-dl": "^3.11.0",
-    "vite-tsconfig-paths": "^5.1.4",
-    "@swc/core": "^1.12.14"
+    "vite-tsconfig-paths": "^5.1.4"
   },
   "commitlint": {
     "extends": [

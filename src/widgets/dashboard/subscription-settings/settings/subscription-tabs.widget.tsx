@@ -276,7 +276,7 @@ export const SubscriptionTabs = ({
                                                     description={t(
                                                         'subscription-settings.widget.profile-webpage-url-description'
                                                     )}
-                                                    key={form.key('randomizeHosts')}
+                                                    key={form.key('isProfileWebpageUrlEnabled')}
                                                     label={t(
                                                         'subscription-settings.widget.profile-webpage-url'
                                                     )}

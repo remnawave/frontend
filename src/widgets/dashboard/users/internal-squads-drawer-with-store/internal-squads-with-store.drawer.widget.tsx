@@ -182,9 +182,7 @@ export const InternalSquadsDrawerWithStore = () => {
             setActiveTab('profiles')
             setFilterType('all')
         }
-    }, [isOpen, internalSquad?.inbounds])
 
-    useEffect(() => {
         if (isOpen && internalSquad?.inbounds) {
             setSelectedInbounds(new Set(internalSquad.inbounds.map((inbound) => inbound.uuid)))
         }

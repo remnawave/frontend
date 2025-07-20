@@ -23,15 +23,21 @@ export const InfraBillingPageComponent = () => {
     const isMobile = useMediaQuery('(max-width: 400px)')
 
     return (
-        <Page title={'Infra Billing'}>
+        <Page title={t('constants.infra-billing')}>
             <PageHeader
                 breadcrumbs={[
                     { label: t('constants.dashboard'), href: ROUTES.DASHBOARD.HOME },
                     { label: t('constants.management') },
-                    { label: 'CRM' },
-                    { label: 'Infra Billing', href: ROUTES.DASHBOARD.CRM.INFRA_BILLING }
+                    {
+                        label: t('constants.nodes'),
+                        href: ROUTES.DASHBOARD.MANAGEMENT.NODES
+                    },
+                    {
+                        label: t('constants.infra-billing'),
+                        href: ROUTES.DASHBOARD.CRM.INFRA_BILLING
+                    }
                 ]}
-                title="Infra Billing"
+                title={t('constants.infra-billing')}
             />
 
             <Grid>

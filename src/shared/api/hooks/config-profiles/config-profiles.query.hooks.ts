@@ -46,7 +46,7 @@ export const useGetConfigProfile = createGetQueryHook({
     },
     errorHandler: (error) => {
         notifications.show({
-            title: `Get Node`,
+            title: `Get Config Profile`,
             message: error instanceof Error ? error.message : `Request failed with unknown error.`,
             color: 'red'
         })

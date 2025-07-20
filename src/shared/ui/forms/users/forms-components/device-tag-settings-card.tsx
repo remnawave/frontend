@@ -50,7 +50,7 @@ export function DeviceTagSettingsCard<
                             }}
                         />
                         <Title c="orange.4" order={5}>
-                            Device & Tag Settings
+                            {t('device-tag-settings-card.device-and-tag-settings')}
                         </Title>
                     </Group>
                 }

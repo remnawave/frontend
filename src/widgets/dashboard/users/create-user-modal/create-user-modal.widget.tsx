@@ -14,7 +14,7 @@ import {
     ContactInformationCard,
     DeviceTagSettingsCard,
     TrafficLimitsCard,
-    UserIndentityCreationCard
+    UserIdentityCreationCard
 } from '@shared/ui/forms/users/forms-components'
 import {
     useUserCreationModalStoreActions,
@@ -170,7 +170,7 @@ export const CreateUserModalWidget = () => {
                             initial="hidden"
                             variants={containerVariants}
                         >
-                            <UserIndentityCreationCard
+                            <UserIdentityCreationCard
                                 cardVariants={cardVariants}
                                 form={form}
                                 motionWrapper={MotionWrapper}
@@ -212,7 +212,7 @@ export const CreateUserModalWidget = () => {
                                 style={{ flex: '1 1 450px' }}
                                 variants={containerVariants}
                             >
-                                <UserIndentityCreationCard
+                                <UserIdentityCreationCard
                                     cardVariants={cardVariants}
                                     form={form}
                                     motionWrapper={MotionWrapper}

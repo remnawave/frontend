@@ -77,7 +77,7 @@ jobs:
 
             - name: Install dependencies and build
               run: |
-                  npm install
+                  npm ci
                   npm run start:build
 
             - name: Create ZIP archive of /dist

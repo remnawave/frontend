@@ -49,11 +49,9 @@ export const useBandwidthTableColumns = () => {
 
                     return (
                         <Flex direction="column" gap={4}>
-                            <Flex align="center" justify="space-between">
-                                <Text c="dimmed" ff="monospace" fw={600} size="md">
-                                    {prettyBytesUtil(node.trafficUsedBytes || 0) || '0 GB'}
-                                </Text>
-                            </Flex>
+                            <Text c="dimmed" ff="monospace" fw={600} size="md">
+                                {prettyBytesUtil(node.trafficUsedBytes || 0) || '0 GB'}
+                            </Text>
                             <Progress
                                 color={getProgressColor(percentage)}
                                 radius="sm"

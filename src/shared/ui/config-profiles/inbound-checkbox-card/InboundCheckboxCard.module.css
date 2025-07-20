@@ -38,7 +38,7 @@
         border-color: var(--mantine-primary-color-filled);
         background-color: light-dark(
             var(--mantine-primary-color-light),
-            var(--mantine-primary-color-dark-color)
+            var(--mantine-primary-color-dark)
         );
     }
 

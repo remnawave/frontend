@@ -1,4 +1,5 @@
 import { MdCalendarToday, MdPayment, MdTrendingUp } from 'react-icons/md'
+import { useTranslation } from 'react-i18next'
 import { FaServer } from 'react-icons/fa'
 import { Grid } from '@mantine/core'
 import dayjs from 'dayjs'
@@ -15,33 +16,34 @@ export function StatsWidget() {
     const currentDay = currentDate.format('D')
 
     const { data: nodes, isLoading } = useGetInfraBillingNodes()
+    const { t } = useTranslation()
 
     const stats = [
         {
-            title: 'Current Date',
+            title: t('stats.widget.current-date'),
             value: currentDay,
             subtitle: currentMonth,
             icon: <MdCalendarToday size={24} />,
             color: 'blue'
         },
         {
-            title: `Upcoming in ${currentMonthOnly}`,
+            title: t('stats.widget.upcoming-in', { month: currentMonthOnly }),
             value: nodes?.stats.upcomingNodesCount ?? 0,
-            subtitle: 'nodes pending payment',
+            subtitle: t('stats.widget.nodes-pending-payment'),
             icon: <FaServer size={24} />,
             color: 'orange'
         },
         {
-            title: `Payments in ${currentMonthOnly}`,
+            title: t('stats.widget.payments-in', { month: currentMonthOnly }),
             value: formatCurrency(nodes?.stats.currentMonthPayments ?? 0),
-            subtitle: 'total payments made',
+            subtitle: t('stats.widget.total-payments-made'),
             icon: <MdPayment size={24} />,
             color: 'green'
         },
         {
-            title: 'Total Spent',
+            title: t('stats.widget.total-spent'),
             value: formatCurrency(nodes?.stats.totalSpent ?? 0),
-            subtitle: 'lifetime spending',
+            subtitle: t('stats.widget.lifetime-spending'),
             icon: <MdTrendingUp size={24} />,
             color: 'violet'
         }

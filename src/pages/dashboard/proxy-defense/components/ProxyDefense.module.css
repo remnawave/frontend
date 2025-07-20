@@ -54,7 +54,7 @@
     justify-content: center;
     background-color: rgba(0, 0, 0, 0.7);
     z-index: 100;
-    animation: 'formatAnimation 2s ease-in-out';
+    animation: formatAnimation 2s ease-in-out;
 }
 
 .formattedDisplay {
@@ -224,18 +224,5 @@
             0 0 20px #ff0000,
             0 0 40px #ff0000,
             0 0 60px #ff0000;
-    }
-}
-
-/* Pulse animation for critical health */
-@keyframes pulse {
-    0%,
-    100% {
-        opacity: 1;
-        transform: scale(1);
-    }
-    50% {
-        opacity: 0.7;
-        transform: scale(1.05);
     }
 }

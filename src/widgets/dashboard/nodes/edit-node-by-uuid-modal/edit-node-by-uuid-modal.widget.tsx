@@ -146,7 +146,12 @@ export const EditNodeByUuidModalWidget = () => {
             }
             transitionProps={isMobile ? { transition: 'fade', duration: 200 } : undefined}
         >
-            {isLoading && <LoaderModalShared h="80vh" text="Loading node..." />}
+            {isLoading && (
+                <LoaderModalShared
+                    h="80vh"
+                    text={t('edit-node-by-uuid-modal.widget.loading-node')}
+                />
+            )}
 
             {!isLoading && !fetchedNode && (
                 <>
@@ -164,7 +169,7 @@ export const EditNodeByUuidModalWidget = () => {
                             size="sm"
                             variant="outline"
                         >
-                            Close
+                            {t('edit-node-by-uuid-modal.widget.close')}
                         </Button>
                     </ModalFooter>
                 </>
@@ -178,7 +183,7 @@ export const EditNodeByUuidModalWidget = () => {
                     handleClose={() => handleClose(true)}
                     handleSubmit={handleSubmit}
                     isUpdateNodePending={isUpdateNodePending}
-                    node={fetchedNode ?? null}
+                    node={fetchedNode}
                     nodeDetailsCard={
                         fetchedNode && (
                             <NodeDetailsCardWidget fetchedNode={fetchedNode} node={fetchedNode} />

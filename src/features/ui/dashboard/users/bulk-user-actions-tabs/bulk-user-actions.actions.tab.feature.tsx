@@ -124,39 +124,6 @@ export const BulkUserActionsActionsTabFeature = (props: IProps) => {
         )
     }, [internalSquads, searchQuery])
 
-    // const handleChangeActiveInternalSquads = () => {
-    //     const selectedInternalSquads: string[] = []
-
-    //     modals.openConfirmModal({
-    //         title: 'Change Active Internal Squads',
-    //         centered: true,
-    //         children: (
-
-    //         ),
-    //         labels: {
-    //             confirm: t('bulk-user-actions.actions.tab.feature.change'),
-    //             cancel: t('bulk-user-actioins-modal.widget.cancel')
-    //         },
-    //         confirmProps: { color: 'blue' },
-    //         onConfirm: () => {
-    //             if (selectedInternalSquads.length === 0) {
-    //                 notifications.show({
-    //                     title: 'No internal squads selected',
-    //                     message: 'Please select at least one internal squad',
-    //                     color: 'red'
-    //                 })
-    //                 return
-    //             }
-    //             setActiveInternalSquads({
-    //                 variables: {
-    //                     uuids,
-    //                     activeInternalSquads: selectedInternalSquads
-    //                 }
-    //             })
-    //         }
-    //     })
-    // }
-
     return (
         <Stack gap="md">
             <Text c="dimmed" size="sm">
@@ -170,15 +137,19 @@ export const BulkUserActionsActionsTabFeature = (props: IProps) => {
                     <Group justify="apart">
                         <Group>
                             <PiNotchesDuotone color="cyan" size={px('1.2rem')} />
-                            <Text>Change Active Internal Squads</Text>
+                            <Text>
+                                {t(
+                                    'bulk-user-actions.actions.tab.feature.change-active-internal-squads'
+                                )}
+                            </Text>
                         </Group>
                         <InternalSquadsListWidget
-                            description={
-                                'Specify internal squads that will be assigned to the user'
-                            }
+                            description={t(
+                                'bulk-user-actions.actions.tab.feature.specify-internal-squads-that-will-be-assigned-to-the-user'
+                            )}
                             filteredInternalSquads={filteredInternalSquads}
                             formKey={form.key('activeInternalSquads')}
-                            label={'Internal squads'}
+                            label={t('bulk-user-actions.actions.tab.feature.internal-squads')}
                             searchQuery={searchQuery}
                             setSearchQuery={setSearchQuery}
                             {...form.getInputProps('activeInternalSquads')}
@@ -201,7 +172,9 @@ export const BulkUserActionsActionsTabFeature = (props: IProps) => {
                         </Button>
                     </Group>
                     <Text c="dimmed" size="xs">
-                        Changes the active internal squads for all selected users
+                        {t(
+                            'bulk-user-actions.actions.tab.feature.changes-the-active-internal-squads-for-all-selected-users'
+                        )}
                     </Text>
                 </Stack>
             </Paper>
