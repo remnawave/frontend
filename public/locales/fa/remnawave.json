@@ -1344,5 +1344,16 @@
     },
     "user-indentity-creation-card": {
         "user-identity": "User Identity"
+    },
+    "hosts-filters": {
+        "feature": {
+            "address": "Address",
+            "all-config-profiles": "All Config Profiles",
+            "all-inbounds": "All Inbounds",
+            "filters": "Filters",
+            "search-by-remark": "Search by remark...",
+            "select-config-profile": "Select config profile",
+            "select-inbound": "Select inbound"
+        }
     }
 }

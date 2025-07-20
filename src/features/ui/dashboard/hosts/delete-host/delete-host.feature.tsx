@@ -31,9 +31,10 @@ export function DeleteHostFeature() {
                 color="red"
                 loading={isDeleteHostPending}
                 onClick={handleDeleteHost}
-                size="xl"
+                radius="md"
+                size="lg"
             >
-                <PiTrashDuotone size="24px" />
+                <PiTrashDuotone size="20px" />
             </ActionIcon>
         </Tooltip>
     )

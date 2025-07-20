@@ -1,5 +1,6 @@
 import { ActionIcon, Card, Group, Select, Stack, Title } from '@mantine/core'
 import { PiBookmarks, PiMagnifyingGlass, PiTag, PiX } from 'react-icons/pi'
+import { useTranslation } from 'react-i18next'
 import { HiFilter } from 'react-icons/hi'
 import { useMemo } from 'react'
 
@@ -22,6 +23,8 @@ export const HostsFiltersFeature = (props: IProps) => {
         searchAddressData
     } = props
 
+    const { t } = useTranslation()
+
     const actions = useHostsStoreActions()
     const configProfileFilter = useHostsStoreConfigProfileFilter()
     const inboundFilter = useHostsStoreInboundFilter()
@@ -30,7 +33,7 @@ export const HostsFiltersFeature = (props: IProps) => {
         if (!configProfiles) return []
 
         return [
-            { value: '', label: 'All Config Profiles' },
+            { value: '', label: t('hosts-filters.feature.all-config-profiles') },
             ...configProfiles.map((configProfile) => ({
                 value: configProfile.uuid,
                 label: configProfile.name
@@ -46,7 +49,7 @@ export const HostsFiltersFeature = (props: IProps) => {
         if (!selectedConfigProfile) return []
 
         return [
-            { value: '', label: 'All Inbounds' },
+            { value: '', label: t('hosts-filters.feature.all-inbounds') },
             ...selectedConfigProfile.inbounds.map((inbound) => ({
                 value: inbound.uuid,
                 label: inbound.tag || inbound.uuid
@@ -66,8 +69,7 @@ export const HostsFiltersFeature = (props: IProps) => {
         actions.resetFilters()
     }
 
-    const hasActiveFilters =
-        configProfileFilter || inboundFilter || searchValue || searchAddressValue
+    const hasActiveFilters = configProfileFilter || inboundFilter
 
     return (
         <Card mb="xl" padding="lg" radius="md" shadow="sm" withBorder>
@@ -82,7 +84,7 @@ export const HostsFiltersFeature = (props: IProps) => {
                         >
                             <HiFilter size={16} />
                         </ActionIcon>
-                        <Title order={5}>Filters</Title>
+                        <Title order={5}>{t('hosts-filters.feature.filters')}</Title>
                     </Group>
 
                     {hasActiveFilters && (
@@ -104,7 +106,7 @@ export const HostsFiltersFeature = (props: IProps) => {
                         leftSection={<PiBookmarks size="16px" />}
                         leftSectionPointerEvents="none"
                         onChange={handleConfigProfileChange}
-                        placeholder="Select config profile"
+                        placeholder={t('hosts-filters.feature.select-config-profile')}
                         radius="md"
                         size="sm"
                         value={configProfileFilter || ''}
@@ -117,7 +119,7 @@ export const HostsFiltersFeature = (props: IProps) => {
                         leftSection={<PiTag size="16px" />}
                         leftSectionPointerEvents="none"
                         onChange={handleInboundChange}
-                        placeholder="Select inbound"
+                        placeholder={t('hosts-filters.feature.select-inbound')}
                         radius="md"
                         size="sm"
                         value={inboundFilter || ''}
@@ -130,7 +132,7 @@ export const HostsFiltersFeature = (props: IProps) => {
                         data={searchOptions}
                         leftSection={<PiMagnifyingGlass size={16} />}
                         onChange={handleSearchSelect}
-                        placeholder="Search by remark..."
+                        placeholder={t('hosts-filters.feature.search-by-remark')}
                         searchable
                         value={searchValue}
                     />
@@ -140,7 +142,7 @@ export const HostsFiltersFeature = (props: IProps) => {
                         data={searchAddressData}
                         leftSection={<PiMagnifyingGlass size={16} />}
                         onChange={handleSearchAddressSelect}
-                        placeholder="Address"
+                        placeholder={t('hosts-filters.feature.address')}
                         searchable
                         value={searchAddressValue}
                     />

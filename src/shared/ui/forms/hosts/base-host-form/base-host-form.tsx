@@ -41,6 +41,7 @@ import { HostSelectInboundFeature } from '@features/ui/dashboard/hosts/host-sele
 import { PopoverWithInfoShared } from '@shared/ui/popovers/popover-with-info'
 import { DeleteHostFeature } from '@features/ui/dashboard/hosts/delete-host'
 import { TemplateInfoPopoverShared } from '@shared/ui/popovers'
+import { ModalFooter } from '@shared/ui/modal-footer'
 
 import { IProps } from './interfaces'
 
@@ -434,38 +435,40 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
                 </Stack>
             </Stack>
 
-            <Group gap="xs" justify="space-between" pt={15} w="100%">
-                <ActionIcon.Group>
-                    <DeleteHostFeature />
-                </ActionIcon.Group>
+            <ModalFooter>
+                <Group gap="xs" justify="space-between" w="100%">
+                    <ActionIcon.Group>
+                        <DeleteHostFeature />
+                    </ActionIcon.Group>
 
-                <Group gap="xs">
-                    {handleCloneHost && (
+                    <Group gap="xs">
+                        {handleCloneHost && (
+                            <Button
+                                color="blue"
+                                leftSection={<PiCopyDuotone size="16px" />}
+                                loading={isSubmitting}
+                                onClick={handleCloneHost}
+                                size="sm"
+                                variant="light"
+                            >
+                                {t('base-host-form.clone')}
+                            </Button>
+                        )}
+
                         <Button
-                            color="blue"
-                            leftSection={<PiCopyDuotone size="16px" />}
+                            color="teal"
+                            disabled={!form.isValid() || !form.isDirty() || !form.isTouched()}
+                            leftSection={<PiFloppyDiskDuotone size="16px" />}
                             loading={isSubmitting}
-                            onClick={handleCloneHost}
-                            size="md"
-                            variant="light"
+                            size="sm"
+                            type="submit"
+                            variant="outline"
                         >
-                            {t('base-host-form.clone')}
+                            {t('base-host-form.save')}
                         </Button>
-                    )}
-
-                    <Button
-                        color="blue"
-                        disabled={!form.isValid() || !form.isDirty() || !form.isTouched()}
-                        leftSection={<PiFloppyDiskDuotone size="16px" />}
-                        loading={isSubmitting}
-                        size="md"
-                        type="submit"
-                        variant="outline"
-                    >
-                        {t('base-host-form.save')}
-                    </Button>
+                    </Group>
                 </Group>
-            </Group>
+            </ModalFooter>
 
             <Drawer
                 onClose={close}

@@ -1344,5 +1344,16 @@
             "loading-node": "Loading node...",
             "close": "Close"
         }
+    },
+    "hosts-filters": {
+        "feature": {
+            "all-config-profiles": "All Config Profiles",
+            "all-inbounds": "All Inbounds",
+            "filters": "Filters",
+            "select-config-profile": "Select config profile",
+            "select-inbound": "Select inbound",
+            "search-by-remark": "Search by remark...",
+            "address": "Address"
+        }
     }
 }
