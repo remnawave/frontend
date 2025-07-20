@@ -8,6 +8,7 @@
         "nodes": "节点",
         "nodes-bandwidth-table": "带宽",
         "nodes-statistics": "统计数据",
+        "nodes-metrics": "Metrics",
         "users": "用户",
         "overview": "概述",
         "management": "管理",
@@ -19,8 +20,7 @@
         "subscription-page-builder": "订阅应用配置",
         "config-profiles": "Config Profiles",
         "internal-squads": "Internal Squads",
-        "infra-billing": "Infra Billing",
-        "nodes-metrics": "Metrics"
+        "infra-billing": "Infra Billing"
     },
     "bandwidth-metrics": {
         "current-year": "今年",
@@ -297,8 +297,8 @@
             "subscription-qr-code": "订阅二维码",
             "close": "关闭",
             "edit-user-headline": "编辑用户",
-            "subscription-url-description-line-2": "If you want to change it, please change it in the .env file and restart Remnawave using command:",
             "subscription-url-description-line-1": "Domain and path resolved from .env variable:",
+            "subscription-url-description-line-2": "If you want to change it, please change it in the .env file and restart Remnawave using command:",
             "view-accessible-nodes": "View accessible nodes"
         }
     },
@@ -374,14 +374,14 @@
         "save": "保存",
         "consumption-m-line-1": "Applies selected multiplier to user's traffic (1.0 = normal, 0.5 = half, 2.0 = double).",
         "consumption-m-line-2": "In simple terms, this means that if a user's traffic limit is 1 GiB and the consumption multiplier is 2.0, the user will be able to use only 0.5 GiB of traffic (real usage), but Remnawave will show usage as 1 GiB and the user will be LIMITED.",
-        "consumption": "Consumption",
-        "copy-node-uuid": "Copy Node UUID",
-        "core-configuration": "Core configuration",
-        "management": "Management",
-        "more-actions": "More Actions",
         "node-vitals": "Node Vitals",
+        "consumption": "Consumption",
+        "core-configuration": "Core configuration",
+        "tracking-and-billing": "Tracking & Billing",
+        "more-actions": "More Actions",
         "quick-actions": "Quick Actions",
-        "tracking-and-billing": "Tracking & Billing"
+        "copy-node-uuid": "Copy Node UUID",
+        "management": "Management"
     },
     "home": {
         "page": {
@@ -389,8 +389,8 @@
             "system": "系统",
             "bandwidth": "带宽",
             "short-stats": "简要统计",
-            "process-details": "进程详情",
-            "remnawave-usage": "Remnawave 使用情况"
+            "remnawave-usage": "Remnawave 使用情况",
+            "process-details": "进程详情"
         }
     },
     "login-form": {
@@ -609,8 +609,8 @@
             "update-settings": "更新设置",
             "enabled": "已启用",
             "disabled": "已禁用",
-            "profile-webpage-url-description": "某些客户端使用。默认启用，域名来自 SUB_PUBLIC_DOMAIN .env 变量。",
             "profile-webpage-url": "配置网页 URL",
+            "profile-webpage-url-description": "某些客户端使用。默认启用，域名来自 SUB_PUBLIC_DOMAIN .env 变量。",
             "serve-json-at-base-subscription": "在基础订阅提供 JSON",
             "serve-json-description": "在基础订阅路径（无需附加 /json）提供 JSON 配置。如果客户端支持，将提供 JSON，否则将照常提供。",
             "add-username-to-base-subscription": "将 #username 添加到基础订阅",
@@ -733,8 +733,8 @@
                     "resets-the-traffic-usage-to-zero-for-all-selected-users": "将所有选定用户的流量使用重置为0",
                     "revokes-subscription-for-all-selected-users": "撤销所有选定用户的订阅",
                     "change-active-internal-squads": "Change Active Internal Squads",
-                    "internal-squads": "Internal squads",
                     "specify-internal-squads-that-will-be-assigned-to-the-user": "Specify internal squads that will be assigned to the user",
+                    "internal-squads": "Internal squads",
                     "changes-the-active-internal-squads-for-all-selected-users": "Changes the active internal squads for all selected users"
                 }
             }
@@ -796,6 +796,8 @@
             "no-data-available-for-the-selected-period": "所选时段无可用数据",
             "no-data-available": "无可用数据",
             "traffic-statistics": "流量统计",
+            "click-to-show-all": "点击显示全部",
+            "click-to-highlight-only-this-node": "点击仅高亮此节点",
             "usage-by-period": "时段用量",
             "7-days": "7 天",
             "14-days": "14 天",
@@ -811,9 +813,7 @@
             "filter-nodes": "筛选节点",
             "bar-chart": "条形图",
             "show-nodes": "显示节点",
-            "click-to-see-all": "点击查看全部",
-            "click-to-show-all": "点击显示全部",
-            "click-to-highlight-only-this-node": "点击仅高亮此节点"
+            "click-to-see-all": "点击查看全部"
         }
     },
     "get-user-usage": {
@@ -853,8 +853,8 @@
             "timestamps": "时间戳",
             "created-at": "创建于",
             "updated-at": "更新于",
-            "first-connected-at": "首次连接于",
             "tag": "标签",
+            "first-connected-at": "首次连接于",
             "active-internal-squads": "Active Internal Squads"
         }
     },
@@ -1022,15 +1022,193 @@
         "select-template-to-load": "选择要加载的模板"
     },
     "pm2-metrics": {
-        "average-cpu": "CPU 平均使用率",
-        "heaviest-process": "最耗资源的进程",
+        "total-processes": "进程总数",
         "total-memory": "总内存使用",
-        "total-processes": "进程总数"
+        "average-cpu": "CPU 平均使用率",
+        "heaviest-process": "最耗资源的进程"
     },
-    "active-nodes-list-with-store": {
+    "internal-squads-header": {
+        "widget": {
+            "list": "List of all internal squads"
+        }
+    },
+    "internal-squads-grid": {
+        "widget": {
+            "delete-internal-squad": "Delete Internal Squad",
+            "delete-internal-squad-confirmation": "Are you sure you want to delete the internal squad \"{{internalSquadName}}\"?",
+            "this-action-cannot-be-undone": "This action cannot be undone.",
+            "delete": "Delete",
+            "cancel": "Cancel",
+            "remove-users-from-internal-squad": "Remove Users from Internal Squad",
+            "remove-users-from-internal-squad-confirmation": "Are you sure you want to remove the users from the internal squad \"{{internalSquadName}}\"?",
+            "remove": "Remove",
+            "add-users-to-internal-squad": "Add Users to Internal Squad",
+            "add-users-to-internal-squad-confirmation": "Are you sure you want to add the users to the internal squad \"{{internalSquadName}}\"?",
+            "add": "Add",
+            "no-internal-squads": "No Internal Squads",
+            "create-your-first-internal-squad-to-get-started": "Create your first internal squad to get started",
+            "delete-squad": "Delete squad",
+            "inbounds": "Inbounds",
+            "users": "Users",
+            "edit-inbounds": "Edit inbounds"
+        }
+    },
+    "config-profile-detail-header": {
+        "widget": {
+            "active-nodes": "Active nodes"
+        }
+    },
+    "config-profiles-grid": {
+        "widget": {
+            "delete-config-profile": "Delete Config Profile",
+            "are-you-sure-you-want-to-delete-the-config-profile": "Are you sure you want to delete the config profile \"{{profileName}}\"?",
+            "delete": "Delete",
+            "cancel": "Cancel",
+            "this-action-cannot-be-undone": "This action cannot be undone.",
+            "no-config-profiles": "No Config Profiles",
+            "create-your-first-config-profile-to-get-started": "Create your first config profile to get started",
+            "delete-profile": "Delete profile",
+            "inbounds": "Inbounds",
+            "nodes": "Nodes",
+            "download": "Download",
+            "quick-view": "Quick view",
+            "edit-xray-config": "Edit Xray Config"
+        }
+    },
+    "config-profiles-header": {
+        "widget": {
+            "list-of-all-config-profiles": "List of all config profiles"
+        }
+    },
+    "view-infra-provider": {
+        "drawer": {
+            "widget": {
+                "infra-provider": "Infra Provider",
+                "name-description": "The name of the provider. This is used to identify the provider in the UI.",
+                "name": "Name",
+                "enter-provider-name": "Enter provider name",
+                "favicon-link": "Favicon Link",
+                "enter-favicon-link": "Enter favicon link",
+                "favicon-link-description": "The favicon link is the link to the favicon of the provider. It is used to display the favicon of the provider in the UI. You can just enter the domain name.",
+                "login-url": "Login URL",
+                "enter-login-url": "Enter login URL",
+                "login-url-description": "The login URL is the URL of the login page of the provider. It will help you quickly go to the login page of the provider.",
+                "save-changes": "Save Changes"
+            }
+        }
+    },
+    "update-billing-date-modal": {
+        "widget": {
+            "update-billing-date": "Update Billing Date",
+            "current-date": "Current Date",
+            "new-date": "New Date",
+            "today": "Today",
+            "tomorrow": "Tomorrow",
+            "next-month": "Next Month",
+            "cancel": "Cancel",
+            "update-date": "Update Date"
+        }
+    },
+    "infra-providers-table": {
+        "widget": {
+            "delete-infra-provider": "Delete Infra Provider",
+            "delete-infra-provider-confirmation": "Are you sure you want to delete this infra provider?",
+            "this-action-is-irreversible": "This action is irreversible.",
+            "delete": "Delete",
+            "cancel": "Cancel",
+            "refresh": "Refresh",
+            "create-infra-provider": "Create Infra Provider",
+            "infra-providers": "Infra Providers",
+            "list-of-all-infra-providers": "List of all infra providers",
+            "no-providers-found": "No providers found."
+        }
+    },
+    "use-infra-providers-columns": {
+        "hoster-name": "Hoster name",
+        "providers": "providers",
+        "login-url": "Login URL",
+        "total": "Total, $",
+        "servers": "Servers",
+        "no-servers": "No servers"
+    },
+    "infra-billing-records-table": {
+        "widget": {
+            "delete-infra-billing-record": "Delete Infra Billing Record",
+            "delete-infra-billing-record-confirmation": "Are you sure you want to delete this infra billing record?",
+            "this-action-is-irreversible": "This action is irreversible.",
+            "delete": "Delete",
+            "cancel": "Cancel",
+            "refresh": "Refresh",
+            "create": "Create",
+            "billing-records-sorted-by-date": "Billing records sorted by date",
+            "infra-billing-records": "Infra Billing Records",
+            "no-billing-records-found": "No billing records found."
+        }
+    },
+    "use-infra-billing-records-columns": {
+        "hoster-name": "Hoster name",
+        "billed-at": "Billed at",
+        "paid": "Paid, $"
+    },
+    "infra-billing-nodes": {
+        "widget": {
+            "delete-infra-billing-node": "Delete Infra Billing Node",
+            "delete-infra-billing-node-confirmation": "Are you sure you want to delete this infra billing node?",
+            "this-action-is-irreversible": "This action is irreversible.",
+            "delete": "Delete",
+            "cancel": "Cancel",
+            "refresh": "Refresh",
+            "add-node": "Add Node",
+            "list-of-all-infra-billing-nodes": "List of all infra billing nodes sorted by next billing date",
+            "infra-billing-nodes": "Infra Billing Nodes",
+            "no-nodes-found": "No nodes found.",
+            "add-a-node": "Add a node"
+        }
+    },
+    "use-infra-billing-nodes-columns": {
+        "hoster-name": "Hoster name",
+        "node": "Node",
+        "next-billing-at": "Next billing at"
+    },
+    "next-billing-at-cell": {
+        "in-current-month": "In current month",
+        "far-future": "Far future",
+        "date-approaching": "Date approaching",
+        "today": "Today",
+        "tomorrow": "Tomorrow",
+        "more-than-3-days-ago": "More than 3 days ago",
+        "yesterday": "Yesterday"
+    },
+    "create-infra-provider": {
+        "drawer": {
+            "widget": {
+                "create": "Create"
+            }
+        }
+    },
+    "create-infra-billing-record": {
         "modal": {
-            "shared": {
-                "active-nodes": "Active Nodes"
+            "widget": {
+                "error": "Error",
+                "please-select-a-provider": "Please select a provider",
+                "bill-record": "Bill Record",
+                "billed-at": "Billed At",
+                "the-date-and-time-when-the-bill-was-paid": "The date and time when the bill was paid.",
+                "payment-amount-usd": "Payment amount, USD",
+                "amount": "Amount",
+                "create": "Create"
+            }
+        }
+    },
+    "create-infra-billing-node": {
+        "modal": {
+            "widget": {
+                "error": "Error",
+                "please-select-a-provider-and-billing-node": "Please select a provider and billing node",
+                "billing-node": "Billing Node",
+                "next-billing-at": "Next Billing At",
+                "next-billing-at-description": "The date and time when the billing node will be billed. Remnawave will notify you about upcoming billing.",
+                "create": "Create"
             }
         }
     },
@@ -1042,69 +1220,16 @@
             }
         }
     },
+    "active-nodes-list-with-store": {
+        "modal": {
+            "shared": {
+                "active-nodes": "Active Nodes"
+            }
+        }
+    },
     "config-profile-card": {
         "shared": {
             "active-on-nodes": "Active on nodes"
-        }
-    },
-    "config-profile-detail-header": {
-        "widget": {
-            "active-nodes": "Active nodes"
-        }
-    },
-    "config-profiles-grid": {
-        "widget": {
-            "are-you-sure-you-want-to-delete-the-config-profile": "Are you sure you want to delete the config profile \"{{profileName}}\"?",
-            "cancel": "Cancel",
-            "create-your-first-config-profile-to-get-started": "Create your first config profile to get started",
-            "delete": "Delete",
-            "delete-config-profile": "Delete Config Profile",
-            "delete-profile": "Delete profile",
-            "download": "Download",
-            "edit-xray-config": "Edit Xray Config",
-            "inbounds": "Inbounds",
-            "no-config-profiles": "No Config Profiles",
-            "nodes": "Nodes",
-            "quick-view": "Quick view",
-            "this-action-cannot-be-undone": "This action cannot be undone."
-        }
-    },
-    "config-profiles-header": {
-        "widget": {
-            "list-of-all-config-profiles": "List of all config profiles"
-        }
-    },
-    "create-infra-billing-node": {
-        "modal": {
-            "widget": {
-                "billing-node": "Billing Node",
-                "create": "Create",
-                "error": "Error",
-                "next-billing-at": "Next Billing At",
-                "next-billing-at-description": "The date and time when the billing node will be billed. Remnawave will notify you about upcoming billing.",
-                "please-select-a-provider-and-billing-node": "Please select a provider and billing node"
-            }
-        }
-    },
-    "create-infra-billing-record": {
-        "modal": {
-            "widget": {
-                "amount": "Amount",
-                "bill-record": "Bill Record",
-                "billed-at": "Billed At",
-                "create": "Create",
-                "error": "Error",
-                "payment-amount-usd": "Payment amount, USD",
-                "please-select-a-provider": "Please select a provider",
-                "the-date-and-time-when-the-bill-was-paid": "The date and time when the bill was paid."
-            }
-        }
-    },
-    "create-infra-provider": {
-        "drawer": {
-            "widget": {
-                "create": "Create"
-            }
         }
     },
     "flat-inbound-checkbox-card": {
@@ -1112,256 +1237,131 @@
             "inbound-config-inbound-tag": "Inbound Config: {{inboundTag}}"
         }
     },
-    "host-select-inbound": {
-        "feature": {
-            "change": "Change",
-            "choose-an-inbound-to-apply-to-the-host": "Choose an inbound to apply to the host",
-            "select": "Select",
-            "no-inbound-selected": "No inbound selected"
-        }
-    },
-    "infra-billing-nodes": {
-        "widget": {
-            "add-a-node": "Add a node",
-            "add-node": "Add Node",
-            "cancel": "Cancel",
-            "delete": "Delete",
-            "delete-infra-billing-node": "Delete Infra Billing Node",
-            "infra-billing-nodes": "Infra Billing Nodes",
-            "delete-infra-billing-node-confirmation": "Are you sure you want to delete this infra billing node?",
-            "list-of-all-infra-billing-nodes": "List of all infra billing nodes sorted by next billing date",
-            "no-nodes-found": "No nodes found.",
-            "refresh": "Refresh",
-            "this-action-is-irreversible": "This action is irreversible."
-        }
-    },
-    "infra-billing-records-table": {
-        "widget": {
-            "billing-records-sorted-by-date": "Billing records sorted by date",
-            "cancel": "Cancel",
-            "create": "Create",
-            "delete": "Delete",
-            "delete-infra-billing-record": "Delete Infra Billing Record",
-            "delete-infra-billing-record-confirmation": "Are you sure you want to delete this infra billing record?",
-            "infra-billing-records": "Infra Billing Records",
-            "no-billing-records-found": "No billing records found.",
-            "refresh": "Refresh",
-            "this-action-is-irreversible": "This action is irreversible."
-        }
-    },
-    "infra-providers-table": {
-        "widget": {
-            "cancel": "Cancel",
-            "create-infra-provider": "Create Infra Provider",
-            "delete": "Delete",
-            "delete-infra-provider": "Delete Infra Provider",
-            "delete-infra-provider-confirmation": "Are you sure you want to delete this infra provider?",
-            "infra-providers": "Infra Providers",
-            "list-of-all-infra-providers": "List of all infra providers",
-            "no-providers-found": "No providers found.",
-            "refresh": "Refresh",
-            "this-action-is-irreversible": "This action is irreversible."
-        }
-    },
-    "internal-squads-grid": {
-        "widget": {
-            "add": "Add",
-            "add-users-to-internal-squad": "Add Users to Internal Squad",
-            "add-users-to-internal-squad-confirmation": "Are you sure you want to add the users to the internal squad \"{{internalSquadName}}\"?",
-            "cancel": "Cancel",
-            "create-your-first-internal-squad-to-get-started": "Create your first internal squad to get started",
-            "delete": "Delete",
-            "delete-internal-squad": "Delete Internal Squad",
-            "delete-internal-squad-confirmation": "Are you sure you want to delete the internal squad \"{{internalSquadName}}\"?",
-            "delete-squad": "Delete squad",
-            "edit-inbounds": "Edit inbounds",
-            "inbounds": "Inbounds",
-            "no-internal-squads": "No Internal Squads",
-            "remove": "Remove",
-            "remove-users-from-internal-squad": "Remove Users from Internal Squad",
-            "remove-users-from-internal-squad-confirmation": "Are you sure you want to remove the users from the internal squad \"{{internalSquadName}}\"?",
-            "this-action-cannot-be-undone": "This action cannot be undone.",
-            "users": "Users"
-        }
-    },
-    "internal-squads-header": {
-        "widget": {
-            "list": "List of all internal squads"
-        }
-    },
-    "internal-squads-list": {
-        "widget": {
-            "no-squads-found": "No squads found",
-            "search-internal-squads": "Search internal squads..."
-        }
-    },
-    "internal-squads": {
-        "drawer": {
-            "widget": {
-                "all": "All",
-                "choose-inbounds-from-any-profiles": "Choose inbounds from any profiles",
-                "config-profiles": "Config Profiles",
-                "flat-list": "Flat List",
-                "no-config-profiles-available": "No config profiles available",
-                "no-inbounds-selected": "No inbounds selected",
-                "no-profiles-or-inbounds-found": "No profiles or inbounds found",
-                "search-profiles-or-inbounds": "Search profiles or inbounds...",
-                "selected": "Selected",
-                "unselected": "Unselected",
-                "selected-from-multiple-profiles": "From multiple profiles",
-                "update-internal-squad": "Update Internal Squad"
-            }
-        }
-    },
-    "next-billing-at-cell": {
-        "date-approaching": "Date approaching",
-        "far-future": "Far future",
-        "today": "Today",
-        "more-than-3-days-ago": "More than 3 days ago",
-        "tomorrow": "Tomorrow",
-        "in-current-month": "In current month",
-        "yesterday": "Yesterday"
-    },
-    "select-billing-node": {
-        "shared": {
-            "billing-node": "Billing Node",
-            "select-billing-node": "Select billing node...",
-            "select-the-billing-node": "Select the billing node.",
-            "no-billing-nodes-available": "No billing nodes available"
-        }
-    },
-    "view-infra-provider": {
-        "drawer": {
-            "widget": {
-                "name-description": "The name of the provider. This is used to identify the provider in the UI.",
-                "name": "Name",
-                "save-changes": "Save Changes",
-                "login-url": "Login URL",
-                "favicon-link-description": "The favicon link is the link to the favicon of the provider. It is used to display the favicon of the provider in the UI. You can just enter the domain name.",
-                "favicon-link": "Favicon Link",
-                "enter-provider-name": "Enter provider name",
-                "infra-provider": "Infra Provider",
-                "enter-favicon-link": "Enter favicon link",
-                "enter-login-url": "Enter login URL",
-                "login-url-description": "The login URL is the URL of the login page of the provider. It will help you quickly go to the login page of the provider."
-            }
-        }
-    },
-    "user-accessible-nodes": {
-        "modal": {
-            "widget": {
-                "user-accessible-nodes": "User Accessible Nodes",
-                "no-accessible-nodes-found-for-this-user": "No accessible nodes found for this user",
-                "loading-accessible-nodes": "Loading accessible nodes...",
-                "access-summary": "Access Summary"
-            }
-        }
-    },
-    "use-infra-billing-records-columns": {
-        "paid": "Paid, $",
-        "hoster-name": "Hoster name",
-        "billed-at": "Billed at"
-    },
-    "use-infra-billing-nodes-columns": {
-        "hoster-name": "Hoster name",
-        "next-billing-at": "Next billing at",
-        "node": "Node"
-    },
-    "update-billing-date-modal": {
-        "widget": {
-            "next-month": "Next Month",
-            "cancel": "Cancel",
-            "new-date": "New Date",
-            "today": "Today",
-            "update-billing-date": "Update Billing Date",
-            "update-date": "Update Date",
-            "tomorrow": "Tomorrow",
-            "current-date": "Current Date"
-        }
-    },
-    "show-config-profiles-with-inbounds": {
-        "feature": {
-            "config-profile": "Config Profile",
-            "change-profile": "Change Profile",
-            "choose-a-profile-to-configure-inbounds-for-this-node": "Choose a profile to configure inbounds for this node",
-            "no-config-profile-selected": "No config profile selected",
-            "select-the-config-profile-that-will-be-applied-to-this-node": "Select the config profile that will be applied to this node",
-            "select-config-profile": "Select Config Profile"
-        }
-    },
-    "select-infra-provider": {
-        "shared": {
-            "select-the-infrastructure-provider": "Select the infrastructure provider.",
-            "select-provider": "Select provider...",
-            "no-providers-available": "No providers available",
-            "infrastructure-provider": "Infrastructure Provider"
-        }
-    },
-    "use-infra-providers-columns": {
-        "hoster-name": "Hoster name",
-        "login-url": "Login URL",
-        "no-servers": "No servers",
-        "servers": "Servers",
-        "providers": "providers",
-        "total": "Total, $"
-    },
     "virtualized-flat-inbounds-list": {
         "shared": {
             "no-inbounds-found": "No inbounds found"
         }
     },
-    "access-settings-card": {
-        "access-settings": "Access Settings"
-    },
-    "stats": {
-        "widget": {
-            "total-spent": "Total Spent",
-            "payments-in": "Payments in {{month}}",
-            "lifetime-spending": "lifetime spending",
-            "current-date": "Current Date",
-            "nodes-pending-payment": "nodes pending payment",
-            "total-payments-made": "total payments made",
-            "upcoming-in": "Upcoming in {{month}}"
+    "select-billing-node": {
+        "shared": {
+            "billing-node": "Billing Node",
+            "no-billing-nodes-available": "No billing nodes available",
+            "select-the-billing-node": "Select the billing node.",
+            "select-billing-node": "Select billing node..."
         }
     },
-    "hosts-config-profiles": {
-        "drawer": {
+    "select-infra-provider": {
+        "shared": {
+            "infrastructure-provider": "Infrastructure Provider",
+            "no-providers-available": "No providers available",
+            "select-the-infrastructure-provider": "Select the infrastructure provider.",
+            "select-provider": "Select provider..."
+        }
+    },
+    "internal-squads-list": {
+        "widget": {
+            "search-internal-squads": "Search internal squads...",
+            "no-squads-found": "No squads found"
+        }
+    },
+    "user-accessible-nodes": {
+        "modal": {
             "widget": {
-                "selected": "selected",
-                "no-profile-selected": "No profile selected",
-                "no-profiles-or-inbounds-found": "No profiles or inbounds found",
-                "not-supported": "Not supported",
-                "search-profiles-or-inbounds": "Search profiles or inbounds...",
-                "unknown-inbound": "Unknown inbound",
-                "choose-an-inbound-to-apply-to-the-host": "Choose an inbound to apply to the host.",
-                "apply-changes": "Apply changes",
-                "hosts-do-not-support-multiple-inbounds": "Hosts do not support multiple inbounds",
-                "no-config-profiles-available": "No config profiles available",
-                "no-inbound-selected": "No inbound selected"
+                "loading-accessible-nodes": "Loading accessible nodes...",
+                "no-accessible-nodes-found-for-this-user": "No accessible nodes found for this user",
+                "access-summary": "Access Summary",
+                "user-accessible-nodes": "User Accessible Nodes"
             }
         }
     },
-    "edit-node-by-uuid-modal": {
-        "widget": {
-            "close": "Close",
-            "loading-node": "Loading node..."
+    "internal-squads": {
+        "drawer": {
+            "widget": {
+                "selected-from-multiple-profiles": "From multiple profiles",
+                "no-inbounds-selected": "No inbounds selected",
+                "choose-inbounds-from-any-profiles": "Choose inbounds from any profiles",
+                "update-internal-squad": "Update Internal Squad",
+                "search-profiles-or-inbounds": "Search profiles or inbounds...",
+                "config-profiles": "Config Profiles",
+                "flat-list": "Flat List",
+                "no-profiles-or-inbounds-found": "No profiles or inbounds found",
+                "no-config-profiles-available": "No config profiles available",
+                "all": "All",
+                "selected": "Selected",
+                "unselected": "Unselected"
+            }
         }
     },
-    "user-indentity-creation-card": {
-        "user-identity": "User Identity"
+    "host-select-inbound": {
+        "feature": {
+            "no-inbound-selected": "No inbound selected",
+            "change": "Change",
+            "choose-an-inbound-to-apply-to-the-host": "Choose an inbound to apply to the host",
+            "select": "Select"
+        }
+    },
+    "show-config-profiles-with-inbounds": {
+        "feature": {
+            "config-profile": "Config Profile",
+            "select-the-config-profile-that-will-be-applied-to-this-node": "Select the config profile that will be applied to this node",
+            "no-config-profile-selected": "No config profile selected",
+            "choose-a-profile-to-configure-inbounds-for-this-node": "Choose a profile to configure inbounds for this node",
+            "change-profile": "Change Profile",
+            "select-config-profile": "Select Config Profile"
+        }
+    },
+    "access-settings-card": {
+        "access-settings": "Access Settings"
     },
     "device-tag-settings-card": {
         "device-and-tag-settings": "Device & Tag Settings"
     },
+    "user-indentity-creation-card": {
+        "user-identity": "User Identity"
+    },
+    "hosts-config-profiles": {
+        "drawer": {
+            "widget": {
+                "no-profile-selected": "No profile selected",
+                "unknown-inbound": "Unknown inbound",
+                "selected": "selected",
+                "no-inbound-selected": "No inbound selected",
+                "choose-an-inbound-to-apply-to-the-host": "Choose an inbound to apply to the host.",
+                "apply-changes": "Apply changes",
+                "search-profiles-or-inbounds": "Search profiles or inbounds...",
+                "hosts-do-not-support-multiple-inbounds": "Hosts do not support multiple inbounds",
+                "not-supported": "Not supported",
+                "no-profiles-or-inbounds-found": "No profiles or inbounds found",
+                "no-config-profiles-available": "No config profiles available"
+            }
+        }
+    },
+    "stats": {
+        "widget": {
+            "current-date": "Current Date",
+            "upcoming-in": "Upcoming in {{month}}",
+            "nodes-pending-payment": "nodes pending payment",
+            "payments-in": "Payments in {{month}}",
+            "total-payments-made": "total payments made",
+            "total-spent": "Total Spent",
+            "lifetime-spending": "lifetime spending"
+        }
+    },
+    "edit-node-by-uuid-modal": {
+        "widget": {
+            "loading-node": "Loading node...",
+            "close": "Close"
+        }
+    },
     "hosts-filters": {
         "feature": {
-            "address": "Address",
             "all-config-profiles": "All Config Profiles",
             "all-inbounds": "All Inbounds",
             "filters": "Filters",
-            "search-by-remark": "Search by remark...",
             "select-config-profile": "Select config profile",
-            "select-inbound": "Select inbound"
+            "select-inbound": "Select inbound",
+            "search-by-remark": "Search by remark...",
+            "address": "Address"
         }
     }
 }
