@@ -363,7 +363,7 @@
         "address": "آدرس",
         "e-g-example-com": "مثلا example.com",
         "port": "پورت",
-        "e-g-443": "مثلا 443",
+        "e-g-443": "مثلا 2222",
         "consumption-multiplier": "ضریب مصرف ترافیک",
         "traffic-tracking": "ثبت مصرف ترافیک",
         "limit": "حد مصرف",
@@ -373,7 +373,15 @@
         "e-g-50": "مثلا 50",
         "save": "ذخیره",
         "consumption-m-line-1": "ضریب مشخص شده را به مقدار مصرف ترافیک اعمال می‌کند. به عنوان مثال اگر ضریب مصرف 0.5 باشد، مقدار مصرف نصف خواهد شد.",
-        "consumption-m-line-2": "به زبان ساده اگر محدودیت مصرف یک کاربر 1 گیگابایت باشد، با ضریب 2.0 کاربر فقط می‌تواند به اندازه 500 مگابایت از سرور استفاده کرده و سپس اکانت ایشان محدود می‌شود."
+        "consumption-m-line-2": "به زبان ساده اگر محدودیت مصرف یک کاربر 1 گیگابایت باشد، با ضریب 2.0 کاربر فقط می‌تواند به اندازه 500 مگابایت از سرور استفاده کرده و سپس اکانت ایشان محدود می‌شود.",
+        "consumption": "Consumption",
+        "copy-node-uuid": "Copy Node UUID",
+        "core-configuration": "Core configuration",
+        "management": "Management",
+        "more-actions": "More Actions",
+        "node-vitals": "Node Vitals",
+        "quick-actions": "Quick Actions",
+        "tracking-and-billing": "Tracking & Billing"
     },
     "home": {
         "page": {

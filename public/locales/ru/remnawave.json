@@ -363,7 +363,7 @@
         "address": "Адрес",
         "e-g-example-com": "например, example.com",
         "port": "Порт",
-        "e-g-443": "например, 443",
+        "e-g-443": "например, 2222",
         "consumption-multiplier": "Коэффициент использования",
         "traffic-tracking": "Отслеживание трафика",
         "limit": "Лимит",
@@ -373,7 +373,15 @@
         "e-g-50": "например, 50",
         "save": "Сохранить",
         "consumption-m-line-1": "Applies selected multiplier to user's traffic (1.0 = normal, 0.5 = half, 2.0 = double).",
-        "consumption-m-line-2": "In simple terms, this means that if a user's traffic limit is 1 GiB and the consumption multiplier is 2.0, the user will be able to use only 0.5 GiB of traffic (real usage), but Remnawave will show usage as 1 GiB and the user will be LIMITED."
+        "consumption-m-line-2": "In simple terms, this means that if a user's traffic limit is 1 GiB and the consumption multiplier is 2.0, the user will be able to use only 0.5 GiB of traffic (real usage), but Remnawave will show usage as 1 GiB and the user will be LIMITED.",
+        "consumption": "Consumption",
+        "copy-node-uuid": "Copy Node UUID",
+        "core-configuration": "Core configuration",
+        "management": "Management",
+        "more-actions": "More Actions",
+        "node-vitals": "Node Vitals",
+        "quick-actions": "Quick Actions",
+        "tracking-and-billing": "Tracking & Billing"
     },
     "home": {
         "page": {

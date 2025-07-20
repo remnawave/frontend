@@ -137,7 +137,7 @@ export const BaseNodeForm = <T extends CreateNodeCommand.Request | UpdateNodeCom
                                         }}
                                     />
                                     <Title c="blue.4" order={4}>
-                                        Node Vitals
+                                        {t('base-node-form.node-vitals')}
                                     </Title>
                                 </Group>
                             }
@@ -216,7 +216,7 @@ export const BaseNodeForm = <T extends CreateNodeCommand.Request | UpdateNodeCom
                                         }}
                                     />
                                     <Title c="indigo.4" order={4}>
-                                        Consumption
+                                        {t('base-node-form.consumption')}
                                     </Title>
                                 </Group>
                             }
@@ -297,7 +297,7 @@ export const BaseNodeForm = <T extends CreateNodeCommand.Request | UpdateNodeCom
                                         }}
                                     />
                                     <Title c="teal.4" order={4}>
-                                        Core configuration
+                                        {t('base-node-form.core-configuration')}
                                     </Title>
                                 </Group>
                             }
@@ -349,7 +349,7 @@ export const BaseNodeForm = <T extends CreateNodeCommand.Request | UpdateNodeCom
                                         }}
                                     />
                                     <Title c="yellow.4" order={4}>
-                                        Tracking & Billing
+                                        {t('base-node-form.tracking-and-billing')}
                                     </Title>
                                 </Group>
                             }
@@ -486,22 +486,22 @@ export const BaseNodeForm = <T extends CreateNodeCommand.Request | UpdateNodeCom
                                 size="sm"
                                 variant="outline"
                             >
-                                More Actions
+                                {t('base-node-form.more-actions')}
                             </Button>
                         </Menu.Target>
 
                         <Menu.Dropdown>
-                            <Menu.Label>Quick Actions</Menu.Label>
+                            <Menu.Label>{t('base-node-form.quick-actions')}</Menu.Label>
                             <GetNodeUsersUsageFeature nodeUuid={node.uuid} />
                             <CopyButton value={node.uuid}>
                                 {({ copy }) => (
                                     <Menu.Item leftSection={<TbCopy size="16px" />} onClick={copy}>
-                                        Copy Node UUID
+                                        {t('base-node-form.copy-node-uuid')}
                                     </Menu.Item>
                                 )}
                             </CopyButton>
                             <Menu.Divider />
-                            <Menu.Label>Management</Menu.Label>
+                            <Menu.Label>{t('base-node-form.management')}</Menu.Label>
                             <ToggleNodeStatusButtonFeature handleClose={handleClose} node={node} />
                             <Menu.Divider />
                             <DeleteNodeFeature handleClose={handleClose} node={node} />
