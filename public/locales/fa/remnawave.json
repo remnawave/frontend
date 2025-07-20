@@ -343,7 +343,7 @@
         "address-description-line-1": "آدرس باید یک آدرس IP یا دامنه برای مقصد اتصال باشد.",
         "address-description-line-2": "در بیشتر موارد، باید به یکی از نود‌های متصل اشاره کند.",
         "port-description-line-1": "پورت اتصال.",
-        "port-description-line-2": "در بیشتر موارد، باید با پورت ورودی انتخاب‌شده مطابقت داشته باشد.",
+        "port-description-line-2": "در بیشتر موارد، باید با پورت اینباند انتخاب‌شده مطابقت داشته باشد.",
         "sni-description-line-1": "SNI نشان‌دهنده نام سرور است.",
         "sni-description-line-2": "اگر مشخص نشود، مقدار از کانفیگ اینباند استخراج خواهد شد.",
         "host-visibility": "قابلیت دیده شدن هاست",
@@ -1048,9 +1048,9 @@
             "no-internal-squads": "هیچ اسکواد داخلی‌ای وجود ندارد",
             "create-your-first-internal-squad-to-get-started": "برای شروع، اولین اسکواد داخلی خود را ایجاد کنید",
             "delete-squad": "حذف اسکواد",
-            "inbounds": "ورودی‌ها",
+            "inbounds": "اینباندها",
             "users": "کاربران",
-            "edit-inbounds": "ویرایش ورودی‌ها"
+            "edit-inbounds": "ویرایش اینباندها"
         }
     },
     "config-profile-detail-header": {
@@ -1069,7 +1069,7 @@
             "create-your-first-config-profile-to-get-started": "برای شروع، اولین پروفایل پیکربندی خود را ایجاد کنید",
             "delete-profile": "حذف پروفایل",
             "download": "دانلود",
-            "inbounds": "ورودی‌ها",
+            "inbounds": "اینباندها",
             "nodes": "نودها",
             "quick-view": "نمای سریع",
             "edit-xray-config": "ویرایش پیکربندی Xray"
@@ -1124,7 +1124,7 @@
         }
     },
     "use-infra-providers-columns": {
-        "hoster-name": "نام میزبانی‌کننده",
+        "hoster-name": "نام هاستی‌کننده",
         "providers": "ارائه‌دهنده‌ها",
         "login-url": "آدرس ورود",
         "total": "جمع کل ($)",
@@ -1146,7 +1146,7 @@
         }
     },
     "use-infra-billing-records-columns": {
-        "hoster-name": "نام میزبان‌دهنده",
+        "hoster-name": "نام هاست‌دهنده",
         "billed-at": "تاریخ صورتحساب",
         "paid": "پرداخت شده ($)"
     },
@@ -1166,7 +1166,7 @@
         }
     },
     "use-infra-billing-nodes-columns": {
-        "hoster-name": "نام میزبانی‌کننده",
+        "hoster-name": "نام هاستی‌کننده",
         "node": "نود",
         "next-billing-at": "تاریخ صورتحساب بعدی"
     },
@@ -1234,12 +1234,12 @@
     },
     "flat-inbound-checkbox-card": {
         "shared": {
-            "inbound-config-inbound-tag": "پیکربندی ورودی: {{inboundTag}}"
+            "inbound-config-inbound-tag": "پیکربندی اینباند: {{inboundTag}}"
         }
     },
     "virtualized-flat-inbounds-list": {
         "shared": {
-            "no-inbounds-found": "هیچ ورودی‌ای یافت نشد"
+            "no-inbounds-found": "هیچ اینباندی یافت نشد"
         }
     },
     "select-billing-node": {
@@ -1296,7 +1296,7 @@
         "feature": {
             "no-inbound-selected": "هیچ اینباندی انتخاب نشده است",
             "change": "تغییر",
-            "choose-an-inbound-to-apply-to-the-host": "یک اینباند را برای اعمال به میزبان انتخاب کنید",
+            "choose-an-inbound-to-apply-to-the-host": "یک اینباند را برای اعمال به هاست انتخاب کنید",
             "select": "انتخاب"
         }
     },
@@ -1305,63 +1305,63 @@
             "config-profile": "پروفایل پیکربندی",
             "select-the-config-profile-that-will-be-applied-to-this-node": "پروفایل پیکربندی که به این نود اعمال می‌شود را انتخاب کنید",
             "no-config-profile-selected": "هیچ پروفایلی انتخاب نشده است",
-            "choose-a-profile-to-configure-inbounds-for-this-node": "یک پروفایل برای پیکربندی ورودی‌ها برای این نود انتخاب کنید",
+            "choose-a-profile-to-configure-inbounds-for-this-node": "یک پروفایل برای پیکربندی اینباند برای این نود انتخاب کنید",
             "change-profile": "تغییر پروفایل",
             "select-config-profile": "انتخاب پروفایل پیکربندی"
         }
     },
     "access-settings-card": {
-        "access-settings": "Access Settings"
+        "access-settings": "تنظیمات دسترسی"
     },
     "device-tag-settings-card": {
-        "device-and-tag-settings": "Device & Tag Settings"
+        "device-and-tag-settings": "تنظیمات دستگاه و تگ"
     },
-    "stats": {
-        "widget": {
-            "total-spent": "Total Spent",
-            "payments-in": "Payments in {{month}}",
-            "lifetime-spending": "lifetime spending",
-            "current-date": "Current Date",
-            "nodes-pending-payment": "nodes pending payment",
-            "total-payments-made": "total payments made",
-            "upcoming-in": "Upcoming in {{month}}"
-        }
+    "user-indentity-creation-card": {
+        "user-identity": "هویت کاربر"
     },
     "hosts-config-profiles": {
         "drawer": {
             "widget": {
-                "selected": "selected",
-                "no-profile-selected": "No profile selected",
-                "no-profiles-or-inbounds-found": "No profiles or inbounds found",
-                "not-supported": "Not supported",
-                "search-profiles-or-inbounds": "Search profiles or inbounds...",
-                "unknown-inbound": "Unknown inbound",
-                "choose-an-inbound-to-apply-to-the-host": "Choose an inbound to apply to the host.",
-                "apply-changes": "Apply changes",
-                "hosts-do-not-support-multiple-inbounds": "Hosts do not support multiple inbounds",
-                "no-config-profiles-available": "No config profiles available",
-                "no-inbound-selected": "No inbound selected"
+                "no-profile-selected": "هیچ پروفایلی انتخاب نشده",
+                "unknown-inbound": "اینباند ناشناخته",
+                "selected": "انتخاب شده",
+                "no-inbound-selected": "هیچ اینباندی انتخاب نشده است",
+                "choose-an-inbound-to-apply-to-the-host": "یک اینباند برای اعمال به هاست انتخاب کنید.",
+                "apply-changes": "اعمال تغییرات",
+                "search-profiles-or-inbounds": "جستجوی پروفایل یا اینباند...",
+                "hosts-do-not-support-multiple-inbounds": "نمی‌توان به یک هاست چندین اینباند اعمال کرد",
+                "not-supported": "پشتیبانی نمی‌شود",
+                "no-profiles-or-inbounds-found": "هیچ پروفایل یا اینباند یافت نشد",
+                "no-config-profiles-available": "هیچ پروفایل تنظیمات در دسترس نیست"
             }
+        }
+    },
+    "stats": {
+        "widget": {
+            "current-date": "تاریخ کنونی",
+            "upcoming-in": "{{month}}موعد ",
+            "nodes-pending-payment": "نود‌های در انتظار پرداخت",
+            "payments-in": "پرداخت‌ها در {{month}}",
+            "total-payments-made": "کل پرداخت‌های انجام شده",
+            "total-spent": "کل هزینه شده",
+            "lifetime-spending": "هزینه کل طول عمر"
         }
     },
     "edit-node-by-uuid-modal": {
         "widget": {
-            "close": "Close",
-            "loading-node": "Loading node..."
+            "loading-node": "در حال بارگذاری نود...",
+            "close": "بستن"
         }
-    },
-    "user-indentity-creation-card": {
-        "user-identity": "User Identity"
     },
     "hosts-filters": {
         "feature": {
-            "address": "Address",
-            "all-config-profiles": "All Config Profiles",
-            "all-inbounds": "All Inbounds",
-            "filters": "Filters",
-            "search-by-remark": "Search by remark...",
-            "select-config-profile": "Select config profile",
-            "select-inbound": "Select inbound"
+            "all-config-profiles": "همه پروفایل‌های تنظیمات",
+            "all-inbounds": "همه اینباندها",
+            "filters": "فیلترها",
+            "select-config-profile": "انتخاب پروفایل تنظیمات",
+            "select-inbound": "انتخاب اینباند",
+            "search-by-remark": "جستجو بر اساس توضیحات...",
+            "address": "آدرس"
         }
     }
 }
