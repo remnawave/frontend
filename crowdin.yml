@@ -1,0 +1,4 @@
+files:
+    - source: /public/locales/en/remnawave.json
+      translation: /public/locales
+      multilingual: 1
