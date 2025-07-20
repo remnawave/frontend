@@ -57,12 +57,12 @@
         "feature": {
             "save": "ذخیره",
             "format": "فرمت",
+            "failed-to-save-invalid-json": "به دلیل JSON نامتعتبر ذخیره نشد",
+            "error": "خطا",
+            "save-anyway": "ذخیره کانفیگ نامعتبر",
             "save-anyway-description": "این آیا از ذخیره کانفیگ نامعتبر مطمئن هستید؟ این عملیات ممکن است باعث بروز مشکلاتی در نرم‌افزار شود. اگر مطمئن هستید، روی \"ذخیره کانفیگ نامعتبر\" کلیک کنید.",
             "cancel": "لغو",
             "save-anyway-title": "تایید عملیات",
-            "error": "خطا",
-            "failed-to-save-invalid-json": "به دلیل JSON نامتعتبر ذخیره نشد",
-            "save-anyway": "ذخیره کانفیگ نامعتبر",
             "load-from-github": "بارگذاری از گیت‌هاب",
             "tools": "ابزارها"
         }
@@ -267,11 +267,11 @@
             "3-months": "+3 ماه",
             "1-year": "+1 سال",
             "2099-year": "سال 2099",
-            "disable-hwid-limit": "غیرفعالسازی لیمیت HWID",
-            "hwid-device-limit": "لیمیت دستگاه براساس HWID",
             "hwid-user-limit-line-1": "این ویژگی فقط در صورتی کار می‌‌کند که",
             "hwid-user-limit-line-2": "در فایل .env این مقدار را داشته باشد:",
             "hwid-user-limit-line-3": "اطلاعات بیشتر",
+            "disable-hwid-limit": "غیرفعالسازی لیمیت HWID",
+            "hwid-device-limit": "لیمیت دستگاه براساس HWID",
             "expire-at-description": "تاریخ و ساعت منقضی شدن اشتراک کاربر",
             "internal-squads": "اسکوادهای داخلی",
             "internal-squads-description": "اسکوادهایی که کاربر عضو آن‌ها خواهد بود را مشخص کنید"
@@ -297,8 +297,8 @@
             "subscription-qr-code": "اشتراک کد QR",
             "close": "بستن",
             "edit-user-headline": "ویرایش کاربر",
-            "subscription-url-description-line-2": "برای تغییر این مقدار لطفا فایل .env را ویرایش کرده و سپس Remnawave را با این کامند ریستارت کنید:",
             "subscription-url-description-line-1": "دامنه و مسیر استخراج شده از فایل .env:",
+            "subscription-url-description-line-2": "برای تغییر این مقدار لطفا فایل .env را ویرایش کرده و سپس Remnawave را با این کامند ریستارت کنید:",
             "view-accessible-nodes": "مشاهده نودهای در دسترس"
         }
     },
@@ -374,14 +374,14 @@
         "save": "ذخیره",
         "consumption-m-line-1": "ضریب مشخص شده را به مقدار مصرف ترافیک اعمال می‌کند. به عنوان مثال اگر ضریب مصرف 0.5 باشد، مقدار مصرف نصف خواهد شد.",
         "consumption-m-line-2": "به زبان ساده اگر محدودیت مصرف یک کاربر 1 گیگابایت باشد، با ضریب 2.0 کاربر فقط می‌تواند به اندازه 500 مگابایت از سرور استفاده کرده و سپس اکانت ایشان محدود می‌شود.",
-        "consumption": "Consumption",
-        "copy-node-uuid": "Copy Node UUID",
-        "core-configuration": "Core configuration",
-        "management": "Management",
-        "more-actions": "More Actions",
         "node-vitals": "Node Vitals",
+        "consumption": "Consumption",
+        "core-configuration": "Core configuration",
+        "tracking-and-billing": "Tracking & Billing",
+        "more-actions": "More Actions",
         "quick-actions": "Quick Actions",
-        "tracking-and-billing": "Tracking & Billing"
+        "copy-node-uuid": "Copy Node UUID",
+        "management": "Management"
     },
     "home": {
         "page": {
@@ -416,12 +416,12 @@
             "60-days": "۶۰ روز",
             "90-days": "۹۰ روز",
             "180-days": "۱۸۰ روز",
+            "total-traffic": "ترافیک کل",
+            "top-nodes": "نودهای پرمصرف",
             "filter-nodes": "فیلتر کردن نودها",
+            "previous-day": "روز قبل",
             "next-day": "روز بعد",
             "node": "نود",
-            "previous-day": "روز قبل",
-            "top-nodes": "نودهای پرمصرف",
-            "total-traffic": "ترافیک کل",
             "traffic": "ترافیک"
         }
     },
@@ -492,9 +492,9 @@
     },
     "xray-json-template-description": {
         "widget": {
+            "importing-json-subscription": "نحوه استفاده از اشتراک‌های JSON",
             "description-line-1": "برای استفاده از این اشتراک، کافی است",
-            "description-line-2": "را به انتهای لینک اشتراک خود اضافه کنید. درصورتی که از کلاینت‌های پشتیبانی شده جدول زیر استفاده نشود اشتراک‌ها مانند قبل، مثلا به صورت base64 یا mihomo، ارسال خواهند شد",
-            "importing-json-subscription": "نحوه استفاده از اشتراک‌های JSON"
+            "description-line-2": "را به انتهای لینک اشتراک خود اضافه کنید. درصورتی که از کلاینت‌های پشتیبانی شده جدول زیر استفاده نشود اشتراک‌ها مانند قبل، مثلا به صورت base64 یا mihomo، ارسال خواهند شد"
         }
     },
     "happ-routing-builder": {
@@ -733,8 +733,8 @@
                     "resets-the-traffic-usage-to-zero-for-all-selected-users": "ترافیک مصرفی را برای همه کاربران انتخاب‌شده به صفر بازنشانی می‌کند",
                     "revokes-subscription-for-all-selected-users": "اشتراک را برای همه کاربران انتخاب‌شده لغو می‌کند",
                     "change-active-internal-squads": "Change Active Internal Squads",
-                    "internal-squads": "Internal squads",
                     "specify-internal-squads-that-will-be-assigned-to-the-user": "Specify internal squads that will be assigned to the user",
+                    "internal-squads": "Internal squads",
                     "changes-the-active-internal-squads-for-all-selected-users": "Changes the active internal squads for all selected users"
                 }
             }
@@ -796,9 +796,9 @@
             "no-data-available-for-the-selected-period": "داده‌ای برای دوره انتخاب‌شده در دسترس نیست",
             "no-data-available": "داده‌ای در دسترس نیست",
             "traffic-statistics": "آمار ترافیک",
-            "usage-by-period": "استفاده بر اساس دوره",
-            "click-to-highlight-only-this-node": "کلیک کنید تا فقط این نود برجسته شود",
             "click-to-show-all": "برای نمایش همه کلیک کنید",
+            "click-to-highlight-only-this-node": "کلیک کنید تا فقط این نود برجسته شود",
+            "usage-by-period": "استفاده بر اساس دوره",
             "7-days": "۷ روز",
             "14-days": "۱۴ روز",
             "30-days": "۳۰ روز",
@@ -1068,9 +1068,9 @@
             "no-config-profiles": "هیچ پروفایل پیکربندی‌ای وجود ندارد",
             "create-your-first-config-profile-to-get-started": "برای شروع، اولین پروفایل پیکربندی خود را ایجاد کنید",
             "delete-profile": "حذف پروفایل",
-            "download": "دانلود",
             "inbounds": "ورودی‌ها",
             "nodes": "نودها",
+            "download": "دانلود",
             "quick-view": "نمای سریع",
             "edit-xray-config": "ویرایش پیکربندی Xray"
         }
@@ -1245,9 +1245,9 @@
     "select-billing-node": {
         "shared": {
             "billing-node": "نود صورتحساب",
-            "select-billing-node": "انتخاب نود صورتحساب...",
+            "no-billing-nodes-available": "هیچ نود صورتحسابی موجود نیست",
             "select-the-billing-node": "نود صورتحساب را انتخاب کنید.",
-            "no-billing-nodes-available": "هیچ نود صورتحسابی موجود نیست"
+            "select-billing-node": "انتخاب نود صورتحساب..."
         }
     },
     "select-infra-provider": {
@@ -1316,52 +1316,52 @@
     "device-tag-settings-card": {
         "device-and-tag-settings": "Device & Tag Settings"
     },
-    "stats": {
-        "widget": {
-            "total-spent": "Total Spent",
-            "payments-in": "Payments in {{month}}",
-            "lifetime-spending": "lifetime spending",
-            "current-date": "Current Date",
-            "nodes-pending-payment": "nodes pending payment",
-            "total-payments-made": "total payments made",
-            "upcoming-in": "Upcoming in {{month}}"
-        }
+    "user-indentity-creation-card": {
+        "user-identity": "User Identity"
     },
     "hosts-config-profiles": {
         "drawer": {
             "widget": {
-                "selected": "selected",
                 "no-profile-selected": "No profile selected",
-                "no-profiles-or-inbounds-found": "No profiles or inbounds found",
-                "not-supported": "Not supported",
-                "search-profiles-or-inbounds": "Search profiles or inbounds...",
                 "unknown-inbound": "Unknown inbound",
+                "selected": "selected",
+                "no-inbound-selected": "No inbound selected",
                 "choose-an-inbound-to-apply-to-the-host": "Choose an inbound to apply to the host.",
                 "apply-changes": "Apply changes",
+                "search-profiles-or-inbounds": "Search profiles or inbounds...",
                 "hosts-do-not-support-multiple-inbounds": "Hosts do not support multiple inbounds",
-                "no-config-profiles-available": "No config profiles available",
-                "no-inbound-selected": "No inbound selected"
+                "not-supported": "Not supported",
+                "no-profiles-or-inbounds-found": "No profiles or inbounds found",
+                "no-config-profiles-available": "No config profiles available"
             }
+        }
+    },
+    "stats": {
+        "widget": {
+            "current-date": "Current Date",
+            "upcoming-in": "Upcoming in {{month}}",
+            "nodes-pending-payment": "nodes pending payment",
+            "payments-in": "Payments in {{month}}",
+            "total-payments-made": "total payments made",
+            "total-spent": "Total Spent",
+            "lifetime-spending": "lifetime spending"
         }
     },
     "edit-node-by-uuid-modal": {
         "widget": {
-            "close": "Close",
-            "loading-node": "Loading node..."
+            "loading-node": "Loading node...",
+            "close": "Close"
         }
-    },
-    "user-indentity-creation-card": {
-        "user-identity": "User Identity"
     },
     "hosts-filters": {
         "feature": {
-            "address": "Address",
             "all-config-profiles": "All Config Profiles",
             "all-inbounds": "All Inbounds",
             "filters": "Filters",
-            "search-by-remark": "Search by remark...",
             "select-config-profile": "Select config profile",
-            "select-inbound": "Select inbound"
+            "select-inbound": "Select inbound",
+            "search-by-remark": "Search by remark...",
+            "address": "Address"
         }
     }
 }
