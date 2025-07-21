@@ -1363,5 +1363,7 @@
             "search-by-remark": "Поиск по примечанию...",
             "address": "Поиск по адресу..."
         }
-    }
+    },
+    "test": "testX",
+    "test2": "test2X"
 }

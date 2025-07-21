@@ -1363,5 +1363,7 @@
             "search-by-remark": "جستجو بر اساس توضیحات...",
             "address": "آدرس"
         }
-    }
+    },
+    "test": "testX",
+    "test2": "test2X"
 }
