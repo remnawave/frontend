@@ -28,6 +28,7 @@ jobs:
                   config: ./crowdin.yml
                   skip_ref_checkout: true
                   crowdin_branch_name: dev
+                  download_translations_args: -e af
                   pull_request_body: |
                       ## 🌐 New translations from Crowdin
 
