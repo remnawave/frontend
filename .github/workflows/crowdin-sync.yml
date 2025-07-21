@@ -25,6 +25,9 @@ jobs:
                   create_pull_request: true
                   download_translations_args: -b dev
                   pull_request_title: 'chore(i18n): update translations'
+                  pull_request_base_branch_name: 'dev'
+                  skip_ref_checkout: true
+                  crowdin_branch_name: dev
                   pull_request_body: |
                       ## 🌐 New translations from Crowdin
 
@@ -36,7 +39,6 @@ jobs:
 
                       ---
                       *Automated by [Crowdin GitHub Action](https://github.com/crowdin/github-action)*
-                  pull_request_base_branch_name: 'dev'
                   commit_message: 'chore(i18n): update translations'
               env:
                   # A classic GitHub Personal Access Token with the 'repo' scope selected (the user should have write access to the repository).
