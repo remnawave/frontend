@@ -1363,5 +1363,7 @@
             "search-by-remark": "Search by remark...",
             "address": "Address"
         }
-    }
+    },
+    "test": "testX",
+    "test2": "test2X"
 }
