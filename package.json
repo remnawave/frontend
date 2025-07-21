@@ -19,7 +19,8 @@
     "cb": "vite build",
     "start:preview": "vite preview --port 3333",
     "serve": "NODE_ENV=production tsc && vite build && vite preview --port 3333",
-    "serve:dev": "cross-env NODE_ENV=production DOMAIN_OVERRIDE=1 tsc && vite build && vite preview --port 3333",
+    "serve:dev": "tsc && vite build && vite preview --port 3333",
+    "serve:loc": "tsc && vite build && vite preview --port 3333",
     "typecheck": "tsc --noEmit",
     "lint": "npm run lint:eslint && npm run lint:stylelint",
     "lint:eslint": "eslint . --ext .ts,.tsx --cache",
@@ -95,6 +96,7 @@
     "ufo": "^1.6.1",
     "uqr": "^0.1.2",
     "vite-plugin-deadfile": "^1.4.0",
+    "vite-plugin-ejs": "^1.7.0",
     "xbytes": "^1.9.1",
     "zod": "^3.25.55",
     "zustand": "^5.0.5"

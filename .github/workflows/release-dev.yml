@@ -79,6 +79,29 @@ jobs:
               run: |
                   gh release upload dev-build remnawave-frontend.zip --clobber
 
+            - name: Install dependencies and build with Crowdin
+              env:
+                  CROWDIN: 1
+              run: |
+                  npm ci
+                  npm run start:build
+
+            - name: Create ZIP archive of /dist
+              run: |
+                  zip -r remnawave-frontend-loc.zip ./dist
+
+            - name: Remove previous ZIP from release (if exists)
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              run: |
+                  gh release delete-asset dev-build remnawave-frontend-loc.zip || true
+
+            - name: Upload new ZIP to release
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              run: |
+                  gh release upload dev-build remnawave-frontend-loc.zip --clobber
+
             - name: Update release notes
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

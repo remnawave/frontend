@@ -2,6 +2,7 @@ import removeConsole from 'vite-plugin-remove-console'
 // import { visualizer } from 'rollup-plugin-visualizer'
 import webfontDownload from 'vite-plugin-webfont-dl'
 import tsconfigPaths from 'vite-tsconfig-paths'
+import { ViteEjsPlugin } from 'vite-plugin-ejs'
 import { fileURLToPath, URL } from 'node:url'
 import react from '@vitejs/plugin-react-swc'
 // import deadFile from 'vite-plugin-deadfile'
@@ -15,7 +16,13 @@ export default defineConfig({
         react(),
         tsconfigPaths(),
         removeConsole(),
-        webfontDownload()
+        webfontDownload(),
+        ViteEjsPlugin((viteConfig) => {
+            return {
+                root: viteConfig.root,
+                isCrowdin: process.env.CROWDIN === '1'
+            }
+        })
         // visualizer({
         //     open: true,
         //     gzipSize: true,
@@ -80,7 +87,8 @@ export default defineConfig({
     define: {
         __DOMAIN_BACKEND__: JSON.stringify(process.env.DOMAIN_BACKEND || 'example.com').trim(),
         __NODE_ENV__: JSON.stringify(process.env.NODE_ENV).trim(),
-        __DOMAIN_OVERRIDE__: JSON.stringify(process.env.DOMAIN_OVERRIDE || '0').trim()
+        __DOMAIN_OVERRIDE__: JSON.stringify(process.env.DOMAIN_OVERRIDE || '0').trim(),
+        __CROWDIN__: JSON.stringify(process.env.CROWDIN || '0').trim()
     },
     server: {
         host: '0.0.0.0',
