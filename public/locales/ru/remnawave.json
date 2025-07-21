@@ -246,7 +246,7 @@
         "widget": {
             "only-active-nodes": "Отображаются только ноды с активным отслеживанием трафика",
             "today": "Сегодня",
-            "nodes-with-active-traffic-tracking-not-found": "Nodes with active traffic tracking not found."
+            "nodes-with-active-traffic-tracking-not-found": "Ноды с включенным трекингом не найдены."
         }
     },
     "create-user-modal": {
@@ -272,8 +272,8 @@
             "hwid-user-limit-line-3": "Подробнее.",
             "disable-hwid-limit": "Отключить лимит HWID",
             "hwid-device-limit": "Ограничение HWID устройств",
-            "expire-at-description": "The date and time when the user's subscription will expire.",
-            "internal-squads": "Internal squads",
+            "expire-at-description": "Дата и время истечения срока действия подписки пользователя.",
+            "internal-squads": "Внутренние сквады",
             "internal-squads-description": "Specify internal squads that will be assigned to the user"
         }
     },
@@ -297,9 +297,9 @@
             "subscription-qr-code": "QR-код ссылки-подписки",
             "close": "Закрыть",
             "edit-user-headline": "Редактирование",
-            "subscription-url-description-line-1": "Domain and path resolved from .env variable:",
-            "subscription-url-description-line-2": "If you want to change it, please change it in the .env file and restart Remnawave using command:",
-            "view-accessible-nodes": "View accessible nodes"
+            "subscription-url-description-line-1": "Домен и путь получены из .env переменной:",
+            "subscription-url-description-line-2": "Если вы хотите изменить его, пожалуйста, измените его в .env файле и перезапустите Remnawave командой:",
+            "view-accessible-nodes": "Посмотреть доступные ноды"
         }
     },
     "base-api-token-form": {
@@ -336,17 +336,17 @@
         "extra-xhttp": "Extra xHTTP",
         "xhttp-extra-params": "xHTTP extra params",
         "extra-xhttp-description": "This extra params will work only with xHTTP protocol. Pass object \"extra\" to the client. This JSON input is not validated, be sure to paste the correct extra params. Use the button below to copy the basic extra params, then paste it into the JSON input.",
-        "invalid-json": "Invalid JSON",
+        "invalid-json": "Неверный JSON",
         "fill-with-sample-xhttp-extra-params": "Fill with sample xHTTP extra params",
-        "close": "Close",
-        "clone": "Clone",
+        "close": "Закрыть",
+        "clone": "Дублировать",
         "address-description-line-1": "Address must be an IP address or a domain name of connection destination.",
-        "address-description-line-2": "In most cases, it should points to the one of connected nodes.",
-        "port-description-line-1": "Connection port.",
-        "port-description-line-2": "In most cases, must match the port of selected inbound.",
+        "address-description-line-2": "В большинстве случаев, должно быть направлено на одну из подключенных нод.",
+        "port-description-line-1": "Порт подключения.",
+        "port-description-line-2": "В большинстве случаев, должно совпадать с портом выбранного инбаунда.",
         "sni-description-line-1": "SNI is a server name indication.",
         "sni-description-line-2": "If not specified, value from config's inbound will be used.",
-        "host-visibility": "Host Visibility",
+        "host-visibility": "Видимость хоста",
         "server-description-description": "Только для приложения Happ.",
         "select-one-inbound-to-apply-to-the-host": "Select one inbound to apply to the host",
         "server-description-header": "Server Description",
@@ -376,12 +376,12 @@
         "consumption-m-line-2": "In simple terms, this means that if a user's traffic limit is 1 GiB and the consumption multiplier is 2.0, the user will be able to use only 0.5 GiB of traffic (real usage), but Remnawave will show usage as 1 GiB and the user will be LIMITED.",
         "node-vitals": "Node Vitals",
         "consumption": "Consumption",
-        "core-configuration": "Core configuration",
-        "tracking-and-billing": "Tracking & Billing",
-        "more-actions": "More Actions",
-        "quick-actions": "Quick Actions",
-        "copy-node-uuid": "Copy Node UUID",
-        "management": "Management"
+        "core-configuration": "Конфигурация ядра",
+        "tracking-and-billing": "Трекинг & Биллинг",
+        "more-actions": "Действия",
+        "quick-actions": "Быстрые действия",
+        "copy-node-uuid": "Скопировать UUID ноды",
+        "management": "Менеджмент"
     },
     "home": {
         "page": {
@@ -732,10 +732,10 @@
                     "perform-action-on-users": "Выполнить действия для {{usersCount}} выбранных пользователей",
                     "resets-the-traffic-usage-to-zero-for-all-selected-users": "Сбрасывает использование трафика до нуля для всех выбранных пользователей",
                     "revokes-subscription-for-all-selected-users": "Отзывает подписку для всех выбранных пользователей",
-                    "change-active-internal-squads": "Change Active Internal Squads",
-                    "specify-internal-squads-that-will-be-assigned-to-the-user": "Specify internal squads that will be assigned to the user",
-                    "internal-squads": "Internal squads",
-                    "changes-the-active-internal-squads-for-all-selected-users": "Changes the active internal squads for all selected users"
+                    "change-active-internal-squads": "Изменить активные внутренние группы",
+                    "specify-internal-squads-that-will-be-assigned-to-the-user": "Выберите внутренние сквады, в которых будет состоять пользователь",
+                    "internal-squads": "Внутренние сквады",
+                    "changes-the-active-internal-squads-for-all-selected-users": "Изменить активные внутренние сквады для всех выбранных пользователей"
                 }
             }
         },
@@ -812,7 +812,7 @@
             "grouped": "Сгруппировать",
             "filter-nodes": "Фильтр по нодам",
             "bar-chart": "Столбчатая диаграмма",
-            "show-nodes": "Show nodes",
+            "show-nodes": "Показать ноды",
             "click-to-see-all": "Показать все"
         }
     },
@@ -855,7 +855,7 @@
             "updated-at": "Дата обновления",
             "tag": "Тэг",
             "first-connected-at": "Первое подключение",
-            "active-internal-squads": "Active Internal Squads"
+            "active-internal-squads": "Активные внутренние сквады"
         }
     },
     "subscription-page-builder-header": {
@@ -1022,35 +1022,35 @@
         "select-template-to-load": "Выберите шаблон для загрузки"
     },
     "pm2-metrics": {
-        "total-processes": "Total Processes",
-        "total-memory": "Total Memory",
-        "average-cpu": "Average CPU",
+        "total-processes": "Все процессы",
+        "total-memory": "Всего памяти",
+        "average-cpu": "Средний CPU",
         "heaviest-process": "Heaviest Process"
     },
     "internal-squads-header": {
         "widget": {
-            "list": "List of all internal squads"
+            "list": "Список всех внутренних сквадов"
         }
     },
     "internal-squads-grid": {
         "widget": {
-            "delete-internal-squad": "Delete Internal Squad",
-            "delete-internal-squad-confirmation": "Are you sure you want to delete the internal squad \"{{internalSquadName}}\"?",
-            "this-action-cannot-be-undone": "This action cannot be undone.",
-            "delete": "Delete",
-            "cancel": "Cancel",
-            "remove-users-from-internal-squad": "Remove Users from Internal Squad",
-            "remove-users-from-internal-squad-confirmation": "Are you sure you want to remove the users from the internal squad \"{{internalSquadName}}\"?",
-            "remove": "Remove",
-            "add-users-to-internal-squad": "Add Users to Internal Squad",
+            "delete-internal-squad": "Удалить внутренний сквад",
+            "delete-internal-squad-confirmation": "Вы уверены, что хотите удалить внутренний сквад {{internalSquadName}}?",
+            "this-action-cannot-be-undone": "Это действие необратимо.",
+            "delete": "Удалить",
+            "cancel": "Отменить",
+            "remove-users-from-internal-squad": "Удалить пользователей из Внутреннего Сквада",
+            "remove-users-from-internal-squad-confirmation": "Вы уверены, что хотите удалить пользователей из внутреннего сквада {{internalSquadName}}?",
+            "remove": "Удалить",
+            "add-users-to-internal-squad": "Добавить пользователей во Внутренний Сквад",
             "add-users-to-internal-squad-confirmation": "Are you sure you want to add the users to the internal squad \"{{internalSquadName}}\"?",
             "add": "Добавить",
-            "no-internal-squads": "No Internal Squads",
-            "create-your-first-internal-squad-to-get-started": "Create your first internal squad to get started",
-            "delete-squad": "Delete squad",
-            "inbounds": "Inbounds",
-            "users": "Users",
-            "edit-inbounds": "Edit inbounds"
+            "no-internal-squads": "Внутренних сквадов не найдено",
+            "create-your-first-internal-squad-to-get-started": "Создайте свой первый внутренний сквад",
+            "delete-squad": "Удалить сквад",
+            "inbounds": "Инбаунды",
+            "users": "Пользователи",
+            "edit-inbounds": "Изменить инбаунды"
         }
     },
     "config-profile-detail-header": {
