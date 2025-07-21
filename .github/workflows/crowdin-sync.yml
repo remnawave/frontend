@@ -25,6 +25,7 @@ jobs:
                   create_pull_request: true
                   pull_request_title: 'chore(i18n): update translations'
                   pull_request_base_branch_name: 'dev'
+                  config: ./crowdin.yml
                   skip_ref_checkout: true
                   crowdin_branch_name: dev
                   pull_request_body: |
