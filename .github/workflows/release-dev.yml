@@ -58,9 +58,19 @@ jobs:
                   }
                   EOF
 
-            - name: Install dependencies and build
+            - name: Install dependencies
               run: |
                   npm ci
+
+            - name: Upload sources
+              env:
+                  CROWDIN_PROJECT_ID: ${{ secrets.CROWDIN_PROJECT_ID }}
+                  CROWDIN_API_TOKEN: ${{ secrets.CROWDIN_API_TOKEN }}
+              run: |
+                  npm run crowdin:upload
+
+            - name: Build
+              run: |
                   npm run start:build
 
             - name: Create ZIP archive of /dist
@@ -79,15 +89,13 @@ jobs:
               run: |
                   gh release upload dev-build remnawave-frontend.zip --clobber
 
-            - name: Install dependencies and build with Crowdin
+            - name: Build with Crowdin
               env:
                   CROWDIN: 1
                   CROWDIN_PROJECT_ID: ${{ secrets.CROWDIN_PROJECT_ID }}
                   CROWDIN_API_TOKEN: ${{ secrets.CROWDIN_API_TOKEN }}
               run: |
-                  crowdin upload --branch=dev
-                  crowdin download translations --language=af --branch=dev
-                  npm ci
+                  npm run crowdin:download
                   npm run start:build
 
             - name: Create ZIP archive of /dist
