@@ -1,0 +1,46 @@
+name: Sync translations from Crowdin
+
+on:
+    schedule:
+        - cron: '0 * * * *'
+    workflow_dispatch:
+
+jobs:
+    synchronize-with-crowdin:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+
+            - name: crowdin action
+              uses: crowdin/github-action@v2
+              with:
+                  upload_sources: false
+                  upload_translations: false
+                  download_translations: true
+                  localization_branch_name: translations
+                  create_pull_request: true
+                  pull_request_title: 'chore(i18n): update translations'
+                  pull_request_body: |
+                      ## 🌐 New translations from Crowdin
+
+                      This PR contains the latest translations from [Crowdin](https://crowdin.com).
+
+
+                      ### 🔍 Translation Status
+                      Check the current translation status at [i18n.remna.st](https://i18n.remna.st)
+
+                      ---
+                      *Automated by [Crowdin GitHub Action](https://github.com/crowdin/github-action)*
+                  pull_request_base_branch_name: 'dev'
+                  commit_message: 'chore(i18n): update translations'
+              env:
+                  # A classic GitHub Personal Access Token with the 'repo' scope selected (the user should have write access to the repository).
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+                  # A numeric ID, found at https://crowdin.com/project/<projectName>/tools/api
+                  CROWDIN_PROJECT_ID: ${{ secrets.CROWDIN_PROJECT_ID }}
+
+                  # Visit https://crowdin.com/settings#api-key to create this token
+                  CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_API_TOKEN }}
