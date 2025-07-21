@@ -274,7 +274,7 @@
             "hwid-device-limit": "Ограничение HWID устройств",
             "expire-at-description": "Дата и время истечения срока действия подписки пользователя.",
             "internal-squads": "Внутренние сквады",
-            "internal-squads-description": "Specify internal squads that will be assigned to the user"
+            "internal-squads-description": "Укажите, в каких внутренних группах будет состоять пользователь."
         }
     },
     "login-form-feature": {
@@ -329,7 +329,7 @@
         "e-g-443": "например, 443",
         "path-e-g-ws": "путь (например, /ws)",
         "security-layer": "Security Layer",
-        "tls-transport-layer-security": "TLS",
+        "tls-transport-layer-security": "TLS (Transport Layer Security)",
         "none": "None",
         "inbounds-default": "По умолчанию",
         "here-you-can-override-security-settings-from-xtls-config": "Здесь вы можете переопределить настройки безопасности из конфигурации XTLS.",
