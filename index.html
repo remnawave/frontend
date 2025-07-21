@@ -3,14 +3,6 @@
     <head>
         <!-- <script crossorigin="anonymous" src="//unpkg.com/react-scan/dist/auto.global.js"></script> -->
 
-        <% if(isCrowdin){ %>
-        <script type="text/javascript">
-            var _jipt = []
-            _jipt.push(['project', 'remnawave'])
-        </script>
-        <script type="text/javascript" src="//cdn.crowdin.com/jipt/jipt.js"></script>
-        <% } %>
-
         <meta charset="UTF-8" />
         <meta name="robots" content="noindex, nofollow" />
 
@@ -28,7 +20,7 @@
             href="https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;500;700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
             rel="stylesheet"
         />
-        <script src="/wasm_exec.js"></script>
+        <script type="module" src="/wasm_exec.js"></script>
 
         <meta name="color-scheme" content="dark only" />
         <meta name="theme-color" content="#161B23" />
@@ -39,6 +31,14 @@
         />
         <meta name="description" content="Remnawave Dashboard" />
         <title>Remnawave</title>
+
+        <% if(isCrowdin){ %>
+        <script type="text/javascript">
+            var _jipt = []
+            _jipt.push(['project', 'remnawave'])
+        </script>
+        <script type="text/javascript" src="//cdn.crowdin.com/jipt/jipt.js"></script>
+        <% } %>
     </head>
     <body>
         <div id="root"></div>
