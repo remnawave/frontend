@@ -23,7 +23,6 @@ jobs:
                   download_translations: true
                   localization_branch_name: translations
                   create_pull_request: true
-                  download_translations_args: -b dev
                   pull_request_title: 'chore(i18n): update translations'
                   pull_request_base_branch_name: 'dev'
                   skip_ref_checkout: true
