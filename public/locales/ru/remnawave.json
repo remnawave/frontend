@@ -274,7 +274,7 @@
             "hwid-device-limit": "Ограничение HWID устройств",
             "expire-at-description": "Дата и время истечения срока действия подписки пользователя.",
             "internal-squads": "Внутренние сквады",
-            "internal-squads-description": "Specify internal squads that will be assigned to the user"
+            "internal-squads-description": "Укажите, в каких внутренних группах будет состоять пользователь."
         }
     },
     "login-form-feature": {
@@ -299,7 +299,7 @@
             "edit-user-headline": "Редактирование",
             "subscription-url-description-line-1": "Домен и путь получены из .env переменной:",
             "subscription-url-description-line-2": "Если вы хотите изменить его, пожалуйста, измените его в .env файле и перезапустите Remnawave командой:",
-            "view-accessible-nodes": "Посмотреть доступные ноды"
+            "view-accessible-nodes": "Доступные ноды"
         }
     },
     "base-api-token-form": {
@@ -329,7 +329,7 @@
         "e-g-443": "например, 443",
         "path-e-g-ws": "путь (например, /ws)",
         "security-layer": "Security Layer",
-        "tls-transport-layer-security": "TLS",
+        "tls-transport-layer-security": "TLS (Transport Layer Security)",
         "none": "None",
         "inbounds-default": "По умолчанию",
         "here-you-can-override-security-settings-from-xtls-config": "Здесь вы можете переопределить настройки безопасности из конфигурации XTLS.",
@@ -350,10 +350,10 @@
         "server-description-description": "Только для приложения Happ.",
         "select-one-inbound-to-apply-to-the-host": "Select one inbound to apply to the host",
         "server-description-header": "Server Description",
-        "server-description-line-1": "This feature fill only with Happ with ProviderID value. Please, refer to",
-        "server-description-line-2": "Happ documentation",
-        "server-description-line-3": "for more information.",
-        "server-description-line-4": "Remnawave will encode this value to base64. Do not place encoded value here.",
+        "server-description-line-1": "Эта функция доступна только для Happ со значением ProviderID. См.",
+        "server-description-line-2": "документацию Happ",
+        "server-description-line-3": "для дополнительной информации.",
+        "server-description-line-4": "Remnawave закодирует это значение в формате base64. Не вводите здесь закодированное значение.",
         "server-description-placeholder": "Максимум 30 символов"
     },
     "base-node-form": {
@@ -372,10 +372,10 @@
         "notify-percent": "Процент уведомления",
         "e-g-50": "например, 50",
         "save": "Сохранить",
-        "consumption-m-line-1": "Applies selected multiplier to user's traffic (1.0 = normal, 0.5 = half, 2.0 = double).",
-        "consumption-m-line-2": "In simple terms, this means that if a user's traffic limit is 1 GiB and the consumption multiplier is 2.0, the user will be able to use only 0.5 GiB of traffic (real usage), but Remnawave will show usage as 1 GiB and the user will be LIMITED.",
-        "node-vitals": "Node Vitals",
-        "consumption": "Consumption",
+        "consumption-m-line-1": "Применяет выбранный множитель к трафику пользователя (1,0 = обычный, 0,5 = половина, 2,0 = двойной).",
+        "consumption-m-line-2": "Проще говоря, это означает, что если лимит трафика пользователя составляет 1 GB, а множитель потребления равен 2,0, пользователь сможет использовать только 0,5 GB трафика (реальное использование), но Remnawave покажет использование как 1 GB, и пользователь будет переведен в статус LIMITED.",
+        "node-vitals": "Параметры ноды",
+        "consumption": "Потребление",
         "core-configuration": "Конфигурация ядра",
         "tracking-and-billing": "Трекинг & Биллинг",
         "more-actions": "Действия",
@@ -1070,29 +1070,29 @@
             "delete-profile": "Delete profile",
             "inbounds": "Inbounds",
             "nodes": "Nodes",
-            "download": "Download",
-            "quick-view": "Quick view",
-            "edit-xray-config": "Edit Xray Config"
+            "download": "Скачать",
+            "quick-view": "Быстрый просмотр",
+            "edit-xray-config": "Изменить конфиг Xray"
         }
     },
     "config-profiles-header": {
         "widget": {
-            "list-of-all-config-profiles": "List of all config profiles"
+            "list-of-all-config-profiles": "Список всех профилей"
         }
     },
     "view-infra-provider": {
         "drawer": {
             "widget": {
-                "infra-provider": "Infra Provider",
-                "name-description": "The name of the provider. This is used to identify the provider in the UI.",
-                "name": "Name",
-                "enter-provider-name": "Enter provider name",
-                "favicon-link": "Favicon Link",
+                "infra-provider": "Провайдер",
+                "name-description": "Имя провайдера. Используется для вывода в UI.",
+                "name": "Имя",
+                "enter-provider-name": "Введите имя провайдера",
+                "favicon-link": "Ссылка на Favicon",
                 "enter-favicon-link": "Enter favicon link",
-                "favicon-link-description": "The favicon link is the link to the favicon of the provider. It is used to display the favicon of the provider in the UI. You can just enter the domain name.",
-                "login-url": "Login URL",
+                "favicon-link-description": "Это ссылка на иконку провайдера. Она используется для отображения иконки провайдера в UI. Достаточно просто ввести доменное имя.",
+                "login-url": "Ссылка для входа",
                 "enter-login-url": "Enter login URL",
-                "login-url-description": "The login URL is the URL of the login page of the provider. It will help you quickly go to the login page of the provider.",
+                "login-url-description": "URL-адрес входа — это URL-адрес страницы входа провайдера. Он поможет вам быстро перейти на страницу входа провайдера.",
                 "save-changes": "Save Changes"
             }
         }
@@ -1117,19 +1117,19 @@
             "delete": "Delete",
             "cancel": "Cancel",
             "refresh": "Обновить",
-            "create-infra-provider": "Create Infra Provider",
-            "infra-providers": "Infra Providers",
-            "list-of-all-infra-providers": "List of all infra providers",
-            "no-providers-found": "No providers found."
+            "create-infra-provider": "Создать провайдера",
+            "infra-providers": "Провайдеры",
+            "list-of-all-infra-providers": "Список всех провайдеров",
+            "no-providers-found": "Провайдеров не найдено."
         }
     },
     "use-infra-providers-columns": {
-        "hoster-name": "Hoster name",
-        "providers": "providers",
-        "login-url": "Login URL",
-        "total": "Total, $",
-        "servers": "Servers",
-        "no-servers": "No servers"
+        "hoster-name": "Имя хостера",
+        "providers": "провайдер(а)",
+        "login-url": "Ссылка для входа",
+        "total": "Всего, $",
+        "servers": "Сервера",
+        "no-servers": "Серверов нет"
     },
     "infra-billing-records-table": {
         "widget": {
@@ -1139,16 +1139,16 @@
             "delete": "Удалить",
             "cancel": "Cancel",
             "refresh": "Обновить",
-            "create": "Create",
-            "billing-records-sorted-by-date": "Billing records sorted by date",
-            "infra-billing-records": "Infra Billing Records",
-            "no-billing-records-found": "No billing records found."
+            "create": "Создать",
+            "billing-records-sorted-by-date": "Список всех платежей",
+            "infra-billing-records": "История платежей",
+            "no-billing-records-found": "Платежей не найдено."
         }
     },
     "use-infra-billing-records-columns": {
-        "hoster-name": "Hoster name",
-        "billed-at": "Billed at",
-        "paid": "Paid, $"
+        "hoster-name": "Имя хостера",
+        "billed-at": "Дата оплаты",
+        "paid": "Оплачено, $"
     },
     "infra-billing-nodes": {
         "widget": {
@@ -1158,17 +1158,17 @@
             "delete": "Delete",
             "cancel": "Cancel",
             "refresh": "Обновить",
-            "add-node": "Add Node",
-            "list-of-all-infra-billing-nodes": "List of all infra billing nodes sorted by next billing date",
-            "infra-billing-nodes": "Infra Billing Nodes",
-            "no-nodes-found": "No nodes found.",
-            "add-a-node": "Add a node"
+            "add-node": "Добавить ноду",
+            "list-of-all-infra-billing-nodes": "Список всех оплачиваемых нод, отсортированных по дате",
+            "infra-billing-nodes": "Оплачиваемые ноды",
+            "no-nodes-found": "Нод не найдено.",
+            "add-a-node": "Добавить ноду"
         }
     },
     "use-infra-billing-nodes-columns": {
-        "hoster-name": "Hoster name",
-        "node": "Node",
-        "next-billing-at": "Next billing at"
+        "hoster-name": "Имя хостера",
+        "node": "Нода",
+        "next-billing-at": "Следующий платеж"
     },
     "next-billing-at-cell": {
         "in-current-month": "In current month",
@@ -1215,7 +1215,7 @@
     "active-nodes-list": {
         "modal": {
             "shared": {
-                "profile-is-active-on": "Profile is active on {{nodeCount}} node(s)",
+                "profile-is-active-on": "Профиль активен на {{nodeCount}} ноде(ах)",
                 "this-profile-is-not-active-on-any-nodes": "This profile is not active on any nodes"
             }
         }
@@ -1223,7 +1223,7 @@
     "active-nodes-list-with-store": {
         "modal": {
             "shared": {
-                "active-nodes": "Active Nodes"
+                "active-nodes": "Активные ноды"
             }
         }
     },
@@ -1252,15 +1252,15 @@
     },
     "select-infra-provider": {
         "shared": {
-            "infrastructure-provider": "Infrastructure Provider",
+            "infrastructure-provider": "Провайдер",
             "no-providers-available": "No providers available",
-            "select-the-infrastructure-provider": "Select the infrastructure provider.",
-            "select-provider": "Select provider..."
+            "select-the-infrastructure-provider": "Выберите провайдера.",
+            "select-provider": "Выбрать провайдера..."
         }
     },
     "internal-squads-list": {
         "widget": {
-            "search-internal-squads": "Search internal squads...",
+            "search-internal-squads": "Поиск по внутренним сквадам...",
             "no-squads-found": "No squads found"
         }
     },
@@ -1269,55 +1269,55 @@
             "widget": {
                 "loading-accessible-nodes": "Loading accessible nodes...",
                 "no-accessible-nodes-found-for-this-user": "No accessible nodes found for this user",
-                "access-summary": "Access Summary",
-                "user-accessible-nodes": "User Accessible Nodes"
+                "access-summary": "Сводка доступа",
+                "user-accessible-nodes": "Доступные ноды для пользователя"
             }
         }
     },
     "internal-squads": {
         "drawer": {
             "widget": {
-                "selected-from-multiple-profiles": "From multiple profiles",
-                "no-inbounds-selected": "No inbounds selected",
-                "choose-inbounds-from-any-profiles": "Choose inbounds from any profiles",
-                "update-internal-squad": "Update Internal Squad",
-                "search-profiles-or-inbounds": "Search profiles or inbounds...",
-                "config-profiles": "Config Profiles",
-                "flat-list": "Flat List",
+                "selected-from-multiple-profiles": "Из нескольких профилей",
+                "no-inbounds-selected": "Инбаунды не выбраны",
+                "choose-inbounds-from-any-profiles": "Выберите инбаунды из любых профилей",
+                "update-internal-squad": "Обновить внутренний сквад",
+                "search-profiles-or-inbounds": "Поиск по профилям или инбаундам...",
+                "config-profiles": "Профили",
+                "flat-list": "Список",
                 "no-profiles-or-inbounds-found": "No profiles or inbounds found",
                 "no-config-profiles-available": "No config profiles available",
-                "all": "All",
-                "selected": "Selected",
-                "unselected": "Unselected"
+                "all": "Все",
+                "selected": "Выбранные",
+                "unselected": "Невыбранные"
             }
         }
     },
     "host-select-inbound": {
         "feature": {
-            "no-inbound-selected": "No inbound selected",
+            "no-inbound-selected": "Инбаунд не выбран",
             "change": "Change",
-            "choose-an-inbound-to-apply-to-the-host": "Choose an inbound to apply to the host",
-            "select": "Select"
+            "choose-an-inbound-to-apply-to-the-host": "Выберите инбаунд, который будет привязан к хосту",
+            "select": "Выбрать"
         }
     },
     "show-config-profiles-with-inbounds": {
         "feature": {
-            "config-profile": "Config Profile",
-            "select-the-config-profile-that-will-be-applied-to-this-node": "Select the config profile that will be applied to this node",
-            "no-config-profile-selected": "No config profile selected",
-            "choose-a-profile-to-configure-inbounds-for-this-node": "Choose a profile to configure inbounds for this node",
+            "config-profile": "Профили",
+            "select-the-config-profile-that-will-be-applied-to-this-node": "Выберите профиль, который будет применить для этой ноды.",
+            "no-config-profile-selected": "Профиль не выбран",
+            "choose-a-profile-to-configure-inbounds-for-this-node": "Выберите профиль для настройки инбаундов для этой ноды",
             "change-profile": "Change Profile",
-            "select-config-profile": "Select Config Profile"
+            "select-config-profile": "Выбрать профиль"
         }
     },
     "access-settings-card": {
-        "access-settings": "Access Settings"
+        "access-settings": "Настройки доступа"
     },
     "device-tag-settings-card": {
-        "device-and-tag-settings": "Device & Tag Settings"
+        "device-and-tag-settings": "Устройства & Теги"
     },
     "user-indentity-creation-card": {
-        "user-identity": "User Identity"
+        "user-identity": "Личность"
     },
     "hosts-config-profiles": {
         "drawer": {
@@ -1325,10 +1325,10 @@
                 "no-profile-selected": "No profile selected",
                 "unknown-inbound": "Unknown inbound",
                 "selected": "selected",
-                "no-inbound-selected": "No inbound selected",
-                "choose-an-inbound-to-apply-to-the-host": "Choose an inbound to apply to the host.",
-                "apply-changes": "Apply changes",
-                "search-profiles-or-inbounds": "Search profiles or inbounds...",
+                "no-inbound-selected": "Инбаунд не выбран",
+                "choose-an-inbound-to-apply-to-the-host": "Выберите инбаунд, который будет привязан к хосту.",
+                "apply-changes": "Применить изменения",
+                "search-profiles-or-inbounds": "Поиск по профилям или инбаундам...",
                 "hosts-do-not-support-multiple-inbounds": "Hosts do not support multiple inbounds",
                 "not-supported": "Not supported",
                 "no-profiles-or-inbounds-found": "No profiles or inbounds found",
@@ -1338,13 +1338,13 @@
     },
     "stats": {
         "widget": {
-            "current-date": "Current Date",
-            "upcoming-in": "Upcoming in {{month}}",
-            "nodes-pending-payment": "nodes pending payment",
-            "payments-in": "Payments in {{month}}",
-            "total-payments-made": "total payments made",
-            "total-spent": "Total Spent",
-            "lifetime-spending": "lifetime spending"
+            "current-date": "Текущая дата",
+            "upcoming-in": "Ожидается в {{month}}",
+            "nodes-pending-payment": "нод, ожидающих оплаты",
+            "payments-in": "Платежей в {{month}}",
+            "total-payments-made": "всего платежей",
+            "total-spent": "Всего потрачено",
+            "lifetime-spending": "суммарных трат"
         }
     },
     "edit-node-by-uuid-modal": {
@@ -1355,13 +1355,13 @@
     },
     "hosts-filters": {
         "feature": {
-            "all-config-profiles": "All Config Profiles",
+            "all-config-profiles": "Все профили",
             "all-inbounds": "All Inbounds",
-            "filters": "Filters",
-            "select-config-profile": "Select config profile",
-            "select-inbound": "Select inbound",
-            "search-by-remark": "Search by remark...",
-            "address": "Address"
+            "filters": "Фильтры",
+            "select-config-profile": "Выберите профиль",
+            "select-inbound": "Выберите инбаунд",
+            "search-by-remark": "Поиск по примечанию...",
+            "address": "Поиск по адресу..."
         }
     }
 }
