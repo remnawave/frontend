@@ -23,6 +23,7 @@ jobs:
                   download_translations: true
                   localization_branch_name: translations
                   create_pull_request: true
+                  download_translations_args: '--branch=dev'
                   pull_request_title: 'chore(i18n): update translations'
                   pull_request_body: |
                       ## 🌐 New translations from Crowdin
