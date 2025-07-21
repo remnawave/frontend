@@ -2,6 +2,10 @@ project_id_en: 'CROWDIN_PROJECT_ID'
 api_token_env: 'CROWDIN_API_TOKEN'
 preserve_hierarchy: true
 
+base_path: .
+
 files:
     - source: /public/locales/en/remnawave.json
       translation: /public/locales/%two_letters_code%/remnawave.json
+
+export_languages: ['ru', 'fa', 'zh']
