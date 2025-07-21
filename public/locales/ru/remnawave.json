@@ -75,11 +75,11 @@
     },
     "action-group": {
         "feature": {
-            "new-user": "Новый пользователь",
+            "new-user": "Создать польз.",
             "reset-table": "Сбросить таблицу",
             "clear-filters": "Очистить фильтры",
             "update": "Обновить",
-            "bulk-actions": "Массовые действия"
+            "bulk-actions": "Масс. действия"
         }
     },
     "use-table-columns": {
@@ -603,9 +603,9 @@
             "user-status-remarks-description": "Эти значения будут отображаться в странице подписки, если пользователь просрочен, ограничен или отключен.",
             "user-status-remarks-description-line-2": "Вы можете добавить несколько примечаний для каждого статуса.",
             "user-status-remarks-description-line-3": "Поскольку просроченные, ограниченные и отключенные пользователи не могут подключиться к серверу, они увидят эти примечания вместо пустой подписки.",
-            "expired-users-remarks": "Примечания для просроченных пользователей",
-            "limited-users-remarks": "Примечания для ограниченных пользователей",
-            "disabled-users-remarks": "Примечания для отключенных пользователей",
+            "expired-users-remarks": "Примечания для EXPIRED пользователей",
+            "limited-users-remarks": "Примечания для LIMITED пользователей",
+            "disabled-users-remarks": "Примечания для DISABLED пользователей",
             "update-settings": "Обновить настройки",
             "enabled": "Включено",
             "disabled": "Выключено",
@@ -1069,7 +1069,7 @@
             "create-your-first-config-profile-to-get-started": "Create your first config profile to get started",
             "delete-profile": "Delete profile",
             "inbounds": "Inbounds",
-            "nodes": "Nodes",
+            "nodes": "Ноды",
             "download": "Скачать",
             "quick-view": "Быстрый просмотр",
             "edit-xray-config": "Изменить конфиг Xray"
@@ -1306,7 +1306,7 @@
             "select-the-config-profile-that-will-be-applied-to-this-node": "Выберите профиль, который будет применить для этой ноды.",
             "no-config-profile-selected": "Профиль не выбран",
             "choose-a-profile-to-configure-inbounds-for-this-node": "Выберите профиль для настройки инбаундов для этой ноды",
-            "change-profile": "Change Profile",
+            "change-profile": "Изменить профиль",
             "select-config-profile": "Выбрать профиль"
         }
     },
