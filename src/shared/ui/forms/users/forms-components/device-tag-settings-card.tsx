@@ -89,9 +89,9 @@ export function DeviceTagSettingsCard<
                                 />
                             </>
                         }
-                        descriptionProps={{
-                            component: 'div'
-                        }}
+                        // descriptionProps={{
+                        //     component: 'div'
+                        // }}
                         disabled={form.getValues().hwidDeviceLimit === 0}
                         hideControls
                         key={form.key('hwidDeviceLimit')}

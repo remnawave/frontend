@@ -3,6 +3,9 @@ export const ROUTES = {
         ROOT: '/auth',
         LOGIN: '/auth/login'
     },
+    OAUTH2: {
+        ROOT: '/oauth2/callback/:provider'
+    },
     DASHBOARD: {
         ROOT: '/dashboard',
         HOME: '/dashboard/home',

@@ -18,6 +18,7 @@ import { SubscriptionSettingsConnector } from '@pages/dashboard/subscription-set
 import { ConfigProfilesPageConnector } from '@pages/dashboard/config-profiles/connectors'
 import { NodesMetricsPageConnector } from '@pages/dashboard/nodes-metrics/ui/connectors'
 import { StatisticNodesConnector } from '@pages/dashboard/statistic-nodes/connectors'
+import { Oauth2CallbackPage } from '@pages/auth/oauth2-callback/oauth2-callback.page'
 import { ApiTokensPageConnector } from '@pages/dashboard/api-tokens/ui/connectors'
 import { ProxyDefensePageConnector } from '@pages/dashboard/proxy-defense'
 import { HostsPageConnector } from '@pages/dashboard/hosts/ui/connectors'
@@ -37,6 +38,9 @@ import { AuthLayout } from '../layouts/auth'
 const router = createBrowserRouter(
     createRoutesFromElements(
         <Route element={<ErrorBoundaryHoc fallback={<ErrorPageComponent />} />}>
+            <Route element={<AuthLayout />} path={ROUTES.OAUTH2.ROOT}>
+                <Route element={<Oauth2CallbackPage />} path={ROUTES.OAUTH2.ROOT} />
+            </Route>
             <Route element={<AuthGuard />}>
                 <Route element={<Navigate replace to={ROUTES.DASHBOARD.ROOT} />} path="/" />
                 <Route element={<AuthLayout />} path={ROUTES.AUTH.ROOT}>

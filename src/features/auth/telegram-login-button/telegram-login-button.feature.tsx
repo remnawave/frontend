@@ -77,7 +77,7 @@ export const TelegramLoginButtonFeature = (props: IProps) => {
             radius={'md'}
             variant="filled"
         >
-            Login
+            Telegram
         </Button>
     )
 }

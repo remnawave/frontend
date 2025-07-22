@@ -1,9 +1,9 @@
-import { Navigate, useNavigate, useParams } from 'react-router-dom'
+import { Navigate, useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { consola } from 'consola/browser'
 
-import { useGetConfigProfile, useGetConfigProfiles } from '@shared/api/hooks'
 import { fetchWithProgress } from '@shared/utils/fetch-with-progress'
+import { useGetConfigProfile } from '@shared/api/hooks'
 import { ROUTES } from '@shared/constants'
 import { LoadingScreen } from '@shared/ui'
 import { app } from 'src/config'
