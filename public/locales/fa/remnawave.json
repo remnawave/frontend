@@ -24,15 +24,15 @@
     },
     "bandwidth-metrics": {
         "current-year": "امسال",
-        "from-last-year": "سال پیش",
+        "from-last-year": "در مقایسه با سال پیش",
         "calendar-month": "این ماه تقویمی",
-        "from-last-month-0": "ماه پیش",
-        "last-30-days": "سی روز پیش",
-        "from-last-month": "ماه پیش",
-        "last-7-days": "هفت روز پیش",
-        "from-last-week": "هفته پیش",
+        "from-last-month-0": "در مقایسه با ماه قبل",
+        "last-30-days": "30 روز اخیر",
+        "from-last-month": "در مقایسه با ماه پیش",
+        "last-7-days": "7 روز اخیر",
+        "from-last-week": "در مقایسه با هفته قبل",
         "today": "امروز",
-        "from-yesterday": "دیروز"
+        "from-yesterday": "در مقایسه با دیروز"
     },
     "online-metrics": {
         "never-online": "آنلاین نشده",
@@ -57,7 +57,7 @@
         "feature": {
             "save": "ذخیره",
             "format": "فرمت",
-            "failed-to-save-invalid-json": "به دلیل JSON نامتعتبر ذخیره نشد",
+            "failed-to-save-invalid-json": "به دلیل JSON نامتعتبر ذخیره نشد.",
             "error": "خطا",
             "save-anyway": "ذخیره کانفیگ نامعتبر",
             "save-anyway-description": "این آیا از ذخیره کانفیگ نامعتبر مطمئن هستید؟ این عملیات ممکن است باعث بروز مشکلاتی در نرم‌افزار شود. اگر مطمئن هستید، روی \"ذخیره کانفیگ نامعتبر\" کلیک کنید.",
@@ -164,7 +164,7 @@
     },
     "keypair": {
         "widget": {
-            "public-key": "(معادل password) Public Key",
+            "public-key": "(معادل Password) Public Key",
             "private-key": "کلید خصوصی (Private Key)",
             "generate-key-pair": "ایجاد جفت کلید",
             "both-keys": "هر دو"
@@ -244,9 +244,9 @@
     },
     "table": {
         "widget": {
-            "only-active-nodes": "فقط نودهایی که ردیابی ترافیک فعال دارند نمایش داده می‌شوند.",
+            "only-active-nodes": "فقط نودهایی که پایش ترافیک فعال دارند نمایش داده می‌شوند",
             "today": "امروز",
-            "nodes-with-active-traffic-tracking-not-found": "Nodes with active traffic tracking not found."
+            "nodes-with-active-traffic-tracking-not-found": "هیچ نودی با پایش مصرف ترافیک فعال یافت نشد."
         }
     },
     "create-user-modal": {
@@ -257,9 +257,9 @@
             "traffic-reset-strategy": "دوره بازنشانی ترافیک",
             "traffic-reset-strategy-description": "هر چند وقت یک بار ترافیک کاربر بازنشانی شود",
             "data-limit": "محدودیت ترافیک",
-            "data-limit-description": "محدودیت ترافیک را به گیگابایت وارد کنید، صفر به معنی نامحدود است",
+            "data-limit-description": "محدودیت ترافیک را به گیگابایت وارد کنید (0 به معنی نامحدود است)",
             "username-cannot-be-changed-later": "نام کاربری نمی تواند بعدا تغییر داده شود",
-            "loading-user-creation": "در حال بارگذاری صفحه ساخت کاربر",
+            "loading-user-creation": "در حال بارگذاری صفحه ساخت کاربر ...",
             "create-user": "ساخت کاربر",
             "telegram-id-of-a-user-in-telegram": "آیدی عددی تلگرام کاربر",
             "email-of-a-user": "ایمیل کاربر",
@@ -269,12 +269,12 @@
             "2099-year": "سال 2099",
             "hwid-user-limit-line-1": "این ویژگی فقط در صورتی کار می‌‌کند که",
             "hwid-user-limit-line-2": "در فایل .env این مقدار را داشته باشد:",
-            "hwid-user-limit-line-3": "اطلاعات بیشتر",
+            "hwid-user-limit-line-3": "اطلاعات بیشتر.",
             "disable-hwid-limit": "غیرفعالسازی لیمیت HWID",
             "hwid-device-limit": "لیمیت دستگاه براساس HWID",
-            "expire-at-description": "تاریخ و ساعت منقضی شدن اشتراک کاربر",
+            "expire-at-description": "تاریخ و ساعت منقضی شدن اشتراک کاربر.",
             "internal-squads": "اسکوادهای داخلی",
-            "internal-squads-description": "اسکوادهایی که کاربر عضو آن‌ها خواهد بود را مشخص کنید"
+            "internal-squads-description": "اسکوادهایی که کاربر عضو آن‌ها خواهد بود را مشخص کنید."
         }
     },
     "login-form-feature": {
@@ -321,7 +321,7 @@
         "path": "مسیر",
         "alpn-e-g-h2": "ALPN (به طور مثال h2)",
         "fingerprint": "اثر انگشت",
-        "fingerprint-e-g-chrome": " اثر انگشت (مثلا chrome)",
+        "fingerprint-e-g-chrome": "اثر انگشت (مثلا chrome)",
         "save": "ذخیره",
         "sni-e-g-example-com": "SNI (مثلا example.com)",
         "host-e-g-example-com": "هاست (مثلا example.com)",
@@ -335,7 +335,7 @@
         "here-you-can-override-security-settings-from-xtls-config": "در اینجا می توانید تنظیمات امنیتی را از پیکربندی XTLS نادیده بگیرید.",
         "extra-xhttp": "تنظیمات Extra XHTTP",
         "xhttp-extra-params": "XHTTP Extra پارامترهای",
-        "extra-xhttp-description": "این تنظیمات فقط برای کانفیگ‌های XHTTP استفاده می‌شود. یک شی JSON به اسم extra به نرم‌افزار کلاینت ارسال خواهد شد. به کمک دکمه زیر می‌توانید تنظیمات نمونه را کپی کرده و استفاده کنید",
+        "extra-xhttp-description": "این تنظیمات فقط برای کانفیگ‌های XHTTP استفاده می‌شود. یک شی JSON به اسم extra به نرم‌افزار کلاینت ارسال خواهد شد. به کمک دکمه زیر می‌توانید تنظیمات نمونه را کپی کرده و استفاده کنید.",
         "invalid-json": "JSON نامعتبر",
         "fill-with-sample-xhttp-extra-params": "پر کردن با پارامترهای نمونه XHTTP Extra",
         "close": "بستن",
@@ -350,9 +350,9 @@
         "server-description-description": "مخصوص Happ.",
         "select-one-inbound-to-apply-to-the-host": "یک اینباند برای اعمال روی هاست انتخاب کنید",
         "server-description-header": "توضیحات سرور",
-        "server-description-line-1": "این ویژگی فقط با ProviderID نرم افزار Happ کار می‌کند. لطفا مراجعه کنید به:",
+        "server-description-line-1": "این ویژگی فقط با ProviderID نرم‌افزار Happ کار می‌کند. لطفا مراجعه کنید به",
         "server-description-line-2": "مستندات Happ",
-        "server-description-line-3": "برای اطلاعات بیشتر",
+        "server-description-line-3": "برای کسب اطلاعات بیشتر",
         "server-description-line-4": "این مقدار توسط Remnawave به صورت Base64 رمزنگاری می‌شود. لطفا مقدار رمزنگاری شده وارد نکنید.",
         "server-description-placeholder": "حداکثر 30 کاراکتر"
     },
@@ -365,23 +365,23 @@
         "port": "پورت",
         "e-g-443": "مثلا 2222",
         "consumption-multiplier": "ضریب مصرف ترافیک",
-        "traffic-tracking": "ثبت مصرف ترافیک",
+        "traffic-tracking": "پایش مصرف ترافیک",
         "limit": "حد مصرف",
         "reset-day": "روز صفر کردن ترافیک",
         "e-g-1-31": "مثلا 1-31",
         "notify-percent": "اطلاع‌رسانی در چند درصد",
         "e-g-50": "مثلا 50",
         "save": "ذخیره",
-        "consumption-m-line-1": "ضریب مشخص شده را به مقدار مصرف ترافیک اعمال می‌کند. به عنوان مثال اگر ضریب مصرف 0.5 باشد، مقدار مصرف نصف خواهد شد.",
-        "consumption-m-line-2": "به زبان ساده اگر محدودیت مصرف یک کاربر 1 گیگابایت باشد، با ضریب 2.0 کاربر فقط می‌تواند به اندازه 500 مگابایت از سرور استفاده کرده و سپس اکانت ایشان محدود می‌شود.",
-        "node-vitals": "Node Vitals",
-        "consumption": "Consumption",
-        "core-configuration": "Core configuration",
-        "tracking-and-billing": "Tracking & Billing",
-        "more-actions": "More Actions",
-        "quick-actions": "Quick Actions",
-        "copy-node-uuid": "Copy Node UUID",
-        "management": "Management"
+        "consumption-m-line-1": "ضریب مشخص شده را به مقدار مصرف ترافیک اعمال می‌کند (به عنوان مثال اگر ضریب مصرف 0.5 باشد، مقدار مصرف نصف خواهد شد. 1.0 = نرمال، 2.0 = مصرف دوبل)",
+        "consumption-m-line-2": "به زبان ساده اگر محدودیت مصرف یک کاربر 1 گیگابایت باشد، با ضریب 2.0 کاربر فقط می‌تواند به اندازه 500 مگابایت از سرور استفاده (مصرف واقعی) کند و سپس اکانت ایشان محدود می‌شود.",
+        "node-vitals": "اطلاعات اصلی نود",
+        "consumption": "مصرف",
+        "core-configuration": "پیکربندی هسته",
+        "tracking-and-billing": "پایش و صورتحساب‌ها",
+        "more-actions": "عملیات بیشتر",
+        "quick-actions": "عملیات سریع",
+        "copy-node-uuid": "کپی کردن UUID نود",
+        "management": "مدیریت"
     },
     "home": {
         "page": {
@@ -468,9 +468,9 @@
         "widget": {
             "delete-users": "حذف کردن کاربرها",
             "confirm-action-description": "آیا مطمئن هستید که می‌خواهید کاربران انتخاب شده را حذف کنید؟",
-            "confirm-action-irreversible": "این عملیات برگشت‌ناپذیر است",
+            "confirm-action-irreversible": "این عملیات برگشت‌ناپذیر است.",
             "cancel": "انصراف",
-            "user-deletion-description": "حذف تمامی کاربران با وضعیت انتخاب شده. اگر کاربران با وضعیت \"فعال یا Active\" را حذف می‌کنید، باید تمامی نودها را برای اعمال تغییرات مجدداً راه‌اندازی کنید",
+            "user-deletion-description": "حذف تمامی کاربران با وضعیت انتخاب شده. اگر کاربران با وضعیت \"فعال یا Active\" را حذف می‌کنید، باید تمامی نودها را برای اعمال تغییرات مجدداً راه‌اندازی کنید.",
             "select-status": "حذف کردن بر اساس وضعیت"
         }
     },
@@ -494,7 +494,7 @@
         "widget": {
             "importing-json-subscription": "نحوه استفاده از اشتراک‌های JSON",
             "description-line-1": "برای استفاده از این اشتراک، کافی است",
-            "description-line-2": "را به انتهای لینک اشتراک خود اضافه کنید. درصورتی که از کلاینت‌های پشتیبانی شده جدول زیر استفاده نشود اشتراک‌ها مانند قبل، مثلا به صورت base64 یا mihomo، ارسال خواهند شد"
+            "description-line-2": "را به انتهای لینک اشتراک خود اضافه کنید. درصورتی که از کلاینت‌های پشتیبانی شده جدول زیر استفاده نشود اشتراک‌ها مانند قبل (مثلا به صورت base64 یا mihomo) ارسال خواهند شد"
         }
     },
     "happ-routing-builder": {
@@ -509,8 +509,8 @@
             "proxy-all-traffic-except-rules-or-direct-all-traffic-except-rules": "قوانین مشخص شده به چه صورت اعمال شوند؟",
             "enable": "فعالسازی",
             "disable": "غیرفعالسازی",
-            "fake-dns-description": "فعالسازی یا غیرفعالسازی FakeDNS. پیشنهاد می‌شود درصورت استفاده از DoU این مورد را فعال کنید",
-            "choose-doh-dns-over-https-or-dou-dns-over-udp": "استفاده از DoU یا DoH برای سرور DNS ریموت",
+            "fake-dns-description": "فعالسازی یا غیرفعالسازی FakeDNS. پیشنهاد می‌شود درصورت استفاده از DoU این مورد را فعال کنید.",
+            "choose-doh-dns-over-https-or-dou-dns-over-udp": "استفاده از DoU (DNS over UDP) یا DoH (DNS over HTTPS) برای سرور DNS ریموت",
             "remote-dns-type": "نوع DNS ریموت",
             "domain-name-for-doh": "دامنه سرور DoH",
             "remote-dns-domain": "دامنه سرور DNS ریموت",
@@ -528,21 +528,21 @@
             "geosite-url": "لینک GeoSite",
             "unix-timestamp-description": "تایم استمپ آخرین به‌روزرسانی فایل‌های GeoIP و GeoSite. درصورت در دسترس نبودن خالی بگذارید.",
             "last-updated": "آخرین به‌روزرسانی",
-            "select-the-domain-processing-strategy": "استراتژی پردازش دامنه را انتخاب کنید",
+            "select-the-domain-processing-strategy": "استراتژی پردازش دامنه را انتخاب کنید.",
             "domain-strategy": "استراتژی دامنه",
             "dns-hosts-description": "مقادیر دستی DNS مورد نظر را به این صورت وارد نمایید: { \"example.com\": \"1.2.3.4\", \"test.org\": \"8.8.8.8\" }",
             "dns-hosts": "هاست‌های DNS",
-            "sites-that-will-use-direct-connection": "دامنه‌هایی که به صورت مستقیم وصل خواهند شد",
+            "sites-that-will-use-direct-connection": "دامنه‌هایی که به صورت مستقیم وصل خواهند شد.",
             "direct-sites": "دامنه‌های مستقیم",
-            "ip-addresses-that-will-use-direct-connection": "آیپی‌هایی که به صورت مستقیم وصل خواهند شد",
+            "ip-addresses-that-will-use-direct-connection": "آیپی‌هایی که به صورت مستقیم وصل خواهند شد.",
             "direct-ip": "آیپی‌های مستقیم",
-            "sites-that-will-be-proxied": "دامنه‌هایی که پروکسی خواهند شد",
+            "sites-that-will-be-proxied": "دامنه‌هایی که پروکسی خواهند شد.",
             "proxy-sites": "دامنه‌های پروکسی‌شده",
-            "ip-addresses-that-will-be-proxied": "آیپی‌هایی که پروکسی خواهند شد",
+            "ip-addresses-that-will-be-proxied": "آیپی‌هایی که پروکسی خواهند شد.",
             "proxy-ip": "آیپی‌های پروکسی‌شده",
-            "sites-that-will-be-blocked": "دامنه‌هایی که باید بلاک شوند",
+            "sites-that-will-be-blocked": "دامنه‌هایی که باید بلاک شوند.",
             "blocked-sites": "دامنه‌های بلاک شده",
-            "ip-addresses-that-will-be-blocked": "آیپی‌هایی که باید بلاک شوند",
+            "ip-addresses-that-will-be-blocked": "آیپی‌هایی که باید بلاک شوند.",
             "blocked-ips": "آیپی‌های بلاک شده",
             "encoded-happ-link": "لینک Happ ایجاد شده",
             "copied": "کپی شد",
@@ -732,10 +732,10 @@
                     "perform-action-on-users": "انجام اقدامات برای {{usersCount}} کاربر انتخاب‌شده",
                     "resets-the-traffic-usage-to-zero-for-all-selected-users": "ترافیک مصرفی را برای همه کاربران انتخاب‌شده به صفر بازنشانی می‌کند",
                     "revokes-subscription-for-all-selected-users": "اشتراک را برای همه کاربران انتخاب‌شده لغو می‌کند",
-                    "change-active-internal-squads": "Change Active Internal Squads",
-                    "specify-internal-squads-that-will-be-assigned-to-the-user": "Specify internal squads that will be assigned to the user",
-                    "internal-squads": "Internal squads",
-                    "changes-the-active-internal-squads-for-all-selected-users": "Changes the active internal squads for all selected users"
+                    "change-active-internal-squads": "تغییر دادن اسکوادهای فعال",
+                    "specify-internal-squads-that-will-be-assigned-to-the-user": "اسکوادهایی که این کاربر عضو آن‌ها خواهد شد را مشخص کنید",
+                    "internal-squads": "اسکوادهای داخلی",
+                    "changes-the-active-internal-squads-for-all-selected-users": "اسکوادهای فعال را برای همه کاربران انتخاب شده تغییر می‌دهد"
                 }
             }
         },
