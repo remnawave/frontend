@@ -76,7 +76,7 @@ export const LoginPage = () => {
                 )}
 
                 {(isTelegramLogin || isOAuth2Login) && (
-                    <Center maw={800} mt={20} w={{ base: 440, sm: 500, md: 500 }}>
+                    <Center maw={800} mt={20}>
                         <Stack>
                             {isTelegramLogin && (
                                 <TelegramLoginButtonFeature tgAuth={authStatus.tgAuth} />

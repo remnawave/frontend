@@ -93,7 +93,7 @@ export default defineConfig({
     server: {
         host: '0.0.0.0',
         port: 3333,
-        cors: false,
+        cors: true,
         strictPort: true,
         allowedHosts: true
     },
