@@ -5,11 +5,7 @@
     border-radius: var(--mantine-radius-lg);
     padding: var(--mantine-spacing-sm);
     margin-bottom: var(--mantine-spacing-md);
-    background: linear-gradient(
-        135deg,
-        var(--mantine-color-dark-6) 0%,
-        var(--mantine-color-dark-7) 100%
-    );
+
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     box-shadow:
         0 2px 8px light-dark(rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.2)),
@@ -23,22 +19,6 @@
     box-shadow:
         0 8px 25px light-dark(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.3)),
         0 4px 10px light-dark(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2));
-}
-
-/* Gradient Border */
-.gradientBorder {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background: linear-gradient(
-        90deg,
-        var(--mantine-color-blue-5),
-        var(--mantine-color-teal-5),
-        var(--mantine-color-green-5)
-    );
-    border-radius: var(--mantine-radius-lg) var(--mantine-radius-lg) 0 0;
 }
 
 /* Icon Wrapper */

@@ -21,7 +21,7 @@ export default function NodesPageComponent(props: IProps) {
             <PageHeader
                 breadcrumbs={[
                     { label: t('constants.dashboard'), href: ROUTES.DASHBOARD.HOME },
-                    { label: t('constants.management') },
+
                     { label: t('constants.nodes') }
                 ]}
                 title={t('constants.nodes')}

@@ -94,6 +94,44 @@ export const ApiTokenCardWidget = forwardRef((props: IProps, ref: ForwardedRef<H
                             <div className={classes.iconWrapper}>
                                 <PiKey className={classes.tokenIcon} size="18px" />
                             </div>
+                            <Group className={classes.actionButtons} gap="xs">
+                                <Tooltip
+                                    label={
+                                        clipboard.copied
+                                            ? t('api-token-card.widget.copied')
+                                            : t('api-token-card.widget.copy-token')
+                                    }
+                                >
+                                    <ActionIcon
+                                        className={classes.actionButton}
+                                        color={clipboard.copied ? 'teal' : 'blue'}
+                                        onClick={handleCopy}
+                                        radius="md"
+                                        size="lg"
+                                        variant={clipboard.copied ? 'filled' : 'light'}
+                                    >
+                                        {clipboard.copied ? (
+                                            <PiCheck size="16px" />
+                                        ) : (
+                                            <PiCopy size="16px" />
+                                        )}
+                                    </ActionIcon>
+                                </Tooltip>
+
+                                <Tooltip label={t('api-token-card.widget.delete')}>
+                                    <ActionIcon
+                                        className={classes.actionButton}
+                                        color="red"
+                                        loading={isDeletingApiToken}
+                                        onClick={handleDelete}
+                                        radius="md"
+                                        size="lg"
+                                        variant="light"
+                                    >
+                                        <PiTrash size="16px" />
+                                    </ActionIcon>
+                                </Tooltip>
+                            </Group>
                             <Badge
                                 autoContrast
                                 className={classes.tokenBadge}
@@ -112,46 +150,7 @@ export const ApiTokenCardWidget = forwardRef((props: IProps, ref: ForwardedRef<H
                             </Group>
                         </Group>
                     </Stack>
-
-                    <Group className={classes.actionButtons} gap="xs">
-                        <Tooltip
-                            label={
-                                clipboard.copied
-                                    ? t('api-token-card.widget.copied')
-                                    : t('api-token-card.widget.copy-token')
-                            }
-                        >
-                            <ActionIcon
-                                className={classes.actionButton}
-                                color={clipboard.copied ? 'teal' : 'blue'}
-                                onClick={handleCopy}
-                                size="lg"
-                                variant={clipboard.copied ? 'filled' : 'light'}
-                            >
-                                {clipboard.copied ? (
-                                    <PiCheck size="16px" />
-                                ) : (
-                                    <PiCopy size="16px" />
-                                )}
-                            </ActionIcon>
-                        </Tooltip>
-
-                        <Tooltip label={t('api-token-card.widget.delete')}>
-                            <ActionIcon
-                                className={classes.actionButton}
-                                color="red"
-                                loading={isDeletingApiToken}
-                                onClick={handleDelete}
-                                size="lg"
-                                variant="light"
-                            >
-                                <PiTrash size="16px" />
-                            </ActionIcon>
-                        </Tooltip>
-                    </Group>
                 </Flex>
-
-                <div className={classes.gradientBorder} />
             </Container>
         </motion.div>
     )

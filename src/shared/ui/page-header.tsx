@@ -1,4 +1,5 @@
 import { Anchor, Breadcrumbs, ElementProps, Group, GroupProps, Text, Title } from '@mantine/core'
+import { PiCaretRight } from 'react-icons/pi'
 import { NavLink } from 'react-router-dom'
 import { motion } from 'motion/react'
 import { ReactNode } from 'react'
@@ -43,7 +44,11 @@ export function PageHeader({
                             ease: [0, 0.71, 0.2, 1.01]
                         }}
                     >
-                        <Breadcrumbs mt="sm">
+                        <Breadcrumbs
+                            mt="sm"
+                            separator={<PiCaretRight size={14} />}
+                            separatorMargin="xs"
+                        >
                             {breadcrumbs.map((breadcrumb) =>
                                 breadcrumb.href ? (
                                     <Anchor
