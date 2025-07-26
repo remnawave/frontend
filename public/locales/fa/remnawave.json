@@ -79,7 +79,16 @@
             "reset-table": "بازنشانی جدول",
             "clear-filters": "پاک کردن فیلترها",
             "update": "به‌روزرسانی",
-            "bulk-actions": "عملیات جمعی"
+            "bulk-actions": "عملیات جمعی",
+            "help": "Help",
+            "table-controls-help": "Table Controls Help",
+            "table-controler-description-line-1": "This table provides several controls to help you view and manage the data effectively. Here's what each control does:",
+            "table-controler-description-line-2": "Control",
+            "table-controler-description-line-3": "Description",
+            "table-controler-description-line-4": "Toggle column filters to search and filter data",
+            "show-or-hide-specific-columns": "Show or hide specific columns",
+            "adjust-row-spacing-density": "Adjust row spacing density",
+            "toggle-fullscreen-table-view": "Toggle fullscreen table view"
         }
     },
     "use-table-columns": {
@@ -1363,5 +1372,17 @@
             "search-by-remark": "جستجو بر اساس توضیحات...",
             "address": "آدرس"
         }
+    },
+    "mobile-warning-overlay": {
+        "mobile-device-detected": "Mobile Device Detected",
+        "description-line-1": "This page contains complex tables that may not be comfortable to use on mobile devices.",
+        "description-line-2": "Here are some controls you can use to manage the table on mobile devices.",
+        "show-or-hide-columns": "Show or hide columns",
+        "adjust-row-spacing-density": "Adjust row spacing density",
+        "toggle-fullscreen-table-view": "Toggle fullscreen table view",
+        "desktop-recommended": "Desktop recommended",
+        "or": "or",
+        "rotate-device": "Rotate device",
+        "i-understand-continue-anyway": "I understand, continue anyway"
     }
 }
