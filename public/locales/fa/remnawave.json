@@ -496,7 +496,8 @@
             "error": "خطا",
             "passwords-do-not-match": "پسوردها مطابقت ندارند",
             "password-too-short": "حداقل 24 کاراکتر",
-            "register-description": "برای شروع یک اکانت سوپرادمین ایجاد کنید"
+            "register-description": "برای شروع یک اکانت سوپرادمین ایجاد کنید",
+            "registration": "Registration"
         }
     },
     "xray-json-template-description": {

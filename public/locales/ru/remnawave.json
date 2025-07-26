@@ -496,7 +496,8 @@
             "error": "Ошибка",
             "passwords-do-not-match": "Пароли не совпадают",
             "password-too-short": "Минимум 24 символа",
-            "register-description": "Создайте аккаунт супер-админа, чтобы начать"
+            "register-description": "Создайте аккаунт супер-админа, чтобы начать",
+            "registration": "Регистрация"
         }
     },
     "xray-json-template-description": {
