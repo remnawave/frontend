@@ -496,7 +496,8 @@
             "error": "错误",
             "passwords-do-not-match": "密码不匹配",
             "password-too-short": "最少 24 个字符",
-            "register-description": "创建一个超级管理员账户以开始使用"
+            "register-description": "创建一个超级管理员账户以开始使用",
+            "registration": "Registration"
         }
     },
     "xray-json-template-description": {
