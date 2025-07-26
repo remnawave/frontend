@@ -80,7 +80,7 @@ export const UserActionGroupFeature = (props: IProps) => {
                     size="xs"
                     variant="light"
                 >
-                    Help
+                    {t('action-group.feature.help')}
                 </Button>
                 <Button
                     leftSection={<PiArrowsClockwise size="16px" />}
@@ -145,19 +145,22 @@ export const UserActionGroupFeature = (props: IProps) => {
                 padding="lg"
                 position="left"
                 size="500px"
-                title="Table Controls Help"
+                title={t('action-group.feature.table-controls-help')}
             >
                 <Stack gap="md">
                     <Text c="dimmed" size="sm">
-                        This table provides several controls to help you view and manage the data
-                        effectively. Here's what each control does:
+                        {t('action-group.feature.table-controler-description-line-1')}
                     </Text>
 
                     <Table>
                         <Table.Thead>
                             <Table.Tr>
-                                <Table.Th>Control</Table.Th>
-                                <Table.Th>Description</Table.Th>
+                                <Table.Th>
+                                    {t('action-group.feature.table-controler-description-line-2')}
+                                </Table.Th>
+                                <Table.Th>
+                                    {t('action-group.feature.table-controler-description-line-3')}
+                                </Table.Th>
                             </Table.Tr>
                         </Table.Thead>
                         <Table.Tbody>
@@ -168,13 +171,17 @@ export const UserActionGroupFeature = (props: IProps) => {
                                         <TbFilterOff size="24px" />
                                     </Group>
                                 </Table.Td>
-                                <Table.Td>Toggle column filters to search and filter data</Table.Td>
+                                <Table.Td>
+                                    {t('action-group.feature.table-controler-description-line-4')}
+                                </Table.Td>
                             </Table.Tr>
                             <Table.Tr>
                                 <Table.Td>
                                     <TbColumns size="24px" />
                                 </Table.Td>
-                                <Table.Td>Show or hide specific columns</Table.Td>
+                                <Table.Td>
+                                    {t('action-group.feature.show-or-hide-specific-columns')}
+                                </Table.Td>
                             </Table.Tr>
                             <Table.Tr>
                                 <Table.Td>
@@ -184,7 +191,9 @@ export const UserActionGroupFeature = (props: IProps) => {
                                         <TbBaselineDensityLarge size="24px" />
                                     </Group>
                                 </Table.Td>
-                                <Table.Td>Adjust row spacing density</Table.Td>
+                                <Table.Td>
+                                    {t('action-group.feature.adjust-row-spacing-density')}
+                                </Table.Td>
                             </Table.Tr>
                             <Table.Tr>
                                 <Table.Td>
@@ -193,7 +202,9 @@ export const UserActionGroupFeature = (props: IProps) => {
                                         <TbMinimize size="24px" />
                                     </Group>
                                 </Table.Td>
-                                <Table.Td>Toggle fullscreen table view</Table.Td>
+                                <Table.Td>
+                                    {t('action-group.feature.toggle-fullscreen-table-view')}
+                                </Table.Td>
                             </Table.Tr>
                         </Table.Tbody>
                     </Table>

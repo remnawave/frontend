@@ -12,12 +12,14 @@ import {
 } from '@mantine/core'
 import { TbBaselineDensitySmall, TbColumns, TbMaximize, TbRotate2 } from 'react-icons/tb'
 import { PiDeviceMobile, PiMonitor, PiWarning } from 'react-icons/pi'
+import { useTranslation } from 'react-i18next'
 import { useEffect, useState } from 'react'
 
 import { useMiscStoreActions, useMobileWarningClosed } from '@entities/dashboard/misc-store'
 
 export function MobileWarningOverlay() {
     const [opened, setOpened] = useState(false)
+    const { t } = useTranslation()
 
     const mobileWarningClosed = useMobileWarningClosed()
     const actions = useMiscStoreActions()
@@ -59,23 +61,21 @@ export function MobileWarningOverlay() {
 
                     <Stack align="center" gap="sm">
                         <Title c="orange.4" order={3} ta="center">
-                            Mobile Device Detected
+                            {t('mobile-warning-overlay.mobile-device-detected')}
                         </Title>
 
                         <Text c="gray.4" fw={800} size="sm" ta="center">
-                            This page contains complex tables that may not be comfortable to use on
-                            mobile devices.
+                            {t('mobile-warning-overlay.description-line-1')}
                         </Text>
 
                         <Text c="gray.4" size="sm" ta="center">
-                            Here are some controls you can use to manage the table on mobile
-                            devices.
+                            {t('mobile-warning-overlay.description-line-2')}
                         </Text>
 
                         <Group gap="xs">
                             <TbColumns color="var(--mantine-color-gray-4)" size={px('1.2rem')} />
                             <Text c="gray.4" size="xs">
-                                Show or hide columns
+                                {t('mobile-warning-overlay.show-or-hide-columns')}
                             </Text>
                         </Group>
 
@@ -85,14 +85,14 @@ export function MobileWarningOverlay() {
                                 size={px('1.2rem')}
                             />
                             <Text c="gray.4" size="xs">
-                                Adjust row spacing density
+                                {t('mobile-warning-overlay.adjust-row-spacing-density')}
                             </Text>
                         </Group>
 
                         <Group gap="xs">
                             <TbMaximize color="var(--mantine-color-gray-4)" size={px('1.2rem')} />
                             <Text c="gray.4" size="xs">
-                                Toggle fullscreen table view
+                                {t('mobile-warning-overlay.toggle-fullscreen-table-view')}
                             </Text>
                         </Group>
                     </Stack>
@@ -107,12 +107,12 @@ export function MobileWarningOverlay() {
                                     size={px('1.2rem')}
                                 />
                                 <Text c="blue.4" size="xs">
-                                    Desktop recommended
+                                    {t('mobile-warning-overlay.desktop-recommended')}
                                 </Text>
                             </Group>
 
-                            <Text c="gray.5" size="xs">
-                                or
+                            <Text c="gray.s5" size="xs">
+                                {t('mobile-warning-overlay.or')}
                             </Text>
 
                             <Group gap="xs">
@@ -121,7 +121,7 @@ export function MobileWarningOverlay() {
                                     size={px('1.2rem')}
                                 />
                                 <Text c="teal.4" size="xs">
-                                    Rotate device
+                                    {t('mobile-warning-overlay.rotate-device')}
                                 </Text>
                             </Group>
                         </Group>
@@ -135,7 +135,7 @@ export function MobileWarningOverlay() {
                         size="md"
                         variant="light"
                     >
-                        I understand, continue anyway
+                        {t('mobile-warning-overlay.i-understand-continue-anyway')}
                     </Button>
                 </Stack>
             </Center>
