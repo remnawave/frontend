@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next'
 import { Grid, Stack } from '@mantine/core'
+import { motion } from 'motion/react'
 
 import { NodesRealtimeUsageMetrics } from '@widgets/dashboard/nodes/nodes-realtime-metrics'
 import { EditNodeModalConnectorWidget } from '@widgets/dashboard/nodes/edit-node-modal'
@@ -20,7 +21,7 @@ export default function NodesPageComponent(props: IProps) {
             <PageHeader
                 breadcrumbs={[
                     { label: t('constants.dashboard'), href: ROUTES.DASHBOARD.HOME },
-                    { label: t('constants.management') },
+
                     { label: t('constants.nodes') }
                 ]}
                 title={t('constants.nodes')}
@@ -36,7 +37,15 @@ export default function NodesPageComponent(props: IProps) {
                     {isLoading ? (
                         <LoadingScreen height="60vh" />
                     ) : (
-                        <NodesTableWidget nodes={nodes} />
+                        <motion.div
+                            animate={{ opacity: 1 }}
+                            initial={{ opacity: 0 }}
+                            transition={{
+                                duration: 0.5
+                            }}
+                        >
+                            <NodesTableWidget nodes={nodes} />
+                        </motion.div>
                     )}
                 </Grid.Col>
             </Grid>

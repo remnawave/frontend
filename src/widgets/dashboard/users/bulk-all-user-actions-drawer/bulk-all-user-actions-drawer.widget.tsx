@@ -1,4 +1,4 @@
-import { Badge, Drawer, Group, Tabs, Text } from '@mantine/core'
+import { Badge, Drawer, Group, px, Tabs, Text } from '@mantine/core'
 import { PiInfo, PiPencil, PiWarning } from 'react-icons/pi'
 import { useTranslation } from 'react-i18next'
 import { useState } from 'react'
@@ -48,15 +48,15 @@ export const BulkAllUserActionsDrawerWidget = (props: IBulkAllDrawerProps) => {
         >
             <Tabs onChange={setActiveTab} value={activeTab}>
                 <Tabs.List grow mb="md">
-                    <Tabs.Tab leftSection={<PiPencil size="0.8rem" />} value="updateAll">
+                    <Tabs.Tab leftSection={<PiPencil size={px('0.8rem')} />} value="updateAll">
                         {t('bulk-all-user-actions-drawer.widget.update')}
                     </Tabs.Tab>
-                    <Tabs.Tab leftSection={<PiInfo size="0.8rem" />} value="actionsAll">
+                    <Tabs.Tab leftSection={<PiInfo size={px('0.8rem')} />} value="actionsAll">
                         {t('bulk-all-user-actions-drawer.widget.actions')}
                     </Tabs.Tab>
                     <Tabs.Tab
                         color="red"
-                        leftSection={<PiWarning size="0.8rem" />}
+                        leftSection={<PiWarning size={px('0.8rem')} />}
                         value="dangerAll"
                     >
                         {t('bulk-all-user-actions-drawer.widget.danger')}

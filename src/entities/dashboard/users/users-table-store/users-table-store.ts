@@ -34,7 +34,7 @@ const DEFAULT_COLUMN_SIZE: MRT_ColumnSizingState = {
 }
 
 const DEFAULT_PINNING: MRT_ColumnPinningState = {
-    left: ['mrt-row-actions', 'mrt-row-select', 'username'],
+    left: ['mrt-row-actions'],
     right: []
 }
 
@@ -104,7 +104,7 @@ export const useUsersTableStore = create<IActions & IState>()(
 
         {
             name: 'rmnw-users-table-store',
-            version: 3,
+            version: 4,
             storage: createJSONStorage(() => localStorage),
             partialize: (state) => ({
                 columnVisibility: state.columnVisibility,

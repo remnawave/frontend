@@ -6,6 +6,7 @@ import {
     Card,
     Divider,
     Flex,
+    px,
     Tabs,
     TextInput,
     Title,
@@ -38,7 +39,7 @@ export const ButtonFields = (props: ButtonFieldsProps) => {
                                         size="input-sm"
                                         variant="light"
                                     >
-                                        <PiPlus size="1.2rem" />
+                                        <PiPlus size={px('1.2rem')} />
                                     </ActionIcon>
                                 </Tooltip>
                                 <Tooltip label={t('button-fields.remove-button')} withArrow>
@@ -50,7 +51,7 @@ export const ButtonFields = (props: ButtonFieldsProps) => {
                                         size="input-sm"
                                         variant="light"
                                     >
-                                        <PiTrash size="1.2rem" />
+                                        <PiTrash size={px('1.2rem')} />
                                     </ActionIcon>
                                 </Tooltip>
                             </ActionIconGroup>
@@ -149,7 +150,7 @@ export const ButtonFields = (props: ButtonFieldsProps) => {
             {buttons.length === 0 && (
                 <Flex justify="center" mb="xl" mt="xl">
                     <Button
-                        leftSection={<PiPlus size="1.5rem" />}
+                        leftSection={<PiPlus size="24px" />}
                         onClick={() => addButton(localApp, section, updateApp)}
                         variant="outline"
                     >

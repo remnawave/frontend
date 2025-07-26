@@ -1,6 +1,6 @@
 import { GetAllNodesCommand } from '@remnawave/backend-contract'
 
 export interface IProps {
-    index: number
+    isDragOverlay?: boolean
     node: GetAllNodesCommand.Response['response'][number]
 }

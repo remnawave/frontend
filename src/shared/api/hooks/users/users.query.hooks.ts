@@ -2,6 +2,7 @@ import {
     GetAllTagsCommand,
     GetAllUsersCommand,
     GetSubscriptionInfoByShortUuidCommand,
+    GetUserAccessibleNodesCommand,
     GetUserByUuidCommand,
     GetUserUsageByRangeCommand
 } from '@remnawave/backend-contract'
@@ -29,7 +30,10 @@ export const usersQueryKeys = createQueryKeys('users', {
     }),
     getUserTags: {
         queryKey: null
-    }
+    },
+    getUserAccessibleNodes: (route: GetUserAccessibleNodesCommand.Request) => ({
+        queryKey: [route]
+    })
 })
 
 export const useGetUserByUuid = createGetQueryHook({
@@ -76,7 +80,7 @@ export const useGetSubscriptionInfoByShortUuid = createGetQueryHook({
     routeParamsSchema: GetSubscriptionInfoByShortUuidCommand.RequestSchema,
     getQueryKey: ({ route }) => usersQueryKeys.getSubscriptionInfoByShortUuid(route!).queryKey,
     rQueryParams: {
-        staleTime: sToMs(40)
+        staleTime: sToMs(4)
     },
     errorHandler: (error) => {
         notifications.show({
@@ -117,6 +121,23 @@ export const useGetUserTags = createGetQueryHook({
     errorHandler: (error) => {
         notifications.show({
             title: `Get User Tags`,
+            message: error instanceof Error ? error.message : `Request failed with unknown error.`,
+            color: 'red'
+        })
+    }
+})
+
+export const useGetUserAccessibleNodes = createGetQueryHook({
+    endpoint: GetUserAccessibleNodesCommand.TSQ_url,
+    responseSchema: GetUserAccessibleNodesCommand.ResponseSchema,
+    routeParamsSchema: GetUserAccessibleNodesCommand.RequestSchema,
+    getQueryKey: ({ route }) => usersQueryKeys.getUserAccessibleNodes(route!).queryKey,
+    rQueryParams: {
+        staleTime: sToMs(60)
+    },
+    errorHandler: (error) => {
+        notifications.show({
+            title: `Get User Accessible Nodes`,
             message: error instanceof Error ? error.message : `Request failed with unknown error.`,
             color: 'red'
         })

@@ -1,4 +1,10 @@
-import { LoginCommand, RegisterCommand, TelegramCallbackCommand } from '@remnawave/backend-contract'
+import {
+    LoginCommand,
+    OAuth2AuthorizeCommand,
+    OAuth2CallbackCommand,
+    RegisterCommand,
+    TelegramCallbackCommand
+} from '@remnawave/backend-contract'
 import { notifications } from '@mantine/notifications'
 
 import { setToken } from '@entities/auth/session-store'
@@ -58,6 +64,34 @@ export const useTelegramCallback = createMutationHook({
     rMutationParams: {
         onSuccess: (data) => {
             setToken({ token: data.accessToken })
+        }
+    }
+})
+
+export const useOauth2Callback = createMutationHook({
+    endpoint: OAuth2CallbackCommand.TSQ_url,
+    bodySchema: OAuth2CallbackCommand.RequestSchema,
+    responseSchema: OAuth2CallbackCommand.ResponseSchema,
+    requestMethod: OAuth2CallbackCommand.endpointDetails.REQUEST_METHOD,
+    rMutationParams: {
+        onSuccess: (data) => {
+            setToken({ token: data.accessToken })
+        }
+    }
+})
+
+export const useOAuth2Authorize = createMutationHook({
+    endpoint: OAuth2AuthorizeCommand.TSQ_url,
+    bodySchema: OAuth2AuthorizeCommand.RequestSchema,
+    responseSchema: OAuth2AuthorizeCommand.ResponseSchema,
+    requestMethod: OAuth2AuthorizeCommand.endpointDetails.REQUEST_METHOD,
+    rMutationParams: {
+        onError: (error) => {
+            notifications.show({
+                title: 'OAuth2 Authorize',
+                message: error.message,
+                color: 'red'
+            })
         }
     }
 })

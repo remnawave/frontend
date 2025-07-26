@@ -52,7 +52,6 @@ export const useUserTableColumns = () => {
                         nodeName={cell.row.original.lastConnectedNode?.nodeName}
                     />
                 ),
-                accessorFn: (originalRow) => originalRow.lastConnectedNode?.nodeName || '–',
 
                 enableColumnFilterModes: false,
                 enableColumnFilter: false,
@@ -127,7 +126,6 @@ export const useUserTableColumns = () => {
                 accessorKey: 'tag',
                 header: 'Tag',
                 Cell: ({ cell }) => <Badge size="lg">{cell.row.original.tag || '–'}</Badge>,
-
                 mantineTableBodyCellProps: {
                     align: 'center'
                 }

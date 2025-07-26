@@ -113,7 +113,7 @@ export const AppForm = (props: AppFormProps) => {
                 <Accordion.Item value="installation">
                     <Accordion.Control>
                         <Flex align="center" gap="xs">
-                            <PiDownloadBold size="1.5rem" />
+                            <PiDownloadBold size="24px" />
                             {t('app-form.component.installation-step')}
                         </Flex>
                     </Accordion.Control>
@@ -144,13 +144,13 @@ export const AppForm = (props: AppFormProps) => {
                 <Accordion.Item value="before-subscription">
                     <Accordion.Control>
                         <Flex align="center" gap="xs">
-                            <PiInfoBold size="1.5rem" />
+                            <PiInfoBold size="24px" />
                             {t('app-form.component.additional-before-subscription-step')}
                             {localApp.additionalBeforeAddSubscriptionStep && (
                                 <Button
                                     color="red"
                                     component="p"
-                                    leftSection={<PiMinus size="1.25rem" />}
+                                    leftSection={<PiMinus size="20px" />}
                                     ml={'xs'}
                                     onClick={() =>
                                         updateApp({
@@ -166,7 +166,7 @@ export const AppForm = (props: AppFormProps) => {
                             {!localApp.additionalBeforeAddSubscriptionStep && (
                                 <Button
                                     component="p"
-                                    leftSection={<PiPlus size="1.25rem" />}
+                                    leftSection={<PiPlus size="20px" />}
                                     ml={'xs'}
                                     onClick={() =>
                                         updateApp({
@@ -226,7 +226,7 @@ export const AppForm = (props: AppFormProps) => {
                 <Accordion.Item value="subscription">
                     <Accordion.Control>
                         <Flex align="center" gap="xs">
-                            <PiCloudArrowDownBold size="1.5rem" />
+                            <PiCloudArrowDownBold size="24px" />
                             {t('app-form.component.add-subscription-step')}
                         </Flex>
                     </Accordion.Control>
@@ -247,13 +247,13 @@ export const AppForm = (props: AppFormProps) => {
                 <Accordion.Item value="after-subscription">
                     <Accordion.Control>
                         <Flex align="center" gap="xs">
-                            <PiStarBold size="1.5rem" />
+                            <PiStarBold size="24px" />
                             {t('app-form.component.additional-after-subscription-step')}
                             {localApp.additionalAfterAddSubscriptionStep && (
                                 <Button
                                     color="red"
                                     component="p"
-                                    leftSection={<PiMinus size="1.25rem" />}
+                                    leftSection={<PiMinus size="20px" />}
                                     ml={'xs'}
                                     onClick={() =>
                                         updateApp({
@@ -269,7 +269,7 @@ export const AppForm = (props: AppFormProps) => {
                             {!localApp.additionalAfterAddSubscriptionStep && (
                                 <Button
                                     component="p"
-                                    leftSection={<PiPlus size="1.25rem" />}
+                                    leftSection={<PiPlus size="20px" />}
                                     ml={'xs'}
                                     onClick={() =>
                                         updateApp({
@@ -329,7 +329,7 @@ export const AppForm = (props: AppFormProps) => {
                 <Accordion.Item value="connect">
                     <Accordion.Control>
                         <Flex align="center" gap="xs">
-                            <PiCheckBold size="1.5rem" />
+                            <PiCheckBold size="24px" />
                             {t('app-form.component.connect-and-use-step')}
                         </Flex>
                     </Accordion.Control>

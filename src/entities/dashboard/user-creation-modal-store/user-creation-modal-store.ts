@@ -13,14 +13,11 @@ const initialState: IState = {
 
 export const useUserCreationModalStore = create<IActions & IState>()(
     devtools(
-        (set, getState) => ({
+        (set) => ({
             ...initialState,
             actions: {
                 changeModalState: async (modalState: boolean) => {
                     set(() => ({ isModalOpen: modalState }))
-                    if (!modalState) {
-                        await getState().actions.resetState()
-                    }
                 },
                 getInitialState: () => {
                     return initialState

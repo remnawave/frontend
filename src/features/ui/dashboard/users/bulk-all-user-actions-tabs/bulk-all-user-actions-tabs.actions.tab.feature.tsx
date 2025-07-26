@@ -1,4 +1,4 @@
-import { Button, Group, Paper, Stack, Text } from '@mantine/core'
+import { Button, Group, Paper, px, Stack, Text } from '@mantine/core'
 import { PiClockClockwise } from 'react-icons/pi'
 import { useTranslation } from 'react-i18next'
 import { modals } from '@mantine/modals'
@@ -49,7 +49,7 @@ export const BulkAllUserActionsActionsTabFeature = (props: IProps) => {
                 <Stack>
                     <Group justify="apart">
                         <Group>
-                            <PiClockClockwise color="cyan" size="1.2rem" />
+                            <PiClockClockwise color="cyan" size={px('1.2rem')} />
                             <Text>
                                 {t('bulk-all-user-actions-tabs.actions.tab.feature.reset-traffic')}
                             </Text>

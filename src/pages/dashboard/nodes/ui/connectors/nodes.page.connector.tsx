@@ -5,7 +5,7 @@ import {
     useNodesStoreCreateModalIsOpen,
     useNodesStoreEditModalIsOpen
 } from '@entities/dashboard/nodes/nodes-store'
-import { nodesQueryKeys, QueryKeys, useGetNodes } from '@shared/api/hooks'
+import { nodesQueryKeys, QueryKeys, useGetConfigProfiles, useGetNodes } from '@shared/api/hooks'
 import { queryClient } from '@shared/api'
 
 import NodesPageComponent from '../components/nodes.page.component'
@@ -17,6 +17,7 @@ export function NodesPageConnector() {
     const isEditModalOpen = useNodesStoreEditModalIsOpen()
 
     const { data: nodes, isLoading } = useGetNodes()
+    const { isLoading: isConfigProfilesLoading } = useGetConfigProfiles()
 
     useEffect(() => {
         ;(async () => {
@@ -36,5 +37,5 @@ export function NodesPageConnector() {
         })()
     }, [isCreateModalOpen, isEditModalOpen])
 
-    return <NodesPageComponent isLoading={isLoading} nodes={nodes} />
+    return <NodesPageComponent isLoading={isLoading || isConfigProfilesLoading} nodes={nodes} />
 }

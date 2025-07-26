@@ -2,18 +2,20 @@ import {
     PiAirTrafficControlDuotone,
     PiArrowsInCardinalFill,
     PiBarcodeDuotone,
-    PiBoundingBoxDuotone,
     PiBracketsCurly,
+    PiChartLine,
     PiCookie,
     PiCpu,
-    PiGearDuotone,
     PiListChecks,
     PiStarDuotone,
     PiUsersDuotone
 } from 'react-icons/pi'
+import { HiChartPie, HiCurrencyDollar, HiServer } from 'react-icons/hi'
+import { TbChartArcs, TbCirclesRelation } from 'react-icons/tb'
 import { useTranslation } from 'react-i18next'
 
 import { HappLogo } from '@pages/dashboard/utils/happ-routing-builder/ui/components/happ-routing-builder.page.component'
+import { XtlsLogo } from '@shared/ui/logos/xtls-logo'
 import { ROUTES } from '@shared/constants'
 
 import { MenuItem } from './interfaces'
@@ -41,6 +43,16 @@ export const useMenuSections = (): MenuItem[] => {
                     icon: PiUsersDuotone
                 },
                 {
+                    name: t('constants.internal-squads'),
+                    href: ROUTES.DASHBOARD.MANAGEMENT.INTERNAL_SQUADS,
+                    icon: TbCirclesRelation
+                },
+                {
+                    name: t('constants.config-profiles'),
+                    href: ROUTES.DASHBOARD.MANAGEMENT.CONFIG_PROFILES,
+                    icon: XtlsLogo
+                },
+                {
                     name: t('constants.hosts'),
                     href: ROUTES.DASHBOARD.MANAGEMENT.HOSTS,
                     icon: PiListChecks
@@ -52,33 +64,33 @@ export const useMenuSections = (): MenuItem[] => {
                     dropdownItems: [
                         {
                             name: t('constants.management'),
-                            href: ROUTES.DASHBOARD.MANAGEMENT.NODES
+                            href: ROUTES.DASHBOARD.MANAGEMENT.NODES,
+                            icon: HiServer
+                        },
+
+                        {
+                            name: t('constants.nodes-statistics'),
+                            href: ROUTES.DASHBOARD.MANAGEMENT.NODES_STATS,
+                            icon: HiChartPie
+                        },
+                        {
+                            name: t('constants.infra-billing'),
+                            href: ROUTES.DASHBOARD.CRM.INFRA_BILLING,
+                            icon: HiCurrencyDollar
                         },
                         {
                             name: t('constants.nodes-bandwidth-table'),
-                            href: ROUTES.DASHBOARD.MANAGEMENT.NODES_BANDWIDTH_TABLE
+                            href: ROUTES.DASHBOARD.MANAGEMENT.NODES_BANDWIDTH_TABLE,
+                            icon: TbChartArcs
                         },
                         {
-                            name: t('constants.nodes-statistics'),
-                            href: ROUTES.DASHBOARD.MANAGEMENT.NODES_STATS
+                            name: t('constants.nodes-metrics'),
+                            href: ROUTES.DASHBOARD.MANAGEMENT.NODES_METRICS,
+                            icon: PiChartLine
                         }
                     ]
                 },
-                {
-                    name: t('constants.config'),
-                    href: ROUTES.DASHBOARD.MANAGEMENT.CONFIG,
-                    icon: PiGearDuotone
-                },
-                {
-                    name: t('constants.inbounds'),
-                    href: ROUTES.DASHBOARD.MANAGEMENT.INBOUNDS,
-                    icon: PiBoundingBoxDuotone
-                },
-                {
-                    name: t('constants.subscription-settings'),
-                    href: ROUTES.DASHBOARD.MANAGEMENT.SUBSCRIPTION_SETTINGS,
-                    icon: PiBarcodeDuotone
-                },
+
                 {
                     name: t('constants.api-tokens'),
                     href: ROUTES.DASHBOARD.MANAGEMENT.API_TOKENS,
@@ -87,10 +99,15 @@ export const useMenuSections = (): MenuItem[] => {
             ]
         },
         {
-            header: t('constants.templates'),
+            header: t('constants.subscription'),
             section: [
                 {
-                    name: t('constants.subscription'),
+                    name: t('constants.subscription-settings'),
+                    href: ROUTES.DASHBOARD.MANAGEMENT.SUBSCRIPTION_SETTINGS,
+                    icon: PiBarcodeDuotone
+                },
+                {
+                    name: t('constants.templates'),
                     href: ROUTES.DASHBOARD.TEMPLATES.ROOT,
                     icon: PiBracketsCurly,
                     dropdownItems: [
@@ -107,12 +124,12 @@ export const useMenuSections = (): MenuItem[] => {
                             href: ROUTES.DASHBOARD.TEMPLATES.STASH
                         },
                         {
-                            name: 'Clash',
-                            href: ROUTES.DASHBOARD.TEMPLATES.CLASH
-                        },
-                        {
                             name: 'Singbox',
                             href: ROUTES.DASHBOARD.TEMPLATES.SINGBOX
+                        },
+                        {
+                            name: 'Clash',
+                            href: ROUTES.DASHBOARD.TEMPLATES.CLASH
                         },
                         {
                             name: 'Singbox legacy',

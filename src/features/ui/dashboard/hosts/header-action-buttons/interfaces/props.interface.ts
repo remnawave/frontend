@@ -1,5 +1,5 @@
-import { GetInboundsCommand } from '@remnawave/backend-contract'
+import { GetConfigProfilesCommand } from '@remnawave/backend-contract'
 
 export interface IProps {
-    inbounds: GetInboundsCommand.Response['response']
+    configProfiles: GetConfigProfilesCommand.Response['response']['configProfiles'] | undefined
 }

@@ -1,4 +1,5 @@
 import { notifications } from '@mantine/notifications'
+import { useLayoutEffect, useRef } from 'react'
 import { BiLogoTelegram } from 'react-icons/bi'
 import { Avatar, Button } from '@mantine/core'
 
@@ -6,13 +7,30 @@ import { useTelegramCallback } from '@shared/api/hooks'
 import { useAuth } from '@shared/hooks/use-auth'
 
 import { IProps } from './interfaces/props.interface'
+import { createScript } from './createScript'
 
 export const TelegramLoginButtonFeature = (props: IProps) => {
     const { tgAuth } = props
 
+    const hiddenDivRef = useRef<HTMLButtonElement>(null)
+
+    const scriptRef = useRef<HTMLScriptElement>(null)
+
     const { mutate: telegramCallback, isPending } = useTelegramCallback()
 
     const { setIsAuthenticated } = useAuth()
+
+    useLayoutEffect(() => {
+        scriptRef.current?.remove()
+
+        scriptRef.current = createScript()
+
+        hiddenDivRef.current?.before(scriptRef.current)
+
+        return () => {
+            scriptRef.current?.remove()
+        }
+    }, [])
 
     if (!tgAuth) {
         return null
@@ -74,10 +92,11 @@ export const TelegramLoginButtonFeature = (props: IProps) => {
             loaderProps={{ type: 'dots' }}
             loading={isPending}
             onClick={handleLogin}
-            radius={'md'}
+            radius="md"
+            ref={hiddenDivRef}
             variant="filled"
         >
-            Login
+            Telegram
         </Button>
     )
 }

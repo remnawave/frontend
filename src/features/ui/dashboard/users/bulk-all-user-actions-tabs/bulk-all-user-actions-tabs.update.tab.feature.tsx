@@ -106,7 +106,7 @@ export const BulkAllUserActionsUpdateTabFeature = (props: IProps) => {
                     description={t('bulk-all-user-actions-tabs.update.tab.feature.user-status')}
                     key={form.key('status')}
                     label={t('bulk-all-user-actions-tabs.update.tab.feature.status')}
-                    leftSection={<PiClockDuotone size="1rem" />}
+                    leftSection={<PiClockDuotone size="16px" />}
                     placeholder={t('bulk-all-user-actions-tabs.update.tab.feature.select-status')}
                     {...form.getInputProps('status')}
                 />
@@ -142,7 +142,7 @@ export const BulkAllUserActionsUpdateTabFeature = (props: IProps) => {
                     description={t('create-user-modal.widget.traffic-reset-strategy-description')}
                     key={form.key('trafficLimitStrategy')}
                     label={t('create-user-modal.widget.traffic-reset-strategy')}
-                    leftSection={<PiClockDuotone size="1rem" />}
+                    leftSection={<PiClockDuotone size="16px" />}
                     placeholder={t('create-user-modal.widget.pick-value')}
                     {...form.getInputProps('trafficLimitStrategy')}
                 />
@@ -151,7 +151,7 @@ export const BulkAllUserActionsUpdateTabFeature = (props: IProps) => {
                     clearable
                     key={form.key('expireAt')}
                     label={t('bulk-all-user-actions-tabs.update.tab.feature.expire-date')}
-                    leftSection={<PiCalendar size="1rem" />}
+                    leftSection={<PiCalendar size="16px" />}
                     placeholder={t(
                         'bulk-all-user-actions-tabs.update.tab.feature.select-expiration-date'
                     )}
@@ -220,7 +220,7 @@ export const BulkAllUserActionsUpdateTabFeature = (props: IProps) => {
                     hideControls
                     key={form.key('telegramId')}
                     label="Telegram ID"
-                    leftSection={<PiTelegramLogoDuotone size="1rem" />}
+                    leftSection={<PiTelegramLogoDuotone size="16px" />}
                     min={1}
                     {...form.getInputProps('telegramId')}
                 />
@@ -228,7 +228,7 @@ export const BulkAllUserActionsUpdateTabFeature = (props: IProps) => {
                 <TextInput
                     key={form.key('email')}
                     label="Email"
-                    leftSection={<PiEnvelopeDuotone size="1rem" />}
+                    leftSection={<PiEnvelopeDuotone size="16px" />}
                     {...form.getInputProps('email')}
                 />
 
@@ -250,7 +250,7 @@ export const BulkAllUserActionsUpdateTabFeature = (props: IProps) => {
                 <Stack gap={'xs'}>
                     <Button
                         fullWidth
-                        leftSection={<PiX size="1rem" />}
+                        leftSection={<PiX size="16px" />}
                         loading={isUpdatePending}
                         mt="md"
                         onClick={cleanUpDrawer}
@@ -262,7 +262,7 @@ export const BulkAllUserActionsUpdateTabFeature = (props: IProps) => {
 
                     <Button
                         fullWidth
-                        leftSection={<PiPencil size="1rem" />}
+                        leftSection={<PiPencil size="16px" />}
                         loading={isUpdatePending}
                         mt="md"
                         type="submit"

@@ -1,13 +1,4 @@
-import {
-    ActionIcon,
-    Center,
-    CopyButton,
-    Drawer,
-    Stack,
-    Text,
-    TextInput,
-    Tooltip
-} from '@mantine/core'
+import { ActionIcon, Center, CopyButton, Drawer, Menu, Stack, Text, TextInput } from '@mantine/core'
 import { PiCheck, PiCopy, PiEmptyDuotone, PiLinkBreakDuotone } from 'react-icons/pi'
 import { useDisclosure } from '@mantine/hooks'
 import { useTranslation } from 'react-i18next'
@@ -70,7 +61,7 @@ export function GetUserSubscriptionLinksFeature(props: IProps) {
                                     onClick={copy}
                                     variant="subtle"
                                 >
-                                    {copied ? <PiCheck size="1rem" /> : <PiCopy size="1rem" />}
+                                    {copied ? <PiCheck size="16px" /> : <PiCopy size="16px" />}
                                 </ActionIcon>
                             )}
                         </CopyButton>
@@ -102,11 +93,13 @@ export function GetUserSubscriptionLinksFeature(props: IProps) {
                     <Stack>{renderLinks()}</Stack>
                 )}
             </Drawer>
-            <Tooltip label={t('get-user-subscription-links.feature.subscription-links')}>
-                <ActionIcon color="teal.5" onClick={handlers.open} size="xl">
-                    <PiLinkBreakDuotone size="1.5rem" />
-                </ActionIcon>
-            </Tooltip>
+
+            <Menu.Item
+                leftSection={<PiLinkBreakDuotone color="var(--mantine-color-teal-5)" size="16px" />}
+                onClick={handlers.open}
+            >
+                {t('get-user-subscription-links.feature.subscription-links')}
+            </Menu.Item>
         </>
     )
 }

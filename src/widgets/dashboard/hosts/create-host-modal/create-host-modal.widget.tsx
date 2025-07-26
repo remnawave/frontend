@@ -1,12 +1,14 @@
 import { CreateHostCommand, SECURITY_LAYERS } from '@remnawave/backend-contract'
-import { useForm, zodResolver } from '@mantine/form'
+import { zodResolver } from 'mantine-form-zod-resolver'
+import { notifications } from '@mantine/notifications'
 import { useTranslation } from 'react-i18next'
 import { Modal, Text } from '@mantine/core'
 import { useEffect, useState } from 'react'
+import { useForm } from '@mantine/form'
 
 import { useHostsStoreActions, useHostsStoreCreateModalIsOpen } from '@entities/dashboard'
+import { useCreateHost, useGetConfigProfiles } from '@shared/api/hooks'
 import { BaseHostForm } from '@shared/ui/forms/hosts/base-host-form'
-import { useCreateHost, useGetInbounds } from '@shared/api/hooks'
 
 export const CreateHostModalWidget = () => {
     const { t } = useTranslation()
@@ -14,7 +16,7 @@ export const CreateHostModalWidget = () => {
     const isModalOpen = useHostsStoreCreateModalIsOpen()
     const actions = useHostsStoreActions()
 
-    const { data: inbounds } = useGetInbounds()
+    const { data: configProfiles } = useGetConfigProfiles()
 
     const [advancedOpened, setAdvancedOpened] = useState(false)
 
@@ -22,13 +24,6 @@ export const CreateHostModalWidget = () => {
         mode: 'uncontrolled',
         name: 'create-host-form',
         validate: zodResolver(CreateHostCommand.RequestSchema)
-    })
-
-    form.watch('inboundUuid', ({ value }) => {
-        const inbound = inbounds?.find((inbound) => inbound.uuid === value)
-        if (inbound) {
-            form.setFieldValue('port', inbound.port)
-        }
     })
 
     const handleClose = () => {
@@ -49,15 +44,24 @@ export const CreateHostModalWidget = () => {
     })
 
     const handleSubmit = form.onSubmit(async (values) => {
-        if (!values.inboundUuid) {
+        if (!values.inbound.configProfileInboundUuid || !values.inbound.configProfileUuid) {
+            notifications.show({
+                title: 'Error',
+                message: 'Please select the config profile and inbound',
+                color: 'red'
+            })
+
             return null
         }
 
         createHost({
             variables: {
                 ...values,
-                inboundUuid: values.inboundUuid,
-                isDisabled: !values.isDisabled
+                isDisabled: !values.isDisabled,
+                inbound: {
+                    configProfileInboundUuid: values.inbound.configProfileInboundUuid,
+                    configProfileUuid: values.inbound.configProfileUuid
+                }
             }
         })
 
@@ -68,6 +72,23 @@ export const CreateHostModalWidget = () => {
         form.setFieldValue('securityLayer', SECURITY_LAYERS.DEFAULT)
     }, [form])
 
+    form.watch('inbound.configProfileInboundUuid', ({ value }) => {
+        const { configProfileUuid } = form.getValues().inbound
+        if (!configProfileUuid) {
+            return
+        }
+
+        const configProfile = configProfiles?.configProfiles.find(
+            (configProfile) => configProfile.uuid === configProfileUuid
+        )
+        if (configProfile) {
+            form.setFieldValue(
+                'port',
+                configProfile.inbounds.find((inbound) => inbound.uuid === value)?.port ?? 0
+            )
+        }
+    })
+
     return (
         <Modal
             centered
@@ -77,9 +98,9 @@ export const CreateHostModalWidget = () => {
         >
             <BaseHostForm
                 advancedOpened={advancedOpened}
+                configProfiles={configProfiles?.configProfiles ?? []}
                 form={form}
                 handleSubmit={handleSubmit}
-                inbounds={inbounds ?? []}
                 isSubmitting={isCreateHostPending}
                 setAdvancedOpened={setAdvancedOpened}
             />

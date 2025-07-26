@@ -101,6 +101,7 @@ export default defineConfig([
             ],
 
             'perfectionist/sort-objects': ['off'],
+            'perfectionist/sort-modules': ['off'],
 
             indent: [
                 'error',

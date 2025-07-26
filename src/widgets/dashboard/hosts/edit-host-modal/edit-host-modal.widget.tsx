@@ -1,8 +1,10 @@
 import { UpdateHostCommand } from '@remnawave/backend-contract'
-import { useForm, zodResolver } from '@mantine/form'
+import { zodResolver } from 'mantine-form-zod-resolver'
+import { notifications } from '@mantine/notifications'
 import { useTranslation } from 'react-i18next'
 import { useEffect, useState } from 'react'
 import { Modal, Text } from '@mantine/core'
+import { useForm } from '@mantine/form'
 import consola from 'consola/browser'
 
 import {
@@ -10,7 +12,7 @@ import {
     useHostsStoreEditModalHost,
     useHostsStoreEditModalIsOpen
 } from '@entities/dashboard'
-import { useCreateHost, useGetInbounds, useUpdateHost } from '@shared/api/hooks'
+import { useCreateHost, useGetConfigProfiles, useUpdateHost } from '@shared/api/hooks'
 import { BaseHostForm } from '@shared/ui/forms/hosts/base-host-form'
 
 export const EditHostModalWidget = () => {
@@ -22,7 +24,7 @@ export const EditHostModalWidget = () => {
     const actions = useHostsStoreActions()
     const host = useHostsStoreEditModalHost()
 
-    const { data: inbounds } = useGetInbounds()
+    const { data: configProfiles } = useGetConfigProfiles()
 
     const form = useForm<UpdateHostCommand.Request>({
         name: 'edit-host-form',
@@ -60,7 +62,7 @@ export const EditHostModalWidget = () => {
     })
 
     useEffect(() => {
-        if (host && inbounds) {
+        if (host && configProfiles) {
             let xHttpExtraParamsParsed: null | object | string
 
             if (typeof host.xHttpExtraParams === 'object' && host.xHttpExtraParams !== null) {
@@ -73,7 +75,7 @@ export const EditHostModalWidget = () => {
                 remark: host.remark,
                 address: host.address,
                 port: host.port,
-                inboundUuid: host.inboundUuid,
+
                 securityLayer: host.securityLayer,
                 isDisabled: !host.isDisabled,
                 sni: host.sni ?? undefined,
@@ -82,15 +84,30 @@ export const EditHostModalWidget = () => {
                 alpn: (host.alpn as UpdateHostCommand.Request['alpn']) ?? undefined,
                 xHttpExtraParams: xHttpExtraParamsParsed,
                 fingerprint:
-                    (host.fingerprint as UpdateHostCommand.Request['fingerprint']) ?? undefined
+                    (host.fingerprint as UpdateHostCommand.Request['fingerprint']) ?? undefined,
+                inbound: {
+                    configProfileUuid: host.inbound.configProfileUuid ?? '',
+                    configProfileInboundUuid: host.inbound.configProfileInboundUuid ?? ''
+                },
+                serverDescription: host.serverDescription ?? undefined
             })
         }
-    }, [host, inbounds])
+    }, [host, configProfiles])
 
-    form.watch('inboundUuid', ({ value }) => {
-        const inbound = inbounds?.find((inbound) => inbound.uuid === value)
-        if (inbound) {
-            form.setFieldValue('port', inbound.port)
+    form.watch('inbound.configProfileInboundUuid', ({ value }) => {
+        const { inbound } = form.getValues()
+        if (!inbound?.configProfileUuid) {
+            return
+        }
+
+        const configProfile = configProfiles?.configProfiles.find(
+            (configProfile) => configProfile.uuid === inbound.configProfileUuid
+        )
+        if (configProfile) {
+            form.setFieldValue(
+                'port',
+                configProfile.inbounds.find((inbound) => inbound.uuid === value)?.port ?? undefined
+            )
         }
     })
 
@@ -128,12 +145,22 @@ export const EditHostModalWidget = () => {
             return
         }
 
+        if (!host.inbound.configProfileInboundUuid || !host.inbound.configProfileUuid) {
+            notifications.show({
+                title: 'Error',
+                message: 'Dangling host cannot be cloned',
+                color: 'red'
+            })
+
+            return
+        }
+
         createHost({
             variables: {
                 ...host,
                 remark: `Clone #${Math.random().toString(36).substring(2, 15)}`,
                 port: host.port,
-                inboundUuid: host.inboundUuid,
+
                 isDisabled: true,
                 path: host.path ?? undefined,
                 sni: host.sni ?? undefined,
@@ -141,7 +168,12 @@ export const EditHostModalWidget = () => {
                 alpn: (host.alpn as UpdateHostCommand.Request['alpn']) ?? undefined,
                 xHttpExtraParams: host.xHttpExtraParams ?? undefined,
                 fingerprint:
-                    (host.fingerprint as UpdateHostCommand.Request['fingerprint']) ?? undefined
+                    (host.fingerprint as UpdateHostCommand.Request['fingerprint']) ?? undefined,
+                inbound: {
+                    configProfileUuid: host.inbound.configProfileUuid,
+                    configProfileInboundUuid: host.inbound.configProfileInboundUuid
+                },
+                serverDescription: host.serverDescription ?? undefined
             }
         })
     }
@@ -155,11 +187,11 @@ export const EditHostModalWidget = () => {
         >
             <BaseHostForm
                 advancedOpened={advancedOpened}
+                configProfiles={configProfiles?.configProfiles ?? []}
                 form={form}
                 handleCloneHost={handleCloneHost}
                 handleSubmit={handleSubmit}
                 host={host!}
-                inbounds={inbounds ?? []}
                 isSubmitting={isUpdateHostPending}
                 setAdvancedOpened={setAdvancedOpened}
             />

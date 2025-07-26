@@ -5,10 +5,11 @@ import { IState } from './state.interface'
 export interface IActions {
     actions: {
         getInitialState: () => IState
-        resetSelectedInboundTag: () => void
+        resetFilters: () => void
         resetState: () => Promise<void>
+        setConfigProfileFilter: (configProfileUuid: null | string) => void
         setHost: (host: UpdateHostCommand.Response['response']) => void
-        setSelectedInboundTag: (tag: string) => void
+        setInboundFilter: (inboundUuid: null | string) => void
         toggleCreateModal: (isOpen: boolean) => void
         toggleEditModal: (isOpen: boolean) => void
     }

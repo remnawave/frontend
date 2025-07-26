@@ -59,7 +59,7 @@ export const LoginFormFeature = () => {
                     />
                     <Button
                         fullWidth
-                        leftSection={<PiSignInDuotone size="1rem" />}
+                        leftSection={<PiSignInDuotone size="16px" />}
                         loading={isLoading}
                         mt="xl"
                         type="submit"

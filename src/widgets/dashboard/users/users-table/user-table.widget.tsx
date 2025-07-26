@@ -3,11 +3,10 @@ import {
     MantineReactTable,
     MRT_ColumnFilterFnsState,
     MRT_SortingState,
-    MRT_TableOptions,
     useMantineReactTable
 } from 'mantine-react-table'
-import { useCallback, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { useMemo, useState } from 'react'
 
 import {
     useUsersTableStoreActions,
@@ -26,7 +25,6 @@ import { UsersTableSelectionFeature } from '@features/ui/dashboard/users/users-t
 import { useUserTableColumns } from '@features/dashboard/users/users-table/model/use-table-columns'
 import { UserActionGroupFeature } from '@features/dashboard/users/users-action-group'
 import { UserActionsFeature } from '@features/ui/dashboard/users/user-actions'
-import { User } from '@entities/dashboard/users/models'
 import { DataTableShared } from '@shared/ui/table'
 import { useGetUsersV2 } from '@shared/api/hooks'
 import { sToMs } from '@shared/utils/time-utils'
@@ -141,16 +139,14 @@ export function UserTableWidget() {
         },
         enableColumnPinning: true,
         positionToolbarAlertBanner: 'top',
-        renderToolbarAlertBannerContent: useCallback<
-            Required<MRT_TableOptions<User>>['renderToolbarAlertBannerContent']
-        >(({ table }) => {
+        renderToolbarAlertBannerContent: () => {
             return (
                 <UsersTableSelectionFeature
                     resetRowSelection={table.resetRowSelection}
                     toggleAllPageRowsSelected={table.toggleAllPageRowsSelected}
                 />
             )
-        }, []),
+        },
         selectAllMode: 'page',
         state: {
             columnFilterFns,
@@ -168,18 +164,12 @@ export function UserTableWidget() {
         },
         enableRowActions: true,
         onRowSelectionChange: bulkUsersActionsStoreActions.setTableSelection,
-        getRowId: useCallback<Required<MRT_TableOptions<User>>['getRowId']>(
-            (originalRow) => originalRow.uuid,
-            []
-        ),
-        renderRowActions: useCallback<Required<MRT_TableOptions<User>>['renderRowActions']>(
-            ({ row }) => (
-                <UserActionsFeature
-                    subscriptionUrl={row.original.subscriptionUrl}
-                    userUuid={row.original.uuid}
-                />
-            ),
-            []
+        getRowId: (originalRow) => originalRow.uuid,
+        renderRowActions: ({ row }) => (
+            <UserActionsFeature
+                subscriptionUrl={row.original.subscriptionUrl}
+                userUuid={row.original.uuid}
+            />
         ),
         displayColumnDefOptions: {
             'mrt-row-actions': { size: 140 }

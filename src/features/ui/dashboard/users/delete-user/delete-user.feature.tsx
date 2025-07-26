@@ -1,7 +1,7 @@
-import { ActionIcon, Text, Tooltip } from '@mantine/core'
-import { PiTrashDuotone } from 'react-icons/pi'
+import { Loader, Menu, Text } from '@mantine/core'
 import { useTranslation } from 'react-i18next'
 import { modals } from '@mantine/modals'
+import { TbTrash } from 'react-icons/tb'
 
 import { useUserModalStoreActions } from '@entities/dashboard/user-modal-store/user-modal-store'
 import { useDeleteUser } from '@shared/api/hooks'
@@ -44,10 +44,14 @@ export function DeleteUserFeature(props: IProps) {
         })
 
     return (
-        <Tooltip label={t('delete-user.feature.delete-user')}>
-            <ActionIcon color="red.5" loading={isDeleteUserPending} onClick={openModal} size="xl">
-                <PiTrashDuotone size="1.5rem" />
-            </ActionIcon>
-        </Tooltip>
+        <Menu.Item
+            color="red.5"
+            leftSection={
+                isDeleteUserPending ? <Loader color="red" size={14} /> : <TbTrash size={14} />
+            }
+            onClick={openModal}
+        >
+            {t('delete-user.feature.delete-user')}
+        </Menu.Item>
     )
 }

@@ -25,7 +25,7 @@ export const NodesHeaderActionButtonsFeature = () => {
     return (
         <Group grow preventGrowOverflow={false} wrap="wrap">
             <Button
-                leftSection={<PiArrowsClockwise size="1rem" />}
+                leftSection={<PiArrowsClockwise size="16px" />}
                 loading={isGetNodesPending || isPending || isRefetching}
                 onClick={() => refetchNodes()}
                 size="xs"
@@ -36,7 +36,7 @@ export const NodesHeaderActionButtonsFeature = () => {
 
             <Button
                 c="teal"
-                leftSection={<PiSpiral size="1rem" />}
+                leftSection={<PiSpiral size="16px" />}
                 loading={isRestartAllNodesPending}
                 onClick={() => restartAllNodes({})}
                 size="xs"
@@ -46,7 +46,7 @@ export const NodesHeaderActionButtonsFeature = () => {
             </Button>
 
             <Button
-                leftSection={<PiPlus size="1rem" />}
+                leftSection={<PiPlus size="16px" />}
                 onClick={handleCreate}
                 size="xs"
                 variant="default"

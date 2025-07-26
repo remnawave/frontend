@@ -6,8 +6,8 @@ export const app = {
     githubOrg: 'https://github.com/remnawave',
     githubDonation: 'https://github.com/remnawave/backend#donation',
     configEditor: {
-        wasmUrl: 'https://remnawave.github.io/xray-monaco-editor/main.wasm',
-        wasmJsUrl: 'https://remnawave.github.io/xray-monaco-editor/wasm_exec.js',
-        jsonSchemaUrl: 'https://remnawave.github.io/xray-monaco-editor/xray.schema.json'
+        wasmUrl: '/main.wasm',
+        wasmJsUrl: '/wasm_exec.js',
+        jsonSchemaUrl: '/xray.schema.json'
     }
 }

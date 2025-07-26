@@ -22,21 +22,21 @@ export function SubscriptionPageBuilderHeaderWidget(props: {
                 actions={
                     <Group grow preventGrowOverflow={false} wrap="wrap">
                         <Button
-                            leftSection={<IconCloudDownload size="1rem" />}
+                            leftSection={<IconCloudDownload size="16px" />}
                             onClick={loadDefaultConfig}
                             variant="light"
                         >
                             {t('subscription-page-builder-header.widget.load-default')}
                         </Button>
 
-                        <Button leftSection={<IconDownload size="1rem" />} onClick={exportConfig}>
+                        <Button leftSection={<IconDownload size="16px" />} onClick={exportConfig}>
                             {t('subscription-page-builder-header.widget.export-config')}
                         </Button>
 
                         <FileInput
                             accept="application/json,.json"
                             clearable
-                            leftSection={<IconUpload size="1rem" />}
+                            leftSection={<IconUpload size="16px" />}
                             onChange={importConfig}
                             placeholder={t('subscription-page-builder-header.widget.upload-config')}
                             radius="lg"

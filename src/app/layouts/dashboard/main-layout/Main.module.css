@@ -5,9 +5,34 @@
     margin-top: 0.75rem;
     height: calc(100vh - 1.5rem);
 
-    background-color: light-dark(var(--mantine-color-gray-1), var(--mantine-color-dark-8));
-    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.5);
-    border-radius: var(--mantine-radius-md);
+    background: light-dark(
+        linear-gradient(135deg, var(--mantine-color-gray-0) 0%, var(--mantine-color-gray-1) 100%),
+        linear-gradient(135deg, var(--mantine-color-dark-8) 0%, var(--mantine-color-dark-7) 100%)
+    );
+
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.1),
+        0 2px 8px rgba(0, 0, 0, 0.05),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+
+    border-radius: var(--mantine-radius-lg);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sidebarWrapper::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: var(--mantine-radius-lg);
+    background: light-dark(
+        radial-gradient(circle at 20% 20%, rgba(99, 102, 241, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 20% 20%, rgba(6, 182, 212, 0.1) 0%, transparent 50%)
+    );
+    pointer-events: none;
+    z-index: -1;
 }
 
 .logoWrapper {
@@ -17,7 +42,31 @@
 
 .header {
     backdrop-filter: blur(7px);
+    -webkit-backdrop-filter: blur(7px);
     margin-left: -300px;
     padding-left: 300px;
     background-color: transparent;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.logoSection {
+    position: relative;
+    padding-bottom: var(--mantine-spacing-xs);
+    border-bottom: 1px solid light-dark(rgba(0, 0, 0, 0.06), rgba(255, 255, 255, 0.06));
+    margin-bottom: var(--mantine-spacing-md);
+}
+
+.logoSection::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: var(--mantine-spacing-md);
+    right: var(--mantine-spacing-md);
+    height: 1px;
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(6, 182, 212, 0.3) 50%,
+        transparent 100%
+    );
 }

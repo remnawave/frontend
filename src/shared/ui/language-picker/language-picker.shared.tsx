@@ -2,11 +2,14 @@ import { ActionIcon, Menu, Text, useDirection } from '@mantine/core'
 import { useTranslation } from 'react-i18next'
 import { useEffect } from 'react'
 
+const isCrowdin = __CROWDIN__ === '1'
+
 const data = [
     { label: 'English', emoji: '🇬🇧', value: 'en' },
     { label: 'Русский', emoji: '🇷🇺', value: 'ru' },
     { label: 'فارسی', emoji: '🇮🇷', value: 'fa' },
-    { label: '简体中文', emoji: '🇨🇳', value: 'zh' }
+    { label: '简体中文', emoji: '🇨🇳', value: 'zh' },
+    ...(isCrowdin ? [{ label: 'Crowdin', emoji: '🏴‍☠️', value: 'af' }] : [])
 ]
 
 export function LanguagePicker() {

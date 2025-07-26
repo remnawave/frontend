@@ -6,7 +6,7 @@ import {
     BulkResetTrafficUsersCommand,
     BulkRevokeUsersSubscriptionCommand,
     BulkUpdateUsersCommand,
-    BulkUpdateUsersInboundsCommand,
+    BulkUpdateUsersSquadsCommand,
     CreateUserCommand,
     DeleteUserCommand,
     DisableUserCommand,
@@ -291,11 +291,11 @@ export const useBulkDeleteUsers = createMutationHook({
     }
 })
 
-export const useBulkSetActiveInbounds = createMutationHook({
-    endpoint: BulkUpdateUsersInboundsCommand.TSQ_url,
-    bodySchema: BulkUpdateUsersInboundsCommand.RequestSchema,
-    responseSchema: BulkUpdateUsersInboundsCommand.ResponseSchema,
-    requestMethod: BulkUpdateUsersInboundsCommand.endpointDetails.REQUEST_METHOD,
+export const useBulkSetActiveInternalSquads = createMutationHook({
+    endpoint: BulkUpdateUsersSquadsCommand.TSQ_url,
+    bodySchema: BulkUpdateUsersSquadsCommand.RequestSchema,
+    responseSchema: BulkUpdateUsersSquadsCommand.ResponseSchema,
+    requestMethod: BulkUpdateUsersSquadsCommand.endpointDetails.REQUEST_METHOD,
     rMutationParams: {
         onSuccess: () => {
             notifications.show({

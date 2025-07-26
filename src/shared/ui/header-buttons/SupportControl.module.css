@@ -18,7 +18,7 @@
     }
 
     svg {
-        color: var(--mantine-color-white);
+        color: var(--mantine-color-red-8);
         width: rem(22);
         height: rem(22);
     }

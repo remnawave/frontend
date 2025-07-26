@@ -35,8 +35,7 @@ export function DataUsageColumnEntity(props: IProps) {
                 </Text>
             </Group>
             <Progress
-                animated
-                color={usedTrafficPercentage > 100 ? 'yellow.9' : 'teal.9'}
+                color={usedTrafficPercentage > 100 ? 'orange.7' : 'teal.9'}
                 radius="xs"
                 size="md"
                 striped

@@ -73,7 +73,7 @@ export function CreateableTagInputShared(props: IProps) {
                     description={'Create or select a tag'}
                     error={error || restProps.error}
                     label="Tag"
-                    leftSection={<PiTagDuotone size="1rem" />}
+                    leftSection={<PiTagDuotone size="16px" />}
                     onBlur={() => {
                         combobox.closeDropdown()
                         onChange?.(search.trim() === '' ? null : search)

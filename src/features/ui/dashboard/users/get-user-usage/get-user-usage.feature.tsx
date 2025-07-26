@@ -1,7 +1,7 @@
 import { PiChartBarDuotone } from 'react-icons/pi'
 import { useDisclosure } from '@mantine/hooks'
 import { useTranslation } from 'react-i18next'
-import { Button } from '@mantine/core'
+import { Menu } from '@mantine/core'
 
 import { UserUsageModalWidget } from '@widgets/dashboard/users/user-usage-modal/user-usage-modal.widget'
 
@@ -15,15 +15,13 @@ export function GetUserUsageFeature(props: IProps) {
 
     return (
         <>
-            <Button
-                color="grape"
-                leftSection={<PiChartBarDuotone size="1rem" />}
+            <Menu.Item
+                leftSection={<PiChartBarDuotone color="var(--mantine-color-blue-5)" size="16px" />}
                 onClick={handlers.open}
-                size="md"
-                variant="outline"
             >
                 {t('get-user-usage.feature.show-usage')}
-            </Button>
+            </Menu.Item>
+
             <UserUsageModalWidget onClose={handlers.close} opened={opened} userUuid={userUuid} />
         </>
     )

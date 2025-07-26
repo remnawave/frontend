@@ -1,5 +1,4 @@
 declare global {
-    // eslint-disable-next-line no-use-before-define
     type ITelegramCallback = (dataOrFalse: false | ITelegramData) => void
 
     interface ITelegramData {

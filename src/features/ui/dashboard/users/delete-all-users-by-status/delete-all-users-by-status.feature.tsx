@@ -97,7 +97,7 @@ export const DeleteAllUsersByStatusFeature = (props: IProps) => {
                     data={userStatusValues}
                     description={t('bulk-user-actioins-modal.widget.user-deletion-description')}
                     label={t('bulk-user-actioins-modal.widget.select-status')}
-                    leftSection={<PiClockDuotone size="1rem" />}
+                    leftSection={<PiClockDuotone size="16px" />}
                     onChange={(value) => setSelectedStatus(value as TUsersStatus)}
                     placeholder={t('bulk-user-actioins-modal.widget.select-status')}
                     value={selectedStatus}

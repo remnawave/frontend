@@ -23,7 +23,7 @@
     }
 
     svg {
-        color: var(--mantine-color-white);
+        color: var(--telegram-color);
         width: rem(22);
         height: rem(22);
     }

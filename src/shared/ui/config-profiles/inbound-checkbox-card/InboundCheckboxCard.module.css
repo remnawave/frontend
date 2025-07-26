@@ -1,0 +1,64 @@
+.root {
+    position: relative;
+    padding: var(--mantine-spacing-xs);
+    transition: border-color 150ms ease;
+
+    &[data-checked] {
+        border-color: var(--mantine-primary-color-filled);
+    }
+
+    @mixin hover {
+        @mixin light {
+            background-color: var(--mantine-color-gray-0);
+        }
+
+        @mixin dark {
+            background-color: var(--mantine-color-dark-6);
+        }
+    }
+}
+
+.label {
+    font-family: var(--mantine-font-family-monospace);
+    font-weight: bold;
+    font-size: var(--mantine-font-size-md);
+    line-height: 1.2;
+    color: var(--mantine-color-bright);
+    max-width: 13ch;
+}
+
+.compactRoot {
+    position: relative;
+    padding: 8px 12px;
+    transition: all 150ms ease;
+    min-height: 48px;
+    border: 1px solid light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4));
+
+    &[data-checked] {
+        border-color: var(--mantine-primary-color-filled);
+        background-color: light-dark(
+            var(--mantine-primary-color-light),
+            var(--mantine-primary-color-dark)
+        );
+    }
+
+    @mixin hover {
+        @mixin light {
+            background-color: var(--mantine-color-gray-0);
+            border-color: var(--mantine-color-gray-4);
+        }
+
+        @mixin dark {
+            background-color: var(--mantine-color-dark-6);
+            border-color: var(--mantine-color-dark-3);
+        }
+    }
+}
+
+.compactLabel {
+    font-family: var(--mantine-font-family-monospace);
+    font-weight: 600;
+    color: var(--mantine-color-bright);
+    min-width: 0;
+    flex: 1;
+}

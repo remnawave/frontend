@@ -1,4 +1,4 @@
-import { Button, Group, Paper, Stack, Text, Title } from '@mantine/core'
+import { Button, Group, Paper, px, Stack, Text, Title } from '@mantine/core'
 import { PiBookOpenTextDuotone, PiCodeDuotone } from 'react-icons/pi'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
@@ -27,7 +27,7 @@ export function ApiTokensDocumentationWidget(props: IProps) {
                 <Group>
                     <Button
                         component={Link}
-                        leftSection={<PiBookOpenTextDuotone size="1.2rem" />}
+                        leftSection={<PiBookOpenTextDuotone size={px('1.2rem')} />}
                         rel="noopener noreferrer"
                         target="_blank"
                         to={docs.scalarPath!}
@@ -39,7 +39,7 @@ export function ApiTokensDocumentationWidget(props: IProps) {
                     <Button
                         color="blue"
                         component={Link}
-                        leftSection={<PiCodeDuotone size="1.2rem" />}
+                        leftSection={<PiCodeDuotone size={px('1.2rem')} />}
                         rel="noopener noreferrer"
                         target="_blank"
                         to={docs.swaggerPath!}
