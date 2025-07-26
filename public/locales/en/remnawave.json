@@ -496,7 +496,8 @@
             "error": "Error",
             "passwords-do-not-match": "Passwords do not match",
             "password-too-short": "Minimum 24 characters",
-            "register-description": "Create a super-admin account to get started"
+            "register-description": "Create a super-admin account to get started",
+            "registration": "Registration"
         }
     },
     "xray-json-template-description": {

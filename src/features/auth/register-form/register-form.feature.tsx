@@ -103,7 +103,7 @@ export const RegisterFormFeature = () => {
             <Container my={40} size={'100%'}>
                 <Paper mt={30} p={30} radius="md">
                     <Title mb="xs" order={2} ta="center">
-                        {t('register-form.feature.sign-up')}
+                        {t('register-form.feature.registration')}
                     </Title>
                     <Text c="dimmed" mb="md" size="sm" ta="center">
                         {t('register-form.feature.register-description')}
