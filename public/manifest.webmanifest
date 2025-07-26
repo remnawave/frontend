@@ -38,5 +38,21 @@
             "type": "image/png",
             "purpose": "maskable"
         }
+    ],
+    "screenshots": [
+        {
+            "src": "/preview_web.jpg",
+            "sizes": "1512x850",
+            "type": "image/jpeg",
+            "form_factor": "wide",
+            "label": "Remnawave Dashboard Overview"
+        },
+        {
+            "src": "/preview_mobile.jpg",
+            "sizes": "645x1398",
+            "type": "image/jpeg",
+            "form_factor": "narrow",
+            "label": "Remnawave Dashboard Overview"
+        }
     ]
 }
