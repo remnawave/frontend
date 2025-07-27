@@ -206,10 +206,14 @@ export const SubscriptionTabs = ({
                                             </ThemeIcon>
                                             <Stack gap={4}>
                                                 <Title fw={600} mb={2} order={4}>
-                                                    Additional Options
+                                                    {t(
+                                                        'subscription-tabs.widget.additional-options'
+                                                    )}
                                                 </Title>
                                                 <Text c="dimmed" lh={1.5} size="sm">
-                                                    Configure additional subscription options
+                                                    {t(
+                                                        'subscription-tabs.widget.configure-additional-subscription-options'
+                                                    )}
                                                 </Text>
                                             </Stack>
                                         </Group>
@@ -531,7 +535,7 @@ export const SubscriptionTabs = ({
                                             color="red"
                                             icon={<PiInfo />}
                                             radius="md"
-                                            title="Error"
+                                            title={t('subscription-tabs.widget.error')}
                                         >
                                             {form.errors.customResponseHeaders}
                                         </Alert>
@@ -553,10 +557,12 @@ export const SubscriptionTabs = ({
                             <Group align="center" justify="space-between">
                                 <Box>
                                     <Title fw={600} order={4}>
-                                        Save Settings
+                                        {t('subscription-tabs.widget.save-settings')}
                                     </Title>
                                     <Text c="dimmed" size="sm">
-                                        Save your subscription settings to apply changes
+                                        {t(
+                                            'subscription-tabs.widget.save-your-subscription-settings-to-apply-changes'
+                                        )}
                                     </Text>
                                 </Box>
                                 <Button

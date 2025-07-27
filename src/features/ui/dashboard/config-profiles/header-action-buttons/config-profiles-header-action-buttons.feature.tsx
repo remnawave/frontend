@@ -3,6 +3,7 @@ import { CreateConfigProfileCommand } from '@remnawave/backend-contract'
 import { generatePath, useNavigate } from 'react-router-dom'
 import { PiArrowsClockwise, PiPlus } from 'react-icons/pi'
 import { useDisclosure } from '@mantine/hooks'
+import { useTranslation } from 'react-i18next'
 import { useField } from '@mantine/form'
 
 import { QueryKeys, useCreateConfigProfile, useGetConfigProfiles } from '@shared/api/hooks'
@@ -49,6 +50,7 @@ const generateDefaultConfig = () => {
 
 export const ConfigProfilesHeaderActionButtonsFeature = () => {
     const { isFetching } = useGetConfigProfiles()
+    const { t } = useTranslation()
 
     const [opened, { open, close }] = useDisclosure(false)
     const navigate = useNavigate()
@@ -93,31 +95,45 @@ export const ConfigProfilesHeaderActionButtonsFeature = () => {
                 size="xs"
                 variant="default"
             >
-                Update
+                {t('config-profiles-header-action-buttons.feature.update')}
             </Button>
 
             <Button leftSection={<PiPlus size="16px" />} onClick={open} size="xs" variant="default">
-                Create Config Profile
+                {t('config-profiles-header-action-buttons.feature.create-config-profile')}
             </Button>
 
-            <Modal centered onClose={close} opened={opened} size="md" title="Create Config Profile">
+            <Modal
+                centered
+                onClose={close}
+                opened={opened}
+                size="md"
+                title={t('config-profiles-header-action-buttons.feature.create-config-profile')}
+            >
                 <Stack gap="md">
                     <Text size="sm">
-                        Create a new config profile by entering a name below.
+                        {t(
+                            'config-profiles-header-action-buttons.feature.create-a-new-config-profile-by-entering-a-name-below'
+                        )}
                         <br />
-                        <br />
-                        You can customize XRay config after creation.
+
+                        {t(
+                            'config-profiles-header-action-buttons.feature.you-can-customize-xray-config-after-creation'
+                        )}
                     </Text>
                     <TextInput
-                        description="It can't be changed later"
-                        label="Profile Name"
-                        placeholder="Enter profile name"
+                        description={t(
+                            'config-profiles-header-action-buttons.feature.it-cant-be-changed-later'
+                        )}
+                        label={t('config-profiles-header-action-buttons.feature.profile-name')}
+                        placeholder={t(
+                            'config-profiles-header-action-buttons.feature.enter-profile-name'
+                        )}
                         required
                         {...nameField.getInputProps()}
                     />
                     <Group justify="flex-end">
                         <Button onClick={close} variant="default">
-                            Cancel
+                            {t('config-profiles-header-action-buttons.feature.cancel')}
                         </Button>
 
                         <Button
@@ -131,7 +147,7 @@ export const ConfigProfilesHeaderActionButtonsFeature = () => {
                                 })
                             }}
                         >
-                            Create
+                            {t('config-profiles-header-action-buttons.feature.create')}
                         </Button>
                     </Group>
                 </Stack>

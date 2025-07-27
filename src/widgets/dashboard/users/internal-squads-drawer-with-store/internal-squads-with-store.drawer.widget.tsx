@@ -423,7 +423,7 @@ export const InternalSquadsDrawerWithStore = () => {
             padding="md"
             position="right"
             size="480px"
-            title={`Edit Internal Squad`}
+            title={t('internal-squads.drawer.widget.edit-internal-squad')}
         >
             {isLoading ? (
                 <LoaderModalShared h="80vh" text="Loading..." w="100%" />

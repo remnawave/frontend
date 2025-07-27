@@ -204,7 +204,7 @@ export const InternalSquadsDrawer = (props: IProps) => {
             padding="md"
             position="right"
             size="480px"
-            title={`Edit Internal Squad`}
+            title={t('internal-squads.drawer.widget.edit-internal-squad')}
         >
             <Stack gap="md" h="100%">
                 <Paper mb="sm" p="md" radius={'md'} shadow="sm" withBorder>

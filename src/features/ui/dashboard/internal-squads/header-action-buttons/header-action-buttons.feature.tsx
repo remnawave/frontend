@@ -2,6 +2,7 @@ import { Button, Group, Modal, Stack, Text, TextInput } from '@mantine/core'
 import { CreateInternalSquadCommand } from '@remnawave/backend-contract'
 import { PiArrowsClockwise, PiPlus } from 'react-icons/pi'
 import { useDisclosure } from '@mantine/hooks'
+import { useTranslation } from 'react-i18next'
 import { useField } from '@mantine/form'
 
 import { QueryKeys, useCreateInternalSquad, useGetInternalSquads } from '@shared/api/hooks'
@@ -9,6 +10,7 @@ import { MODALS, useModalsStore } from '@entities/dashboard/modal-store'
 import { queryClient } from '@shared/api'
 
 export const InternalSquadsHeaderActionButtonsFeature = () => {
+    const { t } = useTranslation()
     const { isFetching } = useGetInternalSquads()
 
     const { open: openModal, setInternalData } = useModalsStore()
@@ -59,14 +61,20 @@ export const InternalSquadsHeaderActionButtonsFeature = () => {
                 size="xs"
                 variant="default"
             >
-                Update
+                {t('internal-squad-header-action-buttons.feature.update')}
             </Button>
 
             <Button leftSection={<PiPlus size="16px" />} onClick={open} size="xs" variant="default">
-                Create Internal Squad
+                {t('internal-squad-header-action-buttons.feature.create-internal-squad')}
             </Button>
 
-            <Modal centered onClose={close} opened={opened} size="md" title="Create Internal Squad">
+            <Modal
+                centered
+                onClose={close}
+                opened={opened}
+                size="md"
+                title={t('internal-squad-header-action-buttons.feature.create-internal-squad')}
+            >
                 <form
                     onSubmit={(e) => {
                         e.preventDefault()
@@ -79,17 +87,25 @@ export const InternalSquadsHeaderActionButtonsFeature = () => {
                     }}
                 >
                     <Stack gap="md">
-                        <Text size="sm">Create a new internal squad by entering a name below.</Text>
+                        <Text size="sm">
+                            {t(
+                                'internal-squad-header-action-buttons.feature.create-a-new-internal-squad-by-entering-a-name-below'
+                            )}
+                        </Text>
                         <TextInput
-                            description="It can't be changed later"
-                            label="Squad Name"
-                            placeholder="Enter squad name"
+                            description={t(
+                                'internal-squad-header-action-buttons.feature.it-cant-be-changed-later'
+                            )}
+                            label={t('internal-squad-header-action-buttons.feature.squad-name')}
+                            placeholder={t(
+                                'internal-squad-header-action-buttons.feature.enter-squad-name'
+                            )}
                             required
                             {...nameField.getInputProps()}
                         />
                         <Group justify="flex-end">
                             <Button onClick={close} variant="default">
-                                Cancel
+                                {t('internal-squad-header-action-buttons.feature.cancel')}
                             </Button>
 
                             <Button
@@ -97,7 +113,7 @@ export const InternalSquadsHeaderActionButtonsFeature = () => {
                                 loading={isPending}
                                 type="submit"
                             >
-                                Create
+                                {t('internal-squad-header-action-buttons.feature.create')}
                             </Button>
                         </Group>
                     </Stack>
