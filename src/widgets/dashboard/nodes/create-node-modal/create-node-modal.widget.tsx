@@ -3,7 +3,6 @@ import { em, Group, Modal, Text } from '@mantine/core'
 import { useForm, zodResolver } from '@mantine/form'
 import { useTranslation } from 'react-i18next'
 import { useMediaQuery } from '@mantine/hooks'
-import { PiXBold } from 'react-icons/pi'
 import { useState } from 'react'
 
 import { useNodesStoreActions, useNodesStoreCreateModalIsOpen } from '@entities/dashboard/nodes'
@@ -66,9 +65,6 @@ export const CreateNodeModalWidget = () => {
     return (
         <Modal
             centered
-            closeButtonProps={{
-                icon: <PiXBold size={26} />
-            }}
             fullScreen={isMobile}
             onClose={handleClose}
             opened={isModalOpen}

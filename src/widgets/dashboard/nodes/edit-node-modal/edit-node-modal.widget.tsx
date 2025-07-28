@@ -4,7 +4,6 @@ import { em, Group, Modal, Text } from '@mantine/core'
 import { useTranslation } from 'react-i18next'
 import { useMediaQuery } from '@mantine/hooks'
 import { useEffect, useState } from 'react'
-import { PiXBold } from 'react-icons/pi'
 import { useForm } from '@mantine/form'
 
 import {
@@ -130,9 +129,6 @@ export const EditNodeModalConnectorWidget = () => {
     return (
         <Modal
             centered
-            closeButtonProps={{
-                icon: <PiXBold size={26} />
-            }}
             fullScreen={isMobile}
             onClose={() => actions.toggleEditModal(false)}
             onExitTransitionEnd={() => handleClose}

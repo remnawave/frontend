@@ -3,8 +3,8 @@ import { DrawerOverlay } from '@mantine/core'
 export default {
     DrawerOverlay: DrawerOverlay.extend({
         defaultProps: {
-            backgroundOpacity: 0.5,
-            blur: 2
+            backgroundOpacity: 0.6,
+            blur: 0
         }
     })
 }

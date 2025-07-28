@@ -1,5 +1,5 @@
 import { Box, Button, Center, em, Group, Menu, Modal, px, Stack } from '@mantine/core'
-import { PiFloppyDiskDuotone, PiQrCodeDuotone, PiXBold } from 'react-icons/pi'
+import { PiFloppyDiskDuotone, PiQrCodeDuotone } from 'react-icons/pi'
 import { UpdateUserCommand } from '@remnawave/backend-contract'
 import { zodResolver } from 'mantine-form-zod-resolver'
 import { TbDots, TbServerCog } from 'react-icons/tb'
@@ -216,9 +216,6 @@ export const ViewUserModal = () => {
     return (
         <Modal
             centered
-            closeButtonProps={{
-                icon: <PiXBold size={26} />
-            }}
             fullScreen={isMobile}
             onClose={() => actions.changeModalState(false)}
             onExitTransitionEnd={handleClose}

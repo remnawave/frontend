@@ -131,9 +131,6 @@ export const EditNodeByUuidModalWidget = () => {
     return (
         <Modal
             centered
-            closeButtonProps={{
-                icon: <PiXBold size={26} />
-            }}
             fullScreen={isMobile}
             onClose={() => close(MODALS.EDIT_NODE_BY_UUID_MODAL)}
             onExitTransitionEnd={() => handleClose}

@@ -1,7 +1,7 @@
 import { CreateUserCommand, USERS_STATUS } from '@remnawave/backend-contract'
 import { Button, em, Group, Modal, Stack } from '@mantine/core'
-import { PiFloppyDiskDuotone, PiXBold } from 'react-icons/pi'
 import { zodResolver } from 'mantine-form-zod-resolver'
+import { PiFloppyDiskDuotone } from 'react-icons/pi'
 import { useTranslation } from 'react-i18next'
 import { useMediaQuery } from '@mantine/hooks'
 import { useForm } from '@mantine/form'
@@ -145,9 +145,6 @@ export const CreateUserModalWidget = () => {
     return (
         <Modal
             centered
-            closeButtonProps={{
-                icon: <PiXBold size={26} />
-            }}
             fullScreen={isMobile}
             onClose={handleCloseModal}
             onExitTransitionEnd={handleResetForm}
