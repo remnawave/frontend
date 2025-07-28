@@ -111,7 +111,7 @@ export function MobileWarningOverlay() {
                                 </Text>
                             </Group>
 
-                            <Text c="gray.s5" size="xs">
+                            <Text c="gray.5" size="xs">
                                 {t('mobile-warning-overlay.or')}
                             </Text>
 
