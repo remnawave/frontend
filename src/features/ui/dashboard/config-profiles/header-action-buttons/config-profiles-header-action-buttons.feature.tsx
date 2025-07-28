@@ -1,7 +1,17 @@
-import { Button, Group, Modal, Stack, Text, TextInput } from '@mantine/core'
+import {
+    ActionIcon,
+    ActionIconGroup,
+    Button,
+    Group,
+    Modal,
+    Stack,
+    Text,
+    TextInput,
+    Tooltip
+} from '@mantine/core'
 import { CreateConfigProfileCommand } from '@remnawave/backend-contract'
 import { generatePath, useNavigate } from 'react-router-dom'
-import { PiArrowsClockwise, PiPlus } from 'react-icons/pi'
+import { TbPlus, TbRefresh } from 'react-icons/tb'
 import { useDisclosure } from '@mantine/hooks'
 import { useTranslation } from 'react-i18next'
 import { useField } from '@mantine/form'
@@ -88,19 +98,33 @@ export const ConfigProfilesHeaderActionButtonsFeature = () => {
 
     return (
         <Group grow preventGrowOverflow={false} wrap="wrap">
-            <Button
-                leftSection={<PiArrowsClockwise size="16px" />}
-                loading={isFetching}
-                onClick={handleUpdate}
-                size="xs"
-                variant="default"
-            >
-                {t('config-profiles-header-action-buttons.feature.update')}
-            </Button>
+            <ActionIconGroup>
+                <Tooltip
+                    label={t('config-profiles-header-action-buttons.feature.update')}
+                    withArrow
+                >
+                    <ActionIcon
+                        loading={isFetching}
+                        onClick={handleUpdate}
+                        radius="md"
+                        size="lg"
+                        variant="light"
+                    >
+                        <TbRefresh size="18px" />
+                    </ActionIcon>
+                </Tooltip>
+            </ActionIconGroup>
 
-            <Button leftSection={<PiPlus size="16px" />} onClick={open} size="xs" variant="default">
-                {t('config-profiles-header-action-buttons.feature.create-config-profile')}
-            </Button>
+            <ActionIconGroup>
+                <Tooltip
+                    label={t('config-profiles-header-action-buttons.feature.create-config-profile')}
+                    withArrow
+                >
+                    <ActionIcon color="teal" onClick={open} radius="md" size="lg" variant="light">
+                        <TbPlus size="18px" />
+                    </ActionIcon>
+                </Tooltip>
+            </ActionIconGroup>
 
             <Modal
                 centered

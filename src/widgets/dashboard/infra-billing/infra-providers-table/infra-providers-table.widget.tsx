@@ -1,8 +1,18 @@
+import {
+    ActionIcon,
+    ActionIconGroup,
+    Box,
+    Button,
+    Group,
+    Stack,
+    Text,
+    Tooltip
+} from '@mantine/core'
 import { GetInfraProvidersCommand } from '@remnawave/backend-contract'
-import { PiArrowsClockwise, PiEmpty, PiPlus } from 'react-icons/pi'
-import { Box, Button, Group, Stack, Text } from '@mantine/core'
+import { TbPlus, TbRefresh } from 'react-icons/tb'
 import { useTranslation } from 'react-i18next'
 import { DataTable } from 'mantine-datatable'
+import { PiEmpty } from 'react-icons/pi'
 import { modals } from '@mantine/modals'
 import { useMemo } from 'react'
 
@@ -92,30 +102,43 @@ export function InfraProvidersTableWidget() {
             <DataTableShared.Title
                 actions={
                     <Group grow preventGrowOverflow={false} wrap="wrap">
-                        <Button
-                            leftSection={<PiArrowsClockwise size="16px" />}
-                            loading={infraProvidersLoading}
-                            onClick={() => {
-                                queryClient.refetchQueries({
-                                    queryKey: QueryKeys.infraBilling.getInfraProviders.queryKey
-                                })
-                            }}
-                            size="xs"
-                            variant="default"
-                        >
-                            {t('infra-providers-table.widget.refresh')}
-                        </Button>
+                        <ActionIconGroup>
+                            <Tooltip label={t('infra-providers-table.widget.refresh')} withArrow>
+                                <ActionIcon
+                                    loading={infraProvidersLoading}
+                                    onClick={() => {
+                                        queryClient.refetchQueries({
+                                            queryKey:
+                                                QueryKeys.infraBilling.getInfraProviders.queryKey
+                                        })
+                                    }}
+                                    radius="md"
+                                    size="lg"
+                                    variant="light"
+                                >
+                                    <TbRefresh size="18px" />
+                                </ActionIcon>
+                            </Tooltip>
+                        </ActionIconGroup>
 
-                        <Button
-                            leftSection={<PiPlus size="16px" />}
-                            onClick={() => {
-                                openModal(MODALS.CREATE_INFRA_PROVIDER_DRAWER)
-                            }}
-                            size="xs"
-                            variant="outline"
-                        >
-                            {t('infra-providers-table.widget.create-infra-provider')}
-                        </Button>
+                        <ActionIconGroup>
+                            <Tooltip
+                                label={t('infra-providers-table.widget.create-infra-provider')}
+                                withArrow
+                            >
+                                <ActionIcon
+                                    color="teal"
+                                    onClick={() => {
+                                        openModal(MODALS.CREATE_INFRA_PROVIDER_DRAWER)
+                                    }}
+                                    radius="md"
+                                    size="lg"
+                                    variant="light"
+                                >
+                                    <TbPlus size="18px" />
+                                </ActionIcon>
+                            </Tooltip>
+                        </ActionIconGroup>
                     </Group>
                 }
                 description={t('infra-providers-table.widget.list-of-all-infra-providers')}

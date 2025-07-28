@@ -1,3 +1,4 @@
+// import { splashScreen } from 'vite-plugin-splash-screen'
 import removeConsole from 'vite-plugin-remove-console'
 // import { visualizer } from 'rollup-plugin-visualizer'
 import webfontDownload from 'vite-plugin-webfont-dl'
@@ -23,6 +24,10 @@ export default defineConfig({
                 isCrowdin: process.env.CROWDIN === '1'
             }
         })
+        // splashScreen({
+        //     logoSrc: 'favicons/logo_small.svg',
+        //     splashBg: '#161B23'
+        // })
         // visualizer({
         //     open: true,
         //     gzipSize: true,

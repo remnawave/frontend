@@ -1,6 +1,7 @@
-import { PiArrowsClockwise, PiPlus, PiSpiral } from 'react-icons/pi'
+import { ActionIcon, ActionIconGroup, Group, Tooltip } from '@mantine/core'
+import { TbPlus, TbRefresh } from 'react-icons/tb'
 import { useTranslation } from 'react-i18next'
-import { Button, Group } from '@mantine/core'
+import { PiSpiral } from 'react-icons/pi'
 
 import { useNodesStoreActions } from '@entities/dashboard/nodes/nodes-store/nodes-store'
 import { useGetNodes, useRestartAllNodes } from '@shared/api/hooks'
@@ -24,35 +25,51 @@ export const NodesHeaderActionButtonsFeature = () => {
 
     return (
         <Group grow preventGrowOverflow={false} wrap="wrap">
-            <Button
-                leftSection={<PiArrowsClockwise size="16px" />}
-                loading={isGetNodesPending || isPending || isRefetching}
-                onClick={() => refetchNodes()}
-                size="xs"
-                variant="default"
-            >
-                {t('nodes-header-action-buttons.feature.update')}
-            </Button>
+            <ActionIconGroup>
+                <Tooltip
+                    label={t('nodes-header-action-buttons.feature.restart-all-nodes')}
+                    withArrow
+                >
+                    <ActionIcon
+                        color="grape"
+                        loading={isRestartAllNodesPending}
+                        onClick={() => restartAllNodes({})}
+                        radius="md"
+                        size="lg"
+                        variant="light"
+                    >
+                        <PiSpiral size="18px" />
+                    </ActionIcon>
+                </Tooltip>
+            </ActionIconGroup>
 
-            <Button
-                c="teal"
-                leftSection={<PiSpiral size="16px" />}
-                loading={isRestartAllNodesPending}
-                onClick={() => restartAllNodes({})}
-                size="xs"
-                variant="default"
-            >
-                {t('nodes-header-action-buttons.feature.restart-all-nodes')}
-            </Button>
+            <ActionIconGroup>
+                <Tooltip label={t('nodes-header-action-buttons.feature.update')} withArrow>
+                    <ActionIcon
+                        loading={isGetNodesPending || isPending || isRefetching}
+                        onClick={() => refetchNodes()}
+                        radius="md"
+                        size="lg"
+                        variant="light"
+                    >
+                        <TbRefresh size="18px" />
+                    </ActionIcon>
+                </Tooltip>
+            </ActionIconGroup>
 
-            <Button
-                leftSection={<PiPlus size="16px" />}
-                onClick={handleCreate}
-                size="xs"
-                variant="default"
-            >
-                {t('nodes-header-action-buttons.feature.create-new-node')}
-            </Button>
+            <ActionIconGroup>
+                <Tooltip label={t('nodes-header-action-buttons.feature.create-new-node')} withArrow>
+                    <ActionIcon
+                        color="teal"
+                        onClick={handleCreate}
+                        radius="md"
+                        size="lg"
+                        variant="light"
+                    >
+                        <TbPlus size="18px" />
+                    </ActionIcon>
+                </Tooltip>
+            </ActionIconGroup>
         </Group>
     )
 }

@@ -1,9 +1,19 @@
-import { PiArrowsClockwise, PiEmpty, PiPlus } from 'react-icons/pi'
-import { Box, Button, Group, Stack, Text } from '@mantine/core'
+import {
+    ActionIcon,
+    ActionIconGroup,
+    Box,
+    Button,
+    Group,
+    Stack,
+    Text,
+    Tooltip
+} from '@mantine/core'
 import { useHotkeys, useMediaQuery } from '@mantine/hooks'
+import { TbPlus, TbRefresh } from 'react-icons/tb'
 import { useTranslation } from 'react-i18next'
 import { DataTable } from 'mantine-datatable'
 import { useMemo, useState } from 'react'
+import { PiEmpty } from 'react-icons/pi'
 import { modals } from '@mantine/modals'
 
 import {
@@ -79,28 +89,43 @@ export function InfraBillingRecordsTableWidget() {
             <DataTableShared.Title
                 actions={
                     <Group grow preventGrowOverflow={false} wrap="wrap">
-                        <Button
-                            leftSection={<PiArrowsClockwise size="16px" />}
-                            loading={infraBillingRecordsLoading}
-                            onClick={() => {
-                                refetchInfraBillingRecords()
-                            }}
-                            size="xs"
-                            variant="default"
-                        >
-                            {t('infra-billing-records-table.widget.refresh')}
-                        </Button>
+                        <ActionIconGroup>
+                            <Tooltip
+                                label={t('infra-billing-records-table.widget.refresh')}
+                                withArrow
+                            >
+                                <ActionIcon
+                                    loading={infraBillingRecordsLoading}
+                                    onClick={() => {
+                                        refetchInfraBillingRecords()
+                                    }}
+                                    radius="md"
+                                    size="lg"
+                                    variant="light"
+                                >
+                                    <TbRefresh size="18px" />
+                                </ActionIcon>
+                            </Tooltip>
+                        </ActionIconGroup>
 
-                        <Button
-                            leftSection={<PiPlus size="16px" />}
-                            onClick={() => {
-                                openModal(MODALS.CREATE_INFRA_BILLING_RECORD_DRAWER)
-                            }}
-                            size="xs"
-                            variant="outline"
-                        >
-                            {t('infra-billing-records-table.widget.create')}
-                        </Button>
+                        <ActionIconGroup>
+                            <Tooltip
+                                label={t('infra-billing-records-table.widget.create')}
+                                withArrow
+                            >
+                                <ActionIcon
+                                    color="teal"
+                                    onClick={() => {
+                                        openModal(MODALS.CREATE_INFRA_BILLING_RECORD_DRAWER)
+                                    }}
+                                    radius="md"
+                                    size="lg"
+                                    variant="light"
+                                >
+                                    <TbPlus size="18px" />
+                                </ActionIcon>
+                            </Tooltip>
+                        </ActionIconGroup>
                     </Group>
                 }
                 description={t('infra-billing-records-table.widget.billing-records-sorted-by-date')}

@@ -7,10 +7,22 @@ import {
     TbFilterOff,
     TbMaximize,
     TbMinimize,
-    TbQuestionMark
+    TbPlus,
+    TbQuestionMark,
+    TbRefresh,
+    TbRestore,
+    TbSettings
 } from 'react-icons/tb'
-import { PiAnchorSimpleDuotone, PiArrowsClockwise, PiExcludeSquare, PiPlus } from 'react-icons/pi'
-import { Button, Drawer, Group, Stack, Table, Text } from '@mantine/core'
+import {
+    ActionIcon,
+    ActionIconGroup,
+    Drawer,
+    Group,
+    Stack,
+    Table,
+    Text,
+    Tooltip
+} from '@mantine/core'
 import { useTranslation } from 'react-i18next'
 import { useDisclosure } from '@mantine/hooks'
 
@@ -73,64 +85,87 @@ export const UserActionGroupFeature = (props: IProps) => {
     return (
         <>
             <Group grow preventGrowOverflow={false} wrap="wrap">
-                <Button
-                    color="lime"
-                    leftSection={<TbQuestionMark size="20px" />}
-                    onClick={helpDrawerHandlers.open}
-                    size="xs"
-                    variant="light"
-                >
-                    {t('action-group.feature.help')}
-                </Button>
-                <Button
-                    leftSection={<PiArrowsClockwise size="16px" />}
-                    loading={isLoading}
-                    onClick={handleRefetch}
-                    size="xs"
-                    variant="default"
-                >
-                    {t('action-group.feature.update')}
-                </Button>
-                <Button
-                    color="gray"
-                    leftSection={<PiExcludeSquare size="16px" />}
-                    loading={isLoading}
-                    onClick={handleClearFilters}
-                    size="xs"
-                    variant="outline"
-                >
-                    {t('action-group.feature.clear-filters')}
-                </Button>
+                <ActionIconGroup>
+                    <Tooltip label={t('action-group.feature.help')} withArrow>
+                        <ActionIcon
+                            color="lime"
+                            onClick={helpDrawerHandlers.open}
+                            radius="md"
+                            size="lg"
+                            variant="light"
+                        >
+                            <TbQuestionMark size="18px" />
+                        </ActionIcon>
+                    </Tooltip>
+                </ActionIconGroup>
 
-                <Button
-                    leftSection={<PiArrowsClockwise size="16px" />}
-                    loading={isLoading}
-                    onClick={handleResetTable}
-                    size="xs"
-                    variant="outline"
-                >
-                    {t('action-group.feature.reset-table')}
-                </Button>
+                <ActionIconGroup>
+                    <Tooltip label={t('action-group.feature.update')} withArrow>
+                        <ActionIcon
+                            loading={isLoading}
+                            onClick={handleRefetch}
+                            radius="md"
+                            size="lg"
+                            variant="light"
+                        >
+                            <TbRefresh size="18px" />
+                        </ActionIcon>
+                    </Tooltip>
 
-                <Button
-                    color="red"
-                    leftSection={<PiAnchorSimpleDuotone size="16px" />}
-                    loading={isLoading}
-                    onClick={bulkAllDrawerHandlers.open}
-                    size="xs"
-                    variant="outline"
-                >
-                    {t('action-group.feature.bulk-actions')}
-                </Button>
+                    <Tooltip label={t('action-group.feature.clear-filters')} withArrow>
+                        <ActionIcon
+                            color="orange"
+                            loading={isLoading}
+                            onClick={handleClearFilters}
+                            radius="md"
+                            size="lg"
+                            variant="light"
+                        >
+                            <TbFilterOff size="18px" />
+                        </ActionIcon>
+                    </Tooltip>
 
-                <Button
-                    leftSection={<PiPlus size="16px" />}
-                    onClick={handleOpenCreateUserModal}
-                    size="xs"
-                    variant="default"
-                >
-                    {t('action-group.feature.new-user')}
-                </Button>
+                    <Tooltip label={t('action-group.feature.reset-table')} withArrow>
+                        <ActionIcon
+                            color="gray"
+                            loading={isLoading}
+                            onClick={handleResetTable}
+                            radius="md"
+                            size="lg"
+                            variant="light"
+                        >
+                            <TbRestore size="18px" />
+                        </ActionIcon>
+                    </Tooltip>
+                </ActionIconGroup>
+
+                <ActionIconGroup>
+                    <Tooltip label={t('action-group.feature.bulk-actions')} withArrow>
+                        <ActionIcon
+                            color="red"
+                            loading={isLoading}
+                            onClick={bulkAllDrawerHandlers.open}
+                            radius="md"
+                            size="lg"
+                            variant="light"
+                        >
+                            <TbSettings size="18px" />
+                        </ActionIcon>
+                    </Tooltip>
+
+                    <Tooltip label={t('action-group.feature.new-user')} withArrow>
+                        <ActionIcon
+                            color="teal"
+                            onClick={handleOpenCreateUserModal}
+                            radius="md"
+                            size="lg"
+                            variant="light"
+                        >
+                            <TbPlus size="18px" />
+                        </ActionIcon>
+                    </Tooltip>
+                </ActionIconGroup>
+
                 <BulkAllUserActionsDrawerWidget
                     handlers={bulkAllDrawerHandlers}
                     isDrawerOpen={isBulkAllUserActionsDrawerOpen}
