@@ -931,7 +931,12 @@
             "additional-response-headers": "هدرهای برگشتی اضافی",
             "headers-that-will-be-sent-with-subscription-content": "هدرهای اضافی که می‌خواهید همراه با محتوای اشتراک ارسال شوند را مشخص کنید.",
             "randomize-hosts": "هاست رندوم",
-            "randomize-hosts-description": "استفاده از مقادیر رندوم برای هاست در اشتراک‌ها"
+            "randomize-hosts-description": "استفاده از مقادیر رندوم برای هاست در اشتراک‌ها",
+            "additional-options": "تنظیمات بیشتر",
+            "configure-additional-subscription-options": "پیکربندی تنظیمات اضافی",
+            "error": "خطا",
+            "save-settings": "ذخیره تنظیمات",
+            "save-your-subscription-settings-to-apply-changes": "برای اعمال تغییرات تنظیمات اشتراک را ذخیره کنید"
         }
     },
     "nodes-realtime-metrics": {
@@ -1298,7 +1303,8 @@
                 "no-config-profiles-available": "هیچ پروفایل پیکربندی‌ای موجود نیست",
                 "all": "همه",
                 "selected": "انتخاب شده",
-                "unselected": "انتخاب نشده"
+                "unselected": "انتخاب نشده",
+                "edit-internal-squad": "ویرایش اسکواد"
             }
         }
     },
@@ -1385,5 +1391,30 @@
         "or": "یا",
         "rotate-device": "چرخاندن دستگاه",
         "i-understand-continue-anyway": "می‌دانم، ادامه بده"
+    },
+    "internal-squad-header-action-buttons": {
+        "feature": {
+            "update": "به‌روزرسانی",
+            "create-internal-squad": "ایجاد اسکواد داخلی",
+            "create-a-new-internal-squad-by-entering-a-name-below": "برای ایجاد اسکواد جدید اسم آن را وارد کنید",
+            "it-cant-be-changed-later": "بعدا قابل تغییر نخواهد بود",
+            "squad-name": "نام اسکواد",
+            "enter-squad-name": "نام اسکواد را وارد کنید",
+            "cancel": "لغو",
+            "create": "ایجاد"
+        }
+    },
+    "config-profiles-header-action-buttons": {
+        "feature": {
+            "update": "به‌روزرسانی",
+            "create-config-profile": "ساخت پروفایل پیکربندی",
+            "create-a-new-config-profile-by-entering-a-name-below": "برای ایجاد پروفایل پیکربندی جدید اسم آن را وارد کنید",
+            "you-can-customize-xray-config-after-creation": "کانفیگ Xray را می‌توانید بعد از ایجاد شخصی‌سازی کنید",
+            "it-cant-be-changed-later": "بعدا قابل تغییر نخواهد بود",
+            "profile-name": "نام پروفایل",
+            "enter-profile-name": "نام پروفایل را وارد کنید",
+            "cancel": "لغو",
+            "create": "ایجاد"
+        }
     }
 }

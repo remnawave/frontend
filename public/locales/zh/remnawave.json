@@ -931,7 +931,12 @@
             "additional-response-headers": "附加响应头",
             "headers-that-will-be-sent-with-subscription-content": "将与订阅内容一起发送的响应头。",
             "randomize-hosts": "随机化主机",
-            "randomize-hosts-description": "在订阅内容中随机排序主机"
+            "randomize-hosts-description": "在订阅内容中随机排序主机",
+            "additional-options": "Additional Options",
+            "configure-additional-subscription-options": "Configure additional subscription options",
+            "error": "Error",
+            "save-settings": "Save Settings",
+            "save-your-subscription-settings-to-apply-changes": "Save your subscription settings to apply changes"
         }
     },
     "nodes-realtime-metrics": {
@@ -1298,7 +1303,8 @@
                 "no-config-profiles-available": "No config profiles available",
                 "all": "All",
                 "selected": "Selected",
-                "unselected": "Unselected"
+                "unselected": "Unselected",
+                "edit-internal-squad": "Edit Internal Squad"
             }
         }
     },
@@ -1385,5 +1391,30 @@
         "or": "or",
         "rotate-device": "Rotate device",
         "i-understand-continue-anyway": "I understand, continue anyway"
+    },
+    "internal-squad-header-action-buttons": {
+        "feature": {
+            "update": "Update",
+            "create-internal-squad": "Create Internal Squad",
+            "create-a-new-internal-squad-by-entering-a-name-below": "Create a new internal squad by entering a name below.",
+            "it-cant-be-changed-later": "It can't be changed later",
+            "squad-name": "Squad Name",
+            "enter-squad-name": "Enter squad name",
+            "cancel": "Cancel",
+            "create": "Create"
+        }
+    },
+    "config-profiles-header-action-buttons": {
+        "feature": {
+            "update": "Update",
+            "create-config-profile": "Create Config Profile",
+            "create-a-new-config-profile-by-entering-a-name-below": "Create a new config profile by entering a name below.",
+            "you-can-customize-xray-config-after-creation": "You can customize XRay config after creation.",
+            "it-cant-be-changed-later": "It can't be changed later",
+            "profile-name": "Profile Name",
+            "enter-profile-name": "Enter profile name",
+            "cancel": "Cancel",
+            "create": "Create"
+        }
     }
 }
