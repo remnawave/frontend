@@ -17,6 +17,7 @@ import {
     ActionIcon,
     ActionIconGroup,
     Drawer,
+    Flex,
     Group,
     Stack,
     Table,
@@ -84,7 +85,12 @@ export const UserActionGroupFeature = (props: IProps) => {
 
     return (
         <>
-            <Group grow preventGrowOverflow={false} wrap="wrap">
+            <Flex
+                align="center"
+                gap={{ base: 0, sm: 'xs' }}
+                justify={{ base: 'space-between', sm: 'flex-end' }}
+                w={{ base: '100%', sm: 'auto' }}
+            >
                 <ActionIconGroup>
                     <Tooltip label={t('action-group.feature.help')} withArrow>
                         <ActionIcon
@@ -170,7 +176,7 @@ export const UserActionGroupFeature = (props: IProps) => {
                     handlers={bulkAllDrawerHandlers}
                     isDrawerOpen={isBulkAllUserActionsDrawerOpen}
                 />
-            </Group>
+            </Flex>
 
             <Drawer
                 keepMounted={false}
