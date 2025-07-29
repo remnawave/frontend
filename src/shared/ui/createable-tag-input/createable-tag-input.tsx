@@ -35,7 +35,7 @@ export function CreateableTagInputShared(props: IProps) {
 
     const exactOptionMatch = data.some((item) => item === search)
     const filteredOptions = exactOptionMatch
-        ? data
+        ? data.filter((item) => item.toLowerCase() === search.toLowerCase().trim())
         : data.filter((item) => item.toLowerCase().includes(search.toLowerCase().trim()))
 
     const options = filteredOptions.map((item) => (
@@ -64,6 +64,7 @@ export function CreateableTagInputShared(props: IProps) {
 
                 combobox.closeDropdown()
             }}
+            position="top"
             store={combobox}
             withinPortal={false}
         >
@@ -110,7 +111,7 @@ export function CreateableTagInputShared(props: IProps) {
             </Combobox.Target>
 
             <Combobox.Dropdown>
-                <Combobox.Options>
+                <Combobox.Options mah={200} style={{ overflowY: 'auto' }}>
                     {options}
                     {!exactOptionMatch && search.trim().length > 0 && (
                         <Combobox.Option value="$create">+ {search}</Combobox.Option>
