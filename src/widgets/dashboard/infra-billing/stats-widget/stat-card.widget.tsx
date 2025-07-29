@@ -33,15 +33,32 @@ export function StatCardWidget({ title, value, icon, color, subtitle, isLoading 
             }}
         >
             <Group align="flex-start" justify="space-between">
-                <Stack gap="xs" style={{ flex: 1 }}>
-                    <Text c="gray.4" fw={500} size="sm">
+                <Stack gap="xs" style={{ flex: 1, minWidth: 0 }}>
+                    <Text
+                        c="gray.4"
+                        fw={500}
+                        size="sm"
+                        style={{
+                            whiteSpace: 'nowrap',
+                            overflow: 'hidden',
+                            textOverflow: 'ellipsis'
+                        }}
+                    >
                         {title}
                     </Text>
                     <Text c="gray.1" fw={700} size="xl">
                         {isLoading ? <Loader color={color} size="xs" /> : value}
                     </Text>
                     {subtitle && (
-                        <Text c="gray.5" size="xs">
+                        <Text
+                            c="gray.5"
+                            size="xs"
+                            style={{
+                                whiteSpace: 'nowrap',
+                                overflow: 'hidden',
+                                textOverflow: 'ellipsis'
+                            }}
+                        >
                             {subtitle}
                         </Text>
                     )}
