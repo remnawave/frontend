@@ -7,11 +7,14 @@ import '@mantine/dropzone/styles.css'
 import '@mantine/notifications/styles.css'
 import '@mantine/nprogress/styles.css'
 import 'mantine-react-table/styles.css'
+import 'mantine-datatable/styles.layer.css'
+import '@gfazioli/mantine-list-view-table/styles.css'
 
 import './global.css'
 
 import { Center, DirectionProvider, MantineProvider } from '@mantine/core'
 import { polyfillCountryFlagEmojis } from 'country-flag-emoji-polyfill'
+// import { hideSplashScreen } from 'vite-plugin-splash-screen/runtime'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import customParseFormat from 'dayjs/plugin/customParseFormat'
 import { QueryClientProvider } from '@tanstack/react-query'
@@ -39,6 +42,10 @@ polyfillCountryFlagEmojis()
 export function App() {
     const mq = useMediaQuery('(min-width: 40em)')
     const isDev = __NODE_ENV__ === 'development'
+
+    // useEffect(() => {
+    //     hideSplashScreen()
+    // }, [])
 
     return (
         // <StrictMode>

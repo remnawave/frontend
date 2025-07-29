@@ -1,25 +1,28 @@
 import {
     PiArrowsDownUpDuotone,
     PiCalendarDotDuotone,
+    PiCheck,
     PiClockDuotone,
-    PiGlobe,
-    PiLockSimple,
+    PiCopy,
     PiNetworkDuotone,
     PiTag,
     PiTagDuotone,
     PiUserDuotone
 } from 'react-icons/pi'
 import {
+    ActionIcon,
     Badge,
     Box,
     Center,
+    CopyButton,
     Drawer,
     Group,
     Paper,
     Stack,
     Text,
     ThemeIcon,
-    Title
+    Title,
+    Tooltip
 } from '@mantine/core'
 import { useTranslation } from 'react-i18next'
 import dayjs from 'dayjs'
@@ -190,10 +193,6 @@ export const DetailedUserInfoDrawerWidget = () => {
                             </Group>
 
                             <CopyableFieldShared
-                                label={t('detailed-user-info-drawer.widget.subscription-uuid')}
-                                value={user.subscriptionUuid}
-                            />
-                            <CopyableFieldShared
                                 label={t('detailed-user-info-drawer.widget.subscription-url')}
                                 value={user.subscriptionUrl}
                             />
@@ -259,7 +258,7 @@ export const DetailedUserInfoDrawerWidget = () => {
                         </Stack>
                     </Paper>
 
-                    {user.activeUserInbounds && user.activeUserInbounds.length > 0 && (
+                    {user.activeInternalSquads && user.activeInternalSquads.length > 0 && (
                         <Paper p="md" radius="md" withBorder>
                             <Stack gap="xs">
                                 <Group>
@@ -272,13 +271,15 @@ export const DetailedUserInfoDrawerWidget = () => {
                                         <PiTagDuotone size={16} />
                                     </ThemeIcon>
                                     <Title order={5}>
-                                        {t('detailed-user-info-drawer.widget.active-inbounds')}
+                                        {t(
+                                            'detailed-user-info-drawer.widget.active-internal-squads'
+                                        )}
                                     </Title>
                                 </Group>
 
-                                {user.activeUserInbounds.map((inbound) => (
+                                {user.activeInternalSquads.map((squad) => (
                                     <Paper
-                                        key={inbound.uuid}
+                                        key={squad.uuid}
                                         p="md"
                                         radius="md"
                                         shadow="sm"
@@ -286,35 +287,31 @@ export const DetailedUserInfoDrawerWidget = () => {
                                     >
                                         <Group justify="space-between">
                                             <Group gap="xs">
-                                                <PiTag size="1rem" />
+                                                <PiTag size="16px" />
                                                 <Text fw={600} size="sm">
-                                                    {inbound.tag}
+                                                    {squad.name}
                                                 </Text>
-                                            </Group>
 
-                                            <Group gap="xs">
-                                                <Badge color={'green'} size="md">
-                                                    {inbound.type}
-                                                </Badge>
-
-                                                {inbound.network && (
-                                                    <Badge
-                                                        color="grape"
-                                                        leftSection={<PiGlobe size="1rem" />}
-                                                        size="md"
-                                                    >
-                                                        {inbound.network}
-                                                    </Badge>
-                                                )}
-                                                {inbound.security && (
-                                                    <Badge
-                                                        color="gray"
-                                                        leftSection={<PiLockSimple size="1rem" />}
-                                                        size="md"
-                                                    >
-                                                        {inbound.security}
-                                                    </Badge>
-                                                )}
+                                                <CopyButton timeout={2000} value={squad.uuid}>
+                                                    {({ copied, copy }) => (
+                                                        <Tooltip
+                                                            label={copied ? 'Copied!' : 'Copy UUID'}
+                                                        >
+                                                            <ActionIcon
+                                                                color={copied ? 'teal' : 'gray'}
+                                                                onClick={copy}
+                                                                size="sm"
+                                                                variant="subtle"
+                                                            >
+                                                                {copied ? (
+                                                                    <PiCheck size={14} />
+                                                                ) : (
+                                                                    <PiCopy size={14} />
+                                                                )}
+                                                            </ActionIcon>
+                                                        </Tooltip>
+                                                    )}
+                                                </CopyButton>
                                             </Group>
                                         </Group>
                                     </Paper>

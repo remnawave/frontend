@@ -1,0 +1,111 @@
+.root {
+    padding: var(--mantine-spacing-lg);
+    border-radius: var(--mantine-radius-md);
+    cursor: default;
+    position: relative;
+    overflow: hidden;
+
+    /* Light theme */
+    border: 1px solid var(--mantine-color-gray-2);
+    background: linear-gradient(
+        135deg,
+        var(--mantine-color-white) 0%,
+        var(--mantine-color-gray-0) 100%
+    );
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Dark theme */
+[data-mantine-color-scheme='dark'] .root {
+    border: 1px solid var(--mantine-color-dark-4);
+    background: linear-gradient(
+        135deg,
+        var(--mantine-color-dark-6) 0%,
+        var(--mantine-color-dark-7) 100%
+    );
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.root::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--mantine-color-blue-5), var(--mantine-color-cyan-5));
+    opacity: 0;
+}
+
+.root:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+    border-color: var(--mantine-color-blue-3);
+}
+
+[data-mantine-color-scheme='dark'] .root:hover {
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+    border-color: var(--mantine-color-blue-4);
+}
+
+.root:hover::before {
+    opacity: 1;
+}
+
+.icon {
+    padding: var(--mantine-spacing-sm);
+    border-radius: var(--mantine-radius-xl);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    min-width: 56px;
+    min-height: 56px;
+    backdrop-filter: blur(8px);
+}
+
+.textEmphasis {
+    font-weight: 700;
+    font-size: var(--mantine-font-size-xl);
+    line-height: 1.2;
+    color: var(--mantine-color-white-5);
+}
+
+.textMuted {
+    color: var(--mantine-color-dimmed);
+    font-size: var(--mantine-font-size-sm);
+    font-weight: 500;
+    line-height: 1.4;
+    letter-spacing: 0.01em;
+}
+
+.trendContainer {
+    display: flex;
+    align-items: center;
+    gap: var(--mantine-spacing-xs);
+
+    border-radius: var(--mantine-radius-md);
+    white-space: nowrap;
+}
+
+.trendPositive {
+    background: rgba(var(--mantine-color-green-6-rgb), 0.15);
+    border: 1px solid rgba(var(--mantine-color-green-6-rgb), 0.3);
+}
+
+.trendNegative {
+    background: var(--mantine-color-red-6) 15;
+    border: 1px solid var(--mantine-color-red-6) 30;
+}
+
+.trendValue {
+    font-size: var(--mantine-font-size-xs);
+    font-weight: 600;
+}
+
+.trendText {
+    color: var(--mantine-color-dimmed);
+    font-size: var(--mantine-font-size-xs);
+    font-weight: 500;
+}

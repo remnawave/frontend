@@ -4,28 +4,29 @@ import {
     Button,
     Card,
     Checkbox,
-    Divider,
+    Container,
     Grid,
     Group,
     NumberInput,
-    Select,
+    px,
     Stack,
     Tabs,
     Text,
     Textarea,
     TextInput,
     ThemeIcon,
-    Title,
-    useMantineTheme
+    Title
 } from '@mantine/core'
 import {
     PiChatsCircle,
+    PiClock,
     PiClockCountdown,
     PiClockUser,
     PiDeviceMobile,
     PiFloppyDisk,
     PiGear,
     PiInfo,
+    PiLink,
     PiProhibit,
     PiUserCircle
 } from 'react-icons/pi'
@@ -65,512 +66,520 @@ export const SubscriptionTabs = ({
     updateHeaders
 }: SubscriptionTabsProps) => {
     const { t } = useTranslation()
-    const theme = useMantineTheme()
     const navigate = useNavigate()
 
     return (
         <form key="subscription-settings-form" onSubmit={handleSubmit}>
-            <Stack gap="xl">
-                <Tabs
-                    color="cyan"
-                    defaultValue="general"
-                    radius="md"
-                    style={{
-                        width: '100%'
-                    }}
-                    styles={{
-                        tab: {
-                            paddingLeft: '20px',
-                            paddingRight: '20px',
-                            height: '52px',
-                            fontSize: '16px',
-                            fontWeight: 500
-                        }
-                    }}
-                >
-                    <Tabs.List>
-                        <Tabs.Tab
-                            leftSection={<PiInfo color={theme.colors.blue[6]} size="1.3rem" />}
-                            value="general"
-                        >
-                            {t('subscription-settings.widget.subscription-info')}
-                        </Tabs.Tab>
-                        <Tabs.Tab
-                            leftSection={
-                                <PiDeviceMobile color={theme.colors.grape[6]} size="1.3rem" />
-                            }
-                            value="happ"
-                        >
-                            {t('subscription-settings.widget.happ-settings')}
-                        </Tabs.Tab>
-                        <Tabs.Tab
-                            leftSection={
-                                <PiChatsCircle color={theme.colors.teal[6]} size="1.3rem" />
-                            }
-                            value="remarks"
-                        >
-                            {t('subscription-settings.widget.user-status-remarks')}
-                        </Tabs.Tab>
-                        <Tabs.Tab
-                            leftSection={
-                                <TbPrescription color={theme.colors.indigo[6]} size="1.3rem" />
-                            }
-                            value="additional-response-headers"
-                        >
-                            {t('subscription-tabs.widget.additional-response-headers')}
-                        </Tabs.Tab>
-                    </Tabs.List>
+            <Container p={0} pb="lg" size="xl">
+                <Stack gap="xl">
+                    <Tabs
+                        color="cyan"
+                        defaultValue="general"
+                        radius="md"
+                        style={{
+                            width: '100%'
+                        }}
+                    >
+                        <Tabs.List>
+                            <Tabs.Tab leftSection={<PiInfo size={px('1.2rem')} />} value="general">
+                                {t('subscription-settings.widget.subscription-info')}
+                            </Tabs.Tab>
+                            <Tabs.Tab
+                                leftSection={<PiDeviceMobile size={px('1.2rem')} />}
+                                value="happ"
+                            >
+                                {t('subscription-settings.widget.happ-settings')}
+                            </Tabs.Tab>
+                            <Tabs.Tab
+                                leftSection={<PiChatsCircle size={px('1.2rem')} />}
+                                value="remarks"
+                            >
+                                {t('subscription-settings.widget.user-status-remarks')}
+                            </Tabs.Tab>
+                            <Tabs.Tab
+                                leftSection={<TbPrescription size={px('1.2rem')} />}
+                                value="additional-response-headers"
+                            >
+                                {t('subscription-tabs.widget.additional-response-headers')}
+                            </Tabs.Tab>
+                        </Tabs.List>
 
-                    <Tabs.Panel value="general">
-                        <Card mt="sm" p="md" radius="md" shadow="sm" withBorder>
-                            <Card.Section inheritPadding p="md" withBorder>
-                                <Group align="flex-start" wrap="nowrap">
-                                    <ThemeIcon color="blue" radius="md" size="lg" variant="light">
-                                        <PiUserCircle size="1.5rem" />
-                                    </ThemeIcon>
+                        <Tabs.Panel pt="xl" value="general">
+                            <Stack gap="lg">
+                                <Card radius="md" shadow="md" withBorder>
+                                    <Card.Section p="lg" withBorder>
+                                        <Group align="center" gap="md" wrap="nowrap">
+                                            <ThemeIcon
+                                                color="blue"
+                                                radius="md"
+                                                size={40}
+                                                variant="light"
+                                            >
+                                                <PiUserCircle size="1.8rem" />
+                                            </ThemeIcon>
+                                            <Stack gap={4}>
+                                                <Title fw={600} mb={2} order={4}>
+                                                    {t(
+                                                        'subscription-settings.widget.subscription-info'
+                                                    )}
+                                                </Title>
+                                                <Text c="dimmed" lh={1.5} size="sm">
+                                                    {t(
+                                                        'subscription-settings.widget.subscription-info-description'
+                                                    )}
+                                                </Text>
+                                            </Stack>
+                                        </Group>
+                                    </Card.Section>
 
-                                    <Stack gap="xs">
-                                        <Title fw={600} order={4}>
-                                            {t('subscription-settings.widget.subscription-info')}
-                                        </Title>
+                                    <Card.Section p="lg">
+                                        <Grid>
+                                            <Grid.Col span={{ xs: 12, sm: 6 }}>
+                                                <TextInput
+                                                    description={t(
+                                                        'subscription-settings.widget.this-title-will-be-displayed-as-subscription-name'
+                                                    )}
+                                                    key={form.key('profileTitle')}
+                                                    label={t(
+                                                        'subscription-settings.widget.profile-title'
+                                                    )}
+                                                    leftSection={
+                                                        <TemplateInfoPopoverShared
+                                                            showHostDescription={false}
+                                                        />
+                                                    }
+                                                    placeholder={t(
+                                                        'subscription-settings.widget.enter-profile-title'
+                                                    )}
+                                                    radius="md"
+                                                    size="sm"
+                                                    {...form.getInputProps('profileTitle')}
+                                                />
+                                            </Grid.Col>
+                                            <Grid.Col span={{ xs: 12, sm: 6 }}>
+                                                <NumberInput
+                                                    description={t(
+                                                        'subscription-settings.widget.auto-update-description'
+                                                    )}
+                                                    key={form.key('profileUpdateInterval')}
+                                                    label={t(
+                                                        'subscription-settings.widget.auto-update-interval-hours'
+                                                    )}
+                                                    leftSection={<PiClock size={px('1.2rem')} />}
+                                                    min={1}
+                                                    placeholder="60"
+                                                    radius="md"
+                                                    size="sm"
+                                                    {...form.getInputProps('profileUpdateInterval')}
+                                                />
+                                            </Grid.Col>
+                                            <Grid.Col span={{ xs: 12, sm: 6 }}>
+                                                <TextInput
+                                                    description={t(
+                                                        'subscription-settings.widget.support-link-description'
+                                                    )}
+                                                    key={form.key('supportLink')}
+                                                    label={t(
+                                                        'subscription-settings.widget.support-link'
+                                                    )}
+                                                    leftSection={<PiLink size={px('1.2rem')} />}
+                                                    placeholder="https://support.example.com"
+                                                    radius="md"
+                                                    size="sm"
+                                                    {...form.getInputProps('supportLink')}
+                                                />
+                                            </Grid.Col>
+                                        </Grid>
+                                    </Card.Section>
+                                </Card>
 
-                                        <Text c="dimmed" size="sm">
-                                            {t(
-                                                'subscription-settings.widget.subscription-info-description'
-                                            )}
-                                        </Text>
-                                    </Stack>
-                                </Group>
-                            </Card.Section>
+                                <Card radius="md" shadow="md" withBorder>
+                                    <Card.Section p="lg" withBorder>
+                                        <Group align="center" gap="md" wrap="nowrap">
+                                            <ThemeIcon
+                                                color="cyan"
+                                                radius="md"
+                                                size={40}
+                                                variant="light"
+                                            >
+                                                <PiGear size="1.8rem" />
+                                            </ThemeIcon>
+                                            <Stack gap={4}>
+                                                <Title fw={600} mb={2} order={4}>
+                                                    {t(
+                                                        'subscription-tabs.widget.additional-options'
+                                                    )}
+                                                </Title>
+                                                <Text c="dimmed" lh={1.5} size="sm">
+                                                    {t(
+                                                        'subscription-tabs.widget.configure-additional-subscription-options'
+                                                    )}
+                                                </Text>
+                                            </Stack>
+                                        </Group>
+                                    </Card.Section>
 
-                            <Card.Section p="md" pt="xl">
-                                <Grid>
-                                    <Grid.Col span={{ xs: 12, sm: 6 }}>
-                                        <TextInput
+                                    <Card.Section p="lg">
+                                        <Grid>
+                                            <Grid.Col span={{ xs: 12, sm: 6 }}>
+                                                <Checkbox
+                                                    description={t(
+                                                        'subscription-settings.widget.serve-json-description'
+                                                    )}
+                                                    key={form.key('serveJsonAtBaseSubscription')}
+                                                    label={t(
+                                                        'subscription-settings.widget.serve-json-at-base-subscription'
+                                                    )}
+                                                    size="sm"
+                                                    {...form.getInputProps(
+                                                        'serveJsonAtBaseSubscription',
+                                                        {
+                                                            type: 'checkbox'
+                                                        }
+                                                    )}
+                                                />
+                                            </Grid.Col>
+
+                                            <Grid.Col span={{ xs: 12, sm: 6 }}>
+                                                <Checkbox
+                                                    description={t(
+                                                        'subscription-settings.widget.add-username-description'
+                                                    )}
+                                                    key={form.key('addUsernameToBaseSubscription')}
+                                                    label={t(
+                                                        'subscription-settings.widget.add-username-to-base-subscription'
+                                                    )}
+                                                    size="sm"
+                                                    {...form.getInputProps(
+                                                        'addUsernameToBaseSubscription',
+                                                        {
+                                                            type: 'checkbox'
+                                                        }
+                                                    )}
+                                                />
+                                            </Grid.Col>
+
+                                            <Grid.Col span={{ xs: 12, sm: 6 }}>
+                                                <Checkbox
+                                                    description={t(
+                                                        'subscription-tabs.widget.randomize-hosts-description'
+                                                    )}
+                                                    key={form.key('randomizeHosts')}
+                                                    label={t(
+                                                        'subscription-tabs.widget.randomize-hosts'
+                                                    )}
+                                                    size="sm"
+                                                    {...form.getInputProps('randomizeHosts', {
+                                                        type: 'checkbox'
+                                                    })}
+                                                />
+                                            </Grid.Col>
+
+                                            <Grid.Col span={{ xs: 12, sm: 6 }}>
+                                                <Checkbox
+                                                    description={t(
+                                                        'subscription-settings.widget.profile-webpage-url-description'
+                                                    )}
+                                                    key={form.key('isProfileWebpageUrlEnabled')}
+                                                    label={t(
+                                                        'subscription-settings.widget.profile-webpage-url'
+                                                    )}
+                                                    size="sm"
+                                                    {...form.getInputProps(
+                                                        'isProfileWebpageUrlEnabled',
+                                                        {
+                                                            type: 'checkbox'
+                                                        }
+                                                    )}
+                                                />
+                                            </Grid.Col>
+                                        </Grid>
+                                    </Card.Section>
+                                </Card>
+                            </Stack>
+                        </Tabs.Panel>
+
+                        <Tabs.Panel pt="xl" value="happ">
+                            <Card radius="md" shadow="sm" withBorder>
+                                <Card.Section p="lg" withBorder>
+                                    <Group align="center" gap="md" wrap="nowrap">
+                                        <ThemeIcon
+                                            color="blue"
+                                            radius="md"
+                                            size={40}
+                                            variant="light"
+                                        >
+                                            <PiDeviceMobile size="1.8rem" />
+                                        </ThemeIcon>
+                                        <Stack gap={4}>
+                                            <Title fw={600} mb={2} order={4}>
+                                                {t('subscription-settings.widget.happ-settings')}
+                                            </Title>
+                                            <Text c="dimmed" lh={1.5} size="sm">
+                                                {t(
+                                                    'subscription-settings.widget.happ-description-line-1'
+                                                )}{' '}
+                                                <br />
+                                                {t(
+                                                    'subscription-settings.widget.happ-description-line-2'
+                                                )}
+                                            </Text>
+                                        </Stack>
+                                    </Group>
+                                </Card.Section>
+
+                                <Card.Section p="lg">
+                                    <Stack gap="xl">
+                                        <Textarea
                                             description={t(
-                                                'subscription-settings.widget.this-title-will-be-displayed-as-subscription-name'
+                                                'subscription-settings.widget.happ-announce-description'
                                             )}
-                                            key={form.key('profileTitle')}
-                                            label={t('subscription-settings.widget.profile-title')}
+                                            key={form.key('happAnnounce')}
+                                            label={t('subscription-settings.widget.happ-announce')}
                                             leftSection={
                                                 <TemplateInfoPopoverShared
                                                     showHostDescription={false}
                                                 />
                                             }
+                                            minRows={4}
                                             placeholder={t(
-                                                'subscription-settings.widget.enter-profile-title'
+                                                'subscription-settings.widget.enter-happ-announce-max-200-characters'
                                             )}
                                             radius="md"
-                                            {...form.getInputProps('profileTitle')}
+                                            size="sm"
+                                            {...form.getInputProps('happAnnounce')}
                                         />
-                                    </Grid.Col>
-                                    <Grid.Col span={{ xs: 12, sm: 6 }}>
-                                        <NumberInput
-                                            description={t(
-                                                'subscription-settings.widget.auto-update-description'
-                                            )}
-                                            key={form.key('profileUpdateInterval')}
-                                            label={t(
-                                                'subscription-settings.widget.auto-update-interval-hours'
-                                            )}
-                                            min={1}
-                                            placeholder="60"
+
+                                        <Textarea
+                                            description={
+                                                <Box>
+                                                    <Text c="dimmed" size="sm">
+                                                        {t(
+                                                            'subscription-settings.widget.happ-routing-description'
+                                                        )}{' '}
+                                                        <br />
+                                                        {t(
+                                                            'subscription-settings.widget.happ-routing-description-line-2'
+                                                        )}
+                                                    </Text>
+                                                    <Button
+                                                        color="grape"
+                                                        leftSection={<PiGear size={px('1.2rem')} />}
+                                                        mb="xs"
+                                                        mt="xs"
+                                                        onClick={() => {
+                                                            navigate(
+                                                                ROUTES.DASHBOARD.UTILS
+                                                                    .HAPP_ROUTING_BUILDER
+                                                            )
+                                                        }}
+                                                        radius="md"
+                                                        size="sm"
+                                                        variant="light"
+                                                        w="fit-content"
+                                                    >
+                                                        {t(
+                                                            'subscription-settings.widget.configure-happ-routing'
+                                                        )}
+                                                    </Button>
+                                                </Box>
+                                            }
+                                            key={form.key('happRouting')}
+                                            label={t('subscription-settings.widget.happ-routing')}
+                                            minRows={4}
+                                            placeholder="happ://routing/add/..."
                                             radius="md"
-                                            {...form.getInputProps('profileUpdateInterval')}
+                                            size="sm"
+                                            {...form.getInputProps('happRouting')}
                                         />
-                                    </Grid.Col>
-                                    <Grid.Col span={{ xs: 12, sm: 6 }}>
-                                        <TextInput
-                                            description={t(
-                                                'subscription-settings.widget.support-link-description'
-                                            )}
-                                            key={form.key('supportLink')}
-                                            label={t('subscription-settings.widget.support-link')}
-                                            placeholder="https://support.example.com"
-                                            radius="md"
-                                            {...form.getInputProps('supportLink')}
-                                        />
-                                    </Grid.Col>
-
-                                    <Grid.Col span={{ xs: 12, sm: 6 }}>
-                                        <Select
-                                            allowDeselect={false}
-                                            comboboxProps={{
-                                                transitionProps: {
-                                                    transition: 'pop',
-                                                    duration: 200
-                                                }
-                                            }}
-                                            data={[
-                                                {
-                                                    label: t(
-                                                        'subscription-settings.widget.enabled'
-                                                    ),
-                                                    value: 'true'
-                                                },
-                                                {
-                                                    label: t(
-                                                        'subscription-settings.widget.disabled'
-                                                    ),
-                                                    value: 'false'
-                                                }
-                                            ]}
-                                            description={t(
-                                                'subscription-settings.widget.profile-webpage-url-description'
-                                            )}
-                                            key={form.key('isProfileWebpageUrlEnabled')}
-                                            label={t(
-                                                'subscription-settings.widget.profile-webpage-url'
-                                            )}
-                                            radius="md"
-                                            {...form.getInputProps('isProfileWebpageUrlEnabled')}
-                                        />
-                                    </Grid.Col>
-
-                                    <Grid.Col span={12}>
-                                        <Divider labelPosition="center" my="md" />
-                                    </Grid.Col>
-
-                                    <Grid.Col span={{ xs: 12, sm: 6 }}>
-                                        <Box mb="md">
-                                            <Checkbox
-                                                key={form.key('serveJsonAtBaseSubscription')}
-                                                label={t(
-                                                    'subscription-settings.widget.serve-json-at-base-subscription'
-                                                )}
-                                                size="md"
-                                                {...form.getInputProps(
-                                                    'serveJsonAtBaseSubscription',
-                                                    {
-                                                        type: 'checkbox'
-                                                    }
-                                                )}
-                                            />
-                                            <Text
-                                                c="dimmed"
-                                                component="div"
-                                                ml={30}
-                                                pl={'0.4rem'}
-                                                size="sm"
-                                            >
-                                                {t(
-                                                    'subscription-settings.widget.serve-json-description'
-                                                )}
-                                            </Text>
-                                        </Box>
-                                    </Grid.Col>
-
-                                    <Grid.Col span={{ xs: 12, sm: 6 }}>
-                                        <Box>
-                                            <Checkbox
-                                                key={form.key('addUsernameToBaseSubscription')}
-                                                label={t(
-                                                    'subscription-settings.widget.add-username-to-base-subscription'
-                                                )}
-                                                size="md"
-                                                {...form.getInputProps(
-                                                    'addUsernameToBaseSubscription',
-                                                    {
-                                                        type: 'checkbox'
-                                                    }
-                                                )}
-                                            />
-                                            <Text
-                                                c="dimmed"
-                                                component="div"
-                                                ml={30}
-                                                pl={'0.4rem'}
-                                                size="sm"
-                                            >
-                                                {t(
-                                                    'subscription-settings.widget.add-username-description'
-                                                )}
-                                            </Text>
-                                        </Box>
-                                    </Grid.Col>
-
-                                    <Grid.Col span={{ xs: 12, sm: 6 }}>
-                                        <Box>
-                                            <Checkbox
-                                                key={form.key('randomizeHosts')}
-                                                label={t(
-                                                    'subscription-tabs.widget.randomize-hosts'
-                                                )}
-                                                size="md"
-                                                {...form.getInputProps('randomizeHosts', {
-                                                    type: 'checkbox'
-                                                })}
-                                            />
-                                            <Text
-                                                c="dimmed"
-                                                component="div"
-                                                ml={30}
-                                                pl={'0.4rem'}
-                                                size="sm"
-                                            >
-                                                {t(
-                                                    'subscription-tabs.widget.randomize-hosts-description'
-                                                )}
-                                            </Text>
-                                        </Box>
-                                    </Grid.Col>
-                                </Grid>
-                            </Card.Section>
-                        </Card>
-                    </Tabs.Panel>
-
-                    <Tabs.Panel value="happ">
-                        <Card mt="sm" p="md" radius="md" shadow="sm" withBorder>
-                            <Card.Section inheritPadding p="md" withBorder>
-                                <Group align="flex-start" wrap="nowrap">
-                                    <ThemeIcon color="grape" radius="md" size="lg" variant="light">
-                                        <PiDeviceMobile size="1.5rem" />
-                                    </ThemeIcon>
-
-                                    <Stack gap="xs">
-                                        <Title fw={600} order={4}>
-                                            {t('subscription-settings.widget.happ-settings')}
-                                        </Title>
-
-                                        <Text c="dimmed" size="sm">
-                                            {t(
-                                                'subscription-settings.widget.happ-description-line-1'
-                                            )}{' '}
-                                            <br />
-                                            {t(
-                                                'subscription-settings.widget.happ-description-line-2'
-                                            )}
-                                        </Text>
                                     </Stack>
-                                </Group>
-                            </Card.Section>
+                                </Card.Section>
+                            </Card>
+                        </Tabs.Panel>
 
-                            <Card.Section p="md" pt="xl">
-                                <Stack gap="lg">
-                                    <Textarea
-                                        description={t(
-                                            'subscription-settings.widget.happ-announce-description'
-                                        )}
-                                        key={form.key('happAnnounce')}
-                                        label={t('subscription-settings.widget.happ-announce')}
-                                        leftSection={
-                                            <TemplateInfoPopoverShared
-                                                showHostDescription={false}
-                                            />
-                                        }
-                                        minRows={4}
-                                        placeholder={t(
-                                            'subscription-settings.widget.enter-happ-announce-max-200-characters'
-                                        )}
-                                        radius="md"
-                                        {...form.getInputProps('happAnnounce')}
-                                    />
-
-                                    <Textarea
-                                        description={
-                                            <>
-                                                {t(
-                                                    'subscription-settings.widget.happ-routing-description'
-                                                )}{' '}
-                                                <br />
-                                                {t(
-                                                    'subscription-settings.widget.happ-routing-description-line-2'
-                                                )}
-                                                <br />
-                                                <Button
-                                                    color="grape"
-                                                    leftSection={<PiGear size="1.2rem" />}
-                                                    mb="md"
-                                                    mt={'md'}
-                                                    onClick={() => {
-                                                        navigate(
-                                                            ROUTES.DASHBOARD.UTILS
-                                                                .HAPP_ROUTING_BUILDER
-                                                        )
-                                                    }}
-                                                    radius="md"
-                                                    size="sm"
-                                                    variant="light"
-                                                    w="fit-content"
-                                                >
+                        <Tabs.Panel pt="xl" value="remarks">
+                            <Stack gap="lg">
+                                <Card radius="md" shadow="sm" withBorder>
+                                    <Card.Section p="lg" withBorder>
+                                        <Group align="center" gap="md" wrap="nowrap">
+                                            <ThemeIcon
+                                                color="blue"
+                                                radius="md"
+                                                size={40}
+                                                variant="light"
+                                            >
+                                                <PiChatsCircle size="24px" />
+                                            </ThemeIcon>
+                                            <Stack gap={4}>
+                                                <Title fw={600} mb={2} order={4}>
                                                     {t(
-                                                        'subscription-settings.widget.configure-happ-routing'
+                                                        'subscription-settings.widget.user-status-remarks'
                                                     )}
-                                                </Button>
-                                            </>
-                                        }
-                                        key={form.key('happRouting')}
-                                        label={t('subscription-settings.widget.happ-routing')}
-                                        minRows={4}
-                                        placeholder="happ://routing/add/..."
-                                        radius="md"
-                                        {...form.getInputProps('happRouting')}
-                                    />
-                                </Stack>
-                            </Card.Section>
-                        </Card>
-                    </Tabs.Panel>
+                                                </Title>
+                                                <Text c="dimmed" lh={1.5} size="sm">
+                                                    {t(
+                                                        'subscription-settings.widget.user-status-remarks-description'
+                                                    )}
+                                                    <br />
+                                                    {t(
+                                                        'subscription-settings.widget.user-status-remarks-description-line-2'
+                                                    )}
+                                                    <br />
+                                                    {t(
+                                                        'subscription-settings.widget.user-status-remarks-description-line-3'
+                                                    )}
+                                                </Text>
+                                            </Stack>
+                                        </Group>
+                                    </Card.Section>
 
-                    <Tabs.Panel value="remarks">
-                        <Card mt="sm" p="md" radius="md" shadow="sm" withBorder>
-                            <Card.Section inheritPadding p="md" withBorder>
-                                <Group align="flex-start" wrap="nowrap">
-                                    <ThemeIcon color="teal" radius="md" size="lg" variant="light">
-                                        <PiChatsCircle size="1.5rem" />
-                                    </ThemeIcon>
-
-                                    <Stack gap="xs">
-                                        <Title fw={600} order={4}>
-                                            {t('subscription-settings.widget.user-status-remarks')}
-                                        </Title>
-
-                                        <Text c="dimmed" size="sm">
-                                            {t(
-                                                'subscription-settings.widget.user-status-remarks-description'
-                                            )}
-                                            <br />
-                                            {t(
-                                                'subscription-settings.widget.user-status-remarks-description-line-2'
-                                            )}
-                                            <br />
-                                            {t(
-                                                'subscription-settings.widget.user-status-remarks-description-line-3'
-                                            )}
-                                        </Text>
-                                    </Stack>
-                                </Group>
-                            </Card.Section>
-
-                            <Card.Section p="md" pt="xl" withBorder>
-                                <Grid>
-                                    <Grid.Col span={{ xs: 12, sm: 6 }}>
-                                        <Box mb="md">
+                                    <Card.Section p="lg" withBorder>
+                                        <Box>
                                             <Checkbox
+                                                description={
+                                                    <>
+                                                        {t(
+                                                            'subscription-tabs.widget.show-custom-remark-description-line-1'
+                                                        )}
+                                                        <br />
+                                                        {t(
+                                                            'subscription-tabs.widget.show-custom-remark-description-line-2'
+                                                        )}
+                                                    </>
+                                                }
                                                 key={form.key('isShowCustomRemarks')}
                                                 label={t(
                                                     'subscription-tabs.widget.show-custom-remarks'
                                                 )}
-                                                size="md"
+                                                size="sm"
                                                 {...form.getInputProps('isShowCustomRemarks', {
                                                     type: 'checkbox'
                                                 })}
                                             />
-                                            <Text
-                                                c="dimmed"
-                                                component="div"
-                                                ml={30}
-                                                pl={'0.4rem'}
-                                                size="sm"
-                                            >
+                                        </Box>
+                                    </Card.Section>
+
+                                    <Card.Section p="lg" withBorder>
+                                        <Grid>
+                                            <Grid.Col span={{ xs: 12, sm: 6, md: 4 }}>
+                                                <RemarksManager
+                                                    icon={<PiClockUser size="16px" />}
+                                                    iconColor="red"
+                                                    initialRemarks={remarks.expired}
+                                                    onChange={updateExpiredRemarks}
+                                                    title={t(
+                                                        'subscription-settings.widget.expired-users-remarks'
+                                                    )}
+                                                />
+                                            </Grid.Col>
+
+                                            <Grid.Col span={{ xs: 12, sm: 6, md: 4 }}>
+                                                <RemarksManager
+                                                    icon={<PiClockCountdown size="16px" />}
+                                                    iconColor="orange"
+                                                    initialRemarks={remarks.limited}
+                                                    onChange={updateLimitedRemarks}
+                                                    title={t(
+                                                        'subscription-settings.widget.limited-users-remarks'
+                                                    )}
+                                                />
+                                            </Grid.Col>
+
+                                            <Grid.Col span={{ xs: 12, sm: 6, md: 4 }}>
+                                                <RemarksManager
+                                                    icon={<PiProhibit size="16px" />}
+                                                    iconColor="gray"
+                                                    initialRemarks={remarks.disabled}
+                                                    onChange={updateDisabledRemarks}
+                                                    title={t(
+                                                        'subscription-settings.widget.disabled-users-remarks'
+                                                    )}
+                                                />
+                                            </Grid.Col>
+                                        </Grid>
+                                    </Card.Section>
+                                </Card>
+                            </Stack>
+                        </Tabs.Panel>
+
+                        <Tabs.Panel pt="xl" value="additional-response-headers">
+                            <Card radius="lg" shadow="sm" withBorder>
+                                <Card.Section p="lg" withBorder>
+                                    <Group align="center" gap="md" wrap="nowrap">
+                                        <ThemeIcon
+                                            color="blue"
+                                            radius="md"
+                                            size={40}
+                                            variant="light"
+                                        >
+                                            <TbPrescription size="24px" />
+                                        </ThemeIcon>
+                                        <Stack gap={4}>
+                                            <Title fw={600} mb={2} order={4}>
                                                 {t(
-                                                    'subscription-tabs.widget.show-custom-remark-description-line-1'
+                                                    'subscription-tabs.widget.additional-response-headers'
                                                 )}
-                                                <br />
+                                            </Title>
+                                            <Text c="dimmed" lh={1.5} size="sm">
                                                 {t(
-                                                    'subscription-tabs.widget.show-custom-remark-description-line-2'
+                                                    'subscription-tabs.widget.headers-that-will-be-sent-with-subscription-content'
                                                 )}
                                             </Text>
-                                        </Box>
-                                    </Grid.Col>
-                                </Grid>
-                            </Card.Section>
+                                        </Stack>
+                                    </Group>
+                                </Card.Section>
 
-                            <Card.Section p="md" pt="xl">
-                                <Grid>
-                                    <Grid.Col span={{ xs: 12, sm: 6, md: 4 }}>
-                                        <RemarksManager
-                                            icon={<PiClockUser size="1rem" />}
-                                            iconColor="red"
-                                            initialRemarks={remarks.expired}
-                                            onChange={updateExpiredRemarks}
-                                            title={t(
-                                                'subscription-settings.widget.expired-users-remarks'
-                                            )}
-                                        />
-                                    </Grid.Col>
+                                {form.errors.customResponseHeaders && (
+                                    <Card.Section p="lg">
+                                        <Alert
+                                            color="red"
+                                            icon={<PiInfo />}
+                                            radius="md"
+                                            title={t('subscription-tabs.widget.error')}
+                                        >
+                                            {form.errors.customResponseHeaders}
+                                        </Alert>
+                                    </Card.Section>
+                                )}
 
-                                    <Grid.Col span={{ xs: 12, sm: 6, md: 4 }}>
-                                        <RemarksManager
-                                            icon={<PiClockCountdown size="1rem" />}
-                                            iconColor="orange"
-                                            initialRemarks={remarks.limited}
-                                            onChange={updateLimitedRemarks}
-                                            title={t(
-                                                'subscription-settings.widget.limited-users-remarks'
-                                            )}
-                                        />
-                                    </Grid.Col>
+                                <Card.Section p="lg">
+                                    <HeadersManager
+                                        initialHeaders={headers}
+                                        onChange={updateHeaders}
+                                    />
+                                </Card.Section>
+                            </Card>
+                        </Tabs.Panel>
+                    </Tabs>
 
-                                    <Grid.Col span={{ xs: 12, sm: 6, md: 4 }}>
-                                        <RemarksManager
-                                            icon={<PiProhibit size="1rem" />}
-                                            iconColor="gray"
-                                            initialRemarks={remarks.disabled}
-                                            onChange={updateDisabledRemarks}
-                                            title={t(
-                                                'subscription-settings.widget.disabled-users-remarks'
-                                            )}
-                                        />
-                                    </Grid.Col>
-                                </Grid>
-                            </Card.Section>
-                        </Card>
-                    </Tabs.Panel>
-
-                    <Tabs.Panel value="additional-response-headers">
-                        <Card mt="sm" p="md" radius="md" shadow="sm" withBorder>
-                            <Card.Section inheritPadding p="md" withBorder>
-                                <Group align="flex-start" wrap="nowrap">
-                                    <ThemeIcon color="indigo" radius="md" size="lg" variant="light">
-                                        <TbPrescription size="1.5rem" />
-                                    </ThemeIcon>
-
-                                    <Stack gap="xs">
-                                        <Title fw={600} order={4}>
-                                            {t(
-                                                'subscription-tabs.widget.additional-response-headers'
-                                            )}
-                                        </Title>
-
-                                        <Text c="dimmed" size="sm">
-                                            {t(
-                                                'subscription-tabs.widget.headers-that-will-be-sent-with-subscription-content'
-                                            )}
-                                        </Text>
-                                    </Stack>
-                                </Group>
-                            </Card.Section>
-
-                            {form.errors.customResponseHeaders && (
-                                <Alert
-                                    color="violet"
-                                    icon={<PiInfo color="violet" />}
-                                    mt="md"
-                                    title="Error"
+                    <Card radius="lg" shadow="sm" withBorder>
+                        <Card.Section p="lg">
+                            <Group align="center" justify="space-between">
+                                <Box>
+                                    <Title fw={600} order={4}>
+                                        {t('subscription-tabs.widget.save-settings')}
+                                    </Title>
+                                    <Text c="dimmed" size="sm">
+                                        {t(
+                                            'subscription-tabs.widget.save-your-subscription-settings-to-apply-changes'
+                                        )}
+                                    </Text>
+                                </Box>
+                                <Button
+                                    color="blue"
+                                    leftSection={<PiFloppyDisk size={px('1.2rem')} />}
+                                    loading={isUpdateSubscriptionSettingsPending}
+                                    radius="md"
+                                    size="md"
+                                    type="submit"
                                 >
-                                    {form.errors.customResponseHeaders}
-                                </Alert>
-                            )}
-
-                            <Card.Section p="md" pt="xl">
-                                <HeadersManager initialHeaders={headers} onChange={updateHeaders} />
-                            </Card.Section>
-                        </Card>
-                    </Tabs.Panel>
-                </Tabs>
-
-                <Group justify="flex-start" mb="xl">
-                    <Button
-                        color="blue"
-                        leftSection={<PiFloppyDisk size="1.2rem" />}
-                        loading={isUpdateSubscriptionSettingsPending}
-                        size="md"
-                        type="submit"
-                    >
-                        {t('subscription-settings.widget.update-settings')}
-                    </Button>
-                </Group>
-            </Stack>
+                                    {t('subscription-settings.widget.update-settings')}
+                                </Button>
+                            </Group>
+                        </Card.Section>
+                    </Card>
+                </Stack>
+            </Container>
         </form>
     )
 }

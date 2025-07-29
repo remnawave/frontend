@@ -4,8 +4,10 @@ import {
     Collapse,
     Drawer,
     Group,
+    HoverCard,
     JsonInput,
     NumberInput,
+    px,
     Select,
     Stack,
     Switch,
@@ -29,12 +31,17 @@ import {
     SECURITY_LAYERS,
     UpdateHostCommand
 } from '@remnawave/backend-contract'
+import { HiQuestionMarkCircle } from 'react-icons/hi'
 import { useDisclosure } from '@mantine/hooks'
 import { useTranslation } from 'react-i18next'
+import { Link } from 'react-router-dom'
 
+import { HappLogo } from '@pages/dashboard/utils/happ-routing-builder/ui/components/happ-routing-builder.page.component'
+import { HostSelectInboundFeature } from '@features/ui/dashboard/hosts/host-select-inbound/host-select-inbound.feature'
 import { PopoverWithInfoShared } from '@shared/ui/popovers/popover-with-info'
 import { DeleteHostFeature } from '@features/ui/dashboard/hosts/delete-host'
 import { TemplateInfoPopoverShared } from '@shared/ui/popovers'
+import { ModalFooter } from '@shared/ui/modal-footer'
 
 import { IProps } from './interfaces'
 
@@ -91,8 +98,7 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
         form,
         advancedOpened,
         handleSubmit,
-        host,
-        inbounds,
+        configProfiles,
         setAdvancedOpened,
         isSubmitting,
         handleCloneHost
@@ -108,19 +114,56 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
     }
 
     const isXhttpExtraButtonDisabled = () => {
-        return (
-            !inbounds ||
-            !form.getValues().inboundUuid ||
-            !inbounds.some(
-                (inbound) =>
-                    inbound.uuid === form.getValues().inboundUuid && inbound.network === 'xhttp'
-            )
+        const { inbound } = form.getValues()
+
+        if (!inbound) {
+            return true
+        }
+
+        if (!configProfiles || !inbound.configProfileInboundUuid || !inbound.configProfileUuid) {
+            return true
+        }
+
+        return !configProfiles.some(
+            (configProfile) =>
+                configProfile.uuid === inbound.configProfileUuid &&
+                configProfile.inbounds.some((inbound) => inbound.network === 'xhttp')
         )
+    }
+
+    const saveInbound = (inbound: string, configProfileUuid: string) => {
+        form.setValues({
+            inbound: {
+                configProfileInboundUuid: inbound,
+                configProfileUuid
+            }
+        } as Partial<T>)
+        form.setTouched({
+            configProfileInboundUuid: true,
+            configProfileUuid: true
+        })
+        form.setDirty({
+            configProfileInboundUuid: true,
+            configProfileUuid: true
+        })
     }
 
     return (
         <form onSubmit={handleSubmit}>
             <Stack gap="md">
+                <Group gap="xs" justify="space-between">
+                    <Text fw={500} size="sm">
+                        {t('base-host-form.host-visibility')}
+                    </Text>
+                    <Switch
+                        color="teal.8"
+                        key={form.key('isDisabled')}
+                        radius="md"
+                        size="md"
+                        {...form.getInputProps('isDisabled', { type: 'checkbox' })}
+                    />
+                </Group>
+
                 <TextInput
                     key={form.key('remark')}
                     label={t('base-host-form.remark')}
@@ -129,32 +172,22 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
                     required
                 />
 
-                <Group gap="xs" grow justify="space-between" preventGrowOverflow={false} w="100%">
-                    <Select
-                        data={Object.values(inbounds ?? {}).map((inbound) => ({
-                            label: inbound.tag,
-                            value: inbound.uuid
-                        }))}
-                        key={form.key('inboundUuid')}
-                        label={t('base-host-form.inbound')}
-                        {...form.getInputProps('inboundUuid')}
-                        allowDeselect={false}
-                        defaultValue={host?.inboundUuid ?? undefined}
-                        placeholder={t('base-host-form.select-inbound')}
-                        required
-                        w="75%"
+                <Stack gap="xs">
+                    <HostSelectInboundFeature
+                        activeConfigProfileInbound={
+                            form.getValues().inbound?.configProfileInboundUuid ?? undefined
+                        }
+                        activeConfigProfileUuid={
+                            form.getValues().inbound?.configProfileUuid ?? undefined
+                        }
+                        configProfiles={configProfiles}
+                        onSaveInbound={saveInbound}
                     />
 
-                    <Switch
-                        color="teal.8"
-                        key={form.key('isDisabled')}
-                        mt={25}
-                        radius="md"
-                        size="xl"
-                        w="20%"
-                        {...form.getInputProps('isDisabled', { type: 'checkbox' })}
-                    />
-                </Group>
+                    <Text c="dimmed" size="xs">
+                        {t('base-host-form.select-one-inbound-to-apply-to-the-host')}
+                    </Text>
+                </Stack>
 
                 <Stack gap="md">
                     <Group
@@ -216,7 +249,7 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
                     <Button
                         onClick={() => setAdvancedOpened(!advancedOpened)}
                         rightSection={
-                            advancedOpened ? <PiCaretUp size="1rem" /> : <PiCaretDown size="1rem" />
+                            advancedOpened ? <PiCaretUp size="16px" /> : <PiCaretDown size="16px" />
                         }
                         variant="subtle"
                     >
@@ -295,11 +328,62 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
                                                 alignItems: 'center'
                                             }}
                                         >
-                                            <PiInfo size="1.25rem" />
+                                            <PiInfo size="20px" />
                                         </span>
                                     </Tooltip>
                                 }
                                 {...form.getInputProps('securityLayer')}
+                            />
+
+                            <TextInput
+                                description={t('base-host-form.server-description-description')}
+                                key={form.key('serverDescription')}
+                                label={
+                                    <Group gap={4} justify="flex-start">
+                                        <Text fw={600} size="sm">
+                                            {t('base-host-form.server-description-header')}
+                                        </Text>
+                                        <HoverCard shadow="md" width={280} withArrow>
+                                            <HoverCard.Target>
+                                                <ActionIcon color="gray" size="xs" variant="subtle">
+                                                    <HiQuestionMarkCircle size={20} />
+                                                </ActionIcon>
+                                            </HoverCard.Target>
+                                            <HoverCard.Dropdown>
+                                                <Stack gap="sm">
+                                                    <Text fw={600} size="sm">
+                                                        {t(
+                                                            'base-host-form.server-description-header'
+                                                        )}
+                                                    </Text>
+                                                    <Text c="dimmed" size="sm">
+                                                        {t(
+                                                            'base-host-form.server-description-line-1'
+                                                        )}{' '}
+                                                        <Link
+                                                            target="_blank"
+                                                            to="https://www.happ.su/main/dev-docs/examples-of-links-and-parameters#serverdescription"
+                                                        >
+                                                            {t(
+                                                                'base-host-form.server-description-line-2'
+                                                            )}
+                                                        </Link>{' '}
+                                                        {t(
+                                                            'base-host-form.server-description-line-3'
+                                                        )}
+                                                        <br />
+                                                        {t(
+                                                            'base-host-form.server-description-line-4'
+                                                        )}
+                                                    </Text>
+                                                </Stack>
+                                            </HoverCard.Dropdown>
+                                        </HoverCard>
+                                    </Group>
+                                }
+                                leftSection={<HappLogo size={20} />}
+                                placeholder={t('base-host-form.server-description-placeholder')}
+                                {...form.getInputProps('serverDescription')}
                             />
 
                             <Group
@@ -351,38 +435,40 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
                 </Stack>
             </Stack>
 
-            <Group gap="xs" justify="space-between" pt={15} w="100%">
-                <ActionIcon.Group>
-                    <DeleteHostFeature />
-                </ActionIcon.Group>
+            <ModalFooter>
+                <Group gap="xs" justify="space-between" w="100%">
+                    <ActionIcon.Group>
+                        <DeleteHostFeature />
+                    </ActionIcon.Group>
 
-                <Group gap="xs">
-                    {handleCloneHost && (
+                    <Group gap="xs">
+                        {handleCloneHost && (
+                            <Button
+                                color="blue"
+                                leftSection={<PiCopyDuotone size="16px" />}
+                                loading={isSubmitting}
+                                onClick={handleCloneHost}
+                                size="sm"
+                                variant="light"
+                            >
+                                {t('base-host-form.clone')}
+                            </Button>
+                        )}
+
                         <Button
-                            color="blue"
-                            leftSection={<PiCopyDuotone size="1rem" />}
+                            color="teal"
+                            disabled={!form.isValid() || !form.isDirty() || !form.isTouched()}
+                            leftSection={<PiFloppyDiskDuotone size="16px" />}
                             loading={isSubmitting}
-                            onClick={handleCloneHost}
-                            size="md"
-                            variant="light"
+                            size="sm"
+                            type="submit"
+                            variant="outline"
                         >
-                            {t('base-host-form.clone')}
+                            {t('base-host-form.save')}
                         </Button>
-                    )}
-
-                    <Button
-                        color="blue"
-                        disabled={!form.isValid() || !form.isDirty() || !form.isTouched()}
-                        leftSection={<PiFloppyDiskDuotone size="1rem" />}
-                        loading={isSubmitting}
-                        size="md"
-                        type="submit"
-                        variant="outline"
-                    >
-                        {t('base-host-form.save')}
-                    </Button>
+                    </Group>
                 </Group>
-            </Group>
+            </ModalFooter>
 
             <Drawer
                 onClose={close}
@@ -407,7 +493,7 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
 
                     <Button
                         color="gray"
-                        leftSection={<PiArrowUpDuotone size="1.2rem" />}
+                        leftSection={<PiArrowUpDuotone size={px('1.2rem')} />}
                         onClick={() => {
                             // @ts-expect-error -- TODO: fix this
                             form.setFieldValue('xHttpExtraParams', pasteBasicXHttpExtraParams)

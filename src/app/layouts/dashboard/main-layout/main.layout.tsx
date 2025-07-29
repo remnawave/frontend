@@ -1,7 +1,9 @@
 import {
     AppShell,
     Badge,
+    Box,
     Burger,
+    Button,
     Container,
     Group,
     Indicator,
@@ -9,16 +11,20 @@ import {
     Text
 } from '@mantine/core'
 import { useClickOutside, useDisclosure, useMediaQuery } from '@mantine/hooks'
+import { Outlet, useNavigate } from 'react-router-dom'
+import { PiGameController } from 'react-icons/pi'
 import { useQuery } from '@tanstack/react-query'
 import { useEffect, useState } from 'react'
-import { Outlet } from 'react-router-dom'
 import semver from 'semver'
 import axios from 'axios'
 
 import { getBuildInfo } from '@shared/utils/get-build-info/get-build-info.util'
+import { ScrollToTopWrapper } from '@shared/hocs/scroll-to-top/scroll-to-top'
 import { BuildInfoModal } from '@shared/ui/build-info-modal/build-info-modal'
+import { useEasterEggStore } from '@entities/dashboard/easter-egg-store'
 import { HeaderControls } from '@shared/ui/header-buttons'
 import { sToMs } from '@shared/utils/time-utils'
+import { ROUTES } from '@shared/constants'
 import { Logo } from '@shared/ui/logo'
 
 import { Navigation } from './navbar/navigation.layout'
@@ -31,6 +37,10 @@ export function MainLayout() {
     const [buildInfoModalOpened, setBuildInfoModalOpened] = useState(false)
     const [isMediaQueryReady, setIsMediaQueryReady] = useState(false)
 
+    const navigate = useNavigate()
+    const { incrementClick, isEasterEggUnlocked, isGameModalOpen, closeGameModal } =
+        useEasterEggStore()
+
     const [versions, setVersions] = useState<{
         currentVersion: string
         latestVersion: string
@@ -39,6 +49,7 @@ export function MainLayout() {
         latestVersion: '0.0.0'
     })
     const [isNewVersionAvailable, setIsNewVersionAvailable] = useState(false)
+    const [isLogoAnimating, setIsLogoAnimating] = useState(false)
 
     const buildInfo = getBuildInfo()
 
@@ -96,6 +107,94 @@ export function MainLayout() {
         setIsNewVersionAvailable(semver.gt(versions.latestVersion, versions.currentVersion))
     }, [versions])
 
+    const handleClick = () => {
+        incrementClick()
+
+        setIsLogoAnimating(true)
+        setTimeout(() => {
+            setIsLogoAnimating(false)
+        }, 100)
+    }
+
+    const logoElement = !isEasterEggUnlocked ? (
+        <Logo
+            c={isLogoAnimating ? 'pink' : 'cyan'}
+            onClick={handleClick}
+            style={{ cursor: 'pointer' }}
+            w="2.5rem"
+        />
+    ) : (
+        <Logo
+            c="pink"
+            onClick={() => {
+                navigate(ROUTES.DASHBOARD.EASTER_EGG.PROXY_DEFENSE)
+            }}
+            style={{ cursor: 'pointer' }}
+            w="2.5rem"
+        />
+    )
+
+    const titleElement = (
+        <Text
+            fw={700}
+            size="lg"
+            style={{
+                userSelect: 'none',
+                WebkitUserSelect: 'none'
+            }}
+        >
+            <Text
+                c={isEasterEggUnlocked || isLogoAnimating ? 'pink' : 'cyan'}
+                component="span"
+                fw={700}
+            >
+                Remna
+            </Text>
+            wave
+        </Text>
+    )
+
+    const versionBadge =
+        buildInfo.branch === 'dev' ? (
+            <Indicator
+                color="cyan.6"
+                disabled={!isNewVersionAvailable}
+                offset={3}
+                processing
+                size={11}
+            >
+                <Badge
+                    color="red"
+                    onClick={() => setBuildInfoModalOpened(true)}
+                    radius="xl"
+                    size="lg"
+                    style={{ cursor: 'help' }}
+                    variant="light"
+                >
+                    dev
+                </Badge>
+            </Indicator>
+        ) : (
+            <Indicator
+                color="cyan.6"
+                disabled={!isNewVersionAvailable}
+                offset={3}
+                processing
+                size={11}
+            >
+                <Badge
+                    color="cyan"
+                    onClick={() => setBuildInfoModalOpened(true)}
+                    radius="xl"
+                    size="lg"
+                    style={{ cursor: 'pointer' }}
+                    variant="light"
+                >
+                    {`${packageJson.version}`}
+                </Badge>
+            </Indicator>
+        )
+
     return isMediaQueryReady ? (
         <AppShell
             header={{ height: 64 }}
@@ -141,87 +240,47 @@ export function MainLayout() {
                 w={300}
                 withBorder={false}
             >
-                <AppShell.Section>
-                    <Group align="center" mb="md">
-                        <Group gap="xs" justify="space-around" w="100%">
-                            <Burger
-                                hiddenFrom="lg"
-                                onClick={isMobile ? toggleMobile : toggleDesktop}
-                                opened={isMobile ? mobileOpened : desktopOpened}
-                                size="sm"
-                            />
-                            <Group gap={4}>
-                                <Logo c="cyan" w="2.5rem" />
-                                <Text fw={700} size="lg">
-                                    <Text c="cyan" component="span" fw={700}>
-                                        Remna
-                                    </Text>
-                                    wave
-                                </Text>
-                            </Group>
-                            {buildInfo.branch === 'dev' && (
-                                <Indicator
-                                    color="cyan.6"
-                                    disabled={!isNewVersionAvailable}
-                                    offset={3}
-                                    processing
-                                    size={11}
-                                >
-                                    <Badge
-                                        color="red"
-                                        onClick={() => setBuildInfoModalOpened(true)}
-                                        radius="xl"
-                                        size="lg"
-                                        style={{ cursor: 'help', marginLeft: 'auto' }}
-                                        variant="light"
-                                    >
-                                        dev
-                                    </Badge>
-                                </Indicator>
-                            )}
+                <AppShell.Section className={classes.logoSection}>
+                    <Box style={{ position: 'absolute', left: '0' }}>
+                        <Burger
+                            hiddenFrom="lg"
+                            onClick={isMobile ? toggleMobile : toggleDesktop}
+                            opened={isMobile ? mobileOpened : desktopOpened}
+                            size="sm"
+                        />
+                    </Box>
 
-                            {buildInfo.branch !== 'dev' && (
-                                <Indicator
-                                    color="cyan.6"
-                                    disabled={!isNewVersionAvailable}
-                                    offset={3}
-                                    processing
-                                    size={11}
-                                >
-                                    <Badge
-                                        color="cyan"
-                                        onClick={() => setBuildInfoModalOpened(true)}
-                                        radius="xl"
-                                        size="lg"
-                                        style={{ cursor: 'pointer', marginLeft: 'auto' }}
-                                        variant="light"
-                                    >
-                                        {`${packageJson.version}`}
-                                    </Badge>
-                                </Indicator>
-                            )}
-
-                            {isSocialButton && (
-                                <Group style={{ flexShrink: 0 }}>
-                                    <HeaderControls
-                                        githubLink="https://github.com/remnawave/panel"
-                                        isGithubLoading={isGithubLoading}
-                                        stars={data?.totalStars}
-                                        telegramLink="https://t.me/remnawave"
-                                        withLanguage={false}
-                                        withLogout={false}
-                                        withRefresh={false}
-                                    />
-                                </Group>
-                            )}
-                        </Group>
+                    <Group gap="xs" justify="center" w="100%">
+                        {logoElement}
+                        {titleElement}
+                        {!isMobile && versionBadge}
                     </Group>
+
+                    {isMobile && (
+                        <Group gap="xs" justify="center">
+                            {versionBadge}
+                        </Group>
+                    )}
+
+                    {isSocialButton && (
+                        <Group justify="center" mt="md" style={{ flexShrink: 0 }}>
+                            <HeaderControls
+                                githubLink="https://github.com/remnawave/panel"
+                                isGithubLoading={isGithubLoading}
+                                stars={data?.totalStars}
+                                telegramLink="https://t.me/remnawave"
+                                withLanguage={false}
+                                withLogout={false}
+                                withRefresh={false}
+                            />
+                        </Group>
+                    )}
                 </AppShell.Section>
                 <AppShell.Section
                     component={ScrollArea}
                     flex={1}
                     offsetScrollbars="present"
-                    scrollbarSize={'0.4rem'}
+                    scrollbarSize={'0.2rem'}
                     type="hover"
                 >
                     <Navigation isMobile={isMobile} onClose={toggleMobile} />
@@ -232,7 +291,9 @@ export function MainLayout() {
                     height: '100dvh'
                 }}
             >
-                <Outlet />
+                <ScrollToTopWrapper>
+                    <Outlet />
+                </ScrollToTopWrapper>
             </AppShell.Main>
 
             <BuildInfoModal
@@ -241,6 +302,57 @@ export function MainLayout() {
                 onClose={() => setBuildInfoModalOpened(false)}
                 opened={buildInfoModalOpened}
             />
+
+            {isGameModalOpen && (
+                <div
+                    style={{
+                        position: 'fixed',
+                        top: 0,
+                        left: 0,
+                        right: 0,
+                        bottom: 0,
+                        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        zIndex: 1000
+                    }}
+                >
+                    <div
+                        onClick={(e) => e.stopPropagation()}
+                        style={{
+                            background: 'var(--mantine-color-dark-8)',
+                            border: '1px solid var(--mantine-color-gray-6)',
+                            padding: '2rem',
+                            borderRadius: '8px',
+                            textAlign: 'center',
+                            maxWidth: '400px',
+                            width: '90%',
+                            boxShadow: '0 2px 10px rgba(0, 0, 0, 0.1)'
+                        }}
+                    >
+                        <Text fw={700} mb="md" size="xl">
+                            🎉 Easter Egg Found
+                        </Text>
+                        <Text mb="md">You've discovered the hidden Proxy Defense game!</Text>
+                        <Group gap="md" justify="center">
+                            <Button onClick={closeGameModal} size="md" variant="light">
+                                Close
+                            </Button>
+                            <Button
+                                leftSection={<PiGameController size={22} />}
+                                onClick={() => {
+                                    closeGameModal()
+                                    navigate(ROUTES.DASHBOARD.EASTER_EGG.PROXY_DEFENSE)
+                                }}
+                                size="md"
+                            >
+                                Play Game
+                            </Button>
+                        </Group>
+                    </div>
+                </div>
+            )}
         </AppShell>
     ) : (
         <div style={{ height: '100vh' }}></div>

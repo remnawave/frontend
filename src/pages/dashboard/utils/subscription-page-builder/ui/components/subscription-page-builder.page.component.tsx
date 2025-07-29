@@ -275,7 +275,7 @@ export const SubscriptionPageBuilderComponent = () => {
 
                                 <Button
                                     fullWidth
-                                    leftSection={<IconPlus size="1rem" />}
+                                    leftSection={<IconPlus size="16px" />}
                                     mt="md"
                                     onClick={addNewApp}
                                 >
@@ -315,7 +315,7 @@ export const SubscriptionPageBuilderComponent = () => {
                 >
                     <Alert
                         color="red"
-                        icon={<IconAlertCircle size="1rem" />}
+                        icon={<IconAlertCircle size="16px" />}
                         mb="md"
                         title={t('subscription-page-builder.page.component.invalid-configuration')}
                     >

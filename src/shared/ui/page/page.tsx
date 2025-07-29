@@ -13,18 +13,10 @@ interface PageProps extends BoxProps {
 
 export const Page = forwardRef<HTMLDivElement, PageProps>(
     ({ children, title = '', meta, ...other }, ref) => {
-        // const { scrollIntoView } = useScrollIntoView<HTMLDivElement>({
-        //     offset: 0
-        // })
-
         useEffect(() => {
             nprogress.complete()
             return () => nprogress.start()
         }, [])
-
-        // useEffect(() => {
-        //     scrollIntoView()
-        // }, [])
 
         return (
             <>

@@ -1,5 +1,6 @@
 import {
     GetBandwidthStatsCommand,
+    GetNodesMetricsCommand,
     GetNodesStatisticsCommand,
     GetRemnawaveHealthCommand,
     GetStatsCommand
@@ -26,6 +27,9 @@ export const systemQueryKeys = createQueryKeys('system', {
         queryKey: null
     },
     getRemnawaveHealth: {
+        queryKey: null
+    },
+    getNodesMetrics: {
         queryKey: null
     }
 })
@@ -108,6 +112,24 @@ export const useGetRemnawaveHealth = createGetQueryHook({
     errorHandler: (error) => {
         notifications.show({
             title: `Get Remnawave Health`,
+            message: error instanceof Error ? error.message : `Request failed with unknown error.`,
+            color: 'red'
+        })
+    }
+})
+
+export const useGetNodesMetrics = createGetQueryHook({
+    endpoint: GetNodesMetricsCommand.TSQ_url,
+    responseSchema: GetNodesMetricsCommand.ResponseSchema,
+    getQueryKey: () => systemQueryKeys.getNodesMetrics.queryKey,
+    rQueryParams: {
+        placeholderData: keepPreviousData,
+        staleTime: sToMs(30),
+        refetchInterval: sToMs(30)
+    },
+    errorHandler: (error) => {
+        notifications.show({
+            title: `Get Nodes Metrics`,
             message: error instanceof Error ? error.message : `Request failed with unknown error.`,
             color: 'red'
         })

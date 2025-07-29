@@ -1,13 +1,15 @@
 import { CreateNodeCommand } from '@remnawave/backend-contract'
+import { em, Group, Modal, Text } from '@mantine/core'
 import { useForm, zodResolver } from '@mantine/form'
-import { Group, Modal, Text } from '@mantine/core'
 import { useTranslation } from 'react-i18next'
+import { useMediaQuery } from '@mantine/hooks'
 import { useState } from 'react'
 
 import { useNodesStoreActions, useNodesStoreCreateModalIsOpen } from '@entities/dashboard/nodes'
+import { configProfilesQueryKeys, useCreateNode, useGetPubKey } from '@shared/api/hooks'
 import { BaseNodeForm } from '@shared/ui/forms/nodes/base-node-form/base-node-form'
-import { useCreateNode, useGetInbounds, useGetPubKey } from '@shared/api/hooks'
 import { gbToBytesUtil } from '@shared/utils/bytes'
+import { queryClient } from '@shared/api'
 
 export const CreateNodeModalWidget = () => {
     const { t } = useTranslation()
@@ -16,7 +18,8 @@ export const CreateNodeModalWidget = () => {
     const actions = useNodesStoreActions()
 
     const { data: pubKey } = useGetPubKey()
-    const { data: inbounds } = useGetInbounds()
+
+    const isMobile = useMediaQuery(`(max-width: ${em(768)})`)
 
     const [advancedOpened, setAdvancedOpened] = useState(false)
 
@@ -40,6 +43,9 @@ export const CreateNodeModalWidget = () => {
     const { mutate: createNode, isPending: isCreateNodePending } = useCreateNode({
         mutationFns: {
             onSuccess: () => {
+                queryClient.refetchQueries({
+                    queryKey: configProfilesQueryKeys.getConfigProfiles.queryKey
+                })
                 handleClose()
             }
         }
@@ -59,6 +65,7 @@ export const CreateNodeModalWidget = () => {
     return (
         <Modal
             centered
+            fullScreen={isMobile}
             onClose={handleClose}
             opened={isModalOpen}
             size="900px"
@@ -67,6 +74,7 @@ export const CreateNodeModalWidget = () => {
                     <Text fw={500}>{t('create-node-modal.widget.create-node')}</Text>
                 </Group>
             }
+            transitionProps={isMobile ? { transition: 'fade', duration: 200 } : undefined}
         >
             <BaseNodeForm
                 advancedOpened={advancedOpened}
@@ -74,7 +82,6 @@ export const CreateNodeModalWidget = () => {
                 form={form}
                 handleClose={handleClose}
                 handleSubmit={handleSubmit}
-                inbounds={inbounds}
                 isUpdateNodePending={isCreateNodePending}
                 node={null}
                 pubKey={pubKey}

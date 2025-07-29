@@ -5,32 +5,34 @@
         "config": "Xray کانفیگ",
         "home": "خانه",
         "hosts": "هاست‌ها",
-        "inbounds": "اینباندها",
         "nodes": "نودها",
         "nodes-bandwidth-table": "جدول مصرف نودها",
         "nodes-statistics": "آمار نودها",
+        "nodes-metrics": "آمار",
         "users": "کاربرها",
         "overview": "نمای کلی",
         "management": "مدیریت",
-        "statistics": "آمار",
         "subscription-settings": "تنظیمات اشتراک",
         "utils": "ابزارها",
         "happ-routing-builder": "مسیرساز برای Happ",
         "templates": "قالب‌ها",
         "subscription": "اشتراک",
-        "subscription-page-builder": "سازنده صفحه اشتراک"
+        "subscription-page-builder": "سازنده صفحه اشتراک",
+        "config-profiles": "پروفایل‌های کانفیگ",
+        "internal-squads": "اسکوادهای داخلی",
+        "infra-billing": "صورتحساب‌های تجهیزات"
     },
     "bandwidth-metrics": {
         "current-year": "امسال",
-        "from-last-year": "سال پیش",
+        "from-last-year": "در مقایسه با سال پیش",
         "calendar-month": "این ماه تقویمی",
-        "from-last-month-0": "ماه پیش",
-        "last-30-days": "سی روز پیش",
-        "from-last-month": "ماه پیش",
-        "last-7-days": "هفت روز پیش",
-        "from-last-week": "هفته پیش",
+        "from-last-month-0": "در مقایسه با ماه قبل",
+        "last-30-days": "30 روز اخیر",
+        "from-last-month": "در مقایسه با ماه پیش",
+        "last-7-days": "7 روز اخیر",
+        "from-last-week": "در مقایسه با هفته قبل",
         "today": "امروز",
-        "from-yesterday": "دیروز"
+        "from-yesterday": "در مقایسه با دیروز"
     },
     "online-metrics": {
         "never-online": "آنلاین نشده",
@@ -42,7 +44,7 @@
         "system-uptime": "آپتایم سیستم",
         "ram-usage": "مصرف رم",
         "total-traffic": "مصرف کل ترافیک",
-        "total-online-on-nodes": "Total online on nodes"
+        "total-online-on-nodes": "کل افراد آنلاین روی تمام نودها"
     },
     "users-metrics": {
         "disabled-users": "کاربران غیرفعال",
@@ -55,15 +57,14 @@
         "feature": {
             "save": "ذخیره",
             "format": "فرمت",
-            "copy-config": "کپی",
+            "failed-to-save-invalid-json": "به دلیل JSON نامتعتبر ذخیره نشد.",
+            "error": "خطا",
+            "save-anyway": "ذخیره کانفیگ نامعتبر",
             "save-anyway-description": "این آیا از ذخیره کانفیگ نامعتبر مطمئن هستید؟ این عملیات ممکن است باعث بروز مشکلاتی در نرم‌افزار شود. اگر مطمئن هستید، روی \"ذخیره کانفیگ نامعتبر\" کلیک کنید.",
             "cancel": "لغو",
             "save-anyway-title": "تایید عملیات",
-            "error": "خطا",
-            "failed-to-save-invalid-json": "به دلیل JSON نامتعتبر ذخیره نشد",
-            "save-anyway": "ذخیره کانفیگ نامعتبر",
             "load-from-github": "بارگذاری از گیت‌هاب",
-            "tools": "Tools"
+            "tools": "ابزارها"
         }
     },
     "use-bandwidth-table-columns": {
@@ -78,7 +79,16 @@
             "reset-table": "بازنشانی جدول",
             "clear-filters": "پاک کردن فیلترها",
             "update": "به‌روزرسانی",
-            "bulk-actions": "عملیات جمعی"
+            "bulk-actions": "عملیات جمعی",
+            "help": "کمک",
+            "table-controls-help": "راهنمای فرمان‌های جدول",
+            "table-controler-description-line-1": "این جدول با فرمان‌های مختلف در مدیریت بهینه داده‌ها به شما کمک می‌کند. عملکرد هر فرمان به این صورت است:",
+            "table-controler-description-line-2": "فرمان",
+            "table-controler-description-line-3": "توضیحات",
+            "table-controler-description-line-4": "روشن یا خاموش کردن فیلترهای ستون‌ها برای جست‌وجو و فیلتر داده‌ها",
+            "show-or-hide-specific-columns": "نمایش یا مخفی کردن ستون‌ها",
+            "adjust-row-spacing-density": "تنظیم فاصله سطرها",
+            "toggle-fullscreen-table-view": "تغییر نمایش تمام صفحه جدول"
         }
     },
     "use-table-columns": {
@@ -103,9 +113,7 @@
         }
     },
     "header-buttons": {
-        "feature": {
-            "logout": "خروج"
-        }
+        "feature": {}
     },
     "delete-host": {
         "feature": {
@@ -115,8 +123,7 @@
     "header-action-buttons": {
         "feature": {
             "create-new-host": "ساخت هاست جدید",
-            "update": "به‌روزرسانی",
-            "all": "همه"
+            "update": "به‌روزرسانی"
         }
     },
     "delete-node": {
@@ -166,7 +173,7 @@
     },
     "keypair": {
         "widget": {
-            "public-key": "(معادل password) Public Key",
+            "public-key": "(معادل Password) Public Key",
             "private-key": "کلید خصوصی (Private Key)",
             "generate-key-pair": "ایجاد جفت کلید",
             "both-keys": "هر دو"
@@ -246,44 +253,43 @@
     },
     "table": {
         "widget": {
-            "only-active-nodes": "فقط نودهایی که ردیابی ترافیک فعال دارند نمایش داده می‌شوند.",
-            "today": "امروز"
+            "only-active-nodes": "فقط نودهایی که پایش ترافیک فعال دارند نمایش داده می‌شوند",
+            "today": "امروز",
+            "nodes-with-active-traffic-tracking-not-found": "هیچ نودی با پایش مصرف ترافیک فعال یافت نشد."
         }
     },
     "create-user-modal": {
         "widget": {
-            "inbounds": "اینباندها",
-            "inbounds-description": "اینباندهای قابل دسترسی برای این کاربر را انتخاب کنید.",
             "user-description": "توضیحات کاربر",
             "expiry-date": "تاریخ انقضا",
             "pick-value": "انتخاب مقدار",
             "traffic-reset-strategy": "دوره بازنشانی ترافیک",
             "traffic-reset-strategy-description": "هر چند وقت یک بار ترافیک کاربر بازنشانی شود",
             "data-limit": "محدودیت ترافیک",
-            "data-limit-description": "محدودیت ترافیک را به گیگابایت وارد کنید، صفر به معنی نامحدود است",
+            "data-limit-description": "محدودیت ترافیک را به گیگابایت وارد کنید (0 به معنی نامحدود است)",
             "username-cannot-be-changed-later": "نام کاربری نمی تواند بعدا تغییر داده شود",
-            "loading-user-creation": "در حال بارگذاری صفحه ساخت کاربر",
+            "loading-user-creation": "در حال بارگذاری صفحه ساخت کاربر ...",
             "create-user": "ساخت کاربر",
-            "email-of-a-user": "ایمیل کاربر",
             "telegram-id-of-a-user-in-telegram": "آیدی عددی تلگرام کاربر",
+            "email-of-a-user": "ایمیل کاربر",
             "1-month": "+1 ماه",
+            "3-months": "+3 ماه",
             "1-year": "+1 سال",
             "2099-year": "سال 2099",
-            "3-months": "+3 ماه",
-            "disable-hwid-limit": "غیرفعالسازی لیمیت HWID",
-            "hwid-device-limit": "لیمیت دستگاه براساس HWID",
             "hwid-user-limit-line-1": "این ویژگی فقط در صورتی کار می‌‌کند که",
             "hwid-user-limit-line-2": "در فایل .env این مقدار را داشته باشد:",
-            "hwid-user-limit-line-3": "اطلاعات بیشتر",
-            "expire-at-description": "The date and time when the user's subscription will expire."
+            "hwid-user-limit-line-3": "اطلاعات بیشتر.",
+            "disable-hwid-limit": "غیرفعالسازی لیمیت HWID",
+            "hwid-device-limit": "لیمیت دستگاه براساس HWID",
+            "expire-at-description": "تاریخ و ساعت منقضی شدن اشتراک کاربر.",
+            "internal-squads": "اسکوادهای داخلی",
+            "internal-squads-description": "اسکوادهایی که کاربر عضو آن‌ها خواهد بود را مشخص کنید."
         }
     },
     "login-form-feature": {
         "username": "نام کاربری"
     },
-    "home-page": {
-        "users": "کاربرها"
-    },
+    "home-page": {},
     "user-table": {
         "widget": {
             "list-of-all-users": "فهرست تمامی کاربران",
@@ -294,18 +300,15 @@
     "view-user-modal": {
         "widget": {
             "connection-details": "جزئیات اتصال",
-            "last-traffic-reset-at": "آخرین زمان بازنشانی ترافیک",
             "subscription-url": "لینک اشتراک",
             "subscription-short-uuid": "UUID کوتاه اشتراک",
-            "username-cannot-be-changed": "نام کاربری قابل تغییر نمی‌باشد",
-            "user-details": "مشخصات کاربر",
-            "loading-user-data": "در حال بارگذاری اطلاعات کاربر...",
             "edit-user": "ویرایش کاربر",
-            "never": "هرگز",
-            "close": "بستن",
-            "show-qr": "نمایش QR",
             "subscription-qr-code": "اشتراک کد QR",
-            "edit-user-headline": "ویرایش کاربر"
+            "close": "بستن",
+            "edit-user-headline": "ویرایش کاربر",
+            "subscription-url-description-line-1": "دامنه و مسیر استخراج شده از فایل .env:",
+            "subscription-url-description-line-2": "برای تغییر این مقدار لطفا فایل .env را ویرایش کرده و سپس Remnawave را با این کامند ریستارت کنید:",
+            "view-accessible-nodes": "مشاهده نودهای در دسترس"
         }
     },
     "base-api-token-form": {
@@ -322,28 +325,26 @@
         "remark": "نام",
         "address": "آدرس",
         "port": "پورت",
-        "inbound": "اینباند",
-        "select-inbound": "انتخاب اینباند",
         "advanced-options": "گزینه‌های پیشرفته",
         "host": "هاست",
         "path": "مسیر",
         "alpn-e-g-h2": "ALPN (به طور مثال h2)",
         "fingerprint": "اثر انگشت",
-        "fingerprint-e-g-chrome": " اثر انگشت (مثلا chrome)",
+        "fingerprint-e-g-chrome": "اثر انگشت (مثلا chrome)",
         "save": "ذخیره",
         "sni-e-g-example-com": "SNI (مثلا example.com)",
         "host-e-g-example-com": "هاست (مثلا example.com)",
         "e-g-example-com": "مثلا example.com",
         "e-g-443": "مثلا 443",
         "path-e-g-ws": "مسیر (مثلا /ws)",
-        "here-you-can-override-security-settings-from-xtls-config": "در اینجا می توانید تنظیمات امنیتی را از پیکربندی XTLS نادیده بگیرید.",
-        "inbounds-default": "پیش فرض اینباند",
-        "none": "هیچ کدام",
         "security-layer": "لایه امنیتی",
         "tls-transport-layer-security": "TLS (امنیت لایه حمل و نقل)",
+        "none": "هیچ کدام",
+        "inbounds-default": "پیش فرض اینباند",
+        "here-you-can-override-security-settings-from-xtls-config": "در اینجا می توانید تنظیمات امنیتی را از پیکربندی XTLS نادیده بگیرید.",
         "extra-xhttp": "تنظیمات Extra XHTTP",
         "xhttp-extra-params": "XHTTP Extra پارامترهای",
-        "extra-xhttp-description": "این تنظیمات فقط برای کانفیگ‌های XHTTP استفاده می‌شود. یک شی JSON به اسم extra به نرم‌افزار کلاینت ارسال خواهد شد. به کمک دکمه زیر می‌توانید تنظیمات نمونه را کپی کرده و استفاده کنید",
+        "extra-xhttp-description": "این تنظیمات فقط برای کانفیگ‌های XHTTP استفاده می‌شود. یک شی JSON به اسم extra به نرم‌افزار کلاینت ارسال خواهد شد. به کمک دکمه زیر می‌توانید تنظیمات نمونه را کپی کرده و استفاده کنید.",
         "invalid-json": "JSON نامعتبر",
         "fill-with-sample-xhttp-extra-params": "پر کردن با پارامترهای نمونه XHTTP Extra",
         "close": "بستن",
@@ -351,9 +352,18 @@
         "address-description-line-1": "آدرس باید یک آدرس IP یا دامنه برای مقصد اتصال باشد.",
         "address-description-line-2": "در بیشتر موارد، باید به یکی از نود‌های متصل اشاره کند.",
         "port-description-line-1": "پورت اتصال.",
-        "port-description-line-2": "در بیشتر موارد، باید با پورت ورودی انتخاب‌شده مطابقت داشته باشد.",
+        "port-description-line-2": "در بیشتر موارد، باید با پورت اینباند انتخاب‌شده مطابقت داشته باشد.",
         "sni-description-line-1": "SNI نشان‌دهنده نام سرور است.",
-        "sni-description-line-2": "اگر مشخص نشود، مقدار از کانفیگ اینباند استخراج خواهد شد."
+        "sni-description-line-2": "اگر مشخص نشود، مقدار از کانفیگ اینباند استخراج خواهد شد.",
+        "host-visibility": "قابلیت دیده شدن هاست",
+        "server-description-description": "مخصوص Happ.",
+        "select-one-inbound-to-apply-to-the-host": "یک اینباند برای اعمال روی هاست انتخاب کنید",
+        "server-description-header": "توضیحات سرور",
+        "server-description-line-1": "این ویژگی فقط با ProviderID نرم‌افزار Happ کار می‌کند. لطفا مراجعه کنید به",
+        "server-description-line-2": "مستندات Happ",
+        "server-description-line-3": "برای کسب اطلاعات بیشتر",
+        "server-description-line-4": "این مقدار توسط Remnawave به صورت Base64 رمزنگاری می‌شود. لطفا مقدار رمزنگاری شده وارد نکنید.",
+        "server-description-placeholder": "حداکثر 30 کاراکتر"
     },
     "base-node-form": {
         "country": "کشور",
@@ -362,17 +372,25 @@
         "address": "آدرس",
         "e-g-example-com": "مثلا example.com",
         "port": "پورت",
-        "e-g-443": "مثلا 443",
+        "e-g-443": "مثلا 2222",
         "consumption-multiplier": "ضریب مصرف ترافیک",
-        "traffic-tracking": "ثبت مصرف ترافیک",
+        "traffic-tracking": "پایش مصرف ترافیک",
         "limit": "حد مصرف",
         "reset-day": "روز صفر کردن ترافیک",
         "e-g-1-31": "مثلا 1-31",
         "notify-percent": "اطلاع‌رسانی در چند درصد",
         "e-g-50": "مثلا 50",
-        "select-active-inbounds-for-this-node": "اینباندهای فعال برای این نود را انتخاب کنید",
-        "inbounds": "اینباندها",
-        "save": "ذخیره"
+        "save": "ذخیره",
+        "consumption-m-line-1": "ضریب مشخص شده را به مقدار مصرف ترافیک اعمال می‌کند (به عنوان مثال اگر ضریب مصرف 0.5 باشد، مقدار مصرف نصف خواهد شد. 1.0 = نرمال، 2.0 = مصرف دوبل)",
+        "consumption-m-line-2": "به زبان ساده اگر محدودیت مصرف یک کاربر 1 گیگابایت باشد، با ضریب 2.0 کاربر فقط می‌تواند به اندازه 500 مگابایت از سرور استفاده (مصرف واقعی) کند و سپس اکانت ایشان محدود می‌شود.",
+        "node-vitals": "اطلاعات اصلی نود",
+        "consumption": "مصرف",
+        "core-configuration": "پیکربندی هسته",
+        "tracking-and-billing": "پایش و صورتحساب‌ها",
+        "more-actions": "عملیات بیشتر",
+        "quick-actions": "عملیات سریع",
+        "copy-node-uuid": "کپی کردن UUID نود",
+        "management": "مدیریت"
     },
     "home": {
         "page": {
@@ -380,8 +398,8 @@
             "system": "سیستم",
             "bandwidth": "پهنای باند",
             "short-stats": "آمار مختصر",
-            "process-details": "Process Details",
-            "remnawave-usage": "Remnawave Usage"
+            "remnawave-usage": "مصرف منابع Remnawave",
+            "process-details": "مشخصات Process"
         }
     },
     "login-form": {
@@ -394,26 +412,26 @@
     },
     "statistic-nodes": {
         "component": {
+            "no-data-available-for-the-selected-period": "داده‌ای برای دوره انتخاب‌شده در دسترس نیست",
+            "click-to-see-all": "برای دیدن همه کلیک کنید",
+            "show-nodes": "نمایش نودها",
+            "no-data-available": "داده‌ای در دسترس نیست",
+            "click-to-show-all": "برای نمایش همه کلیک کنید",
+            "click-to-highlight-only-this-node": "کلیک کنید تا فقط این نود برجسته شود",
+            "usage-by-period": "استفاده بر اساس دوره",
             "7-days": "۷ روز",
             "14-days": "۱۴ روز",
             "30-days": "۳۰ روز",
             "60-days": "۶۰ روز",
             "90-days": "۹۰ روز",
             "180-days": "۱۸۰ روز",
-            "click-to-highlight-only-this-node": "کلیک کنید تا فقط این نود برجسته شود",
-            "click-to-see-all": "کلیک کنید تا همه را ببینید",
-            "click-to-show-all": "برای نمایش همه کلیک کنید",
-            "filter-nodes": "فیلتر کردن نودها",
-            "next-day": "روز بعد",
-            "no-data-available": "داده‌ای در دسترس نیست",
-            "no-data-available-for-the-selected-period": "داده‌ای برای دوره انتخاب‌شده در دسترس نیست",
-            "node": "نود",
-            "previous-day": "روز قبل",
-            "show-nodes": "نمایش نودها",
-            "top-nodes": "نودهای پرمصرف",
             "total-traffic": "ترافیک کل",
-            "traffic": "ترافیک",
-            "usage-by-period": "استفاده بر اساس دوره"
+            "top-nodes": "نودهای پرمصرف",
+            "filter-nodes": "فیلتر کردن نودها",
+            "previous-day": "روز قبل",
+            "next-day": "روز بعد",
+            "node": "نود",
+            "traffic": "ترافیک"
         }
     },
     "get-expiration-text": {
@@ -459,9 +477,9 @@
         "widget": {
             "delete-users": "حذف کردن کاربرها",
             "confirm-action-description": "آیا مطمئن هستید که می‌خواهید کاربران انتخاب شده را حذف کنید؟",
-            "confirm-action-irreversible": "این عملیات برگشت‌ناپذیر است",
+            "confirm-action-irreversible": "این عملیات برگشت‌ناپذیر است.",
             "cancel": "انصراف",
-            "user-deletion-description": "حذف تمامی کاربران با وضعیت انتخاب شده. اگر کاربران با وضعیت \"فعال یا Active\" را حذف می‌کنید، باید تمامی نودها را برای اعمال تغییرات مجدداً راه‌اندازی کنید",
+            "user-deletion-description": "حذف تمامی کاربران با وضعیت انتخاب شده. اگر کاربران با وضعیت \"فعال یا Active\" را حذف می‌کنید، باید تمامی نودها را برای اعمال تغییرات مجدداً راه‌اندازی کنید.",
             "select-status": "حذف کردن بر اساس وضعیت"
         }
     },
@@ -478,22 +496,21 @@
             "error": "خطا",
             "passwords-do-not-match": "پسوردها مطابقت ندارند",
             "password-too-short": "حداقل 24 کاراکتر",
-            "register-description": "برای شروع یک اکانت سوپرادمین ایجاد کنید"
+            "register-description": "برای شروع یک اکانت سوپرادمین ایجاد کنید",
+            "registration": "ثبت نام"
         }
     },
     "xray-json-template-description": {
         "widget": {
+            "importing-json-subscription": "نحوه استفاده از اشتراک‌های JSON",
             "description-line-1": "برای استفاده از این اشتراک، کافی است",
-            "description-line-2": "را به انتهای لینک اشتراک خود اضافه کنید. درصورتی که از کلاینت‌های پشتیبانی شده جدول زیر استفاده نشود اشتراک‌ها مانند قبل، مثلا به صورت base64 یا mihomo، ارسال خواهند شد",
-            "importing-json-subscription": "نحوه استفاده از اشتراک‌های JSON"
+            "description-line-2": "را به انتهای لینک اشتراک خود اضافه کنید. درصورتی که از کلاینت‌های پشتیبانی شده جدول زیر استفاده نشود اشتراک‌ها مانند قبل (مثلا به صورت base64 یا mihomo) ارسال خواهند شد"
         }
     },
     "happ-routing-builder": {
         "widget": {
             "copy-link": "کپی کردن لینک",
             "visual-editor": "ویرایشگر بصری",
-            "code-viewer": "نمایشگر کد",
-            "encode-happ-link": "ایجاد لینک روتینگ Happ",
             "enter-the-configuration-name": "اسم تنظیمات روتینگ را وارد کنید",
             "name": "نام",
             "russia": "روسیه",
@@ -502,8 +519,8 @@
             "proxy-all-traffic-except-rules-or-direct-all-traffic-except-rules": "قوانین مشخص شده به چه صورت اعمال شوند؟",
             "enable": "فعالسازی",
             "disable": "غیرفعالسازی",
-            "fake-dns-description": "فعالسازی یا غیرفعالسازی FakeDNS. پیشنهاد می‌شود درصورت استفاده از DoU این مورد را فعال کنید",
-            "choose-doh-dns-over-https-or-dou-dns-over-udp": "استفاده از DoU یا DoH برای سرور DNS ریموت",
+            "fake-dns-description": "فعالسازی یا غیرفعالسازی FakeDNS. پیشنهاد می‌شود درصورت استفاده از DoU این مورد را فعال کنید.",
+            "choose-doh-dns-over-https-or-dou-dns-over-udp": "استفاده از DoU (DNS over UDP) یا DoH (DNS over HTTPS) برای سرور DNS ریموت",
             "remote-dns-type": "نوع DNS ریموت",
             "domain-name-for-doh": "دامنه سرور DoH",
             "remote-dns-domain": "دامنه سرور DNS ریموت",
@@ -521,41 +538,40 @@
             "geosite-url": "لینک GeoSite",
             "unix-timestamp-description": "تایم استمپ آخرین به‌روزرسانی فایل‌های GeoIP و GeoSite. درصورت در دسترس نبودن خالی بگذارید.",
             "last-updated": "آخرین به‌روزرسانی",
-            "select-the-domain-processing-strategy": "استراتژی پردازش دامنه را انتخاب کنید",
+            "select-the-domain-processing-strategy": "استراتژی پردازش دامنه را انتخاب کنید.",
             "domain-strategy": "استراتژی دامنه",
             "dns-hosts-description": "مقادیر دستی DNS مورد نظر را به این صورت وارد نمایید: { \"example.com\": \"1.2.3.4\", \"test.org\": \"8.8.8.8\" }",
-            "dns-hosts": "DNS hosts",
-            "sites-that-will-use-direct-connection": "دامنه‌هایی که به صورت مستقیم وصل خواهند شد",
+            "dns-hosts": "هاست‌های DNS",
+            "sites-that-will-use-direct-connection": "دامنه‌هایی که به صورت مستقیم وصل خواهند شد.",
             "direct-sites": "دامنه‌های مستقیم",
-            "ip-addresses-that-will-use-direct-connection": "آیپی‌هایی که به صورت مستقیم وصل خواهند شد",
+            "ip-addresses-that-will-use-direct-connection": "آیپی‌هایی که به صورت مستقیم وصل خواهند شد.",
             "direct-ip": "آیپی‌های مستقیم",
-            "sites-that-will-be-proxied": "دامنه‌هایی که پروکسی خواهند شد",
+            "sites-that-will-be-proxied": "دامنه‌هایی که پروکسی خواهند شد.",
             "proxy-sites": "دامنه‌های پروکسی‌شده",
-            "ip-addresses-that-will-be-proxied": "آیپی‌هایی که پروکسی خواهند شد",
+            "ip-addresses-that-will-be-proxied": "آیپی‌هایی که پروکسی خواهند شد.",
             "proxy-ip": "آیپی‌های پروکسی‌شده",
-            "sites-that-will-be-blocked": "دامنه‌هایی که باید بلاک شوند",
+            "sites-that-will-be-blocked": "دامنه‌هایی که باید بلاک شوند.",
             "blocked-sites": "دامنه‌های بلاک شده",
-            "ip-addresses-that-will-be-blocked": "آیپی‌هایی که باید بلاک شوند",
+            "ip-addresses-that-will-be-blocked": "آیپی‌هایی که باید بلاک شوند.",
             "blocked-ips": "آیپی‌های بلاک شده",
             "encoded-happ-link": "لینک Happ ایجاد شده",
             "copied": "کپی شد",
             "show-qr": "نمایش QR",
             "close": "بستن",
-            "basic-configuration": "تنظیمات پایه",
-            "block-routing": "روتینگ بلاک (مسدودسازی ترافیک)",
-            "code-editor": "ویرایشگر کد",
-            "decode": "رمزگشایی",
-            "direct-routing": "روتینگ مستقیم",
-            "dns-hosts-0": "هاست‌های DNS",
-            "domestic-dns-settings": "تنظیمات DNS محلی",
-            "encoded-link": "لینک رمزنگاری شده",
-            "import-configuration": "وارد کردن تنظیمات",
-            "import-from-base64": "وارد کردن از Base64",
             "invalid-base64-or-happ-link": "لینک Happ یا Base64 نامعتبر است",
+            "import-configuration": "وارد کردن تنظیمات",
             "paste-a-happ-routing-link-or-base64-encoded-config": "لینک Happ یا تنظیمات رمزنگاری شده Base64 را وارد کنید",
+            "import-from-base64": "وارد کردن از Base64",
             "paste-base64-or-happ-link-here": "اینجا لینک Happ یا Base64 را وارد کنید",
+            "decode": "رمزگشایی",
+            "basic-configuration": "تنظیمات پایه",
+            "remote-dns-settings": "تنظیمات DNS ریموت (خارج)",
+            "domestic-dns-settings": "تنظیمات DNS محلی",
+            "dns-hosts-0": "هاست‌های DNS",
+            "direct-routing": "روتینگ مستقیم",
             "proxy-routing": "روتینگ پروکسی",
-            "remote-dns-settings": "تنظیمات DNS ریموت (خارج)"
+            "block-routing": "روتینگ بلاک (مسدودسازی ترافیک)",
+            "code-editor": "ویرایشگر کد"
         },
         "page": {
             "component": {
@@ -601,61 +617,31 @@
             "limited-users-remarks": "ریمارک‌های کاربر محدود شده",
             "disabled-users-remarks": "ریمارک‌های کاربر غیرفعال شده",
             "update-settings": "به‌روزرسانی تنظیمات",
-            "disabled": "غیرفعال",
             "enabled": "فعال",
+            "disabled": "غیرفعال",
             "profile-webpage-url": "URL صفحه وب مشخصات",
             "profile-webpage-url-description": "توسط برخی از نرم‌افزارها استفاده می‌شود. \nبه طور پیش فرض فعال شده ، دامنه از متغیر SUB_PUBLIC_DOMAIN .env دریافت می‌شود",
             "serve-json-at-base-subscription": "ارائه JSON در لینک پایه پیشفرض",
             "serve-json-description": "درصورت پشتیبانی نرم‌افزار، بدون نیاز به قرار دادن /json در انتهای لینک، اشتراک JSON برای آن ارسال خواهد شد",
             "add-username-to-base-subscription": "افزودن #username به انتهای لینک اشتراک",
             "add-username-description": "با فعال کردن این گزینه #username به انتهای لینک‌های اشتراک اضافه خواهد شد.",
+            "subscription-info-description": "این تنظیمات توسط نرم‌افزارهایی مثل Happ, v2RayNG, Streisand و..و استفاده می‌شود",
             "happ-description-line-1": "در این قسمت می‌توانید تنظیمات مربوط به نرم‌افزار Happ را برای لینک‌های اشتراک مشخص کنید.",
-            "happ-description-line-2": "این تنظیمات فقط در نرم‌افزار Happ استفاده خواهد شد",
-            "subscription-info-description": "این تنظیمات توسط نرم‌افزارهایی مثل Happ, v2RayNG, Streisand و..و استفاده می‌شود"
+            "happ-description-line-2": "این تنظیمات فقط در نرم‌افزار Happ استفاده خواهد شد"
         },
         "page": {
             "component": {
+                "what-is-subscription-settings": "تنظیمات اشتراک چیست؟",
                 "subscription-settings-description": "تنظیمات زیر مربوط به مشخصات لینک اشتراک می‌باشد که در بعضی از نرم‌افزارها نمایش داده شده و استفاده می‌شوند.",
-                "subscription-settings-description-line-2": "پیشنهاد می‌شود این تنظیمات را با توجه به شرایط و نیازهای خود تغییر دهید",
-                "what-is-subscription-settings": "تنظیمات اشتراک چیست؟"
+                "subscription-settings-description-line-2": "پیشنهاد می‌شود این تنظیمات را با توجه به شرایط و نیازهای خود تغییر دهید"
             }
         }
     },
     "inbounds-page-header": {
-        "widget": {
-            "list-of-all-inbounds": "لیست همه اینباندها",
-            "inbounds": "اینباندها",
-            "important-note": "نکته مهم",
-            "important-note-description-line-1": "همه عملیات‌های گروهی نیاز به ریستارت کامل همه نودها دارند",
-            "important-note-description-line-2": "لطفاً از ارسال درخواست‌های متعدد در مدت زمان کوتاه خودداری کنید",
-            "important-note-description-line-3": "پس از ذخیره تغییرات، ممکن است تا ۳۰ ثانیه طول بکشد تا تغییرات در همه نودها اعمال شوند"
-        }
+        "widget": {}
     },
     "inbounds-card": {
-        "widget": {
-            "nodes": "نودها",
-            "enabled-nodes": "نودهایی که این اینباند در آن‌ها فعال است",
-            "disabled-nodes": "نودهایی که این اینباند در آن‌ها غیرفعال است",
-            "remove": "حذف",
-            "add": "افزودن",
-            "cancel": "لغو",
-            "users": "کاربرها",
-            "enabled-users": "کاربرانی که این اینباند برای آن‌ها فعال است",
-            "disabled-users": "کاربرانی که این اینباند برای آن‌ها غیرفعال است",
-            "show-raw-inbound": "نمایش اینباند خام",
-            "raw-inbound": "اینباند خام",
-            "are-you-sure": "آیا مطمئن هستید؟",
-            "add-users-to-inbound-line-1": "آیا مطمئن هستید که می‌خواهید این اینباند را به کاربران اضافه کنید؟",
-            "add-users-to-inbound-line-2": "این اقدام اینباند را به همه کاربران اضافه خواهد کرد",
-            "remove-users-from-inbound-line-1": "آیا مطمئن هستید که می‌خواهید این اینباند را برای کاربران حذف کنید؟",
-            "remove-users-from-inbound-line-2": "این اقدام اینباند را برای همه کاربران حذف خواهد کرد.",
-            "add-nodes-to-inbound-line-1": "آیا مطمئن هستید که می‌خواهید این اینباند را به نودها اضافه کنید؟",
-            "add-nodes-to-inbound-line-2": "این اقدام اینباند را به همه نودها اضافه خواهد کرد.",
-            "remove-nodes-from-inbound-line-1": "آیا مطمئن هستید که می‌خواهید این اینباند را از نودها حذف کنید؟",
-            "remove-nodes-from-inbound-line-2": "این اقدام اینباند را از همه نودها حذف خواهد کرد.",
-            "copied": "کپی شده",
-            "copy-uuid": "کپی UUID"
-        }
+        "widget": {}
     },
     "multi-select-hosts": {
         "feature": {
@@ -664,7 +650,6 @@
             "delete": "حذف",
             "cancel": "لغو",
             "set-inbound": "تنظیم اینباند",
-            "inbound": "اینباند",
             "set-port": "تنظیم پورت",
             "port": "پورت",
             "clear-selection": "پاک کردن انتخاب",
@@ -687,7 +672,7 @@
         "feature": {
             "processing": "در حال پردازش",
             "deleting-users": "در حال حذف کاربران...",
-            "success": "موفقیت",
+            "success": "عملیات موفقیت‌آمیز",
             "deleted-data-affectedrows-users": "{{count}} کاربر حذف شد"
         }
     },
@@ -753,14 +738,14 @@
                     "reset-traffic-confirmation-line-1": "آیا مطمئن هستید که می‌خواهید ترافیک {{usersCount}} کاربر را بازنشانی کنید؟",
                     "reset-traffic-confirmation-line-2": "این اقدام مصرف کاربران را به صفر تنظیم می‌کند.",
                     "reset": "بازنشانی",
-                    "change-active-inbounds": "تغییر اینباندهای فعال",
                     "change": "تغییر",
-                    "no-inbounds-selected": "هیچ اینباند انتخاب نشده است",
-                    "please-select-at-least-one-inbound": "لطفاً حداقل یک اینباند انتخاب کنید",
                     "perform-action-on-users": "انجام اقدامات برای {{usersCount}} کاربر انتخاب‌شده",
-                    "changes-the-active-inbounds-for-all-selected-users": "اینباند‌های فعال را برای همه کاربران انتخاب‌شده تغییر می‌دهد",
                     "resets-the-traffic-usage-to-zero-for-all-selected-users": "ترافیک مصرفی را برای همه کاربران انتخاب‌شده به صفر بازنشانی می‌کند",
-                    "revokes-subscription-for-all-selected-users": "اشتراک را برای همه کاربران انتخاب‌شده لغو می‌کند"
+                    "revokes-subscription-for-all-selected-users": "اشتراک را برای همه کاربران انتخاب‌شده لغو می‌کند",
+                    "change-active-internal-squads": "تغییر دادن اسکوادهای فعال",
+                    "specify-internal-squads-that-will-be-assigned-to-the-user": "اسکوادهایی که این کاربر عضو آن‌ها خواهد شد را مشخص کنید",
+                    "internal-squads": "اسکوادهای داخلی",
+                    "changes-the-active-internal-squads-for-all-selected-users": "اسکوادهای فعال را برای همه کاربران انتخاب شده تغییر می‌دهد"
                 }
             }
         },
@@ -805,7 +790,6 @@
         "feature": {
             "subscription-links": "لینک‌های اشتراک",
             "loading-subscription-links": "درحال بارگذاری لینک‌های اشتراک ...",
-            "show-links": "نشان دادن لینک‌ها",
             "no-available-hosts-found-for-this-user": "هیچ هاست موجودی برای این کاربر یافت نشد"
         }
     },
@@ -821,9 +805,9 @@
         "widget": {
             "no-data-available-for-the-selected-period": "داده‌ای برای دوره انتخاب‌شده در دسترس نیست",
             "no-data-available": "داده‌ای در دسترس نیست",
+            "traffic-statistics": "آمار ترافیک",
             "click-to-show-all": "برای نمایش همه کلیک کنید",
             "click-to-highlight-only-this-node": "کلیک کنید تا فقط این نود برجسته شود",
-            "traffic-statistics": "آمار ترافیک",
             "usage-by-period": "استفاده بر اساس دوره",
             "7-days": "۷ روز",
             "14-days": "۱۴ روز",
@@ -849,9 +833,7 @@
     },
     "detailed-user-info-drawer": {
         "widget": {
-            "copied": "کپی شد",
             "detailed-user-info": "اطلاعات دقیق کاربر",
-            "copy": "کپی",
             "loading-user-info": "در حال بارگذاری اطلاعات کاربر...",
             "user-information": "اطلاعات کاربر",
             "uuid": "UUID",
@@ -867,7 +849,6 @@
             "traffic-limit-strategy": "استراتژی محدودیت ترافیک",
             "last-traffic-reset": "آخرین بازنشانی ترافیک",
             "subscription-information": "اطلاعات اشتراک",
-            "subscription-uuid": "شناسه (UUID) اشتراک",
             "subscription-url": "آدرس URL اشتراک",
             "expires-at": "زمان انقضا",
             "last-opened-at": "آخرین بار باز شده در",
@@ -879,12 +860,12 @@
             "ss-password": "رمز عبور SS",
             "last-online": "آخرین آنلاین",
             "last-connected-node": "آخرین نود متصل‌شده",
-            "active-inbounds": "اینباندهای فعال",
             "timestamps": "مهرهای زمانی",
             "created-at": "ایجاد شده در",
             "updated-at": "به‌روزرسانی شده در",
+            "tag": "تگ",
             "first-connected-at": "اولین اتصال",
-            "tag": "تگ"
+            "active-internal-squads": "اسکوادهای داخلی فعال"
         }
     },
     "subscription-page-builder-header": {
@@ -950,7 +931,12 @@
             "additional-response-headers": "هدرهای برگشتی اضافی",
             "headers-that-will-be-sent-with-subscription-content": "هدرهای اضافی که می‌خواهید همراه با محتوای اشتراک ارسال شوند را مشخص کنید.",
             "randomize-hosts": "هاست رندوم",
-            "randomize-hosts-description": "استفاده از مقادیر رندوم برای هاست در اشتراک‌ها"
+            "randomize-hosts-description": "استفاده از مقادیر رندوم برای هاست در اشتراک‌ها",
+            "additional-options": "تنظیمات بیشتر",
+            "configure-additional-subscription-options": "پیکربندی تنظیمات اضافی",
+            "error": "خطا",
+            "save-settings": "ذخیره تنظیمات",
+            "save-your-subscription-settings-to-apply-changes": "برای اعمال تغییرات تنظیمات اشتراک را ذخیره کنید"
         }
     },
     "nodes-realtime-metrics": {
@@ -1033,27 +1019,402 @@
         }
     },
     "template-selector": {
+        "search-templates": "جست‌وجوی قالب‌ها",
+        "official-templates": "قالب‌های رسمی",
         "author-templates": "{{author}} قالب‌های",
         "modal": {
             "cancel": "لغو",
             "load-template": "بارگذاری قالب"
         },
-        "official-templates": "قالب‌های رسمی",
-        "search-templates": "جست‌وجوی قالب‌ها",
         "add-template": "افزودن قالب"
     },
     "use-download-template": {
         "failed-to-load-template": "خطا هنگام بارگذاری قالب",
-        "failed-to-load-template-please-try-again": "بارگذاری قالب ناموفق بود، لطفا مجدد تلاش کنید",
+        "template-loaded": "قالب مورد نظر بارگذاری شد",
+        "template-name-has-been-loaded-into-the-editor": "وارد ویرایشگر شده‌است {{name}}",
         "load-failed": "بارگذاری ناموفق",
-        "select-template-to-load": "قالب مورد نظر خود را انتخاب کنید",
-        "template-loaded": "قالب با موفقیت بارگذاری شد",
-        "template-name-has-been-loaded-into-the-editor": "وارد ویرایشگر شده‌است {{name}}"
+        "failed-to-load-template-please-try-again": "بارگذاری قالب ناموفق بود، لطفا مجدد تلاش کنید",
+        "select-template-to-load": "قالب مورد نظر خود را انتخاب کنید"
     },
     "pm2-metrics": {
-        "average-cpu": "Average CPU",
-        "heaviest-process": "Heaviest Process",
-        "total-memory": "Total Memory",
-        "total-processes": "Total Processes"
+        "total-processes": "تعداد کل Processها",
+        "total-memory": "کل رم مصرفی",
+        "average-cpu": "میانگین مصرف CPU",
+        "heaviest-process": "سنگین‌ترین Process"
+    },
+    "internal-squads-header": {
+        "widget": {
+            "list": "لیست همه اسکوادهای داخلی"
+        }
+    },
+    "internal-squads-grid": {
+        "widget": {
+            "delete-internal-squad": "حذف اسکواد داخلی",
+            "delete-internal-squad-confirmation": "آیا مطمئن هستید که می‌خواهید اسکواد داخلی «{{internalSquadName}}» را حذف کنید؟",
+            "this-action-cannot-be-undone": "این اقدام قابل بازگشت نیست.",
+            "delete": "حذف",
+            "cancel": "انصراف",
+            "remove-users-from-internal-squad": "حذف کاربران از اسکواد داخلی",
+            "remove-users-from-internal-squad-confirmation": "آیا مطمئن هستید که می‌خواهید کاربران را از اسکواد داخلی «{{internalSquadName}}» حذف کنید؟",
+            "remove": "حذف",
+            "add-users-to-internal-squad": "افزودن کاربران به اسکواد داخلی",
+            "add-users-to-internal-squad-confirmation": "آیا مطمئن هستید که می‌خواهید کاربران را به اسکواد داخلی «{{internalSquadName}}» اضافه کنید؟",
+            "add": "افزودن",
+            "no-internal-squads": "هیچ اسکواد داخلی‌ای وجود ندارد",
+            "create-your-first-internal-squad-to-get-started": "برای شروع، اولین اسکواد داخلی خود را ایجاد کنید",
+            "delete-squad": "حذف اسکواد",
+            "inbounds": "اینباندها",
+            "users": "کاربران",
+            "edit-inbounds": "ویرایش اینباندها"
+        }
+    },
+    "config-profile-detail-header": {
+        "widget": {
+            "active-nodes": "نودهای فعال"
+        }
+    },
+    "config-profiles-grid": {
+        "widget": {
+            "delete-config-profile": "حذف پروفایل پیکربندی",
+            "are-you-sure-you-want-to-delete-the-config-profile": "آیا مطمئن هستید که می‌خواهید پروفایل پیکربندی «{{profileName}}» را حذف کنید؟",
+            "delete": "حذف",
+            "cancel": "انصراف",
+            "this-action-cannot-be-undone": "این اقدام قابل بازگشت نیست.",
+            "no-config-profiles": "هیچ پروفایل پیکربندی‌ای وجود ندارد",
+            "create-your-first-config-profile-to-get-started": "برای شروع، اولین پروفایل پیکربندی خود را ایجاد کنید",
+            "delete-profile": "حذف پروفایل",
+            "inbounds": "اینباندها",
+            "nodes": "نودها",
+            "download": "دانلود",
+            "quick-view": "نمای سریع",
+            "edit-xray-config": "ویرایش پیکربندی Xray"
+        }
+    },
+    "config-profiles-header": {
+        "widget": {
+            "list-of-all-config-profiles": "لیست همه پروفایل‌های پیکربندی"
+        }
+    },
+    "view-infra-provider": {
+        "drawer": {
+            "widget": {
+                "infra-provider": "ارائه‌دهنده تجهیزات",
+                "name-description": "نام ارائه‌دهنده. این نام برای شناسایی ارائه‌دهنده در رابط کاربری استفاده می‌شود.",
+                "name": "نام",
+                "enter-provider-name": "نام ارائه‌دهنده را وارد کنید",
+                "favicon-link": "لینک Favicon",
+                "enter-favicon-link": "لینک Favicon را وارد کنید",
+                "favicon-link-description": "لینک favicon، لینک نماد ارائه‌دهنده است که در رابط کاربری نمایش داده می‌شود. فقط نام دامنه را وارد کنید.",
+                "login-url": "آدرس ورود",
+                "enter-login-url": "آدرس ورود را وارد کنید",
+                "login-url-description": "آدرس ورود صفحه لاگین ارائه‌دهنده است و برای دسترسی سریع به آن استفاده می‌شود.",
+                "save-changes": "ذخیره تغییرات"
+            }
+        }
+    },
+    "update-billing-date-modal": {
+        "widget": {
+            "update-billing-date": "به‌روزرسانی تاریخ صورتحساب",
+            "current-date": "تاریخ فعلی",
+            "new-date": "تاریخ جدید",
+            "today": "امروز",
+            "tomorrow": "فردا",
+            "next-month": "ماه بعد",
+            "cancel": "انصراف",
+            "update-date": "به‌روزرسانی تاریخ"
+        }
+    },
+    "infra-providers-table": {
+        "widget": {
+            "delete-infra-provider": "حذف ارائه‌دهنده تجهیزات",
+            "delete-infra-provider-confirmation": "آیا مطمئن هستید که می‌خواهید این ارائه‌دهنده تجهیزات را حذف کنید؟",
+            "this-action-is-irreversible": "این اقدام غیرقابل بازگشت است.",
+            "delete": "حذف",
+            "cancel": "انصراف",
+            "refresh": "بازنشانی",
+            "create-infra-provider": "ایجاد ارائه‌دهنده تجهیزات",
+            "infra-providers": "ارائه‌دهندگان تجهیزات",
+            "list-of-all-infra-providers": "لیست همه ارائه‌دهندگان تجهیزات",
+            "no-providers-found": "هیچ ارائه‌دهنده‌ای یافت نشد."
+        }
+    },
+    "use-infra-providers-columns": {
+        "hoster-name": "نام هاستی‌کننده",
+        "providers": "ارائه‌دهنده‌ها",
+        "login-url": "آدرس ورود",
+        "total": "جمع کل ($)",
+        "servers": "سرورها",
+        "no-servers": "بدون سرور"
+    },
+    "infra-billing-records-table": {
+        "widget": {
+            "delete-infra-billing-record": "حذف رکورد صورتحساب تجهیزات",
+            "delete-infra-billing-record-confirmation": "آیا مطمئن هستید که می‌خواهید این رکورد صورتحساب تجهیزات را حذف کنید؟",
+            "this-action-is-irreversible": "این اقدام غیرقابل بازگشت است.",
+            "delete": "حذف",
+            "cancel": "انصراف",
+            "refresh": "بازنشانی",
+            "create": "ایجاد",
+            "billing-records-sorted-by-date": "رکوردهای صورتحساب بر اساس تاریخ مرتب شده‌اند",
+            "infra-billing-records": "رکوردهای صورتحساب تجهیزات",
+            "no-billing-records-found": "هیچ رکورد صورتحسابی یافت نشد."
+        }
+    },
+    "use-infra-billing-records-columns": {
+        "hoster-name": "نام هاست‌دهنده",
+        "billed-at": "تاریخ صورتحساب",
+        "paid": "پرداخت شده ($)"
+    },
+    "infra-billing-nodes": {
+        "widget": {
+            "delete-infra-billing-node": "حذف نود صورتحساب تجهیزات",
+            "delete-infra-billing-node-confirmation": "آیا مطمئن هستید که می‌خواهید این نود صورتحساب تجهیزات را حذف کنید؟",
+            "this-action-is-irreversible": "این اقدام غیرقابل بازگشت است.",
+            "delete": "حذف",
+            "cancel": "انصراف",
+            "refresh": "بازنشانی",
+            "add-node": "افزودن نود",
+            "list-of-all-infra-billing-nodes": "لیست همه نودهای صورتحساب تجهیزات بر اساس تاریخ صورتحساب بعدی",
+            "infra-billing-nodes": "نودهای صورتحساب تجهیزات",
+            "no-nodes-found": "هیچ نودی یافت نشد.",
+            "add-a-node": "افزودن نود"
+        }
+    },
+    "use-infra-billing-nodes-columns": {
+        "hoster-name": "نام هاستی‌کننده",
+        "node": "نود",
+        "next-billing-at": "تاریخ صورتحساب بعدی"
+    },
+    "next-billing-at-cell": {
+        "in-current-month": "در این ماه",
+        "far-future": "آینده دور",
+        "date-approaching": "تاریخ صورتحساب نزدیک است",
+        "today": "امروز",
+        "tomorrow": "فردا",
+        "more-than-3-days-ago": "بیش از ۳ روز پیش",
+        "yesterday": "دیروز"
+    },
+    "create-infra-provider": {
+        "drawer": {
+            "widget": {
+                "create": "ایجاد"
+            }
+        }
+    },
+    "create-infra-billing-record": {
+        "modal": {
+            "widget": {
+                "error": "خطا",
+                "please-select-a-provider": "لطفاً یک ارائه‌دهنده انتخاب کنید",
+                "bill-record": "رکورد صورتحساب",
+                "billed-at": "تاریخ صورتحساب",
+                "the-date-and-time-when-the-bill-was-paid": "تاریخ و زمان پرداخت صورتحساب.",
+                "payment-amount-usd": "مبلغ پرداختی (دلار)",
+                "amount": "مقدار",
+                "create": "ایجاد"
+            }
+        }
+    },
+    "create-infra-billing-node": {
+        "modal": {
+            "widget": {
+                "error": "خطا",
+                "please-select-a-provider-and-billing-node": "لطفاً یک ارائه‌دهنده و نود صورتحساب انتخاب کنید",
+                "billing-node": "نود صورتحساب",
+                "next-billing-at": "صورتحساب بعدی در",
+                "next-billing-at-description": "تاریخ و زمانی که نود صورتحساب بعدی صادر می‌شود. Remnawave شما را مطلع خواهد کرد.",
+                "create": "ایجاد"
+            }
+        }
+    },
+    "active-nodes-list": {
+        "modal": {
+            "shared": {
+                "profile-is-active-on": "این پروفایل روی {{nodeCount}} نود فعال می‌باشد.",
+                "this-profile-is-not-active-on-any-nodes": "این پروفایل روی هیچ نودی فعال نمی‌باشد"
+            }
+        }
+    },
+    "active-nodes-list-with-store": {
+        "modal": {
+            "shared": {
+                "active-nodes": "نودهای فعال"
+            }
+        }
+    },
+    "config-profile-card": {
+        "shared": {
+            "active-on-nodes": "فعال روی نودها"
+        }
+    },
+    "flat-inbound-checkbox-card": {
+        "shared": {
+            "inbound-config-inbound-tag": "پیکربندی اینباند: {{inboundTag}}"
+        }
+    },
+    "virtualized-flat-inbounds-list": {
+        "shared": {
+            "no-inbounds-found": "هیچ اینباندی یافت نشد"
+        }
+    },
+    "select-billing-node": {
+        "shared": {
+            "billing-node": "نود صورتحساب",
+            "no-billing-nodes-available": "هیچ نود صورتحسابی موجود نیست",
+            "select-the-billing-node": "نود صورتحساب را انتخاب کنید.",
+            "select-billing-node": "انتخاب نود صورتحساب..."
+        }
+    },
+    "select-infra-provider": {
+        "shared": {
+            "infrastructure-provider": "ارائه‌دهنده تجهیزات",
+            "no-providers-available": "هیچ ارائه‌دهنده‌ای موجود نیست",
+            "select-the-infrastructure-provider": "ارائه‌دهنده تجهیزات را انتخاب کنید.",
+            "select-provider": "انتخاب ارائه‌دهنده..."
+        }
+    },
+    "internal-squads-list": {
+        "widget": {
+            "search-internal-squads": "جستجوی اسکوادهای داخلی...",
+            "no-squads-found": "هیچ اسکوادی یافت نشد"
+        }
+    },
+    "user-accessible-nodes": {
+        "modal": {
+            "widget": {
+                "loading-accessible-nodes": "در حال بارگذاری نودهای قابل دسترس...",
+                "no-accessible-nodes-found-for-this-user": "هیچ نود قابل‌دسترسی‌ای برای این کاربر یافت نشد",
+                "access-summary": "خلاصه دسترسی",
+                "user-accessible-nodes": "نودهای قابل دسترس برای کاربر"
+            }
+        }
+    },
+    "internal-squads": {
+        "drawer": {
+            "widget": {
+                "selected-from-multiple-profiles": "از چندین پروفایل",
+                "no-inbounds-selected": "هیچ اینباندی انتخاب نشده است",
+                "choose-inbounds-from-any-profiles": "اینباندها را از هر پروفایلی انتخاب کنید",
+                "update-internal-squad": "به‌روزرسانی اسکواد داخلی",
+                "search-profiles-or-inbounds": "جستجوی پروفایل یا اینباند...",
+                "config-profiles": "پروفایل‌های پیکربندی",
+                "flat-list": "لیست ساده",
+                "no-profiles-or-inbounds-found": "هیچ پروفایل یا اینباندی یافت نشد",
+                "no-config-profiles-available": "هیچ پروفایل پیکربندی‌ای موجود نیست",
+                "all": "همه",
+                "selected": "انتخاب شده",
+                "unselected": "انتخاب نشده",
+                "edit-internal-squad": "ویرایش اسکواد"
+            }
+        }
+    },
+    "host-select-inbound": {
+        "feature": {
+            "no-inbound-selected": "هیچ اینباندی انتخاب نشده است",
+            "change": "تغییر",
+            "choose-an-inbound-to-apply-to-the-host": "یک اینباند را برای اعمال به هاست انتخاب کنید",
+            "select": "انتخاب"
+        }
+    },
+    "show-config-profiles-with-inbounds": {
+        "feature": {
+            "config-profile": "پروفایل پیکربندی",
+            "select-the-config-profile-that-will-be-applied-to-this-node": "پروفایل پیکربندی که به این نود اعمال می‌شود را انتخاب کنید",
+            "no-config-profile-selected": "هیچ پروفایلی انتخاب نشده است",
+            "choose-a-profile-to-configure-inbounds-for-this-node": "یک پروفایل برای پیکربندی اینباند برای این نود انتخاب کنید",
+            "change-profile": "تغییر پروفایل",
+            "select-config-profile": "انتخاب پروفایل پیکربندی"
+        }
+    },
+    "access-settings-card": {
+        "access-settings": "تنظیمات دسترسی"
+    },
+    "device-tag-settings-card": {
+        "device-and-tag-settings": "تنظیمات دستگاه و تگ"
+    },
+    "user-indentity-creation-card": {
+        "user-identity": "هویت کاربر"
+    },
+    "hosts-config-profiles": {
+        "drawer": {
+            "widget": {
+                "no-profile-selected": "هیچ پروفایلی انتخاب نشده",
+                "unknown-inbound": "اینباند ناشناخته",
+                "selected": "انتخاب شده",
+                "no-inbound-selected": "هیچ اینباندی انتخاب نشده است",
+                "choose-an-inbound-to-apply-to-the-host": "یک اینباند برای اعمال به هاست انتخاب کنید.",
+                "apply-changes": "اعمال تغییرات",
+                "search-profiles-or-inbounds": "جستجوی پروفایل یا اینباند...",
+                "hosts-do-not-support-multiple-inbounds": "نمی‌توان به یک هاست چندین اینباند اعمال کرد",
+                "not-supported": "پشتیبانی نمی‌شود",
+                "no-profiles-or-inbounds-found": "هیچ پروفایل یا اینباند یافت نشد",
+                "no-config-profiles-available": "هیچ پروفایل تنظیمات در دسترس نیست"
+            }
+        }
+    },
+    "stats": {
+        "widget": {
+            "current-date": "تاریخ کنونی",
+            "upcoming-in": "{{month}}موعد ",
+            "nodes-pending-payment": "نود‌های در انتظار پرداخت",
+            "payments-in": "پرداخت‌ها در {{month}}",
+            "total-payments-made": "کل پرداخت‌های انجام شده",
+            "total-spent": "کل هزینه شده",
+            "lifetime-spending": "هزینه کل طول عمر"
+        }
+    },
+    "edit-node-by-uuid-modal": {
+        "widget": {
+            "loading-node": "در حال بارگذاری نود...",
+            "close": "بستن"
+        }
+    },
+    "hosts-filters": {
+        "feature": {
+            "all-config-profiles": "همه پروفایل‌های تنظیمات",
+            "all-inbounds": "همه اینباندها",
+            "filters": "فیلترها",
+            "select-config-profile": "انتخاب پروفایل تنظیمات",
+            "select-inbound": "انتخاب اینباند",
+            "search-by-remark": "جستجو بر اساس توضیحات...",
+            "address": "آدرس"
+        }
+    },
+    "mobile-warning-overlay": {
+        "mobile-device-detected": "دستگاه موبایل شناسایی شد",
+        "description-line-1": "این صفحه حاوی جدول‌های پیچیده‌ای است که شاید روی دستگاه موبایل به خوبی قابل استفاده نباشند",
+        "description-line-2": "برخی فرمان‌ها که می‌توانید برای مدیریت جدول روی دستگاه موبایل استفاده کنید:",
+        "show-or-hide-columns": "نمایش یا مخفی کردن ستون‌ها",
+        "adjust-row-spacing-density": "تنظیم فاصله سطرها",
+        "toggle-fullscreen-table-view": "تغییر نمایش تمام صفحه جدول",
+        "desktop-recommended": "پیشنهاد می‌شود از دسکتاپ استفاده کنید",
+        "or": "یا",
+        "rotate-device": "چرخاندن دستگاه",
+        "i-understand-continue-anyway": "می‌دانم، ادامه بده"
+    },
+    "internal-squad-header-action-buttons": {
+        "feature": {
+            "update": "به‌روزرسانی",
+            "create-internal-squad": "ایجاد اسکواد داخلی",
+            "create-a-new-internal-squad-by-entering-a-name-below": "برای ایجاد اسکواد جدید اسم آن را وارد کنید",
+            "it-cant-be-changed-later": "بعدا قابل تغییر نخواهد بود",
+            "squad-name": "نام اسکواد",
+            "enter-squad-name": "نام اسکواد را وارد کنید",
+            "cancel": "لغو",
+            "create": "ایجاد"
+        }
+    },
+    "config-profiles-header-action-buttons": {
+        "feature": {
+            "update": "به‌روزرسانی",
+            "create-config-profile": "ساخت پروفایل پیکربندی",
+            "create-a-new-config-profile-by-entering-a-name-below": "برای ایجاد پروفایل پیکربندی جدید اسم آن را وارد کنید",
+            "you-can-customize-xray-config-after-creation": "کانفیگ Xray را می‌توانید بعد از ایجاد شخصی‌سازی کنید",
+            "it-cant-be-changed-later": "بعدا قابل تغییر نخواهد بود",
+            "profile-name": "نام پروفایل",
+            "enter-profile-name": "نام پروفایل را وارد کنید",
+            "cancel": "لغو",
+            "create": "ایجاد"
+        }
     }
 }

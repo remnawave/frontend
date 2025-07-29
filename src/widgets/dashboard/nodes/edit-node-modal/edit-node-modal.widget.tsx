@@ -1,28 +1,28 @@
 import { UpdateNodeCommand } from '@remnawave/backend-contract'
 import { zodResolver } from 'mantine-form-zod-resolver'
-import { Group, Modal, Text } from '@mantine/core'
+import { em, Group, Modal, Text } from '@mantine/core'
 import { useTranslation } from 'react-i18next'
+import { useMediaQuery } from '@mantine/hooks'
 import { useEffect, useState } from 'react'
 import { useForm } from '@mantine/form'
 
+import {
+    configProfilesQueryKeys,
+    nodesQueryKeys,
+    useGetNode,
+    useGetPubKey,
+    useUpdateNode
+} from '@shared/api/hooks'
 import {
     useNodesStoreActions,
     useNodesStoreEditModalIsOpen,
     useNodesStoreEditModalNode
 } from '@entities/dashboard/nodes'
-import {
-    nodesQueryKeys,
-    useGetInbounds,
-    useGetNode,
-    useGetPubKey,
-    useUpdateNode
-} from '@shared/api/hooks'
 import { BaseNodeForm } from '@shared/ui/forms/nodes/base-node-form/base-node-form'
 import { bytesToGbUtil, gbToBytesUtil } from '@shared/utils/bytes'
 import { queryClient } from '@shared/api'
 
-import { NodeXrayVersionBadgeWidget } from '../node-xray-version-badge/node-xray-version-badge.widget'
-import { NodeStatusBadgeWidget } from '../node-status-badge/node-status-badge.widget'
+import { NodeDetailsCardWidget } from '../node-details-card/node-details-card.widget'
 
 export const EditNodeModalConnectorWidget = () => {
     const { t } = useTranslation()
@@ -30,6 +30,8 @@ export const EditNodeModalConnectorWidget = () => {
     const isModalOpen = useNodesStoreEditModalIsOpen()
     const actions = useNodesStoreActions()
     const node = useNodesStoreEditModalNode()
+
+    const isMobile = useMediaQuery(`(max-width: ${em(768)})`)
 
     const [advancedOpened, setAdvancedOpened] = useState(false)
 
@@ -40,7 +42,6 @@ export const EditNodeModalConnectorWidget = () => {
     })
 
     const { data: pubKey } = useGetPubKey()
-    const { data: inbounds } = useGetInbounds()
 
     const { data: fetchedNode } = useGetNode({
         route: {
@@ -60,12 +61,11 @@ export const EditNodeModalConnectorWidget = () => {
             queryKey: nodesQueryKeys.getNode({ uuid: node?.uuid ?? '' }).queryKey
         })
 
-        form.reset()
-        form.resetDirty()
-        form.resetTouched()
-
         setTimeout(() => {
             actions.clearEditModal()
+            form.reset()
+            form.resetDirty()
+            form.resetTouched()
             setAdvancedOpened(false)
         }, 300)
     }
@@ -73,6 +73,9 @@ export const EditNodeModalConnectorWidget = () => {
     const { mutate: updateNode, isPending: isUpdateNodePending } = useUpdateNode({
         mutationFns: {
             onSuccess: async () => {
+                queryClient.refetchQueries({
+                    queryKey: configProfilesQueryKeys.getConfigProfiles.queryKey
+                })
                 handleClose(true)
             }
         }
@@ -90,8 +93,15 @@ export const EditNodeModalConnectorWidget = () => {
                 trafficLimitBytes: bytesToGbUtil(node.trafficLimitBytes ?? undefined),
                 trafficResetDay: node.trafficResetDay ?? undefined,
                 notifyPercent: node.notifyPercent ?? undefined,
-                excludedInbounds: node.excludedInbounds.map((inbound) => inbound.uuid) ?? [],
-                consumptionMultiplier: node.consumptionMultiplier ?? undefined
+                consumptionMultiplier: node.consumptionMultiplier ?? undefined,
+
+                configProfile: {
+                    activeConfigProfileUuid: node.configProfile.activeConfigProfileUuid ?? '',
+                    activeInbounds:
+                        node.configProfile.activeInbounds.map((inbound) => inbound.uuid) ?? []
+                },
+
+                providerUuid: node.providerUuid ?? undefined
             })
         }
     }, [node])
@@ -107,7 +117,11 @@ export const EditNodeModalConnectorWidget = () => {
                 uuid: node.uuid,
                 name: values.name?.trim(),
                 address: values.address?.trim(),
-                trafficLimitBytes: gbToBytesUtil(values.trafficLimitBytes)
+                trafficLimitBytes: gbToBytesUtil(values.trafficLimitBytes),
+                configProfile: {
+                    activeConfigProfileUuid: values.configProfile?.activeConfigProfileUuid ?? '',
+                    activeInbounds: values.configProfile?.activeInbounds ?? []
+                }
             }
         })
     })
@@ -115,6 +129,7 @@ export const EditNodeModalConnectorWidget = () => {
     return (
         <Modal
             centered
+            fullScreen={isMobile}
             onClose={() => actions.toggleEditModal(false)}
             onExitTransitionEnd={() => handleClose}
             opened={isModalOpen}
@@ -122,12 +137,9 @@ export const EditNodeModalConnectorWidget = () => {
             title={
                 <Group gap="xl" justify="space-between">
                     <Text fw={500}>{t('edit-node-modal.widget.edit-node')}</Text>
-                    {node && <NodeStatusBadgeWidget fetchedNode={fetchedNode} node={node} />}
-                    {node?.isConnected && (
-                        <NodeXrayVersionBadgeWidget fetchedNode={fetchedNode} node={node} />
-                    )}
                 </Group>
             }
+            transitionProps={isMobile ? { transition: 'fade', duration: 200 } : undefined}
         >
             <BaseNodeForm
                 advancedOpened={advancedOpened}
@@ -135,9 +147,11 @@ export const EditNodeModalConnectorWidget = () => {
                 form={form}
                 handleClose={() => handleClose(true)}
                 handleSubmit={handleSubmit}
-                inbounds={inbounds}
                 isUpdateNodePending={isUpdateNodePending}
                 node={node}
+                nodeDetailsCard={
+                    node && <NodeDetailsCardWidget fetchedNode={fetchedNode} node={node} />
+                }
                 pubKey={pubKey}
                 setAdvancedOpened={setAdvancedOpened}
             />

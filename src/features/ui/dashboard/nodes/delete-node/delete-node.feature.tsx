@@ -1,6 +1,6 @@
-import { ActionIcon, Tooltip } from '@mantine/core'
-import { PiTrashDuotone } from 'react-icons/pi'
 import { useTranslation } from 'react-i18next'
+import { Loader, Menu } from '@mantine/core'
+import { TbTrash } from 'react-icons/tb'
 
 import { useDeleteNode } from '@shared/api/hooks'
 
@@ -26,10 +26,12 @@ export function DeleteNodeFeature(props: IProps) {
     }
 
     return (
-        <Tooltip label={t('delete-node.feature.delete-node')}>
-            <ActionIcon color="red" loading={isPending} onClick={handleDeleteNode} size="xl">
-                <PiTrashDuotone size="1.5rem" />
-            </ActionIcon>
-        </Tooltip>
+        <Menu.Item
+            color="red.5"
+            leftSection={isPending ? <Loader color="red" size={14} /> : <TbTrash size={14} />}
+            onClick={handleDeleteNode}
+        >
+            {t('delete-node.feature.delete-node')}
+        </Menu.Item>
     )
 }

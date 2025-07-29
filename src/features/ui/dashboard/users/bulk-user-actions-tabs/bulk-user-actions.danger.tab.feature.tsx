@@ -1,4 +1,4 @@
-import { Alert, Button, Group, Paper, Stack, Text } from '@mantine/core'
+import { Alert, Button, Group, Paper, px, Stack, Text } from '@mantine/core'
 import { PiTrash, PiWarning } from 'react-icons/pi'
 import { useTranslation } from 'react-i18next'
 import { modals } from '@mantine/modals'
@@ -55,7 +55,7 @@ export const BulkUserActionsDangerTabFeature = (props: IProps) => {
         <Stack gap="md">
             <Alert
                 color="red.6"
-                icon={<PiWarning size="1rem" />}
+                icon={<PiWarning size="16px" />}
                 title={t('bulk-user-actions.danger.tab.feature.danger-zone')}
             >
                 {t(
@@ -67,7 +67,7 @@ export const BulkUserActionsDangerTabFeature = (props: IProps) => {
                 <Stack>
                     <Group justify="apart">
                         <Group>
-                            <PiTrash color={'var(--mantine-color-red-6)'} size="1.2rem" />
+                            <PiTrash color={'var(--mantine-color-red-6)'} size={px('1.2rem')} />
                             <Text>{t('bulk-user-actions.danger.tab.feature.delete-users')}</Text>
                         </Group>
                         <Button

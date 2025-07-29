@@ -32,11 +32,11 @@ export const HeaderButtons = () => {
             <LanguagePicker />
 
             <ActionIcon color="gray" onClick={handleRefresh} size="xl">
-                <PiArrowsClockwise size="1.5rem" />
+                <PiArrowsClockwise size="24px" />
             </ActionIcon>
 
             <ActionIcon color="cyan" onClick={handleLogout} size="xl">
-                <PiSignOutDuotone size="1.5rem" />
+                <PiSignOutDuotone size="24px" />
             </ActionIcon>
         </Group>
     )

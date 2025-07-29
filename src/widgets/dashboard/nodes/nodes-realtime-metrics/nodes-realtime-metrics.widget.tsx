@@ -2,6 +2,7 @@ import { PiArrowDownDuotone, PiArrowUpDuotone, PiSpeedometer } from 'react-icons
 import { Box, Group, Loader, SimpleGrid } from '@mantine/core'
 import { useTranslation } from 'react-i18next'
 import { TbServer2 } from 'react-icons/tb'
+import { motion } from 'motion/react'
 
 import { prettyRealtimeBytesUtil } from '@shared/utils/bytes'
 import { useGetNodesRealtimeUsage } from '@shared/api/hooks'
@@ -54,27 +55,39 @@ export function NodesRealtimeUsageMetrics() {
     ]
     return (
         <SimpleGrid cols={{ base: 1, sm: 2, xl: 4 }}>
-            {cards.map((card) => (
-                <MetricCard.Root key={card.title}>
-                    <Group wrap="nowrap">
-                        <MetricCard.Icon c={card.color}>
-                            <card.icon size="2rem" />
-                        </MetricCard.Icon>
-                        <Box miw={0}>
-                            <MetricCard.TextMuted truncate>{card.title}</MetricCard.TextMuted>
-                            <MetricCard.TextEmphasis ff={'monospace'}>
-                                {isNodesRealtimeUsageLoading ? (
-                                    <Loader color={card.color} size="xs" />
-                                ) : (
-                                    card.value
-                                )}
-                            </MetricCard.TextEmphasis>
-                            <MetricCard.TextMuted truncate>
-                                {t('nodes-realtime-metrics.widget.current-hour')}
-                            </MetricCard.TextMuted>
-                        </Box>
-                    </Group>
-                </MetricCard.Root>
+            {cards.map((card, index) => (
+                <motion.div
+                    animate={{ opacity: 1, y: 0 }}
+                    initial={{ opacity: 0, y: 0 }}
+                    key={card.title}
+                    transition={{
+                        duration: 0.3,
+                        delay: index * 0.07,
+                        ease: 'easeIn'
+                    }}
+                    whileHover={{ y: -4 }}
+                >
+                    <MetricCard.Root key={card.title}>
+                        <Group wrap="nowrap">
+                            <MetricCard.Icon c={card.color}>
+                                <card.icon size="32px" />
+                            </MetricCard.Icon>
+                            <Box miw={0}>
+                                <MetricCard.TextMuted truncate>{card.title}</MetricCard.TextMuted>
+                                <MetricCard.TextEmphasis ff={'monospace'}>
+                                    {isNodesRealtimeUsageLoading ? (
+                                        <Loader color={card.color} size="xs" />
+                                    ) : (
+                                        card.value
+                                    )}
+                                </MetricCard.TextEmphasis>
+                                <MetricCard.TextMuted truncate>
+                                    {t('nodes-realtime-metrics.widget.current-hour')}
+                                </MetricCard.TextMuted>
+                            </Box>
+                        </Group>
+                    </MetricCard.Root>
+                </motion.div>
             ))}
         </SimpleGrid>
     )

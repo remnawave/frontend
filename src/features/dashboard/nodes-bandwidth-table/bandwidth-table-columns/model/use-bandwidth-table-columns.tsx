@@ -1,7 +1,6 @@
-/* eslint-disable camelcase */
+import { ListViewTableColumn } from '@gfazioli/mantine-list-view-table'
 import { GetAllNodesCommand } from '@remnawave/backend-contract'
-import { Group, Progress, Text } from '@mantine/core'
-import { MRT_ColumnDef } from 'mantine-react-table'
+import { Flex, Progress, Text } from '@mantine/core'
 import { useTranslation } from 'react-i18next'
 import { useMemo } from 'react'
 
@@ -11,36 +10,33 @@ import { prettyBytesUtil } from '@shared/utils/bytes'
 export const useBandwidthTableColumns = () => {
     const { t } = useTranslation()
 
-    return useMemo<MRT_ColumnDef<GetAllNodesCommand.Response['response'][0]>[]>(
+    const getProgressColor = (percentage: number) => {
+        if (percentage > 95) return 'red.6'
+        if (percentage > 80) return 'yellow.6'
+        return 'teal.6'
+    }
+
+    return useMemo<ListViewTableColumn<GetAllNodesCommand.Response['response'][number]>[]>(
         () => [
             {
-                accessorKey: 'name',
-                header: t('use-bandwidth-table-columns.node-name'),
-                mantineTableBodyCellProps: {
-                    align: 'left'
-                },
-                minSize: 150,
-                maxSize: 300,
-                size: 220
+                key: 'name',
+                sortable: true,
+                title: t('use-bandwidth-table-columns.node-name'),
+                renderCell: (node) => <Text ff="monospace">{node.name}</Text>
             },
             {
-                accessorKey: 'trafficResetDay',
-                header: t('use-bandwidth-table-columns.traffic-cycle'),
-                Cell: ({ cell }) => (
-                    <Text>{getNodeResetPeriodUtil(cell.row.original.trafficResetDay ?? 0)}</Text>
-                ),
-                mantineTableBodyCellProps: {
-                    align: 'left'
-                },
-                minSize: 150,
-                maxSize: 300,
-                size: 300
+                key: 'trafficResetDay',
+                sortable: true,
+                title: t('use-bandwidth-table-columns.traffic-cycle'),
+                renderCell: (node) => (
+                    <Text>{getNodeResetPeriodUtil(node.trafficResetDay ?? 0)}</Text>
+                )
             },
             {
-                accessorKey: 'trafficUsedBytes',
-                header: t('use-bandwidth-table-columns.traffic'),
-                Cell: ({ cell }) => {
-                    const node = cell.row.original
+                key: 'trafficUsedBytes',
+                title: t('use-bandwidth-table-columns.traffic'),
+                sortable: true,
+                renderCell: (node) => {
                     let percentage = 0
 
                     if (node.trafficLimitBytes === 0) {
@@ -52,44 +48,31 @@ export const useBandwidthTableColumns = () => {
                     }
 
                     return (
-                        <>
-                            <Group gap="xs">
-                                <Progress
-                                    color={percentage > 95 ? 'red.9' : 'teal.9'}
-                                    radius="md"
-                                    size="25"
-                                    striped
-                                    value={percentage}
-                                    w={'10ch'}
-                                />
-                                <Text ff="monospace">
-                                    {prettyBytesUtil(node.trafficUsedBytes || 0) || '0 GB'}
-                                </Text>
-                            </Group>
-                        </>
+                        <Flex direction="column" gap={4}>
+                            <Text c="dimmed" ff="monospace" fw={600} size="md">
+                                {prettyBytesUtil(node.trafficUsedBytes || 0) || '0 GB'}
+                            </Text>
+                            <Progress
+                                color={getProgressColor(percentage)}
+                                radius="sm"
+                                size="md"
+                                value={percentage}
+                            />
+                        </Flex>
                     )
                 },
-                mantineTableBodyCellProps: {
-                    align: 'left'
-                },
-                minSize: 150,
-                maxSize: 300,
-                size: 300
+                textAlign: 'left'
             },
             {
-                accessorKey: 'trafficLimitBytes',
-                header: t('use-bandwidth-table-columns.traffic-limit'),
-                Cell: ({ cell }) => (
+                key: 'trafficLimitBytes',
+                title: t('use-bandwidth-table-columns.traffic-limit'),
+                sortable: true,
+                renderCell: (node) => (
                     <Text ff="monospace">
-                        {prettyBytesUtil(cell.row.original.trafficLimitBytes || 0) || '0 GB'}
+                        {prettyBytesUtil(node.trafficLimitBytes || 0) || '0 GB'}
                     </Text>
                 ),
-                mantineTableBodyCellProps: {
-                    align: 'left'
-                },
-                minSize: 150,
-                maxSize: 300,
-                size: 300
+                textAlign: 'left'
             }
         ],
         []

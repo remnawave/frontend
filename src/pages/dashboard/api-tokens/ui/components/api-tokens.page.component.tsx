@@ -20,7 +20,7 @@ export default function ApiTokensPageComponent(props: IProps) {
             <PageHeader
                 breadcrumbs={[
                     { label: t('constants.dashboard'), href: ROUTES.DASHBOARD.HOME },
-                    { label: t('constants.management') },
+
                     {
                         label: t('constants.api-tokens'),
                         href: ROUTES.DASHBOARD.MANAGEMENT.API_TOKENS

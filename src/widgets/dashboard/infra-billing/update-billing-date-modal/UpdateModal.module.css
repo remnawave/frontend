@@ -1,0 +1,12 @@
+.day[data-selected] {
+    background-color: transparent;
+    color: var(--mantine-primary-color-contrast);
+    border: 2px solid var(--mantine-primary-color-filled);
+}
+
+.day[data-today]:not([data-selected]) {
+    background-color: transparent;
+    color: var(--mantine-primary-color-contrast);
+    border: 2px solid var(--mantine-color-red-9);
+    border-radius: 50%;
+}

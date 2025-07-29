@@ -1,7 +1,31 @@
-import { PiAnchorSimpleDuotone, PiArrowsClockwise, PiExcludeSquare, PiPlus } from 'react-icons/pi'
+import {
+    TbBaselineDensityLarge,
+    TbBaselineDensityMedium,
+    TbBaselineDensitySmall,
+    TbColumns,
+    TbFilter,
+    TbFilterOff,
+    TbMaximize,
+    TbMinimize,
+    TbPlus,
+    TbQuestionMark,
+    TbRefresh,
+    TbRestore,
+    TbSettings
+} from 'react-icons/tb'
+import {
+    ActionIcon,
+    ActionIconGroup,
+    Drawer,
+    Flex,
+    Group,
+    Stack,
+    Table,
+    Text,
+    Tooltip
+} from '@mantine/core'
 import { useTranslation } from 'react-i18next'
 import { useDisclosure } from '@mantine/hooks'
-import { Button, Group } from '@mantine/core'
 
 import { BulkAllUserActionsDrawerWidget } from '@widgets/dashboard/users/bulk-all-user-actions-drawer/bulk-all-user-actions-drawer.widget'
 import { useUserCreationModalStoreActions } from '@entities/dashboard/user-creation-modal-store'
@@ -11,6 +35,8 @@ import { IProps } from './interfaces'
 
 export const UserActionGroupFeature = (props: IProps) => {
     const { t } = useTranslation()
+
+    const [isHelpDrawerOpen, helpDrawerHandlers] = useDisclosure(false)
 
     const { isLoading, refetch, table } = props
     const actions = useUsersTableStoreActions()
@@ -58,60 +84,173 @@ export const UserActionGroupFeature = (props: IProps) => {
     }
 
     return (
-        <Group grow preventGrowOverflow={false} wrap="wrap">
-            <Button
-                leftSection={<PiArrowsClockwise size="1rem" />}
-                loading={isLoading}
-                onClick={handleRefetch}
-                size="xs"
-                variant="default"
+        <>
+            <Flex
+                align="center"
+                gap={{ base: 0, sm: 'xs' }}
+                justify={{ base: 'space-between', sm: 'flex-end' }}
+                w={{ base: '100%', sm: 'auto' }}
             >
-                {t('action-group.feature.update')}
-            </Button>
-            <Button
-                color="gray"
-                leftSection={<PiExcludeSquare size="1rem" />}
-                loading={isLoading}
-                onClick={handleClearFilters}
-                size="xs"
-                variant="outline"
-            >
-                {t('action-group.feature.clear-filters')}
-            </Button>
+                <ActionIconGroup>
+                    <Tooltip label={t('action-group.feature.help')} withArrow>
+                        <ActionIcon
+                            color="lime"
+                            onClick={helpDrawerHandlers.open}
+                            radius="md"
+                            size="lg"
+                            variant="light"
+                        >
+                            <TbQuestionMark size="18px" />
+                        </ActionIcon>
+                    </Tooltip>
+                </ActionIconGroup>
 
-            <Button
-                leftSection={<PiArrowsClockwise size="1rem" />}
-                loading={isLoading}
-                onClick={handleResetTable}
-                size="xs"
-                variant="outline"
-            >
-                {t('action-group.feature.reset-table')}
-            </Button>
+                <ActionIconGroup>
+                    <Tooltip label={t('action-group.feature.update')} withArrow>
+                        <ActionIcon
+                            loading={isLoading}
+                            onClick={handleRefetch}
+                            radius="md"
+                            size="lg"
+                            variant="light"
+                        >
+                            <TbRefresh size="18px" />
+                        </ActionIcon>
+                    </Tooltip>
 
-            <Button
-                color="red"
-                leftSection={<PiAnchorSimpleDuotone size="1rem" />}
-                loading={isLoading}
-                onClick={bulkAllDrawerHandlers.open}
-                size="xs"
-                variant="outline"
-            >
-                {t('action-group.feature.bulk-actions')}
-            </Button>
+                    <Tooltip label={t('action-group.feature.clear-filters')} withArrow>
+                        <ActionIcon
+                            color="orange"
+                            loading={isLoading}
+                            onClick={handleClearFilters}
+                            radius="md"
+                            size="lg"
+                            variant="light"
+                        >
+                            <TbFilterOff size="18px" />
+                        </ActionIcon>
+                    </Tooltip>
 
-            <Button
-                leftSection={<PiPlus size="1rem" />}
-                onClick={handleOpenCreateUserModal}
-                size="xs"
-                variant="default"
+                    <Tooltip label={t('action-group.feature.reset-table')} withArrow>
+                        <ActionIcon
+                            color="gray"
+                            loading={isLoading}
+                            onClick={handleResetTable}
+                            radius="md"
+                            size="lg"
+                            variant="light"
+                        >
+                            <TbRestore size="18px" />
+                        </ActionIcon>
+                    </Tooltip>
+                </ActionIconGroup>
+
+                <ActionIconGroup>
+                    <Tooltip label={t('action-group.feature.bulk-actions')} withArrow>
+                        <ActionIcon
+                            color="red"
+                            loading={isLoading}
+                            onClick={bulkAllDrawerHandlers.open}
+                            radius="md"
+                            size="lg"
+                            variant="light"
+                        >
+                            <TbSettings size="18px" />
+                        </ActionIcon>
+                    </Tooltip>
+
+                    <Tooltip label={t('action-group.feature.new-user')} withArrow>
+                        <ActionIcon
+                            color="teal"
+                            onClick={handleOpenCreateUserModal}
+                            radius="md"
+                            size="lg"
+                            variant="light"
+                        >
+                            <TbPlus size="18px" />
+                        </ActionIcon>
+                    </Tooltip>
+                </ActionIconGroup>
+
+                <BulkAllUserActionsDrawerWidget
+                    handlers={bulkAllDrawerHandlers}
+                    isDrawerOpen={isBulkAllUserActionsDrawerOpen}
+                />
+            </Flex>
+
+            <Drawer
+                keepMounted={false}
+                onClose={helpDrawerHandlers.close}
+                opened={isHelpDrawerOpen}
+                overlayProps={{ backgroundOpacity: 0.6, blur: 0 }}
+                padding="lg"
+                position="left"
+                size="500px"
+                title={t('action-group.feature.table-controls-help')}
             >
-                {t('action-group.feature.new-user')}
-            </Button>
-            <BulkAllUserActionsDrawerWidget
-                handlers={bulkAllDrawerHandlers}
-                isDrawerOpen={isBulkAllUserActionsDrawerOpen}
-            />
-        </Group>
+                <Stack gap="md">
+                    <Text c="dimmed" size="sm">
+                        {t('action-group.feature.table-controler-description-line-1')}
+                    </Text>
+
+                    <Table>
+                        <Table.Thead>
+                            <Table.Tr>
+                                <Table.Th>
+                                    {t('action-group.feature.table-controler-description-line-2')}
+                                </Table.Th>
+                                <Table.Th>
+                                    {t('action-group.feature.table-controler-description-line-3')}
+                                </Table.Th>
+                            </Table.Tr>
+                        </Table.Thead>
+                        <Table.Tbody>
+                            <Table.Tr>
+                                <Table.Td>
+                                    <Group gap="xs">
+                                        <TbFilter size="24px" />
+                                        <TbFilterOff size="24px" />
+                                    </Group>
+                                </Table.Td>
+                                <Table.Td>
+                                    {t('action-group.feature.table-controler-description-line-4')}
+                                </Table.Td>
+                            </Table.Tr>
+                            <Table.Tr>
+                                <Table.Td>
+                                    <TbColumns size="24px" />
+                                </Table.Td>
+                                <Table.Td>
+                                    {t('action-group.feature.show-or-hide-specific-columns')}
+                                </Table.Td>
+                            </Table.Tr>
+                            <Table.Tr>
+                                <Table.Td>
+                                    <Group gap="xs">
+                                        <TbBaselineDensitySmall size="24px" />
+                                        <TbBaselineDensityMedium size="24px" />
+                                        <TbBaselineDensityLarge size="24px" />
+                                    </Group>
+                                </Table.Td>
+                                <Table.Td>
+                                    {t('action-group.feature.adjust-row-spacing-density')}
+                                </Table.Td>
+                            </Table.Tr>
+                            <Table.Tr>
+                                <Table.Td>
+                                    <Group gap="xs">
+                                        <TbMaximize size="24px" />
+                                        <TbMinimize size="24px" />
+                                    </Group>
+                                </Table.Td>
+                                <Table.Td>
+                                    {t('action-group.feature.toggle-fullscreen-table-view')}
+                                </Table.Td>
+                            </Table.Tr>
+                        </Table.Tbody>
+                    </Table>
+                </Stack>
+            </Drawer>
+        </>
     )
 }

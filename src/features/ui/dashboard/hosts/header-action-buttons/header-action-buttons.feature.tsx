@@ -1,20 +1,15 @@
-import { PiArrowsClockwise, PiBookmarks, PiPlus } from 'react-icons/pi'
-import { Button, Group, Select } from '@mantine/core'
+import { ActionIcon, ActionIconGroup, Group, Tooltip } from '@mantine/core'
+import { TbPlus, TbRefresh } from 'react-icons/tb'
 import { useTranslation } from 'react-i18next'
 
-import { useHostsStoreActions, useHostsStoreSelectedInboundTag } from '@entities/dashboard'
+import { useHostsStoreActions } from '@entities/dashboard'
 import { QueryKeys, useGetHosts } from '@shared/api/hooks'
 import { queryClient } from '@shared/api'
 
-import { IProps } from './interfaces'
-
-export const HeaderActionButtonsFeature = (props: IProps) => {
+export const HeaderActionButtonsFeature = () => {
     const { t } = useTranslation()
 
-    const { inbounds } = props
-
     const actions = useHostsStoreActions()
-    const selectedInboundTag = useHostsStoreSelectedInboundTag()
 
     const { isFetching } = useGetHosts()
 
@@ -30,40 +25,33 @@ export const HeaderActionButtonsFeature = (props: IProps) => {
 
     return (
         <Group grow preventGrowOverflow={false} wrap="wrap">
-            <Select
-                data={[
-                    { value: 'ALL', label: t('header-action-buttons.feature.all') },
-                    ...inbounds.map((inbound) => ({
-                        value: inbound.tag,
-                        label: inbound.tag
-                    }))
-                ]}
-                defaultValue="ALL"
-                leftSection={<PiBookmarks size="1rem" />}
-                leftSectionPointerEvents="none"
-                onChange={(value) => actions.setSelectedInboundTag(value || 'ALL')}
-                radius="lg"
-                size="xs"
-                value={selectedInboundTag}
-            />
-            <Button
-                leftSection={<PiArrowsClockwise size="1rem" />}
-                loading={isFetching}
-                onClick={handleUpdate}
-                size="xs"
-                variant="default"
-            >
-                {t('header-action-buttons.feature.update')}
-            </Button>
+            <ActionIconGroup>
+                <Tooltip label={t('header-action-buttons.feature.update')} withArrow>
+                    <ActionIcon
+                        loading={isFetching}
+                        onClick={handleUpdate}
+                        radius="md"
+                        size="lg"
+                        variant="light"
+                    >
+                        <TbRefresh size="18px" />
+                    </ActionIcon>
+                </Tooltip>
+            </ActionIconGroup>
 
-            <Button
-                leftSection={<PiPlus size="1rem" />}
-                onClick={handleCreate}
-                size="xs"
-                variant="default"
-            >
-                {t('header-action-buttons.feature.create-new-host')}
-            </Button>
+            <ActionIconGroup>
+                <Tooltip label={t('header-action-buttons.feature.create-new-host')} withArrow>
+                    <ActionIcon
+                        color="teal"
+                        onClick={handleCreate}
+                        radius="md"
+                        size="lg"
+                        variant="light"
+                    >
+                        <TbPlus size="18px" />
+                    </ActionIcon>
+                </Tooltip>
+            </ActionIconGroup>
         </Group>
     )
 }

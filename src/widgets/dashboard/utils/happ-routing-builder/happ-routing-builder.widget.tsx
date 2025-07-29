@@ -20,6 +20,7 @@ import {
     Group,
     JsonInput,
     Paper,
+    px,
     Select,
     Text,
     Textarea,
@@ -316,7 +317,7 @@ export const HappRoutingBuilderWidget = () => {
                                 value={base64Input}
                             />
                             <Button
-                                leftSection={<PiArrowClockwise size="1rem" />}
+                                leftSection={<PiArrowClockwise size="16px" />}
                                 onClick={decodeBase64Input}
                             >
                                 {t('happ-routing-builder.widget.decode')}
@@ -333,7 +334,7 @@ export const HappRoutingBuilderWidget = () => {
                                 <Button
                                     color={copied ? 'teal' : 'blue'}
                                     leftSection={
-                                        copied ? <PiCheck size="1rem" /> : <PiCopy size="1rem" />
+                                        copied ? <PiCheck size="16px" /> : <PiCopy size="16px" />
                                     }
                                     onClick={copy}
                                     size="sm"
@@ -344,7 +345,7 @@ export const HappRoutingBuilderWidget = () => {
                             )}
                         </CopyButton>
                         <Button
-                            leftSection={<PiQrCodeDuotone size="1rem" />}
+                            leftSection={<PiQrCodeDuotone size="16px" />}
                             onClick={() => {
                                 const happLinkQrCode = renderSVG(generateHappLink(), {
                                     whiteColor: '#161B22',
@@ -400,7 +401,7 @@ export const HappRoutingBuilderWidget = () => {
                             </Text>
                             <Accordion defaultValue="basic" variant="separated">
                                 <Accordion.Item value="basic">
-                                    <Accordion.Control icon={<PiGear size="1.2rem" />}>
+                                    <Accordion.Control icon={<PiGear size={px('1.2rem')} />}>
                                         <Text fw={700}>
                                             {t('happ-routing-builder.widget.basic-configuration')}
                                         </Text>
@@ -516,7 +517,7 @@ export const HappRoutingBuilderWidget = () => {
                                 </Accordion.Item>
 
                                 <Accordion.Item value="remoteDns">
-                                    <Accordion.Control icon={<PiGlobeStand size="1.2rem" />}>
+                                    <Accordion.Control icon={<PiGlobeStand size={px('1.2rem')} />}>
                                         <Text fw={700}>
                                             {t('happ-routing-builder.widget.remote-dns-settings')}
                                         </Text>
@@ -588,7 +589,7 @@ export const HappRoutingBuilderWidget = () => {
                                 </Accordion.Item>
 
                                 <Accordion.Item value="domesticDns">
-                                    <Accordion.Control icon={<PiGlobe size="1.2rem" />}>
+                                    <Accordion.Control icon={<PiGlobe size={px('1.2rem')} />}>
                                         <Text fw={700}>
                                             {t('happ-routing-builder.widget.domestic-dns-settings')}
                                         </Text>
@@ -660,7 +661,7 @@ export const HappRoutingBuilderWidget = () => {
                                 </Accordion.Item>
 
                                 <Accordion.Item value="geoSettings">
-                                    <Accordion.Control icon={<PiGlobeStand size="1.2rem" />}>
+                                    <Accordion.Control icon={<PiGlobeStand size={px('1.2rem')} />}>
                                         <Text fw={700}>Geo Settings</Text>
                                     </Accordion.Control>
                                     <Accordion.Panel>
@@ -753,7 +754,7 @@ export const HappRoutingBuilderWidget = () => {
                                 </Accordion.Item>
 
                                 <Accordion.Item value="dnsHosts">
-                                    <Accordion.Control icon={<PiShieldStar size="1.2rem" />}>
+                                    <Accordion.Control icon={<PiShieldStar size={px('1.2rem')} />}>
                                         <Text fw={700}>
                                             {t('happ-routing-builder.widget.dns-hosts-0')}
                                         </Text>
@@ -776,7 +777,7 @@ export const HappRoutingBuilderWidget = () => {
                                 </Accordion.Item>
 
                                 <Accordion.Item value="directRouting">
-                                    <Accordion.Control icon={<PiSignOut size="1.2rem" />}>
+                                    <Accordion.Control icon={<PiSignOut size={px('1.2rem')} />}>
                                         <Text fw={700}>
                                             {t('happ-routing-builder.widget.direct-routing')}
                                         </Text>
@@ -828,7 +829,7 @@ export const HappRoutingBuilderWidget = () => {
                                 </Accordion.Item>
 
                                 <Accordion.Item value="proxyRouting">
-                                    <Accordion.Control icon={<PiShieldCheck size="1.2rem" />}>
+                                    <Accordion.Control icon={<PiShieldCheck size={px('1.2rem')} />}>
                                         <Text fw={700}>
                                             {t('happ-routing-builder.widget.proxy-routing')}
                                         </Text>
@@ -877,7 +878,7 @@ export const HappRoutingBuilderWidget = () => {
                                 </Accordion.Item>
 
                                 <Accordion.Item value="blockRouting">
-                                    <Accordion.Control icon={<PiProhibit size="1.2rem" />}>
+                                    <Accordion.Control icon={<PiProhibit size={px('1.2rem')} />}>
                                         <Text fw={700}>
                                             {t('happ-routing-builder.widget.block-routing')}
                                         </Text>

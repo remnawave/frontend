@@ -516,7 +516,7 @@ export const NodeUsersUsageDrawer = (props: IProps) => {
                         }}
                     >
                         <Stack align="center" gap={8}>
-                            <PiEmpty size="1.5rem" />
+                            <PiEmpty size="24px" />
                             <Text c="dimmed" size="sm">
                                 {t('node-users-usage-drawer.widget.no-data-available')}
                             </Text>
@@ -728,7 +728,7 @@ export const NodeUsersUsageDrawer = (props: IProps) => {
                             {!isLoading && !topUsersWithUsage.length && (
                                 <Center>
                                     <Stack align="center" gap={5}>
-                                        <PiEmpty size="1.5rem" />
+                                        <PiEmpty size="24px" />
                                         <Text c="dimmed" size="sm">
                                             {t('node-users-usage-drawer.widget.no-data-available')}
                                         </Text>

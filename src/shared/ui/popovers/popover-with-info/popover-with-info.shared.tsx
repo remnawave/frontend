@@ -15,7 +15,7 @@ export const PopoverWithInfoShared = (props: IProps) => {
                         alignItems: 'center'
                     }}
                 >
-                    <PiInfo size="1.25rem" />
+                    <PiInfo size="20px" />
                 </span>
             </Popover.Target>
             <Popover.Dropdown>

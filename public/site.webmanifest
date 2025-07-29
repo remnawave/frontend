@@ -1,0 +1,58 @@
+{
+    "name": "Remnawave",
+    "short_name": "Remnawave",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#161B23",
+    "lang": "en",
+    "id": "/",
+    "orientation": "any",
+    "scope": "/",
+    "description": "Remnawave Dashboard",
+    "theme_color": "#161B23",
+    "icons": [
+        {
+            "src": "/favicons/icon_64x64.png",
+            "sizes": "64x64",
+            "type": "image/png"
+        },
+        {
+            "src": "/favicons/icon_192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/favicons/icon_512x512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        },
+        {
+            "src": "/favicons/icon_512x512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/favicons/icon_512x512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "maskable"
+        }
+    ],
+    "screenshots": [
+        {
+            "src": "/favicons/preview_web.jpg",
+            "sizes": "1512x850",
+            "type": "image/jpeg",
+            "form_factor": "wide",
+            "label": "Remnawave Dashboard Overview"
+        },
+        {
+            "src": "/favicons/preview_mobile.jpg",
+            "sizes": "645x1398",
+            "type": "image/jpeg",
+            "form_factor": "narrow",
+            "label": "Remnawave Dashboard Overview"
+        }
+    ]
+}

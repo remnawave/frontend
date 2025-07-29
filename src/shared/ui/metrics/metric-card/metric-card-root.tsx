@@ -1,7 +1,9 @@
 import { Card, CardProps, ElementProps } from '@mantine/core'
 
+import classes from './MetricCard.module.css'
+
 type MetricCardRootProps = CardProps & ElementProps<'div', keyof CardProps>
 
-export function MetricCardRoot({ ...props }: MetricCardRootProps) {
-    return <Card p="md" radius="md" shadow="sm" withBorder {...props} />
+export function MetricCardRoot({ className, ...props }: MetricCardRootProps) {
+    return <Card className={`${classes.root} ${className || ''}`} withBorder {...props} />
 }

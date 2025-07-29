@@ -9,13 +9,18 @@ import { SUBSCRIPTION_TEMPLATE_TYPE } from '@remnawave/backend-contract'
 
 import { SubscriptionPageBuilderConnector } from '@pages/dashboard/utils/subscription-page-builder/ui/connectors/subscription-page-builder.page.connector'
 import { HappRoutingBuilderPageConnector } from '@pages/dashboard/utils/happ-routing-builder/ui/connectors/happ-routing-builder.page.connector'
+import { ConfigProfileByUuidPageConnector } from '@pages/dashboard/config-profiles/connectors/config-profile-by-uuid.page.connector'
+import { InternalSquadsPageConnector } from '@pages/dashboard/internal-squads/connectors/internal-squads.page.connector'
+import { InfraBillingPageConnector } from '@pages/dashboard/crm/infra-billing/connectors/infra-billing.page.connector'
 import { TemplateBasePageConnector } from '@pages/dashboard/templates/ui/connectors/template-base-page.connector'
 import { NodesBandwidthTablePageConnector } from '@pages/dashboard/nodes-bandwidth-table/ui/connectors'
 import { SubscriptionSettingsConnector } from '@pages/dashboard/subscription-settings/connectors'
+import { ConfigProfilesPageConnector } from '@pages/dashboard/config-profiles/connectors'
+import { NodesMetricsPageConnector } from '@pages/dashboard/nodes-metrics/ui/connectors'
 import { StatisticNodesConnector } from '@pages/dashboard/statistic-nodes/connectors'
+import { Oauth2CallbackPage } from '@pages/auth/oauth2-callback/oauth2-callback.page'
 import { ApiTokensPageConnector } from '@pages/dashboard/api-tokens/ui/connectors'
-import { InboundsPageConnector } from '@pages/dashboard/inbounds/ui/connectors'
-import { ConfigPageConnector } from '@pages/dashboard/config/ui/connectors'
+import { ProxyDefensePageConnector } from '@pages/dashboard/proxy-defense'
 import { HostsPageConnector } from '@pages/dashboard/hosts/ui/connectors'
 import { UsersPageConnector } from '@pages/dashboard/users/ui/connectors'
 import { NodesPageConnector } from '@pages/dashboard/nodes/ui/connectors'
@@ -33,6 +38,9 @@ import { AuthLayout } from '../layouts/auth'
 const router = createBrowserRouter(
     createRoutesFromElements(
         <Route element={<ErrorBoundaryHoc fallback={<ErrorPageComponent />} />}>
+            <Route element={<AuthLayout />} path={ROUTES.OAUTH2.ROOT}>
+                <Route element={<Oauth2CallbackPage />} path={ROUTES.OAUTH2.ROOT} />
+            </Route>
             <Route element={<AuthGuard />}>
                 <Route element={<Navigate replace to={ROUTES.DASHBOARD.ROOT} />} path="/" />
                 <Route element={<AuthLayout />} path={ROUTES.AUTH.ROOT}>
@@ -54,10 +62,6 @@ const router = createBrowserRouter(
                             path={ROUTES.DASHBOARD.MANAGEMENT.USERS}
                         />
                         <Route
-                            element={<InboundsPageConnector />}
-                            path={ROUTES.DASHBOARD.MANAGEMENT.INBOUNDS}
-                        />
-                        <Route
                             element={<HostsPageConnector />}
                             path={ROUTES.DASHBOARD.MANAGEMENT.HOSTS}
                         />
@@ -74,16 +78,28 @@ const router = createBrowserRouter(
                             path={ROUTES.DASHBOARD.MANAGEMENT.NODES_STATS}
                         />
                         <Route
-                            element={<ConfigPageConnector />}
-                            path={ROUTES.DASHBOARD.MANAGEMENT.CONFIG}
-                        />
-                        <Route
                             element={<ApiTokensPageConnector />}
                             path={ROUTES.DASHBOARD.MANAGEMENT.API_TOKENS}
                         />
                         <Route
                             element={<SubscriptionSettingsConnector />}
                             path={ROUTES.DASHBOARD.MANAGEMENT.SUBSCRIPTION_SETTINGS}
+                        />
+                        <Route
+                            element={<ConfigProfilesPageConnector />}
+                            path={ROUTES.DASHBOARD.MANAGEMENT.CONFIG_PROFILES}
+                        />
+                        <Route
+                            element={<ConfigProfileByUuidPageConnector />}
+                            path={ROUTES.DASHBOARD.MANAGEMENT.CONFIG_PROFILE_BY_UUID}
+                        />
+                        <Route
+                            element={<InternalSquadsPageConnector />}
+                            path={ROUTES.DASHBOARD.MANAGEMENT.INTERNAL_SQUADS}
+                        />
+                        <Route
+                            element={<NodesMetricsPageConnector />}
+                            path={ROUTES.DASHBOARD.MANAGEMENT.NODES_METRICS}
                         />
                     </Route>
 
@@ -150,6 +166,13 @@ const router = createBrowserRouter(
                         />
                     </Route>
 
+                    <Route path={ROUTES.DASHBOARD.CRM.ROOT}>
+                        <Route
+                            element={<InfraBillingPageConnector />}
+                            path={ROUTES.DASHBOARD.CRM.INFRA_BILLING}
+                        />
+                    </Route>
+
                     <Route path={ROUTES.DASHBOARD.UTILS.ROOT}>
                         <Route
                             element={
@@ -169,6 +192,12 @@ const router = createBrowserRouter(
                             path={ROUTES.DASHBOARD.UTILS.SUBSCRIPTION_PAGE_BUILDER}
                         />
                     </Route>
+
+                    {/* Easter Egg Routes */}
+                    <Route
+                        element={<ProxyDefensePageConnector />}
+                        path={ROUTES.DASHBOARD.EASTER_EGG.PROXY_DEFENSE}
+                    />
                 </Route>
 
                 <Route element={<NotFoundPageComponent />} path="*" />

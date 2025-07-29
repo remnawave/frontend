@@ -8,7 +8,7 @@ export const MetricWithIcon = (props: MetricWithIconProps) => (
     <MetricCard.Root key={props.title}>
         <Group wrap="nowrap">
             <MetricCard.Icon c={props.color} p="sm">
-                <props.icon size="1.8rem" />
+                <props.icon size="32px" />
             </MetricCard.Icon>
             <Stack align="self-start" gap="xs" miw={0} w="100%">
                 <MetricCard.TextMuted truncate>{props.title}</MetricCard.TextMuted>
