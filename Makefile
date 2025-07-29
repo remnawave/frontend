@@ -1,4 +1,4 @@
-.PHONY: download-monaco-deps clean
+.PHONY: download-monaco-deps clean bump-patch bump-minor bump-major update-deps
 
 MONACO_FILES = \
 	public/wasm_exec.js \
@@ -23,3 +23,15 @@ public/main.wasm:
 
 clean:
 	rm -f $(MONACO_FILES)
+
+bump-patch:
+	npm version patch
+	npm install
+
+bump-minor:
+	npm version minor
+	npm install
+
+bump-major:
+	npm version major
+	npm install
