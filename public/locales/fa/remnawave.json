@@ -308,7 +308,14 @@
             "edit-user-headline": "ویرایش کاربر",
             "subscription-url-description-line-1": "دامنه و مسیر استخراج شده از فایل .env:",
             "subscription-url-description-line-2": "برای تغییر این مقدار لطفا فایل .env را ویرایش کرده و سپس Remnawave را با این کامند ریستارت کنید:",
-            "view-accessible-nodes": "مشاهده نودهای در دسترس"
+            "view-accessible-nodes": "مشاهده نودهای در دسترس",
+            "fetching-user-data": "Fetching user data...",
+            "more-actions": "More Actions",
+            "management": "Management",
+            "danger-zone": "Danger Zone",
+            "information": "Information",
+            "detailed-info": "Detailed Info",
+            "subscription": "Subscription"
         }
     },
     "base-api-token-form": {

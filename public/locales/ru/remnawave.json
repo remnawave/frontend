@@ -308,7 +308,14 @@
             "edit-user-headline": "Редактирование",
             "subscription-url-description-line-1": "Домен и путь получены из .env переменной:",
             "subscription-url-description-line-2": "Если вы хотите изменить его, пожалуйста, измените его в .env файле и перезапустите Remnawave командой:",
-            "view-accessible-nodes": "Доступные ноды"
+            "view-accessible-nodes": "Доступные ноды",
+            "fetching-user-data": "Получение данных пользователя...",
+            "more-actions": "Действия",
+            "management": "Менеджмент",
+            "danger-zone": "Опасная зона",
+            "information": "Информация",
+            "detailed-info": "Подробная информация",
+            "subscription": "Подписка"
         }
     },
     "base-api-token-form": {
