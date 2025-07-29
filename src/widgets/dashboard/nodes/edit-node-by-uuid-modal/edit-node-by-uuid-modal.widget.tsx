@@ -44,12 +44,14 @@ export const EditNodeByUuidModalWidget = () => {
 
     const { data: pubKey } = useGetPubKey()
 
+    const isQueryEnabled = isOpen && !form.isTouched()
+
     const { data: fetchedNode, isLoading } = useGetNode({
         route: {
             uuid: nodeUuid?.nodeUuid ?? ''
         },
         rQueryParams: {
-            enabled: isOpen
+            enabled: isQueryEnabled
         }
     })
 

@@ -1058,7 +1058,7 @@
             "remove-users-from-internal-squad-confirmation": "Вы уверены, что хотите удалить пользователей из внутреннего сквада {{internalSquadName}}?",
             "remove": "Удалить",
             "add-users-to-internal-squad": "Добавить пользователей во Внутренний Сквад",
-            "add-users-to-internal-squad-confirmation": "Вы уверены, что хотите удалить пользователей из внутреннего сквада {{internalSquadName}}?",
+            "add-users-to-internal-squad-confirmation": "Вы уверены, что хотите добавить пользователей во внутренних сквад {{internalSquadName}}?",
             "add": "Добавить",
             "no-internal-squads": "Внутренних сквадов не найдено",
             "create-your-first-internal-squad-to-get-started": "Создайте свой первый внутренний сквад",

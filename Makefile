@@ -1,4 +1,4 @@
-.PHONY: download-monaco-deps clean
+.PHONY: download-monaco-deps clean bump-patch bump-minor bump-major tag-release
 
 MONACO_FILES = \
 	public/wasm_exec.js \
@@ -23,3 +23,22 @@ public/main.wasm:
 
 clean:
 	rm -f $(MONACO_FILES)
+
+bump-patch:
+	npm version patch --no-git-tag-version
+	npm install
+
+bump-minor:
+	npm version minor --no-git-tag-version
+	npm install
+
+bump-major:
+	npm version major --no-git-tag-version
+	npm install
+
+tag-release:
+	@VERSION=$$(node -p "require('./package.json').version") && \
+	echo "Creating signed tag for version $$VERSION..." && \
+	git tag -s "$$VERSION" -m "Release $$VERSION" && \
+	git push origin --follow-tags && \
+	echo "Signed tag $$VERSION created and pushed"
