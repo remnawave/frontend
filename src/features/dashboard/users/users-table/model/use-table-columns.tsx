@@ -1,8 +1,8 @@
 /* eslint-disable camelcase */
-import { GetAllUsersCommand } from '@remnawave/backend-contract'
+import { GetAllUsersCommand, GetInternalSquadsCommand } from '@remnawave/backend-contract'
+import { Badge, Group, Stack, Text, Tooltip } from '@mantine/core'
 import { MRT_ColumnDef } from 'mantine-react-table'
 import { useTranslation } from 'react-i18next'
-import { Badge } from '@mantine/core'
 import { useMemo } from 'react'
 import dayjs from 'dayjs'
 
@@ -11,8 +11,11 @@ import { UsernameColumnEntity } from '@entities/dashboard/users/ui/table-columns
 import { StatusColumnEntity } from '@entities/dashboard/users/ui/table-columns/status'
 import { DataUsageColumnEntity } from '@entities/dashboard/users/ui'
 import { prettyBytesToAnyUtil } from '@shared/utils/bytes'
+import { formatInt } from '@shared/utils/misc'
 
-export const useUserTableColumns = () => {
+export const useUserTableColumns = (
+    internalSquads?: GetInternalSquadsCommand.Response['response']
+) => {
     const { t } = useTranslation()
 
     return useMemo<MRT_ColumnDef<GetAllUsersCommand.Response['response']['users'][number]>[]>(
@@ -125,9 +128,72 @@ export const useUserTableColumns = () => {
             {
                 accessorKey: 'tag',
                 header: 'Tag',
-                Cell: ({ cell }) => <Badge size="lg">{cell.row.original.tag || '–'}</Badge>,
+                Cell: ({ cell }) =>
+                    cell.row.original.tag ? (
+                        <Badge size="lg">{cell.row.original.tag}</Badge>
+                    ) : (
+                        <Text c="dimmed">–</Text>
+                    ),
                 mantineTableBodyCellProps: {
                     align: 'center'
+                }
+            },
+
+            {
+                accessorKey: 'activeInternalSquads',
+                header: 'Internal Squads',
+                filterVariant: 'select',
+                enableColumnFilterModes: false,
+                enableSorting: false,
+                enableClickToCopy: false,
+                mantineFilterSelectProps: {
+                    data:
+                        internalSquads?.internalSquads.map((squad) => ({
+                            label: `${squad.name} (${formatInt(squad.info.membersCount)})`,
+                            value: squad.uuid
+                        })) ?? []
+                },
+                Cell: ({ cell }) => {
+                    const squads = cell.row.original.activeInternalSquads
+
+                    if (squads.length === 0) {
+                        return <Text c="dimmed">–</Text>
+                    }
+
+                    if (squads.length === 1) {
+                        return (
+                            <Group gap="xs" wrap="nowrap">
+                                {squads.map((squad) => (
+                                    <Badge key={squad.uuid} size="sm" variant="light">
+                                        {squad.name}
+                                    </Badge>
+                                ))}
+                            </Group>
+                        )
+                    }
+
+                    return (
+                        <Tooltip
+                            bg="dark.7"
+                            label={
+                                <Stack gap="xs">
+                                    {squads.map((squad) => (
+                                        <Badge fullWidth key={squad.uuid} size="sm" variant="light">
+                                            {squad.name}
+                                        </Badge>
+                                    ))}
+                                </Stack>
+                            }
+                            multiline
+                            position="top"
+                        >
+                            <Group gap="xs" style={{ cursor: 'help' }} wrap="nowrap">
+                                <Badge color="gray" size="sm" variant="outline">
+                                    {squads.length} squads
+                                </Badge>
+                            </Group>
+                        </Tooltip>
+                    )
                 }
             },
 

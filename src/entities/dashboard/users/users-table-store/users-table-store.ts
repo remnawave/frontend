@@ -33,8 +33,9 @@ const DEFAULT_COLUMN_SIZE: MRT_ColumnSizingState = {
     onlineAt: 100
 }
 
+// 'mrt-row-select'
 const DEFAULT_PINNING: MRT_ColumnPinningState = {
-    left: ['mrt-row-actions'],
+    left: [],
     right: []
 }
 
@@ -104,7 +105,7 @@ export const useUsersTableStore = create<IActions & IState>()(
 
         {
             name: 'x-rmnw-users-table',
-            version: 1,
+            version: 2,
             storage: createJSONStorage(() => localStorage),
             partialize: (state) => ({
                 columnVisibility: state.columnVisibility,
@@ -113,7 +114,17 @@ export const useUsersTableStore = create<IActions & IState>()(
                 columnFilter: state.columnFilter,
                 columnSize: state.columnSize,
                 paginationState: state.paginationState
-            })
+            }),
+            migrate: () => {
+                return {
+                    columnVisibility: DEFAULT_VISIBILITY,
+                    columnPinning: DEFAULT_PINNING,
+                    showColumnFilters: false,
+                    columnFilter: DEFAULT_COLUMN_FILTER,
+                    columnSize: DEFAULT_COLUMN_SIZE,
+                    paginationState: DEFAULT_PAGINATION_STATE
+                }
+            }
         }
     )
 )

@@ -24,9 +24,9 @@ import {
 import { UsersTableSelectionFeature } from '@features/ui/dashboard/users/users-table-selection/users-table-selection.feature'
 import { useUserTableColumns } from '@features/dashboard/users/users-table/model/use-table-columns'
 import { UserActionGroupFeature } from '@features/dashboard/users/users-action-group'
-import { UserActionsFeature } from '@features/ui/dashboard/users/user-actions'
+import { useUserModalStoreActions } from '@entities/dashboard/user-modal-store'
+import { useGetInternalSquads, useGetUsersV2 } from '@shared/api/hooks'
 import { DataTableShared } from '@shared/ui/table'
-import { useGetUsersV2 } from '@shared/api/hooks'
 import { sToMs } from '@shared/utils/time-utils'
 
 import { BulkUserActionsDrawerWidget } from '../bulk-user-actions-drawer/bulk-user-actions-drawer.widget'
@@ -34,9 +34,12 @@ import { BulkUserActionsDrawerWidget } from '../bulk-user-actions-drawer/bulk-us
 export function UserTableWidget() {
     const { t } = useTranslation()
 
-    const tableColumns = useUserTableColumns()
+    const { data: internalSquads } = useGetInternalSquads()
+
+    const tableColumns = useUserTableColumns(internalSquads)
     const bulkUsersActionsStoreActions = useBulkUsersActionsStoreActions()
     const tableSelection = useBulkUsersActionsStoreTableSelection()
+    const userModalActions = useUserModalStoreActions()
 
     const actions = useUsersTableStoreActions()
 
@@ -83,7 +86,7 @@ export function UserTableWidget() {
         enableFullScreenToggle: true,
         enableSortingRemoval: true,
         enableGlobalFilter: false,
-        enableClickToCopy: true,
+        enableClickToCopy: false,
         // enableColumnFilterModes: true,
         columnFilterModeOptions: ['contains'],
         initialState: {
@@ -162,18 +165,17 @@ export function UserTableWidget() {
             rowSelection: tableSelection,
             columnSizing: columnSize
         },
-        enableRowActions: true,
+        mantineTableBodyRowProps: ({ row }) => ({
+            onClick: async () => {
+                await userModalActions.setUserUuid(row.original.uuid)
+                userModalActions.changeModalState(true)
+            },
+            style: {
+                cursor: 'pointer'
+            }
+        }),
         onRowSelectionChange: bulkUsersActionsStoreActions.setTableSelection,
-        getRowId: (originalRow) => originalRow.uuid,
-        renderRowActions: ({ row }) => (
-            <UserActionsFeature
-                subscriptionUrl={row.original.subscriptionUrl}
-                userUuid={row.original.uuid}
-            />
-        ),
-        displayColumnDefOptions: {
-            'mrt-row-actions': { size: 140 }
-        }
+        getRowId: (originalRow) => originalRow.uuid
     })
 
     return (

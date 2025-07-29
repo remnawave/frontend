@@ -78,6 +78,7 @@ export const DetailedUserInfoDrawerWidget = () => {
                     <Text fw={500}>{t('detailed-user-info-drawer.widget.detailed-user-info')}</Text>
                 </Group>
             }
+            zIndex={1000}
         >
             {isUserLoading && (
                 <Center h={'100%'} mt="md" py="xl" ta="center">

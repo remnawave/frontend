@@ -308,7 +308,14 @@
             "edit-user-headline": "编辑用户",
             "subscription-url-description-line-1": "Domain and path resolved from .env variable:",
             "subscription-url-description-line-2": "If you want to change it, please change it in the .env file and restart Remnawave using command:",
-            "view-accessible-nodes": "View accessible nodes"
+            "view-accessible-nodes": "View accessible nodes",
+            "fetching-user-data": "Fetching user data...",
+            "more-actions": "More Actions",
+            "management": "Management",
+            "danger-zone": "Danger Zone",
+            "information": "Information",
+            "detailed-info": "Detailed Info",
+            "subscription": "Subscription"
         }
     },
     "base-api-token-form": {
