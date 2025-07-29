@@ -1,5 +1,5 @@
 import { Box, Button, Center, em, Group, Menu, Modal, px, Stack } from '@mantine/core'
-import { PiFloppyDiskDuotone, PiQrCodeDuotone } from 'react-icons/pi'
+import { PiFloppyDiskDuotone, PiQrCodeDuotone, PiUserCircle } from 'react-icons/pi'
 import { UpdateUserCommand } from '@remnawave/backend-contract'
 import { zodResolver } from 'mantine-form-zod-resolver'
 import { TbDots, TbServerCog } from 'react-icons/tb'
@@ -233,7 +233,9 @@ export const ViewUserModal = () => {
                 >
                     <Center h={'100%'} mt="xl" py="xl" ta="center">
                         <Box>
-                            <LoaderModalShared text="Fetching user data..." />
+                            <LoaderModalShared
+                                text={t('view-user-modal.widget.fetching-user-data')}
+                            />
                         </Box>
                     </Center>
                 </motion.div>
@@ -343,12 +345,57 @@ export const ViewUserModal = () => {
                                         size="sm"
                                         variant="outline"
                                     >
-                                        More Actions
+                                        {t('view-user-modal.widget.more-actions')}
                                     </Button>
                                 </Menu.Target>
 
                                 <Menu.Dropdown>
-                                    <Menu.Label>Quick Actions</Menu.Label>
+                                    <Menu.Label>
+                                        {t('view-user-modal.widget.management')}
+                                    </Menu.Label>
+                                    <ToggleUserStatusButtonFeature user={user} />
+                                    <ResetUsageUserFeature userUuid={user.uuid} />
+                                    <RevokeSubscriptionUserFeature userUuid={user.uuid} />
+
+                                    <Menu.Divider />
+                                    <Menu.Label>
+                                        {t('view-user-modal.widget.danger-zone')}
+                                    </Menu.Label>
+                                    <DeleteUserFeature userUuid={user.uuid} />
+                                    <Menu.Divider />
+                                    <Menu.Label>
+                                        {t('view-user-modal.widget.information')}
+                                    </Menu.Label>
+                                    <Menu.Item
+                                        leftSection={<PiUserCircle size={14} />}
+                                        onClick={async () => {
+                                            await actions.setDrawerUserUuid(user.uuid)
+                                            actions.changeDetailedUserInfoDrawerState(true)
+                                        }}
+                                    >
+                                        {t('view-user-modal.widget.detailed-info')}
+                                    </Menu.Item>
+                                    <GetUserUsageFeature userUuid={user.uuid} />
+                                    <GetHwidUserDevicesFeature userUuid={user.uuid} />
+                                    <Menu.Item
+                                        leftSection={<TbServerCog size={14} />}
+                                        onClick={() => {
+                                            setInternalData({
+                                                internalState: {
+                                                    userUuid: user.uuid
+                                                },
+                                                modalKey: MODALS.USER_ACCESSIBLE_NODES_DRAWER
+                                            })
+                                            openModal(MODALS.USER_ACCESSIBLE_NODES_DRAWER)
+                                        }}
+                                    >
+                                        {t('view-user-modal.widget.view-accessible-nodes')}
+                                    </Menu.Item>
+
+                                    <Menu.Divider />
+                                    <Menu.Label>
+                                        {t('view-user-modal.widget.subscription')}
+                                    </Menu.Label>
                                     <Menu.Item
                                         leftSection={<PiQrCodeDuotone size={14} />}
                                         onClick={() => {
@@ -386,34 +433,6 @@ export const ViewUserModal = () => {
                                         {t('view-user-modal.widget.subscription-qr-code')}
                                     </Menu.Item>
                                     <GetUserSubscriptionLinksFeature shortUuid={user.shortUuid} />
-                                    <GetHwidUserDevicesFeature userUuid={user.uuid} />
-                                    <GetUserUsageFeature userUuid={user.uuid} />
-                                    <Menu.Item
-                                        leftSection={<TbServerCog size={14} />}
-                                        onClick={() => {
-                                            setInternalData({
-                                                internalState: {
-                                                    userUuid: user.uuid
-                                                },
-                                                modalKey: MODALS.USER_ACCESSIBLE_NODES_DRAWER
-                                            })
-                                            openModal(MODALS.USER_ACCESSIBLE_NODES_DRAWER)
-                                        }}
-                                    >
-                                        {t('view-user-modal.widget.view-accessible-nodes')}
-                                    </Menu.Item>
-
-                                    <Menu.Divider />
-                                    <Menu.Label>Management</Menu.Label>
-
-                                    <ResetUsageUserFeature userUuid={user.uuid} />
-
-                                    <RevokeSubscriptionUserFeature userUuid={user.uuid} />
-
-                                    <ToggleUserStatusButtonFeature user={user} />
-
-                                    <Menu.Divider />
-                                    <DeleteUserFeature userUuid={user.uuid} />
                                 </Menu.Dropdown>
                             </Menu>
                             <Button

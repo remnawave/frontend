@@ -6,7 +6,7 @@ export function ConnectedNodeColumnEntity(props: IProps) {
     const { nodeName } = props
 
     return (
-        <Text ff="monospace" fw={500} size="lg">
+        <Text ff="monospace" fw={500} size="md">
             {nodeName || '–'}
         </Text>
     )

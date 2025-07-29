@@ -40,13 +40,6 @@ export const useUserModalStore = create<IActions & IState>()(
                         set(() => ({
                             isDetailedUserInfoDrawerOpen: false
                         }))
-
-                        setTimeout(() => {
-                            set(() => ({
-                                userUuid: null
-                            }))
-                            getState().actions.resetState()
-                        }, 200)
                     }
                 },
                 setUserUuid: async (userUuid: string): Promise<void> => {
