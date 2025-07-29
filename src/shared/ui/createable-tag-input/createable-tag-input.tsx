@@ -35,7 +35,7 @@ export function CreateableTagInputShared(props: IProps) {
 
     const exactOptionMatch = data.some((item) => item === search)
     const filteredOptions = exactOptionMatch
-        ? data.filter((item) => item.toLowerCase() === search.toLowerCase().trim())
+        ? data
         : data.filter((item) => item.toLowerCase().includes(search.toLowerCase().trim()))
 
     const options = filteredOptions.map((item) => (
