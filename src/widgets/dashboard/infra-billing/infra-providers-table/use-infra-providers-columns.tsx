@@ -119,7 +119,6 @@ export function getInfraProvidersColumns(
                                 <ReactCountryFlag
                                     countryCode={node.countryCode}
                                     style={{ fontSize: '0.8em' }}
-                                    svg
                                 />
                             }
                             size="sm"

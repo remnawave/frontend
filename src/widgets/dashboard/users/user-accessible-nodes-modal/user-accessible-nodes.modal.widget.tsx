@@ -134,7 +134,6 @@ export const UserAccessibleNodesModalWidget = () => {
                                         <ReactCountryFlag
                                             countryCode={node.countryCode}
                                             style={{ fontSize: '1.4em' }}
-                                            svg
                                         />
                                     )}
                                     <Text c="gray.1" fw={600} size="lg">
