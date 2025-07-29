@@ -3,7 +3,7 @@ import {
     TbDownload as IconDownload,
     TbUpload as IconUpload
 } from 'react-icons/tb'
-import { Accordion, Button, FileInput, Group, Text } from '@mantine/core'
+import { Accordion, Button, FileButton, Group, Text } from '@mantine/core'
 import { PiInfoDuotone } from 'react-icons/pi'
 import { useTranslation } from 'react-i18next'
 
@@ -33,14 +33,13 @@ export function SubscriptionPageBuilderHeaderWidget(props: {
                             {t('subscription-page-builder-header.widget.export-config')}
                         </Button>
 
-                        <FileInput
-                            accept="application/json,.json"
-                            clearable
-                            leftSection={<IconUpload size="16px" />}
-                            onChange={importConfig}
-                            placeholder={t('subscription-page-builder-header.widget.upload-config')}
-                            radius="lg"
-                        />
+                        <FileButton accept="application/json,.json" onChange={importConfig}>
+                            {(props) => (
+                                <Button leftSection={<IconUpload size="16px" />} {...props}>
+                                    {t('subscription-page-builder-header.widget.upload-config')}
+                                </Button>
+                            )}
+                        </FileButton>
                     </Group>
                 }
                 title={t('subscription-page-builder-header.widget.subscription-page-builder')}
