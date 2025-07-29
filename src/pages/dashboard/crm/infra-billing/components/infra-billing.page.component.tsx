@@ -1,6 +1,6 @@
-import { useMediaQuery, useOrientation } from '@mantine/hooks'
+import { useMediaQuery } from '@mantine/hooks'
+import { em, Flex, Grid } from '@mantine/core'
 import { useTranslation } from 'react-i18next'
-import { Flex, Grid } from '@mantine/core'
 import { motion } from 'motion/react'
 
 import { CreateInfraBillingRecordDrawerWidget } from '@widgets/dashboard/infra-billing/create-infra-billing-record-modal/create-infra-billing-record.modal.widget'
@@ -19,9 +19,7 @@ import { Page } from '@shared/ui/page'
 
 export const InfraBillingPageComponent = () => {
     const { t } = useTranslation()
-    const { type } = useOrientation()
-    const isMobile = useMediaQuery('(max-width: 400px)')
-
+    const isMobile = useMediaQuery(`(max-width: ${em(450)})`)
     return (
         <Page title={t('constants.infra-billing')}>
             <PageHeader
@@ -47,12 +45,11 @@ export const InfraBillingPageComponent = () => {
                         initial={{ opacity: 0 }}
                         transition={{ duration: 0.5 }}
                     >
-                        {type === 'portrait-primary' && isMobile ? (
+                        <StatsWidget />
+                        {isMobile ? (
                             <LandscapeBannerShared />
                         ) : (
                             <>
-                                <StatsWidget />
-
                                 <Flex
                                     align="flex-start"
                                     direction="row"
