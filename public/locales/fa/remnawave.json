@@ -943,7 +943,11 @@
             "configure-additional-subscription-options": "پیکربندی تنظیمات اضافی",
             "error": "خطا",
             "save-settings": "ذخیره تنظیمات",
-            "save-your-subscription-settings-to-apply-changes": "برای اعمال تغییرات تنظیمات اشتراک را ذخیره کنید"
+            "save-your-subscription-settings-to-apply-changes": "برای اعمال تغییرات تنظیمات اشتراک را ذخیره کنید",
+            "announce-and-routing": "Announce & Routing",
+            "announce-and-routing-description": "Configure announce message and routing rules for supported clients",
+            "announce-description": "This text will be displayed beneath the subscription name in supported clients such as Happ and v2rayTUN",
+            "enter-announce-text-max-200-characters": "Enter Announce text, max. 200 characters"
         }
     },
     "nodes-realtime-metrics": {
