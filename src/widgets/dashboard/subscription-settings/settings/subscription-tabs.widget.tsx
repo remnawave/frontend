@@ -304,10 +304,14 @@ export const SubscriptionTabs = ({
                                             </ThemeIcon>
                                             <Stack gap={4}>
                                                 <Title fw={600} mb={2} order={4}>
-                                                    Announce & Routing
+                                                    {t(
+                                                        'subscription-tabs.widget.announce-and-routing'
+                                                    )}
                                                 </Title>
                                                 <Text c="dimmed" lh={1.5} size="sm">
-                                                    Configure Announce & Routing
+                                                    {t(
+                                                        'subscription-tabs.widget.announce-and-routing-description'
+                                                    )}
                                                 </Text>
                                             </Stack>
                                         </Group>
@@ -316,7 +320,9 @@ export const SubscriptionTabs = ({
                                     <Card.Section p="lg">
                                         <Stack gap="xl">
                                             <Textarea
-                                                description="This text will be displayed beneath the subscription name in supported clients such as Happ and v2rayTUN"
+                                                description={t(
+                                                    'subscription-tabs.widget.announce-description'
+                                                )}
                                                 key={form.key('happAnnounce')}
                                                 label="Announce"
                                                 leftSection={
@@ -325,7 +331,9 @@ export const SubscriptionTabs = ({
                                                     />
                                                 }
                                                 minRows={4}
-                                                placeholder="Enter Announce text, max. 200 characters"
+                                                placeholder={t(
+                                                    'subscription-tabs.widget.enter-announce-text-max-200-characters'
+                                                )}
                                                 radius="md"
                                                 size="sm"
                                                 style={{
