@@ -17,8 +17,7 @@ import { GetAllNodesCommand } from '@remnawave/backend-contract'
 import { useWindowVirtualizer } from '@tanstack/react-virtual'
 import { useListState, useMediaQuery } from '@mantine/hooks'
 import { restrictToVerticalAxis } from '@dnd-kit/modifiers'
-import { Box, Container, em, Stack } from '@mantine/core'
-import { motion } from 'framer-motion'
+import { Container, em, Stack } from '@mantine/core'
 
 import { nodesQueryKeys, useGetNodes, useReorderNodes } from '@shared/api/hooks'
 import { EmptyPageLayout } from '@shared/ui/layouts/empty-page'
@@ -26,6 +25,7 @@ import { sToMs } from '@shared/utils/time-utils'
 import { queryClient } from '@shared/api'
 
 import { NodeCardWidget } from '../node-card'
+import styles from './NodesTable.module.css'
 import { IProps } from './interfaces'
 
 export const NodesTableWidget = memo((props: IProps) => {
@@ -61,7 +61,7 @@ export const NodesTableWidget = memo((props: IProps) => {
     const virtualizer = useWindowVirtualizer({
         count: state.length,
         estimateSize: () => (isMobile ? 169 : 64),
-        overscan: 5,
+        overscan: 7,
         scrollMargin: parentOffsetRef.current,
         getItemKey: (index) => state[index].uuid
     })
@@ -174,9 +174,7 @@ export const NodesTableWidget = memo((props: IProps) => {
             <div ref={listRef}>
                 <div
                     style={{
-                        height: `${virtualizer.getTotalSize()}px`,
-                        width: '100%',
-                        position: 'relative'
+                        height: `${virtualizer.getTotalSize()}px`
                     }}
                 >
                     <SortableContext items={dataIds.current} strategy={verticalListSortingStrategy}>
@@ -194,29 +192,27 @@ export const NodesTableWidget = memo((props: IProps) => {
                                     if (!item) return null
 
                                     return (
-                                        <Box
+                                        <div
                                             data-index={virtualItem.index}
                                             key={item.uuid}
                                             style={{
-                                                position: 'absolute',
-                                                top: 0,
-                                                left: 0,
-                                                right: 0,
-                                                transform: `translateY(${
-                                                    virtualItem.start -
-                                                    virtualizer.options.scrollMargin
-                                                }px)`
+                                                height: `0px`
                                             }}
                                         >
-                                            <motion.div
-                                                animate={{ opacity: 1 }}
-                                                exit={{ opacity: 0 }}
-                                                initial={{ opacity: 0 }}
-                                                transition={{ duration: 0.1 }}
+                                            <div
+                                                style={{
+                                                    height: `${virtualItem.size}px`,
+                                                    transform: `translateY(${
+                                                        virtualItem.start -
+                                                        virtualizer.options.scrollMargin
+                                                    }px)`
+                                                }}
                                             >
-                                                <NodeCardWidget node={item} />
-                                            </motion.div>
-                                        </Box>
+                                                <div className={styles.nodeFadeIn}>
+                                                    <NodeCardWidget node={item} />
+                                                </div>
+                                            </div>
+                                        </div>
                                     )
                                 })}
                             </Stack>

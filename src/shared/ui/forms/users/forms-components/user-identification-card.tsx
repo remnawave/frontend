@@ -51,15 +51,18 @@ export const UserIdentificationCard = (props: IProps) => {
                         {({ copied, copy }) => (
                             <TextInput
                                 label="Username"
-                                leftSection={
-                                    copied ? (
-                                        <PiCheck color="var(--mantine-color-teal-6)" size="16px" />
-                                    ) : (
-                                        <PiUserDuotone size="16px" />
-                                    )
-                                }
+                                leftSection={<PiUserDuotone size="16px" />}
                                 onClick={copy}
                                 readOnly
+                                rightSection={
+                                    <ActionIcon
+                                        color={copied ? 'teal' : 'gray'}
+                                        onClick={copy}
+                                        variant="subtle"
+                                    >
+                                        {copied ? <PiCheck size="16px" /> : <PiCopy size="16px" />}
+                                    </ActionIcon>
+                                }
                                 styles={{
                                     input: {
                                         cursor: 'copy',
@@ -71,13 +74,14 @@ export const UserIdentificationCard = (props: IProps) => {
                         )}
                     </CopyButton>
 
-                    <TextInput
-                        disabled
-                        label={t('view-user-modal.widget.subscription-short-uuid')}
-                        leftSection={<PiLinkDuotone size="16px" />}
-                        rightSection={
-                            <CopyButton timeout={2000} value={user.shortUuid}>
-                                {({ copied, copy }) => (
+                    <CopyButton timeout={2000} value={user.shortUuid}>
+                        {({ copied, copy }) => (
+                            <TextInput
+                                label={t('view-user-modal.widget.subscription-short-uuid')}
+                                leftSection={<PiLinkDuotone size="16px" />}
+                                onClick={copy}
+                                readOnly
+                                rightSection={
                                     <ActionIcon
                                         color={copied ? 'teal' : 'gray'}
                                         onClick={copy}
@@ -85,57 +89,68 @@ export const UserIdentificationCard = (props: IProps) => {
                                     >
                                         {copied ? <PiCheck size="16px" /> : <PiCopy size="16px" />}
                                     </ActionIcon>
-                                )}
-                            </CopyButton>
-                        }
-                        styles={{
-                            label: { fontWeight: 500 }
-                        }}
-                        value={user.shortUuid}
-                    />
+                                }
+                                styles={{
+                                    input: {
+                                        cursor: 'copy',
+                                        fontFamily: 'monospace'
+                                    }
+                                }}
+                                value={user.shortUuid}
+                            />
+                        )}
+                    </CopyButton>
 
-                    <TextInput
-                        disabled
-                        label={
-                            <Group gap={4} justify="flex-start">
-                                <Text fw={500} fz="sm">
-                                    {t('view-user-modal.widget.subscription-url')}
-                                </Text>
-                                <HoverCard shadow="md" width={280} withArrow>
-                                    <HoverCard.Target>
-                                        <ActionIcon color="gray" mb={2} size="xs" variant="subtle">
-                                            <HiQuestionMarkCircle size={16} />
-                                        </ActionIcon>
-                                    </HoverCard.Target>
-                                    <HoverCard.Dropdown>
-                                        <Stack gap="sm">
-                                            <Text fw={600} size="sm">
-                                                {t('view-user-modal.widget.subscription-url')}
-                                            </Text>
-                                            <Text c="dimmed" size="sm">
-                                                {t(
-                                                    'view-user-modal.widget.subscription-url-description-line-1'
-                                                )}
-                                                <Code bg="gray.1" c="dark.4" fw={700}>
-                                                    SUB_PUBLIC_DOMAIN
-                                                </Code>
-                                                <br />
-                                                {t(
-                                                    'view-user-modal.widget.subscription-url-description-line-2'
-                                                )}
-                                            </Text>
-                                            <Code bg="gray.1" block c="dark.4" fw={700}>
-                                                docker compose down && docker compose up -d
-                                            </Code>
-                                        </Stack>
-                                    </HoverCard.Dropdown>
-                                </HoverCard>
-                            </Group>
-                        }
-                        leftSection={<PiLinkDuotone size="16px" />}
-                        rightSection={
-                            <CopyButton timeout={2000} value={userSubscriptionUrlMemo || ''}>
-                                {({ copied, copy }) => (
+                    <CopyButton timeout={2000} value={userSubscriptionUrlMemo || ''}>
+                        {({ copied, copy }) => (
+                            <TextInput
+                                label={
+                                    <Group gap={4} justify="flex-start">
+                                        <Text fw={500} fz="sm">
+                                            {t('view-user-modal.widget.subscription-url')}
+                                        </Text>
+                                        <HoverCard shadow="md" width={280} withArrow>
+                                            <HoverCard.Target>
+                                                <ActionIcon
+                                                    color="gray"
+                                                    mb={2}
+                                                    size="xs"
+                                                    variant="subtle"
+                                                >
+                                                    <HiQuestionMarkCircle size={16} />
+                                                </ActionIcon>
+                                            </HoverCard.Target>
+                                            <HoverCard.Dropdown>
+                                                <Stack gap="sm">
+                                                    <Text fw={600} size="sm">
+                                                        {t(
+                                                            'view-user-modal.widget.subscription-url'
+                                                        )}
+                                                    </Text>
+                                                    <Text c="dimmed" size="sm">
+                                                        {t(
+                                                            'view-user-modal.widget.subscription-url-description-line-1'
+                                                        )}
+                                                        <Code bg="gray.1" c="dark.4" fw={700}>
+                                                            SUB_PUBLIC_DOMAIN
+                                                        </Code>
+                                                        <br />
+                                                        {t(
+                                                            'view-user-modal.widget.subscription-url-description-line-2'
+                                                        )}
+                                                    </Text>
+                                                    <Code bg="gray.1" block c="dark.4" fw={700}>
+                                                        docker compose down && docker compose up -d
+                                                    </Code>
+                                                </Stack>
+                                            </HoverCard.Dropdown>
+                                        </HoverCard>
+                                    </Group>
+                                }
+                                leftSection={<PiLinkDuotone size="16px" />}
+                                onClick={copy}
+                                readOnly
+                                rightSection={
                                     <ActionIcon
                                         color={copied ? 'teal' : 'gray'}
                                         onClick={copy}
@@ -143,11 +158,17 @@ export const UserIdentificationCard = (props: IProps) => {
                                     >
                                         {copied ? <PiCheck size="16px" /> : <PiCopy size="16px" />}
                                     </ActionIcon>
-                                )}
-                            </CopyButton>
-                        }
-                        value={userSubscriptionUrlMemo || ''}
-                    />
+                                }
+                                styles={{
+                                    input: {
+                                        cursor: 'copy',
+                                        fontFamily: 'monospace'
+                                    }
+                                }}
+                                value={userSubscriptionUrlMemo || ''}
+                            />
+                        )}
+                    </CopyButton>
                 </Stack>
             </Fieldset>
         </MotionWrapper>
