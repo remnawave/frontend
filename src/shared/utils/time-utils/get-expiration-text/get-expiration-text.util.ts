@@ -13,6 +13,10 @@ export function getExpirationTextUtil(
     const expiration = dayjs(expireAt).locale(i18nProps.language)
     const now = dayjs()
 
+    if (expiration.year() === 2099) {
+        return '∞'
+    }
+
     if (expiration.isBefore(now)) {
         return t('get-expiration-text.util.expired', {
             expiration: expiration.fromNow(false)

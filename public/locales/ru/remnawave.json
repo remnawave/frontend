@@ -943,7 +943,11 @@
             "configure-additional-subscription-options": "Настройка доп. опций подписки",
             "error": "Ошибка",
             "save-settings": "Сохранить",
-            "save-your-subscription-settings-to-apply-changes": "Сохраните настройки подписки, чтобы применить изменения"
+            "save-your-subscription-settings-to-apply-changes": "Сохраните настройки подписки, чтобы применить изменения",
+            "announce-and-routing": "Announce & Роутинг",
+            "announce-and-routing-description": "Настройка Announce-сообщения и правил роутинга для поддерживаемых клиентов",
+            "announce-description": "Этот текст будет отображаться под названием подписки в поддерживаемых клиентах, таких как Happ и v2rayTUN",
+            "enter-announce-text-max-200-characters": "Введите Announce-сообщение, максимум 200 символов"
         }
     },
     "nodes-realtime-metrics": {

@@ -41,6 +41,7 @@ import { ROUTES } from '@shared/constants'
 
 import { HeaderItem, HeadersManager } from './headers-manager.widget'
 import { RemarksManager } from './remarks-manager.widget'
+import styles from './SubscriotionTabs.module.css'
 
 interface SubscriptionTabsProps {
     form: ReturnType<typeof useForm<UpdateSubscriptionSettingsCommand.Request>>
@@ -83,12 +84,6 @@ export const SubscriptionTabs = ({
                         <Tabs.List>
                             <Tabs.Tab leftSection={<PiInfo size={px('1.2rem')} />} value="general">
                                 {t('subscription-settings.widget.subscription-info')}
-                            </Tabs.Tab>
-                            <Tabs.Tab
-                                leftSection={<PiDeviceMobile size={px('1.2rem')} />}
-                                value="happ"
-                            >
-                                {t('subscription-settings.widget.happ-settings')}
                             </Tabs.Tab>
                             <Tabs.Tab
                                 leftSection={<PiChatsCircle size={px('1.2rem')} />}
@@ -296,105 +291,107 @@ export const SubscriptionTabs = ({
                                         </Grid>
                                     </Card.Section>
                                 </Card>
-                            </Stack>
-                        </Tabs.Panel>
+                                <Card radius="md" shadow="md" withBorder>
+                                    <Card.Section p="lg" withBorder>
+                                        <Group align="center" gap="md" wrap="nowrap">
+                                            <ThemeIcon
+                                                color="cyan"
+                                                radius="md"
+                                                size={40}
+                                                variant="light"
+                                            >
+                                                <PiDeviceMobile size="1.8rem" />
+                                            </ThemeIcon>
+                                            <Stack gap={4}>
+                                                <Title fw={600} mb={2} order={4}>
+                                                    {t(
+                                                        'subscription-tabs.widget.announce-and-routing'
+                                                    )}
+                                                </Title>
+                                                <Text c="dimmed" lh={1.5} size="sm">
+                                                    {t(
+                                                        'subscription-tabs.widget.announce-and-routing-description'
+                                                    )}
+                                                </Text>
+                                            </Stack>
+                                        </Group>
+                                    </Card.Section>
 
-                        <Tabs.Panel pt="xl" value="happ">
-                            <Card radius="md" shadow="sm" withBorder>
-                                <Card.Section p="lg" withBorder>
-                                    <Group align="center" gap="md" wrap="nowrap">
-                                        <ThemeIcon
-                                            color="blue"
-                                            radius="md"
-                                            size={40}
-                                            variant="light"
-                                        >
-                                            <PiDeviceMobile size="1.8rem" />
-                                        </ThemeIcon>
-                                        <Stack gap={4}>
-                                            <Title fw={600} mb={2} order={4}>
-                                                {t('subscription-settings.widget.happ-settings')}
-                                            </Title>
-                                            <Text c="dimmed" lh={1.5} size="sm">
-                                                {t(
-                                                    'subscription-settings.widget.happ-description-line-1'
-                                                )}{' '}
-                                                <br />
-                                                {t(
-                                                    'subscription-settings.widget.happ-description-line-2'
+                                    <Card.Section p="lg">
+                                        <Stack gap="xl">
+                                            <Textarea
+                                                description={t(
+                                                    'subscription-tabs.widget.announce-description'
                                                 )}
-                                            </Text>
+                                                key={form.key('happAnnounce')}
+                                                label="Announce"
+                                                leftSection={
+                                                    <TemplateInfoPopoverShared
+                                                        showHostDescription={false}
+                                                    />
+                                                }
+                                                minRows={4}
+                                                placeholder={t(
+                                                    'subscription-tabs.widget.enter-announce-text-max-200-characters'
+                                                )}
+                                                radius="md"
+                                                size="sm"
+                                                style={{
+                                                    placeContent: 'center'
+                                                }}
+                                                {...form.getInputProps('happAnnounce')}
+                                            />
+
+                                            <Textarea
+                                                description={
+                                                    <Box>
+                                                        <Text c="dimmed" size="sm">
+                                                            {t(
+                                                                'subscription-settings.widget.happ-routing-description'
+                                                            )}{' '}
+                                                            <br />
+                                                            {t(
+                                                                'subscription-settings.widget.happ-routing-description-line-2'
+                                                            )}
+                                                        </Text>
+                                                        <Button
+                                                            color="grape"
+                                                            leftSection={
+                                                                <PiGear size={px('1.2rem')} />
+                                                            }
+                                                            mb="xs"
+                                                            mt="xs"
+                                                            onClick={() => {
+                                                                navigate(
+                                                                    ROUTES.DASHBOARD.UTILS
+                                                                        .HAPP_ROUTING_BUILDER
+                                                                )
+                                                            }}
+                                                            radius="md"
+                                                            size="sm"
+                                                            variant="light"
+                                                            w="fit-content"
+                                                        >
+                                                            {t(
+                                                                'subscription-settings.widget.configure-happ-routing'
+                                                            )}
+                                                        </Button>
+                                                    </Box>
+                                                }
+                                                key={form.key('happRouting')}
+                                                label={t(
+                                                    'subscription-settings.widget.happ-routing'
+                                                )}
+                                                minRows={4}
+                                                placeholder="happ://routing/add/..."
+                                                radius="md"
+                                                size="sm"
+                                                {...form.getInputProps('happRouting')}
+                                            />
                                         </Stack>
-                                    </Group>
-                                </Card.Section>
-
-                                <Card.Section p="lg">
-                                    <Stack gap="xl">
-                                        <Textarea
-                                            description={t(
-                                                'subscription-settings.widget.happ-announce-description'
-                                            )}
-                                            key={form.key('happAnnounce')}
-                                            label={t('subscription-settings.widget.happ-announce')}
-                                            leftSection={
-                                                <TemplateInfoPopoverShared
-                                                    showHostDescription={false}
-                                                />
-                                            }
-                                            minRows={4}
-                                            placeholder={t(
-                                                'subscription-settings.widget.enter-happ-announce-max-200-characters'
-                                            )}
-                                            radius="md"
-                                            size="sm"
-                                            {...form.getInputProps('happAnnounce')}
-                                        />
-
-                                        <Textarea
-                                            description={
-                                                <Box>
-                                                    <Text c="dimmed" size="sm">
-                                                        {t(
-                                                            'subscription-settings.widget.happ-routing-description'
-                                                        )}{' '}
-                                                        <br />
-                                                        {t(
-                                                            'subscription-settings.widget.happ-routing-description-line-2'
-                                                        )}
-                                                    </Text>
-                                                    <Button
-                                                        color="grape"
-                                                        leftSection={<PiGear size={px('1.2rem')} />}
-                                                        mb="xs"
-                                                        mt="xs"
-                                                        onClick={() => {
-                                                            navigate(
-                                                                ROUTES.DASHBOARD.UTILS
-                                                                    .HAPP_ROUTING_BUILDER
-                                                            )
-                                                        }}
-                                                        radius="md"
-                                                        size="sm"
-                                                        variant="light"
-                                                        w="fit-content"
-                                                    >
-                                                        {t(
-                                                            'subscription-settings.widget.configure-happ-routing'
-                                                        )}
-                                                    </Button>
-                                                </Box>
-                                            }
-                                            key={form.key('happRouting')}
-                                            label={t('subscription-settings.widget.happ-routing')}
-                                            minRows={4}
-                                            placeholder="happ://routing/add/..."
-                                            radius="md"
-                                            size="sm"
-                                            {...form.getInputProps('happRouting')}
-                                        />
-                                    </Stack>
-                                </Card.Section>
-                            </Card>
+                                    </Card.Section>
+                                </Card>
+                            </Stack>
                         </Tabs.Panel>
 
                         <Tabs.Panel pt="xl" value="remarks">
@@ -552,19 +549,9 @@ export const SubscriptionTabs = ({
                         </Tabs.Panel>
                     </Tabs>
 
-                    <Card radius="lg" shadow="sm" withBorder>
+                    <Card className={styles.footer} h="auto" m="0" mt="md" pos="sticky">
                         <Card.Section p="lg">
-                            <Group align="center" justify="space-between">
-                                <Box>
-                                    <Title fw={600} order={4}>
-                                        {t('subscription-tabs.widget.save-settings')}
-                                    </Title>
-                                    <Text c="dimmed" size="sm">
-                                        {t(
-                                            'subscription-tabs.widget.save-your-subscription-settings-to-apply-changes'
-                                        )}
-                                    </Text>
-                                </Box>
+                            <Group align="center" justify="flex-start">
                                 <Button
                                     color="blue"
                                     leftSection={<PiFloppyDisk size={px('1.2rem')} />}
@@ -575,6 +562,16 @@ export const SubscriptionTabs = ({
                                 >
                                     {t('subscription-settings.widget.update-settings')}
                                 </Button>
+                                <Box visibleFrom="md">
+                                    <Title fw={600} order={4}>
+                                        {t('subscription-tabs.widget.save-settings')}
+                                    </Title>
+                                    <Text c="dimmed" size="sm">
+                                        {t(
+                                            'subscription-tabs.widget.save-your-subscription-settings-to-apply-changes'
+                                        )}
+                                    </Text>
+                                </Box>
                             </Group>
                         </Card.Section>
                     </Card>
