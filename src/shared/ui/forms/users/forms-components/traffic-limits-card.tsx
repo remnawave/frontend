@@ -68,6 +68,7 @@ export const TrafficLimitsCard = <T extends CreateUserCommand.Request | UpdateUs
                 <Stack gap="md">
                     <NumberInput
                         allowDecimal={false}
+                        allowNegative={false}
                         decimalScale={0}
                         description={t('create-user-modal.widget.data-limit-description')}
                         key={form.key('trafficLimitBytes')}
