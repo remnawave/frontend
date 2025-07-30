@@ -22,6 +22,7 @@ import {
     PiCopyDuotone,
     PiFloppyDiskDuotone,
     PiInfo,
+    PiNetwork,
     PiPencilDuotone
 } from 'react-icons/pi'
 import {
@@ -32,6 +33,7 @@ import {
     UpdateHostCommand
 } from '@remnawave/backend-contract'
 import { HiQuestionMarkCircle } from 'react-icons/hi'
+import { TbCloudNetwork } from 'react-icons/tb'
 import { useDisclosure } from '@mantine/hooks'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
@@ -91,6 +93,33 @@ const pasteBasicXHttpExtraParams = `{
 }
 `
 
+const basicMuxParams = `{
+  "enabled": true,
+  "concurrency": -1,
+  "xudpConcurrency": 16,
+  "xudpProxyUDP443": "reject"
+}`
+
+const basicSockoptParams = `{
+  "mark": 0,
+  "tcpMaxSeg": 1440,
+  "tcpFastOpen": false,
+  "tproxy": "off",
+  "domainStrategy": "AsIs",
+  "dialerProxy": "",
+  "happyEyeballs": {},
+  "acceptProxyProtocol": false,
+  "tcpKeepAliveInterval": 0,
+  "tcpKeepAliveIdle": 300,
+  "tcpUserTimeout": 10000,
+  "tcpcongestion": "bbr",
+  "interface": "wg0",
+  "V6Only": false,
+  "tcpWindowClamp": 600,
+  "tcpMptcp": false,
+  "tcpNoDelay": false
+}`
+
 export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCommand.Request>(
     props: IProps<T>
 ) => {
@@ -106,6 +135,9 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
 
     const { t } = useTranslation()
     const [opened, { open, close }] = useDisclosure(false)
+    const [muxParamsOpened, { open: openMuxParams, close: closeMuxParams }] = useDisclosure(false)
+    const [sockoptParamsOpened, { open: openSockoptParams, close: closeSockoptParams }] =
+        useDisclosure(false)
 
     const securityLayerLabels = {
         [SECURITY_LAYERS.TLS]: t('base-host-form.tls-transport-layer-security'),
@@ -430,6 +462,34 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
                                     {t('base-host-form.extra-xhttp')}
                                 </Button>
                             </Group>
+
+                            <Group
+                                gap="xs"
+                                grow
+                                justify="space-between"
+                                preventGrowOverflow={false}
+                                w="100%"
+                            >
+                                <Button
+                                    color="indigo"
+                                    leftSection={<TbCloudNetwork />}
+                                    mt="xs"
+                                    onClick={openMuxParams}
+                                    variant="light"
+                                >
+                                    MUX
+                                </Button>
+
+                                <Button
+                                    color="indigo"
+                                    leftSection={<PiNetwork />}
+                                    mt="xs"
+                                    onClick={openSockoptParams}
+                                    variant="light"
+                                >
+                                    Sockopt
+                                </Button>
+                            </Group>
                         </Stack>
                     </Collapse>
                 </Stack>
@@ -504,6 +564,115 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
                     </Button>
 
                     <Button onClick={close}>{t('base-host-form.close')}</Button>
+                </Stack>
+            </Drawer>
+
+            <Drawer
+                onClose={closeMuxParams}
+                opened={muxParamsOpened}
+                padding="lg"
+                position="right"
+                size="lg"
+                title="MUX"
+            >
+                <Stack gap="md">
+                    <Stack gap={0}>
+                        <Text size="sm">
+                            {t('base-host-form.this-will-only-be-used-for-xray-json-output')}
+                        </Text>
+                        <Text size="sm">
+                            {t('base-host-form.please-ensure-you-provide-a-valid-json-mux-object')}
+                        </Text>
+                        <Text size="sm">
+                            {t('base-host-form.for-more-information-refer-to')}{' '}
+                            <Link
+                                target="_blank"
+                                to="https://xtls.github.io/ru/config/outbound.html#muxobject"
+                            >
+                                {t('base-host-form.xtls-documentation')}
+                            </Link>
+                            .
+                        </Text>
+                    </Stack>
+                    <JsonInput
+                        autosize
+                        formatOnBlur
+                        key={form.key('muxParams')}
+                        minRows={15}
+                        placeholder={basicMuxParams}
+                        validationError={t('base-host-form.invalid-json')}
+                        {...form.getInputProps('muxParams')}
+                    />
+
+                    <Button
+                        color="gray"
+                        leftSection={<PiArrowUpDuotone size={px('1.2rem')} />}
+                        onClick={() => {
+                            // @ts-expect-error -- TODO: fix this
+                            form.setFieldValue('muxParams', basicMuxParams)
+                        }}
+                        variant="light"
+                    >
+                        {t('base-host-form.paste-default-mux-params')}
+                    </Button>
+
+                    <Button onClick={closeMuxParams}>{t('base-host-form.close')}</Button>
+                </Stack>
+            </Drawer>
+
+            <Drawer
+                onClose={closeSockoptParams}
+                opened={sockoptParamsOpened}
+                padding="lg"
+                position="right"
+                size="lg"
+                title="Sockopt"
+            >
+                <Stack gap="md">
+                    <Stack gap={0}>
+                        <Text size="sm">
+                            {t('base-host-form.this-will-only-be-used-for-xray-json-output')}
+                        </Text>
+                        <Text size="sm">
+                            {t(
+                                'base-host-form.please-ensure-you-provide-a-valid-json-sockopt-object'
+                            )}
+                        </Text>
+                        <Text size="sm">
+                            {t('base-host-form.for-more-information-refer-to')}{' '}
+                            <Link
+                                target="_blank"
+                                to="https://xtls.github.io/ru/config/transport.html#sockoptobject"
+                            >
+                                {t('base-host-form.xtls-documentation')}
+                            </Link>
+                            .
+                        </Text>
+                    </Stack>
+
+                    <JsonInput
+                        autosize
+                        formatOnBlur
+                        key={form.key('sockoptParams')}
+                        minRows={15}
+                        placeholder={basicSockoptParams}
+                        validationError={t('base-host-form.invalid-json')}
+                        {...form.getInputProps('sockoptParams')}
+                    />
+
+                    <Button
+                        color="gray"
+                        leftSection={<PiArrowUpDuotone size={px('1.2rem')} />}
+                        onClick={() => {
+                            // @ts-expect-error -- TODO: fix this
+                            form.setFieldValue('sockoptParams', basicSockoptParams)
+                        }}
+                        variant="light"
+                    >
+                        {t('base-host-form.paste-default-sockopt-params')}
+                    </Button>
+
+                    <Button onClick={closeSockoptParams}>{t('base-host-form.close')}</Button>
                 </Stack>
             </Drawer>
         </form>
