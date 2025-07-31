@@ -1434,5 +1434,10 @@
             "cancel": "取消",
             "create": "创建"
         }
+    },
+    "restart-node-button": {
+        "feature": {
+            "restart": "重新启动"
+        }
     }
 }
