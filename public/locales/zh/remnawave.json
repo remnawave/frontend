@@ -1241,7 +1241,7 @@
     "active-nodes-list": {
         "modal": {
             "shared": {
-                "profile-is-active-on": "该配置文件已在 {{nodeCount}} 个节点上激",
+                "profile-is-active-on": "该配置文件已在 {{nodeCount}} 个节点上激活",
                 "this-profile-is-not-active-on-any-nodes": "该配置文件未在任何节点上激活"
             }
         }
