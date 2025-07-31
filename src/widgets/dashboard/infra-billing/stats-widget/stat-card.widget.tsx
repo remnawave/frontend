@@ -29,7 +29,8 @@ export function StatCardWidget({ title, value, icon, color, subtitle, isLoading 
             style={{
                 backgroundColor: 'var(--mantine-color-dark-6)',
                 border: '1px solid var(--mantine-color-dark-6)',
-                cursor: 'default'
+                cursor: 'default',
+                transitionDuration: '0.3s'
             }}
         >
             <Group align="flex-start" justify="space-between">
