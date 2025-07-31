@@ -25,6 +25,7 @@ import {
     PiUsersDuotone
 } from 'react-icons/pi'
 import { GetNodesMetricsCommand } from '@remnawave/backend-contract'
+import { useTranslation } from 'react-i18next'
 import { TbServer2 } from 'react-icons/tb'
 import { memo, useState } from 'react'
 
@@ -41,6 +42,7 @@ export const NodeDetailsCard = memo(
         node: GetNodesMetricsCommand.Response['response']['nodes'][number]
     }) => {
         const [hideZeroValues, setHideZeroValues] = useState(true)
+        const { t } = useTranslation()
 
         const filterNonZeroStats = (stats: typeof node.inboundsStats) => {
             if (!hideZeroValues) return stats
@@ -133,7 +135,11 @@ export const NodeDetailsCard = memo(
 
                         <Group gap="xs" style={{ flexShrink: 0, minWidth: 'fit-content' }}>
                             <Tooltip
-                                label={hideZeroValues ? 'Show zero values' : 'Hide zero values'}
+                                label={
+                                    hideZeroValues
+                                        ? t('node-details-card.show-zero-values')
+                                        : t('node-details-card.hide-zero-values')
+                                }
                             >
                                 <ActionIcon
                                     color="indigo"
@@ -261,9 +267,7 @@ export const NodeDetailsCard = memo(
                                                 <PiProhibitDuotone size="1.0rem" />
                                             </ThemeIcon>
                                             <Text c="gray.5" size="xs" ta="center">
-                                                {hideZeroValues
-                                                    ? 'No active inbound traffic'
-                                                    : 'No inbound traffic data'}
+                                                {t('node-details-card.no-inbound-traffic-data')}
                                             </Text>
                                         </Stack>
                                     </Center>
@@ -365,9 +369,7 @@ export const NodeDetailsCard = memo(
                                                 <PiProhibitDuotone size="1.0rem" />
                                             </ThemeIcon>
                                             <Text c="gray.5" size="xs" ta="center">
-                                                {hideZeroValues
-                                                    ? 'No active outbound traffic'
-                                                    : 'No outbound traffic data'}
+                                                {t('node-details-card.no-outbound-traffic-data')}
                                             </Text>
                                         </Stack>
                                     </Center>

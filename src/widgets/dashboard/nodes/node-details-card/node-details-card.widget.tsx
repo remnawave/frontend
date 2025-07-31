@@ -157,14 +157,20 @@ export const NodeDetailsCardWidget = memo(({ node, fetchedNode }: IProps) => {
                         </ThemeIcon>
                         <Box>
                             <Title c="white" fw={600} order={5}>
-                                Node Details
+                                {t('node-details-card.widget.node-details')}
                             </Title>
                         </Box>
                     </Group>
 
                     <Group gap="xs">
                         {!isConfigMissing && (
-                            <Tooltip label={nodeData.isDisabled ? 'Enable Node' : 'Disable Node'}>
+                            <Tooltip
+                                label={
+                                    nodeData.isDisabled
+                                        ? t('node-details-card.widget.enable-node')
+                                        : t('node-details-card.widget.disable-node')
+                                }
+                            >
                                 <ActionIcon
                                     color={nodeData.isDisabled ? 'teal' : 'red'}
                                     disabled={isDisableNodePending || isEnableNodePending}
@@ -207,7 +213,11 @@ export const NodeDetailsCardWidget = memo(({ node, fetchedNode }: IProps) => {
                         )}
 
                         {isConfigMissing && (
-                            <Tooltip label="Config profile or inbounds is missing">
+                            <Tooltip
+                                label={t(
+                                    'node-details-card.widget.config-profile-or-inbounds-is-missing'
+                                )}
+                            >
                                 <ActionIcon
                                     color="gray"
                                     disabled
@@ -307,7 +317,7 @@ export const NodeDetailsCardWidget = memo(({ node, fetchedNode }: IProps) => {
                                     border: '1px solid rgba(139, 92, 246, 0.3)'
                                 }}
                             >
-                                <Tooltip label="Xray Core Version">
+                                <Tooltip label={t('node-details-card.widget.xray-core-version')}>
                                     <Group gap="xs" justify="center">
                                         <XtlsLogo color="var(--mantine-color-violet-4)" size={18} />
                                         <Text c="violet.4" fw={600} size="sm">
@@ -327,7 +337,9 @@ export const NodeDetailsCardWidget = memo(({ node, fetchedNode }: IProps) => {
                                     border: '1px solid rgba(99, 102, 241, 0.3)'
                                 }}
                             >
-                                <Tooltip label="Node version, @remnawave/node">
+                                <Tooltip
+                                    label={t('node-details-card.widget.remnawave-node-version')}
+                                >
                                     <Group gap="xs" justify="center">
                                         <Logo color="var(--mantine-color-indigo-4)" size={18} />
                                         <Text c="indigo.4" fw={600} size="sm">
