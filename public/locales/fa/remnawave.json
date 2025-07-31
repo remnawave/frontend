@@ -1439,5 +1439,19 @@
         "feature": {
             "restart": "Restart"
         }
+    },
+    "node-details-card": {
+        "show-zero-values": "Show zero values",
+        "hide-zero-values": "Hide zero values",
+        "no-inbound-traffic-data": "No inbound traffic data",
+        "no-outbound-traffic-data": "No outbound traffic data",
+        "widget": {
+            "node-details": "Node Details",
+            "enable-node": "Enable Node",
+            "disable-node": "Disable Node",
+            "config-profile-or-inbounds-is-missing": "Config profile or inbounds is missing",
+            "xray-core-version": "Xray Core Version",
+            "remnawave-node-version": "Node version, @remnawave/node"
+        }
     }
 }
