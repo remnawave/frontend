@@ -4,6 +4,7 @@
     cursor: default;
     position: relative;
     overflow: hidden;
+    transition: 0.14s ease-in;
 
     /* Light theme */
     border: 1px solid var(--mantine-color-gray-2);
@@ -33,19 +34,21 @@
     left: 0;
     right: 0;
     height: 3px;
-    background: linear-gradient(90deg, var(--mantine-color-blue-5), var(--mantine-color-cyan-5));
+    background: linear-gradient(90deg, var(--mantine-color-cyan-4), var(--mantine-color-cyan-8));
     opacity: 0;
+    transition: 0.24s ease-in-out;
 }
 
 .root:hover {
     transform: translateY(-2px);
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
-    border-color: var(--mantine-color-blue-3);
+    border-color: var(--mantine-color-cyan-5);
+    transition: 0.24s ease-out;
 }
 
 [data-mantine-color-scheme='dark'] .root:hover {
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
-    border-color: var(--mantine-color-blue-4);
+    border-color: var(--mantine-color-cyan-5);
 }
 
 .root:hover::before {
