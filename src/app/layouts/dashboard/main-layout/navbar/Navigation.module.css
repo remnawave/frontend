@@ -40,6 +40,9 @@
     width: calc(100% - 8px);
     transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 
+    border-left: 3px solid transparent;
+    border-right: 3px solid transparent;
+
     &::before {
         content: '';
         position: absolute;
@@ -63,7 +66,7 @@
     }
 
     &:hover {
-        transform: translateX(4px);
+        transform: translateX(2px);
         box-shadow:
             0 2px 8px rgba(0, 0, 0, 0.1),
             0 1px 4px rgba(0, 0, 0, 0.05);
@@ -95,9 +98,9 @@
 .sectionDropdownItemLink {
     border-radius: var(--mantine-radius-md);
     margin-bottom: 2px;
-    margin-left: 2px;
+    margin-left: 22px;
     position: relative;
-    width: calc(100% - 8px);
+    width: calc(100% - 30px);
 
     transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 
