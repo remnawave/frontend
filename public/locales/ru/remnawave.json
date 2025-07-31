@@ -1439,5 +1439,19 @@
         "feature": {
             "restart": "Перезапустить"
         }
+    },
+    "node-details-card": {
+        "show-zero-values": "Показать нулевые значения",
+        "hide-zero-values": "Скрыть нулевые значения",
+        "no-inbound-traffic-data": "Нет Inbound-траффика",
+        "no-outbound-traffic-data": "Нет Outbound-траффика",
+        "widget": {
+            "node-details": "Детали ноды",
+            "enable-node": "Включить ноды",
+            "disable-node": "Выключить ноду",
+            "config-profile-or-inbounds-is-missing": "Профиль или инбаунд не выбран",
+            "xray-core-version": "Версия ядра Xray",
+            "remnawave-node-version": "Версия модуля @remnawave/node"
+        }
     }
 }
