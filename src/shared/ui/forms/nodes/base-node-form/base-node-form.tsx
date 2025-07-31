@@ -42,6 +42,7 @@ import { ShowConfigProfilesWithInboundsFeature } from '@features/ui/dashboard/no
 import { SelectInfraProviderShared } from '@shared/ui/infra-billing/select-infra-provider/select-infra-provider.shared'
 import { ToggleNodeStatusButtonFeature } from '@features/ui/dashboard/nodes/toggle-node-status-button'
 import { GetNodeUsersUsageFeature } from '@features/ui/dashboard/nodes/get-node-users-usage'
+import { RestartNodeButtonFeature } from '@features/ui/dashboard/nodes/restart-node-button'
 import { ModalAccordionWidget } from '@widgets/dashboard/nodes/modal-accordeon-widget'
 import { DeleteNodeFeature } from '@features/ui/dashboard/nodes/delete-node'
 import { useGetConfigProfiles } from '@shared/api/hooks'
@@ -502,6 +503,7 @@ export const BaseNodeForm = <T extends CreateNodeCommand.Request | UpdateNodeCom
                             </CopyButton>
                             <Menu.Divider />
                             <Menu.Label>{t('base-node-form.management')}</Menu.Label>
+                            <RestartNodeButtonFeature handleClose={handleClose} node={node} />
                             <ToggleNodeStatusButtonFeature handleClose={handleClose} node={node} />
                             <Menu.Divider />
                             <DeleteNodeFeature handleClose={handleClose} node={node} />

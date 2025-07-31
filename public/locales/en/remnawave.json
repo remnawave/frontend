@@ -1434,5 +1434,10 @@
             "cancel": "Cancel",
             "create": "Create"
         }
+    },
+    "restart-node-button": {
+        "feature": {
+            "restart": "Restart"
+        }
     }
 }
