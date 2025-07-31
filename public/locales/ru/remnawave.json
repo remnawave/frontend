@@ -1434,5 +1434,10 @@
             "cancel": "Отменить",
             "create": "Создать"
         }
+    },
+    "restart-node-button": {
+        "feature": {
+            "restart": "Перезапустить"
+        }
     }
 }
