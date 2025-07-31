@@ -370,7 +370,14 @@
         "server-description-line-2": "مستندات Happ",
         "server-description-line-3": "برای کسب اطلاعات بیشتر",
         "server-description-line-4": "این مقدار توسط Remnawave به صورت Base64 رمزنگاری می‌شود. لطفا مقدار رمزنگاری شده وارد نکنید.",
-        "server-description-placeholder": "حداکثر 30 کاراکتر"
+        "server-description-placeholder": "حداکثر 30 کاراکتر",
+        "this-will-only-be-used-for-xray-json-output": "This will only be used for Xray-JSON output.",
+        "please-ensure-you-provide-a-valid-json-mux-object": "Please ensure you provide a valid JSON MUX object.",
+        "for-more-information-refer-to": "For more information, refer to",
+        "xtls-documentation": "XTLS documentation",
+        "paste-default-mux-params": "Paste default Mux Params",
+        "please-ensure-you-provide-a-valid-json-sockopt-object": "Please ensure you provide a valid JSON Sockopt object.",
+        "paste-default-sockopt-params": "Paste default Sockopt Params"
     },
     "base-node-form": {
         "country": "کشور",
@@ -1426,6 +1433,11 @@
             "enter-profile-name": "نام پروفایل را وارد کنید",
             "cancel": "لغو",
             "create": "ایجاد"
+        }
+    },
+    "restart-node-button": {
+        "feature": {
+            "restart": "Restart"
         }
     }
 }

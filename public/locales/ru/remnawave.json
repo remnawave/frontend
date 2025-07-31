@@ -370,7 +370,14 @@
         "server-description-line-2": "документацию Happ",
         "server-description-line-3": "для дополнительной информации.",
         "server-description-line-4": "Remnawave закодирует это значение в формате base64. Не вводите здесь закодированное значение.",
-        "server-description-placeholder": "Максимум 30 символов"
+        "server-description-placeholder": "Максимум 30 символов",
+        "this-will-only-be-used-for-xray-json-output": "Это будет использоваться только с Xray-JSON.",
+        "please-ensure-you-provide-a-valid-json-mux-object": "Убедитесь, что вы предоставили правильный объект JSON MUX.",
+        "for-more-information-refer-to": "За дополнительной информацией обратитесь к",
+        "xtls-documentation": "документации XTLS",
+        "paste-default-mux-params": "Вставить пример MUX",
+        "please-ensure-you-provide-a-valid-json-sockopt-object": "Убедитесь, что вы предоставили правильный объект JSON Sockopt.",
+        "paste-default-sockopt-params": "Вставить пример Sockopt"
     },
     "base-node-form": {
         "country": "Страна",
@@ -1426,6 +1433,11 @@
             "enter-profile-name": "Введите имя профиля",
             "cancel": "Отменить",
             "create": "Создать"
+        }
+    },
+    "restart-node-button": {
+        "feature": {
+            "restart": "Перезапустить"
         }
     }
 }

@@ -34,6 +34,7 @@ import {
 import { GetUserSubscriptionLinksFeature } from '@features/ui/dashboard/users/get-user-subscription-links'
 import { ToggleUserStatusButtonFeature } from '@features/ui/dashboard/users/toggle-user-status-button'
 import { RevokeSubscriptionUserFeature } from '@features/ui/dashboard/users/revoke-subscription-user'
+import { useBulkUsersActionsStoreActions } from '@entities/dashboard/users/bulk-users-actions-store'
 import { GetHwidUserDevicesFeature } from '@features/ui/dashboard/users/get-hwid-user-devices'
 import { ResetUsageUserFeature } from '@features/ui/dashboard/users/reset-usage-user'
 import { GetUserUsageFeature } from '@features/ui/dashboard/users/get-user-usage'
@@ -71,6 +72,8 @@ export const ViewUserModal = () => {
 
     const isViewUserModalOpen = useUserModalStoreIsModalOpen()
     const actions = useUserModalStoreActions()
+    const bulkUsersActionsStoreActions = useBulkUsersActionsStoreActions()
+
     const selectedUser = useUserModalStoreUserUuid()
 
     const isMobile = useMediaQuery(`(max-width: ${em(768)})`)
@@ -166,6 +169,12 @@ export const ViewUserModal = () => {
             })
         }
     }, [user, internalSquads])
+
+    useEffect(() => {
+        if (isViewUserModalOpen) {
+            bulkUsersActionsStoreActions.resetState()
+        }
+    }, [isViewUserModalOpen])
 
     const handleSubmit = form.onSubmit(async (values) => {
         const dirtyFields = form.getDirty()

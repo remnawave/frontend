@@ -5,6 +5,7 @@ import {
     EnableNodeCommand,
     ReorderNodeCommand,
     RestartAllNodesCommand,
+    RestartNodeCommand,
     UpdateNodeCommand
 } from '@remnawave/backend-contract'
 import { notifications } from '@mantine/notifications'
@@ -162,6 +163,30 @@ export const useReorderNodes = createMutationHook({
         onError: (error) => {
             notifications.show({
                 title: `Reorder Nodes`,
+                message:
+                    error instanceof Error ? error.message : `Request failed with unknown error.`,
+                color: 'red'
+            })
+        }
+    }
+})
+
+export const useRestartNode = createMutationHook({
+    endpoint: RestartNodeCommand.TSQ_url,
+    responseSchema: RestartNodeCommand.ResponseSchema,
+    routeParamsSchema: RestartNodeCommand.RequestSchema,
+    requestMethod: RestartNodeCommand.endpointDetails.REQUEST_METHOD,
+    rMutationParams: {
+        onSuccess: () => {
+            notifications.show({
+                title: 'Success',
+                message: 'Node restarted successfully',
+                color: 'teal'
+            })
+        },
+        onError: (error) => {
+            notifications.show({
+                title: `Restart Node`,
                 message:
                     error instanceof Error ? error.message : `Request failed with unknown error.`,
                 color: 'red'
