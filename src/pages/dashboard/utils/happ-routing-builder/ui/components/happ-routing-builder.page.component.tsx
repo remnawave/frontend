@@ -54,7 +54,6 @@ export const HappRoutingBuilderPageComponent = () => {
             <PageHeader
                 breadcrumbs={[
                     { label: t('constants.dashboard'), href: ROUTES.DASHBOARD.HOME },
-                    { label: t('constants.utils') },
                     { label: title }
                 ]}
                 title={title}

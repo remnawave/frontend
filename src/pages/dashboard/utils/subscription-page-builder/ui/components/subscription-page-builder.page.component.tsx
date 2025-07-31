@@ -1,19 +1,29 @@
 import {
+    ActionIcon,
     Alert,
     Button,
     Code,
     Container,
     Flex,
     Grid,
+    Group,
     LoadingOverlay,
     Modal,
     Paper,
     ScrollArea,
     Stack,
     Tabs,
-    Text
+    Text,
+    ThemeIcon,
+    Tooltip
 } from '@mantine/core'
-import { TbAlertCircle as IconAlertCircle, TbPlus as IconPlus } from 'react-icons/tb'
+import {
+    TbAlertCircle as IconAlertCircle,
+    TbPlus as IconPlus,
+    TbChevronDown,
+    TbChevronUp,
+    TbStar
+} from 'react-icons/tb'
 import { PiAndroidLogo, PiAppleLogo, PiWindowsLogo } from 'react-icons/pi'
 import { useTranslation } from 'react-i18next'
 import { useDisclosure } from '@mantine/hooks'
@@ -54,34 +64,13 @@ export const SubscriptionPageBuilderComponent = () => {
         }, 10)
     }
 
-    const updateApp = (updatedApp: AppConfig & { _oldId?: string }) => {
+    const updateApp = (updatedApp: AppConfig) => {
         const updatedConfig = { ...config }
+        const appIndex = updatedConfig[activeTab].findIndex((app) => app.id === updatedApp.id)
 
-        if (updatedApp._oldId && updatedApp._oldId !== updatedApp.id) {
-            const appIndex = updatedConfig[activeTab].findIndex(
-                (app) => app.id === updatedApp._oldId
-            )
-            if (appIndex !== -1) {
-                const appWithoutOldId = { ...updatedApp } as AppConfig
-                delete (appWithoutOldId as AppConfig & { _oldId?: string })._oldId
-                updatedConfig[activeTab][appIndex] = appWithoutOldId
-
-                if (selectedAppId === updatedApp._oldId) {
-                    setSelectedAppId(updatedApp.id)
-                }
-
-                setConfig(updatedConfig)
-            }
-        } else {
-            const appIndex = updatedConfig[activeTab].findIndex((app) => app.id === updatedApp.id)
-            if (appIndex !== -1) {
-                const appWithoutOldId = { ...updatedApp } as AppConfig
-                if ((updatedApp as AppConfig & { _oldId?: string })._oldId) {
-                    delete (appWithoutOldId as AppConfig & { _oldId?: string })._oldId
-                }
-                updatedConfig[activeTab][appIndex] = appWithoutOldId
-                setConfig(updatedConfig)
-            }
+        if (appIndex !== -1) {
+            updatedConfig[activeTab][appIndex] = updatedApp
+            setConfig(updatedConfig)
         }
     }
 
@@ -97,6 +86,55 @@ export const SubscriptionPageBuilderComponent = () => {
         }
     }
 
+    const moveAppUp = (appId: string) => {
+        const updatedConfig = { ...config }
+        const apps = [...updatedConfig[activeTab]]
+        const currentIndex = apps.findIndex((app) => app.id === appId)
+
+        if (currentIndex > 0) {
+            const temp = apps[currentIndex]
+            apps[currentIndex] = apps[currentIndex - 1]
+            apps[currentIndex - 1] = temp
+            updatedConfig[activeTab] = apps
+            setConfig(updatedConfig)
+        }
+    }
+
+    const moveAppDown = (appId: string) => {
+        const updatedConfig = { ...config }
+        const apps = [...updatedConfig[activeTab]]
+        const currentIndex = apps.findIndex((app) => app.id === appId)
+
+        if (currentIndex < apps.length - 1) {
+            const temp = apps[currentIndex]
+            apps[currentIndex] = apps[currentIndex + 1]
+            apps[currentIndex + 1] = temp
+            updatedConfig[activeTab] = apps
+            setConfig(updatedConfig)
+        }
+    }
+
+    const normalizeConfigIds = (config: PlatformConfig): PlatformConfig => {
+        const normalizedConfig = JSON.parse(JSON.stringify(config)) as PlatformConfig
+
+        normalizedConfig.ios = normalizedConfig.ios.map((app) => ({
+            ...app,
+            id: app.id.toLowerCase() as `${Lowercase<string>}`
+        }))
+
+        normalizedConfig.android = normalizedConfig.android.map((app) => ({
+            ...app,
+            id: app.id.toLowerCase() as `${Lowercase<string>}`
+        }))
+
+        normalizedConfig.pc = normalizedConfig.pc.map((app) => ({
+            ...app,
+            id: app.id.toLowerCase() as `${Lowercase<string>}`
+        }))
+
+        return normalizedConfig
+    }
+
     const validateAndApplyConfig = (configData: PlatformConfig) => {
         const validationResult = validatePlatformConfig(configData)
 
@@ -106,7 +144,7 @@ export const SubscriptionPageBuilderComponent = () => {
             return false
         }
 
-        setConfig(configData as PlatformConfig)
+        setConfig(configData)
 
         if (configData.ios?.length > 0) {
             setActiveTab('ios')
@@ -149,8 +187,9 @@ export const SubscriptionPageBuilderComponent = () => {
         const reader = new FileReader()
         reader.onload = (e) => {
             try {
-                const configData = JSON.parse(e.target?.result as string)
-                const isValid = validateAndApplyConfig(configData)
+                const configData = JSON.parse(e.target?.result as string) as PlatformConfig
+                const normalizedConfig = normalizeConfigIds(configData)
+                const isValid = validateAndApplyConfig(normalizedConfig)
 
                 if (!isValid) {
                     consola.error('Validation failed for imported config')
@@ -179,8 +218,9 @@ export const SubscriptionPageBuilderComponent = () => {
                 throw new Error(`Failed to fetch: ${response.status}`)
             }
 
-            const configData = await response.json()
-            const isValid = validateAndApplyConfig(configData)
+            const configData = (await response.json()) as PlatformConfig
+            const normalizedConfig = normalizeConfigIds(configData)
+            const isValid = validateAndApplyConfig(normalizedConfig)
 
             if (!isValid) {
                 consola.error('Validation failed for default config')
@@ -200,12 +240,37 @@ export const SubscriptionPageBuilderComponent = () => {
 
     const selectedApp = config[activeTab].find((app) => app.id === selectedAppId)
 
+    const getPlatformIcon = (platform: 'android' | 'ios' | 'pc') => {
+        switch (platform) {
+            case 'android':
+                return <PiAndroidLogo size="18px" />
+            case 'ios':
+                return <PiAppleLogo size="18px" />
+            case 'pc':
+                return <PiWindowsLogo size="18px" />
+            default:
+                return <PiAppleLogo size="18px" />
+        }
+    }
+
+    const getPlatformColor = (platform: 'android' | 'ios' | 'pc') => {
+        switch (platform) {
+            case 'android':
+                return 'teal'
+            case 'ios':
+                return 'gray'
+            case 'pc':
+                return 'blue'
+            default:
+                return 'gray'
+        }
+    }
+
     return (
         <Page title={t('constants.subscription-page-builder')}>
             <PageHeader
                 breadcrumbs={[
                     { label: t('constants.dashboard'), href: ROUTES.DASHBOARD.HOME },
-                    { label: t('constants.utils') },
                     { label: t('constants.subscription-page-builder') }
                 ]}
                 title={t('constants.subscription-page-builder')}
@@ -249,26 +314,83 @@ export const SubscriptionPageBuilderComponent = () => {
                                         )}
                                     </Text>
                                 ) : (
-                                    config[activeTab].map((app) => (
+                                    config[activeTab].map((app, index) => (
                                         <Paper
                                             key={app.id}
-                                            onClick={() => setSelectedAppId(app.id)}
-                                            p="sm"
+                                            p="md"
                                             radius="md"
-                                            shadow={selectedAppId === app.id ? 'md' : 'xs'}
+                                            shadow={selectedAppId === app.id ? 'lg' : 'xs'}
                                             style={{
-                                                cursor: 'pointer',
                                                 borderColor:
                                                     selectedAppId === app.id
-                                                        ? 'var(--mantine-color-cyan-outline)'
-                                                        : undefined
+                                                        ? `var(--mantine-color-${getPlatformColor(activeTab)}-outline)`
+                                                        : undefined,
+                                                borderWidth: selectedAppId === app.id ? 2 : 1,
+                                                cursor: 'pointer',
+                                                transition: 'all 0.2s ease'
                                             }}
                                             withBorder
                                         >
-                                            <Text fw={500}>{app.name}</Text>
-                                            <Text c="dimmed" size="xs">
-                                                {app.urlScheme ? app.urlScheme : 'No URL scheme'}
-                                            </Text>
+                                            <Group align="flex-start" justify="space-between">
+                                                <div
+                                                    onClick={() => setSelectedAppId(app.id)}
+                                                    style={{
+                                                        flex: 1
+                                                    }}
+                                                >
+                                                    <Group gap="xs" mb="xs">
+                                                        <ThemeIcon
+                                                            color={getPlatformColor(activeTab)}
+                                                            radius="md"
+                                                            size="sm"
+                                                            variant="light"
+                                                        >
+                                                            {getPlatformIcon(activeTab)}
+                                                        </ThemeIcon>
+                                                        <Text fw={600} size="sm">
+                                                            {app.name}
+                                                        </Text>
+                                                        {app.isFeatured && (
+                                                            <TbStar color="gold" size={16} />
+                                                        )}
+                                                    </Group>
+
+                                                    <Text c="dimmed" size="xs">
+                                                        {app.urlScheme || 'No URL scheme'}
+                                                    </Text>
+                                                </div>
+                                                <Group gap={4}>
+                                                    <Tooltip label="Move up">
+                                                        <ActionIcon
+                                                            disabled={index === 0}
+                                                            onClick={(e) => {
+                                                                e.stopPropagation()
+                                                                moveAppUp(app.id)
+                                                            }}
+                                                            size="sm"
+                                                            variant="subtle"
+                                                        >
+                                                            <TbChevronUp />
+                                                        </ActionIcon>
+                                                    </Tooltip>
+                                                    <Tooltip label="Move down">
+                                                        <ActionIcon
+                                                            disabled={
+                                                                index ===
+                                                                config[activeTab].length - 1
+                                                            }
+                                                            onClick={(e) => {
+                                                                e.stopPropagation()
+                                                                moveAppDown(app.id)
+                                                            }}
+                                                            size="sm"
+                                                            variant="subtle"
+                                                        >
+                                                            <TbChevronDown />
+                                                        </ActionIcon>
+                                                    </Tooltip>
+                                                </Group>
+                                            </Group>
                                         </Paper>
                                     ))
                                 )}
