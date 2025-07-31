@@ -134,8 +134,9 @@ export function ShowConfigProfilesWithInboundsFeature(props: IProps) {
             </Button>
 
             <ConfigProfilesDrawer
-                activeConfigProfileInbounds={activeConfigProfileInbounds || []}
-                activeConfigProfileUuid={activeConfigProfileUuid || null}
+                activeConfigProfileInbounds={activeConfigProfileInbounds}
+                activeConfigProfileUuid={activeConfigProfileUuid}
+                key={`${activeConfigProfileUuid}-${activeConfigProfileInbounds?.join(',')}`}
                 onClose={handlers.close}
                 onSaveInbounds={onSaveInbounds}
                 opened={opened}

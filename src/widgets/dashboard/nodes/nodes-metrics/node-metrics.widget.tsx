@@ -2,7 +2,6 @@ import {
     Box,
     Card,
     Center,
-    Grid,
     Group,
     HoverCard,
     Indicator,
@@ -23,14 +22,19 @@ import {
     PiSpeedometer,
     PiUsersDuotone
 } from 'react-icons/pi'
+import { GetNodesMetricsCommand } from '@remnawave/backend-contract'
+import { VirtuosoMasonry } from '@virtuoso.dev/masonry'
 import { TbServer, TbServer2 } from 'react-icons/tb'
-import { memo, useMemo } from 'react'
+import { memo, useCallback, useMemo } from 'react'
+import { useMediaQuery } from '@mantine/hooks'
 
+import { MODALS, useModalsStore } from '@entities/dashboard/modal-store'
 import { MetricCard } from '@shared/ui/metrics/metric-card'
 import { useGetNodesMetrics } from '@shared/api/hooks'
 import { formatInt } from '@shared/utils/misc'
 
 import { NodeDetailsCard } from './node-details-card'
+import styles from './NodeDetails.module.css'
 
 const StatCard = memo(
     ({
@@ -66,6 +70,19 @@ const StatCard = memo(
 
 export const NodeMetricsWidget = () => {
     const { data: nodeMetrics, isLoading } = useGetNodesMetrics()
+    const { open, setInternalData } = useModalsStore()
+    const isMobile = useMediaQuery('(max-width: 768px)')
+
+    const handleNodeClick = useCallback(
+        (nodeUuid: string) => {
+            setInternalData({
+                internalState: { nodeUuid },
+                modalKey: MODALS.EDIT_NODE_BY_UUID_MODAL
+            })
+            open(MODALS.EDIT_NODE_BY_UUID_MODAL)
+        },
+        [open, setInternalData]
+    )
 
     const overallStats = useMemo(() => {
         if (!nodeMetrics?.nodes) return null
@@ -108,6 +125,25 @@ export const NodeMetricsWidget = () => {
                     </Stack>
                 </Center>
             </Card>
+        )
+    }
+
+    const Item: React.FC<{
+        context: unknown
+        data: GetNodesMetricsCommand.Response['response']['nodes'][number]
+        index: number
+    }> = ({ data }) => {
+        return (
+            <div
+                className={styles.itemFadeIn}
+                key={data.nodeUuid}
+                style={{
+                    padding: 5,
+                    margin: '0'
+                }}
+            >
+                <NodeDetailsCard handleNodeClick={handleNodeClick} node={data} />
+            </div>
         )
     }
 
@@ -228,13 +264,15 @@ export const NodeMetricsWidget = () => {
                     </Title>
                 </Group>
 
-                <Grid>
-                    {nodeMetrics.nodes.map((node) => (
-                        <Grid.Col key={node.nodeUuid} span={{ base: 12, lg: 6 }}>
-                            <NodeDetailsCard node={node} />
-                        </Grid.Col>
-                    ))}
-                </Grid>
+                <VirtuosoMasonry
+                    columnCount={isMobile ? 1 : 2}
+                    data={nodeMetrics?.nodes}
+                    ItemContent={Item}
+                    style={{
+                        height: '100%'
+                    }}
+                    useWindowScroll={true}
+                />
             </Box>
         </Stack>
     )

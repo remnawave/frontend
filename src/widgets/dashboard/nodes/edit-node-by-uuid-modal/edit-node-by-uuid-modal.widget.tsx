@@ -133,9 +133,10 @@ export const EditNodeByUuidModalWidget = () => {
     return (
         <Modal
             centered
+            closeOnEscape={false}
             fullScreen={isMobile}
             onClose={() => close(MODALS.EDIT_NODE_BY_UUID_MODAL)}
-            onExitTransitionEnd={() => handleClose}
+            onExitTransitionEnd={() => handleClose()}
             opened={isOpen}
             size="900px"
             title={
