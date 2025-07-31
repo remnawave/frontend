@@ -29,9 +29,7 @@ export const EditHostModalWidget = () => {
     const form = useForm<UpdateHostCommand.Request>({
         name: 'edit-host-form',
         mode: 'uncontrolled',
-        validate: zodResolver(
-            UpdateHostCommand.RequestSchema.omit({ uuid: true, xHttpExtraParams: true })
-        )
+        validate: zodResolver(UpdateHostCommand.RequestSchema.omit({ uuid: true }))
     })
 
     const handleClose = () => {
@@ -64,6 +62,8 @@ export const EditHostModalWidget = () => {
     useEffect(() => {
         if (host && configProfiles) {
             let xHttpExtraParamsParsed: null | object | string
+            let muxParamsParsed: null | object | string
+            let sockoptParamsParsed: null | object | string
 
             if (typeof host.xHttpExtraParams === 'object' && host.xHttpExtraParams !== null) {
                 xHttpExtraParamsParsed = JSON.stringify(host.xHttpExtraParams, null, 2)
@@ -71,25 +71,38 @@ export const EditHostModalWidget = () => {
                 xHttpExtraParamsParsed = ''
             }
 
+            if (typeof host.muxParams === 'object' && host.muxParams !== null) {
+                muxParamsParsed = JSON.stringify(host.muxParams, null, 2)
+            } else {
+                muxParamsParsed = ''
+            }
+
+            if (typeof host.sockoptParams === 'object' && host.sockoptParams !== null) {
+                sockoptParamsParsed = JSON.stringify(host.sockoptParams, null, 2)
+            } else {
+                sockoptParamsParsed = ''
+            }
+
             form.setValues({
                 remark: host.remark,
                 address: host.address,
                 port: host.port,
-
                 securityLayer: host.securityLayer,
                 isDisabled: !host.isDisabled,
                 sni: host.sni ?? undefined,
                 host: host.host ?? undefined,
                 path: host.path ?? undefined,
                 alpn: (host.alpn as UpdateHostCommand.Request['alpn']) ?? undefined,
-                xHttpExtraParams: xHttpExtraParamsParsed,
                 fingerprint:
                     (host.fingerprint as UpdateHostCommand.Request['fingerprint']) ?? undefined,
                 inbound: {
                     configProfileUuid: host.inbound.configProfileUuid ?? '',
                     configProfileInboundUuid: host.inbound.configProfileInboundUuid ?? ''
                 },
-                serverDescription: host.serverDescription ?? undefined
+                serverDescription: host.serverDescription ?? undefined,
+                xHttpExtraParams: xHttpExtraParamsParsed,
+                muxParams: muxParamsParsed,
+                sockoptParams: sockoptParamsParsed
             })
         }
     }, [host, configProfiles])
@@ -117,6 +130,8 @@ export const EditHostModalWidget = () => {
         }
 
         let xHttpExtraParams
+        let muxParams
+        let sockoptParams
 
         try {
             if (values.xHttpExtraParams === '') {
@@ -130,12 +145,38 @@ export const EditHostModalWidget = () => {
             // silence
         }
 
+        try {
+            if (values.muxParams === '') {
+                muxParams = null
+            } else {
+                muxParams = JSON.parse(values.muxParams as unknown as string)
+            }
+        } catch (error) {
+            consola.error(error)
+            muxParams = null
+            // silence
+        }
+
+        try {
+            if (values.sockoptParams === '') {
+                sockoptParams = null
+            } else {
+                sockoptParams = JSON.parse(values.sockoptParams as unknown as string)
+            }
+        } catch (error) {
+            consola.error(error)
+            sockoptParams = null
+            // silence
+        }
+
         updateHost({
             variables: {
                 ...values,
                 isDisabled: !values.isDisabled,
                 uuid: host.uuid,
-                xHttpExtraParams
+                xHttpExtraParams,
+                muxParams,
+                sockoptParams
             }
         })
     })
@@ -167,13 +208,15 @@ export const EditHostModalWidget = () => {
                 host: host.host ?? undefined,
                 alpn: (host.alpn as UpdateHostCommand.Request['alpn']) ?? undefined,
                 xHttpExtraParams: host.xHttpExtraParams ?? undefined,
+                muxParams: host.muxParams ?? undefined,
                 fingerprint:
                     (host.fingerprint as UpdateHostCommand.Request['fingerprint']) ?? undefined,
                 inbound: {
                     configProfileUuid: host.inbound.configProfileUuid,
                     configProfileInboundUuid: host.inbound.configProfileInboundUuid
                 },
-                serverDescription: host.serverDescription ?? undefined
+                serverDescription: host.serverDescription ?? undefined,
+                sockoptParams: host.sockoptParams ?? undefined
             }
         })
     }

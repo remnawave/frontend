@@ -370,7 +370,14 @@
         "server-description-line-2": "Happ 文档",
         "server-description-line-3": "以获取更多信息。",
         "server-description-line-4": "Remnawave 将自动对该值进行 base64 编码，请勿在此输入已编码的值。",
-        "server-description-placeholder": "最多 30 个字符"
+        "server-description-placeholder": "最多 30 个字符",
+        "this-will-only-be-used-for-xray-json-output": "This will only be used for Xray-JSON output.",
+        "please-ensure-you-provide-a-valid-json-mux-object": "Please ensure you provide a valid JSON MUX object.",
+        "for-more-information-refer-to": "For more information, refer to",
+        "xtls-documentation": "XTLS documentation",
+        "paste-default-mux-params": "Paste default Mux Params",
+        "please-ensure-you-provide-a-valid-json-sockopt-object": "Please ensure you provide a valid JSON Sockopt object.",
+        "paste-default-sockopt-params": "Paste default Sockopt Params"
     },
     "base-node-form": {
         "country": "国家",

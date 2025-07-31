@@ -113,6 +113,7 @@ export const BulkAllUserActionsUpdateTabFeature = (props: IProps) => {
 
                 <NumberInput
                     allowDecimal={false}
+                    allowNegative={false}
                     decimalScale={0}
                     description={t('create-user-modal.widget.data-limit-description')}
                     key={form.key('trafficLimitBytes')}
