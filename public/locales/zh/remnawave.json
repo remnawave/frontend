@@ -370,7 +370,14 @@
         "server-description-line-2": "Happ documentation",
         "server-description-line-3": "for more information.",
         "server-description-line-4": "Remnawave will encode this value to base64. Do not place encoded value here.",
-        "server-description-placeholder": "Maximum 30 characters"
+        "server-description-placeholder": "Maximum 30 characters",
+        "this-will-only-be-used-for-xray-json-output": "This will only be used for Xray-JSON output.",
+        "please-ensure-you-provide-a-valid-json-mux-object": "Please ensure you provide a valid JSON MUX object.",
+        "for-more-information-refer-to": "For more information, refer to",
+        "xtls-documentation": "XTLS documentation",
+        "paste-default-mux-params": "Paste default Mux Params",
+        "please-ensure-you-provide-a-valid-json-sockopt-object": "Please ensure you provide a valid JSON Sockopt object.",
+        "paste-default-sockopt-params": "Paste default Sockopt Params"
     },
     "base-node-form": {
         "country": "国家",
