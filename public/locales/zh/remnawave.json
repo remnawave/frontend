@@ -1,7 +1,7 @@
 {
     "constants": {
         "dashboard": "仪表盘",
-        "api-tokens": "API 秘钥",
+        "api-tokens": "API 令牌",
         "config": "Xray 配置",
         "home": "首页",
         "hosts": "主机",
@@ -44,7 +44,7 @@
         "system-uptime": "系统运行时间",
         "ram-usage": "内存使用率",
         "total-traffic": "总流量",
-        "total-online-on-nodes": "节点在线总数"
+        "total-online-on-nodes": "所有节点在线的用户总数"
     },
     "users-metrics": {
         "disabled-users": "禁用用户",
@@ -371,13 +371,13 @@
         "server-description-line-3": "以获取更多信息。",
         "server-description-line-4": "Remnawave 将自动对该值进行 base64 编码，请勿在此输入已编码的值。",
         "server-description-placeholder": "最多 30 个字符",
-        "this-will-only-be-used-for-xray-json-output": "This will only be used for Xray-JSON output.",
-        "please-ensure-you-provide-a-valid-json-mux-object": "Please ensure you provide a valid JSON MUX object.",
-        "for-more-information-refer-to": "For more information, refer to",
-        "xtls-documentation": "XTLS documentation",
-        "paste-default-mux-params": "Paste default Mux Params",
-        "please-ensure-you-provide-a-valid-json-sockopt-object": "Please ensure you provide a valid JSON Sockopt object.",
-        "paste-default-sockopt-params": "Paste default Sockopt Params"
+        "this-will-only-be-used-for-xray-json-output": "这将仅用于 Xray-JSON 输出。",
+        "please-ensure-you-provide-a-valid-json-mux-object": "请确保您提供一个有效的 JSON MUX 对象。",
+        "for-more-information-refer-to": "欲了解更多信息，请参阅：",
+        "xtls-documentation": "XTLS 文档",
+        "paste-default-mux-params": "粘贴默认的 Mux 参数",
+        "please-ensure-you-provide-a-valid-json-sockopt-object": "请确保您提供一个有效的 JSON Sockopt 对象。",
+        "paste-default-sockopt-params": "粘贴默认 Sockopt 参数"
     },
     "base-node-form": {
         "country": "国家",
@@ -511,7 +511,7 @@
             "passwords-do-not-match": "密码不匹配",
             "password-too-short": "最少 24 个字符",
             "register-description": "创建一个超级管理员账户以开始使用",
-            "registration": "Registration"
+            "registration": "注册"
         }
     },
     "xray-json-template-description": {
@@ -1009,7 +1009,7 @@
             "platform": "平台",
             "unknown": "未知",
             "model": "型号",
-            "user-agent": "User Agent",
+            "user-agent": "浏览器版本(User Agent)",
             "added": "添加时间",
             "os-version": "操作系统版本",
             "delete-device": "删除设备",
