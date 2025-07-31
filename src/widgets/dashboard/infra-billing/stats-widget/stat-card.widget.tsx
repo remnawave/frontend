@@ -27,8 +27,13 @@ export function StatCardWidget({ title, value, icon, color, subtitle, isLoading 
             radius="md"
             shadow="sm"
             style={{
-                backgroundColor: 'var(--mantine-color-dark-6)',
-                border: '1px solid var(--mantine-color-dark-6)',
+                border: '1px solid var(--mantine-color-dark-4)',
+                background: `linear-gradient(
+                    135deg,
+                    var(--mantine-color-dark-6) 0%,
+                    var(--mantine-color-dark-7) 100%
+                )`,
+                boxShadow: '0 1px 3px rgba(0, 0, 0, 0.2)',
                 cursor: 'default',
                 transitionDuration: '0.3s'
             }}
