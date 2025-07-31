@@ -10,6 +10,7 @@ import { useClipboard, useMediaQuery } from '@mantine/hooks'
 import { notifications } from '@mantine/notifications'
 import ReactCountryFlag from 'react-country-flag'
 import { useSortable } from '@dnd-kit/sortable'
+import { TbAlertCircle } from 'react-icons/tb'
 import { useTranslation } from 'react-i18next'
 import { CSS } from '@dnd-kit/utilities'
 import clsx from 'clsx'
@@ -113,7 +114,14 @@ export const NodeCardWidget = memo((props: IProps) => {
         }
 
         return { backgroundColor, borderColor, boxShadow }
-    }, [node.isConnected, node.isConnecting, node.isDisabled])
+    }, [node.isConnected, node.isConnecting, node.isDisabled, node.configProfile])
+
+    const isConfigMissing = useMemo(() => {
+        return (
+            node.configProfile.activeConfigProfileUuid === null ||
+            node.configProfile.activeInbounds.length === 0
+        )
+    }, [node.configProfile])
 
     return (
         <Box
@@ -148,18 +156,31 @@ export const NodeCardWidget = memo((props: IProps) => {
                 <Grid align="center" className={classes.desktopGrid} gutter="md">
                     <Grid.Col span={{ base: 12, sm: 5.5 }}>
                         <Flex align="center" gap="sm">
-                            <NodeStatusBadgeWidget node={node} withText={false} />
-
-                            <Badge
-                                color={node.usersOnline! > 0 ? 'teal' : 'gray'}
-                                leftSection={<PiUsersDuotone size={14} />}
-                                miw={'7ch'}
-                                radius="md"
-                                size="lg"
-                                variant="outline"
-                            >
-                                {node.usersOnline}
-                            </Badge>
+                            {isConfigMissing ? (
+                                <Badge
+                                    color="red"
+                                    leftSection={<TbAlertCircle size={14} />}
+                                    radius="md"
+                                    size="lg"
+                                    variant="light"
+                                >
+                                    DANGLING
+                                </Badge>
+                            ) : (
+                                <>
+                                    <NodeStatusBadgeWidget node={node} withText={false} />
+                                    <Badge
+                                        color={node.usersOnline! > 0 ? 'teal' : 'gray'}
+                                        leftSection={<PiUsersDuotone size={14} />}
+                                        miw={'7ch'}
+                                        radius="md"
+                                        size="lg"
+                                        variant="outline"
+                                    >
+                                        {node.usersOnline}
+                                    </Badge>
+                                </>
+                            )}
 
                             <Flex align="center" className={classes.nameContainer} gap="xs">
                                 {node.countryCode && node.countryCode !== 'XX' && (
@@ -281,18 +302,32 @@ export const NodeCardWidget = memo((props: IProps) => {
             {isMobile && (
                 <Box>
                     <Flex align="center" gap="sm" mb="xs">
-                        <NodeStatusBadgeWidget node={node} withText={false} />
+                        {isConfigMissing && (
+                            <Badge
+                                color="red"
+                                leftSection={<TbAlertCircle size={14} />}
+                                radius="md"
+                                size="lg"
+                                variant="light"
+                            >
+                                DANGLING
+                            </Badge>
+                        )}
 
-                        <Badge
-                            color={node.usersOnline! > 0 ? 'teal' : 'gray'}
-                            leftSection={<PiUsersDuotone size={14} />}
-                            miw={'7ch'}
-                            radius="md"
-                            size="lg"
-                            variant="outline"
-                        >
-                            {node.usersOnline}
-                        </Badge>
+                        {!isConfigMissing && <NodeStatusBadgeWidget node={node} withText={false} />}
+
+                        {!isConfigMissing && (
+                            <Badge
+                                color={node.usersOnline! > 0 ? 'teal' : 'gray'}
+                                leftSection={<PiUsersDuotone size={14} />}
+                                miw={'7ch'}
+                                radius="md"
+                                size="lg"
+                                variant="outline"
+                            >
+                                {node.usersOnline}
+                            </Badge>
+                        )}
 
                         <Flex align="center" gap="xs" style={{ flex: 1, minWidth: 0 }}>
                             {node.countryCode && node.countryCode !== 'XX' && (

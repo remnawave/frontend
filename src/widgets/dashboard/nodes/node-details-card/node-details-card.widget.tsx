@@ -1,7 +1,9 @@
 import {
+    ActionIcon,
     Box,
     Card,
     Group,
+    Loader,
     Paper,
     SimpleGrid,
     Stack,
@@ -11,13 +13,16 @@ import {
     Tooltip
 } from '@mantine/core'
 import { PiCloudArrowUpDuotone, PiUsersDuotone, PiWarningCircle } from 'react-icons/pi'
-import { TbWifi, TbWifiOff } from 'react-icons/tb'
+import { UpdateNodeCommand } from '@remnawave/backend-contract'
+import { TbPower, TbWifi, TbWifiOff } from 'react-icons/tb'
 import { HiOutlineServer } from 'react-icons/hi'
 import { useTranslation } from 'react-i18next'
 import { motion } from 'framer-motion'
 import { memo, useMemo } from 'react'
 
+import { QueryKeys, useDisableNode, useEnableNode } from '@shared/api/hooks'
 import { XtlsLogo } from '@shared/ui/logos/xtls-logo'
+import { queryClient } from '@shared/api'
 import { Logo } from '@shared/ui'
 
 import { IProps } from './interface'
@@ -27,12 +32,46 @@ export const NodeDetailsCardWidget = memo(({ node, fetchedNode }: IProps) => {
 
     const nodeData = fetchedNode || node
 
+    const mutationParams = {
+        route: {
+            uuid: nodeData.uuid
+        },
+        mutationFns: {
+            onSuccess: async (nodeData: UpdateNodeCommand.Response['response']) => {
+                await queryClient.setQueryData(
+                    QueryKeys.nodes.getNode({ uuid: nodeData.uuid }).queryKey,
+                    nodeData
+                )
+            }
+        }
+    }
+
+    const { mutate: disableNode, isPending: isDisableNodePending } = useDisableNode(mutationParams)
+    const { mutate: enableNode, isPending: isEnableNodePending } = useEnableNode(mutationParams)
+
+    const isConfigMissing = useMemo(() => {
+        return (
+            node.configProfile.activeConfigProfileUuid === null ||
+            node.configProfile.activeInbounds.length === 0
+        )
+    }, [node.configProfile])
+
     const { icon, color, backgroundColor, borderColor, boxShadow } = useMemo(() => {
         let icon: React.ReactNode
         let color = 'red'
         let backgroundColor = 'rgba(239, 68, 68, 0.15)'
         let borderColor = 'rgba(239, 68, 68, 0.3)'
         let boxShadow = 'rgba(239, 68, 68, 0.2)'
+
+        if (isConfigMissing) {
+            icon = <PiWarningCircle size={18} style={{ color: 'var(--mantine-color-red-6)' }} />
+            color = 'red'
+            backgroundColor = 'rgba(239, 68, 68, 0.15)'
+            borderColor = 'rgba(239, 68, 68, 0.3)'
+            boxShadow = 'rgba(239, 68, 68, 0.2)'
+
+            return { icon, color, backgroundColor, borderColor, boxShadow }
+        }
 
         if (nodeData.isConnected) {
             icon = <TbWifi size={18} style={{ color: 'var(--mantine-color-teal-6)' }} />
@@ -67,6 +106,14 @@ export const NodeDetailsCardWidget = memo(({ node, fetchedNode }: IProps) => {
 
         return { icon, color, backgroundColor, borderColor, boxShadow }
     }, [nodeData.isConnected, nodeData.isConnecting, nodeData.isDisabled, t])
+
+    const handleToggleNodeStatus = () => {
+        if (nodeData.isDisabled) {
+            enableNode({})
+        } else {
+            disableNode({})
+        }
+    }
 
     return (
         <Card
@@ -115,29 +162,98 @@ export const NodeDetailsCardWidget = memo(({ node, fetchedNode }: IProps) => {
                         </Box>
                     </Group>
 
-                    <motion.div
-                        animate={{
-                            scale: nodeData?.isConnected ? [1, 1.1, 1] : 1,
-                            opacity: nodeData?.isConnected ? [1, 0.8, 1] : 0.6
-                        }}
-                        transition={{
-                            duration: nodeData?.isConnected ? 2 : 0,
-                            repeat: nodeData?.isConnected ? Infinity : 0
-                        }}
-                    >
-                        <ThemeIcon
-                            color={color}
-                            size="lg"
-                            style={{
-                                backgroundColor,
-                                border: `1px solid ${borderColor}`,
-                                boxShadow: `0 0 15px ${boxShadow}`
+                    <Group gap="xs">
+                        {!isConfigMissing && (
+                            <Tooltip label={nodeData.isDisabled ? 'Enable Node' : 'Disable Node'}>
+                                <ActionIcon
+                                    color={nodeData.isDisabled ? 'teal' : 'red'}
+                                    disabled={isDisableNodePending || isEnableNodePending}
+                                    onClick={handleToggleNodeStatus}
+                                    size="md"
+                                    style={{
+                                        backgroundColor: nodeData.isDisabled
+                                            ? 'rgba(45, 212, 191, 0.15)'
+                                            : 'rgba(239, 68, 68, 0.15)',
+                                        border: `1px solid ${
+                                            nodeData.isDisabled
+                                                ? 'rgba(45, 212, 191, 0.3)'
+                                                : 'rgba(239, 68, 68, 0.3)'
+                                        }`,
+                                        boxShadow: `0 0 10px ${
+                                            nodeData.isDisabled
+                                                ? 'rgba(45, 212, 191, 0.2)'
+                                                : 'rgba(239, 68, 68, 0.2)'
+                                        }`
+                                    }}
+                                    variant="light"
+                                >
+                                    {isDisableNodePending || isEnableNodePending ? (
+                                        <Loader
+                                            color={nodeData.isDisabled ? 'teal' : 'red'}
+                                            size="xs"
+                                        />
+                                    ) : (
+                                        <TbPower
+                                            size={16}
+                                            style={{
+                                                color: nodeData.isDisabled
+                                                    ? 'var(--mantine-color-teal-4)'
+                                                    : 'var(--mantine-color-red-4)'
+                                            }}
+                                        />
+                                    )}
+                                </ActionIcon>
+                            </Tooltip>
+                        )}
+
+                        {isConfigMissing && (
+                            <Tooltip label="Config profile or inbounds is missing">
+                                <ActionIcon
+                                    color="gray"
+                                    disabled
+                                    size="md"
+                                    style={{
+                                        backgroundColor: 'rgba(107, 114, 128, 0.15)',
+                                        border: `1px solid rgba(107, 114, 128, 0.3)`,
+                                        boxShadow: `0 0 10px rgba(107, 114, 128, 0.2)`,
+                                        opacity: 0.7
+                                    }}
+                                    variant="light"
+                                >
+                                    <TbPower
+                                        size={16}
+                                        style={{
+                                            color: 'var(--mantine-color-teal-4)'
+                                        }}
+                                    />
+                                </ActionIcon>
+                            </Tooltip>
+                        )}
+
+                        <motion.div
+                            animate={{
+                                scale: nodeData?.isConnected ? [1, 1.1, 1] : 1,
+                                opacity: nodeData?.isConnected ? [1, 0.8, 1] : 0.6
                             }}
-                            variant="light"
+                            transition={{
+                                duration: nodeData?.isConnected ? 2 : 0,
+                                repeat: nodeData?.isConnected ? Infinity : 0
+                            }}
                         >
-                            {icon}
-                        </ThemeIcon>
-                    </motion.div>
+                            <ThemeIcon
+                                color={color}
+                                size="lg"
+                                style={{
+                                    backgroundColor,
+                                    border: `1px solid ${borderColor}`,
+                                    boxShadow: `0 0 15px ${boxShadow}`
+                                }}
+                                variant="light"
+                            >
+                                {icon}
+                            </ThemeIcon>
+                        </motion.div>
+                    </Group>
                 </Group>
 
                 {nodeData.isConnected && (
