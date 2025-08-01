@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 import {
     Accordion,
     ActionIcon,
@@ -12,8 +13,9 @@ import {
     TextInput
 } from '@mantine/core'
 import { GetConfigProfilesCommand } from '@remnawave/backend-contract'
-import { TbArrowAutofitDown, TbSearch, TbX } from 'react-icons/tb'
 import { useCallback, useEffect, useMemo, useState } from 'react'
+import { TbDeviceFloppy, TbSearch, TbX } from 'react-icons/tb'
+import { useTranslation } from 'react-i18next'
 
 import { ConfigProfileCardShared } from '@shared/ui/config-profiles/config-profile-card/config-profile-card.shared'
 import { useGetConfigProfiles } from '@shared/api/hooks'
@@ -28,6 +30,8 @@ export const ConfigProfilesDrawer = (props: IProps) => {
         activeConfigProfileUuid,
         onSaveInbounds
     } = props
+
+    const { t } = useTranslation()
 
     const { data: configProfiles, isLoading: isConfigProfilesLoading } = useGetConfigProfiles()
 
@@ -147,64 +151,94 @@ export const ConfigProfilesDrawer = (props: IProps) => {
             padding="md"
             position="right"
             size="480px"
-            title="Config Profiles"
+            title={t('config-profiles.drawer.widget.config-profiles')}
         >
             <Stack gap="md" h="100%">
-                <Paper mb="sm" p="sm" radius={'md'} shadow="xs" withBorder>
-                    <Group align="center" justify="space-between">
-                        <Box>
-                            {selectedInbounds.size > 0 && selectedProfileUuid ? (
-                                <>
-                                    <Text fw={700} size="sm">
-                                        {filteredProfiles.find(
-                                            (p) => p.uuid === selectedProfileUuid
-                                        )?.name || 'No profile selected'}
-                                    </Text>
-                                    <Text c="dimmed" size="xs">
-                                        {selectedInbounds.size} inbound
-                                        {selectedInbounds.size !== 1 ? 's' : ''} selected
-                                    </Text>
-                                </>
-                            ) : (
-                                <>
-                                    <Text fw={700} size="sm">
-                                        No inbounds selected
-                                    </Text>
-                                    <Text c="dimmed" size="xs">
-                                        Choose Config Profile to apply to the node.
-                                    </Text>
-                                </>
-                            )}
+                <Paper p="md" radius="md" shadow="sm" withBorder>
+                    <Stack gap="md">
+                        <Box
+                            bd="1px solid var(--mantine-color-dark-4)"
+                            bdrs="md"
+                            bg="dark.6"
+                            p="md"
+                        >
+                            <Group align="center" justify="space-between">
+                                <Box flex={1}>
+                                    <Group align="center" justify="space-between">
+                                        <Box>
+                                            {selectedInbounds.size > 0 && selectedProfileUuid ? (
+                                                <>
+                                                    <Text fw={700} size="sm">
+                                                        {filteredProfiles.find(
+                                                            (p) => p.uuid === selectedProfileUuid
+                                                        )?.name ||
+                                                            t(
+                                                                'config-profiles.drawer.widget.no-profile-selected'
+                                                            )}
+                                                    </Text>
+                                                    <Text c="dimmed" size="xs">
+                                                        {t(
+                                                            'internal-squads.drawer.widget.selected-inbounds',
+                                                            {
+                                                                count: selectedInbounds.size
+                                                            }
+                                                        )}
+                                                    </Text>
+                                                </>
+                                            ) : (
+                                                <Box>
+                                                    <Text fw={700} size="sm">
+                                                        {t(
+                                                            'config-profiles.drawer.widget.no-inbounds-selected'
+                                                        )}
+                                                    </Text>
+                                                    <Text c="dimmed" size="xs">
+                                                        {t(
+                                                            'config-profiles.drawer.widget.choose-config-profile-to-apply-to-the-node'
+                                                        )}
+                                                    </Text>
+                                                </Box>
+                                            )}
+                                        </Box>
+                                        {selectedInbounds.size > 0 && (
+                                            <ActionIcon
+                                                color="red"
+                                                onClick={clearSelection}
+                                                radius="md"
+                                                size="lg"
+                                                variant="light"
+                                            >
+                                                <TbX size={24} />
+                                            </ActionIcon>
+                                        )}
+                                    </Group>
+                                </Box>
+                            </Group>
                         </Box>
-                        {selectedInbounds.size > 0 && (
-                            <ActionIcon
-                                color="gray"
-                                onClick={clearSelection}
-                                size="sm"
-                                variant="subtle"
-                            >
-                                <TbX size={14} />
-                            </ActionIcon>
-                        )}
-                    </Group>
-                </Paper>
 
-                <Group justify="flex-end">
-                    <Button
-                        disabled={selectedInbounds.size === 0}
-                        fullWidth
-                        leftSection={<TbArrowAutofitDown size={'1.3rem'} />}
-                        onClick={handleSaveInbounds}
-                        size="md"
-                    >
-                        Apply changes
-                    </Button>
-                </Group>
+                        <Group justify="flex-end">
+                            <Button
+                                color="teal"
+                                disabled={selectedInbounds.size === 0}
+                                fullWidth
+                                leftSection={<TbDeviceFloppy size={'1.2rem'} />}
+                                onClick={handleSaveInbounds}
+                                size="md"
+                                style={{
+                                    transition: 'all 0.2s ease'
+                                }}
+                                variant="light"
+                            >
+                                {t('config-profiles.drawer.widget.apply-changes')}
+                            </Button>
+                        </Group>
+                    </Stack>
+                </Paper>
 
                 <TextInput
                     leftSection={<TbSearch size={16} />}
                     onChange={(event) => setSearchQuery(event.currentTarget.value)}
-                    placeholder="Search profiles or inbounds..."
+                    placeholder={t('config-profiles.drawer.widget.search-profiles-or-inbounds')}
                     radius="md"
                     value={searchQuery}
                 />
@@ -238,8 +272,12 @@ export const ConfigProfilesDrawer = (props: IProps) => {
                             {filteredProfiles.length === 0 && (
                                 <Text c="dimmed" py="xl" size="sm" ta="center">
                                     {debouncedSearchQuery
-                                        ? 'No profiles or inbounds found'
-                                        : 'No config profiles available'}
+                                        ? t(
+                                              'config-profiles.drawer.widget.no-profiles-or-inbounds-found'
+                                          )
+                                        : t(
+                                              'config-profiles.drawer.widget.no-config-profiles-available'
+                                          )}
                                 </Text>
                             )}
                         </Accordion>

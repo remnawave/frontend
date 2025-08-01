@@ -12,6 +12,7 @@ import {
     Box,
     Button,
     Checkbox,
+    Divider,
     Flex,
     Group,
     Stack,
@@ -64,23 +65,7 @@ export const AppForm = (props: AppFormProps) => {
             </Group>
 
             <Stack gap="sm">
-                <TextInput
-                    label={t('app-form.component.app-id')}
-                    onChange={(e) => {
-                        const oldId = localApp.id
-                        const newId = e.target.value as `${Lowercase<string>}`
-
-                        const updatedApp: AppConfig = {
-                            ...localApp,
-                            id: newId
-                        }
-
-                        setLocalApp(updatedApp)
-
-                        onChange({ ...updatedApp, _oldId: oldId } as AppConfig)
-                    }}
-                    value={localApp.id}
-                />
+                <TextInput disabled label={t('app-form.component.app-id')} value={localApp.id} />
 
                 <TextInput
                     label={t('app-form.component.app-name')}
@@ -94,15 +79,19 @@ export const AppForm = (props: AppFormProps) => {
                     value={localApp.urlScheme}
                 />
 
-                <Group>
+                <Divider label="Settings" labelPosition="center" my="sm" />
+
+                <Group grow>
                     <Checkbox
                         checked={localApp.isFeatured}
+                        description="Mark this app as featured"
                         label={t('app-form.component.featured-app')}
                         onChange={(e) => updateApp({ isFeatured: e.target.checked })}
                     />
 
                     <Checkbox
                         checked={!!localApp.isNeedBase64Encoding}
+                        description="Enable base64 encoding for subscriptions"
                         label={t('app-form.component.need-base64-encoding')}
                         onChange={(e) => updateApp({ isNeedBase64Encoding: e.target.checked })}
                     />

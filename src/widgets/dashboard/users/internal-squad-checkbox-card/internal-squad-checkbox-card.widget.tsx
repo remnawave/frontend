@@ -1,10 +1,9 @@
 import { ActionIcon, Badge, Checkbox, Group, Text } from '@mantine/core'
+import { PiTag, PiUsers } from 'react-icons/pi'
 import { useDisclosure } from '@mantine/hooks'
-import { PiUsers } from 'react-icons/pi'
 import { TbEdit } from 'react-icons/tb'
 import { memo } from 'react'
 
-import { XtlsLogo } from '@shared/ui/logos/xtls-logo'
 import { formatInt } from '@shared/utils/misc'
 
 import { InternalSquadsDrawer } from '../internal-squads-drawer'
@@ -31,7 +30,7 @@ export const InternalSquadCheckboxCard = memo((props: IProps) => {
                 <Group align="center" gap="xs" justify="space-between" wrap="nowrap">
                     <Group align="center" gap="xs" style={{ flex: 1, minWidth: 0 }} wrap="nowrap">
                         <Checkbox.Indicator size="sm" />
-                        <Text className={classes.compactLabel} size="sm" truncate>
+                        <Text className={classes.compactLabel} size="xs" truncate>
                             {internalSquad.name}
                         </Text>
                     </Group>
@@ -41,17 +40,18 @@ export const InternalSquadCheckboxCard = memo((props: IProps) => {
                             color="teal"
                             leftSection={<PiUsers size="16" />}
                             size="md"
-                            variant="outline"
+                            variant="light"
+                            visibleFrom="sm"
                         >
                             {formatInt(internalSquad.info.membersCount, {
                                 thousandSeparator: ','
                             })}{' '}
                         </Badge>
                         <Badge
-                            color="gray"
-                            leftSection={<XtlsLogo size="16" />}
+                            color="blue"
+                            leftSection={<PiTag size="16" />}
                             size="md"
-                            variant="outline"
+                            variant="light"
                         >
                             {internalSquad.info.inboundsCount}
                         </Badge>

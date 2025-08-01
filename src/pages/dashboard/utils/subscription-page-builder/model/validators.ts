@@ -58,8 +58,14 @@ function validateAppConfig(app: any, path: string): string[] {
 
     if (typeof app.id !== 'string') {
         errors.push(`${path}.id: must be a lowercase string`)
-    } else if (!/^[a-z]/.test(app.id)) {
-        errors.push(`${path}.id: must start with a lowercase letter`)
+    } else if (app.id === '') {
+        errors.push(`${path}.id: cannot be empty`)
+    } else if (!/^[a-z][a-z0-9-]*[a-z0-9]$/.test(app.id) && app.id.length > 1) {
+        errors.push(
+            `${path}.id: must start with a lowercase letter and contain only lowercase letters, numbers, and hyphens`
+        )
+    } else if (!/^[a-z]$/.test(app.id) && app.id.length === 1) {
+        errors.push(`${path}.id: single character must be a lowercase letter`)
     }
 
     if (typeof app.name !== 'string') errors.push(`${path}.name: must be a string`)

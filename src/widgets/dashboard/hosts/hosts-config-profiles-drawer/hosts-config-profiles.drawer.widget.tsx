@@ -13,8 +13,8 @@ import {
     TextInput
 } from '@mantine/core'
 import { GetConfigProfilesCommand } from '@remnawave/backend-contract'
-import { TbArrowAutofitDown, TbSearch, TbX } from 'react-icons/tb'
 import { useCallback, useEffect, useMemo, useState } from 'react'
+import { TbDeviceFloppy, TbSearch, TbX } from 'react-icons/tb'
 import { notifications } from '@mantine/notifications'
 import { useTranslation } from 'react-i18next'
 
@@ -126,69 +126,92 @@ export const HostsConfigProfilesDrawer = (props: IProps) => {
             title={t('constants.config-profiles')}
         >
             <Stack gap="md" h="100%">
-                <Paper mb="sm" p="sm" radius={'md'} shadow="xs" withBorder>
-                    <Group align="center" justify="space-between">
-                        <Box>
-                            {selectedInbound && selectedProfileUuid ? (
-                                <>
-                                    <Text fw={700} size="sm">
-                                        {filteredProfiles.find(
-                                            (p) => p.uuid === selectedProfileUuid
-                                        )?.name ||
-                                            t(
-                                                'hosts-config-profiles.drawer.widget.no-profile-selected'
+                <Paper p="md" radius="md" shadow="sm" withBorder>
+                    <Stack gap="md">
+                        <Box
+                            bd="1px solid var(--mantine-color-dark-4)"
+                            bdrs="md"
+                            bg="dark.6"
+                            p="md"
+                        >
+                            <Group align="center" justify="space-between">
+                                <Box flex={1}>
+                                    <Group align="center" justify="space-between">
+                                        <Box>
+                                            {selectedInbound && selectedProfileUuid ? (
+                                                <>
+                                                    <Text fw={700} size="sm">
+                                                        {filteredProfiles.find(
+                                                            (p) => p.uuid === selectedProfileUuid
+                                                        )?.name ||
+                                                            t(
+                                                                'hosts-config-profiles.drawer.widget.no-profile-selected'
+                                                            )}
+                                                    </Text>
+                                                    <Text c="white" ff="monospace" size="xs">
+                                                        {filteredProfiles
+                                                            .find(
+                                                                (p) =>
+                                                                    p.uuid === selectedProfileUuid
+                                                            )
+                                                            ?.inbounds.find(
+                                                                (i) => i.uuid === selectedInbound
+                                                            )?.tag ||
+                                                            t(
+                                                                'hosts-config-profiles.drawer.widget.unknown-inbound'
+                                                            )}
+                                                    </Text>
+                                                </>
+                                            ) : (
+                                                <Box>
+                                                    <Text fw={700} size="sm">
+                                                        {t(
+                                                            'hosts-config-profiles.drawer.widget.no-inbound-selected'
+                                                        )}
+                                                    </Text>
+                                                    <Text c="dimmed" size="xs">
+                                                        {t(
+                                                            'hosts-config-profiles.drawer.widget.choose-an-inbound-to-apply-to-the-host'
+                                                        )}
+                                                    </Text>
+                                                </Box>
                                             )}
-                                    </Text>
-                                    <Text c="dimmed" size="xs">
-                                        {filteredProfiles
-                                            .find((p) => p.uuid === selectedProfileUuid)
-                                            ?.inbounds.find((i) => i.uuid === selectedInbound)
-                                            ?.tag ||
-                                            t(
-                                                'hosts-config-profiles.drawer.widget.unknown-inbound'
-                                            )}{' '}
-                                        {t('hosts-config-profiles.drawer.widget.selected')}
-                                    </Text>
-                                </>
-                            ) : (
-                                <>
-                                    <Text fw={700} size="sm">
-                                        {t(
-                                            'hosts-config-profiles.drawer.widget.no-inbound-selected'
-                                        )}
-                                    </Text>
-                                    <Text c="dimmed" size="xs">
-                                        {t(
-                                            'hosts-config-profiles.drawer.widget.choose-an-inbound-to-apply-to-the-host'
-                                        )}
-                                    </Text>
-                                </>
-                            )}
-                        </Box>
-                        {selectedInbound && (
-                            <ActionIcon
-                                color="gray"
-                                onClick={clearSelection}
-                                size="sm"
-                                variant="subtle"
-                            >
-                                <TbX size={14} />
-                            </ActionIcon>
-                        )}
-                    </Group>
-                </Paper>
+                                        </Box>
 
-                <Group justify="flex-end">
-                    <Button
-                        disabled={!selectedInbound}
-                        fullWidth
-                        leftSection={<TbArrowAutofitDown size={'1.3rem'} />}
-                        onClick={handleSaveInbound}
-                        size="md"
-                    >
-                        {t('hosts-config-profiles.drawer.widget.apply-changes')}
-                    </Button>
-                </Group>
+                                        {selectedInbound && (
+                                            <ActionIcon
+                                                color="red"
+                                                onClick={clearSelection}
+                                                radius="md"
+                                                size="lg"
+                                                variant="light"
+                                            >
+                                                <TbX size={24} />
+                                            </ActionIcon>
+                                        )}
+                                    </Group>
+                                </Box>
+                            </Group>
+                        </Box>
+
+                        <Group justify="flex-end">
+                            <Button
+                                color="teal"
+                                disabled={!selectedInbound}
+                                fullWidth
+                                leftSection={<TbDeviceFloppy size={'1.2rem'} />}
+                                onClick={handleSaveInbound}
+                                size="md"
+                                style={{
+                                    transition: 'all 0.2s ease'
+                                }}
+                                variant="light"
+                            >
+                                {t('hosts-config-profiles.drawer.widget.apply-changes')}
+                            </Button>
+                        </Group>
+                    </Stack>
+                </Paper>
 
                 <TextInput
                     leftSection={<TbSearch size={16} />}

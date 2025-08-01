@@ -326,8 +326,7 @@ export const BaseNodeForm = <T extends CreateNodeCommand.Request | UpdateNodeCom
                                             form.getValues().configProfile?.activeInbounds ?? []
                                         }
                                         activeConfigProfileUuid={
-                                            form.getValues().configProfile
-                                                ?.activeConfigProfileUuid ?? ''
+                                            form.getValues().configProfile?.activeConfigProfileUuid
                                         }
                                         configProfiles={configProfiles.configProfiles}
                                         errors={form.errors.configProfile}

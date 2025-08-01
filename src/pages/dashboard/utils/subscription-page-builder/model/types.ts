@@ -1,5 +1,3 @@
-/* eslint-disable no-use-before-define */
-
 export interface AppConfig {
     additionalAfterAddSubscriptionStep?: TitleStep
     additionalBeforeAddSubscriptionStep?: TitleStep

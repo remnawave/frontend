@@ -20,6 +20,12 @@ const SelectItem = forwardRef<HTMLDivElement, ItemProps>(
                     alt={name}
                     color="initials"
                     name={name}
+                    onLoad={(event) => {
+                        const img = event.target as HTMLImageElement
+                        if (img.naturalWidth <= 16 && img.naturalHeight <= 16) {
+                            img.src = ''
+                        }
+                    }}
                     radius="sm"
                     size={20}
                     src={faviconResolver(faviconLink)}
@@ -92,6 +98,12 @@ export const SelectInfraProviderShared = (props: IProps) => {
             alt={selectedProvider.name}
             color="initials"
             name={selectedProvider.name}
+            onLoad={(event) => {
+                const img = event.target as HTMLImageElement
+                if (img.naturalWidth <= 16 && img.naturalHeight <= 16) {
+                    img.src = ''
+                }
+            }}
             radius="sm"
             size={16}
             src={faviconResolver(selectedProvider.faviconLink)}

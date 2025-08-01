@@ -35,7 +35,7 @@
         "from-yesterday": "对比昨日"
     },
     "online-metrics": {
-        "never-online": "从未上线",
+        "never-online": "从未在线",
         "online-this-week": "最近一周上线",
         "online-today": "今日在线过",
         "online-now": "当前在线"
@@ -64,7 +64,11 @@
             "cancel": "取消",
             "save-anyway-title": "确认操作",
             "load-from-github": "从 GitHub 加载",
-            "tools": "工具"
+            "tools": "工具",
+            "copy-all-content": "Copy all content",
+            "select-all": "Select all",
+            "cut-selection": "Cut selection",
+            "paste-from-clipboard": "Paste from clipboard"
         }
     },
     "use-bandwidth-table-columns": {
@@ -168,7 +172,7 @@
     },
     "config-editor": {
         "widget": {
-            "loading-editor": "正在加载编辑器..."
+            "loading-editor": "正在加载编辑器"
         }
     },
     "keypair": {
@@ -194,12 +198,12 @@
             "list-of-all-hosts": "所有主机列表",
             "about-hosts": "关于主机",
             "header-description-line-1": "主机是用户的入口点。一组主机形成一个所谓的“订阅”。",
-            "header-description-line-2": "每个主机可以可选地关联到一个服务器。",
+            "header-description-line-2": "每个主机都可以选择性地指向一个服务器。",
             "remark": "备注",
             "remark-description-line-1": "主机的名称。它可以是任何内容，但在单个订阅中必须保持唯一。",
             "remark-description-line-2": "备注将显示在终端客户端的可用服务器列表中。",
             "inbound": "入站",
-            "inbound-line-1": "必须选择一个入站来绑定主机。",
+            "inbound-line-1": "必须选择一个主机用来绑定入站",
             "inbound-line-2": "入站列表来自“Xray 配置”。",
             "address-and-port": "地址和端口",
             "address-and-port-line-1": "在大多数情况下，IP/域名应指向已连接的节点之一。",
@@ -227,7 +231,7 @@
     },
     "error-accordeon": {
         "widget": {
-            "last-error-message": "最后错误消息",
+            "last-error-message": "最后的错误消息",
             "important-note-description": "为了连接节点, 您需要运行以下命令运行 Remnawave Node",
             "important-note-description-value": "将当前值复制粘贴到 Remnawave Node 运行 ",
             "important-note": "重要提示"
@@ -253,9 +257,9 @@
     },
     "table": {
         "widget": {
-            "only-active-nodes": "仅显示启用了流量跟踪的节点",
+            "only-active-nodes": "仅显示启用了流量统计的节点",
             "today": "今日",
-            "nodes-with-active-traffic-tracking-not-found": "未找到启用流量跟踪的节点"
+            "nodes-with-active-traffic-tracking-not-found": "未找到启用流量统计的节点。"
         }
     },
     "create-user-modal": {
@@ -266,24 +270,24 @@
             "traffic-reset-strategy": "流量重置策略",
             "traffic-reset-strategy-description": "用户流量使用统计应多久重置一次",
             "data-limit": "流量限制",
-            "data-limit-description": "输入流量限制（GB）（0 表示无限制）",
+            "data-limit-description": "输入流量限制 GB（0 表示无限制）",
             "username-cannot-be-changed-later": "用户名之后无法更改",
-            "loading-user-creation": "正在加载创建用户窗口...",
+            "loading-user-creation": "正在加载创建用户窗口..",
             "create-user": "创建用户",
             "telegram-id-of-a-user-in-telegram": "用户在 Telegram 中的数字 ID",
             "email-of-a-user": "用户的邮箱地址",
             "1-month": "+1 个月",
             "3-months": "+3 个月",
             "1-year": "+1 年",
-            "2099-year": "2099 年",
+            "2099-year": "2099年",
             "hwid-user-limit-line-1": "此功能仅在",
             "hwid-user-limit-line-2": ".env 变量设置为",
             "hwid-user-limit-line-3": "时有效。了解更多。",
             "disable-hwid-limit": "禁用 HWID 限制",
             "hwid-device-limit": "HWID 设备限制",
-            "expire-at-description": "用户的订阅服务将于该时间结束",
+            "expire-at-description": "用户的订阅服务将于该时间结束。",
             "internal-squads": "内部分组",
-            "internal-squads-description": "指定将分配给用户的内部分组"
+            "internal-squads-description": "指定将分配给用户的内部分组。"
         }
     },
     "login-form-feature": {
@@ -301,7 +305,7 @@
         "widget": {
             "connection-details": "连接详情",
             "subscription-url": "订阅 URL",
-            "subscription-short-uuid": "订阅短 UUID",
+            "subscription-short-uuid": "订阅短uuid",
             "edit-user": "编辑用户",
             "subscription-qr-code": "订阅二维码",
             "close": "关闭",
@@ -335,7 +339,7 @@
         "advanced-options": "高级选项",
         "host": "主机",
         "path": "路径",
-        "alpn-e-g-h2": "ALPN (例如 h2)",
+        "alpn-e-g-h2": "ALPN (例如h2)",
         "fingerprint": "指纹",
         "fingerprint-e-g-chrome": "指纹 (例如 chrome)",
         "save": "保存",
@@ -373,7 +377,7 @@
         "server-description-placeholder": "最多 30 个字符",
         "this-will-only-be-used-for-xray-json-output": "这将仅用于 Xray-JSON 输出。",
         "please-ensure-you-provide-a-valid-json-mux-object": "请确保您提供一个有效的 JSON MUX 对象。",
-        "for-more-information-refer-to": "欲了解更多信息，请参阅：",
+        "for-more-information-refer-to": "欲了解更多信息，请参阅:",
         "xtls-documentation": "XTLS 文档",
         "paste-default-mux-params": "粘贴默认的 Mux 参数",
         "please-ensure-you-provide-a-valid-json-sockopt-object": "请确保您提供一个有效的 JSON Sockopt 对象。",
@@ -386,12 +390,12 @@
         "address": "地址",
         "e-g-example-com": "例如 example.com",
         "port": "端口",
-        "e-g-443": "例如 2222",
+        "e-g-443": "例如 \"2222\"",
         "consumption-multiplier": "流量倍率",
         "traffic-tracking": "跟踪流量使用",
         "limit": "限制",
         "reset-day": "重置日期",
-        "e-g-1-31": "例如 1-31",
+        "e-g-1-31": "例如 \"1-31\"",
         "notify-percent": "达量通知百分比",
         "e-g-50": "例如 50",
         "save": "保存",
@@ -1072,10 +1076,8 @@
             "this-action-cannot-be-undone": "此操作无法撤销。",
             "delete": "删除",
             "cancel": "取消",
-            "remove-users-from-internal-squad": "从内部分组中移除用户",
             "remove-users-from-internal-squad-confirmation": "你确定要将用户从内部分组 \"{{internalSquadName}}\" 中移除吗？",
             "remove": "移除",
-            "add-users-to-internal-squad": "添加用户到内部分组",
             "add-users-to-internal-squad-confirmation": "你确定要将用户添加到内部分组 \"{{internalSquadName}}\" 吗？",
             "add": "添加",
             "no-internal-squads": "暂无内部分组",
@@ -1083,7 +1085,11 @@
             "delete-squad": "删除分组",
             "inbounds": "入站连接",
             "users": "用户",
-            "edit-inbounds": "编辑入站连接"
+            "edit-inbounds": "编辑入站连接",
+            "remove-users": "Remove users",
+            "add-users": "Add users",
+            "edit": "Edit",
+            "copy-uuid": "Copy UUID"
         }
     },
     "config-profile-detail-header": {
@@ -1105,7 +1111,9 @@
             "nodes": "节点",
             "download": "下载",
             "quick-view": "快速查看",
-            "edit-xray-config": "编辑 Xray 配置"
+            "edit-xray-config": "编辑 Xray 配置",
+            "xray-config": "Xray Config",
+            "copy-uuid": "Copy UUID"
         }
     },
     "config-profiles-header": {
@@ -1322,7 +1330,9 @@
                 "all": "全部",
                 "selected": "已选择",
                 "unselected": "未选择",
-                "edit-internal-squad": "编辑内部分组"
+                "edit-internal-squad": "编辑内部分组",
+                "selected-inbounds": "Selected inbounds: {{count}}",
+                "save-changes": "Save changes"
             }
         }
     },
@@ -1438,6 +1448,34 @@
     "restart-node-button": {
         "feature": {
             "restart": "重新启动"
+        }
+    },
+    "node-details-card": {
+        "show-zero-values": "显示为 0 的值",
+        "hide-zero-values": "隐藏为 0 的值",
+        "no-inbound-traffic-data": "无入站流量数据",
+        "no-outbound-traffic-data": "无出站流量数据",
+        "widget": {
+            "node-details": "节点详情",
+            "enable-node": "启用节点",
+            "disable-node": "禁用节点",
+            "config-profile-or-inbounds-is-missing": "缺少配置文件或者入站配置",
+            "xray-core-version": "Xray 核心版本",
+            "remnawave-node-version": "节点版本，@remnawave/节点"
+        }
+    },
+    "config-profiles": {
+        "drawer": {
+            "widget": {
+                "config-profiles": "Config Profiles",
+                "no-profile-selected": "No profile selected",
+                "no-inbounds-selected": "No inbounds selected",
+                "choose-config-profile-to-apply-to-the-node": "Choose Config Profile to apply to the node.",
+                "apply-changes": "Apply changes",
+                "search-profiles-or-inbounds": "Search profiles or inbounds...",
+                "no-profiles-or-inbounds-found": "No profiles or inbounds found",
+                "no-config-profiles-available": "No config profiles available"
+            }
         }
     }
 }

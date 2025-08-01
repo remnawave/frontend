@@ -14,11 +14,12 @@ import {
     Stack,
     Tabs,
     Text,
-    TextInput
+    TextInput,
+    Tooltip
 } from '@mantine/core'
-import { PiCheck, PiCopy, PiList, PiTreeView, PiUsers } from 'react-icons/pi'
+import { PiCheck, PiCircle, PiCopy, PiList, PiTag, PiTreeView, PiUsers } from 'react-icons/pi'
+import { TbCirclesRelation, TbDeviceFloppy, TbSearch, TbX } from 'react-icons/tb'
 import { GetConfigProfilesCommand } from '@remnawave/backend-contract'
-import { TbArrowAutofitDown, TbSearch, TbX } from 'react-icons/tb'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
@@ -207,102 +208,171 @@ export const InternalSquadsDrawer = (props: IProps) => {
             title={t('internal-squads.drawer.widget.edit-internal-squad')}
         >
             <Stack gap="md" h="100%">
-                <Paper mb="sm" p="md" radius={'md'} shadow="sm" withBorder>
-                    <Stack gap="sm">
-                        <Group align="center" justify="space-between">
-                            <Text fw={700} size="lg">
-                                {internalSquad.name}
-                            </Text>
-                            <Group gap="xs">
-                                <CopyButton timeout={2000} value={internalSquad.uuid}>
-                                    {({ copied, copy }) => (
-                                        <ActionIcon
-                                            color={copied ? 'teal' : 'gray'}
-                                            onClick={copy}
-                                            variant="subtle"
+                <Paper
+                    p="md"
+                    radius="md"
+                    shadow="sm"
+                    style={{
+                        background:
+                            'linear-gradient(135deg, var(--mantine-color-dark-6) 0%, var(--mantine-color-dark-7) 100%)',
+                        border: '1px solid var(--mantine-color-dark-4)'
+                    }}
+                    withBorder
+                >
+                    <Stack gap="md">
+                        <Group align="center" justify="space-between" wrap="nowrap">
+                            <Stack gap="xs" style={{ flex: 1, minWidth: 0 }}>
+                                <Group
+                                    gap="xs"
+                                    justify="start"
+                                    style={{ flex: 1, minWidth: 0 }}
+                                    wrap="nowrap"
+                                >
+                                    <ActionIcon
+                                        color={
+                                            internalSquad.info.membersCount > 0 ? 'teal' : 'gray'
+                                        }
+                                        radius="md"
+                                        size="md"
+                                        style={{ flexShrink: 0 }}
+                                        variant={
+                                            internalSquad.info.membersCount > 0 ? 'light' : 'subtle'
+                                        }
+                                    >
+                                        {internalSquad.info.membersCount > 0 ? (
+                                            <TbCirclesRelation size={16} />
+                                        ) : (
+                                            <PiCircle size={16} />
+                                        )}
+                                    </ActionIcon>
+                                    <Text
+                                        c="white"
+                                        fw={700}
+                                        size="md"
+                                        style={{
+                                            flex: 1,
+                                            minWidth: 0,
+                                            overflow: 'hidden',
+                                            textOverflow: 'ellipsis',
+                                            whiteSpace: 'nowrap'
+                                        }}
+                                    >
+                                        {internalSquad.name}
+                                    </Text>
+                                </Group>
+                                <Group gap="xs" justify="flex-start" wrap="wrap">
+                                    <Tooltip label={t('internal-squads-grid.widget.users')}>
+                                        <Badge
+                                            color={
+                                                internalSquad.info.membersCount > 0
+                                                    ? 'teal'
+                                                    : 'gray'
+                                            }
+                                            leftSection={<PiUsers size={12} />}
+                                            size="lg"
+                                            variant="light"
                                         >
-                                            {copied ? (
-                                                <PiCheck size="16px" />
-                                            ) : (
-                                                <PiCopy size="16px" />
-                                            )}
-                                        </ActionIcon>
-                                    )}
-                                </CopyButton>
-                            </Group>
+                                            {formatInt(internalSquad.info.membersCount, {
+                                                thousandSeparator: ','
+                                            })}
+                                        </Badge>
+                                    </Tooltip>
+                                    <Tooltip label={t('internal-squads-grid.widget.inbounds')}>
+                                        <Badge
+                                            color="blue"
+                                            leftSection={<PiTag size={12} />}
+                                            size="lg"
+                                            variant="light"
+                                        >
+                                            {formatInt(selectedInbounds.size, {
+                                                thousandSeparator: ','
+                                            })}
+                                        </Badge>
+                                    </Tooltip>
+                                </Group>
+                            </Stack>
+                            <CopyButton timeout={2000} value={internalSquad.uuid}>
+                                {({ copied, copy }) => (
+                                    <ActionIcon
+                                        color={copied ? 'teal' : 'gray'}
+                                        onClick={copy}
+                                        size="lg"
+                                        style={{ flexShrink: 0 }}
+                                        variant="subtle"
+                                    >
+                                        {copied ? <PiCheck size="18px" /> : <PiCopy size="18px" />}
+                                    </ActionIcon>
+                                )}
+                            </CopyButton>
                         </Group>
 
-                        <Group gap="md" wrap="wrap">
-                            <Group gap="xs">
-                                <Badge
-                                    color="teal"
-                                    leftSection={<PiUsers size="14" />}
-                                    size="md"
-                                    variant="outline"
-                                >
-                                    {formatInt(internalSquad.info.membersCount, {
-                                        thousandSeparator: ','
-                                    })}{' '}
-                                    members
-                                </Badge>
+                        <Box
+                            bg="dark.6"
+                            p="md"
+                            style={{
+                                borderRadius: 'var(--mantine-radius-md)',
+                                border: '1px solid var(--mantine-color-dark-4)'
+                            }}
+                        >
+                            <Group align="center" justify="space-between">
+                                <Box flex={1}>
+                                    <Group align="center" justify="space-between">
+                                        <Box>
+                                            <Text c="white" fw={600} size="sm">
+                                                {selectedInbounds.size === 0
+                                                    ? t(
+                                                          'internal-squads.drawer.widget.no-inbounds-selected'
+                                                      )
+                                                    : t(
+                                                          'internal-squads.drawer.widget.selected-inbounds',
+                                                          {
+                                                              count: selectedInbounds.size
+                                                          }
+                                                      )}
+                                            </Text>
+                                            <Text c="dimmed" mt={2} size="xs">
+                                                {selectedInbounds.size > 0
+                                                    ? t(
+                                                          'internal-squads.drawer.widget.selected-from-multiple-profiles'
+                                                      )
+                                                    : t(
+                                                          'internal-squads.drawer.widget.choose-inbounds-from-any-profiles'
+                                                      )}
+                                            </Text>
+                                        </Box>
+                                        {selectedInbounds.size > 0 && (
+                                            <ActionIcon
+                                                color="red"
+                                                onClick={clearSelection}
+                                                radius="md"
+                                                size="lg"
+                                                variant="light"
+                                            >
+                                                <TbX size={24} />
+                                            </ActionIcon>
+                                        )}
+                                    </Group>
+                                </Box>
                             </Group>
-                        </Group>
+                        </Box>
+
+                        <Button
+                            color="teal"
+                            disabled={selectedInbounds.size === 0}
+                            fullWidth
+                            leftSection={<TbDeviceFloppy size={'1.2rem'} />}
+                            loading={isUpdatingInternalSquad}
+                            onClick={handleUpdateInternalSquad}
+                            size="md"
+                            style={{
+                                transition: 'all 0.2s ease'
+                            }}
+                            variant="light"
+                        >
+                            {t('internal-squads.drawer.widget.save-changes')}
+                        </Button>
                     </Stack>
                 </Paper>
-
-                <Paper mb="sm" p="sm" radius={'md'} shadow="xs" withBorder>
-                    <Group align="center" justify="space-between">
-                        <Box>
-                            {selectedInbounds.size > 0 ? (
-                                <>
-                                    <Text fw={700} size="sm">
-                                        {selectedInbounds.size} inbound
-                                        {selectedInbounds.size !== 1 ? 's' : ''} selected
-                                    </Text>
-                                    <Text c="dimmed" size="xs">
-                                        {t(
-                                            'internal-squads.drawer.widget.selected-from-multiple-profiles'
-                                        )}
-                                    </Text>
-                                </>
-                            ) : (
-                                <>
-                                    <Text fw={700} size="sm">
-                                        {t('internal-squads.drawer.widget.no-inbounds-selected')}
-                                    </Text>
-                                    <Text c="dimmed" size="xs">
-                                        {t(
-                                            'internal-squads.drawer.widget.choose-inbounds-from-any-profiles'
-                                        )}
-                                    </Text>
-                                </>
-                            )}
-                        </Box>
-                        {selectedInbounds.size > 0 && (
-                            <ActionIcon
-                                color="gray"
-                                onClick={clearSelection}
-                                size="sm"
-                                variant="subtle"
-                            >
-                                <TbX size={14} />
-                            </ActionIcon>
-                        )}
-                    </Group>
-                </Paper>
-
-                <Group justify="flex-end">
-                    <Button
-                        disabled={selectedInbounds.size === 0}
-                        fullWidth
-                        leftSection={<TbArrowAutofitDown size={'1.3rem'} />}
-                        loading={isUpdatingInternalSquad}
-                        onClick={handleUpdateInternalSquad}
-                        size="md"
-                    >
-                        {t('internal-squads.drawer.widget.update-internal-squad')}
-                    </Button>
-                </Group>
 
                 <TextInput
                     leftSection={<TbSearch size={16} />}

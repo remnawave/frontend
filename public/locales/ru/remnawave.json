@@ -64,7 +64,11 @@
             "cancel": "Отмена",
             "save-anyway-title": "Подтвердить действие",
             "load-from-github": "Скачать с Github",
-            "tools": "Инструменты"
+            "tools": "Инструменты",
+            "copy-all-content": "Скопировать все содержимое",
+            "select-all": "Выделить все",
+            "cut-selection": "Вырезать выделенное",
+            "paste-from-clipboard": "Вставить из буфера обмена"
         }
     },
     "use-bandwidth-table-columns": {
@@ -1072,10 +1076,8 @@
             "this-action-cannot-be-undone": "Это действие необратимо.",
             "delete": "Удалить",
             "cancel": "Отменить",
-            "remove-users-from-internal-squad": "Удалить пользователей из Внутреннего Сквада",
             "remove-users-from-internal-squad-confirmation": "Вы уверены, что хотите удалить пользователей из внутреннего сквада {{internalSquadName}}?",
             "remove": "Удалить",
-            "add-users-to-internal-squad": "Добавить пользователей во Внутренний Сквад",
             "add-users-to-internal-squad-confirmation": "Вы уверены, что хотите добавить пользователей во внутренних сквад {{internalSquadName}}?",
             "add": "Добавить",
             "no-internal-squads": "Внутренних сквадов не найдено",
@@ -1083,7 +1085,11 @@
             "delete-squad": "Удалить сквад",
             "inbounds": "Инбаунды",
             "users": "Пользователи",
-            "edit-inbounds": "Изменить инбаунды"
+            "edit-inbounds": "Изменить инбаунды",
+            "remove-users": "Удалить пользователей",
+            "add-users": "Добавить пользователей",
+            "edit": "Изменить",
+            "copy-uuid": "Скопировать UUID"
         }
     },
     "config-profile-detail-header": {
@@ -1105,7 +1111,9 @@
             "nodes": "Ноды",
             "download": "Скачать",
             "quick-view": "Быстрый просмотр",
-            "edit-xray-config": "Изменить конфиг Xray"
+            "edit-xray-config": "Изменить конфиг Xray",
+            "xray-config": "Конфиг. Xray",
+            "copy-uuid": "Скопировать UUID"
         }
     },
     "config-profiles-header": {
@@ -1322,7 +1330,9 @@
                 "all": "Все",
                 "selected": "Выбранные",
                 "unselected": "Невыбранные",
-                "edit-internal-squad": "Изменить сквад"
+                "edit-internal-squad": "Изменить сквад",
+                "selected-inbounds": "Выбранных инбаундов: {{count}}",
+                "save-changes": "Сохранить"
             }
         }
     },
@@ -1438,6 +1448,34 @@
     "restart-node-button": {
         "feature": {
             "restart": "Перезапустить"
+        }
+    },
+    "node-details-card": {
+        "show-zero-values": "Показать нулевые значения",
+        "hide-zero-values": "Скрыть нулевые значения",
+        "no-inbound-traffic-data": "Нет Inbound-траффика",
+        "no-outbound-traffic-data": "Нет Outbound-траффика",
+        "widget": {
+            "node-details": "Детали ноды",
+            "enable-node": "Включить ноды",
+            "disable-node": "Выключить ноду",
+            "config-profile-or-inbounds-is-missing": "Профиль или инбаунд не выбран",
+            "xray-core-version": "Версия ядра Xray",
+            "remnawave-node-version": "Версия модуля @remnawave/node"
+        }
+    },
+    "config-profiles": {
+        "drawer": {
+            "widget": {
+                "config-profiles": "Профили",
+                "no-profile-selected": "Профиль не выбран",
+                "no-inbounds-selected": "Инбаунды не выбраны",
+                "choose-config-profile-to-apply-to-the-node": "Выберите Профиль для применения к ноде.",
+                "apply-changes": "Сохранить",
+                "search-profiles-or-inbounds": "Поиск по профилям или инбаундам...",
+                "no-profiles-or-inbounds-found": "Профили или инбаунды не найдены",
+                "no-config-profiles-available": "Нет доступных профилей"
+            }
         }
     }
 }
