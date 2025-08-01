@@ -556,6 +556,7 @@ export const StatisticNodesPage = () => {
                     </Text>
                     <Select
                         allowDeselect={false}
+                        comboboxProps={{ transitionProps: { transition: 'pop', duration: 200 } }}
                         data={[
                             { label: t('statistic-nodes.component.7-days'), value: '7' },
                             { label: t('statistic-nodes.component.14-days'), value: '14' },
@@ -656,6 +657,7 @@ export const StatisticNodesPage = () => {
                     <MultiSelect
                         checkIconPosition="left"
                         clearable
+                        comboboxProps={{ transitionProps: { transition: 'pop', duration: 200 } }}
                         data={series.map((s) => ({ value: s.name, label: s.name }))}
                         maw={{ base: '100%', sm: 400 }}
                         onChange={setSelectedNodes}
