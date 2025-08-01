@@ -52,6 +52,9 @@ export function CreateInfraProviderDrawerWidget() {
         <Drawer
             keepMounted={false}
             onClose={() => close(MODALS.CREATE_INFRA_PROVIDER_DRAWER)}
+            onExitTransitionEnd={() => {
+                form.reset()
+            }}
             opened={isOpen}
             overlayProps={{ backgroundOpacity: 0.6, blur: 0 }}
             padding="lg"
