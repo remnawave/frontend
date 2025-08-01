@@ -64,7 +64,11 @@
             "cancel": "لغو",
             "save-anyway-title": "تایید عملیات",
             "load-from-github": "بارگذاری از گیت‌هاب",
-            "tools": "ابزارها"
+            "tools": "ابزارها",
+            "copy-all-content": "Copy all content",
+            "select-all": "Select all",
+            "cut-selection": "Cut selection",
+            "paste-from-clipboard": "Paste from clipboard"
         }
     },
     "use-bandwidth-table-columns": {
@@ -1072,10 +1076,8 @@
             "this-action-cannot-be-undone": "این اقدام قابل بازگشت نیست.",
             "delete": "حذف",
             "cancel": "انصراف",
-            "remove-users-from-internal-squad": "حذف کاربران از اسکواد داخلی",
             "remove-users-from-internal-squad-confirmation": "آیا مطمئن هستید که می‌خواهید کاربران را از اسکواد داخلی «{{internalSquadName}}» حذف کنید؟",
             "remove": "حذف",
-            "add-users-to-internal-squad": "افزودن کاربران به اسکواد داخلی",
             "add-users-to-internal-squad-confirmation": "آیا مطمئن هستید که می‌خواهید کاربران را به اسکواد داخلی «{{internalSquadName}}» اضافه کنید؟",
             "add": "افزودن",
             "no-internal-squads": "هیچ اسکواد داخلی‌ای وجود ندارد",
@@ -1083,7 +1085,11 @@
             "delete-squad": "حذف اسکواد",
             "inbounds": "اینباندها",
             "users": "کاربران",
-            "edit-inbounds": "ویرایش اینباندها"
+            "edit-inbounds": "ویرایش اینباندها",
+            "remove-users": "Remove users",
+            "add-users": "Add users",
+            "edit": "Edit",
+            "copy-uuid": "Copy UUID"
         }
     },
     "config-profile-detail-header": {
@@ -1105,7 +1111,9 @@
             "nodes": "نودها",
             "download": "دانلود",
             "quick-view": "نمای سریع",
-            "edit-xray-config": "ویرایش پیکربندی Xray"
+            "edit-xray-config": "ویرایش پیکربندی Xray",
+            "xray-config": "Xray Config",
+            "copy-uuid": "Copy UUID"
         }
     },
     "config-profiles-header": {
@@ -1322,7 +1330,9 @@
                 "all": "همه",
                 "selected": "انتخاب شده",
                 "unselected": "انتخاب نشده",
-                "edit-internal-squad": "ویرایش اسکواد"
+                "edit-internal-squad": "ویرایش اسکواد",
+                "selected-inbounds": "Selected inbounds: {{count}}",
+                "save-changes": "Save changes"
             }
         }
     },
@@ -1452,6 +1462,20 @@
             "config-profile-or-inbounds-is-missing": "Config profile or inbounds is missing",
             "xray-core-version": "Xray Core Version",
             "remnawave-node-version": "Node version, @remnawave/node"
+        }
+    },
+    "config-profiles": {
+        "drawer": {
+            "widget": {
+                "config-profiles": "Config Profiles",
+                "no-profile-selected": "No profile selected",
+                "no-inbounds-selected": "No inbounds selected",
+                "choose-config-profile-to-apply-to-the-node": "Choose Config Profile to apply to the node.",
+                "apply-changes": "Apply changes",
+                "search-profiles-or-inbounds": "Search profiles or inbounds...",
+                "no-profiles-or-inbounds-found": "No profiles or inbounds found",
+                "no-config-profiles-available": "No config profiles available"
+            }
         }
     }
 }
