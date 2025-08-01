@@ -71,6 +71,12 @@ export function getInfraBillingNodesColumns(
                         alt={provider.name}
                         color="initials"
                         name={provider.name}
+                        onLoad={(event) => {
+                            const img = event.target as HTMLImageElement
+                            if (img.naturalWidth <= 16 && img.naturalHeight <= 16) {
+                                img.src = ''
+                            }
+                        }}
                         radius="sm"
                         size={18}
                         src={faviconResolver(provider.faviconLink)}

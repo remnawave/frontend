@@ -206,6 +206,15 @@ export const NodeCardWidget = memo((props: IProps) => {
                                                 alt={node.provider.name}
                                                 color="initials"
                                                 name={node.provider.name}
+                                                onLoad={(event) => {
+                                                    const img = event.target as HTMLImageElement
+                                                    if (
+                                                        img.naturalWidth <= 16 &&
+                                                        img.naturalHeight <= 16
+                                                    ) {
+                                                        img.src = ''
+                                                    }
+                                                }}
                                                 radius="sm"
                                                 size={16}
                                                 src={faviconResolver(node.provider.faviconLink)}
@@ -355,6 +364,15 @@ export const NodeCardWidget = memo((props: IProps) => {
                                             alt={node.provider.name}
                                             color="initials"
                                             name={node.provider.name}
+                                            onLoad={(event) => {
+                                                const img = event.target as HTMLImageElement
+                                                if (
+                                                    img.naturalWidth <= 16 &&
+                                                    img.naturalHeight <= 16
+                                                ) {
+                                                    img.src = ''
+                                                }
+                                            }}
                                             radius="sm"
                                             size={16}
                                             src={faviconResolver(node.provider.faviconLink)}
