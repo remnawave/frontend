@@ -5,27 +5,16 @@ import {
     Button,
     Card,
     CopyButton,
-    Divider,
     Grid,
     Group,
+    Menu,
     Stack,
     Text,
     Title,
     Tooltip
 } from '@mantine/core'
-import {
-    PiCheck,
-    PiCircle,
-    PiCopy,
-    PiEmpty,
-    PiMinus,
-    PiPencilDuotone,
-    PiPlus,
-    PiTag,
-    PiTrashDuotone,
-    PiUsers
-} from 'react-icons/pi'
-import { TbCirclesRelation } from 'react-icons/tb'
+import { PiCheck, PiCircle, PiCopy, PiEmpty, PiTag, PiTrashDuotone, PiUsers } from 'react-icons/pi'
+import { TbChevronDown, TbCirclesRelation, TbUsersMinus, TbUsersPlus } from 'react-icons/tb'
 import { useTranslation } from 'react-i18next'
 import { useMediaQuery } from '@mantine/hooks'
 import { modals } from '@mantine/modals'
@@ -45,6 +34,7 @@ import { queryClient } from '@shared/api/query-client'
 import { sToMs } from '@shared/utils/time-utils'
 import { formatInt } from '@shared/utils/misc'
 
+import classes from './InternalSquads.module.css'
 import { IProps } from './interfaces'
 
 export function InternalSquadsGridWidget(props: IProps) {
@@ -117,7 +107,7 @@ export function InternalSquadsGridWidget(props: IProps) {
 
     const handleRemoveFromUsers = (internalSquadUuid: string, internalSquadName: string) => {
         modals.openConfirmModal({
-            title: t('internal-squads-grid.widget.remove-users-from-internal-squad'),
+            title: t('internal-squads-grid.widget.remove-users'),
             centered: true,
             children: (
                 <Stack gap="xs">
@@ -151,7 +141,7 @@ export function InternalSquadsGridWidget(props: IProps) {
 
     const handleAddToUsers = (internalSquadUuid: string, internalSquadName: string) => {
         modals.openConfirmModal({
-            title: t('internal-squads-grid.widget.add-users-to-internal-squad'),
+            title: t('internal-squads-grid.widget.add-users'),
             centered: true,
             children: (
                 <Stack gap="xs">
@@ -210,7 +200,7 @@ export function InternalSquadsGridWidget(props: IProps) {
                 return (
                     <Grid.Col
                         key={internalSquad.uuid}
-                        span={{ base: 12, sm: 6, md: 6, lg: 6, xl: 3 }}
+                        span={{ base: 12, sm: 6, md: 6, lg: 4, xl: 3 }}
                     >
                         <motion.div
                             animate={{ opacity: 1, y: 0 }}
@@ -220,21 +210,13 @@ export function InternalSquadsGridWidget(props: IProps) {
                                 delay: index * 0.1,
                                 ease: 'easeOut'
                             }}
-                            whileHover={{ y: -4 }}
                         >
                             <Card
+                                className={classes.card}
                                 h="100%"
                                 p={isMobile ? 'md' : 'lg'}
-                                radius="lg"
+                                radius="md"
                                 shadow="xs"
-                                style={{
-                                    display: 'flex',
-                                    flexDirection: 'column',
-                                    position: 'relative',
-                                    overflow: 'hidden',
-                                    background:
-                                        'linear-gradient(280deg, var(--mantine-color-dark-6) 0%, var(--mantine-color-dark-7) 100%)'
-                                }}
                                 withBorder
                             >
                                 <Box
@@ -283,49 +265,6 @@ export function InternalSquadsGridWidget(props: IProps) {
                                                 {internalSquad.name}
                                             </Text>
                                         </Group>
-
-                                        <Group gap={4}>
-                                            <CopyButton timeout={2000} value={internalSquad.uuid}>
-                                                {({ copied, copy }) => (
-                                                    <Tooltip
-                                                        label={copied ? 'Copied!' : 'Copy UUID'}
-                                                    >
-                                                        <ActionIcon
-                                                            color={copied ? 'teal' : 'gray'}
-                                                            onClick={copy}
-                                                            size="sm"
-                                                            variant="subtle"
-                                                        >
-                                                            {copied ? (
-                                                                <PiCheck size={14} />
-                                                            ) : (
-                                                                <PiCopy size={14} />
-                                                            )}
-                                                        </ActionIcon>
-                                                    </Tooltip>
-                                                )}
-                                            </CopyButton>
-
-                                            <Tooltip
-                                                label={t(
-                                                    'internal-squads-grid.widget.delete-squad'
-                                                )}
-                                            >
-                                                <ActionIcon
-                                                    color="red"
-                                                    onClick={() =>
-                                                        handleDeleteInternalSquad(
-                                                            internalSquad.uuid,
-                                                            internalSquad.name
-                                                        )
-                                                    }
-                                                    size="sm"
-                                                    variant="subtle"
-                                                >
-                                                    <PiTrashDuotone size={14} />
-                                                </ActionIcon>
-                                            </Tooltip>
-                                        </Group>
                                     </Group>
 
                                     <Stack gap="sm">
@@ -360,44 +299,10 @@ export function InternalSquadsGridWidget(props: IProps) {
                                         </Group>
                                     </Stack>
 
-                                    <Divider variant="dashed" />
-
-                                    <Stack gap="xs">
-                                        <Group grow>
-                                            <Button
-                                                color="red"
-                                                disabled={membersCount === 0}
-                                                leftSection={<PiMinus size={16} />}
-                                                onClick={() =>
-                                                    handleRemoveFromUsers(
-                                                        internalSquad.uuid,
-                                                        internalSquad.name
-                                                    )
-                                                }
-                                                size="xs"
-                                                variant="light"
-                                            >
-                                                {t('internal-squads-grid.widget.remove')}
-                                            </Button>
-                                            <Button
-                                                color="teal"
-                                                leftSection={<PiPlus size={16} />}
-                                                onClick={() =>
-                                                    handleAddToUsers(
-                                                        internalSquad.uuid,
-                                                        internalSquad.name
-                                                    )
-                                                }
-                                                size="xs"
-                                                variant="light"
-                                            >
-                                                {t('internal-squads-grid.widget.add')}
-                                            </Button>
-                                        </Group>
-
+                                    <Group gap={0} wrap="nowrap">
                                         <Button
-                                            fullWidth
-                                            leftSection={<PiPencilDuotone size={14} />}
+                                            className={classes.button}
+                                            leftSection={<PiTag size={14} />}
                                             onClick={() => {
                                                 setInternalData({
                                                     internalState: internalSquad,
@@ -405,12 +310,89 @@ export function InternalSquadsGridWidget(props: IProps) {
                                                 })
                                                 open(MODALS.INTERNAL_SQUAD_SHOW_INBOUNDS)
                                             }}
+                                            radius="md"
                                             size="xs"
-                                            variant="default"
+                                            variant="light"
                                         >
-                                            {t('internal-squads-grid.widget.edit-inbounds')}
+                                            {t('internal-squads-grid.widget.edit')}
                                         </Button>
-                                    </Stack>
+                                        <Menu radius="sm" withinPortal>
+                                            <Menu.Target>
+                                                <ActionIcon
+                                                    className={classes.menuControl}
+                                                    radius="md"
+                                                    size={30}
+                                                    variant="light"
+                                                >
+                                                    <TbChevronDown size={24} />
+                                                </ActionIcon>
+                                            </Menu.Target>
+
+                                            <Menu.Dropdown>
+                                                <Menu.Item
+                                                    color="teal"
+                                                    leftSection={<TbUsersPlus size={18} />}
+                                                    onClick={() =>
+                                                        handleAddToUsers(
+                                                            internalSquad.uuid,
+                                                            internalSquad.name
+                                                        )
+                                                    }
+                                                >
+                                                    {t('internal-squads-grid.widget.add-users')}
+                                                </Menu.Item>
+                                                <Menu.Item
+                                                    color="red"
+                                                    disabled={membersCount === 0}
+                                                    leftSection={<TbUsersMinus size={18} />}
+                                                    onClick={() =>
+                                                        handleRemoveFromUsers(
+                                                            internalSquad.uuid,
+                                                            internalSquad.name
+                                                        )
+                                                    }
+                                                >
+                                                    {t('internal-squads-grid.widget.remove-users')}
+                                                </Menu.Item>
+
+                                                <CopyButton
+                                                    timeout={2000}
+                                                    value={internalSquad.uuid}
+                                                >
+                                                    {({ copied, copy }) => (
+                                                        <Menu.Item
+                                                            color={copied ? 'teal' : undefined}
+                                                            leftSection={
+                                                                copied ? (
+                                                                    <PiCheck size={14} />
+                                                                ) : (
+                                                                    <PiCopy size={14} />
+                                                                )
+                                                            }
+                                                            onClick={copy}
+                                                        >
+                                                            {t(
+                                                                'internal-squads-grid.widget.copy-uuid'
+                                                            )}
+                                                        </Menu.Item>
+                                                    )}
+                                                </CopyButton>
+
+                                                <Menu.Item
+                                                    color="red"
+                                                    leftSection={<PiTrashDuotone size={14} />}
+                                                    onClick={() =>
+                                                        handleDeleteInternalSquad(
+                                                            internalSquad.uuid,
+                                                            internalSquad.name
+                                                        )
+                                                    }
+                                                >
+                                                    {t('internal-squads-grid.widget.delete-squad')}
+                                                </Menu.Item>
+                                            </Menu.Dropdown>
+                                        </Menu>
+                                    </Group>
                                 </Stack>
                             </Card>
                         </motion.div>

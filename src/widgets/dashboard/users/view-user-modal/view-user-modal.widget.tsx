@@ -360,17 +360,18 @@ export const ViewUserModal = () => {
 
                                 <Menu.Dropdown>
                                     <Menu.Label>
+                                        {t('view-user-modal.widget.danger-zone')}
+                                    </Menu.Label>
+                                    <DeleteUserFeature userUuid={user.uuid} />
+
+                                    <Menu.Divider />
+                                    <Menu.Label>
                                         {t('view-user-modal.widget.management')}
                                     </Menu.Label>
                                     <ToggleUserStatusButtonFeature user={user} />
                                     <ResetUsageUserFeature userUuid={user.uuid} />
                                     <RevokeSubscriptionUserFeature userUuid={user.uuid} />
 
-                                    <Menu.Divider />
-                                    <Menu.Label>
-                                        {t('view-user-modal.widget.danger-zone')}
-                                    </Menu.Label>
-                                    <DeleteUserFeature userUuid={user.uuid} />
                                     <Menu.Divider />
                                     <Menu.Label>
                                         {t('view-user-modal.widget.information')}
