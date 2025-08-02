@@ -119,7 +119,7 @@ export const SelectInfraProviderShared = (props: IProps) => {
             allowDeselect
             clearable
             comboboxProps={{
-                transitionProps: { transition: 'pop', duration: 200 },
+                transitionProps: { transition: 'fade', duration: 200 },
                 shadow: 'md'
             }}
             data={selectData}

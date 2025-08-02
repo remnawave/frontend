@@ -33,7 +33,7 @@
     top: 0;
     left: 0;
     right: 0;
-    height: 3px;
+    height: 2px;
     background: linear-gradient(90deg, var(--mantine-color-cyan-4), var(--mantine-color-cyan-8));
     opacity: 0;
     transition: 0.24s ease-in-out;
