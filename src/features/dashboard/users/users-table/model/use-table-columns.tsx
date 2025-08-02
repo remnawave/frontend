@@ -1,5 +1,9 @@
 /* eslint-disable camelcase */
-import { GetAllUsersCommand, GetInternalSquadsCommand } from '@remnawave/backend-contract'
+import {
+    GetAllNodesCommand,
+    GetAllUsersCommand,
+    GetInternalSquadsCommand
+} from '@remnawave/backend-contract'
 import { Badge, Group, Stack, Text, Tooltip } from '@mantine/core'
 import { MRT_ColumnDef } from 'mantine-react-table'
 import { useTranslation } from 'react-i18next'
@@ -13,8 +17,11 @@ import { DataUsageColumnEntity } from '@entities/dashboard/users/ui'
 import { prettyBytesToAnyUtil } from '@shared/utils/bytes'
 import { formatInt } from '@shared/utils/misc'
 
+import { NodeSelectItem, NodeSelectItemProps } from './node-select-item'
+
 export const useUserTableColumns = (
-    internalSquads?: GetInternalSquadsCommand.Response['response']
+    internalSquads?: GetInternalSquadsCommand.Response['response'],
+    nodes?: GetAllNodesCommand.Response['response']
 ) => {
     const { t } = useTranslation()
 
@@ -53,9 +60,23 @@ export const useUserTableColumns = (
                         lastConnectedNode={cell.row.original.lastConnectedNode}
                     />
                 ),
-
-                enableColumnFilterModes: false,
-                enableColumnFilter: false,
+                filterVariant: 'select',
+                mantineFilterSelectProps: {
+                    comboboxProps: {
+                        transitionProps: { transition: 'pop', duration: 200 }
+                    },
+                    checkIconPosition: 'left',
+                    data:
+                        nodes?.map((node) => ({
+                            label: node.name,
+                            value: node.uuid,
+                            countryCode: node.countryCode
+                        })) ?? [],
+                    renderOption: (item) => {
+                        const option = item.option as NodeSelectItemProps
+                        return <NodeSelectItem {...option} />
+                    }
+                },
                 enableSorting: false,
                 mantineTableBodyCellProps: {
                     align: 'center'
@@ -212,6 +233,9 @@ export const useUserTableColumns = (
                         : '–',
                 minSize: 250,
                 size: 400,
+
+                enableColumnFilterModes: false,
+                enableColumnFilter: false,
 
                 mantineTableBodyCellProps: {
                     align: 'center'
