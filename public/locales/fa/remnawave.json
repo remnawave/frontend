@@ -939,7 +939,9 @@
         "add-button": "افزودن دکمه",
         "remove-button": "حذف دکمه",
         "button-link": "لینک دکمه",
-        "button-text": "متن دکمه"
+        "button-text": "متن دکمه",
+        "enter-button-text": "Enter button text...",
+        "english": "English"
     },
     "subscription-tabs": {
         "widget": {
@@ -1476,6 +1478,16 @@
                 "no-profiles-or-inbounds-found": "پروفایل یا اینباندی یافت نشد",
                 "no-config-profiles-available": "پروفایل پیکربندی‌ای موجود نیست"
             }
+        }
+    },
+    "language-selector": {
+        "component": {
+            "persian": "Persian",
+            "russian": "Russian",
+            "chinese": "Chinese",
+            "additional-languages": "Additional Languages",
+            "english-is-always-enabled": "English is always enabled",
+            "english": "English"
         }
     }
 }
