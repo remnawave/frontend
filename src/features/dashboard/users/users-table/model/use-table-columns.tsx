@@ -50,7 +50,7 @@ export const useUserTableColumns = (
                 header: t('use-table-columns.last-connected-node'),
                 Cell: ({ cell }) => (
                     <ConnectedNodeColumnEntity
-                        nodeName={cell.row.original.lastConnectedNode?.nodeName}
+                        lastConnectedNode={cell.row.original.lastConnectedNode}
                     />
                 ),
 

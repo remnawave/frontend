@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 import {
     Accordion,
     ActionIcon,
@@ -30,6 +31,7 @@ import { GetUserUsageByRangeCommand } from '@remnawave/backend-contract'
 import { PiEmpty, PiListBullets } from 'react-icons/pi'
 import { BarChart, Sparkline } from '@mantine/charts'
 import { useEffect, useMemo, useState } from 'react'
+import ReactCountryFlag from 'react-country-flag'
 import { useTranslation } from 'react-i18next'
 import ColorHash from 'color-hash'
 import dayjs from 'dayjs'
@@ -55,6 +57,7 @@ export const UserUsageModalWidget = (props: IProps) => {
     const [selectedDate, setSelectedDate] = useState<null | string>(null)
     const [selectedDayData, setSelectedDayData] = useState<Array<{
         color: string
+        countryCode?: string
         name: string
         value: number
     }> | null>(null)
@@ -104,8 +107,9 @@ export const UserUsageModalWidget = (props: IProps) => {
         const groupedData: Record<string, ChartData> = {}
         const seriesSet = new Set<string>()
         const nodeTotal: Record<string, number> = {}
+        const nodeCountryCode: Record<string, string> = {}
 
-        dbData.forEach(({ nodeName, total, date }) => {
+        dbData.forEach(({ nodeName, total, date, countryCode }) => {
             const formattedDate = dayjs(date).format('MMM D')
             if (!groupedData[formattedDate]) {
                 groupedData[formattedDate] = { date: formattedDate }
@@ -118,6 +122,10 @@ export const UserUsageModalWidget = (props: IProps) => {
                 nodeTotal[nodeName] = 0
             }
             nodeTotal[nodeName] += total
+
+            if (countryCode && !nodeCountryCode[nodeName]) {
+                nodeCountryCode[nodeName] = countryCode
+            }
         })
 
         const sortedNodes = Object.entries(nodeTotal)
@@ -132,7 +140,8 @@ export const UserUsageModalWidget = (props: IProps) => {
                 return {
                     name: nodeName,
                     color,
-                    total: nodeTotal[nodeName] || 0
+                    total: nodeTotal[nodeName] || 0,
+                    countryCode: nodeCountryCode[nodeName]
                 }
             }),
             topNodes: sortedNodes.slice(0, 3),
@@ -172,7 +181,8 @@ export const UserUsageModalWidget = (props: IProps) => {
             return {
                 name: nodeName,
                 color: nodeInfo?.color || '#888',
-                total: nodeInfo?.total || 0
+                total: nodeInfo?.total || 0,
+                countryCode: nodeInfo?.countryCode
             }
         })
     }, [series, topNodes])
@@ -212,7 +222,8 @@ export const UserUsageModalWidget = (props: IProps) => {
                 return {
                     name,
                     value: Number(value) || 0,
-                    color: nodeInfo?.color || '#ccc'
+                    color: nodeInfo?.color || '#ccc',
+                    countryCode: nodeInfo?.countryCode
                 }
             })
             .sort((a, b) => b.value - a.value)
@@ -345,7 +356,28 @@ export const UserUsageModalWidget = (props: IProps) => {
                                                         }}
                                                         w={10}
                                                     />
-                                                    <Text fz="sm">{entry.name}</Text>
+                                                    <Group gap={6}>
+                                                        {(() => {
+                                                            const nodeInfo = series.find(
+                                                                (s) => s.name === entry.name
+                                                            )
+                                                            return (
+                                                                nodeInfo?.countryCode &&
+                                                                nodeInfo.countryCode !== 'XX' && (
+                                                                    <ReactCountryFlag
+                                                                        countryCode={
+                                                                            nodeInfo.countryCode
+                                                                        }
+                                                                        style={{
+                                                                            fontSize: '1.1em',
+                                                                            borderRadius: '2px'
+                                                                        }}
+                                                                    />
+                                                                )
+                                                            )
+                                                        })()}
+                                                        <Text fz="sm">{entry.name}</Text>
+                                                    </Group>
                                                 </Group>
                                                 <Text fw={500} fz="sm">
                                                     {prettyBytesToAnyUtil(entry.value)}
@@ -464,17 +496,28 @@ export const UserUsageModalWidget = (props: IProps) => {
                                 )}
                                 position="top"
                             >
-                                <Text
-                                    size="sm"
-                                    style={{
-                                        maxWidth: '100%',
-                                        overflow: 'hidden',
-                                        textOverflow: 'ellipsis',
-                                        whiteSpace: 'nowrap'
-                                    }}
-                                >
-                                    {node.name}
-                                </Text>
+                                <Group gap={6} style={{ minWidth: 0, flex: 1 }}>
+                                    {node.countryCode && node.countryCode !== 'XX' && (
+                                        <ReactCountryFlag
+                                            countryCode={node.countryCode}
+                                            style={{
+                                                fontSize: '1.1em',
+                                                borderRadius: '2px'
+                                            }}
+                                        />
+                                    )}
+                                    <Text
+                                        size="sm"
+                                        style={{
+                                            maxWidth: '100%',
+                                            overflow: 'hidden',
+                                            textOverflow: 'ellipsis',
+                                            whiteSpace: 'nowrap'
+                                        }}
+                                    >
+                                        {node.name}
+                                    </Text>
+                                </Group>
                             </Tooltip>
                         </Group>
                     ))}
@@ -606,9 +649,21 @@ export const UserUsageModalWidget = (props: IProps) => {
                                                     }}
                                                     w={10}
                                                 />
-                                                <Text fw={index === 0 ? 600 : 400} size="sm">
-                                                    {node.name}
-                                                </Text>
+                                                <Group gap={6}>
+                                                    {node.countryCode &&
+                                                        node.countryCode !== 'XX' && (
+                                                            <ReactCountryFlag
+                                                                countryCode={node.countryCode}
+                                                                style={{
+                                                                    fontSize: '1.1em',
+                                                                    borderRadius: '2px'
+                                                                }}
+                                                            />
+                                                        )}
+                                                    <Text fw={index === 0 ? 600 : 400} size="sm">
+                                                        {node.name}
+                                                    </Text>
+                                                </Group>
                                             </Group>
                                             <Text size="sm">
                                                 {prettyBytesToAnyUtil(node.total)}
@@ -763,7 +818,20 @@ export const UserUsageModalWidget = (props: IProps) => {
                                                         }}
                                                         w={12}
                                                     />
-                                                    <Text>{entry.name}</Text>
+                                                    <Group gap={6}>
+                                                        {/* eslint-disable indent */}
+                                                        {entry.countryCode &&
+                                                            entry.countryCode !== 'XX' && (
+                                                                <ReactCountryFlag
+                                                                    countryCode={entry.countryCode}
+                                                                    style={{
+                                                                        fontSize: '1.1em',
+                                                                        borderRadius: '2px'
+                                                                    }}
+                                                                />
+                                                            )}
+                                                        <Text>{entry.name}</Text>
+                                                    </Group>
                                                 </Group>
                                             </Table.Td>
                                             <Table.Td style={{ textAlign: 'right' }}>
