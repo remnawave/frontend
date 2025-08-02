@@ -939,7 +939,9 @@
         "add-button": "Добавить кнопку",
         "remove-button": "Удалить кнопку",
         "button-link": "Ссылка кнопки",
-        "button-text": "Текст кнопки"
+        "button-text": "Текст кнопки",
+        "enter-button-text": "Enter button text...",
+        "english": "English"
     },
     "subscription-tabs": {
         "widget": {
@@ -1476,6 +1478,16 @@
                 "no-profiles-or-inbounds-found": "Профили или инбаунды не найдены",
                 "no-config-profiles-available": "Нет доступных профилей"
             }
+        }
+    },
+    "language-selector": {
+        "component": {
+            "persian": "Persian",
+            "russian": "Russian",
+            "chinese": "Chinese",
+            "additional-languages": "Additional Languages",
+            "english-is-always-enabled": "English is always enabled",
+            "english": "English"
         }
     }
 }
