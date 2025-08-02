@@ -19,8 +19,66 @@ import { addButton, removeButton, updateButtonField, updateButtonText } from './
 import { ButtonFieldsProps } from '../interfaces'
 
 export const ButtonFields = (props: ButtonFieldsProps) => {
-    const { buttons, localApp, section, updateApp } = props
+    const { buttons, localApp, section, updateApp, additionalLocales } = props
     const { t } = useTranslation()
+
+    const enabledLocales = ['en', ...additionalLocales]
+
+    const getLocaleFlag = (locale: string): string => {
+        switch (locale) {
+            case 'en':
+                return '🇬🇧'
+            case 'ru':
+                return '🇷🇺'
+            case 'fa':
+                return '🇮🇷'
+            case 'zh':
+                return '🇨🇳'
+            default:
+                return '🌐'
+        }
+    }
+
+    const getLocaleName = (locale: string): string => {
+        switch (locale) {
+            case 'en':
+                return 'English'
+            case 'ru':
+                return 'Russian'
+            case 'fa':
+                return 'Persian'
+            case 'zh':
+                return 'Chinese'
+            default:
+                return locale
+        }
+    }
+
+    const getLocaleDir = (locale: string): 'ltr' | 'rtl' | 'auto' => {
+        switch (locale) {
+            case 'fa':
+                return 'rtl'
+            case 'en':
+                return 'ltr'
+            default:
+                return 'auto'
+        }
+    }
+
+    const getLocalePlaceholder = (locale: string): string => {
+        switch (locale) {
+            case 'en':
+                return 'Button text in English'
+            case 'ru':
+                return 'Текст кнопки на русском'
+            case 'fa':
+                return 'متن دکمه به فارسی'
+            case 'zh':
+                return '按钮文本'
+            default:
+                return `Button text in ${locale}`
+        }
+    }
 
     return (
         <Box>
@@ -35,7 +93,14 @@ export const ButtonFields = (props: ButtonFieldsProps) => {
                                 <Tooltip label={t('button-fields.add-button')} withArrow>
                                     <ActionIcon
                                         color="teal"
-                                        onClick={() => addButton(localApp, section, updateApp)}
+                                        onClick={() =>
+                                            addButton(
+                                                localApp,
+                                                section,
+                                                updateApp,
+                                                additionalLocales
+                                            )
+                                        }
                                         size="input-sm"
                                         variant="light"
                                     >
@@ -85,63 +150,32 @@ export const ButtonFields = (props: ButtonFieldsProps) => {
 
                         <Tabs defaultValue="en" variant="default">
                             <Tabs.List grow>
-                                <Tabs.Tab value="en">🇬🇧 English</Tabs.Tab>
-                                <Tabs.Tab value="ru">🇷🇺 Russian</Tabs.Tab>
-                                <Tabs.Tab value="fa">🇮🇷 Persian</Tabs.Tab>
+                                {enabledLocales.map((locale) => (
+                                    <Tabs.Tab key={locale} value={locale}>
+                                        {getLocaleFlag(locale)} {getLocaleName(locale)}
+                                    </Tabs.Tab>
+                                ))}
                             </Tabs.List>
 
-                            <Tabs.Panel pt="md" value="en">
-                                <TextInput
-                                    onChange={(e) =>
-                                        updateButtonText(
-                                            localApp,
-                                            section,
-                                            index,
-                                            'en',
-                                            e.target.value,
-                                            updateApp
-                                        )
-                                    }
-                                    placeholder="Button text in English"
-                                    value={button.buttonText.en}
-                                />
-                            </Tabs.Panel>
-
-                            <Tabs.Panel pt="md" value="ru">
-                                <TextInput
-                                    dir="auto"
-                                    onChange={(e) =>
-                                        updateButtonText(
-                                            localApp,
-                                            section,
-                                            index,
-                                            'ru',
-                                            e.target.value,
-                                            updateApp
-                                        )
-                                    }
-                                    placeholder="Текст кнопки на русском"
-                                    value={button.buttonText.ru}
-                                />
-                            </Tabs.Panel>
-
-                            <Tabs.Panel pt="md" value="fa">
-                                <TextInput
-                                    dir="rtl"
-                                    onChange={(e) =>
-                                        updateButtonText(
-                                            localApp,
-                                            section,
-                                            index,
-                                            'fa',
-                                            e.target.value,
-                                            updateApp
-                                        )
-                                    }
-                                    placeholder="متن دکمه به فارسی"
-                                    value={button.buttonText.fa}
-                                />
-                            </Tabs.Panel>
+                            {enabledLocales.map((locale) => (
+                                <Tabs.Panel key={locale} pt="md" value={locale}>
+                                    <TextInput
+                                        dir={getLocaleDir(locale)}
+                                        onChange={(e) =>
+                                            updateButtonText(
+                                                localApp,
+                                                section,
+                                                index,
+                                                locale as any,
+                                                e.target.value,
+                                                updateApp
+                                            )
+                                        }
+                                        placeholder={getLocalePlaceholder(locale)}
+                                        value={(button.buttonText as any)[locale] || ''}
+                                    />
+                                </Tabs.Panel>
+                            ))}
                         </Tabs>
                     </Box>
                 </Card>
@@ -151,7 +185,7 @@ export const ButtonFields = (props: ButtonFieldsProps) => {
                 <Flex justify="center" mb="xl" mt="xl">
                     <Button
                         leftSection={<PiPlus size="24px" />}
-                        onClick={() => addButton(localApp, section, updateApp)}
+                        onClick={() => addButton(localApp, section, updateApp, additionalLocales)}
                         variant="outline"
                     >
                         {t('button-fields.add-button')}

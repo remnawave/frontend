@@ -23,34 +23,42 @@ import { useTranslation } from 'react-i18next'
 import { useEffect, useState } from 'react'
 
 import { updateLocalizedField } from './lib/localized-fields.utils'
+import { IAppConfig, ILocalizedText } from '../../../model/types'
 import { emptyLocalizedText } from '../../../model/config'
 import { LocalizedFields } from './lib/localized-fields'
 import { ButtonFields } from './lib/button-fields'
-import { AppConfig } from '../../../model/types'
 import { AppFormProps } from './interfaces'
 
 export const AppForm = (props: AppFormProps) => {
-    const { app, onChange, onDelete } = props
+    const { app, onChange, onDelete, additionalLocales } = props
     const { t } = useTranslation()
-    const [localApp, setLocalApp] = useState<AppConfig>(app)
+    const [localApp, setLocalApp] = useState<IAppConfig>(app)
 
     useEffect(() => {
         setLocalApp(app)
     }, [app])
 
-    const updateApp = (newData: Partial<AppConfig>) => {
+    const updateApp = (newData: Partial<IAppConfig>) => {
         const updated = { ...localApp, ...newData }
         setLocalApp(updated)
         onChange(updated)
     }
 
     const handleUpdateLocalizedField = (
-        section: keyof AppConfig,
+        section: keyof IAppConfig,
         field: string,
-        lang: 'en' | 'fa' | 'ru',
+        lang: keyof ILocalizedText,
         value: string
     ) => {
         updateLocalizedField(localApp, section, field, lang, value, setLocalApp, onChange)
+    }
+
+    const createLocalizedTextWithAdditionalLocales = (): ILocalizedText => {
+        const text: ILocalizedText = { ...emptyLocalizedText }
+        additionalLocales.forEach((locale) => {
+            text[locale] = ''
+        })
+        return text
     }
 
     return (
@@ -111,6 +119,7 @@ export const AppForm = (props: AppFormProps) => {
                             {t('app-form.component.description')}
                         </Title>
                         <LocalizedFields
+                            additionalLocales={additionalLocales}
                             field="description"
                             isDescription={true}
                             section="installationStep"
@@ -122,6 +131,7 @@ export const AppForm = (props: AppFormProps) => {
                             {t('app-form.component.buttons')}
                         </Title>
                         <ButtonFields
+                            additionalLocales={additionalLocales}
                             buttons={localApp.installationStep.buttons}
                             localApp={localApp}
                             section="installationStep"
@@ -160,8 +170,9 @@ export const AppForm = (props: AppFormProps) => {
                                     onClick={() =>
                                         updateApp({
                                             additionalBeforeAddSubscriptionStep: {
-                                                title: { ...emptyLocalizedText },
-                                                description: { ...emptyLocalizedText },
+                                                title: createLocalizedTextWithAdditionalLocales(),
+                                                description:
+                                                    createLocalizedTextWithAdditionalLocales(),
                                                 buttons: []
                                             }
                                         })
@@ -181,6 +192,7 @@ export const AppForm = (props: AppFormProps) => {
                                     {t('app-form.component.title')}
                                 </Title>
                                 <LocalizedFields
+                                    additionalLocales={additionalLocales}
                                     field="title"
                                     section="additionalBeforeAddSubscriptionStep"
                                     updateField={handleUpdateLocalizedField}
@@ -191,6 +203,7 @@ export const AppForm = (props: AppFormProps) => {
                                     {t('app-form.component.description')}
                                 </Title>
                                 <LocalizedFields
+                                    additionalLocales={additionalLocales}
                                     field="description"
                                     isDescription={true}
                                     section="additionalBeforeAddSubscriptionStep"
@@ -202,6 +215,7 @@ export const AppForm = (props: AppFormProps) => {
                                     {t('app-form.component.buttons')}
                                 </Title>
                                 <ButtonFields
+                                    additionalLocales={additionalLocales}
                                     buttons={localApp.additionalBeforeAddSubscriptionStep.buttons}
                                     localApp={localApp}
                                     section="additionalBeforeAddSubscriptionStep"
@@ -224,6 +238,7 @@ export const AppForm = (props: AppFormProps) => {
                             {t('app-form.component.description')}
                         </Title>
                         <LocalizedFields
+                            additionalLocales={additionalLocales}
                             field="description"
                             isDescription={true}
                             section="addSubscriptionStep"
@@ -263,8 +278,9 @@ export const AppForm = (props: AppFormProps) => {
                                     onClick={() =>
                                         updateApp({
                                             additionalAfterAddSubscriptionStep: {
-                                                title: { ...emptyLocalizedText },
-                                                description: { ...emptyLocalizedText },
+                                                title: createLocalizedTextWithAdditionalLocales(),
+                                                description:
+                                                    createLocalizedTextWithAdditionalLocales(),
                                                 buttons: []
                                             }
                                         })
@@ -284,6 +300,7 @@ export const AppForm = (props: AppFormProps) => {
                                     {t('app-form.component.title')}
                                 </Title>
                                 <LocalizedFields
+                                    additionalLocales={additionalLocales}
                                     field="title"
                                     section="additionalAfterAddSubscriptionStep"
                                     updateField={handleUpdateLocalizedField}
@@ -294,6 +311,7 @@ export const AppForm = (props: AppFormProps) => {
                                     {t('app-form.component.description')}
                                 </Title>
                                 <LocalizedFields
+                                    additionalLocales={additionalLocales}
                                     field="description"
                                     isDescription={true}
                                     section="additionalAfterAddSubscriptionStep"
@@ -305,6 +323,7 @@ export const AppForm = (props: AppFormProps) => {
                                     {t('app-form.component.buttons')}
                                 </Title>
                                 <ButtonFields
+                                    additionalLocales={additionalLocales}
                                     buttons={localApp.additionalAfterAddSubscriptionStep.buttons}
                                     localApp={localApp}
                                     section="additionalAfterAddSubscriptionStep"
@@ -327,6 +346,7 @@ export const AppForm = (props: AppFormProps) => {
                             {t('app-form.component.description')}
                         </Title>
                         <LocalizedFields
+                            additionalLocales={additionalLocales}
                             field="description"
                             isDescription={true}
                             section="connectAndUseStep"

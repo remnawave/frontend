@@ -1477,5 +1477,14 @@
                 "no-config-profiles-available": "No config profiles available"
             }
         }
+    },
+    "language-selector": {
+        "component": {
+            "persian": "Persian",
+            "russian": "Russian",
+            "chinese": "Chinese",
+            "additional-languages": "Additional Languages",
+            "english-is-always-enabled": "English is always enabled"
+        }
     }
 }

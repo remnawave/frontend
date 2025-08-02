@@ -1,9 +1,10 @@
-import { AppConfig, Button as ConfigButton } from '../../../../model/types'
+import { IAppConfig, IButton, TAdditionalLocales } from '../../../../model/types'
 import { ButtonSection } from '../lib/button-fields.utils'
 
 export interface ButtonFieldsProps {
-    buttons: ConfigButton[]
-    localApp: AppConfig
+    buttons: IButton[]
+    localApp: IAppConfig
     section: ButtonSection
-    updateApp: (data: Partial<AppConfig>) => void
+    updateApp: (data: Partial<IAppConfig>) => void
+    additionalLocales: TAdditionalLocales[]
 }

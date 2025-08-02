@@ -1,7 +1,8 @@
-import { AppConfig } from '../../../../model/types'
+import { IAppConfig, TAdditionalLocales } from '../../../../model/types'
 
 export interface AppFormProps {
-    app: AppConfig
-    onChange: (app: AppConfig) => void
+    app: IAppConfig
+    onChange: (app: IAppConfig) => void
     onDelete?: () => void
+    additionalLocales: TAdditionalLocales[]
 }

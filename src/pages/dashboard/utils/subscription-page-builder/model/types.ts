@@ -1,42 +1,48 @@
-export interface AppConfig {
-    additionalAfterAddSubscriptionStep?: TitleStep
-    additionalBeforeAddSubscriptionStep?: TitleStep
-    addSubscriptionStep: Step
-    connectAndUseStep: Step
-    id: `${Lowercase<string>}`
+export type TAdditionalLocales = 'fa' | 'ru' | 'zh'
+export type TEnabledLocales = 'en' | TAdditionalLocales
+export type TPlatform = 'android' | 'androidTV' | 'appleTV' | 'ios' | 'linux' | 'macos' | 'windows'
+
+export interface ILocalizedText {
+    en: string
+    fa?: string
+    ru?: string
+    zh?: string
+}
+
+export interface IStep {
+    description: ILocalizedText
+}
+
+export interface IButton {
+    buttonLink: string
+    buttonText: ILocalizedText
+}
+export interface ITitleStep extends IStep {
+    buttons: IButton[]
+    title: ILocalizedText
+}
+
+export interface IAppConfig {
+    additionalAfterAddSubscriptionStep?: ITitleStep
+    additionalBeforeAddSubscriptionStep?: ITitleStep
+    addSubscriptionStep: IStep
+    connectAndUseStep: IStep
+    id: string
     installationStep: {
-        buttons: Button[]
-        description: LocalizedText
+        buttons: IButton[]
+        description: ILocalizedText
     }
     isFeatured: boolean
     isNeedBase64Encoding?: boolean
     name: string
     urlScheme: string
-    viewPosition?: number
 }
 
-export interface Button {
-    buttonLink: string
-    buttonText: LocalizedText
+export interface ISubscriptionPageConfiguration {
+    additionalLocales: TAdditionalLocales[]
 }
 
-export interface LocalizedText {
-    en: string
-    fa: string
-    ru: string
-}
-
-export interface PlatformConfig {
-    android: AppConfig[]
-    ios: AppConfig[]
-    pc: AppConfig[]
-}
-
-export interface Step {
-    description: LocalizedText
-}
-
-export interface TitleStep extends Step {
-    buttons: Button[]
-    title: LocalizedText
+export interface ISubscriptionPageAppConfig {
+    config: ISubscriptionPageConfiguration
+    platforms: Record<TPlatform, IAppConfig[]>
 }
