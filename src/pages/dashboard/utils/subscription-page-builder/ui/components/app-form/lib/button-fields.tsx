@@ -15,8 +15,12 @@ import {
 import { PiLink, PiPlus, PiTrash } from 'react-icons/pi'
 import { useTranslation } from 'react-i18next'
 
+import { TAdditionalLocales } from '@pages/dashboard/utils/subscription-page-builder/model/types'
+
 import { addButton, removeButton, updateButtonField, updateButtonText } from './button-fields.utils'
 import { ButtonFieldsProps } from '../interfaces'
+import { getLocaleFlag } from './get-locale-flag'
+import { getLocaleName } from './get-locale-name'
 
 export const ButtonFields = (props: ButtonFieldsProps) => {
     const { buttons, localApp, section, updateApp, additionalLocales } = props
@@ -24,59 +28,14 @@ export const ButtonFields = (props: ButtonFieldsProps) => {
 
     const enabledLocales = ['en', ...additionalLocales]
 
-    const getLocaleFlag = (locale: string): string => {
+    const getLocaleDir = (locale: string): 'auto' | 'ltr' | 'rtl' => {
         switch (locale) {
-            case 'en':
-                return '🇬🇧'
-            case 'ru':
-                return '🇷🇺'
-            case 'fa':
-                return '🇮🇷'
-            case 'zh':
-                return '🇨🇳'
-            default:
-                return '🌐'
-        }
-    }
-
-    const getLocaleName = (locale: string): string => {
-        switch (locale) {
-            case 'en':
-                return 'English'
-            case 'ru':
-                return 'Russian'
-            case 'fa':
-                return 'Persian'
-            case 'zh':
-                return 'Chinese'
-            default:
-                return locale
-        }
-    }
-
-    const getLocaleDir = (locale: string): 'ltr' | 'rtl' | 'auto' => {
-        switch (locale) {
-            case 'fa':
-                return 'rtl'
             case 'en':
                 return 'ltr'
+            case 'fa':
+                return 'rtl'
             default:
                 return 'auto'
-        }
-    }
-
-    const getLocalePlaceholder = (locale: string): string => {
-        switch (locale) {
-            case 'en':
-                return 'Button text in English'
-            case 'ru':
-                return 'Текст кнопки на русском'
-            case 'fa':
-                return 'متن دکمه به فارسی'
-            case 'zh':
-                return '按钮文本'
-            default:
-                return `Button text in ${locale}`
         }
     }
 
@@ -152,7 +111,7 @@ export const ButtonFields = (props: ButtonFieldsProps) => {
                             <Tabs.List grow>
                                 {enabledLocales.map((locale) => (
                                     <Tabs.Tab key={locale} value={locale}>
-                                        {getLocaleFlag(locale)} {getLocaleName(locale)}
+                                        {getLocaleFlag(locale)} {getLocaleName(locale, t)}
                                     </Tabs.Tab>
                                 ))}
                             </Tabs.List>
@@ -166,12 +125,13 @@ export const ButtonFields = (props: ButtonFieldsProps) => {
                                                 localApp,
                                                 section,
                                                 index,
-                                                locale as any,
+                                                locale as TAdditionalLocales,
                                                 e.target.value,
                                                 updateApp
                                             )
                                         }
-                                        placeholder={getLocalePlaceholder(locale)}
+                                        placeholder={t('button-fields.enter-button-text')}
+                                        // eslint-disable-next-line @typescript-eslint/no-explicit-any
                                         value={(button.buttonText as any)[locale] || ''}
                                     />
                                 </Tabs.Panel>

@@ -1,65 +1,14 @@
 import { Checkbox, Group, Paper, Stack, Text, Title } from '@mantine/core'
-import ReactCountryFlag from 'react-country-flag'
 import { useTranslation } from 'react-i18next'
 import { TbLanguage } from 'react-icons/tb'
-import { TFunction } from 'i18next'
-import { ReactNode } from 'react'
 
+import { getLocaleFlag } from '../app-form/lib/get-locale-flag'
+import { getLocaleName } from '../app-form/lib/get-locale-name'
 import { TAdditionalLocales } from '../../../model/types'
 
 interface LanguageSelectorProps {
     additionalLocales: TAdditionalLocales[]
     onChange: (locales: TAdditionalLocales[]) => void
-}
-
-const getLocaleFlag = (locale: string): ReactNode => {
-    switch (locale) {
-        case 'fa':
-            return (
-                <ReactCountryFlag
-                    countryCode="IR"
-                    style={{
-                        fontSize: '1.1em',
-                        borderRadius: '2px'
-                    }}
-                />
-            )
-        case 'ru':
-            return (
-                <ReactCountryFlag
-                    countryCode="RU"
-                    style={{
-                        fontSize: '1.1em',
-                        borderRadius: '2px'
-                    }}
-                />
-            )
-        case 'zh':
-            return (
-                <ReactCountryFlag
-                    countryCode="CN"
-                    style={{
-                        fontSize: '1.1em',
-                        borderRadius: '2px'
-                    }}
-                />
-            )
-        default:
-            return null
-    }
-}
-
-const getLocaleName = (locale: string, t: TFunction): string => {
-    switch (locale) {
-        case 'fa':
-            return t('language-selector.component.persian')
-        case 'ru':
-            return t('language-selector.component.russian')
-        case 'zh':
-            return t('language-selector.component.chinese')
-        default:
-            return locale
-    }
 }
 
 export const LanguageSelector = (props: LanguageSelectorProps) => {

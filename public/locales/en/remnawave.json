@@ -939,7 +939,9 @@
         "add-button": "Add button",
         "remove-button": "Remove button",
         "button-link": "Button Link",
-        "button-text": "Button Text"
+        "button-text": "Button Text",
+        "enter-button-text": "Enter button text...",
+        "english": "English"
     },
     "subscription-tabs": {
         "widget": {
@@ -1484,7 +1486,8 @@
             "russian": "Russian",
             "chinese": "Chinese",
             "additional-languages": "Additional Languages",
-            "english-is-always-enabled": "English is always enabled"
+            "english-is-always-enabled": "English is always enabled",
+            "english": "English"
         }
     }
 }
