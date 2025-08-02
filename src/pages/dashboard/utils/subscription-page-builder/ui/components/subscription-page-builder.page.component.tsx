@@ -46,6 +46,7 @@ import { validateSubscriptionPageAppConfig } from '../../model/validators'
 import { createEmptyApp, emptyConfig } from '../../model/config'
 import { autoMigrateConfig } from '../../model/migration.utils'
 import { LanguageSelector } from './language-selector'
+import classes from './CustomTabs.module.css'
 import { AppForm } from './app-form'
 
 const DEFAULT_CONFIG_URL =
@@ -335,8 +336,10 @@ export const SubscriptionPageBuilderComponent = () => {
 
                             <Paper p="md" radius="md" shadow="sm" withBorder>
                                 <Tabs
+                                    classNames={classes}
                                     onChange={(value) => setActiveTab(value as TPlatform)}
                                     value={activeTab}
+                                    variant="unstyled"
                                 >
                                     <Tabs.List grow>
                                         <Tabs.Tab leftSection={<PiAppleLogo />} value="ios">
