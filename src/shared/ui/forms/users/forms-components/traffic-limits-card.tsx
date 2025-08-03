@@ -102,8 +102,8 @@ export const TrafficLimitsCard = <T extends CreateUserCommand.Request | UpdateUs
 
                     <Select
                         allowDeselect={false}
-                        data={resetDataStrategy(t)}
                         comboboxProps={{ transitionProps: { transition: 'fade', duration: 200 } }}
+                        data={resetDataStrategy(t)}
                         defaultValue={form.values.trafficLimitStrategy}
                         description={t(
                             'create-user-modal.widget.traffic-reset-strategy-description'

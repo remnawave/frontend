@@ -62,7 +62,7 @@ export function NodesRealtimeUsageMetrics() {
                     key={card.title}
                     transition={{
                         duration: 0.2,
-                        delay: index * 0.02,
+                        delay: index * 0.07,
                         ease: 'easeIn'
                     }}
                     whileHover={{ y: -1 }}
