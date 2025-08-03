@@ -63,7 +63,7 @@ export const useUserTableColumns = (
                 filterVariant: 'select',
                 mantineFilterSelectProps: {
                     comboboxProps: {
-                        transitionProps: { transition: 'pop', duration: 200 }
+                        transitionProps: { transition: 'fade', duration: 200 }
                     },
                     checkIconPosition: 'left',
                     data:

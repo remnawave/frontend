@@ -7,7 +7,7 @@ export default {
             withArrow: false,
             radius: 'md',
             transitionProps: {
-                transition: 'pop',
+                transition: 'fade',
                 duration: 180,
                 timingFunction: 'ease-out'
             },
@@ -26,7 +26,7 @@ export default {
     }),
     Combobox: Combobox.extend({
         defaultProps: {
-            transitionProps: { transition: 'pop', duration: 200 }
+            transitionProps: { transition: 'fade', duration: 200 }
         }
     })
 }
