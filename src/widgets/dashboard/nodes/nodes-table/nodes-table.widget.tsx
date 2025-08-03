@@ -24,6 +24,7 @@ import { EmptyPageLayout } from '@shared/ui/layouts/empty-page'
 import { sToMs } from '@shared/utils/time-utils'
 import { queryClient } from '@shared/api'
 
+import { NodesSpotlightSearchWidget } from '../nodes-spotlight-search'
 import { NodeCardWidget } from '../node-card'
 import styles from './NodesTable.module.css'
 import { IProps } from './interfaces'
@@ -31,6 +32,7 @@ import { IProps } from './interfaces'
 export const NodesTableWidget = memo((props: IProps) => {
     const { nodes } = props
     const [state, handlers] = useListState(nodes || [])
+
     const [isPollingEnabled, setIsPollingEnabled] = useState(true)
     const [draggedNode, setDraggedNode] = useState<
         GetAllNodesCommand.Response['response'][number] | null
@@ -163,70 +165,76 @@ export const NodesTableWidget = memo((props: IProps) => {
     }
 
     return (
-        <DndContext
-            collisionDetection={closestCenter}
-            modifiers={[restrictToVerticalAxis]}
-            onDragCancel={handleDragCancel}
-            onDragEnd={handleDragEnd}
-            onDragStart={handleDragStart}
-            sensors={sensors}
-        >
-            <div ref={listRef}>
-                <div
-                    style={{
-                        height: `${virtualizer.getTotalSize()}px`
-                    }}
-                >
-                    <SortableContext items={dataIds.current} strategy={verticalListSortingStrategy}>
-                        <Container
-                            p={0}
-                            size={'lg'}
-                            style={{
-                                position: 'relative',
-                                minHeight: '100px'
-                            }}
+        <>
+            <DndContext
+                collisionDetection={closestCenter}
+                modifiers={[restrictToVerticalAxis]}
+                onDragCancel={handleDragCancel}
+                onDragEnd={handleDragEnd}
+                onDragStart={handleDragStart}
+                sensors={sensors}
+            >
+                <div ref={listRef}>
+                    <div
+                        style={{
+                            height: `${virtualizer.getTotalSize()}px`
+                        }}
+                    >
+                        <SortableContext
+                            items={dataIds.current}
+                            strategy={verticalListSortingStrategy}
                         >
-                            <Stack gap={0}>
-                                {virtualizer.getVirtualItems().map((virtualItem) => {
-                                    const item = state[virtualItem.index]
-                                    if (!item) return null
+                            <Container
+                                p={0}
+                                size={'lg'}
+                                style={{
+                                    position: 'relative',
+                                    minHeight: '100px'
+                                }}
+                            >
+                                <Stack gap={0}>
+                                    {virtualizer.getVirtualItems().map((virtualItem) => {
+                                        const item = state[virtualItem.index]
+                                        if (!item) return null
 
-                                    return (
-                                        <div
-                                            data-index={virtualItem.index}
-                                            key={item.uuid}
-                                            style={{
-                                                height: `0px`
-                                            }}
-                                        >
+                                        return (
                                             <div
+                                                data-index={virtualItem.index}
+                                                key={item.uuid}
                                                 style={{
-                                                    height: `${virtualItem.size}px`,
-                                                    transform: `translateY(${
-                                                        virtualItem.start -
-                                                        virtualizer.options.scrollMargin
-                                                    }px)`
+                                                    height: `0px`
                                                 }}
                                             >
-                                                <div className={styles.nodeFadeIn}>
-                                                    <NodeCardWidget node={item} />
+                                                <div
+                                                    style={{
+                                                        height: `${virtualItem.size}px`,
+                                                        transform: `translateY(${
+                                                            virtualItem.start -
+                                                            virtualizer.options.scrollMargin
+                                                        }px)`
+                                                    }}
+                                                >
+                                                    <div className={styles.nodeFadeIn}>
+                                                        <NodeCardWidget node={item} />
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    )
-                                })}
-                            </Stack>
-                        </Container>
-                    </SortableContext>
+                                        )
+                                    })}
+                                </Stack>
+                            </Container>
+                        </SortableContext>
+                    </div>
                 </div>
-            </div>
-            <DragOverlay>
-                {draggedNode && (
-                    <Container p={0} size={'lg'} style={{ width: '100%' }}>
-                        <NodeCardWidget isDragOverlay node={draggedNode} />
-                    </Container>
-                )}
-            </DragOverlay>
-        </DndContext>
+                <DragOverlay>
+                    {draggedNode && (
+                        <Container p={0} size={'lg'} style={{ width: '100%' }}>
+                            <NodeCardWidget isDragOverlay node={draggedNode} />
+                        </Container>
+                    )}
+                </DragOverlay>
+            </DndContext>
+            {nodes && nodes.length > 0 && <NodesSpotlightSearchWidget nodes={nodes} />}
+        </>
     )
 })

@@ -14,6 +14,7 @@ import { IProps } from './interfaces'
 
 export default function NodesPageComponent(props: IProps) {
     const { t } = useTranslation()
+
     const { nodes, isLoading } = props
 
     return (

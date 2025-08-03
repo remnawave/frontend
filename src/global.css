@@ -19,3 +19,7 @@ body {
         }
     }
 }
+
+.mantine-Spotlight-action[data-selected] {
+    background-color: var(--mantine-color-dark-5) !important;
+}

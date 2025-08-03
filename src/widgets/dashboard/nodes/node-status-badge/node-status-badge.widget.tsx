@@ -51,7 +51,7 @@ export const NodeStatusBadgeWidget = memo(
 
         if (!withText) {
             return (
-                <ActionIcon color={color} radius="md" size="md" {...rest}>
+                <ActionIcon color={color} radius="md" size={26} {...rest}>
                     {icon}
                 </ActionIcon>
             )
