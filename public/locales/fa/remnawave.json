@@ -940,8 +940,8 @@
         "remove-button": "حذف دکمه",
         "button-link": "لینک دکمه",
         "button-text": "متن دکمه",
-        "enter-button-text": "Enter button text...",
-        "english": "English"
+        "enter-button-text": "متن دکمه را وارد کنید",
+        "english": "انگلیسی"
     },
     "subscription-tabs": {
         "widget": {
@@ -1482,12 +1482,12 @@
     },
     "language-selector": {
         "component": {
-            "persian": "Persian",
-            "russian": "Russian",
-            "chinese": "Chinese",
-            "additional-languages": "Additional Languages",
-            "english-is-always-enabled": "English is always enabled",
-            "english": "English"
+            "persian": "فارسی",
+            "russian": "روسی",
+            "chinese": "چینی",
+            "additional-languages": "زبان‌های بیشتر",
+            "english-is-always-enabled": "انگلیسی همیشه فعال می‌باشد",
+            "english": "انگلیسی"
         }
     }
 }
