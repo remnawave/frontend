@@ -1489,5 +1489,18 @@
             "english-is-always-enabled": "انگلیسی همیشه فعال می‌باشد",
             "english": "انگلیسی"
         }
+    },
+    "node-stats": {
+        "card": {
+            "stats": "Stats",
+            "traffic-refill-in-days": "Traffic refill in (days):",
+            "represents-the-uptime-of-the-xray-core": "Represents the uptime of the Xray Core"
+        }
+    },
+    "nodes-spotlight-search": {
+        "widget": {
+            "no-nodes-found": "No nodes found...",
+            "search-by-name-or-address": "Search by name or address..."
+        }
     }
 }
