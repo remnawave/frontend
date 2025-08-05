@@ -78,55 +78,52 @@ export function HostCardWidget(props: IProps) {
                 ref={isDragOverlay ? undefined : setNodeRef}
                 style={style}
             >
-                <Box
-                    className={classes.contentArea}
-                    onClick={(e) => {
-                        e.stopPropagation()
-                        handleEdit()
-                    }}
-                    onTouchEnd={() => setIsHovered(false)}
-                    onTouchStart={() => setIsHovered(true)}
-                >
-                    <Stack gap="sm">
-                        <Group justify="space-between" wrap="nowrap">
-                            <Group gap="sm" wrap="nowrap">
-                                <Checkbox
-                                    checked={isSelected}
-                                    onChange={(e) => {
-                                        e.stopPropagation()
-                                        onSelect?.()
-                                    }}
-                                    size="md"
-                                    styles={{
-                                        input: { cursor: 'pointer' }
-                                    }}
-                                />
-                                <Box
-                                    {...(isDragOverlay ? {} : attributes)}
-                                    {...(isDragOverlay ? {} : listeners)}
-                                    className={classes.mobileDragHandle}
-                                    onClick={(e) => e.stopPropagation()}
-                                >
-                                    {!isFiltered && <RiDraggable size={px('1.2rem')} />}
-                                    {isFiltered && (
-                                        <PiLock
-                                            className={classes.lockedIcon}
-                                            size={px('1.2rem')}
-                                        />
-                                    )}
-                                </Box>
-                            </Group>
-
-                            <ActionIcon
-                                color={isHostActive ? 'teal' : 'gray'}
-                                radius="md"
-                                size="lg"
-                                variant="light"
+                <Stack gap="sm">
+                    <Group justify="space-between" wrap="nowrap">
+                        <Group gap="sm" wrap="nowrap">
+                            <Checkbox
+                                checked={isSelected}
+                                onChange={(e) => {
+                                    e.stopPropagation()
+                                    onSelect?.()
+                                }}
+                                size="md"
+                                styles={{
+                                    input: { cursor: 'pointer' }
+                                }}
+                            />
+                            <Box
+                                {...(isDragOverlay ? {} : attributes)}
+                                {...(isDragOverlay ? {} : listeners)}
+                                className={classes.mobileDragHandle}
+                                onClick={(e) => e.stopPropagation()}
                             >
-                                {isHostActive ? <PiPulse size={16} /> : <PiProhibit size={16} />}
-                            </ActionIcon>
+                                {!isFiltered && <RiDraggable size={px('1.2rem')} />}
+                                {isFiltered && (
+                                    <PiLock className={classes.lockedIcon} size={px('1.2rem')} />
+                                )}
+                            </Box>
                         </Group>
 
+                        <ActionIcon
+                            color={isHostActive ? 'teal' : 'gray'}
+                            radius="md"
+                            size="lg"
+                            variant="light"
+                        >
+                            {isHostActive ? <PiPulse size={16} /> : <PiProhibit size={16} />}
+                        </ActionIcon>
+                    </Group>
+
+                    <Box
+                        className={classes.contentArea}
+                        onClick={(e) => {
+                            e.stopPropagation()
+                            handleEdit()
+                        }}
+                        onTouchEnd={() => setIsHovered(false)}
+                        onTouchStart={() => setIsHovered(true)}
+                    >
                         <Stack gap="xs">
                             <Text className={classes.hostName} fw={600} size="lg">
                                 {item.remark}
@@ -172,8 +169,8 @@ export function HostCardWidget(props: IProps) {
                                 </Badge>
                             </Stack>
                         </Stack>
-                    </Stack>
-                </Box>
+                    </Box>
+                </Stack>
             </Box>
         )
     }
