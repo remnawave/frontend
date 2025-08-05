@@ -1500,7 +1500,7 @@
     "nodes-spotlight-search": {
         "widget": {
             "no-nodes-found": "No nodes found...",
-            "search-by-name-or-address": "Search by name or address..."
+            "search-by-name-or-address": "按名称或地址搜索……"
         }
     }
 }
