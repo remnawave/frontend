@@ -1,1 +1,1 @@
-export * from './node-users-usage-drawer.widget'
+export { NodeUsersUsageDrawer } from './node-users-usage-drawer.widget'

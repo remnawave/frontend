@@ -1,5 +1,5 @@
+/* eslint-disable indent */
 import {
-    Accordion,
     ActionIcon,
     Box,
     Card,
@@ -8,7 +8,6 @@ import {
     Group,
     Modal,
     MultiSelect,
-    Paper,
     ScrollArea,
     SegmentedControl,
     Select,
@@ -16,9 +15,7 @@ import {
     Skeleton,
     Stack,
     Table,
-    Tabs,
-    Text,
-    Tooltip
+    Text
 } from '@mantine/core'
 import {
     TbChartBar as IconChartBar,
@@ -26,47 +23,56 @@ import {
     TbChevronRight,
     TbRefresh
 } from 'react-icons/tb'
-import { GetNodeUserUsageByRangeCommand } from '@remnawave/backend-contract'
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import HighchartsReact from 'highcharts-react-official'
 import { PiEmpty, PiListBullets } from 'react-icons/pi'
-import { BarChart, Sparkline } from '@mantine/charts'
+import { useDebouncedValue } from '@mantine/hooks'
 import { useTranslation } from 'react-i18next'
-import ColorHash from 'color-hash'
+import { Sparkline } from '@mantine/charts'
+import * as Highcharts from 'highcharts'
 import dayjs from 'dayjs'
 
+import { useHighchartsDataProcessor } from '@shared/hooks/use-highcharts-data-processor'
 import { useGetNodeUsersUsageByRange } from '@shared/api/hooks'
 import { prettyBytesToAnyUtil } from '@shared/utils/bytes'
 
 import { IProps } from './interfaces'
 
-export const NodeUsersUsageDrawer = (props: IProps) => {
+const MemoizedSparkline = memo(Sparkline)
+
+interface DayDataDetails {
+    filtered: Array<{
+        color: string
+        name: string
+        value: number
+    }>
+    hiddenCount: number
+    hiddenTraffic: number
+    totalTraffic: number
+}
+
+export const NodeUsersUsageDrawer = memo((props: IProps) => {
     const { nodeUuid, opened, onClose } = props
     const { t } = useTranslation()
 
-    interface DayDataDetails {
-        filtered: Array<{
-            color: string
-            name: string
-            value: number
-        }>
-        hiddenCount: number
-        hiddenTraffic: number
-        totalTraffic: number
-    }
-
     const [period, setPeriod] = useState<'7' | '14' | '30' | '60' | '90' | '180' | '365'>('7')
     const [dateRange, setDateRange] = useState<[Date, Date]>([
-        dayjs().utc().subtract(7, 'day').startOf('hour').toDate(),
-        dayjs().utc().startOf('hour').toDate()
+        dayjs().utc().subtract(7, 'day').startOf('day').toDate(),
+        dayjs().utc().endOf('day').toDate()
     ])
+
     const [selectedUsers, setSelectedUsers] = useState<string[]>([])
     const [viewType, setViewType] = useState<'grouped' | 'stacked'>('stacked')
-    const [highlightedUser, setHighlightedUser] = useState<null | string>(null)
     const [userDetailsActive, setUserDetailsActive] = useState<boolean>(false)
     const [selectedDate, setSelectedDate] = useState<null | string>(null)
     const [selectedDayData, setSelectedDayData] = useState<DayDataDetails | null>(null)
     const [currentDateIndex, setCurrentDateIndex] = useState<null | number>(null)
-    const ch = new ColorHash({ lightness: 0.5, saturation: 0.7 })
+
+    const chartRef = useRef<HighchartsReact.RefObject>(null)
+
+    const [debouncedSelectedUsers] = useDebouncedValue(selectedUsers, 300)
+
+    const { processData, processedData, isProcessing, error } = useHighchartsDataProcessor()
 
     const handleMultiSelectChange = useCallback((newUsers: string[]) => {
         setSelectedUsers(newUsers)
@@ -76,14 +82,9 @@ export const NodeUsersUsageDrawer = (props: IProps) => {
         setViewType((value || 'stacked') as 'grouped' | 'stacked')
     }, [])
 
-    const handleHighlightUser = useCallback((userName: string) => {
-        setHighlightedUser((prevValue) => (prevValue === userName ? null : userName))
-    }, [])
-
     useEffect(() => {
         if (!opened) {
             setSelectedUsers([])
-            setHighlightedUser(null)
             setViewType('stacked')
             setPeriod('7')
             setDateRange([
@@ -114,252 +115,222 @@ export const NodeUsersUsageDrawer = (props: IProps) => {
         }
     })
 
-    const formatDataForChart = (
-        dbData: GetNodeUserUsageByRangeCommand.Response['response'] = []
-    ) => {
-        if (!dbData || dbData.length === 0) {
-            return {
-                data: [],
-                series: [],
-                topUsers: [],
-                totalUsage: 0,
-                userCount: 0,
-                significantUserCount: 0,
-                displayedUserCount: 0
-            }
+    useEffect(() => {
+        if (nodeUsersUsage && nodeUsersUsage.length > 0) {
+            processData(nodeUsersUsage, {
+                maxDisplayedUsers: 100,
+                minTrafficThreshold: 100 * 1024,
+                selectedUsers: debouncedSelectedUsers
+            })
         }
-
-        interface ChartData {
-            [key: string]: number | string
-            date: string
-        }
-
-        const groupedData: Record<string, ChartData> = {}
-        const seriesSet = new Set<string>()
-        const userTotal: Record<string, number> = {}
-
-        const uniqueDates = new Set<string>()
-        dbData.forEach(({ date }) => {
-            uniqueDates.add(dayjs(date).format('MMM D'))
-        })
-        uniqueDates.forEach((date) => {
-            groupedData[date] = { date }
-        })
-
-        dbData.forEach(({ username, total, date }) => {
-            const formattedDate = dayjs(date).format('MMM D')
-            groupedData[formattedDate][username] = total
-            seriesSet.add(username)
-
-            if (!userTotal[username]) {
-                userTotal[username] = 0
-            }
-            userTotal[username] += total
-        })
-
-        const totalUsage = Object.values(userTotal).reduce((sum, val) => sum + val, 0)
-
-        const MIN_TRAFFIC_THRESHOLD = 100 * 1024 // 100 КБ
-
-        const significantUsersData = Object.entries(userTotal)
-            .filter(([, total]) => total >= MIN_TRAFFIC_THRESHOLD)
-            .map(([name, total]) => ({ name, total }))
-            .sort((a, b) => b.total - a.total)
-
-        const significantUsers = significantUsersData.map((item) => item.name)
-
-        const MAX_DISPLAYED_USERS = 100
-        const topSignificantUsers = significantUsers.slice(0, MAX_DISPLAYED_USERS)
-
-        const allUserCount = seriesSet.size
-        const significantUserCount = significantUsers.length
-        const displayedUserCount = topSignificantUsers.length
-
-        const generatedSeries = topSignificantUsers.map((userName) => {
-            const color = ch.hex(userName)
-            return {
-                name: userName,
-                color,
-                total: userTotal[userName] || 0
-            }
-        })
-
-        return {
-            data: Object.values(groupedData),
-            series: generatedSeries,
-            topUsers: significantUsersData.slice(0, 3).map((item) => item.name),
-            totalUsage,
-            userCount: allUserCount,
-            significantUserCount,
-            displayedUserCount
-        }
-    }
+    }, [nodeUsersUsage, debouncedSelectedUsers, processData])
 
     const {
-        data,
-        series,
-        topUsers,
-        totalUsage,
-        userCount,
-        significantUserCount,
-        displayedUserCount
-    } = useMemo(() => {
-        return formatDataForChart(nodeUsersUsage ?? [])
-    }, [nodeUsersUsage])
-
-    const filteredSeries = useMemo(() => {
-        return selectedUsers.length > 0
-            ? series.filter((s) => selectedUsers.includes(s.name))
-            : series
-    }, [series, selectedUsers])
-
-    const sortedSeries = useMemo(() => {
-        return [...filteredSeries].sort((a, b) => b.total - a.total)
-    }, [filteredSeries])
-
-    const trendData = useMemo(() => {
-        const dailyTotals = data.map((day) => {
-            const total = Object.entries(day)
-                .filter(([key]) => key !== 'date')
-                .reduce((sum, [, value]) => {
-                    return sum + (typeof value === 'number' ? value : 0)
-                }, 0)
-            return { date: day.date, value: total }
-        })
-        return dailyTotals
-    }, [data])
-
-    const displaySeries = useMemo(() => {
-        if (highlightedUser) {
-            return sortedSeries.filter((s) => s.name === highlightedUser)
-        }
-
-        if (Number(period) > 30 && sortedSeries.length > 10) {
-            return sortedSeries.slice(0, 10)
-        }
-
-        return sortedSeries
-    }, [sortedSeries, highlightedUser, period])
+        categories = [],
+        displayedUserCount = 0,
+        series = [],
+        significantUserCount = 0,
+        topUsers = [],
+        totalUsage = 0,
+        trendData = [],
+        userCount = 0,
+        allAvailableUsers = []
+    } = processedData || {}
 
     const topUsersWithUsage = useMemo(() => {
         return topUsers.map((userName) => {
             const userInfo = series.find((s) => s.name === userName)
             return {
-                name: userName,
                 color: userInfo?.color || '#888',
+                name: userName,
                 total: userInfo?.total || 0
             }
         })
     }, [series, topUsers])
 
-    const hasData = data.length > 0 && displaySeries.length > 0
+    const hasData = categories.length > 0 && series.length > 0
+    const showLoading = isLoading || isProcessing
 
-    const handleBarClick = (barData: Record<string, unknown>, clickIndex?: number) => {
-        const date = barData.date as string
-        if (!date) return
+    const handleBarClick = useCallback(
+        (category: string, pointIndex: number) => {
+            if (!category) return
 
-        const technicalFields = [
-            'width',
-            'y',
-            'x',
-            'height',
-            'value',
-            'payload',
-            'background',
-            'fill',
-            'tooltipPayload',
-            'tooltipPosition',
-            'cursor',
-            'className',
-            'index',
-            'stroke',
-            'strokeWidth',
-            'strokeDasharray',
-            'stackedData',
-            'dataKey',
-            'layout'
-        ]
+            const allDayData = series
+                .map((s) => ({
+                    color: s.color,
+                    name: s.name,
+                    value: s.data[pointIndex] || 0
+                }))
+                .filter((item) => item.value > 0)
+                .sort((a, b) => b.value - a.value)
 
-        const allDayData = Object.entries(barData)
-            .filter(([key]) => key !== 'date' && !technicalFields.includes(key))
-            .map(([name, value]) => {
-                const userInfo = series.find((s) => s.name === name)
-                return {
-                    name,
-                    value: Number(value) || 0,
-                    color: userInfo?.color || '#ccc'
-                }
+            const MIN_TRAFFIC_THRESHOLD = 100 * 1024
+            const significantDayData = allDayData.filter(
+                (item) => item.value >= MIN_TRAFFIC_THRESHOLD
+            )
+            const hiddenUserCount = allDayData.length - significantDayData.length
+            const totalDayTraffic = allDayData.reduce((sum, item) => sum + item.value, 0)
+            const hiddenDayTraffic =
+                totalDayTraffic - significantDayData.reduce((sum, item) => sum + item.value, 0)
+
+            if (allDayData.length === 0) return
+
+            setSelectedDate(category)
+            setSelectedDayData({
+                filtered: significantDayData,
+                hiddenCount: hiddenUserCount,
+                hiddenTraffic: hiddenDayTraffic,
+                totalTraffic: totalDayTraffic
             })
-            .sort((a, b) => b.value - a.value)
+            setCurrentDateIndex(pointIndex)
+            setUserDetailsActive(true)
+        },
+        [series]
+    )
 
-        const MIN_TRAFFIC_THRESHOLD = 100 * 1024
+    const chartOptions: Highcharts.Options = useMemo(() => {
+        if (!hasData) return {}
 
-        const significantDayData = allDayData.filter((item) => item.value >= MIN_TRAFFIC_THRESHOLD)
-
-        const hiddenUserCount = allDayData.length - significantDayData.length
-
-        const totalDayTraffic = allDayData.reduce((sum, item) => sum + (item.value || 0), 0)
-
-        const displayedDayTraffic = significantDayData.reduce(
-            (sum, item) => sum + (item.value || 0),
-            0
-        )
-
-        const hiddenDayTraffic = totalDayTraffic - displayedDayTraffic
-
-        if (allDayData.length === 0) return
-
-        let dateIndex: null | number = null
-
-        if (typeof clickIndex === 'number') {
-            dateIndex = clickIndex
-        } else {
-            for (let i = 0; i < data.length; i++) {
-                if (data[i].date === date) {
-                    dateIndex = i
-                    break
+        const options: Highcharts.Options = {
+            chart: {
+                type: 'column',
+                height: 400,
+                backgroundColor: 'transparent',
+                style: {
+                    fontFamily: 'inherit'
                 }
+            },
+            accessibility: {
+                enabled: false
+            },
+            title: {
+                text: undefined
+            },
+            subtitle: {
+                text: undefined
+            },
+            xAxis: {
+                categories,
+                crosshair: true,
+                labels: {
+                    style: {
+                        color: 'var(--mantine-color-text)'
+                    }
+                },
+                gridLineColor: 'var(--mantine-color-gray-4)',
+                gridLineWidth: 1,
+                gridLineDashStyle: 'ShortDot'
+            },
+            yAxis: {
+                title: undefined,
+                labels: {
+                    style: {
+                        color: 'var(--mantine-color-text)'
+                    },
+                    formatter() {
+                        return prettyBytesToAnyUtil(this.value as number) || ''
+                    }
+                },
+                gridLineColor: undefined
+            },
+            plotOptions: {
+                column: {
+                    stacking: viewType === 'stacked' ? 'normal' : undefined,
+                    borderWidth: 0,
+                    borderRadius: 3,
+                    maxPointWidth: 35,
+                    point: {
+                        events: {
+                            click() {
+                                handleBarClick(this.category as string, this.index)
+                            }
+                        }
+                    },
+
+                    cursor: 'pointer'
+                }
+            },
+            tooltip: {
+                shared: true,
+                backgroundColor: 'var(--mantine-color-body)',
+                borderColor: 'var(--mantine-color-gray-4)',
+                style: {
+                    color: 'var(--mantine-color-text)'
+                },
+                formatter() {
+                    const points = this.points || []
+
+                    if (points.length === 0) return ''
+
+                    const date = points[0].category
+
+                    const totalForDay = points.reduce((sum, point) => sum + (point.y || 0), 0)
+
+                    let html = `<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; font-size: 0.875rem;">
+                        <div style="font-weight: 600;">${dayjs(date).format('D MMMM')}</div>
+                        <div style="color: var(--mantine-color-dimmed);">Σ ${prettyBytesToAnyUtil(totalForDay)}</div>
+                    </div>`
+
+                    const sortedPoints = [...points]
+                        .filter((point) => (point.y || 0) > 50_000)
+                        .sort((a, b) => (b.y || 0) - (a.y || 0))
+                        .slice(0, 10)
+
+                    sortedPoints.forEach((point) => {
+                        html += `<div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+                            <div style="width: 10px; height: 10px; background-color: ${point.color}; border-radius: 50%;"></div>
+                            <span style="flex: 1;">${point.series.name}</span>
+                            <span style="font-weight: 500;">${prettyBytesToAnyUtil(point.y || 0)}</span>
+                        </div>`
+                    })
+
+                    html += `<div style="color: var(--mantine-color-dimmed); font-size: 0.75rem; text-align: center; margin-top: 8px;">${t('node-users-usage-drawer.widget.click-to-see-all-users')}</div>`
+
+                    return html
+                },
+                useHTML: true
+            },
+            legend: {
+                enabled: false
+            },
+            series: series.map((s) => ({
+                name: s.name,
+                data: s.data,
+                color: s.color,
+                type: 'column'
+            })),
+            credits: {
+                enabled: false
+            },
+            exporting: {
+                enabled: false
             }
         }
 
-        setSelectedDate(date)
-        setSelectedDayData({
-            filtered: significantDayData,
-            hiddenCount: hiddenUserCount,
-            totalTraffic: totalDayTraffic,
-            hiddenTraffic: hiddenDayTraffic
-        })
-        setCurrentDateIndex(dateIndex)
-        setUserDetailsActive(true)
-    }
+        return options
+    }, [hasData, categories, series, viewType, t, handleBarClick])
 
     const goToPreviousDay = useCallback(() => {
         if (currentDateIndex === null || currentDateIndex <= 0) return
-
         const previousIndex = currentDateIndex - 1
-        const previousData = data[previousIndex]
-
-        if (!previousData) return
-
-        handleBarClick(previousData, previousIndex)
-    }, [currentDateIndex, data])
+        const previousCategory = categories[previousIndex]
+        if (!previousCategory) return
+        handleBarClick(previousCategory, previousIndex)
+    }, [currentDateIndex, categories, handleBarClick])
 
     const goToNextDay = useCallback(() => {
-        if (currentDateIndex === null || currentDateIndex >= data.length - 1) return
-
+        if (currentDateIndex === null || currentDateIndex >= categories.length - 1) return
         const nextIndex = currentDateIndex + 1
-        const nextData = data[nextIndex]
-
-        if (!nextData) return
-
-        handleBarClick(nextData, nextIndex)
-    }, [currentDateIndex, data, handleBarClick])
+        const nextCategory = categories[nextIndex]
+        if (!nextCategory) return
+        handleBarClick(nextCategory, nextIndex)
+    }, [currentDateIndex, categories, handleBarClick])
 
     const hasPreviousDay = currentDateIndex !== null && currentDateIndex > 0
-    const hasNextDay = currentDateIndex !== null && currentDateIndex < data.length - 1
+    const hasNextDay = currentDateIndex !== null && currentDateIndex < categories.length - 1
 
-    const renderBarChart = () => {
-        if (isLoading) {
+    const renderChart = useCallback(() => {
+        if (showLoading) {
             return <Skeleton height={400} mt="md" />
         }
 
@@ -380,221 +351,36 @@ export const NodeUsersUsageDrawer = (props: IProps) => {
 
         return (
             <Box mt="md" style={{ width: '100%', height: 400 }}>
-                <BarChart
-                    barProps={{
-                        radius: 3,
-                        cursor: 'pointer',
-                        onClick: (barData, index) => {
-                            const barIndex = typeof index === 'number' ? index : -1
-                            handleBarClick(barData, barIndex)
-                        }
-                    }}
-                    data={data}
-                    dataKey="date"
-                    h={400}
-                    maxBarWidth={35}
-                    orientation="vertical"
-                    series={displaySeries}
-                    tooltipAnimationDuration={200}
-                    tooltipProps={{
-                        content: ({ payload, active }) => {
-                            if (!active || !payload || payload.length === 0) return null
-
-                            const date = payload[0]?.payload?.date
-                            if (!date) return null
-
-                            const validPayload = payload.filter(
-                                (entry) => entry && typeof entry.value === 'number'
-                            )
-
-                            if (validPayload.length === 0) return null
-
-                            const sortedPayload = [...validPayload].sort(
-                                (a, b) => b.value - a.value
-                            )
-                            const totalForDay = validPayload.reduce((sum, entry) => {
-                                return sum + (Number(entry.value) || 0)
-                            }, 0)
-
-                            const filteredPayload = sortedPayload.filter(
-                                (entry) => entry.value > 50_000
-                            )
-
-                            return (
-                                <Paper px="md" py="sm" radius="md" shadow="md" withBorder>
-                                    <Group justify="space-between" mb={8}>
-                                        <Text fw={600}>{date}</Text>
-                                        <Text c="dimmed" fz="sm">
-                                            {`Σ ${prettyBytesToAnyUtil(totalForDay)}`}
-                                        </Text>
-                                    </Group>
-
-                                    {filteredPayload.slice(0, 10).map((entry) => (
-                                        <Stack
-                                            gap={4}
-                                            key={entry.dataKey || `${entry.name}-${Math.random()}`}
-                                        >
-                                            <Group justify="space-between">
-                                                <Group gap={8}>
-                                                    <Box
-                                                        h={10}
-                                                        style={{
-                                                            backgroundColor: entry.color,
-                                                            borderRadius: '50%'
-                                                        }}
-                                                        w={10}
-                                                    />
-                                                    <Text fz="sm">{entry.name}</Text>
-                                                </Group>
-                                                <Text fw={500} fz="sm">
-                                                    {prettyBytesToAnyUtil(entry.value)}
-                                                </Text>
-                                            </Group>
-                                        </Stack>
-                                    ))}
-
-                                    <Text c="dimmed" fz="xs" mt={8} ta="center">
-                                        {t('node-users-usage-drawer.widget.click-to-see-all-users')}
-                                    </Text>
-                                </Paper>
-                            )
-                        }
-                    }}
-                    type={viewType === 'stacked' ? 'stacked' : 'default'}
-                    valueFormatter={(value) => {
-                        return prettyBytesToAnyUtil(value) ?? ''
-                    }}
-                    withLegend={false}
-                    withXAxis
-                />
-
+                <HighchartsReact highcharts={Highcharts} options={chartOptions} ref={chartRef} />
                 <Text c="dimmed" mt={8} size="sm" ta="center">
                     {t('node-users-usage-drawer.widget.click-on-bars-to-view-details')}
                 </Text>
             </Box>
         )
-    }
+    }, [showLoading, hasData, chartOptions, t])
 
-    const renderLegend = () => {
-        const content = (
-            <SimpleGrid
-                cols={{ base: 1, xs: 2, sm: 3, md: 4 }}
-                spacing={'xs'}
-                style={{
-                    cursor: 'pointer',
-                    marginTop: '0.5rem',
-                    marginBottom: '0.5rem'
-                }}
-                verticalSpacing={'xs'}
-            >
-                {isLoading &&
-                    Array.from({ length: 8 }).map((_, i) => (
-                        <Group
-                            gap={8}
-                            key={i}
-                            style={{
-                                padding: '0.25rem 0.5rem',
-                                borderRadius: '4px'
-                            }}
-                        >
-                            <Skeleton circle height={10} width={10} />
-                            <Skeleton height={20} width={120} />
-                        </Group>
-                    ))}
-
-                {!isLoading && !hasData && (
-                    <Group
-                        style={{
-                            padding: '0.25rem 0.5rem',
-                            borderRadius: '4px',
-                            gridColumn: '1 / -1',
-                            height: '100%',
-                            minHeight: '66px',
-                            display: 'flex',
-                            justifyContent: 'center',
-                            alignItems: 'center'
-                        }}
-                    >
-                        <Stack align="center" gap={8}>
-                            <PiEmpty size="24px" />
-                            <Text c="dimmed" size="sm">
-                                {t('node-users-usage-drawer.widget.no-data-available')}
-                            </Text>
-                        </Stack>
-                    </Group>
-                )}
-
-                {!isLoading &&
-                    sortedSeries.map((user) => (
-                        <Group
-                            gap={8}
-                            key={user.name}
-                            onClick={() => handleHighlightUser(user.name)}
-                            style={{
-                                opacity: highlightedUser && highlightedUser !== user.name ? 0.5 : 1,
-                                transition: 'opacity 0.2s',
-                                padding: '0.25rem 0.5rem',
-                                borderRadius: '4px',
-                                backgroundColor:
-                                    highlightedUser === user.name
-                                        ? 'rgba(0,0,0,0.1)'
-                                        : 'transparent'
-                            }}
-                        >
-                            <Box
-                                h={10}
-                                style={{
-                                    backgroundColor: user.color,
-                                    borderRadius: '50%'
-                                }}
-                                w={10}
-                            />
-                            <Tooltip
-                                label={
-                                    /* eslint-disable indent */
-                                    highlightedUser === user.name
-                                        ? t(
-                                              'node-users-usage-drawer.widget.click-to-show-all-users'
-                                          )
-                                        : t(
-                                              'node-users-usage-drawer.widget.click-to-highlight-only-this-user'
-                                          )
-                                    /* eslint-enable indent */
-                                }
-                                position="top"
-                            >
-                                <Text
-                                    size="sm"
-                                    style={{
-                                        maxWidth: '100%',
-                                        overflow: 'hidden',
-                                        textOverflow: 'ellipsis',
-                                        whiteSpace: 'nowrap'
-                                    }}
-                                >
-                                    {user.name}
-                                </Text>
-                            </Tooltip>
-                        </Group>
-                    ))}
-            </SimpleGrid>
-        )
-
+    const renderLegend = useCallback(() => {
         return (
-            <Accordion defaultValue="closed" variant="default">
-                <Accordion.Item value="legend">
-                    <Accordion.Control
-                        icon={<PiListBullets color="var(--mantine-color-gray-7)" size={18} />}
-                    >
+            <Card withBorder>
+                <Group gap="xs" wrap="nowrap">
+                    <PiListBullets size={18} />
+                    <Text>
                         {t('node-users-usage-drawer.widget.users-accordeon', {
                             displayedUserCount,
                             significantUserCount,
                             userCount
                         })}
-                    </Accordion.Control>
-                    <Accordion.Panel>{content}</Accordion.Panel>
-                </Accordion.Item>
-            </Accordion>
+                    </Text>
+                </Group>
+            </Card>
+        )
+    }, [displayedUserCount, significantUserCount, t, userCount])
+
+    if (error) {
+        return (
+            <Drawer onClose={onClose} opened={opened} size="400px" title="Error">
+                <Text c="red">Error processing data: {error}</Text>
+            </Drawer>
         )
     }
 
@@ -657,7 +443,7 @@ export const NodeUsersUsageDrawer = (props: IProps) => {
                                 {t('node-users-usage-drawer.widget.total-traffic')}
                             </Text>
                             <Group align="flex-end" gap="xs">
-                                {isLoading ? (
+                                {showLoading ? (
                                     <Skeleton height={28} width={120} />
                                 ) : (
                                     <Text fw={700} size="xl">
@@ -665,9 +451,9 @@ export const NodeUsersUsageDrawer = (props: IProps) => {
                                     </Text>
                                 )}
                             </Group>
-                            {isLoading && <Skeleton height={40} />}
-                            {!isLoading && (
-                                <Sparkline
+                            {showLoading && <Skeleton height={40} />}
+                            {!showLoading && (
+                                <MemoizedSparkline
                                     color={trendData.length > 1 ? undefined : 'red'}
                                     curveType="natural"
                                     data={
@@ -679,9 +465,9 @@ export const NodeUsersUsageDrawer = (props: IProps) => {
                                     h={40}
                                     strokeWidth={1.5}
                                     trendColors={{
-                                        positive: 'teal.6',
                                         negative: 'red.6',
-                                        neutral: 'gray.5'
+                                        neutral: 'gray.5',
+                                        positive: 'teal.6'
                                     }}
                                     w="100%"
                                 />
@@ -694,14 +480,14 @@ export const NodeUsersUsageDrawer = (props: IProps) => {
                             <Text c="dimmed" size="sm">
                                 {t('node-users-usage-drawer.widget.top-users')}
                             </Text>
-                            {isLoading && (
+                            {showLoading && (
                                 <Stack gap={5}>
                                     <Skeleton height={20} />
                                     <Skeleton height={20} />
                                     <Skeleton height={20} />
                                 </Stack>
                             )}
-                            {!isLoading && topUsersWithUsage.length > 0 && (
+                            {!showLoading && topUsersWithUsage.length > 0 && (
                                 <Stack gap={4}>
                                     {topUsersWithUsage.map((user, index) => (
                                         <Group gap={8} justify="space-between" key={user.name}>
@@ -725,7 +511,7 @@ export const NodeUsersUsageDrawer = (props: IProps) => {
                                     ))}
                                 </Stack>
                             )}
-                            {!isLoading && !topUsersWithUsage.length && (
+                            {!showLoading && !topUsersWithUsage.length && (
                                 <Center>
                                     <Stack align="center" gap={5}>
                                         <PiEmpty size="24px" />
@@ -764,9 +550,9 @@ export const NodeUsersUsageDrawer = (props: IProps) => {
                         checkIconPosition="left"
                         clearable
                         data={
-                            series?.map((s) => ({
-                                value: s.name,
-                                label: s.name
+                            allAvailableUsers?.map((user) => ({
+                                label: user.name,
+                                value: user.name
                             })) || []
                         }
                         maw={{ base: '100%', sm: 400 }}
@@ -775,23 +561,16 @@ export const NodeUsersUsageDrawer = (props: IProps) => {
                         searchable
                         size="sm"
                         value={
-                            selectedUsers?.filter((name) => series?.some((s) => s.name === name)) ||
-                            []
+                            selectedUsers?.filter((name) =>
+                                allAvailableUsers?.some((user) => user.name === name)
+                            ) || []
                         }
                     />
                 </Group>
 
                 {renderLegend()}
 
-                <Tabs defaultValue="bar">
-                    <Tabs.List>
-                        <Tabs.Tab leftSection={<IconChartBar size={16} />} value="bar">
-                            {t('node-users-usage-drawer.widget.bar-chart')}
-                        </Tabs.Tab>
-                    </Tabs.List>
-
-                    <Tabs.Panel value="bar">{renderBarChart()}</Tabs.Panel>
-                </Tabs>
+                {renderChart()}
             </Stack>
 
             <Modal
@@ -824,7 +603,6 @@ export const NodeUsersUsageDrawer = (props: IProps) => {
                             </ActionIcon>
                         </Group>
                         <Text c="dimmed" fz="sm">
-                            {/* eslint-disable indent */}
                             {selectedDayData
                                 ? t(
                                       'node-users-usage-drawer.widget.total-traffic-prettybytestoanyutil',
@@ -835,7 +613,6 @@ export const NodeUsersUsageDrawer = (props: IProps) => {
                                       }
                                   )
                                 : ''}
-                            {/* eslint-enable indent */}
                             {selectedDayData && selectedDayData.hiddenCount > 0 && (
                                 <Text c="dimmed" fz="xs" mt={2}>
                                     {t('node-users-usage-drawer.widget.hidden-users', {
@@ -902,10 +679,10 @@ export const NodeUsersUsageDrawer = (props: IProps) => {
                                     {t(
                                         'node-users-usage-drawer.widget.users-hidden-with-less-than-100-kb',
                                         {
-                                            usersCount: selectedDayData.hiddenCount,
                                             totalTraffic: prettyBytesToAnyUtil(
                                                 selectedDayData.hiddenTraffic
-                                            )
+                                            ),
+                                            usersCount: selectedDayData.hiddenCount
                                         }
                                     )}
                                 </Text>
@@ -916,4 +693,4 @@ export const NodeUsersUsageDrawer = (props: IProps) => {
             </Modal>
         </Drawer>
     )
-}
+})
