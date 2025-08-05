@@ -117,7 +117,7 @@ export const useGetNodeUsersUsageByRange = createGetQueryHook({
     getQueryKey: ({ route, query }) =>
         nodesQueryKeys.getNodeUserUsage({ ...route!, ...query! }).queryKey,
     rQueryParams: {
-        staleTime: sToMs(15)
+        staleTime: sToMs(60)
     },
     errorHandler: (error) => {
         notifications.show({

@@ -14,7 +14,8 @@ export const MODALS = {
     CREATE_INFRA_BILLING_RECORD_DRAWER: 'CREATE_INFRA_BILLING_RECORD_DRAWER',
     UPDATE_BILLING_DATE_MODAL: 'UPDATE_BILLING_DATE_MODAL',
     CREATE_INFRA_BILLING_NODE_MODAL: 'CREATE_INFRA_BILLING_NODE_MODAL',
-    EDIT_NODE_BY_UUID_MODAL: 'EDIT_NODE_BY_UUID_MODAL'
+    EDIT_NODE_BY_UUID_MODAL: 'EDIT_NODE_BY_UUID_MODAL',
+    SHOW_NODE_USERS_USAGE_DRAWER: 'SHOW_NODE_USERS_USAGE_DRAWER'
 } as const
 
 export interface ModalInternalStates {
@@ -26,6 +27,9 @@ export interface ModalInternalStates {
         nodeUuid: string
     }
     INTERNAL_SQUAD_SHOW_INBOUNDS: GetInternalSquadsCommand.Response['response']['internalSquads'][number]
+    SHOW_NODE_USERS_USAGE_DRAWER: {
+        nodeUuid: string
+    }
     UPDATE_BILLING_DATE_MODAL: GetInfraBillingNodesCommand.Response['response']['billingNodes'][number]
     USER_ACCESSIBLE_NODES_DRAWER: {
         userUuid: string

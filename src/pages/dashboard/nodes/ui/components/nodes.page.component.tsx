@@ -4,6 +4,7 @@ import { motion } from 'motion/react'
 
 import { NodesRealtimeUsageMetrics } from '@widgets/dashboard/nodes/nodes-realtime-metrics'
 import { EditNodeModalConnectorWidget } from '@widgets/dashboard/nodes/edit-node-modal'
+import { NodeUsersUsageDrawer } from '@widgets/dashboard/nodes/node-users-usage-drawer'
 import { CreateNodeModalWidget } from '@widgets/dashboard/nodes/create-node-modal'
 import { NodesPageHeaderWidget } from '@widgets/dashboard/nodes/nodes-page-header'
 import { NodesTableWidget } from '@widgets/dashboard/nodes/nodes-table'
@@ -53,6 +54,7 @@ export default function NodesPageComponent(props: IProps) {
 
             <EditNodeModalConnectorWidget key="view-node-widget" />
             <CreateNodeModalWidget key="create-node-widget" />
+            <NodeUsersUsageDrawer key="node-users-usage-drawer" />
         </Page>
     )
 }

@@ -33,10 +33,9 @@ import * as Highcharts from 'highcharts'
 import dayjs from 'dayjs'
 
 import { useHighchartsDataProcessor } from '@shared/hooks/use-highcharts-data-processor'
+import { MODALS, useModalsStore } from '@entities/dashboard/modal-store'
 import { useGetNodeUsersUsageByRange } from '@shared/api/hooks'
 import { prettyBytesToAnyUtil } from '@shared/utils/bytes'
-
-import { IProps } from './interfaces'
 
 const MemoizedSparkline = memo(Sparkline)
 
@@ -51,8 +50,12 @@ interface DayDataDetails {
     totalTraffic: number
 }
 
-export const NodeUsersUsageDrawer = memo((props: IProps) => {
-    const { nodeUuid, opened, onClose } = props
+export const NodeUsersUsageDrawer = memo(() => {
+    const { isOpen, internalState: nodeUuid } = useModalsStore(
+        (state) => state.modals[MODALS.SHOW_NODE_USERS_USAGE_DRAWER]
+    )
+    const { close } = useModalsStore()
+
     const { t } = useTranslation()
 
     const [period, setPeriod] = useState<'7' | '14' | '30' | '60' | '90' | '180' | '365'>('7')
@@ -83,7 +86,7 @@ export const NodeUsersUsageDrawer = memo((props: IProps) => {
     }, [])
 
     useEffect(() => {
-        if (!opened) {
+        if (!isOpen) {
             setSelectedUsers([])
             setViewType('stacked')
             setPeriod('7')
@@ -92,7 +95,7 @@ export const NodeUsersUsageDrawer = memo((props: IProps) => {
                 dayjs().utc().endOf('day').toDate()
             ])
         }
-    }, [opened])
+    }, [isOpen])
 
     useEffect(() => {
         const end = dayjs().utc().endOf('day').toDate()
@@ -107,7 +110,10 @@ export const NodeUsersUsageDrawer = memo((props: IProps) => {
         isRefetching
     } = useGetNodeUsersUsageByRange({
         route: {
-            uuid: nodeUuid
+            uuid: nodeUuid?.nodeUuid ?? ''
+        },
+        rQueryParams: {
+            enabled: !!nodeUuid?.nodeUuid
         },
         query: {
             start: dateRange[0].toISOString(),
@@ -116,12 +122,18 @@ export const NodeUsersUsageDrawer = memo((props: IProps) => {
     })
 
     useEffect(() => {
+        if (!isOpen) return
+
         if (nodeUsersUsage && nodeUsersUsage.length > 0) {
-            processData(nodeUsersUsage, {
-                maxDisplayedUsers: 100,
-                minTrafficThreshold: 100 * 1024,
-                selectedUsers: debouncedSelectedUsers
-            })
+            const processDataAsync = async () => {
+                await processData(nodeUsersUsage, {
+                    maxDisplayedUsers: 100,
+                    minTrafficThreshold: 100 * 1024,
+                    selectedUsers: debouncedSelectedUsers
+                })
+            }
+
+            processDataAsync()
         }
     }, [nodeUsersUsage, debouncedSelectedUsers, processData])
 
@@ -378,7 +390,12 @@ export const NodeUsersUsageDrawer = memo((props: IProps) => {
 
     if (error) {
         return (
-            <Drawer onClose={onClose} opened={opened} size="400px" title="Error">
+            <Drawer
+                onClose={() => close(MODALS.SHOW_NODE_USERS_USAGE_DRAWER)}
+                opened={isOpen}
+                size="400px"
+                title="Error"
+            >
                 <Text c="red">Error processing data: {error}</Text>
             </Drawer>
         )
@@ -387,8 +404,8 @@ export const NodeUsersUsageDrawer = memo((props: IProps) => {
     return (
         <Drawer
             keepMounted={false}
-            onClose={onClose}
-            opened={opened}
+            onClose={() => close(MODALS.SHOW_NODE_USERS_USAGE_DRAWER)}
+            opened={isOpen}
             overlayProps={{ backgroundOpacity: 0.6, blur: 0 }}
             padding="lg"
             position="right"
@@ -575,6 +592,7 @@ export const NodeUsersUsageDrawer = memo((props: IProps) => {
 
             <Modal
                 centered
+                component="div"
                 onClose={() => {
                     setUserDetailsActive(false)
                     setCurrentDateIndex(null)
