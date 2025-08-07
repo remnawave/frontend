@@ -5,6 +5,7 @@ import {
     MRT_SortingState,
     useMantineReactTable
 } from 'mantine-react-table'
+import { notifications } from '@mantine/notifications'
 import { useTranslation } from 'react-i18next'
 import { useMemo, useState } from 'react'
 
@@ -168,6 +169,14 @@ export function UserTableWidget() {
         },
         mantineTableBodyRowProps: ({ row }) => ({
             onClick: async () => {
+                if (row.id === 'mrt-row-empty' || row.original.uuid === undefined) {
+                    notifications.show({
+                        title: 'Nice try!',
+                        message: 'Nothing to show...',
+                        color: 'indigo'
+                    })
+                    return
+                }
                 await userModalActions.setUserUuid(row.original.uuid)
                 userModalActions.changeModalState(true)
             },
