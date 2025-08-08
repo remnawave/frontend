@@ -8,7 +8,8 @@ import { IActions, IState } from './interfaces'
 const initialState: IState = {
     filters: {
         configProfileUuid: null,
-        inboundUuid: null
+        inboundUuid: null,
+        hostTag: null
     },
     editModal: {
         isOpen: false,
@@ -68,7 +69,12 @@ export const useHostsStore = create<IActions & IState>()(
                     }))
                 },
                 resetFilters: () => {
-                    set({ filters: { configProfileUuid: null, inboundUuid: null } })
+                    set({ filters: { configProfileUuid: null, inboundUuid: null, hostTag: null } })
+                },
+                setHostTagFilter: (hostTag: null | string) => {
+                    set((state) => ({
+                        filters: { ...state.filters, hostTag }
+                    }))
                 }
             }
         }),
@@ -87,6 +93,8 @@ export const useHostsStoreConfigProfileFilter = () =>
     useHostsStore((state) => state.filters.configProfileUuid)
 
 export const useHostsStoreInboundFilter = () => useHostsStore((state) => state.filters.inboundUuid)
+
+export const useHostsStoreHostTagFilter = () => useHostsStore((state) => state.filters.hostTag)
 
 // Edit Modal
 export const useHostsStoreEditModalIsOpen = () => useHostsStore((state) => state.editModal.isOpen)

@@ -1,9 +1,9 @@
 import { ActionIcon, Badge, Box, Checkbox, Group, px, Stack, Text } from '@mantine/core'
+import { TbAlertCircle, TbEyeOff, TbTagStarred } from 'react-icons/tb'
 import { PiLock, PiProhibit, PiPulse, PiTag } from 'react-icons/pi'
 import { CSSProperties, useState } from 'react'
 import { useSortable } from '@dnd-kit/sortable'
 import { useMediaQuery } from '@mantine/hooks'
-import { TbAlertCircle } from 'react-icons/tb'
 import { RiDraggable } from 'react-icons/ri'
 import { CSS } from '@dnd-kit/utilities'
 import ColorHash from 'color-hash'
@@ -36,7 +36,8 @@ export function HostCardWidget(props: IProps) {
 
     const isFiltered =
         (!!filters.configProfileUuid && configProfile?.uuid !== filters.configProfileUuid) ||
-        (!!filters.inboundUuid && item.inbound.configProfileInboundUuid !== filters.inboundUuid)
+        (!!filters.inboundUuid && item.inbound.configProfileInboundUuid !== filters.inboundUuid) ||
+        (!!filters.hostTag && item.tag !== filters.hostTag)
 
     const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
         id: item.uuid,
@@ -105,14 +106,56 @@ export function HostCardWidget(props: IProps) {
                             </Box>
                         </Group>
 
-                        <ActionIcon
-                            color={isHostActive ? 'teal' : 'gray'}
-                            radius="md"
-                            size="lg"
-                            variant="light"
-                        >
-                            {isHostActive ? <PiPulse size={16} /> : <PiProhibit size={16} />}
-                        </ActionIcon>
+                        <Group gap="xs">
+                            {item.tag && (
+                                <Badge
+                                    autoContrast
+                                    color={ch.hex(item.tag)}
+                                    leftSection={<TbTagStarred size={12} />}
+                                    radius="md"
+                                    size="md"
+                                    variant="outline"
+                                >
+                                    {item.tag}
+                                </Badge>
+                            )}
+                        </Group>
+
+                        {!isHostActive && (
+                            <ActionIcon
+                                color="gray"
+                                radius="md"
+                                size="lg"
+                                style={{ flexShrink: 0 }}
+                                variant="light"
+                            >
+                                <PiProhibit size={16} />
+                            </ActionIcon>
+                        )}
+
+                        {isHostActive && item.isHidden && (
+                            <ActionIcon
+                                color="violet"
+                                radius="md"
+                                size="lg"
+                                style={{ flexShrink: 0 }}
+                                variant="light"
+                            >
+                                <TbEyeOff size={16} />
+                            </ActionIcon>
+                        )}
+
+                        {isHostActive && !item.isHidden && (
+                            <ActionIcon
+                                color="teal"
+                                radius="md"
+                                size="lg"
+                                style={{ flexShrink: 0 }}
+                                variant="light"
+                            >
+                                <PiPulse size={16} />
+                            </ActionIcon>
+                        )}
                     </Group>
 
                     <Box
@@ -218,15 +261,41 @@ export function HostCardWidget(props: IProps) {
                             style={{ overflow: 'hidden' }}
                             wrap="nowrap"
                         >
-                            <ActionIcon
-                                color={isHostActive ? 'teal' : 'gray'}
-                                radius="md"
-                                size="md"
-                                style={{ flexShrink: 0 }}
-                                variant="light"
-                            >
-                                {isHostActive ? <PiPulse size={16} /> : <PiProhibit size={16} />}
-                            </ActionIcon>
+                            {!isHostActive && (
+                                <ActionIcon
+                                    color="gray"
+                                    radius="md"
+                                    size="md"
+                                    style={{ flexShrink: 0 }}
+                                    variant="light"
+                                >
+                                    <PiProhibit size={16} />
+                                </ActionIcon>
+                            )}
+
+                            {isHostActive && item.isHidden && (
+                                <ActionIcon
+                                    color="violet"
+                                    radius="md"
+                                    size="md"
+                                    style={{ flexShrink: 0 }}
+                                    variant="light"
+                                >
+                                    <TbEyeOff size={16} />
+                                </ActionIcon>
+                            )}
+
+                            {isHostActive && !item.isHidden && (
+                                <ActionIcon
+                                    color="teal"
+                                    radius="md"
+                                    size="md"
+                                    style={{ flexShrink: 0 }}
+                                    variant="light"
+                                >
+                                    <PiPulse size={16} />
+                                </ActionIcon>
+                            )}
 
                             <Group gap="md" style={{ flexShrink: 1, minWidth: 0 }} wrap="nowrap">
                                 <Text fw={600} style={{ flexShrink: 0 }} truncate>
@@ -244,6 +313,19 @@ export function HostCardWidget(props: IProps) {
                             </Group>
                         </Group>
                         <Group gap="md" style={{ flexShrink: 0 }} wrap="nowrap">
+                            {item.tag && (
+                                <Badge
+                                    autoContrast
+                                    color={ch.hex(item.tag)}
+                                    leftSection={<TbTagStarred size={12} />}
+                                    radius="md"
+                                    size="md"
+                                    variant="outline"
+                                >
+                                    {item.tag}
+                                </Badge>
+                            )}
+
                             {item.inbound.configProfileInboundUuid && (
                                 <Badge
                                     autoContrast

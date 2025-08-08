@@ -15,7 +15,14 @@ import { IProps } from './interfaces'
 
 export default function HostsPageComponent(props: IProps) {
     const { t } = useTranslation()
-    const { configProfiles, hosts, isHostsLoading, isConfigProfilesLoading } = props
+    const {
+        configProfiles,
+        hosts,
+        hostTags,
+        isHostsLoading,
+        isConfigProfilesLoading,
+        isHostTagsLoading
+    } = props
     const [selectedHosts, setSelectedHosts] = useState<string[]>([])
 
     return (
@@ -33,7 +40,7 @@ export default function HostsPageComponent(props: IProps) {
                 <Grid.Col span={12}>
                     <HostsPageHeaderWidget />
 
-                    {isHostsLoading || isConfigProfilesLoading ? (
+                    {isHostsLoading || isConfigProfilesLoading || isHostTagsLoading ? (
                         <LoadingScreen height="60vh" />
                     ) : (
                         <motion.div
@@ -44,6 +51,7 @@ export default function HostsPageComponent(props: IProps) {
                             <HostsTableWidget
                                 configProfiles={configProfiles}
                                 hosts={hosts}
+                                hostTags={hostTags}
                                 selectedHosts={selectedHosts}
                                 setSelectedHosts={setSelectedHosts}
                             />

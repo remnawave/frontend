@@ -4,13 +4,14 @@ import {
     useHostsStoreCreateModalIsOpen,
     useHostsStoreEditModalIsOpen
 } from '@entities/dashboard/hosts/hosts-store'
+import { QueryKeys, useGetConfigProfiles, useGetHosts, useGetHostTags } from '@shared/api/hooks'
 import HostsPageComponent from '@pages/dashboard/hosts/ui/components/hosts.page.component'
-import { QueryKeys, useGetConfigProfiles, useGetHosts } from '@shared/api/hooks'
 import { queryClient } from '@shared/api'
 
 export function HostsPageConnector() {
     const { data: hosts, isLoading: isHostsLoading } = useGetHosts()
     const { data: configProfiles, isLoading: isConfigProfilesLoading } = useGetConfigProfiles()
+    const { data: hostTags, isLoading: isHostTagsLoading } = useGetHostTags()
 
     const isCreateModalOpen = useHostsStoreCreateModalIsOpen()
     const isEditModalOpen = useHostsStoreEditModalIsOpen()
@@ -26,8 +27,10 @@ export function HostsPageConnector() {
         <HostsPageComponent
             configProfiles={configProfiles?.configProfiles}
             hosts={hosts}
+            hostTags={hostTags?.tags}
             isConfigProfilesLoading={isConfigProfilesLoading}
             isHostsLoading={isHostsLoading}
+            isHostTagsLoading={isHostTagsLoading}
         />
     )
 }

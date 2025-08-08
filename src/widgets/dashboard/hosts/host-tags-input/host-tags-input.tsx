@@ -1,33 +1,55 @@
-import { CloseButton, Combobox, InputBase, useCombobox } from '@mantine/core'
+/* eslint-disable no-nested-ternary */
+import { CloseButton, Combobox, InputBase, Loader, useCombobox } from '@mantine/core'
+import { useTranslation } from 'react-i18next'
 import { PiTagDuotone } from 'react-icons/pi'
 import { useEffect, useState } from 'react'
 
+import { useGetHostTags } from '@shared/api/hooks'
+
 import type { IProps } from './interfaces/props.interface'
 
-export function CreateableTagInputShared(props: IProps) {
+export function HostTagsInputWidget(props: IProps) {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { tags, value, onChange, defaultValue, ...restProps } = props
-    const combobox = useCombobox({
-        onDropdownClose: () => combobox.resetSelectedOption()
-    })
-
-    const [data, setData] = useState(tags)
+    const { value, onChange, defaultValue, ...restProps } = props
+    const [data, setData] = useState<string[]>([])
     const [search, setSearch] = useState(value?.toString() || '')
     const [error, setError] = useState('')
 
+    const { t } = useTranslation()
+
+    const {
+        data: hostTags,
+        isRefetching: isHostTagsRefetching,
+        isLoading: isHostTagsLoading
+    } = useGetHostTags({
+        rQueryParams: {
+            enabled: false
+        }
+    })
+
+    const combobox = useCombobox({
+        onDropdownOpen: async () => {
+            if (!isHostTagsLoading && !isHostTagsRefetching) {
+                setData(hostTags?.tags || [])
+            }
+        }
+    })
+
     const validateTag = (tag: string) => {
         if (!/^[A-Z0-9_]+$/.test(tag)) {
-            return 'Tag can only contain uppercase letters, numbers, underscores'
+            return t('host-tags-input.tag-can-only-contain-uppercase-letters-numbers-underscores')
         }
         if (tag.length > 16) {
-            return 'Tag must be less than 16 characters'
+            return t('host-tags-input.tag-must-be-less-than-16-characters')
         }
         return null
     }
 
     useEffect(() => {
-        setData(tags)
-    }, [tags])
+        if (hostTags && !isHostTagsLoading && !isHostTagsRefetching) {
+            setData(hostTags.tags)
+        }
+    }, [hostTags, isHostTagsLoading, isHostTagsRefetching])
 
     useEffect(() => {
         setSearch(value?.toString() || '')
@@ -46,6 +68,9 @@ export function CreateableTagInputShared(props: IProps) {
 
     return (
         <Combobox
+            onExitTransitionEnd={() => {
+                combobox.resetSelectedOption()
+            }}
             onOptionSubmit={(val) => {
                 if (val === '$create') {
                     const validationError = validateTag(search)
@@ -56,22 +81,26 @@ export function CreateableTagInputShared(props: IProps) {
                     setData((current) => [...current, search])
                     onChange?.(search)
                     setError('')
-                } else {
-                    onChange?.(val)
-                    setSearch(val)
-                    setError('')
+
+                    return
                 }
+
+                onChange?.(val)
+                setSearch(val)
+                setError('')
 
                 combobox.closeDropdown()
             }}
-            position="top"
+            position="bottom"
             store={combobox}
             withinPortal={false}
         >
             <Combobox.Target>
                 <InputBase
                     {...restProps}
-                    description="Create or select a tag"
+                    description={t(
+                        'host-tags-input.tags-are-not-visible-to-end-users-tag-will-be-sent-with-raw-subscription-only'
+                    )}
                     error={error || restProps.error}
                     label="Tag"
                     leftSection={<PiTagDuotone size="16px" />}
@@ -86,11 +115,13 @@ export function CreateableTagInputShared(props: IProps) {
                     }}
                     onClick={() => combobox.openDropdown()}
                     onFocus={() => combobox.openDropdown()}
-                    placeholder="EXAMPLE_TAG_1"
+                    placeholder="ROUTING_HOST"
                     rightSection={
-                        (value !== null && value !== undefined) || search ? (
+                        isHostTagsRefetching ? (
+                            <Loader size="xs" />
+                        ) : (value !== null && value !== undefined) || search ? (
                             <CloseButton
-                                aria-label="Clear value"
+                                aria-label={t('host-tags-input.clear-value')}
                                 onClick={() => {
                                     onChange?.(null)
                                     setError('')
@@ -112,7 +143,11 @@ export function CreateableTagInputShared(props: IProps) {
 
             <Combobox.Dropdown>
                 <Combobox.Options mah={200} style={{ overflowY: 'auto' }}>
-                    {options}
+                    {isHostTagsLoading || isHostTagsRefetching ? (
+                        <Combobox.Empty>Loading....</Combobox.Empty>
+                    ) : (
+                        options
+                    )}
                     {!exactOptionMatch && search.trim().length > 0 && (
                         <Combobox.Option value="$create">+ {search}</Combobox.Option>
                     )}

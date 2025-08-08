@@ -9,6 +9,7 @@ export interface IActions {
         resetState: () => Promise<void>
         setConfigProfileFilter: (configProfileUuid: null | string) => void
         setHost: (host: UpdateHostCommand.Response['response']) => void
+        setHostTagFilter: (hostTag: null | string) => void
         setInboundFilter: (inboundUuid: null | string) => void
         toggleCreateModal: (isOpen: boolean) => void
         toggleEditModal: (isOpen: boolean) => void

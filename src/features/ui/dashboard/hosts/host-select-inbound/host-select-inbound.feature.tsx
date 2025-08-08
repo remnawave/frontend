@@ -43,7 +43,7 @@ export function HostSelectInboundFeature(props: IProps) {
                             <Text fw={500} size="sm" truncate>
                                 {activeProfile.name}
                             </Text>
-                            <Group gap="xs">
+                            <Group gap="xs" wrap="nowrap">
                                 <PiTag size={12} style={{ opacity: 0.7 }} />
                                 <Text c="dimmed" size="xs" truncate>
                                     {activeInbound.tag}

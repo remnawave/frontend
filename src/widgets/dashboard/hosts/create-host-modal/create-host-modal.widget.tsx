@@ -7,8 +7,9 @@ import { useEffect, useState } from 'react'
 import { useForm } from '@mantine/form'
 
 import { useHostsStoreActions, useHostsStoreCreateModalIsOpen } from '@entities/dashboard'
-import { useCreateHost, useGetConfigProfiles } from '@shared/api/hooks'
+import { QueryKeys, useCreateHost, useGetConfigProfiles } from '@shared/api/hooks'
 import { BaseHostForm } from '@shared/ui/forms/hosts/base-host-form'
+import { queryClient } from '@shared/api'
 
 export const CreateHostModalWidget = () => {
     const { t } = useTranslation()
@@ -39,6 +40,9 @@ export const CreateHostModalWidget = () => {
         mutationFns: {
             onSuccess: async () => {
                 handleClose()
+                await queryClient.refetchQueries({
+                    queryKey: QueryKeys.hosts.getAllTags.queryKey
+                })
             }
         }
     })
@@ -46,8 +50,8 @@ export const CreateHostModalWidget = () => {
     const handleSubmit = form.onSubmit(async (values) => {
         if (!values.inbound.configProfileInboundUuid || !values.inbound.configProfileUuid) {
             notifications.show({
-                title: 'Error',
-                message: 'Please select the config profile and inbound',
+                title: t('create-host-modal.widget.error'),
+                message: t('create-host-modal.widget.please-select-the-config-profile-and-inbound'),
                 color: 'red'
             })
 
