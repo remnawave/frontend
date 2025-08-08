@@ -102,6 +102,8 @@ export function ConfigProfilesGridWidget(props: IProps) {
         )
     }
 
+    const isHighCount = configProfiles.length > 6
+
     return (
         <Grid>
             {configProfiles.map((profile, index) => {
@@ -110,13 +112,16 @@ export function ConfigProfilesGridWidget(props: IProps) {
                 const isActive = nodesCount > 0
 
                 return (
-                    <Grid.Col key={profile.uuid} span={{ base: 12, sm: 6, md: 6, lg: 4, xl: 3 }}>
+                    <Grid.Col
+                        key={profile.uuid}
+                        span={{ base: 12, sm: 6, md: 6, lg: 4, xl: 3, '2xl': 2 }}
+                    >
                         <motion.div
                             animate={{ opacity: 1, y: 0 }}
-                            initial={{ opacity: 0, y: 20 }}
+                            initial={{ opacity: 0, y: isHighCount ? 0 : 20 }}
                             transition={{
-                                duration: 0.4,
-                                delay: index * 0.1,
+                                duration: 0.3,
+                                delay: isHighCount ? 0.1 : index * 0.05,
                                 ease: 'easeOut'
                             }}
                         >
