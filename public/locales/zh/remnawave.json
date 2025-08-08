@@ -185,12 +185,16 @@
     },
     "create-host-modal": {
         "widget": {
-            "new-host": "新建主机"
+            "new-host": "新建主机",
+            "please-select-the-config-profile-and-inbound": "Please select the config profile and inbound",
+            "error": "Error"
         }
     },
     "edit-host-modal": {
         "widget": {
-            "edit-host": "编辑主机"
+            "edit-host": "编辑主机",
+            "dangling-host-cannot-be-cloned": "Dangling host cannot be cloned",
+            "error": "Error"
         }
     },
     "hosts-page-header": {
@@ -381,7 +385,14 @@
         "xtls-documentation": "XTLS 文档",
         "paste-default-mux-params": "粘贴默认的 Mux 参数",
         "please-ensure-you-provide-a-valid-json-sockopt-object": "请确保您提供一个有效的 JSON Sockopt 对象。",
-        "paste-default-sockopt-params": "粘贴默认 Sockopt 参数"
+        "paste-default-sockopt-params": "粘贴默认 Sockopt 参数",
+        "basic": "Basic",
+        "advanced": "Advanced",
+        "connection-overrides": "Connection overrides",
+        "xray-json-and-raw": "Xray Json & Raw",
+        "hide-host": "Hide Host",
+        "hide-host-from-users-remnawave-will-send-host-only-for-raw-subscription-responses": "Hide host from users, Remnawave will send host only for RAW Subscription responses.",
+        "apps-specific": "Apps specific"
     },
     "base-node-form": {
         "country": "国家",
@@ -1407,7 +1418,8 @@
             "select-config-profile": "选择配置文件",
             "select-inbound": "选择入站",
             "search-by-remark": "按备注搜索...",
-            "address": "地址"
+            "address": "地址",
+            "filter-by-tags": "Filter by tags"
         }
     },
     "mobile-warning-overlay": {
@@ -1502,5 +1514,11 @@
             "no-nodes-found": "No nodes found...",
             "search-by-name-or-address": "按名称或地址搜索……"
         }
+    },
+    "host-tags-input": {
+        "tag-can-only-contain-uppercase-letters-numbers-underscores": "Tag can only contain uppercase letters, numbers, underscores",
+        "tag-must-be-less-than-16-characters": "Tag must be less than 16 characters",
+        "tags-are-not-visible-to-end-users-tag-will-be-sent-with-raw-subscription-only": "Tags are not visible to end users. Tag will be sent with RAW subscription only.",
+        "clear-value": "Clear value"
     }
 }
