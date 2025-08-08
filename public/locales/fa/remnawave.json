@@ -185,12 +185,16 @@
     },
     "create-host-modal": {
         "widget": {
-            "new-host": "هاست جدید"
+            "new-host": "هاست جدید",
+            "please-select-the-config-profile-and-inbound": "Please select the config profile and inbound",
+            "error": "Error"
         }
     },
     "edit-host-modal": {
         "widget": {
-            "edit-host": "ویرایش هاست"
+            "edit-host": "ویرایش هاست",
+            "dangling-host-cannot-be-cloned": "Dangling host cannot be cloned",
+            "error": "Error"
         }
     },
     "hosts-page-header": {
@@ -381,7 +385,14 @@
         "xtls-documentation": "مستندات XTLS",
         "paste-default-mux-params": "جای‌گذاری پارامترهای پیش‌فرض Mux",
         "please-ensure-you-provide-a-valid-json-sockopt-object": "لطفا از صحت JSON وارد شده برای Sockopt اطمینان حاصل کنید",
-        "paste-default-sockopt-params": "جای‌گذاری پارامترهای پیش‌فرض Sockopt"
+        "paste-default-sockopt-params": "جای‌گذاری پارامترهای پیش‌فرض Sockopt",
+        "basic": "Basic",
+        "advanced": "Advanced",
+        "connection-overrides": "Connection overrides",
+        "xray-json-and-raw": "Xray Json & Raw",
+        "hide-host": "Hide Host",
+        "hide-host-from-users-remnawave-will-send-host-only-for-raw-subscription-responses": "Hide host from users, Remnawave will send host only for RAW Subscription responses.",
+        "apps-specific": "Apps specific"
     },
     "base-node-form": {
         "country": "کشور",
@@ -1407,7 +1418,8 @@
             "select-config-profile": "انتخاب پروفایل تنظیمات",
             "select-inbound": "انتخاب اینباند",
             "search-by-remark": "جستجو بر اساس توضیحات...",
-            "address": "آدرس"
+            "address": "آدرس",
+            "filter-by-tags": "Filter by tags"
         }
     },
     "mobile-warning-overlay": {
@@ -1502,5 +1514,11 @@
             "no-nodes-found": "No nodes found...",
             "search-by-name-or-address": "Search by name or address..."
         }
+    },
+    "host-tags-input": {
+        "tag-can-only-contain-uppercase-letters-numbers-underscores": "Tag can only contain uppercase letters, numbers, underscores",
+        "tag-must-be-less-than-16-characters": "Tag must be less than 16 characters",
+        "tags-are-not-visible-to-end-users-tag-will-be-sent-with-raw-subscription-only": "Tags are not visible to end users. Tag will be sent with RAW subscription only.",
+        "clear-value": "Clear value"
     }
 }
