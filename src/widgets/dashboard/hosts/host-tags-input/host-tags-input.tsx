@@ -36,11 +36,13 @@ export function HostTagsInputWidget(props: IProps) {
     })
 
     const validateTag = (tag: string) => {
-        if (!/^[A-Z0-9_]+$/.test(tag)) {
-            return t('host-tags-input.tag-can-only-contain-uppercase-letters-numbers-underscores')
+        if (!/^[A-Z0-9_:]+$/.test(tag)) {
+            return t(
+                'host-tags-input.tag-can-only-contain-uppercase-letters-numbers-underscores-and-colons'
+            )
         }
-        if (tag.length > 16) {
-            return t('host-tags-input.tag-must-be-less-than-16-characters')
+        if (tag.length > 32) {
+            return t('host-tags-input.tag-must-be-less-than-32-characters')
         }
         return null
     }
