@@ -91,7 +91,7 @@ export function HostTagsInputWidget(props: IProps) {
 
                 combobox.closeDropdown()
             }}
-            position="bottom"
+            position="top"
             store={combobox}
             withinPortal={false}
         >
