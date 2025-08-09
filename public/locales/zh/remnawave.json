@@ -1516,8 +1516,8 @@
         }
     },
     "host-tags-input": {
-        "tag-can-only-contain-uppercase-letters-numbers-underscores": "Tag can only contain uppercase letters, numbers, underscores",
-        "tag-must-be-less-than-16-characters": "Tag must be less than 16 characters",
+        "tag-can-only-contain-uppercase-letters-numbers-underscores-and-colons": "Tag can only contain uppercase letters, numbers, underscores and colons",
+        "tag-must-be-less-than-32-characters": "Tag must be less than 32 characters",
         "tags-are-not-visible-to-end-users-tag-will-be-sent-with-raw-subscription-only": "Tags are not visible to end users. Tag will be sent with RAW subscription only.",
         "clear-value": "Clear value"
     }

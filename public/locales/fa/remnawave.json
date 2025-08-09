@@ -186,15 +186,15 @@
     "create-host-modal": {
         "widget": {
             "new-host": "هاست جدید",
-            "please-select-the-config-profile-and-inbound": "Please select the config profile and inbound",
-            "error": "Error"
+            "please-select-the-config-profile-and-inbound": "لطفا پروفایل پیکربندی و اینباند را انتخاب کنید",
+            "error": "خطا"
         }
     },
     "edit-host-modal": {
         "widget": {
             "edit-host": "ویرایش هاست",
             "dangling-host-cannot-be-cloned": "Dangling host cannot be cloned",
-            "error": "Error"
+            "error": "خطا"
         }
     },
     "hosts-page-header": {
@@ -386,12 +386,12 @@
         "paste-default-mux-params": "جای‌گذاری پارامترهای پیش‌فرض Mux",
         "please-ensure-you-provide-a-valid-json-sockopt-object": "لطفا از صحت JSON وارد شده برای Sockopt اطمینان حاصل کنید",
         "paste-default-sockopt-params": "جای‌گذاری پارامترهای پیش‌فرض Sockopt",
-        "basic": "Basic",
-        "advanced": "Advanced",
+        "basic": "ساده",
+        "advanced": "پیشرفته",
         "connection-overrides": "Connection overrides",
         "xray-json-and-raw": "Xray Json & Raw",
-        "hide-host": "Hide Host",
-        "hide-host-from-users-remnawave-will-send-host-only-for-raw-subscription-responses": "Hide host from users, Remnawave will send host only for RAW Subscription responses.",
+        "hide-host": "مخفی کردن هاست",
+        "hide-host-from-users-remnawave-will-send-host-only-for-raw-subscription-responses": "مخفی کردن هاست از کاربران، Remnawave این هاست را فقط برای درخواست‌های اشتراک خام ارسال خواهد کرد",
         "apps-specific": "Apps specific"
     },
     "base-node-form": {
@@ -1419,7 +1419,7 @@
             "select-inbound": "انتخاب اینباند",
             "search-by-remark": "جستجو بر اساس توضیحات...",
             "address": "آدرس",
-            "filter-by-tags": "Filter by tags"
+            "filter-by-tags": "فیلتر بر اساس برچسب"
         }
     },
     "mobile-warning-overlay": {
@@ -1504,21 +1504,21 @@
     },
     "node-stats": {
         "card": {
-            "stats": "Stats",
-            "traffic-refill-in-days": "Traffic refill in (days):",
-            "represents-the-uptime-of-the-xray-core": "Represents the uptime of the Xray Core"
+            "stats": "آمار",
+            "traffic-refill-in-days": "شارژ ترافیک در (روز):",
+            "represents-the-uptime-of-the-xray-core": "نشان‌دهنده آپتایم هسته Xray"
         }
     },
     "nodes-spotlight-search": {
         "widget": {
-            "no-nodes-found": "No nodes found...",
-            "search-by-name-or-address": "Search by name or address..."
+            "no-nodes-found": "هیچ نودی یافت نشد...",
+            "search-by-name-or-address": "جست‌وجو براساس نام یا آدرس"
         }
     },
     "host-tags-input": {
-        "tag-can-only-contain-uppercase-letters-numbers-underscores": "Tag can only contain uppercase letters, numbers, underscores",
-        "tag-must-be-less-than-16-characters": "Tag must be less than 16 characters",
-        "tags-are-not-visible-to-end-users-tag-will-be-sent-with-raw-subscription-only": "Tags are not visible to end users. Tag will be sent with RAW subscription only.",
-        "clear-value": "Clear value"
+        "tag-can-only-contain-uppercase-letters-numbers-underscores-and-colons": "برچسب باید فقط شامل حروف بزرگ، ارقام، آندرلاین و دونقطه باشد",
+        "tag-must-be-less-than-32-characters": "طول برچسب باید زیر 32 کاراکتر باشد",
+        "tags-are-not-visible-to-end-users-tag-will-be-sent-with-raw-subscription-only": "برچسب‌ها برای کاربران قابل مشاهده نیستند و فقط با اشتراک خام ارسال خواهند شد.",
+        "clear-value": "پاکسازی مقدار"
     }
 }
