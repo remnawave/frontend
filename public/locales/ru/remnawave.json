@@ -364,7 +364,7 @@
         "fill-with-sample-xhttp-extra-params": "Fill with sample xHTTP extra params",
         "close": "Закрыть",
         "clone": "Дублировать",
-        "address-description-line-1": "Address must be an IP address or a domain name of connection destination.",
+        "address-description-line-1": "Адрес должен быть IP-адресом или доменным именем пункта назначения соединения.",
         "address-description-line-2": "В большинстве случаев, должно быть направлено на одну из подключенных нод.",
         "port-description-line-1": "Порт подключения.",
         "port-description-line-2": "В большинстве случаев, должно совпадать с портом выбранного инбаунда.",
@@ -392,7 +392,15 @@
         "xray-json-and-raw": "Xray Json & Raw",
         "hide-host": "Скрыть хост",
         "hide-host-from-users-remnawave-will-send-host-only-for-raw-subscription-responses": "Скрыть хост от пользователей, Remnawave отправит этот хост только для RAW-формата подписки",
-        "apps-specific": "Apps specific"
+        "apps-specific": "Apps specific",
+        "single-domain": "Single domain",
+        "default-mode-for-one-domain": "Default mode for one domain",
+        "multi-domain": "Multi domain",
+        "multi-domain-description": "Multiple domains separated by commas. Remnawave will randomly choose one of the domains.",
+        "wildcard-domain": "Wildcard domain",
+        "wildcard-domain-description": "Wildcard pattern for subdomains. Remnawave will replace * with the randomly generated string.",
+        "override-sni-from-address": "Override SNI from Address",
+        "override-sni-from-address-description": "This option replaces the SNI value with the specified Address field value. This is particularly useful for multi-domain configurations or wildcard domains configuration."
     },
     "base-node-form": {
         "country": "Страна",
