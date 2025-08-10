@@ -18,3 +18,31 @@
         backdrop-filter: none;
     }
 }
+
+.tab {
+    position: relative;
+    border: 1px solid light-dark(var(--mantine-color-gray-2), var(--mantine-color-dark-4));
+    background-color: light-dark(var(--mantine-color-white), var(--mantine-color-dark-6));
+
+    border-radius: 8px;
+    margin: 4px;
+
+    @mixin hover {
+        background-color: light-dark(var(--mantine-color-gray-0), var(--mantine-color-dark-5));
+    }
+
+    &[data-active] {
+        z-index: 1;
+        background-color: transparent;
+        border: 2px solid var(--mantine-color-cyan-filled);
+
+        @mixin hover {
+            background-color: var(--mantine-color-cyan-outline-hover);
+        }
+    }
+}
+
+.tabLabel {
+    color: var(--mantine-color-white);
+    font-weight: 500;
+}

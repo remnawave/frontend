@@ -1,7 +1,7 @@
 import { ActionIcon, Button, Group, TextInput } from '@mantine/core'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { PiPlus, PiTrash } from 'react-icons/pi'
 import { useTranslation } from 'react-i18next'
-import { useEffect, useState } from 'react'
 
 import { TemplateInfoPopoverShared } from '@shared/ui/popovers/template-info-popover/template-info-popover.shared'
 
@@ -19,51 +19,75 @@ export const HeadersManager = (props: HeadersManagerProps) => {
     const { initialHeaders = [{ key: '', value: '' }], onChange } = props
 
     const [localHeaders, setLocalHeaders] = useState<HeaderItem[]>(initialHeaders)
-
     const { t } = useTranslation()
 
+    const isInitializedRef = useRef(false)
+
     useEffect(() => {
-        if (JSON.stringify(initialHeaders) !== JSON.stringify(localHeaders)) {
-            setLocalHeaders(initialHeaders)
+        if (!isInitializedRef.current && initialHeaders.length > 0) {
+            if (
+                !(
+                    initialHeaders.length === 1 &&
+                    initialHeaders[0].key === '' &&
+                    initialHeaders[0].value === ''
+                )
+            ) {
+                setLocalHeaders(initialHeaders)
+            }
+            isInitializedRef.current = true
         }
     }, [initialHeaders])
 
+    const timeoutRef = useRef<NodeJS.Timeout | null>(null)
+
     useEffect(() => {
-        onChange(localHeaders)
+        if (timeoutRef.current) {
+            clearTimeout(timeoutRef.current)
+        }
+
+        timeoutRef.current = setTimeout(() => {
+            onChange(localHeaders)
+        }, 100)
+
+        return () => {
+            if (timeoutRef.current) {
+                clearTimeout(timeoutRef.current)
+            }
+        }
     }, [localHeaders, onChange])
 
-    const addLocalHeader = () => {
+    const addLocalHeader = useCallback(() => {
         setLocalHeaders((prev) => [...prev, { key: '', value: '' }])
-    }
+    }, [])
 
-    const removeLocalHeader = (index: number) => {
+    const removeLocalHeader = useCallback((index: number) => {
         setLocalHeaders((prev) => {
             const newHeaders = [...prev]
             newHeaders.splice(index, 1)
             return newHeaders
         })
-    }
+    }, [])
 
-    const updateLocalHeaderKey = (index: number, key: string) => {
+    const updateLocalHeaderKey = useCallback((index: number, key: string) => {
         setLocalHeaders((prev) => {
             const newHeaders = [...prev]
             newHeaders[index] = { ...newHeaders[index], key }
             return newHeaders
         })
-    }
+    }, [])
 
-    const updateLocalHeaderValue = (index: number, value: string) => {
+    const updateLocalHeaderValue = useCallback((index: number, value: string) => {
         setLocalHeaders((prev) => {
             const newHeaders = [...prev]
             newHeaders[index] = { ...newHeaders[index], value }
             return newHeaders
         })
-    }
+    }, [])
 
     return (
         <>
             {localHeaders.map((header, index) => (
-                <Group align="flex-start" gap="sm" key={`${index}`} mb="xs">
+                <Group align="flex-start" gap="sm" key={index} mb="xs">
                     <ActionIcon
                         color="red"
                         onClick={() => removeLocalHeader(index)}
