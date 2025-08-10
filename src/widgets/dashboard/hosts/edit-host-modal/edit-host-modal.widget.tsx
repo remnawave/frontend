@@ -113,7 +113,8 @@ export const EditHostModalWidget = () => {
                 muxParams: muxParamsParsed,
                 sockoptParams: sockoptParamsParsed,
                 tag: host.tag ?? undefined,
-                isHidden: host.isHidden
+                isHidden: host.isHidden,
+                overrideSniFromAddress: host.overrideSniFromAddress
             })
         }
     }, [host, configProfiles])
@@ -230,7 +231,8 @@ export const EditHostModalWidget = () => {
                 },
                 serverDescription: host.serverDescription ?? undefined,
                 sockoptParams: host.sockoptParams ?? undefined,
-                tag: host.tag ?? undefined
+                tag: host.tag ?? undefined,
+                overrideSniFromAddress: host.overrideSniFromAddress
             }
         })
     }
@@ -240,6 +242,7 @@ export const EditHostModalWidget = () => {
             centered
             onClose={handleClose}
             opened={isModalOpen}
+            size="30rem"
             title={<Text fw={500}>{t('edit-host-modal.widget.edit-host')}</Text>}
         >
             <BaseHostForm

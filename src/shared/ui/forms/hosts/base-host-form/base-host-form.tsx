@@ -184,6 +184,65 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
         handleFormErrors(form, form.errors)
     }, [form.errors])
 
+    const patternHoverCard = (showSingle = true, showMulti = true, showWildcard = true) => {
+        return (
+            <HoverCard shadow="md" width={300} withArrow>
+                <HoverCard.Target>
+                    <ActionIcon color="gray" size="xs" variant="subtle">
+                        <HiQuestionMarkCircle size={20} />
+                    </ActionIcon>
+                </HoverCard.Target>
+                <HoverCard.Dropdown>
+                    <Stack gap="md">
+                        <Stack gap="sm">
+                            {showSingle && (
+                                <Stack gap={0}>
+                                    <Text fw={600} mb={4} size="sm">
+                                        {t('base-host-form.single-domain')}
+                                    </Text>
+                                    <Text c="dimmed" mb={6} size="xs">
+                                        {t('base-host-form.default-mode-for-one-domain')}
+                                    </Text>
+                                    <Text c="blue" ff="monospace" size="xs">
+                                        eu.node.com
+                                    </Text>
+                                </Stack>
+                            )}
+
+                            {showMulti && (
+                                <Stack gap={0}>
+                                    <Text fw={600} mb={4} size="sm">
+                                        {t('base-host-form.multi-domain')}
+                                    </Text>
+                                    <Text c="dimmed" mb={6} size="xs">
+                                        {t('base-host-form.multi-domain-description')}
+                                    </Text>
+                                    <Text c="blue" ff="monospace" size="xs">
+                                        eu.node.com,us.node.com,au.node.com
+                                    </Text>
+                                </Stack>
+                            )}
+
+                            {showWildcard && (
+                                <Stack gap={0}>
+                                    <Text fw={600} mb={4} size="sm">
+                                        {t('base-host-form.wildcard-domain')}
+                                    </Text>
+                                    <Text c="dimmed" mb={6} size="xs">
+                                        {t('base-host-form.wildcard-domain-description')}
+                                    </Text>
+                                    <Text c="blue" ff="monospace" size="xs">
+                                        *.node.com
+                                    </Text>
+                                </Stack>
+                            )}
+                        </Stack>
+                    </Stack>
+                </HoverCard.Dropdown>
+            </HoverCard>
+        )
+    }
+
     return (
         <form onSubmit={handleSubmit}>
             <Group gap="xs" justify="space-between" mb="md">
@@ -279,6 +338,7 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
                                         {...form.getInputProps('address')}
                                         placeholder={t('base-host-form.e-g-example-com')}
                                         required
+                                        rightSection={patternHoverCard(true, true, true)}
                                         w="65%"
                                     />
 
@@ -356,8 +416,46 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
                                                 />
                                             }
                                             placeholder={t('base-host-form.sni-e-g-example-com')}
+                                            rightSection={patternHoverCard(true, false, true)}
                                             {...form.getInputProps('sni')}
                                         />
+
+                                        <Group gap="xs" justify="space-between">
+                                            <Group gap={4}>
+                                                <Text fw={600} size="sm">
+                                                    {t('base-host-form.override-sni-from-address')}
+                                                </Text>
+                                                <HoverCard shadow="md" width={280} withArrow>
+                                                    <HoverCard.Target>
+                                                        <ActionIcon
+                                                            color="gray"
+                                                            size="xs"
+                                                            variant="subtle"
+                                                        >
+                                                            <HiQuestionMarkCircle size={20} />
+                                                        </ActionIcon>
+                                                    </HoverCard.Target>
+                                                    <HoverCard.Dropdown>
+                                                        <Stack gap="sm">
+                                                            <Text c="dimmed" size="sm">
+                                                                {t(
+                                                                    'base-host-form.override-sni-from-address-description'
+                                                                )}
+                                                            </Text>
+                                                        </Stack>
+                                                    </HoverCard.Dropdown>
+                                                </HoverCard>
+                                            </Group>
+                                            <Switch
+                                                color="teal.8"
+                                                key={form.key('overrideSniFromAddress')}
+                                                radius="md"
+                                                size="md"
+                                                {...form.getInputProps('overrideSniFromAddress', {
+                                                    type: 'checkbox'
+                                                })}
+                                            />
+                                        </Group>
 
                                         <Group
                                             gap="xs"
@@ -372,6 +470,7 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
                                                 placeholder={t(
                                                     'base-host-form.host-e-g-example-com'
                                                 )}
+                                                rightSection={patternHoverCard(true, false, true)}
                                                 {...form.getInputProps('host')}
                                                 w="55%"
                                             />

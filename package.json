@@ -57,7 +57,7 @@
     "@mantine/spotlight": "^8.2.4",
     "@monaco-editor/react": "^4.7.0",
     "@paralleldrive/cuid2": "2.2.2",
-    "@remnawave/backend-contract": "2.1.6",
+    "@remnawave/backend-contract": "2.1.7",
     "@stablelib/base64": "^2.0.1",
     "@stablelib/x25519": "^2.0.1",
     "@tabler/icons-react": "^3.34.1",

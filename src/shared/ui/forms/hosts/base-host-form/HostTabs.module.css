@@ -7,28 +7,35 @@
         background-color: light-dark(var(--mantine-color-gray-0), var(--mantine-color-dark-5));
     }
 
-    &:first-of-type {
-        border-radius: 8px 0 0 8px;
-
-        @mixin rtl {
-            border-radius: 0 8px 8px 0;
-        }
+    @mixin smaller-than 370px {
+        border-radius: 8px;
+        margin: 4px;
     }
 
-    &:last-of-type {
-        border-radius: 0 8px 8px 0;
+    @mixin larger-than 370px {
+        &:first-of-type {
+            border-radius: 8px 0 0 8px;
 
-        @mixin rtl {
-            border-radius: 0 8px 8px 0;
+            @mixin rtl {
+                border-radius: 0 8px 8px 0;
+            }
         }
-    }
 
-    & + & {
-        border-left-width: 0;
+        &:last-of-type {
+            border-radius: 0 8px 8px 0;
 
-        @mixin rtl {
-            border-right-width: 0;
-            border-left-width: 1px;
+            @mixin rtl {
+                border-radius: 0 8px 8px 0;
+            }
+        }
+
+        & + & {
+            border-left-width: 0;
+
+            @mixin rtl {
+                border-right-width: 0;
+                border-left-width: 1px;
+            }
         }
     }
 
