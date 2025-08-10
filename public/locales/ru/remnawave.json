@@ -186,15 +186,15 @@
     "create-host-modal": {
         "widget": {
             "new-host": "Новый хост",
-            "please-select-the-config-profile-and-inbound": "Please select the config profile and inbound",
-            "error": "Error"
+            "please-select-the-config-profile-and-inbound": "Пожалуйста, выберите профиль и инбаунд",
+            "error": "Ошибка"
         }
     },
     "edit-host-modal": {
         "widget": {
             "edit-host": "Редактировать хост",
-            "dangling-host-cannot-be-cloned": "Dangling host cannot be cloned",
-            "error": "Error"
+            "dangling-host-cannot-be-cloned": "Хост со статусом DANGLING не может быть клонирован",
+            "error": "Ошибка"
         }
     },
     "hosts-page-header": {
@@ -386,12 +386,12 @@
         "paste-default-mux-params": "Вставить пример MUX",
         "please-ensure-you-provide-a-valid-json-sockopt-object": "Убедитесь, что вы предоставили правильный объект JSON Sockopt.",
         "paste-default-sockopt-params": "Вставить пример Sockopt",
-        "basic": "Basic",
-        "advanced": "Advanced",
-        "connection-overrides": "Connection overrides",
+        "basic": "Основные",
+        "advanced": "Расширенные",
+        "connection-overrides": "Переопределения соединений",
         "xray-json-and-raw": "Xray Json & Raw",
-        "hide-host": "Hide Host",
-        "hide-host-from-users-remnawave-will-send-host-only-for-raw-subscription-responses": "Hide host from users, Remnawave will send host only for RAW Subscription responses.",
+        "hide-host": "Скрыть хост",
+        "hide-host-from-users-remnawave-will-send-host-only-for-raw-subscription-responses": "Скрыть хост от пользователей, Remnawave отправит этот хост только для RAW-формата подписки",
         "apps-specific": "Apps specific"
     },
     "base-node-form": {
@@ -951,8 +951,8 @@
         "remove-button": "Удалить кнопку",
         "button-link": "Ссылка кнопки",
         "button-text": "Текст кнопки",
-        "enter-button-text": "Enter button text...",
-        "english": "English"
+        "enter-button-text": "Введите текст кнопки...",
+        "english": "Английский"
     },
     "subscription-tabs": {
         "widget": {
@@ -1419,7 +1419,7 @@
             "select-inbound": "Выберите инбаунд",
             "search-by-remark": "Поиск по примечанию...",
             "address": "Поиск по адресу...",
-            "filter-by-tags": "Filter by tags"
+            "filter-by-tags": "Фильтр по тегам"
         }
     },
     "mobile-warning-overlay": {
@@ -1494,31 +1494,31 @@
     },
     "language-selector": {
         "component": {
-            "persian": "Persian",
-            "russian": "Russian",
-            "chinese": "Chinese",
-            "additional-languages": "Additional Languages",
-            "english-is-always-enabled": "English is always enabled",
-            "english": "English"
+            "persian": "Персидский",
+            "russian": "Русский",
+            "chinese": "Китайский",
+            "additional-languages": "Дополнительные языки",
+            "english-is-always-enabled": "Английский всегда включен",
+            "english": "Английский"
         }
     },
     "node-stats": {
         "card": {
-            "stats": "Stats",
-            "traffic-refill-in-days": "Traffic refill in (days):",
-            "represents-the-uptime-of-the-xray-core": "Represents the uptime of the Xray Core"
+            "stats": "Статистика",
+            "traffic-refill-in-days": "Сброс трафика (дней):",
+            "represents-the-uptime-of-the-xray-core": "Отражает время работы ядра Xray"
         }
     },
     "nodes-spotlight-search": {
         "widget": {
-            "no-nodes-found": "No nodes found...",
-            "search-by-name-or-address": "Search by name or address..."
+            "no-nodes-found": "Нод не найдено...",
+            "search-by-name-or-address": "Поиск по имени или адресу..."
         }
     },
     "host-tags-input": {
-        "tag-can-only-contain-uppercase-letters-numbers-underscores-and-colons": "Tag can only contain uppercase letters, numbers, underscores and colons",
-        "tag-must-be-less-than-32-characters": "Tag must be less than 32 characters",
-        "tags-are-not-visible-to-end-users-tag-will-be-sent-with-raw-subscription-only": "Tags are not visible to end users. Tag will be sent with RAW subscription only.",
-        "clear-value": "Clear value"
+        "tag-can-only-contain-uppercase-letters-numbers-underscores-and-colons": "Тег может содержать только заглавные буквы, цифры, подчеркивания и двоеточия",
+        "tag-must-be-less-than-32-characters": "Тег должен быть меньше 32 символов",
+        "tags-are-not-visible-to-end-users-tag-will-be-sent-with-raw-subscription-only": "Теги не видны конечным пользователям. Тег будет отправлен только с RAW подпиской.",
+        "clear-value": "Очистить значение"
     }
 }
