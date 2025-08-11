@@ -393,14 +393,14 @@
         "hide-host": "مخفی کردن هاست",
         "hide-host-from-users-remnawave-will-send-host-only-for-raw-subscription-responses": "مخفی کردن هاست از کاربران، Remnawave این هاست را فقط برای درخواست‌های اشتراک خام ارسال خواهد کرد",
         "apps-specific": "Apps specific",
-        "single-domain": "Single domain",
-        "default-mode-for-one-domain": "Default mode for one domain",
-        "multi-domain": "Multi domain",
-        "multi-domain-description": "Multiple domains separated by commas. Remnawave will randomly choose one of the domains.",
-        "wildcard-domain": "Wildcard domain",
-        "wildcard-domain-description": "Wildcard pattern for subdomains. Remnawave will replace * with the randomly generated string.",
-        "override-sni-from-address": "Override SNI from Address",
-        "override-sni-from-address-description": "This option replaces the SNI value with the specified Address field value. This is particularly useful for multi-domain configurations or wildcard domains configuration."
+        "single-domain": "تک‌دامنه",
+        "default-mode-for-one-domain": "حالت پیشفرض برای یک دامنه",
+        "multi-domain": "چند دامنه",
+        "multi-domain-description": "چندین دامنه که با کاما (,) جدا شده‌اند، Remnawave یکی از دامنه‌ها را به صورت تصادفی انتخاب خواهد کرد.",
+        "wildcard-domain": "دامنه wildcard",
+        "wildcard-domain-description": "الگوی wildcard برای دامنه. Remnawave به جای * یک رشته متنی رندوم جایگذاری خواهد کرد",
+        "override-sni-from-address": "بازنویسی SNI از آدرس دامنه",
+        "override-sni-from-address-description": "این گزینه مقدار SNI را با آدرس مشخص شده جایگزین خواهد کرد که برای کانفیگ‌های چند دامنه‌ای و wildcard قابل استفاده می‌باشد"
     },
     "base-node-form": {
         "country": "کشور",
@@ -1111,7 +1111,7 @@
             "add-users": "افزودن کاربران",
             "edit": "ویرایش",
             "copy-uuid": "کپی UUID",
-            "rename": "Rename"
+            "rename": "تغییر نام"
         }
     },
     "config-profile-detail-header": {
@@ -1136,7 +1136,7 @@
             "edit-xray-config": "ویرایش پیکربندی Xray",
             "xray-config": "Xray کانفیگ",
             "copy-uuid": "کپی UUID",
-            "rename": "Rename"
+            "rename": "تغییر نام"
         }
     },
     "config-profiles-header": {
@@ -1533,10 +1533,10 @@
     },
     "rename-modal": {
         "shared": {
-            "rename": "Rename",
-            "new-name": "New Name",
-            "cancel": "Cancel",
-            "save": "Save"
+            "rename": "تغییر نام",
+            "new-name": "نام جدید",
+            "cancel": "لغو",
+            "save": "ذخیره"
         }
     }
 }
