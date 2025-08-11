@@ -393,14 +393,14 @@
         "hide-host": "Скрыть хост",
         "hide-host-from-users-remnawave-will-send-host-only-for-raw-subscription-responses": "Скрыть хост от пользователей, Remnawave отправит этот хост только для RAW-формата подписки",
         "apps-specific": "Apps specific",
-        "single-domain": "Single domain",
-        "default-mode-for-one-domain": "Default mode for one domain",
-        "multi-domain": "Multi domain",
-        "multi-domain-description": "Multiple domains separated by commas. Remnawave will randomly choose one of the domains.",
-        "wildcard-domain": "Wildcard domain",
-        "wildcard-domain-description": "Wildcard pattern for subdomains. Remnawave will replace * with the randomly generated string.",
-        "override-sni-from-address": "Override SNI from Address",
-        "override-sni-from-address-description": "This option replaces the SNI value with the specified Address field value. This is particularly useful for multi-domain configurations or wildcard domains configuration."
+        "single-domain": "Один домен",
+        "default-mode-for-one-domain": "Режим по умолчанию для одного домена",
+        "multi-domain": "Мульти домен",
+        "multi-domain-description": "Несколько доменов, разделенных запятыми. Remnawave будет случайным образом выбирать один из доменов.",
+        "wildcard-domain": "Wildcard домен",
+        "wildcard-domain-description": "Шаблон шаблона Wildcard для субдоменов. Remnawave заменит * случайно созданной строкой.",
+        "override-sni-from-address": "Переопределить SNI из адреса",
+        "override-sni-from-address-description": "Эта опция заменяет значение SNI на указанное значение поля Адрес. Это особенно полезно для опций: мульти-домен или Wildcard-домен."
     },
     "base-node-form": {
         "country": "Страна",
@@ -1111,7 +1111,7 @@
             "add-users": "Добавить пользователей",
             "edit": "Изменить",
             "copy-uuid": "Скопировать UUID",
-            "rename": "Rename"
+            "rename": "Переименовать"
         }
     },
     "config-profile-detail-header": {
@@ -1136,7 +1136,7 @@
             "edit-xray-config": "Изменить конфиг Xray",
             "xray-config": "Конфиг. Xray",
             "copy-uuid": "Скопировать UUID",
-            "rename": "Rename"
+            "rename": "Переименовать"
         }
     },
     "config-profiles-header": {
@@ -1533,10 +1533,10 @@
     },
     "rename-modal": {
         "shared": {
-            "rename": "Rename",
-            "new-name": "New Name",
-            "cancel": "Cancel",
-            "save": "Save"
+            "rename": "Переименовать",
+            "new-name": "Новое имя",
+            "cancel": "Закрыть",
+            "save": "Сохранить"
         }
     }
 }
