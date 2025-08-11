@@ -1110,7 +1110,8 @@
             "remove-users": "پاک کردن کاربران",
             "add-users": "افزودن کاربران",
             "edit": "ویرایش",
-            "copy-uuid": "کپی UUID"
+            "copy-uuid": "کپی UUID",
+            "rename": "Rename"
         }
     },
     "config-profile-detail-header": {
@@ -1134,7 +1135,8 @@
             "quick-view": "نمای سریع",
             "edit-xray-config": "ویرایش پیکربندی Xray",
             "xray-config": "Xray کانفیگ",
-            "copy-uuid": "کپی UUID"
+            "copy-uuid": "کپی UUID",
+            "rename": "Rename"
         }
     },
     "config-profiles-header": {
@@ -1528,5 +1530,13 @@
         "tag-must-be-less-than-32-characters": "طول برچسب باید زیر 32 کاراکتر باشد",
         "tags-are-not-visible-to-end-users-tag-will-be-sent-with-raw-subscription-only": "برچسب‌ها برای کاربران قابل مشاهده نیستند و فقط با اشتراک خام ارسال خواهند شد.",
         "clear-value": "پاکسازی مقدار"
+    },
+    "rename-modal": {
+        "shared": {
+            "rename": "Rename",
+            "new-name": "New Name",
+            "cancel": "Cancel",
+            "save": "Save"
+        }
     }
 }

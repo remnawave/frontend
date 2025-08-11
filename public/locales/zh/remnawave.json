@@ -1110,7 +1110,8 @@
             "remove-users": "删除用户",
             "add-users": "添加用户",
             "edit": "编辑",
-            "copy-uuid": "复制 UUID"
+            "copy-uuid": "复制 UUID",
+            "rename": "Rename"
         }
     },
     "config-profile-detail-header": {
@@ -1134,7 +1135,8 @@
             "quick-view": "快速查看",
             "edit-xray-config": "编辑 Xray 配置",
             "xray-config": "Xray 配置",
-            "copy-uuid": "复制 UUID"
+            "copy-uuid": "复制 UUID",
+            "rename": "Rename"
         }
     },
     "config-profiles-header": {
@@ -1528,5 +1530,13 @@
         "tag-must-be-less-than-32-characters": "标签必须小于 32 个字符",
         "tags-are-not-visible-to-end-users-tag-will-be-sent-with-raw-subscription-only": "标签对最终用户不可见。标签将只能与 RAW 订阅一起发送。",
         "clear-value": "清除"
+    },
+    "rename-modal": {
+        "shared": {
+            "rename": "Rename",
+            "new-name": "New Name",
+            "cancel": "Cancel",
+            "save": "Save"
+        }
     }
 }
