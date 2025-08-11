@@ -68,7 +68,8 @@
             "copy-all-content": "Скопировать все содержимое",
             "select-all": "Выделить все",
             "cut-selection": "Вырезать выделенное",
-            "paste-from-clipboard": "Вставить из буфера обмена"
+            "paste-from-clipboard": "Вставить из буфера обмена",
+            "generate-keypair": "Generate Keypair"
         }
     },
     "use-bandwidth-table-columns": {

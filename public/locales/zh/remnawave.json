@@ -68,7 +68,8 @@
             "copy-all-content": "复制全部内容",
             "select-all": "全选",
             "cut-selection": "剪切选中项",
-            "paste-from-clipboard": "从剪切板中粘贴"
+            "paste-from-clipboard": "从剪切板中粘贴",
+            "generate-keypair": "Generate Keypair"
         }
     },
     "use-bandwidth-table-columns": {
