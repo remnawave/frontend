@@ -114,6 +114,7 @@ export const InternalSquadsHeaderActionButtonsFeature = () => {
                             )}
                         </Text>
                         <TextInput
+                            data-autofocus
                             description={t(
                                 'internal-squad-header-action-buttons.feature.it-cant-be-changed-later'
                             )}

@@ -4,6 +4,7 @@ import { Grid } from '@mantine/core'
 
 import { InternalSquadsHeaderWidget } from '@widgets/dashboard/internal-squads/internal-squads-header-widget/internal-squads-header.widget'
 import { InternalSquadsGridWidget } from '@widgets/dashboard/internal-squads/internal-squads-grid/internal-squads-grid.widget'
+import { RenameModalShared } from '@shared/ui/modals/rename-modal.shared'
 import { ROUTES } from '@shared/constants'
 import { PageHeader } from '@shared/ui'
 import { Page } from '@shared/ui/page'
@@ -41,6 +42,7 @@ export const InternalSquadsPageComponent = (props: Props) => {
                     </motion.div>
                 </Grid.Col>
             </Grid>
+            <RenameModalShared key="rename-internal-squad-modal" renameFrom="internalSquad" />
         </Page>
     )
 }

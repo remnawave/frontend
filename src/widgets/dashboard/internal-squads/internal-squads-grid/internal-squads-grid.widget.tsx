@@ -13,7 +13,16 @@ import {
     Title,
     Tooltip
 } from '@mantine/core'
-import { PiCheck, PiCircle, PiCopy, PiEmpty, PiTag, PiTrashDuotone, PiUsers } from 'react-icons/pi'
+import {
+    PiCheck,
+    PiCircle,
+    PiCopy,
+    PiEmpty,
+    PiPencil,
+    PiTag,
+    PiTrashDuotone,
+    PiUsers
+} from 'react-icons/pi'
 import { TbChevronDown, TbCirclesRelation, TbUsersMinus, TbUsersPlus } from 'react-icons/tb'
 import { useTranslation } from 'react-i18next'
 import { useMediaQuery } from '@mantine/hooks'
@@ -379,6 +388,25 @@ export function InternalSquadsGridWidget(props: IProps) {
                                                         </Menu.Item>
                                                     )}
                                                 </CopyButton>
+
+                                                <Menu.Item
+                                                    leftSection={<PiPencil size={14} />}
+                                                    onClick={() => {
+                                                        setInternalData({
+                                                            internalState: {
+                                                                name: internalSquad.name,
+                                                                uuid: internalSquad.uuid
+                                                            },
+                                                            modalKey:
+                                                                MODALS.RENAME_SQUAD_OR_CONFIG_PROFILE_MODAL
+                                                        })
+                                                        open(
+                                                            MODALS.RENAME_SQUAD_OR_CONFIG_PROFILE_MODAL
+                                                        )
+                                                    }}
+                                                >
+                                                    {t('internal-squads-grid.widget.rename')}
+                                                </Menu.Item>
 
                                                 <Menu.Item
                                                     color="red"

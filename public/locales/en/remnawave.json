@@ -1110,7 +1110,8 @@
             "remove-users": "Remove users",
             "add-users": "Add users",
             "edit": "Edit",
-            "copy-uuid": "Copy UUID"
+            "copy-uuid": "Copy UUID",
+            "rename": "Rename"
         }
     },
     "config-profile-detail-header": {
@@ -1134,7 +1135,8 @@
             "quick-view": "Quick view",
             "edit-xray-config": "Edit Xray Config",
             "xray-config": "Xray Config",
-            "copy-uuid": "Copy UUID"
+            "copy-uuid": "Copy UUID",
+            "rename": "Rename"
         }
     },
     "config-profiles-header": {
@@ -1528,5 +1530,13 @@
         "tag-must-be-less-than-32-characters": "Tag must be less than 32 characters",
         "tags-are-not-visible-to-end-users-tag-will-be-sent-with-raw-subscription-only": "Tags are not visible to end users. Tag will be sent with RAW subscription only.",
         "clear-value": "Clear value"
+    },
+    "rename-modal": {
+        "shared": {
+            "rename": "Rename",
+            "new-name": "New Name",
+            "cancel": "Cancel",
+            "save": "Save"
+        }
     }
 }

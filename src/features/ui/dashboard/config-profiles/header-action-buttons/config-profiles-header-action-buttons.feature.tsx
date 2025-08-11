@@ -133,48 +133,51 @@ export const ConfigProfilesHeaderActionButtonsFeature = () => {
                 size="md"
                 title={t('config-profiles-header-action-buttons.feature.create-config-profile')}
             >
-                <Stack gap="md">
-                    <Text size="sm">
-                        {t(
-                            'config-profiles-header-action-buttons.feature.create-a-new-config-profile-by-entering-a-name-below'
-                        )}
-                        <br />
+                <form
+                    onSubmit={(e) => {
+                        e.preventDefault()
+                        createConfigProfile({
+                            variables: {
+                                name: nameField.getValue(),
+                                config: generateDefaultConfig()
+                            }
+                        })
+                    }}
+                >
+                    <Stack gap="md">
+                        <Text size="sm">
+                            {t(
+                                'config-profiles-header-action-buttons.feature.create-a-new-config-profile-by-entering-a-name-below'
+                            )}
+                            <br />
 
-                        {t(
-                            'config-profiles-header-action-buttons.feature.you-can-customize-xray-config-after-creation'
-                        )}
-                    </Text>
-                    <TextInput
-                        description={t(
-                            'config-profiles-header-action-buttons.feature.it-cant-be-changed-later'
-                        )}
-                        label={t('config-profiles-header-action-buttons.feature.profile-name')}
-                        placeholder={t(
-                            'config-profiles-header-action-buttons.feature.enter-profile-name'
-                        )}
-                        required
-                        {...nameField.getInputProps()}
-                    />
-                    <Group justify="flex-end">
-                        <Button onClick={close} variant="default">
-                            {t('config-profiles-header-action-buttons.feature.cancel')}
-                        </Button>
+                            {t(
+                                'config-profiles-header-action-buttons.feature.you-can-customize-xray-config-after-creation'
+                            )}
+                        </Text>
+                        <TextInput
+                            data-autofocus
+                            description={t(
+                                'config-profiles-header-action-buttons.feature.it-cant-be-changed-later'
+                            )}
+                            label={t('config-profiles-header-action-buttons.feature.profile-name')}
+                            placeholder={t(
+                                'config-profiles-header-action-buttons.feature.enter-profile-name'
+                            )}
+                            required
+                            {...nameField.getInputProps()}
+                        />
+                        <Group justify="flex-end">
+                            <Button onClick={close} variant="default">
+                                {t('config-profiles-header-action-buttons.feature.cancel')}
+                            </Button>
 
-                        <Button
-                            loading={isPending}
-                            onClick={() => {
-                                createConfigProfile({
-                                    variables: {
-                                        name: nameField.getValue(),
-                                        config: generateDefaultConfig()
-                                    }
-                                })
-                            }}
-                        >
-                            {t('config-profiles-header-action-buttons.feature.create')}
-                        </Button>
-                    </Group>
-                </Stack>
+                            <Button loading={isPending} type="submit">
+                                {t('config-profiles-header-action-buttons.feature.create')}
+                            </Button>
+                        </Group>
+                    </Stack>
+                </form>
             </Modal>
         </Group>
     )
