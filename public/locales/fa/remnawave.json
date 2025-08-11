@@ -68,7 +68,8 @@
             "copy-all-content": "کپی همهٔ محتوا",
             "select-all": "انتخاب همه",
             "cut-selection": "بریدن محتوای انتخاب شده",
-            "paste-from-clipboard": "جای‌گذاری از کلیپ‌بورد"
+            "paste-from-clipboard": "جای‌گذاری از کلیپ‌بورد",
+            "generate-keypair": "Generate Keypair"
         }
     },
     "use-bandwidth-table-columns": {
