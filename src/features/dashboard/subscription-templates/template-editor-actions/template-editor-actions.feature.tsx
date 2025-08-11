@@ -1,8 +1,15 @@
-import { TbClipboardCopy, TbClipboardText, TbCut, TbDownload, TbSelectAll } from 'react-icons/tb'
+import {
+    TbClipboardCopy,
+    TbClipboardText,
+    TbCut,
+    TbDownload,
+    TbMenu2,
+    TbSelectAll
+} from 'react-icons/tb'
 import { PiCheckSquareOffset, PiFloppyDisk } from 'react-icons/pi'
-import { ActionIcon, Button, Group } from '@mantine/core'
+import { ActionIcon, Button, Group, Menu } from '@mantine/core'
+import { useClipboard, useMediaQuery } from '@mantine/hooks'
 import { useTranslation } from 'react-i18next'
-import { useClipboard } from '@mantine/hooks'
 
 import { useDownloadTemplate } from '@shared/ui/load-templates/use-download-template'
 import { useUpdateSubscriptionTemplate } from '@shared/api/hooks'
@@ -13,10 +20,11 @@ export function TemplateEditorActionsFeature(props: Props) {
     const { editorRef, language, templateType } = props
     const { t } = useTranslation()
 
+    const isMobile = useMediaQuery('(max-width: 48em)')
+    const clipboard = useClipboard({ timeout: 500 })
+
     const { mutate: updateConfig, isPending: isUpdating } = useUpdateSubscriptionTemplate()
     const { openDownloadModal } = useDownloadTemplate(templateType, editorRef, 'SUBSCRIPTION')
-
-    const clipboard = useClipboard({ timeout: 500 })
 
     const handleSave = () => {
         if (!editorRef.current) return
@@ -123,65 +131,87 @@ export function TemplateEditorActionsFeature(props: Props) {
     }
 
     return (
-        <Group>
-            <Group grow preventGrowOverflow={false} wrap="wrap">
+        <Group grow={isMobile} preventGrowOverflow={false} wrap="wrap">
+            <Button
+                color="teal"
+                leftSection={<PiFloppyDisk size={16} />}
+                loading={isUpdating}
+                onClick={handleSave}
+                radius="md"
+                variant="light"
+            >
+                {t('config-editor-actions.feature.save')}
+            </Button>
+
+            <Group gap={0} wrap="nowrap">
                 <Button
                     leftSection={<PiCheckSquareOffset size={16} />}
-                    mb="md"
                     onClick={formatDocument}
+                    radius="md"
+                    style={{
+                        borderTopRightRadius: 0,
+                        borderBottomRightRadius: 0,
+                        borderRight: 0,
+                        width: '100%'
+                    }}
+                    variant="default"
                 >
                     {t('config-editor-actions.feature.format')}
                 </Button>
-                <Button
-                    leftSection={<PiFloppyDisk size={16} />}
-                    loading={isUpdating}
-                    mb="md"
-                    onClick={handleSave}
-                >
-                    {t('config-editor-actions.feature.save')}
-                </Button>
-            </Group>
-            <Group>
-                <ActionIcon.Group mb="md">
-                    <ActionIcon
-                        color={clipboard.copied ? 'teal' : 'cyan'}
-                        onClick={handleCopyConfig}
-                        radius="md"
-                        size="input-sm"
-                        variant="outline"
-                    >
-                        <TbClipboardCopy size={20} />
-                    </ActionIcon>
 
-                    <ActionIcon
-                        onClick={handleSelectAll}
-                        radius="md"
-                        size="input-sm"
-                        variant="outline"
-                    >
-                        <TbSelectAll size={20} />
-                    </ActionIcon>
+                <Menu radius="sm" shadow="md" withinPortal>
+                    <Menu.Target>
+                        <ActionIcon
+                            radius="md"
+                            size={36}
+                            style={{
+                                borderTopLeftRadius: 0,
+                                borderBottomLeftRadius: 0,
+                                border: '1px solid var(--mantine-color-gray-7)'
+                            }}
+                            variant="default"
+                        >
+                            <TbMenu2 size={20} />
+                        </ActionIcon>
+                    </Menu.Target>
 
-                    <ActionIcon onClick={handleCut} radius="md" size="input-sm" variant="outline">
-                        <TbCut size={20} />
-                    </ActionIcon>
+                    <Menu.Dropdown>
+                        <Menu.Item
+                            color={clipboard.copied ? 'teal' : undefined}
+                            leftSection={<TbClipboardCopy size={14} />}
+                            onClick={handleCopyConfig}
+                        >
+                            {t('config-editor-actions.feature.copy-all-content')}
+                        </Menu.Item>
 
-                    <ActionIcon onClick={handlePaste} radius="md" size="input-sm" variant="outline">
-                        <TbClipboardText size={20} />
-                    </ActionIcon>
-                </ActionIcon.Group>
-            </Group>
+                        <Menu.Item
+                            leftSection={<TbSelectAll size={14} />}
+                            onClick={handleSelectAll}
+                        >
+                            {t('config-editor-actions.feature.select-all')}
+                        </Menu.Item>
 
-            <Group grow preventGrowOverflow={false} wrap="wrap">
-                <Button
-                    leftSection={<TbDownload size={16} />}
-                    loading={isUpdating}
-                    mb="md"
-                    onClick={openDownloadModal}
-                    variant="light"
-                >
-                    {t('config-editor-actions.feature.load-from-github')}
-                </Button>
+                        <Menu.Item leftSection={<TbCut size={14} />} onClick={handleCut}>
+                            {t('config-editor-actions.feature.cut-selection')}
+                        </Menu.Item>
+
+                        <Menu.Item
+                            leftSection={<TbClipboardText size={14} />}
+                            onClick={handlePaste}
+                        >
+                            {t('config-editor-actions.feature.paste-from-clipboard')}
+                        </Menu.Item>
+
+                        <Menu.Divider />
+
+                        <Menu.Item
+                            leftSection={<TbDownload size={14} />}
+                            onClick={openDownloadModal}
+                        >
+                            {t('config-editor-actions.feature.load-from-github')}
+                        </Menu.Item>
+                    </Menu.Dropdown>
+                </Menu>
             </Group>
         </Group>
     )

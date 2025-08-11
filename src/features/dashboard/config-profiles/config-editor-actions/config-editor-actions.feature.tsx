@@ -3,14 +3,15 @@ import {
     TbClipboardText,
     TbCut,
     TbDownload,
+    TbMenu2,
     TbSelectAll,
     TbTools
 } from 'react-icons/tb'
-import { ActionIcon, Button, Group, Text, Tooltip } from '@mantine/core'
-import { PiCheckSquareOffset, PiFloppyDisk } from 'react-icons/pi'
+import { PiCheck, PiCheckSquareOffset, PiCopy, PiFloppyDisk } from 'react-icons/pi'
+import { ActionIcon, Button, CopyButton, Group, Menu, Text } from '@mantine/core'
+import { useClipboard, useMediaQuery } from '@mantine/hooks'
 import { notifications } from '@mantine/notifications'
 import { useTranslation } from 'react-i18next'
-import { useClipboard } from '@mantine/hooks'
 import { modals } from '@mantine/modals'
 import consola from 'consola/browser'
 
@@ -26,6 +27,7 @@ export function ConfigEditorActionsFeature(props: Props) {
         props
     const { t } = useTranslation()
 
+    const isMobile = useMediaQuery('(max-width: 48em)')
     const clipboard = useClipboard({ timeout: 500 })
 
     const { mutate: updateConfig, isPending: isUpdating } = useUpdateConfigProfile({
@@ -156,110 +158,147 @@ export function ConfigEditorActionsFeature(props: Props) {
     }
 
     return (
-        <Group grow preventGrowOverflow={false} wrap="wrap">
-            <Button
-                leftSection={<PiCheckSquareOffset size={16} />}
-                mb="md"
-                onClick={formatDocument}
-            >
-                {t('config-editor-actions.feature.format')}
-            </Button>
-
+        <Group grow={isMobile} preventGrowOverflow={false} wrap="wrap">
             <Button
                 color="teal"
                 disabled={!isConfigValid}
                 leftSection={<PiFloppyDisk size={16} />}
                 loading={isUpdating}
-                mb="md"
                 onClick={handleSave}
+                radius="md"
+                variant="light"
             >
                 {t('config-editor-actions.feature.save')}
             </Button>
 
-            <Button
-                color="red"
-                disabled={isConfigValid || isUpdating}
-                leftSection={<PiFloppyDisk size={16} />}
-                loading={isUpdating}
-                mb="md"
-                onClick={() => {
-                    modals.openConfirmModal({
-                        title: t('config-editor-actions.feature.save-anyway-title'),
-                        children: (
-                            <Text>
-                                {t('config-editor-actions.feature.save-anyway-description')}
-                            </Text>
-                        ),
-                        centered: true,
-                        labels: {
-                            confirm: t('config-editor-actions.feature.save'),
-                            cancel: t('config-editor-actions.feature.cancel')
-                        },
-                        confirmProps: {
-                            color: 'red'
-                        },
-                        onConfirm: handleSave
-                    })
-                }}
-            >
-                {t('config-editor-actions.feature.save-anyway')}
-            </Button>
-
-            <Group>
+            {!isConfigValid && !isUpdating && (
                 <Button
-                    leftSection={<TbTools size={16} />}
-                    mb="md"
+                    color="red"
+                    disabled={isConfigValid || isUpdating}
+                    leftSection={<PiFloppyDisk size={16} />}
+                    loading={isUpdating}
                     onClick={() => {
-                        modals.open({
-                            title: t('config-editor-actions.feature.tools'),
+                        modals.openConfirmModal({
+                            title: t('config-editor-actions.feature.save-anyway-title'),
+                            children: (
+                                <Text>
+                                    {t('config-editor-actions.feature.save-anyway-description')}
+                                </Text>
+                            ),
                             centered: true,
-                            children: <KeypairGeneratorWidget />
+                            labels: {
+                                confirm: t('config-editor-actions.feature.save'),
+                                cancel: t('config-editor-actions.feature.cancel')
+                            },
+                            confirmProps: {
+                                color: 'red'
+                            },
+                            onConfirm: handleSave
                         })
                     }}
-                >
-                    {t('config-editor-actions.feature.tools')}
-                </Button>
-
-                <ActionIcon.Group mb="md">
-                    <Tooltip label={t('config-editor-actions.feature.copy-all-content')}>
-                        <ActionIcon
-                            color={clipboard.copied ? 'teal' : 'cyan'}
-                            onClick={handleCopyConfig}
-                            size="input-sm"
-                            variant="outline"
-                        >
-                            <TbClipboardCopy size={20} />
-                        </ActionIcon>
-                    </Tooltip>
-
-                    <Tooltip label={t('config-editor-actions.feature.select-all')}>
-                        <ActionIcon onClick={handleSelectAll} size="input-sm" variant="outline">
-                            <TbSelectAll size={20} />
-                        </ActionIcon>
-                    </Tooltip>
-
-                    <Tooltip label={t('config-editor-actions.feature.cut-selection')}>
-                        <ActionIcon onClick={handleCut} size="input-sm" variant="outline">
-                            <TbCut size={20} />
-                        </ActionIcon>
-                    </Tooltip>
-
-                    <Tooltip label={t('config-editor-actions.feature.paste-from-clipboard')}>
-                        <ActionIcon onClick={handlePaste} size="input-sm" variant="outline">
-                            <TbClipboardText size={20} />
-                        </ActionIcon>
-                    </Tooltip>
-                </ActionIcon.Group>
-
-                <Button
-                    leftSection={<TbDownload size={16} />}
-                    loading={isUpdating}
-                    mb="md"
-                    onClick={openDownloadModal}
+                    radius="md"
                     variant="light"
                 >
-                    {t('config-editor-actions.feature.load-from-github')}
+                    {t('config-editor-actions.feature.save-anyway')}
                 </Button>
+            )}
+
+            <Group gap={0} wrap="nowrap">
+                <Button
+                    leftSection={<PiCheckSquareOffset size={16} />}
+                    onClick={formatDocument}
+                    radius="md"
+                    style={{
+                        borderTopRightRadius: 0,
+                        borderBottomRightRadius: 0,
+                        borderRight: 0,
+                        width: '100%'
+                    }}
+                    variant="default"
+                >
+                    {t('config-editor-actions.feature.format')}
+                </Button>
+
+                <Menu radius="sm" shadow="md" withinPortal>
+                    <Menu.Target>
+                        <ActionIcon
+                            radius="md"
+                            size={36}
+                            style={{
+                                borderTopLeftRadius: 0,
+                                borderBottomLeftRadius: 0,
+                                border: '1px solid var(--mantine-color-gray-7)'
+                            }}
+                            variant="default"
+                        >
+                            <TbMenu2 size={20} />
+                        </ActionIcon>
+                    </Menu.Target>
+
+                    <Menu.Dropdown>
+                        <CopyButton timeout={2000} value={configProfile.uuid}>
+                            {({ copied, copy }) => (
+                                <Menu.Item
+                                    color={copied ? 'teal' : undefined}
+                                    leftSection={
+                                        copied ? <PiCheck size={14} /> : <PiCopy size={14} />
+                                    }
+                                    onClick={copy}
+                                >
+                                    {t('config-profiles-grid.widget.copy-uuid')}
+                                </Menu.Item>
+                            )}
+                        </CopyButton>
+
+                        <Menu.Item
+                            color={clipboard.copied ? 'teal' : undefined}
+                            leftSection={<TbClipboardCopy size={14} />}
+                            onClick={handleCopyConfig}
+                        >
+                            {t('config-editor-actions.feature.copy-all-content')}
+                        </Menu.Item>
+
+                        <Menu.Item
+                            leftSection={<TbSelectAll size={14} />}
+                            onClick={handleSelectAll}
+                        >
+                            {t('config-editor-actions.feature.select-all')}
+                        </Menu.Item>
+
+                        <Menu.Item leftSection={<TbCut size={14} />} onClick={handleCut}>
+                            {t('config-editor-actions.feature.cut-selection')}
+                        </Menu.Item>
+
+                        <Menu.Item
+                            leftSection={<TbClipboardText size={14} />}
+                            onClick={handlePaste}
+                        >
+                            {t('config-editor-actions.feature.paste-from-clipboard')}
+                        </Menu.Item>
+
+                        <Menu.Divider />
+
+                        <Menu.Item
+                            leftSection={<TbTools size={14} />}
+                            onClick={() => {
+                                modals.open({
+                                    title: t('config-editor-actions.feature.tools'),
+                                    centered: true,
+                                    children: <KeypairGeneratorWidget />
+                                })
+                            }}
+                        >
+                            {t('config-editor-actions.feature.generate-keypair')}
+                        </Menu.Item>
+
+                        <Menu.Item
+                            leftSection={<TbDownload size={14} />}
+                            onClick={openDownloadModal}
+                        >
+                            {t('config-editor-actions.feature.load-from-github')}
+                        </Menu.Item>
+                    </Menu.Dropdown>
+                </Menu>
             </Group>
         </Group>
     )

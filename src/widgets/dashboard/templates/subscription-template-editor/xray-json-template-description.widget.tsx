@@ -22,7 +22,7 @@ export const XrayJsonTemplateDescriptionWidget = () => {
     ))
 
     return (
-        <Accordion variant="separated">
+        <Accordion mb="md" variant="separated">
             <Accordion.Item value="importing-json-subscription">
                 <Accordion.Control
                     icon={<PiInfoDuotone color="var(--mantine-color-red-6)" size={20} />}

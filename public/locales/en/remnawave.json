@@ -68,7 +68,8 @@
             "copy-all-content": "Copy all content",
             "select-all": "Select all",
             "cut-selection": "Cut selection",
-            "paste-from-clipboard": "Paste from clipboard"
+            "paste-from-clipboard": "Paste from clipboard",
+            "generate-keypair": "Generate Keypair"
         }
     },
     "use-bandwidth-table-columns": {

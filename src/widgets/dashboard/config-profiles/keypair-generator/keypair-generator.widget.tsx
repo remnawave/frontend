@@ -40,19 +40,6 @@ export const KeypairGeneratorWidget = () => {
 
     return (
         <Stack gap="lg">
-            <Button
-                fullWidth
-                gradient={{ from: 'blue', to: 'cyan' }}
-                leftSection={<PiKey size={px('1.2rem')} />}
-                onClick={generatePublicAndPrivate}
-                size="sm"
-                variant="outline"
-            >
-                {t('keypair.widget.generate-key-pair')}
-            </Button>
-
-            <Divider />
-
             <Stack gap="md">
                 <Stack gap="xs">
                     <Group align="center" justify="space-between">
@@ -152,6 +139,18 @@ export const KeypairGeneratorWidget = () => {
                     </Code>
                 </Stack>
             </Stack>
+
+            <Group justify="flex-end">
+                <Button
+                    leftSection={<PiKey size={px('1.2rem')} />}
+                    onClick={generatePublicAndPrivate}
+                    radius="md"
+                    size="sm"
+                    variant="default"
+                >
+                    {t('keypair.widget.generate-key-pair')}
+                </Button>
+            </Group>
         </Stack>
     )
 }
