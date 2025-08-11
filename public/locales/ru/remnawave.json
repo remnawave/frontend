@@ -1110,7 +1110,8 @@
             "remove-users": "Удалить пользователей",
             "add-users": "Добавить пользователей",
             "edit": "Изменить",
-            "copy-uuid": "Скопировать UUID"
+            "copy-uuid": "Скопировать UUID",
+            "rename": "Rename"
         }
     },
     "config-profile-detail-header": {
@@ -1134,7 +1135,8 @@
             "quick-view": "Быстрый просмотр",
             "edit-xray-config": "Изменить конфиг Xray",
             "xray-config": "Конфиг. Xray",
-            "copy-uuid": "Скопировать UUID"
+            "copy-uuid": "Скопировать UUID",
+            "rename": "Rename"
         }
     },
     "config-profiles-header": {
@@ -1528,5 +1530,13 @@
         "tag-must-be-less-than-32-characters": "Тег должен быть меньше 32 символов",
         "tags-are-not-visible-to-end-users-tag-will-be-sent-with-raw-subscription-only": "Теги не видны конечным пользователям. Тег будет отправлен только с RAW подпиской.",
         "clear-value": "Очистить значение"
+    },
+    "rename-modal": {
+        "shared": {
+            "rename": "Rename",
+            "new-name": "New Name",
+            "cancel": "Cancel",
+            "save": "Save"
+        }
     }
 }
