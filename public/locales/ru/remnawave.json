@@ -930,7 +930,11 @@
                 "validation-errors": "Ошибки валидации",
                 "invalid-configuration": "Недействительная конфигурация",
                 "the-configuration-did-not-pass-validation": "Конфигурация не прошла проверку.",
-                "close": "Закрыть"
+                "close": "Закрыть",
+                "configuration-settings": "Общие настройки",
+                "platform-apps": "Приложения",
+                "move-up": "Переместить вверх",
+                "move-down": "Переместить ниже"
             }
         }
     },
@@ -1538,6 +1542,17 @@
             "new-name": "Новое имя",
             "cancel": "Закрыть",
             "save": "Сохранить"
+        }
+    },
+    "branding-settings": {
+        "component": {
+            "branding-settings": "Настройки бренда",
+            "brand-name": "Название бренда",
+            "the-name-that-will-be-displayed-on-the-subscription-page": "Название, которое будет отображаться на странице подписки",
+            "url-to-your-brand-logo-image": "URL логотипа вашего бренда",
+            "logo-url": "Ссылка на логотип",
+            "link-to-your-support-or-help-page": "Ссылка на вашу поддержку или страницу помощи",
+            "support-url": "URL поддержки"
         }
     }
 }
