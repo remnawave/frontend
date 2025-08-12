@@ -19,26 +19,62 @@ export function validateSubscriptionPageAppConfig(config: any): ValidationResult
         return { valid: false, errors: ['Configuration must be an object'] }
     }
 
-    // Validate config section
     if (!config.config || typeof config.config !== 'object') {
         errors.push('config.config: must be an object')
-    } else if (!Array.isArray(config.config.additionalLocales)) {
-        errors.push('config.config.additionalLocales: must be an array')
     } else {
-        config.config.additionalLocales.forEach((locale: any, index: number) => {
-            if (typeof locale !== 'string' || !['fa', 'ru', 'zh'].includes(locale)) {
-                errors.push(
-                    `config.config.additionalLocales[${index}]: must be one of 'fa', 'ru', 'zh'`
-                )
+        if (!Array.isArray(config.config.additionalLocales)) {
+            errors.push('config.config.additionalLocales: must be an array')
+        } else {
+            config.config.additionalLocales.forEach((locale: any, index: number) => {
+                if (typeof locale !== 'string' || !['fa', 'ru', 'zh'].includes(locale)) {
+                    errors.push(
+                        `config.config.additionalLocales[${index}]: must be one of 'fa', 'ru', 'zh'`
+                    )
+                }
+            })
+        }
+
+        if (config.config.branding !== undefined) {
+            if (typeof config.config.branding !== 'object' || config.config.branding === null) {
+                errors.push('config.config.branding: must be an object')
+            } else {
+                const { branding } = config.config
+
+                if (branding.name !== undefined && typeof branding.name !== 'string') {
+                    errors.push('config.config.branding.name: must be a string')
+                }
+
+                if (branding.logoUrl !== undefined) {
+                    if (typeof branding.logoUrl !== 'string') {
+                        errors.push('config.config.branding.logoUrl: must be a string')
+                    } else if (branding.logoUrl && !isValidUrl(branding.logoUrl)) {
+                        errors.push('config.config.branding.logoUrl: must be a valid URL')
+                    }
+                }
+
+                if (branding.supportUrl !== undefined) {
+                    if (typeof branding.supportUrl !== 'string') {
+                        errors.push('config.config.branding.supportUrl: must be a string')
+                    } else if (branding.supportUrl && !isValidUrl(branding.supportUrl)) {
+                        errors.push('config.config.branding.supportUrl: must be a valid URL')
+                    }
+                }
             }
-        })
+        }
     }
 
-    // Validate platforms section
     if (!config.platforms || typeof config.platforms !== 'object') {
         errors.push('config.platforms: must be an object')
     } else {
-        const supportedPlatforms: TPlatform[] = ['android', 'ios', 'linux', 'macos', 'windows']
+        const supportedPlatforms: TPlatform[] = [
+            'android',
+            'ios',
+            'linux',
+            'macos',
+            'windows',
+            'androidTV',
+            'appleTV'
+        ]
 
         supportedPlatforms.forEach((platform) => {
             if (!Array.isArray(config.platforms[platform])) {
@@ -236,4 +272,14 @@ function validateTitleStep(step: any, path: string, additionalLocales: string[])
     errors.push(...validateButtons(step.buttons, `${path}.buttons`, additionalLocales))
 
     return errors
+}
+
+function isValidUrl(url: string): boolean {
+    try {
+        // eslint-disable-next-line no-new
+        new URL(url)
+        return true
+    } catch {
+        return false
+    }
 }

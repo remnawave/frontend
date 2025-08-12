@@ -85,6 +85,10 @@ export const cleanupSubscriptionPageConfig = (
 
     const cleanedConfig: ISubscriptionPageAppConfig = {
         ...config,
+        config: {
+            ...config.config,
+            ...(config.config.branding && { branding: config.config.branding })
+        },
         platforms: {
             android: [],
             ios: [],

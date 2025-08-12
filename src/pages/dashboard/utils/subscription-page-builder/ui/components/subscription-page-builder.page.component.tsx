@@ -1,9 +1,13 @@
+/* eslint-disable indent */
 import {
+    Accordion,
     ActionIcon,
     Alert,
+    Box,
     Button,
     Code,
     Container,
+    Divider,
     Flex,
     Grid,
     Group,
@@ -22,6 +26,8 @@ import {
     TbPlus as IconPlus,
     TbChevronDown,
     TbChevronUp,
+    TbDevices,
+    TbSettings,
     TbStar
 } from 'react-icons/tb'
 import { PiAndroidLogo, PiAppleLogo, PiLinuxLogo, PiWindowsLogo } from 'react-icons/pi'
@@ -46,6 +52,7 @@ import { validateSubscriptionPageAppConfig } from '../../model/validators'
 import { createEmptyApp, emptyConfig } from '../../model/config'
 import { autoMigrateConfig } from '../../model/migration.utils'
 import { LanguageSelector } from './language-selector'
+import { BrandingSettings } from './branding-settings'
 import classes from './CustomTabs.module.css'
 import { AppForm } from './app-form'
 
@@ -104,6 +111,28 @@ export const SubscriptionPageBuilderComponent = () => {
         updatedConfig.config.additionalLocales = locales
 
         updatedConfig = cleanupSubscriptionPageConfig(updatedConfig)
+
+        setConfig(updatedConfig)
+    }
+
+    const updateBranding = (branding: { logoUrl?: string; name?: string; supportUrl?: string }) => {
+        const updatedConfig = { ...config }
+
+        const cleanBranding = Object.entries(branding).reduce(
+            (acc, [key, value]) => {
+                if (value !== undefined && value !== '') {
+                    acc[key as keyof typeof branding] = value
+                }
+                return acc
+            },
+            {} as typeof branding
+        )
+
+        if (Object.keys(cleanBranding).length > 0) {
+            updatedConfig.config.branding = cleanBranding
+        } else {
+            delete updatedConfig.config.branding
+        }
 
         setConfig(updatedConfig)
     }
@@ -327,161 +356,261 @@ export const SubscriptionPageBuilderComponent = () => {
                 />
 
                 <Grid>
-                    <Grid.Col span={{ base: 12, md: 4 }}>
+                    <Grid.Col span={{ base: 12, lg: 4 }}>
                         <Stack gap="md">
-                            <LanguageSelector
-                                additionalLocales={config.config.additionalLocales}
-                                onChange={updateAdditionalLocales}
-                            />
+                            <Accordion
+                                chevronPosition="left"
+                                defaultValue="platform"
+                                variant="separated"
+                            >
+                                <Accordion.Item value="config">
+                                    <Accordion.Control>
+                                        <Group gap="xs">
+                                            <TbSettings size={16} />
+                                            <Text fw={500} size="sm">
+                                                {t(
+                                                    'subscription-page-builder.page.component.configuration-settings'
+                                                )}
+                                            </Text>
+                                        </Group>
+                                    </Accordion.Control>
+                                    <Accordion.Panel>
+                                        <Stack gap="md">
+                                            <BrandingSettings
+                                                branding={config.config.branding}
+                                                onChange={updateBranding}
+                                            />
 
-                            <Paper p="md" radius="md" shadow="sm" withBorder>
-                                <Tabs
-                                    classNames={classes}
-                                    onChange={(value) => setActiveTab(value as TPlatform)}
-                                    value={activeTab}
-                                    variant="unstyled"
-                                >
-                                    <Tabs.List grow>
-                                        <Tabs.Tab leftSection={<PiAppleLogo />} value="ios">
-                                            iOS
-                                        </Tabs.Tab>
-                                        <Tabs.Tab leftSection={<PiAndroidLogo />} value="android">
-                                            Android
-                                        </Tabs.Tab>
-                                        <Tabs.Tab leftSection={<PiWindowsLogo />} value="windows">
-                                            Windows
-                                        </Tabs.Tab>
-                                        <Tabs.Tab leftSection={<PiWindowsLogo />} value="macos">
-                                            macOS
-                                        </Tabs.Tab>
-                                        <Tabs.Tab leftSection={<PiWindowsLogo />} value="linux">
-                                            Linux
-                                        </Tabs.Tab>
-                                        <Tabs.Tab leftSection={<PiAndroidLogo />} value="androidTV">
-                                            AndroidTV
-                                        </Tabs.Tab>
-                                        <Tabs.Tab leftSection={<PiAppleLogo />} value="appleTV">
-                                            AppleTV
-                                        </Tabs.Tab>
-                                    </Tabs.List>
-                                </Tabs>
+                                            <Divider my="xs" />
 
-                                <Stack mt="md">
-                                    {config.platforms[activeTab].length === 0 ? (
-                                        <Text c="dimmed" py="xl" ta="center">
-                                            {t(
-                                                'subscription-page-builder.page.component.no-apps-configured-for-this-platform'
-                                            )}
-                                        </Text>
-                                    ) : (
-                                        config.platforms[activeTab].map(
-                                            (app: IAppConfig, index: number) => (
-                                                <Paper
-                                                    key={app.id}
-                                                    p="md"
-                                                    radius="md"
-                                                    shadow={selectedAppId === app.id ? 'lg' : 'xs'}
-                                                    style={{
-                                                        borderColor:
-                                                            selectedAppId === app.id
-                                                                ? `var(--mantine-color-${getPlatformColor(activeTab)}-outline)`
-                                                                : undefined,
-                                                        borderWidth:
-                                                            selectedAppId === app.id ? 2 : 1,
-                                                        cursor: 'pointer',
-                                                        transition: 'all 0.2s ease'
-                                                    }}
-                                                    withBorder
-                                                >
-                                                    <Group
-                                                        align="flex-start"
-                                                        justify="space-between"
+                                            <LanguageSelector
+                                                additionalLocales={config.config.additionalLocales}
+                                                onChange={updateAdditionalLocales}
+                                            />
+                                        </Stack>
+                                    </Accordion.Panel>
+                                </Accordion.Item>
+
+                                <Accordion.Item value="platform">
+                                    <Accordion.Control>
+                                        <Group gap="xs">
+                                            <TbDevices size={16} />
+                                            <Text fw={500} size="sm">
+                                                {t(
+                                                    'subscription-page-builder.page.component.platform-apps'
+                                                )}
+                                            </Text>
+                                        </Group>
+                                    </Accordion.Control>
+                                    <Accordion.Panel>
+                                        <Box>
+                                            <Tabs
+                                                classNames={classes}
+                                                onChange={(value) =>
+                                                    setActiveTab(value as TPlatform)
+                                                }
+                                                value={activeTab}
+                                                variant="unstyled"
+                                            >
+                                                <Tabs.List grow>
+                                                    <Tabs.Tab
+                                                        leftSection={<PiAppleLogo />}
+                                                        value="ios"
                                                     >
-                                                        <div
-                                                            onClick={() => setSelectedAppId(app.id)}
-                                                            style={{
-                                                                flex: 1
-                                                            }}
-                                                        >
-                                                            <Group gap="xs" mb="xs">
-                                                                <ThemeIcon
-                                                                    color={getPlatformColor(
-                                                                        activeTab
-                                                                    )}
-                                                                    radius="md"
-                                                                    size="sm"
-                                                                    variant="light"
-                                                                >
-                                                                    {getPlatformIcon(activeTab)}
-                                                                </ThemeIcon>
-                                                                <Text fw={600} size="sm">
-                                                                    {app.name}
-                                                                </Text>
-                                                                {app.isFeatured && (
-                                                                    <TbStar
-                                                                        color="gold"
-                                                                        size={16}
-                                                                    />
-                                                                )}
-                                                            </Group>
+                                                        iOS
+                                                    </Tabs.Tab>
+                                                    <Tabs.Tab
+                                                        leftSection={<PiAndroidLogo />}
+                                                        value="android"
+                                                    >
+                                                        Android
+                                                    </Tabs.Tab>
+                                                    <Tabs.Tab
+                                                        leftSection={<PiWindowsLogo />}
+                                                        value="windows"
+                                                    >
+                                                        Windows
+                                                    </Tabs.Tab>
+                                                    <Tabs.Tab
+                                                        leftSection={<PiWindowsLogo />}
+                                                        value="macos"
+                                                    >
+                                                        macOS
+                                                    </Tabs.Tab>
+                                                    <Tabs.Tab
+                                                        leftSection={<PiWindowsLogo />}
+                                                        value="linux"
+                                                    >
+                                                        Linux
+                                                    </Tabs.Tab>
+                                                    <Tabs.Tab
+                                                        leftSection={<PiAndroidLogo />}
+                                                        value="androidTV"
+                                                    >
+                                                        AndroidTV
+                                                    </Tabs.Tab>
+                                                    <Tabs.Tab
+                                                        leftSection={<PiAppleLogo />}
+                                                        value="appleTV"
+                                                    >
+                                                        AppleTV
+                                                    </Tabs.Tab>
+                                                </Tabs.List>
+                                            </Tabs>
 
-                                                            <Text c="dimmed" size="xs">
-                                                                {app.urlScheme || 'No URL scheme'}
-                                                            </Text>
-                                                        </div>
-                                                        <Group gap={4}>
-                                                            <Tooltip label="Move up">
-                                                                <ActionIcon
-                                                                    disabled={index === 0}
-                                                                    onClick={(e) => {
-                                                                        e.stopPropagation()
-                                                                        moveAppUp(app.id)
-                                                                    }}
-                                                                    size="sm"
-                                                                    variant="subtle"
+                                            <Stack mt="md">
+                                                {config.platforms[activeTab].length === 0 ? (
+                                                    <Text c="dimmed" py="xl" ta="center">
+                                                        {t(
+                                                            'subscription-page-builder.page.component.no-apps-configured-for-this-platform'
+                                                        )}
+                                                    </Text>
+                                                ) : (
+                                                    config.platforms[activeTab].map(
+                                                        (app: IAppConfig, index: number) => (
+                                                            <Paper
+                                                                key={app.id}
+                                                                p="md"
+                                                                radius="md"
+                                                                shadow={
+                                                                    selectedAppId === app.id
+                                                                        ? 'lg'
+                                                                        : 'xs'
+                                                                }
+                                                                style={{
+                                                                    borderColor:
+                                                                        selectedAppId === app.id
+                                                                            ? `var(--mantine-color-${getPlatformColor(activeTab)}-outline)`
+                                                                            : undefined,
+                                                                    borderWidth:
+                                                                        selectedAppId === app.id
+                                                                            ? 2
+                                                                            : 1,
+                                                                    cursor: 'pointer',
+                                                                    transition: 'all 0.2s ease'
+                                                                }}
+                                                                withBorder
+                                                            >
+                                                                <Group
+                                                                    align="flex-start"
+                                                                    justify="space-between"
                                                                 >
-                                                                    <TbChevronUp />
-                                                                </ActionIcon>
-                                                            </Tooltip>
-                                                            <Tooltip label="Move down">
-                                                                <ActionIcon
-                                                                    disabled={
-                                                                        index ===
-                                                                        config.platforms[activeTab]
-                                                                            .length -
-                                                                            1
-                                                                    }
-                                                                    onClick={(e) => {
-                                                                        e.stopPropagation()
-                                                                        moveAppDown(app.id)
-                                                                    }}
-                                                                    size="sm"
-                                                                    variant="subtle"
-                                                                >
-                                                                    <TbChevronDown />
-                                                                </ActionIcon>
-                                                            </Tooltip>
-                                                        </Group>
-                                                    </Group>
-                                                </Paper>
-                                            )
-                                        )
-                                    )}
+                                                                    <div
+                                                                        onClick={() =>
+                                                                            setSelectedAppId(app.id)
+                                                                        }
+                                                                        style={{
+                                                                            flex: 1
+                                                                        }}
+                                                                    >
+                                                                        <Group gap="xs" mb="xs">
+                                                                            <ThemeIcon
+                                                                                color={getPlatformColor(
+                                                                                    activeTab
+                                                                                )}
+                                                                                radius="md"
+                                                                                size="sm"
+                                                                                variant="light"
+                                                                            >
+                                                                                {getPlatformIcon(
+                                                                                    activeTab
+                                                                                )}
+                                                                            </ThemeIcon>
+                                                                            <Text
+                                                                                fw={600}
+                                                                                size="sm"
+                                                                            >
+                                                                                {app.name}
+                                                                            </Text>
+                                                                            {app.isFeatured && (
+                                                                                <TbStar
+                                                                                    color="gold"
+                                                                                    size={16}
+                                                                                />
+                                                                            )}
+                                                                        </Group>
 
-                                    <Button
-                                        fullWidth
-                                        leftSection={<IconPlus size="16px" />}
-                                        mt="md"
-                                        onClick={addNewApp}
-                                    >
-                                        {t('subscription-page-builder.page.component.add-app')}
-                                    </Button>
-                                </Stack>
-                            </Paper>
+                                                                        <Text c="dimmed" size="xs">
+                                                                            {app.urlScheme ||
+                                                                                'No URL scheme'}
+                                                                        </Text>
+                                                                    </div>
+                                                                    <Group gap={4}>
+                                                                        <Tooltip
+                                                                            label={t(
+                                                                                'subscription-page-builder.page.component.move-up'
+                                                                            )}
+                                                                        >
+                                                                            <ActionIcon
+                                                                                disabled={
+                                                                                    index === 0
+                                                                                }
+                                                                                onClick={(e) => {
+                                                                                    e.stopPropagation()
+                                                                                    moveAppUp(
+                                                                                        app.id
+                                                                                    )
+                                                                                }}
+                                                                                size="sm"
+                                                                                variant="subtle"
+                                                                            >
+                                                                                <TbChevronUp />
+                                                                            </ActionIcon>
+                                                                        </Tooltip>
+                                                                        <Tooltip
+                                                                            label={t(
+                                                                                'subscription-page-builder.page.component.move-down'
+                                                                            )}
+                                                                        >
+                                                                            <ActionIcon
+                                                                                disabled={
+                                                                                    index ===
+                                                                                    config
+                                                                                        .platforms[
+                                                                                        activeTab
+                                                                                    ].length -
+                                                                                        1
+                                                                                }
+                                                                                onClick={(e) => {
+                                                                                    e.stopPropagation()
+                                                                                    moveAppDown(
+                                                                                        app.id
+                                                                                    )
+                                                                                }}
+                                                                                size="sm"
+                                                                                variant="subtle"
+                                                                            >
+                                                                                <TbChevronDown />
+                                                                            </ActionIcon>
+                                                                        </Tooltip>
+                                                                    </Group>
+                                                                </Group>
+                                                            </Paper>
+                                                        )
+                                                    )
+                                                )}
+
+                                                <Button
+                                                    fullWidth
+                                                    leftSection={<IconPlus size="16px" />}
+                                                    mt="md"
+                                                    onClick={addNewApp}
+                                                    radius="md"
+                                                    variant="default"
+                                                >
+                                                    {t(
+                                                        'subscription-page-builder.page.component.add-app'
+                                                    )}
+                                                </Button>
+                                            </Stack>
+                                        </Box>
+                                    </Accordion.Panel>
+                                </Accordion.Item>
+                            </Accordion>
                         </Stack>
                     </Grid.Col>
 
-                    <Grid.Col span={{ base: 12, md: 8 }}>
+                    <Grid.Col span={{ base: 12, lg: 8 }}>
                         <Paper p="md" radius="md" shadow="sm" withBorder>
                             {selectedApp ? (
                                 <AppForm

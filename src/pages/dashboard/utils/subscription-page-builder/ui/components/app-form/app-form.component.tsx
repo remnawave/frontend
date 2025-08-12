@@ -149,15 +149,16 @@ export const AppForm = (props: AppFormProps) => {
                                 <Button
                                     color="red"
                                     component="p"
-                                    leftSection={<PiMinus size="20px" />}
-                                    ml={'xs'}
+                                    leftSection={<PiMinus size="16px" />}
+                                    ml="xs"
                                     onClick={() =>
                                         updateApp({
                                             additionalBeforeAddSubscriptionStep: undefined
                                         })
                                     }
+                                    radius="md"
                                     size="xs"
-                                    variant="outline"
+                                    variant="default"
                                 >
                                     {t('app-form.component.remove-step')}
                                 </Button>
@@ -165,8 +166,8 @@ export const AppForm = (props: AppFormProps) => {
                             {!localApp.additionalBeforeAddSubscriptionStep && (
                                 <Button
                                     component="p"
-                                    leftSection={<PiPlus size="20px" />}
-                                    ml={'xs'}
+                                    leftSection={<PiPlus size="16px" />}
+                                    ml="xs"
                                     onClick={() =>
                                         updateApp({
                                             additionalBeforeAddSubscriptionStep: {
@@ -177,8 +178,9 @@ export const AppForm = (props: AppFormProps) => {
                                             }
                                         })
                                     }
+                                    radius="md"
                                     size="xs"
-                                    variant="outline"
+                                    variant="default"
                                 >
                                     {t('app-form.component.add-step')}
                                 </Button>
@@ -264,8 +266,9 @@ export const AppForm = (props: AppFormProps) => {
                                             additionalAfterAddSubscriptionStep: undefined
                                         })
                                     }
+                                    radius="md"
                                     size="xs"
-                                    variant="outline"
+                                    variant="default"
                                 >
                                     {t('app-form.component.remove-step')}
                                 </Button>
@@ -285,8 +288,9 @@ export const AppForm = (props: AppFormProps) => {
                                             }
                                         })
                                     }
+                                    radius="md"
                                     size="xs"
-                                    variant="outline"
+                                    variant="default"
                                 >
                                     {t('app-form.component.add-step')}
                                 </Button>

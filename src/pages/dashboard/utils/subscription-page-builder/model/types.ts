@@ -40,6 +40,11 @@ export interface IAppConfig {
 
 export interface ISubscriptionPageConfiguration {
     additionalLocales: TAdditionalLocales[]
+    branding?: {
+        logoUrl?: string
+        name?: string
+        supportUrl?: string
+    }
 }
 
 export interface ISubscriptionPageAppConfig {

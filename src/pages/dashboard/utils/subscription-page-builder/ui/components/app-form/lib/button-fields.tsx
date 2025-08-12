@@ -146,7 +146,8 @@ export const ButtonFields = (props: ButtonFieldsProps) => {
                     <Button
                         leftSection={<PiPlus size="24px" />}
                         onClick={() => addButton(localApp, section, updateApp, additionalLocales)}
-                        variant="outline"
+                        radius="md"
+                        variant="default"
                     >
                         {t('button-fields.add-button')}
                     </Button>

@@ -930,7 +930,11 @@
                 "validation-errors": "Validation errors",
                 "invalid-configuration": "Invalid configuration",
                 "the-configuration-did-not-pass-validation": "The configuration did not pass validation.",
-                "close": "Close"
+                "close": "Close",
+                "configuration-settings": "Configuration Settings",
+                "platform-apps": "Platform Apps",
+                "move-up": "Move up",
+                "move-down": "Move down"
             }
         }
     },
@@ -1538,6 +1542,17 @@
             "new-name": "New Name",
             "cancel": "Cancel",
             "save": "Save"
+        }
+    },
+    "branding-settings": {
+        "component": {
+            "branding-settings": "Branding Settings",
+            "brand-name": "Brand Name",
+            "the-name-that-will-be-displayed-on-the-subscription-page": "The name that will be displayed on the subscription page",
+            "url-to-your-brand-logo-image": "URL to your brand logo image",
+            "logo-url": "Logo URL",
+            "link-to-your-support-or-help-page": "Link to your support or help page",
+            "support-url": "Support URL"
         }
     }
 }

@@ -1,4 +1,4 @@
-import { Checkbox, Group, Paper, Stack, Text, Title } from '@mantine/core'
+import { Box, Checkbox, Group, Stack, Text, Title } from '@mantine/core'
 import { useTranslation } from 'react-i18next'
 import { TbLanguage } from 'react-icons/tb'
 
@@ -26,12 +26,12 @@ export const LanguageSelector = (props: LanguageSelectorProps) => {
     }
 
     return (
-        <Paper p="md" radius="md" shadow="sm" withBorder>
+        <Box>
             <Group align="center" gap="xs" mb="xs">
-                <TbLanguage size={20} />
-                <Title order={4}>{t('language-selector.component.additional-languages')}</Title>
+                <TbLanguage size={16} />
+                <Title order={6}>{t('language-selector.component.additional-languages')}</Title>
             </Group>
-            <Text c="dimmed" mb="md" size="sm">
+            <Text c="dimmed" mb="sm" size="xs">
                 {t('language-selector.component.english-is-always-enabled')}
             </Text>
             <Stack gap="xs">
@@ -46,9 +46,10 @@ export const LanguageSelector = (props: LanguageSelectorProps) => {
                             </Group>
                         }
                         onChange={(e) => handleLocaleChange(locale, e.target.checked)}
+                        size="sm"
                     />
                 ))}
             </Stack>
-        </Paper>
+        </Box>
     )
 }
