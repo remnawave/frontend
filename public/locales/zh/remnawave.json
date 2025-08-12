@@ -69,7 +69,7 @@
             "select-all": "全选",
             "cut-selection": "剪切选中项",
             "paste-from-clipboard": "从剪切板中粘贴",
-            "generate-keypair": "Generate Keypair"
+            "generate-keypair": "生成密钥"
         }
     },
     "use-bandwidth-table-columns": {
@@ -394,14 +394,14 @@
         "hide-host": "隐藏主机",
         "hide-host-from-users-remnawave-will-send-host-only-for-raw-subscription-responses": "隐藏用户的主机。Remnawave 将仅发送RAW 订阅。",
         "apps-specific": "特定的应用程序",
-        "single-domain": "Single domain",
-        "default-mode-for-one-domain": "Default mode for one domain",
-        "multi-domain": "Multi domain",
-        "multi-domain-description": "Multiple domains separated by commas. Remnawave will randomly choose one of the domains.",
-        "wildcard-domain": "Wildcard domain",
-        "wildcard-domain-description": "Wildcard pattern for subdomains. Remnawave will replace * with the randomly generated string.",
-        "override-sni-from-address": "Override SNI from Address",
-        "override-sni-from-address-description": "This option replaces the SNI value with the specified Address field value. This is particularly useful for multi-domain configurations or wildcard domains configuration."
+        "single-domain": "单个域名",
+        "default-mode-for-one-domain": "域名的默认模式",
+        "multi-domain": "多个域名",
+        "multi-domain-description": "多个域名用逗号分隔。Remnawave将随机选择其中一个域名。",
+        "wildcard-domain": "通配符域名",
+        "wildcard-domain-description": "子域的通配符模式。Remnawave将以 * 替换为随机生成的字符串。",
+        "override-sni-from-address": "从地址覆盖SNI地址",
+        "override-sni-from-address-description": "此选项用指定的地址字段值替换SNI值。这对于多域配置或通配符域配置特别有用。"
     },
     "base-node-form": {
         "country": "国家",
@@ -930,7 +930,11 @@
                 "validation-errors": "校验错误",
                 "invalid-configuration": "无效配置",
                 "the-configuration-did-not-pass-validation": "配置未通过校验。",
-                "close": "关闭"
+                "close": "关闭",
+                "configuration-settings": "Configuration Settings",
+                "platform-apps": "Platform Apps",
+                "move-up": "Move up",
+                "move-down": "Move down"
             }
         }
     },
@@ -1112,7 +1116,7 @@
             "add-users": "添加用户",
             "edit": "编辑",
             "copy-uuid": "复制 UUID",
-            "rename": "Rename"
+            "rename": "重命名"
         }
     },
     "config-profile-detail-header": {
@@ -1137,7 +1141,7 @@
             "edit-xray-config": "编辑 Xray 配置",
             "xray-config": "Xray 配置",
             "copy-uuid": "复制 UUID",
-            "rename": "Rename"
+            "rename": "重命名"
         }
     },
     "config-profiles-header": {
@@ -1534,10 +1538,21 @@
     },
     "rename-modal": {
         "shared": {
-            "rename": "Rename",
-            "new-name": "New Name",
-            "cancel": "Cancel",
-            "save": "Save"
+            "rename": "重命名",
+            "new-name": "新名称",
+            "cancel": "取消",
+            "save": "保存"
+        }
+    },
+    "branding-settings": {
+        "component": {
+            "branding-settings": "Branding Settings",
+            "brand-name": "Brand Name",
+            "the-name-that-will-be-displayed-on-the-subscription-page": "The name that will be displayed on the subscription page",
+            "url-to-your-brand-logo-image": "URL to your brand logo image",
+            "logo-url": "Logo URL",
+            "link-to-your-support-or-help-page": "Link to your support or help page",
+            "support-url": "Support URL"
         }
     }
 }
