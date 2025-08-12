@@ -69,7 +69,7 @@
             "select-all": "Выделить все",
             "cut-selection": "Вырезать выделенное",
             "paste-from-clipboard": "Вставить из буфера обмена",
-            "generate-keypair": "Generate Keypair"
+            "generate-keypair": "Сгенерировать ключи"
         }
     },
     "use-bandwidth-table-columns": {
