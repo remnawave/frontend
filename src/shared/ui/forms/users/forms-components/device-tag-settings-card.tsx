@@ -99,9 +99,6 @@ export function DeviceTagSettingsCard<
                             leftSection={<TbDevices2 size="16px" />}
                             placeholder="HWID_FALLBACK_DEVICE_LIMIT in use"
                             {...form.getInputProps('hwidDeviceLimit')}
-                            styles={{
-                                label: { fontWeight: 500 }
-                            }}
                         />
                     </Stack>
 

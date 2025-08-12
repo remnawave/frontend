@@ -438,7 +438,7 @@ export const SubscriptionPageBuilderComponent = () => {
                                                         macOS
                                                     </Tabs.Tab>
                                                     <Tabs.Tab
-                                                        leftSection={<PiWindowsLogo />}
+                                                        leftSection={<PiLinuxLogo />}
                                                         value="linux"
                                                     >
                                                         Linux

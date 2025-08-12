@@ -25,7 +25,7 @@
             border-radius: 0 8px 8px 0;
 
             @mixin rtl {
-                border-radius: 0 8px 8px 0;
+                border-radius: 8px 0 0 8px;
             }
         }
 

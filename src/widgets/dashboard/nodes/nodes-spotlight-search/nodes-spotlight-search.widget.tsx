@@ -52,7 +52,7 @@ export const NodesSpotlightSearchWidget = ({ nodes }: IProps) => {
                     <Group>
                         <NodeStatusBadgeWidget node={node} withText={false} />
                         <Badge
-                            color={node.usersOnline! > 0 ? 'teal' : 'gray'}
+                            color={(node.usersOnline ?? 0) > 0 ? 'teal' : 'gray'}
                             leftSection={<PiUsersDuotone size={14} />}
                             miw={'7ch'}
                             radius="md"

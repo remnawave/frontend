@@ -101,9 +101,10 @@ export const cleanupSubscriptionPageConfig = (
     }
 
     Object.keys(config.platforms).forEach((platform) => {
-        cleanedConfig.platforms[platform as keyof typeof config.platforms] = config.platforms[
-            platform as keyof typeof config.platforms
-        ].map((app) => cleanupAppConfig(app, enabledLocales))
+        const platformKey = platform as keyof typeof config.platforms
+        cleanedConfig.platforms[platformKey] = config.platforms[platformKey].map((app) =>
+            cleanupAppConfig(app, enabledLocales)
+        )
     })
 
     return cleanedConfig
