@@ -73,5 +73,8 @@
   "i18n-ally.indent": 4,
   "i18n-ally.extract.keygenStrategy": "slug",
   "i18n-ally.extract.keygenStyle": "default",
-  "i18n-ally.extract.keyPrefix": "{fileNameWithoutExt}."
+  "i18n-ally.extract.keyPrefix": "{fileNameWithoutExt}.",
+  "github-actions.workflows.pinned.workflows": [
+    ".github/workflows/crowdin-sync.yml"
+  ]
 }
