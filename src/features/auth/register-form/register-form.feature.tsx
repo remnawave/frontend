@@ -129,7 +129,6 @@ export const RegisterFormFeature = () => {
 
                         <PasswordInput
                             label={t('register-form.feature.confirm-password')}
-                            mt="md"
                             placeholder="soy_t5Px5`Gm4j0@Hf&Dd7iU"
                             required
                             size="md"
@@ -139,8 +138,8 @@ export const RegisterFormFeature = () => {
                         <Button
                             fullWidth
                             leftSection={<PiShuffleDuotone size="16px" />}
-                            mt="xl"
                             onClick={handleGeneratePassword}
+                            radius="md"
                             size="md"
                             variant="light"
                         >
@@ -153,8 +152,10 @@ export const RegisterFormFeature = () => {
                         leftSection={<PiSignpostDuotone size="16px" />}
                         loading={isLoading}
                         mt="xl"
+                        radius="md"
                         size="md"
                         type="submit"
+                        variant="default"
                     >
                         {t('register-form.feature.sign-up')}
                     </Button>

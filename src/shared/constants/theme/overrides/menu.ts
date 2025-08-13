@@ -1,4 +1,4 @@
-import { Menu } from '@mantine/core'
+import { Combobox, Menu } from '@mantine/core'
 
 export default {
     Menu: Menu.extend({
@@ -7,7 +7,7 @@ export default {
             withArrow: false,
             radius: 'md',
             transitionProps: {
-                transition: 'pop',
+                transition: 'fade',
                 duration: 180,
                 timingFunction: 'ease-out'
             },
@@ -22,6 +22,11 @@ export default {
                     margin: '4px 0'
                 }
             }
+        }
+    }),
+    Combobox: Combobox.extend({
+        defaultProps: {
+            transitionProps: { transition: 'fade', duration: 200 }
         }
     })
 }

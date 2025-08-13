@@ -1,8 +1,14 @@
-import { GetAllHostsCommand, GetConfigProfilesCommand } from '@remnawave/backend-contract'
+import {
+    GetAllHostsCommand,
+    GetAllHostTagsCommand,
+    GetConfigProfilesCommand
+} from '@remnawave/backend-contract'
 
 export interface IProps {
     configProfiles: GetConfigProfilesCommand.Response['response']['configProfiles'] | undefined
     hosts: GetAllHostsCommand.Response['response'] | undefined
+    hostTags: GetAllHostTagsCommand.Response['response']['tags'] | undefined
     isConfigProfilesLoading: boolean
     isHostsLoading: boolean
+    isHostTagsLoading: boolean
 }

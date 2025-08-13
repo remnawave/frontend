@@ -13,7 +13,7 @@ import {
     Title,
     Tooltip
 } from '@mantine/core'
-import { PiCheck, PiCircle, PiCopy, PiCpu, PiTag, PiTrashDuotone } from 'react-icons/pi'
+import { PiCheck, PiCircle, PiCopy, PiCpu, PiPencil, PiTag, PiTrashDuotone } from 'react-icons/pi'
 import { TbChevronDown, TbDownload, TbEdit, TbEye } from 'react-icons/tb'
 import { githubDarkTheme, JsonEditor } from 'json-edit-react'
 import { generatePath, useNavigate } from 'react-router-dom'
@@ -102,6 +102,8 @@ export function ConfigProfilesGridWidget(props: IProps) {
         )
     }
 
+    const isHighCount = configProfiles.length > 6
+
     return (
         <Grid>
             {configProfiles.map((profile, index) => {
@@ -110,13 +112,16 @@ export function ConfigProfilesGridWidget(props: IProps) {
                 const isActive = nodesCount > 0
 
                 return (
-                    <Grid.Col key={profile.uuid} span={{ base: 12, sm: 6, md: 6, lg: 4, xl: 3 }}>
+                    <Grid.Col
+                        key={profile.uuid}
+                        span={{ base: 12, sm: 6, md: 6, lg: 4, xl: 3, '2xl': 2 }}
+                    >
                         <motion.div
                             animate={{ opacity: 1, y: 0 }}
-                            initial={{ opacity: 0, y: 20 }}
+                            initial={{ opacity: 0, y: isHighCount ? 0 : 20 }}
                             transition={{
-                                duration: 0.4,
-                                delay: index * 0.1,
+                                duration: 0.3,
+                                delay: isHighCount ? 0.1 : index * 0.05,
                                 ease: 'easeOut'
                             }}
                         >
@@ -328,6 +333,25 @@ export function ConfigProfilesGridWidget(props: IProps) {
                                                         </Menu.Item>
                                                     )}
                                                 </CopyButton>
+
+                                                <Menu.Item
+                                                    leftSection={<PiPencil size={14} />}
+                                                    onClick={() => {
+                                                        setInternalData({
+                                                            internalState: {
+                                                                name: profile.name,
+                                                                uuid: profile.uuid
+                                                            },
+                                                            modalKey:
+                                                                MODALS.RENAME_SQUAD_OR_CONFIG_PROFILE_MODAL
+                                                        })
+                                                        open(
+                                                            MODALS.RENAME_SQUAD_OR_CONFIG_PROFILE_MODAL
+                                                        )
+                                                    }}
+                                                >
+                                                    {t('config-profiles-grid.widget.rename')}
+                                                </Menu.Item>
 
                                                 <Menu.Item
                                                     color="red"

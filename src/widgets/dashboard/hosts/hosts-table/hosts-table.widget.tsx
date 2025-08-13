@@ -28,7 +28,7 @@ import { useReorderHosts } from '@shared/api/hooks'
 import { IProps } from './interfaces'
 
 export const HostsTableWidget = memo((props: IProps) => {
-    const { configProfiles, hosts, selectedHosts, setSelectedHosts } = props
+    const { configProfiles, hosts, hostTags, selectedHosts, setSelectedHosts } = props
     const [state, handlers] = useListState(hosts || [])
     const [draggedHost, setDraggedHost] = useState<
         GetAllHostsCommand.Response['response'][number] | null
@@ -213,6 +213,7 @@ export const HostsTableWidget = memo((props: IProps) => {
                 configProfiles={configProfiles}
                 handleSearchAddressSelect={handleSearchAddressSelect}
                 handleSearchSelect={handleSearchSelect}
+                hostTags={hostTags}
                 searchAddressData={searchAddressOptions}
                 searchAddressValue={searchAddressValue}
                 searchOptions={searchOptions}

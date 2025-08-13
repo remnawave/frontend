@@ -65,10 +65,11 @@
             "save-anyway-title": "تایید عملیات",
             "load-from-github": "بارگذاری از گیت‌هاب",
             "tools": "ابزارها",
-            "copy-all-content": "Copy all content",
-            "select-all": "Select all",
-            "cut-selection": "Cut selection",
-            "paste-from-clipboard": "Paste from clipboard"
+            "copy-all-content": "کپی همهٔ محتوا",
+            "select-all": "انتخاب همه",
+            "cut-selection": "بریدن محتوای انتخاب شده",
+            "paste-from-clipboard": "جای‌گذاری از کلیپ‌بورد",
+            "generate-keypair": "Generate Keypair"
         }
     },
     "use-bandwidth-table-columns": {
@@ -185,12 +186,16 @@
     },
     "create-host-modal": {
         "widget": {
-            "new-host": "هاست جدید"
+            "new-host": "هاست جدید",
+            "please-select-the-config-profile-and-inbound": "لطفا پروفایل پیکربندی و اینباند را انتخاب کنید",
+            "error": "خطا"
         }
     },
     "edit-host-modal": {
         "widget": {
-            "edit-host": "ویرایش هاست"
+            "edit-host": "ویرایش هاست",
+            "dangling-host-cannot-be-cloned": "Dangling host cannot be cloned",
+            "error": "خطا"
         }
     },
     "hosts-page-header": {
@@ -313,13 +318,13 @@
             "subscription-url-description-line-1": "دامنه و مسیر استخراج شده از فایل .env:",
             "subscription-url-description-line-2": "برای تغییر این مقدار لطفا فایل .env را ویرایش کرده و سپس Remnawave را با این کامند ریستارت کنید:",
             "view-accessible-nodes": "مشاهده نودهای در دسترس",
-            "fetching-user-data": "Fetching user data...",
-            "more-actions": "More Actions",
-            "management": "Management",
-            "danger-zone": "Danger Zone",
-            "information": "Information",
-            "detailed-info": "Detailed Info",
-            "subscription": "Subscription"
+            "fetching-user-data": "درحال دریافت اطلاعات کاربر",
+            "more-actions": "عملیات بیشتر",
+            "management": "مدیریت",
+            "danger-zone": "هشدار",
+            "information": "اطلاعات",
+            "detailed-info": "اطلاعات دقیق",
+            "subscription": "اشتراک"
         }
     },
     "base-api-token-form": {
@@ -375,13 +380,28 @@
         "server-description-line-3": "برای کسب اطلاعات بیشتر",
         "server-description-line-4": "این مقدار توسط Remnawave به صورت Base64 رمزنگاری می‌شود. لطفا مقدار رمزنگاری شده وارد نکنید.",
         "server-description-placeholder": "حداکثر 30 کاراکتر",
-        "this-will-only-be-used-for-xray-json-output": "This will only be used for Xray-JSON output.",
-        "please-ensure-you-provide-a-valid-json-mux-object": "Please ensure you provide a valid JSON MUX object.",
-        "for-more-information-refer-to": "For more information, refer to",
-        "xtls-documentation": "XTLS documentation",
-        "paste-default-mux-params": "Paste default Mux Params",
-        "please-ensure-you-provide-a-valid-json-sockopt-object": "Please ensure you provide a valid JSON Sockopt object.",
-        "paste-default-sockopt-params": "Paste default Sockopt Params"
+        "this-will-only-be-used-for-xray-json-output": "این مقادیر فقط در خروجی Xray-JSON استفاده خواهد شد.",
+        "please-ensure-you-provide-a-valid-json-mux-object": "لطفا از صحت JSON وارد شده برای Mux اطمینان حاصل کنید",
+        "for-more-information-refer-to": "برای اطلاعات بیشتر مراجعه کنید به",
+        "xtls-documentation": "مستندات XTLS",
+        "paste-default-mux-params": "جای‌گذاری پارامترهای پیش‌فرض Mux",
+        "please-ensure-you-provide-a-valid-json-sockopt-object": "لطفا از صحت JSON وارد شده برای Sockopt اطمینان حاصل کنید",
+        "paste-default-sockopt-params": "جای‌گذاری پارامترهای پیش‌فرض Sockopt",
+        "basic": "ساده",
+        "advanced": "پیشرفته",
+        "connection-overrides": "Connection overrides",
+        "xray-json-and-raw": "Xray Json & Raw",
+        "hide-host": "مخفی کردن هاست",
+        "hide-host-from-users-remnawave-will-send-host-only-for-raw-subscription-responses": "مخفی کردن هاست از کاربران، Remnawave این هاست را فقط برای درخواست‌های اشتراک خام ارسال خواهد کرد",
+        "apps-specific": "Apps specific",
+        "single-domain": "تک‌دامنه",
+        "default-mode-for-one-domain": "حالت پیشفرض برای یک دامنه",
+        "multi-domain": "چند دامنه",
+        "multi-domain-description": "چندین دامنه که با کاما (,) جدا شده‌اند، Remnawave یکی از دامنه‌ها را به صورت تصادفی انتخاب خواهد کرد.",
+        "wildcard-domain": "دامنه wildcard",
+        "wildcard-domain-description": "الگوی wildcard برای دامنه. Remnawave به جای * یک رشته متنی رندوم جایگذاری خواهد کرد",
+        "override-sni-from-address": "بازنویسی SNI از آدرس دامنه",
+        "override-sni-from-address-description": "این گزینه مقدار SNI را با آدرس مشخص شده جایگزین خواهد کرد که برای کانفیگ‌های چند دامنه‌ای و wildcard قابل استفاده می‌باشد"
     },
     "base-node-form": {
         "country": "کشور",
@@ -910,7 +930,11 @@
                 "validation-errors": "خطاهای اعتبارسنجی",
                 "invalid-configuration": "پیکربندی نامعتبر",
                 "the-configuration-did-not-pass-validation": "پیکربندی از اعتبارسنجی عبور نکرد.",
-                "close": "بستن"
+                "close": "بستن",
+                "configuration-settings": "Configuration Settings",
+                "platform-apps": "Platform Apps",
+                "move-up": "Move up",
+                "move-down": "Move down"
             }
         }
     },
@@ -939,7 +963,9 @@
         "add-button": "افزودن دکمه",
         "remove-button": "حذف دکمه",
         "button-link": "لینک دکمه",
-        "button-text": "متن دکمه"
+        "button-text": "متن دکمه",
+        "enter-button-text": "متن دکمه را وارد کنید",
+        "english": "انگلیسی"
     },
     "subscription-tabs": {
         "widget": {
@@ -955,10 +981,10 @@
             "error": "خطا",
             "save-settings": "ذخیره تنظیمات",
             "save-your-subscription-settings-to-apply-changes": "برای اعمال تغییرات تنظیمات اشتراک را ذخیره کنید",
-            "announce-and-routing": "Announce & Routing",
-            "announce-and-routing-description": "Configure announce message and routing rules for supported clients",
-            "announce-description": "This text will be displayed beneath the subscription name in supported clients such as Happ and v2rayTUN",
-            "enter-announce-text-max-200-characters": "Enter Announce text, max. 200 characters"
+            "announce-and-routing": "پیام اعلامیه و روتینگ",
+            "announce-and-routing-description": "پیکربندی پیام اعلامیه و قوانین روتینگ برای کلاینت‌های پشتیبانی شده",
+            "announce-description": "این متن زیر اسم اشتراک در نرم‌افزارهای پشتیبانی شده مثل Happ و v2rayTUN نمایش داده خواهد شد",
+            "enter-announce-text-max-200-characters": "پیام اعلامیه را وارد کنید، حداکثر 200 حرف."
         }
     },
     "nodes-realtime-metrics": {
@@ -1086,10 +1112,11 @@
             "inbounds": "اینباندها",
             "users": "کاربران",
             "edit-inbounds": "ویرایش اینباندها",
-            "remove-users": "Remove users",
-            "add-users": "Add users",
-            "edit": "Edit",
-            "copy-uuid": "Copy UUID"
+            "remove-users": "پاک کردن کاربران",
+            "add-users": "افزودن کاربران",
+            "edit": "ویرایش",
+            "copy-uuid": "کپی UUID",
+            "rename": "تغییر نام"
         }
     },
     "config-profile-detail-header": {
@@ -1112,8 +1139,9 @@
             "download": "دانلود",
             "quick-view": "نمای سریع",
             "edit-xray-config": "ویرایش پیکربندی Xray",
-            "xray-config": "Xray Config",
-            "copy-uuid": "Copy UUID"
+            "xray-config": "Xray کانفیگ",
+            "copy-uuid": "کپی UUID",
+            "rename": "تغییر نام"
         }
     },
     "config-profiles-header": {
@@ -1331,8 +1359,8 @@
                 "selected": "انتخاب شده",
                 "unselected": "انتخاب نشده",
                 "edit-internal-squad": "ویرایش اسکواد",
-                "selected-inbounds": "Selected inbounds: {{count}}",
-                "save-changes": "Save changes"
+                "selected-inbounds": "اینباندهای انتخاب شده: {{count}}",
+                "save-changes": "ذخیره تغییرات"
             }
         }
     },
@@ -1405,7 +1433,8 @@
             "select-config-profile": "انتخاب پروفایل تنظیمات",
             "select-inbound": "انتخاب اینباند",
             "search-by-remark": "جستجو بر اساس توضیحات...",
-            "address": "آدرس"
+            "address": "آدرس",
+            "filter-by-tags": "فیلتر بر اساس برچسب"
         }
     },
     "mobile-warning-overlay": {
@@ -1447,35 +1476,83 @@
     },
     "restart-node-button": {
         "feature": {
-            "restart": "Restart"
+            "restart": "راه‌اندازی مجدد"
         }
     },
     "node-details-card": {
-        "show-zero-values": "Show zero values",
-        "hide-zero-values": "Hide zero values",
-        "no-inbound-traffic-data": "No inbound traffic data",
-        "no-outbound-traffic-data": "No outbound traffic data",
+        "show-zero-values": "نمایش مقادیر صفر",
+        "hide-zero-values": "مخفی‌سازی مقادیر صفر",
+        "no-inbound-traffic-data": "اطلاعات ترافیک اینباند موجود نمی‌باشد",
+        "no-outbound-traffic-data": "اطلاعات ترافیک اوتباند موجود نمی‌باشد",
         "widget": {
-            "node-details": "Node Details",
-            "enable-node": "Enable Node",
-            "disable-node": "Disable Node",
-            "config-profile-or-inbounds-is-missing": "Config profile or inbounds is missing",
-            "xray-core-version": "Xray Core Version",
-            "remnawave-node-version": "Node version, @remnawave/node"
+            "node-details": "مشخصات نود",
+            "enable-node": "فعالسازی نود",
+            "disable-node": "غیرفعالسازی نود",
+            "config-profile-or-inbounds-is-missing": "پروفایل پیکربندی یا اینباند وجود ندارد",
+            "xray-core-version": "نسخه هسته Xray",
+            "remnawave-node-version": "نسخه نود، @remnawave/node"
         }
     },
     "config-profiles": {
         "drawer": {
             "widget": {
-                "config-profiles": "Config Profiles",
-                "no-profile-selected": "No profile selected",
-                "no-inbounds-selected": "No inbounds selected",
-                "choose-config-profile-to-apply-to-the-node": "Choose Config Profile to apply to the node.",
-                "apply-changes": "Apply changes",
-                "search-profiles-or-inbounds": "Search profiles or inbounds...",
-                "no-profiles-or-inbounds-found": "No profiles or inbounds found",
-                "no-config-profiles-available": "No config profiles available"
+                "config-profiles": "پروفایل‌های پیکربندی",
+                "no-profile-selected": "پروفایلی انتخاب نشده",
+                "no-inbounds-selected": "اینباندی انتخاب نشده است",
+                "choose-config-profile-to-apply-to-the-node": "پروفایل پیکربندی‌ای که روی نود اعمال خواهد شد را انتخاب کنید.",
+                "apply-changes": "اعمال تغییرات",
+                "search-profiles-or-inbounds": "جستجوی پروفایل یا اینباند...",
+                "no-profiles-or-inbounds-found": "پروفایل یا اینباندی یافت نشد",
+                "no-config-profiles-available": "پروفایل پیکربندی‌ای موجود نیست"
             }
+        }
+    },
+    "language-selector": {
+        "component": {
+            "persian": "فارسی",
+            "russian": "روسی",
+            "chinese": "چینی",
+            "additional-languages": "زبان‌های بیشتر",
+            "english-is-always-enabled": "انگلیسی همیشه فعال می‌باشد",
+            "english": "انگلیسی"
+        }
+    },
+    "node-stats": {
+        "card": {
+            "stats": "آمار",
+            "traffic-refill-in-days": "شارژ ترافیک در (روز):",
+            "represents-the-uptime-of-the-xray-core": "نشان‌دهنده آپتایم هسته Xray"
+        }
+    },
+    "nodes-spotlight-search": {
+        "widget": {
+            "no-nodes-found": "هیچ نودی یافت نشد...",
+            "search-by-name-or-address": "جست‌وجو براساس نام یا آدرس"
+        }
+    },
+    "host-tags-input": {
+        "tag-can-only-contain-uppercase-letters-numbers-underscores-and-colons": "برچسب باید فقط شامل حروف بزرگ، ارقام، آندرلاین و دونقطه باشد",
+        "tag-must-be-less-than-32-characters": "طول برچسب باید زیر 32 کاراکتر باشد",
+        "tags-are-not-visible-to-end-users-tag-will-be-sent-with-raw-subscription-only": "برچسب‌ها برای کاربران قابل مشاهده نیستند و فقط با اشتراک خام ارسال خواهند شد.",
+        "clear-value": "پاکسازی مقدار"
+    },
+    "rename-modal": {
+        "shared": {
+            "rename": "تغییر نام",
+            "new-name": "نام جدید",
+            "cancel": "لغو",
+            "save": "ذخیره"
+        }
+    },
+    "branding-settings": {
+        "component": {
+            "branding-settings": "Branding Settings",
+            "brand-name": "Brand Name",
+            "the-name-that-will-be-displayed-on-the-subscription-page": "The name that will be displayed on the subscription page",
+            "url-to-your-brand-logo-image": "URL to your brand logo image",
+            "logo-url": "Logo URL",
+            "link-to-your-support-or-help-page": "Link to your support or help page",
+            "support-url": "Support URL"
         }
     }
 }

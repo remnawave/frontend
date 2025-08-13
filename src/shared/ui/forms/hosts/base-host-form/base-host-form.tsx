@@ -1,8 +1,8 @@
 import {
     ActionIcon,
     Button,
-    Collapse,
     Drawer,
+    Fieldset,
     Group,
     HoverCard,
     JsonInput,
@@ -11,18 +11,20 @@ import {
     Select,
     Stack,
     Switch,
+    Tabs,
     Text,
     TextInput,
-    Tooltip
+    Tooltip,
+    Transition
 } from '@mantine/core'
 import {
     PiArrowUpDuotone,
-    PiCaretDown,
-    PiCaretUp,
     PiCopyDuotone,
     PiFloppyDiskDuotone,
+    PiGearSixDuotone,
     PiInfo,
     PiNetwork,
+    PiNoteDuotone,
     PiPencilDuotone
 } from 'react-icons/pi'
 import {
@@ -36,15 +38,19 @@ import { HiQuestionMarkCircle } from 'react-icons/hi'
 import { TbCloudNetwork } from 'react-icons/tb'
 import { useDisclosure } from '@mantine/hooks'
 import { useTranslation } from 'react-i18next'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import { HappLogo } from '@pages/dashboard/utils/happ-routing-builder/ui/components/happ-routing-builder.page.component'
 import { HostSelectInboundFeature } from '@features/ui/dashboard/hosts/host-select-inbound/host-select-inbound.feature'
+import { HostTagsInputWidget } from '@widgets/dashboard/hosts/host-tags-input/host-tags-input'
 import { PopoverWithInfoShared } from '@shared/ui/popovers/popover-with-info'
 import { DeleteHostFeature } from '@features/ui/dashboard/hosts/delete-host'
 import { TemplateInfoPopoverShared } from '@shared/ui/popovers'
 import { ModalFooter } from '@shared/ui/modal-footer'
+import { handleFormErrors } from '@shared/utils/misc'
 
+import classes from './HostTabs.module.css'
 import { IProps } from './interfaces'
 
 const basicXHttpExtraParams = `{
@@ -123,19 +129,13 @@ const basicSockoptParams = `{
 export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCommand.Request>(
     props: IProps<T>
 ) => {
-    const {
-        form,
-        advancedOpened,
-        handleSubmit,
-        configProfiles,
-        setAdvancedOpened,
-        isSubmitting,
-        handleCloneHost
-    } = props
+    const { form, handleSubmit, configProfiles, isSubmitting, handleCloneHost } = props
 
     const { t } = useTranslation()
     const [opened, { open, close }] = useDisclosure(false)
     const [muxParamsOpened, { open: openMuxParams, close: closeMuxParams }] = useDisclosure(false)
+    const [activeTab, setActiveTab] = useState<null | string>('basic')
+
     const [sockoptParamsOpened, { open: openSockoptParams, close: closeSockoptParams }] =
         useDisclosure(false)
 
@@ -180,341 +180,557 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
         })
     }
 
+    useEffect(() => {
+        handleFormErrors(form, form.errors)
+    }, [form.errors])
+
+    const patternHoverCard = (showSingle = true, showMulti = true, showWildcard = true) => {
+        return (
+            <HoverCard shadow="md" width={300} withArrow>
+                <HoverCard.Target>
+                    <ActionIcon color="gray" size="xs" variant="subtle">
+                        <HiQuestionMarkCircle size={20} />
+                    </ActionIcon>
+                </HoverCard.Target>
+                <HoverCard.Dropdown>
+                    <Stack gap="md">
+                        <Stack gap="sm">
+                            {showSingle && (
+                                <Stack gap={0}>
+                                    <Text fw={600} mb={4} size="sm">
+                                        {t('base-host-form.single-domain')}
+                                    </Text>
+                                    <Text c="dimmed" mb={6} size="xs">
+                                        {t('base-host-form.default-mode-for-one-domain')}
+                                    </Text>
+                                    <Text c="blue" ff="monospace" size="xs">
+                                        eu.node.com
+                                    </Text>
+                                </Stack>
+                            )}
+
+                            {showMulti && (
+                                <Stack gap={0}>
+                                    <Text fw={600} mb={4} size="sm">
+                                        {t('base-host-form.multi-domain')}
+                                    </Text>
+                                    <Text c="dimmed" mb={6} size="xs">
+                                        {t('base-host-form.multi-domain-description')}
+                                    </Text>
+                                    <Text c="blue" ff="monospace" size="xs">
+                                        eu.node.com,us.node.com,au.node.com
+                                    </Text>
+                                </Stack>
+                            )}
+
+                            {showWildcard && (
+                                <Stack gap={0}>
+                                    <Text fw={600} mb={4} size="sm">
+                                        {t('base-host-form.wildcard-domain')}
+                                    </Text>
+                                    <Text c="dimmed" mb={6} size="xs">
+                                        {t('base-host-form.wildcard-domain-description')}
+                                    </Text>
+                                    <Text c="blue" ff="monospace" size="xs">
+                                        *.node.com
+                                    </Text>
+                                </Stack>
+                            )}
+                        </Stack>
+                    </Stack>
+                </HoverCard.Dropdown>
+            </HoverCard>
+        )
+    }
+
     return (
         <form onSubmit={handleSubmit}>
-            <Stack gap="md">
-                <Group gap="xs" justify="space-between">
-                    <Text fw={500} size="sm">
-                        {t('base-host-form.host-visibility')}
-                    </Text>
-                    <Switch
-                        color="teal.8"
-                        key={form.key('isDisabled')}
-                        radius="md"
-                        size="md"
-                        {...form.getInputProps('isDisabled', { type: 'checkbox' })}
-                    />
-                </Group>
-
-                <TextInput
-                    key={form.key('remark')}
-                    label={t('base-host-form.remark')}
-                    {...form.getInputProps('remark')}
-                    leftSection={<TemplateInfoPopoverShared />}
-                    required
+            <Group gap="xs" justify="space-between" mb="md">
+                <Text fw={500} size="sm">
+                    {t('base-host-form.host-visibility')}
+                </Text>
+                <Switch
+                    color="teal.8"
+                    key={form.key('isDisabled')}
+                    radius="md"
+                    size="md"
+                    {...form.getInputProps('isDisabled', { type: 'checkbox' })}
                 />
+            </Group>
 
-                <Stack gap="xs">
-                    <HostSelectInboundFeature
-                        activeConfigProfileInbound={
-                            form.getValues().inbound?.configProfileInboundUuid ?? undefined
-                        }
-                        activeConfigProfileUuid={
-                            form.getValues().inbound?.configProfileUuid ?? undefined
-                        }
-                        configProfiles={configProfiles}
-                        onSaveInbound={saveInbound}
-                    />
+            <Tabs classNames={classes} onChange={setActiveTab} value={activeTab} variant="unstyled">
+                <Tabs.List grow mb="md">
+                    <Tabs.Tab key="basic" leftSection={<PiNoteDuotone size={16} />} value="basic">
+                        {t('base-host-form.basic')}
+                    </Tabs.Tab>
 
-                    <Text c="dimmed" size="xs">
-                        {t('base-host-form.select-one-inbound-to-apply-to-the-host')}
-                    </Text>
-                </Stack>
-
-                <Stack gap="md">
-                    <Group
-                        gap="xs"
-                        grow
-                        justify="space-between"
-                        preventGrowOverflow={false}
-                        w="100%"
+                    <Tabs.Tab
+                        key="advanced"
+                        leftSection={<PiGearSixDuotone size={16} />}
+                        value="advanced"
                     >
-                        <TextInput
-                            key={form.key('address')}
-                            label={t('base-host-form.address')}
-                            leftSection={
-                                <PopoverWithInfoShared
-                                    text={
-                                        <>
-                                            {t('base-host-form.address-description-line-1')}
-                                            <br />
-                                            {t('base-host-form.address-description-line-2')}
-                                        </>
-                                    }
-                                />
-                            }
-                            {...form.getInputProps('address')}
-                            placeholder={t('base-host-form.e-g-example-com')}
-                            required
-                            w="75%"
-                        />
+                        {t('base-host-form.advanced')}
+                    </Tabs.Tab>
+                </Tabs.List>
 
-                        <NumberInput
-                            key={form.key('port')}
-                            label={t('base-host-form.port')}
-                            {...form.getInputProps('port')}
-                            allowDecimal={false}
-                            allowNegative={false}
-                            clampBehavior="strict"
-                            decimalScale={0}
-                            hideControls
-                            leftSection={
-                                <PopoverWithInfoShared
-                                    text={
-                                        <>
-                                            {t('base-host-form.port-description-line-1')}
-                                            <br />
-                                            <br />
-                                            {t('base-host-form.port-description-line-2')}
-                                        </>
-                                    }
-                                />
-                            }
-                            max={65535}
-                            min={1}
-                            placeholder={t('base-host-form.e-g-443')}
-                            required
-                            w="20%"
-                        />
-                    </Group>
-
-                    <Button
-                        onClick={() => setAdvancedOpened(!advancedOpened)}
-                        rightSection={
-                            advancedOpened ? <PiCaretUp size="16px" /> : <PiCaretDown size="16px" />
-                        }
-                        variant="subtle"
+                <Tabs.Panel value="basic">
+                    <Transition
+                        duration={200}
+                        mounted={activeTab === 'basic'}
+                        timingFunction="linear"
+                        transition="fade"
                     >
-                        {t('base-host-form.advanced-options')}
-                    </Button>
+                        {(styles) => (
+                            <Stack gap="md" style={styles}>
+                                <TextInput
+                                    key={form.key('remark')}
+                                    label={t('base-host-form.remark')}
+                                    {...form.getInputProps('remark')}
+                                    leftSection={<TemplateInfoPopoverShared />}
+                                    required
+                                />
 
-                    <Collapse in={advancedOpened}>
-                        <Stack gap="md">
-                            <TextInput
-                                key={form.key('sni')}
-                                label="SNI"
-                                leftSection={
-                                    <PopoverWithInfoShared
-                                        text={
-                                            <>
-                                                {t('base-host-form.sni-description-line-1')}
-                                                <br />
-                                                <br />
-                                                {t('base-host-form.sni-description-line-2')}
-                                            </>
+                                <Stack gap="xs">
+                                    <HostSelectInboundFeature
+                                        activeConfigProfileInbound={
+                                            form.getValues().inbound?.configProfileInboundUuid ??
+                                            undefined
                                         }
+                                        activeConfigProfileUuid={
+                                            form.getValues().inbound?.configProfileUuid ?? undefined
+                                        }
+                                        configProfiles={configProfiles}
+                                        onSaveInbound={saveInbound}
                                     />
-                                }
-                                placeholder={t('base-host-form.sni-e-g-example-com')}
-                                {...form.getInputProps('sni')}
-                            />
 
-                            <Group
-                                gap="xs"
-                                grow
-                                justify="space-between"
-                                preventGrowOverflow={false}
-                                w="100%"
-                            >
-                                <TextInput
-                                    key={form.key('host')}
-                                    label={t('base-host-form.host')}
-                                    placeholder={t('base-host-form.host-e-g-example-com')}
-                                    {...form.getInputProps('host')}
-                                    w="55%"
-                                />
-                                <TextInput
-                                    key={form.key('path')}
-                                    label={t('base-host-form.path')}
-                                    placeholder={t('base-host-form.path-e-g-ws')}
-                                    {...form.getInputProps('path')}
-                                    w="40%"
-                                />
-                            </Group>
-
-                            <Select
-                                allowDeselect={false}
-                                clearable={false}
-                                data={Object.values(SECURITY_LAYERS).map((securityLayer) => ({
-                                    label: securityLayerLabels[securityLayer] || securityLayer,
-                                    value: securityLayer
-                                }))}
-                                key={form.key('securityLayer')}
-                                label={t('base-host-form.security-layer')}
-                                leftSection={
-                                    <Tooltip
-                                        events={{ hover: true, focus: true, touch: false }}
-                                        label={t(
-                                            'base-host-form.here-you-can-override-security-settings-from-xtls-config'
+                                    <Text c="dimmed" size="xs">
+                                        {t(
+                                            'base-host-form.select-one-inbound-to-apply-to-the-host'
                                         )}
-                                        multiline
-                                        offset={10}
-                                        transitionProps={{ duration: 200 }}
-                                        w={220}
-                                        withArrow
-                                    >
-                                        <span
-                                            style={{
-                                                cursor: 'pointer',
-                                                display: 'flex',
-                                                alignItems: 'center'
-                                            }}
-                                        >
-                                            <PiInfo size="20px" />
-                                        </span>
-                                    </Tooltip>
-                                }
-                                {...form.getInputProps('securityLayer')}
-                            />
+                                    </Text>
+                                </Stack>
 
-                            <TextInput
-                                description={t('base-host-form.server-description-description')}
-                                key={form.key('serverDescription')}
-                                label={
-                                    <Group gap={4} justify="flex-start">
-                                        <Text fw={600} size="sm">
-                                            {t('base-host-form.server-description-header')}
-                                        </Text>
-                                        <HoverCard shadow="md" width={280} withArrow>
-                                            <HoverCard.Target>
-                                                <ActionIcon color="gray" size="xs" variant="subtle">
-                                                    <HiQuestionMarkCircle size={20} />
-                                                </ActionIcon>
-                                            </HoverCard.Target>
-                                            <HoverCard.Dropdown>
-                                                <Stack gap="sm">
+                                <Group
+                                    gap="xs"
+                                    grow
+                                    justify="space-between"
+                                    preventGrowOverflow={false}
+                                    w="100%"
+                                >
+                                    <TextInput
+                                        key={form.key('address')}
+                                        label={t('base-host-form.address')}
+                                        leftSection={
+                                            <PopoverWithInfoShared
+                                                text={
+                                                    <>
+                                                        {t(
+                                                            'base-host-form.address-description-line-1'
+                                                        )}
+                                                        <br />
+                                                        {t(
+                                                            'base-host-form.address-description-line-2'
+                                                        )}
+                                                    </>
+                                                }
+                                            />
+                                        }
+                                        {...form.getInputProps('address')}
+                                        placeholder={t('base-host-form.e-g-example-com')}
+                                        required
+                                        rightSection={patternHoverCard(true, true, true)}
+                                        w="65%"
+                                    />
+
+                                    <NumberInput
+                                        key={form.key('port')}
+                                        label={t('base-host-form.port')}
+                                        {...form.getInputProps('port')}
+                                        allowDecimal={false}
+                                        allowNegative={false}
+                                        clampBehavior="strict"
+                                        decimalScale={0}
+                                        hideControls
+                                        leftSection={
+                                            <PopoverWithInfoShared
+                                                text={
+                                                    <>
+                                                        {t(
+                                                            'base-host-form.port-description-line-1'
+                                                        )}
+                                                        <br />
+                                                        <br />
+                                                        {t(
+                                                            'base-host-form.port-description-line-2'
+                                                        )}
+                                                    </>
+                                                }
+                                            />
+                                        }
+                                        max={65535}
+                                        min={1}
+                                        placeholder={t('base-host-form.e-g-443')}
+                                        required
+                                        w="30%"
+                                    />
+                                </Group>
+
+                                <HostTagsInputWidget
+                                    key={form.key('tag')}
+                                    {...form.getInputProps('tag')}
+                                    value={form.getValues().tag}
+                                />
+                            </Stack>
+                        )}
+                    </Transition>
+                </Tabs.Panel>
+
+                <Tabs.Panel value="advanced">
+                    <Transition
+                        duration={200}
+                        mounted={activeTab === 'advanced'}
+                        timingFunction="linear"
+                        transition="fade"
+                    >
+                        {(styles) => (
+                            <Stack gap="md" style={styles}>
+                                <Fieldset legend={t('base-host-form.connection-overrides')}>
+                                    <Stack gap="xs">
+                                        <TextInput
+                                            key={form.key('sni')}
+                                            label="SNI"
+                                            leftSection={
+                                                <PopoverWithInfoShared
+                                                    text={
+                                                        <>
+                                                            {t(
+                                                                'base-host-form.sni-description-line-1'
+                                                            )}
+                                                            <br />
+                                                            <br />
+                                                            {t(
+                                                                'base-host-form.sni-description-line-2'
+                                                            )}
+                                                        </>
+                                                    }
+                                                />
+                                            }
+                                            placeholder={t('base-host-form.sni-e-g-example-com')}
+                                            rightSection={patternHoverCard(true, false, true)}
+                                            {...form.getInputProps('sni')}
+                                        />
+
+                                        <Group gap="xs" justify="space-between">
+                                            <Group gap={4}>
+                                                <Text fw={600} size="sm">
+                                                    {t('base-host-form.override-sni-from-address')}
+                                                </Text>
+                                                <HoverCard shadow="md" width={280} withArrow>
+                                                    <HoverCard.Target>
+                                                        <ActionIcon
+                                                            color="gray"
+                                                            size="xs"
+                                                            variant="subtle"
+                                                        >
+                                                            <HiQuestionMarkCircle size={20} />
+                                                        </ActionIcon>
+                                                    </HoverCard.Target>
+                                                    <HoverCard.Dropdown>
+                                                        <Stack gap="sm">
+                                                            <Text c="dimmed" size="sm">
+                                                                {t(
+                                                                    'base-host-form.override-sni-from-address-description'
+                                                                )}
+                                                            </Text>
+                                                        </Stack>
+                                                    </HoverCard.Dropdown>
+                                                </HoverCard>
+                                            </Group>
+                                            <Switch
+                                                color="teal.8"
+                                                key={form.key('overrideSniFromAddress')}
+                                                radius="md"
+                                                size="md"
+                                                {...form.getInputProps('overrideSniFromAddress', {
+                                                    type: 'checkbox'
+                                                })}
+                                            />
+                                        </Group>
+
+                                        <Group
+                                            gap="xs"
+                                            grow
+                                            justify="space-between"
+                                            preventGrowOverflow={false}
+                                            w="100%"
+                                        >
+                                            <TextInput
+                                                key={form.key('host')}
+                                                label={t('base-host-form.host')}
+                                                placeholder={t(
+                                                    'base-host-form.host-e-g-example-com'
+                                                )}
+                                                rightSection={patternHoverCard(true, false, true)}
+                                                {...form.getInputProps('host')}
+                                                w="55%"
+                                            />
+                                            <TextInput
+                                                key={form.key('path')}
+                                                label={t('base-host-form.path')}
+                                                placeholder={t('base-host-form.path-e-g-ws')}
+                                                {...form.getInputProps('path')}
+                                                w="40%"
+                                            />
+                                        </Group>
+
+                                        <Select
+                                            allowDeselect={false}
+                                            clearable={false}
+                                            data={Object.values(SECURITY_LAYERS).map(
+                                                (securityLayer) => ({
+                                                    label:
+                                                        securityLayerLabels[securityLayer] ||
+                                                        securityLayer,
+                                                    value: securityLayer
+                                                })
+                                            )}
+                                            key={form.key('securityLayer')}
+                                            label={t('base-host-form.security-layer')}
+                                            leftSection={
+                                                <Tooltip
+                                                    events={{
+                                                        hover: true,
+                                                        focus: true,
+                                                        touch: false
+                                                    }}
+                                                    label={t(
+                                                        'base-host-form.here-you-can-override-security-settings-from-xtls-config'
+                                                    )}
+                                                    multiline
+                                                    offset={10}
+                                                    transitionProps={{ duration: 200 }}
+                                                    w={220}
+                                                    withArrow
+                                                >
+                                                    <span
+                                                        style={{
+                                                            cursor: 'pointer',
+                                                            display: 'flex',
+                                                            alignItems: 'center'
+                                                        }}
+                                                    >
+                                                        <PiInfo size="20px" />
+                                                    </span>
+                                                </Tooltip>
+                                            }
+                                            {...form.getInputProps('securityLayer')}
+                                        />
+
+                                        <Group
+                                            gap="xs"
+                                            grow
+                                            justify="space-between"
+                                            preventGrowOverflow={false}
+                                            w="100%"
+                                        >
+                                            <Select
+                                                clearable
+                                                data={Object.values(ALPN).map((alpn) => ({
+                                                    label: alpn,
+                                                    value: alpn
+                                                }))}
+                                                key={form.key('alpn')}
+                                                label="ALPN"
+                                                placeholder={t('base-host-form.alpn-e-g-h2')}
+                                                {...form.getInputProps('alpn')}
+                                                w="40%"
+                                            />
+
+                                            <Select
+                                                clearable
+                                                data={Object.values(FINGERPRINTS).map(
+                                                    (fingerprint) => ({
+                                                        label: fingerprint,
+                                                        value: fingerprint
+                                                    })
+                                                )}
+                                                key={form.key('fingerprint')}
+                                                label={t('base-host-form.fingerprint')}
+                                                placeholder={t(
+                                                    'base-host-form.fingerprint-e-g-chrome'
+                                                )}
+                                                {...form.getInputProps('fingerprint')}
+                                                w="55%"
+                                            />
+                                        </Group>
+                                    </Stack>
+                                </Fieldset>
+
+                                <Fieldset legend={t('base-host-form.xray-json-and-raw')}>
+                                    <Stack gap="xs">
+                                        <Group gap="xs" justify="space-between">
+                                            <Group gap={4}>
+                                                <Text fw={600} size="sm">
+                                                    {t('base-host-form.hide-host')}
+                                                </Text>
+                                                <HoverCard shadow="md" width={280} withArrow>
+                                                    <HoverCard.Target>
+                                                        <ActionIcon
+                                                            color="gray"
+                                                            size="xs"
+                                                            variant="subtle"
+                                                        >
+                                                            <HiQuestionMarkCircle size={20} />
+                                                        </ActionIcon>
+                                                    </HoverCard.Target>
+                                                    <HoverCard.Dropdown>
+                                                        <Stack gap="sm">
+                                                            <Text c="dimmed" size="sm">
+                                                                {t(
+                                                                    'base-host-form.hide-host-from-users-remnawave-will-send-host-only-for-raw-subscription-responses'
+                                                                )}
+                                                            </Text>
+                                                        </Stack>
+                                                    </HoverCard.Dropdown>
+                                                </HoverCard>
+                                            </Group>
+                                            <Switch
+                                                color="teal.8"
+                                                key={form.key('isHidden')}
+                                                radius="md"
+                                                size="md"
+                                                {...form.getInputProps('isHidden', {
+                                                    type: 'checkbox'
+                                                })}
+                                            />
+                                        </Group>
+
+                                        <Group
+                                            gap="xs"
+                                            grow
+                                            justify="space-between"
+                                            preventGrowOverflow={false}
+                                            w="100%"
+                                        >
+                                            <Button
+                                                disabled={isXhttpExtraButtonDisabled()}
+                                                leftSection={<PiPencilDuotone />}
+                                                onClick={open}
+                                                variant="default"
+                                            >
+                                                xHTTP
+                                            </Button>
+
+                                            <Button
+                                                leftSection={<TbCloudNetwork />}
+                                                onClick={openMuxParams}
+                                                variant="default"
+                                            >
+                                                Mux
+                                            </Button>
+
+                                            <Button
+                                                leftSection={<PiNetwork />}
+                                                onClick={openSockoptParams}
+                                                variant="default"
+                                            >
+                                                SockOpt
+                                            </Button>
+                                        </Group>
+                                    </Stack>
+                                </Fieldset>
+
+                                <Fieldset legend={t('base-host-form.apps-specific')}>
+                                    <Stack gap="xs">
+                                        <TextInput
+                                            description={t(
+                                                'base-host-form.server-description-description'
+                                            )}
+                                            key={form.key('serverDescription')}
+                                            label={
+                                                <Group gap={4} justify="flex-start">
                                                     <Text fw={600} size="sm">
                                                         {t(
                                                             'base-host-form.server-description-header'
                                                         )}
                                                     </Text>
-                                                    <Text c="dimmed" size="sm">
-                                                        {t(
-                                                            'base-host-form.server-description-line-1'
-                                                        )}{' '}
-                                                        <Link
-                                                            target="_blank"
-                                                            to="https://www.happ.su/main/dev-docs/examples-of-links-and-parameters#serverdescription"
-                                                        >
-                                                            {t(
-                                                                'base-host-form.server-description-line-2'
-                                                            )}
-                                                        </Link>{' '}
-                                                        {t(
-                                                            'base-host-form.server-description-line-3'
-                                                        )}
-                                                        <br />
-                                                        {t(
-                                                            'base-host-form.server-description-line-4'
-                                                        )}
-                                                    </Text>
-                                                </Stack>
-                                            </HoverCard.Dropdown>
-                                        </HoverCard>
-                                    </Group>
-                                }
-                                leftSection={<HappLogo size={20} />}
-                                placeholder={t('base-host-form.server-description-placeholder')}
-                                {...form.getInputProps('serverDescription')}
-                            />
-
-                            <Group
-                                gap="xs"
-                                grow
-                                justify="space-between"
-                                preventGrowOverflow={false}
-                                w="100%"
-                            >
-                                <Select
-                                    clearable
-                                    data={Object.values(ALPN).map((alpn) => ({
-                                        label: alpn,
-                                        value: alpn
-                                    }))}
-                                    key={form.key('alpn')}
-                                    label="ALPN"
-                                    placeholder={t('base-host-form.alpn-e-g-h2')}
-                                    {...form.getInputProps('alpn')}
-                                    w="40%"
-                                />
-
-                                <Select
-                                    clearable
-                                    data={Object.values(FINGERPRINTS).map((fingerprint) => ({
-                                        label: fingerprint,
-                                        value: fingerprint
-                                    }))}
-                                    key={form.key('fingerprint')}
-                                    label={t('base-host-form.fingerprint')}
-                                    placeholder={t('base-host-form.fingerprint-e-g-chrome')}
-                                    {...form.getInputProps('fingerprint')}
-                                    w="55%"
-                                />
-
-                                <Button
-                                    color="pink"
-                                    disabled={isXhttpExtraButtonDisabled()}
-                                    leftSection={<PiPencilDuotone />}
-                                    mt={'xs'}
-                                    onClick={open}
-                                    variant="light"
-                                >
-                                    {t('base-host-form.extra-xhttp')}
-                                </Button>
-                            </Group>
-
-                            <Group
-                                gap="xs"
-                                grow
-                                justify="space-between"
-                                preventGrowOverflow={false}
-                                w="100%"
-                            >
-                                <Button
-                                    color="indigo"
-                                    leftSection={<TbCloudNetwork />}
-                                    mt="xs"
-                                    onClick={openMuxParams}
-                                    variant="light"
-                                >
-                                    MUX
-                                </Button>
-
-                                <Button
-                                    color="indigo"
-                                    leftSection={<PiNetwork />}
-                                    mt="xs"
-                                    onClick={openSockoptParams}
-                                    variant="light"
-                                >
-                                    Sockopt
-                                </Button>
-                            </Group>
-                        </Stack>
-                    </Collapse>
-                </Stack>
-            </Stack>
+                                                    <HoverCard shadow="md" width={280} withArrow>
+                                                        <HoverCard.Target>
+                                                            <ActionIcon
+                                                                color="gray"
+                                                                size="xs"
+                                                                variant="subtle"
+                                                            >
+                                                                <HiQuestionMarkCircle size={20} />
+                                                            </ActionIcon>
+                                                        </HoverCard.Target>
+                                                        <HoverCard.Dropdown>
+                                                            <Stack gap="sm">
+                                                                <Text fw={600} size="sm">
+                                                                    {t(
+                                                                        'base-host-form.server-description-header'
+                                                                    )}
+                                                                </Text>
+                                                                <Text c="dimmed" size="sm">
+                                                                    {t(
+                                                                        'base-host-form.server-description-line-1'
+                                                                    )}{' '}
+                                                                    <Link
+                                                                        target="_blank"
+                                                                        to="https://www.happ.su/main/dev-docs/examples-of-links-and-parameters#serverdescription"
+                                                                    >
+                                                                        {t(
+                                                                            'base-host-form.server-description-line-2'
+                                                                        )}
+                                                                    </Link>{' '}
+                                                                    {t(
+                                                                        'base-host-form.server-description-line-3'
+                                                                    )}
+                                                                    <br />
+                                                                    {t(
+                                                                        'base-host-form.server-description-line-4'
+                                                                    )}
+                                                                </Text>
+                                                            </Stack>
+                                                        </HoverCard.Dropdown>
+                                                    </HoverCard>
+                                                </Group>
+                                            }
+                                            leftSection={<HappLogo size={20} />}
+                                            placeholder={t(
+                                                'base-host-form.server-description-placeholder'
+                                            )}
+                                            {...form.getInputProps('serverDescription')}
+                                        />
+                                    </Stack>
+                                </Fieldset>
+                            </Stack>
+                        )}
+                    </Transition>
+                </Tabs.Panel>
+            </Tabs>
 
             <ModalFooter>
                 <Group gap="xs" justify="space-between" w="100%">
                     <ActionIcon.Group>
                         <DeleteHostFeature />
+                        {handleCloneHost && (
+                            <Tooltip label={t('base-host-form.clone')}>
+                                <ActionIcon
+                                    color="blue"
+                                    loading={isSubmitting}
+                                    onClick={handleCloneHost}
+                                    radius="md"
+                                    size="lg"
+                                    variant="light"
+                                >
+                                    <PiCopyDuotone size="20px" />
+                                </ActionIcon>
+                            </Tooltip>
+                        )}
                     </ActionIcon.Group>
 
                     <Group gap="xs">
-                        {handleCloneHost && (
-                            <Button
-                                color="blue"
-                                leftSection={<PiCopyDuotone size="16px" />}
-                                loading={isSubmitting}
-                                onClick={handleCloneHost}
-                                size="sm"
-                                variant="light"
-                            >
-                                {t('base-host-form.clone')}
-                            </Button>
-                        )}
-
                         <Button
                             color="teal"
                             disabled={!form.isValid() || !form.isDirty() || !form.isTouched()}

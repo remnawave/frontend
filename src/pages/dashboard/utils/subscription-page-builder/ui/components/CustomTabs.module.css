@@ -1,0 +1,22 @@
+.tab {
+    margin: 4px;
+    position: relative;
+    border: 1px solid light-dark(var(--mantine-color-gray-2), var(--mantine-color-dark-4));
+    background-color: light-dark(var(--mantine-color-white), var(--mantine-color-dark-6));
+    border-radius: 4px;
+
+    @mixin hover {
+        background-color: light-dark(var(--mantine-color-gray-0), var(--mantine-color-dark-5));
+    }
+
+    &[data-active] {
+        z-index: 1;
+        background-color: var(--mantine-color-cyan-filled);
+        border-color: var(--mantine-color-cyan-filled);
+        color: var(--mantine-color-white);
+
+        @mixin hover {
+            background-color: var(--mantine-color-cyan-filled-hover);
+        }
+    }
+}

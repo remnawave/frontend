@@ -68,7 +68,8 @@
             "copy-all-content": "Copy all content",
             "select-all": "Select all",
             "cut-selection": "Cut selection",
-            "paste-from-clipboard": "Paste from clipboard"
+            "paste-from-clipboard": "Paste from clipboard",
+            "generate-keypair": "Generate Keypair"
         }
     },
     "use-bandwidth-table-columns": {
@@ -185,12 +186,16 @@
     },
     "create-host-modal": {
         "widget": {
-            "new-host": "New host"
+            "new-host": "New host",
+            "please-select-the-config-profile-and-inbound": "Please select the config profile and inbound",
+            "error": "Error"
         }
     },
     "edit-host-modal": {
         "widget": {
-            "edit-host": "Edit host"
+            "edit-host": "Edit host",
+            "dangling-host-cannot-be-cloned": "Dangling host cannot be cloned",
+            "error": "Error"
         }
     },
     "hosts-page-header": {
@@ -381,7 +386,22 @@
         "xtls-documentation": "XTLS documentation",
         "paste-default-mux-params": "Paste default Mux Params",
         "please-ensure-you-provide-a-valid-json-sockopt-object": "Please ensure you provide a valid JSON Sockopt object.",
-        "paste-default-sockopt-params": "Paste default Sockopt Params"
+        "paste-default-sockopt-params": "Paste default Sockopt Params",
+        "basic": "Basic",
+        "advanced": "Advanced",
+        "connection-overrides": "Connection overrides",
+        "xray-json-and-raw": "Xray Json & Raw",
+        "hide-host": "Hide Host",
+        "hide-host-from-users-remnawave-will-send-host-only-for-raw-subscription-responses": "Hide host from users, Remnawave will send host only for RAW Subscription responses.",
+        "apps-specific": "Apps specific",
+        "single-domain": "Single domain",
+        "default-mode-for-one-domain": "Default mode for one domain",
+        "multi-domain": "Multi domain",
+        "multi-domain-description": "Multiple domains separated by commas. Remnawave will randomly choose one of the domains.",
+        "wildcard-domain": "Wildcard domain",
+        "wildcard-domain-description": "Wildcard pattern for subdomains. Remnawave will replace * with the randomly generated string.",
+        "override-sni-from-address": "Override SNI from Address",
+        "override-sni-from-address-description": "This option replaces the SNI value with the specified Address field value. This is particularly useful for multi-domain configurations or wildcard domains configuration."
     },
     "base-node-form": {
         "country": "Country",
@@ -910,7 +930,11 @@
                 "validation-errors": "Validation errors",
                 "invalid-configuration": "Invalid configuration",
                 "the-configuration-did-not-pass-validation": "The configuration did not pass validation.",
-                "close": "Close"
+                "close": "Close",
+                "configuration-settings": "Configuration Settings",
+                "platform-apps": "Platform Apps",
+                "move-up": "Move up",
+                "move-down": "Move down"
             }
         }
     },
@@ -939,7 +963,9 @@
         "add-button": "Add button",
         "remove-button": "Remove button",
         "button-link": "Button Link",
-        "button-text": "Button Text"
+        "button-text": "Button Text",
+        "enter-button-text": "Enter button text...",
+        "english": "English"
     },
     "subscription-tabs": {
         "widget": {
@@ -1089,7 +1115,8 @@
             "remove-users": "Remove users",
             "add-users": "Add users",
             "edit": "Edit",
-            "copy-uuid": "Copy UUID"
+            "copy-uuid": "Copy UUID",
+            "rename": "Rename"
         }
     },
     "config-profile-detail-header": {
@@ -1113,7 +1140,8 @@
             "quick-view": "Quick view",
             "edit-xray-config": "Edit Xray Config",
             "xray-config": "Xray Config",
-            "copy-uuid": "Copy UUID"
+            "copy-uuid": "Copy UUID",
+            "rename": "Rename"
         }
     },
     "config-profiles-header": {
@@ -1405,7 +1433,8 @@
             "select-config-profile": "Select config profile",
             "select-inbound": "Select inbound",
             "search-by-remark": "Search by remark...",
-            "address": "Address"
+            "address": "Address",
+            "filter-by-tags": "Filter by tags"
         }
     },
     "mobile-warning-overlay": {
@@ -1476,6 +1505,54 @@
                 "no-profiles-or-inbounds-found": "No profiles or inbounds found",
                 "no-config-profiles-available": "No config profiles available"
             }
+        }
+    },
+    "language-selector": {
+        "component": {
+            "persian": "Persian",
+            "russian": "Russian",
+            "chinese": "Chinese",
+            "additional-languages": "Additional Languages",
+            "english-is-always-enabled": "English is always enabled",
+            "english": "English"
+        }
+    },
+    "node-stats": {
+        "card": {
+            "stats": "Stats",
+            "traffic-refill-in-days": "Traffic refill in (days):",
+            "represents-the-uptime-of-the-xray-core": "Represents the uptime of the Xray Core"
+        }
+    },
+    "nodes-spotlight-search": {
+        "widget": {
+            "no-nodes-found": "No nodes found...",
+            "search-by-name-or-address": "Search by name or address..."
+        }
+    },
+    "host-tags-input": {
+        "tag-can-only-contain-uppercase-letters-numbers-underscores-and-colons": "Tag can only contain uppercase letters, numbers, underscores and colons",
+        "tag-must-be-less-than-32-characters": "Tag must be less than 32 characters",
+        "tags-are-not-visible-to-end-users-tag-will-be-sent-with-raw-subscription-only": "Tags are not visible to end users. Tag will be sent with RAW subscription only.",
+        "clear-value": "Clear value"
+    },
+    "rename-modal": {
+        "shared": {
+            "rename": "Rename",
+            "new-name": "New Name",
+            "cancel": "Cancel",
+            "save": "Save"
+        }
+    },
+    "branding-settings": {
+        "component": {
+            "branding-settings": "Branding Settings",
+            "brand-name": "Brand Name",
+            "the-name-that-will-be-displayed-on-the-subscription-page": "The name that will be displayed on the subscription page",
+            "url-to-your-brand-logo-image": "URL to your brand logo image",
+            "logo-url": "Logo URL",
+            "link-to-your-support-or-help-page": "Link to your support or help page",
+            "support-url": "Support URL"
         }
     }
 }

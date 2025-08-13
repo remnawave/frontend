@@ -4,6 +4,7 @@ import { Grid } from '@mantine/core'
 
 import { ConfigProfilesHeaderWidget } from '@widgets/dashboard/config-profiles/config-profiles-header/config-profiles-header.widget'
 import { ConfigProfilesGridWidget } from '@widgets/dashboard/config-profiles/config-profiles-grid/config-profiles-grid.widget'
+import { RenameModalShared } from '@shared/ui/modals/rename-modal.shared'
 import { ROUTES } from '@shared/constants'
 import { PageHeader } from '@shared/ui'
 import { Page } from '@shared/ui/page'
@@ -41,6 +42,7 @@ export const ConfigPageComponent = (props: Props) => {
                     </motion.div>
                 </Grid.Col>
             </Grid>
+            <RenameModalShared key="rename-config-profile-modal" renameFrom="configProfile" />
         </Page>
     )
 }

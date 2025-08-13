@@ -1,28 +1,35 @@
 import { PiChartBarDuotone } from 'react-icons/pi'
-import { useDisclosure } from '@mantine/hooks'
 import { useTranslation } from 'react-i18next'
 import { Menu } from '@mantine/core'
+import { memo } from 'react'
 
-import { NodeUsersUsageDrawer } from '@widgets/dashboard/nodes/node-users-usage-drawer/node-users-usage-drawer.widget'
+import { MODALS, useModalsStore } from '@entities/dashboard/modal-store'
 
 import { IProps } from './interfaces'
 
-export function GetNodeUsersUsageFeature(props: IProps) {
+const GetNodeUsersUsageFeatureComponent = (props: IProps) => {
     const { nodeUuid } = props
     const { t } = useTranslation()
 
-    const [opened, handlers] = useDisclosure(false)
+    const { open: openModal, setInternalData } = useModalsStore()
 
     return (
-        <>
-            <Menu.Item
-                color="grape"
-                leftSection={<PiChartBarDuotone size="16px" />}
-                onClick={handlers.open}
-            >
-                {t('get-user-usage.feature.show-usage')}
-            </Menu.Item>
-            <NodeUsersUsageDrawer nodeUuid={nodeUuid} onClose={handlers.close} opened={opened} />
-        </>
+        <Menu.Item
+            color="grape"
+            leftSection={<PiChartBarDuotone size="16px" />}
+            onClick={() => {
+                setInternalData({
+                    internalState: {
+                        nodeUuid
+                    },
+                    modalKey: MODALS.SHOW_NODE_USERS_USAGE_DRAWER
+                })
+                openModal(MODALS.SHOW_NODE_USERS_USAGE_DRAWER)
+            }}
+        >
+            {t('get-user-usage.feature.show-usage')}
+        </Menu.Item>
     )
 }
+
+export const GetNodeUsersUsageFeature = memo(GetNodeUsersUsageFeatureComponent)

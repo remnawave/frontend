@@ -1,14 +1,20 @@
-import { AppConfig, LocalizedText } from '../../../../model/types'
+import {
+    IAppConfig,
+    ILocalizedText,
+    TAdditionalLocales,
+    TEnabledLocales
+} from '../../../../model/types'
 
 export interface LocalizedFieldsProps {
     field: string
     isDescription?: boolean
     section: string
     updateField: (
-        section: keyof AppConfig,
+        section: keyof IAppConfig,
         field: string,
-        lang: keyof LocalizedText,
+        lang: TEnabledLocales,
         value: string
     ) => void
-    value: LocalizedText
+    value: ILocalizedText
+    additionalLocales: TAdditionalLocales[]
 }

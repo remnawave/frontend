@@ -13,7 +13,16 @@ import {
     Title,
     Tooltip
 } from '@mantine/core'
-import { PiCheck, PiCircle, PiCopy, PiEmpty, PiTag, PiTrashDuotone, PiUsers } from 'react-icons/pi'
+import {
+    PiCheck,
+    PiCircle,
+    PiCopy,
+    PiEmpty,
+    PiPencil,
+    PiTag,
+    PiTrashDuotone,
+    PiUsers
+} from 'react-icons/pi'
 import { TbChevronDown, TbCirclesRelation, TbUsersMinus, TbUsersPlus } from 'react-icons/tb'
 import { useTranslation } from 'react-i18next'
 import { useMediaQuery } from '@mantine/hooks'
@@ -190,6 +199,8 @@ export function InternalSquadsGridWidget(props: IProps) {
         )
     }
 
+    const isHighCount = internalSquads.length > 6
+
     return (
         <Grid>
             {internalSquads.map((internalSquad, index) => {
@@ -200,14 +211,14 @@ export function InternalSquadsGridWidget(props: IProps) {
                 return (
                     <Grid.Col
                         key={internalSquad.uuid}
-                        span={{ base: 12, sm: 6, md: 6, lg: 4, xl: 3 }}
+                        span={{ base: 12, sm: 6, md: 6, lg: 4, xl: 3, '2xl': 2 }}
                     >
                         <motion.div
                             animate={{ opacity: 1, y: 0 }}
-                            initial={{ opacity: 0, y: 20 }}
+                            initial={{ opacity: 0, y: isHighCount ? 0 : 20 }}
                             transition={{
-                                duration: 0.4,
-                                delay: index * 0.1,
+                                duration: 0.3,
+                                delay: isHighCount ? 0.1 : index * 0.05,
                                 ease: 'easeOut'
                             }}
                         >
@@ -268,7 +279,7 @@ export function InternalSquadsGridWidget(props: IProps) {
                                     </Group>
 
                                     <Stack gap="sm">
-                                        <Group gap="xs" justify="center">
+                                        <Group gap="xs" justify="center" wrap="nowrap">
                                             <Tooltip
                                                 label={t('internal-squads-grid.widget.inbounds')}
                                             >
@@ -377,6 +388,25 @@ export function InternalSquadsGridWidget(props: IProps) {
                                                         </Menu.Item>
                                                     )}
                                                 </CopyButton>
+
+                                                <Menu.Item
+                                                    leftSection={<PiPencil size={14} />}
+                                                    onClick={() => {
+                                                        setInternalData({
+                                                            internalState: {
+                                                                name: internalSquad.name,
+                                                                uuid: internalSquad.uuid
+                                                            },
+                                                            modalKey:
+                                                                MODALS.RENAME_SQUAD_OR_CONFIG_PROFILE_MODAL
+                                                        })
+                                                        open(
+                                                            MODALS.RENAME_SQUAD_OR_CONFIG_PROFILE_MODAL
+                                                        )
+                                                    }}
+                                                >
+                                                    {t('internal-squads-grid.widget.rename')}
+                                                </Menu.Item>
 
                                                 <Menu.Item
                                                     color="red"

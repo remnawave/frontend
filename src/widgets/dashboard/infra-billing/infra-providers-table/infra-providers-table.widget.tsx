@@ -171,7 +171,7 @@ export function InfraProvidersTableWidget() {
                     </Stack>
                 }
                 fetching={infraProvidersLoading}
-                height={400}
+                height={600}
                 onCellClick={({ record, column }) => {
                     if (record.loginUrl && column.accessor === 'loginUrl') {
                         window.open(record.loginUrl, '_blank', 'noopener,noreferrer')

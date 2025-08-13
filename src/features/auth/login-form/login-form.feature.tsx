@@ -62,7 +62,9 @@ export const LoginFormFeature = () => {
                         leftSection={<PiSignInDuotone size="16px" />}
                         loading={isLoading}
                         mt="xl"
+                        radius="md"
                         type="submit"
+                        variant="default"
                     >
                         {t('login-form.feature.sign-in')}
                     </Button>

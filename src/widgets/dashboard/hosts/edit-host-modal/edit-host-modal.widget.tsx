@@ -12,8 +12,9 @@ import {
     useHostsStoreEditModalHost,
     useHostsStoreEditModalIsOpen
 } from '@entities/dashboard'
-import { useCreateHost, useGetConfigProfiles, useUpdateHost } from '@shared/api/hooks'
+import { QueryKeys, useCreateHost, useGetConfigProfiles, useUpdateHost } from '@shared/api/hooks'
 import { BaseHostForm } from '@shared/ui/forms/hosts/base-host-form'
+import { queryClient } from '@shared/api'
 
 export const EditHostModalWidget = () => {
     const { t } = useTranslation()
@@ -29,7 +30,9 @@ export const EditHostModalWidget = () => {
     const form = useForm<UpdateHostCommand.Request>({
         name: 'edit-host-form',
         mode: 'uncontrolled',
-        validate: zodResolver(UpdateHostCommand.RequestSchema.omit({ uuid: true }))
+        validate: zodResolver(UpdateHostCommand.RequestSchema.omit({ uuid: true })),
+        validateInputOnChange: true,
+        validateInputOnBlur: true
     })
 
     const handleClose = () => {
@@ -47,6 +50,9 @@ export const EditHostModalWidget = () => {
         mutationFns: {
             onSuccess: async () => {
                 handleClose()
+                await queryClient.refetchQueries({
+                    queryKey: QueryKeys.hosts.getAllTags.queryKey
+                })
             }
         }
     })
@@ -55,6 +61,9 @@ export const EditHostModalWidget = () => {
         mutationFns: {
             onSuccess: async () => {
                 handleClose()
+                await queryClient.refetchQueries({
+                    queryKey: QueryKeys.hosts.getAllTags.queryKey
+                })
             }
         }
     })
@@ -102,7 +111,10 @@ export const EditHostModalWidget = () => {
                 serverDescription: host.serverDescription ?? undefined,
                 xHttpExtraParams: xHttpExtraParamsParsed,
                 muxParams: muxParamsParsed,
-                sockoptParams: sockoptParamsParsed
+                sockoptParams: sockoptParamsParsed,
+                tag: host.tag ?? undefined,
+                isHidden: host.isHidden,
+                overrideSniFromAddress: host.overrideSniFromAddress
             })
         }
     }, [host, configProfiles])
@@ -176,7 +188,9 @@ export const EditHostModalWidget = () => {
                 uuid: host.uuid,
                 xHttpExtraParams,
                 muxParams,
-                sockoptParams
+                sockoptParams,
+                // eslint-disable-next-line no-nested-ternary
+                tag: values.tag ? (values.tag === '' ? null : values.tag) : undefined
             }
         })
     })
@@ -188,8 +202,8 @@ export const EditHostModalWidget = () => {
 
         if (!host.inbound.configProfileInboundUuid || !host.inbound.configProfileUuid) {
             notifications.show({
-                title: 'Error',
-                message: 'Dangling host cannot be cloned',
+                title: t('edit-host-modal.widget.error'),
+                message: t('edit-host-modal.widget.dangling-host-cannot-be-cloned'),
                 color: 'red'
             })
 
@@ -216,7 +230,9 @@ export const EditHostModalWidget = () => {
                     configProfileInboundUuid: host.inbound.configProfileInboundUuid
                 },
                 serverDescription: host.serverDescription ?? undefined,
-                sockoptParams: host.sockoptParams ?? undefined
+                sockoptParams: host.sockoptParams ?? undefined,
+                tag: host.tag ?? undefined,
+                overrideSniFromAddress: host.overrideSniFromAddress
             }
         })
     }
@@ -226,6 +242,7 @@ export const EditHostModalWidget = () => {
             centered
             onClose={handleClose}
             opened={isModalOpen}
+            size="30rem"
             title={<Text fw={500}>{t('edit-host-modal.widget.edit-host')}</Text>}
         >
             <BaseHostForm

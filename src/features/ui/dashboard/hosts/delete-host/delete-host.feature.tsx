@@ -1,6 +1,6 @@
 import { ActionIcon, Tooltip } from '@mantine/core'
-import { PiTrashDuotone } from 'react-icons/pi'
 import { useTranslation } from 'react-i18next'
+import { TbTrash } from 'react-icons/tb'
 
 import { useHostsStoreActions, useHostsStoreEditModalHost } from '@entities/dashboard'
 import { useDeleteHost } from '@shared/api/hooks'
@@ -33,8 +33,9 @@ export function DeleteHostFeature() {
                 onClick={handleDeleteHost}
                 radius="md"
                 size="lg"
+                variant="light"
             >
-                <PiTrashDuotone size="20px" />
+                <TbTrash size="20px" />
             </ActionIcon>
         </Tooltip>
     )

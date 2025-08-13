@@ -1,6 +1,6 @@
+import { Box, Card, Code, Paper } from '@mantine/core'
 import Editor, { Monaco } from '@monaco-editor/react'
 import { useEffect, useRef, useState } from 'react'
-import { Box, Code, Paper } from '@mantine/core'
 import { useTranslation } from 'react-i18next'
 
 import { ConfigEditorActionsFeature } from '@features/dashboard/config-profiles/config-editor-actions'
@@ -35,15 +35,6 @@ export function ConfigEditorWidget(props: IProps) {
 
     return (
         <Box>
-            <ConfigEditorActionsFeature
-                configProfile={configProfile}
-                editorRef={editorRef}
-                isConfigValid={isConfigValid}
-                monacoRef={monacoRef}
-                setIsConfigValid={setIsConfigValid}
-                setResult={setResult}
-            />
-
             {result && (
                 <Paper
                     mb="md"
@@ -134,6 +125,17 @@ export function ConfigEditorWidget(props: IProps) {
                     value={JSON.stringify(configProfile.config, null, 2)}
                 />
             </Paper>
+
+            <Card className={styles.footer} h="auto" m="0" mt="md" pos="sticky">
+                <ConfigEditorActionsFeature
+                    configProfile={configProfile}
+                    editorRef={editorRef}
+                    isConfigValid={isConfigValid}
+                    monacoRef={monacoRef}
+                    setIsConfigValid={setIsConfigValid}
+                    setResult={setResult}
+                />
+            </Card>
         </Box>
     )
 }

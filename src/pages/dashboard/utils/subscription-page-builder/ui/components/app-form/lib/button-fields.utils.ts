@@ -1,4 +1,4 @@
-import { AppConfig, Button as ConfigButton, LocalizedText } from '../../../../model/types'
+import { IAppConfig, IButton, ILocalizedText, TAdditionalLocales } from '../../../../model/types'
 import { emptyLocalizedText } from '../../../../model/config'
 
 export type ButtonSection =
@@ -7,13 +7,19 @@ export type ButtonSection =
     | 'installationStep'
 
 export const addButton = (
-    localApp: AppConfig,
+    localApp: IAppConfig,
     section: ButtonSection,
-    updateApp: (data: Partial<AppConfig>) => void
+    updateApp: (data: Partial<IAppConfig>) => void,
+    additionalLocales: TAdditionalLocales[]
 ) => {
-    const newButton: ConfigButton = {
+    const buttonText: ILocalizedText = { ...emptyLocalizedText }
+    additionalLocales.forEach((locale) => {
+        buttonText[locale] = 'Button Text'
+    })
+
+    const newButton: IButton = {
         buttonLink: '',
-        buttonText: { ...emptyLocalizedText }
+        buttonText
     }
 
     if (section === 'installationStep') {
@@ -50,10 +56,10 @@ export const addButton = (
 }
 
 export const removeButton = (
-    localApp: AppConfig,
+    localApp: IAppConfig,
     section: ButtonSection,
     index: number,
-    updateApp: (data: Partial<AppConfig>) => void
+    updateApp: (data: Partial<IAppConfig>) => void
 ) => {
     if (section === 'installationStep') {
         const buttons = [...localApp.installationStep.buttons]
@@ -92,12 +98,12 @@ export const removeButton = (
 }
 
 export const updateButtonField = (
-    localApp: AppConfig,
+    localApp: IAppConfig,
     section: ButtonSection,
     index: number,
-    field: keyof ConfigButton,
+    field: keyof IButton,
     value: string,
-    updateApp: (data: Partial<AppConfig>) => void
+    updateApp: (data: Partial<IAppConfig>) => void
 ) => {
     let buttons
 
@@ -108,7 +114,7 @@ export const updateButtonField = (
         } else if (field === 'buttonText') {
             buttons[index] = {
                 ...buttons[index],
-                buttonText: value as unknown as LocalizedText
+                buttonText: value as unknown as ILocalizedText
             }
         }
 
@@ -128,7 +134,7 @@ export const updateButtonField = (
         } else if (field === 'buttonText') {
             buttons[index] = {
                 ...buttons[index],
-                buttonText: value as unknown as LocalizedText
+                buttonText: value as unknown as ILocalizedText
             }
         }
 
@@ -148,7 +154,7 @@ export const updateButtonField = (
         } else if (field === 'buttonText') {
             buttons[index] = {
                 ...buttons[index],
-                buttonText: value as unknown as LocalizedText
+                buttonText: value as unknown as ILocalizedText
             }
         }
 
@@ -162,12 +168,12 @@ export const updateButtonField = (
 }
 
 export const updateButtonText = (
-    localApp: AppConfig,
+    localApp: IAppConfig,
     section: ButtonSection,
     index: number,
-    lang: keyof LocalizedText,
+    lang: keyof ILocalizedText,
     value: string,
-    updateApp: (data: Partial<AppConfig>) => void
+    updateApp: (data: Partial<IAppConfig>) => void
 ) => {
     let buttons
 

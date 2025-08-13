@@ -65,10 +65,11 @@
             "save-anyway-title": "确认操作",
             "load-from-github": "从 GitHub 加载",
             "tools": "工具",
-            "copy-all-content": "Copy all content",
-            "select-all": "Select all",
-            "cut-selection": "Cut selection",
-            "paste-from-clipboard": "Paste from clipboard"
+            "copy-all-content": "复制全部内容",
+            "select-all": "全选",
+            "cut-selection": "剪切选中项",
+            "paste-from-clipboard": "从剪切板中粘贴",
+            "generate-keypair": "生成密钥"
         }
     },
     "use-bandwidth-table-columns": {
@@ -172,7 +173,7 @@
     },
     "config-editor": {
         "widget": {
-            "loading-editor": "正在加载编辑器"
+            "loading-editor": "正在加载编辑器.."
         }
     },
     "keypair": {
@@ -185,12 +186,16 @@
     },
     "create-host-modal": {
         "widget": {
-            "new-host": "新建主机"
+            "new-host": "新建主机",
+            "please-select-the-config-profile-and-inbound": "请选择配置文件和入站配置",
+            "error": "错误"
         }
     },
     "edit-host-modal": {
         "widget": {
-            "edit-host": "编辑主机"
+            "edit-host": "编辑主机",
+            "dangling-host-cannot-be-cloned": "同名主机不能被克隆。",
+            "error": "错误"
         }
     },
     "hosts-page-header": {
@@ -203,7 +208,7 @@
             "remark-description-line-1": "主机的名称。它可以是任何内容，但在单个订阅中必须保持唯一。",
             "remark-description-line-2": "备注将显示在终端客户端的可用服务器列表中。",
             "inbound": "入站",
-            "inbound-line-1": "必须选择一个主机用来绑定入站",
+            "inbound-line-1": "必须选择一个主机用来绑定入站。",
             "inbound-line-2": "入站列表来自“Xray 配置”。",
             "address-and-port": "地址和端口",
             "address-and-port-line-1": "在大多数情况下，IP/域名应指向已连接的节点之一。",
@@ -381,7 +386,22 @@
         "xtls-documentation": "XTLS 文档",
         "paste-default-mux-params": "粘贴默认的 Mux 参数",
         "please-ensure-you-provide-a-valid-json-sockopt-object": "请确保您提供一个有效的 JSON Sockopt 对象。",
-        "paste-default-sockopt-params": "粘贴默认 Sockopt 参数"
+        "paste-default-sockopt-params": "粘贴默认 Sockopt 参数",
+        "basic": "基本设置",
+        "advanced": "高级",
+        "connection-overrides": "连接覆盖",
+        "xray-json-and-raw": "Xray Json 和 Raw",
+        "hide-host": "隐藏主机",
+        "hide-host-from-users-remnawave-will-send-host-only-for-raw-subscription-responses": "隐藏用户的主机。Remnawave 将仅发送RAW 订阅。",
+        "apps-specific": "特定的应用程序",
+        "single-domain": "单个域名",
+        "default-mode-for-one-domain": "域名的默认模式",
+        "multi-domain": "多个域名",
+        "multi-domain-description": "多个域名用逗号分隔。Remnawave将随机选择其中一个域名。",
+        "wildcard-domain": "通配符域名",
+        "wildcard-domain-description": "子域的通配符模式。Remnawave将以 * 替换为随机生成的字符串。",
+        "override-sni-from-address": "从地址覆盖SNI地址",
+        "override-sni-from-address-description": "此选项用指定的地址字段值替换SNI值。这对于多域配置或通配符域配置特别有用。"
     },
     "base-node-form": {
         "country": "国家",
@@ -910,7 +930,11 @@
                 "validation-errors": "校验错误",
                 "invalid-configuration": "无效配置",
                 "the-configuration-did-not-pass-validation": "配置未通过校验。",
-                "close": "关闭"
+                "close": "关闭",
+                "configuration-settings": "Configuration Settings",
+                "platform-apps": "Platform Apps",
+                "move-up": "Move up",
+                "move-down": "Move down"
             }
         }
     },
@@ -939,7 +963,9 @@
         "add-button": "添加按钮",
         "remove-button": "移除按钮",
         "button-link": "按钮链接",
-        "button-text": "按钮文本"
+        "button-text": "按钮文本",
+        "enter-button-text": "输入按钮文本...",
+        "english": "英语"
     },
     "subscription-tabs": {
         "widget": {
@@ -1086,10 +1112,11 @@
             "inbounds": "入站连接",
             "users": "用户",
             "edit-inbounds": "编辑入站连接",
-            "remove-users": "Remove users",
-            "add-users": "Add users",
-            "edit": "Edit",
-            "copy-uuid": "Copy UUID"
+            "remove-users": "删除用户",
+            "add-users": "添加用户",
+            "edit": "编辑",
+            "copy-uuid": "复制 UUID",
+            "rename": "重命名"
         }
     },
     "config-profile-detail-header": {
@@ -1112,8 +1139,9 @@
             "download": "下载",
             "quick-view": "快速查看",
             "edit-xray-config": "编辑 Xray 配置",
-            "xray-config": "Xray Config",
-            "copy-uuid": "Copy UUID"
+            "xray-config": "Xray 配置",
+            "copy-uuid": "复制 UUID",
+            "rename": "重命名"
         }
     },
     "config-profiles-header": {
@@ -1331,8 +1359,8 @@
                 "selected": "已选择",
                 "unselected": "未选择",
                 "edit-internal-squad": "编辑内部分组",
-                "selected-inbounds": "Selected inbounds: {{count}}",
-                "save-changes": "Save changes"
+                "selected-inbounds": "已设置的入站：{{count}}",
+                "save-changes": "保存更改"
             }
         }
     },
@@ -1405,7 +1433,8 @@
             "select-config-profile": "选择配置文件",
             "select-inbound": "选择入站",
             "search-by-remark": "按备注搜索...",
-            "address": "地址"
+            "address": "地址",
+            "filter-by-tags": "按标签进行筛选"
         }
     },
     "mobile-warning-overlay": {
@@ -1467,15 +1496,63 @@
     "config-profiles": {
         "drawer": {
             "widget": {
-                "config-profiles": "Config Profiles",
-                "no-profile-selected": "No profile selected",
-                "no-inbounds-selected": "No inbounds selected",
-                "choose-config-profile-to-apply-to-the-node": "Choose Config Profile to apply to the node.",
-                "apply-changes": "Apply changes",
-                "search-profiles-or-inbounds": "Search profiles or inbounds...",
-                "no-profiles-or-inbounds-found": "No profiles or inbounds found",
-                "no-config-profiles-available": "No config profiles available"
+                "config-profiles": "配置文件",
+                "no-profile-selected": "未选择配置文件",
+                "no-inbounds-selected": "未选择入站配置",
+                "choose-config-profile-to-apply-to-the-node": "选择要应用到节点的配置文件。",
+                "apply-changes": "应用更改",
+                "search-profiles-or-inbounds": "搜索配置文件或入站配置...",
+                "no-profiles-or-inbounds-found": "未找到配置文件或入站配置",
+                "no-config-profiles-available": "暂无可用配置文件"
             }
+        }
+    },
+    "language-selector": {
+        "component": {
+            "persian": "波斯语",
+            "russian": "俄语",
+            "chinese": "中文",
+            "additional-languages": "其它语言",
+            "english-is-always-enabled": "总是使用英语",
+            "english": "英语"
+        }
+    },
+    "node-stats": {
+        "card": {
+            "stats": "统计信息",
+            "traffic-refill-in-days": "流量重置(天)：",
+            "represents-the-uptime-of-the-xray-core": "表示Xray 核心的运行时间"
+        }
+    },
+    "nodes-spotlight-search": {
+        "widget": {
+            "no-nodes-found": "未找到任何节点。",
+            "search-by-name-or-address": "按名称或地址搜索……"
+        }
+    },
+    "host-tags-input": {
+        "tag-can-only-contain-uppercase-letters-numbers-underscores-and-colons": "标签只能包含大写字母、数字、下划线和冒号",
+        "tag-must-be-less-than-32-characters": "标签必须小于 32 个字符",
+        "tags-are-not-visible-to-end-users-tag-will-be-sent-with-raw-subscription-only": "标签对最终用户不可见。标签将只能与 RAW 订阅一起发送。",
+        "clear-value": "清除"
+    },
+    "rename-modal": {
+        "shared": {
+            "rename": "重命名",
+            "new-name": "新名称",
+            "cancel": "取消",
+            "save": "保存"
+        }
+    },
+    "branding-settings": {
+        "component": {
+            "branding-settings": "Branding Settings",
+            "brand-name": "Brand Name",
+            "the-name-that-will-be-displayed-on-the-subscription-page": "The name that will be displayed on the subscription page",
+            "url-to-your-brand-logo-image": "URL to your brand logo image",
+            "logo-url": "Logo URL",
+            "link-to-your-support-or-help-page": "Link to your support or help page",
+            "support-url": "Support URL"
         }
     }
 }

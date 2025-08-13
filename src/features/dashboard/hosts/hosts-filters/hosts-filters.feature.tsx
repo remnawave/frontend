@@ -1,12 +1,14 @@
 import { ActionIcon, Card, Group, Select, Stack, Title } from '@mantine/core'
 import { PiBookmarks, PiMagnifyingGlass, PiTag, PiX } from 'react-icons/pi'
 import { useTranslation } from 'react-i18next'
+import { TbTagStarred } from 'react-icons/tb'
 import { HiFilter } from 'react-icons/hi'
 import { useMemo } from 'react'
 
 import {
     useHostsStoreActions,
     useHostsStoreConfigProfileFilter,
+    useHostsStoreHostTagFilter,
     useHostsStoreInboundFilter
 } from '@entities/dashboard'
 
@@ -20,7 +22,8 @@ export const HostsFiltersFeature = (props: IProps) => {
         searchAddressValue,
         searchOptions,
         searchValue,
-        searchAddressData
+        searchAddressData,
+        hostTags
     } = props
 
     const { t } = useTranslation()
@@ -28,6 +31,7 @@ export const HostsFiltersFeature = (props: IProps) => {
     const actions = useHostsStoreActions()
     const configProfileFilter = useHostsStoreConfigProfileFilter()
     const inboundFilter = useHostsStoreInboundFilter()
+    const hostTagFilter = useHostsStoreHostTagFilter()
 
     const configProfileOptions = useMemo(() => {
         if (!configProfiles) return []
@@ -63,6 +67,10 @@ export const HostsFiltersFeature = (props: IProps) => {
 
     const handleInboundChange = (value: null | string) => {
         actions.setInboundFilter(value || null)
+    }
+
+    const handleHostTagChange = (value: null | string) => {
+        actions.setHostTagFilter(value || null)
     }
 
     const handleResetFilters = () => {
@@ -145,6 +153,18 @@ export const HostsFiltersFeature = (props: IProps) => {
                         placeholder={t('hosts-filters.feature.address')}
                         searchable
                         value={searchAddressValue}
+                    />
+
+                    <Select
+                        clearable
+                        data={hostTags}
+                        leftSection={<TbTagStarred size="16px" />}
+                        leftSectionPointerEvents="none"
+                        onChange={handleHostTagChange}
+                        placeholder={t('hosts-filters.feature.filter-by-tags')}
+                        radius="md"
+                        size="sm"
+                        value={hostTagFilter || null}
                     />
                 </Group>
             </Stack>

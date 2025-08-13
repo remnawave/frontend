@@ -1,8 +1,9 @@
 import { UpdateSubscriptionSettingsCommand } from '@remnawave/backend-contract'
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
+import { zodResolver } from 'mantine-form-zod-resolver'
 import { notifications } from '@mantine/notifications'
-import { useForm, zodResolver } from '@mantine/form'
 import { useTranslation } from 'react-i18next'
+import { useForm } from '@mantine/form'
 
 import { useUpdateSubscriptionSettings } from '@shared/api/hooks'
 import { handleFormErrors } from '@shared/utils/misc'
@@ -33,6 +34,15 @@ export const SubscriptionSettingsWidget = (props: IProps) => {
         )
     })
 
+    const { mutate: updateSubscriptionSettings, isPending: isUpdateSubscriptionSettingsPending } =
+        useUpdateSubscriptionSettings({
+            mutationFns: {
+                onError(error) {
+                    handleFormErrors(form, error)
+                }
+            }
+        })
+
     const updateExpiredRemarks = useCallback((newRemarks: string[]) => {
         setRemarks((prev) => ({ ...prev, expired: newRemarks }))
     }, [])
@@ -49,14 +59,55 @@ export const SubscriptionSettingsWidget = (props: IProps) => {
         setHeaders(newHeaders)
     }, [])
 
-    const { mutate: updateSubscriptionSettings, isPending: isUpdateSubscriptionSettingsPending } =
-        useUpdateSubscriptionSettings({
-            mutationFns: {
-                onError(error) {
-                    handleFormErrors(form, error)
-                }
+    const handleSubmit = useMemo(() => {
+        return form.onSubmit((values) => {
+            const filterEmptyStrings = (arr: string[]): string[] => {
+                const filtered = arr.filter((item) => item.trim() !== '')
+                return filtered.length > 0 ? filtered : ['']
             }
+
+            const expiredFiltered = filterEmptyStrings(remarks.expired)
+            const limitedFiltered = filterEmptyStrings(remarks.limited)
+            const disabledFiltered = filterEmptyStrings(remarks.disabled)
+
+            if (
+                expiredFiltered[0] === '' ||
+                limitedFiltered[0] === '' ||
+                disabledFiltered[0] === ''
+            ) {
+                notifications.show({
+                    color: 'red',
+                    title: t('subscription-settings.widget.validation-error'),
+                    message: t(
+                        'subscription-settings.widget.you-must-add-at-least-one-remark-with-text'
+                    )
+                })
+                return
+            }
+
+            const headersFiltered = headers.filter((header) => header.key.trim() !== '')
+
+            const customResponseHeaders: Record<string, string> = {}
+            headersFiltered.forEach((header) => {
+                customResponseHeaders[header.key] = header.value
+            })
+
+            const isProfileWebpageUrlEnabled =
+                (values.isProfileWebpageUrlEnabled as unknown as string) === 'true'
+
+            updateSubscriptionSettings({
+                variables: {
+                    ...values,
+                    uuid: values.uuid,
+                    isProfileWebpageUrlEnabled,
+                    expiredUsersRemarks: expiredFiltered,
+                    limitedUsersRemarks: limitedFiltered,
+                    disabledUsersRemarks: disabledFiltered,
+                    customResponseHeaders
+                }
+            })
         })
+    }, [form, remarks, headers, t, updateSubscriptionSettings])
 
     useEffect(() => {
         if (subscriptionSettings) {
@@ -115,50 +166,6 @@ export const SubscriptionSettingsWidget = (props: IProps) => {
             })
         }
     }, [subscriptionSettings])
-
-    const handleSubmit = form.onSubmit((values) => {
-        const filterEmptyStrings = (arr: string[]): string[] => {
-            const filtered = arr.filter((item) => item.trim() !== '')
-            return filtered.length > 0 ? filtered : ['']
-        }
-
-        const expiredFiltered = filterEmptyStrings(remarks.expired)
-        const limitedFiltered = filterEmptyStrings(remarks.limited)
-        const disabledFiltered = filterEmptyStrings(remarks.disabled)
-
-        if (expiredFiltered[0] === '' || limitedFiltered[0] === '' || disabledFiltered[0] === '') {
-            notifications.show({
-                color: 'red',
-                title: t('subscription-settings.widget.validation-error'),
-                message: t(
-                    'subscription-settings.widget.you-must-add-at-least-one-remark-with-text'
-                )
-            })
-            return
-        }
-
-        const headersFiltered = headers.filter((header) => header.key.trim() !== '')
-
-        const customResponseHeaders: Record<string, string> = {}
-        headersFiltered.forEach((header) => {
-            customResponseHeaders[header.key] = header.value
-        })
-
-        const isProfileWebpageUrlEnabled =
-            (values.isProfileWebpageUrlEnabled as unknown as string) === 'true'
-
-        updateSubscriptionSettings({
-            variables: {
-                ...values,
-                uuid: values.uuid,
-                isProfileWebpageUrlEnabled,
-                expiredUsersRemarks: expiredFiltered,
-                limitedUsersRemarks: limitedFiltered,
-                disabledUsersRemarks: disabledFiltered,
-                customResponseHeaders
-            }
-        })
-    })
 
     return (
         <SubscriptionTabs

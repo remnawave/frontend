@@ -68,7 +68,8 @@
             "copy-all-content": "Скопировать все содержимое",
             "select-all": "Выделить все",
             "cut-selection": "Вырезать выделенное",
-            "paste-from-clipboard": "Вставить из буфера обмена"
+            "paste-from-clipboard": "Вставить из буфера обмена",
+            "generate-keypair": "Сгенерировать ключи"
         }
     },
     "use-bandwidth-table-columns": {
@@ -185,12 +186,16 @@
     },
     "create-host-modal": {
         "widget": {
-            "new-host": "Новый хост"
+            "new-host": "Новый хост",
+            "please-select-the-config-profile-and-inbound": "Пожалуйста, выберите профиль и инбаунд",
+            "error": "Ошибка"
         }
     },
     "edit-host-modal": {
         "widget": {
-            "edit-host": "Редактировать хост"
+            "edit-host": "Редактировать хост",
+            "dangling-host-cannot-be-cloned": "Хост со статусом DANGLING не может быть клонирован",
+            "error": "Ошибка"
         }
     },
     "hosts-page-header": {
@@ -360,7 +365,7 @@
         "fill-with-sample-xhttp-extra-params": "Fill with sample xHTTP extra params",
         "close": "Закрыть",
         "clone": "Дублировать",
-        "address-description-line-1": "Address must be an IP address or a domain name of connection destination.",
+        "address-description-line-1": "Адрес должен быть IP-адресом или доменным именем пункта назначения соединения.",
         "address-description-line-2": "В большинстве случаев, должно быть направлено на одну из подключенных нод.",
         "port-description-line-1": "Порт подключения.",
         "port-description-line-2": "В большинстве случаев, должно совпадать с портом выбранного инбаунда.",
@@ -381,7 +386,22 @@
         "xtls-documentation": "документации XTLS",
         "paste-default-mux-params": "Вставить пример MUX",
         "please-ensure-you-provide-a-valid-json-sockopt-object": "Убедитесь, что вы предоставили правильный объект JSON Sockopt.",
-        "paste-default-sockopt-params": "Вставить пример Sockopt"
+        "paste-default-sockopt-params": "Вставить пример Sockopt",
+        "basic": "Основные",
+        "advanced": "Расширенные",
+        "connection-overrides": "Переопределения соединений",
+        "xray-json-and-raw": "Xray Json & Raw",
+        "hide-host": "Скрыть хост",
+        "hide-host-from-users-remnawave-will-send-host-only-for-raw-subscription-responses": "Скрыть хост от пользователей, Remnawave отправит этот хост только для RAW-формата подписки",
+        "apps-specific": "Apps specific",
+        "single-domain": "Один домен",
+        "default-mode-for-one-domain": "Режим по умолчанию для одного домена",
+        "multi-domain": "Мульти домен",
+        "multi-domain-description": "Несколько доменов, разделенных запятыми. Remnawave будет случайным образом выбирать один из доменов.",
+        "wildcard-domain": "Wildcard домен",
+        "wildcard-domain-description": "Шаблон шаблона Wildcard для субдоменов. Remnawave заменит * случайно созданной строкой.",
+        "override-sni-from-address": "Переопределить SNI из адреса",
+        "override-sni-from-address-description": "Эта опция заменяет значение SNI на указанное значение поля Адрес. Это особенно полезно для опций: мульти-домен или Wildcard-домен."
     },
     "base-node-form": {
         "country": "Страна",
@@ -910,7 +930,11 @@
                 "validation-errors": "Ошибки валидации",
                 "invalid-configuration": "Недействительная конфигурация",
                 "the-configuration-did-not-pass-validation": "Конфигурация не прошла проверку.",
-                "close": "Закрыть"
+                "close": "Закрыть",
+                "configuration-settings": "Общие настройки",
+                "platform-apps": "Приложения",
+                "move-up": "Переместить вверх",
+                "move-down": "Переместить ниже"
             }
         }
     },
@@ -939,7 +963,9 @@
         "add-button": "Добавить кнопку",
         "remove-button": "Удалить кнопку",
         "button-link": "Ссылка кнопки",
-        "button-text": "Текст кнопки"
+        "button-text": "Текст кнопки",
+        "enter-button-text": "Введите текст кнопки...",
+        "english": "Английский"
     },
     "subscription-tabs": {
         "widget": {
@@ -1089,7 +1115,8 @@
             "remove-users": "Удалить пользователей",
             "add-users": "Добавить пользователей",
             "edit": "Изменить",
-            "copy-uuid": "Скопировать UUID"
+            "copy-uuid": "Скопировать UUID",
+            "rename": "Переименовать"
         }
     },
     "config-profile-detail-header": {
@@ -1113,7 +1140,8 @@
             "quick-view": "Быстрый просмотр",
             "edit-xray-config": "Изменить конфиг Xray",
             "xray-config": "Конфиг. Xray",
-            "copy-uuid": "Скопировать UUID"
+            "copy-uuid": "Скопировать UUID",
+            "rename": "Переименовать"
         }
     },
     "config-profiles-header": {
@@ -1405,7 +1433,8 @@
             "select-config-profile": "Выберите профиль",
             "select-inbound": "Выберите инбаунд",
             "search-by-remark": "Поиск по примечанию...",
-            "address": "Поиск по адресу..."
+            "address": "Поиск по адресу...",
+            "filter-by-tags": "Фильтр по тегам"
         }
     },
     "mobile-warning-overlay": {
@@ -1476,6 +1505,54 @@
                 "no-profiles-or-inbounds-found": "Профили или инбаунды не найдены",
                 "no-config-profiles-available": "Нет доступных профилей"
             }
+        }
+    },
+    "language-selector": {
+        "component": {
+            "persian": "Персидский",
+            "russian": "Русский",
+            "chinese": "Китайский",
+            "additional-languages": "Дополнительные языки",
+            "english-is-always-enabled": "Английский всегда включен",
+            "english": "Английский"
+        }
+    },
+    "node-stats": {
+        "card": {
+            "stats": "Статистика",
+            "traffic-refill-in-days": "Сброс трафика (дней):",
+            "represents-the-uptime-of-the-xray-core": "Отражает время работы ядра Xray"
+        }
+    },
+    "nodes-spotlight-search": {
+        "widget": {
+            "no-nodes-found": "Нод не найдено...",
+            "search-by-name-or-address": "Поиск по имени или адресу..."
+        }
+    },
+    "host-tags-input": {
+        "tag-can-only-contain-uppercase-letters-numbers-underscores-and-colons": "Тег может содержать только заглавные буквы, цифры, подчеркивания и двоеточия",
+        "tag-must-be-less-than-32-characters": "Тег должен быть меньше 32 символов",
+        "tags-are-not-visible-to-end-users-tag-will-be-sent-with-raw-subscription-only": "Теги не видны конечным пользователям. Тег будет отправлен только с RAW подпиской.",
+        "clear-value": "Очистить значение"
+    },
+    "rename-modal": {
+        "shared": {
+            "rename": "Переименовать",
+            "new-name": "Новое имя",
+            "cancel": "Закрыть",
+            "save": "Сохранить"
+        }
+    },
+    "branding-settings": {
+        "component": {
+            "branding-settings": "Настройки бренда",
+            "brand-name": "Название бренда",
+            "the-name-that-will-be-displayed-on-the-subscription-page": "Название, которое будет отображаться на странице подписки",
+            "url-to-your-brand-logo-image": "URL логотипа вашего бренда",
+            "logo-url": "Ссылка на логотип",
+            "link-to-your-support-or-help-page": "Ссылка на вашу поддержку или страницу помощи",
+            "support-url": "URL поддержки"
         }
     }
 }

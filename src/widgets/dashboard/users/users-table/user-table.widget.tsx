@@ -5,6 +5,7 @@ import {
     MRT_SortingState,
     useMantineReactTable
 } from 'mantine-react-table'
+import { notifications } from '@mantine/notifications'
 import { useTranslation } from 'react-i18next'
 import { useMemo, useState } from 'react'
 
@@ -24,8 +25,8 @@ import {
 import { UsersTableSelectionFeature } from '@features/ui/dashboard/users/users-table-selection/users-table-selection.feature'
 import { useUserTableColumns } from '@features/dashboard/users/users-table/model/use-table-columns'
 import { UserActionGroupFeature } from '@features/dashboard/users/users-action-group'
+import { useGetInternalSquads, useGetNodes, useGetUsersV2 } from '@shared/api/hooks'
 import { useUserModalStoreActions } from '@entities/dashboard/user-modal-store'
-import { useGetInternalSquads, useGetUsersV2 } from '@shared/api/hooks'
 import { DataTableShared } from '@shared/ui/table'
 import { sToMs } from '@shared/utils/time-utils'
 
@@ -35,8 +36,9 @@ export function UserTableWidget() {
     const { t } = useTranslation()
 
     const { data: internalSquads } = useGetInternalSquads()
+    const { data: nodes } = useGetNodes()
 
-    const tableColumns = useUserTableColumns(internalSquads)
+    const tableColumns = useUserTableColumns(internalSquads, nodes)
     const bulkUsersActionsStoreActions = useBulkUsersActionsStoreActions()
     const tableSelection = useBulkUsersActionsStoreTableSelection()
     const userModalActions = useUserModalStoreActions()
@@ -167,6 +169,14 @@ export function UserTableWidget() {
         },
         mantineTableBodyRowProps: ({ row }) => ({
             onClick: async () => {
+                if (row.id === 'mrt-row-empty' || row.original.uuid === undefined) {
+                    notifications.show({
+                        title: 'Nice try!',
+                        message: 'Nothing to show...',
+                        color: 'indigo'
+                    })
+                    return
+                }
                 await userModalActions.setUserUuid(row.original.uuid)
                 userModalActions.changeModalState(true)
             },

@@ -422,20 +422,11 @@ export const ViewUserModal = () => {
                                                     'view-user-modal.widget.subscription-qr-code'
                                                 ),
                                                 children: (
-                                                    <>
-                                                        <div
-                                                            dangerouslySetInnerHTML={{
-                                                                __html: subscriptionQrCode
-                                                            }}
-                                                        />
-                                                        <Button
-                                                            fullWidth
-                                                            mt="md"
-                                                            onClick={() => modals.closeAll()}
-                                                        >
-                                                            {t('view-user-modal.widget.close')}
-                                                        </Button>
-                                                    </>
+                                                    <div
+                                                        dangerouslySetInnerHTML={{
+                                                            __html: subscriptionQrCode
+                                                        }}
+                                                    />
                                                 )
                                             })
                                         }}

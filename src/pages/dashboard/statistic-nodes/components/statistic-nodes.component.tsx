@@ -26,6 +26,7 @@ import { GetNodesUsageByRangeCommand } from '@remnawave/backend-contract'
 import { PiEmpty, PiListBullets } from 'react-icons/pi'
 import { BarChart, Sparkline } from '@mantine/charts'
 import { useEffect, useMemo, useState } from 'react'
+import ReactCountryFlag from 'react-country-flag'
 import { useTranslation } from 'react-i18next'
 import ColorHash from 'color-hash'
 import dayjs from 'dayjs'
@@ -81,6 +82,7 @@ export const StatisticNodesPage = () => {
 
     const [selectedDayData, setSelectedDayData] = useState<Array<{
         color: string
+        countryCode?: string
         name: string
         value: number
     }> | null>(null)
@@ -114,8 +116,9 @@ export const StatisticNodesPage = () => {
         const groupedData: Record<string, ChartData> = {}
         const seriesSet = new Set<string>()
         const nodeTotal: Record<string, number> = {}
+        const countryCodeByNode: Record<string, string> = {}
 
-        dbData.forEach(({ nodeName, total, date }) => {
+        dbData.forEach(({ nodeName, total, date, nodeCountryCode }) => {
             const formattedDate = dayjs(date).format('MMM D')
             if (!groupedData[formattedDate]) {
                 groupedData[formattedDate] = { date: formattedDate, totalForDay: 0 }
@@ -129,6 +132,10 @@ export const StatisticNodesPage = () => {
                 nodeTotal[nodeName] = 0
             }
             nodeTotal[nodeName] += total
+
+            if (nodeCountryCode && !countryCodeByNode[nodeName]) {
+                countryCodeByNode[nodeName] = nodeCountryCode
+            }
         })
 
         const sortedNodes = Object.entries(nodeTotal)
@@ -140,7 +147,8 @@ export const StatisticNodesPage = () => {
             return {
                 name: nodeName,
                 color: ch.hex(`${nodeName}-${index}`),
-                total: nodeTotal[nodeName] || 0
+                total: nodeTotal[nodeName] || 0,
+                countryCode: countryCodeByNode[nodeName]
             }
         })
 
@@ -179,7 +187,8 @@ export const StatisticNodesPage = () => {
             return {
                 name: nodeName,
                 color: nodeInfo?.color || '#888',
-                total: nodeInfo?.total || 0
+                total: nodeInfo?.total || 0,
+                countryCode: nodeInfo?.countryCode
             }
         })
     }, [series, topNodes])
@@ -222,7 +231,8 @@ export const StatisticNodesPage = () => {
                 return {
                     name,
                     value: Number(value) || 0,
-                    color: nodeInfo?.color || '#ccc'
+                    color: nodeInfo?.color || '#ccc',
+                    countryCode: nodeInfo?.countryCode
                 }
             })
             .sort((a, b) => b.value - a.value)
@@ -395,7 +405,28 @@ export const StatisticNodesPage = () => {
                                                         }}
                                                         w={10}
                                                     />
-                                                    <Text fz="sm">{entry.name}</Text>
+                                                    <Group gap={6}>
+                                                        {(() => {
+                                                            const nodeInfo = series.find(
+                                                                (s) => s.name === entry.name
+                                                            )
+                                                            return (
+                                                                nodeInfo?.countryCode &&
+                                                                nodeInfo.countryCode !== 'XX' && (
+                                                                    <ReactCountryFlag
+                                                                        countryCode={
+                                                                            nodeInfo.countryCode
+                                                                        }
+                                                                        style={{
+                                                                            fontSize: '1.1em',
+                                                                            borderRadius: '2px'
+                                                                        }}
+                                                                    />
+                                                                )
+                                                            )
+                                                        })()}
+                                                        <Text fz="sm">{entry.name}</Text>
+                                                    </Group>
                                                 </Group>
                                                 <Text fw={500} fz="sm">
                                                     {prettyBytesToAnyUtil(entry.value)}
@@ -516,17 +547,28 @@ export const StatisticNodesPage = () => {
                                         /* eslint-enable */
                                         position="top"
                                     >
-                                        <Text
-                                            size="sm"
-                                            style={{
-                                                maxWidth: '100%',
-                                                overflow: 'hidden',
-                                                textOverflow: 'ellipsis',
-                                                whiteSpace: 'nowrap'
-                                            }}
-                                        >
-                                            {node.name}
-                                        </Text>
+                                        <Group gap={6} style={{ minWidth: 0, flex: 1 }}>
+                                            {node.countryCode && node.countryCode !== 'XX' && (
+                                                <ReactCountryFlag
+                                                    countryCode={node.countryCode}
+                                                    style={{
+                                                        fontSize: '1.1em',
+                                                        borderRadius: '2px'
+                                                    }}
+                                                />
+                                            )}
+                                            <Text
+                                                size="sm"
+                                                style={{
+                                                    maxWidth: '100%',
+                                                    overflow: 'hidden',
+                                                    textOverflow: 'ellipsis',
+                                                    whiteSpace: 'nowrap'
+                                                }}
+                                            >
+                                                {node.name}
+                                            </Text>
+                                        </Group>
                                     </Tooltip>
                                 </Group>
                             ))}
@@ -556,6 +598,7 @@ export const StatisticNodesPage = () => {
                     </Text>
                     <Select
                         allowDeselect={false}
+                        comboboxProps={{ transitionProps: { transition: 'fade', duration: 200 } }}
                         data={[
                             { label: t('statistic-nodes.component.7-days'), value: '7' },
                             { label: t('statistic-nodes.component.14-days'), value: '14' },
@@ -626,9 +669,25 @@ export const StatisticNodesPage = () => {
                                             <Group gap={8} justify="space-between" key={node.name}>
                                                 <Group gap={8}>
                                                     {renderColorDot(node.color)}
-                                                    <Text fw={index === 0 ? 600 : 400} size="sm">
-                                                        {node.name}
-                                                    </Text>
+                                                    <Group gap={6}>
+                                                        {/* eslint-disable indent */}
+                                                        {node.countryCode &&
+                                                            node.countryCode !== 'XX' && (
+                                                                <ReactCountryFlag
+                                                                    countryCode={node.countryCode}
+                                                                    style={{
+                                                                        fontSize: '1.1em',
+                                                                        borderRadius: '2px'
+                                                                    }}
+                                                                />
+                                                            )}
+                                                        <Text
+                                                            fw={index === 0 ? 600 : 400}
+                                                            size="sm"
+                                                        >
+                                                            {node.name}
+                                                        </Text>
+                                                    </Group>
                                                 </Group>
                                                 <Text size="sm">
                                                     {prettyBytesToAnyUtil(node.total)}
@@ -656,6 +715,7 @@ export const StatisticNodesPage = () => {
                     <MultiSelect
                         checkIconPosition="left"
                         clearable
+                        comboboxProps={{ transitionProps: { transition: 'fade', duration: 200 } }}
                         data={series.map((s) => ({ value: s.name, label: s.name }))}
                         maw={{ base: '100%', sm: 400 }}
                         onChange={setSelectedNodes}
@@ -734,7 +794,22 @@ export const StatisticNodesPage = () => {
                                                             }}
                                                             w={12}
                                                         />
-                                                        <Text>{entry.name}</Text>
+                                                        <Group gap={6}>
+                                                            {/* eslint-disable indent */}
+                                                            {entry.countryCode &&
+                                                                entry.countryCode !== 'XX' && (
+                                                                    <ReactCountryFlag
+                                                                        countryCode={
+                                                                            entry.countryCode
+                                                                        }
+                                                                        style={{
+                                                                            fontSize: '1.1em',
+                                                                            borderRadius: '2px'
+                                                                        }}
+                                                                    />
+                                                                )}
+                                                            <Text>{entry.name}</Text>
+                                                        </Group>
                                                     </Group>
                                                 </Table.Td>
                                                 <Table.Td style={{ textAlign: 'right' }}>

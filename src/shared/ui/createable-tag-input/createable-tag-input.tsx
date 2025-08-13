@@ -71,7 +71,7 @@ export function CreateableTagInputShared(props: IProps) {
             <Combobox.Target>
                 <InputBase
                     {...restProps}
-                    description={'Create or select a tag'}
+                    description="Create or select a tag"
                     error={error || restProps.error}
                     label="Tag"
                     leftSection={<PiTagDuotone size="16px" />}

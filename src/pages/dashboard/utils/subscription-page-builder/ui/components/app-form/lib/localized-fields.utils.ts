@@ -1,15 +1,15 @@
 /* eslint-disable indent */
 
-import { AppConfig, LocalizedText } from '../../../../model/types'
+import { IAppConfig, ILocalizedText } from '../../../../model/types'
 
 export const updateLocalizedField = (
-    localApp: AppConfig,
-    obj: keyof AppConfig,
+    localApp: IAppConfig,
+    obj: keyof IAppConfig,
     field: string,
-    lang: keyof LocalizedText,
+    lang: keyof ILocalizedText,
     value: string,
-    setLocalApp: (app: AppConfig) => void,
-    onChange: (app: AppConfig) => void
+    setLocalApp: (app: IAppConfig) => void,
+    onChange: (app: IAppConfig) => void
 ) => {
     const objValue = localApp[obj]
     const fieldValue =
@@ -17,7 +17,7 @@ export const updateLocalizedField = (
             ? (objValue as Record<string, unknown>)[field]
             : null
 
-    const updated: AppConfig = {
+    const updated: IAppConfig = {
         ...localApp,
         [obj]:
             typeof objValue === 'object' && objValue !== null

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { SUBSCRIPTION_TEMPLATE_TYPE } from '@remnawave/backend-contract'
 import Editor, { Monaco } from '@monaco-editor/react'
-import { Box, Divider, Paper } from '@mantine/core'
+import { Box, Card, Paper } from '@mantine/core'
 import 'monaco-yaml/yaml.worker.js'
 import { useTranslation } from 'react-i18next'
 import { useRef } from 'react'
@@ -46,14 +46,6 @@ export function SubscriptionTemplateEditorWidget(props: Props) {
             {templateType === SUBSCRIPTION_TEMPLATE_TYPE.XRAY_JSON && (
                 <XrayJsonTemplateDescriptionWidget />
             )}
-            <Divider mb="md" mt="md" size="md" />
-
-            <TemplateEditorActionsFeature
-                editorRef={editorRef}
-                language={language}
-                monacoRef={monacoRef}
-                templateType={templateType}
-            />
 
             <Paper
                 mb="md"
@@ -110,6 +102,15 @@ export function SubscriptionTemplateEditorWidget(props: Props) {
                     value={getConfig() || ''}
                 />
             </Paper>
+
+            <Card className={styles.footer} h="auto" m="0" mt="md" pos="sticky">
+                <TemplateEditorActionsFeature
+                    editorRef={editorRef}
+                    language={language}
+                    monacoRef={monacoRef}
+                    templateType={templateType}
+                />
+            </Card>
         </Box>
     )
 }

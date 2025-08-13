@@ -18,10 +18,12 @@ export function StatCardWidget({ title, value, icon, color, subtitle, isLoading 
             onMouseEnter={(e) => {
                 e.currentTarget.style.transform = 'translateY(-2px)'
                 e.currentTarget.style.boxShadow = '0 8px 30px rgba(0, 0, 0, 0.3)'
+                e.currentTarget.style.borderColor = 'var(--mantine-color-cyan-5)'
             }}
             onMouseLeave={(e) => {
                 e.currentTarget.style.transform = 'translateY(0)'
                 e.currentTarget.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)'
+                e.currentTarget.style.borderColor = 'var(--mantine-color-dark-4)'
             }}
             p="lg"
             radius="md"

@@ -4,6 +4,7 @@ import {
     Code,
     Fieldset,
     Group,
+    Input,
     NumberInput,
     Stack,
     Text,
@@ -56,10 +57,9 @@ export function DeviceTagSettingsCard<
                 }
             >
                 <Stack gap="md">
-                    <NumberInput
-                        allowDecimal={false}
-                        allowNegative={false}
-                        description={
+                    <Stack gap={0}>
+                        <Input.Label>{t('create-user-modal.widget.hwid-device-limit')}</Input.Label>
+                        <Input.Description component="div">
                             <>
                                 <Text c="dimmed" size="0.75rem">
                                     {t('create-user-modal.widget.hwid-user-limit-line-1')}{' '}
@@ -76,8 +76,8 @@ export function DeviceTagSettingsCard<
                                 <Checkbox
                                     checked={form.getValues().hwidDeviceLimit === 0}
                                     label={t('create-user-modal.widget.disable-hwid-limit')}
-                                    mb={'xs'}
-                                    mt={'xs'}
+                                    mb="xs"
+                                    mt="xs"
                                     onChange={(event) => {
                                         const { checked } = event.currentTarget
                                         form.setFieldValue(
@@ -88,21 +88,19 @@ export function DeviceTagSettingsCard<
                                     }}
                                 />
                             </>
-                        }
-                        // descriptionProps={{
-                        //     component: 'div'
-                        // }}
-                        disabled={form.getValues().hwidDeviceLimit === 0}
-                        hideControls
-                        key={form.key('hwidDeviceLimit')}
-                        label={t('create-user-modal.widget.hwid-device-limit')}
-                        leftSection={<TbDevices2 size="16px" />}
-                        placeholder="HWID_FALLBACK_DEVICE_LIMIT in use"
-                        {...form.getInputProps('hwidDeviceLimit')}
-                        styles={{
-                            label: { fontWeight: 500 }
-                        }}
-                    />
+                        </Input.Description>
+
+                        <NumberInput
+                            allowDecimal={false}
+                            allowNegative={false}
+                            disabled={form.getValues().hwidDeviceLimit === 0}
+                            hideControls
+                            key={form.key('hwidDeviceLimit')}
+                            leftSection={<TbDevices2 size="16px" />}
+                            placeholder="HWID_FALLBACK_DEVICE_LIMIT in use"
+                            {...form.getInputProps('hwidDeviceLimit')}
+                        />
+                    </Stack>
 
                     <CreateableTagInputShared
                         key={form.key('tag')}

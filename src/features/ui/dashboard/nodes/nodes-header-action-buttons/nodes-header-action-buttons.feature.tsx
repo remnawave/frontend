@@ -1,6 +1,7 @@
 import { ActionIcon, ActionIconGroup, Group, Tooltip } from '@mantine/core'
-import { TbPlus, TbRefresh } from 'react-icons/tb'
+import { TbPlus, TbRefresh, TbSearch } from 'react-icons/tb'
 import { useTranslation } from 'react-i18next'
+import { spotlight } from '@mantine/spotlight'
 import { PiSpiral } from 'react-icons/pi'
 
 import { useNodesStoreActions } from '@entities/dashboard/nodes/nodes-store/nodes-store'
@@ -25,6 +26,20 @@ export const NodesHeaderActionButtonsFeature = () => {
 
     return (
         <Group grow preventGrowOverflow={false} wrap="wrap">
+            <ActionIconGroup>
+                <Tooltip label="Search nodes">
+                    <ActionIcon
+                        color="gray"
+                        onClick={spotlight.open}
+                        radius="md"
+                        size="lg"
+                        variant="light"
+                    >
+                        <TbSearch size="18px" />
+                    </ActionIcon>
+                </Tooltip>
+            </ActionIconGroup>
+
             <ActionIconGroup>
                 <Tooltip
                     label={t('nodes-header-action-buttons.feature.restart-all-nodes')}
