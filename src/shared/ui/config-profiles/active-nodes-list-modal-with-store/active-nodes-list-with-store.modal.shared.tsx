@@ -43,7 +43,7 @@ export const ActiveNodesListModalWithStoreShared = () => {
 
                         <Stack gap="xs">
                             {nodes.map((node) => (
-                                <Paper key={node.uuid} p="sm" radius="md" withBorder>
+                                <Paper bg="dark.6" key={node.uuid} p="sm" radius="md" withBorder>
                                     <Group align="center" justify="space-between" wrap="nowrap">
                                         <Group
                                             align="center"
