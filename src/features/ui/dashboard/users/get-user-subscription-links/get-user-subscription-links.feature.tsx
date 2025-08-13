@@ -1,8 +1,16 @@
+import {
+    PiCheck,
+    PiCopy,
+    PiEmptyDuotone,
+    PiLinkBreakDuotone,
+    PiQrCodeDuotone
+} from 'react-icons/pi'
 import { ActionIcon, Center, CopyButton, Drawer, Menu, Stack, Text, TextInput } from '@mantine/core'
-import { PiCheck, PiCopy, PiEmptyDuotone, PiLinkBreakDuotone } from 'react-icons/pi'
 import { useDisclosure } from '@mantine/hooks'
 import { useTranslation } from 'react-i18next'
+import { modals } from '@mantine/modals'
 import { useEffect } from 'react'
+import { renderSVG } from 'uqr'
 
 import { useGetSubscriptionInfoByShortUuid } from '@shared/api/hooks'
 import { LoaderModalShared } from '@shared/ui/loader-modal'
@@ -28,6 +36,23 @@ export function GetUserSubscriptionLinksFeature(props: IProps) {
     useEffect(() => {
         refetch()
     }, [opened])
+
+    const renderQrCode = (link: string, remark: string) => {
+        modals.open({
+            centered: true,
+            title: remark,
+            children: (
+                <div
+                    dangerouslySetInnerHTML={{
+                        __html: renderSVG(link, {
+                            whiteColor: '#161B22',
+                            blackColor: '#3CC9DB'
+                        })
+                    }}
+                />
+            )
+        })
+    }
 
     const renderLinks = () => {
         if (!subscriptionInfo?.links.length) {
@@ -67,6 +92,11 @@ export function GetUserSubscriptionLinksFeature(props: IProps) {
                         </CopyButton>
                     }
                     readOnly
+                    rightSection={
+                        <ActionIcon onClick={() => renderQrCode(link, name)} variant="subtle">
+                            <PiQrCodeDuotone size="16px" />
+                        </ActionIcon>
+                    }
                     value={link}
                 />
             )
