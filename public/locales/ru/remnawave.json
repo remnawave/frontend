@@ -1554,5 +1554,12 @@
             "link-to-your-support-or-help-page": "Ссылка на вашу поддержку или страницу помощи",
             "support-url": "URL поддержки"
         }
+    },
+    "internal-squad-accessible-nodes": {
+        "modal": {
+            "widget": {
+                "internal-squad-accessible-nodes": "Internal Squad Accessible Nodes"
+            }
+        }
     }
 }
