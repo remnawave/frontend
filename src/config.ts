@@ -8,6 +8,7 @@ export const app = {
     configEditor: {
         wasmUrl: '/main.wasm',
         wasmJsUrl: '/wasm_exec.js',
-        jsonSchemaUrl: '/xray.schema.json'
+        jsonSchemaUrl: '/xray.schema.json',
+        jsonSchemaCnUrl: '/xray.schema.cn.json'
     }
 }

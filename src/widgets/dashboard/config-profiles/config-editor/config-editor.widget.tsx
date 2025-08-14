@@ -12,7 +12,7 @@ import styles from './ConfigEditor.module.css'
 import { IProps } from './interfaces'
 
 export function ConfigEditorWidget(props: IProps) {
-    const { t } = useTranslation()
+    const { t, i18n } = useTranslation()
 
     const { configProfile } = props
     const [result, setResult] = useState('')
@@ -23,8 +23,8 @@ export function ConfigEditorWidget(props: IProps) {
 
     useEffect(() => {
         if (!monacoRef.current) return
-        MonacoSetupFeature.setup(monacoRef.current as Monaco)
-    }, [monacoRef.current])
+        MonacoSetupFeature.setup(monacoRef.current as Monaco, i18n.language)
+    }, [monacoRef.current, i18n.language])
 
     const handleEditorDidMount = (monaco: Monaco) => {
         monaco.editor.defineTheme('GithubDark', {

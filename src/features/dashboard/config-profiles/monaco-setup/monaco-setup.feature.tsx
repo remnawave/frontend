@@ -5,9 +5,19 @@ import axios from 'axios'
 import { app } from 'src/config'
 
 export const MonacoSetupFeature = {
-    setup: async (monaco: Monaco) => {
+    setup: async (monaco: Monaco, currentLanguage: string) => {
         try {
-            const response = await axios.get(app.configEditor.jsonSchemaUrl)
+            let { jsonSchemaUrl } = app.configEditor
+            switch (currentLanguage) {
+                case 'zh':
+                    jsonSchemaUrl = app.configEditor.jsonSchemaCnUrl
+                    break
+                default:
+                    jsonSchemaUrl = app.configEditor.jsonSchemaUrl
+            }
+
+            const response = await axios.get(jsonSchemaUrl)
+
             const schema = await response.data
 
             monaco.languages.json.jsonDefaults.setDiagnosticsOptions({
