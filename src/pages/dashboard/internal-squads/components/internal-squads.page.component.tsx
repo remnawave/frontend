@@ -2,6 +2,7 @@ import { useTranslation } from 'react-i18next'
 import { motion } from 'motion/react'
 import { Grid } from '@mantine/core'
 
+import { InternalSquadAccessibleNodesModalWidget } from '@widgets/dashboard/internal-squads/internal-squad-accessible-nodes-modal/internal-squad-accessible-nodes.modal.widget'
 import { InternalSquadsHeaderWidget } from '@widgets/dashboard/internal-squads/internal-squads-header-widget/internal-squads-header.widget'
 import { InternalSquadsGridWidget } from '@widgets/dashboard/internal-squads/internal-squads-grid/internal-squads-grid.widget'
 import { RenameModalShared } from '@shared/ui/modals/rename-modal.shared'
@@ -43,6 +44,7 @@ export const InternalSquadsPageComponent = (props: Props) => {
                 </Grid.Col>
             </Grid>
             <RenameModalShared key="rename-internal-squad-modal" renameFrom="internalSquad" />
+            <InternalSquadAccessibleNodesModalWidget key="internal-squad-accessible-nodes-modal" />
         </Page>
     )
 }

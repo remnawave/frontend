@@ -1,4 +1,5 @@
 import {
+    GetInternalSquadAccessibleNodesCommand,
     GetInternalSquadByUuidCommand,
     GetInternalSquadsCommand
 } from '@remnawave/backend-contract'
@@ -15,6 +16,9 @@ export const internalSquadsQueryKeys = createQueryKeys('internalSquads', {
         queryKey: null
     },
     getInternalSquad: (route: GetInternalSquadByUuidCommand.Request) => ({
+        queryKey: [route]
+    }),
+    getInternalSquadAccessibleNodes: (route: GetInternalSquadAccessibleNodesCommand.Request) => ({
         queryKey: [route]
     })
 })
@@ -50,6 +54,24 @@ export const useGetInternalSquad = createGetQueryHook({
     errorHandler: (error) => {
         notifications.show({
             title: `Get Internal Squad`,
+            message: error instanceof Error ? error.message : `Request failed with unknown error.`,
+            color: 'red'
+        })
+    }
+})
+
+export const useGetInternalSquadAccessibleNodes = createGetQueryHook({
+    endpoint: GetInternalSquadAccessibleNodesCommand.TSQ_url,
+    responseSchema: GetInternalSquadAccessibleNodesCommand.ResponseSchema,
+    routeParamsSchema: GetInternalSquadAccessibleNodesCommand.RequestSchema,
+    getQueryKey: ({ route }) =>
+        internalSquadsQueryKeys.getInternalSquadAccessibleNodes(route!).queryKey,
+    rQueryParams: {
+        staleTime: sToMs(15)
+    },
+    errorHandler: (error) => {
+        notifications.show({
+            title: `Get Internal Squad Accessible Nodes`,
             message: error instanceof Error ? error.message : `Request failed with unknown error.`,
             color: 'red'
         })

@@ -23,7 +23,13 @@ import {
     PiTrashDuotone,
     PiUsers
 } from 'react-icons/pi'
-import { TbChevronDown, TbCirclesRelation, TbUsersMinus, TbUsersPlus } from 'react-icons/tb'
+import {
+    TbChevronDown,
+    TbCirclesRelation,
+    TbServerCog,
+    TbUsersMinus,
+    TbUsersPlus
+} from 'react-icons/tb'
 import { useTranslation } from 'react-i18next'
 import { useMediaQuery } from '@mantine/hooks'
 import { modals } from '@mantine/modals'
@@ -364,6 +370,26 @@ export function InternalSquadsGridWidget(props: IProps) {
                                                     }
                                                 >
                                                     {t('internal-squads-grid.widget.remove-users')}
+                                                </Menu.Item>
+
+                                                <Menu.Item
+                                                    leftSection={<TbServerCog size={14} />}
+                                                    onClick={() => {
+                                                        setInternalData({
+                                                            internalState: {
+                                                                squadUuid: internalSquad.uuid
+                                                            },
+                                                            modalKey:
+                                                                MODALS.INTERNAL_SQUAD_ACCESSIBLE_NODES_DRAWER
+                                                        })
+                                                        open(
+                                                            MODALS.INTERNAL_SQUAD_ACCESSIBLE_NODES_DRAWER
+                                                        )
+                                                    }}
+                                                >
+                                                    {t(
+                                                        'view-user-modal.widget.view-accessible-nodes'
+                                                    )}
                                                 </Menu.Item>
 
                                                 <CopyButton
