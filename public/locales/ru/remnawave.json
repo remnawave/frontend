@@ -1558,7 +1558,7 @@
     "internal-squad-accessible-nodes": {
         "modal": {
             "widget": {
-                "internal-squad-accessible-nodes": "Internal Squad Accessible Nodes"
+                "internal-squad-accessible-nodes": "Ноды, доступные скваду"
             }
         }
     }
