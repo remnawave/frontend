@@ -173,7 +173,11 @@
     },
     "config-editor": {
         "widget": {
-            "loading-editor": "در حال بارگذاری ویرایشگر..."
+            "loading-editor": "در حال بارگذاری ویرایشگر...",
+            "unsaved-changes": "Unsaved Changes",
+            "your-changes-will-be-lost-if-you-leave-this-page-without-saving": "Your changes will be lost if you leave this page without saving.",
+            "leave": "Leave",
+            "stay": "Stay"
         }
     },
     "keypair": {
