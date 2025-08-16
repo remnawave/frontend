@@ -23,8 +23,17 @@ import { queryClient } from '@shared/api'
 import { Props } from './interfaces'
 
 export function ConfigEditorActionsFeature(props: Props) {
-    const { editorRef, monacoRef, isConfigValid, setResult, setIsConfigValid, configProfile } =
-        props
+    const {
+        editorRef,
+        monacoRef,
+        isConfigValid,
+        setResult,
+        setIsConfigValid,
+        configProfile,
+        hasUnsavedChanges,
+        setHasUnsavedChanges,
+        setOriginalValue
+    } = props
     const { t } = useTranslation()
 
     const isMobile = useMediaQuery('(max-width: 48em)')
@@ -37,6 +46,16 @@ export function ConfigEditorActionsFeature(props: Props) {
                     queryKey: QueryKeys['config-profiles'].getConfigProfiles.queryKey
                 })
                 setIsConfigValid(true)
+                setHasUnsavedChanges(false)
+
+                if (
+                    editorRef.current &&
+                    typeof editorRef.current === 'object' &&
+                    'getValue' in editorRef.current
+                ) {
+                    const newValue = editorRef.current.getValue()
+                    setOriginalValue(newValue)
+                }
             },
             onError: (error) => {
                 setIsConfigValid(false)
@@ -160,8 +179,8 @@ export function ConfigEditorActionsFeature(props: Props) {
     return (
         <Group grow={isMobile} preventGrowOverflow={false} wrap="wrap">
             <Button
-                color="teal"
-                disabled={!isConfigValid}
+                color={!hasUnsavedChanges ? 'gray' : 'teal'}
+                disabled={!isConfigValid && !hasUnsavedChanges}
                 leftSection={<PiFloppyDisk size={16} />}
                 loading={isUpdating}
                 onClick={handleSave}
