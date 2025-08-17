@@ -243,6 +243,34 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
         )
     }
 
+    const vlessRouteHoverCard = () => {
+        return (
+            <HoverCard shadow="md" width={300} withArrow>
+                <HoverCard.Target>
+                    <ActionIcon color="gray" size="xs" variant="subtle">
+                        <HiQuestionMarkCircle size={20} />
+                    </ActionIcon>
+                </HoverCard.Target>
+                <HoverCard.Dropdown>
+                    <Stack gap="md">
+                        <Stack gap="sm">
+                            <Text c="dimmed" size="sm">
+                                Refer to the{' '}
+                                <Link
+                                    target="_blank"
+                                    to="https://xtls.github.io/ru/config/inbounds/vless.html"
+                                >
+                                    XTLS Documentation
+                                </Link>{' '}
+                                for more information.
+                            </Text>
+                        </Stack>
+                    </Stack>
+                </HoverCard.Dropdown>
+            </HoverCard>
+        )
+    }
+
     return (
         <form onSubmit={handleSubmit}>
             <Group gap="xs" justify="space-between" mb="md">
@@ -563,6 +591,21 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
                                                 w="55%"
                                             />
                                         </Group>
+
+                                        <NumberInput
+                                            key={form.key('vlessRouteId')}
+                                            label="Vless Route ID"
+                                            {...form.getInputProps('vlessRouteId')}
+                                            allowDecimal={false}
+                                            allowNegative={false}
+                                            clampBehavior="strict"
+                                            decimalScale={0}
+                                            description="From 0 to 255, empty to disable"
+                                            hideControls
+                                            max={255}
+                                            min={0}
+                                            rightSection={vlessRouteHoverCard()}
+                                        />
                                     </Stack>
                                 </Fieldset>
 
