@@ -600,9 +600,9 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
                                             allowNegative={false}
                                             clampBehavior="strict"
                                             decimalScale={0}
-                                            description="From 0 to 255, empty to disable"
+                                            description="From 0 to 65535, empty to disable"
                                             hideControls
-                                            max={255}
+                                            max={65535}
                                             min={0}
                                             rightSection={vlessRouteHoverCard()}
                                         />
