@@ -286,7 +286,13 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
                 />
             </Group>
 
-            <Tabs classNames={classes} onChange={setActiveTab} value={activeTab} variant="unstyled">
+            <Tabs
+                classNames={classes}
+                keepMounted
+                onChange={setActiveTab}
+                value={activeTab}
+                variant="unstyled"
+            >
                 <Tabs.List grow mb="md">
                     <Tabs.Tab key="basic" leftSection={<PiNoteDuotone size={16} />} value="basic">
                         {t('base-host-form.basic')}
