@@ -141,13 +141,13 @@
             "update": "Обновить",
             "create-new-node": "Создать новую ноду",
             "restart-all-nodes": "Перезапустить все ноды",
-            "search-nodes": "Search nodes",
-            "force-restart": "Force restart",
-            "force-restart-description": "will guarantee that all nodes will fully restart Xray Core.",
-            "graceful-restart": "Graceful restart",
-            "graceful-restart-description-1": "will send a request to all nodes to restart Xray, but request can be unfulfilled if the node hash is the same as the current one. This is the default option.",
-            "force": "Force",
-            "graceful": "Graceful"
+            "search-nodes": "Поиск нод...",
+            "force-restart": "Принудительный перезапуск",
+            "force-restart-description": "гарантирует, что все ноды полностью перезапустит Xray Core.",
+            "graceful-restart": "Плавный перезапуск",
+            "graceful-restart-description-1": "отправит запрос на все ноды для перезапуска Xray, но запрос может быть невыполнен, если хэш на ноде совпадает с текущим. Это опция по умолчанию.",
+            "force": "Принудительный",
+            "graceful": "Плавный"
         }
     },
     "toggle-node-status-button": {
@@ -181,10 +181,10 @@
     "config-editor": {
         "widget": {
             "loading-editor": "Загрузка редактора...",
-            "unsaved-changes": "Unsaved Changes",
-            "your-changes-will-be-lost-if-you-leave-this-page-without-saving": "Your changes will be lost if you leave this page without saving.",
-            "leave": "Leave",
-            "stay": "Stay"
+            "unsaved-changes": "Несохранённые изменения",
+            "your-changes-will-be-lost-if-you-leave-this-page-without-saving": "Ваши изменения будут потеряны, если вы покинете эту страницу без сохранения.",
+            "leave": "Выйти",
+            "stay": "Остаться"
         }
     },
     "keypair": {
