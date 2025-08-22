@@ -69,7 +69,7 @@
             "select-all": "انتخاب همه",
             "cut-selection": "بریدن محتوای انتخاب شده",
             "paste-from-clipboard": "جای‌گذاری از کلیپ‌بورد",
-            "generate-keypair": "Generate Keypair"
+            "generate-keypair": "ایجاد جفت‌کلید"
         }
     },
     "use-bandwidth-table-columns": {
@@ -141,13 +141,13 @@
             "update": "به‌روزرسانی",
             "create-new-node": "ساخت نود جدید",
             "restart-all-nodes": "ریستارت کردن تمامی نودها",
-            "search-nodes": "Search nodes",
-            "force-restart": "Force restart",
-            "force-restart-description": "will guarantee that all nodes will fully restart Xray Core.",
-            "graceful-restart": "Graceful restart",
-            "graceful-restart-description-1": "will send a request to all nodes to restart Xray, but request can be unfulfilled if the node hash is the same as the current one. This is the default option.",
-            "force": "Force",
-            "graceful": "Graceful"
+            "search-nodes": "جست‌وجوی نودها",
+            "force-restart": "ری‌استارت اجباری",
+            "force-restart-description": "با این روش همه نودها هسته Xray را به صورت اجباری ری‌استارت خواهند کرد",
+            "graceful-restart": "راه‌اندازی مجدد آرام",
+            "graceful-restart-description-1": "با این روش درخواست ری‌استارت هسته به همه نودها ارسال خواهد شد اما درصورت یکسان بودن هش نود با هش فعلی ممکن است درخواست اجرا نشود. این، حالت پیشفرض ری‌استارت است",
+            "force": "اجباری",
+            "graceful": "آرام"
         }
     },
     "toggle-node-status-button": {
@@ -181,10 +181,10 @@
     "config-editor": {
         "widget": {
             "loading-editor": "در حال بارگذاری ویرایشگر...",
-            "unsaved-changes": "Unsaved Changes",
-            "your-changes-will-be-lost-if-you-leave-this-page-without-saving": "Your changes will be lost if you leave this page without saving.",
-            "leave": "Leave",
-            "stay": "Stay"
+            "unsaved-changes": "تغییرات ذخیره نشده",
+            "your-changes-will-be-lost-if-you-leave-this-page-without-saving": "اگر این صفحه را بدون ذخیره تغییرات ترک کنید، تغییرات ایجاد شده از دست خواهند رفت.",
+            "leave": "ترک",
+            "stay": "ماندن"
         }
     },
     "keypair": {
@@ -205,7 +205,7 @@
     "edit-host-modal": {
         "widget": {
             "edit-host": "ویرایش هاست",
-            "dangling-host-cannot-be-cloned": "Dangling host cannot be cloned",
+            "dangling-host-cannot-be-cloned": "نمی‌توان هاست معلق را کلون کرد",
             "error": "خطا"
         }
     },
@@ -400,8 +400,8 @@
         "paste-default-sockopt-params": "جای‌گذاری پارامترهای پیش‌فرض Sockopt",
         "basic": "ساده",
         "advanced": "پیشرفته",
-        "connection-overrides": "Connection overrides",
-        "xray-json-and-raw": "Xray Json & Raw",
+        "connection-overrides": "تنظیمات اجباری اتصال",
+        "xray-json-and-raw": "اشتراک خام و JSON برای Xray",
         "hide-host": "مخفی کردن هاست",
         "hide-host-from-users-remnawave-will-send-host-only-for-raw-subscription-responses": "مخفی کردن هاست از کاربران، Remnawave این هاست را فقط برای درخواست‌های اشتراک خام ارسال خواهد کرد",
         "apps-specific": "Apps specific",
@@ -942,10 +942,10 @@
                 "invalid-configuration": "پیکربندی نامعتبر",
                 "the-configuration-did-not-pass-validation": "پیکربندی از اعتبارسنجی عبور نکرد.",
                 "close": "بستن",
-                "configuration-settings": "Configuration Settings",
-                "platform-apps": "Platform Apps",
-                "move-up": "Move up",
-                "move-down": "Move down"
+                "configuration-settings": "تنظیمات پیکربندی",
+                "platform-apps": "نرم‌افزارهای پلتفرم",
+                "move-up": "انتقال به بالا",
+                "move-down": "انتقال به پایین"
             }
         }
     },
@@ -1557,19 +1557,19 @@
     },
     "branding-settings": {
         "component": {
-            "branding-settings": "Branding Settings",
-            "brand-name": "Brand Name",
-            "the-name-that-will-be-displayed-on-the-subscription-page": "The name that will be displayed on the subscription page",
-            "url-to-your-brand-logo-image": "URL to your brand logo image",
-            "logo-url": "Logo URL",
-            "link-to-your-support-or-help-page": "Link to your support or help page",
-            "support-url": "Support URL"
+            "branding-settings": "تنظیمات برندینگ",
+            "brand-name": "اسم برند",
+            "the-name-that-will-be-displayed-on-the-subscription-page": "اسمی که در صفحه اشتراک نشان داده خواهد شد",
+            "url-to-your-brand-logo-image": "آدرس تصویر لوگوی برند شما",
+            "logo-url": "ادرس لوگو",
+            "link-to-your-support-or-help-page": "لینک صفحه پشتیبانی شما",
+            "support-url": "آدرس پشتیبانی"
         }
     },
     "internal-squad-accessible-nodes": {
         "modal": {
             "widget": {
-                "internal-squad-accessible-nodes": "Internal Squad Accessible Nodes"
+                "internal-squad-accessible-nodes": "نودهای قابل دسترسی برای اسکواد"
             }
         }
     }
