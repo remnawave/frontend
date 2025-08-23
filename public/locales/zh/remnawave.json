@@ -141,13 +141,13 @@
             "update": "刷新",
             "create-new-node": "创建新节点",
             "restart-all-nodes": "重启所有节点",
-            "search-nodes": "Search nodes",
-            "force-restart": "Force restart",
-            "force-restart-description": "will guarantee that all nodes will fully restart Xray Core.",
-            "graceful-restart": "Graceful restart",
-            "graceful-restart-description-1": "will send a request to all nodes to restart Xray, but request can be unfulfilled if the node hash is the same as the current one. This is the default option.",
-            "force": "Force",
-            "graceful": "Graceful"
+            "search-nodes": "搜索节点",
+            "force-restart": "强制重启",
+            "force-restart-description": "将保证所有节点将完全重启 Xray 核心。",
+            "graceful-restart": "平滑重启",
+            "graceful-restart-description-1": "将向所有节点发送请求以重启 Xray。 但如果节点哈希与当前的哈希相同，则请求可能无法实现。 这是默认的选项。",
+            "force": "强制执行",
+            "graceful": "平滑的"
         }
     },
     "toggle-node-status-button": {
