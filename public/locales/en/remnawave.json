@@ -51,7 +51,10 @@
         "limited-users": "Limited users",
         "expired-users": "Expired users",
         "active-users": "Active users",
-        "total-users": "Total users"
+        "total-users": "Total users",
+        "widget": {
+            "total": "Total"
+        }
     },
     "config-editor-actions": {
         "feature": {

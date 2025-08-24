@@ -22,31 +22,31 @@ export function UsersMetrics() {
     const cards = [
         {
             icon: PiUsersDuotone,
-            title: t('users-metrics.total-users'),
+            title: t('users-metrics.widget.total'),
             value: users?.totalUsers,
             color: 'blue'
         },
         {
             icon: PiPulseDuotone,
-            title: t('users-metrics.active-users'),
+            title: 'Active',
             value: users?.statusCounts.ACTIVE,
             color: 'teal'
         },
         {
             icon: PiClockUserDuotone,
-            title: t('users-metrics.expired-users'),
+            title: 'Expired',
             value: users?.statusCounts.EXPIRED,
             color: 'red'
         },
         {
             icon: PiClockCountdownDuotone,
-            title: t('users-metrics.limited-users'),
+            title: 'Limited',
             value: users?.statusCounts.LIMITED,
             color: 'orange'
         },
         {
             icon: PiProhibitDuotone,
-            title: t('users-metrics.disabled-users'),
+            title: 'Disabled',
             value: users?.statusCounts.DISABLED,
             color: 'gray'
         }
@@ -60,7 +60,7 @@ export function UsersMetrics() {
                             <card.icon size="32px" />
                         </MetricCard.Icon>
                         <Stack align="self-start" gap="xs" miw={0} w="100%">
-                            <MetricCard.TextMuted truncate>{card.title}</MetricCard.TextMuted>
+                            <MetricCard.TextMuted>{card.title}</MetricCard.TextMuted>
                             <Box miw={0} w={'100%'}>
                                 <MetricCard.TextEmphasis ff={'monospace'} truncate>
                                     {isLoading ? (
