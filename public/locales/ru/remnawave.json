@@ -51,7 +51,10 @@
         "limited-users": "Limited польз.",
         "expired-users": "Expired польз.",
         "active-users": "Active польз.",
-        "total-users": "Всего польз."
+        "total-users": "Всего польз.",
+        "widget": {
+            "total": "Всего"
+        }
     },
     "config-editor-actions": {
         "feature": {
@@ -1570,6 +1573,14 @@
         "modal": {
             "widget": {
                 "internal-squad-accessible-nodes": "Ноды, доступные скваду"
+            }
+        }
+    },
+    "config-profile-inbounds": {
+        "drawer": {
+            "widget": {
+                "fetching-inbounds": "Загружаем инбаунды...",
+                "inbounds-with-active-squads": "Инбаунды с активными сквадами"
             }
         }
     }
