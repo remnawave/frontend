@@ -51,7 +51,10 @@
         "limited-users": "受限用户",
         "expired-users": "过期用户",
         "active-users": "活跃用户",
-        "total-users": "总用户数"
+        "total-users": "总用户数",
+        "widget": {
+            "total": "Total"
+        }
     },
     "config-editor-actions": {
         "feature": {
@@ -1570,6 +1573,14 @@
         "modal": {
             "widget": {
                 "internal-squad-accessible-nodes": "内置分组可访问节点"
+            }
+        }
+    },
+    "config-profile-inbounds": {
+        "drawer": {
+            "widget": {
+                "fetching-inbounds": "Fetching inbounds...",
+                "inbounds-with-active-squads": "Inbounds with active squads"
             }
         }
     }

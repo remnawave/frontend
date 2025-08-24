@@ -51,7 +51,10 @@
         "limited-users": "کاربران محدود شده",
         "expired-users": "کاربران منقضی",
         "active-users": "کاربران فعال",
-        "total-users": "کل کاربران"
+        "total-users": "کل کاربران",
+        "widget": {
+            "total": "Total"
+        }
     },
     "config-editor-actions": {
         "feature": {
@@ -1570,6 +1573,14 @@
         "modal": {
             "widget": {
                 "internal-squad-accessible-nodes": "نودهای قابل دسترسی برای اسکواد"
+            }
+        }
+    },
+    "config-profile-inbounds": {
+        "drawer": {
+            "widget": {
+                "fetching-inbounds": "Fetching inbounds...",
+                "inbounds-with-active-squads": "Inbounds with active squads"
             }
         }
     }
