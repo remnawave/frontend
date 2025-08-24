@@ -43,8 +43,9 @@ export function ConfigEditorActionsFeature(props: Props) {
         mutationFns: {
             onSuccess: async () => {
                 await queryClient.refetchQueries({
-                    queryKey: QueryKeys['config-profiles'].getConfigProfiles.queryKey
+                    queryKey: QueryKeys.configProfiles.getConfigProfiles.queryKey
                 })
+
                 setIsConfigValid(true)
                 setHasUnsavedChanges(false)
 

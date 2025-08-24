@@ -1572,5 +1572,13 @@
                 "internal-squad-accessible-nodes": "Internal Squad Accessible Nodes"
             }
         }
+    },
+    "config-profile-inbounds": {
+        "drawer": {
+            "widget": {
+                "fetching-inbounds": "Fetching inbounds...",
+                "inbounds-with-active-squads": "Inbounds with active squads"
+            }
+        }
     }
 }

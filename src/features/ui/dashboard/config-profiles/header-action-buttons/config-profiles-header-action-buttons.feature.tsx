@@ -67,7 +67,7 @@ export const ConfigProfilesHeaderActionButtonsFeature = () => {
 
     const handleUpdate = async () => {
         await queryClient.refetchQueries({
-            queryKey: QueryKeys['config-profiles'].getConfigProfiles.queryKey
+            queryKey: QueryKeys.configProfiles.getConfigProfiles.queryKey
         })
     }
 

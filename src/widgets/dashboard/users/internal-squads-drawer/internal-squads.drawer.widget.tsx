@@ -24,12 +24,8 @@ import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { VirtualizedFlatInboundsListShared } from '@shared/ui/config-profiles/virtualized-flat-inbounds-list/virtualized-flat-inbounds-list.shared'
-import {
-    internalSquadsQueryKeys,
-    useGetConfigProfiles,
-    useUpdateInternalSquad
-} from '@shared/api/hooks'
 import { ConfigProfileCardShared } from '@shared/ui/config-profiles/config-profile-card/config-profile-card.shared'
+import { QueryKeys, useGetConfigProfiles, useUpdateInternalSquad } from '@shared/api/hooks'
 import { queryClient } from '@shared/api/query-client'
 import { formatInt } from '@shared/utils/misc'
 
@@ -178,8 +174,13 @@ export const InternalSquadsDrawer = (props: IProps) => {
             mutationFns: {
                 onSuccess: () => {
                     queryClient.refetchQueries({
-                        queryKey: internalSquadsQueryKeys.getInternalSquads.queryKey
+                        queryKey: QueryKeys.internalSquads.getInternalSquads.queryKey
                     })
+
+                    queryClient.refetchQueries({
+                        queryKey: QueryKeys.configProfiles.getConfigProfileInbounds._def
+                    })
+
                     onClose()
                 }
             }
