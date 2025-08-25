@@ -51,7 +51,10 @@
         "limited-users": "Limited users",
         "expired-users": "Expired users",
         "active-users": "Active users",
-        "total-users": "Total users"
+        "total-users": "Total users",
+        "widget": {
+            "total": "Total"
+        }
     },
     "config-editor-actions": {
         "feature": {
@@ -140,7 +143,14 @@
         "feature": {
             "update": "Update",
             "create-new-node": "Create new node",
-            "restart-all-nodes": "Restart all nodes"
+            "restart-all-nodes": "Restart all nodes",
+            "search-nodes": "Search nodes",
+            "force-restart": "Force restart",
+            "force-restart-description": "will guarantee that all nodes will fully restart Xray Core.",
+            "graceful-restart": "Graceful restart",
+            "graceful-restart-description-1": "will send a request to all nodes to restart Xray, but request can be unfulfilled if the node hash is the same as the current one. This is the default option.",
+            "force": "Force",
+            "graceful": "Graceful"
         }
     },
     "toggle-node-status-button": {
@@ -173,7 +183,11 @@
     },
     "config-editor": {
         "widget": {
-            "loading-editor": "Loading editor..."
+            "loading-editor": "Loading editor...",
+            "unsaved-changes": "Unsaved Changes",
+            "your-changes-will-be-lost-if-you-leave-this-page-without-saving": "Your changes will be lost if you leave this page without saving.",
+            "leave": "Leave",
+            "stay": "Stay"
         }
     },
     "keypair": {
@@ -1559,6 +1573,14 @@
         "modal": {
             "widget": {
                 "internal-squad-accessible-nodes": "Internal Squad Accessible Nodes"
+            }
+        }
+    },
+    "config-profile-inbounds": {
+        "drawer": {
+            "widget": {
+                "fetching-inbounds": "Fetching inbounds...",
+                "inbounds-with-active-squads": "Inbounds with active squads"
             }
         }
     }

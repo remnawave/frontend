@@ -24,6 +24,12 @@ export const CreateHostModalWidget = () => {
     const form = useForm<CreateHostCommand.Request>({
         mode: 'uncontrolled',
         name: 'create-host-form',
+        validateInputOnBlur: true,
+        onValuesChange: (values) => {
+            if (typeof values.vlessRouteId === 'string' && values.vlessRouteId === '') {
+                form.setFieldValue('vlessRouteId', null)
+            }
+        },
         validate: zodResolver(CreateHostCommand.RequestSchema)
     })
 

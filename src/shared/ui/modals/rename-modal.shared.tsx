@@ -62,7 +62,7 @@ export function RenameModalShared({ renameFrom }: IProps) {
             mutationFns: {
                 onSuccess: () => {
                     queryClient.refetchQueries({
-                        queryKey: QueryKeys['config-profiles'].getConfigProfiles.queryKey
+                        queryKey: QueryKeys.configProfiles.getConfigProfiles.queryKey
                     })
                     handleModalClose()
                 }

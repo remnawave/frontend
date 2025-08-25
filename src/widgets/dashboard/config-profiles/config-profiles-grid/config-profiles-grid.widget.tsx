@@ -30,6 +30,7 @@ import { XtlsLogo } from '@shared/ui/logos/xtls-logo'
 import { formatInt } from '@shared/utils/misc'
 import { ROUTES } from '@shared/constants'
 
+import { ConfigProfileInboundsDrawerWidget } from '../config-profile-inbounds-drawer/config-profile-inbounds.drawer.widget'
 import classes from './ConfigProfilesGrid.module.css'
 import { IProps } from './interfaces'
 
@@ -45,7 +46,7 @@ export function ConfigProfilesGridWidget(props: IProps) {
         mutationFns: {
             onSuccess: () => {
                 queryClient.refetchQueries({
-                    queryKey: QueryKeys['config-profiles'].getConfigProfiles.queryKey
+                    queryKey: QueryKeys.configProfiles.getConfigProfiles.queryKey
                 })
             }
         }
@@ -190,7 +191,18 @@ export function ConfigProfilesGridWidget(props: IProps) {
                                                 <Badge
                                                     color="blue"
                                                     leftSection={<PiTag size={12} />}
+                                                    onClick={() => {
+                                                        setInternalData({
+                                                            internalState: profile,
+                                                            modalKey:
+                                                                MODALS.CONFIG_PROFILE_SHOW_INBOUNDS_DRAWER
+                                                        })
+                                                        open(
+                                                            MODALS.CONFIG_PROFILE_SHOW_INBOUNDS_DRAWER
+                                                        )
+                                                    }}
                                                     size="lg"
+                                                    style={{ cursor: 'pointer' }}
                                                     variant="light"
                                                 >
                                                     {formatInt(inboundsCount, {
@@ -289,6 +301,7 @@ export function ConfigProfilesGridWidget(props: IProps) {
                                                 >
                                                     {t('config-profiles-grid.widget.quick-view')}
                                                 </Menu.Item>
+
                                                 <Menu.Item
                                                     leftSection={<TbDownload size={18} />}
                                                     onClick={(e) => {
@@ -320,9 +333,9 @@ export function ConfigProfilesGridWidget(props: IProps) {
                                                             color={copied ? 'teal' : undefined}
                                                             leftSection={
                                                                 copied ? (
-                                                                    <PiCheck size={14} />
+                                                                    <PiCheck size={18} />
                                                                 ) : (
-                                                                    <PiCopy size={14} />
+                                                                    <PiCopy size={18} />
                                                                 )
                                                             }
                                                             onClick={copy}
@@ -335,7 +348,7 @@ export function ConfigProfilesGridWidget(props: IProps) {
                                                 </CopyButton>
 
                                                 <Menu.Item
-                                                    leftSection={<PiPencil size={14} />}
+                                                    leftSection={<PiPencil size={18} />}
                                                     onClick={() => {
                                                         setInternalData({
                                                             internalState: {
@@ -355,7 +368,7 @@ export function ConfigProfilesGridWidget(props: IProps) {
 
                                                 <Menu.Item
                                                     color="red"
-                                                    leftSection={<PiTrashDuotone size={14} />}
+                                                    leftSection={<PiTrashDuotone size={18} />}
                                                     onClick={(e) => {
                                                         e.stopPropagation()
                                                         handleDeleteProfile(
@@ -377,7 +390,7 @@ export function ConfigProfilesGridWidget(props: IProps) {
                     </Grid.Col>
                 )
             })}
-
+            <ConfigProfileInboundsDrawerWidget />
             <ActiveNodesListModalWithStoreShared />
         </Grid>
     )
