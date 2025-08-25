@@ -196,7 +196,15 @@ export const NodeMetricsWidget = () => {
                         </Text>
                     </Group>
                     <Group align="center" gap="xs">
-                        <Indicator color="teal.5" processing size={8} visibleFrom="xs" />
+                        <Indicator
+                            color="teal.5"
+                            processing
+                            size={8}
+                            style={{
+                                zIndex: 5
+                            }}
+                            visibleFrom="xs"
+                        />
                         <Text c="gray.4" size="xs">
                             Live updates from /metrics endpoint
                         </Text>

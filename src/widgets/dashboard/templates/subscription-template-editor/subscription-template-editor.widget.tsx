@@ -84,6 +84,10 @@ export function SubscriptionTemplateEditorWidget(props: Props) {
                             bracketPairs: true,
                             indentation: true
                         },
+                        scrollbar: {
+                            alwaysConsumeMouseWheel: false
+                        },
+                        smoothScrolling: true,
                         insertSpaces: true,
                         minimap: { enabled: true },
                         scrollBeyondLastLine: false,

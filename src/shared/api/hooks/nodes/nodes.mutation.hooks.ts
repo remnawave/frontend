@@ -135,6 +135,7 @@ export const useDisableNode = createMutationHook({
 export const useRestartAllNodes = createMutationHook({
     endpoint: RestartAllNodesCommand.TSQ_url,
     responseSchema: RestartAllNodesCommand.ResponseSchema,
+    bodySchema: RestartAllNodesCommand.RequestBodySchema,
     requestMethod: RestartAllNodesCommand.endpointDetails.REQUEST_METHOD,
     rMutationParams: {
         onSuccess: () => {

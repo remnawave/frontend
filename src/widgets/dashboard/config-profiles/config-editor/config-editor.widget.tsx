@@ -1,7 +1,9 @@
-import { Box, Card, Code, Paper } from '@mantine/core'
+import { Box, Card, Code, Paper, Text } from '@mantine/core'
 import Editor, { Monaco } from '@monaco-editor/react'
 import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { useBlocker } from 'react-router-dom'
+import { modals } from '@mantine/modals'
 
 import { ConfigEditorActionsFeature } from '@features/dashboard/config-profiles/config-editor-actions'
 import { ConfigValidationFeature } from '@features/dashboard/config-profiles/config-validation'
@@ -17,20 +19,80 @@ export function ConfigEditorWidget(props: IProps) {
     const { configProfile } = props
     const [result, setResult] = useState('')
     const [isConfigValid, setIsConfigValid] = useState(false)
+    const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false)
+    const [originalValue, setOriginalValue] = useState('')
 
     const editorRef = useRef<unknown>(null)
     const monacoRef = useRef<unknown>(null)
+
+    useEffect(() => {
+        const initialValue = JSON.stringify(configProfile.config, null, 2)
+        setOriginalValue(initialValue)
+        setHasUnsavedChanges(false)
+    }, [configProfile.config])
 
     useEffect(() => {
         if (!monacoRef.current) return
         MonacoSetupFeature.setup(monacoRef.current as Monaco, i18n.language)
     }, [monacoRef.current, i18n.language])
 
+    const blocker = useBlocker(
+        ({ currentLocation, nextLocation }) =>
+            hasUnsavedChanges && currentLocation.pathname !== nextLocation.pathname
+    )
+
+    useEffect(() => {
+        if (blocker.state === 'blocked') {
+            modals.openConfirmModal({
+                title: t('config-editor.widget.unsaved-changes'),
+                children: (
+                    <Text c="dimmed" size="md">
+                        {t(
+                            'config-editor.widget.your-changes-will-be-lost-if-you-leave-this-page-without-saving'
+                        )}
+                    </Text>
+                ),
+                centered: true,
+                labels: {
+                    confirm: t('config-editor.widget.leave'),
+                    cancel: t('config-editor.widget.stay')
+                },
+
+                confirmProps: {
+                    color: 'red',
+                    variant: 'light'
+                },
+                cancelProps: {
+                    variant: 'light'
+                },
+                onConfirm: () => {
+                    blocker.proceed()
+                },
+                onCancel: () => {
+                    blocker.reset()
+                },
+                closeOnConfirm: true,
+                closeOnCancel: true
+            })
+        }
+    }, [blocker])
+
     const handleEditorDidMount = (monaco: Monaco) => {
         monaco.editor.defineTheme('GithubDark', {
             ...monacoTheme,
             base: 'vs-dark'
         })
+    }
+
+    const checkForChanges = () => {
+        if (!editorRef.current) return
+        if (typeof editorRef.current !== 'object') return
+        if (!('getValue' in editorRef.current)) return
+        if (typeof editorRef.current.getValue !== 'function') return
+
+        const currentValue = editorRef.current.getValue()
+        const hasChanges = currentValue !== originalValue
+        setHasUnsavedChanges(hasChanges)
     }
 
     return (
@@ -78,14 +140,15 @@ export function ConfigEditorWidget(props: IProps) {
                     className={styles.monacoEditor}
                     defaultLanguage="json"
                     loading={t('config-editor.widget.loading-editor')}
-                    onChange={() =>
+                    onChange={() => {
                         ConfigValidationFeature.validate(
                             editorRef,
                             monacoRef,
                             setResult,
                             setIsConfigValid
                         )
-                    }
+                        checkForChanges()
+                    }}
                     onMount={(editor, monaco) => {
                         editorRef.current = editor
                         monacoRef.current = monaco
@@ -105,6 +168,9 @@ export function ConfigEditorWidget(props: IProps) {
                             enabled: true,
                             independentColorPoolPerBracketType: true
                         },
+                        scrollbar: {
+                            alwaysConsumeMouseWheel: false
+                        },
                         detectIndentation: true,
                         folding: true,
                         foldingStrategy: 'indentation',
@@ -116,9 +182,12 @@ export function ConfigEditorWidget(props: IProps) {
                             indentation: true
                         },
                         insertSpaces: true,
+                        lineNumbersMinChars: 1,
                         minimap: { enabled: true },
                         quickSuggestions: true,
+                        renderLineHighlight: 'all',
                         scrollBeyondLastLine: false,
+                        smoothScrolling: true,
                         tabSize: 2
                     }}
                     theme={'GithubDark'}
@@ -130,9 +199,13 @@ export function ConfigEditorWidget(props: IProps) {
                 <ConfigEditorActionsFeature
                     configProfile={configProfile}
                     editorRef={editorRef}
+                    hasUnsavedChanges={hasUnsavedChanges}
                     isConfigValid={isConfigValid}
                     monacoRef={monacoRef}
+                    originalValue={originalValue}
+                    setHasUnsavedChanges={setHasUnsavedChanges}
                     setIsConfigValid={setIsConfigValid}
+                    setOriginalValue={setOriginalValue}
                     setResult={setResult}
                 />
             </Card>

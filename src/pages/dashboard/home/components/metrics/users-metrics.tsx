@@ -18,31 +18,31 @@ export const getUsersMetrics = (
         {
             value: formatInt(users.totalUsers) ?? 0,
             icon: PiUsersDuotone,
-            title: t('users-metrics.total-users'),
+            title: t('users-metrics.widget.total'),
             color: 'var(--mantine-color-blue-4)'
         },
         {
             value: formatInt(users.statusCounts.ACTIVE) ?? 0,
-            title: t('users-metrics.active-users'),
+            title: 'Active',
             icon: PiPulseDuotone,
             color: 'var(--mantine-color-teal-4)'
         },
         {
             value: formatInt(users.statusCounts.EXPIRED) ?? 0,
             icon: PiClockUserDuotone,
-            title: t('users-metrics.expired-users'),
+            title: 'Expired',
             color: 'var(--mantine-color-red-4)'
         },
         {
             value: formatInt(users.statusCounts.LIMITED) ?? 0,
             icon: PiClockCountdownDuotone,
-            title: t('users-metrics.limited-users'),
+            title: 'Limited',
             color: 'var(--mantine-color-orange-4)'
         },
         {
             value: formatInt(users.statusCounts.DISABLED) ?? 0,
             icon: PiProhibitDuotone,
-            title: t('users-metrics.disabled-users'),
+            title: 'Disabled',
             color: 'var(--mantine-color-gray-4)'
         }
     ]

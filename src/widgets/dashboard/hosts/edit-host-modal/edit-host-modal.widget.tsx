@@ -30,9 +30,13 @@ export const EditHostModalWidget = () => {
     const form = useForm<UpdateHostCommand.Request>({
         name: 'edit-host-form',
         mode: 'uncontrolled',
-        validate: zodResolver(UpdateHostCommand.RequestSchema.omit({ uuid: true })),
-        validateInputOnChange: true,
-        validateInputOnBlur: true
+        validateInputOnBlur: true,
+        onValuesChange: (values) => {
+            if (typeof values.vlessRouteId === 'string' && values.vlessRouteId === '') {
+                form.setFieldValue('vlessRouteId', null)
+            }
+        },
+        validate: zodResolver(UpdateHostCommand.RequestSchema.omit({ uuid: true }))
     })
 
     const handleClose = () => {
@@ -114,7 +118,8 @@ export const EditHostModalWidget = () => {
                 sockoptParams: sockoptParamsParsed,
                 tag: host.tag ?? undefined,
                 isHidden: host.isHidden,
-                overrideSniFromAddress: host.overrideSniFromAddress
+                overrideSniFromAddress: host.overrideSniFromAddress,
+                vlessRouteId: host.vlessRouteId ?? undefined
             })
         }
     }, [host, configProfiles])
@@ -232,7 +237,8 @@ export const EditHostModalWidget = () => {
                 serverDescription: host.serverDescription ?? undefined,
                 sockoptParams: host.sockoptParams ?? undefined,
                 tag: host.tag ?? undefined,
-                overrideSniFromAddress: host.overrideSniFromAddress
+                overrideSniFromAddress: host.overrideSniFromAddress,
+                vlessRouteId: host.vlessRouteId ?? undefined
             }
         })
     }

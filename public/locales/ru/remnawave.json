@@ -51,7 +51,10 @@
         "limited-users": "Limited польз.",
         "expired-users": "Expired польз.",
         "active-users": "Active польз.",
-        "total-users": "Всего польз."
+        "total-users": "Всего польз.",
+        "widget": {
+            "total": "Всего"
+        }
     },
     "config-editor-actions": {
         "feature": {
@@ -140,7 +143,14 @@
         "feature": {
             "update": "Обновить",
             "create-new-node": "Создать новую ноду",
-            "restart-all-nodes": "Перезапустить все ноды"
+            "restart-all-nodes": "Перезапустить все ноды",
+            "search-nodes": "Поиск нод...",
+            "force-restart": "Принудительный перезапуск",
+            "force-restart-description": "гарантирует, что все ноды полностью перезапустит Xray Core.",
+            "graceful-restart": "Плавный перезапуск",
+            "graceful-restart-description-1": "отправит запрос на все ноды для перезапуска Xray, но запрос может быть невыполнен, если хэш на ноде совпадает с текущим. Это опция по умолчанию.",
+            "force": "Принудительный",
+            "graceful": "Плавный"
         }
     },
     "toggle-node-status-button": {
@@ -173,7 +183,11 @@
     },
     "config-editor": {
         "widget": {
-            "loading-editor": "Загрузка редактора..."
+            "loading-editor": "Загрузка редактора...",
+            "unsaved-changes": "Несохранённые изменения",
+            "your-changes-will-be-lost-if-you-leave-this-page-without-saving": "Ваши изменения будут потеряны, если вы покинете эту страницу без сохранения.",
+            "leave": "Выйти",
+            "stay": "Остаться"
         }
     },
     "keypair": {
@@ -1559,6 +1573,14 @@
         "modal": {
             "widget": {
                 "internal-squad-accessible-nodes": "Ноды, доступные скваду"
+            }
+        }
+    },
+    "config-profile-inbounds": {
+        "drawer": {
+            "widget": {
+                "fetching-inbounds": "Загружаем инбаунды...",
+                "inbounds-with-active-squads": "Инбаунды с активными сквадами"
             }
         }
     }
