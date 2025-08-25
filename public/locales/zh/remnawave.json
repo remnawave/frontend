@@ -53,7 +53,7 @@
         "active-users": "活跃用户",
         "total-users": "总用户数",
         "widget": {
-            "total": "Total"
+            "total": "总计"
         }
     },
     "config-editor-actions": {
@@ -1579,8 +1579,8 @@
     "config-profile-inbounds": {
         "drawer": {
             "widget": {
-                "fetching-inbounds": "Fetching inbounds...",
-                "inbounds-with-active-squads": "Inbounds with active squads"
+                "fetching-inbounds": "正在获取入站配置...",
+                "inbounds-with-active-squads": "入站配置（活跃的内部分组）"
             }
         }
     }
