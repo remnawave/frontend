@@ -53,7 +53,7 @@
         "active-users": "کاربران فعال",
         "total-users": "کل کاربران",
         "widget": {
-            "total": "Total"
+            "total": "مجموع"
         }
     },
     "config-editor-actions": {
@@ -407,7 +407,7 @@
         "xray-json-and-raw": "اشتراک خام و JSON برای Xray",
         "hide-host": "مخفی کردن هاست",
         "hide-host-from-users-remnawave-will-send-host-only-for-raw-subscription-responses": "مخفی کردن هاست از کاربران، Remnawave این هاست را فقط برای درخواست‌های اشتراک خام ارسال خواهد کرد",
-        "apps-specific": "Apps specific",
+        "apps-specific": "مختص نرم‌افزارها",
         "single-domain": "تک‌دامنه",
         "default-mode-for-one-domain": "حالت پیشفرض برای یک دامنه",
         "multi-domain": "چند دامنه",
@@ -1579,8 +1579,8 @@
     "config-profile-inbounds": {
         "drawer": {
             "widget": {
-                "fetching-inbounds": "Fetching inbounds...",
-                "inbounds-with-active-squads": "Inbounds with active squads"
+                "fetching-inbounds": "درحال دریافت اینباندها",
+                "inbounds-with-active-squads": "اینباندهایی که اسکواد فعال دارند"
             }
         }
     }
