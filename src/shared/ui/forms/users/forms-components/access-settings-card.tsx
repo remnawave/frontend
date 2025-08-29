@@ -81,11 +81,19 @@ export const AccessSettingsCard = <T extends CreateUserCommand.Request | UpdateU
                         }}
                         submitButtonProps={{
                             style: {
-                                width: '30%'
+                                borderRadius: 'var(--mantine-radius-md)',
+                                width: '20%'
                             }
                         }}
                         timePickerProps={{
                             withDropdown: true,
+                            scrollAreaProps: {
+                                styles: {
+                                    content: {
+                                        minWidth: 'fit-content' // TODO: MantineUI bug
+                                    }
+                                }
+                            },
                             presets: getTimeRange({
                                 startTime: '06:00:00',
                                 endTime: '18:00:00',
