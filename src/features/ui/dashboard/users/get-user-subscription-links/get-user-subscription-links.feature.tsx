@@ -12,13 +12,13 @@ import { modals } from '@mantine/modals'
 import { useEffect } from 'react'
 import { renderSVG } from 'uqr'
 
-import { useGetSubscriptionInfoByShortUuid } from '@shared/api/hooks'
+import { useGetSubscriptionInfoByUuid } from '@shared/api/hooks'
 import { LoaderModalShared } from '@shared/ui/loader-modal'
 
 import { IProps } from './interfaces'
 
 export function GetUserSubscriptionLinksFeature(props: IProps) {
-    const { shortUuid } = props
+    const { uuid } = props
     const { t } = useTranslation()
 
     const [opened, handlers] = useDisclosure(false)
@@ -27,9 +27,9 @@ export function GetUserSubscriptionLinksFeature(props: IProps) {
         data: subscriptionInfo,
         isLoading,
         refetch
-    } = useGetSubscriptionInfoByShortUuid({
+    } = useGetSubscriptionInfoByUuid({
         route: {
-            shortUuid
+            uuid
         }
     })
 

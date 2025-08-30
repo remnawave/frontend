@@ -1,3 +1,3 @@
 export interface IProps {
-    shortUuid: string
+    uuid: string
 }
