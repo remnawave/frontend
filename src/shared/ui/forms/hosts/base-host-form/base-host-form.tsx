@@ -258,7 +258,7 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
                                 Refer to the{' '}
                                 <Link
                                     target="_blank"
-                                    to="https://xtls.github.io/ru/config/inbounds/vless.html"
+                                    to="https://xtls.github.io/config/routing.html"
                                 >
                                     XTLS Documentation
                                 </Link>{' '}

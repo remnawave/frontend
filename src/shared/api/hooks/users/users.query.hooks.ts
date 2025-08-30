@@ -1,7 +1,7 @@
 import {
     GetAllTagsCommand,
     GetAllUsersCommand,
-    GetSubscriptionInfoByShortUuidCommand,
+    GetSubscriptionByUuidCommand,
     GetUserAccessibleNodesCommand,
     GetUserByUuidCommand,
     GetUserUsageByRangeCommand
@@ -20,7 +20,7 @@ export const usersQueryKeys = createQueryKeys('users', {
     getUserByUuid: (route: GetUserByUuidCommand.Request) => ({
         queryKey: [route]
     }),
-    getSubscriptionInfoByShortUuid: (route: GetSubscriptionInfoByShortUuidCommand.Request) => ({
+    getSubscriptionByUuid: (route: GetSubscriptionByUuidCommand.Request) => ({
         queryKey: [route]
     }),
     getUserUsageByRange: (
@@ -74,17 +74,17 @@ export const useGetUsersV2 = createGetQueryHook({
     }
 })
 
-export const useGetSubscriptionInfoByShortUuid = createGetQueryHook({
-    endpoint: GetSubscriptionInfoByShortUuidCommand.TSQ_url,
-    responseSchema: GetSubscriptionInfoByShortUuidCommand.ResponseSchema,
-    routeParamsSchema: GetSubscriptionInfoByShortUuidCommand.RequestSchema,
-    getQueryKey: ({ route }) => usersQueryKeys.getSubscriptionInfoByShortUuid(route!).queryKey,
+export const useGetSubscriptionInfoByUuid = createGetQueryHook({
+    endpoint: GetSubscriptionByUuidCommand.TSQ_url,
+    responseSchema: GetSubscriptionByUuidCommand.ResponseSchema,
+    routeParamsSchema: GetSubscriptionByUuidCommand.RequestSchema,
+    getQueryKey: ({ route }) => usersQueryKeys.getSubscriptionByUuid(route!).queryKey,
     rQueryParams: {
         staleTime: sToMs(4)
     },
     errorHandler: (error) => {
         notifications.show({
-            title: `Get Subscription Info By Short UUID`,
+            title: `Get Subscription Info By UUID`,
             message: error instanceof Error ? error.message : `Request failed with unknown error.`,
             color: 'red'
         })

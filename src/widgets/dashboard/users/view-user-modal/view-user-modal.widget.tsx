@@ -433,7 +433,7 @@ export const ViewUserModal = () => {
                                     >
                                         {t('view-user-modal.widget.subscription-qr-code')}
                                     </Menu.Item>
-                                    <GetUserSubscriptionLinksFeature shortUuid={user.shortUuid} />
+                                    <GetUserSubscriptionLinksFeature uuid={user.uuid} />
                                 </Menu.Dropdown>
                             </Menu>
                             <Button
