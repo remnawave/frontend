@@ -1,7 +1,11 @@
 import {
+    Anchor,
     Button,
+    Checkbox,
+    Code,
     Divider,
     Group,
+    Input,
     NumberInput,
     Select,
     Stack,
@@ -18,9 +22,11 @@ import {
     PiX
 } from 'react-icons/pi'
 import { BulkAllUpdateUsersCommand } from '@remnawave/backend-contract'
-import { useForm, zodResolver } from '@mantine/form'
+import { zodResolver } from 'mantine-form-zod-resolver'
 import { DateTimePicker } from '@mantine/dates'
 import { useTranslation } from 'react-i18next'
+import { TbDevices2 } from 'react-icons/tb'
+import { useForm } from '@mantine/form'
 import dayjs from 'dayjs'
 
 import { CreateableTagInputShared } from '@shared/ui/createable-tag-input/createable-tag-input'
@@ -46,7 +52,8 @@ export const BulkAllUserActionsUpdateTabFeature = (props: IProps) => {
             expireAt: undefined,
             description: undefined,
             telegramId: undefined,
-            tag: undefined
+            tag: undefined,
+            hwidDeviceLimit: undefined
         },
         validate: zodResolver(
             BulkAllUpdateUsersCommand.RequestSchema.omit({
@@ -79,7 +86,9 @@ export const BulkAllUserActionsUpdateTabFeature = (props: IProps) => {
                     email: values.email === '' ? null : values.email,
                     // @ts-expect-error - TODO: fix ZOD schema
                     expireAt: values.expireAt ? dayjs(values.expireAt).toISOString() : undefined,
-                    tag: values.tag === '' ? null : values.tag
+                    tag: values.tag === '' ? null : values.tag,
+                    // @ts-expect-error - TODO: fix ZOD schema
+                    hwidDeviceLimit: values.hwidDeviceLimit === '' ? null : values.hwidDeviceLimit
                 }
             },
             {
@@ -247,6 +256,64 @@ export const BulkAllUserActionsUpdateTabFeature = (props: IProps) => {
                     resize="vertical"
                     {...form.getInputProps('description')}
                 />
+
+                <Stack gap={0}>
+                    <Input.Label>{t('create-user-modal.widget.hwid-device-limit')}</Input.Label>
+                    <Input.Description component="div">
+                        <>
+                            <Text c="dimmed" size="0.75rem">
+                                {t('create-user-modal.widget.hwid-user-limit-line-1')}{' '}
+                                <Code>HWID_DEVICE_LIMIT_ENABLED</Code>{' '}
+                                {t('create-user-modal.widget.hwid-user-limit-line-2')}{' '}
+                                <Code>true</Code>.{' '}
+                                <Anchor
+                                    href="https://remna.st/docs/features/hwid-device-limit"
+                                    target="_blank"
+                                >
+                                    {t('create-user-modal.widget.hwid-user-limit-line-3')}
+                                </Anchor>
+                            </Text>
+                            <Checkbox
+                                checked={form.getValues().hwidDeviceLimit === 0}
+                                label={t('create-user-modal.widget.disable-hwid-limit')}
+                                mb="xs"
+                                mt="xs"
+                                onChange={(event) => {
+                                    const { checked } = event.currentTarget
+                                    form.setFieldValue('hwidDeviceLimit', checked ? 0 : null)
+                                }}
+                            />
+
+                            <Checkbox
+                                checked={form.getValues().hwidDeviceLimit === null}
+                                disabled={form.getValues().hwidDeviceLimit === 0}
+                                label="Use HWID_FALLBACK_DEVICE_LIMIT"
+                                mb="xs"
+                                mt="xs"
+                                onChange={(event) => {
+                                    const { checked } = event.currentTarget
+                                    form.setFieldValue(
+                                        'hwidDeviceLimit',
+                                        checked ? null : undefined
+                                    )
+                                }}
+                            />
+                        </>
+                    </Input.Description>
+
+                    <NumberInput
+                        allowDecimal={false}
+                        allowNegative={false}
+                        disabled={
+                            form.getValues().hwidDeviceLimit === 0 ||
+                            form.getValues().hwidDeviceLimit === null
+                        }
+                        hideControls
+                        key={form.key('hwidDeviceLimit')}
+                        leftSection={<TbDevices2 size="16px" />}
+                        {...form.getInputProps('hwidDeviceLimit')}
+                    />
+                </Stack>
 
                 <Stack gap={'xs'}>
                     <Button

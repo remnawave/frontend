@@ -2,6 +2,7 @@ import { fixupConfigRules, fixupPluginRules } from '@eslint/compat'
 import { defineConfig, globalIgnores } from 'eslint/config'
 import reactRefresh from 'eslint-plugin-react-refresh'
 import tsParser from '@typescript-eslint/parser'
+import stylistic from '@stylistic/eslint-plugin'
 import { FlatCompat } from '@eslint/eslintrc'
 import _import from 'eslint-plugin-import'
 import { fileURLToPath } from 'node:url'
@@ -24,7 +25,8 @@ export default defineConfig([
         '**/plop',
         'plop/**/*',
         '**/plopfile.js',
-        '**/.stylelintrc.js'
+        '**/.stylelintrc.js',
+        'node_modules/'
     ]),
     {
         extends: fixupConfigRules(
@@ -41,6 +43,7 @@ export default defineConfig([
 
         plugins: {
             'react-refresh': reactRefresh,
+            '@stylistic': stylistic,
             import: fixupPluginRules(_import)
         },
 
@@ -48,7 +51,6 @@ export default defineConfig([
             globals: {
                 ...globals.browser
             },
-
             parser: tsParser
         },
 
@@ -103,13 +105,15 @@ export default defineConfig([
             'perfectionist/sort-objects': ['off'],
             'perfectionist/sort-modules': ['off'],
 
-            indent: [
-                'error',
-                4,
-                {
-                    SwitchCase: 1
-                }
-            ],
+            // indent: [
+            //     'error',
+            //     4,
+            //     {
+            //         SwitchCase: 1
+            //     }
+            // ],
+
+            '@stylistic/indent': ['error', 4, { SwitchCase: 1 }],
 
             'max-classes-per-file': 'off',
             'import/no-extraneous-dependencies': ['off'],
