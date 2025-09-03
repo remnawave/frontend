@@ -194,8 +194,7 @@ export const EditHostModalWidget = () => {
                 xHttpExtraParams,
                 muxParams,
                 sockoptParams,
-                // eslint-disable-next-line no-nested-ternary
-                tag: values.tag ? (values.tag === '' ? null : values.tag) : undefined
+                tag: values.tag === '' ? null : values.tag
             }
         })
     })
