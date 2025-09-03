@@ -13,6 +13,8 @@ import {
 import { HiChartPie, HiCurrencyDollar, HiServer } from 'react-icons/hi'
 import { TbChartArcs, TbCirclesRelation } from 'react-icons/tb'
 import { useTranslation } from 'react-i18next'
+import { useHotkeys } from '@mantine/hooks'
+import { useState } from 'react'
 
 import { HappLogo } from '@pages/dashboard/utils/happ-routing-builder/ui/components/happ-routing-builder.page.component'
 import { XtlsLogo } from '@shared/ui/logos/xtls-logo'
@@ -22,8 +24,11 @@ import { MenuItem } from './interfaces'
 
 export const useMenuSections = (): MenuItem[] => {
     const { t } = useTranslation()
+    const [showDevMenu, setShowDevMenu] = useState(false)
 
-    return [
+    useHotkeys([['mod+shift+J', () => setShowDevMenu((prev) => !prev)]])
+
+    const menuSections: MenuItem[] = [
         {
             header: t('constants.overview'),
             section: [
@@ -153,18 +158,22 @@ export const useMenuSections = (): MenuItem[] => {
                     icon: PiArrowsInCardinalFill
                 }
             ]
-        },
-        {
-            header: 'Superadmin',
+        }
+    ]
+
+    if (showDevMenu) {
+        menuSections.unshift({
+            header: 'Dev Menu',
             section: [
                 {
-                    name: 'Queues',
-                    // TODO: remove this after testing
+                    name: 'Queues Viewer',
                     href: '/api/queues',
                     icon: PiAirTrafficControlDuotone,
                     newTab: true
                 }
             ]
-        }
-    ]
+        })
+    }
+
+    return menuSections
 }
