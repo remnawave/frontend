@@ -81,7 +81,7 @@ export const HappRoutingBuilderWidget = () => {
         lastUpdated: '',
         dnsHosts: '{\n  "example.com": "1.2.3.4",\n  "test.org": "8.8.8.8"\n}',
         directSites: 'geosite:ru\ngeosite:geolocation-ru',
-        directIp: 'geoip:cn',
+        directIp: 'geoip:ru',
         proxySites: 'geosite:com',
         proxyIp: '',
         blockSites: '',
@@ -820,7 +820,7 @@ export const HappRoutingBuilderWidget = () => {
                                                             e.target.value
                                                         )
                                                     }
-                                                    placeholder="geoip:cn"
+                                                    placeholder="geoip:ru"
                                                     value={formData.directIp}
                                                 />
                                             </Grid.Col>
