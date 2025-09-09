@@ -1,4 +1,6 @@
 ## Remnawave Frontend
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fremnawave%2Ffrontend.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fremnawave%2Ffrontend?ref=badge_shield)
+
 
 Frontend for Remnawave Panel..
 
@@ -16,3 +18,7 @@ Thanks to the all contributors who have helped improve Remnawave:
   <img src="https://contrib.rocks/image?repo=remnawave/frontend" />
 </a>
 </p>
+
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fremnawave%2Ffrontend.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fremnawave%2Ffrontend?ref=badge_large)
