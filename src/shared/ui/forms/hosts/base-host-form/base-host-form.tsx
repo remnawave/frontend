@@ -310,6 +310,7 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
                 <Tabs.Panel value="basic">
                     <Transition
                         duration={200}
+                        keepMounted
                         mounted={activeTab === 'basic'}
                         timingFunction="linear"
                         transition="fade"
@@ -422,6 +423,7 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
                 <Tabs.Panel value="advanced">
                     <Transition
                         duration={200}
+                        keepMounted
                         mounted={activeTab === 'advanced'}
                         timingFunction="linear"
                         transition="fade"
