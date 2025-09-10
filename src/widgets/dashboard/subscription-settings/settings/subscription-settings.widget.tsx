@@ -27,11 +27,7 @@ export const SubscriptionSettingsWidget = (props: IProps) => {
     const form = useForm<UpdateSubscriptionSettingsCommand.Request>({
         name: 'edit-subscription-settings-form',
         mode: 'uncontrolled',
-        validate: zodResolver(
-            UpdateSubscriptionSettingsCommand.RequestSchema.omit({
-                isProfileWebpageUrlEnabled: true
-            })
-        )
+        validate: zodResolver(UpdateSubscriptionSettingsCommand.RequestSchema)
     })
 
     const { mutate: updateSubscriptionSettings, isPending: isUpdateSubscriptionSettingsPending } =
@@ -92,14 +88,10 @@ export const SubscriptionSettingsWidget = (props: IProps) => {
                 customResponseHeaders[header.key] = header.value
             })
 
-            const isProfileWebpageUrlEnabled =
-                (values.isProfileWebpageUrlEnabled as unknown as string) === 'true'
-
             updateSubscriptionSettings({
                 variables: {
                     ...values,
                     uuid: values.uuid,
-                    isProfileWebpageUrlEnabled,
                     expiredUsersRemarks: expiredFiltered,
                     limitedUsersRemarks: limitedFiltered,
                     disabledUsersRemarks: disabledFiltered,
@@ -149,12 +141,7 @@ export const SubscriptionSettingsWidget = (props: IProps) => {
                 profileUpdateInterval: subscriptionSettings.profileUpdateInterval,
                 happAnnounce: subscriptionSettings.happAnnounce,
                 happRouting: subscriptionSettings.happRouting,
-
-                // @ts-expect-error - TODO: fix this
-                isProfileWebpageUrlEnabled: subscriptionSettings.isProfileWebpageUrlEnabled
-                    ? 'true'
-                    : 'false',
-
+                isProfileWebpageUrlEnabled: subscriptionSettings.isProfileWebpageUrlEnabled,
                 expiredUsersRemarks: subscriptionSettings.expiredUsersRemarks,
                 limitedUsersRemarks: subscriptionSettings.limitedUsersRemarks,
                 disabledUsersRemarks: subscriptionSettings.disabledUsersRemarks,
