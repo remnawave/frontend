@@ -376,7 +376,7 @@ export function GetHwidUserDevicesFeature(props: IProps) {
                             onClick={() => deleteAllDevices({ variables: { userUuid } })}
                             variant="light"
                         >
-                            Delete All Devices
+                            {t('get-hwid-user-devices.feature.delete-all-devices')}
                         </Button>
                         <TextInput
                             label={t('get-hwid-user-devices.feature.search-by-hwid')}

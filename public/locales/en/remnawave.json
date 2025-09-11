@@ -1070,7 +1070,8 @@
             "important-note-line-7": "Learn more.",
             "loading-hwid-devices": "Loading HWIDs and Devices ...",
             "search-by-hwid": "Search by HWID",
-            "enter-hwid-to-filter-devices": "Enter HWID to filter devices ..."
+            "enter-hwid-to-filter-devices": "Enter HWID to filter devices ...",
+            "delete-all-devices": "Delete All Devices"
         }
     },
     "headers-manager": {
