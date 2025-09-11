@@ -24,6 +24,7 @@ import dayjs from 'dayjs'
 
 import {
     hwidUserDevicesQueryKeys,
+    useDeleteAllUserHwidDevices,
     useDeleteUserHwidDevice,
     useGetUserHwidDevices
 } from '@shared/api/hooks'
@@ -50,6 +51,17 @@ export function GetHwidUserDevicesFeature(props: IProps) {
     })
 
     const { mutate: deleteDevice } = useDeleteUserHwidDevice({
+        mutationFns: {
+            onSuccess: (data) => {
+                queryClient.setQueryData(
+                    hwidUserDevicesQueryKeys.getUserHwidDevices({ userUuid }).queryKey,
+                    data
+                )
+            }
+        }
+    })
+
+    const { mutate: deleteAllDevices } = useDeleteAllUserHwidDevices({
         mutationFns: {
             onSuccess: (data) => {
                 queryClient.setQueryData(
@@ -356,6 +368,16 @@ export function GetHwidUserDevicesFeature(props: IProps) {
                     />
                 ) : (
                     <Stack>
+                        <Button
+                            color="red"
+                            fullWidth
+                            leftSection={<PiTrash size="16px" />}
+                            mb="md"
+                            onClick={() => deleteAllDevices({ variables: { userUuid } })}
+                            variant="light"
+                        >
+                            Delete All Devices
+                        </Button>
                         <TextInput
                             label={t('get-hwid-user-devices.feature.search-by-hwid')}
                             onChange={(event) => setSearchQuery(event.currentTarget.value)}
