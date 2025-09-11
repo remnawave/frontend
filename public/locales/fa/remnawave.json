@@ -1071,7 +1071,7 @@
             "loading-hwid-devices": "در حال بارگذاری HWIDها و دستگاه‌ها ...",
             "search-by-hwid": "جستجو بر اساس HWID",
             "enter-hwid-to-filter-devices": "برای فیلتر کردن دستگاه‌ها HWID را وارد کنید ...",
-            "delete-all-devices": "Delete All Devices"
+            "delete-all-devices": "حذف همه دستگاه‌ها"
         }
     },
     "headers-manager": {
