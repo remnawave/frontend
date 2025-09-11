@@ -1070,7 +1070,8 @@
             "important-note-line-7": "بیشتر بدانید.",
             "loading-hwid-devices": "در حال بارگذاری HWIDها و دستگاه‌ها ...",
             "search-by-hwid": "جستجو بر اساس HWID",
-            "enter-hwid-to-filter-devices": "برای فیلتر کردن دستگاه‌ها HWID را وارد کنید ..."
+            "enter-hwid-to-filter-devices": "برای فیلتر کردن دستگاه‌ها HWID را وارد کنید ...",
+            "delete-all-devices": "Delete All Devices"
         }
     },
     "headers-manager": {
