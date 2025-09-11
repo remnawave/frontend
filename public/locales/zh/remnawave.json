@@ -1070,7 +1070,8 @@
             "important-note-line-7": "了解更多。",
             "loading-hwid-devices": "正在加载 HWID 和设备...",
             "search-by-hwid": "按 HWID 搜索",
-            "enter-hwid-to-filter-devices": "输入 HWID 以筛选设备..."
+            "enter-hwid-to-filter-devices": "输入 HWID 以筛选设备...",
+            "delete-all-devices": "Delete All Devices"
         }
     },
     "headers-manager": {

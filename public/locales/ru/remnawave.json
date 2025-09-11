@@ -1070,7 +1070,8 @@
             "important-note-line-7": "Подробнее.",
             "loading-hwid-devices": "Загружаем HWID устройства...",
             "search-by-hwid": "Поиск по HWID",
-            "enter-hwid-to-filter-devices": "Введите HWID для поиска..."
+            "enter-hwid-to-filter-devices": "Введите HWID для поиска...",
+            "delete-all-devices": "Delete All Devices"
         }
     },
     "headers-manager": {
