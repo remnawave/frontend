@@ -103,7 +103,7 @@ export const useUserTableColumns = (
                 minSize: 150,
                 enableColumnFilterModes: false,
                 enableColumnFilter: false,
-                maxSize: 400,
+                maxSize: 700,
                 size: 300
             },
             {
