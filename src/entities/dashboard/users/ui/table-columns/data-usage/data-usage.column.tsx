@@ -25,13 +25,13 @@ export function DataUsageColumnEntity(props: IProps) {
     }[user.trafficLimitStrategy]
 
     return (
-        <Box w={300}>
+        <Box miw={300}>
             <Group justify="space-between">
                 <Text c="red.5" fw={700} fz="xs">
-                    {Math.round(usedTrafficPercentage)}%
+                    {usedTrafficPercentage.toFixed(2)}%
                 </Text>
                 <Text c="teal.5" fw={700} fz="xs">
-                    {Math.round(100 - usedTrafficPercentage)}%
+                    {(100 - usedTrafficPercentage).toFixed(2)}%
                 </Text>
             </Group>
             <Progress
