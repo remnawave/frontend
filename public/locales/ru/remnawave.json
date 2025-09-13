@@ -1071,7 +1071,7 @@
             "loading-hwid-devices": "Загружаем HWID устройства...",
             "search-by-hwid": "Поиск по HWID",
             "enter-hwid-to-filter-devices": "Введите HWID для поиска...",
-            "delete-all-devices": "Delete All Devices"
+            "delete-all-devices": "Удалить все устройства"
         }
     },
     "headers-manager": {
@@ -1583,6 +1583,15 @@
                 "fetching-inbounds": "Загружаем инбаунды...",
                 "inbounds-with-active-squads": "Инбаунды с активными сквадами"
             }
+        }
+    },
+    "get-user-subscription-request-history": {
+        "feature": {
+            "subscription-request-history": "История запросов подписки",
+            "nothing-to-show": "Нечего показывать...",
+            "request-at": "Запрос в",
+            "ip-address": "IP-адрес",
+            "user-agent": "Юзер-агент"
         }
     }
 }
