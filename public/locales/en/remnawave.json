@@ -1584,5 +1584,14 @@
                 "inbounds-with-active-squads": "Inbounds with active squads"
             }
         }
+    },
+    "get-user-subscription-request-history": {
+        "feature": {
+            "subscription-request-history": "Subscription Request History",
+            "nothing-to-show": "Nothing to show...",
+            "request-at": "Request At",
+            "ip-address": "IP Address",
+            "user-agent": "User Agent"
+        }
     }
 }

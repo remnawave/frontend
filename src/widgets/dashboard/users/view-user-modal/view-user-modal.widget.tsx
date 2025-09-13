@@ -31,6 +31,7 @@ import {
     usersQueryKeys,
     useUpdateUser
 } from '@shared/api/hooks'
+import { GetUserSubscriptionRequestHistoryFeature } from '@features/ui/dashboard/users/get-user-subscription-request-history'
 import { GetUserSubscriptionLinksFeature } from '@features/ui/dashboard/users/get-user-subscription-links'
 import { ToggleUserStatusButtonFeature } from '@features/ui/dashboard/users/toggle-user-status-button'
 import { RevokeSubscriptionUserFeature } from '@features/ui/dashboard/users/revoke-subscription-user'
@@ -387,6 +388,7 @@ export const ViewUserModal = () => {
                                     </Menu.Item>
                                     <GetUserUsageFeature userUuid={user.uuid} />
                                     <GetHwidUserDevicesFeature userUuid={user.uuid} />
+
                                     <Menu.Item
                                         leftSection={<TbServerCog size={14} />}
                                         onClick={() => {
@@ -434,6 +436,9 @@ export const ViewUserModal = () => {
                                         {t('view-user-modal.widget.subscription-qr-code')}
                                     </Menu.Item>
                                     <GetUserSubscriptionLinksFeature uuid={user.uuid} />
+                                    <GetUserSubscriptionRequestHistoryFeature
+                                        userUuid={user.uuid}
+                                    />
                                 </Menu.Dropdown>
                             </Menu>
                             <Button
