@@ -112,6 +112,35 @@ function formatDataForHighcharts(
         }
     })
 
+    const remainingUsers = significantUsers.slice(maxDisplayedUsers)
+    if (remainingUsers.length > 0 && selectedUsers.length === 0) {
+        const othersData = new Array(categories.length).fill(0)
+        let othersTotal = 0
+
+        for (let i = 0; i < categories.length; i++) {
+            const category = categories[i]
+            const dateMap = dataByDateAndUser.get(category)
+
+            for (const userName of remainingUsers) {
+                const userValue = dateMap?.get(userName) || 0
+                othersData[i] += userValue
+            }
+        }
+
+        for (const userName of remainingUsers) {
+            othersTotal += userTotals.get(userName) || 0
+        }
+
+        if (othersTotal > 0) {
+            series.push({
+                name: `Others (${remainingUsers.length} users)`,
+                data: othersData,
+                color: '#999999',
+                total: othersTotal
+            })
+        }
+    }
+
     const allUserCount = userTotals.size
     const significantUserCount = significantUsers.length
     const displayedUserCount = finalUsers.length
