@@ -209,7 +209,11 @@
         "widget": {
             "edit-host": "Редактировать хост",
             "dangling-host-cannot-be-cloned": "Хост со статусом DANGLING не может быть клонирован",
-            "error": "Ошибка"
+            "error": "Ошибка",
+            "are-you-sure": "Вы уверены?",
+            "allowing-insecure-connections-can-lead-to-security-risks-we-do-not-recommend-enabling-this-option": "Разрешение небезопасных соединений может привести к рискам безопасности. Мы не рекомендуем включать эту опцию.",
+            "proceed": "Продолжить",
+            "cancel": "Закрыть"
         }
     },
     "hosts-page-header": {
@@ -415,7 +419,9 @@
         "wildcard-domain": "Wildcard домен",
         "wildcard-domain-description": "Шаблон шаблона Wildcard для субдоменов. Remnawave заменит * случайно созданной строкой.",
         "override-sni-from-address": "Переопределить SNI из адреса",
-        "override-sni-from-address-description": "Эта опция заменяет значение SNI на указанное значение поля Адрес. Это особенно полезно для опций: мульти-домен или Wildcard-домен."
+        "override-sni-from-address-description": "Эта опция заменяет значение SNI на указанное значение поля Адрес. Это особенно полезно для опций: мульти-домен или Wildcard-домен.",
+        "legacy-options": "Устаревшие настройки",
+        "allow-insecure": "Разрешить небезопасные"
     },
     "base-node-form": {
         "country": "Страна",

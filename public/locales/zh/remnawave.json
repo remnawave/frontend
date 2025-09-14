@@ -209,7 +209,11 @@
         "widget": {
             "edit-host": "编辑主机",
             "dangling-host-cannot-be-cloned": "同名主机不能被克隆。",
-            "error": "错误"
+            "error": "错误",
+            "are-you-sure": "Are you sure?",
+            "allowing-insecure-connections-can-lead-to-security-risks-we-do-not-recommend-enabling-this-option": "Allowing insecure connections can lead to security risks. We do not recommend enabling this option.",
+            "proceed": "Proceed",
+            "cancel": "Cancel"
         }
     },
     "hosts-page-header": {
@@ -415,7 +419,9 @@
         "wildcard-domain": "通配符域名",
         "wildcard-domain-description": "子域的通配符模式。Remnawave将以 * 替换为随机生成的字符串。",
         "override-sni-from-address": "从地址覆盖SNI地址",
-        "override-sni-from-address-description": "此选项用指定的地址字段值替换SNI值。这对于多域配置或通配符域配置特别有用。"
+        "override-sni-from-address-description": "此选项用指定的地址字段值替换SNI值。这对于多域配置或通配符域配置特别有用。",
+        "legacy-options": "Legacy options",
+        "allow-insecure": "Allow Insecure"
     },
     "base-node-form": {
         "country": "国家",
