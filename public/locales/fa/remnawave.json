@@ -209,7 +209,11 @@
         "widget": {
             "edit-host": "ویرایش هاست",
             "dangling-host-cannot-be-cloned": "نمی‌توان هاست معلق را کلون کرد",
-            "error": "خطا"
+            "error": "خطا",
+            "are-you-sure": "Are you sure?",
+            "allowing-insecure-connections-can-lead-to-security-risks-we-do-not-recommend-enabling-this-option": "Allowing insecure connections can lead to security risks. We do not recommend enabling this option.",
+            "proceed": "Proceed",
+            "cancel": "Cancel"
         }
     },
     "hosts-page-header": {
@@ -415,7 +419,9 @@
         "wildcard-domain": "دامنه wildcard",
         "wildcard-domain-description": "الگوی wildcard برای دامنه. Remnawave به جای * یک رشته متنی رندوم جایگذاری خواهد کرد",
         "override-sni-from-address": "بازنویسی SNI از آدرس دامنه",
-        "override-sni-from-address-description": "این گزینه مقدار SNI را با آدرس مشخص شده جایگزین خواهد کرد که برای کانفیگ‌های چند دامنه‌ای و wildcard قابل استفاده می‌باشد"
+        "override-sni-from-address-description": "این گزینه مقدار SNI را با آدرس مشخص شده جایگزین خواهد کرد که برای کانفیگ‌های چند دامنه‌ای و wildcard قابل استفاده می‌باشد",
+        "legacy-options": "Legacy options",
+        "allow-insecure": "Allow Insecure"
     },
     "base-node-form": {
         "country": "کشور",
@@ -1070,7 +1076,8 @@
             "important-note-line-7": "بیشتر بدانید.",
             "loading-hwid-devices": "در حال بارگذاری HWIDها و دستگاه‌ها ...",
             "search-by-hwid": "جستجو بر اساس HWID",
-            "enter-hwid-to-filter-devices": "برای فیلتر کردن دستگاه‌ها HWID را وارد کنید ..."
+            "enter-hwid-to-filter-devices": "برای فیلتر کردن دستگاه‌ها HWID را وارد کنید ...",
+            "delete-all-devices": "حذف همه دستگاه‌ها"
         }
     },
     "headers-manager": {
@@ -1582,6 +1589,15 @@
                 "fetching-inbounds": "درحال دریافت اینباندها",
                 "inbounds-with-active-squads": "اینباندهایی که اسکواد فعال دارند"
             }
+        }
+    },
+    "get-user-subscription-request-history": {
+        "feature": {
+            "subscription-request-history": "Subscription Request History",
+            "nothing-to-show": "Nothing to show...",
+            "request-at": "Request At",
+            "ip-address": "IP Address",
+            "user-agent": "User Agent"
         }
     }
 }

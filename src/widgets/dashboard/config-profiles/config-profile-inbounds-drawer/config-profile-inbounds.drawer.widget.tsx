@@ -4,14 +4,17 @@ import {
     Box,
     Card,
     Center,
+    CopyButton,
     Drawer,
     Group,
     Loader,
     Stack,
-    Text
+    Text,
+    Tooltip
 } from '@mantine/core'
 import { githubDarkTheme, JsonEditor } from 'json-edit-react'
 import { TbCirclesRelation, TbTag } from 'react-icons/tb'
+import { PiCheck, PiCopy } from 'react-icons/pi'
 import { useTranslation } from 'react-i18next'
 import { modals } from '@mantine/modals'
 import ColorHash from 'color-hash'
@@ -124,13 +127,35 @@ export const ConfigProfileInboundsDrawerWidget = () => {
                                             </Text>
                                         </Group>
 
-                                        <Badge
-                                            leftSection={<TbCirclesRelation size="18" />}
-                                            size="lg"
-                                            variant="transparent"
-                                        >
-                                            {filteredSquads.length}
-                                        </Badge>
+                                        <Group gap={0} mr="md" wrap="nowrap">
+                                            <Badge
+                                                leftSection={<TbCirclesRelation size="18" />}
+                                                size="lg"
+                                                variant="transparent"
+                                            >
+                                                {filteredSquads.length}
+                                            </Badge>
+                                            <CopyButton timeout={2000} value={inbound.uuid}>
+                                                {({ copied, copy }) => (
+                                                    <Tooltip
+                                                        label={copied ? 'Copied!' : 'Copy UUID'}
+                                                    >
+                                                        <ActionIcon
+                                                            color={copied ? 'teal' : 'gray'}
+                                                            onClick={copy}
+                                                            size="sm"
+                                                            variant="subtle"
+                                                        >
+                                                            {copied ? (
+                                                                <PiCheck size={18} />
+                                                            ) : (
+                                                                <PiCopy size={18} />
+                                                            )}
+                                                        </ActionIcon>
+                                                    </Tooltip>
+                                                )}
+                                            </CopyButton>
+                                        </Group>
                                     </Group>
 
                                     {filteredSquads.length > 0 && (

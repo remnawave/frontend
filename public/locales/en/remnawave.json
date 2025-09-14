@@ -209,7 +209,11 @@
         "widget": {
             "edit-host": "Edit host",
             "dangling-host-cannot-be-cloned": "Dangling host cannot be cloned",
-            "error": "Error"
+            "error": "Error",
+            "are-you-sure": "Are you sure?",
+            "allowing-insecure-connections-can-lead-to-security-risks-we-do-not-recommend-enabling-this-option": "Allowing insecure connections can lead to security risks. We do not recommend enabling this option.",
+            "proceed": "Proceed",
+            "cancel": "Cancel"
         }
     },
     "hosts-page-header": {
@@ -415,7 +419,9 @@
         "wildcard-domain": "Wildcard domain",
         "wildcard-domain-description": "Wildcard pattern for subdomains. Remnawave will replace * with the randomly generated string.",
         "override-sni-from-address": "Override SNI from Address",
-        "override-sni-from-address-description": "This option replaces the SNI value with the specified Address field value. This is particularly useful for multi-domain configurations or wildcard domains configuration."
+        "override-sni-from-address-description": "This option replaces the SNI value with the specified Address field value. This is particularly useful for multi-domain configurations or wildcard domains configuration.",
+        "legacy-options": "Legacy options",
+        "allow-insecure": "Allow Insecure"
     },
     "base-node-form": {
         "country": "Country",
@@ -1070,7 +1076,8 @@
             "important-note-line-7": "Learn more.",
             "loading-hwid-devices": "Loading HWIDs and Devices ...",
             "search-by-hwid": "Search by HWID",
-            "enter-hwid-to-filter-devices": "Enter HWID to filter devices ..."
+            "enter-hwid-to-filter-devices": "Enter HWID to filter devices ...",
+            "delete-all-devices": "Delete All Devices"
         }
     },
     "headers-manager": {
@@ -1582,6 +1589,15 @@
                 "fetching-inbounds": "Fetching inbounds...",
                 "inbounds-with-active-squads": "Inbounds with active squads"
             }
+        }
+    },
+    "get-user-subscription-request-history": {
+        "feature": {
+            "subscription-request-history": "Subscription Request History",
+            "nothing-to-show": "Nothing to show...",
+            "request-at": "Request At",
+            "ip-address": "IP Address",
+            "user-agent": "User Agent"
         }
     }
 }

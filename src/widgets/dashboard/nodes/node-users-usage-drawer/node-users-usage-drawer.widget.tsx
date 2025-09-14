@@ -1,4 +1,4 @@
-/* eslint-disable indent */
+/* eslint-disable @stylistic/indent */
 import {
     ActionIcon,
     Box,
@@ -127,7 +127,7 @@ export const NodeUsersUsageDrawer = memo(() => {
         if (nodeUsersUsage && nodeUsersUsage.length > 0) {
             const processDataAsync = async () => {
                 await processData(nodeUsersUsage, {
-                    maxDisplayedUsers: 100,
+                    maxDisplayedUsers: 2_00,
                     minTrafficThreshold: 100 * 1024,
                     selectedUsers: debouncedSelectedUsers
                 })
@@ -135,7 +135,7 @@ export const NodeUsersUsageDrawer = memo(() => {
 
             processDataAsync()
         }
-    }, [nodeUsersUsage, debouncedSelectedUsers, processData])
+    }, [isOpen, nodeUsersUsage, debouncedSelectedUsers, processData])
 
     const {
         categories = [],

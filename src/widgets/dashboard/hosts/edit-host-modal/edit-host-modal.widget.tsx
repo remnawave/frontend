@@ -4,6 +4,7 @@ import { notifications } from '@mantine/notifications'
 import { useTranslation } from 'react-i18next'
 import { useEffect, useState } from 'react'
 import { Modal, Text } from '@mantine/core'
+import { modals } from '@mantine/modals'
 import { useForm } from '@mantine/form'
 import consola from 'consola/browser'
 
@@ -119,7 +120,8 @@ export const EditHostModalWidget = () => {
                 tag: host.tag ?? undefined,
                 isHidden: host.isHidden,
                 overrideSniFromAddress: host.overrideSniFromAddress,
-                vlessRouteId: host.vlessRouteId ?? undefined
+                vlessRouteId: host.vlessRouteId ?? undefined,
+                allowInsecure: host.allowInsecure ?? undefined
             })
         }
     }, [host, configProfiles])
@@ -138,6 +140,31 @@ export const EditHostModalWidget = () => {
                 'port',
                 configProfile.inbounds.find((inbound) => inbound.uuid === value)?.port ?? undefined
             )
+        }
+    })
+
+    form.watch('allowInsecure', ({ value }) => {
+        if (value === true) {
+            modals.openConfirmModal({
+                title: t('edit-host-modal.widget.are-you-sure'),
+                children: t(
+                    'edit-host-modal.widget.allowing-insecure-connections-can-lead-to-security-risks-we-do-not-recommend-enabling-this-option'
+                ),
+                centered: true,
+                labels: {
+                    confirm: t('edit-host-modal.widget.proceed'),
+                    cancel: t('edit-host-modal.widget.cancel')
+                },
+                confirmProps: {
+                    color: 'red'
+                },
+                onConfirm: () => {
+                    form.setFieldValue('allowInsecure', true)
+                },
+                onCancel: () => {
+                    form.setFieldValue('allowInsecure', false)
+                }
+            })
         }
     })
 
@@ -237,7 +264,8 @@ export const EditHostModalWidget = () => {
                 sockoptParams: host.sockoptParams ?? undefined,
                 tag: host.tag ?? undefined,
                 overrideSniFromAddress: host.overrideSniFromAddress,
-                vlessRouteId: host.vlessRouteId ?? undefined
+                vlessRouteId: host.vlessRouteId ?? undefined,
+                allowInsecure: host.allowInsecure ?? undefined
             }
         })
     }

@@ -25,20 +25,20 @@
     "bandwidth-metrics": {
         "current-year": "今年",
         "from-last-year": "对比去年",
-        "calendar-month": "日历月份",
+        "calendar-month": "日历月",
         "from-last-month-0": "对比上月",
         "last-30-days": "最近 30 天",
         "from-last-month": "对比上月",
         "last-7-days": "最近 7 天",
         "from-last-week": "对比上周",
-        "today": "今日",
+        "today": "今天",
         "from-yesterday": "对比昨日"
     },
     "online-metrics": {
         "never-online": "从未在线",
         "online-this-week": "最近一周上线",
-        "online-today": "今日在线过",
-        "online-now": "当前在线"
+        "online-today": "今天在线过",
+        "online-now": "当前在线用户"
     },
     "simple-metrics": {
         "system-uptime": "系统运行时间",
@@ -209,7 +209,11 @@
         "widget": {
             "edit-host": "编辑主机",
             "dangling-host-cannot-be-cloned": "同名主机不能被克隆。",
-            "error": "错误"
+            "error": "错误",
+            "are-you-sure": "Are you sure?",
+            "allowing-insecure-connections-can-lead-to-security-risks-we-do-not-recommend-enabling-this-option": "Allowing insecure connections can lead to security risks. We do not recommend enabling this option.",
+            "proceed": "Proceed",
+            "cancel": "Cancel"
         }
     },
     "hosts-page-header": {
@@ -277,7 +281,7 @@
     "table": {
         "widget": {
             "only-active-nodes": "仅显示启用了流量统计的节点",
-            "today": "今日",
+            "today": "今天",
             "nodes-with-active-traffic-tracking-not-found": "未找到启用流量统计的节点。"
         }
     },
@@ -306,7 +310,7 @@
             "hwid-device-limit": "HWID 设备限制",
             "expire-at-description": "用户的订阅服务将于该时间结束。",
             "internal-squads": "内部分组",
-            "internal-squads-description": "指定将分配给用户的内部分组。"
+            "internal-squads-description": "指定用户所属内部分组"
         }
     },
     "login-form-feature": {
@@ -415,7 +419,9 @@
         "wildcard-domain": "通配符域名",
         "wildcard-domain-description": "子域的通配符模式。Remnawave将以 * 替换为随机生成的字符串。",
         "override-sni-from-address": "从地址覆盖SNI地址",
-        "override-sni-from-address-description": "此选项用指定的地址字段值替换SNI值。这对于多域配置或通配符域配置特别有用。"
+        "override-sni-from-address-description": "此选项用指定的地址字段值替换SNI值。这对于多域配置或通配符域配置特别有用。",
+        "legacy-options": "Legacy options",
+        "allow-insecure": "Allow Insecure"
     },
     "base-node-form": {
         "country": "国家",
@@ -794,8 +800,8 @@
                     "perform-action-on-users": "对 {{usersCount}} 位选定用户执行操作",
                     "resets-the-traffic-usage-to-zero-for-all-selected-users": "将所有选定用户的流量使用重置为0",
                     "revokes-subscription-for-all-selected-users": "撤销所有选定用户的订阅",
-                    "change-active-internal-squads": "更改活跃内部分组",
-                    "specify-internal-squads-that-will-be-assigned-to-the-user": "指定将分配给该用户的内部分组",
+                    "change-active-internal-squads": "更改激活的内部分组",
+                    "specify-internal-squads-that-will-be-assigned-to-the-user": "指定将分配给用户的内部小组",
                     "internal-squads": "内部分组",
                     "changes-the-active-internal-squads-for-all-selected-users": "更改所有选中用户的活跃内部分组"
                 }
@@ -917,7 +923,7 @@
             "updated-at": "更新于",
             "tag": "标签",
             "first-connected-at": "首次连接于",
-            "active-internal-squads": "活跃的内部分组"
+            "active-internal-squads": "激活的的内部分组"
         }
     },
     "subscription-page-builder-header": {
@@ -1070,7 +1076,8 @@
             "important-note-line-7": "了解更多。",
             "loading-hwid-devices": "正在加载 HWID 和设备...",
             "search-by-hwid": "按 HWID 搜索",
-            "enter-hwid-to-filter-devices": "输入 HWID 以筛选设备..."
+            "enter-hwid-to-filter-devices": "输入 HWID 以筛选设备...",
+            "delete-all-devices": "删除所有设备"
         }
     },
     "headers-manager": {
@@ -1582,6 +1589,15 @@
                 "fetching-inbounds": "正在获取入站配置...",
                 "inbounds-with-active-squads": "入站配置（活跃的内部分组）"
             }
+        }
+    },
+    "get-user-subscription-request-history": {
+        "feature": {
+            "subscription-request-history": "订阅请求历史",
+            "nothing-to-show": "没有要显示的内容...",
+            "request-at": "请求时间",
+            "ip-address": "IP 地址",
+            "user-agent": "User Agent"
         }
     }
 }

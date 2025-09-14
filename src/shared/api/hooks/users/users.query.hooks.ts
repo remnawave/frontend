@@ -4,6 +4,7 @@ import {
     GetSubscriptionByUuidCommand,
     GetUserAccessibleNodesCommand,
     GetUserByUuidCommand,
+    GetUserSubscriptionRequestHistoryCommand,
     GetUserUsageByRangeCommand
 } from '@remnawave/backend-contract'
 import { createQueryKeys } from '@lukemorales/query-key-factory'
@@ -32,6 +33,11 @@ export const usersQueryKeys = createQueryKeys('users', {
         queryKey: null
     },
     getUserAccessibleNodes: (route: GetUserAccessibleNodesCommand.Request) => ({
+        queryKey: [route]
+    }),
+    getUserSubscriptionRequestHistory: (
+        route: GetUserSubscriptionRequestHistoryCommand.Request
+    ) => ({
         queryKey: [route]
     })
 })
@@ -138,6 +144,23 @@ export const useGetUserAccessibleNodes = createGetQueryHook({
     errorHandler: (error) => {
         notifications.show({
             title: `Get User Accessible Nodes`,
+            message: error instanceof Error ? error.message : `Request failed with unknown error.`,
+            color: 'red'
+        })
+    }
+})
+
+export const useGetUserSubscriptionRequestHistory = createGetQueryHook({
+    endpoint: GetUserSubscriptionRequestHistoryCommand.TSQ_url,
+    responseSchema: GetUserSubscriptionRequestHistoryCommand.ResponseSchema,
+    routeParamsSchema: GetUserSubscriptionRequestHistoryCommand.RequestSchema,
+    getQueryKey: ({ route }) => usersQueryKeys.getUserSubscriptionRequestHistory(route!).queryKey,
+    rQueryParams: {
+        staleTime: sToMs(60)
+    },
+    errorHandler: (error) => {
+        notifications.show({
+            title: `Get User Subscription Request History`,
             message: error instanceof Error ? error.message : `Request failed with unknown error.`,
             color: 'red'
         })
