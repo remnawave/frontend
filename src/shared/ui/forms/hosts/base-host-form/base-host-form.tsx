@@ -755,6 +755,25 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
                                         />
                                     </Stack>
                                 </Fieldset>
+
+                                <Fieldset legend={t('base-host-form.legacy-options')}>
+                                    <Group gap="xs" justify="space-between">
+                                        <Group gap={4}>
+                                            <Text fw={600} size="sm">
+                                                {t('base-host-form.allow-insecure')}
+                                            </Text>
+                                        </Group>
+                                        <Switch
+                                            color="teal.8"
+                                            key={form.key('allowInsecure')}
+                                            radius="md"
+                                            size="md"
+                                            {...form.getInputProps('allowInsecure', {
+                                                type: 'checkbox'
+                                            })}
+                                        />
+                                    </Group>
+                                </Fieldset>
                             </Stack>
                         )}
                     </Transition>
