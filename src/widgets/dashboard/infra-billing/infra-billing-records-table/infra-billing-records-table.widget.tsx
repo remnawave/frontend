@@ -8,10 +8,10 @@ import {
     Text,
     Tooltip
 } from '@mantine/core'
-import { useHotkeys, useMediaQuery } from '@mantine/hooks'
 import { TbPlus, TbRefresh } from 'react-icons/tb'
 import { useTranslation } from 'react-i18next'
 import { DataTable } from 'mantine-datatable'
+import { useHotkeys } from '@mantine/hooks'
 import { useMemo, useState } from 'react'
 import { PiEmpty } from 'react-icons/pi'
 import { modals } from '@mantine/modals'
@@ -29,7 +29,6 @@ const PAGE_SIZE = 50
 
 export function InfraBillingRecordsTableWidget() {
     const [page, setPage] = useState(1)
-    const isMobile = useMediaQuery('(max-width: 48em)')
 
     const {
         data: infraBillingRecords,
@@ -85,7 +84,7 @@ export function InfraBillingRecordsTableWidget() {
         })
 
     return (
-        <DataTableShared.Container mb="xl" shadow="lg" w={isMobile ? '100%' : '40%'}>
+        <DataTableShared.Container shadow="lg">
             <DataTableShared.Title
                 actions={
                     <Group grow preventGrowOverflow={false} wrap="wrap">

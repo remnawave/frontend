@@ -10,7 +10,6 @@ import {
 } from '@mantine/core'
 import { GetInfraBillingNodesCommand } from '@remnawave/backend-contract'
 import { TbPlus, TbRefresh } from 'react-icons/tb'
-import { useMediaQuery } from '@mantine/hooks'
 import { useTranslation } from 'react-i18next'
 import { DataTable } from 'mantine-datatable'
 import { PiEmpty } from 'react-icons/pi'
@@ -26,8 +25,6 @@ import { getInfraBillingNodesColumns } from './use-infra-billing-nodes-columns'
 const PAGE_SIZE = 500
 
 export function InfraBillingNodesTableWidget() {
-    const isMobile = useMediaQuery('(max-width: 48em)')
-
     const {
         data: infraBillingNodes,
         isFetching: infraBillingNodesLoading,
@@ -84,7 +81,7 @@ export function InfraBillingNodesTableWidget() {
     }
 
     return (
-        <DataTableShared.Container mb="xl" shadow="lg" w={isMobile ? '100%' : '58%'}>
+        <DataTableShared.Container shadow="lg">
             <DataTableShared.Title
                 actions={
                     <Group gap="xs">
