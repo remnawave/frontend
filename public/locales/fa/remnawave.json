@@ -21,8 +21,8 @@
         "config-profiles": "پروفایل‌های کانفیگ",
         "internal-squads": "اسکوادهای داخلی",
         "infra-billing": "صورتحساب‌های تجهیزات",
-        "hwid-inspector": "HWID Inspector",
-        "tools": "Tools"
+        "hwid-inspector": "بازرسی HWID",
+        "tools": "ابزارها"
     },
     "bandwidth-metrics": {
         "current-year": "امسال",
@@ -212,10 +212,10 @@
             "edit-host": "ویرایش هاست",
             "dangling-host-cannot-be-cloned": "نمی‌توان هاست معلق را کلون کرد",
             "error": "خطا",
-            "are-you-sure": "Are you sure?",
-            "allowing-insecure-connections-can-lead-to-security-risks-we-do-not-recommend-enabling-this-option": "Allowing insecure connections can lead to security risks. We do not recommend enabling this option.",
-            "proceed": "Proceed",
-            "cancel": "Cancel"
+            "are-you-sure": "آیا مطمئن هستید؟",
+            "allowing-insecure-connections-can-lead-to-security-risks-we-do-not-recommend-enabling-this-option": "اجازه دادن برای برقراری اتصال‌های ناامن می‌تواند موجب ریسک‌های امنیتی شود. ما فعال کردن این گزینه را پیشنهاد نمی‌کنیم.",
+            "proceed": "ادامه",
+            "cancel": "انصراف"
         }
     },
     "hosts-page-header": {
@@ -422,8 +422,8 @@
         "wildcard-domain-description": "الگوی wildcard برای دامنه. Remnawave به جای * یک رشته متنی رندوم جایگذاری خواهد کرد",
         "override-sni-from-address": "بازنویسی SNI از آدرس دامنه",
         "override-sni-from-address-description": "این گزینه مقدار SNI را با آدرس مشخص شده جایگزین خواهد کرد که برای کانفیگ‌های چند دامنه‌ای و wildcard قابل استفاده می‌باشد",
-        "legacy-options": "Legacy options",
-        "allow-insecure": "Allow Insecure"
+        "legacy-options": "تنظیمات قدیمی",
+        "allow-insecure": "اجازه اتصال ناامن"
     },
     "base-node-form": {
         "country": "کشور",
@@ -1595,38 +1595,38 @@
     },
     "get-user-subscription-request-history": {
         "feature": {
-            "subscription-request-history": "Subscription Request History",
-            "nothing-to-show": "Nothing to show...",
-            "request-at": "Request At",
-            "ip-address": "IP Address",
-            "user-agent": "User Agent"
+            "subscription-request-history": "تاریخچه درخواست اشتراک",
+            "nothing-to-show": "چیزی برای نشان دادن موجود نیست...",
+            "request-at": "درخواست شده در",
+            "ip-address": "آدرس IP",
+            "user-agent": "عامل کاربر"
         }
     },
     "use-hwid-inspector-table-columns": {
-        "platform": "Platform",
-        "os-version": "OS Version",
-        "device-model": "Device Model",
-        "user-agent": "User Agent",
-        "user-uuid": "User UUID",
-        "created-at": "Created At",
-        "updated-at": "Updated At"
+        "platform": "پلتفرم",
+        "os-version": "نسخه سیستم عامل",
+        "device-model": "مدل دستگاه",
+        "user-agent": "عامل کاربر",
+        "user-uuid": "UUID کاربر",
+        "created-at": "ایجاد شده در",
+        "updated-at": "به‌روز شده در"
     },
     "hwid-inspector-table": {
         "widget": {
-            "hwid-devices-list": "HWID Devices list"
+            "hwid-devices-list": "لیست دستگاه‌های HWID"
         }
     },
     "hwid-inspector-metrics": {
         "widget": {
-            "apps": "Apps",
-            "platforms": "Platforms",
-            "total-unique-devices": "Total Unique Devices",
-            "total-hwid-devices": "Total HWID Devices",
-            "avg-devices-per-user": "Avg Devices Per User",
-            "platform-distribution": "Platform Distribution",
-            "app-distribution": "App Distribution",
-            "no-platform-data": "No platform data available",
-            "no-app-data": "No app data available"
+            "apps": "نرم‌افزارها",
+            "platforms": "پلتفرم‌ها",
+            "total-unique-devices": "لیست دستگاه‌های منحصر به فرد",
+            "total-hwid-devices": "تغداد کل دستگاه‌های HWID",
+            "avg-devices-per-user": "میانگین دستگاه بر کاربر",
+            "platform-distribution": "توزیع پلتفرم‌ها",
+            "app-distribution": "توزیع نرم‌افزارها",
+            "no-platform-data": "داده‌ای برای پلتفرم‌ها در دسترس نیست",
+            "no-app-data": "داده‌ای برای نرم‌افزارها در دسترس نیست"
         }
     }
 }
