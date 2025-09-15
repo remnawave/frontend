@@ -21,8 +21,8 @@
         "config-profiles": "Профили",
         "internal-squads": "Внутренние сквады",
         "infra-billing": "Инфра-биллинг",
-        "hwid-inspector": "HWID Inspector",
-        "tools": "Tools"
+        "hwid-inspector": "Инспектор HWID",
+        "tools": "Инструменты"
     },
     "bandwidth-metrics": {
         "current-year": "Текущий год",
@@ -1603,30 +1603,30 @@
         }
     },
     "use-hwid-inspector-table-columns": {
-        "platform": "Platform",
-        "os-version": "OS Version",
-        "device-model": "Device Model",
-        "user-agent": "User Agent",
-        "user-uuid": "User UUID",
-        "created-at": "Created At",
-        "updated-at": "Updated At"
+        "platform": "Платформа",
+        "os-version": "Версия OS",
+        "device-model": "Модель устройства",
+        "user-agent": "Юзер-агент",
+        "user-uuid": "UUID польз.",
+        "created-at": "Дата создания",
+        "updated-at": "Дата обновления"
     },
     "hwid-inspector-table": {
         "widget": {
-            "hwid-devices-list": "HWID Devices list"
+            "hwid-devices-list": "Список HWID устройств"
         }
     },
     "hwid-inspector-metrics": {
         "widget": {
-            "apps": "Apps",
-            "platforms": "Platforms",
-            "total-unique-devices": "Total Unique Devices",
-            "total-hwid-devices": "Total HWID Devices",
-            "avg-devices-per-user": "Avg Devices Per User",
-            "platform-distribution": "Platform Distribution",
-            "app-distribution": "App Distribution",
-            "no-platform-data": "No platform data available",
-            "no-app-data": "No app data available"
+            "apps": "Приложения",
+            "platforms": "Платформы",
+            "total-unique-devices": "Всего уникальных устройств",
+            "total-hwid-devices": "Всего HWID устройств",
+            "avg-devices-per-user": "Среднее количество устройств на пользователя",
+            "platform-distribution": "Распределение платформ",
+            "app-distribution": "Распределение приложений",
+            "no-platform-data": "Нет доступных данных платформы",
+            "no-app-data": "Нет данных"
         }
     }
 }
