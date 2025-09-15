@@ -20,7 +20,9 @@
         "subscription-page-builder": "订阅应用配置",
         "config-profiles": "配置文件",
         "internal-squads": "内部分组",
-        "infra-billing": "网络供应商计费"
+        "infra-billing": "网络供应商计费",
+        "hwid-inspector": "HWID Inspector",
+        "tools": "Tools"
     },
     "bandwidth-metrics": {
         "current-year": "今年",
@@ -1598,6 +1600,33 @@
             "request-at": "请求时间",
             "ip-address": "IP 地址",
             "user-agent": "User Agent"
+        }
+    },
+    "use-hwid-inspector-table-columns": {
+        "platform": "Platform",
+        "os-version": "OS Version",
+        "device-model": "Device Model",
+        "user-agent": "User Agent",
+        "user-uuid": "User UUID",
+        "created-at": "Created At",
+        "updated-at": "Updated At"
+    },
+    "hwid-inspector-table": {
+        "widget": {
+            "hwid-devices-list": "HWID Devices list"
+        }
+    },
+    "hwid-inspector-metrics": {
+        "widget": {
+            "apps": "Apps",
+            "platforms": "Platforms",
+            "total-unique-devices": "Total Unique Devices",
+            "total-hwid-devices": "Total HWID Devices",
+            "avg-devices-per-user": "Avg Devices Per User",
+            "platform-distribution": "Platform Distribution",
+            "app-distribution": "App Distribution",
+            "no-platform-data": "No platform data available",
+            "no-app-data": "No app data available"
         }
     }
 }
