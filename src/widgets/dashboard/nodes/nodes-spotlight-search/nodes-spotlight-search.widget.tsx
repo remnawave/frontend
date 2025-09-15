@@ -34,7 +34,7 @@ export const NodesSpotlightSearchWidget = ({ nodes }: IProps) => {
         <Spotlight
             actions={nodes.map((node) => ({
                 label: node.name,
-                description: `${node.address} ${node.provider?.name ? `| ${node.provider.name}` : ''}`,
+                description: `${node.address} ${node.provider?.name ? `| ${node.provider.name} | ${node.uuid}` : `| ${node.uuid}`}`,
                 id: node.uuid,
                 leftSection:
                     node.countryCode && node.countryCode !== 'XX' ? (
