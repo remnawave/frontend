@@ -1,4 +1,4 @@
-/* eslint-disable indent */
+/* eslint-disable @stylistic/indent */
 import {
     Accordion,
     ActionIcon,

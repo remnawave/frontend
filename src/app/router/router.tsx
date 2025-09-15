@@ -15,6 +15,7 @@ import { InfraBillingPageConnector } from '@pages/dashboard/crm/infra-billing/co
 import { TemplateBasePageConnector } from '@pages/dashboard/templates/ui/connectors/template-base-page.connector'
 import { NodesBandwidthTablePageConnector } from '@pages/dashboard/nodes-bandwidth-table/ui/connectors'
 import { SubscriptionSettingsConnector } from '@pages/dashboard/subscription-settings/connectors'
+import { HwidInspectorPageConnector } from '@pages/dashboard/hwid-inspector/ui/connectors'
 import { ConfigProfilesPageConnector } from '@pages/dashboard/config-profiles/connectors'
 import { NodesMetricsPageConnector } from '@pages/dashboard/nodes-metrics/ui/connectors'
 import { StatisticNodesConnector } from '@pages/dashboard/statistic-nodes/connectors'
@@ -100,6 +101,13 @@ const router = createBrowserRouter(
                         <Route
                             element={<NodesMetricsPageConnector />}
                             path={ROUTES.DASHBOARD.MANAGEMENT.NODES_METRICS}
+                        />
+                    </Route>
+
+                    <Route path={ROUTES.DASHBOARD.TOOLS.ROOT}>
+                        <Route
+                            element={<HwidInspectorPageConnector />}
+                            path={ROUTES.DASHBOARD.TOOLS.HWID_INSPECTOR}
                         />
                     </Route>
 
