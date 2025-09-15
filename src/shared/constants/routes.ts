@@ -23,6 +23,10 @@ export const ROUTES = {
             CONFIG_PROFILE_BY_UUID: '/dashboard/management/config-profiles/:uuid',
             INTERNAL_SQUADS: '/dashboard/management/internal-squads'
         },
+        TOOLS: {
+            ROOT: '/dashboard/tools',
+            HWID_INSPECTOR: '/dashboard/tools/hwid-inspector'
+        },
         TEMPLATES: {
             ROOT: '/dashboard/templates',
             XRAY_JSON: '/dashboard/templates/xray-json',

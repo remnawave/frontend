@@ -20,7 +20,9 @@
         "subscription-page-builder": "Sub Page Builder",
         "config-profiles": "Профили",
         "internal-squads": "Внутренние сквады",
-        "infra-billing": "Инфра-биллинг"
+        "infra-billing": "Инфра-биллинг",
+        "hwid-inspector": "Инспектор HWID",
+        "tools": "Инструменты"
     },
     "bandwidth-metrics": {
         "current-year": "Текущий год",
@@ -1598,6 +1600,33 @@
             "request-at": "Запрос в",
             "ip-address": "IP-адрес",
             "user-agent": "Юзер-агент"
+        }
+    },
+    "use-hwid-inspector-table-columns": {
+        "platform": "Платформа",
+        "os-version": "Версия OS",
+        "device-model": "Модель устройства",
+        "user-agent": "Юзер-агент",
+        "user-uuid": "UUID польз.",
+        "created-at": "Дата создания",
+        "updated-at": "Дата обновления"
+    },
+    "hwid-inspector-table": {
+        "widget": {
+            "hwid-devices-list": "Список HWID устройств"
+        }
+    },
+    "hwid-inspector-metrics": {
+        "widget": {
+            "apps": "Приложения",
+            "platforms": "Платформы",
+            "total-unique-devices": "Всего уникальных устройств",
+            "total-hwid-devices": "Всего HWID устройств",
+            "avg-devices-per-user": "Среднее количество устройств на пользователя",
+            "platform-distribution": "Распределение платформ",
+            "app-distribution": "Распределение приложений",
+            "no-platform-data": "Нет доступных данных платформы",
+            "no-app-data": "Нет данных"
         }
     }
 }

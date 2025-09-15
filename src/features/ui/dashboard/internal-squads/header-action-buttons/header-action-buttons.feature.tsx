@@ -115,9 +115,6 @@ export const InternalSquadsHeaderActionButtonsFeature = () => {
                         </Text>
                         <TextInput
                             data-autofocus
-                            description={t(
-                                'internal-squad-header-action-buttons.feature.it-cant-be-changed-later'
-                            )}
                             label={t('internal-squad-header-action-buttons.feature.squad-name')}
                             placeholder={t(
                                 'internal-squad-header-action-buttons.feature.enter-squad-name'

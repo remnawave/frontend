@@ -1,5 +1,6 @@
+import { Split } from '@gfazioli/mantine-split-pane'
+import { em, Grid, Stack } from '@mantine/core'
 import { useMediaQuery } from '@mantine/hooks'
-import { em, Flex, Grid } from '@mantine/core'
 import { useTranslation } from 'react-i18next'
 import { motion } from 'motion/react'
 
@@ -49,19 +50,21 @@ export const InfraBillingPageComponent = () => {
                         {isMobile ? (
                             <LandscapeBannerShared />
                         ) : (
-                            <>
-                                <Flex
-                                    align="flex-start"
-                                    direction="row"
-                                    justify="space-between"
-                                    wrap="wrap"
-                                >
-                                    <InfraBillingNodesTableWidget />
-                                    <InfraBillingRecordsTableWidget />
-                                </Flex>
+                            <Stack>
+                                <Split spacing="sm" variant="dotted">
+                                    <Split.Pane initialWidth="60%">
+                                        <InfraBillingNodesTableWidget />
+                                    </Split.Pane>
+
+                                    <Split.Resizer />
+
+                                    <Split.Pane>
+                                        <InfraBillingRecordsTableWidget />
+                                    </Split.Pane>
+                                </Split>
 
                                 <InfraProvidersTableWidget />
-                            </>
+                            </Stack>
                         )}
                     </motion.div>
                 </Grid.Col>

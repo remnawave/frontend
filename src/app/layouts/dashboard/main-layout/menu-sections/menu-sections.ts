@@ -10,8 +10,8 @@ import {
     PiStarDuotone,
     PiUsersDuotone
 } from 'react-icons/pi'
+import { TbChartArcs, TbCirclesRelation, TbDeviceAnalytics } from 'react-icons/tb'
 import { HiChartPie, HiCurrencyDollar, HiServer } from 'react-icons/hi'
-import { TbChartArcs, TbCirclesRelation } from 'react-icons/tb'
 import { useTranslation } from 'react-i18next'
 import { useHotkeys } from '@mantine/hooks'
 import { useState } from 'react'
@@ -100,6 +100,16 @@ export const useMenuSections = (): MenuItem[] => {
                     name: t('constants.api-tokens'),
                     href: ROUTES.DASHBOARD.MANAGEMENT.API_TOKENS,
                     icon: PiCookie
+                }
+            ]
+        },
+        {
+            header: t('constants.tools'),
+            section: [
+                {
+                    name: t('constants.hwid-inspector'),
+                    href: ROUTES.DASHBOARD.TOOLS.HWID_INSPECTOR,
+                    icon: TbDeviceAnalytics
                 }
             ]
         },

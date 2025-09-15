@@ -157,9 +157,6 @@ export const ConfigProfilesHeaderActionButtonsFeature = () => {
                         </Text>
                         <TextInput
                             data-autofocus
-                            description={t(
-                                'config-profiles-header-action-buttons.feature.it-cant-be-changed-later'
-                            )}
                             label={t('config-profiles-header-action-buttons.feature.profile-name')}
                             placeholder={t(
                                 'config-profiles-header-action-buttons.feature.enter-profile-name'
