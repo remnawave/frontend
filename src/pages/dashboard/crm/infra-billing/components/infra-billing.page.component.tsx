@@ -1,5 +1,5 @@
 import { Split } from '@gfazioli/mantine-split-pane'
-import { em, Grid, Stack } from '@mantine/core'
+import { em, Grid, Paper, Stack, Title } from '@mantine/core'
 import { useMediaQuery } from '@mantine/hooks'
 import { useTranslation } from 'react-i18next'
 import { motion } from 'motion/react'
@@ -58,7 +58,7 @@ export const InfraBillingPageComponent = () => {
 
                                     <Split.Resizer />
 
-                                    <Split.Pane>
+                                    <Split.Pane initialWidth="40%">
                                         <InfraBillingRecordsTableWidget />
                                     </Split.Pane>
                                 </Split>
