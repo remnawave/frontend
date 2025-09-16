@@ -22,7 +22,8 @@
         "internal-squads": "Внутренние сквады",
         "infra-billing": "Инфра-биллинг",
         "hwid-inspector": "Инспектор HWID",
-        "tools": "Инструменты"
+        "tools": "Инструменты",
+        "srh-inspector": "SRH Inspector"
     },
     "bandwidth-metrics": {
         "current-year": "Текущий год",
@@ -1627,6 +1628,17 @@
             "app-distribution": "Распределение приложений",
             "no-platform-data": "Нет доступных данных платформы",
             "no-app-data": "Нет данных"
+        }
+    },
+    "use-srh-inspector-table-columns": {
+        "request-ip": "Request IP",
+        "user-agent": "User Agent",
+        "request-at": "Request At",
+        "user-uuid": "User UUID"
+    },
+    "srh-inspector-table": {
+        "widget": {
+            "subscription-request-history": "Subscription Request History"
         }
     }
 }
