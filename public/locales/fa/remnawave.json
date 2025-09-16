@@ -22,7 +22,8 @@
         "internal-squads": "اسکوادهای داخلی",
         "infra-billing": "صورتحساب‌های تجهیزات",
         "hwid-inspector": "بازرسی HWID",
-        "tools": "ابزارها"
+        "tools": "ابزارها",
+        "srh-inspector": "SRH Inspector"
     },
     "bandwidth-metrics": {
         "current-year": "امسال",
@@ -1627,6 +1628,17 @@
             "app-distribution": "توزیع نرم‌افزارها",
             "no-platform-data": "داده‌ای برای پلتفرم‌ها در دسترس نیست",
             "no-app-data": "داده‌ای برای نرم‌افزارها در دسترس نیست"
+        }
+    },
+    "use-srh-inspector-table-columns": {
+        "request-ip": "Request IP",
+        "user-agent": "User Agent",
+        "request-at": "Request At",
+        "user-uuid": "User UUID"
+    },
+    "srh-inspector-table": {
+        "widget": {
+            "subscription-request-history": "Subscription Request History"
         }
     }
 }
