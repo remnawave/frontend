@@ -25,7 +25,8 @@ export const ROUTES = {
         },
         TOOLS: {
             ROOT: '/dashboard/tools',
-            HWID_INSPECTOR: '/dashboard/tools/hwid-inspector'
+            HWID_INSPECTOR: '/dashboard/tools/hwid-inspector',
+            SRH_INSPECTOR: '/dashboard/tools/srh-inspector'
         },
         TEMPLATES: {
             ROOT: '/dashboard/templates',
