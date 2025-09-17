@@ -23,7 +23,7 @@
         "infra-billing": "Инфра-биллинг",
         "hwid-inspector": "Инспектор HWID",
         "tools": "Инструменты",
-        "srh-inspector": "SRH Inspector"
+        "srh-inspector": "Инспектор SRH"
     },
     "bandwidth-metrics": {
         "current-year": "Текущий год",
@@ -1062,7 +1062,7 @@
             "platform": "Платформа",
             "unknown": "Неизвестно",
             "model": "Модель",
-            "user-agent": "Юзер-агент",
+            "user-agent": "User Agent",
             "added": "Создан",
             "os-version": "Версия OS",
             "delete-device": "Удалить устройство",
@@ -1600,14 +1600,14 @@
             "nothing-to-show": "Нечего показывать...",
             "request-at": "Запрос в",
             "ip-address": "IP-адрес",
-            "user-agent": "Юзер-агент"
+            "user-agent": "User Agent"
         }
     },
     "use-hwid-inspector-table-columns": {
         "platform": "Платформа",
         "os-version": "Версия OS",
         "device-model": "Модель устройства",
-        "user-agent": "Юзер-агент",
+        "user-agent": "User Agent",
         "user-uuid": "UUID польз.",
         "created-at": "Дата создания",
         "updated-at": "Дата обновления"
@@ -1631,14 +1631,14 @@
         }
     },
     "use-srh-inspector-table-columns": {
-        "request-ip": "Request IP",
+        "request-ip": "IP адрес запроса",
         "user-agent": "User Agent",
-        "request-at": "Request At",
-        "user-uuid": "User UUID"
+        "request-at": "Дата запроса",
+        "user-uuid": "UUID польз."
     },
     "srh-inspector-table": {
         "widget": {
-            "subscription-request-history": "Subscription Request History"
+            "subscription-request-history": "История запросов подписки"
         }
     }
 }
