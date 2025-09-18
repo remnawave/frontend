@@ -1,4 +1,5 @@
 export const COUNTRIES = [
+    { value: 'XX', label: '🏴‍☠️ Unknown' },
     { value: 'AF', label: '🇦🇫 Afghanistan' },
     { value: 'AL', label: '🇦🇱 Albania' },
     { value: 'DZ', label: '🇩🇿 Algeria' },
@@ -190,8 +191,7 @@ export const COUNTRIES = [
     { value: 'VN', label: '🇻🇳 Vietnam' },
     { value: 'YE', label: '🇾🇪 Yemen' },
     { value: 'ZM', label: '🇿🇲 Zambia' },
-    { value: 'ZW', label: '🇿🇼 Zimbabwe' },
-    { value: 'XX', label: '🏴‍☠️ Unknown' }
+    { value: 'ZW', label: '🇿🇼 Zimbabwe' }
 ] as const
 
 export type CountryCode = (typeof COUNTRIES)[number]['value']
