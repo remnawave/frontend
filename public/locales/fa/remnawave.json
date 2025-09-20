@@ -23,7 +23,7 @@
         "infra-billing": "صورتحساب‌های تجهیزات",
         "hwid-inspector": "بازرسی HWID",
         "tools": "ابزارها",
-        "srh-inspector": "SRH Inspector"
+        "srh-inspector": "بازرسی SRH"
     },
     "bandwidth-metrics": {
         "current-year": "امسال",
@@ -1631,14 +1631,14 @@
         }
     },
     "use-srh-inspector-table-columns": {
-        "request-ip": "Request IP",
-        "user-agent": "User Agent",
-        "request-at": "Request At",
-        "user-uuid": "User UUID"
+        "request-ip": "IP درخواست کننده",
+        "user-agent": "عامل کاربر",
+        "request-at": "درخواست شده در",
+        "user-uuid": "UUID کاربر"
     },
     "srh-inspector-table": {
         "widget": {
-            "subscription-request-history": "Subscription Request History"
+            "subscription-request-history": "تاریخچه درخواست اشتراک"
         }
     }
 }
