@@ -95,7 +95,7 @@ export const ViewUserModal = () => {
             }
         },
         validate: zodResolver(
-            UpdateUserCommand.RequestSchema.omit({
+            UpdateUserCommand.RequestSchema._def.schema.omit({
                 expireAt: true,
                 hwidDeviceLimit: true
             })
