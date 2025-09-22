@@ -17,8 +17,8 @@ export const useGetSubscriptionSettings = createGetQueryHook({
     responseSchema: GetSubscriptionSettingsCommand.ResponseSchema,
     getQueryKey: () => subscriptionSettingsQueryKeys.getSubscriptionSettings.queryKey,
     rQueryParams: {
-        refetchOnMount: true,
-        staleTime: sToMs(5)
+        refetchOnMount: false,
+        staleTime: sToMs(30)
     },
     errorHandler: (error) => {
         notifications.show({
