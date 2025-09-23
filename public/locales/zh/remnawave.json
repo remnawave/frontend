@@ -21,8 +21,9 @@
         "config-profiles": "配置文件",
         "internal-squads": "内部分组",
         "infra-billing": "网络供应商计费",
-        "hwid-inspector": "HWID Inspector",
-        "tools": "Tools"
+        "hwid-inspector": "HWID 视图",
+        "tools": "工具",
+        "srh-inspector": "SRH 检查"
     },
     "bandwidth-metrics": {
         "current-year": "今年",
@@ -212,10 +213,10 @@
             "edit-host": "编辑主机",
             "dangling-host-cannot-be-cloned": "同名主机不能被克隆。",
             "error": "错误",
-            "are-you-sure": "Are you sure?",
-            "allowing-insecure-connections-can-lead-to-security-risks-we-do-not-recommend-enabling-this-option": "Allowing insecure connections can lead to security risks. We do not recommend enabling this option.",
-            "proceed": "Proceed",
-            "cancel": "Cancel"
+            "are-you-sure": "您确定吗？",
+            "allowing-insecure-connections-can-lead-to-security-risks-we-do-not-recommend-enabling-this-option": "允许不安全的连接会导致安全风险。我们不建议启用此选项。",
+            "proceed": "继续",
+            "cancel": "取消"
         }
     },
     "hosts-page-header": {
@@ -422,8 +423,8 @@
         "wildcard-domain-description": "子域的通配符模式。Remnawave将以 * 替换为随机生成的字符串。",
         "override-sni-from-address": "从地址覆盖SNI地址",
         "override-sni-from-address-description": "此选项用指定的地址字段值替换SNI值。这对于多域配置或通配符域配置特别有用。",
-        "legacy-options": "Legacy options",
-        "allow-insecure": "Allow Insecure"
+        "legacy-options": "传统选项",
+        "allow-insecure": "允许不安全的连接"
     },
     "base-node-form": {
         "country": "国家",
@@ -1603,30 +1604,41 @@
         }
     },
     "use-hwid-inspector-table-columns": {
-        "platform": "Platform",
-        "os-version": "OS Version",
-        "device-model": "Device Model",
+        "platform": "平台",
+        "os-version": "操作系统版本",
+        "device-model": "设备型号",
         "user-agent": "User Agent",
-        "user-uuid": "User UUID",
-        "created-at": "Created At",
-        "updated-at": "Updated At"
+        "user-uuid": "用户 UUID",
+        "created-at": "创建于",
+        "updated-at": "更新于"
     },
     "hwid-inspector-table": {
         "widget": {
-            "hwid-devices-list": "HWID Devices list"
+            "hwid-devices-list": "HWID 设备列表"
         }
     },
     "hwid-inspector-metrics": {
         "widget": {
-            "apps": "Apps",
-            "platforms": "Platforms",
-            "total-unique-devices": "Total Unique Devices",
-            "total-hwid-devices": "Total HWID Devices",
-            "avg-devices-per-user": "Avg Devices Per User",
-            "platform-distribution": "Platform Distribution",
-            "app-distribution": "App Distribution",
-            "no-platform-data": "No platform data available",
-            "no-app-data": "No app data available"
+            "apps": "应用",
+            "platforms": "平台",
+            "total-unique-devices": "唯一设备总数",
+            "total-hwid-devices": "HWID 设备总数",
+            "avg-devices-per-user": "每个用户平均设备数",
+            "platform-distribution": "平台分布",
+            "app-distribution": "应用分布",
+            "no-platform-data": "无平台数据",
+            "no-app-data": "无可用数据"
+        }
+    },
+    "use-srh-inspector-table-columns": {
+        "request-ip": "请求IP地址",
+        "user-agent": "User Agent",
+        "request-at": "请求时间",
+        "user-uuid": "用户 UUID"
+    },
+    "srh-inspector-table": {
+        "widget": {
+            "subscription-request-history": "订阅请求历史"
         }
     }
 }

@@ -18,6 +18,7 @@ import { SubscriptionSettingsConnector } from '@pages/dashboard/subscription-set
 import { HwidInspectorPageConnector } from '@pages/dashboard/hwid-inspector/ui/connectors'
 import { ConfigProfilesPageConnector } from '@pages/dashboard/config-profiles/connectors'
 import { NodesMetricsPageConnector } from '@pages/dashboard/nodes-metrics/ui/connectors'
+import { SrhInspectorPageConnector } from '@pages/dashboard/srh-inspector/ui/connectors'
 import { StatisticNodesConnector } from '@pages/dashboard/statistic-nodes/connectors'
 import { Oauth2CallbackPage } from '@pages/auth/oauth2-callback/oauth2-callback.page'
 import { ApiTokensPageConnector } from '@pages/dashboard/api-tokens/ui/connectors'
@@ -108,6 +109,10 @@ const router = createBrowserRouter(
                         <Route
                             element={<HwidInspectorPageConnector />}
                             path={ROUTES.DASHBOARD.TOOLS.HWID_INSPECTOR}
+                        />
+                        <Route
+                            element={<SrhInspectorPageConnector />}
+                            path={ROUTES.DASHBOARD.TOOLS.SRH_INSPECTOR}
                         />
                     </Route>
 

@@ -22,7 +22,8 @@
         "internal-squads": "Внутренние сквады",
         "infra-billing": "Инфра-биллинг",
         "hwid-inspector": "Инспектор HWID",
-        "tools": "Инструменты"
+        "tools": "Инструменты",
+        "srh-inspector": "Инспектор SRH"
     },
     "bandwidth-metrics": {
         "current-year": "Текущий год",
@@ -380,9 +381,9 @@
         "here-you-can-override-security-settings-from-xtls-config": "Здесь вы можете переопределить настройки безопасности из конфигурации XTLS.",
         "extra-xhttp": "Extra xHTTP",
         "xhttp-extra-params": "xHTTP extra params",
-        "extra-xhttp-description": "This extra params will work only with xHTTP protocol. Pass object \"extra\" to the client. This JSON input is not validated, be sure to paste the correct extra params. Use the button below to copy the basic extra params, then paste it into the JSON input.",
+        "extra-xhttp-description": "Этот параметр будет работать только с протоколом XHTTP. Клиенту будет передан объект \"extra\". Ввод JSON не проверяется, убедитесь в правильности написания конфигурации. Вы можете использовать кнопку ниже, чтобы скопировать дополнительные настройки и вставить их в JSON вход.",
         "invalid-json": "Неверный JSON",
-        "fill-with-sample-xhttp-extra-params": "Fill with sample xHTTP extra params",
+        "fill-with-sample-xhttp-extra-params": "Заполнить примером xHTTP extra",
         "close": "Закрыть",
         "clone": "Дублировать",
         "address-description-line-1": "Адрес должен быть IP-адресом или доменным именем пункта назначения соединения.",
@@ -413,7 +414,7 @@
         "xray-json-and-raw": "Xray Json & Raw",
         "hide-host": "Скрыть хост",
         "hide-host-from-users-remnawave-will-send-host-only-for-raw-subscription-responses": "Скрыть хост от пользователей, Remnawave отправит этот хост только для RAW-формата подписки",
-        "apps-specific": "Apps specific",
+        "apps-specific": "Настройки для приложений",
         "single-domain": "Один домен",
         "default-mode-for-one-domain": "Режим по умолчанию для одного домена",
         "multi-domain": "Мульти домен",
@@ -459,7 +460,7 @@
             "bandwidth": "Трафик",
             "short-stats": "Краткая статистика",
             "remnawave-usage": "Remnawave Usage",
-            "process-details": "Process Details"
+            "process-details": "Детали по процессам"
         }
     },
     "login-form": {
@@ -923,7 +924,7 @@
             "timestamps": "Временные метки",
             "created-at": "Дата создания",
             "updated-at": "Дата обновления",
-            "tag": "Тэг",
+            "tag": "Tag",
             "first-connected-at": "Первое подключение",
             "active-internal-squads": "Активные внутренние сквады"
         }
@@ -1061,7 +1062,7 @@
             "platform": "Платформа",
             "unknown": "Неизвестно",
             "model": "Модель",
-            "user-agent": "Юзер-агент",
+            "user-agent": "User Agent",
             "added": "Создан",
             "os-version": "Версия OS",
             "delete-device": "Удалить устройство",
@@ -1299,7 +1300,7 @@
                 "please-select-a-provider-and-billing-node": "Пожалуйста, выберите провайдера и биллинг ноду",
                 "billing-node": "Биллинг нода",
                 "next-billing-at": "Следующий платеж",
-                "next-billing-at-description": "The date and time when the billing node will be billed. Remnawave will notify you about upcoming billing.",
+                "next-billing-at-description": "Дата и время для следующей оплаты этого узла. Remnawave уведомит вас о предстоящем платеже.",
                 "create": "Создать"
             }
         }
@@ -1599,14 +1600,14 @@
             "nothing-to-show": "Нечего показывать...",
             "request-at": "Запрос в",
             "ip-address": "IP-адрес",
-            "user-agent": "Юзер-агент"
+            "user-agent": "User Agent"
         }
     },
     "use-hwid-inspector-table-columns": {
         "platform": "Платформа",
         "os-version": "Версия OS",
         "device-model": "Модель устройства",
-        "user-agent": "Юзер-агент",
+        "user-agent": "User Agent",
         "user-uuid": "UUID польз.",
         "created-at": "Дата создания",
         "updated-at": "Дата обновления"
@@ -1627,6 +1628,17 @@
             "app-distribution": "Распределение приложений",
             "no-platform-data": "Нет доступных данных платформы",
             "no-app-data": "Нет данных"
+        }
+    },
+    "use-srh-inspector-table-columns": {
+        "request-ip": "IP адрес запроса",
+        "user-agent": "User Agent",
+        "request-at": "Дата запроса",
+        "user-uuid": "UUID польз."
+    },
+    "srh-inspector-table": {
+        "widget": {
+            "subscription-request-history": "История запросов подписки"
         }
     }
 }
