@@ -346,6 +346,17 @@ export const useUserTableColumns = (
                 mantineTableBodyCellProps: {
                     align: 'center'
                 }
+            },
+            {
+                accessorKey: 'uuid',
+                header: 'UUID',
+                accessorFn: (originalRow) => originalRow.uuid,
+                minSize: 400,
+                maxSize: 800,
+
+                mantineTableBodyCellProps: {
+                    align: 'center'
+                }
             }
         ],
         []
