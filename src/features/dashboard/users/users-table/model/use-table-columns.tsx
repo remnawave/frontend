@@ -145,12 +145,11 @@ export const useUserTableColumns = (
             {
                 accessorKey: 'tag',
                 header: 'Tag',
-                Cell: ({ cell }) =>
-                    cell.row.original.tag ? (
-                        <Badge size="lg">{cell.row.original.tag}</Badge>
-                    ) : (
-                        <Text c="dimmed">–</Text>
-                    ),
+                Cell: ({ cell }) => (
+                    <Text ff="monospace" fw={500} size="md">
+                        {cell.row.original.tag || '–'}
+                    </Text>
+                ),
                 mantineTableBodyCellProps: {
                     align: 'center'
                 }
