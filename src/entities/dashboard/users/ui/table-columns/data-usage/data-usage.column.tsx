@@ -29,8 +29,15 @@ export function DataUsageColumnEntity(props: IProps) {
             <Group justify="space-between">
                 <Text c="red.5" fw={700} fz="xs">
                     {usedTrafficPercentage.toFixed(2)}%
+                    <Text c="dimmed" component="span" fz="xs">
+                        {' '}
+                        {strategy}
+                    </Text>
                 </Text>
                 <Text c="teal.5" fw={700} fz="xs">
+                    <Text c="dimmed" component="span" fw={550} fz="xs" size="xs">
+                        Σ {lifetimeUsedTraffic}
+                    </Text>{' '}
                     {(100 - usedTrafficPercentage).toFixed(2)}%
                 </Text>
             </Group>
@@ -38,16 +45,16 @@ export function DataUsageColumnEntity(props: IProps) {
                 color={usedTrafficPercentage > 100 ? 'orange.7' : 'teal.9'}
                 radius="xs"
                 size="md"
-                striped
                 value={usedTrafficPercentage}
             />
 
             <Group gap="xs" justify="space-between" mt={2}>
-                <Text c="dimmed" fw={'550'} size="xs">
-                    {totalUsedTraffic} {limitBytes === '0' ? '' : `/ ${limitBytes}`} {strategy}
+                <Text c="dimmed" fw={550} size="xs">
+                    {totalUsedTraffic === '0' ? '0 GiB' : totalUsedTraffic}
                 </Text>
-                <Text c="dimmed" fw={'550'} size="xs">
-                    Σ {lifetimeUsedTraffic}
+
+                <Text c="dimmed" fw={550} size="xs">
+                    {limitBytes === '0' ? '∞' : `${limitBytes}`}
                 </Text>
             </Group>
         </Box>

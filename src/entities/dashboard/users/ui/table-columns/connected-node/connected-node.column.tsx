@@ -14,6 +14,7 @@ export function ConnectedNodeColumnEntity(props: IProps) {
                 flex: 1,
                 minWidth: 0
             }}
+            wrap="nowrap"
         >
             {lastConnectedNode?.countryCode && lastConnectedNode.countryCode !== 'XX' && (
                 <ReactCountryFlag
