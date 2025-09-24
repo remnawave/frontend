@@ -188,7 +188,7 @@ export function GetUserSubscriptionRequestHistoryFeature(props: IProps) {
             </Drawer>
 
             <Menu.Item leftSection={<TbRewindBackward50 size="16px" />} onClick={handlers.open}>
-                {t('get-user-subscription-request-history.feature.subscription-request-history')}
+                {t('get-user-subscription-request-history.feature.request-history')}
             </Menu.Item>
         </>
     )
