@@ -424,7 +424,13 @@
         "override-sni-from-address": "Переопределить SNI из адреса",
         "override-sni-from-address-description": "Эта опция заменяет значение SNI на указанное значение поля Адрес. Это особенно полезно для опций: мульти-домен или Wildcard-домен.",
         "legacy-options": "Устаревшие настройки",
-        "allow-insecure": "Разрешить небезопасные"
+        "allow-insecure": "Разрешить небезопасные",
+        "shuffled-hosts-hover-card": "Shuffled hosts will be placed at the top of the list and sorted randomly.",
+        "vless-route-description": "From 0 to 65535, empty to disable",
+        "misc-settings": "Misc settings",
+        "shuffle-host": "Shuffle Host",
+        "mihomo-specific": "Mihomo Specific",
+        "enable-x25519mlkem768": "Enable x25519mlkem768"
     },
     "base-node-form": {
         "country": "Страна",
