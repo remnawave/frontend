@@ -1600,7 +1600,8 @@
             "nothing-to-show": "没有要显示的内容...",
             "request-at": "请求时间",
             "ip-address": "IP 地址",
-            "user-agent": "User Agent"
+            "user-agent": "User Agent",
+            "request-history": "Request History"
         }
     },
     "use-hwid-inspector-table-columns": {

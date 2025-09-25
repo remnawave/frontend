@@ -1600,7 +1600,8 @@
             "nothing-to-show": "Нечего показывать...",
             "request-at": "Запрос в",
             "ip-address": "IP-адрес",
-            "user-agent": "User Agent"
+            "user-agent": "User Agent",
+            "request-history": "Request History"
         }
     },
     "use-hwid-inspector-table-columns": {
