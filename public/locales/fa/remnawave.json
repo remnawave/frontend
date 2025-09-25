@@ -1600,7 +1600,8 @@
             "nothing-to-show": "چیزی برای نشان دادن موجود نیست...",
             "request-at": "درخواست شده در",
             "ip-address": "آدرس IP",
-            "user-agent": "عامل کاربر"
+            "user-agent": "عامل کاربر",
+            "request-history": "Request History"
         }
     },
     "use-hwid-inspector-table-columns": {
