@@ -6,6 +6,7 @@ import {
     Button,
     Container,
     Group,
+    Image,
     Indicator,
     ScrollArea,
     Text
@@ -21,10 +22,12 @@ import axios from 'axios'
 import { getBuildInfo } from '@shared/utils/get-build-info/get-build-info.util'
 import { ScrollToTopWrapper } from '@shared/hocs/scroll-to-top/scroll-to-top'
 import { BuildInfoModal } from '@shared/ui/build-info-modal/build-info-modal'
+import { useGetAuthStatus } from '@shared/api/hooks/auth/auth.query.hooks'
 import { useEasterEggStore } from '@entities/dashboard/easter-egg-store'
 import { HeaderControls } from '@shared/ui/header-buttons'
 import { sToMs } from '@shared/utils/time-utils'
 import { ROUTES } from '@shared/constants'
+import { LoadingScreen } from '@shared/ui'
 import { Logo } from '@shared/ui/logo'
 
 import { Navigation } from './navbar/navigation.layout'
@@ -32,6 +35,8 @@ import packageJson from '../../../../../package.json'
 import classes from './Main.module.css'
 
 export function MainLayout() {
+    const { data: authStatus, isFetching } = useGetAuthStatus()
+
     const [mobileOpened, { toggle: toggleMobile }] = useDisclosure()
     const [desktopOpened, { toggle: toggleDesktop }] = useDisclosure(true)
     const [buildInfoModalOpened, setBuildInfoModalOpened] = useState(false)
@@ -107,7 +112,16 @@ export function MainLayout() {
         setIsNewVersionAvailable(semver.gt(versions.latestVersion, versions.currentVersion))
     }, [versions])
 
+    if (isFetching) {
+        return <LoadingScreen height="100vh" />
+    }
+
     const handleClick = () => {
+        if (isEasterEggUnlocked) {
+            navigate(ROUTES.DASHBOARD.EASTER_EGG.PROXY_DEFENSE)
+            return
+        }
+
         incrementClick()
 
         setIsLogoAnimating(true)
@@ -195,6 +209,48 @@ export function MainLayout() {
             </Indicator>
         )
 
+    const customLogo = () => {
+        if (!authStatus?.branding.logoUrl) {
+            return logoElement
+        }
+
+        return (
+            <Image
+                alt="logo"
+                fallbackSrc="/favicons/logo.svg"
+                fit="contain"
+                onClick={handleClick}
+                src={authStatus.branding.logoUrl}
+                style={{
+                    maxWidth: '30px',
+                    maxHeight: '30px',
+                    width: '30px',
+                    height: '30px',
+                    cursor: 'pointer'
+                }}
+            />
+        )
+    }
+
+    const customTitle = () => {
+        if (!authStatus?.branding.title) {
+            return titleElement
+        }
+
+        return (
+            <Text
+                fw={700}
+                size="lg"
+                style={{
+                    userSelect: 'none',
+                    WebkitUserSelect: 'none'
+                }}
+            >
+                {authStatus.branding.title}
+            </Text>
+        )
+    }
+
     return isMediaQueryReady ? (
         <AppShell
             header={{ height: 64 }}
@@ -251,8 +307,8 @@ export function MainLayout() {
                     </Box>
 
                     <Group gap="xs" justify="center" w="100%">
-                        {logoElement}
-                        {titleElement}
+                        {customLogo()}
+                        {customTitle()}
                         {!isMobile && versionBadge}
                     </Group>
 

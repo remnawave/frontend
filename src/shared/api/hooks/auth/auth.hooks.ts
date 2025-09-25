@@ -42,7 +42,7 @@ export const useRegister = createMutationHook({
             notifications.show({
                 title: 'Register',
                 message: 'User registered successfully',
-                color: 'green'
+                color: 'teal'
             })
             setToken({ token: data.accessToken })
         },

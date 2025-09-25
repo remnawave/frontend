@@ -1,4 +1,4 @@
-import { Badge, Box, Center, Group, Stack, Text, Title } from '@mantine/core'
+import { Badge, Box, Center, Group, Image, Stack, Text, Title } from '@mantine/core'
 import { useLayoutEffect } from 'react'
 
 import { TelegramLoginButtonFeature } from '@features/auth/telegram-login-button/telegram-login-button.feature'
@@ -6,7 +6,6 @@ import { OAuth2LoginButtonsFeature } from '@features/auth/oauth2-login-button/oa
 import { useGetAuthStatus } from '@shared/api/hooks/auth/auth.query.hooks'
 import { RegisterFormFeature } from '@features/auth/register-form'
 import { LoginFormFeature } from '@features/auth/login-form'
-import { UnderlineShape } from '@shared/ui/underline-shape'
 import { clearQueryClient } from '@shared/api/query-client'
 import { LoadingScreen } from '@shared/ui'
 import { Logo } from '@shared/ui/logo'
@@ -38,29 +37,55 @@ export const LoginPage = () => {
 
     const isRegister = !authStatus?.isLoginAllowed && authStatus?.isRegisterAllowed
 
+    const customLogo = () => {
+        if (!authStatus?.branding.logoUrl) {
+            return <Logo c="cyan" w="3rem" />
+        }
+
+        return (
+            <Image
+                alt="logo"
+                fit="contain"
+                src={authStatus.branding.logoUrl}
+                style={{
+                    maxWidth: '40px',
+                    maxHeight: '40px',
+                    width: '40px',
+                    height: '40px'
+                }}
+            />
+        )
+    }
+
+    const customTitle = () => {
+        if (!authStatus?.branding.title) {
+            return (
+                <Title order={1} pos="relative">
+                    <Text c="cyan" component="span" fw="inherit" fz="inherit" pos="relative">
+                        Remna
+                    </Text>
+                    <Text c="white" component="span" fw="inherit" fz="inherit" pos="relative">
+                        wave
+                    </Text>
+                </Title>
+            )
+        }
+
+        return (
+            <Title order={1} pos="relative">
+                <Text c="white" component="span" fw="inherit" fz="inherit" pos="relative">
+                    {authStatus.branding.title}
+                </Text>
+            </Title>
+        )
+    }
+
     return (
         <Page title="Login">
-            <Stack align="center" gap="xl">
+            <Stack align="center" gap="xs">
                 <Group align="center" gap={4} justify="center">
-                    <Logo c="cyan" w="3rem" />
-                    <Title order={1} pos="relative">
-                        <Text c="cyan" component="span" fw="inherit" fz="inherit" pos="relative">
-                            Remna
-                        </Text>
-                        <Text c="white" component="span" fw="inherit" fz="inherit" pos="relative">
-                            wave
-                        </Text>
-
-                        <UnderlineShape
-                            bottom="-1rem"
-                            c="cyan"
-                            h="0.625rem"
-                            left="0"
-                            pos="absolute"
-                            style={{ zIndex: 1 }}
-                            w="7.852rem"
-                        />
-                    </Title>
+                    {customLogo()}
+                    {customTitle()}
                 </Group>
 
                 {!authStatus && (

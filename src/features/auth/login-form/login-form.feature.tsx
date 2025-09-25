@@ -1,8 +1,9 @@
 import { Button, Container, Paper, PasswordInput, TextInput } from '@mantine/core'
 import { LoginCommand } from '@remnawave/backend-contract'
-import { useForm, zodResolver } from '@mantine/form'
+import { zodResolver } from 'mantine-form-zod-resolver'
 import { PiSignInDuotone } from 'react-icons/pi'
 import { useTranslation } from 'react-i18next'
+import { useForm } from '@mantine/form'
 
 import { handleFormErrors } from '@shared/utils/misc'
 import { useAuth } from '@shared/hooks/use-auth'
@@ -40,8 +41,8 @@ export const LoginFormFeature = () => {
 
     return (
         <form onSubmit={handleSubmit}>
-            <Container my={40} size={'100%'}>
-                <Paper mt={30} p={30}>
+            <Container size="100%">
+                <Paper p={30}>
                     <TextInput
                         label={t('login-form.feature.username')}
                         name="username"
