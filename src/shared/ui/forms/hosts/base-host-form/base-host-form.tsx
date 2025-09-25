@@ -271,6 +271,55 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
         )
     }
 
+    const mihomoX25519HoverCard = () => {
+        return (
+            <HoverCard shadow="md" width={280} withArrow>
+                <HoverCard.Target>
+                    <ActionIcon color="gray" size="xs" variant="subtle">
+                        <HiQuestionMarkCircle size={20} />
+                    </ActionIcon>
+                </HoverCard.Target>
+                <HoverCard.Dropdown>
+                    <Stack gap="md">
+                        <Stack gap="sm">
+                            <Text c="dimmed" size="sm">
+                                Refer to the{' '}
+                                <Link
+                                    target="_blank"
+                                    to="https://wiki.metacubex.one/en/config/proxies/tls/#reality-optssupport-x25519mlkem768"
+                                >
+                                    Mihomo Documentation
+                                </Link>{' '}
+                                for more information.
+                            </Text>
+                        </Stack>
+                    </Stack>
+                </HoverCard.Dropdown>
+            </HoverCard>
+        )
+    }
+
+    const shuffleHostHoverCard = () => {
+        return (
+            <HoverCard shadow="md" width={280} withArrow>
+                <HoverCard.Target>
+                    <ActionIcon color="gray" size="xs" variant="subtle">
+                        <HiQuestionMarkCircle size={20} />
+                    </ActionIcon>
+                </HoverCard.Target>
+                <HoverCard.Dropdown>
+                    <Stack gap="md">
+                        <Stack gap="sm">
+                            <Text c="dimmed" size="sm">
+                                {t('base-host-form.shuffled-hosts-hover-card')}
+                            </Text>
+                        </Stack>
+                    </Stack>
+                </HoverCard.Dropdown>
+            </HoverCard>
+        )
+    }
+
     return (
         <form onSubmit={handleSubmit}>
             <Group gap="xs" justify="space-between" mb="md">
@@ -608,7 +657,9 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
                                             allowNegative={false}
                                             clampBehavior="strict"
                                             decimalScale={0}
-                                            description="From 0 to 65535, empty to disable"
+                                            description={t(
+                                                'base-host-form.vless-route-description'
+                                            )}
                                             hideControls
                                             max={65535}
                                             min={0}
@@ -756,19 +807,59 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
                                     </Stack>
                                 </Fieldset>
 
-                                <Fieldset legend={t('base-host-form.legacy-options')}>
+                                <Fieldset legend={t('base-host-form.misc-settings')}>
+                                    <Stack gap="xs">
+                                        <Group gap="xs" justify="space-between">
+                                            <Group gap={4}>
+                                                <Text fw={600} size="sm">
+                                                    {t('base-host-form.shuffle-host')}
+                                                </Text>
+                                                {shuffleHostHoverCard()}
+                                            </Group>
+                                            <Switch
+                                                color="teal.8"
+                                                key={form.key('shuffleHost')}
+                                                radius="md"
+                                                size="md"
+                                                {...form.getInputProps('shuffleHost', {
+                                                    type: 'checkbox'
+                                                })}
+                                            />
+                                        </Group>
+
+                                        <Group gap="xs" justify="space-between">
+                                            <Group gap={4}>
+                                                <Text fw={600} size="sm">
+                                                    {t('base-host-form.allow-insecure')}
+                                                </Text>
+                                            </Group>
+                                            <Switch
+                                                color="teal.8"
+                                                key={form.key('allowInsecure')}
+                                                radius="md"
+                                                size="md"
+                                                {...form.getInputProps('allowInsecure', {
+                                                    type: 'checkbox'
+                                                })}
+                                            />
+                                        </Group>
+                                    </Stack>
+                                </Fieldset>
+
+                                <Fieldset legend={t('base-host-form.mihomo-specific')}>
                                     <Group gap="xs" justify="space-between">
                                         <Group gap={4}>
                                             <Text fw={600} size="sm">
-                                                {t('base-host-form.allow-insecure')}
+                                                {t('base-host-form.enable-x25519mlkem768')}
                                             </Text>
+                                            {mihomoX25519HoverCard()}
                                         </Group>
                                         <Switch
                                             color="teal.8"
-                                            key={form.key('allowInsecure')}
+                                            key={form.key('mihomoX25519')}
                                             radius="md"
                                             size="md"
-                                            {...form.getInputProps('allowInsecure', {
+                                            {...form.getInputProps('mihomoX25519', {
                                                 type: 'checkbox'
                                             })}
                                         />
