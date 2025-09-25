@@ -424,7 +424,13 @@
         "override-sni-from-address": "بازنویسی SNI از آدرس دامنه",
         "override-sni-from-address-description": "این گزینه مقدار SNI را با آدرس مشخص شده جایگزین خواهد کرد که برای کانفیگ‌های چند دامنه‌ای و wildcard قابل استفاده می‌باشد",
         "legacy-options": "تنظیمات قدیمی",
-        "allow-insecure": "اجازه اتصال ناامن"
+        "allow-insecure": "اجازه اتصال ناامن",
+        "shuffled-hosts-hover-card": "Shuffled hosts will be placed at the top of the list and sorted randomly.",
+        "vless-route-description": "From 0 to 65535, empty to disable",
+        "misc-settings": "Misc settings",
+        "shuffle-host": "Shuffle Host",
+        "mihomo-specific": "Mihomo Specific",
+        "enable-x25519mlkem768": "Enable x25519mlkem768"
     },
     "base-node-form": {
         "country": "کشور",
