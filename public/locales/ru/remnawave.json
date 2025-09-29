@@ -425,12 +425,12 @@
         "override-sni-from-address-description": "Эта опция заменяет значение SNI на указанное значение поля Адрес. Это особенно полезно для опций: мульти-домен или Wildcard-домен.",
         "legacy-options": "Устаревшие настройки",
         "allow-insecure": "Разрешить небезопасные",
-        "shuffled-hosts-hover-card": "Shuffled hosts will be placed at the top of the list and sorted randomly.",
-        "vless-route-description": "From 0 to 65535, empty to disable",
-        "misc-settings": "Misc settings",
-        "shuffle-host": "Shuffle Host",
-        "mihomo-specific": "Mihomo Specific",
-        "enable-x25519mlkem768": "Enable x25519mlkem768"
+        "shuffled-hosts-hover-card": "Перемешиваемые узлы будут помещены в верхней части списка и отсортированы случайным образом.",
+        "vless-route-description": "От 0 до 65535, оставьте пустым для отключения",
+        "misc-settings": "Прочие настройки",
+        "shuffle-host": "Перемешать хост",
+        "mihomo-specific": "Настройки для Mihomo",
+        "enable-x25519mlkem768": "Включение x25519mlkem768"
     },
     "base-node-form": {
         "country": "Страна",
@@ -1607,7 +1607,7 @@
             "request-at": "Запрос в",
             "ip-address": "IP-адрес",
             "user-agent": "User Agent",
-            "request-history": "Request History"
+            "request-history": "История запросов"
         }
     },
     "use-hwid-inspector-table-columns": {
