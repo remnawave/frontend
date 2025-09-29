@@ -81,7 +81,7 @@ export function SrhInspectorMetrics() {
             chart: {
                 type: 'column',
                 backgroundColor: 'transparent',
-                height: 400,
+                height: 300,
                 style: {
                     fontFamily: 'inherit'
                 }
@@ -204,7 +204,7 @@ export function SrhInspectorMetrics() {
                 <SimpleGrid cols={{ base: 1, lg: 2 }} spacing="md">
                     {[1, 2].map((i) => (
                         <Card key={i} p="lg" radius="md" withBorder>
-                            <Center h={i === 1 ? 300 : 400}>
+                            <Center h={300}>
                                 <Loader size="lg" />
                             </Center>
                         </Card>
@@ -275,7 +275,7 @@ export function SrhInspectorMetrics() {
                         </Text>
                     </Group>
                     {stats?.hourlyRequestStats && stats.hourlyRequestStats.length > 0 ? (
-                        <Box h={400}>
+                        <Box h={300}>
                             <HighchartsReact
                                 highcharts={Highcharts}
                                 options={hourlyChartOptions}
@@ -283,7 +283,7 @@ export function SrhInspectorMetrics() {
                             />
                         </Box>
                     ) : (
-                        <Center h={400}>
+                        <Center h={300}>
                             <Stack align="center" gap="sm">
                                 <PiChartBar color="var(--mantine-color-gray-4)" size="48px" />
                                 <Text c="dimmed" size="sm">
