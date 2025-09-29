@@ -110,14 +110,7 @@ export const HomePage = (props: IProps) => {
                 title={t('home.page.short-stats')}
             />
 
-            <MotionStack
-                animate="visible"
-                gap="sm"
-                initial="hidden"
-                mb="xl"
-                pb="xl"
-                variants={containerVariants}
-            >
+            <MotionStack animate="visible" gap="sm" initial="hidden" variants={containerVariants}>
                 {pm2SummaryMetrics.length > 0 && (
                     <MotionWrapper variants={sectionVariants}>
                         <AnimatedTitle m={'xs'} ml={0} order={4} variants={titleVariants}>

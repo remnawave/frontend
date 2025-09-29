@@ -4,12 +4,14 @@ import { NavLink } from 'react-router-dom'
 import { motion } from 'motion/react'
 import { ReactNode } from 'react'
 
+/* eslint-disable @stylistic/indent */
 interface PageHeaderProps
     extends ElementProps<'header', keyof GroupProps>,
         Omit<GroupProps, 'title'> {
     breadcrumbs?: { href?: string; label: string }[]
     title: ReactNode
 }
+/* eslint-enable @stylistic/indent */
 
 export function PageHeader({
     children,
