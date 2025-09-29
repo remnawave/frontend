@@ -1647,5 +1647,12 @@
         "widget": {
             "subscription-request-history": "订阅请求历史"
         }
+    },
+    "srh-inspector-metrics": {
+        "widget": {
+            "requests": "Requests",
+            "hourly-request-statistics": "Hourly Request Statistics",
+            "no-hourly-data-available": "No hourly data available"
+        }
     }
 }
