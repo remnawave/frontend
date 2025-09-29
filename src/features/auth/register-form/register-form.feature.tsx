@@ -10,11 +10,12 @@ import {
 } from '@mantine/core'
 import { PiShuffleDuotone, PiSignpostDuotone } from 'react-icons/pi'
 import { RegisterCommand } from '@remnawave/backend-contract'
+import { zodResolver } from 'mantine-form-zod-resolver'
 import { notifications } from '@mantine/notifications'
-import { useForm, zodResolver } from '@mantine/form'
 import { generate } from 'generate-password-ts'
 import { useTranslation } from 'react-i18next'
 import { useClipboard } from '@mantine/hooks'
+import { useForm } from '@mantine/form'
 import { useEffect } from 'react'
 
 import { handleFormErrors } from '@shared/utils/misc'
@@ -100,8 +101,8 @@ export const RegisterFormFeature = () => {
 
     return (
         <form onSubmit={handleSubmit}>
-            <Container my={40} size={'100%'}>
-                <Paper mt={30} p={30} radius="md">
+            <Container size="100%">
+                <Paper p={30} radius="md">
                     <Title mb="xs" order={2} ta="center">
                         {t('register-form.feature.registration')}
                     </Title>

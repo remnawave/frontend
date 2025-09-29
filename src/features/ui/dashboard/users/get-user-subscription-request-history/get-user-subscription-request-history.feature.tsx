@@ -1,16 +1,28 @@
 import {
+    ActionIcon,
+    Card,
+    Center,
+    CopyButton,
+    Drawer,
+    Group,
+    Menu,
+    Stack,
+    Text,
+    Textarea
+} from '@mantine/core'
+import {
     TbCalendar,
     TbDevices,
     TbExternalLink,
     TbInfoCircle,
     TbRewindBackward50
 } from 'react-icons/tb'
-import { Card, Center, Code, Drawer, Group, Menu, Stack, Text } from '@mantine/core'
-import { PiEmptyDuotone } from 'react-icons/pi'
+import { PiCheck, PiCopy, PiEmptyDuotone } from 'react-icons/pi'
 import { useDisclosure } from '@mantine/hooks'
 import { useTranslation } from 'react-i18next'
 import { useEffect } from 'react'
 
+import { CopyableFieldShared } from '@shared/ui/copyable-field/copyable-field'
 import { useGetUserSubscriptionRequestHistory } from '@shared/api/hooks'
 import { LoaderModalShared } from '@shared/ui/loader-modal'
 import { formatDate } from '@shared/utils/misc'
@@ -87,9 +99,12 @@ export function GetUserSubscriptionRequestHistoryFeature(props: IProps) {
                                             </Text>
                                         </Group>
 
-                                        <Code>
-                                            {formatDate(request.requestAt, 'DD.MM.YYYY HH:mm:ss')}
-                                        </Code>
+                                        <CopyableFieldShared
+                                            value={formatDate(
+                                                request.requestAt,
+                                                'DD.MM.YYYY HH:mm:ss'
+                                            )}
+                                        />
                                     </Stack>
                                     <Stack gap="xs">
                                         <Group align="center" gap="xs">
@@ -103,22 +118,23 @@ export function GetUserSubscriptionRequestHistoryFeature(props: IProps) {
                                                 )}
                                             </Text>
 
-                                            <TbExternalLink
-                                                onClick={() => {
-                                                    window.open(
-                                                        `https://ipinfo.io/${request.requestIp}`,
-                                                        '_blank'
-                                                    )
-                                                }}
-                                                size={16}
-                                                style={{
-                                                    color: 'var(--mantine-color-indigo-5)',
-                                                    cursor: 'pointer'
-                                                }}
-                                            />
+                                            <a
+                                                href={`https://ipinfo.io/${request.requestIp}`}
+                                                rel="noopener noreferrer"
+                                                style={{ textDecoration: 'none' }}
+                                                target="_blank"
+                                            >
+                                                <TbExternalLink
+                                                    size={16}
+                                                    style={{
+                                                        color: 'var(--mantine-color-indigo-5)',
+                                                        cursor: 'pointer'
+                                                    }}
+                                                />
+                                            </a>
                                         </Group>
 
-                                        <Code>{request.requestIp}</Code>
+                                        <CopyableFieldShared value={request.requestIp || '-'} />
                                     </Stack>
 
                                     <Stack gap="xs">
@@ -134,7 +150,35 @@ export function GetUserSubscriptionRequestHistoryFeature(props: IProps) {
                                             </Text>
                                         </Group>
 
-                                        <Code>{request.userAgent}</Code>
+                                        <CopyButton timeout={2000} value={request.userAgent || '-'}>
+                                            {({ copied, copy }) => (
+                                                <Textarea
+                                                    autosize
+                                                    onClick={copy}
+                                                    readOnly
+                                                    rightSection={
+                                                        <ActionIcon
+                                                            color={copied ? 'teal' : 'gray'}
+                                                            onClick={copy}
+                                                            variant="subtle"
+                                                        >
+                                                            {copied ? (
+                                                                <PiCheck size="16px" />
+                                                            ) : (
+                                                                <PiCopy size="16px" />
+                                                            )}
+                                                        </ActionIcon>
+                                                    }
+                                                    styles={{
+                                                        input: {
+                                                            cursor: 'copy',
+                                                            fontFamily: 'monospace'
+                                                        }
+                                                    }}
+                                                    value={request.userAgent || '-'}
+                                                />
+                                            )}
+                                        </CopyButton>
                                     </Stack>
                                 </Stack>
                             </Card>
@@ -144,7 +188,7 @@ export function GetUserSubscriptionRequestHistoryFeature(props: IProps) {
             </Drawer>
 
             <Menu.Item leftSection={<TbRewindBackward50 size="16px" />} onClick={handlers.open}>
-                {t('get-user-subscription-request-history.feature.subscription-request-history')}
+                {t('get-user-subscription-request-history.feature.request-history')}
             </Menu.Item>
         </>
     )

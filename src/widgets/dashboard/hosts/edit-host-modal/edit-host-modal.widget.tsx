@@ -121,7 +121,9 @@ export const EditHostModalWidget = () => {
                 isHidden: host.isHidden,
                 overrideSniFromAddress: host.overrideSniFromAddress,
                 vlessRouteId: host.vlessRouteId ?? undefined,
-                allowInsecure: host.allowInsecure ?? undefined
+                allowInsecure: host.allowInsecure ?? undefined,
+                shuffleHost: host.shuffleHost ?? undefined,
+                mihomoX25519: host.mihomoX25519 ?? undefined
             })
         }
     }, [host, configProfiles])

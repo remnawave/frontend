@@ -424,7 +424,13 @@
         "override-sni-from-address": "بازنویسی SNI از آدرس دامنه",
         "override-sni-from-address-description": "این گزینه مقدار SNI را با آدرس مشخص شده جایگزین خواهد کرد که برای کانفیگ‌های چند دامنه‌ای و wildcard قابل استفاده می‌باشد",
         "legacy-options": "تنظیمات قدیمی",
-        "allow-insecure": "اجازه اتصال ناامن"
+        "allow-insecure": "اجازه اتصال ناامن",
+        "shuffled-hosts-hover-card": "هاست‌های به هم زده شده در بالای لیست قرار گرفته و به صورت تصادفی مرتب خواهند شد.",
+        "vless-route-description": "از 0 تا 65535، برای غیرفعالسازی خالی بگذارید",
+        "misc-settings": "تنظیمات متفرقه",
+        "shuffle-host": "به هم زدن هاست‌ها",
+        "mihomo-specific": "مخصوص Mihomo",
+        "enable-x25519mlkem768": "فعالسازی x25519mlkem768"
     },
     "base-node-form": {
         "country": "کشور",
@@ -1600,7 +1606,8 @@
             "nothing-to-show": "چیزی برای نشان دادن موجود نیست...",
             "request-at": "درخواست شده در",
             "ip-address": "آدرس IP",
-            "user-agent": "عامل کاربر"
+            "user-agent": "عامل کاربر",
+            "request-history": "تاریخچه درخواست"
         }
     },
     "use-hwid-inspector-table-columns": {

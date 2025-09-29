@@ -424,7 +424,13 @@
         "override-sni-from-address": "Override SNI from Address",
         "override-sni-from-address-description": "This option replaces the SNI value with the specified Address field value. This is particularly useful for multi-domain configurations or wildcard domains configuration.",
         "legacy-options": "Legacy options",
-        "allow-insecure": "Allow Insecure"
+        "allow-insecure": "Allow Insecure",
+        "shuffled-hosts-hover-card": "Shuffled hosts will be placed at the top of the list and sorted randomly.",
+        "vless-route-description": "From 0 to 65535, empty to disable",
+        "misc-settings": "Misc settings",
+        "shuffle-host": "Shuffle Host",
+        "mihomo-specific": "Mihomo Specific",
+        "enable-x25519mlkem768": "Enable x25519mlkem768"
     },
     "base-node-form": {
         "country": "Country",
@@ -1600,7 +1606,8 @@
             "nothing-to-show": "Nothing to show...",
             "request-at": "Request At",
             "ip-address": "IP Address",
-            "user-agent": "User Agent"
+            "user-agent": "User Agent",
+            "request-history": "Request History"
         }
     },
     "use-hwid-inspector-table-columns": {

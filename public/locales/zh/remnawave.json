@@ -424,7 +424,13 @@
         "override-sni-from-address": "从地址覆盖SNI地址",
         "override-sni-from-address-description": "此选项用指定的地址字段值替换SNI值。这对于多域配置或通配符域配置特别有用。",
         "legacy-options": "传统选项",
-        "allow-insecure": "允许不安全的连接"
+        "allow-insecure": "允许不安全的连接",
+        "shuffled-hosts-hover-card": "Shuffled hosts will be placed at the top of the list and sorted randomly.",
+        "vless-route-description": "From 0 to 65535, empty to disable",
+        "misc-settings": "Misc settings",
+        "shuffle-host": "Shuffle Host",
+        "mihomo-specific": "Mihomo Specific",
+        "enable-x25519mlkem768": "Enable x25519mlkem768"
     },
     "base-node-form": {
         "country": "国家",
@@ -1600,7 +1606,8 @@
             "nothing-to-show": "没有要显示的内容...",
             "request-at": "请求时间",
             "ip-address": "IP 地址",
-            "user-agent": "User Agent"
+            "user-agent": "User Agent",
+            "request-history": "Request History"
         }
     },
     "use-hwid-inspector-table-columns": {
