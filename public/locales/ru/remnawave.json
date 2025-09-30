@@ -1650,9 +1650,9 @@
     },
     "srh-inspector-metrics": {
         "widget": {
-            "requests": "Requests",
-            "hourly-request-statistics": "Hourly Request Statistics",
-            "no-hourly-data-available": "No hourly data available"
+            "requests": "Запросы",
+            "hourly-request-statistics": "Почасовая статистика запросов",
+            "no-hourly-data-available": "Нет данных"
         }
     }
 }
