@@ -1647,5 +1647,12 @@
         "widget": {
             "subscription-request-history": "تاریخچه درخواست اشتراک"
         }
+    },
+    "srh-inspector-metrics": {
+        "widget": {
+            "requests": "درخواست‌ها",
+            "hourly-request-statistics": "آمار ساعتی درخواست‌ها",
+            "no-hourly-data-available": "داده‌های ساعتی در دسترس نمی‌باشد"
+        }
     }
 }

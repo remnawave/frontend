@@ -11,7 +11,7 @@ import {
     ScrollArea,
     Text
 } from '@mantine/core'
-import { useClickOutside, useDisclosure, useMediaQuery } from '@mantine/hooks'
+import { useClickOutside, useDisclosure, useHeadroom, useMediaQuery } from '@mantine/hooks'
 import { Outlet, useNavigate } from 'react-router-dom'
 import { PiGameController } from 'react-icons/pi'
 import { useQuery } from '@tanstack/react-query'
@@ -41,6 +41,7 @@ export function MainLayout() {
     const [desktopOpened, { toggle: toggleDesktop }] = useDisclosure(true)
     const [buildInfoModalOpened, setBuildInfoModalOpened] = useState(false)
     const [isMediaQueryReady, setIsMediaQueryReady] = useState(false)
+    const pinned = useHeadroom({ fixedAt: 120 })
 
     const navigate = useNavigate()
     const { incrementClick, isEasterEggUnlocked, isGameModalOpen, closeGameModal } =
@@ -253,7 +254,7 @@ export function MainLayout() {
 
     return isMediaQueryReady ? (
         <AppShell
-            header={{ height: 64 }}
+            header={{ height: 64, collapsed: !pinned, offset: false }}
             layout="alt"
             navbar={{
                 width: 300,
@@ -342,11 +343,7 @@ export function MainLayout() {
                     <Navigation isMobile={isMobile} onClose={toggleMobile} />
                 </AppShell.Section>
             </AppShell.Navbar>
-            <AppShell.Main
-                style={{
-                    height: '100dvh'
-                }}
-            >
+            <AppShell.Main pb="var(--mantine-spacing-md)" pt="var(--app-shell-header-height)">
                 <ScrollToTopWrapper>
                     <Outlet />
                 </ScrollToTopWrapper>

@@ -1647,5 +1647,12 @@
         "widget": {
             "subscription-request-history": "История запросов подписки"
         }
+    },
+    "srh-inspector-metrics": {
+        "widget": {
+            "requests": "Запросы",
+            "hourly-request-statistics": "Почасовая статистика запросов",
+            "no-hourly-data-available": "Нет данных"
+        }
     }
 }
