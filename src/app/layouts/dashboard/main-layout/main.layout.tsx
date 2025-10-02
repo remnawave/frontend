@@ -35,7 +35,7 @@ import packageJson from '../../../../../package.json'
 import classes from './Main.module.css'
 
 export function MainLayout() {
-    const { data: authStatus, isFetching } = useGetAuthStatus()
+    const { data: authStatus, isLoading: isAuthStatusLoading } = useGetAuthStatus()
 
     const [mobileOpened, { toggle: toggleMobile }] = useDisclosure()
     const [desktopOpened, { toggle: toggleDesktop }] = useDisclosure(true)
@@ -113,7 +113,7 @@ export function MainLayout() {
         setIsNewVersionAvailable(semver.gt(versions.latestVersion, versions.currentVersion))
     }, [versions])
 
-    if (isFetching) {
+    if (isAuthStatusLoading) {
         return <LoadingScreen height="100vh" />
     }
 

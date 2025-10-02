@@ -1,6 +1,9 @@
 import { createQueryKeys } from '@lukemorales/query-key-factory'
 import { GetStatusCommand } from '@remnawave/backend-contract'
+import { keepPreviousData } from '@tanstack/react-query'
 import { notifications } from '@mantine/notifications'
+
+import { sToMs } from '@shared/utils/time-utils'
 
 import { createGetQueryHook } from '../../tsq-helpers'
 
@@ -15,7 +18,9 @@ export const useGetAuthStatus = createGetQueryHook({
     responseSchema: GetStatusCommand.ResponseSchema,
     getQueryKey: () => authQueryKeys.getAuthStatus.queryKey,
     rQueryParams: {
-        refetchOnMount: false
+        refetchOnMount: false,
+        placeholderData: keepPreviousData,
+        staleTime: sToMs(500)
     },
     errorHandler: (error) => {
         notifications.show({
