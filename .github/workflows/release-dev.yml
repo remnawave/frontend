@@ -33,7 +33,7 @@ jobs:
             - name: Setup Node
               uses: actions/setup-node@v3
               with:
-                  node-version: '22.x'
+                  node-version: '22.18.0'
 
             - name: Generate build-info.json
               env:
