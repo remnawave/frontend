@@ -275,6 +275,7 @@ export const EditHostModalWidget = () => {
     return (
         <Modal
             centered
+            fullScreen={true}
             onClose={handleClose}
             opened={isModalOpen}
             size="30rem"

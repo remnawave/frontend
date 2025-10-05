@@ -254,7 +254,7 @@ export function MainLayout() {
 
     return isMediaQueryReady ? (
         <AppShell
-            header={{ height: 64, collapsed: !pinned, offset: false }}
+            header={{ height: 64, collapsed: isMobile ? false : !pinned, offset: false }}
             layout="alt"
             navbar={{
                 width: 300,

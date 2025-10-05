@@ -5,7 +5,7 @@ body {
     min-height: 100vh;
 }
 
-#root {
+.root {
     height: 100vh;
 
     @mixin dark {
@@ -18,8 +18,37 @@ body {
             border: none;
         }
     }
+
+    @supports (padding: env(safe-area-inset-top)) {
+        padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom)
+            env(safe-area-inset-left);
+    }
 }
 
 .mantine-Spotlight-action[data-selected] {
     background-color: var(--mantine-color-dark-5) !important;
+}
+
+.mantine-Modal-root[data-full-screen] .mantine-Modal-header {
+    padding-top: env(safe-area-inset-top, 0px);
+}
+.mantine-Drawer-header {
+    padding-top: env(safe-area-inset-top, 0px);
+}
+
+@supports (padding: env(safe-area-inset-bottom)) {
+    .safe-area-bottom {
+        position: fixed;
+        left: 10px;
+        right: 0;
+        bottom: 0px;
+        width: 100%;
+        height: 4px;
+        background: #161b23;
+        z-index: 0;
+    }
+}
+
+[class*='MRT_TopToolbar-module_root-fullscreen'] {
+    padding-top: env(safe-area-inset-top, 0px) !important;
 }
