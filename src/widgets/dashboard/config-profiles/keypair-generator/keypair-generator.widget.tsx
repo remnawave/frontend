@@ -105,9 +105,6 @@ export const KeypairGeneratorWidget = () => {
                                         label={t('keypair.widget.public-key')}
                                         value={keyPair.publicKey}
                                     />
-                                </Stack>
-
-                                <Stack gap="xs">
                                     <CopyableFieldShared
                                         label={t('keypair.widget.private-key')}
                                         value={keyPair.privateKey}
