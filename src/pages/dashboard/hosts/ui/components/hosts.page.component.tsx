@@ -1,3 +1,5 @@
+/* eslint-disable @stylistic/indent */
+
 import { useTranslation } from 'react-i18next'
 import { motion } from 'motion/react'
 import { Grid } from '@mantine/core'
@@ -21,7 +23,8 @@ export default function HostsPageComponent(props: IProps) {
         hostTags,
         isHostsLoading,
         isConfigProfilesLoading,
-        isHostTagsLoading
+        isHostTagsLoading,
+        isNodesLoading
     } = props
     const [selectedHosts, setSelectedHosts] = useState<string[]>([])
 
@@ -40,7 +43,10 @@ export default function HostsPageComponent(props: IProps) {
                 <Grid.Col span={12}>
                     <HostsPageHeaderWidget />
 
-                    {isHostsLoading || isConfigProfilesLoading || isHostTagsLoading ? (
+                    {isHostsLoading ||
+                    isConfigProfilesLoading ||
+                    isHostTagsLoading ||
+                    isNodesLoading ? (
                         <LoadingScreen height="60vh" />
                     ) : (
                         <motion.div

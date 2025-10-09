@@ -11,4 +11,5 @@ export interface IProps {
     isConfigProfilesLoading: boolean
     isHostsLoading: boolean
     isHostTagsLoading: boolean
+    isNodesLoading: boolean
 }

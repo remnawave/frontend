@@ -2,18 +2,24 @@ import { UpdateHostCommand } from '@remnawave/backend-contract'
 import { zodResolver } from 'mantine-form-zod-resolver'
 import { notifications } from '@mantine/notifications'
 import { useTranslation } from 'react-i18next'
+import { Drawer, Text } from '@mantine/core'
 import { useEffect, useState } from 'react'
-import { Modal, Text } from '@mantine/core'
 import { modals } from '@mantine/modals'
 import { useForm } from '@mantine/form'
 import consola from 'consola/browser'
 
 import {
+    QueryKeys,
+    useCreateHost,
+    useGetConfigProfiles,
+    useGetNodes,
+    useUpdateHost
+} from '@shared/api/hooks'
+import {
     useHostsStoreActions,
     useHostsStoreEditModalHost,
     useHostsStoreEditModalIsOpen
 } from '@entities/dashboard'
-import { QueryKeys, useCreateHost, useGetConfigProfiles, useUpdateHost } from '@shared/api/hooks'
 import { BaseHostForm } from '@shared/ui/forms/hosts/base-host-form'
 import { queryClient } from '@shared/api'
 
@@ -27,6 +33,7 @@ export const EditHostModalWidget = () => {
     const host = useHostsStoreEditModalHost()
 
     const { data: configProfiles } = useGetConfigProfiles()
+    const { data: nodes } = useGetNodes()
 
     const form = useForm<UpdateHostCommand.Request>({
         name: 'edit-host-form',
@@ -123,7 +130,8 @@ export const EditHostModalWidget = () => {
                 vlessRouteId: host.vlessRouteId ?? undefined,
                 allowInsecure: host.allowInsecure ?? undefined,
                 shuffleHost: host.shuffleHost ?? undefined,
-                mihomoX25519: host.mihomoX25519 ?? undefined
+                mihomoX25519: host.mihomoX25519 ?? undefined,
+                nodes: host.nodes ?? undefined
             })
         }
     }, [host, configProfiles])
@@ -267,17 +275,21 @@ export const EditHostModalWidget = () => {
                 tag: host.tag ?? undefined,
                 overrideSniFromAddress: host.overrideSniFromAddress,
                 vlessRouteId: host.vlessRouteId ?? undefined,
-                allowInsecure: host.allowInsecure ?? undefined
+                allowInsecure: host.allowInsecure ?? undefined,
+                nodes: host.nodes ?? undefined
             }
         })
     }
 
     return (
-        <Modal
-            centered
+        <Drawer
+            keepMounted={false}
             onClose={handleClose}
             opened={isModalOpen}
-            size="30rem"
+            overlayProps={{ backgroundOpacity: 0.6, blur: 0 }}
+            padding="lg"
+            position="right"
+            size="lg"
             title={<Text fw={500}>{t('edit-host-modal.widget.edit-host')}</Text>}
         >
             <BaseHostForm
@@ -288,8 +300,9 @@ export const EditHostModalWidget = () => {
                 handleSubmit={handleSubmit}
                 host={host!}
                 isSubmitting={isUpdateHostPending}
+                nodes={nodes!}
                 setAdvancedOpened={setAdvancedOpened}
             />
-        </Modal>
+        </Drawer>
     )
 }

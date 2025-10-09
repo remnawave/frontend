@@ -1,10 +1,16 @@
 import { useEffect } from 'react'
 
 import {
+    QueryKeys,
+    useGetConfigProfiles,
+    useGetHosts,
+    useGetHostTags,
+    useGetNodes
+} from '@shared/api/hooks'
+import {
     useHostsStoreCreateModalIsOpen,
     useHostsStoreEditModalIsOpen
 } from '@entities/dashboard/hosts/hosts-store'
-import { QueryKeys, useGetConfigProfiles, useGetHosts, useGetHostTags } from '@shared/api/hooks'
 import HostsPageComponent from '@pages/dashboard/hosts/ui/components/hosts.page.component'
 import { queryClient } from '@shared/api'
 
@@ -12,6 +18,7 @@ export function HostsPageConnector() {
     const { data: hosts, isLoading: isHostsLoading } = useGetHosts()
     const { data: configProfiles, isLoading: isConfigProfilesLoading } = useGetConfigProfiles()
     const { data: hostTags, isLoading: isHostTagsLoading } = useGetHostTags()
+    const { isLoading: isNodesLoading } = useGetNodes()
 
     const isCreateModalOpen = useHostsStoreCreateModalIsOpen()
     const isEditModalOpen = useHostsStoreEditModalIsOpen()
@@ -31,6 +38,7 @@ export function HostsPageConnector() {
             isConfigProfilesLoading={isConfigProfilesLoading}
             isHostsLoading={isHostsLoading}
             isHostTagsLoading={isHostTagsLoading}
+            isNodesLoading={isNodesLoading}
         />
     )
 }

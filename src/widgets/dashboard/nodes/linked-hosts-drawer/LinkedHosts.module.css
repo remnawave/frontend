@@ -1,0 +1,99 @@
+.item {
+    display: flex;
+    align-items: center;
+    border-radius: var(--mantine-radius-md);
+    border: 1px solid light-dark(var(--mantine-color-gray-2), var(--mantine-color-dark-6));
+    padding: var(--mantine-spacing-xs) var(--mantine-spacing-md);
+    margin-bottom: var(--mantine-spacing-xs);
+
+    background: linear-gradient(
+        135deg,
+        var(--mantine-color-dark-6) 0%,
+        var(--mantine-color-dark-7) 100%
+    );
+    box-shadow: var(--mantine-shadow-sm);
+    cursor: pointer !important;
+
+    transition: border-color 150ms ease;
+}
+
+.item:hover {
+    border-color: var(--mantine-color-cyan-filled);
+}
+
+.label {
+    font-family: var(--mantine-font-family-monospace);
+    font-weight: bold;
+    font-size: var(--mantine-font-size-sm);
+    line-height: 1.3;
+    color: var(--mantine-color-bright);
+}
+
+.hostInfoLabel {
+    font-family: var(--mantine-font-family-monospace);
+    font-size: var(--mantine-font-size-sm);
+    line-height: 1.3;
+    color: var(--mantine-color-dimmed);
+}
+
+.contentArea {
+    cursor: pointer;
+    width: 100%;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.lockedIcon {
+    opacity: 0.5 !important;
+    cursor: not-allowed;
+}
+
+.truncatedBadge {
+    max-width: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.truncatedText {
+    max-width: 180px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.hostAddress {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-family: var(--mantine-font-family-monospace);
+    font-size: var(--mantine-font-size-sm);
+}
+
+.statusIndicator {
+    display: flex;
+    align-items: center;
+    padding: var(--mantine-spacing-xs) var(--mantine-spacing-sm);
+    border-radius: var(--mantine-radius-lg);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.statusActive {
+    background-color: light-dark(var(--mantine-color-teal-1), var(--mantine-color-teal-9));
+    color: var(--mantine-color-teal-7);
+}
+
+.statusInactive {
+    background-color: light-dark(var(--mantine-color-gray-2), var(--mantine-color-dark-5));
+    color: var(--mantine-color-gray-6);
+}
+
+.hostName {
+    line-height: 1.3;
+    color: var(--mantine-color-bright);
+    margin-bottom: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

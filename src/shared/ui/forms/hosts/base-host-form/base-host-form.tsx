@@ -1,11 +1,14 @@
 import {
     ActionIcon,
+    Badge,
     Button,
+    Checkbox,
     Drawer,
     Fieldset,
     Group,
     HoverCard,
     JsonInput,
+    MultiSelect,
     NumberInput,
     px,
     Select,
@@ -34,8 +37,8 @@ import {
     SECURITY_LAYERS,
     UpdateHostCommand
 } from '@remnawave/backend-contract'
+import { TbCloudNetwork, TbServer2 } from 'react-icons/tb'
 import { HiQuestionMarkCircle } from 'react-icons/hi'
-import { TbCloudNetwork } from 'react-icons/tb'
 import { useDisclosure } from '@mantine/hooks'
 import { useTranslation } from 'react-i18next'
 import { useEffect, useState } from 'react'
@@ -44,10 +47,11 @@ import { Link } from 'react-router-dom'
 import { HappLogo } from '@pages/dashboard/utils/happ-routing-builder/ui/components/happ-routing-builder.page.component'
 import { HostSelectInboundFeature } from '@features/ui/dashboard/hosts/host-select-inbound/host-select-inbound.feature'
 import { HostTagsInputWidget } from '@widgets/dashboard/hosts/host-tags-input/host-tags-input'
+import { emojiFlag, resolveCountryCode } from '@shared/utils/misc/resolve-country-code'
 import { PopoverWithInfoShared } from '@shared/ui/popovers/popover-with-info'
 import { DeleteHostFeature } from '@features/ui/dashboard/hosts/delete-host'
 import { TemplateInfoPopoverShared } from '@shared/ui/popovers'
-import { ModalFooter } from '@shared/ui/modal-footer'
+import { DrawerFooter } from '@shared/ui/drawer-footer'
 import { handleFormErrors } from '@shared/utils/misc'
 
 import classes from './HostTabs.module.css'
@@ -129,7 +133,7 @@ const basicSockoptParams = `{
 export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCommand.Request>(
     props: IProps<T>
 ) => {
-    const { form, handleSubmit, configProfiles, isSubmitting, handleCloneHost } = props
+    const { form, handleSubmit, configProfiles, isSubmitting, handleCloneHost, nodes } = props
 
     const { t } = useTranslation()
     const [opened, { open, close }] = useDisclosure(false)
@@ -463,6 +467,55 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
                                     key={form.key('tag')}
                                     {...form.getInputProps('tag')}
                                     value={form.getValues().tag}
+                                />
+
+                                <MultiSelect
+                                    clearButtonProps={{
+                                        size: 'xs'
+                                    }}
+                                    data={nodes.map((node) => ({
+                                        label: `${emojiFlag(node.countryCode)} ${node.name}${
+                                            node.provider ? ` (${node.provider.name})` : ''
+                                        }`,
+                                        value: node.uuid
+                                    }))}
+                                    description={t(
+                                        'base-host-form.pick-nodes-which-resolved-from-this-host-only-visual-assignment'
+                                    )}
+                                    inputWrapperOrder={['label', 'input', 'description', 'error']}
+                                    key={form.key('nodes')}
+                                    label={t('base-host-form.nodes')}
+                                    leftSection={<TbServer2 size={16} />}
+                                    renderOption={(item) => {
+                                        const node = nodes.find(
+                                            (node) => node.uuid === item.option.value
+                                        )
+                                        if (!node) return null
+                                        return (
+                                            <>
+                                                <Checkbox
+                                                    aria-hidden
+                                                    checked={item.checked}
+                                                    onChange={() => {}}
+                                                    style={{ pointerEvents: 'none' }}
+                                                    tabIndex={-1}
+                                                />
+                                                <Group gap={7} justify="space-between" w="100%">
+                                                    <Group gap={7}>
+                                                        {resolveCountryCode(node.countryCode)}
+                                                        <span>{node.name}</span>
+                                                    </Group>
+                                                    {node.provider && (
+                                                        <Badge color="gray" size="xs">
+                                                            {node.provider.name}
+                                                        </Badge>
+                                                    )}
+                                                </Group>
+                                            </>
+                                        )
+                                    }}
+                                    searchable
+                                    {...form.getInputProps('nodes')}
                                 />
                             </Stack>
                         )}
@@ -871,8 +924,22 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
                 </Tabs.Panel>
             </Tabs>
 
-            <ModalFooter>
+            <DrawerFooter>
                 <Group gap="xs" justify="space-between" w="100%">
+                    <Group gap="xs">
+                        <Button
+                            color="teal"
+                            disabled={!form.isValid() || !form.isDirty() || !form.isTouched()}
+                            leftSection={<PiFloppyDiskDuotone size="16px" />}
+                            loading={isSubmitting}
+                            size="sm"
+                            type="submit"
+                            variant="outline"
+                        >
+                            {t('base-host-form.save')}
+                        </Button>
+                    </Group>
+
                     <ActionIcon.Group>
                         <DeleteHostFeature />
                         {handleCloneHost && (
@@ -890,22 +957,8 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
                             </Tooltip>
                         )}
                     </ActionIcon.Group>
-
-                    <Group gap="xs">
-                        <Button
-                            color="teal"
-                            disabled={!form.isValid() || !form.isDirty() || !form.isTouched()}
-                            leftSection={<PiFloppyDiskDuotone size="16px" />}
-                            loading={isSubmitting}
-                            size="sm"
-                            type="submit"
-                            variant="outline"
-                        >
-                            {t('base-host-form.save')}
-                        </Button>
-                    </Group>
                 </Group>
-            </ModalFooter>
+            </DrawerFooter>
 
             <Drawer
                 onClose={close}

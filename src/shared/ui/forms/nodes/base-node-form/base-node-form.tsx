@@ -7,6 +7,7 @@ import { useMediaQuery } from '@mantine/hooks'
 import { motion } from 'framer-motion'
 
 import { ToggleNodeStatusButtonFeature } from '@features/ui/dashboard/nodes/toggle-node-status-button'
+import { GetNodeLinkedHostsFeature } from '@features/ui/dashboard/nodes/get-node-linked-hosts'
 import { GetNodeUsersUsageFeature } from '@features/ui/dashboard/nodes/get-node-users-usage'
 import { RestartNodeButtonFeature } from '@features/ui/dashboard/nodes/restart-node-button'
 import { ModalAccordionWidget } from '@widgets/dashboard/nodes/modal-accordeon-widget'
@@ -193,6 +194,8 @@ export const BaseNodeForm = <T extends CreateNodeCommand.Request | UpdateNodeCom
                         <Menu.Dropdown>
                             <Menu.Label>{t('base-node-form.quick-actions')}</Menu.Label>
                             <GetNodeUsersUsageFeature nodeUuid={node.uuid} />
+                            <GetNodeLinkedHostsFeature nodeUuid={node.uuid} />
+
                             <CopyButton value={node.uuid}>
                                 {({ copy }) => (
                                     <Menu.Item leftSection={<TbCopy size="16px" />} onClick={copy}>
