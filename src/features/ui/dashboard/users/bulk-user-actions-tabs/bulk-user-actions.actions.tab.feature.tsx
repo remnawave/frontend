@@ -162,7 +162,7 @@ export const BulkUserActionsActionsTabFeature = (props: IProps) => {
                                 setActiveInternalSquads({
                                     variables: {
                                         uuids,
-                                        activeInternalSquads: form.values.activeInternalSquads
+                                        activeInternalSquads: form.getValues().activeInternalSquads
                                     }
                                 })
                             }}
