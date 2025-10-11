@@ -430,7 +430,9 @@
         "misc-settings": "杂项设置",
         "shuffle-host": "随机主机",
         "mihomo-specific": "Mihomo 特定设置",
-        "enable-x25519mlkem768": "启用 x25519mlkem768"
+        "enable-x25519mlkem768": "启用 x25519mlkem768",
+        "pick-nodes-which-resolved-from-this-host-only-visual-assignment": "Pick nodes which resolved from this host. Only visual assignment.",
+        "nodes": "Nodes"
     },
     "base-node-form": {
         "country": "国家",
@@ -1653,6 +1655,17 @@
             "requests": "请求数",
             "hourly-request-statistics": "每小时请求统计",
             "no-hourly-data-available": "没有可用的小时数据"
+        }
+    },
+    "linked-hosts-drawer": {
+        "widget": {
+            "assigned-hosts": "Assigned hosts",
+            "no-hosts-assigned-to-this-node": "No hosts assigned to this node"
+        }
+    },
+    "get-node-linked-hosts": {
+        "feature": {
+            "linked-hosts": "Linked hosts"
         }
     }
 }

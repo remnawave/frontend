@@ -1,7 +1,8 @@
 import { ActionIcon, Badge, Box, Checkbox, Group, px, Stack, Text } from '@mantine/core'
 import { TbAlertCircle, TbEyeOff, TbTagStarred } from 'react-icons/tb'
 import { PiLock, PiProhibit, PiPulse, PiTag } from 'react-icons/pi'
-import { CSSProperties, useState } from 'react'
+import { CSSProperties, useEffect, useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import { useSortable } from '@dnd-kit/sortable'
 import { useMediaQuery } from '@mantine/hooks'
 import { RiDraggable } from 'react-icons/ri'
@@ -10,6 +11,8 @@ import ColorHash from 'color-hash'
 import cx from 'clsx'
 
 import { useHostsStoreActions, useHostsStoreFilters } from '@entities/dashboard'
+import { resolveCountryCode } from '@shared/utils/misc/resolve-country-code'
+import { SEARCH_PARAMS } from '@shared/constants/search-params'
 import { XtlsLogo } from '@shared/ui/logos/xtls-logo'
 
 import classes from './HostCard.module.css'
@@ -17,6 +20,7 @@ import { IProps } from './interfaces'
 
 export function HostCardWidget(props: IProps) {
     const {
+        nodes,
         item,
         configProfiles,
         isSelected,
@@ -24,6 +28,8 @@ export function HostCardWidget(props: IProps) {
         isDragOverlay = false,
         isHighlighted = false
     } = props
+
+    const [searchParams, setSearchParams] = useSearchParams()
 
     const filters = useHostsStoreFilters()
     const actions = useHostsStoreActions()
@@ -52,6 +58,20 @@ export function HostCardWidget(props: IProps) {
         position: 'relative'
     }
 
+    const handleEdit = () => {
+        actions.setHost(item)
+        actions.toggleEditModal(true)
+    }
+
+    useEffect(() => {
+        if (searchParams.get(SEARCH_PARAMS.HOST) === item.uuid) {
+            handleEdit()
+
+            searchParams.delete(SEARCH_PARAMS.HOST)
+            setSearchParams(searchParams)
+        }
+    }, [searchParams])
+
     if (!configProfiles) {
         return null
     }
@@ -59,11 +79,6 @@ export function HostCardWidget(props: IProps) {
     const isHostActive = !item.isDisabled
 
     const ch = new ColorHash({ lightness: [0.65, 0.65, 0.65] })
-
-    const handleEdit = () => {
-        actions.setHost(item)
-        actions.toggleEditModal(true)
-    }
 
     if (isMobile) {
         return (
@@ -312,7 +327,35 @@ export function HostCardWidget(props: IProps) {
                                 </Text>
                             </Group>
                         </Group>
+
                         <Group gap="md" style={{ flexShrink: 0 }} wrap="nowrap">
+                            {item.nodes.length > 0 &&
+                                item.nodes.slice(0, 3).map((nodeId) => {
+                                    const node = nodes.find((node) => node.uuid === nodeId)
+                                    if (!node) return null
+                                    return (
+                                        <Badge
+                                            autoContrast
+                                            color="gray"
+                                            key={node.uuid}
+                                            leftSection={resolveCountryCode(node.countryCode)}
+                                            radius="md"
+                                            size="md"
+                                            style={{
+                                                cursor: 'pointer'
+                                            }}
+                                            variant="default"
+                                        >
+                                            {node.name}
+                                        </Badge>
+                                    )
+                                })}
+                            {item.nodes.length > 3 && (
+                                <Badge color="gray" radius="md" size="md" variant="default">
+                                    +{item.nodes.length - 3}
+                                </Badge>
+                            )}
+
                             {item.tag && (
                                 <Badge
                                     autoContrast

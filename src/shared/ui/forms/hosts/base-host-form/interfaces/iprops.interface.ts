@@ -1,5 +1,6 @@
 import {
     CreateHostCommand,
+    GetAllNodesCommand,
     GetConfigProfilesCommand,
     UpdateHostCommand
 } from '@remnawave/backend-contract'
@@ -13,5 +14,6 @@ export interface IProps<T extends CreateHostCommand.Request | UpdateHostCommand.
     handleSubmit: () => void
     host?: UpdateHostCommand.Response['response']
     isSubmitting: boolean
+    nodes: GetAllNodesCommand.Response['response']
     setAdvancedOpened: (value: boolean) => void
 }

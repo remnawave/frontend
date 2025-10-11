@@ -22,8 +22,8 @@ import { motion } from 'framer-motion'
 
 import { HostsFiltersFeature } from '@features/dashboard/hosts/hosts-filters'
 import { HostCardWidget } from '@widgets/dashboard/hosts/host-card'
+import { useGetNodes, useReorderHosts } from '@shared/api/hooks'
 import { EmptyPageLayout } from '@shared/ui/layouts/empty-page'
-import { useReorderHosts } from '@shared/api/hooks'
 
 import { IProps } from './interfaces'
 
@@ -40,6 +40,7 @@ export const HostsTableWidget = memo((props: IProps) => {
     const listRef = useRef<HTMLDivElement | null>(null)
     const isMobile = useMediaQuery(`(max-width: ${em(768)})`)
 
+    const { data: nodes } = useGetNodes()
     const { mutate: reorderHosts } = useReorderHosts()
 
     const virtualizer = useWindowVirtualizer({
@@ -242,14 +243,7 @@ export const HostsTableWidget = memo((props: IProps) => {
                             items={dataIds.current}
                             strategy={verticalListSortingStrategy}
                         >
-                            <Container
-                                p={0}
-                                size={'lg'}
-                                style={{
-                                    position: 'relative',
-                                    minHeight: '100px'
-                                }}
-                            >
+                            <Container fluid>
                                 <Stack gap={0}>
                                     {virtualizer.getVirtualItems().map((virtualItem) => {
                                         const item = state[virtualItem.index]
@@ -261,6 +255,8 @@ export const HostsTableWidget = memo((props: IProps) => {
                                                 key={item.uuid}
                                                 style={{
                                                     position: 'absolute',
+                                                    marginLeft: '16px',
+                                                    marginRight: '16px',
                                                     top: 0,
                                                     left: 0,
                                                     right: 0,
@@ -285,6 +281,7 @@ export const HostsTableWidget = memo((props: IProps) => {
                                                             item.uuid
                                                         )}
                                                         item={item}
+                                                        nodes={nodes!}
                                                         onSelect={() =>
                                                             toggleHostSelection(item.uuid)
                                                         }
@@ -301,12 +298,13 @@ export const HostsTableWidget = memo((props: IProps) => {
 
                 <DragOverlay>
                     {draggedHost && (
-                        <Container p={0} size={'lg'} style={{ width: '100%' }}>
+                        <Container fluid>
                             <HostCardWidget
                                 configProfiles={configProfiles}
                                 isDragOverlay
                                 isSelected={selectedHosts.includes(draggedHost.uuid)}
                                 item={draggedHost}
+                                nodes={nodes!}
                                 onSelect={() => toggleHostSelection(draggedHost.uuid)}
                             />
                         </Container>

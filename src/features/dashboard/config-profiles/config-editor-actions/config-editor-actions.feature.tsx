@@ -9,6 +9,7 @@ import {
 } from 'react-icons/tb'
 import { PiCheck, PiCheckSquareOffset, PiCopy, PiFloppyDisk } from 'react-icons/pi'
 import { ActionIcon, Button, CopyButton, Group, Menu, Text } from '@mantine/core'
+import { UpdateConfigProfileCommand } from '@remnawave/backend-contract'
 import { useClipboard, useMediaQuery } from '@mantine/hooks'
 import { notifications } from '@mantine/notifications'
 import { useTranslation } from 'react-i18next'
@@ -41,7 +42,9 @@ export function ConfigEditorActionsFeature(props: Props) {
 
     const { mutate: updateConfig, isPending: isUpdating } = useUpdateConfigProfile({
         mutationFns: {
-            onSuccess: async () => {
+            onSuccess: async (
+                updatedConfigProfile: UpdateConfigProfileCommand.Response['response']
+            ) => {
                 await queryClient.refetchQueries({
                     queryKey: QueryKeys.configProfiles.getConfigProfiles.queryKey
                 })
@@ -49,14 +52,24 @@ export function ConfigEditorActionsFeature(props: Props) {
                 setIsConfigValid(true)
                 setHasUnsavedChanges(false)
 
+                const newValue = JSON.stringify(updatedConfigProfile.config, null, 2)
+
                 if (
                     editorRef.current &&
                     typeof editorRef.current === 'object' &&
-                    'getValue' in editorRef.current
+                    'setValue' in editorRef.current &&
+                    typeof editorRef.current.setValue === 'function'
                 ) {
-                    const newValue = editorRef.current.getValue()
+                    editorRef.current.setValue(newValue)
                     setOriginalValue(newValue)
                 }
+
+                await queryClient.setQueryData(
+                    QueryKeys.configProfiles.getConfigProfile({
+                        uuid: configProfile.uuid
+                    }).queryKey,
+                    updatedConfigProfile
+                )
             },
             onError: (error) => {
                 setIsConfigValid(false)

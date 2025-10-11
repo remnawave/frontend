@@ -430,7 +430,9 @@
         "misc-settings": "Прочие настройки",
         "shuffle-host": "Перемешать хост",
         "mihomo-specific": "Настройки для Mihomo",
-        "enable-x25519mlkem768": "Включение x25519mlkem768"
+        "enable-x25519mlkem768": "Включение x25519mlkem768",
+        "pick-nodes-which-resolved-from-this-host-only-visual-assignment": "Выберите ноды, которые направлены на этот хост. Это поле влияет только на визуальное отображение.",
+        "nodes": "Ноды"
     },
     "base-node-form": {
         "country": "Страна",
@@ -1653,6 +1655,17 @@
             "requests": "Запросы",
             "hourly-request-statistics": "Почасовая статистика запросов",
             "no-hourly-data-available": "Нет данных"
+        }
+    },
+    "linked-hosts-drawer": {
+        "widget": {
+            "assigned-hosts": "Связанные хосты",
+            "no-hosts-assigned-to-this-node": "Хосты, связанные с этой нодой не найдены"
+        }
+    },
+    "get-node-linked-hosts": {
+        "feature": {
+            "linked-hosts": "Связанные хосты"
         }
     }
 }

@@ -25,7 +25,7 @@ import { Notifications } from '@mantine/notifications'
 import { ModalsProvider } from '@mantine/modals'
 import { I18nextProvider } from 'react-i18next'
 import { useMediaQuery } from '@mantine/hooks'
-import { Suspense } from 'react'
+import { Suspense, useEffect } from 'react'
 import dayjs from 'dayjs'
 
 // import { StrictMode } from 'react'
@@ -44,6 +44,15 @@ polyfillCountryFlagEmojis()
 export function App() {
     const mq = useMediaQuery('(min-width: 40em)')
     const isDev = __NODE_ENV__ === 'development'
+
+    useEffect(() => {
+        const root = document.getElementById('root')
+        if (root) {
+            const bottomBar = document.createElement('div')
+            bottomBar.className = 'safe-area-bottom'
+            root.appendChild(bottomBar)
+        }
+    }, [])
 
     // useEffect(() => {
     //     hideSplashScreen()

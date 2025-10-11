@@ -3,7 +3,7 @@
     margin-left: 0.75rem;
     margin-bottom: 0.75rem;
     margin-top: 0.75rem;
-    height: calc(100vh - 1.5rem);
+    height: calc(100vh - 1.5rem - env(safe-area-inset-top, 0px));
 
     background: light-dark(
         linear-gradient(135deg, var(--mantine-color-gray-0) 0%, var(--mantine-color-gray-1) 100%),
@@ -17,6 +17,11 @@
 
     border-radius: var(--mantine-radius-lg);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    @supports (padding: env(safe-area-inset-top)) {
+        top: env(safe-area-inset-top);
+        z-index: 20;
+    }
 }
 
 .sidebarWrapper::before {
@@ -47,6 +52,13 @@
     padding-left: 300px;
     background-color: transparent;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    @supports (padding: env(safe-area-inset-top)) {
+        top: 0;
+        padding-top: env(safe-area-inset-top, 0px);
+        height: calc(64px + env(safe-area-inset-top, 0px));
+        z-index: 10;
+    }
 }
 
 .logoSection {

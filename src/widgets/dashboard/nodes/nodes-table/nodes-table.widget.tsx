@@ -184,14 +184,7 @@ export const NodesTableWidget = memo((props: IProps) => {
                             items={dataIds.current}
                             strategy={verticalListSortingStrategy}
                         >
-                            <Container
-                                p={0}
-                                size={'lg'}
-                                style={{
-                                    position: 'relative',
-                                    minHeight: '100px'
-                                }}
-                            >
+                            <Container fluid>
                                 <Stack gap={0}>
                                     {virtualizer.getVirtualItems().map((virtualItem) => {
                                         const item = state[virtualItem.index]
@@ -228,7 +221,7 @@ export const NodesTableWidget = memo((props: IProps) => {
                 </div>
                 <DragOverlay>
                     {draggedNode && (
-                        <Container p={0} size={'lg'} style={{ width: '100%' }}>
+                        <Container fluid>
                             <NodeCardWidget isDragOverlay node={draggedNode} />
                         </Container>
                     )}

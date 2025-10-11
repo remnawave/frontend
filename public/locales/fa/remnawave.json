@@ -430,7 +430,9 @@
         "misc-settings": "تنظیمات متفرقه",
         "shuffle-host": "به هم زدن هاست‌ها",
         "mihomo-specific": "مخصوص Mihomo",
-        "enable-x25519mlkem768": "فعالسازی x25519mlkem768"
+        "enable-x25519mlkem768": "فعالسازی x25519mlkem768",
+        "pick-nodes-which-resolved-from-this-host-only-visual-assignment": "نودهایی که از طریق این هاست استفاده می‌شوند را انتخاب کنید. (تاثیر عملکردی ندارد و فقط جنبه نمایشی دارد)",
+        "nodes": "نودها"
     },
     "base-node-form": {
         "country": "کشور",
@@ -1653,6 +1655,17 @@
             "requests": "درخواست‌ها",
             "hourly-request-statistics": "آمار ساعتی درخواست‌ها",
             "no-hourly-data-available": "داده‌های ساعتی در دسترس نمی‌باشد"
+        }
+    },
+    "linked-hosts-drawer": {
+        "widget": {
+            "assigned-hosts": "نودهای مشخص شده",
+            "no-hosts-assigned-to-this-node": "هیچ هاستی برای این نود مشخص نشده است"
+        }
+    },
+    "get-node-linked-hosts": {
+        "feature": {
+            "linked-hosts": "هاست‌های لینک شده"
         }
     }
 }

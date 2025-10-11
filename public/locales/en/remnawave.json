@@ -430,7 +430,9 @@
         "misc-settings": "Misc settings",
         "shuffle-host": "Shuffle Host",
         "mihomo-specific": "Mihomo Specific",
-        "enable-x25519mlkem768": "Enable x25519mlkem768"
+        "enable-x25519mlkem768": "Enable x25519mlkem768",
+        "pick-nodes-which-resolved-from-this-host-only-visual-assignment": "Pick nodes which resolved from this host. Only visual assignment.",
+        "nodes": "Nodes"
     },
     "base-node-form": {
         "country": "Country",
@@ -1653,6 +1655,17 @@
             "requests": "Requests",
             "hourly-request-statistics": "Hourly Request Statistics",
             "no-hourly-data-available": "No hourly data available"
+        }
+    },
+    "linked-hosts-drawer": {
+        "widget": {
+            "assigned-hosts": "Assigned hosts",
+            "no-hosts-assigned-to-this-node": "No hosts assigned to this node"
+        }
+    },
+    "get-node-linked-hosts": {
+        "feature": {
+            "linked-hosts": "Linked hosts"
         }
     }
 }

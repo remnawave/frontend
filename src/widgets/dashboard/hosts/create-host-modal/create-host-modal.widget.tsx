@@ -2,12 +2,12 @@ import { CreateHostCommand, SECURITY_LAYERS } from '@remnawave/backend-contract'
 import { zodResolver } from 'mantine-form-zod-resolver'
 import { notifications } from '@mantine/notifications'
 import { useTranslation } from 'react-i18next'
-import { Modal, Text } from '@mantine/core'
+import { Drawer, Text } from '@mantine/core'
 import { useEffect, useState } from 'react'
 import { useForm } from '@mantine/form'
 
+import { QueryKeys, useCreateHost, useGetConfigProfiles, useGetNodes } from '@shared/api/hooks'
 import { useHostsStoreActions, useHostsStoreCreateModalIsOpen } from '@entities/dashboard'
-import { QueryKeys, useCreateHost, useGetConfigProfiles } from '@shared/api/hooks'
 import { BaseHostForm } from '@shared/ui/forms/hosts/base-host-form'
 import { queryClient } from '@shared/api'
 
@@ -18,6 +18,7 @@ export const CreateHostModalWidget = () => {
     const actions = useHostsStoreActions()
 
     const { data: configProfiles } = useGetConfigProfiles()
+    const { data: nodes } = useGetNodes()
 
     const [advancedOpened, setAdvancedOpened] = useState(false)
 
@@ -100,10 +101,14 @@ export const CreateHostModalWidget = () => {
     })
 
     return (
-        <Modal
-            centered
+        <Drawer
+            keepMounted={false}
             onClose={handleClose}
             opened={isModalOpen}
+            overlayProps={{ backgroundOpacity: 0.6, blur: 0 }}
+            padding="lg"
+            position="right"
+            size="lg"
             title={<Text fw={500}>{t('create-host-modal.widget.new-host')}</Text>}
         >
             <BaseHostForm
@@ -112,8 +117,9 @@ export const CreateHostModalWidget = () => {
                 form={form}
                 handleSubmit={handleSubmit}
                 isSubmitting={isCreateHostPending}
+                nodes={nodes!}
                 setAdvancedOpened={setAdvancedOpened}
             />
-        </Modal>
+        </Drawer>
     )
 }

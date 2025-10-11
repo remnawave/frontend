@@ -1,5 +1,4 @@
 import { ActionIcon, Button, CloseButton } from '@mantine/core'
-import { PiXBold } from 'react-icons/pi'
 
 export default {
     ActionIcon: ActionIcon.extend({
@@ -16,8 +15,7 @@ export default {
     }),
     CloseButton: CloseButton.extend({
         defaultProps: {
-            size: 'lg',
-            icon: <PiXBold size={26} />
+            size: 'lg'
         }
     })
 }
