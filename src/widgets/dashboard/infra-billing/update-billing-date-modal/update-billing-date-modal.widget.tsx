@@ -23,6 +23,10 @@ export function UpdateBillingDateModalWidget() {
             onSuccess: (data) => {
                 queryClient.setQueryData(QueryKeys.infraBilling.getInfraBillingNodes.queryKey, data)
 
+                if (billingNode && billingNode.callback) {
+                    billingNode.callback()
+                }
+
                 close(MODALS.UPDATE_BILLING_DATE_MODAL)
                 setSelectedDate(null)
             },
@@ -32,7 +36,11 @@ export function UpdateBillingDateModalWidget() {
 
     useEffect(() => {
         if (billingNode && isOpen) {
-            setSelectedDate(new Date(billingNode.nextBillingAt))
+            if (billingNode.uuids.length === 1 && billingNode.nextBillingAt) {
+                setSelectedDate(new Date(billingNode.nextBillingAt))
+            } else {
+                setSelectedDate(new Date())
+            }
         }
     }, [billingNode, isOpen])
 
@@ -41,7 +49,7 @@ export function UpdateBillingDateModalWidget() {
 
         updateNode({
             variables: {
-                uuid: billingNode.uuid,
+                uuids: billingNode.uuids,
                 // @ts-expect-error - TODO: fix ZOD schema
                 nextBillingAt: selectedDate ? dayjs(selectedDate).toISOString() : undefined
             }
@@ -71,13 +79,17 @@ export function UpdateBillingDateModalWidget() {
             <Stack gap="md">
                 {billingNode && (
                     <Stack align="center" gap={0} justify="center">
-                        <TextInput
-                            label={t('update-billing-date-modal.widget.current-date')}
-                            mb="xs"
-                            readOnly
-                            value={dayjs(new Date(billingNode.nextBillingAt)).format('D MMMM YYYY')}
-                            w="100%"
-                        />
+                        {billingNode.uuids.length === 1 && billingNode.nextBillingAt && (
+                            <TextInput
+                                label={t('update-billing-date-modal.widget.current-date')}
+                                mb="xs"
+                                readOnly
+                                value={dayjs(new Date(billingNode.nextBillingAt)).format(
+                                    'D MMMM YYYY'
+                                )}
+                                w="100%"
+                            />
+                        )}
 
                         <TextInput
                             label={t('update-billing-date-modal.widget.new-date')}

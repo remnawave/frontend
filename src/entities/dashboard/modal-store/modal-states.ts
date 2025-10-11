@@ -1,6 +1,5 @@
 import {
     GetConfigProfilesCommand,
-    GetInfraBillingNodesCommand,
     GetInfraProvidersCommand,
     GetInternalSquadsCommand
 } from '@remnawave/backend-contract'
@@ -45,7 +44,11 @@ export interface ModalInternalStates {
     SHOW_NODE_USERS_USAGE_DRAWER: {
         nodeUuid: string
     }
-    UPDATE_BILLING_DATE_MODAL: GetInfraBillingNodesCommand.Response['response']['billingNodes'][number]
+    UPDATE_BILLING_DATE_MODAL: {
+        callback?: () => void
+        nextBillingAt?: Date
+        uuids: string[]
+    }
     USER_ACCESSIBLE_NODES_DRAWER: {
         userUuid: string
     }
