@@ -17,7 +17,7 @@ import { GetAllNodesCommand } from '@remnawave/backend-contract'
 import { useWindowVirtualizer } from '@tanstack/react-virtual'
 import { useListState, useMediaQuery } from '@mantine/hooks'
 import { restrictToVerticalAxis } from '@dnd-kit/modifiers'
-import { Container, em, Stack } from '@mantine/core'
+import { Box, Container, em, Stack } from '@mantine/core'
 
 import { nodesQueryKeys, useGetNodes, useReorderNodes } from '@shared/api/hooks'
 import { EmptyPageLayout } from '@shared/ui/layouts/empty-page'
@@ -177,7 +177,9 @@ export const NodesTableWidget = memo((props: IProps) => {
                 <div ref={listRef}>
                     <div
                         style={{
-                            height: `${virtualizer.getTotalSize()}px`
+                            height: `${virtualizer.getTotalSize()}px`,
+                            width: '100%',
+                            position: 'relative'
                         }}
                     >
                         <SortableContext
@@ -191,27 +193,26 @@ export const NodesTableWidget = memo((props: IProps) => {
                                         if (!item) return null
 
                                         return (
-                                            <div
+                                            <Box
                                                 data-index={virtualItem.index}
                                                 key={item.uuid}
                                                 style={{
-                                                    height: `0px`
+                                                    position: 'absolute',
+                                                    marginLeft: isMobile ? '0px' : '16px',
+                                                    marginRight: isMobile ? '0px' : '16px',
+                                                    top: 0,
+                                                    left: 0,
+                                                    right: 0,
+                                                    transform: `translateY(${
+                                                        virtualItem.start -
+                                                        virtualizer.options.scrollMargin
+                                                    }px)`
                                                 }}
                                             >
-                                                <div
-                                                    style={{
-                                                        height: `${virtualItem.size}px`,
-                                                        transform: `translateY(${
-                                                            virtualItem.start -
-                                                            virtualizer.options.scrollMargin
-                                                        }px)`
-                                                    }}
-                                                >
-                                                    <div className={styles.nodeFadeIn}>
-                                                        <NodeCardWidget node={item} />
-                                                    </div>
+                                                <div className={styles.nodeFadeIn}>
+                                                    <NodeCardWidget node={item} />
                                                 </div>
-                                            </div>
+                                            </Box>
                                         )
                                     })}
                                 </Stack>
@@ -221,7 +222,7 @@ export const NodesTableWidget = memo((props: IProps) => {
                 </div>
                 <DragOverlay>
                     {draggedNode && (
-                        <Container fluid>
+                        <Container fluid pl={0} pr={0}>
                             <NodeCardWidget isDragOverlay node={draggedNode} />
                         </Container>
                     )}

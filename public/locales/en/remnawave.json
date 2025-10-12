@@ -1263,13 +1263,15 @@
             "list-of-all-infra-billing-nodes": "List of all infra billing nodes sorted by next billing date",
             "infra-billing-nodes": "Infra Billing Nodes",
             "no-nodes-found": "No nodes found.",
-            "add-a-node": "Add a node"
+            "add-a-node": "Add a node",
+            "update-multiple-nodes": "Update multiple nodes"
         }
     },
     "use-infra-billing-nodes-columns": {
         "hoster-name": "Hoster name",
         "node": "Node",
-        "next-billing-at": "Next billing at"
+        "next-billing-at": "Next billing at",
+        "quick-update-to-next-month": "Quick update to next month"
     },
     "next-billing-at-cell": {
         "in-current-month": "In current month",

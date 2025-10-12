@@ -255,8 +255,8 @@ export const HostsTableWidget = memo((props: IProps) => {
                                                 key={item.uuid}
                                                 style={{
                                                     position: 'absolute',
-                                                    marginLeft: '16px',
-                                                    marginRight: '16px',
+                                                    marginLeft: isMobile ? '0px' : '16px',
+                                                    marginRight: isMobile ? '0px' : '16px',
                                                     top: 0,
                                                     left: 0,
                                                     right: 0,
@@ -298,7 +298,7 @@ export const HostsTableWidget = memo((props: IProps) => {
 
                 <DragOverlay>
                     {draggedHost && (
-                        <Container fluid>
+                        <Container fluid pl={0} pr={0}>
                             <HostCardWidget
                                 configProfiles={configProfiles}
                                 isDragOverlay

@@ -1,7 +1,16 @@
-import { ActionIcon, ActionIconGroup, Avatar, Center, Flex, Text } from '@mantine/core'
+import {
+    ActionIcon,
+    ActionIconGroup,
+    Avatar,
+    Center,
+    Flex,
+    Group,
+    Text,
+    Tooltip
+} from '@mantine/core'
 import { GetInfraBillingNodesCommand } from '@remnawave/backend-contract'
 import { HiCalendar, HiOfficeBuilding, HiServer } from 'react-icons/hi'
-import { TbClick, TbExternalLink, TbTrash } from 'react-icons/tb'
+import { TbCheckbox, TbClick, TbExternalLink } from 'react-icons/tb'
 import { DataTableColumn } from 'mantine-datatable'
 import ReactCountryFlag from 'react-country-flag'
 import { TFunction } from 'i18next'
@@ -12,36 +21,14 @@ import { InfraBillingNodesTableNextBillingAtCell } from './next-billing-at-cell'
 import { InfraProvidersColumnTitle } from './column-title'
 
 export function getInfraBillingNodesColumns(
-    handleDeleteInfraBillingNode: (uuid: string) => void,
+    handleQuickUpdateNextBillingAt: (uuid: string, currentDate: Date) => void,
+    isQuickUpdatePending: (uuid: string) => boolean,
     t: TFunction
 ): DataTableColumn<
     // handleOpenModal: (row: GetInfraBillingHistoryRecordsCommand.Response['response']['records'][number]) => void,
-
     GetInfraBillingNodesCommand.Response['response']['billingNodes'][number]
 >[] {
     return [
-        {
-            accessor: 'actions',
-            title: (
-                <Center>
-                    <TbClick size={16} />
-                </Center>
-            ),
-            width: '0%',
-            render: (row) => (
-                <ActionIconGroup>
-                    <ActionIcon
-                        color="gray"
-                        onClick={() => handleDeleteInfraBillingNode(row.uuid)}
-                        radius={'md'}
-                        size="md"
-                        variant="outline"
-                    >
-                        <TbTrash size={16} />
-                    </ActionIcon>
-                </ActionIconGroup>
-            )
-        },
         {
             accessor: 'provider.name',
             ellipsis: true,
@@ -134,6 +121,38 @@ export function getInfraBillingNodesColumns(
             width: 200,
             render: ({ nextBillingAt }) => (
                 <InfraBillingNodesTableNextBillingAtCell nextBillingAt={nextBillingAt} t={t} />
+            )
+        },
+        {
+            accessor: 'actions',
+            title: (
+                <Center>
+                    <TbClick size={16} />
+                </Center>
+            ),
+            width: '0%',
+            render: (row) => (
+                <Group wrap="nowrap">
+                    <ActionIconGroup>
+                        <Tooltip
+                            label={t('use-infra-billing-nodes-columns.quick-update-to-next-month')}
+                            withArrow
+                        >
+                            <ActionIcon
+                                color="teal"
+                                loading={isQuickUpdatePending(row.uuid)}
+                                onClick={() =>
+                                    handleQuickUpdateNextBillingAt(row.uuid, row.nextBillingAt)
+                                }
+                                radius="md"
+                                size="md"
+                                variant="outline"
+                            >
+                                <TbCheckbox size={16} />
+                            </ActionIcon>
+                        </Tooltip>
+                    </ActionIconGroup>
+                </Group>
             )
         }
     ]

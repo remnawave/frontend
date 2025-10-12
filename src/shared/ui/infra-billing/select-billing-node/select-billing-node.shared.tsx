@@ -119,6 +119,7 @@ export const SelectBillingNodeShared = (props: IProps) => {
                 const option = item.option as ItemProps
                 return <SelectItem {...option} />
             }}
+            searchable
             value={selectedValue}
         />
     )

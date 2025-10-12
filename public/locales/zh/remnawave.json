@@ -431,8 +431,8 @@
         "shuffle-host": "随机主机",
         "mihomo-specific": "Mihomo 特定设置",
         "enable-x25519mlkem768": "启用 x25519mlkem768",
-        "pick-nodes-which-resolved-from-this-host-only-visual-assignment": "Pick nodes which resolved from this host. Only visual assignment.",
-        "nodes": "Nodes"
+        "pick-nodes-which-resolved-from-this-host-only-visual-assignment": "从主机中选择解析的节点。仅可视化。",
+        "nodes": "节点"
     },
     "base-node-form": {
         "country": "国家",
@@ -1263,13 +1263,15 @@
             "list-of-all-infra-billing-nodes": "按下次计费日期排序的所有网络计费节点列表",
             "infra-billing-nodes": "网络计费节点",
             "no-nodes-found": "未找到任何节点。",
-            "add-a-node": "添加一个节点"
+            "add-a-node": "添加一个节点",
+            "update-multiple-nodes": "升级多个节点"
         }
     },
     "use-infra-billing-nodes-columns": {
         "hoster-name": "主机商名称",
         "node": "节点",
-        "next-billing-at": "下一计费时间"
+        "next-billing-at": "下一计费时间",
+        "quick-update-to-next-month": "下个月快速更新"
     },
     "next-billing-at-cell": {
         "in-current-month": "本月内",
@@ -1659,13 +1661,13 @@
     },
     "linked-hosts-drawer": {
         "widget": {
-            "assigned-hosts": "Assigned hosts",
-            "no-hosts-assigned-to-this-node": "No hosts assigned to this node"
+            "assigned-hosts": "指定主机",
+            "no-hosts-assigned-to-this-node": "没有分配给此节点的主机"
         }
     },
     "get-node-linked-hosts": {
         "feature": {
-            "linked-hosts": "Linked hosts"
+            "linked-hosts": "链接的主机"
         }
     }
 }

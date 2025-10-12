@@ -1263,13 +1263,15 @@
             "list-of-all-infra-billing-nodes": "لیست همه نودهای صورتحساب تجهیزات بر اساس تاریخ صورتحساب بعدی",
             "infra-billing-nodes": "نودهای صورتحساب تجهیزات",
             "no-nodes-found": "هیچ نودی یافت نشد.",
-            "add-a-node": "افزودن نود"
+            "add-a-node": "افزودن نود",
+            "update-multiple-nodes": "به‌روزرسانی چند نود"
         }
     },
     "use-infra-billing-nodes-columns": {
         "hoster-name": "نام هاستی‌کننده",
         "node": "نود",
-        "next-billing-at": "تاریخ صورتحساب بعدی"
+        "next-billing-at": "تاریخ صورتحساب بعدی",
+        "quick-update-to-next-month": "به‌روزرسانی سریع برای ماه بعدی"
     },
     "next-billing-at-cell": {
         "in-current-month": "در این ماه",
