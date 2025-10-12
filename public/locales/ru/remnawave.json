@@ -1263,13 +1263,15 @@
             "list-of-all-infra-billing-nodes": "Список всех оплачиваемых нод, отсортированных по дате",
             "infra-billing-nodes": "Оплачиваемые ноды",
             "no-nodes-found": "Нод не найдено.",
-            "add-a-node": "Добавить ноду"
+            "add-a-node": "Добавить ноду",
+            "update-multiple-nodes": "Обновить несколько нод"
         }
     },
     "use-infra-billing-nodes-columns": {
         "hoster-name": "Имя хостера",
         "node": "Нода",
-        "next-billing-at": "Следующий платеж"
+        "next-billing-at": "Следующий платеж",
+        "quick-update-to-next-month": "Быстро обновить до следующего месяца"
     },
     "next-billing-at-cell": {
         "in-current-month": "В текущем месяце",
