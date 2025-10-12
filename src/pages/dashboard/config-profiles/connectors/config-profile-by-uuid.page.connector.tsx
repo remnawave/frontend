@@ -1,5 +1,5 @@
 import { Navigate, useParams } from 'react-router-dom'
-import { useEffect, useState } from 'react'
+import { useLayoutEffect, useState } from 'react'
 import { consola } from 'consola/browser'
 
 import { fetchWithProgress } from '@shared/utils/fetch-with-progress'
@@ -19,11 +19,12 @@ export function ConfigProfileByUuidPageConnector() {
     const { data: configProfile, isLoading: isConfigProfileLoading } = useGetConfigProfile({
         route: { uuid: uuid! },
         rQueryParams: {
-            enabled: !!uuid
+            enabled: !!uuid,
+            refetchOnWindowFocus: false
         }
     })
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         const initWasm = async () => {
             try {
                 const go = new window.Go()
