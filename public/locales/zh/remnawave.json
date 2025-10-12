@@ -1263,13 +1263,15 @@
             "list-of-all-infra-billing-nodes": "按下次计费日期排序的所有网络计费节点列表",
             "infra-billing-nodes": "网络计费节点",
             "no-nodes-found": "未找到任何节点。",
-            "add-a-node": "添加一个节点"
+            "add-a-node": "添加一个节点",
+            "update-multiple-nodes": "Update multiple nodes"
         }
     },
     "use-infra-billing-nodes-columns": {
         "hoster-name": "主机商名称",
         "node": "节点",
-        "next-billing-at": "下一计费时间"
+        "next-billing-at": "下一计费时间",
+        "quick-update-to-next-month": "Quick update to next month"
     },
     "next-billing-at-cell": {
         "in-current-month": "本月内",
