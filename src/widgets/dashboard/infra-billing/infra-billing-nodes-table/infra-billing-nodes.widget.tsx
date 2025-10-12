@@ -163,7 +163,12 @@ export function InfraBillingNodesTableWidget() {
                                             <TbTrash size={16} />
                                         </ActionIcon>
 
-                                        <Tooltip label="Update multiple nodes" withArrow>
+                                        <Tooltip
+                                            label={t(
+                                                'infra-billing-nodes.widget.update-multiple-nodes'
+                                            )}
+                                            withArrow
+                                        >
                                             <ActionIcon
                                                 color="teal"
                                                 onClick={handleUpdateMultipleNodes}

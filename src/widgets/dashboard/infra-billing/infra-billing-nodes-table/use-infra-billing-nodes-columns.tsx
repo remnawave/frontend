@@ -134,7 +134,10 @@ export function getInfraBillingNodesColumns(
             render: (row) => (
                 <Group wrap="nowrap">
                     <ActionIconGroup>
-                        <Tooltip label="Quick update to next month" withArrow>
+                        <Tooltip
+                            label={t('use-infra-billing-nodes-columns.quick-update-to-next-month')}
+                            withArrow
+                        >
                             <ActionIcon
                                 color="teal"
                                 loading={isQuickUpdatePending(row.uuid)}
