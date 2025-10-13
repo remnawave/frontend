@@ -76,5 +76,6 @@
   "i18n-ally.extract.keyPrefix": "{fileNameWithoutExt}.",
   "github-actions.workflows.pinned.workflows": [
     ".github/workflows/crowdin-sync.yml"
-  ]
+  ],
+  "makefile.configureOnOpen": false
 }
