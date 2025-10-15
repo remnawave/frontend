@@ -292,7 +292,7 @@ export function MainLayout() {
             <AppShell.Navbar
                 className={classes.sidebarWrapper}
                 p="md"
-                pb="xl"
+                pb={0}
                 ref={ref}
                 w={300}
                 withBorder={false}
@@ -318,7 +318,17 @@ export function MainLayout() {
                             {versionBadge}
                         </Group>
                     )}
+                </AppShell.Section>
+                <AppShell.Section
+                    className={classes.scrollArea}
+                    component={ScrollArea}
+                    flex={1}
+                    scrollbarSize="0.2rem"
+                >
+                    <Navigation isMobile={isMobile} onClose={toggleMobile} />
+                </AppShell.Section>
 
+                <AppShell.Section className={classes.footerSection}>
                     {isSocialButton && (
                         <Group justify="center" mt="md" style={{ flexShrink: 0 }}>
                             <HeaderControls
@@ -332,15 +342,6 @@ export function MainLayout() {
                             />
                         </Group>
                     )}
-                </AppShell.Section>
-                <AppShell.Section
-                    component={ScrollArea}
-                    flex={1}
-                    offsetScrollbars="present"
-                    scrollbarSize={'0.2rem'}
-                    type="hover"
-                >
-                    <Navigation isMobile={isMobile} onClose={toggleMobile} />
                 </AppShell.Section>
             </AppShell.Navbar>
             <AppShell.Main pb="var(--mantine-spacing-md)" pt="var(--app-shell-header-height)">

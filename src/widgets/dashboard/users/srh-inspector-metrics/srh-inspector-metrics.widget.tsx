@@ -225,12 +225,20 @@ export function SrhInspectorMetrics() {
                             'linear-gradient(135deg, var(--mantine-color-dark-6) 0%, var(--mantine-color-dark-7) 100%)'
                     }}
                 >
-                    <Group align="center" gap="sm" mb="lg">
+                    <Group align="center" gap="sm" mb="lg" wrap="nowrap">
                         <ThemeIcon color="teal" size="lg" variant="outline">
                             <PiChartPieDuotone size="20px" />
                         </ThemeIcon>
 
-                        <Text fw={600} size="lg">
+                        <Text
+                            fw={600}
+                            size="lg"
+                            style={{
+                                textOverflow: 'ellipsis',
+                                whiteSpace: 'nowrap',
+                                overflow: 'hidden'
+                            }}
+                        >
                             {t('hwid-inspector-metrics.widget.app-distribution')}
                         </Text>
                     </Group>
@@ -265,12 +273,20 @@ export function SrhInspectorMetrics() {
                             'linear-gradient(135deg, var(--mantine-color-dark-6) 0%, var(--mantine-color-dark-7) 100%)'
                     }}
                 >
-                    <Group align="center" gap="sm" mb="lg">
+                    <Group align="center" gap="sm" mb="lg" wrap="nowrap">
                         <ThemeIcon color="blue" size="lg" variant="outline">
                             <PiChartBar size="20px" />
                         </ThemeIcon>
 
-                        <Text fw={600} size="lg">
+                        <Text
+                            fw={600}
+                            size="lg"
+                            style={{
+                                textOverflow: 'ellipsis',
+                                whiteSpace: 'nowrap',
+                                overflow: 'hidden'
+                            }}
+                        >
                             {t('srh-inspector-metrics.widget.hourly-request-statistics')}
                         </Text>
                     </Group>
