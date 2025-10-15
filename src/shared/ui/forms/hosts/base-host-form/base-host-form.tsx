@@ -554,7 +554,7 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
                                                 />
                                             }
                                             placeholder={t('base-host-form.sni-e-g-example-com')}
-                                            rightSection={patternHoverCard(true, false, true)}
+                                            rightSection={patternHoverCard(true, true, true)}
                                             {...form.getInputProps('sni')}
                                         />
 
