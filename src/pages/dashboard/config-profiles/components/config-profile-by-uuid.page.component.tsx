@@ -1,43 +1,104 @@
-import { GetConfigProfileByUuidCommand } from '@remnawave/backend-contract'
+import { GetConfigProfileByUuidCommand, GetSnippetsCommand } from '@remnawave/backend-contract'
+import { Box, Drawer, Flex, Transition } from '@mantine/core'
+import { useMediaQuery } from '@mantine/hooks'
 import { useTranslation } from 'react-i18next'
-import { motion } from 'motion/react'
 
 import { ConfigEditorWidget } from '@widgets/dashboard/config-profiles/config-editor/config-editor.widget'
+import { SnippetsDrawerWidget } from '@widgets/dashboard/config-profiles/snippets-drawer'
+import { MODALS, useModalsStore } from '@entities/dashboard/modal-store'
 import { ROUTES } from '@shared/constants'
 import { PageHeader } from '@shared/ui'
 import { Page } from '@shared/ui/page'
 
 interface Props {
     configProfile: GetConfigProfileByUuidCommand.Response['response']
+    snippets: GetSnippetsCommand.Response['response']
 }
 
 export const ConfigProfileByUuidPageComponent = (props: Props) => {
-    const { configProfile } = props
+    const { configProfile, snippets } = props
 
     const { t } = useTranslation()
+    const isMobile = useMediaQuery('(max-width: 1200px)')
+
+    const { isOpen } = useModalsStore(
+        (state) => state.modals[MODALS.CONFIG_PROFILE_SHOW_SNIPPETS_DRAWER]
+    )
+    const { close } = useModalsStore()
 
     return (
-        <Page title={t('constants.config-profiles')}>
-            <PageHeader
-                breadcrumbs={[
-                    { label: t('constants.dashboard'), href: ROUTES.DASHBOARD.HOME },
+        <>
+            <Page title={t('constants.config-profiles')}>
+                <PageHeader
+                    breadcrumbs={[
+                        { label: t('constants.dashboard'), href: ROUTES.DASHBOARD.HOME },
 
-                    {
-                        label: t('constants.config-profiles'),
-                        href: ROUTES.DASHBOARD.MANAGEMENT.CONFIG_PROFILES
-                    },
-                    { label: configProfile.name }
-                ]}
-                title={configProfile.name}
-            />
+                        {
+                            label: t('constants.config-profiles'),
+                            href: ROUTES.DASHBOARD.MANAGEMENT.CONFIG_PROFILES
+                        },
+                        { label: configProfile.name }
+                    ]}
+                    title={configProfile.name}
+                />
 
-            <motion.div
-                animate={{ opacity: 1 }}
-                initial={{ opacity: 0 }}
-                transition={{ duration: 0.5, delay: 0.1 }}
-            >
-                <ConfigEditorWidget configProfile={configProfile} />
-            </motion.div>
-        </Page>
+                {isMobile ? (
+                    <>
+                        <ConfigEditorWidget configProfile={configProfile} snippets={snippets} />
+
+                        <Drawer
+                            keepMounted={false}
+                            onClose={() => close(MODALS.CONFIG_PROFILE_SHOW_SNIPPETS_DRAWER)}
+                            opened={isOpen}
+                            overlayProps={{ backgroundOpacity: 0.6, blur: 0 }}
+                            padding={0}
+                            position="right"
+                            size="450px"
+                            withCloseButton={false}
+                        >
+                            <SnippetsDrawerWidget />
+                        </Drawer>
+                    </>
+                ) : (
+                    <Flex gap="md">
+                        <Box style={{ flex: 1, minWidth: 0 }}>
+                            <ConfigEditorWidget configProfile={configProfile} snippets={snippets} />
+                        </Box>
+
+                        <Box
+                            style={{
+                                width: isOpen ? '400px' : '0px',
+                                overflow: 'hidden',
+                                transition: 'width 0.3s ease'
+                            }}
+                        >
+                            <Transition
+                                duration={300}
+                                keepMounted
+                                mounted={isOpen}
+                                timingFunction="ease"
+                                transition={{
+                                    in: { opacity: 1, transform: 'translateX(0)' },
+                                    out: { opacity: 0, transform: 'translateX(20px)' },
+                                    transitionProperty: 'transform, opacity'
+                                }}
+                            >
+                                {(transitionStyles) => (
+                                    <Box
+                                        style={{
+                                            ...transitionStyles,
+                                            width: '400px',
+                                            pointerEvents: isOpen ? 'auto' : 'none'
+                                        }}
+                                    >
+                                        <SnippetsDrawerWidget />
+                                    </Box>
+                                )}
+                            </Transition>
+                        </Box>
+                    </Flex>
+                )}
+            </Page>
+        </>
     )
 }

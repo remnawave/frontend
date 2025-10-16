@@ -1,7 +1,10 @@
+import type { editor } from 'monaco-editor'
+
 import { TSubscriptionTemplateType } from '@remnawave/backend-contract'
 import { notifications } from '@mantine/notifications'
 import { useTranslation } from 'react-i18next'
 import { modals } from '@mantine/modals'
+import { RefObject } from 'react'
 
 import { IDownloadableSubscriptionTemplate } from '@shared/constants/templates'
 
@@ -9,7 +12,7 @@ import { TemplateDownloadModal } from './template-selector.modal'
 
 export const useDownloadTemplate = (
     templateType: TSubscriptionTemplateType,
-    editorRef: React.RefObject<unknown>,
+    editorRef: RefObject<editor.IStandaloneCodeEditor | null>,
     editorType: 'SUBSCRIPTION' | 'XRAY_CORE'
 ) => {
     const { t } = useTranslation()
@@ -24,12 +27,7 @@ export const useDownloadTemplate = (
 
             const content = await response.text()
 
-            if (
-                editorRef.current &&
-                typeof editorRef.current === 'object' &&
-                'setValue' in editorRef.current &&
-                typeof editorRef.current.setValue === 'function'
-            ) {
+            if (editorRef.current) {
                 editorRef.current.setValue(content)
             }
 

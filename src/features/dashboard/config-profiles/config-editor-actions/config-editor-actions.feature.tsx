@@ -1,4 +1,5 @@
 import {
+    TbBraces,
     TbClipboardCopy,
     TbClipboardText,
     TbCut,
@@ -18,6 +19,7 @@ import consola from 'consola/browser'
 
 import { KeypairGeneratorWidget } from '@widgets/dashboard/config-profiles/keypair-generator/keypair-generator.widget'
 import { useDownloadTemplate } from '@shared/ui/load-templates/use-download-template'
+import { MODALS, useModalsStore } from '@entities/dashboard/modal-store'
 import { QueryKeys, useUpdateConfigProfile } from '@shared/api/hooks'
 import { queryClient } from '@shared/api'
 
@@ -40,6 +42,12 @@ export function ConfigEditorActionsFeature(props: Props) {
     const isMobile = useMediaQuery('(max-width: 48em)')
     const clipboard = useClipboard({ timeout: 500 })
 
+    const modalsStore = useModalsStore()
+    const { open, close, setInternalData } = modalsStore
+
+    const isSnippetsOpen =
+        modalsStore.modals[MODALS.CONFIG_PROFILE_SHOW_SNIPPETS_DRAWER]?.isOpen || false
+
     const { mutate: updateConfig, isPending: isUpdating } = useUpdateConfigProfile({
         mutationFns: {
             onSuccess: async (
@@ -54,12 +62,7 @@ export function ConfigEditorActionsFeature(props: Props) {
 
                 const newValue = JSON.stringify(updatedConfigProfile.config, null, 2)
 
-                if (
-                    editorRef.current &&
-                    typeof editorRef.current === 'object' &&
-                    'setValue' in editorRef.current &&
-                    typeof editorRef.current.setValue === 'function'
-                ) {
+                if (editorRef.current) {
                     editorRef.current.setValue(newValue)
                     setOriginalValue(newValue)
                 }
@@ -83,10 +86,6 @@ export function ConfigEditorActionsFeature(props: Props) {
     const handleSave = () => {
         if (!editorRef.current) return
         if (!monacoRef.current) return
-        if (typeof editorRef.current !== 'object') return
-        if (typeof monacoRef.current !== 'object') return
-        if (!('getValue' in editorRef.current)) return
-        if (typeof editorRef.current.getValue !== 'function') return
 
         const currentValue = editorRef.current.getValue()
 
@@ -114,9 +113,6 @@ export function ConfigEditorActionsFeature(props: Props) {
 
     const handleCopyConfig = () => {
         if (!editorRef.current) return
-        if (typeof editorRef.current !== 'object') return
-        if (!('getValue' in editorRef.current)) return
-        if (typeof editorRef.current.getValue !== 'function') return
 
         const currentValue = editorRef.current.getValue()
         clipboard.copy(currentValue)
@@ -124,9 +120,6 @@ export function ConfigEditorActionsFeature(props: Props) {
 
     const handleSelectAll = () => {
         if (!editorRef.current) return
-        if (typeof editorRef.current !== 'object') return
-        if (!('getModel' in editorRef.current)) return
-        if (typeof editorRef.current.getModel !== 'function') return
 
         const model = editorRef.current.getModel()
         if (!model) return
@@ -141,11 +134,6 @@ export function ConfigEditorActionsFeature(props: Props) {
 
     const handleCut = () => {
         if (!editorRef.current) return
-        if (typeof editorRef.current !== 'object') return
-        if (!('getSelection' in editorRef.current)) return
-        if (typeof editorRef.current.getSelection !== 'function') return
-        if (!('getModel' in editorRef.current)) return
-        if (typeof editorRef.current.getModel !== 'function') return
 
         const selection = editorRef.current.getSelection()
         const model = editorRef.current.getModel()
@@ -159,14 +147,12 @@ export function ConfigEditorActionsFeature(props: Props) {
 
     const handlePaste = () => {
         if (!editorRef.current) return
-        if (typeof editorRef.current !== 'object') return
-        if (!('getPosition' in editorRef.current)) return
-        if (typeof editorRef.current.getPosition !== 'function') return
 
         const position = editorRef.current.getPosition()
         if (!position) return
 
         navigator.clipboard.readText().then((text) => {
+            if (!editorRef.current) return
             editorRef.current.executeEdits('', [
                 {
                     range: {
@@ -183,11 +169,8 @@ export function ConfigEditorActionsFeature(props: Props) {
 
     const formatDocument = () => {
         if (!editorRef.current) return
-        if (typeof editorRef.current !== 'object') return
-        if (!('getAction' in editorRef.current)) return
-        if (typeof editorRef.current.getAction !== 'function') return
 
-        editorRef.current.getAction('editor.action.formatDocument').run()
+        editorRef.current.getAction('editor.action.formatDocument')?.run()
     }
 
     return (
@@ -237,29 +220,14 @@ export function ConfigEditorActionsFeature(props: Props) {
             )}
 
             <Group gap={0} wrap="nowrap">
-                <Button
-                    leftSection={<PiCheckSquareOffset size={16} />}
-                    onClick={formatDocument}
-                    radius="md"
-                    style={{
-                        borderTopRightRadius: 0,
-                        borderBottomRightRadius: 0,
-                        borderRight: 0,
-                        width: '100%'
-                    }}
-                    variant="default"
-                >
-                    {t('config-editor-actions.feature.format')}
-                </Button>
-
                 <Menu radius="sm" shadow="md" withinPortal>
                     <Menu.Target>
                         <ActionIcon
                             radius="md"
                             size={36}
                             style={{
-                                borderTopLeftRadius: 0,
-                                borderBottomLeftRadius: 0,
+                                borderTopRightRadius: 0,
+                                borderBottomRightRadius: 0,
                                 border: '1px solid var(--mantine-color-gray-7)'
                             }}
                             variant="default"
@@ -332,6 +300,47 @@ export function ConfigEditorActionsFeature(props: Props) {
                         </Menu.Item>
                     </Menu.Dropdown>
                 </Menu>
+
+                <Button
+                    leftSection={<PiCheckSquareOffset size={16} />}
+                    onClick={formatDocument}
+                    radius="md"
+                    style={{
+                        borderTopLeftRadius: 0,
+                        borderBottomLeftRadius: 0,
+                        borderTopRightRadius: 0,
+                        borderBottomRightRadius: 0,
+                        borderRight: 0,
+                        borderLeft: 0,
+                        width: '100%'
+                    }}
+                    variant="default"
+                >
+                    {t('config-editor-actions.feature.format')}
+                </Button>
+
+                <ActionIcon
+                    onClick={() => {
+                        if (isSnippetsOpen) {
+                            close(MODALS.CONFIG_PROFILE_SHOW_SNIPPETS_DRAWER)
+                        } else {
+                            setInternalData({
+                                internalState: undefined,
+                                modalKey: MODALS.CONFIG_PROFILE_SHOW_SNIPPETS_DRAWER
+                            })
+                            open(MODALS.CONFIG_PROFILE_SHOW_SNIPPETS_DRAWER)
+                        }
+                    }}
+                    radius="md"
+                    size={36}
+                    style={{
+                        borderTopLeftRadius: 0,
+                        borderBottomLeftRadius: 0
+                    }}
+                    variant={isSnippetsOpen ? 'filled' : 'default'}
+                >
+                    <TbBraces size={20} />
+                </ActionIcon>
             </Group>
         </Group>
     )

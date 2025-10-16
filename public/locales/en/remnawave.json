@@ -1669,5 +1669,32 @@
         "feature": {
             "linked-hosts": "Linked hosts"
         }
+    },
+    "snippets": {
+        "drawer": {
+            "widget": {
+                "invalid-json": "Invalid JSON",
+                "snippet-cannot-be-empty": "Snippet cannot be empty",
+                "snippet-cannot-contain-empty-objects": "Snippet cannot contain empty objects",
+                "fetching-snippets": "Fetching snippets...",
+                "no-snippets-yet": "No snippets yet.",
+                "more-items": "more items...",
+                "create-snippet": "Create Snippet",
+                "snippet-name": "Snippet Name",
+                "enter-snippet-name-cannot-be-changed-later": "Enter snippet name (cannot be changed later)",
+                "snippet-is-valid": "Snippet is valid",
+                "cancel": "Cancel",
+                "create": "Create",
+                "edit-snippet": "Edit Snippet",
+                "update": "Update",
+                "snippets": "Snippets",
+                "new-snippet": "New snippet",
+                "snippets-help-line-1": "They are used to predefine some of your configurations.",
+                "snippets-help-line-2": "A snippet must contain an array of Outbound or Rule objects, and at least one item is required.",
+                "snippets-help-line-3": "Autocomplete is available for snippet names. Also, you can quickly preview the snippet by hovering over the name in the editor.",
+                "snippets-help-line-4": "Inside outbounds[], you can reference the snippets by name.",
+                "snippets-help-line-5": "Inside routing.rules[], you can reference the snippets by name."
+            }
+        }
     }
 }

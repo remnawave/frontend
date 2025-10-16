@@ -8,6 +8,7 @@ import { configProfilesQueryKeys } from './config-profiles/config-profiles.query
 import { internalSquadsQueryKeys } from './internal-squads/internal-squads.query.hooks'
 import { infraBillingQueryKeys } from './infra-billing/infra-billing.query.hooks'
 import { apiTokensQueryKeys } from './api-tokens/api-tokens.query.hooks'
+import { snippetsQueryKeys } from './snippets/snippets.query.hooks'
 import { systemQueryKeys } from './system/system.query.hooks'
 import { usersQueryKeys } from './users/users.query.hooks'
 import { hostsQueryKeys } from './hosts/hosts.query.hooks'
@@ -27,7 +28,8 @@ export const QueryKeys = mergeQueryKeys(
     configProfilesQueryKeys,
     internalSquadsQueryKeys,
     infraBillingQueryKeys,
-    subscriptionRequestHistoryQueryKeys
+    subscriptionRequestHistoryQueryKeys,
+    snippetsQueryKeys
 )
 
 export type TQueryKeys = inferQueryKeyStore<typeof QueryKeys>
