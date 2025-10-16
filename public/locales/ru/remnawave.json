@@ -1669,5 +1669,32 @@
         "feature": {
             "linked-hosts": "Связанные хосты"
         }
+    },
+    "snippets": {
+        "drawer": {
+            "widget": {
+                "invalid-json": "Неверный JSON",
+                "snippet-cannot-be-empty": "Сниппет не может быть пустым",
+                "snippet-cannot-contain-empty-objects": "Сниппет не может содержать пустые объекты",
+                "fetching-snippets": "Загрузка сниппетов...",
+                "no-snippets-yet": "Пока ничего нет.",
+                "more-items": "ещё элементов...",
+                "create-snippet": "Создать сниппет",
+                "snippet-name": "Имя сниппета",
+                "enter-snippet-name-cannot-be-changed-later": "Введите имя сниппета (нельзя изменить позже)",
+                "snippet-is-valid": "Сниппет валиден",
+                "cancel": "Закрыть",
+                "create": "Создать",
+                "edit-snippet": "Редактировать сниппет",
+                "update": "Обновить",
+                "snippets": "Сниппеты",
+                "new-snippet": "Новый сниппет",
+                "snippets-help-line-1": "Они используются для предопределения некоторых элементов ваших конфигураций.",
+                "snippets-help-line-2": "Сниппет должен содержать массив объектов Outbound или Rules и требуется хотя бы один элемент внутри этого массива.",
+                "snippets-help-line-3": "Автозаполнение доступно для имен сниппетов. Кроме того, вы можете быстро просмотреть сниппет, наведя курсор на имя в редакторе.",
+                "snippets-help-line-4": "Внутри outbounds[], вы можете ссылаться на сниппеты по имени.",
+                "snippets-help-line-5": "Внутри routing.rules[], вы можете ссылаться на сниппеты по имени."
+            }
+        }
     }
 }
