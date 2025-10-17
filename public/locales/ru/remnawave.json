@@ -23,7 +23,8 @@
         "infra-billing": "Инфра-биллинг",
         "hwid-inspector": "Инспектор HWID",
         "tools": "Инструменты",
-        "srh-inspector": "Инспектор SRH"
+        "srh-inspector": "Инспектор SRH",
+        "response-rules": "Response Rules"
     },
     "bandwidth-metrics": {
         "current-year": "Текущий год",
@@ -1695,6 +1696,18 @@
                 "snippets-help-line-4": "Внутри outbounds[], вы можете ссылаться на сниппеты по имени.",
                 "snippets-help-line-5": "Внутри routing.rules[], вы можете ссылаться на сниппеты по имени."
             }
+        }
+    },
+    "response-rules-editor-actions": {
+        "feature": {
+            "response-rules-debugger": "Response Rules Debugger",
+            "response-rules-debugger-description-1": "Use this cURL command to test how your response rules match different request headers.",
+            "response-rules-debugger-description-2": "You can import it into:",
+            "or": ", or",
+            "curl-command": "cURL Command",
+            "close": "Close",
+            "copy-curl-command": "Copy cURL command",
+            "debugger": "Debugger"
         }
     }
 }
