@@ -12,6 +12,7 @@ import { HappRoutingBuilderPageConnector } from '@pages/dashboard/utils/happ-rou
 import { ConfigProfileByUuidPageConnector } from '@pages/dashboard/config-profiles/connectors/config-profile-by-uuid.page.connector'
 import { InternalSquadsPageConnector } from '@pages/dashboard/internal-squads/connectors/internal-squads.page.connector'
 import { InfraBillingPageConnector } from '@pages/dashboard/crm/infra-billing/connectors/infra-billing.page.connector'
+import { ResponseRulesPageConnector } from '@pages/dashboard/response-rules/connectors/response-rules.page.connector'
 import { TemplateBasePageConnector } from '@pages/dashboard/templates/ui/connectors/template-base-page.connector'
 import { NodesBandwidthTablePageConnector } from '@pages/dashboard/nodes-bandwidth-table/ui/connectors'
 import { SubscriptionSettingsConnector } from '@pages/dashboard/subscription-settings/connectors'
@@ -103,6 +104,10 @@ const router = createBrowserRouter(
                             element={<NodesMetricsPageConnector />}
                             path={ROUTES.DASHBOARD.MANAGEMENT.NODES_METRICS}
                         />
+                        <Route
+                            element={<ResponseRulesPageConnector />}
+                            path={ROUTES.DASHBOARD.MANAGEMENT.RESPONSE_RULES}
+                        />
                     </Route>
 
                     <Route path={ROUTES.DASHBOARD.TOOLS.ROOT}>
@@ -146,16 +151,6 @@ const router = createBrowserRouter(
                                 />
                             }
                             path={ROUTES.DASHBOARD.TEMPLATES.SINGBOX}
-                        />
-                        <Route
-                            element={
-                                <TemplateBasePageConnector
-                                    language="json"
-                                    templateType={SUBSCRIPTION_TEMPLATE_TYPE.SINGBOX_LEGACY}
-                                    title="Singbox legacy"
-                                />
-                            }
-                            path={ROUTES.DASHBOARD.TEMPLATES.SINGBOX_LEGACY}
                         />
                         <Route
                             element={

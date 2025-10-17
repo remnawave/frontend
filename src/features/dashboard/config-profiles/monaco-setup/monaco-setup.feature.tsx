@@ -1,8 +1,10 @@
-import { GetSnippetsCommand } from '@remnawave/backend-contract'
+import { GetSnippetsCommand, ResponseRulesConfigSchema } from '@remnawave/backend-contract'
+import zodToJsonSchema, { jsonDescription } from 'zod-to-json-schema'
 import { Monaco } from '@monaco-editor/react'
 import consola from 'consola'
 import axios from 'axios'
 
+import { monacoTheme } from '@shared/constants/monaco-theme'
 import { app } from 'src/config'
 
 export const MonacoSetupFeature = {
@@ -129,6 +131,56 @@ export const MonacoSetupSnippetsFeature = {
         } catch (error) {
             consola.error('Failed to load snippet JSON schema:', error)
             return null
+        }
+    }
+}
+
+export const MonacoSetupResponseRulesFeature = {
+    setup: async (monaco: Monaco) => {
+        try {
+            const schema = zodToJsonSchema(ResponseRulesConfigSchema, {
+                name: 'Response Rules Config Schema',
+                applyRegexFlags: true,
+                errorMessages: true,
+                postProcess: jsonDescription
+            })
+
+            consola.log(JSON.stringify(schema, null, 2))
+
+            monaco.languages.json.jsonDefaults.setDiagnosticsOptions({
+                schemaValidation: 'error',
+                comments: 'error',
+                trailingCommas: 'error',
+
+                schemas: [
+                    {
+                        fileMatch: ['response-rules://*'],
+                        schema,
+                        uri: 'https://response-rules-schema.json'
+                    }
+                ],
+                validate: true
+            })
+
+            monaco.languages.json.jsonDefaults.setModeConfiguration({
+                documentFormattingEdits: true,
+                documentRangeFormattingEdits: true,
+                completionItems: true,
+                hovers: true,
+                documentSymbols: true,
+                tokens: true,
+                colors: true,
+                foldingRanges: true,
+                diagnostics: true,
+                selectionRanges: true
+            })
+
+            monaco.editor.defineTheme('GithubDark', {
+                ...monacoTheme,
+                base: 'vs-dark'
+            })
+        } catch (error) {
+            consola.error('Failed to load JSON schema:', error)
         }
     }
 }

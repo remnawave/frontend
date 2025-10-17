@@ -6,6 +6,7 @@ import { useState } from 'react'
 import {
     IDownloadableSubscriptionTemplate,
     IDownloadableSubscriptionTemplateList,
+    SRR_TEMPLATES_LIST_LINK,
     SUBSCRIPTION_TEMPLATE_LIST_LINK,
     XRAY_CORE_TEMPLATE_LIST_LINK
 } from '@shared/constants/templates'
@@ -17,10 +18,14 @@ export const TemplateDownloadModal = (props: TemplateSelectorModalProps) => {
     const { editorType, templateType, onCancel, onLoadTemplate } = props
     const { t } = useTranslation()
 
-    const templatesUrl =
-        editorType === 'SUBSCRIPTION'
-            ? SUBSCRIPTION_TEMPLATE_LIST_LINK
-            : XRAY_CORE_TEMPLATE_LIST_LINK
+    let templatesUrl = ''
+    if (editorType === 'SRR') {
+        templatesUrl = SRR_TEMPLATES_LIST_LINK
+    } else if (editorType === 'SUBSCRIPTION') {
+        templatesUrl = SUBSCRIPTION_TEMPLATE_LIST_LINK
+    } else if (editorType === 'XRAY_CORE') {
+        templatesUrl = XRAY_CORE_TEMPLATE_LIST_LINK
+    }
 
     const {
         data: templatesList,
@@ -79,10 +84,11 @@ export const TemplateDownloadModal = (props: TemplateSelectorModalProps) => {
                     {t('template-selector.modal.cancel')}
                 </Button>
                 <Button
-                    color="blue"
                     disabled={!selectedTemplate}
                     loading={isDownloading}
                     onClick={() => selectedTemplate && handleLoadTemplate(selectedTemplate)}
+                    radius="md"
+                    variant="default"
                 >
                     {t('template-selector.modal.load-template')}
                 </Button>

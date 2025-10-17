@@ -11,9 +11,9 @@ import { IDownloadableSubscriptionTemplate } from '@shared/constants/templates'
 import { TemplateDownloadModal } from './template-selector.modal'
 
 export const useDownloadTemplate = (
-    templateType: TSubscriptionTemplateType,
+    templateType: 'SRR' | TSubscriptionTemplateType,
     editorRef: RefObject<editor.IStandaloneCodeEditor | null>,
-    editorType: 'SUBSCRIPTION' | 'XRAY_CORE'
+    editorType: 'SRR' | 'SUBSCRIPTION' | 'XRAY_CORE'
 ) => {
     const { t } = useTranslation()
 
@@ -29,6 +29,7 @@ export const useDownloadTemplate = (
 
             if (editorRef.current) {
                 editorRef.current.setValue(content)
+                editorRef.current.getAction('editor.action.formatDocument')?.run()
             }
 
             notifications.show({

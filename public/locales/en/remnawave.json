@@ -23,7 +23,8 @@
         "infra-billing": "Infra Billing",
         "hwid-inspector": "HWID Inspector",
         "tools": "Tools",
-        "srh-inspector": "SRH Inspector"
+        "srh-inspector": "SRH Inspector",
+        "response-rules": "Response Rules"
     },
     "bandwidth-metrics": {
         "current-year": "Current year",
@@ -1695,6 +1696,18 @@
                 "snippets-help-line-4": "Inside outbounds[], you can reference the snippets by name.",
                 "snippets-help-line-5": "Inside routing.rules[], you can reference the snippets by name."
             }
+        }
+    },
+    "response-rules-editor-actions": {
+        "feature": {
+            "response-rules-debugger": "Response Rules Debugger",
+            "response-rules-debugger-description-1": "Use this cURL command to test how your response rules match different request headers.",
+            "response-rules-debugger-description-2": "You can import it into:",
+            "or": ", or",
+            "curl-command": "cURL Command",
+            "close": "Close",
+            "copy-curl-command": "Copy cURL command",
+            "debugger": "Debugger"
         }
     }
 }

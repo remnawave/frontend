@@ -14,7 +14,8 @@ import {
     TbChartArcs,
     TbCirclesRelation,
     TbDeviceAnalytics,
-    TbReportAnalytics
+    TbReportAnalytics,
+    TbRoute
 } from 'react-icons/tb'
 import { HiChartPie, HiCurrencyDollar, HiServer } from 'react-icons/hi'
 import { useTranslation } from 'react-i18next'
@@ -155,12 +156,13 @@ export const useMenuSections = (): MenuItem[] => {
                         {
                             name: 'Clash',
                             href: ROUTES.DASHBOARD.TEMPLATES.CLASH
-                        },
-                        {
-                            name: 'Singbox legacy',
-                            href: ROUTES.DASHBOARD.TEMPLATES.SINGBOX_LEGACY
                         }
                     ]
+                },
+                {
+                    name: t('constants.response-rules'),
+                    href: ROUTES.DASHBOARD.MANAGEMENT.RESPONSE_RULES,
+                    icon: TbRoute
                 }
             ]
         },

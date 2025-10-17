@@ -19,6 +19,7 @@ export const ROUTES = {
             NODES_METRICS: '/dashboard/management/metrics/nodes',
             API_TOKENS: '/dashboard/management/api-tokens',
             SUBSCRIPTION_SETTINGS: '/dashboard/management/subscription-settings',
+            RESPONSE_RULES: '/dashboard/management/response-rules',
             CONFIG_PROFILES: '/dashboard/management/config-profiles',
             CONFIG_PROFILE_BY_UUID: '/dashboard/management/config-profiles/:uuid',
             INTERNAL_SQUADS: '/dashboard/management/internal-squads'
@@ -32,7 +33,6 @@ export const ROUTES = {
             ROOT: '/dashboard/templates',
             XRAY_JSON: '/dashboard/templates/xray-json',
             MIHOMO: '/dashboard/templates/mihomo',
-            SINGBOX_LEGACY: '/dashboard/templates/sg-legacy',
             SINGBOX: '/dashboard/templates/singbox',
             STASH: '/dashboard/templates/stash',
             CLASH: '/dashboard/templates/clash'
