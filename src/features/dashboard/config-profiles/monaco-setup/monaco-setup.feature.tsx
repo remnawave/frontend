@@ -145,8 +145,6 @@ export const MonacoSetupResponseRulesFeature = {
                 postProcess: jsonDescription
             })
 
-            consola.log(JSON.stringify(schema, null, 2))
-
             monaco.languages.json.jsonDefaults.setDiagnosticsOptions({
                 schemaValidation: 'error',
                 comments: 'error',
