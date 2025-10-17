@@ -4,14 +4,14 @@ import {
     TbClipboardText,
     TbCut,
     TbDownload,
-    TbMenu2,
+    TbMenuDeep,
     TbSelectAll,
     TbTools
 } from 'react-icons/tb'
 import { PiCheck, PiCheckSquareOffset, PiCopy, PiFloppyDisk } from 'react-icons/pi'
 import { ActionIcon, Button, CopyButton, Group, Menu, Text } from '@mantine/core'
+import { useClipboard, useDisclosure, useMediaQuery } from '@mantine/hooks'
 import { UpdateConfigProfileCommand } from '@remnawave/backend-contract'
-import { useClipboard, useMediaQuery } from '@mantine/hooks'
 import { notifications } from '@mantine/notifications'
 import { useTranslation } from 'react-i18next'
 import { modals } from '@mantine/modals'
@@ -44,6 +44,8 @@ export function ConfigEditorActionsFeature(props: Props) {
 
     const modalsStore = useModalsStore()
     const { open, close, setInternalData } = modalsStore
+
+    const [opened, handlers] = useDisclosure(false)
 
     const isSnippetsOpen =
         modalsStore.modals[MODALS.CONFIG_PROFILE_SHOW_SNIPPETS_DRAWER]?.isOpen || false
@@ -220,19 +222,25 @@ export function ConfigEditorActionsFeature(props: Props) {
             )}
 
             <Group gap={0} wrap="nowrap">
-                <Menu radius="sm" shadow="md" withinPortal>
+                <Menu
+                    onClose={() => handlers.close()}
+                    onOpen={() => handlers.open()}
+                    radius="sm"
+                    shadow="md"
+                    trigger="click-hover"
+                    withinPortal
+                >
                     <Menu.Target>
                         <ActionIcon
                             radius="md"
                             size={36}
                             style={{
                                 borderTopRightRadius: 0,
-                                borderBottomRightRadius: 0,
-                                border: '1px solid var(--mantine-color-gray-7)'
+                                borderBottomRightRadius: 0
                             }}
-                            variant="default"
+                            variant={opened ? 'outline' : 'default'}
                         >
-                            <TbMenu2 size={20} />
+                            <TbMenuDeep size={20} />
                         </ActionIcon>
                     </Menu.Target>
 

@@ -5,6 +5,15 @@ import {
     UpdateSubscriptionSettingsCommand
 } from '@remnawave/backend-contract'
 import {
+    TbBug,
+    TbClipboardCopy,
+    TbClipboardText,
+    TbCut,
+    TbDownload,
+    TbMenuDeep,
+    TbSelectAll
+} from 'react-icons/tb'
+import {
     ActionIcon,
     Anchor,
     Button,
@@ -15,17 +24,8 @@ import {
     Text,
     Textarea
 } from '@mantine/core'
-import {
-    TbBug,
-    TbClipboardCopy,
-    TbClipboardText,
-    TbCut,
-    TbDownload,
-    TbMenu2,
-    TbSelectAll
-} from 'react-icons/tb'
 import { PiCheck, PiCheckSquareOffset, PiCopy, PiFloppyDisk } from 'react-icons/pi'
-import { useClipboard, useMediaQuery } from '@mantine/hooks'
+import { useClipboard, useDisclosure, useMediaQuery } from '@mantine/hooks'
 import { notifications } from '@mantine/notifications'
 import { useTranslation } from 'react-i18next'
 import { modals } from '@mantine/modals'
@@ -55,6 +55,7 @@ export function ResponseRulesEditorActionsFeature(props: Props) {
 
     const isMobile = useMediaQuery('(max-width: 48em)')
     const clipboard = useClipboard({ timeout: 500 })
+    const [opened, handlers] = useDisclosure(false)
 
     const { mutate: updateResponseRulesRes, isPending: isUpdating } = useUpdateSubscriptionSettings(
         {
@@ -311,19 +312,25 @@ export function ResponseRulesEditorActionsFeature(props: Props) {
             </Button>
 
             <Group gap={0} wrap="nowrap">
-                <Menu radius="sm" shadow="md" withinPortal>
+                <Menu
+                    onClose={() => handlers.close()}
+                    onOpen={() => handlers.open()}
+                    radius="sm"
+                    shadow="md"
+                    trigger="click-hover"
+                    withinPortal
+                >
                     <Menu.Target>
                         <ActionIcon
                             radius="md"
                             size={36}
                             style={{
                                 borderTopRightRadius: 0,
-                                borderBottomRightRadius: 0,
-                                border: '1px solid var(--mantine-color-gray-7)'
+                                borderBottomRightRadius: 0
                             }}
-                            variant="default"
+                            variant={opened ? 'outline' : 'default'}
                         >
-                            <TbMenu2 size={20} />
+                            <TbMenuDeep size={20} />
                         </ActionIcon>
                     </Menu.Target>
 

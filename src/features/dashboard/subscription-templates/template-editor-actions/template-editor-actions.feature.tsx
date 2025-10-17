@@ -3,12 +3,12 @@ import {
     TbClipboardText,
     TbCut,
     TbDownload,
-    TbMenu2,
+    TbMenuDeep,
     TbSelectAll
 } from 'react-icons/tb'
+import { useClipboard, useDisclosure, useMediaQuery } from '@mantine/hooks'
 import { PiCheckSquareOffset, PiFloppyDisk } from 'react-icons/pi'
 import { ActionIcon, Button, Group, Menu } from '@mantine/core'
-import { useClipboard, useMediaQuery } from '@mantine/hooks'
 import { useTranslation } from 'react-i18next'
 
 import { useDownloadTemplate } from '@shared/ui/load-templates/use-download-template'
@@ -22,6 +22,7 @@ export function TemplateEditorActionsFeature(props: Props) {
 
     const isMobile = useMediaQuery('(max-width: 48em)')
     const clipboard = useClipboard({ timeout: 500 })
+    const [opened, handlers] = useDisclosure(false)
 
     const { mutate: updateConfig, isPending: isUpdating } = useUpdateSubscriptionTemplate()
     const { openDownloadModal } = useDownloadTemplate(templateType, editorRef, 'SUBSCRIPTION')
@@ -144,34 +145,25 @@ export function TemplateEditorActionsFeature(props: Props) {
             </Button>
 
             <Group gap={0} wrap="nowrap">
-                <Button
-                    leftSection={<PiCheckSquareOffset size={16} />}
-                    onClick={formatDocument}
-                    radius="md"
-                    style={{
-                        borderTopRightRadius: 0,
-                        borderBottomRightRadius: 0,
-                        borderRight: 0,
-                        width: '100%'
-                    }}
-                    variant="default"
+                <Menu
+                    onClose={() => handlers.close()}
+                    onOpen={() => handlers.open()}
+                    radius="sm"
+                    shadow="md"
+                    trigger="click-hover"
+                    withinPortal
                 >
-                    {t('config-editor-actions.feature.format')}
-                </Button>
-
-                <Menu radius="sm" shadow="md" withinPortal>
                     <Menu.Target>
                         <ActionIcon
                             radius="md"
                             size={36}
                             style={{
-                                borderTopLeftRadius: 0,
-                                borderBottomLeftRadius: 0,
-                                border: '1px solid var(--mantine-color-gray-7)'
+                                borderTopRightRadius: 0,
+                                borderBottomRightRadius: 0
                             }}
-                            variant="default"
+                            variant={opened ? 'outline' : 'default'}
                         >
-                            <TbMenu2 size={20} />
+                            <TbMenuDeep size={20} />
                         </ActionIcon>
                     </Menu.Target>
 
@@ -212,6 +204,21 @@ export function TemplateEditorActionsFeature(props: Props) {
                         </Menu.Item>
                     </Menu.Dropdown>
                 </Menu>
+
+                <Button
+                    leftSection={<PiCheckSquareOffset size={16} />}
+                    onClick={formatDocument}
+                    radius="md"
+                    style={{
+                        borderTopLeftRadius: 0,
+                        borderBottomLeftRadius: 0,
+                        borderLeft: 0,
+                        width: '100%'
+                    }}
+                    variant="default"
+                >
+                    {t('config-editor-actions.feature.format')}
+                </Button>
             </Group>
         </Group>
     )
