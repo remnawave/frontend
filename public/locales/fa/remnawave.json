@@ -24,7 +24,7 @@
         "hwid-inspector": "بازرسی HWID",
         "tools": "ابزارها",
         "srh-inspector": "بازرسی SRH",
-        "response-rules": "Response Rules"
+        "response-rules": "قوانین پاسخ"
     },
     "bandwidth-metrics": {
         "current-year": "امسال",
@@ -122,7 +122,7 @@
     "api-tokens-header-action-buttons": {
         "feature": {
             "create-new-api-token": "ساخت توکن API جدید",
-            "create": "Create"
+            "create": "ساختن"
         }
     },
     "header-buttons": {
@@ -250,13 +250,13 @@
     "create-node-modal": {
         "widget": {
             "create-node": "ساخت نود",
-            "next": "Next",
-            "back": "Back",
-            "checking-connection": "Checking connection",
-            "connection-successful": "Connection successful",
-            "connection-failed": "Connection failed",
-            "open-node": "Open Node",
-            "close": "Close"
+            "next": "بعدی",
+            "back": "بازگشت",
+            "checking-connection": "درحال بررسی اتصال",
+            "connection-successful": "اتصال موفقیت‌آمیز بود",
+            "connection-failed": "اتصال ناموفق بود",
+            "open-node": "باز کردن نود",
+            "close": "بستن"
         }
     },
     "edit-node-modal": {
@@ -444,7 +444,7 @@
         "country": "کشور",
         "select-country": "انتخاب کشور",
         "internal-name": "نام داخلی",
-        "internal-name-placeholder": "e.g. US-NY-Node-01",
+        "internal-name-placeholder": "برای مثال US-NY-Node-01",
         "address": "آدرس",
         "e-g-example-com": "مثلا example.com",
         "port": "پورت",
@@ -1417,7 +1417,7 @@
             "select-the-config-profile-that-will-be-applied-to-this-node": "پروفایل پیکربندی که به این نود اعمال می‌شود را انتخاب کنید",
             "no-config-profile-selected": "هیچ پروفایلی انتخاب نشده است",
             "choose-a-profile-to-configure-inbounds-for-this-node": "یک پروفایل برای پیکربندی اینباند برای این نود انتخاب کنید",
-            "change": "Change"
+            "change": "تغییر دادن"
         }
     },
     "access-settings-card": {
@@ -1676,59 +1676,59 @@
     "snippets": {
         "drawer": {
             "widget": {
-                "invalid-json": "Invalid JSON",
-                "snippet-cannot-be-empty": "Snippet cannot be empty",
-                "snippet-cannot-contain-empty-objects": "Snippet cannot contain empty objects",
-                "fetching-snippets": "Fetching snippets...",
-                "no-snippets-yet": "No snippets yet.",
-                "more-items": "more items...",
-                "create-snippet": "Create Snippet",
-                "snippet-name": "Snippet Name",
-                "enter-snippet-name-cannot-be-changed-later": "Enter snippet name (cannot be changed later)",
-                "snippet-is-valid": "Snippet is valid",
-                "cancel": "Cancel",
-                "create": "Create",
-                "edit-snippet": "Edit Snippet",
-                "update": "Update",
-                "snippets": "Snippets",
-                "new-snippet": "New snippet",
-                "snippets-help-line-1": "They are used to predefine some of your configurations.",
-                "snippets-help-line-2": "A snippet must contain an array of Outbound or Rule objects, and at least one item is required.",
-                "snippets-help-line-3": "Autocomplete is available for snippet names. Also, you can quickly preview the snippet by hovering over the name in the editor.",
-                "snippets-help-line-4": "Inside outbounds[], you can reference the snippets by name.",
-                "snippets-help-line-5": "Inside routing.rules[], you can reference the snippets by name."
+                "invalid-json": "JSON نامعتبر",
+                "snippet-cannot-be-empty": "قطعه کد نمی‌تواند خالی باشد",
+                "snippet-cannot-contain-empty-objects": "قطعه کد نمی‌تواند حاوی مقادیر خالی باشد",
+                "fetching-snippets": "درحال دریافت قطعه کدها",
+                "no-snippets-yet": "هیچ قطعه کدی وجود ندارد",
+                "more-items": "موارد بیشتر",
+                "create-snippet": "ایجاد قطعه کد",
+                "snippet-name": "نام قطعه کد",
+                "enter-snippet-name-cannot-be-changed-later": "اسم اسنیپت را وارد کنید (قابل تغییر نخواهد بود)",
+                "snippet-is-valid": "قطعه کد صحیح است",
+                "cancel": "لغو",
+                "create": "ساختن",
+                "edit-snippet": "ویرایش قطعه کد",
+                "update": "به‌روزرسانی",
+                "snippets": "قطعه کدها",
+                "new-snippet": "قطعه کد جدید",
+                "snippets-help-line-1": "قطعه کدها برای آماده‌سازی بخشی از کانفیگ استفاده می‌شوند.",
+                "snippets-help-line-2": "هر قطعه کد باید شامل آرایه‌ای از اشیا Outbound یا Rule باشد و باید حداقل یک آیتم داخل آرایه وجود داشته باشد.",
+                "snippets-help-line-3": "برای اسم قطعه کدها تکمیل خودکار در دسترس است. همچنین با بردن نشانگر موس روی اسم اسنیپت می‌توانید پیش‌نمایش سریعی از محتوای آن را مشاهده کنید.",
+                "snippets-help-line-4": "داخل آرایه outbounds[] می‌توانید به اسم قطعه کدها اشاره کنید.",
+                "snippets-help-line-5": "داخل آرایه routing.rules[] می‌توانید به اسم قطعه کدها اشاره کنید."
             }
         }
     },
     "response-rules-editor-actions": {
         "feature": {
-            "response-rules-debugger": "Response Rules Debugger",
-            "response-rules-debugger-description-1": "Use this cURL command to test how your response rules match different request headers.",
-            "response-rules-debugger-description-2": "You can import it into:",
-            "or": ", or",
-            "curl-command": "cURL Command",
-            "close": "Close",
-            "copy-curl-command": "Copy cURL command",
-            "debugger": "Debugger"
+            "response-rules-debugger": "عیب‌یاب قوانین پاسخ",
+            "response-rules-debugger-description-1": "می‌توانید از این دستور cURL برای آزمایش کردن قوانین پاسخ خود با هدرهای مختلف استفاده کنید",
+            "response-rules-debugger-description-2": "می‌توانید آن را در آدرس مقابل ایمپورت کنید:",
+            "or": "یا",
+            "curl-command": "دستور cURL",
+            "close": "بستن",
+            "copy-curl-command": "کپی کردن دستور cURL",
+            "debugger": "عیب‌یاب"
         }
     },
     "copy-docker-compose": {
         "widget": {
-            "copy-docker-compose-yml": "Copy docker-compose.yml"
+            "copy-docker-compose-yml": "کپی کردن docker-compose.yml"
         }
     },
     "create-node-step-1-connection": {
         "copy-the": "Copy the",
         "content-for-the-remnawave-node-below": "content for the Remnawave Node below.",
-        "learn-more": "Learn more.",
-        "secret-key-ssl_cert": "Secret Key (SSL_CERT)",
-        "domain-or-ip": "Domain or IP"
+        "learn-more": "اطلاعات بیشتر.",
+        "secret-key-ssl_cert": "کلید مخفی (SSL_CERT)",
+        "domain-or-ip": "دامنه یا آیپی"
     },
     "create-node-step-3-status": {
-        "establishing-mtls-connection": "Establishing mTLS connection...",
-        "xray-core-is-up-and-running": "Xray Core is up and running!",
-        "remnawave-will-try-to-reconnect-shortly": "Remnawave will try to reconnect shortly...",
-        "no-errros-so-far": "No errros so far",
-        "last-error-message": "Last error message"
+        "establishing-mtls-connection": "درحال برقراری اتصال mTLS",
+        "xray-core-is-up-and-running": "هسته Xray درحال اجرا می‌باشد!",
+        "remnawave-will-try-to-reconnect-shortly": "به زودی Remnawave برای اتصال مجدد تلاش خواهد کرد",
+        "no-errros-so-far": "تا کنون خطایی وجود نداشته است",
+        "last-error-message": "آخرین پیام خطا"
     }
 }
