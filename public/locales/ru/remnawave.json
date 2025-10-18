@@ -24,7 +24,7 @@
         "hwid-inspector": "Инспектор HWID",
         "tools": "Инструменты",
         "srh-inspector": "Инспектор SRH",
-        "response-rules": "Response Rules"
+        "response-rules": "Правила ответов"
     },
     "bandwidth-metrics": {
         "current-year": "Текущий год",
@@ -121,7 +121,8 @@
     },
     "api-tokens-header-action-buttons": {
         "feature": {
-            "create-new-api-token": "Создать новый токен API"
+            "create-new-api-token": "Создать новый токен API",
+            "create": "Создать"
         }
     },
     "header-buttons": {
@@ -248,7 +249,14 @@
     },
     "create-node-modal": {
         "widget": {
-            "create-node": "Создать ноду"
+            "create-node": "Создать ноду",
+            "next": "Далее",
+            "back": "Назад",
+            "checking-connection": "Проверяем соединение",
+            "connection-successful": "Успешное подключение",
+            "connection-failed": "Ошибка подключения",
+            "open-node": "Открыть ноду",
+            "close": "Закрыть"
         }
     },
     "edit-node-modal": {
@@ -258,10 +266,7 @@
     },
     "error-accordeon": {
         "widget": {
-            "last-error-message": "Последнее сообщение об ошибке",
-            "important-note-description": "Чтобы подключить ноду, Вам нужно запустить Remnawave Node со следующим",
-            "important-note-description-value": "значением. \nСкопируйте и вставьте его в Remnanode ",
-            "important-note": "Важная информация"
+            "last-error-message": "Последнее сообщение об ошибке"
         }
     },
     "node-card": {
@@ -439,6 +444,7 @@
         "country": "Страна",
         "select-country": "Выберите страну",
         "internal-name": "Внутреннее имя",
+        "internal-name-placeholder": "e.g. US-NY-Node-01",
         "address": "Адрес",
         "e-g-example-com": "например, example.com",
         "port": "Порт",
@@ -1153,9 +1159,7 @@
         }
     },
     "config-profile-detail-header": {
-        "widget": {
-            "active-nodes": "Ноды"
-        }
+        "widget": {}
     },
     "config-profiles-grid": {
         "widget": {
@@ -1413,8 +1417,7 @@
             "select-the-config-profile-that-will-be-applied-to-this-node": "Выберите профиль, который будет применить для этой ноды.",
             "no-config-profile-selected": "Профиль не выбран",
             "choose-a-profile-to-configure-inbounds-for-this-node": "Выберите профиль для настройки инбаундов для этой ноды",
-            "change-profile": "Изменить профиль",
-            "select-config-profile": "Выбрать профиль"
+            "change": "Изменить"
         }
     },
     "access-settings-card": {
@@ -1502,7 +1505,6 @@
             "create-config-profile": "Создать профиль",
             "create-a-new-config-profile-by-entering-a-name-below": "Создайте новый профиль, введя имя ниже.",
             "you-can-customize-xray-config-after-creation": "Вы можете настроить конфигурацию XRay после создания.",
-            "it-cant-be-changed-later": "Невозможно изменить позже",
             "profile-name": "Имя профиля",
             "enter-profile-name": "Введите имя профиля",
             "cancel": "Отменить",
@@ -1700,14 +1702,33 @@
     },
     "response-rules-editor-actions": {
         "feature": {
-            "response-rules-debugger": "Response Rules Debugger",
-            "response-rules-debugger-description-1": "Use this cURL command to test how your response rules match different request headers.",
-            "response-rules-debugger-description-2": "You can import it into:",
-            "or": ", or",
-            "curl-command": "cURL Command",
-            "close": "Close",
-            "copy-curl-command": "Copy cURL command",
-            "debugger": "Debugger"
+            "response-rules-debugger": "Отладчик правил ответа",
+            "response-rules-debugger-description-1": "Используйте эту команду cURL, чтобы проверить, как правила ответа соответствуют различным заголовкам запроса.",
+            "response-rules-debugger-description-2": "Вы можете импортировать его в:",
+            "or": ", или",
+            "curl-command": "cURL команда",
+            "close": "Закрыть",
+            "copy-curl-command": "Скопировать cURL команду",
+            "debugger": "Отладчик"
         }
+    },
+    "copy-docker-compose": {
+        "widget": {
+            "copy-docker-compose-yml": "Копировать docker-compose.yml"
+        }
+    },
+    "create-node-step-1-connection": {
+        "copy-the": "Скопируйте",
+        "content-for-the-remnawave-node-below": "содержимое для Remnawave node ниже.",
+        "learn-more": "Дополнительная информация.",
+        "secret-key-ssl_cert": "Секретный ключ (SSL_CERT)",
+        "domain-or-ip": "Домен или IP"
+    },
+    "create-node-step-3-status": {
+        "establishing-mtls-connection": "Установка mTLS соединения...",
+        "xray-core-is-up-and-running": "Ядро Xray запущено и работает!",
+        "remnawave-will-try-to-reconnect-shortly": "Remnawave скоро попробует переподключиться...",
+        "no-errros-so-far": "Пока никаких ошибок нет",
+        "last-error-message": "Последнее сообщение об ошибке"
     }
 }

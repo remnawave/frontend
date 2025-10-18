@@ -121,7 +121,8 @@
     },
     "api-tokens-header-action-buttons": {
         "feature": {
-            "create-new-api-token": "ساخت توکن API جدید"
+            "create-new-api-token": "ساخت توکن API جدید",
+            "create": "Create"
         }
     },
     "header-buttons": {
@@ -248,7 +249,14 @@
     },
     "create-node-modal": {
         "widget": {
-            "create-node": "ساخت نود"
+            "create-node": "ساخت نود",
+            "next": "Next",
+            "back": "Back",
+            "checking-connection": "Checking connection",
+            "connection-successful": "Connection successful",
+            "connection-failed": "Connection failed",
+            "open-node": "Open Node",
+            "close": "Close"
         }
     },
     "edit-node-modal": {
@@ -258,10 +266,7 @@
     },
     "error-accordeon": {
         "widget": {
-            "last-error-message": "آخرین پیام خطا",
-            "important-note-description": "برای اتصال به نود باید این سرتیفیکت را در فایل داکر نود قرار دهید",
-            "important-note-description-value": "سرتیفیکت را کپی کرده و وارد Remnanode کنید",
-            "important-note": "نکته مهم"
+            "last-error-message": "آخرین پیام خطا"
         }
     },
     "node-card": {
@@ -439,6 +444,7 @@
         "country": "کشور",
         "select-country": "انتخاب کشور",
         "internal-name": "نام داخلی",
+        "internal-name-placeholder": "e.g. US-NY-Node-01",
         "address": "آدرس",
         "e-g-example-com": "مثلا example.com",
         "port": "پورت",
@@ -1153,9 +1159,7 @@
         }
     },
     "config-profile-detail-header": {
-        "widget": {
-            "active-nodes": "نودهای فعال"
-        }
+        "widget": {}
     },
     "config-profiles-grid": {
         "widget": {
@@ -1413,8 +1417,7 @@
             "select-the-config-profile-that-will-be-applied-to-this-node": "پروفایل پیکربندی که به این نود اعمال می‌شود را انتخاب کنید",
             "no-config-profile-selected": "هیچ پروفایلی انتخاب نشده است",
             "choose-a-profile-to-configure-inbounds-for-this-node": "یک پروفایل برای پیکربندی اینباند برای این نود انتخاب کنید",
-            "change-profile": "تغییر پروفایل",
-            "select-config-profile": "انتخاب پروفایل پیکربندی"
+            "change": "Change"
         }
     },
     "access-settings-card": {
@@ -1502,7 +1505,6 @@
             "create-config-profile": "ساخت پروفایل پیکربندی",
             "create-a-new-config-profile-by-entering-a-name-below": "برای ایجاد پروفایل پیکربندی جدید اسم آن را وارد کنید",
             "you-can-customize-xray-config-after-creation": "کانفیگ Xray را می‌توانید بعد از ایجاد شخصی‌سازی کنید",
-            "it-cant-be-changed-later": "بعدا قابل تغییر نخواهد بود",
             "profile-name": "نام پروفایل",
             "enter-profile-name": "نام پروفایل را وارد کنید",
             "cancel": "لغو",
@@ -1709,5 +1711,24 @@
             "copy-curl-command": "Copy cURL command",
             "debugger": "Debugger"
         }
+    },
+    "copy-docker-compose": {
+        "widget": {
+            "copy-docker-compose-yml": "Copy docker-compose.yml"
+        }
+    },
+    "create-node-step-1-connection": {
+        "copy-the": "Copy the",
+        "content-for-the-remnawave-node-below": "content for the Remnawave Node below.",
+        "learn-more": "Learn more.",
+        "secret-key-ssl_cert": "Secret Key (SSL_CERT)",
+        "domain-or-ip": "Domain or IP"
+    },
+    "create-node-step-3-status": {
+        "establishing-mtls-connection": "Establishing mTLS connection...",
+        "xray-core-is-up-and-running": "Xray Core is up and running!",
+        "remnawave-will-try-to-reconnect-shortly": "Remnawave will try to reconnect shortly...",
+        "no-errros-so-far": "No errros so far",
+        "last-error-message": "Last error message"
     }
 }

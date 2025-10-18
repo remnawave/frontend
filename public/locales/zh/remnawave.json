@@ -121,7 +121,8 @@
     },
     "api-tokens-header-action-buttons": {
         "feature": {
-            "create-new-api-token": "创建新 API 密钥"
+            "create-new-api-token": "创建新 API 密钥",
+            "create": "Create"
         }
     },
     "header-buttons": {
@@ -248,7 +249,14 @@
     },
     "create-node-modal": {
         "widget": {
-            "create-node": "创建节点"
+            "create-node": "创建节点",
+            "next": "Next",
+            "back": "Back",
+            "checking-connection": "Checking connection",
+            "connection-successful": "Connection successful",
+            "connection-failed": "Connection failed",
+            "open-node": "Open Node",
+            "close": "Close"
         }
     },
     "edit-node-modal": {
@@ -258,10 +266,7 @@
     },
     "error-accordeon": {
         "widget": {
-            "last-error-message": "最后的错误消息",
-            "important-note-description": "为了连接节点, 您需要运行以下命令运行 Remnawave Node",
-            "important-note-description-value": "将当前值复制粘贴到 Remnawave Node 运行 ",
-            "important-note": "重要提示"
+            "last-error-message": "最后的错误消息"
         }
     },
     "node-card": {
@@ -439,6 +444,7 @@
         "country": "国家",
         "select-country": "选择国家",
         "internal-name": "内部名称",
+        "internal-name-placeholder": "e.g. US-NY-Node-01",
         "address": "地址",
         "e-g-example-com": "例如 example.com",
         "port": "端口",
@@ -1153,9 +1159,7 @@
         }
     },
     "config-profile-detail-header": {
-        "widget": {
-            "active-nodes": "活跃节点"
-        }
+        "widget": {}
     },
     "config-profiles-grid": {
         "widget": {
@@ -1413,8 +1417,7 @@
             "select-the-config-profile-that-will-be-applied-to-this-node": "选择将应用于此节点的配置文件",
             "no-config-profile-selected": "未选择配置文件",
             "choose-a-profile-to-configure-inbounds-for-this-node": "选择一个配置文件以为该节点配置入站",
-            "change-profile": "更改配置文件",
-            "select-config-profile": "选择配置文件"
+            "change": "Change"
         }
     },
     "access-settings-card": {
@@ -1502,7 +1505,6 @@
             "create-config-profile": "创建配置文件",
             "create-a-new-config-profile-by-entering-a-name-below": "在下方输入名称以创建新的配置文件。",
             "you-can-customize-xray-config-after-creation": "创建后可以自定义 XRay 配置。",
-            "it-cant-be-changed-later": "创建后无法更改名称",
             "profile-name": "配置文件名称",
             "enter-profile-name": "输入配置文件名称",
             "cancel": "取消",
@@ -1709,5 +1711,24 @@
             "copy-curl-command": "复制 cURL 命令",
             "debugger": "调试器"
         }
+    },
+    "copy-docker-compose": {
+        "widget": {
+            "copy-docker-compose-yml": "Copy docker-compose.yml"
+        }
+    },
+    "create-node-step-1-connection": {
+        "copy-the": "Copy the",
+        "content-for-the-remnawave-node-below": "content for the Remnawave Node below.",
+        "learn-more": "Learn more.",
+        "secret-key-ssl_cert": "Secret Key (SSL_CERT)",
+        "domain-or-ip": "Domain or IP"
+    },
+    "create-node-step-3-status": {
+        "establishing-mtls-connection": "Establishing mTLS connection...",
+        "xray-core-is-up-and-running": "Xray Core is up and running!",
+        "remnawave-will-try-to-reconnect-shortly": "Remnawave will try to reconnect shortly...",
+        "no-errros-so-far": "No errros so far",
+        "last-error-message": "Last error message"
     }
 }
