@@ -41,7 +41,6 @@ export function MobileWarningOverlay() {
             onClose={handleClose}
             opened={opened}
             padding="xl"
-            radius="lg"
             size="sm"
             withCloseButton={false}
         >

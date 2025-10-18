@@ -87,7 +87,6 @@ export const TemplateDownloadModal = (props: TemplateSelectorModalProps) => {
                     disabled={!selectedTemplate}
                     loading={isDownloading}
                     onClick={() => selectedTemplate && handleLoadTemplate(selectedTemplate)}
-                    radius="md"
                     variant="default"
                 >
                     {t('template-selector.modal.load-template')}

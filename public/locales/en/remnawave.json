@@ -121,7 +121,8 @@
     },
     "api-tokens-header-action-buttons": {
         "feature": {
-            "create-new-api-token": "Create new API token"
+            "create-new-api-token": "Create new API token",
+            "create": "Create"
         }
     },
     "header-buttons": {

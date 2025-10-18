@@ -342,7 +342,6 @@ export const MusicPlayer = () => {
 
                         <ActionIcon
                             onClick={toggleMinimize}
-                            radius="md"
                             size="md"
                             style={{
                                 backgroundColor: '#ffffff10',
@@ -396,12 +395,7 @@ export const MusicPlayer = () => {
                             </Text>
                         </Box>
                         <Group gap="xs">
-                            <ActionIcon
-                                onClick={openInSpotify}
-                                radius="md"
-                                size="md"
-                                variant="transparent"
-                            >
+                            <ActionIcon onClick={openInSpotify} size="md" variant="transparent">
                                 <svg
                                     aria-label="Spotify"
                                     height="24"
@@ -421,7 +415,6 @@ export const MusicPlayer = () => {
                             </ActionIcon>
                             <ActionIcon
                                 onClick={toggleMinimize}
-                                radius="md"
                                 size="md"
                                 style={{
                                     backgroundColor: '#ffffff10',
@@ -537,7 +530,6 @@ export const MusicPlayer = () => {
                     <Group gap="sm">
                         <ActionIcon
                             onClick={toggleMute}
-                            radius="md"
                             size="md"
                             style={{
                                 backgroundColor: isMuted ? '#ef444420' : '#ffffff10',

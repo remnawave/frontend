@@ -74,7 +74,7 @@ export function NodesRealtimeUsageMetrics() {
                             </MetricCard.Icon>
                             <Box miw={0}>
                                 <MetricCard.TextMuted truncate>{card.title}</MetricCard.TextMuted>
-                                <MetricCard.TextEmphasis ff={'monospace'}>
+                                <MetricCard.TextEmphasis ff="monospace">
                                     {isNodesRealtimeUsageLoading ? (
                                         <Loader color={card.color} size="xs" />
                                     ) : (

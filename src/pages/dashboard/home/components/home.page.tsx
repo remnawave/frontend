@@ -113,7 +113,7 @@ export const HomePage = (props: IProps) => {
             <MotionStack animate="visible" gap="sm" initial="hidden" variants={containerVariants}>
                 {pm2SummaryMetrics.length > 0 && (
                     <MotionWrapper variants={sectionVariants}>
-                        <AnimatedTitle m={'xs'} ml={0} order={4} variants={titleVariants}>
+                        <AnimatedTitle m="xs" ml={0} order={4} variants={titleVariants}>
                             {t('home.page.remnawave-usage')}
                         </AnimatedTitle>
 
@@ -129,7 +129,7 @@ export const HomePage = (props: IProps) => {
 
                 {pm2ProcessMetrics.length > 0 && (
                     <MotionWrapper variants={sectionVariants}>
-                        <AnimatedTitle m={'xs'} ml={0} order={4} variants={titleVariants}>
+                        <AnimatedTitle m="xs" ml={0} order={4} variants={titleVariants}>
                             {t('home.page.process-details')}
                         </AnimatedTitle>
                         <MotionGrid cols={{ base: 1, sm: 2, xl: 4 }} variants={gridVariants}>
@@ -143,7 +143,7 @@ export const HomePage = (props: IProps) => {
                 )}
 
                 <MotionWrapper variants={sectionVariants}>
-                    <AnimatedTitle m={'xs'} ml={0} order={4} variants={titleVariants}>
+                    <AnimatedTitle m="xs" ml={0} order={4} variants={titleVariants}>
                         {t('home.page.bandwidth')}
                     </AnimatedTitle>
                     <MotionGrid cols={{ base: 1, sm: 2, xl: 3 }} variants={gridVariants}>
@@ -156,7 +156,7 @@ export const HomePage = (props: IProps) => {
                 </MotionWrapper>
 
                 <MotionWrapper variants={sectionVariants}>
-                    <AnimatedTitle m={'xs'} ml={0} order={4} variants={titleVariants}>
+                    <AnimatedTitle m="xs" ml={0} order={4} variants={titleVariants}>
                         {t('home.page.system')}
                     </AnimatedTitle>
                     <MotionGrid cols={{ base: 1, sm: 2, xl: 3 }} variants={gridVariants}>
@@ -169,7 +169,7 @@ export const HomePage = (props: IProps) => {
                 </MotionWrapper>
 
                 <MotionWrapper variants={sectionVariants}>
-                    <AnimatedTitle m={'xs'} ml={0} order={4} variants={titleVariants}>
+                    <AnimatedTitle m="xs" ml={0} order={4} variants={titleVariants}>
                         {t('home.page.online-stats')}
                     </AnimatedTitle>
                     <MotionGrid cols={{ base: 1, sm: 2, xl: 4 }} variants={gridVariants}>
@@ -182,7 +182,7 @@ export const HomePage = (props: IProps) => {
                 </MotionWrapper>
 
                 <MotionWrapper variants={sectionVariants}>
-                    <AnimatedTitle m={'xs'} ml={0} order={4} variants={titleVariants}>
+                    <AnimatedTitle m="xs" ml={0} order={4} variants={titleVariants}>
                         {t('user-table.widget.table-title')}
                     </AnimatedTitle>
                     <MotionGrid cols={{ base: 1, sm: 2, xl: 4 }} variants={gridVariants}>

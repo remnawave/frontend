@@ -96,9 +96,7 @@ export const CreateNodeStep2ConfigProfiles = ({
                         color="gray"
                         leftSection={<PiArrowLeft size={18} />}
                         onClick={onPrev}
-                        radius="md"
                         size="md"
-                        variant="light"
                     >
                         {t('create-node-modal.widget.back')}
                     </Button>
@@ -107,10 +105,8 @@ export const CreateNodeStep2ConfigProfiles = ({
                         leftSection={<TbCheck size={18} />}
                         loading={isCreating}
                         onClick={handleCreateNode}
-                        radius="md"
                         size="md"
                         type="submit"
-                        variant="light"
                     >
                         {t('create-node-modal.widget.create-node')}
                     </Button>

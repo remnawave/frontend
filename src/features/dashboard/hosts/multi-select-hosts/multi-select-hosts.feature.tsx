@@ -200,7 +200,6 @@ export const MultiSelectHostsFeature = (props: IProps) => {
                 {(styles) => (
                     <Paper
                         p="md"
-                        radius="md"
                         shadow="md"
                         style={{
                             ...styles,

@@ -62,9 +62,9 @@ export const RemarksManager = ({
     }, [])
 
     return (
-        <Paper p="sm" radius="md" shadow="xs" withBorder>
+        <Paper p="sm" shadow="xs" withBorder>
             <Group align="center" gap="xs" justify="flex-start" mb="md">
-                <ThemeIcon color={iconColor} radius="md" size="md" variant="light">
+                <ThemeIcon color={iconColor} size="md" variant="light">
                     {icon}
                 </ThemeIcon>
                 <Text fw={600} size="sm">
@@ -78,7 +78,6 @@ export const RemarksManager = ({
                         color="red"
                         disabled={localRemarks.length === 1}
                         onClick={() => removeLocalRemark(index)}
-                        radius="md"
                         size="lg"
                         variant="light"
                     >

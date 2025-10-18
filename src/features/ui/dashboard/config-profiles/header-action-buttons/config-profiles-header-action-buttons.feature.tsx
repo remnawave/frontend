@@ -106,7 +106,6 @@ export const ConfigProfilesHeaderActionButtonsFeature = () => {
                     <ActionIcon
                         loading={isFetching}
                         onClick={handleUpdate}
-                        radius="md"
                         size="lg"
                         variant="light"
                     >
@@ -120,7 +119,7 @@ export const ConfigProfilesHeaderActionButtonsFeature = () => {
                     label={t('config-profiles-header-action-buttons.feature.create-config-profile')}
                     withArrow
                 >
-                    <ActionIcon color="teal" onClick={open} radius="md" size="lg" variant="light">
+                    <ActionIcon color="teal" onClick={open} size="lg" variant="light">
                         <TbPlus size="18px" />
                     </ActionIcon>
                 </Tooltip>
@@ -165,11 +164,11 @@ export const ConfigProfilesHeaderActionButtonsFeature = () => {
                             {...nameField.getInputProps()}
                         />
                         <Group justify="flex-end">
-                            <Button onClick={close} variant="default">
+                            <Button color="gray" onClick={close} variant="light">
                                 {t('config-profiles-header-action-buttons.feature.cancel')}
                             </Button>
 
-                            <Button loading={isPending} type="submit">
+                            <Button color="teal" loading={isPending} type="submit">
                                 {t('config-profiles-header-action-buttons.feature.create')}
                             </Button>
                         </Group>

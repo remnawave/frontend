@@ -91,7 +91,6 @@ export const HeadersManager = (props: HeadersManagerProps) => {
                     <ActionIcon
                         color="red"
                         onClick={() => removeLocalHeader(index)}
-                        radius="md"
                         size="lg"
                         variant="light"
                     >

@@ -98,7 +98,6 @@ export function InfraBillingRecordsTableWidget() {
                                     onClick={() => {
                                         refetchInfraBillingRecords()
                                     }}
-                                    radius="md"
                                     size="lg"
                                     variant="light"
                                 >
@@ -117,7 +116,6 @@ export function InfraBillingRecordsTableWidget() {
                                     onClick={() => {
                                         openModal(MODALS.CREATE_INFRA_BILLING_RECORD_DRAWER)
                                     }}
-                                    radius="md"
                                     size="lg"
                                     variant="light"
                                 >

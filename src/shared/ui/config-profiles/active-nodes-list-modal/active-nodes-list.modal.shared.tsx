@@ -24,7 +24,7 @@ export const ActiveNodesListModalShared = (props: IProps) => {
 
                     <Stack gap="xs">
                         {nodes.map((node) => (
-                            <Paper key={node.uuid} p="sm" radius="md" withBorder>
+                            <Paper key={node.uuid} p="sm" withBorder>
                                 <Group align="center" justify="space-between" wrap="nowrap">
                                     <Group
                                         align="center"

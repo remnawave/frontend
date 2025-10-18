@@ -187,7 +187,7 @@ export function InternalSquadsGridWidget(props: IProps) {
 
     if (!internalSquads || internalSquads.length === 0) {
         return (
-            <Card p="xl" radius="md" withBorder>
+            <Card p="xl" withBorder>
                 <Stack align="center" gap="md">
                     <PiEmpty size={48} style={{ opacity: 0.5 }} />
                     <div>
@@ -232,7 +232,6 @@ export function InternalSquadsGridWidget(props: IProps) {
                                 className={classes.card}
                                 h="100%"
                                 p={isMobile ? 'md' : 'lg'}
-                                radius="md"
                                 shadow="xs"
                                 withBorder
                             >
@@ -258,7 +257,6 @@ export function InternalSquadsGridWidget(props: IProps) {
                                         >
                                             <ActionIcon
                                                 color={isActive ? 'teal' : 'gray'}
-                                                radius="md"
                                                 size="md"
                                                 variant={isActive ? 'light' : 'subtle'}
                                             >
@@ -327,7 +325,6 @@ export function InternalSquadsGridWidget(props: IProps) {
                                                 })
                                                 open(MODALS.INTERNAL_SQUAD_SHOW_INBOUNDS)
                                             }}
-                                            radius="md"
                                             size="xs"
                                             variant="light"
                                         >
@@ -337,7 +334,6 @@ export function InternalSquadsGridWidget(props: IProps) {
                                             <Menu.Target>
                                                 <ActionIcon
                                                     className={classes.menuControl}
-                                                    radius="md"
                                                     size={30}
                                                     variant="light"
                                                 >

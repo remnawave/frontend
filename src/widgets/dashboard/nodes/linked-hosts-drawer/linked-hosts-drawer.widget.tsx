@@ -99,7 +99,6 @@ export const LinkedHostsDrawer = memo(() => {
                                     {!isHostActive && (
                                         <ActionIcon
                                             color="gray"
-                                            radius="md"
                                             size="md"
                                             style={{ flexShrink: 0 }}
                                             variant="light"
@@ -111,7 +110,6 @@ export const LinkedHostsDrawer = memo(() => {
                                     {isHostActive && host.isHidden && (
                                         <ActionIcon
                                             color="violet"
-                                            radius="md"
                                             size="md"
                                             style={{ flexShrink: 0 }}
                                             variant="light"
@@ -123,7 +121,6 @@ export const LinkedHostsDrawer = memo(() => {
                                     {isHostActive && !host.isHidden && (
                                         <ActionIcon
                                             color="teal"
-                                            radius="md"
                                             size="md"
                                             style={{ flexShrink: 0 }}
                                             variant="light"
@@ -159,7 +156,6 @@ export const LinkedHostsDrawer = memo(() => {
                                             autoContrast
                                             color={ch.hex(host.inbound.configProfileInboundUuid)}
                                             leftSection={<PiTag size={12} />}
-                                            radius="md"
                                             size="md"
                                             variant="outline"
                                         >
@@ -183,7 +179,6 @@ export const LinkedHostsDrawer = memo(() => {
                                                 <TbAlertCircle size={12} />
                                             )
                                         }
-                                        radius="md"
                                         size="md"
                                         variant="light"
                                     >

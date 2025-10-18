@@ -241,7 +241,7 @@ export const ViewUserModal = () => {
                     style={{ height: '70vh' }}
                     transition={{ duration: 0.3 }}
                 >
-                    <Center h={'100%'} mt="xl" py="xl" ta="center">
+                    <Center h="100%" mt="xl" py="xl" ta="center">
                         <Box>
                             <LoaderModalShared
                                 text={t('view-user-modal.widget.fetching-user-data')}

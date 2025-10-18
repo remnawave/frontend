@@ -350,7 +350,7 @@ export const NodeUsersUsageDrawer = memo(() => {
             return (
                 <Center h={400} mt="md" py="xl" ta="center">
                     <Box>
-                        <PiEmpty size={'2rem'} />
+                        <PiEmpty size="2rem" />
                         <Text c="dimmed">
                             {t(
                                 'node-users-usage-drawer.widget.no-data-available-for-the-selected-period'

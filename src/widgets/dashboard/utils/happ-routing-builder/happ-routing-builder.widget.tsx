@@ -443,7 +443,7 @@ export const HappRoutingBuilderWidget = () => {
                                                     description={t(
                                                         'happ-routing-builder.widget.proxy-all-traffic-except-rules-or-direct-all-traffic-except-rules'
                                                     )}
-                                                    label={'GlobalProxy'}
+                                                    label="GlobalProxy"
                                                     onChange={(value) =>
                                                         handleInputChange(
                                                             'globalProxy',
@@ -473,7 +473,7 @@ export const HappRoutingBuilderWidget = () => {
                                                     description={t(
                                                         'happ-routing-builder.widget.fake-dns-description'
                                                     )}
-                                                    label={'FakeDNS'}
+                                                    label="FakeDNS"
                                                     onChange={(value) =>
                                                         handleInputChange(
                                                             'fakeDns',
@@ -501,7 +501,7 @@ export const HappRoutingBuilderWidget = () => {
                                                             )
                                                         }
                                                     ]}
-                                                    label={'useChunkFiles'}
+                                                    label="useChunkFiles"
                                                     onChange={(value) =>
                                                         handleInputChange(
                                                             'useChunkFiles',

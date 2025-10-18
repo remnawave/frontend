@@ -31,7 +31,6 @@ export function DeleteHostFeature() {
                 color="red"
                 loading={isDeleteHostPending}
                 onClick={handleDeleteHost}
-                radius="md"
                 size="lg"
                 variant="light"
             >

@@ -98,7 +98,6 @@ export function getInfraBillingRecordsColumns(
                     <ActionIcon
                         color="gray"
                         onClick={() => handleDeleteInfraBillingRecord(row.uuid)}
-                        radius={'md'}
                         size="md"
                         variant="outline"
                     >

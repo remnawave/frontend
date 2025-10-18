@@ -112,7 +112,6 @@ export function InfraProvidersTableWidget() {
                                                 QueryKeys.infraBilling.getInfraProviders.queryKey
                                         })
                                     }}
-                                    radius="md"
                                     size="lg"
                                     variant="light"
                                 >
@@ -131,7 +130,6 @@ export function InfraProvidersTableWidget() {
                                     onClick={() => {
                                         openModal(MODALS.CREATE_INFRA_PROVIDER_DRAWER)
                                     }}
-                                    radius="md"
                                     size="lg"
                                     variant="light"
                                 >

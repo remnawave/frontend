@@ -315,7 +315,7 @@ export const BulkAllUserActionsUpdateTabFeature = (props: IProps) => {
                     />
                 </Stack>
 
-                <Stack gap={'xs'}>
+                <Stack gap="xs">
                     <Button
                         fullWidth
                         leftSection={<PiX size="16px" />}

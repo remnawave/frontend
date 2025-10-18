@@ -79,7 +79,6 @@ export const ConfigProfileInboundsDrawerWidget = () => {
                                 bg="dark.6"
                                 key={inbound.uuid}
                                 p="xs"
-                                radius="lg"
                                 style={{
                                     borderLeft: `4px solid ${tagColor}`
                                 }}
@@ -112,7 +111,6 @@ export const ConfigProfileInboundsDrawerWidget = () => {
                                                         size: 'xl'
                                                     })
                                                 }}
-                                                radius="md"
                                                 size="md"
                                                 variant="filled"
                                             >

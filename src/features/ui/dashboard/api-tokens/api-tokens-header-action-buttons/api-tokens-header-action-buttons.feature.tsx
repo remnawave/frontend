@@ -21,7 +21,7 @@ export const ApiTokensHeaderActionButtonsFeature = () => {
                 size="xs"
                 variant="default"
             >
-                {t('api-tokens-header-action-buttons.feature.create-new-api-token')}
+                {t('api-tokens-header-action-buttons.feature.create')}
             </Button>
         </Group>
     )

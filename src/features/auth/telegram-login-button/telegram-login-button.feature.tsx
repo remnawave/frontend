@@ -87,12 +87,11 @@ export const TelegramLoginButtonFeature = (props: IProps) => {
 
     return (
         <Button
-            color={'#0088cc'}
-            leftSection={<BiLogoTelegram color={'white'} size={20} />}
+            color="#0088cc"
+            leftSection={<BiLogoTelegram color="white" size={20} />}
             loaderProps={{ type: 'dots' }}
             loading={isPending}
             onClick={handleLogin}
-            radius="md"
             ref={hiddenDivRef}
             variant="filled"
         >

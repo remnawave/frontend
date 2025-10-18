@@ -17,6 +17,7 @@ import {
     Tabs,
     Text,
     TextInput,
+    ThemeIcon,
     Tooltip,
     Transition
 } from '@mantine/core'
@@ -37,7 +38,7 @@ import {
     SECURITY_LAYERS,
     UpdateHostCommand
 } from '@remnawave/backend-contract'
-import { TbCloudNetwork, TbServer2 } from 'react-icons/tb'
+import { TbCloudNetwork, TbEye, TbServer2 } from 'react-icons/tb'
 import { HiQuestionMarkCircle } from 'react-icons/hi'
 import { useDisclosure } from '@mantine/hooks'
 import { useTranslation } from 'react-i18next'
@@ -327,14 +328,19 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
     return (
         <form onSubmit={handleSubmit}>
             <Group gap="xs" justify="space-between" mb="md">
-                <Text fw={500} size="sm">
-                    {t('base-host-form.host-visibility')}
-                </Text>
+                <Group gap="xs">
+                    <ThemeIcon color="indigo" size="lg" variant="outline">
+                        <TbEye size={24} />
+                    </ThemeIcon>
+
+                    <Text fw={600} size="lg">
+                        {t('base-host-form.host-visibility')}
+                    </Text>
+                </Group>
                 <Switch
                     color="teal.8"
                     key={form.key('isDisabled')}
-                    radius="md"
-                    size="md"
+                    size="lg"
                     {...form.getInputProps('isDisabled', { type: 'checkbox' })}
                 />
             </Group>
@@ -587,7 +593,6 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
                                             <Switch
                                                 color="teal.8"
                                                 key={form.key('overrideSniFromAddress')}
-                                                radius="md"
                                                 size="md"
                                                 {...form.getInputProps('overrideSniFromAddress', {
                                                     type: 'checkbox'
@@ -752,7 +757,6 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
                                             <Switch
                                                 color="teal.8"
                                                 key={form.key('isHidden')}
-                                                radius="md"
                                                 size="md"
                                                 {...form.getInputProps('isHidden', {
                                                     type: 'checkbox'
@@ -872,7 +876,6 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
                                             <Switch
                                                 color="teal.8"
                                                 key={form.key('shuffleHost')}
-                                                radius="md"
                                                 size="md"
                                                 {...form.getInputProps('shuffleHost', {
                                                     type: 'checkbox'
@@ -889,7 +892,6 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
                                             <Switch
                                                 color="teal.8"
                                                 key={form.key('allowInsecure')}
-                                                radius="md"
                                                 size="md"
                                                 {...form.getInputProps('allowInsecure', {
                                                     type: 'checkbox'
@@ -910,7 +912,6 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
                                         <Switch
                                             color="teal.8"
                                             key={form.key('mihomoX25519')}
-                                            radius="md"
                                             size="md"
                                             {...form.getInputProps('mihomoX25519', {
                                                 type: 'checkbox'
@@ -934,7 +935,6 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
                             loading={isSubmitting}
                             size="sm"
                             type="submit"
-                            variant="outline"
                         >
                             {t('base-host-form.save')}
                         </Button>
@@ -948,7 +948,6 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
                                     color="blue"
                                     loading={isSubmitting}
                                     onClick={handleCloneHost}
-                                    radius="md"
                                     size="lg"
                                     variant="light"
                                 >

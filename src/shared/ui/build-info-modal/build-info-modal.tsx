@@ -58,7 +58,6 @@ export function BuildInfoModal({
             onClose={onClose}
             opened={opened}
             padding="xl"
-            radius="lg"
             title={
                 <Group justify="space-between" w="100%">
                     <Title c={theme.primaryColor} fw={700} order={3}>
@@ -87,7 +86,6 @@ export function BuildInfoModal({
                     <Paper
                         bg="rgba(0, 180, 160, 0.05)"
                         p="lg"
-                        radius="lg"
                         style={{ border: `1px solid ${theme.colors.teal[3]}` }}
                         withBorder
                     >
@@ -106,14 +104,12 @@ export function BuildInfoModal({
                                     color="teal"
                                     component="a"
                                     fullWidth={false}
-                                    href={'https://github.com/remnawave/panel/releases/latest'}
+                                    href="https://github.com/remnawave/panel/releases/latest"
                                     leftSection={<IconBrandGithub size={16} />}
                                     mt="sm"
-                                    radius="md"
                                     size="sm"
                                     style={{ alignSelf: 'flex-start' }}
                                     target="_blank"
-                                    variant="light"
                                 >
                                     Check out
                                 </Button>
@@ -122,7 +118,7 @@ export function BuildInfoModal({
                     </Paper>
                 )}
 
-                <Card padding="lg" radius="lg" shadow="sm" withBorder>
+                <Card padding="lg" shadow="sm" withBorder>
                     <Stack gap="lg">
                         <Group align="center" gap="lg">
                             <ThemeIcon
@@ -207,7 +203,7 @@ export function BuildInfoModal({
                                 <Text fw={700} size="md">
                                     Commit
                                 </Text>
-                                <Code fz={'sm'}>{buildInfo.commit}</Code>
+                                <Code fz="sm">{buildInfo.commit}</Code>
                             </Box>
                         </Group>
                     </Stack>
@@ -218,7 +214,6 @@ export function BuildInfoModal({
                         component="a"
                         href={buildInfo.commitUrl}
                         leftSection={<IconBrandGithub size={18} />}
-                        radius="md"
                         size="md"
                         target="_blank"
                         variant="outline"
@@ -229,12 +224,10 @@ export function BuildInfoModal({
                     <Button
                         color="cyan"
                         component="a"
-                        href={'https://t.me/remnawave'}
+                        href="https://t.me/remnawave"
                         leftSection={<IconBrandTelegram size={18} />}
-                        radius="md"
                         size="md"
                         target="_blank"
-                        variant="light"
                     >
                         Ask Community
                     </Button>

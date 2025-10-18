@@ -183,8 +183,6 @@ export function ConfigEditorActionsFeature(props: Props) {
                 leftSection={<PiFloppyDisk size={16} />}
                 loading={isUpdating}
                 onClick={handleSave}
-                radius="md"
-                variant="light"
             >
                 {t('config-editor-actions.feature.save')}
             </Button>
@@ -214,8 +212,6 @@ export function ConfigEditorActionsFeature(props: Props) {
                             onConfirm: handleSave
                         })
                     }}
-                    radius="md"
-                    variant="light"
                 >
                     {t('config-editor-actions.feature.save-anyway')}
                 </Button>
@@ -232,7 +228,6 @@ export function ConfigEditorActionsFeature(props: Props) {
                 >
                     <Menu.Target>
                         <ActionIcon
-                            radius="md"
                             size={36}
                             style={{
                                 borderTopRightRadius: 0,
@@ -312,7 +307,6 @@ export function ConfigEditorActionsFeature(props: Props) {
                 <Button
                     leftSection={<PiCheckSquareOffset size={16} />}
                     onClick={formatDocument}
-                    radius="md"
                     style={{
                         borderTopLeftRadius: 0,
                         borderBottomLeftRadius: 0,
@@ -339,7 +333,6 @@ export function ConfigEditorActionsFeature(props: Props) {
                             open(MODALS.CONFIG_PROFILE_SHOW_SNIPPETS_DRAWER)
                         }
                     }}
-                    radius="md"
                     size={36}
                     style={{
                         borderTopLeftRadius: 0,

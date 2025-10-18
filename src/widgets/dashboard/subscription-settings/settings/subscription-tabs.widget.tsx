@@ -89,7 +89,6 @@ export const SubscriptionTabs = ({
                                 setActiveTab(value)
                             }
                         }}
-                        radius="md"
                         style={{
                             width: '100%'
                         }}
@@ -123,12 +122,11 @@ export const SubscriptionTabs = ({
                             >
                                 {(styles) => (
                                     <Stack gap="lg" style={styles}>
-                                        <Card radius="md" shadow="md" withBorder>
+                                        <Card shadow="md" withBorder>
                                             <Card.Section p="lg" withBorder>
                                                 <Group align="center" gap="md" wrap="nowrap">
                                                     <ThemeIcon
                                                         color="blue"
-                                                        radius="md"
                                                         size={40}
                                                         variant="light"
                                                     >
@@ -168,7 +166,6 @@ export const SubscriptionTabs = ({
                                                             placeholder={t(
                                                                 'subscription-settings.widget.enter-profile-title'
                                                             )}
-                                                            radius="md"
                                                             size="sm"
                                                             {...form.getInputProps('profileTitle')}
                                                         />
@@ -187,7 +184,6 @@ export const SubscriptionTabs = ({
                                                             }
                                                             min={1}
                                                             placeholder="60"
-                                                            radius="md"
                                                             size="sm"
                                                             {...form.getInputProps(
                                                                 'profileUpdateInterval'
@@ -207,7 +203,6 @@ export const SubscriptionTabs = ({
                                                                 <PiLink size={px('1.2rem')} />
                                                             }
                                                             placeholder="https://support.example.com"
-                                                            radius="md"
                                                             size="sm"
                                                             {...form.getInputProps('supportLink')}
                                                         />
@@ -216,12 +211,11 @@ export const SubscriptionTabs = ({
                                             </Card.Section>
                                         </Card>
 
-                                        <Card radius="md" shadow="md" withBorder>
+                                        <Card shadow="md" withBorder>
                                             <Card.Section p="lg" withBorder>
                                                 <Group align="center" gap="md" wrap="nowrap">
                                                     <ThemeIcon
                                                         color="cyan"
-                                                        radius="md"
                                                         size={40}
                                                         variant="light"
                                                     >
@@ -328,12 +322,11 @@ export const SubscriptionTabs = ({
                                                 </Grid>
                                             </Card.Section>
                                         </Card>
-                                        <Card radius="md" shadow="md" withBorder>
+                                        <Card shadow="md" withBorder>
                                             <Card.Section p="lg" withBorder>
                                                 <Group align="center" gap="md" wrap="nowrap">
                                                     <ThemeIcon
                                                         color="cyan"
-                                                        radius="md"
                                                         size={40}
                                                         variant="light"
                                                     >
@@ -371,7 +364,6 @@ export const SubscriptionTabs = ({
                                                         placeholder={t(
                                                             'subscription-tabs.widget.enter-announce-text-max-200-characters'
                                                         )}
-                                                        radius="md"
                                                         size="sm"
                                                         style={{
                                                             placeContent: 'center'
@@ -406,7 +398,6 @@ export const SubscriptionTabs = ({
                                                                                 .HAPP_ROUTING_BUILDER
                                                                         )
                                                                     }}
-                                                                    radius="md"
                                                                     size="sm"
                                                                     variant="light"
                                                                     w="fit-content"
@@ -423,7 +414,6 @@ export const SubscriptionTabs = ({
                                                         )}
                                                         minRows={4}
                                                         placeholder="happ://routing/add/..."
-                                                        radius="md"
                                                         size="sm"
                                                         {...form.getInputProps('happRouting')}
                                                     />
@@ -444,12 +434,11 @@ export const SubscriptionTabs = ({
                             >
                                 {(styles) => (
                                     <Stack gap="lg" style={styles}>
-                                        <Card radius="md" shadow="sm" withBorder>
+                                        <Card shadow="sm" withBorder>
                                             <Card.Section p="lg" withBorder>
                                                 <Group align="center" gap="md" wrap="nowrap">
                                                     <ThemeIcon
                                                         color="blue"
-                                                        radius="md"
                                                         size={40}
                                                         variant="light"
                                                     >
@@ -560,15 +549,10 @@ export const SubscriptionTabs = ({
                                 transition="fade"
                             >
                                 {(styles) => (
-                                    <Card radius="lg" shadow="sm" style={styles} withBorder>
+                                    <Card shadow="sm" style={styles} withBorder>
                                         <Card.Section p="lg" withBorder>
                                             <Group align="center" gap="md" wrap="nowrap">
-                                                <ThemeIcon
-                                                    color="blue"
-                                                    radius="md"
-                                                    size={40}
-                                                    variant="light"
-                                                >
+                                                <ThemeIcon color="blue" size={40} variant="light">
                                                     <TbPrescription size="24px" />
                                                 </ThemeIcon>
                                                 <Stack gap={4}>
@@ -591,7 +575,6 @@ export const SubscriptionTabs = ({
                                                 <Alert
                                                     color="red"
                                                     icon={<PiInfo />}
-                                                    radius="md"
                                                     title={t('subscription-tabs.widget.error')}
                                                 >
                                                     {form.errors.customResponseHeaders}
@@ -615,25 +598,14 @@ export const SubscriptionTabs = ({
                         <Card.Section p="lg">
                             <Group align="center" justify="flex-start">
                                 <Button
-                                    color="blue"
+                                    color="teal"
                                     leftSection={<PiFloppyDisk size={px('1.2rem')} />}
                                     loading={isUpdateSubscriptionSettingsPending}
-                                    radius="md"
                                     size="md"
                                     type="submit"
                                 >
                                     {t('subscription-settings.widget.update-settings')}
                                 </Button>
-                                <Box visibleFrom="md">
-                                    <Title fw={600} order={4}>
-                                        {t('subscription-tabs.widget.save-settings')}
-                                    </Title>
-                                    <Text c="dimmed" size="sm">
-                                        {t(
-                                            'subscription-tabs.widget.save-your-subscription-settings-to-apply-changes'
-                                        )}
-                                    </Text>
-                                </Box>
                             </Group>
                         </Card.Section>
                     </Card>

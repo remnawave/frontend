@@ -108,7 +108,6 @@ export const UserAccessibleNodesModalWidget = () => {
                         <Card
                             m="xs"
                             p="md"
-                            radius="lg"
                             style={{
                                 backgroundColor: 'var(--mantine-color-dark-6)',
                                 borderWidth: '1px'
@@ -290,7 +289,7 @@ export const UserAccessibleNodesModalWidget = () => {
 
         return (
             <Stack gap="lg">
-                <Card p="md" radius="md" withBorder>
+                <Card p="md" withBorder>
                     <Group align="center" gap="md">
                         <IconFlag color="var(--mantine-color-blue-4)" size={20} />
                         <Text c="gray.1" fw={600} size="lg">

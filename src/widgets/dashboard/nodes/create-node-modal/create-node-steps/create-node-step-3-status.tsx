@@ -92,7 +92,6 @@ export const CreateNodeStep3Status = ({ nodeUuid, onClose }: IProps) => {
         <Stack gap="lg" mih={400}>
             <Paper
                 p="xl"
-                radius="md"
                 shadow="sm"
                 style={{
                     background:
@@ -152,7 +151,6 @@ export const CreateNodeStep3Status = ({ nodeUuid, onClose }: IProps) => {
                 <Alert
                     color="teal"
                     icon={<TbCheck size={20} />}
-                    radius="md"
                     title={t('create-node-step-3-status.no-errros-so-far')}
                     variant="light"
                 />
@@ -162,7 +160,6 @@ export const CreateNodeStep3Status = ({ nodeUuid, onClose }: IProps) => {
                 <Alert
                     color="red"
                     icon={<TbAlertCircle size={20} />}
-                    radius="md"
                     title={t('create-node-step-3-status.last-error-message')}
                     variant="light"
                 >
@@ -175,9 +172,7 @@ export const CreateNodeStep3Status = ({ nodeUuid, onClose }: IProps) => {
                     color="gray"
                     leftSection={<TbX size={18} />}
                     onClick={handleClose}
-                    radius="md"
                     size="md"
-                    variant="light"
                 >
                     {t('create-node-modal.widget.close')}
                 </Button>
@@ -188,9 +183,7 @@ export const CreateNodeStep3Status = ({ nodeUuid, onClose }: IProps) => {
                         status === STATUS.CONNECTED ? <TbCheck size={18} /> : <TbLink size={18} />
                     }
                     onClick={handleOpenNode}
-                    radius="md"
                     size="md"
-                    variant="light"
                 >
                     {t('create-node-modal.widget.open-node')}
                 </Button>

@@ -156,7 +156,6 @@ export function InfraBillingNodesTableWidget() {
                                         <ActionIcon
                                             color="red"
                                             onClick={() => handleDeleteInfraBillingNode()}
-                                            radius="md"
                                             size="lg"
                                             variant="light"
                                         >
@@ -172,7 +171,6 @@ export function InfraBillingNodesTableWidget() {
                                             <ActionIcon
                                                 color="teal"
                                                 onClick={handleUpdateMultipleNodes}
-                                                radius="md"
                                                 size="lg"
                                                 variant="light"
                                             >
@@ -192,7 +190,6 @@ export function InfraBillingNodesTableWidget() {
                                         refetchInfraBillingNodes()
                                         clearMultiSelectedRecords()
                                     }}
-                                    radius="md"
                                     size="lg"
                                     variant="light"
                                 >
@@ -208,7 +205,6 @@ export function InfraBillingNodesTableWidget() {
                                     onClick={() => {
                                         openModal(MODALS.CREATE_INFRA_BILLING_NODE_MODAL)
                                     }}
-                                    radius="md"
                                     size="lg"
                                     variant="light"
                                 >

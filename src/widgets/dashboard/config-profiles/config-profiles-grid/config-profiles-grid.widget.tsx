@@ -85,7 +85,7 @@ export function ConfigProfilesGridWidget(props: IProps) {
 
     if (!configProfiles || configProfiles.length === 0) {
         return (
-            <Card p="xl" radius="md" withBorder>
+            <Card p="xl" withBorder>
                 <Stack align="center" gap="md">
                     <XtlsLogo size={48} style={{ opacity: 0.5 }} />
                     <div>
@@ -130,7 +130,6 @@ export function ConfigProfilesGridWidget(props: IProps) {
                                 className={classes.card}
                                 h="100%"
                                 p={isMobile ? 'md' : 'lg'}
-                                radius="md"
                                 shadow="xs"
                                 withBorder
                             >
@@ -156,7 +155,6 @@ export function ConfigProfilesGridWidget(props: IProps) {
                                         >
                                             <ActionIcon
                                                 color={isActive ? 'teal' : 'gray'}
-                                                radius="md"
                                                 size="md"
                                                 variant={isActive ? 'light' : 'subtle'}
                                             >
@@ -255,7 +253,6 @@ export function ConfigProfilesGridWidget(props: IProps) {
                                                     )
                                                 )
                                             }}
-                                            radius="md"
                                             size="xs"
                                             variant="light"
                                         >
@@ -265,7 +262,6 @@ export function ConfigProfilesGridWidget(props: IProps) {
                                             <Menu.Target>
                                                 <ActionIcon
                                                     className={classes.menuControl}
-                                                    radius="md"
                                                     size={30}
                                                     variant="light"
                                                 >

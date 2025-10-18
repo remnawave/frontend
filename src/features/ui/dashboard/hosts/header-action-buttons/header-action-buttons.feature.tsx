@@ -30,7 +30,6 @@ export const HeaderActionButtonsFeature = () => {
                     <ActionIcon
                         loading={isFetching}
                         onClick={handleUpdate}
-                        radius="md"
                         size="lg"
                         variant="light"
                     >
@@ -41,13 +40,7 @@ export const HeaderActionButtonsFeature = () => {
 
             <ActionIconGroup>
                 <Tooltip label={t('header-action-buttons.feature.create-new-host')} withArrow>
-                    <ActionIcon
-                        color="teal"
-                        onClick={handleCreate}
-                        radius="md"
-                        size="lg"
-                        variant="light"
-                    >
+                    <ActionIcon color="teal" onClick={handleCreate} size="lg" variant="light">
                         <TbPlus size="18px" />
                     </ActionIcon>
                 </Tooltip>

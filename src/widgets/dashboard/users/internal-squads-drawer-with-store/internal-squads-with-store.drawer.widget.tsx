@@ -1,4 +1,5 @@
-/* eslint-disable indent */
+/* eslint-disable @stylistic/indent */
+
 import {
     Accordion,
     ActionIcon,
@@ -219,7 +220,6 @@ export const InternalSquadsDrawerWithStore = () => {
             <Stack gap="md" h="100%">
                 <Paper
                     p="md"
-                    radius="md"
                     shadow="sm"
                     style={{
                         background:
@@ -241,7 +241,6 @@ export const InternalSquadsDrawerWithStore = () => {
                                         color={
                                             internalSquad.info.membersCount > 0 ? 'teal' : 'gray'
                                         }
-                                        radius="md"
                                         size="md"
                                         style={{ flexShrink: 0 }}
                                         variant={
@@ -353,7 +352,6 @@ export const InternalSquadsDrawerWithStore = () => {
                                             <ActionIcon
                                                 color="red"
                                                 onClick={clearSelection}
-                                                radius="md"
                                                 size="lg"
                                                 variant="light"
                                             >
@@ -369,7 +367,7 @@ export const InternalSquadsDrawerWithStore = () => {
                             color="teal"
                             disabled={selectedInbounds.size === 0}
                             fullWidth
-                            leftSection={<TbDeviceFloppy size={'1.2rem'} />}
+                            leftSection={<TbDeviceFloppy size="1.2rem" />}
                             loading={isUpdatingInternalSquad}
                             onClick={handleUpdateInternalSquad}
                             size="md"
@@ -387,7 +385,6 @@ export const InternalSquadsDrawerWithStore = () => {
                     leftSection={<TbSearch size={16} />}
                     onChange={(event) => setSearchQuery(event.currentTarget.value)}
                     placeholder={t('internal-squads.drawer.widget.search-profiles-or-inbounds')}
-                    radius="md"
                     value={searchQuery}
                 />
 

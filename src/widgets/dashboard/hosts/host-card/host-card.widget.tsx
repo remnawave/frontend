@@ -127,7 +127,6 @@ export function HostCardWidget(props: IProps) {
                                     autoContrast
                                     color={ch.hex(item.tag)}
                                     leftSection={<TbTagStarred size={12} />}
-                                    radius="md"
                                     size="md"
                                     variant="outline"
                                 >
@@ -139,7 +138,6 @@ export function HostCardWidget(props: IProps) {
                         {!isHostActive && (
                             <ActionIcon
                                 color="gray"
-                                radius="md"
                                 size="lg"
                                 style={{ flexShrink: 0 }}
                                 variant="light"
@@ -151,7 +149,6 @@ export function HostCardWidget(props: IProps) {
                         {isHostActive && item.isHidden && (
                             <ActionIcon
                                 color="violet"
-                                radius="md"
                                 size="lg"
                                 style={{ flexShrink: 0 }}
                                 variant="light"
@@ -163,7 +160,6 @@ export function HostCardWidget(props: IProps) {
                         {isHostActive && !item.isHidden && (
                             <ActionIcon
                                 color="teal"
-                                radius="md"
                                 size="lg"
                                 style={{ flexShrink: 0 }}
                                 variant="light"
@@ -203,7 +199,6 @@ export function HostCardWidget(props: IProps) {
                                             <TbAlertCircle size={12} />
                                         )
                                     }
-                                    radius="lg"
                                     size="sm"
                                     variant="light"
                                 >
@@ -216,7 +211,6 @@ export function HostCardWidget(props: IProps) {
                                         item.inbound.configProfileInboundUuid || 'dangling'
                                     )}
                                     leftSection={<PiTag size={12} />}
-                                    radius="lg"
                                     size="sm"
                                     variant="outline"
                                 >
@@ -279,7 +273,6 @@ export function HostCardWidget(props: IProps) {
                             {!isHostActive && (
                                 <ActionIcon
                                     color="gray"
-                                    radius="md"
                                     size="md"
                                     style={{ flexShrink: 0 }}
                                     variant="light"
@@ -291,7 +284,6 @@ export function HostCardWidget(props: IProps) {
                             {isHostActive && item.isHidden && (
                                 <ActionIcon
                                     color="violet"
-                                    radius="md"
                                     size="md"
                                     style={{ flexShrink: 0 }}
                                     variant="light"
@@ -303,7 +295,6 @@ export function HostCardWidget(props: IProps) {
                             {isHostActive && !item.isHidden && (
                                 <ActionIcon
                                     color="teal"
-                                    radius="md"
                                     size="md"
                                     style={{ flexShrink: 0 }}
                                     variant="light"
@@ -339,7 +330,6 @@ export function HostCardWidget(props: IProps) {
                                             color="gray"
                                             key={node.uuid}
                                             leftSection={resolveCountryCode(node.countryCode)}
-                                            radius="md"
                                             size="md"
                                             style={{
                                                 cursor: 'pointer'
@@ -351,7 +341,7 @@ export function HostCardWidget(props: IProps) {
                                     )
                                 })}
                             {item.nodes.length > 3 && (
-                                <Badge color="gray" radius="md" size="md" variant="default">
+                                <Badge color="gray" size="md" variant="default">
                                     +{item.nodes.length - 3}
                                 </Badge>
                             )}
@@ -361,7 +351,6 @@ export function HostCardWidget(props: IProps) {
                                     autoContrast
                                     color={ch.hex(item.tag)}
                                     leftSection={<TbTagStarred size={12} />}
-                                    radius="md"
                                     size="md"
                                     variant="outline"
                                 >
@@ -374,7 +363,6 @@ export function HostCardWidget(props: IProps) {
                                     autoContrast
                                     color={ch.hex(item.inbound.configProfileInboundUuid)}
                                     leftSection={<PiTag size={12} />}
-                                    radius="md"
                                     size="md"
                                     variant="outline"
                                 >
@@ -395,7 +383,6 @@ export function HostCardWidget(props: IProps) {
                                         <TbAlertCircle size={12} />
                                     )
                                 }
-                                radius="md"
                                 size="md"
                                 variant="light"
                             >

@@ -81,7 +81,7 @@ export const DetailedUserInfoDrawerWidget = () => {
             zIndex={1000}
         >
             {isUserLoading && (
-                <Center h={'100%'} mt="md" py="xl" ta="center">
+                <Center h="100%" mt="md" py="xl" ta="center">
                     <Box>
                         <LoaderModalShared
                             text={t('detailed-user-info-drawer.widget.loading-user-info')}
@@ -92,14 +92,13 @@ export const DetailedUserInfoDrawerWidget = () => {
 
             {!isUserLoading && user && (
                 <Stack gap="md">
-                    <Paper p="md" radius="md" withBorder>
+                    <Paper p="md" withBorder>
                         <Stack gap="xs">
                             <Group justify="flex-start">
                                 <Group>
                                     <ThemeIcon
                                         autoContrast
                                         color="blue"
-                                        radius="md"
                                         size="md"
                                         variant="outline"
                                     >
@@ -146,10 +145,10 @@ export const DetailedUserInfoDrawerWidget = () => {
                         </Stack>
                     </Paper>
 
-                    <Paper p="md" radius="md" withBorder>
+                    <Paper p="md" withBorder>
                         <Stack gap="xs">
                             <Group>
-                                <ThemeIcon color="teal" radius="md" size="md" variant="outline">
+                                <ThemeIcon color="teal" size="md" variant="outline">
                                     <PiArrowsDownUpDuotone size={16} />
                                 </ThemeIcon>
                                 <Title order={5}>
@@ -182,10 +181,10 @@ export const DetailedUserInfoDrawerWidget = () => {
                         </Stack>
                     </Paper>
 
-                    <Paper p="md" radius="md" withBorder>
+                    <Paper p="md" withBorder>
                         <Stack gap="xs">
                             <Group>
-                                <ThemeIcon color="orange" radius="md" size="md" variant="outline">
+                                <ThemeIcon color="orange" size="md" variant="outline">
                                     <PiCalendarDotDuotone size={16} />
                                 </ThemeIcon>
                                 <Title order={5}>
@@ -198,7 +197,7 @@ export const DetailedUserInfoDrawerWidget = () => {
                                 value={user.subscriptionUrl}
                             />
                             <CopyableFieldShared
-                                label={'Happ Crypto Link'}
+                                label="Happ Crypto Link"
                                 value={user.happ.cryptoLink}
                             />
                             <CopyableFieldShared
@@ -221,10 +220,10 @@ export const DetailedUserInfoDrawerWidget = () => {
                         </Stack>
                     </Paper>
 
-                    <Paper p="md" radius="md" withBorder>
+                    <Paper p="md" withBorder>
                         <Stack gap="xs">
                             <Group>
-                                <ThemeIcon color="violet" radius="md" size="md" variant="outline">
+                                <ThemeIcon color="violet" size="md" variant="outline">
                                     <PiNetworkDuotone size={16} />
                                 </ThemeIcon>
                                 <Title order={5}>
@@ -260,15 +259,10 @@ export const DetailedUserInfoDrawerWidget = () => {
                     </Paper>
 
                     {user.activeInternalSquads && user.activeInternalSquads.length > 0 && (
-                        <Paper p="md" radius="md" withBorder>
+                        <Paper p="md" withBorder>
                             <Stack gap="xs">
                                 <Group>
-                                    <ThemeIcon
-                                        color="green"
-                                        radius="md"
-                                        size="md"
-                                        variant="outline"
-                                    >
+                                    <ThemeIcon color="green" size="md" variant="outline">
                                         <PiTagDuotone size={16} />
                                     </ThemeIcon>
                                     <Title order={5}>
@@ -279,13 +273,7 @@ export const DetailedUserInfoDrawerWidget = () => {
                                 </Group>
 
                                 {user.activeInternalSquads.map((squad) => (
-                                    <Paper
-                                        key={squad.uuid}
-                                        p="md"
-                                        radius="md"
-                                        shadow="sm"
-                                        withBorder
-                                    >
+                                    <Paper key={squad.uuid} p="md" shadow="sm" withBorder>
                                         <Group justify="space-between">
                                             <Group gap="xs">
                                                 <PiTag size="16px" />
@@ -321,10 +309,10 @@ export const DetailedUserInfoDrawerWidget = () => {
                         </Paper>
                     )}
 
-                    <Paper p="md" radius="md" withBorder>
+                    <Paper p="md" withBorder>
                         <Stack gap="xs">
                             <Group>
-                                <ThemeIcon color="gray" radius="md" size="md" variant="outline">
+                                <ThemeIcon color="gray" size="md" variant="outline">
                                     <PiClockDuotone size={16} />
                                 </ThemeIcon>
                                 <Title order={5}>

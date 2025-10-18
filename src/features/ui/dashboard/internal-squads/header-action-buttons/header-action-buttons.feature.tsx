@@ -69,7 +69,6 @@ export const InternalSquadsHeaderActionButtonsFeature = () => {
                     <ActionIcon
                         loading={isFetching}
                         onClick={handleUpdate}
-                        radius="md"
                         size="lg"
                         variant="light"
                     >
@@ -83,7 +82,7 @@ export const InternalSquadsHeaderActionButtonsFeature = () => {
                     label={t('internal-squad-header-action-buttons.feature.create-internal-squad')}
                     withArrow
                 >
-                    <ActionIcon color="teal" onClick={open} radius="md" size="lg" variant="light">
+                    <ActionIcon color="teal" onClick={open} size="lg" variant="light">
                         <TbPlus size="18px" />
                     </ActionIcon>
                 </Tooltip>
@@ -123,14 +122,16 @@ export const InternalSquadsHeaderActionButtonsFeature = () => {
                             {...nameField.getInputProps()}
                         />
                         <Group justify="flex-end">
-                            <Button onClick={close} variant="default">
+                            <Button color="gray" onClick={close} variant="light">
                                 {t('internal-squad-header-action-buttons.feature.cancel')}
                             </Button>
 
                             <Button
+                                color="teal"
                                 disabled={!!nameField.error || nameField.getValue().length === 0}
                                 loading={isPending}
                                 type="submit"
+                                variant="default"
                             >
                                 {t('internal-squad-header-action-buttons.feature.create')}
                             </Button>

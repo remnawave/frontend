@@ -1,4 +1,4 @@
-/* eslint-disable indent */
+/* eslint-disable @stylistic/indent */
 
 import { UpdateConfigProfileCommand, UpdateInternalSquadCommand } from '@remnawave/backend-contract'
 import { Button, Group, Modal, Stack, TextInput } from '@mantine/core'
@@ -120,7 +120,7 @@ export function RenameModalShared({ renameFrom }: IProps) {
                     <Button
                         color="teal"
                         disabled={!!nameField.error || !nameField.getValue()}
-                        leftSection={<TbDeviceFloppy size={'1.2rem'} />}
+                        leftSection={<TbDeviceFloppy size="1.2rem" />}
                         loading={isLoading}
                         onClick={handleSave}
                         style={{

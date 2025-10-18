@@ -15,7 +15,7 @@ export function ApiTokensDocumentationWidget(props: IProps) {
     }
 
     return (
-        <Paper mb="lg" p="md" radius="md" withBorder>
+        <Paper mb="lg" p="md" withBorder>
             <Stack gap="md">
                 <Title order={4}>{t('api-tokens-documentation.widget.api-documentation')}</Title>
 

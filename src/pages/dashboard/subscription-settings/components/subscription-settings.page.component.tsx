@@ -44,7 +44,7 @@ export const SubscriptionSettingsPageComponent = (props: IProps) => {
             />
 
             <Container fluid p={0} size="xl">
-                <Paper mb="xl" p="md" radius="md" shadow="sm" withBorder>
+                <Paper mb="xl" p="md" shadow="sm" withBorder>
                     <Group align="flex-start" wrap="nowrap">
                         <Avatar
                             color="white"

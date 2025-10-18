@@ -102,7 +102,7 @@ export function SubscriptionTemplateEditorWidget(props: Props) {
                             top: 33
                         }
                     }}
-                    theme={'GithubDark'}
+                    theme="GithubDark"
                     value={getConfig() || ''}
                 />
             </Paper>

@@ -130,7 +130,7 @@ export const InternalSquadAccessibleNodesModalWidget = () => {
                     return null
                 case 'node':
                     return (
-                        <Card bg="dark.6" m="xs" p="md" radius="lg" withBorder>
+                        <Card bg="dark.6" m="xs" p="md" withBorder>
                             <Stack gap="sm">
                                 <Group align="center" gap="md">
                                     {hasChildren && (
@@ -261,7 +261,7 @@ export const InternalSquadAccessibleNodesModalWidget = () => {
 
         return (
             <Stack gap="lg">
-                <Card p="md" radius="md" withBorder>
+                <Card p="md" withBorder>
                     <Group align="center" gap="md">
                         <IconFlag color="var(--mantine-color-blue-4)" size={20} />
                         <Text c="gray.1" fw={600} size="lg">

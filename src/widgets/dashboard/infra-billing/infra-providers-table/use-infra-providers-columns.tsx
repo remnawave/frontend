@@ -160,7 +160,6 @@ export function getInfraProvidersColumns(
                     <ActionIcon
                         color="blue"
                         onClick={() => handleOpenModal(row)}
-                        radius={'md'}
                         size="md"
                         variant="outline"
                     >
@@ -169,7 +168,6 @@ export function getInfraProvidersColumns(
                     <ActionIcon
                         color="red"
                         onClick={() => handleDeleteInfraProvider(row.uuid)}
-                        radius={'md'}
                         size="md"
                         variant="outline"
                     >

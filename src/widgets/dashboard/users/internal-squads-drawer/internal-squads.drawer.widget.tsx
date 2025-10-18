@@ -211,7 +211,6 @@ export const InternalSquadsDrawer = (props: IProps) => {
             <Stack gap="md" h="100%">
                 <Paper
                     p="md"
-                    radius="md"
                     shadow="sm"
                     style={{
                         background:
@@ -233,7 +232,6 @@ export const InternalSquadsDrawer = (props: IProps) => {
                                         color={
                                             internalSquad.info.membersCount > 0 ? 'teal' : 'gray'
                                         }
-                                        radius="md"
                                         size="md"
                                         style={{ flexShrink: 0 }}
                                         variant={
@@ -345,7 +343,6 @@ export const InternalSquadsDrawer = (props: IProps) => {
                                             <ActionIcon
                                                 color="red"
                                                 onClick={clearSelection}
-                                                radius="md"
                                                 size="lg"
                                                 variant="light"
                                             >
@@ -361,7 +358,7 @@ export const InternalSquadsDrawer = (props: IProps) => {
                             color="teal"
                             disabled={selectedInbounds.size === 0}
                             fullWidth
-                            leftSection={<TbDeviceFloppy size={'1.2rem'} />}
+                            leftSection={<TbDeviceFloppy size="1.2rem" />}
                             loading={isUpdatingInternalSquad}
                             onClick={handleUpdateInternalSquad}
                             size="md"
@@ -379,7 +376,6 @@ export const InternalSquadsDrawer = (props: IProps) => {
                     leftSection={<TbSearch size={16} />}
                     onChange={(event) => setSearchQuery(event.currentTarget.value)}
                     placeholder={t('internal-squads.drawer.widget.search-profiles-or-inbounds')}
-                    radius="md"
                     value={searchQuery}
                 />
 

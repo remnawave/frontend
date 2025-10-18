@@ -59,7 +59,6 @@ export function ShowConfigProfilesWithInboundsFeature(props: IProps) {
 
             <Paper
                 p="md"
-                radius="md"
                 style={{
                     borderColor: clsx(
                         !activeProfile && !errors && 'var(--mantine-color-gray-6)',
@@ -136,7 +135,6 @@ export function ShowConfigProfilesWithInboundsFeature(props: IProps) {
                     <Button
                         leftSection={<TbFile size={16} />}
                         onClick={handlers.open}
-                        radius="md"
                         size="sm"
                         variant="default"
                     >

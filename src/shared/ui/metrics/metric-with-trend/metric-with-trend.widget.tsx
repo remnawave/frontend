@@ -19,7 +19,7 @@ export const MetricWithTrend = (props: IProps) => {
                 </Flex>
 
                 <Stack gap={2} mt={-25}>
-                    <MetricCard.TextEmphasis ff={'monospace'} truncate>
+                    <MetricCard.TextEmphasis ff="monospace" truncate>
                         {value}
                     </MetricCard.TextEmphasis>
                     <MetricCard.TextTrend value={difference}>

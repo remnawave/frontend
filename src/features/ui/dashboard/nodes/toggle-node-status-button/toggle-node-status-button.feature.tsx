@@ -54,7 +54,7 @@ export function ToggleNodeStatusButtonFeature(props: IProps) {
             color={color}
             leftSection={
                 isDisableNodePending || isEnableNodePending ? (
-                    <Loader color={color} size={'1rem'} />
+                    <Loader color={color} size="1rem" />
                 ) : (
                     icon
                 )

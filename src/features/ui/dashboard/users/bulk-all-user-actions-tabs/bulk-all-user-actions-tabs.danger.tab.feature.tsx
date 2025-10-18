@@ -24,7 +24,7 @@ export const BulkAllUserActionsDangerTabFeature = (props: IProps) => {
                 <Stack>
                     <Group justify="apart">
                         <Group>
-                            <PiTrash color={'var(--mantine-color-red-6)'} size={px('1.2rem')} />
+                            <PiTrash color="var(--mantine-color-red-6)" size={px('1.2rem')} />
                             <Text>
                                 {t(
                                     'bulk-all-user-actions-tabs.danger.tab.feature.delete-users-by-status'

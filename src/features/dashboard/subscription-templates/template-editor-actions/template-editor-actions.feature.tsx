@@ -138,8 +138,6 @@ export function TemplateEditorActionsFeature(props: Props) {
                 leftSection={<PiFloppyDisk size={16} />}
                 loading={isUpdating}
                 onClick={handleSave}
-                radius="md"
-                variant="light"
             >
                 {t('config-editor-actions.feature.save')}
             </Button>
@@ -148,14 +146,12 @@ export function TemplateEditorActionsFeature(props: Props) {
                 <Menu
                     onClose={() => handlers.close()}
                     onOpen={() => handlers.open()}
-                    radius="sm"
                     shadow="md"
                     trigger="click-hover"
                     withinPortal
                 >
                     <Menu.Target>
                         <ActionIcon
-                            radius="md"
                             size={36}
                             style={{
                                 borderTopRightRadius: 0,
@@ -208,7 +204,6 @@ export function TemplateEditorActionsFeature(props: Props) {
                 <Button
                     leftSection={<PiCheckSquareOffset size={16} />}
                     onClick={formatDocument}
-                    radius="md"
                     style={{
                         borderTopLeftRadius: 0,
                         borderBottomLeftRadius: 0,

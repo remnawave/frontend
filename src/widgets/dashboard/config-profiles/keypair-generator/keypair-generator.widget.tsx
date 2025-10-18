@@ -156,7 +156,6 @@ export const KeypairGeneratorWidget = () => {
                                     <Button
                                         leftSection={<PiKey size={px('1.2rem')} />}
                                         onClick={generatePublicAndPrivate}
-                                        radius="md"
                                         size="sm"
                                         variant="default"
                                     >
@@ -203,7 +202,6 @@ export const KeypairGeneratorWidget = () => {
                                     <Button
                                         leftSection={<PiKey size={px('1.2rem')} />}
                                         onClick={generateMlDsa65KeyPair}
-                                        radius="md"
                                         size="sm"
                                         variant="default"
                                     >
@@ -241,7 +239,6 @@ export const KeypairGeneratorWidget = () => {
                                     <Button
                                         leftSection={<PiKey size={px('1.2rem')} />}
                                         onClick={generateMlKem768KeyPair}
-                                        radius="md"
                                         size="sm"
                                         variant="default"
                                     >

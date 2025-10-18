@@ -145,22 +145,20 @@ export function SrhInspectorTableWidget() {
                             await userModalActions.setUserUuid(row.original.userUuid)
                             userModalActions.changeModalState(true)
                         }}
-                        radius="md"
                         size="input-sm"
                         variant="light"
                     >
-                        <PiUserCircle size={'1.5rem'} />
+                        <PiUserCircle size="1.5rem" />
                     </ActionIcon>
                     <ActionIcon
                         color="grape"
                         onClick={async () => {
                             window.open(`https://ipinfo.io/${row.original.requestIp}`, '_blank')
                         }}
-                        radius="md"
                         size="input-sm"
                         variant="light"
                     >
-                        <TbExternalLink size={'1.5rem'} />
+                        <TbExternalLink size="1.5rem" />
                     </ActionIcon>
                 </ActionIconGroup>
             ),
@@ -182,7 +180,6 @@ export function SrhInspectorTableWidget() {
                             <ActionIcon
                                 loading={isLoading}
                                 onClick={() => refetch()}
-                                radius="md"
                                 size="lg"
                                 variant="light"
                             >
@@ -201,7 +198,6 @@ export function SrhInspectorTableWidget() {
                                     table.resetColumnFilters(true)
                                     table.resetGlobalFilter(true)
                                 }}
-                                radius="md"
                                 size="lg"
                                 variant="light"
                             >

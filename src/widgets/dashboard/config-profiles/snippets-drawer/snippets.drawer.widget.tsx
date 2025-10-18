@@ -332,7 +332,6 @@ export const SnippetsDrawerWidget = () => {
                             key={snippet.name}
                             onClick={() => handleEdit(snippet)}
                             padding="sm"
-                            radius="md"
                             shadow="sm"
                             withBorder
                         >
@@ -395,7 +394,6 @@ export const SnippetsDrawerWidget = () => {
                                                         e.stopPropagation()
                                                         copy()
                                                     }}
-                                                    radius="md"
                                                     size="sm"
                                                     variant="subtle"
                                                 >
@@ -415,7 +413,6 @@ export const SnippetsDrawerWidget = () => {
                                                 e.stopPropagation()
                                                 handleDelete(snippet.name)
                                             }}
-                                            radius="md"
                                             size="sm"
                                             variant="subtle"
                                         >
@@ -736,7 +733,7 @@ export const SnippetsDrawerWidget = () => {
 
     return (
         <>
-            <Paper p={0} radius="md" shadow="sm" withBorder>
+            <Paper p={0} shadow="sm" withBorder>
                 <Stack gap={0}>
                     <Group
                         gap="sm"
@@ -759,7 +756,6 @@ export const SnippetsDrawerWidget = () => {
                         <ActionIcon
                             color="gray"
                             onClick={openSnippetsHelpModal}
-                            radius="md"
                             size="sm"
                             variant="subtle"
                         >
@@ -772,7 +768,6 @@ export const SnippetsDrawerWidget = () => {
                                     queryKey: QueryKeys.snippets.getSnippets.queryKey
                                 })
                             }}
-                            radius="md"
                             size="sm"
                             variant="subtle"
                         >
@@ -781,7 +776,6 @@ export const SnippetsDrawerWidget = () => {
                         <ActionIcon
                             color="gray"
                             onClick={() => close(MODALS.CONFIG_PROFILE_SHOW_SNIPPETS_DRAWER)}
-                            radius="md"
                             size="sm"
                             variant="subtle"
                         >
@@ -794,7 +788,6 @@ export const SnippetsDrawerWidget = () => {
                             fullWidth
                             leftSection={<TbPlus size={18} />}
                             onClick={handleOpenCreate}
-                            radius="md"
                             variant="default"
                         >
                             {t('snippets.drawer.widget.new-snippet')}

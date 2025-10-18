@@ -113,7 +113,7 @@ export const NodeMetricsWidget = () => {
 
     if (!nodeMetrics?.nodes?.length) {
         return (
-            <Card p="xl" radius="lg">
+            <Card p="xl">
                 <Center>
                     <Stack align="center" gap="md">
                         <ThemeIcon color="gray" size="xl" variant="light">
@@ -151,7 +151,6 @@ export const NodeMetricsWidget = () => {
         <Stack gap="md">
             <Paper
                 p="md"
-                radius="md"
                 style={{
                     background: 'rgba(59, 130, 246, 0.05)',
                     border: '1px solid rgba(59, 130, 246, 0.2)'

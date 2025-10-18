@@ -118,7 +118,6 @@ export const NodeDetailsCardWidget = memo(({ node, fetchedNode }: IProps) => {
     return (
         <Card
             p="lg"
-            radius="lg"
             style={{
                 background: `
                     linear-gradient(135deg, 
@@ -276,7 +275,6 @@ export const NodeDetailsCardWidget = memo(({ node, fetchedNode }: IProps) => {
                     >
                         <Paper
                             p="xs"
-                            radius="md"
                             style={{
                                 background:
                                     nodeData.usersOnline! > 0
@@ -311,7 +309,6 @@ export const NodeDetailsCardWidget = memo(({ node, fetchedNode }: IProps) => {
                         {nodeData.xrayVersion && (
                             <Paper
                                 p="xs"
-                                radius="md"
                                 style={{
                                     background: 'rgba(139, 92, 246, 0.1)',
                                     border: '1px solid rgba(139, 92, 246, 0.3)'
@@ -331,7 +328,6 @@ export const NodeDetailsCardWidget = memo(({ node, fetchedNode }: IProps) => {
                         {nodeData.nodeVersion && (
                             <Paper
                                 p="xs"
-                                radius="md"
                                 style={{
                                     background: 'rgba(99, 102, 241, 0.1)',
                                     border: '1px solid rgba(99, 102, 241, 0.3)'

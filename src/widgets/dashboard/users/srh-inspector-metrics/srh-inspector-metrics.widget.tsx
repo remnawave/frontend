@@ -203,7 +203,7 @@ export function SrhInspectorMetrics() {
             <Stack gap="md">
                 <SimpleGrid cols={{ base: 1, lg: 2 }} spacing="md">
                     {[1, 2].map((i) => (
-                        <Card key={i} p="lg" radius="md" withBorder>
+                        <Card key={i} p="lg" withBorder>
                             <Center h={300}>
                                 <Loader size="lg" />
                             </Center>
@@ -219,7 +219,6 @@ export function SrhInspectorMetrics() {
             <SimpleGrid cols={{ base: 1, lg: 2 }} spacing="lg">
                 <Card
                     p="lg"
-                    radius="md"
                     style={{
                         background:
                             'linear-gradient(135deg, var(--mantine-color-dark-6) 0%, var(--mantine-color-dark-7) 100%)'
@@ -267,7 +266,6 @@ export function SrhInspectorMetrics() {
 
                 <Card
                     p="lg"
-                    radius="md"
                     style={{
                         background:
                             'linear-gradient(135deg, var(--mantine-color-dark-6) 0%, var(--mantine-color-dark-7) 100%)'

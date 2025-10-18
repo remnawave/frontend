@@ -160,7 +160,6 @@ export const NodeCardWidget = memo((props: IProps) => {
                                 <Badge
                                     color="red"
                                     leftSection={<TbAlertCircle size={14} />}
-                                    radius="md"
                                     size="lg"
                                     variant="light"
                                 >
@@ -172,8 +171,7 @@ export const NodeCardWidget = memo((props: IProps) => {
                                     <Badge
                                         color={node.usersOnline! > 0 ? 'teal' : 'gray'}
                                         leftSection={<PiUsersDuotone size={14} />}
-                                        miw={'7ch'}
-                                        radius="md"
+                                        miw="7ch"
                                         size="lg"
                                         variant="outline"
                                     >
@@ -220,7 +218,6 @@ export const NodeCardWidget = memo((props: IProps) => {
                                                 src={faviconResolver(node.provider.faviconLink)}
                                             />
                                         }
-                                        radius="md"
                                         size="lg"
                                         style={{
                                             maxWidth: '20ch',
@@ -315,7 +312,6 @@ export const NodeCardWidget = memo((props: IProps) => {
                             <Badge
                                 color="red"
                                 leftSection={<TbAlertCircle size={14} />}
-                                radius="md"
                                 size="lg"
                                 variant="light"
                             >
@@ -329,8 +325,7 @@ export const NodeCardWidget = memo((props: IProps) => {
                             <Badge
                                 color={node.usersOnline! > 0 ? 'teal' : 'gray'}
                                 leftSection={<PiUsersDuotone size={14} />}
-                                miw={'7ch'}
-                                radius="md"
+                                miw="7ch"
                                 size="lg"
                                 variant="outline"
                             >
@@ -378,7 +373,6 @@ export const NodeCardWidget = memo((props: IProps) => {
                                             src={faviconResolver(node.provider.faviconLink)}
                                         />
                                     }
-                                    radius="md"
                                     size="lg"
                                     variant="light"
                                 >
@@ -391,14 +385,13 @@ export const NodeCardWidget = memo((props: IProps) => {
                                     color="gray"
                                     leftSection={
                                         <Avatar
-                                            alt={'Unknown'}
+                                            alt="Unknown"
                                             color="initials"
-                                            name={'Unknown'}
+                                            name="Unknown"
                                             radius="sm"
                                             size={16}
                                         />
                                     }
-                                    radius="md"
                                     size="lg"
                                     style={{
                                         visibility: 'hidden'

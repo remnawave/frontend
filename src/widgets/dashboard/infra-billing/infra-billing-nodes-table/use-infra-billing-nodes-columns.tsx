@@ -144,7 +144,6 @@ export function getInfraBillingNodesColumns(
                                 onClick={() =>
                                     handleQuickUpdateNextBillingAt(row.uuid, row.nextBillingAt)
                                 }
-                                radius="md"
                                 size="md"
                                 variant="outline"
                             >
