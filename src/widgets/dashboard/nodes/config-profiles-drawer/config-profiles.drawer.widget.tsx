@@ -1,4 +1,4 @@
-/* eslint-disable indent */
+/* eslint-disable @stylistic/indent */
 import {
     Accordion,
     ActionIcon,
@@ -223,6 +223,7 @@ export const ConfigProfilesDrawer = (props: IProps) => {
                                 fullWidth
                                 leftSection={<TbDeviceFloppy size={'1.2rem'} />}
                                 onClick={handleSaveInbounds}
+                                radius="md"
                                 size="md"
                                 style={{
                                     transition: 'all 0.2s ease'

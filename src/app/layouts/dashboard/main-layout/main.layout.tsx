@@ -151,6 +151,7 @@ export function MainLayout() {
 
     const titleElement = (
         <Text
+            ff="Unbounded"
             fw={700}
             size="lg"
             style={{
@@ -240,6 +241,7 @@ export function MainLayout() {
 
         return (
             <Text
+                ff="Unbounded"
                 fw={700}
                 size="lg"
                 style={{

@@ -70,7 +70,7 @@ export const BaseNodeForm = <T extends CreateNodeCommand.Request | UpdateNodeCom
                     initial="hidden"
                     variants={containerVariants}
                 >
-                    <ModalAccordionWidget fetchedNode={fetchedNode} node={node} pubKey={pubKey} />
+                    <ModalAccordionWidget fetchedNode={fetchedNode} node={node} />
 
                     {nodeDetailsCard && (
                         <MotionWrapper variants={cardVariants}>{nodeDetailsCard}</MotionWrapper>
@@ -89,6 +89,7 @@ export const BaseNodeForm = <T extends CreateNodeCommand.Request | UpdateNodeCom
                         cardVariants={cardVariants}
                         form={form}
                         motionWrapper={MotionWrapper}
+                        pubKey={pubKey}
                     />
 
                     <NodeConfigProfilesCard
@@ -121,11 +122,7 @@ export const BaseNodeForm = <T extends CreateNodeCommand.Request | UpdateNodeCom
                         style={{ flex: '1 1 400px' }}
                         variants={containerVariants}
                     >
-                        <ModalAccordionWidget
-                            fetchedNode={fetchedNode}
-                            node={node}
-                            pubKey={pubKey}
-                        />
+                        <ModalAccordionWidget fetchedNode={fetchedNode} node={node} />
 
                         {nodeDetailsCard && (
                             <MotionWrapper variants={cardVariants}>{nodeDetailsCard}</MotionWrapper>
@@ -135,6 +132,7 @@ export const BaseNodeForm = <T extends CreateNodeCommand.Request | UpdateNodeCom
                             cardVariants={cardVariants}
                             form={form}
                             motionWrapper={MotionWrapper}
+                            pubKey={pubKey}
                         />
 
                         <NodeConsumptionCard

@@ -1,4 +1,5 @@
-/* eslint-disable indent */
+/* eslint-disable @stylistic/indent */
+
 import {
     Accordion,
     ActionIcon,
@@ -819,7 +820,7 @@ export const UserUsageModalWidget = (props: IProps) => {
                                                         w={12}
                                                     />
                                                     <Group gap={6}>
-                                                        {/* eslint-disable indent */}
+                                                        {/* eslint-disable @stylistic/indent */}
                                                         {entry.countryCode &&
                                                             entry.countryCode !== 'XX' && (
                                                                 <ReactCountryFlag

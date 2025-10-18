@@ -60,7 +60,7 @@ export const LoginPage = () => {
     const customTitle = () => {
         if (!authStatus?.branding.title) {
             return (
-                <Title order={1} pos="relative">
+                <Title ff="Unbounded" order={1} pos="relative">
                     <Text c="cyan" component="span" fw="inherit" fz="inherit" pos="relative">
                         Remna
                     </Text>
@@ -72,7 +72,7 @@ export const LoginPage = () => {
         }
 
         return (
-            <Title order={1} pos="relative">
+            <Title ff="Unbounded" order={1} pos="relative">
                 <Text c="white" component="span" fw="inherit" fz="inherit" pos="relative">
                     {authStatus.branding.title}
                 </Text>
