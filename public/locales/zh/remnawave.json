@@ -24,7 +24,7 @@
         "hwid-inspector": "HWID 视图",
         "tools": "工具",
         "srh-inspector": "SRH 检查",
-        "response-rules": "Response Rules"
+        "response-rules": "响应规则"
     },
     "bandwidth-metrics": {
         "current-year": "今年",
@@ -1674,40 +1674,40 @@
     "snippets": {
         "drawer": {
             "widget": {
-                "invalid-json": "Invalid JSON",
-                "snippet-cannot-be-empty": "Snippet cannot be empty",
-                "snippet-cannot-contain-empty-objects": "Snippet cannot contain empty objects",
-                "fetching-snippets": "Fetching snippets...",
-                "no-snippets-yet": "No snippets yet.",
-                "more-items": "more items...",
-                "create-snippet": "Create Snippet",
-                "snippet-name": "Snippet Name",
-                "enter-snippet-name-cannot-be-changed-later": "Enter snippet name (cannot be changed later)",
-                "snippet-is-valid": "Snippet is valid",
-                "cancel": "Cancel",
-                "create": "Create",
-                "edit-snippet": "Edit Snippet",
-                "update": "Update",
-                "snippets": "Snippets",
-                "new-snippet": "New snippet",
-                "snippets-help-line-1": "They are used to predefine some of your configurations.",
-                "snippets-help-line-2": "A snippet must contain an array of Outbound or Rule objects, and at least one item is required.",
-                "snippets-help-line-3": "Autocomplete is available for snippet names. Also, you can quickly preview the snippet by hovering over the name in the editor.",
-                "snippets-help-line-4": "Inside outbounds[], you can reference the snippets by name.",
-                "snippets-help-line-5": "Inside routing.rules[], you can reference the snippets by name."
+                "invalid-json": "无效的 JSON",
+                "snippet-cannot-be-empty": "代码块不能为空",
+                "snippet-cannot-contain-empty-objects": "代码块不能包含空对象",
+                "fetching-snippets": "正在获取代码块...",
+                "no-snippets-yet": "尚无代码块",
+                "more-items": "更多项目...",
+                "create-snippet": "创建代码块",
+                "snippet-name": "代码块名称",
+                "enter-snippet-name-cannot-be-changed-later": "输入代码块名称 (稍后不能更改)",
+                "snippet-is-valid": "代码块有效",
+                "cancel": "取消",
+                "create": "创建",
+                "edit-snippet": "编辑代码块",
+                "update": "更新",
+                "snippets": "代码块",
+                "new-snippet": "新建代码块",
+                "snippets-help-line-1": "它们用于预定义您的一些配置。",
+                "snippets-help-line-2": "代码块必须包含一个出站或规则对象数组，而且至少需要一个项目。",
+                "snippets-help-line-3": "自动完成是可用的代码块名称。此外，您可以快速预览代码块，在编辑器的名称上悬停。",
+                "snippets-help-line-4": "在出站内[]，你可以引用的代码块名称。",
+                "snippets-help-line-5": "在路由规则[]中，你可以引用的代码块名称。"
             }
         }
     },
     "response-rules-editor-actions": {
         "feature": {
-            "response-rules-debugger": "Response Rules Debugger",
-            "response-rules-debugger-description-1": "Use this cURL command to test how your response rules match different request headers.",
-            "response-rules-debugger-description-2": "You can import it into:",
-            "or": ", or",
-            "curl-command": "cURL Command",
-            "close": "Close",
-            "copy-curl-command": "Copy cURL command",
-            "debugger": "Debugger"
+            "response-rules-debugger": "响应规则调试器",
+            "response-rules-debugger-description-1": "使用此 cURL 命令来测试您的响应规则如何匹配不同的请求头.",
+            "response-rules-debugger-description-2": "您可以将其导入到：",
+            "or": "，或",
+            "curl-command": "cURL 命令",
+            "close": "关闭",
+            "copy-curl-command": "复制 cURL 命令",
+            "debugger": "调试器"
         }
     }
 }
