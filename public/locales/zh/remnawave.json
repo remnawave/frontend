@@ -122,7 +122,7 @@
     "api-tokens-header-action-buttons": {
         "feature": {
             "create-new-api-token": "创建新 API 密钥",
-            "create": "Create"
+            "create": "创建"
         }
     },
     "header-buttons": {
@@ -250,13 +250,13 @@
     "create-node-modal": {
         "widget": {
             "create-node": "创建节点",
-            "next": "Next",
-            "back": "Back",
-            "checking-connection": "Checking connection",
-            "connection-successful": "Connection successful",
-            "connection-failed": "Connection failed",
-            "open-node": "Open Node",
-            "close": "Close"
+            "next": "下一步",
+            "back": "后退",
+            "checking-connection": "检查连接",
+            "connection-successful": "连接成功",
+            "connection-failed": "连接失败",
+            "open-node": "打开节点",
+            "close": "关闭"
         }
     },
     "edit-node-modal": {
@@ -444,7 +444,7 @@
         "country": "国家",
         "select-country": "选择国家",
         "internal-name": "内部名称",
-        "internal-name-placeholder": "e.g. US-NY-Node-01",
+        "internal-name-placeholder": "例如：US-NY-Node-01",
         "address": "地址",
         "e-g-example-com": "例如 example.com",
         "port": "端口",
@@ -1417,7 +1417,7 @@
             "select-the-config-profile-that-will-be-applied-to-this-node": "选择将应用于此节点的配置文件",
             "no-config-profile-selected": "未选择配置文件",
             "choose-a-profile-to-configure-inbounds-for-this-node": "选择一个配置文件以为该节点配置入站",
-            "change": "Change"
+            "change": "更改"
         }
     },
     "access-settings-card": {
@@ -1714,21 +1714,21 @@
     },
     "copy-docker-compose": {
         "widget": {
-            "copy-docker-compose-yml": "Copy docker-compose.yml"
+            "copy-docker-compose-yml": "复制 docker-compose.yml"
         }
     },
     "create-node-step-1-connection": {
-        "copy-the": "Copy the",
-        "content-for-the-remnawave-node-below": "content for the Remnawave Node below.",
-        "learn-more": "Learn more.",
-        "secret-key-ssl_cert": "Secret Key (SSL_CERT)",
-        "domain-or-ip": "Domain or IP"
+        "copy-the": "复制",
+        "content-for-the-remnawave-node-below": "以下是 Remnawave 节点的内容。",
+        "learn-more": "了解更多。",
+        "secret-key-ssl_cert": "密钥(SSL_证书)",
+        "domain-or-ip": "域名或IP"
     },
     "create-node-step-3-status": {
-        "establishing-mtls-connection": "Establishing mTLS connection...",
-        "xray-core-is-up-and-running": "Xray Core is up and running!",
-        "remnawave-will-try-to-reconnect-shortly": "Remnawave will try to reconnect shortly...",
-        "no-errros-so-far": "No errros so far",
-        "last-error-message": "Last error message"
+        "establishing-mtls-connection": "正在建立mTLS连接...",
+        "xray-core-is-up-and-running": "Xray 核心正在运行！",
+        "remnawave-will-try-to-reconnect-shortly": "Remnawave 将很快尝试重新连接...",
+        "no-errros-so-far": "到目前为止没有错误",
+        "last-error-message": "最后一个错误消息"
     }
 }
