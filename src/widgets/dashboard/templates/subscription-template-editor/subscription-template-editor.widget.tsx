@@ -60,7 +60,6 @@ export function SubscriptionTemplateEditorWidget(props: Props) {
             <Paper
                 mb="md"
                 p={0}
-                radius="xs"
                 style={{
                     resize: 'vertical',
                     overflow: 'hidden',

@@ -209,7 +209,6 @@ export function ConfigEditorWidget(props: IProps) {
                             indentation: true
                         },
                         insertSpaces: true,
-                        lineNumbersMinChars: 1,
                         minimap: { enabled: true },
                         quickSuggestions: true,
                         renderLineHighlight: 'all',

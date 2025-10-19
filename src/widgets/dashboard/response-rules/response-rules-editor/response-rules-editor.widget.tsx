@@ -177,7 +177,7 @@ export function ResponseRulesEditorWidget(props: IProps) {
                             indentation: true
                         },
                         insertSpaces: true,
-                        lineNumbersMinChars: 3,
+
                         minimap: { enabled: true },
                         quickSuggestions: true,
                         renderLineHighlight: 'all',

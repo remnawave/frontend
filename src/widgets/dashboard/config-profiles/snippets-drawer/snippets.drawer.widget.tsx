@@ -485,7 +485,6 @@ export const SnippetsDrawerWidget = () => {
 
                     <Paper
                         p={0}
-                        radius="xs"
                         style={{
                             border: createSnippetForm.getInputProps('snippet').error
                                 ? '1px solid var(--mantine-color-red-5)'
@@ -531,7 +530,7 @@ export const SnippetsDrawerWidget = () => {
                                     indentation: true
                                 },
                                 insertSpaces: true,
-                                lineNumbersMinChars: 1,
+
                                 minimap: { enabled: false },
                                 readOnly: isCreating,
                                 scrollBeyondLastLine: true,
@@ -620,7 +619,6 @@ export const SnippetsDrawerWidget = () => {
 
                     <Paper
                         p={0}
-                        radius="xs"
                         style={{
                             border: createSnippetForm.getInputProps('snippet').error
                                 ? '1px solid var(--mantine-color-red-5)'
@@ -667,7 +665,7 @@ export const SnippetsDrawerWidget = () => {
                                     indentation: true
                                 },
                                 insertSpaces: true,
-                                lineNumbersMinChars: 1,
+
                                 minimap: { enabled: false },
                                 readOnly: isUpdating,
                                 scrollBeyondLastLine: true,
