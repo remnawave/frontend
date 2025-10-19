@@ -147,6 +147,21 @@ export function ResponseRulesEditorWidget(props: IProps) {
                     onMount={(editor, monaco) => {
                         editorRef.current = editor
                         monacoRef.current = monaco
+
+                        const contribution = editor.getContribution(
+                            'editor.contrib.suggestController'
+                            /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
+                        ) as any
+
+                        if (contribution && contribution.widget) {
+                            const suggestWidget = contribution.widget.value
+                            if (suggestWidget?._setDetailsVisible) {
+                                suggestWidget._setDetailsVisible(true)
+                            }
+                            if (suggestWidget?._persistedSize) {
+                                suggestWidget._persistedSize.store({ width: 300, height: 300 })
+                            }
+                        }
                     }}
                     options={{
                         autoClosingBrackets: 'always',
