@@ -1,14 +1,15 @@
 import type { editor } from 'monaco-editor'
 
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { Box, Card, Code, Paper, Text } from '@mantine/core'
 import Editor, { Monaco } from '@monaco-editor/react'
-import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useBlocker } from 'react-router-dom'
 import { modals } from '@mantine/modals'
 
 import { ResponseRulesEditorActionsFeature } from '@features/dashboard/response-rules/response-rules-editor-actions'
 import { MonacoSetupResponseRulesFeature } from '@features/dashboard/config-profiles/monaco-setup'
+import { preventBackScroll } from '@shared/utils/misc'
 
 import styles from './ResponseRulesEditor.module.css'
 import { IProps } from './interfaces'
@@ -85,6 +86,15 @@ export function ResponseRulesEditorWidget(props: IProps) {
         setHasUnsavedChanges(hasChanges)
     }
 
+    useLayoutEffect(() => {
+        document.body.addEventListener('wheel', preventBackScroll, {
+            passive: false
+        })
+        return () => {
+            document.body.removeEventListener('wheel', preventBackScroll)
+        }
+    }, [])
+
     return (
         <Box>
             {result && (
@@ -116,7 +126,6 @@ export function ResponseRulesEditorWidget(props: IProps) {
             <Paper
                 mb="md"
                 p={0}
-                radius="xs"
                 style={{
                     resize: 'vertical',
                     overflow: 'visible',
@@ -149,6 +158,12 @@ export function ResponseRulesEditorWidget(props: IProps) {
                             independentColorPoolPerBracketType: true
                         },
                         scrollbar: {
+                            useShadows: false,
+                            verticalHasArrows: true,
+                            horizontalHasArrows: true,
+                            vertical: 'visible',
+                            horizontal: 'visible',
+                            arrowSize: 30,
                             alwaysConsumeMouseWheel: false
                         },
                         detectIndentation: true,
@@ -168,7 +183,11 @@ export function ResponseRulesEditorWidget(props: IProps) {
                         renderLineHighlight: 'all',
                         scrollBeyondLastLine: false,
                         smoothScrolling: true,
-                        tabSize: 2
+                        tabSize: 2,
+                        padding: {
+                            top: 10,
+                            bottom: 10
+                        }
                     }}
                     path="response-rules://*"
                     theme="GithubDark"

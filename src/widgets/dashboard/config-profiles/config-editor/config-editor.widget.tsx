@@ -1,9 +1,9 @@
 import type { editor } from 'monaco-editor'
 
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { GetSnippetsCommand } from '@remnawave/backend-contract'
 import { Box, Card, Code, Paper, Text } from '@mantine/core'
 import Editor, { Monaco } from '@monaco-editor/react'
-import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useBlocker } from 'react-router-dom'
 import { modals } from '@mantine/modals'
@@ -12,6 +12,7 @@ import { ConfigEditorActionsFeature } from '@features/dashboard/config-profiles/
 import { ConfigValidationFeature } from '@features/dashboard/config-profiles/config-validation'
 import { MonacoSetupFeature } from '@features/dashboard/config-profiles/monaco-setup'
 import { monacoTheme } from '@shared/constants/monaco-theme/monaco-theme'
+import { preventBackScroll } from '@shared/utils/misc'
 
 import styles from './ConfigEditor.module.css'
 import { IProps } from './interfaces'
@@ -104,6 +105,15 @@ export function ConfigEditorWidget(props: IProps) {
         setHasUnsavedChanges(hasChanges)
     }
 
+    useLayoutEffect(() => {
+        document.body.addEventListener('wheel', preventBackScroll, {
+            passive: false
+        })
+        return () => {
+            document.body.removeEventListener('wheel', preventBackScroll)
+        }
+    }, [])
+
     return (
         <Box>
             {result && (
@@ -135,7 +145,6 @@ export function ConfigEditorWidget(props: IProps) {
             <Paper
                 mb="md"
                 p={0}
-                radius="xs"
                 style={{
                     resize: 'vertical',
                     overflow: 'hidden',
@@ -181,6 +190,12 @@ export function ConfigEditorWidget(props: IProps) {
                             independentColorPoolPerBracketType: true
                         },
                         scrollbar: {
+                            useShadows: false,
+                            verticalHasArrows: true,
+                            horizontalHasArrows: true,
+                            vertical: 'visible',
+                            horizontal: 'visible',
+                            arrowSize: 30,
                             alwaysConsumeMouseWheel: false
                         },
                         detectIndentation: true,
@@ -200,7 +215,11 @@ export function ConfigEditorWidget(props: IProps) {
                         renderLineHighlight: 'all',
                         scrollBeyondLastLine: false,
                         smoothScrolling: true,
-                        tabSize: 2
+                        tabSize: 2,
+                        padding: {
+                            top: 10,
+                            bottom: 10
+                        }
                     }}
                     theme="GithubDark"
                     value={JSON.stringify(configProfile.config, null, 2)}

@@ -3,11 +3,12 @@ import { SUBSCRIPTION_TEMPLATE_TYPE } from '@remnawave/backend-contract'
 import Editor, { Monaco } from '@monaco-editor/react'
 import { Box, Card, Paper } from '@mantine/core'
 import 'monaco-yaml/yaml.worker.js'
+import { useLayoutEffect, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useRef } from 'react'
 
 import { TemplateEditorActionsFeature } from '@features/dashboard/subscription-templates/template-editor-actions'
 import { monacoTheme } from '@shared/constants/monaco-theme/monaco-theme'
+import { preventBackScroll } from '@shared/utils/misc'
 
 import { XrayJsonTemplateDescriptionWidget } from './xray-json-template-description.widget'
 import { configureMonaco } from './utils/setup-template-monaco'
@@ -40,6 +41,15 @@ export function SubscriptionTemplateEditorWidget(props: Props) {
         editorRef.current = editor
         monacoRef.current = monaco
     }
+
+    useLayoutEffect(() => {
+        document.body.addEventListener('wheel', preventBackScroll, {
+            passive: false
+        })
+        return () => {
+            document.body.removeEventListener('wheel', preventBackScroll)
+        }
+    }, [])
 
     return (
         <Box>
@@ -85,6 +95,12 @@ export function SubscriptionTemplateEditorWidget(props: Props) {
                             indentation: true
                         },
                         scrollbar: {
+                            useShadows: false,
+                            verticalHasArrows: true,
+                            horizontalHasArrows: true,
+                            vertical: 'visible',
+                            horizontal: 'visible',
+                            arrowSize: 30,
                             alwaysConsumeMouseWheel: false
                         },
                         smoothScrolling: true,
@@ -99,7 +115,8 @@ export function SubscriptionTemplateEditorWidget(props: Props) {
                             other: true
                         },
                         padding: {
-                            top: 33
+                            top: 10,
+                            bottom: 10
                         }
                     }}
                     theme="GithubDark"
