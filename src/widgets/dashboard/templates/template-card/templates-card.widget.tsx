@@ -4,6 +4,7 @@ import { PiCheck, PiCopy, PiPencil, PiTrashDuotone } from 'react-icons/pi'
 import { generatePath, useNavigate } from 'react-router-dom'
 import { TbChevronDown, TbEdit } from 'react-icons/tb'
 import { useDisclosure } from '@mantine/hooks'
+import { useTranslation } from 'react-i18next'
 import { motion } from 'framer-motion'
 import { ReactNode } from 'react'
 import clsx from 'clsx'
@@ -24,6 +25,8 @@ interface IProps {
 
 export function TemplatesCardWidget(props: IProps) {
     const { index, isHighCount, template, templateTitle, themeLogo, handleDeleteTemplate } = props
+
+    const { t } = useTranslation()
 
     const { open, setInternalData } = useModalsStore()
     const [opened, handlers] = useDisclosure(false)
@@ -113,7 +116,7 @@ export function TemplatesCardWidget(props: IProps) {
                             size="sm"
                             variant="light"
                         >
-                            Edit
+                            {t('templates-card.widget.edit')}
                         </Button>
                         <Menu
                             key={template.uuid}
@@ -155,7 +158,7 @@ export function TemplatesCardWidget(props: IProps) {
                                             }
                                             onClick={copy}
                                         >
-                                            Copy UUID
+                                            {t('templates-card.widget.copy-uuid')}
                                         </Menu.Item>
                                     )}
                                 </CopyButton>
@@ -174,7 +177,7 @@ export function TemplatesCardWidget(props: IProps) {
                                         open(MODALS.RENAME_SQUAD_OR_CONFIG_PROFILE_MODAL)
                                     }}
                                 >
-                                    Rename
+                                    {t('templates-card.widget.rename')}
                                 </Menu.Item>
 
                                 <Menu.Item
@@ -186,7 +189,7 @@ export function TemplatesCardWidget(props: IProps) {
                                         handleDeleteTemplate(template.uuid)
                                     }}
                                 >
-                                    Delete
+                                    {t('templates-card.widget.delete')}
                                 </Menu.Item>
                             </Menu.Dropdown>
                         </Menu>

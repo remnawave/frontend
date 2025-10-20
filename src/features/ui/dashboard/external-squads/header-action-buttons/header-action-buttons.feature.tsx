@@ -8,65 +8,54 @@ import {
     TextInput,
     Tooltip
 } from '@mantine/core'
-import {
-    CreateSubscriptionTemplateCommand,
-    TSubscriptionTemplateType
-} from '@remnawave/backend-contract'
-import { generatePath, useNavigate } from 'react-router-dom'
+import { CreateExternalSquadCommand } from '@remnawave/backend-contract'
 import { TbPlus, TbRefresh } from 'react-icons/tb'
 import { useDisclosure } from '@mantine/hooks'
 import { useTranslation } from 'react-i18next'
 import { useField } from '@mantine/form'
 
-import {
-    QueryKeys,
-    useCreateSubscriptionTemplate,
-    useGetSubscriptionTemplates
-} from '@shared/api/hooks'
-import { ROUTES } from '@shared/constants'
+import { QueryKeys, useCreateExternalSquad, useGetExternalSquads } from '@shared/api/hooks'
+import { MODALS, useModalsStore } from '@entities/dashboard/modal-store'
 import { queryClient } from '@shared/api'
 
-interface IProps {
-    templateType: TSubscriptionTemplateType
-}
-
-export const TemplatesHeaderActionButtonsFeature = (props: IProps) => {
-    const { templateType } = props
+export const ExternalSquadsHeaderActionButtonsFeature = () => {
+    const { isFetching } = useGetExternalSquads()
     const { t } = useTranslation()
 
-    const { isFetching } = useGetSubscriptionTemplates()
+    const { open: openModal, setInternalData } = useModalsStore()
 
     const [opened, { open, close }] = useDisclosure(false)
-    const navigate = useNavigate()
 
     const handleUpdate = async () => {
         await queryClient.refetchQueries({
-            queryKey: QueryKeys.subscriptionTemplate.getSubscriptionTemplates.queryKey
+            queryKey: QueryKeys.externalSquads.getExternalSquads.queryKey
         })
     }
 
-    const nameField = useField<CreateSubscriptionTemplateCommand.Request['name']>({
+    const nameField = useField<CreateExternalSquadCommand.Request['name']>({
         initialValue: '',
         validateOnChange: true,
         validate: (value) => {
-            const result = CreateSubscriptionTemplateCommand.RequestSchema.omit({
-                templateType: true
-            }).safeParse({ name: value, templateType })
+            const result = CreateExternalSquadCommand.RequestSchema.safeParse({ name: value })
             return result.success ? null : result.error.errors[0]?.message
         }
     })
-    const { mutate: createTemplate, isPending } = useCreateSubscriptionTemplate({
+
+    const { mutate: createExternalSquad, isPending } = useCreateExternalSquad({
         mutationFns: {
             onSuccess: (data) => {
                 close()
                 nameField.reset()
                 handleUpdate()
-                navigate(
-                    generatePath(ROUTES.DASHBOARD.TEMPLATES.TEMPLATE_EDITOR, {
-                        type: data.templateType,
-                        uuid: data.uuid
-                    })
-                )
+
+                setInternalData({
+                    internalState: data,
+                    modalKey: MODALS.EXTERNAL_SQUAD_DRAWER
+                })
+                openModal(MODALS.EXTERNAL_SQUAD_DRAWER)
+            },
+            onError: (error) => {
+                nameField.setError(error.message)
             }
         }
     })
@@ -74,7 +63,10 @@ export const TemplatesHeaderActionButtonsFeature = (props: IProps) => {
     return (
         <Group grow preventGrowOverflow={false} wrap="wrap">
             <ActionIconGroup>
-                <Tooltip label={t('header-action-buttons.feature.update-templates')} withArrow>
+                <Tooltip
+                    label={t('header-action-buttons.feature.update-external-squads')}
+                    withArrow
+                >
                     <ActionIcon
                         loading={isFetching}
                         onClick={handleUpdate}
@@ -87,7 +79,10 @@ export const TemplatesHeaderActionButtonsFeature = (props: IProps) => {
             </ActionIconGroup>
 
             <ActionIconGroup>
-                <Tooltip label={t('header-action-buttons.feature.create-new-template')} withArrow>
+                <Tooltip
+                    label={t('header-action-buttons.feature.create-new-external-squad')}
+                    withArrow
+                >
                     <ActionIcon color="teal" onClick={open} size="lg" variant="light">
                         <TbPlus size="18px" />
                     </ActionIcon>
@@ -99,15 +94,14 @@ export const TemplatesHeaderActionButtonsFeature = (props: IProps) => {
                 onClose={close}
                 opened={opened}
                 size="md"
-                title={t('header-action-buttons.feature.create-new-template')}
+                title={t('header-action-buttons.feature.create-new-external-squad')}
             >
                 <form
                     onSubmit={(e) => {
                         e.preventDefault()
-                        createTemplate({
+                        createExternalSquad({
                             variables: {
-                                name: nameField.getValue(),
-                                templateType
+                                name: nameField.getValue()
                             }
                         })
                     }}
@@ -115,17 +109,23 @@ export const TemplatesHeaderActionButtonsFeature = (props: IProps) => {
                     <Stack gap="md">
                         <TextInput
                             data-autofocus
-                            label={t('header-action-buttons.feature.template-name')}
-                            placeholder="My Mihomo template"
+                            label={t('header-action-buttons.feature.external-squad-name')}
+                            placeholder="My Awesome Squad"
                             required
                             {...nameField.getInputProps()}
                         />
                         <Group justify="flex-end">
-                            <Button color="gray" onClick={close} variant="light">
+                            <Button color="gray" onClick={close} variant="subtle">
                                 {t('header-action-buttons.feature.cancel')}
                             </Button>
 
-                            <Button color="teal" loading={isPending} type="submit">
+                            <Button
+                                color="teal"
+                                disabled={!!nameField.error || nameField.getValue().length === 0}
+                                loading={isPending}
+                                type="submit"
+                                variant="light"
+                            >
                                 {t('header-action-buttons.feature.create')}
                             </Button>
                         </Group>

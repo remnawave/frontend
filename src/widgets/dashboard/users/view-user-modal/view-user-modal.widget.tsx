@@ -20,17 +20,18 @@ import {
     UserIdentificationCard
 } from '@shared/ui/forms/users/forms-components'
 import {
-    useUserModalStoreActions,
-    useUserModalStoreIsModalOpen,
-    useUserModalStoreUserUuid
-} from '@entities/dashboard/user-modal-store/user-modal-store'
-import {
+    useGetExternalSquads,
     useGetInternalSquads,
     useGetUserByUuid,
     useGetUserTags,
     usersQueryKeys,
     useUpdateUser
 } from '@shared/api/hooks'
+import {
+    useUserModalStoreActions,
+    useUserModalStoreIsModalOpen,
+    useUserModalStoreUserUuid
+} from '@entities/dashboard/user-modal-store/user-modal-store'
 import { GetUserSubscriptionRequestHistoryFeature } from '@features/ui/dashboard/users/get-user-subscription-request-history'
 import { GetUserSubscriptionLinksFeature } from '@features/ui/dashboard/users/get-user-subscription-links'
 import { ToggleUserStatusButtonFeature } from '@features/ui/dashboard/users/toggle-user-status-button'
@@ -82,6 +83,7 @@ export const ViewUserModal = () => {
     const { open: openModal, setInternalData } = useModalsStore()
 
     const { data: internalSquads } = useGetInternalSquads()
+    const { data: externalSquads } = useGetExternalSquads()
 
     const form = useForm<UpdateUserCommand.Request>({
         name: 'edit-user-form',
@@ -166,7 +168,8 @@ export const ViewUserModal = () => {
                 telegramId: user.telegramId ?? undefined,
                 email: user.email ?? undefined,
                 hwidDeviceLimit: user.hwidDeviceLimit ?? undefined,
-                tag: user.tag ?? undefined
+                tag: user.tag ?? undefined,
+                externalSquadUuid: user.externalSquadUuid ?? undefined
             })
         }
     }, [user, internalSquads])
@@ -201,7 +204,10 @@ export const ViewUserModal = () => {
                 // @ts-expect-error - TODO: fix ZOD schema
                 hwidDeviceLimit: values.hwidDeviceLimit === '' ? null : values.hwidDeviceLimit,
                 // eslint-disable-next-line no-nested-ternary
-                tag: dirtyFields.tag ? (values.tag === '' ? null : values.tag) : undefined
+                tag: dirtyFields.tag ? (values.tag === '' ? null : values.tag) : undefined,
+                externalSquadUuid: dirtyFields.externalSquadUuid
+                    ? values.externalSquadUuid
+                    : undefined
             }
         })
     })
@@ -280,6 +286,7 @@ export const ViewUserModal = () => {
                                 />
                                 <AccessSettingsCard
                                     cardVariants={cardVariants}
+                                    externalSquads={externalSquads}
                                     form={form}
                                     internalSquads={internalSquads}
                                     motionWrapper={MotionWrapper}
@@ -339,6 +346,7 @@ export const ViewUserModal = () => {
                                     />
                                     <AccessSettingsCard
                                         cardVariants={cardVariants}
+                                        externalSquads={externalSquads}
                                         form={form}
                                         internalSquads={internalSquads}
                                         motionWrapper={MotionWrapper}

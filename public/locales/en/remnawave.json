@@ -20,6 +20,7 @@
         "subscription-page-builder": "Sub Page Builder",
         "config-profiles": "Config Profiles",
         "internal-squads": "Internal Squads",
+        "external-squads": "External Squads",
         "infra-billing": "Infra Billing",
         "hwid-inspector": "HWID Inspector",
         "tools": "Tools",
@@ -136,7 +137,15 @@
     "header-action-buttons": {
         "feature": {
             "create-new-host": "Create new host",
-            "update": "Update"
+            "update": "Update",
+            "update-external-squads": "Update external squads",
+            "create-new-external-squad": "Create new external squad",
+            "external-squad-name": "External Squad Name",
+            "cancel": "Cancel",
+            "create": "Create",
+            "update-templates": "Update templates",
+            "create-new-template": "Create new template",
+            "template-name": "Template name"
         }
     },
     "delete-node": {
@@ -1421,7 +1430,10 @@
         }
     },
     "access-settings-card": {
-        "access-settings": "Access Settings"
+        "access-settings": "Access Settings",
+        "select-an-external-squad-to-apply-custom-settings-to-this-user": "Select an external squad to apply custom settings to this user.",
+        "external-squad": "External Squad",
+        "select-an-external-squad": "Select an external squad..."
     },
     "device-tag-settings-card": {
         "device-and-tag-settings": "Device & Tag Settings"
@@ -1730,5 +1742,65 @@
         "remnawave-will-try-to-reconnect-shortly": "Remnawave will try to reconnect shortly...",
         "no-errros-so-far": "No errros so far",
         "last-error-message": "Last error message"
+    },
+    "external-squad-card": {
+        "widget": {
+            "users": "Users",
+            "edit": "Edit",
+            "add-users": "Add users",
+            "remove-users": "Remove users",
+            "copy-uuid": "Copy UUID",
+            "rename": "Rename",
+            "delete": "Delete"
+        }
+    },
+    "internal-squads-with-store": {
+        "drawer": {
+            "widget": {
+                "users": "Users"
+            }
+        }
+    },
+    "external-squads": {
+        "drawer": {
+            "widget": {
+                "subscription-templates": "Subscription Templates",
+                "subscription-templates-description-line-1": "Select one template for each subscription type. If not selected, the default template will be used automatically.",
+                "subscription-templates-description-line-2": "Please note, Response Rules have a higher priority.",
+                "select-a-template": "Select a template",
+                "default-template-in-use": "Default template in use...",
+                "save": "Save",
+                "edit-external-squad": "Edit external squad"
+            }
+        },
+        "page": {
+            "component": {
+                "list-of-all-external-squads": "List of all external squads"
+            }
+        }
+    },
+    "external-squads-grid": {
+        "widget": {
+            "confirm-deletion": "Confirm deletion",
+            "confirm-deletion-decription-1": "Are you sure you want to perform this action? This action cannot be undone.",
+            "delete": "Delete",
+            "cancel": "Cancel",
+            "confirm-action": "Confirm action",
+            "confirm-action-description-2": "Are you sure you want to perform this action? This action cannot be undone.",
+            "remove": "Remove",
+            "add": "Add",
+            "no-external-squads": "No external squads",
+            "no-external-squads-line-1": "External squads allow you to customize settings for specific groups of users.",
+            "no-external-squads-line-2": "You can override default subscription templates and other settings for each squad.",
+            "no-external-squads-line-3": "Create a squad and assign users to apply custom configurations."
+        }
+    },
+    "templates-card": {
+        "widget": {
+            "edit": "Edit",
+            "copy-uuid": "Copy UUID",
+            "rename": "Rename",
+            "delete": "Delete"
+        }
     }
 }

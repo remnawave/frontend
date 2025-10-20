@@ -15,7 +15,8 @@ import {
     TbCirclesRelation,
     TbDeviceAnalytics,
     TbReportAnalytics,
-    TbRoute
+    TbRoute,
+    TbWebhook
 } from 'react-icons/tb'
 import { SUBSCRIPTION_TEMPLATE_TYPE } from '@remnawave/backend-contract'
 import { HiChartPie, HiCurrencyDollar, HiServer } from 'react-icons/hi'
@@ -58,6 +59,11 @@ export const useMenuSections = (): MenuItem[] => {
                     name: t('constants.internal-squads'),
                     href: ROUTES.DASHBOARD.MANAGEMENT.INTERNAL_SQUADS,
                     icon: TbCirclesRelation
+                },
+                {
+                    name: t('constants.external-squads'),
+                    href: ROUTES.DASHBOARD.MANAGEMENT.EXTERNAL_SQUADS,
+                    icon: TbWebhook
                 },
                 {
                     name: t('constants.config-profiles'),

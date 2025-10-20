@@ -1,5 +1,6 @@
 import {
     GetConfigProfilesCommand,
+    GetExternalSquadsCommand,
     GetInfraProvidersCommand,
     GetInternalSquadsCommand
 } from '@remnawave/backend-contract'
@@ -7,6 +8,7 @@ import {
 export const MODALS = {
     CONFIG_PROFILES_SHOW_ACTIVE_NODE: 'CONFIG_PROFILES_SHOW_ACTIVE_NODE',
     INTERNAL_SQUAD_SHOW_INBOUNDS: 'INTERNAL_SQUAD_SHOW_INBOUNDS',
+    EXTERNAL_SQUAD_DRAWER: 'EXTERNAL_SQUAD_DRAWER',
     USER_ACCESSIBLE_NODES_DRAWER: 'USER_ACCESSIBLE_NODES_DRAWER',
     VIEW_INFRA_PROVIDER_DRAWER: 'VIEW_INFRA_PROVIDER_DRAWER',
     CREATE_INFRA_PROVIDER_DRAWER: 'CREATE_INFRA_PROVIDER_DRAWER',
@@ -32,6 +34,7 @@ export interface ModalInternalStates {
     EDIT_NODE_BY_UUID_MODAL: {
         nodeUuid: string
     }
+    EXTERNAL_SQUAD_DRAWER: GetExternalSquadsCommand.Response['response']['externalSquads'][number]
     INTERNAL_SQUAD_ACCESSIBLE_NODES_DRAWER: {
         squadUuid: string
     }

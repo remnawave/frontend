@@ -1,5 +1,6 @@
 import {
     UpdateConfigProfileCommand,
+    UpdateExternalSquadCommand,
     UpdateInternalSquadCommand,
     UpdateSubscriptionTemplateCommand
 } from '@remnawave/backend-contract'
@@ -11,13 +12,14 @@ import { useField } from '@mantine/form'
 import {
     QueryKeys,
     useUpdateConfigProfile,
+    useUpdateExternalSquad,
     useUpdateInternalSquad,
     useUpdateSubscriptionTemplate
 } from '@shared/api/hooks'
 import { MODALS, useModalsStore } from '@entities/dashboard/modal-store'
 import { queryClient } from '@shared/api/query-client'
 
-type RenameType = 'configProfile' | 'internalSquad' | 'template'
+type RenameType = 'configProfile' | 'externalSquad' | 'internalSquad' | 'template'
 
 interface IProps {
     renameFrom: RenameType
@@ -44,6 +46,12 @@ export function RenameModalShared({ renameFrom }: IProps) {
 
                 if (renameFrom === 'internalSquad') {
                     return UpdateInternalSquadCommand.RequestSchema.omit({ uuid: true }).safeParse({
+                        name: value
+                    })
+                }
+
+                if (renameFrom === 'externalSquad') {
+                    return UpdateExternalSquadCommand.RequestSchema.omit({ uuid: true }).safeParse({
                         name: value
                     })
                 }
@@ -87,6 +95,18 @@ export function RenameModalShared({ renameFrom }: IProps) {
             }
         })
 
+    const { mutate: updateExternalSquad, isPending: isUpdatingExternalSquad } =
+        useUpdateExternalSquad({
+            mutationFns: {
+                onSuccess: () => {
+                    queryClient.refetchQueries({
+                        queryKey: QueryKeys.externalSquads.getExternalSquads.queryKey
+                    })
+                    handleModalClose()
+                }
+            }
+        })
+
     const { mutate: updateTemplate, isPending: isUpdatingTemplate } = useUpdateSubscriptionTemplate(
         {
             mutationFns: {
@@ -107,6 +127,15 @@ export function RenameModalShared({ renameFrom }: IProps) {
             if (!internalState) return
 
             updateInternalSquad({
+                variables: {
+                    uuid: internalState.uuid,
+                    name: nameField.getValue()
+                }
+            })
+        } else if (renameFrom === 'externalSquad') {
+            if (!internalState) return
+
+            updateExternalSquad({
                 variables: {
                     uuid: internalState.uuid,
                     name: nameField.getValue()
@@ -133,7 +162,11 @@ export function RenameModalShared({ renameFrom }: IProps) {
         }
     }
 
-    const isLoading = isUpdatingInternalSquad || isUpdatingConfigProfile || isUpdatingTemplate
+    const isLoading =
+        isUpdatingInternalSquad ||
+        isUpdatingConfigProfile ||
+        isUpdatingTemplate ||
+        isUpdatingExternalSquad
 
     return (
         <Modal

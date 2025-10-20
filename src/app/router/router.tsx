@@ -18,6 +18,7 @@ import { NodesBandwidthTablePageConnector } from '@pages/dashboard/nodes-bandwid
 import { SubscriptionSettingsConnector } from '@pages/dashboard/subscription-settings/connectors'
 import { HwidInspectorPageConnector } from '@pages/dashboard/hwid-inspector/ui/connectors'
 import { ConfigProfilesPageConnector } from '@pages/dashboard/config-profiles/connectors'
+import { ExternalSquadsPageConnector } from '@pages/dashboard/external-squads/connectors'
 import { NodesMetricsPageConnector } from '@pages/dashboard/nodes-metrics/ui/connectors'
 import { SrhInspectorPageConnector } from '@pages/dashboard/srh-inspector/ui/connectors'
 import { StatisticNodesConnector } from '@pages/dashboard/statistic-nodes/connectors'
@@ -100,6 +101,11 @@ const router = createBrowserRouter(
                             element={<InternalSquadsPageConnector />}
                             path={ROUTES.DASHBOARD.MANAGEMENT.INTERNAL_SQUADS}
                         />
+                        <Route
+                            element={<ExternalSquadsPageConnector />}
+                            path={ROUTES.DASHBOARD.MANAGEMENT.EXTERNAL_SQUADS}
+                        />
+
                         <Route
                             element={<NodesMetricsPageConnector />}
                             path={ROUTES.DASHBOARD.MANAGEMENT.NODES_METRICS}
