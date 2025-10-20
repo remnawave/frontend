@@ -13,7 +13,7 @@ import cx from 'clsx'
 import { useHostsStoreActions, useHostsStoreFilters } from '@entities/dashboard'
 import { resolveCountryCode } from '@shared/utils/misc/resolve-country-code'
 import { SEARCH_PARAMS } from '@shared/constants/search-params'
-import { XtlsLogo } from '@shared/ui/logos/xtls-logo'
+import { XrayLogo } from '@shared/ui/logos'
 
 import classes from './HostCard.module.css'
 import { IProps } from './interfaces'
@@ -194,7 +194,7 @@ export function HostCardWidget(props: IProps) {
                                     color={configProfile?.uuid ? ch.hex(configProfile.uuid) : 'red'}
                                     leftSection={
                                         configProfile?.uuid ? (
-                                            <XtlsLogo size={12} />
+                                            <XrayLogo size={12} />
                                         ) : (
                                             <TbAlertCircle size={12} />
                                         )
@@ -378,7 +378,7 @@ export function HostCardWidget(props: IProps) {
                                 color={configProfile?.uuid ? ch.hex(configProfile.uuid) : 'red'}
                                 leftSection={
                                     configProfile?.uuid ? (
-                                        <XtlsLogo size={12} />
+                                        <XrayLogo size={12} />
                                     ) : (
                                         <TbAlertCircle size={12} />
                                     )

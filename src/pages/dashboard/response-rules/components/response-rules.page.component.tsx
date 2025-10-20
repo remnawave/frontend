@@ -1,4 +1,7 @@
-import { GetSubscriptionSettingsCommand } from '@remnawave/backend-contract'
+import {
+    GetSubscriptionSettingsCommand,
+    TSubscriptionTemplateType
+} from '@remnawave/backend-contract'
 import { useTranslation } from 'react-i18next'
 import { Box, Flex } from '@mantine/core'
 
@@ -8,12 +11,13 @@ import { PageHeader } from '@shared/ui'
 import { Page } from '@shared/ui/page'
 
 interface Props {
+    groupedTemplates: Record<TSubscriptionTemplateType, string[]>
     responseRules: GetSubscriptionSettingsCommand.Response['response']['responseRules']
     subscriptionSettingsUuid: string
 }
 
 export const ResponseRulesPageComponent = (props: Props) => {
-    const { responseRules, subscriptionSettingsUuid } = props
+    const { groupedTemplates, responseRules, subscriptionSettingsUuid } = props
 
     const { t } = useTranslation()
 
@@ -39,6 +43,7 @@ export const ResponseRulesPageComponent = (props: Props) => {
             <Flex gap="md">
                 <Box style={{ flex: 1, minWidth: 0 }}>
                     <ResponseRulesEditorWidget
+                        groupedTemplates={groupedTemplates}
                         responseRules={responseRules}
                         subscriptionSettingsUuid={subscriptionSettingsUuid}
                     />

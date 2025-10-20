@@ -21,7 +21,7 @@ import { motion } from 'framer-motion'
 import { memo, useMemo } from 'react'
 
 import { QueryKeys, useDisableNode, useEnableNode } from '@shared/api/hooks'
-import { XtlsLogo } from '@shared/ui/logos/xtls-logo'
+import { XrayLogo } from '@shared/ui/logos'
 import { queryClient } from '@shared/api'
 import { Logo } from '@shared/ui'
 
@@ -316,7 +316,7 @@ export const NodeDetailsCardWidget = memo(({ node, fetchedNode }: IProps) => {
                             >
                                 <Tooltip label={t('node-details-card.widget.xray-core-version')}>
                                     <Group gap="xs" justify="center">
-                                        <XtlsLogo color="var(--mantine-color-violet-4)" size={18} />
+                                        <XrayLogo color="var(--mantine-color-violet-4)" size={18} />
                                         <Text c="violet.4" fw={600} size="sm">
                                             {nodeData.xrayVersion || 'N/A'}
                                         </Text>

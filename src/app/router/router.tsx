@@ -5,7 +5,6 @@ import {
     Route,
     RouterProvider
 } from 'react-router-dom'
-import { SUBSCRIPTION_TEMPLATE_TYPE } from '@remnawave/backend-contract'
 
 import { SubscriptionPageBuilderConnector } from '@pages/dashboard/utils/subscription-page-builder/ui/connectors/subscription-page-builder.page.connector'
 import { HappRoutingBuilderPageConnector } from '@pages/dashboard/utils/happ-routing-builder/ui/connectors/happ-routing-builder.page.connector'
@@ -13,6 +12,7 @@ import { ConfigProfileByUuidPageConnector } from '@pages/dashboard/config-profil
 import { InternalSquadsPageConnector } from '@pages/dashboard/internal-squads/connectors/internal-squads.page.connector'
 import { InfraBillingPageConnector } from '@pages/dashboard/crm/infra-billing/connectors/infra-billing.page.connector'
 import { ResponseRulesPageConnector } from '@pages/dashboard/response-rules/connectors/response-rules.page.connector'
+import { TemplateEditorPageConnector } from '@pages/dashboard/templates/ui/connectors/template-editor-page.connector'
 import { TemplateBasePageConnector } from '@pages/dashboard/templates/ui/connectors/template-base-page.connector'
 import { NodesBandwidthTablePageConnector } from '@pages/dashboard/nodes-bandwidth-table/ui/connectors'
 import { SubscriptionSettingsConnector } from '@pages/dashboard/subscription-settings/connectors'
@@ -123,54 +123,13 @@ const router = createBrowserRouter(
 
                     <Route path={ROUTES.DASHBOARD.TEMPLATES.ROOT}>
                         <Route
-                            element={
-                                <TemplateBasePageConnector
-                                    language="yaml"
-                                    templateType={SUBSCRIPTION_TEMPLATE_TYPE.MIHOMO}
-                                    title="Mihomo"
-                                />
-                            }
-                            path={ROUTES.DASHBOARD.TEMPLATES.MIHOMO}
+                            element={<TemplateBasePageConnector />}
+                            path={ROUTES.DASHBOARD.TEMPLATES.TEMPLATES_BY_TYPE}
                         />
+
                         <Route
-                            element={
-                                <TemplateBasePageConnector
-                                    language="yaml"
-                                    templateType={SUBSCRIPTION_TEMPLATE_TYPE.STASH}
-                                    title="Stash"
-                                />
-                            }
-                            path={ROUTES.DASHBOARD.TEMPLATES.STASH}
-                        />
-                        <Route
-                            element={
-                                <TemplateBasePageConnector
-                                    language="json"
-                                    templateType={SUBSCRIPTION_TEMPLATE_TYPE.SINGBOX}
-                                    title="Singbox"
-                                />
-                            }
-                            path={ROUTES.DASHBOARD.TEMPLATES.SINGBOX}
-                        />
-                        <Route
-                            element={
-                                <TemplateBasePageConnector
-                                    language="json"
-                                    templateType={SUBSCRIPTION_TEMPLATE_TYPE.XRAY_JSON}
-                                    title="Xray JSON"
-                                />
-                            }
-                            path={ROUTES.DASHBOARD.TEMPLATES.XRAY_JSON}
-                        />
-                        <Route
-                            element={
-                                <TemplateBasePageConnector
-                                    language="yaml"
-                                    templateType={SUBSCRIPTION_TEMPLATE_TYPE.CLASH}
-                                    title="Clash"
-                                />
-                            }
-                            path={ROUTES.DASHBOARD.TEMPLATES.CLASH}
+                            element={<TemplateEditorPageConnector />}
+                            path={ROUTES.DASHBOARD.TEMPLATES.TEMPLATE_EDITOR}
                         />
                     </Route>
 

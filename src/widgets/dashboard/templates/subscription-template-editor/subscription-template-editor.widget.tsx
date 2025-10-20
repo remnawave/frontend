@@ -1,8 +1,12 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { SUBSCRIPTION_TEMPLATE_TYPE } from '@remnawave/backend-contract'
+import type { editor } from 'monaco-editor'
+
+import {
+    GetSubscriptionTemplateCommand,
+    SUBSCRIPTION_TEMPLATE_TYPE
+} from '@remnawave/backend-contract'
 import Editor, { Monaco } from '@monaco-editor/react'
-import { Box, Card, Paper } from '@mantine/core'
 import 'monaco-yaml/yaml.worker.js'
+import { Box, Card, Paper } from '@mantine/core'
 import { useLayoutEffect, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 
@@ -13,20 +17,26 @@ import { preventBackScroll } from '@shared/utils/misc'
 import { XrayJsonTemplateDescriptionWidget } from './xray-json-template-description.widget'
 import { configureMonaco } from './utils/setup-template-monaco'
 import styles from './SubscriptionTemplateEditor.module.css'
-import { Props } from './interfaces'
+
+interface Props {
+    editorType: 'json' | 'yaml'
+    template: GetSubscriptionTemplateCommand.Response['response']
+}
 
 export function SubscriptionTemplateEditorWidget(props: Props) {
     const { t } = useTranslation()
-    const { encodedTemplateYaml, templateType, language, templateJson } = props
+    const { editorType, template } = props
 
-    const editorRef = useRef<unknown>(null)
-    const monacoRef = useRef<unknown>(null)
+    const editorRef = useRef<editor.IStandaloneCodeEditor | null>(null)
+    const monacoRef = useRef<Monaco | null>(null)
 
     const getConfig = () => {
-        if (language === 'yaml') {
-            return encodedTemplateYaml ? Buffer.from(encodedTemplateYaml, 'base64').toString() : ''
+        if (editorType === 'yaml') {
+            return template.encodedTemplateYaml
+                ? Buffer.from(template.encodedTemplateYaml, 'base64').toString()
+                : ''
         }
-        return JSON.stringify(templateJson, null, 2)
+        return JSON.stringify(template.templateJson, null, 2)
     }
 
     const handleEditorWillMount = (monaco: Monaco) => {
@@ -34,10 +44,10 @@ export function SubscriptionTemplateEditorWidget(props: Props) {
             ...monacoTheme,
             base: 'vs-dark'
         })
-        configureMonaco(monaco, language)
+        configureMonaco(monaco, editorType)
     }
 
-    const handleEditorDidMount = (editor: any, monaco: Monaco) => {
+    const handleEditorDidMount = (editor: editor.IStandaloneCodeEditor, monaco: Monaco) => {
         editorRef.current = editor
         monacoRef.current = monaco
     }
@@ -53,7 +63,7 @@ export function SubscriptionTemplateEditorWidget(props: Props) {
 
     return (
         <Box>
-            {templateType === SUBSCRIPTION_TEMPLATE_TYPE.XRAY_JSON && (
+            {template.templateType === SUBSCRIPTION_TEMPLATE_TYPE.XRAY_JSON && (
                 <XrayJsonTemplateDescriptionWidget />
             )}
 
@@ -71,7 +81,7 @@ export function SubscriptionTemplateEditorWidget(props: Props) {
                 <Editor
                     beforeMount={handleEditorWillMount}
                     className={styles.monacoEditor}
-                    defaultLanguage={language}
+                    defaultLanguage={editorType}
                     loading={t('config-editor.widget.loading-editor')}
                     onMount={handleEditorDidMount}
                     options={{
@@ -126,9 +136,8 @@ export function SubscriptionTemplateEditorWidget(props: Props) {
             <Card className={styles.footer} h="auto" m="0" mt="md" pos="sticky">
                 <TemplateEditorActionsFeature
                     editorRef={editorRef}
-                    language={language}
-                    monacoRef={monacoRef}
-                    templateType={templateType}
+                    editorType={editorType}
+                    template={template}
                 />
             </Card>
         </Box>

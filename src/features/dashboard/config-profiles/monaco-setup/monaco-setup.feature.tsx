@@ -1,4 +1,8 @@
-import { GetSnippetsCommand, ResponseRulesConfigSchema } from '@remnawave/backend-contract'
+import {
+    GetSnippetsCommand,
+    ResponseRulesConfigSchema,
+    TSubscriptionTemplateType
+} from '@remnawave/backend-contract'
 import zodToJsonSchema, { jsonDescription } from 'zod-to-json-schema'
 import { Monaco } from '@monaco-editor/react'
 import consola from 'consola'
@@ -136,7 +140,10 @@ export const MonacoSetupSnippetsFeature = {
 }
 
 export const MonacoSetupResponseRulesFeature = {
-    setup: async (monaco: Monaco) => {
+    setup: async (
+        monaco: Monaco,
+        groupedTemplates: Record<TSubscriptionTemplateType, string[]>
+    ) => {
         try {
             const schema = zodToJsonSchema(ResponseRulesConfigSchema, {
                 name: 'Response Rules Config Schema',
@@ -144,6 +151,95 @@ export const MonacoSetupResponseRulesFeature = {
                 errorMessages: true,
                 postProcess: jsonDescription
             })
+
+            const templateOptions = {
+                BROWSER: [],
+                BLOCK: [],
+                STATUS_CODE_404: [],
+                STATUS_CODE_451: [],
+                SOCKET_DROP: [],
+                ...groupedTemplates
+            }
+
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            const schemaDefinitions = (schema as any).definitions?.['Response Rules Config Schema']
+            const rulesItems = schemaDefinitions?.properties?.rules?.items
+
+            if (rulesItems) {
+                if (!rulesItems.allOf) {
+                    rulesItems.allOf = []
+                }
+
+                Object.entries(templateOptions).forEach(([responseType, templates]) => {
+                    if (templates.length > 0) {
+                        rulesItems.allOf.push({
+                            if: {
+                                properties: {
+                                    responseType: { const: responseType }
+                                },
+                                required: ['responseType']
+                            },
+                            then: {
+                                properties: {
+                                    responseModifications: {
+                                        properties: {
+                                            subscriptionTemplate: {
+                                                enum: templates,
+                                                markdownDescription: `Available templates for **${responseType}** response type.`,
+                                                markdownEnumDescriptions: templates.map(
+                                                    (t) => `Use ${t} template`
+                                                )
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        })
+                    } else {
+                        rulesItems.allOf.push({
+                            if: {
+                                properties: {
+                                    responseType: { const: responseType }
+                                },
+                                required: ['responseType']
+                            },
+                            then: {
+                                properties: {
+                                    responseModifications: {
+                                        properties: {
+                                            overrideSubscriptionTemplateWith: {
+                                                type: 'null',
+                                                not: { type: 'string' },
+                                                markdownDescription: `⚠️ No templates available for **${responseType}** response type. This field should not be used.`
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        })
+                    }
+                })
+                //     } else {
+                //         rulesItems.allOf.push({
+                //             if: {
+                //                 properties: {
+                //                     responseType: { const: responseType }
+                //                 },
+                //                 required: ['responseType']
+                //             },
+                //             then: {
+                //                 properties: {
+                //                     responseModifications: {
+                //                         properties: {
+                //                             overrideSubscriptionTemplateWith: false
+                //                         }
+                //                     }
+                //                 }
+                //             }
+                //         })
+                //     }
+                // })
+            }
 
             monaco.languages.json.jsonDefaults.setDiagnosticsOptions({
                 schemaValidation: 'error',

@@ -13,7 +13,7 @@ import { TbChartBar } from 'react-icons/tb'
 
 import { getNodeResetDaysUtil, getXrayUptimeUtil } from '@shared/utils/time-utils'
 import { prettyBytesToAnyUtil } from '@shared/utils/bytes'
-import { XtlsLogo } from '@shared/ui/logos/xtls-logo'
+import { XrayLogo } from '@shared/ui/logos'
 
 interface IProps<T extends CreateNodeCommand.Request | UpdateNodeCommand.Request> {
     cardVariants: Variants
@@ -89,7 +89,7 @@ export const NodeStatsCard = <T extends CreateNodeCommand.Request | UpdateNodeCo
                             >
                                 <Badge
                                     color="white"
-                                    leftSection={<XtlsLogo height={14} width={14} />}
+                                    leftSection={<XrayLogo size={14} />}
                                     size="md"
                                     variant="outline"
                                 >

@@ -1,0 +1,192 @@
+.cardWrapper {
+    height: 100%;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(
+        135deg,
+        var(--mantine-color-dark-6) 0%,
+        var(--mantine-color-dark-7) 50%,
+        var(--mantine-color-dark-8) 100%
+    );
+    border-color: var(--mantine-color-dark-4);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    min-height: 120px;
+}
+
+@media (max-width: 48em) {
+    .card {
+        min-height: 180px;
+    }
+}
+
+.cardWrapper:hover .card {
+    box-shadow:
+        0 20px 25px -5px rgba(0, 0, 0, 0.3),
+        0 10px 10px -5px rgba(0, 0, 0, 0.2),
+        0 0 0 1px var(--mantine-color-teal-5),
+        0 0 30px -5px rgba(20, 184, 166, 0.3);
+    border-color: var(--mantine-color-teal-6);
+}
+
+.cardWrapper.inactive:hover .card {
+    box-shadow:
+        0 20px 25px -5px rgba(0, 0, 0, 0.3),
+        0 10px 10px -5px rgba(0, 0, 0, 0.2),
+        0 0 0 1px var(--mantine-color-gray-6),
+        0 0 30px -5px rgba(108, 117, 125, 0.2);
+    border-color: var(--mantine-color-gray-6);
+}
+
+.topAccent {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(
+        90deg,
+        var(--mantine-color-teal-6) 0%,
+        var(--mantine-color-cyan-5) 50%,
+        var(--mantine-color-teal-6) 100%
+    );
+    z-index: 2;
+}
+
+.inactiveTopAccent {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(
+        90deg,
+        var(--mantine-color-gray-6) 0%,
+        var(--mantine-color-gray-5) 50%,
+        var(--mantine-color-gray-6) 100%
+    );
+    z-index: 2;
+}
+
+.glowEffect {
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at center, rgba(20, 184, 166, 0.1) 0%, transparent 50%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.cardWrapper:hover .glowEffect {
+    opacity: 1;
+}
+
+.cardWrapper.inactive .glowEffect {
+    background: radial-gradient(circle at center, rgba(108, 117, 125, 0.08) 0%, transparent 50%);
+}
+
+.cardWrapper.inactive:hover .glowEffect {
+    opacity: 1;
+}
+
+.iconWrapper {
+    position: relative;
+}
+
+.icon {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+}
+
+.cardWrapper:hover .icon {
+    transform: scale(1.1);
+}
+
+.title {
+    color: white;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    transition: color 0.2s ease;
+    line-height: 1.3;
+}
+
+.cardWrapper:hover .title {
+    color: var(--mantine-color-teal-4);
+}
+
+.cardWrapper.inactive:hover .title {
+    color: var(--mantine-color-gray-4);
+}
+
+.subtitle {
+    transition: color 0.2s ease;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-family: 'Unbounded', sans-serif;
+}
+
+.cardWrapper:hover .subtitle {
+    color: var(--mantine-color-teal-6);
+}
+
+.cardWrapper.inactive:hover .subtitle {
+    color: var(--mantine-color-gray-6);
+}
+
+.uuidText {
+    font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Code', 'Consolas', monospace;
+    font-size: 10px;
+    letter-spacing: -0.2px;
+}
+
+.infoSection {
+    padding: 8px 12px;
+    border-radius: 6px;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--mantine-color-dark-5);
+    transition: all 0.2s ease;
+}
+
+.cardWrapper:hover .infoSection {
+    background: rgba(20, 184, 166, 0.08);
+    border-color: var(--mantine-color-teal-9);
+}
+
+.cardWrapper.inactive:hover .infoSection {
+    background: rgba(108, 117, 125, 0.08);
+    border-color: var(--mantine-color-gray-7);
+}
+
+.button {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.menuControl {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border: 0;
+    border-left: 2px solid var(--mantine-color-body);
+    transition: all 0.2s ease;
+}
+
+.menuControlIcon {
+    transition: transform 0.2s ease;
+}
+
+.menuControlIconOpen {
+    transform: rotate(180deg);
+}
+
+.menuControlIconClosed {
+    transform: rotate(0deg);
+}

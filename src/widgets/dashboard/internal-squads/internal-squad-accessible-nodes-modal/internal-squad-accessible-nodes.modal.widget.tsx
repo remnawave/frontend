@@ -23,7 +23,7 @@ import ColorHash from 'color-hash'
 
 import { MODALS, useModalsStore } from '@entities/dashboard/modal-store'
 import { useGetInternalSquadAccessibleNodes } from '@shared/api/hooks'
-import { XtlsLogo } from '@shared/ui/logos/xtls-logo'
+import { XrayLogo } from '@shared/ui/logos'
 
 interface CustomTreeNodeData extends TreeNodeData {
     configProfileColor?: string
@@ -159,7 +159,7 @@ export const InternalSquadAccessibleNodesModalWidget = () => {
                                     <Badge
                                         autoContrast
                                         color={node.configProfileColor}
-                                        leftSection={<XtlsLogo size={20} />}
+                                        leftSection={<XrayLogo size={20} />}
                                         size="md"
                                         variant="light"
                                     >

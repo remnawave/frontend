@@ -17,7 +17,7 @@ import { IProps } from './interfaces'
 export function ResponseRulesEditorWidget(props: IProps) {
     const { t } = useTranslation()
 
-    const { responseRules, subscriptionSettingsUuid } = props
+    const { groupedTemplates, responseRules, subscriptionSettingsUuid } = props
 
     const [result, setResult] = useState('')
     const [isConfigValid, setIsConfigValid] = useState(false)
@@ -75,7 +75,7 @@ export function ResponseRulesEditorWidget(props: IProps) {
     }, [blocker])
 
     const handleEditorDidMount = (monaco: Monaco) => {
-        MonacoSetupResponseRulesFeature.setup(monaco)
+        MonacoSetupResponseRulesFeature.setup(monaco, groupedTemplates)
     }
 
     const checkForChanges = () => {

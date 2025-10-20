@@ -22,7 +22,7 @@ import { PiTag } from 'react-icons/pi'
 
 import { MODALS, useModalsStore } from '@entities/dashboard/modal-store'
 import { useGetUserAccessibleNodes } from '@shared/api/hooks'
-import { XtlsLogo } from '@shared/ui/logos/xtls-logo'
+import { XrayLogo } from '@shared/ui/logos'
 
 interface CustomTreeNodeData extends TreeNodeData {
     configProfileName?: string
@@ -140,7 +140,7 @@ export const UserAccessibleNodesModalWidget = () => {
                                     </Text>
                                     <Badge
                                         color="teal"
-                                        leftSection={<XtlsLogo size={20} />}
+                                        leftSection={<XrayLogo size={20} />}
                                         size="lg"
                                         variant="light"
                                     >

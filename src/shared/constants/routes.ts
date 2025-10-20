@@ -31,11 +31,8 @@ export const ROUTES = {
         },
         TEMPLATES: {
             ROOT: '/dashboard/templates',
-            XRAY_JSON: '/dashboard/templates/xray-json',
-            MIHOMO: '/dashboard/templates/mihomo',
-            SINGBOX: '/dashboard/templates/singbox',
-            STASH: '/dashboard/templates/stash',
-            CLASH: '/dashboard/templates/clash'
+            TEMPLATES_BY_TYPE: '/dashboard/templates/:type',
+            TEMPLATE_EDITOR: '/dashboard/templates/:type/:uuid'
         },
         UTILS: {
             ROOT: '/dashboard/utils',

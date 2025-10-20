@@ -18,8 +18,8 @@ import clsx from 'clsx'
 import { getNodeResetDaysUtil, getXrayUptimeUtil } from '@shared/utils/time-utils'
 import { useNodesStoreActions } from '@entities/dashboard/nodes'
 import { prettyBytesToAnyUtil } from '@shared/utils/bytes'
-import { XtlsLogo } from '@shared/ui/logos/xtls-logo'
 import { faviconResolver } from '@shared/utils/misc'
+import { XrayLogo } from '@shared/ui/logos'
 
 import { NodeStatusBadgeWidget } from '../node-status-badge'
 import classes from './NodeCard.module.css'
@@ -289,7 +289,7 @@ export const NodeCardWidget = memo((props: IProps) => {
 
                             {isOnline && (
                                 <Flex align="center" gap={4}>
-                                    <XtlsLogo height={14} width={14} />
+                                    <XrayLogo size={14} />
                                     <Text
                                         c={isOnline ? 'teal' : 'red'}
                                         fw={isOnline ? 600 : 500}
@@ -445,7 +445,7 @@ export const NodeCardWidget = memo((props: IProps) => {
                         )}
 
                         <Flex align="center" gap={4}>
-                            <XtlsLogo height={12} width={12} />
+                            <XrayLogo size={12} />
                             <Text
                                 c={isOnline ? 'teal' : 'dimmed'}
                                 fw={isOnline ? 600 : 500}

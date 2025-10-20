@@ -9,7 +9,7 @@ import { memo } from 'react'
 import { MODALS, useModalsStore } from '@entities/dashboard/modal-store'
 import { useGetConfigProfiles, useGetHosts } from '@shared/api/hooks'
 import { SEARCH_PARAMS } from '@shared/constants/search-params'
-import { XtlsLogo } from '@shared/ui/logos/xtls-logo'
+import { XrayLogo } from '@shared/ui/logos'
 import { ROUTES } from '@shared/constants'
 import { LoadingScreen } from '@shared/ui'
 
@@ -174,7 +174,7 @@ export const LinkedHostsDrawer = memo(() => {
                                         }
                                         leftSection={
                                             configProfile?.uuid ? (
-                                                <XtlsLogo size={12} />
+                                                <XrayLogo size={12} />
                                             ) : (
                                                 <TbAlertCircle size={12} />
                                             )

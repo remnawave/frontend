@@ -1,3 +1,5 @@
+import type { editor } from 'monaco-editor'
+
 import {
     TbClipboardCopy,
     TbClipboardText,
@@ -6,26 +8,48 @@ import {
     TbMenuDeep,
     TbSelectAll
 } from 'react-icons/tb'
+import { GetSubscriptionTemplateCommand } from '@remnawave/backend-contract'
 import { useClipboard, useDisclosure, useMediaQuery } from '@mantine/hooks'
 import { PiCheckSquareOffset, PiFloppyDisk } from 'react-icons/pi'
 import { ActionIcon, Button, Group, Menu } from '@mantine/core'
 import { useTranslation } from 'react-i18next'
+import { RefObject } from 'react'
 
 import { useDownloadTemplate } from '@shared/ui/load-templates/use-download-template'
-import { useUpdateSubscriptionTemplate } from '@shared/api/hooks'
+import { QueryKeys, useUpdateSubscriptionTemplate } from '@shared/api/hooks'
+import { queryClient } from '@shared/api'
 
-import { Props } from './interfaces'
+interface Props {
+    editorRef: RefObject<editor.IStandaloneCodeEditor | null>
+    editorType: 'json' | 'yaml'
+    template: GetSubscriptionTemplateCommand.Response['response']
+}
 
 export function TemplateEditorActionsFeature(props: Props) {
-    const { editorRef, language, templateType } = props
+    const { editorRef, editorType, template } = props
     const { t } = useTranslation()
 
     const isMobile = useMediaQuery('(max-width: 48em)')
     const clipboard = useClipboard({ timeout: 500 })
     const [opened, handlers] = useDisclosure(false)
 
-    const { mutate: updateConfig, isPending: isUpdating } = useUpdateSubscriptionTemplate()
-    const { openDownloadModal } = useDownloadTemplate(templateType, editorRef, 'SUBSCRIPTION')
+    const { mutate: updateConfig, isPending: isUpdating } = useUpdateSubscriptionTemplate({
+        mutationFns: {
+            onSuccess: (data) => {
+                queryClient.setQueryData(
+                    QueryKeys.subscriptionTemplate.getSubscriptionTemplate({ uuid: template.uuid })
+                        .queryKey,
+                    data
+                )
+            }
+        }
+    })
+
+    const { openDownloadModal } = useDownloadTemplate(
+        template.templateType,
+        editorRef,
+        'SUBSCRIPTION'
+    )
 
     const handleSave = () => {
         if (!editorRef.current) return
@@ -36,18 +60,18 @@ export function TemplateEditorActionsFeature(props: Props) {
         const currentValue = editorRef.current.getValue()
 
         if (currentValue && currentValue.trim()) {
-            if (language === 'yaml') {
+            if (editorType === 'yaml') {
                 updateConfig({
                     variables: {
-                        templateType,
+                        uuid: template.uuid,
                         encodedTemplateYaml: Buffer.from(currentValue, 'utf-8').toString('base64')
                     }
                 })
             }
 
-            if (language === 'json') {
+            if (editorType === 'json') {
                 updateConfig({
-                    variables: { templateType, templateJson: JSON.parse(currentValue) }
+                    variables: { uuid: template.uuid, templateJson: JSON.parse(currentValue) }
                 })
             }
         }
@@ -55,9 +79,6 @@ export function TemplateEditorActionsFeature(props: Props) {
 
     const handleCopyConfig = () => {
         if (!editorRef.current) return
-        if (typeof editorRef.current !== 'object') return
-        if (!('getValue' in editorRef.current)) return
-        if (typeof editorRef.current.getValue !== 'function') return
 
         const currentValue = editorRef.current.getValue()
         clipboard.copy(currentValue)
@@ -65,18 +86,12 @@ export function TemplateEditorActionsFeature(props: Props) {
 
     const formatDocument = () => {
         if (!editorRef.current) return
-        if (typeof editorRef.current !== 'object') return
-        if (!('getAction' in editorRef.current)) return
-        if (typeof editorRef.current.getAction !== 'function') return
 
-        editorRef.current.getAction('editor.action.formatDocument').run()
+        editorRef.current.getAction('editor.action.formatDocument')?.run()
     }
 
     const handleSelectAll = () => {
         if (!editorRef.current) return
-        if (typeof editorRef.current !== 'object') return
-        if (!('getModel' in editorRef.current)) return
-        if (typeof editorRef.current.getModel !== 'function') return
 
         const model = editorRef.current.getModel()
         if (!model) return
@@ -91,11 +106,6 @@ export function TemplateEditorActionsFeature(props: Props) {
 
     const handleCut = () => {
         if (!editorRef.current) return
-        if (typeof editorRef.current !== 'object') return
-        if (!('getSelection' in editorRef.current)) return
-        if (typeof editorRef.current.getSelection !== 'function') return
-        if (!('getModel' in editorRef.current)) return
-        if (typeof editorRef.current.getModel !== 'function') return
 
         const selection = editorRef.current.getSelection()
         const model = editorRef.current.getModel()
@@ -109,14 +119,12 @@ export function TemplateEditorActionsFeature(props: Props) {
 
     const handlePaste = () => {
         if (!editorRef.current) return
-        if (typeof editorRef.current !== 'object') return
-        if (!('getPosition' in editorRef.current)) return
-        if (typeof editorRef.current.getPosition !== 'function') return
 
         const position = editorRef.current.getPosition()
         if (!position) return
 
         navigator.clipboard.readText().then((text) => {
+            if (!editorRef.current) return
             editorRef.current.executeEdits('', [
                 {
                     range: {
