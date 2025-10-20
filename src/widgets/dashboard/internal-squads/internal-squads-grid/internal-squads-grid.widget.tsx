@@ -40,18 +40,13 @@ export function InternalSquadsGridWidget(props: IProps) {
 
     const { mutate: addUsersToInternalSquad } = useAddUsersToInternalSquad({
         mutationFns: {
-            ...baseNotificationsMutations('add-users-to-internal-squad', refetchInternalSquads),
-            onMutate: undefined
+            ...baseNotificationsMutations('add-users-to-internal-squad', refetchInternalSquads)
         }
     })
 
     const { mutate: deleteUsersFromInternalSquad } = useDeleteUsersFromInternalSquad({
         mutationFns: {
-            ...baseNotificationsMutations(
-                'delete-users-from-internal-squad',
-                refetchInternalSquads
-            ),
-            onMutate: undefined
+            ...baseNotificationsMutations('delete-users-from-internal-squad', refetchInternalSquads)
         }
     })
 
@@ -71,6 +66,7 @@ export function InternalSquadsGridWidget(props: IProps) {
                 confirm: t('internal-squads-grid.widget.delete'),
                 cancel: t('internal-squads-grid.widget.cancel')
             },
+            cancelProps: { variant: 'subtle', color: 'gray' },
             confirmProps: { color: 'red' },
             centered: true,
             onConfirm: () => {
@@ -106,6 +102,7 @@ export function InternalSquadsGridWidget(props: IProps) {
                 confirm: t('internal-squads-grid.widget.remove'),
                 cancel: t('internal-squads-grid.widget.cancel')
             },
+            cancelProps: { variant: 'subtle', color: 'gray' },
             confirmProps: { color: 'red' },
             onConfirm: () => {
                 deleteUsersFromInternalSquad({
@@ -137,6 +134,7 @@ export function InternalSquadsGridWidget(props: IProps) {
                 confirm: t('internal-squads-grid.widget.add'),
                 cancel: t('internal-squads-grid.widget.cancel')
             },
+            cancelProps: { variant: 'subtle', color: 'gray' },
             confirmProps: { color: 'teal' },
             onConfirm: () => {
                 addUsersToInternalSquad({

@@ -41,18 +41,13 @@ export function ExternalSquadsGridWidget(props: IProps) {
 
     const { mutate: addUsersToExternalSquad } = useAddUsersToExternalSquad({
         mutationFns: {
-            ...baseNotificationsMutations('add-users-to-external-squad', refetchExternalSquads),
-            onMutate: undefined
+            ...baseNotificationsMutations('add-users-to-external-squad', refetchExternalSquads)
         }
     })
 
     const { mutate: deleteUsersFromExternalSquad } = useDeleteUsersFromExternalSquad({
         mutationFns: {
-            ...baseNotificationsMutations(
-                'delete-users-from-external-squad',
-                refetchExternalSquads
-            ),
-            onMutate: undefined
+            ...baseNotificationsMutations('delete-users-from-external-squad', refetchExternalSquads)
         }
     })
 
