@@ -80,7 +80,15 @@ export function ConfigProfilesGridWidget(props: IProps) {
 
     return (
         <SimpleGrid
-            cols={{ base: 1, '800px': 2, '1200px': 4, '1800px': 5, '2400px': 6, '3000px': 7 }}
+            cols={{
+                base: 1,
+                '800px': 2,
+                '1000px': 3,
+                '1200px': 4,
+                '1800px': 5,
+                '2400px': 6,
+                '3000px': 7
+            }}
             type="container"
         >
             {configProfiles.map((profile, index) => (
@@ -89,6 +97,7 @@ export function ConfigProfilesGridWidget(props: IProps) {
                     handleDeleteConfigProfile={handleDeleteProfile}
                     index={index}
                     isHighCount={isHighCount}
+                    key={profile.uuid}
                 />
             ))}
             <ConfigProfileInboundsDrawerWidget />
