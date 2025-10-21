@@ -1770,7 +1770,9 @@
                 "select-a-template": "Select a template",
                 "default-template-in-use": "Default template in use...",
                 "save": "Save",
-                "edit-external-squad": "Edit external squad"
+                "edit-external-squad": "Edit external squad",
+                "templates": "Templates",
+                "settings": "Settings"
             }
         },
         "page": {
@@ -1801,6 +1803,14 @@
             "copy-uuid": "Copy UUID",
             "rename": "Rename",
             "delete": "Delete"
+        }
+    },
+    "external-squads-settings": {
+        "tab": {
+            "widget": {
+                "override-subscription-settings-for-this-external-squad": "Override subscription settings for this external squad",
+                "add-override": "Add override"
+            }
         }
     }
 }

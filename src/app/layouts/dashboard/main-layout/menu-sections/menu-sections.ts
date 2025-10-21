@@ -2,7 +2,6 @@ import {
     PiAirTrafficControlDuotone,
     PiArrowsInCardinalFill,
     PiBarcodeDuotone,
-    PiBracketsCurly,
     PiChartLine,
     PiCookie,
     PiCpu,
@@ -14,6 +13,7 @@ import {
     TbChartArcs,
     TbCirclesRelation,
     TbDeviceAnalytics,
+    TbFolder,
     TbReportAnalytics,
     TbRoute,
     TbWebhook
@@ -142,7 +142,7 @@ export const useMenuSections = (): MenuItem[] => {
                 {
                     name: t('constants.templates'),
                     href: ROUTES.DASHBOARD.TEMPLATES.ROOT,
-                    icon: PiBracketsCurly,
+                    icon: TbFolder,
                     dropdownItems: [
                         {
                             name: 'Xray JSON',
