@@ -1770,7 +1770,9 @@
                 "select-a-template": "选择一个模板",
                 "default-template-in-use": "正在使用默认模板...",
                 "save": "保存",
-                "edit-external-squad": "编辑额外分组"
+                "edit-external-squad": "编辑额外分组",
+                "templates": "Templates",
+                "settings": "Settings"
             }
         },
         "page": {
@@ -1801,6 +1803,14 @@
             "copy-uuid": "复制 UUID",
             "rename": "重命名",
             "delete": "删除"
+        }
+    },
+    "external-squads-settings": {
+        "tab": {
+            "widget": {
+                "override-subscription-settings-for-this-external-squad": "Override subscription settings for this external squad",
+                "add-override": "Add override"
+            }
         }
     }
 }
