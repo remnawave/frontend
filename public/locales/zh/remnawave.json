@@ -20,7 +20,7 @@
         "subscription-page-builder": "订阅应用配置",
         "config-profiles": "配置文件",
         "internal-squads": "内部分组",
-        "external-squads": "External Squads",
+        "external-squads": "外部分组",
         "infra-billing": "网络供应商计费",
         "hwid-inspector": "HWID 视图",
         "tools": "工具",
@@ -138,14 +138,14 @@
         "feature": {
             "create-new-host": "创建新主机",
             "update": "刷新",
-            "update-external-squads": "Update external squads",
-            "create-new-external-squad": "Create new external squad",
-            "external-squad-name": "External Squad Name",
-            "cancel": "Cancel",
-            "create": "Create",
-            "update-templates": "Update templates",
-            "create-new-template": "Create new template",
-            "template-name": "Template name"
+            "update-external-squads": "更新外部分组",
+            "create-new-external-squad": "新建外部分组",
+            "external-squad-name": "外部分组名称",
+            "cancel": "取消",
+            "create": "创建",
+            "update-templates": "更新模板",
+            "create-new-template": "创建新模板",
+            "template-name": "模板名称"
         }
     },
     "delete-node": {
@@ -1431,9 +1431,9 @@
     },
     "access-settings-card": {
         "access-settings": "访问设置",
-        "select-an-external-squad-to-apply-custom-settings-to-this-user": "Select an external squad to apply custom settings to this user.",
-        "external-squad": "External Squad",
-        "select-an-external-squad": "Select an external squad..."
+        "select-an-external-squad-to-apply-custom-settings-to-this-user": "为此用户选择外部分组来应用自定义设置。",
+        "external-squad": "外部分组",
+        "select-an-external-squad": "选择一个外部分组..."
     },
     "device-tag-settings-card": {
         "device-and-tag-settings": "设备与标签设置"
@@ -1745,62 +1745,62 @@
     },
     "external-squad-card": {
         "widget": {
-            "users": "Users",
-            "edit": "Edit",
-            "add-users": "Add users",
-            "remove-users": "Remove users",
-            "copy-uuid": "Copy UUID",
-            "rename": "Rename",
-            "delete": "Delete"
+            "users": "用户",
+            "edit": "编辑",
+            "add-users": "添加用户",
+            "remove-users": "删除用户",
+            "copy-uuid": "复制 UUID",
+            "rename": "重命名",
+            "delete": "删除"
         }
     },
     "internal-squads-with-store": {
         "drawer": {
             "widget": {
-                "users": "Users"
+                "users": "用户"
             }
         }
     },
     "external-squads": {
         "drawer": {
             "widget": {
-                "subscription-templates": "Subscription Templates",
-                "subscription-templates-description-line-1": "Select one template for each subscription type. If not selected, the default template will be used automatically.",
-                "subscription-templates-description-line-2": "Please note, Response Rules have a higher priority.",
-                "select-a-template": "Select a template",
-                "default-template-in-use": "Default template in use...",
-                "save": "Save",
-                "edit-external-squad": "Edit external squad"
+                "subscription-templates": "订阅模板",
+                "subscription-templates-description-line-1": "为每个订阅类型选择一个模板。如果没有选择，默认模板将自动使用。",
+                "subscription-templates-description-line-2": "请注意，《响应规则》有更高的优先级别。",
+                "select-a-template": "选择一个模板",
+                "default-template-in-use": "正在使用默认模板...",
+                "save": "保存",
+                "edit-external-squad": "编辑额外分组"
             }
         },
         "page": {
             "component": {
-                "list-of-all-external-squads": "List of all external squads"
+                "list-of-all-external-squads": "所有额外分组列表"
             }
         }
     },
     "external-squads-grid": {
         "widget": {
-            "confirm-deletion": "Confirm deletion",
-            "confirm-deletion-decription-1": "Are you sure you want to perform this action? This action cannot be undone.",
-            "delete": "Delete",
-            "cancel": "Cancel",
-            "confirm-action": "Confirm action",
-            "confirm-action-description-2": "Are you sure you want to perform this action? This action cannot be undone.",
-            "remove": "Remove",
-            "add": "Add",
-            "no-external-squads": "No external squads",
-            "no-external-squads-line-1": "External squads allow you to customize settings for specific groups of users.",
-            "no-external-squads-line-2": "You can override default subscription templates and other settings for each squad.",
-            "no-external-squads-line-3": "Create a squad and assign users to apply custom configurations."
+            "confirm-deletion": "确认操作",
+            "confirm-deletion-decription-1": "您确定要执行此操作吗？此操作不能撤消。",
+            "delete": "删除",
+            "cancel": "取消",
+            "confirm-action": "确认操作",
+            "confirm-action-description-2": "您确定要执行此操作吗？此操作不能撤消。",
+            "remove": "移除",
+            "add": "添加",
+            "no-external-squads": "暂无内部分组",
+            "no-external-squads-line-1": "额外分组允许您为特定用户组自定义设置。",
+            "no-external-squads-line-2": "你可以覆盖每个分组的默认订阅模板和其他设置。",
+            "no-external-squads-line-3": "创建一个分组并指定用户应用自定义配置。"
         }
     },
     "templates-card": {
         "widget": {
-            "edit": "Edit",
-            "copy-uuid": "Copy UUID",
-            "rename": "Rename",
-            "delete": "Delete"
+            "edit": "编辑",
+            "copy-uuid": "复制 UUID",
+            "rename": "重命名",
+            "delete": "删除"
         }
     }
 }
