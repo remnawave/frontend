@@ -1770,7 +1770,9 @@
                 "select-a-template": "یک الگو انتخاب کنید",
                 "default-template-in-use": "Default template in use...",
                 "save": "ذخیره",
-                "edit-external-squad": "Edit external squad"
+                "edit-external-squad": "Edit external squad",
+                "templates": "Templates",
+                "settings": "Settings"
             }
         },
         "page": {
@@ -1801,6 +1803,14 @@
             "copy-uuid": "کپی UUID",
             "rename": "تغییر نام",
             "delete": "حذف"
+        }
+    },
+    "external-squads-settings": {
+        "tab": {
+            "widget": {
+                "override-subscription-settings-for-this-external-squad": "Override subscription settings for this external squad",
+                "add-override": "Add override"
+            }
         }
     }
 }

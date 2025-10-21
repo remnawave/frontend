@@ -1770,7 +1770,9 @@
                 "select-a-template": "Выберите шаблон",
                 "default-template-in-use": "Используется Default шаблон...",
                 "save": "Сохранить",
-                "edit-external-squad": "Редактировать внешний отряд"
+                "edit-external-squad": "Редактировать внешний отряд",
+                "templates": "Templates",
+                "settings": "Settings"
             }
         },
         "page": {
@@ -1801,6 +1803,14 @@
             "copy-uuid": "Скопировать UUID",
             "rename": "Переименовать",
             "delete": "Удалить"
+        }
+    },
+    "external-squads-settings": {
+        "tab": {
+            "widget": {
+                "override-subscription-settings-for-this-external-squad": "Override subscription settings for this external squad",
+                "add-override": "Add override"
+            }
         }
     }
 }
