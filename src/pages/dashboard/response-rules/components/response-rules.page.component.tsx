@@ -5,6 +5,7 @@ import {
 import { useTranslation } from 'react-i18next'
 import { Box, Flex } from '@mantine/core'
 
+import { SrrAdvancedWarningOverlay } from '@shared/ui/srr-advanced-warning-overlay/srr-advanced-warning-overlay'
 import { ResponseRulesEditorWidget } from '@widgets/dashboard/response-rules/response-rules-editor'
 import { ROUTES } from '@shared/constants'
 import { PageHeader } from '@shared/ui'
@@ -21,11 +22,6 @@ export const ResponseRulesPageComponent = (props: Props) => {
 
     const { t } = useTranslation()
 
-    // const { isOpen } = useModalsStore(
-    //     (state) => state.modals[MODALS.CONFIG_PROFILE_SHOW_SNIPPETS_DRAWER]
-    // )
-    // const { close } = useModalsStore()
-
     return (
         <Page title={t('constants.response-rules')}>
             <PageHeader
@@ -39,6 +35,8 @@ export const ResponseRulesPageComponent = (props: Props) => {
                 ]}
                 title={t('constants.response-rules')}
             />
+
+            <SrrAdvancedWarningOverlay />
 
             <Flex gap="md">
                 <Box style={{ flex: 1, minWidth: 0 }}>

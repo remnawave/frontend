@@ -11,6 +11,9 @@ export const useMiscStore = create<IActions & IState>()(
                 actions: {
                     setMobileWarningClosed: (closed: boolean) => {
                         set({ mobileWarningClosed: closed })
+                    },
+                    setSrrAdvancedModalClosed: (closed: boolean) => {
+                        set({ srrAdvancedModalClosed: closed })
                     }
                 }
             }),
@@ -19,13 +22,25 @@ export const useMiscStore = create<IActions & IState>()(
         {
             name: 'miscStore',
             partialize: (state) => ({
-                mobileWarningClosed: state.mobileWarningClosed
+                mobileWarningClosed: state.mobileWarningClosed,
+                srrAdvancedModalClosed: state.srrAdvancedModalClosed
             }),
+            migrate: (persistedState: unknown, version: number) => {
+                if (version === 1) {
+                    return {
+                        mobileWarningClosed:
+                            (persistedState as IState).mobileWarningClosed ?? false,
+                        srrAdvancedModalClosed: false
+                    }
+                }
+                return persistedState
+            },
             storage: createJSONStorage(() => localStorage),
-            version: 1
+            version: 2
         }
     )
 )
 
 export const useMobileWarningClosed = () => useMiscStore((state) => state.mobileWarningClosed)
+export const useSrrAdvancedModalClosed = () => useMiscStore((state) => state.srrAdvancedModalClosed)
 export const useMiscStoreActions = () => useMiscStore((state) => state.actions)
