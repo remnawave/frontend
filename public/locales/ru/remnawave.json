@@ -143,9 +143,9 @@
             "external-squad-name": "Имя внешнего сквада",
             "cancel": "Отменить",
             "create": "Создать",
-            "update-templates": "Обновить темплейты",
-            "create-new-template": "Создать новый темплейт",
-            "template-name": "Имя темплейта"
+            "update-templates": "Обновить шаблоны",
+            "create-new-template": "Создать новый шаблон",
+            "template-name": "Имя шаблона"
         }
     },
     "delete-node": {
@@ -1431,7 +1431,7 @@
     },
     "access-settings-card": {
         "access-settings": "Настройки доступа",
-        "select-an-external-squad-to-apply-custom-settings-to-this-user": "Выберите внешний отряд для применения кастомных настроек к этому пользователю.",
+        "select-an-external-squad-to-apply-custom-settings-to-this-user": "Выберите внешний сквад для применения кастомных настроек к этому пользователю.",
         "external-squad": "Внешний сквад",
         "select-an-external-squad": "Выберите внешний сквад..."
     },
@@ -1764,11 +1764,11 @@
     "external-squads": {
         "drawer": {
             "widget": {
-                "subscription-templates": "Темпейты подписки",
-                "subscription-templates-description-line-1": "Выберите один темплейт для каждого типа подписки. Если не выбрано, темплейт по умолчанию будет использоваться автоматически.",
+                "subscription-templates": "Шаблоны подписки",
+                "subscription-templates-description-line-1": "Выберите один шаблон для каждого типа подписки. Если не выбрано, шаблон по умолчанию \"Default\" будет использоваться автоматически.",
                 "subscription-templates-description-line-2": "Обратите внимание, Правила Ответа имеют более высокий приоритет.",
-                "select-a-template": "Выберите темплейт",
-                "default-template-in-use": "Используется Default темплейт...",
+                "select-a-template": "Выберите шаблон",
+                "default-template-in-use": "Используется Default шаблон...",
                 "save": "Сохранить",
                 "edit-external-squad": "Редактировать внешний отряд"
             }
@@ -1791,8 +1791,8 @@
             "add": "Добавить",
             "no-external-squads": "Внешние сквады не найдены",
             "no-external-squads-line-1": "Внешние сквады позволяют перезаписывать настройки для определенных групп пользователей.",
-            "no-external-squads-line-2": "Вы можете переопределить темплейты подписки по умолчанию и другие настройки для каждого сквада.",
-            "no-external-squads-line-3": "Создайте сквад и добавьте в него пользователей для применения кастомных настроек."
+            "no-external-squads-line-2": "Вы можете переопределить шаблоны подписки по умолчанию и прочие настройки для каждого сквада.",
+            "no-external-squads-line-3": "Создайте сквад и добавьте в него пользователей для применения индивидуальных настроек."
         }
     },
     "templates-card": {
