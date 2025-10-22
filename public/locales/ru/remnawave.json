@@ -1771,8 +1771,8 @@
                 "default-template-in-use": "Используется Default шаблон...",
                 "save": "Сохранить",
                 "edit-external-squad": "Редактировать внешний отряд",
-                "templates": "Templates",
-                "settings": "Settings"
+                "templates": "Шаблоны",
+                "settings": "Настройки"
             }
         },
         "page": {
@@ -1808,18 +1808,18 @@
     "external-squads-settings": {
         "tab": {
             "widget": {
-                "override-subscription-settings-for-this-external-squad": "Override subscription settings for this external squad",
-                "add-override": "Add override"
+                "override-subscription-settings-for-this-external-squad": "Переопределить параметры подписки для этого внешнего сквада",
+                "add-override": "Добавить параметр"
             }
         }
     },
     "srr-advanced-warning-overlay": {
-        "warning": "Warning",
-        "warning-line-1": "This feature is designed for advanced users who understand the potential risks and implications.",
-        "incorrect-configuration-line-1": "Incorrect configuration",
-        "incorrect-configuration-line-2": "may cause unexpected behavior",
-        "review-settings-carefully-line-1": "Review settings carefully",
-        "review-settings-carefully-line-2": "before applying changes",
-        "continue": "Continue"
+        "warning": "Предупреждение",
+        "warning-line-1": "Эта функция предназначена для опытных пользователей, которые понимают потенциальные риски и последствия.",
+        "incorrect-configuration-line-1": "Неправильная конфигурация",
+        "incorrect-configuration-line-2": "может привести к неожиданному поведению",
+        "review-settings-carefully-line-1": "Проверьте внимательно настройки",
+        "review-settings-carefully-line-2": "перед тем как применить изменения",
+        "continue": "Продолжить"
     }
 }

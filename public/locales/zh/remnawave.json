@@ -1771,8 +1771,8 @@
                 "default-template-in-use": "正在使用默认模板...",
                 "save": "保存",
                 "edit-external-squad": "编辑额外分组",
-                "templates": "Templates",
-                "settings": "Settings"
+                "templates": "模板",
+                "settings": "设置"
             }
         },
         "page": {
@@ -1808,18 +1808,18 @@
     "external-squads-settings": {
         "tab": {
             "widget": {
-                "override-subscription-settings-for-this-external-squad": "Override subscription settings for this external squad",
-                "add-override": "Add override"
+                "override-subscription-settings-for-this-external-squad": "覆盖此外部分组的订阅设置",
+                "add-override": "添加重写"
             }
         }
     },
     "srr-advanced-warning-overlay": {
-        "warning": "Warning",
-        "warning-line-1": "This feature is designed for advanced users who understand the potential risks and implications.",
-        "incorrect-configuration-line-1": "Incorrect configuration",
-        "incorrect-configuration-line-2": "may cause unexpected behavior",
-        "review-settings-carefully-line-1": "Review settings carefully",
-        "review-settings-carefully-line-2": "before applying changes",
-        "continue": "Continue"
+        "warning": "警告",
+        "warning-line-1": "这个功能是为了解潜在风险和影响的高级用户设计的。",
+        "incorrect-configuration-line-1": "配置错误",
+        "incorrect-configuration-line-2": "可能导致异常行为",
+        "review-settings-carefully-line-1": "谨慎审查设置",
+        "review-settings-carefully-line-2": "应用更改前",
+        "continue": "继续"
     }
 }
