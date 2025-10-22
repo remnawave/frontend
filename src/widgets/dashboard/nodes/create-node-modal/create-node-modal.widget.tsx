@@ -27,6 +27,7 @@ export const CreateNodeModalWidget = () => {
 
     const [activeStep, setActiveStep] = useState(0)
     const [createdNodeUuid, setCreatedNodeUuid] = useState<string>()
+    const [selectedPort, setSelectedPort] = useState<number>(2222)
 
     const form = useForm<CreateNodeCommand.Request>({
         name: 'create-node-form',
@@ -84,6 +85,12 @@ export const CreateNodeModalWidget = () => {
         })
     }, [form])
 
+    form.watch('port', ({ value }) => {
+        if (value) {
+            setSelectedPort(value)
+        }
+    })
+
     return (
         <Modal
             centered
@@ -137,6 +144,7 @@ export const CreateNodeModalWidget = () => {
                             <CreateNodeStep1Connection
                                 form={form}
                                 onNext={nextStep}
+                                port={selectedPort}
                                 pubKey={pubKey?.pubKey}
                             />
                         </div>
@@ -157,6 +165,7 @@ export const CreateNodeModalWidget = () => {
                                 isCreating={isCreateNodePending}
                                 onCreateNode={handleCreateNode}
                                 onPrev={prevStep}
+                                port={selectedPort}
                             />
                         </div>
                     )}

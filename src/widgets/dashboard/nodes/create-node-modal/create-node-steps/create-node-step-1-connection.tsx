@@ -25,10 +25,11 @@ interface IProps {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     form: UseFormReturnType<CreateNodeCommand.Request, any>
     onNext: () => void
+    port: number
     pubKey: string | undefined
 }
 
-export const CreateNodeStep1Connection = ({ form, onNext, pubKey }: IProps) => {
+export const CreateNodeStep1Connection = ({ form, onNext, pubKey, port }: IProps) => {
     const { t } = useTranslation()
 
     const handleNext = async () => {
@@ -147,7 +148,7 @@ export const CreateNodeStep1Connection = ({ form, onNext, pubKey }: IProps) => {
                 </Stack>
 
                 <Stack gap="xs" mt="auto">
-                    <CopyDockerComposeWidget port={form.getValues().port} />
+                    <CopyDockerComposeWidget port={port} />
 
                     <Group justify="flex-end" mt="auto">
                         <Button

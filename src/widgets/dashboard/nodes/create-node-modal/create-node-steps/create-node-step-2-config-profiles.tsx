@@ -16,13 +16,15 @@ interface IProps {
     isCreating: boolean
     onCreateNode: () => void
     onPrev: () => void
+    port: number
 }
 
 export const CreateNodeStep2ConfigProfiles = ({
     form,
     isCreating,
     onCreateNode,
-    onPrev
+    onPrev,
+    port
 }: IProps) => {
     const { t } = useTranslation()
 
@@ -89,7 +91,7 @@ export const CreateNodeStep2ConfigProfiles = ({
             </Stack>
 
             <Stack gap="xs" mt="auto">
-                <CopyDockerComposeWidget port={form.getValues().port} />
+                <CopyDockerComposeWidget port={port} />
 
                 <Group justify="space-between">
                     <Button
