@@ -52,21 +52,21 @@ const getOAuth2ProvidersConfig = () =>
             key: 'github' as const,
             title: 'GitHub',
             icon: <BiLogoGithub size={24} />,
-            iconColor: 'gray',
+            iconColor: '#1B1F24',
             fields: ['clientId', 'clientSecret', 'allowedEmails'] as const
         },
         {
             key: 'pocketid' as const,
             title: 'PocketID',
             icon: <PocketidLogo size={24} />,
-            iconColor: 'gray',
+            iconColor: '#000',
             fields: ['clientId', 'clientSecret', 'plainDomain', 'allowedEmails'] as const
         },
         {
             key: 'yandex' as const,
             title: 'Yandex',
             icon: <YandexLogo size={24} />,
-            iconColor: 'gray',
+            iconColor: '#FC3F1D',
             fields: ['clientId', 'clientSecret', 'allowedEmails'] as const
         }
     ] as const
