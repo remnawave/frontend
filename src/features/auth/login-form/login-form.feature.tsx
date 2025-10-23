@@ -42,7 +42,7 @@ export const LoginFormFeature = () => {
     return (
         <form onSubmit={handleSubmit}>
             <Container size="100%">
-                <Paper p={30}>
+                <Paper>
                     <TextInput
                         label={t('login-form.feature.username')}
                         name="username"

@@ -16,6 +16,7 @@ import {
     TbFolder,
     TbReportAnalytics,
     TbRoute,
+    TbSettings2,
     TbWebhook
 } from 'react-icons/tb'
 import { SUBSCRIPTION_TEMPLATE_TYPE } from '@remnawave/backend-contract'
@@ -113,6 +114,11 @@ export const useMenuSections = (): MenuItem[] => {
                     name: t('constants.api-tokens'),
                     href: ROUTES.DASHBOARD.MANAGEMENT.API_TOKENS,
                     icon: PiCookie
+                },
+                {
+                    name: t('constants.remnawave-settings'),
+                    href: ROUTES.DASHBOARD.MANAGEMENT.REMNAWAVE_SETTINGS,
+                    icon: TbSettings2
                 }
             ]
         },

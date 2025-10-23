@@ -8,7 +8,7 @@ import { useOAuth2Authorize } from '@shared/api/hooks'
 import { IProps } from './interfaces/props.interface'
 
 export const OAuth2LoginButtonsFeature = (props: IProps) => {
-    const { oauth2 } = props
+    const { authentication } = props
     const [loadingProvider, setLoadingProvider] = useState<null | TOAuth2ProvidersKeys>(null)
 
     const { mutate: oauth2Authorize } = useOAuth2Authorize({
@@ -39,7 +39,7 @@ export const OAuth2LoginButtonsFeature = (props: IProps) => {
 
     return (
         <Stack>
-            {oauth2.providers.pocketid && (
+            {authentication.oauth2.providers.pocketid && (
                 <Button
                     color="dark"
                     leftSection={
@@ -64,7 +64,7 @@ export const OAuth2LoginButtonsFeature = (props: IProps) => {
                 </Button>
             )}
 
-            {oauth2.providers.github && (
+            {authentication.oauth2.providers.github && (
                 <Button
                     color="#24292e"
                     leftSection={<BiLogoGithub color="white" size={20} />}
@@ -77,7 +77,7 @@ export const OAuth2LoginButtonsFeature = (props: IProps) => {
                 </Button>
             )}
 
-            {oauth2.providers.yandex && (
+            {authentication.oauth2.providers.yandex && (
                 <Button
                     color="#000000"
                     leftSection={

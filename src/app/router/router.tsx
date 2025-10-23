@@ -16,6 +16,7 @@ import { TemplateEditorPageConnector } from '@pages/dashboard/templates/ui/conne
 import { TemplateBasePageConnector } from '@pages/dashboard/templates/ui/connectors/template-base-page.connector'
 import { NodesBandwidthTablePageConnector } from '@pages/dashboard/nodes-bandwidth-table/ui/connectors'
 import { SubscriptionSettingsConnector } from '@pages/dashboard/subscription-settings/connectors'
+import { RemnawaveSettingsConnector } from '@pages/dashboard/remnawave-settings/connectors'
 import { HwidInspectorPageConnector } from '@pages/dashboard/hwid-inspector/ui/connectors'
 import { ConfigProfilesPageConnector } from '@pages/dashboard/config-profiles/connectors'
 import { ExternalSquadsPageConnector } from '@pages/dashboard/external-squads/connectors'
@@ -113,6 +114,11 @@ const router = createBrowserRouter(
                         <Route
                             element={<ResponseRulesPageConnector />}
                             path={ROUTES.DASHBOARD.MANAGEMENT.RESPONSE_RULES}
+                        />
+
+                        <Route
+                            element={<RemnawaveSettingsConnector />}
+                            path={ROUTES.DASHBOARD.MANAGEMENT.REMNAWAVE_SETTINGS}
                         />
                     </Route>
 

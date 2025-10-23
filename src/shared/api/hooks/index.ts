@@ -2,6 +2,7 @@ export * from './api-tokens/api-tokens.mutation.hooks'
 export * from './api-tokens/api-tokens.query.hooks'
 
 export * from './auth/auth.hooks'
+export * from './auth/auth.query.hooks'
 
 export * from './config-profiles/config-profiles.mutation.hooks'
 export * from './config-profiles/config-profiles.query.hooks'
@@ -25,6 +26,12 @@ export * from './keys-factory'
 
 export * from './nodes/nodes.mutation.hooks'
 export * from './nodes/nodes.query.hooks'
+
+export * from './passkeys/passkeys.hooks'
+export * from './passkeys/passkeys.query.hooks'
+
+export * from './remnawave-settings/remnawave-settings.mutation.hooks'
+export * from './remnawave-settings/remnawave-settings.query.hooks'
 
 export * from './snippets/snippets.mutation.hooks'
 export * from './snippets/snippets.query.hooks'
