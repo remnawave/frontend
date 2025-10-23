@@ -201,8 +201,6 @@ export const AuthentificationSettingsCardWidget = (props: IProps) => {
     const FIELD_CONFIG = getFieldConfig(t)
 
     const renderOAuth2Provider = (config: ReturnType<typeof getOAuth2ProvidersConfig>[number]) => {
-        const isEnabled = form.getValues().oauth2Settings![config.key]!.enabled
-
         return (
             <Accordion.Item key={config.key} value={config.key}>
                 <Center>
@@ -219,16 +217,13 @@ export const AuthentificationSettingsCardWidget = (props: IProps) => {
                     </Accordion.Control>
                     <Box pr="xs">
                         <Switch
-                            checked={isEnabled}
                             color="teal.8"
-                            onChange={(e) => {
-                                form.setFieldValue(
-                                    `oauth2Settings.${config.key}.enabled`,
-                                    e.currentTarget.checked
-                                )
-                            }}
+                            key={form.key(`oauth2Settings.${config.key}.enabled`)}
                             onClick={(e) => e.stopPropagation()}
                             size="md"
+                            {...form.getInputProps(`oauth2Settings.${config.key}.enabled`, {
+                                type: 'checkbox'
+                            })}
                         />
                     </Box>
                 </Center>
@@ -306,16 +301,13 @@ export const AuthentificationSettingsCardWidget = (props: IProps) => {
                                     </Accordion.Control>
                                     <Group justify="flex-end" pr="xs" wrap="nowrap">
                                         <Switch
-                                            checked={form.getValues().passwordSettings!.enabled}
                                             color="teal.8"
-                                            onChange={(e) => {
-                                                form.setFieldValue(
-                                                    'passwordSettings.enabled',
-                                                    e.currentTarget.checked
-                                                )
-                                            }}
+                                            key={form.key('passwordSettings.enabled')}
                                             onClick={(e) => e.stopPropagation()}
                                             size="md"
+                                            {...form.getInputProps('passwordSettings.enabled', {
+                                                type: 'checkbox'
+                                            })}
                                         />
                                     </Group>
                                 </Center>
@@ -337,16 +329,13 @@ export const AuthentificationSettingsCardWidget = (props: IProps) => {
                                     </Accordion.Control>
                                     <Group justify="flex-end" pr="xs" wrap="nowrap">
                                         <Switch
-                                            checked={form.getValues().passkeySettings!.enabled}
                                             color="teal.8"
-                                            onChange={(e) => {
-                                                form.setFieldValue(
-                                                    'passkeySettings.enabled',
-                                                    e.currentTarget.checked
-                                                )
-                                            }}
+                                            key={form.key('passkeySettings.enabled')}
                                             onClick={(e) => e.stopPropagation()}
                                             size="md"
+                                            {...form.getInputProps('passkeySettings.enabled', {
+                                                type: 'checkbox'
+                                            })}
                                         />
                                     </Group>
                                 </Center>
@@ -410,16 +399,13 @@ export const AuthentificationSettingsCardWidget = (props: IProps) => {
                                     </Accordion.Control>
                                     <Group justify="flex-end" pr="xs" wrap="nowrap">
                                         <Switch
-                                            checked={form.getValues().tgAuthSettings!.enabled}
                                             color="teal.8"
-                                            onChange={(e) => {
-                                                form.setFieldValue(
-                                                    'tgAuthSettings.enabled',
-                                                    e.currentTarget.checked
-                                                )
-                                            }}
+                                            key={form.key('tgAuthSettings.enabled')}
                                             onClick={(e) => e.stopPropagation()}
                                             size="md"
+                                            {...form.getInputProps('tgAuthSettings.enabled', {
+                                                type: 'checkbox'
+                                            })}
                                         />
                                     </Group>
                                 </Center>
