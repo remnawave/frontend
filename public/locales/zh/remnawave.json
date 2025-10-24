@@ -1,7 +1,6 @@
 {
     "constants": {
         "dashboard": "仪表盘",
-        "api-tokens": "API 令牌",
         "config": "Xray 配置",
         "home": "首页",
         "hosts": "主机",
@@ -27,6 +26,30 @@
         "srh-inspector": "SRH 检查",
         "response-rules": "响应规则",
         "remnawave-settings": "Remnawave Settings"
+    },
+    "common": {
+        "delete": "Delete",
+        "create": "Create",
+        "cancel": "Cancel",
+        "copied": "Copied",
+        "copy": "Copy",
+        "refresh": "Refresh",
+        "save": "Save",
+        "update": "Update",
+        "enable": "Enable",
+        "disable": "Disable",
+        "continue": "Continue",
+        "confirm-action": "Confirm action",
+        "confirm-action-description": "Are you sure you want to perform this action? This action cannot be undone.",
+        "edit": "Edit",
+        "copy-uuid": "Copy UUID",
+        "rename": "Rename",
+        "close": "Close",
+        "change": "Change",
+        "save-changes": "Save changes",
+        "remove": "Remove",
+        "add": "Add",
+        "select": "Select"
     },
     "bandwidth-metrics": {
         "current-year": "今年",
@@ -64,14 +87,11 @@
     },
     "config-editor-actions": {
         "feature": {
-            "save": "保存",
             "format": "格式化",
             "failed-to-save-invalid-json": "保存失败，无效的 JSON。",
             "error": "错误",
             "save-anyway": "仍然保存",
             "save-anyway-description": "您确定要保存无效的 Xray 配置吗？ 此操作\n                                    可能导致意外行为。请仅在您清楚自己在做什么的情况下继续。",
-            "cancel": "取消",
-            "save-anyway-title": "确认操作",
             "load-from-github": "从 GitHub 加载",
             "tools": "工具",
             "copy-all-content": "复制全部内容",
@@ -92,7 +112,6 @@
             "new-user": "新建用户",
             "reset-table": "重置表格样式",
             "clear-filters": "清除筛选",
-            "update": "刷新",
             "bulk-actions": "批量操作",
             "help": "帮助",
             "table-controls-help": "表格控件帮助",
@@ -121,42 +140,22 @@
         "sub-link-revoked-at": "订阅链接撤销于",
         "created-at": "创建于"
     },
-    "api-tokens-header-action-buttons": {
-        "feature": {
-            "create-new-api-token": "创建新 API 密钥",
-            "create": "创建"
-        }
-    },
     "header-buttons": {
         "feature": {}
-    },
-    "delete-host": {
-        "feature": {
-            "delete-host": "删除主机"
-        }
     },
     "header-action-buttons": {
         "feature": {
             "create-new-host": "创建新主机",
-            "update": "刷新",
             "update-external-squads": "更新外部分组",
             "create-new-external-squad": "新建外部分组",
             "external-squad-name": "外部分组名称",
-            "cancel": "取消",
-            "create": "创建",
             "update-templates": "更新模板",
             "create-new-template": "创建新模板",
             "template-name": "模板名称"
         }
     },
-    "delete-node": {
-        "feature": {
-            "delete-node": "删除节点"
-        }
-    },
     "nodes-header-action-buttons": {
         "feature": {
-            "update": "刷新",
             "create-new-node": "创建新节点",
             "restart-all-nodes": "重启所有节点",
             "search-nodes": "搜索节点",
@@ -166,34 +165,6 @@
             "graceful-restart-description-1": "将向所有节点发送请求以重启 Xray。 但如果节点哈希与当前的哈希相同，则请求可能无法实现。 这是默认的选项。",
             "force": "强制执行",
             "graceful": "平滑的"
-        }
-    },
-    "toggle-node-status-button": {
-        "feature": {
-            "disable": "禁用",
-            "enable": "启用"
-        }
-    },
-    "api-token-card": {
-        "widget": {
-            "delete": "删除",
-            "copy-token": "复制密钥",
-            "copied": "已复制",
-            "apitoken-tokenname-copied-to-clipboard": "{{apiTokenName}} 已复制到剪贴板"
-        }
-    },
-    "api-tokens-documentation": {
-        "widget": {
-            "open-swagger": "打开 Swagger",
-            "open-scalar": "打开 Scalar",
-            "doc-description-line-2": "两者都提供有关可用端点、请求/响应格式和身份验证方法的全面详细信息。",
-            "doc-description-line-1": "使用 Scalar 或 Swagger UI 浏览 API 文档。",
-            "api-documentation": "API 文档"
-        }
-    },
-    "api-tokens-page-header": {
-        "widget": {
-            "list-of-all-api-tokens": "所有 API 密钥列表"
         }
     },
     "config-editor": {
@@ -350,7 +321,6 @@
             "subscription-short-uuid": "订阅短uuid",
             "edit-user": "编辑用户",
             "subscription-qr-code": "订阅二维码",
-            "close": "关闭",
             "edit-user-headline": "编辑用户",
             "subscription-url-description-line-1": ".env 变量解析出的域名和路径：",
             "subscription-url-description-line-2": "如需更改，请在 .env 文件中修改并使用以下命令重启 Remnawave：",
@@ -363,11 +333,6 @@
             "detailed-info": "详细信息",
             "subscription": "订阅"
         }
-    },
-    "base-api-token-form": {
-        "create": "创建",
-        "token-description": "密钥描述",
-        "token-name": "密钥名称"
     },
     "empty-page": {
         "layout": {
@@ -384,7 +349,6 @@
         "alpn-e-g-h2": "ALPN (例如h2)",
         "fingerprint": "指纹",
         "fingerprint-e-g-chrome": "指纹 (例如 chrome)",
-        "save": "保存",
         "sni-e-g-example-com": "SNI (例如 example.com)",
         "host-e-g-example-com": "主机 (例如 example.com)",
         "e-g-example-com": "例如 example.com",
@@ -400,7 +364,6 @@
         "extra-xhttp-description": "此设置仅适用于 XHTTP 协议。 一个 \"extra\" JSON 将被传递给客户端. 输入的 JSON 不会被验证可用性，请确保输入有效的配置。您可以使用下面的按钮复制基本 \"extra\" 设置并粘贴到 JSON 中。",
         "invalid-json": "无效的 JSON",
         "fill-with-sample-xhttp-extra-params": "填充示例 XHTTP 额外选项",
-        "close": "关闭",
         "clone": "克隆",
         "address-description-line-1": "地址必须是连接目标的 IP 地址或域名。",
         "address-description-line-2": "在大多数情况下，它应指向已连接的节点之一。",
@@ -466,7 +429,6 @@
         "e-g-1-31": "例如 \"1-31\"",
         "notify-percent": "达量通知百分比",
         "e-g-50": "例如 50",
-        "save": "保存",
         "consumption-m-line-1": "将所选倍率应用于用户的流量消耗（1.0 = 正常，0.5 = 减半，2.0 = 加倍）。",
         "consumption-m-line-2": "简单来说，如果用户的流量上限是 1 GiB，且倍率为 2.0，用户实际只能使用 0.5 GiB 流量，但 Remnawave 会显示为已使用 1 GiB，并限制其继续使用。",
         "node-vitals": "节点状态",
@@ -554,17 +516,8 @@
             "disable": "禁用用户"
         }
     },
-    "create-api-token-modal": {
-        "widget": {
-            "create-token": "创建密钥"
-        }
-    },
     "bulk-user-actioins-modal": {
         "widget": {
-            "delete-users": "删除用户",
-            "confirm-action-description": "您确定要删除选定的用户吗？",
-            "confirm-action-irreversible": "此操作不可逆。",
-            "cancel": "取消",
             "user-deletion-description": "删除所有具有选定状态的用户。如果您删除状态为“活跃”的用户，应重启所有节点以使更改生效。",
             "select-status": "按状态删除"
         }
@@ -603,8 +556,6 @@
             "proxy-all-traffic-except-rules": "代理所有流量（规则除外）",
             "direct-all-traffic-except-rules": "直连所有流量（规则除外）",
             "proxy-all-traffic-except-rules-or-direct-all-traffic-except-rules": "代理所有流量（规则除外），或直连所有流量（规则除外）",
-            "enable": "启用",
-            "disable": "禁用",
             "fake-dns-description": "启用或禁用 FakeDNS。使用 DoU 时建议启用。",
             "choose-doh-dns-over-https-or-dou-dns-over-udp": "远程 DNS 使用 DoH (HTTPS 上的 DNS) 或者 DoU (UDP 上的 DNS)",
             "remote-dns-type": "远程 DNS 类型",
@@ -641,9 +592,7 @@
             "ip-addresses-that-will-be-blocked": "禁止连接的 IP 地址.",
             "blocked-ips": "禁止的 IP",
             "encoded-happ-link": "编码后的 Happ 链接",
-            "copied": "已复制",
             "show-qr": "显示二维码",
-            "close": "关闭",
             "invalid-base64-or-happ-link": "无效的 Base64 或 Happ 链接",
             "import-configuration": "导入配置",
             "paste-a-happ-routing-link-or-base64-encoded-config": "粘贴一个 Happ 路由链接或 Base64 编码的配置",
@@ -723,33 +672,21 @@
             }
         }
     },
-    "inbounds-page-header": {
-        "widget": {}
-    },
-    "inbounds-card": {
-        "widget": {}
-    },
     "multi-select-hosts": {
         "feature": {
             "delete-hosts": "删除主机",
             "are-you-sure-you-want-to-delete-these-hosts": "您确定要删除这些主机吗？",
-            "delete": "删除",
-            "cancel": "取消",
             "set-inbound": "设置入站",
             "set-port": "设置端口",
             "port": "端口",
             "clear-selection": "清除选择",
-            "select-all": "全选",
-            "enable": "启用",
-            "disable": "禁用",
-            "set-port-0": "设置端口"
+            "select-all": "全选"
         }
     },
     "bulk-user-actions-drawer": {
         "widget": {
             "bulk-user-actions": "批量操作用户",
             "users": "用户",
-            "update": "更新",
             "actions": "操作",
             "danger": "危险"
         }
@@ -772,7 +709,6 @@
                     "select-status": "选择状态",
                     "expire-date": "过期日期",
                     "select-expiration-date": "选择过期日期",
-                    "close": "关闭",
                     "update-users": "更新用户"
                 }
             }
@@ -780,10 +716,7 @@
         "actions": {
             "tab": {
                 "feature": {
-                    "confirm-action": "确认操作",
-                    "reset-traffic-confirmation": "您确定要重置所有选定用户的流量吗？",
                     "reset": "重置",
-                    "cancel": "取消",
                     "perform-actions-on-all-users": "对所有用户执行操作",
                     "reset-traffic": "重置流量",
                     "reset-traffic-description": "将所有选定用户的流量使用重置为零"
@@ -796,7 +729,6 @@
                     "danger-zone": "危险区",
                     "danger-zone-description": "这些操作不可逆，可能导致永久性数据丢失。",
                     "delete-users-by-status": "按状态删除用户",
-                    "delete": "删除",
                     "delete-users-by-status-description": "永久删除所有具有选定状态的用户"
                 }
             }
@@ -806,7 +738,6 @@
         "widget": {
             "bulk-all-user-actions": "批量所有用户操作",
             "all-users": "所有用户",
-            "update": "更新",
             "actions": "操作",
             "danger": "危险区"
         }
@@ -816,15 +747,9 @@
             "tab": {
                 "feature": {
                     "revoke-subscription": "撤销订阅",
-                    "revoke-confirmation-line-1": "您确定要撤销 {{usersCount}} 位用户的订阅吗？",
-                    "revoke-confirmation-line-2": "此操作不可撤销。",
                     "revoke": "撤销",
-                    "cancel": "取消",
                     "reset-traffic": "重置流量",
-                    "reset-traffic-confirmation-line-1": "您确定要重置 {{usersCount}} 位用户的流量吗？",
-                    "reset-traffic-confirmation-line-2": "这将把他们的用量设为零。",
                     "reset": "重置",
-                    "change": "更改",
                     "perform-action-on-users": "对 {{usersCount}} 位选定用户执行操作",
                     "resets-the-traffic-usage-to-zero-for-all-selected-users": "将所有选定用户的流量使用重置为0",
                     "revokes-subscription-for-all-selected-users": "撤销所有选定用户的订阅",
@@ -839,10 +764,6 @@
             "tab": {
                 "feature": {
                     "delete-users": "删除用户",
-                    "delete-confirmation-line-1": "您确定要删除 {{usersCount}} 位用户吗？",
-                    "delete-confirmation-line-2": "此操作不可撤销，所有数据将永久丢失。",
-                    "delete": "删除",
-                    "cancel": "取消",
                     "danger-zone": "危险区",
                     "these-actions-are-irreversible-and-can-result-in-permanent-data-loss": "这些操作不可逆，可能导致永久性数据丢失。",
                     "permanently-deletes-all-selected-users-and-their-data": "永久删除所有选定用户及其数据"
@@ -858,7 +779,6 @@
                     "select-status": "选择状态",
                     "expire-date": "过期日期",
                     "select-expiration-date": "选择过期日期",
-                    "close": "关闭",
                     "update-users": "更新用户"
                 }
             }
@@ -882,9 +802,7 @@
     "delete-user": {
         "feature": {
             "delete-user": "删除用户",
-            "are-you-sure": "您确定要删除此用户吗？此操作不可逆。",
-            "delete": "删除",
-            "cancel": "取消"
+            "are-you-sure": "您确定要删除此用户吗？此操作不可逆。"
         }
     },
     "user-usage-modal": {
@@ -978,7 +896,6 @@
                 "validation-errors": "校验错误",
                 "invalid-configuration": "无效配置",
                 "the-configuration-did-not-pass-validation": "配置未通过校验。",
-                "close": "关闭",
                 "configuration-settings": "配置设置",
                 "platform-apps": "平台应用程序",
                 "move-up": "向上移动",
@@ -1120,7 +1037,6 @@
         "official-templates": "官方模板",
         "author-templates": "{{author}} 模板",
         "modal": {
-            "cancel": "取消",
             "load-template": "加载模板"
         },
         "add-template": "添加模板"
@@ -1149,12 +1065,8 @@
             "delete-internal-squad": "删除内部分组",
             "delete-internal-squad-confirmation": "你确定要删除内部分组 \"{{internalSquadName}}\" 吗？",
             "this-action-cannot-be-undone": "此操作无法撤销。",
-            "delete": "删除",
-            "cancel": "取消",
             "remove-users-from-internal-squad-confirmation": "你确定要将用户从内部分组 \"{{internalSquadName}}\" 中移除吗？",
-            "remove": "移除",
             "add-users-to-internal-squad-confirmation": "你确定要将用户添加到内部分组 \"{{internalSquadName}}\" 吗？",
-            "add": "添加",
             "no-internal-squads": "暂无内部分组",
             "create-your-first-internal-squad-to-get-started": "创建你的第一个内部分组以开始使用",
             "delete-squad": "删除分组",
@@ -1162,22 +1074,11 @@
             "users": "用户",
             "edit-inbounds": "编辑入站连接",
             "remove-users": "删除用户",
-            "add-users": "添加用户",
-            "edit": "编辑",
-            "copy-uuid": "复制 UUID",
-            "rename": "重命名"
+            "add-users": "添加用户"
         }
-    },
-    "config-profile-detail-header": {
-        "widget": {}
     },
     "config-profiles-grid": {
         "widget": {
-            "delete-config-profile": "删除配置文件",
-            "are-you-sure-you-want-to-delete-the-config-profile": "你确定要删除配置文件 \"{{profileName}}\" 吗？",
-            "delete": "删除",
-            "cancel": "取消",
-            "this-action-cannot-be-undone": "此操作无法撤销。",
             "no-config-profiles": "暂无配置文件",
             "create-your-first-config-profile-to-get-started": "创建你的第一个配置文件以开始",
             "delete-profile": "删除文件",
@@ -1186,9 +1087,7 @@
             "download": "下载",
             "quick-view": "快速查看",
             "edit-xray-config": "编辑 Xray 配置",
-            "xray-config": "Xray 配置",
-            "copy-uuid": "复制 UUID",
-            "rename": "重命名"
+            "xray-config": "Xray 配置"
         }
     },
     "config-profiles-header": {
@@ -1221,18 +1120,11 @@
             "today": "今天",
             "tomorrow": "明天",
             "next-month": "下个月",
-            "cancel": "取消",
             "update-date": "更新日期"
         }
     },
     "infra-providers-table": {
         "widget": {
-            "delete-infra-provider": "删除网络提供商",
-            "delete-infra-provider-confirmation": "你确定要删除此网络提供商吗？",
-            "this-action-is-irreversible": "此操作不可撤销。",
-            "delete": "删除",
-            "cancel": "取消",
-            "refresh": "刷新",
             "create-infra-provider": "创建网络提供商",
             "infra-providers": "网络提供商",
             "list-of-all-infra-providers": "所有网络提供商列表",
@@ -1249,13 +1141,6 @@
     },
     "infra-billing-records-table": {
         "widget": {
-            "delete-infra-billing-record": "删除网络账单记录",
-            "delete-infra-billing-record-confirmation": "你确定要删除这条网络账单记录吗？",
-            "this-action-is-irreversible": "此操作不可撤销。",
-            "delete": "删除",
-            "cancel": "取消",
-            "refresh": "刷新",
-            "create": "创建",
             "billing-records-sorted-by-date": "账单记录按日期排序",
             "infra-billing-records": "网络账单记录",
             "no-billing-records-found": "未找到账单记录"
@@ -1271,9 +1156,6 @@
             "delete-infra-billing-node": "删除网络计费节点",
             "delete-infra-billing-node-confirmation": "你确定要删除这个网络计费节点吗？",
             "this-action-is-irreversible": "此操作不可撤销。",
-            "delete": "删除",
-            "cancel": "取消",
-            "refresh": "刷新",
             "add-node": "添加节点",
             "list-of-all-infra-billing-nodes": "按下次计费日期排序的所有网络计费节点列表",
             "infra-billing-nodes": "网络计费节点",
@@ -1297,13 +1179,6 @@
         "more-than-3-days-ago": "三天前以上",
         "yesterday": "昨天"
     },
-    "create-infra-provider": {
-        "drawer": {
-            "widget": {
-                "create": "创建"
-            }
-        }
-    },
     "create-infra-billing-record": {
         "modal": {
             "widget": {
@@ -1313,8 +1188,7 @@
                 "billed-at": "账单日期",
                 "the-date-and-time-when-the-bill-was-paid": "账单支付的日期和时间。",
                 "payment-amount-usd": "付款金额（美元）",
-                "amount": "金额",
-                "create": "创建"
+                "amount": "金额"
             }
         }
     },
@@ -1325,8 +1199,7 @@
                 "please-select-a-provider-and-billing-node": "请选择一个网络提供商和计费节点",
                 "billing-node": "计费节点",
                 "next-billing-at": "下次计费时间",
-                "next-billing-at-description": "计费节点将被计费的日期和时间。Remnawave 将会通知你即将到来的账单。",
-                "create": "创建"
+                "next-billing-at-description": "计费节点将被计费的日期和时间。Remnawave 将会通知你即将到来的账单。"
             }
         }
     },
@@ -1408,17 +1281,14 @@
                 "selected": "已选择",
                 "unselected": "未选择",
                 "edit-internal-squad": "编辑内部分组",
-                "selected-inbounds": "已设置的入站：{{count}}",
-                "save-changes": "保存更改"
+                "selected-inbounds": "已设置的入站：{{count}}"
             }
         }
     },
     "host-select-inbound": {
         "feature": {
             "no-inbound-selected": "未选择入站配置",
-            "change": "更改",
-            "choose-an-inbound-to-apply-to-the-host": "选择一个入站配置应用到该主机",
-            "select": "选择"
+            "choose-an-inbound-to-apply-to-the-host": "选择一个入站配置应用到该主机"
         }
     },
     "show-config-profiles-with-inbounds": {
@@ -1426,8 +1296,7 @@
             "config-profile": "配置文件",
             "select-the-config-profile-that-will-be-applied-to-this-node": "选择将应用于此节点的配置文件",
             "no-config-profile-selected": "未选择配置文件",
-            "choose-a-profile-to-configure-inbounds-for-this-node": "选择一个配置文件以为该节点配置入站",
-            "change": "更改"
+            "choose-a-profile-to-configure-inbounds-for-this-node": "选择一个配置文件以为该节点配置入站"
         }
     },
     "access-settings-card": {
@@ -1472,8 +1341,7 @@
     },
     "edit-node-by-uuid-modal": {
         "widget": {
-            "loading-node": "正在加载节点...",
-            "close": "关闭"
+            "loading-node": "正在加载节点..."
         }
     },
     "hosts-filters": {
@@ -1502,26 +1370,20 @@
     },
     "internal-squad-header-action-buttons": {
         "feature": {
-            "update": "更新",
             "create-internal-squad": "创建内部分组",
             "create-a-new-internal-squad-by-entering-a-name-below": "在下方输入名称以创建新的内部分组。",
             "it-cant-be-changed-later": "创建后无法更改名称",
             "squad-name": "分组名称",
-            "enter-squad-name": "输入分组名称",
-            "cancel": "取消",
-            "create": "创建"
+            "enter-squad-name": "输入分组名称"
         }
     },
     "config-profiles-header-action-buttons": {
         "feature": {
-            "update": "更新",
             "create-config-profile": "创建配置文件",
             "create-a-new-config-profile-by-entering-a-name-below": "在下方输入名称以创建新的配置文件。",
             "you-can-customize-xray-config-after-creation": "创建后可以自定义 XRay 配置。",
             "profile-name": "配置文件名称",
-            "enter-profile-name": "输入配置文件名称",
-            "cancel": "取消",
-            "create": "创建"
+            "enter-profile-name": "输入配置文件名称"
         }
     },
     "restart-node-button": {
@@ -1588,10 +1450,7 @@
     },
     "rename-modal": {
         "shared": {
-            "rename": "重命名",
-            "new-name": "新名称",
-            "cancel": "取消",
-            "save": "保存"
+            "new-name": "新名称"
         }
     },
     "branding-settings": {
@@ -1699,10 +1558,7 @@
                 "snippet-name": "代码块名称",
                 "enter-snippet-name-cannot-be-changed-later": "输入代码块名称 (稍后不能更改)",
                 "snippet-is-valid": "代码块有效",
-                "cancel": "取消",
-                "create": "创建",
                 "edit-snippet": "编辑代码块",
-                "update": "更新",
                 "snippets": "代码块",
                 "new-snippet": "新建代码块",
                 "snippets-help-line-1": "它们用于预定义您的一些配置。",
@@ -1720,7 +1576,6 @@
             "response-rules-debugger-description-2": "您可以将其导入到：",
             "or": "，或",
             "curl-command": "cURL 命令",
-            "close": "关闭",
             "copy-curl-command": "复制 cURL 命令",
             "debugger": "调试器"
         }
@@ -1747,12 +1602,8 @@
     "external-squad-card": {
         "widget": {
             "users": "用户",
-            "edit": "编辑",
             "add-users": "添加用户",
-            "remove-users": "删除用户",
-            "copy-uuid": "复制 UUID",
-            "rename": "重命名",
-            "delete": "删除"
+            "remove-users": "删除用户"
         }
     },
     "internal-squads-with-store": {
@@ -1770,7 +1621,6 @@
                 "subscription-templates-description-line-2": "请注意，《响应规则》有更高的优先级别。",
                 "select-a-template": "选择一个模板",
                 "default-template-in-use": "正在使用默认模板...",
-                "save": "保存",
                 "edit-external-squad": "编辑额外分组",
                 "templates": "模板",
                 "settings": "设置"
@@ -1784,26 +1634,10 @@
     },
     "external-squads-grid": {
         "widget": {
-            "confirm-deletion": "确认操作",
-            "confirm-deletion-decription-1": "您确定要执行此操作吗？此操作不能撤消。",
-            "delete": "删除",
-            "cancel": "取消",
-            "confirm-action": "确认操作",
-            "confirm-action-description-2": "您确定要执行此操作吗？此操作不能撤消。",
-            "remove": "移除",
-            "add": "添加",
             "no-external-squads": "暂无内部分组",
             "no-external-squads-line-1": "额外分组允许您为特定用户组自定义设置。",
             "no-external-squads-line-2": "你可以覆盖每个分组的默认订阅模板和其他设置。",
             "no-external-squads-line-3": "创建一个分组并指定用户应用自定义配置。"
-        }
-    },
-    "templates-card": {
-        "widget": {
-            "edit": "编辑",
-            "copy-uuid": "复制 UUID",
-            "rename": "重命名",
-            "delete": "删除"
         }
     },
     "external-squads-settings": {
@@ -1820,20 +1654,17 @@
         "incorrect-configuration-line-1": "配置错误",
         "incorrect-configuration-line-2": "可能导致异常行为",
         "review-settings-carefully-line-1": "谨慎审查设置",
-        "review-settings-carefully-line-2": "应用更改前",
-        "continue": "继续"
+        "review-settings-carefully-line-2": "应用更改前"
     },
     "auth-settings": {
         "header": {
             "title": "Authentication Methods",
             "description": "Manage your authentication methods."
         },
-        "save-button": "Save",
         "error-modal": {
             "title": "Update Failed",
             "description": "An error occurred while updating authentication settings. Please review the error details below and try again.",
-            "unknown-error": "Request failed with unknown error.",
-            "close-button": "Close"
+            "unknown-error": "Request failed with unknown error."
         },
         "passkey": {
             "title": "Passkey",
@@ -1889,12 +1720,9 @@
         "component": {
             "delete-passkey": "Delete Passkey",
             "delete-passkey-confirmation": "Are you sure you want to delete this passkey? This action cannot be undone.",
-            "delete": "Delete",
-            "cancel": "Cancel",
             "passkeys": "Passkeys",
             "passkeys-description": "Passkeys allow you to sign in securely without passwords. You can register multiple passkeys across different devices.",
             "active-passkeys": "Active Passkeys",
-            "add": "Add",
             "no-passkeys-registered-yet": "No passkeys registered yet",
             "add-passkeys-description": "Add your first passkey to enable secure, passwordless sign-in across your devices",
             "register": "Register",
@@ -1908,8 +1736,15 @@
             "branding-settings": "Branding Settings",
             "the-title-that-will-be-displayed-on-login-page": "The title that will be displayed on login page",
             "brand-name": "Brand Name",
-            "the-url-to-your-brand-logo-image": "The URL to your brand logo image",
-            "save": "Save"
+            "the-url-to-your-brand-logo-image": "The URL to your brand logo image"
+        }
+    },
+    "api-tokens-card": {
+        "widget": {
+            "api-tokens-description": "Manage your API access tokens for programmatic access.",
+            "api-tokens": "API Tokens",
+            "no-api-tokens-found": "No API tokens found",
+            "token-name": "Token Name"
         }
     }
 }
