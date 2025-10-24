@@ -1,9 +1,9 @@
 import { UpdateSubscriptionSettingsCommand } from '@remnawave/backend-contract'
-import { px, Stack, Tabs, Transition } from '@mantine/core'
 import { PiChatsCircle, PiInfo } from 'react-icons/pi'
 import { TbPrescription } from 'react-icons/tb'
 import { useTranslation } from 'react-i18next'
 import Masonry from 'react-layout-masonry'
+import { px, Tabs } from '@mantine/core'
 import { useState } from 'react'
 
 import { SubscriptionAnnounceRoutingCardWidget } from './cards/subscription-announce-routing-card.widget'
@@ -65,62 +65,25 @@ export const SubscriptionSettingsTabsWidget = ({ subscriptionSettings }: Subscri
             </Tabs.List>
 
             <Tabs.Panel pt="xl" value={TABS.general}>
-                <Transition
-                    duration={200}
-                    mounted={activeTab === TABS.general}
-                    timingFunction="linear"
-                    transition="fade"
-                >
-                    {(styles) => (
-                        <Stack gap="lg" style={styles}>
-                            <Masonry columns={{ 300: 1, 1400: 2, 2000: 3, 3000: 4 }} gap={16}>
-                                <SubscriptionInfoCardWidget
-                                    subscriptionSettings={subscriptionSettings}
-                                />
-                                <SubscriptionAdditionalOptionsWidget
-                                    subscriptionSettings={subscriptionSettings}
-                                />
-                                <SubscriptionAnnounceRoutingCardWidget
-                                    subscriptionSettings={subscriptionSettings}
-                                />
-                            </Masonry>
-                        </Stack>
-                    )}
-                </Transition>
+                <Masonry columns={{ 300: 1, 1400: 2, 2000: 3, 3000: 4 }} gap={16}>
+                    <SubscriptionInfoCardWidget subscriptionSettings={subscriptionSettings} />
+                    <SubscriptionAdditionalOptionsWidget
+                        subscriptionSettings={subscriptionSettings}
+                    />
+                    <SubscriptionAnnounceRoutingCardWidget
+                        subscriptionSettings={subscriptionSettings}
+                    />
+                </Masonry>
             </Tabs.Panel>
 
             <Tabs.Panel pt="xl" value={TABS.remarks}>
-                <Transition
-                    duration={200}
-                    mounted={activeTab === TABS.remarks}
-                    timingFunction="linear"
-                    transition="fade"
-                >
-                    {(styles) => (
-                        <Stack gap="lg" style={styles}>
-                            <SubscriptionUserRemarksCardWidget
-                                subscriptionSettings={subscriptionSettings}
-                            />
-                        </Stack>
-                    )}
-                </Transition>
+                <SubscriptionUserRemarksCardWidget subscriptionSettings={subscriptionSettings} />
             </Tabs.Panel>
 
             <Tabs.Panel pt="xl" value={TABS.additionalResponseHeaders}>
-                <Transition
-                    duration={200}
-                    mounted={activeTab === TABS.additionalResponseHeaders}
-                    timingFunction="linear"
-                    transition="fade"
-                >
-                    {(styles) => (
-                        <Stack gap="lg" style={styles}>
-                            <SubscriptionResponseHeadersCardWidget
-                                subscriptionSettings={subscriptionSettings}
-                            />
-                        </Stack>
-                    )}
-                </Transition>
+                <SubscriptionResponseHeadersCardWidget
+                    subscriptionSettings={subscriptionSettings}
+                />
             </Tabs.Panel>
         </Tabs>
     )

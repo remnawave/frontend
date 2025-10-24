@@ -1,7 +1,6 @@
 {
     "constants": {
         "dashboard": "Dashboard",
-        "api-tokens": "API Tokens",
         "config": "Xray Config",
         "home": "Home",
         "hosts": "Hosts",
@@ -121,12 +120,6 @@
         "sub-link-revoked-at": "Sub-link revoked at",
         "created-at": "Created at"
     },
-    "api-tokens-header-action-buttons": {
-        "feature": {
-            "create-new-api-token": "Create new API token",
-            "create": "Create"
-        }
-    },
     "header-buttons": {
         "feature": {}
     },
@@ -172,28 +165,6 @@
         "feature": {
             "disable": "Disable",
             "enable": "Enable"
-        }
-    },
-    "api-token-card": {
-        "widget": {
-            "delete": "Delete",
-            "copy-token": "Copy token",
-            "copied": "Copied",
-            "apitoken-tokenname-copied-to-clipboard": "{{apiTokenName}} copied to clipboard"
-        }
-    },
-    "api-tokens-documentation": {
-        "widget": {
-            "open-swagger": "Open Swagger",
-            "open-scalar": "Open Scalar",
-            "doc-description-line-2": "Both provide comprehensive details about the available endpoints, request/response formats, and authentication methods.",
-            "doc-description-line-1": "Explore API documentation using either Scalar or Swagger UI.",
-            "api-documentation": "API Documentation"
-        }
-    },
-    "api-tokens-page-header": {
-        "widget": {
-            "list-of-all-api-tokens": "List of all API tokens"
         }
     },
     "config-editor": {
@@ -363,11 +334,6 @@
             "detailed-info": "Detailed Info",
             "subscription": "Subscription"
         }
-    },
-    "base-api-token-form": {
-        "create": "Create",
-        "token-description": "Token description",
-        "token-name": "Token name"
     },
     "empty-page": {
         "layout": {
@@ -552,11 +518,6 @@
         "feature": {
             "enable": "Enable user",
             "disable": "Disable user"
-        }
-    },
-    "create-api-token-modal": {
-        "widget": {
-            "create-token": "Create token"
         }
     },
     "bulk-user-actioins-modal": {
@@ -1910,6 +1871,16 @@
             "brand-name": "Brand Name",
             "the-url-to-your-brand-logo-image": "The URL to your brand logo image",
             "save": "Save"
+        }
+    },
+    "api-tokens-card": {
+        "widget": {
+            "api-tokens-description": "Manage your API access tokens for programmatic access.",
+            "api-tokens": "API Tokens",
+            "no-api-tokens-found": "No API tokens found",
+            "create": "Create",
+            "token-name": "Token Name",
+            "cancel": "Cancel"
         }
     }
 }

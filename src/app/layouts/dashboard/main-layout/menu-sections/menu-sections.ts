@@ -3,7 +3,6 @@ import {
     PiArrowsInCardinalFill,
     PiBarcodeDuotone,
     PiChartLine,
-    PiCookie,
     PiCpu,
     PiListChecks,
     PiStarDuotone,
@@ -111,23 +110,8 @@ export const useMenuSections = (): MenuItem[] => {
                 },
 
                 {
-                    name: t('constants.api-tokens'),
-                    href: ROUTES.DASHBOARD.MANAGEMENT.API_TOKENS,
-                    icon: PiCookie
-                },
-                {
                     name: t('constants.remnawave-settings'),
                     href: ROUTES.DASHBOARD.MANAGEMENT.REMNAWAVE_SETTINGS,
-                    icon: Logo
-                }
-            ]
-        },
-        {
-            header: 'Remnawave',
-            section: [
-                {
-                    name: 'Dashboard',
-                    href: ROUTES.DASHBOARD.HOME,
                     icon: Logo
                 }
             ]

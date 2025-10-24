@@ -13,6 +13,8 @@ import { XrayLogo } from '@shared/ui/logos/xray-logo'
 import { TemplatesCardWidget } from '../template-card/templates-card.widget'
 import { IProps } from './interfaces'
 
+// TODO: Add i18n
+
 export function TemplatesGridWidget(props: IProps) {
     const { templates, templateTitle, type } = props
 

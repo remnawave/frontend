@@ -24,7 +24,6 @@ import { NodesMetricsPageConnector } from '@pages/dashboard/nodes-metrics/ui/con
 import { SrhInspectorPageConnector } from '@pages/dashboard/srh-inspector/ui/connectors'
 import { StatisticNodesConnector } from '@pages/dashboard/statistic-nodes/connectors'
 import { Oauth2CallbackPage } from '@pages/auth/oauth2-callback/oauth2-callback.page'
-import { ApiTokensPageConnector } from '@pages/dashboard/api-tokens/ui/connectors'
 import { ProxyDefensePageConnector } from '@pages/dashboard/proxy-defense'
 import { HostsPageConnector } from '@pages/dashboard/hosts/ui/connectors'
 import { UsersPageConnector } from '@pages/dashboard/users/ui/connectors'
@@ -81,10 +80,6 @@ const router = createBrowserRouter(
                         <Route
                             element={<StatisticNodesConnector />}
                             path={ROUTES.DASHBOARD.MANAGEMENT.NODES_STATS}
-                        />
-                        <Route
-                            element={<ApiTokensPageConnector />}
-                            path={ROUTES.DASHBOARD.MANAGEMENT.API_TOKENS}
                         />
                         <Route
                             element={<SubscriptionSettingsConnector />}
