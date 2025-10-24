@@ -1732,8 +1732,8 @@
     },
     "branding-settings-card": {
         "widget": {
-            "customize-your-remnawave-instance": "Кастомизировать ваш инстанс Remnawave",
-            "branding-settings": "Настройки брендинга",
+            "customize-your-remnawave-instance": "Кастомизировать вашу панель Remnawave",
+            "branding-settings": "Настройки кастомизации",
             "the-title-that-will-be-displayed-on-login-page": "Заголовок, отображаемый на странице входа",
             "brand-name": "Название бренда",
             "the-url-to-your-brand-logo-image": "URL-адрес логотипа вашего бренда"
