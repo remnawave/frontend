@@ -16,7 +16,6 @@ import {
     TbFolder,
     TbReportAnalytics,
     TbRoute,
-    TbSettings2,
     TbWebhook
 } from 'react-icons/tb'
 import { SUBSCRIPTION_TEMPLATE_TYPE } from '@remnawave/backend-contract'
@@ -28,6 +27,7 @@ import { useState } from 'react'
 import { HappLogo } from '@pages/dashboard/utils/happ-routing-builder/ui/components/happ-routing-builder.page.component'
 import { MihomoLogo, SingboxLogo, StashLogo, XrayLogo } from '@shared/ui/logos'
 import { ROUTES } from '@shared/constants'
+import { Logo } from '@shared/ui'
 
 import { MenuItem } from './interfaces'
 
@@ -118,7 +118,17 @@ export const useMenuSections = (): MenuItem[] => {
                 {
                     name: t('constants.remnawave-settings'),
                     href: ROUTES.DASHBOARD.MANAGEMENT.REMNAWAVE_SETTINGS,
-                    icon: TbSettings2
+                    icon: Logo
+                }
+            ]
+        },
+        {
+            header: 'Remnawave',
+            section: [
+                {
+                    name: 'Dashboard',
+                    href: ROUTES.DASHBOARD.HOME,
+                    icon: Logo
                 }
             ]
         },
