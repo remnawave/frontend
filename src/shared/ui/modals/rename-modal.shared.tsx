@@ -174,7 +174,7 @@ export function RenameModalShared({ renameFrom }: IProps) {
             onClose={handleModalClose}
             onExitTransitionEnd={() => nameField.reset()}
             opened={isOpen}
-            title={t('rename-modal.shared.rename')}
+            title={t('common.rename')}
         >
             <form
                 onSubmit={(e) => {
@@ -194,7 +194,7 @@ export function RenameModalShared({ renameFrom }: IProps) {
 
                     <Group justify="flex-end">
                         <Button color="gray" onClick={handleModalClose} variant="light">
-                            {t('rename-modal.shared.cancel')}
+                            {t('common.cancel')}
                         </Button>
                         <Button
                             color="teal"
@@ -207,7 +207,7 @@ export function RenameModalShared({ renameFrom }: IProps) {
                             type="submit"
                             variant="light"
                         >
-                            {t('rename-modal.shared.save')}
+                            {t('common.save')}
                         </Button>
                     </Group>
                 </Stack>

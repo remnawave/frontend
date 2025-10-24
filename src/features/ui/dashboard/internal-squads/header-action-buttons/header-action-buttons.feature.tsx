@@ -65,7 +65,7 @@ export const InternalSquadsHeaderActionButtonsFeature = () => {
     return (
         <Group grow preventGrowOverflow={false} wrap="wrap">
             <ActionIconGroup>
-                <Tooltip label={t('internal-squad-header-action-buttons.feature.update')} withArrow>
+                <Tooltip label={t('common.update')} withArrow>
                     <ActionIcon
                         loading={isFetching}
                         onClick={handleUpdate}
@@ -123,7 +123,7 @@ export const InternalSquadsHeaderActionButtonsFeature = () => {
                         />
                         <Group justify="flex-end">
                             <Button color="gray" onClick={close} variant="light">
-                                {t('internal-squad-header-action-buttons.feature.cancel')}
+                                {t('common.cancel')}
                             </Button>
 
                             <Button
@@ -133,7 +133,7 @@ export const InternalSquadsHeaderActionButtonsFeature = () => {
                                 type="submit"
                                 variant="default"
                             >
-                                {t('internal-squad-header-action-buttons.feature.create')}
+                                {t('common.create')}
                             </Button>
                         </Group>
                     </Stack>

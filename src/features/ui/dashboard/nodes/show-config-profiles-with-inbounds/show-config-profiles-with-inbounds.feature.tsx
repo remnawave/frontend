@@ -138,7 +138,7 @@ export function ShowConfigProfilesWithInboundsFeature(props: IProps) {
                         size="sm"
                         variant="default"
                     >
-                        {t('show-config-profiles-with-inbounds.feature.change')}
+                        {t('common.change')}
                     </Button>
                 </Stack>
             </Paper>

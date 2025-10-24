@@ -144,19 +144,13 @@ export const ApiTokensCardWidget = (props: IProps) => {
                         </ActionIcon.Group>
 
                         <Button color="teal" onClick={open} size="md" variant="light">
-                            {t('api-tokens-card.widget.create')}
+                            {t('common.create')}
                         </Button>
                     </Group>
                 </SettingsCardShared.Bottom>
             </SettingsCardShared.Container>
 
-            <Modal
-                centered
-                onClose={close}
-                opened={opened}
-                size="md"
-                title={t('api-tokens-card.widget.create')}
-            >
+            <Modal centered onClose={close} opened={opened} size="md" title={t('common.create')}>
                 <form
                     onSubmit={(e) => {
                         e.preventDefault()
@@ -177,11 +171,11 @@ export const ApiTokensCardWidget = (props: IProps) => {
                         />
                         <Group justify="flex-end">
                             <Button color="gray" onClick={close} variant="light">
-                                {t('api-tokens-card.widget.cancel')}
+                                {t('common.cancel')}
                             </Button>
 
                             <Button color="teal" loading={isCreateApiTokenPending} type="submit">
-                                {t('api-tokens-card.widget.create')}
+                                {t('common.create')}
                             </Button>
                         </Group>
                     </Stack>

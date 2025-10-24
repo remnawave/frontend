@@ -126,7 +126,7 @@ export const NodesHeaderActionButtonsFeature = () => {
             </ActionIconGroup>
 
             <ActionIconGroup>
-                <Tooltip label={t('nodes-header-action-buttons.feature.update')} withArrow>
+                <Tooltip label={t('common.update')} withArrow>
                     <ActionIcon
                         loading={isGetNodesPending || isPending || isRefetching}
                         onClick={() => refetchNodes()}

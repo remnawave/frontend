@@ -22,16 +22,12 @@ export const BulkAllUserActionsActionsTabFeature = (props: IProps) => {
 
     const handleResetTraffic = () => {
         modals.openConfirmModal({
-            title: t('bulk-all-user-actions-tabs.actions.tab.feature.confirm-action'),
+            title: t('common.confirm-action'),
             centered: true,
-            children: (
-                <Text>
-                    {t('bulk-all-user-actions-tabs.actions.tab.feature.reset-traffic-confirmation')}
-                </Text>
-            ),
+            children: t('common.confirm-action-description'),
             labels: {
                 confirm: t('bulk-all-user-actions-tabs.actions.tab.feature.reset'),
-                cancel: t('bulk-all-user-actions-tabs.actions.tab.feature.cancel')
+                cancel: t('common.cancel')
             },
             confirmProps: { color: 'red' },
             onConfirm: () => {

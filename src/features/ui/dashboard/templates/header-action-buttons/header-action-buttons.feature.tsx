@@ -122,11 +122,11 @@ export const TemplatesHeaderActionButtonsFeature = (props: IProps) => {
                         />
                         <Group justify="flex-end">
                             <Button color="gray" onClick={close} variant="light">
-                                {t('header-action-buttons.feature.cancel')}
+                                {t('common.cancel')}
                             </Button>
 
                             <Button color="teal" loading={isPending} type="submit">
-                                {t('header-action-buttons.feature.create')}
+                                {t('common.create')}
                             </Button>
                         </Group>
                     </Stack>

@@ -25,24 +25,13 @@ export function ConfigProfilesGridWidget(props: IProps) {
         }
     })
 
-    const handleDeleteProfile = (profileUuid: string, profileName: string) => {
+    const handleDeleteProfile = (profileUuid: string) => {
         modals.openConfirmModal({
-            title: t('config-profiles-grid.widget.delete-config-profile'),
-            children: (
-                <Text size="sm">
-                    {t(
-                        'config-profiles-grid.widget.are-you-sure-you-want-to-delete-the-config-profile',
-                        {
-                            profileName
-                        }
-                    )}
-                    <br />
-                    {t('config-profiles-grid.widget.this-action-cannot-be-undone')}
-                </Text>
-            ),
+            title: t('common.confirm-action'),
+            children: t('common.confirm-action-description'),
             labels: {
-                confirm: t('config-profiles-grid.widget.delete'),
-                cancel: t('config-profiles-grid.widget.cancel')
+                confirm: t('common.delete'),
+                cancel: t('common.cancel')
             },
             confirmProps: { color: 'red' },
             centered: true,

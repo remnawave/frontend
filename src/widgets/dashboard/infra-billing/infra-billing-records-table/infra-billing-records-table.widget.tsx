@@ -57,19 +57,11 @@ export function InfraBillingRecordsTableWidget() {
 
     const handleDeleteInfraBillingRecord = (uuid: string) =>
         modals.openConfirmModal({
-            title: t('infra-billing-records-table.widget.delete-infra-billing-record'),
-            children: (
-                <Text size="sm">
-                    {t(
-                        'infra-billing-records-table.widget.delete-infra-billing-record-confirmation'
-                    )}
-                    <br />
-                    {t('infra-billing-records-table.widget.this-action-is-irreversible')}
-                </Text>
-            ),
+            title: t('common.confirm-action'),
+            children: t('common.confirm-action-description'),
             labels: {
-                confirm: t('infra-billing-records-table.widget.delete'),
-                cancel: t('infra-billing-records-table.widget.cancel')
+                confirm: t('common.delete'),
+                cancel: t('common.cancel')
             },
 
             centered: true,
@@ -89,10 +81,7 @@ export function InfraBillingRecordsTableWidget() {
                 actions={
                     <Group grow preventGrowOverflow={false} wrap="wrap">
                         <ActionIconGroup>
-                            <Tooltip
-                                label={t('infra-billing-records-table.widget.refresh')}
-                                withArrow
-                            >
+                            <Tooltip label={t('common.refresh')} withArrow>
                                 <ActionIcon
                                     loading={infraBillingRecordsLoading}
                                     onClick={() => {
@@ -107,10 +96,7 @@ export function InfraBillingRecordsTableWidget() {
                         </ActionIconGroup>
 
                         <ActionIconGroup>
-                            <Tooltip
-                                label={t('infra-billing-records-table.widget.create')}
-                                withArrow
-                            >
+                            <Tooltip label={t('common.create')} withArrow>
                                 <ActionIcon
                                     color="teal"
                                     onClick={() => {
@@ -144,7 +130,7 @@ export function InfraBillingRecordsTableWidget() {
                             style={{ pointerEvents: 'all' }}
                             variant="light"
                         >
-                            {t('infra-billing-records-table.widget.create')}
+                            {t('common.create')}
                         </Button>
                     </Stack>
                 }

@@ -936,7 +936,7 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
                             size="sm"
                             type="submit"
                         >
-                            {t('base-host-form.save')}
+                            {t('common.save')}
                         </Button>
                     </Group>
 
@@ -992,7 +992,7 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
                         {t('base-host-form.fill-with-sample-xhttp-extra-params')}
                     </Button>
 
-                    <Button onClick={close}>{t('base-host-form.close')}</Button>
+                    <Button onClick={close}>{t('common.close')}</Button>
                 </Stack>
             </Drawer>
 
@@ -1045,7 +1045,7 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
                         {t('base-host-form.paste-default-mux-params')}
                     </Button>
 
-                    <Button onClick={closeMuxParams}>{t('base-host-form.close')}</Button>
+                    <Button onClick={closeMuxParams}>{t('common.close')}</Button>
                 </Stack>
             </Drawer>
 
@@ -1101,7 +1101,7 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
                         {t('base-host-form.paste-default-sockopt-params')}
                     </Button>
 
-                    <Button onClick={closeSockoptParams}>{t('base-host-form.close')}</Button>
+                    <Button onClick={closeSockoptParams}>{t('common.close')}</Button>
                 </Stack>
             </Drawer>
         </form>

@@ -31,7 +31,7 @@ import classes from './config-profile-card.module.css'
 
 interface IProps {
     configProfile: GetConfigProfilesCommand.Response['response']['configProfiles'][number]
-    handleDeleteConfigProfile: (configProfileUuid: string, configProfileName: string) => void
+    handleDeleteConfigProfile: (configProfileUuid: string) => void
     index: number
     isHighCount: boolean
 }
@@ -266,7 +266,7 @@ export function ConfigProfileCardWidget(props: IProps) {
                                             }
                                             onClick={copy}
                                         >
-                                            {t('config-profiles-grid.widget.copy-uuid')}
+                                            {t('common.copy-uuid')}
                                         </Menu.Item>
                                     )}
                                 </CopyButton>
@@ -284,7 +284,7 @@ export function ConfigProfileCardWidget(props: IProps) {
                                         open(MODALS.RENAME_SQUAD_OR_CONFIG_PROFILE_MODAL)
                                     }}
                                 >
-                                    {t('config-profiles-grid.widget.rename')}
+                                    {t('common.rename')}
                                 </Menu.Item>
 
                                 <Menu.Item
@@ -292,10 +292,7 @@ export function ConfigProfileCardWidget(props: IProps) {
                                     leftSection={<PiTrashDuotone size={18} />}
                                     onClick={(e) => {
                                         e.stopPropagation()
-                                        handleDeleteConfigProfile(
-                                            configProfile.uuid,
-                                            configProfile.name
-                                        )
+                                        handleDeleteConfigProfile(configProfile.uuid)
                                     }}
                                 >
                                     {t('config-profiles-grid.widget.delete-profile')}

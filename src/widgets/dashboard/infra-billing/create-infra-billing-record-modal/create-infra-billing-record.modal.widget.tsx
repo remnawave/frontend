@@ -156,7 +156,7 @@ export function CreateInfraBillingRecordDrawerWidget() {
                     />
 
                     <Button loading={isCreateInfraBillingRecordPending} type="submit">
-                        {t('create-infra-billing-record.modal.widget.create')}
+                        {t('common.create')}
                     </Button>
                 </Stack>
             </form>

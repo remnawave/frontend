@@ -35,7 +35,7 @@ export const BulkAllUserActionsDangerTabFeature = (props: IProps) => {
                             color="red.6"
                             onClick={() => {
                                 modals.open({
-                                    title: 'Confirm Action',
+                                    title: t('common.confirm-action'),
                                     centered: true,
                                     children: (
                                         <DeleteAllUsersByStatusFeature
@@ -46,7 +46,7 @@ export const BulkAllUserActionsDangerTabFeature = (props: IProps) => {
                             }}
                             variant="light"
                         >
-                            {t('bulk-all-user-actions-tabs.danger.tab.feature.delete')}
+                            {t('common.delete')}
                         </Button>
                     </Group>
                     <Text c="dimmed" size="xs">

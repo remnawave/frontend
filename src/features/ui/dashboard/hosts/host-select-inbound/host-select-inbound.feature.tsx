@@ -58,7 +58,7 @@ export function HostSelectInboundFeature(props: IProps) {
                         size="xs"
                         variant="light"
                     >
-                        {t('host-select-inbound.feature.change')}
+                        {t('common.change')}
                     </Button>
                 </Group>
             ) : (
@@ -86,7 +86,7 @@ export function HostSelectInboundFeature(props: IProps) {
                         size="xs"
                         variant="light"
                     >
-                        {t('host-select-inbound.feature.select')}
+                        {t('common.select')}
                     </Button>
                 </Group>
             )}

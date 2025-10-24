@@ -177,7 +177,7 @@ export function InternalSquadCardWidget(props: IProps) {
                             size="sm"
                             variant="light"
                         >
-                            {t('internal-squads-grid.widget.edit')}
+                            {t('common.edit')}
                         </Button>
                         <Menu
                             key={internalSquad.uuid}
@@ -248,7 +248,7 @@ export function InternalSquadCardWidget(props: IProps) {
                                             }
                                             onClick={copy}
                                         >
-                                            {t('internal-squads-grid.widget.copy-uuid')}
+                                            {t('common.copy-uuid')}
                                         </Menu.Item>
                                     )}
                                 </CopyButton>
@@ -257,7 +257,7 @@ export function InternalSquadCardWidget(props: IProps) {
                                     leftSection={<PiPencil size={18} />}
                                     onClick={handleRename}
                                 >
-                                    {t('internal-squads-grid.widget.rename')}
+                                    {t('common.rename')}
                                 </Menu.Item>
 
                                 <Menu.Item

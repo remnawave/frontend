@@ -147,7 +147,7 @@ export function TemplateEditorActionsFeature(props: Props) {
                 loading={isUpdating}
                 onClick={handleSave}
             >
-                {t('config-editor-actions.feature.save')}
+                {t('common.save')}
             </Button>
 
             <Group gap={0} wrap="nowrap">

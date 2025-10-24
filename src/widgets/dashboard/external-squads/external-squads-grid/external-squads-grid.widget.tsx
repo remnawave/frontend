@@ -53,11 +53,11 @@ export function ExternalSquadsGridWidget(props: IProps) {
 
     const handleDeleteExternalSquad = (externalSquadUuid: string) => {
         modals.openConfirmModal({
-            title: t('external-squads-grid.widget.confirm-deletion'),
-            children: t('external-squads-grid.widget.confirm-deletion-decription-1'),
+            title: t('common.confirm-action'),
+            children: t('common.confirm-action-description'),
             labels: {
-                confirm: t('external-squads-grid.widget.delete'),
-                cancel: t('external-squads-grid.widget.cancel')
+                confirm: t('common.delete'),
+                cancel: t('common.cancel')
             },
             cancelProps: { variant: 'subtle', color: 'gray' },
             confirmProps: { color: 'red' },
@@ -74,12 +74,12 @@ export function ExternalSquadsGridWidget(props: IProps) {
 
     const handleRemoveFromUsers = (externalSquadUuid: string) => {
         modals.openConfirmModal({
-            title: t('external-squads-grid.widget.confirm-action'),
+            title: t('common.confirm-action'),
             centered: true,
-            children: t('external-squads-grid.widget.confirm-action-description-2'),
+            children: t('common.confirm-action-description'),
             labels: {
-                confirm: t('external-squads-grid.widget.remove'),
-                cancel: t('external-squads-grid.widget.cancel')
+                confirm: t('common.remove'),
+                cancel: t('common.cancel')
             },
             cancelProps: { variant: 'subtle', color: 'gray' },
             confirmProps: { color: 'red' },
@@ -95,12 +95,12 @@ export function ExternalSquadsGridWidget(props: IProps) {
 
     const handleAddToUsers = (externalSquadUuid: string) => {
         modals.openConfirmModal({
-            title: t('external-squads-grid.widget.confirm-action'),
+            title: t('common.confirm-action'),
             centered: true,
-            children: t('external-squads-grid.widget.confirm-action-description-2'),
+            children: t('common.confirm-action-description'),
             labels: {
-                confirm: t('external-squads-grid.widget.add'),
-                cancel: t('external-squads-grid.widget.cancel')
+                confirm: t('common.add'),
+                cancel: t('common.cancel')
             },
             cancelProps: { variant: 'subtle', color: 'gray' },
             confirmProps: { color: 'teal' },

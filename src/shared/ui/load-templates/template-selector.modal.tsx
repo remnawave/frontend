@@ -62,7 +62,7 @@ export const TemplateDownloadModal = (props: TemplateSelectorModalProps) => {
                     <Text>Error loading templates from Github. Try again later.</Text>
                     <Group justify="center" mt="md">
                         <Button onClick={onCancel} variant="subtle">
-                            {t('template-selector.modal.cancel')}
+                            {t('common.cancel')}
                         </Button>
                     </Group>
                 </Stack>
@@ -81,7 +81,7 @@ export const TemplateDownloadModal = (props: TemplateSelectorModalProps) => {
             />
             <Group justify="flex-end" mt="md">
                 <Button onClick={onCancel} variant="subtle">
-                    {t('template-selector.modal.cancel')}
+                    {t('common.cancel')}
                 </Button>
                 <Button
                     disabled={!selectedTemplate}

@@ -113,7 +113,7 @@ export const SubscriptionAnnounceRoutingCardWidget = (props: IProps) => {
                             {t('subscription-settings.widget.configure-happ-routing')}
                         </Button>
                         <Button color="teal" loading={isPending} size="md" type="submit">
-                            {t('branding-settings-card.widget.save')}
+                            {t('common.save')}
                         </Button>
                     </Group>
                 </SettingsCardShared.Bottom>

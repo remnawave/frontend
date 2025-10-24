@@ -26,7 +26,7 @@ export function DeleteHostFeature() {
     }
 
     return (
-        <Tooltip label={t('delete-host.feature.delete-host')}>
+        <Tooltip label={t('common.delete')}>
             <ActionIcon
                 color="red"
                 loading={isDeleteHostPending}

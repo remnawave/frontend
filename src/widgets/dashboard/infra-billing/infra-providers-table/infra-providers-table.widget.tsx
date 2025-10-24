@@ -73,17 +73,11 @@ export function InfraProvidersTableWidget() {
 
     const handleDeleteInfraProvider = (uuid: string) =>
         modals.openConfirmModal({
-            title: t('infra-providers-table.widget.delete-infra-provider'),
-            children: (
-                <Text size="sm">
-                    {t('infra-providers-table.widget.delete-infra-provider-confirmation')}
-                    <br />
-                    {t('infra-providers-table.widget.this-action-is-irreversible')}
-                </Text>
-            ),
+            title: t('common.confirm-action'),
+            children: t('common.confirm-action-description'),
             labels: {
-                confirm: t('infra-providers-table.widget.delete'),
-                cancel: t('infra-providers-table.widget.cancel')
+                confirm: t('common.delete'),
+                cancel: t('common.cancel')
             },
 
             centered: true,
@@ -103,7 +97,7 @@ export function InfraProvidersTableWidget() {
                 actions={
                     <Group grow preventGrowOverflow={false} wrap="wrap">
                         <ActionIconGroup>
-                            <Tooltip label={t('infra-providers-table.widget.refresh')} withArrow>
+                            <Tooltip label={t('common.refresh')} withArrow>
                                 <ActionIcon
                                     loading={infraProvidersLoading}
                                     onClick={() => {

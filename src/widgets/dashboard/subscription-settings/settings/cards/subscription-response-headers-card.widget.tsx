@@ -222,7 +222,7 @@ export const SubscriptionResponseHeadersCardWidget = (props: IProps) => {
                             {t('headers-manager.widget.add-header')}
                         </Button>
                         <Button color="teal" loading={isPending} size="md" type="submit">
-                            {t('branding-settings-card.widget.save')}
+                            {t('common.save')}
                         </Button>
                     </Group>
                 </SettingsCardShared.Bottom>

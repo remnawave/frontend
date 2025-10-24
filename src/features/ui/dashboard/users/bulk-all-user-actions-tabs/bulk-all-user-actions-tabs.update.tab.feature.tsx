@@ -325,7 +325,7 @@ export const BulkAllUserActionsUpdateTabFeature = (props: IProps) => {
                         type="reset"
                         variant="light"
                     >
-                        {t('bulk-all-user-actions-tabs.update.tab.feature.close')}
+                        {t('common.close')}
                     </Button>
 
                     <Button

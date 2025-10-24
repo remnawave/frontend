@@ -219,7 +219,7 @@ export const BaseNodeForm = <T extends CreateNodeCommand.Request | UpdateNodeCom
                     type="submit"
                     variant="light"
                 >
-                    {t('base-node-form.save')}
+                    {t('common.save')}
                 </Button>
             </ModalFooter>
         </form>

@@ -177,7 +177,7 @@ export const AuthentificationSettingsCardWidget = (props: IProps) => {
                                 onClick={() => modals.closeAll()}
                                 variant="light"
                             >
-                                {t('auth-settings.error-modal.close-button')}
+                                {t('common.close')}
                             </Button>
                         </Stack>
                     )
@@ -446,7 +446,7 @@ export const AuthentificationSettingsCardWidget = (props: IProps) => {
                     <SettingsCardShared.Bottom>
                         <Group justify="flex-end">
                             <Button color="teal" loading={isUpdatePending} size="md" type="submit">
-                                {t('auth-settings.save-button')}
+                                {t('common.save')}
                             </Button>
                         </Group>
                     </SettingsCardShared.Bottom>

@@ -136,7 +136,7 @@ export const SubscriptionAdditionalOptionsWidget = (props: IProps) => {
                 <SettingsCardShared.Bottom>
                     <Group justify="flex-end">
                         <Button color="teal" loading={isPending} size="md" type="submit">
-                            {t('branding-settings-card.widget.save')}
+                            {t('common.save')}
                         </Button>
                     </Group>
                 </SettingsCardShared.Bottom>

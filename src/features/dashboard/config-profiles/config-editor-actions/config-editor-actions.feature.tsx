@@ -184,7 +184,7 @@ export function ConfigEditorActionsFeature(props: Props) {
                 loading={isUpdating}
                 onClick={handleSave}
             >
-                {t('config-editor-actions.feature.save')}
+                {t('common.save')}
             </Button>
 
             {!isConfigValid && !isUpdating && (
@@ -195,7 +195,7 @@ export function ConfigEditorActionsFeature(props: Props) {
                     loading={isUpdating}
                     onClick={() => {
                         modals.openConfirmModal({
-                            title: t('config-editor-actions.feature.save-anyway-title'),
+                            title: t('common.confirm-action'),
                             children: (
                                 <Text>
                                     {t('config-editor-actions.feature.save-anyway-description')}
@@ -203,8 +203,8 @@ export function ConfigEditorActionsFeature(props: Props) {
                             ),
                             centered: true,
                             labels: {
-                                confirm: t('config-editor-actions.feature.save'),
-                                cancel: t('config-editor-actions.feature.cancel')
+                                confirm: t('common.save'),
+                                cancel: t('common.cancel')
                             },
                             confirmProps: {
                                 color: 'red'
@@ -249,7 +249,7 @@ export function ConfigEditorActionsFeature(props: Props) {
                                     }
                                     onClick={copy}
                                 >
-                                    {t('config-profiles-grid.widget.copy-uuid')}
+                                    {t('common.copy-uuid')}
                                 </Menu.Item>
                             )}
                         </CopyButton>

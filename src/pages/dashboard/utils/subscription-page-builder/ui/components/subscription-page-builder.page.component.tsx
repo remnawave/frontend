@@ -660,7 +660,7 @@ export const SubscriptionPageBuilderComponent = () => {
                     </ScrollArea>
                     <Flex justify="flex-end" mt="lg">
                         <Button onClick={close} variant="outline">
-                            {t('subscription-page-builder.page.component.close')}
+                            {t('common.close')}
                         </Button>
                     </Flex>
                 </Modal>

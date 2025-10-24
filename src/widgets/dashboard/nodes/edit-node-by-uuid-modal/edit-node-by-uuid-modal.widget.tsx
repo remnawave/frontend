@@ -169,7 +169,7 @@ export const EditNodeByUuidModalWidget = () => {
                             size="sm"
                             variant="outline"
                         >
-                            {t('edit-node-by-uuid-modal.widget.close')}
+                            {t('common.close')}
                         </Button>
                     </ModalFooter>
                 </>

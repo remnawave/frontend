@@ -99,10 +99,7 @@ export const ConfigProfilesHeaderActionButtonsFeature = () => {
     return (
         <Group grow preventGrowOverflow={false} wrap="wrap">
             <ActionIconGroup>
-                <Tooltip
-                    label={t('config-profiles-header-action-buttons.feature.update')}
-                    withArrow
-                >
+                <Tooltip label={t('common.update')} withArrow>
                     <ActionIcon
                         loading={isFetching}
                         onClick={handleUpdate}
@@ -165,11 +162,11 @@ export const ConfigProfilesHeaderActionButtonsFeature = () => {
                         />
                         <Group justify="flex-end">
                             <Button color="gray" onClick={close} variant="light">
-                                {t('config-profiles-header-action-buttons.feature.cancel')}
+                                {t('common.cancel')}
                             </Button>
 
                             <Button color="teal" loading={isPending} type="submit">
-                                {t('config-profiles-header-action-buttons.feature.create')}
+                                {t('common.create')}
                             </Button>
                         </Group>
                     </Stack>

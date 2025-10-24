@@ -297,7 +297,7 @@ export const ExternalSquadsSettingsTabWidget = (props: IProps) => {
                 }}
                 variant="light"
             >
-                {t('external-squads.drawer.widget.save')}
+                {t('common.save')}
             </Button>
         </Paper>
     )

@@ -586,10 +586,10 @@ export const SnippetsDrawerWidget = () => {
                             }}
                             variant="subtle"
                         >
-                            {t('snippets.drawer.widget.cancel')}
+                            {t('common.cancel')}
                         </Button>
                         <Button loading={isCreating} type="submit">
-                            {t('snippets.drawer.widget.create')}
+                            {t('common.create')}
                         </Button>
                     </Group>
                 </Stack>
@@ -718,10 +718,10 @@ export const SnippetsDrawerWidget = () => {
                             }}
                             variant="subtle"
                         >
-                            {t('snippets.drawer.widget.cancel')}
+                            {t('common.cancel')}
                         </Button>
                         <Button loading={isUpdating} type="submit">
-                            {t('snippets.drawer.widget.update')}
+                            {t('common.save')}
                         </Button>
                     </Group>
                 </Stack>

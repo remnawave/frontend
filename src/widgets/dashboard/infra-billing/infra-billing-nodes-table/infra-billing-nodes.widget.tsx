@@ -82,8 +82,8 @@ export function InfraBillingNodesTableWidget() {
                 </Text>
             ),
             labels: {
-                confirm: t('infra-billing-nodes.widget.delete'),
-                cancel: t('infra-billing-nodes.widget.cancel')
+                confirm: t('common.delete'),
+                cancel: t('common.cancel')
             },
 
             centered: true,
@@ -183,7 +183,7 @@ export function InfraBillingNodesTableWidget() {
                         </AnimatePresence>
 
                         <ActionIconGroup>
-                            <Tooltip label={t('infra-billing-nodes.widget.refresh')} withArrow>
+                            <Tooltip label={t('common.refresh')} withArrow>
                                 <ActionIcon
                                     loading={infraBillingNodesLoading}
                                     onClick={() => {

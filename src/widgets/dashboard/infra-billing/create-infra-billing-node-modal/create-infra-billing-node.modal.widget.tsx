@@ -150,7 +150,7 @@ export function CreateInfraBillingNodeModalWidget() {
                     />
 
                     <Button loading={isCreateInfraBillingNodePending} type="submit">
-                        {t('create-infra-billing-node.modal.widget.create')}
+                        {t('common.create')}
                     </Button>
                 </Stack>
             </form>

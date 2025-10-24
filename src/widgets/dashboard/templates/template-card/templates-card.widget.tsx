@@ -116,7 +116,7 @@ export function TemplatesCardWidget(props: IProps) {
                             size="sm"
                             variant="light"
                         >
-                            {t('templates-card.widget.edit')}
+                            {t('common.edit')}
                         </Button>
                         <Menu
                             key={template.uuid}
@@ -158,7 +158,7 @@ export function TemplatesCardWidget(props: IProps) {
                                             }
                                             onClick={copy}
                                         >
-                                            {t('templates-card.widget.copy-uuid')}
+                                            {t('common.copy-uuid')}
                                         </Menu.Item>
                                     )}
                                 </CopyButton>
@@ -177,7 +177,7 @@ export function TemplatesCardWidget(props: IProps) {
                                         open(MODALS.RENAME_SQUAD_OR_CONFIG_PROFILE_MODAL)
                                     }}
                                 >
-                                    {t('templates-card.widget.rename')}
+                                    {t('common.rename')}
                                 </Menu.Item>
 
                                 <Menu.Item
@@ -189,7 +189,7 @@ export function TemplatesCardWidget(props: IProps) {
                                         handleDeleteTemplate(template.uuid)
                                     }}
                                 >
-                                    {t('templates-card.widget.delete')}
+                                    {t('common.delete')}
                                 </Menu.Item>
                             </Menu.Dropdown>
                         </Menu>

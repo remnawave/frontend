@@ -63,8 +63,8 @@ export function InternalSquadsGridWidget(props: IProps) {
                 </Text>
             ),
             labels: {
-                confirm: t('internal-squads-grid.widget.delete'),
-                cancel: t('internal-squads-grid.widget.cancel')
+                confirm: t('common.delete'),
+                cancel: t('common.cancel')
             },
             cancelProps: { variant: 'subtle', color: 'gray' },
             confirmProps: { color: 'red' },
@@ -99,8 +99,8 @@ export function InternalSquadsGridWidget(props: IProps) {
                 </Stack>
             ),
             labels: {
-                confirm: t('internal-squads-grid.widget.remove'),
-                cancel: t('internal-squads-grid.widget.cancel')
+                confirm: t('common.remove'),
+                cancel: t('common.cancel')
             },
             cancelProps: { variant: 'subtle', color: 'gray' },
             confirmProps: { color: 'red' },
@@ -131,8 +131,8 @@ export function InternalSquadsGridWidget(props: IProps) {
                 </Stack>
             ),
             labels: {
-                confirm: t('internal-squads-grid.widget.add'),
-                cancel: t('internal-squads-grid.widget.cancel')
+                confirm: t('common.add'),
+                cancel: t('common.cancel')
             },
             cancelProps: { variant: 'subtle', color: 'gray' },
             confirmProps: { color: 'teal' },

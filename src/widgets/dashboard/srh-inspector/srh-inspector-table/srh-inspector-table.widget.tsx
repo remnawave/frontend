@@ -176,7 +176,7 @@ export function SrhInspectorTableWidget() {
             <DataTableShared.Title
                 actions={
                     <ActionIconGroup>
-                        <Tooltip label={t('action-group.feature.update')} withArrow>
+                        <Tooltip label={t('common.update')} withArrow>
                             <ActionIcon
                                 loading={isLoading}
                                 onClick={() => refetch()}

@@ -91,7 +91,7 @@ export function CreateInfraProviderDrawerWidget() {
                     />
 
                     <Button loading={isCreateInfraProviderPending} type="submit">
-                        {t('create-infra-provider.drawer.widget.create')}
+                        {t('common.create')}
                     </Button>
                 </Stack>
             </form>

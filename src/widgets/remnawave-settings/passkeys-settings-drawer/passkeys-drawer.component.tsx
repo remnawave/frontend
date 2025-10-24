@@ -75,8 +75,8 @@ export const PasskeysDrawerComponent = ({ onClose, opened }: IProps) => {
             centered: true,
             children: t('passkeys-drawer.component.delete-passkey-confirmation'),
             labels: {
-                confirm: t('passkeys-drawer.component.delete'),
-                cancel: t('passkeys-drawer.component.cancel')
+                confirm: t('common.delete'),
+                cancel: t('common.cancel')
             },
             cancelProps: { variant: 'subtle', color: 'gray' },
             confirmProps: { color: 'red' },
@@ -188,7 +188,7 @@ export const PasskeysDrawerComponent = ({ onClose, opened }: IProps) => {
                         size="md"
                         variant="light"
                     >
-                        {t('passkeys-drawer.component.add')}
+                        {t('common.add')}
                     </Button>
                 </Group>
 

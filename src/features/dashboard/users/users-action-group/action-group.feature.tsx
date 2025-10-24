@@ -105,7 +105,7 @@ export const UserActionGroupFeature = (props: IProps) => {
                 </ActionIconGroup>
 
                 <ActionIconGroup>
-                    <Tooltip label={t('action-group.feature.update')} withArrow>
+                    <Tooltip label={t('common.update')} withArrow>
                         <ActionIcon
                             loading={isLoading}
                             onClick={handleRefetch}

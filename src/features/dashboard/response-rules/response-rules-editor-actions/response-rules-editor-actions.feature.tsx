@@ -275,7 +275,7 @@ export function ResponseRulesEditorActionsFeature(props: Props) {
 
                     <Group justify="flex-end">
                         <Button onClick={() => modals.closeAll()} variant="subtle">
-                            {t('response-rules-editor-actions.feature.close')}
+                            {t('common.close')}
                         </Button>
                         <CopyButton value={curlCommand}>
                             {({ copied, copy }) => (
@@ -306,7 +306,7 @@ export function ResponseRulesEditorActionsFeature(props: Props) {
                 loading={isUpdating}
                 onClick={handleSave}
             >
-                {t('config-editor-actions.feature.save')}
+                {t('common.save')}
             </Button>
 
             <Group gap={0} wrap="nowrap">

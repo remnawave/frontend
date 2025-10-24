@@ -147,7 +147,7 @@ export function ExternalSquadCardWidget(props: IProps) {
                             size="sm"
                             variant="light"
                         >
-                            {t('external-squad-card.widget.edit')}
+                            {t('common.edit')}
                         </Button>
                         <Menu
                             key={externalSquad.uuid}
@@ -204,7 +204,7 @@ export function ExternalSquadCardWidget(props: IProps) {
                                             }
                                             onClick={copy}
                                         >
-                                            {t('external-squad-card.widget.copy-uuid')}
+                                            {t('common.copy-uuid')}
                                         </Menu.Item>
                                     )}
                                 </CopyButton>
@@ -213,7 +213,7 @@ export function ExternalSquadCardWidget(props: IProps) {
                                     leftSection={<PiPencil size={18} />}
                                     onClick={handleRename}
                                 >
-                                    {t('external-squad-card.widget.rename')}
+                                    {t('common.rename')}
                                 </Menu.Item>
 
                                 <Menu.Item
@@ -221,7 +221,7 @@ export function ExternalSquadCardWidget(props: IProps) {
                                     leftSection={<PiTrashDuotone size={18} />}
                                     onClick={() => handleDeleteExternalSquad(externalSquad.uuid)}
                                 >
-                                    {t('external-squad-card.widget.delete')}
+                                    {t('common.delete')}
                                 </Menu.Item>
                             </Menu.Dropdown>
                         </Menu>

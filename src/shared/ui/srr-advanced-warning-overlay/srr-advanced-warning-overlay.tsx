@@ -97,7 +97,7 @@ export function SrrAdvancedWarningOverlay() {
                         size="md"
                         variant="light"
                     >
-                        {t('srr-advanced-warning-overlay.continue')}
+                        {t('common.continue')}
                     </Button>
                 </Stack>
             </Center>

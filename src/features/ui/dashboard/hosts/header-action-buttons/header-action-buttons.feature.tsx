@@ -26,7 +26,7 @@ export const HeaderActionButtonsFeature = () => {
     return (
         <Group grow preventGrowOverflow={false} wrap="wrap">
             <ActionIconGroup>
-                <Tooltip label={t('header-action-buttons.feature.update')} withArrow>
+                <Tooltip label={t('common.update')} withArrow>
                     <ActionIcon
                         loading={isFetching}
                         onClick={handleUpdate}

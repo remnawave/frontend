@@ -126,7 +126,7 @@ export function UpdateBillingDateModalWidget() {
 
                 <Group justify="flex-end" mt="lg">
                     <Button disabled={isLoading} onClick={handleClose} variant="default">
-                        {t('update-billing-date-modal.widget.cancel')}
+                        {t('common.cancel')}
                     </Button>
                     <Button
                         disabled={!selectedDate || !billingNode}

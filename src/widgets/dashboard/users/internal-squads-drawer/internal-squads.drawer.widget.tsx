@@ -361,7 +361,7 @@ export const InternalSquadsDrawer = (props: IProps) => {
                             }}
                             variant="light"
                         >
-                            {t('internal-squads.drawer.widget.save-changes')}
+                            {t('common.save')}
                         </Button>
                     </Stack>
                 </Paper>

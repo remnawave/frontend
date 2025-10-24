@@ -116,7 +116,7 @@ export const ExternalSquadsHeaderActionButtonsFeature = () => {
                         />
                         <Group justify="flex-end">
                             <Button color="gray" onClick={close} variant="subtle">
-                                {t('header-action-buttons.feature.cancel')}
+                                {t('common.cancel')}
                             </Button>
 
                             <Button
@@ -126,7 +126,7 @@ export const ExternalSquadsHeaderActionButtonsFeature = () => {
                                 type="submit"
                                 variant="light"
                             >
-                                {t('header-action-buttons.feature.create')}
+                                {t('common.create')}
                             </Button>
                         </Group>
                     </Stack>
