@@ -2,7 +2,7 @@ import { Box, Divider, Group, Stack, Text, ThemeIcon, Title } from '@mantine/cor
 import { ReactNode } from 'react'
 
 interface SettingsCardHeaderProps {
-    description: string
+    description: ReactNode | string
     icon: ReactNode
     title: string
 }
@@ -11,7 +11,7 @@ export function SettingsCardHeader({ description, icon, title }: SettingsCardHea
     return (
         <Box>
             <Group align="flex-start" justify="space-between">
-                <Group align="flex-start" gap="md">
+                <Group align="flex-start" gap="md" wrap="nowrap">
                     <ThemeIcon color="cyan" size="xl" variant="light">
                         {icon}
                     </ThemeIcon>

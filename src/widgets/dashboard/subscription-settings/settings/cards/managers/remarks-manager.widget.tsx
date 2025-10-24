@@ -62,7 +62,7 @@ export const RemarksManager = ({
     }, [])
 
     return (
-        <Paper p="sm" shadow="xs" withBorder>
+        <Paper bg="dark.6" p="sm" shadow="xs" withBorder>
             <Group align="center" gap="xs" justify="flex-start" mb="md">
                 <ThemeIcon color={iconColor} size="md" variant="light">
                     {icon}

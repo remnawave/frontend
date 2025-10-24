@@ -9,6 +9,7 @@ export function SettingsCardBottom({ children }: SettingsCardBottomProps) {
     return (
         <>
             <Divider
+                mt="lg"
                 style={{
                     opacity: 0.3
                 }}
