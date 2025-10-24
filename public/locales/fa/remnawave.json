@@ -1618,7 +1618,7 @@
             "widget": {
                 "subscription-templates": "الگوهای اشتراک",
                 "subscription-templates-description-line-1": "Select one template for each subscription type. If not selected, the default template will be used automatically.",
-                "subscription-templates-description-line-2": "Please note, Response Rules have a higher priority.",
+                "subscription-templates-description-line-2": "لطفا توجه کنید که قوانین پاسخ اولویت بالاتری خواهند داشت.",
                 "select-a-template": "یک الگو انتخاب کنید",
                 "default-template-in-use": "Default template in use...",
                 "edit-external-squad": "Edit external squad",
