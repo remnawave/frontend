@@ -22,7 +22,7 @@ import { modals } from '@mantine/modals'
 import { motion } from 'framer-motion'
 import clsx from 'clsx'
 
-import { MODALS, useModalsStore } from '@entities/dashboard/modal-store'
+import { MODALS, useModalsStoreOpenWithData } from '@entities/dashboard/modal-store'
 import { formatInt } from '@shared/utils/misc'
 import { XrayLogo } from '@shared/ui/logos'
 import { ROUTES } from '@shared/constants'
@@ -42,7 +42,8 @@ export function ConfigProfileCardWidget(props: IProps) {
 
     const [opened, handlers] = useDisclosure(false)
 
-    const { open, setInternalData } = useModalsStore()
+    const openModalWithData = useModalsStoreOpenWithData()
+
     const navigate = useNavigate()
 
     const nodesCount = configProfile.nodes.length
@@ -117,12 +118,10 @@ export function ConfigProfileCardWidget(props: IProps) {
                                             color="blue"
                                             leftSection={<PiTag size={12} />}
                                             onClick={() => {
-                                                setInternalData({
-                                                    internalState: configProfile,
-                                                    modalKey:
-                                                        MODALS.CONFIG_PROFILE_SHOW_INBOUNDS_DRAWER
-                                                })
-                                                open(MODALS.CONFIG_PROFILE_SHOW_INBOUNDS_DRAWER)
+                                                openModalWithData(
+                                                    MODALS.CONFIG_PROFILE_SHOW_INBOUNDS_DRAWER,
+                                                    configProfile
+                                                )
                                             }}
                                             size="lg"
                                             style={{ cursor: 'pointer' }}
@@ -139,12 +138,10 @@ export function ConfigProfileCardWidget(props: IProps) {
                                             color={isActive ? 'teal' : 'gray'}
                                             leftSection={<PiCpu size={12} />}
                                             onClick={() => {
-                                                setInternalData({
-                                                    internalState: configProfile.nodes,
-                                                    modalKey:
-                                                        MODALS.CONFIG_PROFILES_SHOW_ACTIVE_NODE
-                                                })
-                                                open(MODALS.CONFIG_PROFILES_SHOW_ACTIVE_NODE)
+                                                openModalWithData(
+                                                    MODALS.CONFIG_PROFILES_SHOW_ACTIVE_NODE,
+                                                    configProfile.nodes
+                                                )
                                             }}
                                             size="lg"
                                             style={{
@@ -274,14 +271,13 @@ export function ConfigProfileCardWidget(props: IProps) {
                                 <Menu.Item
                                     leftSection={<PiPencil size={18} />}
                                     onClick={() => {
-                                        setInternalData({
-                                            internalState: {
+                                        openModalWithData(
+                                            MODALS.RENAME_SQUAD_OR_CONFIG_PROFILE_MODAL,
+                                            {
                                                 name: configProfile.name,
                                                 uuid: configProfile.uuid
-                                            },
-                                            modalKey: MODALS.RENAME_SQUAD_OR_CONFIG_PROFILE_MODAL
-                                        })
-                                        open(MODALS.RENAME_SQUAD_OR_CONFIG_PROFILE_MODAL)
+                                            }
+                                        )
                                     }}
                                 >
                                     {t('common.rename')}

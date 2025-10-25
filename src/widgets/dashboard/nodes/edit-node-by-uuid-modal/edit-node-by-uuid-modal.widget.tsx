@@ -14,8 +14,8 @@ import {
     useGetPubKey,
     useUpdateNode
 } from '@shared/api/hooks'
+import { MODALS, useModalClose, useModalState } from '@entities/dashboard/modal-store'
 import { BaseNodeForm } from '@shared/ui/forms/nodes/base-node-form/base-node-form'
-import { MODALS, useModalsStore } from '@entities/dashboard/modal-store'
 import { bytesToGbUtil, gbToBytesUtil } from '@shared/utils/bytes'
 import { LoaderModalShared } from '@shared/ui/loader-modal'
 import { ModalFooter } from '@shared/ui/modal-footer'
@@ -26,11 +26,8 @@ import { NodeDetailsCardWidget } from '../node-details-card/node-details-card.wi
 export const EditNodeByUuidModalWidget = () => {
     const { t } = useTranslation()
 
-    const { isOpen, internalState: nodeUuid } = useModalsStore(
-        (state) => state.modals[MODALS.EDIT_NODE_BY_UUID_MODAL]
-    )
-
-    const { close } = useModalsStore()
+    const { isOpen, internalState: nodeUuid } = useModalState(MODALS.EDIT_NODE_BY_UUID_MODAL)
+    const close = useModalClose(MODALS.EDIT_NODE_BY_UUID_MODAL)
 
     const isMobile = useMediaQuery(`(max-width: ${em(768)})`)
 
@@ -57,7 +54,7 @@ export const EditNodeByUuidModalWidget = () => {
 
     const handleClose = (closeModal: boolean = false) => {
         if (closeModal) {
-            close(MODALS.EDIT_NODE_BY_UUID_MODAL)
+            close()
         }
 
         queryClient.removeQueries({
@@ -135,7 +132,7 @@ export const EditNodeByUuidModalWidget = () => {
             centered
             closeOnEscape={false}
             fullScreen={isMobile}
-            onClose={() => close(MODALS.EDIT_NODE_BY_UUID_MODAL)}
+            onClose={close}
             onExitTransitionEnd={() => handleClose()}
             opened={isOpen}
             size="900px"

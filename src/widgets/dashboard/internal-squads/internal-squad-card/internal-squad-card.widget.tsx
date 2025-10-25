@@ -25,7 +25,7 @@ import { useTranslation } from 'react-i18next'
 import { motion } from 'motion/react'
 import clsx from 'clsx'
 
-import { MODALS, useModalsStore } from '@entities/dashboard/modal-store'
+import { MODALS, useModalsStoreOpenWithData } from '@entities/dashboard/modal-store'
 import { formatInt } from '@shared/utils/misc'
 
 import classes from './internal-squad-card.module.css'
@@ -51,39 +51,14 @@ export function InternalSquadCardWidget(props: IProps) {
 
     const { t } = useTranslation()
     const [opened, handlers] = useDisclosure(false)
-    const { open, setInternalData } = useModalsStore()
+    const openModalWithData = useModalsStoreOpenWithData()
 
     const { membersCount } = internalSquad.info
     const { inboundsCount } = internalSquad.info
     const isActive = membersCount > 0
 
     const handleOpenInbounds = () => {
-        setInternalData({
-            internalState: internalSquad,
-            modalKey: MODALS.INTERNAL_SQUAD_SHOW_INBOUNDS
-        })
-        open(MODALS.INTERNAL_SQUAD_SHOW_INBOUNDS)
-    }
-
-    const handleOpenAccessibleNodes = () => {
-        setInternalData({
-            internalState: {
-                squadUuid: internalSquad.uuid
-            },
-            modalKey: MODALS.INTERNAL_SQUAD_ACCESSIBLE_NODES_DRAWER
-        })
-        open(MODALS.INTERNAL_SQUAD_ACCESSIBLE_NODES_DRAWER)
-    }
-
-    const handleRename = () => {
-        setInternalData({
-            internalState: {
-                name: internalSquad.name,
-                uuid: internalSquad.uuid
-            },
-            modalKey: MODALS.RENAME_SQUAD_OR_CONFIG_PROFILE_MODAL
-        })
-        open(MODALS.RENAME_SQUAD_OR_CONFIG_PROFILE_MODAL)
+        openModalWithData(MODALS.INTERNAL_SQUAD_SHOW_INBOUNDS, internalSquad)
     }
 
     return (
@@ -230,7 +205,14 @@ export function InternalSquadCardWidget(props: IProps) {
 
                                 <Menu.Item
                                     leftSection={<TbServerCog size={18} />}
-                                    onClick={handleOpenAccessibleNodes}
+                                    onClick={() =>
+                                        openModalWithData(
+                                            MODALS.INTERNAL_SQUAD_ACCESSIBLE_NODES_DRAWER,
+                                            {
+                                                squadUuid: internalSquad.uuid
+                                            }
+                                        )
+                                    }
                                 >
                                     {t('view-user-modal.widget.view-accessible-nodes')}
                                 </Menu.Item>
@@ -255,7 +237,15 @@ export function InternalSquadCardWidget(props: IProps) {
 
                                 <Menu.Item
                                     leftSection={<PiPencil size={18} />}
-                                    onClick={handleRename}
+                                    onClick={() =>
+                                        openModalWithData(
+                                            MODALS.RENAME_SQUAD_OR_CONFIG_PROFILE_MODAL,
+                                            {
+                                                name: internalSquad.name,
+                                                uuid: internalSquad.uuid
+                                            }
+                                        )
+                                    }
                                 >
                                     {t('common.rename')}
                                 </Menu.Item>

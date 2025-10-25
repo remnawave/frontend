@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next'
 import ColorHash from 'color-hash'
 import { memo } from 'react'
 
-import { MODALS, useModalsStore } from '@entities/dashboard/modal-store'
+import { MODALS, useModalClose, useModalState } from '@entities/dashboard/modal-store'
 import { useGetConfigProfiles, useGetHosts } from '@shared/api/hooks'
 import { SEARCH_PARAMS } from '@shared/constants/search-params'
 import { XrayLogo } from '@shared/ui/logos'
@@ -16,10 +16,8 @@ import { LoadingScreen } from '@shared/ui'
 import styles from './LinkedHosts.module.css'
 
 export const LinkedHostsDrawer = memo(() => {
-    const { isOpen, internalState: nodeUuid } = useModalsStore(
-        (state) => state.modals[MODALS.SHOW_NODE_LINKED_HOSTS_DRAWER]
-    )
-    const { close } = useModalsStore()
+    const { isOpen, internalState: nodeUuid } = useModalState(MODALS.SHOW_NODE_LINKED_HOSTS_DRAWER)
+    const close = useModalClose(MODALS.SHOW_NODE_LINKED_HOSTS_DRAWER)
 
     const { t } = useTranslation()
 
@@ -32,7 +30,7 @@ export const LinkedHostsDrawer = memo(() => {
         return (
             <Drawer
                 keepMounted={false}
-                onClose={() => close(MODALS.SHOW_NODE_LINKED_HOSTS_DRAWER)}
+                onClose={close}
                 opened={isOpen}
                 overlayProps={{ backgroundOpacity: 0.6, blur: 0 }}
                 padding="lg"
@@ -50,7 +48,7 @@ export const LinkedHostsDrawer = memo(() => {
     return (
         <Drawer
             keepMounted={false}
-            onClose={() => close(MODALS.SHOW_NODE_LINKED_HOSTS_DRAWER)}
+            onClose={close}
             opened={isOpen}
             overlayProps={{ backgroundOpacity: 0.6, blur: 0 }}
             padding="lg"
@@ -78,7 +76,7 @@ export const LinkedHostsDrawer = memo(() => {
                         <Box
                             className={styles.item}
                             onClick={() => {
-                                close(MODALS.SHOW_NODE_LINKED_HOSTS_DRAWER)
+                                close()
 
                                 navigate({
                                     pathname: ROUTES.DASHBOARD.MANAGEMENT.HOSTS,

@@ -1,5 +1,4 @@
 /* eslint-disable @stylistic/indent */
-
 import {
     Accordion,
     ActionIcon,
@@ -31,7 +30,7 @@ import {
     useUpdateInternalSquad
 } from '@shared/api/hooks'
 import { ConfigProfileCardShared } from '@shared/ui/config-profiles/config-profile-card/config-profile-card.shared'
-import { MODALS, useModalsStore } from '@entities/dashboard/modal-store'
+import { MODALS, useModalClose, useModalState } from '@entities/dashboard/modal-store'
 import { LoaderModalShared } from '@shared/ui/loader-modal'
 import { queryClient } from '@shared/api/query-client'
 import { formatInt } from '@shared/utils/misc'
@@ -39,20 +38,12 @@ import { formatInt } from '@shared/utils/misc'
 import classes from './internal-squads-with-store.module.css'
 
 export const InternalSquadsDrawerWithStore = () => {
-    const { isOpen, internalState: internalSquad } = useModalsStore(
-        (state) => state.modals[MODALS.INTERNAL_SQUAD_SHOW_INBOUNDS]
+    const { isOpen, internalState: internalSquad } = useModalState(
+        MODALS.INTERNAL_SQUAD_SHOW_INBOUNDS
     )
-    const { close } = useModalsStore()
-    const { t } = useTranslation()
+    const close = useModalClose(MODALS.INTERNAL_SQUAD_SHOW_INBOUNDS)
 
-    // const { data: internalSquad, isLoading: isInternalSquadLoading } = useGetInternalSquad({
-    //     route: {
-    //         uuid: internalState?.internalSquadUuid ?? ''
-    //     },
-    //     rQueryParams: {
-    //         enabled: !!internalState?.internalSquadUuid
-    //     }
-    // })
+    const { t } = useTranslation()
 
     const { data: configProfiles, isLoading: isConfigProfilesLoading } = useGetConfigProfiles()
 
@@ -200,7 +191,7 @@ export const InternalSquadsDrawerWithStore = () => {
                     queryClient.refetchQueries({
                         queryKey: internalSquadsQueryKeys.getInternalSquads.queryKey
                     })
-                    close(MODALS.INTERNAL_SQUAD_SHOW_INBOUNDS)
+                    close()
                 }
             }
         })
@@ -483,7 +474,7 @@ export const InternalSquadsDrawerWithStore = () => {
     return (
         <Drawer
             keepMounted={true}
-            onClose={() => close(MODALS.INTERNAL_SQUAD_SHOW_INBOUNDS)}
+            onClose={close}
             opened={isOpen}
             overlayProps={{ backgroundOpacity: 0.6, blur: 0 }}
             padding="md"

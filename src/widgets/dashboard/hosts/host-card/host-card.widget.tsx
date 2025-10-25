@@ -10,9 +10,10 @@ import { CSS } from '@dnd-kit/utilities'
 import ColorHash from 'color-hash'
 import cx from 'clsx'
 
-import { useHostsStoreActions, useHostsStoreFilters } from '@entities/dashboard'
+import { MODALS, useModalsStoreOpenWithData } from '@entities/dashboard/modal-store'
 import { resolveCountryCode } from '@shared/utils/misc/resolve-country-code'
 import { SEARCH_PARAMS } from '@shared/constants/search-params'
+import { useHostsStoreFilters } from '@entities/dashboard'
 import { XrayLogo } from '@shared/ui/logos'
 
 import classes from './HostCard.module.css'
@@ -32,7 +33,9 @@ export function HostCardWidget(props: IProps) {
     const [searchParams, setSearchParams] = useSearchParams()
 
     const filters = useHostsStoreFilters()
-    const actions = useHostsStoreActions()
+
+    const openModalWithData = useModalsStoreOpenWithData()
+
     const [isHovered, setIsHovered] = useState(false)
     const isMobile = useMediaQuery('(max-width: 48em)')
 
@@ -59,8 +62,7 @@ export function HostCardWidget(props: IProps) {
     }
 
     const handleEdit = () => {
-        actions.setHost(item)
-        actions.toggleEditModal(true)
+        openModalWithData(MODALS.EDIT_HOST_MODAL, item)
     }
 
     useEffect(() => {

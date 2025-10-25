@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next'
 
 import { ConfigEditorWidget } from '@widgets/dashboard/config-profiles/config-editor/config-editor.widget'
 import { SnippetsDrawerWidget } from '@widgets/dashboard/config-profiles/snippets-drawer'
-import { MODALS, useModalsStore } from '@entities/dashboard/modal-store'
+import { MODALS, useModalClose, useModalIsOpen } from '@entities/dashboard/modal-store'
 import { ROUTES } from '@shared/constants'
 import { PageHeader } from '@shared/ui'
 import { Page } from '@shared/ui/page'
@@ -21,10 +21,8 @@ export const ConfigProfileByUuidPageComponent = (props: Props) => {
     const { t } = useTranslation()
     const isMobile = useMediaQuery('(max-width: 1200px)')
 
-    const { isOpen } = useModalsStore(
-        (state) => state.modals[MODALS.CONFIG_PROFILE_SHOW_SNIPPETS_DRAWER]
-    )
-    const { close } = useModalsStore()
+    const isOpen = useModalIsOpen(MODALS.CONFIG_PROFILE_SHOW_SNIPPETS_DRAWER)
+    const close = useModalClose(MODALS.CONFIG_PROFILE_SHOW_SNIPPETS_DRAWER)
 
     return (
         <>
@@ -48,7 +46,7 @@ export const ConfigProfileByUuidPageComponent = (props: Props) => {
 
                         <Drawer
                             keepMounted={false}
-                            onClose={() => close(MODALS.CONFIG_PROFILE_SHOW_SNIPPETS_DRAWER)}
+                            onClose={close}
                             opened={isOpen}
                             overlayProps={{ backgroundOpacity: 0.6, blur: 0 }}
                             padding={0}

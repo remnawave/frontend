@@ -2,19 +2,19 @@ import { ActionIcon, Tooltip } from '@mantine/core'
 import { useTranslation } from 'react-i18next'
 import { TbTrash } from 'react-icons/tb'
 
-import { useHostsStoreActions, useHostsStoreEditModalHost } from '@entities/dashboard'
+import { MODALS, useModalClose, useModalState } from '@entities/dashboard/modal-store'
 import { useDeleteHost } from '@shared/api/hooks'
 
 export function DeleteHostFeature() {
     const { t } = useTranslation()
 
-    const actions = useHostsStoreActions()
-    const host = useHostsStoreEditModalHost()
+    const { internalState: host } = useModalState(MODALS.EDIT_HOST_MODAL)
+    const close = useModalClose(MODALS.EDIT_HOST_MODAL)
 
     const { mutate: deleteHost, isPending: isDeleteHostPending } = useDeleteHost({
         mutationFns: {
             onSuccess: () => {
-                actions.toggleEditModal(false)
+                close()
             }
         }
     })

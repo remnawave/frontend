@@ -2,7 +2,8 @@ import {
     GetConfigProfilesCommand,
     GetExternalSquadsCommand,
     GetInfraProvidersCommand,
-    GetInternalSquadsCommand
+    GetInternalSquadsCommand,
+    UpdateHostCommand
 } from '@remnawave/backend-contract'
 
 export const MODALS = {
@@ -21,16 +22,20 @@ export const MODALS = {
     RENAME_SQUAD_OR_CONFIG_PROFILE_MODAL: 'RENAME_SQUAD_OR_CONFIG_PROFILE_MODAL',
     INTERNAL_SQUAD_ACCESSIBLE_NODES_DRAWER: 'INTERNAL_SQUAD_ACCESSIBLE_NODES_DRAWER',
     CONFIG_PROFILE_SHOW_INBOUNDS_DRAWER: 'CONFIG_PROFILE_SHOW_INBOUNDS_DRAWER',
-    CONFIG_PROFILE_SHOW_SNIPPETS_DRAWER: 'CONFIG_PROFILE_SHOW_SNIPPETS_DRAWER'
+    CONFIG_PROFILE_SHOW_SNIPPETS_DRAWER: 'CONFIG_PROFILE_SHOW_SNIPPETS_DRAWER',
+    EDIT_HOST_MODAL: 'EDIT_HOST_MODAL',
+    CREATE_HOST_MODAL: 'CREATE_HOST_MODAL'
 } as const
 
 export interface ModalInternalStates {
     CONFIG_PROFILE_SHOW_INBOUNDS_DRAWER: GetConfigProfilesCommand.Response['response']['configProfiles'][number]
     CONFIG_PROFILE_SHOW_SNIPPETS_DRAWER: undefined
     CONFIG_PROFILES_SHOW_ACTIVE_NODE: GetConfigProfilesCommand.Response['response']['configProfiles'][number]['nodes']
+    CREATE_HOST_MODAL: undefined
     CREATE_INFRA_BILLING_NODE_MODAL: undefined
     CREATE_INFRA_BILLING_RECORD_DRAWER: undefined
     CREATE_INFRA_PROVIDER_DRAWER: undefined
+    EDIT_HOST_MODAL: UpdateHostCommand.Response['response']
     EDIT_NODE_BY_UUID_MODAL: {
         nodeUuid: string
     }

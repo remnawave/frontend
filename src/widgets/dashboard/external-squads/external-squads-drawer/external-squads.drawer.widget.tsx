@@ -18,7 +18,7 @@ import { PiCheck, PiCopy, PiUsers } from 'react-icons/pi'
 import { useTranslation } from 'react-i18next'
 import { useState } from 'react'
 
-import { MODALS, useModalsStore } from '@entities/dashboard/modal-store'
+import { MODALS, useModalClose, useModalState } from '@entities/dashboard/modal-store'
 import { useGetSubscriptionTemplates } from '@shared/api/hooks'
 import { LoaderModalShared } from '@shared/ui/loader-modal'
 import { formatInt } from '@shared/utils/misc'
@@ -39,10 +39,8 @@ export const ExternalSquadsDrawer = () => {
 
     const [activeTab, setActiveTab] = useState<TabType>('templates')
 
-    const { isOpen, internalState: externalSquad } = useModalsStore(
-        (state) => state.modals[MODALS.EXTERNAL_SQUAD_DRAWER]
-    )
-    const { close } = useModalsStore()
+    const { isOpen, internalState: externalSquad } = useModalState(MODALS.EXTERNAL_SQUAD_DRAWER)
+    const close = useModalClose(MODALS.EXTERNAL_SQUAD_DRAWER)
 
     const { isLoading: isTemplatesLoading } = useGetSubscriptionTemplates()
 
@@ -204,7 +202,7 @@ export const ExternalSquadsDrawer = () => {
     return (
         <Drawer
             keepMounted={true}
-            onClose={() => close(MODALS.EXTERNAL_SQUAD_DRAWER)}
+            onClose={close}
             opened={isOpen}
             overlayProps={{ backgroundOpacity: 0.6, blur: 0 }}
             padding="md"

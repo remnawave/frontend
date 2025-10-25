@@ -17,13 +17,20 @@ import { useTranslation } from 'react-i18next'
 import { modals } from '@mantine/modals'
 import consola from 'consola/browser'
 
+import {
+    MODALS,
+    useModalClose,
+    useModalsStoreOpenWithData,
+    useModalState
+} from '@entities/dashboard/modal-store'
 import { KeypairGeneratorWidget } from '@widgets/dashboard/config-profiles/keypair-generator/keypair-generator.widget'
 import { useDownloadTemplate } from '@shared/ui/load-templates/use-download-template'
-import { MODALS, useModalsStore } from '@entities/dashboard/modal-store'
 import { QueryKeys, useUpdateConfigProfile } from '@shared/api/hooks'
 import { queryClient } from '@shared/api'
 
 import { Props } from './interfaces'
+
+const MODAL_KEY = MODALS.CONFIG_PROFILE_SHOW_SNIPPETS_DRAWER
 
 export function ConfigEditorActionsFeature(props: Props) {
     const {
@@ -42,13 +49,11 @@ export function ConfigEditorActionsFeature(props: Props) {
     const isMobile = useMediaQuery('(max-width: 48em)')
     const clipboard = useClipboard({ timeout: 500 })
 
-    const modalsStore = useModalsStore()
-    const { open, close, setInternalData } = modalsStore
+    const { isOpen } = useModalState(MODAL_KEY)
+    const close = useModalClose(MODAL_KEY)
+    const openWithData = useModalsStoreOpenWithData()
 
     const [opened, handlers] = useDisclosure(false)
-
-    const isSnippetsOpen =
-        modalsStore.modals[MODALS.CONFIG_PROFILE_SHOW_SNIPPETS_DRAWER]?.isOpen || false
 
     const { mutate: updateConfig, isPending: isUpdating } = useUpdateConfigProfile({
         mutationFns: {
@@ -323,14 +328,10 @@ export function ConfigEditorActionsFeature(props: Props) {
 
                 <ActionIcon
                     onClick={() => {
-                        if (isSnippetsOpen) {
-                            close(MODALS.CONFIG_PROFILE_SHOW_SNIPPETS_DRAWER)
+                        if (isOpen) {
+                            close()
                         } else {
-                            setInternalData({
-                                internalState: undefined,
-                                modalKey: MODALS.CONFIG_PROFILE_SHOW_SNIPPETS_DRAWER
-                            })
-                            open(MODALS.CONFIG_PROFILE_SHOW_SNIPPETS_DRAWER)
+                            openWithData(MODAL_KEY, undefined)
                         }
                     }}
                     size={36}
@@ -338,7 +339,7 @@ export function ConfigEditorActionsFeature(props: Props) {
                         borderTopLeftRadius: 0,
                         borderBottomLeftRadius: 0
                     }}
-                    variant={isSnippetsOpen ? 'filled' : 'default'}
+                    variant={isOpen ? 'filled' : 'default'}
                 >
                     <TbBraces size={20} />
                 </ActionIcon>

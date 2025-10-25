@@ -39,9 +39,9 @@ import { RevokeSubscriptionUserFeature } from '@features/ui/dashboard/users/revo
 import { useBulkUsersActionsStoreActions } from '@entities/dashboard/users/bulk-users-actions-store'
 import { GetHwidUserDevicesFeature } from '@features/ui/dashboard/users/get-hwid-user-devices'
 import { ResetUsageUserFeature } from '@features/ui/dashboard/users/reset-usage-user'
+import { MODALS, useModalsStoreOpenWithData } from '@entities/dashboard/modal-store'
 import { GetUserUsageFeature } from '@features/ui/dashboard/users/get-user-usage'
 import { DeleteUserFeature } from '@features/ui/dashboard/users/delete-user'
-import { MODALS, useModalsStore } from '@entities/dashboard/modal-store'
 import { bytesToGbUtil, gbToBytesUtil } from '@shared/utils/bytes'
 import { LoaderModalShared } from '@shared/ui/loader-modal'
 import { handleFormErrors } from '@shared/utils/misc'
@@ -80,7 +80,7 @@ export const ViewUserModal = () => {
 
     const isMobile = useMediaQuery(`(max-width: ${em(768)})`)
 
-    const { open: openModal, setInternalData } = useModalsStore()
+    const openModalWithData = useModalsStoreOpenWithData()
 
     const { data: internalSquads } = useGetInternalSquads()
     const { data: externalSquads } = useGetExternalSquads()
@@ -400,13 +400,9 @@ export const ViewUserModal = () => {
                                     <Menu.Item
                                         leftSection={<TbServerCog size={14} />}
                                         onClick={() => {
-                                            setInternalData({
-                                                internalState: {
-                                                    userUuid: user.uuid
-                                                },
-                                                modalKey: MODALS.USER_ACCESSIBLE_NODES_DRAWER
+                                            openModalWithData(MODALS.USER_ACCESSIBLE_NODES_DRAWER, {
+                                                userUuid: user.uuid
                                             })
-                                            openModal(MODALS.USER_ACCESSIBLE_NODES_DRAWER)
                                         }}
                                     >
                                         {t('view-user-modal.widget.view-accessible-nodes')}

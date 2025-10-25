@@ -9,7 +9,7 @@ import { motion } from 'framer-motion'
 import { ReactNode } from 'react'
 import clsx from 'clsx'
 
-import { MODALS, useModalsStore } from '@entities/dashboard/modal-store'
+import { MODALS, useModalsStoreOpenWithData } from '@entities/dashboard/modal-store'
 import { ROUTES } from '@shared/constants'
 
 import classes from './templates-card.module.css'
@@ -28,7 +28,8 @@ export function TemplatesCardWidget(props: IProps) {
 
     const { t } = useTranslation()
 
-    const { open, setInternalData } = useModalsStore()
+    const openModalWithData = useModalsStoreOpenWithData()
+
     const [opened, handlers] = useDisclosure(false)
 
     const navigate = useNavigate()
@@ -167,14 +168,13 @@ export function TemplatesCardWidget(props: IProps) {
                                     disabled={template.name === 'Default'}
                                     leftSection={<PiPencil size={18} />}
                                     onClick={() => {
-                                        setInternalData({
-                                            internalState: {
+                                        openModalWithData(
+                                            MODALS.RENAME_SQUAD_OR_CONFIG_PROFILE_MODAL,
+                                            {
                                                 name: template.name,
                                                 uuid: template.uuid
-                                            },
-                                            modalKey: MODALS.RENAME_SQUAD_OR_CONFIG_PROFILE_MODAL
-                                        })
-                                        open(MODALS.RENAME_SQUAD_OR_CONFIG_PROFILE_MODAL)
+                                            }
+                                        )
                                     }}
                                 >
                                     {t('common.rename')}

@@ -17,7 +17,7 @@ import { modals } from '@mantine/modals'
 import { useMemo } from 'react'
 
 import { QueryKeys, useDeleteInfraProvider, useGetInfraProviders } from '@shared/api/hooks'
-import { MODALS, useModalsStore } from '@entities/dashboard/modal-store'
+import { MODALS, useModalsStoreOpenWithData } from '@entities/dashboard/modal-store'
 import { DataTableShared } from '@shared/ui/table'
 import { queryClient } from '@shared/api'
 
@@ -31,7 +31,9 @@ export function InfraProvidersTableWidget() {
         isFetching: infraProvidersLoading,
         refetch: refetchInfraProviders
     } = useGetInfraProviders()
-    const { open: openModal, setInternalData } = useModalsStore()
+
+    const openModalWithData = useModalsStoreOpenWithData()
+
     const { t } = useTranslation()
 
     const memoizedInfraProviders = useMemo(() => infraProviders, [infraProviders])
@@ -64,11 +66,7 @@ export function InfraProvidersTableWidget() {
     const handleOpenModal = (
         row: GetInfraProvidersCommand.Response['response']['providers'][number]
     ) => {
-        setInternalData({
-            internalState: row,
-            modalKey: MODALS.VIEW_INFRA_PROVIDER_DRAWER
-        })
-        openModal(MODALS.VIEW_INFRA_PROVIDER_DRAWER)
+        openModalWithData(MODALS.VIEW_INFRA_PROVIDER_DRAWER, row)
     }
 
     const handleDeleteInfraProvider = (uuid: string) =>
@@ -122,7 +120,10 @@ export function InfraProvidersTableWidget() {
                                 <ActionIcon
                                     color="teal"
                                     onClick={() => {
-                                        openModal(MODALS.CREATE_INFRA_PROVIDER_DRAWER)
+                                        openModalWithData(
+                                            MODALS.CREATE_INFRA_PROVIDER_DRAWER,
+                                            undefined
+                                        )
                                     }}
                                     size="lg"
                                     variant="light"
@@ -154,7 +155,9 @@ export function InfraProvidersTableWidget() {
                             {t('infra-providers-table.widget.no-providers-found')}
                         </Text>
                         <Button
-                            onClick={() => openModal(MODALS.CREATE_INFRA_PROVIDER_DRAWER)}
+                            onClick={() =>
+                                openModalWithData(MODALS.CREATE_INFRA_PROVIDER_DRAWER, undefined)
+                            }
                             style={{ pointerEvents: 'all' }}
                             variant="light"
                         >

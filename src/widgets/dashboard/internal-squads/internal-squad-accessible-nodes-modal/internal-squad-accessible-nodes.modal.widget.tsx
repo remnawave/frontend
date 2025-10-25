@@ -21,7 +21,7 @@ import { TbServer } from 'react-icons/tb'
 import { PiTag } from 'react-icons/pi'
 import ColorHash from 'color-hash'
 
-import { MODALS, useModalsStore } from '@entities/dashboard/modal-store'
+import { MODALS, useModalClose, useModalState } from '@entities/dashboard/modal-store'
 import { useGetInternalSquadAccessibleNodes } from '@shared/api/hooks'
 import { XrayLogo } from '@shared/ui/logos'
 
@@ -77,10 +77,8 @@ const ch = new ColorHash({
 export const InternalSquadAccessibleNodesModalWidget = () => {
     const { t } = useTranslation()
 
-    const { isOpen, internalState } = useModalsStore(
-        (state) => state.modals[MODALS.INTERNAL_SQUAD_ACCESSIBLE_NODES_DRAWER]
-    )
-    const { close } = useModalsStore()
+    const { isOpen, internalState } = useModalState(MODALS.INTERNAL_SQUAD_ACCESSIBLE_NODES_DRAWER)
+    const close = useModalClose(MODALS.INTERNAL_SQUAD_ACCESSIBLE_NODES_DRAWER)
 
     const { data: internalSquadAccessibleNodes, isLoading } = useGetInternalSquadAccessibleNodes({
         route: {
@@ -300,7 +298,7 @@ export const InternalSquadAccessibleNodesModalWidget = () => {
     return (
         <Drawer
             keepMounted={false}
-            onClose={() => close(MODALS.INTERNAL_SQUAD_ACCESSIBLE_NODES_DRAWER)}
+            onClose={close}
             opened={isOpen}
             overlayProps={{ backgroundOpacity: 0.6, blur: 0 }}
             padding="lg"

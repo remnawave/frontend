@@ -20,7 +20,7 @@ import {
     useDeleteInfraBillingHistoryRecord,
     useGetInfraBillingHistoryRecords
 } from '@shared/api/hooks'
-import { MODALS, useModalsStore } from '@entities/dashboard/modal-store'
+import { MODALS, useModalsStoreOpenWithData } from '@entities/dashboard/modal-store'
 import { DataTableShared } from '@shared/ui/table'
 
 import { getInfraBillingRecordsColumns } from './use-infra-billing-records-columns'
@@ -40,10 +40,14 @@ export function InfraBillingRecordsTableWidget() {
             size: PAGE_SIZE
         }
     })
-    const { open: openModal } = useModalsStore()
+    const openModalWithData = useModalsStoreOpenWithData()
     const { t } = useTranslation()
 
-    useHotkeys([['mod + K', () => openModal(MODALS.CREATE_INFRA_BILLING_RECORD_DRAWER)]])
+    const handleOpenModal = () => {
+        openModalWithData(MODALS.CREATE_INFRA_BILLING_RECORD_DRAWER, undefined)
+    }
+
+    useHotkeys([['mod + K', handleOpenModal]])
 
     const memoizedInfraBillingRecords = useMemo(() => infraBillingRecords, [infraBillingRecords])
 
@@ -99,9 +103,7 @@ export function InfraBillingRecordsTableWidget() {
                             <Tooltip label={t('common.create')} withArrow>
                                 <ActionIcon
                                     color="teal"
-                                    onClick={() => {
-                                        openModal(MODALS.CREATE_INFRA_BILLING_RECORD_DRAWER)
-                                    }}
+                                    onClick={handleOpenModal}
                                     size="lg"
                                     variant="light"
                                 >
@@ -126,7 +128,7 @@ export function InfraBillingRecordsTableWidget() {
                             {t('infra-billing-records-table.widget.no-billing-records-found')}
                         </Text>
                         <Button
-                            onClick={() => openModal(MODALS.CREATE_INFRA_BILLING_RECORD_DRAWER)}
+                            onClick={handleOpenModal}
                             style={{ pointerEvents: 'all' }}
                             variant="light"
                         >

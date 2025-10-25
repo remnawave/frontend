@@ -10,17 +10,15 @@ import dayjs from 'dayjs'
 
 import { SelectInfraProviderShared } from '@shared/ui/infra-billing/select-infra-provider/select-infra-provider.shared'
 import { SelectBillingNodeShared } from '@shared/ui/infra-billing/select-billing-node/select-billing-node.shared'
+import { MODALS, useModalClose, useModalIsOpen } from '@entities/dashboard/modal-store'
 import { QueryKeys, useCreateInfraBillingNode } from '@shared/api/hooks'
-import { MODALS, useModalsStore } from '@entities/dashboard/modal-store'
 import { handleFormErrors } from '@shared/utils/misc'
 import { queryClient } from '@shared/api'
 
 export function CreateInfraBillingNodeModalWidget() {
-    const { isOpen } = useModalsStore(
-        (state) => state.modals[MODALS.CREATE_INFRA_BILLING_NODE_MODAL]
-    )
+    const isOpen = useModalIsOpen(MODALS.CREATE_INFRA_BILLING_NODE_MODAL)
+    const close = useModalClose(MODALS.CREATE_INFRA_BILLING_NODE_MODAL)
 
-    const { close } = useModalsStore()
     const { t } = useTranslation()
 
     const form = useForm<CreateInfraBillingNodeCommand.Request>({
@@ -51,7 +49,7 @@ export function CreateInfraBillingNodeModalWidget() {
 
                     form.reset()
 
-                    close(MODALS.CREATE_INFRA_BILLING_NODE_MODAL)
+                    close()
                 },
                 onError: (error) => {
                     handleFormErrors(form, error)
@@ -90,7 +88,7 @@ export function CreateInfraBillingNodeModalWidget() {
             onClose={() => {
                 form.reset()
 
-                close(MODALS.CREATE_INFRA_BILLING_NODE_MODAL)
+                close()
             }}
             opened={isOpen}
             overlayProps={{ backgroundOpacity: 0.6, blur: 0 }}

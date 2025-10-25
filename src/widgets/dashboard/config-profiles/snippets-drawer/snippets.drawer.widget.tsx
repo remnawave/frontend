@@ -39,8 +39,8 @@ import {
     useUpdateSnippet
 } from '@shared/api/hooks'
 import { MonacoSetupSnippetsFeature } from '@features/dashboard/config-profiles/monaco-setup/monaco-setup.feature'
+import { MODALS, useModalClose, useModalState } from '@entities/dashboard/modal-store'
 import { CopyableFieldShared } from '@shared/ui/copyable-field/copyable-field'
-import { MODALS, useModalsStore } from '@entities/dashboard/modal-store'
 import { queryClient } from '@shared/api'
 
 import classes from './SnippetsDrawer.module.css'
@@ -48,9 +48,8 @@ import classes from './SnippetsDrawer.module.css'
 export const SnippetsDrawerWidget = () => {
     const { t, i18n } = useTranslation()
 
-    const { internalState } = useModalsStore(
-        (state) => state.modals[MODALS.CONFIG_PROFILE_SHOW_SNIPPETS_DRAWER]
-    )
+    const { isOpen } = useModalState(MODALS.CONFIG_PROFILE_SHOW_SNIPPETS_DRAWER)
+    const close = useModalClose(MODALS.CONFIG_PROFILE_SHOW_SNIPPETS_DRAWER)
 
     const monacoRef = useRef<Monaco | null>(null)
     const editorRef = useRef<editor.IStandaloneCodeEditor | null>(null)
@@ -62,8 +61,6 @@ export const SnippetsDrawerWidget = () => {
     }, [monacoRef.current, i18n.language])
 
     const isMobile = useMediaQuery('(max-width: 1200px)')
-
-    const { close } = useModalsStore()
 
     const [createModalOpened, { open: openCreateModal, close: closeCreateModal }] =
         useDisclosure(false)
@@ -93,7 +90,7 @@ export const SnippetsDrawerWidget = () => {
 
     const { data: snippets, isLoading } = useGetSnippets({
         rQueryParams: {
-            enabled: !!internalState
+            enabled: !!isOpen
         }
     })
 
@@ -771,12 +768,7 @@ export const SnippetsDrawerWidget = () => {
                         >
                             <TbRefresh size={18} />
                         </ActionIcon>
-                        <ActionIcon
-                            color="gray"
-                            onClick={() => close(MODALS.CONFIG_PROFILE_SHOW_SNIPPETS_DRAWER)}
-                            size="sm"
-                            variant="subtle"
-                        >
+                        <ActionIcon color="gray" onClick={close} size="sm" variant="subtle">
                             <TbX size={18} />
                         </ActionIcon>
                     </Group>

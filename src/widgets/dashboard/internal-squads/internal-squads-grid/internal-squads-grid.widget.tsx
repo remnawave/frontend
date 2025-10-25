@@ -10,7 +10,6 @@ import {
     useDeleteUsersFromInternalSquad,
     useGetInternalSquads
 } from '@shared/api/hooks'
-import { InternalSquadsDrawerWithStore } from '@widgets/dashboard/users/internal-squads-drawer-with-store'
 import { baseNotificationsMutations } from '@shared/ui/notifications/base-notification-mutations'
 import { queryClient } from '@shared/api/query-client'
 import { sToMs } from '@shared/utils/time-utils'
@@ -192,8 +191,6 @@ export function InternalSquadsGridWidget(props: IProps) {
                     key={internalSquad.uuid}
                 />
             ))}
-
-            <InternalSquadsDrawerWithStore />
         </SimpleGrid>
     )
 }

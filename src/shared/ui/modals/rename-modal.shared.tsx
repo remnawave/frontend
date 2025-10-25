@@ -16,7 +16,7 @@ import {
     useUpdateInternalSquad,
     useUpdateSubscriptionTemplate
 } from '@shared/api/hooks'
-import { MODALS, useModalsStore } from '@entities/dashboard/modal-store'
+import { MODALS, useModalClose, useModalState } from '@entities/dashboard/modal-store'
 import { queryClient } from '@shared/api/query-client'
 
 type RenameType = 'configProfile' | 'externalSquad' | 'internalSquad' | 'template'
@@ -28,10 +28,8 @@ interface IProps {
 export function RenameModalShared({ renameFrom }: IProps) {
     const { t } = useTranslation()
 
-    const { isOpen, internalState } = useModalsStore(
-        (state) => state.modals[MODALS.RENAME_SQUAD_OR_CONFIG_PROFILE_MODAL]
-    )
-    const { close } = useModalsStore()
+    const { isOpen, internalState } = useModalState(MODALS.RENAME_SQUAD_OR_CONFIG_PROFILE_MODAL)
+    const close = useModalClose(MODALS.RENAME_SQUAD_OR_CONFIG_PROFILE_MODAL)
 
     const nameField = useField<string>({
         mode: 'controlled',
@@ -68,7 +66,7 @@ export function RenameModalShared({ renameFrom }: IProps) {
     })
 
     const handleModalClose = () => {
-        close(MODALS.RENAME_SQUAD_OR_CONFIG_PROFILE_MODAL)
+        close()
     }
 
     const { mutate: updateInternalSquad, isPending: isUpdatingInternalSquad } =

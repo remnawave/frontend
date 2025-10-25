@@ -15,14 +15,14 @@ import { useTranslation } from 'react-i18next'
 import { useField } from '@mantine/form'
 
 import { QueryKeys, useCreateExternalSquad, useGetExternalSquads } from '@shared/api/hooks'
-import { MODALS, useModalsStore } from '@entities/dashboard/modal-store'
+import { MODALS, useModalsStoreOpenWithData } from '@entities/dashboard/modal-store'
 import { queryClient } from '@shared/api'
 
 export const ExternalSquadsHeaderActionButtonsFeature = () => {
     const { isFetching } = useGetExternalSquads()
     const { t } = useTranslation()
 
-    const { open: openModal, setInternalData } = useModalsStore()
+    const openModalWithData = useModalsStoreOpenWithData()
 
     const [opened, { open, close }] = useDisclosure(false)
 
@@ -48,11 +48,7 @@ export const ExternalSquadsHeaderActionButtonsFeature = () => {
                 nameField.reset()
                 handleUpdate()
 
-                setInternalData({
-                    internalState: data,
-                    modalKey: MODALS.EXTERNAL_SQUAD_DRAWER
-                })
-                openModal(MODALS.EXTERNAL_SQUAD_DRAWER)
+                openModalWithData(MODALS.EXTERNAL_SQUAD_DRAWER, data)
             },
             onError: (error) => {
                 nameField.setError(error.message)

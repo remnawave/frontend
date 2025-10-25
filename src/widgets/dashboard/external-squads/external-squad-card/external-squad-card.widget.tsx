@@ -19,7 +19,7 @@ import { useTranslation } from 'react-i18next'
 import { motion } from 'motion/react'
 import clsx from 'clsx'
 
-import { MODALS, useModalsStore } from '@entities/dashboard/modal-store'
+import { MODALS, useModalsStoreOpenWithData } from '@entities/dashboard/modal-store'
 import { formatInt } from '@shared/utils/misc'
 
 import classes from './external-squad-card.module.css'
@@ -45,28 +45,21 @@ export function ExternalSquadCardWidget(props: IProps) {
 
     const { t } = useTranslation()
     const [opened, handlers] = useDisclosure(false)
-    const { open, setInternalData } = useModalsStore()
+
+    const openModalWithData = useModalsStoreOpenWithData()
 
     const { membersCount } = externalSquad.info
     const isActive = membersCount > 0
 
     const handleOpenInbounds = () => {
-        setInternalData({
-            internalState: externalSquad,
-            modalKey: MODALS.EXTERNAL_SQUAD_DRAWER
-        })
-        open(MODALS.EXTERNAL_SQUAD_DRAWER)
+        openModalWithData(MODALS.EXTERNAL_SQUAD_DRAWER, externalSquad)
     }
 
     const handleRename = () => {
-        setInternalData({
-            internalState: {
-                name: externalSquad.name,
-                uuid: externalSquad.uuid
-            },
-            modalKey: MODALS.RENAME_SQUAD_OR_CONFIG_PROFILE_MODAL
+        openModalWithData(MODALS.RENAME_SQUAD_OR_CONFIG_PROFILE_MODAL, {
+            name: externalSquad.name,
+            uuid: externalSquad.uuid
         })
-        open(MODALS.RENAME_SQUAD_OR_CONFIG_PROFILE_MODAL)
     }
 
     return (

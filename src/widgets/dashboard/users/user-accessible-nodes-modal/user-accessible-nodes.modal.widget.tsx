@@ -20,7 +20,7 @@ import ReactCountryFlag from 'react-country-flag'
 import { useTranslation } from 'react-i18next'
 import { PiTag } from 'react-icons/pi'
 
-import { MODALS, useModalsStore } from '@entities/dashboard/modal-store'
+import { MODALS, useModalClose, useModalState } from '@entities/dashboard/modal-store'
 import { useGetUserAccessibleNodes } from '@shared/api/hooks'
 import { XrayLogo } from '@shared/ui/logos'
 
@@ -48,10 +48,8 @@ interface RenderTreeNodeProps {
 export const UserAccessibleNodesModalWidget = () => {
     const { t } = useTranslation()
 
-    const { isOpen, internalState } = useModalsStore(
-        (state) => state.modals[MODALS.USER_ACCESSIBLE_NODES_DRAWER]
-    )
-    const { close } = useModalsStore()
+    const { isOpen, internalState } = useModalState(MODALS.USER_ACCESSIBLE_NODES_DRAWER)
+    const close = useModalClose(MODALS.USER_ACCESSIBLE_NODES_DRAWER)
 
     const { data: userAccessibleNodes, isLoading } = useGetUserAccessibleNodes({
         route: {
@@ -345,7 +343,7 @@ export const UserAccessibleNodesModalWidget = () => {
     return (
         <Drawer
             keepMounted={false}
-            onClose={() => close(MODALS.USER_ACCESSIBLE_NODES_DRAWER)}
+            onClose={close}
             opened={isOpen}
             overlayProps={{ backgroundOpacity: 0.6, blur: 0 }}
             padding="lg"
