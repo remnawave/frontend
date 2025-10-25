@@ -17,7 +17,7 @@ export const SidebarTitleShared = (props: IProps) => {
                 WebkitUserSelect: 'none'
             }}
         >
-            <Text c="cyan" component="span" fw={700}>
+            <Text c={title ? 'white' : 'cyan'} component="span" fw={700}>
                 {title || 'Remna'}
             </Text>
             {title ? '' : 'wave'}

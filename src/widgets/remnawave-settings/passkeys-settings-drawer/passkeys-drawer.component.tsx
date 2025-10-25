@@ -2,6 +2,7 @@ import {
     ActionIcon,
     Box,
     Button,
+    Code,
     Divider,
     Drawer,
     Flex,
@@ -92,12 +93,28 @@ export const PasskeysDrawerComponent = ({ onClose, opened }: IProps) => {
         setIsPasskeyRegistering(true)
 
         try {
-            const { data: registrationOptions } = await getPasskeyRegistrationOptions()
+            const {
+                data: registrationOptions,
+                isError,
+                error
+            } = await getPasskeyRegistrationOptions()
 
-            consola.log('registrationOptions', registrationOptions)
+            if (isError) {
+                modals.open({
+                    title: 'Request Failed',
+                    centered: true,
+                    children: (
+                        <Stack gap="md">
+                            <Code p="md">
+                                <Text c="red.1" fw={500} size="sm">
+                                    {error.message}
+                                </Text>
+                            </Code>
+                        </Stack>
+                    )
+                })
 
-            if (!registrationOptions || typeof registrationOptions !== 'object') {
-                throw new Error('Invalid options received from server')
+                return
             }
 
             const registrationResponse = await startRegistration({
@@ -196,7 +213,7 @@ export const PasskeysDrawerComponent = ({ onClose, opened }: IProps) => {
 
                 {!isLoading && passkeys.length === 0 && (
                     <Box
-                        h="280px"
+                        mih="280px"
                         p="xl"
                         style={{
                             border: '1px dashed var(--mantine-color-gray-4)',
@@ -211,8 +228,8 @@ export const PasskeysDrawerComponent = ({ onClose, opened }: IProps) => {
                             <ThemeIcon color="blue" radius="xl" size={80} variant="light">
                                 <TbFingerprint size={40} />
                             </ThemeIcon>
-                            <Stack gap="xs">
-                                <Text fw={600} size="lg">
+                            <Stack align="center" gap="xs">
+                                <Text fw={600} size="lg" ta="center">
                                     {t('passkeys-drawer.component.no-passkeys-registered-yet')}
                                 </Text>
                                 <Text c="dimmed" maw={300} size="sm" ta="center">
