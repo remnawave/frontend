@@ -54,10 +54,21 @@ export default defineConfig({
         rollupOptions: {
             output: {
                 manualChunks: {
-                    react: ['react', 'react-dom', 'react-router-dom', 'react-error-boundary'],
-                    icons: ['react-icons/pi', 'react-icons/fa', 'react-icons/tb'],
+                    assets: [
+                        '/src/shared/assets/lotties/satellite.json',
+                        '/src/shared/assets/lotties/checkmark.json',
+                        '/src/shared/assets/lotties/stop-v2.json'
+                    ],
+                    react: [
+                        'react',
+                        'react-dom',
+                        'react-router-dom',
+                        'react-error-boundary',
+                        'react-dom/client'
+                    ],
+                    icons: ['react-icons/pi', 'react-icons/fa', 'react-icons/tb', 'lottie-web'],
                     date: ['dayjs'],
-                    zod: ['axios', 'zod', 'zustand', 'xbytes'],
+                    zod: ['axios', 'zod', 'zustand', 'xbytes', 'zod-to-json-schema'],
                     utils: [
                         'nanoid',
                         'ufo',

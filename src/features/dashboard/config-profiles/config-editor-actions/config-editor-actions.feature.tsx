@@ -1,27 +1,36 @@
 import {
+    TbBraces,
     TbClipboardCopy,
     TbClipboardText,
     TbCut,
     TbDownload,
-    TbMenu2,
+    TbMenuDeep,
     TbSelectAll,
     TbTools
 } from 'react-icons/tb'
 import { PiCheck, PiCheckSquareOffset, PiCopy, PiFloppyDisk } from 'react-icons/pi'
 import { ActionIcon, Button, CopyButton, Group, Menu, Text } from '@mantine/core'
+import { useClipboard, useDisclosure, useMediaQuery } from '@mantine/hooks'
 import { UpdateConfigProfileCommand } from '@remnawave/backend-contract'
-import { useClipboard, useMediaQuery } from '@mantine/hooks'
 import { notifications } from '@mantine/notifications'
 import { useTranslation } from 'react-i18next'
 import { modals } from '@mantine/modals'
 import consola from 'consola/browser'
 
+import {
+    MODALS,
+    useModalClose,
+    useModalsStoreOpenWithData,
+    useModalState
+} from '@entities/dashboard/modal-store'
 import { KeypairGeneratorWidget } from '@widgets/dashboard/config-profiles/keypair-generator/keypair-generator.widget'
 import { useDownloadTemplate } from '@shared/ui/load-templates/use-download-template'
 import { QueryKeys, useUpdateConfigProfile } from '@shared/api/hooks'
 import { queryClient } from '@shared/api'
 
 import { Props } from './interfaces'
+
+const MODAL_KEY = MODALS.CONFIG_PROFILE_SHOW_SNIPPETS_DRAWER
 
 export function ConfigEditorActionsFeature(props: Props) {
     const {
@@ -40,6 +49,12 @@ export function ConfigEditorActionsFeature(props: Props) {
     const isMobile = useMediaQuery('(max-width: 48em)')
     const clipboard = useClipboard({ timeout: 500 })
 
+    const { isOpen } = useModalState(MODAL_KEY)
+    const close = useModalClose(MODAL_KEY)
+    const openWithData = useModalsStoreOpenWithData()
+
+    const [opened, handlers] = useDisclosure(false)
+
     const { mutate: updateConfig, isPending: isUpdating } = useUpdateConfigProfile({
         mutationFns: {
             onSuccess: async (
@@ -54,12 +69,7 @@ export function ConfigEditorActionsFeature(props: Props) {
 
                 const newValue = JSON.stringify(updatedConfigProfile.config, null, 2)
 
-                if (
-                    editorRef.current &&
-                    typeof editorRef.current === 'object' &&
-                    'setValue' in editorRef.current &&
-                    typeof editorRef.current.setValue === 'function'
-                ) {
+                if (editorRef.current) {
                     editorRef.current.setValue(newValue)
                     setOriginalValue(newValue)
                 }
@@ -83,10 +93,6 @@ export function ConfigEditorActionsFeature(props: Props) {
     const handleSave = () => {
         if (!editorRef.current) return
         if (!monacoRef.current) return
-        if (typeof editorRef.current !== 'object') return
-        if (typeof monacoRef.current !== 'object') return
-        if (!('getValue' in editorRef.current)) return
-        if (typeof editorRef.current.getValue !== 'function') return
 
         const currentValue = editorRef.current.getValue()
 
@@ -114,9 +120,6 @@ export function ConfigEditorActionsFeature(props: Props) {
 
     const handleCopyConfig = () => {
         if (!editorRef.current) return
-        if (typeof editorRef.current !== 'object') return
-        if (!('getValue' in editorRef.current)) return
-        if (typeof editorRef.current.getValue !== 'function') return
 
         const currentValue = editorRef.current.getValue()
         clipboard.copy(currentValue)
@@ -124,9 +127,6 @@ export function ConfigEditorActionsFeature(props: Props) {
 
     const handleSelectAll = () => {
         if (!editorRef.current) return
-        if (typeof editorRef.current !== 'object') return
-        if (!('getModel' in editorRef.current)) return
-        if (typeof editorRef.current.getModel !== 'function') return
 
         const model = editorRef.current.getModel()
         if (!model) return
@@ -141,11 +141,6 @@ export function ConfigEditorActionsFeature(props: Props) {
 
     const handleCut = () => {
         if (!editorRef.current) return
-        if (typeof editorRef.current !== 'object') return
-        if (!('getSelection' in editorRef.current)) return
-        if (typeof editorRef.current.getSelection !== 'function') return
-        if (!('getModel' in editorRef.current)) return
-        if (typeof editorRef.current.getModel !== 'function') return
 
         const selection = editorRef.current.getSelection()
         const model = editorRef.current.getModel()
@@ -159,14 +154,12 @@ export function ConfigEditorActionsFeature(props: Props) {
 
     const handlePaste = () => {
         if (!editorRef.current) return
-        if (typeof editorRef.current !== 'object') return
-        if (!('getPosition' in editorRef.current)) return
-        if (typeof editorRef.current.getPosition !== 'function') return
 
         const position = editorRef.current.getPosition()
         if (!position) return
 
         navigator.clipboard.readText().then((text) => {
+            if (!editorRef.current) return
             editorRef.current.executeEdits('', [
                 {
                     range: {
@@ -183,11 +176,8 @@ export function ConfigEditorActionsFeature(props: Props) {
 
     const formatDocument = () => {
         if (!editorRef.current) return
-        if (typeof editorRef.current !== 'object') return
-        if (!('getAction' in editorRef.current)) return
-        if (typeof editorRef.current.getAction !== 'function') return
 
-        editorRef.current.getAction('editor.action.formatDocument').run()
+        editorRef.current.getAction('editor.action.formatDocument')?.run()
     }
 
     return (
@@ -198,10 +188,8 @@ export function ConfigEditorActionsFeature(props: Props) {
                 leftSection={<PiFloppyDisk size={16} />}
                 loading={isUpdating}
                 onClick={handleSave}
-                radius="md"
-                variant="light"
             >
-                {t('config-editor-actions.feature.save')}
+                {t('common.save')}
             </Button>
 
             {!isConfigValid && !isUpdating && (
@@ -212,7 +200,7 @@ export function ConfigEditorActionsFeature(props: Props) {
                     loading={isUpdating}
                     onClick={() => {
                         modals.openConfirmModal({
-                            title: t('config-editor-actions.feature.save-anyway-title'),
+                            title: t('common.confirm-action'),
                             children: (
                                 <Text>
                                     {t('config-editor-actions.feature.save-anyway-description')}
@@ -220,8 +208,8 @@ export function ConfigEditorActionsFeature(props: Props) {
                             ),
                             centered: true,
                             labels: {
-                                confirm: t('config-editor-actions.feature.save'),
-                                cancel: t('config-editor-actions.feature.cancel')
+                                confirm: t('common.save'),
+                                cancel: t('common.cancel')
                             },
                             confirmProps: {
                                 color: 'red'
@@ -229,42 +217,30 @@ export function ConfigEditorActionsFeature(props: Props) {
                             onConfirm: handleSave
                         })
                     }}
-                    radius="md"
-                    variant="light"
                 >
                     {t('config-editor-actions.feature.save-anyway')}
                 </Button>
             )}
 
             <Group gap={0} wrap="nowrap">
-                <Button
-                    leftSection={<PiCheckSquareOffset size={16} />}
-                    onClick={formatDocument}
-                    radius="md"
-                    style={{
-                        borderTopRightRadius: 0,
-                        borderBottomRightRadius: 0,
-                        borderRight: 0,
-                        width: '100%'
-                    }}
-                    variant="default"
+                <Menu
+                    onClose={() => handlers.close()}
+                    onOpen={() => handlers.open()}
+                    radius="sm"
+                    shadow="md"
+                    trigger="click-hover"
+                    withinPortal
                 >
-                    {t('config-editor-actions.feature.format')}
-                </Button>
-
-                <Menu radius="sm" shadow="md" withinPortal>
                     <Menu.Target>
                         <ActionIcon
-                            radius="md"
                             size={36}
                             style={{
-                                borderTopLeftRadius: 0,
-                                borderBottomLeftRadius: 0,
-                                border: '1px solid var(--mantine-color-gray-7)'
+                                borderTopRightRadius: 0,
+                                borderBottomRightRadius: 0
                             }}
-                            variant="default"
+                            variant={opened ? 'outline' : 'default'}
                         >
-                            <TbMenu2 size={20} />
+                            <TbMenuDeep size={20} />
                         </ActionIcon>
                     </Menu.Target>
 
@@ -278,7 +254,7 @@ export function ConfigEditorActionsFeature(props: Props) {
                                     }
                                     onClick={copy}
                                 >
-                                    {t('config-profiles-grid.widget.copy-uuid')}
+                                    {t('common.copy-uuid')}
                                 </Menu.Item>
                             )}
                         </CopyButton>
@@ -332,6 +308,41 @@ export function ConfigEditorActionsFeature(props: Props) {
                         </Menu.Item>
                     </Menu.Dropdown>
                 </Menu>
+
+                <Button
+                    leftSection={<PiCheckSquareOffset size={16} />}
+                    onClick={formatDocument}
+                    style={{
+                        borderTopLeftRadius: 0,
+                        borderBottomLeftRadius: 0,
+                        borderTopRightRadius: 0,
+                        borderBottomRightRadius: 0,
+                        borderRight: 0,
+                        borderLeft: 0,
+                        width: '100%'
+                    }}
+                    variant="default"
+                >
+                    {t('config-editor-actions.feature.format')}
+                </Button>
+
+                <ActionIcon
+                    onClick={() => {
+                        if (isOpen) {
+                            close()
+                        } else {
+                            openWithData(MODAL_KEY, undefined)
+                        }
+                    }}
+                    size={36}
+                    style={{
+                        borderTopLeftRadius: 0,
+                        borderBottomLeftRadius: 0
+                    }}
+                    variant={isOpen ? 'filled' : 'default'}
+                >
+                    <TbBraces size={20} />
+                </ActionIcon>
             </Group>
         </Group>
     )

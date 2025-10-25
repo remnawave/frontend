@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next'
 import { PiTag } from 'react-icons/pi'
 
 import { HostsConfigProfilesDrawer } from '@widgets/dashboard/hosts/hosts-config-profiles-drawer/hosts-config-profiles.drawer.widget'
-import { XtlsLogo } from '@shared/ui/logos/xtls-logo'
+import { XrayLogo } from '@shared/ui/logos'
 
 import { IProps } from './interfaces'
 
@@ -36,7 +36,7 @@ export function HostSelectInboundFeature(props: IProps) {
                 <Group gap="sm" justify="space-between" w="100%">
                     <Group gap="xs" miw={0} style={{ flex: 1 }}>
                         <ActionIcon color="teal" size="sm" variant="subtle">
-                            <XtlsLogo size={16} />
+                            <XrayLogo size={16} />
                         </ActionIcon>
 
                         <Stack gap={2} style={{ flex: 1, minWidth: 0 }}>
@@ -58,7 +58,7 @@ export function HostSelectInboundFeature(props: IProps) {
                         size="xs"
                         variant="light"
                     >
-                        {t('host-select-inbound.feature.change')}
+                        {t('common.change')}
                     </Button>
                 </Group>
             ) : (
@@ -86,7 +86,7 @@ export function HostSelectInboundFeature(props: IProps) {
                         size="xs"
                         variant="light"
                     >
-                        {t('host-select-inbound.feature.select')}
+                        {t('common.select')}
                     </Button>
                 </Group>
             )}

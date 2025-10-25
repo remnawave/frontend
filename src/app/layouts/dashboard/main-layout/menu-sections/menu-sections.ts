@@ -2,9 +2,7 @@ import {
     PiAirTrafficControlDuotone,
     PiArrowsInCardinalFill,
     PiBarcodeDuotone,
-    PiBracketsCurly,
     PiChartLine,
-    PiCookie,
     PiCpu,
     PiListChecks,
     PiStarDuotone,
@@ -14,16 +12,21 @@ import {
     TbChartArcs,
     TbCirclesRelation,
     TbDeviceAnalytics,
-    TbReportAnalytics
+    TbFolder,
+    TbReportAnalytics,
+    TbRoute,
+    TbWebhook
 } from 'react-icons/tb'
+import { SUBSCRIPTION_TEMPLATE_TYPE } from '@remnawave/backend-contract'
 import { HiChartPie, HiCurrencyDollar, HiServer } from 'react-icons/hi'
 import { useTranslation } from 'react-i18next'
 import { useHotkeys } from '@mantine/hooks'
 import { useState } from 'react'
 
 import { HappLogo } from '@pages/dashboard/utils/happ-routing-builder/ui/components/happ-routing-builder.page.component'
-import { XtlsLogo } from '@shared/ui/logos/xtls-logo'
+import { MihomoLogo, SingboxLogo, StashLogo, XrayLogo } from '@shared/ui/logos'
 import { ROUTES } from '@shared/constants'
+import { Logo } from '@shared/ui'
 
 import { MenuItem } from './interfaces'
 
@@ -58,9 +61,14 @@ export const useMenuSections = (): MenuItem[] => {
                     icon: TbCirclesRelation
                 },
                 {
+                    name: t('constants.external-squads'),
+                    href: ROUTES.DASHBOARD.MANAGEMENT.EXTERNAL_SQUADS,
+                    icon: TbWebhook
+                },
+                {
                     name: t('constants.config-profiles'),
                     href: ROUTES.DASHBOARD.MANAGEMENT.CONFIG_PROFILES,
-                    icon: XtlsLogo
+                    icon: XrayLogo
                 },
                 {
                     name: t('constants.hosts'),
@@ -102,9 +110,9 @@ export const useMenuSections = (): MenuItem[] => {
                 },
 
                 {
-                    name: t('constants.api-tokens'),
-                    href: ROUTES.DASHBOARD.MANAGEMENT.API_TOKENS,
-                    icon: PiCookie
+                    name: t('constants.remnawave-settings'),
+                    href: ROUTES.DASHBOARD.MANAGEMENT.REMNAWAVE_SETTINGS,
+                    icon: Logo
                 }
             ]
         },
@@ -134,33 +142,54 @@ export const useMenuSections = (): MenuItem[] => {
                 {
                     name: t('constants.templates'),
                     href: ROUTES.DASHBOARD.TEMPLATES.ROOT,
-                    icon: PiBracketsCurly,
+                    icon: TbFolder,
                     dropdownItems: [
                         {
                             name: 'Xray JSON',
-                            href: ROUTES.DASHBOARD.TEMPLATES.XRAY_JSON
+                            href: ROUTES.DASHBOARD.TEMPLATES.TEMPLATES_BY_TYPE.replace(
+                                ':type',
+                                SUBSCRIPTION_TEMPLATE_TYPE.XRAY_JSON
+                            ),
+                            icon: XrayLogo
                         },
                         {
                             name: 'Mihomo',
-                            href: ROUTES.DASHBOARD.TEMPLATES.MIHOMO
+                            href: ROUTES.DASHBOARD.TEMPLATES.TEMPLATES_BY_TYPE.replace(
+                                ':type',
+                                SUBSCRIPTION_TEMPLATE_TYPE.MIHOMO
+                            ),
+                            icon: MihomoLogo
                         },
                         {
                             name: 'Stash',
-                            href: ROUTES.DASHBOARD.TEMPLATES.STASH
+                            href: ROUTES.DASHBOARD.TEMPLATES.TEMPLATES_BY_TYPE.replace(
+                                ':type',
+                                SUBSCRIPTION_TEMPLATE_TYPE.STASH
+                            ),
+                            icon: StashLogo
                         },
                         {
                             name: 'Singbox',
-                            href: ROUTES.DASHBOARD.TEMPLATES.SINGBOX
+                            href: ROUTES.DASHBOARD.TEMPLATES.TEMPLATES_BY_TYPE.replace(
+                                ':type',
+                                SUBSCRIPTION_TEMPLATE_TYPE.SINGBOX
+                            ),
+                            icon: SingboxLogo
                         },
                         {
                             name: 'Clash',
-                            href: ROUTES.DASHBOARD.TEMPLATES.CLASH
-                        },
-                        {
-                            name: 'Singbox legacy',
-                            href: ROUTES.DASHBOARD.TEMPLATES.SINGBOX_LEGACY
+                            href: ROUTES.DASHBOARD.TEMPLATES.TEMPLATES_BY_TYPE.replace(
+                                ':type',
+                                SUBSCRIPTION_TEMPLATE_TYPE.CLASH
+                            ),
+                            icon: MihomoLogo
                         }
                     ]
+                },
+                {
+                    name: t('constants.response-rules'),
+                    href: ROUTES.DASHBOARD.MANAGEMENT.RESPONSE_RULES,
+                    icon: TbRoute
                 }
             ]
         },

@@ -7,7 +7,7 @@ import { UserAccessibleNodesModalWidget } from '@widgets/dashboard/users/user-ac
 import { DetailedUserInfoDrawerWidget } from '@widgets/dashboard/users/detailed-user-info-drawer/detailed-user-info-drawer.widget'
 import { MobileWarningOverlay } from '@shared/ui/mobile-warning-overlay/mobile-warning-overlay'
 import { SrhInspectorTableWidget } from '@widgets/dashboard/srh-inspector/srh-inspector-table'
-import { SrhInspectorMetrics } from '@widgets/dashboard/users/srh-inspector-metrics'
+import { SrhInspectorMetrics } from '@widgets/dashboard/srh-inspector/srh-inspector-metrics'
 import { ViewUserModal } from '@widgets/dashboard/users/view-user-modal'
 import { PageHeader } from '@shared/ui/page-header'
 import { ROUTES } from '@shared/constants'

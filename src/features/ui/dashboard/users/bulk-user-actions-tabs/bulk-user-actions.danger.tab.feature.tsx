@@ -15,7 +15,6 @@ export const BulkUserActionsDangerTabFeature = (props: IProps) => {
     const actions = useBulkUsersActionsStoreActions()
 
     const uuids = actions.getUuids()
-    const uuidsLength = actions.getUuidLength()
 
     const { mutate: deleteUsers, isPending: isDeletePending } = useBulkDeleteUsers({
         mutationFns: {
@@ -27,20 +26,12 @@ export const BulkUserActionsDangerTabFeature = (props: IProps) => {
 
     const handleDeleteUsers = () => {
         modals.openConfirmModal({
-            title: t('bulk-user-actions.danger.tab.feature.delete-users'),
+            title: t('common.confirm-action'),
             centered: true,
-            children: (
-                <Text size="sm">
-                    {t('bulk-user-actions.danger.tab.feature.delete-confirmation-line-1', {
-                        usersCount: uuidsLength
-                    })}
-                    <br />
-                    {t('bulk-user-actions.danger.tab.feature.delete-confirmation-line-2')}
-                </Text>
-            ),
+            children: t('common.confirm-action-description'),
             labels: {
-                confirm: t('bulk-user-actions.danger.tab.feature.delete'),
-                cancel: t('bulk-user-actions.danger.tab.feature.cancel')
+                confirm: t('common.delete'),
+                cancel: t('common.cancel')
             },
             confirmProps: { color: 'red' },
             onConfirm: () => {
@@ -67,7 +58,7 @@ export const BulkUserActionsDangerTabFeature = (props: IProps) => {
                 <Stack>
                     <Group justify="apart">
                         <Group>
-                            <PiTrash color={'var(--mantine-color-red-6)'} size={px('1.2rem')} />
+                            <PiTrash color="var(--mantine-color-red-6)" size={px('1.2rem')} />
                             <Text>{t('bulk-user-actions.danger.tab.feature.delete-users')}</Text>
                         </Group>
                         <Button
@@ -76,7 +67,7 @@ export const BulkUserActionsDangerTabFeature = (props: IProps) => {
                             onClick={handleDeleteUsers}
                             variant="light"
                         >
-                            {t('bulk-user-actions.danger.tab.feature.delete')}
+                            {t('common.delete')}
                         </Button>
                     </Group>
                     <Text c="dimmed" size="xs">

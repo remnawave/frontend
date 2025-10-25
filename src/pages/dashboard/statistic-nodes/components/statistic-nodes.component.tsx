@@ -293,7 +293,7 @@ export const StatisticNodesPage = () => {
             return (
                 <Center h={400} mt="md" py="xl" ta="center">
                     <Box>
-                        <PiEmpty size={'2rem'} />
+                        <PiEmpty size="2rem" />
                         <Text c="dimmed">
                             {t(
                                 'statistic-nodes.component.no-data-available-for-the-selected-period'
@@ -355,7 +355,7 @@ export const StatisticNodesPage = () => {
                             )
 
                             return (
-                                <Paper px="md" py="sm" radius="md" shadow="md" withBorder>
+                                <Paper px="md" py="sm" shadow="md" withBorder>
                                     <Group justify="space-between" mb={8}>
                                         <Text fw={600}>{date}</Text>
                                         <Text c="dimmed" fz="sm">
@@ -481,13 +481,13 @@ export const StatisticNodesPage = () => {
                     <Accordion.Panel>
                         <SimpleGrid
                             cols={{ base: 1, xs: 2, sm: 3, md: 4 }}
-                            spacing={'xs'}
+                            spacing="xs"
                             style={{
                                 cursor: 'pointer',
                                 marginTop: '0.5rem',
                                 marginBottom: '0.5rem'
                             }}
-                            verticalSpacing={'xs'}
+                            verticalSpacing="xs"
                         >
                             {!hasData && (
                                 <Group
@@ -670,7 +670,7 @@ export const StatisticNodesPage = () => {
                                                 <Group gap={8}>
                                                     {renderColorDot(node.color)}
                                                     <Group gap={6}>
-                                                        {/* eslint-disable indent */}
+                                                        {/* eslint-disable @stylistic/indent */}
                                                         {node.countryCode &&
                                                             node.countryCode !== 'XX' && (
                                                                 <ReactCountryFlag
@@ -795,7 +795,7 @@ export const StatisticNodesPage = () => {
                                                             w={12}
                                                         />
                                                         <Group gap={6}>
-                                                            {/* eslint-disable indent */}
+                                                            {}
                                                             {entry.countryCode &&
                                                                 entry.countryCode !== 'XX' && (
                                                                     <ReactCountryFlag

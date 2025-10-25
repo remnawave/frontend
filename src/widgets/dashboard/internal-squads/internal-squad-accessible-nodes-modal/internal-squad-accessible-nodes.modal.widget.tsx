@@ -21,9 +21,9 @@ import { TbServer } from 'react-icons/tb'
 import { PiTag } from 'react-icons/pi'
 import ColorHash from 'color-hash'
 
-import { MODALS, useModalsStore } from '@entities/dashboard/modal-store'
+import { MODALS, useModalClose, useModalState } from '@entities/dashboard/modal-store'
 import { useGetInternalSquadAccessibleNodes } from '@shared/api/hooks'
-import { XtlsLogo } from '@shared/ui/logos/xtls-logo'
+import { XrayLogo } from '@shared/ui/logos'
 
 interface CustomTreeNodeData extends TreeNodeData {
     configProfileColor?: string
@@ -77,10 +77,8 @@ const ch = new ColorHash({
 export const InternalSquadAccessibleNodesModalWidget = () => {
     const { t } = useTranslation()
 
-    const { isOpen, internalState } = useModalsStore(
-        (state) => state.modals[MODALS.INTERNAL_SQUAD_ACCESSIBLE_NODES_DRAWER]
-    )
-    const { close } = useModalsStore()
+    const { isOpen, internalState } = useModalState(MODALS.INTERNAL_SQUAD_ACCESSIBLE_NODES_DRAWER)
+    const close = useModalClose(MODALS.INTERNAL_SQUAD_ACCESSIBLE_NODES_DRAWER)
 
     const { data: internalSquadAccessibleNodes, isLoading } = useGetInternalSquadAccessibleNodes({
         route: {
@@ -130,7 +128,7 @@ export const InternalSquadAccessibleNodesModalWidget = () => {
                     return null
                 case 'node':
                     return (
-                        <Card bg="dark.6" m="xs" p="md" radius="lg" withBorder>
+                        <Card bg="dark.6" m="xs" p="md" withBorder>
                             <Stack gap="sm">
                                 <Group align="center" gap="md">
                                     {hasChildren && (
@@ -159,7 +157,7 @@ export const InternalSquadAccessibleNodesModalWidget = () => {
                                     <Badge
                                         autoContrast
                                         color={node.configProfileColor}
-                                        leftSection={<XtlsLogo size={20} />}
+                                        leftSection={<XrayLogo size={20} />}
                                         size="md"
                                         variant="light"
                                     >
@@ -261,7 +259,7 @@ export const InternalSquadAccessibleNodesModalWidget = () => {
 
         return (
             <Stack gap="lg">
-                <Card p="md" radius="md" withBorder>
+                <Card p="md" withBorder>
                     <Group align="center" gap="md">
                         <IconFlag color="var(--mantine-color-blue-4)" size={20} />
                         <Text c="gray.1" fw={600} size="lg">
@@ -300,7 +298,7 @@ export const InternalSquadAccessibleNodesModalWidget = () => {
     return (
         <Drawer
             keepMounted={false}
-            onClose={() => close(MODALS.INTERNAL_SQUAD_ACCESSIBLE_NODES_DRAWER)}
+            onClose={close}
             opened={isOpen}
             overlayProps={{ backgroundOpacity: 0.6, blur: 0 }}
             padding="lg"

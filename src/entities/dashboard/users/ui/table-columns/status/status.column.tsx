@@ -14,7 +14,7 @@ export function StatusColumnEntity(props: IProps) {
     const expirationText = getExpirationTextUtil(user.expireAt, t, i18n)
 
     if (need === 'badge') {
-        return <UserStatusBadge miw={'13ch'} status={user.status} />
+        return <UserStatusBadge miw="13ch" status={user.status} />
     }
 
     if (need === 'date') {

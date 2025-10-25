@@ -1,4 +1,4 @@
-/* eslint-disable indent */
+/* eslint-disable @stylistic/indent */
 import {
     Accordion,
     ActionIcon,
@@ -17,7 +17,7 @@ import {
     TextInput,
     Tooltip
 } from '@mantine/core'
-import { PiCheck, PiCircle, PiCopy, PiList, PiTag, PiTreeView, PiUsers } from 'react-icons/pi'
+import { PiCheck, PiCopy, PiList, PiTag, PiTreeView, PiUsers } from 'react-icons/pi'
 import { TbCirclesRelation, TbDeviceFloppy, TbSearch, TbX } from 'react-icons/tb'
 import { GetConfigProfilesCommand } from '@remnawave/backend-contract'
 import { useCallback, useEffect, useMemo, useState } from 'react'
@@ -30,26 +30,20 @@ import {
     useUpdateInternalSquad
 } from '@shared/api/hooks'
 import { ConfigProfileCardShared } from '@shared/ui/config-profiles/config-profile-card/config-profile-card.shared'
-import { MODALS, useModalsStore } from '@entities/dashboard/modal-store'
+import { MODALS, useModalClose, useModalState } from '@entities/dashboard/modal-store'
 import { LoaderModalShared } from '@shared/ui/loader-modal'
 import { queryClient } from '@shared/api/query-client'
 import { formatInt } from '@shared/utils/misc'
 
-export const InternalSquadsDrawerWithStore = () => {
-    const { isOpen, internalState: internalSquad } = useModalsStore(
-        (state) => state.modals[MODALS.INTERNAL_SQUAD_SHOW_INBOUNDS]
-    )
-    const { close } = useModalsStore()
-    const { t } = useTranslation()
+import classes from './internal-squads-with-store.module.css'
 
-    // const { data: internalSquad, isLoading: isInternalSquadLoading } = useGetInternalSquad({
-    //     route: {
-    //         uuid: internalState?.internalSquadUuid ?? ''
-    //     },
-    //     rQueryParams: {
-    //         enabled: !!internalState?.internalSquadUuid
-    //     }
-    // })
+export const InternalSquadsDrawerWithStore = () => {
+    const { isOpen, internalState: internalSquad } = useModalState(
+        MODALS.INTERNAL_SQUAD_SHOW_INBOUNDS
+    )
+    const close = useModalClose(MODALS.INTERNAL_SQUAD_SHOW_INBOUNDS)
+
+    const { t } = useTranslation()
 
     const { data: configProfiles, isLoading: isConfigProfilesLoading } = useGetConfigProfiles()
 
@@ -197,7 +191,7 @@ export const InternalSquadsDrawerWithStore = () => {
                     queryClient.refetchQueries({
                         queryKey: internalSquadsQueryKeys.getInternalSquads.queryKey
                     })
-                    close(MODALS.INTERNAL_SQUAD_SHOW_INBOUNDS)
+                    close()
                 }
             }
         })
@@ -219,7 +213,6 @@ export const InternalSquadsDrawerWithStore = () => {
             <Stack gap="md" h="100%">
                 <Paper
                     p="md"
-                    radius="md"
                     shadow="sm"
                     style={{
                         background:
@@ -230,47 +223,35 @@ export const InternalSquadsDrawerWithStore = () => {
                 >
                     <Stack gap="md">
                         <Group align="center" justify="space-between" wrap="nowrap">
-                            <Stack gap="xs" style={{ flex: 1, minWidth: 0 }}>
-                                <Group
-                                    gap="xs"
-                                    justify="start"
-                                    style={{ flex: 1, minWidth: 0 }}
-                                    wrap="nowrap"
+                            <Box className={classes.iconWrapper}>
+                                <ActionIcon
+                                    bg={internalSquad.info.membersCount > 0 ? '' : 'dark.6'}
+                                    className={classes.icon}
+                                    color={internalSquad.info.membersCount > 0 ? 'teal' : 'gray'}
+                                    size="xl"
+                                    variant={
+                                        internalSquad.info.membersCount > 0 ? 'light' : 'subtle'
+                                    }
                                 >
-                                    <ActionIcon
-                                        color={
-                                            internalSquad.info.membersCount > 0 ? 'teal' : 'gray'
-                                        }
-                                        radius="md"
-                                        size="md"
-                                        style={{ flexShrink: 0 }}
-                                        variant={
-                                            internalSquad.info.membersCount > 0 ? 'light' : 'subtle'
-                                        }
+                                    <TbCirclesRelation size={28} />
+                                </ActionIcon>
+                            </Box>
+
+                            <Stack gap={6} style={{ flex: 1, minWidth: 0 }}>
+                                <Text
+                                    className={classes.title}
+                                    ff="monospace"
+                                    fw={700}
+                                    lineClamp={2}
+                                    size="lg"
+                                    title={internalSquad.name}
+                                >
+                                    {internalSquad.name}
+                                </Text>
+                                <Group gap="xs" justify="left" wrap="nowrap">
+                                    <Tooltip
+                                        label={t('internal-squads-with-store.drawer.widget.users')}
                                     >
-                                        {internalSquad.info.membersCount > 0 ? (
-                                            <TbCirclesRelation size={16} />
-                                        ) : (
-                                            <PiCircle size={16} />
-                                        )}
-                                    </ActionIcon>
-                                    <Text
-                                        c="white"
-                                        fw={700}
-                                        size="md"
-                                        style={{
-                                            flex: 1,
-                                            minWidth: 0,
-                                            overflow: 'hidden',
-                                            textOverflow: 'ellipsis',
-                                            whiteSpace: 'nowrap'
-                                        }}
-                                    >
-                                        {internalSquad.name}
-                                    </Text>
-                                </Group>
-                                <Group gap="xs" justify="flex-start" wrap="wrap">
-                                    <Tooltip label={t('internal-squads-grid.widget.users')}>
                                         <Badge
                                             color={
                                                 internalSquad.info.membersCount > 0
@@ -298,21 +279,25 @@ export const InternalSquadsDrawerWithStore = () => {
                                             })}
                                         </Badge>
                                     </Tooltip>
+                                    <CopyButton timeout={2000} value={internalSquad.uuid}>
+                                        {({ copied, copy }) => (
+                                            <ActionIcon
+                                                color={copied ? 'teal' : 'gray'}
+                                                onClick={copy}
+                                                size="lg"
+                                                style={{ flexShrink: 0 }}
+                                                variant="subtle"
+                                            >
+                                                {copied ? (
+                                                    <PiCheck size="18px" />
+                                                ) : (
+                                                    <PiCopy size="18px" />
+                                                )}
+                                            </ActionIcon>
+                                        )}
+                                    </CopyButton>
                                 </Group>
                             </Stack>
-                            <CopyButton timeout={2000} value={internalSquad.uuid}>
-                                {({ copied, copy }) => (
-                                    <ActionIcon
-                                        color={copied ? 'teal' : 'gray'}
-                                        onClick={copy}
-                                        size="lg"
-                                        style={{ flexShrink: 0 }}
-                                        variant="subtle"
-                                    >
-                                        {copied ? <PiCheck size="18px" /> : <PiCopy size="18px" />}
-                                    </ActionIcon>
-                                )}
-                            </CopyButton>
                         </Group>
 
                         <Box
@@ -353,7 +338,6 @@ export const InternalSquadsDrawerWithStore = () => {
                                             <ActionIcon
                                                 color="red"
                                                 onClick={clearSelection}
-                                                radius="md"
                                                 size="lg"
                                                 variant="light"
                                             >
@@ -369,7 +353,7 @@ export const InternalSquadsDrawerWithStore = () => {
                             color="teal"
                             disabled={selectedInbounds.size === 0}
                             fullWidth
-                            leftSection={<TbDeviceFloppy size={'1.2rem'} />}
+                            leftSection={<TbDeviceFloppy size="1.2rem" />}
                             loading={isUpdatingInternalSquad}
                             onClick={handleUpdateInternalSquad}
                             size="md"
@@ -378,7 +362,7 @@ export const InternalSquadsDrawerWithStore = () => {
                             }}
                             variant="light"
                         >
-                            {t('internal-squads.drawer.widget.save-changes')}
+                            {t('common.save')}
                         </Button>
                     </Stack>
                 </Paper>
@@ -387,7 +371,6 @@ export const InternalSquadsDrawerWithStore = () => {
                     leftSection={<TbSearch size={16} />}
                     onChange={(event) => setSearchQuery(event.currentTarget.value)}
                     placeholder={t('internal-squads.drawer.widget.search-profiles-or-inbounds')}
-                    radius="md"
                     value={searchQuery}
                 />
 
@@ -491,7 +474,7 @@ export const InternalSquadsDrawerWithStore = () => {
     return (
         <Drawer
             keepMounted={true}
-            onClose={() => close(MODALS.INTERNAL_SQUAD_SHOW_INBOUNDS)}
+            onClose={close}
             opened={isOpen}
             overlayProps={{ backgroundOpacity: 0.6, blur: 0 }}
             padding="md"

@@ -10,10 +10,11 @@ import { CSS } from '@dnd-kit/utilities'
 import ColorHash from 'color-hash'
 import cx from 'clsx'
 
-import { useHostsStoreActions, useHostsStoreFilters } from '@entities/dashboard'
+import { MODALS, useModalsStoreOpenWithData } from '@entities/dashboard/modal-store'
 import { resolveCountryCode } from '@shared/utils/misc/resolve-country-code'
 import { SEARCH_PARAMS } from '@shared/constants/search-params'
-import { XtlsLogo } from '@shared/ui/logos/xtls-logo'
+import { useHostsStoreFilters } from '@entities/dashboard'
+import { XrayLogo } from '@shared/ui/logos'
 
 import classes from './HostCard.module.css'
 import { IProps } from './interfaces'
@@ -32,7 +33,9 @@ export function HostCardWidget(props: IProps) {
     const [searchParams, setSearchParams] = useSearchParams()
 
     const filters = useHostsStoreFilters()
-    const actions = useHostsStoreActions()
+
+    const openModalWithData = useModalsStoreOpenWithData()
+
     const [isHovered, setIsHovered] = useState(false)
     const isMobile = useMediaQuery('(max-width: 48em)')
 
@@ -59,8 +62,7 @@ export function HostCardWidget(props: IProps) {
     }
 
     const handleEdit = () => {
-        actions.setHost(item)
-        actions.toggleEditModal(true)
+        openModalWithData(MODALS.EDIT_HOST_MODAL, item)
     }
 
     useEffect(() => {
@@ -127,7 +129,6 @@ export function HostCardWidget(props: IProps) {
                                     autoContrast
                                     color={ch.hex(item.tag)}
                                     leftSection={<TbTagStarred size={12} />}
-                                    radius="md"
                                     size="md"
                                     variant="outline"
                                 >
@@ -139,7 +140,6 @@ export function HostCardWidget(props: IProps) {
                         {!isHostActive && (
                             <ActionIcon
                                 color="gray"
-                                radius="md"
                                 size="lg"
                                 style={{ flexShrink: 0 }}
                                 variant="light"
@@ -151,7 +151,6 @@ export function HostCardWidget(props: IProps) {
                         {isHostActive && item.isHidden && (
                             <ActionIcon
                                 color="violet"
-                                radius="md"
                                 size="lg"
                                 style={{ flexShrink: 0 }}
                                 variant="light"
@@ -163,7 +162,6 @@ export function HostCardWidget(props: IProps) {
                         {isHostActive && !item.isHidden && (
                             <ActionIcon
                                 color="teal"
-                                radius="md"
                                 size="lg"
                                 style={{ flexShrink: 0 }}
                                 variant="light"
@@ -198,12 +196,11 @@ export function HostCardWidget(props: IProps) {
                                     color={configProfile?.uuid ? ch.hex(configProfile.uuid) : 'red'}
                                     leftSection={
                                         configProfile?.uuid ? (
-                                            <XtlsLogo size={12} />
+                                            <XrayLogo size={12} />
                                         ) : (
                                             <TbAlertCircle size={12} />
                                         )
                                     }
-                                    radius="lg"
                                     size="sm"
                                     variant="light"
                                 >
@@ -216,7 +213,6 @@ export function HostCardWidget(props: IProps) {
                                         item.inbound.configProfileInboundUuid || 'dangling'
                                     )}
                                     leftSection={<PiTag size={12} />}
-                                    radius="lg"
                                     size="sm"
                                     variant="outline"
                                 >
@@ -279,7 +275,6 @@ export function HostCardWidget(props: IProps) {
                             {!isHostActive && (
                                 <ActionIcon
                                     color="gray"
-                                    radius="md"
                                     size="md"
                                     style={{ flexShrink: 0 }}
                                     variant="light"
@@ -291,7 +286,6 @@ export function HostCardWidget(props: IProps) {
                             {isHostActive && item.isHidden && (
                                 <ActionIcon
                                     color="violet"
-                                    radius="md"
                                     size="md"
                                     style={{ flexShrink: 0 }}
                                     variant="light"
@@ -303,7 +297,6 @@ export function HostCardWidget(props: IProps) {
                             {isHostActive && !item.isHidden && (
                                 <ActionIcon
                                     color="teal"
-                                    radius="md"
                                     size="md"
                                     style={{ flexShrink: 0 }}
                                     variant="light"
@@ -339,7 +332,6 @@ export function HostCardWidget(props: IProps) {
                                             color="gray"
                                             key={node.uuid}
                                             leftSection={resolveCountryCode(node.countryCode)}
-                                            radius="md"
                                             size="md"
                                             style={{
                                                 cursor: 'pointer'
@@ -351,7 +343,7 @@ export function HostCardWidget(props: IProps) {
                                     )
                                 })}
                             {item.nodes.length > 3 && (
-                                <Badge color="gray" radius="md" size="md" variant="default">
+                                <Badge color="gray" size="md" variant="default">
                                     +{item.nodes.length - 3}
                                 </Badge>
                             )}
@@ -361,7 +353,6 @@ export function HostCardWidget(props: IProps) {
                                     autoContrast
                                     color={ch.hex(item.tag)}
                                     leftSection={<TbTagStarred size={12} />}
-                                    radius="md"
                                     size="md"
                                     variant="outline"
                                 >
@@ -374,7 +365,6 @@ export function HostCardWidget(props: IProps) {
                                     autoContrast
                                     color={ch.hex(item.inbound.configProfileInboundUuid)}
                                     leftSection={<PiTag size={12} />}
-                                    radius="md"
                                     size="md"
                                     variant="outline"
                                 >
@@ -390,12 +380,11 @@ export function HostCardWidget(props: IProps) {
                                 color={configProfile?.uuid ? ch.hex(configProfile.uuid) : 'red'}
                                 leftSection={
                                     configProfile?.uuid ? (
-                                        <XtlsLogo size={12} />
+                                        <XrayLogo size={12} />
                                     ) : (
                                         <TbAlertCircle size={12} />
                                     )
                                 }
-                                radius="md"
                                 size="md"
                                 variant="light"
                             >

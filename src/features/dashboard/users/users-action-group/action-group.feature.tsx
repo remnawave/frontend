@@ -96,7 +96,6 @@ export const UserActionGroupFeature = (props: IProps) => {
                         <ActionIcon
                             color="lime"
                             onClick={helpDrawerHandlers.open}
-                            radius="md"
                             size="lg"
                             variant="light"
                         >
@@ -106,11 +105,10 @@ export const UserActionGroupFeature = (props: IProps) => {
                 </ActionIconGroup>
 
                 <ActionIconGroup>
-                    <Tooltip label={t('action-group.feature.update')} withArrow>
+                    <Tooltip label={t('common.update')} withArrow>
                         <ActionIcon
                             loading={isLoading}
                             onClick={handleRefetch}
-                            radius="md"
                             size="lg"
                             variant="light"
                         >
@@ -123,7 +121,6 @@ export const UserActionGroupFeature = (props: IProps) => {
                             color="orange"
                             loading={isLoading}
                             onClick={handleClearFilters}
-                            radius="md"
                             size="lg"
                             variant="light"
                         >
@@ -136,7 +133,6 @@ export const UserActionGroupFeature = (props: IProps) => {
                             color="gray"
                             loading={isLoading}
                             onClick={handleResetTable}
-                            radius="md"
                             size="lg"
                             variant="light"
                         >
@@ -151,7 +147,6 @@ export const UserActionGroupFeature = (props: IProps) => {
                             color="red"
                             loading={isLoading}
                             onClick={bulkAllDrawerHandlers.open}
-                            radius="md"
                             size="lg"
                             variant="light"
                         >
@@ -163,7 +158,6 @@ export const UserActionGroupFeature = (props: IProps) => {
                         <ActionIcon
                             color="teal"
                             onClick={handleOpenCreateUserModal}
-                            radius="md"
                             size="lg"
                             variant="light"
                         >

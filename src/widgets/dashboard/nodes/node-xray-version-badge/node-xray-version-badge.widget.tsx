@@ -1,7 +1,7 @@
 import { Badge, Group } from '@mantine/core'
 import { memo } from 'react'
 
-import { XtlsLogo } from '@shared/ui/logos/xtls-logo'
+import { XrayLogo } from '@shared/ui/logos'
 
 import { IProps } from './interface'
 
@@ -10,12 +10,7 @@ export const NodeXrayVersionBadgeWidget = memo(({ node, fetchedNode, ...rest }: 
 
     return (
         <Group>
-            <Badge
-                color="grape"
-                leftSection={<XtlsLogo height={18} width={18} />}
-                size="lg"
-                {...rest}
-            >
+            <Badge color="grape" leftSection={<XrayLogo size={18} />} size="lg" {...rest}>
                 {nodeData.xrayVersion ?? 'unknown'}
             </Badge>
         </Group>

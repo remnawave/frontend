@@ -20,17 +20,18 @@ import {
     UserIdentificationCard
 } from '@shared/ui/forms/users/forms-components'
 import {
-    useUserModalStoreActions,
-    useUserModalStoreIsModalOpen,
-    useUserModalStoreUserUuid
-} from '@entities/dashboard/user-modal-store/user-modal-store'
-import {
+    useGetExternalSquads,
     useGetInternalSquads,
     useGetUserByUuid,
     useGetUserTags,
     usersQueryKeys,
     useUpdateUser
 } from '@shared/api/hooks'
+import {
+    useUserModalStoreActions,
+    useUserModalStoreIsModalOpen,
+    useUserModalStoreUserUuid
+} from '@entities/dashboard/user-modal-store/user-modal-store'
 import { GetUserSubscriptionRequestHistoryFeature } from '@features/ui/dashboard/users/get-user-subscription-request-history'
 import { GetUserSubscriptionLinksFeature } from '@features/ui/dashboard/users/get-user-subscription-links'
 import { ToggleUserStatusButtonFeature } from '@features/ui/dashboard/users/toggle-user-status-button'
@@ -38,9 +39,9 @@ import { RevokeSubscriptionUserFeature } from '@features/ui/dashboard/users/revo
 import { useBulkUsersActionsStoreActions } from '@entities/dashboard/users/bulk-users-actions-store'
 import { GetHwidUserDevicesFeature } from '@features/ui/dashboard/users/get-hwid-user-devices'
 import { ResetUsageUserFeature } from '@features/ui/dashboard/users/reset-usage-user'
+import { MODALS, useModalsStoreOpenWithData } from '@entities/dashboard/modal-store'
 import { GetUserUsageFeature } from '@features/ui/dashboard/users/get-user-usage'
 import { DeleteUserFeature } from '@features/ui/dashboard/users/delete-user'
-import { MODALS, useModalsStore } from '@entities/dashboard/modal-store'
 import { bytesToGbUtil, gbToBytesUtil } from '@shared/utils/bytes'
 import { LoaderModalShared } from '@shared/ui/loader-modal'
 import { handleFormErrors } from '@shared/utils/misc'
@@ -79,9 +80,10 @@ export const ViewUserModal = () => {
 
     const isMobile = useMediaQuery(`(max-width: ${em(768)})`)
 
-    const { open: openModal, setInternalData } = useModalsStore()
+    const openModalWithData = useModalsStoreOpenWithData()
 
     const { data: internalSquads } = useGetInternalSquads()
+    const { data: externalSquads } = useGetExternalSquads()
 
     const form = useForm<UpdateUserCommand.Request>({
         name: 'edit-user-form',
@@ -166,7 +168,8 @@ export const ViewUserModal = () => {
                 telegramId: user.telegramId ?? undefined,
                 email: user.email ?? undefined,
                 hwidDeviceLimit: user.hwidDeviceLimit ?? undefined,
-                tag: user.tag ?? undefined
+                tag: user.tag ?? undefined,
+                externalSquadUuid: user.externalSquadUuid ?? undefined
             })
         }
     }, [user, internalSquads])
@@ -201,7 +204,10 @@ export const ViewUserModal = () => {
                 // @ts-expect-error - TODO: fix ZOD schema
                 hwidDeviceLimit: values.hwidDeviceLimit === '' ? null : values.hwidDeviceLimit,
                 // eslint-disable-next-line no-nested-ternary
-                tag: dirtyFields.tag ? (values.tag === '' ? null : values.tag) : undefined
+                tag: dirtyFields.tag ? (values.tag === '' ? null : values.tag) : undefined,
+                externalSquadUuid: dirtyFields.externalSquadUuid
+                    ? values.externalSquadUuid
+                    : undefined
             }
         })
     })
@@ -241,7 +247,7 @@ export const ViewUserModal = () => {
                     style={{ height: '70vh' }}
                     transition={{ duration: 0.3 }}
                 >
-                    <Center h={'100%'} mt="xl" py="xl" ta="center">
+                    <Center h="100%" mt="xl" py="xl" ta="center">
                         <Box>
                             <LoaderModalShared
                                 text={t('view-user-modal.widget.fetching-user-data')}
@@ -280,6 +286,7 @@ export const ViewUserModal = () => {
                                 />
                                 <AccessSettingsCard
                                     cardVariants={cardVariants}
+                                    externalSquads={externalSquads}
                                     form={form}
                                     internalSquads={internalSquads}
                                     motionWrapper={MotionWrapper}
@@ -339,6 +346,7 @@ export const ViewUserModal = () => {
                                     />
                                     <AccessSettingsCard
                                         cardVariants={cardVariants}
+                                        externalSquads={externalSquads}
                                         form={form}
                                         internalSquads={internalSquads}
                                         motionWrapper={MotionWrapper}
@@ -392,13 +400,9 @@ export const ViewUserModal = () => {
                                     <Menu.Item
                                         leftSection={<TbServerCog size={14} />}
                                         onClick={() => {
-                                            setInternalData({
-                                                internalState: {
-                                                    userUuid: user.uuid
-                                                },
-                                                modalKey: MODALS.USER_ACCESSIBLE_NODES_DRAWER
+                                            openModalWithData(MODALS.USER_ACCESSIBLE_NODES_DRAWER, {
+                                                userUuid: user.uuid
                                             })
-                                            openModal(MODALS.USER_ACCESSIBLE_NODES_DRAWER)
                                         }}
                                     >
                                         {t('view-user-modal.widget.view-accessible-nodes')}

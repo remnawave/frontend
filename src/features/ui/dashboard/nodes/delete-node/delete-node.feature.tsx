@@ -31,7 +31,7 @@ export function DeleteNodeFeature(props: IProps) {
             leftSection={isPending ? <Loader color="red" size={14} /> : <TbTrash size={14} />}
             onClick={handleDeleteNode}
         >
-            {t('delete-node.feature.delete-node')}
+            {t('common.delete')}
         </Menu.Item>
     )
 }

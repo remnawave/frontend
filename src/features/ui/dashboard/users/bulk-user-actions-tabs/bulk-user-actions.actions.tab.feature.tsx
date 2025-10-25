@@ -20,7 +20,6 @@ export const BulkUserActionsActionsTabFeature = (props: IProps) => {
     const { t } = useTranslation()
 
     const actions = useBulkUsersActionsStoreActions()
-    const uuidsLength = actions.getUuidLength()
     const uuids = actions.getUuids()
     const { cleanUpDrawer } = props
 
@@ -66,18 +65,10 @@ export const BulkUserActionsActionsTabFeature = (props: IProps) => {
         modals.openConfirmModal({
             title: t('bulk-user-actions.actions.tab.feature.revoke-subscription'),
             centered: true,
-            children: (
-                <Text size="sm">
-                    {t('bulk-user-actions.actions.tab.feature.revoke-confirmation-line-1', {
-                        usersCount: uuidsLength
-                    })}
-                    <br />
-                    {t('bulk-user-actions.actions.tab.feature.revoke-confirmation-line-2')}
-                </Text>
-            ),
+            children: t('common.confirm-action-description'),
             labels: {
                 confirm: t('bulk-user-actions.actions.tab.feature.revoke'),
-                cancel: t('bulk-user-actions.actions.tab.feature.cancel')
+                cancel: t('common.cancel')
             },
             confirmProps: { color: 'orange' },
             onConfirm: () => {
@@ -92,18 +83,10 @@ export const BulkUserActionsActionsTabFeature = (props: IProps) => {
         modals.openConfirmModal({
             title: t('bulk-user-actions.actions.tab.feature.reset-traffic'),
             centered: true,
-            children: (
-                <Text size="sm">
-                    {t('bulk-user-actions.actions.tab.feature.reset-traffic-confirmation-line-1', {
-                        usersCount: uuidsLength
-                    })}
-                    <br />
-                    {t('bulk-user-actions.actions.tab.feature.reset-traffic-confirmation-line-2')}
-                </Text>
-            ),
+            children: t('common.confirm-action-description'),
             labels: {
                 confirm: t('bulk-user-actions.actions.tab.feature.reset'),
-                cancel: t('bulk-user-actioins-modal.widget.cancel')
+                cancel: t('common.cancel')
             },
             confirmProps: { color: 'blue' },
             onConfirm: () => {
@@ -168,7 +151,7 @@ export const BulkUserActionsActionsTabFeature = (props: IProps) => {
                             }}
                             variant="light"
                         >
-                            {t('bulk-user-actions.actions.tab.feature.change')}
+                            {t('common.change')}
                         </Button>
                     </Group>
                     <Text c="dimmed" size="xs">

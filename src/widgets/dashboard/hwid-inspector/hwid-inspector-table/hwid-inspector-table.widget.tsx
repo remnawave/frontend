@@ -142,11 +142,10 @@ export function HwidInspectorTableWidget() {
                         await userModalActions.setUserUuid(row.original.userUuid)
                         userModalActions.changeModalState(true)
                     }}
-                    radius="md"
                     size="input-sm"
                     variant="light"
                 >
-                    <PiUserCircle size={'1.5rem'} />
+                    <PiUserCircle size="1.5rem" />
                 </ActionIcon>
             ),
             []
@@ -160,11 +159,10 @@ export function HwidInspectorTableWidget() {
             <DataTableShared.Title
                 actions={
                     <ActionIconGroup>
-                        <Tooltip label={t('action-group.feature.update')} withArrow>
+                        <Tooltip label={t('common.update')} withArrow>
                             <ActionIcon
                                 loading={isLoading}
                                 onClick={() => refetch()}
-                                radius="md"
                                 size="lg"
                                 variant="light"
                             >
@@ -183,7 +181,6 @@ export function HwidInspectorTableWidget() {
                                     table.resetColumnFilters(true)
                                     table.resetGlobalFilter(true)
                                 }}
-                                radius="md"
                                 size="lg"
                                 variant="light"
                             >

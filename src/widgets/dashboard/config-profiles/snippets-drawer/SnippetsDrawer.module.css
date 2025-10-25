@@ -1,0 +1,10 @@
+.snippetCard {
+    cursor: pointer;
+    transition: all 0.15s ease;
+    border: 1px solid var(--mantine-color-dark-4);
+}
+
+.snippetCard:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    border-color: var(--mantine-color-cyan-5);
+}

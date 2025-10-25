@@ -1,4 +1,4 @@
-/* eslint-disable indent */
+/* eslint-disable @stylistic/indent */
 import {
     Accordion,
     ActionIcon,
@@ -154,7 +154,7 @@ export const ConfigProfilesDrawer = (props: IProps) => {
             title={t('config-profiles.drawer.widget.config-profiles')}
         >
             <Stack gap="md" h="100%">
-                <Paper p="md" radius="md" shadow="sm" withBorder>
+                <Paper p="md" shadow="sm" withBorder>
                     <Stack gap="md">
                         <Box
                             bd="1px solid var(--mantine-color-dark-4)"
@@ -204,7 +204,6 @@ export const ConfigProfilesDrawer = (props: IProps) => {
                                             <ActionIcon
                                                 color="red"
                                                 onClick={clearSelection}
-                                                radius="md"
                                                 size="lg"
                                                 variant="light"
                                             >
@@ -221,13 +220,9 @@ export const ConfigProfilesDrawer = (props: IProps) => {
                                 color="teal"
                                 disabled={selectedInbounds.size === 0}
                                 fullWidth
-                                leftSection={<TbDeviceFloppy size={'1.2rem'} />}
+                                leftSection={<TbDeviceFloppy size="1.2rem" />}
                                 onClick={handleSaveInbounds}
                                 size="md"
-                                style={{
-                                    transition: 'all 0.2s ease'
-                                }}
-                                variant="light"
                             >
                                 {t('config-profiles.drawer.widget.apply-changes')}
                             </Button>
@@ -239,7 +234,6 @@ export const ConfigProfilesDrawer = (props: IProps) => {
                     leftSection={<TbSearch size={16} />}
                     onChange={(event) => setSearchQuery(event.currentTarget.value)}
                     placeholder={t('config-profiles.drawer.widget.search-profiles-or-inbounds')}
-                    radius="md"
                     value={searchQuery}
                 />
 

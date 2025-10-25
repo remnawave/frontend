@@ -3,7 +3,7 @@ import { TSubscriptionTemplateType } from '@remnawave/backend-contract'
 export interface IDownloadableSubscriptionTemplate {
     author: string
     name: string
-    type: TSubscriptionTemplateType
+    type: 'SRR' | TSubscriptionTemplateType
     url: string
 }
 

@@ -16,7 +16,7 @@ import { useTranslation } from 'react-i18next'
 import { modals } from '@mantine/modals'
 import { memo } from 'react'
 
-import { XtlsLogo } from '@shared/ui/logos/xtls-logo'
+import { XrayLogo } from '@shared/ui/logos'
 
 import type { IProps } from './interfaces/props.interface'
 
@@ -103,7 +103,7 @@ export const ConfigProfileCardShared = memo((props: IProps) => {
                             size="lg"
                             variant="subtle"
                         >
-                            <XtlsLogo size={16} />
+                            <XrayLogo size={16} />
                         </ActionIcon>
                     </ActionIconGroup>
                 </Group>

@@ -1,4 +1,5 @@
-/* eslint-disable indent */
+/* eslint-disable @stylistic/indent */
+
 import {
     Accordion,
     ActionIcon,
@@ -283,7 +284,7 @@ export const UserUsageModalWidget = (props: IProps) => {
             return (
                 <Center h={400} mt="md" py="xl" ta="center">
                     <Box>
-                        <PiEmpty size={'2rem'} />
+                        <PiEmpty size="2rem" />
                         <Text c="dimmed">
                             {t('user-usage-modal.widget.no-data-available-for-the-selected-period')}
                         </Text>
@@ -334,7 +335,7 @@ export const UserUsageModalWidget = (props: IProps) => {
                             )
 
                             return (
-                                <Paper px="md" py="sm" radius="md" shadow="md" withBorder>
+                                <Paper px="md" py="sm" shadow="md" withBorder>
                                     <Group justify="space-between" mb={8}>
                                         <Text fw={600}>{date}</Text>
                                         <Text c="dimmed" fz="sm">
@@ -416,13 +417,13 @@ export const UserUsageModalWidget = (props: IProps) => {
         const content = (
             <SimpleGrid
                 cols={{ base: 1, xs: 2, sm: 3, md: 4 }}
-                spacing={'xs'}
+                spacing="xs"
                 style={{
                     cursor: 'pointer',
                     marginTop: '0.5rem',
                     marginBottom: '0.5rem'
                 }}
-                verticalSpacing={'xs'}
+                verticalSpacing="xs"
             >
                 {isLoading &&
                     Array.from({ length: 8 }).map((_, i) => (
@@ -819,7 +820,7 @@ export const UserUsageModalWidget = (props: IProps) => {
                                                         w={12}
                                                     />
                                                     <Group gap={6}>
-                                                        {/* eslint-disable indent */}
+                                                        {/* eslint-disable @stylistic/indent */}
                                                         {entry.countryCode &&
                                                             entry.countryCode !== 'XX' && (
                                                                 <ReactCountryFlag

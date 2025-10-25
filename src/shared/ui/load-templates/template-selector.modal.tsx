@@ -6,6 +6,7 @@ import { useState } from 'react'
 import {
     IDownloadableSubscriptionTemplate,
     IDownloadableSubscriptionTemplateList,
+    SRR_TEMPLATES_LIST_LINK,
     SUBSCRIPTION_TEMPLATE_LIST_LINK,
     XRAY_CORE_TEMPLATE_LIST_LINK
 } from '@shared/constants/templates'
@@ -17,10 +18,14 @@ export const TemplateDownloadModal = (props: TemplateSelectorModalProps) => {
     const { editorType, templateType, onCancel, onLoadTemplate } = props
     const { t } = useTranslation()
 
-    const templatesUrl =
-        editorType === 'SUBSCRIPTION'
-            ? SUBSCRIPTION_TEMPLATE_LIST_LINK
-            : XRAY_CORE_TEMPLATE_LIST_LINK
+    let templatesUrl = ''
+    if (editorType === 'SRR') {
+        templatesUrl = SRR_TEMPLATES_LIST_LINK
+    } else if (editorType === 'SUBSCRIPTION') {
+        templatesUrl = SUBSCRIPTION_TEMPLATE_LIST_LINK
+    } else if (editorType === 'XRAY_CORE') {
+        templatesUrl = XRAY_CORE_TEMPLATE_LIST_LINK
+    }
 
     const {
         data: templatesList,
@@ -57,7 +62,7 @@ export const TemplateDownloadModal = (props: TemplateSelectorModalProps) => {
                     <Text>Error loading templates from Github. Try again later.</Text>
                     <Group justify="center" mt="md">
                         <Button onClick={onCancel} variant="subtle">
-                            {t('template-selector.modal.cancel')}
+                            {t('common.cancel')}
                         </Button>
                     </Group>
                 </Stack>
@@ -76,13 +81,13 @@ export const TemplateDownloadModal = (props: TemplateSelectorModalProps) => {
             />
             <Group justify="flex-end" mt="md">
                 <Button onClick={onCancel} variant="subtle">
-                    {t('template-selector.modal.cancel')}
+                    {t('common.cancel')}
                 </Button>
                 <Button
-                    color="blue"
                     disabled={!selectedTemplate}
                     loading={isDownloading}
                     onClick={() => selectedTemplate && handleLoadTemplate(selectedTemplate)}
+                    variant="default"
                 >
                     {t('template-selector.modal.load-template')}
                 </Button>

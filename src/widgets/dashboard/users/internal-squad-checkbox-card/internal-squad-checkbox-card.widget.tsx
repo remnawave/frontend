@@ -65,7 +65,6 @@ export const InternalSquadCheckboxCard = memo((props: IProps) => {
 
                                 handlers.open()
                             }}
-                            radius={'md'}
                             size="lg"
                             variant="default"
                         >

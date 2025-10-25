@@ -20,7 +20,12 @@ import {
     useUserCreationModalStoreActions,
     useUserCreationModalStoreIsModalOpen
 } from '@entities/dashboard/user-creation-modal-store/user-creation-modal-store'
-import { useCreateUser, useGetInternalSquads, useGetUserTags } from '@shared/api/hooks'
+import {
+    useCreateUser,
+    useGetExternalSquads,
+    useGetInternalSquads,
+    useGetUserTags
+} from '@shared/api/hooks'
 import { LoaderModalShared } from '@shared/ui/loader-modal'
 import { handleFormErrors } from '@shared/utils/misc'
 import { ModalFooter } from '@shared/ui/modal-footer'
@@ -54,7 +59,7 @@ export const CreateUserModalWidget = () => {
     const actions = useUserCreationModalStoreActions()
 
     const { data: internalSquads, isLoading: isInternalSquadsLoading } = useGetInternalSquads()
-
+    const { data: externalSquads } = useGetExternalSquads()
     const { data: tags, isLoading: isTagsLoading } = useGetUserTags()
     const isMobile = useMediaQuery(`(max-width: ${em(768)})`)
 
@@ -133,7 +138,8 @@ export const CreateUserModalWidget = () => {
                     // @ts-expect-error - TODO: fix ZOD schema
                     hwidDeviceLimit: values.hwidDeviceLimit === '' ? null : values.hwidDeviceLimit,
                     tag: values.tag,
-                    activeInternalSquads: values.activeInternalSquads
+                    activeInternalSquads: values.activeInternalSquads,
+                    externalSquadUuid: values.externalSquadUuid
                 }
             },
             {
@@ -182,6 +188,7 @@ export const CreateUserModalWidget = () => {
 
                             <AccessSettingsCard
                                 cardVariants={cardVariants}
+                                externalSquads={externalSquads}
                                 form={form}
                                 internalSquads={internalSquads}
                                 motionWrapper={MotionWrapper}
@@ -245,6 +252,7 @@ export const CreateUserModalWidget = () => {
 
                                 <AccessSettingsCard
                                     cardVariants={cardVariants}
+                                    externalSquads={externalSquads}
                                     form={form}
                                     internalSquads={internalSquads}
                                     motionWrapper={MotionWrapper}

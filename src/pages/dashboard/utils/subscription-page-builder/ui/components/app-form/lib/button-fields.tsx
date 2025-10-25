@@ -42,7 +42,7 @@ export const ButtonFields = (props: ButtonFieldsProps) => {
     return (
         <Box>
             {buttons.map((button, index) => (
-                <Card key={index} mb="lg" padding="md" radius="md" withBorder>
+                <Card key={index} mb="lg" padding="md" withBorder>
                     <Card.Section p="md" withBorder>
                         <Flex align="center" justify="space-between">
                             <Title order={5}>
@@ -146,7 +146,6 @@ export const ButtonFields = (props: ButtonFieldsProps) => {
                     <Button
                         leftSection={<PiPlus size="24px" />}
                         onClick={() => addButton(localApp, section, updateApp, additionalLocales)}
-                        radius="md"
                         variant="default"
                     >
                         {t('button-fields.add-button')}

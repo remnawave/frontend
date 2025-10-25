@@ -16,14 +16,14 @@ import { useTranslation } from 'react-i18next'
 import { useField } from '@mantine/form'
 
 import { QueryKeys, useCreateInternalSquad, useGetInternalSquads } from '@shared/api/hooks'
-import { MODALS, useModalsStore } from '@entities/dashboard/modal-store'
+import { MODALS, useModalsStoreOpenWithData } from '@entities/dashboard/modal-store'
 import { queryClient } from '@shared/api'
 
 export const InternalSquadsHeaderActionButtonsFeature = () => {
     const { t } = useTranslation()
     const { isFetching } = useGetInternalSquads()
 
-    const { open: openModal, setInternalData } = useModalsStore()
+    const openModalWithData = useModalsStoreOpenWithData()
 
     const [opened, { open, close }] = useDisclosure(false)
 
@@ -50,12 +50,9 @@ export const InternalSquadsHeaderActionButtonsFeature = () => {
                 nameField.reset()
                 handleUpdate()
 
-                setInternalData({
-                    internalState: data,
-                    modalKey: MODALS.INTERNAL_SQUAD_SHOW_INBOUNDS
-                })
-                openModal(MODALS.INTERNAL_SQUAD_SHOW_INBOUNDS)
+                openModalWithData(MODALS.INTERNAL_SQUAD_SHOW_INBOUNDS, data)
             },
+
             onError: (error) => {
                 nameField.setError(error.message)
             }
@@ -65,11 +62,10 @@ export const InternalSquadsHeaderActionButtonsFeature = () => {
     return (
         <Group grow preventGrowOverflow={false} wrap="wrap">
             <ActionIconGroup>
-                <Tooltip label={t('internal-squad-header-action-buttons.feature.update')} withArrow>
+                <Tooltip label={t('common.update')} withArrow>
                     <ActionIcon
                         loading={isFetching}
                         onClick={handleUpdate}
-                        radius="md"
                         size="lg"
                         variant="light"
                     >
@@ -83,7 +79,7 @@ export const InternalSquadsHeaderActionButtonsFeature = () => {
                     label={t('internal-squad-header-action-buttons.feature.create-internal-squad')}
                     withArrow
                 >
-                    <ActionIcon color="teal" onClick={open} radius="md" size="lg" variant="light">
+                    <ActionIcon color="teal" onClick={open} size="lg" variant="light">
                         <TbPlus size="18px" />
                     </ActionIcon>
                 </Tooltip>
@@ -123,16 +119,18 @@ export const InternalSquadsHeaderActionButtonsFeature = () => {
                             {...nameField.getInputProps()}
                         />
                         <Group justify="flex-end">
-                            <Button onClick={close} variant="default">
-                                {t('internal-squad-header-action-buttons.feature.cancel')}
+                            <Button color="gray" onClick={close} variant="light">
+                                {t('common.cancel')}
                             </Button>
 
                             <Button
+                                color="teal"
                                 disabled={!!nameField.error || nameField.getValue().length === 0}
                                 loading={isPending}
                                 type="submit"
+                                variant="default"
                             >
-                                {t('internal-squad-header-action-buttons.feature.create')}
+                                {t('common.create')}
                             </Button>
                         </Group>
                     </Stack>

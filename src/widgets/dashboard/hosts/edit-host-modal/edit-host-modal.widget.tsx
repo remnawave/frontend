@@ -15,22 +15,18 @@ import {
     useGetNodes,
     useUpdateHost
 } from '@shared/api/hooks'
-import {
-    useHostsStoreActions,
-    useHostsStoreEditModalHost,
-    useHostsStoreEditModalIsOpen
-} from '@entities/dashboard'
+import { MODALS, useModalClose, useModalState } from '@entities/dashboard/modal-store'
 import { BaseHostForm } from '@shared/ui/forms/hosts/base-host-form'
 import { queryClient } from '@shared/api'
+import {} from '@entities/dashboard'
 
 export const EditHostModalWidget = () => {
     const { t } = useTranslation()
 
-    const [advancedOpened, setAdvancedOpened] = useState(false)
+    const { isOpen, internalState: host } = useModalState(MODALS.EDIT_HOST_MODAL)
+    const close = useModalClose(MODALS.EDIT_HOST_MODAL)
 
-    const isModalOpen = useHostsStoreEditModalIsOpen()
-    const actions = useHostsStoreActions()
-    const host = useHostsStoreEditModalHost()
+    const [advancedOpened, setAdvancedOpened] = useState(false)
 
     const { data: configProfiles } = useGetConfigProfiles()
     const { data: nodes } = useGetNodes()
@@ -48,7 +44,7 @@ export const EditHostModalWidget = () => {
     })
 
     const handleClose = () => {
-        actions.toggleEditModal(false)
+        close()
 
         setTimeout(() => {
             form.reset()
@@ -285,7 +281,7 @@ export const EditHostModalWidget = () => {
         <Drawer
             keepMounted={false}
             onClose={handleClose}
-            opened={isModalOpen}
+            opened={isOpen}
             overlayProps={{ backgroundOpacity: 0.6, blur: 0 }}
             padding="lg"
             position="right"

@@ -84,7 +84,7 @@ export function GetUserSubscriptionRequestHistoryFeature(props: IProps) {
                         )}
 
                         {subscriptionRequestHistory?.records.map((request) => (
-                            <Card key={request.id} padding="lg" radius="md" withBorder>
+                            <Card key={request.id} padding="lg" withBorder>
                                 <Stack gap="sm">
                                     <Stack gap="xs">
                                         <Group align="center" gap="xs">

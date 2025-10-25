@@ -7,11 +7,8 @@ import {
     useGetHostTags,
     useGetNodes
 } from '@shared/api/hooks'
-import {
-    useHostsStoreCreateModalIsOpen,
-    useHostsStoreEditModalIsOpen
-} from '@entities/dashboard/hosts/hosts-store'
 import HostsPageComponent from '@pages/dashboard/hosts/ui/components/hosts.page.component'
+import { MODALS, useModalIsOpen } from '@entities/dashboard/modal-store'
 import { queryClient } from '@shared/api'
 
 export function HostsPageConnector() {
@@ -20,8 +17,8 @@ export function HostsPageConnector() {
     const { data: hostTags, isLoading: isHostTagsLoading } = useGetHostTags()
     const { isLoading: isNodesLoading } = useGetNodes()
 
-    const isCreateModalOpen = useHostsStoreCreateModalIsOpen()
-    const isEditModalOpen = useHostsStoreEditModalIsOpen()
+    const isCreateModalOpen = useModalIsOpen(MODALS.CREATE_HOST_MODAL)
+    const isEditModalOpen = useModalIsOpen(MODALS.EDIT_HOST_MODAL)
 
     useEffect(() => {
         if (isCreateModalOpen || isEditModalOpen) return

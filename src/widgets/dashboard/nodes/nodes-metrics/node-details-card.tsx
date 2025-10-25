@@ -53,7 +53,7 @@ export const NodeDetailsCard = memo(
         const filteredOutboundStats = filterNonZeroStats(node.outboundsStats)
 
         return (
-            <Paper className={styles.NodeDetailCardPaper} p="lg" radius="lg">
+            <Paper className={styles.NodeDetailCardPaper} p="lg">
                 <Box className={styles.NodeDetailCardBox} />
 
                 <Stack gap="md" style={{ position: 'relative', zIndex: 1 }}>
@@ -144,7 +144,6 @@ export const NodeDetailsCard = memo(
                                 <ActionIcon
                                     color="indigo"
                                     onClick={() => setHideZeroValues(!hideZeroValues)}
-                                    radius="md"
                                     size="md"
                                     variant="light"
                                 >
@@ -172,11 +171,7 @@ export const NodeDetailsCard = memo(
 
                     <Grid align="flex-start" justify="flex-start">
                         <Grid.Col span={{ base: 12, lg: 6 }}>
-                            <Card
-                                p="md"
-                                radius="md"
-                                style={{ backgroundColor: 'rgba(16, 185, 129, 0.1)' }}
-                            >
+                            <Card p="md" style={{ backgroundColor: 'rgba(16, 185, 129, 0.1)' }}>
                                 <Group align="center" gap="xs" mb="xs" wrap="nowrap">
                                     <PiArrowDownDuotone
                                         color="var(--mantine-color-teal-4)"
@@ -275,11 +270,7 @@ export const NodeDetailsCard = memo(
                             </Card>
                         </Grid.Col>
                         <Grid.Col span={{ base: 12, lg: 6 }}>
-                            <Card
-                                p="md"
-                                radius="md"
-                                style={{ backgroundColor: 'rgba(59, 130, 246, 0.1)' }}
-                            >
+                            <Card p="md" style={{ backgroundColor: 'rgba(59, 130, 246, 0.1)' }}>
                                 <Group align="center" gap="xs" mb="xs" wrap="nowrap">
                                     <PiArrowUpDuotone
                                         color="var(--mantine-color-blue-4)"

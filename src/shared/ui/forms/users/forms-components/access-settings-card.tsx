@@ -1,16 +1,17 @@
 import {
     CreateUserCommand,
+    GetExternalSquadsCommand,
     GetInternalSquadsCommand,
     UpdateUserCommand
 } from '@remnawave/backend-contract'
 import { ForwardRefComponent, HTMLMotionProps, Variants } from 'motion/react'
-import { Fieldset, Group, Stack, Title } from '@mantine/core'
+import { Fieldset, Group, Select, Stack, Title } from '@mantine/core'
 import { DateTimePicker, getTimeRange } from '@mantine/dates'
 import { notifications } from '@mantine/notifications'
+import { TbShield, TbWebhook } from 'react-icons/tb'
 import { PiCalendarDuotone } from 'react-icons/pi'
 import { UseFormReturnType } from '@mantine/form'
 import { useTranslation } from 'react-i18next'
-import { TbShield } from 'react-icons/tb'
 import { useMemo, useState } from 'react'
 import dayjs from 'dayjs'
 
@@ -18,6 +19,7 @@ import { InternalSquadsListWidget } from '@widgets/dashboard/users/internal-squa
 
 interface IProps<T extends CreateUserCommand.Request | UpdateUserCommand.Request> {
     cardVariants: Variants
+    externalSquads: GetExternalSquadsCommand.Response['response'] | undefined
     form: UseFormReturnType<T>
     internalSquads: GetInternalSquadsCommand.Response['response'] | undefined
     motionWrapper: ForwardRefComponent<HTMLDivElement, HTMLMotionProps<'div'>>
@@ -28,7 +30,7 @@ export const AccessSettingsCard = <T extends CreateUserCommand.Request | UpdateU
 ) => {
     const { t } = useTranslation()
 
-    const { cardVariants, motionWrapper, form, internalSquads } = props
+    const { cardVariants, motionWrapper, form, internalSquads, externalSquads } = props
 
     const [searchQuery, setSearchQuery] = useState('')
 
@@ -153,6 +155,24 @@ export const AccessSettingsCard = <T extends CreateUserCommand.Request | UpdateU
                         searchQuery={searchQuery}
                         setSearchQuery={setSearchQuery}
                         {...form.getInputProps('activeInternalSquads')}
+                    />
+
+                    <Select
+                        allowDeselect={true}
+                        clearable
+                        data={externalSquads?.externalSquads.map((externalSquad) => ({
+                            label: externalSquad.name,
+                            value: externalSquad.uuid
+                        }))}
+                        defaultValue={form.values.externalSquadUuid}
+                        description={t(
+                            'access-settings-card.select-an-external-squad-to-apply-custom-settings-to-this-user'
+                        )}
+                        key={form.key('externalSquadUuid')}
+                        label={t('access-settings-card.external-squad')}
+                        leftSection={<TbWebhook size="16px" />}
+                        placeholder={t('access-settings-card.select-an-external-squad')}
+                        {...form.getInputProps('externalSquadUuid')}
                     />
                 </Stack>
             </Fieldset>

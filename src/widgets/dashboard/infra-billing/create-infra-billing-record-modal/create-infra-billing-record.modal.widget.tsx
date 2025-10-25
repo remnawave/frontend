@@ -9,17 +9,15 @@ import { useForm } from '@mantine/form'
 import dayjs from 'dayjs'
 
 import { SelectInfraProviderShared } from '@shared/ui/infra-billing/select-infra-provider/select-infra-provider.shared'
+import { MODALS, useModalClose, useModalIsOpen } from '@entities/dashboard/modal-store'
 import { QueryKeys, useCreateInfraBillingHistoryRecord } from '@shared/api/hooks'
-import { MODALS, useModalsStore } from '@entities/dashboard/modal-store'
 import { handleFormErrors } from '@shared/utils/misc'
 import { queryClient } from '@shared/api'
 
 export function CreateInfraBillingRecordDrawerWidget() {
-    const { isOpen } = useModalsStore(
-        (state) => state.modals[MODALS.CREATE_INFRA_BILLING_RECORD_DRAWER]
-    )
+    const isOpen = useModalIsOpen(MODALS.CREATE_INFRA_BILLING_RECORD_DRAWER)
+    const close = useModalClose(MODALS.CREATE_INFRA_BILLING_RECORD_DRAWER)
 
-    const { close } = useModalsStore()
     const { t } = useTranslation()
 
     const form = useForm<CreateInfraBillingHistoryRecordCommand.Request>({
@@ -60,7 +58,7 @@ export function CreateInfraBillingRecordDrawerWidget() {
 
                     form.reset()
 
-                    close(MODALS.CREATE_INFRA_BILLING_RECORD_DRAWER)
+                    close()
                 },
                 onError: (error) => {
                     handleFormErrors(form, error)
@@ -97,7 +95,7 @@ export function CreateInfraBillingRecordDrawerWidget() {
             onClose={() => {
                 form.reset()
 
-                close(MODALS.CREATE_INFRA_BILLING_RECORD_DRAWER)
+                close()
             }}
             opened={isOpen}
             overlayProps={{ backgroundOpacity: 0.6, blur: 0 }}
@@ -156,7 +154,7 @@ export function CreateInfraBillingRecordDrawerWidget() {
                     />
 
                     <Button loading={isCreateInfraBillingRecordPending} type="submit">
-                        {t('create-infra-billing-record.modal.widget.create')}
+                        {t('common.create')}
                     </Button>
                 </Stack>
             </form>

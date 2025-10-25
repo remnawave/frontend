@@ -4,17 +4,16 @@ import { zodResolver } from 'mantine-form-zod-resolver'
 import { useTranslation } from 'react-i18next'
 import { useForm } from '@mantine/form'
 
-import { MODALS, useModalsStore } from '@entities/dashboard/modal-store'
+import { MODALS, useModalClose, useModalIsOpen } from '@entities/dashboard/modal-store'
 import { QueryKeys, useCreateInfraProvider } from '@shared/api/hooks'
 import { handleFormErrors } from '@shared/utils/misc'
 import { queryClient } from '@shared/api'
 
 export function CreateInfraProviderDrawerWidget() {
-    const { isOpen } = useModalsStore((state) => state.modals[MODALS.CREATE_INFRA_PROVIDER_DRAWER])
+    const isOpen = useModalIsOpen(MODALS.CREATE_INFRA_PROVIDER_DRAWER)
+    const close = useModalClose(MODALS.CREATE_INFRA_PROVIDER_DRAWER)
 
     const { t } = useTranslation()
-
-    const { close } = useModalsStore()
 
     const form = useForm<CreateInfraProviderCommand.Request>({
         name: 'create-infra-provider-form',
@@ -30,7 +29,7 @@ export function CreateInfraProviderDrawerWidget() {
                         queryKey: QueryKeys.infraBilling.getInfraProviders.queryKey
                     })
 
-                    close(MODALS.CREATE_INFRA_PROVIDER_DRAWER)
+                    close()
                 },
                 onError: (error) => {
                     handleFormErrors(form, error)
@@ -51,7 +50,7 @@ export function CreateInfraProviderDrawerWidget() {
     return (
         <Drawer
             keepMounted={false}
-            onClose={() => close(MODALS.CREATE_INFRA_PROVIDER_DRAWER)}
+            onClose={close}
             onExitTransitionEnd={() => {
                 form.reset()
             }}
@@ -91,7 +90,7 @@ export function CreateInfraProviderDrawerWidget() {
                     />
 
                     <Button loading={isCreateInfraProviderPending} type="submit">
-                        {t('create-infra-provider.drawer.widget.create')}
+                        {t('common.create')}
                     </Button>
                 </Stack>
             </form>

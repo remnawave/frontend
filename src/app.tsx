@@ -60,7 +60,7 @@ export function App() {
 
     return (
         // <StrictMode>
-        <I18nextProvider defaultNS={''} i18n={i18n}>
+        <I18nextProvider defaultNS="" i18n={i18n}>
             <QueryClientProvider client={queryClient}>
                 {isDev && <ReactQueryDevtools initialIsOpen={false} />}
                 <AuthProvider>
@@ -71,7 +71,7 @@ export function App() {
                                 <NavigationProgress />
                                 <Suspense
                                     fallback={
-                                        <Center h={'100%'}>
+                                        <Center h="100%">
                                             <LoadingScreen height="60vh" />
                                         </Center>
                                     }

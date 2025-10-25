@@ -24,7 +24,7 @@ import {
     useGetInfraBillingNodes,
     useUpdateInfraBillingNode
 } from '@shared/api/hooks'
-import { MODALS, useModalsStore } from '@entities/dashboard/modal-store'
+import { MODALS, useModalsStoreOpenWithData } from '@entities/dashboard/modal-store'
 import { DataTableShared } from '@shared/ui/table'
 import { queryClient } from '@shared/api'
 
@@ -39,7 +39,8 @@ export function InfraBillingNodesTableWidget() {
         refetch: refetchInfraBillingNodes
     } = useGetInfraBillingNodes()
 
-    const { open: openModal, setInternalData } = useModalsStore()
+    const openModalWithData = useModalsStoreOpenWithData()
+
     const { t } = useTranslation()
 
     const [multiSelectedRecords, setMultiSelectedRecords] = useState<
@@ -82,8 +83,8 @@ export function InfraBillingNodesTableWidget() {
                 </Text>
             ),
             labels: {
-                confirm: t('infra-billing-nodes.widget.delete'),
-                cancel: t('infra-billing-nodes.widget.cancel')
+                confirm: t('common.delete'),
+                cancel: t('common.cancel')
             },
 
             centered: true,
@@ -114,14 +115,10 @@ export function InfraBillingNodesTableWidget() {
     const handleClickBillingAt = (
         node: GetInfraBillingNodesCommand.Response['response']['billingNodes'][number]
     ) => {
-        setInternalData({
-            internalState: {
-                uuids: [node.uuid],
-                nextBillingAt: node.nextBillingAt
-            },
-            modalKey: MODALS.UPDATE_BILLING_DATE_MODAL
+        openModalWithData(MODALS.UPDATE_BILLING_DATE_MODAL, {
+            uuids: [node.uuid],
+            nextBillingAt: node.nextBillingAt
         })
-        openModal(MODALS.UPDATE_BILLING_DATE_MODAL)
     }
 
     const clearMultiSelectedRecords = () => {
@@ -129,14 +126,10 @@ export function InfraBillingNodesTableWidget() {
     }
 
     const handleUpdateMultipleNodes = () => {
-        setInternalData({
-            internalState: {
-                uuids: multiSelectedRecords.map((node) => node.uuid),
-                callback: clearMultiSelectedRecords
-            },
-            modalKey: MODALS.UPDATE_BILLING_DATE_MODAL
+        openModalWithData(MODALS.UPDATE_BILLING_DATE_MODAL, {
+            uuids: multiSelectedRecords.map((node) => node.uuid),
+            callback: clearMultiSelectedRecords
         })
-        openModal(MODALS.UPDATE_BILLING_DATE_MODAL)
     }
 
     return (
@@ -156,7 +149,6 @@ export function InfraBillingNodesTableWidget() {
                                         <ActionIcon
                                             color="red"
                                             onClick={() => handleDeleteInfraBillingNode()}
-                                            radius="md"
                                             size="lg"
                                             variant="light"
                                         >
@@ -172,7 +164,6 @@ export function InfraBillingNodesTableWidget() {
                                             <ActionIcon
                                                 color="teal"
                                                 onClick={handleUpdateMultipleNodes}
-                                                radius="md"
                                                 size="lg"
                                                 variant="light"
                                             >
@@ -185,14 +176,13 @@ export function InfraBillingNodesTableWidget() {
                         </AnimatePresence>
 
                         <ActionIconGroup>
-                            <Tooltip label={t('infra-billing-nodes.widget.refresh')} withArrow>
+                            <Tooltip label={t('common.refresh')} withArrow>
                                 <ActionIcon
                                     loading={infraBillingNodesLoading}
                                     onClick={() => {
                                         refetchInfraBillingNodes()
                                         clearMultiSelectedRecords()
                                     }}
-                                    radius="md"
                                     size="lg"
                                     variant="light"
                                 >
@@ -206,9 +196,11 @@ export function InfraBillingNodesTableWidget() {
                                 <ActionIcon
                                     color="teal"
                                     onClick={() => {
-                                        openModal(MODALS.CREATE_INFRA_BILLING_NODE_MODAL)
+                                        openModalWithData(
+                                            MODALS.CREATE_INFRA_BILLING_NODE_MODAL,
+                                            undefined
+                                        )
                                     }}
-                                    radius="md"
                                     size="lg"
                                     variant="light"
                                 >
@@ -237,7 +229,9 @@ export function InfraBillingNodesTableWidget() {
                             {t('infra-billing-nodes.widget.no-nodes-found')}
                         </Text>
                         <Button
-                            onClick={() => openModal(MODALS.CREATE_INFRA_BILLING_NODE_MODAL)}
+                            onClick={() =>
+                                openModalWithData(MODALS.CREATE_INFRA_BILLING_NODE_MODAL, undefined)
+                            }
                             style={{ pointerEvents: 'all' }}
                             variant="light"
                         >

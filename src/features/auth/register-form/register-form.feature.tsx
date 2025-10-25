@@ -102,7 +102,7 @@ export const RegisterFormFeature = () => {
     return (
         <form onSubmit={handleSubmit}>
             <Container size="100%">
-                <Paper p={30} radius="md">
+                <Paper p={30}>
                     <Title mb="xs" order={2} ta="center">
                         {t('register-form.feature.registration')}
                     </Title>
@@ -140,9 +140,7 @@ export const RegisterFormFeature = () => {
                             fullWidth
                             leftSection={<PiShuffleDuotone size="16px" />}
                             onClick={handleGeneratePassword}
-                            radius="md"
                             size="md"
-                            variant="light"
                         >
                             {t('register-form.feature.generate')}
                         </Button>
@@ -153,7 +151,6 @@ export const RegisterFormFeature = () => {
                         leftSection={<PiSignpostDuotone size="16px" />}
                         loading={isLoading}
                         mt="xl"
-                        radius="md"
                         size="md"
                         type="submit"
                         variant="default"

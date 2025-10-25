@@ -20,9 +20,9 @@ import ReactCountryFlag from 'react-country-flag'
 import { useTranslation } from 'react-i18next'
 import { PiTag } from 'react-icons/pi'
 
-import { MODALS, useModalsStore } from '@entities/dashboard/modal-store'
+import { MODALS, useModalClose, useModalState } from '@entities/dashboard/modal-store'
 import { useGetUserAccessibleNodes } from '@shared/api/hooks'
-import { XtlsLogo } from '@shared/ui/logos/xtls-logo'
+import { XrayLogo } from '@shared/ui/logos'
 
 interface CustomTreeNodeData extends TreeNodeData {
     configProfileName?: string
@@ -48,10 +48,8 @@ interface RenderTreeNodeProps {
 export const UserAccessibleNodesModalWidget = () => {
     const { t } = useTranslation()
 
-    const { isOpen, internalState } = useModalsStore(
-        (state) => state.modals[MODALS.USER_ACCESSIBLE_NODES_DRAWER]
-    )
-    const { close } = useModalsStore()
+    const { isOpen, internalState } = useModalState(MODALS.USER_ACCESSIBLE_NODES_DRAWER)
+    const close = useModalClose(MODALS.USER_ACCESSIBLE_NODES_DRAWER)
 
     const { data: userAccessibleNodes, isLoading } = useGetUserAccessibleNodes({
         route: {
@@ -108,7 +106,6 @@ export const UserAccessibleNodesModalWidget = () => {
                         <Card
                             m="xs"
                             p="md"
-                            radius="lg"
                             style={{
                                 backgroundColor: 'var(--mantine-color-dark-6)',
                                 borderWidth: '1px'
@@ -141,7 +138,7 @@ export const UserAccessibleNodesModalWidget = () => {
                                     </Text>
                                     <Badge
                                         color="teal"
-                                        leftSection={<XtlsLogo size={20} />}
+                                        leftSection={<XrayLogo size={20} />}
                                         size="lg"
                                         variant="light"
                                     >
@@ -290,7 +287,7 @@ export const UserAccessibleNodesModalWidget = () => {
 
         return (
             <Stack gap="lg">
-                <Card p="md" radius="md" withBorder>
+                <Card p="md" withBorder>
                     <Group align="center" gap="md">
                         <IconFlag color="var(--mantine-color-blue-4)" size={20} />
                         <Text c="gray.1" fw={600} size="lg">
@@ -346,7 +343,7 @@ export const UserAccessibleNodesModalWidget = () => {
     return (
         <Drawer
             keepMounted={false}
-            onClose={() => close(MODALS.USER_ACCESSIBLE_NODES_DRAWER)}
+            onClose={close}
             opened={isOpen}
             overlayProps={{ backgroundOpacity: 0.6, blur: 0 }}
             padding="lg"

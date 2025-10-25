@@ -1,4 +1,5 @@
-/* eslint-disable indent */
+/* eslint-disable @stylistic/indent */
+
 import {
     Accordion,
     ActionIcon,
@@ -471,7 +472,6 @@ export const SubscriptionPageBuilderComponent = () => {
                                                             <Paper
                                                                 key={app.id}
                                                                 p="md"
-                                                                radius="md"
                                                                 shadow={
                                                                     selectedAppId === app.id
                                                                         ? 'lg'
@@ -508,7 +508,6 @@ export const SubscriptionPageBuilderComponent = () => {
                                                                                 color={getPlatformColor(
                                                                                     activeTab
                                                                                 )}
-                                                                                radius="md"
                                                                                 size="sm"
                                                                                 variant="light"
                                                                             >
@@ -595,7 +594,6 @@ export const SubscriptionPageBuilderComponent = () => {
                                                     leftSection={<IconPlus size="16px" />}
                                                     mt="md"
                                                     onClick={addNewApp}
-                                                    radius="md"
                                                     variant="default"
                                                 >
                                                     {t(
@@ -611,7 +609,7 @@ export const SubscriptionPageBuilderComponent = () => {
                     </Grid.Col>
 
                     <Grid.Col span={{ base: 12, lg: 8 }}>
-                        <Paper p="md" radius="md" shadow="sm" withBorder>
+                        <Paper p="md" shadow="sm" withBorder>
                             {selectedApp ? (
                                 <AppForm
                                     additionalLocales={config.config.additionalLocales}
@@ -662,7 +660,7 @@ export const SubscriptionPageBuilderComponent = () => {
                     </ScrollArea>
                     <Flex justify="flex-end" mt="lg">
                         <Button onClick={close} variant="outline">
-                            {t('subscription-page-builder.page.component.close')}
+                            {t('common.close')}
                         </Button>
                     </Flex>
                 </Modal>

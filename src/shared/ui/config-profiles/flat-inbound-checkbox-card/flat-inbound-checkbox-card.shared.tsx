@@ -78,7 +78,6 @@ export const FlatInboundCheckboxCardShared = (props: IProps) => {
                             e.stopPropagation()
                             handleShowInboundJson(inbound)
                         }}
-                        radius={'md'}
                         size="md"
                     >
                         <TbCode size={16} />

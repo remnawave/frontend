@@ -3,7 +3,8 @@ import {
     OAuth2AuthorizeCommand,
     OAuth2CallbackCommand,
     RegisterCommand,
-    TelegramCallbackCommand
+    TelegramCallbackCommand,
+    VerifyPasskeyAuthenticationCommand
 } from '@remnawave/backend-contract'
 import { notifications } from '@mantine/notifications'
 
@@ -92,6 +93,24 @@ export const useOAuth2Authorize = createMutationHook({
                 message: error.message,
                 color: 'red'
             })
+        }
+    }
+})
+
+export const usePasskeyAuthenticationVerify = createMutationHook({
+    endpoint: VerifyPasskeyAuthenticationCommand.TSQ_url,
+    bodySchema: VerifyPasskeyAuthenticationCommand.RequestSchema,
+    responseSchema: VerifyPasskeyAuthenticationCommand.ResponseSchema,
+    requestMethod: VerifyPasskeyAuthenticationCommand.endpointDetails.REQUEST_METHOD,
+    rMutationParams: {
+        onSuccess: (data) => {
+            notifications.show({
+                title: 'Passkey Verified',
+                message: 'Passkey authenticated successfully',
+                color: 'teal'
+            })
+
+            setToken({ token: data.accessToken })
         }
     }
 })

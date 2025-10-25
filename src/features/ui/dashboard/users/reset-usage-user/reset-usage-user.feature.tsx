@@ -45,7 +45,7 @@ export function ResetUsageUserFeature(props: IProps) {
         <Menu.Item
             leftSection={
                 isResetUserTrafficPending ? (
-                    <Loader color="var(--mantine-color-blue-5)" size={'1rem'} />
+                    <Loader color="var(--mantine-color-blue-5)" size="1rem" />
                 ) : (
                     <PiClockCounterClockwiseDuotone
                         color="var(--mantine-color-blue-5)"

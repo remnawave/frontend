@@ -5,16 +5,17 @@ import { useTranslation } from 'react-i18next'
 import { useForm } from '@mantine/form'
 import { useEffect } from 'react'
 
-import { MODALS, useModalsStore } from '@entities/dashboard/modal-store'
+import { MODALS, useModalClose, useModalState } from '@entities/dashboard/modal-store'
 import { QueryKeys, useUpdateInfraProvider } from '@shared/api/hooks'
 import { handleFormErrors } from '@shared/utils/misc'
 import { queryClient } from '@shared/api'
 
 export function ViewInfraProviderDrawerWidget() {
-    const { isOpen, internalState: infraProvider } = useModalsStore(
-        (state) => state.modals[MODALS.VIEW_INFRA_PROVIDER_DRAWER]
+    const { isOpen, internalState: infraProvider } = useModalState(
+        MODALS.VIEW_INFRA_PROVIDER_DRAWER
     )
-    const { close } = useModalsStore()
+    const close = useModalClose(MODALS.VIEW_INFRA_PROVIDER_DRAWER)
+
     const { t } = useTranslation()
 
     const form = useForm<UpdateInfraProviderCommand.Request>({
@@ -31,7 +32,7 @@ export function ViewInfraProviderDrawerWidget() {
                         queryKey: QueryKeys.infraBilling.getInfraProviders.queryKey
                     })
 
-                    close(MODALS.VIEW_INFRA_PROVIDER_DRAWER)
+                    close()
                 },
                 onError: (error) => {
                     handleFormErrors(form, error)
@@ -64,7 +65,7 @@ export function ViewInfraProviderDrawerWidget() {
     return (
         <Drawer
             keepMounted={false}
-            onClose={() => close(MODALS.VIEW_INFRA_PROVIDER_DRAWER)}
+            onClose={close}
             opened={isOpen}
             overlayProps={{ backgroundOpacity: 0.6, blur: 0 }}
             padding="lg"

@@ -156,7 +156,6 @@ export const AppForm = (props: AppFormProps) => {
                                             additionalBeforeAddSubscriptionStep: undefined
                                         })
                                     }
-                                    radius="md"
                                     size="xs"
                                     variant="default"
                                 >
@@ -178,7 +177,6 @@ export const AppForm = (props: AppFormProps) => {
                                             }
                                         })
                                     }
-                                    radius="md"
                                     size="xs"
                                     variant="default"
                                 >
@@ -260,13 +258,12 @@ export const AppForm = (props: AppFormProps) => {
                                     color="red"
                                     component="p"
                                     leftSection={<PiMinus size="20px" />}
-                                    ml={'xs'}
+                                    ml="xs"
                                     onClick={() =>
                                         updateApp({
                                             additionalAfterAddSubscriptionStep: undefined
                                         })
                                     }
-                                    radius="md"
                                     size="xs"
                                     variant="default"
                                 >
@@ -277,7 +274,7 @@ export const AppForm = (props: AppFormProps) => {
                                 <Button
                                     component="p"
                                     leftSection={<PiPlus size="20px" />}
-                                    ml={'xs'}
+                                    ml="xs"
                                     onClick={() =>
                                         updateApp({
                                             additionalAfterAddSubscriptionStep: {
@@ -288,7 +285,6 @@ export const AppForm = (props: AppFormProps) => {
                                             }
                                         })
                                     }
-                                    radius="md"
                                     size="xs"
                                     variant="default"
                                 >

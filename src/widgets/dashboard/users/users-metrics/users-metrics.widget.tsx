@@ -61,8 +61,8 @@ export function UsersMetrics() {
                         </MetricCard.Icon>
                         <Stack align="self-start" gap="xs" miw={0} w="100%">
                             <MetricCard.TextMuted>{card.title}</MetricCard.TextMuted>
-                            <Box miw={0} w={'100%'}>
-                                <MetricCard.TextEmphasis ff={'monospace'} truncate>
+                            <Box miw={0} w="100%">
+                                <MetricCard.TextEmphasis ff="monospace" truncate>
                                     {isLoading ? (
                                         <Loader color={card.color} size="xs" />
                                     ) : (

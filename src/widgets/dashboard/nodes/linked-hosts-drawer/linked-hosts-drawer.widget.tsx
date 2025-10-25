@@ -6,20 +6,18 @@ import { useTranslation } from 'react-i18next'
 import ColorHash from 'color-hash'
 import { memo } from 'react'
 
-import { MODALS, useModalsStore } from '@entities/dashboard/modal-store'
+import { MODALS, useModalClose, useModalState } from '@entities/dashboard/modal-store'
 import { useGetConfigProfiles, useGetHosts } from '@shared/api/hooks'
 import { SEARCH_PARAMS } from '@shared/constants/search-params'
-import { XtlsLogo } from '@shared/ui/logos/xtls-logo'
+import { XrayLogo } from '@shared/ui/logos'
 import { ROUTES } from '@shared/constants'
 import { LoadingScreen } from '@shared/ui'
 
 import styles from './LinkedHosts.module.css'
 
 export const LinkedHostsDrawer = memo(() => {
-    const { isOpen, internalState: nodeUuid } = useModalsStore(
-        (state) => state.modals[MODALS.SHOW_NODE_LINKED_HOSTS_DRAWER]
-    )
-    const { close } = useModalsStore()
+    const { isOpen, internalState: nodeUuid } = useModalState(MODALS.SHOW_NODE_LINKED_HOSTS_DRAWER)
+    const close = useModalClose(MODALS.SHOW_NODE_LINKED_HOSTS_DRAWER)
 
     const { t } = useTranslation()
 
@@ -32,7 +30,7 @@ export const LinkedHostsDrawer = memo(() => {
         return (
             <Drawer
                 keepMounted={false}
-                onClose={() => close(MODALS.SHOW_NODE_LINKED_HOSTS_DRAWER)}
+                onClose={close}
                 opened={isOpen}
                 overlayProps={{ backgroundOpacity: 0.6, blur: 0 }}
                 padding="lg"
@@ -50,7 +48,7 @@ export const LinkedHostsDrawer = memo(() => {
     return (
         <Drawer
             keepMounted={false}
-            onClose={() => close(MODALS.SHOW_NODE_LINKED_HOSTS_DRAWER)}
+            onClose={close}
             opened={isOpen}
             overlayProps={{ backgroundOpacity: 0.6, blur: 0 }}
             padding="lg"
@@ -78,7 +76,7 @@ export const LinkedHostsDrawer = memo(() => {
                         <Box
                             className={styles.item}
                             onClick={() => {
-                                close(MODALS.SHOW_NODE_LINKED_HOSTS_DRAWER)
+                                close()
 
                                 navigate({
                                     pathname: ROUTES.DASHBOARD.MANAGEMENT.HOSTS,
@@ -99,7 +97,6 @@ export const LinkedHostsDrawer = memo(() => {
                                     {!isHostActive && (
                                         <ActionIcon
                                             color="gray"
-                                            radius="md"
                                             size="md"
                                             style={{ flexShrink: 0 }}
                                             variant="light"
@@ -111,7 +108,6 @@ export const LinkedHostsDrawer = memo(() => {
                                     {isHostActive && host.isHidden && (
                                         <ActionIcon
                                             color="violet"
-                                            radius="md"
                                             size="md"
                                             style={{ flexShrink: 0 }}
                                             variant="light"
@@ -123,7 +119,6 @@ export const LinkedHostsDrawer = memo(() => {
                                     {isHostActive && !host.isHidden && (
                                         <ActionIcon
                                             color="teal"
-                                            radius="md"
                                             size="md"
                                             style={{ flexShrink: 0 }}
                                             variant="light"
@@ -159,7 +154,6 @@ export const LinkedHostsDrawer = memo(() => {
                                             autoContrast
                                             color={ch.hex(host.inbound.configProfileInboundUuid)}
                                             leftSection={<PiTag size={12} />}
-                                            radius="md"
                                             size="md"
                                             variant="outline"
                                         >
@@ -178,12 +172,11 @@ export const LinkedHostsDrawer = memo(() => {
                                         }
                                         leftSection={
                                             configProfile?.uuid ? (
-                                                <XtlsLogo size={12} />
+                                                <XrayLogo size={12} />
                                             ) : (
                                                 <TbAlertCircle size={12} />
                                             )
                                         }
-                                        radius="md"
                                         size="md"
                                         variant="light"
                                     >

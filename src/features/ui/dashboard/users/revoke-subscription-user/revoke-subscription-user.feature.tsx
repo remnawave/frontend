@@ -38,7 +38,7 @@ export function RevokeSubscriptionUserFeature(props: IProps) {
 
     return (
         <Menu.Item
-            leftSection={isPending ? <Loader size={'1rem'} /> : <PiKeyDuotone size="16px" />}
+            leftSection={isPending ? <Loader size="1rem" /> : <PiKeyDuotone size="16px" />}
             onClick={openModal}
         >
             Revoke Subscription

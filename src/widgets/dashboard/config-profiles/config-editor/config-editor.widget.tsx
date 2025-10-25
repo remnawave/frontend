@@ -1,6 +1,9 @@
+import type { editor } from 'monaco-editor'
+
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
+import { GetSnippetsCommand } from '@remnawave/backend-contract'
 import { Box, Card, Code, Paper, Text } from '@mantine/core'
 import Editor, { Monaco } from '@monaco-editor/react'
-import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useBlocker } from 'react-router-dom'
 import { modals } from '@mantine/modals'
@@ -9,6 +12,7 @@ import { ConfigEditorActionsFeature } from '@features/dashboard/config-profiles/
 import { ConfigValidationFeature } from '@features/dashboard/config-profiles/config-validation'
 import { MonacoSetupFeature } from '@features/dashboard/config-profiles/monaco-setup'
 import { monacoTheme } from '@shared/constants/monaco-theme/monaco-theme'
+import { preventBackScroll } from '@shared/utils/misc'
 
 import styles from './ConfigEditor.module.css'
 import { IProps } from './interfaces'
@@ -16,14 +20,18 @@ import { IProps } from './interfaces'
 export function ConfigEditorWidget(props: IProps) {
     const { t, i18n } = useTranslation()
 
-    const { configProfile } = props
+    const { configProfile, snippets } = props
+
     const [result, setResult] = useState('')
     const [isConfigValid, setIsConfigValid] = useState(false)
     const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false)
     const [originalValue, setOriginalValue] = useState('')
+    const [snippetsMap, setSnippetsMap] = useState<
+        Map<string, GetSnippetsCommand.Response['response']['snippets'][number]['snippet']>
+    >(new Map())
 
-    const editorRef = useRef<unknown>(null)
-    const monacoRef = useRef<unknown>(null)
+    const editorRef = useRef<editor.IStandaloneCodeEditor | null>(null)
+    const monacoRef = useRef<Monaco | null>(null)
 
     useEffect(() => {
         const initialValue = JSON.stringify(configProfile.config, null, 2)
@@ -33,8 +41,13 @@ export function ConfigEditorWidget(props: IProps) {
 
     useEffect(() => {
         if (!monacoRef.current) return
-        MonacoSetupFeature.setup(monacoRef.current as Monaco, i18n.language)
-    }, [monacoRef.current, i18n.language])
+
+        MonacoSetupFeature.setup(monacoRef.current, i18n.language, snippets.snippets)
+    }, [monacoRef.current, i18n.language, snippets])
+
+    useEffect(() => {
+        setSnippetsMap(new Map(snippets.snippets.map((s) => [s.name, s.snippet])))
+    }, [snippets])
 
     const blocker = useBlocker(
         ({ currentLocation, nextLocation }) =>
@@ -86,14 +99,20 @@ export function ConfigEditorWidget(props: IProps) {
 
     const checkForChanges = () => {
         if (!editorRef.current) return
-        if (typeof editorRef.current !== 'object') return
-        if (!('getValue' in editorRef.current)) return
-        if (typeof editorRef.current.getValue !== 'function') return
 
         const currentValue = editorRef.current.getValue()
         const hasChanges = currentValue !== originalValue
         setHasUnsavedChanges(hasChanges)
     }
+
+    useLayoutEffect(() => {
+        document.body.addEventListener('wheel', preventBackScroll, {
+            passive: false
+        })
+        return () => {
+            document.body.removeEventListener('wheel', preventBackScroll)
+        }
+    }, [])
 
     return (
         <Box>
@@ -126,7 +145,6 @@ export function ConfigEditorWidget(props: IProps) {
             <Paper
                 mb="md"
                 p={0}
-                radius="xs"
                 style={{
                     resize: 'vertical',
                     overflow: 'hidden',
@@ -145,18 +163,21 @@ export function ConfigEditorWidget(props: IProps) {
                             editorRef,
                             monacoRef,
                             setResult,
-                            setIsConfigValid
+                            setIsConfigValid,
+                            snippetsMap
                         )
                         checkForChanges()
                     }}
                     onMount={(editor, monaco) => {
                         editorRef.current = editor
                         monacoRef.current = monaco
+
                         ConfigValidationFeature.validate(
                             editorRef,
                             monacoRef,
                             setResult,
-                            setIsConfigValid
+                            setIsConfigValid,
+                            snippetsMap
                         )
                     }}
                     options={{
@@ -169,6 +190,12 @@ export function ConfigEditorWidget(props: IProps) {
                             independentColorPoolPerBracketType: true
                         },
                         scrollbar: {
+                            useShadows: false,
+                            verticalHasArrows: true,
+                            horizontalHasArrows: true,
+                            vertical: 'visible',
+                            horizontal: 'visible',
+                            arrowSize: 30,
                             alwaysConsumeMouseWheel: false
                         },
                         detectIndentation: true,
@@ -182,15 +209,18 @@ export function ConfigEditorWidget(props: IProps) {
                             indentation: true
                         },
                         insertSpaces: true,
-                        lineNumbersMinChars: 1,
                         minimap: { enabled: true },
                         quickSuggestions: true,
                         renderLineHighlight: 'all',
                         scrollBeyondLastLine: false,
                         smoothScrolling: true,
-                        tabSize: 2
+                        tabSize: 2,
+                        padding: {
+                            top: 10,
+                            bottom: 10
+                        }
                     }}
-                    theme={'GithubDark'}
+                    theme="GithubDark"
                     value={JSON.stringify(configProfile.config, null, 2)}
                 />
             </Paper>

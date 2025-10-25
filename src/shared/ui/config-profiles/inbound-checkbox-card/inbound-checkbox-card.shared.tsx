@@ -77,7 +77,6 @@ export const InboundCheckboxCardShared = (props: IProps) => {
 
                             handleShowInboundJson(inbound)
                         }}
-                        radius={'md'}
                     >
                         <TbCode size={16} />
                     </ActionIcon>

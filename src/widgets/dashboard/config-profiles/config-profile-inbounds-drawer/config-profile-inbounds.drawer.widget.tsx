@@ -20,15 +20,14 @@ import { modals } from '@mantine/modals'
 import ColorHash from 'color-hash'
 
 import { InternalSquadsListSimpleWidgetShared } from '@shared/ui/internal-squads/internal-squads-list-simple'
+import { MODALS, useModalClose, useModalState } from '@entities/dashboard/modal-store'
 import { useGetConfigProfileInbounds, useGetInternalSquads } from '@shared/api/hooks'
-import { MODALS, useModalsStore } from '@entities/dashboard/modal-store'
 
 export const ConfigProfileInboundsDrawerWidget = () => {
     const { t } = useTranslation()
-    const { isOpen, internalState } = useModalsStore(
-        (state) => state.modals[MODALS.CONFIG_PROFILE_SHOW_INBOUNDS_DRAWER]
-    )
-    const { close } = useModalsStore()
+
+    const { isOpen, internalState } = useModalState(MODALS.CONFIG_PROFILE_SHOW_INBOUNDS_DRAWER)
+    const close = useModalClose(MODALS.CONFIG_PROFILE_SHOW_INBOUNDS_DRAWER)
 
     const { data: configProfileInbounds, isLoading } = useGetConfigProfileInbounds({
         route: {
@@ -79,7 +78,6 @@ export const ConfigProfileInboundsDrawerWidget = () => {
                                 bg="dark.6"
                                 key={inbound.uuid}
                                 p="xs"
-                                radius="lg"
                                 style={{
                                     borderLeft: `4px solid ${tagColor}`
                                 }}
@@ -112,7 +110,6 @@ export const ConfigProfileInboundsDrawerWidget = () => {
                                                         size: 'xl'
                                                     })
                                                 }}
-                                                radius="md"
                                                 size="md"
                                                 variant="filled"
                                             >
@@ -175,7 +172,7 @@ export const ConfigProfileInboundsDrawerWidget = () => {
     return (
         <Drawer
             keepMounted={false}
-            onClose={() => close(MODALS.CONFIG_PROFILE_SHOW_INBOUNDS_DRAWER)}
+            onClose={close}
             opened={isOpen}
             overlayProps={{ backgroundOpacity: 0.6, blur: 0 }}
             padding="lg"
