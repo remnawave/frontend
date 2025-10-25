@@ -53,10 +53,10 @@ export function SubscriptionPageBuilderHeaderWidget(props: {
                             {t('subscription-page-builder-header.widget.how-to-use-it')}
                         </Accordion.Control>
                         <Accordion.Panel>
-                            <Text fw={500} fz={'md'}>
+                            <Text fw={500} fz="md">
                                 {t('subscription-page-builder-header.widget.description-line-1')}
                             </Text>
-                            <Text fw={500} fz={'md'} mt={'xs'}>
+                            <Text fw={500} fz="md" mt="xs">
                                 {t('subscription-page-builder-header.widget.description-line-2')}
                             </Text>
                             <Text c="dimmed" fz="sm" mt="xs">
@@ -65,7 +65,7 @@ export function SubscriptionPageBuilderHeaderWidget(props: {
                             <Button
                                 component="a"
                                 href="https://remna.st/docs/install/remnawave-subscription-page#configuring-subscription-page-optional"
-                                mt={'xs'}
+                                mt="xs"
                                 target="_blank"
                             >
                                 {t('subscription-page-builder-header.widget.learn-more')}

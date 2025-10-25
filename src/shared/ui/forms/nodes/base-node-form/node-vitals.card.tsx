@@ -1,25 +1,28 @@
+import { CreateNodeCommand, GetPubKeyCommand, UpdateNodeCommand } from '@remnawave/backend-contract'
 import { Fieldset, Group, NumberInput, Select, Stack, TextInput, Title } from '@mantine/core'
-import { CreateNodeCommand, UpdateNodeCommand } from '@remnawave/backend-contract'
+import { TbCertificate, TbMapPin, TbUserCheck, TbWorld } from 'react-icons/tb'
 import { ForwardRefComponent, HTMLMotionProps, Variants } from 'motion/react'
-import { TbMapPin, TbUserCheck, TbWorld } from 'react-icons/tb'
 import { UseFormReturnType } from '@mantine/form'
 import { HiOutlineServer } from 'react-icons/hi'
 import { useTranslation } from 'react-i18next'
+
+import { CopyableFieldShared } from '@shared/ui/copyable-field/copyable-field'
 
 import { COUNTRIES } from './constants'
 
 interface IProps<T extends CreateNodeCommand.Request | UpdateNodeCommand.Request> {
     cardVariants: Variants
     form: UseFormReturnType<T>
-
     motionWrapper: ForwardRefComponent<HTMLDivElement, HTMLMotionProps<'div'>>
+
+    pubKey: GetPubKeyCommand.Response['response'] | undefined
 }
 
 export const NodeVitalsCard = <T extends CreateNodeCommand.Request | UpdateNodeCommand.Request>(
     props: IProps<T>
 ) => {
     const { t } = useTranslation()
-    const { cardVariants, form, motionWrapper } = props
+    const { cardVariants, form, motionWrapper, pubKey } = props
 
     const MotionWrapper = motionWrapper
 
@@ -41,6 +44,13 @@ export const NodeVitalsCard = <T extends CreateNodeCommand.Request | UpdateNodeC
                 }
             >
                 <Stack gap="md">
+                    <CopyableFieldShared
+                        label="Secret Key (SECRET_KEY)"
+                        leftSection={<TbCertificate size={16} />}
+                        size="sm"
+                        value={`${pubKey?.pubKey.trimEnd() ?? 'Error loading...'}`}
+                    />
+
                     <Select
                         key={form.key('countryCode')}
                         label={t('base-node-form.country')}
@@ -82,7 +92,7 @@ export const NodeVitalsCard = <T extends CreateNodeCommand.Request | UpdateNodeC
 
                         <NumberInput
                             key={form.key('port')}
-                            label={t('base-node-form.port')}
+                            label="Node Port (NODE_PORT)"
                             {...form.getInputProps('port')}
                             allowDecimal={false}
                             allowNegative={false}
@@ -90,7 +100,7 @@ export const NodeVitalsCard = <T extends CreateNodeCommand.Request | UpdateNodeC
                             decimalScale={0}
                             hideControls
                             max={65535}
-                            placeholder={t('base-node-form.e-g-443')}
+                            placeholder="2222"
                             required
                             styles={{
                                 label: { fontWeight: 500 },

@@ -20,7 +20,7 @@ import {
     useDeleteInfraBillingHistoryRecord,
     useGetInfraBillingHistoryRecords
 } from '@shared/api/hooks'
-import { MODALS, useModalsStore } from '@entities/dashboard/modal-store'
+import { MODALS, useModalsStoreOpenWithData } from '@entities/dashboard/modal-store'
 import { DataTableShared } from '@shared/ui/table'
 
 import { getInfraBillingRecordsColumns } from './use-infra-billing-records-columns'
@@ -40,10 +40,14 @@ export function InfraBillingRecordsTableWidget() {
             size: PAGE_SIZE
         }
     })
-    const { open: openModal } = useModalsStore()
+    const openModalWithData = useModalsStoreOpenWithData()
     const { t } = useTranslation()
 
-    useHotkeys([['mod + K', () => openModal(MODALS.CREATE_INFRA_BILLING_RECORD_DRAWER)]])
+    const handleOpenModal = () => {
+        openModalWithData(MODALS.CREATE_INFRA_BILLING_RECORD_DRAWER, undefined)
+    }
+
+    useHotkeys([['mod + K', handleOpenModal]])
 
     const memoizedInfraBillingRecords = useMemo(() => infraBillingRecords, [infraBillingRecords])
 
@@ -57,19 +61,11 @@ export function InfraBillingRecordsTableWidget() {
 
     const handleDeleteInfraBillingRecord = (uuid: string) =>
         modals.openConfirmModal({
-            title: t('infra-billing-records-table.widget.delete-infra-billing-record'),
-            children: (
-                <Text size="sm">
-                    {t(
-                        'infra-billing-records-table.widget.delete-infra-billing-record-confirmation'
-                    )}
-                    <br />
-                    {t('infra-billing-records-table.widget.this-action-is-irreversible')}
-                </Text>
-            ),
+            title: t('common.confirm-action'),
+            children: t('common.confirm-action-description'),
             labels: {
-                confirm: t('infra-billing-records-table.widget.delete'),
-                cancel: t('infra-billing-records-table.widget.cancel')
+                confirm: t('common.delete'),
+                cancel: t('common.cancel')
             },
 
             centered: true,
@@ -89,16 +85,12 @@ export function InfraBillingRecordsTableWidget() {
                 actions={
                     <Group grow preventGrowOverflow={false} wrap="wrap">
                         <ActionIconGroup>
-                            <Tooltip
-                                label={t('infra-billing-records-table.widget.refresh')}
-                                withArrow
-                            >
+                            <Tooltip label={t('common.refresh')} withArrow>
                                 <ActionIcon
                                     loading={infraBillingRecordsLoading}
                                     onClick={() => {
                                         refetchInfraBillingRecords()
                                     }}
-                                    radius="md"
                                     size="lg"
                                     variant="light"
                                 >
@@ -108,16 +100,10 @@ export function InfraBillingRecordsTableWidget() {
                         </ActionIconGroup>
 
                         <ActionIconGroup>
-                            <Tooltip
-                                label={t('infra-billing-records-table.widget.create')}
-                                withArrow
-                            >
+                            <Tooltip label={t('common.create')} withArrow>
                                 <ActionIcon
                                     color="teal"
-                                    onClick={() => {
-                                        openModal(MODALS.CREATE_INFRA_BILLING_RECORD_DRAWER)
-                                    }}
-                                    radius="md"
+                                    onClick={handleOpenModal}
                                     size="lg"
                                     variant="light"
                                 >
@@ -142,11 +128,11 @@ export function InfraBillingRecordsTableWidget() {
                             {t('infra-billing-records-table.widget.no-billing-records-found')}
                         </Text>
                         <Button
-                            onClick={() => openModal(MODALS.CREATE_INFRA_BILLING_RECORD_DRAWER)}
+                            onClick={handleOpenModal}
                             style={{ pointerEvents: 'all' }}
                             variant="light"
                         >
-                            {t('infra-billing-records-table.widget.create')}
+                            {t('common.create')}
                         </Button>
                     </Stack>
                 }

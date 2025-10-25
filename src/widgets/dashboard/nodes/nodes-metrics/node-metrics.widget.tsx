@@ -28,7 +28,7 @@ import { TbServer, TbServer2 } from 'react-icons/tb'
 import { memo, useCallback, useMemo } from 'react'
 import { useMediaQuery } from '@mantine/hooks'
 
-import { MODALS, useModalsStore } from '@entities/dashboard/modal-store'
+import { MODALS, useModalsStoreOpenWithData } from '@entities/dashboard/modal-store'
 import { MetricCard } from '@shared/ui/metrics/metric-card'
 import { useGetNodesMetrics } from '@shared/api/hooks'
 import { formatInt } from '@shared/utils/misc'
@@ -70,18 +70,14 @@ const StatCard = memo(
 
 export const NodeMetricsWidget = () => {
     const { data: nodeMetrics, isLoading } = useGetNodesMetrics()
-    const { open, setInternalData } = useModalsStore()
+    const openModalWithData = useModalsStoreOpenWithData()
     const isMobile = useMediaQuery('(max-width: 768px)')
 
     const handleNodeClick = useCallback(
         (nodeUuid: string) => {
-            setInternalData({
-                internalState: { nodeUuid },
-                modalKey: MODALS.EDIT_NODE_BY_UUID_MODAL
-            })
-            open(MODALS.EDIT_NODE_BY_UUID_MODAL)
+            openModalWithData(MODALS.EDIT_NODE_BY_UUID_MODAL, { nodeUuid })
         },
-        [open, setInternalData]
+        [openModalWithData]
     )
 
     const overallStats = useMemo(() => {
@@ -113,7 +109,7 @@ export const NodeMetricsWidget = () => {
 
     if (!nodeMetrics?.nodes?.length) {
         return (
-            <Card p="xl" radius="lg">
+            <Card p="xl">
                 <Center>
                     <Stack align="center" gap="md">
                         <ThemeIcon color="gray" size="xl" variant="light">
@@ -151,7 +147,6 @@ export const NodeMetricsWidget = () => {
         <Stack gap="md">
             <Paper
                 p="md"
-                radius="md"
                 style={{
                     background: 'rgba(59, 130, 246, 0.05)',
                     border: '1px solid rgba(59, 130, 246, 0.2)'

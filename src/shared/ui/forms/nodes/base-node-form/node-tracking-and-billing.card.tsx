@@ -1,5 +1,3 @@
-/* eslint-disable indent */
-
 import {
     Badge,
     Collapse,
@@ -97,7 +95,7 @@ export const NodeTrackingAndBillingCard = <
                                 thumbIcon={
                                     form.getValues().isTrafficTrackingActive ? (
                                         <PiCheckDuotone
-                                            color={'teal'}
+                                            color="teal"
                                             style={{ width: rem(12), height: rem(12) }}
                                         />
                                     ) : (

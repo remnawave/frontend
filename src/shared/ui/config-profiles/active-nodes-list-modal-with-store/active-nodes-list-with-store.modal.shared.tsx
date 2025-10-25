@@ -13,19 +13,18 @@ import { PiCheck, PiCopy, PiCpu } from 'react-icons/pi'
 import ReactCountryFlag from 'react-country-flag'
 import { useTranslation } from 'react-i18next'
 
-import { MODALS, useModalsStore } from '@entities/dashboard/modal-store'
+import { MODALS, useModalClose, useModalState } from '@entities/dashboard/modal-store'
 
 export const ActiveNodesListModalWithStoreShared = () => {
-    const { isOpen, internalState: nodes } = useModalsStore(
-        (state) => state.modals[MODALS.CONFIG_PROFILES_SHOW_ACTIVE_NODE]
-    )
-    const { close } = useModalsStore()
+    const { isOpen, internalState: nodes } = useModalState(MODALS.CONFIG_PROFILES_SHOW_ACTIVE_NODE)
+    const close = useModalClose(MODALS.CONFIG_PROFILES_SHOW_ACTIVE_NODE)
+
     const { t } = useTranslation()
 
     return (
         <Modal
             centered
-            onClose={() => close(MODALS.CONFIG_PROFILES_SHOW_ACTIVE_NODE)}
+            onClose={close}
             opened={isOpen}
             size="lg"
             title={t('active-nodes-list-with-store.modal.shared.active-nodes')}
@@ -43,7 +42,7 @@ export const ActiveNodesListModalWithStoreShared = () => {
 
                         <Stack gap="xs">
                             {nodes.map((node) => (
-                                <Paper bg="dark.6" key={node.uuid} p="sm" radius="md" withBorder>
+                                <Paper bg="dark.6" key={node.uuid} p="sm" withBorder>
                                     <Group align="center" justify="space-between" wrap="nowrap">
                                         <Group
                                             align="center"

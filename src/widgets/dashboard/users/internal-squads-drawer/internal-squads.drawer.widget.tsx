@@ -17,7 +17,7 @@ import {
     TextInput,
     Tooltip
 } from '@mantine/core'
-import { PiCheck, PiCircle, PiCopy, PiList, PiTag, PiTreeView, PiUsers } from 'react-icons/pi'
+import { PiCheck, PiCopy, PiList, PiTag, PiTreeView, PiUsers } from 'react-icons/pi'
 import { TbCirclesRelation, TbDeviceFloppy, TbSearch, TbX } from 'react-icons/tb'
 import { GetConfigProfilesCommand } from '@remnawave/backend-contract'
 import { useCallback, useEffect, useMemo, useState } from 'react'
@@ -29,6 +29,7 @@ import { QueryKeys, useGetConfigProfiles, useUpdateInternalSquad } from '@shared
 import { queryClient } from '@shared/api/query-client'
 import { formatInt } from '@shared/utils/misc'
 
+import classes from './internal-squads-drawer.module.css'
 import { IProps } from './interfaces'
 
 export const InternalSquadsDrawer = (props: IProps) => {
@@ -211,7 +212,6 @@ export const InternalSquadsDrawer = (props: IProps) => {
             <Stack gap="md" h="100%">
                 <Paper
                     p="md"
-                    radius="md"
                     shadow="sm"
                     style={{
                         background:
@@ -222,47 +222,35 @@ export const InternalSquadsDrawer = (props: IProps) => {
                 >
                     <Stack gap="md">
                         <Group align="center" justify="space-between" wrap="nowrap">
-                            <Stack gap="xs" style={{ flex: 1, minWidth: 0 }}>
-                                <Group
-                                    gap="xs"
-                                    justify="start"
-                                    style={{ flex: 1, minWidth: 0 }}
-                                    wrap="nowrap"
+                            <Box className={classes.iconWrapper}>
+                                <ActionIcon
+                                    bg={internalSquad.info.membersCount > 0 ? '' : 'dark.6'}
+                                    className={classes.icon}
+                                    color={internalSquad.info.membersCount > 0 ? 'teal' : 'gray'}
+                                    size="xl"
+                                    variant={
+                                        internalSquad.info.membersCount > 0 ? 'light' : 'subtle'
+                                    }
                                 >
-                                    <ActionIcon
-                                        color={
-                                            internalSquad.info.membersCount > 0 ? 'teal' : 'gray'
-                                        }
-                                        radius="md"
-                                        size="md"
-                                        style={{ flexShrink: 0 }}
-                                        variant={
-                                            internalSquad.info.membersCount > 0 ? 'light' : 'subtle'
-                                        }
+                                    <TbCirclesRelation size={28} />
+                                </ActionIcon>
+                            </Box>
+
+                            <Stack gap={6} style={{ flex: 1, minWidth: 0 }}>
+                                <Text
+                                    className={classes.title}
+                                    ff="monospace"
+                                    fw={700}
+                                    lineClamp={2}
+                                    size="lg"
+                                    title={internalSquad.name}
+                                >
+                                    {internalSquad.name}
+                                </Text>
+                                <Group gap="xs" justify="left" wrap="nowrap">
+                                    <Tooltip
+                                        label={t('internal-squads-with-store.drawer.widget.users')}
                                     >
-                                        {internalSquad.info.membersCount > 0 ? (
-                                            <TbCirclesRelation size={16} />
-                                        ) : (
-                                            <PiCircle size={16} />
-                                        )}
-                                    </ActionIcon>
-                                    <Text
-                                        c="white"
-                                        fw={700}
-                                        size="md"
-                                        style={{
-                                            flex: 1,
-                                            minWidth: 0,
-                                            overflow: 'hidden',
-                                            textOverflow: 'ellipsis',
-                                            whiteSpace: 'nowrap'
-                                        }}
-                                    >
-                                        {internalSquad.name}
-                                    </Text>
-                                </Group>
-                                <Group gap="xs" justify="flex-start" wrap="wrap">
-                                    <Tooltip label={t('internal-squads-grid.widget.users')}>
                                         <Badge
                                             color={
                                                 internalSquad.info.membersCount > 0
@@ -290,21 +278,25 @@ export const InternalSquadsDrawer = (props: IProps) => {
                                             })}
                                         </Badge>
                                     </Tooltip>
+                                    <CopyButton timeout={2000} value={internalSquad.uuid}>
+                                        {({ copied, copy }) => (
+                                            <ActionIcon
+                                                color={copied ? 'teal' : 'gray'}
+                                                onClick={copy}
+                                                size="lg"
+                                                style={{ flexShrink: 0 }}
+                                                variant="subtle"
+                                            >
+                                                {copied ? (
+                                                    <PiCheck size="18px" />
+                                                ) : (
+                                                    <PiCopy size="18px" />
+                                                )}
+                                            </ActionIcon>
+                                        )}
+                                    </CopyButton>
                                 </Group>
                             </Stack>
-                            <CopyButton timeout={2000} value={internalSquad.uuid}>
-                                {({ copied, copy }) => (
-                                    <ActionIcon
-                                        color={copied ? 'teal' : 'gray'}
-                                        onClick={copy}
-                                        size="lg"
-                                        style={{ flexShrink: 0 }}
-                                        variant="subtle"
-                                    >
-                                        {copied ? <PiCheck size="18px" /> : <PiCopy size="18px" />}
-                                    </ActionIcon>
-                                )}
-                            </CopyButton>
                         </Group>
 
                         <Box
@@ -345,7 +337,6 @@ export const InternalSquadsDrawer = (props: IProps) => {
                                             <ActionIcon
                                                 color="red"
                                                 onClick={clearSelection}
-                                                radius="md"
                                                 size="lg"
                                                 variant="light"
                                             >
@@ -361,7 +352,7 @@ export const InternalSquadsDrawer = (props: IProps) => {
                             color="teal"
                             disabled={selectedInbounds.size === 0}
                             fullWidth
-                            leftSection={<TbDeviceFloppy size={'1.2rem'} />}
+                            leftSection={<TbDeviceFloppy size="1.2rem" />}
                             loading={isUpdatingInternalSquad}
                             onClick={handleUpdateInternalSquad}
                             size="md"
@@ -370,7 +361,7 @@ export const InternalSquadsDrawer = (props: IProps) => {
                             }}
                             variant="light"
                         >
-                            {t('internal-squads.drawer.widget.save-changes')}
+                            {t('common.save')}
                         </Button>
                     </Stack>
                 </Paper>
@@ -379,7 +370,6 @@ export const InternalSquadsDrawer = (props: IProps) => {
                     leftSection={<TbSearch size={16} />}
                     onChange={(event) => setSearchQuery(event.currentTarget.value)}
                     placeholder={t('internal-squads.drawer.widget.search-profiles-or-inbounds')}
-                    radius="md"
                     value={searchQuery}
                 />
 

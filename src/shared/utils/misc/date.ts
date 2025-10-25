@@ -10,7 +10,7 @@ export type CustomDate = Dayjs
 
 export const date = dayjs
 
-export function formatDate(value: CustomDate | Date | string, format = 'DD-MM-YYYY') {
+export function formatDate(value: CustomDate | Date | string, format = 'YYYY-MM-DD HH:mm:ss') {
     return date(value).format(format)
 }
 

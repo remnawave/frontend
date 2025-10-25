@@ -8,7 +8,7 @@ import { useOAuth2Authorize } from '@shared/api/hooks'
 import { IProps } from './interfaces/props.interface'
 
 export const OAuth2LoginButtonsFeature = (props: IProps) => {
-    const { oauth2 } = props
+    const { authentication } = props
     const [loadingProvider, setLoadingProvider] = useState<null | TOAuth2ProvidersKeys>(null)
 
     const { mutate: oauth2Authorize } = useOAuth2Authorize({
@@ -39,7 +39,7 @@ export const OAuth2LoginButtonsFeature = (props: IProps) => {
 
     return (
         <Stack>
-            {oauth2.providers.pocketid && (
+            {authentication.oauth2.providers.pocketid && (
                 <Button
                     color="dark"
                     leftSection={
@@ -58,30 +58,28 @@ export const OAuth2LoginButtonsFeature = (props: IProps) => {
                     loaderProps={{ type: 'dots' }}
                     loading={loadingProvider === 'pocketid'}
                     onClick={() => handleOAuth2Login('pocketid')}
-                    radius={'md'}
                     variant="filled"
                 >
                     PocketID
                 </Button>
             )}
 
-            {oauth2.providers.github && (
+            {authentication.oauth2.providers.github && (
                 <Button
-                    color={'#24292e'}
-                    leftSection={<BiLogoGithub color={'white'} size={20} />}
+                    color="#24292e"
+                    leftSection={<BiLogoGithub color="white" size={20} />}
                     loaderProps={{ type: 'dots' }}
                     loading={loadingProvider === 'github'}
                     onClick={() => handleOAuth2Login('github')}
-                    radius={'md'}
                     variant="filled"
                 >
                     GitHub
                 </Button>
             )}
 
-            {oauth2.providers.yandex && (
+            {authentication.oauth2.providers.yandex && (
                 <Button
-                    color={'#000000'}
+                    color="#000000"
                     leftSection={
                         <svg
                             fill="none"
@@ -100,7 +98,6 @@ export const OAuth2LoginButtonsFeature = (props: IProps) => {
                     loaderProps={{ type: 'dots' }}
                     loading={loadingProvider === 'yandex'}
                     onClick={() => handleOAuth2Login('yandex')}
-                    radius={'md'}
                     variant="filled"
                 >
                     Yandex

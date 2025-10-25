@@ -12,8 +12,8 @@ export const MetricWithIcon = (props: MetricWithIconProps) => (
             </MetricCard.Icon>
             <Stack align="self-start" gap="xs" miw={0} w="100%">
                 <MetricCard.TextMuted truncate>{props.title}</MetricCard.TextMuted>
-                <Box miw={0} w={'100%'}>
-                    <MetricCard.TextEmphasis ff={'monospace'} truncate>
+                <Box miw={0} w="100%">
+                    <MetricCard.TextEmphasis ff="monospace" truncate>
                         {props.value}
                     </MetricCard.TextEmphasis>
                 </Box>

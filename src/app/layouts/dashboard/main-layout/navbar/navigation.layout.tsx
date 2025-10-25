@@ -16,7 +16,7 @@ export const Navigation = ({ isMobile, onClose }: NavigationProps) => {
     const menu = useMenuSections()
 
     return (
-        <Stack gap="md">
+        <Stack gap="md" pb="md" pt="md">
             {menu.map((item, index) => (
                 <Box key={item.header}>
                     {index > 0 && <Divider color="cyan.4" mb="lg" opacity={0.3} variant="dashed" />}

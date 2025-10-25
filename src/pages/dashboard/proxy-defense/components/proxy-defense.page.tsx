@@ -1,6 +1,8 @@
 /* eslint-disable no-nested-ternary */
-/* eslint-disable indent */
+
 /* eslint-disable no-param-reassign */
+
+/* eslint-disable @stylistic/indent */
 
 import {
     IconBuilding,
@@ -2507,7 +2509,7 @@ export const ProxyDefensePage = () => {
                 </Box>
 
                 {/* Tower Selection Panel */}
-                <Paper mb={0} radius="md">
+                <Paper mb={0}>
                     <Title c="cyan" mb="md" order={5} ta="center">
                         🏗️ Build Towers
                     </Title>
@@ -2565,7 +2567,7 @@ export const ProxyDefensePage = () => {
 
                 {/* Game Board with Tower Selection */}
                 <Group align="center" gap="md" justify="center">
-                    <Paper p="md" radius="md">
+                    <Paper p="md">
                         <Box
                             className={classes.gameBoard}
                             onClick={handleBoardClick}
@@ -2734,7 +2736,7 @@ export const ProxyDefensePage = () => {
                                         color: 'white'
                                     }}
                                 >
-                                    <Card p="xl" radius="lg" shadow="xl" withBorder>
+                                    <Card p="xl" shadow="xl" withBorder>
                                         <Stack align="center" gap="md">
                                             <Group align="center" gap="sm">
                                                 <IconShield color="cyan" size={32} />
@@ -2766,7 +2768,7 @@ export const ProxyDefensePage = () => {
                 </Group>
 
                 {/* Enemy Tracking Panel */}
-                <Paper m={0} p="md" radius="md">
+                <Paper m={0} p="md">
                     <Title c="red" mb="md" order={5} ta="center">
                         👾 Enemy Tracker
                     </Title>
@@ -3030,7 +3032,7 @@ export const ProxyDefensePage = () => {
 
                 {/* Live Statistics Panel */}
                 {gameState.isGameStarted && (
-                    <Paper bg="gray.9" p="lg" radius="md" shadow="xs" withBorder>
+                    <Paper bg="gray.9" p="lg" shadow="xs" withBorder>
                         <Group align="center" gap="md" mb="lg">
                             <IconTrendingUp color="cyan" size={24} />
                             <Title c="cyan" order={4}>
@@ -3041,7 +3043,7 @@ export const ProxyDefensePage = () => {
                         <Grid>
                             {/* Economics Card */}
                             <Grid.Col span={{ base: 12, sm: 6, lg: 3 }}>
-                                <Card h="100%" p="md" radius="md" withBorder>
+                                <Card h="100%" p="md" withBorder>
                                     <Group align="center" gap="sm" mb="sm">
                                         <IconCurrencyDollar
                                             color={
@@ -3151,7 +3153,7 @@ export const ProxyDefensePage = () => {
 
                             {/* Combat Card */}
                             <Grid.Col span={{ base: 12, sm: 6, lg: 3 }}>
-                                <Card h="100%" p="md" radius="md" withBorder>
+                                <Card h="100%" p="md" withBorder>
                                     <Group align="center" gap="sm" mb="sm">
                                         <IconSwords color="red" size={20} />
                                         <Text c="red" fw={600} size="sm">
@@ -3212,7 +3214,7 @@ export const ProxyDefensePage = () => {
 
                             {/* Construction Card */}
                             <Grid.Col span={{ base: 12, sm: 6, lg: 3 }}>
-                                <Card h="100%" p="md" radius="md" withBorder>
+                                <Card h="100%" p="md" withBorder>
                                     <Group align="center" gap="sm" mb="sm">
                                         <IconBuilding color="blue" size={20} />
                                         <Text c="blue" fw={600} size="sm">
@@ -3281,7 +3283,7 @@ export const ProxyDefensePage = () => {
 
                             {/* Defense Card */}
                             <Grid.Col span={{ base: 12, sm: 6, lg: 3 }}>
-                                <Card h="100%" p="md" radius="md" withBorder>
+                                <Card h="100%" p="md" withBorder>
                                     <Group align="center" gap="sm" mb="sm">
                                         <IconShieldCheck
                                             color={gameState.towers.length > 0 ? 'teal' : 'red'}
@@ -3403,7 +3405,6 @@ export const ProxyDefensePage = () => {
                 <Paper
                     bg="linear-gradient(135deg, var(--mantine-color-dark-6) 0%, var(--mantine-color-dark-7) 100%)"
                     p="sm"
-                    radius="md"
                     shadow="xs"
                     withBorder
                 >
@@ -3413,7 +3414,7 @@ export const ProxyDefensePage = () => {
                     <Grid>
                         {Object.entries(TOWER_TYPES).map(([type, stats]) => (
                             <Grid.Col key={type} span={{ base: 12, sm: 4 }}>
-                                <Card p="md" radius="md" withBorder>
+                                <Card p="md" withBorder>
                                     <Group align="center" gap="sm" mb="sm">
                                         <div
                                             style={{
@@ -3475,7 +3476,6 @@ export const ProxyDefensePage = () => {
                 <Paper
                     bg="linear-gradient(135deg, var(--mantine-color-dark-6) 0%, var(--mantine-color-dark-7) 100%)"
                     p="sm"
-                    radius="md"
                     shadow="xs"
                     withBorder
                 >
@@ -3485,7 +3485,7 @@ export const ProxyDefensePage = () => {
                     <Grid>
                         {Object.entries(ENEMY_TYPES).map(([type, stats]) => (
                             <Grid.Col key={type} span={{ base: 12, sm: 6, md: 4 }}>
-                                <Card p="md" radius="md" withBorder>
+                                <Card p="md" withBorder>
                                     <Group align="center" gap="sm" mb="sm">
                                         <div
                                             style={{
@@ -3653,14 +3653,14 @@ export const ProxyDefensePage = () => {
                 {/* Detailed Game Mechanics */}
                 <Stack gap="md">
                     {/* Tower Defense Guide */}
-                    <Paper p="lg" radius="md" withBorder>
+                    <Paper p="lg" withBorder>
                         <Title c="cyan" mb="md" order={3}>
                             🏰 Defense Arsenal
                         </Title>
 
                         <Grid>
                             <Grid.Col span={6}>
-                                <Card h="100%" p="md" radius="md" withBorder>
+                                <Card h="100%" p="md" withBorder>
                                     <Title c="blue" mb="sm" order={5}>
                                         🛡️ Tank Towers
                                     </Title>
@@ -3679,7 +3679,7 @@ export const ProxyDefensePage = () => {
                             </Grid.Col>
 
                             <Grid.Col span={6}>
-                                <Card h="100%" p="md" radius="md" withBorder>
+                                <Card h="100%" p="md" withBorder>
                                     <Title c="teal" mb="sm" order={5}>
                                         ⚡ DPS Towers
                                     </Title>
@@ -3698,7 +3698,7 @@ export const ProxyDefensePage = () => {
                             </Grid.Col>
 
                             <Grid.Col span={6}>
-                                <Card h="100%" p="md" radius="md" withBorder>
+                                <Card h="100%" p="md" withBorder>
                                     <Title c="indigo" mb="sm" order={5}>
                                         🔄 Support Towers
                                     </Title>
@@ -3717,7 +3717,7 @@ export const ProxyDefensePage = () => {
                             </Grid.Col>
 
                             <Grid.Col span={6}>
-                                <Card h="100%" p="md" radius="md" withBorder>
+                                <Card h="100%" p="md" withBorder>
                                     <Title c="cyan" mb="sm" order={5}>
                                         ❄️ Control Towers
                                     </Title>
@@ -3736,7 +3736,7 @@ export const ProxyDefensePage = () => {
                             </Grid.Col>
 
                             <Grid.Col span={12}>
-                                <Card p="md" radius="md" withBorder>
+                                <Card p="md" withBorder>
                                     <Title c="purple" mb="sm" order={5}>
                                         ⚡️ Special Towers
                                     </Title>
@@ -3756,14 +3756,14 @@ export const ProxyDefensePage = () => {
                     </Paper>
 
                     {/* Enemy Threats */}
-                    <Paper p="lg" radius="md" withBorder>
+                    <Paper p="lg" withBorder>
                         <Title c="red" mb="md" order={3}>
                             👾 Enemy Threats
                         </Title>
 
                         <Grid>
                             <Grid.Col span={6}>
-                                <Card h="100%" p="md" radius="md" withBorder>
+                                <Card h="100%" p="md" withBorder>
                                     <Title c="pink" mb="sm" order={5}>
                                         🏃 Basic Enemies
                                     </Title>
@@ -3785,7 +3785,7 @@ export const ProxyDefensePage = () => {
                             </Grid.Col>
 
                             <Grid.Col span={6}>
-                                <Card h="100%" p="md" radius="md" withBorder>
+                                <Card h="100%" p="md" withBorder>
                                     <Title c="green" mb="sm" order={5}>
                                         🛡️ Special Enemies
                                     </Title>
@@ -3807,7 +3807,7 @@ export const ProxyDefensePage = () => {
                             </Grid.Col>
 
                             <Grid.Col span={6}>
-                                <Card h="100%" p="md" radius="md" withBorder>
+                                <Card h="100%" p="md" withBorder>
                                     <Title c="purple" mb="sm" order={5}>
                                         🕷️ Boss Enemies
                                     </Title>
@@ -3826,7 +3826,7 @@ export const ProxyDefensePage = () => {
                             </Grid.Col>
 
                             <Grid.Col span={6}>
-                                <Card h="100%" p="md" radius="md" withBorder>
+                                <Card h="100%" p="md" withBorder>
                                     <Title c="gold" mb="sm" order={5}>
                                         🔥 Legendary Enemies
                                     </Title>
@@ -3847,14 +3847,14 @@ export const ProxyDefensePage = () => {
                     </Paper>
 
                     {/* Wave System */}
-                    <Paper p="lg" radius="md" withBorder>
+                    <Paper p="lg" withBorder>
                         <Title c="indigo" mb="md" order={3}>
                             🌊 Wave System
                         </Title>
 
                         <Grid>
                             <Grid.Col span={6}>
-                                <Card h="100%" p="md" radius="md" withBorder>
+                                <Card h="100%" p="md" withBorder>
                                     <Title c="blue" mb="sm" order={5}>
                                         📊 Wave Types
                                     </Title>
@@ -3882,7 +3882,7 @@ export const ProxyDefensePage = () => {
                             </Grid.Col>
 
                             <Grid.Col span={6}>
-                                <Card h="100%" p="md" radius="md" withBorder>
+                                <Card h="100%" p="md" withBorder>
                                     <Title c="purple" mb="sm" order={5}>
                                         ⚔️ Formations
                                     </Title>
@@ -3910,14 +3910,14 @@ export const ProxyDefensePage = () => {
                     </Paper>
 
                     {/* Advanced Systems */}
-                    <Paper p="lg" radius="md" withBorder>
+                    <Paper p="lg" withBorder>
                         <Title c="cyan" mb="md" order={3}>
                             🎯 Advanced Systems
                         </Title>
 
                         <Grid>
                             <Grid.Col span={4}>
-                                <Card h="100%" p="md" radius="md" withBorder>
+                                <Card h="100%" p="md" withBorder>
                                     <Title c="green" mb="sm" order={5}>
                                         💰 Economy
                                     </Title>
@@ -3947,7 +3947,7 @@ export const ProxyDefensePage = () => {
                             </Grid.Col>
 
                             <Grid.Col span={4}>
-                                <Card h="100%" p="md" radius="md" withBorder>
+                                <Card h="100%" p="md" withBorder>
                                     <Title c="teal" mb="sm" order={5}>
                                         🔄 Regeneration
                                     </Title>
@@ -3965,7 +3965,7 @@ export const ProxyDefensePage = () => {
                             </Grid.Col>
 
                             <Grid.Col span={4}>
-                                <Card h="100%" p="md" radius="md" withBorder>
+                                <Card h="100%" p="md" withBorder>
                                     <Title c="orange" mb="sm" order={5}>
                                         🎲 Spawn Limits
                                     </Title>
@@ -3982,14 +3982,14 @@ export const ProxyDefensePage = () => {
                     </Paper>
 
                     {/* Strategy Guide */}
-                    <Paper p="lg" radius="md" withBorder>
+                    <Paper p="lg" withBorder>
                         <Title c="yellow" mb="md" order={3}>
                             🎯 Master Strategy Guide
                         </Title>
 
                         <Grid>
                             <Grid.Col span={6}>
-                                <Card h="100%" p="md" radius="md" withBorder>
+                                <Card h="100%" p="md" withBorder>
                                     <Title c="blue" mb="sm" order={5}>
                                         🏗️ Build Strategy
                                     </Title>
@@ -4017,7 +4017,7 @@ export const ProxyDefensePage = () => {
                             </Grid.Col>
 
                             <Grid.Col span={6}>
-                                <Card h="100%" p="md" radius="md" withBorder>
+                                <Card h="100%" p="md" withBorder>
                                     <Title c="red" mb="sm" order={5}>
                                         ⚡ Priority Targeting
                                     </Title>
@@ -4045,7 +4045,7 @@ export const ProxyDefensePage = () => {
                             </Grid.Col>
 
                             <Grid.Col span={6}>
-                                <Card h="100%" p="md" radius="md" withBorder>
+                                <Card h="100%" p="md" withBorder>
                                     <Title c="purple" mb="sm" order={5}>
                                         🌊 Wave-Specific Tips
                                     </Title>
@@ -4074,7 +4074,7 @@ export const ProxyDefensePage = () => {
                             </Grid.Col>
 
                             <Grid.Col span={6}>
-                                <Card h="100%" p="md" radius="md" withBorder>
+                                <Card h="100%" p="md" withBorder>
                                     <Title c="green" mb="sm" order={5}>
                                         💰 Economic Tips
                                     </Title>
@@ -4099,14 +4099,14 @@ export const ProxyDefensePage = () => {
                     </Paper>
 
                     {/* Global Events */}
-                    <Paper p="lg" radius="md" withBorder>
+                    <Paper p="lg" withBorder>
                         <Title c="orange" mb="md" order={3}>
                             🌍 Global Events
                         </Title>
 
                         <Grid>
                             <Grid.Col span={6}>
-                                <Card h="100%" p="md" radius="md" withBorder>
+                                <Card h="100%" p="md" withBorder>
                                     <Title c="red" mb="sm" order={5}>
                                         💽 Disk Format
                                     </Title>
@@ -4131,7 +4131,7 @@ export const ProxyDefensePage = () => {
                             </Grid.Col>
 
                             <Grid.Col span={6}>
-                                <Card h="100%" p="md" radius="md" withBorder>
+                                <Card h="100%" p="md" withBorder>
                                     <Title c="blue" mb="sm" order={5}>
                                         🌊 Data Flood
                                     </Title>
@@ -4158,14 +4158,14 @@ export const ProxyDefensePage = () => {
                     </Paper>
 
                     {/* Quick Reference */}
-                    <Paper p="lg" radius="md" withBorder>
+                    <Paper p="lg" withBorder>
                         <Title c="violet" mb="md" order={3}>
                             ⚡ Quick Reference
                         </Title>
 
                         <Grid>
                             <Grid.Col span={3}>
-                                <Card h="100%" p="md" radius="md" withBorder>
+                                <Card h="100%" p="md" withBorder>
                                     <Title c="red" mb="sm" order={6}>
                                         🚨 Critical Rules
                                     </Title>
@@ -4182,7 +4182,7 @@ export const ProxyDefensePage = () => {
                             </Grid.Col>
 
                             <Grid.Col span={3}>
-                                <Card h="100%" p="md" radius="md" withBorder>
+                                <Card h="100%" p="md" withBorder>
                                     <Title c="blue" mb="sm" order={6}>
                                         🎯 Zones
                                     </Title>
@@ -4198,7 +4198,7 @@ export const ProxyDefensePage = () => {
                             </Grid.Col>
 
                             <Grid.Col span={3}>
-                                <Card h="100%" p="md" radius="md" withBorder>
+                                <Card h="100%" p="md" withBorder>
                                     <Title c="green" mb="sm" order={6}>
                                         💰 Economy
                                     </Title>
@@ -4222,7 +4222,7 @@ export const ProxyDefensePage = () => {
                             </Grid.Col>
 
                             <Grid.Col span={3}>
-                                <Card h="100%" p="md" radius="md" withBorder>
+                                <Card h="100%" p="md" withBorder>
                                     <Title c="orange" mb="sm" order={6}>
                                         🏥 Health
                                     </Title>

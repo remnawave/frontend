@@ -1,12 +1,11 @@
 {
     "constants": {
         "dashboard": "仪表盘",
-        "api-tokens": "API 令牌",
         "config": "Xray 配置",
         "home": "首页",
         "hosts": "主机",
         "nodes": "节点",
-        "nodes-bandwidth-table": "带宽",
+        "nodes-bandwidth-table": "流量使用情况",
         "nodes-statistics": "统计数据",
         "nodes-metrics": "指标",
         "users": "用户",
@@ -20,10 +19,37 @@
         "subscription-page-builder": "订阅应用配置",
         "config-profiles": "配置文件",
         "internal-squads": "内部分组",
+        "external-squads": "外部分组",
         "infra-billing": "网络供应商计费",
         "hwid-inspector": "HWID 视图",
         "tools": "工具",
-        "srh-inspector": "SRH 检查"
+        "srh-inspector": "SRH 检查",
+        "response-rules": "请求订阅的应用",
+        "remnawave-settings": "Remnawave 设置"
+    },
+    "common": {
+        "delete": "删除",
+        "create": "创建",
+        "cancel": "取消",
+        "copied": "复制成功",
+        "copy": "复制",
+        "refresh": "刷新",
+        "save": "保存",
+        "update": "更新",
+        "enable": "启用",
+        "disable": "禁用",
+        "continue": "继续",
+        "confirm-action": "确认操作",
+        "confirm-action-description": "您确定要执行此操作吗？此操作不能撤消。",
+        "edit": "编辑",
+        "copy-uuid": "复制 UUID",
+        "rename": "重命名",
+        "close": "关闭",
+        "change": "更改",
+        "save-changes": "保存更改",
+        "remove": "删除",
+        "add": "添加",
+        "select": "选择"
     },
     "bandwidth-metrics": {
         "current-year": "今年",
@@ -47,7 +73,7 @@
         "system-uptime": "系统运行时间",
         "ram-usage": "内存使用率",
         "total-traffic": "总流量",
-        "total-online-on-nodes": "所有节点在线的用户总数"
+        "total-online-on-nodes": "所有节点在线用户总数"
     },
     "users-metrics": {
         "disabled-users": "禁用用户",
@@ -61,14 +87,11 @@
     },
     "config-editor-actions": {
         "feature": {
-            "save": "保存",
             "format": "格式化",
             "failed-to-save-invalid-json": "保存失败，无效的 JSON。",
             "error": "错误",
             "save-anyway": "仍然保存",
             "save-anyway-description": "您确定要保存无效的 Xray 配置吗？ 此操作\n                                    可能导致意外行为。请仅在您清楚自己在做什么的情况下继续。",
-            "cancel": "取消",
-            "save-anyway-title": "确认操作",
             "load-from-github": "从 GitHub 加载",
             "tools": "工具",
             "copy-all-content": "复制全部内容",
@@ -89,7 +112,6 @@
             "new-user": "新建用户",
             "reset-table": "重置表格样式",
             "clear-filters": "清除筛选",
-            "update": "刷新",
             "bulk-actions": "批量操作",
             "help": "帮助",
             "table-controls-help": "表格控件帮助",
@@ -118,33 +140,22 @@
         "sub-link-revoked-at": "订阅链接撤销于",
         "created-at": "创建于"
     },
-    "api-tokens-header-action-buttons": {
-        "feature": {
-            "create-new-api-token": "创建新 API 密钥"
-        }
-    },
     "header-buttons": {
         "feature": {}
-    },
-    "delete-host": {
-        "feature": {
-            "delete-host": "删除主机"
-        }
     },
     "header-action-buttons": {
         "feature": {
             "create-new-host": "创建新主机",
-            "update": "刷新"
-        }
-    },
-    "delete-node": {
-        "feature": {
-            "delete-node": "删除节点"
+            "update-external-squads": "更新外部分组",
+            "create-new-external-squad": "新建外部分组",
+            "external-squad-name": "外部分组名称",
+            "update-templates": "更新模板",
+            "create-new-template": "创建新模板",
+            "template-name": "模板名称"
         }
     },
     "nodes-header-action-buttons": {
         "feature": {
-            "update": "刷新",
             "create-new-node": "创建新节点",
             "restart-all-nodes": "重启所有节点",
             "search-nodes": "搜索节点",
@@ -154,34 +165,6 @@
             "graceful-restart-description-1": "将向所有节点发送请求以重启 Xray。 但如果节点哈希与当前的哈希相同，则请求可能无法实现。 这是默认的选项。",
             "force": "强制执行",
             "graceful": "平滑的"
-        }
-    },
-    "toggle-node-status-button": {
-        "feature": {
-            "disable": "禁用",
-            "enable": "启用"
-        }
-    },
-    "api-token-card": {
-        "widget": {
-            "delete": "删除",
-            "copy-token": "复制密钥",
-            "copied": "已复制",
-            "apitoken-tokenname-copied-to-clipboard": "{{apiTokenName}} 已复制到剪贴板"
-        }
-    },
-    "api-tokens-documentation": {
-        "widget": {
-            "open-swagger": "打开 Swagger",
-            "open-scalar": "打开 Scalar",
-            "doc-description-line-2": "两者都提供有关可用端点、请求/响应格式和身份验证方法的全面详细信息。",
-            "doc-description-line-1": "使用 Scalar 或 Swagger UI 浏览 API 文档。",
-            "api-documentation": "API 文档"
-        }
-    },
-    "api-tokens-page-header": {
-        "widget": {
-            "list-of-all-api-tokens": "所有 API 密钥列表"
         }
     },
     "config-editor": {
@@ -211,7 +194,7 @@
     "edit-host-modal": {
         "widget": {
             "edit-host": "编辑主机",
-            "dangling-host-cannot-be-cloned": "同名主机不能被克隆。",
+            "dangling-host-cannot-be-cloned": "同名主机不能被克隆",
             "error": "错误",
             "are-you-sure": "您确定吗？",
             "allowing-insecure-connections-can-lead-to-security-risks-we-do-not-recommend-enabling-this-option": "允许不安全的连接会导致安全风险。我们不建议启用此选项。",
@@ -247,7 +230,14 @@
     },
     "create-node-modal": {
         "widget": {
-            "create-node": "创建节点"
+            "create-node": "创建节点",
+            "next": "下一步",
+            "back": "后退",
+            "checking-connection": "检查连接",
+            "connection-successful": "连接成功",
+            "connection-failed": "连接失败",
+            "open-node": "打开节点",
+            "close": "关闭"
         }
     },
     "edit-node-modal": {
@@ -257,10 +247,7 @@
     },
     "error-accordeon": {
         "widget": {
-            "last-error-message": "最后的错误消息",
-            "important-note-description": "为了连接节点, 您需要运行以下命令运行 Remnawave Node",
-            "important-note-description-value": "将当前值复制粘贴到 Remnawave Node 运行 ",
-            "important-note": "重要提示"
+            "last-error-message": "最后的错误消息"
         }
     },
     "node-card": {
@@ -313,7 +300,7 @@
             "hwid-device-limit": "HWID 设备限制",
             "expire-at-description": "用户的订阅服务将于该时间结束。",
             "internal-squads": "内部分组",
-            "internal-squads-description": "指定用户所属内部分组"
+            "internal-squads-description": "指定用户所属内部分组。"
         }
     },
     "login-form-feature": {
@@ -334,7 +321,6 @@
             "subscription-short-uuid": "订阅短uuid",
             "edit-user": "编辑用户",
             "subscription-qr-code": "订阅二维码",
-            "close": "关闭",
             "edit-user-headline": "编辑用户",
             "subscription-url-description-line-1": ".env 变量解析出的域名和路径：",
             "subscription-url-description-line-2": "如需更改，请在 .env 文件中修改并使用以下命令重启 Remnawave：",
@@ -347,11 +333,6 @@
             "detailed-info": "详细信息",
             "subscription": "订阅"
         }
-    },
-    "base-api-token-form": {
-        "create": "创建",
-        "token-description": "密钥描述",
-        "token-name": "密钥名称"
     },
     "empty-page": {
         "layout": {
@@ -366,9 +347,8 @@
         "host": "主机",
         "path": "路径",
         "alpn-e-g-h2": "ALPN (例如h2)",
-        "fingerprint": "指纹",
-        "fingerprint-e-g-chrome": "指纹 (例如 chrome)",
-        "save": "保存",
+        "fingerprint": "浏览器指纹",
+        "fingerprint-e-g-chrome": "浏览器指纹 (例如 chrome)",
         "sni-e-g-example-com": "SNI (例如 example.com)",
         "host-e-g-example-com": "主机 (例如 example.com)",
         "e-g-example-com": "例如 example.com",
@@ -384,7 +364,6 @@
         "extra-xhttp-description": "此设置仅适用于 XHTTP 协议。 一个 \"extra\" JSON 将被传递给客户端. 输入的 JSON 不会被验证可用性，请确保输入有效的配置。您可以使用下面的按钮复制基本 \"extra\" 设置并粘贴到 JSON 中。",
         "invalid-json": "无效的 JSON",
         "fill-with-sample-xhttp-extra-params": "填充示例 XHTTP 额外选项",
-        "close": "关闭",
         "clone": "克隆",
         "address-description-line-1": "地址必须是连接目标的 IP 地址或域名。",
         "address-description-line-2": "在大多数情况下，它应指向已连接的节点之一。",
@@ -403,7 +382,7 @@
         "server-description-placeholder": "最多 30 个字符",
         "this-will-only-be-used-for-xray-json-output": "这将仅用于 Xray-JSON 输出。",
         "please-ensure-you-provide-a-valid-json-mux-object": "请确保您提供一个有效的 JSON MUX 对象。",
-        "for-more-information-refer-to": "欲了解更多信息，请参阅:",
+        "for-more-information-refer-to": "欲了解更多信息，请参阅",
         "xtls-documentation": "XTLS 文档",
         "paste-default-mux-params": "粘贴默认的 Mux 参数",
         "please-ensure-you-provide-a-valid-json-sockopt-object": "请确保您提供一个有效的 JSON Sockopt 对象。",
@@ -426,11 +405,11 @@
         "legacy-options": "传统选项",
         "allow-insecure": "允许不安全的连接",
         "shuffled-hosts-hover-card": "随机排序的主机将放置在列表的顶端。",
-        "vless-route-description": "从0到65535，空以禁用",
+        "vless-route-description": "从 0 到 65535 ，空以禁用",
         "misc-settings": "杂项设置",
         "shuffle-host": "随机主机",
         "mihomo-specific": "Mihomo 特定设置",
-        "enable-x25519mlkem768": "启用 x25519mlkem768",
+        "enable-x25519mlkem768": "启用 x25519mlkem768 ",
         "pick-nodes-which-resolved-from-this-host-only-visual-assignment": "从主机中选择解析的节点。仅可视化。",
         "nodes": "节点"
     },
@@ -438,18 +417,16 @@
         "country": "国家",
         "select-country": "选择国家",
         "internal-name": "内部名称",
+        "internal-name-placeholder": "例如：US-NY-Node-01 ",
         "address": "地址",
         "e-g-example-com": "例如 example.com",
-        "port": "端口",
-        "e-g-443": "例如 \"2222\"",
         "consumption-multiplier": "流量倍率",
         "traffic-tracking": "跟踪流量使用",
         "limit": "限制",
         "reset-day": "重置日期",
-        "e-g-1-31": "例如 \"1-31\"",
+        "e-g-1-31": "例如 \"1-31\" ",
         "notify-percent": "达量通知百分比",
         "e-g-50": "例如 50",
-        "save": "保存",
         "consumption-m-line-1": "将所选倍率应用于用户的流量消耗（1.0 = 正常，0.5 = 减半，2.0 = 加倍）。",
         "consumption-m-line-2": "简单来说，如果用户的流量上限是 1 GiB，且倍率为 2.0，用户实际只能使用 0.5 GiB 流量，但 Remnawave 会显示为已使用 1 GiB，并限制其继续使用。",
         "node-vitals": "节点状态",
@@ -537,17 +514,8 @@
             "disable": "禁用用户"
         }
     },
-    "create-api-token-modal": {
-        "widget": {
-            "create-token": "创建密钥"
-        }
-    },
     "bulk-user-actioins-modal": {
         "widget": {
-            "delete-users": "删除用户",
-            "confirm-action-description": "您确定要删除选定的用户吗？",
-            "confirm-action-irreversible": "此操作不可逆。",
-            "cancel": "取消",
             "user-deletion-description": "删除所有具有选定状态的用户。如果您删除状态为“活跃”的用户，应重启所有节点以使更改生效。",
             "select-status": "按状态删除"
         }
@@ -573,7 +541,7 @@
         "widget": {
             "importing-json-subscription": "导入 JSON 订阅",
             "description-line-1": "要使用此订阅，只需在您的订阅链接末尾添加",
-            "description-line-2": "。确保您使用的是下表列出的受支持应用之一。否则，订阅将像往常一样服务于请求的客户端。（例如 Base64, Mihomo）"
+            "description-line-2": "确保您使用的是下表列出的受支持应用之一。否则，订阅将像往常一样服务于请求的客户端。（例如 Base64, Mihomo）"
         }
     },
     "happ-routing-builder": {
@@ -586,8 +554,6 @@
             "proxy-all-traffic-except-rules": "代理所有流量（规则除外）",
             "direct-all-traffic-except-rules": "直连所有流量（规则除外）",
             "proxy-all-traffic-except-rules-or-direct-all-traffic-except-rules": "代理所有流量（规则除外），或直连所有流量（规则除外）",
-            "enable": "启用",
-            "disable": "禁用",
             "fake-dns-description": "启用或禁用 FakeDNS。使用 DoU 时建议启用。",
             "choose-doh-dns-over-https-or-dou-dns-over-udp": "远程 DNS 使用 DoH (HTTPS 上的 DNS) 或者 DoU (UDP 上的 DNS)",
             "remote-dns-type": "远程 DNS 类型",
@@ -624,9 +590,7 @@
             "ip-addresses-that-will-be-blocked": "禁止连接的 IP 地址.",
             "blocked-ips": "禁止的 IP",
             "encoded-happ-link": "编码后的 Happ 链接",
-            "copied": "已复制",
             "show-qr": "显示二维码",
-            "close": "关闭",
             "invalid-base64-or-happ-link": "无效的 Base64 或 Happ 链接",
             "import-configuration": "导入配置",
             "paste-a-happ-routing-link-or-base64-encoded-config": "粘贴一个 Happ 路由链接或 Base64 编码的配置",
@@ -706,33 +670,21 @@
             }
         }
     },
-    "inbounds-page-header": {
-        "widget": {}
-    },
-    "inbounds-card": {
-        "widget": {}
-    },
     "multi-select-hosts": {
         "feature": {
             "delete-hosts": "删除主机",
             "are-you-sure-you-want-to-delete-these-hosts": "您确定要删除这些主机吗？",
-            "delete": "删除",
-            "cancel": "取消",
             "set-inbound": "设置入站",
             "set-port": "设置端口",
             "port": "端口",
             "clear-selection": "清除选择",
-            "select-all": "全选",
-            "enable": "启用",
-            "disable": "禁用",
-            "set-port-0": "设置端口"
+            "select-all": "全选"
         }
     },
     "bulk-user-actions-drawer": {
         "widget": {
             "bulk-user-actions": "批量操作用户",
             "users": "用户",
-            "update": "更新",
             "actions": "操作",
             "danger": "危险"
         }
@@ -755,7 +707,6 @@
                     "select-status": "选择状态",
                     "expire-date": "过期日期",
                     "select-expiration-date": "选择过期日期",
-                    "close": "关闭",
                     "update-users": "更新用户"
                 }
             }
@@ -763,10 +714,7 @@
         "actions": {
             "tab": {
                 "feature": {
-                    "confirm-action": "确认操作",
-                    "reset-traffic-confirmation": "您确定要重置所有选定用户的流量吗？",
                     "reset": "重置",
-                    "cancel": "取消",
                     "perform-actions-on-all-users": "对所有用户执行操作",
                     "reset-traffic": "重置流量",
                     "reset-traffic-description": "将所有选定用户的流量使用重置为零"
@@ -779,7 +727,6 @@
                     "danger-zone": "危险区",
                     "danger-zone-description": "这些操作不可逆，可能导致永久性数据丢失。",
                     "delete-users-by-status": "按状态删除用户",
-                    "delete": "删除",
                     "delete-users-by-status-description": "永久删除所有具有选定状态的用户"
                 }
             }
@@ -789,7 +736,6 @@
         "widget": {
             "bulk-all-user-actions": "批量所有用户操作",
             "all-users": "所有用户",
-            "update": "更新",
             "actions": "操作",
             "danger": "危险区"
         }
@@ -799,15 +745,9 @@
             "tab": {
                 "feature": {
                     "revoke-subscription": "撤销订阅",
-                    "revoke-confirmation-line-1": "您确定要撤销 {{usersCount}} 位用户的订阅吗？",
-                    "revoke-confirmation-line-2": "此操作不可撤销。",
                     "revoke": "撤销",
-                    "cancel": "取消",
                     "reset-traffic": "重置流量",
-                    "reset-traffic-confirmation-line-1": "您确定要重置 {{usersCount}} 位用户的流量吗？",
-                    "reset-traffic-confirmation-line-2": "这将把他们的用量设为零。",
                     "reset": "重置",
-                    "change": "更改",
                     "perform-action-on-users": "对 {{usersCount}} 位选定用户执行操作",
                     "resets-the-traffic-usage-to-zero-for-all-selected-users": "将所有选定用户的流量使用重置为0",
                     "revokes-subscription-for-all-selected-users": "撤销所有选定用户的订阅",
@@ -822,10 +762,6 @@
             "tab": {
                 "feature": {
                     "delete-users": "删除用户",
-                    "delete-confirmation-line-1": "您确定要删除 {{usersCount}} 位用户吗？",
-                    "delete-confirmation-line-2": "此操作不可撤销，所有数据将永久丢失。",
-                    "delete": "删除",
-                    "cancel": "取消",
                     "danger-zone": "危险区",
                     "these-actions-are-irreversible-and-can-result-in-permanent-data-loss": "这些操作不可逆，可能导致永久性数据丢失。",
                     "permanently-deletes-all-selected-users-and-their-data": "永久删除所有选定用户及其数据"
@@ -841,7 +777,6 @@
                     "select-status": "选择状态",
                     "expire-date": "过期日期",
                     "select-expiration-date": "选择过期日期",
-                    "close": "关闭",
                     "update-users": "更新用户"
                 }
             }
@@ -865,9 +800,7 @@
     "delete-user": {
         "feature": {
             "delete-user": "删除用户",
-            "are-you-sure": "您确定要删除此用户吗？此操作不可逆。",
-            "delete": "删除",
-            "cancel": "取消"
+            "are-you-sure": "您确定要删除此用户吗？此操作不可逆。"
         }
     },
     "user-usage-modal": {
@@ -961,7 +894,6 @@
                 "validation-errors": "校验错误",
                 "invalid-configuration": "无效配置",
                 "the-configuration-did-not-pass-validation": "配置未通过校验。",
-                "close": "关闭",
                 "configuration-settings": "配置设置",
                 "platform-apps": "平台应用程序",
                 "move-up": "向上移动",
@@ -1103,7 +1035,6 @@
         "official-templates": "官方模板",
         "author-templates": "{{author}} 模板",
         "modal": {
-            "cancel": "取消",
             "load-template": "加载模板"
         },
         "add-template": "添加模板"
@@ -1132,12 +1063,8 @@
             "delete-internal-squad": "删除内部分组",
             "delete-internal-squad-confirmation": "你确定要删除内部分组 \"{{internalSquadName}}\" 吗？",
             "this-action-cannot-be-undone": "此操作无法撤销。",
-            "delete": "删除",
-            "cancel": "取消",
             "remove-users-from-internal-squad-confirmation": "你确定要将用户从内部分组 \"{{internalSquadName}}\" 中移除吗？",
-            "remove": "移除",
             "add-users-to-internal-squad-confirmation": "你确定要将用户添加到内部分组 \"{{internalSquadName}}\" 吗？",
-            "add": "添加",
             "no-internal-squads": "暂无内部分组",
             "create-your-first-internal-squad-to-get-started": "创建你的第一个内部分组以开始使用",
             "delete-squad": "删除分组",
@@ -1145,24 +1072,11 @@
             "users": "用户",
             "edit-inbounds": "编辑入站连接",
             "remove-users": "删除用户",
-            "add-users": "添加用户",
-            "edit": "编辑",
-            "copy-uuid": "复制 UUID",
-            "rename": "重命名"
-        }
-    },
-    "config-profile-detail-header": {
-        "widget": {
-            "active-nodes": "活跃节点"
+            "add-users": "添加用户"
         }
     },
     "config-profiles-grid": {
         "widget": {
-            "delete-config-profile": "删除配置文件",
-            "are-you-sure-you-want-to-delete-the-config-profile": "你确定要删除配置文件 \"{{profileName}}\" 吗？",
-            "delete": "删除",
-            "cancel": "取消",
-            "this-action-cannot-be-undone": "此操作无法撤销。",
             "no-config-profiles": "暂无配置文件",
             "create-your-first-config-profile-to-get-started": "创建你的第一个配置文件以开始",
             "delete-profile": "删除文件",
@@ -1171,9 +1085,7 @@
             "download": "下载",
             "quick-view": "快速查看",
             "edit-xray-config": "编辑 Xray 配置",
-            "xray-config": "Xray 配置",
-            "copy-uuid": "复制 UUID",
-            "rename": "重命名"
+            "xray-config": "Xray 配置"
         }
     },
     "config-profiles-header": {
@@ -1206,18 +1118,11 @@
             "today": "今天",
             "tomorrow": "明天",
             "next-month": "下个月",
-            "cancel": "取消",
             "update-date": "更新日期"
         }
     },
     "infra-providers-table": {
         "widget": {
-            "delete-infra-provider": "删除网络提供商",
-            "delete-infra-provider-confirmation": "你确定要删除此网络提供商吗？",
-            "this-action-is-irreversible": "此操作不可撤销。",
-            "delete": "删除",
-            "cancel": "取消",
-            "refresh": "刷新",
             "create-infra-provider": "创建网络提供商",
             "infra-providers": "网络提供商",
             "list-of-all-infra-providers": "所有网络提供商列表",
@@ -1234,13 +1139,6 @@
     },
     "infra-billing-records-table": {
         "widget": {
-            "delete-infra-billing-record": "删除网络账单记录",
-            "delete-infra-billing-record-confirmation": "你确定要删除这条网络账单记录吗？",
-            "this-action-is-irreversible": "此操作不可撤销。",
-            "delete": "删除",
-            "cancel": "取消",
-            "refresh": "刷新",
-            "create": "创建",
             "billing-records-sorted-by-date": "账单记录按日期排序",
             "infra-billing-records": "网络账单记录",
             "no-billing-records-found": "未找到账单记录"
@@ -1256,9 +1154,6 @@
             "delete-infra-billing-node": "删除网络计费节点",
             "delete-infra-billing-node-confirmation": "你确定要删除这个网络计费节点吗？",
             "this-action-is-irreversible": "此操作不可撤销。",
-            "delete": "删除",
-            "cancel": "取消",
-            "refresh": "刷新",
             "add-node": "添加节点",
             "list-of-all-infra-billing-nodes": "按下次计费日期排序的所有网络计费节点列表",
             "infra-billing-nodes": "网络计费节点",
@@ -1282,13 +1177,6 @@
         "more-than-3-days-ago": "三天前以上",
         "yesterday": "昨天"
     },
-    "create-infra-provider": {
-        "drawer": {
-            "widget": {
-                "create": "创建"
-            }
-        }
-    },
     "create-infra-billing-record": {
         "modal": {
             "widget": {
@@ -1298,8 +1186,7 @@
                 "billed-at": "账单日期",
                 "the-date-and-time-when-the-bill-was-paid": "账单支付的日期和时间。",
                 "payment-amount-usd": "付款金额（美元）",
-                "amount": "金额",
-                "create": "创建"
+                "amount": "金额"
             }
         }
     },
@@ -1310,8 +1197,7 @@
                 "please-select-a-provider-and-billing-node": "请选择一个网络提供商和计费节点",
                 "billing-node": "计费节点",
                 "next-billing-at": "下次计费时间",
-                "next-billing-at-description": "计费节点将被计费的日期和时间。Remnawave 将会通知你即将到来的账单。",
-                "create": "创建"
+                "next-billing-at-description": "计费节点将被计费的日期和时间。Remnawave 将会通知你即将到来的账单。"
             }
         }
     },
@@ -1393,17 +1279,14 @@
                 "selected": "已选择",
                 "unselected": "未选择",
                 "edit-internal-squad": "编辑内部分组",
-                "selected-inbounds": "已设置的入站：{{count}}",
-                "save-changes": "保存更改"
+                "selected-inbounds": "已设置的入站：{{count}}"
             }
         }
     },
     "host-select-inbound": {
         "feature": {
             "no-inbound-selected": "未选择入站配置",
-            "change": "更改",
-            "choose-an-inbound-to-apply-to-the-host": "选择一个入站配置应用到该主机",
-            "select": "选择"
+            "choose-an-inbound-to-apply-to-the-host": "选择一个入站配置应用到该主机"
         }
     },
     "show-config-profiles-with-inbounds": {
@@ -1411,13 +1294,14 @@
             "config-profile": "配置文件",
             "select-the-config-profile-that-will-be-applied-to-this-node": "选择将应用于此节点的配置文件",
             "no-config-profile-selected": "未选择配置文件",
-            "choose-a-profile-to-configure-inbounds-for-this-node": "选择一个配置文件以为该节点配置入站",
-            "change-profile": "更改配置文件",
-            "select-config-profile": "选择配置文件"
+            "choose-a-profile-to-configure-inbounds-for-this-node": "选择一个配置文件以为该节点配置入站"
         }
     },
     "access-settings-card": {
-        "access-settings": "访问设置"
+        "access-settings": "访问设置",
+        "select-an-external-squad-to-apply-custom-settings-to-this-user": "为此用户选择外部分组来应用自定义设置。",
+        "external-squad": "外部分组",
+        "select-an-external-squad": "选择一个外部分组..."
     },
     "device-tag-settings-card": {
         "device-and-tag-settings": "设备与标签设置"
@@ -1455,8 +1339,7 @@
     },
     "edit-node-by-uuid-modal": {
         "widget": {
-            "loading-node": "正在加载节点...",
-            "close": "关闭"
+            "loading-node": "正在加载节点..."
         }
     },
     "hosts-filters": {
@@ -1485,27 +1368,20 @@
     },
     "internal-squad-header-action-buttons": {
         "feature": {
-            "update": "更新",
             "create-internal-squad": "创建内部分组",
             "create-a-new-internal-squad-by-entering-a-name-below": "在下方输入名称以创建新的内部分组。",
             "it-cant-be-changed-later": "创建后无法更改名称",
             "squad-name": "分组名称",
-            "enter-squad-name": "输入分组名称",
-            "cancel": "取消",
-            "create": "创建"
+            "enter-squad-name": "输入分组名称"
         }
     },
     "config-profiles-header-action-buttons": {
         "feature": {
-            "update": "更新",
             "create-config-profile": "创建配置文件",
             "create-a-new-config-profile-by-entering-a-name-below": "在下方输入名称以创建新的配置文件。",
             "you-can-customize-xray-config-after-creation": "创建后可以自定义 XRay 配置。",
-            "it-cant-be-changed-later": "创建后无法更改名称",
             "profile-name": "配置文件名称",
-            "enter-profile-name": "输入配置文件名称",
-            "cancel": "取消",
-            "create": "创建"
+            "enter-profile-name": "输入配置文件名称"
         }
     },
     "restart-node-button": {
@@ -1572,10 +1448,7 @@
     },
     "rename-modal": {
         "shared": {
-            "rename": "重命名",
-            "new-name": "新名称",
-            "cancel": "取消",
-            "save": "保存"
+            "new-name": "新名称"
         }
     },
     "branding-settings": {
@@ -1668,6 +1541,207 @@
     "get-node-linked-hosts": {
         "feature": {
             "linked-hosts": "链接的主机"
+        }
+    },
+    "snippets": {
+        "drawer": {
+            "widget": {
+                "invalid-json": "无效的 JSON",
+                "snippet-cannot-be-empty": "代码块不能为空",
+                "snippet-cannot-contain-empty-objects": "代码块不能包含空对象",
+                "fetching-snippets": "正在获取代码块...",
+                "no-snippets-yet": "尚无代码块",
+                "more-items": "更多项目...",
+                "create-snippet": "创建代码块",
+                "snippet-name": "代码块名称",
+                "enter-snippet-name-cannot-be-changed-later": "输入代码块名称 (稍后不能更改)",
+                "snippet-is-valid": "代码块有效",
+                "edit-snippet": "编辑代码块",
+                "snippets": "代码块",
+                "new-snippet": "新建代码块",
+                "snippets-help-line-1": "它们用于预定义您的一些配置。",
+                "snippets-help-line-2": "代码块必须包含一个出站或规则对象数组，而且至少需要一个项目。",
+                "snippets-help-line-3": "自动完成是可用的代码块名称。此外，您可以快速预览代码块，在编辑器的名称上悬停。",
+                "snippets-help-line-4": "在出站内[]，你可以引用的代码块名称。",
+                "snippets-help-line-5": "在路由规则[]中，你可以引用的代码块名称。"
+            }
+        }
+    },
+    "response-rules-editor-actions": {
+        "feature": {
+            "response-rules-debugger": "响应规则调试器",
+            "response-rules-debugger-description-1": "使用此 cURL 命令来测试您的响应规则如何匹配不同的请求头.",
+            "response-rules-debugger-description-2": "您可以将其导入到：",
+            "or": "，或",
+            "curl-command": "cURL 命令",
+            "copy-curl-command": "复制 cURL 命令",
+            "debugger": "调试器"
+        }
+    },
+    "copy-docker-compose": {
+        "widget": {
+            "copy-docker-compose-yml": "复制 docker-compose.yml"
+        }
+    },
+    "create-node-step-1-connection": {
+        "copy-the": "复制",
+        "content-for-the-remnawave-node-below": "以下是 Remnawave 节点的内容。",
+        "learn-more": "了解更多。",
+        "domain-or-ip": "域名或IP"
+    },
+    "create-node-step-3-status": {
+        "establishing-mtls-connection": "正在建立mTLS连接...",
+        "xray-core-is-up-and-running": "Xray 核心正在运行！",
+        "remnawave-will-try-to-reconnect-shortly": "Remnawave 将很快尝试重新连接...",
+        "no-errros-so-far": "到目前为止没有错误",
+        "last-error-message": "最后一个错误消息"
+    },
+    "external-squad-card": {
+        "widget": {
+            "users": "用户",
+            "add-users": "添加用户",
+            "remove-users": "删除用户"
+        }
+    },
+    "internal-squads-with-store": {
+        "drawer": {
+            "widget": {
+                "users": "用户"
+            }
+        }
+    },
+    "external-squads": {
+        "drawer": {
+            "widget": {
+                "subscription-templates": "订阅模板",
+                "subscription-templates-description-line-1": "为每个订阅类型选择一个模板。如果没有选择，默认模板将自动使用。",
+                "subscription-templates-description-line-2": "请注意，《响应规则》有更高的优先级别。",
+                "select-a-template": "选择一个模板",
+                "default-template-in-use": "正在使用默认模板...",
+                "edit-external-squad": "编辑额外分组",
+                "templates": "模板",
+                "settings": "设置"
+            }
+        },
+        "page": {
+            "component": {
+                "list-of-all-external-squads": "所有额外分组列表"
+            }
+        }
+    },
+    "external-squads-grid": {
+        "widget": {
+            "no-external-squads": "暂无内部分组",
+            "no-external-squads-line-1": "额外分组允许您为特定用户组自定义设置。",
+            "no-external-squads-line-2": "你可以覆盖每个分组的默认订阅模板和其他设置。",
+            "no-external-squads-line-3": "创建一个分组并指定用户应用自定义配置。"
+        }
+    },
+    "external-squads-settings": {
+        "tab": {
+            "widget": {
+                "override-subscription-settings-for-this-external-squad": "覆盖此外部分组的订阅设置",
+                "add-override": "添加重写"
+            }
+        }
+    },
+    "srr-advanced-warning-overlay": {
+        "warning": "警告",
+        "warning-line-1": "这个功能是为了解潜在风险和影响的高级用户设计的。",
+        "incorrect-configuration-line-1": "配置错误",
+        "incorrect-configuration-line-2": "可能导致异常行为",
+        "review-settings-carefully-line-1": "谨慎审查设置",
+        "review-settings-carefully-line-2": "应用更改前"
+    },
+    "auth-settings": {
+        "header": {
+            "title": "认证方式",
+            "description": "管理您的认证方式。"
+        },
+        "error-modal": {
+            "title": "更新失败",
+            "description": "更新身份验证设置时发生错误。请检查下面的错误详情，然后重试。",
+            "unknown-error": "请求失败，出现未知错误。"
+        },
+        "passkey": {
+            "title": "Passkey",
+            "manage-button": "管理",
+            "rpId": {
+                "label": "前端域名",
+                "description": "不带http协议标头的前端域名 (如：example.com)"
+            },
+            "origin": {
+                "label": "后端域名",
+                "description": "符合https规则的后端域名 (如：https://api.example.com)"
+            }
+        },
+        "password": {
+            "title": "密码"
+        },
+        "telegram": {
+            "botToken": {
+                "label": "Bot 令牌",
+                "description": "Telegram Bot 令牌",
+                "placeholder": "输入 Bot 令牌"
+            },
+            "adminIds": {
+                "label": "允许的管理员 ID",
+                "description": "允许的管理员 ID 列表",
+                "placeholder": "输入管理员 ID"
+            }
+        },
+        "fields": {
+            "clientId": {
+                "label": "客户端 ID",
+                "description": "提供商 OAuth2 客户端 ID",
+                "placeholder": "输入客户端 ID"
+            },
+            "clientSecret": {
+                "label": "客户端密钥",
+                "description": "提供商 OAuth2 客户端密钥",
+                "placeholder": "输入客户端密钥"
+            },
+            "plainDomain": {
+                "label": "域名",
+                "description": "PocketID 的域名 (例如:example.com)",
+                "placeholder": "example.com"
+            },
+            "allowedEmails": {
+                "label": "允许的电子邮件",
+                "description": "允许的电子邮件地址列表。",
+                "placeholder": "请输入电子邮箱"
+            }
+        }
+    },
+    "passkeys-drawer": {
+        "component": {
+            "delete-passkey": "删除通行密钥",
+            "delete-passkey-confirmation": "您确定要删除此 通行密钥 吗？此操作无法撤消。",
+            "passkeys": "通行密钥",
+            "passkeys-description": "通行密钥允许您在没有密码的情况下安全登录。您可以在不同的设备上注册多个通行密钥。",
+            "active-passkeys": "激活的通行密钥",
+            "no-passkeys-registered-yet": "尚无通行密钥注册",
+            "add-passkeys-description": "添加您的第一个通行密钥以启用无密码登录您的设备",
+            "register": "注册",
+            "last-used-at": "上次使用时间",
+            "created-at": "创建时间"
+        }
+    },
+    "branding-settings-card": {
+        "widget": {
+            "customize-your-remnawave-instance": "自定义您的 Remnawave 实例",
+            "branding-settings": "商标设置",
+            "the-title-that-will-be-displayed-on-login-page": "登录页面显示的标题",
+            "brand-name": "品牌名称",
+            "the-url-to-your-brand-logo-image": "品牌标志图片的 URL"
+        }
+    },
+    "api-tokens-card": {
+        "widget": {
+            "api-tokens-description": "管理您的 API Token用于程序访问。",
+            "api-tokens": "API Tokens",
+            "no-api-tokens-found": "未找到 API Tokens",
+            "token-name": "API Tokens 名称"
         }
     }
 }

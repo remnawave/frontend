@@ -17,6 +17,7 @@ import {
     Tabs,
     Text,
     TextInput,
+    ThemeIcon,
     Tooltip,
     Transition
 } from '@mantine/core'
@@ -37,7 +38,7 @@ import {
     SECURITY_LAYERS,
     UpdateHostCommand
 } from '@remnawave/backend-contract'
-import { TbCloudNetwork, TbServer2 } from 'react-icons/tb'
+import { TbCloudNetwork, TbEye, TbServer2 } from 'react-icons/tb'
 import { HiQuestionMarkCircle } from 'react-icons/hi'
 import { useDisclosure } from '@mantine/hooks'
 import { useTranslation } from 'react-i18next'
@@ -327,14 +328,19 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
     return (
         <form onSubmit={handleSubmit}>
             <Group gap="xs" justify="space-between" mb="md">
-                <Text fw={500} size="sm">
-                    {t('base-host-form.host-visibility')}
-                </Text>
+                <Group gap="xs">
+                    <ThemeIcon color="indigo" size="lg" variant="outline">
+                        <TbEye size={24} />
+                    </ThemeIcon>
+
+                    <Text fw={600} size="lg">
+                        {t('base-host-form.host-visibility')}
+                    </Text>
+                </Group>
                 <Switch
                     color="teal.8"
                     key={form.key('isDisabled')}
-                    radius="md"
-                    size="md"
+                    size="lg"
                     {...form.getInputProps('isDisabled', { type: 'checkbox' })}
                 />
             </Group>
@@ -554,7 +560,7 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
                                                 />
                                             }
                                             placeholder={t('base-host-form.sni-e-g-example-com')}
-                                            rightSection={patternHoverCard(true, false, true)}
+                                            rightSection={patternHoverCard(true, true, true)}
                                             {...form.getInputProps('sni')}
                                         />
 
@@ -587,7 +593,6 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
                                             <Switch
                                                 color="teal.8"
                                                 key={form.key('overrideSniFromAddress')}
-                                                radius="md"
                                                 size="md"
                                                 {...form.getInputProps('overrideSniFromAddress', {
                                                     type: 'checkbox'
@@ -752,7 +757,6 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
                                             <Switch
                                                 color="teal.8"
                                                 key={form.key('isHidden')}
-                                                radius="md"
                                                 size="md"
                                                 {...form.getInputProps('isHidden', {
                                                     type: 'checkbox'
@@ -872,7 +876,6 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
                                             <Switch
                                                 color="teal.8"
                                                 key={form.key('shuffleHost')}
-                                                radius="md"
                                                 size="md"
                                                 {...form.getInputProps('shuffleHost', {
                                                     type: 'checkbox'
@@ -889,7 +892,6 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
                                             <Switch
                                                 color="teal.8"
                                                 key={form.key('allowInsecure')}
-                                                radius="md"
                                                 size="md"
                                                 {...form.getInputProps('allowInsecure', {
                                                     type: 'checkbox'
@@ -910,7 +912,6 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
                                         <Switch
                                             color="teal.8"
                                             key={form.key('mihomoX25519')}
-                                            radius="md"
                                             size="md"
                                             {...form.getInputProps('mihomoX25519', {
                                                 type: 'checkbox'
@@ -934,9 +935,8 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
                             loading={isSubmitting}
                             size="sm"
                             type="submit"
-                            variant="outline"
                         >
-                            {t('base-host-form.save')}
+                            {t('common.save')}
                         </Button>
                     </Group>
 
@@ -948,7 +948,6 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
                                     color="blue"
                                     loading={isSubmitting}
                                     onClick={handleCloneHost}
-                                    radius="md"
                                     size="lg"
                                     variant="light"
                                 >
@@ -993,7 +992,7 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
                         {t('base-host-form.fill-with-sample-xhttp-extra-params')}
                     </Button>
 
-                    <Button onClick={close}>{t('base-host-form.close')}</Button>
+                    <Button onClick={close}>{t('common.close')}</Button>
                 </Stack>
             </Drawer>
 
@@ -1046,7 +1045,7 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
                         {t('base-host-form.paste-default-mux-params')}
                     </Button>
 
-                    <Button onClick={closeMuxParams}>{t('base-host-form.close')}</Button>
+                    <Button onClick={closeMuxParams}>{t('common.close')}</Button>
                 </Stack>
             </Drawer>
 
@@ -1102,7 +1101,7 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
                         {t('base-host-form.paste-default-sockopt-params')}
                     </Button>
 
-                    <Button onClick={closeSockoptParams}>{t('base-host-form.close')}</Button>
+                    <Button onClick={closeSockoptParams}>{t('common.close')}</Button>
                 </Stack>
             </Drawer>
         </form>

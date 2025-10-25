@@ -1,5 +1,5 @@
 import { GetStatusCommand } from '@remnawave/backend-contract'
 
 export interface IProps {
-    tgAuth: GetStatusCommand.Response['response']['tgAuth']
+    authentication: NonNullable<GetStatusCommand.Response['response']['authentication']>
 }

@@ -33,11 +33,11 @@ export function ToggleNodeStatusButtonFeature(props: IProps) {
 
     if (node.isDisabled) {
         color = 'teal'
-        buttonLabel = t('toggle-node-status-button.feature.enable')
+        buttonLabel = t('common.enable')
         icon = <PiCellSignalFullDuotone size="16px" />
     } else {
         color = 'red'
-        buttonLabel = t('toggle-node-status-button.feature.disable')
+        buttonLabel = t('common.disable')
         icon = <PiCellSignalSlashDuotone size="16px" />
     }
 
@@ -54,7 +54,7 @@ export function ToggleNodeStatusButtonFeature(props: IProps) {
             color={color}
             leftSection={
                 isDisableNodePending || isEnableNodePending ? (
-                    <Loader color={color} size={'1rem'} />
+                    <Loader color={color} size="1rem" />
                 ) : (
                     icon
                 )

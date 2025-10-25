@@ -57,7 +57,7 @@ export function ToggleUserStatusButtonFeature(props: IProps) {
             color={color}
             leftSection={
                 isDisableUserPending || isEnableUserPending ? (
-                    <Loader color={color} size={'1rem'} />
+                    <Loader color={color} size="1rem" />
                 ) : (
                     icon
                 )

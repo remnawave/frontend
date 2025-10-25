@@ -33,7 +33,7 @@ import * as Highcharts from 'highcharts'
 import dayjs from 'dayjs'
 
 import { useHighchartsDataProcessor } from '@shared/hooks/use-highcharts-data-processor'
-import { MODALS, useModalsStore } from '@entities/dashboard/modal-store'
+import { MODALS, useModalClose, useModalState } from '@entities/dashboard/modal-store'
 import { useGetNodeUsersUsageByRange } from '@shared/api/hooks'
 import { prettyBytesToAnyUtil } from '@shared/utils/bytes'
 
@@ -51,10 +51,8 @@ interface DayDataDetails {
 }
 
 export const NodeUsersUsageDrawer = memo(() => {
-    const { isOpen, internalState: nodeUuid } = useModalsStore(
-        (state) => state.modals[MODALS.SHOW_NODE_USERS_USAGE_DRAWER]
-    )
-    const { close } = useModalsStore()
+    const { isOpen, internalState: nodeUuid } = useModalState(MODALS.SHOW_NODE_USERS_USAGE_DRAWER)
+    const close = useModalClose(MODALS.SHOW_NODE_USERS_USAGE_DRAWER)
 
     const { t } = useTranslation()
 
@@ -350,7 +348,7 @@ export const NodeUsersUsageDrawer = memo(() => {
             return (
                 <Center h={400} mt="md" py="xl" ta="center">
                     <Box>
-                        <PiEmpty size={'2rem'} />
+                        <PiEmpty size="2rem" />
                         <Text c="dimmed">
                             {t(
                                 'node-users-usage-drawer.widget.no-data-available-for-the-selected-period'
@@ -390,12 +388,7 @@ export const NodeUsersUsageDrawer = memo(() => {
 
     if (error) {
         return (
-            <Drawer
-                onClose={() => close(MODALS.SHOW_NODE_USERS_USAGE_DRAWER)}
-                opened={isOpen}
-                size="400px"
-                title="Error"
-            >
+            <Drawer onClose={close} opened={isOpen} size="400px" title="Error">
                 <Text c="red">Error processing data: {error}</Text>
             </Drawer>
         )
@@ -404,7 +397,7 @@ export const NodeUsersUsageDrawer = memo(() => {
     return (
         <Drawer
             keepMounted={false}
-            onClose={() => close(MODALS.SHOW_NODE_USERS_USAGE_DRAWER)}
+            onClose={close}
             opened={isOpen}
             overlayProps={{ backgroundOpacity: 0.6, blur: 0 }}
             padding="lg"

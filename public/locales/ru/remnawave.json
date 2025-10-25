@@ -1,7 +1,6 @@
 {
     "constants": {
         "dashboard": "Панель управления",
-        "api-tokens": "API токены",
         "config": "Конфиг",
         "home": "Главная",
         "hosts": "Хосты",
@@ -20,10 +19,37 @@
         "subscription-page-builder": "Sub Page Builder",
         "config-profiles": "Профили",
         "internal-squads": "Внутренние сквады",
+        "external-squads": "Внешние сквады",
         "infra-billing": "Инфра-биллинг",
         "hwid-inspector": "Инспектор HWID",
         "tools": "Инструменты",
-        "srh-inspector": "Инспектор SRH"
+        "srh-inspector": "Инспектор SRH",
+        "response-rules": "Правила ответов",
+        "remnawave-settings": "Настройки Remnawave"
+    },
+    "common": {
+        "delete": "Удалить",
+        "create": "Создать",
+        "cancel": "Закрыть",
+        "copied": "Скопировано",
+        "copy": "Скопировать",
+        "refresh": "Обновить",
+        "save": "Сохранить",
+        "update": "Обновить",
+        "enable": "Включить",
+        "disable": "Отключить",
+        "continue": "Продолжить",
+        "confirm-action": "Подтвердите действие",
+        "confirm-action-description": "Вы уверены, что хотите выполнить это действие? Это действие нельзя отменить.",
+        "edit": "Изменить",
+        "copy-uuid": "Скопировать UUID",
+        "rename": "Переименовать",
+        "close": "Закрыть",
+        "change": "Изменить",
+        "save-changes": "Сохранить изменения",
+        "remove": "Удалить",
+        "add": "Добавить",
+        "select": "Выбрать"
     },
     "bandwidth-metrics": {
         "current-year": "Текущий год",
@@ -61,14 +87,11 @@
     },
     "config-editor-actions": {
         "feature": {
-            "save": "Сохранить",
             "format": "Форматировать",
             "failed-to-save-invalid-json": "Не удалось сохранить, невалидный JSON.",
             "error": "Ошибка",
             "save-anyway": "Все равно сохранить",
             "save-anyway-description": "Вы уверены, что хотите сохранить невалидную конфигурацию xRay? Это действие\n                                    может привести к неожиданному поведению. Продолжите только если вы знаете, что\n                                    делаете.",
-            "cancel": "Отмена",
-            "save-anyway-title": "Подтвердить действие",
             "load-from-github": "Скачать с Github",
             "tools": "Инструменты",
             "copy-all-content": "Скопировать все содержимое",
@@ -89,7 +112,6 @@
             "new-user": "Создать польз.",
             "reset-table": "Сбросить таблицу",
             "clear-filters": "Очистить фильтры",
-            "update": "Обновить",
             "bulk-actions": "Масс. действия",
             "help": "Справка",
             "table-controls-help": "Помощь по управлению таблицей",
@@ -118,33 +140,22 @@
         "sub-link-revoked-at": "Сброс ссылки-подписки",
         "created-at": "Дата создания"
     },
-    "api-tokens-header-action-buttons": {
-        "feature": {
-            "create-new-api-token": "Создать новый токен API"
-        }
-    },
     "header-buttons": {
         "feature": {}
-    },
-    "delete-host": {
-        "feature": {
-            "delete-host": "Удалить хост"
-        }
     },
     "header-action-buttons": {
         "feature": {
             "create-new-host": "Создать новый хост",
-            "update": "Обновить"
-        }
-    },
-    "delete-node": {
-        "feature": {
-            "delete-node": "Удалить ноду"
+            "update-external-squads": "Обновить",
+            "create-new-external-squad": "Создать новый внешний сквад",
+            "external-squad-name": "Имя внешнего сквада",
+            "update-templates": "Обновить шаблоны",
+            "create-new-template": "Создать новый шаблон",
+            "template-name": "Имя шаблона"
         }
     },
     "nodes-header-action-buttons": {
         "feature": {
-            "update": "Обновить",
             "create-new-node": "Создать новую ноду",
             "restart-all-nodes": "Перезапустить все ноды",
             "search-nodes": "Поиск нод...",
@@ -154,34 +165,6 @@
             "graceful-restart-description-1": "отправит запрос на все ноды для перезапуска Xray, но запрос может быть невыполнен, если хэш на ноде совпадает с текущим. Это опция по умолчанию.",
             "force": "Принудительный",
             "graceful": "Плавный"
-        }
-    },
-    "toggle-node-status-button": {
-        "feature": {
-            "disable": "Отключить",
-            "enable": "Включить"
-        }
-    },
-    "api-token-card": {
-        "widget": {
-            "delete": "Удалить",
-            "copy-token": "Скопировать токен",
-            "copied": "Скопировано",
-            "apitoken-tokenname-copied-to-clipboard": "{{apiTokenName}} скопирован в буфер обмена"
-        }
-    },
-    "api-tokens-documentation": {
-        "widget": {
-            "open-swagger": "Открыть Swagger",
-            "open-scalar": "Открыть Scalar",
-            "doc-description-line-2": "Оба предоставляют исчерпывающую информацию о доступных endpoint, форматах запросов/ответов и методах аутентификации.",
-            "doc-description-line-1": "Изучите документацию API, используя Scalar или Swagger UI.",
-            "api-documentation": "Документация API"
-        }
-    },
-    "api-tokens-page-header": {
-        "widget": {
-            "list-of-all-api-tokens": "Список всех токенов API"
         }
     },
     "config-editor": {
@@ -247,7 +230,14 @@
     },
     "create-node-modal": {
         "widget": {
-            "create-node": "Создать ноду"
+            "create-node": "Создать ноду",
+            "next": "Далее",
+            "back": "Назад",
+            "checking-connection": "Проверяем соединение",
+            "connection-successful": "Успешное подключение",
+            "connection-failed": "Ошибка подключения",
+            "open-node": "Открыть ноду",
+            "close": "Закрыть"
         }
     },
     "edit-node-modal": {
@@ -257,10 +247,7 @@
     },
     "error-accordeon": {
         "widget": {
-            "last-error-message": "Последнее сообщение об ошибке",
-            "important-note-description": "Чтобы подключить ноду, Вам нужно запустить Remnawave Node со следующим",
-            "important-note-description-value": "значением. \nСкопируйте и вставьте его в Remnanode ",
-            "important-note": "Важная информация"
+            "last-error-message": "Последнее сообщение об ошибке"
         }
     },
     "node-card": {
@@ -334,7 +321,6 @@
             "subscription-short-uuid": "ShortUuid подписки",
             "edit-user": "Сохранить",
             "subscription-qr-code": "QR-код ссылки-подписки",
-            "close": "Закрыть",
             "edit-user-headline": "Редактирование",
             "subscription-url-description-line-1": "Домен и путь получены из .env переменной:",
             "subscription-url-description-line-2": "Если вы хотите изменить его, пожалуйста, измените его в .env файле и перезапустите Remnawave командой:",
@@ -347,11 +333,6 @@
             "detailed-info": "Подробная информация",
             "subscription": "Подписка"
         }
-    },
-    "base-api-token-form": {
-        "create": "Создать",
-        "token-description": "Описание токена",
-        "token-name": "Имя токена"
     },
     "empty-page": {
         "layout": {
@@ -368,7 +349,6 @@
         "alpn-e-g-h2": "ALPN (например, h2)",
         "fingerprint": "Отпечаток",
         "fingerprint-e-g-chrome": "Отпечаток (например, chrome)",
-        "save": "Сохранить",
         "sni-e-g-example-com": "SNI (например, example.com)",
         "host-e-g-example-com": "Хост (например, example.com)",
         "e-g-example-com": "например, example.com",
@@ -384,7 +364,6 @@
         "extra-xhttp-description": "Этот параметр будет работать только с протоколом XHTTP. Клиенту будет передан объект \"extra\". Ввод JSON не проверяется, убедитесь в правильности написания конфигурации. Вы можете использовать кнопку ниже, чтобы скопировать дополнительные настройки и вставить их в JSON вход.",
         "invalid-json": "Неверный JSON",
         "fill-with-sample-xhttp-extra-params": "Заполнить примером xHTTP extra",
-        "close": "Закрыть",
         "clone": "Дублировать",
         "address-description-line-1": "Адрес должен быть IP-адресом или доменным именем пункта назначения соединения.",
         "address-description-line-2": "В большинстве случаев, должно быть направлено на одну из подключенных нод.",
@@ -438,10 +417,9 @@
         "country": "Страна",
         "select-country": "Выберите страну",
         "internal-name": "Внутреннее имя",
+        "internal-name-placeholder": "e.g. US-NY-Node-01",
         "address": "Адрес",
         "e-g-example-com": "например, example.com",
-        "port": "Порт",
-        "e-g-443": "например, 2222",
         "consumption-multiplier": "Коэффициент использования",
         "traffic-tracking": "Отслеживание трафика",
         "limit": "Лимит",
@@ -449,7 +427,6 @@
         "e-g-1-31": "например, 1-31",
         "notify-percent": "Процент уведомления",
         "e-g-50": "например, 50",
-        "save": "Сохранить",
         "consumption-m-line-1": "Применяет выбранный множитель к трафику пользователя (1,0 = обычный, 0,5 = половина, 2,0 = двойной).",
         "consumption-m-line-2": "Проще говоря, это означает, что если лимит трафика пользователя составляет 1 GB, а множитель потребления равен 2,0, пользователь сможет использовать только 0,5 GB трафика (реальное использование), но Remnawave покажет использование как 1 GB, и пользователь будет переведен в статус LIMITED.",
         "node-vitals": "Параметры ноды",
@@ -537,17 +514,8 @@
             "disable": "Выключить польз."
         }
     },
-    "create-api-token-modal": {
-        "widget": {
-            "create-token": "Создать токен"
-        }
-    },
     "bulk-user-actioins-modal": {
         "widget": {
-            "delete-users": "Удалить пользователей",
-            "confirm-action-description": "Вы уверены, что хотите удалить выбранных пользователей?",
-            "confirm-action-irreversible": "Это действие необратимо.",
-            "cancel": "Отмена",
             "user-deletion-description": "Удалить всех пользователей с выбранным статусом. \nЕсли вы удалите пользователей со статусом «ACTIVE», вы должны перезапустить все ноды, чтобы применить изменения.",
             "select-status": "Удалить по статусу"
         }
@@ -586,8 +554,6 @@
             "proxy-all-traffic-except-rules": "Проксировать весь трафик, кроме правил",
             "direct-all-traffic-except-rules": "Прямое соединение для всего трафика, кроме правил",
             "proxy-all-traffic-except-rules-or-direct-all-traffic-except-rules": "Проксировать весь трафик, кроме правил, или прямое соединение для всего трафика, кроме правил",
-            "enable": "Включить",
-            "disable": "Отключить",
             "fake-dns-description": "Включить или отключить FakeDNS. Рекомендуется активировать при использовании DoU.",
             "choose-doh-dns-over-https-or-dou-dns-over-udp": "Выберите DoH (DNS через HTTPS) или DoU (DNS через UDP)",
             "remote-dns-type": "Тип удаленного DNS",
@@ -624,9 +590,7 @@
             "ip-addresses-that-will-be-blocked": "IP-адреса, которые будут заблокированы.",
             "blocked-ips": "Заблокированные IP",
             "encoded-happ-link": "Кодированная Happ ссылка",
-            "copied": "Скопировано",
             "show-qr": "Показать QR",
-            "close": "Закрыть",
             "invalid-base64-or-happ-link": "Невалидная ссылка Base64 или Happ",
             "import-configuration": "Импорт конфигурации",
             "paste-a-happ-routing-link-or-base64-encoded-config": "Вставьте ссылку маршрутизации Happ или конфигурацию в кодировке Base64",
@@ -706,33 +670,21 @@
             }
         }
     },
-    "inbounds-page-header": {
-        "widget": {}
-    },
-    "inbounds-card": {
-        "widget": {}
-    },
     "multi-select-hosts": {
         "feature": {
             "delete-hosts": "Удалить хосты",
             "are-you-sure-you-want-to-delete-these-hosts": "Вы уверены, что хотите удалить эти хосты?",
-            "delete": "Удалить",
-            "cancel": "Отмена",
             "set-inbound": "Установить инбаунд",
             "set-port": "Установить порт",
             "port": "Порт",
             "clear-selection": "Очистить выбор",
-            "select-all": "Выбрать все",
-            "enable": "Включить",
-            "disable": "Отключить",
-            "set-port-0": "Установить порт"
+            "select-all": "Выбрать все"
         }
     },
     "bulk-user-actions-drawer": {
         "widget": {
             "bulk-user-actions": "Массовые действия с пользователями",
             "users": "пользователей",
-            "update": "Обновить",
             "actions": "Действия",
             "danger": "Опасно"
         }
@@ -755,7 +707,6 @@
                     "select-status": "Выберите статус",
                     "expire-date": "Дата истечения",
                     "select-expiration-date": "Выберите дату истечения",
-                    "close": "Закрыть",
                     "update-users": "Обновить пользователей"
                 }
             }
@@ -763,10 +714,7 @@
         "actions": {
             "tab": {
                 "feature": {
-                    "confirm-action": "Подтвердить действие",
-                    "reset-traffic-confirmation": "Вы уверены, что хотите сбросить трафик для всех выбранных пользователей?",
                     "reset": "Сбросить",
-                    "cancel": "Отмена",
                     "perform-actions-on-all-users": "Выполнить действия для всех пользователей",
                     "reset-traffic": "Сбросить трафик",
                     "reset-traffic-description": "Сбрасывает использование трафика до нуля для всех выбранных пользователей"
@@ -779,7 +727,6 @@
                     "danger-zone": "Опасная зона",
                     "danger-zone-description": "Эти действия необратимы и могут привести к постоянной потере данных.",
                     "delete-users-by-status": "Удалить пользователей по статусу",
-                    "delete": "Удалить",
                     "delete-users-by-status-description": "Навсегда удаляет всех пользователей с выбранным статусом"
                 }
             }
@@ -789,7 +736,6 @@
         "widget": {
             "bulk-all-user-actions": "Массовые действия со всеми пользователями",
             "all-users": "Все пользователи",
-            "update": "Обновить",
             "actions": "Действия",
             "danger": "Опасно"
         }
@@ -799,15 +745,9 @@
             "tab": {
                 "feature": {
                     "revoke-subscription": "Отозвать подписку",
-                    "revoke-confirmation-line-1": "Вы уверены, что хотите отозвать подписку для {{usersCount}} пользователя(ей)?",
-                    "revoke-confirmation-line-2": "Это действие нельзя отменить.",
                     "revoke": "Отозвать",
-                    "cancel": "Отмена",
                     "reset-traffic": "Сбросить трафик",
-                    "reset-traffic-confirmation-line-1": "Вы уверены, что хотите сбросить трафик для {{usersCount}} пользователя(ей)?",
-                    "reset-traffic-confirmation-line-2": "Это установит их использование на ноль.",
                     "reset": "Сбросить",
-                    "change": "Изменить",
                     "perform-action-on-users": "Выполнить действия для {{usersCount}} выбранных пользователей",
                     "resets-the-traffic-usage-to-zero-for-all-selected-users": "Сбрасывает использование трафика до нуля для всех выбранных пользователей",
                     "revokes-subscription-for-all-selected-users": "Отзывает подписку для всех выбранных пользователей",
@@ -822,10 +762,6 @@
             "tab": {
                 "feature": {
                     "delete-users": "Удалить пользователей",
-                    "delete-confirmation-line-1": "Вы уверены, что хотите удалить {{usersCount}} пользователя(ей)?",
-                    "delete-confirmation-line-2": "Это действие нельзя отменить, и все данные будут безвозвратно потеряны.",
-                    "delete": "Удалить",
-                    "cancel": "Отмена",
                     "danger-zone": "Опасная зона",
                     "these-actions-are-irreversible-and-can-result-in-permanent-data-loss": "Эти действия необратимы и могут привести к постоянной потере данных.",
                     "permanently-deletes-all-selected-users-and-their-data": "Навсегда удаляет всех выбранных пользователей и их данные"
@@ -841,7 +777,6 @@
                     "select-status": "Выберите статус",
                     "expire-date": "Дата истечения",
                     "select-expiration-date": "Выберите дату истечения",
-                    "close": "Закрыть",
                     "update-users": "Обновить пользователей"
                 }
             }
@@ -865,9 +800,7 @@
     "delete-user": {
         "feature": {
             "delete-user": "Удалить пользователя",
-            "are-you-sure": "Вы уверены, что хотите удалить пользователя? Это действие необратимо.",
-            "delete": "Удалить",
-            "cancel": "Отмена"
+            "are-you-sure": "Вы уверены, что хотите удалить пользователя? Это действие необратимо."
         }
     },
     "user-usage-modal": {
@@ -961,7 +894,6 @@
                 "validation-errors": "Ошибки валидации",
                 "invalid-configuration": "Недействительная конфигурация",
                 "the-configuration-did-not-pass-validation": "Конфигурация не прошла проверку.",
-                "close": "Закрыть",
                 "configuration-settings": "Общие настройки",
                 "platform-apps": "Приложения",
                 "move-up": "Переместить вверх",
@@ -1103,7 +1035,6 @@
         "official-templates": "Официальные шаблоны",
         "author-templates": "Шаблоны от {{author}}",
         "modal": {
-            "cancel": "Отмена",
             "load-template": "Загрузить шаблон"
         },
         "add-template": "Добавить шаблон"
@@ -1132,12 +1063,8 @@
             "delete-internal-squad": "Удалить внутренний сквад",
             "delete-internal-squad-confirmation": "Вы уверены, что хотите удалить внутренний сквад {{internalSquadName}}?",
             "this-action-cannot-be-undone": "Это действие необратимо.",
-            "delete": "Удалить",
-            "cancel": "Отменить",
             "remove-users-from-internal-squad-confirmation": "Вы уверены, что хотите удалить пользователей из внутреннего сквада {{internalSquadName}}?",
-            "remove": "Удалить",
             "add-users-to-internal-squad-confirmation": "Вы уверены, что хотите добавить пользователей во внутренних сквад {{internalSquadName}}?",
-            "add": "Добавить",
             "no-internal-squads": "Внутренних сквадов не найдено",
             "create-your-first-internal-squad-to-get-started": "Создайте свой первый внутренний сквад",
             "delete-squad": "Удалить сквад",
@@ -1145,24 +1072,11 @@
             "users": "Пользователи",
             "edit-inbounds": "Изменить инбаунды",
             "remove-users": "Удалить пользователей",
-            "add-users": "Добавить пользователей",
-            "edit": "Изменить",
-            "copy-uuid": "Скопировать UUID",
-            "rename": "Переименовать"
-        }
-    },
-    "config-profile-detail-header": {
-        "widget": {
-            "active-nodes": "Ноды"
+            "add-users": "Добавить пользователей"
         }
     },
     "config-profiles-grid": {
         "widget": {
-            "delete-config-profile": "Удалить профиль",
-            "are-you-sure-you-want-to-delete-the-config-profile": "Вы уверены, что хотите удалить внутренний сквад {{profileName}}?",
-            "delete": "Удалить",
-            "cancel": "Отменить",
-            "this-action-cannot-be-undone": "Это действие необратимо.",
             "no-config-profiles": "Профили не найдены",
             "create-your-first-config-profile-to-get-started": "Создайте свой первый профиль, чтобы начать работу",
             "delete-profile": "Удалить профиль",
@@ -1171,9 +1085,7 @@
             "download": "Скачать",
             "quick-view": "Быстрый просмотр",
             "edit-xray-config": "Изменить конфиг Xray",
-            "xray-config": "Конфиг. Xray",
-            "copy-uuid": "Скопировать UUID",
-            "rename": "Переименовать"
+            "xray-config": "Конфиг. Xray"
         }
     },
     "config-profiles-header": {
@@ -1206,18 +1118,11 @@
             "today": "Сегодня",
             "tomorrow": "Завтра",
             "next-month": "Следующий месяц",
-            "cancel": "Отменить",
             "update-date": "Обновить дату"
         }
     },
     "infra-providers-table": {
         "widget": {
-            "delete-infra-provider": "Удалить провайдера",
-            "delete-infra-provider-confirmation": "Вы уверены, что хотите удалить этого провайдера?",
-            "this-action-is-irreversible": "Это действие необратимо.",
-            "delete": "Удалить",
-            "cancel": "Отмена",
-            "refresh": "Обновить",
             "create-infra-provider": "Создать провайдера",
             "infra-providers": "Провайдеры",
             "list-of-all-infra-providers": "Список всех провайдеров",
@@ -1234,13 +1139,6 @@
     },
     "infra-billing-records-table": {
         "widget": {
-            "delete-infra-billing-record": "Удалить платежную запись",
-            "delete-infra-billing-record-confirmation": "Вы уверены, что хотите удалить платежную запись?",
-            "this-action-is-irreversible": "Это действие необратимо.",
-            "delete": "Удалить",
-            "cancel": "Отменить",
-            "refresh": "Обновить",
-            "create": "Создать",
             "billing-records-sorted-by-date": "Список всех платежей",
             "infra-billing-records": "История платежей",
             "no-billing-records-found": "Платежей не найдено."
@@ -1256,9 +1154,6 @@
             "delete-infra-billing-node": "Удалить биллинг ноду",
             "delete-infra-billing-node-confirmation": "Вы уверены, что хотите удалить эту биллинг ноду?",
             "this-action-is-irreversible": "Это действие необратимо.",
-            "delete": "Удалить",
-            "cancel": "Отменить",
-            "refresh": "Обновить",
             "add-node": "Добавить ноду",
             "list-of-all-infra-billing-nodes": "Список всех оплачиваемых нод, отсортированных по дате",
             "infra-billing-nodes": "Оплачиваемые ноды",
@@ -1282,13 +1177,6 @@
         "more-than-3-days-ago": "Больше 3-х дней назад",
         "yesterday": "Вчера"
     },
-    "create-infra-provider": {
-        "drawer": {
-            "widget": {
-                "create": "Создать"
-            }
-        }
-    },
     "create-infra-billing-record": {
         "modal": {
             "widget": {
@@ -1298,8 +1186,7 @@
                 "billed-at": "Дата оплаты",
                 "the-date-and-time-when-the-bill-was-paid": "Дата и время оплаты счета.",
                 "payment-amount-usd": "Сумма платежа, USD",
-                "amount": "Сумма",
-                "create": "Создать"
+                "amount": "Сумма"
             }
         }
     },
@@ -1310,8 +1197,7 @@
                 "please-select-a-provider-and-billing-node": "Пожалуйста, выберите провайдера и биллинг ноду",
                 "billing-node": "Биллинг нода",
                 "next-billing-at": "Следующий платеж",
-                "next-billing-at-description": "Дата и время для следующей оплаты этого узла. Remnawave уведомит вас о предстоящем платеже.",
-                "create": "Создать"
+                "next-billing-at-description": "Дата и время для следующей оплаты этого узла. Remnawave уведомит вас о предстоящем платеже."
             }
         }
     },
@@ -1393,17 +1279,14 @@
                 "selected": "Выбранные",
                 "unselected": "Невыбранные",
                 "edit-internal-squad": "Изменить сквад",
-                "selected-inbounds": "Выбранных инбаундов: {{count}}",
-                "save-changes": "Сохранить"
+                "selected-inbounds": "Выбранных инбаундов: {{count}}"
             }
         }
     },
     "host-select-inbound": {
         "feature": {
             "no-inbound-selected": "Инбаунд не выбран",
-            "change": "Изменить",
-            "choose-an-inbound-to-apply-to-the-host": "Выберите инбаунд, который будет привязан к хосту",
-            "select": "Выбрать"
+            "choose-an-inbound-to-apply-to-the-host": "Выберите инбаунд, который будет привязан к хосту"
         }
     },
     "show-config-profiles-with-inbounds": {
@@ -1411,13 +1294,14 @@
             "config-profile": "Профили",
             "select-the-config-profile-that-will-be-applied-to-this-node": "Выберите профиль, который будет применить для этой ноды.",
             "no-config-profile-selected": "Профиль не выбран",
-            "choose-a-profile-to-configure-inbounds-for-this-node": "Выберите профиль для настройки инбаундов для этой ноды",
-            "change-profile": "Изменить профиль",
-            "select-config-profile": "Выбрать профиль"
+            "choose-a-profile-to-configure-inbounds-for-this-node": "Выберите профиль для настройки инбаундов для этой ноды"
         }
     },
     "access-settings-card": {
-        "access-settings": "Настройки доступа"
+        "access-settings": "Настройки доступа",
+        "select-an-external-squad-to-apply-custom-settings-to-this-user": "Выберите внешний сквад для применения кастомных настроек к этому пользователю.",
+        "external-squad": "Внешний сквад",
+        "select-an-external-squad": "Выберите внешний сквад..."
     },
     "device-tag-settings-card": {
         "device-and-tag-settings": "Устройства & Теги"
@@ -1455,8 +1339,7 @@
     },
     "edit-node-by-uuid-modal": {
         "widget": {
-            "loading-node": "Загрузка ноды...",
-            "close": "Закрыть"
+            "loading-node": "Загрузка ноды..."
         }
     },
     "hosts-filters": {
@@ -1485,27 +1368,20 @@
     },
     "internal-squad-header-action-buttons": {
         "feature": {
-            "update": "Обновить",
             "create-internal-squad": "Создать внутренний сквад",
             "create-a-new-internal-squad-by-entering-a-name-below": "Создайте новый внутренний отряд, введя имя ниже.",
             "it-cant-be-changed-later": "Его нельзя изменить позже",
             "squad-name": "Имя сквада",
-            "enter-squad-name": "Введите имя сквада",
-            "cancel": "Закрыть",
-            "create": "Создать"
+            "enter-squad-name": "Введите имя сквада"
         }
     },
     "config-profiles-header-action-buttons": {
         "feature": {
-            "update": "Обновить",
             "create-config-profile": "Создать профиль",
             "create-a-new-config-profile-by-entering-a-name-below": "Создайте новый профиль, введя имя ниже.",
             "you-can-customize-xray-config-after-creation": "Вы можете настроить конфигурацию XRay после создания.",
-            "it-cant-be-changed-later": "Невозможно изменить позже",
             "profile-name": "Имя профиля",
-            "enter-profile-name": "Введите имя профиля",
-            "cancel": "Отменить",
-            "create": "Создать"
+            "enter-profile-name": "Введите имя профиля"
         }
     },
     "restart-node-button": {
@@ -1572,10 +1448,7 @@
     },
     "rename-modal": {
         "shared": {
-            "rename": "Переименовать",
-            "new-name": "Новое имя",
-            "cancel": "Закрыть",
-            "save": "Сохранить"
+            "new-name": "Новое имя"
         }
     },
     "branding-settings": {
@@ -1668,6 +1541,207 @@
     "get-node-linked-hosts": {
         "feature": {
             "linked-hosts": "Связанные хосты"
+        }
+    },
+    "snippets": {
+        "drawer": {
+            "widget": {
+                "invalid-json": "Неверный JSON",
+                "snippet-cannot-be-empty": "Сниппет не может быть пустым",
+                "snippet-cannot-contain-empty-objects": "Сниппет не может содержать пустые объекты",
+                "fetching-snippets": "Загрузка сниппетов...",
+                "no-snippets-yet": "Пока ничего нет.",
+                "more-items": "ещё элементов...",
+                "create-snippet": "Создать сниппет",
+                "snippet-name": "Имя сниппета",
+                "enter-snippet-name-cannot-be-changed-later": "Введите имя сниппета (нельзя изменить позже)",
+                "snippet-is-valid": "Сниппет валиден",
+                "edit-snippet": "Редактировать сниппет",
+                "snippets": "Сниппеты",
+                "new-snippet": "Новый сниппет",
+                "snippets-help-line-1": "Они используются для предопределения некоторых элементов ваших конфигураций.",
+                "snippets-help-line-2": "Сниппет должен содержать массив объектов Outbound или Rules и требуется хотя бы один элемент внутри этого массива.",
+                "snippets-help-line-3": "Автозаполнение доступно для имен сниппетов. Кроме того, вы можете быстро просмотреть сниппет, наведя курсор на имя в редакторе.",
+                "snippets-help-line-4": "Внутри outbounds[], вы можете ссылаться на сниппеты по имени.",
+                "snippets-help-line-5": "Внутри routing.rules[], вы можете ссылаться на сниппеты по имени."
+            }
+        }
+    },
+    "response-rules-editor-actions": {
+        "feature": {
+            "response-rules-debugger": "Отладчик правил ответа",
+            "response-rules-debugger-description-1": "Используйте эту команду cURL, чтобы проверить, как правила ответа соответствуют различным заголовкам запроса.",
+            "response-rules-debugger-description-2": "Вы можете импортировать его в:",
+            "or": ", или",
+            "curl-command": "cURL команда",
+            "copy-curl-command": "Скопировать cURL команду",
+            "debugger": "Отладчик"
+        }
+    },
+    "copy-docker-compose": {
+        "widget": {
+            "copy-docker-compose-yml": "Копировать docker-compose.yml"
+        }
+    },
+    "create-node-step-1-connection": {
+        "copy-the": "Скопируйте",
+        "content-for-the-remnawave-node-below": "содержимое для Remnawave node ниже.",
+        "learn-more": "Дополнительная информация.",
+        "domain-or-ip": "Домен или IP"
+    },
+    "create-node-step-3-status": {
+        "establishing-mtls-connection": "Установка mTLS соединения...",
+        "xray-core-is-up-and-running": "Ядро Xray запущено и работает!",
+        "remnawave-will-try-to-reconnect-shortly": "Remnawave скоро попробует переподключиться...",
+        "no-errros-so-far": "Пока никаких ошибок нет",
+        "last-error-message": "Последнее сообщение об ошибке"
+    },
+    "external-squad-card": {
+        "widget": {
+            "users": "Пользователи",
+            "add-users": "Добавить пользователей",
+            "remove-users": "Удалить пользователей"
+        }
+    },
+    "internal-squads-with-store": {
+        "drawer": {
+            "widget": {
+                "users": "Пользователи"
+            }
+        }
+    },
+    "external-squads": {
+        "drawer": {
+            "widget": {
+                "subscription-templates": "Шаблоны подписки",
+                "subscription-templates-description-line-1": "Выберите один шаблон для каждого типа подписки. Если не выбрано, шаблон по умолчанию \"Default\" будет использоваться автоматически.",
+                "subscription-templates-description-line-2": "Обратите внимание, Правила Ответа имеют более высокий приоритет.",
+                "select-a-template": "Выберите шаблон",
+                "default-template-in-use": "Используется Default шаблон...",
+                "edit-external-squad": "Редактировать внешний отряд",
+                "templates": "Шаблоны",
+                "settings": "Настройки"
+            }
+        },
+        "page": {
+            "component": {
+                "list-of-all-external-squads": "Список всех внешних сквадов"
+            }
+        }
+    },
+    "external-squads-grid": {
+        "widget": {
+            "no-external-squads": "Внешние сквады не найдены",
+            "no-external-squads-line-1": "Внешние сквады позволяют перезаписывать настройки для определенных групп пользователей.",
+            "no-external-squads-line-2": "Вы можете переопределить шаблоны подписки по умолчанию и прочие настройки для каждого сквада.",
+            "no-external-squads-line-3": "Создайте сквад и добавьте в него пользователей для применения индивидуальных настроек."
+        }
+    },
+    "external-squads-settings": {
+        "tab": {
+            "widget": {
+                "override-subscription-settings-for-this-external-squad": "Переопределить параметры подписки для этого внешнего сквада",
+                "add-override": "Добавить переопределение"
+            }
+        }
+    },
+    "srr-advanced-warning-overlay": {
+        "warning": "Предупреждение",
+        "warning-line-1": "Эта функция предназначена для опытных пользователей, которые понимают потенциальные риски и последствия.",
+        "incorrect-configuration-line-1": "Неправильная конфигурация",
+        "incorrect-configuration-line-2": "может привести к неожиданному поведению",
+        "review-settings-carefully-line-1": "Проверьте внимательно настройки",
+        "review-settings-carefully-line-2": "перед тем как применить изменения"
+    },
+    "auth-settings": {
+        "header": {
+            "title": "Способы аутентификации",
+            "description": "Управление способами аутентификации."
+        },
+        "error-modal": {
+            "title": "Ошибка обновления",
+            "description": "Произошла ошибка при обновлении параметров аутентификации. Пожалуйста, просмотрите детали ошибки ниже и повторите попытку.",
+            "unknown-error": "Запрос не удался из-за неизвестной ошибки."
+        },
+        "passkey": {
+            "title": "Passkey",
+            "manage-button": "Настроить",
+            "rpId": {
+                "label": "Frontend Domain",
+                "description": "Публичный домен вашего frontend без протокола (например, example.com)"
+            },
+            "origin": {
+                "label": "Backend Domain",
+                "description": "Полная ссылка на backend (например, https://api.example.com)"
+            }
+        },
+        "password": {
+            "title": "Пароль"
+        },
+        "telegram": {
+            "botToken": {
+                "label": "Токен бота",
+                "description": "Токен Telegram-бота",
+                "placeholder": "Введите токен бота"
+            },
+            "adminIds": {
+                "label": "Разрешенные Telegram ID",
+                "description": "Список разрешенных Telegram ID",
+                "placeholder": "Введите ID..."
+            }
+        },
+        "fields": {
+            "clientId": {
+                "label": "Client ID",
+                "description": "Client ID OAuth2 от провайдера",
+                "placeholder": "Введите Client ID"
+            },
+            "clientSecret": {
+                "label": "Client Secret",
+                "description": "Client Secret OAuth2 от провайдера",
+                "placeholder": "Введите Client Secret"
+            },
+            "plainDomain": {
+                "label": "Домен (только домен)",
+                "description": "Домен для PocketID (например, pocker.yoursite.com)",
+                "placeholder": "example.com"
+            },
+            "allowedEmails": {
+                "label": "Разрешенные Email-адреса",
+                "description": "Список разрешенных email адресов.",
+                "placeholder": "Введите email"
+            }
+        }
+    },
+    "passkeys-drawer": {
+        "component": {
+            "delete-passkey": "Удалить ключ входа",
+            "delete-passkey-confirmation": "Вы уверены, что хотите удалить passkey? Это действие нельзя отменить.",
+            "passkeys": "Passkeys",
+            "passkeys-description": "С помощью ключей входа вы можете безопасности входить без паролей. Вы можете зарегистрировать несколько ключей входа с помощью разных устройств.",
+            "active-passkeys": "Активные ключи входа",
+            "no-passkeys-registered-yet": "Ключей входа пока что не зарегистрировано",
+            "add-passkeys-description": "Добавьте свой первый ключ входа, чтобы включить безопасную и беспарольную аутентификацию на ваших устройствах",
+            "register": "Зарегистрировать",
+            "last-used-at": "Последнее использование",
+            "created-at": "Дата создания"
+        }
+    },
+    "branding-settings-card": {
+        "widget": {
+            "customize-your-remnawave-instance": "Кастомизировать вашу панель Remnawave",
+            "branding-settings": "Настройки кастомизации",
+            "the-title-that-will-be-displayed-on-login-page": "Заголовок, отображаемый на странице входа",
+            "brand-name": "Название бренда",
+            "the-url-to-your-brand-logo-image": "URL-адрес логотипа вашего бренда"
+        }
+    },
+    "api-tokens-card": {
+        "widget": {
+            "api-tokens-description": "Управление API токенами для доступа из кода.",
+            "api-tokens": "API токены",
+            "no-api-tokens-found": "API токены не найдены",
+            "token-name": "Название токена"
         }
     }
 }

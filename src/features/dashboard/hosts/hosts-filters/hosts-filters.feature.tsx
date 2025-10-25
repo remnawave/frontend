@@ -80,7 +80,7 @@ export const HostsFiltersFeature = (props: IProps) => {
     const hasActiveFilters = configProfileFilter || inboundFilter
 
     return (
-        <Card mb="xl" padding="lg" radius="md" shadow="sm" withBorder>
+        <Card mb="xl" padding="lg" shadow="sm" withBorder>
             <Stack gap="md">
                 <Group justify="space-between">
                     <Group gap="xs">
@@ -115,7 +115,6 @@ export const HostsFiltersFeature = (props: IProps) => {
                         leftSectionPointerEvents="none"
                         onChange={handleConfigProfileChange}
                         placeholder={t('hosts-filters.feature.select-config-profile')}
-                        radius="md"
                         size="sm"
                         value={configProfileFilter || ''}
                     />
@@ -128,7 +127,6 @@ export const HostsFiltersFeature = (props: IProps) => {
                         leftSectionPointerEvents="none"
                         onChange={handleInboundChange}
                         placeholder={t('hosts-filters.feature.select-inbound')}
-                        radius="md"
                         size="sm"
                         value={inboundFilter || ''}
                     />
@@ -162,7 +160,6 @@ export const HostsFiltersFeature = (props: IProps) => {
                         leftSectionPointerEvents="none"
                         onChange={handleHostTagChange}
                         placeholder={t('hosts-filters.feature.filter-by-tags')}
-                        radius="md"
                         size="sm"
                         value={hostTagFilter || null}
                     />

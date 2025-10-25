@@ -1,0 +1,38 @@
+.container {
+    position: relative;
+    width: 100%;
+}
+
+.section {
+    z-index: 2;
+}
+
+.input {
+    cursor: copy;
+    font-family: monospace;
+    padding-right: 30px;
+    overflow: hidden;
+    text-overflow: clip;
+    white-space: nowrap;
+}
+
+.inputWrapper {
+    position: relative;
+}
+
+.inputWrapper::after {
+    content: '';
+    position: absolute;
+    top: 1px;
+    right: 10px;
+    bottom: 1px;
+    width: 80px;
+    background: linear-gradient(to right, transparent, var(--mantine-color-default) 70%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.copyButton {
+    position: relative;
+    z-index: 10;
+}

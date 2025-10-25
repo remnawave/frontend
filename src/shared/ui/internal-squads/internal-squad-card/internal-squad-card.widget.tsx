@@ -27,7 +27,6 @@ export const InternalSquadCardShared = memo((props: IProps) => {
                 onClick={() => {
                     handlers.open()
                 }}
-                radius="md"
             >
                 <Group align="center" gap="xs" justify="space-between" wrap="nowrap">
                     <Group align="center" gap="xs" style={{ flex: 1, minWidth: 0 }} wrap="nowrap">

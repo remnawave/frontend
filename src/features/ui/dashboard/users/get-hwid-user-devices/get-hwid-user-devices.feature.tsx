@@ -119,7 +119,7 @@ export function GetHwidUserDevicesFeature(props: IProps) {
         return (
             <Stack gap="md">
                 {filteredDevices?.map((device) => (
-                    <Card key={device.hwid} padding="md" radius="md" withBorder>
+                    <Card key={device.hwid} padding="md" withBorder>
                         <Card.Section bg="gray.9" p="xs">
                             <Group justify="space-between">
                                 <Text fw={600} size="sm">
@@ -237,7 +237,7 @@ export function GetHwidUserDevicesFeature(props: IProps) {
                                         device.deviceModel ||
                                         t('get-hwid-user-devices.feature.unknown')
                                     }
-                                    w={'100%'}
+                                    w="100%"
                                 />
                             </Group>
 
@@ -273,7 +273,7 @@ export function GetHwidUserDevicesFeature(props: IProps) {
                                         device.userAgent ||
                                         t('get-hwid-user-devices.feature.unknown')
                                     }
-                                    w={'100%'}
+                                    w="100%"
                                 />
                             </Group>
 
@@ -282,7 +282,7 @@ export function GetHwidUserDevicesFeature(props: IProps) {
                                     label={t('get-hwid-user-devices.feature.added')}
                                     readOnly
                                     value={dayjs(device.createdAt).format('YYYY-MM-DD HH:mm')}
-                                    w={'100%'}
+                                    w="100%"
                                 />
                             </Group>
                         </Stack>

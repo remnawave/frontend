@@ -1,7 +1,6 @@
 {
     "constants": {
         "dashboard": "Dashboard",
-        "api-tokens": "API Tokens",
         "config": "Xray Config",
         "home": "Home",
         "hosts": "Hosts",
@@ -20,10 +19,37 @@
         "subscription-page-builder": "Sub Page Builder",
         "config-profiles": "Config Profiles",
         "internal-squads": "Internal Squads",
+        "external-squads": "External Squads",
         "infra-billing": "Infra Billing",
         "hwid-inspector": "HWID Inspector",
         "tools": "Tools",
-        "srh-inspector": "SRH Inspector"
+        "srh-inspector": "SRH Inspector",
+        "response-rules": "Response Rules",
+        "remnawave-settings": "Remnawave Settings"
+    },
+    "common": {
+        "delete": "Delete",
+        "create": "Create",
+        "cancel": "Cancel",
+        "copied": "Copied",
+        "copy": "Copy",
+        "refresh": "Refresh",
+        "save": "Save",
+        "update": "Update",
+        "enable": "Enable",
+        "disable": "Disable",
+        "continue": "Continue",
+        "confirm-action": "Confirm action",
+        "confirm-action-description": "Are you sure you want to perform this action? This action cannot be undone.",
+        "edit": "Edit",
+        "copy-uuid": "Copy UUID",
+        "rename": "Rename",
+        "close": "Close",
+        "change": "Change",
+        "save-changes": "Save changes",
+        "remove": "Remove",
+        "add": "Add",
+        "select": "Select"
     },
     "bandwidth-metrics": {
         "current-year": "Current year",
@@ -61,14 +87,11 @@
     },
     "config-editor-actions": {
         "feature": {
-            "save": "Save",
             "format": "Format",
             "failed-to-save-invalid-json": "Failed to save, invalid JSON.",
             "error": "Error",
             "save-anyway": "Save anyway",
             "save-anyway-description": "Are you sure you want to save invalid Xray config? This action\n                                    can lead to unexpected behavior. Continue only if you know what\n                                    you are doing.",
-            "cancel": "Cancel",
-            "save-anyway-title": "Confirm action",
             "load-from-github": "Load from GitHub",
             "tools": "Tools",
             "copy-all-content": "Copy all content",
@@ -89,7 +112,6 @@
             "new-user": "New user",
             "reset-table": "Reset table",
             "clear-filters": "Clear filters",
-            "update": "Update",
             "bulk-actions": "Bulk Actions",
             "help": "Help",
             "table-controls-help": "Table Controls Help",
@@ -118,33 +140,22 @@
         "sub-link-revoked-at": "Sub-link revoked at",
         "created-at": "Created at"
     },
-    "api-tokens-header-action-buttons": {
-        "feature": {
-            "create-new-api-token": "Create new API token"
-        }
-    },
     "header-buttons": {
         "feature": {}
-    },
-    "delete-host": {
-        "feature": {
-            "delete-host": "Delete host"
-        }
     },
     "header-action-buttons": {
         "feature": {
             "create-new-host": "Create new host",
-            "update": "Update"
-        }
-    },
-    "delete-node": {
-        "feature": {
-            "delete-node": "Delete node"
+            "update-external-squads": "Update external squads",
+            "create-new-external-squad": "Create new external squad",
+            "external-squad-name": "External Squad Name",
+            "update-templates": "Update templates",
+            "create-new-template": "Create new template",
+            "template-name": "Template name"
         }
     },
     "nodes-header-action-buttons": {
         "feature": {
-            "update": "Update",
             "create-new-node": "Create new node",
             "restart-all-nodes": "Restart all nodes",
             "search-nodes": "Search nodes",
@@ -154,34 +165,6 @@
             "graceful-restart-description-1": "will send a request to all nodes to restart Xray, but request can be unfulfilled if the node hash is the same as the current one. This is the default option.",
             "force": "Force",
             "graceful": "Graceful"
-        }
-    },
-    "toggle-node-status-button": {
-        "feature": {
-            "disable": "Disable",
-            "enable": "Enable"
-        }
-    },
-    "api-token-card": {
-        "widget": {
-            "delete": "Delete",
-            "copy-token": "Copy token",
-            "copied": "Copied",
-            "apitoken-tokenname-copied-to-clipboard": "{{apiTokenName}} copied to clipboard"
-        }
-    },
-    "api-tokens-documentation": {
-        "widget": {
-            "open-swagger": "Open Swagger",
-            "open-scalar": "Open Scalar",
-            "doc-description-line-2": "Both provide comprehensive details about the available endpoints, request/response formats, and authentication methods.",
-            "doc-description-line-1": "Explore API documentation using either Scalar or Swagger UI.",
-            "api-documentation": "API Documentation"
-        }
-    },
-    "api-tokens-page-header": {
-        "widget": {
-            "list-of-all-api-tokens": "List of all API tokens"
         }
     },
     "config-editor": {
@@ -247,7 +230,14 @@
     },
     "create-node-modal": {
         "widget": {
-            "create-node": "Create node"
+            "create-node": "Create node",
+            "next": "Next",
+            "back": "Back",
+            "checking-connection": "Checking connection",
+            "connection-successful": "Connection successful",
+            "connection-failed": "Connection failed",
+            "open-node": "Open Node",
+            "close": "Close"
         }
     },
     "edit-node-modal": {
@@ -257,10 +247,7 @@
     },
     "error-accordeon": {
         "widget": {
-            "last-error-message": "Last error message",
-            "important-note-description": "In order to connect node, you need to run Remnawave Node with the following",
-            "important-note-description-value": "value. Copy and paste it into the Remnanode ",
-            "important-note": "Important note"
+            "last-error-message": "Last error message"
         }
     },
     "node-card": {
@@ -334,7 +321,6 @@
             "subscription-short-uuid": "Subscription short uuid",
             "edit-user": "Edit user",
             "subscription-qr-code": "Subscription QR Code",
-            "close": "Close",
             "edit-user-headline": "Edit user",
             "subscription-url-description-line-1": "Domain and path resolved from .env variable:",
             "subscription-url-description-line-2": "If you want to change it, please change it in the .env file and restart Remnawave using command:",
@@ -347,11 +333,6 @@
             "detailed-info": "Detailed Info",
             "subscription": "Subscription"
         }
-    },
-    "base-api-token-form": {
-        "create": "Create",
-        "token-description": "Token description",
-        "token-name": "Token name"
     },
     "empty-page": {
         "layout": {
@@ -368,7 +349,6 @@
         "alpn-e-g-h2": "ALPN (e.g. h2)",
         "fingerprint": "Fingerprint",
         "fingerprint-e-g-chrome": "Fingerprint (e.g. chrome)",
-        "save": "Save",
         "sni-e-g-example-com": "SNI (e.g. example.com)",
         "host-e-g-example-com": "Host (e.g. example.com)",
         "e-g-example-com": "e.g. example.com",
@@ -384,7 +364,6 @@
         "extra-xhttp-description": "This setting will only work with the XHTTP protocol. An \"extra\" object JSON will be passed to the client. The JSON input is not validated, be sure to enter a valid configuration. You can use the button below to copy the basic extra settings and paste it into the JSON input.",
         "invalid-json": "Invalid JSON",
         "fill-with-sample-xhttp-extra-params": "Fill with sample XHTTP extra options",
-        "close": "Close",
         "clone": "Clone",
         "address-description-line-1": "Address must be the IP address or a domain name pointing to the connection destination.",
         "address-description-line-2": "In most cases, it should points to the one of connected nodes.",
@@ -438,10 +417,9 @@
         "country": "Country",
         "select-country": "Select country",
         "internal-name": "Internal name",
+        "internal-name-placeholder": "e.g. US-NY-Node-01",
         "address": "Address",
         "e-g-example-com": "e.g. example.com",
-        "port": "Port",
-        "e-g-443": "e.g. 2222",
         "consumption-multiplier": "Consumption multiplier",
         "traffic-tracking": "Track traffic usage",
         "limit": "Limit",
@@ -449,7 +427,6 @@
         "e-g-1-31": "e.g. 1-31",
         "notify-percent": "Notification %",
         "e-g-50": "e.g. 50",
-        "save": "Save",
         "consumption-m-line-1": "Applies selected multiplier to user's traffic (1.0 = normal, 0.5 = half, 2.0 = double).",
         "consumption-m-line-2": "In simple terms, this means that if a user's traffic limit is 1 GiB and the consumption multiplier is 2.0, the user will be able to use only 0.5 GiB of traffic (real usage), but Remnawave will show usage as 1 GiB and the user will be LIMITED.",
         "node-vitals": "Node Vitals",
@@ -537,17 +514,8 @@
             "disable": "Disable user"
         }
     },
-    "create-api-token-modal": {
-        "widget": {
-            "create-token": "Create token"
-        }
-    },
     "bulk-user-actioins-modal": {
         "widget": {
-            "delete-users": "Delete users",
-            "confirm-action-description": "Are you sure you want to delete selected users?",
-            "confirm-action-irreversible": "This action is irreversible.",
-            "cancel": "Cancel",
             "user-deletion-description": "Delete all users with selected status. If you will delete users with \"Active\" status, you should restart all nodes to apply changes.",
             "select-status": "Delete by status"
         }
@@ -586,8 +554,6 @@
             "proxy-all-traffic-except-rules": "Proxy all traffic except the rules",
             "direct-all-traffic-except-rules": "Direct route all traffic except the rules",
             "proxy-all-traffic-except-rules-or-direct-all-traffic-except-rules": "Proxy all traffic except the rules, or direct route all traffic except the rules",
-            "enable": "Enable",
-            "disable": "Disable",
             "fake-dns-description": "Enable or disable FakeDNS. Recommended to activate when using DoU.",
             "choose-doh-dns-over-https-or-dou-dns-over-udp": "Whether to use DoH (DNS over HTTPS) or DoU (DNS over UDP) for the remote DNS",
             "remote-dns-type": "Remote DNS type",
@@ -624,9 +590,7 @@
             "ip-addresses-that-will-be-blocked": "IP addresses that should be blocked.",
             "blocked-ips": "Blocked IPs",
             "encoded-happ-link": "Encoded Happ Link",
-            "copied": "Copied",
             "show-qr": "Show QR",
-            "close": "Close",
             "invalid-base64-or-happ-link": "Invalid Base64 or Happ Link",
             "import-configuration": "Import Configuration",
             "paste-a-happ-routing-link-or-base64-encoded-config": "Paste a Happ routing link or Base64 encoded config",
@@ -706,33 +670,21 @@
             }
         }
     },
-    "inbounds-page-header": {
-        "widget": {}
-    },
-    "inbounds-card": {
-        "widget": {}
-    },
     "multi-select-hosts": {
         "feature": {
             "delete-hosts": "Delete hosts",
             "are-you-sure-you-want-to-delete-these-hosts": "Are you sure you want to delete these hosts?",
-            "delete": "Delete",
-            "cancel": "Cancel",
             "set-inbound": "Set inbound",
             "set-port": "Set Port",
             "port": "Port",
             "clear-selection": "Clear selection",
-            "select-all": "Select all",
-            "enable": "Enable",
-            "disable": "Disable",
-            "set-port-0": "Set port"
+            "select-all": "Select all"
         }
     },
     "bulk-user-actions-drawer": {
         "widget": {
             "bulk-user-actions": "Bulk User Actions",
             "users": "users",
-            "update": "Update",
             "actions": "Actions",
             "danger": "Danger"
         }
@@ -755,7 +707,6 @@
                     "select-status": "Select status",
                     "expire-date": "Expiry Date",
                     "select-expiration-date": "Select expiration date",
-                    "close": "Close",
                     "update-users": "Update Users"
                 }
             }
@@ -763,10 +714,7 @@
         "actions": {
             "tab": {
                 "feature": {
-                    "confirm-action": "Confirm Action",
-                    "reset-traffic-confirmation": "Are you sure you want to reset the traffic for all selected users?",
                     "reset": "Reset",
-                    "cancel": "Cancel",
                     "perform-actions-on-all-users": "Perform actions on all users",
                     "reset-traffic": "Reset Traffic",
                     "reset-traffic-description": "Resets the traffic usage to zero for all selected users"
@@ -779,7 +727,6 @@
                     "danger-zone": "Danger Zone",
                     "danger-zone-description": "These actions are irreversible and can result in permanent data loss.",
                     "delete-users-by-status": "Delete Users By Status",
-                    "delete": "Delete",
                     "delete-users-by-status-description": "Permanently deletes all users with the selected status"
                 }
             }
@@ -789,7 +736,6 @@
         "widget": {
             "bulk-all-user-actions": "Bulk All User Actions",
             "all-users": "All users",
-            "update": "Update",
             "actions": "Actions",
             "danger": "Danger"
         }
@@ -799,15 +745,9 @@
             "tab": {
                 "feature": {
                     "revoke-subscription": "Revoke Subscription",
-                    "revoke-confirmation-line-1": "Are you sure you want to revoke subscription for {{usersCount}} user(s)?",
-                    "revoke-confirmation-line-2": "This action cannot be undone.",
                     "revoke": "Revoke",
-                    "cancel": "Cancel",
                     "reset-traffic": "Reset Traffic",
-                    "reset-traffic-confirmation-line-1": "Are you sure you want to reset traffic for {{usersCount}} user(s)?",
-                    "reset-traffic-confirmation-line-2": "This will set their usage to zero.",
                     "reset": "Reset",
-                    "change": "Change",
                     "perform-action-on-users": "Perform actions on {{usersCount}} selected users",
                     "resets-the-traffic-usage-to-zero-for-all-selected-users": "Resets the traffic usage to zero for all selected users",
                     "revokes-subscription-for-all-selected-users": "Revokes subscription for all selected users",
@@ -822,10 +762,6 @@
             "tab": {
                 "feature": {
                     "delete-users": "Delete Users",
-                    "delete-confirmation-line-1": "Are you sure you want to delete {{usersCount}} user(s)?",
-                    "delete-confirmation-line-2": "This action cannot be undone and all data will be permanently lost.",
-                    "delete": "Delete",
-                    "cancel": "Cancel",
                     "danger-zone": "Danger Zone",
                     "these-actions-are-irreversible-and-can-result-in-permanent-data-loss": "These actions are irreversible and can result in permanent data loss.",
                     "permanently-deletes-all-selected-users-and-their-data": "Permanently deletes all selected users and their data"
@@ -841,7 +777,6 @@
                     "select-status": "Select status",
                     "expire-date": "Expiry Date",
                     "select-expiration-date": "Select expiration date",
-                    "close": "Close",
                     "update-users": "Update Users"
                 }
             }
@@ -865,9 +800,7 @@
     "delete-user": {
         "feature": {
             "delete-user": "Delete user",
-            "are-you-sure": "Are you sure you want to delete the user? This action is irreversible.",
-            "delete": "Delete",
-            "cancel": "Cancel"
+            "are-you-sure": "Are you sure you want to delete the user? This action is irreversible."
         }
     },
     "user-usage-modal": {
@@ -961,7 +894,6 @@
                 "validation-errors": "Validation errors",
                 "invalid-configuration": "Invalid configuration",
                 "the-configuration-did-not-pass-validation": "The configuration did not pass validation.",
-                "close": "Close",
                 "configuration-settings": "Configuration Settings",
                 "platform-apps": "Platform Apps",
                 "move-up": "Move up",
@@ -1103,7 +1035,6 @@
         "official-templates": "Official Templates",
         "author-templates": "{{author}} Templates",
         "modal": {
-            "cancel": "Cancel",
             "load-template": "Load Template"
         },
         "add-template": "Add template"
@@ -1132,12 +1063,8 @@
             "delete-internal-squad": "Delete Internal Squad",
             "delete-internal-squad-confirmation": "Are you sure you want to delete the internal squad \"{{internalSquadName}}\"?",
             "this-action-cannot-be-undone": "This action cannot be undone.",
-            "delete": "Delete",
-            "cancel": "Cancel",
             "remove-users-from-internal-squad-confirmation": "Are you sure you want to remove the users from the internal squad \"{{internalSquadName}}\"?",
-            "remove": "Remove",
             "add-users-to-internal-squad-confirmation": "Are you sure you want to add the users to the internal squad \"{{internalSquadName}}\"?",
-            "add": "Add",
             "no-internal-squads": "No Internal Squads",
             "create-your-first-internal-squad-to-get-started": "Create your first internal squad to get started",
             "delete-squad": "Delete squad",
@@ -1145,24 +1072,11 @@
             "users": "Users",
             "edit-inbounds": "Edit inbounds",
             "remove-users": "Remove users",
-            "add-users": "Add users",
-            "edit": "Edit",
-            "copy-uuid": "Copy UUID",
-            "rename": "Rename"
-        }
-    },
-    "config-profile-detail-header": {
-        "widget": {
-            "active-nodes": "Active nodes"
+            "add-users": "Add users"
         }
     },
     "config-profiles-grid": {
         "widget": {
-            "delete-config-profile": "Delete Config Profile",
-            "are-you-sure-you-want-to-delete-the-config-profile": "Are you sure you want to delete the config profile \"{{profileName}}\"?",
-            "delete": "Delete",
-            "cancel": "Cancel",
-            "this-action-cannot-be-undone": "This action cannot be undone.",
             "no-config-profiles": "No Config Profiles",
             "create-your-first-config-profile-to-get-started": "Create your first config profile to get started",
             "delete-profile": "Delete profile",
@@ -1171,9 +1085,7 @@
             "download": "Download",
             "quick-view": "Quick view",
             "edit-xray-config": "Edit Xray Config",
-            "xray-config": "Xray Config",
-            "copy-uuid": "Copy UUID",
-            "rename": "Rename"
+            "xray-config": "Xray Config"
         }
     },
     "config-profiles-header": {
@@ -1206,18 +1118,11 @@
             "today": "Today",
             "tomorrow": "Tomorrow",
             "next-month": "Next Month",
-            "cancel": "Cancel",
             "update-date": "Update Date"
         }
     },
     "infra-providers-table": {
         "widget": {
-            "delete-infra-provider": "Delete Infra Provider",
-            "delete-infra-provider-confirmation": "Are you sure you want to delete this infra provider?",
-            "this-action-is-irreversible": "This action is irreversible.",
-            "delete": "Delete",
-            "cancel": "Cancel",
-            "refresh": "Refresh",
             "create-infra-provider": "Create Infra Provider",
             "infra-providers": "Infra Providers",
             "list-of-all-infra-providers": "List of all infra providers",
@@ -1234,13 +1139,6 @@
     },
     "infra-billing-records-table": {
         "widget": {
-            "delete-infra-billing-record": "Delete Infra Billing Record",
-            "delete-infra-billing-record-confirmation": "Are you sure you want to delete this infra billing record?",
-            "this-action-is-irreversible": "This action is irreversible.",
-            "delete": "Delete",
-            "cancel": "Cancel",
-            "refresh": "Refresh",
-            "create": "Create",
             "billing-records-sorted-by-date": "Billing records sorted by date",
             "infra-billing-records": "Infra Billing Records",
             "no-billing-records-found": "No billing records found."
@@ -1256,9 +1154,6 @@
             "delete-infra-billing-node": "Delete Infra Billing Node",
             "delete-infra-billing-node-confirmation": "Are you sure you want to delete this infra billing node?",
             "this-action-is-irreversible": "This action is irreversible.",
-            "delete": "Delete",
-            "cancel": "Cancel",
-            "refresh": "Refresh",
             "add-node": "Add Node",
             "list-of-all-infra-billing-nodes": "List of all infra billing nodes sorted by next billing date",
             "infra-billing-nodes": "Infra Billing Nodes",
@@ -1282,13 +1177,6 @@
         "more-than-3-days-ago": "More than 3 days ago",
         "yesterday": "Yesterday"
     },
-    "create-infra-provider": {
-        "drawer": {
-            "widget": {
-                "create": "Create"
-            }
-        }
-    },
     "create-infra-billing-record": {
         "modal": {
             "widget": {
@@ -1298,8 +1186,7 @@
                 "billed-at": "Billed At",
                 "the-date-and-time-when-the-bill-was-paid": "The date and time when the bill was paid.",
                 "payment-amount-usd": "Payment amount, USD",
-                "amount": "Amount",
-                "create": "Create"
+                "amount": "Amount"
             }
         }
     },
@@ -1310,8 +1197,7 @@
                 "please-select-a-provider-and-billing-node": "Please select a provider and billing node",
                 "billing-node": "Billing Node",
                 "next-billing-at": "Next Billing At",
-                "next-billing-at-description": "The date and time for the next billing of this node. Remnawave will notify you about upcoming billing.",
-                "create": "Create"
+                "next-billing-at-description": "The date and time for the next billing of this node. Remnawave will notify you about upcoming billing."
             }
         }
     },
@@ -1393,17 +1279,14 @@
                 "selected": "Selected",
                 "unselected": "Unselected",
                 "edit-internal-squad": "Edit Internal Squad",
-                "selected-inbounds": "Selected inbounds: {{count}}",
-                "save-changes": "Save changes"
+                "selected-inbounds": "Selected inbounds: {{count}}"
             }
         }
     },
     "host-select-inbound": {
         "feature": {
             "no-inbound-selected": "No inbound selected",
-            "change": "Change",
-            "choose-an-inbound-to-apply-to-the-host": "Choose an inbound to apply to the host",
-            "select": "Select"
+            "choose-an-inbound-to-apply-to-the-host": "Choose an inbound to apply to the host"
         }
     },
     "show-config-profiles-with-inbounds": {
@@ -1411,13 +1294,14 @@
             "config-profile": "Config Profile",
             "select-the-config-profile-that-will-be-applied-to-this-node": "Select the config profile that will be applied to this node",
             "no-config-profile-selected": "No config profile selected",
-            "choose-a-profile-to-configure-inbounds-for-this-node": "Choose a profile to configure inbounds for this node",
-            "change-profile": "Change Profile",
-            "select-config-profile": "Select Config Profile"
+            "choose-a-profile-to-configure-inbounds-for-this-node": "Choose a profile to configure inbounds for this node"
         }
     },
     "access-settings-card": {
-        "access-settings": "Access Settings"
+        "access-settings": "Access Settings",
+        "select-an-external-squad-to-apply-custom-settings-to-this-user": "Select an external squad to apply custom settings to this user.",
+        "external-squad": "External Squad",
+        "select-an-external-squad": "Select an external squad..."
     },
     "device-tag-settings-card": {
         "device-and-tag-settings": "Device & Tag Settings"
@@ -1455,8 +1339,7 @@
     },
     "edit-node-by-uuid-modal": {
         "widget": {
-            "loading-node": "Loading node...",
-            "close": "Close"
+            "loading-node": "Loading node..."
         }
     },
     "hosts-filters": {
@@ -1485,27 +1368,20 @@
     },
     "internal-squad-header-action-buttons": {
         "feature": {
-            "update": "Update",
             "create-internal-squad": "Create Internal Squad",
             "create-a-new-internal-squad-by-entering-a-name-below": "Create a new internal squad by entering a name below.",
             "it-cant-be-changed-later": "It can't be changed later",
             "squad-name": "Squad Name",
-            "enter-squad-name": "Enter squad name",
-            "cancel": "Cancel",
-            "create": "Create"
+            "enter-squad-name": "Enter squad name"
         }
     },
     "config-profiles-header-action-buttons": {
         "feature": {
-            "update": "Update",
             "create-config-profile": "Create Config Profile",
             "create-a-new-config-profile-by-entering-a-name-below": "Create a new config profile by entering a name below.",
             "you-can-customize-xray-config-after-creation": "You can customize XRay config after creation.",
-            "it-cant-be-changed-later": "It can't be changed later",
             "profile-name": "Profile Name",
-            "enter-profile-name": "Enter profile name",
-            "cancel": "Cancel",
-            "create": "Create"
+            "enter-profile-name": "Enter profile name"
         }
     },
     "restart-node-button": {
@@ -1572,10 +1448,7 @@
     },
     "rename-modal": {
         "shared": {
-            "rename": "Rename",
-            "new-name": "New Name",
-            "cancel": "Cancel",
-            "save": "Save"
+            "new-name": "New Name"
         }
     },
     "branding-settings": {
@@ -1668,6 +1541,207 @@
     "get-node-linked-hosts": {
         "feature": {
             "linked-hosts": "Linked hosts"
+        }
+    },
+    "snippets": {
+        "drawer": {
+            "widget": {
+                "invalid-json": "Invalid JSON",
+                "snippet-cannot-be-empty": "Snippet cannot be empty",
+                "snippet-cannot-contain-empty-objects": "Snippet cannot contain empty objects",
+                "fetching-snippets": "Fetching snippets...",
+                "no-snippets-yet": "No snippets yet.",
+                "more-items": "more items...",
+                "create-snippet": "Create Snippet",
+                "snippet-name": "Snippet Name",
+                "enter-snippet-name-cannot-be-changed-later": "Enter snippet name (cannot be changed later)",
+                "snippet-is-valid": "Snippet is valid",
+                "edit-snippet": "Edit Snippet",
+                "snippets": "Snippets",
+                "new-snippet": "New snippet",
+                "snippets-help-line-1": "They are used to predefine some of your configurations.",
+                "snippets-help-line-2": "A snippet must contain an array of Outbound or Rule objects, and at least one item is required.",
+                "snippets-help-line-3": "Autocomplete is available for snippet names. Also, you can quickly preview the snippet by hovering over the name in the editor.",
+                "snippets-help-line-4": "Inside outbounds[], you can reference the snippets by name.",
+                "snippets-help-line-5": "Inside routing.rules[], you can reference the snippets by name."
+            }
+        }
+    },
+    "response-rules-editor-actions": {
+        "feature": {
+            "response-rules-debugger": "Response Rules Debugger",
+            "response-rules-debugger-description-1": "Use this cURL command to test how your response rules match different request headers.",
+            "response-rules-debugger-description-2": "You can import it into:",
+            "or": ", or",
+            "curl-command": "cURL Command",
+            "copy-curl-command": "Copy cURL command",
+            "debugger": "Debugger"
+        }
+    },
+    "copy-docker-compose": {
+        "widget": {
+            "copy-docker-compose-yml": "Copy docker-compose.yml"
+        }
+    },
+    "create-node-step-1-connection": {
+        "copy-the": "Copy the",
+        "content-for-the-remnawave-node-below": "content for the Remnawave Node below.",
+        "learn-more": "Learn more.",
+        "domain-or-ip": "Domain or IP"
+    },
+    "create-node-step-3-status": {
+        "establishing-mtls-connection": "Establishing mTLS connection...",
+        "xray-core-is-up-and-running": "Xray Core is up and running!",
+        "remnawave-will-try-to-reconnect-shortly": "Remnawave will try to reconnect shortly...",
+        "no-errros-so-far": "No errros so far",
+        "last-error-message": "Last error message"
+    },
+    "external-squad-card": {
+        "widget": {
+            "users": "Users",
+            "add-users": "Add users",
+            "remove-users": "Remove users"
+        }
+    },
+    "internal-squads-with-store": {
+        "drawer": {
+            "widget": {
+                "users": "Users"
+            }
+        }
+    },
+    "external-squads": {
+        "drawer": {
+            "widget": {
+                "subscription-templates": "Subscription Templates",
+                "subscription-templates-description-line-1": "Select one template for each subscription type. If not selected, the default template will be used automatically.",
+                "subscription-templates-description-line-2": "Please note, Response Rules have a higher priority.",
+                "select-a-template": "Select a template",
+                "default-template-in-use": "Default template in use...",
+                "edit-external-squad": "Edit external squad",
+                "templates": "Templates",
+                "settings": "Settings"
+            }
+        },
+        "page": {
+            "component": {
+                "list-of-all-external-squads": "List of all external squads"
+            }
+        }
+    },
+    "external-squads-grid": {
+        "widget": {
+            "no-external-squads": "No external squads",
+            "no-external-squads-line-1": "External squads allow you to customize settings for specific groups of users.",
+            "no-external-squads-line-2": "You can override default subscription templates and other settings for each squad.",
+            "no-external-squads-line-3": "Create a squad and assign users to apply custom configurations."
+        }
+    },
+    "external-squads-settings": {
+        "tab": {
+            "widget": {
+                "override-subscription-settings-for-this-external-squad": "Override subscription settings for this external squad",
+                "add-override": "Add override"
+            }
+        }
+    },
+    "srr-advanced-warning-overlay": {
+        "warning": "Warning",
+        "warning-line-1": "This feature is designed for advanced users who understand the potential risks and implications.",
+        "incorrect-configuration-line-1": "Incorrect configuration",
+        "incorrect-configuration-line-2": "may cause unexpected behavior",
+        "review-settings-carefully-line-1": "Review settings carefully",
+        "review-settings-carefully-line-2": "before applying changes"
+    },
+    "auth-settings": {
+        "header": {
+            "title": "Authentication Methods",
+            "description": "Manage your authentication methods."
+        },
+        "error-modal": {
+            "title": "Update Failed",
+            "description": "An error occurred while updating authentication settings. Please review the error details below and try again.",
+            "unknown-error": "Request failed with unknown error."
+        },
+        "passkey": {
+            "title": "Passkey",
+            "manage-button": "Manage",
+            "rpId": {
+                "label": "Frontend Domain",
+                "description": "Public domain of your frontend without protocol (e.g., example.com)"
+            },
+            "origin": {
+                "label": "Backend Domain",
+                "description": "Fully qualified https origin of your backend (e.g., https://api.example.com)"
+            }
+        },
+        "password": {
+            "title": "Password"
+        },
+        "telegram": {
+            "botToken": {
+                "label": "Bot Token",
+                "description": "Telegram bot token",
+                "placeholder": "Enter bot token"
+            },
+            "adminIds": {
+                "label": "Allowed Admin IDs",
+                "description": "List of allowed admin IDs",
+                "placeholder": "Enter admin IDs"
+            }
+        },
+        "fields": {
+            "clientId": {
+                "label": "Client ID",
+                "description": "Provider OAuth2 Client ID",
+                "placeholder": "Enter client ID"
+            },
+            "clientSecret": {
+                "label": "Client Secret",
+                "description": "Provider OAuth2 Client Secret",
+                "placeholder": "Enter client secret"
+            },
+            "plainDomain": {
+                "label": "Plain Domain",
+                "description": "Plain domain for PocketID (e.g., example.com)",
+                "placeholder": "example.com"
+            },
+            "allowedEmails": {
+                "label": "Allowed Emails",
+                "description": "List of allowed email addresses.",
+                "placeholder": "Enter email"
+            }
+        }
+    },
+    "passkeys-drawer": {
+        "component": {
+            "delete-passkey": "Delete Passkey",
+            "delete-passkey-confirmation": "Are you sure you want to delete this passkey? This action cannot be undone.",
+            "passkeys": "Passkeys",
+            "passkeys-description": "Passkeys allow you to sign in securely without passwords. You can register multiple passkeys across different devices.",
+            "active-passkeys": "Active Passkeys",
+            "no-passkeys-registered-yet": "No passkeys registered yet",
+            "add-passkeys-description": "Add your first passkey to enable secure, passwordless sign-in across your devices",
+            "register": "Register",
+            "last-used-at": "Last Used At",
+            "created-at": "Created At"
+        }
+    },
+    "branding-settings-card": {
+        "widget": {
+            "customize-your-remnawave-instance": "Customize your Remnawave instance",
+            "branding-settings": "Branding Settings",
+            "the-title-that-will-be-displayed-on-login-page": "The title that will be displayed on login page",
+            "brand-name": "Brand Name",
+            "the-url-to-your-brand-logo-image": "The URL to your brand logo image"
+        }
+    },
+    "api-tokens-card": {
+        "widget": {
+            "api-tokens-description": "Manage your API access tokens for programmatic access.",
+            "api-tokens": "API Tokens",
+            "no-api-tokens-found": "No API tokens found",
+            "token-name": "Token Name"
         }
     }
 }

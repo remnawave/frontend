@@ -23,17 +23,17 @@ import {
 } from 'react-icons/pi'
 import { BulkUpdateUsersCommand } from '@remnawave/backend-contract'
 import { zodResolver } from 'mantine-form-zod-resolver'
+import { TbDevices2, TbWebhook } from 'react-icons/tb'
 import { DateTimePicker } from '@mantine/dates'
 import { useTranslation } from 'react-i18next'
-import { TbDevices2 } from 'react-icons/tb'
 import { useForm } from '@mantine/form'
 import dayjs from 'dayjs'
 import { z } from 'zod'
 
 import { useBulkUsersActionsStoreActions } from '@entities/dashboard/users/bulk-users-actions-store'
 import { CreateableTagInputShared } from '@shared/ui/createable-tag-input/createable-tag-input'
+import { useBulkUpdateUsers, useGetExternalSquads, useGetUserTags } from '@shared/api/hooks'
 import { userStatusValues } from '@shared/constants/forms/user-status.constants'
-import { useBulkUpdateUsers, useGetUserTags } from '@shared/api/hooks'
 import { resetDataStrategy } from '@shared/constants'
 import { handleFormErrors } from '@shared/utils/misc'
 import { gbToBytesUtil } from '@shared/utils/bytes'
@@ -78,6 +78,7 @@ export const BulkUserActionsUpdateTabFeature = (props: IProps) => {
     })
 
     const { data: tags } = useGetUserTags()
+    const { data: externalSquads } = useGetExternalSquads()
 
     const { mutate: updateUsers, isPending: isUpdatePending } = useBulkUpdateUsers({
         mutationFns: {
@@ -110,7 +111,8 @@ export const BulkUserActionsUpdateTabFeature = (props: IProps) => {
                             // @ts-expect-error - TODO: fix ZOD schema
                             values.fields.hwidDeviceLimit === ''
                                 ? null
-                                : values.fields.hwidDeviceLimit
+                                : values.fields.hwidDeviceLimit,
+                        externalSquadUuid: values.fields.externalSquadUuid
                     }
                 }
             },
@@ -143,6 +145,24 @@ export const BulkUserActionsUpdateTabFeature = (props: IProps) => {
                     leftSection={<PiClockDuotone size="16px" />}
                     placeholder={t('bulk-user-actions.update.tab.feature.select-status')}
                     {...form.getInputProps('fields.status')}
+                />
+
+                <Select
+                    allowDeselect={true}
+                    clearable
+                    data={externalSquads?.externalSquads.map((externalSquad) => ({
+                        label: externalSquad.name,
+                        value: externalSquad.uuid
+                    }))}
+                    defaultValue={form.values.fields.externalSquadUuid}
+                    description={t(
+                        'access-settings-card.select-an-external-squad-to-apply-custom-settings-to-this-user'
+                    )}
+                    key={form.key('fields.externalSquadUuid')}
+                    label={t('access-settings-card.external-squad')}
+                    leftSection={<TbWebhook size="16px" />}
+                    placeholder={t('access-settings-card.select-an-external-squad')}
+                    {...form.getInputProps('fields.externalSquadUuid')}
                 />
 
                 <NumberInput
@@ -339,7 +359,7 @@ export const BulkUserActionsUpdateTabFeature = (props: IProps) => {
                     />
                 </Stack>
 
-                <Stack gap={'xs'}>
+                <Stack gap="xs">
                     <Button
                         fullWidth
                         leftSection={<PiX size="16px" />}
@@ -349,7 +369,7 @@ export const BulkUserActionsUpdateTabFeature = (props: IProps) => {
                         type="reset"
                         variant="light"
                     >
-                        {t('bulk-user-actions.update.tab.feature.close')}
+                        {t('common.close')}
                     </Button>
 
                     <Button

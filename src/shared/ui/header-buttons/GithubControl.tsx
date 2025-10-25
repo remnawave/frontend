@@ -22,7 +22,7 @@ export function GithubControl({
             href={link}
             rel="noopener noreferrer"
             target="_blank"
-            w={'auto'}
+            w="auto"
             {...others}
         >
             <Group gap={8} ml={10} mr={10} wrap="nowrap">

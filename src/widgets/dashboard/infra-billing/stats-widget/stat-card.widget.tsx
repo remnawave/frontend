@@ -26,7 +26,6 @@ export function StatCardWidget({ title, value, icon, color, subtitle, isLoading 
                 e.currentTarget.style.borderColor = 'var(--mantine-color-dark-4)'
             }}
             p="lg"
-            radius="md"
             shadow="sm"
             style={{
                 border: '1px solid var(--mantine-color-dark-4)',

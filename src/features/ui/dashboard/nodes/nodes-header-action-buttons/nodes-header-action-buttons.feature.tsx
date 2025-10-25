@@ -72,9 +72,7 @@ export const NodesHeaderActionButtonsFeature = () => {
                                 })
                                 modals.closeAll()
                             }}
-                            radius="md"
                             size="md"
-                            variant="light"
                         >
                             {t('nodes-header-action-buttons.feature.force')}
                         </Button>
@@ -88,9 +86,7 @@ export const NodesHeaderActionButtonsFeature = () => {
                                 })
                                 modals.closeAll()
                             }}
-                            radius="md"
                             size="md"
-                            variant="light"
                         >
                             {t('nodes-header-action-buttons.feature.graceful')}
                         </Button>
@@ -104,13 +100,7 @@ export const NodesHeaderActionButtonsFeature = () => {
         <Group grow preventGrowOverflow={false} wrap="wrap">
             <ActionIconGroup>
                 <Tooltip label={t('nodes-header-action-buttons.feature.search-nodes')}>
-                    <ActionIcon
-                        color="gray"
-                        onClick={spotlight.open}
-                        radius="md"
-                        size="lg"
-                        variant="light"
-                    >
+                    <ActionIcon color="gray" onClick={spotlight.open} size="lg" variant="light">
                         <TbSearch size="18px" />
                     </ActionIcon>
                 </Tooltip>
@@ -127,7 +117,6 @@ export const NodesHeaderActionButtonsFeature = () => {
                         onClick={() => {
                             openRestartAllNodesModal()
                         }}
-                        radius="md"
                         size="lg"
                         variant="light"
                     >
@@ -137,11 +126,10 @@ export const NodesHeaderActionButtonsFeature = () => {
             </ActionIconGroup>
 
             <ActionIconGroup>
-                <Tooltip label={t('nodes-header-action-buttons.feature.update')} withArrow>
+                <Tooltip label={t('common.update')} withArrow>
                     <ActionIcon
                         loading={isGetNodesPending || isPending || isRefetching}
                         onClick={() => refetchNodes()}
-                        radius="md"
                         size="lg"
                         variant="light"
                     >
@@ -152,13 +140,7 @@ export const NodesHeaderActionButtonsFeature = () => {
 
             <ActionIconGroup>
                 <Tooltip label={t('nodes-header-action-buttons.feature.create-new-node')} withArrow>
-                    <ActionIcon
-                        color="teal"
-                        onClick={handleCreate}
-                        radius="md"
-                        size="lg"
-                        variant="light"
-                    >
+                    <ActionIcon color="teal" onClick={handleCreate} size="lg" variant="light">
                         <TbPlus size="18px" />
                     </ActionIcon>
                 </Tooltip>

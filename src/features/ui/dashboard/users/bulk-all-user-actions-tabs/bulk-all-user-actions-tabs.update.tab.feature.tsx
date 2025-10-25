@@ -315,7 +315,7 @@ export const BulkAllUserActionsUpdateTabFeature = (props: IProps) => {
                     />
                 </Stack>
 
-                <Stack gap={'xs'}>
+                <Stack gap="xs">
                     <Button
                         fullWidth
                         leftSection={<PiX size="16px" />}
@@ -325,7 +325,7 @@ export const BulkAllUserActionsUpdateTabFeature = (props: IProps) => {
                         type="reset"
                         variant="light"
                     >
-                        {t('bulk-all-user-actions-tabs.update.tab.feature.close')}
+                        {t('common.close')}
                     </Button>
 
                     <Button

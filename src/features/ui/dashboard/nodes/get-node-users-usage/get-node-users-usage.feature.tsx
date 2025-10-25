@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { Menu } from '@mantine/core'
 import { memo } from 'react'
 
-import { MODALS, useModalsStore } from '@entities/dashboard/modal-store'
+import { MODALS, useModalsStoreOpenWithData } from '@entities/dashboard/modal-store'
 
 import { IProps } from './interfaces'
 
@@ -11,20 +11,16 @@ const GetNodeUsersUsageFeatureComponent = (props: IProps) => {
     const { nodeUuid } = props
     const { t } = useTranslation()
 
-    const { open: openModal, setInternalData } = useModalsStore()
+    const openModalWithData = useModalsStoreOpenWithData()
 
     return (
         <Menu.Item
             color="grape"
             leftSection={<PiChartBarDuotone size="16px" />}
             onClick={() => {
-                setInternalData({
-                    internalState: {
-                        nodeUuid
-                    },
-                    modalKey: MODALS.SHOW_NODE_USERS_USAGE_DRAWER
+                openModalWithData(MODALS.SHOW_NODE_USERS_USAGE_DRAWER, {
+                    nodeUuid
                 })
-                openModal(MODALS.SHOW_NODE_USERS_USAGE_DRAWER)
             }}
         >
             {t('get-user-usage.feature.show-usage')}

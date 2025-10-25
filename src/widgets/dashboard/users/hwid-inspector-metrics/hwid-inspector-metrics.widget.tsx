@@ -137,7 +137,7 @@ export function HwidInspectorMetrics() {
             <Stack gap="md">
                 <SimpleGrid cols={{ base: 1, sm: 2, xl: 3 }}>
                     {[1, 2, 3].map((i) => (
-                        <Card key={i} p="lg" radius="md" withBorder>
+                        <Card key={i} p="lg" withBorder>
                             <Center h={80}>
                                 <Loader size="md" />
                             </Center>
@@ -146,7 +146,7 @@ export function HwidInspectorMetrics() {
                 </SimpleGrid>
                 <SimpleGrid cols={{ base: 1, lg: 2 }} spacing="md">
                     {[1, 2].map((i) => (
-                        <Card key={i} p="lg" radius="md" withBorder>
+                        <Card key={i} p="lg" withBorder>
                             <Center h={300}>
                                 <Loader size="lg" />
                             </Center>
@@ -169,8 +169,8 @@ export function HwidInspectorMetrics() {
                             </MetricCard.Icon>
                             <Stack align="self-start" gap="xs" miw={0} w="100%">
                                 <MetricCard.TextMuted>{card.title}</MetricCard.TextMuted>
-                                <Box miw={0} w={'100%'}>
-                                    <MetricCard.TextEmphasis ff={'monospace'} truncate>
+                                <Box miw={0} w="100%">
+                                    <MetricCard.TextEmphasis ff="monospace" truncate>
                                         {card.format
                                             ? card.format(card.value ?? 0)
                                             : formatInt(card.value ?? 0)}
@@ -186,18 +186,25 @@ export function HwidInspectorMetrics() {
                 {/* Platform Distribution */}
                 <Card
                     p="lg"
-                    radius="md"
                     style={{
                         background:
                             'linear-gradient(135deg, var(--mantine-color-dark-6) 0%, var(--mantine-color-dark-7) 100%)'
                     }}
                     withBorder
                 >
-                    <Group align="center" gap="sm" mb="lg">
+                    <Group align="center" gap="sm" mb="lg" wrap="nowrap">
                         <ThemeIcon color="blue" size="lg" variant="outline">
                             <PiChartPieDuotone size="20px" />
                         </ThemeIcon>
-                        <Text fw={600} size="lg">
+                        <Text
+                            fw={600}
+                            size="lg"
+                            style={{
+                                textOverflow: 'ellipsis',
+                                whiteSpace: 'nowrap',
+                                overflow: 'hidden'
+                            }}
+                        >
                             {t('hwid-inspector-metrics.widget.platform-distribution')}
                         </Text>
                     </Group>
@@ -227,18 +234,25 @@ export function HwidInspectorMetrics() {
                 {/* App Distribution */}
                 <Card
                     p="lg"
-                    radius="md"
                     style={{
                         background:
                             'linear-gradient(135deg, var(--mantine-color-dark-6) 0%, var(--mantine-color-dark-7) 100%)'
                     }}
                 >
-                    <Group align="center" gap="sm" mb="lg">
+                    <Group align="center" gap="sm" mb="lg" wrap="nowrap">
                         <ThemeIcon color="teal" size="lg" variant="outline">
                             <PiChartPieDuotone size="20px" />
                         </ThemeIcon>
 
-                        <Text fw={600} size="lg">
+                        <Text
+                            fw={600}
+                            size="lg"
+                            style={{
+                                textOverflow: 'ellipsis',
+                                whiteSpace: 'nowrap',
+                                overflow: 'hidden'
+                            }}
+                        >
                             {t('hwid-inspector-metrics.widget.app-distribution')}
                         </Text>
                     </Group>

@@ -1,6 +1,6 @@
 import { BulkDeleteUsersByStatusCommand, TUsersStatus } from '@remnawave/backend-contract'
 import { TbCheck as IconCheck, TbX as IconX } from 'react-icons/tb'
-import { Button, Group, Select, Stack, Text } from '@mantine/core'
+import { Button, Group, Select, Stack } from '@mantine/core'
 import { notifications } from '@mantine/notifications'
 import { PiClockDuotone } from 'react-icons/pi'
 import { useTranslation } from 'react-i18next'
@@ -34,7 +34,7 @@ export const DeleteAllUsersByStatusFeature = (props: IProps) => {
 
                 return { notificationId }
             },
-            onSuccess: (data, variables, context: unknown) => {
+            onSuccess: (data, context: unknown) => {
                 if (context && typeof context === 'object' && 'notificationId' in context) {
                     notifications.update({
                         icon: <IconCheck size={18} />,
@@ -52,7 +52,7 @@ export const DeleteAllUsersByStatusFeature = (props: IProps) => {
                     })
                 }
             },
-            onError: (error, variables, context: unknown) => {
+            onError: (error, context: unknown) => {
                 if (context && typeof context === 'object' && 'notificationId' in context) {
                     notifications.update({
                         id: context.notificationId as string,
@@ -71,17 +71,11 @@ export const DeleteAllUsersByStatusFeature = (props: IProps) => {
 
     const confirmDeleteUsers = () =>
         modals.openConfirmModal({
-            title: t('bulk-user-actioins-modal.widget.delete-users'),
-            children: (
-                <Text size="sm">
-                    {t('bulk-user-actioins-modal.widget.confirm-action-description')}
-                    <br />
-                    {t('bulk-user-actioins-modal.widget.confirm-action-irreversible')}
-                </Text>
-            ),
+            title: t('common.confirm-action'),
+            children: t('common.confirm-action-description'),
             labels: {
-                confirm: t('bulk-user-actioins-modal.widget.delete-users'),
-                cancel: t('bulk-user-actioins-modal.widget.cancel')
+                confirm: t('common.delete'),
+                cancel: t('common.cancel')
             },
             centered: true,
             confirmProps: { color: 'red' },
@@ -103,7 +97,7 @@ export const DeleteAllUsersByStatusFeature = (props: IProps) => {
                     value={selectedStatus}
                 />
                 <Button color="red" disabled={!selectedStatus} onClick={confirmDeleteUsers}>
-                    {t('bulk-user-actioins-modal.widget.delete-users')}
+                    {t('common.delete')}
                 </Button>
             </Stack>
         </Group>

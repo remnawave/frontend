@@ -21,7 +21,7 @@ import { motion } from 'framer-motion'
 import { memo, useMemo } from 'react'
 
 import { QueryKeys, useDisableNode, useEnableNode } from '@shared/api/hooks'
-import { XtlsLogo } from '@shared/ui/logos/xtls-logo'
+import { XrayLogo } from '@shared/ui/logos'
 import { queryClient } from '@shared/api'
 import { Logo } from '@shared/ui'
 
@@ -118,7 +118,6 @@ export const NodeDetailsCardWidget = memo(({ node, fetchedNode }: IProps) => {
     return (
         <Card
             p="lg"
-            radius="lg"
             style={{
                 background: `
                     linear-gradient(135deg, 
@@ -276,7 +275,6 @@ export const NodeDetailsCardWidget = memo(({ node, fetchedNode }: IProps) => {
                     >
                         <Paper
                             p="xs"
-                            radius="md"
                             style={{
                                 background:
                                     nodeData.usersOnline! > 0
@@ -311,7 +309,6 @@ export const NodeDetailsCardWidget = memo(({ node, fetchedNode }: IProps) => {
                         {nodeData.xrayVersion && (
                             <Paper
                                 p="xs"
-                                radius="md"
                                 style={{
                                     background: 'rgba(139, 92, 246, 0.1)',
                                     border: '1px solid rgba(139, 92, 246, 0.3)'
@@ -319,7 +316,7 @@ export const NodeDetailsCardWidget = memo(({ node, fetchedNode }: IProps) => {
                             >
                                 <Tooltip label={t('node-details-card.widget.xray-core-version')}>
                                     <Group gap="xs" justify="center">
-                                        <XtlsLogo color="var(--mantine-color-violet-4)" size={18} />
+                                        <XrayLogo color="var(--mantine-color-violet-4)" size={18} />
                                         <Text c="violet.4" fw={600} size="sm">
                                             {nodeData.xrayVersion || 'N/A'}
                                         </Text>
@@ -331,7 +328,6 @@ export const NodeDetailsCardWidget = memo(({ node, fetchedNode }: IProps) => {
                         {nodeData.nodeVersion && (
                             <Paper
                                 p="xs"
-                                radius="md"
                                 style={{
                                     background: 'rgba(99, 102, 241, 0.1)',
                                     border: '1px solid rgba(99, 102, 241, 0.3)'

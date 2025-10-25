@@ -59,7 +59,7 @@ export const HappRoutingBuilderPageComponent = () => {
                 title={title}
             />
             <Container fluid p={0} size="xl">
-                <Paper mb="xl" p="md" radius="md" shadow="sm" withBorder>
+                <Paper mb="xl" p="md" shadow="sm" withBorder>
                     <Group align="flex-start" wrap="nowrap">
                         <Avatar radius="md" size="lg" variant="transparent" visibleFrom="sm">
                             <HappLogo />
@@ -92,7 +92,7 @@ export const HappRoutingBuilderPageComponent = () => {
                                     leftSection={<PiBookOpenTextDuotone size={px('1.2rem')} />}
                                     rel="noopener noreferrer"
                                     target="_blank"
-                                    to={'https://www.happ.su/main/developer-documentation/routing'}
+                                    to="https://www.happ.su/main/developer-documentation/routing"
                                     variant="light"
                                 >
                                     {t(

@@ -10,7 +10,7 @@ import { IProps } from './interfaces/props.interface'
 import { createScript } from './createScript'
 
 export const TelegramLoginButtonFeature = (props: IProps) => {
-    const { tgAuth } = props
+    const { authentication } = props
 
     const hiddenDivRef = useRef<HTMLButtonElement>(null)
 
@@ -31,10 +31,6 @@ export const TelegramLoginButtonFeature = (props: IProps) => {
             scriptRef.current?.remove()
         }
     }, [])
-
-    if (!tgAuth) {
-        return null
-    }
 
     const handleTelegramLogin = (data: false | ITelegramData) => {
         if (data) {
@@ -79,20 +75,21 @@ export const TelegramLoginButtonFeature = (props: IProps) => {
     }
 
     const handleLogin = () => {
+        if (!authentication.tgAuth.botId) return
+
         window.Telegram.Login.auth(
-            { bot_id: tgAuth.botId.toString(), request_access: true },
+            { bot_id: authentication.tgAuth.botId.toString(), request_access: true },
             handleTelegramLogin
         )
     }
 
     return (
         <Button
-            color={'#0088cc'}
-            leftSection={<BiLogoTelegram color={'white'} size={20} />}
+            color="#0088cc"
+            leftSection={<BiLogoTelegram color="white" size={20} />}
             loaderProps={{ type: 'dots' }}
             loading={isPending}
             onClick={handleLogin}
-            radius="md"
             ref={hiddenDivRef}
             variant="filled"
         >

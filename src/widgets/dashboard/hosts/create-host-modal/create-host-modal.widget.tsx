@@ -7,15 +7,15 @@ import { useEffect, useState } from 'react'
 import { useForm } from '@mantine/form'
 
 import { QueryKeys, useCreateHost, useGetConfigProfiles, useGetNodes } from '@shared/api/hooks'
-import { useHostsStoreActions, useHostsStoreCreateModalIsOpen } from '@entities/dashboard'
+import { MODALS, useModalClose, useModalState } from '@entities/dashboard/modal-store'
 import { BaseHostForm } from '@shared/ui/forms/hosts/base-host-form'
 import { queryClient } from '@shared/api'
 
 export const CreateHostModalWidget = () => {
     const { t } = useTranslation()
 
-    const isModalOpen = useHostsStoreCreateModalIsOpen()
-    const actions = useHostsStoreActions()
+    const { isOpen } = useModalState(MODALS.CREATE_HOST_MODAL)
+    const close = useModalClose(MODALS.CREATE_HOST_MODAL)
 
     const { data: configProfiles } = useGetConfigProfiles()
     const { data: nodes } = useGetNodes()
@@ -35,7 +35,7 @@ export const CreateHostModalWidget = () => {
     })
 
     const handleClose = () => {
-        actions.toggleCreateModal(false)
+        close()
         setAdvancedOpened(false)
 
         form.reset()
@@ -104,7 +104,7 @@ export const CreateHostModalWidget = () => {
         <Drawer
             keepMounted={false}
             onClose={handleClose}
-            opened={isModalOpen}
+            opened={isOpen}
             overlayProps={{ backgroundOpacity: 0.6, blur: 0 }}
             padding="lg"
             position="right"

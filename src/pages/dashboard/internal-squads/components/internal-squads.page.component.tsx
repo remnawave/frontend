@@ -5,6 +5,7 @@ import { Grid } from '@mantine/core'
 import { InternalSquadAccessibleNodesModalWidget } from '@widgets/dashboard/internal-squads/internal-squad-accessible-nodes-modal/internal-squad-accessible-nodes.modal.widget'
 import { InternalSquadsHeaderWidget } from '@widgets/dashboard/internal-squads/internal-squads-header-widget/internal-squads-header.widget'
 import { InternalSquadsGridWidget } from '@widgets/dashboard/internal-squads/internal-squads-grid/internal-squads-grid.widget'
+import { InternalSquadsDrawerWithStore } from '@widgets/dashboard/users/internal-squads-drawer-with-store'
 import { RenameModalShared } from '@shared/ui/modals/rename-modal.shared'
 import { ROUTES } from '@shared/constants'
 import { PageHeader } from '@shared/ui'
@@ -45,6 +46,7 @@ export const InternalSquadsPageComponent = (props: Props) => {
             </Grid>
             <RenameModalShared key="rename-internal-squad-modal" renameFrom="internalSquad" />
             <InternalSquadAccessibleNodesModalWidget key="internal-squad-accessible-nodes-modal" />
+            <InternalSquadsDrawerWithStore key="internal-squads-drawer-with-store" />
         </Page>
     )
 }

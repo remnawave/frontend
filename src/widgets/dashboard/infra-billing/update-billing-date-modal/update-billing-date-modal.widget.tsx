@@ -4,17 +4,16 @@ import { DatePicker } from '@mantine/dates'
 import { useEffect, useState } from 'react'
 import dayjs from 'dayjs'
 
+import { MODALS, useModalClose, useModalState } from '@entities/dashboard/modal-store'
 import { QueryKeys, useUpdateInfraBillingNode } from '@shared/api/hooks'
-import { MODALS, useModalsStore } from '@entities/dashboard/modal-store'
 import { queryClient } from '@shared/api'
 
 import styles from './UpdateModal.module.css'
 
 export function UpdateBillingDateModalWidget() {
-    const { isOpen, internalState: billingNode } = useModalsStore(
-        (state) => state.modals[MODALS.UPDATE_BILLING_DATE_MODAL]
-    )
-    const { close } = useModalsStore()
+    const { isOpen, internalState: billingNode } = useModalState(MODALS.UPDATE_BILLING_DATE_MODAL)
+    const close = useModalClose(MODALS.UPDATE_BILLING_DATE_MODAL)
+
     const [selectedDate, setSelectedDate] = useState<Date | null>(null)
     const { t } = useTranslation()
 
@@ -27,7 +26,7 @@ export function UpdateBillingDateModalWidget() {
                     billingNode.callback()
                 }
 
-                close(MODALS.UPDATE_BILLING_DATE_MODAL)
+                close()
                 setSelectedDate(null)
             },
             onError: () => {}
@@ -57,7 +56,7 @@ export function UpdateBillingDateModalWidget() {
     }
 
     const handleClose = () => {
-        close(MODALS.UPDATE_BILLING_DATE_MODAL)
+        close()
 
         setTimeout(() => {
             setSelectedDate(null)
@@ -126,7 +125,7 @@ export function UpdateBillingDateModalWidget() {
 
                 <Group justify="flex-end" mt="lg">
                     <Button disabled={isLoading} onClick={handleClose} variant="default">
-                        {t('update-billing-date-modal.widget.cancel')}
+                        {t('common.cancel')}
                     </Button>
                     <Button
                         disabled={!selectedDate || !billingNode}

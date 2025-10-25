@@ -61,7 +61,7 @@ export const BulkUserActionsDrawerWidget = (props: IProps) => {
             <Tabs onChange={setActiveTab} value={activeTab}>
                 <Tabs.List grow mb="md">
                     <Tabs.Tab leftSection={<PiPencil size={px('0.8rem')} />} value="update">
-                        {t('bulk-user-actions-drawer.widget.update')}
+                        {t('common.update')}
                     </Tabs.Tab>
                     <Tabs.Tab leftSection={<PiInfo size={px('0.8rem')} />} value="actions">
                         {t('bulk-user-actions-drawer.widget.actions')}

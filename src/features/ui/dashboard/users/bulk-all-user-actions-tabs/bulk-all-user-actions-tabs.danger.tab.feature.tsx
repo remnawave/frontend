@@ -24,7 +24,7 @@ export const BulkAllUserActionsDangerTabFeature = (props: IProps) => {
                 <Stack>
                     <Group justify="apart">
                         <Group>
-                            <PiTrash color={'var(--mantine-color-red-6)'} size={px('1.2rem')} />
+                            <PiTrash color="var(--mantine-color-red-6)" size={px('1.2rem')} />
                             <Text>
                                 {t(
                                     'bulk-all-user-actions-tabs.danger.tab.feature.delete-users-by-status'
@@ -35,7 +35,7 @@ export const BulkAllUserActionsDangerTabFeature = (props: IProps) => {
                             color="red.6"
                             onClick={() => {
                                 modals.open({
-                                    title: 'Confirm Action',
+                                    title: t('common.confirm-action'),
                                     centered: true,
                                     children: (
                                         <DeleteAllUsersByStatusFeature
@@ -46,7 +46,7 @@ export const BulkAllUserActionsDangerTabFeature = (props: IProps) => {
                             }}
                             variant="light"
                         >
-                            {t('bulk-all-user-actions-tabs.danger.tab.feature.delete')}
+                            {t('common.delete')}
                         </Button>
                     </Group>
                     <Text c="dimmed" size="xs">

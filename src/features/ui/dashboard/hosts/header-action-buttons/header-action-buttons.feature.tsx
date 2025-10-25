@@ -2,19 +2,19 @@ import { ActionIcon, ActionIconGroup, Group, Tooltip } from '@mantine/core'
 import { TbPlus, TbRefresh } from 'react-icons/tb'
 import { useTranslation } from 'react-i18next'
 
-import { useHostsStoreActions } from '@entities/dashboard'
+import { MODALS, useModalsStoreOpenWithData } from '@entities/dashboard/modal-store'
 import { QueryKeys, useGetHosts } from '@shared/api/hooks'
 import { queryClient } from '@shared/api'
 
 export const HeaderActionButtonsFeature = () => {
     const { t } = useTranslation()
 
-    const actions = useHostsStoreActions()
+    const openModalWithData = useModalsStoreOpenWithData()
 
     const { isFetching } = useGetHosts()
 
     const handleCreate = () => {
-        actions.toggleCreateModal(true)
+        openModalWithData(MODALS.CREATE_HOST_MODAL, undefined)
     }
 
     const handleUpdate = async () => {
@@ -26,11 +26,10 @@ export const HeaderActionButtonsFeature = () => {
     return (
         <Group grow preventGrowOverflow={false} wrap="wrap">
             <ActionIconGroup>
-                <Tooltip label={t('header-action-buttons.feature.update')} withArrow>
+                <Tooltip label={t('common.update')} withArrow>
                     <ActionIcon
                         loading={isFetching}
                         onClick={handleUpdate}
-                        radius="md"
                         size="lg"
                         variant="light"
                     >
@@ -41,13 +40,7 @@ export const HeaderActionButtonsFeature = () => {
 
             <ActionIconGroup>
                 <Tooltip label={t('header-action-buttons.feature.create-new-host')} withArrow>
-                    <ActionIcon
-                        color="teal"
-                        onClick={handleCreate}
-                        radius="md"
-                        size="lg"
-                        variant="light"
-                    >
+                    <ActionIcon color="teal" onClick={handleCreate} size="lg" variant="light">
                         <TbPlus size="18px" />
                     </ActionIcon>
                 </Tooltip>

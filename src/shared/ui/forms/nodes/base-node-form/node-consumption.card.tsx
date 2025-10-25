@@ -1,5 +1,3 @@
-/* eslint-disable indent */
-
 import {
     ActionIcon,
     Fieldset,
@@ -81,7 +79,7 @@ export const NodeConsumptionCard = <
                         </Group>
                     </Group>
 
-                    <Paper p="sm" radius="md">
+                    <Paper p="sm">
                         <Slider
                             key={form.key('consumptionMultiplier')}
                             {...form.getInputProps('consumptionMultiplier')}

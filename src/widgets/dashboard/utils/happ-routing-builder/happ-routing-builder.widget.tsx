@@ -265,13 +265,13 @@ export const HappRoutingBuilderWidget = () => {
         } catch (error) {
             consola.error(error)
             modals.open({
-                title: t('happ-routing-builder.widget.close'),
+                title: t('common.close'),
                 centered: true,
                 children: (
                     <>
                         <Text>{t('happ-routing-builder.widget.invalid-base64-or-happ-link')}</Text>
                         <Button fullWidth mt="md" onClick={() => modals.closeAll()}>
-                            {t('happ-routing-builder.widget.close')}
+                            {t('common.close')}
                         </Button>
                     </>
                 )
@@ -340,7 +340,7 @@ export const HappRoutingBuilderWidget = () => {
                                     size="sm"
                                     variant="light"
                                 >
-                                    {copied ? t('happ-routing-builder.widget.copied') : copiedText}
+                                    {copied ? t('common.copied') : copiedText}
                                 </Button>
                             )}
                         </CopyButton>
@@ -366,7 +366,7 @@ export const HappRoutingBuilderWidget = () => {
                                                 mt="md"
                                                 onClick={() => modals.closeAll()}
                                             >
-                                                {t('happ-routing-builder.widget.close')}
+                                                {t('common.close')}
                                             </Button>
                                         </>
                                     )
@@ -443,7 +443,7 @@ export const HappRoutingBuilderWidget = () => {
                                                     description={t(
                                                         'happ-routing-builder.widget.proxy-all-traffic-except-rules-or-direct-all-traffic-except-rules'
                                                     )}
-                                                    label={'GlobalProxy'}
+                                                    label="GlobalProxy"
                                                     onChange={(value) =>
                                                         handleInputChange(
                                                             'globalProxy',
@@ -459,21 +459,17 @@ export const HappRoutingBuilderWidget = () => {
                                                     data={[
                                                         {
                                                             value: 'true',
-                                                            label: t(
-                                                                'happ-routing-builder.widget.enable'
-                                                            )
+                                                            label: t('common.enable')
                                                         },
                                                         {
                                                             value: 'false',
-                                                            label: t(
-                                                                'happ-routing-builder.widget.disable'
-                                                            )
+                                                            label: t('common.disable')
                                                         }
                                                     ]}
                                                     description={t(
                                                         'happ-routing-builder.widget.fake-dns-description'
                                                     )}
-                                                    label={'FakeDNS'}
+                                                    label="FakeDNS"
                                                     onChange={(value) =>
                                                         handleInputChange(
                                                             'fakeDns',
@@ -490,18 +486,14 @@ export const HappRoutingBuilderWidget = () => {
                                                     data={[
                                                         {
                                                             value: 'true',
-                                                            label: t(
-                                                                'happ-routing-builder.widget.enable'
-                                                            )
+                                                            label: t('common.enable')
                                                         },
                                                         {
                                                             value: 'false',
-                                                            label: t(
-                                                                'happ-routing-builder.widget.disable'
-                                                            )
+                                                            label: t('common.disable')
                                                         }
                                                     ]}
-                                                    label={'useChunkFiles'}
+                                                    label="useChunkFiles"
                                                     onChange={(value) =>
                                                         handleInputChange(
                                                             'useChunkFiles',

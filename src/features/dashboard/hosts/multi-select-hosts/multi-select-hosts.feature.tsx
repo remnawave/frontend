@@ -119,8 +119,8 @@ export const MultiSelectHostsFeature = (props: IProps) => {
                 </Text>
             ),
             labels: {
-                confirm: t('multi-select-hosts.feature.delete'),
-                cancel: t('multi-select-hosts.feature.cancel')
+                confirm: t('common.delete'),
+                cancel: t('common.cancel')
             },
             confirmProps: {
                 color: 'red'
@@ -163,7 +163,7 @@ export const MultiSelectHostsFeature = (props: IProps) => {
 
                     <Group justify="flex-end">
                         <Button onClick={() => modals.closeAll()} variant="subtle">
-                            {t('multi-select-hosts.feature.cancel')}
+                            {t('common.cancel')}
                         </Button>
                         <Button
                             onClick={async () => {
@@ -200,7 +200,6 @@ export const MultiSelectHostsFeature = (props: IProps) => {
                 {(styles) => (
                     <Paper
                         p="md"
-                        radius="md"
                         shadow="md"
                         style={{
                             ...styles,
@@ -233,14 +232,14 @@ export const MultiSelectHostsFeature = (props: IProps) => {
                                     leftSection={<PiPulseDuotone />}
                                     onClick={enableSelectedHosts}
                                 >
-                                    {t('multi-select-hosts.feature.enable')}
+                                    {t('common.enable')}
                                 </Button>
                                 <Button
                                     color="gray"
                                     leftSection={<PiProhibitDuotone />}
                                     onClick={disableSelectedHosts}
                                 >
-                                    {t('multi-select-hosts.feature.disable')}
+                                    {t('common.disable')}
                                 </Button>
                                 <Button
                                     color="cyan"
@@ -254,14 +253,14 @@ export const MultiSelectHostsFeature = (props: IProps) => {
                                     leftSection={<PiArrowBendDownLeftDuotone />}
                                     onClick={setPortSelectedHosts}
                                 >
-                                    {t('multi-select-hosts.feature.set-port-0')}
+                                    {t('multi-select-hosts.feature.set-port')}
                                 </Button>
                                 <Button
                                     color="red"
                                     leftSection={<PiTrash />}
                                     onClick={deleteSelectedHosts}
                                 >
-                                    {t('multi-select-hosts.feature.delete')}
+                                    {t('common.delete')}
                                 </Button>
                             </Group>
                         </Stack>
@@ -291,7 +290,7 @@ export const MultiSelectHostsFeature = (props: IProps) => {
                             }}
                         />
                         <Button onClick={handlers.close} variant="light">
-                            {t('multi-select-hosts.feature.cancel')}
+                            {t('common.cancel')}
                         </Button>
                         <Button
                             onClick={() => {
