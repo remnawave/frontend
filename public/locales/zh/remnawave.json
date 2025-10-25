@@ -420,8 +420,6 @@
         "internal-name-placeholder": "例如：US-NY-Node-01 ",
         "address": "地址",
         "e-g-example-com": "例如 example.com",
-        "port": "端口",
-        "e-g-443": "例如 \"2222\" ",
         "consumption-multiplier": "流量倍率",
         "traffic-tracking": "跟踪流量使用",
         "limit": "限制",
@@ -1589,7 +1587,6 @@
         "copy-the": "复制",
         "content-for-the-remnawave-node-below": "以下是 Remnawave 节点的内容。",
         "learn-more": "了解更多。",
-        "secret-key-ssl_cert": "密钥(SSL_证书)",
         "domain-or-ip": "域名或IP"
     },
     "create-node-step-3-status": {
