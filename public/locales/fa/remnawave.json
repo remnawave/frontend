@@ -420,8 +420,6 @@
         "internal-name-placeholder": "برای مثال US-NY-Node-01",
         "address": "آدرس",
         "e-g-example-com": "مثلا example.com",
-        "port": "پورت",
-        "e-g-443": "مثلا 2222",
         "consumption-multiplier": "ضریب مصرف ترافیک",
         "traffic-tracking": "پایش مصرف ترافیک",
         "limit": "حد مصرف",
@@ -1589,7 +1587,6 @@
         "copy-the": "محتوای",
         "content-for-the-remnawave-node-below": "زیر را برای نود کپی کنید.",
         "learn-more": "اطلاعات بیشتر.",
-        "secret-key-ssl_cert": "کلید مخفی (SSL_CERT)",
         "domain-or-ip": "دامنه یا آیپی"
     },
     "create-node-step-3-status": {

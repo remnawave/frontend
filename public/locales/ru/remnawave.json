@@ -420,8 +420,6 @@
         "internal-name-placeholder": "e.g. US-NY-Node-01",
         "address": "Адрес",
         "e-g-example-com": "например, example.com",
-        "port": "Порт",
-        "e-g-443": "например, 2222",
         "consumption-multiplier": "Коэффициент использования",
         "traffic-tracking": "Отслеживание трафика",
         "limit": "Лимит",
@@ -1589,7 +1587,6 @@
         "copy-the": "Скопируйте",
         "content-for-the-remnawave-node-below": "содержимое для Remnawave node ниже.",
         "learn-more": "Дополнительная информация.",
-        "secret-key-ssl_cert": "Секретный ключ (SSL_CERT)",
         "domain-or-ip": "Домен или IP"
     },
     "create-node-step-3-status": {
