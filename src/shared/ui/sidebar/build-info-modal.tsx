@@ -1,13 +1,4 @@
 import {
-    TbBrandGithub as IconBrandGithub,
-    TbBrandTelegram as IconBrandTelegram,
-    TbCalendar as IconCalendar,
-    TbCheck as IconCheck,
-    TbCopy as IconCopy,
-    TbGitBranch,
-    TbHash
-} from 'react-icons/tb'
-import {
     Badge,
     Box,
     Button,
@@ -25,6 +16,15 @@ import {
     Tooltip,
     useMantineTheme
 } from '@mantine/core'
+import {
+    TbBrandGithub,
+    TbBrandTelegram,
+    TbCalendar,
+    TbCheck,
+    TbCopy,
+    TbGitBranch,
+    TbHash
+} from 'react-icons/tb'
 import { useClipboard } from '@mantine/hooks'
 
 import { IBuildInfo } from '@shared/utils/get-build-info/interfaces/build-info.interface'
@@ -67,7 +67,7 @@ export function BuildInfoModal({
                         <Button
                             color={clipboard.copied ? 'green' : 'gray'}
                             leftSection={
-                                clipboard.copied ? <IconCheck size={16} /> : <IconCopy size={16} />
+                                clipboard.copied ? <TbCheck size={16} /> : <TbCopy size={16} />
                             }
                             onClick={copyBuildInfo}
                             radius="xl"
@@ -104,8 +104,8 @@ export function BuildInfoModal({
                                     color="teal"
                                     component="a"
                                     fullWidth={false}
-                                    href="https://github.com/remnawave/panel/releases/latest"
-                                    leftSection={<IconBrandGithub size={16} />}
+                                    href="https://t.me/remnalog"
+                                    leftSection={<TbBrandTelegram size={16} />}
                                     mt="sm"
                                     size="sm"
                                     style={{ alignSelf: 'flex-start' }}
@@ -130,7 +130,7 @@ export function BuildInfoModal({
                                 }}
                                 variant="light"
                             >
-                                <IconCalendar size={24} />
+                                <TbCalendar size={24} />
                             </ThemeIcon>
                             <Box style={{ flex: 1 }}>
                                 <Text fw={700} size="md">
@@ -213,7 +213,7 @@ export function BuildInfoModal({
                     <Button
                         component="a"
                         href={buildInfo.commitUrl}
-                        leftSection={<IconBrandGithub size={18} />}
+                        leftSection={<TbBrandGithub size={18} />}
                         size="md"
                         target="_blank"
                         variant="outline"
@@ -225,7 +225,7 @@ export function BuildInfoModal({
                         color="cyan"
                         component="a"
                         href="https://t.me/remnawave"
-                        leftSection={<IconBrandTelegram size={18} />}
+                        leftSection={<TbBrandTelegram size={18} />}
                         size="md"
                         target="_blank"
                     >
