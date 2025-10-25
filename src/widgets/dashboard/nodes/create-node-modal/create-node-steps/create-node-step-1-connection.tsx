@@ -78,7 +78,7 @@ export const CreateNodeStep1Connection = ({ form, onNext, pubKey, port }: IProps
                 <Divider />
                 <Stack gap="xs">
                     <CopyableFieldShared
-                        label={t('create-node-step-1-connection.secret-key-ssl_cert')}
+                        label="Secret Key (SECRET_KEY)"
                         leftSection={<TbCertificate size={16} />}
                         size="sm"
                         value={`${pubKey?.trimEnd()}`}
@@ -128,7 +128,7 @@ export const CreateNodeStep1Connection = ({ form, onNext, pubKey, port }: IProps
 
                         <NumberInput
                             key={form.key('port')}
-                            label={t('base-node-form.port')}
+                            label="Node Port (NODE_PORT)"
                             {...form.getInputProps('port')}
                             allowDecimal={false}
                             allowNegative={false}

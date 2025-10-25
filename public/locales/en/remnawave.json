@@ -420,8 +420,6 @@
         "internal-name-placeholder": "e.g. US-NY-Node-01",
         "address": "Address",
         "e-g-example-com": "e.g. example.com",
-        "port": "Port",
-        "e-g-443": "e.g. 2222",
         "consumption-multiplier": "Consumption multiplier",
         "traffic-tracking": "Track traffic usage",
         "limit": "Limit",
@@ -1589,7 +1587,6 @@
         "copy-the": "Copy the",
         "content-for-the-remnawave-node-below": "content for the Remnawave Node below.",
         "learn-more": "Learn more.",
-        "secret-key-ssl_cert": "Secret Key (SSL_CERT)",
         "domain-or-ip": "Domain or IP"
     },
     "create-node-step-3-status": {

@@ -45,7 +45,7 @@ export const NodeVitalsCard = <T extends CreateNodeCommand.Request | UpdateNodeC
             >
                 <Stack gap="md">
                     <CopyableFieldShared
-                        label="SSL_CERT"
+                        label="Secret Key (SECRET_KEY)"
                         leftSection={<TbCertificate size={16} />}
                         size="sm"
                         value={`${pubKey?.pubKey.trimEnd() ?? 'Error loading...'}`}
@@ -92,7 +92,7 @@ export const NodeVitalsCard = <T extends CreateNodeCommand.Request | UpdateNodeC
 
                         <NumberInput
                             key={form.key('port')}
-                            label={t('base-node-form.port')}
+                            label="Node Port (NODE_PORT)"
                             {...form.getInputProps('port')}
                             allowDecimal={false}
                             allowNegative={false}
@@ -100,7 +100,7 @@ export const NodeVitalsCard = <T extends CreateNodeCommand.Request | UpdateNodeC
                             decimalScale={0}
                             hideControls
                             max={65535}
-                            placeholder={t('base-node-form.e-g-443')}
+                            placeholder="2222"
                             required
                             styles={{
                                 label: { fontWeight: 500 },

@@ -26,8 +26,8 @@ export const CopyDockerComposeWidget = ({ port }: IProps) => {
     network_mode: host
     restart: always
     environment:
-      - APP_PORT=${port ?? 2222}
-      - SSL_CERT="${pubKey.pubKey.trimEnd()}"`
+      - NODE_PORT=${port ?? 2222}
+      - SECRET_KEY="${pubKey.pubKey.trimEnd()}"`
     }
 
     return (
