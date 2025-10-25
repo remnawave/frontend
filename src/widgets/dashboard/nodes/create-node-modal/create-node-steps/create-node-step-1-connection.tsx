@@ -128,7 +128,7 @@ export const CreateNodeStep1Connection = ({ form, onNext, pubKey, port }: IProps
 
                         <NumberInput
                             key={form.key('port')}
-                            label="Node Port (NODE_PORT)"
+                            label="Node Port"
                             {...form.getInputProps('port')}
                             allowDecimal={false}
                             allowNegative={false}

@@ -92,7 +92,7 @@ export const NodeVitalsCard = <T extends CreateNodeCommand.Request | UpdateNodeC
 
                         <NumberInput
                             key={form.key('port')}
-                            label="Node Port (NODE_PORT)"
+                            label="Node Port"
                             {...form.getInputProps('port')}
                             allowDecimal={false}
                             allowNegative={false}
