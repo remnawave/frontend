@@ -497,7 +497,7 @@
     },
     "data-usage": {
         "column": {
-            "monthly": "月",
+            "monthly": "每月",
             "weekly": "周",
             "daily": "日"
         }
