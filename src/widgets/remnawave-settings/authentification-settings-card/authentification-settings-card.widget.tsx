@@ -139,10 +139,20 @@ export const AuthentificationSettingsCardWidget = (props: IProps) => {
 
     const { mutate: updateSettings, isPending: isUpdatePending } = useUpdateRemnawaveSettings({
         mutationFns: {
-            onSuccess() {
+            onSuccess(data) {
                 queryClient.refetchQueries({
                     queryKey: QueryKeys.remnawaveSettings.getRemnawaveSettings.queryKey
                 })
+
+                form.setValues({
+                    passkeySettings: data.passkeySettings!,
+                    passwordSettings: data.passwordSettings!,
+                    oauth2Settings: data.oauth2Settings!,
+                    tgAuthSettings: data.tgAuthSettings!
+                })
+
+                form.resetDirty()
+                form.resetTouched()
             },
             onError(error) {
                 handleFormErrors(form, error)
