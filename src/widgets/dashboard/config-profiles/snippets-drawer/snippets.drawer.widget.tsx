@@ -195,7 +195,7 @@ export const SnippetsDrawerWidget = () => {
     const handleDelete = (name: string) => {
         modals.openConfirmModal({
             title: t('common.confirm-action'),
-            children: <Text>{t('common.confirm-action-description')}</Text>,
+            children: t('common.confirm-action-description'),
             labels: {
                 confirm: t('common.delete'),
                 cancel: t('common.cancel')
