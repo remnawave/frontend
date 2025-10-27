@@ -497,7 +497,7 @@
     },
     "data-usage": {
         "column": {
-            "monthly": "月",
+            "monthly": "每月",
             "weekly": "周",
             "daily": "日"
         }
@@ -954,7 +954,7 @@
         "widget": {
             "total-upload": "总上传",
             "total-download": "总下载",
-            "average-bps": "平均 BPS",
+            "average-bps": "带宽使用平均值",
             "active-nodes": "活动节点",
             "current-hour": "当前小时"
         }
