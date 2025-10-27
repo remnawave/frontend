@@ -111,7 +111,7 @@ export const ExternalSquadsTemplatesTabWidget = (props: IProps) => {
 
         updateExternalSquad({
             variables: {
-                templates: templates.length > 0 ? templates : undefined,
+                templates,
                 uuid: externalSquad.uuid
             }
         })
