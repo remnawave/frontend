@@ -49,7 +49,10 @@
         "save-changes": "保存更改",
         "remove": "删除",
         "add": "添加",
-        "select": "选择"
+        "select": "选择",
+        "loading": "Loading",
+        "success": "Success",
+        "download": "Download"
     },
     "bandwidth-metrics": {
         "current-year": "今年",
@@ -1219,6 +1222,12 @@
     "config-profile-card": {
         "shared": {
             "active-on-nodes": "已在节点上激活"
+        },
+        "widget": {
+            "loading-computed-config-profile": "Loading computed config profile...",
+            "computed-config-profile-loaded-successfully": "Computed config profile loaded successfully",
+            "the-computed-config-profile-description": "The computed config profile shows the final configuration after all snippets have been applied.",
+            "view-computed": "View Computed"
         }
     },
     "flat-inbound-checkbox-card": {

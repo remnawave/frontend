@@ -49,7 +49,10 @@
         "save-changes": "ذخیره تغییرات",
         "remove": "حذف کردن",
         "add": "افزودن",
-        "select": "انتخاب"
+        "select": "انتخاب",
+        "loading": "Loading",
+        "success": "Success",
+        "download": "Download"
     },
     "bandwidth-metrics": {
         "current-year": "امسال",
@@ -1219,6 +1222,12 @@
     "config-profile-card": {
         "shared": {
             "active-on-nodes": "فعال روی نودها"
+        },
+        "widget": {
+            "loading-computed-config-profile": "Loading computed config profile...",
+            "computed-config-profile-loaded-successfully": "Computed config profile loaded successfully",
+            "the-computed-config-profile-description": "The computed config profile shows the final configuration after all snippets have been applied.",
+            "view-computed": "View Computed"
         }
     },
     "flat-inbound-checkbox-card": {
