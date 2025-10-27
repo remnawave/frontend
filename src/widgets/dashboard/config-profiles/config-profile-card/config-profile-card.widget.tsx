@@ -5,23 +5,27 @@ import {
     Button,
     Card,
     CopyButton,
+    Divider,
     Group,
+    Loader,
     Menu,
     Stack,
     Text,
     Tooltip
 } from '@mantine/core'
+import { TbCheck, TbChevronDown, TbCpu2, TbDownload, TbEdit, TbEye } from 'react-icons/tb'
 import { PiCheck, PiCopy, PiCpu, PiPencil, PiTag, PiTrashDuotone } from 'react-icons/pi'
-import { TbChevronDown, TbDownload, TbEdit, TbEye } from 'react-icons/tb'
 import { GetConfigProfilesCommand } from '@remnawave/backend-contract'
 import { githubDarkTheme, JsonEditor } from 'json-edit-react'
 import { generatePath, useNavigate } from 'react-router-dom'
+import { notifications } from '@mantine/notifications'
 import { useDisclosure } from '@mantine/hooks'
 import { useTranslation } from 'react-i18next'
 import { modals } from '@mantine/modals'
 import { motion } from 'framer-motion'
 import clsx from 'clsx'
 
+import { useGetComputedConfigProfile } from '@shared/api/hooks/config-profiles/config-profiles.query.hooks'
 import { MODALS, useModalsStoreOpenWithData } from '@entities/dashboard/modal-store'
 import { formatInt } from '@shared/utils/misc'
 import { XrayLogo } from '@shared/ui/logos'
@@ -56,6 +60,87 @@ export function ConfigProfileCardWidget(props: IProps) {
                 uuid: configProfile.uuid
             })
         )
+    }
+
+    const { refetch: refetchComputedConfigProfile, isLoading: isLoadingComputedConfigProfile } =
+        useGetComputedConfigProfile({
+            route: {
+                uuid: configProfile.uuid
+            }
+        })
+
+    const handleViewComputedConfigProfile = async () => {
+        notifications.show({
+            id: 'view-computed-config-profile',
+            loading: true,
+            title: t('common.loading'),
+            message: t('config-profile-card.widget.loading-computed-config-profile'),
+            autoClose: false,
+            withCloseButton: false
+        })
+
+        const computedConfigProfile = await refetchComputedConfigProfile()
+
+        if (computedConfigProfile && computedConfigProfile.data) {
+            notifications.update({
+                id: 'view-computed-config-profile',
+                loading: false,
+                title: t('common.success'),
+                message: t(
+                    'config-profile-card.widget.computed-config-profile-loaded-successfully'
+                ),
+                icon: <TbCheck size={18} />,
+                autoClose: 3000
+            })
+
+            modals.openConfirmModal({
+                children: (
+                    <>
+                        <Text size="sm">
+                            {t(
+                                'config-profile-card.widget.the-computed-config-profile-description'
+                            )}
+                        </Text>
+                        <Divider my="md" />
+                        <JsonEditor
+                            data={computedConfigProfile.data.config as object}
+                            indent={4}
+                            maxWidth="100%"
+                            rootName=""
+                            theme={githubDarkTheme}
+                            viewOnly
+                        />
+                    </>
+                ),
+                cancelProps: {
+                    variant: 'subtle',
+                    color: 'gray'
+                },
+                confirmProps: {
+                    color: 'teal'
+                },
+                labels: {
+                    confirm: t('common.download'),
+                    cancel: t('common.cancel')
+                },
+                size: 'xl',
+                title: computedConfigProfile.data.name,
+                onConfirm: () => {
+                    const jsonString = JSON.stringify(computedConfigProfile.data.config, null, 2)
+                    const blob = new Blob([jsonString], {
+                        type: 'application/json'
+                    })
+                    const url = URL.createObjectURL(blob)
+                    const a = document.createElement('a')
+                    a.href = url
+                    a.download = `${computedConfigProfile.data.name}.json`
+                    document.body.appendChild(a)
+                    a.click()
+                    document.body.removeChild(a)
+                    URL.revokeObjectURL(url)
+                }
+            })
+        }
     }
 
     return (
@@ -223,6 +308,22 @@ export function ConfigProfileCardWidget(props: IProps) {
                                     }}
                                 >
                                     {t('config-profiles-grid.widget.quick-view')}
+                                </Menu.Item>
+
+                                <Menu.Item
+                                    leftSection={
+                                        isLoadingComputedConfigProfile ? (
+                                            <Loader size={18} />
+                                        ) : (
+                                            <TbCpu2 size={18} />
+                                        )
+                                    }
+                                    onClick={(e) => {
+                                        e.stopPropagation()
+                                        handleViewComputedConfigProfile()
+                                    }}
+                                >
+                                    {t('config-profile-card.widget.view-computed')}
                                 </Menu.Item>
 
                                 <Menu.Item

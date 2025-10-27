@@ -1,4 +1,5 @@
 import {
+    GetComputedConfigProfileByUuidCommand,
     GetConfigProfileByUuidCommand,
     GetConfigProfilesCommand,
     GetInboundsByProfileUuidCommand
@@ -15,6 +16,9 @@ export const configProfilesQueryKeys = createQueryKeys('configProfiles', {
         queryKey: null
     },
     getConfigProfile: (route: GetConfigProfileByUuidCommand.Request) => ({
+        queryKey: [route]
+    }),
+    getComputedConfigProfile: (route: GetComputedConfigProfileByUuidCommand.Request) => ({
         queryKey: [route]
     }),
     getConfigProfileInbounds: (route: GetConfigProfileByUuidCommand.Request) => ({
@@ -69,6 +73,23 @@ export const useGetConfigProfileInbounds = createGetQueryHook({
     errorHandler: (error) => {
         notifications.show({
             title: `Get Config Profile Inbounds`,
+            message: error instanceof Error ? error.message : `Request failed with unknown error.`,
+            color: 'red'
+        })
+    }
+})
+
+export const useGetComputedConfigProfile = createGetQueryHook({
+    endpoint: GetComputedConfigProfileByUuidCommand.TSQ_url,
+    responseSchema: GetComputedConfigProfileByUuidCommand.ResponseSchema,
+    routeParamsSchema: GetComputedConfigProfileByUuidCommand.RequestSchema,
+    getQueryKey: ({ route }) => configProfilesQueryKeys.getComputedConfigProfile(route!).queryKey,
+    rQueryParams: {
+        enabled: false
+    },
+    errorHandler: (error) => {
+        notifications.show({
+            title: `Get Computed Config Profile`,
             message: error instanceof Error ? error.message : `Request failed with unknown error.`,
             color: 'red'
         })
