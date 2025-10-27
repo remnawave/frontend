@@ -193,9 +193,22 @@ export const SnippetsDrawerWidget = () => {
     }
 
     const handleDelete = (name: string) => {
-        deleteSnippet({
-            variables: {
-                name
+        modals.openConfirmModal({
+            title: t('common.confirm-action'),
+            children: <Text>{t('common.confirm-action-description')}</Text>,
+            labels: {
+                confirm: t('common.delete'),
+                cancel: t('common.cancel')
+            },
+            centered: true,
+            cancelProps: { variant: 'subtle', color: 'gray' },
+            confirmProps: { color: 'red' },
+            onConfirm: () => {
+                deleteSnippet({
+                    variables: {
+                        name
+                    }
+                })
             }
         })
     }
