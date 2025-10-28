@@ -50,9 +50,9 @@
         "remove": "删除",
         "add": "添加",
         "select": "选择",
-        "loading": "Loading",
-        "success": "Success",
-        "download": "Download"
+        "loading": "正在加载",
+        "success": "成功",
+        "download": "下载"
     },
     "bandwidth-metrics": {
         "current-year": "今年",
@@ -1225,9 +1225,9 @@
         },
         "widget": {
             "loading-computed-config-profile": "Loading computed config profile...",
-            "computed-config-profile-loaded-successfully": "Computed config profile loaded successfully",
-            "the-computed-config-profile-description": "The computed config profile shows the final configuration after all snippets have been applied.",
-            "view-computed": "View Computed"
+            "computed-config-profile-loaded-successfully": "已成功加载配置文件",
+            "the-computed-config-profile-description": "",
+            "view-computed": "查看视图"
         }
     },
     "flat-inbound-checkbox-card": {
