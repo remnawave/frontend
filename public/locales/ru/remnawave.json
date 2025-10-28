@@ -50,9 +50,9 @@
         "remove": "Удалить",
         "add": "Добавить",
         "select": "Выбрать",
-        "loading": "Loading",
-        "success": "Success",
-        "download": "Download"
+        "loading": "Загрузка",
+        "success": "Успешно",
+        "download": "Скачать"
     },
     "bandwidth-metrics": {
         "current-year": "Текущий год",
@@ -1224,10 +1224,10 @@
             "active-on-nodes": "Активен на ноде(ах)"
         },
         "widget": {
-            "loading-computed-config-profile": "Loading computed config profile...",
-            "computed-config-profile-loaded-successfully": "Computed config profile loaded successfully",
-            "the-computed-config-profile-description": "The computed config profile shows the final configuration after all snippets have been applied.",
-            "view-computed": "View Computed"
+            "loading-computed-config-profile": "Загрузка развернутой конфигурации...",
+            "computed-config-profile-loaded-successfully": "Развернутая конфигурация загружена успешно",
+            "the-computed-config-profile-description": "Оконечная конфигурация с развернутыми сниппетами.",
+            "view-computed": "Посмотреть в развертке"
         }
     },
     "flat-inbound-checkbox-card": {
