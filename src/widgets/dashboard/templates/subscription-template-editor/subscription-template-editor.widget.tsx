@@ -62,18 +62,15 @@ export function SubscriptionTemplateEditorWidget(props: Props) {
     }, [])
 
     return (
-        <Box>
+        <Box className={styles.container}>
             {template.templateType === SUBSCRIPTION_TEMPLATE_TYPE.XRAY_JSON && (
                 <XrayJsonTemplateDescriptionWidget />
             )}
 
             <Paper
-                mb="md"
+                className={styles.editorWrapper}
                 p={0}
                 style={{
-                    resize: 'vertical',
-                    overflow: 'hidden',
-                    height: '700px',
                     direction: 'ltr'
                 }}
                 withBorder
@@ -89,6 +86,7 @@ export function SubscriptionTemplateEditorWidget(props: Props) {
                         autoClosingQuotes: 'always',
                         autoIndent: 'full',
                         automaticLayout: true,
+                        fixedOverflowWidgets: true,
                         bracketPairColorization: {
                             enabled: true,
                             independentColorPoolPerBracketType: true
