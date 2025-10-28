@@ -207,7 +207,7 @@ export const MonacoSetupResponseRulesFeature = {
                                 properties: {
                                     responseModifications: {
                                         properties: {
-                                            overrideSubscriptionTemplateWith: {
+                                            subscriptionTemplate: {
                                                 type: 'null',
                                                 not: { type: 'string' },
                                                 markdownDescription: `⚠️ No templates available for **${responseType}** response type. This field should not be used.`
