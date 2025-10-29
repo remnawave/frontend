@@ -24,7 +24,6 @@ export function NodesBandwidthTableWidget() {
     return (
         <DataTableShared.Container>
             <DataTableShared.Title
-                description={t('table.widget.only-active-nodes')}
                 title={`${t('table.widget.today')}: ${dayjs().format('DD MMMM')}`}
             />
             <DataTableShared.Content>

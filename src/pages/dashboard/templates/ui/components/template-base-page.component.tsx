@@ -40,7 +40,6 @@ export const TemplateBasePageComponent = (props: Props) => {
                     <DataTableShared.Container mb="xl">
                         <DataTableShared.Title
                             actions={<TemplatesHeaderActionButtonsFeature templateType={type} />}
-                            description="Available templates"
                             title={title}
                         />
                     </DataTableShared.Container>

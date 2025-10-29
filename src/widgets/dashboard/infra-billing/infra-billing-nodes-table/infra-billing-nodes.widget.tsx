@@ -210,7 +210,6 @@ export function InfraBillingNodesTableWidget() {
                         </ActionIconGroup>
                     </Group>
                 }
-                description={t('infra-billing-nodes.widget.list-of-all-infra-billing-nodes')}
                 title={t('infra-billing-nodes.widget.infra-billing-nodes')}
             />
             <DataTable

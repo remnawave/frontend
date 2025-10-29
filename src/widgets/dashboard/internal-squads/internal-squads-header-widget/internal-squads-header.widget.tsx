@@ -10,7 +10,6 @@ export function InternalSquadsHeaderWidget() {
         <DataTableShared.Container mb="xl">
             <DataTableShared.Title
                 actions={<InternalSquadsHeaderActionButtonsFeature />}
-                description={t('internal-squads-header.widget.list')}
                 title={t('constants.internal-squads')}
             />
         </DataTableShared.Container>

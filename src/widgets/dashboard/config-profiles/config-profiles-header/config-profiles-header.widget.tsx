@@ -10,7 +10,6 @@ export function ConfigProfilesHeaderWidget() {
         <DataTableShared.Container mb="xl">
             <DataTableShared.Title
                 actions={<ConfigProfilesHeaderActionButtonsFeature />}
-                description={t('config-profiles-header.widget.list-of-all-config-profiles')}
                 title={t('constants.config-profiles')}
             />
         </DataTableShared.Container>

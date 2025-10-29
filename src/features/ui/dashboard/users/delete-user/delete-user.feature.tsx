@@ -47,7 +47,7 @@ export function DeleteUserFeature(props: IProps) {
         <Menu.Item
             color="red.5"
             leftSection={
-                isDeleteUserPending ? <Loader color="red" size={14} /> : <TbTrash size={14} />
+                isDeleteUserPending ? <Loader color="red" size={16} /> : <TbTrash size={16} />
             }
             onClick={openModal}
         >

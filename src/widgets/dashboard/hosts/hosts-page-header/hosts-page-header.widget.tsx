@@ -12,7 +12,6 @@ export function HostsPageHeaderWidget() {
         <DataTableShared.Container mb="xl">
             <DataTableShared.Title
                 actions={<HeaderActionButtonsFeature />}
-                description={t('hosts-page-header.widget.list-of-all-hosts')}
                 title={t('constants.hosts')}
             />
             <DataTableShared.Content>

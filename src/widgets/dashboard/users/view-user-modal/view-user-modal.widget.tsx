@@ -359,9 +359,9 @@ export const ViewUserModal = () => {
                             <Menu keepMounted={true} position="top-end" shadow="md">
                                 <Menu.Target>
                                     <Button
+                                        color="gray"
                                         leftSection={<TbDots size={px('1.2rem')} />}
                                         size="sm"
-                                        variant="outline"
                                     >
                                         {t('view-user-modal.widget.more-actions')}
                                     </Button>

@@ -2,7 +2,7 @@
     bottom: 0;
     border-top: none;
     border-bottom: none;
-    border-radius: 20px;
+    border-radius: var(--mantine-radius-default);
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.3);

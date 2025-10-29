@@ -113,7 +113,6 @@ export function InfraBillingRecordsTableWidget() {
                         </ActionIconGroup>
                     </Group>
                 }
-                description={t('infra-billing-records-table.widget.billing-records-sorted-by-date')}
                 title={t('infra-billing-records-table.widget.infra-billing-records')}
             />
             <DataTable

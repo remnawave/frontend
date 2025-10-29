@@ -194,7 +194,6 @@ export function UserTableWidget() {
                 actions={
                     <UserActionGroupFeature isLoading={isLoading} refetch={refetch} table={table} />
                 }
-                description={t('user-table.widget.list-of-all-users')}
                 title={t('user-table.widget.table-title')}
             />
 

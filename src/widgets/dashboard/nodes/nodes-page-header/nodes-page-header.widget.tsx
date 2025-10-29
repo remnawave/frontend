@@ -10,7 +10,6 @@ export function NodesPageHeaderWidget() {
         <DataTableShared.Container mb="xl">
             <DataTableShared.Title
                 actions={<NodesHeaderActionButtonsFeature />}
-                description={t('nodes-page-header.widget.list-of-all-nodes')}
                 title={t('constants.nodes')}
             />
         </DataTableShared.Container>

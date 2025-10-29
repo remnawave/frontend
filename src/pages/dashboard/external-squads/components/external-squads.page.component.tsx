@@ -36,9 +36,6 @@ export const ExternalSquadsPageComponent = (props: Props) => {
                     <DataTableShared.Container mb="xl">
                         <DataTableShared.Title
                             actions={<ExternalSquadsHeaderActionButtonsFeature />}
-                            description={t(
-                                'external-squads.page.component.list-of-all-external-squads'
-                            )}
                             title={t('constants.external-squads')}
                         />
                     </DataTableShared.Container>
