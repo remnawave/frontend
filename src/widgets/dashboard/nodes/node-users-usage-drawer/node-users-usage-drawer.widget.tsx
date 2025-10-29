@@ -274,10 +274,15 @@ export const NodeUsersUsageDrawer = memo(() => {
 
                     const date = points[0].category
 
+                    let formattedDate = date
+                    if (dayjs(date).isValid()) {
+                        formattedDate = dayjs(date).format('D MMMM')
+                    }
+
                     const totalForDay = points.reduce((sum, point) => sum + (point.y || 0), 0)
 
                     let html = `<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; font-size: 0.875rem;">
-                        <div style="font-weight: 600;">${dayjs(date).format('D MMMM')}</div>
+                        <div style="font-weight: 600;">${formattedDate}</div>
                         <div style="color: var(--mantine-color-dimmed);">Σ ${prettyBytesToAnyUtil(totalForDay)}</div>
                     </div>`
 
