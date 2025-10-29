@@ -14,12 +14,11 @@ import { useDisclosure } from '@mantine/hooks'
 import { useTranslation } from 'react-i18next'
 import { useField } from '@mantine/form'
 
-import { QueryKeys, useCreateExternalSquad, useGetExternalSquads } from '@shared/api/hooks'
 import { MODALS, useModalsStoreOpenWithData } from '@entities/dashboard/modal-store'
-import { queryClient } from '@shared/api'
+import { useCreateExternalSquad, useGetExternalSquads } from '@shared/api/hooks'
 
 export const ExternalSquadsHeaderActionButtonsFeature = () => {
-    const { isFetching } = useGetExternalSquads()
+    const { isFetching, refetch: refetchExternalSquads } = useGetExternalSquads()
     const { t } = useTranslation()
 
     const openModalWithData = useModalsStoreOpenWithData()
@@ -27,9 +26,7 @@ export const ExternalSquadsHeaderActionButtonsFeature = () => {
     const [opened, { open, close }] = useDisclosure(false)
 
     const handleUpdate = async () => {
-        await queryClient.refetchQueries({
-            queryKey: QueryKeys.externalSquads.getExternalSquads.queryKey
-        })
+        await refetchExternalSquads()
     }
 
     const nameField = useField<CreateExternalSquadCommand.Request['name']>({

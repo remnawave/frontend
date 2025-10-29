@@ -4,6 +4,7 @@ import { Grid } from '@mantine/core'
 
 import { ExternalSquadsGridWidget } from '@widgets/dashboard/external-squads/external-squads-grid/external-squads-grid.widget'
 import { ExternalSquadsHeaderActionButtonsFeature } from '@features/ui/dashboard/external-squads/header-action-buttons'
+import { ExternalSquadsDrawer } from '@widgets/dashboard/external-squads/external-squads-drawer'
 import { RenameModalShared } from '@shared/ui/modals/rename-modal.shared'
 import { DataTableShared } from '@shared/ui/table'
 import { ROUTES } from '@shared/constants'
@@ -51,6 +52,7 @@ export const ExternalSquadsPageComponent = (props: Props) => {
                     </motion.div>
                 </Grid.Col>
             </Grid>
+            <ExternalSquadsDrawer />
             <RenameModalShared key="rename-external-squad-modal" renameFrom="externalSquad" />
         </Page>
     )

@@ -16,7 +16,7 @@ import {
 import { PiCheck, PiCopy, PiListChecks, PiUsers } from 'react-icons/pi'
 import { TbFolder, TbSettings, TbWebhook } from 'react-icons/tb'
 import { useTranslation } from 'react-i18next'
-import { useState } from 'react'
+import { memo, useState } from 'react'
 
 import { MODALS, useModalClose, useModalState } from '@entities/dashboard/modal-store'
 import { useGetExternalSquad, useGetSubscriptionTemplates } from '@shared/api/hooks'
@@ -38,7 +38,7 @@ const TAB_TYPE = {
 
 type TabType = (typeof TAB_TYPE)[keyof typeof TAB_TYPE]
 
-export const ExternalSquadsDrawer = () => {
+export const ExternalSquadsDrawer = memo(() => {
     const { t } = useTranslation()
 
     const [activeTab, setActiveTab] = useState<TabType>('templates')
@@ -261,4 +261,4 @@ export const ExternalSquadsDrawer = () => {
             {isLoading && <LoaderModalShared h="80vh" text="Loading..." w="100%" />}
         </Drawer>
     )
-}
+})
