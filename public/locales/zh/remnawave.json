@@ -1752,5 +1752,13 @@
             "no-api-tokens-found": "未找到 API Tokens",
             "token-name": "API Tokens 名称"
         }
+    },
+    "external-squads-hosts": {
+        "tab": {
+            "widget": {
+                "host-overrides": "Host Overrides",
+                "override-host-settings-for-this-external-squad": "Override host settings for this external squad."
+            }
+        }
     }
 }
