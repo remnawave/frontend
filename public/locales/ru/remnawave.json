@@ -1224,10 +1224,10 @@
             "active-on-nodes": "Активен на ноде(ах)"
         },
         "widget": {
-            "loading-computed-config-profile": "Загрузка развернутой конфигурации...",
-            "computed-config-profile-loaded-successfully": "Развернутая конфигурация загружена успешно",
-            "the-computed-config-profile-description": "Оконечная конфигурация с развернутыми сниппетами.",
-            "view-computed": "Посмотреть в развертке"
+            "loading-computed-config-profile": "Загрузка вычисленного конфига...",
+            "computed-config-profile-loaded-successfully": "Конфиг. успешно загружен",
+            "the-computed-config-profile-description": "В вычисленном профиле показывается окончательная конфигурация после применения всех сниппетов.",
+            "view-computed": "Просмотр со сниппетами"
         }
     },
     "flat-inbound-checkbox-card": {
@@ -1756,8 +1756,8 @@
     "external-squads-hosts": {
         "tab": {
             "widget": {
-                "host-overrides": "Перезапись хоста",
-                "override-host-settings-for-this-external-squad": "Переопределить настройки хоста для внешнего отряда."
+                "host-overrides": "Переопределение хостов",
+                "override-host-settings-for-this-external-squad": "Переопределить настройки хостов для внешнего отряда."
             }
         }
     }
