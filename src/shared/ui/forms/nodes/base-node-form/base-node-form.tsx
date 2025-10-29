@@ -181,19 +181,23 @@ export const BaseNodeForm = <T extends CreateNodeCommand.Request | UpdateNodeCom
                     <Menu keepMounted={true} position="top-end" shadow="md">
                         <Menu.Target>
                             <Button
+                                color="gray"
                                 leftSection={<TbDots size={px('1.2rem')} />}
                                 size="sm"
-                                variant="outline"
                             >
                                 {t('base-node-form.more-actions')}
                             </Button>
                         </Menu.Target>
 
                         <Menu.Dropdown>
-                            <Menu.Label>{t('base-node-form.quick-actions')}</Menu.Label>
-                            <GetNodeUsersUsageFeature nodeUuid={node.uuid} />
-                            <GetNodeLinkedHostsFeature nodeUuid={node.uuid} />
+                            <DeleteNodeFeature handleClose={handleClose} node={node} />
+                            <Menu.Divider />
 
+                            <Menu.Label>{t('base-node-form.management')}</Menu.Label>
+                            <RestartNodeButtonFeature handleClose={handleClose} node={node} />
+                            <ToggleNodeStatusButtonFeature handleClose={handleClose} node={node} />
+                            <Menu.Divider />
+                            <Menu.Label>{t('base-node-form.quick-actions')}</Menu.Label>
                             <CopyButton value={node.uuid}>
                                 {({ copy }) => (
                                     <Menu.Item leftSection={<TbCopy size="16px" />} onClick={copy}>
@@ -201,12 +205,8 @@ export const BaseNodeForm = <T extends CreateNodeCommand.Request | UpdateNodeCom
                                     </Menu.Item>
                                 )}
                             </CopyButton>
-                            <Menu.Divider />
-                            <Menu.Label>{t('base-node-form.management')}</Menu.Label>
-                            <RestartNodeButtonFeature handleClose={handleClose} node={node} />
-                            <ToggleNodeStatusButtonFeature handleClose={handleClose} node={node} />
-                            <Menu.Divider />
-                            <DeleteNodeFeature handleClose={handleClose} node={node} />
+                            <GetNodeUsersUsageFeature nodeUuid={node.uuid} />
+                            <GetNodeLinkedHostsFeature nodeUuid={node.uuid} />
                         </Menu.Dropdown>
                     </Menu>
                 )}
