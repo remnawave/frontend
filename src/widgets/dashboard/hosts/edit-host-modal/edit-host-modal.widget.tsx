@@ -288,17 +288,18 @@ export const EditHostModalWidget = () => {
             size="lg"
             title={<Text fw={500}>{t('edit-host-modal.widget.edit-host')}</Text>}
         >
-            <BaseHostForm
-                advancedOpened={advancedOpened}
-                configProfiles={configProfiles?.configProfiles ?? []}
-                form={form}
-                handleCloneHost={handleCloneHost}
-                handleSubmit={handleSubmit}
-                host={host!}
-                isSubmitting={isUpdateHostPending}
-                nodes={nodes!}
-                setAdvancedOpened={setAdvancedOpened}
-            />
+            {host && (
+                <BaseHostForm
+                    advancedOpened={advancedOpened}
+                    configProfiles={configProfiles?.configProfiles ?? []}
+                    form={form}
+                    handleCloneHost={handleCloneHost}
+                    handleSubmit={handleSubmit}
+                    isSubmitting={isUpdateHostPending}
+                    nodes={nodes!}
+                    setAdvancedOpened={setAdvancedOpened}
+                />
+            )}
         </Drawer>
     )
 }

@@ -26,7 +26,7 @@ export const useGetExternalSquads = createGetQueryHook({
     rQueryParams: {
         placeholderData: keepPreviousData,
         refetchOnMount: true,
-        staleTime: sToMs(5)
+        staleTime: sToMs(30)
     },
 
     errorHandler: (error) => {
@@ -44,7 +44,7 @@ export const useGetExternalSquad = createGetQueryHook({
     routeParamsSchema: GetExternalSquadByUuidCommand.RequestSchema,
     getQueryKey: ({ route }) => externalSquadsQueryKeys.getExternalSquad(route!).queryKey,
     rQueryParams: {
-        refetchOnMount: true,
+        refetchOnMount: false,
         staleTime: sToMs(30)
     },
     errorHandler: (error) => {

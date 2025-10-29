@@ -1,6 +1,5 @@
 import {
     GetConfigProfilesCommand,
-    GetExternalSquadsCommand,
     GetInfraProvidersCommand,
     GetInternalSquadsCommand,
     UpdateHostCommand
@@ -39,7 +38,7 @@ export interface ModalInternalStates {
     EDIT_NODE_BY_UUID_MODAL: {
         nodeUuid: string
     }
-    EXTERNAL_SQUAD_DRAWER: GetExternalSquadsCommand.Response['response']['externalSquads'][number]
+    EXTERNAL_SQUAD_DRAWER: string
     INTERNAL_SQUAD_ACCESSIBLE_NODES_DRAWER: {
         squadUuid: string
     }

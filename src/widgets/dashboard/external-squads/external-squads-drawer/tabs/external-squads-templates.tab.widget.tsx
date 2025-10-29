@@ -9,8 +9,8 @@ import { TbDeviceFloppy } from 'react-icons/tb'
 import { useTranslation } from 'react-i18next'
 
 import { useGetSubscriptionTemplates } from '@shared/api/hooks/subscription-template/subscription-template.query.hooks'
-import { externalSquadsQueryKeys, useUpdateExternalSquad } from '@shared/api/hooks'
 import { MihomoLogo, SingboxLogo, StashLogo, XrayLogo } from '@shared/ui/logos'
+import { QueryKeys, useUpdateExternalSquad } from '@shared/api/hooks'
 import { queryClient } from '@shared/api'
 
 interface IProps {
@@ -91,10 +91,13 @@ export const ExternalSquadsTemplatesTabWidget = (props: IProps) => {
     const { mutate: updateExternalSquad, isPending: isUpdatingExternalSquad } =
         useUpdateExternalSquad({
             mutationFns: {
-                onSuccess: () => {
-                    queryClient.refetchQueries({
-                        queryKey: externalSquadsQueryKeys.getExternalSquads.queryKey
-                    })
+                onSuccess: (data) => {
+                    queryClient.setQueryData(
+                        QueryKeys.externalSquads.getExternalSquad({
+                            uuid: data.uuid
+                        }).queryKey,
+                        data
+                    )
                 }
             }
         })

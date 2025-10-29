@@ -48,7 +48,7 @@ export const ExternalSquadsHeaderActionButtonsFeature = () => {
                 nameField.reset()
                 handleUpdate()
 
-                openModalWithData(MODALS.EXTERNAL_SQUAD_DRAWER, data)
+                openModalWithData(MODALS.EXTERNAL_SQUAD_DRAWER, data.uuid)
             },
             onError: (error) => {
                 nameField.setError(error.message)

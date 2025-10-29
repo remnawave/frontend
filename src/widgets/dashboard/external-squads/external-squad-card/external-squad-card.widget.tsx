@@ -46,13 +46,20 @@ export function ExternalSquadCardWidget(props: IProps) {
     const { t } = useTranslation()
     const [opened, handlers] = useDisclosure(false)
 
+    // const { open: openModal, setInternalData } = useModalsStore()
+
     const openModalWithData = useModalsStoreOpenWithData()
 
     const { membersCount } = externalSquad.info
     const isActive = membersCount > 0
 
-    const handleOpenInbounds = () => {
-        openModalWithData(MODALS.EXTERNAL_SQUAD_DRAWER, externalSquad)
+    const handleOpenEditModal = () => {
+        // setInternalData({
+        //     internalState: externalSquad.uuid,
+        //     modalKey: MODALS.EXTERNAL_SQUAD_DRAWER
+        // })
+        // openModal(MODALS.EXTERNAL_SQUAD_DRAWER)
+        openModalWithData(MODALS.EXTERNAL_SQUAD_DRAWER, externalSquad.uuid)
     }
 
     const handleRename = () => {
@@ -94,7 +101,7 @@ export function ExternalSquadCardWidget(props: IProps) {
                                     bg={isActive ? '' : 'dark.6'}
                                     className={classes.icon}
                                     color={isActive ? 'teal' : 'gray'}
-                                    onClick={handleOpenInbounds}
+                                    onClick={handleOpenEditModal}
                                     size="xl"
                                     variant={isActive ? 'light' : 'subtle'}
                                 >
@@ -136,7 +143,7 @@ export function ExternalSquadCardWidget(props: IProps) {
                             className={classes.button}
                             fullWidth
                             leftSection={<PiTag size={16} />}
-                            onClick={handleOpenInbounds}
+                            onClick={handleOpenEditModal}
                             size="sm"
                             variant="light"
                         >
