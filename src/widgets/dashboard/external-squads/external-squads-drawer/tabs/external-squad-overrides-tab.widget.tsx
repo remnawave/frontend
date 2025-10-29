@@ -69,7 +69,7 @@ export function ExternalSquadOverridesTab<T extends Record<string, unknown>>(pro
                 setFieldOrder([...preservedOrder, ...newFields])
                 setOverrides(currentOverrides)
             } else {
-                setFieldOrder(Object.keys(config.schemaShape))
+                setFieldOrder([])
                 setOverrides({} as T)
             }
 
@@ -165,7 +165,13 @@ export function ExternalSquadOverridesTab<T extends Record<string, unknown>>(pro
                 [field]: defaultValue
             }
         })
-        setFieldOrder((prev) => [...prev, String(field)])
+        setFieldOrder((prev) => {
+            const fieldStr = String(field)
+            if (prev.includes(fieldStr)) {
+                return prev
+            }
+            return [...prev, fieldStr]
+        })
     }
 
     const handleRemoveOverride = (field: keyof T) => {
