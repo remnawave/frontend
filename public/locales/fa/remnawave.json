@@ -1752,5 +1752,13 @@
             "no-api-tokens-found": "هیچ توکن API یافت نشد",
             "token-name": "نام توکن"
         }
+    },
+    "external-squads-hosts": {
+        "tab": {
+            "widget": {
+                "host-overrides": "Host Overrides",
+                "override-host-settings-for-this-external-squad": "Override host settings for this external squad."
+            }
+        }
     }
 }
