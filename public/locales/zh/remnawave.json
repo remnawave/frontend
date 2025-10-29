@@ -1224,9 +1224,9 @@
             "active-on-nodes": "已在节点上激活"
         },
         "widget": {
-            "loading-computed-config-profile": "Loading computed config profile...",
+            "loading-computed-config-profile": "正在加载配置文件……",
             "computed-config-profile-loaded-successfully": "已成功加载配置文件",
-            "the-computed-config-profile-description": "",
+            "the-computed-config-profile-description": "显示所有代码块合并后的最终配置文件。",
             "view-computed": "查看视图"
         }
     },
@@ -1756,8 +1756,8 @@
     "external-squads-hosts": {
         "tab": {
             "widget": {
-                "host-overrides": "Host Overrides",
-                "override-host-settings-for-this-external-squad": "Override host settings for this external squad."
+                "host-overrides": "主机替换",
+                "override-host-settings-for-this-external-squad": "覆盖此外部分组的主机设置."
             }
         }
     }
