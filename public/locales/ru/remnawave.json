@@ -1763,8 +1763,8 @@
     },
     "reset-usage-user": {
         "feature": {
-            "reset": "Reset",
-            "reset-usage": "Reset usage"
+            "reset": "Сбросить",
+            "reset-usage": "Сбросить трафик"
         }
     }
 }
