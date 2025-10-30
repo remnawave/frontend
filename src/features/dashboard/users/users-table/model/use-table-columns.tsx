@@ -144,7 +144,7 @@ export const useUserTableColumns = (
 
             {
                 accessorKey: 'tag',
-                header: 'Tag',
+                header: t('use-table-columns.tag'),
                 Cell: ({ cell }) => (
                     <Text ff="monospace" fw={500} size="md">
                         {cell.row.original.tag || '–'}
@@ -157,7 +157,7 @@ export const useUserTableColumns = (
 
             {
                 accessorKey: 'activeInternalSquads',
-                header: 'Internal Squads',
+                header: t('use-table-columns.internal-squads'),
                 filterVariant: 'select',
                 enableColumnFilterModes: false,
                 enableSorting: false,
@@ -225,7 +225,7 @@ export const useUserTableColumns = (
 
             {
                 accessorKey: 'firstConnectedAt',
-                header: 'First connected at',
+                header: t('use-table-columns.first-connected-at'),
                 accessorFn: (originalRow) =>
                     originalRow.firstConnectedAt
                         ? dayjs(originalRow.firstConnectedAt).format('DD/MM/YYYY, HH:mm')
@@ -288,7 +288,7 @@ export const useUserTableColumns = (
 
             {
                 accessorKey: 'subLastOpenedAt',
-                header: 'Sub last opened at',
+                header: t('use-table-columns.sub-last-opened-at'),
                 accessorFn: (originalRow) =>
                     originalRow.subLastOpenedAt
                         ? dayjs(originalRow.subLastOpenedAt).format('DD/MM/YYYY, HH:mm')

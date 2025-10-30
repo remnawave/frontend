@@ -141,7 +141,11 @@
         "last-ua": "Last UA",
         "lifetime-used": "Lifetime Usage",
         "sub-link-revoked-at": "Sub-link revoked at",
-        "created-at": "Created at"
+        "created-at": "Created at",
+        "internal-squads": "Internal Squads",
+        "first-connected-at": "First connected at",
+        "sub-last-opened-at": "Sub last opened at",
+        "tag": "Tag"
     },
     "header-buttons": {
         "feature": {}
