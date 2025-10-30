@@ -1760,5 +1760,11 @@
                 "override-host-settings-for-this-external-squad": "Переопределить настройки хостов для внешнего отряда."
             }
         }
+    },
+    "reset-usage-user": {
+        "feature": {
+            "reset": "Reset",
+            "reset-usage": "Reset usage"
+        }
     }
 }
