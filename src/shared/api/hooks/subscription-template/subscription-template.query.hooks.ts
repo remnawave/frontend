@@ -3,11 +3,10 @@ import {
     GetSubscriptionTemplatesCommand
 } from '@remnawave/backend-contract'
 import { createQueryKeys } from '@lukemorales/query-key-factory'
-import { notifications } from '@mantine/notifications'
 
 import { sToMs } from '@shared/utils/time-utils'
 
-import { createGetQueryHook } from '../../tsq-helpers'
+import { createGetQueryHook, errorHandler } from '../../tsq-helpers'
 
 export const subscriptionTemplateQueryKeys = createQueryKeys('subscriptionTemplate', {
     getSubscriptionTemplate: (route: GetSubscriptionTemplateCommand.Request) => ({
@@ -28,13 +27,7 @@ export const useGetSubscriptionTemplate = createGetQueryHook({
         refetchOnMount: false,
         staleTime: sToMs(30)
     },
-    errorHandler: (error) => {
-        notifications.show({
-            title: 'Get Subscription Template',
-            message: error instanceof Error ? error.message : `Request failed with unknown error.`,
-            color: 'red'
-        })
-    }
+    errorHandler: (error) => errorHandler(error, 'Get Subscription Template')
 })
 
 export const useGetSubscriptionTemplates = createGetQueryHook({
@@ -45,11 +38,5 @@ export const useGetSubscriptionTemplates = createGetQueryHook({
         refetchOnMount: false,
         staleTime: sToMs(30)
     },
-    errorHandler: (error) => {
-        notifications.show({
-            title: 'Get Subscription Templates',
-            message: error instanceof Error ? error.message : `Request failed with unknown error.`,
-            color: 'red'
-        })
-    }
+    errorHandler: (error) => errorHandler(error, 'Get Subscription Templates')
 })

@@ -38,9 +38,7 @@ import { consola } from 'consola/browser'
 import { useState } from 'react'
 
 import { SubscriptionPageBuilderHeaderWidget } from '@widgets/dashboard/utils/subscription-page-builder-header'
-import { ROUTES } from '@shared/constants'
-import { PageHeader } from '@shared/ui'
-import { Page } from '@shared/ui/page'
+import { Page } from '@shared/ui'
 
 import {
     IAppConfig,
@@ -340,13 +338,6 @@ export const SubscriptionPageBuilderComponent = () => {
 
     return (
         <Page title={t('constants.subscription-page-builder')}>
-            <PageHeader
-                breadcrumbs={[
-                    { label: t('constants.dashboard'), href: ROUTES.DASHBOARD.HOME },
-                    { label: t('constants.subscription-page-builder') }
-                ]}
-                title={t('constants.subscription-page-builder')}
-            />
             <Container fluid p={0} pos="relative" size="xl">
                 <LoadingOverlay visible={loading} />
 

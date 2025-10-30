@@ -9,9 +9,7 @@ import { HwidInspectorTableWidget } from '@widgets/dashboard/hwid-inspector/hwid
 import { MobileWarningOverlay } from '@shared/ui/mobile-warning-overlay/mobile-warning-overlay'
 import { HwidInspectorMetrics } from '@widgets/dashboard/users/hwid-inspector-metrics'
 import { ViewUserModal } from '@widgets/dashboard/users/view-user-modal'
-import { PageHeader } from '@shared/ui/page-header'
-import { ROUTES } from '@shared/constants'
-import { Page } from '@shared/ui/page'
+import { Page } from '@shared/ui'
 
 export default function HwidInspectorPageComponent() {
     const { t } = useTranslation()
@@ -19,14 +17,6 @@ export default function HwidInspectorPageComponent() {
 
     return (
         <Page title={t('constants.hwid-inspector')}>
-            <PageHeader
-                breadcrumbs={[
-                    { label: t('constants.dashboard'), href: ROUTES.DASHBOARD.HOME },
-                    { label: t('constants.hwid-inspector') }
-                ]}
-                title={t('constants.hwid-inspector')}
-            />
-
             <Stack>
                 {isMobile && <MobileWarningOverlay />}
                 <HwidInspectorMetrics />

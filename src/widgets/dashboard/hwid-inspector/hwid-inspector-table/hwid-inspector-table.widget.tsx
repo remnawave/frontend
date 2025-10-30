@@ -10,10 +10,10 @@ import {
     MRT_VisibilityState,
     useMantineReactTable
 } from 'mantine-react-table'
+import { TbDeviceAnalytics, TbRefresh, TbRestore } from 'react-icons/tb'
 import { GetAllHwidDevicesCommand } from '@remnawave/backend-contract'
 import { ActionIcon, ActionIconGroup, Tooltip } from '@mantine/core'
 import { useCallback, useMemo, useState } from 'react'
-import { TbRefresh, TbRestore } from 'react-icons/tb'
 import { useTranslation } from 'react-i18next'
 import { PiUserCircle } from 'react-icons/pi'
 
@@ -163,10 +163,10 @@ export function HwidInspectorTableWidget() {
                             <ActionIcon
                                 loading={isLoading}
                                 onClick={() => refetch()}
-                                size="lg"
+                                size="input-md"
                                 variant="light"
                             >
-                                <TbRefresh size="18px" />
+                                <TbRefresh size="24px" />
                             </ActionIcon>
                         </Tooltip>
 
@@ -181,14 +181,15 @@ export function HwidInspectorTableWidget() {
                                     table.resetColumnFilters(true)
                                     table.resetGlobalFilter(true)
                                 }}
-                                size="lg"
+                                size="input-md"
                                 variant="light"
                             >
-                                <TbRestore size="18px" />
+                                <TbRestore size="24px" />
                             </ActionIcon>
                         </Tooltip>
                     </ActionIconGroup>
                 }
+                icon={<TbDeviceAnalytics size={24} />}
                 title={t('hwid-inspector-table.widget.hwid-devices-list')}
             />
 

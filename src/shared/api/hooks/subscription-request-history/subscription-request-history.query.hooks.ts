@@ -4,10 +4,10 @@ import {
 } from '@remnawave/backend-contract'
 import { createQueryKeys } from '@lukemorales/query-key-factory'
 import { keepPreviousData } from '@tanstack/react-query'
-import { notifications } from '@mantine/notifications'
 
-import { createGetQueryHook } from '@shared/api/tsq-helpers'
 import { sToMs } from '@shared/utils/time-utils'
+
+import { createGetQueryHook, errorHandler } from '../../tsq-helpers'
 
 export const subscriptionRequestHistoryQueryKeys = createQueryKeys('subscriptionRequestHistory', {
     getSubscriptionRequestHistory: (
@@ -35,13 +35,7 @@ export const useGetSubscriptionRequestHistory = createGetQueryHook({
         placeholderData: keepPreviousData,
         refetchOnMount: true
     },
-    errorHandler: (error) => {
-        notifications.show({
-            title: `Get Subscription Request History`,
-            message: error instanceof Error ? error.message : `Request failed with unknown error.`,
-            color: 'red'
-        })
-    }
+    errorHandler: (error) => errorHandler(error, 'Get Subscription Request History')
 })
 
 export const useGetSubscriptionRequestHistoryStats = createGetQueryHook({
@@ -54,11 +48,5 @@ export const useGetSubscriptionRequestHistoryStats = createGetQueryHook({
         staleTime: STALE_TIME,
         refetchInterval: REFETCH_INTERVAL
     },
-    errorHandler: (error) => {
-        notifications.show({
-            title: `Get Subscription Request History Stats`,
-            message: error instanceof Error ? error.message : `Request failed with unknown error.`,
-            color: 'red'
-        })
-    }
+    errorHandler: (error) => errorHandler(error, 'Get Subscription Request History Stats')
 })

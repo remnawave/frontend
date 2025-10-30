@@ -10,8 +10,8 @@ import {
     MRT_VisibilityState,
     useMantineReactTable
 } from 'mantine-react-table'
+import { TbExternalLink, TbRefresh, TbReportAnalytics, TbRestore } from 'react-icons/tb'
 import { GetSubscriptionRequestHistoryCommand } from '@remnawave/backend-contract'
-import { TbExternalLink, TbRefresh, TbRestore } from 'react-icons/tb'
 import { ActionIcon, ActionIconGroup, Tooltip } from '@mantine/core'
 import { useCallback, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -180,10 +180,10 @@ export function SrhInspectorTableWidget() {
                             <ActionIcon
                                 loading={isLoading}
                                 onClick={() => refetch()}
-                                size="lg"
+                                size="input-md"
                                 variant="light"
                             >
-                                <TbRefresh size="18px" />
+                                <TbRefresh size="24px" />
                             </ActionIcon>
                         </Tooltip>
 
@@ -198,14 +198,15 @@ export function SrhInspectorTableWidget() {
                                     table.resetColumnFilters(true)
                                     table.resetGlobalFilter(true)
                                 }}
-                                size="lg"
+                                size="input-md"
                                 variant="light"
                             >
-                                <TbRestore size="18px" />
+                                <TbRestore size="24px" />
                             </ActionIcon>
                         </Tooltip>
                     </ActionIconGroup>
                 }
+                icon={<TbReportAnalytics size={24} />}
                 title={t('srh-inspector-table.widget.subscription-request-history')}
             />
 

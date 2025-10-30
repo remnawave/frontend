@@ -39,72 +39,86 @@ export const useMenuSections = (): MenuItem[] => {
     const menuSections: MenuItem[] = [
         {
             header: t('constants.overview'),
+            id: 'overview',
             section: [
                 {
                     name: t('constants.home'),
                     href: ROUTES.DASHBOARD.HOME,
-                    icon: PiStarDuotone
+                    icon: PiStarDuotone,
+                    id: 'home'
                 }
             ]
         },
         {
             header: t('constants.management'),
+            id: 'management',
             section: [
                 {
                     name: t('constants.users'),
                     href: ROUTES.DASHBOARD.MANAGEMENT.USERS,
-                    icon: PiUsersDuotone
+                    icon: PiUsersDuotone,
+                    id: 'users'
                 },
                 {
                     name: t('constants.internal-squads'),
                     href: ROUTES.DASHBOARD.MANAGEMENT.INTERNAL_SQUADS,
-                    icon: TbCirclesRelation
+                    icon: TbCirclesRelation,
+                    id: 'internal-squads'
                 },
                 {
                     name: t('constants.external-squads'),
                     href: ROUTES.DASHBOARD.MANAGEMENT.EXTERNAL_SQUADS,
-                    icon: TbWebhook
+                    icon: TbWebhook,
+                    id: 'external-squads'
                 },
                 {
                     name: t('constants.config-profiles'),
                     href: ROUTES.DASHBOARD.MANAGEMENT.CONFIG_PROFILES,
-                    icon: XrayLogo
+                    icon: XrayLogo,
+                    id: 'config-profiles'
                 },
                 {
                     name: t('constants.hosts'),
                     href: ROUTES.DASHBOARD.MANAGEMENT.HOSTS,
-                    icon: PiListChecks
+                    icon: PiListChecks,
+                    id: 'hosts'
                 },
                 {
                     name: t('constants.nodes'),
                     href: ROUTES.DASHBOARD.MANAGEMENT.NODES,
                     icon: PiCpu,
+                    id: 'nodes',
                     dropdownItems: [
                         {
                             name: t('constants.management'),
                             href: ROUTES.DASHBOARD.MANAGEMENT.NODES,
-                            icon: HiServer
+                            icon: HiServer,
+                            id: 'management'
                         },
 
                         {
                             name: t('constants.nodes-statistics'),
                             href: ROUTES.DASHBOARD.MANAGEMENT.NODES_STATS,
-                            icon: HiChartPie
+                            icon: HiChartPie,
+                            id: 'nodes-statistics'
                         },
                         {
                             name: t('constants.infra-billing'),
                             href: ROUTES.DASHBOARD.CRM.INFRA_BILLING,
-                            icon: HiCurrencyDollar
+                            icon: HiCurrencyDollar,
+                            id: 'infra-billing'
                         },
                         {
                             name: t('constants.nodes-bandwidth-table'),
                             href: ROUTES.DASHBOARD.MANAGEMENT.NODES_BANDWIDTH_TABLE,
-                            icon: TbChartArcs
+                            icon: TbChartArcs,
+                            id: 'nodes-bandwidth-table'
                         },
                         {
                             name: t('constants.nodes-metrics'),
                             href: ROUTES.DASHBOARD.MANAGEMENT.NODES_METRICS,
-                            icon: PiChartLine
+                            icon: PiChartLine,
+                            id: 'nodes-metrics'
                         }
                     ]
                 },
@@ -112,37 +126,26 @@ export const useMenuSections = (): MenuItem[] => {
                 {
                     name: t('constants.remnawave-settings'),
                     href: ROUTES.DASHBOARD.MANAGEMENT.REMNAWAVE_SETTINGS,
-                    icon: Logo
-                }
-            ]
-        },
-        {
-            header: t('constants.tools'),
-            section: [
-                {
-                    name: t('constants.hwid-inspector'),
-                    href: ROUTES.DASHBOARD.TOOLS.HWID_INSPECTOR,
-                    icon: TbDeviceAnalytics
-                },
-                {
-                    name: t('constants.srh-inspector'),
-                    href: ROUTES.DASHBOARD.TOOLS.SRH_INSPECTOR,
-                    icon: TbReportAnalytics
+                    icon: Logo,
+                    id: 'remnawave-settings'
                 }
             ]
         },
         {
             header: t('constants.subscription'),
+            id: 'subscription',
             section: [
                 {
                     name: t('constants.subscription-settings'),
                     href: ROUTES.DASHBOARD.MANAGEMENT.SUBSCRIPTION_SETTINGS,
-                    icon: PiBarcodeDuotone
+                    icon: PiBarcodeDuotone,
+                    id: 'subscription-settings'
                 },
                 {
                     name: t('constants.templates'),
                     href: ROUTES.DASHBOARD.TEMPLATES.ROOT,
                     icon: TbFolder,
+                    id: 'templates',
                     dropdownItems: [
                         {
                             name: 'Xray JSON',
@@ -150,7 +153,8 @@ export const useMenuSections = (): MenuItem[] => {
                                 ':type',
                                 SUBSCRIPTION_TEMPLATE_TYPE.XRAY_JSON
                             ),
-                            icon: XrayLogo
+                            icon: XrayLogo,
+                            id: 'xray-json'
                         },
                         {
                             name: 'Mihomo',
@@ -158,7 +162,8 @@ export const useMenuSections = (): MenuItem[] => {
                                 ':type',
                                 SUBSCRIPTION_TEMPLATE_TYPE.MIHOMO
                             ),
-                            icon: MihomoLogo
+                            icon: MihomoLogo,
+                            id: 'mihomo'
                         },
                         {
                             name: 'Stash',
@@ -166,7 +171,8 @@ export const useMenuSections = (): MenuItem[] => {
                                 ':type',
                                 SUBSCRIPTION_TEMPLATE_TYPE.STASH
                             ),
-                            icon: StashLogo
+                            icon: StashLogo,
+                            id: 'stash'
                         },
                         {
                             name: 'Singbox',
@@ -174,7 +180,8 @@ export const useMenuSections = (): MenuItem[] => {
                                 ':type',
                                 SUBSCRIPTION_TEMPLATE_TYPE.SINGBOX
                             ),
-                            icon: SingboxLogo
+                            icon: SingboxLogo,
+                            id: 'singbox'
                         },
                         {
                             name: 'Clash',
@@ -182,29 +189,52 @@ export const useMenuSections = (): MenuItem[] => {
                                 ':type',
                                 SUBSCRIPTION_TEMPLATE_TYPE.CLASH
                             ),
-                            icon: MihomoLogo
+                            icon: MihomoLogo,
+                            id: 'clash'
                         }
                     ]
                 },
                 {
                     name: t('constants.response-rules'),
                     href: ROUTES.DASHBOARD.MANAGEMENT.RESPONSE_RULES,
-                    icon: TbRoute
+                    icon: TbRoute,
+                    id: 'response-rules'
+                }
+            ]
+        },
+        {
+            header: t('constants.tools'),
+            id: 'tools',
+            section: [
+                {
+                    name: t('constants.hwid-inspector'),
+                    href: ROUTES.DASHBOARD.TOOLS.HWID_INSPECTOR,
+                    icon: TbDeviceAnalytics,
+                    id: 'hwid-inspector'
+                },
+                {
+                    name: t('constants.srh-inspector'),
+                    href: ROUTES.DASHBOARD.TOOLS.SRH_INSPECTOR,
+                    icon: TbReportAnalytics,
+                    id: 'srh-inspector'
                 }
             ]
         },
         {
             header: t('constants.utils'),
+            id: 'utils',
             section: [
                 {
                     name: t('constants.happ-routing-builder'),
                     href: ROUTES.DASHBOARD.UTILS.HAPP_ROUTING_BUILDER,
-                    icon: HappLogo
+                    icon: HappLogo,
+                    id: 'happ-routing-builder'
                 },
                 {
                     name: 'Subscription Page',
                     href: ROUTES.DASHBOARD.UTILS.SUBSCRIPTION_PAGE_BUILDER,
-                    icon: PiArrowsInCardinalFill
+                    icon: PiArrowsInCardinalFill,
+                    id: 'subscription-page-builder'
                 }
             ]
         }
@@ -213,11 +243,13 @@ export const useMenuSections = (): MenuItem[] => {
     if (showDevMenu) {
         menuSections.unshift({
             header: 'Dev Menu',
+            id: 'dev-menu',
             section: [
                 {
                     name: 'Queues Viewer',
                     href: '/api/queues',
                     icon: PiAirTrafficControlDuotone,
+                    id: 'queues-viewer',
                     newTab: true
                 }
             ]

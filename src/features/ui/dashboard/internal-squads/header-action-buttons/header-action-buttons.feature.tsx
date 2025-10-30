@@ -66,10 +66,10 @@ export const InternalSquadsHeaderActionButtonsFeature = () => {
                     <ActionIcon
                         loading={isFetching}
                         onClick={handleUpdate}
-                        size="lg"
+                        size="input-md"
                         variant="light"
                     >
-                        <TbRefresh size="18px" />
+                        <TbRefresh size="24px" />
                     </ActionIcon>
                 </Tooltip>
             </ActionIconGroup>
@@ -79,8 +79,8 @@ export const InternalSquadsHeaderActionButtonsFeature = () => {
                     label={t('internal-squad-header-action-buttons.feature.create-internal-squad')}
                     withArrow
                 >
-                    <ActionIcon color="teal" onClick={open} size="lg" variant="light">
-                        <TbPlus size="18px" />
+                    <ActionIcon color="teal" onClick={open} size="input-md" variant="light">
+                        <TbPlus size="24px" />
                     </ActionIcon>
                 </Tooltip>
             </ActionIconGroup>

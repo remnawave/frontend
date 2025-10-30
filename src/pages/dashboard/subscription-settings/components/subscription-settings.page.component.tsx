@@ -1,10 +1,9 @@
+import { PiBarcodeDuotone } from 'react-icons/pi'
 import { useTranslation } from 'react-i18next'
 import { Container } from '@mantine/core'
 
 import { SubscriptionSettingsTabsWidget } from '@widgets/dashboard/subscription-settings/settings/subscription-tabs.widget'
-import { LoadingScreen, PageHeader } from '@shared/ui'
-import { ROUTES } from '@shared/constants'
-import { Page } from '@shared/ui/page'
+import { LoadingScreen, Page, PageHeaderShared } from '@shared/ui'
 
 import { IProps } from './interfaces'
 
@@ -19,12 +18,8 @@ export const SubscriptionSettingsPageComponent = (props: IProps) => {
 
     return (
         <Page title={t('constants.subscription-settings')}>
-            <PageHeader
-                breadcrumbs={[
-                    { label: t('constants.dashboard'), href: ROUTES.DASHBOARD.HOME },
-                    { label: t('constants.subscription') },
-                    { label: t('constants.subscription-settings') }
-                ]}
+            <PageHeaderShared
+                icon={<PiBarcodeDuotone size={24} />}
                 title={t('constants.subscription-settings')}
             />
 

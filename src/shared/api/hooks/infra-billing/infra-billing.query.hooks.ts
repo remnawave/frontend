@@ -6,11 +6,10 @@ import {
 } from '@remnawave/backend-contract'
 import { createQueryKeys } from '@lukemorales/query-key-factory'
 import { keepPreviousData } from '@tanstack/react-query'
-import { notifications } from '@mantine/notifications'
 
 import { sToMs } from '@shared/utils/time-utils'
 
-import { createGetQueryHook } from '../../tsq-helpers'
+import { createGetQueryHook, errorHandler } from '../../tsq-helpers'
 
 export const infraBillingQueryKeys = createQueryKeys('infraBilling', {
     getInfraProviders: {
@@ -37,13 +36,7 @@ export const useGetInfraProviders = createGetQueryHook({
         refetchOnMount: true,
         staleTime: sToMs(30)
     },
-    errorHandler: (error) => {
-        notifications.show({
-            title: `Get All Infra Providers`,
-            message: error instanceof Error ? error.message : `Request failed with unknown error.`,
-            color: 'red'
-        })
-    }
+    errorHandler: (error) => errorHandler(error, 'Get All Infra Providers')
 })
 
 export const useGetInfraProvider = createGetQueryHook({
@@ -56,13 +49,7 @@ export const useGetInfraProvider = createGetQueryHook({
         staleTime: sToMs(30),
         placeholderData: keepPreviousData
     },
-    errorHandler: (error) => {
-        notifications.show({
-            title: `Get Infra Provider`,
-            message: error instanceof Error ? error.message : `Request failed with unknown error.`,
-            color: 'red'
-        })
-    }
+    errorHandler: (error) => errorHandler(error, 'Get Infra Provider')
 })
 
 export const useGetInfraBillingHistoryRecords = createGetQueryHook({
@@ -77,13 +64,7 @@ export const useGetInfraBillingHistoryRecords = createGetQueryHook({
         placeholderData: keepPreviousData,
         refetchOnMount: true
     },
-    errorHandler: (error) => {
-        notifications.show({
-            title: `Get Infra Billing History Records`,
-            message: error instanceof Error ? error.message : `Request failed with unknown error.`,
-            color: 'red'
-        })
-    }
+    errorHandler: (error) => errorHandler(error, 'Get Infra Billing History Records')
 })
 
 export const useGetInfraBillingNodes = createGetQueryHook({
@@ -95,11 +76,5 @@ export const useGetInfraBillingNodes = createGetQueryHook({
         staleTime: sToMs(30),
         placeholderData: keepPreviousData
     },
-    errorHandler: (error) => {
-        notifications.show({
-            title: `Get All Infra Billing Nodes`,
-            message: error instanceof Error ? error.message : `Request failed with unknown error.`,
-            color: 'red'
-        })
-    }
+    errorHandler: (error) => errorHandler(error, 'Get All Infra Billing Nodes')
 })

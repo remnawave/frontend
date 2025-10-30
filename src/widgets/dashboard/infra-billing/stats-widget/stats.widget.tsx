@@ -50,7 +50,7 @@ export function StatsWidget() {
     ]
 
     return (
-        <Grid mb="xl">
+        <Grid mb="md">
             {stats.map((stat, index) => (
                 <Grid.Col key={index} span={{ base: 12, xs: 6, md: 6, sm: 6, lg: 3 }}>
                     <StatCardWidget

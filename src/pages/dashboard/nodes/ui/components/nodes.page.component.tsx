@@ -1,16 +1,16 @@
 import { useTranslation } from 'react-i18next'
 import { Grid, Stack } from '@mantine/core'
+import { HiServer } from 'react-icons/hi'
 import { motion } from 'motion/react'
 
 import { LinkedHostsDrawer } from '@widgets/dashboard/nodes/linked-hosts-drawer/linked-hosts-drawer.widget'
+import { NodesHeaderActionButtonsFeature } from '@features/ui/dashboard/nodes/nodes-header-action-buttons'
 import { NodesRealtimeUsageMetrics } from '@widgets/dashboard/nodes/nodes-realtime-metrics'
 import { EditNodeModalConnectorWidget } from '@widgets/dashboard/nodes/edit-node-modal'
 import { NodeUsersUsageDrawer } from '@widgets/dashboard/nodes/node-users-usage-drawer'
 import { CreateNodeModalWidget } from '@widgets/dashboard/nodes/create-node-modal'
-import { NodesPageHeaderWidget } from '@widgets/dashboard/nodes/nodes-page-header'
 import { NodesTableWidget } from '@widgets/dashboard/nodes/nodes-table'
-import { LoadingScreen, Page, PageHeader } from '@shared/ui'
-import { ROUTES } from '@shared/constants'
+import { LoadingScreen, Page, PageHeaderShared } from '@shared/ui'
 
 import { IProps } from './interfaces'
 
@@ -21,20 +21,15 @@ export default function NodesPageComponent(props: IProps) {
 
     return (
         <Page title={t('constants.nodes')}>
-            <PageHeader
-                breadcrumbs={[
-                    { label: t('constants.dashboard'), href: ROUTES.DASHBOARD.HOME },
-
-                    { label: t('constants.nodes') }
-                ]}
-                title={t('constants.nodes')}
-            />
-
             <Grid>
                 <Grid.Col span={12}>
                     <Stack>
                         <NodesRealtimeUsageMetrics />
-                        <NodesPageHeaderWidget />
+                        <PageHeaderShared
+                            actions={<NodesHeaderActionButtonsFeature />}
+                            icon={<HiServer size={24} />}
+                            title={t('constants.nodes')}
+                        />
                     </Stack>
 
                     {isLoading ? (

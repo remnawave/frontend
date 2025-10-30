@@ -2,12 +2,12 @@ import { GetConfigProfileByUuidCommand, GetSnippetsCommand } from '@remnawave/ba
 import { Box, Drawer, Flex, Transition } from '@mantine/core'
 import { useMediaQuery } from '@mantine/hooks'
 import { useTranslation } from 'react-i18next'
+import { TbFile } from 'react-icons/tb'
 
 import { ConfigEditorWidget } from '@widgets/dashboard/config-profiles/config-editor/config-editor.widget'
 import { SnippetsDrawerWidget } from '@widgets/dashboard/config-profiles/snippets-drawer'
 import { MODALS, useModalClose, useModalIsOpen } from '@entities/dashboard/modal-store'
-import { ROUTES } from '@shared/constants'
-import { PageHeader } from '@shared/ui'
+import { PageHeaderShared } from '@shared/ui/page-header/page-header.shared'
 import { Page } from '@shared/ui/page'
 
 interface Props {
@@ -27,16 +27,9 @@ export const ConfigProfileByUuidPageComponent = (props: Props) => {
     return (
         <>
             <Page title={t('constants.config-profiles')}>
-                <PageHeader
-                    breadcrumbs={[
-                        { label: t('constants.dashboard'), href: ROUTES.DASHBOARD.HOME },
-
-                        {
-                            label: t('constants.config-profiles'),
-                            href: ROUTES.DASHBOARD.MANAGEMENT.CONFIG_PROFILES
-                        },
-                        { label: configProfile.name }
-                    ]}
+                <PageHeaderShared
+                    description={configProfile.uuid}
+                    icon={<TbFile size={24} />}
                     title={configProfile.name}
                 />
 

@@ -4,11 +4,10 @@ import {
 } from '@remnawave/backend-contract'
 import { createQueryKeys } from '@lukemorales/query-key-factory'
 import { keepPreviousData } from '@tanstack/react-query'
-import { notifications } from '@mantine/notifications'
 
 import { sToMs } from '@shared/utils/time-utils'
 
-import { createGetQueryHook } from '../../tsq-helpers'
+import { createGetQueryHook, errorHandler } from '../../tsq-helpers'
 
 export const authQueryKeys = createQueryKeys('auth', {
     getAuthStatus: {
@@ -28,13 +27,7 @@ export const useGetAuthStatus = createGetQueryHook({
         placeholderData: keepPreviousData,
         staleTime: sToMs(500)
     },
-    errorHandler: (error) => {
-        notifications.show({
-            title: 'Authentication Error',
-            message: error instanceof Error ? error.message : `Request failed with unknown error.`,
-            color: 'red'
-        })
-    }
+    errorHandler: (error) => errorHandler(error, 'Authentication Error')
 })
 
 export const usePasskeyAuthenticationOptions = createGetQueryHook({
@@ -44,11 +37,5 @@ export const usePasskeyAuthenticationOptions = createGetQueryHook({
     rQueryParams: {
         enabled: false
     },
-    errorHandler: (error) => {
-        notifications.show({
-            title: 'Authentication Error',
-            message: error instanceof Error ? error.message : `Request failed with unknown error.`,
-            color: 'red'
-        })
-    }
+    errorHandler: (error) => errorHandler(error, 'Authentication Error')
 })

@@ -18,7 +18,7 @@ export const Navigation = ({ isMobile, onClose }: NavigationProps) => {
     return (
         <Stack gap="md" pb="md" pt="md">
             {menu.map((item, index) => (
-                <Box key={item.header}>
+                <Box key={item.id}>
                     {index > 0 && <Divider color="cyan.4" mb="lg" opacity={0.3} variant="dashed" />}
                     <Title className={classes.sectionTitle} order={6}>
                         {item.header}
@@ -31,7 +31,7 @@ export const Navigation = ({ isMobile, onClose }: NavigationProps) => {
                                     active={false}
                                     childrenOffset={0}
                                     className={classes.sectionLink}
-                                    key={subItem.name}
+                                    key={subItem.id}
                                     label={subItem.name}
                                     leftSection={subItem.icon && <subItem.icon />}
                                     variant="light"
@@ -41,7 +41,7 @@ export const Navigation = ({ isMobile, onClose }: NavigationProps) => {
                                             active={pathname.includes(dropdownItem.href)}
                                             className={classes.sectionDropdownItemLink}
                                             component={RouterLink}
-                                            key={dropdownItem.name}
+                                            key={dropdownItem.id}
                                             label={dropdownItem.name}
                                             leftSection={
                                                 dropdownItem.icon ? (
@@ -61,7 +61,7 @@ export const Navigation = ({ isMobile, onClose }: NavigationProps) => {
                                     active={pathname === subItem.href}
                                     className={classes.sectionLink}
                                     component={RouterLink}
-                                    key={subItem.name}
+                                    key={subItem.id}
                                     label={subItem.name}
                                     leftSection={subItem.icon && <subItem.icon />}
                                     onClick={isMobile ? onClose : undefined}

@@ -8,11 +8,10 @@ import {
 } from '@remnawave/backend-contract'
 import { createQueryKeys } from '@lukemorales/query-key-factory'
 import { keepPreviousData } from '@tanstack/react-query'
-import { notifications } from '@mantine/notifications'
 
 import { sToMs } from '@shared/utils/time-utils'
 
-import { createGetQueryHook } from '../../tsq-helpers'
+import { createGetQueryHook, errorHandler } from '../../tsq-helpers'
 
 export const nodesQueryKeys = createQueryKeys('nodes', {
     getAllNodes: {
@@ -45,13 +44,7 @@ export const useGetNodes = createGetQueryHook({
         refetchOnMount: true,
         staleTime: sToMs(5)
     },
-    errorHandler: (error) => {
-        notifications.show({
-            title: `Get All Nodes`,
-            message: error instanceof Error ? error.message : `Request failed with unknown error.`,
-            color: 'red'
-        })
-    }
+    errorHandler: (error) => errorHandler(error, 'Get All Nodes')
 })
 
 export const useGetNode = createGetQueryHook({
@@ -64,13 +57,7 @@ export const useGetNode = createGetQueryHook({
         staleTime: sToMs(5),
         refetchInterval: sToMs(5)
     },
-    errorHandler: (error) => {
-        notifications.show({
-            title: `Get Node`,
-            message: error instanceof Error ? error.message : `Request failed with unknown error.`,
-            color: 'red'
-        })
-    }
+    errorHandler: (error) => errorHandler(error, 'Get Node')
 })
 export const useGetPubKey = createGetQueryHook({
     endpoint: GetPubKeyCommand.TSQ_url,
@@ -83,13 +70,7 @@ export const useGetPubKey = createGetQueryHook({
         refetchInterval: sToMs(5)
     },
 
-    errorHandler: (error) => {
-        notifications.show({
-            title: `Get PubKey`,
-            message: error instanceof Error ? error.message : `Request failed with unknown error.`,
-            color: 'red'
-        })
-    }
+    errorHandler: (error) => errorHandler(error, 'Get PubKey')
 })
 
 export const useGetNodesUsageByRangeCommand = createGetQueryHook({
@@ -100,13 +81,7 @@ export const useGetNodesUsageByRangeCommand = createGetQueryHook({
     rQueryParams: {
         staleTime: sToMs(5)
     },
-    errorHandler: (error) => {
-        notifications.show({
-            title: `Get Nodes Usage By Range`,
-            message: error instanceof Error ? error.message : `Request failed with unknown error.`,
-            color: 'red'
-        })
-    }
+    errorHandler: (error) => errorHandler(error, 'Get Nodes Usage By Range')
 })
 
 export const useGetNodeUsersUsageByRange = createGetQueryHook({
@@ -119,13 +94,7 @@ export const useGetNodeUsersUsageByRange = createGetQueryHook({
     rQueryParams: {
         staleTime: sToMs(60)
     },
-    errorHandler: (error) => {
-        notifications.show({
-            title: `Get Node Users Usage By Range`,
-            message: error instanceof Error ? error.message : `Request failed with unknown error.`,
-            color: 'red'
-        })
-    }
+    errorHandler: (error) => errorHandler(error, 'Get Node Users Usage By Range')
 })
 
 export const useGetNodesRealtimeUsage = createGetQueryHook({
@@ -136,11 +105,5 @@ export const useGetNodesRealtimeUsage = createGetQueryHook({
         staleTime: sToMs(5),
         refetchInterval: sToMs(5)
     },
-    errorHandler: (error) => {
-        notifications.show({
-            title: `Get Nodes Realtime Usage`,
-            message: error instanceof Error ? error.message : `Request failed with unknown error.`,
-            color: 'red'
-        })
-    }
+    errorHandler: (error) => errorHandler(error, 'Get Nodes Realtime Usage')
 })

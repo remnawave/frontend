@@ -1,17 +1,14 @@
-/* eslint-disable @stylistic/indent */
-
 import { useTranslation } from 'react-i18next'
+import { PiListChecks } from 'react-icons/pi'
 import { motion } from 'motion/react'
-import { Grid } from '@mantine/core'
 import { useState } from 'react'
 
 import { MultiSelectHostsFeature } from '@features/dashboard/hosts/multi-select-hosts/multi-select-hosts.feature'
+import { HeaderActionButtonsFeature } from '@features/ui/dashboard/hosts/header-action-buttons'
 import { CreateHostModalWidget } from '@widgets/dashboard/hosts/create-host-modal'
-import { HostsPageHeaderWidget } from '@widgets/dashboard/hosts/hosts-page-header'
 import { EditHostModalWidget } from '@widgets/dashboard/hosts/edit-host-modal'
 import { HostsTableWidget } from '@widgets/dashboard/hosts/hosts-table'
-import { LoadingScreen, Page, PageHeader } from '@shared/ui'
-import { ROUTES } from '@shared/constants'
+import { LoadingScreen, Page, PageHeaderShared } from '@shared/ui'
 
 import { IProps } from './interfaces'
 
@@ -30,41 +27,29 @@ export default function HostsPageComponent(props: IProps) {
 
     return (
         <Page title={t('constants.hosts')}>
-            <PageHeader
-                breadcrumbs={[
-                    { label: t('constants.dashboard'), href: ROUTES.DASHBOARD.HOME },
-
-                    { label: t('constants.hosts') }
-                ]}
+            <PageHeaderShared
+                actions={<HeaderActionButtonsFeature />}
+                icon={<PiListChecks size={24} />}
                 title={t('constants.hosts')}
             />
 
-            <Grid>
-                <Grid.Col span={12}>
-                    <HostsPageHeaderWidget />
-
-                    {isHostsLoading ||
-                    isConfigProfilesLoading ||
-                    isHostTagsLoading ||
-                    isNodesLoading ? (
-                        <LoadingScreen height="60vh" />
-                    ) : (
-                        <motion.div
-                            animate={{ opacity: 1 }}
-                            initial={{ opacity: 0 }}
-                            transition={{ duration: 0.5 }}
-                        >
-                            <HostsTableWidget
-                                configProfiles={configProfiles}
-                                hosts={hosts}
-                                hostTags={hostTags}
-                                selectedHosts={selectedHosts}
-                                setSelectedHosts={setSelectedHosts}
-                            />
-                        </motion.div>
-                    )}
-                </Grid.Col>
-            </Grid>
+            {isHostsLoading || isConfigProfilesLoading || isHostTagsLoading || isNodesLoading ? (
+                <LoadingScreen height="60vh" />
+            ) : (
+                <motion.div
+                    animate={{ opacity: 1 }}
+                    initial={{ opacity: 0 }}
+                    transition={{ duration: 0.5 }}
+                >
+                    <HostsTableWidget
+                        configProfiles={configProfiles}
+                        hosts={hosts}
+                        hostTags={hostTags}
+                        selectedHosts={selectedHosts}
+                        setSelectedHosts={setSelectedHosts}
+                    />
+                </motion.div>
+            )}
 
             <EditHostModalWidget key="edit-host-modal" />
             <CreateHostModalWidget key="create-host-modal" />

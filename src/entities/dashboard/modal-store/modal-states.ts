@@ -5,6 +5,8 @@ import {
     UpdateHostCommand
 } from '@remnawave/backend-contract'
 
+import { THelpDrawerAvailableScreen } from '@shared/ui/help-drawer'
+
 export const MODALS = {
     CONFIG_PROFILES_SHOW_ACTIVE_NODE: 'CONFIG_PROFILES_SHOW_ACTIVE_NODE',
     INTERNAL_SQUAD_SHOW_INBOUNDS: 'INTERNAL_SQUAD_SHOW_INBOUNDS',
@@ -23,7 +25,8 @@ export const MODALS = {
     CONFIG_PROFILE_SHOW_INBOUNDS_DRAWER: 'CONFIG_PROFILE_SHOW_INBOUNDS_DRAWER',
     CONFIG_PROFILE_SHOW_SNIPPETS_DRAWER: 'CONFIG_PROFILE_SHOW_SNIPPETS_DRAWER',
     EDIT_HOST_MODAL: 'EDIT_HOST_MODAL',
-    CREATE_HOST_MODAL: 'CREATE_HOST_MODAL'
+    CREATE_HOST_MODAL: 'CREATE_HOST_MODAL',
+    HELP_DRAWER: 'HELP_DRAWER'
 } as const
 
 export interface ModalInternalStates {
@@ -39,6 +42,9 @@ export interface ModalInternalStates {
         nodeUuid: string
     }
     EXTERNAL_SQUAD_DRAWER: string
+    HELP_DRAWER: {
+        screen: THelpDrawerAvailableScreen
+    }
     INTERNAL_SQUAD_ACCESSIBLE_NODES_DRAWER: {
         squadUuid: string
     }

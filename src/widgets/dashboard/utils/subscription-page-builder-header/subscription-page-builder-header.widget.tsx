@@ -4,7 +4,7 @@ import {
     TbUpload as IconUpload
 } from 'react-icons/tb'
 import { Accordion, Button, FileButton, Group, Text } from '@mantine/core'
-import { PiInfoDuotone } from 'react-icons/pi'
+import { PiArrowsInCardinalFill, PiInfoDuotone } from 'react-icons/pi'
 import { useTranslation } from 'react-i18next'
 
 import { DataTableShared } from '@shared/ui/table'
@@ -42,6 +42,7 @@ export function SubscriptionPageBuilderHeaderWidget(props: {
                         </FileButton>
                     </Group>
                 }
+                icon={<PiArrowsInCardinalFill size={24} />}
                 title={t('subscription-page-builder-header.widget.subscription-page-builder')}
             />
             <DataTableShared.Content>

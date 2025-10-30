@@ -1,26 +1,18 @@
 import { Text } from '@mantine/core'
 
-interface IProps {
-    title?: null | string
-}
+import { useGetAuthStatus } from '@shared/api/hooks/auth/auth.query.hooks'
 
-export const SidebarTitleShared = (props: IProps) => {
-    const { title } = props
+import classes from './sidebar.module.css'
+
+export const SidebarTitleShared = () => {
+    const { data: authStatus } = useGetAuthStatus()
 
     return (
-        <Text
-            ff="Unbounded"
-            fw={700}
-            size="lg"
-            style={{
-                userSelect: 'none',
-                WebkitUserSelect: 'none'
-            }}
-        >
-            <Text c={title ? 'white' : 'cyan'} component="span" fw={700}>
-                {title || 'Remna'}
+        <Text className={classes.logoTitle}>
+            <Text c={authStatus?.branding.title ? 'white' : 'cyan'} component="span" inherit>
+                {authStatus?.branding.title || 'Remna'}
             </Text>
-            {title ? '' : 'wave'}
+            {authStatus?.branding.title ? '' : 'wave'}
         </Text>
     )
 }

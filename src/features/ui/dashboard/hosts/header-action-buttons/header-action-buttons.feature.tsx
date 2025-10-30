@@ -30,18 +30,18 @@ export const HeaderActionButtonsFeature = () => {
                     <ActionIcon
                         loading={isFetching}
                         onClick={handleUpdate}
-                        size="lg"
+                        size="input-md"
                         variant="light"
                     >
-                        <TbRefresh size="18px" />
+                        <TbRefresh size="24px" />
                     </ActionIcon>
                 </Tooltip>
             </ActionIconGroup>
 
             <ActionIconGroup>
                 <Tooltip label={t('header-action-buttons.feature.create-new-host')} withArrow>
-                    <ActionIcon color="teal" onClick={handleCreate} size="lg" variant="light">
-                        <TbPlus size="18px" />
+                    <ActionIcon color="teal" onClick={handleCreate} size="input-md" variant="light">
+                        <TbPlus size="24px" />
                     </ActionIcon>
                 </Tooltip>
             </ActionIconGroup>

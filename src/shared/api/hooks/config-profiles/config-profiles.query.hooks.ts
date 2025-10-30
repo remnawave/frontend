@@ -5,11 +5,10 @@ import {
     GetInboundsByProfileUuidCommand
 } from '@remnawave/backend-contract'
 import { createQueryKeys } from '@lukemorales/query-key-factory'
-import { notifications } from '@mantine/notifications'
 
 import { sToMs } from '@shared/utils/time-utils'
 
-import { createGetQueryHook } from '../../tsq-helpers'
+import { createGetQueryHook, errorHandler } from '../../tsq-helpers'
 
 export const configProfilesQueryKeys = createQueryKeys('configProfiles', {
     getConfigProfiles: {
@@ -34,13 +33,7 @@ export const useGetConfigProfiles = createGetQueryHook({
         refetchOnMount: true,
         staleTime: sToMs(5)
     },
-    errorHandler: (error) => {
-        notifications.show({
-            title: `Get All Config Profiles`,
-            message: error instanceof Error ? error.message : `Request failed with unknown error.`,
-            color: 'red'
-        })
-    }
+    errorHandler: (error) => errorHandler(error, 'Get All Config Profiles')
 })
 
 export const useGetConfigProfile = createGetQueryHook({
@@ -52,13 +45,7 @@ export const useGetConfigProfile = createGetQueryHook({
         refetchOnMount: true,
         staleTime: sToMs(30)
     },
-    errorHandler: (error) => {
-        notifications.show({
-            title: `Get Config Profile`,
-            message: error instanceof Error ? error.message : `Request failed with unknown error.`,
-            color: 'red'
-        })
-    }
+    errorHandler: (error) => errorHandler(error, 'Get Config Profile')
 })
 
 export const useGetConfigProfileInbounds = createGetQueryHook({
@@ -70,13 +57,7 @@ export const useGetConfigProfileInbounds = createGetQueryHook({
         refetchOnMount: true,
         staleTime: sToMs(30)
     },
-    errorHandler: (error) => {
-        notifications.show({
-            title: `Get Config Profile Inbounds`,
-            message: error instanceof Error ? error.message : `Request failed with unknown error.`,
-            color: 'red'
-        })
-    }
+    errorHandler: (error) => errorHandler(error, 'Get Config Profile Inbounds')
 })
 
 export const useGetComputedConfigProfile = createGetQueryHook({
@@ -87,11 +68,5 @@ export const useGetComputedConfigProfile = createGetQueryHook({
     rQueryParams: {
         enabled: false
     },
-    errorHandler: (error) => {
-        notifications.show({
-            title: `Get Computed Config Profile`,
-            message: error instanceof Error ? error.message : `Request failed with unknown error.`,
-            color: 'red'
-        })
-    }
+    errorHandler: (error) => errorHandler(error, 'Get Computed Config Profile')
 })

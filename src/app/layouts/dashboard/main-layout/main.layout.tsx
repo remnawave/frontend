@@ -1,25 +1,21 @@
 import { useClickOutside, useDisclosure, useHeadroom, useMediaQuery } from '@mantine/hooks'
 import { AppShell, Box, Burger, Container, Group, ScrollArea } from '@mantine/core'
-import { useQuery } from '@tanstack/react-query'
 import { useEffect, useState } from 'react'
 import { Outlet } from 'react-router-dom'
-import axios from 'axios'
+import clsx from 'clsx'
 
+import { useIsLoadingRemnawaveUpdates, useRemnawaveInfo } from '@entities/dashboard/updates-store'
 import { ScrollToTopWrapper } from '@shared/hocs/scroll-to-top/scroll-to-top'
-import { useGetAuthStatus } from '@shared/api/hooks/auth/auth.query.hooks'
 import { SidebarTitleShared } from '@shared/ui/sidebar/sidebar-title'
 import { SidebarLogoShared } from '@shared/ui/sidebar/sidebar-logo'
 import { HeaderControls } from '@shared/ui/header-buttons'
+import { HelpDrawerShared } from '@shared/ui/help-drawer'
 import { VersionBadgeShared } from '@shared/ui/sidebar'
-import { sToMs } from '@shared/utils/time-utils'
-import { LoadingScreen } from '@shared/ui'
 
 import { Navigation } from './navbar/navigation.layout'
 import classes from './Main.module.css'
 
 export function MainLayout() {
-    const { data: authStatus, isLoading: isAuthStatusLoading } = useGetAuthStatus()
-
     const [mobileOpened, { toggle: toggleMobile }] = useDisclosure()
     const [desktopOpened, { toggle: toggleDesktop }] = useDisclosure(true)
     const [isMediaQueryReady, setIsMediaQueryReady] = useState(false)
@@ -32,6 +28,9 @@ export function MainLayout() {
         getInitialValueInEffect: false
     })
 
+    const remnawaveInfo = useRemnawaveInfo()
+    const isLoadingUpdates = useIsLoadingRemnawaveUpdates()
+
     useEffect(() => {
         setIsMediaQueryReady(true)
     }, [isMobile, isSocialButton])
@@ -42,28 +41,13 @@ export function MainLayout() {
         }
     })
 
-    const { data, isLoading: isGithubLoading } = useQuery({
-        queryKey: ['github-stars'],
-        staleTime: sToMs(3600),
-        refetchInterval: sToMs(3600),
-        queryFn: async () => {
-            const response = await axios.get<{
-                totalStars: number
-            }>('https://ungh.cc/stars/remnawave/*')
-            return response.data
-        }
-    })
-
-    if (isAuthStatusLoading) {
-        return <LoadingScreen height="100vh" />
-    }
-
     if (!isMediaQueryReady) {
         return <div style={{ height: '100vh' }}></div>
     }
 
     return (
         <AppShell
+            className={classes.appShellFadeIn}
             header={{ height: 64, collapsed: isMobile ? false : !pinned, offset: false }}
             layout="alt"
             navbar={{
@@ -71,7 +55,7 @@ export function MainLayout() {
                 breakpoint: 'lg',
                 collapsed: { mobile: !mobileOpened, desktop: !desktopOpened }
             }}
-            padding="xl"
+            padding={isMobile ? 'md' : 'xl'}
             transitionDuration={500}
             transitionTimingFunction="ease-in-out"
         >
@@ -88,8 +72,8 @@ export function MainLayout() {
                         <Group style={{ flexShrink: 0 }}>
                             <HeaderControls
                                 githubLink="https://github.com/remnawave/panel"
-                                isGithubLoading={isGithubLoading}
-                                stars={data?.totalStars}
+                                isGithubLoading={isLoadingUpdates}
+                                stars={remnawaveInfo.starsCount || undefined}
                                 telegramLink="https://t.me/remnawave"
                                 withGithub={!isSocialButton}
                                 withSupport={!isSocialButton}
@@ -100,7 +84,10 @@ export function MainLayout() {
                 </Container>
             </AppShell.Header>
             <AppShell.Navbar
-                className={classes.sidebarWrapper}
+                className={clsx(classes.sidebarWrapper, {
+                    [classes.sidebarWrapperClosedDesktop]: !isMobile && !desktopOpened,
+                    [classes.sidebarWrapperClosedMobile]: isMobile && !mobileOpened
+                })}
                 p="md"
                 pb={0}
                 ref={ref}
@@ -117,9 +104,12 @@ export function MainLayout() {
                         />
                     </Box>
 
-                    <Group gap="xs" justify="center" w="100%">
-                        <SidebarLogoShared logoUrl={authStatus?.branding.logoUrl} />
-                        <SidebarTitleShared title={authStatus?.branding.title} />
+                    <Group gap="xs" justify={isMobile ? 'center' : 'space-between'} w="100%">
+                        <Group gap={4}>
+                            <SidebarLogoShared />
+                            <SidebarTitleShared />
+                        </Group>
+
                         {!isMobile && <VersionBadgeShared />}
                     </Group>
 
@@ -143,8 +133,8 @@ export function MainLayout() {
                         <Group justify="center" mt="md" style={{ flexShrink: 0 }}>
                             <HeaderControls
                                 githubLink="https://github.com/remnawave/panel"
-                                isGithubLoading={isGithubLoading}
-                                stars={data?.totalStars}
+                                isGithubLoading={isLoadingUpdates}
+                                stars={remnawaveInfo.starsCount || undefined}
                                 telegramLink="https://t.me/remnawave"
                                 withLanguage={false}
                                 withLogout={false}
@@ -154,10 +144,14 @@ export function MainLayout() {
                     )}
                 </AppShell.Section>
             </AppShell.Navbar>
-            <AppShell.Main pb="var(--mantine-spacing-md)" pt="var(--app-shell-header-height)">
+            <AppShell.Main
+                pb="var(--mantine-spacing-md)"
+                pt="calc(var(--app-shell-header-height) + 10px)"
+            >
                 <ScrollToTopWrapper>
                     <Outlet />
                 </ScrollToTopWrapper>
+                <HelpDrawerShared />
             </AppShell.Main>
         </AppShell>
     )

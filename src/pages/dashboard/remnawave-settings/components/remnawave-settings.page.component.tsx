@@ -6,9 +6,7 @@ import { Container } from '@mantine/core'
 import { AuthentificationSettingsCardWidget } from '@widgets/remnawave-settings/authentification-settings-card/authentification-settings-card.widget'
 import { BrandingSettingsCardWidget } from '@widgets/remnawave-settings/branding-settings-card/branding-settings-card.widget'
 import { ApiTokensCardWidget } from '@widgets/remnawave-settings/api-tokens-card/api-tokens-card.widget'
-import { LoadingScreen, PageHeader } from '@shared/ui'
-import { ROUTES } from '@shared/constants'
-import { Page } from '@shared/ui/page'
+import { LoadingScreen, Logo, Page, PageHeaderShared } from '@shared/ui'
 
 interface IProps {
     apiTokensData: FindAllApiTokensCommand.Response['response']
@@ -36,13 +34,7 @@ export const RemnawaveSettingsPageComponent = (props: IProps) => {
 
     return (
         <Page title={t('constants.remnawave-settings')}>
-            <PageHeader
-                breadcrumbs={[
-                    { label: t('constants.dashboard'), href: ROUTES.DASHBOARD.HOME },
-                    { label: t('constants.remnawave-settings') }
-                ]}
-                title={t('constants.remnawave-settings')}
-            />
+            <PageHeaderShared icon={<Logo size={24} />} title={t('constants.remnawave-settings')} />
             <Container fluid p={0} size="xl">
                 <Masonry columns={{ 300: 1, 1400: 2, 2000: 3, 3000: 4 }} gap={16}>
                     <AuthentificationSettingsCardWidget

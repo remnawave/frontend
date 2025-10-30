@@ -9,9 +9,7 @@ import { MobileWarningOverlay } from '@shared/ui/mobile-warning-overlay/mobile-w
 import { SrhInspectorTableWidget } from '@widgets/dashboard/srh-inspector/srh-inspector-table'
 import { SrhInspectorMetrics } from '@widgets/dashboard/srh-inspector/srh-inspector-metrics'
 import { ViewUserModal } from '@widgets/dashboard/users/view-user-modal'
-import { PageHeader } from '@shared/ui/page-header'
-import { ROUTES } from '@shared/constants'
-import { Page } from '@shared/ui/page'
+import { Page } from '@shared/ui'
 
 export default function SrhInspectorPageComponent() {
     const { t } = useTranslation()
@@ -19,14 +17,6 @@ export default function SrhInspectorPageComponent() {
 
     return (
         <Page title={t('constants.srh-inspector')}>
-            <PageHeader
-                breadcrumbs={[
-                    { label: t('constants.dashboard'), href: ROUTES.DASHBOARD.HOME },
-                    { label: t('constants.srh-inspector') }
-                ]}
-                title={t('constants.srh-inspector')}
-            />
-
             <Stack>
                 {isMobile && <MobileWarningOverlay />}
                 <SrhInspectorMetrics />

@@ -3,9 +3,8 @@ import {
     GetPasskeyRegistrationOptionsCommand
 } from '@remnawave/backend-contract'
 import { createQueryKeys } from '@lukemorales/query-key-factory'
-import { notifications } from '@mantine/notifications'
 
-import { createGetQueryHook } from '../../tsq-helpers'
+import { createGetQueryHook, errorHandler } from '../../tsq-helpers'
 
 export const passkeysQueryKeys = createQueryKeys('passkeys', {
     getAllPasskeys: {
@@ -23,13 +22,7 @@ export const usePasskeyRegistrationOptions = createGetQueryHook({
     rQueryParams: {
         enabled: false
     },
-    errorHandler: (error) => {
-        notifications.show({
-            title: 'Authentication Error',
-            message: error instanceof Error ? error.message : `Request failed with unknown error.`,
-            color: 'red'
-        })
-    }
+    errorHandler: (error) => errorHandler(error, 'Get Passkey Registration Options')
 })
 
 export const useGetAllPasskeys = createGetQueryHook({
@@ -39,11 +32,5 @@ export const useGetAllPasskeys = createGetQueryHook({
     rQueryParams: {
         refetchOnMount: false
     },
-    errorHandler: (error) => {
-        notifications.show({
-            title: 'Authentication Error',
-            message: error instanceof Error ? error.message : `Request failed with unknown error.`,
-            color: 'red'
-        })
-    }
+    errorHandler: (error) => errorHandler(error, 'Get All Passkeys')
 })

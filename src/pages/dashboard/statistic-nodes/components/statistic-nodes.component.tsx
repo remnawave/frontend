@@ -28,14 +28,13 @@ import { BarChart, Sparkline } from '@mantine/charts'
 import { useEffect, useMemo, useState } from 'react'
 import ReactCountryFlag from 'react-country-flag'
 import { useTranslation } from 'react-i18next'
+import { HiChartPie } from 'react-icons/hi'
 import ColorHash from 'color-hash'
 import dayjs from 'dayjs'
 
 import { useGetNodesUsageByRangeCommand } from '@shared/api/hooks'
+import { LoadingScreen, Page, PageHeaderShared } from '@shared/ui'
 import { prettyBytesToAnyUtil } from '@shared/utils/bytes'
-import { LoadingScreen, PageHeader } from '@shared/ui'
-import { ROUTES } from '@shared/constants'
-import { Page } from '@shared/ui/page'
 
 export const StatisticNodesPage = () => {
     const { t } = useTranslation()
@@ -581,13 +580,8 @@ export const StatisticNodesPage = () => {
 
     return (
         <Page title={t('constants.nodes-statistics')}>
-            <PageHeader
-                breadcrumbs={[
-                    { label: t('constants.dashboard'), href: ROUTES.DASHBOARD.HOME },
-
-                    { label: t('constants.nodes'), href: ROUTES.DASHBOARD.MANAGEMENT.NODES },
-                    { label: t('constants.nodes-statistics') }
-                ]}
+            <PageHeaderShared
+                icon={<HiChartPie size={24} />}
                 title={t('constants.nodes-statistics')}
             />
 

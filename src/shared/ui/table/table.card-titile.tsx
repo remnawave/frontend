@@ -1,67 +1,112 @@
-import { CardSection, CardSectionProps, Group, Text, Title } from '@mantine/core'
+import {
+    ActionIcon,
+    Box,
+    CardSection,
+    CardSectionProps,
+    Group,
+    Stack,
+    Text,
+    Title
+} from '@mantine/core'
 import { forwardRef, ReactNode } from 'react'
 import { motion } from 'motion/react'
+
+import classes from './table.module.css'
 
 export interface CardTitleProps extends Omit<CardSectionProps, 'c' | 'fw' | 'size' | 'tt'> {
     actions?: ReactNode
     description?: string
+    icon: ReactNode
     title: ReactNode
 }
 
 export const CardTitle = forwardRef<HTMLDivElement, CardTitleProps>(
-    ({ title, description, style, actions, withBorder = true, ...props }, ref) => (
+    ({ title, description, style, actions, withBorder = true, icon, ...props }, ref) => (
         <CardSection
+            className={classes.card}
             inheritPadding
             py="md"
             ref={ref}
             style={{
-                ...style,
-                borderTop: 'none',
-                background: `linear-gradient(
-                    135deg,
-                    var(--mantine-color-dark-8) 0%,
-                    var(--mantine-color-dark-7) 100%
-                )`,
-                boxShadow: `
-                    0 8px 32px rgba(0, 0, 0, 0.1),
-                    0 2px 8px rgba(0, 0, 0, 0.05)
-                `,
-                position: 'relative',
-                cursor: 'default'
+                ...style
             }}
             withBorder={withBorder}
             {...props}
         >
-            <div
-                style={{
-                    position: 'absolute',
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    bottom: 0,
-                    background: `radial-gradient(circle at 20% 20%, rgba(6, 182, 212, 0.1) 0%, transparent 50%)`,
-                    pointerEvents: 'none',
-                    zIndex: 0,
-                    transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
-                }}
-            />
             <motion.div
                 animate={{ opacity: 1, y: 0 }}
                 initial={{ opacity: 0, y: -10 }}
                 style={{ position: 'relative', zIndex: 1 }}
                 transition={{ duration: 0.5, ease: [0, 0.71, 0.2, 1.01] }}
             >
-                <Group justify="space-between">
-                    <div>
-                        <Title order={5}>{title}</Title>
-                        {description && (
-                            <Text c="dimmed" size="xs">
-                                {description}
-                            </Text>
-                        )}
-                    </div>
-                    {actions}
-                </Group>
+                <Box className={classes.headerWrapper}>
+                    <Box className={classes.contentSection}>
+                        <Group align="center" gap="md" wrap="nowrap">
+                            <motion.div
+                                animate={{ opacity: 1, y: 0 }}
+                                initial={{ opacity: 0, y: -10 }}
+                                transition={{
+                                    duration: 0.5,
+                                    ease: [0, 0.71, 0.2, 1.01]
+                                }}
+                            >
+                                <ActionIcon
+                                    className={classes.actionIcon}
+                                    color="cyan"
+                                    size="input-md"
+                                    variant="light"
+                                >
+                                    {icon}
+                                </ActionIcon>
+                            </motion.div>
+
+                            <Stack gap={0}>
+                                <motion.div
+                                    animate={{ opacity: 1, y: 0 }}
+                                    initial={{ opacity: 0, y: -10 }}
+                                    transition={{
+                                        duration: 0.5,
+                                        ease: [0, 0.71, 0.2, 1.01]
+                                    }}
+                                >
+                                    <Title order={4} pt={0}>
+                                        {title}
+                                    </Title>
+                                </motion.div>
+                                {description && (
+                                    <motion.div
+                                        animate={{ opacity: 1, y: 0 }}
+                                        initial={{ opacity: 0, y: -10 }}
+                                        transition={{
+                                            duration: 0.5,
+                                            ease: [0, 0.71, 0.2, 1.01]
+                                        }}
+                                    >
+                                        <Text c="dimmed" fz="sm">
+                                            {description}
+                                        </Text>
+                                    </motion.div>
+                                )}
+                            </Stack>
+                        </Group>
+                    </Box>
+
+                    {actions && (
+                        <motion.div
+                            animate={{ opacity: 1, y: 0 }}
+                            className={classes.actionsSection}
+                            initial={{ opacity: 0, y: -10 }}
+                            transition={{
+                                duration: 0.5,
+                                ease: [0, 0.71, 0.2, 1.01]
+                            }}
+                        >
+                            <Group align="flex-end" gap="sm" wrap="nowrap">
+                                {actions}
+                            </Group>
+                        </motion.div>
+                    )}
+                </Box>
             </motion.div>
         </CardSection>
     )

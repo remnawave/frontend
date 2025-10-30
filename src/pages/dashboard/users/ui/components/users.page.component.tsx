@@ -11,8 +11,6 @@ import { CreateUserModalWidget } from '@widgets/dashboard/users/create-user-moda
 import { ViewUserModal } from '@widgets/dashboard/users/view-user-modal'
 import { UserTableWidget } from '@widgets/dashboard/users/users-table'
 import { UsersMetrics } from '@widgets/dashboard/users/users-metrics'
-import { PageHeader } from '@shared/ui/page-header'
-import { ROUTES } from '@shared/constants'
 import { LoadingScreen } from '@shared/ui'
 import { Page } from '@shared/ui/page'
 
@@ -45,14 +43,6 @@ export default function UsersPageComponent() {
 
     return (
         <Page title={t('constants.users')}>
-            <PageHeader
-                breadcrumbs={[
-                    { label: t('constants.dashboard'), href: ROUTES.DASHBOARD.HOME },
-                    { label: t('constants.users') }
-                ]}
-                title={t('constants.users')}
-            />
-
             <Stack>
                 {isMobile && <MobileWarningOverlay />}
                 <UsersMetrics />

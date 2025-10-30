@@ -1,6 +1,7 @@
 import { ListViewTable } from '@gfazioli/mantine-list-view-table'
 import { GetAllNodesCommand } from '@remnawave/backend-contract'
 import { useTranslation } from 'react-i18next'
+import { TbChartArcs } from 'react-icons/tb'
 import { Table } from '@mantine/core'
 import dayjs from 'dayjs'
 
@@ -24,6 +25,7 @@ export function NodesBandwidthTableWidget() {
     return (
         <DataTableShared.Container>
             <DataTableShared.Title
+                icon={<TbChartArcs size={24} />}
                 title={`${t('table.widget.today')}: ${dayjs().format('DD MMMM')}`}
             />
             <DataTableShared.Content>
