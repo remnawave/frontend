@@ -540,13 +540,6 @@
             "registration": "ثبت نام"
         }
     },
-    "xray-json-template-description": {
-        "widget": {
-            "importing-json-subscription": "نحوه استفاده از اشتراک‌های JSON",
-            "description-line-1": "برای استفاده از این اشتراک، کافی است",
-            "description-line-2": "را به انتهای لینک اشتراک خود اضافه کنید. درصورتی که از کلاینت‌های پشتیبانی شده جدول زیر استفاده نشود اشتراک‌ها مانند قبل (مثلا به صورت base64 یا mihomo) ارسال خواهند شد"
-        }
-    },
     "happ-routing-builder": {
         "widget": {
             "copy-link": "کپی کردن لینک",
@@ -1765,6 +1758,18 @@
         "feature": {
             "reset": "Reset",
             "reset-usage": "Reset usage"
+        }
+    },
+    "help-drawer": {
+        "shared": {
+            "templates-xray-json": "<h2>Xray JSON Subscription Format</h2> <p> The Xray JSON format provides native JSON-based subscription support for compatible clients. Simply append <code>/json</code> to your subscription URL to enable this format. </p> <h3>Supported Applications</h3> <ul> <li><strong>v2rayNG</strong> — version 1.8.29 or higher</li> <li><strong>V2rayN</strong> — version 6.40 or higher</li> <li><strong>Streisand</strong> — all versions</li> <li><strong>Happ</strong> — all versions</li> <li><strong>V2Box</strong> — all versions</li> <li><strong>ktor-client</strong> — all versions</li> </ul> <h3>Usage Instructions</h3> <p><strong>Step 1:</strong> Modify your subscription URL</p> <p style=\"margin-left: 20px;\"> Append <code>/json</code> to the end of your subscription link:<br /> <code style=\"display: inline-block; margin-top: 8px; padding: 8px 12px; background: rgba(0,0,0,0.05); border-radius: 4px;\"> https://&lt;server&gt;/api/sub/xxxx/json </code> </p> <p><strong>Step 2:</strong> Verify compatibility</p> <p style=\"margin-left: 20px;\"> Ensure your client application meets the minimum version requirements listed above. </p> <p><strong>Alternatively:</strong> Enable JSON At the base path</p> <p style=\"margin-left: 20px;\"> Enable the \"Serve JSON at base subscription\" option in the subscription settings. This will serve the JSON subscription at the base subscription path (without having to append /json). </p> <h3>Fallback Behavior</h3> <p> For clients that don't support the JSON format (such as Base64 or Mihomo-based clients), the subscription will automatically fall back to the standard format compatible with your client. </p>",
+            "unknown-screen-provided": "Unknown screen provided.",
+            "loading-help-drawer": "Loading help drawer..."
+        }
+    },
+    "help-action-icon": {
+        "shared": {
+            "help-article": "Help Article"
         }
     }
 }
