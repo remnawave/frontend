@@ -16,6 +16,12 @@ export const HelpDrawerShared = memo(() => {
     let content = null
 
     switch (internalState?.screen) {
+        case HELP_DRAWER_AVAILABLE_SCREENS.EXTERNAL_SQUADS_GRID:
+            content = t('help-drawer.shared.external-squads-grid')
+            break
+        case HELP_DRAWER_AVAILABLE_SCREENS.INTERNAL_SQUADS_GRID:
+            content = t('help-drawer.shared.internal-squads-grid')
+            break
         case HELP_DRAWER_AVAILABLE_SCREENS.TEMPLATES_JSON:
             content = t('help-drawer.shared.templates-xray-json')
             break
@@ -32,6 +38,7 @@ export const HelpDrawerShared = memo(() => {
             overlayProps={{ backgroundOpacity: 0.6, blur: 0 }}
             position="right"
             size="lg"
+            title={t('help-action-icon.shared.help-article')}
         >
             <ScrollArea h="100%">
                 {!internalState && (

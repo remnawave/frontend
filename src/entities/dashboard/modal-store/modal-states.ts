@@ -5,7 +5,7 @@ import {
     UpdateHostCommand
 } from '@remnawave/backend-contract'
 
-import { THelpDrawerAvailableScreen } from '@shared/ui/help-drawer'
+import { THelpDrawerAvailableScreen } from '@shared/ui/help-drawer/help-drawer.types'
 
 export const MODALS = {
     CONFIG_PROFILES_SHOW_ACTIVE_NODE: 'CONFIG_PROFILES_SHOW_ACTIVE_NODE',

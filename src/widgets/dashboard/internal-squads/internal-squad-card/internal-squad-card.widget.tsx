@@ -214,7 +214,7 @@ export function InternalSquadCardWidget(props: IProps) {
                                         )
                                     }
                                 >
-                                    {t('view-user-modal.widget.view-accessible-nodes')}
+                                    {t('internal-squad-card.widget.available-nodes')}
                                 </Menu.Item>
 
                                 <CopyButton timeout={2000} value={internalSquad.uuid}>

@@ -16,6 +16,7 @@ import { useField } from '@mantine/form'
 
 import { MODALS, useModalsStoreOpenWithData } from '@entities/dashboard/modal-store'
 import { useCreateExternalSquad, useGetExternalSquads } from '@shared/api/hooks'
+import { HelpActionIconShared } from '@shared/ui/help-drawer'
 
 export const ExternalSquadsHeaderActionButtonsFeature = () => {
     const { isFetching, refetch: refetchExternalSquads } = useGetExternalSquads()
@@ -55,6 +56,8 @@ export const ExternalSquadsHeaderActionButtonsFeature = () => {
 
     return (
         <Group grow preventGrowOverflow={false} wrap="wrap">
+            <HelpActionIconShared hidden={false} screen="EXTERNAL_SQUADS_GRID" />
+
             <ActionIconGroup>
                 <Tooltip
                     label={t('header-action-buttons.feature.update-external-squads')}

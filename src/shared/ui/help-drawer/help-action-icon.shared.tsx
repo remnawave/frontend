@@ -1,6 +1,6 @@
 import { ActionIcon, Tooltip } from '@mantine/core'
+import { TbQuestionMark } from 'react-icons/tb'
 import { useTranslation } from 'react-i18next'
-import { TbHelp } from 'react-icons/tb'
 import { memo } from 'react'
 
 import { MODALS, useModalsStoreOpenWithData } from '@entities/dashboard/modal-store'
@@ -38,7 +38,7 @@ export const HelpActionIconShared = memo((props: IProps) => {
                 size="input-md"
                 variant="light"
             >
-                <TbHelp size={24} />
+                <TbQuestionMark size={24} />
             </ActionIcon>
         </Tooltip>
     )
