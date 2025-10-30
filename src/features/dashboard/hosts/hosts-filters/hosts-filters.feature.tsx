@@ -80,7 +80,7 @@ export const HostsFiltersFeature = (props: IProps) => {
     const hasActiveFilters = configProfileFilter || inboundFilter
 
     return (
-        <Card mb="xl" padding="lg" shadow="sm" withBorder>
+        <Card padding="lg" shadow="sm" withBorder>
             <Stack gap="md">
                 <Group justify="space-between">
                     <Group gap="xs">
