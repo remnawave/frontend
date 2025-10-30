@@ -540,13 +540,6 @@
             "registration": "Регистрация"
         }
     },
-    "xray-json-template-description": {
-        "widget": {
-            "importing-json-subscription": "Импорт JSON подписки",
-            "description-line-1": "Чтобы использовать эту подписку, просто добавьте",
-            "description-line-2": "в конец вашей ссылки на подписку. \nУбедитесь, что вы используете одно из поддерживаемых приложений, перечисленных в таблице ниже. \nИначе подписка будет работать как обычно для запрошенного клиента. (например, Base64, Mihomo)"
-        }
-    },
     "happ-routing-builder": {
         "widget": {
             "copy-link": "Копировать ссылку",
@@ -1765,6 +1758,18 @@
         "feature": {
             "reset": "Сбросить",
             "reset-usage": "Сбросить трафик"
+        }
+    },
+    "help-drawer": {
+        "shared": {
+            "templates-xray-json": "<h2>Формат подписки Xray JSON</h2> <p> Формат Xray JSON обеспечивает поддержку подписок в формате JSON для совместимых клиентов. Просто добавьте <code>/json</code> в конец URL вашей подписки, чтобы включить этот формат. </p> <h3>Поддерживаемые приложения</h3> <ul> <li><strong>v2rayNG</strong> — версия 1.8.29 или выше</li> <li><strong>V2rayN</strong> — версия 6.40 или выше</li> <li><strong>Streisand</strong> — все версии</li> <li><strong>Happ</strong> — все версии</li> <li><strong>V2Box</strong> — все версии</li> <li><strong>ktor-client</strong> — все версии</li> </ul> <h3>Инструкции по использованию</h3> <p><strong>Шаг 1:</strong> Измените URL вашей подписки</p> <p style=\"margin-left: 20px;\"> Добавьте <code>/json</code> в конец вашей ссылки на подписку:<br /> <code style=\"display: inline-block; margin-top: 8px; padding: 8px 12px; background: rgba(0,0,0,0.05); border-radius: 4px;\"> https://&lt;сервер&gt;/api/sub/xxxx/json </code> </p> <p><strong>Шаг 2:</strong> Проверьте совместимость</p> <p style=\"margin-left: 20px;\"> Убедитесь, что ваше клиентское приложение соответствует минимальным требованиям к версии, перечисленным выше. </p> <p><strong>Или:</strong> Включите JSON на базовом пути</p> <p style=\"margin-left: 20px;\"> Включите опцию \"Обслуживать JSON на базовом пути подписки\" в настройках подписки. Это позволит обслуживать подписку JSON на базовом пути подписки (без необходимости добавлять /json). </p> <h3>Резервное поведение</h3> <p> Для клиентов, которые не поддерживают формат JSON (таких как клиенты на основе Base64 или Mihomo), подписка автоматически вернется к стандартному формату, совместимому с вашим клиентом. </p>",
+            "unknown-screen-provided": "Неизвестный экран.",
+            "loading-help-drawer": "Загружаем справку..."
+        }
+    },
+    "help-action-icon": {
+        "shared": {
+            "help-article": "Справочная статья"
         }
     }
 }
