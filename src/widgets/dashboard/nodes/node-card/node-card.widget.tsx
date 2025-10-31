@@ -59,7 +59,12 @@ export const NodeCardWidget = memo((props: IProps) => {
             }
         }
 
-        return { maxData, percentage, prettyUsedData }
+        return {
+            maxData,
+            percentage,
+            prettyUsedData,
+            fallbackProgress: node.isTrafficTrackingActive && node.trafficLimitBytes === 0
+        }
     }, [node.trafficUsedBytes, node.trafficLimitBytes, node.isTrafficTrackingActive])
 
     const isOnline = useMemo(() => {
@@ -67,10 +72,11 @@ export const NodeCardWidget = memo((props: IProps) => {
     }, [node.isConnected, node.xrayUptime])
 
     const getProgressColor = useCallback(() => {
+        if (trafficData.fallbackProgress) return 'teal.6'
         if (trafficData.percentage > 95) return 'red.6'
         if (trafficData.percentage > 80) return 'yellow.6'
         return 'teal.6'
-    }, [trafficData.percentage])
+    }, [trafficData.percentage, trafficData.fallbackProgress])
 
     const handleCopy = useCallback(
         (e: React.MouseEvent) => {

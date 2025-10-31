@@ -4,6 +4,7 @@ import {
     DisableNodeCommand,
     EnableNodeCommand,
     ReorderNodeCommand,
+    ResetNodeTrafficCommand,
     RestartAllNodesCommand,
     RestartNodeCommand,
     UpdateNodeCommand
@@ -188,6 +189,30 @@ export const useRestartNode = createMutationHook({
         onError: (error) => {
             notifications.show({
                 title: `Restart Node`,
+                message:
+                    error instanceof Error ? error.message : `Request failed with unknown error.`,
+                color: 'red'
+            })
+        }
+    }
+})
+
+export const useResetNodeTraffic = createMutationHook({
+    endpoint: ResetNodeTrafficCommand.TSQ_url,
+    responseSchema: ResetNodeTrafficCommand.ResponseSchema,
+    routeParamsSchema: ResetNodeTrafficCommand.RequestSchema,
+    requestMethod: ResetNodeTrafficCommand.endpointDetails.REQUEST_METHOD,
+    rMutationParams: {
+        onSuccess: () => {
+            notifications.show({
+                title: 'Success',
+                message: 'Node traffic reset successfully',
+                color: 'teal'
+            })
+        },
+        onError: (error) => {
+            notifications.show({
+                title: `Reset Node Traffic`,
                 message:
                     error instanceof Error ? error.message : `Request failed with unknown error.`,
                 color: 'red'

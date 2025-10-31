@@ -10,6 +10,7 @@ import { ToggleNodeStatusButtonFeature } from '@features/ui/dashboard/nodes/togg
 import { GetNodeLinkedHostsFeature } from '@features/ui/dashboard/nodes/get-node-linked-hosts'
 import { GetNodeUsersUsageFeature } from '@features/ui/dashboard/nodes/get-node-users-usage'
 import { RestartNodeButtonFeature } from '@features/ui/dashboard/nodes/restart-node-button'
+import { ResetNodeTrafficFeature } from '@features/ui/dashboard/nodes/reset-node-traffic'
 import { ModalAccordionWidget } from '@widgets/dashboard/nodes/modal-accordeon-widget'
 import { DeleteNodeFeature } from '@features/ui/dashboard/nodes/delete-node'
 import { ModalFooter } from '@shared/ui/modal-footer'
@@ -194,17 +195,19 @@ export const BaseNodeForm = <T extends CreateNodeCommand.Request | UpdateNodeCom
                             <Menu.Divider />
 
                             <Menu.Label>{t('base-node-form.management')}</Menu.Label>
+                            <CopyButton value={node.uuid}>
+                                {({ copy }) => (
+                                    <Menu.Item leftSection={<TbCopy size="16px" />} onClick={copy}>
+                                        {t('common.copy-uuid')}
+                                    </Menu.Item>
+                                )}
+                            </CopyButton>
+                            <ResetNodeTrafficFeature handleClose={handleClose} node={node} />
+
                             <RestartNodeButtonFeature handleClose={handleClose} node={node} />
                             <ToggleNodeStatusButtonFeature handleClose={handleClose} node={node} />
                             <Menu.Divider />
                             <Menu.Label>{t('base-node-form.quick-actions')}</Menu.Label>
-                            <CopyButton value={node.uuid}>
-                                {({ copy }) => (
-                                    <Menu.Item leftSection={<TbCopy size="16px" />} onClick={copy}>
-                                        {t('base-node-form.copy-node-uuid')}
-                                    </Menu.Item>
-                                )}
-                            </CopyButton>
                             <GetNodeUsersUsageFeature nodeUuid={node.uuid} />
                             <GetNodeLinkedHostsFeature nodeUuid={node.uuid} />
                         </Menu.Dropdown>

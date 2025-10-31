@@ -28,7 +28,7 @@ export function DeleteNodeFeature(props: IProps) {
     return (
         <Menu.Item
             color="red.5"
-            leftSection={isPending ? <Loader color="red" size={14} /> : <TbTrash size={14} />}
+            leftSection={isPending ? <Loader color="red" size="1rem" /> : <TbTrash size="1rem" />}
             onClick={handleDeleteNode}
         >
             {t('common.delete')}
