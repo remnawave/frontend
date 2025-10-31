@@ -1779,5 +1779,10 @@
             "failed-to-load-documentation": "Не удалось загрузить документацию",
             "loading-documentation": "Загрузка документации..."
         }
+    },
+    "reset-node-traffic": {
+        "feature": {
+            "reset-traffic": "Reset Traffic"
+        }
     }
 }

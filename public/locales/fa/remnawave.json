@@ -1779,5 +1779,10 @@
             "failed-to-load-documentation": "Failed to load documentation",
             "loading-documentation": "Loading documentation..."
         }
+    },
+    "reset-node-traffic": {
+        "feature": {
+            "reset-traffic": "Reset Traffic"
+        }
     }
 }

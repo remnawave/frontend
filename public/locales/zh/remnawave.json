@@ -1779,5 +1779,10 @@
             "failed-to-load-documentation": "无法加载文档",
             "loading-documentation": "正在加载文档..."
         }
+    },
+    "reset-node-traffic": {
+        "feature": {
+            "reset-traffic": "Reset Traffic"
+        }
     }
 }
