@@ -12,8 +12,12 @@ import { THelpDrawerAvailableScreen } from './help-drawer.types'
 import { LoaderModalShared } from '../loader-modal'
 import classes from './help-drawer.module.css'
 
+const SUPPORTED_LANGUAGES = new Set(['en', 'fa', 'ru', 'zh'])
+
 const resolveDocsUrl = (screen: THelpDrawerAvailableScreen, language: string) => {
-    return `https://raw.githubusercontent.com/remnawave/panel/refs/heads/main/_panel-docs/help-articles/${language}/${screen}.md`
+    const lang = language.split('-')[0]
+    const safeLang = SUPPORTED_LANGUAGES.has(lang) ? lang : 'en'
+    return `https://raw.githubusercontent.com/remnawave/panel/refs/heads/main/_panel-docs/help-articles/${safeLang}/${screen}.md`
 }
 
 export const HelpDrawerShared = memo(() => {
