@@ -141,7 +141,7 @@
 }
 
 .uuidText {
-    font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Code', 'Consolas', monospace;
+    font-family: 'Fira Mono', monospace;
     font-size: 10px;
     letter-spacing: -0.2px;
 }
@@ -169,6 +169,13 @@
     border-bottom-right-radius: 0;
     font-weight: 600;
     transition: all 0.2s ease;
+
+    @mixin rtl {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+        border-top-right-radius: var(--mantine-radius-default);
+        border-bottom-right-radius: var(--mantine-radius-default);
+    }
 }
 
 .menuControl {
@@ -177,6 +184,16 @@
     border: 0;
     border-left: 2px solid var(--mantine-color-body);
     transition: all 0.2s ease;
+
+    @mixin rtl {
+        border-left: 0;
+        border-right: 2px solid var(--mantine-color-body);
+
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+        border-top-left-radius: var(--mantine-radius-default);
+        border-bottom-left-radius: var(--mantine-radius-default);
+    }
 }
 
 .menuControlIcon {

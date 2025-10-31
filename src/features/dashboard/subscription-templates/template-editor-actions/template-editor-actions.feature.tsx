@@ -19,6 +19,8 @@ import { useDownloadTemplate } from '@shared/ui/load-templates/use-download-temp
 import { QueryKeys, useUpdateSubscriptionTemplate } from '@shared/api/hooks'
 import { queryClient } from '@shared/api'
 
+import classes from './template-editor-actions.module.css'
+
 interface Props {
     editorRef: RefObject<editor.IStandaloneCodeEditor | null>
     editorType: 'json' | 'yaml'
@@ -160,11 +162,8 @@ export function TemplateEditorActionsFeature(props: Props) {
                 >
                     <Menu.Target>
                         <ActionIcon
+                            className={classes.actionIconLeft}
                             size={36}
-                            style={{
-                                borderTopRightRadius: 0,
-                                borderBottomRightRadius: 0
-                            }}
                             variant={opened ? 'outline' : 'default'}
                         >
                             <TbMenuDeep size={20} />
@@ -210,14 +209,9 @@ export function TemplateEditorActionsFeature(props: Props) {
                 </Menu>
 
                 <Button
+                    className={classes.centeredButton}
                     leftSection={<PiCheckSquareOffset size={16} />}
                     onClick={formatDocument}
-                    style={{
-                        borderTopLeftRadius: 0,
-                        borderBottomLeftRadius: 0,
-                        borderLeft: 0,
-                        width: '100%'
-                    }}
                     variant="default"
                 >
                     {t('config-editor-actions.feature.format')}

@@ -112,7 +112,7 @@ export function InternalSquadCardWidget(props: IProps) {
                                 >
                                     {internalSquad.name}
                                 </Text>
-                                <Group gap="xs" justify="left" wrap="nowrap">
+                                <Group gap="xs" wrap="nowrap">
                                     <Tooltip label={t('internal-squads-grid.widget.inbounds')}>
                                         <Badge
                                             color="blue"

@@ -28,6 +28,7 @@ import { useDownloadTemplate } from '@shared/ui/load-templates/use-download-temp
 import { QueryKeys, useUpdateConfigProfile } from '@shared/api/hooks'
 import { queryClient } from '@shared/api'
 
+import classes from './config-editor-actions.module.css'
 import { Props } from './interfaces'
 
 const MODAL_KEY = MODALS.CONFIG_PROFILE_SHOW_SNIPPETS_DRAWER
@@ -233,11 +234,8 @@ export function ConfigEditorActionsFeature(props: Props) {
                 >
                     <Menu.Target>
                         <ActionIcon
+                            className={classes.actionIconLeft}
                             size={36}
-                            style={{
-                                borderTopRightRadius: 0,
-                                borderBottomRightRadius: 0
-                            }}
                             variant={opened ? 'outline' : 'default'}
                         >
                             <TbMenuDeep size={20} />
@@ -310,23 +308,16 @@ export function ConfigEditorActionsFeature(props: Props) {
                 </Menu>
 
                 <Button
+                    className={classes.centeredButton}
                     leftSection={<PiCheckSquareOffset size={16} />}
                     onClick={formatDocument}
-                    style={{
-                        borderTopLeftRadius: 0,
-                        borderBottomLeftRadius: 0,
-                        borderTopRightRadius: 0,
-                        borderBottomRightRadius: 0,
-                        borderRight: 0,
-                        borderLeft: 0,
-                        width: '100%'
-                    }}
                     variant="default"
                 >
                     {t('config-editor-actions.feature.format')}
                 </Button>
 
                 <ActionIcon
+                    className={classes.actionIconRight}
                     onClick={() => {
                         if (isOpen) {
                             close()
@@ -335,10 +326,6 @@ export function ConfigEditorActionsFeature(props: Props) {
                         }
                     }}
                     size={36}
-                    style={{
-                        borderTopLeftRadius: 0,
-                        borderBottomLeftRadius: 0
-                    }}
                     variant={isOpen ? 'filled' : 'default'}
                 >
                     <TbBraces size={20} />

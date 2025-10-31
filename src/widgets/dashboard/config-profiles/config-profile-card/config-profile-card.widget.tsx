@@ -197,7 +197,7 @@ export function ConfigProfileCardWidget(props: IProps) {
                                 >
                                     {configProfile.name}
                                 </Text>
-                                <Group gap="xs" justify="left" wrap="nowrap">
+                                <Group gap="xs" wrap="nowrap">
                                     <Tooltip label={t('config-profiles-grid.widget.inbounds')}>
                                         <Badge
                                             color="blue"

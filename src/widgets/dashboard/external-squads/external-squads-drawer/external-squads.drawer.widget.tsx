@@ -102,7 +102,7 @@ export const ExternalSquadsDrawer = memo(() => {
                                     >
                                         {externalSquad.name}
                                     </Text>
-                                    <Group gap="xs" justify="left" wrap="nowrap">
+                                    <Group gap="xs" wrap="nowrap">
                                         <Tooltip label={t('external-squad-card.widget.users')}>
                                             <Badge
                                                 color={isActive ? 'teal' : 'gray'}
