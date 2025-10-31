@@ -62,7 +62,7 @@ export const InternalSquadsHeaderActionButtonsFeature = () => {
 
     return (
         <Group grow preventGrowOverflow={false} wrap="wrap">
-            <HelpActionIconShared hidden={false} screen="INTERNAL_SQUADS_GRID" />
+            <HelpActionIconShared hidden={false} screen="PAGE_INTERNAL_SQUADS" />
 
             <ActionIconGroup>
                 <Tooltip label={t('common.update')} withArrow>

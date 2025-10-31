@@ -1,59 +1,115 @@
-import { Drawer, ScrollArea, Typography } from '@mantine/core'
+import { Box, Center, Code, Drawer, Stack, Title, Typography } from '@mantine/core'
+import { memo, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { memo } from 'react'
+import { TbAlertCircle } from 'react-icons/tb'
+import ReactMarkdown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
+import rehypeRaw from 'rehype-raw'
 
 import { MODALS, useModalClose, useModalState } from '@entities/dashboard/modal-store'
 
-import { HELP_DRAWER_AVAILABLE_SCREENS } from './help-drawer.types'
+import { THelpDrawerAvailableScreen } from './help-drawer.types'
 import { LoaderModalShared } from '../loader-modal'
+import classes from './help-drawer.module.css'
+
+const resolveDocsUrl = (screen: THelpDrawerAvailableScreen, language: string) => {
+    return `https://raw.githubusercontent.com/remnawave/panel/refs/heads/main/_panel-docs/help-articles/${language}/${screen}.md`
+}
 
 export const HelpDrawerShared = memo(() => {
+    const { t, i18n } = useTranslation()
+
     const { isOpen, internalState } = useModalState(MODALS.HELP_DRAWER)
     const close = useModalClose(MODALS.HELP_DRAWER)
 
-    const { t } = useTranslation()
+    const [content, setContent] = useState('')
+    const [loading, setLoading] = useState(false)
+    const [showContent, setShowContent] = useState(false)
+    const [error, setError] = useState<null | string>(null)
 
-    let content = null
+    useEffect(() => {
+        if (!isOpen || !internalState) {
+            return
+        }
 
-    switch (internalState?.screen) {
-        case HELP_DRAWER_AVAILABLE_SCREENS.EXTERNAL_SQUADS_GRID:
-            content = t('help-drawer.shared.external-squads-grid')
-            break
-        case HELP_DRAWER_AVAILABLE_SCREENS.INTERNAL_SQUADS_GRID:
-            content = t('help-drawer.shared.internal-squads-grid')
-            break
-        case HELP_DRAWER_AVAILABLE_SCREENS.TEMPLATES_JSON:
-            content = t('help-drawer.shared.templates-xray-json')
-            break
-        default:
-            content = t('help-drawer.shared.unknown-screen-provided')
-            break
+        setLoading(true)
+        setError(null)
+        setContent('')
+        setShowContent(false)
+
+        fetch(resolveDocsUrl(internalState.screen, i18n.language))
+            .then((res) => {
+                if (!res.ok) throw new Error(t('help-drawer.shared.failed-to-load-documentation'))
+                return res.text()
+            })
+            .then((text) => {
+                setContent(text)
+            })
+            .catch((err) => {
+                setError(err.message)
+                setLoading(false)
+            })
+            .finally(() => {
+                setTimeout(() => {
+                    setLoading(false)
+                    setShowContent(true)
+                }, 300)
+            })
+    }, [isOpen])
+
+    const cleanContent = () => {
+        setContent('')
+        setShowContent(false)
+        setLoading(false)
+        setError(null)
     }
 
     return (
         <Drawer
             keepMounted={false}
             onClose={close}
+            onExitTransitionEnd={cleanContent}
             opened={isOpen}
             overlayProps={{ backgroundOpacity: 0.6, blur: 0 }}
             position="right"
             size="lg"
             title={t('help-action-icon.shared.help-article')}
         >
-            <ScrollArea h="100%">
-                {!internalState && (
-                    <LoaderModalShared text={t('help-drawer.shared.loading-help-drawer')} />
-                )}
-                {internalState && (
-                    <Typography pb="xl">
-                        <div
-                            dangerouslySetInnerHTML={{
-                                __html: content
-                            }}
-                        />
+            {loading && (
+                <LoaderModalShared
+                    h="80vh"
+                    text={t('help-drawer.shared.loading-documentation')}
+                    w="100%"
+                />
+            )}
+
+            {error && (
+                <Center h="80vh" w="100%">
+                    <Stack align="center" gap="xs">
+                        <TbAlertCircle color="var(--mantine-color-red-5)" size="4rem" />
+                        <Title c="dimmed" order={4} size="lg">
+                            {t('help-drawer.shared.failed-to-load-documentation')}
+                        </Title>
+                        <Code color="var(--mantine-color-red-light)">{error}</Code>
+                    </Stack>
+                </Center>
+            )}
+
+            <Box
+                style={{
+                    opacity: showContent ? 1 : 0,
+                    pointerEvents: showContent ? 'auto' : 'none',
+                    transition: 'opacity 0.3s ease'
+                }}
+            >
+                {!loading && content && (
+                    <Typography className={classes.root}>
+                        <ReactMarkdown rehypePlugins={[rehypeRaw]} remarkPlugins={[remarkGfm]}>
+                            {content}
+                        </ReactMarkdown>
                     </Typography>
                 )}
-            </ScrollArea>
+            </Box>
         </Drawer>
     )
 })

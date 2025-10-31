@@ -89,7 +89,7 @@ export const HostsFiltersFeature = (props: IProps) => {
                     variant="filled"
                 >
                     <Accordion.Item value="filters">
-                        <Accordion.Control>
+                        <Accordion.Control component="a">
                             <Group align="center" gap="md" wrap="nowrap">
                                 <ActionIcon color="gray" size="input-sm" variant="light">
                                     <HiFilter size={20} />

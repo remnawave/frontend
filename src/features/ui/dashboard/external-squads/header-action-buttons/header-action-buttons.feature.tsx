@@ -56,7 +56,7 @@ export const ExternalSquadsHeaderActionButtonsFeature = () => {
 
     return (
         <Group grow preventGrowOverflow={false} wrap="wrap">
-            <HelpActionIconShared hidden={false} screen="EXTERNAL_SQUADS_GRID" />
+            <HelpActionIconShared hidden={false} screen="PAGE_EXTERNAL_SQUADS" />
 
             <ActionIconGroup>
                 <Tooltip

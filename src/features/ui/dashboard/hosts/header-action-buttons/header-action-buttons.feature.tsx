@@ -2,6 +2,7 @@ import { ActionIcon, ActionIconGroup, Group, Tooltip } from '@mantine/core'
 import { TbPlus, TbRefresh } from 'react-icons/tb'
 import { useTranslation } from 'react-i18next'
 
+import { HelpActionIconShared } from '@shared/ui/help-drawer/help-action-icon.shared'
 import { MODALS, useModalsStoreOpenWithData } from '@entities/dashboard/modal-store'
 import { QueryKeys, useGetHosts } from '@shared/api/hooks'
 import { queryClient } from '@shared/api'
@@ -25,6 +26,8 @@ export const HeaderActionButtonsFeature = () => {
 
     return (
         <Group grow preventGrowOverflow={false} wrap="wrap">
+            <HelpActionIconShared hidden={false} screen="PAGE_HOSTS" />
+
             <ActionIconGroup>
                 <Tooltip label={t('common.update')} withArrow>
                     <ActionIcon

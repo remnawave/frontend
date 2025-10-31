@@ -32,7 +32,7 @@ export const TemplateEditorPageComponent = (props: Props) => {
                     <Group>
                         <HelpActionIconShared
                             hidden={!isHelpDrawerVisible}
-                            screen="TEMPLATES_JSON"
+                            screen="EDITOR_TEMPLATES_XRAY_JSON"
                         />
 
                         <ActionIcon

@@ -1,13 +1,16 @@
 import { GetConfigProfileByUuidCommand, GetSnippetsCommand } from '@remnawave/backend-contract'
-import { Box, Drawer, Flex, Transition } from '@mantine/core'
+import { ActionIcon, Box, Drawer, Flex, Group, Transition } from '@mantine/core'
+import { TbArrowBack, TbFile } from 'react-icons/tb'
 import { useMediaQuery } from '@mantine/hooks'
 import { useTranslation } from 'react-i18next'
-import { TbFile } from 'react-icons/tb'
+import { useNavigate } from 'react-router-dom'
 
 import { ConfigEditorWidget } from '@widgets/dashboard/config-profiles/config-editor/config-editor.widget'
 import { SnippetsDrawerWidget } from '@widgets/dashboard/config-profiles/snippets-drawer'
 import { MODALS, useModalClose, useModalIsOpen } from '@entities/dashboard/modal-store'
 import { PageHeaderShared } from '@shared/ui/page-header/page-header.shared'
+import { HelpActionIconShared } from '@shared/ui/help-drawer'
+import { ROUTES } from '@shared/constants'
 import { Page } from '@shared/ui/page'
 
 interface Props {
@@ -20,6 +23,7 @@ export const ConfigProfileByUuidPageComponent = (props: Props) => {
 
     const { t } = useTranslation()
     const isMobile = useMediaQuery('(max-width: 1200px)')
+    const navigate = useNavigate()
 
     const isOpen = useModalIsOpen(MODALS.CONFIG_PROFILE_SHOW_SNIPPETS_DRAWER)
     const close = useModalClose(MODALS.CONFIG_PROFILE_SHOW_SNIPPETS_DRAWER)
@@ -28,6 +32,22 @@ export const ConfigProfileByUuidPageComponent = (props: Props) => {
         <>
             <Page title={t('constants.config-profiles')}>
                 <PageHeaderShared
+                    actions={
+                        <Group>
+                            <HelpActionIconShared hidden={false} screen="PAGE_CONFIG_PROFILES" />
+
+                            <ActionIcon
+                                color="gray"
+                                onClick={() =>
+                                    navigate(ROUTES.DASHBOARD.MANAGEMENT.CONFIG_PROFILES)
+                                }
+                                size="input-md"
+                                variant="light"
+                            >
+                                <TbArrowBack size={24} />
+                            </ActionIcon>
+                        </Group>
+                    }
                     description={configProfile.uuid}
                     icon={<TbFile size={24} />}
                     title={configProfile.name}
