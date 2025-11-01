@@ -1782,7 +1782,7 @@
     },
     "reset-node-traffic": {
         "feature": {
-            "reset-traffic": "Reset Traffic"
+            "reset-traffic": "重置流量"
         }
     }
 }
