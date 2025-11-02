@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next'
-import { PiChartLine } from 'react-icons/pi'
+import { PiSpeedometer } from 'react-icons/pi'
 
 import { EditNodeByUuidModalWidget } from '@widgets/dashboard/nodes/edit-node-by-uuid-modal'
 import { NodeMetricsWidget } from '@widgets/dashboard/nodes/nodes-metrics'
@@ -13,10 +13,7 @@ export default function NodesMetricsPageComponent(props: IProps) {
 
     return (
         <Page title={t('constants.nodes-metrics')}>
-            <PageHeaderShared
-                icon={<PiChartLine size={24} />}
-                title={t('constants.nodes-metrics')}
-            />
+            <PageHeaderShared icon={<PiSpeedometer size={24} />} title="Metrics Overview" />
 
             {isLoading ? <LoadingScreen height="80vh" /> : <NodeMetricsWidget />}
 
