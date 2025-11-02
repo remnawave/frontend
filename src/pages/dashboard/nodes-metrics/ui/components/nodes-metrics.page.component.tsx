@@ -18,7 +18,7 @@ export default function NodesMetricsPageComponent(props: IProps) {
                 title={t('constants.nodes-metrics')}
             />
 
-            {isLoading ? <LoadingScreen height="60vh" /> : <NodeMetricsWidget />}
+            {isLoading ? <LoadingScreen height="80vh" /> : <NodeMetricsWidget />}
 
             <EditNodeByUuidModalWidget />
         </Page>

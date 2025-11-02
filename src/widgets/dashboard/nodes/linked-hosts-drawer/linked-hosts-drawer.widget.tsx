@@ -38,7 +38,7 @@ export const LinkedHostsDrawer = memo(() => {
                 size="500px"
                 title={t('linked-hosts-drawer.widget.assigned-hosts')}
             >
-                <LoadingScreen height="60vh" />
+                <LoadingScreen />
             </Drawer>
         )
     }

@@ -26,7 +26,7 @@ export default function HostsPageComponent(props: IProps) {
     return (
         <Page title={t('constants.hosts')}>
             {isHostsLoading || isConfigProfilesLoading || isHostTagsLoading || isNodesLoading ? (
-                <LoadingScreen height="60vh" />
+                <LoadingScreen />
             ) : (
                 <motion.div
                     animate={{ opacity: 1 }}
