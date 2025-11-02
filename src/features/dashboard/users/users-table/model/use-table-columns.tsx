@@ -2,6 +2,7 @@
 import {
     GetAllNodesCommand,
     GetAllUsersCommand,
+    GetExternalSquadsCommand,
     GetInternalSquadsCommand
 } from '@remnawave/backend-contract'
 import { Badge, Group, Stack, Text, Tooltip } from '@mantine/core'
@@ -21,6 +22,7 @@ import { NodeSelectItem, NodeSelectItemProps } from './node-select-item'
 
 export const useUserTableColumns = (
     internalSquads?: GetInternalSquadsCommand.Response['response'],
+    externalSquads?: GetExternalSquadsCommand.Response['response'],
     nodes?: GetAllNodesCommand.Response['response']
 ) => {
     const { t } = useTranslation()
@@ -209,6 +211,34 @@ export const useUserTableColumns = (
                             </Group>
                         </Tooltip>
                     )
+                }
+            },
+
+            {
+                accessorKey: 'externalSquadUuid',
+                header: t('constants.external-squads'),
+                filterVariant: 'select',
+                enableColumnFilterModes: false,
+                enableSorting: false,
+                mantineFilterSelectProps: {
+                    data:
+                        externalSquads?.externalSquads.map((squad) => ({
+                            label: squad.name,
+                            value: squad.uuid
+                        })) ?? []
+                },
+                Cell: ({ cell }) => {
+                    const userSquad = cell.row.original.externalSquadUuid
+
+                    if (!userSquad) {
+                        return <Text c="dimmed">–</Text>
+                    }
+
+                    const squadName = externalSquads?.externalSquads.find(
+                        (squad) => userSquad === squad.uuid
+                    )?.name
+
+                    return squadName || '–'
                 }
             },
 
