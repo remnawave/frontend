@@ -16,7 +16,7 @@ export const ExternalSquadsPageComponent = (props: Props) => {
     const { externalSquads } = props
 
     return (
-        <Page title={t('constants.internal-squads')}>
+        <Page title={t('constants.external-squads')}>
             <PageHeaderShared
                 actions={<ExternalSquadsHeaderActionButtonsFeature />}
                 icon={<TbWebhook size={24} />}
