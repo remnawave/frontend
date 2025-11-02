@@ -73,6 +73,16 @@ export const NodeDetailsCardWidget = memo(({ node, fetchedNode }: IProps) => {
             return { icon, color, backgroundColor, borderColor, boxShadow }
         }
 
+        if (nodeData.isDisabled) {
+            icon = <TbWifiOff size={18} style={{ color: 'var(--mantine-color-gray-6)' }} />
+            color = 'gray'
+            backgroundColor = 'rgba(107, 114, 128, 0.15)'
+            borderColor = 'rgba(107, 114, 128, 0.3)'
+            boxShadow = 'rgba(107, 114, 128, 0.2)'
+
+            return { icon, color, backgroundColor, borderColor, boxShadow }
+        }
+
         if (nodeData.isConnected) {
             icon = <TbWifi size={18} style={{ color: 'var(--mantine-color-teal-6)' }} />
             color = 'teal'
@@ -90,12 +100,6 @@ export const NodeDetailsCardWidget = memo(({ node, fetchedNode }: IProps) => {
             backgroundColor = 'rgba(245, 158, 11, 0.15)'
             borderColor = 'rgba(245, 158, 11, 0.3)'
             boxShadow = 'rgba(245, 158, 11, 0.2)'
-        } else if (nodeData.isDisabled) {
-            icon = <TbWifiOff size={18} style={{ color: 'var(--mantine-color-gray-6)' }} />
-            color = 'gray'
-            backgroundColor = 'rgba(107, 114, 128, 0.15)'
-            borderColor = 'rgba(107, 114, 128, 0.3)'
-            boxShadow = 'rgba(107, 114, 128, 0.2)'
         } else {
             icon = <PiWarningCircle size={18} style={{ color: 'var(--mantine-color-red-6)' }} />
             color = 'red'
