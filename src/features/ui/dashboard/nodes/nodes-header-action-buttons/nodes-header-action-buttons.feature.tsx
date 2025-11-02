@@ -100,8 +100,13 @@ export const NodesHeaderActionButtonsFeature = () => {
         <Group grow preventGrowOverflow={false} wrap="wrap">
             <ActionIconGroup>
                 <Tooltip label={t('nodes-header-action-buttons.feature.search-nodes')}>
-                    <ActionIcon color="gray" onClick={spotlight.open} size="lg" variant="light">
-                        <TbSearch size="18px" />
+                    <ActionIcon
+                        color="gray"
+                        onClick={spotlight.open}
+                        size="input-md"
+                        variant="light"
+                    >
+                        <TbSearch size="24px" />
                     </ActionIcon>
                 </Tooltip>
             </ActionIconGroup>
@@ -117,10 +122,10 @@ export const NodesHeaderActionButtonsFeature = () => {
                         onClick={() => {
                             openRestartAllNodesModal()
                         }}
-                        size="lg"
+                        size="input-md"
                         variant="light"
                     >
-                        <PiSpiral size="18px" />
+                        <PiSpiral size="24px" />
                     </ActionIcon>
                 </Tooltip>
             </ActionIconGroup>
@@ -130,18 +135,18 @@ export const NodesHeaderActionButtonsFeature = () => {
                     <ActionIcon
                         loading={isGetNodesPending || isPending || isRefetching}
                         onClick={() => refetchNodes()}
-                        size="lg"
+                        size="input-md"
                         variant="light"
                     >
-                        <TbRefresh size="18px" />
+                        <TbRefresh size="24px" />
                     </ActionIcon>
                 </Tooltip>
             </ActionIconGroup>
 
             <ActionIconGroup>
                 <Tooltip label={t('nodes-header-action-buttons.feature.create-new-node')} withArrow>
-                    <ActionIcon color="teal" onClick={handleCreate} size="lg" variant="light">
-                        <TbPlus size="18px" />
+                    <ActionIcon color="teal" onClick={handleCreate} size="input-md" variant="light">
+                        <TbPlus size="24px" />
                     </ActionIcon>
                 </Tooltip>
             </ActionIconGroup>

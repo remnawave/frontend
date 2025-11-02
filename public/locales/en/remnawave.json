@@ -49,7 +49,10 @@
         "save-changes": "Save changes",
         "remove": "Remove",
         "add": "Add",
-        "select": "Select"
+        "select": "Select",
+        "loading": "Loading",
+        "success": "Success",
+        "download": "Download"
     },
     "bandwidth-metrics": {
         "current-year": "Current year",
@@ -138,7 +141,11 @@
         "last-ua": "Last UA",
         "lifetime-used": "Lifetime Usage",
         "sub-link-revoked-at": "Sub-link revoked at",
-        "created-at": "Created at"
+        "created-at": "Created at",
+        "internal-squads": "Internal Squads",
+        "first-connected-at": "First connected at",
+        "sub-last-opened-at": "Sub last opened at",
+        "tag": "Tag"
     },
     "header-buttons": {
         "feature": {}
@@ -535,13 +542,6 @@
             "password-too-short": "Minimum 24 characters",
             "register-description": "Create a super-admin account to get started",
             "registration": "Registration"
-        }
-    },
-    "xray-json-template-description": {
-        "widget": {
-            "importing-json-subscription": "Importing JSON subscription",
-            "description-line-1": "To use this subscription, just add",
-            "description-line-2": "at the end of your subscription link. Make sure you're using one of the supported apps listed in the table below. Otherwise, subscription will work as usual for requested client. (e.g. Base64, Mihomo)"
         }
     },
     "happ-routing-builder": {
@@ -1219,6 +1219,12 @@
     "config-profile-card": {
         "shared": {
             "active-on-nodes": "Active on nodes"
+        },
+        "widget": {
+            "loading-computed-config-profile": "Loading computed config profile...",
+            "computed-config-profile-loaded-successfully": "Computed config profile loaded successfully",
+            "the-computed-config-profile-description": "The computed config profile shows the final configuration after all snippets have been applied.",
+            "view-computed": "View Computed"
         }
     },
     "flat-inbound-checkbox-card": {
@@ -1742,6 +1748,41 @@
             "api-tokens": "API Tokens",
             "no-api-tokens-found": "No API tokens found",
             "token-name": "Token Name"
+        }
+    },
+    "external-squads-hosts": {
+        "tab": {
+            "widget": {
+                "host-overrides": "Host Overrides",
+                "override-host-settings-for-this-external-squad": "Override host settings for this external squad."
+            }
+        }
+    },
+    "reset-usage-user": {
+        "feature": {
+            "reset": "Reset",
+            "reset-usage": "Reset usage"
+        }
+    },
+    "help-action-icon": {
+        "shared": {
+            "help-article": "Help Article"
+        }
+    },
+    "internal-squad-card": {
+        "widget": {
+            "available-nodes": "Available Nodes"
+        }
+    },
+    "help-drawer": {
+        "shared": {
+            "failed-to-load-documentation": "Failed to load documentation",
+            "loading-documentation": "Loading documentation..."
+        }
+    },
+    "reset-node-traffic": {
+        "feature": {
+            "reset-traffic": "Reset Traffic"
         }
     }
 }

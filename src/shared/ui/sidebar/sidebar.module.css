@@ -1,0 +1,21 @@
+@keyframes fadein {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.fadeIn {
+    animation: fadein 0.2s ease-out;
+}
+
+.logoTitle {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 700;
+    font-size: var(--mantine-font-size-lg);
+    user-select: none;
+    -webkit-user-select: none;
+    animation: fadein 0.2s ease-out;
+}

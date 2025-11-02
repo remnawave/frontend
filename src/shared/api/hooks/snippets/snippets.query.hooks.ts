@@ -1,10 +1,9 @@
 import { GetSnippetsCommand } from '@remnawave/backend-contract'
 import { createQueryKeys } from '@lukemorales/query-key-factory'
-import { notifications } from '@mantine/notifications'
 
 import { sToMs } from '@shared/utils/time-utils'
 
-import { createGetQueryHook } from '../../tsq-helpers'
+import { createGetQueryHook, errorHandler } from '../../tsq-helpers'
 
 export const snippetsQueryKeys = createQueryKeys('snippets', {
     getSnippets: {
@@ -20,11 +19,5 @@ export const useGetSnippets = createGetQueryHook({
         refetchOnMount: true,
         staleTime: sToMs(30)
     },
-    errorHandler: (error) => {
-        notifications.show({
-            title: `Get All Snippets`,
-            message: error instanceof Error ? error.message : `Request failed with unknown error.`,
-            color: 'red'
-        })
-    }
+    errorHandler: (error) => errorHandler(error, 'Get All Snippets')
 })

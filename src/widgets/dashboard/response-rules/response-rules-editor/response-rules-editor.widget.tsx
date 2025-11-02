@@ -96,9 +96,10 @@ export function ResponseRulesEditorWidget(props: IProps) {
     }, [])
 
     return (
-        <Box>
+        <Box className={styles.container}>
             {result && (
                 <Paper
+                    className={styles.validationMessage}
                     mb="md"
                     p="md"
                     radius="sm"
@@ -110,7 +111,6 @@ export function ResponseRulesEditorWidget(props: IProps) {
                     }}
                 >
                     <Code
-                        block
                         color={isConfigValid ? 'teal' : 'red'}
                         style={{
                             backgroundColor: 'transparent',
@@ -124,15 +124,10 @@ export function ResponseRulesEditorWidget(props: IProps) {
             )}
 
             <Paper
-                mb="md"
+                className={styles.editorWrapper}
                 p={0}
                 style={{
-                    resize: 'vertical',
-                    overflow: 'visible',
-                    height: '700px',
-                    direction: 'ltr',
-                    position: 'relative',
-                    zIndex: 1
+                    direction: 'ltr'
                 }}
                 withBorder
             >
@@ -168,6 +163,7 @@ export function ResponseRulesEditorWidget(props: IProps) {
                         autoClosingQuotes: 'always',
                         autoIndent: 'full',
                         automaticLayout: true,
+                        fixedOverflowWidgets: true,
                         bracketPairColorization: {
                             enabled: true,
                             independentColorPoolPerBracketType: true

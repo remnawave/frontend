@@ -1,5 +1,6 @@
 import { PiClockCounterClockwiseDuotone } from 'react-icons/pi'
-import { Loader, Menu, Text } from '@mantine/core'
+import { useTranslation } from 'react-i18next'
+import { Loader, Menu } from '@mantine/core'
 import { modals } from '@mantine/modals'
 
 import { useUserModalStoreActions } from '@entities/dashboard/user-modal-store'
@@ -9,6 +10,8 @@ import { IProps } from './interfaces'
 
 export function ResetUsageUserFeature(props: IProps) {
     const { userUuid } = props
+    const { t } = useTranslation()
+
     const actions = useUserModalStoreActions()
 
     const { mutate: resetUserTraffic, isPending: isResetUserTrafficPending } = useResetUserTraffic({
@@ -29,13 +32,9 @@ export function ResetUsageUserFeature(props: IProps) {
 
     const openModal = () =>
         modals.openConfirmModal({
-            title: 'Reset user traffic',
-            children: (
-                <Text size="sm">
-                    Are you sure you want to reset the user traffic? This action is irreversible.
-                </Text>
-            ),
-            labels: { confirm: 'Reset', cancel: 'Cancel' },
+            title: t('common.confirm-action'),
+            children: t('common.confirm-action-description'),
+            labels: { confirm: t('reset-usage-user.feature.reset'), cancel: t('common.cancel') },
             centered: true,
             confirmProps: { color: 'red' },
             onConfirm: () => handleResetUsage()
@@ -45,17 +44,14 @@ export function ResetUsageUserFeature(props: IProps) {
         <Menu.Item
             leftSection={
                 isResetUserTrafficPending ? (
-                    <Loader color="var(--mantine-color-blue-5)" size="1rem" />
+                    <Loader size="1rem" />
                 ) : (
-                    <PiClockCounterClockwiseDuotone
-                        color="var(--mantine-color-blue-5)"
-                        size="16px"
-                    />
+                    <PiClockCounterClockwiseDuotone size="16px" />
                 )
             }
             onClick={openModal}
         >
-            Reset usage
+            {t('reset-usage-user.feature.reset-usage')}
         </Menu.Item>
     )
 }

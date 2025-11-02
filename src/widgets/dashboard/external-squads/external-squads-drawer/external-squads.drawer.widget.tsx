@@ -13,36 +13,51 @@ import {
     Tooltip,
     Transition
 } from '@mantine/core'
+import { PiCheck, PiCopy, PiListChecks, PiUsers } from 'react-icons/pi'
 import { TbFolder, TbSettings, TbWebhook } from 'react-icons/tb'
-import { PiCheck, PiCopy, PiUsers } from 'react-icons/pi'
 import { useTranslation } from 'react-i18next'
-import { useState } from 'react'
+import { memo, useState } from 'react'
 
 import { MODALS, useModalClose, useModalState } from '@entities/dashboard/modal-store'
-import { useGetSubscriptionTemplates } from '@shared/api/hooks'
+import { useGetExternalSquad, useGetSubscriptionTemplates } from '@shared/api/hooks'
 import { LoaderModalShared } from '@shared/ui/loader-modal'
 import { formatInt } from '@shared/utils/misc'
 
-import { ExternalSquadsTemplatesTabWidget } from './external-squads-templates.tab.widget'
-import { ExternalSquadsSettingsTabWidget } from './external-squads-settings.tab.widget'
+import {
+    ExternalSquadsHostOverridesTabWidget,
+    ExternalSquadsSettingsTabWidget,
+    ExternalSquadsTemplatesTabWidget
+} from './tabs'
 import classes from './external-squads.module.css'
 
 const TAB_TYPE = {
     settings: 'settings',
-    templates: 'templates'
+    templates: 'templates',
+    hosts: 'hosts'
 } as const
 
 type TabType = (typeof TAB_TYPE)[keyof typeof TAB_TYPE]
 
-export const ExternalSquadsDrawer = () => {
+export const ExternalSquadsDrawer = memo(() => {
     const { t } = useTranslation()
 
     const [activeTab, setActiveTab] = useState<TabType>('templates')
 
-    const { isOpen, internalState: externalSquad } = useModalState(MODALS.EXTERNAL_SQUAD_DRAWER)
+    const { isOpen, internalState: externalSquadUuid } = useModalState(MODALS.EXTERNAL_SQUAD_DRAWER)
+
     const close = useModalClose(MODALS.EXTERNAL_SQUAD_DRAWER)
 
     const { isLoading: isTemplatesLoading } = useGetSubscriptionTemplates()
+
+    const { data: externalSquad, isLoading: isExternalSquadLoading } = useGetExternalSquad({
+        route: {
+            uuid: externalSquadUuid ?? ''
+        },
+        rQueryParams: {
+            enabled: !!externalSquadUuid,
+            staleTime: 0
+        }
+    })
 
     const renderDrawerContent = () => {
         if (!externalSquad) return null
@@ -87,7 +102,7 @@ export const ExternalSquadsDrawer = () => {
                                     >
                                         {externalSquad.name}
                                     </Text>
-                                    <Group gap="xs" justify="left" wrap="nowrap">
+                                    <Group gap="xs" wrap="nowrap">
                                         <Tooltip label={t('external-squad-card.widget.users')}>
                                             <Badge
                                                 color={isActive ? 'teal' : 'gray'}
@@ -155,6 +170,12 @@ export const ExternalSquadsDrawer = () => {
                         >
                             {t('external-squads.drawer.widget.settings')}
                         </Tabs.Tab>
+                        <Tabs.Tab
+                            leftSection={<PiListChecks size={px('1.2rem')} />}
+                            value={TAB_TYPE.hosts}
+                        >
+                            {t('constants.hosts')}
+                        </Tabs.Tab>
                     </Tabs.List>
 
                     <Tabs.Panel pt="xl" value={TAB_TYPE.templates}>
@@ -192,16 +213,34 @@ export const ExternalSquadsDrawer = () => {
                             )}
                         </Transition>
                     </Tabs.Panel>
+
+                    <Tabs.Panel pt="xl" value={TAB_TYPE.hosts}>
+                        <Transition
+                            duration={200}
+                            mounted={activeTab === TAB_TYPE.hosts}
+                            timingFunction="linear"
+                            transition="fade"
+                        >
+                            {(styles) => (
+                                <Stack gap="lg" style={styles}>
+                                    <ExternalSquadsHostOverridesTabWidget
+                                        externalSquad={externalSquad}
+                                        isOpen={isOpen}
+                                    />
+                                </Stack>
+                            )}
+                        </Transition>
+                    </Tabs.Panel>
                 </Tabs>
             </Stack>
         )
     }
 
-    const isLoading = isTemplatesLoading || !externalSquad
+    const isLoading = isTemplatesLoading || isExternalSquadLoading
 
     return (
         <Drawer
-            keepMounted={true}
+            keepMounted={false}
             onClose={close}
             opened={isOpen}
             overlayProps={{ backgroundOpacity: 0.6, blur: 0 }}
@@ -210,11 +249,16 @@ export const ExternalSquadsDrawer = () => {
             size="540px"
             title={t('external-squads.drawer.widget.edit-external-squad')}
         >
-            {isLoading ? (
-                <LoaderModalShared h="80vh" text="Loading..." w="100%" />
-            ) : (
-                renderDrawerContent()
-            )}
+            <Transition
+                duration={300}
+                mounted={!isLoading}
+                timingFunction="ease-in-out"
+                transition="fade"
+            >
+                {(styles) => <Box style={styles}>{renderDrawerContent()}</Box>}
+            </Transition>
+
+            {isLoading && <LoaderModalShared h="80vh" text="Loading..." w="100%" />}
         </Drawer>
     )
-}
+})

@@ -30,7 +30,13 @@ export function RestartNodeButtonFeature(props: IProps) {
         <Menu.Item
             color="teal"
             disabled={node.isDisabled}
-            leftSection={isRestartNodePending ? <Loader color="teal" size="1rem" /> : <TbReload />}
+            leftSection={
+                isRestartNodePending ? (
+                    <Loader color="teal" size="1rem" />
+                ) : (
+                    <TbReload size="1rem" />
+                )
+            }
             onClick={() => restartNode({})}
         >
             {t('restart-node-button.feature.restart')}

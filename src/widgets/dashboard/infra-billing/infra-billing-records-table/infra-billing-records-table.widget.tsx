@@ -8,7 +8,7 @@ import {
     Text,
     Tooltip
 } from '@mantine/core'
-import { TbPlus, TbRefresh } from 'react-icons/tb'
+import { TbCreditCard, TbPlus, TbRefresh } from 'react-icons/tb'
 import { useTranslation } from 'react-i18next'
 import { DataTable } from 'mantine-datatable'
 import { useHotkeys } from '@mantine/hooks'
@@ -91,10 +91,10 @@ export function InfraBillingRecordsTableWidget() {
                                     onClick={() => {
                                         refetchInfraBillingRecords()
                                     }}
-                                    size="lg"
+                                    size="input-md"
                                     variant="light"
                                 >
-                                    <TbRefresh size="18px" />
+                                    <TbRefresh size="24px" />
                                 </ActionIcon>
                             </Tooltip>
                         </ActionIconGroup>
@@ -104,16 +104,16 @@ export function InfraBillingRecordsTableWidget() {
                                 <ActionIcon
                                     color="teal"
                                     onClick={handleOpenModal}
-                                    size="lg"
+                                    size="input-md"
                                     variant="light"
                                 >
-                                    <TbPlus size="18px" />
+                                    <TbPlus size="24px" />
                                 </ActionIcon>
                             </Tooltip>
                         </ActionIconGroup>
                     </Group>
                 }
-                description={t('infra-billing-records-table.widget.billing-records-sorted-by-date')}
+                icon={<TbCreditCard size={24} />}
                 title={t('infra-billing-records-table.widget.infra-billing-records')}
             />
             <DataTable

@@ -1,0 +1,46 @@
+.headerWrapper {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--mantine-spacing-md);
+}
+
+.contentSection {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.actionsSection {
+    flex: 0 1 auto;
+    margin-left: auto;
+    display: flex;
+    justify-content: flex-end;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.card {
+    background: linear-gradient(
+        135deg,
+        var(--mantine-color-dark-6) 0%,
+        var(--mantine-color-dark-7) 100%
+    );
+    animation: fadeIn 200ms linear both;
+    border-top: none;
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.1),
+        0 2px 8px rgba(0, 0, 0, 0.05);
+    position: relative;
+}
+
+.actionIcon {
+    cursor: default;
+}

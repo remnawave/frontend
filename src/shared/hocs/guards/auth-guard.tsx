@@ -1,6 +1,9 @@
 import { Navigate, Outlet, useLocation } from 'react-router-dom'
+import { useLayoutEffect } from 'react'
 
-import { LoadingScreen } from '@shared/ui/loading-screen'
+import { useUpdatesStoreActions } from '@entities/dashboard/updates-store'
+import { LoadingProgress } from '@shared/ui/loading-screen'
+import { useGetAuthStatus } from '@shared/api/hooks'
 import { ROUTES } from '@shared/constants/routes'
 import { useAuth } from '@shared/hooks'
 
@@ -9,8 +12,15 @@ export function AuthGuard() {
 
     const { isAuthenticated, isInitialized } = useAuth()
 
-    if (!isInitialized) {
-        return <LoadingScreen />
+    const { isLoading } = useGetAuthStatus({})
+    const updatesStoreActions = useUpdatesStoreActions()
+
+    useLayoutEffect(() => {
+        updatesStoreActions.getRemnawaveInfo()
+    }, [])
+
+    if (!isInitialized || isLoading) {
+        return <LoadingProgress />
     }
 
     if (!isAuthenticated) {

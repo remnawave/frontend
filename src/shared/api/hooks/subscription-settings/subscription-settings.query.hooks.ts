@@ -1,10 +1,9 @@
 import { GetSubscriptionSettingsCommand } from '@remnawave/backend-contract'
 import { createQueryKeys } from '@lukemorales/query-key-factory'
-import { notifications } from '@mantine/notifications'
 
 import { sToMs } from '@shared/utils/time-utils'
 
-import { createGetQueryHook } from '../../tsq-helpers'
+import { createGetQueryHook, errorHandler } from '../../tsq-helpers'
 
 export const subscriptionSettingsQueryKeys = createQueryKeys('subscriptionSettings', {
     getSubscriptionSettings: {
@@ -20,11 +19,5 @@ export const useGetSubscriptionSettings = createGetQueryHook({
         refetchOnMount: false,
         staleTime: sToMs(30)
     },
-    errorHandler: (error) => {
-        notifications.show({
-            title: `Get Subscription Settings`,
-            message: error instanceof Error ? error.message : `Request failed with unknown error.`,
-            color: 'red'
-        })
-    }
+    errorHandler: (error) => errorHandler(error, 'Get Subscription Settings')
 })

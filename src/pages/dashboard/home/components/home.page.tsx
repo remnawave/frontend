@@ -3,9 +3,8 @@ import { motion, Variants } from 'motion/react'
 import { useTranslation } from 'react-i18next'
 
 import { MetricWithIcon } from '@widgets/dashboard/home/metric-with-icons'
-import { LoadingScreen, PageHeader } from '@shared/ui'
 import { MetricWithTrend } from '@shared/ui/metrics'
-import { ROUTES } from '@shared/constants'
+import { LoadingScreen } from '@shared/ui'
 import { Page } from '@shared/ui/page'
 
 import {
@@ -102,14 +101,6 @@ export const HomePage = (props: IProps) => {
 
     return (
         <Page title={t('constants.home')}>
-            <PageHeader
-                breadcrumbs={[
-                    { label: t('constants.dashboard'), href: ROUTES.DASHBOARD.HOME },
-                    { label: t('constants.home') }
-                ]}
-                title={t('home.page.short-stats')}
-            />
-
             <MotionStack animate="visible" gap="sm" initial="hidden" variants={containerVariants}>
                 {pm2SummaryMetrics.length > 0 && (
                     <MotionWrapper variants={sectionVariants}>

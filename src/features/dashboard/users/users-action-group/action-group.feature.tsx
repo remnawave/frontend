@@ -17,7 +17,6 @@ import {
     ActionIcon,
     ActionIconGroup,
     Drawer,
-    Flex,
     Group,
     Stack,
     Table,
@@ -85,58 +84,40 @@ export const UserActionGroupFeature = (props: IProps) => {
 
     return (
         <>
-            <Flex
-                align="center"
-                gap={{ base: 0, sm: 'xs' }}
-                justify={{ base: 'space-between', sm: 'flex-end' }}
-                w={{ base: '100%', sm: 'auto' }}
-            >
+            <Group grow preventGrowOverflow={false} wrap="wrap">
                 <ActionIconGroup>
                     <Tooltip label={t('action-group.feature.help')} withArrow>
                         <ActionIcon
                             color="lime"
                             onClick={helpDrawerHandlers.open}
-                            size="lg"
+                            size="input-md"
                             variant="light"
                         >
-                            <TbQuestionMark size="18px" />
+                            <TbQuestionMark size="24px" />
                         </ActionIcon>
                     </Tooltip>
                 </ActionIconGroup>
 
                 <ActionIconGroup>
-                    <Tooltip label={t('common.update')} withArrow>
-                        <ActionIcon
-                            loading={isLoading}
-                            onClick={handleRefetch}
-                            size="lg"
-                            variant="light"
-                        >
-                            <TbRefresh size="18px" />
-                        </ActionIcon>
-                    </Tooltip>
-
                     <Tooltip label={t('action-group.feature.clear-filters')} withArrow>
                         <ActionIcon
-                            color="orange"
                             loading={isLoading}
                             onClick={handleClearFilters}
-                            size="lg"
-                            variant="light"
+                            size="input-md"
+                            variant="default"
                         >
-                            <TbFilterOff size="18px" />
+                            <TbFilterOff size="24px" />
                         </ActionIcon>
                     </Tooltip>
 
                     <Tooltip label={t('action-group.feature.reset-table')} withArrow>
                         <ActionIcon
-                            color="gray"
                             loading={isLoading}
                             onClick={handleResetTable}
-                            size="lg"
-                            variant="light"
+                            size="input-md"
+                            variant="default"
                         >
-                            <TbRestore size="18px" />
+                            <TbRestore size="24px" />
                         </ActionIcon>
                     </Tooltip>
                 </ActionIconGroup>
@@ -147,10 +128,21 @@ export const UserActionGroupFeature = (props: IProps) => {
                             color="red"
                             loading={isLoading}
                             onClick={bulkAllDrawerHandlers.open}
-                            size="lg"
+                            size="input-md"
                             variant="light"
                         >
-                            <TbSettings size="18px" />
+                            <TbSettings size="24px" />
+                        </ActionIcon>
+                    </Tooltip>
+
+                    <Tooltip label={t('common.update')} withArrow>
+                        <ActionIcon
+                            loading={isLoading}
+                            onClick={handleRefetch}
+                            size="input-md"
+                            variant="light"
+                        >
+                            <TbRefresh size="24px" />
                         </ActionIcon>
                     </Tooltip>
 
@@ -158,19 +150,19 @@ export const UserActionGroupFeature = (props: IProps) => {
                         <ActionIcon
                             color="teal"
                             onClick={handleOpenCreateUserModal}
-                            size="lg"
+                            size="input-md"
                             variant="light"
                         >
-                            <TbPlus size="18px" />
+                            <TbPlus size="24px" />
                         </ActionIcon>
                     </Tooltip>
                 </ActionIconGroup>
+            </Group>
 
-                <BulkAllUserActionsDrawerWidget
-                    handlers={bulkAllDrawerHandlers}
-                    isDrawerOpen={isBulkAllUserActionsDrawerOpen}
-                />
-            </Flex>
+            <BulkAllUserActionsDrawerWidget
+                handlers={bulkAllDrawerHandlers}
+                isDrawerOpen={isBulkAllUserActionsDrawerOpen}
+            />
 
             <Drawer
                 keepMounted={false}

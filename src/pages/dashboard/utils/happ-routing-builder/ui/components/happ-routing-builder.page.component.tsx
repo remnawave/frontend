@@ -4,9 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 
 import { HappRoutingBuilderWidget } from '@widgets/dashboard/utils/happ-routing-builder/happ-routing-builder.widget'
-import { ROUTES } from '@shared/constants'
-import { PageHeader } from '@shared/ui'
-import { Page } from '@shared/ui/page'
+import { Page, PageHeaderShared } from '@shared/ui'
 
 export const HappLogo = ({ size = 48 }: { size?: number }) => (
     <svg
@@ -51,13 +49,7 @@ export const HappRoutingBuilderPageComponent = () => {
 
     return (
         <Page title={title}>
-            <PageHeader
-                breadcrumbs={[
-                    { label: t('constants.dashboard'), href: ROUTES.DASHBOARD.HOME },
-                    { label: title }
-                ]}
-                title={title}
-            />
+            <PageHeaderShared icon={<HappLogo size={24} />} title={title} />
             <Container fluid p={0} size="xl">
                 <Paper mb="xl" p="md" shadow="sm" withBorder>
                     <Group align="flex-start" wrap="nowrap">

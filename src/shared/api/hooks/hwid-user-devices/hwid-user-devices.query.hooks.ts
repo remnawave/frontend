@@ -5,10 +5,10 @@ import {
 } from '@remnawave/backend-contract'
 import { createQueryKeys } from '@lukemorales/query-key-factory'
 import { keepPreviousData } from '@tanstack/react-query'
-import { notifications } from '@mantine/notifications'
 
-import { createGetQueryHook } from '@shared/api/tsq-helpers'
 import { sToMs } from '@shared/utils/time-utils'
+
+import { createGetQueryHook, errorHandler } from '../../tsq-helpers'
 
 export const hwidUserDevicesQueryKeys = createQueryKeys('hwid-user-devices', {
     getUserHwidDevices: (route: GetUserHwidDevicesCommand.Request) => ({
@@ -34,13 +34,7 @@ export const useGetUserHwidDevices = createGetQueryHook({
         staleTime: sToMs(20),
         refetchInterval: sToMs(20)
     },
-    errorHandler: (error) => {
-        notifications.show({
-            title: 'Get User HWIDs and Devices',
-            message: error instanceof Error ? error.message : `Request failed with unknown error.`,
-            color: 'red'
-        })
-    }
+    errorHandler: (error) => errorHandler(error, 'Get User HWIDs and Devices')
 })
 
 export const useGetAllHwidDevices = createGetQueryHook({
@@ -54,13 +48,7 @@ export const useGetAllHwidDevices = createGetQueryHook({
         placeholderData: keepPreviousData,
         refetchOnMount: true
     },
-    errorHandler: (error) => {
-        notifications.show({
-            title: `Get All HWIDs`,
-            message: error instanceof Error ? error.message : `Request failed with unknown error.`,
-            color: 'red'
-        })
-    }
+    errorHandler: (error) => errorHandler(error, 'Get All HWIDs')
 })
 
 export const useGetHwidDevicesStats = createGetQueryHook({
@@ -72,11 +60,5 @@ export const useGetHwidDevicesStats = createGetQueryHook({
         staleTime: STALE_TIME,
         refetchInterval: REFETCH_INTERVAL
     },
-    errorHandler: (error) => {
-        notifications.show({
-            title: `Get HWIDs Devices Stats`,
-            message: error instanceof Error ? error.message : `Request failed with unknown error.`,
-            color: 'red'
-        })
-    }
+    errorHandler: (error) => errorHandler(error, 'Get HWIDs Devices Stats')
 })

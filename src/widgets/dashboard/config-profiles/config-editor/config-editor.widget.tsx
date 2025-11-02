@@ -115,10 +115,10 @@ export function ConfigEditorWidget(props: IProps) {
     }, [])
 
     return (
-        <Box>
+        <Box className={styles.container}>
             {result && (
                 <Paper
-                    mb="md"
+                    className={styles.validationMessage}
                     p="md"
                     radius="sm"
                     style={{
@@ -129,7 +129,6 @@ export function ConfigEditorWidget(props: IProps) {
                     }}
                 >
                     <Code
-                        block
                         color={isConfigValid ? 'teal' : 'red'}
                         style={{
                             backgroundColor: 'transparent',
@@ -143,12 +142,9 @@ export function ConfigEditorWidget(props: IProps) {
             )}
 
             <Paper
-                mb="md"
+                className={styles.editorWrapper}
                 p={0}
                 style={{
-                    resize: 'vertical',
-                    overflow: 'hidden',
-                    height: '700px',
                     direction: 'ltr'
                 }}
                 withBorder
@@ -185,6 +181,7 @@ export function ConfigEditorWidget(props: IProps) {
                         autoClosingQuotes: 'always',
                         autoIndent: 'full',
                         automaticLayout: true,
+                        fixedOverflowWidgets: true,
                         bracketPairColorization: {
                             enabled: true,
                             independentColorPoolPerBracketType: true

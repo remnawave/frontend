@@ -1,3 +1,5 @@
+/* eslint-disable @stylistic/indent */
+
 import { Box, BoxProps, ElementProps } from '@mantine/core'
 
 interface LogoProps

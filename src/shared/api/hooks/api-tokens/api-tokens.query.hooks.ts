@@ -1,9 +1,8 @@
 import { FindAllApiTokensCommand } from '@remnawave/backend-contract'
 import { createQueryKeys } from '@lukemorales/query-key-factory'
 import { keepPreviousData } from '@tanstack/react-query'
-import { notifications } from '@mantine/notifications'
 
-import { createGetQueryHook } from '../../tsq-helpers'
+import { createGetQueryHook, errorHandler } from '../../tsq-helpers'
 
 export const apiTokensQueryKeys = createQueryKeys('apiTokens', {
     getAllApiTokens: {
@@ -19,11 +18,5 @@ export const useGetApiTokens = createGetQueryHook({
         placeholderData: keepPreviousData,
         refetchOnMount: true
     },
-    errorHandler: (error) => {
-        notifications.show({
-            title: `Get All Api Tokens`,
-            message: error instanceof Error ? error.message : `Request failed with unknown error.`,
-            color: 'red'
-        })
-    }
+    errorHandler: (error) => errorHandler(error, 'Get All Api Tokens')
 })

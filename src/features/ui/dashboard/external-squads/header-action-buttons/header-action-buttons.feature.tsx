@@ -14,12 +14,12 @@ import { useDisclosure } from '@mantine/hooks'
 import { useTranslation } from 'react-i18next'
 import { useField } from '@mantine/form'
 
-import { QueryKeys, useCreateExternalSquad, useGetExternalSquads } from '@shared/api/hooks'
 import { MODALS, useModalsStoreOpenWithData } from '@entities/dashboard/modal-store'
-import { queryClient } from '@shared/api'
+import { useCreateExternalSquad, useGetExternalSquads } from '@shared/api/hooks'
+import { HelpActionIconShared } from '@shared/ui/help-drawer'
 
 export const ExternalSquadsHeaderActionButtonsFeature = () => {
-    const { isFetching } = useGetExternalSquads()
+    const { isFetching, refetch: refetchExternalSquads } = useGetExternalSquads()
     const { t } = useTranslation()
 
     const openModalWithData = useModalsStoreOpenWithData()
@@ -27,9 +27,7 @@ export const ExternalSquadsHeaderActionButtonsFeature = () => {
     const [opened, { open, close }] = useDisclosure(false)
 
     const handleUpdate = async () => {
-        await queryClient.refetchQueries({
-            queryKey: QueryKeys.externalSquads.getExternalSquads.queryKey
-        })
+        await refetchExternalSquads()
     }
 
     const nameField = useField<CreateExternalSquadCommand.Request['name']>({
@@ -48,7 +46,7 @@ export const ExternalSquadsHeaderActionButtonsFeature = () => {
                 nameField.reset()
                 handleUpdate()
 
-                openModalWithData(MODALS.EXTERNAL_SQUAD_DRAWER, data)
+                openModalWithData(MODALS.EXTERNAL_SQUAD_DRAWER, data.uuid)
             },
             onError: (error) => {
                 nameField.setError(error.message)
@@ -58,6 +56,8 @@ export const ExternalSquadsHeaderActionButtonsFeature = () => {
 
     return (
         <Group grow preventGrowOverflow={false} wrap="wrap">
+            <HelpActionIconShared hidden={false} screen="PAGE_EXTERNAL_SQUADS" />
+
             <ActionIconGroup>
                 <Tooltip
                     label={t('header-action-buttons.feature.update-external-squads')}
@@ -66,10 +66,10 @@ export const ExternalSquadsHeaderActionButtonsFeature = () => {
                     <ActionIcon
                         loading={isFetching}
                         onClick={handleUpdate}
-                        size="lg"
+                        size="input-md"
                         variant="light"
                     >
-                        <TbRefresh size="18px" />
+                        <TbRefresh size="24px" />
                     </ActionIcon>
                 </Tooltip>
             </ActionIconGroup>
@@ -79,8 +79,8 @@ export const ExternalSquadsHeaderActionButtonsFeature = () => {
                     label={t('header-action-buttons.feature.create-new-external-squad')}
                     withArrow
                 >
-                    <ActionIcon color="teal" onClick={open} size="lg" variant="light">
-                        <TbPlus size="18px" />
+                    <ActionIcon color="teal" onClick={open} size="input-md" variant="light">
+                        <TbPlus size="24px" />
                     </ActionIcon>
                 </Tooltip>
             </ActionIconGroup>

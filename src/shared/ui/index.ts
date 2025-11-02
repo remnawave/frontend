@@ -1,3 +1,4 @@
+export * from './get-core-logo-from-type'
 export * from './header-buttons'
 export * from './loading-screen'
 export * from './logo'

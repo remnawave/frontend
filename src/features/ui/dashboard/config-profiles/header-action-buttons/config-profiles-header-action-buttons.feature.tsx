@@ -17,6 +17,7 @@ import { useTranslation } from 'react-i18next'
 import { useField } from '@mantine/form'
 
 import { QueryKeys, useCreateConfigProfile, useGetConfigProfiles } from '@shared/api/hooks'
+import { HelpActionIconShared } from '@shared/ui/help-drawer'
 import { ROUTES } from '@shared/constants'
 import { queryClient } from '@shared/api'
 
@@ -98,15 +99,17 @@ export const ConfigProfilesHeaderActionButtonsFeature = () => {
 
     return (
         <Group grow preventGrowOverflow={false} wrap="wrap">
+            <HelpActionIconShared hidden={false} screen="PAGE_CONFIG_PROFILES" />
+
             <ActionIconGroup>
                 <Tooltip label={t('common.update')} withArrow>
                     <ActionIcon
                         loading={isFetching}
                         onClick={handleUpdate}
-                        size="lg"
+                        size="input-md"
                         variant="light"
                     >
-                        <TbRefresh size="18px" />
+                        <TbRefresh size="24px" />
                     </ActionIcon>
                 </Tooltip>
             </ActionIconGroup>
@@ -116,8 +119,8 @@ export const ConfigProfilesHeaderActionButtonsFeature = () => {
                     label={t('config-profiles-header-action-buttons.feature.create-config-profile')}
                     withArrow
                 >
-                    <ActionIcon color="teal" onClick={open} size="lg" variant="light">
-                        <TbPlus size="18px" />
+                    <ActionIcon color="teal" onClick={open} size="input-md" variant="light">
+                        <TbPlus size="24px" />
                     </ActionIcon>
                 </Tooltip>
             </ActionIconGroup>

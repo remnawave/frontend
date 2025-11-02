@@ -42,6 +42,7 @@ export const TrafficLimitsCard = <T extends CreateUserCommand.Request | UpdateUs
 
     const usedTrafficPercentage = user ? (user.usedTrafficBytes / user.trafficLimitBytes) * 100 : 0
     const totalUsedTraffic = prettyBytesUtil(user?.usedTrafficBytes, true)
+    const lifetimeUsedTraffic = prettyBytesUtil(user?.lifetimeUsedTrafficBytes, true)
 
     return (
         <MotionWrapper variants={cardVariants}>
@@ -59,7 +60,7 @@ export const TrafficLimitsCard = <T extends CreateUserCommand.Request | UpdateUs
                         </Title>
                         {user && (
                             <Badge color="indigo" size="sm" variant="light">
-                                {totalUsedTraffic === '0' ? '0' : totalUsedTraffic}
+                                {lifetimeUsedTraffic}
                             </Badge>
                         )}
                     </Group>

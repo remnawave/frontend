@@ -66,6 +66,7 @@ export default defineConfig({
                         'react-error-boundary',
                         'react-dom/client'
                     ],
+                    markdown: ['react-markdown', 'remark-gfm', 'rehype-raw'],
                     icons: ['react-icons/pi', 'react-icons/fa', 'react-icons/tb', 'lottie-web'],
                     date: ['dayjs'],
                     zod: ['axios', 'zod', 'zustand', 'xbytes', 'zod-to-json-schema'],

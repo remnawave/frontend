@@ -1,3 +1,5 @@
+/* eslint-disable no-nested-ternary */
+
 import { Box, Card, Center, Group, Loader, SimpleGrid, Stack, Text, ThemeIcon } from '@mantine/core'
 import { PiChartBar, PiChartPieDuotone } from 'react-icons/pi'
 import HighchartsReact from 'highcharts-react-official'
@@ -198,21 +200,11 @@ export function SrhInspectorMetrics() {
         }
     }, [stats?.hourlyRequestStats, t])
 
-    if (isLoading) {
-        return (
-            <Stack gap="md">
-                <SimpleGrid cols={{ base: 1, lg: 2 }} spacing="md">
-                    {[1, 2].map((i) => (
-                        <Card key={i} p="lg" withBorder>
-                            <Center h={300}>
-                                <Loader size="lg" />
-                            </Center>
-                        </Card>
-                    ))}
-                </SimpleGrid>
-            </Stack>
-        )
-    }
+    const loaderCard = (
+        <Center h={300}>
+            <Loader size="lg" />
+        </Center>
+    )
 
     return (
         <Stack gap="xl">
@@ -241,7 +233,9 @@ export function SrhInspectorMetrics() {
                             {t('hwid-inspector-metrics.widget.app-distribution')}
                         </Text>
                     </Group>
-                    {stats?.byParsedApp && stats.byParsedApp.length > 0 ? (
+                    {isLoading ? (
+                        loaderCard
+                    ) : stats?.byParsedApp && stats.byParsedApp.length > 0 ? (
                         <Box h={300}>
                             <HighchartsReact
                                 highcharts={Highcharts}
@@ -288,7 +282,9 @@ export function SrhInspectorMetrics() {
                             {t('srh-inspector-metrics.widget.hourly-request-statistics')}
                         </Text>
                     </Group>
-                    {stats?.hourlyRequestStats && stats.hourlyRequestStats.length > 0 ? (
+                    {isLoading ? (
+                        loaderCard
+                    ) : stats?.hourlyRequestStats && stats.hourlyRequestStats.length > 0 ? (
                         <Box h={300}>
                             <HighchartsReact
                                 highcharts={Highcharts}

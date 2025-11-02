@@ -1,3 +1,5 @@
+/* eslint-disable no-nested-ternary */
+
 import {
     PiCalculatorDuotone,
     PiChartPieDuotone,
@@ -132,33 +134,14 @@ export function HwidInspectorMetrics() {
         }
     ]
 
-    if (isLoading) {
-        return (
-            <Stack gap="md">
-                <SimpleGrid cols={{ base: 1, sm: 2, xl: 3 }}>
-                    {[1, 2, 3].map((i) => (
-                        <Card key={i} p="lg" withBorder>
-                            <Center h={80}>
-                                <Loader size="md" />
-                            </Center>
-                        </Card>
-                    ))}
-                </SimpleGrid>
-                <SimpleGrid cols={{ base: 1, lg: 2 }} spacing="md">
-                    {[1, 2].map((i) => (
-                        <Card key={i} p="lg" withBorder>
-                            <Center h={300}>
-                                <Loader size="lg" />
-                            </Center>
-                        </Card>
-                    ))}
-                </SimpleGrid>
-            </Stack>
-        )
-    }
+    const loaderCard = (
+        <Center h={300}>
+            <Loader size="lg" />
+        </Center>
+    )
 
     return (
-        <Stack gap="xl">
+        <Stack gap="md" mb={0}>
             {/* Metric Cards */}
             <SimpleGrid cols={{ base: 1, sm: 2, xl: 3 }}>
                 {metricCards.map((card) => (
@@ -171,9 +154,13 @@ export function HwidInspectorMetrics() {
                                 <MetricCard.TextMuted>{card.title}</MetricCard.TextMuted>
                                 <Box miw={0} w="100%">
                                     <MetricCard.TextEmphasis ff="monospace" truncate>
-                                        {card.format
-                                            ? card.format(card.value ?? 0)
-                                            : formatInt(card.value ?? 0)}
+                                        {isLoading ? (
+                                            <Loader size="xs" />
+                                        ) : card.format ? (
+                                            card.format(card.value ?? 0)
+                                        ) : (
+                                            formatInt(card.value ?? 0)
+                                        )}
                                     </MetricCard.TextEmphasis>
                                 </Box>
                             </Stack>
@@ -182,7 +169,7 @@ export function HwidInspectorMetrics() {
                 ))}
             </SimpleGrid>
 
-            <SimpleGrid cols={{ base: 1, lg: 2 }} spacing="lg">
+            <SimpleGrid cols={{ base: 1, lg: 2 }}>
                 {/* Platform Distribution */}
                 <Card
                     p="lg"
@@ -208,7 +195,10 @@ export function HwidInspectorMetrics() {
                             {t('hwid-inspector-metrics.widget.platform-distribution')}
                         </Text>
                     </Group>
-                    {stats?.byPlatform && stats.byPlatform.length > 0 ? (
+
+                    {isLoading ? (
+                        loaderCard
+                    ) : stats?.byPlatform && stats.byPlatform.length > 0 ? (
                         <Box h={300}>
                             <HighchartsReact
                                 highcharts={Highcharts}
@@ -256,7 +246,9 @@ export function HwidInspectorMetrics() {
                             {t('hwid-inspector-metrics.widget.app-distribution')}
                         </Text>
                     </Group>
-                    {stats?.byApp && stats.byApp.length > 0 ? (
+                    {isLoading ? (
+                        loaderCard
+                    ) : stats?.byApp && stats.byApp.length > 0 ? (
                         <Box h={300}>
                             <HighchartsReact
                                 highcharts={Highcharts}

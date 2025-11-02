@@ -49,7 +49,10 @@
         "save-changes": "Сохранить изменения",
         "remove": "Удалить",
         "add": "Добавить",
-        "select": "Выбрать"
+        "select": "Выбрать",
+        "loading": "Загрузка",
+        "success": "Успешно",
+        "download": "Скачать"
     },
     "bandwidth-metrics": {
         "current-year": "Текущий год",
@@ -138,7 +141,11 @@
         "last-ua": "Последний UA",
         "lifetime-used": "Трафик за все время",
         "sub-link-revoked-at": "Сброс ссылки-подписки",
-        "created-at": "Дата создания"
+        "created-at": "Дата создания",
+        "internal-squads": "Внутренние сквады",
+        "first-connected-at": "Первое подключение",
+        "sub-last-opened-at": "Последний запрос подписки",
+        "tag": "Tag"
     },
     "header-buttons": {
         "feature": {}
@@ -425,7 +432,7 @@
         "limit": "Лимит",
         "reset-day": "День сброса",
         "e-g-1-31": "например, 1-31",
-        "notify-percent": "Процент уведомления",
+        "notify-percent": "% уведомления",
         "e-g-50": "например, 50",
         "consumption-m-line-1": "Применяет выбранный множитель к трафику пользователя (1,0 = обычный, 0,5 = половина, 2,0 = двойной).",
         "consumption-m-line-2": "Проще говоря, это означает, что если лимит трафика пользователя составляет 1 GB, а множитель потребления равен 2,0, пользователь сможет использовать только 0,5 GB трафика (реальное использование), но Remnawave покажет использование как 1 GB, и пользователь будет переведен в статус LIMITED.",
@@ -535,13 +542,6 @@
             "password-too-short": "Минимум 24 символа",
             "register-description": "Создайте аккаунт супер-админа, чтобы начать",
             "registration": "Регистрация"
-        }
-    },
-    "xray-json-template-description": {
-        "widget": {
-            "importing-json-subscription": "Импорт JSON подписки",
-            "description-line-1": "Чтобы использовать эту подписку, просто добавьте",
-            "description-line-2": "в конец вашей ссылки на подписку. \nУбедитесь, что вы используете одно из поддерживаемых приложений, перечисленных в таблице ниже. \nИначе подписка будет работать как обычно для запрошенного клиента. (например, Base64, Mihomo)"
         }
     },
     "happ-routing-builder": {
@@ -1219,6 +1219,12 @@
     "config-profile-card": {
         "shared": {
             "active-on-nodes": "Активен на ноде(ах)"
+        },
+        "widget": {
+            "loading-computed-config-profile": "Загрузка вычисленного конфига...",
+            "computed-config-profile-loaded-successfully": "Конфиг. успешно загружен",
+            "the-computed-config-profile-description": "В вычисленном профиле показывается окончательная конфигурация после применения всех сниппетов.",
+            "view-computed": "Просмотр со сниппетами"
         }
     },
     "flat-inbound-checkbox-card": {
@@ -1742,6 +1748,41 @@
             "api-tokens": "API токены",
             "no-api-tokens-found": "API токены не найдены",
             "token-name": "Название токена"
+        }
+    },
+    "external-squads-hosts": {
+        "tab": {
+            "widget": {
+                "host-overrides": "Переопределение хостов",
+                "override-host-settings-for-this-external-squad": "Переопределить настройки хостов для внешнего отряда."
+            }
+        }
+    },
+    "reset-usage-user": {
+        "feature": {
+            "reset": "Сбросить",
+            "reset-usage": "Сбросить трафик"
+        }
+    },
+    "help-action-icon": {
+        "shared": {
+            "help-article": "Справочная статья"
+        }
+    },
+    "internal-squad-card": {
+        "widget": {
+            "available-nodes": "Доступные ноды"
+        }
+    },
+    "help-drawer": {
+        "shared": {
+            "failed-to-load-documentation": "Не удалось загрузить документацию",
+            "loading-documentation": "Загрузка документации..."
+        }
+    },
+    "reset-node-traffic": {
+        "feature": {
+            "reset-traffic": "Сбросить трафик"
         }
     }
 }

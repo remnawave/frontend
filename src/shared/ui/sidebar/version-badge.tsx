@@ -1,15 +1,14 @@
-import { useQuery } from '@tanstack/react-query'
 import { Badge, Indicator } from '@mantine/core'
 import { useMemo, useState } from 'react'
 import semver from 'semver'
-import axios from 'axios'
 
 import { getBuildInfo } from '@shared/utils/get-build-info/get-build-info.util'
-import { sToMs } from '@shared/utils/time-utils/s-to-ms/s-to-ms.util'
+import { useRemnawaveInfo } from '@entities/dashboard/updates-store'
 
 import { BuildInfoModal } from './build-info-modal'
 import packageJson from '../../../../package.json'
 import { GameModalShared } from './game-modal'
+import classes from './sidebar.module.css'
 
 export const VersionBadgeShared = () => {
     const [buildInfoModalOpened, setBuildInfoModalOpened] = useState(false)
@@ -17,25 +16,13 @@ export const VersionBadgeShared = () => {
     const buildInfo = useMemo(() => getBuildInfo(), [])
     const isDev = buildInfo.branch === 'dev'
 
-    const { data: latestVersion } = useQuery({
-        queryKey: ['github-latest-version'],
-        staleTime: sToMs(3600),
-        refetchInterval: sToMs(3600),
-        queryFn: async () => {
-            const response = await axios.get<{
-                release: {
-                    tag: string
-                }
-            }>('https://ungh.cc/repos/remnawave/panel/releases/latest')
-            return response.data.release.tag
-        }
-    })
+    const remnawaveInfo = useRemnawaveInfo()
 
     const isNewVersionAvailable = useMemo(() => {
         const currentVersion = buildInfo.tag ?? '0.0.0'
-        const latest = latestVersion ?? '0.0.0'
+        const latest = remnawaveInfo.latestVersion || '0.0.0'
         return semver.gt(latest, currentVersion)
-    }, [latestVersion, buildInfo.tag])
+    }, [remnawaveInfo.latestVersion, buildInfo.tag])
 
     return (
         <>
@@ -47,6 +34,7 @@ export const VersionBadgeShared = () => {
                 size={11}
             >
                 <Badge
+                    className={classes.fadeIn}
                     color={isDev ? 'red' : 'cyan'}
                     onClick={() => setBuildInfoModalOpened(true)}
                     radius="xl"

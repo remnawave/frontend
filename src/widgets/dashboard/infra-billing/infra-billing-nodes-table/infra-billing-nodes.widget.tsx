@@ -8,8 +8,8 @@ import {
     Text,
     Tooltip
 } from '@mantine/core'
+import { TbCalendar, TbPlus, TbRefresh, TbServer, TbTrash } from 'react-icons/tb'
 import { GetInfraBillingNodesCommand } from '@remnawave/backend-contract'
-import { TbCalendar, TbPlus, TbRefresh, TbTrash } from 'react-icons/tb'
 import { AnimatePresence, motion } from 'motion/react'
 import { useTranslation } from 'react-i18next'
 import { DataTable } from 'mantine-datatable'
@@ -149,10 +149,10 @@ export function InfraBillingNodesTableWidget() {
                                         <ActionIcon
                                             color="red"
                                             onClick={() => handleDeleteInfraBillingNode()}
-                                            size="lg"
+                                            size="input-md"
                                             variant="light"
                                         >
-                                            <TbTrash size={16} />
+                                            <TbTrash size="24px" />
                                         </ActionIcon>
 
                                         <Tooltip
@@ -164,10 +164,10 @@ export function InfraBillingNodesTableWidget() {
                                             <ActionIcon
                                                 color="teal"
                                                 onClick={handleUpdateMultipleNodes}
-                                                size="lg"
+                                                size="input-md"
                                                 variant="light"
                                             >
-                                                <TbCalendar size="18px" />
+                                                <TbCalendar size="24px" />
                                             </ActionIcon>
                                         </Tooltip>
                                     </Group>
@@ -183,10 +183,10 @@ export function InfraBillingNodesTableWidget() {
                                         refetchInfraBillingNodes()
                                         clearMultiSelectedRecords()
                                     }}
-                                    size="lg"
+                                    size="input-md"
                                     variant="light"
                                 >
-                                    <TbRefresh size="18px" />
+                                    <TbRefresh size="24px" />
                                 </ActionIcon>
                             </Tooltip>
                         </ActionIconGroup>
@@ -201,16 +201,16 @@ export function InfraBillingNodesTableWidget() {
                                             undefined
                                         )
                                     }}
-                                    size="lg"
+                                    size="input-md"
                                     variant="light"
                                 >
-                                    <TbPlus size="18px" />
+                                    <TbPlus size="24px" />
                                 </ActionIcon>
                             </Tooltip>
                         </ActionIconGroup>
                     </Group>
                 }
-                description={t('infra-billing-nodes.widget.list-of-all-infra-billing-nodes')}
+                icon={<TbServer size={24} />}
                 title={t('infra-billing-nodes.widget.infra-billing-nodes')}
             />
             <DataTable

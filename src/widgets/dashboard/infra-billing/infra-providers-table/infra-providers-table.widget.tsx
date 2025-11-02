@@ -9,7 +9,7 @@ import {
     Tooltip
 } from '@mantine/core'
 import { GetInfraProvidersCommand } from '@remnawave/backend-contract'
-import { TbPlus, TbRefresh } from 'react-icons/tb'
+import { TbCloud, TbPlus, TbRefresh } from 'react-icons/tb'
 import { useTranslation } from 'react-i18next'
 import { DataTable } from 'mantine-datatable'
 import { PiEmpty } from 'react-icons/pi'
@@ -104,10 +104,10 @@ export function InfraProvidersTableWidget() {
                                                 QueryKeys.infraBilling.getInfraProviders.queryKey
                                         })
                                     }}
-                                    size="lg"
+                                    size="input-md"
                                     variant="light"
                                 >
-                                    <TbRefresh size="18px" />
+                                    <TbRefresh size="24px" />
                                 </ActionIcon>
                             </Tooltip>
                         </ActionIconGroup>
@@ -125,16 +125,16 @@ export function InfraProvidersTableWidget() {
                                             undefined
                                         )
                                     }}
-                                    size="lg"
+                                    size="input-md"
                                     variant="light"
                                 >
-                                    <TbPlus size="18px" />
+                                    <TbPlus size="24px" />
                                 </ActionIcon>
                             </Tooltip>
                         </ActionIconGroup>
                     </Group>
                 }
-                description={t('infra-providers-table.widget.list-of-all-infra-providers')}
+                icon={<TbCloud size={24} />}
                 title={t('infra-providers-table.widget.infra-providers')}
             />
             <DataTable

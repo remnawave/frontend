@@ -12,7 +12,6 @@ export interface IProps<T extends CreateHostCommand.Request | UpdateHostCommand.
     form: UseFormReturnType<T>
     handleCloneHost?: () => void
     handleSubmit: () => void
-    host?: UpdateHostCommand.Response['response']
     isSubmitting: boolean
     nodes: GetAllNodesCommand.Response['response']
     setAdvancedOpened: (value: boolean) => void

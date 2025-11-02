@@ -1,10 +1,9 @@
 import { GetAllHostsCommand, GetAllHostTagsCommand } from '@remnawave/backend-contract'
 import { createQueryKeys } from '@lukemorales/query-key-factory'
-import { notifications } from '@mantine/notifications'
 
 import { sToMs } from '@shared/utils/time-utils'
 
-import { createGetQueryHook } from '../../tsq-helpers'
+import { createGetQueryHook, errorHandler } from '../../tsq-helpers'
 
 export const hostsQueryKeys = createQueryKeys('hosts', {
     getAllHosts: {
@@ -22,13 +21,7 @@ export const useGetHosts = createGetQueryHook({
     rQueryParams: {
         refetchOnMount: true
     },
-    errorHandler: (error) => {
-        notifications.show({
-            title: `Get All Hosts`,
-            message: error instanceof Error ? error.message : `Request failed with unknown error.`,
-            color: 'red'
-        })
-    }
+    errorHandler: (error) => errorHandler(error, 'Get All Hosts')
 })
 
 export const useGetHostTags = createGetQueryHook({
@@ -41,12 +34,5 @@ export const useGetHostTags = createGetQueryHook({
         refetchInterval: sToMs(60),
         placeholderData: false
     },
-
-    errorHandler: (error) => {
-        notifications.show({
-            title: `Get All Host Tags`,
-            message: error instanceof Error ? error.message : `Request failed with unknown error.`,
-            color: 'red'
-        })
-    }
+    errorHandler: (error) => errorHandler(error, 'Get All Host Tags')
 })

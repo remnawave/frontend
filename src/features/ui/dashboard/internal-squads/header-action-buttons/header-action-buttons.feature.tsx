@@ -17,6 +17,7 @@ import { useField } from '@mantine/form'
 
 import { QueryKeys, useCreateInternalSquad, useGetInternalSquads } from '@shared/api/hooks'
 import { MODALS, useModalsStoreOpenWithData } from '@entities/dashboard/modal-store'
+import { HelpActionIconShared } from '@shared/ui/help-drawer'
 import { queryClient } from '@shared/api'
 
 export const InternalSquadsHeaderActionButtonsFeature = () => {
@@ -61,15 +62,17 @@ export const InternalSquadsHeaderActionButtonsFeature = () => {
 
     return (
         <Group grow preventGrowOverflow={false} wrap="wrap">
+            <HelpActionIconShared hidden={false} screen="PAGE_INTERNAL_SQUADS" />
+
             <ActionIconGroup>
                 <Tooltip label={t('common.update')} withArrow>
                     <ActionIcon
                         loading={isFetching}
                         onClick={handleUpdate}
-                        size="lg"
+                        size="input-md"
                         variant="light"
                     >
-                        <TbRefresh size="18px" />
+                        <TbRefresh size="24px" />
                     </ActionIcon>
                 </Tooltip>
             </ActionIconGroup>
@@ -79,8 +82,8 @@ export const InternalSquadsHeaderActionButtonsFeature = () => {
                     label={t('internal-squad-header-action-buttons.feature.create-internal-squad')}
                     withArrow
                 >
-                    <ActionIcon color="teal" onClick={open} size="lg" variant="light">
-                        <TbPlus size="18px" />
+                    <ActionIcon color="teal" onClick={open} size="input-md" variant="light">
+                        <TbPlus size="24px" />
                     </ActionIcon>
                 </Tooltip>
             </ActionIconGroup>

@@ -1,10 +1,11 @@
 import {
     GetConfigProfilesCommand,
-    GetExternalSquadsCommand,
     GetInfraProvidersCommand,
     GetInternalSquadsCommand,
     UpdateHostCommand
 } from '@remnawave/backend-contract'
+
+import { THelpDrawerAvailableScreen } from '@shared/ui/help-drawer/help-drawer.types'
 
 export const MODALS = {
     CONFIG_PROFILES_SHOW_ACTIVE_NODE: 'CONFIG_PROFILES_SHOW_ACTIVE_NODE',
@@ -24,7 +25,8 @@ export const MODALS = {
     CONFIG_PROFILE_SHOW_INBOUNDS_DRAWER: 'CONFIG_PROFILE_SHOW_INBOUNDS_DRAWER',
     CONFIG_PROFILE_SHOW_SNIPPETS_DRAWER: 'CONFIG_PROFILE_SHOW_SNIPPETS_DRAWER',
     EDIT_HOST_MODAL: 'EDIT_HOST_MODAL',
-    CREATE_HOST_MODAL: 'CREATE_HOST_MODAL'
+    CREATE_HOST_MODAL: 'CREATE_HOST_MODAL',
+    HELP_DRAWER: 'HELP_DRAWER'
 } as const
 
 export interface ModalInternalStates {
@@ -39,7 +41,10 @@ export interface ModalInternalStates {
     EDIT_NODE_BY_UUID_MODAL: {
         nodeUuid: string
     }
-    EXTERNAL_SQUAD_DRAWER: GetExternalSquadsCommand.Response['response']['externalSquads'][number]
+    EXTERNAL_SQUAD_DRAWER: string
+    HELP_DRAWER: {
+        screen: THelpDrawerAvailableScreen
+    }
     INTERNAL_SQUAD_ACCESSIBLE_NODES_DRAWER: {
         squadUuid: string
     }

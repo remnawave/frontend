@@ -4,12 +4,11 @@ import {
 } from '@remnawave/backend-contract'
 import { useTranslation } from 'react-i18next'
 import { Box, Flex } from '@mantine/core'
+import { TbRoute } from 'react-icons/tb'
 
 import { SrrAdvancedWarningOverlay } from '@shared/ui/srr-advanced-warning-overlay/srr-advanced-warning-overlay'
 import { ResponseRulesEditorWidget } from '@widgets/dashboard/response-rules/response-rules-editor'
-import { ROUTES } from '@shared/constants'
-import { PageHeader } from '@shared/ui'
-import { Page } from '@shared/ui/page'
+import { Page, PageHeaderShared } from '@shared/ui'
 
 interface Props {
     groupedTemplates: Record<TSubscriptionTemplateType, string[]>
@@ -24,17 +23,7 @@ export const ResponseRulesPageComponent = (props: Props) => {
 
     return (
         <Page title={t('constants.response-rules')}>
-            <PageHeader
-                breadcrumbs={[
-                    { label: t('constants.dashboard'), href: ROUTES.DASHBOARD.HOME },
-
-                    {
-                        label: t('constants.response-rules'),
-                        href: ROUTES.DASHBOARD.MANAGEMENT.RESPONSE_RULES
-                    }
-                ]}
-                title={t('constants.response-rules')}
-            />
+            <PageHeaderShared icon={<TbRoute size={24} />} title={t('constants.response-rules')} />
 
             <SrrAdvancedWarningOverlay />
 

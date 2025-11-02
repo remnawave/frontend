@@ -47,7 +47,12 @@ export const NodeStatsCard = <T extends CreateNodeCommand.Request | UpdateNodeCo
             }
         }
 
-        return { maxData, percentage, prettyUsedData }
+        return {
+            maxData,
+            percentage,
+            prettyUsedData,
+            fallbackProgress: node.isTrafficTrackingActive && node.trafficLimitBytes === 0
+        }
     }, [node.trafficUsedBytes, node.trafficLimitBytes, node.isTrafficTrackingActive])
 
     const isOnline = useMemo(() => {
@@ -55,10 +60,11 @@ export const NodeStatsCard = <T extends CreateNodeCommand.Request | UpdateNodeCo
     }, [node?.isConnected, node?.xrayUptime])
 
     const getProgressColor = useCallback(() => {
+        if (trafficData.fallbackProgress) return 'teal.6'
         if (trafficData.percentage > 95) return 'red.6'
         if (trafficData.percentage > 80) return 'yellow.6'
         return 'teal.6'
-    }, [trafficData.percentage])
+    }, [trafficData.percentage, trafficData.fallbackProgress])
 
     const getTrafficBadgeColor = useCallback(() => {
         if (!node?.isTrafficTrackingActive) return 'teal'
@@ -77,7 +83,7 @@ export const NodeStatsCard = <T extends CreateNodeCommand.Request | UpdateNodeCo
                             {t('node-stats.card.stats')}
                         </Title>
 
-                        {node.isTrafficTrackingActive && (
+                        {node.isTrafficTrackingActive && !trafficData.fallbackProgress && (
                             <Badge color={getTrafficBadgeColor()} size="md" variant="outline">
                                 {trafficData.percentage}%
                             </Badge>

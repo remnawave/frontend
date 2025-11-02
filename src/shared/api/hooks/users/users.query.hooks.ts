@@ -9,10 +9,10 @@ import {
 } from '@remnawave/backend-contract'
 import { createQueryKeys } from '@lukemorales/query-key-factory'
 import { keepPreviousData } from '@tanstack/react-query'
-import { notifications } from '@mantine/notifications'
 
-import { createGetQueryHook } from '@shared/api/tsq-helpers'
 import { sToMs } from '@shared/utils/time-utils'
+
+import { createGetQueryHook, errorHandler } from '../../tsq-helpers'
 
 export const usersQueryKeys = createQueryKeys('users', {
     getAllUsers: (filters: GetAllUsersCommand.RequestQuery) => ({
@@ -51,13 +51,7 @@ export const useGetUserByUuid = createGetQueryHook({
         staleTime: sToMs(3),
         refetchInterval: sToMs(35)
     },
-    errorHandler: (error) => {
-        notifications.show({
-            title: `Get User By UUID`,
-            message: error instanceof Error ? error.message : `Request failed with unknown error.`,
-            color: 'red'
-        })
-    }
+    errorHandler: (error) => errorHandler(error, 'Get User By UUID')
 })
 
 export const useGetUsersV2 = createGetQueryHook({
@@ -71,13 +65,7 @@ export const useGetUsersV2 = createGetQueryHook({
         placeholderData: keepPreviousData,
         refetchOnMount: true
     },
-    errorHandler: (error) => {
-        notifications.show({
-            title: `Get All Users`,
-            message: error instanceof Error ? error.message : `Request failed with unknown error.`,
-            color: 'red'
-        })
-    }
+    errorHandler: (error) => errorHandler(error, 'Get All Users')
 })
 
 export const useGetSubscriptionInfoByUuid = createGetQueryHook({
@@ -88,13 +76,7 @@ export const useGetSubscriptionInfoByUuid = createGetQueryHook({
     rQueryParams: {
         staleTime: sToMs(4)
     },
-    errorHandler: (error) => {
-        notifications.show({
-            title: `Get Subscription Info By UUID`,
-            message: error instanceof Error ? error.message : `Request failed with unknown error.`,
-            color: 'red'
-        })
-    }
+    errorHandler: (error) => errorHandler(error, 'Get Subscription Info By UUID')
 })
 
 export const useGetUserUsageByRange = createGetQueryHook({
@@ -107,13 +89,7 @@ export const useGetUserUsageByRange = createGetQueryHook({
     rQueryParams: {
         staleTime: sToMs(15)
     },
-    errorHandler: (error) => {
-        notifications.show({
-            title: `Get User Usage By Range`,
-            message: error instanceof Error ? error.message : `Request failed with unknown error.`,
-            color: 'red'
-        })
-    }
+    errorHandler: (error) => errorHandler(error, 'Get User Usage By Range')
 })
 
 export const useGetUserTags = createGetQueryHook({
@@ -124,13 +100,7 @@ export const useGetUserTags = createGetQueryHook({
         staleTime: sToMs(15),
         refetchInterval: sToMs(15)
     },
-    errorHandler: (error) => {
-        notifications.show({
-            title: `Get User Tags`,
-            message: error instanceof Error ? error.message : `Request failed with unknown error.`,
-            color: 'red'
-        })
-    }
+    errorHandler: (error) => errorHandler(error, 'Get User Tags')
 })
 
 export const useGetUserAccessibleNodes = createGetQueryHook({
@@ -141,13 +111,7 @@ export const useGetUserAccessibleNodes = createGetQueryHook({
     rQueryParams: {
         staleTime: sToMs(60)
     },
-    errorHandler: (error) => {
-        notifications.show({
-            title: `Get User Accessible Nodes`,
-            message: error instanceof Error ? error.message : `Request failed with unknown error.`,
-            color: 'red'
-        })
-    }
+    errorHandler: (error) => errorHandler(error, 'Get User Accessible Nodes')
 })
 
 export const useGetUserSubscriptionRequestHistory = createGetQueryHook({
@@ -158,11 +122,5 @@ export const useGetUserSubscriptionRequestHistory = createGetQueryHook({
     rQueryParams: {
         staleTime: sToMs(60)
     },
-    errorHandler: (error) => {
-        notifications.show({
-            title: `Get User Subscription Request History`,
-            message: error instanceof Error ? error.message : `Request failed with unknown error.`,
-            color: 'red'
-        })
-    }
+    errorHandler: (error) => errorHandler(error, 'Get User Subscription Request History')
 })

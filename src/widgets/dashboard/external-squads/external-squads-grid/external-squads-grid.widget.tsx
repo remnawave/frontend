@@ -15,7 +15,6 @@ import { queryClient } from '@shared/api/query-client'
 import { sToMs } from '@shared/utils/time-utils'
 
 import { ExternalSquadCardWidget } from '../external-squad-card/external-squad-card.widget'
-import { ExternalSquadsDrawer } from '../external-squads-drawer'
 import { IProps } from './interfaces'
 
 export function ExternalSquadsGridWidget(props: IProps) {
@@ -163,8 +162,6 @@ export function ExternalSquadsGridWidget(props: IProps) {
                     key={externalSquad.uuid}
                 />
             ))}
-
-            <ExternalSquadsDrawer />
         </SimpleGrid>
     )
 }

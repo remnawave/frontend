@@ -6,6 +6,7 @@ import {
     useMantineReactTable
 } from 'mantine-react-table'
 import { notifications } from '@mantine/notifications'
+import { PiUsersDuotone } from 'react-icons/pi'
 import { useTranslation } from 'react-i18next'
 import { useMemo, useState } from 'react'
 
@@ -194,7 +195,7 @@ export function UserTableWidget() {
                 actions={
                     <UserActionGroupFeature isLoading={isLoading} refetch={refetch} table={table} />
                 }
-                description={t('user-table.widget.list-of-all-users')}
+                icon={<PiUsersDuotone size={24} />}
                 title={t('user-table.widget.table-title')}
             />
 

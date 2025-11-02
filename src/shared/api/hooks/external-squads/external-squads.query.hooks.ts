@@ -4,11 +4,10 @@ import {
 } from '@remnawave/backend-contract'
 import { createQueryKeys } from '@lukemorales/query-key-factory'
 import { keepPreviousData } from '@tanstack/react-query'
-import { notifications } from '@mantine/notifications'
 
 import { sToMs } from '@shared/utils/time-utils'
 
-import { createGetQueryHook } from '../../tsq-helpers'
+import { createGetQueryHook, errorHandler } from '../../tsq-helpers'
 
 export const externalSquadsQueryKeys = createQueryKeys('externalSquads', {
     getExternalSquads: {
@@ -26,16 +25,10 @@ export const useGetExternalSquads = createGetQueryHook({
     rQueryParams: {
         placeholderData: keepPreviousData,
         refetchOnMount: true,
-        staleTime: sToMs(5)
+        staleTime: sToMs(30)
     },
 
-    errorHandler: (error) => {
-        notifications.show({
-            title: `Get All External Squads`,
-            message: error instanceof Error ? error.message : `Request failed with unknown error.`,
-            color: 'red'
-        })
-    }
+    errorHandler: (error) => errorHandler(error, 'Get All External Squads')
 })
 
 export const useGetExternalSquad = createGetQueryHook({
@@ -44,14 +37,8 @@ export const useGetExternalSquad = createGetQueryHook({
     routeParamsSchema: GetExternalSquadByUuidCommand.RequestSchema,
     getQueryKey: ({ route }) => externalSquadsQueryKeys.getExternalSquad(route!).queryKey,
     rQueryParams: {
-        refetchOnMount: true,
+        refetchOnMount: false,
         staleTime: sToMs(30)
     },
-    errorHandler: (error) => {
-        notifications.show({
-            title: `Get External Squad`,
-            message: error instanceof Error ? error.message : `Request failed with unknown error.`,
-            color: 'red'
-        })
-    }
+    errorHandler: (error) => errorHandler(error, 'Get External Squad')
 })

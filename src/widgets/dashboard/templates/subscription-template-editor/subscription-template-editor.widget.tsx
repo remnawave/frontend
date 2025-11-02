@@ -1,9 +1,6 @@
 import type { editor } from 'monaco-editor'
 
-import {
-    GetSubscriptionTemplateCommand,
-    SUBSCRIPTION_TEMPLATE_TYPE
-} from '@remnawave/backend-contract'
+import { GetSubscriptionTemplateCommand } from '@remnawave/backend-contract'
 import Editor, { Monaco } from '@monaco-editor/react'
 import 'monaco-yaml/yaml.worker.js'
 import { Box, Card, Paper } from '@mantine/core'
@@ -14,7 +11,6 @@ import { TemplateEditorActionsFeature } from '@features/dashboard/subscription-t
 import { monacoTheme } from '@shared/constants/monaco-theme/monaco-theme'
 import { preventBackScroll } from '@shared/utils/misc'
 
-import { XrayJsonTemplateDescriptionWidget } from './xray-json-template-description.widget'
 import { configureMonaco } from './utils/setup-template-monaco'
 import styles from './SubscriptionTemplateEditor.module.css'
 
@@ -62,18 +58,11 @@ export function SubscriptionTemplateEditorWidget(props: Props) {
     }, [])
 
     return (
-        <Box>
-            {template.templateType === SUBSCRIPTION_TEMPLATE_TYPE.XRAY_JSON && (
-                <XrayJsonTemplateDescriptionWidget />
-            )}
-
+        <Box className={styles.container}>
             <Paper
-                mb="md"
+                className={styles.editorWrapper}
                 p={0}
                 style={{
-                    resize: 'vertical',
-                    overflow: 'hidden',
-                    height: '700px',
                     direction: 'ltr'
                 }}
                 withBorder
@@ -89,6 +78,7 @@ export function SubscriptionTemplateEditorWidget(props: Props) {
                         autoClosingQuotes: 'always',
                         autoIndent: 'full',
                         automaticLayout: true,
+                        fixedOverflowWidgets: true,
                         bracketPairColorization: {
                             enabled: true,
                             independentColorPoolPerBracketType: true
