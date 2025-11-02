@@ -23,7 +23,7 @@ const DeferredUserTableWidget = () => {
     }, [])
 
     if (!shouldRender) {
-        return <LoadingScreen height="60vh" />
+        return <LoadingScreen height="80vh" />
     }
 
     return (

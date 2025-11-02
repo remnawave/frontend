@@ -127,7 +127,10 @@ export const UserActionGroupFeature = (props: IProps) => {
                         <ActionIcon
                             color="red"
                             loading={isLoading}
-                            onClick={bulkAllDrawerHandlers.open}
+                            onClick={() => {
+                                table.resetRowSelection()
+                                bulkAllDrawerHandlers.open()
+                            }}
                             size="input-md"
                             variant="light"
                         >

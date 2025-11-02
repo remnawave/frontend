@@ -10,7 +10,7 @@ export function LoadingScreen({
     value?: number
 }) {
     return (
-        <Center h={height}>
+        <Center style={{ height: `calc(${height} - var(--app-shell-header-height) - 20px)` }}>
             <Stack align="center" gap="xs" w="100%">
                 {text && <Text size="lg">{text}</Text>}
                 <Progress

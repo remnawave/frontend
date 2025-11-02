@@ -10,7 +10,6 @@ import { SidebarTitleShared } from '@shared/ui/sidebar/sidebar-title'
 import { SidebarLogoShared } from '@shared/ui/sidebar/sidebar-logo'
 import { HeaderControls } from '@shared/ui/header-buttons'
 import { HelpDrawerShared } from '@shared/ui/help-drawer'
-import { VersionBadgeShared } from '@shared/ui/sidebar'
 
 import { Navigation } from './navbar/navigation.layout'
 import classes from './Main.module.css'
@@ -104,20 +103,10 @@ export function MainLayout() {
                         />
                     </Box>
 
-                    <Group gap="xs" justify={isMobile ? 'center' : 'space-between'} w="100%">
-                        <Group gap={4}>
-                            <SidebarLogoShared />
-                            <SidebarTitleShared />
-                        </Group>
-
-                        {!isMobile && <VersionBadgeShared />}
+                    <Group gap="xs" justify="center" wrap="nowrap">
+                        <SidebarLogoShared />
+                        <SidebarTitleShared />
                     </Group>
-
-                    {isMobile && (
-                        <Group gap="xs" justify="center">
-                            <VersionBadgeShared />
-                        </Group>
-                    )}
                 </AppShell.Section>
                 <AppShell.Section
                     className={classes.scrollArea}
@@ -139,6 +128,7 @@ export function MainLayout() {
                                 withLanguage={false}
                                 withLogout={false}
                                 withRefresh={false}
+                                withVersion={false}
                             />
                         </Group>
                     )}
