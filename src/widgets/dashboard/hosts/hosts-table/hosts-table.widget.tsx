@@ -204,10 +204,6 @@ export const HostsTableWidget = memo((props: IProps) => {
         return null
     }
 
-    if (hosts.length === 0) {
-        return <EmptyPageLayout />
-    }
-
     return (
         <Stack gap="md">
             <HostsFiltersFeature
@@ -223,94 +219,98 @@ export const HostsTableWidget = memo((props: IProps) => {
                 setSearchValue={setSearchValue}
             />
 
-            <DndContext
-                collisionDetection={closestCenter}
-                modifiers={[restrictToVerticalAxis]}
-                onDragCancel={handleDragCancel}
-                onDragEnd={handleDragEnd}
-                onDragStart={handleDragStart}
-                sensors={sensors}
-            >
-                <div ref={listRef}>
-                    <div
-                        style={{
-                            height: `${virtualizer.getTotalSize()}px`,
-                            width: '100%',
-                            position: 'relative'
-                        }}
-                    >
-                        <SortableContext
-                            items={dataIds.current}
-                            strategy={verticalListSortingStrategy}
+            {hosts.length === 0 && <EmptyPageLayout />}
+
+            {hosts.length > 0 && (
+                <DndContext
+                    collisionDetection={closestCenter}
+                    modifiers={[restrictToVerticalAxis]}
+                    onDragCancel={handleDragCancel}
+                    onDragEnd={handleDragEnd}
+                    onDragStart={handleDragStart}
+                    sensors={sensors}
+                >
+                    <div ref={listRef}>
+                        <div
+                            style={{
+                                height: `${virtualizer.getTotalSize()}px`,
+                                width: '100%',
+                                position: 'relative'
+                            }}
                         >
-                            <Container fluid>
-                                <Stack gap={0}>
-                                    {virtualizer.getVirtualItems().map((virtualItem) => {
-                                        const item = state[virtualItem.index]
-                                        if (!item) return null
+                            <SortableContext
+                                items={dataIds.current}
+                                strategy={verticalListSortingStrategy}
+                            >
+                                <Container fluid>
+                                    <Stack gap={0}>
+                                        {virtualizer.getVirtualItems().map((virtualItem) => {
+                                            const item = state[virtualItem.index]
+                                            if (!item) return null
 
-                                        return (
-                                            <Box
-                                                data-index={virtualItem.index}
-                                                key={item.uuid}
-                                                style={{
-                                                    position: 'absolute',
-                                                    marginLeft: isMobile ? '0px' : '16px',
-                                                    marginRight: isMobile ? '0px' : '16px',
-                                                    top: 0,
-                                                    left: 0,
-                                                    right: 0,
-                                                    transform: `translateY(${
-                                                        virtualItem.start -
-                                                        virtualizer.options.scrollMargin
-                                                    }px)`
-                                                }}
-                                            >
-                                                <motion.div
-                                                    animate={{ opacity: 1 }}
-                                                    exit={{ opacity: 0 }}
-                                                    initial={{ opacity: 0 }}
-                                                    transition={{ duration: 0.1 }}
+                                            return (
+                                                <Box
+                                                    data-index={virtualItem.index}
+                                                    key={item.uuid}
+                                                    style={{
+                                                        position: 'absolute',
+                                                        marginLeft: isMobile ? '0px' : '16px',
+                                                        marginRight: isMobile ? '0px' : '16px',
+                                                        top: 0,
+                                                        left: 0,
+                                                        right: 0,
+                                                        transform: `translateY(${
+                                                            virtualItem.start -
+                                                            virtualizer.options.scrollMargin
+                                                        }px)`
+                                                    }}
                                                 >
-                                                    <HostCardWidget
-                                                        configProfiles={configProfiles}
-                                                        isHighlighted={
-                                                            highlightedHost === item.uuid
-                                                        }
-                                                        isSelected={selectedHosts.includes(
-                                                            item.uuid
-                                                        )}
-                                                        item={item}
-                                                        nodes={nodes!}
-                                                        onSelect={() =>
-                                                            toggleHostSelection(item.uuid)
-                                                        }
-                                                    />
-                                                </motion.div>
-                                            </Box>
-                                        )
-                                    })}
-                                </Stack>
-                            </Container>
-                        </SortableContext>
+                                                    <motion.div
+                                                        animate={{ opacity: 1 }}
+                                                        exit={{ opacity: 0 }}
+                                                        initial={{ opacity: 0 }}
+                                                        transition={{ duration: 0.1 }}
+                                                    >
+                                                        <HostCardWidget
+                                                            configProfiles={configProfiles}
+                                                            isHighlighted={
+                                                                highlightedHost === item.uuid
+                                                            }
+                                                            isSelected={selectedHosts.includes(
+                                                                item.uuid
+                                                            )}
+                                                            item={item}
+                                                            nodes={nodes!}
+                                                            onSelect={() =>
+                                                                toggleHostSelection(item.uuid)
+                                                            }
+                                                        />
+                                                    </motion.div>
+                                                </Box>
+                                            )
+                                        })}
+                                    </Stack>
+                                </Container>
+                            </SortableContext>
+                        </div>
                     </div>
-                </div>
 
-                <DragOverlay>
-                    {draggedHost && (
-                        <Container fluid pl={0} pr={0}>
-                            <HostCardWidget
-                                configProfiles={configProfiles}
-                                isDragOverlay
-                                isSelected={selectedHosts.includes(draggedHost.uuid)}
-                                item={draggedHost}
-                                nodes={nodes!}
-                                onSelect={() => toggleHostSelection(draggedHost.uuid)}
-                            />
-                        </Container>
-                    )}
-                </DragOverlay>
-            </DndContext>
+                    <DragOverlay>
+                        {draggedHost && (
+                            <Container fluid pl={0} pr={0}>
+                                <HostCardWidget
+                                    configProfiles={configProfiles}
+                                    isDragOverlay
+                                    isSelected={selectedHosts.includes(draggedHost.uuid)}
+                                    item={draggedHost}
+                                    nodes={nodes!}
+                                    onSelect={() => toggleHostSelection(draggedHost.uuid)}
+                                />
+                            </Container>
+                        )}
+                    </DragOverlay>
+                </DndContext>
+            )}
         </Stack>
     )
 })
