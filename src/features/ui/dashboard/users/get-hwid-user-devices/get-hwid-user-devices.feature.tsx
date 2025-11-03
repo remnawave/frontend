@@ -353,7 +353,7 @@ export function GetHwidUserDevicesFeature(props: IProps) {
                                 <br />
                                 <br />
                                 <Anchor
-                                    href="https://remna.st/docs/features/hwid-device-limit"
+                                    href="https://docs.rw/docs/features/hwid-device-limit"
                                     target="_blank"
                                 >
                                     {t('get-hwid-user-devices.feature.important-note-line-7')}

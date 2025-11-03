@@ -2,7 +2,7 @@
 
 Frontend for Remnawave Panel..
 
-Learn more about Remnawave Panel [here](https://remna.st/).
+Learn more about Remnawave Panel [here](https://docs.rw/).
 
 # Contributors
 

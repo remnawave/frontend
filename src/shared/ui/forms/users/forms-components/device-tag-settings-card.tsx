@@ -67,7 +67,7 @@ export function DeviceTagSettingsCard<
                                     {t('create-user-modal.widget.hwid-user-limit-line-2')}{' '}
                                     <Code>true</Code>.{' '}
                                     <Anchor
-                                        href="https://remna.st/docs/features/hwid-device-limit"
+                                        href="https://docs.rw/docs/features/hwid-device-limit"
                                         target="_blank"
                                     >
                                         {t('create-user-modal.widget.hwid-user-limit-line-3')}

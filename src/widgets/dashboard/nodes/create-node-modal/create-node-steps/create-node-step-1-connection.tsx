@@ -66,7 +66,7 @@ export const CreateNodeStep1Connection = ({ form, onNext, pubKey, port }: IProps
                     {t('create-node-step-1-connection.content-for-the-remnawave-node-below')}{' '}
                     <Anchor
                         fw="700"
-                        href="https://remna.st/docs/install/remnawave-node"
+                        href="https://docs.rw/docs/install/remnawave-node"
                         inherit
                         target="_blank"
                         underline="hover"
