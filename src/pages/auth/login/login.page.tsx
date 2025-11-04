@@ -1,6 +1,6 @@
 import { Badge, Box, Center, Divider, Group, Image, Stack, Text, Title } from '@mantine/core'
 import { GetStatusCommand } from '@remnawave/backend-contract'
-import { useLayoutEffect } from 'react'
+import { useLayoutEffect, useMemo } from 'react'
 
 import { TelegramLoginButtonFeature } from '@features/auth/telegram-login-button/telegram-login-button.feature'
 import { OAuth2LoginButtonsFeature } from '@features/auth/oauth2-login-button/oauth2-login-button.feature'
@@ -9,6 +9,7 @@ import { useGetAuthStatus } from '@shared/api/hooks/auth/auth.query.hooks'
 import { RegisterFormFeature } from '@features/auth/register-form'
 import { LoginFormFeature } from '@features/auth/login-form'
 import { clearQueryClient } from '@shared/api/query-client'
+import { parseColoredTextUtil } from '@shared/utils/misc'
 import { LoadingScreen } from '@shared/ui'
 import { Logo } from '@shared/ui/logo'
 import { Page } from '@shared/ui/page'
@@ -50,25 +51,22 @@ const BrandLogo = ({ logoUrl }: { logoUrl?: null | string }) => {
     )
 }
 
-const BrandTitle = ({ title }: { title?: null | string }) => {
-    if (!title) {
-        return (
-            <Title ff="Unbounded" order={1} pos="relative">
-                <Text c="cyan" component="span" fw="inherit" fz="inherit" pos="relative">
-                    Remna
-                </Text>
-                <Text c="white" component="span" fw="inherit" fz="inherit" pos="relative">
-                    wave
-                </Text>
-            </Title>
-        )
-    }
-
+const BrandTitle = ({ titleParts }: { titleParts: Array<{ color: string; text: string }> }) => {
     return (
         <Title ff="Unbounded" order={1} pos="relative">
-            <Text c="white" component="span" fw="inherit" fz="inherit" pos="relative">
-                {title}
-            </Text>
+            {titleParts.map((part, index) => (
+                <Text
+                    c={part.color || 'white'}
+                    component="span"
+                    fw="inherit"
+                    fz="inherit"
+                    inherit
+                    key={index}
+                    pos="relative"
+                >
+                    {part.text}
+                </Text>
+            ))}
         </Title>
     )
 }
@@ -108,6 +106,17 @@ export const LoginPage = () => {
         clearQueryClient()
     }, [])
 
+    const titleParts = useMemo(() => {
+        if (authStatus?.branding.title) {
+            return parseColoredTextUtil(authStatus.branding.title)
+        }
+
+        return [
+            { text: 'Remna', color: 'cyan' },
+            { text: 'wave', color: 'white' }
+        ]
+    }, [authStatus?.branding.title])
+
     if (isFetching) {
         return <LoadingScreen height="60vh" />
     }
@@ -120,7 +129,7 @@ export const LoginPage = () => {
             <Stack align="center" gap="xs">
                 <Group align="center" gap={4} justify="center">
                     <BrandLogo logoUrl={authStatus?.branding.logoUrl} />
-                    <BrandTitle title={authStatus?.branding.title} />
+                    <BrandTitle titleParts={titleParts} />
                 </Group>
 
                 {!authStatus && (
