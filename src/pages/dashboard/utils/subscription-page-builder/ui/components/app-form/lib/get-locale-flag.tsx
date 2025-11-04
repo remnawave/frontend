@@ -23,6 +23,16 @@ export const getLocaleFlag = (locale: string): ReactNode => {
                     }}
                 />
             )
+        case 'fr':
+            return (
+                <ReactCountryFlag
+                    countryCode="FR"
+                    style={{
+                        fontSize: '1.1em',
+                        borderRadius: '2px'
+                    }}
+                />
+            )
         case 'ru':
             return (
                 <ReactCountryFlag
