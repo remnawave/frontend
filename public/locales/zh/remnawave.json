@@ -1740,7 +1740,13 @@
             "branding-settings": "商标设置",
             "the-title-that-will-be-displayed-on-login-page": "登录页面显示的标题",
             "brand-name": "品牌名称",
-            "the-url-to-your-brand-logo-image": "品牌标志图片的 URL"
+            "the-url-to-your-brand-logo-image": "品牌标志图片的 URL",
+            "colored-title-format": "Colored Title Format",
+            "colored-title-description": "You can color individual words using {color}word syntax. Supports both HEX colors (#RRGGBB) and MantineUI color names.",
+            "example-hex-colors": "Example with HEX colors",
+            "example-mantine-colors": "Example with MantineUI colors",
+            "example-mixed": "Example with mixed colors",
+            "color-format-note": "💡 Color applies only to the word immediately following the marker. Without markers, text will be white."
         }
     },
     "api-tokens-card": {
