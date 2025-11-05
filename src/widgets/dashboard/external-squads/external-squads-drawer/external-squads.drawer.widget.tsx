@@ -13,8 +13,8 @@ import {
     Tooltip,
     Transition
 } from '@mantine/core'
+import { TbFolder, TbPrescription, TbSettings, TbWebhook } from 'react-icons/tb'
 import { PiCheck, PiCopy, PiListChecks, PiUsers } from 'react-icons/pi'
-import { TbFolder, TbSettings, TbWebhook } from 'react-icons/tb'
 import { useTranslation } from 'react-i18next'
 import { memo, useState } from 'react'
 
@@ -28,12 +28,14 @@ import {
     ExternalSquadsSettingsTabWidget,
     ExternalSquadsTemplatesTabWidget
 } from './tabs'
+import { ExternalSquadsResponseHeadersTabWidget } from './tabs/external-squads-response-headers.widget'
 import classes from './external-squads.module.css'
 
 const TAB_TYPE = {
     settings: 'settings',
     templates: 'templates',
-    hosts: 'hosts'
+    hosts: 'hosts',
+    responseHeaders: 'responseHeaders'
 } as const
 
 type TabType = (typeof TAB_TYPE)[keyof typeof TAB_TYPE]
@@ -176,6 +178,12 @@ export const ExternalSquadsDrawer = memo(() => {
                         >
                             {t('constants.hosts')}
                         </Tabs.Tab>
+                        <Tabs.Tab
+                            leftSection={<TbPrescription size={px('1.2rem')} />}
+                            value={TAB_TYPE.responseHeaders}
+                        >
+                            {t('external-squads-response-headers.widget.response-headers')}
+                        </Tabs.Tab>
                     </Tabs.List>
 
                     <Tabs.Panel pt="xl" value={TAB_TYPE.templates}>
@@ -224,6 +232,24 @@ export const ExternalSquadsDrawer = memo(() => {
                             {(styles) => (
                                 <Stack gap="lg" style={styles}>
                                     <ExternalSquadsHostOverridesTabWidget
+                                        externalSquad={externalSquad}
+                                        isOpen={isOpen}
+                                    />
+                                </Stack>
+                            )}
+                        </Transition>
+                    </Tabs.Panel>
+
+                    <Tabs.Panel pt="xl" value={TAB_TYPE.responseHeaders}>
+                        <Transition
+                            duration={200}
+                            mounted={activeTab === TAB_TYPE.responseHeaders}
+                            timingFunction="linear"
+                            transition="fade"
+                        >
+                            {(styles) => (
+                                <Stack gap="lg" style={styles}>
+                                    <ExternalSquadsResponseHeadersTabWidget
                                         externalSquad={externalSquad}
                                         isOpen={isOpen}
                                     />
