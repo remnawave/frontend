@@ -1791,5 +1791,10 @@
         "feature": {
             "reset-traffic": "Сбросить трафик"
         }
+    },
+    "external-squads-response-headers": {
+        "widget": {
+            "response-headers": "Headers"
+        }
     }
 }

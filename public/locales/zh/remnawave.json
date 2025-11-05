@@ -1791,5 +1791,10 @@
         "feature": {
             "reset-traffic": "重置流量"
         }
+    },
+    "external-squads-response-headers": {
+        "widget": {
+            "response-headers": "Headers"
+        }
     }
 }
