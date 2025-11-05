@@ -1428,7 +1428,7 @@
             "persian": "波斯语",
             "russian": "俄语",
             "chinese": "中文",
-            "french": "French",
+            "french": "法语",
             "additional-languages": "其它语言",
             "english-is-always-enabled": "总是使用英语",
             "english": "英语"
@@ -1741,12 +1741,12 @@
             "the-title-that-will-be-displayed-on-login-page": "登录页面显示的标题",
             "brand-name": "品牌名称",
             "the-url-to-your-brand-logo-image": "品牌标志图片的 URL",
-            "colored-title-format": "Colored Title Format",
-            "colored-title-description": "You can color individual words using {color}word syntax. Supports both HEX colors (#RRGGBB) and MantineUI color names.",
-            "example-hex-colors": "Example with HEX colors",
-            "example-mantine-colors": "Example with MantineUI colors",
-            "example-mixed": "Example with mixed colors",
-            "color-format-note": "💡 Color applies only to the word immediately following the marker. Without markers, text will be white."
+            "colored-title-format": "彩色标题格式",
+            "colored-title-description": "您可以使用 {color}文字 语法为单个单词着色。支持十六进制颜色 (#RRGGBB) 和 MantineUI 颜色名称。",
+            "example-hex-colors": "十六进制颜色示例",
+            "example-mantine-colors": "MantineUI颜色示例",
+            "example-mixed": "混合颜色示例",
+            "color-format-note": "💡 颜色仅适用于标记后面的单词。没有标记，文本将为白色。"
         }
     },
     "api-tokens-card": {
