@@ -1794,7 +1794,7 @@
     },
     "external-squads-response-headers": {
         "widget": {
-            "response-headers": "Headers"
+            "response-headers": "请求头"
         }
     }
 }
