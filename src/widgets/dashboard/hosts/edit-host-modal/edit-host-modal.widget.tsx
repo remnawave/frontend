@@ -1,11 +1,11 @@
 import { UpdateHostCommand } from '@remnawave/backend-contract'
 import { zodResolver } from 'mantine-form-zod-resolver'
 import { notifications } from '@mantine/notifications'
+import { memo, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Drawer, Text } from '@mantine/core'
-import { useEffect, useState } from 'react'
 import { modals } from '@mantine/modals'
 import { useForm } from '@mantine/form'
+import { Drawer } from '@mantine/core'
 import consola from 'consola/browser'
 
 import {
@@ -20,7 +20,7 @@ import { BaseHostForm } from '@shared/ui/forms/hosts/base-host-form'
 import { queryClient } from '@shared/api'
 import {} from '@entities/dashboard'
 
-export const EditHostModalWidget = () => {
+export const EditHostModalWidget = memo(() => {
     const { t } = useTranslation()
 
     const { isOpen, internalState: host } = useModalState(MODALS.EDIT_HOST_MODAL)
@@ -286,7 +286,7 @@ export const EditHostModalWidget = () => {
             padding="lg"
             position="right"
             size="lg"
-            title={<Text fw={500}>{t('edit-host-modal.widget.edit-host')}</Text>}
+            title={t('edit-host-modal.widget.edit-host')}
         >
             {host && (
                 <BaseHostForm
@@ -302,4 +302,4 @@ export const EditHostModalWidget = () => {
             )}
         </Drawer>
     )
-}
+})

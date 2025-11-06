@@ -1428,6 +1428,7 @@
             "persian": "波斯语",
             "russian": "俄语",
             "chinese": "中文",
+            "french": "法语",
             "additional-languages": "其它语言",
             "english-is-always-enabled": "总是使用英语",
             "english": "英语"
@@ -1739,7 +1740,13 @@
             "branding-settings": "商标设置",
             "the-title-that-will-be-displayed-on-login-page": "登录页面显示的标题",
             "brand-name": "品牌名称",
-            "the-url-to-your-brand-logo-image": "品牌标志图片的 URL"
+            "the-url-to-your-brand-logo-image": "品牌标志图片的 URL",
+            "colored-title-format": "彩色标题格式",
+            "colored-title-description": "您可以使用 {color}文字 语法为单个单词着色。支持十六进制颜色 (#RRGGBB) 和 MantineUI 颜色名称。",
+            "example-hex-colors": "十六进制颜色示例",
+            "example-mantine-colors": "MantineUI颜色示例",
+            "example-mixed": "混合颜色示例",
+            "color-format-note": "💡 颜色仅适用于标记后面的单词。没有标记，文本将为白色。"
         }
     },
     "api-tokens-card": {
@@ -1783,6 +1790,11 @@
     "reset-node-traffic": {
         "feature": {
             "reset-traffic": "重置流量"
+        }
+    },
+    "external-squads-response-headers": {
+        "widget": {
+            "response-headers": "请求头"
         }
     }
 }

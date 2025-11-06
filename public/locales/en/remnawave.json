@@ -1428,6 +1428,7 @@
             "persian": "Persian",
             "russian": "Russian",
             "chinese": "Chinese",
+            "french": "French",
             "additional-languages": "Additional Languages",
             "english-is-always-enabled": "English is always enabled",
             "english": "English"
@@ -1739,7 +1740,13 @@
             "branding-settings": "Branding Settings",
             "the-title-that-will-be-displayed-on-login-page": "The title that will be displayed on login page",
             "brand-name": "Brand Name",
-            "the-url-to-your-brand-logo-image": "The URL to your brand logo image"
+            "the-url-to-your-brand-logo-image": "The URL to your brand logo image",
+            "colored-title-format": "Colored Title Format",
+            "colored-title-description": "You can color individual words using {color}word syntax. Supports both HEX colors (#RRGGBB) and MantineUI color names.",
+            "example-hex-colors": "Example with HEX colors",
+            "example-mantine-colors": "Example with MantineUI colors",
+            "example-mixed": "Example with mixed colors",
+            "color-format-note": "💡 Color applies only to the word immediately following the marker. Without markers, text will be white."
         }
     },
     "api-tokens-card": {
@@ -1783,6 +1790,11 @@
     "reset-node-traffic": {
         "feature": {
             "reset-traffic": "Reset Traffic"
+        }
+    },
+    "external-squads-response-headers": {
+        "widget": {
+            "response-headers": "Headers"
         }
     }
 }

@@ -24,9 +24,14 @@ import {
     useBulkUsersActionsStoreTableSelection
 } from '@entities/dashboard/users/bulk-users-actions-store'
 import { UsersTableSelectionFeature } from '@features/ui/dashboard/users/users-table-selection/users-table-selection.feature'
+import {
+    useGetExternalSquads,
+    useGetInternalSquads,
+    useGetNodes,
+    useGetUsersV2
+} from '@shared/api/hooks'
 import { useUserTableColumns } from '@features/dashboard/users/users-table/model/use-table-columns'
 import { UserActionGroupFeature } from '@features/dashboard/users/users-action-group'
-import { useGetInternalSquads, useGetNodes, useGetUsersV2 } from '@shared/api/hooks'
 import { useUserModalStoreActions } from '@entities/dashboard/user-modal-store'
 import { DataTableShared } from '@shared/ui/table'
 import { sToMs } from '@shared/utils/time-utils'
@@ -37,9 +42,10 @@ export function UserTableWidget() {
     const { t } = useTranslation()
 
     const { data: internalSquads } = useGetInternalSquads()
+    const { data: externalSquads } = useGetExternalSquads()
     const { data: nodes } = useGetNodes()
 
-    const tableColumns = useUserTableColumns(internalSquads, nodes)
+    const tableColumns = useUserTableColumns(internalSquads, externalSquads, nodes)
     const bulkUsersActionsStoreActions = useBulkUsersActionsStoreActions()
     const tableSelection = useBulkUsersActionsStoreTableSelection()
     const userModalActions = useUserModalStoreActions()

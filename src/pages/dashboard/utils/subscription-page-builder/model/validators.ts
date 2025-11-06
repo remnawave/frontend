@@ -26,9 +26,9 @@ export function validateSubscriptionPageAppConfig(config: any): ValidationResult
             errors.push('config.config.additionalLocales: must be an array')
         } else {
             config.config.additionalLocales.forEach((locale: any, index: number) => {
-                if (typeof locale !== 'string' || !['fa', 'ru', 'zh'].includes(locale)) {
+                if (typeof locale !== 'string' || !['fa', 'fr', 'ru', 'zh'].includes(locale)) {
                     errors.push(
-                        `config.config.additionalLocales[${index}]: must be one of 'fa', 'ru', 'zh'`
+                        `config.config.additionalLocales[${index}]: must be one of 'fa', 'fr', 'ru', 'zh'`
                     )
                 }
             })

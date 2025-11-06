@@ -68,8 +68,8 @@ export const NodeCardWidget = memo((props: IProps) => {
     }, [node.trafficUsedBytes, node.trafficLimitBytes, node.isTrafficTrackingActive])
 
     const isOnline = useMemo(() => {
-        return node.isConnected && node.xrayUptime !== '0'
-    }, [node.isConnected, node.xrayUptime])
+        return node.isConnected && node.xrayUptime !== '0' && !node.isDisabled
+    }, [node.isConnected, node.xrayUptime, node.isDisabled])
 
     const getProgressColor = useCallback(() => {
         if (trafficData.fallbackProgress) return 'teal.6'
@@ -101,6 +101,14 @@ export const NodeCardWidget = memo((props: IProps) => {
         let borderColor = 'rgba(239, 68, 68, 0.3)'
         let boxShadow = 'rgba(239, 68, 68, 0.2)'
 
+        if (node.isDisabled) {
+            backgroundColor = 'rgba(107, 114, 128, 0.15)'
+            borderColor = 'rgba(107, 114, 128, 0.3)'
+            boxShadow = 'rgba(107, 114, 128, 0.2)'
+
+            return { backgroundColor, borderColor, boxShadow }
+        }
+
         if (node.isConnected) {
             backgroundColor = 'rgba(45, 212, 191, 0.15)'
             borderColor = 'rgba(45, 212, 191, 0.3)'
@@ -109,10 +117,6 @@ export const NodeCardWidget = memo((props: IProps) => {
             backgroundColor = 'rgba(245, 158, 11, 0.15)'
             borderColor = 'rgba(245, 158, 11, 0.3)'
             boxShadow = 'rgba(245, 158, 11, 0.2)'
-        } else if (node.isDisabled) {
-            backgroundColor = 'rgba(107, 114, 128, 0.15)'
-            borderColor = 'rgba(107, 114, 128, 0.3)'
-            boxShadow = 'rgba(107, 114, 128, 0.2)'
         } else {
             backgroundColor = 'rgba(239, 68, 68, 0.15)'
             borderColor = 'rgba(239, 68, 68, 0.3)'

@@ -24,7 +24,8 @@ const DEFAULT_VISIBILITY: MRT_VisibilityState = {
     telegramId: false,
     email: false,
     subLastOpenedAt: false,
-    uuid: false
+    uuid: false,
+    externalSquadUuid: false
 }
 
 const DEFAULT_COLUMN_SIZE: MRT_ColumnSizingState = {

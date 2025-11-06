@@ -5,7 +5,7 @@ import { sToMs } from '../utils/time-utils'
 export const queryClient = new QueryClient({
     defaultOptions: {
         queries: {
-            refetchOnWindowFocus: true,
+            refetchOnWindowFocus: false,
             refetchIntervalInBackground: false,
             retry: false,
             gcTime: sToMs(120),

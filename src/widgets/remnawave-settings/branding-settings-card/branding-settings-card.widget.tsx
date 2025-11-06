@@ -1,10 +1,23 @@
 import {
+    ActionIcon,
+    Box,
+    Button,
+    Code,
+    Divider,
+    Group,
+    HoverCard,
+    Stack,
+    Text,
+    TextInput,
+    ThemeIcon
+} from '@mantine/core'
+import {
     GetRemnawaveSettingsCommand,
     UpdateRemnawaveSettingsCommand
 } from '@remnawave/backend-contract'
-import { Button, Code, Group, Stack, Text, TextInput, ThemeIcon } from '@mantine/core'
 import { TbAlertCircle, TbLink, TbStar } from 'react-icons/tb'
 import { zodResolver } from 'mantine-form-zod-resolver'
+import { HiQuestionMarkCircle } from 'react-icons/hi'
 import { useTranslation } from 'react-i18next'
 import { modals } from '@mantine/modals'
 import { useForm } from '@mantine/form'
@@ -108,6 +121,71 @@ export const BrandingSettingsCardWidget = (props: IProps) => {
         })
     })
 
+    const brandingTitleHoverCard = () => {
+        return (
+            <HoverCard shadow="md" width={350} withArrow>
+                <HoverCard.Target>
+                    <ActionIcon color="gray" size="xs" variant="subtle">
+                        <HiQuestionMarkCircle size={20} />
+                    </ActionIcon>
+                </HoverCard.Target>
+                <HoverCard.Dropdown>
+                    <Stack gap="md">
+                        <Stack gap="sm">
+                            <Stack gap={4}>
+                                <Text fw={600} size="sm">
+                                    {t('branding-settings-card.widget.colored-title-format')}
+                                </Text>
+                                <Text c="dimmed" size="xs">
+                                    {t('branding-settings-card.widget.colored-title-description')}
+                                </Text>
+                            </Stack>
+
+                            <Divider />
+
+                            <Stack gap={8}>
+                                <Box>
+                                    <Text c="dimmed" fw={500} mb={4} size="xs">
+                                        {t('branding-settings-card.widget.example-hex-colors')}:
+                                    </Text>
+                                    <Code block c="blue" fz="xs">
+                                        {'{#B8F2E6}Re{#FFA69E}mna{#AEC6CF}wave'}
+                                    </Code>
+                                </Box>
+
+                                <Box>
+                                    <Text c="dimmed" fw={500} mb={4} size="xs">
+                                        {t('branding-settings-card.widget.example-mantine-colors')}:
+                                    </Text>
+                                    <Code block c="blue" fz="xs">
+                                        {'{cyan}Remna{white}wave'}
+                                    </Code>
+                                </Box>
+
+                                <Box>
+                                    <Text c="dimmed" fw={500} mb={4} size="xs">
+                                        {t('branding-settings-card.widget.example-mixed')}:
+                                    </Text>
+                                    <Code block c="blue" fz="xs">
+                                        {'{#B8F2E6}Re{#FFA69E}mna{cyan}wave'}
+                                    </Code>
+                                </Box>
+                            </Stack>
+
+                            <Divider />
+
+                            <Box>
+                                <Text c="dimmed" size="xs">
+                                    {t('branding-settings-card.widget.color-format-note')}
+                                </Text>
+                            </Box>
+                        </Stack>
+                    </Stack>
+                </HoverCard.Dropdown>
+            </HoverCard>
+        )
+    }
+
     return (
         <>
             <form onSubmit={handleSubmit} style={{ display: 'contents' }}>
@@ -130,6 +208,7 @@ export const BrandingSettingsCardWidget = (props: IProps) => {
                                 label={t('branding-settings-card.widget.brand-name')}
                                 leftSection={<TbStar size={16} />}
                                 placeholder="Remnawave"
+                                rightSection={brandingTitleHoverCard()}
                                 {...form.getInputProps('brandingSettings.title')}
                             />
 

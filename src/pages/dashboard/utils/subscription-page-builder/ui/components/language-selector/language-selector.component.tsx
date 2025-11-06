@@ -15,7 +15,7 @@ export const LanguageSelector = (props: LanguageSelectorProps) => {
     const { t } = useTranslation()
     const { additionalLocales, onChange } = props
 
-    const availableLocales: TAdditionalLocales[] = ['ru', 'fa', 'zh']
+    const availableLocales: TAdditionalLocales[] = ['ru', 'fa', 'fr', 'zh']
 
     const handleLocaleChange = (locale: TAdditionalLocales, checked: boolean) => {
         if (checked) {

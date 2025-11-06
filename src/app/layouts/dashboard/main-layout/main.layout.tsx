@@ -46,7 +46,7 @@ export function MainLayout() {
 
     return (
         <AppShell
-            className={classes.appShellFadeIn}
+            className={isMobile ? undefined : classes.appShellFadeIn}
             header={{ height: 64, collapsed: isMobile ? false : !pinned, offset: false }}
             layout="alt"
             navbar={{

@@ -11,22 +11,20 @@ import {
     SimpleGrid,
     Stack,
     Text,
-    ThemeIcon,
-    Title
+    ThemeIcon
 } from '@mantine/core'
 import {
     PiGlobeSimple,
     PiInfo,
     PiProhibitDuotone,
     PiPulseDuotone,
-    PiSpeedometer,
     PiUsersDuotone
 } from 'react-icons/pi'
 import { GetNodesMetricsCommand } from '@remnawave/backend-contract'
 import { VirtuosoMasonry } from '@virtuoso.dev/masonry'
-import { TbServer, TbServer2 } from 'react-icons/tb'
 import { memo, useCallback, useMemo } from 'react'
 import { useMediaQuery } from '@mantine/hooks'
+import { TbServer } from 'react-icons/tb'
 
 import { MODALS, useModalsStoreOpenWithData } from '@entities/dashboard/modal-store'
 import { MetricCard } from '@shared/ui/metrics/metric-card'
@@ -208,23 +206,6 @@ export const NodeMetricsWidget = () => {
             </Paper>
 
             <Box>
-                <Group align="center" gap="md" mb="lg" wrap="nowrap">
-                    <ThemeIcon color="indigo" size="lg" variant="light">
-                        <PiSpeedometer size="24px" />
-                    </ThemeIcon>
-                    <Title
-                        c="white"
-                        order={2}
-                        style={{
-                            whiteSpace: 'nowrap',
-                            overflow: 'hidden',
-                            textOverflow: 'ellipsis'
-                        }}
-                    >
-                        Metrics Overview
-                    </Title>
-                </Group>
-
                 <SimpleGrid cols={{ sm: 1, md: 2, lg: 4 }} spacing="md">
                     <StatCard
                         color="indigo"
@@ -258,15 +239,6 @@ export const NodeMetricsWidget = () => {
             </Box>
 
             <Box>
-                <Group align="center" gap="md" mb="lg">
-                    <ThemeIcon color="teal" size="lg" variant="light">
-                        <TbServer2 size="24px" />
-                    </ThemeIcon>
-                    <Title c="white" order={2}>
-                        Node Details
-                    </Title>
-                </Group>
-
                 <VirtuosoMasonry
                     columnCount={isMobile ? 1 : 2}
                     data={nodeMetrics?.nodes}

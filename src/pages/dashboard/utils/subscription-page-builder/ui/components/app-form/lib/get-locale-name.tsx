@@ -6,6 +6,8 @@ export const getLocaleName = (locale: string, t: TFunction): string => {
             return t('language-selector.component.english')
         case 'fa':
             return t('language-selector.component.persian')
+        case 'fr':
+            return t('language-selector.component.french')
         case 'ru':
             return t('language-selector.component.russian')
         case 'zh':
