@@ -12,7 +12,7 @@
         "overview": "نمای کلی",
         "management": "مدیریت",
         "subscription-settings": "تنظیمات اشتراک",
-        "utils": "ابزارها",
+        "utils": "ابزارهای کاربردی",
         "happ-routing-builder": "مسیرساز برای Happ",
         "templates": "قالب‌ها",
         "subscription": "اشتراک",
@@ -50,9 +50,9 @@
         "remove": "حذف کردن",
         "add": "افزودن",
         "select": "انتخاب",
-        "loading": "Loading",
-        "success": "Success",
-        "download": "Download"
+        "loading": "در حال بارگذاری",
+        "success": "با موفقیت انجام شد",
+        "download": "دانلود"
     },
     "bandwidth-metrics": {
         "current-year": "امسال",
@@ -142,10 +142,10 @@
         "lifetime-used": "مصرف کل",
         "sub-link-revoked-at": "ساب لینک لفو شده در",
         "created-at": "ساخته شده در",
-        "internal-squads": "Internal Squads",
-        "first-connected-at": "First connected at",
-        "sub-last-opened-at": "Sub last opened at",
-        "tag": "Tag"
+        "internal-squads": "اسکوادهای داخلی",
+        "first-connected-at": "اولین اتصال",
+        "sub-last-opened-at": "آخرین دریافت اشتراک",
+        "tag": "برچسب"
     },
     "header-buttons": {
         "feature": {}
@@ -865,7 +865,7 @@
             "timestamps": "مهرهای زمانی",
             "created-at": "ایجاد شده در",
             "updated-at": "به‌روزرسانی شده در",
-            "tag": "تگ",
+            "tag": "برچسب",
             "first-connected-at": "اولین اتصال",
             "active-internal-squads": "اسکوادهای داخلی فعال"
         }
@@ -1221,10 +1221,10 @@
             "active-on-nodes": "فعال روی نودها"
         },
         "widget": {
-            "loading-computed-config-profile": "Loading computed config profile...",
-            "computed-config-profile-loaded-successfully": "Computed config profile loaded successfully",
-            "the-computed-config-profile-description": "The computed config profile shows the final configuration after all snippets have been applied.",
-            "view-computed": "View Computed"
+            "loading-computed-config-profile": "درحال بارگذاری کانفیگ محاسبه‌شده ...",
+            "computed-config-profile-loaded-successfully": "کانفیگ محاسبه‌شده با موفقیت بارگذاری شد",
+            "the-computed-config-profile-description": "کانفیگ محاسبه‌شده نشان‌دهنده کانفیگ نهایی پس از جایگذاری مقادیر اسنیپت‌ها می‌باشد.",
+            "view-computed": "نشان دادن کانفیگ ‌محاسبه‌شده"
         }
     },
     "flat-inbound-checkbox-card": {
@@ -1310,7 +1310,7 @@
         "select-an-external-squad": "یک اسکواد خارجی انتخاب کنید"
     },
     "device-tag-settings-card": {
-        "device-and-tag-settings": "تنظیمات دستگاه و تگ"
+        "device-and-tag-settings": "تنظیمات دستگاه و برچسب"
     },
     "user-indentity-creation-card": {
         "user-identity": "هویت کاربر"
@@ -1428,7 +1428,7 @@
             "persian": "فارسی",
             "russian": "روسی",
             "chinese": "چینی",
-            "french": "French",
+            "french": "فرانسوی",
             "additional-languages": "زبان‌های بیشتر",
             "english-is-always-enabled": "انگلیسی همیشه فعال می‌باشد",
             "english": "انگلیسی"
@@ -1741,12 +1741,12 @@
             "the-title-that-will-be-displayed-on-login-page": "عنوانی که در صفحه ورود نشان داده خواهد شد",
             "brand-name": "اسم برند",
             "the-url-to-your-brand-logo-image": "آدرس تصویر لوگوی برند شما",
-            "colored-title-format": "Colored Title Format",
-            "colored-title-description": "You can color individual words using {color}word syntax. Supports both HEX colors (#RRGGBB) and MantineUI color names.",
-            "example-hex-colors": "Example with HEX colors",
-            "example-mantine-colors": "Example with MantineUI colors",
-            "example-mixed": "Example with mixed colors",
-            "color-format-note": "💡 Color applies only to the word immediately following the marker. Without markers, text will be white."
+            "colored-title-format": "فرمت عنوان رنگی",
+            "colored-title-description": "می‌توانید کلمه‌ها را به صورت تکی به کمک نوشتار \"{color}کلمه\" رنگ‌آمیزی کنید. این ویژگی از رنگ‌های HEX (#RRGGBB) و اسم رنگ‌های MantineUI پشتیبانی می‌کند.",
+            "example-hex-colors": "مثال با رنگ‌های HEX",
+            "example-mantine-colors": "مثال با رنگ‌های MantineUI",
+            "example-mixed": "مثال با رنگ‌های مختلط",
+            "color-format-note": "💡 رنگ مشخص شده فقط برای کلمه‌ای که به نشانگر رنگ چسبیده اعمال می‌شود. بدون نشانگر، متن سفیدرنگ خواهد بود."
         }
     },
     "api-tokens-card": {
@@ -1760,41 +1760,41 @@
     "external-squads-hosts": {
         "tab": {
             "widget": {
-                "host-overrides": "Host Overrides",
-                "override-host-settings-for-this-external-squad": "Override host settings for this external squad."
+                "host-overrides": "تنظیمات override هاست‌ها",
+                "override-host-settings-for-this-external-squad": "override تنظیمات هاست برای این اسکواد خارجی."
             }
         }
     },
     "reset-usage-user": {
         "feature": {
-            "reset": "Reset",
-            "reset-usage": "Reset usage"
+            "reset": "بازنشانی",
+            "reset-usage": "بازنشانی مصرف"
         }
     },
     "help-action-icon": {
         "shared": {
-            "help-article": "Help Article"
+            "help-article": "مقاله راهنما"
         }
     },
     "internal-squad-card": {
         "widget": {
-            "available-nodes": "Available Nodes"
+            "available-nodes": "نودهای قابل دسترسی"
         }
     },
     "help-drawer": {
         "shared": {
-            "failed-to-load-documentation": "Failed to load documentation",
-            "loading-documentation": "Loading documentation..."
+            "failed-to-load-documentation": "بارگذاری مستندات با شکست مواجه شد",
+            "loading-documentation": "درحال بارگذاری مستندات"
         }
     },
     "reset-node-traffic": {
         "feature": {
-            "reset-traffic": "Reset Traffic"
+            "reset-traffic": "بازنشانی ترافیک"
         }
     },
     "external-squads-response-headers": {
         "widget": {
-            "response-headers": "Headers"
+            "response-headers": "هدرها"
         }
     }
 }
