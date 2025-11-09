@@ -2,6 +2,7 @@ import {
     UpdateConfigProfileCommand,
     UpdateExternalSquadCommand,
     UpdateInternalSquadCommand,
+    UpdatePasskeyCommand,
     UpdateSubscriptionTemplateCommand
 } from '@remnawave/backend-contract'
 import { Button, Group, Modal, Stack, TextInput } from '@mantine/core'
@@ -14,12 +15,13 @@ import {
     useUpdateConfigProfile,
     useUpdateExternalSquad,
     useUpdateInternalSquad,
+    useUpdatePasskey,
     useUpdateSubscriptionTemplate
 } from '@shared/api/hooks'
 import { MODALS, useModalClose, useModalState } from '@entities/dashboard/modal-store'
 import { queryClient } from '@shared/api/query-client'
 
-type RenameType = 'configProfile' | 'externalSquad' | 'internalSquad' | 'template'
+type RenameType = 'configProfile' | 'externalSquad' | 'internalSquad' | 'passkey' | 'template'
 
 interface IProps {
     renameFrom: RenameType
@@ -38,6 +40,12 @@ export function RenameModalShared({ renameFrom }: IProps) {
             const result = (() => {
                 if (renameFrom === 'configProfile') {
                     return UpdateConfigProfileCommand.RequestSchema.omit({ uuid: true }).safeParse({
+                        name: value
+                    })
+                }
+
+                if (renameFrom === 'passkey') {
+                    return UpdatePasskeyCommand.RequestSchema.omit({ id: true }).safeParse({
                         name: value
                     })
                 }
@@ -118,6 +126,17 @@ export function RenameModalShared({ renameFrom }: IProps) {
         }
     )
 
+    const { mutate: updatePasskey, isPending: isUpdatingPasskey } = useUpdatePasskey({
+        mutationFns: {
+            onSuccess: () => {
+                queryClient.refetchQueries({
+                    queryKey: QueryKeys.passkeys.getAllPasskeys.queryKey
+                })
+                handleModalClose()
+            }
+        }
+    })
+
     const handleSave = async () => {
         if (await nameField.validate()) return
 
@@ -157,6 +176,15 @@ export function RenameModalShared({ renameFrom }: IProps) {
                     name: nameField.getValue()
                 }
             })
+        } else if (renameFrom === 'passkey') {
+            if (!internalState) return
+
+            updatePasskey({
+                variables: {
+                    id: internalState.uuid,
+                    name: nameField.getValue()
+                }
+            })
         }
     }
 
@@ -164,7 +192,8 @@ export function RenameModalShared({ renameFrom }: IProps) {
         isUpdatingInternalSquad ||
         isUpdatingConfigProfile ||
         isUpdatingTemplate ||
-        isUpdatingExternalSquad
+        isUpdatingExternalSquad ||
+        isUpdatingPasskey
 
     return (
         <Modal

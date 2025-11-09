@@ -1,6 +1,5 @@
 import {
     Accordion,
-    Box,
     Button,
     Center,
     Code,
@@ -28,6 +27,7 @@ import { TFunction } from 'i18next'
 
 import { PasskeysDrawerComponent } from '@widgets/remnawave-settings/passkeys-settings-drawer/passkeys-drawer.component'
 import { useUpdateRemnawaveSettings } from '@shared/api/hooks/remnawave-settings/remnawave-settings.mutation.hooks'
+import { HelpActionIconShared, THelpDrawerAvailableScreen } from '@shared/ui/help-drawer'
 import { SettingsCardShared } from '@shared/ui/settings-card'
 import { QueryKeys } from '@shared/api/hooks/keys-factory'
 import { YandexLogo } from '@shared/ui/logos/yandex-logo'
@@ -225,7 +225,18 @@ export const AuthentificationSettingsCardWidget = (props: IProps) => {
                             <Text fw={500}>{config.title}</Text>
                         </Group>
                     </Accordion.Control>
-                    <Box pr="xs">
+                    <Group gap="xs" justify="flex-end" pr="xs" wrap="nowrap">
+                        <HelpActionIconShared
+                            actionIconProps={{
+                                size: 'input-xs'
+                            }}
+                            iconProps={{
+                                size: 20
+                            }}
+                            screen={
+                                `AUTH_METHODS_${config.key.toUpperCase()}` as THelpDrawerAvailableScreen
+                            }
+                        />
                         <Switch
                             color="teal.8"
                             key={form.key(`oauth2Settings.${config.key}.enabled`)}
@@ -235,7 +246,7 @@ export const AuthentificationSettingsCardWidget = (props: IProps) => {
                                 type: 'checkbox'
                             })}
                         />
-                    </Box>
+                    </Group>
                 </Center>
 
                 <Accordion.Panel>
@@ -309,7 +320,16 @@ export const AuthentificationSettingsCardWidget = (props: IProps) => {
                                             </Text>
                                         </Group>
                                     </Accordion.Control>
-                                    <Group justify="flex-end" pr="xs" wrap="nowrap">
+                                    <Group gap="xs" justify="flex-end" pr="xs" wrap="nowrap">
+                                        <HelpActionIconShared
+                                            actionIconProps={{
+                                                size: 'input-xs'
+                                            }}
+                                            iconProps={{
+                                                size: 20
+                                            }}
+                                            screen="AUTH_METHODS_PASSWORD"
+                                        />
                                         <Switch
                                             color="teal.8"
                                             key={form.key('passwordSettings.enabled')}
@@ -407,7 +427,16 @@ export const AuthentificationSettingsCardWidget = (props: IProps) => {
                                             <Text fw={500}>Telegram</Text>
                                         </Group>
                                     </Accordion.Control>
-                                    <Group justify="flex-end" pr="xs" wrap="nowrap">
+                                    <Group gap="xs" justify="flex-end" pr="xs" wrap="nowrap">
+                                        <HelpActionIconShared
+                                            actionIconProps={{
+                                                size: 'input-xs'
+                                            }}
+                                            iconProps={{
+                                                size: 20
+                                            }}
+                                            screen="AUTH_METHODS_TELEGRAM"
+                                        />
                                         <Switch
                                             color="teal.8"
                                             key={form.key('tgAuthSettings.enabled')}
@@ -423,9 +452,6 @@ export const AuthentificationSettingsCardWidget = (props: IProps) => {
                                 <Accordion.Panel>
                                     <Stack gap="md">
                                         <TextInput
-                                            description={t(
-                                                'auth-settings.telegram.botToken.description'
-                                            )}
                                             key={form.key('tgAuthSettings.botToken')}
                                             label={t('auth-settings.telegram.botToken.label')}
                                             placeholder={t(
@@ -436,9 +462,6 @@ export const AuthentificationSettingsCardWidget = (props: IProps) => {
 
                                         <TagsInput
                                             clearable
-                                            description={t(
-                                                'auth-settings.telegram.adminIds.description'
-                                            )}
                                             key={form.key('tgAuthSettings.adminIds')}
                                             label={t('auth-settings.telegram.adminIds.label')}
                                             placeholder={t(
