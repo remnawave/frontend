@@ -10,6 +10,7 @@ import { SubscriptionAnnounceRoutingCardWidget } from './cards/subscription-anno
 import { SubscriptionResponseHeadersCardWidget } from './cards/subscription-response-headers-card.widget'
 import { SubscriptionAdditionalOptionsWidget } from './cards/subscription-additional-options.widget'
 import { SubscriptionUserRemarksCardWidget } from './cards/subscription-user-remarks-card.widget'
+import { SubscriptionHwidSettingsWidget } from './cards/subscription-hwid-settings.widget'
 import { SubscriptionInfoCardWidget } from './cards/subscription-info-card.widget'
 import styles from './subscription-tabs.module.css'
 
@@ -67,9 +68,11 @@ export const SubscriptionSettingsTabsWidget = ({ subscriptionSettings }: Subscri
             <Tabs.Panel pt="xl" value={TABS.general}>
                 <Masonry columns={{ 300: 1, 1400: 2, 2000: 3, 3000: 4 }} gap={16}>
                     <SubscriptionInfoCardWidget subscriptionSettings={subscriptionSettings} />
+
                     <SubscriptionAdditionalOptionsWidget
                         subscriptionSettings={subscriptionSettings}
                     />
+                    <SubscriptionHwidSettingsWidget subscriptionSettings={subscriptionSettings} />
                     <SubscriptionAnnounceRoutingCardWidget
                         subscriptionSettings={subscriptionSettings}
                     />

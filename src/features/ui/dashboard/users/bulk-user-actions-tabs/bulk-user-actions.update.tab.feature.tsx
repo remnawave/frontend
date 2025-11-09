@@ -331,7 +331,7 @@ export const BulkUserActionsUpdateTabFeature = (props: IProps) => {
                             <Checkbox
                                 checked={form.getValues().fields.hwidDeviceLimit === null}
                                 disabled={form.getValues().fields.hwidDeviceLimit === 0}
-                                label="Use HWID_FALLBACK_DEVICE_LIMIT"
+                                label="Use Fallback Device Limit"
                                 mb="xs"
                                 mt="xs"
                                 onChange={(event) => {

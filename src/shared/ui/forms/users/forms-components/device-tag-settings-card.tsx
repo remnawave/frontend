@@ -63,9 +63,7 @@ export function DeviceTagSettingsCard<
                             <>
                                 <Text c="dimmed" size="0.75rem">
                                     {t('create-user-modal.widget.hwid-user-limit-line-1')}{' '}
-                                    <Code>HWID_DEVICE_LIMIT_ENABLED</Code>{' '}
-                                    {t('create-user-modal.widget.hwid-user-limit-line-2')}{' '}
-                                    <Code>true</Code>.{' '}
+                                    <Code>HWID Device Limit Enabled</Code>{' '}
                                     <Anchor
                                         href="https://docs.rw/docs/features/hwid-device-limit"
                                         target="_blank"
@@ -97,7 +95,7 @@ export function DeviceTagSettingsCard<
                             hideControls
                             key={form.key('hwidDeviceLimit')}
                             leftSection={<TbDevices2 size="16px" />}
-                            placeholder="HWID_FALLBACK_DEVICE_LIMIT in use"
+                            placeholder="Fallback Device Limit in use"
                             {...form.getInputProps('hwidDeviceLimit')}
                         />
                     </Stack>
