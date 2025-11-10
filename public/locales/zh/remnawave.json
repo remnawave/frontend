@@ -1799,23 +1799,23 @@
     },
     "subscription-hwid-settings": {
         "widget": {
-            "hwid-card-description": "Carefully review documentation before enabling HWID feature. Not all client applications support this feature.",
-            "hwid-settings": "HWID Settings",
-            "hwid-limit": "HWID Limit",
-            "fallback-device-limit-description": "Enter the maximum number of devices that can be used with a subscription",
-            "fallback-device-limit": "Fallback Device Limit",
-            "max-devices-announce-description": "Enter message that will be displayed when the user has reached the maximum number of devices",
-            "max-devices-announce": "Max Devices Announce",
-            "max-200-characters": "Max. 200 characters",
-            "documentation": "Documentation"
+            "hwid-card-description": "在启用 HWID 功能之前仔细阅读文档。并非所有客户端应用程序都支持此功能。",
+            "hwid-settings": "HWID 设置",
+            "hwid-limit": "HWID 限制",
+            "fallback-device-limit-description": "输入可以通过订阅同时使用的最大设备数量",
+            "fallback-device-limit": "回退设备限制",
+            "max-devices-announce-description": "输入用户达到设备同时最大使用数量时将显示的消息",
+            "max-devices-announce": "最多设备公告",
+            "max-200-characters": "最多为200字符",
+            "documentation": "文档"
         }
     },
     "external-squads-hwid-settings": {
         "tab": {
             "widget": {
-                "hwid-settings-override": "HWID Settings Override",
-                "override-hwid-description": "Override HWID device limit settings for this external squad. When disabled, global subscription settings will be used.",
-                "enable-hwid-override": "Enable HWID Override"
+                "hwid-settings-override": "HWID 设置覆盖",
+                "override-hwid-description": "覆盖此外部分组的 HWID 设备限制设置。禁用时，将使用全局订阅设置。",
+                "enable-hwid-override": "启用 HWID 覆盖"
             }
         }
     }
