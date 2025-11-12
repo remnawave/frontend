@@ -9,8 +9,8 @@ export function UsernameColumnEntity(props: IProps) {
 
     const { user } = props
 
-    const color = getConnectionStatusColorUtil(user.onlineAt)
-    const timeAgo = getTimeAgoUtil(user.onlineAt, t, i18n.language)
+    const color = getConnectionStatusColorUtil(user.userTraffic.onlineAt)
+    const timeAgo = getTimeAgoUtil(user.userTraffic.onlineAt, t, i18n.language)
 
     return (
         <Group align="center" gap="md" pl={10} wrap="nowrap">

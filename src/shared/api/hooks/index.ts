@@ -43,7 +43,9 @@ export * from './subscription-settings/subscription-settings.query.hooks'
 export * from './subscription-template/subscription-template.mutation.hooks'
 
 export * from './subscription-template/subscription-template.query.hooks'
-export * from './system/system.query.hooks'
+export * from './system/system.mutation.hooks'
 
+export * from './system/system.query.hooks'
 export * from './users/users.mutation.hooks'
+
 export * from './users/users.query.hooks'

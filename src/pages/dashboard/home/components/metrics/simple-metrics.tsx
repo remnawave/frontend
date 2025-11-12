@@ -1,8 +1,8 @@
-import { PiCpuDuotone, PiMemoryDuotone } from 'react-icons/pi'
+import { PiChartBarDuotone, PiCpuDuotone, PiMemoryDuotone } from 'react-icons/pi'
 import { GetStatsCommand } from '@remnawave/backend-contract'
 import { TFunction } from 'i18next'
 
-import { prettyBytesUtil } from '@shared/utils/bytes'
+import { prettyBytesUtil, prettyBytesUtilWithoutPrefix } from '@shared/utils/bytes'
 
 export const getSimpleMetrics = (
     systemInfo: GetStatsCommand.Response['response'],
@@ -20,12 +20,12 @@ export const getSimpleMetrics = (
             title: t('simple-metrics.total-online-on-nodes'),
             color: 'var(--mantine-color-blue-4)'
         },
-        // {
-        //     value: prettyBytesUtilWithoutPrefix(Number(users.totalTrafficBytes)) ?? 0,
-        //     icon: PiChartBarDuotone,
-        //     title: t('simple-metrics.total-traffic'),
-        //     color: 'var(--mantine-color-green-4)'
-        // },
+        {
+            value: prettyBytesUtilWithoutPrefix(Number(nodes.totalBytesLifetime)) ?? 0,
+            icon: PiChartBarDuotone,
+            title: t('simple-metrics.total-traffic'),
+            color: 'var(--mantine-color-green-4)'
+        },
         {
             value: `${usedRamGB} / ${totalRamGB}`,
             icon: PiMemoryDuotone,

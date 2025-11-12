@@ -96,6 +96,9 @@ export const UserUsageModalWidget = (props: IProps) => {
         query: {
             start: dateRange[0].toISOString(),
             end: dateRange[1].toISOString()
+        },
+        rQueryParams: {
+            enabled: opened
         }
     })
 

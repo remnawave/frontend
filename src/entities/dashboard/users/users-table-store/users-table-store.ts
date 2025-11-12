@@ -16,10 +16,7 @@ const DEFAULT_VISIBILITY: MRT_VisibilityState = {
     shortUuid: false,
     createdAt: false,
     subRevokedAt: false,
-    totalUsedBytes: false,
-    onlineAt: false,
     subLastUserAgent: false,
-    lifetimeUsedTrafficBytes: false,
     description: false,
     telegramId: false,
     email: false,
@@ -108,7 +105,7 @@ export const useUsersTableStore = create<IActions & IState>()(
 
         {
             name: 'x-rmnw-users-table',
-            version: 4,
+            version: 5,
             storage: createJSONStorage(() => localStorage),
             partialize: (state) => ({
                 columnVisibility: state.columnVisibility,

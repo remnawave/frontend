@@ -1,4 +1,5 @@
 /* eslint-disable camelcase */
+
 import {
     GetAllNodesCommand,
     GetAllUsersCommand,
@@ -59,7 +60,13 @@ export const useUserTableColumns = (
                 header: t('use-table-columns.last-connected-node'),
                 Cell: ({ cell }) => (
                     <ConnectedNodeColumnEntity
-                        lastConnectedNode={cell.row.original.lastConnectedNode}
+                        node={
+                            nodes?.find(
+                                (node) =>
+                                    node.uuid ===
+                                    cell.row.original.userTraffic.lastConnectedNodeUuid
+                            ) ?? undefined
+                        }
                     />
                 ),
                 filterVariant: 'select',
@@ -254,12 +261,16 @@ export const useUserTableColumns = (
             },
 
             {
-                accessorKey: 'firstConnectedAt',
+                accessorKey: 'userTraffic.firstConnectedAt',
                 header: t('use-table-columns.first-connected-at'),
-                accessorFn: (originalRow) =>
-                    originalRow.firstConnectedAt
-                        ? dayjs(originalRow.firstConnectedAt).format('DD/MM/YYYY, HH:mm')
-                        : '–',
+                accessorFn: (originalRow) => {
+                    if (originalRow.userTraffic && originalRow.userTraffic.firstConnectedAt) {
+                        return dayjs(originalRow.userTraffic.firstConnectedAt).format(
+                            'DD/MM/YYYY, HH:mm'
+                        )
+                    }
+                    return '–'
+                },
                 minSize: 250,
                 size: 400,
 
@@ -290,11 +301,11 @@ export const useUserTableColumns = (
                 }
             },
             {
-                accessorKey: 'onlineAt',
+                accessorKey: 'userTraffic.onlineAt',
                 header: t('use-table-columns.online-at'),
                 accessorFn: (originalRow) =>
-                    originalRow.onlineAt
-                        ? dayjs(originalRow.onlineAt).format('DD/MM/YYYY, HH:mm')
+                    originalRow.userTraffic && originalRow.userTraffic.onlineAt
+                        ? dayjs(originalRow.userTraffic.onlineAt).format('DD/MM/YYYY, HH:mm')
                         : t('use-table-columns.never'),
                 minSize: 170,
                 maxSize: 400,
@@ -334,10 +345,12 @@ export const useUserTableColumns = (
                 }
             },
             {
-                accessorKey: 'lifetimeUsedTrafficBytes',
+                accessorKey: 'userTraffic.lifetimeUsedTrafficBytes',
                 header: t('use-table-columns.lifetime-used'),
                 accessorFn: (originalRow) =>
-                    prettyBytesToAnyUtil(originalRow.lifetimeUsedTrafficBytes) || '–',
+                    originalRow.userTraffic && originalRow.userTraffic.lifetimeUsedTrafficBytes
+                        ? prettyBytesToAnyUtil(originalRow.userTraffic.lifetimeUsedTrafficBytes)
+                        : '–',
                 minSize: 170,
                 maxSize: 300,
                 size: 170,
