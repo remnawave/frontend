@@ -1761,7 +1761,7 @@
         "tab": {
             "widget": {
                 "host-overrides": "Переопределение хостов",
-                "override-host-settings-for-this-external-squad": "Переопределить настройки хостов для внешнего отряда."
+                "override-host-settings-for-this-external-squad": "Переопределить настройки хостов для внешнего сквада."
             }
         }
     },
