@@ -1799,23 +1799,23 @@
     },
     "subscription-hwid-settings": {
         "widget": {
-            "hwid-card-description": "Carefully review documentation before enabling HWID feature. Not all client applications support this feature.",
-            "hwid-settings": "HWID Settings",
-            "hwid-limit": "HWID Limit",
-            "fallback-device-limit-description": "Enter the maximum number of devices that can be used with a subscription",
-            "fallback-device-limit": "Fallback Device Limit",
-            "max-devices-announce-description": "Enter message that will be displayed when the user has reached the maximum number of devices",
-            "max-devices-announce": "Max Devices Announce",
-            "max-200-characters": "Max. 200 characters",
-            "documentation": "Documentation"
+            "hwid-card-description": "قبل از فعال کردن محدودیت HWID به دقت مستندات مربوط به آن را بخوانید. همه نرم افزارهای کلاینت از این ویژگی پشتیبانی نمی‌کنند.",
+            "hwid-settings": "تنظیمات HWID",
+            "hwid-limit": "محدودیت HWID",
+            "fallback-device-limit-description": "حداکثر تعداد دستگاه‌هایی که با هر اشتراک قابل استفاده خواهند بود را وارد نمایید",
+            "fallback-device-limit": "محدودیت پیشفرض تعداد دستگاه ",
+            "max-devices-announce-description": "پیامی را که کاربر هنگام پر شدن محدودیت تعداد دستگاه مشاهده خواهد کرد وارد نمایید",
+            "max-devices-announce": "پیغام پر شدن تعداد دستگاه",
+            "max-200-characters": "حداکثر 200 کاراکتر",
+            "documentation": "مستندات"
         }
     },
     "external-squads-hwid-settings": {
         "tab": {
             "widget": {
-                "hwid-settings-override": "HWID Settings Override",
-                "override-hwid-description": "Override HWID device limit settings for this external squad. When disabled, global subscription settings will be used.",
-                "enable-hwid-override": "Enable HWID Override"
+                "hwid-settings-override": "override تنظیمات HWID",
+                "override-hwid-description": "برای این اسکواد خارجی تنظیمات HWID override خواهند شد. درصورت غیرفعال بودن، مقادیر موجود در تنظیمات عمومی استفاده خواهد شد.",
+                "enable-hwid-override": "فعالسازی override تنظیمات HWID"
             }
         }
     }
