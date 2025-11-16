@@ -13,6 +13,7 @@ import {
     useCreateHost,
     useGetConfigProfiles,
     useGetNodes,
+    useGetSubscriptionTemplates,
     useUpdateHost
 } from '@shared/api/hooks'
 import { MODALS, useModalClose, useModalState } from '@entities/dashboard/modal-store'
@@ -30,6 +31,7 @@ export const EditHostModalWidget = memo(() => {
 
     const { data: configProfiles } = useGetConfigProfiles()
     const { data: nodes } = useGetNodes()
+    const { data: templates } = useGetSubscriptionTemplates()
 
     const form = useForm<UpdateHostCommand.Request>({
         name: 'edit-host-form',
@@ -127,7 +129,8 @@ export const EditHostModalWidget = memo(() => {
                 allowInsecure: host.allowInsecure ?? undefined,
                 shuffleHost: host.shuffleHost ?? undefined,
                 mihomoX25519: host.mihomoX25519 ?? undefined,
-                nodes: host.nodes ?? undefined
+                nodes: host.nodes ?? undefined,
+                xrayJsonTemplateUuid: host.xrayJsonTemplateUuid ?? undefined
             })
         }
     }, [host, configProfiles])
@@ -272,7 +275,8 @@ export const EditHostModalWidget = memo(() => {
                 overrideSniFromAddress: host.overrideSniFromAddress,
                 vlessRouteId: host.vlessRouteId ?? undefined,
                 allowInsecure: host.allowInsecure ?? undefined,
-                nodes: host.nodes ?? undefined
+                nodes: host.nodes ?? undefined,
+                xrayJsonTemplateUuid: host.xrayJsonTemplateUuid ?? undefined
             }
         })
     }
@@ -298,6 +302,7 @@ export const EditHostModalWidget = memo(() => {
                     isSubmitting={isUpdateHostPending}
                     nodes={nodes!}
                     setAdvancedOpened={setAdvancedOpened}
+                    subscriptionTemplates={templates?.templates ?? []}
                 />
             )}
         </Drawer>

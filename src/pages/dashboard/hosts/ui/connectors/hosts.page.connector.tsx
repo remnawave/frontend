@@ -5,7 +5,8 @@ import {
     useGetConfigProfiles,
     useGetHosts,
     useGetHostTags,
-    useGetNodes
+    useGetNodes,
+    useGetSubscriptionTemplates
 } from '@shared/api/hooks'
 import HostsPageComponent from '@pages/dashboard/hosts/ui/components/hosts.page.component'
 import { MODALS, useModalIsOpen } from '@entities/dashboard/modal-store'
@@ -16,6 +17,7 @@ export function HostsPageConnector() {
     const { data: configProfiles, isLoading: isConfigProfilesLoading } = useGetConfigProfiles()
     const { data: hostTags, isLoading: isHostTagsLoading } = useGetHostTags()
     const { isLoading: isNodesLoading } = useGetNodes()
+    const { isLoading: isSubscriptionTemplatesLoading } = useGetSubscriptionTemplates()
 
     const isCreateModalOpen = useModalIsOpen(MODALS.CREATE_HOST_MODAL)
     const isEditModalOpen = useModalIsOpen(MODALS.EDIT_HOST_MODAL)
@@ -32,10 +34,13 @@ export function HostsPageConnector() {
             configProfiles={configProfiles?.configProfiles}
             hosts={hosts}
             hostTags={hostTags?.tags}
-            isConfigProfilesLoading={isConfigProfilesLoading}
-            isHostsLoading={isHostsLoading}
-            isHostTagsLoading={isHostTagsLoading}
-            isNodesLoading={isNodesLoading}
+            isLoading={
+                isConfigProfilesLoading ||
+                isHostsLoading ||
+                isHostTagsLoading ||
+                isNodesLoading ||
+                isSubscriptionTemplatesLoading
+            }
         />
     )
 }
