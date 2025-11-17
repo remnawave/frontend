@@ -96,6 +96,7 @@ export function TemplatesGridWidget(props: IProps) {
             columnCount={columnCount}
             enableDnd={true}
             items={templates}
+            key={`templates-grid-widget-${type}`}
             onReorder={handleReorder}
             renderDragOverlay={(template) => (
                 <TemplatesCardWidget
