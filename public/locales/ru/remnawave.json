@@ -419,10 +419,10 @@
         "enable-x25519mlkem768": "Включение x25519mlkem768",
         "pick-nodes-which-resolved-from-this-host-only-visual-assignment": "Выберите ноды, которые направлены на этот хост. Это поле влияет только на визуальное отображение.",
         "nodes": "Ноды",
-        "select-a-xray-json-template": "Select a Xray JSON Template",
-        "xray-json-template": "Xray JSON Template",
-        "override-the-xray-json-template": "Override the Xray JSON template which will be used for this host.",
-        "vital-parameters": "Vital Parameters"
+        "select-a-xray-json-template": "Выберите шаблон Xray JSON",
+        "xray-json-template": "Шаблон Xray JSON",
+        "override-the-xray-json-template": "Переопределить шаблон Xray JSON, который будет использоваться для этого узла.",
+        "vital-parameters": "Базовые параметры"
     },
     "base-node-form": {
         "country": "Страна",
