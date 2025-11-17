@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useLayoutEffect, useState } from 'react'
 
 export interface ResponsiveColumnsBreakpoints {
     /**
@@ -89,16 +89,15 @@ export function useResponsiveColumns(
         calculateColumns(getWindowWidth(), base, breakpoints)
     )
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         const handleResize = () => {
             const newWidth = window.innerWidth
             setWidth(newWidth)
             setColumnCount(calculateColumns(newWidth, base, breakpoints))
         }
 
-        window.addEventListener('resize', handleResize)
+        window.addEventListener('resize', handleResize, { passive: true })
 
-        // Initial calculation
         handleResize()
 
         return () => window.removeEventListener('resize', handleResize)
