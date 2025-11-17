@@ -15,6 +15,7 @@
     );
     border-color: var(--mantine-color-dark-4);
     min-height: 120px;
+    animation: none;
 }
 
 @media (max-width: 48em) {
