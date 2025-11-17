@@ -56,7 +56,9 @@ export function InternalSquadCardWidget(props: IProps) {
     const isActive = membersCount > 0
 
     const handleOpenInbounds = () => {
-        openModalWithData(MODALS.INTERNAL_SQUAD_SHOW_INBOUNDS, internalSquad)
+        openModalWithData(MODALS.INTERNAL_SQUAD_SHOW_INBOUNDS, {
+            squadUuid: internalSquad.uuid
+        })
     }
 
     return (

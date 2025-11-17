@@ -1,5 +1,3 @@
-/* eslint-disable @stylistic/indent */
-
 import {
     Accordion,
     ActionIcon,
@@ -8,7 +6,6 @@ import {
     Drawer,
     Group,
     Paper,
-    ScrollArea,
     Stack,
     Text,
     TextInput
@@ -18,10 +15,12 @@ import { useCallback, useEffect, useMemo, useState } from 'react'
 import { TbDeviceFloppy, TbSearch, TbX } from 'react-icons/tb'
 import { notifications } from '@mantine/notifications'
 import { useTranslation } from 'react-i18next'
+import { Virtuoso } from 'react-virtuoso'
 
 import { ConfigProfileCardShared } from '@shared/ui/config-profiles/config-profile-card/config-profile-card.shared'
 import { useGetConfigProfiles } from '@shared/api/hooks'
 
+import classes from './hosts-config-profiles.module.css'
 import { IProps } from './interfaces'
 
 export const HostsConfigProfilesDrawer = (props: IProps) => {
@@ -221,68 +220,69 @@ export const HostsConfigProfilesDrawer = (props: IProps) => {
                     value={searchQuery}
                 />
 
-                <ScrollArea flex={1}>
-                    <Stack gap="sm">
-                        <Accordion
-                            chevronPosition="left"
-                            multiple={true}
-                            onChange={(value) => {
-                                setOpenAccordions(new Set(value))
-                            }}
-                            value={Array.from(openAccordions)}
-                            variant="separated"
-                        >
-                            {filteredProfiles.map((profile) => {
+                {filteredProfiles.length === 0 ? (
+                    <Text c="dimmed" py="xl" size="sm" ta="center">
+                        {debouncedSearchQuery
+                            ? t('hosts-config-profiles.drawer.widget.no-profiles-or-inbounds-found')
+                            : t('hosts-config-profiles.drawer.widget.no-config-profiles-available')}
+                    </Text>
+                ) : (
+                    <Accordion
+                        chevronPosition="left"
+                        multiple={true}
+                        onChange={(value) => {
+                            setOpenAccordions(new Set(value))
+                        }}
+                        value={Array.from(openAccordions)}
+                        variant="separated"
+                    >
+                        <Virtuoso
+                            data={filteredProfiles}
+                            itemContent={(_index, profile) => {
                                 const isOpen = openAccordions.has(profile.uuid)
                                 return (
-                                    <ConfigProfileCardShared
-                                        isOpen={isOpen}
-                                        key={profile.uuid}
-                                        onInboundToggle={handleInboundToggle}
-                                        onSelectAllInbounds={() => {
-                                            notifications.show({
-                                                message: t(
-                                                    'hosts-config-profiles.drawer.widget.hosts-do-not-support-multiple-inbounds'
-                                                ),
-                                                color: 'red',
-                                                title: t(
-                                                    'hosts-config-profiles.drawer.widget.not-supported'
-                                                ),
-                                                autoClose: 2000
-                                            })
-                                        }}
-                                        onUnselectAllInbounds={() => {
-                                            notifications.show({
-                                                message: t(
-                                                    'hosts-config-profiles.drawer.widget.hosts-do-not-support-multiple-inbounds'
-                                                ),
-                                                color: 'red',
-                                                title: t(
-                                                    'hosts-config-profiles.drawer.widget.not-supported'
-                                                ),
-                                                autoClose: 2000
-                                            })
-                                        }}
-                                        profile={profile}
-                                        selectedInbounds={selectedInboundsSet}
-                                    />
+                                    <div
+                                        className={classes.itemWrapper}
+                                        style={{ marginBottom: '8px' }}
+                                    >
+                                        <ConfigProfileCardShared
+                                            isOpen={isOpen}
+                                            onInboundToggle={handleInboundToggle}
+                                            onSelectAllInbounds={() => {
+                                                notifications.show({
+                                                    message: t(
+                                                        'hosts-config-profiles.drawer.widget.hosts-do-not-support-multiple-inbounds'
+                                                    ),
+                                                    color: 'red',
+                                                    title: t(
+                                                        'hosts-config-profiles.drawer.widget.not-supported'
+                                                    ),
+                                                    autoClose: 2000
+                                                })
+                                            }}
+                                            onUnselectAllInbounds={() => {
+                                                notifications.show({
+                                                    message: t(
+                                                        'hosts-config-profiles.drawer.widget.hosts-do-not-support-multiple-inbounds'
+                                                    ),
+                                                    color: 'red',
+                                                    title: t(
+                                                        'hosts-config-profiles.drawer.widget.not-supported'
+                                                    ),
+                                                    autoClose: 2000
+                                                })
+                                            }}
+                                            profile={profile}
+                                            selectedInbounds={selectedInboundsSet}
+                                        />
+                                    </div>
                                 )
-                            })}
-
-                            {filteredProfiles.length === 0 && (
-                                <Text c="dimmed" py="xl" size="sm" ta="center">
-                                    {debouncedSearchQuery
-                                        ? t(
-                                              'hosts-config-profiles.drawer.widget.no-profiles-or-inbounds-found'
-                                          )
-                                        : t(
-                                              'hosts-config-profiles.drawer.widget.no-config-profiles-available'
-                                          )}
-                                </Text>
-                            )}
-                        </Accordion>
-                    </Stack>
-                </ScrollArea>
+                            }}
+                            style={{ height: '500px' }}
+                            useWindowScroll={false}
+                        />
+                    </Accordion>
+                )}
             </Stack>
         </Drawer>
     )

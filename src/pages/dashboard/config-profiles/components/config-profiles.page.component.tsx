@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { ConfigProfilesSpotlightWidget } from '@widgets/dashboard/config-profiles/config-profiles-spotlight/config-profiles-spotlight'
 import { ConfigProfilesGridWidget } from '@widgets/dashboard/config-profiles/config-profiles-grid/config-profiles-grid.widget'
 import { ConfigProfilesHeaderActionButtonsFeature } from '@features/ui/dashboard/config-profiles/header-action-buttons'
+import { InternalSquadsDrawerWithStore } from '@widgets/dashboard/users/internal-squads-drawer-with-store'
 import { PageHeaderShared } from '@shared/ui/page-header/page-header.shared'
 import { RenameModalShared } from '@shared/ui/modals/rename-modal.shared'
 import { XrayLogo } from '@shared/ui/logos'
@@ -35,6 +36,7 @@ export const ConfigPageComponent = (props: Props) => {
             )}
 
             <RenameModalShared key="rename-config-profile-modal" renameFrom="configProfile" />
+            <InternalSquadsDrawerWithStore key="internal-squads-drawer-with-store" />
         </Page>
     )
 }

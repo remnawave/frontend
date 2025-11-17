@@ -9,7 +9,6 @@ import {
     Drawer,
     Group,
     Paper,
-    ScrollArea,
     SegmentedControl,
     Stack,
     Tabs,
@@ -22,11 +21,13 @@ import { TbCirclesRelation, TbDeviceFloppy, TbSearch, TbX } from 'react-icons/tb
 import { GetConfigProfilesCommand } from '@remnawave/backend-contract'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { Virtuoso } from 'react-virtuoso'
 
 import { VirtualizedFlatInboundsListShared } from '@shared/ui/config-profiles/virtualized-flat-inbounds-list/virtualized-flat-inbounds-list.shared'
 import {
     internalSquadsQueryKeys,
     useGetConfigProfiles,
+    useGetInternalSquad,
     useUpdateInternalSquad
 } from '@shared/api/hooks'
 import { ConfigProfileCardShared } from '@shared/ui/config-profiles/config-profile-card/config-profile-card.shared'
@@ -38,7 +39,7 @@ import { formatInt } from '@shared/utils/misc'
 import classes from './internal-squads-with-store.module.css'
 
 export const InternalSquadsDrawerWithStore = () => {
-    const { isOpen, internalState: internalSquad } = useModalState(
+    const { isOpen, internalState: internalSquadModalState } = useModalState(
         MODALS.INTERNAL_SQUAD_SHOW_INBOUNDS
     )
     const close = useModalClose(MODALS.INTERNAL_SQUAD_SHOW_INBOUNDS)
@@ -46,6 +47,14 @@ export const InternalSquadsDrawerWithStore = () => {
     const { t } = useTranslation()
 
     const { data: configProfiles, isLoading: isConfigProfilesLoading } = useGetConfigProfiles()
+    const { data: internalSquad, isLoading: isInternalSquadLoading } = useGetInternalSquad({
+        route: {
+            uuid: internalSquadModalState?.squadUuid ?? ''
+        },
+        rQueryParams: {
+            enabled: !!internalSquadModalState
+        }
+    })
 
     const [searchQuery, setSearchQuery] = useState('')
     const [debouncedSearchQuery, setDebouncedSearchQuery] = useState('')
@@ -187,10 +196,16 @@ export const InternalSquadsDrawerWithStore = () => {
     const { mutate: updateInternalSquad, isPending: isUpdatingInternalSquad } =
         useUpdateInternalSquad({
             mutationFns: {
-                onSuccess: () => {
+                onSuccess: (data) => {
                     queryClient.refetchQueries({
                         queryKey: internalSquadsQueryKeys.getInternalSquads.queryKey
                     })
+                    queryClient.setQueryData(
+                        internalSquadsQueryKeys.getInternalSquad({
+                            uuid: data.uuid
+                        }).queryKey,
+                        data
+                    )
                     close()
                 }
             }
@@ -389,46 +404,53 @@ export const InternalSquadsDrawerWithStore = () => {
                     </Tabs.List>
 
                     <Tabs.Panel pt="sm" value="profiles">
-                        <ScrollArea flex={1}>
-                            <Stack gap="sm">
-                                <Accordion
-                                    chevronPosition="left"
-                                    multiple={true}
-                                    onChange={(value) => {
-                                        setOpenAccordions(new Set(value))
-                                    }}
-                                    value={Array.from(openAccordions)}
-                                    variant="separated"
-                                >
-                                    {filteredProfiles.map((profile) => {
+                        {filteredProfiles.length === 0 ? (
+                            <Text c="dimmed" py="xl" size="sm" ta="center">
+                                {debouncedSearchQuery
+                                    ? t(
+                                          'internal-squads.drawer.widget.no-profiles-or-inbounds-found'
+                                      )
+                                    : t(
+                                          'internal-squads.drawer.widget.no-config-profiles-available'
+                                      )}
+                            </Text>
+                        ) : (
+                            <Accordion
+                                chevronPosition="left"
+                                multiple={true}
+                                onChange={(value) => {
+                                    setOpenAccordions(new Set(value))
+                                }}
+                                value={Array.from(openAccordions)}
+                                variant="separated"
+                            >
+                                <Virtuoso
+                                    data={filteredProfiles}
+                                    itemContent={(_index, profile) => {
                                         const isOpen = openAccordions.has(profile.uuid)
                                         return (
-                                            <ConfigProfileCardShared
-                                                isOpen={isOpen}
-                                                key={profile.uuid}
-                                                onInboundToggle={handleInboundToggle}
-                                                onSelectAllInbounds={handleSelectAllInbounds}
-                                                onUnselectAllInbounds={handleUnselectAllInbounds}
-                                                profile={profile}
-                                                selectedInbounds={selectedInbounds}
-                                            />
+                                            <div
+                                                className={classes.itemWrapper}
+                                                style={{ marginBottom: '8px' }}
+                                            >
+                                                <ConfigProfileCardShared
+                                                    isOpen={isOpen}
+                                                    onInboundToggle={handleInboundToggle}
+                                                    onSelectAllInbounds={handleSelectAllInbounds}
+                                                    onUnselectAllInbounds={
+                                                        handleUnselectAllInbounds
+                                                    }
+                                                    profile={profile}
+                                                    selectedInbounds={selectedInbounds}
+                                                />
+                                            </div>
                                         )
-                                    })}
-
-                                    {filteredProfiles.length === 0 && (
-                                        <Text c="dimmed" py="xl" size="sm" ta="center">
-                                            {debouncedSearchQuery
-                                                ? t(
-                                                      'internal-squads.drawer.widget.no-profiles-or-inbounds-found'
-                                                  )
-                                                : t(
-                                                      'internal-squads.drawer.widget.no-config-profiles-available'
-                                                  )}
-                                        </Text>
-                                    )}
-                                </Accordion>
-                            </Stack>
-                        </ScrollArea>
+                                    }}
+                                    style={{ height: '500px' }}
+                                    useWindowScroll={false}
+                                />
+                            </Accordion>
+                        )}
                     </Tabs.Panel>
 
                     <Tabs.Panel pt="sm" value="flat">
@@ -469,7 +491,7 @@ export const InternalSquadsDrawerWithStore = () => {
         )
     }
 
-    const isLoading = isConfigProfilesLoading || !internalSquad
+    const isLoading = isConfigProfilesLoading || isInternalSquadLoading
 
     return (
         <Drawer

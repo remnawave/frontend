@@ -16,10 +16,10 @@ export const InternalSquadsSpotlightWidget = (props: IProps) => {
 
     const openModalWithData = useModalsStoreOpenWithData()
 
-    const handleOpenEditModal = (
-        internalSquad: GetInternalSquadsCommand.Response['response']['internalSquads'][number]
-    ) => {
-        openModalWithData(MODALS.INTERNAL_SQUAD_SHOW_INBOUNDS, internalSquad)
+    const handleOpenEditModal = (squadUuid: string) => {
+        openModalWithData(MODALS.INTERNAL_SQUAD_SHOW_INBOUNDS, {
+            squadUuid
+        })
     }
 
     return (
@@ -53,7 +53,7 @@ export const InternalSquadsSpotlightWidget = (props: IProps) => {
                         </Badge>
                     </Group>
                 ),
-                onClick: () => handleOpenEditModal(item)
+                onClick: () => handleOpenEditModal(item.uuid)
             }))}
         />
     )

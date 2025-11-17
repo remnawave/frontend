@@ -58,7 +58,9 @@ export const InternalSquadsHeaderActionButtonsFeature = (props: IProps) => {
                 nameField.reset()
                 handleUpdate()
 
-                openModalWithData(MODALS.INTERNAL_SQUAD_SHOW_INBOUNDS, data)
+                openModalWithData(MODALS.INTERNAL_SQUAD_SHOW_INBOUNDS, {
+                    squadUuid: data.uuid
+                })
             },
 
             onError: (error) => {
