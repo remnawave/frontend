@@ -27,7 +27,8 @@ export const WithDndSortable = forwardRef<HTMLDivElement, WithDndSortableProps>(
         const { attributes, listeners, setNodeRef, transform, transition, isDragging } =
             useSortable({
                 id,
-                disabled: isDragOverlay
+                disabled: isDragOverlay,
+                animateLayoutChanges: () => false
             })
 
         const style: CSSProperties = {
