@@ -419,10 +419,10 @@
         "enable-x25519mlkem768": "启用 x25519mlkem768 ",
         "pick-nodes-which-resolved-from-this-host-only-visual-assignment": "从主机中选择解析的节点。仅可视化。",
         "nodes": "节点",
-        "select-a-xray-json-template": "Select a Xray JSON Template",
-        "xray-json-template": "Xray JSON Template",
-        "override-the-xray-json-template": "Override the Xray JSON template which will be used for this host.",
-        "vital-parameters": "Vital Parameters"
+        "select-a-xray-json-template": "选择一个 Xray JSON 模板",
+        "xray-json-template": "Xray JSON 模板",
+        "override-the-xray-json-template": "覆盖将用于此主机的 Xray JSON 模板。",
+        "vital-parameters": "关键参数"
     },
     "base-node-form": {
         "country": "国家",
