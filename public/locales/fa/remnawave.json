@@ -52,7 +52,9 @@
         "select": "انتخاب",
         "loading": "در حال بارگذاری",
         "success": "با موفقیت انجام شد",
-        "download": "دانلود"
+        "download": "دانلود",
+        "search": "Search",
+        "nothing-found": "Nothing found"
     },
     "bandwidth-metrics": {
         "current-year": "امسال",

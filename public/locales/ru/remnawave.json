@@ -52,7 +52,9 @@
         "select": "Выбрать",
         "loading": "Загрузка",
         "success": "Успешно",
-        "download": "Скачать"
+        "download": "Скачать",
+        "search": "Search",
+        "nothing-found": "Nothing found"
     },
     "bandwidth-metrics": {
         "current-year": "Текущий год",
