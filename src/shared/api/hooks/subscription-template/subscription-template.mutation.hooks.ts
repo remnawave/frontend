@@ -1,6 +1,7 @@
 import {
     CreateSubscriptionTemplateCommand,
     DeleteSubscriptionTemplateCommand,
+    ReorderSubscriptionTemplateCommand,
     UpdateSubscriptionTemplateCommand
 } from '@remnawave/backend-contract'
 import { notifications } from '@mantine/notifications'
@@ -71,6 +72,23 @@ export const useDeleteSubscriptionTemplate = createMutationHook({
         onError: (error) => {
             notifications.show({
                 title: `Delete Subscription Template`,
+                message:
+                    error instanceof Error ? error.message : `Request failed with unknown error.`,
+                color: 'red'
+            })
+        }
+    }
+})
+
+export const useReorderSubscriptionTemplates = createMutationHook({
+    endpoint: ReorderSubscriptionTemplateCommand.TSQ_url,
+    bodySchema: ReorderSubscriptionTemplateCommand.RequestSchema,
+    responseSchema: ReorderSubscriptionTemplateCommand.ResponseSchema,
+    requestMethod: ReorderSubscriptionTemplateCommand.endpointDetails.REQUEST_METHOD,
+    rMutationParams: {
+        onError: (error) => {
+            notifications.show({
+                title: `Reorder Subscription Templates`,
                 message:
                     error instanceof Error ? error.message : `Request failed with unknown error.`,
                 color: 'red'

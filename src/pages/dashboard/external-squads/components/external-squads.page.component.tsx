@@ -2,6 +2,7 @@ import { useTranslation } from 'react-i18next'
 import { TbWebhook } from 'react-icons/tb'
 import { motion } from 'motion/react'
 
+import { ExternalSquadsSpotlightWidget } from '@widgets/dashboard/external-squads/external-squads-spotlight/external-squads-spotlight'
 import { ExternalSquadsGridWidget } from '@widgets/dashboard/external-squads/external-squads-grid/external-squads-grid.widget'
 import { ExternalSquadsHeaderActionButtonsFeature } from '@features/ui/dashboard/external-squads/header-action-buttons'
 import { ExternalSquadsDrawer } from '@widgets/dashboard/external-squads/external-squads-drawer'
@@ -18,7 +19,11 @@ export const ExternalSquadsPageComponent = (props: Props) => {
     return (
         <Page title={t('constants.external-squads')}>
             <PageHeaderShared
-                actions={<ExternalSquadsHeaderActionButtonsFeature />}
+                actions={
+                    <ExternalSquadsHeaderActionButtonsFeature
+                        externalSquadCount={externalSquads.length}
+                    />
+                }
                 icon={<TbWebhook size={24} />}
                 title={t('constants.external-squads')}
             />
@@ -31,6 +36,9 @@ export const ExternalSquadsPageComponent = (props: Props) => {
                 <ExternalSquadsGridWidget externalSquads={externalSquads} />
             </motion.div>
 
+            {externalSquads.length > 0 && (
+                <ExternalSquadsSpotlightWidget externalSquads={externalSquads} />
+            )}
             <ExternalSquadsDrawer />
             <RenameModalShared key="rename-external-squad-modal" renameFrom="externalSquad" />
         </Page>

@@ -5,26 +5,32 @@ import { generatePath, useNavigate } from 'react-router-dom'
 import { TbChevronDown, TbEdit } from 'react-icons/tb'
 import { useDisclosure } from '@mantine/hooks'
 import { useTranslation } from 'react-i18next'
-import { motion } from 'framer-motion'
 import { ReactNode } from 'react'
 import clsx from 'clsx'
 
 import { MODALS, useModalsStoreOpenWithData } from '@entities/dashboard/modal-store'
+import { WithDndSortable } from '@shared/hocs/with-dnd-sortable'
 import { ROUTES } from '@shared/constants'
 
 import classes from './templates-card.module.css'
 
 interface IProps {
     handleDeleteTemplate: (templateUuid: string) => void
-    index: number
-    isHighCount: boolean
+
+    isDragOverlay?: boolean
     template: GetSubscriptionTemplatesCommand.Response['response']['templates'][number]
     templateTitle: string
     themeLogo: ReactNode
 }
 
 export function TemplatesCardWidget(props: IProps) {
-    const { index, isHighCount, template, templateTitle, themeLogo, handleDeleteTemplate } = props
+    const {
+        template,
+        templateTitle,
+        themeLogo,
+        handleDeleteTemplate,
+        isDragOverlay = false
+    } = props
 
     const { t } = useTranslation()
 
@@ -35,16 +41,10 @@ export function TemplatesCardWidget(props: IProps) {
     const navigate = useNavigate()
 
     return (
-        <motion.div
-            animate={{ opacity: 1, y: 0 }}
-            className={classes.cardWrapper}
-            initial={{ opacity: 0, y: isHighCount ? 0 : 20 }}
-            key={template.uuid}
-            transition={{
-                duration: 0.3,
-                delay: isHighCount ? 0.1 : index * 0.05,
-                ease: 'easeOut'
-            }}
+        <WithDndSortable
+            dragHandlePosition="top-right"
+            id={template.uuid}
+            isDragOverlay={isDragOverlay}
         >
             <Card className={classes.card} h="100%" p="xl" shadow="sm" withBorder>
                 <Box className={classes.topAccent} />
@@ -196,6 +196,6 @@ export function TemplatesCardWidget(props: IProps) {
                     </Group>
                 </Stack>
             </Card>
-        </motion.div>
+        </WithDndSortable>
     )
 }

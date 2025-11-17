@@ -1,9 +1,11 @@
-import { Card, SimpleGrid, Stack, Text, Title } from '@mantine/core'
+import { Card, Stack, Text, Title } from '@mantine/core'
 import { useTranslation } from 'react-i18next'
 import { modals } from '@mantine/modals'
 
 import { ActiveNodesListModalWithStoreShared } from '@shared/ui/config-profiles/active-nodes-list-modal-with-store/active-nodes-list-with-store.modal.shared'
-import { QueryKeys, useDeleteConfigProfile } from '@shared/api/hooks'
+import { QueryKeys, useDeleteConfigProfile, useReorderConfigProfiles } from '@shared/api/hooks'
+import { useResponsiveColumns } from '@shared/hooks/use-responsive-columns'
+import { VirtualizedDndGrid } from '@shared/ui/virtualized-dnd-grid'
 import { queryClient } from '@shared/api/query-client'
 import { XrayLogo } from '@shared/ui/logos'
 
@@ -14,6 +16,16 @@ import { IProps } from './interfaces'
 export function ConfigProfilesGridWidget(props: IProps) {
     const { configProfiles } = props
     const { t } = useTranslation()
+
+    const { columnCount } = useResponsiveColumns({})
+
+    const { mutate: reorderConfigProfiles } = useReorderConfigProfiles({
+        mutationFns: {
+            onSuccess: (data) => {
+                queryClient.setQueryData(QueryKeys.configProfiles.getConfigProfiles.queryKey, data)
+            }
+        }
+    })
 
     const { mutate: deleteConfigProfile } = useDeleteConfigProfile({
         mutationFns: {
@@ -45,6 +57,17 @@ export function ConfigProfilesGridWidget(props: IProps) {
         })
     }
 
+    const handleReorder = (reorderedItems: typeof configProfiles) => {
+        reorderConfigProfiles({
+            variables: {
+                items: reorderedItems.map((item, index) => ({
+                    uuid: item.uuid,
+                    viewPosition: index
+                }))
+            }
+        })
+    }
+
     if (!configProfiles || configProfiles.length === 0) {
         return (
             <Card p="xl" withBorder>
@@ -65,32 +88,31 @@ export function ConfigProfilesGridWidget(props: IProps) {
         )
     }
 
-    const isHighCount = configProfiles.length > 6
-
     return (
-        <SimpleGrid
-            cols={{
-                base: 1,
-                '800px': 2,
-                '1000px': 3,
-                '1200px': 4,
-                '1800px': 5,
-                '2400px': 6,
-                '3000px': 7
-            }}
-            type="container"
-        >
-            {configProfiles.map((profile, index) => (
-                <ConfigProfileCardWidget
-                    configProfile={profile}
-                    handleDeleteConfigProfile={handleDeleteProfile}
-                    index={index}
-                    isHighCount={isHighCount}
-                    key={profile.uuid}
-                />
-            ))}
+        <>
+            <VirtualizedDndGrid
+                columnCount={columnCount}
+                enableDnd={true}
+                items={configProfiles}
+                onReorder={handleReorder}
+                renderDragOverlay={(profile) => (
+                    <ConfigProfileCardWidget
+                        configProfile={profile}
+                        handleDeleteConfigProfile={handleDeleteProfile}
+                        isDragOverlay
+                    />
+                )}
+                renderItem={(profile) => (
+                    <ConfigProfileCardWidget
+                        configProfile={profile}
+                        handleDeleteConfigProfile={handleDeleteProfile}
+                    />
+                )}
+                useWindowScroll={true}
+            />
+
             <ConfigProfileInboundsDrawerWidget />
             <ActiveNodesListModalWithStoreShared />
-        </SimpleGrid>
+        </>
     )
 }

@@ -1,4 +1,4 @@
-import { Card, SimpleGrid, Stack, Text, Title } from '@mantine/core'
+import { Card, Stack, Text, Title } from '@mantine/core'
 import { useTranslation } from 'react-i18next'
 import { PiEmpty } from 'react-icons/pi'
 import { modals } from '@mantine/modals'
@@ -8,9 +8,12 @@ import {
     useAddUsersToInternalSquad,
     useDeleteInternalSquad,
     useDeleteUsersFromInternalSquad,
-    useGetInternalSquads
+    useGetInternalSquads,
+    useReorderInternalSquads
 } from '@shared/api/hooks'
 import { baseNotificationsMutations } from '@shared/ui/notifications/base-notification-mutations'
+import { useResponsiveColumns } from '@shared/hooks/use-responsive-columns'
+import { VirtualizedDndGrid } from '@shared/ui/virtualized-dnd-grid'
 import { queryClient } from '@shared/api/query-client'
 import { sToMs } from '@shared/utils/time-utils'
 
@@ -20,6 +23,15 @@ import { IProps } from './interfaces'
 export function InternalSquadsGridWidget(props: IProps) {
     const { internalSquads } = props
     const { t } = useTranslation()
+    const { columnCount } = useResponsiveColumns({})
+
+    const { mutate: reorderInternalSquads } = useReorderInternalSquads({
+        mutationFns: {
+            onSuccess: (data) => {
+                queryClient.setQueryData(QueryKeys.internalSquads.getInternalSquads.queryKey, data)
+            }
+        }
+    })
 
     const { refetch: refetchInternalSquads } = useGetInternalSquads({
         rQueryParams: {
@@ -145,6 +157,17 @@ export function InternalSquadsGridWidget(props: IProps) {
         })
     }
 
+    const handleReorder = (reorderedItems: typeof internalSquads) => {
+        reorderInternalSquads({
+            variables: {
+                items: reorderedItems.map((item, index) => ({
+                    uuid: item.uuid,
+                    viewPosition: index
+                }))
+            }
+        })
+    }
+
     if (!internalSquads || internalSquads.length === 0) {
         return (
             <Card p="xl" withBorder>
@@ -165,32 +188,30 @@ export function InternalSquadsGridWidget(props: IProps) {
         )
     }
 
-    const isHighCount = internalSquads.length > 6
-
     return (
-        <SimpleGrid
-            cols={{
-                base: 1,
-                '800px': 2,
-                '1000px': 3,
-                '1200px': 4,
-                '1800px': 5,
-                '2400px': 6,
-                '3000px': 7
-            }}
-            type="container"
-        >
-            {internalSquads.map((internalSquad, index) => (
+        <VirtualizedDndGrid
+            columnCount={columnCount}
+            enableDnd={true}
+            items={internalSquads}
+            onReorder={handleReorder}
+            renderDragOverlay={(internalSquad) => (
                 <InternalSquadCardWidget
                     handleAddToUsers={handleAddToUsers}
                     handleDeleteInternalSquad={handleDeleteInternalSquad}
                     handleRemoveFromUsers={handleRemoveFromUsers}
-                    index={index}
                     internalSquad={internalSquad}
-                    isHighCount={isHighCount}
-                    key={internalSquad.uuid}
+                    isDragOverlay
                 />
-            ))}
-        </SimpleGrid>
+            )}
+            renderItem={(internalSquad) => (
+                <InternalSquadCardWidget
+                    handleAddToUsers={handleAddToUsers}
+                    handleDeleteInternalSquad={handleDeleteInternalSquad}
+                    handleRemoveFromUsers={handleRemoveFromUsers}
+                    internalSquad={internalSquad}
+                />
+            )}
+            useWindowScroll={true}
+        />
     )
 }

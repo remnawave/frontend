@@ -52,7 +52,9 @@
         "select": "Select",
         "loading": "Loading",
         "success": "Success",
-        "download": "Download"
+        "download": "Download",
+        "search": "Search",
+        "nothing-found": "Nothing found"
     },
     "bandwidth-metrics": {
         "current-year": "Current year",

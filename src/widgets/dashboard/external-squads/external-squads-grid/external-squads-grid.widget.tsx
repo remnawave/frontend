@@ -1,4 +1,4 @@
-import { Card, SimpleGrid, Stack, Text, Title } from '@mantine/core'
+import { Card, Stack, Text, Title } from '@mantine/core'
 import { useTranslation } from 'react-i18next'
 import { PiEmpty } from 'react-icons/pi'
 import { modals } from '@mantine/modals'
@@ -8,9 +8,12 @@ import {
     useAddUsersToExternalSquad,
     useDeleteExternalSquad,
     useDeleteUsersFromExternalSquad,
-    useGetExternalSquads
+    useGetExternalSquads,
+    useReorderExternalSquads
 } from '@shared/api/hooks'
 import { baseNotificationsMutations } from '@shared/ui/notifications/base-notification-mutations'
+import { useResponsiveColumns } from '@shared/hooks/use-responsive-columns'
+import { VirtualizedDndGrid } from '@shared/ui/virtualized-dnd-grid'
 import { queryClient } from '@shared/api/query-client'
 import { sToMs } from '@shared/utils/time-utils'
 
@@ -21,6 +24,7 @@ export function ExternalSquadsGridWidget(props: IProps) {
     const { externalSquads } = props
 
     const { t } = useTranslation()
+    const { columnCount } = useResponsiveColumns({})
 
     const { refetch: refetchExternalSquads } = useGetExternalSquads({
         rQueryParams: {
@@ -34,6 +38,14 @@ export function ExternalSquadsGridWidget(props: IProps) {
                 queryClient.refetchQueries({
                     queryKey: QueryKeys.externalSquads.getExternalSquads.queryKey
                 })
+            }
+        }
+    })
+
+    const { mutate: reorderExternalSquads } = useReorderExternalSquads({
+        mutationFns: {
+            onSuccess: (data) => {
+                queryClient.setQueryData(QueryKeys.externalSquads.getExternalSquads.queryKey, data)
             }
         }
     })
@@ -113,6 +125,17 @@ export function ExternalSquadsGridWidget(props: IProps) {
         })
     }
 
+    const handleReorder = (reorderedItems: typeof externalSquads) => {
+        reorderExternalSquads({
+            variables: {
+                items: reorderedItems.map((item, index) => ({
+                    uuid: item.uuid,
+                    viewPosition: index
+                }))
+            }
+        })
+    }
+
     if (!externalSquads || externalSquads.length === 0) {
         return (
             <Card bg="dark.6" h="100%" p="xl" withBorder>
@@ -136,32 +159,32 @@ export function ExternalSquadsGridWidget(props: IProps) {
         )
     }
 
-    const isHighCount = externalSquads.length > 6
-
     return (
-        <SimpleGrid
-            cols={{
-                base: 1,
-                '800px': 2,
-                '1000px': 3,
-                '1200px': 4,
-                '1800px': 5,
-                '2400px': 6,
-                '3000px': 7
-            }}
-            type="container"
-        >
-            {externalSquads.map((externalSquad, index) => (
-                <ExternalSquadCardWidget
-                    externalSquad={externalSquad}
-                    handleAddToUsers={handleAddToUsers}
-                    handleDeleteExternalSquad={handleDeleteExternalSquad}
-                    handleRemoveFromUsers={handleRemoveFromUsers}
-                    index={index}
-                    isHighCount={isHighCount}
-                    key={externalSquad.uuid}
-                />
-            ))}
-        </SimpleGrid>
+        <>
+            <VirtualizedDndGrid
+                columnCount={columnCount}
+                enableDnd={true}
+                items={externalSquads}
+                onReorder={handleReorder}
+                renderDragOverlay={(externalSquad) => (
+                    <ExternalSquadCardWidget
+                        externalSquad={externalSquad}
+                        handleAddToUsers={handleAddToUsers}
+                        handleDeleteExternalSquad={handleDeleteExternalSquad}
+                        handleRemoveFromUsers={handleRemoveFromUsers}
+                        isDragOverlay
+                    />
+                )}
+                renderItem={(externalSquad) => (
+                    <ExternalSquadCardWidget
+                        externalSquad={externalSquad}
+                        handleAddToUsers={handleAddToUsers}
+                        handleDeleteExternalSquad={handleDeleteExternalSquad}
+                        handleRemoveFromUsers={handleRemoveFromUsers}
+                    />
+                )}
+                useWindowScroll={true}
+            />
+        </>
     )
 }

@@ -17,9 +17,14 @@ import { useTranslation } from 'react-i18next'
 import { useField } from '@mantine/form'
 
 import { QueryKeys, useCreateConfigProfile, useGetConfigProfiles } from '@shared/api/hooks'
+import { UniversalSpotlightActionIconShared } from '@shared/ui/universal-spotlight'
 import { HelpActionIconShared } from '@shared/ui/help-drawer'
 import { ROUTES } from '@shared/constants'
 import { queryClient } from '@shared/api'
+
+interface IProps {
+    configProfileCount: number
+}
 
 const generateDefaultConfig = () => {
     const randomNumber = Math.floor(Math.random() * 999999) + 1
@@ -59,7 +64,8 @@ const generateDefaultConfig = () => {
     }
 }
 
-export const ConfigProfilesHeaderActionButtonsFeature = () => {
+export const ConfigProfilesHeaderActionButtonsFeature = (props: IProps) => {
+    const { configProfileCount } = props
     const { isFetching } = useGetConfigProfiles()
     const { t } = useTranslation()
 
@@ -100,6 +106,8 @@ export const ConfigProfilesHeaderActionButtonsFeature = () => {
     return (
         <Group grow preventGrowOverflow={false} wrap="wrap">
             <HelpActionIconShared hidden={false} screen="PAGE_CONFIG_PROFILES" />
+
+            {configProfileCount > 0 && <UniversalSpotlightActionIconShared />}
 
             <ActionIconGroup>
                 <Tooltip label={t('common.update')} withArrow>
