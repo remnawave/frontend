@@ -52,7 +52,9 @@
         "select": "选择",
         "loading": "正在加载",
         "success": "成功",
-        "download": "下载"
+        "download": "下载",
+        "search": "Search",
+        "nothing-found": "Nothing found"
     },
     "bandwidth-metrics": {
         "current-year": "今年",
