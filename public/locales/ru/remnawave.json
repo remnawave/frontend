@@ -53,8 +53,8 @@
         "loading": "Загрузка",
         "success": "Успешно",
         "download": "Скачать",
-        "search": "Search",
-        "nothing-found": "Nothing found"
+        "search": "Поиск",
+        "nothing-found": "Ничего не найдено"
     },
     "bandwidth-metrics": {
         "current-year": "Текущий год",
