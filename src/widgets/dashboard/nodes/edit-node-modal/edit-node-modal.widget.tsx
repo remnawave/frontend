@@ -103,7 +103,8 @@ export const EditNodeModalConnectorWidget = () => {
                         node.configProfile.activeInbounds.map((inbound) => inbound.uuid) ?? []
                 },
 
-                providerUuid: node.providerUuid ?? undefined
+                providerUuid: node.providerUuid ?? undefined,
+                tags: node.tags ?? []
             })
         }
     }, [node])

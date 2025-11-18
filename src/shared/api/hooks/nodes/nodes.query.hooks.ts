@@ -1,5 +1,6 @@
 import {
     GetAllNodesCommand,
+    GetAllNodesTagsCommand,
     GetNodesRealtimeUsageCommand,
     GetNodesUsageByRangeCommand,
     GetNodeUserUsageByRangeCommand,
@@ -32,6 +33,9 @@ export const nodesQueryKeys = createQueryKeys('nodes', {
         queryKey: [query]
     }),
     getNodeUserUsageByRange: {
+        queryKey: null
+    },
+    getAllTags: {
         queryKey: null
     }
 })
@@ -106,4 +110,14 @@ export const useGetNodesRealtimeUsage = createGetQueryHook({
         refetchInterval: sToMs(5)
     },
     errorHandler: (error) => errorHandler(error, 'Get Nodes Realtime Usage')
+})
+
+export const useGetNodesTags = createGetQueryHook({
+    endpoint: GetAllNodesTagsCommand.TSQ_url,
+    responseSchema: GetAllNodesTagsCommand.ResponseSchema,
+    getQueryKey: () => nodesQueryKeys.getAllTags.queryKey,
+    rQueryParams: {
+        staleTime: 0
+    },
+    errorHandler: (error) => errorHandler(error, 'Get All Nodes Tags')
 })

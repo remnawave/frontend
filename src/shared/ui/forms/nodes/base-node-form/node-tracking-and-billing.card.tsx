@@ -8,17 +8,19 @@ import {
     rem,
     Stack,
     Switch,
+    TagsInput,
     Text,
     Title
 } from '@mantine/core'
 import { CreateNodeCommand, UpdateNodeCommand } from '@remnawave/backend-contract'
 import { ForwardRefComponent, HTMLMotionProps, Variants } from 'motion/react'
-import { PiCheckDuotone, PiXDuotone } from 'react-icons/pi'
+import { PiCheckDuotone, PiTagDuotone, PiXDuotone } from 'react-icons/pi'
 import { TbChartBar, TbChartLine } from 'react-icons/tb'
 import { UseFormReturnType } from '@mantine/form'
 import { useTranslation } from 'react-i18next'
 
 import { SelectInfraProviderShared } from '@shared/ui/infra-billing/select-infra-provider/select-infra-provider.shared'
+import { useGetNodesTags } from '@shared/api/hooks'
 
 interface IProps<T extends CreateNodeCommand.Request | UpdateNodeCommand.Request> {
     advancedOpened: boolean
@@ -34,6 +36,7 @@ export const NodeTrackingAndBillingCard = <
     props: IProps<T>
 ) => {
     const { t } = useTranslation()
+    const { data: nodesTags } = useGetNodesTags()
     const { cardVariants, form, motionWrapper, setAdvancedOpened, advancedOpened } = props
 
     const MotionWrapper = motionWrapper
@@ -166,6 +169,24 @@ export const NodeTrackingAndBillingCard = <
                             </Stack>
                         </Collapse>
                     </Stack>
+
+                    <TagsInput
+                        clearable
+                        data={nodesTags?.tags || []}
+                        key={form.key('tags')}
+                        label="Tags"
+                        leftSection={<PiTagDuotone size="16px" />}
+                        maxTags={10}
+                        placeholder="Enter tags (comma, space, semicolon)"
+                        splitChars={[',', ' ', ';']}
+                        {...form.getInputProps('tags')}
+                        error={
+                            Object.keys(form.errors)
+                                .filter((key) => key.startsWith('tags.'))
+                                .map((key) => form.errors[key])
+                                .join(', ') || form.getInputProps('tags').error
+                        }
+                    />
                 </Stack>
             </Fieldset>
         </MotionWrapper>
