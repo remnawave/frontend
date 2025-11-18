@@ -48,6 +48,8 @@ export function parseColoredTextUtil(text: string): Array<{ color: string; text:
                 if (word) {
                     parts.push({ text: word, color })
                 }
+            } else {
+                i++
             }
         }
 
