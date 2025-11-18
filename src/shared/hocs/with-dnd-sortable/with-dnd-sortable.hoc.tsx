@@ -32,7 +32,7 @@ export const WithDndSortable = forwardRef<HTMLDivElement, WithDndSortableProps>(
             })
 
         const style: CSSProperties = {
-            transform: CSS.Transform.toString(transform),
+            transform: CSS.Translate.toString(transform),
             transition,
             opacity: isDragging ? 0 : 1,
             position: 'relative'
