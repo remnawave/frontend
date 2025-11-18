@@ -100,7 +100,7 @@ export const ExternalSquadsDrawer = memo(() => {
                                         className={classes.title}
                                         ff="monospace"
                                         fw={700}
-                                        lineClamp={2}
+                                        lineClamp={1}
                                         size="lg"
                                         title={externalSquad.name}
                                     >

@@ -13,10 +13,11 @@ import {
 } from '@dnd-kit/core'
 import { arrayMove, rectSortingStrategy, SortableContext } from '@dnd-kit/sortable'
 import { restrictToWindowEdges } from '@dnd-kit/modifiers'
-import { VirtuosoMasonry } from '@virtuoso.dev/masonry'
 import { ReactNode, useEffect, useState } from 'react'
+import { VirtuosoGrid } from 'react-virtuoso'
 import { Box } from '@mantine/core'
 
+import { VirtualizedGridComponents } from './virtualized-grid-components'
 import classes from './virtualized-dnd-grid.module.css'
 
 interface VirtualizedDndGridProps<T extends { uuid: string }> {
@@ -33,7 +34,6 @@ interface VirtualizedDndGridProps<T extends { uuid: string }> {
 export function VirtualizedDndGrid<T extends { uuid: string }>(props: VirtualizedDndGridProps<T>) {
     const {
         items: initialItems,
-        columnCount,
         renderItem,
         renderDragOverlay,
         onReorder,
@@ -91,16 +91,13 @@ export function VirtualizedDndGrid<T extends { uuid: string }>(props: Virtualize
 
     const draggedItem = activeId ? items.find((item) => item.uuid === activeId) : null
 
-    const ItemWrapper: React.FC<{
-        context?: unknown
-        data: T
-        index: number
-    }> = ({ data, index }) => {
-        if (!data) return null
+    const itemContent = (index: number) => {
+        const item = items[index]
+        if (!item) return null
 
         return (
-            <div className={classes.itemWrapper} style={{ padding: '5px', width: '100%' }}>
-                {renderItem(data, index)}
+            <div className={classes.itemWrapper} style={{ width: '100%' }}>
+                {renderItem(item, index)}
             </div>
         )
     }
@@ -108,10 +105,10 @@ export function VirtualizedDndGrid<T extends { uuid: string }>(props: Virtualize
     if (!enableDnd) {
         return (
             <Box style={style}>
-                <VirtuosoMasonry
-                    columnCount={columnCount}
-                    data={items}
-                    ItemContent={ItemWrapper}
+                <VirtuosoGrid
+                    components={VirtualizedGridComponents}
+                    itemContent={itemContent}
+                    totalCount={items.length}
                     useWindowScroll={useWindowScroll}
                 />
             </Box>
@@ -129,10 +126,14 @@ export function VirtualizedDndGrid<T extends { uuid: string }>(props: Virtualize
         >
             <SortableContext items={items.map((item) => item.uuid)} strategy={rectSortingStrategy}>
                 <Box style={style}>
-                    <VirtuosoMasonry
-                        columnCount={columnCount}
-                        data={items}
-                        ItemContent={ItemWrapper}
+                    <VirtuosoGrid
+                        components={VirtualizedGridComponents}
+                        itemContent={itemContent}
+                        overscan={{
+                            main: 4,
+                            reverse: 4
+                        }}
+                        totalCount={items.length}
                         useWindowScroll={useWindowScroll}
                     />
                 </Box>
