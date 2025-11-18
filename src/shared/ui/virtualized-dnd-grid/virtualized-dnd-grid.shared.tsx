@@ -21,7 +21,6 @@ import { VirtualizedGridComponents } from './virtualized-grid-components'
 import classes from './virtualized-dnd-grid.module.css'
 
 interface VirtualizedDndGridProps<T extends { uuid: string }> {
-    columnCount: number
     enableDnd?: boolean
     items: T[]
     onReorder?: (items: T[]) => void

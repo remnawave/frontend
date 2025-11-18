@@ -49,7 +49,7 @@ import { ModalFooter } from '@shared/ui/modal-footer'
 import { queryClient } from '@shared/api'
 
 const MotionWrapper = motion.div
-const MotionStack = motion(Stack)
+const MotionStack = motion.create(Stack)
 
 const containerVariants = {
     hidden: {},

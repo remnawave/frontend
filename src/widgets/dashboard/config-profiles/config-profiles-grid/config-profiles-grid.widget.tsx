@@ -4,7 +4,6 @@ import { modals } from '@mantine/modals'
 
 import { ActiveNodesListModalWithStoreShared } from '@shared/ui/config-profiles/active-nodes-list-modal-with-store/active-nodes-list-with-store.modal.shared'
 import { QueryKeys, useDeleteConfigProfile, useReorderConfigProfiles } from '@shared/api/hooks'
-import { useResponsiveColumns } from '@shared/hooks/use-responsive-columns'
 import { VirtualizedDndGrid } from '@shared/ui/virtualized-dnd-grid'
 import { queryClient } from '@shared/api/query-client'
 import { XrayLogo } from '@shared/ui/logos'
@@ -16,8 +15,6 @@ import { IProps } from './interfaces'
 export function ConfigProfilesGridWidget(props: IProps) {
     const { configProfiles } = props
     const { t } = useTranslation()
-
-    const { columnCount } = useResponsiveColumns({})
 
     const { mutate: reorderConfigProfiles } = useReorderConfigProfiles({
         mutationFns: {
@@ -91,7 +88,6 @@ export function ConfigProfilesGridWidget(props: IProps) {
     return (
         <>
             <VirtualizedDndGrid
-                columnCount={columnCount}
                 enableDnd={true}
                 items={configProfiles}
                 onReorder={handleReorder}

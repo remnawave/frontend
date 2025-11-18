@@ -7,7 +7,6 @@ import {
     useDeleteSubscriptionTemplate,
     useReorderSubscriptionTemplates
 } from '@shared/api/hooks'
-import { useResponsiveColumns } from '@shared/hooks/use-responsive-columns'
 import { VirtualizedDndGrid } from '@shared/ui/virtualized-dnd-grid'
 import { SingboxLogo } from '@shared/ui/logos/singbox-logo'
 import { MihomoLogo } from '@shared/ui/logos/mihomo-logo'
@@ -20,8 +19,6 @@ import { IProps } from './interfaces'
 
 export function TemplatesGridWidget(props: IProps) {
     const { templates, templateTitle, type } = props
-
-    const { columnCount } = useResponsiveColumns({})
 
     const { mutate: deleteTemplate } = useDeleteSubscriptionTemplate({
         mutationFns: {
@@ -93,7 +90,6 @@ export function TemplatesGridWidget(props: IProps) {
 
     return (
         <VirtualizedDndGrid
-            columnCount={columnCount}
             enableDnd={true}
             items={templates}
             key={`templates-grid-widget-${type}`}

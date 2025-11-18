@@ -12,7 +12,6 @@ import {
     useReorderInternalSquads
 } from '@shared/api/hooks'
 import { baseNotificationsMutations } from '@shared/ui/notifications/base-notification-mutations'
-import { useResponsiveColumns } from '@shared/hooks/use-responsive-columns'
 import { VirtualizedDndGrid } from '@shared/ui/virtualized-dnd-grid'
 import { queryClient } from '@shared/api/query-client'
 import { sToMs } from '@shared/utils/time-utils'
@@ -23,7 +22,6 @@ import { IProps } from './interfaces'
 export function InternalSquadsGridWidget(props: IProps) {
     const { internalSquads } = props
     const { t } = useTranslation()
-    const { columnCount } = useResponsiveColumns({})
 
     const { mutate: reorderInternalSquads } = useReorderInternalSquads({
         mutationFns: {
@@ -190,7 +188,6 @@ export function InternalSquadsGridWidget(props: IProps) {
 
     return (
         <VirtualizedDndGrid
-            columnCount={columnCount}
             enableDnd={true}
             items={internalSquads}
             onReorder={handleReorder}

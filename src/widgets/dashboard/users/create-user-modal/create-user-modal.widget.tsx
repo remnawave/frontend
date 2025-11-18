@@ -32,7 +32,7 @@ import { ModalFooter } from '@shared/ui/modal-footer'
 import { gbToBytesUtil } from '@shared/utils/bytes'
 
 const MotionWrapper = motion.div
-const MotionStack = motion(Stack)
+const MotionStack = motion.create(Stack)
 
 const containerVariants = {
     hidden: {},

@@ -12,7 +12,6 @@ import {
     useReorderExternalSquads
 } from '@shared/api/hooks'
 import { baseNotificationsMutations } from '@shared/ui/notifications/base-notification-mutations'
-import { useResponsiveColumns } from '@shared/hooks/use-responsive-columns'
 import { VirtualizedDndGrid } from '@shared/ui/virtualized-dnd-grid'
 import { queryClient } from '@shared/api/query-client'
 import { sToMs } from '@shared/utils/time-utils'
@@ -24,7 +23,6 @@ export function ExternalSquadsGridWidget(props: IProps) {
     const { externalSquads } = props
 
     const { t } = useTranslation()
-    const { columnCount } = useResponsiveColumns({})
 
     const { refetch: refetchExternalSquads } = useGetExternalSquads({
         rQueryParams: {
@@ -162,7 +160,6 @@ export function ExternalSquadsGridWidget(props: IProps) {
     return (
         <>
             <VirtualizedDndGrid
-                columnCount={columnCount}
                 enableDnd={true}
                 items={externalSquads}
                 onReorder={handleReorder}

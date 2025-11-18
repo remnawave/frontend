@@ -18,8 +18,8 @@ import {
 import { IProps } from './interfaces'
 
 const MotionWrapper = motion.div
-const MotionStack = motion(Stack)
-const MotionGrid = motion(SimpleGrid)
+const MotionStack = motion.create(Stack)
+const MotionGrid = motion.create(SimpleGrid)
 
 interface IAnimatedTitleProps extends TitleProps {
     children: React.ReactNode
