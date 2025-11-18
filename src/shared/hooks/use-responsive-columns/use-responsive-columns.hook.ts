@@ -76,7 +76,8 @@ export function useResponsiveColumns(
         breakpoints = {
             800: 2,
             1400: 3,
-            1500: 4,
+            1600: 4,
+            2000: 5,
             2400: 6,
             3000: 7
         }

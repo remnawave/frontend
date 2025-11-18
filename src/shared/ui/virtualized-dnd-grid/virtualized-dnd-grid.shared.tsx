@@ -99,7 +99,7 @@ export function VirtualizedDndGrid<T extends { uuid: string }>(props: Virtualize
         if (!data) return null
 
         return (
-            <div className={classes.itemWrapper} style={{ padding: 5, margin: 0, width: '100%' }}>
+            <div className={classes.itemWrapper} style={{ padding: '5px', width: '100%' }}>
                 {renderItem(data, index)}
             </div>
         )
@@ -112,9 +112,6 @@ export function VirtualizedDndGrid<T extends { uuid: string }>(props: Virtualize
                     columnCount={columnCount}
                     data={items}
                     ItemContent={ItemWrapper}
-                    style={{
-                        height: '100%'
-                    }}
                     useWindowScroll={useWindowScroll}
                 />
             </Box>
