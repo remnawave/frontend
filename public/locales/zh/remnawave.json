@@ -53,8 +53,8 @@
         "loading": "正在加载",
         "success": "成功",
         "download": "下载",
-        "search": "Search",
-        "nothing-found": "Nothing found"
+        "search": "搜索",
+        "nothing-found": "未找到"
     },
     "bandwidth-metrics": {
         "current-year": "今年",
