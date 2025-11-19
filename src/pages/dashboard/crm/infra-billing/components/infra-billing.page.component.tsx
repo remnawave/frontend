@@ -38,7 +38,7 @@ export const InfraBillingPageComponent = () => {
 
                             <Split.Resizer />
 
-                            <Split.Pane initialWidth="40%">
+                            <Split.Pane grow initialWidth="40%">
                                 <InfraBillingRecordsTableWidget />
                             </Split.Pane>
                         </Split>
