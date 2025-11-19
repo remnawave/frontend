@@ -424,7 +424,9 @@
         "select-a-xray-json-template": "Выберите шаблон Xray JSON",
         "xray-json-template": "Шаблон Xray JSON",
         "override-the-xray-json-template": "Переопределить шаблон Xray JSON, который будет использоваться для этого узла.",
-        "vital-parameters": "Базовые параметры"
+        "vital-parameters": "Базовые параметры",
+        "exclude-this-host-from-specific-internal-squads": "Exclude this host from specific Internal Squads",
+        "excluded-internal-squads": "Excluded Internal Squads"
     },
     "base-node-form": {
         "country": "Страна",

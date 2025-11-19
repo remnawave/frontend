@@ -424,7 +424,9 @@
         "select-a-xray-json-template": "یکی از الگوهای کانفیگ Json را انتخاب کنید",
         "xray-json-template": "الگوی کانفیگ Json",
         "override-the-xray-json-template": "الگوی Json کانفیگی که برای این هاست استفاده خواهد شد را override کنید.",
-        "vital-parameters": "پارامترهای حیاتی"
+        "vital-parameters": "پارامترهای حیاتی",
+        "exclude-this-host-from-specific-internal-squads": "Exclude this host from specific Internal Squads",
+        "excluded-internal-squads": "Excluded Internal Squads"
     },
     "base-node-form": {
         "country": "کشور",

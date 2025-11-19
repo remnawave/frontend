@@ -424,7 +424,9 @@
         "select-a-xray-json-template": "选择一个 Xray JSON 模板",
         "xray-json-template": "Xray JSON 模板",
         "override-the-xray-json-template": "覆盖将用于此主机的 Xray JSON 模板。",
-        "vital-parameters": "关键参数"
+        "vital-parameters": "关键参数",
+        "exclude-this-host-from-specific-internal-squads": "从指定的内部小队排除此主机",
+        "excluded-internal-squads": "排除的内部分组"
     },
     "base-node-form": {
         "country": "国家",
