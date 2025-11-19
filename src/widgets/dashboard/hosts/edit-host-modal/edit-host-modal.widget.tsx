@@ -12,6 +12,7 @@ import {
     QueryKeys,
     useCreateHost,
     useGetConfigProfiles,
+    useGetInternalSquads,
     useGetNodes,
     useGetSubscriptionTemplates,
     useUpdateHost
@@ -32,6 +33,7 @@ export const EditHostModalWidget = memo(() => {
     const { data: configProfiles } = useGetConfigProfiles()
     const { data: nodes } = useGetNodes()
     const { data: templates } = useGetSubscriptionTemplates()
+    const { data: internalSquads } = useGetInternalSquads()
 
     const form = useForm<UpdateHostCommand.Request>({
         name: 'edit-host-form',
@@ -130,7 +132,8 @@ export const EditHostModalWidget = memo(() => {
                 shuffleHost: host.shuffleHost ?? undefined,
                 mihomoX25519: host.mihomoX25519 ?? undefined,
                 nodes: host.nodes ?? undefined,
-                xrayJsonTemplateUuid: host.xrayJsonTemplateUuid ?? undefined
+                xrayJsonTemplateUuid: host.xrayJsonTemplateUuid ?? undefined,
+                excludedInternalSquads: host.excludedInternalSquads ?? undefined
             })
         }
     }, [host, configProfiles])
@@ -276,7 +279,8 @@ export const EditHostModalWidget = memo(() => {
                 vlessRouteId: host.vlessRouteId ?? undefined,
                 allowInsecure: host.allowInsecure ?? undefined,
                 nodes: host.nodes ?? undefined,
-                xrayJsonTemplateUuid: host.xrayJsonTemplateUuid ?? undefined
+                xrayJsonTemplateUuid: host.xrayJsonTemplateUuid ?? undefined,
+                excludedInternalSquads: host.excludedInternalSquads ?? undefined
             }
         })
     }
@@ -299,6 +303,7 @@ export const EditHostModalWidget = memo(() => {
                     form={form}
                     handleCloneHost={handleCloneHost}
                     handleSubmit={handleSubmit}
+                    internalSquads={internalSquads?.internalSquads ?? []}
                     isSubmitting={isUpdateHostPending}
                     nodes={nodes!}
                     setAdvancedOpened={setAdvancedOpened}

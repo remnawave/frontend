@@ -38,7 +38,7 @@ import {
     SECURITY_LAYERS,
     UpdateHostCommand
 } from '@remnawave/backend-contract'
-import { TbCloudNetwork, TbEye, TbServer2 } from 'react-icons/tb'
+import { TbCirclesRelation, TbCloudNetwork, TbEye, TbServer2 } from 'react-icons/tb'
 import { HiQuestionMarkCircle } from 'react-icons/hi'
 import { useDisclosure } from '@mantine/hooks'
 import { useTranslation } from 'react-i18next'
@@ -75,6 +75,7 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
         isSubmitting,
         handleCloneHost,
         nodes,
+        internalSquads,
         subscriptionTemplates
     } = props
 
@@ -465,6 +466,43 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
                                         }}
                                         searchable
                                         {...form.getInputProps('nodes')}
+                                    />
+
+                                    <MultiSelect
+                                        clearable
+                                        clearButtonProps={{
+                                            size: 'xs'
+                                        }}
+                                        data={internalSquads.map((internalSquad) => ({
+                                            label: internalSquad.name,
+                                            value: internalSquad.uuid
+                                        }))}
+                                        description={t(
+                                            'base-host-form.exclude-this-host-from-specific-internal-squads'
+                                        )}
+                                        inputWrapperOrder={[
+                                            'label',
+                                            'input',
+                                            'description',
+                                            'error'
+                                        ]}
+                                        key={form.key('excludedInternalSquads')}
+                                        label={t('base-host-form.excluded-internal-squads')}
+                                        leftSection={<TbCirclesRelation size={16} />}
+                                        renderOption={(item) => {
+                                            return (
+                                                <Checkbox
+                                                    aria-hidden
+                                                    checked={item.checked}
+                                                    label={item.option.label}
+                                                    onChange={() => {}}
+                                                    style={{ pointerEvents: 'none' }}
+                                                    tabIndex={-1}
+                                                />
+                                            )
+                                        }}
+                                        searchable
+                                        {...form.getInputProps('excludedInternalSquads')}
                                     />
                                 </Stack>
                             </Fieldset>

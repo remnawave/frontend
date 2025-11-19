@@ -424,7 +424,9 @@
         "select-a-xray-json-template": "Select a Xray JSON Template",
         "xray-json-template": "Xray JSON Template",
         "override-the-xray-json-template": "Override the Xray JSON template which will be used for this host.",
-        "vital-parameters": "Vital Parameters"
+        "vital-parameters": "Vital Parameters",
+        "exclude-this-host-from-specific-internal-squads": "Exclude this host from specific Internal Squads",
+        "excluded-internal-squads": "Excluded Internal Squads"
     },
     "base-node-form": {
         "country": "Country",

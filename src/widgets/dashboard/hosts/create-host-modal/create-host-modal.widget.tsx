@@ -10,6 +10,7 @@ import {
     QueryKeys,
     useCreateHost,
     useGetConfigProfiles,
+    useGetInternalSquads,
     useGetNodes,
     useGetSubscriptionTemplates
 } from '@shared/api/hooks'
@@ -25,6 +26,7 @@ export const CreateHostModalWidget = () => {
 
     const { data: configProfiles } = useGetConfigProfiles()
     const { data: nodes } = useGetNodes()
+    const { data: internalSquads } = useGetInternalSquads()
     const { data: templates } = useGetSubscriptionTemplates()
 
     const [advancedOpened, setAdvancedOpened] = useState(false)
@@ -123,6 +125,7 @@ export const CreateHostModalWidget = () => {
                 configProfiles={configProfiles?.configProfiles ?? []}
                 form={form}
                 handleSubmit={handleSubmit}
+                internalSquads={internalSquads?.internalSquads ?? []}
                 isSubmitting={isCreateHostPending}
                 nodes={nodes!}
                 setAdvancedOpened={setAdvancedOpened}
