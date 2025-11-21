@@ -664,7 +664,7 @@
             "subscription-info-description": "Эти настройки поддерживаются многими клиентами, такими как Happ, V2RayNG, Streisand и т.д.",
             "happ-description-line-1": "Здесь вы можете сконфигурировать настройки Happ для подписки.",
             "happ-description-line-2": "Эти настройки будут использоваться только в том случае, если подписка используется в Happ.",
-            "custom-remarks": "Custom remarks"
+            "custom-remarks": "Кастомные примечания"
         },
         "page": {
             "component": {
@@ -1632,7 +1632,7 @@
                 "edit-external-squad": "Редактировать внешний отряд",
                 "templates": "Шаблоны",
                 "settings": "Настройки",
-                "remarks": "Remarks"
+                "remarks": "Примечания"
             }
         },
         "page": {
@@ -1826,15 +1826,15 @@
     },
     "external-squads-custom-remarks": {
         "widget": {
-            "override-remarks-description": "Override user status remarks for this external squad. When disabled, global subscription settings will be used.",
-            "enable-override": "Enable Override"
+            "override-remarks-description": "Переопределить примечания статуса пользователя для этого внешнего сквада. Если отключено, будут использоваться глобальные настройки подписки.",
+            "enable-override": "Включить переопределение"
         }
     },
     "subscription-user-remarks-card": {
         "widget": {
-            "user-status": "User status",
-            "empty-hosts": "Empty Hosts",
-            "empty-internal-squads": "Empty Internal Squads"
+            "user-status": "Статус пользователя",
+            "empty-hosts": "Пустой хост",
+            "empty-internal-squads": "Пустой внутренний сквад"
         }
     }
 }
