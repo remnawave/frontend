@@ -1833,8 +1833,8 @@
     "subscription-user-remarks-card": {
         "widget": {
             "user-status": "Статус пользователя",
-            "empty-hosts": "Пустой хост",
-            "empty-internal-squads": "Пустой внутренний сквад"
+            "empty-hosts": "Отсутствуют хосты",
+            "empty-internal-squads": "Отсутствует внутренние сквады"
         }
     }
 }
