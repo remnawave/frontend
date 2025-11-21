@@ -1,13 +1,16 @@
 import {
     ActionIcon,
     Button,
+    Card,
     DefaultMantineColor,
+    Divider,
     Group,
-    Paper,
+    Stack,
     Text,
     TextInput,
     ThemeIcon
 } from '@mantine/core'
+import { useAutoAnimate } from '@formkit/auto-animate/react'
 import { useCallback, useEffect, useState } from 'react'
 import { useDebouncedValue } from '@mantine/hooks'
 import { PiPlus, PiTrash } from 'react-icons/pi'
@@ -31,6 +34,30 @@ export const RemarksManager = ({
     const [localRemarks, setLocalRemarks] = useState<string[]>(initialRemarks)
     const [debouncedRemarks] = useDebouncedValue(localRemarks, 300)
     const { t } = useTranslation()
+
+    const [parent] = useAutoAnimate((el, action) => {
+        let keyframes: Keyframe[] | undefined
+        if (action === 'add') {
+            keyframes = [
+                { transform: 'scale(.98)', opacity: 0 },
+                { transform: 'scale(1)', opacity: 1 }
+            ]
+        }
+        if (action === 'remove') {
+            keyframes = [
+                { transform: 'scale(1)', opacity: 1 },
+                { transform: 'scale(.98)', opacity: 0 }
+            ]
+        }
+        if (action === 'remain') {
+            keyframes = [{ opacity: 0.98 }, { opacity: 1 }]
+        }
+
+        return new KeyframeEffect(el, keyframes as Keyframe[], {
+            duration: 250,
+            easing: 'ease-in-out'
+        })
+    })
 
     useEffect(() => {
         setLocalRemarks(initialRemarks)
@@ -62,45 +89,55 @@ export const RemarksManager = ({
     }, [])
 
     return (
-        <Paper bg="dark.6" p="sm" shadow="xs" withBorder>
-            <Group align="center" gap="xs" justify="flex-start" mb="md">
-                <ThemeIcon color={iconColor} size="md" variant="light">
-                    {icon}
-                </ThemeIcon>
-                <Text fw={600} size="sm">
-                    {title}
-                </Text>
-            </Group>
+        <Card>
+            <Stack gap="md">
+                <Group align="center" gap="xs" justify="space-between" wrap="nowrap">
+                    <Group align="center" gap="xs" wrap="nowrap">
+                        <ThemeIcon color={iconColor} size="lg" variant="light">
+                            {icon}
+                        </ThemeIcon>
+                        <Text fw={600} size="md">
+                            {title}
+                        </Text>
+                    </Group>
 
-            {localRemarks.map((remark, index) => (
-                <Group align="flex-start" gap="sm" key={index} mb="xs">
-                    <ActionIcon
-                        color="red"
-                        disabled={localRemarks.length === 1}
-                        onClick={() => removeLocalRemark(index)}
-                        size="lg"
+                    <Button
+                        leftSection={<PiPlus size="16px" />}
+                        onClick={addLocalRemark}
+                        size="sm"
                         variant="light"
                     >
-                        <PiTrash size="16px" />
-                    </ActionIcon>
-                    <TextInput
-                        leftSection={<TemplateInfoPopoverShared showHostDescription={false} />}
-                        onChange={(e) => updateLocalRemark(index, e.target.value)}
-                        placeholder={t('remarks-manager.widget.enter-remark')}
-                        style={{ flex: 1 }}
-                        value={remark}
-                    />
+                        {t('common.add')}
+                    </Button>
                 </Group>
-            ))}
-            <Button
-                leftSection={<PiPlus size="16px" />}
-                mt="xs"
-                onClick={addLocalRemark}
-                size="sm"
-                variant="light"
-            >
-                {t('remarks-manager.widget.add-remark')}
-            </Button>
-        </Paper>
+
+                <Divider />
+
+                <Stack gap="xs" ref={parent}>
+                    {localRemarks.map((remark, index) => (
+                        <Group align="flex-start" gap="sm" key={index}>
+                            <TextInput
+                                leftSection={
+                                    <TemplateInfoPopoverShared showHostDescription={false} />
+                                }
+                                onChange={(e) => updateLocalRemark(index, e.target.value)}
+                                placeholder={t('remarks-manager.widget.enter-remark')}
+                                style={{ flex: 1 }}
+                                value={remark}
+                            />
+                            <ActionIcon
+                                color="red"
+                                disabled={localRemarks.length === 1}
+                                onClick={() => removeLocalRemark(index)}
+                                size="lg"
+                                variant="light"
+                            >
+                                <PiTrash size="16px" />
+                            </ActionIcon>
+                        </Group>
+                    ))}
+                </Stack>
+            </Stack>
+        </Card>
     )
 }

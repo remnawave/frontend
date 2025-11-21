@@ -13,8 +13,8 @@ import {
     Tooltip,
     Transition
 } from '@mantine/core'
+import { TbFolder, TbListLetters, TbPrescription, TbSettings, TbWebhook } from 'react-icons/tb'
 import { PiCheck, PiCopy, PiIdentificationBadge, PiListChecks, PiUsers } from 'react-icons/pi'
-import { TbFolder, TbPrescription, TbSettings, TbWebhook } from 'react-icons/tb'
 import { useTranslation } from 'react-i18next'
 import { memo, useState } from 'react'
 
@@ -30,6 +30,7 @@ import {
     ExternalSquadsTemplatesTabWidget
 } from './tabs'
 import { ExternalSquadsResponseHeadersTabWidget } from './tabs/external-squads-response-headers.widget'
+import { ExternalSquadsCustomRemarksTabWidget } from './tabs/external-squads-custom-remarks.widget'
 import classes from './external-squads.module.css'
 
 const TAB_TYPE = {
@@ -37,7 +38,8 @@ const TAB_TYPE = {
     templates: 'templates',
     hosts: 'hosts',
     responseHeaders: 'responseHeaders',
-    hwidSettings: 'hwidSettings'
+    hwidSettings: 'hwidSettings',
+    customRemarks: 'customRemarks'
 } as const
 
 type TabType = (typeof TAB_TYPE)[keyof typeof TAB_TYPE]
@@ -192,6 +194,12 @@ export const ExternalSquadsDrawer = memo(() => {
                         >
                             HWID
                         </Tabs.Tab>
+                        <Tabs.Tab
+                            leftSection={<TbListLetters size={px('1.2rem')} />}
+                            value={TAB_TYPE.customRemarks}
+                        >
+                            {t('external-squads.drawer.widget.remarks')}
+                        </Tabs.Tab>
                     </Tabs.List>
 
                     <Tabs.Panel pt="xl" value={TAB_TYPE.templates}>
@@ -276,6 +284,24 @@ export const ExternalSquadsDrawer = memo(() => {
                             {(styles) => (
                                 <Stack gap="lg" style={styles}>
                                     <ExternalSquadsHwidSettingsTabWidget
+                                        externalSquad={externalSquad}
+                                        isOpen={isOpen}
+                                    />
+                                </Stack>
+                            )}
+                        </Transition>
+                    </Tabs.Panel>
+
+                    <Tabs.Panel pt="xl" value={TAB_TYPE.customRemarks}>
+                        <Transition
+                            duration={200}
+                            mounted={activeTab === TAB_TYPE.customRemarks}
+                            timingFunction="linear"
+                            transition="fade"
+                        >
+                            {(styles) => (
+                                <Stack gap="lg" style={styles}>
+                                    <ExternalSquadsCustomRemarksTabWidget
                                         externalSquad={externalSquad}
                                         isOpen={isOpen}
                                     />

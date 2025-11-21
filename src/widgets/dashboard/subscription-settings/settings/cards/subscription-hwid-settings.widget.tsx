@@ -84,7 +84,7 @@ export const SubscriptionHwidSettingsWidget = (props: IProps) => {
                             description={t(
                                 'subscription-hwid-settings.widget.fallback-device-limit-description'
                             )}
-                            key={form.key('hwidSettings.maxDevicesAnnounce')}
+                            key={form.key('hwidSettings.fallbackDeviceLimit')}
                             label={t('subscription-hwid-settings.widget.fallback-device-limit')}
                             leftSection={<TbDevices2 size="16px" />}
                             max={9999}

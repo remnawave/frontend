@@ -59,7 +59,7 @@
     "@monaco-editor/react": "^4.7.0",
     "@noble/post-quantum": "^0.5.2",
     "@paralleldrive/cuid2": "2.2.2",
-    "@remnawave/backend-contract": "2.3.16",
+    "@remnawave/backend-contract": "2.3.19",
     "@simplewebauthn/browser": "^13.2.2",
     "@stablelib/base64": "^2.0.1",
     "@stablelib/x25519": "^2.0.1",

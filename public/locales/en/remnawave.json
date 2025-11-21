@@ -626,8 +626,7 @@
     },
     "remarks-manager": {
         "widget": {
-            "enter-remark": "Enter remark",
-            "add-remark": "Add remark"
+            "enter-remark": "Enter remark"
         }
     },
     "subscription-settings": {
@@ -650,13 +649,9 @@
             "happ-routing-description-line-2": "A routing link for Happ can be obtained through Remnawave's Happ Routing Builder. The button below will redirect you to the aforementioned page.",
             "configure-happ-routing": "Happ Routing Builder",
             "happ-routing": "Happ routing",
-            "user-status-remarks": "User status remarks",
             "user-status-remarks-description": "The following values will be displayed in the subscription page if the user is expired, limited or disabled.",
             "user-status-remarks-description-line-2": "You can add multiple remarks for each status.",
             "user-status-remarks-description-line-3": "Because expired, limited and disabled users are not able to connect to the server, they will see these remarks in the client instead of receiving an empty subscription.",
-            "expired-users-remarks": "Expired user remarks",
-            "limited-users-remarks": "Limited user remarks",
-            "disabled-users-remarks": "Disabled user remarks",
             "update-settings": "Update settings",
             "enabled": "Enabled",
             "disabled": "Disabled",
@@ -668,7 +663,8 @@
             "add-username-description": "Append #username to the base subscription path at the subscription route.",
             "subscription-info-description": "Subscription links are supported by many client apps such as Happ, v2RayNG, Streisand, etc.",
             "happ-description-line-1": "Here you can configure settings specific to Happ.",
-            "happ-description-line-2": "These settings will only apply to subscription links that are imported in Happ."
+            "happ-description-line-2": "These settings will only apply to subscription links that are imported in Happ.",
+            "custom-remarks": "Custom remarks"
         },
         "page": {
             "component": {
@@ -1635,7 +1631,8 @@
                 "default-template-in-use": "Default template in use...",
                 "edit-external-squad": "Edit external squad",
                 "templates": "Templates",
-                "settings": "Settings"
+                "settings": "Settings",
+                "remarks": "Remarks"
             }
         },
         "page": {
@@ -1825,6 +1822,19 @@
                 "override-hwid-description": "Override HWID device limit settings for this external squad. When disabled, global subscription settings will be used.",
                 "enable-hwid-override": "Enable HWID Override"
             }
+        }
+    },
+    "external-squads-custom-remarks": {
+        "widget": {
+            "override-remarks-description": "Override user status remarks for this external squad. When disabled, global subscription settings will be used.",
+            "enable-override": "Enable Override"
+        }
+    },
+    "subscription-user-remarks-card": {
+        "widget": {
+            "user-status": "User status",
+            "empty-hosts": "Empty Hosts",
+            "empty-internal-squads": "Empty Internal Squads"
         }
     }
 }
