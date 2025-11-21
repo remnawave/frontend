@@ -664,7 +664,7 @@
             "subscription-info-description": "订阅链接受许多客户端应用支持，例如 Happ, v2RayNG, Streisand 等。",
             "happ-description-line-1": "您可以在此处配置仅适用于 Happ 的设置。",
             "happ-description-line-2": "这些设置仅适用于在 Happ 中导入的订阅链接。",
-            "custom-remarks": "Custom remarks"
+            "custom-remarks": "自定义备注"
         },
         "page": {
             "component": {
@@ -1632,7 +1632,7 @@
                 "edit-external-squad": "编辑额外分组",
                 "templates": "模板",
                 "settings": "设置",
-                "remarks": "Remarks"
+                "remarks": "备注"
             }
         },
         "page": {
@@ -1826,15 +1826,15 @@
     },
     "external-squads-custom-remarks": {
         "widget": {
-            "override-remarks-description": "Override user status remarks for this external squad. When disabled, global subscription settings will be used.",
-            "enable-override": "Enable Override"
+            "override-remarks-description": "覆盖此外部分组的用户状态注释。禁用时，将使用全局订阅设置。",
+            "enable-override": "启用覆盖"
         }
     },
     "subscription-user-remarks-card": {
         "widget": {
-            "user-status": "User status",
-            "empty-hosts": "Empty Hosts",
-            "empty-internal-squads": "Empty Internal Squads"
+            "user-status": "用户状态",
+            "empty-hosts": "清空主机",
+            "empty-internal-squads": "清空内部小队"
         }
     }
 }
