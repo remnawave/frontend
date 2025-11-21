@@ -626,8 +626,7 @@
     },
     "remarks-manager": {
         "widget": {
-            "enter-remark": "ریمارک را وارد نمایید",
-            "add-remark": "افزودن ریمارک"
+            "enter-remark": "ریمارک را وارد نمایید"
         }
     },
     "subscription-settings": {
@@ -650,13 +649,9 @@
             "happ-routing-description-line-2": "برای ایجاد لینک مسیریابی می‌توانید از بخش مربوطه در پنل استفاده کنید",
             "configure-happ-routing": "ساخت لینک مسیریابی Happ",
             "happ-routing": "مسیریابی Happ",
-            "user-status-remarks": "ریمارک‌های وضعیت کاربر",
             "user-status-remarks-description": "درصورتی که کاربر منقضی، محدود یا غیرفعال شده باشد مقادیر زیر در اشتراک او نمایش داده خواهند شد",
             "user-status-remarks-description-line-2": "می‌توانید برای هر وضعیت چند ریمارک ایجاد کنید",
             "user-status-remarks-description-line-3": "چون کاربرهای منقضی، محدود یا غیرفعال توانایی اتصال به سرورها را ندارند، به جای دریافت لینک خالی این مقادیر را در نرم‌افزار خواهند دید",
-            "expired-users-remarks": "ریمارک‌های کاربر منقضی شده",
-            "limited-users-remarks": "ریمارک‌های کاربر محدود شده",
-            "disabled-users-remarks": "ریمارک‌های کاربر غیرفعال شده",
             "update-settings": "به‌روزرسانی تنظیمات",
             "enabled": "فعال",
             "disabled": "غیرفعال",
@@ -668,7 +663,8 @@
             "add-username-description": "با فعال کردن این گزینه #username به انتهای لینک‌های اشتراک اضافه خواهد شد.",
             "subscription-info-description": "این تنظیمات توسط نرم‌افزارهایی مثل Happ, v2RayNG, Streisand و..و استفاده می‌شود",
             "happ-description-line-1": "در این قسمت می‌توانید تنظیمات مربوط به نرم‌افزار Happ را برای لینک‌های اشتراک مشخص کنید.",
-            "happ-description-line-2": "این تنظیمات فقط در نرم‌افزار Happ استفاده خواهد شد"
+            "happ-description-line-2": "این تنظیمات فقط در نرم‌افزار Happ استفاده خواهد شد",
+            "custom-remarks": "Custom remarks"
         },
         "page": {
             "component": {
@@ -1635,7 +1631,8 @@
                 "default-template-in-use": "درحال استفاده از الگوی پیش‌فرض ...",
                 "edit-external-squad": "ویرایش اسکواد خارجی",
                 "templates": "الگوها",
-                "settings": "تنظیمات"
+                "settings": "تنظیمات",
+                "remarks": "Remarks"
             }
         },
         "page": {
@@ -1825,6 +1822,19 @@
                 "override-hwid-description": "برای این اسکواد خارجی تنظیمات HWID override خواهند شد. درصورت غیرفعال بودن، مقادیر موجود در تنظیمات عمومی استفاده خواهد شد.",
                 "enable-hwid-override": "فعالسازی override تنظیمات HWID"
             }
+        }
+    },
+    "external-squads-custom-remarks": {
+        "widget": {
+            "override-remarks-description": "Override user status remarks for this external squad. When disabled, global subscription settings will be used.",
+            "enable-override": "Enable Override"
+        }
+    },
+    "subscription-user-remarks-card": {
+        "widget": {
+            "user-status": "User status",
+            "empty-hosts": "Empty Hosts",
+            "empty-internal-squads": "Empty Internal Squads"
         }
     }
 }
