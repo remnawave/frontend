@@ -626,8 +626,7 @@
     },
     "remarks-manager": {
         "widget": {
-            "enter-remark": "输入备注",
-            "add-remark": "添加备注"
+            "enter-remark": "输入备注"
         }
     },
     "subscription-settings": {
@@ -650,13 +649,9 @@
             "happ-routing-description-line-2": "可以通过 Remnawave 的 Happ 路由编辑器获取 Happ 的路由链接。下面的按钮将重定向到上述页面。",
             "configure-happ-routing": "Happ 路由编辑器",
             "happ-routing": "Happ 路由",
-            "user-status-remarks": "用户状态备注",
             "user-status-remarks-description": "如果用户已过期、受限或禁用，以下值将显示在订阅页面中。",
             "user-status-remarks-description-line-2": "您可以为每种状态添加多个备注。",
             "user-status-remarks-description-line-3": "因为过期、受限和禁用的用户无法连接到服务器，他们将在客户端中看到这些备注，而不是收到空的订阅。",
-            "expired-users-remarks": "过期用户备注",
-            "limited-users-remarks": "受限用户备注",
-            "disabled-users-remarks": "禁用用户备注",
             "update-settings": "更新设置",
             "enabled": "已启用",
             "disabled": "已禁用",
@@ -668,7 +663,8 @@
             "add-username-description": "在订阅路由的基础订阅路径后附加 #username 。",
             "subscription-info-description": "订阅链接受许多客户端应用支持，例如 Happ, v2RayNG, Streisand 等。",
             "happ-description-line-1": "您可以在此处配置仅适用于 Happ 的设置。",
-            "happ-description-line-2": "这些设置仅适用于在 Happ 中导入的订阅链接。"
+            "happ-description-line-2": "这些设置仅适用于在 Happ 中导入的订阅链接。",
+            "custom-remarks": "Custom remarks"
         },
         "page": {
             "component": {
@@ -1635,7 +1631,8 @@
                 "default-template-in-use": "正在使用默认模板...",
                 "edit-external-squad": "编辑额外分组",
                 "templates": "模板",
-                "settings": "设置"
+                "settings": "设置",
+                "remarks": "Remarks"
             }
         },
         "page": {
@@ -1825,6 +1822,19 @@
                 "override-hwid-description": "覆盖此外部分组的 HWID 设备限制设置。禁用时，将使用全局订阅设置。",
                 "enable-hwid-override": "启用 HWID 覆盖"
             }
+        }
+    },
+    "external-squads-custom-remarks": {
+        "widget": {
+            "override-remarks-description": "Override user status remarks for this external squad. When disabled, global subscription settings will be used.",
+            "enable-override": "Enable Override"
+        }
+    },
+    "subscription-user-remarks-card": {
+        "widget": {
+            "user-status": "User status",
+            "empty-hosts": "Empty Hosts",
+            "empty-internal-squads": "Empty Internal Squads"
         }
     }
 }

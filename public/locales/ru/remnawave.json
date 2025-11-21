@@ -626,8 +626,7 @@
     },
     "remarks-manager": {
         "widget": {
-            "enter-remark": "Введите примечание",
-            "add-remark": "Добавить примечание"
+            "enter-remark": "Введите примечание"
         }
     },
     "subscription-settings": {
@@ -650,13 +649,9 @@
             "happ-routing-description-line-2": "Маршрутизация должна быть настроена через Happ Routing Builder. Используйте кнопку ниже для настройки маршрутизации.",
             "configure-happ-routing": "Настроить Happ Routing",
             "happ-routing": "Happ routing",
-            "user-status-remarks": "Примечания по статусу пользователя",
             "user-status-remarks-description": "Эти значения будут отображаться в странице подписки, если пользователь просрочен, ограничен или отключен.",
             "user-status-remarks-description-line-2": "Вы можете добавить несколько примечаний для каждого статуса.",
             "user-status-remarks-description-line-3": "Поскольку просроченные, ограниченные и отключенные пользователи не могут подключиться к серверу, они увидят эти примечания вместо пустой подписки.",
-            "expired-users-remarks": "Примечания для EXPIRED пользователей",
-            "limited-users-remarks": "Примечания для LIMITED пользователей",
-            "disabled-users-remarks": "Примечания для DISABLED пользователей",
             "update-settings": "Обновить настройки",
             "enabled": "Включено",
             "disabled": "Выключено",
@@ -668,7 +663,8 @@
             "add-username-description": "Это добавит #username в путь подписки на базовой подписке.",
             "subscription-info-description": "Эти настройки поддерживаются многими клиентами, такими как Happ, V2RayNG, Streisand и т.д.",
             "happ-description-line-1": "Здесь вы можете сконфигурировать настройки Happ для подписки.",
-            "happ-description-line-2": "Эти настройки будут использоваться только в том случае, если подписка используется в Happ."
+            "happ-description-line-2": "Эти настройки будут использоваться только в том случае, если подписка используется в Happ.",
+            "custom-remarks": "Custom remarks"
         },
         "page": {
             "component": {
@@ -1635,7 +1631,8 @@
                 "default-template-in-use": "Используется Default шаблон...",
                 "edit-external-squad": "Редактировать внешний отряд",
                 "templates": "Шаблоны",
-                "settings": "Настройки"
+                "settings": "Настройки",
+                "remarks": "Remarks"
             }
         },
         "page": {
@@ -1825,6 +1822,19 @@
                 "override-hwid-description": "Переопределить параметры лимита HWID для этого внешнего сквада. Если отключено, будут использоваться глобальные настройки подписки.",
                 "enable-hwid-override": "Включить переопределение HWID"
             }
+        }
+    },
+    "external-squads-custom-remarks": {
+        "widget": {
+            "override-remarks-description": "Override user status remarks for this external squad. When disabled, global subscription settings will be used.",
+            "enable-override": "Enable Override"
+        }
+    },
+    "subscription-user-remarks-card": {
+        "widget": {
+            "user-status": "User status",
+            "empty-hosts": "Empty Hosts",
+            "empty-internal-squads": "Empty Internal Squads"
         }
     }
 }
