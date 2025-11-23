@@ -21,6 +21,9 @@ interface IProps {
     subscriptionSettings: UpdateSubscriptionSettingsCommand.Response['response']
 }
 
+const HEADER_NAME_REGEX = /^[!#$%&'*+\-.0-9A-Z^_`a-z|~]+$/
+const HEADER_VALUE_REGEX = /^[\x21-\x7E]([\x20-\x7E]*[\x21-\x7E])?$/
+
 export const SubscriptionResponseHeadersCardWidget = (props: IProps) => {
     const { subscriptionSettings } = props
     const { t } = useTranslation()
@@ -61,17 +64,43 @@ export const SubscriptionResponseHeadersCardWidget = (props: IProps) => {
     })
 
     const handleSubmit = form.onSubmit((values) => {
-        const headersFiltered = headers.filter((header) => header.key.trim() !== '')
+        const headersFiltered = headers
+            .map((header) => ({
+                key: header.key.trim(),
+                value: header.value.trim()
+            }))
+            .filter((header) => header.key !== '')
 
-        const customResponseHeaders: Record<string, string> = {}
-        headersFiltered.forEach((header) => {
-            customResponseHeaders[header.key] = header.value
+        const seen = new Set<string>()
+        const uniqueHeaders: HeaderItem[] = []
+        for (let i = headersFiltered.length - 1; i >= 0; i--) {
+            const header = headersFiltered[i]
+            if (!seen.has(header.key)) {
+                uniqueHeaders.unshift(header)
+                seen.add(header.key)
+            }
+        }
+
+        for (const header of uniqueHeaders) {
+            if (!HEADER_NAME_REGEX.test(header.key)) {
+                form.setFieldError('customResponseHeaders', `Invalid header name: ${header.key}`)
+                return
+            }
+            if (!HEADER_VALUE_REGEX.test(header.value)) {
+                form.setFieldError('customResponseHeaders', `Invalid header value: ${header.value}`)
+                return
+            }
+        }
+
+        const responseHeaders: Record<string, string> = {}
+        uniqueHeaders.forEach((header) => {
+            responseHeaders[header.key] = header.value
         })
 
         mutate({
             variables: {
                 uuid: values.uuid,
-                customResponseHeaders
+                customResponseHeaders: responseHeaders
             }
         })
     })
