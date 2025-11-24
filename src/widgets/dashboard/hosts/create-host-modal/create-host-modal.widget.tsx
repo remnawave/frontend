@@ -3,8 +3,8 @@ import { zodResolver } from 'mantine-form-zod-resolver'
 import { notifications } from '@mantine/notifications'
 import { useTranslation } from 'react-i18next'
 import { Drawer, Text } from '@mantine/core'
-import { useEffect, useState } from 'react'
 import { useForm } from '@mantine/form'
+import { useState } from 'react'
 
 import {
     QueryKeys,
@@ -40,7 +40,18 @@ export const CreateHostModalWidget = () => {
                 form.setFieldValue('vlessRouteId', null)
             }
         },
-        validate: zodResolver(CreateHostCommand.RequestSchema)
+        validate: zodResolver(CreateHostCommand.RequestSchema),
+
+        initialValues: {
+            securityLayer: SECURITY_LAYERS.DEFAULT,
+            port: 0,
+            remark: '',
+            address: '',
+            inbound: {
+                configProfileUuid: '',
+                configProfileInboundUuid: ''
+            }
+        }
     })
 
     const handleClose = () => {
@@ -87,10 +98,6 @@ export const CreateHostModalWidget = () => {
 
         return null
     })
-
-    useEffect(() => {
-        form.setFieldValue('securityLayer', SECURITY_LAYERS.DEFAULT)
-    }, [form])
 
     form.watch('inbound.configProfileInboundUuid', ({ value }) => {
         const { configProfileUuid } = form.getValues().inbound
