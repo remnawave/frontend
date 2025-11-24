@@ -19,6 +19,7 @@ import {
 } from '@shared/api/hooks'
 import { MODALS, useModalClose, useModalState } from '@entities/dashboard/modal-store'
 import { BaseHostForm } from '@shared/ui/forms/hosts/base-host-form'
+import { cloneString } from '@shared/utils/misc/clone-string'
 import { queryClient } from '@shared/api'
 import {} from '@entities/dashboard'
 
@@ -256,7 +257,7 @@ export const EditHostModalWidget = memo(() => {
         createHost({
             variables: {
                 ...host,
-                remark: `Clone #${Math.random().toString(36).substring(2, 15)}`,
+                remark: cloneString(host.remark),
                 port: host.port,
 
                 isDisabled: true,

@@ -1,4 +1,5 @@
 export * from './boolean'
+export * from './clone-string'
 export * from './date'
 export * from './factory'
 export * from './favicon-resolver'
