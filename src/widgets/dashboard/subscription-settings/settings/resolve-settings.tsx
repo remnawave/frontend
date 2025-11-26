@@ -37,13 +37,6 @@ export function resolveSubscriptionSetting(
     rightSection?: React.ReactNode
 } {
     switch (field) {
-        case 'addUsernameToBaseSubscription':
-            return {
-                description: t('subscription-settings.widget.add-username-description'),
-                label: t('subscription-settings.widget.add-username-to-base-subscription'),
-                inputType: 'boolean',
-                hoverCard: hoverCard(t('subscription-settings.widget.add-username-description'))
-            }
         case 'happAnnounce':
             return {
                 description: t('subscription-settings.widget.happ-announce-description'),

@@ -659,8 +659,6 @@
             "profile-webpage-url-description": "Used by some clients. Enabled by default, domain obtained from SUB_PUBLIC_DOMAIN .env variable.",
             "serve-json-at-base-subscription": "Serve JSON at base subscription",
             "serve-json-description": "Serve JSON configurations at the base subscription path (without having to append /json). If the client supports it, it will be served JSON, otherwise it will be served as usual.",
-            "add-username-to-base-subscription": "Add #username to base subscription",
-            "add-username-description": "Append #username to the base subscription path at the subscription route.",
             "subscription-info-description": "Subscription links are supported by many client apps such as Happ, v2RayNG, Streisand, etc.",
             "happ-description-line-1": "Here you can configure settings specific to Happ.",
             "happ-description-line-2": "These settings will only apply to subscription links that are imported in Happ.",
