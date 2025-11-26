@@ -659,8 +659,6 @@
             "profile-webpage-url-description": "某些客户端使用。默认启用，域名来自 SUB_PUBLIC_DOMAIN .env 变量。",
             "serve-json-at-base-subscription": "在基础订阅提供 JSON",
             "serve-json-description": "在基础订阅路径（无需附加 /json）提供 JSON 配置。如果客户端支持，将提供 JSON，否则将照常提供。",
-            "add-username-to-base-subscription": "将 #username 添加到基础订阅",
-            "add-username-description": "在订阅路由的基础订阅路径后附加 #username 。",
             "subscription-info-description": "订阅链接受许多客户端应用支持，例如 Happ, v2RayNG, Streisand 等。",
             "happ-description-line-1": "您可以在此处配置仅适用于 Happ 的设置。",
             "happ-description-line-2": "这些设置仅适用于在 Happ 中导入的订阅链接。",
