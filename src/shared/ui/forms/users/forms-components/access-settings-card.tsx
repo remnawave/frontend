@@ -33,6 +33,7 @@ export const AccessSettingsCard = <T extends CreateUserCommand.Request | UpdateU
     const { cardVariants, motionWrapper, form, internalSquads, externalSquads } = props
 
     const [searchQuery, setSearchQuery] = useState('')
+    const [localExpireAt, setLocalExpireAt] = useState<Date | undefined>(undefined)
 
     const MotionWrapper = motionWrapper
 
@@ -45,6 +46,10 @@ export const AccessSettingsCard = <T extends CreateUserCommand.Request | UpdateU
             internalSquad.name?.toLowerCase().includes(query)
         )
     }, [internalSquads, searchQuery])
+
+    form.watch('expireAt', (value) => {
+        setLocalExpireAt(value.value)
+    })
 
     return (
         <MotionWrapper variants={cardVariants}>
@@ -129,15 +134,21 @@ export const AccessSettingsCard = <T extends CreateUserCommand.Request | UpdateU
                         }}
                         presets={[
                             {
-                                value: dayjs().add(1, 'month').format('YYYY-MM-DD HH:mm:ss'),
+                                value: dayjs(localExpireAt)
+                                    .add(1, 'month')
+                                    .format('YYYY-MM-DD HH:mm:ss'),
                                 label: t('create-user-modal.widget.1-month')
                             },
                             {
-                                value: dayjs().add(3, 'months').format('YYYY-MM-DD HH:mm:ss'),
+                                value: dayjs(localExpireAt)
+                                    .add(3, 'months')
+                                    .format('YYYY-MM-DD HH:mm:ss'),
                                 label: t('create-user-modal.widget.3-months')
                             },
                             {
-                                value: dayjs().add(1, 'year').format('YYYY-MM-DD HH:mm:ss'),
+                                value: dayjs(localExpireAt)
+                                    .add(1, 'year')
+                                    .format('YYYY-MM-DD HH:mm:ss'),
                                 label: t('create-user-modal.widget.1-year')
                             },
                             {
