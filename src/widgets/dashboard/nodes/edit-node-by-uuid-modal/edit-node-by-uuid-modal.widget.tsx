@@ -75,6 +75,9 @@ export const EditNodeByUuidModalWidget = () => {
                 queryClient.refetchQueries({
                     queryKey: configProfilesQueryKeys.getConfigProfiles.queryKey
                 })
+                queryClient.refetchQueries({
+                    queryKey: nodesQueryKeys.getAllNodes.queryKey
+                })
                 handleClose(true)
             }
         }

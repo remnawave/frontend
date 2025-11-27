@@ -1,4 +1,14 @@
 import {
+    TbAlertCircle,
+    TbCards,
+    TbInfoCircle,
+    TbPlus,
+    TbRefresh,
+    TbRocket,
+    TbSearch,
+    TbTable
+} from 'react-icons/tb'
+import {
     ActionIcon,
     ActionIconGroup,
     Alert,
@@ -8,16 +18,23 @@ import {
     Text,
     Tooltip
 } from '@mantine/core'
-import { TbAlertCircle, TbInfoCircle, TbPlus, TbRefresh, TbRocket, TbSearch } from 'react-icons/tb'
 import { useTranslation } from 'react-i18next'
 import { spotlight } from '@mantine/spotlight'
 import { PiSpiral } from 'react-icons/pi'
 import { modals } from '@mantine/modals'
 
 import { useNodesStoreActions } from '@entities/dashboard/nodes/nodes-store/nodes-store'
+import { NodesViewMode } from '@pages/dashboard/nodes/ui/components/interfaces'
 import { useGetNodes, useRestartAllNodes } from '@shared/api/hooks'
 
-export const NodesHeaderActionButtonsFeature = () => {
+interface IProps {
+    setViewMode: (viewMode: NodesViewMode) => void
+    viewMode: NodesViewMode
+}
+
+export const NodesHeaderActionButtonsFeature = (props: IProps) => {
+    const { setViewMode, viewMode } = props
+
     const { t } = useTranslation()
 
     const actions = useNodesStoreActions()
@@ -107,6 +124,29 @@ export const NodesHeaderActionButtonsFeature = () => {
                         variant="light"
                     >
                         <TbSearch size="24px" />
+                    </ActionIcon>
+                </Tooltip>
+            </ActionIconGroup>
+
+            <ActionIconGroup>
+                <Tooltip label="Toggle view mode">
+                    <ActionIcon
+                        color="gray"
+                        onClick={() =>
+                            setViewMode(
+                                viewMode === NodesViewMode.TABLE
+                                    ? NodesViewMode.CARDS
+                                    : NodesViewMode.TABLE
+                            )
+                        }
+                        size="input-md"
+                        variant="light"
+                    >
+                        {viewMode === NodesViewMode.CARDS ? (
+                            <TbTable size="24px" />
+                        ) : (
+                            <TbCards size="24px" />
+                        )}
                     </ActionIcon>
                 </Tooltip>
             </ActionIconGroup>
