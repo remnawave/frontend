@@ -1837,21 +1837,21 @@
     },
     "multi-select-nodes": {
         "feature": {
-            "profile-and-inbounds": "Profile & Inbounds"
+            "profile-and-inbounds": "个人资料和入站"
         }
     },
     "use-nodes-table-widget": {
-        "online": "Online",
-        "name": "Name",
-        "address": "Address",
-        "traffic-used": "Traffic Used",
-        "config-profile": "Config Profile",
-        "inbounds": "Inbounds",
+        "online": "在线",
+        "name": "名称",
+        "address": "地址",
+        "traffic-used": "流量使用",
+        "config-profile": "配置文件",
+        "inbounds": "入站",
         "xray-v": "Xray V.",
-        "node-v": "Node V.",
-        "provider": "Provider",
-        "tags": "Tags",
-        "total-ram": "Total RAM",
-        "cpu-model": "CPU Model"
+        "node-v": "节点 V.",
+        "provider": "服务商",
+        "tags": "标签",
+        "total-ram": "内存总数",
+        "cpu-model": "CPU 型号"
     }
 }
