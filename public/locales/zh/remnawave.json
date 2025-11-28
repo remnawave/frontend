@@ -1834,5 +1834,24 @@
             "empty-hosts": "清空主机",
             "empty-internal-squads": "清空内部小队"
         }
+    },
+    "multi-select-nodes": {
+        "feature": {
+            "profile-and-inbounds": "Profile & Inbounds"
+        }
+    },
+    "use-nodes-table-widget": {
+        "online": "Online",
+        "name": "Name",
+        "address": "Address",
+        "traffic-used": "Traffic Used",
+        "config-profile": "Config Profile",
+        "inbounds": "Inbounds",
+        "xray-v": "Xray V.",
+        "node-v": "Node V.",
+        "provider": "Provider",
+        "tags": "Tags",
+        "total-ram": "Total RAM",
+        "cpu-model": "CPU Model"
     }
 }
