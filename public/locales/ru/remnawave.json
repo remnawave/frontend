@@ -1834,5 +1834,24 @@
             "empty-hosts": "Отсутствуют хосты",
             "empty-internal-squads": "Отсутствует внутренние сквады"
         }
+    },
+    "multi-select-nodes": {
+        "feature": {
+            "profile-and-inbounds": "Профиль и инбаунды"
+        }
+    },
+    "use-nodes-table-widget": {
+        "online": "Онлайн",
+        "name": "Имя",
+        "address": "Адрес",
+        "traffic-used": "Польз. трафик",
+        "config-profile": "Профиль",
+        "inbounds": "Инбаунды",
+        "xray-v": "вер. Xray",
+        "node-v": "вер. Ноды",
+        "provider": "Провайдер",
+        "tags": "Теги",
+        "total-ram": "Всего памяти",
+        "cpu-model": "Модель CPU"
     }
 }
