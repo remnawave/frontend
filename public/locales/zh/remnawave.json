@@ -414,7 +414,7 @@
         "legacy-options": "传统选项",
         "allow-insecure": "允许不安全的连接",
         "shuffled-hosts-hover-card": "随机排序的主机将放置在列表的顶端。",
-        "vless-route-description": "从 0 到 65535 ，空以禁用",
+        "vless-route-description": "从 1 到 65535，0 或留空以禁用",
         "misc-settings": "杂项设置",
         "shuffle-host": "随机主机",
         "mihomo-specific": "Mihomo 特定设置",
