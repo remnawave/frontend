@@ -131,6 +131,8 @@ export const DetailedUserInfoDrawerWidget = () => {
                                 </Badge>
                             </Group>
 
+                            <CopyableFieldShared label="ID" value={user.id.toString()} />
+
                             <CopyableFieldShared
                                 label={t('detailed-user-info-drawer.widget.uuid')}
                                 value={user.uuid}

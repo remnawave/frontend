@@ -42,6 +42,12 @@ export const useUserTableColumns = (
                 size: 220
             },
             {
+                accessorKey: 'id',
+                header: 'ID',
+                accessorFn: (originalRow) => originalRow.id,
+                size: 80
+            },
+            {
                 accessorKey: 'status',
                 header: t('use-table-columns.status'),
                 Cell: ({ cell }) => <StatusColumnEntity need="badge" user={cell.row.original} />,
