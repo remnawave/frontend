@@ -115,18 +115,20 @@ export const NodesHeaderActionButtonsFeature = (props: IProps) => {
 
     return (
         <Group grow preventGrowOverflow={false} wrap="wrap">
-            <ActionIconGroup>
-                <Tooltip label={t('nodes-header-action-buttons.feature.search-nodes')}>
-                    <ActionIcon
-                        color="gray"
-                        onClick={spotlight.open}
-                        size="input-md"
-                        variant="light"
-                    >
-                        <TbSearch size="24px" />
-                    </ActionIcon>
-                </Tooltip>
-            </ActionIconGroup>
+            {viewMode === NodesViewMode.CARDS && (
+                <ActionIconGroup>
+                    <Tooltip label={t('nodes-header-action-buttons.feature.search-nodes')}>
+                        <ActionIcon
+                            color="gray"
+                            onClick={spotlight.open}
+                            size="input-md"
+                            variant="light"
+                        >
+                            <TbSearch size="24px" />
+                        </ActionIcon>
+                    </Tooltip>
+                </ActionIconGroup>
+            )}
 
             <ActionIconGroup>
                 <Tooltip label="Toggle view mode">
@@ -150,7 +152,6 @@ export const NodesHeaderActionButtonsFeature = (props: IProps) => {
                     </ActionIcon>
                 </Tooltip>
             </ActionIconGroup>
-
             <ActionIconGroup>
                 <Tooltip
                     label={t('nodes-header-action-buttons.feature.restart-all-nodes')}
@@ -169,7 +170,6 @@ export const NodesHeaderActionButtonsFeature = (props: IProps) => {
                     </ActionIcon>
                 </Tooltip>
             </ActionIconGroup>
-
             <ActionIconGroup>
                 <Tooltip label={t('common.update')} withArrow>
                     <ActionIcon
@@ -182,7 +182,6 @@ export const NodesHeaderActionButtonsFeature = (props: IProps) => {
                     </ActionIcon>
                 </Tooltip>
             </ActionIconGroup>
-
             <ActionIconGroup>
                 <Tooltip label={t('nodes-header-action-buttons.feature.create-new-node')} withArrow>
                     <ActionIcon color="teal" onClick={handleCreate} size="input-md" variant="light">
