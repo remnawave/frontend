@@ -16,6 +16,7 @@ export const InternalSquadsListWidget = memo((props: IProps) => {
         setSearchQuery,
         label,
         description,
+        hideEditButton,
         ...rest
     } = props
 
@@ -108,7 +109,10 @@ export const InternalSquadsListWidget = memo((props: IProps) => {
                                         paddingBottom: '0px'
                                     }}
                                 >
-                                    <InternalSquadCheckboxCard internalSquad={internalSquad} />
+                                    <InternalSquadCheckboxCard
+                                        hideEditButton={hideEditButton}
+                                        internalSquad={internalSquad}
+                                    />
                                 </div>
                             )
                         })}

@@ -756,7 +756,12 @@
                     "change-active-internal-squads": "Change Active Internal Squads",
                     "specify-internal-squads-that-will-be-assigned-to-the-user": "Specify internal squads that will be assigned to the user",
                     "internal-squads": "Internal squads",
-                    "changes-the-active-internal-squads-for-all-selected-users": "Changes the active internal squads for all selected users"
+                    "changes-the-active-internal-squads-for-all-selected-users": "Changes the active internal squads for all selected users",
+                    "extend-expiration-date": "Extend Expiration Date",
+                    "enter-the-number-of-days-to-extend-the-expiration-date": "Enter the number of days to extend the expiration date",
+                    "extend-days": "Extend Days",
+                    "extend": "Extend",
+                    "extend-expiration-date-description": "Add days to the expiration date for selected users. Days will be added to the current expiration date of each user."
                 }
             }
         },

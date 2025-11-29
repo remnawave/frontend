@@ -1,11 +1,12 @@
-import { PiClockClockwise, PiNotchesDuotone, PiUserMinus } from 'react-icons/pi'
-import { Button, Group, Paper, px, Stack, Text } from '@mantine/core'
+import { PiClockClockwise, PiClockUser, PiNotchesDuotone, PiUserMinus } from 'react-icons/pi'
+import { Button, Divider, Group, NumberInput, Paper, Stack, Text } from '@mantine/core'
 import { useTranslation } from 'react-i18next'
 import { useMemo, useState } from 'react'
 import { modals } from '@mantine/modals'
 import { useForm } from '@mantine/form'
 
 import {
+    useBulkExtendUsersExpirationDate,
     useBulkResetTraffic,
     useBulkRevokeUsersSubscription,
     useBulkSetActiveInternalSquads,
@@ -61,6 +62,15 @@ export const BulkUserActionsActionsTabFeature = (props: IProps) => {
             }
         })
 
+    const { mutate: extendExpirationDate, isPending: isExtendExpirationDatePending } =
+        useBulkExtendUsersExpirationDate({
+            mutationFns: {
+                onSuccess: () => {
+                    cleanUpDrawer()
+                }
+            }
+        })
+
     const handleRevokeSubscription = () => {
         modals.openConfirmModal({
             title: t('bulk-user-actions.actions.tab.feature.revoke-subscription'),
@@ -97,6 +107,52 @@ export const BulkUserActionsActionsTabFeature = (props: IProps) => {
         })
     }
 
+    const handleExtendExpirationDate = () => {
+        let userInput = 1
+
+        modals.open({
+            title: t('bulk-user-actions.actions.tab.feature.extend-expiration-date'),
+            centered: true,
+            children: (
+                <>
+                    <NumberInput
+                        allowDecimal={false}
+                        allowNegative={false}
+                        data-autofocus
+                        decimalScale={0}
+                        defaultValue={1}
+                        description={t(
+                            'bulk-user-actions.actions.tab.feature.enter-the-number-of-days-to-extend-the-expiration-date'
+                        )}
+                        label={t('bulk-user-actions.actions.tab.feature.extend-days')}
+                        max={9999}
+                        min={1}
+                        onChange={(value) => {
+                            userInput = Number(value)
+                        }}
+                        required
+                        step={1}
+                    />
+                    <Button
+                        fullWidth
+                        mt="md"
+                        onClick={() => {
+                            modals.closeAll()
+                            extendExpirationDate({
+                                variables: {
+                                    uuids,
+                                    extendDays: userInput
+                                }
+                            })
+                        }}
+                    >
+                        {t('bulk-user-actions.actions.tab.feature.extend')}
+                    </Button>
+                </>
+            )
+        })
+    }
+
     const filteredInternalSquads = useMemo(() => {
         const allInternalSquads = internalSquads?.internalSquads || []
         if (!searchQuery.trim()) return allInternalSquads
@@ -115,101 +171,163 @@ export const BulkUserActionsActionsTabFeature = (props: IProps) => {
                 })}
             </Text>
 
-            <Paper p="md" withBorder>
-                <Stack>
-                    <Group justify="apart">
-                        <Group>
-                            <PiNotchesDuotone color="cyan" size={px('1.2rem')} />
-                            <Text>
+            <Paper bg="dark.6" p="md" shadow="sm" withBorder>
+                <Stack gap="md">
+                    <Group align="center" justify="space-between" wrap="nowrap">
+                        <Stack gap={4}>
+                            <Group gap="xs">
+                                <PiClockUser size={20} />
+                                <Text fw={600} size="md">
+                                    {t(
+                                        'bulk-user-actions.actions.tab.feature.extend-expiration-date'
+                                    )}
+                                </Text>
+                            </Group>
+                            <Text c="dimmed" size="sm">
                                 {t(
-                                    'bulk-user-actions.actions.tab.feature.change-active-internal-squads'
+                                    'bulk-user-actions.actions.tab.feature.extend-expiration-date-description'
                                 )}
                             </Text>
-                        </Group>
-                        <InternalSquadsListWidget
-                            description={t(
-                                'bulk-user-actions.actions.tab.feature.specify-internal-squads-that-will-be-assigned-to-the-user'
-                            )}
-                            filteredInternalSquads={filteredInternalSquads}
-                            formKey={form.key('activeInternalSquads')}
-                            label={t('bulk-user-actions.actions.tab.feature.internal-squads')}
-                            searchQuery={searchQuery}
-                            setSearchQuery={setSearchQuery}
-                            {...form.getInputProps('activeInternalSquads')}
-                        />
-
-                        <Button
-                            color="cyan"
-                            loading={isSetActiveInternalSquadsPending}
-                            onClick={() => {
-                                setActiveInternalSquads({
-                                    variables: {
-                                        uuids,
-                                        activeInternalSquads: form.getValues().activeInternalSquads
-                                    }
-                                })
-                            }}
-                            variant="light"
-                        >
-                            {t('common.change')}
-                        </Button>
+                        </Stack>
                     </Group>
-                    <Text c="dimmed" size="xs">
-                        {t(
-                            'bulk-user-actions.actions.tab.feature.changes-the-active-internal-squads-for-all-selected-users'
-                        )}
-                    </Text>
                 </Stack>
+
+                <Divider mb="md" mt="xs" />
+
+                <Group justify="flex-end">
+                    <Button
+                        loading={isExtendExpirationDatePending}
+                        onClick={handleExtendExpirationDate}
+                        size="sm"
+                        style={{
+                            transition: 'all 0.2s ease'
+                        }}
+                        variant="light"
+                    >
+                        {t('bulk-user-actions.actions.tab.feature.extend')}
+                    </Button>
+                </Group>
             </Paper>
 
-            <Paper p="md" withBorder>
-                <Stack>
-                    <Group justify="apart">
-                        <Group>
-                            <PiClockClockwise color="cyan" size={px('1.2rem')} />
-                            <Text>{t('bulk-user-actions.actions.tab.feature.reset-traffic')}</Text>
-                        </Group>
-                        <Button
-                            color="cyan"
-                            loading={isResetPending}
-                            onClick={handleResetTraffic}
-                            variant="light"
-                        >
-                            {t('bulk-user-actions.actions.tab.feature.reset')}
-                        </Button>
-                    </Group>
-                    <Text c="dimmed" size="xs">
-                        {t(
-                            'bulk-user-actions.actions.tab.feature.resets-the-traffic-usage-to-zero-for-all-selected-users'
-                        )}
-                    </Text>
-                </Stack>
-            </Paper>
-
-            <Paper p="md" withBorder>
-                <Stack>
-                    <Group justify="apart">
-                        <Group>
-                            <PiUserMinus color="orange" size={px('1.2rem')} />
-                            <Text>
-                                {t('bulk-user-actions.actions.tab.feature.revoke-subscription')}
+            <Paper bg="dark.6" p="md" shadow="sm" withBorder>
+                <Stack gap="md">
+                    <Group align="center" justify="space-between" wrap="nowrap">
+                        <Stack gap={4}>
+                            <Group gap="xs">
+                                <PiClockClockwise size={20} />
+                                <Text fw={600} size="md">
+                                    {t('bulk-user-actions.actions.tab.feature.reset-traffic')}
+                                </Text>
+                            </Group>
+                            <Text c="dimmed" size="sm">
+                                {t(
+                                    'bulk-user-actions.actions.tab.feature.resets-the-traffic-usage-to-zero-for-all-selected-users'
+                                )}
                             </Text>
-                        </Group>
-                        <Button
-                            color="orange"
-                            loading={isRevokePending}
-                            onClick={handleRevokeSubscription}
-                            variant="light"
-                        >
-                            {t('bulk-user-actions.actions.tab.feature.revoke')}
-                        </Button>
+                        </Stack>
                     </Group>
-                    <Text c="dimmed" size="xs">
-                        {t(
-                            'bulk-user-actions.actions.tab.feature.revokes-subscription-for-all-selected-users'
-                        )}
-                    </Text>
                 </Stack>
+
+                <Divider mb="md" mt="xs" />
+
+                <Group justify="flex-end">
+                    <Button
+                        color="cyan"
+                        loading={isResetPending}
+                        onClick={handleResetTraffic}
+                        variant="light"
+                    >
+                        {t('bulk-user-actions.actions.tab.feature.reset')}
+                    </Button>
+                </Group>
+            </Paper>
+
+            <Paper bg="dark.6" p="md" shadow="sm" withBorder>
+                <Stack gap="md">
+                    <Group align="center" justify="space-between" wrap="nowrap">
+                        <Stack gap={4}>
+                            <Group gap="xs">
+                                <PiUserMinus size={20} />
+                                <Text fw={600} size="md">
+                                    {t('bulk-user-actions.actions.tab.feature.revoke-subscription')}
+                                </Text>
+                            </Group>
+                            <Text c="dimmed" size="sm">
+                                {t(
+                                    'bulk-user-actions.actions.tab.feature.revokes-subscription-for-all-selected-users'
+                                )}
+                            </Text>
+                        </Stack>
+                    </Group>
+                </Stack>
+
+                <Divider mb="md" mt="xs" />
+
+                <Group justify="flex-end">
+                    <Button
+                        color="orange"
+                        loading={isRevokePending}
+                        onClick={handleRevokeSubscription}
+                        variant="light"
+                    >
+                        {t('bulk-user-actions.actions.tab.feature.revoke')}
+                    </Button>
+                </Group>
+            </Paper>
+
+            <Paper bg="dark.7" p="md" shadow="sm" withBorder>
+                <Stack gap="md">
+                    <Group align="center" justify="space-between" wrap="nowrap">
+                        <Stack gap={4}>
+                            <Group gap="xs">
+                                <PiNotchesDuotone size={20} />
+                                <Text fw={600} size="md">
+                                    {t(
+                                        'bulk-user-actions.actions.tab.feature.change-active-internal-squads'
+                                    )}
+                                </Text>
+                            </Group>
+                            <Text c="dimmed" size="sm">
+                                {t(
+                                    'bulk-user-actions.actions.tab.feature.changes-the-active-internal-squads-for-all-selected-users'
+                                )}
+                            </Text>
+
+                            <InternalSquadsListWidget
+                                description={t(
+                                    'bulk-user-actions.actions.tab.feature.specify-internal-squads-that-will-be-assigned-to-the-user'
+                                )}
+                                filteredInternalSquads={filteredInternalSquads}
+                                formKey={form.key('activeInternalSquads')}
+                                hideEditButton={true}
+                                label={t('bulk-user-actions.actions.tab.feature.internal-squads')}
+                                searchQuery={searchQuery}
+                                setSearchQuery={setSearchQuery}
+                                {...form.getInputProps('activeInternalSquads')}
+                            />
+                        </Stack>
+                    </Group>
+                </Stack>
+
+                <Divider mb="md" mt="xs" />
+
+                <Group justify="flex-end">
+                    <Button
+                        color="cyan"
+                        loading={isSetActiveInternalSquadsPending}
+                        onClick={() => {
+                            setActiveInternalSquads({
+                                variables: {
+                                    uuids,
+                                    activeInternalSquads: form.getValues().activeInternalSquads
+                                }
+                            })
+                        }}
+                        variant="light"
+                    >
+                        {t('common.change')}
+                    </Button>
+                </Group>
             </Paper>
         </Stack>
     )

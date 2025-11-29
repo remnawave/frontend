@@ -10,7 +10,7 @@ import classes from './Checkbox.module.css'
 import { IProps } from './interfaces'
 
 export const InternalSquadCheckboxCard = memo((props: IProps) => {
-    const { internalSquad } = props
+    const { internalSquad, hideEditButton } = props
 
     const openModalWithData = useModalsStoreOpenWithData()
 
@@ -54,21 +54,23 @@ export const InternalSquadCheckboxCard = memo((props: IProps) => {
                     <Badge color="blue" leftSection={<PiTag size="16" />} size="md" variant="light">
                         {internalSquad.info.inboundsCount}
                     </Badge>
-                    <ActionIcon
-                        color="cyan"
-                        component="a"
-                        onClick={(e) => {
-                            e.preventDefault()
-                            e.stopPropagation()
-                            e.nativeEvent.stopImmediatePropagation()
+                    {!hideEditButton && (
+                        <ActionIcon
+                            color="cyan"
+                            component="a"
+                            onClick={(e) => {
+                                e.preventDefault()
+                                e.stopPropagation()
+                                e.nativeEvent.stopImmediatePropagation()
 
-                            handleOpenEditModal(internalSquad.uuid)
-                        }}
-                        size="lg"
-                        variant="default"
-                    >
-                        <TbEdit size={16} />
-                    </ActionIcon>
+                                handleOpenEditModal(internalSquad.uuid)
+                            }}
+                            size="lg"
+                            variant="default"
+                        >
+                            <TbEdit size={16} />
+                        </ActionIcon>
+                    )}
                 </Group>
             </Group>
         </Checkbox.Card>
