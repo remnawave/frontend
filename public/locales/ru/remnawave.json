@@ -756,7 +756,12 @@
                     "change-active-internal-squads": "Изменить активные внутренние группы",
                     "specify-internal-squads-that-will-be-assigned-to-the-user": "Выберите внутренние сквады, в которых будет состоять пользователь",
                     "internal-squads": "Внутренние сквады",
-                    "changes-the-active-internal-squads-for-all-selected-users": "Изменить активные внутренние сквады для всех выбранных пользователей"
+                    "changes-the-active-internal-squads-for-all-selected-users": "Изменить активные внутренние сквады для всех выбранных пользователей",
+                    "extend-expiration-date": "Extend Expiration Date",
+                    "enter-the-number-of-days-to-extend-the-expiration-date": "Enter the number of days to extend the expiration date",
+                    "extend-days": "Extend Days",
+                    "extend": "Extend",
+                    "extend-expiration-date-description": "Add days to the expiration date for selected users. Days will be added to the current expiration date of each user."
                 }
             }
         },
