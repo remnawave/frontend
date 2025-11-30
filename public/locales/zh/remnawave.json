@@ -757,11 +757,11 @@
                     "specify-internal-squads-that-will-be-assigned-to-the-user": "指定将分配给用户的内部小组",
                     "internal-squads": "内部分组",
                     "changes-the-active-internal-squads-for-all-selected-users": "更改所有选中用户的活跃内部分组",
-                    "extend-expiration-date": "Extend Expiration Date",
-                    "enter-the-number-of-days-to-extend-the-expiration-date": "Enter the number of days to extend the expiration date",
-                    "extend-days": "Extend Days",
-                    "extend": "Extend",
-                    "extend-expiration-date-description": "Add days to the expiration date for selected users. Days will be added to the current expiration date of each user."
+                    "extend-expiration-date": "延长日期",
+                    "enter-the-number-of-days-to-extend-the-expiration-date": "输入延长到期日的天数",
+                    "extend-days": "延长天数",
+                    "extend": "延长",
+                    "extend-expiration-date-description": "将天数添加到选定用户的到期日期。天数将添加到当前每个用户的到期日期。"
                 }
             }
         },
