@@ -1,4 +1,4 @@
-import { Badge, Drawer, Group, px, Tabs, Text } from '@mantine/core'
+import { Badge, Box, Drawer, Group, Tabs, Text, Transition } from '@mantine/core'
 import { PiInfo, PiPencil, PiWarning } from 'react-icons/pi'
 import { useTranslation } from 'react-i18next'
 import { useState } from 'react'
@@ -15,6 +15,15 @@ import { sleep } from '@shared/utils/misc'
 import { queryClient } from '@shared/api'
 
 import { IProps } from './interfaces/props.interface'
+import classes from './bulk-user-actions.module.css'
+
+const TAB_TYPE = {
+    update: 'update',
+    actions: 'actions',
+    danger: 'danger'
+} as const
+
+type TabType = (typeof TAB_TYPE)[keyof typeof TAB_TYPE]
 
 export const BulkUserActionsDrawerWidget = (props: IProps) => {
     const { resetRowSelection } = props
@@ -22,7 +31,7 @@ export const BulkUserActionsDrawerWidget = (props: IProps) => {
 
     const isDrawerOpen = useBulkUsersActionsStoreIsDrawerOpen()
     const handlers = useBulkUsersActionsStoreActions()
-    const [activeTab, setActiveTab] = useState<null | string>('update')
+    const [activeTab, setActiveTab] = useState<null | TabType>(TAB_TYPE.update)
 
     const uuidsLength = handlers.getUuidLength()
 
@@ -58,33 +67,74 @@ export const BulkUserActionsDrawerWidget = (props: IProps) => {
                 </Group>
             }
         >
-            <Tabs onChange={setActiveTab} value={activeTab}>
+            <Tabs
+                classNames={{
+                    tab: classes.tab,
+                    tabLabel: classes.tabLabel
+                }}
+                color="cyan"
+                onChange={(value) => setActiveTab(value as TabType)}
+                value={activeTab}
+                variant="unstyled"
+            >
                 <Tabs.List grow mb="md">
-                    <Tabs.Tab leftSection={<PiPencil size={px('0.8rem')} />} value="update">
+                    <Tabs.Tab leftSection={<PiPencil size="20px" />} value={TAB_TYPE.update}>
                         {t('common.update')}
                     </Tabs.Tab>
-                    <Tabs.Tab leftSection={<PiInfo size={px('0.8rem')} />} value="actions">
+                    <Tabs.Tab leftSection={<PiInfo size="20px" />} value={TAB_TYPE.actions}>
                         {t('bulk-user-actions-drawer.widget.actions')}
                     </Tabs.Tab>
                     <Tabs.Tab
-                        color="red"
-                        leftSection={<PiWarning size={px('0.8rem')} />}
-                        value="danger"
+                        leftSection={<PiWarning color="red" size="20px" />}
+                        value={TAB_TYPE.danger}
                     >
                         {t('bulk-user-actions-drawer.widget.danger')}
                     </Tabs.Tab>
                 </Tabs.List>
 
-                <Tabs.Panel value="update">
-                    <BulkUserActionsUpdateTabFeature cleanUpDrawer={cleanUpDrawer} />
+                <Tabs.Panel value={TAB_TYPE.update}>
+                    <Transition
+                        duration={200}
+                        mounted={activeTab === TAB_TYPE.update}
+                        timingFunction="linear"
+                        transition="fade"
+                    >
+                        {(styles) => (
+                            <Box style={styles}>
+                                <BulkUserActionsUpdateTabFeature cleanUpDrawer={cleanUpDrawer} />
+                            </Box>
+                        )}
+                    </Transition>
                 </Tabs.Panel>
 
-                <Tabs.Panel value="actions">
-                    <BulkUserActionsActionsTabFeature cleanUpDrawer={cleanUpDrawer} />
+                <Tabs.Panel value={TAB_TYPE.actions}>
+                    <Transition
+                        duration={200}
+                        mounted={activeTab === TAB_TYPE.actions}
+                        timingFunction="linear"
+                        transition="fade"
+                    >
+                        {(styles) => (
+                            <Box style={styles}>
+                                <BulkUserActionsActionsTabFeature cleanUpDrawer={cleanUpDrawer} />
+                            </Box>
+                        )}
+                    </Transition>
                 </Tabs.Panel>
 
-                <Tabs.Panel value="danger">
-                    <BulkUserActionsDangerTabFeature cleanUpDrawer={cleanUpDrawer} />
+                <Tabs.Panel value={TAB_TYPE.danger}>
+                    <Transition
+                        duration={200}
+                        mounted={activeTab === TAB_TYPE.danger}
+                        timingFunction="linear"
+                        transition="fade"
+                    >
+                        {(styles) => (
+                            <Box style={styles}>
+                                <BulkUserActionsDangerTabFeature cleanUpDrawer={cleanUpDrawer} />
+                            </Box>
+                        )}
+                    </Transition>
                 </Tabs.Panel>
             </Tabs>
         </Drawer>
