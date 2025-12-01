@@ -64,6 +64,10 @@ export const ConfigValidationFeature = {
                 replaceSnippetsInArray(clonedCurrentValue.routing.rules, snippetsMap)
             }
 
+            if (clonedCurrentValue.routing?.balancers) {
+                replaceSnippetsInArray(clonedCurrentValue.routing.balancers, snippetsMap)
+            }
+
             const validationResult = window.XrayParseConfig(JSON.stringify(clonedCurrentValue))
 
             setResult(
