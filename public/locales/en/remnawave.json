@@ -674,8 +674,6 @@
     },
     "multi-select-hosts": {
         "feature": {
-            "delete-hosts": "Delete hosts",
-            "are-you-sure-you-want-to-delete-these-hosts": "Are you sure you want to delete these hosts?",
             "set-inbound": "Set inbound",
             "set-port": "Set Port",
             "port": "Port",
@@ -802,12 +800,6 @@
             "subscription-links": "Subscription links",
             "loading-subscription-links": "Loading subscription links...",
             "no-available-hosts-found-for-this-user": "No available hosts found for this user"
-        }
-    },
-    "delete-user": {
-        "feature": {
-            "delete-user": "Delete user",
-            "are-you-sure": "Are you sure you want to delete the user? This action is irreversible."
         }
     },
     "user-usage-modal": {
@@ -1067,11 +1059,6 @@
     },
     "internal-squads-grid": {
         "widget": {
-            "delete-internal-squad": "Delete Internal Squad",
-            "delete-internal-squad-confirmation": "Are you sure you want to delete the internal squad \"{{internalSquadName}}\"?",
-            "this-action-cannot-be-undone": "This action cannot be undone.",
-            "remove-users-from-internal-squad-confirmation": "Are you sure you want to remove the users from the internal squad \"{{internalSquadName}}\"?",
-            "add-users-to-internal-squad-confirmation": "Are you sure you want to add the users to the internal squad \"{{internalSquadName}}\"?",
             "no-internal-squads": "No Internal Squads",
             "create-your-first-internal-squad-to-get-started": "Create your first internal squad to get started",
             "delete-squad": "Delete squad",
@@ -1158,9 +1145,6 @@
     },
     "infra-billing-nodes": {
         "widget": {
-            "delete-infra-billing-node": "Delete Infra Billing Node",
-            "delete-infra-billing-node-confirmation": "Are you sure you want to delete this infra billing node?",
-            "this-action-is-irreversible": "This action is irreversible.",
             "add-node": "Add Node",
             "list-of-all-infra-billing-nodes": "List of all infra billing nodes sorted by next billing date",
             "infra-billing-nodes": "Infra Billing Nodes",
@@ -1730,8 +1714,6 @@
     },
     "passkeys-drawer": {
         "component": {
-            "delete-passkey": "Delete Passkey",
-            "delete-passkey-confirmation": "Are you sure you want to delete this passkey? This action cannot be undone.",
             "passkeys": "Passkeys",
             "passkeys-description": "Passkeys allow you to sign in securely without passwords. You can register multiple passkeys across different devices.",
             "active-passkeys": "Active Passkeys",

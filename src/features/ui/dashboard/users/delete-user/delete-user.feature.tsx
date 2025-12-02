@@ -1,5 +1,5 @@
-import { Loader, Menu, Text } from '@mantine/core'
 import { useTranslation } from 'react-i18next'
+import { Loader, Menu } from '@mantine/core'
 import { modals } from '@mantine/modals'
 import { TbTrash } from 'react-icons/tb'
 
@@ -32,8 +32,8 @@ export function DeleteUserFeature(props: IProps) {
 
     const openModal = () =>
         modals.openConfirmModal({
-            title: t('delete-user.feature.delete-user'),
-            children: <Text size="sm">{t('delete-user.feature.are-you-sure')}</Text>,
+            title: t('common.delete'),
+            children: t('common.confirm-action-description'),
             labels: {
                 confirm: t('common.delete'),
                 cancel: t('common.cancel')
@@ -51,7 +51,7 @@ export function DeleteUserFeature(props: IProps) {
             }
             onClick={openModal}
         >
-            {t('delete-user.feature.delete-user')}
+            {t('common.delete')}
         </Menu.Item>
     )
 }

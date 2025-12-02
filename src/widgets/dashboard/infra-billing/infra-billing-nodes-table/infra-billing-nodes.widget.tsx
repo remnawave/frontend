@@ -74,14 +74,8 @@ export function InfraBillingNodesTableWidget() {
 
     const handleDeleteInfraBillingNode = () =>
         modals.openConfirmModal({
-            title: t('infra-billing-nodes.widget.delete-infra-billing-node'),
-            children: (
-                <Text size="sm">
-                    {t('infra-billing-nodes.widget.delete-infra-billing-node-confirmation')}
-                    <br />
-                    {t('infra-billing-nodes.widget.this-action-is-irreversible')}
-                </Text>
-            ),
+            title: t('common.delete'),
+            children: t('common.confirm-action-description'),
             labels: {
                 confirm: t('common.delete'),
                 cancel: t('common.cancel')

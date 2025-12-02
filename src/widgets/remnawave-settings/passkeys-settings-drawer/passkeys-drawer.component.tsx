@@ -76,9 +76,9 @@ export const PasskeysDrawerComponent = ({ onClose, opened }: IProps) => {
 
     const handleDelete = (passkeyId: string) => {
         modals.openConfirmModal({
-            title: t('passkeys-drawer.component.delete-passkey'),
+            title: t('common.delete'),
             centered: true,
-            children: t('passkeys-drawer.component.delete-passkey-confirmation'),
+            children: t('common.confirm-action-description'),
             labels: {
                 confirm: t('common.delete'),
                 cancel: t('common.cancel')
@@ -297,11 +297,7 @@ export const PasskeysDrawerComponent = ({ onClose, opened }: IProps) => {
                                                         </ActionIcon>
                                                     </Tooltip>
 
-                                                    <Tooltip
-                                                        label={t(
-                                                            'passkeys-drawer.component.delete-passkey'
-                                                        )}
-                                                    >
+                                                    <Tooltip label={t('common.delete')}>
                                                         <ActionIcon
                                                             color="red"
                                                             disabled={isDeleting}

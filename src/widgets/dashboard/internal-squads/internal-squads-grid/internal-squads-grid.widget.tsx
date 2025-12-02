@@ -59,18 +59,10 @@ export function InternalSquadsGridWidget(props: IProps) {
         }
     })
 
-    const handleDeleteInternalSquad = (internalSquadUuid: string, internalSquadName: string) => {
+    const handleDeleteInternalSquad = (internalSquadUuid: string) => {
         modals.openConfirmModal({
-            title: t('internal-squads-grid.widget.delete-internal-squad'),
-            children: (
-                <Text size="sm">
-                    {t('internal-squads-grid.widget.delete-internal-squad-confirmation', {
-                        internalSquadName
-                    })}
-                    <br />
-                    {t('internal-squads-grid.widget.this-action-cannot-be-undone')}
-                </Text>
-            ),
+            title: t('common.delete'),
+            children: t('common.confirm-action-description'),
             labels: {
                 confirm: t('common.delete'),
                 cancel: t('common.cancel')
@@ -88,27 +80,13 @@ export function InternalSquadsGridWidget(props: IProps) {
         })
     }
 
-    const handleRemoveFromUsers = (internalSquadUuid: string, internalSquadName: string) => {
+    const handleRemoveFromUsers = (internalSquadUuid: string) => {
         modals.openConfirmModal({
             title: t('internal-squads-grid.widget.remove-users'),
             centered: true,
-            children: (
-                <Stack gap="xs">
-                    <Text fw={800} size="sm">
-                        {t(
-                            'internal-squads-grid.widget.remove-users-from-internal-squad-confirmation',
-                            {
-                                internalSquadName
-                            }
-                        )}
-                    </Text>
-                    <Text fw={600} size="sm">
-                        {t('internal-squads-grid.widget.this-action-cannot-be-undone')}
-                    </Text>
-                </Stack>
-            ),
+            children: t('common.confirm-action-description'),
             labels: {
-                confirm: t('common.remove'),
+                confirm: t('common.delete'),
                 cancel: t('common.cancel')
             },
             cancelProps: { variant: 'subtle', color: 'gray' },
@@ -123,22 +101,11 @@ export function InternalSquadsGridWidget(props: IProps) {
         })
     }
 
-    const handleAddToUsers = (internalSquadUuid: string, internalSquadName: string) => {
+    const handleAddToUsers = (internalSquadUuid: string) => {
         modals.openConfirmModal({
             title: t('internal-squads-grid.widget.add-users'),
             centered: true,
-            children: (
-                <Stack gap="xs">
-                    <Text fw={800} size="sm">
-                        {t('internal-squads-grid.widget.add-users-to-internal-squad-confirmation', {
-                            internalSquadName
-                        })}
-                    </Text>
-                    <Text fw={600} size="sm">
-                        {t('internal-squads-grid.widget.this-action-cannot-be-undone')}
-                    </Text>
-                </Stack>
-            ),
+            children: t('common.confirm-action-description'),
             labels: {
                 confirm: t('common.add'),
                 cancel: t('common.cancel')
