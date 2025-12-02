@@ -53,8 +53,8 @@
         "loading": "در حال بارگذاری",
         "success": "با موفقیت انجام شد",
         "download": "دانلود",
-        "search": "Search",
-        "nothing-found": "Nothing found"
+        "search": "جستجو",
+        "nothing-found": "چیزی یافت نشد"
     },
     "bandwidth-metrics": {
         "current-year": "امسال",
@@ -425,8 +425,8 @@
         "xray-json-template": "الگوی کانفیگ Json",
         "override-the-xray-json-template": "الگوی Json کانفیگی که برای این هاست استفاده خواهد شد را override کنید.",
         "vital-parameters": "پارامترهای حیاتی",
-        "exclude-this-host-from-specific-internal-squads": "Exclude this host from specific Internal Squads",
-        "excluded-internal-squads": "Excluded Internal Squads"
+        "exclude-this-host-from-specific-internal-squads": "این هاست را از اسکوادهای خارجی مشخص حذف کنید",
+        "excluded-internal-squads": "اسکوادهای خارجی حذف شده"
     },
     "base-node-form": {
         "country": "کشور",
@@ -662,7 +662,7 @@
             "subscription-info-description": "این تنظیمات توسط نرم‌افزارهایی مثل Happ, v2RayNG, Streisand و..و استفاده می‌شود",
             "happ-description-line-1": "در این قسمت می‌توانید تنظیمات مربوط به نرم‌افزار Happ را برای لینک‌های اشتراک مشخص کنید.",
             "happ-description-line-2": "این تنظیمات فقط در نرم‌افزار Happ استفاده خواهد شد",
-            "custom-remarks": "Custom remarks"
+            "custom-remarks": "ریمارک‌های سفارشی"
         },
         "page": {
             "component": {
@@ -757,11 +757,11 @@
                     "specify-internal-squads-that-will-be-assigned-to-the-user": "اسکوادهایی که این کاربر عضو آن‌ها خواهد شد را مشخص کنید",
                     "internal-squads": "اسکوادهای داخلی",
                     "changes-the-active-internal-squads-for-all-selected-users": "اسکوادهای فعال را برای همه کاربران انتخاب شده تغییر می‌دهد",
-                    "extend-expiration-date": "Extend Expiration Date",
-                    "enter-the-number-of-days-to-extend-the-expiration-date": "Enter the number of days to extend the expiration date",
-                    "extend-days": "Extend Days",
-                    "extend": "Extend",
-                    "extend-expiration-date-description": "Add days to the expiration date for selected users. Days will be added to the current expiration date of each user."
+                    "extend-expiration-date": "تمدید زمان انقضا",
+                    "enter-the-number-of-days-to-extend-the-expiration-date": "تعداد روزهایی که به زمان اشتراک افزوده می‌شوند.",
+                    "extend-days": "روزهای تمدید ",
+                    "extend": "تمدید",
+                    "extend-expiration-date-description": "افزودن به تعداد روزهای باقی مانده تا انقضای کاربرهای انتخاب شده."
                 }
             }
         },
@@ -1635,7 +1635,7 @@
                 "edit-external-squad": "ویرایش اسکواد خارجی",
                 "templates": "الگوها",
                 "settings": "تنظیمات",
-                "remarks": "Remarks"
+                "remarks": "ریمارک‌ها"
             }
         },
         "page": {
@@ -1829,34 +1829,34 @@
     },
     "external-squads-custom-remarks": {
         "widget": {
-            "override-remarks-description": "Override user status remarks for this external squad. When disabled, global subscription settings will be used.",
-            "enable-override": "Enable Override"
+            "override-remarks-description": "تغییر دادن ریمارک‌های وضعیت کاربر برای این اسکواد خارجی. درصورت غیرفعال بودن از تنظیمات کلی اشتراک استفاده خواهد شد.",
+            "enable-override": "فعالسازی override"
         }
     },
     "subscription-user-remarks-card": {
         "widget": {
-            "user-status": "User status",
-            "empty-hosts": "Empty Hosts",
-            "empty-internal-squads": "Empty Internal Squads"
+            "user-status": "وضعیت کاربر",
+            "empty-hosts": "هاست‌های خالی",
+            "empty-internal-squads": "اسکوادهای داخلی خالی"
         }
     },
     "multi-select-nodes": {
         "feature": {
-            "profile-and-inbounds": "Profile & Inbounds"
+            "profile-and-inbounds": "پروفایل و اینباندها"
         }
     },
     "use-nodes-table-widget": {
-        "online": "Online",
-        "name": "Name",
-        "address": "Address",
-        "traffic-used": "Traffic Used",
-        "config-profile": "Config Profile",
-        "inbounds": "Inbounds",
-        "xray-v": "Xray V.",
-        "node-v": "Node V.",
-        "provider": "Provider",
-        "tags": "Tags",
-        "total-ram": "Total RAM",
-        "cpu-model": "CPU Model"
+        "online": "آنلاین",
+        "name": "اسم",
+        "address": "آدرس",
+        "traffic-used": "ترافیک استفاده‌شده",
+        "config-profile": "پروفایل پیکربندی",
+        "inbounds": "اینباندها",
+        "xray-v": "نسخه هسته Xray",
+        "node-v": "نسخه نود",
+        "provider": "ارائه‌دهنده",
+        "tags": "برچسب‌ها",
+        "total-ram": "کل RAM",
+        "cpu-model": "مدل پردازنده"
     }
 }
