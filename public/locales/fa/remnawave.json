@@ -674,8 +674,6 @@
     },
     "multi-select-hosts": {
         "feature": {
-            "delete-hosts": "حذف هاست‌ها",
-            "are-you-sure-you-want-to-delete-these-hosts": "آیا مطمئن هستید که می‌خواهید این هاست‌ها را حذف کنید؟",
             "set-inbound": "تنظیم اینباند",
             "set-port": "تنظیم پورت",
             "port": "پورت",
@@ -802,12 +800,6 @@
             "subscription-links": "لینک‌های اشتراک",
             "loading-subscription-links": "درحال بارگذاری لینک‌های اشتراک ...",
             "no-available-hosts-found-for-this-user": "هیچ هاست موجودی برای این کاربر یافت نشد"
-        }
-    },
-    "delete-user": {
-        "feature": {
-            "delete-user": "حذف کاربر",
-            "are-you-sure": "آیا مطمئن هستید که می‌خواهید کاربر را حذف کنید؟ این اقدام غیرقابل بازگشت است."
         }
     },
     "user-usage-modal": {
@@ -1067,11 +1059,6 @@
     },
     "internal-squads-grid": {
         "widget": {
-            "delete-internal-squad": "حذف اسکواد داخلی",
-            "delete-internal-squad-confirmation": "آیا مطمئن هستید که می‌خواهید اسکواد داخلی «{{internalSquadName}}» را حذف کنید؟",
-            "this-action-cannot-be-undone": "این اقدام قابل بازگشت نیست.",
-            "remove-users-from-internal-squad-confirmation": "آیا مطمئن هستید که می‌خواهید کاربران را از اسکواد داخلی «{{internalSquadName}}» حذف کنید؟",
-            "add-users-to-internal-squad-confirmation": "آیا مطمئن هستید که می‌خواهید کاربران را به اسکواد داخلی «{{internalSquadName}}» اضافه کنید؟",
             "no-internal-squads": "هیچ اسکواد داخلی‌ای وجود ندارد",
             "create-your-first-internal-squad-to-get-started": "برای شروع، اولین اسکواد داخلی خود را ایجاد کنید",
             "delete-squad": "حذف اسکواد",
@@ -1158,9 +1145,6 @@
     },
     "infra-billing-nodes": {
         "widget": {
-            "delete-infra-billing-node": "حذف نود صورتحساب تجهیزات",
-            "delete-infra-billing-node-confirmation": "آیا مطمئن هستید که می‌خواهید این نود صورتحساب تجهیزات را حذف کنید؟",
-            "this-action-is-irreversible": "این اقدام غیرقابل بازگشت است.",
             "add-node": "افزودن نود",
             "list-of-all-infra-billing-nodes": "لیست همه نودهای صورتحساب تجهیزات بر اساس تاریخ صورتحساب بعدی",
             "infra-billing-nodes": "نودهای صورتحساب تجهیزات",
@@ -1730,8 +1714,6 @@
     },
     "passkeys-drawer": {
         "component": {
-            "delete-passkey": "حذف رمز عبور",
-            "delete-passkey-confirmation": "آیا مطمئن هستید می خواهید این رمز عبور را حذف کنید؟ این عمل قابل بازگشت نیست.",
             "passkeys": "کلیدهای عبور",
             "passkeys-description": "کلیدهای عبور به شما اجازه می‌دهند بدون گذرواژه وارد پنل شوید. می‌توانید چندین کلیدعبور برای دستگاه‎‌های مختلف ثبت کنید.",
             "active-passkeys": "کلیدهای عبور فعال",
