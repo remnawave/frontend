@@ -674,8 +674,6 @@
     },
     "multi-select-hosts": {
         "feature": {
-            "delete-hosts": "删除主机",
-            "are-you-sure-you-want-to-delete-these-hosts": "您确定要删除这些主机吗？",
             "set-inbound": "设置入站",
             "set-port": "设置端口",
             "port": "端口",
@@ -802,12 +800,6 @@
             "subscription-links": "订阅链接",
             "loading-subscription-links": "正在加载订阅链接...",
             "no-available-hosts-found-for-this-user": "未找到此用户的可用主机"
-        }
-    },
-    "delete-user": {
-        "feature": {
-            "delete-user": "删除用户",
-            "are-you-sure": "您确定要删除此用户吗？此操作不可逆。"
         }
     },
     "user-usage-modal": {
@@ -1067,11 +1059,6 @@
     },
     "internal-squads-grid": {
         "widget": {
-            "delete-internal-squad": "删除内部分组",
-            "delete-internal-squad-confirmation": "你确定要删除内部分组 \"{{internalSquadName}}\" 吗？",
-            "this-action-cannot-be-undone": "此操作无法撤销。",
-            "remove-users-from-internal-squad-confirmation": "你确定要将用户从内部分组 \"{{internalSquadName}}\" 中移除吗？",
-            "add-users-to-internal-squad-confirmation": "你确定要将用户添加到内部分组 \"{{internalSquadName}}\" 吗？",
             "no-internal-squads": "暂无内部分组",
             "create-your-first-internal-squad-to-get-started": "创建你的第一个内部分组以开始使用",
             "delete-squad": "删除分组",
@@ -1158,9 +1145,6 @@
     },
     "infra-billing-nodes": {
         "widget": {
-            "delete-infra-billing-node": "删除网络计费节点",
-            "delete-infra-billing-node-confirmation": "你确定要删除这个网络计费节点吗？",
-            "this-action-is-irreversible": "此操作不可撤销。",
             "add-node": "添加节点",
             "list-of-all-infra-billing-nodes": "按下次计费日期排序的所有网络计费节点列表",
             "infra-billing-nodes": "网络计费节点",
@@ -1730,8 +1714,6 @@
     },
     "passkeys-drawer": {
         "component": {
-            "delete-passkey": "删除通行密钥",
-            "delete-passkey-confirmation": "您确定要删除此 通行密钥 吗？此操作无法撤消。",
             "passkeys": "通行密钥",
             "passkeys-description": "通行密钥允许您在没有密码的情况下安全登录。您可以在不同的设备上注册多个通行密钥。",
             "active-passkeys": "激活的通行密钥",

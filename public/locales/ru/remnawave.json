@@ -674,8 +674,6 @@
     },
     "multi-select-hosts": {
         "feature": {
-            "delete-hosts": "Удалить хосты",
-            "are-you-sure-you-want-to-delete-these-hosts": "Вы уверены, что хотите удалить эти хосты?",
             "set-inbound": "Установить инбаунд",
             "set-port": "Установить порт",
             "port": "Порт",
@@ -802,12 +800,6 @@
             "subscription-links": "Подписные ссылки",
             "loading-subscription-links": "Загрузка ссылок на подписку ...",
             "no-available-hosts-found-for-this-user": "Для этого пользователя не найдено доступных хостов"
-        }
-    },
-    "delete-user": {
-        "feature": {
-            "delete-user": "Удалить пользователя",
-            "are-you-sure": "Вы уверены, что хотите удалить пользователя? Это действие необратимо."
         }
     },
     "user-usage-modal": {
@@ -1067,11 +1059,6 @@
     },
     "internal-squads-grid": {
         "widget": {
-            "delete-internal-squad": "Удалить внутренний сквад",
-            "delete-internal-squad-confirmation": "Вы уверены, что хотите удалить внутренний сквад {{internalSquadName}}?",
-            "this-action-cannot-be-undone": "Это действие необратимо.",
-            "remove-users-from-internal-squad-confirmation": "Вы уверены, что хотите удалить пользователей из внутреннего сквада {{internalSquadName}}?",
-            "add-users-to-internal-squad-confirmation": "Вы уверены, что хотите добавить пользователей во внутренних сквад {{internalSquadName}}?",
             "no-internal-squads": "Внутренних сквадов не найдено",
             "create-your-first-internal-squad-to-get-started": "Создайте свой первый внутренний сквад",
             "delete-squad": "Удалить сквад",
@@ -1158,9 +1145,6 @@
     },
     "infra-billing-nodes": {
         "widget": {
-            "delete-infra-billing-node": "Удалить биллинг ноду",
-            "delete-infra-billing-node-confirmation": "Вы уверены, что хотите удалить эту биллинг ноду?",
-            "this-action-is-irreversible": "Это действие необратимо.",
             "add-node": "Добавить ноду",
             "list-of-all-infra-billing-nodes": "Список всех оплачиваемых нод, отсортированных по дате",
             "infra-billing-nodes": "Оплачиваемые ноды",
@@ -1730,8 +1714,6 @@
     },
     "passkeys-drawer": {
         "component": {
-            "delete-passkey": "Удалить ключ входа",
-            "delete-passkey-confirmation": "Вы уверены, что хотите удалить passkey? Это действие нельзя отменить.",
             "passkeys": "Passkeys",
             "passkeys-description": "С помощью ключей входа вы можете безопасности входить без паролей. Вы можете зарегистрировать несколько ключей входа с помощью разных устройств.",
             "active-passkeys": "Активные ключи входа",
