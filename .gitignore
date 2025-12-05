@@ -146,3 +146,5 @@ public/xray.schema.cn.json
 
 scripts
 scripts/**
+
+public/assets/**
