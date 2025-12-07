@@ -582,6 +582,44 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
                                             />
                                         </Group>
 
+                                        <Group gap="xs" justify="space-between">
+                                            <Group gap={4}>
+                                                <Text fw={600} size="sm">
+                                                    Keep SNI blank
+                                                </Text>
+                                                <HoverCard shadow="md" width={280} withArrow>
+                                                    <HoverCard.Target>
+                                                        <ActionIcon
+                                                            color="gray"
+                                                            size="xs"
+                                                            variant="subtle"
+                                                        >
+                                                            <HiQuestionMarkCircle size={20} />
+                                                        </ActionIcon>
+                                                    </HoverCard.Target>
+                                                    <HoverCard.Dropdown>
+                                                        <Stack gap="sm">
+                                                            <Text c="dimmed" size="sm">
+                                                                In some cases, SNI must be left
+                                                                blank. Use this option to force an
+                                                                empty SNI. Note that this option has
+                                                                the highest priority, so it will be
+                                                                applied even if SNI is already set.
+                                                            </Text>
+                                                        </Stack>
+                                                    </HoverCard.Dropdown>
+                                                </HoverCard>
+                                            </Group>
+                                            <Switch
+                                                color="teal.8"
+                                                key={form.key('keepSniBlank')}
+                                                size="md"
+                                                {...form.getInputProps('keepSniBlank', {
+                                                    type: 'checkbox'
+                                                })}
+                                            />
+                                        </Group>
+
                                         <Group
                                             gap="xs"
                                             grow
