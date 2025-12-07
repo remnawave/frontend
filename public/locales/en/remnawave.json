@@ -426,7 +426,9 @@
         "override-the-xray-json-template": "Override the Xray JSON template which will be used for this host.",
         "vital-parameters": "Vital Parameters",
         "exclude-this-host-from-specific-internal-squads": "Exclude this host from specific Internal Squads",
-        "excluded-internal-squads": "Excluded Internal Squads"
+        "excluded-internal-squads": "Excluded Internal Squads",
+        "keep-sni-blank": "Keep SNI blank",
+        "keep-sni-blank-description": "In some cases, SNI must be left blank. Use this option to force an empty SNI. Note that this option has the highest priority, so it will be applied even if SNI is already set."
     },
     "base-node-form": {
         "country": "Country",
