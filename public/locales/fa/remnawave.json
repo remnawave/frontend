@@ -426,7 +426,9 @@
         "override-the-xray-json-template": "الگوی Json کانفیگی که برای این هاست استفاده خواهد شد را override کنید.",
         "vital-parameters": "پارامترهای حیاتی",
         "exclude-this-host-from-specific-internal-squads": "این هاست را از اسکوادهای خارجی مشخص حذف کنید",
-        "excluded-internal-squads": "اسکوادهای خارجی حذف شده"
+        "excluded-internal-squads": "اسکوادهای خارجی حذف شده",
+        "keep-sni-blank": "Keep SNI blank",
+        "keep-sni-blank-description": "In some cases, SNI must be left blank. Use this option to force an empty SNI. Note that this option has the highest priority, so it will be applied even if SNI is already set."
     },
     "base-node-form": {
         "country": "کشور",

@@ -426,7 +426,9 @@
         "override-the-xray-json-template": "覆盖将用于此主机的 Xray JSON 模板。",
         "vital-parameters": "关键参数",
         "exclude-this-host-from-specific-internal-squads": "从指定的内部小队排除此主机",
-        "excluded-internal-squads": "排除的内部分组"
+        "excluded-internal-squads": "排除的内部分组",
+        "keep-sni-blank": "保持SNI 为空",
+        "keep-sni-blank-description": "在某些情况下，SNI必须留空。使用此选项强制一个空的SNI。 请注意，此选项具有最高优先级，因此即使SNI已经设置，它也会被应用。"
     },
     "base-node-form": {
         "country": "国家",
