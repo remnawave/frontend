@@ -5,7 +5,13 @@ import {
     useNodesStoreCreateModalIsOpen,
     useNodesStoreEditModalIsOpen
 } from '@entities/dashboard/nodes/nodes-store'
-import { nodesQueryKeys, QueryKeys, useGetConfigProfiles, useGetNodes } from '@shared/api/hooks'
+import {
+    nodesQueryKeys,
+    QueryKeys,
+    useGetConfigProfiles,
+    useGetNodes,
+    useGetNodesTags
+} from '@shared/api/hooks'
 import { queryClient } from '@shared/api'
 
 import NodesPageComponent from '../components/nodes.page.component'
@@ -18,6 +24,7 @@ export function NodesPageConnector() {
 
     const { data: nodes, isLoading } = useGetNodes()
     const { isLoading: isConfigProfilesLoading } = useGetConfigProfiles()
+    useGetNodesTags()
 
     useEffect(() => {
         ;(async () => {

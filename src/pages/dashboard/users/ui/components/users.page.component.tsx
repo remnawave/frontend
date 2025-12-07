@@ -6,6 +6,7 @@ import { Stack } from '@mantine/core'
 
 import { UserAccessibleNodesModalWidget } from '@widgets/dashboard/users/user-accessible-nodes-modal/user-accessible-nodes.modal.widget'
 import { DetailedUserInfoDrawerWidget } from '@widgets/dashboard/users/detailed-user-info-drawer/detailed-user-info-drawer.widget'
+import { InternalSquadsDrawerWithStore } from '@widgets/dashboard/users/internal-squads-drawer-with-store'
 import { MobileWarningOverlay } from '@shared/ui/mobile-warning-overlay/mobile-warning-overlay'
 import { CreateUserModalWidget } from '@widgets/dashboard/users/create-user-modal'
 import { ViewUserModal } from '@widgets/dashboard/users/view-user-modal'
@@ -54,6 +55,7 @@ export default function UsersPageComponent() {
             <CreateUserModalWidget key="create-user-widget" />
             <DetailedUserInfoDrawerWidget key="detailed-user-info-drawer" />
             <UserAccessibleNodesModalWidget key="user-accessible-nodes-modal" />
+            <InternalSquadsDrawerWithStore key="internal-squads-drawer-with-store" />
         </Page>
     )
 }

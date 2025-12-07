@@ -16,10 +16,10 @@ import { TbChevronDown, TbUsersMinus, TbUsersPlus, TbWebhook } from 'react-icons
 import { GetExternalSquadsCommand } from '@remnawave/backend-contract'
 import { useDisclosure } from '@mantine/hooks'
 import { useTranslation } from 'react-i18next'
-import { motion } from 'motion/react'
 import clsx from 'clsx'
 
 import { MODALS, useModalsStoreOpenWithData } from '@entities/dashboard/modal-store'
+import { WithDndSortable } from '@shared/hocs/with-dnd-sortable'
 import { formatInt } from '@shared/utils/misc'
 
 import classes from './external-squad-card.module.css'
@@ -29,8 +29,7 @@ interface IProps {
     handleAddToUsers: (externalSquadUuid: string) => void
     handleDeleteExternalSquad: (externalSquadUuid: string) => void
     handleRemoveFromUsers: (externalSquadUuid: string) => void
-    index: number
-    isHighCount: boolean
+    isDragOverlay?: boolean
 }
 
 export function ExternalSquadCardWidget(props: IProps) {
@@ -38,9 +37,8 @@ export function ExternalSquadCardWidget(props: IProps) {
         handleAddToUsers,
         handleDeleteExternalSquad,
         handleRemoveFromUsers,
-        index,
         externalSquad,
-        isHighCount
+        isDragOverlay = false
     } = props
 
     const { t } = useTranslation()
@@ -49,9 +47,6 @@ export function ExternalSquadCardWidget(props: IProps) {
     // const { open: openModal, setInternalData } = useModalsStore()
 
     const openModalWithData = useModalsStoreOpenWithData()
-
-    const { membersCount } = externalSquad.info
-    const isActive = membersCount > 0
 
     const handleOpenEditModal = () => {
         // setInternalData({
@@ -69,19 +64,14 @@ export function ExternalSquadCardWidget(props: IProps) {
         })
     }
 
+    const { membersCount } = externalSquad.info
+    const isActive = membersCount > 0
+
     return (
-        <motion.div
-            animate={{ opacity: 1, y: 0 }}
-            className={clsx(classes.cardWrapper, {
-                [classes.inactive]: !isActive
-            })}
-            initial={{ opacity: 0, y: isHighCount ? 0 : 20 }}
-            key={externalSquad.uuid}
-            transition={{
-                duration: 0.3,
-                delay: isHighCount ? 0.1 : index * 0.05,
-                ease: 'easeOut'
-            }}
+        <WithDndSortable
+            dragHandlePosition="top-right"
+            id={externalSquad.uuid}
+            isDragOverlay={isDragOverlay}
         >
             <Card className={classes.card} h="100%" p="xl" shadow="sm" withBorder>
                 <Box
@@ -114,7 +104,7 @@ export function ExternalSquadCardWidget(props: IProps) {
                                     className={classes.title}
                                     ff="monospace"
                                     fw={700}
-                                    lineClamp={2}
+                                    lineClamp={1}
                                     size="lg"
                                     title={externalSquad.name}
                                 >
@@ -228,6 +218,6 @@ export function ExternalSquadCardWidget(props: IProps) {
                     </Group>
                 </Stack>
             </Card>
-        </motion.div>
+        </WithDndSortable>
     )
 }

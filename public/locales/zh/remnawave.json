@@ -52,7 +52,9 @@
         "select": "选择",
         "loading": "正在加载",
         "success": "成功",
-        "download": "下载"
+        "download": "下载",
+        "search": "搜索",
+        "nothing-found": "未找到"
     },
     "bandwidth-metrics": {
         "current-year": "今年",
@@ -412,13 +414,21 @@
         "legacy-options": "传统选项",
         "allow-insecure": "允许不安全的连接",
         "shuffled-hosts-hover-card": "随机排序的主机将放置在列表的顶端。",
-        "vless-route-description": "从 0 到 65535 ，空以禁用",
+        "vless-route-description": "从 1 到 65535，0 或留空以禁用",
         "misc-settings": "杂项设置",
         "shuffle-host": "随机主机",
         "mihomo-specific": "Mihomo 特定设置",
         "enable-x25519mlkem768": "启用 x25519mlkem768 ",
         "pick-nodes-which-resolved-from-this-host-only-visual-assignment": "从主机中选择解析的节点。仅可视化。",
-        "nodes": "节点"
+        "nodes": "节点",
+        "select-a-xray-json-template": "选择一个 Xray JSON 模板",
+        "xray-json-template": "Xray JSON 模板",
+        "override-the-xray-json-template": "覆盖将用于此主机的 Xray JSON 模板。",
+        "vital-parameters": "关键参数",
+        "exclude-this-host-from-specific-internal-squads": "从指定的内部小队排除此主机",
+        "excluded-internal-squads": "排除的内部分组",
+        "keep-sni-blank": "保持SNI 为空",
+        "keep-sni-blank-description": "在某些情况下，SNI必须留空。使用此选项强制一个空的SNI。 请注意，此选项具有最高优先级，因此即使SNI已经设置，它也会被应用。"
     },
     "base-node-form": {
         "country": "国家",
@@ -618,8 +628,7 @@
     },
     "remarks-manager": {
         "widget": {
-            "enter-remark": "输入备注",
-            "add-remark": "添加备注"
+            "enter-remark": "输入备注"
         }
     },
     "subscription-settings": {
@@ -642,13 +651,9 @@
             "happ-routing-description-line-2": "可以通过 Remnawave 的 Happ 路由编辑器获取 Happ 的路由链接。下面的按钮将重定向到上述页面。",
             "configure-happ-routing": "Happ 路由编辑器",
             "happ-routing": "Happ 路由",
-            "user-status-remarks": "用户状态备注",
             "user-status-remarks-description": "如果用户已过期、受限或禁用，以下值将显示在订阅页面中。",
             "user-status-remarks-description-line-2": "您可以为每种状态添加多个备注。",
             "user-status-remarks-description-line-3": "因为过期、受限和禁用的用户无法连接到服务器，他们将在客户端中看到这些备注，而不是收到空的订阅。",
-            "expired-users-remarks": "过期用户备注",
-            "limited-users-remarks": "受限用户备注",
-            "disabled-users-remarks": "禁用用户备注",
             "update-settings": "更新设置",
             "enabled": "已启用",
             "disabled": "已禁用",
@@ -656,11 +661,10 @@
             "profile-webpage-url-description": "某些客户端使用。默认启用，域名来自 SUB_PUBLIC_DOMAIN .env 变量。",
             "serve-json-at-base-subscription": "在基础订阅提供 JSON",
             "serve-json-description": "在基础订阅路径（无需附加 /json）提供 JSON 配置。如果客户端支持，将提供 JSON，否则将照常提供。",
-            "add-username-to-base-subscription": "将 #username 添加到基础订阅",
-            "add-username-description": "在订阅路由的基础订阅路径后附加 #username 。",
             "subscription-info-description": "订阅链接受许多客户端应用支持，例如 Happ, v2RayNG, Streisand 等。",
             "happ-description-line-1": "您可以在此处配置仅适用于 Happ 的设置。",
-            "happ-description-line-2": "这些设置仅适用于在 Happ 中导入的订阅链接。"
+            "happ-description-line-2": "这些设置仅适用于在 Happ 中导入的订阅链接。",
+            "custom-remarks": "自定义备注"
         },
         "page": {
             "component": {
@@ -672,8 +676,6 @@
     },
     "multi-select-hosts": {
         "feature": {
-            "delete-hosts": "删除主机",
-            "are-you-sure-you-want-to-delete-these-hosts": "您确定要删除这些主机吗？",
             "set-inbound": "设置入站",
             "set-port": "设置端口",
             "port": "端口",
@@ -754,7 +756,12 @@
                     "change-active-internal-squads": "更改激活的内部分组",
                     "specify-internal-squads-that-will-be-assigned-to-the-user": "指定将分配给用户的内部小组",
                     "internal-squads": "内部分组",
-                    "changes-the-active-internal-squads-for-all-selected-users": "更改所有选中用户的活跃内部分组"
+                    "changes-the-active-internal-squads-for-all-selected-users": "更改所有选中用户的活跃内部分组",
+                    "extend-expiration-date": "延长日期",
+                    "enter-the-number-of-days-to-extend-the-expiration-date": "输入延长到期日的天数",
+                    "extend-days": "延长天数",
+                    "extend": "延长",
+                    "extend-expiration-date-description": "将天数添加到选定用户的到期日期。天数将添加到当前每个用户的到期日期。"
                 }
             }
         },
@@ -795,12 +802,6 @@
             "subscription-links": "订阅链接",
             "loading-subscription-links": "正在加载订阅链接...",
             "no-available-hosts-found-for-this-user": "未找到此用户的可用主机"
-        }
-    },
-    "delete-user": {
-        "feature": {
-            "delete-user": "删除用户",
-            "are-you-sure": "您确定要删除此用户吗？此操作不可逆。"
         }
     },
     "user-usage-modal": {
@@ -1060,11 +1061,6 @@
     },
     "internal-squads-grid": {
         "widget": {
-            "delete-internal-squad": "删除内部分组",
-            "delete-internal-squad-confirmation": "你确定要删除内部分组 \"{{internalSquadName}}\" 吗？",
-            "this-action-cannot-be-undone": "此操作无法撤销。",
-            "remove-users-from-internal-squad-confirmation": "你确定要将用户从内部分组 \"{{internalSquadName}}\" 中移除吗？",
-            "add-users-to-internal-squad-confirmation": "你确定要将用户添加到内部分组 \"{{internalSquadName}}\" 吗？",
             "no-internal-squads": "暂无内部分组",
             "create-your-first-internal-squad-to-get-started": "创建你的第一个内部分组以开始使用",
             "delete-squad": "删除分组",
@@ -1151,9 +1147,6 @@
     },
     "infra-billing-nodes": {
         "widget": {
-            "delete-infra-billing-node": "删除网络计费节点",
-            "delete-infra-billing-node-confirmation": "你确定要删除这个网络计费节点吗？",
-            "this-action-is-irreversible": "此操作不可撤销。",
             "add-node": "添加节点",
             "list-of-all-infra-billing-nodes": "按下次计费日期排序的所有网络计费节点列表",
             "infra-billing-nodes": "网络计费节点",
@@ -1627,7 +1620,8 @@
                 "default-template-in-use": "正在使用默认模板...",
                 "edit-external-squad": "编辑额外分组",
                 "templates": "模板",
-                "settings": "设置"
+                "settings": "设置",
+                "remarks": "备注"
             }
         },
         "page": {
@@ -1722,8 +1716,6 @@
     },
     "passkeys-drawer": {
         "component": {
-            "delete-passkey": "删除通行密钥",
-            "delete-passkey-confirmation": "您确定要删除此 通行密钥 吗？此操作无法撤消。",
             "passkeys": "通行密钥",
             "passkeys-description": "通行密钥允许您在没有密码的情况下安全登录。您可以在不同的设备上注册多个通行密钥。",
             "active-passkeys": "激活的通行密钥",
@@ -1796,5 +1788,59 @@
         "widget": {
             "response-headers": "请求头"
         }
+    },
+    "subscription-hwid-settings": {
+        "widget": {
+            "hwid-card-description": "在启用 HWID 功能之前仔细阅读文档。并非所有客户端应用程序都支持此功能。",
+            "hwid-settings": "HWID 设置",
+            "hwid-limit": "HWID 限制",
+            "fallback-device-limit-description": "输入可以通过订阅同时使用的最大设备数量",
+            "fallback-device-limit": "回退设备限制",
+            "max-devices-announce-description": "输入用户达到设备同时最大使用数量时将显示的消息",
+            "max-devices-announce": "最多设备公告",
+            "max-200-characters": "最多为200字符",
+            "documentation": "文档"
+        }
+    },
+    "external-squads-hwid-settings": {
+        "tab": {
+            "widget": {
+                "hwid-settings-override": "HWID 设置覆盖",
+                "override-hwid-description": "覆盖此外部分组的 HWID 设备限制设置。禁用时，将使用全局订阅设置。",
+                "enable-hwid-override": "启用 HWID 覆盖"
+            }
+        }
+    },
+    "external-squads-custom-remarks": {
+        "widget": {
+            "override-remarks-description": "覆盖此外部分组的用户状态注释。禁用时，将使用全局订阅设置。",
+            "enable-override": "启用覆盖"
+        }
+    },
+    "subscription-user-remarks-card": {
+        "widget": {
+            "user-status": "用户状态",
+            "empty-hosts": "清空主机",
+            "empty-internal-squads": "清空内部小队"
+        }
+    },
+    "multi-select-nodes": {
+        "feature": {
+            "profile-and-inbounds": "个人资料和入站"
+        }
+    },
+    "use-nodes-table-widget": {
+        "online": "在线",
+        "name": "名称",
+        "address": "地址",
+        "traffic-used": "流量使用",
+        "config-profile": "配置文件",
+        "inbounds": "入站",
+        "xray-v": "Xray V.",
+        "node-v": "节点 V.",
+        "provider": "服务商",
+        "tags": "标签",
+        "total-ram": "内存总数",
+        "cpu-model": "CPU 型号"
     }
 }

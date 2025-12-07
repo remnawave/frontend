@@ -18,8 +18,8 @@ import {
 import { IProps } from './interfaces'
 
 const MotionWrapper = motion.div
-const MotionStack = motion(Stack)
-const MotionGrid = motion(SimpleGrid)
+const MotionStack = motion.create(Stack)
+const MotionGrid = motion.create(SimpleGrid)
 
 interface IAnimatedTitleProps extends TitleProps {
     children: React.ReactNode
@@ -148,10 +148,10 @@ export const HomePage = (props: IProps) => {
 
                 <MotionWrapper variants={sectionVariants}>
                     <AnimatedTitle m="xs" ml={0} order={4} variants={titleVariants}>
-                        {t('home.page.system')}
+                        {t('home.page.online-stats')}
                     </AnimatedTitle>
-                    <MotionGrid cols={{ base: 1, sm: 2, xl: 3 }} variants={gridVariants}>
-                        {simpleMetrics.map((metric) => (
+                    <MotionGrid cols={{ base: 1, sm: 2, xl: 4 }} variants={gridVariants}>
+                        {onlineMetrics.map((metric) => (
                             <MotionWrapper key={metric.title} variants={cardVariants}>
                                 <MetricWithIcon {...metric} />
                             </MotionWrapper>
@@ -161,10 +161,10 @@ export const HomePage = (props: IProps) => {
 
                 <MotionWrapper variants={sectionVariants}>
                     <AnimatedTitle m="xs" ml={0} order={4} variants={titleVariants}>
-                        {t('home.page.online-stats')}
+                        {t('home.page.system')}
                     </AnimatedTitle>
-                    <MotionGrid cols={{ base: 1, sm: 2, xl: 4 }} variants={gridVariants}>
-                        {onlineMetrics.map((metric) => (
+                    <MotionGrid cols={{ base: 1, sm: 2, xl: 3 }} variants={gridVariants}>
+                        {simpleMetrics.map((metric) => (
                             <MotionWrapper key={metric.title} variants={cardVariants}>
                                 <MetricWithIcon {...metric} />
                             </MotionWrapper>

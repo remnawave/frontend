@@ -61,6 +61,10 @@ export const MonacoSetupFeature = {
                 schema.definitions.RuleObject.properties.snippet = snippetSchema
             }
 
+            if (schema.definitions?.BalancerObject?.properties) {
+                schema.definitions.BalancerObject.properties.snippet = snippetSchema
+            }
+
             monaco.languages.json.jsonDefaults.setDiagnosticsOptions({
                 allowComments: false,
                 enableSchemaRequest: true,
@@ -97,7 +101,7 @@ export const MonacoSetupSnippetsFeature = {
             const snippetArraySchema = {
                 $schema: 'http://json-schema.org/draft-07/schema#',
                 title: 'Snippet Array',
-                description: 'Array of Outbound or Rule objects for snippets',
+                description: 'Array of Outbound, Rule or Balancer objects for snippets',
                 type: 'array',
                 items: {
                     oneOf: [
@@ -110,6 +114,11 @@ export const MonacoSetupSnippetsFeature = {
                             ...(schema.definitions?.RuleObject || {}),
                             title: 'Rule Object',
                             description: 'Routing rule (for routing.rules[])'
+                        },
+                        {
+                            ...(schema.definitions?.BalancerObject || {}),
+                            title: 'Balancer Object',
+                            description: 'Balancer configuration (for routing.balancers[])'
                         }
                     ]
                 },

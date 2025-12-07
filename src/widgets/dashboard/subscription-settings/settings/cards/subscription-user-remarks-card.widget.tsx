@@ -1,6 +1,7 @@
-import { PiChatsCircle, PiClockCountdown, PiClockUser, PiProhibit } from 'react-icons/pi'
+import { PiClockCountdown, PiClockUser, PiListChecks, PiProhibit } from 'react-icons/pi'
 import { UpdateSubscriptionSettingsCommand } from '@remnawave/backend-contract'
-import { Button, Card, Group, Stack } from '@mantine/core'
+import { TbCirclesRelation, TbListLetters } from 'react-icons/tb'
+import { Button, Card, Grid, Group, Stack } from '@mantine/core'
 import { useCallback, useEffect, useState } from 'react'
 import { zodResolver } from 'mantine-form-zod-resolver'
 import { notifications } from '@mantine/notifications'
@@ -25,7 +26,9 @@ export const SubscriptionUserRemarksCardWidget = (props: IProps) => {
     const [remarks, setRemarks] = useState<Record<string, string[]>>({
         expired: [''],
         limited: [''],
-        disabled: ['']
+        disabled: [''],
+        emptyHosts: [''],
+        emptyInternalSquads: ['']
     })
 
     const updateExpiredRemarks = useCallback((newRemarks: string[]) => {
@@ -38,6 +41,14 @@ export const SubscriptionUserRemarksCardWidget = (props: IProps) => {
 
     const updateDisabledRemarks = useCallback((newRemarks: string[]) => {
         setRemarks((prev) => ({ ...prev, disabled: newRemarks }))
+    }, [])
+
+    const updateEmptyHostsRemarks = useCallback((newRemarks: string[]) => {
+        setRemarks((prev) => ({ ...prev, emptyHosts: newRemarks }))
+    }, [])
+
+    const updateEmptyInternalSquadsRemarks = useCallback((newRemarks: string[]) => {
+        setRemarks((prev) => ({ ...prev, emptyInternalSquads: newRemarks }))
     }, [])
 
     const form = useForm<UpdateSubscriptionSettingsCommand.Request>({
@@ -76,6 +87,8 @@ export const SubscriptionUserRemarksCardWidget = (props: IProps) => {
         const expiredFiltered = filterEmptyStrings(remarks.expired)
         const limitedFiltered = filterEmptyStrings(remarks.limited)
         const disabledFiltered = filterEmptyStrings(remarks.disabled)
+        const emptyHostsFiltered = filterEmptyStrings(remarks.emptyHosts)
+        const emptyInternalSquadsFiltered = filterEmptyStrings(remarks.emptyInternalSquads)
 
         if (expiredFiltered[0] === '' || limitedFiltered[0] === '' || disabledFiltered[0] === '') {
             notifications.show({
@@ -91,9 +104,13 @@ export const SubscriptionUserRemarksCardWidget = (props: IProps) => {
         mutate({
             variables: {
                 uuid: values.uuid,
-                expiredUsersRemarks: expiredFiltered,
-                limitedUsersRemarks: limitedFiltered,
-                disabledUsersRemarks: disabledFiltered
+                customRemarks: {
+                    expiredUsers: expiredFiltered,
+                    limitedUsers: limitedFiltered,
+                    disabledUsers: disabledFiltered,
+                    emptyHosts: emptyHostsFiltered,
+                    emptyInternalSquads: emptyInternalSquadsFiltered
+                }
             }
         })
     })
@@ -112,9 +129,13 @@ export const SubscriptionUserRemarksCardWidget = (props: IProps) => {
         }
 
         setRemarks({
-            expired: processRemarks(subscriptionSettings.expiredUsersRemarks),
-            limited: processRemarks(subscriptionSettings.limitedUsersRemarks),
-            disabled: processRemarks(subscriptionSettings.disabledUsersRemarks)
+            expired: processRemarks(subscriptionSettings.customRemarks.expiredUsers),
+            limited: processRemarks(subscriptionSettings.customRemarks.limitedUsers),
+            disabled: processRemarks(subscriptionSettings.customRemarks.disabledUsers),
+            emptyHosts: processRemarks(subscriptionSettings.customRemarks.emptyHosts),
+            emptyInternalSquads: processRemarks(
+                subscriptionSettings.customRemarks.emptyInternalSquads
+            )
         })
     }, [subscriptionSettings])
 
@@ -135,38 +156,102 @@ export const SubscriptionUserRemarksCardWidget = (props: IProps) => {
                             )}
                         </>
                     }
-                    icon={<PiChatsCircle size={24} />}
-                    title={t('subscription-settings.widget.user-status-remarks')}
+                    icon={<TbListLetters size={24} />}
+                    title={t('subscription-settings.widget.custom-remarks')}
                 />
 
                 <SettingsCardShared.Content>
                     <Stack gap="md">
                         <Card.Section p="lg" withBorder>
-                            <Stack>
-                                <RemarksManager
-                                    icon={<PiClockUser size="16px" />}
-                                    iconColor="red"
-                                    initialRemarks={remarks.expired}
-                                    onChange={updateExpiredRemarks}
-                                    title={t('subscription-settings.widget.expired-users-remarks')}
-                                />
+                            <Grid
+                                breakpoints={{
+                                    xs: '480px',
+                                    sm: '640px',
+                                    md: '768px',
+                                    lg: '960px',
+                                    xl: '1280px'
+                                }}
+                                type="container"
+                            >
+                                <Grid.Col
+                                    span={{
+                                        base: 12,
+                                        md: 6
+                                    }}
+                                >
+                                    <RemarksManager
+                                        icon={<PiClockUser size="24px" />}
+                                        iconColor="red"
+                                        initialRemarks={remarks.expired}
+                                        onChange={updateExpiredRemarks}
+                                        title={`${t('subscription-user-remarks-card.widget.user-status')}: EXPIRED`}
+                                    />
+                                </Grid.Col>
 
-                                <RemarksManager
-                                    icon={<PiClockCountdown size="16px" />}
-                                    iconColor="orange"
-                                    initialRemarks={remarks.limited}
-                                    onChange={updateLimitedRemarks}
-                                    title={t('subscription-settings.widget.limited-users-remarks')}
-                                />
+                                <Grid.Col
+                                    span={{
+                                        base: 12,
+                                        md: 6
+                                    }}
+                                >
+                                    <RemarksManager
+                                        icon={<PiClockCountdown size="24px" />}
+                                        iconColor="orange"
+                                        initialRemarks={remarks.limited}
+                                        onChange={updateLimitedRemarks}
+                                        title={`${t('subscription-user-remarks-card.widget.user-status')}: LIMITED`}
+                                    />
+                                </Grid.Col>
 
-                                <RemarksManager
-                                    icon={<PiProhibit size="16px" />}
-                                    iconColor="gray"
-                                    initialRemarks={remarks.disabled}
-                                    onChange={updateDisabledRemarks}
-                                    title={t('subscription-settings.widget.disabled-users-remarks')}
-                                />
-                            </Stack>
+                                <Grid.Col
+                                    span={{
+                                        base: 12,
+                                        md: 6
+                                    }}
+                                >
+                                    <RemarksManager
+                                        icon={<PiProhibit size="24px" />}
+                                        iconColor="gray"
+                                        initialRemarks={remarks.disabled}
+                                        onChange={updateDisabledRemarks}
+                                        title={`${t('subscription-user-remarks-card.widget.user-status')}: DISABLED`}
+                                    />
+                                </Grid.Col>
+
+                                <Grid.Col
+                                    span={{
+                                        base: 12,
+                                        md: 6
+                                    }}
+                                >
+                                    <RemarksManager
+                                        icon={<PiListChecks size="24px" />}
+                                        iconColor="blue"
+                                        initialRemarks={remarks.emptyHosts}
+                                        onChange={updateEmptyHostsRemarks}
+                                        title={t(
+                                            'subscription-user-remarks-card.widget.empty-hosts'
+                                        )}
+                                    />
+                                </Grid.Col>
+
+                                <Grid.Col
+                                    span={{
+                                        base: 12,
+                                        md: 6
+                                    }}
+                                >
+                                    <RemarksManager
+                                        icon={<TbCirclesRelation size="24px" />}
+                                        iconColor="green"
+                                        initialRemarks={remarks.emptyInternalSquads}
+                                        onChange={updateEmptyInternalSquadsRemarks}
+                                        title={t(
+                                            'subscription-user-remarks-card.widget.empty-internal-squads'
+                                        )}
+                                    />
+                                </Grid.Col>
+                            </Grid>
                         </Card.Section>
                     </Stack>
                 </SettingsCardShared.Content>

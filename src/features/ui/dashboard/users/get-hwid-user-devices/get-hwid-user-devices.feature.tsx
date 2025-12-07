@@ -338,14 +338,14 @@ export function GetHwidUserDevicesFeature(props: IProps) {
                         <Accordion.Panel>
                             <Text c="dimmed" size="sm">
                                 {t('get-hwid-user-devices.feature.important-note-line-1')}{' '}
-                                <Code fw={500}>HWID_DEVICE_LIMIT_ENABLED=true</Code>{' '}
+                                <Code fw={500}>Enabled HWID Device Limit</Code>{' '}
                                 {t('get-hwid-user-devices.feature.important-note-line-2')}
                                 <br />
                                 {t('get-hwid-user-devices.feature.important-note-line-3')}
                                 <br />
                                 <br />
                                 {t('get-hwid-user-devices.feature.important-note-line-4')}{' '}
-                                <Code>HWID_FALLBACK_DEVICE_LIMIT</Code>{' '}
+                                <Code>Fallback Device Limit</Code>{' '}
                                 {t('get-hwid-user-devices.feature.important-note-line-5')}
                                 <br />
                                 <br />

@@ -1,15 +1,16 @@
 import { UpdateSubscriptionSettingsCommand } from '@remnawave/backend-contract'
-import { PiChatsCircle, PiInfo } from 'react-icons/pi'
-import { TbPrescription } from 'react-icons/tb'
+import { TbListLetters, TbPrescription } from 'react-icons/tb'
 import { useTranslation } from 'react-i18next'
 import Masonry from 'react-layout-masonry'
 import { px, Tabs } from '@mantine/core'
+import { PiInfo } from 'react-icons/pi'
 import { useState } from 'react'
 
 import { SubscriptionAnnounceRoutingCardWidget } from './cards/subscription-announce-routing-card.widget'
 import { SubscriptionResponseHeadersCardWidget } from './cards/subscription-response-headers-card.widget'
 import { SubscriptionAdditionalOptionsWidget } from './cards/subscription-additional-options.widget'
 import { SubscriptionUserRemarksCardWidget } from './cards/subscription-user-remarks-card.widget'
+import { SubscriptionHwidSettingsWidget } from './cards/subscription-hwid-settings.widget'
 import { SubscriptionInfoCardWidget } from './cards/subscription-info-card.widget'
 import styles from './subscription-tabs.module.css'
 
@@ -53,8 +54,8 @@ export const SubscriptionSettingsTabsWidget = ({ subscriptionSettings }: Subscri
                 <Tabs.Tab leftSection={<PiInfo size={px('1.2rem')} />} value={TABS.general}>
                     {t('subscription-settings.widget.subscription-info')}
                 </Tabs.Tab>
-                <Tabs.Tab leftSection={<PiChatsCircle size={px('1.2rem')} />} value={TABS.remarks}>
-                    {t('subscription-settings.widget.user-status-remarks')}
+                <Tabs.Tab leftSection={<TbListLetters size={px('1.2rem')} />} value={TABS.remarks}>
+                    {t('subscription-settings.widget.custom-remarks')}
                 </Tabs.Tab>
                 <Tabs.Tab
                     leftSection={<TbPrescription size={px('1.2rem')} />}
@@ -67,9 +68,11 @@ export const SubscriptionSettingsTabsWidget = ({ subscriptionSettings }: Subscri
             <Tabs.Panel pt="xl" value={TABS.general}>
                 <Masonry columns={{ 300: 1, 1400: 2, 2000: 3, 3000: 4 }} gap={16}>
                     <SubscriptionInfoCardWidget subscriptionSettings={subscriptionSettings} />
+
                     <SubscriptionAdditionalOptionsWidget
                         subscriptionSettings={subscriptionSettings}
                     />
+                    <SubscriptionHwidSettingsWidget subscriptionSettings={subscriptionSettings} />
                     <SubscriptionAnnounceRoutingCardWidget
                         subscriptionSettings={subscriptionSettings}
                     />

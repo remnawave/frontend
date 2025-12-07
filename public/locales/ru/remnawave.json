@@ -52,7 +52,9 @@
         "select": "Выбрать",
         "loading": "Загрузка",
         "success": "Успешно",
-        "download": "Скачать"
+        "download": "Скачать",
+        "search": "Поиск",
+        "nothing-found": "Ничего не найдено"
     },
     "bandwidth-metrics": {
         "current-year": "Текущий год",
@@ -412,13 +414,21 @@
         "legacy-options": "Устаревшие настройки",
         "allow-insecure": "Разрешить небезопасные",
         "shuffled-hosts-hover-card": "Перемешиваемые узлы будут помещены в верхней части списка и отсортированы случайным образом.",
-        "vless-route-description": "От 0 до 65535, оставьте пустым для отключения",
+        "vless-route-description": "От 1 до 65535, оставьте пустым (или 0) для отключения",
         "misc-settings": "Прочие настройки",
         "shuffle-host": "Перемешать хост",
         "mihomo-specific": "Настройки для Mihomo",
         "enable-x25519mlkem768": "Включение x25519mlkem768",
         "pick-nodes-which-resolved-from-this-host-only-visual-assignment": "Выберите ноды, которые направлены на этот хост. Это поле влияет только на визуальное отображение.",
-        "nodes": "Ноды"
+        "nodes": "Ноды",
+        "select-a-xray-json-template": "Выберите шаблон Xray JSON",
+        "xray-json-template": "Шаблон Xray JSON",
+        "override-the-xray-json-template": "Переопределить шаблон Xray JSON, который будет использоваться для этого узла.",
+        "vital-parameters": "Базовые параметры",
+        "exclude-this-host-from-specific-internal-squads": "Исключить этот хост из выбранных внутренних сквадов",
+        "excluded-internal-squads": "Исключить из внутренних сквадов",
+        "keep-sni-blank": "Оставить SNI пустым",
+        "keep-sni-blank-description": "В некоторых случаях SNI должен быть оставлен пустым. Используйте эту опцию, чтобы принудительно использовать пустой SNI. Обратите внимание, что этот параметр имеет наивысший приоритет, поэтому он будет применяться даже если SNI уже установлен."
     },
     "base-node-form": {
         "country": "Страна",
@@ -618,8 +628,7 @@
     },
     "remarks-manager": {
         "widget": {
-            "enter-remark": "Введите примечание",
-            "add-remark": "Добавить примечание"
+            "enter-remark": "Введите примечание"
         }
     },
     "subscription-settings": {
@@ -642,13 +651,9 @@
             "happ-routing-description-line-2": "Маршрутизация должна быть настроена через Happ Routing Builder. Используйте кнопку ниже для настройки маршрутизации.",
             "configure-happ-routing": "Настроить Happ Routing",
             "happ-routing": "Happ routing",
-            "user-status-remarks": "Примечания по статусу пользователя",
             "user-status-remarks-description": "Эти значения будут отображаться в странице подписки, если пользователь просрочен, ограничен или отключен.",
             "user-status-remarks-description-line-2": "Вы можете добавить несколько примечаний для каждого статуса.",
             "user-status-remarks-description-line-3": "Поскольку просроченные, ограниченные и отключенные пользователи не могут подключиться к серверу, они увидят эти примечания вместо пустой подписки.",
-            "expired-users-remarks": "Примечания для EXPIRED пользователей",
-            "limited-users-remarks": "Примечания для LIMITED пользователей",
-            "disabled-users-remarks": "Примечания для DISABLED пользователей",
             "update-settings": "Обновить настройки",
             "enabled": "Включено",
             "disabled": "Выключено",
@@ -656,11 +661,10 @@
             "profile-webpage-url-description": "Используется некоторыми клиентами. \nВключено по умолчанию, домен резволится из SUB_PUBLIC_DOMAIN .env переменной.",
             "serve-json-at-base-subscription": "Использовать JSON в базовой подписке",
             "serve-json-description": "Это позволит вам сервить JSON подписку в базовом пути подписки. Если запрошенный клиент поддерживает его, он будет сервиться как JSON, в противном случае он будет сервиться как обычно.",
-            "add-username-to-base-subscription": "Добавить #username в базовую подписку",
-            "add-username-description": "Это добавит #username в путь подписки на базовой подписке.",
             "subscription-info-description": "Эти настройки поддерживаются многими клиентами, такими как Happ, V2RayNG, Streisand и т.д.",
             "happ-description-line-1": "Здесь вы можете сконфигурировать настройки Happ для подписки.",
-            "happ-description-line-2": "Эти настройки будут использоваться только в том случае, если подписка используется в Happ."
+            "happ-description-line-2": "Эти настройки будут использоваться только в том случае, если подписка используется в Happ.",
+            "custom-remarks": "Кастомные примечания"
         },
         "page": {
             "component": {
@@ -672,8 +676,6 @@
     },
     "multi-select-hosts": {
         "feature": {
-            "delete-hosts": "Удалить хосты",
-            "are-you-sure-you-want-to-delete-these-hosts": "Вы уверены, что хотите удалить эти хосты?",
             "set-inbound": "Установить инбаунд",
             "set-port": "Установить порт",
             "port": "Порт",
@@ -754,7 +756,12 @@
                     "change-active-internal-squads": "Изменить активные внутренние группы",
                     "specify-internal-squads-that-will-be-assigned-to-the-user": "Выберите внутренние сквады, в которых будет состоять пользователь",
                     "internal-squads": "Внутренние сквады",
-                    "changes-the-active-internal-squads-for-all-selected-users": "Изменить активные внутренние сквады для всех выбранных пользователей"
+                    "changes-the-active-internal-squads-for-all-selected-users": "Изменить активные внутренние сквады для всех выбранных пользователей",
+                    "extend-expiration-date": "Продлить срок действия",
+                    "enter-the-number-of-days-to-extend-the-expiration-date": "Введите количество дней, чтобы продлить срок действия",
+                    "extend-days": "Добавить дни",
+                    "extend": "Продлить",
+                    "extend-expiration-date-description": "Дни будут добавлены к текущей дате истечения срока действия, для всех выбранных пользователей."
                 }
             }
         },
@@ -795,12 +802,6 @@
             "subscription-links": "Подписные ссылки",
             "loading-subscription-links": "Загрузка ссылок на подписку ...",
             "no-available-hosts-found-for-this-user": "Для этого пользователя не найдено доступных хостов"
-        }
-    },
-    "delete-user": {
-        "feature": {
-            "delete-user": "Удалить пользователя",
-            "are-you-sure": "Вы уверены, что хотите удалить пользователя? Это действие необратимо."
         }
     },
     "user-usage-modal": {
@@ -1060,11 +1061,6 @@
     },
     "internal-squads-grid": {
         "widget": {
-            "delete-internal-squad": "Удалить внутренний сквад",
-            "delete-internal-squad-confirmation": "Вы уверены, что хотите удалить внутренний сквад {{internalSquadName}}?",
-            "this-action-cannot-be-undone": "Это действие необратимо.",
-            "remove-users-from-internal-squad-confirmation": "Вы уверены, что хотите удалить пользователей из внутреннего сквада {{internalSquadName}}?",
-            "add-users-to-internal-squad-confirmation": "Вы уверены, что хотите добавить пользователей во внутренних сквад {{internalSquadName}}?",
             "no-internal-squads": "Внутренних сквадов не найдено",
             "create-your-first-internal-squad-to-get-started": "Создайте свой первый внутренний сквад",
             "delete-squad": "Удалить сквад",
@@ -1151,9 +1147,6 @@
     },
     "infra-billing-nodes": {
         "widget": {
-            "delete-infra-billing-node": "Удалить биллинг ноду",
-            "delete-infra-billing-node-confirmation": "Вы уверены, что хотите удалить эту биллинг ноду?",
-            "this-action-is-irreversible": "Это действие необратимо.",
             "add-node": "Добавить ноду",
             "list-of-all-infra-billing-nodes": "Список всех оплачиваемых нод, отсортированных по дате",
             "infra-billing-nodes": "Оплачиваемые ноды",
@@ -1627,7 +1620,8 @@
                 "default-template-in-use": "Используется Default шаблон...",
                 "edit-external-squad": "Редактировать внешний отряд",
                 "templates": "Шаблоны",
-                "settings": "Настройки"
+                "settings": "Настройки",
+                "remarks": "Примечания"
             }
         },
         "page": {
@@ -1722,8 +1716,6 @@
     },
     "passkeys-drawer": {
         "component": {
-            "delete-passkey": "Удалить ключ входа",
-            "delete-passkey-confirmation": "Вы уверены, что хотите удалить passkey? Это действие нельзя отменить.",
             "passkeys": "Passkeys",
             "passkeys-description": "С помощью ключей входа вы можете безопасности входить без паролей. Вы можете зарегистрировать несколько ключей входа с помощью разных устройств.",
             "active-passkeys": "Активные ключи входа",
@@ -1761,7 +1753,7 @@
         "tab": {
             "widget": {
                 "host-overrides": "Переопределение хостов",
-                "override-host-settings-for-this-external-squad": "Переопределить настройки хостов для внешнего отряда."
+                "override-host-settings-for-this-external-squad": "Переопределить настройки хостов для внешнего сквада."
             }
         }
     },
@@ -1794,7 +1786,61 @@
     },
     "external-squads-response-headers": {
         "widget": {
-            "response-headers": "Headers"
+            "response-headers": "Хэдеры"
         }
+    },
+    "subscription-hwid-settings": {
+        "widget": {
+            "hwid-card-description": "Перед включением функции HWID тщательно читайте документацию. Не все клиентские приложения поддерживают эту функцию.",
+            "hwid-settings": "Настройки HWID",
+            "hwid-limit": "Лимит HWID",
+            "fallback-device-limit-description": "Введите максимальное количество устройств, которые могут запрашивать подписку",
+            "fallback-device-limit": "Лимит устройств по умолчанию",
+            "max-devices-announce-description": "Введите сообщение, которое будет отображаться в клиенте пользователя при достижении максимального количества устройств",
+            "max-devices-announce": "Объявление при лимите устройств",
+            "max-200-characters": "Макс. 200 символов",
+            "documentation": "Документация"
+        }
+    },
+    "external-squads-hwid-settings": {
+        "tab": {
+            "widget": {
+                "hwid-settings-override": "Переопределение параметров HWID",
+                "override-hwid-description": "Переопределить параметры лимита HWID для этого внешнего сквада. Если отключено, будут использоваться глобальные настройки подписки.",
+                "enable-hwid-override": "Включить переопределение HWID"
+            }
+        }
+    },
+    "external-squads-custom-remarks": {
+        "widget": {
+            "override-remarks-description": "Переопределить примечания статуса пользователя для этого внешнего сквада. Если отключено, будут использоваться глобальные настройки подписки.",
+            "enable-override": "Включить переопределение"
+        }
+    },
+    "subscription-user-remarks-card": {
+        "widget": {
+            "user-status": "Статус пользователя",
+            "empty-hosts": "Отсутствуют хосты",
+            "empty-internal-squads": "Отсутствует внутренние сквады"
+        }
+    },
+    "multi-select-nodes": {
+        "feature": {
+            "profile-and-inbounds": "Профиль и инбаунды"
+        }
+    },
+    "use-nodes-table-widget": {
+        "online": "Онлайн",
+        "name": "Имя",
+        "address": "Адрес",
+        "traffic-used": "Польз. трафик",
+        "config-profile": "Профиль",
+        "inbounds": "Инбаунды",
+        "xray-v": "вер. Xray",
+        "node-v": "вер. Ноды",
+        "provider": "Провайдер",
+        "tags": "Теги",
+        "total-ram": "Всего памяти",
+        "cpu-model": "Модель CPU"
     }
 }

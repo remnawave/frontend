@@ -31,10 +31,10 @@ export function DeleteHostFeature() {
                 color="red"
                 loading={isDeleteHostPending}
                 onClick={handleDeleteHost}
-                size="lg"
+                size="xl"
                 variant="light"
             >
-                <TbTrash size="20px" />
+                <TbTrash size="24px" />
             </ActionIcon>
         </Tooltip>
     )

@@ -3,6 +3,7 @@ import {
     CreateInternalSquadCommand,
     DeleteInternalSquadCommand,
     DeleteUsersFromInternalSquadCommand,
+    ReorderInternalSquadCommand,
     UpdateInternalSquadCommand
 } from '@remnawave/backend-contract'
 import { notifications } from '@mantine/notifications'
@@ -107,6 +108,23 @@ export const useDeleteUsersFromInternalSquad = createMutationHook({
         onError: (error) => {
             notifications.show({
                 title: `Remove Users from Internal Squad`,
+                message:
+                    error instanceof Error ? error.message : `Request failed with unknown error.`,
+                color: 'red'
+            })
+        }
+    }
+})
+
+export const useReorderInternalSquads = createMutationHook({
+    endpoint: ReorderInternalSquadCommand.TSQ_url,
+    bodySchema: ReorderInternalSquadCommand.RequestSchema,
+    responseSchema: ReorderInternalSquadCommand.ResponseSchema,
+    requestMethod: ReorderInternalSquadCommand.endpointDetails.REQUEST_METHOD,
+    rMutationParams: {
+        onError: (error) => {
+            notifications.show({
+                title: `Reorder Internal Squads`,
                 message:
                     error instanceof Error ? error.message : `Request failed with unknown error.`,
                 color: 'red'

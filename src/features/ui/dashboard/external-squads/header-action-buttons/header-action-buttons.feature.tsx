@@ -15,10 +15,17 @@ import { useTranslation } from 'react-i18next'
 import { useField } from '@mantine/form'
 
 import { MODALS, useModalsStoreOpenWithData } from '@entities/dashboard/modal-store'
+import { UniversalSpotlightActionIconShared } from '@shared/ui/universal-spotlight'
 import { useCreateExternalSquad, useGetExternalSquads } from '@shared/api/hooks'
 import { HelpActionIconShared } from '@shared/ui/help-drawer'
 
-export const ExternalSquadsHeaderActionButtonsFeature = () => {
+interface IProps {
+    externalSquadCount: number
+}
+
+export const ExternalSquadsHeaderActionButtonsFeature = (props: IProps) => {
+    const { externalSquadCount } = props
+
     const { isFetching, refetch: refetchExternalSquads } = useGetExternalSquads()
     const { t } = useTranslation()
 
@@ -57,6 +64,8 @@ export const ExternalSquadsHeaderActionButtonsFeature = () => {
     return (
         <Group grow preventGrowOverflow={false} wrap="wrap">
             <HelpActionIconShared hidden={false} screen="PAGE_EXTERNAL_SQUADS" />
+
+            {externalSquadCount > 0 && <UniversalSpotlightActionIconShared />}
 
             <ActionIconGroup>
                 <Tooltip

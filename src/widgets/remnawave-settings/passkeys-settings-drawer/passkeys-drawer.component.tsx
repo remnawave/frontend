@@ -19,7 +19,7 @@ import {
     type PublicKeyCredentialCreationOptionsJSON,
     startRegistration
 } from '@simplewebauthn/browser'
-import { PiClockDuotone, PiKey, PiTrash } from 'react-icons/pi'
+import { PiClockDuotone, PiKey, PiPencil, PiTrash } from 'react-icons/pi'
 import { notifications } from '@mantine/notifications'
 import { TbFingerprint } from 'react-icons/tb'
 import { useTranslation } from 'react-i18next'
@@ -34,7 +34,9 @@ import {
     usePasskeyRegistrationOptions,
     usePasskeyRegistrationVerify
 } from '@shared/api/hooks'
+import { MODALS, useModalsStoreOpenWithData } from '@entities/dashboard/modal-store'
 import { CopyableFieldShared } from '@shared/ui/copyable-field/copyable-field'
+import { RenameModalShared } from '@shared/ui/modals/rename-modal.shared'
 import { formatDate } from '@shared/utils/misc/date'
 import { LoadingScreen } from '@shared/ui'
 import { queryClient } from '@shared/api'
@@ -48,6 +50,8 @@ export const PasskeysDrawerComponent = ({ onClose, opened }: IProps) => {
     const { t } = useTranslation()
 
     const { data: passkeysData, isLoading } = useGetAllPasskeys()
+    const openModalWithData = useModalsStoreOpenWithData()
+
     const [isPasskeyRegistering, setIsPasskeyRegistering] = useState(false)
     const { mutate: deletePasskey, isPending: isDeleting } = useDeletePasskey({
         mutationFns: {
@@ -72,9 +76,9 @@ export const PasskeysDrawerComponent = ({ onClose, opened }: IProps) => {
 
     const handleDelete = (passkeyId: string) => {
         modals.openConfirmModal({
-            title: t('passkeys-drawer.component.delete-passkey'),
+            title: t('common.delete'),
             centered: true,
-            children: t('passkeys-drawer.component.delete-passkey-confirmation'),
+            children: t('common.confirm-action-description'),
             labels: {
                 confirm: t('common.delete'),
                 cancel: t('common.cancel')
@@ -274,22 +278,38 @@ export const PasskeysDrawerComponent = ({ onClose, opened }: IProps) => {
                                                     <Title order={5}>{passkey.name}</Title>
                                                 </Group>
 
-                                                <Tooltip
-                                                    label={t(
-                                                        'passkeys-drawer.component.delete-passkey'
-                                                    )}
-                                                >
-                                                    <ActionIcon
-                                                        color="red"
-                                                        disabled={isDeleting}
-                                                        loading={isDeleting}
-                                                        onClick={() => handleDelete(passkey.id)}
-                                                        size="lg"
-                                                        variant="light"
-                                                    >
-                                                        <PiTrash size={18} />
-                                                    </ActionIcon>
-                                                </Tooltip>
+                                                <Group gap="xs">
+                                                    <Tooltip label={t('common.rename')}>
+                                                        <ActionIcon
+                                                            onClick={() =>
+                                                                openModalWithData(
+                                                                    MODALS.RENAME_SQUAD_OR_CONFIG_PROFILE_MODAL,
+                                                                    {
+                                                                        name: passkey.name,
+                                                                        uuid: passkey.id
+                                                                    }
+                                                                )
+                                                            }
+                                                            size="lg"
+                                                            variant="light"
+                                                        >
+                                                            <PiPencil size={18} />
+                                                        </ActionIcon>
+                                                    </Tooltip>
+
+                                                    <Tooltip label={t('common.delete')}>
+                                                        <ActionIcon
+                                                            color="red"
+                                                            disabled={isDeleting}
+                                                            loading={isDeleting}
+                                                            onClick={() => handleDelete(passkey.id)}
+                                                            size="lg"
+                                                            variant="light"
+                                                        >
+                                                            <PiTrash size={18} />
+                                                        </ActionIcon>
+                                                    </Tooltip>
+                                                </Group>
                                             </Group>
 
                                             <CopyableFieldShared
@@ -317,6 +337,7 @@ export const PasskeysDrawerComponent = ({ onClose, opened }: IProps) => {
                     </ScrollArea>
                 )}
             </Flex>
+            <RenameModalShared key="rename-passkey-modal" renameFrom="passkey" />
         </Drawer>
     )
 }

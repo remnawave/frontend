@@ -25,6 +25,7 @@ import {
     Tooltip
 } from '@mantine/core'
 import { useTranslation } from 'react-i18next'
+import { useEffect, useState } from 'react'
 import dayjs from 'dayjs'
 
 import {
@@ -32,13 +33,14 @@ import {
     useUserModalStoreDrawerUserUuid,
     useUserModalStoreIsDetailedUserInfoDrawerOpen
 } from '@entities/dashboard/user-modal-store/user-modal-store'
+import { useEncryptSubscriptionLink, useGetUserByUuid } from '@shared/api/hooks'
 import { CopyableFieldShared } from '@shared/ui/copyable-field/copyable-field'
 import { LoaderModalShared } from '@shared/ui/loader-modal'
 import { prettyBytesToAnyUtil } from '@shared/utils/bytes'
-import { useGetUserByUuid } from '@shared/api/hooks'
 
 export const DetailedUserInfoDrawerWidget = () => {
     const { t } = useTranslation()
+    const [encryptedSubscriptionLink, setEncryptedSubscriptionLink] = useState('')
 
     const actions = useUserModalStoreActions()
     const isDetailedUserInfoDrawerOpen = useUserModalStoreIsDetailedUserInfoDrawerOpen()
@@ -46,6 +48,7 @@ export const DetailedUserInfoDrawerWidget = () => {
 
     const cleanUpDrawer = async () => {
         actions.changeDetailedUserInfoDrawerState(false)
+        setEncryptedSubscriptionLink('')
     }
 
     const isQueryEnabled = !!selectedUser
@@ -58,6 +61,21 @@ export const DetailedUserInfoDrawerWidget = () => {
             enabled: isQueryEnabled
         }
     })
+
+    const { mutateAsync: encryptSubscriptionLink } = useEncryptSubscriptionLink()
+
+    useEffect(() => {
+        if (!user || !selectedUser) return
+        encryptSubscriptionLink({
+            variables: {
+                linkToEncrypt: user.subscriptionUrl
+            }
+        })
+            .then((result) => {
+                setEncryptedSubscriptionLink(result.encryptedLink)
+            })
+            .catch(() => {})
+    }, [selectedUser, user])
 
     const formatDate = (dateString: Date | null | string) => {
         if (!dateString) return '—'
@@ -113,6 +131,8 @@ export const DetailedUserInfoDrawerWidget = () => {
                                 </Badge>
                             </Group>
 
+                            <CopyableFieldShared label="ID" value={user.id.toString()} />
+
                             <CopyableFieldShared
                                 label={t('detailed-user-info-drawer.widget.uuid')}
                                 value={user.uuid}
@@ -158,12 +178,17 @@ export const DetailedUserInfoDrawerWidget = () => {
 
                             <CopyableFieldShared
                                 label={t('detailed-user-info-drawer.widget.used-traffic')}
-                                value={prettyBytesToAnyUtil(user.usedTrafficBytes || 0) || '—'}
+                                value={
+                                    prettyBytesToAnyUtil(user.userTraffic.usedTrafficBytes || 0) ||
+                                    '—'
+                                }
                             />
                             <CopyableFieldShared
                                 label={t('detailed-user-info-drawer.widget.lifetime-used-traffic')}
                                 value={
-                                    prettyBytesToAnyUtil(user.lifetimeUsedTrafficBytes || 0) || '—'
+                                    prettyBytesToAnyUtil(
+                                        user.userTraffic.lifetimeUsedTrafficBytes || 0
+                                    ) || '—'
                                 }
                             />
                             <CopyableFieldShared
@@ -198,7 +223,7 @@ export const DetailedUserInfoDrawerWidget = () => {
                             />
                             <CopyableFieldShared
                                 label="Happ Crypto Link"
-                                value={user.happ.cryptoLink}
+                                value={encryptedSubscriptionLink}
                             />
                             <CopyableFieldShared
                                 label={t('detailed-user-info-drawer.widget.expires-at')}
@@ -245,15 +270,19 @@ export const DetailedUserInfoDrawerWidget = () => {
                             />
                             <CopyableFieldShared
                                 label={t('detailed-user-info-drawer.widget.first-connected-at')}
-                                value={formatDate(user.firstConnectedAt)}
+                                value={formatDate(user.userTraffic.firstConnectedAt)}
                             />
                             <CopyableFieldShared
                                 label={t('detailed-user-info-drawer.widget.last-online')}
-                                value={user.onlineAt ? formatDate(user.onlineAt.toString()) : '—'}
+                                value={
+                                    user.userTraffic.onlineAt
+                                        ? formatDate(user.userTraffic.onlineAt.toString())
+                                        : '—'
+                                }
                             />
                             <CopyableFieldShared
                                 label={t('detailed-user-info-drawer.widget.last-connected-node')}
-                                value={user.lastConnectedNode?.nodeName || '—'}
+                                value={user.userTraffic.lastConnectedNodeUuid || '—'}
                             />
                         </Stack>
                     </Paper>

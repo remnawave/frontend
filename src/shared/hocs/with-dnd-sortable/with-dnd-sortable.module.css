@@ -1,0 +1,40 @@
+.dragHandle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: grab;
+
+    z-index: 10;
+    position: absolute;
+}
+
+.dragHandle:hover {
+    color: var(--mantine-color-teal-5);
+    background: rgba(20, 184, 166, 0.2);
+    transform: scale(1.1);
+}
+
+.dragHandle:active {
+    cursor: grabbing;
+    transform: scale(0.95);
+}
+
+.dragHandleTopLeft {
+    top: 8px;
+    left: 8px;
+}
+
+.dragHandleTopRight {
+    top: 8px;
+    right: 8px;
+}
+
+.dragHandleBottomLeft {
+    bottom: 8px;
+    left: 8px;
+}
+
+.dragHandleBottomRight {
+    bottom: 8px;
+    right: 8px;
+}

@@ -17,10 +17,17 @@ import { useField } from '@mantine/form'
 
 import { QueryKeys, useCreateInternalSquad, useGetInternalSquads } from '@shared/api/hooks'
 import { MODALS, useModalsStoreOpenWithData } from '@entities/dashboard/modal-store'
+import { UniversalSpotlightActionIconShared } from '@shared/ui/universal-spotlight'
 import { HelpActionIconShared } from '@shared/ui/help-drawer'
 import { queryClient } from '@shared/api'
 
-export const InternalSquadsHeaderActionButtonsFeature = () => {
+interface IProps {
+    internalSquadCount: number
+}
+
+export const InternalSquadsHeaderActionButtonsFeature = (props: IProps) => {
+    const { internalSquadCount } = props
+
     const { t } = useTranslation()
     const { isFetching } = useGetInternalSquads()
 
@@ -51,7 +58,9 @@ export const InternalSquadsHeaderActionButtonsFeature = () => {
                 nameField.reset()
                 handleUpdate()
 
-                openModalWithData(MODALS.INTERNAL_SQUAD_SHOW_INBOUNDS, data)
+                openModalWithData(MODALS.INTERNAL_SQUAD_SHOW_INBOUNDS, {
+                    squadUuid: data.uuid
+                })
             },
 
             onError: (error) => {
@@ -63,6 +72,8 @@ export const InternalSquadsHeaderActionButtonsFeature = () => {
     return (
         <Group grow preventGrowOverflow={false} wrap="wrap">
             <HelpActionIconShared hidden={false} screen="PAGE_INTERNAL_SQUADS" />
+
+            {internalSquadCount > 0 && <UniversalSpotlightActionIconShared />}
 
             <ActionIconGroup>
                 <Tooltip label={t('common.update')} withArrow>

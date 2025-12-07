@@ -1,0 +1,98 @@
+.cardWrapper {
+    position: relative;
+    cursor: pointer;
+}
+
+.card {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(
+        135deg,
+        var(--mantine-color-dark-6) 0%,
+        var(--mantine-color-dark-7) 50%,
+        var(--mantine-color-dark-8) 100%
+    );
+    border: 1px solid var(--mantine-color-dark-4);
+    border-radius: var(--mantine-radius-md);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: var(--mantine-spacing-sm);
+}
+
+.cardWrapper:hover .card {
+    box-shadow:
+        0 8px 16px -5px rgba(0, 0, 0, 0.3),
+        0 4px 6px -2px rgba(0, 0, 0, 0.2),
+        0 0 0 1px var(--mantine-color-teal-5),
+        0 0 20px -5px rgba(20, 184, 166, 0.3);
+    border-color: var(--mantine-color-teal-6);
+}
+
+.cardWrapperInactive:hover .card {
+    box-shadow:
+        0 8px 16px -5px rgba(0, 0, 0, 0.3),
+        0 4px 6px -2px rgba(0, 0, 0, 0.2),
+        0 0 0 1px var(--mantine-color-gray-6),
+        0 0 20px -5px rgba(108, 117, 125, 0.2);
+    border-color: var(--mantine-color-gray-6);
+}
+
+.topAccent {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(
+        90deg,
+        var(--mantine-color-teal-6) 0%,
+        var(--mantine-color-cyan-5) 50%,
+        var(--mantine-color-teal-6) 100%
+    );
+    z-index: 2;
+    border-radius: var(--mantine-radius-md) var(--mantine-radius-md) 0 0;
+}
+
+.topAccentInactive {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(
+        90deg,
+        var(--mantine-color-gray-6) 0%,
+        var(--mantine-color-gray-5) 50%,
+        var(--mantine-color-gray-6) 100%
+    );
+    z-index: 2;
+    border-radius: var(--mantine-radius-md) var(--mantine-radius-md) 0 0;
+}
+
+.glowEffect {
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at center, rgba(20, 184, 166, 0.08) 0%, transparent 50%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.cardWrapper:hover .glowEffect {
+    opacity: 1;
+}
+
+.content {
+    position: relative;
+    z-index: 1;
+}
+
+.iconWrapper {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.cardWrapper:hover .iconWrapper {
+    transform: scale(1.05);
+}

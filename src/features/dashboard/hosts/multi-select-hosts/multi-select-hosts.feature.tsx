@@ -7,7 +7,6 @@ import {
     NumberInput,
     Paper,
     Stack,
-    Text,
     Transition
 } from '@mantine/core'
 import {
@@ -111,13 +110,9 @@ export const MultiSelectHostsFeature = (props: IProps) => {
 
     const deleteSelectedHosts = () => {
         modals.openConfirmModal({
-            title: t('multi-select-hosts.feature.delete-hosts'),
+            title: t('common.delete'),
             centered: true,
-            children: (
-                <Text>
-                    {t('multi-select-hosts.feature.are-you-sure-you-want-to-delete-these-hosts')}
-                </Text>
-            ),
+            children: t('common.confirm-action-description'),
             labels: {
                 confirm: t('common.delete'),
                 cancel: t('common.cancel')

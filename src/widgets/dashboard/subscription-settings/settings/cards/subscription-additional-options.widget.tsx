@@ -25,7 +25,6 @@ export const SubscriptionAdditionalOptionsWidget = (props: IProps) => {
         initialValues: {
             uuid: subscriptionSettings.uuid,
             serveJsonAtBaseSubscription: subscriptionSettings.serveJsonAtBaseSubscription,
-            addUsernameToBaseSubscription: subscriptionSettings.addUsernameToBaseSubscription,
             randomizeHosts: subscriptionSettings.randomizeHosts,
             isShowCustomRemarks: subscriptionSettings.isShowCustomRemarks,
             isProfileWebpageUrlEnabled: subscriptionSettings.isProfileWebpageUrlEnabled
@@ -52,7 +51,6 @@ export const SubscriptionAdditionalOptionsWidget = (props: IProps) => {
             variables: {
                 uuid: values.uuid,
                 serveJsonAtBaseSubscription: values.serveJsonAtBaseSubscription,
-                addUsernameToBaseSubscription: values.addUsernameToBaseSubscription,
                 randomizeHosts: values.randomizeHosts,
                 isShowCustomRemarks: values.isShowCustomRemarks,
                 isProfileWebpageUrlEnabled: values.isProfileWebpageUrlEnabled
@@ -115,18 +113,6 @@ export const SubscriptionAdditionalOptionsWidget = (props: IProps) => {
                             label={t('subscription-tabs.widget.show-custom-remarks')}
                             size="sm"
                             {...form.getInputProps('isShowCustomRemarks', {
-                                type: 'checkbox'
-                            })}
-                        />
-
-                        <Switch
-                            description={t('subscription-settings.widget.add-username-description')}
-                            key={form.key('addUsernameToBaseSubscription')}
-                            label={t(
-                                'subscription-settings.widget.add-username-to-base-subscription'
-                            )}
-                            size="sm"
-                            {...form.getInputProps('addUsernameToBaseSubscription', {
                                 type: 'checkbox'
                             })}
                         />

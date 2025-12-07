@@ -62,8 +62,6 @@
 .header {
     backdrop-filter: blur(7px);
     -webkit-backdrop-filter: blur(7px);
-    margin-left: -300px;
-    padding-left: 300px;
     background-color: transparent;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 

@@ -40,9 +40,11 @@ export const TrafficLimitsCard = <T extends CreateUserCommand.Request | UpdateUs
 
     const MotionWrapper = motionWrapper
 
-    const usedTrafficPercentage = user ? (user.usedTrafficBytes / user.trafficLimitBytes) * 100 : 0
-    const totalUsedTraffic = prettyBytesUtil(user?.usedTrafficBytes, true)
-    const lifetimeUsedTraffic = prettyBytesUtil(user?.lifetimeUsedTrafficBytes, true)
+    const usedTrafficPercentage = user
+        ? (user.userTraffic.usedTrafficBytes / user.trafficLimitBytes) * 100
+        : 0
+    const totalUsedTraffic = prettyBytesUtil(user?.userTraffic.usedTrafficBytes, true)
+    const lifetimeUsedTraffic = prettyBytesUtil(user?.userTraffic.lifetimeUsedTrafficBytes, true)
 
     return (
         <MotionWrapper variants={cardVariants}>

@@ -9,7 +9,13 @@ import {
     Text,
     TextInput
 } from '@mantine/core'
-import { PiCheck, PiCopy, PiLinkDuotone, PiUserDuotone } from 'react-icons/pi'
+import {
+    PiCheck,
+    PiCopy,
+    PiIdentificationCardDuotone,
+    PiLinkDuotone,
+    PiUserDuotone
+} from 'react-icons/pi'
 import { ForwardRefComponent, HTMLMotionProps, Variants } from 'motion/react'
 import { HiIdentification, HiQuestionMarkCircle } from 'react-icons/hi'
 import { GetUserByUuidCommand } from '@remnawave/backend-contract'
@@ -47,6 +53,33 @@ export const UserIdentificationCard = (props: IProps) => {
                 }
             >
                 <Stack gap="md">
+                    <CopyButton timeout={2000} value={user.id.toString()}>
+                        {({ copied, copy }) => (
+                            <TextInput
+                                label="ID"
+                                leftSection={<PiIdentificationCardDuotone size="16px" />}
+                                onClick={copy}
+                                readOnly
+                                rightSection={
+                                    <ActionIcon
+                                        color={copied ? 'teal' : 'gray'}
+                                        onClick={copy}
+                                        variant="subtle"
+                                    >
+                                        {copied ? <PiCheck size="16px" /> : <PiCopy size="16px" />}
+                                    </ActionIcon>
+                                }
+                                styles={{
+                                    input: {
+                                        cursor: 'copy',
+                                        fontFamily: 'monospace'
+                                    }
+                                }}
+                                value={user.id.toString()}
+                            />
+                        )}
+                    </CopyButton>
+
                     <CopyButton timeout={2000} value={user.username}>
                         {({ copied, copy }) => (
                             <TextInput

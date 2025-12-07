@@ -11,11 +11,11 @@ export function DataUsageColumnEntity(props: IProps) {
     const { user } = props
 
     const usedTrafficPercentage = user.trafficLimitBytes
-        ? (user.usedTrafficBytes / user.trafficLimitBytes) * 100
+        ? (user.userTraffic.usedTrafficBytes / user.trafficLimitBytes) * 100
         : 0
     const limitBytes = prettyBytesUtil(user.trafficLimitBytes, true)
-    const totalUsedTraffic = prettyBytesUtil(user.usedTrafficBytes, true)
-    const lifetimeUsedTraffic = prettyBytesUtil(user.lifetimeUsedTrafficBytes, true)
+    const totalUsedTraffic = prettyBytesUtil(user.userTraffic.usedTrafficBytes, true)
+    const lifetimeUsedTraffic = prettyBytesUtil(user.userTraffic.lifetimeUsedTrafficBytes, true)
 
     const strategy = {
         [RESET_PERIODS.MONTH]: t('data-usage.column.monthly'),

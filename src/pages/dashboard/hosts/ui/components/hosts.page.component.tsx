@@ -12,20 +12,12 @@ import { IProps } from './interfaces'
 
 export default function HostsPageComponent(props: IProps) {
     const { t } = useTranslation()
-    const {
-        configProfiles,
-        hosts,
-        hostTags,
-        isHostsLoading,
-        isConfigProfilesLoading,
-        isHostTagsLoading,
-        isNodesLoading
-    } = props
+    const { configProfiles, hosts, hostTags, isLoading } = props
     const [selectedHosts, setSelectedHosts] = useState<string[]>([])
 
     return (
         <Page title={t('constants.hosts')}>
-            {isHostsLoading || isConfigProfilesLoading || isHostTagsLoading || isNodesLoading ? (
+            {isLoading ? (
                 <LoadingScreen />
             ) : (
                 <motion.div

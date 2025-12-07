@@ -6,6 +6,7 @@ import { motion } from 'motion/react'
 
 import { TemplatesHeaderActionButtonsFeature } from '@features/ui/dashboard/templates/header-action-buttons'
 import { TemplatesGridWidget } from '@widgets/dashboard/templates/templates-grid/templates-grid.widget'
+import { TemplatesSpotlightWidget } from '@widgets/dashboard/templates/templates-spotlight'
 import { RenameModalShared } from '@shared/ui/modals/rename-modal.shared'
 import { getCoreLogoFromType } from '@shared/ui/get-core-logo-from-type'
 import { Page, PageHeaderShared } from '@shared/ui'
@@ -34,6 +35,8 @@ export const TemplateBasePageComponent = (props: Props) => {
             >
                 <TemplatesGridWidget templates={templates} templateTitle={title} type={type} />
             </motion.div>
+
+            <TemplatesSpotlightWidget templates={templates} />
 
             <RenameModalShared key="rename-template-modal" renameFrom="template" />
         </Page>

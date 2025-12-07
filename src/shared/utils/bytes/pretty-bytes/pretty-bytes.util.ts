@@ -18,7 +18,7 @@ export function prettyBytesToAnyUtil(
 }
 
 export function prettyBytesUtil(
-    bytesInput: number | string | undefined,
+    bytesInput: null | number | string | undefined,
     returnZero: boolean = false
 ): string | undefined {
     if (!bytesInput) {

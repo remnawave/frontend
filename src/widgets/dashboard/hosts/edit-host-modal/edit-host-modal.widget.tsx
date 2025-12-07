@@ -12,11 +12,14 @@ import {
     QueryKeys,
     useCreateHost,
     useGetConfigProfiles,
+    useGetInternalSquads,
     useGetNodes,
+    useGetSubscriptionTemplates,
     useUpdateHost
 } from '@shared/api/hooks'
 import { MODALS, useModalClose, useModalState } from '@entities/dashboard/modal-store'
 import { BaseHostForm } from '@shared/ui/forms/hosts/base-host-form'
+import { cloneString } from '@shared/utils/misc/clone-string'
 import { queryClient } from '@shared/api'
 import {} from '@entities/dashboard'
 
@@ -30,6 +33,8 @@ export const EditHostModalWidget = memo(() => {
 
     const { data: configProfiles } = useGetConfigProfiles()
     const { data: nodes } = useGetNodes()
+    const { data: templates } = useGetSubscriptionTemplates()
+    const { data: internalSquads } = useGetInternalSquads()
 
     const form = useForm<UpdateHostCommand.Request>({
         name: 'edit-host-form',
@@ -123,11 +128,14 @@ export const EditHostModalWidget = memo(() => {
                 tag: host.tag ?? undefined,
                 isHidden: host.isHidden,
                 overrideSniFromAddress: host.overrideSniFromAddress,
+                keepSniBlank: host.keepSniBlank,
                 vlessRouteId: host.vlessRouteId ?? undefined,
                 allowInsecure: host.allowInsecure ?? undefined,
                 shuffleHost: host.shuffleHost ?? undefined,
                 mihomoX25519: host.mihomoX25519 ?? undefined,
-                nodes: host.nodes ?? undefined
+                nodes: host.nodes ?? undefined,
+                xrayJsonTemplateUuid: host.xrayJsonTemplateUuid ?? undefined,
+                excludedInternalSquads: host.excludedInternalSquads ?? undefined
             })
         }
     }, [host, configProfiles])
@@ -250,7 +258,7 @@ export const EditHostModalWidget = memo(() => {
         createHost({
             variables: {
                 ...host,
-                remark: `Clone #${Math.random().toString(36).substring(2, 15)}`,
+                remark: cloneString(host.remark),
                 port: host.port,
 
                 isDisabled: true,
@@ -270,9 +278,12 @@ export const EditHostModalWidget = memo(() => {
                 sockoptParams: host.sockoptParams ?? undefined,
                 tag: host.tag ?? undefined,
                 overrideSniFromAddress: host.overrideSniFromAddress,
+                keepSniBlank: host.keepSniBlank,
                 vlessRouteId: host.vlessRouteId ?? undefined,
                 allowInsecure: host.allowInsecure ?? undefined,
-                nodes: host.nodes ?? undefined
+                nodes: host.nodes ?? undefined,
+                xrayJsonTemplateUuid: host.xrayJsonTemplateUuid ?? undefined,
+                excludedInternalSquads: host.excludedInternalSquads ?? undefined
             }
         })
     }
@@ -295,9 +306,11 @@ export const EditHostModalWidget = memo(() => {
                     form={form}
                     handleCloneHost={handleCloneHost}
                     handleSubmit={handleSubmit}
+                    internalSquads={internalSquads?.internalSquads ?? []}
                     isSubmitting={isUpdateHostPending}
                     nodes={nodes!}
                     setAdvancedOpened={setAdvancedOpened}
+                    subscriptionTemplates={templates?.templates ?? []}
                 />
             )}
         </Drawer>

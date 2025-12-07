@@ -8,7 +8,7 @@ export const getSimpleMetrics = (
     systemInfo: GetStatsCommand.Response['response'],
     t: TFunction
 ) => {
-    const { memory, users, nodes } = systemInfo
+    const { memory, nodes } = systemInfo
 
     const totalRamGB = prettyBytesUtil(memory.total) ?? 0
     const usedRamGB = prettyBytesUtil(memory.active) ?? 0
@@ -21,7 +21,7 @@ export const getSimpleMetrics = (
             color: 'var(--mantine-color-blue-4)'
         },
         {
-            value: prettyBytesUtilWithoutPrefix(Number(users.totalTrafficBytes)) ?? 0,
+            value: prettyBytesUtilWithoutPrefix(Number(nodes.totalBytesLifetime)) ?? 0,
             icon: PiChartBarDuotone,
             title: t('simple-metrics.total-traffic'),
             color: 'var(--mantine-color-green-4)'

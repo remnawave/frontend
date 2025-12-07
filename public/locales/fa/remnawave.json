@@ -12,7 +12,7 @@
         "overview": "نمای کلی",
         "management": "مدیریت",
         "subscription-settings": "تنظیمات اشتراک",
-        "utils": "ابزارها",
+        "utils": "ابزارهای کاربردی",
         "happ-routing-builder": "مسیرساز برای Happ",
         "templates": "قالب‌ها",
         "subscription": "اشتراک",
@@ -50,9 +50,11 @@
         "remove": "حذف کردن",
         "add": "افزودن",
         "select": "انتخاب",
-        "loading": "Loading",
-        "success": "Success",
-        "download": "Download"
+        "loading": "در حال بارگذاری",
+        "success": "با موفقیت انجام شد",
+        "download": "دانلود",
+        "search": "جستجو",
+        "nothing-found": "چیزی یافت نشد"
     },
     "bandwidth-metrics": {
         "current-year": "امسال",
@@ -142,10 +144,10 @@
         "lifetime-used": "مصرف کل",
         "sub-link-revoked-at": "ساب لینک لفو شده در",
         "created-at": "ساخته شده در",
-        "internal-squads": "Internal Squads",
-        "first-connected-at": "First connected at",
-        "sub-last-opened-at": "Sub last opened at",
-        "tag": "Tag"
+        "internal-squads": "اسکوادهای داخلی",
+        "first-connected-at": "اولین اتصال",
+        "sub-last-opened-at": "آخرین دریافت اشتراک",
+        "tag": "برچسب"
     },
     "header-buttons": {
         "feature": {}
@@ -412,13 +414,21 @@
         "legacy-options": "تنظیمات قدیمی",
         "allow-insecure": "اجازه اتصال ناامن",
         "shuffled-hosts-hover-card": "هاست‌های به هم زده شده در بالای لیست قرار گرفته و به صورت تصادفی مرتب خواهند شد.",
-        "vless-route-description": "از 0 تا 65535، برای غیرفعالسازی خالی بگذارید",
+        "vless-route-description": "از 1 تا 65535، برای غیرفعال‌سازی 0 یا خالی بگذارید",
         "misc-settings": "تنظیمات متفرقه",
         "shuffle-host": "به هم زدن هاست‌ها",
         "mihomo-specific": "مخصوص Mihomo",
         "enable-x25519mlkem768": "فعالسازی x25519mlkem768",
         "pick-nodes-which-resolved-from-this-host-only-visual-assignment": "نودهایی که از طریق این هاست استفاده می‌شوند را انتخاب کنید. (تاثیر عملکردی ندارد و فقط جنبه نمایشی دارد)",
-        "nodes": "نودها"
+        "nodes": "نودها",
+        "select-a-xray-json-template": "یکی از الگوهای کانفیگ Json را انتخاب کنید",
+        "xray-json-template": "الگوی کانفیگ Json",
+        "override-the-xray-json-template": "الگوی Json کانفیگی که برای این هاست استفاده خواهد شد را override کنید.",
+        "vital-parameters": "پارامترهای حیاتی",
+        "exclude-this-host-from-specific-internal-squads": "این هاست را از اسکوادهای خارجی مشخص حذف کنید",
+        "excluded-internal-squads": "اسکوادهای خارجی حذف شده",
+        "keep-sni-blank": "Keep SNI blank",
+        "keep-sni-blank-description": "In some cases, SNI must be left blank. Use this option to force an empty SNI. Note that this option has the highest priority, so it will be applied even if SNI is already set."
     },
     "base-node-form": {
         "country": "کشور",
@@ -618,8 +628,7 @@
     },
     "remarks-manager": {
         "widget": {
-            "enter-remark": "ریمارک را وارد نمایید",
-            "add-remark": "افزودن ریمارک"
+            "enter-remark": "ریمارک را وارد نمایید"
         }
     },
     "subscription-settings": {
@@ -642,13 +651,9 @@
             "happ-routing-description-line-2": "برای ایجاد لینک مسیریابی می‌توانید از بخش مربوطه در پنل استفاده کنید",
             "configure-happ-routing": "ساخت لینک مسیریابی Happ",
             "happ-routing": "مسیریابی Happ",
-            "user-status-remarks": "ریمارک‌های وضعیت کاربر",
             "user-status-remarks-description": "درصورتی که کاربر منقضی، محدود یا غیرفعال شده باشد مقادیر زیر در اشتراک او نمایش داده خواهند شد",
             "user-status-remarks-description-line-2": "می‌توانید برای هر وضعیت چند ریمارک ایجاد کنید",
             "user-status-remarks-description-line-3": "چون کاربرهای منقضی، محدود یا غیرفعال توانایی اتصال به سرورها را ندارند، به جای دریافت لینک خالی این مقادیر را در نرم‌افزار خواهند دید",
-            "expired-users-remarks": "ریمارک‌های کاربر منقضی شده",
-            "limited-users-remarks": "ریمارک‌های کاربر محدود شده",
-            "disabled-users-remarks": "ریمارک‌های کاربر غیرفعال شده",
             "update-settings": "به‌روزرسانی تنظیمات",
             "enabled": "فعال",
             "disabled": "غیرفعال",
@@ -656,11 +661,10 @@
             "profile-webpage-url-description": "توسط برخی از نرم‌افزارها استفاده می‌شود. \nبه طور پیش فرض فعال شده ، دامنه از متغیر SUB_PUBLIC_DOMAIN .env دریافت می‌شود",
             "serve-json-at-base-subscription": "ارائه JSON در لینک پایه پیشفرض",
             "serve-json-description": "درصورت پشتیبانی نرم‌افزار، بدون نیاز به قرار دادن /json در انتهای لینک، اشتراک JSON برای آن ارسال خواهد شد",
-            "add-username-to-base-subscription": "افزودن #username به انتهای لینک اشتراک",
-            "add-username-description": "با فعال کردن این گزینه #username به انتهای لینک‌های اشتراک اضافه خواهد شد.",
             "subscription-info-description": "این تنظیمات توسط نرم‌افزارهایی مثل Happ, v2RayNG, Streisand و..و استفاده می‌شود",
             "happ-description-line-1": "در این قسمت می‌توانید تنظیمات مربوط به نرم‌افزار Happ را برای لینک‌های اشتراک مشخص کنید.",
-            "happ-description-line-2": "این تنظیمات فقط در نرم‌افزار Happ استفاده خواهد شد"
+            "happ-description-line-2": "این تنظیمات فقط در نرم‌افزار Happ استفاده خواهد شد",
+            "custom-remarks": "ریمارک‌های سفارشی"
         },
         "page": {
             "component": {
@@ -672,8 +676,6 @@
     },
     "multi-select-hosts": {
         "feature": {
-            "delete-hosts": "حذف هاست‌ها",
-            "are-you-sure-you-want-to-delete-these-hosts": "آیا مطمئن هستید که می‌خواهید این هاست‌ها را حذف کنید؟",
             "set-inbound": "تنظیم اینباند",
             "set-port": "تنظیم پورت",
             "port": "پورت",
@@ -754,7 +756,12 @@
                     "change-active-internal-squads": "تغییر دادن اسکوادهای فعال",
                     "specify-internal-squads-that-will-be-assigned-to-the-user": "اسکوادهایی که این کاربر عضو آن‌ها خواهد شد را مشخص کنید",
                     "internal-squads": "اسکوادهای داخلی",
-                    "changes-the-active-internal-squads-for-all-selected-users": "اسکوادهای فعال را برای همه کاربران انتخاب شده تغییر می‌دهد"
+                    "changes-the-active-internal-squads-for-all-selected-users": "اسکوادهای فعال را برای همه کاربران انتخاب شده تغییر می‌دهد",
+                    "extend-expiration-date": "تمدید زمان انقضا",
+                    "enter-the-number-of-days-to-extend-the-expiration-date": "تعداد روزهایی که به زمان اشتراک افزوده می‌شوند.",
+                    "extend-days": "روزهای تمدید ",
+                    "extend": "تمدید",
+                    "extend-expiration-date-description": "افزودن به تعداد روزهای باقی مانده تا انقضای کاربرهای انتخاب شده."
                 }
             }
         },
@@ -795,12 +802,6 @@
             "subscription-links": "لینک‌های اشتراک",
             "loading-subscription-links": "درحال بارگذاری لینک‌های اشتراک ...",
             "no-available-hosts-found-for-this-user": "هیچ هاست موجودی برای این کاربر یافت نشد"
-        }
-    },
-    "delete-user": {
-        "feature": {
-            "delete-user": "حذف کاربر",
-            "are-you-sure": "آیا مطمئن هستید که می‌خواهید کاربر را حذف کنید؟ این اقدام غیرقابل بازگشت است."
         }
     },
     "user-usage-modal": {
@@ -865,7 +866,7 @@
             "timestamps": "مهرهای زمانی",
             "created-at": "ایجاد شده در",
             "updated-at": "به‌روزرسانی شده در",
-            "tag": "تگ",
+            "tag": "برچسب",
             "first-connected-at": "اولین اتصال",
             "active-internal-squads": "اسکوادهای داخلی فعال"
         }
@@ -1060,11 +1061,6 @@
     },
     "internal-squads-grid": {
         "widget": {
-            "delete-internal-squad": "حذف اسکواد داخلی",
-            "delete-internal-squad-confirmation": "آیا مطمئن هستید که می‌خواهید اسکواد داخلی «{{internalSquadName}}» را حذف کنید؟",
-            "this-action-cannot-be-undone": "این اقدام قابل بازگشت نیست.",
-            "remove-users-from-internal-squad-confirmation": "آیا مطمئن هستید که می‌خواهید کاربران را از اسکواد داخلی «{{internalSquadName}}» حذف کنید؟",
-            "add-users-to-internal-squad-confirmation": "آیا مطمئن هستید که می‌خواهید کاربران را به اسکواد داخلی «{{internalSquadName}}» اضافه کنید؟",
             "no-internal-squads": "هیچ اسکواد داخلی‌ای وجود ندارد",
             "create-your-first-internal-squad-to-get-started": "برای شروع، اولین اسکواد داخلی خود را ایجاد کنید",
             "delete-squad": "حذف اسکواد",
@@ -1151,9 +1147,6 @@
     },
     "infra-billing-nodes": {
         "widget": {
-            "delete-infra-billing-node": "حذف نود صورتحساب تجهیزات",
-            "delete-infra-billing-node-confirmation": "آیا مطمئن هستید که می‌خواهید این نود صورتحساب تجهیزات را حذف کنید؟",
-            "this-action-is-irreversible": "این اقدام غیرقابل بازگشت است.",
             "add-node": "افزودن نود",
             "list-of-all-infra-billing-nodes": "لیست همه نودهای صورتحساب تجهیزات بر اساس تاریخ صورتحساب بعدی",
             "infra-billing-nodes": "نودهای صورتحساب تجهیزات",
@@ -1221,10 +1214,10 @@
             "active-on-nodes": "فعال روی نودها"
         },
         "widget": {
-            "loading-computed-config-profile": "Loading computed config profile...",
-            "computed-config-profile-loaded-successfully": "Computed config profile loaded successfully",
-            "the-computed-config-profile-description": "The computed config profile shows the final configuration after all snippets have been applied.",
-            "view-computed": "View Computed"
+            "loading-computed-config-profile": "درحال بارگذاری کانفیگ محاسبه‌شده ...",
+            "computed-config-profile-loaded-successfully": "کانفیگ محاسبه‌شده با موفقیت بارگذاری شد",
+            "the-computed-config-profile-description": "کانفیگ محاسبه‌شده نشان‌دهنده کانفیگ نهایی پس از جایگذاری مقادیر اسنیپت‌ها می‌باشد.",
+            "view-computed": "نشان دادن کانفیگ ‌محاسبه‌شده"
         }
     },
     "flat-inbound-checkbox-card": {
@@ -1310,7 +1303,7 @@
         "select-an-external-squad": "یک اسکواد خارجی انتخاب کنید"
     },
     "device-tag-settings-card": {
-        "device-and-tag-settings": "تنظیمات دستگاه و تگ"
+        "device-and-tag-settings": "تنظیمات دستگاه و برچسب"
     },
     "user-indentity-creation-card": {
         "user-identity": "هویت کاربر"
@@ -1428,7 +1421,7 @@
             "persian": "فارسی",
             "russian": "روسی",
             "chinese": "چینی",
-            "french": "French",
+            "french": "فرانسوی",
             "additional-languages": "زبان‌های بیشتر",
             "english-is-always-enabled": "انگلیسی همیشه فعال می‌باشد",
             "english": "انگلیسی"
@@ -1627,7 +1620,8 @@
                 "default-template-in-use": "درحال استفاده از الگوی پیش‌فرض ...",
                 "edit-external-squad": "ویرایش اسکواد خارجی",
                 "templates": "الگوها",
-                "settings": "تنظیمات"
+                "settings": "تنظیمات",
+                "remarks": "ریمارک‌ها"
             }
         },
         "page": {
@@ -1722,8 +1716,6 @@
     },
     "passkeys-drawer": {
         "component": {
-            "delete-passkey": "حذف رمز عبور",
-            "delete-passkey-confirmation": "آیا مطمئن هستید می خواهید این رمز عبور را حذف کنید؟ این عمل قابل بازگشت نیست.",
             "passkeys": "کلیدهای عبور",
             "passkeys-description": "کلیدهای عبور به شما اجازه می‌دهند بدون گذرواژه وارد پنل شوید. می‌توانید چندین کلیدعبور برای دستگاه‎‌های مختلف ثبت کنید.",
             "active-passkeys": "کلیدهای عبور فعال",
@@ -1741,12 +1733,12 @@
             "the-title-that-will-be-displayed-on-login-page": "عنوانی که در صفحه ورود نشان داده خواهد شد",
             "brand-name": "اسم برند",
             "the-url-to-your-brand-logo-image": "آدرس تصویر لوگوی برند شما",
-            "colored-title-format": "Colored Title Format",
-            "colored-title-description": "You can color individual words using {color}word syntax. Supports both HEX colors (#RRGGBB) and MantineUI color names.",
-            "example-hex-colors": "Example with HEX colors",
-            "example-mantine-colors": "Example with MantineUI colors",
-            "example-mixed": "Example with mixed colors",
-            "color-format-note": "💡 Color applies only to the word immediately following the marker. Without markers, text will be white."
+            "colored-title-format": "فرمت عنوان رنگی",
+            "colored-title-description": "می‌توانید کلمه‌ها را به صورت تکی به کمک نوشتار \"{color}کلمه\" رنگ‌آمیزی کنید. این ویژگی از رنگ‌های HEX (#RRGGBB) و اسم رنگ‌های MantineUI پشتیبانی می‌کند.",
+            "example-hex-colors": "مثال با رنگ‌های HEX",
+            "example-mantine-colors": "مثال با رنگ‌های MantineUI",
+            "example-mixed": "مثال با رنگ‌های مختلط",
+            "color-format-note": "💡 رنگ مشخص شده فقط برای کلمه‌ای که به نشانگر رنگ چسبیده اعمال می‌شود. بدون نشانگر، متن سفیدرنگ خواهد بود."
         }
     },
     "api-tokens-card": {
@@ -1760,41 +1752,95 @@
     "external-squads-hosts": {
         "tab": {
             "widget": {
-                "host-overrides": "Host Overrides",
-                "override-host-settings-for-this-external-squad": "Override host settings for this external squad."
+                "host-overrides": "تنظیمات override هاست‌ها",
+                "override-host-settings-for-this-external-squad": "override تنظیمات هاست برای این اسکواد خارجی."
             }
         }
     },
     "reset-usage-user": {
         "feature": {
-            "reset": "Reset",
-            "reset-usage": "Reset usage"
+            "reset": "بازنشانی",
+            "reset-usage": "بازنشانی مصرف"
         }
     },
     "help-action-icon": {
         "shared": {
-            "help-article": "Help Article"
+            "help-article": "مقاله راهنما"
         }
     },
     "internal-squad-card": {
         "widget": {
-            "available-nodes": "Available Nodes"
+            "available-nodes": "نودهای قابل دسترسی"
         }
     },
     "help-drawer": {
         "shared": {
-            "failed-to-load-documentation": "Failed to load documentation",
-            "loading-documentation": "Loading documentation..."
+            "failed-to-load-documentation": "بارگذاری مستندات با شکست مواجه شد",
+            "loading-documentation": "درحال بارگذاری مستندات"
         }
     },
     "reset-node-traffic": {
         "feature": {
-            "reset-traffic": "Reset Traffic"
+            "reset-traffic": "بازنشانی ترافیک"
         }
     },
     "external-squads-response-headers": {
         "widget": {
-            "response-headers": "Headers"
+            "response-headers": "هدرها"
         }
+    },
+    "subscription-hwid-settings": {
+        "widget": {
+            "hwid-card-description": "قبل از فعال کردن محدودیت HWID به دقت مستندات مربوط به آن را بخوانید. همه نرم افزارهای کلاینت از این ویژگی پشتیبانی نمی‌کنند.",
+            "hwid-settings": "تنظیمات HWID",
+            "hwid-limit": "محدودیت HWID",
+            "fallback-device-limit-description": "حداکثر تعداد دستگاه‌هایی که با هر اشتراک قابل استفاده خواهند بود را وارد نمایید",
+            "fallback-device-limit": "محدودیت پیشفرض تعداد دستگاه ",
+            "max-devices-announce-description": "پیامی را که کاربر هنگام پر شدن محدودیت تعداد دستگاه مشاهده خواهد کرد وارد نمایید",
+            "max-devices-announce": "پیغام پر شدن تعداد دستگاه",
+            "max-200-characters": "حداکثر 200 کاراکتر",
+            "documentation": "مستندات"
+        }
+    },
+    "external-squads-hwid-settings": {
+        "tab": {
+            "widget": {
+                "hwid-settings-override": "override تنظیمات HWID",
+                "override-hwid-description": "برای این اسکواد خارجی تنظیمات HWID override خواهند شد. درصورت غیرفعال بودن، مقادیر موجود در تنظیمات عمومی استفاده خواهد شد.",
+                "enable-hwid-override": "فعالسازی override تنظیمات HWID"
+            }
+        }
+    },
+    "external-squads-custom-remarks": {
+        "widget": {
+            "override-remarks-description": "تغییر دادن ریمارک‌های وضعیت کاربر برای این اسکواد خارجی. درصورت غیرفعال بودن از تنظیمات کلی اشتراک استفاده خواهد شد.",
+            "enable-override": "فعالسازی override"
+        }
+    },
+    "subscription-user-remarks-card": {
+        "widget": {
+            "user-status": "وضعیت کاربر",
+            "empty-hosts": "هاست‌های خالی",
+            "empty-internal-squads": "اسکوادهای داخلی خالی"
+        }
+    },
+    "multi-select-nodes": {
+        "feature": {
+            "profile-and-inbounds": "پروفایل و اینباندها"
+        }
+    },
+    "use-nodes-table-widget": {
+        "online": "آنلاین",
+        "name": "اسم",
+        "address": "آدرس",
+        "traffic-used": "ترافیک استفاده‌شده",
+        "config-profile": "پروفایل پیکربندی",
+        "inbounds": "اینباندها",
+        "xray-v": "نسخه هسته Xray",
+        "node-v": "نسخه نود",
+        "provider": "ارائه‌دهنده",
+        "tags": "برچسب‌ها",
+        "total-ram": "کل RAM",
+        "cpu-model": "مدل پردازنده"
     }
 }

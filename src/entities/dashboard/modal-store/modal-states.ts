@@ -1,7 +1,6 @@
 import {
     GetConfigProfilesCommand,
     GetInfraProvidersCommand,
-    GetInternalSquadsCommand,
     UpdateHostCommand
 } from '@remnawave/backend-contract'
 
@@ -48,7 +47,9 @@ export interface ModalInternalStates {
     INTERNAL_SQUAD_ACCESSIBLE_NODES_DRAWER: {
         squadUuid: string
     }
-    INTERNAL_SQUAD_SHOW_INBOUNDS: GetInternalSquadsCommand.Response['response']['internalSquads'][number]
+    INTERNAL_SQUAD_SHOW_INBOUNDS: {
+        squadUuid: string
+    }
     RENAME_SQUAD_OR_CONFIG_PROFILE_MODAL: {
         name: string
         uuid: string

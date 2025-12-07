@@ -1,5 +1,5 @@
-import { GetAllUsersCommand } from '@remnawave/backend-contract'
+import { GetAllNodesCommand } from '@remnawave/backend-contract'
 
 export interface IProps {
-    lastConnectedNode: GetAllUsersCommand.Response['response']['users'][number]['lastConnectedNode']
+    node: GetAllNodesCommand.Response['response'][number] | undefined
 }

@@ -5,7 +5,8 @@ import components from './overrides'
 export const theme = createTheme({
     components,
     cursorType: 'pointer',
-    fontFamily: 'Montserrat, Vazirmatn, Noto Sans SC, Twemoji Country Flags, sans-serif',
+    fontFamily:
+        'Montserrat, Vazirmatn, Apple Color Emoji, Noto Sans SC, Twemoji Country Flags, sans-serif',
     fontFamilyMonospace: 'Fira Mono, monospace',
     breakpoints: {
         xs: '30em',
@@ -17,6 +18,7 @@ export const theme = createTheme({
         '3xl': '120em',
         '4xl': '160em'
     },
+
     scale: 1,
     fontSmoothing: true,
     focusRing: 'never',

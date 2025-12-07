@@ -1,4 +1,4 @@
-import { Card, SimpleGrid, Stack, Text, Title } from '@mantine/core'
+import { Card, Stack, Text, Title } from '@mantine/core'
 import { useTranslation } from 'react-i18next'
 import { PiEmpty } from 'react-icons/pi'
 import { modals } from '@mantine/modals'
@@ -8,9 +8,11 @@ import {
     useAddUsersToInternalSquad,
     useDeleteInternalSquad,
     useDeleteUsersFromInternalSquad,
-    useGetInternalSquads
+    useGetInternalSquads,
+    useReorderInternalSquads
 } from '@shared/api/hooks'
 import { baseNotificationsMutations } from '@shared/ui/notifications/base-notification-mutations'
+import { VirtualizedDndGrid } from '@shared/ui/virtualized-dnd-grid'
 import { queryClient } from '@shared/api/query-client'
 import { sToMs } from '@shared/utils/time-utils'
 
@@ -20,6 +22,14 @@ import { IProps } from './interfaces'
 export function InternalSquadsGridWidget(props: IProps) {
     const { internalSquads } = props
     const { t } = useTranslation()
+
+    const { mutate: reorderInternalSquads } = useReorderInternalSquads({
+        mutationFns: {
+            onSuccess: (data) => {
+                queryClient.setQueryData(QueryKeys.internalSquads.getInternalSquads.queryKey, data)
+            }
+        }
+    })
 
     const { refetch: refetchInternalSquads } = useGetInternalSquads({
         rQueryParams: {
@@ -49,18 +59,10 @@ export function InternalSquadsGridWidget(props: IProps) {
         }
     })
 
-    const handleDeleteInternalSquad = (internalSquadUuid: string, internalSquadName: string) => {
+    const handleDeleteInternalSquad = (internalSquadUuid: string) => {
         modals.openConfirmModal({
-            title: t('internal-squads-grid.widget.delete-internal-squad'),
-            children: (
-                <Text size="sm">
-                    {t('internal-squads-grid.widget.delete-internal-squad-confirmation', {
-                        internalSquadName
-                    })}
-                    <br />
-                    {t('internal-squads-grid.widget.this-action-cannot-be-undone')}
-                </Text>
-            ),
+            title: t('common.delete'),
+            children: t('common.confirm-action-description'),
             labels: {
                 confirm: t('common.delete'),
                 cancel: t('common.cancel')
@@ -78,27 +80,13 @@ export function InternalSquadsGridWidget(props: IProps) {
         })
     }
 
-    const handleRemoveFromUsers = (internalSquadUuid: string, internalSquadName: string) => {
+    const handleRemoveFromUsers = (internalSquadUuid: string) => {
         modals.openConfirmModal({
             title: t('internal-squads-grid.widget.remove-users'),
             centered: true,
-            children: (
-                <Stack gap="xs">
-                    <Text fw={800} size="sm">
-                        {t(
-                            'internal-squads-grid.widget.remove-users-from-internal-squad-confirmation',
-                            {
-                                internalSquadName
-                            }
-                        )}
-                    </Text>
-                    <Text fw={600} size="sm">
-                        {t('internal-squads-grid.widget.this-action-cannot-be-undone')}
-                    </Text>
-                </Stack>
-            ),
+            children: t('common.confirm-action-description'),
             labels: {
-                confirm: t('common.remove'),
+                confirm: t('common.delete'),
                 cancel: t('common.cancel')
             },
             cancelProps: { variant: 'subtle', color: 'gray' },
@@ -113,22 +101,11 @@ export function InternalSquadsGridWidget(props: IProps) {
         })
     }
 
-    const handleAddToUsers = (internalSquadUuid: string, internalSquadName: string) => {
+    const handleAddToUsers = (internalSquadUuid: string) => {
         modals.openConfirmModal({
             title: t('internal-squads-grid.widget.add-users'),
             centered: true,
-            children: (
-                <Stack gap="xs">
-                    <Text fw={800} size="sm">
-                        {t('internal-squads-grid.widget.add-users-to-internal-squad-confirmation', {
-                            internalSquadName
-                        })}
-                    </Text>
-                    <Text fw={600} size="sm">
-                        {t('internal-squads-grid.widget.this-action-cannot-be-undone')}
-                    </Text>
-                </Stack>
-            ),
+            children: t('common.confirm-action-description'),
             labels: {
                 confirm: t('common.add'),
                 cancel: t('common.cancel')
@@ -141,6 +118,17 @@ export function InternalSquadsGridWidget(props: IProps) {
                         uuid: internalSquadUuid
                     }
                 })
+            }
+        })
+    }
+
+    const handleReorder = (reorderedItems: typeof internalSquads) => {
+        reorderInternalSquads({
+            variables: {
+                items: reorderedItems.map((item, index) => ({
+                    uuid: item.uuid,
+                    viewPosition: index
+                }))
             }
         })
     }
@@ -165,32 +153,29 @@ export function InternalSquadsGridWidget(props: IProps) {
         )
     }
 
-    const isHighCount = internalSquads.length > 6
-
     return (
-        <SimpleGrid
-            cols={{
-                base: 1,
-                '800px': 2,
-                '1000px': 3,
-                '1200px': 4,
-                '1800px': 5,
-                '2400px': 6,
-                '3000px': 7
-            }}
-            type="container"
-        >
-            {internalSquads.map((internalSquad, index) => (
+        <VirtualizedDndGrid
+            enableDnd={true}
+            items={internalSquads}
+            onReorder={handleReorder}
+            renderDragOverlay={(internalSquad) => (
                 <InternalSquadCardWidget
                     handleAddToUsers={handleAddToUsers}
                     handleDeleteInternalSquad={handleDeleteInternalSquad}
                     handleRemoveFromUsers={handleRemoveFromUsers}
-                    index={index}
                     internalSquad={internalSquad}
-                    isHighCount={isHighCount}
-                    key={internalSquad.uuid}
+                    isDragOverlay
                 />
-            ))}
-        </SimpleGrid>
+            )}
+            renderItem={(internalSquad) => (
+                <InternalSquadCardWidget
+                    handleAddToUsers={handleAddToUsers}
+                    handleDeleteInternalSquad={handleDeleteInternalSquad}
+                    handleRemoveFromUsers={handleRemoveFromUsers}
+                    internalSquad={internalSquad}
+                />
+            )}
+            useWindowScroll={true}
+        />
     )
 }

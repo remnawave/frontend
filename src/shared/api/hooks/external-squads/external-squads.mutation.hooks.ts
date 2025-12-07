@@ -3,6 +3,7 @@ import {
     CreateExternalSquadCommand,
     DeleteExternalSquadCommand,
     DeleteUsersFromExternalSquadCommand,
+    ReorderExternalSquadCommand,
     UpdateExternalSquadCommand
 } from '@remnawave/backend-contract'
 import { notifications } from '@mantine/notifications'
@@ -107,6 +108,23 @@ export const useDeleteUsersFromExternalSquad = createMutationHook({
         onError: (error) => {
             notifications.show({
                 title: `Remove Users from External Squad`,
+                message:
+                    error instanceof Error ? error.message : `Request failed with unknown error.`,
+                color: 'red'
+            })
+        }
+    }
+})
+
+export const useReorderExternalSquads = createMutationHook({
+    endpoint: ReorderExternalSquadCommand.TSQ_url,
+    bodySchema: ReorderExternalSquadCommand.RequestSchema,
+    responseSchema: ReorderExternalSquadCommand.ResponseSchema,
+    requestMethod: ReorderExternalSquadCommand.endpointDetails.REQUEST_METHOD,
+    rMutationParams: {
+        onError: (error) => {
+            notifications.show({
+                title: `Reorder External Squads`,
                 message:
                     error instanceof Error ? error.message : `Request failed with unknown error.`,
                 color: 'red'

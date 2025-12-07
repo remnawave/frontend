@@ -52,7 +52,9 @@
         "select": "Select",
         "loading": "Loading",
         "success": "Success",
-        "download": "Download"
+        "download": "Download",
+        "search": "Search",
+        "nothing-found": "Nothing found"
     },
     "bandwidth-metrics": {
         "current-year": "Current year",
@@ -412,13 +414,21 @@
         "legacy-options": "Legacy options",
         "allow-insecure": "Allow Insecure",
         "shuffled-hosts-hover-card": "Shuffled hosts will be placed at the top of the list and sorted randomly.",
-        "vless-route-description": "From 0 to 65535, empty to disable",
+        "vless-route-description": "From 1 to 65535, 0/empty to disable",
         "misc-settings": "Misc settings",
         "shuffle-host": "Shuffle Host",
         "mihomo-specific": "Mihomo Specific",
         "enable-x25519mlkem768": "Enable x25519mlkem768",
         "pick-nodes-which-resolved-from-this-host-only-visual-assignment": "Pick nodes which resolved from this host. Only visual assignment.",
-        "nodes": "Nodes"
+        "nodes": "Nodes",
+        "select-a-xray-json-template": "Select a Xray JSON Template",
+        "xray-json-template": "Xray JSON Template",
+        "override-the-xray-json-template": "Override the Xray JSON template which will be used for this host.",
+        "vital-parameters": "Vital Parameters",
+        "exclude-this-host-from-specific-internal-squads": "Exclude this host from specific Internal Squads",
+        "excluded-internal-squads": "Excluded Internal Squads",
+        "keep-sni-blank": "Keep SNI blank",
+        "keep-sni-blank-description": "In some cases, SNI must be left blank. Use this option to force an empty SNI. Note that this option has the highest priority, so it will be applied even if SNI is already set."
     },
     "base-node-form": {
         "country": "Country",
@@ -618,8 +628,7 @@
     },
     "remarks-manager": {
         "widget": {
-            "enter-remark": "Enter remark",
-            "add-remark": "Add remark"
+            "enter-remark": "Enter remark"
         }
     },
     "subscription-settings": {
@@ -642,13 +651,9 @@
             "happ-routing-description-line-2": "A routing link for Happ can be obtained through Remnawave's Happ Routing Builder. The button below will redirect you to the aforementioned page.",
             "configure-happ-routing": "Happ Routing Builder",
             "happ-routing": "Happ routing",
-            "user-status-remarks": "User status remarks",
             "user-status-remarks-description": "The following values will be displayed in the subscription page if the user is expired, limited or disabled.",
             "user-status-remarks-description-line-2": "You can add multiple remarks for each status.",
             "user-status-remarks-description-line-3": "Because expired, limited and disabled users are not able to connect to the server, they will see these remarks in the client instead of receiving an empty subscription.",
-            "expired-users-remarks": "Expired user remarks",
-            "limited-users-remarks": "Limited user remarks",
-            "disabled-users-remarks": "Disabled user remarks",
             "update-settings": "Update settings",
             "enabled": "Enabled",
             "disabled": "Disabled",
@@ -656,11 +661,10 @@
             "profile-webpage-url-description": "Used by some clients. Enabled by default, domain obtained from SUB_PUBLIC_DOMAIN .env variable.",
             "serve-json-at-base-subscription": "Serve JSON at base subscription",
             "serve-json-description": "Serve JSON configurations at the base subscription path (without having to append /json). If the client supports it, it will be served JSON, otherwise it will be served as usual.",
-            "add-username-to-base-subscription": "Add #username to base subscription",
-            "add-username-description": "Append #username to the base subscription path at the subscription route.",
             "subscription-info-description": "Subscription links are supported by many client apps such as Happ, v2RayNG, Streisand, etc.",
             "happ-description-line-1": "Here you can configure settings specific to Happ.",
-            "happ-description-line-2": "These settings will only apply to subscription links that are imported in Happ."
+            "happ-description-line-2": "These settings will only apply to subscription links that are imported in Happ.",
+            "custom-remarks": "Custom remarks"
         },
         "page": {
             "component": {
@@ -672,8 +676,6 @@
     },
     "multi-select-hosts": {
         "feature": {
-            "delete-hosts": "Delete hosts",
-            "are-you-sure-you-want-to-delete-these-hosts": "Are you sure you want to delete these hosts?",
             "set-inbound": "Set inbound",
             "set-port": "Set Port",
             "port": "Port",
@@ -754,7 +756,12 @@
                     "change-active-internal-squads": "Change Active Internal Squads",
                     "specify-internal-squads-that-will-be-assigned-to-the-user": "Specify internal squads that will be assigned to the user",
                     "internal-squads": "Internal squads",
-                    "changes-the-active-internal-squads-for-all-selected-users": "Changes the active internal squads for all selected users"
+                    "changes-the-active-internal-squads-for-all-selected-users": "Changes the active internal squads for all selected users",
+                    "extend-expiration-date": "Extend Expiration Date",
+                    "enter-the-number-of-days-to-extend-the-expiration-date": "Enter the number of days to extend the expiration date",
+                    "extend-days": "Extend Days",
+                    "extend": "Extend",
+                    "extend-expiration-date-description": "Add days to the expiration date for selected users. Days will be added to the current expiration date of each user."
                 }
             }
         },
@@ -795,12 +802,6 @@
             "subscription-links": "Subscription links",
             "loading-subscription-links": "Loading subscription links...",
             "no-available-hosts-found-for-this-user": "No available hosts found for this user"
-        }
-    },
-    "delete-user": {
-        "feature": {
-            "delete-user": "Delete user",
-            "are-you-sure": "Are you sure you want to delete the user? This action is irreversible."
         }
     },
     "user-usage-modal": {
@@ -1060,11 +1061,6 @@
     },
     "internal-squads-grid": {
         "widget": {
-            "delete-internal-squad": "Delete Internal Squad",
-            "delete-internal-squad-confirmation": "Are you sure you want to delete the internal squad \"{{internalSquadName}}\"?",
-            "this-action-cannot-be-undone": "This action cannot be undone.",
-            "remove-users-from-internal-squad-confirmation": "Are you sure you want to remove the users from the internal squad \"{{internalSquadName}}\"?",
-            "add-users-to-internal-squad-confirmation": "Are you sure you want to add the users to the internal squad \"{{internalSquadName}}\"?",
             "no-internal-squads": "No Internal Squads",
             "create-your-first-internal-squad-to-get-started": "Create your first internal squad to get started",
             "delete-squad": "Delete squad",
@@ -1151,9 +1147,6 @@
     },
     "infra-billing-nodes": {
         "widget": {
-            "delete-infra-billing-node": "Delete Infra Billing Node",
-            "delete-infra-billing-node-confirmation": "Are you sure you want to delete this infra billing node?",
-            "this-action-is-irreversible": "This action is irreversible.",
             "add-node": "Add Node",
             "list-of-all-infra-billing-nodes": "List of all infra billing nodes sorted by next billing date",
             "infra-billing-nodes": "Infra Billing Nodes",
@@ -1627,7 +1620,8 @@
                 "default-template-in-use": "Default template in use...",
                 "edit-external-squad": "Edit external squad",
                 "templates": "Templates",
-                "settings": "Settings"
+                "settings": "Settings",
+                "remarks": "Remarks"
             }
         },
         "page": {
@@ -1722,8 +1716,6 @@
     },
     "passkeys-drawer": {
         "component": {
-            "delete-passkey": "Delete Passkey",
-            "delete-passkey-confirmation": "Are you sure you want to delete this passkey? This action cannot be undone.",
             "passkeys": "Passkeys",
             "passkeys-description": "Passkeys allow you to sign in securely without passwords. You can register multiple passkeys across different devices.",
             "active-passkeys": "Active Passkeys",
@@ -1796,5 +1788,59 @@
         "widget": {
             "response-headers": "Headers"
         }
+    },
+    "subscription-hwid-settings": {
+        "widget": {
+            "hwid-card-description": "Carefully review documentation before enabling HWID feature. Not all client applications support this feature.",
+            "hwid-settings": "HWID Settings",
+            "hwid-limit": "HWID Limit",
+            "fallback-device-limit-description": "Enter the maximum number of devices that can be used with a subscription",
+            "fallback-device-limit": "Fallback Device Limit",
+            "max-devices-announce-description": "Enter message that will be displayed when the user has reached the maximum number of devices",
+            "max-devices-announce": "Max Devices Announce",
+            "max-200-characters": "Max. 200 characters",
+            "documentation": "Documentation"
+        }
+    },
+    "external-squads-hwid-settings": {
+        "tab": {
+            "widget": {
+                "hwid-settings-override": "HWID Settings Override",
+                "override-hwid-description": "Override HWID device limit settings for this external squad. When disabled, global subscription settings will be used.",
+                "enable-hwid-override": "Enable HWID Override"
+            }
+        }
+    },
+    "external-squads-custom-remarks": {
+        "widget": {
+            "override-remarks-description": "Override user status remarks for this external squad. When disabled, global subscription settings will be used.",
+            "enable-override": "Enable Override"
+        }
+    },
+    "subscription-user-remarks-card": {
+        "widget": {
+            "user-status": "User status",
+            "empty-hosts": "Empty Hosts",
+            "empty-internal-squads": "Empty Internal Squads"
+        }
+    },
+    "multi-select-nodes": {
+        "feature": {
+            "profile-and-inbounds": "Profile & Inbounds"
+        }
+    },
+    "use-nodes-table-widget": {
+        "online": "Online",
+        "name": "Name",
+        "address": "Address",
+        "traffic-used": "Traffic Used",
+        "config-profile": "Config Profile",
+        "inbounds": "Inbounds",
+        "xray-v": "Xray V.",
+        "node-v": "Node V.",
+        "provider": "Provider",
+        "tags": "Tags",
+        "total-ram": "Total RAM",
+        "cpu-model": "CPU Model"
     }
 }

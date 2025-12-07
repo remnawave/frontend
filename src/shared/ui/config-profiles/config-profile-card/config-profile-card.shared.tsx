@@ -30,7 +30,6 @@ export const ConfigProfileCardShared = memo((props: IProps) => {
         onInboundToggle,
         onSelectAllInbounds,
         onUnselectAllInbounds,
-
         isOpen
     } = props
 

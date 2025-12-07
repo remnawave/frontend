@@ -49,11 +49,11 @@ export const CreateNodeStep3Status = ({ nodeUuid, onClose }: IProps) => {
             return
         }
 
-        const { isConnected, isXrayRunning, isConnecting, lastStatusMessage } = node
+        const { isConnected, isConnecting, lastStatusMessage } = node
 
         setErrorMessage(lastStatusMessage)
 
-        if (isConnected && isXrayRunning && !isConnecting) {
+        if (isConnected && !isConnecting) {
             setStatus(STATUS.CONNECTED)
 
             return
@@ -65,7 +65,7 @@ export const CreateNodeStep3Status = ({ nodeUuid, onClose }: IProps) => {
             return
         }
 
-        if (lastStatusMessage && !isXrayRunning) {
+        if (lastStatusMessage && !isConnected) {
             setStatus(STATUS.ERROR)
         }
     }, [node, isLoading])

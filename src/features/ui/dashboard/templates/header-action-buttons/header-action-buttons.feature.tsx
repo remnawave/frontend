@@ -23,6 +23,7 @@ import {
     useCreateSubscriptionTemplate,
     useGetSubscriptionTemplates
 } from '@shared/api/hooks'
+import { UniversalSpotlightActionIconShared } from '@shared/ui/universal-spotlight'
 import { ROUTES } from '@shared/constants'
 import { queryClient } from '@shared/api'
 
@@ -73,6 +74,8 @@ export const TemplatesHeaderActionButtonsFeature = (props: IProps) => {
 
     return (
         <Group grow preventGrowOverflow={false} wrap="wrap">
+            <UniversalSpotlightActionIconShared />
+
             <ActionIconGroup>
                 <Tooltip label={t('header-action-buttons.feature.update-templates')} withArrow>
                     <ActionIcon

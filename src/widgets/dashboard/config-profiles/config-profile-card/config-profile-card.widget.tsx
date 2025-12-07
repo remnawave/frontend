@@ -22,11 +22,11 @@ import { notifications } from '@mantine/notifications'
 import { useDisclosure } from '@mantine/hooks'
 import { useTranslation } from 'react-i18next'
 import { modals } from '@mantine/modals'
-import { motion } from 'framer-motion'
 import clsx from 'clsx'
 
 import { useGetComputedConfigProfile } from '@shared/api/hooks/config-profiles/config-profiles.query.hooks'
 import { MODALS, useModalsStoreOpenWithData } from '@entities/dashboard/modal-store'
+import { WithDndSortable } from '@shared/hocs/with-dnd-sortable'
 import { formatInt } from '@shared/utils/misc'
 import { XrayLogo } from '@shared/ui/logos'
 import { ROUTES } from '@shared/constants'
@@ -36,12 +36,11 @@ import classes from './config-profile-card.module.css'
 interface IProps {
     configProfile: GetConfigProfilesCommand.Response['response']['configProfiles'][number]
     handleDeleteConfigProfile: (configProfileUuid: string) => void
-    index: number
-    isHighCount: boolean
+    isDragOverlay?: boolean
 }
 
 export function ConfigProfileCardWidget(props: IProps) {
-    const { configProfile, isHighCount, index, handleDeleteConfigProfile } = props
+    const { configProfile, handleDeleteConfigProfile, isDragOverlay = false } = props
     const { t } = useTranslation()
 
     const [opened, handlers] = useDisclosure(false)
@@ -144,18 +143,10 @@ export function ConfigProfileCardWidget(props: IProps) {
     }
 
     return (
-        <motion.div
-            animate={{ opacity: 1, y: 0 }}
-            className={clsx(classes.cardWrapper, {
-                [classes.inactive]: !isActive
-            })}
-            initial={{ opacity: 0, y: isHighCount ? 0 : 20 }}
-            key={configProfile.uuid}
-            transition={{
-                duration: 0.3,
-                delay: isHighCount ? 0.1 : index * 0.05,
-                ease: 'easeOut'
-            }}
+        <WithDndSortable
+            dragHandlePosition="top-right"
+            id={configProfile.uuid}
+            isDragOverlay={isDragOverlay}
         >
             <Card className={classes.card} h="100%" p="xl" shadow="sm" withBorder>
                 <Box
@@ -191,7 +182,7 @@ export function ConfigProfileCardWidget(props: IProps) {
                                     className={classes.title}
                                     ff="monospace"
                                     fw={700}
-                                    lineClamp={2}
+                                    lineClamp={1}
                                     size="lg"
                                     title={configProfile.name}
                                 >
@@ -399,6 +390,6 @@ export function ConfigProfileCardWidget(props: IProps) {
                     </Group>
                 </Stack>
             </Card>
-        </motion.div>
+        </WithDndSortable>
     )
 }

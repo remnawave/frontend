@@ -3,10 +3,17 @@ import { zodResolver } from 'mantine-form-zod-resolver'
 import { notifications } from '@mantine/notifications'
 import { useTranslation } from 'react-i18next'
 import { Drawer, Text } from '@mantine/core'
-import { useEffect, useState } from 'react'
 import { useForm } from '@mantine/form'
+import { useState } from 'react'
 
-import { QueryKeys, useCreateHost, useGetConfigProfiles, useGetNodes } from '@shared/api/hooks'
+import {
+    QueryKeys,
+    useCreateHost,
+    useGetConfigProfiles,
+    useGetInternalSquads,
+    useGetNodes,
+    useGetSubscriptionTemplates
+} from '@shared/api/hooks'
 import { MODALS, useModalClose, useModalState } from '@entities/dashboard/modal-store'
 import { BaseHostForm } from '@shared/ui/forms/hosts/base-host-form'
 import { queryClient } from '@shared/api'
@@ -19,6 +26,8 @@ export const CreateHostModalWidget = () => {
 
     const { data: configProfiles } = useGetConfigProfiles()
     const { data: nodes } = useGetNodes()
+    const { data: internalSquads } = useGetInternalSquads()
+    const { data: templates } = useGetSubscriptionTemplates()
 
     const [advancedOpened, setAdvancedOpened] = useState(false)
 
@@ -31,7 +40,18 @@ export const CreateHostModalWidget = () => {
                 form.setFieldValue('vlessRouteId', null)
             }
         },
-        validate: zodResolver(CreateHostCommand.RequestSchema)
+        validate: zodResolver(CreateHostCommand.RequestSchema),
+
+        initialValues: {
+            securityLayer: SECURITY_LAYERS.DEFAULT,
+            port: 0,
+            remark: '',
+            address: '',
+            inbound: {
+                configProfileUuid: '',
+                configProfileInboundUuid: ''
+            }
+        }
     })
 
     const handleClose = () => {
@@ -79,10 +99,6 @@ export const CreateHostModalWidget = () => {
         return null
     })
 
-    useEffect(() => {
-        form.setFieldValue('securityLayer', SECURITY_LAYERS.DEFAULT)
-    }, [form])
-
     form.watch('inbound.configProfileInboundUuid', ({ value }) => {
         const { configProfileUuid } = form.getValues().inbound
         if (!configProfileUuid) {
@@ -116,9 +132,11 @@ export const CreateHostModalWidget = () => {
                 configProfiles={configProfiles?.configProfiles ?? []}
                 form={form}
                 handleSubmit={handleSubmit}
+                internalSquads={internalSquads?.internalSquads ?? []}
                 isSubmitting={isCreateHostPending}
                 nodes={nodes!}
                 setAdvancedOpened={setAdvancedOpened}
+                subscriptionTemplates={templates?.templates ?? []}
             />
         </Drawer>
     )

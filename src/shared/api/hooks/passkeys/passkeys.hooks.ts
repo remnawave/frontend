@@ -1,4 +1,8 @@
-import { DeletePasskeyCommand, VerifyPasskeyRegistrationCommand } from '@remnawave/backend-contract'
+import {
+    DeletePasskeyCommand,
+    UpdatePasskeyCommand,
+    VerifyPasskeyRegistrationCommand
+} from '@remnawave/backend-contract'
 import { notifications } from '@mantine/notifications'
 
 import { createMutationHook } from '../../tsq-helpers'
@@ -29,6 +33,22 @@ export const useDeletePasskey = createMutationHook({
             notifications.show({
                 title: 'Passkey Deleted',
                 message: 'Passkey deleted successfully',
+                color: 'teal'
+            })
+        }
+    }
+})
+
+export const useUpdatePasskey = createMutationHook({
+    endpoint: UpdatePasskeyCommand.TSQ_url,
+    bodySchema: UpdatePasskeyCommand.RequestSchema,
+    responseSchema: UpdatePasskeyCommand.ResponseSchema,
+    requestMethod: UpdatePasskeyCommand.endpointDetails.REQUEST_METHOD,
+    rMutationParams: {
+        onSuccess: () => {
+            notifications.show({
+                title: 'Passkey Updated',
+                message: 'Passkey updated successfully',
                 color: 'teal'
             })
         }

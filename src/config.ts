@@ -6,9 +6,9 @@ export const app = {
     githubOrg: 'https://github.com/remnawave',
     githubDonation: 'https://github.com/remnawave/backend#donation',
     configEditor: {
-        wasmUrl: '/main.wasm',
-        wasmJsUrl: '/wasm_exec.js',
-        jsonSchemaUrl: '/xray.schema.json',
-        jsonSchemaCnUrl: '/xray.schema.cn.json'
+        wasmUrl: '/assets/main.wasm',
+        wasmJsUrl: '/assets/wasm_exec.js',
+        jsonSchemaUrl: '/assets/xray.schema.json',
+        jsonSchemaCnUrl: '/assets/xray.schema.cn.json'
     }
 }

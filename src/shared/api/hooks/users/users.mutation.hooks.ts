@@ -1,8 +1,10 @@
 import {
+    BulkAllExtendExpirationDateCommand,
     BulkAllResetTrafficUsersCommand,
     BulkAllUpdateUsersCommand,
     BulkDeleteUsersByStatusCommand,
     BulkDeleteUsersCommand,
+    BulkExtendExpirationDateCommand,
     BulkResetTrafficUsersCommand,
     BulkRevokeUsersSubscriptionCommand,
     BulkUpdateUsersCommand,
@@ -354,6 +356,54 @@ export const useBulkAllResetTrafficUsers = createMutationHook({
         onError: (error) => {
             notifications.show({
                 title: `Bulk All Reset Traffic Users`,
+                message:
+                    error instanceof Error ? error.message : `Request failed with unknown error.`,
+                color: 'red'
+            })
+        }
+    }
+})
+
+export const useBulkExtendUsersExpirationDate = createMutationHook({
+    endpoint: BulkExtendExpirationDateCommand.TSQ_url,
+    bodySchema: BulkExtendExpirationDateCommand.RequestSchema,
+    responseSchema: BulkExtendExpirationDateCommand.ResponseSchema,
+    requestMethod: BulkExtendExpirationDateCommand.endpointDetails.REQUEST_METHOD,
+    rMutationParams: {
+        onSuccess: () => {
+            notifications.show({
+                title: 'Success',
+                message: 'Users expiration date extended successfully',
+                color: 'teal'
+            })
+        },
+        onError: (error) => {
+            notifications.show({
+                title: `Bulk Extend Users Expiration Date`,
+                message:
+                    error instanceof Error ? error.message : `Request failed with unknown error.`,
+                color: 'red'
+            })
+        }
+    }
+})
+
+export const useBulkAllExtendUsersExpirationDate = createMutationHook({
+    endpoint: BulkAllExtendExpirationDateCommand.TSQ_url,
+    bodySchema: BulkAllExtendExpirationDateCommand.RequestSchema,
+    responseSchema: BulkAllExtendExpirationDateCommand.ResponseSchema,
+    requestMethod: BulkAllExtendExpirationDateCommand.endpointDetails.REQUEST_METHOD,
+    rMutationParams: {
+        onSuccess: () => {
+            notifications.show({
+                title: 'Success',
+                message: 'All users expiration date extended successfully',
+                color: 'teal'
+            })
+        },
+        onError: (error) => {
+            notifications.show({
+                title: `Bulk All Extend Users Expiration Date`,
                 message:
                     error instanceof Error ? error.message : `Request failed with unknown error.`,
                 color: 'red'

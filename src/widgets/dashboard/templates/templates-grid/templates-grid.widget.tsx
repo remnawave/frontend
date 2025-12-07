@@ -1,9 +1,13 @@
 import { PiBracketsAngle } from 'react-icons/pi'
-import { SimpleGrid } from '@mantine/core'
 import { modals } from '@mantine/modals'
 import { useMemo } from 'react'
 
-import { QueryKeys, useDeleteSubscriptionTemplate } from '@shared/api/hooks'
+import {
+    QueryKeys,
+    useDeleteSubscriptionTemplate,
+    useReorderSubscriptionTemplates
+} from '@shared/api/hooks'
+import { VirtualizedDndGrid } from '@shared/ui/virtualized-dnd-grid'
 import { SingboxLogo } from '@shared/ui/logos/singbox-logo'
 import { MihomoLogo } from '@shared/ui/logos/mihomo-logo'
 import { StashLogo } from '@shared/ui/logos/stash-logo'
@@ -12,8 +16,6 @@ import { XrayLogo } from '@shared/ui/logos/xray-logo'
 
 import { TemplatesCardWidget } from '../template-card/templates-card.widget'
 import { IProps } from './interfaces'
-
-// TODO: Add i18n
 
 export function TemplatesGridWidget(props: IProps) {
     const { templates, templateTitle, type } = props
@@ -24,6 +26,16 @@ export function TemplatesGridWidget(props: IProps) {
                 queryClient.refetchQueries({
                     queryKey: QueryKeys.subscriptionTemplate.getSubscriptionTemplates.queryKey
                 })
+            }
+        }
+    })
+    const { mutate: reorderTemplates } = useReorderSubscriptionTemplates({
+        mutationFns: {
+            onSuccess: (data) => {
+                queryClient.setQueryData(
+                    QueryKeys.subscriptionTemplate.getSubscriptionTemplates.queryKey,
+                    data
+                )
             }
         }
     })
@@ -49,7 +61,16 @@ export function TemplatesGridWidget(props: IProps) {
         })
     }
 
-    const isHighCount = templates.length > 6
+    const handleReorder = (reorderedItems: typeof templates) => {
+        reorderTemplates({
+            variables: {
+                items: reorderedItems.map((item, index) => ({
+                    uuid: item.uuid,
+                    viewPosition: index
+                }))
+            }
+        })
+    }
 
     const themeLogo = useMemo(() => {
         switch (type) {
@@ -68,29 +89,29 @@ export function TemplatesGridWidget(props: IProps) {
     }, [type])
 
     return (
-        <SimpleGrid
-            cols={{
-                base: 1,
-                '800px': 2,
-                '1000px': 3,
-                '1200px': 4,
-                '1800px': 5,
-                '2400px': 6,
-                '3000px': 7
-            }}
-            type="container"
-        >
-            {templates.map((template, index) => (
+        <VirtualizedDndGrid
+            enableDnd={true}
+            items={templates}
+            key={`templates-grid-widget-${type}`}
+            onReorder={handleReorder}
+            renderDragOverlay={(template) => (
                 <TemplatesCardWidget
                     handleDeleteTemplate={handleDeleteTemplate}
-                    index={index}
-                    isHighCount={isHighCount}
-                    key={template.uuid}
+                    isDragOverlay
                     template={template}
                     templateTitle={templateTitle}
                     themeLogo={themeLogo}
                 />
-            ))}
-        </SimpleGrid>
+            )}
+            renderItem={(template) => (
+                <TemplatesCardWidget
+                    handleDeleteTemplate={handleDeleteTemplate}
+                    template={template}
+                    templateTitle={templateTitle}
+                    themeLogo={themeLogo}
+                />
+            )}
+            useWindowScroll={true}
+        />
     )
 }

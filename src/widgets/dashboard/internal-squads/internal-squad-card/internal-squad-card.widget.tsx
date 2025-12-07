@@ -22,10 +22,10 @@ import { PiCheck, PiCopy, PiPencil, PiTag, PiTrashDuotone, PiUsers } from 'react
 import { GetInternalSquadsCommand } from '@remnawave/backend-contract'
 import { useDisclosure } from '@mantine/hooks'
 import { useTranslation } from 'react-i18next'
-import { motion } from 'motion/react'
 import clsx from 'clsx'
 
 import { MODALS, useModalsStoreOpenWithData } from '@entities/dashboard/modal-store'
+import { WithDndSortable } from '@shared/hocs/with-dnd-sortable'
 import { formatInt } from '@shared/utils/misc'
 
 import classes from './internal-squad-card.module.css'
@@ -34,9 +34,8 @@ interface IProps {
     handleAddToUsers: (internalSquadUuid: string, internalSquadName: string) => void
     handleDeleteInternalSquad: (internalSquadUuid: string, internalSquadName: string) => void
     handleRemoveFromUsers: (internalSquadUuid: string, internalSquadName: string) => void
-    index: number
     internalSquad: GetInternalSquadsCommand.Response['response']['internalSquads'][number]
-    isHighCount: boolean
+    isDragOverlay?: boolean
 }
 
 export function InternalSquadCardWidget(props: IProps) {
@@ -44,9 +43,8 @@ export function InternalSquadCardWidget(props: IProps) {
         handleAddToUsers,
         handleDeleteInternalSquad,
         handleRemoveFromUsers,
-        index,
         internalSquad,
-        isHighCount
+        isDragOverlay = false
     } = props
 
     const { t } = useTranslation()
@@ -58,22 +56,16 @@ export function InternalSquadCardWidget(props: IProps) {
     const isActive = membersCount > 0
 
     const handleOpenInbounds = () => {
-        openModalWithData(MODALS.INTERNAL_SQUAD_SHOW_INBOUNDS, internalSquad)
+        openModalWithData(MODALS.INTERNAL_SQUAD_SHOW_INBOUNDS, {
+            squadUuid: internalSquad.uuid
+        })
     }
 
     return (
-        <motion.div
-            animate={{ opacity: 1, y: 0 }}
-            className={clsx(classes.cardWrapper, {
-                [classes.inactive]: !isActive
-            })}
-            initial={{ opacity: 0, y: isHighCount ? 0 : 20 }}
-            key={internalSquad.uuid}
-            transition={{
-                duration: 0.3,
-                delay: isHighCount ? 0.1 : index * 0.05,
-                ease: 'easeOut'
-            }}
+        <WithDndSortable
+            dragHandlePosition="top-right"
+            id={internalSquad.uuid}
+            isDragOverlay={isDragOverlay}
         >
             <Card className={classes.card} h="100%" p="xl" shadow="sm" withBorder>
                 <Box
@@ -106,7 +98,7 @@ export function InternalSquadCardWidget(props: IProps) {
                                     className={classes.title}
                                     ff="monospace"
                                     fw={700}
-                                    lineClamp={2}
+                                    lineClamp={1}
                                     size="lg"
                                     title={internalSquad.name}
                                 >
@@ -267,6 +259,6 @@ export function InternalSquadCardWidget(props: IProps) {
                     </Group>
                 </Stack>
             </Card>
-        </motion.div>
+        </WithDndSortable>
     )
 }

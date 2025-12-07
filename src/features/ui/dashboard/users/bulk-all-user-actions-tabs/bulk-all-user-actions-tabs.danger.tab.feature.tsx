@@ -1,4 +1,4 @@
-import { Alert, Button, Group, Paper, px, Stack, Text } from '@mantine/core'
+import { Alert, Button, Divider, Group, Paper, Stack, Text } from '@mantine/core'
 import { PiTrash, PiWarning } from 'react-icons/pi'
 import { useTranslation } from 'react-i18next'
 import { modals } from '@mantine/modals'
@@ -20,41 +20,46 @@ export const BulkAllUserActionsDangerTabFeature = (props: IProps) => {
                 {t('bulk-all-user-actions-tabs.danger.tab.feature.danger-zone-description')}
             </Alert>
 
-            <Paper p="md" withBorder>
-                <Stack>
-                    <Group justify="apart">
-                        <Group>
-                            <PiTrash color="var(--mantine-color-red-6)" size={px('1.2rem')} />
-                            <Text>
+            <Paper bg="dark.6" p="md" shadow="sm" withBorder>
+                <Stack gap="md">
+                    <Group align="center" justify="space-between" wrap="nowrap">
+                        <Stack gap={4}>
+                            <Group gap="xs">
+                                <PiTrash color="var(--mantine-color-red-6)" size={20} />
+                                <Text fw={600} size="md">
+                                    {t(
+                                        'bulk-all-user-actions-tabs.danger.tab.feature.delete-users-by-status'
+                                    )}
+                                </Text>
+                            </Group>
+                            <Text c="dimmed" size="sm">
                                 {t(
-                                    'bulk-all-user-actions-tabs.danger.tab.feature.delete-users-by-status'
+                                    'bulk-all-user-actions-tabs.danger.tab.feature.delete-users-by-status-description'
                                 )}
                             </Text>
-                        </Group>
-                        <Button
-                            color="red.6"
-                            onClick={() => {
-                                modals.open({
-                                    title: t('common.confirm-action'),
-                                    centered: true,
-                                    children: (
-                                        <DeleteAllUsersByStatusFeature
-                                            cleanUpDrawer={cleanUpDrawer}
-                                        />
-                                    )
-                                })
-                            }}
-                            variant="light"
-                        >
-                            {t('common.delete')}
-                        </Button>
+                        </Stack>
                     </Group>
-                    <Text c="dimmed" size="xs">
-                        {t(
-                            'bulk-all-user-actions-tabs.danger.tab.feature.delete-users-by-status-description'
-                        )}
-                    </Text>
                 </Stack>
+
+                <Divider mb="md" mt="xs" />
+
+                <Group justify="flex-end">
+                    <Button
+                        color="red.6"
+                        onClick={() => {
+                            modals.open({
+                                title: t('common.confirm-action'),
+                                centered: true,
+                                children: (
+                                    <DeleteAllUsersByStatusFeature cleanUpDrawer={cleanUpDrawer} />
+                                )
+                            })
+                        }}
+                        variant="light"
+                    >
+                        {t('common.delete')}
+                    </Button>
+                </Group>
             </Paper>
         </Stack>
     )
