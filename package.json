@@ -2,7 +2,7 @@
   "name": "@remnawave/frontend",
   "private": false,
   "type": "module",
-  "version": "2.3.0",
+  "version": "2.3.1",
   "license": "AGPL-3.0-only",
   "author": "REMNAWAVE <github.com/remnawave>",
   "homepage": "https://github.com/remnawave",
