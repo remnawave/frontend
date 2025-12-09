@@ -1,6 +1,7 @@
 import {
     GetAllHwidDevicesCommand,
     GetHwidDevicesStatsCommand,
+    GetTopUsersByHwidDevicesCommand,
     GetUserHwidDevicesCommand
 } from '@remnawave/backend-contract'
 import { createQueryKeys } from '@lukemorales/query-key-factory'
@@ -15,6 +16,9 @@ export const hwidUserDevicesQueryKeys = createQueryKeys('hwid-user-devices', {
         queryKey: [route]
     }),
     getAllHwidDevices: (filters: GetAllHwidDevicesCommand.RequestQuery) => ({
+        queryKey: [filters]
+    }),
+    getTopUsersByHwidDevices: (filters: GetTopUsersByHwidDevicesCommand.RequestQuery) => ({
         queryKey: [filters]
     }),
     getHwidDevicesStats: {
@@ -61,4 +65,17 @@ export const useGetHwidDevicesStats = createGetQueryHook({
         refetchInterval: REFETCH_INTERVAL
     },
     errorHandler: (error) => errorHandler(error, 'Get HWIDs Devices Stats')
+})
+
+export const useGetTopUsersByHwidDevices = createGetQueryHook({
+    endpoint: GetTopUsersByHwidDevicesCommand.TSQ_url,
+    responseSchema: GetTopUsersByHwidDevicesCommand.ResponseSchema,
+    requestQuerySchema: GetTopUsersByHwidDevicesCommand.RequestQuerySchema,
+    getQueryKey: ({ query }) => hwidUserDevicesQueryKeys.getTopUsersByHwidDevices(query!).queryKey,
+    rQueryParams: {
+        placeholderData: keepPreviousData,
+        staleTime: STALE_TIME,
+        refetchInterval: REFETCH_INTERVAL
+    },
+    errorHandler: (error) => errorHandler(error, 'Get Top Users by HWIDs Devices')
 })
