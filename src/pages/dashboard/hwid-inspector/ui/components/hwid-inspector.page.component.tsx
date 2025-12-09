@@ -5,6 +5,7 @@ import { Stack } from '@mantine/core'
 
 import { UserAccessibleNodesModalWidget } from '@widgets/dashboard/users/user-accessible-nodes-modal/user-accessible-nodes.modal.widget'
 import { DetailedUserInfoDrawerWidget } from '@widgets/dashboard/users/detailed-user-info-drawer/detailed-user-info-drawer.widget'
+import { HwidInspectorLeaderboardWidget } from '@widgets/dashboard/hwid-inspector/hwid-inspector-leaderboard'
 import { HwidInspectorTableWidget } from '@widgets/dashboard/hwid-inspector/hwid-inspector-table'
 import { MobileWarningOverlay } from '@shared/ui/mobile-warning-overlay/mobile-warning-overlay'
 import { HwidInspectorMetrics } from '@widgets/dashboard/users/hwid-inspector-metrics'
@@ -20,6 +21,14 @@ export default function HwidInspectorPageComponent() {
             <Stack>
                 {isMobile && <MobileWarningOverlay />}
                 <HwidInspectorMetrics />
+
+                <motion.div
+                    animate={{ opacity: 1 }}
+                    initial={{ opacity: 0 }}
+                    transition={{ duration: 0.5, ease: [0, 0.71, 0.2, 1.01] }}
+                >
+                    <HwidInspectorLeaderboardWidget />
+                </motion.div>
 
                 <motion.div
                     animate={{ opacity: 1 }}
