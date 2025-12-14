@@ -20,6 +20,7 @@
     background: rgba(255, 255, 255, 0.02);
     border: 1px solid rgba(255, 255, 255, 0.08);
     backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     transition: all 0.3s ease;
 }
 
@@ -31,6 +32,7 @@
     background: rgba(255, 255, 255, 0.015);
     border: 1px solid rgba(255, 255, 255, 0.06);
     backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     transition: all 0.3s ease;
 }
 
@@ -70,6 +72,7 @@
     top: 0;
     z-index: 100;
     backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     background: rgba(22, 27, 35, 0.9);
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     margin: calc(var(--mantine-spacing-xl) * -1);

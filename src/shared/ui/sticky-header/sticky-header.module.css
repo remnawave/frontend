@@ -7,6 +7,7 @@
     padding: var(--mantine-spacing-md);
 
     backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
 
     @media (min-width: $mantine-breakpoint-md) {
         padding-left: 1.25rem;
