@@ -72,10 +72,13 @@ export function SubpageConfigVisualEditorWidget(props: Props) {
     const { mutate: updateSubscriptionPageConfig, isPending: isUpdatingSubscriptionPageConfig } =
         useUpdateSubscriptionPageConfig({
             mutationFns: {
-                onSuccess: () => {
-                    queryClient.refetchQueries({
-                        queryKey: QueryKeys.subpageConfigs.getSubscriptionPageConfigs.queryKey
-                    })
+                onSuccess: (data) => {
+                    queryClient.setQueryData(
+                        QueryKeys.subpageConfigs.getSubscriptionPageConfig({
+                            uuid: configResponse.uuid
+                        }).queryKey,
+                        data
+                    )
                 }
             }
         })
