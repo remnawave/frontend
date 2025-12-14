@@ -1727,7 +1727,15 @@
             "add-platform": "Add platform",
             "no-platforms-configured": "No platforms configured",
             "add-a-platform-to-get-started": "Add a platform to get started",
-            "validation-error": "Validation Error"
+            "validation-error": "Validation Error",
+            "manage-your-svg-icons": "Manage your SVG icons",
+            "open-svg-library": "Open SVG Library",
+            "cards": "Cards",
+            "hidden": "Hidden",
+            "accordion": "Accordion",
+            "minimal": "Minimal",
+            "timeline": "Timeline",
+            "installation-guides-design": "Installation Guides Design"
         },
         "subpage-config-saved-line-1": "To apply the changes, please restart the Remnawave Subscription-page Docker container.",
         "subpage-config-saved-line-2": "For example, you can use the following command in your terminal:"

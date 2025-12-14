@@ -4,7 +4,8 @@ import {
     TSubscriptionPageLocales,
     TSubscriptionPagePlatformKey,
     TSubscriptionPagePlatformSchema,
-    TSubscriptionPageRawConfig
+    TSubscriptionPageRawConfig,
+    TSubscriptionPageUiConfig
 } from '@remnawave/subscription-page-types'
 import {
     Accordion,
@@ -373,8 +374,10 @@ export function SubpageConfigVisualEditorWidget(props: Props) {
                                     IconComponent={IconPhoto}
                                     iconSize={20}
                                     iconVariant="gradient-violet"
-                                    subtitle="Manage your SVG icons"
-                                    title="SVG Library"
+                                    subtitle={t(
+                                        'subpage-config-visual-editor.widget.manage-your-svg-icons'
+                                    )}
+                                    title={t('svg-library-modal.component.svg-library')}
                                     titleOrder={5}
                                 />
                                 <Badge color="violet" size="sm" variant="light">
@@ -391,7 +394,7 @@ export function SubpageConfigVisualEditorWidget(props: Props) {
                                 onClick={openSvgLibrary}
                                 variant="default"
                             >
-                                Open SVG Library
+                                {t('subpage-config-visual-editor.widget.open-svg-library')}
                             </Button>
                         </Stack>
                     </Card>
@@ -419,6 +422,14 @@ export function SubpageConfigVisualEditorWidget(props: Props) {
                                     {
                                         label: t('subpage-config-visual-editor.widget.expanded'),
                                         value: 'expanded'
+                                    },
+                                    {
+                                        label: t('subpage-config-visual-editor.widget.cards'),
+                                        value: 'cards'
+                                    },
+                                    {
+                                        label: t('subpage-config-visual-editor.widget.hidden'),
+                                        value: 'hidden'
                                     }
                                 ]}
                                 label={t(
@@ -431,12 +442,54 @@ export function SubpageConfigVisualEditorWidget(props: Props) {
                                             ...configState.uiConfig,
                                             subscriptionInfo: {
                                                 block:
-                                                    (v as 'collapsed' | 'expanded') || 'collapsed'
+                                                    (v as TSubscriptionPageUiConfig['subscriptionInfo']['block']) ||
+                                                    'collapsed'
                                             }
                                         }
                                     })
                                 }
                                 value={configState.uiConfig.subscriptionInfo.block}
+                            />
+
+                            <Select
+                                allowDeselect={false}
+                                classNames={{ input: styles.selectDark }}
+                                data={[
+                                    {
+                                        label: t('subpage-config-visual-editor.widget.cards'),
+                                        value: 'cards'
+                                    },
+                                    {
+                                        label: t('subpage-config-visual-editor.widget.accordion'),
+                                        value: 'accordion'
+                                    },
+                                    {
+                                        label: t('subpage-config-visual-editor.widget.minimal'),
+                                        value: 'minimal'
+                                    },
+                                    {
+                                        label: t('subpage-config-visual-editor.widget.timeline'),
+                                        value: 'timeline'
+                                    }
+                                ]}
+                                label={t(
+                                    'subpage-config-visual-editor.widget.installation-guides-design'
+                                )}
+                                onChange={(v) =>
+                                    setConfigState({
+                                        ...configState,
+                                        uiConfig: {
+                                            ...configState.uiConfig,
+                                            installationGuides: {
+                                                ...configState.uiConfig.installationGuides,
+                                                block:
+                                                    (v as TSubscriptionPageUiConfig['installationGuides']['block']) ||
+                                                    'cards'
+                                            }
+                                        }
+                                    })
+                                }
+                                value={configState.uiConfig.installationGuides.block || 'cards'}
                             />
 
                             <LocalizedTextEditor
@@ -449,7 +502,10 @@ export function SubpageConfigVisualEditorWidget(props: Props) {
                                         ...configState,
                                         uiConfig: {
                                             ...configState.uiConfig,
-                                            installationGuides: { headerText }
+                                            installationGuides: {
+                                                ...configState.uiConfig.installationGuides,
+                                                headerText
+                                            }
                                         }
                                     })
                                 }
