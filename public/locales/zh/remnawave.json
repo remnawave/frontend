@@ -1726,7 +1726,8 @@
             "platforms": "平台",
             "add-platform": "添加平台",
             "no-platforms-configured": "未配置平台",
-            "add-a-platform-to-get-started": "添加一个平台以开始"
+            "add-a-platform-to-get-started": "添加一个平台以开始",
+            "validation-error": "Validation Error"
         },
         "subpage-config-saved-line-1": "若要应用更改，请重启Remnawave 订阅页面容器。",
         "subpage-config-saved-line-2": "例如，您可以在终端中使用以下命令："
@@ -1786,6 +1787,25 @@
     "svg-icon-input": {
         "component": {
             "svg-icon": "SVG 图标"
+        }
+    },
+    "svg-icon-select": {
+        "component": {
+            "select-icon": "Select icon...",
+            "no-icons-in-library": "No icons in library"
+        }
+    },
+    "svg-library-modal": {
+        "component": {
+            "svg-library": "SVG Library",
+            "add-icon": "Add Icon",
+            "add-icons-to-use-them-in-blocks-and-buttons": "Add icons to use them in blocks and buttons",
+            "edit-icon": "Edit Icon",
+            "only-latin-characters-no-spaces": "Only latin characters, no spaces",
+            "only-latin-characters-allowed": "Only latin characters allowed",
+            "icon-key": "Icon Key",
+            "svg-code": "SVG Code",
+            "preview": "Preview"
         }
     }
 }
