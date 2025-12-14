@@ -16,7 +16,7 @@
         "happ-routing-builder": "مسیرساز برای Happ",
         "templates": "قالب‌ها",
         "subscription": "اشتراک",
-        "subscription-page-builder": "سازنده صفحه اشتراک",
+        "subscription-page": "Subscription Page",
         "config-profiles": "پروفایل‌های کانفیگ",
         "internal-squads": "اسکوادهای داخلی",
         "external-squads": "اسکوادهای خارجی",
@@ -54,7 +54,8 @@
         "success": "با موفقیت انجام شد",
         "download": "دانلود",
         "search": "جستجو",
-        "nothing-found": "چیزی یافت نشد"
+        "nothing-found": "چیزی یافت نشد",
+        "name": "Name"
     },
     "bandwidth-metrics": {
         "current-year": "امسال",
@@ -554,78 +555,6 @@
             "registration": "ثبت نام"
         }
     },
-    "happ-routing-builder": {
-        "widget": {
-            "copy-link": "کپی کردن لینک",
-            "visual-editor": "ویرایشگر بصری",
-            "enter-the-configuration-name": "اسم تنظیمات روتینگ را وارد کنید",
-            "name": "نام",
-            "russia": "روسیه",
-            "proxy-all-traffic-except-rules": "پروکسی کردن همه ترافیک به جز قوانین مشخص شده",
-            "direct-all-traffic-except-rules": "مسیریابی مستقیم همه ترافیک به جز قوانین مشخص شده",
-            "proxy-all-traffic-except-rules-or-direct-all-traffic-except-rules": "قوانین مشخص شده به چه صورت اعمال شوند؟",
-            "fake-dns-description": "فعالسازی یا غیرفعالسازی FakeDNS. پیشنهاد می‌شود درصورت استفاده از DoU این مورد را فعال کنید.",
-            "choose-doh-dns-over-https-or-dou-dns-over-udp": "استفاده از DoU (DNS over UDP) یا DoH (DNS over HTTPS) برای سرور DNS ریموت",
-            "remote-dns-type": "نوع DNS ریموت",
-            "domain-name-for-doh": "دامنه سرور DoH",
-            "remote-dns-domain": "دامنه سرور DNS ریموت",
-            "server-ip-for-doh-or-dou": "آدرس آیپی برای DoH یا DoU",
-            "remote-dns-ip": "آیپی DNS ریموت",
-            "domestic-dns-type-description": "استفاده از DoU یا DoH برای سرور DNS محلی",
-            "domestic-dns-type": "نوع DNS محلی",
-            "domain-name-for-doh-0": "دامنه سرور DoH",
-            "domestic-dns-domain": "دامنه سرور DNS محلی",
-            "server-ip-for-doh-or-dou-0": "آیپی سرور DNS محلی برای DoU یا DoH",
-            "domestic-dns-ip": "آیپی DNS محلی",
-            "geoip-description": "لینک فایل geoip.dat. درصورت تمایل به استفاده از فایل پیشفرض، خالی بگذارید.",
-            "geoip-url": "لینک GeoIP",
-            "geosite-description": "لینک فایل geosite.dat. درصورت تمایل به استفاده از فایل پیشفرض، خالی بگذارید.",
-            "geosite-url": "لینک GeoSite",
-            "unix-timestamp-description": "تایم استمپ آخرین به‌روزرسانی فایل‌های GeoIP و GeoSite. درصورت در دسترس نبودن خالی بگذارید.",
-            "last-updated": "آخرین به‌روزرسانی",
-            "select-the-domain-processing-strategy": "استراتژی پردازش دامنه را انتخاب کنید.",
-            "domain-strategy": "استراتژی دامنه",
-            "dns-hosts-description": "مقادیر دستی DNS مورد نظر را به این صورت وارد نمایید: { \"example.com\": \"1.2.3.4\", \"test.org\": \"8.8.8.8\" }",
-            "dns-hosts": "هاست‌های DNS",
-            "sites-that-will-use-direct-connection": "دامنه‌هایی که به صورت مستقیم وصل خواهند شد.",
-            "direct-sites": "دامنه‌های مستقیم",
-            "ip-addresses-that-will-use-direct-connection": "آیپی‌هایی که به صورت مستقیم وصل خواهند شد.",
-            "direct-ip": "آیپی‌های مستقیم",
-            "sites-that-will-be-proxied": "دامنه‌هایی که پروکسی خواهند شد.",
-            "proxy-sites": "دامنه‌های پروکسی‌شده",
-            "ip-addresses-that-will-be-proxied": "آیپی‌هایی که پروکسی خواهند شد.",
-            "proxy-ip": "آیپی‌های پروکسی‌شده",
-            "sites-that-will-be-blocked": "دامنه‌هایی که باید بلاک شوند.",
-            "blocked-sites": "دامنه‌های بلاک شده",
-            "ip-addresses-that-will-be-blocked": "آیپی‌هایی که باید بلاک شوند.",
-            "blocked-ips": "آیپی‌های بلاک شده",
-            "encoded-happ-link": "لینک Happ ایجاد شده",
-            "show-qr": "نمایش QR",
-            "invalid-base64-or-happ-link": "لینک Happ یا Base64 نامعتبر است",
-            "import-configuration": "وارد کردن تنظیمات",
-            "paste-a-happ-routing-link-or-base64-encoded-config": "لینک Happ یا تنظیمات رمزنگاری شده Base64 را وارد کنید",
-            "import-from-base64": "وارد کردن از Base64",
-            "paste-base64-or-happ-link-here": "اینجا لینک Happ یا Base64 را وارد کنید",
-            "decode": "رمزگشایی",
-            "basic-configuration": "تنظیمات پایه",
-            "remote-dns-settings": "تنظیمات DNS ریموت (خارج)",
-            "domestic-dns-settings": "تنظیمات DNS محلی",
-            "dns-hosts-0": "هاست‌های DNS",
-            "direct-routing": "روتینگ مستقیم",
-            "proxy-routing": "روتینگ پروکسی",
-            "block-routing": "روتینگ بلاک (مسدودسازی ترافیک)",
-            "code-editor": "ویرایشگر کد"
-        },
-        "page": {
-            "component": {
-                "about-happ": "درباره Happ",
-                "happ-is-multiplatform-xray-client": "Happ یک کلاینت چندسکویی برای Xray می‌باشد.",
-                "about-happ-description-line-2": "در این بخش می‌توانید قوانین مسیریابی را تنظیم کرده و به صورت لینک Happ استخراج کنید",
-                "about-happ-description-line-3": "در تنظیمات اشتراک می‌توانید در قسمت مسیریابی Happ این لینک را وارد نمایید.",
-                "check-out-happ-website": "وبسایت Happ"
-            }
-        }
-    },
     "remarks-manager": {
         "widget": {
             "enter-remark": "ریمارک را وارد نمایید"
@@ -870,66 +799,6 @@
             "first-connected-at": "اولین اتصال",
             "active-internal-squads": "اسکوادهای داخلی فعال"
         }
-    },
-    "subscription-page-builder-header": {
-        "widget": {
-            "load-default": "بارگذاری پیش‌فرض",
-            "export-config": "صادر کردن پیکربندی",
-            "upload-config": "بارگذاری پیکربندی",
-            "subscription-page-builder": "سازنده صفحه اشتراک",
-            "how-to-use-it": "چگونه از این ابزار استفاده کنیم؟",
-            "description-line-1": "می‌توانید از این سازنده برای پیکربندی کلاینت‌ها و راهنماهای موجود برای صفحه اشتراک Remnawave استفاده کنید.",
-            "description-line-2": "پس از ایجاد اولین پیکربندی خود، می‌توانید آن را دانلود کرده و به کانتینر صفحه اشتراک متصل کنید.",
-            "description-line-3": "روی «بارگذاری پیش‌فرض» کلیک کنید تا پیکربندی مرجع را از مخزن GitHub دریافت کنید.",
-            "learn-more": "بیشتر بدانید"
-        }
-    },
-    "subscription-page-builder": {
-        "page": {
-            "component": {
-                "failed-to-parse-config": "تجزیه فایل پیکربندی ناموفق بود. فرمت فایل را بررسی کنید.",
-                "failed-to-load-default-config-check-your-internet-connection": "بارگذاری پیکربندی پیش‌فرض ناموفق بود. اتصال اینترنت خود را بررسی کنید.",
-                "no-apps-configured-for-this-platform": "هیچ برنامه‌ای برای این پلتفرم اضافه نشده است",
-                "add-app": "افزودن برنامه",
-                "select-an-app-from-the-sidebar-or-add-a-new-one": "یک برنامه را از نوار کناری انتخاب کنید یا یک برنامه جدید اضافه کنید",
-                "validation-errors": "خطاهای اعتبارسنجی",
-                "invalid-configuration": "پیکربندی نامعتبر",
-                "the-configuration-did-not-pass-validation": "پیکربندی از اعتبارسنجی عبور نکرد.",
-                "configuration-settings": "تنظیمات پیکربندی",
-                "platform-apps": "نرم‌افزارهای پلتفرم",
-                "move-up": "انتقال به بالا",
-                "move-down": "انتقال به پایین"
-            }
-        }
-    },
-    "app-form": {
-        "component": {
-            "delete-app": "حذف برنامه",
-            "app-id": "شناسه برنامه",
-            "app-name": "اسم برنامه",
-            "url-scheme": "طرح URL",
-            "featured-app": "برنامه ویژه",
-            "need-base64-encoding": "نیاز به رمزنگاری Base64",
-            "installation-step": "مرحله نصب",
-            "description": "توضیحات",
-            "buttons": "دکمه‌ها",
-            "additional-before-subscription-step": "مرحله اضافی قبل از اشتراک",
-            "remove-step": "حذف مرحله",
-            "add-step": "افزودن مرحله",
-            "title": "عنوان",
-            "add-subscription-step": "افزودن مرحله اشتراک",
-            "additional-after-subscription-step": "مرحله اضافی پس از اشتراک",
-            "connect-and-use-step": "مرحله اتصال و استفاده"
-        }
-    },
-    "button-fields": {
-        "button": "دکمه",
-        "add-button": "افزودن دکمه",
-        "remove-button": "حذف دکمه",
-        "button-link": "لینک دکمه",
-        "button-text": "متن دکمه",
-        "enter-button-text": "متن دکمه را وارد کنید",
-        "english": "انگلیسی"
     },
     "subscription-tabs": {
         "widget": {
@@ -1451,17 +1320,6 @@
             "new-name": "نام جدید"
         }
     },
-    "branding-settings": {
-        "component": {
-            "branding-settings": "تنظیمات برندینگ",
-            "brand-name": "اسم برند",
-            "the-name-that-will-be-displayed-on-the-subscription-page": "اسمی که در صفحه اشتراک نشان داده خواهد شد",
-            "url-to-your-brand-logo-image": "آدرس تصویر لوگوی برند شما",
-            "logo-url": "ادرس لوگو",
-            "link-to-your-support-or-help-page": "لینک صفحه پشتیبانی شما",
-            "support-url": "آدرس پشتیبانی"
-        }
-    },
     "internal-squad-accessible-nodes": {
         "modal": {
             "widget": {
@@ -1732,6 +1590,7 @@
             "branding-settings": "تنظیمات برندینگ",
             "the-title-that-will-be-displayed-on-login-page": "عنوانی که در صفحه ورود نشان داده خواهد شد",
             "brand-name": "اسم برند",
+            "logo-url": "Logo URL",
             "the-url-to-your-brand-logo-image": "آدرس تصویر لوگوی برند شما",
             "colored-title-format": "فرمت عنوان رنگی",
             "colored-title-description": "می‌توانید کلمه‌ها را به صورت تکی به کمک نوشتار \"{color}کلمه\" رنگ‌آمیزی کنید. این ویژگی از رنگ‌های HEX (#RRGGBB) و اسم رنگ‌های MantineUI پشتیبانی می‌کند.",
@@ -1842,5 +1701,91 @@
         "tags": "برچسب‌ها",
         "total-ram": "کل RAM",
         "cpu-model": "مدل پردازنده"
+    },
+    "subpage-config-visual-editor": {
+        "widget": {
+            "configuration-saved-successfully": "Configuration saved successfully",
+            "edit-your-subscription-page-configuration": "Edit your subscription page configuration",
+            "subpage-editor": "Subpage Editor",
+            "load-from-github": "Load from GitHub",
+            "brand-appearance": "Brand appearance",
+            "branding": "Branding",
+            "brand-title": "Brand Title",
+            "your-brand-name": "Your Brand Name",
+            "logo-url": "Logo URL",
+            "support-url": "Support URL",
+            "additional-languages": "Additional languages",
+            "localization": "Localization",
+            "ui-configuration": "UI Configuration",
+            "collapsed": "Collapsed",
+            "expanded": "Expanded",
+            "subscription-info-block-design": "Subscription Info Block Design",
+            "installation-guides-header": "Installation Guides Header",
+            "connection-keys-header": "Connection Keys Header",
+            "configure-apps-for-each-platform": "Configure apps for each platform",
+            "platforms": "Platforms",
+            "add-platform": "Add platform",
+            "no-platforms-configured": "No platforms configured",
+            "add-a-platform-to-get-started": "Add a platform to get started"
+        },
+        "subpage-config-saved-line-1": "To apply the changes, please restart the Remnawave Subscription-page Docker container.",
+        "subpage-config-saved-line-2": "For example, you can use the following command in your terminal:"
+    },
+    "app-editor-drawer-content": {
+        "component": {
+            "app-settings": "App Settings",
+            "featured": "Featured",
+            "app-name": "App Name",
+            "blocks": "Blocks",
+            "add-block": "Add Block"
+        }
+    },
+    "block-editor": {
+        "modal": {
+            "component": {
+                "untitled-block": "Untitled Block",
+                "edit-block": "Edit Block",
+                "block-settings": "Block Settings",
+                "svg-icon": "SVG Icon",
+                "icon-color": "Icon Color",
+                "icon-color-help": "You can use any Mantine theme color ({{colors}}) or any valid HEX color (for example: #009688).",
+                "title": "Title",
+                "description": "Description",
+                "buttons": "Buttons",
+                "add-button": "Add Button"
+            }
+        }
+    },
+    "button-editor": {
+        "component": {
+            "link": "Link",
+            "external-link": "External Link",
+            "subscription-link": "Subscription Link",
+            "type": "Type",
+            "svg-icon": "SVG Icon",
+            "button-text": "Button Text"
+        }
+    },
+    "localized-text-editor": {
+        "component": {
+            "not-set": "Not set",
+            "required-default-language": "Required (default language)",
+            "done": "Done"
+        }
+    },
+    "platform-editor": {
+        "component": {
+            "platform-svg-icon": "Platform SVG Icon",
+            "display-name": "Display Name",
+            "apps": "Apps",
+            "add-app": "Add App",
+            "unnamed-app": "Unnamed App",
+            "edit-app": "Edit App"
+        }
+    },
+    "svg-icon-input": {
+        "component": {
+            "svg-icon": "SVG Icon"
+        }
     }
 }
