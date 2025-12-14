@@ -16,7 +16,7 @@
         "happ-routing-builder": "Happ 路由编辑器",
         "templates": "模板",
         "subscription": "订阅",
-        "subscription-page-builder": "订阅应用配置",
+        "subscription-page": "Subscription Page",
         "config-profiles": "配置文件",
         "internal-squads": "内部分组",
         "external-squads": "外部分组",
@@ -54,7 +54,8 @@
         "success": "成功",
         "download": "下载",
         "search": "搜索",
-        "nothing-found": "未找到"
+        "nothing-found": "未找到",
+        "name": "Name"
     },
     "bandwidth-metrics": {
         "current-year": "今年",
@@ -554,78 +555,6 @@
             "registration": "注册"
         }
     },
-    "happ-routing-builder": {
-        "widget": {
-            "copy-link": "复制链接",
-            "visual-editor": "可视化编辑器",
-            "enter-the-configuration-name": "输入配置名称",
-            "name": "名称",
-            "russia": "俄罗斯",
-            "proxy-all-traffic-except-rules": "代理所有流量（规则除外）",
-            "direct-all-traffic-except-rules": "直连所有流量（规则除外）",
-            "proxy-all-traffic-except-rules-or-direct-all-traffic-except-rules": "代理所有流量（规则除外），或直连所有流量（规则除外）",
-            "fake-dns-description": "启用或禁用 FakeDNS。使用 DoU 时建议启用。",
-            "choose-doh-dns-over-https-or-dou-dns-over-udp": "远程 DNS 使用 DoH (HTTPS 上的 DNS) 或者 DoU (UDP 上的 DNS)",
-            "remote-dns-type": "远程 DNS 类型",
-            "domain-name-for-doh": "DNS 服务器域名（如果使用 DoH）",
-            "remote-dns-domain": "远程 DNS 域名",
-            "server-ip-for-doh-or-dou": "DoH 或 DoU 的 DNS 服务器 IP 地址",
-            "remote-dns-ip": "远程 DNS IP 地址",
-            "domestic-dns-type-description": "国内 DNS 是使用 DoH (HTTPS 上的 DNS) 还是 DoU (UDP 上的 DNS)",
-            "domestic-dns-type": "国内 DNS 类型",
-            "domain-name-for-doh-0": "域名（如果使用 DoH）",
-            "domestic-dns-domain": "国内 DNS 域名",
-            "server-ip-for-doh-or-dou-0": "DoH 或 DoU 的 DNS 服务器 IP 地址",
-            "domestic-dns-ip": "国内 DNS IP",
-            "geoip-description": "geoip.dat 文件的链接。如果留空，将使用默认文件。",
-            "geoip-url": "GeoIP URL",
-            "geosite-description": "geosite.dat 文件的链接。如果留空，将使用默认文件。",
-            "geosite-url": "GeoSite URL",
-            "unix-timestamp-description": "输入 geoip 和 geosite 文件最后更新的 Unix 时间戳。如果不可用请留空。",
-            "last-updated": "最后更新时间",
-            "select-the-domain-processing-strategy": "选择域名处理策略。",
-            "domain-strategy": "域名策略",
-            "dns-hosts-description": "使用此格式输入 DNS 主机：{ \"example.com\": \"1.2.3.4\", \"test.org\": \"8.8.8.8\" }",
-            "dns-hosts": "DNS 主机",
-            "sites-that-will-use-direct-connection": "不走代理且直连的域名.",
-            "direct-sites": "直连域名",
-            "ip-addresses-that-will-use-direct-connection": "不走代理且直连的 IP 地址",
-            "direct-ip": "直连 IP",
-            "sites-that-will-be-proxied": "强制走代理的域名.",
-            "proxy-sites": "走代理的域名",
-            "ip-addresses-that-will-be-proxied": "走代理的 IP 地址.",
-            "proxy-ip": "走代理的 IP",
-            "sites-that-will-be-blocked": "禁止连接的域名.",
-            "blocked-sites": "禁止的站点",
-            "ip-addresses-that-will-be-blocked": "禁止连接的 IP 地址.",
-            "blocked-ips": "禁止的 IP",
-            "encoded-happ-link": "编码后的 Happ 链接",
-            "show-qr": "显示二维码",
-            "invalid-base64-or-happ-link": "无效的 Base64 或 Happ 链接",
-            "import-configuration": "导入配置",
-            "paste-a-happ-routing-link-or-base64-encoded-config": "粘贴一个 Happ 路由链接或 Base64 编码的配置",
-            "import-from-base64": "从 Base64 导入",
-            "paste-base64-or-happ-link-here": "在此处粘贴 Base64 或 Happ 链接",
-            "decode": "解码",
-            "basic-configuration": "基本配置",
-            "remote-dns-settings": "远程 DNS 设置",
-            "domestic-dns-settings": "国内 DNS 设置",
-            "dns-hosts-0": "DNS 主机",
-            "direct-routing": "直连路由",
-            "proxy-routing": "代理路由",
-            "block-routing": "禁止路由",
-            "code-editor": "代码编辑器"
-        },
-        "page": {
-            "component": {
-                "about-happ": "关于 Happ",
-                "happ-is-multiplatform-xray-client": "Happ 是一个多平台 Xray 客户端。",
-                "about-happ-description-line-2": "您可以在此处配置路由规则，然后进行编码并用作 Happ 链接。",
-                "about-happ-description-line-3": "要在您的订阅链接中使用给定的 Happ 路由配置，请打开“订阅设置”并更改“Happ 路由”部分。",
-                "check-out-happ-website": "访问 Happ 网站"
-            }
-        }
-    },
     "remarks-manager": {
         "widget": {
             "enter-remark": "输入备注"
@@ -870,66 +799,6 @@
             "first-connected-at": "首次连接于",
             "active-internal-squads": "激活的的内部分组"
         }
-    },
-    "subscription-page-builder-header": {
-        "widget": {
-            "load-default": "加载默认配置",
-            "export-config": "导出配置",
-            "upload-config": "上传配置",
-            "subscription-page-builder": "订阅页面编辑器",
-            "how-to-use-it": "如何使用？",
-            "description-line-1": "您可以使用此编辑器为 Remnawave 订阅页面配置可用的客户端和使用指南。",
-            "description-line-2": "创建所需的配置后，您可以导出并下载它，并将配置文件挂载到您的 subscription-page 容器。",
-            "description-line-3": "点击 \"加载默认配置\" 以从 GitHub 仓库获取参考配置。",
-            "learn-more": "了解更多"
-        }
-    },
-    "subscription-page-builder": {
-        "page": {
-            "component": {
-                "failed-to-parse-config": "解析配置文件失败。请检查文件格式。",
-                "failed-to-load-default-config-check-your-internet-connection": "加载默认配置失败。请检查您的互联网连接。",
-                "no-apps-configured-for-this-platform": "此平台未配置应用",
-                "add-app": "添加应用",
-                "select-an-app-from-the-sidebar-or-add-a-new-one": "从侧边栏选择一个应用或添加一个新应用",
-                "validation-errors": "校验错误",
-                "invalid-configuration": "无效配置",
-                "the-configuration-did-not-pass-validation": "配置未通过校验。",
-                "configuration-settings": "配置设置",
-                "platform-apps": "平台应用程序",
-                "move-up": "向上移动",
-                "move-down": "向下移动"
-            }
-        }
-    },
-    "app-form": {
-        "component": {
-            "delete-app": "删除应用",
-            "app-id": "应用 ID",
-            "app-name": "应用名称",
-            "url-scheme": "URL 方案",
-            "featured-app": "推荐应用",
-            "need-base64-encoding": "需要 Base64 编码",
-            "installation-step": "安装步骤",
-            "description": "描述",
-            "buttons": "按钮",
-            "additional-before-subscription-step": "订阅前附加步骤",
-            "remove-step": "移除步骤",
-            "add-step": "添加步骤",
-            "title": "标题",
-            "add-subscription-step": "添加订阅步骤",
-            "additional-after-subscription-step": "订阅后附加步骤",
-            "connect-and-use-step": "连接和使用步骤"
-        }
-    },
-    "button-fields": {
-        "button": "按钮",
-        "add-button": "添加按钮",
-        "remove-button": "移除按钮",
-        "button-link": "按钮链接",
-        "button-text": "按钮文本",
-        "enter-button-text": "输入按钮文本...",
-        "english": "英语"
     },
     "subscription-tabs": {
         "widget": {
@@ -1451,17 +1320,6 @@
             "new-name": "新名称"
         }
     },
-    "branding-settings": {
-        "component": {
-            "branding-settings": "商标设置",
-            "brand-name": "品牌名称",
-            "the-name-that-will-be-displayed-on-the-subscription-page": "将显示在订阅页面的名称",
-            "url-to-your-brand-logo-image": "品牌标志图片的 URL",
-            "logo-url": "Logo地址",
-            "link-to-your-support-or-help-page": "链接到您的支持或帮助页面",
-            "support-url": "支持 URL"
-        }
-    },
     "internal-squad-accessible-nodes": {
         "modal": {
             "widget": {
@@ -1732,6 +1590,7 @@
             "branding-settings": "商标设置",
             "the-title-that-will-be-displayed-on-login-page": "登录页面显示的标题",
             "brand-name": "品牌名称",
+            "logo-url": "Logo URL",
             "the-url-to-your-brand-logo-image": "品牌标志图片的 URL",
             "colored-title-format": "彩色标题格式",
             "colored-title-description": "您可以使用 {color}文字 语法为单个单词着色。支持十六进制颜色 (#RRGGBB) 和 MantineUI 颜色名称。",
@@ -1842,5 +1701,91 @@
         "tags": "标签",
         "total-ram": "内存总数",
         "cpu-model": "CPU 型号"
+    },
+    "subpage-config-visual-editor": {
+        "widget": {
+            "configuration-saved-successfully": "Configuration saved successfully",
+            "edit-your-subscription-page-configuration": "Edit your subscription page configuration",
+            "subpage-editor": "Subpage Editor",
+            "load-from-github": "Load from GitHub",
+            "brand-appearance": "Brand appearance",
+            "branding": "Branding",
+            "brand-title": "Brand Title",
+            "your-brand-name": "Your Brand Name",
+            "logo-url": "Logo URL",
+            "support-url": "Support URL",
+            "additional-languages": "Additional languages",
+            "localization": "Localization",
+            "ui-configuration": "UI Configuration",
+            "collapsed": "Collapsed",
+            "expanded": "Expanded",
+            "subscription-info-block-design": "Subscription Info Block Design",
+            "installation-guides-header": "Installation Guides Header",
+            "connection-keys-header": "Connection Keys Header",
+            "configure-apps-for-each-platform": "Configure apps for each platform",
+            "platforms": "Platforms",
+            "add-platform": "Add platform",
+            "no-platforms-configured": "No platforms configured",
+            "add-a-platform-to-get-started": "Add a platform to get started"
+        },
+        "subpage-config-saved-line-1": "To apply the changes, please restart the Remnawave Subscription-page Docker container.",
+        "subpage-config-saved-line-2": "For example, you can use the following command in your terminal:"
+    },
+    "app-editor-drawer-content": {
+        "component": {
+            "app-settings": "App Settings",
+            "featured": "Featured",
+            "app-name": "App Name",
+            "blocks": "Blocks",
+            "add-block": "Add Block"
+        }
+    },
+    "block-editor": {
+        "modal": {
+            "component": {
+                "untitled-block": "Untitled Block",
+                "edit-block": "Edit Block",
+                "block-settings": "Block Settings",
+                "svg-icon": "SVG Icon",
+                "icon-color": "Icon Color",
+                "icon-color-help": "You can use any Mantine theme color ({{colors}}) or any valid HEX color (for example: #009688).",
+                "title": "Title",
+                "description": "Description",
+                "buttons": "Buttons",
+                "add-button": "Add Button"
+            }
+        }
+    },
+    "button-editor": {
+        "component": {
+            "link": "Link",
+            "external-link": "External Link",
+            "subscription-link": "Subscription Link",
+            "type": "Type",
+            "svg-icon": "SVG Icon",
+            "button-text": "Button Text"
+        }
+    },
+    "localized-text-editor": {
+        "component": {
+            "not-set": "Not set",
+            "required-default-language": "Required (default language)",
+            "done": "Done"
+        }
+    },
+    "platform-editor": {
+        "component": {
+            "platform-svg-icon": "Platform SVG Icon",
+            "display-name": "Display Name",
+            "apps": "Apps",
+            "add-app": "Add App",
+            "unnamed-app": "Unnamed App",
+            "edit-app": "Edit App"
+        }
+    },
+    "svg-icon-input": {
+        "component": {
+            "svg-icon": "SVG Icon"
+        }
     }
 }
