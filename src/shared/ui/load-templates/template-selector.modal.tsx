@@ -7,6 +7,7 @@ import {
     IDownloadableSubscriptionTemplate,
     IDownloadableSubscriptionTemplateList,
     SRR_TEMPLATES_LIST_LINK,
+    SUBPAGE_CONFIG_TEMPLATE_LIST_LINK,
     SUBSCRIPTION_TEMPLATE_LIST_LINK,
     XRAY_CORE_TEMPLATE_LIST_LINK
 } from '@shared/constants/templates'
@@ -25,6 +26,8 @@ export const TemplateDownloadModal = (props: TemplateSelectorModalProps) => {
         templatesUrl = SUBSCRIPTION_TEMPLATE_LIST_LINK
     } else if (editorType === 'XRAY_CORE') {
         templatesUrl = XRAY_CORE_TEMPLATE_LIST_LINK
+    } else if (editorType === 'SUBPAGE_CONFIG') {
+        templatesUrl = SUBPAGE_CONFIG_TEMPLATE_LIST_LINK
     }
 
     const {

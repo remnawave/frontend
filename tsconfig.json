@@ -58,10 +58,7 @@
   },
   "include": [
     "src",
-    "client.d.ts",
-    "global.d.ts",
     "@types",
-    "telegram.d.ts"
   ],
   "references": [
     {

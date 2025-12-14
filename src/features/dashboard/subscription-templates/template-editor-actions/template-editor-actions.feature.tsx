@@ -47,11 +47,11 @@ export function TemplateEditorActionsFeature(props: Props) {
         }
     })
 
-    const { openDownloadModal } = useDownloadTemplate(
-        template.templateType,
-        editorRef,
-        'SUBSCRIPTION'
-    )
+    const { openDownloadModal } = useDownloadTemplate({
+        editorType: 'SUBSCRIPTION',
+        templateType: template.templateType,
+        editorRef
+    })
 
     const handleSave = () => {
         if (!editorRef.current) return

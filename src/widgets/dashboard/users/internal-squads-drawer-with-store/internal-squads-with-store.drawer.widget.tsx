@@ -32,6 +32,7 @@ import {
 } from '@shared/api/hooks'
 import { ConfigProfileCardShared } from '@shared/ui/config-profiles/config-profile-card/config-profile-card.shared'
 import { MODALS, useModalClose, useModalState } from '@entities/dashboard/modal-store'
+import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { LoaderModalShared } from '@shared/ui/loader-modal'
 import { queryClient } from '@shared/api/query-client'
 import { formatInt } from '@shared/utils/misc'
@@ -498,11 +499,16 @@ export const InternalSquadsDrawerWithStore = () => {
             keepMounted={true}
             onClose={close}
             opened={isOpen}
-            overlayProps={{ backgroundOpacity: 0.6, blur: 0 }}
             padding="md"
             position="right"
             size="480px"
-            title={t('internal-squads.drawer.widget.edit-internal-squad')}
+            title={
+                <BaseOverlayHeader
+                    IconComponent={TbCirclesRelation}
+                    iconVariant="gradient-teal"
+                    title={t('internal-squads.drawer.widget.edit-internal-squad')}
+                />
+            }
         >
             {isLoading ? (
                 <LoaderModalShared h="80vh" text="Loading..." w="100%" />

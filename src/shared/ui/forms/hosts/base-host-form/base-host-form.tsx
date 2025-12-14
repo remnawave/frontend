@@ -51,7 +51,6 @@ import {
     BASIC_XHTTP_EXTRA_PARAMS,
     PASTE_BASIC_XHTTP_EXTRA_PARAMS
 } from '@shared/constants'
-import { HappLogo } from '@pages/dashboard/utils/happ-routing-builder/ui/components/happ-routing-builder.page.component'
 import { HostSelectInboundFeature } from '@features/ui/dashboard/hosts/host-select-inbound/host-select-inbound.feature'
 import { HostTagsInputWidget } from '@widgets/dashboard/hosts/host-tags-input/host-tags-input'
 import { emojiFlag, resolveCountryCode } from '@shared/utils/misc/resolve-country-code'
@@ -61,6 +60,7 @@ import { TemplateInfoPopoverShared } from '@shared/ui/popovers'
 import { DrawerFooter } from '@shared/ui/drawer-footer'
 import { handleFormErrors } from '@shared/utils/misc'
 import { XrayLogo } from '@shared/ui/logos/xray-logo'
+import { HappLogo } from '@shared/ui/logos'
 
 import classes from './HostTabs.module.css'
 import { IProps } from './interfaces'

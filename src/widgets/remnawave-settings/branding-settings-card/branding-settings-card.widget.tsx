@@ -217,7 +217,7 @@ export const BrandingSettingsCardWidget = (props: IProps) => {
                                     'branding-settings-card.widget.the-url-to-your-brand-logo-image'
                                 )}
                                 key={form.key('brandingSettings.logoUrl')}
-                                label={t('branding-settings.component.logo-url')}
+                                label={t('branding-settings-card.widget.logo-url')}
                                 leftSection={<TbLink size={16} />}
                                 placeholder="https://example.com/logo.png"
                                 {...form.getInputProps('brandingSettings.logoUrl')}

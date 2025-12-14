@@ -23,8 +23,7 @@ import { useTranslation } from 'react-i18next'
 import { useHotkeys } from '@mantine/hooks'
 import { useState } from 'react'
 
-import { HappLogo } from '@pages/dashboard/utils/happ-routing-builder/ui/components/happ-routing-builder.page.component'
-import { MihomoLogo, SingboxLogo, StashLogo, XrayLogo } from '@shared/ui/logos'
+import { HappLogo, MihomoLogo, SingboxLogo, StashLogo, XrayLogo } from '@shared/ui/logos'
 import { ROUTES } from '@shared/constants'
 import { Logo } from '@shared/ui'
 
@@ -199,6 +198,12 @@ export const useMenuSections = (): MenuItem[] => {
                     href: ROUTES.DASHBOARD.MANAGEMENT.RESPONSE_RULES,
                     icon: TbRoute,
                     id: 'response-rules'
+                },
+                {
+                    name: 'Subscription Page',
+                    href: ROUTES.DASHBOARD.SUBPAGE_CONFIGS.ROOT,
+                    icon: PiArrowsInCardinalFill,
+                    id: 'subscription-page'
                 }
             ]
         },
@@ -226,15 +231,10 @@ export const useMenuSections = (): MenuItem[] => {
             section: [
                 {
                     name: t('constants.happ-routing-builder'),
-                    href: ROUTES.DASHBOARD.UTILS.HAPP_ROUTING_BUILDER,
+                    href: 'https://routing.happ.su',
                     icon: HappLogo,
-                    id: 'happ-routing-builder'
-                },
-                {
-                    name: 'Subscription Page',
-                    href: ROUTES.DASHBOARD.UTILS.SUBSCRIPTION_PAGE_BUILDER,
-                    icon: PiArrowsInCardinalFill,
-                    id: 'subscription-page-builder'
+                    id: 'happ-routing-builder',
+                    newTab: true
                 }
             ]
         }

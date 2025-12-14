@@ -1,8 +1,10 @@
 import { createTheme } from '@mantine/core'
 
+import { variantColorResolver } from './colors-resolver'
 import components from './overrides'
 
 export const theme = createTheme({
+    variantColorResolver,
     components,
     cursorType: 'pointer',
     fontFamily:

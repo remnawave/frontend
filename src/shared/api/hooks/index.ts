@@ -36,6 +36,9 @@ export * from './remnawave-settings/remnawave-settings.query.hooks'
 export * from './snippets/snippets.mutation.hooks'
 export * from './snippets/snippets.query.hooks'
 
+export * from './subpage-configs/subpage-configs.mutation.hooks'
+export * from './subpage-configs/subpage-configs.query.hooks'
+
 export * from './subscription-request-history/subscription-request-history.query.hooks'
 export * from './subscription-settings/subscription-settings.mutation.hooks'
 
@@ -46,6 +49,6 @@ export * from './subscription-template/subscription-template.query.hooks'
 export * from './system/system.mutation.hooks'
 
 export * from './system/system.query.hooks'
-export * from './users/users.mutation.hooks'
 
+export * from './users/users.mutation.hooks'
 export * from './users/users.query.hooks'

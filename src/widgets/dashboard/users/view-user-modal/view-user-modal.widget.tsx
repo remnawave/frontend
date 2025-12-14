@@ -5,6 +5,7 @@ import { zodResolver } from 'mantine-form-zod-resolver'
 import { TbDots, TbServerCog } from 'react-icons/tb'
 import { useTranslation } from 'react-i18next'
 import { useMediaQuery } from '@mantine/hooks'
+import { IconUser } from '@tabler/icons-react'
 import { useEffect, useMemo } from 'react'
 import { modals } from '@mantine/modals'
 import { useForm } from '@mantine/form'
@@ -42,6 +43,7 @@ import { ResetUsageUserFeature } from '@features/ui/dashboard/users/reset-usage-
 import { MODALS, useModalsStoreOpenWithData } from '@entities/dashboard/modal-store'
 import { GetUserUsageFeature } from '@features/ui/dashboard/users/get-user-usage'
 import { DeleteUserFeature } from '@features/ui/dashboard/users/delete-user'
+import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { bytesToGbUtil, gbToBytesUtil } from '@shared/utils/bytes'
 import { LoaderModalShared } from '@shared/ui/loader-modal'
 import { handleFormErrors } from '@shared/utils/misc'
@@ -237,7 +239,13 @@ export const ViewUserModal = () => {
             onExitTransitionEnd={handleClose}
             opened={isViewUserModalOpen}
             size="1000px"
-            title={t('view-user-modal.widget.edit-user-headline')}
+            title={
+                <BaseOverlayHeader
+                    IconComponent={IconUser}
+                    iconVariant="gradient-cyan"
+                    title={t('view-user-modal.widget.edit-user-headline')}
+                />
+            }
             transitionProps={isMobile ? { transition: 'fade', duration: 200 } : undefined}
         >
             {isUserLoading || isTagsLoading || !user ? (

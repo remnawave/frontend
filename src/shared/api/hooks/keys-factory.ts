@@ -8,6 +8,7 @@ import { hwidUserDevicesQueryKeys } from './hwid-user-devices/hwid-user-devices.
 import { configProfilesQueryKeys } from './config-profiles/config-profiles.query.hooks'
 import { internalSquadsQueryKeys } from './internal-squads/internal-squads.query.hooks'
 import { externalSquadsQueryKeys } from './external-squads/external-squads.query.hooks'
+import { subpageConfigsQueryKeys } from './subpage-configs/subpage-configs.query.hooks'
 import { infraBillingQueryKeys } from './infra-billing/infra-billing.query.hooks'
 import { apiTokensQueryKeys } from './api-tokens/api-tokens.query.hooks'
 import { snippetsQueryKeys } from './snippets/snippets.query.hooks'
@@ -35,7 +36,8 @@ export const QueryKeys = mergeQueryKeys(
     snippetsQueryKeys,
     externalSquadsQueryKeys,
     remnawaveSettingsQueryKeys,
-    passkeysQueryKeys
+    passkeysQueryKeys,
+    subpageConfigsQueryKeys
 )
 
 export type TQueryKeys = inferQueryKeyStore<typeof QueryKeys>

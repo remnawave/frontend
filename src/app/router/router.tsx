@@ -6,9 +6,9 @@ import {
     RouterProvider
 } from 'react-router-dom'
 
-import { SubscriptionPageBuilderConnector } from '@pages/dashboard/utils/subscription-page-builder/ui/connectors/subscription-page-builder.page.connector'
-import { HappRoutingBuilderPageConnector } from '@pages/dashboard/utils/happ-routing-builder/ui/connectors/happ-routing-builder.page.connector'
+import { SubpageConfigEditorPageConnector } from '@pages/dashboard/subpage-config/ui/connectors/subpage-config-editor-page.connector'
 import { ConfigProfileByUuidPageConnector } from '@pages/dashboard/config-profiles/connectors/config-profile-by-uuid.page.connector'
+import { SubpageConfigBasePageConnector } from '@pages/dashboard/subpage-config/ui/connectors/subpage-config-base-page.connector'
 import { InternalSquadsPageConnector } from '@pages/dashboard/internal-squads/connectors/internal-squads.page.connector'
 import { InfraBillingPageConnector } from '@pages/dashboard/crm/infra-billing/connectors/infra-billing.page.connector'
 import { ResponseRulesPageConnector } from '@pages/dashboard/response-rules/connectors/response-rules.page.connector'
@@ -140,30 +140,22 @@ const router = createBrowserRouter(
                         />
                     </Route>
 
+                    <Route path={ROUTES.DASHBOARD.SUBPAGE_CONFIGS.ROOT}>
+                        <Route
+                            element={<SubpageConfigBasePageConnector />}
+                            path={ROUTES.DASHBOARD.SUBPAGE_CONFIGS.ROOT}
+                        />
+
+                        <Route
+                            element={<SubpageConfigEditorPageConnector />}
+                            path={ROUTES.DASHBOARD.SUBPAGE_CONFIGS.SUBPAGE_CONFIG_BY_UUID}
+                        />
+                    </Route>
+
                     <Route path={ROUTES.DASHBOARD.CRM.ROOT}>
                         <Route
                             element={<InfraBillingPageConnector />}
                             path={ROUTES.DASHBOARD.CRM.INFRA_BILLING}
-                        />
-                    </Route>
-
-                    <Route path={ROUTES.DASHBOARD.UTILS.ROOT}>
-                        <Route
-                            element={
-                                <Navigate
-                                    replace
-                                    to={ROUTES.DASHBOARD.UTILS.HAPP_ROUTING_BUILDER}
-                                />
-                            }
-                            index
-                        />
-                        <Route
-                            element={<HappRoutingBuilderPageConnector />}
-                            path={ROUTES.DASHBOARD.UTILS.HAPP_ROUTING_BUILDER}
-                        />
-                        <Route
-                            element={<SubscriptionPageBuilderConnector />}
-                            path={ROUTES.DASHBOARD.UTILS.SUBSCRIPTION_PAGE_BUILDER}
                         />
                     </Route>
 
