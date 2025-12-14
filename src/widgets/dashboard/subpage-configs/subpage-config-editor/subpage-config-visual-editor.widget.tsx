@@ -40,8 +40,9 @@ import { modals } from '@mantine/modals'
 import { useState } from 'react'
 
 import { useDownloadTemplate } from '@shared/ui/load-templates/use-download-template'
+import { QueryKeys, useUpdateSubscriptionPageConfig } from '@shared/api/hooks'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
-import { useUpdateSubscriptionPageConfig } from '@shared/api/hooks'
+import { queryClient } from '@shared/api/query-client'
 
 import { AVAILABLE_PLATFORMS, LOCALE_DATA, PLATFORM_LABELS } from './subpage-config.constants'
 import { LocalizedTextEditor } from './editor-components/localized-text-editor.component'
@@ -69,7 +70,15 @@ export function SubpageConfigVisualEditorWidget(props: Props) {
     const svgLibraryCount = Object.keys(configState.svgLibrary || {}).length
 
     const { mutate: updateSubscriptionPageConfig, isPending: isUpdatingSubscriptionPageConfig } =
-        useUpdateSubscriptionPageConfig()
+        useUpdateSubscriptionPageConfig({
+            mutationFns: {
+                onSuccess: () => {
+                    queryClient.refetchQueries({
+                        queryKey: QueryKeys.subpageConfigs.getSubscriptionPageConfigs.queryKey
+                    })
+                }
+            }
+        })
 
     const { openDownloadModal } = useDownloadTemplate({
         editorType: 'SUBPAGE_CONFIG',
