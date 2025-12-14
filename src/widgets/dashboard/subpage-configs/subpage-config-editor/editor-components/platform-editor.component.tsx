@@ -2,7 +2,8 @@ import {
     TSubscriptionPageAppConfig,
     TSubscriptionPageLocales,
     TSubscriptionPagePlatformKey,
-    TSubscriptionPagePlatformSchema
+    TSubscriptionPagePlatformSchema,
+    TSubscriptionPageSvgLibrary
 } from '@remnawave/subscription-page-types'
 import { Accordion, ActionIcon, Button, Center, Divider, Drawer, Group, Stack } from '@mantine/core'
 import { IconEdit, IconPlus, IconTrash } from '@tabler/icons-react'
@@ -16,7 +17,7 @@ import { AppEditorDrawerContent } from './app-editor-drawer-content.component'
 import { PLATFORM_ICONS, PLATFORM_LABELS } from '../subpage-config.constants'
 import { LocalizedTextEditor } from './localized-text-editor.component'
 import styles from '../subpage-config-visual-editor.module.css'
-import { SvgIconInput } from './svg-icon-input.component'
+import { SvgIconSelect } from './svg-icon-select.component'
 import { AppCard } from './app-card.component'
 
 interface IProps {
@@ -25,10 +26,11 @@ interface IProps {
     onDelete: () => void
     platform: TSubscriptionPagePlatformSchema
     platformKey: TSubscriptionPagePlatformKey
+    svgLibrary: TSubscriptionPageSvgLibrary
 }
 
 export function PlatformEditor(props: IProps) {
-    const { enabledLocales, onChange, onDelete, platform, platformKey } = props
+    const { enabledLocales, onChange, onDelete, platform, platformKey, svgLibrary } = props
     const { t } = useTranslation()
 
     const [drawerOpened, { close: closeDrawer, open: openDrawer }] = useDisclosure(false)
@@ -112,10 +114,11 @@ export function PlatformEditor(props: IProps) {
                 </Center>
                 <Accordion.Panel className={styles.accordionPanel}>
                     <Stack gap="md">
-                        <SvgIconInput
+                        <SvgIconSelect
                             label={t('platform-editor.component.platform-svg-icon')}
-                            onChange={(svgIcon) => onChange({ ...platform, svgIcon })}
-                            value={platform.svgIcon}
+                            onChange={(svgIconKey) => onChange({ ...platform, svgIconKey })}
+                            svgLibrary={svgLibrary}
+                            value={platform.svgIconKey}
                         />
 
                         <LocalizedTextEditor
@@ -181,6 +184,7 @@ export function PlatformEditor(props: IProps) {
                         app={editingApp}
                         enabledLocales={enabledLocales}
                         onChange={(updatedApp) => handleAppChange(editingAppIndex, updatedApp)}
+                        svgLibrary={svgLibrary}
                     />
                 )}
             </Drawer>

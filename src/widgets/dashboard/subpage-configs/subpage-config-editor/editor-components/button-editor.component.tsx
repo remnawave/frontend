@@ -13,7 +13,8 @@ import {
 import {
     SUBSCRIPTION_PAGE_TEMPLATE_KEYS,
     TSubscriptionPageButtonConfig,
-    TSubscriptionPageLocales
+    TSubscriptionPageLocales,
+    TSubscriptionPageSvgLibrary
 } from '@remnawave/subscription-page-types'
 import { IconArrowDown, IconArrowUp, IconChevronRight, IconTrash } from '@tabler/icons-react'
 import { PiCheck, PiCopy } from 'react-icons/pi'
@@ -21,9 +22,9 @@ import { useDisclosure } from '@mantine/hooks'
 import { useTranslation } from 'react-i18next'
 
 import { LocalizedTextEditor } from './localized-text-editor.component'
+import { SvgIconSelect } from './svg-icon-select.component'
 import styles from '../subpage-config-visual-editor.module.css'
 import { SubpageTooltips } from './subpage-tooltips.component'
-import { SvgIconInput } from './svg-icon-input.component'
 
 interface IProps {
     button: TSubscriptionPageButtonConfig
@@ -35,6 +36,7 @@ interface IProps {
     onDelete: () => void
     onMoveDown: () => void
     onMoveUp: () => void
+    svgLibrary: TSubscriptionPageSvgLibrary
 }
 
 export function ButtonEditor(props: IProps) {
@@ -47,7 +49,8 @@ export function ButtonEditor(props: IProps) {
         onChange,
         onDelete,
         onMoveDown,
-        onMoveUp
+        onMoveUp,
+        svgLibrary
     } = props
     const { t } = useTranslation()
     const [opened, { toggle }] = useDisclosure(false)
@@ -179,10 +182,11 @@ export function ButtonEditor(props: IProps) {
                             />
                         </Group>
 
-                        <SvgIconInput
+                        <SvgIconSelect
                             label={t('button-editor.component.svg-icon')}
-                            onChange={(svgIcon) => onChange({ ...button, svgIcon })}
-                            value={button.svgIcon}
+                            onChange={(svgIconKey) => onChange({ ...button, svgIconKey })}
+                            svgLibrary={svgLibrary}
+                            value={button.svgIconKey}
                         />
 
                         <LocalizedTextEditor

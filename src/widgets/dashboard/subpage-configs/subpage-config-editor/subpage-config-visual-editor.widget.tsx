@@ -1,4 +1,5 @@
 import {
+    SubscriptionPageRawConfigSchema,
     TSubscriptionPageConfigAdditionalLocales,
     TSubscriptionPageLocales,
     TSubscriptionPagePlatformKey,
@@ -27,12 +28,14 @@ import {
     IconDownload,
     IconGlobe,
     IconPalette,
+    IconPhoto,
     IconPlus
 } from '@tabler/icons-react'
 import { GetSubscriptionPageConfigCommand } from '@remnawave/backend-contract'
+import { TbAlertTriangle, TbCheck } from 'react-icons/tb'
 import { useTranslation } from 'react-i18next'
+import { useDisclosure } from '@mantine/hooks'
 import { modals } from '@mantine/modals'
-import { TbCheck } from 'react-icons/tb'
 import { useState } from 'react'
 
 import { useDownloadTemplate } from '@shared/ui/load-templates/use-download-template'
@@ -41,6 +44,7 @@ import { useUpdateSubscriptionPageConfig } from '@shared/api/hooks'
 
 import { AVAILABLE_PLATFORMS, LOCALE_DATA, PLATFORM_LABELS } from './subpage-config.constants'
 import { LocalizedTextEditor } from './editor-components/localized-text-editor.component'
+import { SvgLibraryModal } from './editor-components/svg-library-modal.component'
 import { PlatformEditor } from './editor-components/platform-editor.component'
 import { LocaleCard } from './editor-components/locale-card.component'
 import styles from './subpage-config-visual-editor.module.css'
@@ -53,12 +57,15 @@ export function SubpageConfigVisualEditorWidget(props: Props) {
     const { config: configResponse } = props
 
     const { t } = useTranslation()
+    const [svgLibraryOpened, { close: closeSvgLibrary, open: openSvgLibrary }] =
+        useDisclosure(false)
 
     const [configState, setConfigState] = useState<TSubscriptionPageRawConfig>(
         configResponse.config as unknown as TSubscriptionPageRawConfig
     )
 
     const enabledLocales: TSubscriptionPageLocales[] = ['en', ...configState.additionalLocales]
+    const svgLibraryCount = Object.keys(configState.svgLibrary || {}).length
 
     const { mutate: updateSubscriptionPageConfig, isPending: isUpdatingSubscriptionPageConfig } =
         useUpdateSubscriptionPageConfig()
@@ -77,7 +84,7 @@ export function SubpageConfigVisualEditorWidget(props: Props) {
         const newPlatform: TSubscriptionPagePlatformSchema = {
             apps: [],
             displayName: { en: PLATFORM_LABELS[platformKey] },
-            svgIcon: ''
+            svgIconKey: ''
         }
 
         setConfigState({
@@ -108,6 +115,37 @@ export function SubpageConfigVisualEditorWidget(props: Props) {
     )
 
     const handleSave = () => {
+        const validatedConfig = SubscriptionPageRawConfigSchema.safeParse(configState)
+        if (!validatedConfig.success) {
+            modals.open({
+                title: (
+                    <BaseOverlayHeader
+                        IconComponent={TbAlertTriangle}
+                        iconSize={20}
+                        iconVariant="gradient-red"
+                        title={t('subpage-config-visual-editor.widget.validation-error')}
+                        titleOrder={5}
+                    />
+                ),
+                children: (
+                    <Stack gap="sm" p="sm">
+                        <Stack gap={2} mt="xs">
+                            {validatedConfig.error.errors?.length > 0 &&
+                                validatedConfig.error.errors.map((err, idx) => (
+                                    <Text c="red" key={idx} size="sm">
+                                        • {err.path.length ? `${err.path.join('.')}: ` : ''}
+                                        {err.message}
+                                    </Text>
+                                ))}
+                        </Stack>
+                    </Stack>
+                ),
+                centered: true,
+                size: 'lg'
+            })
+            return
+        }
+
         updateSubscriptionPageConfig({
             variables: { uuid: configResponse.uuid, config: configState }
         })
@@ -330,6 +368,36 @@ export function SubpageConfigVisualEditorWidget(props: Props) {
 
                     <Card className={styles.sectionCard} p="lg" radius="lg">
                         <Stack gap="md">
+                            <Group justify="space-between">
+                                <BaseOverlayHeader
+                                    IconComponent={IconPhoto}
+                                    iconSize={20}
+                                    iconVariant="gradient-violet"
+                                    subtitle="Manage your SVG icons"
+                                    title="SVG Library"
+                                    titleOrder={5}
+                                />
+                                <Badge color="violet" size="sm" variant="light">
+                                    {svgLibraryCount} icons
+                                </Badge>
+                            </Group>
+
+                            <Divider className={styles.divider} />
+
+                            <Button
+                                className={styles.addButton}
+                                fullWidth
+                                leftSection={<IconPhoto size={16} />}
+                                onClick={openSvgLibrary}
+                                variant="default"
+                            >
+                                Open SVG Library
+                            </Button>
+                        </Stack>
+                    </Card>
+
+                    <Card className={styles.sectionCard} p="lg" radius="lg">
+                        <Stack gap="md">
                             <BaseOverlayHeader
                                 IconComponent={IconPalette}
                                 iconSize={20}
@@ -479,6 +547,7 @@ export function SubpageConfigVisualEditorWidget(props: Props) {
                                                 onDelete={() => handlePlatformDelete(platformKey)}
                                                 platform={platform}
                                                 platformKey={platformKey}
+                                                svgLibrary={configState.svgLibrary || {}}
                                             />
                                         )
                                     })}
@@ -488,6 +557,13 @@ export function SubpageConfigVisualEditorWidget(props: Props) {
                     </Card>
                 </Stack>
             </div>
+
+            <SvgLibraryModal
+                onChange={(svgLibrary) => setConfigState({ ...configState, svgLibrary })}
+                onClose={closeSvgLibrary}
+                opened={svgLibraryOpened}
+                svgLibrary={configState.svgLibrary || {}}
+            />
         </Box>
     )
 }

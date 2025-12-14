@@ -304,3 +304,112 @@
     width: 32px;
     height: 32px;
 }
+
+/* Icon Select Component */
+.iconSelectTrigger {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--mantine-radius-md);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    min-height: 42px;
+}
+
+.iconSelectTrigger:hover {
+    background: rgba(255, 255, 255, 0.04);
+    border-color: rgba(34, 211, 238, 0.3);
+}
+
+.iconSelectTrigger[data-selected='true'] {
+    border-color: rgba(34, 211, 238, 0.4);
+}
+
+.iconSelectPreview {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: var(--mantine-radius-sm);
+    background: linear-gradient(135deg, rgba(34, 211, 238, 0.1) 0%, rgba(6, 182, 212, 0.05) 100%);
+    border: 1px solid rgba(34, 211, 238, 0.2);
+    flex-shrink: 0;
+}
+
+.iconSelectSvg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+}
+
+.iconSelectSvg svg {
+    width: 100%;
+    height: 100%;
+}
+
+.iconSelectDropdown {
+    background: rgba(30, 35, 45, 0.98) !important;
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    padding: 8px !important;
+}
+
+.iconSelectEmpty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: var(--mantine-spacing-lg);
+}
+
+.iconSelectItem {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--mantine-radius-md);
+    transition: all 0.15s ease;
+    position: relative;
+}
+
+.iconSelectItem:hover {
+    background: rgba(34, 211, 238, 0.08);
+    border-color: rgba(34, 211, 238, 0.25);
+    transform: scale(1.05);
+}
+
+.iconSelectItem[data-selected='true'] {
+    background: linear-gradient(135deg, rgba(34, 211, 238, 0.15) 0%, rgba(6, 182, 212, 0.1) 100%);
+    border-color: rgba(34, 211, 238, 0.5);
+    box-shadow: 0 0 12px rgba(34, 211, 238, 0.2);
+}
+
+.iconSelectItemSvg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+}
+
+.iconSelectItemSvg svg {
+    width: 100%;
+    height: 100%;
+}
+
+.iconSelectCheck {
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
+    width: 16px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--mantine-color-cyan-6);
+    border-radius: 50%;
+    color: white;
+}

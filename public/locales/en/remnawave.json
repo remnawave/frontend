@@ -1726,7 +1726,8 @@
             "platforms": "Platforms",
             "add-platform": "Add platform",
             "no-platforms-configured": "No platforms configured",
-            "add-a-platform-to-get-started": "Add a platform to get started"
+            "add-a-platform-to-get-started": "Add a platform to get started",
+            "validation-error": "Validation Error"
         },
         "subpage-config-saved-line-1": "To apply the changes, please restart the Remnawave Subscription-page Docker container.",
         "subpage-config-saved-line-2": "For example, you can use the following command in your terminal:"
@@ -1786,6 +1787,25 @@
     "svg-icon-input": {
         "component": {
             "svg-icon": "SVG Icon"
+        }
+    },
+    "svg-icon-select": {
+        "component": {
+            "select-icon": "Select icon...",
+            "no-icons-in-library": "No icons in library"
+        }
+    },
+    "svg-library-modal": {
+        "component": {
+            "svg-library": "SVG Library",
+            "add-icon": "Add Icon",
+            "add-icons-to-use-them-in-blocks-and-buttons": "Add icons to use them in blocks and buttons",
+            "edit-icon": "Edit Icon",
+            "only-latin-characters-no-spaces": "Only latin characters, no spaces",
+            "only-latin-characters-allowed": "Only latin characters allowed",
+            "icon-key": "Icon Key",
+            "svg-code": "SVG Code",
+            "preview": "Preview"
         }
     }
 }

@@ -1,7 +1,8 @@
 import {
     TSubscriptionPageAppConfig,
     TSubscriptionPageBlockConfig,
-    TSubscriptionPageLocales
+    TSubscriptionPageLocales,
+    TSubscriptionPageSvgLibrary
 } from '@remnawave/subscription-page-types'
 import { Button, Card, Group, Stack, Switch, TextInput } from '@mantine/core'
 import { IconChevronRight, IconPlus, IconStar } from '@tabler/icons-react'
@@ -19,10 +20,11 @@ interface IProps {
     app: TSubscriptionPageAppConfig
     enabledLocales: TSubscriptionPageLocales[]
     onChange: (app: TSubscriptionPageAppConfig) => void
+    svgLibrary: TSubscriptionPageSvgLibrary
 }
 
 export function AppEditorDrawerContent(props: IProps) {
-    const { app, enabledLocales, onChange } = props
+    const { app, enabledLocales, onChange, svgLibrary } = props
     const { t } = useTranslation()
 
     const [blockModalOpened, { close: closeBlockModal, open: openBlockModal }] =
@@ -33,8 +35,8 @@ export function AppEditorDrawerContent(props: IProps) {
         const newBlock: TSubscriptionPageBlockConfig = {
             buttons: [],
             description: { en: '' },
-            svgIcon: '',
             svgIconColor: 'cyan',
+            svgIconKey: '',
             title: { en: '' }
         }
         onChange({ ...app, blocks: [...app.blocks, newBlock] })
@@ -179,6 +181,7 @@ export function AppEditorDrawerContent(props: IProps) {
                 onClose={handleCloseBlockModal}
                 onExited={handleBlockModalExited}
                 opened={blockModalOpened}
+                svgLibrary={svgLibrary}
             />
         </>
     )

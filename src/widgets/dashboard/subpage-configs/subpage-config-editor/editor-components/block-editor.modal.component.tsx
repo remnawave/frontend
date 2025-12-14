@@ -1,7 +1,8 @@
 import {
     TSubscriptionPageBlockConfig,
     TSubscriptionPageButtonConfig,
-    TSubscriptionPageLocales
+    TSubscriptionPageLocales,
+    TSubscriptionPageSvgLibrary
 } from '@remnawave/subscription-page-types'
 import { IconChevronRight, IconPalette, IconPlus } from '@tabler/icons-react'
 import { Button, Card, Drawer, Stack, Text, TextInput } from '@mantine/core'
@@ -10,9 +11,9 @@ import { useTranslation } from 'react-i18next'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 
 import { LocalizedTextEditor } from './localized-text-editor.component'
+import { SvgIconSelect } from './svg-icon-select.component'
 import styles from '../subpage-config-visual-editor.module.css'
 import { SubpageTooltips } from './subpage-tooltips.component'
-import { SvgIconInput } from './svg-icon-input.component'
 import { ButtonEditor } from './button-editor.component'
 
 interface IProps {
@@ -22,6 +23,7 @@ interface IProps {
     onClose: () => void
     onExited?: () => void
     opened: boolean
+    svgLibrary: TSubscriptionPageSvgLibrary
 }
 
 const DEFAULT_COLOR = [
@@ -42,14 +44,14 @@ const DEFAULT_COLOR = [
 ] as const
 
 export function BlockEditorModal(props: IProps) {
-    const { block, enabledLocales, onChange, onClose, onExited, opened } = props
+    const { block, enabledLocales, onChange, onClose, onExited, opened, svgLibrary } = props
     const { t } = useTranslation()
 
     const handleAddButton = () => {
         if (!block) return
         const newButton: TSubscriptionPageButtonConfig = {
             link: '',
-            svgIcon: '',
+            svgIconKey: '',
             text: { en: '' },
             type: 'external'
         }
@@ -123,11 +125,11 @@ export function BlockEditorModal(props: IProps) {
                                 titleOrder={5}
                             />
 
-                            <SvgIconInput
-                                color={block.svgIconColor || 'cyan'}
+                            <SvgIconSelect
                                 label={t('block-editor.modal.component.svg-icon')}
-                                onChange={(svgIcon) => onChange({ ...block, svgIcon })}
-                                value={block.svgIcon}
+                                onChange={(svgIconKey) => onChange({ ...block, svgIconKey })}
+                                svgLibrary={svgLibrary}
+                                value={block.svgIconKey}
                             />
 
                             <TextInput
@@ -189,6 +191,7 @@ export function BlockEditorModal(props: IProps) {
                                         onDelete={() => handleButtonDelete(buttonIndex)}
                                         onMoveDown={() => handleButtonMoveDown(buttonIndex)}
                                         onMoveUp={() => handleButtonMoveUp(buttonIndex)}
+                                        svgLibrary={svgLibrary}
                                     />
                                 ))}
 
