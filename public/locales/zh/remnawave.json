@@ -16,7 +16,7 @@
         "happ-routing-builder": "Happ 路由编辑器",
         "templates": "模板",
         "subscription": "订阅",
-        "subscription-page": "Subscription Page",
+        "subscription-page": "订阅页面",
         "config-profiles": "配置文件",
         "internal-squads": "内部分组",
         "external-squads": "外部分组",
@@ -55,7 +55,7 @@
         "download": "下载",
         "search": "搜索",
         "nothing-found": "未找到",
-        "name": "Name"
+        "name": "名称"
     },
     "bandwidth-metrics": {
         "current-year": "今年",
@@ -1590,7 +1590,7 @@
             "branding-settings": "商标设置",
             "the-title-that-will-be-displayed-on-login-page": "登录页面显示的标题",
             "brand-name": "品牌名称",
-            "logo-url": "Logo URL",
+            "logo-url": "Logo 网址链接",
             "the-url-to-your-brand-logo-image": "品牌标志图片的 URL",
             "colored-title-format": "彩色标题格式",
             "colored-title-description": "您可以使用 {color}文字 语法为单个单词着色。支持十六进制颜色 (#RRGGBB) 和 MantineUI 颜色名称。",
@@ -1704,88 +1704,88 @@
     },
     "subpage-config-visual-editor": {
         "widget": {
-            "configuration-saved-successfully": "Configuration saved successfully",
-            "edit-your-subscription-page-configuration": "Edit your subscription page configuration",
-            "subpage-editor": "Subpage Editor",
-            "load-from-github": "Load from GitHub",
-            "brand-appearance": "Brand appearance",
-            "branding": "Branding",
-            "brand-title": "Brand Title",
-            "your-brand-name": "Your Brand Name",
-            "logo-url": "Logo URL",
-            "support-url": "Support URL",
-            "additional-languages": "Additional languages",
-            "localization": "Localization",
-            "ui-configuration": "UI Configuration",
-            "collapsed": "Collapsed",
-            "expanded": "Expanded",
-            "subscription-info-block-design": "Subscription Info Block Design",
-            "installation-guides-header": "Installation Guides Header",
-            "connection-keys-header": "Connection Keys Header",
-            "configure-apps-for-each-platform": "Configure apps for each platform",
-            "platforms": "Platforms",
-            "add-platform": "Add platform",
-            "no-platforms-configured": "No platforms configured",
-            "add-a-platform-to-get-started": "Add a platform to get started"
+            "configuration-saved-successfully": "配置保存成功",
+            "edit-your-subscription-page-configuration": "编辑您的订阅页面配置",
+            "subpage-editor": "订阅页面编辑器",
+            "load-from-github": "从 GitHub 加载",
+            "brand-appearance": "商标外观",
+            "branding": "商标",
+            "brand-title": "商标标题",
+            "your-brand-name": "您的商标名称",
+            "logo-url": "Logo 网址链接",
+            "support-url": "支持 URL",
+            "additional-languages": "其它语言",
+            "localization": "本地化设置",
+            "ui-configuration": "界面配置",
+            "collapsed": "收起",
+            "expanded": "展开",
+            "subscription-info-block-design": "订阅信息块设计",
+            "installation-guides-header": "安装指南标题",
+            "connection-keys-header": "连接密钥标题",
+            "configure-apps-for-each-platform": "配置各个平台的应用程序",
+            "platforms": "平台",
+            "add-platform": "添加平台",
+            "no-platforms-configured": "未配置平台",
+            "add-a-platform-to-get-started": "添加一个平台以开始"
         },
-        "subpage-config-saved-line-1": "To apply the changes, please restart the Remnawave Subscription-page Docker container.",
-        "subpage-config-saved-line-2": "For example, you can use the following command in your terminal:"
+        "subpage-config-saved-line-1": "若要应用更改，请重启Remnawave 订阅页面容器。",
+        "subpage-config-saved-line-2": "例如，您可以在终端中使用以下命令："
     },
     "app-editor-drawer-content": {
         "component": {
-            "app-settings": "App Settings",
-            "featured": "Featured",
-            "app-name": "App Name",
-            "blocks": "Blocks",
-            "add-block": "Add Block"
+            "app-settings": "应用设置",
+            "featured": "精选",
+            "app-name": "应用名称",
+            "blocks": "块",
+            "add-block": "添加块"
         }
     },
     "block-editor": {
         "modal": {
             "component": {
-                "untitled-block": "Untitled Block",
-                "edit-block": "Edit Block",
-                "block-settings": "Block Settings",
-                "svg-icon": "SVG Icon",
-                "icon-color": "Icon Color",
-                "icon-color-help": "You can use any Mantine theme color ({{colors}}) or any valid HEX color (for example: #009688).",
-                "title": "Title",
-                "description": "Description",
-                "buttons": "Buttons",
-                "add-button": "Add Button"
+                "untitled-block": "未命名块",
+                "edit-block": "编辑块",
+                "block-settings": "块设置",
+                "svg-icon": "SVG 图标",
+                "icon-color": "图标颜色",
+                "icon-color-help": "您可以使用任何 Mantine 主题颜色（{{colors}}）或任何有效的十六进制颜色代码（例如：#009688）。",
+                "title": "标题",
+                "description": "描述",
+                "buttons": "按钮",
+                "add-button": "添加按钮"
             }
         }
     },
     "button-editor": {
         "component": {
-            "link": "Link",
-            "external-link": "External Link",
-            "subscription-link": "Subscription Link",
-            "type": "Type",
-            "svg-icon": "SVG Icon",
-            "button-text": "Button Text"
+            "link": "链接",
+            "external-link": "外部链接",
+            "subscription-link": "订阅链接",
+            "type": "类型",
+            "svg-icon": "SVG 图标",
+            "button-text": "按钮文本"
         }
     },
     "localized-text-editor": {
         "component": {
-            "not-set": "Not set",
-            "required-default-language": "Required (default language)",
-            "done": "Done"
+            "not-set": "未设置",
+            "required-default-language": "必填(默认语言)",
+            "done": "完成"
         }
     },
     "platform-editor": {
         "component": {
-            "platform-svg-icon": "Platform SVG Icon",
-            "display-name": "Display Name",
-            "apps": "Apps",
-            "add-app": "Add App",
-            "unnamed-app": "Unnamed App",
-            "edit-app": "Edit App"
+            "platform-svg-icon": "平台 SVG 图标",
+            "display-name": "显示名称",
+            "apps": "应用程序",
+            "add-app": "添加应用程序",
+            "unnamed-app": "未命名应用",
+            "edit-app": "编辑应用程序"
         }
     },
     "svg-icon-input": {
         "component": {
-            "svg-icon": "SVG Icon"
+            "svg-icon": "SVG 图标"
         }
     }
 }
