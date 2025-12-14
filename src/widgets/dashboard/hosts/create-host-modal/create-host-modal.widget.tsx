@@ -85,10 +85,50 @@ export const CreateHostModalWidget = () => {
             return null
         }
 
+        let xHttpExtraParams
+        let muxParams
+        let sockoptParams
+
+        try {
+            if (values.xHttpExtraParams === '') {
+                xHttpExtraParams = null
+            } else {
+                xHttpExtraParams = JSON.parse(values.xHttpExtraParams as unknown as string)
+            }
+        } catch {
+            xHttpExtraParams = null
+            // silence
+        }
+
+        try {
+            if (values.muxParams === '') {
+                muxParams = null
+            } else {
+                muxParams = JSON.parse(values.muxParams as unknown as string)
+            }
+        } catch {
+            muxParams = null
+            // silence
+        }
+
+        try {
+            if (values.sockoptParams === '') {
+                sockoptParams = null
+            } else {
+                sockoptParams = JSON.parse(values.sockoptParams as unknown as string)
+            }
+        } catch {
+            sockoptParams = null
+            // silence
+        }
+
         createHost({
             variables: {
                 ...values,
                 isDisabled: !values.isDisabled,
+                sockoptParams,
+                muxParams,
+                xHttpExtraParams,
                 inbound: {
                     configProfileInboundUuid: values.inbound.configProfileInboundUuid,
                     configProfileUuid: values.inbound.configProfileUuid
