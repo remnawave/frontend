@@ -4,7 +4,7 @@ import { useGetSubscriptionPageConfig } from '@shared/api/hooks'
 import { LoadingScreen } from '@shared/ui'
 import { ROUTES } from '@shared/constants'
 
-import { SubpageConfigEditorPageComponent } from '../components/subpage-config-editor-page.component.'
+import { SubpageConfigEditorPageComponent } from '../components/subpage-config-editor-page.component'
 
 export function SubpageConfigEditorPageConnector() {
     const { uuid } = useParams()

@@ -167,7 +167,7 @@ export const SubpageConfigEditorPageComponent = (props: Props) => {
                         <FileButton accept="application/json,.json" onChange={handleImportConfig}>
                             {(props) => (
                                 <Tooltip
-                                    label={t('subpage-config-editor-page.component..import-config')}
+                                    label={t('subpage-config-editor-page.component.import-config')}
                                 >
                                     <ActionIcon
                                         color="gray"
@@ -181,7 +181,7 @@ export const SubpageConfigEditorPageComponent = (props: Props) => {
                             )}
                         </FileButton>
 
-                        <Tooltip label={t('subpage-config-editor-page.component..download-config')}>
+                        <Tooltip label={t('subpage-config-editor-page.component.download-config')}>
                             <ActionIcon
                                 color="gray"
                                 onClick={handleDownloadConfig}

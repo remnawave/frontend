@@ -1832,10 +1832,8 @@
     },
     "subpage-config-editor-page": {
         "component": {
-            "": {
-                "import-config": "Import config",
-                "download-config": "Download config"
-            }
+            "import-config": "Import config",
+            "download-config": "Download config"
         }
     }
 }
