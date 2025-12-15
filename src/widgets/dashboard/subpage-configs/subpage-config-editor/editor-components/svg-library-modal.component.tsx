@@ -144,8 +144,9 @@ export function SvgLibraryModal(props: IProps) {
                     <Button
                         className={styles.addButton}
                         fullWidth
-                        leftSection={<IconPlus size={16} />}
+                        leftSection={<IconPlus size={20} />}
                         onClick={handleOpenAdd}
+                        size="md"
                         variant="default"
                     >
                         {t('svg-library-modal.component.add-icon')}
