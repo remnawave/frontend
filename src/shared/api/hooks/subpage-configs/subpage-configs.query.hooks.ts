@@ -35,7 +35,7 @@ export const useGetSubscriptionPageConfigs = createGetQueryHook({
     getQueryKey: () => subpageConfigsQueryKeys.getSubscriptionPageConfigs.queryKey,
     rQueryParams: {
         refetchOnMount: false,
-        staleTime: sToMs(30)
+        staleTime: sToMs(15)
     },
     errorHandler: (error) => errorHandler(error, 'Get Subscription Page Configs')
 })
