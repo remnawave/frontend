@@ -55,7 +55,8 @@
         "download": "下载",
         "search": "搜索",
         "nothing-found": "未找到",
-        "name": "名称"
+        "name": "名称",
+        "clone": "克隆"
     },
     "bandwidth-metrics": {
         "current-year": "今年",
@@ -1727,15 +1728,15 @@
             "add-platform": "添加平台",
             "no-platforms-configured": "未配置平台",
             "add-a-platform-to-get-started": "添加一个平台以开始",
-            "validation-error": "Validation Error",
-            "manage-your-svg-icons": "Manage your SVG icons",
-            "open-svg-library": "Open SVG Library",
-            "cards": "Cards",
-            "hidden": "Hidden",
-            "accordion": "Accordion",
-            "minimal": "Minimal",
-            "timeline": "Timeline",
-            "installation-guides-design": "Installation Guides Design"
+            "validation-error": "验证错误",
+            "manage-your-svg-icons": "管理您的 SVG 图标",
+            "open-svg-library": "打开 SVG 库",
+            "cards": "卡片",
+            "hidden": "隐藏",
+            "accordion": "可折叠",
+            "minimal": "极简",
+            "timeline": "时间轴",
+            "installation-guides-design": "安装指南标题"
         },
         "subpage-config-saved-line-1": "若要应用更改，请重启Remnawave 订阅页面容器。",
         "subpage-config-saved-line-2": "例如，您可以在终端中使用以下命令："
@@ -1799,31 +1800,46 @@
     },
     "svg-icon-select": {
         "component": {
-            "select-icon": "Select icon...",
-            "no-icons-in-library": "No icons in library"
+            "select-icon": "选择图标...",
+            "no-icons-in-library": "库中没有图标"
         }
     },
     "svg-library-modal": {
         "component": {
-            "svg-library": "SVG Library",
-            "add-icon": "Add Icon",
-            "add-icons-to-use-them-in-blocks-and-buttons": "Add icons to use them in blocks and buttons",
-            "edit-icon": "Edit Icon",
-            "only-latin-characters-no-spaces": "Only latin characters, no spaces",
-            "only-latin-characters-allowed": "Only latin characters allowed",
-            "icon-key": "Icon Key",
-            "svg-code": "SVG Code",
-            "preview": "Preview"
+            "svg-library": "SVG 库",
+            "add-icon": "添加图标",
+            "add-icons-to-use-them-in-blocks-and-buttons": "添加图标以便在方块和按钮中使用",
+            "edit-icon": "编辑图标",
+            "only-latin-characters-no-spaces": "仅拉丁字符，无空格",
+            "only-latin-characters-allowed": "只允许拉丁字符",
+            "icon-key": "图标键值",
+            "svg-code": "SVG 代码",
+            "preview": "预览",
+            "where-to-find-icons": "从哪里找到图标？",
+            "you-can-find-beautiful-icons-at": "你可以找到精致的图标在",
+            "where-to-find-icons-description": "点击任何图标，选择\"复制 SVG\"并粘贴到这里。请确保选择\"轮廓\" 或 \"填充\" 样式。"
         }
     },
     "external-squads-subpage-config": {
         "tab": {
             "widget": {
-                "subscription-page-config": "Subscription Page Config",
-                "subscription-page-config-description": "You can override the subscription page configuration (Remnawave Subscription Page) for this external squad.",
-                "subpage-config": "Subpage Config",
-                "select-config": "Select config..."
+                "subscription-page-config": "订阅页面配置",
+                "subscription-page-config-description": "您可以覆盖这个外部分组的订阅页面配置(Remnawave 订阅页面)。",
+                "subpage-config": "订阅页面配置",
+                "select-config": "选择配置..."
             }
+        }
+    },
+    "subpage-config-editor-page": {
+        "component": {
+            "import-config": "导入配置",
+            "download-config": "下载配置"
+        }
+    },
+    "base-translations-drawer": {
+        "component": {
+            "base-translations": "Base Translations",
+            "completed": "{{count}}/{{total}} completed"
         }
     }
 }

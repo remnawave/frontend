@@ -55,7 +55,8 @@
         "download": "Скачать",
         "search": "Поиск",
         "nothing-found": "Ничего не найдено",
-        "name": "Name"
+        "name": "Name",
+        "clone": "Clone"
     },
     "bandwidth-metrics": {
         "current-year": "Текущий год",
@@ -1813,7 +1814,10 @@
             "only-latin-characters-allowed": "Only latin characters allowed",
             "icon-key": "Icon Key",
             "svg-code": "SVG Code",
-            "preview": "Preview"
+            "preview": "Preview",
+            "where-to-find-icons": "Where to find icons?",
+            "you-can-find-beautiful-icons-at": "You can find beautiful icons at",
+            "where-to-find-icons-description": "Сlick on any icon, select \"Copy SVG\" and paste it here. Make sure to choose \"Outline\" or \"Filled\" style."
         }
     },
     "external-squads-subpage-config": {
@@ -1824,6 +1828,18 @@
                 "subpage-config": "Subpage Config",
                 "select-config": "Select config..."
             }
+        }
+    },
+    "subpage-config-editor-page": {
+        "component": {
+            "import-config": "Import config",
+            "download-config": "Download config"
+        }
+    },
+    "base-translations-drawer": {
+        "component": {
+            "base-translations": "Base Translations",
+            "completed": "{{count}}/{{total}} completed"
         }
     }
 }
