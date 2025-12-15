@@ -1815,5 +1815,15 @@
             "svg-code": "SVG Code",
             "preview": "Preview"
         }
+    },
+    "external-squads-subpage-config": {
+        "tab": {
+            "widget": {
+                "subscription-page-config": "Subscription Page Config",
+                "subscription-page-config-description": "You can override the subscription page configuration (Remnawave Subscription Page) for this external squad.",
+                "subpage-config": "Subpage Config",
+                "select-config": "Select config..."
+            }
+        }
     }
 }
