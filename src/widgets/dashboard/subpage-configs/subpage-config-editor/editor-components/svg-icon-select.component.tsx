@@ -1,4 +1,13 @@
-import { ActionIcon, Box, Group, Popover, SimpleGrid, Text, Tooltip } from '@mantine/core'
+import {
+    ActionIcon,
+    Box,
+    Group,
+    Popover,
+    ScrollArea,
+    SimpleGrid,
+    Text,
+    Tooltip
+} from '@mantine/core'
 import { TSubscriptionPageSvgLibrary } from '@remnawave/subscription-page-types'
 import { IconCheck, IconPhoto } from '@tabler/icons-react'
 import { useDisclosure } from '@mantine/hooks'
@@ -42,7 +51,7 @@ export function SvgIconSelect(props: IProps) {
             )}
             <Popover
                 offset={4}
-                onClose={close}
+                onDismiss={close}
                 opened={opened}
                 position="bottom-start"
                 shadow="lg"
@@ -79,40 +88,42 @@ export function SvgIconSelect(props: IProps) {
                             </Text>
                         </Box>
                     ) : (
-                        <SimpleGrid cols={5} spacing={6}>
-                            {entries.map(([key, svg]) => {
-                                const isSelected = key === value
+                        <ScrollArea.Autosize mah={200} styles={{ scrollbar: { width: '8px' } }}>
+                            <SimpleGrid cols={5} m={10} spacing={6}>
+                                {entries.map(([key, svg]) => {
+                                    const isSelected = key === value
 
-                                return (
-                                    <Tooltip
-                                        key={key}
-                                        label={key}
-                                        openDelay={400}
-                                        position="top"
-                                        withArrow
-                                    >
-                                        <ActionIcon
-                                            className={styles.iconSelectItem}
-                                            data-selected={isSelected}
-                                            onClick={() => handleSelect(key)}
-                                            size={52}
-                                            variant="subtle"
+                                    return (
+                                        <Tooltip
+                                            key={key}
+                                            label={key}
+                                            openDelay={400}
+                                            position="top"
+                                            withArrow
                                         >
-                                            <Box
-                                                className={styles.iconSelectItemSvg}
-                                                dangerouslySetInnerHTML={{ __html: svg }}
-                                            />
+                                            <ActionIcon
+                                                className={styles.iconSelectItem}
+                                                data-selected={isSelected}
+                                                onClick={() => handleSelect(key)}
+                                                size={52}
+                                                variant="subtle"
+                                            >
+                                                <Box
+                                                    className={styles.iconSelectItemSvg}
+                                                    dangerouslySetInnerHTML={{ __html: svg }}
+                                                />
 
-                                            {isSelected && (
-                                                <Box className={styles.iconSelectCheck}>
-                                                    <IconCheck size={12} />
-                                                </Box>
-                                            )}
-                                        </ActionIcon>
-                                    </Tooltip>
-                                )
-                            })}
-                        </SimpleGrid>
+                                                {isSelected && (
+                                                    <Box className={styles.iconSelectCheck}>
+                                                        <IconCheck size={12} />
+                                                    </Box>
+                                                )}
+                                            </ActionIcon>
+                                        </Tooltip>
+                                    )
+                                })}
+                            </SimpleGrid>
+                        </ScrollArea.Autosize>
                     )}
                 </Popover.Dropdown>
             </Popover>
