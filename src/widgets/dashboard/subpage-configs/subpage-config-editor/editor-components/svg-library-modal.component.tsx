@@ -1,5 +1,7 @@
 import {
     ActionIcon,
+    Alert,
+    Anchor,
     Badge,
     Button,
     Card,
@@ -13,10 +15,11 @@ import {
     ThemeIcon
 } from '@mantine/core'
 import { TSubscriptionPageSvgLibrary } from '@remnawave/subscription-page-types'
-import { IconPhoto, IconPlus, IconTrash } from '@tabler/icons-react'
+import { IconBulb, IconPhoto, IconPlus, IconTrash } from '@tabler/icons-react'
 import { useDisclosure } from '@mantine/hooks'
 import { useTranslation } from 'react-i18next'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import isSvg from 'is-svg'
 
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 
@@ -40,8 +43,20 @@ export function SvgLibraryModal(props: IProps) {
 
     const libraryEntries = Object.entries(svgLibrary)
 
+    useEffect(() => {
+        const invalidKeys = libraryEntries.filter(([, svg]) => !isSvg(svg)).map(([key]) => key)
+
+        if (invalidKeys.length > 0) {
+            const cleanedLibrary = { ...svgLibrary }
+            for (const key of invalidKeys) {
+                delete cleanedLibrary[key]
+            }
+            onChange(cleanedLibrary)
+        }
+    }, [])
+
     const handleAdd = () => {
-        if (!newKey.trim() || !newSvg.trim()) return
+        if (!newKey.trim() || !isSvg(newSvg)) return
         if (!/^[A-Za-z]+$/.test(newKey)) return
 
         onChange({ ...svgLibrary, [newKey]: newSvg })
@@ -51,7 +66,7 @@ export function SvgLibraryModal(props: IProps) {
     }
 
     const handleUpdate = () => {
-        if (!editingKey || !newSvg.trim()) return
+        if (!editingKey || !isSvg(newSvg)) return
 
         onChange({ ...svgLibrary, [editingKey]: newSvg })
         setEditingKey(null)
@@ -79,11 +94,6 @@ export function SvgLibraryModal(props: IProps) {
         openAddDrawer()
     }
 
-    const isValidSvg = (svg: string) => {
-        const trimmed = svg.trim()
-        return trimmed.startsWith('<svg') && trimmed.includes('</svg>')
-    }
-
     return (
         <>
             <Drawer
@@ -102,6 +112,35 @@ export function SvgLibraryModal(props: IProps) {
                 }
             >
                 <Stack gap="md">
+                    <Alert
+                        bg="linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(124, 58, 237, 0.05) 100%)"
+                        color="violet.4"
+                        icon={<IconBulb size={20} />}
+                        radius="md"
+                        styles={{
+                            root: {
+                                border: '1px solid rgba(139, 92, 246, 0.25)'
+                            }
+                        }}
+                        title={t('svg-library-modal.component.where-to-find-icons')}
+                        variant="light"
+                    >
+                        <Text c="dimmed" size="sm">
+                            {t('svg-library-modal.component.you-can-find-beautiful-icons-at')}{' '}
+                            <Anchor
+                                c="violet.4"
+                                fw={500}
+                                href="https://tabler.io/icons"
+                                target="_blank"
+                            >
+                                tabler.io/icons.
+                            </Anchor>
+                        </Text>
+                        <Text c="dimmed" size="sm">
+                            {t('svg-library-modal.component.where-to-find-icons-description')}
+                        </Text>
+                    </Alert>
+
                     <Button
                         className={styles.addButton}
                         fullWidth
@@ -125,7 +164,14 @@ export function SvgLibraryModal(props: IProps) {
                             </Text>
                         </div>
                     ) : (
-                        <SimpleGrid cols={2} spacing="sm">
+                        <SimpleGrid
+                            cols={{
+                                base: 1,
+                                sm: 1,
+                                md: 2
+                            }}
+                            spacing="sm"
+                        >
                             {libraryEntries.map(([key, svg]) => (
                                 <Card
                                     className={styles.interactiveCard}
@@ -137,7 +183,7 @@ export function SvgLibraryModal(props: IProps) {
                                     <Group justify="space-between" wrap="nowrap">
                                         <Group gap="sm" wrap="nowrap">
                                             <div className={styles.svgPreviewBox}>
-                                                {isValidSvg(svg) ? (
+                                                {isSvg(svg) ? (
                                                     <ThemeIcon
                                                         color="cyan"
                                                         radius="xl"
@@ -248,7 +294,7 @@ export function SvgLibraryModal(props: IProps) {
                                         {t('svg-library-modal.component.preview')}
                                     </Text>
                                     <div className={styles.svgPreviewBox}>
-                                        {isValidSvg(newSvg) ? (
+                                        {isSvg(newSvg) ? (
                                             <ThemeIcon
                                                 color="cyan"
                                                 radius="xl"
@@ -284,7 +330,7 @@ export function SvgLibraryModal(props: IProps) {
 
                     <Button
                         disabled={
-                            !newSvg.trim() ||
+                            !isSvg(newSvg) ||
                             (!editingKey && (!newKey.trim() || !/^[A-Za-z]+$/.test(newKey)))
                         }
                         fullWidth

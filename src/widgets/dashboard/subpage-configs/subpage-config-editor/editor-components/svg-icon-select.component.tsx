@@ -4,8 +4,10 @@ import { IconCheck, IconPhoto } from '@tabler/icons-react'
 import { useDisclosure } from '@mantine/hooks'
 import { useTranslation } from 'react-i18next'
 import { useMemo } from 'react'
+import isSvg from 'is-svg'
 
 import styles from '../subpage-config-visual-editor.module.css'
+import { RequiredAsterisk } from './required-asterisk'
 
 interface IProps {
     label?: string
@@ -23,8 +25,7 @@ export function SvgIconSelect(props: IProps) {
     const entries = useMemo(() => Object.entries(svgLibrary), [svgLibrary])
 
     const selectedSvg = svgLibrary[value]
-    const isValidSvg =
-        selectedSvg && selectedSvg.trim().startsWith('<svg') && selectedSvg.includes('</svg>')
+    const isValidSelectedSvg = isSvg(selectedSvg ?? '')
 
     const handleSelect = (key: string) => {
         onChange(key)
@@ -36,6 +37,7 @@ export function SvgIconSelect(props: IProps) {
             {label && (
                 <Text c="dimmed" fw={500} mb={4} size="sm">
                     {label}
+                    <RequiredAsterisk />
                 </Text>
             )}
             <Popover
@@ -50,7 +52,7 @@ export function SvgIconSelect(props: IProps) {
                     <Box className={styles.iconSelectTrigger} onClick={toggle}>
                         <Group gap="sm" wrap="nowrap">
                             <Box className={styles.iconSelectPreview}>
-                                {isValidSvg ? (
+                                {isValidSelectedSvg ? (
                                     <Box
                                         className={styles.iconSelectSvg}
                                         dangerouslySetInnerHTML={{ __html: selectedSvg }}
@@ -79,8 +81,6 @@ export function SvgIconSelect(props: IProps) {
                     ) : (
                         <SimpleGrid cols={5} spacing={6}>
                             {entries.map(([key, svg]) => {
-                                const isValid =
-                                    svg && svg.trim().startsWith('<svg') && svg.includes('</svg>')
                                 const isSelected = key === value
 
                                 return (
@@ -98,17 +98,11 @@ export function SvgIconSelect(props: IProps) {
                                             size={52}
                                             variant="subtle"
                                         >
-                                            {isValid ? (
-                                                <Box
-                                                    className={styles.iconSelectItemSvg}
-                                                    dangerouslySetInnerHTML={{ __html: svg }}
-                                                />
-                                            ) : (
-                                                <IconPhoto
-                                                    color="var(--mantine-color-dimmed)"
-                                                    size={18}
-                                                />
-                                            )}
+                                            <Box
+                                                className={styles.iconSelectItemSvg}
+                                                dangerouslySetInnerHTML={{ __html: svg }}
+                                            />
+
                                             {isSelected && (
                                                 <Box className={styles.iconSelectCheck}>
                                                     <IconCheck size={12} />

@@ -6,8 +6,7 @@ export default {
     Drawer: Drawer.extend({
         classNames: {
             header: classes.drawerHeader,
-            body: classes.drawerBody,
-            content: classes.drawerContent
+            body: classes.drawerBody
         },
         defaultProps: {
             radius: 'md'

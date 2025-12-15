@@ -53,17 +53,19 @@ export function LocalizedTextEditor(props: IProps) {
         <>
             <UnstyledButton className={styles.localizedTextButton} onClick={open} w="100%">
                 <Group gap="sm" justify="space-between" wrap="nowrap">
-                    <Group gap="xs" wrap="nowrap">
-                        <IconLanguage className={styles.localizedTextIcon} size={16} />
-                        <div style={{ minWidth: 0 }}>
-                            <Text c="dimmed" size="xs">
+                    <Group gap="xs" style={{ flex: 1, minWidth: 0 }} wrap="nowrap">
+                        <IconLanguage
+                            className={styles.localizedTextIcon}
+                            size={16}
+                            style={{ flexShrink: 0 }}
+                        />
+                        <div style={{ minWidth: 0, flex: 1, overflow: 'hidden' }}>
+                            <Text c="dimmed" size="xs" truncate>
                                 {label}
                             </Text>
                             <Text
                                 c="white"
                                 className={styles.localizedTextPreview}
-                                lineClamp={1}
-                                maw="30ch"
                                 size="sm"
                                 truncate="end"
                             >
@@ -102,9 +104,10 @@ export function LocalizedTextEditor(props: IProps) {
                             }
                             key={locale}
                             label={LOCALE_LABELS[locale]}
-                            minRows={multiline ? 3 : undefined}
+                            minRows={multiline ? 4 : undefined}
                             onChange={(e) => handleChange(locale, e.target.value)}
                             placeholder={`Enter ${label.toLowerCase()}...`}
+                            resize={multiline ? 'vertical' : undefined}
                             value={value[locale] || ''}
                         />
                     ))}

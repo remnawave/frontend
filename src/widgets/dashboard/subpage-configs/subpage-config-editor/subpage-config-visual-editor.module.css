@@ -21,24 +21,11 @@
     border: 1px solid rgba(255, 255, 255, 0.08);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    transition: all 0.3s ease;
+    transition: border-color 0.3s ease;
 }
 
 .sectionCard:hover {
-    background: rgba(255, 255, 255, 0.03);
-}
-
-.platformCard {
-    background: rgba(255, 255, 255, 0.015);
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    transition: all 0.3s ease;
-}
-
-.platformCard:hover {
-    background: rgba(255, 255, 255, 0.03);
-    border-color: rgba(151, 117, 250, 0.2);
+    border-color: rgba(34, 211, 238, 0.25);
 }
 
 .interactiveCard {

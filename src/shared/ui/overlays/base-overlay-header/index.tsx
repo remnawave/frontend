@@ -22,7 +22,7 @@ export const BaseOverlayHeader = (props: IProps) => {
     } = props
 
     return (
-        <Group gap="sm">
+        <Group gap="sm" wrap="nowrap">
             <ThemeIcon size="lg" variant={iconVariant} {...actionIconProps}>
                 <IconComponent size={iconSize} />
             </ThemeIcon>

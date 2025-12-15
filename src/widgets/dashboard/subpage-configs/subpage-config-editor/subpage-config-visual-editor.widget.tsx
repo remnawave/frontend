@@ -26,7 +26,6 @@ import {
     IconCloudDownload,
     IconDeviceDesktop,
     IconDeviceFloppy,
-    IconDownload,
     IconGlobe,
     IconPalette,
     IconPhoto,
@@ -59,6 +58,7 @@ export function SubpageConfigVisualEditorWidget(props: Props) {
     const { config: configResponse } = props
 
     const { t } = useTranslation()
+
     const [svgLibraryOpened, { close: closeSvgLibrary, open: openSvgLibrary }] =
         useDisclosure(false)
 
@@ -68,6 +68,11 @@ export function SubpageConfigVisualEditorWidget(props: Props) {
 
     const enabledLocales: TSubscriptionPageLocales[] = ['en', ...configState.additionalLocales]
     const svgLibraryCount = Object.keys(configState.svgLibrary || {}).length
+
+    const existingPlatforms = Object.keys(configState.platforms) as TSubscriptionPagePlatformKey[]
+    const availablePlatformsToAdd = AVAILABLE_PLATFORMS.filter(
+        (p) => !existingPlatforms.includes(p.value)
+    )
 
     const { mutate: updateSubscriptionPageConfig, isPending: isUpdatingSubscriptionPageConfig } =
         useUpdateSubscriptionPageConfig({
@@ -121,11 +126,6 @@ export function SubpageConfigVisualEditorWidget(props: Props) {
         delete newPlatforms[platformKey]
         setConfigState({ ...configState, platforms: newPlatforms })
     }
-
-    const existingPlatforms = Object.keys(configState.platforms) as TSubscriptionPagePlatformKey[]
-    const availablePlatformsToAdd = AVAILABLE_PLATFORMS.filter(
-        (p) => !existingPlatforms.includes(p.value)
-    )
 
     const handleSave = () => {
         const validatedConfig = SubscriptionPageRawConfigSchema.safeParse(configState)
@@ -191,19 +191,6 @@ export function SubpageConfigVisualEditorWidget(props: Props) {
         })
     }
 
-    const handleDownloadConfig = () => {
-        const json = JSON.stringify(configState, null, 2)
-        const blob = new Blob([json], { type: 'application/json' })
-        const url = URL.createObjectURL(blob)
-        const a = document.createElement('a')
-        a.href = url
-        a.download = `subpage-${configResponse.uuid}.json`
-        document.body.appendChild(a)
-        a.click()
-        document.body.removeChild(a)
-        URL.revokeObjectURL(url)
-    }
-
     const toggleLocale = (code: TSubscriptionPageConfigAdditionalLocales) => {
         const has = configState.additionalLocales.includes(code)
         setConfigState({
@@ -245,15 +232,6 @@ export function SubpageConfigVisualEditorWidget(props: Props) {
                                 {t('subpage-config-visual-editor.widget.load-from-github')}
                             </Button>
 
-                            <Button
-                                className={styles.saveButton}
-                                leftSection={<IconDownload size={24} />}
-                                onClick={handleDownloadConfig}
-                                size="md"
-                                variant="light"
-                            >
-                                {t('common.download')}
-                            </Button>
                             <Button
                                 className={styles.saveButton}
                                 disabled={isUpdatingSubscriptionPageConfig}
@@ -301,6 +279,7 @@ export function SubpageConfigVisualEditorWidget(props: Props) {
                                     placeholder={t(
                                         'subpage-config-visual-editor.widget.your-brand-name'
                                     )}
+                                    required
                                     value={configState.brandingSettings.title}
                                 />
 
@@ -317,6 +296,7 @@ export function SubpageConfigVisualEditorWidget(props: Props) {
                                         })
                                     }
                                     placeholder="https://example.com/logo.png"
+                                    required
                                     value={configState.brandingSettings.logoUrl}
                                 />
 
@@ -333,6 +313,7 @@ export function SubpageConfigVisualEditorWidget(props: Props) {
                                         })
                                     }
                                     placeholder="https://t.me/support"
+                                    required
                                     value={configState.brandingSettings.supportUrl}
                                 />
                             </Stack>
@@ -423,123 +404,135 @@ export function SubpageConfigVisualEditorWidget(props: Props) {
 
                             <Divider className={styles.divider} />
 
-                            <Select
-                                allowDeselect={false}
-                                classNames={{ input: styles.selectDark }}
-                                data={[
-                                    {
-                                        label: t('subpage-config-visual-editor.widget.collapsed'),
-                                        value: 'collapsed'
-                                    },
-                                    {
-                                        label: t('subpage-config-visual-editor.widget.expanded'),
-                                        value: 'expanded'
-                                    },
-                                    {
-                                        label: t('subpage-config-visual-editor.widget.cards'),
-                                        value: 'cards'
-                                    },
-                                    {
-                                        label: t('subpage-config-visual-editor.widget.hidden'),
-                                        value: 'hidden'
+                            <SimpleGrid cols={{ base: 1, md: 2 }} spacing="md">
+                                <Select
+                                    allowDeselect={false}
+                                    classNames={{ input: styles.selectDark }}
+                                    data={[
+                                        {
+                                            label: t(
+                                                'subpage-config-visual-editor.widget.collapsed'
+                                            ),
+                                            value: 'collapsed'
+                                        },
+                                        {
+                                            label: t(
+                                                'subpage-config-visual-editor.widget.expanded'
+                                            ),
+                                            value: 'expanded'
+                                        },
+                                        {
+                                            label: t('subpage-config-visual-editor.widget.cards'),
+                                            value: 'cards'
+                                        },
+                                        {
+                                            label: t('subpage-config-visual-editor.widget.hidden'),
+                                            value: 'hidden'
+                                        }
+                                    ]}
+                                    label={t(
+                                        'subpage-config-visual-editor.widget.subscription-info-block-design'
+                                    )}
+                                    onChange={(v) =>
+                                        setConfigState({
+                                            ...configState,
+                                            uiConfig: {
+                                                ...configState.uiConfig,
+                                                subscriptionInfo: {
+                                                    block:
+                                                        (v as TSubscriptionPageUiConfig['subscriptionInfo']['block']) ||
+                                                        'collapsed'
+                                                }
+                                            }
+                                        })
                                     }
-                                ]}
-                                label={t(
-                                    'subpage-config-visual-editor.widget.subscription-info-block-design'
-                                )}
-                                onChange={(v) =>
-                                    setConfigState({
-                                        ...configState,
-                                        uiConfig: {
-                                            ...configState.uiConfig,
-                                            subscriptionInfo: {
-                                                block:
-                                                    (v as TSubscriptionPageUiConfig['subscriptionInfo']['block']) ||
-                                                    'collapsed'
-                                            }
-                                        }
-                                    })
-                                }
-                                value={configState.uiConfig.subscriptionInfo.block}
-                            />
+                                    required
+                                    value={configState.uiConfig.subscriptionInfo.block}
+                                />
 
-                            <Select
-                                allowDeselect={false}
-                                classNames={{ input: styles.selectDark }}
-                                data={[
-                                    {
-                                        label: t('subpage-config-visual-editor.widget.cards'),
-                                        value: 'cards'
-                                    },
-                                    {
-                                        label: t('subpage-config-visual-editor.widget.accordion'),
-                                        value: 'accordion'
-                                    },
-                                    {
-                                        label: t('subpage-config-visual-editor.widget.minimal'),
-                                        value: 'minimal'
-                                    },
-                                    {
-                                        label: t('subpage-config-visual-editor.widget.timeline'),
-                                        value: 'timeline'
+                                <Select
+                                    allowDeselect={false}
+                                    classNames={{ input: styles.selectDark }}
+                                    data={[
+                                        {
+                                            label: t('subpage-config-visual-editor.widget.cards'),
+                                            value: 'cards'
+                                        },
+                                        {
+                                            label: t(
+                                                'subpage-config-visual-editor.widget.accordion'
+                                            ),
+                                            value: 'accordion'
+                                        },
+                                        {
+                                            label: t('subpage-config-visual-editor.widget.minimal'),
+                                            value: 'minimal'
+                                        },
+                                        {
+                                            label: t(
+                                                'subpage-config-visual-editor.widget.timeline'
+                                            ),
+                                            value: 'timeline'
+                                        }
+                                    ]}
+                                    label={t(
+                                        'subpage-config-visual-editor.widget.installation-guides-design'
+                                    )}
+                                    onChange={(v) =>
+                                        setConfigState({
+                                            ...configState,
+                                            uiConfig: {
+                                                ...configState.uiConfig,
+                                                installationGuides: {
+                                                    ...configState.uiConfig.installationGuides,
+                                                    block:
+                                                        (v as TSubscriptionPageUiConfig['installationGuides']['block']) ||
+                                                        'cards'
+                                                }
+                                            }
+                                        })
                                     }
-                                ]}
-                                label={t(
-                                    'subpage-config-visual-editor.widget.installation-guides-design'
-                                )}
-                                onChange={(v) =>
-                                    setConfigState({
-                                        ...configState,
-                                        uiConfig: {
-                                            ...configState.uiConfig,
-                                            installationGuides: {
-                                                ...configState.uiConfig.installationGuides,
-                                                block:
-                                                    (v as TSubscriptionPageUiConfig['installationGuides']['block']) ||
-                                                    'cards'
-                                            }
-                                        }
-                                    })
-                                }
-                                value={configState.uiConfig.installationGuides.block || 'cards'}
-                            />
+                                    required
+                                    value={configState.uiConfig.installationGuides.block || 'cards'}
+                                />
 
-                            <LocalizedTextEditor
-                                enabledLocales={enabledLocales}
-                                label={t(
-                                    'subpage-config-visual-editor.widget.installation-guides-header'
-                                )}
-                                onChange={(headerText) =>
-                                    setConfigState({
-                                        ...configState,
-                                        uiConfig: {
-                                            ...configState.uiConfig,
-                                            installationGuides: {
-                                                ...configState.uiConfig.installationGuides,
-                                                headerText
+                                <LocalizedTextEditor
+                                    enabledLocales={enabledLocales}
+                                    label={t(
+                                        'subpage-config-visual-editor.widget.connection-keys-header'
+                                    )}
+                                    onChange={(headerText) =>
+                                        setConfigState({
+                                            ...configState,
+                                            uiConfig: {
+                                                ...configState.uiConfig,
+                                                connectionKeys: { headerText }
                                             }
-                                        }
-                                    })
-                                }
-                                value={configState.uiConfig.installationGuides.headerText}
-                            />
+                                        })
+                                    }
+                                    value={configState.uiConfig.connectionKeys.headerText}
+                                />
 
-                            <LocalizedTextEditor
-                                enabledLocales={enabledLocales}
-                                label={t(
-                                    'subpage-config-visual-editor.widget.connection-keys-header'
-                                )}
-                                onChange={(headerText) =>
-                                    setConfigState({
-                                        ...configState,
-                                        uiConfig: {
-                                            ...configState.uiConfig,
-                                            connectionKeys: { headerText }
-                                        }
-                                    })
-                                }
-                                value={configState.uiConfig.connectionKeys.headerText}
-                            />
+                                <LocalizedTextEditor
+                                    enabledLocales={enabledLocales}
+                                    label={t(
+                                        'subpage-config-visual-editor.widget.installation-guides-header'
+                                    )}
+                                    onChange={(headerText) =>
+                                        setConfigState({
+                                            ...configState,
+                                            uiConfig: {
+                                                ...configState.uiConfig,
+                                                installationGuides: {
+                                                    ...configState.uiConfig.installationGuides,
+                                                    headerText
+                                                }
+                                            }
+                                        })
+                                    }
+                                    value={configState.uiConfig.installationGuides.headerText}
+                                />
+                            </SimpleGrid>
                         </Stack>
                     </Card>
 
@@ -562,7 +555,7 @@ export function SubpageConfigVisualEditorWidget(props: Props) {
                                         allowDeselect={false}
                                         classNames={{ input: styles.selectDark }}
                                         data={availablePlatformsToAdd}
-                                        leftSection={<IconPlus size={14} />}
+                                        leftSection={<IconPlus size={20} />}
                                         onChange={(value) => {
                                             if (value)
                                                 handleAddPlatform(
@@ -572,9 +565,8 @@ export function SubpageConfigVisualEditorWidget(props: Props) {
                                         placeholder={t(
                                             'subpage-config-visual-editor.widget.add-platform'
                                         )}
-                                        size="xs"
                                         value={null}
-                                        w={150}
+                                        w={180}
                                     />
                                 )}
                             </Group>
