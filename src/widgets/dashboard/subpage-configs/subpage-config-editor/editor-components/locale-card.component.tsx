@@ -1,47 +1,49 @@
-import { TSubscriptionPageLocales } from '@remnawave/subscription-page-types'
+import { getLanguageInfo, TSubscriptionPageLanguageCode } from '@remnawave/subscription-page-types'
 import { Badge, Group, Text, UnstyledButton } from '@mantine/core'
 
 import styles from '../subpage-config-visual-editor.module.css'
 
 interface IProps {
-    code: TSubscriptionPageLocales
-    flag: string
+    code: TSubscriptionPageLanguageCode
     isActive: boolean
-    isDefault?: boolean
-    name: string
-    nativeName: string
+    isToggleDisabled?: boolean
     onToggle: () => void
 }
 
 export function LocaleCard(props: IProps) {
-    const { code, flag, isActive, isDefault, name, nativeName, onToggle } = props
+    const { code, isActive, isToggleDisabled, onToggle } = props
 
-    const getBadgeColor = () => {
-        if (isDefault) return 'cyan'
-        return isActive ? 'teal' : 'gray'
+    const localeInfo = getLanguageInfo(code)
+
+    if (!localeInfo) {
+        return null
     }
 
     return (
         <UnstyledButton
             className={isActive ? styles.localeCardActive : styles.localeCard}
-            disabled={isDefault}
+            disabled={isToggleDisabled}
             onClick={onToggle}
         >
-            <Group gap="xs" justify="space-between">
-                <Group gap="xs">
-                    <Text fw={600} size="lg">
-                        {flag}
+            <Group gap="xs" justify="space-between" wrap="nowrap">
+                <Group gap="xs" style={{ flex: 1, minWidth: 0 }} wrap="nowrap">
+                    <Text size="lg" style={{ lineHeight: 1 }}>
+                        {localeInfo.emoji}
                     </Text>
-                    <div>
-                        <Text c="white" fw={500} size="sm">
-                            {name}
+                    <div style={{ minWidth: 0, flex: 1 }}>
+                        <Text c={isActive ? 'white' : 'dimmed'} fw={500} size="xs" truncate>
+                            {localeInfo.name}
                         </Text>
-                        <Text c="dimmed" size="xs">
-                            {nativeName}
+                        <Text c="dimmed" size="xs" truncate>
+                            {localeInfo.nativeName}
                         </Text>
                     </div>
                 </Group>
-                <Badge color={getBadgeColor()} size="xs" variant="filled">
+                <Badge
+                    color={isActive ? 'teal' : 'gray'}
+                    size="xs"
+                    variant={isActive ? 'filled' : 'light'}
+                >
                     {code.toUpperCase()}
                 </Badge>
             </Group>

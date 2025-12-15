@@ -1,7 +1,7 @@
 import {
     TSubscriptionPageAppConfig,
     TSubscriptionPageBlockConfig,
-    TSubscriptionPageLocales,
+    TSubscriptionPageLanguageCode,
     TSubscriptionPageSvgLibrary
 } from '@remnawave/subscription-page-types'
 import { Button, Card, Group, Stack, Switch, TextInput } from '@mantine/core'
@@ -14,11 +14,12 @@ import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 
 import { BlockEditorModal } from './block-editor.modal.component'
 import styles from '../subpage-config-visual-editor.module.css'
+import { SvgIconSelect } from './svg-icon-select.component'
 import { BlockCard } from './block-card.component'
 
 interface IProps {
     app: TSubscriptionPageAppConfig
-    enabledLocales: TSubscriptionPageLocales[]
+    enabledLocales: TSubscriptionPageLanguageCode[]
     onChange: (app: TSubscriptionPageAppConfig) => void
     svgLibrary: TSubscriptionPageSvgLibrary
 }
@@ -32,12 +33,15 @@ export function AppEditorDrawerContent(props: IProps) {
     const [editingBlockIndex, setEditingBlockIndex] = useState<null | number>(null)
 
     const handleAddBlock = () => {
+        const firstLocale = enabledLocales[0]
+        const emptyLocalizedText = firstLocale ? { [firstLocale]: '' } : {}
+
         const newBlock: TSubscriptionPageBlockConfig = {
             buttons: [],
-            description: { en: '' },
+            description: emptyLocalizedText,
             svgIconColor: 'cyan',
             svgIconKey: '',
-            title: { en: '' }
+            title: emptyLocalizedText
         }
         onChange({ ...app, blocks: [...app.blocks, newBlock] })
     }
@@ -125,6 +129,14 @@ export function AppEditorDrawerContent(props: IProps) {
                             onChange={(e) => onChange({ ...app, name: e.target.value })}
                             placeholder={t('app-editor-drawer-content.component.app-name')}
                             value={app.name}
+                        />
+
+                        <SvgIconSelect
+                            label={t('block-editor.modal.component.svg-icon')}
+                            onChange={(svgIconKey) => onChange({ ...app, svgIconKey })}
+                            required={false}
+                            svgLibrary={svgLibrary}
+                            value={app.svgIconKey}
                         />
                     </Stack>
                 </Card>

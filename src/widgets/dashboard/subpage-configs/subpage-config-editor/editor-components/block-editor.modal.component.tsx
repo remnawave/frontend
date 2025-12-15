@@ -1,7 +1,7 @@
 import {
     TSubscriptionPageBlockConfig,
     TSubscriptionPageButtonConfig,
-    TSubscriptionPageLocales,
+    TSubscriptionPageLanguageCode,
     TSubscriptionPageSvgLibrary
 } from '@remnawave/subscription-page-types'
 import { IconChevronRight, IconPalette, IconPlus } from '@tabler/icons-react'
@@ -18,7 +18,7 @@ import { ButtonEditor } from './button-editor.component'
 
 interface IProps {
     block: null | TSubscriptionPageBlockConfig
-    enabledLocales: TSubscriptionPageLocales[]
+    enabledLocales: TSubscriptionPageLanguageCode[]
     onChange: (block: TSubscriptionPageBlockConfig) => void
     onClose: () => void
     onExited?: () => void
@@ -47,12 +47,19 @@ export function BlockEditorModal(props: IProps) {
     const { block, enabledLocales, onChange, onClose, onExited, opened, svgLibrary } = props
     const { t } = useTranslation()
 
+    const firstLocale = enabledLocales[0]
+    const blockTitle =
+        (firstLocale && block?.title[firstLocale]) ||
+        t('block-editor.modal.component.untitled-block')
+
     const handleAddButton = () => {
         if (!block) return
+        const emptyLocalizedText = firstLocale ? { [firstLocale]: '' } : {}
+
         const newButton: TSubscriptionPageButtonConfig = {
             link: '',
             svgIconKey: '',
-            text: { en: '' },
+            text: emptyLocalizedText,
             type: 'external'
         }
         onChange({ ...block, buttons: [...block.buttons, newButton] })
@@ -108,7 +115,7 @@ export function BlockEditorModal(props: IProps) {
                 <BaseOverlayHeader
                     IconComponent={IconChevronRight}
                     iconVariant="gradient-violet"
-                    subtitle={block?.title.en || t('block-editor.modal.component.untitled-block')}
+                    subtitle={blockTitle}
                     title={t('block-editor.modal.component.edit-block')}
                 />
             }

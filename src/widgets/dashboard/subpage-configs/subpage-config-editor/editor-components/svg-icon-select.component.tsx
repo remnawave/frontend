@@ -9,7 +9,7 @@ import {
     Tooltip
 } from '@mantine/core'
 import { TSubscriptionPageSvgLibrary } from '@remnawave/subscription-page-types'
-import { IconCheck, IconPhoto } from '@tabler/icons-react'
+import { IconCheck, IconPhoto, IconX } from '@tabler/icons-react'
 import { useDisclosure } from '@mantine/hooks'
 import { useTranslation } from 'react-i18next'
 import { useMemo } from 'react'
@@ -18,22 +18,34 @@ import isSvg from 'is-svg'
 import styles from '../subpage-config-visual-editor.module.css'
 import { RequiredAsterisk } from './required-asterisk'
 
-interface IProps {
+interface BaseProps {
     label?: string
-    onChange: (key: string) => void
     svgLibrary: TSubscriptionPageSvgLibrary
+}
+
+interface RequiredProps extends BaseProps {
+    onChange: (key: string) => void
+    required?: true
     value: string
 }
 
+interface OptionalProps extends BaseProps {
+    onChange: (key: string | undefined) => void
+    required: false
+    value: string | undefined
+}
+
+type IProps = OptionalProps | RequiredProps
+
 export function SvgIconSelect(props: IProps) {
-    const { label, onChange, svgLibrary, value } = props
+    const { label, onChange, svgLibrary, value, required = true } = props
     const { t } = useTranslation()
 
     const [opened, { close, toggle }] = useDisclosure(false)
 
     const entries = useMemo(() => Object.entries(svgLibrary), [svgLibrary])
 
-    const selectedSvg = svgLibrary[value]
+    const selectedSvg = value ? svgLibrary[value] : undefined
     const isValidSelectedSvg = isSvg(selectedSvg ?? '')
 
     const handleSelect = (key: string) => {
@@ -41,12 +53,18 @@ export function SvgIconSelect(props: IProps) {
         close()
     }
 
+    const handleClear = (e: React.MouseEvent) => {
+        e.stopPropagation()
+        // Safe: handleClear is only rendered when required={false}
+        ;(onChange as (key: string | undefined) => void)(undefined)
+    }
+
     return (
         <Box>
             {label && (
                 <Text c="dimmed" fw={500} mb={4} size="sm">
                     {label}
-                    <RequiredAsterisk />
+                    {required && <RequiredAsterisk />}
                 </Text>
             )}
             <Popover
@@ -61,7 +79,7 @@ export function SvgIconSelect(props: IProps) {
                     <Box className={styles.iconSelectTrigger} onClick={toggle}>
                         <Group gap="sm" wrap="nowrap">
                             <Box className={styles.iconSelectPreview}>
-                                {isValidSelectedSvg ? (
+                                {isValidSelectedSvg && selectedSvg ? (
                                     <Box
                                         className={styles.iconSelectSvg}
                                         dangerouslySetInnerHTML={{ __html: selectedSvg }}
@@ -75,6 +93,16 @@ export function SvgIconSelect(props: IProps) {
                                     {value || t('svg-icon-select.component.select-icon')}
                                 </Text>
                             </Box>
+                            {!required && value && (
+                                <ActionIcon
+                                    color="gray"
+                                    onClick={handleClear}
+                                    size="sm"
+                                    variant="subtle"
+                                >
+                                    <IconX size={14} />
+                                </ActionIcon>
+                            )}
                         </Group>
                     </Box>
                 </Popover.Target>

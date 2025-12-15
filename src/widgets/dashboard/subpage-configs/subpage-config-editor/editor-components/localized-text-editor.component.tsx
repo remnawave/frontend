@@ -10,7 +10,8 @@ import {
     UnstyledButton
 } from '@mantine/core'
 import {
-    TSubscriptionPageLocales,
+    getLanguageName,
+    TSubscriptionPageLanguageCode,
     TSubscriptionPageLocalizedText
 } from '@remnawave/subscription-page-types'
 import { IconLanguage } from '@tabler/icons-react'
@@ -20,10 +21,9 @@ import { useTranslation } from 'react-i18next'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 
 import styles from '../subpage-config-visual-editor.module.css'
-import { LOCALE_LABELS } from '../subpage-config.constants'
 
 interface IProps {
-    enabledLocales: TSubscriptionPageLocales[]
+    enabledLocales: TSubscriptionPageLanguageCode[]
     label: string
     multiline?: boolean
     onChange: (value: TSubscriptionPageLocalizedText) => void
@@ -35,19 +35,17 @@ export function LocalizedTextEditor(props: IProps) {
     const { t } = useTranslation()
 
     const [opened, { close, open }] = useDisclosure(false)
-    const allLocales: TSubscriptionPageLocales[] = [
-        'en',
-        ...enabledLocales.filter((l) => l !== 'en')
-    ]
 
-    const handleChange = (locale: TSubscriptionPageLocales, text: string) => {
+    const handleChange = (locale: TSubscriptionPageLanguageCode, text: string) => {
         onChange({ ...value, [locale]: text })
     }
 
     const InputComponent = multiline ? Textarea : TextInput
 
-    const filledCount = allLocales.filter((locale) => value[locale]?.trim()).length
-    const previewText = value.en || t('localized-text-editor.component.not-set')
+    const filledCount = enabledLocales.filter((locale) => value[locale]?.trim()).length
+    const previewLocale = enabledLocales[0]
+    const previewText =
+        (previewLocale && value[previewLocale]) || t('localized-text-editor.component.not-set')
 
     return (
         <>
@@ -73,8 +71,11 @@ export function LocalizedTextEditor(props: IProps) {
                             </Text>
                         </div>
                     </Group>
-                    <Badge color={filledCount === allLocales.length ? 'green' : 'gray'} size="sm">
-                        {filledCount}/{allLocales.length}
+                    <Badge
+                        color={filledCount === enabledLocales.length ? 'green' : 'gray'}
+                        size="sm"
+                    >
+                        {filledCount}/{enabledLocales.length}
                     </Badge>
                 </Group>
             </UnstyledButton>
@@ -94,17 +95,14 @@ export function LocalizedTextEditor(props: IProps) {
                 }
             >
                 <Stack gap="md">
-                    {allLocales.map((locale) => (
+                    {enabledLocales.map((locale, index) => (
                         <InputComponent
+                            autosize={!!multiline}
                             classNames={{ input: styles.inputDark }}
-                            description={
-                                locale === 'en'
-                                    ? t('localized-text-editor.component.required-default-language')
-                                    : undefined
-                            }
+                            description={index === 0 ? 'Primary language' : undefined}
                             key={locale}
-                            label={LOCALE_LABELS[locale]}
-                            minRows={multiline ? 4 : undefined}
+                            label={getLanguageName(locale)}
+                            minRows={multiline ? 3 : undefined}
                             onChange={(e) => handleChange(locale, e.target.value)}
                             placeholder={`Enter ${label.toLowerCase()}...`}
                             resize={multiline ? 'vertical' : undefined}

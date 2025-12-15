@@ -1835,5 +1835,11 @@
             "import-config": "Import config",
             "download-config": "Download config"
         }
+    },
+    "base-translations-drawer": {
+        "component": {
+            "base-translations": "Base Translations",
+            "completed": "{{count}}/{{total}} completed"
+        }
     }
 }

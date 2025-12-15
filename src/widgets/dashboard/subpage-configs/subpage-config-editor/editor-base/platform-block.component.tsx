@@ -1,5 +1,4 @@
 import {
-    TSubscriptionPageLocales,
     TSubscriptionPagePlatformKey,
     TSubscriptionPagePlatformSchema,
     TSubscriptionPageRawConfig
@@ -24,7 +23,7 @@ export function PlatformBlockComponent(props: IProps) {
     const { t } = useTranslation()
     const values = form.getValues()
 
-    const enabledLocales: TSubscriptionPageLocales[] = ['en', ...values.additionalLocales]
+    const enabledLocales = values.locales
 
     const existingPlatforms = Object.keys(values.platforms) as TSubscriptionPagePlatformKey[]
     const availablePlatformsToAdd = AVAILABLE_PLATFORMS.filter(
@@ -32,12 +31,13 @@ export function PlatformBlockComponent(props: IProps) {
     )
 
     const handleAddPlatform = (platformKey: TSubscriptionPagePlatformKey) => {
-        const { platforms } = form.getValues()
+        const { platforms, locales } = form.getValues()
         if (platforms[platformKey]) return
 
+        const firstLocale = locales[0]
         const newPlatform: TSubscriptionPagePlatformSchema = {
             apps: [],
-            displayName: { en: PLATFORM_LABELS[platformKey] },
+            displayName: firstLocale ? { [firstLocale]: PLATFORM_LABELS[platformKey] } : {},
             svgIconKey: ''
         }
 

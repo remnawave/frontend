@@ -1,6 +1,10 @@
-import { IconArrowDown, IconArrowUp, IconStar, IconTrash } from '@tabler/icons-react'
-import { TSubscriptionPageAppConfig } from '@remnawave/subscription-page-types'
-import { ActionIcon, Badge, Card, Group, Text } from '@mantine/core'
+import {
+    TSubscriptionPageAppConfig,
+    TSubscriptionPageSvgLibrary
+} from '@remnawave/subscription-page-types'
+import { IconArrowDown, IconArrowUp, IconPhoto, IconStar, IconTrash } from '@tabler/icons-react'
+import { ActionIcon, Badge, Box, Card, Group, Text } from '@mantine/core'
+import isSvg from 'is-svg'
 
 import styles from '../subpage-config-visual-editor.module.css'
 
@@ -13,16 +17,40 @@ interface IProps {
     onEdit: () => void
     onMoveDown: () => void
     onMoveUp: () => void
+    svgLibrary: TSubscriptionPageSvgLibrary
 }
 
 export function AppCard(props: IProps) {
-    const { app, canMoveDown, canMoveUp, index, onDelete, onEdit, onMoveDown, onMoveUp } = props
+    const {
+        app,
+        canMoveDown,
+        canMoveUp,
+        index,
+        onDelete,
+        onEdit,
+        onMoveDown,
+        onMoveUp,
+        svgLibrary
+    } = props
+
+    const svgContent = app.svgIconKey ? svgLibrary[app.svgIconKey] : null
+    const hasValidIcon = svgContent && isSvg(svgContent)
 
     return (
         <Card className={styles.interactiveCard} onClick={onEdit} p="sm" radius="md">
-            <Group justify="space-between">
-                <Group gap="sm">
-                    <Text c="white" fw={600} size="sm">
+            <Group justify="space-between" wrap="nowrap">
+                <Group gap="sm" wrap="nowrap">
+                    <Box className={styles.appIconPreview}>
+                        {hasValidIcon ? (
+                            <Box
+                                className={styles.appIconSvg}
+                                dangerouslySetInnerHTML={{ __html: svgContent }}
+                            />
+                        ) : (
+                            <IconPhoto color="var(--mantine-color-dimmed)" size={18} />
+                        )}
+                    </Box>
+                    <Text c="white" fw={600} size="sm" truncate>
                         {app.name || `App ${index + 1}`}
                     </Text>
                     {app.featured && (

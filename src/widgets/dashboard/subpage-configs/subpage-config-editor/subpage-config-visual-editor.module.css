@@ -140,18 +140,15 @@
     background: rgba(255, 255, 255, 0.01) !important;
     border-radius: var(--mantine-radius-md);
     margin-bottom: var(--mantine-spacing-sm);
+    transition: border-color 0.2s ease;
+}
+
+.accordionItem:hover {
+    border-color: rgba(255, 255, 255, 0.12) !important;
 }
 
 .accordionControl {
     padding: var(--mantine-spacing-sm) var(--mantine-spacing-md);
-}
-
-.accordionControl:hover {
-    background: rgba(255, 255, 255, 0.02);
-}
-
-.accordionPanel {
-    padding: 0 var(--mantine-spacing-md) var(--mantine-spacing-md);
 }
 
 .textareaDark textarea {
@@ -280,6 +277,29 @@
     background: linear-gradient(135deg, rgba(34, 211, 238, 0.1) 0%, rgba(6, 182, 212, 0.05) 100%);
     border: 1px solid rgba(34, 211, 238, 0.2);
     flex-shrink: 0;
+}
+
+.appIconPreview {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: var(--mantine-radius-sm);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    flex-shrink: 0;
+}
+
+.appIconSvg {
+    width: 18px;
+    height: 18px;
+    color: var(--mantine-color-cyan-4);
+}
+
+.appIconSvg svg {
+    width: 100%;
+    height: 100%;
 }
 
 .iconSelectSvg {

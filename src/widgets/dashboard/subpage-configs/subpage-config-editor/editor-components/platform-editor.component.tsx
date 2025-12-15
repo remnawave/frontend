@@ -1,6 +1,6 @@
 import {
     TSubscriptionPageAppConfig,
-    TSubscriptionPageLocales,
+    TSubscriptionPageLanguageCode,
     TSubscriptionPagePlatformKey,
     TSubscriptionPagePlatformSchema,
     TSubscriptionPageSvgLibrary
@@ -21,7 +21,7 @@ import { SvgIconSelect } from './svg-icon-select.component'
 import { AppCard } from './app-card.component'
 
 interface IProps {
-    enabledLocales: TSubscriptionPageLocales[]
+    enabledLocales: TSubscriptionPageLanguageCode[]
     onChange: (platform: TSubscriptionPagePlatformSchema) => void
     onDelete: () => void
     platform: TSubscriptionPagePlatformSchema
@@ -112,7 +112,7 @@ export function PlatformEditor(props: IProps) {
                         <IconTrash size={18} />
                     </ActionIcon>
                 </Center>
-                <Accordion.Panel className={styles.accordionPanel}>
+                <Accordion.Panel>
                     <Stack gap="md">
                         <SvgIconSelect
                             label={t('platform-editor.component.platform-svg-icon')}
@@ -146,6 +146,7 @@ export function PlatformEditor(props: IProps) {
                                     onEdit={() => handleEditApp(appIndex)}
                                     onMoveDown={() => handleAppMoveDown(appIndex)}
                                     onMoveUp={() => handleAppMoveUp(appIndex)}
+                                    svgLibrary={svgLibrary}
                                 />
                             ))}
 

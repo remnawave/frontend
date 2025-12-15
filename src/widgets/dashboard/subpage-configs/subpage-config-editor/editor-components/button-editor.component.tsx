@@ -3,7 +3,7 @@ import {
     SUBSCRIPTION_PAGE_TEMPLATE_KEYS,
     TButtonType,
     TSubscriptionPageButtonConfig,
-    TSubscriptionPageLocales,
+    TSubscriptionPageLanguageCode,
     TSubscriptionPageSvgLibrary
 } from '@remnawave/subscription-page-types'
 import {
@@ -32,7 +32,7 @@ interface IProps {
     button: TSubscriptionPageButtonConfig
     canMoveDown: boolean
     canMoveUp: boolean
-    enabledLocales: TSubscriptionPageLocales[]
+    enabledLocales: TSubscriptionPageLanguageCode[]
     index: number
     onChange: (button: TSubscriptionPageButtonConfig) => void
     onDelete: () => void
@@ -57,6 +57,9 @@ export function ButtonEditor(props: IProps) {
     const { t } = useTranslation()
     const [opened, { toggle }] = useDisclosure(false)
 
+    const firstLocale = enabledLocales[0]
+    const buttonTitle = (firstLocale && button.text[firstLocale]) || 'Untitled'
+
     return (
         <Card className={styles.buttonCard} p="sm" radius="md">
             <Stack gap="sm">
@@ -67,7 +70,7 @@ export function ButtonEditor(props: IProps) {
                             size={16}
                         />
                         <Text c="white" fw={500} size="sm">
-                            Button {index + 1}: {button.text.en || 'Untitled'}
+                            Button {index + 1}: {buttonTitle}
                         </Text>
                         <Badge
                             color={button.type === 'external' ? 'blue' : 'cyan'}
