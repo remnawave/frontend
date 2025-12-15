@@ -1,7 +1,7 @@
 import { ActionIcon, Box, Button, Card, CopyButton, Group, Menu, Stack, Text } from '@mantine/core'
 import { GetSubscriptionPageConfigsCommand } from '@remnawave/backend-contract'
+import { TbChevronDown, TbCopyCheck, TbEdit, TbFile } from 'react-icons/tb'
 import { PiCheck, PiCopy, PiPencil, PiTrashDuotone } from 'react-icons/pi'
-import { TbChevronDown, TbEdit, TbFile } from 'react-icons/tb'
 import { generatePath, useNavigate } from 'react-router-dom'
 import { useDisclosure } from '@mantine/hooks'
 import { useTranslation } from 'react-i18next'
@@ -14,14 +14,19 @@ import { ROUTES } from '@shared/constants'
 import classes from './subpage-config-card.module.css'
 
 interface IProps {
+    handleCloneSubpageConfig: (subpageConfigUuid: string) => void
     handleDeleteSubpageConfig: (subpageConfigUuid: string) => void
-
     isDragOverlay?: boolean
     subpageConfig: GetSubscriptionPageConfigsCommand.Response['response']['configs'][number]
 }
 
 export function SubpageConfigCardWidget(props: IProps) {
-    const { subpageConfig, handleDeleteSubpageConfig, isDragOverlay = false } = props
+    const {
+        subpageConfig,
+        handleDeleteSubpageConfig,
+        handleCloneSubpageConfig,
+        isDragOverlay = false
+    } = props
 
     const { t } = useTranslation()
 
@@ -171,6 +176,15 @@ export function SubpageConfigCardWidget(props: IProps) {
                                     }}
                                 >
                                     {t('common.rename')}
+                                </Menu.Item>
+
+                                <Menu.Item
+                                    leftSection={<TbCopyCheck size={18} />}
+                                    onClick={() => {
+                                        handleCloneSubpageConfig(subpageConfig.uuid)
+                                    }}
+                                >
+                                    {t('common.clone')}
                                 </Menu.Item>
 
                                 <Menu.Item

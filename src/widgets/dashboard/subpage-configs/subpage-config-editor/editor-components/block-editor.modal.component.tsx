@@ -11,9 +11,9 @@ import { useTranslation } from 'react-i18next'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 
 import { LocalizedTextEditor } from './localized-text-editor.component'
-import { SvgIconSelect } from './svg-icon-select.component'
 import styles from '../subpage-config-visual-editor.module.css'
 import { SubpageTooltips } from './subpage-tooltips.component'
+import { SvgIconSelect } from './svg-icon-select.component'
 import { ButtonEditor } from './button-editor.component'
 
 interface IProps {

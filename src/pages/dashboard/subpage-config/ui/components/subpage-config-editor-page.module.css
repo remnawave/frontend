@@ -1,0 +1,37 @@
+.editorWrapper {
+    min-height: 100vh;
+    background-color: #161b23;
+    background-image:
+        linear-gradient(to right, rgba(128, 128, 128, 0.05) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(128, 128, 128, 0.05) 1px, transparent 1px);
+    background-size: 60px 60px;
+    padding: var(--mantine-spacing-xs);
+    position: relative;
+    border-radius: var(--mantine-radius-lg);
+    overflow: hidden;
+}
+
+.headerWrapper {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    background: rgba(22, 27, 35, 0.9);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    margin: calc(var(--mantine-spacing-xl) * -1);
+    margin-bottom: var(--mantine-spacing-xl);
+    padding: var(--mantine-spacing-md) var(--mantine-spacing-xl);
+}
+
+.saveButton {
+    background: linear-gradient(135deg, rgba(34, 211, 238, 0.2) 0%, rgba(6, 182, 212, 0.15) 100%);
+    border: 1px solid rgba(34, 211, 238, 0.4);
+    transition: all 0.2s ease;
+}
+
+.saveButton:hover {
+    background: linear-gradient(135deg, rgba(34, 211, 238, 0.3) 0%, rgba(6, 182, 212, 0.25) 100%);
+    border-color: rgba(34, 211, 238, 0.6);
+    transform: translateY(-1px);
+}

@@ -3,6 +3,7 @@ import { modals } from '@mantine/modals'
 
 import {
     QueryKeys,
+    useCloneSubscriptionPageConfig,
     useDeleteSubscriptionPageConfig,
     useReorderSubscriptionPageConfigs
 } from '@shared/api/hooks'
@@ -32,6 +33,16 @@ export function SubpageConfigsGridWidget(props: IProps) {
                     QueryKeys.subpageConfigs.getSubscriptionPageConfigs.queryKey,
                     data
                 )
+            }
+        }
+    })
+
+    const { mutate: cloneSubpageConfig } = useCloneSubscriptionPageConfig({
+        mutationFns: {
+            onSuccess: () => {
+                queryClient.refetchQueries({
+                    queryKey: QueryKeys.subpageConfigs.getSubscriptionPageConfigs.queryKey
+                })
             }
         }
     })
@@ -68,6 +79,14 @@ export function SubpageConfigsGridWidget(props: IProps) {
         })
     }
 
+    const handleCloneSubpageConfig = (subpageConfigUuid: string) => {
+        cloneSubpageConfig({
+            variables: {
+                cloneFromUuid: subpageConfigUuid
+            }
+        })
+    }
+
     return (
         <VirtualizedDndGrid
             enableDnd={true}
@@ -76,6 +95,7 @@ export function SubpageConfigsGridWidget(props: IProps) {
             onReorder={handleReorder}
             renderDragOverlay={(subpageConfig) => (
                 <SubpageConfigCardWidget
+                    handleCloneSubpageConfig={handleCloneSubpageConfig}
                     handleDeleteSubpageConfig={handleDeleteSubpageConfig}
                     isDragOverlay
                     subpageConfig={subpageConfig}
@@ -83,6 +103,7 @@ export function SubpageConfigsGridWidget(props: IProps) {
             )}
             renderItem={(subpageConfig) => (
                 <SubpageConfigCardWidget
+                    handleCloneSubpageConfig={handleCloneSubpageConfig}
                     handleDeleteSubpageConfig={handleDeleteSubpageConfig}
                     subpageConfig={subpageConfig}
                 />

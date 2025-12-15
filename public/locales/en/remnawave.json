@@ -55,7 +55,8 @@
         "download": "Download",
         "search": "Search",
         "nothing-found": "Nothing found",
-        "name": "Name"
+        "name": "Name",
+        "clone": "Clone"
     },
     "bandwidth-metrics": {
         "current-year": "Current year",
@@ -1826,6 +1827,14 @@
                 "subscription-page-config-description": "You can override the subscription page configuration (Remnawave Subscription Page) for this external squad.",
                 "subpage-config": "Subpage Config",
                 "select-config": "Select config..."
+            }
+        }
+    },
+    "subpage-config-editor-page": {
+        "component": {
+            "": {
+                "import-config": "Import config",
+                "download-config": "Download config"
             }
         }
     }

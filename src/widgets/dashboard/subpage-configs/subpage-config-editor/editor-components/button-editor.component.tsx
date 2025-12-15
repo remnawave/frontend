@@ -1,4 +1,12 @@
 import {
+    BUTTON_TYPES_VALUES,
+    SUBSCRIPTION_PAGE_TEMPLATE_KEYS,
+    TButtonType,
+    TSubscriptionPageButtonConfig,
+    TSubscriptionPageLocales,
+    TSubscriptionPageSvgLibrary
+} from '@remnawave/subscription-page-types'
+import {
     ActionIcon,
     Badge,
     Card,
@@ -10,21 +18,15 @@ import {
     Text,
     TextInput
 } from '@mantine/core'
-import {
-    SUBSCRIPTION_PAGE_TEMPLATE_KEYS,
-    TSubscriptionPageButtonConfig,
-    TSubscriptionPageLocales,
-    TSubscriptionPageSvgLibrary
-} from '@remnawave/subscription-page-types'
 import { IconArrowDown, IconArrowUp, IconChevronRight, IconTrash } from '@tabler/icons-react'
 import { PiCheck, PiCopy } from 'react-icons/pi'
 import { useDisclosure } from '@mantine/hooks'
 import { useTranslation } from 'react-i18next'
 
 import { LocalizedTextEditor } from './localized-text-editor.component'
-import { SvgIconSelect } from './svg-icon-select.component'
 import styles from '../subpage-config-visual-editor.module.css'
 import { SubpageTooltips } from './subpage-tooltips.component'
+import { SvgIconSelect } from './svg-icon-select.component'
 
 interface IProps {
     button: TSubscriptionPageButtonConfig
@@ -159,23 +161,12 @@ export function ButtonEditor(props: IProps) {
                             <Select
                                 allowDeselect={false}
                                 classNames={{ input: styles.selectDark }}
-                                data={[
-                                    {
-                                        label: t('button-editor.component.external-link'),
-                                        value: 'external'
-                                    },
-                                    {
-                                        label: t('button-editor.component.subscription-link'),
-                                        value: 'subscriptionLink'
-                                    }
-                                ]}
+                                data={BUTTON_TYPES_VALUES}
                                 label={t('button-editor.component.type')}
                                 onChange={(v) =>
                                     onChange({
                                         ...button,
-                                        type:
-                                            (v as TSubscriptionPageButtonConfig['type']) ||
-                                            'external'
+                                        type: v as TButtonType
                                     })
                                 }
                                 value={button.type}

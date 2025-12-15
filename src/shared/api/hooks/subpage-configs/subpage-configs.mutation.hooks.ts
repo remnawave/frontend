@@ -1,4 +1,5 @@
 import {
+    CloneSubscriptionPageConfigCommand,
     CreateSubscriptionPageConfigCommand,
     DeleteSubscriptionPageConfigCommand,
     ReorderSubscriptionPageConfigsCommand,
@@ -89,6 +90,30 @@ export const useReorderSubscriptionPageConfigs = createMutationHook({
         onError: (error) => {
             notifications.show({
                 title: `Reorder Subscription Page Configs`,
+                message:
+                    error instanceof Error ? error.message : `Request failed with unknown error.`,
+                color: 'red'
+            })
+        }
+    }
+})
+
+export const useCloneSubscriptionPageConfig = createMutationHook({
+    endpoint: CloneSubscriptionPageConfigCommand.TSQ_url,
+    bodySchema: CloneSubscriptionPageConfigCommand.RequestSchema,
+    responseSchema: CloneSubscriptionPageConfigCommand.ResponseSchema,
+    requestMethod: CloneSubscriptionPageConfigCommand.endpointDetails.REQUEST_METHOD,
+    rMutationParams: {
+        onSuccess: () => {
+            notifications.show({
+                title: 'Success',
+                message: 'Subscription page config cloned successfully',
+                color: 'teal'
+            })
+        },
+        onError: (error) => {
+            notifications.show({
+                title: `Clone Subscription Page Config`,
                 message:
                     error instanceof Error ? error.message : `Request failed with unknown error.`,
                 color: 'red'
