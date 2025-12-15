@@ -32,8 +32,8 @@ export function PlatformBlockComponent(props: IProps) {
     )
 
     const handleAddPlatform = (platformKey: TSubscriptionPagePlatformKey) => {
-        const currentPlatforms = form.getValues().platforms
-        if (currentPlatforms[platformKey]) return
+        const { platforms } = form.getValues()
+        if (platforms[platformKey]) return
 
         const newPlatform: TSubscriptionPagePlatformSchema = {
             apps: [],
@@ -52,8 +52,8 @@ export function PlatformBlockComponent(props: IProps) {
     }
 
     const handlePlatformDelete = (platformKey: TSubscriptionPagePlatformKey) => {
-        const currentPlatforms = form.getValues().platforms
-        const { [platformKey]: _, ...rest } = currentPlatforms
+        const { platforms } = form.getValues()
+        const { [platformKey]: _, ...rest } = platforms
         form.setFieldValue('platforms', rest)
     }
 

@@ -141,10 +141,7 @@ const router = createBrowserRouter(
                     </Route>
 
                     <Route path={ROUTES.DASHBOARD.SUBPAGE_CONFIGS.ROOT}>
-                        <Route
-                            element={<SubpageConfigBasePageConnector />}
-                            path={ROUTES.DASHBOARD.SUBPAGE_CONFIGS.ROOT}
-                        />
+                        <Route element={<SubpageConfigBasePageConnector />} index />
 
                         <Route
                             element={<SubpageConfigEditorPageConnector />}
