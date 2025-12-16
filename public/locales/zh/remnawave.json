@@ -1838,8 +1838,8 @@
     },
     "base-translations-drawer": {
         "component": {
-            "base-translations": "Base Translations",
-            "completed": "{{count}}/{{total}} completed"
+            "base-translations": "基础翻译",
+            "completed": "{{count}}/{{total}} 已完成"
         }
     }
 }
