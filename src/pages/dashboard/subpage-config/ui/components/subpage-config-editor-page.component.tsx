@@ -218,6 +218,7 @@ export const SubpageConfigEditorPageComponent = (props: Props) => {
                         </ActionIcon>
                     </Group>
                 }
+                description={config.uuid}
                 icon={<TbFile size={24} />}
                 title={config.name}
             />
