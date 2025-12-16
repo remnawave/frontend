@@ -5,7 +5,7 @@ import ReactCountryFlag from 'react-country-flag'
 import { PiUsersDuotone } from 'react-icons/pi'
 import { TbEdit } from 'react-icons/tb'
 import { TFunction } from 'i18next'
-import { sortBy } from 'lodash'
+import sortBy from 'lodash/sortBy'
 
 import { prettyBytesUtil } from '@shared/utils/bytes'
 import { faviconResolver } from '@shared/utils/misc'

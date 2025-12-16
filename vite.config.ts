@@ -77,6 +77,8 @@ export default defineConfig({
                         'buffer',
                         'consola',
                         'semver',
+                        'is-svg',
+                        'sax',
                         'jsonc-parser',
                         'json-edit-react'
                     ],
