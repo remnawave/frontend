@@ -16,7 +16,7 @@
         "happ-routing-builder": "مسیرساز برای Happ",
         "templates": "قالب‌ها",
         "subscription": "اشتراک",
-        "subscription-page": "Subscription Page",
+        "subscription-page": "صفحه اشتراک",
         "config-profiles": "پروفایل‌های کانفیگ",
         "internal-squads": "اسکوادهای داخلی",
         "external-squads": "اسکوادهای خارجی",
@@ -55,8 +55,8 @@
         "download": "دانلود",
         "search": "جستجو",
         "nothing-found": "چیزی یافت نشد",
-        "name": "Name",
-        "clone": "Clone"
+        "name": "اسم",
+        "clone": "همانندسازی"
     },
     "bandwidth-metrics": {
         "current-year": "امسال",
@@ -305,7 +305,7 @@
             "1-year": "+1 سال",
             "2099-year": "سال 2099",
             "hwid-user-limit-line-1": "این ویژگی فقط در صورتی کار می‌‌کند که",
-            "hwid-user-limit-line-2": "in Subscription Settings is set to",
+            "hwid-user-limit-line-2": "در تنظیمات اشتراک این مقدار تنظیم شده است:",
             "hwid-user-limit-line-3": "اطلاعات بیشتر.",
             "disable-hwid-limit": "غیرفعالسازی لیمیت HWID",
             "hwid-device-limit": "لیمیت دستگاه براساس HWID",
@@ -429,7 +429,7 @@
         "vital-parameters": "پارامترهای حیاتی",
         "exclude-this-host-from-specific-internal-squads": "این هاست را از اسکوادهای خارجی مشخص حذف کنید",
         "excluded-internal-squads": "اسکوادهای خارجی حذف شده",
-        "keep-sni-blank": "Keep SNI blank",
+        "keep-sni-blank": "SNI خالی بماند",
         "keep-sni-blank-description": "In some cases, SNI must be left blank. Use this option to force an empty SNI. Note that this option has the highest priority, so it will be applied even if SNI is already set."
     },
     "base-node-form": {
@@ -1591,7 +1591,7 @@
             "branding-settings": "تنظیمات برندینگ",
             "the-title-that-will-be-displayed-on-login-page": "عنوانی که در صفحه ورود نشان داده خواهد شد",
             "brand-name": "اسم برند",
-            "logo-url": "Logo URL",
+            "logo-url": "آدرس URL لوگو",
             "the-url-to-your-brand-logo-image": "آدرس تصویر لوگوی برند شما",
             "colored-title-format": "فرمت عنوان رنگی",
             "colored-title-description": "می‌توانید کلمه‌ها را به صورت تکی به کمک نوشتار \"{color}کلمه\" رنگ‌آمیزی کنید. این ویژگی از رنگ‌های HEX (#RRGGBB) و اسم رنگ‌های MantineUI پشتیبانی می‌کند.",
@@ -1705,141 +1705,141 @@
     },
     "subpage-config-visual-editor": {
         "widget": {
-            "configuration-saved-successfully": "Configuration saved successfully",
-            "edit-your-subscription-page-configuration": "Edit your subscription page configuration",
-            "subpage-editor": "Subpage Editor",
-            "load-from-github": "Load from GitHub",
-            "brand-appearance": "Brand appearance",
-            "branding": "Branding",
-            "brand-title": "Brand Title",
-            "your-brand-name": "Your Brand Name",
-            "logo-url": "Logo URL",
-            "support-url": "Support URL",
-            "additional-languages": "Additional languages",
-            "localization": "Localization",
-            "ui-configuration": "UI Configuration",
-            "collapsed": "Collapsed",
-            "expanded": "Expanded",
-            "subscription-info-block-design": "Subscription Info Block Design",
-            "installation-guides-header": "Installation Guides Header",
-            "connection-keys-header": "Connection Keys Header",
-            "configure-apps-for-each-platform": "Configure apps for each platform",
-            "platforms": "Platforms",
-            "add-platform": "Add platform",
-            "no-platforms-configured": "No platforms configured",
-            "add-a-platform-to-get-started": "Add a platform to get started",
-            "validation-error": "Validation Error",
-            "manage-your-svg-icons": "Manage your SVG icons",
-            "open-svg-library": "Open SVG Library",
-            "cards": "Cards",
-            "hidden": "Hidden",
-            "accordion": "Accordion",
-            "minimal": "Minimal",
-            "timeline": "Timeline",
-            "installation-guides-design": "Installation Guides Design"
+            "configuration-saved-successfully": "پیکربندی با موفقیت ذخیره شد",
+            "edit-your-subscription-page-configuration": "پیکربندی صفحه اشتراک خود را ویرایش کنید",
+            "subpage-editor": "ویرایشگر صفحه اشتراک",
+            "load-from-github": "بارگذاری از گیت‌هاب",
+            "brand-appearance": "ظاهر برند",
+            "branding": "برندینگ",
+            "brand-title": "عنوان برند",
+            "your-brand-name": "اسم برند شما",
+            "logo-url": "آدرس اینترنتی لوگو",
+            "support-url": "آدرس پشتیبانی",
+            "additional-languages": "زبان‌های بیشتر",
+            "localization": "بومی‌سازی",
+            "ui-configuration": "تنظیمات رابط کاربری",
+            "collapsed": "بسته شده",
+            "expanded": "باز شده",
+            "subscription-info-block-design": "طراحی بلاک‌های مشخصات اشتراک",
+            "installation-guides-header": "هدر آموزش‌های نصب",
+            "connection-keys-header": "هدر کلیدهای اتصال",
+            "configure-apps-for-each-platform": "نرم افزارهای هر پلتفرم را تنظیم کنید",
+            "platforms": "پلتفرم‌ها",
+            "add-platform": "افزودن پلتفرم",
+            "no-platforms-configured": "پلتفرمی تنظیم نشده است",
+            "add-a-platform-to-get-started": "برای شروع یک پلتفرم اضافه کنید",
+            "validation-error": "خطای اعتبارسنجی",
+            "manage-your-svg-icons": "آیکون‌های SVG خود را مدیریت کنید",
+            "open-svg-library": "باز کردن کتابخانه SVG",
+            "cards": "کارت‌ها",
+            "hidden": "مخفی",
+            "accordion": "آکوردئون",
+            "minimal": "کمینه",
+            "timeline": "خط زمانی",
+            "installation-guides-design": "طراحی آموزش‌های نصب"
         },
-        "subpage-config-saved-line-1": "To apply the changes, please restart the Remnawave Subscription-page Docker container.",
-        "subpage-config-saved-line-2": "For example, you can use the following command in your terminal:"
+        "subpage-config-saved-line-1": "برای اعمال تغییرات لطفا مخزن",
+        "subpage-config-saved-line-2": "برای مثال می‌توانید این دستور را در ترمینال استفاده کنید:"
     },
     "app-editor-drawer-content": {
         "component": {
-            "app-settings": "App Settings",
-            "featured": "Featured",
-            "app-name": "App Name",
-            "blocks": "Blocks",
-            "add-block": "Add Block"
+            "app-settings": "تنظیمات نرم‌افزار",
+            "featured": "ویژه",
+            "app-name": "اسم برنامه",
+            "blocks": "بلاک‌ها",
+            "add-block": "افزودن بلاک"
         }
     },
     "block-editor": {
         "modal": {
             "component": {
-                "untitled-block": "Untitled Block",
-                "edit-block": "Edit Block",
-                "block-settings": "Block Settings",
-                "svg-icon": "SVG Icon",
-                "icon-color": "Icon Color",
+                "untitled-block": "بلاک بدون عنوان",
+                "edit-block": "ویرایش بلاک",
+                "block-settings": "تنظیمات بلاک",
+                "svg-icon": "آیکون SVG",
+                "icon-color": "رنگ آیکون",
                 "icon-color-help": "You can use any Mantine theme color ({{colors}}) or any valid HEX color (for example: #009688).",
-                "title": "Title",
-                "description": "Description",
-                "buttons": "Buttons",
-                "add-button": "Add Button"
+                "title": "عنوان",
+                "description": "توضیحات",
+                "buttons": "دکمه‌ها",
+                "add-button": "افزودن دکمه"
             }
         }
     },
     "button-editor": {
         "component": {
-            "link": "Link",
-            "external-link": "External Link",
-            "subscription-link": "Subscription Link",
-            "type": "Type",
-            "svg-icon": "SVG Icon",
-            "button-text": "Button Text"
+            "link": "لینک",
+            "external-link": "لینک خارجی",
+            "subscription-link": "لینک اشتراک",
+            "type": "نوع",
+            "svg-icon": "آیکون SVG",
+            "button-text": "متن دکمه"
         }
     },
     "localized-text-editor": {
         "component": {
-            "not-set": "Not set",
-            "required-default-language": "Required (default language)",
-            "done": "Done"
+            "not-set": "تنظیم نشده",
+            "required-default-language": "الزامی (زبان پیش‌فرض)",
+            "done": "انجام شد"
         }
     },
     "platform-editor": {
         "component": {
-            "platform-svg-icon": "Platform SVG Icon",
-            "display-name": "Display Name",
-            "apps": "Apps",
-            "add-app": "Add App",
-            "unnamed-app": "Unnamed App",
-            "edit-app": "Edit App"
+            "platform-svg-icon": "آیکون SVG پلتفرم",
+            "display-name": "نام نمایشی",
+            "apps": "نرم‌افزارها",
+            "add-app": "افزودن برنامه",
+            "unnamed-app": "نرم‌افزار بدون اسم",
+            "edit-app": "ویرایش برنامه"
         }
     },
     "svg-icon-input": {
         "component": {
-            "svg-icon": "SVG Icon"
+            "svg-icon": "آیکون SVG"
         }
     },
     "svg-icon-select": {
         "component": {
-            "select-icon": "Select icon...",
-            "no-icons-in-library": "No icons in library"
+            "select-icon": "انتخاب آیکون",
+            "no-icons-in-library": "آیکونی در کتابخانه وجود ندارد"
         }
     },
     "svg-library-modal": {
         "component": {
-            "svg-library": "SVG Library",
-            "add-icon": "Add Icon",
-            "add-icons-to-use-them-in-blocks-and-buttons": "Add icons to use them in blocks and buttons",
-            "edit-icon": "Edit Icon",
-            "only-latin-characters-no-spaces": "Only latin characters, no spaces",
-            "only-latin-characters-allowed": "Only latin characters allowed",
-            "icon-key": "Icon Key",
-            "svg-code": "SVG Code",
-            "preview": "Preview",
-            "where-to-find-icons": "Where to find icons?",
-            "you-can-find-beautiful-icons-at": "You can find beautiful icons at",
+            "svg-library": "کتابخانه SVG",
+            "add-icon": "افزودن آیکون",
+            "add-icons-to-use-them-in-blocks-and-buttons": "چند آیکون برای استفاده در بلاک‌ها و دکمه‌ها اضافه کنید",
+            "edit-icon": "ویرایش آیکون",
+            "only-latin-characters-no-spaces": "فقط کاراکترهای لاتین، بدون فاصله",
+            "only-latin-characters-allowed": "فقط کاراکترهای لاتین قابل قبول می‌باشد",
+            "icon-key": "کلید آیکون",
+            "svg-code": "کد SVG",
+            "preview": "پیش‌نمایش",
+            "where-to-find-icons": "از کجا آیکون پیدا کنم؟",
+            "you-can-find-beautiful-icons-at": "برای پیدا کردن آیکون‌های زیبا می‌توانید از این منابع استفاده کنید:",
             "where-to-find-icons-description": "Сlick on any icon, select \"Copy SVG\" and paste it here. Make sure to choose \"Outline\" or \"Filled\" style."
         }
     },
     "external-squads-subpage-config": {
         "tab": {
             "widget": {
-                "subscription-page-config": "Subscription Page Config",
+                "subscription-page-config": "پیکربندی صفحه اشتراک",
                 "subscription-page-config-description": "You can override the subscription page configuration (Remnawave Subscription Page) for this external squad.",
-                "subpage-config": "Subpage Config",
-                "select-config": "Select config..."
+                "subpage-config": "تنظیمات صفحه اشتراک",
+                "select-config": "کانفیگ را انتخاب کنید..."
             }
         }
     },
     "subpage-config-editor-page": {
         "component": {
-            "import-config": "Import config",
-            "download-config": "Download config"
+            "import-config": "وارد کردن پیکربندی",
+            "download-config": "دانلود کانفیگ"
         }
     },
     "base-translations-drawer": {
         "component": {
-            "base-translations": "Base Translations",
-            "completed": "{{count}}/{{total}} completed"
+            "base-translations": "ترجمه‌های پایه",
+            "completed": "{{count}}/{{total}} تکمیل شده است"
         }
     }
 }
