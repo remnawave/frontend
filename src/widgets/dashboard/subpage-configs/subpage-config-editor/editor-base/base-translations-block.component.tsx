@@ -45,7 +45,7 @@ export function BaseTranslationsBlockComponent({ form }: IProps) {
     return (
         <>
             <Card className={styles.sectionCard} p="md" radius="lg">
-                <Group justify="space-between" wrap="nowrap">
+                <Group justify="space-between">
                     <Group gap="sm" wrap="nowrap">
                         <BaseOverlayHeader
                             IconComponent={IconLanguage}

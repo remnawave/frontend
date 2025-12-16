@@ -20,16 +20,16 @@ export function BlockCard(props: IProps) {
 
     return (
         <Card className={styles.interactiveCard} onClick={onEdit} p="sm" radius="md">
-            <Group justify="space-between">
-                <Group gap="sm">
-                    <Text c="white" fw={500} size="sm">
-                        {block.title.en || `Block ${index + 1}`}
-                    </Text>
-                    <Badge color="teal" size="xs" variant="light">
+            <Group justify="space-between" wrap="nowrap">
+                <Text c="white" fw={500} size="sm" style={{ flex: 1 }} truncate="end">
+                    {block.title.en || `Block ${index + 1}`}
+                </Text>
+
+                <Group gap={4} wrap="nowrap">
+                    <Badge color="teal" size="xs" variant="light" visibleFrom="sm">
                         {block.buttons.length} buttons
                     </Badge>
-                </Group>
-                <Group gap={4}>
+
                     <ActionIcon
                         color="gray"
                         disabled={!canMoveUp}

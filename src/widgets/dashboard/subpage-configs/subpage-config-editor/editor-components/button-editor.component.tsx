@@ -20,6 +20,7 @@ import {
 } from '@mantine/core'
 import { IconArrowDown, IconArrowUp, IconChevronRight, IconTrash } from '@tabler/icons-react'
 import { PiCheck, PiCopy } from 'react-icons/pi'
+import { TbExternalLink } from 'react-icons/tb'
 import { useDisclosure } from '@mantine/hooks'
 import { useTranslation } from 'react-i18next'
 
@@ -63,15 +64,22 @@ export function ButtonEditor(props: IProps) {
     return (
         <Card className={styles.buttonCard} p="sm" radius="md">
             <Stack gap="sm">
-                <Group className={styles.collapseHeader} justify="space-between" onClick={toggle}>
+                <Group
+                    className={styles.collapseHeader}
+                    justify="space-between"
+                    onClick={toggle}
+                    wrap="nowrap"
+                >
                     <Group gap="xs">
                         <IconChevronRight
                             className={`${styles.chevron} ${opened ? styles.chevronOpen : ''}`}
                             size={16}
                         />
-                        <Text c="white" fw={500} size="sm">
+                        <Text c="white" fw={500} size="sm" style={{ flex: 1 }} truncate="start">
                             Button {index + 1}: {buttonTitle}
                         </Text>
+                    </Group>
+                    <Group gap={4} wrap="nowrap">
                         <Badge
                             color={button.type === 'external' ? 'blue' : 'cyan'}
                             size="xs"
@@ -79,8 +87,6 @@ export function ButtonEditor(props: IProps) {
                         >
                             {button.type}
                         </Badge>
-                    </Group>
-                    <Group gap={4}>
                         <ActionIcon
                             color="gray"
                             disabled={!canMoveUp}
@@ -122,59 +128,59 @@ export function ButtonEditor(props: IProps) {
 
                 <Collapse in={opened}>
                     <Stack gap="sm" pt="sm">
-                        <Group grow>
-                            <TextInput
-                                classNames={{ input: styles.inputDark }}
-                                label={t('button-editor.component.link')}
-                                leftSection={
-                                    <SubpageTooltips>
-                                        <Group gap="xs" key="subpage-template-keys">
-                                            <Text size="sm">
-                                                {t('remark-info.widget.supports-templates')}
-                                            </Text>
+                        <Select
+                            allowDeselect={false}
+                            classNames={{ input: styles.selectDark }}
+                            data={BUTTON_TYPES_VALUES}
+                            label={t('button-editor.component.type')}
+                            leftSection={<TbExternalLink size={16} />}
+                            onChange={(v) =>
+                                onChange({
+                                    ...button,
+                                    type: v as TButtonType
+                                })
+                            }
+                            value={button.type}
+                        />
 
-                                            {SUBSCRIPTION_PAGE_TEMPLATE_KEYS.map((key) => (
-                                                <CopyButton key={key} value={`{{${key}}}`}>
-                                                    {({ copied, copy }) => (
-                                                        <Badge
-                                                            color={copied ? 'teal' : 'blue'}
-                                                            key={key}
-                                                            leftSection={
-                                                                copied ? (
-                                                                    <PiCheck size="16px" />
-                                                                ) : (
-                                                                    <PiCopy size="16px" />
-                                                                )
-                                                            }
-                                                            onClick={copy}
-                                                            size="md"
-                                                        >
-                                                            {`{{${key}}}`}
-                                                        </Badge>
-                                                    )}
-                                                </CopyButton>
-                                            ))}
-                                        </Group>
-                                    </SubpageTooltips>
-                                }
-                                onChange={(e) => onChange({ ...button, link: e.target.value })}
-                                placeholder="https:// or app://"
-                                value={button.link}
-                            />
-                            <Select
-                                allowDeselect={false}
-                                classNames={{ input: styles.selectDark }}
-                                data={BUTTON_TYPES_VALUES}
-                                label={t('button-editor.component.type')}
-                                onChange={(v) =>
-                                    onChange({
-                                        ...button,
-                                        type: v as TButtonType
-                                    })
-                                }
-                                value={button.type}
-                            />
-                        </Group>
+                        <TextInput
+                            classNames={{ input: styles.inputDark }}
+                            label={t('button-editor.component.link')}
+                            leftSection={
+                                <SubpageTooltips>
+                                    <Group gap="xs" key="subpage-template-keys">
+                                        <Text size="sm">
+                                            {t('remark-info.widget.supports-templates')}
+                                        </Text>
+
+                                        {SUBSCRIPTION_PAGE_TEMPLATE_KEYS.map((key) => (
+                                            <CopyButton key={key} value={`{{${key}}}`}>
+                                                {({ copied, copy }) => (
+                                                    <Badge
+                                                        color={copied ? 'teal' : 'blue'}
+                                                        key={key}
+                                                        leftSection={
+                                                            copied ? (
+                                                                <PiCheck size="16px" />
+                                                            ) : (
+                                                                <PiCopy size="16px" />
+                                                            )
+                                                        }
+                                                        onClick={copy}
+                                                        size="md"
+                                                    >
+                                                        {`{{${key}}}`}
+                                                    </Badge>
+                                                )}
+                                            </CopyButton>
+                                        ))}
+                                    </Group>
+                                </SubpageTooltips>
+                            }
+                            onChange={(e) => onChange({ ...button, link: e.target.value })}
+                            placeholder="https:// or app://"
+                            value={button.link}
+                        />
 
                         <SvgIconSelect
                             label={t('button-editor.component.svg-icon')}

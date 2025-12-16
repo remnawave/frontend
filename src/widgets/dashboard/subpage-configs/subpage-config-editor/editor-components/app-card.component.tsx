@@ -40,7 +40,7 @@ export function AppCard(props: IProps) {
         <Card className={styles.interactiveCard} onClick={onEdit} p="sm" radius="md">
             <Group justify="space-between" wrap="nowrap">
                 <Group gap="sm" wrap="nowrap">
-                    <Box className={styles.appIconPreview}>
+                    <Box className={styles.appIconPreview} visibleFrom="sm">
                         {hasValidIcon ? (
                             <Box
                                 className={styles.appIconSvg}
@@ -58,11 +58,11 @@ export function AppCard(props: IProps) {
                             <IconStar size={16} />
                         </ActionIcon>
                     )}
+                </Group>
+                <Group gap={4} wrap="nowrap">
                     <Badge color="violet" size="xs" variant="light">
                         {app.blocks.length} blocks
                     </Badge>
-                </Group>
-                <Group gap={4}>
                     <ActionIcon
                         color="gray"
                         disabled={!canMoveUp}
