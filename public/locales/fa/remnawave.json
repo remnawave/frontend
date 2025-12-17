@@ -856,7 +856,7 @@
             "bar-chart": "نمودار میله‌ای",
             "previous-day": "روز قبل",
             "next-day": "روز بعد",
-            "hidden-users": "({{hiddenCount}} کاربر با کمتر از 100 کیلوبایت مخفی شده‌اند)",
+            "hidden-users": "({{hiddenCount}} users with <{{minTraffic}} hidden)",
             "total-traffic-prettybytestoanyutil": "ترافیک کل: {{totalTraffic}}",
             "user": "کاربر",
             "traffic": "ترافیک",
