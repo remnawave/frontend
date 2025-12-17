@@ -34,7 +34,7 @@ import dayjs from 'dayjs'
 
 import { useHighchartsDataProcessor } from '@shared/hooks/use-highcharts-data-processor'
 import { MODALS, useModalClose, useModalState } from '@entities/dashboard/modal-store'
-import { useGetNodeUsersUsageByRange } from '@shared/api/hooks'
+import { useGetLegacyStatsNodeUserUsage } from '@shared/api/hooks'
 import { prettyBytesToAnyUtil } from '@shared/utils/bytes'
 
 const MemoizedSparkline = memo(Sparkline)
@@ -106,7 +106,7 @@ export const NodeUsersUsageDrawer = memo(() => {
         isLoading,
         refetch,
         isRefetching
-    } = useGetNodeUsersUsageByRange({
+    } = useGetLegacyStatsNodeUserUsage({
         route: {
             uuid: nodeUuid?.nodeUuid ?? ''
         },

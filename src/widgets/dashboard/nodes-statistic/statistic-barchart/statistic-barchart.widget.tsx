@@ -10,7 +10,7 @@ import {
     Table,
     Text
 } from '@mantine/core'
-import { GetNodesUsageByRangeCommand } from '@remnawave/backend-contract'
+import { GetStatsNodesUsageCommand } from '@remnawave/backend-contract'
 import { useTranslation } from 'react-i18next'
 import { Chart } from '@highcharts/react'
 import { PiEmpty } from 'react-icons/pi'
@@ -23,7 +23,7 @@ import { CountryFlag } from '@shared/ui/get-country-flag'
 interface IProps {
     categories: string[] | undefined
     isLoading: boolean
-    series: GetNodesUsageByRangeCommand.Response['response']['series'] | undefined
+    series: GetStatsNodesUsageCommand.Response['response']['series'] | undefined
 }
 
 export const NodesStatisticBarchartWidget = (props: IProps) => {

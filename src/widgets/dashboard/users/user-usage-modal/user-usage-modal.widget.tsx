@@ -28,7 +28,7 @@ import {
     TbChevronRight,
     TbRefresh
 } from 'react-icons/tb'
-import { GetUserUsageByRangeCommand } from '@remnawave/backend-contract'
+import { GetLegacyStatsUserUsageCommand } from '@remnawave/backend-contract'
 import { PiEmpty, PiListBullets } from 'react-icons/pi'
 import { BarChart, Sparkline } from '@mantine/charts'
 import { useEffect, useMemo, useState } from 'react'
@@ -37,7 +37,7 @@ import { useTranslation } from 'react-i18next'
 import ColorHash from 'color-hash'
 import dayjs from 'dayjs'
 
-import { useGetUserUsageByRange } from '@shared/api/hooks'
+import { useGetLegacyStatsUserUsage } from '@shared/api/hooks'
 import { prettyBytesToAnyUtil } from '@shared/utils/bytes'
 
 import { IProps } from './interfaces'
@@ -89,7 +89,7 @@ export const UserUsageModalWidget = (props: IProps) => {
         isLoading,
         refetch,
         isRefetching
-    } = useGetUserUsageByRange({
+    } = useGetLegacyStatsUserUsage({
         route: {
             uuid: userUuid
         },
@@ -102,7 +102,9 @@ export const UserUsageModalWidget = (props: IProps) => {
         }
     })
 
-    const formatDataForChart = (dbData: GetUserUsageByRangeCommand.Response['response'] = []) => {
+    const formatDataForChart = (
+        dbData: GetLegacyStatsUserUsageCommand.Response['response'] = []
+    ) => {
         interface ChartData {
             [key: string]: number | string
             date: string

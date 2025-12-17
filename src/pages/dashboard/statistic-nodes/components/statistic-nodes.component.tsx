@@ -9,7 +9,7 @@ import dayjs from 'dayjs'
 import { NodesStatisticSparklineCardWidget } from '@widgets/dashboard/nodes-statistic/statistic-sparkline-card'
 import { NodesStatisticTopNodesCardWidget } from '@widgets/dashboard/nodes-statistic/statistic-top-card'
 import { NodesStatisticBarchartWidget } from '@widgets/dashboard/nodes-statistic/statistic-barchart'
-import { useGetNodesUsageByRangeCommand } from '@shared/api/hooks'
+import { useGetStatsNodesUsage } from '@shared/api/hooks'
 import { Page, PageHeaderShared } from '@shared/ui'
 
 const DEFAULT_DATE_RANGE = {
@@ -32,7 +32,7 @@ export const StatisticNodesPage = () => {
         isLoading,
         refetch,
         isRefetching
-    } = useGetNodesUsageByRangeCommand({
+    } = useGetStatsNodesUsage({
         query: {
             start: queryRange.start,
             end: queryRange.end

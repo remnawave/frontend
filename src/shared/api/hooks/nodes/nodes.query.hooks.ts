@@ -1,9 +1,6 @@
 import {
     GetAllNodesCommand,
     GetAllNodesTagsCommand,
-    GetNodesRealtimeUsageCommand,
-    GetNodesUsageByRangeCommand,
-    GetNodeUserUsageByRangeCommand,
     GetOneNodeCommand,
     GetPubKeyCommand
 } from '@remnawave/backend-contract'
@@ -22,17 +19,6 @@ export const nodesQueryKeys = createQueryKeys('nodes', {
         queryKey: [route]
     }),
     getPubKey: {
-        queryKey: null
-    },
-    getNodesUsageByRangeCommand: (filters: GetNodesUsageByRangeCommand.RequestQuery) => ({
-        queryKey: [filters]
-    }),
-    getNodeUserUsage: (
-        query: GetNodeUserUsageByRangeCommand.Request & GetNodeUserUsageByRangeCommand.RequestQuery
-    ) => ({
-        queryKey: [query]
-    }),
-    getNodeUserUsageByRange: {
         queryKey: null
     },
     getAllTags: {
@@ -75,41 +61,6 @@ export const useGetPubKey = createGetQueryHook({
     },
 
     errorHandler: (error) => errorHandler(error, 'Get PubKey')
-})
-
-export const useGetNodesUsageByRangeCommand = createGetQueryHook({
-    endpoint: GetNodesUsageByRangeCommand.TSQ_url,
-    responseSchema: GetNodesUsageByRangeCommand.ResponseSchema,
-    requestQuerySchema: GetNodesUsageByRangeCommand.RequestQuerySchema,
-    getQueryKey: ({ query }) => nodesQueryKeys.getNodesUsageByRangeCommand(query!).queryKey,
-    rQueryParams: {
-        staleTime: sToMs(5)
-    },
-    errorHandler: (error) => errorHandler(error, 'Get Nodes Usage By Range')
-})
-
-export const useGetNodeUsersUsageByRange = createGetQueryHook({
-    endpoint: GetNodeUserUsageByRangeCommand.TSQ_url,
-    responseSchema: GetNodeUserUsageByRangeCommand.ResponseSchema,
-    requestQuerySchema: GetNodeUserUsageByRangeCommand.RequestQuerySchema,
-    routeParamsSchema: GetNodeUserUsageByRangeCommand.RequestSchema,
-    getQueryKey: ({ route, query }) =>
-        nodesQueryKeys.getNodeUserUsage({ ...route!, ...query! }).queryKey,
-    rQueryParams: {
-        staleTime: sToMs(60)
-    },
-    errorHandler: (error) => errorHandler(error, 'Get Node Users Usage By Range')
-})
-
-export const useGetNodesRealtimeUsage = createGetQueryHook({
-    endpoint: GetNodesRealtimeUsageCommand.TSQ_url,
-    responseSchema: GetNodesRealtimeUsageCommand.ResponseSchema,
-    getQueryKey: () => nodesQueryKeys.getNodeUserUsageByRange.queryKey,
-    rQueryParams: {
-        staleTime: sToMs(5),
-        refetchInterval: sToMs(5)
-    },
-    errorHandler: (error) => errorHandler(error, 'Get Nodes Realtime Usage')
 })
 
 export const useGetNodesTags = createGetQueryHook({

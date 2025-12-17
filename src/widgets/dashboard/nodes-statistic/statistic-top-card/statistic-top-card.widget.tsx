@@ -1,5 +1,5 @@
 import { Box, Card, Center, Group, Skeleton, Stack, Text } from '@mantine/core'
-import { GetNodesUsageByRangeCommand } from '@remnawave/backend-contract'
+import { GetStatsNodesUsageCommand } from '@remnawave/backend-contract'
 import { useTranslation } from 'react-i18next'
 import { PiEmpty } from 'react-icons/pi'
 
@@ -10,7 +10,7 @@ import styles from './statistic-top-card.module.css'
 
 interface IProps {
     isLoading: boolean
-    topNodes: GetNodesUsageByRangeCommand.Response['response']['topNodes'] | undefined
+    topNodes: GetStatsNodesUsageCommand.Response['response']['topNodes'] | undefined
 }
 
 export const NodesStatisticTopNodesCardWidget = (props: IProps) => {

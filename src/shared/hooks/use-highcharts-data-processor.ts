@@ -1,4 +1,4 @@
-import { GetNodeUserUsageByRangeCommand } from '@remnawave/backend-contract'
+import { GetLegacyStatsNodeUserUsageCommand } from '@remnawave/backend-contract'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { endpointSymbol } from 'vite-plugin-comlink/symbol'
 import consola from 'consola/browser'
@@ -97,7 +97,7 @@ export function useHighchartsDataProcessor() {
 
     const processData = useCallback(
         async (
-            data: GetNodeUserUsageByRangeCommand.Response['response'],
+            data: GetLegacyStatsNodeUserUsageCommand.Response['response'],
             options: UseHighchartsDataProcessorOptions = {}
         ) => {
             if (!workerRef.current || !data || isCleanedUpRef.current) {

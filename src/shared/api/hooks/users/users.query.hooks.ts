@@ -4,8 +4,7 @@ import {
     GetSubscriptionByUuidCommand,
     GetUserAccessibleNodesCommand,
     GetUserByUuidCommand,
-    GetUserSubscriptionRequestHistoryCommand,
-    GetUserUsageByRangeCommand
+    GetUserSubscriptionRequestHistoryCommand
 } from '@remnawave/backend-contract'
 import { createQueryKeys } from '@lukemorales/query-key-factory'
 import { keepPreviousData } from '@tanstack/react-query'
@@ -23,11 +22,6 @@ export const usersQueryKeys = createQueryKeys('users', {
     }),
     getSubscriptionByUuid: (route: GetSubscriptionByUuidCommand.Request) => ({
         queryKey: [route]
-    }),
-    getUserUsageByRange: (
-        query: GetUserUsageByRangeCommand.Request & GetUserUsageByRangeCommand.RequestQuery
-    ) => ({
-        queryKey: [query]
     }),
     getUserTags: {
         queryKey: null
@@ -77,19 +71,6 @@ export const useGetSubscriptionInfoByUuid = createGetQueryHook({
         staleTime: sToMs(4)
     },
     errorHandler: (error) => errorHandler(error, 'Get Subscription Info By UUID')
-})
-
-export const useGetUserUsageByRange = createGetQueryHook({
-    endpoint: GetUserUsageByRangeCommand.TSQ_url,
-    responseSchema: GetUserUsageByRangeCommand.ResponseSchema,
-    requestQuerySchema: GetUserUsageByRangeCommand.RequestQuerySchema,
-    routeParamsSchema: GetUserUsageByRangeCommand.RequestSchema,
-    getQueryKey: ({ route, query }) =>
-        usersQueryKeys.getUserUsageByRange({ ...route!, ...query! }).queryKey,
-    rQueryParams: {
-        staleTime: sToMs(15)
-    },
-    errorHandler: (error) => errorHandler(error, 'Get User Usage By Range')
 })
 
 export const useGetUserTags = createGetQueryHook({
