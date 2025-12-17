@@ -18,10 +18,12 @@ export const NodesStatisticSparklineCardWidget = (props: IProps) => {
 
     let dailyAverage = 0
     let peakDay = 0
+    let isDataAvailable = false
 
     if (sparklineData.length > 0) {
         peakDay = Math.max(...sparklineData)
         dailyAverage = totalUsage / sparklineData.length
+        isDataAvailable = true
     }
 
     return (
@@ -73,7 +75,7 @@ export const NodesStatisticSparklineCardWidget = (props: IProps) => {
                     ) : (
                         <Sparkline
                             curveType="bump"
-                            data={sparklineData.length > 1 ? sparklineData : [1, 1, 1]}
+                            data={isDataAvailable ? sparklineData : [1, 1, 1]}
                             fillOpacity={0.3}
                             h={100}
                             strokeWidth={2}
