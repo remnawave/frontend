@@ -3,19 +3,18 @@ import { ActionIcon, SimpleGrid, Stack } from '@mantine/core'
 import { TbCalendar, TbRefresh } from 'react-icons/tb'
 import { useTranslation } from 'react-i18next'
 import { HiChartPie } from 'react-icons/hi'
-import { useMemo, useState } from 'react'
+import { useState } from 'react'
 import dayjs from 'dayjs'
 
 import { NodesStatisticSparklineCardWidget } from '@widgets/dashboard/nodes-statistic/statistic-sparkline-card'
 import { NodesStatisticTopNodesCardWidget } from '@widgets/dashboard/nodes-statistic/statistic-top-card'
 import { NodesStatisticBarchartWidget } from '@widgets/dashboard/nodes-statistic/statistic-barchart'
-import { getColorPaletteItemByIndexUtil } from '@shared/utils/color-resolver'
 import { useGetNodesUsageByRangeCommand } from '@shared/api/hooks'
 import { Page, PageHeaderShared } from '@shared/ui'
 
 const DEFAULT_DATE_RANGE = {
-    start: dayjs().utc().subtract(7, 'day').startOf('day').toISOString(),
-    end: dayjs().utc().endOf('day').toISOString()
+    start: dayjs().subtract(6, 'day').format('YYYY-MM-DD'),
+    end: dayjs().format('YYYY-MM-DD')
 }
 
 export const StatisticNodesPage = () => {
@@ -47,46 +46,16 @@ export const StatisticNodesPage = () => {
         setRawRange(value)
         if (!value[0] || !value[1]) return
 
-        const start = value[0]
-        const end = value[1]
+        const startDate = value[0]
+        const endDate = value[1]
 
-        if (!dayjs(start).isValid() || !dayjs(end).isValid()) return
+        if (!dayjs(startDate).isValid() || !dayjs(endDate).isValid()) return
 
-        setQueryRange({
-            start: dayjs(start).utc().startOf('day').toISOString(),
-            end: dayjs(end).utc().endOf('day').toISOString()
-        })
+        const startISO = dayjs(startDate).format('YYYY-MM-DD')
+        const endISO = dayjs(endDate).format('YYYY-MM-DD')
+
+        setQueryRange({ start: startISO, end: endISO })
     }
-
-    const { categories, series, sparklineData, topNodes } = useMemo(() => {
-        if (!nodesStats) {
-            return {
-                categories: [],
-                series: [],
-                sparklineData: [],
-                topNodes: []
-            }
-        }
-
-        const seriesWithColors = nodesStats.series.map((s, index) => ({
-            ...s,
-            color: getColorPaletteItemByIndexUtil(index).solid
-        }))
-
-        const topNodesWithColors = nodesStats.topNodes.map((node, index) => ({
-            ...node,
-            color: getColorPaletteItemByIndexUtil(
-                nodesStats.series.findIndex((s) => s.uuid === node.uuid) ?? index
-            ).solid
-        }))
-
-        return {
-            categories: nodesStats.categories,
-            series: seriesWithColors,
-            sparklineData: nodesStats.sparklineData,
-            topNodes: topNodesWithColors
-        }
-    }, [nodesStats])
 
     return (
         <Page title={t('constants.nodes-statistics')}>
@@ -103,49 +72,49 @@ export const StatisticNodesPage = () => {
                                 {
                                     label: t('statistic-nodes.component.3-days'),
                                     value: [
-                                        dayjs().subtract(3, 'day').format('YYYY-MM-DD'),
+                                        dayjs().subtract(2, 'day').format('YYYY-MM-DD'),
                                         dayjs().format('YYYY-MM-DD')
                                     ]
                                 },
                                 {
                                     label: t('statistic-nodes.component.7-days'),
                                     value: [
-                                        dayjs().subtract(7, 'day').format('YYYY-MM-DD'),
+                                        dayjs().subtract(6, 'day').format('YYYY-MM-DD'),
                                         dayjs().format('YYYY-MM-DD')
                                     ]
                                 },
                                 {
                                     label: t('statistic-nodes.component.14-days'),
                                     value: [
-                                        dayjs().subtract(14, 'day').format('YYYY-MM-DD'),
+                                        dayjs().subtract(13, 'day').format('YYYY-MM-DD'),
                                         dayjs().format('YYYY-MM-DD')
                                     ]
                                 },
                                 {
                                     label: t('statistic-nodes.component.30-days'),
                                     value: [
-                                        dayjs().subtract(30, 'day').format('YYYY-MM-DD'),
+                                        dayjs().subtract(29, 'day').format('YYYY-MM-DD'),
                                         dayjs().format('YYYY-MM-DD')
                                     ]
                                 },
                                 {
                                     label: t('statistic-nodes.component.60-days'),
                                     value: [
-                                        dayjs().subtract(60, 'day').format('YYYY-MM-DD'),
+                                        dayjs().subtract(59, 'day').format('YYYY-MM-DD'),
                                         dayjs().format('YYYY-MM-DD')
                                     ]
                                 },
                                 {
                                     label: t('statistic-nodes.component.90-days'),
                                     value: [
-                                        dayjs().subtract(90, 'day').format('YYYY-MM-DD'),
+                                        dayjs().subtract(89, 'day').format('YYYY-MM-DD'),
                                         dayjs().format('YYYY-MM-DD')
                                     ]
                                 },
                                 {
                                     label: t('statistic-nodes.component.180-days'),
                                     value: [
-                                        dayjs().subtract(180, 'day').format('YYYY-MM-DD'),
+                                        dayjs().subtract(179, 'day').format('YYYY-MM-DD'),
                                         dayjs().format('YYYY-MM-DD')
                                     ]
                                 }
@@ -182,16 +151,19 @@ export const StatisticNodesPage = () => {
                 <SimpleGrid cols={{ base: 1, sm: 2 }} spacing="md">
                     <NodesStatisticSparklineCardWidget
                         isLoading={isLoading}
-                        sparklineData={sparklineData}
+                        sparklineData={nodesStats?.sparklineData}
                     />
 
-                    <NodesStatisticTopNodesCardWidget isLoading={isLoading} topNodes={topNodes} />
+                    <NodesStatisticTopNodesCardWidget
+                        isLoading={isLoading}
+                        topNodes={nodesStats?.topNodes}
+                    />
                 </SimpleGrid>
 
                 <NodesStatisticBarchartWidget
-                    categories={categories}
+                    categories={nodesStats?.categories}
                     isLoading={isLoading}
-                    series={series}
+                    series={nodesStats?.series}
                 />
             </Stack>
         </Page>

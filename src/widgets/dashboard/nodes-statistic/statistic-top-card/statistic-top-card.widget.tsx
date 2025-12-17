@@ -10,9 +10,7 @@ import styles from './statistic-top-card.module.css'
 
 interface IProps {
     isLoading: boolean
-    topNodes: (GetNodesUsageByRangeCommand.Response['response']['topNodes'][number] & {
-        color: string
-    })[]
+    topNodes: GetNodesUsageByRangeCommand.Response['response']['topNodes'] | undefined
 }
 
 export const NodesStatisticTopNodesCardWidget = (props: IProps) => {
@@ -21,7 +19,7 @@ export const NodesStatisticTopNodesCardWidget = (props: IProps) => {
     const { t } = useTranslation()
 
     let maxTraffic = 1
-    if (topNodes.length > 0) {
+    if (topNodes && topNodes.length > 0) {
         maxTraffic = topNodes[0].total
     }
 
@@ -37,7 +35,7 @@ export const NodesStatisticTopNodesCardWidget = (props: IProps) => {
                         <Skeleton height={40} />
                     </Stack>
                 )}
-                {!isLoading && topNodes.length > 0 && (
+                {!isLoading && topNodes && topNodes.length > 0 && (
                     <Stack gap={6}>
                         {topNodes.map((node) => {
                             return (
@@ -86,7 +84,7 @@ export const NodesStatisticTopNodesCardWidget = (props: IProps) => {
                         })}
                     </Stack>
                 )}
-                {!isLoading && topNodes.length === 0 && (
+                {!isLoading && topNodes && topNodes.length === 0 && (
                     <Center h={200}>
                         <Stack align="center" gap={8}>
                             <PiEmpty size="32px" style={{ opacity: 0.5 }} />

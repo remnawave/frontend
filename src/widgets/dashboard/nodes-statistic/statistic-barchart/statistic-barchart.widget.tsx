@@ -1,25 +1,33 @@
-import { Box, Card, Center, Group, ScrollArea, Skeleton, Stack, Table, Text } from '@mantine/core'
+import {
+    alpha,
+    Box,
+    Card,
+    Center,
+    Group,
+    ScrollArea,
+    Skeleton,
+    Stack,
+    Table,
+    Text
+} from '@mantine/core'
 import { GetNodesUsageByRangeCommand } from '@remnawave/backend-contract'
 import { useTranslation } from 'react-i18next'
 import { Chart } from '@highcharts/react'
 import { PiEmpty } from 'react-icons/pi'
 import { modals } from '@mantine/modals'
 
-import { getColorPaletteItemByIndexUtil } from '@shared/utils/color-resolver'
 import { prettyBytesToAnyUtil } from '@shared/utils/bytes'
 import { formatTimeUtil } from '@shared/utils/time-utils'
 import { CountryFlag } from '@shared/ui/get-country-flag'
 
 interface IProps {
-    categories: string[]
+    categories: string[] | undefined
     isLoading: boolean
-    series: (GetNodesUsageByRangeCommand.Response['response']['series'][number] & {
-        color: string
-    })[]
+    series: GetNodesUsageByRangeCommand.Response['response']['series'] | undefined
 }
 
 export const NodesStatisticBarchartWidget = (props: IProps) => {
-    const { categories, series, isLoading } = props
+    const { categories = [], series = [], isLoading } = props
 
     const { t } = useTranslation()
 
@@ -122,12 +130,12 @@ export const NodesStatisticBarchartWidget = (props: IProps) => {
     }
 
     return (
-        <Card mih={600} p="xs" withBorder>
+        <Card p="xs" withBorder>
             <Chart
                 options={{
                     chart: {
                         type: 'bar',
-                        height: '60%',
+                        height: '600px',
                         backgroundColor: 'transparent',
                         style: { fontFamily: 'inherit' }
                     },
@@ -135,8 +143,7 @@ export const NodesStatisticBarchartWidget = (props: IProps) => {
                     plotOptions: {
                         bar: {
                             stacking: 'normal',
-                            borderWidth: 0,
-                            borderRadius: 3,
+                            borderRadius: 0,
                             cursor: 'pointer'
                         },
                         series: {
@@ -152,7 +159,6 @@ export const NodesStatisticBarchartWidget = (props: IProps) => {
                         layout: 'horizontal',
                         align: 'center',
                         verticalAlign: 'bottom',
-
                         backgroundColor: 'var(--mantine-color-body)',
                         borderWidth: 2,
                         padding: 20,
@@ -206,6 +212,7 @@ export const NodesStatisticBarchartWidget = (props: IProps) => {
                         title: undefined,
                         reversedStacks: false,
                         labels: {
+                            autoRotation: [-45, 45],
                             style: { color: 'var(--mantine-color-text)' },
                             formatter: ({ value }) => prettyBytesToAnyUtil(value, true)
                         },
@@ -219,22 +226,20 @@ export const NodesStatisticBarchartWidget = (props: IProps) => {
                         useHTML: true,
                         formatter() {
                             const value = this.y || 0
-                            const { color } = this.series
                             const pointIndex = this.index
                             const seriesData = this.series.data
 
-                            let gradientCss = '#888'
-                            if (typeof color === 'string') {
-                                gradientCss = color
-                            } else if (color && 'stops' in color && Array.isArray(color.stops)) {
-                                const stops = color.stops
-                                    .map((stop) => {
-                                        const [position, stopColor] = stop as [number, string]
-                                        return `${stopColor} ${position * 100}%`
-                                    })
-                                    .join(', ')
-                                gradientCss = `linear-gradient(90deg, ${stops})`
+                            let parsedColor = this.series.color
+                            if (typeof parsedColor === 'string' && parsedColor) {
+                                parsedColor = alpha(parsedColor, 0.8)
+                            } else {
+                                parsedColor = '#888'
                             }
+
+                            const totalInThisDay = this.series.chart.series.reduce((sum, s) => {
+                                const point = s.data[pointIndex]
+                                return sum + (point?.y || 0)
+                            }, 0)
 
                             const nearbyDays: {
                                 date: string
@@ -268,8 +273,8 @@ export const NodesStatisticBarchartWidget = (props: IProps) => {
                                 nearbyDaysHtml += `
                             <div style="display: flex; align-items: center; gap: 6px; opacity: ${day.isCurrent ? 1 : 0.5};">
                                 <span style="width: 42px; font-size: 0.7rem; text-align: right; font-weight: ${fontWeight};">${day.date}</span>
-                                <div style="flex: 1; height: 6px; background: var(--mantine-color-gray-3); border-radius: 3px; overflow: hidden;">
-                                    <div style="width: ${Math.max((day.value / maxValue) * 100, 2)}%; height: 100%; background: ${gradientCss}; border-radius: 3px;"></div>
+                                <div style="flex: 1; height: 6px; background: var(--mantine-color-body); border-radius: 3px; overflow: hidden;">
+                                    <div style="width: ${Math.max((day.value / maxValue) * 100, 2)}%; height: 100%; background: ${parsedColor}; border-radius: 3px;"></div>
                                 </div>
                                 <span style="width: 50px; font-size: 0.7rem; font-weight: ${fontWeight};">${prettyBytesToAnyUtil(day.value, true)}</span>
                             </div>
@@ -278,9 +283,15 @@ export const NodesStatisticBarchartWidget = (props: IProps) => {
 
                             return `
                             <div style="font-size: 0.875rem; padding: 4px; min-width: 220px;">
-                                <div style="font-weight: 600; margin-bottom: 8px;">${formatTimeUtil(this.category, 'D MMMM YYYY')}</div>
+                                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+                                    <span style="font-weight: 600;">${formatTimeUtil(this.category, 'D MMMM YYYY')}</span>
+                                    <span style="font-size: 0.85rem; color: var(--mantine-color-dimmed); display: flex; align-items: center; gap: 4px;">
+                                        <span style="font-size: 0.85rem;">Σ</span>
+                                        ${prettyBytesToAnyUtil(totalInThisDay, true)}
+                                    </span>
+                                </div>
                                 <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 10px;">
-                                    <div style="width: 10px; height: 10px; background: ${gradientCss}; border-radius: 50%; flex-shrink: 0;"></div>
+                                    <div style="width: 10px; height: 10px; background: ${parsedColor}; border-radius: 50%; flex-shrink: 0;"></div>
                                     <span style="flex: 1;">${this.series.name}</span>
                                     <span style="font-weight: 600;">${prettyBytesToAnyUtil(value)}</span>
                                 </div>
@@ -292,24 +303,14 @@ export const NodesStatisticBarchartWidget = (props: IProps) => {
                         `
                         }
                     },
-                    series: series.map((s, index) => {
-                        const originalIndex = series.findIndex(
-                            (original) => original.name === s.name
-                        )
-                        const colorSet = getColorPaletteItemByIndexUtil(
-                            originalIndex !== -1 ? originalIndex : index
-                        )
+                    series: series.map((s) => {
                         return {
-                            type: 'bar' as const,
+                            type: 'bar',
                             name: s.name,
                             data: s.data,
-                            color: {
-                                linearGradient: { x1: 0, y1: 0, x2: 1, y2: 0 },
-                                stops: [
-                                    [0, colorSet.gradient[1]],
-                                    [1, colorSet.gradient[0]]
-                                ] as Array<[number, string]>
-                            },
+                            color: alpha(s.color, 0.5),
+                            borderWidth: 1,
+                            borderColor: s.color,
                             point: {
                                 events: {
                                     click(this) {

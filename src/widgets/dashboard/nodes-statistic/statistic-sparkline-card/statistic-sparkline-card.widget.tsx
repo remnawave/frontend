@@ -6,11 +6,11 @@ import { prettyBytesToAnyUtil } from '@shared/utils/bytes'
 
 interface IProps {
     isLoading: boolean
-    sparklineData: number[]
+    sparklineData: number[] | undefined
 }
 
 export const NodesStatisticSparklineCardWidget = (props: IProps) => {
-    const { sparklineData, isLoading } = props
+    const { sparklineData = [], isLoading } = props
 
     const { t } = useTranslation()
 
