@@ -7,8 +7,9 @@ import { useState } from 'react'
 import dayjs from 'dayjs'
 
 import { NodesStatisticSparklineCardWidget } from '@widgets/dashboard/nodes-statistic/statistic-sparkline-card'
-import { NodesStatisticTopNodesCardWidget } from '@widgets/dashboard/nodes-statistic/statistic-top-card'
 import { NodesStatisticBarchartWidget } from '@widgets/dashboard/nodes-statistic/statistic-barchart'
+import { TopLeaderboardCardShared } from '@shared/ui/leaderboard-item-card'
+import { CountryFlag } from '@shared/ui/get-country-flag'
 import { useGetStatsNodesUsage } from '@shared/api/hooks'
 import { Page, PageHeaderShared } from '@shared/ui'
 
@@ -154,9 +155,16 @@ export const StatisticNodesPage = () => {
                         sparklineData={nodesStats?.sparklineData}
                     />
 
-                    <NodesStatisticTopNodesCardWidget
+                    <TopLeaderboardCardShared
+                        emptyText={t('statistic-nodes.component.no-data-available')}
                         isLoading={isLoading}
-                        topNodes={nodesStats?.topNodes}
+                        items={nodesStats?.topNodes?.map((node) => ({
+                            color: node.color,
+                            countryCode: node.countryCode,
+                            name: node.name,
+                            total: node.total
+                        }))}
+                        renderCountryFlag={(item) => <CountryFlag countryCode={item.countryCode} />}
                     />
                 </SimpleGrid>
 

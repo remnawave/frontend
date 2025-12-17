@@ -2,14 +2,14 @@ import { ActionIcon, Drawer, Group, Select, Stack } from '@mantine/core'
 import { DatePickerInput, DatesRangeValue } from '@mantine/dates'
 import { TbCalendar, TbRefresh, TbUsers } from 'react-icons/tb'
 import { useTranslation } from 'react-i18next'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import dayjs from 'dayjs'
 
-import { MODALS, useModalClose, useModalState } from '@entities/dashboard/modal-store'
+import { MODALS, useModalCloseActions, useModalState } from '@entities/dashboard/modal-store'
+import { TopLeaderboardCardShared } from '@shared/ui/leaderboard-item-card'
 import { useGetStatsNodeUsersUsage } from '@shared/api/hooks'
 
 import { NodeUsersSparklineCardWidget } from './usage-sparkline-card'
-import { NodeUsersTopCardWidget } from './usage-top-card'
 
 const TOP_USERS_LIMIT_OPTIONS = [
     { value: '5', label: 'Top 5' },
@@ -22,31 +22,28 @@ const TOP_USERS_LIMIT_OPTIONS = [
     { value: '2000', label: 'Top 2000' }
 ]
 
+const DEFAULT_TOP_USERS_LIMIT = 100
+
 const DEFAULT_DATE_RANGE = {
-    start: dayjs().subtract(6, 'day').format('YYYY-MM-DD'),
-    end: dayjs().format('YYYY-MM-DD')
+    start: dayjs.utc().subtract(6, 'day').format('YYYY-MM-DD'),
+    end: dayjs.utc().format('YYYY-MM-DD')
 }
 
 export const NodeUsersUsageDrawer = () => {
     const { isOpen, internalState: nodeUuid } = useModalState(MODALS.SHOW_NODE_USERS_USAGE_DRAWER)
-    const close = useModalClose(MODALS.SHOW_NODE_USERS_USAGE_DRAWER)
+    const [handleClose, clearInternalState] = useModalCloseActions(
+        MODALS.SHOW_NODE_USERS_USAGE_DRAWER
+    )
 
     const { t } = useTranslation()
 
-    const [topUsersLimit, setTopUsersLimit] = useState<number>(100)
+    const [topUsersLimit, setTopUsersLimit] = useState<number>(DEFAULT_TOP_USERS_LIMIT)
     const [rawRange, setRawRange] = useState<[null | string, null | string]>([
         DEFAULT_DATE_RANGE.start,
         DEFAULT_DATE_RANGE.end
     ])
 
     const [queryRange, setQueryRange] = useState<{ end: string; start: string }>(DEFAULT_DATE_RANGE)
-
-    useEffect(() => {
-        if (!isOpen) {
-            setRawRange([DEFAULT_DATE_RANGE.start, DEFAULT_DATE_RANGE.end])
-            setQueryRange(DEFAULT_DATE_RANGE)
-        }
-    }, [isOpen])
 
     const handleDateRangeChange = (value: DatesRangeValue<string>) => {
         setRawRange(value)
@@ -57,8 +54,8 @@ export const NodeUsersUsageDrawer = () => {
 
         if (!dayjs(startDate).isValid() || !dayjs(endDate).isValid()) return
 
-        const startISO = dayjs(startDate).format('YYYY-MM-DD')
-        const endISO = dayjs(endDate).format('YYYY-MM-DD')
+        const startISO = dayjs.utc(startDate).format('YYYY-MM-DD')
+        const endISO = dayjs.utc(endDate).format('YYYY-MM-DD')
 
         setQueryRange({ start: startISO, end: endISO })
     }
@@ -85,16 +82,22 @@ export const NodeUsersUsageDrawer = () => {
     return (
         <Drawer
             keepMounted={false}
-            onClose={close}
+            onClose={handleClose}
+            onExitTransitionEnd={() => {
+                setRawRange([DEFAULT_DATE_RANGE.start, DEFAULT_DATE_RANGE.end])
+                setQueryRange(DEFAULT_DATE_RANGE)
+                setTopUsersLimit(DEFAULT_TOP_USERS_LIMIT)
+                clearInternalState()
+            }}
             opened={isOpen}
             overlayProps={{ backgroundOpacity: 0.6, blur: 0 }}
             padding="lg"
             position="right"
-            size="900px"
+            size="600px"
             title={t('node-users-usage-drawer.widget.user-traffic-statistics')}
         >
             <Stack gap="md">
-                <Group justify="flex-end" wrap="nowrap">
+                <Group justify="space-between">
                     <Select
                         allowDeselect={false}
                         data={TOP_USERS_LIMIT_OPTIONS}
@@ -191,7 +194,17 @@ export const NodeUsersUsageDrawer = () => {
                     sparklineData={nodeUsersStats?.sparklineData}
                 />
 
-                <NodeUsersTopCardWidget isLoading={isLoading} topUsers={nodeUsersStats?.topUsers} />
+                <TopLeaderboardCardShared
+                    emptyText={t('node-users-usage-drawer.widget.no-data-available')}
+                    isLoading={isLoading}
+                    items={nodeUsersStats?.topUsers?.map((user) => ({
+                        color: user.color,
+                        name: user.username,
+                        total: user.total
+                    }))}
+                    maxHeight={500}
+                    skeletonCount={25}
+                />
             </Stack>
         </Drawer>
     )

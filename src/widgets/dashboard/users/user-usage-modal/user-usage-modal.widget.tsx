@@ -6,8 +6,9 @@ import { useEffect, useState } from 'react'
 import dayjs from 'dayjs'
 
 import { UserUsageSparklineCardWidget } from '@widgets/dashboard/users/user-usage-statistic/usage-sparkline-card'
-import { UserUsageTopNodesCardWidget } from '@widgets/dashboard/users/user-usage-statistic/usage-top-card'
 import { UserUsageBarchartWidget } from '@widgets/dashboard/users/user-usage-statistic/usage-barchart'
+import { TopLeaderboardCardShared } from '@shared/ui/leaderboard-item-card'
+import { CountryFlag } from '@shared/ui/get-country-flag'
 import { useGetStatsUserUsage } from '@shared/api/hooks'
 
 import { IProps } from './interfaces'
@@ -167,9 +168,16 @@ export const UserUsageModalWidget = (props: IProps) => {
                         sparklineData={userUsageStats?.sparklineData}
                     />
 
-                    <UserUsageTopNodesCardWidget
+                    <TopLeaderboardCardShared
+                        emptyText={t('user-usage-modal.widget.no-data-available')}
                         isLoading={isLoading}
-                        topNodes={userUsageStats?.topNodes}
+                        items={userUsageStats?.topNodes?.map((node) => ({
+                            color: node.color,
+                            countryCode: node.countryCode,
+                            name: node.name,
+                            total: node.total
+                        }))}
+                        renderCountryFlag={(item) => <CountryFlag countryCode={item.countryCode} />}
                     />
                 </SimpleGrid>
 
