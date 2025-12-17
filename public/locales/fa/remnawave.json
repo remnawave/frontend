@@ -479,11 +479,7 @@
         "component": {
             "no-data-available-for-the-selected-period": "داده‌ای برای دوره انتخاب‌شده در دسترس نیست",
             "click-to-see-all": "برای دیدن همه کلیک کنید",
-            "show-nodes": "نمایش نودها",
             "no-data-available": "داده‌ای در دسترس نیست",
-            "click-to-show-all": "برای نمایش همه کلیک کنید",
-            "click-to-highlight-only-this-node": "کلیک کنید تا فقط این نود برجسته شود",
-            "usage-by-period": "استفاده بر اساس دوره",
             "7-days": "۷ روز",
             "14-days": "۱۴ روز",
             "30-days": "۳۰ روز",
@@ -491,12 +487,14 @@
             "90-days": "۹۰ روز",
             "180-days": "۱۸۰ روز",
             "total-traffic": "ترافیک کل",
+            "total-traffic-placeholder": "Total Traffic: {{totalTraffic}}",
             "top-nodes": "نودهای پرمصرف",
             "filter-nodes": "فیلتر کردن نودها",
             "previous-day": "روز قبل",
             "next-day": "روز بعد",
             "node": "نود",
-            "traffic": "ترافیک"
+            "traffic": "ترافیک",
+            "3-days": "3 days"
         }
     },
     "get-expiration-text": {
@@ -1840,6 +1838,11 @@
         "component": {
             "base-translations": "ترجمه‌های پایه",
             "completed": "{{count}}/{{total}} تکمیل شده است"
+        }
+    },
+    "statistic-sparkline-card": {
+        "widget": {
+            "peak": "Peak"
         }
     }
 }

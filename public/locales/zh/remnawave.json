@@ -479,11 +479,7 @@
         "component": {
             "no-data-available-for-the-selected-period": "所选时段无可用数据",
             "click-to-see-all": "点击查看全部",
-            "show-nodes": "显示节点",
             "no-data-available": "无可用数据",
-            "click-to-show-all": "点击显示全部",
-            "click-to-highlight-only-this-node": "点击仅高亮此节点",
-            "usage-by-period": "时段用量",
             "7-days": "7 天",
             "14-days": "14 天",
             "30-days": "30 天",
@@ -491,12 +487,14 @@
             "90-days": "90 天",
             "180-days": "180 天",
             "total-traffic": "总流量",
+            "total-traffic-placeholder": "总流量: {{totalTraffic}}",
             "top-nodes": "活跃节点",
             "filter-nodes": "筛选节点",
             "previous-day": "前一天",
             "next-day": "后一天",
             "node": "节点",
-            "traffic": "流量"
+            "traffic": "流量",
+            "3-days": "3 天"
         }
     },
     "get-expiration-text": {
@@ -1840,6 +1838,11 @@
         "component": {
             "base-translations": "基础翻译",
             "completed": "{{count}}/{{total}} 已完成"
+        }
+    },
+    "statistic-sparkline-card": {
+        "widget": {
+            "peak": "峰值"
         }
     }
 }

@@ -479,11 +479,7 @@
         "component": {
             "no-data-available-for-the-selected-period": "Нет доступных данных за выбранный период",
             "click-to-see-all": "Нажмите чтобы посмотреть все",
-            "show-nodes": "Показать ноды",
             "no-data-available": "Доступных данных нет",
-            "click-to-show-all": "Нажмите чтобы посмотреть все",
-            "click-to-highlight-only-this-node": "Нажмите чтобы показать только эту ноду",
-            "usage-by-period": "Использование за период",
             "7-days": "7 дней",
             "14-days": "14 дней",
             "30-days": "30 дней",
@@ -491,12 +487,14 @@
             "90-days": "90 дней",
             "180-days": "180 дней",
             "total-traffic": "Общий трафик",
+            "total-traffic-placeholder": "Total Traffic: {{totalTraffic}}",
             "top-nodes": "Топ нод",
             "filter-nodes": "Фильтр нод",
             "previous-day": "Пред. день",
             "next-day": "След. день",
             "node": "Нода",
-            "traffic": "Трафик"
+            "traffic": "Трафик",
+            "3-days": "3 days"
         }
     },
     "get-expiration-text": {
@@ -1840,6 +1838,11 @@
         "component": {
             "base-translations": "Base Translations",
             "completed": "{{count}}/{{total}} completed"
+        }
+    },
+    "statistic-sparkline-card": {
+        "widget": {
+            "peak": "Peak"
         }
     }
 }
