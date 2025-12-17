@@ -72,8 +72,7 @@ export const NodesStatisticSparklineCardWidget = (props: IProps) => {
                         <Skeleton height={100} />
                     ) : (
                         <Sparkline
-                            color={sparklineData.length > 1 ? undefined : 'red'}
-                            curveType="natural"
+                            curveType="bump"
                             data={sparklineData.length > 1 ? sparklineData : [1, 1, 1]}
                             fillOpacity={0.3}
                             h={100}
