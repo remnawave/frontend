@@ -479,11 +479,7 @@
         "component": {
             "no-data-available-for-the-selected-period": "No data available for the selected period",
             "click-to-see-all": "Click to see all",
-            "show-nodes": "Show Nodes",
             "no-data-available": "No data available",
-            "click-to-show-all": "Click to show all",
-            "click-to-highlight-only-this-node": "Click to highlight only this node",
-            "usage-by-period": "Usage by Period",
             "7-days": "7 days",
             "14-days": "14 days",
             "30-days": "30 days",
@@ -491,12 +487,14 @@
             "90-days": "90 days",
             "180-days": "180 days",
             "total-traffic": "Total Traffic",
+            "total-traffic-placeholder": "Total Traffic: {{totalTraffic}}",
             "top-nodes": "Top Nodes",
             "filter-nodes": "Filter Nodes",
             "previous-day": "Previous day",
             "next-day": "Next day",
             "node": "Node",
-            "traffic": "Traffic"
+            "traffic": "Traffic",
+            "3-days": "3 days"
         }
     },
     "get-expiration-text": {
@@ -1840,6 +1838,11 @@
         "component": {
             "base-translations": "Base Translations",
             "completed": "{{count}}/{{total}} completed"
+        }
+    },
+    "statistic-sparkline-card": {
+        "widget": {
+            "peak": "Peak"
         }
     }
 }

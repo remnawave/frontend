@@ -97,7 +97,12 @@ export default defineConfig({
                     i18n: ['i18next', 'i18next-http-backend', 'i18next-browser-languagedetector'],
                     motion: ['framer-motion', 'motion-dom', 'motion-utils', 'motion'],
                     crypto: ['crypto-js', '@stablelib/base64', '@stablelib/x25519'],
-                    charts: ['recharts', 'highcharts', 'highcharts-react-official'],
+                    charts: [
+                        'recharts',
+                        'highcharts',
+                        'highcharts-react-official',
+                        '@highcharts/react'
+                    ],
                     dnd: ['@dnd-kit/core', '@dnd-kit/sortable', '@dnd-kit/utilities'],
                     mantinetable: ['mantine-react-table', 'mantine-datatable'],
                     prettier: ['prettier', 'vscode-languageserver-types', 'prettier/plugins/yaml'],

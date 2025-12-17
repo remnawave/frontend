@@ -3,6 +3,14 @@ import xbytes from 'xbytes'
 
 export function prettyBytesToAnyUtil(
     bytesInput: number | string | undefined,
+    returnZero: true
+): string
+export function prettyBytesToAnyUtil(
+    bytesInput: number | string | undefined,
+    returnZero?: false
+): string | undefined
+export function prettyBytesToAnyUtil(
+    bytesInput: number | string | undefined,
     returnZero: boolean = false
 ): string | undefined {
     if (!bytesInput) {
