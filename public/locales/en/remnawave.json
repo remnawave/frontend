@@ -856,7 +856,7 @@
             "bar-chart": "Bar Chart",
             "previous-day": "Previous day",
             "next-day": "Next day",
-            "hidden-users": "({{hiddenCount}} users with <100 KB hidden)",
+            "hidden-users": "({{hiddenCount}} users with <{{minTraffic}} hidden)",
             "total-traffic-prettybytestoanyutil": "Total traffic: {{totalTraffic}}",
             "user": "User",
             "traffic": "Traffic",

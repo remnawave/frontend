@@ -1,19 +1,15 @@
 /* eslint-disable no-nested-ternary */
-
 import { Box, Card, Center, Group, Loader, SimpleGrid, Stack, Text, ThemeIcon } from '@mantine/core'
 import { PiChartBar, PiChartPieDuotone } from 'react-icons/pi'
-import HighchartsReact from 'highcharts-react-official'
 import { useTranslation } from 'react-i18next'
-import * as Highcharts from 'highcharts'
-import { useMemo, useRef } from 'react'
+import { Chart } from '@highcharts/react'
+import { useMemo } from 'react'
 import dayjs from 'dayjs'
 
 import { useGetSubscriptionRequestHistoryStats } from '@shared/api/hooks'
 
 export function SrhInspectorMetrics() {
     const { t } = useTranslation()
-    const appChartRef = useRef<HighchartsReact.RefObject>(null)
-    const hourlyChartRef = useRef<HighchartsReact.RefObject>(null)
 
     const { data: stats, isLoading } = useGetSubscriptionRequestHistoryStats()
 
@@ -166,7 +162,7 @@ export function SrhInspectorMetrics() {
         }
     }
 
-    const platformChartOptions: Highcharts.Options = useMemo(() => {
+    const platformChartOptions = useMemo(() => {
         if (!stats?.byParsedApp || stats.byParsedApp.length === 0) return {}
 
         const data = stats.byParsedApp.map((item) => ({
@@ -180,7 +176,7 @@ export function SrhInspectorMetrics() {
         }
     }, [stats?.byParsedApp])
 
-    const hourlyChartOptions: Highcharts.Options = useMemo(() => {
+    const hourlyChartOptions = useMemo(() => {
         if (!stats?.hourlyRequestStats || stats.hourlyRequestStats.length === 0) return {}
 
         const data = stats.hourlyRequestStats.map((item) => {
@@ -237,11 +233,7 @@ export function SrhInspectorMetrics() {
                         loaderCard
                     ) : stats?.byParsedApp && stats.byParsedApp.length > 0 ? (
                         <Box h={300}>
-                            <HighchartsReact
-                                highcharts={Highcharts}
-                                options={platformChartOptions}
-                                ref={appChartRef}
-                            />
+                            <Chart options={platformChartOptions} />
                         </Box>
                     ) : (
                         <Center h={300}>
@@ -286,11 +278,7 @@ export function SrhInspectorMetrics() {
                         loaderCard
                     ) : stats?.hourlyRequestStats && stats.hourlyRequestStats.length > 0 ? (
                         <Box h={300}>
-                            <HighchartsReact
-                                highcharts={Highcharts}
-                                options={hourlyChartOptions}
-                                ref={hourlyChartRef}
-                            />
+                            <Chart options={hourlyChartOptions} />
                         </Box>
                     ) : (
                         <Center h={300}>

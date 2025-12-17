@@ -7,10 +7,9 @@ import {
     PiDevicesDuotone
 } from 'react-icons/pi'
 import { Box, Card, Center, Group, Loader, SimpleGrid, Stack, Text, ThemeIcon } from '@mantine/core'
-import HighchartsReact from 'highcharts-react-official'
 import { useTranslation } from 'react-i18next'
-import * as Highcharts from 'highcharts'
-import { useMemo, useRef } from 'react'
+import { Chart } from '@highcharts/react'
+import { useMemo } from 'react'
 
 import { MetricCard } from '@shared/ui/metrics/metric-card'
 import { useGetHwidDevicesStats } from '@shared/api/hooks'
@@ -18,8 +17,6 @@ import { formatInt } from '@shared/utils/misc'
 
 export function HwidInspectorMetrics() {
     const { t } = useTranslation()
-    const platformChartRef = useRef<HighchartsReact.RefObject>(null)
-    const appChartRef = useRef<HighchartsReact.RefObject>(null)
 
     const { data: stats, isLoading } = useGetHwidDevicesStats()
 
@@ -84,7 +81,7 @@ export function HwidInspectorMetrics() {
         }
     }
 
-    const platformChartOptions: Highcharts.Options = useMemo(() => {
+    const platformChartOptions = useMemo(() => {
         if (!stats?.byPlatform || stats.byPlatform.length === 0) return {}
 
         const data = stats.byPlatform.map((item) => ({
@@ -98,7 +95,7 @@ export function HwidInspectorMetrics() {
         }
     }, [stats?.byPlatform])
 
-    const appChartOptions: Highcharts.Options = useMemo(() => {
+    const appChartOptions = useMemo(() => {
         if (!stats?.byApp || stats.byApp.length === 0) return {}
 
         const data = stats.byApp.map((item) => ({
@@ -200,11 +197,7 @@ export function HwidInspectorMetrics() {
                         loaderCard
                     ) : stats?.byPlatform && stats.byPlatform.length > 0 ? (
                         <Box h={300}>
-                            <HighchartsReact
-                                highcharts={Highcharts}
-                                options={platformChartOptions}
-                                ref={platformChartRef}
-                            />
+                            <Chart options={platformChartOptions} />
                         </Box>
                     ) : (
                         <Center h={300}>
@@ -250,11 +243,7 @@ export function HwidInspectorMetrics() {
                         loaderCard
                     ) : stats?.byApp && stats.byApp.length > 0 ? (
                         <Box h={300}>
-                            <HighchartsReact
-                                highcharts={Highcharts}
-                                options={appChartOptions}
-                                ref={appChartRef}
-                            />
+                            <Chart options={appChartOptions} />
                         </Box>
                     ) : (
                         <Center h={300}>
