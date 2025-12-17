@@ -856,7 +856,7 @@
             "bar-chart": "Столбчатая диаграмма",
             "previous-day": "Предыдущий день",
             "next-day": "Следующий день",
-            "hidden-users": "({{hiddenCount}} пользователей с <100 KB скрыто)",
+            "hidden-users": "({{hiddenCount}} users with <{{minTraffic}} hidden)",
             "total-traffic-prettybytestoanyutil": "Общий трафик: {{totalTraffic}}",
             "user": "Пользователь",
             "traffic": "Трафик",
