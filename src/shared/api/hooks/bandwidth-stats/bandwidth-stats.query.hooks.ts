@@ -2,7 +2,8 @@ import {
     GetLegacyStatsNodeUserUsageCommand,
     GetLegacyStatsUserUsageCommand,
     GetStatsNodesRealtimeUsageCommand,
-    GetStatsNodesUsageCommand
+    GetStatsNodesUsageCommand,
+    GetStatsUserUsageCommand
 } from '@remnawave/backend-contract'
 import { createQueryKeys } from '@lukemorales/query-key-factory'
 import { keepPreviousData } from '@tanstack/react-query'
@@ -17,6 +18,11 @@ export const bandwidthStatsQueryKeys = createQueryKeys('bandwidthStats', {
     },
     getStatsNodesUsageCommand: (filters: GetStatsNodesUsageCommand.RequestQuery) => ({
         queryKey: [filters]
+    }),
+    getStatsUserUsageCommand: (
+        query: GetStatsUserUsageCommand.Request & GetStatsUserUsageCommand.RequestQuery
+    ) => ({
+        queryKey: [query]
     }),
     getLegacyStatsUserUsageCommand: (
         query: GetLegacyStatsUserUsageCommand.Request & GetLegacyStatsUserUsageCommand.RequestQuery
@@ -52,6 +58,19 @@ export const useGetStatsNodesUsage = createGetQueryHook({
         placeholderData: keepPreviousData
     },
     errorHandler: (error) => errorHandler(error, 'Get Nodes Usage By Range')
+})
+
+export const useGetStatsUserUsage = createGetQueryHook({
+    endpoint: GetStatsUserUsageCommand.TSQ_url,
+    responseSchema: GetStatsUserUsageCommand.ResponseSchema,
+    requestQuerySchema: GetStatsUserUsageCommand.RequestQuerySchema,
+    getQueryKey: ({ route, query }) =>
+        bandwidthStatsQueryKeys.getStatsUserUsageCommand({ ...route!, ...query! }).queryKey,
+    rQueryParams: {
+        staleTime: sToMs(30),
+        placeholderData: keepPreviousData
+    },
+    errorHandler: (error) => errorHandler(error, 'Get User Usage By Range')
 })
 
 export const useGetLegacyStatsNodeUserUsage = createGetQueryHook({
