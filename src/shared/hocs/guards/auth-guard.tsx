@@ -12,7 +12,7 @@ export function AuthGuard() {
 
     const { isAuthenticated, isInitialized } = useAuth()
 
-    const { isLoading } = useGetAuthStatus({})
+    const { isLoading } = useGetAuthStatus()
     const updatesStoreActions = useUpdatesStoreActions()
 
     useLayoutEffect(() => {
