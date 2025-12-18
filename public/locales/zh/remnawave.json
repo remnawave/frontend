@@ -856,7 +856,7 @@
             "bar-chart": "条形图",
             "previous-day": "前一天",
             "next-day": "后一天",
-            "hidden-users": "({{hiddenCount}} users with <{{minTraffic}} hidden)",
+            "hidden-users": "（{{hiddenCount}} 位用户因流量低于 {{minTraffic}} 而被隐藏）",
             "total-traffic-prettybytestoanyutil": "总流量: {{totalTraffic}}",
             "user": "用户",
             "traffic": "流量",
