@@ -1844,5 +1844,12 @@
         "widget": {
             "peak": "峰值"
         }
+    },
+    "user-hwid-devices": {
+        "drawer": {
+            "widget": {
+                "enter-search-query": "Enter search query..."
+            }
+        }
     }
 }
