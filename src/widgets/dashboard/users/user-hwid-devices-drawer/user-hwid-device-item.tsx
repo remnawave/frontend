@@ -101,13 +101,13 @@ export const UserHwidDeviceItem = (props: IProps) => {
                     <CopyableFieldShared
                         label={t('get-hwid-user-devices.feature.added')}
                         size="sm"
-                        value={dayjs(device.createdAt).format('YYYY-MM-DD HH:mm Z')}
+                        value={dayjs(device.createdAt).format('HH:mm DD MMMM, YYYY')}
                     />
 
                     <CopyableFieldShared
                         label="Updated"
                         size="sm"
-                        value={dayjs(device.updatedAt).format('YYYY-MM-DD HH:mm Z')}
+                        value={dayjs(device.updatedAt).format('HH:mm DD MMMM, YYYY')}
                     />
                 </Stack>
             </SettingsCardShared.Content>

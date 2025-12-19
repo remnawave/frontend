@@ -148,27 +148,27 @@ export const UserHwidDevicesDrawerWidget = () => {
     const renderListContent = () => {
         if (!filteredDevices || filteredDevices.length === 0) return null
         return (
-            <Virtuoso
-                data={filteredDevices}
-                itemContent={(index, device) => {
-                    return (
-                        <Box
-                            className={classes.itemWrapper}
-                            key={device.hwid}
-                            style={{ marginBottom: '8px' }}
-                        >
-                            <UserHwidDeviceItem
-                                device={device}
-                                index={index}
-                                onDelete={handleDeleteDevice}
-                            />
-                        </Box>
-                    )
-                }}
-                style={{ height: '500px' }}
-                totalCount={filteredDevices.length}
-                useWindowScroll={false}
-            />
+            <Box className={classes.listContainer}>
+                <Virtuoso
+                    data={filteredDevices}
+                    itemContent={(index, device) => {
+                        return (
+                            <Box className={classes.itemWrapper}>
+                                <UserHwidDeviceItem
+                                    device={device}
+                                    index={index}
+                                    onDelete={handleDeleteDevice}
+                                />
+                            </Box>
+                        )
+                    }}
+                    style={{
+                        height: '100%'
+                    }}
+                    totalCount={filteredDevices.length}
+                    useWindowScroll={false}
+                />
+            </Box>
         )
     }
 
@@ -238,8 +238,6 @@ export const UserHwidDevicesDrawerWidget = () => {
             keepMounted={false}
             onClose={close}
             opened={isOpen}
-            overlayProps={{ backgroundOpacity: 0.6, blur: 0 }}
-            padding="lg"
             position="right"
             size="500px"
             title={
