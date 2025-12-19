@@ -72,10 +72,7 @@
 
 .card {
     animation: cardFadeIn 0.25s ease-out both;
-}
-
-.card {
-    animation-delay: calc(var(--card-index, 0) * 30ms + 100ms);
+    animation-delay: calc(var(--card-index, 0) * 70ms + 100ms);
 }
 
 @media (prefers-reduced-motion: reduce) {
