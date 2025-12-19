@@ -16,7 +16,7 @@
         "happ-routing-builder": "Happ Routing",
         "templates": "Templates",
         "subscription": "Subscription",
-        "subscription-page-builder": "Sub Page Builder",
+        "subscription-page": "Subscription Page",
         "config-profiles": "Config Profiles",
         "internal-squads": "Internal Squads",
         "external-squads": "External Squads",
@@ -54,7 +54,9 @@
         "success": "Success",
         "download": "Download",
         "search": "Search",
-        "nothing-found": "Nothing found"
+        "nothing-found": "Nothing found",
+        "name": "Name",
+        "clone": "Clone"
     },
     "bandwidth-metrics": {
         "current-year": "Current year",
@@ -303,7 +305,7 @@
             "1-year": "+1 year",
             "2099-year": "year 2099",
             "hwid-user-limit-line-1": "This feature will only work if",
-            "hwid-user-limit-line-2": ".env variable is set to",
+            "hwid-user-limit-line-2": "in Subscription Settings is set to",
             "hwid-user-limit-line-3": "Learn more.",
             "disable-hwid-limit": "Disable HWID Limit",
             "hwid-device-limit": "HWID Device Limit",
@@ -477,11 +479,7 @@
         "component": {
             "no-data-available-for-the-selected-period": "No data available for the selected period",
             "click-to-see-all": "Click to see all",
-            "show-nodes": "Show Nodes",
             "no-data-available": "No data available",
-            "click-to-show-all": "Click to show all",
-            "click-to-highlight-only-this-node": "Click to highlight only this node",
-            "usage-by-period": "Usage by Period",
             "7-days": "7 days",
             "14-days": "14 days",
             "30-days": "30 days",
@@ -489,12 +487,14 @@
             "90-days": "90 days",
             "180-days": "180 days",
             "total-traffic": "Total Traffic",
+            "total-traffic-placeholder": "Total Traffic: {{totalTraffic}}",
             "top-nodes": "Top Nodes",
             "filter-nodes": "Filter Nodes",
             "previous-day": "Previous day",
             "next-day": "Next day",
             "node": "Node",
-            "traffic": "Traffic"
+            "traffic": "Traffic",
+            "3-days": "3 days"
         }
     },
     "get-expiration-text": {
@@ -552,78 +552,6 @@
             "password-too-short": "Minimum 24 characters",
             "register-description": "Create a super-admin account to get started",
             "registration": "Registration"
-        }
-    },
-    "happ-routing-builder": {
-        "widget": {
-            "copy-link": "Copy link",
-            "visual-editor": "Visual Editor",
-            "enter-the-configuration-name": "Enter a name for the configuration",
-            "name": "Name",
-            "russia": "Russia",
-            "proxy-all-traffic-except-rules": "Proxy all traffic except the rules",
-            "direct-all-traffic-except-rules": "Direct route all traffic except the rules",
-            "proxy-all-traffic-except-rules-or-direct-all-traffic-except-rules": "Proxy all traffic except the rules, or direct route all traffic except the rules",
-            "fake-dns-description": "Enable or disable FakeDNS. Recommended to activate when using DoU.",
-            "choose-doh-dns-over-https-or-dou-dns-over-udp": "Whether to use DoH (DNS over HTTPS) or DoU (DNS over UDP) for the remote DNS",
-            "remote-dns-type": "Remote DNS type",
-            "domain-name-for-doh": "Domain name for the DNS server (if DoH)",
-            "remote-dns-domain": "Remote DNS Domain",
-            "server-ip-for-doh-or-dou": "DNS Server IP address for DoH or DoU",
-            "remote-dns-ip": "Remote DNS IP address",
-            "domestic-dns-type-description": "Whether to use DoH (DNS over HTTPS) or DoU (DNS over UDP) for the domestic DNS",
-            "domestic-dns-type": "Domestic DNS Type",
-            "domain-name-for-doh-0": "Domain name (if DoH)",
-            "domestic-dns-domain": "Domestic DNS Domain",
-            "server-ip-for-doh-or-dou-0": "DNS Server IP address for DoH or DoU",
-            "domestic-dns-ip": "Domestic DNS IP",
-            "geoip-description": "Link to the geoip.dat file. Leave this field empty if you want to use the default file.",
-            "geoip-url": "GeoIP URL",
-            "geosite-description": "Link to the geosite.dat file. Leave this field empty if you want to use the default file.",
-            "geosite-url": "GeoSite URL",
-            "unix-timestamp-description": "Enter the Unix timestamp of the last update to the geoip and geosite files. Leave empty if not available.",
-            "last-updated": "Last updated",
-            "select-the-domain-processing-strategy": "Select the domain processing strategy.",
-            "domain-strategy": "Domain strategy",
-            "dns-hosts-description": "Enter the DNS hosts in this format: { \"example.com\": \"1.2.3.4\", \"test.org\": \"8.8.8.8\" }",
-            "dns-hosts": "DNS hosts",
-            "sites-that-will-use-direct-connection": "Domain names that shouldn't be proxied and use a direct connection.",
-            "direct-sites": "Direct sites",
-            "ip-addresses-that-will-use-direct-connection": "IP addresses that shouldn't be proxied and use a direct connection.",
-            "direct-ip": "Direct IP",
-            "sites-that-will-be-proxied": "Domain names that should be proxied.",
-            "proxy-sites": "Proxy sites",
-            "ip-addresses-that-will-be-proxied": "IP addresses that should be proxied.",
-            "proxy-ip": "Proxy IP",
-            "sites-that-will-be-blocked": "Domain names that should be blocked.",
-            "blocked-sites": "Blocked sites",
-            "ip-addresses-that-will-be-blocked": "IP addresses that should be blocked.",
-            "blocked-ips": "Blocked IPs",
-            "encoded-happ-link": "Encoded Happ Link",
-            "show-qr": "Show QR",
-            "invalid-base64-or-happ-link": "Invalid Base64 or Happ Link",
-            "import-configuration": "Import Configuration",
-            "paste-a-happ-routing-link-or-base64-encoded-config": "Paste a Happ routing link or Base64 encoded config",
-            "import-from-base64": "Import from Base64",
-            "paste-base64-or-happ-link-here": "Paste Base64 or Happ Link here",
-            "decode": "Decode",
-            "basic-configuration": "Basic Configuration",
-            "remote-dns-settings": "Remote DNS Settings",
-            "domestic-dns-settings": "Domestic DNS Settings",
-            "dns-hosts-0": "DNS Hosts",
-            "direct-routing": "Direct Routing",
-            "proxy-routing": "Proxy Routing",
-            "block-routing": "Block Routing",
-            "code-editor": "Code Editor"
-        },
-        "page": {
-            "component": {
-                "about-happ": "About Happ",
-                "happ-is-multiplatform-xray-client": "Happ is a multiplatform Xray client.",
-                "about-happ-description-line-2": "Here you can configure routing rules, which you can then encode and use as a Happ Link.",
-                "about-happ-description-line-3": "To use a given Happ routing configuration in your subscription links, open \"Subscription settings\" and change the \"Happ Routing\" section.",
-                "check-out-happ-website": "Check out Happ's website"
-            }
         }
     },
     "remarks-manager": {
@@ -871,66 +799,6 @@
             "active-internal-squads": "Active Internal Squads"
         }
     },
-    "subscription-page-builder-header": {
-        "widget": {
-            "load-default": "Load Default",
-            "export-config": "Export Config",
-            "upload-config": "Upload Config",
-            "subscription-page-builder": "Subscription Page Builder",
-            "how-to-use-it": "How to use it?",
-            "description-line-1": "You can use this builder to configure available clients and usage guides for Remnawave Subscription Pages.",
-            "description-line-2": "After creating your desired configuration, you can export and download it and mount the configuration file to your subscription-page container.",
-            "description-line-3": "Click \"Load Default\" to get the reference configuration from the GitHub repository.",
-            "learn-more": "Learn more"
-        }
-    },
-    "subscription-page-builder": {
-        "page": {
-            "component": {
-                "failed-to-parse-config": "Failed to parse config file. Check the file format.",
-                "failed-to-load-default-config-check-your-internet-connection": "Failed to load default config. Check your internet connection.",
-                "no-apps-configured-for-this-platform": "No apps configured for this platform",
-                "add-app": "Add app",
-                "select-an-app-from-the-sidebar-or-add-a-new-one": "Select an app from the sidebar or add a new one",
-                "validation-errors": "Validation errors",
-                "invalid-configuration": "Invalid configuration",
-                "the-configuration-did-not-pass-validation": "The configuration did not pass validation.",
-                "configuration-settings": "Configuration Settings",
-                "platform-apps": "Platform Apps",
-                "move-up": "Move up",
-                "move-down": "Move down"
-            }
-        }
-    },
-    "app-form": {
-        "component": {
-            "delete-app": "Delete App",
-            "app-id": "App ID",
-            "app-name": "App Name",
-            "url-scheme": "URL Scheme",
-            "featured-app": "Featured App",
-            "need-base64-encoding": "Need Base64 Encoding",
-            "installation-step": "Installation Step",
-            "description": "Description",
-            "buttons": "Buttons",
-            "additional-before-subscription-step": "Additional Before Subscription Step",
-            "remove-step": "Remove Step",
-            "add-step": "Add Step",
-            "title": "Title",
-            "add-subscription-step": "Add Subscription Step",
-            "additional-after-subscription-step": "Additional After Subscription Step",
-            "connect-and-use-step": "Connect and Use Step"
-        }
-    },
-    "button-fields": {
-        "button": "Button",
-        "add-button": "Add button",
-        "remove-button": "Remove button",
-        "button-link": "Button Link",
-        "button-text": "Button Text",
-        "enter-button-text": "Enter button text...",
-        "english": "English"
-    },
     "subscription-tabs": {
         "widget": {
             "show-custom-remarks": "Show custom remarks",
@@ -988,7 +856,7 @@
             "bar-chart": "Bar Chart",
             "previous-day": "Previous day",
             "next-day": "Next day",
-            "hidden-users": "({{hiddenCount}} users with <100 KB hidden)",
+            "hidden-users": "({{hiddenCount}} users with <{{minTraffic}} hidden)",
             "total-traffic-prettybytestoanyutil": "Total traffic: {{totalTraffic}}",
             "user": "User",
             "traffic": "Traffic",
@@ -1451,17 +1319,6 @@
             "new-name": "New Name"
         }
     },
-    "branding-settings": {
-        "component": {
-            "branding-settings": "Branding Settings",
-            "brand-name": "Brand Name",
-            "the-name-that-will-be-displayed-on-the-subscription-page": "The name that will be displayed on the subscription page",
-            "url-to-your-brand-logo-image": "URL to your brand logo image",
-            "logo-url": "Logo URL",
-            "link-to-your-support-or-help-page": "Link to your support or help page",
-            "support-url": "Support URL"
-        }
-    },
     "internal-squad-accessible-nodes": {
         "modal": {
             "widget": {
@@ -1732,6 +1589,7 @@
             "branding-settings": "Branding Settings",
             "the-title-that-will-be-displayed-on-login-page": "The title that will be displayed on login page",
             "brand-name": "Brand Name",
+            "logo-url": "Logo URL",
             "the-url-to-your-brand-logo-image": "The URL to your brand logo image",
             "colored-title-format": "Colored Title Format",
             "colored-title-description": "You can color individual words using {color}word syntax. Supports both HEX colors (#RRGGBB) and MantineUI color names.",
@@ -1842,5 +1700,156 @@
         "tags": "Tags",
         "total-ram": "Total RAM",
         "cpu-model": "CPU Model"
+    },
+    "subpage-config-visual-editor": {
+        "widget": {
+            "configuration-saved-successfully": "Configuration saved successfully",
+            "edit-your-subscription-page-configuration": "Edit your subscription page configuration",
+            "subpage-editor": "Subpage Editor",
+            "load-from-github": "Load from GitHub",
+            "brand-appearance": "Brand appearance",
+            "branding": "Branding",
+            "brand-title": "Brand Title",
+            "your-brand-name": "Your Brand Name",
+            "logo-url": "Logo URL",
+            "support-url": "Support URL",
+            "additional-languages": "Additional languages",
+            "localization": "Localization",
+            "ui-configuration": "UI Configuration",
+            "collapsed": "Collapsed",
+            "expanded": "Expanded",
+            "subscription-info-block-design": "Subscription Info Block Design",
+            "installation-guides-header": "Installation Guides Header",
+            "connection-keys-header": "Connection Keys Header",
+            "configure-apps-for-each-platform": "Configure apps for each platform",
+            "platforms": "Platforms",
+            "add-platform": "Add platform",
+            "no-platforms-configured": "No platforms configured",
+            "add-a-platform-to-get-started": "Add a platform to get started",
+            "validation-error": "Validation Error",
+            "manage-your-svg-icons": "Manage your SVG icons",
+            "open-svg-library": "Open SVG Library",
+            "cards": "Cards",
+            "hidden": "Hidden",
+            "accordion": "Accordion",
+            "minimal": "Minimal",
+            "timeline": "Timeline",
+            "installation-guides-design": "Installation Guides Design"
+        },
+        "subpage-config-saved-line-1": "To apply the changes, please restart the Remnawave Subscription-page Docker container.",
+        "subpage-config-saved-line-2": "For example, you can use the following command in your terminal:"
+    },
+    "app-editor-drawer-content": {
+        "component": {
+            "app-settings": "App Settings",
+            "featured": "Featured",
+            "app-name": "App Name",
+            "blocks": "Blocks",
+            "add-block": "Add Block"
+        }
+    },
+    "block-editor": {
+        "modal": {
+            "component": {
+                "untitled-block": "Untitled Block",
+                "edit-block": "Edit Block",
+                "block-settings": "Block Settings",
+                "svg-icon": "SVG Icon",
+                "icon-color": "Icon Color",
+                "icon-color-help": "You can use any Mantine theme color ({{colors}}) or any valid HEX color (for example: #009688).",
+                "title": "Title",
+                "description": "Description",
+                "buttons": "Buttons",
+                "add-button": "Add Button"
+            }
+        }
+    },
+    "button-editor": {
+        "component": {
+            "link": "Link",
+            "external-link": "External Link",
+            "subscription-link": "Subscription Link",
+            "type": "Type",
+            "svg-icon": "SVG Icon",
+            "button-text": "Button Text"
+        }
+    },
+    "localized-text-editor": {
+        "component": {
+            "not-set": "Not set",
+            "required-default-language": "Required (default language)",
+            "done": "Done"
+        }
+    },
+    "platform-editor": {
+        "component": {
+            "platform-svg-icon": "Platform SVG Icon",
+            "display-name": "Display Name",
+            "apps": "Apps",
+            "add-app": "Add App",
+            "unnamed-app": "Unnamed App",
+            "edit-app": "Edit App"
+        }
+    },
+    "svg-icon-input": {
+        "component": {
+            "svg-icon": "SVG Icon"
+        }
+    },
+    "svg-icon-select": {
+        "component": {
+            "select-icon": "Select icon...",
+            "no-icons-in-library": "No icons in library"
+        }
+    },
+    "svg-library-modal": {
+        "component": {
+            "svg-library": "SVG Library",
+            "add-icon": "Add Icon",
+            "add-icons-to-use-them-in-blocks-and-buttons": "Add icons to use them in blocks and buttons",
+            "edit-icon": "Edit Icon",
+            "only-latin-characters-no-spaces": "Only latin characters, no spaces",
+            "only-latin-characters-allowed": "Only latin characters allowed",
+            "icon-key": "Icon Key",
+            "svg-code": "SVG Code",
+            "preview": "Preview",
+            "where-to-find-icons": "Where to find icons?",
+            "you-can-find-beautiful-icons-at": "You can find beautiful icons at",
+            "where-to-find-icons-description": "Сlick on any icon, select \"Copy SVG\" and paste it here. Make sure to choose \"Outline\" or \"Filled\" style."
+        }
+    },
+    "external-squads-subpage-config": {
+        "tab": {
+            "widget": {
+                "subscription-page-config": "Subscription Page Config",
+                "subscription-page-config-description": "You can override the subscription page configuration (Remnawave Subscription Page) for this external squad.",
+                "subpage-config": "Subpage Config",
+                "select-config": "Select config..."
+            }
+        }
+    },
+    "subpage-config-editor-page": {
+        "component": {
+            "import-config": "Import config",
+            "download-config": "Download config"
+        }
+    },
+    "base-translations-drawer": {
+        "component": {
+            "base-translations": "Base Translations",
+            "completed": "{{count}}/{{total}} completed"
+        }
+    },
+    "statistic-sparkline-card": {
+        "widget": {
+            "peak": "Peak"
+        }
+    },
+    "user-hwid-devices": {
+        "drawer": {
+            "widget": {
+                "enter-search-query": "Enter search query..."
+            }
+        }
     }
 }

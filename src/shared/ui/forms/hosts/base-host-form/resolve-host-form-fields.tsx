@@ -4,7 +4,7 @@ import { PiIdentificationBadge } from 'react-icons/pi'
 import { HiQuestionMarkCircle } from 'react-icons/hi'
 import { TFunction } from 'i18next'
 
-import { HappLogo } from '@pages/dashboard/utils/happ-routing-builder/ui/components/happ-routing-builder.page.component'
+import { HappLogo } from '@shared/ui/logos'
 
 const hoverCard = (text: string) => {
     return (

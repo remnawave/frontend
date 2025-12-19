@@ -89,7 +89,11 @@ export function ConfigEditorActionsFeature(props: Props) {
         }
     })
 
-    const { openDownloadModal } = useDownloadTemplate('XRAY_JSON', editorRef, 'XRAY_CORE')
+    const { openDownloadModal } = useDownloadTemplate({
+        editorType: 'XRAY_CORE',
+        templateType: 'XRAY_JSON',
+        editorRef
+    })
 
     const handleSave = () => {
         if (!editorRef.current) return

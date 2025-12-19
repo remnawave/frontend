@@ -101,6 +101,21 @@ export const useModalClose = (modalKey: ModalKeys) => {
     }
 }
 
+export const useModalCloseActions = (modalKey: ModalKeys) => {
+    const close = useModalsStore((state) => state.close)
+    const setInternalData = useModalsStore((state) => state.setInternalData)
+
+    const handleClose = () => {
+        close(modalKey)
+    }
+
+    const clearInternalState = () => {
+        setInternalData({ modalKey, internalState: undefined })
+    }
+
+    return [handleClose, clearInternalState] as const
+}
+
 export const useModalState = <K extends ModalKeys>(modalKey: K) => {
     return useModalsStore((state) => state.modals[modalKey])
 }

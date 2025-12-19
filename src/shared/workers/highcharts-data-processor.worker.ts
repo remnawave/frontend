@@ -1,4 +1,4 @@
-import { GetNodeUserUsageByRangeCommand } from '@remnawave/backend-contract'
+import { GetLegacyStatsNodeUserUsageCommand } from '@remnawave/backend-contract'
 import ColorHash from 'color-hash'
 import dayjs from 'dayjs'
 
@@ -36,7 +36,7 @@ const ch = new ColorHash({
 })
 
 function formatDataForHighcharts(
-    dbData: GetNodeUserUsageByRangeCommand.Response['response'],
+    dbData: GetLegacyStatsNodeUserUsageCommand.Response['response'],
     options: ProcessHighchartsDataOptions
 ): HighchartsProcessedData {
     const {
@@ -181,7 +181,7 @@ function formatDataForHighcharts(
 }
 
 export async function processData(
-    data: GetNodeUserUsageByRangeCommand.Response['response'],
+    data: GetLegacyStatsNodeUserUsageCommand.Response['response'],
     options: ProcessHighchartsDataOptions
 ): Promise<HighchartsProcessedData> {
     return formatDataForHighcharts(data, options)

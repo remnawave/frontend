@@ -14,6 +14,7 @@ import { UserTableWidget } from '@widgets/dashboard/users/users-table'
 import { UsersMetrics } from '@widgets/dashboard/users/users-metrics'
 import { LoadingScreen } from '@shared/ui'
 import { Page } from '@shared/ui/page'
+import { UserHwidDevicesDrawerWidget } from '@widgets/dashboard/users/user-hwid-devices-drawer/user-hwid-devices.drawer.widget'
 
 const DeferredUserTableWidget = () => {
     const [shouldRender, setShouldRender] = useState(false)
@@ -56,6 +57,7 @@ export default function UsersPageComponent() {
             <DetailedUserInfoDrawerWidget key="detailed-user-info-drawer" />
             <UserAccessibleNodesModalWidget key="user-accessible-nodes-modal" />
             <InternalSquadsDrawerWithStore key="internal-squads-drawer-with-store" />
+            <UserHwidDevicesDrawerWidget key="user-hwid-devices-drawer" />
         </Page>
     )
 }

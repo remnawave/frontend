@@ -9,6 +9,7 @@ import { THelpDrawerAvailableScreen } from '@shared/ui/help-drawer/help-drawer.t
 export const MODALS = {
     CONFIG_PROFILES_SHOW_ACTIVE_NODE: 'CONFIG_PROFILES_SHOW_ACTIVE_NODE',
     INTERNAL_SQUAD_SHOW_INBOUNDS: 'INTERNAL_SQUAD_SHOW_INBOUNDS',
+    USER_HWID_DEVICES_DRAWER: 'USER_HWID_DEVICES_DRAWER',
     EXTERNAL_SQUAD_DRAWER: 'EXTERNAL_SQUAD_DRAWER',
     USER_ACCESSIBLE_NODES_DRAWER: 'USER_ACCESSIBLE_NODES_DRAWER',
     VIEW_INFRA_PROVIDER_DRAWER: 'VIEW_INFRA_PROVIDER_DRAWER',
@@ -69,4 +70,7 @@ export interface ModalInternalStates {
         userUuid: string
     }
     VIEW_INFRA_PROVIDER_DRAWER: GetInfraProvidersCommand.Response['response']['providers'][number]
+    USER_HWID_DEVICES_DRAWER: {
+        userUuid: string
+    }
 }

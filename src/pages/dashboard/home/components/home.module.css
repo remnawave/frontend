@@ -1,7 +1,86 @@
 .root {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+@keyframes sectionFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes titleSlideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes cardFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.section {
+    animation: sectionFadeIn 0.4s ease-out both;
+}
+
+.section:nth-child(1) {
+    animation-delay: 0ms;
+}
+.section:nth-child(2) {
+    animation-delay: 150ms;
+}
+.section:nth-child(3) {
+    animation-delay: 300ms;
+}
+.section:nth-child(4) {
+    animation-delay: 450ms;
+}
+.section:nth-child(5) {
+    animation-delay: 600ms;
+}
+.section:nth-child(6) {
+    animation-delay: 750ms;
+}
+
+.title {
+    animation: titleSlideIn 0.3s ease-out both;
+}
+
+.grid {
+    display: grid;
+}
+
+.card {
+    animation: cardFadeIn 0.25s ease-out both;
+    animation-delay: calc(var(--card-index, 0) * 70ms + 100ms);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .section,
+    .title,
+    .card {
+        animation: none;
+        opacity: 1;
+        transform: none;
+    }
 }

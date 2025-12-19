@@ -3,6 +3,7 @@ import {
     UpdateExternalSquadCommand,
     UpdateInternalSquadCommand,
     UpdatePasskeyCommand,
+    UpdateSubscriptionPageConfigCommand,
     UpdateSubscriptionTemplateCommand
 } from '@remnawave/backend-contract'
 import { Button, Group, Modal, Stack, TextInput } from '@mantine/core'
@@ -16,12 +17,19 @@ import {
     useUpdateExternalSquad,
     useUpdateInternalSquad,
     useUpdatePasskey,
+    useUpdateSubscriptionPageConfig,
     useUpdateSubscriptionTemplate
 } from '@shared/api/hooks'
 import { MODALS, useModalClose, useModalState } from '@entities/dashboard/modal-store'
 import { queryClient } from '@shared/api/query-client'
 
-type RenameType = 'configProfile' | 'externalSquad' | 'internalSquad' | 'passkey' | 'template'
+type RenameType =
+    | 'configProfile'
+    | 'externalSquad'
+    | 'internalSquad'
+    | 'passkey'
+    | 'subpageConfig'
+    | 'template'
 
 interface IProps {
     renameFrom: RenameType
@@ -58,6 +66,14 @@ export function RenameModalShared({ renameFrom }: IProps) {
 
                 if (renameFrom === 'externalSquad') {
                     return UpdateExternalSquadCommand.RequestSchema.omit({ uuid: true }).safeParse({
+                        name: value
+                    })
+                }
+
+                if (renameFrom === 'subpageConfig') {
+                    return UpdateSubscriptionPageConfigCommand.RequestSchema.omit({
+                        uuid: true
+                    }).safeParse({
                         name: value
                     })
                 }
@@ -137,6 +153,18 @@ export function RenameModalShared({ renameFrom }: IProps) {
         }
     })
 
+    const { mutate: updateSubpageConfig, isPending: isUpdatingSubpageConfig } =
+        useUpdateSubscriptionPageConfig({
+            mutationFns: {
+                onSuccess: () => {
+                    queryClient.refetchQueries({
+                        queryKey: QueryKeys.subpageConfigs.getSubscriptionPageConfigs.queryKey
+                    })
+                    handleModalClose()
+                }
+            }
+        })
+
     const handleSave = async () => {
         if (await nameField.validate()) return
 
@@ -185,6 +213,15 @@ export function RenameModalShared({ renameFrom }: IProps) {
                     name: nameField.getValue()
                 }
             })
+        } else if (renameFrom === 'subpageConfig') {
+            if (!internalState) return
+
+            updateSubpageConfig({
+                variables: {
+                    uuid: internalState.uuid,
+                    name: nameField.getValue()
+                }
+            })
         }
     }
 
@@ -193,7 +230,8 @@ export function RenameModalShared({ renameFrom }: IProps) {
         isUpdatingConfigProfile ||
         isUpdatingTemplate ||
         isUpdatingExternalSquad ||
-        isUpdatingPasskey
+        isUpdatingPasskey ||
+        isUpdatingSubpageConfig
 
     return (
         <Modal

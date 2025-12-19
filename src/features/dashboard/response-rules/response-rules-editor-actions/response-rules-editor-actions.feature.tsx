@@ -90,7 +90,11 @@ export function ResponseRulesEditorActionsFeature(props: Props) {
         }
     )
 
-    const { openDownloadModal } = useDownloadTemplate('SRR', editorRef, 'SRR')
+    const { openDownloadModal } = useDownloadTemplate({
+        editorType: 'SRR',
+        templateType: 'SRR',
+        editorRef
+    })
 
     const handleSave = () => {
         if (!editorRef.current) return

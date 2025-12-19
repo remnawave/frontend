@@ -5,7 +5,6 @@ import webfontDownload from 'vite-plugin-webfont-dl'
 import tsconfigPaths from 'vite-tsconfig-paths'
 import { ViteEjsPlugin } from 'vite-plugin-ejs'
 import { fileURLToPath, URL } from 'node:url'
-import { comlink } from 'vite-plugin-comlink'
 import react from '@vitejs/plugin-react-swc'
 // import deadFile from 'vite-plugin-deadfile'
 import { defineConfig } from 'vite'
@@ -16,7 +15,6 @@ dotenv.config({ path: `${__dirname}/.env` })
 export default defineConfig({
     plugins: [
         react(),
-        comlink(),
         tsconfigPaths(),
         removeConsole(),
         webfontDownload(),
@@ -40,9 +38,6 @@ export default defineConfig({
         //     exclude: ['node_modules/**', /\.md$/i, 'public/**', 'dist/**', '.git/**', '.vscode/**']
         // })
     ],
-    worker: {
-        plugins: () => [comlink()]
-    },
     optimizeDeps: {
         include: ['html-parse-stringify']
     },
@@ -77,6 +72,8 @@ export default defineConfig({
                         'buffer',
                         'consola',
                         'semver',
+                        'is-svg',
+                        'sax',
                         'jsonc-parser',
                         'json-edit-react'
                     ],
@@ -88,11 +85,14 @@ export default defineConfig({
                         '@mantine/notifications',
                         '@mantine/modals'
                     ],
-                    remnawave: ['@remnawave/backend-contract'],
+                    remnawave: [
+                        '@remnawave/backend-contract',
+                        '@remnawave/subscription-page-types'
+                    ],
                     i18n: ['i18next', 'i18next-http-backend', 'i18next-browser-languagedetector'],
                     motion: ['framer-motion', 'motion-dom', 'motion-utils', 'motion'],
                     crypto: ['crypto-js', '@stablelib/base64', '@stablelib/x25519'],
-                    charts: ['recharts', 'highcharts', 'highcharts-react-official'],
+                    charts: ['recharts', 'highcharts', '@highcharts/react'],
                     dnd: ['@dnd-kit/core', '@dnd-kit/sortable', '@dnd-kit/utilities'],
                     mantinetable: ['mantine-react-table', 'mantine-datatable'],
                     prettier: ['prettier', 'vscode-languageserver-types', 'prettier/plugins/yaml'],

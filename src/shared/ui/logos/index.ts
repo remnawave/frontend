@@ -1,3 +1,4 @@
+export * from './happ-logo'
 export * from './mihomo-logo'
 export * from './pockeid-logo'
 export * from './singbox-logo'

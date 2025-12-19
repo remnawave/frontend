@@ -4,15 +4,15 @@ import { useTranslation } from 'react-i18next'
 import { TbServer2 } from 'react-icons/tb'
 import { motion } from 'motion/react'
 
+import { useGetStatsNodesRealtimeUsage } from '@shared/api/hooks'
 import { prettyRealtimeBytesUtil } from '@shared/utils/bytes'
-import { useGetNodesRealtimeUsage } from '@shared/api/hooks'
 import { MetricCard } from '@shared/ui/metrics/metric-card'
 
 export function NodesRealtimeUsageMetrics() {
     const { t } = useTranslation()
 
     const { data: nodesRealtimeUsage, isLoading: isNodesRealtimeUsageLoading } =
-        useGetNodesRealtimeUsage()
+        useGetStatsNodesRealtimeUsage()
 
     const cards = [
         {

@@ -12,6 +12,7 @@ dayjs.extend(utc)
 dayjs.extend(duration)
 dayjs.extend(timezone)
 
+export * from './format-time.util'
 export * from './get-connection-status-color/get-connection-status-color.util'
 export * from './get-expiration-text/get-expiration-text.util'
 export * from './get-node-reset-days/get-node-reset-days.util'

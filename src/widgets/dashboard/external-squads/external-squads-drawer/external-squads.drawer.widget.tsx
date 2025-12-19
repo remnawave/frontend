@@ -13,13 +13,24 @@ import {
     Tooltip,
     Transition
 } from '@mantine/core'
-import { TbFolder, TbListLetters, TbPrescription, TbSettings, TbWebhook } from 'react-icons/tb'
+import {
+    TbFolder,
+    TbListLetters,
+    TbPalette,
+    TbPrescription,
+    TbSettings,
+    TbWebhook
+} from 'react-icons/tb'
 import { PiCheck, PiCopy, PiIdentificationBadge, PiListChecks, PiUsers } from 'react-icons/pi'
 import { useTranslation } from 'react-i18next'
 import { memo, useState } from 'react'
 
+import {
+    useGetExternalSquad,
+    useGetSubscriptionPageConfigs,
+    useGetSubscriptionTemplates
+} from '@shared/api/hooks'
 import { MODALS, useModalClose, useModalState } from '@entities/dashboard/modal-store'
-import { useGetExternalSquad, useGetSubscriptionTemplates } from '@shared/api/hooks'
 import { LoaderModalShared } from '@shared/ui/loader-modal'
 import { formatInt } from '@shared/utils/misc'
 
@@ -27,6 +38,7 @@ import {
     ExternalSquadsHostOverridesTabWidget,
     ExternalSquadsHwidSettingsTabWidget,
     ExternalSquadsSettingsTabWidget,
+    ExternalSquadsSubpageConfigTabWidget,
     ExternalSquadsTemplatesTabWidget
 } from './tabs'
 import { ExternalSquadsResponseHeadersTabWidget } from './tabs/external-squads-response-headers.widget'
@@ -39,7 +51,8 @@ const TAB_TYPE = {
     hosts: 'hosts',
     responseHeaders: 'responseHeaders',
     hwidSettings: 'hwidSettings',
-    customRemarks: 'customRemarks'
+    customRemarks: 'customRemarks',
+    subpageConfig: 'subpageConfig'
 } as const
 
 type TabType = (typeof TAB_TYPE)[keyof typeof TAB_TYPE]
@@ -54,6 +67,7 @@ export const ExternalSquadsDrawer = memo(() => {
     const close = useModalClose(MODALS.EXTERNAL_SQUAD_DRAWER)
 
     const { isLoading: isTemplatesLoading } = useGetSubscriptionTemplates()
+    const { isLoading: isSubpageConfigsLoading } = useGetSubscriptionPageConfigs()
 
     const { data: externalSquad, isLoading: isExternalSquadLoading } = useGetExternalSquad({
         route: {
@@ -200,6 +214,12 @@ export const ExternalSquadsDrawer = memo(() => {
                         >
                             {t('external-squads.drawer.widget.remarks')}
                         </Tabs.Tab>
+                        <Tabs.Tab
+                            leftSection={<TbPalette size={px('1.2rem')} />}
+                            value={TAB_TYPE.subpageConfig}
+                        >
+                            {t('constants.subscription-page')}
+                        </Tabs.Tab>
                     </Tabs.List>
 
                     <Tabs.Panel pt="xl" value={TAB_TYPE.templates}>
@@ -309,12 +329,29 @@ export const ExternalSquadsDrawer = memo(() => {
                             )}
                         </Transition>
                     </Tabs.Panel>
+
+                    <Tabs.Panel pt="xl" value={TAB_TYPE.subpageConfig}>
+                        <Transition
+                            duration={200}
+                            mounted={activeTab === TAB_TYPE.subpageConfig}
+                            timingFunction="linear"
+                            transition="fade"
+                        >
+                            {(styles) => (
+                                <Stack gap="lg" style={styles}>
+                                    <ExternalSquadsSubpageConfigTabWidget
+                                        externalSquad={externalSquad}
+                                    />
+                                </Stack>
+                            )}
+                        </Transition>
+                    </Tabs.Panel>
                 </Tabs>
             </Stack>
         )
     }
 
-    const isLoading = isTemplatesLoading || isExternalSquadLoading
+    const isLoading = isTemplatesLoading || isExternalSquadLoading || isSubpageConfigsLoading
 
     return (
         <Drawer
@@ -324,7 +361,7 @@ export const ExternalSquadsDrawer = memo(() => {
             overlayProps={{ backgroundOpacity: 0.6, blur: 0 }}
             padding="md"
             position="right"
-            size="540px"
+            size="600px"
             title={t('external-squads.drawer.widget.edit-external-squad')}
         >
             <Transition

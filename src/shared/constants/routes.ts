@@ -35,10 +35,9 @@ export const ROUTES = {
             TEMPLATES_BY_TYPE: '/dashboard/templates/:type',
             TEMPLATE_EDITOR: '/dashboard/templates/:type/:uuid'
         },
-        UTILS: {
-            ROOT: '/dashboard/utils',
-            HAPP_ROUTING_BUILDER: '/dashboard/utils/happ-routing-builder',
-            SUBSCRIPTION_PAGE_BUILDER: '/dashboard/utils/subscription-page-builder'
+        SUBPAGE_CONFIGS: {
+            ROOT: '/dashboard/subpage',
+            SUBPAGE_CONFIG_BY_UUID: '/dashboard/subpage/:uuid'
         },
         CRM: {
             ROOT: '/dashboard/crm',

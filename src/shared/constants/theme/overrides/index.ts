@@ -12,14 +12,16 @@ import badge from './badge'
 import table from './table'
 import card from './card'
 import menu from './menu'
+import modal from './modal'
 
 export default {
     ...card,
+    ...drawer,
+    ...modal,
     ...badge,
     ...breadcrumbs,
     ...buttons,
     ...charts,
-    ...drawer,
     ...inputs,
     ...loadingOverlay,
     ...menu,

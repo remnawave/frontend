@@ -1,0 +1,6 @@
+export * from './base-translations-block.component'
+export * from './branding-block.component'
+export * from './localization-block.component'
+export * from './platform-block.component'
+export * from './svg-library-block.component'
+export * from './ui-config-block.component'

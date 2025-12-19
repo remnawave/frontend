@@ -10,11 +10,15 @@ import { IDownloadableSubscriptionTemplate } from '@shared/constants/templates'
 
 import { TemplateDownloadModal } from './template-selector.modal'
 
-export const useDownloadTemplate = (
-    templateType: 'SRR' | TSubscriptionTemplateType,
-    editorRef: RefObject<editor.IStandaloneCodeEditor | null>,
-    editorType: 'SRR' | 'SUBSCRIPTION' | 'XRAY_CORE'
-) => {
+interface IProps {
+    editorRef?: RefObject<editor.IStandaloneCodeEditor | null>
+    editorType: 'SRR' | 'SUBPAGE_CONFIG' | 'SUBSCRIPTION' | 'XRAY_CORE'
+    onLoadTemplate?: (content: string) => Promise<void>
+    templateType: 'SRR' | 'SUBPAGE_CONFIG' | TSubscriptionTemplateType
+}
+
+export const useDownloadTemplate = (props: IProps) => {
+    const { editorRef, editorType, onLoadTemplate, templateType } = props
     const { t } = useTranslation()
 
     const loadTemplate = async (template: IDownloadableSubscriptionTemplate) => {
@@ -27,9 +31,11 @@ export const useDownloadTemplate = (
 
             const content = await response.text()
 
-            if (editorRef.current) {
+            if (editorRef && editorRef.current) {
                 editorRef.current.setValue(content)
                 editorRef.current.getAction('editor.action.formatDocument')?.run()
+            } else if (onLoadTemplate) {
+                await onLoadTemplate(content)
             }
 
             notifications.show({

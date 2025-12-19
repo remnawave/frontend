@@ -11,6 +11,7 @@ import { MobileWarningOverlay } from '@shared/ui/mobile-warning-overlay/mobile-w
 import { HwidInspectorMetrics } from '@widgets/dashboard/users/hwid-inspector-metrics'
 import { ViewUserModal } from '@widgets/dashboard/users/view-user-modal'
 import { Page } from '@shared/ui'
+import { UserHwidDevicesDrawerWidget } from '@widgets/dashboard/users/user-hwid-devices-drawer/user-hwid-devices.drawer.widget'
 
 export default function HwidInspectorPageComponent() {
     const { t } = useTranslation()
@@ -42,6 +43,7 @@ export default function HwidInspectorPageComponent() {
             <ViewUserModal key="view-user-modal" />
             <DetailedUserInfoDrawerWidget key="detailed-user-info-drawer" />
             <UserAccessibleNodesModalWidget key="user-accessible-nodes-modal" />
+            <UserHwidDevicesDrawerWidget key="user-hwid-devices-drawer" />
         </Page>
     )
 }

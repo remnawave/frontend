@@ -3,14 +3,12 @@ import { Button, Group, px, Stack, Textarea } from '@mantine/core'
 import { PiDeviceMobile, PiGear } from 'react-icons/pi'
 import { zodResolver } from 'mantine-form-zod-resolver'
 import { useTranslation } from 'react-i18next'
-import { useNavigate } from 'react-router-dom'
 import { useForm } from '@mantine/form'
 
 import { QueryKeys, useUpdateSubscriptionSettings } from '@shared/api/hooks'
 import { TemplateInfoPopoverShared } from '@shared/ui/popovers'
 import { SettingsCardShared } from '@shared/ui/settings-card'
 import { handleFormErrors } from '@shared/utils/misc'
-import { ROUTES } from '@shared/constants'
 import { queryClient } from '@shared/api'
 
 interface IProps {
@@ -20,8 +18,6 @@ interface IProps {
 export const SubscriptionAnnounceRoutingCardWidget = (props: IProps) => {
     const { subscriptionSettings } = props
     const { t } = useTranslation()
-
-    const navigate = useNavigate()
 
     const form = useForm<UpdateSubscriptionSettingsCommand.Request>({
         name: 'subscription-announce-routing-card-form',
@@ -104,7 +100,11 @@ export const SubscriptionAnnounceRoutingCardWidget = (props: IProps) => {
                             color="grape"
                             leftSection={<PiGear size={px('1.2rem')} />}
                             onClick={() => {
-                                navigate(ROUTES.DASHBOARD.UTILS.HAPP_ROUTING_BUILDER)
+                                window.open(
+                                    'https://routing.happ.su',
+                                    '_blank',
+                                    'noopener noreferrer'
+                                )
                             }}
                             size="md"
                             variant="light"

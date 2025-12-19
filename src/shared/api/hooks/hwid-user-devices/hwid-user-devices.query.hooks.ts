@@ -35,8 +35,7 @@ export const useGetUserHwidDevices = createGetQueryHook({
     routeParamsSchema: GetUserHwidDevicesCommand.RequestSchema,
     getQueryKey: ({ route }) => hwidUserDevicesQueryKeys.getUserHwidDevices(route!).queryKey,
     rQueryParams: {
-        staleTime: sToMs(20),
-        refetchInterval: sToMs(20)
+        refetchInterval: sToMs(60)
     },
     errorHandler: (error) => errorHandler(error, 'Get User HWIDs and Devices')
 })

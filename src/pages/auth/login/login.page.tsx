@@ -1,6 +1,6 @@
 import { Badge, Box, Center, Divider, Group, Image, Stack, Text, Title } from '@mantine/core'
 import { GetStatusCommand } from '@remnawave/backend-contract'
-import { useLayoutEffect, useMemo } from 'react'
+import { useMemo } from 'react'
 
 import { TelegramLoginButtonFeature } from '@features/auth/telegram-login-button/telegram-login-button.feature'
 import { OAuth2LoginButtonsFeature } from '@features/auth/oauth2-login-button/oauth2-login-button.feature'
@@ -8,11 +8,8 @@ import { PasskeyLoginButtonFeature } from '@features/auth/passkey-login-button'
 import { useGetAuthStatus } from '@shared/api/hooks/auth/auth.query.hooks'
 import { RegisterFormFeature } from '@features/auth/register-form'
 import { LoginFormFeature } from '@features/auth/login-form'
-import { clearQueryClient } from '@shared/api/query-client'
 import { parseColoredTextUtil } from '@shared/utils/misc'
-import { LoadingScreen } from '@shared/ui'
-import { Logo } from '@shared/ui/logo'
-import { Page } from '@shared/ui/page'
+import { Logo, Page } from '@shared/ui'
 
 const getAuthMethods = (authStatus: GetStatusCommand.Response['response'] | undefined) => {
     const isPasswordEnabled = authStatus?.authentication?.password?.enabled ?? false
@@ -100,11 +97,7 @@ const AlternativeAuthMethods = ({
 )
 
 export const LoginPage = () => {
-    const { data: authStatus, isFetching } = useGetAuthStatus()
-
-    useLayoutEffect(() => {
-        clearQueryClient()
-    }, [])
+    const { data: authStatus } = useGetAuthStatus()
 
     const titleParts = useMemo(() => {
         if (authStatus?.branding.title) {
@@ -116,10 +109,6 @@ export const LoginPage = () => {
             { text: 'wave', color: 'white' }
         ]
     }, [authStatus?.branding.title])
-
-    if (isFetching) {
-        return <LoadingScreen height="60vh" />
-    }
 
     const isRegister = !authStatus?.isLoginAllowed && authStatus?.isRegisterAllowed
     const authMethods = getAuthMethods(authStatus)

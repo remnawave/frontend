@@ -16,7 +16,7 @@
         "happ-routing-builder": "Happ 路由编辑器",
         "templates": "模板",
         "subscription": "订阅",
-        "subscription-page-builder": "订阅应用配置",
+        "subscription-page": "订阅页面",
         "config-profiles": "配置文件",
         "internal-squads": "内部分组",
         "external-squads": "外部分组",
@@ -54,7 +54,9 @@
         "success": "成功",
         "download": "下载",
         "search": "搜索",
-        "nothing-found": "未找到"
+        "nothing-found": "未找到",
+        "name": "名称",
+        "clone": "克隆"
     },
     "bandwidth-metrics": {
         "current-year": "今年",
@@ -303,7 +305,7 @@
             "1-year": "+1 年",
             "2099-year": "2099年",
             "hwid-user-limit-line-1": "此功能仅在",
-            "hwid-user-limit-line-2": ".env 变量设置为",
+            "hwid-user-limit-line-2": "订阅设置为",
             "hwid-user-limit-line-3": "时有效。了解更多。",
             "disable-hwid-limit": "禁用 HWID 限制",
             "hwid-device-limit": "HWID 设备限制",
@@ -477,11 +479,7 @@
         "component": {
             "no-data-available-for-the-selected-period": "所选时段无可用数据",
             "click-to-see-all": "点击查看全部",
-            "show-nodes": "显示节点",
             "no-data-available": "无可用数据",
-            "click-to-show-all": "点击显示全部",
-            "click-to-highlight-only-this-node": "点击仅高亮此节点",
-            "usage-by-period": "时段用量",
             "7-days": "7 天",
             "14-days": "14 天",
             "30-days": "30 天",
@@ -489,12 +487,14 @@
             "90-days": "90 天",
             "180-days": "180 天",
             "total-traffic": "总流量",
+            "total-traffic-placeholder": "总流量: {{totalTraffic}}",
             "top-nodes": "活跃节点",
             "filter-nodes": "筛选节点",
             "previous-day": "前一天",
             "next-day": "后一天",
             "node": "节点",
-            "traffic": "流量"
+            "traffic": "流量",
+            "3-days": "3 天"
         }
     },
     "get-expiration-text": {
@@ -552,78 +552,6 @@
             "password-too-short": "最少 24 个字符",
             "register-description": "创建一个超级管理员账户以开始使用",
             "registration": "注册"
-        }
-    },
-    "happ-routing-builder": {
-        "widget": {
-            "copy-link": "复制链接",
-            "visual-editor": "可视化编辑器",
-            "enter-the-configuration-name": "输入配置名称",
-            "name": "名称",
-            "russia": "俄罗斯",
-            "proxy-all-traffic-except-rules": "代理所有流量（规则除外）",
-            "direct-all-traffic-except-rules": "直连所有流量（规则除外）",
-            "proxy-all-traffic-except-rules-or-direct-all-traffic-except-rules": "代理所有流量（规则除外），或直连所有流量（规则除外）",
-            "fake-dns-description": "启用或禁用 FakeDNS。使用 DoU 时建议启用。",
-            "choose-doh-dns-over-https-or-dou-dns-over-udp": "远程 DNS 使用 DoH (HTTPS 上的 DNS) 或者 DoU (UDP 上的 DNS)",
-            "remote-dns-type": "远程 DNS 类型",
-            "domain-name-for-doh": "DNS 服务器域名（如果使用 DoH）",
-            "remote-dns-domain": "远程 DNS 域名",
-            "server-ip-for-doh-or-dou": "DoH 或 DoU 的 DNS 服务器 IP 地址",
-            "remote-dns-ip": "远程 DNS IP 地址",
-            "domestic-dns-type-description": "国内 DNS 是使用 DoH (HTTPS 上的 DNS) 还是 DoU (UDP 上的 DNS)",
-            "domestic-dns-type": "国内 DNS 类型",
-            "domain-name-for-doh-0": "域名（如果使用 DoH）",
-            "domestic-dns-domain": "国内 DNS 域名",
-            "server-ip-for-doh-or-dou-0": "DoH 或 DoU 的 DNS 服务器 IP 地址",
-            "domestic-dns-ip": "国内 DNS IP",
-            "geoip-description": "geoip.dat 文件的链接。如果留空，将使用默认文件。",
-            "geoip-url": "GeoIP URL",
-            "geosite-description": "geosite.dat 文件的链接。如果留空，将使用默认文件。",
-            "geosite-url": "GeoSite URL",
-            "unix-timestamp-description": "输入 geoip 和 geosite 文件最后更新的 Unix 时间戳。如果不可用请留空。",
-            "last-updated": "最后更新时间",
-            "select-the-domain-processing-strategy": "选择域名处理策略。",
-            "domain-strategy": "域名策略",
-            "dns-hosts-description": "使用此格式输入 DNS 主机：{ \"example.com\": \"1.2.3.4\", \"test.org\": \"8.8.8.8\" }",
-            "dns-hosts": "DNS 主机",
-            "sites-that-will-use-direct-connection": "不走代理且直连的域名.",
-            "direct-sites": "直连域名",
-            "ip-addresses-that-will-use-direct-connection": "不走代理且直连的 IP 地址",
-            "direct-ip": "直连 IP",
-            "sites-that-will-be-proxied": "强制走代理的域名.",
-            "proxy-sites": "走代理的域名",
-            "ip-addresses-that-will-be-proxied": "走代理的 IP 地址.",
-            "proxy-ip": "走代理的 IP",
-            "sites-that-will-be-blocked": "禁止连接的域名.",
-            "blocked-sites": "禁止的站点",
-            "ip-addresses-that-will-be-blocked": "禁止连接的 IP 地址.",
-            "blocked-ips": "禁止的 IP",
-            "encoded-happ-link": "编码后的 Happ 链接",
-            "show-qr": "显示二维码",
-            "invalid-base64-or-happ-link": "无效的 Base64 或 Happ 链接",
-            "import-configuration": "导入配置",
-            "paste-a-happ-routing-link-or-base64-encoded-config": "粘贴一个 Happ 路由链接或 Base64 编码的配置",
-            "import-from-base64": "从 Base64 导入",
-            "paste-base64-or-happ-link-here": "在此处粘贴 Base64 或 Happ 链接",
-            "decode": "解码",
-            "basic-configuration": "基本配置",
-            "remote-dns-settings": "远程 DNS 设置",
-            "domestic-dns-settings": "国内 DNS 设置",
-            "dns-hosts-0": "DNS 主机",
-            "direct-routing": "直连路由",
-            "proxy-routing": "代理路由",
-            "block-routing": "禁止路由",
-            "code-editor": "代码编辑器"
-        },
-        "page": {
-            "component": {
-                "about-happ": "关于 Happ",
-                "happ-is-multiplatform-xray-client": "Happ 是一个多平台 Xray 客户端。",
-                "about-happ-description-line-2": "您可以在此处配置路由规则，然后进行编码并用作 Happ 链接。",
-                "about-happ-description-line-3": "要在您的订阅链接中使用给定的 Happ 路由配置，请打开“订阅设置”并更改“Happ 路由”部分。",
-                "check-out-happ-website": "访问 Happ 网站"
-            }
         }
     },
     "remarks-manager": {
@@ -871,66 +799,6 @@
             "active-internal-squads": "激活的的内部分组"
         }
     },
-    "subscription-page-builder-header": {
-        "widget": {
-            "load-default": "加载默认配置",
-            "export-config": "导出配置",
-            "upload-config": "上传配置",
-            "subscription-page-builder": "订阅页面编辑器",
-            "how-to-use-it": "如何使用？",
-            "description-line-1": "您可以使用此编辑器为 Remnawave 订阅页面配置可用的客户端和使用指南。",
-            "description-line-2": "创建所需的配置后，您可以导出并下载它，并将配置文件挂载到您的 subscription-page 容器。",
-            "description-line-3": "点击 \"加载默认配置\" 以从 GitHub 仓库获取参考配置。",
-            "learn-more": "了解更多"
-        }
-    },
-    "subscription-page-builder": {
-        "page": {
-            "component": {
-                "failed-to-parse-config": "解析配置文件失败。请检查文件格式。",
-                "failed-to-load-default-config-check-your-internet-connection": "加载默认配置失败。请检查您的互联网连接。",
-                "no-apps-configured-for-this-platform": "此平台未配置应用",
-                "add-app": "添加应用",
-                "select-an-app-from-the-sidebar-or-add-a-new-one": "从侧边栏选择一个应用或添加一个新应用",
-                "validation-errors": "校验错误",
-                "invalid-configuration": "无效配置",
-                "the-configuration-did-not-pass-validation": "配置未通过校验。",
-                "configuration-settings": "配置设置",
-                "platform-apps": "平台应用程序",
-                "move-up": "向上移动",
-                "move-down": "向下移动"
-            }
-        }
-    },
-    "app-form": {
-        "component": {
-            "delete-app": "删除应用",
-            "app-id": "应用 ID",
-            "app-name": "应用名称",
-            "url-scheme": "URL 方案",
-            "featured-app": "推荐应用",
-            "need-base64-encoding": "需要 Base64 编码",
-            "installation-step": "安装步骤",
-            "description": "描述",
-            "buttons": "按钮",
-            "additional-before-subscription-step": "订阅前附加步骤",
-            "remove-step": "移除步骤",
-            "add-step": "添加步骤",
-            "title": "标题",
-            "add-subscription-step": "添加订阅步骤",
-            "additional-after-subscription-step": "订阅后附加步骤",
-            "connect-and-use-step": "连接和使用步骤"
-        }
-    },
-    "button-fields": {
-        "button": "按钮",
-        "add-button": "添加按钮",
-        "remove-button": "移除按钮",
-        "button-link": "按钮链接",
-        "button-text": "按钮文本",
-        "enter-button-text": "输入按钮文本...",
-        "english": "英语"
-    },
     "subscription-tabs": {
         "widget": {
             "show-custom-remarks": "显示自定义备注",
@@ -988,7 +856,7 @@
             "bar-chart": "条形图",
             "previous-day": "前一天",
             "next-day": "后一天",
-            "hidden-users": "({{hiddenCount}} 个 <100 KB 的用户已隐藏)",
+            "hidden-users": "（{{hiddenCount}} 位用户因流量低于 {{minTraffic}} 而被隐藏）",
             "total-traffic-prettybytestoanyutil": "总流量: {{totalTraffic}}",
             "user": "用户",
             "traffic": "流量",
@@ -1451,17 +1319,6 @@
             "new-name": "新名称"
         }
     },
-    "branding-settings": {
-        "component": {
-            "branding-settings": "商标设置",
-            "brand-name": "品牌名称",
-            "the-name-that-will-be-displayed-on-the-subscription-page": "将显示在订阅页面的名称",
-            "url-to-your-brand-logo-image": "品牌标志图片的 URL",
-            "logo-url": "Logo地址",
-            "link-to-your-support-or-help-page": "链接到您的支持或帮助页面",
-            "support-url": "支持 URL"
-        }
-    },
     "internal-squad-accessible-nodes": {
         "modal": {
             "widget": {
@@ -1732,6 +1589,7 @@
             "branding-settings": "商标设置",
             "the-title-that-will-be-displayed-on-login-page": "登录页面显示的标题",
             "brand-name": "品牌名称",
+            "logo-url": "Logo 网址链接",
             "the-url-to-your-brand-logo-image": "品牌标志图片的 URL",
             "colored-title-format": "彩色标题格式",
             "colored-title-description": "您可以使用 {color}文字 语法为单个单词着色。支持十六进制颜色 (#RRGGBB) 和 MantineUI 颜色名称。",
@@ -1842,5 +1700,156 @@
         "tags": "标签",
         "total-ram": "内存总数",
         "cpu-model": "CPU 型号"
+    },
+    "subpage-config-visual-editor": {
+        "widget": {
+            "configuration-saved-successfully": "配置保存成功",
+            "edit-your-subscription-page-configuration": "编辑您的订阅页面配置",
+            "subpage-editor": "订阅页面编辑器",
+            "load-from-github": "从 GitHub 加载",
+            "brand-appearance": "商标外观",
+            "branding": "商标",
+            "brand-title": "商标标题",
+            "your-brand-name": "您的商标名称",
+            "logo-url": "Logo 网址链接",
+            "support-url": "支持 URL",
+            "additional-languages": "其它语言",
+            "localization": "本地化设置",
+            "ui-configuration": "界面配置",
+            "collapsed": "收起",
+            "expanded": "展开",
+            "subscription-info-block-design": "订阅信息块设计",
+            "installation-guides-header": "安装指南标题",
+            "connection-keys-header": "连接密钥标题",
+            "configure-apps-for-each-platform": "配置各个平台的应用程序",
+            "platforms": "平台",
+            "add-platform": "添加平台",
+            "no-platforms-configured": "未配置平台",
+            "add-a-platform-to-get-started": "添加一个平台以开始",
+            "validation-error": "验证错误",
+            "manage-your-svg-icons": "管理您的 SVG 图标",
+            "open-svg-library": "打开 SVG 库",
+            "cards": "卡片",
+            "hidden": "隐藏",
+            "accordion": "可折叠",
+            "minimal": "极简",
+            "timeline": "时间轴",
+            "installation-guides-design": "安装指南标题"
+        },
+        "subpage-config-saved-line-1": "若要应用更改，请重启Remnawave 订阅页面容器。",
+        "subpage-config-saved-line-2": "例如，您可以在终端中使用以下命令："
+    },
+    "app-editor-drawer-content": {
+        "component": {
+            "app-settings": "应用设置",
+            "featured": "精选",
+            "app-name": "应用名称",
+            "blocks": "块",
+            "add-block": "添加块"
+        }
+    },
+    "block-editor": {
+        "modal": {
+            "component": {
+                "untitled-block": "未命名块",
+                "edit-block": "编辑块",
+                "block-settings": "块设置",
+                "svg-icon": "SVG 图标",
+                "icon-color": "图标颜色",
+                "icon-color-help": "您可以使用任何 Mantine 主题颜色（{{colors}}）或任何有效的十六进制颜色代码（例如：#009688）。",
+                "title": "标题",
+                "description": "描述",
+                "buttons": "按钮",
+                "add-button": "添加按钮"
+            }
+        }
+    },
+    "button-editor": {
+        "component": {
+            "link": "链接",
+            "external-link": "外部链接",
+            "subscription-link": "订阅链接",
+            "type": "类型",
+            "svg-icon": "SVG 图标",
+            "button-text": "按钮文本"
+        }
+    },
+    "localized-text-editor": {
+        "component": {
+            "not-set": "未设置",
+            "required-default-language": "必填(默认语言)",
+            "done": "完成"
+        }
+    },
+    "platform-editor": {
+        "component": {
+            "platform-svg-icon": "平台 SVG 图标",
+            "display-name": "显示名称",
+            "apps": "应用程序",
+            "add-app": "添加应用程序",
+            "unnamed-app": "未命名应用",
+            "edit-app": "编辑应用程序"
+        }
+    },
+    "svg-icon-input": {
+        "component": {
+            "svg-icon": "SVG 图标"
+        }
+    },
+    "svg-icon-select": {
+        "component": {
+            "select-icon": "选择图标...",
+            "no-icons-in-library": "库中没有图标"
+        }
+    },
+    "svg-library-modal": {
+        "component": {
+            "svg-library": "SVG 库",
+            "add-icon": "添加图标",
+            "add-icons-to-use-them-in-blocks-and-buttons": "添加图标以便在方块和按钮中使用",
+            "edit-icon": "编辑图标",
+            "only-latin-characters-no-spaces": "仅拉丁字符，无空格",
+            "only-latin-characters-allowed": "只允许拉丁字符",
+            "icon-key": "图标键值",
+            "svg-code": "SVG 代码",
+            "preview": "预览",
+            "where-to-find-icons": "从哪里找到图标？",
+            "you-can-find-beautiful-icons-at": "你可以找到精致的图标在",
+            "where-to-find-icons-description": "点击任何图标，选择\"复制 SVG\"并粘贴到这里。请确保选择\"轮廓\" 或 \"填充\" 样式。"
+        }
+    },
+    "external-squads-subpage-config": {
+        "tab": {
+            "widget": {
+                "subscription-page-config": "订阅页面配置",
+                "subscription-page-config-description": "您可以覆盖这个外部分组的订阅页面配置(Remnawave 订阅页面)。",
+                "subpage-config": "订阅页面配置",
+                "select-config": "选择配置..."
+            }
+        }
+    },
+    "subpage-config-editor-page": {
+        "component": {
+            "import-config": "导入配置",
+            "download-config": "下载配置"
+        }
+    },
+    "base-translations-drawer": {
+        "component": {
+            "base-translations": "基础翻译",
+            "completed": "{{count}}/{{total}} 已完成"
+        }
+    },
+    "statistic-sparkline-card": {
+        "widget": {
+            "peak": "峰值"
+        }
+    },
+    "user-hwid-devices": {
+        "drawer": {
+            "widget": {
+                "enter-search-query": "Enter search query..."
+            }
+        }
     }
 }

@@ -263,7 +263,7 @@ export const BulkAllUserActionsUpdateTabFeature = (props: IProps) => {
                         <>
                             <Text c="dimmed" size="0.75rem">
                                 {t('create-user-modal.widget.hwid-user-limit-line-1')}{' '}
-                                <Code>HWID_DEVICE_LIMIT_ENABLED</Code>{' '}
+                                <Code>HWID Limit</Code>{' '}
                                 {t('create-user-modal.widget.hwid-user-limit-line-2')}{' '}
                                 <Code>true</Code>.{' '}
                                 <Anchor
