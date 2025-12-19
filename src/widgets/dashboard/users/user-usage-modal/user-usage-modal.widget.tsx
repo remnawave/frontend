@@ -37,6 +37,12 @@ export const UserUsageModalWidget = (props: IProps) => {
     }, [opened])
 
     const handleDateRangeChange = (value: DatesRangeValue<string>) => {
+        if (value[0] === null && value[1] === null) {
+            setRawRange([DEFAULT_DATE_RANGE.start, DEFAULT_DATE_RANGE.end])
+            setQueryRange(DEFAULT_DATE_RANGE)
+            return
+        }
+
         setRawRange(value)
         if (!value[0] || !value[1]) return
 
