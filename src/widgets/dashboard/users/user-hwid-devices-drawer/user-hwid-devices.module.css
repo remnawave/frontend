@@ -1,0 +1,19 @@
+.itemWrapper {
+    animation: fadeIn 0.1s ease-out;
+    -webkit-animation: fadeIn 0.1s ease-out;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-perspective: 1000px;
+    perspective: 1000px;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.65);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}

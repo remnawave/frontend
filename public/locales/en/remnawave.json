@@ -1844,5 +1844,12 @@
         "widget": {
             "peak": "Peak"
         }
+    },
+    "user-hwid-devices": {
+        "drawer": {
+            "widget": {
+                "enter-search-query": "Enter search query..."
+            }
+        }
     }
 }
