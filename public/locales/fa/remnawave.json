@@ -430,7 +430,7 @@
         "exclude-this-host-from-specific-internal-squads": "این هاست را از اسکوادهای خارجی مشخص حذف کنید",
         "excluded-internal-squads": "اسکوادهای خارجی حذف شده",
         "keep-sni-blank": "SNI خالی بماند",
-        "keep-sni-blank-description": "In some cases, SNI must be left blank. Use this option to force an empty SNI. Note that this option has the highest priority, so it will be applied even if SNI is already set."
+        "keep-sni-blank-description": "در برخی موارد باید SNI خالی بماند. از این گزینه برای خالی گذاشتن SNI استفاده کنید. توجه داشته باشید که این گزینه بالاترین اولویت را دارد، بنابراین حتی اگر SNI از قبل تنظیم شده باشد، اعمال خواهد شد."
     },
     "base-node-form": {
         "country": "کشور",
@@ -487,14 +487,14 @@
             "90-days": "۹۰ روز",
             "180-days": "۱۸۰ روز",
             "total-traffic": "ترافیک کل",
-            "total-traffic-placeholder": "Total Traffic: {{totalTraffic}}",
+            "total-traffic-placeholder": "ترافیک کل: {{totalTraffic}}",
             "top-nodes": "نودهای پرمصرف",
             "filter-nodes": "فیلتر کردن نودها",
             "previous-day": "روز قبل",
             "next-day": "روز بعد",
             "node": "نود",
             "traffic": "ترافیک",
-            "3-days": "3 days"
+            "3-days": "۳ روز"
         }
     },
     "get-expiration-text": {
@@ -856,7 +856,7 @@
             "bar-chart": "نمودار میله‌ای",
             "previous-day": "روز قبل",
             "next-day": "روز بعد",
-            "hidden-users": "({{hiddenCount}} users with <{{minTraffic}} hidden)",
+            "hidden-users": "({{hiddenCount}} کاربر با کمتر از {{minTraffic}} مخفی شده‌اند)",
             "total-traffic-prettybytestoanyutil": "ترافیک کل: {{totalTraffic}}",
             "user": "کاربر",
             "traffic": "ترافیک",
@@ -1756,7 +1756,7 @@
                 "block-settings": "تنظیمات بلاک",
                 "svg-icon": "آیکون SVG",
                 "icon-color": "رنگ آیکون",
-                "icon-color-help": "You can use any Mantine theme color ({{colors}}) or any valid HEX color (for example: #009688).",
+                "icon-color-help": "می‌توانید از رنگ‌های قالب Mantine ({{colors}}) یا هر رنگ با کد HEX معتبر (مانند #009688) استفاده کنید",
                 "title": "عنوان",
                 "description": "توضیحات",
                 "buttons": "دکمه‌ها",
@@ -1815,14 +1815,14 @@
             "preview": "پیش‌نمایش",
             "where-to-find-icons": "از کجا آیکون پیدا کنم؟",
             "you-can-find-beautiful-icons-at": "برای پیدا کردن آیکون‌های زیبا می‌توانید از این منابع استفاده کنید:",
-            "where-to-find-icons-description": "Сlick on any icon, select \"Copy SVG\" and paste it here. Make sure to choose \"Outline\" or \"Filled\" style."
+            "where-to-find-icons-description": "روی آیکون مورد نظر کلیک کرده، Copy SVG را بزنید و آن را در اینجا وارد کنید. مطمئن شوید که از حالت Outline یا Filled استفاده می‌کنید."
         }
     },
     "external-squads-subpage-config": {
         "tab": {
             "widget": {
                 "subscription-page-config": "پیکربندی صفحه اشتراک",
-                "subscription-page-config-description": "You can override the subscription page configuration (Remnawave Subscription Page) for this external squad.",
+                "subscription-page-config-description": "شما می‌توانید پیکربندی صفحه اشتراک (صفحه اشتراک Remnawave) را برای این گروه خارجی override کنید.",
                 "subpage-config": "تنظیمات صفحه اشتراک",
                 "select-config": "کانفیگ را انتخاب کنید..."
             }
@@ -1842,13 +1842,13 @@
     },
     "statistic-sparkline-card": {
         "widget": {
-            "peak": "Peak"
+            "peak": "اوج"
         }
     },
     "user-hwid-devices": {
         "drawer": {
             "widget": {
-                "enter-search-query": "Enter search query..."
+                "enter-search-query": "عبارت مورد جست‌وجو را وارد کنید..."
             }
         }
     }

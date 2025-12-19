@@ -55,8 +55,8 @@
         "download": "Скачать",
         "search": "Поиск",
         "nothing-found": "Ничего не найдено",
-        "name": "Name",
-        "clone": "Clone"
+        "name": "Имя",
+        "clone": "Клонировать"
     },
     "bandwidth-metrics": {
         "current-year": "Текущий год",
@@ -487,14 +487,14 @@
             "90-days": "90 дней",
             "180-days": "180 дней",
             "total-traffic": "Общий трафик",
-            "total-traffic-placeholder": "Total Traffic: {{totalTraffic}}",
+            "total-traffic-placeholder": "Общий трафик: {{totalTraffic}}",
             "top-nodes": "Топ нод",
             "filter-nodes": "Фильтр нод",
             "previous-day": "Пред. день",
             "next-day": "След. день",
             "node": "Нода",
             "traffic": "Трафик",
-            "3-days": "3 days"
+            "3-days": "3 дня"
         }
     },
     "get-expiration-text": {
@@ -856,7 +856,7 @@
             "bar-chart": "Столбчатая диаграмма",
             "previous-day": "Предыдущий день",
             "next-day": "Следующий день",
-            "hidden-users": "({{hiddenCount}} users with <{{minTraffic}} hidden)",
+            "hidden-users": "({{hiddenCount}} пользователей с <{{minTraffic}} скрытым)",
             "total-traffic-prettybytestoanyutil": "Общий трафик: {{totalTraffic}}",
             "user": "Пользователь",
             "traffic": "Трафик",
@@ -1589,7 +1589,7 @@
             "branding-settings": "Настройки кастомизации",
             "the-title-that-will-be-displayed-on-login-page": "Заголовок, отображаемый на странице входа",
             "brand-name": "Название бренда",
-            "logo-url": "Logo URL",
+            "logo-url": "Ссылка на логотип",
             "the-url-to-your-brand-logo-image": "URL-адрес логотипа вашего бренда",
             "colored-title-format": "Цветной формат заголовка",
             "colored-title-description": "Вы можете окрасить отдельные слова, используя синтаксис {color}. Поддерживает оба цвета HEX (#RRGGBB) и MantineUI цвета.",
@@ -1703,152 +1703,152 @@
     },
     "subpage-config-visual-editor": {
         "widget": {
-            "configuration-saved-successfully": "Configuration saved successfully",
-            "edit-your-subscription-page-configuration": "Edit your subscription page configuration",
+            "configuration-saved-successfully": "Конфигурация успешно сохранена",
+            "edit-your-subscription-page-configuration": "Редактирование конфигурации Subscription Page",
             "subpage-editor": "Subpage Editor",
-            "load-from-github": "Load from GitHub",
-            "brand-appearance": "Brand appearance",
-            "branding": "Branding",
-            "brand-title": "Brand Title",
-            "your-brand-name": "Your Brand Name",
-            "logo-url": "Logo URL",
-            "support-url": "Support URL",
-            "additional-languages": "Additional languages",
-            "localization": "Localization",
-            "ui-configuration": "UI Configuration",
+            "load-from-github": "Скачать с Github",
+            "brand-appearance": "Внешний вид",
+            "branding": "Брендинг",
+            "brand-title": "Название бренда",
+            "your-brand-name": "Название вашего бренда",
+            "logo-url": "Ссылка на логотип",
+            "support-url": "URL поддержки",
+            "additional-languages": "Дополнительные языки",
+            "localization": "Локализация",
+            "ui-configuration": "Конфигурация интерфейса",
             "collapsed": "Collapsed",
             "expanded": "Expanded",
-            "subscription-info-block-design": "Subscription Info Block Design",
+            "subscription-info-block-design": "Внешний вид блока: Subscription Info",
             "installation-guides-header": "Installation Guides Header",
             "connection-keys-header": "Connection Keys Header",
             "configure-apps-for-each-platform": "Configure apps for each platform",
-            "platforms": "Platforms",
-            "add-platform": "Add platform",
-            "no-platforms-configured": "No platforms configured",
-            "add-a-platform-to-get-started": "Add a platform to get started",
-            "validation-error": "Validation Error",
-            "manage-your-svg-icons": "Manage your SVG icons",
-            "open-svg-library": "Open SVG Library",
-            "cards": "Cards",
-            "hidden": "Hidden",
-            "accordion": "Accordion",
-            "minimal": "Minimal",
-            "timeline": "Timeline",
-            "installation-guides-design": "Installation Guides Design"
+            "platforms": "Платформы",
+            "add-platform": "Добавление платформы",
+            "no-platforms-configured": "Платформы не настроены",
+            "add-a-platform-to-get-started": "Добавьте платформу для начала работы",
+            "validation-error": "Ошибка валидации",
+            "manage-your-svg-icons": "Управление иконками SVG",
+            "open-svg-library": "Открыть библиотеку SVG",
+            "cards": "Карточки",
+            "hidden": "Скрытое",
+            "accordion": "Аккордеон",
+            "minimal": "Минимальная",
+            "timeline": "Хронология",
+            "installation-guides-design": "Внешний вид блока: Installation Guides"
         },
-        "subpage-config-saved-line-1": "To apply the changes, please restart the Remnawave Subscription-page Docker container.",
-        "subpage-config-saved-line-2": "For example, you can use the following command in your terminal:"
+        "subpage-config-saved-line-1": "Чтобы применить изменения, пожалуйста, перезапустите Docker-контейнер Susbcription-Page.",
+        "subpage-config-saved-line-2": "Например, вы можете использовать следующую команду в терминале:"
     },
     "app-editor-drawer-content": {
         "component": {
-            "app-settings": "App Settings",
+            "app-settings": "Настройки приложения",
             "featured": "Featured",
-            "app-name": "App Name",
-            "blocks": "Blocks",
-            "add-block": "Add Block"
+            "app-name": "Имя приложения",
+            "blocks": "Блоки",
+            "add-block": "Добавить блок"
         }
     },
     "block-editor": {
         "modal": {
             "component": {
-                "untitled-block": "Untitled Block",
-                "edit-block": "Edit Block",
-                "block-settings": "Block Settings",
-                "svg-icon": "SVG Icon",
-                "icon-color": "Icon Color",
-                "icon-color-help": "You can use any Mantine theme color ({{colors}}) or any valid HEX color (for example: #009688).",
-                "title": "Title",
-                "description": "Description",
-                "buttons": "Buttons",
-                "add-button": "Add Button"
+                "untitled-block": "Блок без имени",
+                "edit-block": "Редактировать блок",
+                "block-settings": "Настройки блока",
+                "svg-icon": "Иконка SVG",
+                "icon-color": "Цвет иконки",
+                "icon-color-help": "Вы можете использовать любой цвет темы Mantine ({{colors}}) или любой правильный HEX цвет (например: #009688).",
+                "title": "Заголовок",
+                "description": "Описание",
+                "buttons": "Кнопки",
+                "add-button": "Добавить кнопку"
             }
         }
     },
     "button-editor": {
         "component": {
-            "link": "Link",
-            "external-link": "External Link",
-            "subscription-link": "Subscription Link",
-            "type": "Type",
-            "svg-icon": "SVG Icon",
-            "button-text": "Button Text"
+            "link": "Ссылка",
+            "external-link": "Внешняя ссылка",
+            "subscription-link": "Ссылка подписки",
+            "type": "Тип",
+            "svg-icon": "Иконка SVG",
+            "button-text": "Текст кнопки"
         }
     },
     "localized-text-editor": {
         "component": {
-            "not-set": "Not set",
-            "required-default-language": "Required (default language)",
-            "done": "Done"
+            "not-set": "Не задано",
+            "required-default-language": "Требуется (язык по умолчанию)",
+            "done": "Готово"
         }
     },
     "platform-editor": {
         "component": {
-            "platform-svg-icon": "Platform SVG Icon",
-            "display-name": "Display Name",
-            "apps": "Apps",
-            "add-app": "Add App",
-            "unnamed-app": "Unnamed App",
-            "edit-app": "Edit App"
+            "platform-svg-icon": "SVG Иконка Платформы",
+            "display-name": "Отображаемое имя",
+            "apps": "Приложения",
+            "add-app": "Добавить приложение",
+            "unnamed-app": "Приложение без имени",
+            "edit-app": "Редактировать приложение"
         }
     },
     "svg-icon-input": {
         "component": {
-            "svg-icon": "SVG Icon"
+            "svg-icon": "Иконка SVG"
         }
     },
     "svg-icon-select": {
         "component": {
-            "select-icon": "Select icon...",
-            "no-icons-in-library": "No icons in library"
+            "select-icon": "Выберите иконку...",
+            "no-icons-in-library": "Нет иконок в библиотеке"
         }
     },
     "svg-library-modal": {
         "component": {
-            "svg-library": "SVG Library",
-            "add-icon": "Add Icon",
-            "add-icons-to-use-them-in-blocks-and-buttons": "Add icons to use them in blocks and buttons",
-            "edit-icon": "Edit Icon",
-            "only-latin-characters-no-spaces": "Only latin characters, no spaces",
-            "only-latin-characters-allowed": "Only latin characters allowed",
-            "icon-key": "Icon Key",
-            "svg-code": "SVG Code",
-            "preview": "Preview",
-            "where-to-find-icons": "Where to find icons?",
-            "you-can-find-beautiful-icons-at": "You can find beautiful icons at",
-            "where-to-find-icons-description": "Сlick on any icon, select \"Copy SVG\" and paste it here. Make sure to choose \"Outline\" or \"Filled\" style."
+            "svg-library": "Библиотека SVG",
+            "add-icon": "Добавить иконку",
+            "add-icons-to-use-them-in-blocks-and-buttons": "Добавьте иконки, чтобы использовать их в блоках и кнопках",
+            "edit-icon": "Редактировать иконку",
+            "only-latin-characters-no-spaces": "Только латинские символы, без пробелов",
+            "only-latin-characters-allowed": "Разрешены только латинские символы",
+            "icon-key": "Название иконки",
+            "svg-code": "SVG-код",
+            "preview": "Предпросмотр",
+            "where-to-find-icons": "Где найти иконки?",
+            "you-can-find-beautiful-icons-at": "Вы можете найти красивые иконки на",
+            "where-to-find-icons-description": "Выберите любую иконку, выберите \"Копировать SVG\" и вставьте её здесь."
         }
     },
     "external-squads-subpage-config": {
         "tab": {
             "widget": {
-                "subscription-page-config": "Subscription Page Config",
-                "subscription-page-config-description": "You can override the subscription page configuration (Remnawave Subscription Page) for this external squad.",
+                "subscription-page-config": "Конфигурация Subscription Page",
+                "subscription-page-config-description": "Вы можете переопределить конфигурацию Remnawave Subscription Page для этого внешнего отряда.",
                 "subpage-config": "Subpage Config",
-                "select-config": "Select config..."
+                "select-config": "Выберите конфигурацию..."
             }
         }
     },
     "subpage-config-editor-page": {
         "component": {
-            "import-config": "Import config",
-            "download-config": "Download config"
+            "import-config": "Импортировать конфигурацию",
+            "download-config": "Загрузить конфигурацию"
         }
     },
     "base-translations-drawer": {
         "component": {
-            "base-translations": "Base Translations",
-            "completed": "{{count}}/{{total}} completed"
+            "base-translations": "Базовые переводы",
+            "completed": "{{count}}/{{total}} завершено"
         }
     },
     "statistic-sparkline-card": {
         "widget": {
-            "peak": "Peak"
+            "peak": "Пик"
         }
     },
     "user-hwid-devices": {
         "drawer": {
             "widget": {
-                "enter-search-query": "Enter search query..."
+                "enter-search-query": "Введите запрос для поиска..."
             }
         }
     }
