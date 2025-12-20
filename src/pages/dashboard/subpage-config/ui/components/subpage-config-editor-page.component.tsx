@@ -31,6 +31,7 @@ import { useTranslation } from 'react-i18next'
 import { useForm } from '@mantine/form'
 
 import {
+    BaseSettingsBlockComponent,
     BaseTranslationsBlockComponent,
     BrandingBlockComponent,
     LocalizationBlockComponent,
@@ -267,6 +268,7 @@ export const SubpageConfigEditorPageComponent = (props: Props) => {
                         <BrandingBlockComponent form={form} />
                         <LocalizationBlockComponent form={form} />
                     </SimpleGrid>
+                    <BaseSettingsBlockComponent form={form} />
                     <SvgLibraryBlockComponent form={form} />
                     <BaseTranslationsBlockComponent form={form} />
                     <UiConfigBlockComponent form={form} />
