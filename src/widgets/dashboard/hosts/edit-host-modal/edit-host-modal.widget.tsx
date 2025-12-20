@@ -3,6 +3,7 @@ import { zodResolver } from 'mantine-form-zod-resolver'
 import { notifications } from '@mantine/notifications'
 import { memo, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { PiListChecks } from 'react-icons/pi'
 import { modals } from '@mantine/modals'
 import { useForm } from '@mantine/form'
 import { Drawer } from '@mantine/core'
@@ -18,6 +19,7 @@ import {
     useUpdateHost
 } from '@shared/api/hooks'
 import { MODALS, useModalClose, useModalState } from '@entities/dashboard/modal-store'
+import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { BaseHostForm } from '@shared/ui/forms/hosts/base-host-form'
 import { cloneString } from '@shared/utils/misc/clone-string'
 import { queryClient } from '@shared/api'
@@ -297,7 +299,13 @@ export const EditHostModalWidget = memo(() => {
             padding="lg"
             position="right"
             size="lg"
-            title={t('edit-host-modal.widget.edit-host')}
+            title={
+                <BaseOverlayHeader
+                    IconComponent={PiListChecks}
+                    iconVariant="gradient-teal"
+                    title={t('edit-host-modal.widget.edit-host')}
+                />
+            }
         >
             {host && (
                 <BaseHostForm

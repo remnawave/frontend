@@ -6,6 +6,8 @@ import { modals } from '@mantine/modals'
 import { TbCode } from 'react-icons/tb'
 import { useCallback } from 'react'
 
+import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
+
 import type { IProps } from './interfaces/props.interface'
 
 import classes from './InboundCheckboxCard.module.css'
@@ -31,9 +33,15 @@ export const InboundCheckboxCardShared = (props: IProps) => {
                         viewOnly
                     />
                 ),
-                title: t('flat-inbound-checkbox-card.shared.inbound-config-inbound-tag', {
-                    inboundTag: inbound.tag
-                }),
+                title: (
+                    <BaseOverlayHeader
+                        IconComponent={TbCode}
+                        iconVariant="gradient-teal"
+                        title={t('flat-inbound-checkbox-card.shared.inbound-config-inbound-tag', {
+                            inboundTag: inbound.tag
+                        })}
+                    />
+                ),
 
                 size: 'xl'
             })

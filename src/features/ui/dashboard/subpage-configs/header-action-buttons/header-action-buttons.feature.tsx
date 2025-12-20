@@ -10,7 +10,7 @@ import {
 } from '@mantine/core'
 import { CreateSubscriptionPageConfigCommand } from '@remnawave/backend-contract'
 import { generatePath, useNavigate } from 'react-router-dom'
-import { TbPlus, TbRefresh } from 'react-icons/tb'
+import { TbFile, TbPlus, TbRefresh } from 'react-icons/tb'
 import { useDisclosure } from '@mantine/hooks'
 import { useTranslation } from 'react-i18next'
 import { useField } from '@mantine/form'
@@ -21,6 +21,7 @@ import {
     useGetSubscriptionPageConfigs
 } from '@shared/api/hooks'
 import { UniversalSpotlightActionIconShared } from '@shared/ui/universal-spotlight'
+import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { ROUTES } from '@shared/constants'
 import { queryClient } from '@shared/api'
 
@@ -86,7 +87,19 @@ export const SubpageConfigsHeaderActionButtonsFeature = () => {
                 </ActionIcon>
             </ActionIconGroup>
 
-            <Modal centered onClose={close} opened={opened} size="md" title={t('common.create')}>
+            <Modal
+                centered
+                onClose={close}
+                opened={opened}
+                size="md"
+                title={
+                    <BaseOverlayHeader
+                        IconComponent={TbFile}
+                        iconVariant="gradient-teal"
+                        title={t('common.create')}
+                    />
+                }
+            >
                 <form
                     onSubmit={(e) => {
                         e.preventDefault()

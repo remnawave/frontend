@@ -10,6 +10,7 @@ import { modals } from '@mantine/modals'
 
 import { useGetComputedConfigProfile } from '@shared/api/hooks/config-profiles/config-profiles.query.hooks'
 import { MODALS, useModalsStoreOpenWithData } from '@entities/dashboard/modal-store'
+import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { WithDndSortable } from '@shared/hocs/with-dnd-sortable'
 import { EntityCardShared } from '@shared/ui/entity-card'
 import { formatInt } from '@shared/utils/misc'
@@ -104,7 +105,14 @@ export function ConfigProfileCardWidget(props: IProps) {
                     cancel: t('common.cancel')
                 },
                 size: 'xl',
-                title: computedConfigProfile.data.name,
+                title: (
+                    <BaseOverlayHeader
+                        IconComponent={TbEye}
+                        iconVariant="gradient-teal"
+                        title={computedConfigProfile.data.name}
+                        titleOrder={5}
+                    />
+                ),
                 onConfirm: () => {
                     const jsonString = JSON.stringify(computedConfigProfile.data.config, null, 2)
                     const blob = new Blob([jsonString], {
@@ -207,7 +215,14 @@ export function ConfigProfileCardWidget(props: IProps) {
                                             />
                                         </Box>
                                     ),
-                                    title: configProfile.name,
+                                    title: (
+                                        <BaseOverlayHeader
+                                            IconComponent={TbEye}
+                                            iconVariant="gradient-teal"
+                                            title={configProfile.name}
+                                            titleOrder={5}
+                                        />
+                                    ),
                                     size: 'xl'
                                 })
                             }}

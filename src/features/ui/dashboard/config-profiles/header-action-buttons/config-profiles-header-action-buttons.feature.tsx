@@ -18,7 +18,9 @@ import { useField } from '@mantine/form'
 
 import { QueryKeys, useCreateConfigProfile, useGetConfigProfiles } from '@shared/api/hooks'
 import { UniversalSpotlightActionIconShared } from '@shared/ui/universal-spotlight'
+import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { HelpActionIconShared } from '@shared/ui/help-drawer'
+import { XrayLogo } from '@shared/ui/logos'
 import { ROUTES } from '@shared/constants'
 import { queryClient } from '@shared/api'
 
@@ -138,7 +140,15 @@ export const ConfigProfilesHeaderActionButtonsFeature = (props: IProps) => {
                 onClose={close}
                 opened={opened}
                 size="md"
-                title={t('config-profiles-header-action-buttons.feature.create-config-profile')}
+                title={
+                    <BaseOverlayHeader
+                        IconComponent={XrayLogo}
+                        iconVariant="gradient-teal"
+                        title={t(
+                            'config-profiles-header-action-buttons.feature.create-config-profile'
+                        )}
+                    />
+                }
             >
                 <form
                     onSubmit={(e) => {

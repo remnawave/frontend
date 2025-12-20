@@ -432,8 +432,14 @@ export const ViewUserModal = () => {
                                             )
                                             modals.open({
                                                 centered: true,
-                                                title: t(
-                                                    'view-user-modal.widget.subscription-qr-code'
+                                                title: (
+                                                    <BaseOverlayHeader
+                                                        IconComponent={PiQrCodeDuotone}
+                                                        iconVariant="gradient-teal"
+                                                        title={t(
+                                                            'view-user-modal.widget.subscription-qr-code'
+                                                        )}
+                                                    />
                                                 ),
                                                 children: (
                                                     <div

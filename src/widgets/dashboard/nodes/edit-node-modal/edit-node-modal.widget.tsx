@@ -1,10 +1,11 @@
 import { UpdateNodeCommand } from '@remnawave/backend-contract'
 import { zodResolver } from 'mantine-form-zod-resolver'
-import { em, Group, Modal, Text } from '@mantine/core'
 import { useTranslation } from 'react-i18next'
 import { useMediaQuery } from '@mantine/hooks'
 import { useEffect, useState } from 'react'
+import { em, Modal } from '@mantine/core'
 import { useForm } from '@mantine/form'
+import { TbCpu } from 'react-icons/tb'
 
 import {
     configProfilesQueryKeys,
@@ -19,6 +20,7 @@ import {
     useNodesStoreEditModalNode
 } from '@entities/dashboard/nodes'
 import { BaseNodeForm } from '@shared/ui/forms/nodes/base-node-form/base-node-form'
+import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { bytesToGbUtil, gbToBytesUtil } from '@shared/utils/bytes'
 import { queryClient } from '@shared/api'
 
@@ -138,9 +140,11 @@ export const EditNodeModalConnectorWidget = () => {
             opened={isModalOpen}
             size="900px"
             title={
-                <Group gap="xl" justify="space-between">
-                    <Text fw={500}>{t('edit-node-modal.widget.edit-node')}</Text>
-                </Group>
+                <BaseOverlayHeader
+                    IconComponent={TbCpu}
+                    iconVariant="gradient-teal"
+                    title={t('edit-node-modal.widget.edit-node')}
+                />
             }
             transitionProps={isMobile ? { transition: 'fade', duration: 200 } : undefined}
         >

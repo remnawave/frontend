@@ -12,8 +12,10 @@ import {
 import { PiCheck, PiCopy, PiCpu } from 'react-icons/pi'
 import ReactCountryFlag from 'react-country-flag'
 import { useTranslation } from 'react-i18next'
+import { TbServer } from 'react-icons/tb'
 
 import { MODALS, useModalClose, useModalState } from '@entities/dashboard/modal-store'
+import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 
 export const ActiveNodesListModalWithStoreShared = () => {
     const { isOpen, internalState: nodes } = useModalState(MODALS.CONFIG_PROFILES_SHOW_ACTIVE_NODE)
@@ -27,7 +29,13 @@ export const ActiveNodesListModalWithStoreShared = () => {
             onClose={close}
             opened={isOpen}
             size="lg"
-            title={t('active-nodes-list-with-store.modal.shared.active-nodes')}
+            title={
+                <BaseOverlayHeader
+                    IconComponent={TbServer}
+                    iconVariant="gradient-teal"
+                    title={t('active-nodes-list-with-store.modal.shared.active-nodes')}
+                />
+            }
         >
             <Stack gap="md">
                 {nodes && nodes.length > 0 ? (

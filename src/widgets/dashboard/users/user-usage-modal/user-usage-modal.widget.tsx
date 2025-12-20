@@ -1,6 +1,6 @@
 import { ActionIcon, Drawer, Group, SimpleGrid, Stack } from '@mantine/core'
+import { TbCalendar, TbChartPie, TbRefresh } from 'react-icons/tb'
 import { DatePickerInput, DatesRangeValue } from '@mantine/dates'
-import { TbCalendar, TbRefresh } from 'react-icons/tb'
 import { useTranslation } from 'react-i18next'
 import { useEffect, useState } from 'react'
 import dayjs from 'dayjs'
@@ -8,6 +8,7 @@ import dayjs from 'dayjs'
 import { UserUsageSparklineCardWidget } from '@widgets/dashboard/users/user-usage-statistic/usage-sparkline-card'
 import { UserUsageBarchartWidget } from '@widgets/dashboard/users/user-usage-statistic/usage-barchart'
 import { TopLeaderboardCardShared } from '@shared/ui/leaderboard-item-card'
+import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { CountryFlag } from '@shared/ui/get-country-flag'
 import { useGetStatsUserUsage } from '@shared/api/hooks'
 
@@ -84,7 +85,13 @@ export const UserUsageModalWidget = (props: IProps) => {
             padding="lg"
             position="right"
             size="900px"
-            title={t('user-usage-modal.widget.traffic-statistics')}
+            title={
+                <BaseOverlayHeader
+                    IconComponent={TbChartPie}
+                    iconVariant="gradient-teal"
+                    title={t('user-usage-modal.widget.traffic-statistics')}
+                />
+            }
         >
             <Stack gap="md">
                 <Group justify="flex-end" wrap="nowrap">

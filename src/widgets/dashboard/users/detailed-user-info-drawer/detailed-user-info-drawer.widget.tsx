@@ -35,6 +35,7 @@ import {
 } from '@entities/dashboard/user-modal-store/user-modal-store'
 import { useEncryptSubscriptionLink, useGetUserByUuid } from '@shared/api/hooks'
 import { CopyableFieldShared } from '@shared/ui/copyable-field/copyable-field'
+import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { LoaderModalShared } from '@shared/ui/loader-modal'
 import { prettyBytesToAnyUtil } from '@shared/utils/bytes'
 
@@ -92,9 +93,11 @@ export const DetailedUserInfoDrawerWidget = () => {
             position="right"
             size="lg"
             title={
-                <Group>
-                    <Text fw={500}>{t('detailed-user-info-drawer.widget.detailed-user-info')}</Text>
-                </Group>
+                <BaseOverlayHeader
+                    IconComponent={PiUserDuotone}
+                    iconVariant="gradient-blue"
+                    title={t('detailed-user-info-drawer.widget.detailed-user-info')}
+                />
             }
             zIndex={1000}
         >

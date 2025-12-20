@@ -33,6 +33,7 @@ import consola from 'consola/browser'
 
 import { useDownloadTemplate } from '@shared/ui/load-templates/use-download-template'
 import { QueryKeys, useUpdateSubscriptionSettings } from '@shared/api/hooks'
+import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { useToken } from '@entities/auth/session-store/use-session-store'
 import { queryClient } from '@shared/api'
 
@@ -213,7 +214,13 @@ export function ResponseRulesEditorActionsFeature(props: Props) {
 -d '${JSON.stringify({ responseRules: parsedRules }, null, 0)}'`
 
         modals.open({
-            title: t('response-rules-editor-actions.feature.response-rules-debugger'),
+            title: (
+                <BaseOverlayHeader
+                    IconComponent={TbBug}
+                    iconVariant="gradient-teal"
+                    title={t('response-rules-editor-actions.feature.response-rules-debugger')}
+                />
+            ),
             size: 'xl',
             centered: true,
             children: (

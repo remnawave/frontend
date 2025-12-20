@@ -5,12 +5,14 @@ import { Button, Modal, Stack } from '@mantine/core'
 import { DatePickerInput } from '@mantine/dates'
 import { useTranslation } from 'react-i18next'
 import { HiCalendar } from 'react-icons/hi'
+import { TbServer } from 'react-icons/tb'
 import { useForm } from '@mantine/form'
 import dayjs from 'dayjs'
 
 import { SelectInfraProviderShared } from '@shared/ui/infra-billing/select-infra-provider/select-infra-provider.shared'
 import { SelectBillingNodeShared } from '@shared/ui/infra-billing/select-billing-node/select-billing-node.shared'
 import { MODALS, useModalClose, useModalIsOpen } from '@entities/dashboard/modal-store'
+import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { QueryKeys, useCreateInfraBillingNode } from '@shared/api/hooks'
 import { handleFormErrors } from '@shared/utils/misc'
 import { queryClient } from '@shared/api'
@@ -87,14 +89,19 @@ export function CreateInfraBillingNodeModalWidget() {
             keepMounted={false}
             onClose={() => {
                 form.reset()
-
                 close()
             }}
             opened={isOpen}
             overlayProps={{ backgroundOpacity: 0.6, blur: 0 }}
             padding="lg"
             size="md"
-            title={t('create-infra-billing-node.modal.widget.billing-node')}
+            title={
+                <BaseOverlayHeader
+                    IconComponent={TbServer}
+                    iconVariant="gradient-teal"
+                    title={t('create-infra-billing-node.modal.widget.billing-node')}
+                />
+            }
         >
             <form onSubmit={handleSubmit}>
                 <Stack>

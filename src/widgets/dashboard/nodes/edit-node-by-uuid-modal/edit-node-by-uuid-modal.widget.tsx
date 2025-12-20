@@ -1,11 +1,12 @@
-import { Button, em, Group, Modal, Stack, Text } from '@mantine/core'
 import { UpdateNodeCommand } from '@remnawave/backend-contract'
+import { Button, em, Modal, Stack, Text } from '@mantine/core'
 import { zodResolver } from 'mantine-form-zod-resolver'
 import { PiEmpty, PiXBold } from 'react-icons/pi'
 import { useTranslation } from 'react-i18next'
 import { useMediaQuery } from '@mantine/hooks'
 import { useEffect, useState } from 'react'
 import { useForm } from '@mantine/form'
+import { TbCpu } from 'react-icons/tb'
 
 import {
     configProfilesQueryKeys,
@@ -16,6 +17,7 @@ import {
 } from '@shared/api/hooks'
 import { MODALS, useModalClose, useModalState } from '@entities/dashboard/modal-store'
 import { BaseNodeForm } from '@shared/ui/forms/nodes/base-node-form/base-node-form'
+import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { bytesToGbUtil, gbToBytesUtil } from '@shared/utils/bytes'
 import { LoaderModalShared } from '@shared/ui/loader-modal'
 import { ModalFooter } from '@shared/ui/modal-footer'
@@ -140,9 +142,11 @@ export const EditNodeByUuidModalWidget = () => {
             opened={isOpen}
             size="900px"
             title={
-                <Group gap="xl" justify="space-between">
-                    <Text fw={500}>{t('edit-node-modal.widget.edit-node')}</Text>
-                </Group>
+                <BaseOverlayHeader
+                    IconComponent={TbCpu}
+                    iconVariant="gradient-teal"
+                    title={t('edit-node-modal.widget.edit-node')}
+                />
             }
             transitionProps={isMobile ? { transition: 'fade', duration: 200 } : undefined}
         >

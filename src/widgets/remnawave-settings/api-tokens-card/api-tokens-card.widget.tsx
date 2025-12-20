@@ -20,6 +20,7 @@ import { SiSwagger } from 'react-icons/si'
 import { useField } from '@mantine/form'
 import { Link } from 'react-router-dom'
 
+import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { useCreateApiToken, useGetApiTokens } from '@shared/api/hooks'
 import { SettingsCardShared } from '@shared/ui/settings-card'
 import { LoadingScreen } from '@shared/ui'
@@ -150,7 +151,19 @@ export const ApiTokensCardWidget = (props: IProps) => {
                 </SettingsCardShared.Bottom>
             </SettingsCardShared.Container>
 
-            <Modal centered onClose={close} opened={opened} size="md" title={t('common.create')}>
+            <Modal
+                centered
+                onClose={close}
+                opened={opened}
+                size="md"
+                title={
+                    <BaseOverlayHeader
+                        IconComponent={TbCookie}
+                        iconVariant="gradient-teal"
+                        title={t('common.create')}
+                    />
+                }
+            >
                 <form
                     onSubmit={(e) => {
                         e.preventDefault()

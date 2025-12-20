@@ -25,6 +25,7 @@ import {
 } from '@entities/dashboard/modal-store'
 import { KeypairGeneratorWidget } from '@widgets/dashboard/config-profiles/keypair-generator/keypair-generator.widget'
 import { useDownloadTemplate } from '@shared/ui/load-templates/use-download-template'
+import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { QueryKeys, useUpdateConfigProfile } from '@shared/api/hooks'
 import { queryClient } from '@shared/api'
 
@@ -293,7 +294,13 @@ export function ConfigEditorActionsFeature(props: Props) {
                             leftSection={<TbTools size={14} />}
                             onClick={() => {
                                 modals.open({
-                                    title: t('config-editor-actions.feature.tools'),
+                                    title: (
+                                        <BaseOverlayHeader
+                                            IconComponent={TbTools}
+                                            iconVariant="gradient-teal"
+                                            title={t('config-editor-actions.feature.tools')}
+                                        />
+                                    ),
                                     centered: true,
                                     children: <KeypairGeneratorWidget />
                                 })

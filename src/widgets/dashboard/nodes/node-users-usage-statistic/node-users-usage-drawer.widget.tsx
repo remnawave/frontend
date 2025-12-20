@@ -1,12 +1,13 @@
+import { TbCalendar, TbChartArcs, TbRefresh, TbUsers } from 'react-icons/tb'
 import { ActionIcon, Drawer, Group, Select, Stack } from '@mantine/core'
 import { DatePickerInput, DatesRangeValue } from '@mantine/dates'
-import { TbCalendar, TbRefresh, TbUsers } from 'react-icons/tb'
 import { useTranslation } from 'react-i18next'
 import { useState } from 'react'
 import dayjs from 'dayjs'
 
 import { MODALS, useModalCloseActions, useModalState } from '@entities/dashboard/modal-store'
 import { TopLeaderboardCardShared } from '@shared/ui/leaderboard-item-card'
+import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { useGetStatsNodeUsersUsage } from '@shared/api/hooks'
 
 import { NodeUsersSparklineCardWidget } from './usage-sparkline-card'
@@ -100,7 +101,13 @@ export const NodeUsersUsageDrawer = () => {
             padding="lg"
             position="right"
             size="600px"
-            title={t('node-users-usage-drawer.widget.user-traffic-statistics')}
+            title={
+                <BaseOverlayHeader
+                    IconComponent={TbChartArcs}
+                    iconVariant="gradient-teal"
+                    title={t('node-users-usage-drawer.widget.user-traffic-statistics')}
+                />
+            }
         >
             <Stack gap="md">
                 <Group justify="space-between">

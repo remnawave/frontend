@@ -41,6 +41,7 @@ import {
 import { MonacoSetupSnippetsFeature } from '@features/dashboard/config-profiles/monaco-setup/monaco-setup.feature'
 import { MODALS, useModalClose, useModalState } from '@entities/dashboard/modal-store'
 import { CopyableFieldShared } from '@shared/ui/copyable-field/copyable-field'
+import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { queryClient } from '@shared/api'
 
 import classes from './SnippetsDrawer.module.css'
@@ -249,7 +250,15 @@ export const SnippetsDrawerWidget = () => {
 
     const openSnippetsHelpModal = () => {
         modals.open({
-            title: t('snippets.drawer.widget.snippets'),
+            title: (
+                <BaseOverlayHeader
+                    IconComponent={TbCode}
+                    iconVariant="gradient-teal"
+                    title={t('snippets.drawer.widget.snippets')}
+                />
+            ),
+            centered: true,
+
             children: (
                 <Stack gap="md">
                     <Stack gap="sm">
@@ -479,7 +488,13 @@ export const SnippetsDrawerWidget = () => {
             }}
             opened={createModalOpened}
             size="lg"
-            title={t('snippets.drawer.widget.create-snippet')}
+            title={
+                <BaseOverlayHeader
+                    IconComponent={TbCode}
+                    iconVariant="gradient-teal"
+                    title={t('snippets.drawer.widget.create-snippet')}
+                />
+            }
         >
             <form onSubmit={createSnippetForm.onSubmit(handleCreate)}>
                 <Stack gap="md">
@@ -618,7 +633,13 @@ export const SnippetsDrawerWidget = () => {
             }}
             opened={editModalOpened}
             size="lg"
-            title={t('snippets.drawer.widget.edit-snippet')}
+            title={
+                <BaseOverlayHeader
+                    IconComponent={TbCode}
+                    iconVariant="gradient-teal"
+                    title={t('snippets.drawer.widget.edit-snippet')}
+                />
+            }
         >
             <form onSubmit={editSnippetForm.onSubmit(handleUpdate)}>
                 <Stack gap="md">
@@ -781,9 +802,11 @@ export const SnippetsDrawerWidget = () => {
                         >
                             <TbRefresh size={18} />
                         </ActionIcon>
-                        <ActionIcon color="gray" onClick={close} size="sm" variant="subtle">
-                            <TbX size={18} />
-                        </ActionIcon>
+                        {!isMobile && (
+                            <ActionIcon color="gray" onClick={close} size="sm" variant="subtle">
+                                <TbX size={18} />
+                            </ActionIcon>
+                        )}
                     </Group>
 
                     <Stack gap="md" p="md" style={{ flex: 1, overflow: 'hidden' }}>

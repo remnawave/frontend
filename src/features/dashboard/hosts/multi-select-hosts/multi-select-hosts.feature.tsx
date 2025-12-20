@@ -1,4 +1,12 @@
 import {
+    PiArrowBendDownLeftDuotone,
+    PiListChecks,
+    PiProhibitDuotone,
+    PiPulseDuotone,
+    PiTagDuotone,
+    PiTrash
+} from 'react-icons/pi'
+import {
     Affix,
     Badge,
     Button,
@@ -9,13 +17,6 @@ import {
     Stack,
     Transition
 } from '@mantine/core'
-import {
-    PiArrowBendDownLeftDuotone,
-    PiProhibitDuotone,
-    PiPulseDuotone,
-    PiTagDuotone,
-    PiTrash
-} from 'react-icons/pi'
 import { notifications } from '@mantine/notifications'
 import { useTranslation } from 'react-i18next'
 import { useDisclosure } from '@mantine/hooks'
@@ -30,6 +31,7 @@ import {
     useSetPortToManyHosts
 } from '@shared/api/hooks/hosts/hosts.mutation.hooks'
 import { HostSelectInboundFeature } from '@features/ui/dashboard/hosts/host-select-inbound/host-select-inbound.feature'
+import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { useBulkEnableHosts, useGetHosts } from '@shared/api/hooks'
 
 import { IProps } from './interfaces/props.interface'
@@ -271,7 +273,13 @@ export const MultiSelectHostsFeature = (props: IProps) => {
                 padding="md"
                 position="right"
                 size="450px"
-                title="Config Profiles"
+                title={
+                    <BaseOverlayHeader
+                        IconComponent={PiListChecks}
+                        iconVariant="gradient-teal"
+                        title="Config Profiles"
+                    />
+                }
             >
                 <Stack gap="md" h="100%">
                     <Group justify="center">

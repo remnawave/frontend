@@ -5,12 +5,11 @@ import {
     Group,
     Modal,
     Stack,
-    Text,
     TextInput,
     Tooltip
 } from '@mantine/core'
 import { CreateInternalSquadCommand } from '@remnawave/backend-contract'
-import { TbPlus, TbRefresh } from 'react-icons/tb'
+import { TbCirclesRelation, TbPlus, TbRefresh } from 'react-icons/tb'
 import { useDisclosure } from '@mantine/hooks'
 import { useTranslation } from 'react-i18next'
 import { useField } from '@mantine/form'
@@ -18,6 +17,7 @@ import { useField } from '@mantine/form'
 import { QueryKeys, useCreateInternalSquad, useGetInternalSquads } from '@shared/api/hooks'
 import { MODALS, useModalsStoreOpenWithData } from '@entities/dashboard/modal-store'
 import { UniversalSpotlightActionIconShared } from '@shared/ui/universal-spotlight'
+import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { HelpActionIconShared } from '@shared/ui/help-drawer'
 import { queryClient } from '@shared/api'
 
@@ -104,7 +104,15 @@ export const InternalSquadsHeaderActionButtonsFeature = (props: IProps) => {
                 onClose={close}
                 opened={opened}
                 size="md"
-                title={t('internal-squad-header-action-buttons.feature.create-internal-squad')}
+                title={
+                    <BaseOverlayHeader
+                        IconComponent={TbCirclesRelation}
+                        iconVariant="gradient-teal"
+                        title={t(
+                            'internal-squad-header-action-buttons.feature.create-internal-squad'
+                        )}
+                    />
+                }
             >
                 <form
                     onSubmit={(e) => {
@@ -118,11 +126,6 @@ export const InternalSquadsHeaderActionButtonsFeature = (props: IProps) => {
                     }}
                 >
                     <Stack gap="md">
-                        <Text size="sm">
-                            {t(
-                                'internal-squad-header-action-buttons.feature.create-a-new-internal-squad-by-entering-a-name-below'
-                            )}
-                        </Text>
                         <TextInput
                             data-autofocus
                             label={t('internal-squad-header-action-buttons.feature.squad-name')}

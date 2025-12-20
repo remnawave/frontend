@@ -9,7 +9,7 @@ import {
     Tooltip
 } from '@mantine/core'
 import { CreateExternalSquadCommand } from '@remnawave/backend-contract'
-import { TbPlus, TbRefresh } from 'react-icons/tb'
+import { TbPlus, TbRefresh, TbWebhook } from 'react-icons/tb'
 import { useDisclosure } from '@mantine/hooks'
 import { useTranslation } from 'react-i18next'
 import { useField } from '@mantine/form'
@@ -17,6 +17,7 @@ import { useField } from '@mantine/form'
 import { MODALS, useModalsStoreOpenWithData } from '@entities/dashboard/modal-store'
 import { UniversalSpotlightActionIconShared } from '@shared/ui/universal-spotlight'
 import { useCreateExternalSquad, useGetExternalSquads } from '@shared/api/hooks'
+import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { HelpActionIconShared } from '@shared/ui/help-drawer'
 
 interface IProps {
@@ -99,7 +100,13 @@ export const ExternalSquadsHeaderActionButtonsFeature = (props: IProps) => {
                 onClose={close}
                 opened={opened}
                 size="md"
-                title={t('header-action-buttons.feature.create-new-external-squad')}
+                title={
+                    <BaseOverlayHeader
+                        IconComponent={TbWebhook}
+                        iconVariant="gradient-teal"
+                        title={t('header-action-buttons.feature.create-new-external-squad')}
+                    />
+                }
             >
                 <form
                     onSubmit={(e) => {
