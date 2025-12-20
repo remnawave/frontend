@@ -1851,5 +1851,14 @@
                 "enter-search-query": "Введите запрос для поиска..."
             }
         }
+    },
+    "base-settings-block": {
+        "component": {
+            "base-settings": "Base Settings",
+            "meta-title": "Meta Title",
+            "meta-description": "Meta Description",
+            "show-connection-keys": "Show Connection Keys",
+            "show-or-hide-raw-connection-keys": "Show or hide raw connection keys"
+        }
     }
 }
