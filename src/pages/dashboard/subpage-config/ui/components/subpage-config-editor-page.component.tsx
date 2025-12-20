@@ -1,12 +1,12 @@
 import {
     ActionIcon,
-    Box,
     Button,
     CopyButton,
     FileButton,
     Group,
     SimpleGrid,
     Stack,
+    ThemeIcon,
     Tooltip
 } from '@mantine/core'
 import {
@@ -45,7 +45,6 @@ import {
 } from '@widgets/dashboard/subpage-configs/subpage-config-editor/modals'
 import { useDownloadTemplate } from '@shared/ui/load-templates/use-download-template'
 import { QueryKeys, useUpdateSubscriptionPageConfig } from '@shared/api/hooks'
-import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { queryClient } from '@shared/api/query-client'
 import { Page, PageHeaderShared } from '@shared/ui'
 import { ROUTES } from '@shared/constants'
@@ -223,58 +222,56 @@ export const SubpageConfigEditorPageComponent = (props: Props) => {
                 icon={<TbFile size={24} />}
                 title={config.name}
             />
-            <Box className={styles.editorWrapper}>
-                <Box className={styles.headerWrapper}>
+
+            <PageHeaderShared
+                actions={
                     <Group justify="space-between">
-                        <Group gap="sm">
-                            <BaseOverlayHeader
-                                IconComponent={TbPalette}
-                                iconSize={20}
-                                iconVariant="gradient-cyan"
-                                subtitle={t(
-                                    'subpage-config-visual-editor.widget.edit-your-subscription-page-configuration'
-                                )}
-                                title={t('subpage-config-visual-editor.widget.subpage-editor')}
-                            />
-                        </Group>
-                        <Group>
-                            <Button
-                                className={styles.saveButton}
-                                leftSection={<TbCloudDownload size={24} />}
-                                onClick={openDownloadModal}
-                                size="md"
-                                variant="light"
-                            >
-                                {t('subpage-config-visual-editor.widget.load-from-github')}
-                            </Button>
+                        <Button
+                            className={styles.saveButton}
+                            leftSection={<TbCloudDownload size={24} />}
+                            onClick={openDownloadModal}
+                            size="md"
+                            variant="light"
+                        >
+                            {t('subpage-config-visual-editor.widget.load-from-github')}
+                        </Button>
 
-                            <Button
-                                className={styles.saveButton}
-                                disabled={isUpdatingSubscriptionPageConfig}
-                                leftSection={<TbDeviceFloppy size={24} />}
-                                loading={isUpdatingSubscriptionPageConfig}
-                                onClick={handleSave}
-                                size="md"
-                                variant="light"
-                            >
-                                {t('common.save')}
-                            </Button>
-                        </Group>
+                        <Button
+                            className={styles.saveButton}
+                            disabled={isUpdatingSubscriptionPageConfig}
+                            leftSection={<TbDeviceFloppy size={24} />}
+                            loading={isUpdatingSubscriptionPageConfig}
+                            onClick={handleSave}
+                            size="md"
+                            variant="light"
+                        >
+                            {t('common.save')}
+                        </Button>
                     </Group>
-                </Box>
+                }
+                className={styles.headerCard}
+                customThemeIcon={
+                    <ThemeIcon size="lg" variant="gradient-cyan">
+                        <TbPalette size={24} />
+                    </ThemeIcon>
+                }
+                description={t(
+                    'subpage-config-visual-editor.widget.edit-your-subscription-page-configuration'
+                )}
+                title={t('subpage-config-visual-editor.widget.subpage-editor')}
+            />
 
-                <Stack gap="lg">
-                    <SimpleGrid cols={{ base: 1, md: 2 }} spacing="lg">
-                        <BrandingBlockComponent form={form} />
-                        <LocalizationBlockComponent form={form} />
-                    </SimpleGrid>
-                    <BaseSettingsBlockComponent form={form} />
-                    <SvgLibraryBlockComponent form={form} />
-                    <BaseTranslationsBlockComponent form={form} />
-                    <UiConfigBlockComponent form={form} />
-                    <PlatformBlockComponent form={form} />
-                </Stack>
-            </Box>
+            <Stack gap="lg">
+                <SimpleGrid cols={{ base: 1, md: 2 }} spacing="lg">
+                    <BrandingBlockComponent form={form} />
+                    <LocalizationBlockComponent form={form} />
+                </SimpleGrid>
+                <BaseSettingsBlockComponent form={form} />
+                <SvgLibraryBlockComponent form={form} />
+                <BaseTranslationsBlockComponent form={form} />
+                <UiConfigBlockComponent form={form} />
+                <PlatformBlockComponent form={form} />
+            </Stack>
         </Page>
     )
 }
