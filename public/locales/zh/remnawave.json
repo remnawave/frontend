@@ -306,7 +306,7 @@
             "2099-year": "2099年",
             "hwid-user-limit-line-1": "此功能仅在",
             "hwid-user-limit-line-2": "订阅设置为",
-            "hwid-user-limit-line-3": "时有效。了解更多。",
+            "hwid-user-limit-line-3": "了解更多。",
             "disable-hwid-limit": "禁用 HWID 限制",
             "hwid-device-limit": "HWID 设备限制",
             "expire-at-description": "用户的订阅服务将于该时间结束。",
@@ -1848,8 +1848,17 @@
     "user-hwid-devices": {
         "drawer": {
             "widget": {
-                "enter-search-query": "Enter search query..."
+                "enter-search-query": "输入查询……"
             }
+        }
+    },
+    "base-settings-block": {
+        "component": {
+            "base-settings": "Base Settings",
+            "meta-title": "Meta Title",
+            "meta-description": "Meta Description",
+            "show-connection-keys": "Show Connection Keys",
+            "show-or-hide-raw-connection-keys": "Show or hide raw connection keys"
         }
     }
 }

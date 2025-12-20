@@ -137,7 +137,7 @@ export const NodesStatisticBarchartWidget = (props: IProps) => {
                 options={{
                     chart: {
                         type: 'bar',
-                        height: '600px',
+                        height: '60%',
                         backgroundColor: 'transparent',
                         style: { fontFamily: 'inherit' }
                     },

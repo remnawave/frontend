@@ -1721,7 +1721,7 @@
             "subscription-info-block-design": "Внешний вид блока: Subscription Info",
             "installation-guides-header": "Installation Guides Header",
             "connection-keys-header": "Connection Keys Header",
-            "configure-apps-for-each-platform": "Configure apps for each platform",
+            "configure-apps-for-each-platform": "Настроить приложения для разных платформ",
             "platforms": "Платформы",
             "add-platform": "Добавление платформы",
             "no-platforms-configured": "Платформы не настроены",
@@ -1850,6 +1850,15 @@
             "widget": {
                 "enter-search-query": "Введите запрос для поиска..."
             }
+        }
+    },
+    "base-settings-block": {
+        "component": {
+            "base-settings": "Base Settings",
+            "meta-title": "Meta Title",
+            "meta-description": "Meta Description",
+            "show-connection-keys": "Show Connection Keys",
+            "show-or-hide-raw-connection-keys": "Show or hide raw connection keys"
         }
     }
 }

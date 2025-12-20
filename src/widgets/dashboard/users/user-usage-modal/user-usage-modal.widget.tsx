@@ -1,8 +1,8 @@
-import { ActionIcon, Drawer, Group, SimpleGrid, Stack } from '@mantine/core'
-import { TbCalendar, TbChartPie, TbRefresh } from 'react-icons/tb'
+import { ActionIcon, Drawer, Group, Select, SimpleGrid, Stack } from '@mantine/core'
+import { TbCalendar, TbChartPie, TbRefresh, TbServer2 } from 'react-icons/tb'
 import { DatePickerInput, DatesRangeValue } from '@mantine/dates'
 import { useTranslation } from 'react-i18next'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import dayjs from 'dayjs'
 
 import { UserUsageSparklineCardWidget } from '@widgets/dashboard/users/user-usage-statistic/usage-sparkline-card'
@@ -13,6 +13,22 @@ import { CountryFlag } from '@shared/ui/get-country-flag'
 import { useGetStatsUserUsage } from '@shared/api/hooks'
 
 import { IProps } from './interfaces'
+
+const TOP_NODES_LIMIT_OPTIONS = [
+    { value: '5', label: 'Top 5' },
+    { value: '10', label: 'Top 10' },
+    { value: '20', label: 'Top 20' },
+    { value: '30', label: 'Top 30' },
+    { value: '40', label: 'Top 40' },
+    { value: '50', label: 'Top 50' },
+    { value: '60', label: 'Top 60' },
+    { value: '70', label: 'Top 70' },
+    { value: '80', label: 'Top 80' },
+    { value: '90', label: 'Top 90' },
+    { value: '100', label: 'Top 100' }
+]
+
+const DEFAULT_TOP_NODES_LIMIT = 20
 
 const DEFAULT_DATE_RANGE = {
     start: dayjs().subtract(6, 'day').format('YYYY-MM-DD'),
@@ -29,13 +45,7 @@ export const UserUsageModalWidget = (props: IProps) => {
     ])
 
     const [queryRange, setQueryRange] = useState<{ end: string; start: string }>(DEFAULT_DATE_RANGE)
-
-    useEffect(() => {
-        if (!opened) {
-            setRawRange([DEFAULT_DATE_RANGE.start, DEFAULT_DATE_RANGE.end])
-            setQueryRange(DEFAULT_DATE_RANGE)
-        }
-    }, [opened])
+    const [topNodesLimit, setTopNodesLimit] = useState<number>(DEFAULT_TOP_NODES_LIMIT)
 
     const handleDateRangeChange = (value: DatesRangeValue<string>) => {
         if (value[0] === null && value[1] === null) {
@@ -69,20 +79,26 @@ export const UserUsageModalWidget = (props: IProps) => {
         },
         query: {
             start: queryRange.start,
-            end: queryRange.end
+            end: queryRange.end,
+            topNodesLimit
         },
         rQueryParams: {
             enabled: opened && Boolean(queryRange.start && queryRange.end)
         }
     })
 
+    const handleClose = () => {
+        setRawRange([DEFAULT_DATE_RANGE.start, DEFAULT_DATE_RANGE.end])
+        setQueryRange(DEFAULT_DATE_RANGE)
+        setTopNodesLimit(DEFAULT_TOP_NODES_LIMIT)
+        onClose()
+    }
+
     return (
         <Drawer
             keepMounted={false}
-            onClose={onClose}
+            onClose={handleClose}
             opened={opened}
-            overlayProps={{ backgroundOpacity: 0.6, blur: 0 }}
-            padding="lg"
             position="right"
             size="900px"
             title={
@@ -95,6 +111,15 @@ export const UserUsageModalWidget = (props: IProps) => {
         >
             <Stack gap="md">
                 <Group justify="flex-end" wrap="nowrap">
+                    <Select
+                        allowDeselect={false}
+                        data={TOP_NODES_LIMIT_OPTIONS}
+                        leftSection={<TbServer2 size="20px" />}
+                        onChange={(value) => setTopNodesLimit(Number(value))}
+                        size="md"
+                        value={String(topNodesLimit)}
+                        w={150}
+                    />
                     <DatePickerInput
                         dropdownType="modal"
                         headerControlsOrder={['previous', 'next', 'level']}
@@ -190,6 +215,7 @@ export const UserUsageModalWidget = (props: IProps) => {
                             name: node.name,
                             total: node.total
                         }))}
+                        maxHeight={230}
                         renderCountryFlag={(item) => <CountryFlag countryCode={item.countryCode} />}
                     />
                 </SimpleGrid>
