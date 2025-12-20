@@ -2,9 +2,11 @@ import { Button, Group, Modal, Stack, TextInput } from '@mantine/core'
 import { useTranslation } from 'react-i18next'
 import { DatePicker } from '@mantine/dates'
 import { useEffect, useState } from 'react'
+import { TbCalendar } from 'react-icons/tb'
 import dayjs from 'dayjs'
 
 import { MODALS, useModalClose, useModalState } from '@entities/dashboard/modal-store'
+import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { QueryKeys, useUpdateInfraBillingNode } from '@shared/api/hooks'
 import { queryClient } from '@shared/api'
 
@@ -73,7 +75,13 @@ export function UpdateBillingDateModalWidget() {
             onClose={handleClose}
             opened={isOpen}
             size="auto"
-            title={t('update-billing-date-modal.widget.update-billing-date')}
+            title={
+                <BaseOverlayHeader
+                    IconComponent={TbCalendar}
+                    iconVariant="gradient-teal"
+                    title={t('update-billing-date-modal.widget.update-billing-date')}
+                />
+            }
         >
             <Stack gap="md">
                 {billingNode && (

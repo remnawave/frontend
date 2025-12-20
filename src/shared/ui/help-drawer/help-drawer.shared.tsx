@@ -1,13 +1,14 @@
 import { Box, Center, Code, Drawer, Stack, Title, Typography } from '@mantine/core'
+import { TbAlertCircle, TbQuestionMark } from 'react-icons/tb'
 import { memo, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { TbAlertCircle } from 'react-icons/tb'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import rehypeRaw from 'rehype-raw'
 
 import { MODALS, useModalClose, useModalState } from '@entities/dashboard/modal-store'
 
+import { BaseOverlayHeader } from '../overlays/base-overlay-header'
 import { THelpDrawerAvailableScreen } from './help-drawer.types'
 import { LoaderModalShared } from '../loader-modal'
 import classes from './help-drawer.module.css'
@@ -77,7 +78,13 @@ export const HelpDrawerShared = memo(() => {
             overlayProps={{ backgroundOpacity: 0.6, blur: 0 }}
             position="right"
             size="lg"
-            title={t('help-action-icon.shared.help-article')}
+            title={
+                <BaseOverlayHeader
+                    IconComponent={TbQuestionMark}
+                    iconVariant="gradient-yellow"
+                    title={t('help-action-icon.shared.help-article')}
+                />
+            }
         >
             {loading && (
                 <LoaderModalShared

@@ -1,6 +1,6 @@
 import { GetConfigProfileByUuidCommand, GetSnippetsCommand } from '@remnawave/backend-contract'
 import { ActionIcon, Box, Drawer, Flex, Group, Transition } from '@mantine/core'
-import { TbArrowBack, TbFile } from 'react-icons/tb'
+import { TbArrowBack, TbCode, TbFile } from 'react-icons/tb'
 import { useMediaQuery } from '@mantine/hooks'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
@@ -9,6 +9,7 @@ import { ConfigEditorWidget } from '@widgets/dashboard/config-profiles/config-ed
 import { SnippetsDrawerWidget } from '@widgets/dashboard/config-profiles/snippets-drawer'
 import { MODALS, useModalClose, useModalIsOpen } from '@entities/dashboard/modal-store'
 import { PageHeaderShared } from '@shared/ui/page-header/page-header.shared'
+import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { HelpActionIconShared } from '@shared/ui/help-drawer'
 import { ROUTES } from '@shared/constants'
 import { Page } from '@shared/ui/page'
@@ -61,11 +62,16 @@ export const ConfigProfileByUuidPageComponent = (props: Props) => {
                             keepMounted={false}
                             onClose={close}
                             opened={isOpen}
-                            overlayProps={{ backgroundOpacity: 0.6, blur: 0 }}
-                            padding={0}
                             position="right"
                             size="450px"
-                            withCloseButton={false}
+                            title={
+                                <BaseOverlayHeader
+                                    IconComponent={TbCode}
+                                    iconVariant="gradient-violet"
+                                    title={t('snippets.drawer.widget.snippets')}
+                                />
+                            }
+                            withCloseButton={true}
                         >
                             <SnippetsDrawerWidget />
                         </Drawer>

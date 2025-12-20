@@ -5,6 +5,7 @@ import { PiFloppyDiskDuotone } from 'react-icons/pi'
 import { useTranslation } from 'react-i18next'
 import { useMediaQuery } from '@mantine/hooks'
 import { useForm } from '@mantine/form'
+import { TbUser } from 'react-icons/tb'
 import { motion } from 'motion/react'
 import { useEffect } from 'react'
 import dayjs from 'dayjs'
@@ -26,6 +27,7 @@ import {
     useGetInternalSquads,
     useGetUserTags
 } from '@shared/api/hooks'
+import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { LoaderModalShared } from '@shared/ui/loader-modal'
 import { handleFormErrors } from '@shared/utils/misc'
 import { ModalFooter } from '@shared/ui/modal-footer'
@@ -156,7 +158,13 @@ export const CreateUserModalWidget = () => {
             onExitTransitionEnd={handleResetForm}
             opened={isModalOpen}
             size="1000px"
-            title={t('create-user-modal.widget.create-user')}
+            title={
+                <BaseOverlayHeader
+                    IconComponent={TbUser}
+                    iconVariant="gradient-teal"
+                    title={t('create-user-modal.widget.create-user')}
+                />
+            }
             transitionProps={isMobile ? { transition: 'fade', duration: 200 } : undefined}
         >
             {isInternalSquadsLoading || isTagsLoading ? (

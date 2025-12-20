@@ -3,11 +3,13 @@ import type { editor } from 'monaco-editor'
 import { TSubscriptionTemplateType } from '@remnawave/backend-contract'
 import { notifications } from '@mantine/notifications'
 import { useTranslation } from 'react-i18next'
+import { TbDownload } from 'react-icons/tb'
 import { modals } from '@mantine/modals'
 import { RefObject } from 'react'
 
 import { IDownloadableSubscriptionTemplate } from '@shared/constants/templates'
 
+import { BaseOverlayHeader } from '../overlays/base-overlay-header'
 import { TemplateDownloadModal } from './template-selector.modal'
 
 interface IProps {
@@ -56,7 +58,13 @@ export const useDownloadTemplate = (props: IProps) => {
 
     const openDownloadModal = () => {
         const modalId = modals.open({
-            title: t('use-download-template.select-template-to-load'),
+            title: (
+                <BaseOverlayHeader
+                    IconComponent={TbDownload}
+                    iconVariant="gradient-cyan"
+                    title={t('use-download-template.select-template-to-load')}
+                />
+            ),
             centered: true,
             size: 'lg',
             children: (

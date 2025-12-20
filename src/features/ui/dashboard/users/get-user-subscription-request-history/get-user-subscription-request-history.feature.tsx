@@ -23,6 +23,7 @@ import { useTranslation } from 'react-i18next'
 import { useEffect } from 'react'
 
 import { CopyableFieldShared } from '@shared/ui/copyable-field/copyable-field'
+import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { useGetUserSubscriptionRequestHistory } from '@shared/api/hooks'
 import { LoaderModalShared } from '@shared/ui/loader-modal'
 import { formatDate } from '@shared/utils/misc'
@@ -59,9 +60,15 @@ export function GetUserSubscriptionRequestHistoryFeature(props: IProps) {
                 padding="lg"
                 position="right"
                 size="md"
-                title={t(
-                    'get-user-subscription-request-history.feature.subscription-request-history'
-                )}
+                title={
+                    <BaseOverlayHeader
+                        IconComponent={TbRewindBackward50}
+                        iconVariant="gradient-teal"
+                        title={t(
+                            'get-user-subscription-request-history.feature.subscription-request-history'
+                        )}
+                    />
+                }
             >
                 {isLoading ? (
                     <LoaderModalShared text="Loading..." />

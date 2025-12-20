@@ -16,6 +16,7 @@ import { useTranslation } from 'react-i18next'
 import { modals } from '@mantine/modals'
 import { memo } from 'react'
 
+import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { XrayLogo } from '@shared/ui/logos'
 
 import type { IProps } from './interfaces/props.interface'
@@ -52,7 +53,13 @@ export const ConfigProfileCardShared = memo((props: IProps) => {
                     />
                 </Box>
             ),
-            title: profile.name,
+            title: (
+                <BaseOverlayHeader
+                    IconComponent={XrayLogo}
+                    iconVariant="gradient-teal"
+                    title={profile.name}
+                />
+            ),
             size: 'xl'
         })
     }
@@ -148,10 +155,12 @@ export const ConfigProfileCardShared = memo((props: IProps) => {
                                 modals.open({
                                     children: <ActiveNodesListModalShared nodes={profile.nodes} />,
                                     title: (
-                                        <Group gap="sm">
-                                            <PiCpu size={20} />
-                                            <Text fw={600}>Active Nodes - {profile.name}</Text>
-                                        </Group>
+                                        <BaseOverlayHeader
+                                            IconComponent={PiCpu}
+                                            iconVariant="gradient-teal"
+                                            title={`Active Nodes - ${profile.name}`}
+                                            titleOrder={5}
+                                        />
                                     ),
                                     size: 'lg',
                                     centered: true

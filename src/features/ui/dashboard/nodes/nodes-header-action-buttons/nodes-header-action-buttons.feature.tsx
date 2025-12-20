@@ -25,6 +25,7 @@ import { modals } from '@mantine/modals'
 
 import { useNodesStoreActions } from '@entities/dashboard/nodes/nodes-store/nodes-store'
 import { NodesViewMode } from '@pages/dashboard/nodes/ui/components/interfaces'
+import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { useGetNodes, useRestartAllNodes } from '@shared/api/hooks'
 
 interface IProps {
@@ -53,7 +54,13 @@ export const NodesHeaderActionButtonsFeature = (props: IProps) => {
 
     const openRestartAllNodesModal = () => {
         modals.open({
-            title: t('nodes-header-action-buttons.feature.restart-all-nodes'),
+            title: (
+                <BaseOverlayHeader
+                    IconComponent={TbRocket}
+                    iconVariant="gradient-teal"
+                    title={t('nodes-header-action-buttons.feature.restart-all-nodes')}
+                />
+            ),
             centered: true,
             size: 'md',
             children: (

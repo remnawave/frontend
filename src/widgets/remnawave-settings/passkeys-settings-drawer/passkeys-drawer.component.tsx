@@ -36,6 +36,7 @@ import {
 } from '@shared/api/hooks'
 import { MODALS, useModalsStoreOpenWithData } from '@entities/dashboard/modal-store'
 import { CopyableFieldShared } from '@shared/ui/copyable-field/copyable-field'
+import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { RenameModalShared } from '@shared/ui/modals/rename-modal.shared'
 import { formatDate } from '@shared/utils/misc/date'
 import { LoadingScreen } from '@shared/ui'
@@ -182,12 +183,11 @@ export const PasskeysDrawerComponent = ({ onClose, opened }: IProps) => {
             position="right"
             size="lg"
             title={
-                <Group gap="sm" mt="md">
-                    <ThemeIcon color="blue" size="lg" variant="light">
-                        <TbFingerprint size={20} />
-                    </ThemeIcon>
-                    <Title order={3}>{t('passkeys-drawer.component.passkeys')}</Title>
-                </Group>
+                <BaseOverlayHeader
+                    IconComponent={TbFingerprint}
+                    iconVariant="gradient-teal"
+                    title={t('passkeys-drawer.component.passkeys')}
+                />
             }
         >
             <Flex direction="column" gap="md" h="100%">

@@ -56,6 +56,7 @@ import { HostTagsInputWidget } from '@widgets/dashboard/hosts/host-tags-input/ho
 import { emojiFlag, resolveCountryCode } from '@shared/utils/misc/resolve-country-code'
 import { PopoverWithInfoShared } from '@shared/ui/popovers/popover-with-info'
 import { DeleteHostFeature } from '@features/ui/dashboard/hosts/delete-host'
+import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { TemplateInfoPopoverShared } from '@shared/ui/popovers'
 import { DrawerFooter } from '@shared/ui/drawer-footer'
 import { handleFormErrors } from '@shared/utils/misc'
@@ -1006,7 +1007,13 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
                 padding="lg"
                 position="right"
                 size="lg"
-                title={t('base-host-form.xhttp-extra-params')}
+                title={
+                    <BaseOverlayHeader
+                        IconComponent={PiPencilDuotone}
+                        iconVariant="gradient-teal"
+                        title={t('base-host-form.xhttp-extra-params')}
+                    />
+                }
             >
                 <Stack gap="md">
                     <Text size="sm">{t('base-host-form.extra-xhttp-description')}</Text>
@@ -1042,7 +1049,13 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
                 padding="lg"
                 position="right"
                 size="lg"
-                title="MUX"
+                title={
+                    <BaseOverlayHeader
+                        IconComponent={TbCloudNetwork}
+                        iconVariant="gradient-teal"
+                        title="MUX"
+                    />
+                }
             >
                 <Stack gap="md">
                     <Stack gap={0}>
@@ -1095,7 +1108,13 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
                 padding="lg"
                 position="right"
                 size="lg"
-                title="Sockopt"
+                title={
+                    <BaseOverlayHeader
+                        IconComponent={PiNetwork}
+                        iconVariant="gradient-teal"
+                        title="SockOpt"
+                    />
+                }
             >
                 <Stack gap="md">
                     <Stack gap={0}>

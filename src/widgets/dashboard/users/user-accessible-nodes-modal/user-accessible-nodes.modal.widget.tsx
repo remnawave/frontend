@@ -9,7 +9,6 @@ import {
     SimpleGrid,
     Stack,
     Text,
-    Title,
     Tree,
     TreeNodeData
 } from '@mantine/core'
@@ -21,6 +20,7 @@ import { useTranslation } from 'react-i18next'
 import { PiTag } from 'react-icons/pi'
 
 import { MODALS, useModalClose, useModalState } from '@entities/dashboard/modal-store'
+import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { useGetUserAccessibleNodes } from '@shared/api/hooks'
 import { XrayLogo } from '@shared/ui/logos'
 
@@ -350,12 +350,11 @@ export const UserAccessibleNodesModalWidget = () => {
             position="right"
             size="800px"
             title={
-                <Group align="center" gap="sm">
-                    <IconServer color="var(--mantine-color-blue-6)" size={24} />
-                    <Title order={3}>
-                        {t('user-accessible-nodes.modal.widget.user-accessible-nodes')}
-                    </Title>
-                </Group>
+                <BaseOverlayHeader
+                    IconComponent={IconServer}
+                    iconVariant="gradient-teal"
+                    title={t('user-accessible-nodes.modal.widget.user-accessible-nodes')}
+                />
             }
         >
             {isLoading && returnLoading()}

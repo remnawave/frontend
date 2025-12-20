@@ -14,6 +14,7 @@ import {
 } from '@shared/api/hooks'
 import { useBulkUsersActionsStoreActions } from '@entities/dashboard/users/bulk-users-actions-store'
 import { InternalSquadsListWidget } from '@widgets/dashboard/users/internal-squads-list'
+import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 
 import { IProps } from './interfaces/props.interface'
 
@@ -111,7 +112,14 @@ export const BulkUserActionsActionsTabFeature = (props: IProps) => {
         let userInput = 1
 
         modals.open({
-            title: t('bulk-user-actions.actions.tab.feature.extend-expiration-date'),
+            title: (
+                <BaseOverlayHeader
+                    IconComponent={PiClockUser}
+                    iconVariant="gradient-teal"
+                    title={t('bulk-user-actions.actions.tab.feature.extend-expiration-date')}
+                    titleOrder={5}
+                />
+            ),
             centered: true,
             children: (
                 <>

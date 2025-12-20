@@ -1,12 +1,13 @@
 import { ActionIcon, Badge, Box, Center, Drawer, Group, Stack, Text } from '@mantine/core'
+import { PiListChecks, PiProhibit, PiPulse, PiTag } from 'react-icons/pi'
 import { createSearchParams, useNavigate } from 'react-router-dom'
-import { PiProhibit, PiPulse, PiTag } from 'react-icons/pi'
 import { TbAlertCircle, TbEyeOff } from 'react-icons/tb'
 import { useTranslation } from 'react-i18next'
 import ColorHash from 'color-hash'
 import { memo } from 'react'
 
 import { MODALS, useModalClose, useModalState } from '@entities/dashboard/modal-store'
+import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { useGetConfigProfiles, useGetHosts } from '@shared/api/hooks'
 import { SEARCH_PARAMS } from '@shared/constants/search-params'
 import { XrayLogo } from '@shared/ui/logos'
@@ -36,7 +37,13 @@ export const LinkedHostsDrawer = memo(() => {
                 padding="lg"
                 position="right"
                 size="500px"
-                title={t('linked-hosts-drawer.widget.assigned-hosts')}
+                title={
+                    <BaseOverlayHeader
+                        IconComponent={PiListChecks}
+                        iconVariant="gradient-teal"
+                        title={t('linked-hosts-drawer.widget.assigned-hosts')}
+                    />
+                }
             >
                 <LoadingScreen />
             </Drawer>
@@ -54,7 +61,13 @@ export const LinkedHostsDrawer = memo(() => {
             padding="lg"
             position="right"
             size="500px"
-            title={t('linked-hosts-drawer.widget.assigned-hosts')}
+            title={
+                <BaseOverlayHeader
+                    IconComponent={PiListChecks}
+                    iconVariant="gradient-teal"
+                    title={t('linked-hosts-drawer.widget.assigned-hosts')}
+                />
+            }
         >
             <Stack gap="md">
                 {linkedHosts.length === 0 && (

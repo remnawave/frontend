@@ -29,6 +29,7 @@ import { useDisclosure } from '@mantine/hooks'
 import { BulkAllUserActionsDrawerWidget } from '@widgets/dashboard/users/bulk-all-user-actions-drawer/bulk-all-user-actions-drawer.widget'
 import { useUserCreationModalStoreActions } from '@entities/dashboard/user-creation-modal-store'
 import { useUsersTableStoreActions } from '@entities/dashboard/users/users-table-store'
+import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 
 import { IProps } from './interfaces'
 
@@ -175,7 +176,13 @@ export const UserActionGroupFeature = (props: IProps) => {
                 padding="lg"
                 position="left"
                 size="500px"
-                title={t('action-group.feature.table-controls-help')}
+                title={
+                    <BaseOverlayHeader
+                        IconComponent={TbQuestionMark}
+                        iconVariant="gradient-teal"
+                        title={t('action-group.feature.table-controls-help')}
+                    />
+                }
             >
                 <Stack gap="md">
                     <Text c="dimmed" size="sm">

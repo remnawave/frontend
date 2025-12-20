@@ -5,6 +5,17 @@
 .modalHeader {
     background: rgba(22, 27, 35, 0.95);
     border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    padding: var(--mantine-spacing-sm) var(--mantine-spacing-lg);
+
+    /* @supports (padding: env(safe-area-inset-top)) {
+        padding-top: max(var(--mantine-spacing-sm), env(safe-area-inset-top, 0px));
+    } */
+}
+
+.modalRoot[data-full-screen] .modalHeader {
+    @supports (padding: env(safe-area-inset-top)) {
+        padding-top: max(var(--mantine-spacing-sm), env(safe-area-inset-top, 0px));
+    }
 }
 
 .modalBody {

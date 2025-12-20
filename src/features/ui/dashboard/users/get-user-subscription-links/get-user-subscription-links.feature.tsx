@@ -12,6 +12,7 @@ import { modals } from '@mantine/modals'
 import { useEffect } from 'react'
 import { renderSVG } from 'uqr'
 
+import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { useGetSubscriptionInfoByUuid } from '@shared/api/hooks'
 import { LoaderModalShared } from '@shared/ui/loader-modal'
 
@@ -40,7 +41,13 @@ export function GetUserSubscriptionLinksFeature(props: IProps) {
     const renderQrCode = (link: string, remark: string) => {
         modals.open({
             centered: true,
-            title: remark,
+            title: (
+                <BaseOverlayHeader
+                    IconComponent={PiQrCodeDuotone}
+                    iconVariant="gradient-teal"
+                    title={remark}
+                />
+            ),
             children: (
                 <div
                     dangerouslySetInnerHTML={{
@@ -113,7 +120,13 @@ export function GetUserSubscriptionLinksFeature(props: IProps) {
                 padding="lg"
                 position="right"
                 size="md"
-                title={t('get-user-subscription-links.feature.subscription-links')}
+                title={
+                    <BaseOverlayHeader
+                        IconComponent={PiLinkBreakDuotone}
+                        iconVariant="gradient-teal"
+                        title={t('get-user-subscription-links.feature.subscription-links')}
+                    />
+                }
             >
                 {isLoading ? (
                     <LoaderModalShared

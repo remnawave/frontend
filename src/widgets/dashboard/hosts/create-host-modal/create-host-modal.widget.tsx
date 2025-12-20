@@ -2,8 +2,9 @@ import { CreateHostCommand, SECURITY_LAYERS } from '@remnawave/backend-contract'
 import { zodResolver } from 'mantine-form-zod-resolver'
 import { notifications } from '@mantine/notifications'
 import { useTranslation } from 'react-i18next'
-import { Drawer, Text } from '@mantine/core'
+import { PiListChecks } from 'react-icons/pi'
 import { useForm } from '@mantine/form'
+import { Drawer } from '@mantine/core'
 import { useState } from 'react'
 
 import {
@@ -15,6 +16,7 @@ import {
     useGetSubscriptionTemplates
 } from '@shared/api/hooks'
 import { MODALS, useModalClose, useModalState } from '@entities/dashboard/modal-store'
+import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { BaseHostForm } from '@shared/ui/forms/hosts/base-host-form'
 import { queryClient } from '@shared/api'
 
@@ -165,7 +167,13 @@ export const CreateHostModalWidget = () => {
             padding="lg"
             position="right"
             size="lg"
-            title={<Text fw={500}>{t('create-host-modal.widget.new-host')}</Text>}
+            title={
+                <BaseOverlayHeader
+                    IconComponent={PiListChecks}
+                    iconVariant="gradient-teal"
+                    title={t('create-host-modal.widget.new-host')}
+                />
+            }
         >
             <BaseHostForm
                 advancedOpened={advancedOpened}

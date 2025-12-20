@@ -22,6 +22,7 @@ import ColorHash from 'color-hash'
 import { InternalSquadsListSimpleWidgetShared } from '@shared/ui/internal-squads/internal-squads-list-simple'
 import { MODALS, useModalClose, useModalState } from '@entities/dashboard/modal-store'
 import { useGetConfigProfileInbounds, useGetInternalSquads } from '@shared/api/hooks'
+import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 
 export const ConfigProfileInboundsDrawerWidget = () => {
     const { t } = useTranslation()
@@ -106,7 +107,14 @@ export const ConfigProfileInboundsDrawerWidget = () => {
                                                                 />
                                                             </Box>
                                                         ),
-                                                        title: inbound.tag,
+                                                        title: (
+                                                            <BaseOverlayHeader
+                                                                IconComponent={TbTag}
+                                                                iconVariant="gradient-teal"
+                                                                title={inbound.tag}
+                                                                titleOrder={5}
+                                                            />
+                                                        ),
                                                         size: 'xl'
                                                     })
                                                 }}
@@ -178,7 +186,13 @@ export const ConfigProfileInboundsDrawerWidget = () => {
             padding="lg"
             position="right"
             size="500px"
-            title={t('config-profile-inbounds.drawer.widget.inbounds-with-active-squads')}
+            title={
+                <BaseOverlayHeader
+                    IconComponent={TbCirclesRelation}
+                    iconVariant="gradient-teal"
+                    title={t('config-profile-inbounds.drawer.widget.inbounds-with-active-squads')}
+                />
+            }
         >
             {(isLoading || isLoadingInternalSquads) && returnLoading()}
             {!isLoading && !isLoadingInternalSquads && configProfileInbounds && renderInbounds()}

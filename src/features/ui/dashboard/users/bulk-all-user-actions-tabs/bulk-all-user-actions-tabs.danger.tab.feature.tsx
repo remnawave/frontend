@@ -3,6 +3,8 @@ import { PiTrash, PiWarning } from 'react-icons/pi'
 import { useTranslation } from 'react-i18next'
 import { modals } from '@mantine/modals'
 
+import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
+
 import { DeleteAllUsersByStatusFeature } from '../delete-all-users-by-status/delete-all-users-by-status.feature'
 import { IProps } from './interfaces'
 
@@ -48,7 +50,13 @@ export const BulkAllUserActionsDangerTabFeature = (props: IProps) => {
                         color="red.6"
                         onClick={() => {
                             modals.open({
-                                title: t('common.confirm-action'),
+                                title: (
+                                    <BaseOverlayHeader
+                                        IconComponent={PiTrash}
+                                        iconVariant="gradient-red"
+                                        title={t('common.confirm-action')}
+                                    />
+                                ),
                                 centered: true,
                                 children: (
                                     <DeleteAllUsersByStatusFeature cleanUpDrawer={cleanUpDrawer} />

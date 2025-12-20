@@ -9,7 +9,6 @@ import {
     SimpleGrid,
     Stack,
     Text,
-    Title,
     Tree,
     TreeNodeData
 } from '@mantine/core'
@@ -22,6 +21,7 @@ import { PiTag } from 'react-icons/pi'
 import ColorHash from 'color-hash'
 
 import { MODALS, useModalClose, useModalState } from '@entities/dashboard/modal-store'
+import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { useGetInternalSquadAccessibleNodes } from '@shared/api/hooks'
 import { XrayLogo } from '@shared/ui/logos'
 
@@ -305,14 +305,13 @@ export const InternalSquadAccessibleNodesModalWidget = () => {
             position="right"
             size="800px"
             title={
-                <Group align="center" gap="sm">
-                    <IconServer color="var(--mantine-color-blue-6)" size={24} />
-                    <Title order={3}>
-                        {t(
-                            'internal-squad-accessible-nodes.modal.widget.internal-squad-accessible-nodes'
-                        )}
-                    </Title>
-                </Group>
+                <BaseOverlayHeader
+                    IconComponent={IconServer}
+                    iconVariant="gradient-teal"
+                    title={t(
+                        'internal-squad-accessible-nodes.modal.widget.internal-squad-accessible-nodes'
+                    )}
+                />
             }
         >
             {isLoading && returnLoading()}

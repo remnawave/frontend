@@ -8,8 +8,7 @@ import {
     HoverCard,
     Stack,
     Text,
-    TextInput,
-    ThemeIcon
+    TextInput
 } from '@mantine/core'
 import {
     GetRemnawaveSettingsCommand,
@@ -23,6 +22,7 @@ import { modals } from '@mantine/modals'
 import { useForm } from '@mantine/form'
 
 import { useUpdateRemnawaveSettings } from '@shared/api/hooks/remnawave-settings/remnawave-settings.mutation.hooks'
+import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { SettingsCardShared } from '@shared/ui/settings-card'
 import { QueryKeys } from '@shared/api/hooks/keys-factory'
 import { handleFormErrors } from '@shared/utils/misc'
@@ -76,14 +76,11 @@ export const BrandingSettingsCardWidget = (props: IProps) => {
 
                 modals.open({
                     title: (
-                        <Group gap="sm">
-                            <ThemeIcon color="red" radius="xl" size="lg" variant="light">
-                                <TbAlertCircle size={24} />
-                            </ThemeIcon>
-                            <Text fw={600} size="lg">
-                                {t('auth-settings.error-modal.title')}
-                            </Text>
-                        </Group>
+                        <BaseOverlayHeader
+                            IconComponent={TbAlertCircle}
+                            iconVariant="gradient-red"
+                            title={t('auth-settings.error-modal.title')}
+                        />
                     ),
                     centered: true,
                     children: (

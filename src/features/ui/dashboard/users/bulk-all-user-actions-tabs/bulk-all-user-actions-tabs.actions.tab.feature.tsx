@@ -4,6 +4,7 @@ import { PiClockUser } from 'react-icons/pi'
 import { modals } from '@mantine/modals'
 
 import { useBulkAllExtendUsersExpirationDate, useBulkAllResetTrafficUsers } from '@shared/api/hooks'
+import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 
 import { IProps } from './interfaces/props.interface'
 
@@ -49,7 +50,14 @@ export const BulkAllUserActionsActionsTabFeature = (props: IProps) => {
         let userInput = 1
 
         modals.open({
-            title: t('bulk-user-actions.actions.tab.feature.extend-expiration-date'),
+            title: (
+                <BaseOverlayHeader
+                    IconComponent={PiClockUser}
+                    iconVariant="gradient-teal"
+                    title={t('bulk-user-actions.actions.tab.feature.extend-expiration-date')}
+                    titleOrder={5}
+                />
+            ),
             centered: true,
             children: (
                 <>

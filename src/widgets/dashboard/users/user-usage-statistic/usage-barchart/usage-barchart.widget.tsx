@@ -12,10 +12,12 @@ import {
 } from '@mantine/core'
 import { GetStatsUserUsageCommand } from '@remnawave/backend-contract'
 import { useTranslation } from 'react-i18next'
+import { TbChartBar } from 'react-icons/tb'
 import { Chart } from '@highcharts/react'
 import { PiEmpty } from 'react-icons/pi'
 import { modals } from '@mantine/modals'
 
+import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { prettyBytesToAnyUtil } from '@shared/utils/bytes'
 import { formatTimeUtil } from '@shared/utils/time-utils'
 import { CountryFlag } from '@shared/ui/get-country-flag'
@@ -71,12 +73,12 @@ export const UserUsageBarchartWidget = (props: IProps) => {
             centered: true,
             size: '600px',
             title: (
-                <Group align="center" justify="space-between" wrap="nowrap">
-                    <Text>{formatTimeUtil(category, 'D MMMM YYYY')}</Text>
-                    <Text c="dimmed" fz="sm">
-                        {`Σ ${prettyBytesToAnyUtil(totalDayTraffic)}`}
-                    </Text>
-                </Group>
+                <BaseOverlayHeader
+                    IconComponent={TbChartBar}
+                    iconVariant="gradient-teal"
+                    subtitle={`Σ ${prettyBytesToAnyUtil(totalDayTraffic)}`}
+                    title={formatTimeUtil(category, 'D MMMM YYYY')}
+                />
             ),
             children: (
                 <Stack>

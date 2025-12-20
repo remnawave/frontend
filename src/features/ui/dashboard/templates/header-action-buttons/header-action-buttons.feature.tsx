@@ -13,7 +13,7 @@ import {
     TSubscriptionTemplateType
 } from '@remnawave/backend-contract'
 import { generatePath, useNavigate } from 'react-router-dom'
-import { TbPlus, TbRefresh } from 'react-icons/tb'
+import { TbFolder, TbPlus, TbRefresh } from 'react-icons/tb'
 import { useDisclosure } from '@mantine/hooks'
 import { useTranslation } from 'react-i18next'
 import { useField } from '@mantine/form'
@@ -24,6 +24,7 @@ import {
     useGetSubscriptionTemplates
 } from '@shared/api/hooks'
 import { UniversalSpotlightActionIconShared } from '@shared/ui/universal-spotlight'
+import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { ROUTES } from '@shared/constants'
 import { queryClient } from '@shared/api'
 
@@ -102,7 +103,13 @@ export const TemplatesHeaderActionButtonsFeature = (props: IProps) => {
                 onClose={close}
                 opened={opened}
                 size="md"
-                title={t('header-action-buttons.feature.create-new-template')}
+                title={
+                    <BaseOverlayHeader
+                        IconComponent={TbFolder}
+                        iconVariant="gradient-teal"
+                        title={t('header-action-buttons.feature.create-new-template')}
+                    />
+                }
             >
                 <form
                     onSubmit={(e) => {

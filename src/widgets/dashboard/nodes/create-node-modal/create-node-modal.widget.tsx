@@ -1,13 +1,15 @@
-import { em, Group, Modal, Progress, Stack, Text, Transition } from '@mantine/core'
+import { em, Group, Modal, Progress, Stack, Transition } from '@mantine/core'
 import { CreateNodeCommand } from '@remnawave/backend-contract'
 import { zodResolver } from 'mantine-form-zod-resolver'
 import { useTranslation } from 'react-i18next'
 import { useMediaQuery } from '@mantine/hooks'
 import { useEffect, useState } from 'react'
 import { useForm } from '@mantine/form'
+import { TbCpu } from 'react-icons/tb'
 
 import { useNodesStoreActions, useNodesStoreCreateModalIsOpen } from '@entities/dashboard/nodes'
 import { configProfilesQueryKeys, useCreateNode, useGetPubKey } from '@shared/api/hooks'
+import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { gbToBytesUtil } from '@shared/utils/bytes'
 import { queryClient } from '@shared/api'
 
@@ -98,7 +100,13 @@ export const CreateNodeModalWidget = () => {
             onClose={handleClose}
             opened={isModalOpen}
             size="md"
-            title={<Text fw={500}>{t('create-node-modal.widget.create-node')}</Text>}
+            title={
+                <BaseOverlayHeader
+                    IconComponent={TbCpu}
+                    iconVariant="gradient-teal"
+                    title={t('create-node-modal.widget.create-node')}
+                />
+            }
             transitionProps={isMobile ? { transition: 'fade', duration: 200 } : undefined}
         >
             <Stack gap="xl">
