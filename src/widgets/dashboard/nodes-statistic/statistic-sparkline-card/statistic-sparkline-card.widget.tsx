@@ -71,7 +71,7 @@ export const NodesStatisticSparklineCardWidget = (props: IProps) => {
 
                 <Box style={{ flex: 1 }}>
                     {isLoading ? (
-                        <Skeleton height={100} />
+                        <Skeleton height={108} />
                     ) : (
                         <Sparkline
                             curveType="bump"
