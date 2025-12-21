@@ -1,8 +1,15 @@
 import {
+    IconArrowDown,
+    IconArrowUp,
+    IconCopy,
+    IconPhoto,
+    IconStar,
+    IconTrash
+} from '@tabler/icons-react'
+import {
     TSubscriptionPageAppConfig,
     TSubscriptionPageSvgLibrary
 } from '@remnawave/subscription-page-types'
-import { IconArrowDown, IconArrowUp, IconPhoto, IconStar, IconTrash } from '@tabler/icons-react'
 import { ActionIcon, Badge, Box, Card, Group, Text } from '@mantine/core'
 import isSvg from 'is-svg'
 
@@ -13,6 +20,7 @@ interface IProps {
     canMoveDown: boolean
     canMoveUp: boolean
     index: number
+    onClone: () => void
     onDelete: () => void
     onEdit: () => void
     onMoveDown: () => void
@@ -26,6 +34,7 @@ export function AppCard(props: IProps) {
         canMoveDown,
         canMoveUp,
         index,
+        onClone,
         onDelete,
         onEdit,
         onMoveDown,
@@ -86,6 +95,17 @@ export function AppCard(props: IProps) {
                         variant="subtle"
                     >
                         <IconArrowDown size={20} />
+                    </ActionIcon>
+                    <ActionIcon
+                        color="gray"
+                        onClick={(e) => {
+                            e.stopPropagation()
+                            onClone()
+                        }}
+                        size="sm"
+                        variant="subtle"
+                    >
+                        <IconCopy size={20} />
                     </ActionIcon>
                     <ActionIcon
                         className={styles.deleteButton}
