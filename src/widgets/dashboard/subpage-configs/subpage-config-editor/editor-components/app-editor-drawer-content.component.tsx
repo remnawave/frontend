@@ -158,6 +158,7 @@ export function AppEditorDrawerContent(props: IProps) {
                                     block={block}
                                     canMoveDown={blockIndex < app.blocks.length - 1}
                                     canMoveUp={blockIndex > 0}
+                                    firstLocale={enabledLocales[0]}
                                     index={blockIndex}
                                     key={blockIndex}
                                     onDelete={() => handleBlockDelete(blockIndex)}
