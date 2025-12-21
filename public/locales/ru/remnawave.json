@@ -1831,7 +1831,13 @@
     "subpage-config-editor-page": {
         "component": {
             "import-config": "Импортировать конфигурацию",
-            "download-config": "Загрузить конфигурацию"
+            "download-config": "Загрузить конфигурацию",
+            "importing-config": "Импортирование...",
+            "this-may-take-a-while": "Это может занять немного времени...",
+            "success": "Успешно",
+            "config-imported-successfully": "Конфигурация успешно импортирована",
+            "error": "Ошибка",
+            "failed-to-parse-config-file": "Ошибка парсинга файла"
         }
     },
     "base-translations-drawer": {
@@ -1854,11 +1860,25 @@
     },
     "base-settings-block": {
         "component": {
-            "base-settings": "Base Settings",
-            "meta-title": "Meta Title",
-            "meta-description": "Meta Description",
+            "base-settings": "Базовые настройки",
+            "meta-title": "Мета заголовок",
+            "meta-description": "Мета описание",
             "show-connection-keys": "Показать ключи подключения",
             "show-or-hide-raw-connection-keys": "Показать или скрыть ключи подключения"
+        }
+    },
+    "import-config-sections": {
+        "modal": {
+            "import-options-description": "Выберите, что вы хотите импортировать из файла конфигурации",
+            "replace-entire-config-with-imported-one": "Заменить весь конфиг импортированным",
+            "full-import": "Полный импорт",
+            "partial-import": "Частичный импорт",
+            "merge-svg-library": "Объединить {{0}} иконок в вашу коллекцию ({{1}} в вашей библиотеке)",
+            "import-svg-library": "Импорт библиотеки SVG",
+            "import-platforms-descriptions": "Заменяет платформы, локали, переводы и объединяет библиотеку SVG",
+            "import-platforms": "Импорт платформ",
+            "replace-base-translation-and-locales": "Заменяет базовые переводы и локали",
+            "import-base-translations": "Импорт базовых переводов"
         }
     }
 }
