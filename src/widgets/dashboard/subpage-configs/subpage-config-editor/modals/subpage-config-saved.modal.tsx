@@ -1,9 +1,12 @@
-import { Code, Stack, Text } from '@mantine/core'
+import { Stack, Text } from '@mantine/core'
 import { modals } from '@mantine/modals'
 import { TbCheck } from 'react-icons/tb'
 import { TFunction } from 'i18next'
 
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
+import { CopyableCodeBlock } from '@shared/ui/copyable-code-block'
+
+const DOCKER_COMMAND = 'docker restart remnawave-subscription-page'
 
 export const showSubpageConfigSavedModal = (t: TFunction) =>
     modals.open({
@@ -23,9 +26,7 @@ export const showSubpageConfigSavedModal = (t: TFunction) =>
                         {t('subpage-config-visual-editor.subpage-config-saved-line-1')}
                     </Text>
                     <Text>{t('subpage-config-visual-editor.subpage-config-saved-line-2')}</Text>
-                    <Code block mt={4}>
-                        docker restart remnawave-subscription-page
-                    </Code>
+                    <CopyableCodeBlock value={DOCKER_COMMAND} />
                 </Stack>
             </Stack>
         )
