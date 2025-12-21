@@ -1,4 +1,15 @@
 import {
+    TbArrowBack,
+    TbCheck,
+    TbCloudDownload,
+    TbDeviceFloppy,
+    TbDownload,
+    TbFile,
+    TbFileImport,
+    TbPalette,
+    TbUpload
+} from 'react-icons/tb'
+import {
     ActionIcon,
     Button,
     CopyButton,
@@ -10,15 +21,6 @@ import {
     Tooltip
 } from '@mantine/core'
 import {
-    TbArrowBack,
-    TbCloudDownload,
-    TbDeviceFloppy,
-    TbDownload,
-    TbFile,
-    TbPalette,
-    TbUpload
-} from 'react-icons/tb'
-import {
     SubscriptionPageRawConfigSchema,
     TSubscriptionPageRawConfig
 } from '@remnawave/subscription-page-types'
@@ -28,7 +30,9 @@ import { notifications } from '@mantine/notifications'
 import { PiCheck, PiCopy } from 'react-icons/pi'
 import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
+import { modals } from '@mantine/modals'
 import { useForm } from '@mantine/form'
+import { useRef } from 'react'
 
 import {
     BaseSettingsBlockComponent,
@@ -40,14 +44,18 @@ import {
     UiConfigBlockComponent
 } from '@widgets/dashboard/subpage-configs/subpage-config-editor/editor-base'
 import {
+    ImportConfigSectionsModalContent,
+    ImportMode,
     showSubpageConfigSavedModal,
     showValidationErrorsModal
 } from '@widgets/dashboard/subpage-configs/subpage-config-editor/modals'
 import { useDownloadTemplate } from '@shared/ui/load-templates/use-download-template'
 import { QueryKeys, useUpdateSubscriptionPageConfig } from '@shared/api/hooks'
+import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { queryClient } from '@shared/api/query-client'
 import { Page, PageHeaderShared } from '@shared/ui'
 import { ROUTES } from '@shared/constants'
+import { sleep } from '@shared/utils/misc'
 
 import styles from './subpage-config-editor-page.module.css'
 
@@ -60,6 +68,7 @@ export const SubpageConfigEditorPageComponent = (props: Props) => {
     const { t } = useTranslation()
     const navigate = useNavigate()
 
+    const resetRef = useRef<() => void>(null)
     const form = useForm<TSubscriptionPageRawConfig>({
         mode: 'uncontrolled',
         initialValues: config.config as TSubscriptionPageRawConfig,
@@ -111,40 +120,120 @@ export const SubpageConfigEditorPageComponent = (props: Props) => {
         })
     }
 
-    const handleImportConfig = (file: File | null) => {
-        if (!file) return
+    const mergeSvgLibrary = (
+        current: Record<string, string>,
+        imported: Record<string, string>
+    ): Record<string, string> => {
+        return { ...current, ...imported }
+    }
 
-        const reader = new FileReader()
-        reader.onload = (e) => {
-            try {
-                const configData = JSON.parse(e.target?.result as string)
-                const validatedConfig = SubscriptionPageRawConfigSchema.safeParse(configData)
+    const handleImportByMode = async (
+        importedConfig: TSubscriptionPageRawConfig,
+        mode: ImportMode
+    ) => {
+        notifications.show({
+            id: 'import-config',
+            loading: true,
+            color: 'cyan',
+            title: t('subpage-config-editor-page.component.importing-config'),
+            message: t('subpage-config-editor-page.component.this-may-take-a-while'),
+            autoClose: false,
+            withCloseButton: false
+        })
 
-                if (!validatedConfig.success) {
-                    const errors = validatedConfig.error.errors.map((err) => ({
-                        path: err.path.join('.'),
-                        message: err.message
-                    }))
-                    showValidationErrorsModal(errors)
-                    return
-                }
+        const currentSvgLibrary = form.getValues().svgLibrary || {}
 
-                form.setValues(validatedConfig.data)
-                notifications.show({
-                    title: 'Success',
-                    message: 'Config imported successfully',
-                    color: 'teal'
+        switch (mode) {
+            case 'baseTranslations': {
+                form.setValues({
+                    baseTranslations: importedConfig.baseTranslations,
+                    locales: importedConfig.locales
                 })
-            } catch {
-                notifications.show({
-                    title: 'Error',
-                    message: 'Failed to parse config file',
-                    color: 'red'
-                })
+                break
             }
+            case 'full': {
+                form.setValues(importedConfig)
+                break
+            }
+            case 'platforms': {
+                form.setValues({
+                    platforms: importedConfig.platforms,
+                    locales: importedConfig.locales,
+                    baseTranslations: importedConfig.baseTranslations,
+                    svgLibrary: mergeSvgLibrary(currentSvgLibrary, importedConfig.svgLibrary || {})
+                })
+                break
+            }
+            case 'svgLibrary': {
+                form.setValues({
+                    svgLibrary: mergeSvgLibrary(currentSvgLibrary, importedConfig.svgLibrary || {})
+                })
+
+                break
+            }
+            default:
+                break
         }
 
-        reader.readAsText(file)
+        notifications.update({
+            id: 'import-config',
+            loading: false,
+            title: t('subpage-config-editor-page.component.success'),
+            message: t('subpage-config-editor-page.component.config-imported-successfully'),
+            icon: <TbCheck size={18} />,
+            autoClose: 3000,
+            color: 'teal'
+        })
+    }
+
+    const handleImportConfig = async (file: File | null) => {
+        if (!file) return
+
+        try {
+            const content = await file.text()
+            const configData = JSON.parse(content)
+            const validatedConfig = SubscriptionPageRawConfigSchema.safeParse(configData)
+
+            if (!validatedConfig.success) {
+                const errors = validatedConfig.error.errors.map((err) => ({
+                    path: err.path.join('.'),
+                    message: err.message
+                }))
+                showValidationErrorsModal(errors)
+                return
+            }
+
+            await sleep(100)
+
+            modals.open({
+                title: (
+                    <BaseOverlayHeader
+                        IconComponent={TbFileImport}
+                        iconSize={20}
+                        iconVariant="gradient-cyan"
+                        title={t('subpage-config-editor-page.component.import-config')}
+                        titleOrder={5}
+                    />
+                ),
+                children: (
+                    <ImportConfigSectionsModalContent
+                        currentConfig={form.getValues()}
+                        importedConfig={validatedConfig.data}
+                        onImport={(mode) => handleImportByMode(validatedConfig.data, mode)}
+                    />
+                ),
+                centered: true,
+                size: 'lg'
+            })
+        } catch {
+            notifications.show({
+                title: t('subpage-config-editor-page.component.error'),
+                message: t('subpage-config-editor-page.component.failed-to-parse-config-file'),
+                color: 'red'
+            })
+        } finally {
+            resetRef.current?.()
+        }
     }
 
     const { openDownloadModal } = useDownloadTemplate({
@@ -165,7 +254,11 @@ export const SubpageConfigEditorPageComponent = (props: Props) => {
                             screen="EDITOR_TEMPLATES_XRAY_JSON"
                         /> */}
 
-                        <FileButton accept="application/json,.json" onChange={handleImportConfig}>
+                        <FileButton
+                            accept="application/json,.json"
+                            onChange={handleImportConfig}
+                            resetRef={resetRef}
+                        >
                             {(props) => (
                                 <Tooltip
                                     label={t('subpage-config-editor-page.component.import-config')}

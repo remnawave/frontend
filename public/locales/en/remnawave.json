@@ -1831,7 +1831,13 @@
     "subpage-config-editor-page": {
         "component": {
             "import-config": "Import config",
-            "download-config": "Download config"
+            "download-config": "Download config",
+            "importing-config": "Importing config",
+            "this-may-take-a-while": "This may take a while...",
+            "success": "Success",
+            "config-imported-successfully": "Config imported successfully",
+            "error": "Error",
+            "failed-to-parse-config-file": "Failed to parse config file"
         }
     },
     "base-translations-drawer": {
@@ -1859,6 +1865,20 @@
             "meta-description": "Meta Description",
             "show-connection-keys": "Show Connection Keys",
             "show-or-hide-raw-connection-keys": "Show or hide raw connection keys"
+        }
+    },
+    "import-config-sections": {
+        "modal": {
+            "import-options-description": "Choose what you want to import from the config file",
+            "replace-entire-config-with-imported-one": "Replace entire config with imported one",
+            "full-import": "Full Import",
+            "partial-import": "Partial import",
+            "merge-svg-library": "Merge {{0}} icons into your collection ({{1}} existing)",
+            "import-svg-library": "Import SVG Library",
+            "import-platforms-descriptions": "Replaces platforms, locales, translations + merges SVG library",
+            "import-platforms": "Import Platforms",
+            "replace-base-translation-and-locales": "Replace Base Translation and Locales",
+            "import-base-translations": "Import Base Translations"
         }
     }
 }
