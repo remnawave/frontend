@@ -60,6 +60,15 @@ export function PlatformEditor(props: IProps) {
         }
     }
 
+    const handleAppClone = (appIndex: number) => {
+        const appToClone = platform.apps[appIndex]
+        const clonedApp: TSubscriptionPageAppConfig = structuredClone(appToClone)
+        clonedApp.name = `${clonedApp.name} (copy)`
+        const newApps = [...platform.apps]
+        newApps.splice(appIndex + 1, 0, clonedApp)
+        onChange({ ...platform, apps: newApps })
+    }
+
     const handleAppMoveUp = (appIndex: number) => {
         if (appIndex === 0) return
         const newApps = [...platform.apps]
@@ -142,6 +151,7 @@ export function PlatformEditor(props: IProps) {
                                     canMoveUp={appIndex > 0}
                                     index={appIndex}
                                     key={appIndex}
+                                    onClone={() => handleAppClone(appIndex)}
                                     onDelete={() => handleAppDelete(appIndex)}
                                     onEdit={() => handleEditApp(appIndex)}
                                     onMoveDown={() => handleAppMoveDown(appIndex)}

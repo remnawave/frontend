@@ -304,7 +304,7 @@
             "3-months": "+3 个月",
             "1-year": "+1 年",
             "2099-year": "2099年",
-            "hwid-user-limit-line-1": "此功能仅在",
+            "hwid-user-limit-line-1": "此功能仅在此功能开启时有效",
             "hwid-user-limit-line-2": "订阅设置为",
             "hwid-user-limit-line-3": "了解更多。",
             "disable-hwid-limit": "禁用 HWID 限制",
@@ -1831,7 +1831,13 @@
     "subpage-config-editor-page": {
         "component": {
             "import-config": "导入配置",
-            "download-config": "下载配置"
+            "download-config": "下载配置",
+            "importing-config": "导入配置",
+            "this-may-take-a-while": "这可能需要一点时间。",
+            "success": "成功",
+            "config-imported-successfully": "配置导入成功",
+            "error": "错误",
+            "failed-to-parse-config-file": "解析配置文件失败"
         }
     },
     "base-translations-drawer": {
@@ -1854,11 +1860,25 @@
     },
     "base-settings-block": {
         "component": {
-            "base-settings": "Base Settings",
-            "meta-title": "Meta Title",
-            "meta-description": "Meta Description",
-            "show-connection-keys": "Show Connection Keys",
-            "show-or-hide-raw-connection-keys": "Show or hide raw connection keys"
+            "base-settings": "基础设置",
+            "meta-title": "Meta标题",
+            "meta-description": "Meta 描述",
+            "show-connection-keys": "显示连接密钥",
+            "show-or-hide-raw-connection-keys": "是否显示原始连接密钥"
+        }
+    },
+    "import-config-sections": {
+        "modal": {
+            "import-options-description": "选择您想要从配置文件导入的内容",
+            "replace-entire-config-with-imported-one": "用导入的配置替换整个配置",
+            "full-import": "全部导入",
+            "partial-import": "部分导入",
+            "merge-svg-library": "将 {{0}} 图标合并到您的收藏中 ({{1}} 存在)",
+            "import-svg-library": "导入 SVG 库",
+            "import-platforms-descriptions": "替换平台、本地、翻译 + 合并SVG 库",
+            "import-platforms": "导入平台",
+            "replace-base-translation-and-locales": "替换基础翻译和语言",
+            "import-base-translations": "导入基础翻译"
         }
     }
 }

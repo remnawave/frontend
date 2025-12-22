@@ -99,6 +99,7 @@ export function LocalizedTextEditor(props: IProps) {
                         <InputComponent
                             autosize={!!multiline}
                             classNames={{ input: styles.inputDark }}
+                            data-autofocus={index === 0}
                             description={index === 0 ? 'Primary language' : undefined}
                             key={locale}
                             label={getLanguageName(locale)}

@@ -1,4 +1,7 @@
-import { TSubscriptionPageBlockConfig } from '@remnawave/subscription-page-types'
+import {
+    TSubscriptionPageBlockConfig,
+    TSubscriptionPageLanguageCode
+} from '@remnawave/subscription-page-types'
 import { IconArrowDown, IconArrowUp, IconTrash } from '@tabler/icons-react'
 import { ActionIcon, Badge, Card, Group, Text } from '@mantine/core'
 
@@ -8,6 +11,7 @@ interface IProps {
     block: TSubscriptionPageBlockConfig
     canMoveDown: boolean
     canMoveUp: boolean
+    firstLocale: TSubscriptionPageLanguageCode
     index: number
     onDelete: () => void
     onEdit: () => void
@@ -16,13 +20,25 @@ interface IProps {
 }
 
 export function BlockCard(props: IProps) {
-    const { block, canMoveDown, canMoveUp, index, onDelete, onEdit, onMoveDown, onMoveUp } = props
+    const {
+        block,
+        canMoveDown,
+        canMoveUp,
+        firstLocale,
+        index,
+        onDelete,
+        onEdit,
+        onMoveDown,
+        onMoveUp
+    } = props
+
+    const blockTitle = block.title[firstLocale] || `Block ${index + 1}`
 
     return (
         <Card className={styles.interactiveCard} onClick={onEdit} p="sm" radius="md">
             <Group justify="space-between" wrap="nowrap">
                 <Text c="white" fw={500} size="sm" style={{ flex: 1 }} truncate="end">
-                    {block.title.en || `Block ${index + 1}`}
+                    {blockTitle}
                 </Text>
 
                 <Group gap={4} wrap="nowrap">

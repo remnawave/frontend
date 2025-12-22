@@ -1,3 +1,4 @@
+import { SUBPAGE_DEFAULT_CONFIG_UUID } from '@remnawave/subscription-page-types'
 import { GetSubscriptionPageConfigsCommand } from '@remnawave/backend-contract'
 import { PiCheck, PiCopy, PiPencil, PiTrashDuotone } from 'react-icons/pi'
 import { TbCopyCheck, TbEdit, TbFile } from 'react-icons/tb'
@@ -37,7 +38,7 @@ export function SubpageConfigCardWidget(props: IProps) {
         )
     }
 
-    const isDefault = subpageConfig.name === 'Default'
+    const isDefault = subpageConfig.uuid === SUBPAGE_DEFAULT_CONFIG_UUID
 
     return (
         <WithDndSortable
@@ -81,7 +82,6 @@ export function SubpageConfigCardWidget(props: IProps) {
                         </CopyButton>
 
                         <Menu.Item
-                            disabled={subpageConfig.name === 'Default'}
                             leftSection={<PiPencil size={18} />}
                             onClick={() => {
                                 openModalWithData(MODALS.RENAME_SQUAD_OR_CONFIG_PROFILE_MODAL, {
@@ -102,7 +102,7 @@ export function SubpageConfigCardWidget(props: IProps) {
 
                         <Menu.Item
                             color="red"
-                            disabled={subpageConfig.name === 'Default'}
+                            disabled={isDefault}
                             leftSection={<PiTrashDuotone size={18} />}
                             onClick={(e) => {
                                 e.stopPropagation()

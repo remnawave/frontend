@@ -9,13 +9,14 @@ import classes from './page-header.module.css'
 
 export interface PageHeaderSharedProps extends Omit<CardProps, 'c' | 'fw' | 'size' | 'tt'> {
     actions?: ReactNode
+    customThemeIcon?: ReactNode
     description?: string
-    icon: ReactNode
+    icon?: ReactNode
     title: ReactNode
 }
 
 export const PageHeaderShared = forwardRef<HTMLDivElement, PageHeaderSharedProps>(
-    ({ icon, title, description, actions, withBorder = true, ...props }, ref) => {
+    ({ icon, title, description, actions, customThemeIcon, withBorder = true, ...props }, ref) => {
         const { copy } = useClipboard()
         const { t } = useTranslation()
 
@@ -57,14 +58,16 @@ export const PageHeaderShared = forwardRef<HTMLDivElement, PageHeaderSharedProps
                                         ease: [0, 0.71, 0.2, 1.01]
                                     }}
                                 >
-                                    <ActionIcon
-                                        className={classes.actionIcon}
-                                        color="cyan"
-                                        size="input-md"
-                                        variant="light"
-                                    >
-                                        {icon}
-                                    </ActionIcon>
+                                    {customThemeIcon || (
+                                        <ActionIcon
+                                            className={classes.actionIcon}
+                                            color="cyan"
+                                            size="input-md"
+                                            variant="light"
+                                        >
+                                            {icon}
+                                        </ActionIcon>
+                                    )}
                                 </motion.div>
 
                                 <Stack gap={0}>
