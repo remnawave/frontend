@@ -122,6 +122,7 @@ export const NodeUsersUsageDrawer = () => {
                     />
 
                     <DatePickerInput
+                        allowSingleDateInRange
                         dropdownType="modal"
                         headerControlsOrder={['previous', 'next', 'level']}
                         leftSection={<TbCalendar size="20px" />}

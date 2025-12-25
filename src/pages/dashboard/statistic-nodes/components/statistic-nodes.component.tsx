@@ -97,6 +97,7 @@ export const StatisticNodesPage = () => {
                             w={150}
                         />
                         <DatePickerInput
+                            allowSingleDateInRange
                             dropdownType="modal"
                             headerControlsOrder={['previous', 'next', 'level']}
                             leftSection={<TbCalendar size="24px" />}

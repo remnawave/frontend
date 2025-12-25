@@ -121,6 +121,7 @@ export const UserUsageModalWidget = (props: IProps) => {
                         w={150}
                     />
                     <DatePickerInput
+                        allowSingleDateInRange
                         dropdownType="modal"
                         headerControlsOrder={['previous', 'next', 'level']}
                         leftSection={<TbCalendar size="20px" />}
