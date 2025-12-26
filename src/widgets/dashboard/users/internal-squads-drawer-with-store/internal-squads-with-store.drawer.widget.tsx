@@ -1,4 +1,3 @@
-/* eslint-disable @stylistic/indent */
 import {
     Accordion,
     ActionIcon,
@@ -17,7 +16,7 @@ import {
     Tooltip
 } from '@mantine/core'
 import { PiCheck, PiCopy, PiList, PiTag, PiTreeView, PiUsers } from 'react-icons/pi'
-import { TbCirclesRelation, TbDeviceFloppy, TbSearch, TbX } from 'react-icons/tb'
+import { TbCirclesRelation, TbDeviceFloppy, TbSearch } from 'react-icons/tb'
 import { GetConfigProfilesCommand } from '@remnawave/backend-contract'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -147,10 +146,6 @@ export const InternalSquadsDrawerWithStore = () => {
         []
     )
 
-    const clearSelection = useCallback(() => {
-        setSelectedInbounds(new Set())
-    }, [])
-
     const handleSelectAllInbounds = useCallback(
         (profileUuid: string) => {
             const profileInbounds = filteredProfiles
@@ -226,7 +221,14 @@ export const InternalSquadsDrawerWithStore = () => {
         if (!internalSquad) return null
 
         return (
-            <Stack gap="md" h="100%">
+            <Stack
+                gap="md"
+                style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    height: '100%'
+                }}
+            >
                 <Paper
                     p="md"
                     shadow="sm"
@@ -316,55 +318,6 @@ export const InternalSquadsDrawerWithStore = () => {
                             </Stack>
                         </Group>
 
-                        <Box
-                            bg="dark.6"
-                            p="md"
-                            style={{
-                                borderRadius: 'var(--mantine-radius-md)',
-                                border: '1px solid var(--mantine-color-dark-4)'
-                            }}
-                        >
-                            <Group align="center" justify="space-between">
-                                <Box flex={1}>
-                                    <Group align="center" justify="space-between">
-                                        <Box>
-                                            <Text c="white" fw={600} size="sm">
-                                                {selectedInbounds.size === 0
-                                                    ? t(
-                                                          'internal-squads.drawer.widget.no-inbounds-selected'
-                                                      )
-                                                    : t(
-                                                          'internal-squads.drawer.widget.selected-inbounds',
-                                                          {
-                                                              count: selectedInbounds.size
-                                                          }
-                                                      )}
-                                            </Text>
-                                            <Text c="dimmed" mt={2} size="xs">
-                                                {selectedInbounds.size > 0
-                                                    ? t(
-                                                          'internal-squads.drawer.widget.selected-from-multiple-profiles'
-                                                      )
-                                                    : t(
-                                                          'internal-squads.drawer.widget.choose-inbounds-from-any-profiles'
-                                                      )}
-                                            </Text>
-                                        </Box>
-                                        {selectedInbounds.size > 0 && (
-                                            <ActionIcon
-                                                color="red"
-                                                onClick={clearSelection}
-                                                size="lg"
-                                                variant="light"
-                                            >
-                                                <TbX size={24} />
-                                            </ActionIcon>
-                                        )}
-                                    </Group>
-                                </Box>
-                            </Group>
-                        </Box>
-
                         <Button
                             color="teal"
                             disabled={selectedInbounds.size === 0}
@@ -391,71 +344,80 @@ export const InternalSquadsDrawerWithStore = () => {
                 />
 
                 <Tabs
+                    classNames={{
+                        root: classes.tabsContainer,
+                        tab: classes.tab,
+                        tabLabel: classes.tabLabel
+                    }}
                     onChange={(value) => value && setActiveTab(value)}
                     value={activeTab}
-                    variant="outline"
+                    variant="unstyled"
                 >
                     <Tabs.List grow>
-                        <Tabs.Tab leftSection={<PiTreeView size={16} />} value="profiles">
+                        <Tabs.Tab leftSection={<PiTreeView size={18} />} value="profiles">
                             {t('internal-squads.drawer.widget.config-profiles')}
                         </Tabs.Tab>
-                        <Tabs.Tab leftSection={<PiList size={16} />} value="flat">
+                        <Tabs.Tab leftSection={<PiList size={18} />} value="flat">
                             {t('internal-squads.drawer.widget.flat-list')}
                         </Tabs.Tab>
                     </Tabs.List>
 
-                    <Tabs.Panel pt="sm" value="profiles">
+                    <Tabs.Panel className={classes.tabPanel} pt="sm" value="profiles">
                         {filteredProfiles.length === 0 ? (
                             <Text c="dimmed" py="xl" size="sm" ta="center">
-                                {debouncedSearchQuery
-                                    ? t(
-                                          'internal-squads.drawer.widget.no-profiles-or-inbounds-found'
-                                      )
-                                    : t(
-                                          'internal-squads.drawer.widget.no-config-profiles-available'
-                                      )}
+                                {t('internal-squads.drawer.widget.no-profiles-or-inbounds-found')}
                             </Text>
                         ) : (
-                            <Accordion
-                                chevronPosition="left"
-                                multiple={true}
-                                onChange={(value) => {
-                                    setOpenAccordions(new Set(value))
-                                }}
-                                value={Array.from(openAccordions)}
-                                variant="separated"
-                            >
+                            <Box className={classes.listContainer}>
                                 <Virtuoso
                                     data={filteredProfiles}
                                     itemContent={(_index, profile) => {
                                         const isOpen = openAccordions.has(profile.uuid)
                                         return (
-                                            <div
-                                                className={classes.itemWrapper}
-                                                style={{ marginBottom: '8px' }}
-                                            >
-                                                <ConfigProfileCardShared
-                                                    isOpen={isOpen}
-                                                    onInboundToggle={handleInboundToggle}
-                                                    onSelectAllInbounds={handleSelectAllInbounds}
-                                                    onUnselectAllInbounds={
-                                                        handleUnselectAllInbounds
-                                                    }
-                                                    profile={profile}
-                                                    selectedInbounds={selectedInbounds}
-                                                />
+                                            <div className={classes.itemWrapper}>
+                                                <Accordion
+                                                    chevronPosition="left"
+                                                    onChange={(value) => {
+                                                        setOpenAccordions((prev) => {
+                                                            const next = new Set(prev)
+                                                            if (value === profile.uuid) {
+                                                                next.add(profile.uuid)
+                                                            } else {
+                                                                next.delete(profile.uuid)
+                                                            }
+                                                            return next
+                                                        })
+                                                    }}
+                                                    value={isOpen ? profile.uuid : null}
+                                                    variant="separated"
+                                                >
+                                                    <ConfigProfileCardShared
+                                                        isOpen={isOpen}
+                                                        onInboundToggle={handleInboundToggle}
+                                                        onSelectAllInbounds={
+                                                            handleSelectAllInbounds
+                                                        }
+                                                        onUnselectAllInbounds={
+                                                            handleUnselectAllInbounds
+                                                        }
+                                                        profile={profile}
+                                                        selectedInbounds={selectedInbounds}
+                                                    />
+                                                </Accordion>
                                             </div>
                                         )
                                     }}
-                                    style={{ height: '500px' }}
+                                    style={{
+                                        height: '100%'
+                                    }}
                                     useWindowScroll={false}
                                 />
-                            </Accordion>
+                            </Box>
                         )}
                     </Tabs.Panel>
 
-                    <Tabs.Panel pt="sm" value="flat">
-                        <Stack flex={1} gap="sm">
+                    <Tabs.Panel className={classes.tabPanel} pt="sm" value="flat">
+                        <Stack className={classes.tabPanel} gap="sm">
                             <SegmentedControl
                                 data={[
                                     { label: t('internal-squads.drawer.widget.all'), value: 'all' },
@@ -475,7 +437,7 @@ export const InternalSquadsDrawerWithStore = () => {
                                 value={filterType}
                             />
 
-                            <Box flex={1}>
+                            <Box className={classes.listContainer}>
                                 {activeTab === 'flat' ? (
                                     <VirtualizedFlatInboundsListShared
                                         allInbounds={filteredAllInbounds}
@@ -501,7 +463,14 @@ export const InternalSquadsDrawerWithStore = () => {
             opened={isOpen}
             padding="md"
             position="right"
-            size="480px"
+            size="500px"
+            styles={{
+                body: {
+                    height: 'calc(100% - 60px)',
+                    display: 'flex',
+                    flexDirection: 'column'
+                }
+            }}
             title={
                 <BaseOverlayHeader
                     IconComponent={TbCirclesRelation}

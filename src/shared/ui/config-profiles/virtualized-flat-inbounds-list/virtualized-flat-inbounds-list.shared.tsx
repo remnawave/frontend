@@ -54,7 +54,7 @@ export const VirtualizedFlatInboundsListShared = memo((props: IProps) => {
         <Box
             ref={parentRef}
             style={{
-                height: '500px',
+                height: '100%',
                 overflow: 'auto',
                 border: '1px solid var(--mantine-color-gray-7)',
                 borderRadius: '8px',
