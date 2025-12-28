@@ -44,13 +44,13 @@ export const UserSubscriptionRequestItem = (props: IProps) => {
 
                         {request.requestIp && (
                             <ActionIcon
-                                color="indigo"
+                                color="cyan"
                                 component="a"
                                 href={`https://ipinfo.io/${request.requestIp}`}
                                 rel="noopener noreferrer"
-                                size="lg"
+                                size="input-sm"
                                 target="_blank"
-                                variant="light"
+                                variant="gradient-teal"
                             >
                                 <TbExternalLink size={18} />
                             </ActionIcon>
