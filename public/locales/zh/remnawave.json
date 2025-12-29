@@ -343,8 +343,8 @@
             "information": "信息",
             "detailed-info": "详细信息",
             "subscription": "订阅",
-            "accessible-nodes": "Accessible Nodes",
-            "qr-code": "QR Code"
+            "accessible-nodes": "可访问节点",
+            "qr-code": "二维码"
         }
     },
     "empty-page": {
@@ -732,7 +732,7 @@
             "subscription-links": "订阅链接",
             "loading-subscription-links": "正在加载订阅链接...",
             "no-available-hosts-found-for-this-user": "未找到此用户的可用主机",
-            "connection-keys": "Connection Keys"
+            "connection-keys": "连接密钥"
         }
     },
     "user-usage-modal": {
@@ -763,7 +763,7 @@
     "get-user-usage": {
         "feature": {
             "show-usage": "显示用量",
-            "usage": "Usage"
+            "usage": "使用情况"
         }
     },
     "detailed-user-info-drawer": {
@@ -881,7 +881,7 @@
             "delete-device": "删除设备",
             "device": "设备",
             "devices": "设备",
-            "hwid-devices": "HWID Devices",
+            "hwid-devices": "HWID 设备列表",
             "important-note": "重要提示",
             "important-note-line-1": "此功能仅在",
             "important-note-line-2": ".env 值存在时可用。",
@@ -1887,11 +1887,11 @@
     },
     "revoke-subscription-user": {
         "feature": {
-            "full-revoke": "Full Revoke",
-            "revoke": "Revoke",
-            "passwords-only": "Passwords Only",
-            "passwords-only-decription": "Only regenerates Connection Passwords, Subscription URL stays the same",
-            "full-revoke-description": "Regenerates Subscription URL and Connection Passwords"
+            "full-revoke": "完全撤销",
+            "revoke": "撤销",
+            "passwords-only": "仅密码",
+            "passwords-only-decription": "只重新生成连接密码，订阅URL保持相同",
+            "full-revoke-description": "重新生成订阅的 URL 和连接密码"
         }
     }
 }
