@@ -63,5 +63,15 @@ export const variantColorResolver: VariantColorsResolver = (input) => {
         }
     }
 
+    if (input.variant === 'gradient-gray') {
+        return {
+            background:
+                'linear-gradient(135deg, rgba(128, 128, 128, 0.15) 0%, rgba(160, 160, 160, 0.1) 100%)',
+            border: '1px solid rgba(128, 128, 128, 0.3)',
+            color: 'var(--mantine-color-gray-6)',
+            hover: 'linear-gradient(135deg, rgba(128, 128, 128, 0.25) 0%, rgba(160, 160, 160, 0.2) 100%)'
+        }
+    }
+
     return defaultResolvedColors
 }

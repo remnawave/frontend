@@ -19,7 +19,6 @@ import { NodeTrackingAndBillingCard } from './node-tracking-and-billing.card'
 import { NodeConfigProfilesCard } from './node-config-profiles.card'
 import { NodeConsumptionCard } from './node-consumption.card'
 import { NodeVitalsCard } from './node-vitals.card'
-import { NodeStatsCard } from './node-stats.card'
 import { IProps } from './interfaces'
 
 const MotionWrapper = motion.div
@@ -75,15 +74,6 @@ export const BaseNodeForm = <T extends CreateNodeCommand.Request | UpdateNodeCom
 
                     {nodeDetailsCard && (
                         <MotionWrapper variants={cardVariants}>{nodeDetailsCard}</MotionWrapper>
-                    )}
-
-                    {node && (
-                        <NodeStatsCard
-                            cardVariants={cardVariants}
-                            form={form}
-                            motionWrapper={MotionWrapper}
-                            node={node}
-                        />
                     )}
 
                     <NodeVitalsCard
@@ -156,15 +146,6 @@ export const BaseNodeForm = <T extends CreateNodeCommand.Request | UpdateNodeCom
                             form={form}
                             motionWrapper={MotionWrapper}
                         />
-
-                        {(fetchedNode || node) && (
-                            <NodeStatsCard
-                                cardVariants={cardVariants}
-                                form={form}
-                                motionWrapper={MotionWrapper}
-                                node={fetchedNode || node!}
-                            />
-                        )}
 
                         <NodeTrackingAndBillingCard
                             advancedOpened={advancedOpened}
