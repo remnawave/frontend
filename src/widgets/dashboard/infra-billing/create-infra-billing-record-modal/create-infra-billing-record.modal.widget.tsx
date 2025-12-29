@@ -20,7 +20,7 @@ export function CreateInfraBillingRecordDrawerWidget() {
     const isOpen = useModalIsOpen(MODALS.CREATE_INFRA_BILLING_RECORD_DRAWER)
     const close = useModalClose(MODALS.CREATE_INFRA_BILLING_RECORD_DRAWER)
 
-    const { t } = useTranslation()
+    const { t, i18n } = useTranslation()
 
     const form = useForm<CreateInfraBillingHistoryRecordCommand.Request>({
         name: 'create-infra-billing-record-form',
@@ -131,6 +131,7 @@ export function CreateInfraBillingRecordDrawerWidget() {
                         key={form.key('billedAt')}
                         label={t('create-infra-billing-record.modal.widget.billed-at')}
                         leftSection={<HiCalendar size="16px" />}
+                        locale={i18n.language}
                         maxDate={dayjs().add(1, 'day').toDate()}
                         required
                         valueFormat="D MMMM, YYYY"

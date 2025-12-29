@@ -54,7 +54,7 @@ const customSchema = z.object({
 
 export const BulkUserActionsUpdateTabFeature = (props: IProps) => {
     const { cleanUpDrawer } = props
-    const { t } = useTranslation()
+    const { t, i18n } = useTranslation()
 
     const actions = useBulkUsersActionsStoreActions()
 
@@ -263,6 +263,7 @@ export const BulkUserActionsUpdateTabFeature = (props: IProps) => {
                     key={form.key('fields.expireAt')}
                     label={t('bulk-user-actions.update.tab.feature.expire-date')}
                     leftSection={<PiCalendar size="16px" />}
+                    locale={i18n.language}
                     placeholder={t('bulk-user-actions.update.tab.feature.select-expiration-date')}
                     valueFormat="MMMM D, YYYY - HH:mm"
                     {...form.getInputProps('fields.expireAt')}

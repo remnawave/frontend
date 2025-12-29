@@ -28,7 +28,7 @@ interface IProps<T extends CreateUserCommand.Request | UpdateUserCommand.Request
 export const AccessSettingsCard = <T extends CreateUserCommand.Request | UpdateUserCommand.Request>(
     props: IProps<T>
 ) => {
-    const { t } = useTranslation()
+    const { t, i18n } = useTranslation()
 
     const { cardVariants, motionWrapper, form, internalSquads, externalSquads } = props
 
@@ -75,6 +75,7 @@ export const AccessSettingsCard = <T extends CreateUserCommand.Request | UpdateU
                         highlightToday
                         key={form.key('expireAt')}
                         label={t('create-user-modal.widget.expiry-date')}
+                        locale={i18n.language}
                         minDate={new Date()}
                         modalProps={{
                             centered: true

@@ -37,7 +37,7 @@ const DEFAULT_DATE_RANGE = {
 
 export const UserUsageModalWidget = (props: IProps) => {
     const { userUuid, opened, onClose } = props
-    const { t } = useTranslation()
+    const { t, i18n } = useTranslation()
 
     const [rawRange, setRawRange] = useState<[null | string, null | string]>([
         DEFAULT_DATE_RANGE.start,
@@ -125,9 +125,17 @@ export const UserUsageModalWidget = (props: IProps) => {
                         dropdownType="modal"
                         headerControlsOrder={['previous', 'next', 'level']}
                         leftSection={<TbCalendar size="20px" />}
+                        locale={i18n.language}
                         maxDate={new Date()}
                         onChange={handleDateRangeChange}
                         presets={[
+                            {
+                                label: t('statistic-nodes.component.current-month'),
+                                value: [
+                                    dayjs().startOf('month').format('YYYY-MM-DD'),
+                                    dayjs().format('YYYY-MM-DD')
+                                ]
+                            },
                             {
                                 label: t('statistic-nodes.component.3-days'),
                                 value: [

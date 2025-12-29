@@ -36,7 +36,7 @@ export const NodeUsersUsageDrawer = () => {
         MODALS.SHOW_NODE_USERS_USAGE_DRAWER
     )
 
-    const { t } = useTranslation()
+    const { t, i18n } = useTranslation()
 
     const [topUsersLimit, setTopUsersLimit] = useState<number>(DEFAULT_TOP_USERS_LIMIT)
     const [rawRange, setRawRange] = useState<[null | string, null | string]>([
@@ -126,9 +126,17 @@ export const NodeUsersUsageDrawer = () => {
                         dropdownType="modal"
                         headerControlsOrder={['previous', 'next', 'level']}
                         leftSection={<TbCalendar size="20px" />}
+                        locale={i18n.language}
                         maxDate={new Date()}
                         onChange={handleDateRangeChange}
                         presets={[
+                            {
+                                label: t('statistic-nodes.component.current-month'),
+                                value: [
+                                    dayjs().startOf('month').format('YYYY-MM-DD'),
+                                    dayjs().format('YYYY-MM-DD')
+                                ]
+                            },
                             {
                                 label: t('statistic-nodes.component.3-days'),
                                 value: [

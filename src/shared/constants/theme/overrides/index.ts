@@ -10,9 +10,9 @@ import drawer from './drawer'
 import inputs from './inputs'
 import badge from './badge'
 import table from './table'
+import modal from './modal'
 import card from './card'
 import menu from './menu'
-import modal from './modal'
 
 export default {
     ...card,
