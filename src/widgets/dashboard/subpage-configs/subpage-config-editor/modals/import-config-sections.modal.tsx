@@ -1,64 +1,20 @@
-import {
-    Divider,
-    Group,
-    Paper,
-    Stack,
-    Text,
-    ThemeIcon,
-    ThemeIconProps,
-    UnstyledButton
-} from '@mantine/core'
-import { TbChevronRight, TbDevices, TbIcons, TbLanguage, TbReplace } from 'react-icons/tb'
 import { TSubscriptionPageRawConfig } from '@remnawave/subscription-page-types'
+import { TbDevices, TbIcons, TbLanguage, TbReplace } from 'react-icons/tb'
+import { Divider, Stack, Text } from '@mantine/core'
 import { useTranslation } from 'react-i18next'
 import { modals } from '@mantine/modals'
 
-import styles from './import-config-sections.module.css'
+import { ActionCardShared } from '@shared/ui'
 
 export type ImportMode = 'baseTranslations' | 'full' | 'platforms' | 'svgLibrary'
 
-interface ImportOptionCardProps {
-    description: string
-    icon: React.ReactNode
-    onClick: () => void
-    title: string
-    variant: ThemeIconProps['variant']
-}
-
-const ImportOptionCard = (props: ImportOptionCardProps) => {
-    const { description, icon, onClick, title, variant } = props
-
-    return (
-        <UnstyledButton onClick={onClick} w="100%">
-            <Paper className={styles.optionCard} p="md" radius="md" withBorder>
-                <Group gap="md" justify="space-between" wrap="nowrap">
-                    <Group gap="md" wrap="nowrap">
-                        <ThemeIcon radius="md" size="xl" variant={variant}>
-                            {icon}
-                        </ThemeIcon>
-                        <Stack gap={2}>
-                            <Text fw={600} size="sm">
-                                {title}
-                            </Text>
-                            <Text c="dimmed" size="xs">
-                                {description}
-                            </Text>
-                        </Stack>
-                    </Group>
-                    <TbChevronRight color="var(--mantine-color-dimmed)" size={20} />
-                </Group>
-            </Paper>
-        </UnstyledButton>
-    )
-}
-
-interface ImportConfigSectionsModalProps {
+interface IProps {
     currentConfig: TSubscriptionPageRawConfig
     importedConfig: TSubscriptionPageRawConfig
     onImport: (mode: ImportMode) => void
 }
 
-export const ImportConfigSectionsModalContent = (props: ImportConfigSectionsModalProps) => {
+export const ImportConfigSectionsModalContent = (props: IProps) => {
     const { currentConfig, importedConfig, onImport } = props
     const { t } = useTranslation()
 
@@ -95,7 +51,7 @@ export const ImportConfigSectionsModalContent = (props: ImportConfigSectionsModa
             </Text>
 
             <Stack gap="sm">
-                <ImportOptionCard
+                <ActionCardShared
                     description={t(
                         'import-config-sections.modal.replace-entire-config-with-imported-one'
                     )}
@@ -114,7 +70,7 @@ export const ImportConfigSectionsModalContent = (props: ImportConfigSectionsModa
                 )}
 
                 {hasSvgLibrary && (
-                    <ImportOptionCard
+                    <ActionCardShared
                         description={t('import-config-sections.modal.merge-svg-library', {
                             0: importedSvgCount,
                             1: currentSvgCount
@@ -127,7 +83,7 @@ export const ImportConfigSectionsModalContent = (props: ImportConfigSectionsModa
                 )}
 
                 {hasPlatforms && (
-                    <ImportOptionCard
+                    <ActionCardShared
                         description={t(
                             'import-config-sections.modal.import-platforms-descriptions'
                         )}
@@ -138,7 +94,7 @@ export const ImportConfigSectionsModalContent = (props: ImportConfigSectionsModa
                     />
                 )}
 
-                <ImportOptionCard
+                <ActionCardShared
                     description={t(
                         'import-config-sections.modal.replace-base-translation-and-locales'
                     )}

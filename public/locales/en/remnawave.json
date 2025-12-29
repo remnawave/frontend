@@ -342,7 +342,9 @@
             "danger-zone": "Danger Zone",
             "information": "Information",
             "detailed-info": "Detailed Info",
-            "subscription": "Subscription"
+            "subscription": "Subscription",
+            "accessible-nodes": "Accessible Nodes",
+            "qr-code": "QR Code"
         }
     },
     "empty-page": {
@@ -729,7 +731,8 @@
         "feature": {
             "subscription-links": "Subscription links",
             "loading-subscription-links": "Loading subscription links...",
-            "no-available-hosts-found-for-this-user": "No available hosts found for this user"
+            "no-available-hosts-found-for-this-user": "No available hosts found for this user",
+            "connection-keys": "Connection Keys"
         }
     },
     "user-usage-modal": {
@@ -759,7 +762,8 @@
     },
     "get-user-usage": {
         "feature": {
-            "show-usage": "Show usage"
+            "show-usage": "Show usage",
+            "usage": "Usage"
         }
     },
     "detailed-user-info-drawer": {
@@ -877,7 +881,7 @@
             "delete-device": "Delete Device",
             "device": "Device",
             "devices": "Devices",
-            "hwid-devices": "HWIDs and Devices",
+            "hwid-devices": "HWID Devices",
             "important-note": "Important note",
             "important-note-line-1": "This feature is only available with the",
             "important-note-line-2": ".env value.",
@@ -1879,6 +1883,15 @@
             "import-platforms": "Import Platforms",
             "replace-base-translation-and-locales": "Replace Base Translation and Locales",
             "import-base-translations": "Import Base Translations"
+        }
+    },
+    "revoke-subscription-user": {
+        "feature": {
+            "full-revoke": "Full Revoke",
+            "revoke": "Revoke",
+            "passwords-only": "Passwords Only",
+            "passwords-only-decription": "Only regenerates Connection Passwords, Subscription URL stays the same",
+            "full-revoke-description": "Regenerates Subscription URL and Connection Passwords"
         }
     }
 }

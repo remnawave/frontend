@@ -413,7 +413,7 @@ export const ViewUserModal = () => {
                                             })
                                         }}
                                     >
-                                        {t('view-user-modal.widget.view-accessible-nodes')}
+                                        {t('view-user-modal.widget.accessible-nodes')}
                                     </Menu.Item>
 
                                     <Menu.Divider />
@@ -421,7 +421,7 @@ export const ViewUserModal = () => {
                                         {t('view-user-modal.widget.subscription')}
                                     </Menu.Label>
                                     <Menu.Item
-                                        leftSection={<PiQrCodeDuotone size={14} />}
+                                        leftSection={<PiQrCodeDuotone size={16} />}
                                         onClick={() => {
                                             const subscriptionQrCode = renderSVG(
                                                 user.subscriptionUrl,
@@ -451,7 +451,7 @@ export const ViewUserModal = () => {
                                             })
                                         }}
                                     >
-                                        {t('view-user-modal.widget.subscription-qr-code')}
+                                        {t('view-user-modal.widget.qr-code')}
                                     </Menu.Item>
                                     <GetUserSubscriptionLinksFeature uuid={user.uuid} />
                                     <GetUserSubscriptionRequestHistoryFeature

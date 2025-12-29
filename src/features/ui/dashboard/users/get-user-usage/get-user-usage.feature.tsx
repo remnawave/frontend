@@ -19,7 +19,7 @@ export function GetUserUsageFeature(props: IProps) {
                 leftSection={<PiChartBarDuotone color="var(--mantine-color-blue-5)" size="16px" />}
                 onClick={handlers.open}
             >
-                {t('get-user-usage.feature.show-usage')}
+                {t('user-usage-modal.widget.traffic-statistics')}
             </Menu.Item>
 
             <UserUsageModalWidget onClose={handlers.close} opened={opened} userUuid={userUuid} />

@@ -124,7 +124,7 @@ export function GetUserSubscriptionLinksFeature(props: IProps) {
                     <BaseOverlayHeader
                         IconComponent={PiLinkBreakDuotone}
                         iconVariant="gradient-teal"
-                        title={t('get-user-subscription-links.feature.subscription-links')}
+                        title={t('get-user-subscription-links.feature.connection-keys')}
                     />
                 }
             >
@@ -141,7 +141,7 @@ export function GetUserSubscriptionLinksFeature(props: IProps) {
                 leftSection={<PiLinkBreakDuotone color="var(--mantine-color-teal-5)" size="16px" />}
                 onClick={handlers.open}
             >
-                {t('get-user-subscription-links.feature.subscription-links')}
+                {t('get-user-subscription-links.feature.connection-keys')}
             </Menu.Item>
         </>
     )
