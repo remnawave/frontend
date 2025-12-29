@@ -1684,7 +1684,9 @@
         "widget": {
             "user-status": "用户状态",
             "empty-hosts": "清空主机",
-            "empty-internal-squads": "清空内部小队"
+            "empty-internal-squads": "清空内部小队",
+            "hwid-max-devices-exceeded": "HWID: Max Devices Exceeded",
+            "hwid-not-supported": "HWID: Not Supported"
         }
     },
     "multi-select-nodes": {

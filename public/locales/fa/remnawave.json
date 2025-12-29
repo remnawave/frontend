@@ -1684,7 +1684,9 @@
         "widget": {
             "user-status": "وضعیت کاربر",
             "empty-hosts": "هاست‌های خالی",
-            "empty-internal-squads": "اسکوادهای داخلی خالی"
+            "empty-internal-squads": "اسکوادهای داخلی خالی",
+            "hwid-max-devices-exceeded": "HWID: Max Devices Exceeded",
+            "hwid-not-supported": "HWID: Not Supported"
         }
     },
     "multi-select-nodes": {
