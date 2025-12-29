@@ -28,12 +28,11 @@ export function CreateInfraBillingRecordDrawerWidget() {
         validate: zodResolver(
             CreateInfraBillingHistoryRecordCommand.RequestSchema.omit({
                 billedAt: true,
-                providerUuid: true,
-                amount: true
+                providerUuid: true
             })
         ),
         initialValues: {
-            billedAt: new Date(),
+            billedAt: dayjs().startOf('day').toDate(),
             providerUuid: '',
             amount: NaN
         }
@@ -92,7 +91,6 @@ export function CreateInfraBillingRecordDrawerWidget() {
 
     return (
         <Modal
-            centered
             keepMounted={false}
             onClose={() => {
                 form.reset()
@@ -100,9 +98,6 @@ export function CreateInfraBillingRecordDrawerWidget() {
                 close()
             }}
             opened={isOpen}
-            overlayProps={{ backgroundOpacity: 0.6, blur: 0 }}
-            padding="lg"
-            size="md"
             title={
                 <BaseOverlayHeader
                     IconComponent={TbInvoice}
@@ -113,41 +108,38 @@ export function CreateInfraBillingRecordDrawerWidget() {
         >
             <form onSubmit={handleSubmit}>
                 <Stack>
-                    <Stack gap="md" mb={-10}>
-                        <SelectInfraProviderShared
-                            selectedInfraProviderUuid={form.getValues().providerUuid}
-                            setSelectedInfraProviderUuid={(providerUuid) => {
-                                form.setValues({
-                                    providerUuid: providerUuid ?? undefined
-                                })
-                                form.setTouched({
-                                    providerUuid: true
-                                })
-                                form.setDirty({
-                                    providerUuid: true
-                                })
-                            }}
-                        />
-                    </Stack>
+                    <SelectInfraProviderShared
+                        selectedInfraProviderUuid={form.getValues().providerUuid}
+                        setSelectedInfraProviderUuid={(providerUuid) => {
+                            form.setValues({
+                                providerUuid: providerUuid ?? undefined
+                            })
+                            form.setTouched({
+                                providerUuid: true
+                            })
+                            form.setDirty({
+                                providerUuid: true
+                            })
+                        }}
+                    />
 
                     <DatePickerInput
-                        data-autofocus
-                        key={form.key('billedAt')}
-                        label={t('create-infra-billing-record.modal.widget.billed-at')}
-                        required
-                        valueFormat="D MMMM, YYYY"
-                        {...form.getInputProps('billedAt')}
                         description={t(
                             'create-infra-billing-record.modal.widget.the-date-and-time-when-the-bill-was-paid'
                         )}
                         highlightToday
+                        key={form.key('billedAt')}
+                        label={t('create-infra-billing-record.modal.widget.billed-at')}
                         leftSection={<HiCalendar size="16px" />}
                         maxDate={dayjs().add(1, 'day').toDate()}
+                        required
+                        valueFormat="D MMMM, YYYY"
+                        {...form.getInputProps('billedAt')}
                     />
 
                     <NumberInput
                         allowNegative={false}
-                        decimalScale={2}
+                        data-autofocus
                         description={t(
                             'create-infra-billing-record.modal.widget.payment-amount-usd'
                         )}
@@ -155,7 +147,6 @@ export function CreateInfraBillingRecordDrawerWidget() {
                         key={form.key('amount')}
                         label={t('create-infra-billing-record.modal.widget.amount')}
                         leftSection={<HiCurrencyDollar size="20px" />}
-                        min={0.01}
                         required
                         thousandSeparator=","
                         {...form.getInputProps('amount')}
