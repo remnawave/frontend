@@ -110,7 +110,7 @@ export const UserUsageModalWidget = (props: IProps) => {
             }
         >
             <Stack gap="md">
-                <Group justify="flex-end" wrap="nowrap">
+                <Group justify="flex-end">
                     <Select
                         allowDeselect={false}
                         data={TOP_NODES_LIMIT_OPTIONS}

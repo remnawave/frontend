@@ -13,10 +13,23 @@ export interface PageHeaderSharedProps extends Omit<CardProps, 'c' | 'fw' | 'siz
     description?: string
     icon?: ReactNode
     title: ReactNode
+    wrapActions?: boolean
 }
 
 export const PageHeaderShared = forwardRef<HTMLDivElement, PageHeaderSharedProps>(
-    ({ icon, title, description, actions, customThemeIcon, withBorder = true, ...props }, ref) => {
+    (
+        {
+            icon,
+            title,
+            description,
+            actions,
+            customThemeIcon,
+            wrapActions = false,
+            withBorder = true,
+            ...props
+        },
+        ref
+    ) => {
         const { copy } = useClipboard()
         const { t } = useTranslation()
 
@@ -116,7 +129,11 @@ export const PageHeaderShared = forwardRef<HTMLDivElement, PageHeaderSharedProps
                                     ease: [0, 0.71, 0.2, 1.01]
                                 }}
                             >
-                                <Group align="flex-end" gap="sm" wrap="nowrap">
+                                <Group
+                                    gap="sm"
+                                    justify="flex-end"
+                                    wrap={wrapActions ? 'wrap' : 'nowrap'}
+                                >
                                     {actions}
                                 </Group>
                             </motion.div>

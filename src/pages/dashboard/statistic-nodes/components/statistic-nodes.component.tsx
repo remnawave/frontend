@@ -180,6 +180,7 @@ export const StatisticNodesPage = () => {
                 }
                 icon={<HiChartPie size={24} />}
                 title={t('constants.nodes-statistics')}
+                wrapActions
             />
 
             <Stack gap="md">
