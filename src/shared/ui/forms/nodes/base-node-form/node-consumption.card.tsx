@@ -68,14 +68,19 @@ export const NodeConsumptionCard = <
                                 color="red"
                                 onClick={() => handlersRef.current?.decrement()}
                                 radius="md"
-                                size={rem(28)}
+                                size={rem(44)}
                                 variant="light"
                             >
                                 <TbMinus size={16} />
                             </ActionIcon>
                         }
                         leftSectionPointerEvents="all"
-                        leftSectionWidth={44}
+                        leftSectionProps={{
+                            style: {
+                                overflow: 'hidden'
+                            }
+                        }}
+                        leftSectionWidth={40}
                         max={100.0}
                         min={0}
                         rightSection={
@@ -83,14 +88,19 @@ export const NodeConsumptionCard = <
                                 color="teal"
                                 onClick={() => handlersRef.current?.increment()}
                                 radius="md"
-                                size={rem(28)}
+                                size={rem(44)}
                                 variant="light"
                             >
                                 <TbPlus size={16} />
                             </ActionIcon>
                         }
                         rightSectionPointerEvents="all"
-                        rightSectionWidth={44}
+                        rightSectionProps={{
+                            style: {
+                                overflow: 'hidden'
+                            }
+                        }}
+                        rightSectionWidth={40}
                         step={0.1}
                         styles={{
                             input: {

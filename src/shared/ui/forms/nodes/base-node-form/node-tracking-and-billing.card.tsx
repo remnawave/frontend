@@ -1,11 +1,9 @@
 import {
-    Badge,
     Collapse,
     Divider,
     Fieldset,
     Group,
     NumberInput,
-    rem,
     Stack,
     Switch,
     TagsInput,
@@ -14,10 +12,10 @@ import {
 } from '@mantine/core'
 import { CreateNodeCommand, UpdateNodeCommand } from '@remnawave/backend-contract'
 import { ForwardRefComponent, HTMLMotionProps, Variants } from 'motion/react'
-import { PiCheckDuotone, PiTagDuotone, PiXDuotone } from 'react-icons/pi'
 import { TbChartBar, TbChartLine } from 'react-icons/tb'
 import { UseFormReturnType } from '@mantine/form'
 import { useTranslation } from 'react-i18next'
+import { PiTagDuotone } from 'react-icons/pi'
 
 import { SelectInfraProviderShared } from '@shared/ui/infra-billing/select-infra-provider/select-infra-provider.shared'
 import { useGetNodesTags } from '@shared/api/hooks'
@@ -49,10 +47,10 @@ export const NodeTrackingAndBillingCard = <
                         <TbChartBar
                             size={20}
                             style={{
-                                color: 'var(--mantine-color-yellow-4)'
+                                color: 'var(--mantine-color-yellow-3)'
                             }}
                         />
-                        <Title c="yellow.4" order={4}>
+                        <Title c="yellow.3" order={4}>
                             {t('base-node-form.tracking-and-billing')}
                         </Title>
                     </Group>
@@ -95,19 +93,6 @@ export const NodeTrackingAndBillingCard = <
                                     setAdvancedOpened(event.currentTarget.checked)
                                 }}
                                 size="md"
-                                thumbIcon={
-                                    form.getValues().isTrafficTrackingActive ? (
-                                        <PiCheckDuotone
-                                            color="teal"
-                                            style={{ width: rem(12), height: rem(12) }}
-                                        />
-                                    ) : (
-                                        <PiXDuotone
-                                            color="red.6"
-                                            style={{ width: rem(12), height: rem(12) }}
-                                        />
-                                    )
-                                }
                             />
                         </Group>
 
@@ -123,10 +108,20 @@ export const NodeTrackingAndBillingCard = <
                                         key={form.key('trafficLimitBytes')}
                                         label={t('base-node-form.limit')}
                                         leftSection={
-                                            <Badge color="blue" size="xs" variant="light">
-                                                GB
-                                            </Badge>
+                                            <>
+                                                <Text
+                                                    display="flex"
+                                                    size="0.75rem"
+                                                    style={{ justifyContent: 'center' }}
+                                                    ta="center"
+                                                    w={26}
+                                                >
+                                                    GB
+                                                </Text>
+                                                <Divider orientation="vertical" />
+                                            </>
                                         }
+                                        thousandSeparator=","
                                         {...form.getInputProps('trafficLimitBytes')}
                                         styles={{
                                             label: { fontWeight: 500 }
@@ -162,7 +157,11 @@ export const NodeTrackingAndBillingCard = <
                                         max={100}
                                         placeholder={t('base-node-form.e-g-50')}
                                         styles={{
-                                            label: { fontWeight: 500 }
+                                            label: {
+                                                fontWeight: 500,
+                                                whiteSpace: 'nowrap',
+                                                textOverflow: 'ellipsis'
+                                            }
                                         }}
                                     />
                                 </Group>
