@@ -1,6 +1,6 @@
+import { TbCirclesRelation, TbDeviceFloppy, TbDevices2, TbListLetters, TbX } from 'react-icons/tb'
 import { PiClockCountdown, PiClockUser, PiListChecks, PiProhibit } from 'react-icons/pi'
 import { Button, Group, Paper, Stack, Switch, Text, Transition } from '@mantine/core'
-import { TbCirclesRelation, TbDeviceFloppy, TbListLetters } from 'react-icons/tb'
 import { GetExternalSquadByUuidCommand } from '@remnawave/backend-contract'
 import { useCallback, useEffect, useState } from 'react'
 import { notifications } from '@mantine/notifications'
@@ -21,7 +21,9 @@ const DEFAULT_REMARKS = {
     limited: ['🚧 Subscription limited', 'Contact support'],
     disabled: ['🚫 Subscription disabled', 'Contact support'],
     emptyHosts: ['🚫 No hosts found'],
-    emptyInternalSquads: ['🚫 No internal squads found']
+    emptyInternalSquads: ['🚫 No internal squads found'],
+    HWIDMaxDevicesExceeded: ['🚫 HWID: Max Devices Exceeded'],
+    HWIDNotSupported: ['🚫 HWID: Not Supported']
 }
 
 export const ExternalSquadsCustomRemarksTabWidget = (props: IProps) => {
@@ -34,7 +36,9 @@ export const ExternalSquadsCustomRemarksTabWidget = (props: IProps) => {
         limited: DEFAULT_REMARKS.limited,
         disabled: DEFAULT_REMARKS.disabled,
         emptyHosts: DEFAULT_REMARKS.emptyHosts,
-        emptyInternalSquads: DEFAULT_REMARKS.emptyInternalSquads
+        emptyInternalSquads: DEFAULT_REMARKS.emptyInternalSquads,
+        HWIDMaxDevicesExceeded: DEFAULT_REMARKS.HWIDMaxDevicesExceeded,
+        HWIDNotSupported: DEFAULT_REMARKS.HWIDNotSupported
     })
 
     useEffect(() => {
@@ -58,7 +62,9 @@ export const ExternalSquadsCustomRemarksTabWidget = (props: IProps) => {
                     limited: processRemarks(currentRemarks.limitedUsers),
                     disabled: processRemarks(currentRemarks.disabledUsers),
                     emptyHosts: processRemarks(currentRemarks.emptyHosts),
-                    emptyInternalSquads: processRemarks(currentRemarks.emptyInternalSquads)
+                    emptyInternalSquads: processRemarks(currentRemarks.emptyInternalSquads),
+                    HWIDMaxDevicesExceeded: processRemarks(currentRemarks.HWIDMaxDevicesExceeded),
+                    HWIDNotSupported: processRemarks(currentRemarks.HWIDNotSupported)
                 })
             } else {
                 setIsOverrideEnabled(false)
@@ -67,7 +73,9 @@ export const ExternalSquadsCustomRemarksTabWidget = (props: IProps) => {
                     limited: DEFAULT_REMARKS.limited,
                     disabled: DEFAULT_REMARKS.disabled,
                     emptyHosts: DEFAULT_REMARKS.emptyHosts,
-                    emptyInternalSquads: DEFAULT_REMARKS.emptyInternalSquads
+                    emptyInternalSquads: DEFAULT_REMARKS.emptyInternalSquads,
+                    HWIDMaxDevicesExceeded: DEFAULT_REMARKS.HWIDMaxDevicesExceeded,
+                    HWIDNotSupported: DEFAULT_REMARKS.HWIDNotSupported
                 })
             }
         }
@@ -93,6 +101,13 @@ export const ExternalSquadsCustomRemarksTabWidget = (props: IProps) => {
         setRemarks((prev) => ({ ...prev, emptyInternalSquads: newRemarks }))
     }, [])
 
+    const updateHWIDMaxDevicesExceededRemarks = useCallback((newRemarks: string[]) => {
+        setRemarks((prev) => ({ ...prev, HWIDMaxDevicesExceeded: newRemarks }))
+    }, [])
+
+    const updateHWIDNotSupportedRemarks = useCallback((newRemarks: string[]) => {
+        setRemarks((prev) => ({ ...prev, HWIDNotSupported: newRemarks }))
+    }, [])
     const { mutate: updateExternalSquad, isPending: isUpdatingExternalSquad } =
         useUpdateExternalSquad({
             mutationFns: {
@@ -132,8 +147,18 @@ export const ExternalSquadsCustomRemarksTabWidget = (props: IProps) => {
         const disabledFiltered = filterEmptyStrings(remarks.disabled)
         const emptyHostsFiltered = filterEmptyStrings(remarks.emptyHosts)
         const emptyInternalSquadsFiltered = filterEmptyStrings(remarks.emptyInternalSquads)
+        const HWIDMaxDevicesExceededFiltered = filterEmptyStrings(remarks.HWIDMaxDevicesExceeded)
+        const HWIDNotSupportedFiltered = filterEmptyStrings(remarks.HWIDNotSupported)
 
-        if (expiredFiltered[0] === '' || limitedFiltered[0] === '' || disabledFiltered[0] === '') {
+        if (
+            expiredFiltered[0] === '' ||
+            limitedFiltered[0] === '' ||
+            disabledFiltered[0] === '' ||
+            HWIDMaxDevicesExceededFiltered[0] === '' ||
+            HWIDNotSupportedFiltered[0] === '' ||
+            emptyHostsFiltered[0] === '' ||
+            emptyInternalSquadsFiltered[0] === ''
+        ) {
             notifications.show({
                 color: 'red',
                 title: t('subscription-settings.widget.validation-error'),
@@ -152,7 +177,9 @@ export const ExternalSquadsCustomRemarksTabWidget = (props: IProps) => {
                     limitedUsers: limitedFiltered,
                     disabledUsers: disabledFiltered,
                     emptyHosts: emptyHostsFiltered,
-                    emptyInternalSquads: emptyInternalSquadsFiltered
+                    emptyInternalSquads: emptyInternalSquadsFiltered,
+                    HWIDMaxDevicesExceeded: HWIDMaxDevicesExceededFiltered,
+                    HWIDNotSupported: HWIDNotSupportedFiltered
                 }
             }
         })
@@ -204,6 +231,26 @@ export const ExternalSquadsCustomRemarksTabWidget = (props: IProps) => {
                 >
                     {(styles) => (
                         <Stack gap="md" style={styles}>
+                            <RemarksManager
+                                icon={<TbDevices2 size="24px" />}
+                                iconColor="red"
+                                initialRemarks={remarks.HWIDMaxDevicesExceeded}
+                                onChange={updateHWIDMaxDevicesExceededRemarks}
+                                title={t(
+                                    'subscription-user-remarks-card.widget.hwid-max-devices-exceeded'
+                                )}
+                            />
+
+                            <RemarksManager
+                                icon={<TbX size="24px" />}
+                                iconColor="red"
+                                initialRemarks={remarks.HWIDNotSupported}
+                                onChange={updateHWIDNotSupportedRemarks}
+                                title={t(
+                                    'subscription-user-remarks-card.widget.hwid-not-supported'
+                                )}
+                            />
+
                             <RemarksManager
                                 icon={<PiClockUser size="24px" />}
                                 iconColor="red"

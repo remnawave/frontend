@@ -1684,7 +1684,9 @@
         "widget": {
             "user-status": "User status",
             "empty-hosts": "Empty Hosts",
-            "empty-internal-squads": "Empty Internal Squads"
+            "empty-internal-squads": "Empty Internal Squads",
+            "hwid-max-devices-exceeded": "HWID: Max Devices Exceeded",
+            "hwid-not-supported": "HWID: Not Supported"
         }
     },
     "multi-select-nodes": {

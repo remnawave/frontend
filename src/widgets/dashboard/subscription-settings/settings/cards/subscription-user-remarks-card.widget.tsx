@@ -1,11 +1,12 @@
 import { PiClockCountdown, PiClockUser, PiListChecks, PiProhibit } from 'react-icons/pi'
+import { TbCirclesRelation, TbDevices2, TbListLetters, TbX } from 'react-icons/tb'
 import { UpdateSubscriptionSettingsCommand } from '@remnawave/backend-contract'
-import { TbCirclesRelation, TbListLetters } from 'react-icons/tb'
-import { Button, Card, Grid, Group, Stack } from '@mantine/core'
+import { Button, Card, Group, Stack } from '@mantine/core'
 import { useCallback, useEffect, useState } from 'react'
 import { zodResolver } from 'mantine-form-zod-resolver'
 import { notifications } from '@mantine/notifications'
 import { useTranslation } from 'react-i18next'
+import Masonry from 'react-layout-masonry'
 import { useForm } from '@mantine/form'
 
 import { QueryKeys, useUpdateSubscriptionSettings } from '@shared/api/hooks'
@@ -28,7 +29,9 @@ export const SubscriptionUserRemarksCardWidget = (props: IProps) => {
         limited: [''],
         disabled: [''],
         emptyHosts: [''],
-        emptyInternalSquads: ['']
+        emptyInternalSquads: [''],
+        HWIDMaxDevicesExceeded: [''],
+        HWIDNotSupported: ['']
     })
 
     const updateExpiredRemarks = useCallback((newRemarks: string[]) => {
@@ -51,15 +54,20 @@ export const SubscriptionUserRemarksCardWidget = (props: IProps) => {
         setRemarks((prev) => ({ ...prev, emptyInternalSquads: newRemarks }))
     }, [])
 
+    const updateHWIDMaxDevicesExceededRemarks = useCallback((newRemarks: string[]) => {
+        setRemarks((prev) => ({ ...prev, HWIDMaxDevicesExceeded: newRemarks }))
+    }, [])
+
+    const updateHWIDNotSupportedRemarks = useCallback((newRemarks: string[]) => {
+        setRemarks((prev) => ({ ...prev, HWIDNotSupported: newRemarks }))
+    }, [])
+
     const form = useForm<UpdateSubscriptionSettingsCommand.Request>({
         name: 'subscription-user-remarks-card-form',
         mode: 'uncontrolled',
         validate: zodResolver(UpdateSubscriptionSettingsCommand.RequestSchema),
         initialValues: {
-            uuid: subscriptionSettings.uuid,
-            profileTitle: subscriptionSettings.profileTitle,
-            supportLink: subscriptionSettings.supportLink,
-            profileUpdateInterval: subscriptionSettings.profileUpdateInterval
+            uuid: subscriptionSettings.uuid
         }
     })
 
@@ -89,8 +97,18 @@ export const SubscriptionUserRemarksCardWidget = (props: IProps) => {
         const disabledFiltered = filterEmptyStrings(remarks.disabled)
         const emptyHostsFiltered = filterEmptyStrings(remarks.emptyHosts)
         const emptyInternalSquadsFiltered = filterEmptyStrings(remarks.emptyInternalSquads)
+        const HWIDMaxDevicesExceededFiltered = filterEmptyStrings(remarks.HWIDMaxDevicesExceeded)
+        const HWIDNotSupportedFiltered = filterEmptyStrings(remarks.HWIDNotSupported)
 
-        if (expiredFiltered[0] === '' || limitedFiltered[0] === '' || disabledFiltered[0] === '') {
+        if (
+            expiredFiltered[0] === '' ||
+            limitedFiltered[0] === '' ||
+            disabledFiltered[0] === '' ||
+            HWIDMaxDevicesExceededFiltered[0] === '' ||
+            HWIDNotSupportedFiltered[0] === '' ||
+            emptyHostsFiltered[0] === '' ||
+            emptyInternalSquadsFiltered[0] === ''
+        ) {
             notifications.show({
                 color: 'red',
                 title: t('subscription-settings.widget.validation-error'),
@@ -109,7 +127,9 @@ export const SubscriptionUserRemarksCardWidget = (props: IProps) => {
                     limitedUsers: limitedFiltered,
                     disabledUsers: disabledFiltered,
                     emptyHosts: emptyHostsFiltered,
-                    emptyInternalSquads: emptyInternalSquadsFiltered
+                    emptyInternalSquads: emptyInternalSquadsFiltered,
+                    HWIDMaxDevicesExceeded: HWIDMaxDevicesExceededFiltered,
+                    HWIDNotSupported: HWIDNotSupportedFiltered
                 }
             }
         })
@@ -135,7 +155,11 @@ export const SubscriptionUserRemarksCardWidget = (props: IProps) => {
             emptyHosts: processRemarks(subscriptionSettings.customRemarks.emptyHosts),
             emptyInternalSquads: processRemarks(
                 subscriptionSettings.customRemarks.emptyInternalSquads
-            )
+            ),
+            HWIDMaxDevicesExceeded: processRemarks(
+                subscriptionSettings.customRemarks.HWIDMaxDevicesExceeded
+            ),
+            HWIDNotSupported: processRemarks(subscriptionSettings.customRemarks.HWIDNotSupported)
         })
     }, [subscriptionSettings])
 
@@ -150,10 +174,6 @@ export const SubscriptionUserRemarksCardWidget = (props: IProps) => {
                             {t(
                                 'subscription-settings.widget.user-status-remarks-description-line-2'
                             )}
-                            <br />
-                            {t(
-                                'subscription-settings.widget.user-status-remarks-description-line-3'
-                            )}
                         </>
                     }
                     icon={<TbListLetters size={24} />}
@@ -163,95 +183,69 @@ export const SubscriptionUserRemarksCardWidget = (props: IProps) => {
                 <SettingsCardShared.Content>
                     <Stack gap="md">
                         <Card.Section p="lg" withBorder>
-                            <Grid
-                                breakpoints={{
-                                    xs: '480px',
-                                    sm: '640px',
-                                    md: '768px',
-                                    lg: '960px',
-                                    xl: '1280px'
-                                }}
-                                type="container"
-                            >
-                                <Grid.Col
-                                    span={{
-                                        base: 12,
-                                        md: 6
-                                    }}
-                                >
-                                    <RemarksManager
-                                        icon={<PiClockUser size="24px" />}
-                                        iconColor="red"
-                                        initialRemarks={remarks.expired}
-                                        onChange={updateExpiredRemarks}
-                                        title={`${t('subscription-user-remarks-card.widget.user-status')}: EXPIRED`}
-                                    />
-                                </Grid.Col>
+                            <Masonry columns={{ 300: 1, 1400: 2, 2000: 3, 3000: 4 }} gap={16}>
+                                <RemarksManager
+                                    icon={<TbDevices2 size="24px" />}
+                                    iconColor="red"
+                                    initialRemarks={remarks.HWIDMaxDevicesExceeded}
+                                    onChange={updateHWIDMaxDevicesExceededRemarks}
+                                    title={t(
+                                        'subscription-user-remarks-card.widget.hwid-max-devices-exceeded'
+                                    )}
+                                />
 
-                                <Grid.Col
-                                    span={{
-                                        base: 12,
-                                        md: 6
-                                    }}
-                                >
-                                    <RemarksManager
-                                        icon={<PiClockCountdown size="24px" />}
-                                        iconColor="orange"
-                                        initialRemarks={remarks.limited}
-                                        onChange={updateLimitedRemarks}
-                                        title={`${t('subscription-user-remarks-card.widget.user-status')}: LIMITED`}
-                                    />
-                                </Grid.Col>
+                                <RemarksManager
+                                    icon={<TbX size="24px" />}
+                                    iconColor="red"
+                                    initialRemarks={remarks.HWIDNotSupported}
+                                    onChange={updateHWIDNotSupportedRemarks}
+                                    title={t(
+                                        'subscription-user-remarks-card.widget.hwid-not-supported'
+                                    )}
+                                />
 
-                                <Grid.Col
-                                    span={{
-                                        base: 12,
-                                        md: 6
-                                    }}
-                                >
-                                    <RemarksManager
-                                        icon={<PiProhibit size="24px" />}
-                                        iconColor="gray"
-                                        initialRemarks={remarks.disabled}
-                                        onChange={updateDisabledRemarks}
-                                        title={`${t('subscription-user-remarks-card.widget.user-status')}: DISABLED`}
-                                    />
-                                </Grid.Col>
+                                <RemarksManager
+                                    icon={<PiClockUser size="24px" />}
+                                    iconColor="red"
+                                    initialRemarks={remarks.expired}
+                                    onChange={updateExpiredRemarks}
+                                    title={`${t('subscription-user-remarks-card.widget.user-status')}: EXPIRED`}
+                                />
 
-                                <Grid.Col
-                                    span={{
-                                        base: 12,
-                                        md: 6
-                                    }}
-                                >
-                                    <RemarksManager
-                                        icon={<PiListChecks size="24px" />}
-                                        iconColor="blue"
-                                        initialRemarks={remarks.emptyHosts}
-                                        onChange={updateEmptyHostsRemarks}
-                                        title={t(
-                                            'subscription-user-remarks-card.widget.empty-hosts'
-                                        )}
-                                    />
-                                </Grid.Col>
+                                <RemarksManager
+                                    icon={<PiClockCountdown size="24px" />}
+                                    iconColor="orange"
+                                    initialRemarks={remarks.limited}
+                                    onChange={updateLimitedRemarks}
+                                    title={`${t('subscription-user-remarks-card.widget.user-status')}: LIMITED`}
+                                />
 
-                                <Grid.Col
-                                    span={{
-                                        base: 12,
-                                        md: 6
-                                    }}
-                                >
-                                    <RemarksManager
-                                        icon={<TbCirclesRelation size="24px" />}
-                                        iconColor="green"
-                                        initialRemarks={remarks.emptyInternalSquads}
-                                        onChange={updateEmptyInternalSquadsRemarks}
-                                        title={t(
-                                            'subscription-user-remarks-card.widget.empty-internal-squads'
-                                        )}
-                                    />
-                                </Grid.Col>
-                            </Grid>
+                                <RemarksManager
+                                    icon={<PiProhibit size="24px" />}
+                                    iconColor="gray"
+                                    initialRemarks={remarks.disabled}
+                                    onChange={updateDisabledRemarks}
+                                    title={`${t('subscription-user-remarks-card.widget.user-status')}: DISABLED`}
+                                />
+
+                                <RemarksManager
+                                    icon={<PiListChecks size="24px" />}
+                                    iconColor="blue"
+                                    initialRemarks={remarks.emptyHosts}
+                                    onChange={updateEmptyHostsRemarks}
+                                    title={t('subscription-user-remarks-card.widget.empty-hosts')}
+                                />
+
+                                <RemarksManager
+                                    icon={<TbCirclesRelation size="24px" />}
+                                    iconColor="green"
+                                    initialRemarks={remarks.emptyInternalSquads}
+                                    onChange={updateEmptyInternalSquadsRemarks}
+                                    title={t(
+                                        'subscription-user-remarks-card.widget.empty-internal-squads'
+                                    )}
+                                />
+                            </Masonry>
                         </Card.Section>
                     </Stack>
                 </SettingsCardShared.Content>
