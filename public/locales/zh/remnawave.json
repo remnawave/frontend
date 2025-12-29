@@ -342,7 +342,9 @@
             "danger-zone": "危险操作区",
             "information": "信息",
             "detailed-info": "详细信息",
-            "subscription": "订阅"
+            "subscription": "订阅",
+            "accessible-nodes": "Accessible Nodes",
+            "qr-code": "QR Code"
         }
     },
     "empty-page": {
@@ -729,7 +731,8 @@
         "feature": {
             "subscription-links": "订阅链接",
             "loading-subscription-links": "正在加载订阅链接...",
-            "no-available-hosts-found-for-this-user": "未找到此用户的可用主机"
+            "no-available-hosts-found-for-this-user": "未找到此用户的可用主机",
+            "connection-keys": "Connection Keys"
         }
     },
     "user-usage-modal": {
@@ -759,7 +762,8 @@
     },
     "get-user-usage": {
         "feature": {
-            "show-usage": "显示用量"
+            "show-usage": "显示用量",
+            "usage": "Usage"
         }
     },
     "detailed-user-info-drawer": {
@@ -877,7 +881,7 @@
             "delete-device": "删除设备",
             "device": "设备",
             "devices": "设备",
-            "hwid-devices": "HWID 和设备",
+            "hwid-devices": "HWID Devices",
             "important-note": "重要提示",
             "important-note-line-1": "此功能仅在",
             "important-note-line-2": ".env 值存在时可用。",
@@ -1879,6 +1883,15 @@
             "import-platforms": "导入平台",
             "replace-base-translation-and-locales": "替换基础翻译和语言",
             "import-base-translations": "导入基础翻译"
+        }
+    },
+    "revoke-subscription-user": {
+        "feature": {
+            "full-revoke": "Full Revoke",
+            "revoke": "Revoke",
+            "passwords-only": "Passwords Only",
+            "passwords-only-decription": "Only regenerates Connection Passwords, Subscription URL stays the same",
+            "full-revoke-description": "Regenerates Subscription URL and Connection Passwords"
         }
     }
 }

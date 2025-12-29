@@ -342,7 +342,9 @@
             "danger-zone": "Опасная зона",
             "information": "Информация",
             "detailed-info": "Подробная информация",
-            "subscription": "Подписка"
+            "subscription": "Подписка",
+            "accessible-nodes": "Accessible Nodes",
+            "qr-code": "QR Code"
         }
     },
     "empty-page": {
@@ -729,7 +731,8 @@
         "feature": {
             "subscription-links": "Подписные ссылки",
             "loading-subscription-links": "Загрузка ссылок на подписку ...",
-            "no-available-hosts-found-for-this-user": "Для этого пользователя не найдено доступных хостов"
+            "no-available-hosts-found-for-this-user": "Для этого пользователя не найдено доступных хостов",
+            "connection-keys": "Connection Keys"
         }
     },
     "user-usage-modal": {
@@ -759,7 +762,8 @@
     },
     "get-user-usage": {
         "feature": {
-            "show-usage": "Статистика"
+            "show-usage": "Статистика",
+            "usage": "Usage"
         }
     },
     "detailed-user-info-drawer": {
@@ -877,7 +881,7 @@
             "delete-device": "Удалить устройство",
             "device": "Устройство",
             "devices": "Устройств",
-            "hwid-devices": "HWID Устройства",
+            "hwid-devices": "HWID Devices",
             "important-note": "Важная информация",
             "important-note-line-1": "Эта функция доступна только с",
             "important-note-line-2": ".env переменной.",
@@ -1879,6 +1883,15 @@
             "import-platforms": "Импорт платформ",
             "replace-base-translation-and-locales": "Заменяет базовые переводы и локали",
             "import-base-translations": "Импорт базовых переводов"
+        }
+    },
+    "revoke-subscription-user": {
+        "feature": {
+            "full-revoke": "Full Revoke",
+            "revoke": "Revoke",
+            "passwords-only": "Passwords Only",
+            "passwords-only-decription": "Only regenerates Connection Passwords, Subscription URL stays the same",
+            "full-revoke-description": "Regenerates Subscription URL and Connection Passwords"
         }
     }
 }
