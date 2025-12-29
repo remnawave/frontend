@@ -342,7 +342,9 @@
             "danger-zone": "هشدار",
             "information": "اطلاعات",
             "detailed-info": "اطلاعات دقیق",
-            "subscription": "اشتراک"
+            "subscription": "اشتراک",
+            "accessible-nodes": "Accessible Nodes",
+            "qr-code": "QR Code"
         }
     },
     "empty-page": {
@@ -729,7 +731,8 @@
         "feature": {
             "subscription-links": "لینک‌های اشتراک",
             "loading-subscription-links": "درحال بارگذاری لینک‌های اشتراک ...",
-            "no-available-hosts-found-for-this-user": "هیچ هاست موجودی برای این کاربر یافت نشد"
+            "no-available-hosts-found-for-this-user": "هیچ هاست موجودی برای این کاربر یافت نشد",
+            "connection-keys": "Connection Keys"
         }
     },
     "user-usage-modal": {
@@ -759,7 +762,8 @@
     },
     "get-user-usage": {
         "feature": {
-            "show-usage": "نمایش مصرف"
+            "show-usage": "نمایش مصرف",
+            "usage": "Usage"
         }
     },
     "detailed-user-info-drawer": {
@@ -877,7 +881,7 @@
             "delete-device": "حذف دستگاه",
             "device": "دستگاه",
             "devices": "دستگاه‌ها",
-            "hwid-devices": "HWIDها و دستگاه‌ها",
+            "hwid-devices": "HWID Devices",
             "important-note": "نکته مهم",
             "important-note-line-1": "این قابلیت تنها با",
             "important-note-line-2": "مقدار .env در دسترس است.",
@@ -1879,6 +1883,15 @@
             "import-platforms": "درون‌ریزی پلتفرم‌ها",
             "replace-base-translation-and-locales": "جایگزین کردن ترجمه‌های پایه و لیست زبان‌ها",
             "import-base-translations": "درون‌ریزی ترجمه‌های پایه"
+        }
+    },
+    "revoke-subscription-user": {
+        "feature": {
+            "full-revoke": "Full Revoke",
+            "revoke": "Revoke",
+            "passwords-only": "Passwords Only",
+            "passwords-only-decription": "Only regenerates Connection Passwords, Subscription URL stays the same",
+            "full-revoke-description": "Regenerates Subscription URL and Connection Passwords"
         }
     }
 }
