@@ -1,6 +1,6 @@
-import { TbCirclesRelation, TbDeviceFloppy, TbDevices2, TbListLetters, TbX } from 'react-icons/tb'
 import { PiClockCountdown, PiClockUser, PiListChecks, PiProhibit } from 'react-icons/pi'
 import { Button, Group, Paper, Stack, Switch, Text, Transition } from '@mantine/core'
+import { TbDeviceFloppy, TbDevices2, TbListLetters, TbX } from 'react-icons/tb'
 import { GetExternalSquadByUuidCommand } from '@remnawave/backend-contract'
 import { useCallback, useEffect, useState } from 'react'
 import { notifications } from '@mantine/notifications'
@@ -21,7 +21,6 @@ const DEFAULT_REMARKS = {
     limited: ['🚧 Subscription limited', 'Contact support'],
     disabled: ['🚫 Subscription disabled', 'Contact support'],
     emptyHosts: ['🚫 No hosts found'],
-    emptyInternalSquads: ['🚫 No internal squads found'],
     HWIDMaxDevicesExceeded: ['🚫 HWID: Max Devices Exceeded'],
     HWIDNotSupported: ['🚫 HWID: Not Supported']
 }
@@ -36,7 +35,6 @@ export const ExternalSquadsCustomRemarksTabWidget = (props: IProps) => {
         limited: DEFAULT_REMARKS.limited,
         disabled: DEFAULT_REMARKS.disabled,
         emptyHosts: DEFAULT_REMARKS.emptyHosts,
-        emptyInternalSquads: DEFAULT_REMARKS.emptyInternalSquads,
         HWIDMaxDevicesExceeded: DEFAULT_REMARKS.HWIDMaxDevicesExceeded,
         HWIDNotSupported: DEFAULT_REMARKS.HWIDNotSupported
     })
@@ -62,7 +60,6 @@ export const ExternalSquadsCustomRemarksTabWidget = (props: IProps) => {
                     limited: processRemarks(currentRemarks.limitedUsers),
                     disabled: processRemarks(currentRemarks.disabledUsers),
                     emptyHosts: processRemarks(currentRemarks.emptyHosts),
-                    emptyInternalSquads: processRemarks(currentRemarks.emptyInternalSquads),
                     HWIDMaxDevicesExceeded: processRemarks(currentRemarks.HWIDMaxDevicesExceeded),
                     HWIDNotSupported: processRemarks(currentRemarks.HWIDNotSupported)
                 })
@@ -73,7 +70,6 @@ export const ExternalSquadsCustomRemarksTabWidget = (props: IProps) => {
                     limited: DEFAULT_REMARKS.limited,
                     disabled: DEFAULT_REMARKS.disabled,
                     emptyHosts: DEFAULT_REMARKS.emptyHosts,
-                    emptyInternalSquads: DEFAULT_REMARKS.emptyInternalSquads,
                     HWIDMaxDevicesExceeded: DEFAULT_REMARKS.HWIDMaxDevicesExceeded,
                     HWIDNotSupported: DEFAULT_REMARKS.HWIDNotSupported
                 })
@@ -95,10 +91,6 @@ export const ExternalSquadsCustomRemarksTabWidget = (props: IProps) => {
 
     const updateEmptyHostsRemarks = useCallback((newRemarks: string[]) => {
         setRemarks((prev) => ({ ...prev, emptyHosts: newRemarks }))
-    }, [])
-
-    const updateEmptyInternalSquadsRemarks = useCallback((newRemarks: string[]) => {
-        setRemarks((prev) => ({ ...prev, emptyInternalSquads: newRemarks }))
     }, [])
 
     const updateHWIDMaxDevicesExceededRemarks = useCallback((newRemarks: string[]) => {
@@ -146,7 +138,6 @@ export const ExternalSquadsCustomRemarksTabWidget = (props: IProps) => {
         const limitedFiltered = filterEmptyStrings(remarks.limited)
         const disabledFiltered = filterEmptyStrings(remarks.disabled)
         const emptyHostsFiltered = filterEmptyStrings(remarks.emptyHosts)
-        const emptyInternalSquadsFiltered = filterEmptyStrings(remarks.emptyInternalSquads)
         const HWIDMaxDevicesExceededFiltered = filterEmptyStrings(remarks.HWIDMaxDevicesExceeded)
         const HWIDNotSupportedFiltered = filterEmptyStrings(remarks.HWIDNotSupported)
 
@@ -156,8 +147,7 @@ export const ExternalSquadsCustomRemarksTabWidget = (props: IProps) => {
             disabledFiltered[0] === '' ||
             HWIDMaxDevicesExceededFiltered[0] === '' ||
             HWIDNotSupportedFiltered[0] === '' ||
-            emptyHostsFiltered[0] === '' ||
-            emptyInternalSquadsFiltered[0] === ''
+            emptyHostsFiltered[0] === ''
         ) {
             notifications.show({
                 color: 'red',
@@ -177,7 +167,6 @@ export const ExternalSquadsCustomRemarksTabWidget = (props: IProps) => {
                     limitedUsers: limitedFiltered,
                     disabledUsers: disabledFiltered,
                     emptyHosts: emptyHostsFiltered,
-                    emptyInternalSquads: emptyInternalSquadsFiltered,
                     HWIDMaxDevicesExceeded: HWIDMaxDevicesExceededFiltered,
                     HWIDNotSupported: HWIDNotSupportedFiltered
                 }
@@ -281,16 +270,6 @@ export const ExternalSquadsCustomRemarksTabWidget = (props: IProps) => {
                                 initialRemarks={remarks.emptyHosts}
                                 onChange={updateEmptyHostsRemarks}
                                 title={t('subscription-user-remarks-card.widget.empty-hosts')}
-                            />
-
-                            <RemarksManager
-                                icon={<TbCirclesRelation size="24px" />}
-                                iconColor="green"
-                                initialRemarks={remarks.emptyInternalSquads}
-                                onChange={updateEmptyInternalSquadsRemarks}
-                                title={t(
-                                    'subscription-user-remarks-card.widget.empty-internal-squads'
-                                )}
                             />
                         </Stack>
                     )}

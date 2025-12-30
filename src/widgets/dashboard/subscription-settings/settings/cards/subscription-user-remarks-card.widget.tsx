@@ -1,6 +1,6 @@
 import { PiClockCountdown, PiClockUser, PiListChecks, PiProhibit } from 'react-icons/pi'
-import { TbCirclesRelation, TbDevices2, TbListLetters, TbX } from 'react-icons/tb'
 import { UpdateSubscriptionSettingsCommand } from '@remnawave/backend-contract'
+import { TbDevices2, TbListLetters, TbX } from 'react-icons/tb'
 import { Button, Card, Group, Stack } from '@mantine/core'
 import { useCallback, useEffect, useState } from 'react'
 import { zodResolver } from 'mantine-form-zod-resolver'
@@ -29,7 +29,6 @@ export const SubscriptionUserRemarksCardWidget = (props: IProps) => {
         limited: [''],
         disabled: [''],
         emptyHosts: [''],
-        emptyInternalSquads: [''],
         HWIDMaxDevicesExceeded: [''],
         HWIDNotSupported: ['']
     })
@@ -48,10 +47,6 @@ export const SubscriptionUserRemarksCardWidget = (props: IProps) => {
 
     const updateEmptyHostsRemarks = useCallback((newRemarks: string[]) => {
         setRemarks((prev) => ({ ...prev, emptyHosts: newRemarks }))
-    }, [])
-
-    const updateEmptyInternalSquadsRemarks = useCallback((newRemarks: string[]) => {
-        setRemarks((prev) => ({ ...prev, emptyInternalSquads: newRemarks }))
     }, [])
 
     const updateHWIDMaxDevicesExceededRemarks = useCallback((newRemarks: string[]) => {
@@ -96,7 +91,6 @@ export const SubscriptionUserRemarksCardWidget = (props: IProps) => {
         const limitedFiltered = filterEmptyStrings(remarks.limited)
         const disabledFiltered = filterEmptyStrings(remarks.disabled)
         const emptyHostsFiltered = filterEmptyStrings(remarks.emptyHosts)
-        const emptyInternalSquadsFiltered = filterEmptyStrings(remarks.emptyInternalSquads)
         const HWIDMaxDevicesExceededFiltered = filterEmptyStrings(remarks.HWIDMaxDevicesExceeded)
         const HWIDNotSupportedFiltered = filterEmptyStrings(remarks.HWIDNotSupported)
 
@@ -106,8 +100,7 @@ export const SubscriptionUserRemarksCardWidget = (props: IProps) => {
             disabledFiltered[0] === '' ||
             HWIDMaxDevicesExceededFiltered[0] === '' ||
             HWIDNotSupportedFiltered[0] === '' ||
-            emptyHostsFiltered[0] === '' ||
-            emptyInternalSquadsFiltered[0] === ''
+            emptyHostsFiltered[0] === ''
         ) {
             notifications.show({
                 color: 'red',
@@ -127,7 +120,6 @@ export const SubscriptionUserRemarksCardWidget = (props: IProps) => {
                     limitedUsers: limitedFiltered,
                     disabledUsers: disabledFiltered,
                     emptyHosts: emptyHostsFiltered,
-                    emptyInternalSquads: emptyInternalSquadsFiltered,
                     HWIDMaxDevicesExceeded: HWIDMaxDevicesExceededFiltered,
                     HWIDNotSupported: HWIDNotSupportedFiltered
                 }
@@ -153,9 +145,6 @@ export const SubscriptionUserRemarksCardWidget = (props: IProps) => {
             limited: processRemarks(subscriptionSettings.customRemarks.limitedUsers),
             disabled: processRemarks(subscriptionSettings.customRemarks.disabledUsers),
             emptyHosts: processRemarks(subscriptionSettings.customRemarks.emptyHosts),
-            emptyInternalSquads: processRemarks(
-                subscriptionSettings.customRemarks.emptyInternalSquads
-            ),
             HWIDMaxDevicesExceeded: processRemarks(
                 subscriptionSettings.customRemarks.HWIDMaxDevicesExceeded
             ),
@@ -234,16 +223,6 @@ export const SubscriptionUserRemarksCardWidget = (props: IProps) => {
                                     initialRemarks={remarks.emptyHosts}
                                     onChange={updateEmptyHostsRemarks}
                                     title={t('subscription-user-remarks-card.widget.empty-hosts')}
-                                />
-
-                                <RemarksManager
-                                    icon={<TbCirclesRelation size="24px" />}
-                                    iconColor="green"
-                                    initialRemarks={remarks.emptyInternalSquads}
-                                    onChange={updateEmptyInternalSquadsRemarks}
-                                    title={t(
-                                        'subscription-user-remarks-card.widget.empty-internal-squads'
-                                    )}
                                 />
                             </Masonry>
                         </Card.Section>
