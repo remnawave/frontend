@@ -115,11 +115,15 @@ export function BaseSettingsBlockComponent({ form }: IProps) {
                                 <Stack gap={2}>
                                     <Group gap={4}>
                                         <Text fw={600} size="sm">
-                                            Hide "Get Link" Button
+                                            {t(
+                                                'base-settings-block.component.hide-get-link-button'
+                                            )}
                                         </Text>
                                     </Group>
                                     <Text c="dimmed" size="xs">
-                                        Hide the "Get Link" button top right corner
+                                        {t(
+                                            'base-settings-block.component.hide-the-get-link-button-top-right-corner'
+                                        )}
                                     </Text>
                                 </Stack>
                             </Group>

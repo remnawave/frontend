@@ -1871,7 +1871,9 @@
             "meta-title": "Meta Title",
             "meta-description": "Meta Description",
             "show-connection-keys": "Show Connection Keys",
-            "show-or-hide-raw-connection-keys": "Show or hide raw connection keys"
+            "show-or-hide-raw-connection-keys": "Show or hide raw connection keys",
+            "hide-get-link-button": "Hide \"Get Link\" Button",
+            "hide-the-get-link-button-top-right-corner": "Hide the \"Get Link\" button top right corner"
         }
     },
     "import-config-sections": {
