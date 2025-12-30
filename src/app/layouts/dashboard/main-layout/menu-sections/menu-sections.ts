@@ -231,7 +231,7 @@ export const useMenuSections = (): MenuItem[] => {
             section: [
                 {
                     name: t('constants.happ-routing-builder'),
-                    href: 'https://routing.happ.su',
+                    href: 'https://utils.docs.rw/happ-rb',
                     icon: HappLogo,
                     id: 'happ-routing-builder',
                     newTab: true
