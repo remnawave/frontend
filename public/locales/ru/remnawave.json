@@ -343,8 +343,8 @@
             "information": "Информация",
             "detailed-info": "Подробная информация",
             "subscription": "Подписка",
-            "accessible-nodes": "Accessible Nodes",
-            "qr-code": "QR Code"
+            "accessible-nodes": "Доступные ноды",
+            "qr-code": "QR Код"
         }
     },
     "empty-page": {
@@ -482,7 +482,7 @@
             "no-data-available-for-the-selected-period": "Нет доступных данных за выбранный период",
             "click-to-see-all": "Нажмите чтобы посмотреть все",
             "no-data-available": "Доступных данных нет",
-            "current-month": "Current Month",
+            "current-month": "Текущий месяц",
             "7-days": "7 дней",
             "14-days": "14 дней",
             "30-days": "30 дней",
@@ -733,7 +733,7 @@
             "subscription-links": "Подписные ссылки",
             "loading-subscription-links": "Загрузка ссылок на подписку ...",
             "no-available-hosts-found-for-this-user": "Для этого пользователя не найдено доступных хостов",
-            "connection-keys": "Connection Keys"
+            "connection-keys": "Ключи для подключения"
         }
     },
     "user-usage-modal": {
@@ -882,7 +882,7 @@
             "delete-device": "Удалить устройство",
             "device": "Устройство",
             "devices": "Устройств",
-            "hwid-devices": "HWID Devices",
+            "hwid-devices": "Устройства HWID",
             "important-note": "Важная информация",
             "important-note-line-1": "Эта функция доступна только с",
             "important-note-line-2": ".env переменной.",
@@ -1685,7 +1685,7 @@
             "user-status": "Статус пользователя",
             "empty-hosts": "Отсутствуют хосты",
             "empty-internal-squads": "Отсутствует внутренние сквады",
-            "hwid-max-devices-exceeded": "HWID: Max Devices Exceeded",
+            "hwid-max-devices-exceeded": "HWID: Макс. число устройств превышено",
             "hwid-not-supported": "HWID: Not Supported"
         }
     },
@@ -1839,7 +1839,7 @@
         "component": {
             "import-config": "Импортировать конфигурацию",
             "download-config": "Загрузить конфигурацию",
-            "importing-config": "Импортирование...",
+            "importing-config": "Импортирование конфига",
             "this-may-take-a-while": "Это может занять немного времени...",
             "success": "Успешно",
             "config-imported-successfully": "Конфигурация успешно импортирована",
@@ -1872,8 +1872,8 @@
             "meta-description": "Мета описание",
             "show-connection-keys": "Показать ключи подключения",
             "show-or-hide-raw-connection-keys": "Показать или скрыть ключи подключения",
-            "hide-get-link-button": "Hide \"Get Link\" Button",
-            "hide-the-get-link-button-top-right-corner": "Hide the \"Get Link\" button top right corner"
+            "hide-get-link-button": "Скрыть кнопку «Получить ссылку»",
+            "hide-the-get-link-button-top-right-corner": "Скрыть кнопку «Получить ссылку» в правом верхнем углу"
         }
     },
     "import-config-sections": {
@@ -1892,11 +1892,11 @@
     },
     "revoke-subscription-user": {
         "feature": {
-            "full-revoke": "Full Revoke",
-            "revoke": "Revoke",
-            "passwords-only": "Passwords Only",
-            "passwords-only-decription": "Only regenerates Connection Passwords, Subscription URL stays the same",
-            "full-revoke-description": "Regenerates Subscription URL and Connection Passwords"
+            "full-revoke": "Полный перевыпуск",
+            "revoke": "Перевыпуск подписки",
+            "passwords-only": "Только пароли",
+            "passwords-only-decription": "Перегенерировать только пароли подключения, URL-адрес подписки остается тем же",
+            "full-revoke-description": "Перегенерировать URL-адрес подписки и пароли подключения"
         }
     }
 }
