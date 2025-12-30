@@ -15,11 +15,18 @@
 
 .version {
     cursor: pointer;
+    min-width: 85px;
 
     &.newVersion {
         @mixin dark {
             animation: glowPulse 3s ease-in-out infinite;
             border-color: var(--mantine-color-cyan-5);
+            color: var(--mantine-color-cyan-5);
         }
+    }
+
+    &.dev {
+        border-color: var(--mantine-color-red-4);
+        color: var(--mantine-color-red-4);
     }
 }

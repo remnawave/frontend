@@ -14,6 +14,13 @@
     transition: border-color 150ms ease;
 }
 
+.container.small {
+    gap: 8px;
+    padding: 8px 12px;
+    font-size: var(--mantine-font-size-xs);
+    border-radius: var(--mantine-radius-sm);
+}
+
 .container:hover {
     border-color: var(--mantine-color-dark-4);
 }
@@ -34,6 +41,10 @@
     background: linear-gradient(to right, transparent, var(--mantine-color-dark-7) 70%);
     pointer-events: none;
     z-index: 1;
+}
+
+.small .codeWrapper::after {
+    width: 24px;
 }
 
 .code {

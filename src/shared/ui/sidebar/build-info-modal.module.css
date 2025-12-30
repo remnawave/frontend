@@ -1,0 +1,57 @@
+.updateCard {
+    background: rgba(45, 212, 191, 0.08);
+    border: 1px solid rgba(45, 212, 191, 0.2);
+}
+
+.updateIconBox {
+    padding: 10px;
+    border-radius: var(--mantine-radius-md);
+    background: rgba(45, 212, 191, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.updateTextWrapper {
+    flex: 1;
+}
+
+.mainCard {
+    background: linear-gradient(
+        135deg,
+        var(--mantine-color-dark-6) 0%,
+        var(--mantine-color-dark-7) 100%
+    );
+    border: 1px solid var(--mantine-color-dark-4);
+}
+
+.divider {
+    opacity: 0.3;
+}
+
+.buildTimeCard {
+    background: rgba(99, 102, 241, 0.08);
+    border: 1px solid rgba(99, 102, 241, 0.2);
+}
+
+.buildNumberCard {
+    background: rgba(139, 92, 246, 0.08);
+    border: 1px solid rgba(139, 92, 246, 0.2);
+}
+
+.backendCard {
+    background: rgba(45, 212, 191, 0.06);
+    border: 1px solid rgba(45, 212, 191, 0.15);
+}
+
+.frontendCard {
+    background: rgba(6, 182, 212, 0.06);
+    border: 1px solid rgba(6, 182, 212, 0.15);
+}
+
+.commitSha {
+    background: rgba(0, 0, 0, 0.2);
+    padding: 4px 8px;
+    border-radius: var(--mantine-radius-sm);
+    flex: 1;
+}

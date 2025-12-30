@@ -1,5 +1,6 @@
 import {
     GetBandwidthStatsCommand,
+    GetMetadataCommand,
     GetNodesMetricsCommand,
     GetNodesStatisticsCommand,
     GetRemnawaveHealthCommand,
@@ -29,6 +30,9 @@ export const systemQueryKeys = createQueryKeys('system', {
         queryKey: null
     },
     getNodesMetrics: {
+        queryKey: null
+    },
+    getRemnawaveMetadata: {
         queryKey: null
     }
 })
@@ -103,4 +107,16 @@ export const useGetNodesMetrics = createGetQueryHook({
         refetchInterval: sToMs(30)
     },
     errorHandler: (error) => errorHandler(error, 'Get Nodes Metrics')
+})
+
+export const useGetRemnawaveMetadata = createGetQueryHook({
+    endpoint: GetMetadataCommand.TSQ_url,
+    responseSchema: GetMetadataCommand.ResponseSchema,
+    getQueryKey: () => systemQueryKeys.getRemnawaveMetadata.queryKey,
+    rQueryParams: {
+        placeholderData: keepPreviousData,
+        refetchOnMount: false,
+        staleTime: sToMs(3_600)
+    },
+    errorHandler: (error) => errorHandler(error, 'Get Remnawave Metadata')
 })

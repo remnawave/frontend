@@ -40,33 +40,6 @@ jobs:
               with:
                   node-version: '22.x'
 
-            - name: Generate build-info.json
-              env:
-                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-              run: |
-                  SHORT_SHA=$(echo "${{ github.sha }}" | cut -c1-8)
-                  BUILD_TIME=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
-                  BRANCH="main"
-                  FULL_SHA="${{ github.sha }}"
-                  TAG="null"
-
-                  if [[ "${{ github.ref }}" == refs/tags/* ]]; then
-                  TAG="${{ github.ref_name }}"
-                  fi
-
-                  COMMIT_URL="https://github.com/${{ github.repository }}/commit/$SHORT_SHA"
-
-                  cat <<EOF > build.info.json
-                  {
-                  "buildTime": "$BUILD_TIME",
-                  "commitFull": "$FULL_SHA",
-                  "commit": "$SHORT_SHA",
-                  "tag": $( [ "$TAG" = "null" ] && echo null || echo "\"$TAG\"" ),
-                  "branch": "$BRANCH",
-                  "commitUrl": "$COMMIT_URL"
-                  }
-                  EOF
-
             - name: Generate changelog
               id: changelog
               run: |
