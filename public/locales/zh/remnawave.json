@@ -1873,7 +1873,7 @@
             "show-connection-keys": "显示连接密钥",
             "show-or-hide-raw-connection-keys": "是否显示原始连接密钥",
             "hide-get-link-button": "Hide \"Get Link\" Button",
-            "hide-the-get-link-button-top-right-corner": "Hide the \"Get Link\" button top right corner"
+            "hide-the-get-link-button-top-right-corner": "Hide the \"Get Link\" button from the top right corner"
         }
     },
     "import-config-sections": {
