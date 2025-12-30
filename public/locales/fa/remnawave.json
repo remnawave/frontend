@@ -343,8 +343,8 @@
             "information": "اطلاعات",
             "detailed-info": "اطلاعات دقیق",
             "subscription": "اشتراک",
-            "accessible-nodes": "Accessible Nodes",
-            "qr-code": "QR Code"
+            "accessible-nodes": "نودهای قابل دسترسی",
+            "qr-code": "کد QR"
         }
     },
     "empty-page": {
@@ -482,7 +482,7 @@
             "no-data-available-for-the-selected-period": "داده‌ای برای دوره انتخاب‌شده در دسترس نیست",
             "click-to-see-all": "برای دیدن همه کلیک کنید",
             "no-data-available": "داده‌ای در دسترس نیست",
-            "current-month": "Current Month",
+            "current-month": "ماه جاری",
             "7-days": "۷ روز",
             "14-days": "۱۴ روز",
             "30-days": "۳۰ روز",
@@ -733,7 +733,7 @@
             "subscription-links": "لینک‌های اشتراک",
             "loading-subscription-links": "درحال بارگذاری لینک‌های اشتراک ...",
             "no-available-hosts-found-for-this-user": "هیچ هاست موجودی برای این کاربر یافت نشد",
-            "connection-keys": "Connection Keys"
+            "connection-keys": "کلیدهای اتصال"
         }
     },
     "user-usage-modal": {
@@ -764,7 +764,7 @@
     "get-user-usage": {
         "feature": {
             "show-usage": "نمایش مصرف",
-            "usage": "Usage"
+            "usage": "میزان استفاده"
         }
     },
     "detailed-user-info-drawer": {
@@ -882,7 +882,7 @@
             "delete-device": "حذف دستگاه",
             "device": "دستگاه",
             "devices": "دستگاه‌ها",
-            "hwid-devices": "HWID Devices",
+            "hwid-devices": "دستگاه‌های HWID",
             "important-note": "نکته مهم",
             "important-note-line-1": "این قابلیت تنها با",
             "important-note-line-2": "مقدار .env در دسترس است.",
@@ -1685,8 +1685,8 @@
             "user-status": "وضعیت کاربر",
             "empty-hosts": "هاست‌های خالی",
             "empty-internal-squads": "اسکوادهای داخلی خالی",
-            "hwid-max-devices-exceeded": "HWID: Max Devices Exceeded",
-            "hwid-not-supported": "HWID: Not Supported"
+            "hwid-max-devices-exceeded": "HWID: ظرفیت دستگاه‌ها پر شده است",
+            "hwid-not-supported": "HWID: پشتیبانی نمی‌شود"
         }
     },
     "multi-select-nodes": {
@@ -1872,8 +1872,8 @@
             "meta-description": "توضیحات متا",
             "show-connection-keys": "نمایش کلیدهای اتصال",
             "show-or-hide-raw-connection-keys": "نمایش یا مخفی‍ی‌سازی کلیدهای اتصال خام",
-            "hide-get-link-button": "Hide \"Get Link\" Button",
-            "hide-the-get-link-button-top-right-corner": "Hide the \"Get Link\" button from the top right corner"
+            "hide-get-link-button": "مخفی کردن دکمه \"دریافت لینک\"",
+            "hide-the-get-link-button-top-right-corner": "دکمه \"دریافت لینک\" از گوشه بالا راست مخفی شود"
         }
     },
     "import-config-sections": {
@@ -1892,11 +1892,11 @@
     },
     "revoke-subscription-user": {
         "feature": {
-            "full-revoke": "Full Revoke",
-            "revoke": "Revoke",
-            "passwords-only": "Passwords Only",
-            "passwords-only-decription": "Only regenerates Connection Passwords, Subscription URL stays the same",
-            "full-revoke-description": "Regenerates Subscription URL and Connection Passwords"
+            "full-revoke": "لغو اشتراک کامل",
+            "revoke": "لغو اشتراک",
+            "passwords-only": "فقط رمز عبور",
+            "passwords-only-decription": "فقط رمزهای اتصال را بازتولید می‌کند و لینک اشتراک تغییر نمی‌کند",
+            "full-revoke-description": "آدرس لینک اشتراک و رمزهای اتصال را بازتولید می‌کند"
         }
     }
 }
