@@ -482,7 +482,7 @@
             "no-data-available-for-the-selected-period": "所选时段无可用数据",
             "click-to-see-all": "点击查看全部",
             "no-data-available": "无可用数据",
-            "current-month": "Current Month",
+            "current-month": "本月",
             "7-days": "7 天",
             "14-days": "14 天",
             "30-days": "30 天",
@@ -1685,8 +1685,8 @@
             "user-status": "用户状态",
             "empty-hosts": "清空主机",
             "empty-internal-squads": "清空内部小队",
-            "hwid-max-devices-exceeded": "HWID: Max Devices Exceeded",
-            "hwid-not-supported": "HWID: Not Supported"
+            "hwid-max-devices-exceeded": "HWID：超过最大设备数量",
+            "hwid-not-supported": "HWID：不支持"
         }
     },
     "multi-select-nodes": {
@@ -1872,8 +1872,8 @@
             "meta-description": "Meta 描述",
             "show-connection-keys": "显示连接密钥",
             "show-or-hide-raw-connection-keys": "是否显示原始连接密钥",
-            "hide-get-link-button": "Hide \"Get Link\" Button",
-            "hide-the-get-link-button-top-right-corner": "Hide the \"Get Link\" button from the top right corner"
+            "hide-get-link-button": "隐藏“获取链接”按钮",
+            "hide-the-get-link-button-top-right-corner": "从右上角隐藏“获取链接”按钮"
         }
     },
     "import-config-sections": {
