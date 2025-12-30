@@ -1873,7 +1873,7 @@
             "show-connection-keys": "Show Connection Keys",
             "show-or-hide-raw-connection-keys": "Show or hide raw connection keys",
             "hide-get-link-button": "Hide \"Get Link\" Button",
-            "hide-the-get-link-button-top-right-corner": "Hide the \"Get Link\" button top right corner"
+            "hide-the-get-link-button-top-right-corner": "Hide the \"Get Link\" button from the top right corner"
         }
     },
     "import-config-sections": {
