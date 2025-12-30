@@ -8,6 +8,7 @@ import { useForm } from '@mantine/form'
 import { Link } from 'react-router-dom'
 
 import { QueryKeys, useUpdateSubscriptionSettings } from '@shared/api/hooks'
+import { TemplateInfoPopoverShared } from '@shared/ui/popovers'
 import { SettingsCardShared } from '@shared/ui/settings-card'
 import { handleFormErrors } from '@shared/utils/misc'
 import { queryClient } from '@shared/api'
@@ -100,6 +101,7 @@ export const SubscriptionHwidSettingsWidget = (props: IProps) => {
                             )}
                             key={form.key('hwidSettings.maxDevicesAnnounce')}
                             label={t('subscription-hwid-settings.widget.max-devices-announce')}
+                            leftSection={<TemplateInfoPopoverShared showHostDescription={false} />}
                             maxLength={200}
                             minRows={4}
                             placeholder={t('subscription-hwid-settings.widget.max-200-characters')}

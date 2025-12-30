@@ -20,6 +20,7 @@ import { useTranslation } from 'react-i18next'
 import { useEffect, useState } from 'react'
 
 import { QueryKeys, useUpdateExternalSquad } from '@shared/api/hooks'
+import { TemplateInfoPopoverShared } from '@shared/ui/popovers'
 import { queryClient } from '@shared/api'
 
 interface IProps {
@@ -223,6 +224,11 @@ export const ExternalSquadsHwidSettingsTabWidget = (props: IProps) => {
                                         label={t(
                                             'subscription-hwid-settings.widget.max-devices-announce'
                                         )}
+                                        leftSection={
+                                            <TemplateInfoPopoverShared
+                                                showHostDescription={false}
+                                            />
+                                        }
                                         maxLength={200}
                                         minRows={3}
                                         onChange={(e) =>
