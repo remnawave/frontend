@@ -11,7 +11,7 @@ import {
     ThemeIcon
 } from '@mantine/core'
 import { TSubscriptionPageRawConfig } from '@remnawave/subscription-page-types'
-import { TbHealthRecognition, TbKey } from 'react-icons/tb'
+import { TbHealthRecognition, TbKey, TbLink } from 'react-icons/tb'
 import { HiQuestionMarkCircle } from 'react-icons/hi'
 import { UseFormReturnType } from '@mantine/form'
 import { useTranslation } from 'react-i18next'
@@ -92,6 +92,34 @@ export function BaseSettingsBlockComponent({ form }: IProps) {
                                         {t(
                                             'base-settings-block.component.show-or-hide-raw-connection-keys'
                                         )}
+                                    </Text>
+                                </Stack>
+                            </Group>
+                            <Checkbox.Indicator color="cyan.8" size="md" />
+                        </Group>
+                    </Checkbox.Card>
+
+                    <Checkbox.Card
+                        key={form.key('baseSettings.hideGetLinkButton')}
+                        p="md"
+                        radius="md"
+                        {...form.getInputProps('baseSettings.hideGetLinkButton', {
+                            type: 'checkbox'
+                        })}
+                    >
+                        <Group justify="space-between" wrap="nowrap">
+                            <Group gap="sm" wrap="nowrap">
+                                <ThemeIcon size="lg" variant="gradient-cyan">
+                                    <TbLink size={20} />
+                                </ThemeIcon>
+                                <Stack gap={2}>
+                                    <Group gap={4}>
+                                        <Text fw={600} size="sm">
+                                            Hide "Get Link" Button
+                                        </Text>
+                                    </Group>
+                                    <Text c="dimmed" size="xs">
+                                        Hide the "Get Link" button top right corner
                                     </Text>
                                 </Stack>
                             </Group>
