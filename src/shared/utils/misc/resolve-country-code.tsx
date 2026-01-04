@@ -1,5 +1,5 @@
-import { TbServer2, TbWorld } from 'react-icons/tb'
 import ReactCountryFlag from 'react-country-flag'
+import { TbServer2 } from 'react-icons/tb'
 
 /**
  * 🏁 Returns an unicode-emoji-flag-icon for a two digit country code or a locale (eg. en-US)
@@ -270,16 +270,16 @@ export function emojiFlag(
     return countryFlagData[(arr[1] || arr[0]).toUpperCase()] || fallback
 }
 
-export function resolveCountryCode(countryCode?: string) {
+export function resolveCountryCode(countryCode?: string, size: number = 24) {
     if (countryCode === 'XX' || !countryCode) {
-        return <TbServer2 size={18} />
+        return <TbServer2 size={size} />
     }
 
     return (
         <ReactCountryFlag
             countryCode={countryCode}
             style={{
-                fontSize: '1.5em',
+                fontSize: size,
                 borderRadius: '2px'
             }}
         />

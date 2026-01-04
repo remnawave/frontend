@@ -1,4 +1,4 @@
-import { Checkbox, Group, Stack, Text, TextInput } from '@mantine/core'
+import { Checkbox, Stack, Text, TextInput } from '@mantine/core'
 import { useVirtualizer } from '@tanstack/react-virtual'
 import { TbCirclesRelation } from 'react-icons/tb'
 import { useTranslation } from 'react-i18next'
@@ -32,21 +32,11 @@ export const InternalSquadsListWidget = memo((props: IProps) => {
     })
 
     return (
-        <Stack gap="md" mt={10}>
-            <Stack gap={0}>
-                <Group gap={5}>
-                    <TbCirclesRelation size={20} />
-                    <Text fw={600} size="sm">
-                        {label}
-                    </Text>
-                </Group>
-
-                <Text c="dimmed" size="sm">
-                    {description}
-                </Text>
-            </Stack>
-
+        <Stack gap="md">
             <TextInput
+                description={description}
+                label={label}
+                leftSection={<TbCirclesRelation size={16} />}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder={t('internal-squads-list.widget.search-internal-squads')}
                 value={searchQuery}

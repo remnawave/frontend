@@ -1,4 +1,5 @@
 import { Group, Stack, Text, ThemeIcon, ThemeIconProps, Title, TitleProps } from '@mantine/core'
+import { useClipboard } from '@mantine/hooks'
 
 type IProps = {
     actionIconProps?: ThemeIconProps
@@ -8,6 +9,7 @@ type IProps = {
     subtitle?: string
     title: string
     titleOrder?: TitleProps['order']
+    withCopy?: boolean
 }
 
 export const BaseOverlayHeader = (props: IProps) => {
@@ -18,8 +20,11 @@ export const BaseOverlayHeader = (props: IProps) => {
         iconVariant,
         subtitle,
         title,
-        titleOrder = 4
+        titleOrder = 4,
+        withCopy = false
     } = props
+
+    const { copy } = useClipboard()
 
     return (
         <Group gap="sm" wrap="nowrap">
@@ -28,10 +33,22 @@ export const BaseOverlayHeader = (props: IProps) => {
             </ThemeIcon>
 
             <Stack gap="0">
-                <Title c="white" order={titleOrder}>
+                <Title
+                    c="white"
+                    onClick={() => withCopy && copy(title)}
+                    order={titleOrder}
+                    style={{
+                        cursor: withCopy ? 'copy' : 'default'
+                    }}
+                >
                     {title}
                 </Title>
-                <Text c="dimmed" size="xs">
+                <Text
+                    c="dimmed"
+                    onClick={() => withCopy && copy(subtitle)}
+                    size="xs"
+                    style={{ cursor: withCopy ? 'copy' : 'default' }}
+                >
                     {subtitle}
                 </Text>
             </Stack>

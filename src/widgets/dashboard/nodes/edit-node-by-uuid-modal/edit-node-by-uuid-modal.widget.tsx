@@ -1,12 +1,12 @@
+import { Button, CopyButton, em, Menu, px, Stack, Text } from '@mantine/core'
+import { PiEmpty, PiFloppyDiskDuotone, PiXBold } from 'react-icons/pi'
 import { UpdateNodeCommand } from '@remnawave/backend-contract'
-import { Button, em, Modal, Stack, Text } from '@mantine/core'
 import { zodResolver } from 'mantine-form-zod-resolver'
-import { PiEmpty, PiXBold } from 'react-icons/pi'
+import { TbCopy, TbCpu, TbDots } from 'react-icons/tb'
 import { useTranslation } from 'react-i18next'
 import { useMediaQuery } from '@mantine/hooks'
 import { useEffect, useState } from 'react'
 import { useForm } from '@mantine/form'
-import { TbCpu } from 'react-icons/tb'
 
 import {
     configProfilesQueryKeys,
@@ -15,12 +15,19 @@ import {
     useGetPubKey,
     useUpdateNode
 } from '@shared/api/hooks'
+import { ToggleNodeStatusButtonFeature } from '@features/ui/dashboard/nodes/toggle-node-status-button'
+import { GetNodeLinkedHostsFeature } from '@features/ui/dashboard/nodes/get-node-linked-hosts'
+import { GetNodeUsersUsageFeature } from '@features/ui/dashboard/nodes/get-node-users-usage'
+import { RestartNodeButtonFeature } from '@features/ui/dashboard/nodes/restart-node-button'
+import { ResetNodeTrafficFeature } from '@features/ui/dashboard/nodes/reset-node-traffic'
 import { MODALS, useModalClose, useModalState } from '@entities/dashboard/modal-store'
 import { BaseNodeForm } from '@shared/ui/forms/nodes/base-node-form/base-node-form'
+import { DeleteNodeFeature } from '@features/ui/dashboard/nodes/delete-node'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { bytesToGbUtil, gbToBytesUtil } from '@shared/utils/bytes'
 import { LoaderModalShared } from '@shared/ui/loader-modal'
 import { ModalFooter } from '@shared/ui/modal-footer'
+import { FramedModal } from '@shared/ui/framed-modal'
 import { queryClient } from '@shared/api'
 
 import { NodeDetailsCardWidget } from '../node-details-card/node-details-card.widget'
@@ -133,14 +140,76 @@ export const EditNodeByUuidModalWidget = () => {
     })
 
     return (
-        <Modal
+        <FramedModal
             centered
             closeOnEscape={false}
+            footer={
+                <>
+                    {fetchedNode && (
+                        <Menu keepMounted={true} position="top-end" shadow="md">
+                            <Menu.Target>
+                                <Button
+                                    color="gray"
+                                    leftSection={<TbDots size={px('1.2rem')} />}
+                                    size="md"
+                                >
+                                    {t('base-node-form.more-actions')}
+                                </Button>
+                            </Menu.Target>
+
+                            <Menu.Dropdown>
+                                <DeleteNodeFeature handleClose={handleClose} node={fetchedNode} />
+                                <Menu.Divider />
+
+                                <Menu.Label>{t('base-node-form.management')}</Menu.Label>
+                                <CopyButton value={fetchedNode.uuid}>
+                                    {({ copy }) => (
+                                        <Menu.Item
+                                            leftSection={<TbCopy size="16px" />}
+                                            onClick={copy}
+                                        >
+                                            {t('common.copy-uuid')}
+                                        </Menu.Item>
+                                    )}
+                                </CopyButton>
+                                <ResetNodeTrafficFeature
+                                    handleClose={handleClose}
+                                    node={fetchedNode}
+                                />
+
+                                <RestartNodeButtonFeature
+                                    handleClose={handleClose}
+                                    node={fetchedNode}
+                                />
+                                <ToggleNodeStatusButtonFeature
+                                    handleClose={handleClose}
+                                    node={fetchedNode}
+                                />
+                                <Menu.Divider />
+                                <Menu.Label>{t('base-node-form.quick-actions')}</Menu.Label>
+                                <GetNodeUsersUsageFeature nodeUuid={fetchedNode.uuid} />
+                                <GetNodeLinkedHostsFeature nodeUuid={fetchedNode.uuid} />
+                            </Menu.Dropdown>
+                        </Menu>
+                    )}
+                    <Button
+                        color="teal"
+                        disabled={!form.isDirty() || !form.isTouched()}
+                        leftSection={<PiFloppyDiskDuotone size="16px" />}
+                        loading={isUpdateNodePending}
+                        onClick={() => handleSubmit()}
+                        size="md"
+                        variant="light"
+                    >
+                        {t('common.save')}
+                    </Button>
+                </>
+            }
             fullScreen={isMobile}
             onClose={close}
             onExitTransitionEnd={() => handleClose()}
             opened={isOpen}
-            size="900px"
+            size="1000px"
             title={
                 <BaseOverlayHeader
                     IconComponent={TbCpu}
@@ -184,9 +253,6 @@ export const EditNodeByUuidModalWidget = () => {
                     advancedOpened={advancedOpened}
                     fetchedNode={fetchedNode}
                     form={form}
-                    handleClose={() => handleClose(true)}
-                    handleSubmit={handleSubmit}
-                    isUpdateNodePending={isUpdateNodePending}
                     node={fetchedNode}
                     nodeDetailsCard={
                         fetchedNode && (
@@ -197,6 +263,6 @@ export const EditNodeByUuidModalWidget = () => {
                     setAdvancedOpened={setAdvancedOpened}
                 />
             )}
-        </Modal>
+        </FramedModal>
     )
 }

@@ -2,14 +2,11 @@ import {
     ActionIcon,
     Badge,
     Box,
-    Card,
-    Divider,
     Group,
     Loader,
     Paper,
     Progress,
     SimpleGrid,
-    Stack,
     Text,
     ThemeIconProps,
     Tooltip
@@ -29,6 +26,7 @@ import { getNodeResetDaysUtil, getXrayUptimeUtil } from '@shared/utils/time-util
 import { QueryKeys, useDisableNode, useEnableNode } from '@shared/api/hooks'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { prettyBytesToAnyUtil } from '@shared/utils/bytes'
+import { SectionCard } from '@shared/ui/section-card'
 import { XrayLogo } from '@shared/ui/logos'
 import { queryClient } from '@shared/api'
 import { Logo } from '@shared/ui'
@@ -135,15 +133,8 @@ export const NodeDetailsCardWidget = memo(({ node, fetchedNode }: IProps) => {
     }
 
     return (
-        <Card
-            p="md"
-            radius="lg"
-            style={{
-                background: 'rgba(255, 255, 255, 0.02)',
-                border: '1px solid rgba(255, 255, 255, 0.08)'
-            }}
-        >
-            <Stack gap="md">
+        <SectionCard.Root>
+            <SectionCard.Section>
                 <Group align="flex-center" justify="space-between">
                     <BaseOverlayHeader
                         IconComponent={IconComponent}
@@ -248,9 +239,8 @@ export const NodeDetailsCardWidget = memo(({ node, fetchedNode }: IProps) => {
                         )}
                     </Group>
                 </Group>
-
-                <Divider style={{ opacity: 0.3 }} />
-
+            </SectionCard.Section>
+            <SectionCard.Section>
                 <Box>
                     <Group gap="xs" justify="space-between" mb={6}>
                         <Group gap={6}>
@@ -283,9 +273,8 @@ export const NodeDetailsCardWidget = memo(({ node, fetchedNode }: IProps) => {
                         </Group>
                     )}
                 </Box>
-
-                <Divider hidden={!nodeData.isConnected} style={{ opacity: 0.3 }} />
-
+            </SectionCard.Section>
+            <SectionCard.Section>
                 {nodeData.isConnected && (
                     <SimpleGrid
                         cols={{
@@ -402,7 +391,7 @@ export const NodeDetailsCardWidget = memo(({ node, fetchedNode }: IProps) => {
                         )}
                     </SimpleGrid>
                 )}
-            </Stack>
-        </Card>
+            </SectionCard.Section>
+        </SectionCard.Root>
     )
 })
