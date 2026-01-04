@@ -169,9 +169,7 @@ export const UserIdentificationCard = memo((props: IProps) => {
                                 cursor: 'pointer'
                             }}
                         >
-                            <Tooltip
-                                label={`${t('use-table-columns.expire-at')}: ${expirationFormattedDate}`}
-                            >
+                            <Tooltip label={t('create-user-modal.widget.expiry-date')}>
                                 <Group gap="xs" justify="center">
                                     <TbCalendar color={getExpirationStyle().iconColor} size={18} />
                                     <Text c={getExpirationStyle().color} fw={600} size="sm">
