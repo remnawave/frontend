@@ -6,8 +6,8 @@ import { motion } from 'motion/react'
 
 import { MODALS, useModalCloseActions, useModalState } from '@entities/dashboard/modal-store'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
+import { nodesQueryKeys, QueryKeys } from '@shared/api/hooks'
 import { LoaderModalShared } from '@shared/ui/loader-modal'
-import { nodesQueryKeys } from '@shared/api/hooks'
 import { queryClient } from '@shared/api'
 
 import { EditNodeByUuidModalContent } from './edit-node-by-uuid-modal.content'
@@ -29,6 +29,10 @@ export const EditNodeByUuidModalWidget = () => {
                 queryKey: nodesQueryKeys.getNode({ uuid: nodeUuid.nodeUuid }).queryKey
             })
         }
+
+        queryClient.refetchQueries({
+            queryKey: QueryKeys.nodes.getAllNodes.queryKey
+        })
     }
 
     return (
@@ -58,10 +62,7 @@ export const EditNodeByUuidModalWidget = () => {
                     <LoaderModalShared h="78vh" />
                 </motion.div>
             ) : (
-                <EditNodeByUuidModalContent
-                    nodeUuid={nodeUuid.nodeUuid}
-                    onClose={clearInternalStateAndClose}
-                />
+                <EditNodeByUuidModalContent nodeUuid={nodeUuid.nodeUuid} onClose={handleClose} />
             )}
         </Modal>
     )

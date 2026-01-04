@@ -63,10 +63,7 @@ export const ViewUserModal = () => {
                     initial={{ opacity: 0 }}
                     transition={{ duration: 0.3 }}
                 >
-                    <LoaderModalShared
-                        h="78vh"
-                        text={t('view-user-modal.widget.fetching-user-data')}
-                    />
+                    <LoaderModalShared h="78vh" />
                 </motion.div>
             ) : (
                 <ViewUserModalContent userUuid={selectedUser} />

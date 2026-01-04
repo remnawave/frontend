@@ -176,7 +176,7 @@ export const BaseNodeForm = <T extends UpdateNodeCommand.Request>(props: IProps<
                             <Button
                                 color="gray"
                                 leftSection={<TbDots size={px('1.2rem')} />}
-                                size="sm"
+                                size="md"
                             >
                                 {t('base-node-form.more-actions')}
                             </Button>
@@ -211,7 +211,7 @@ export const BaseNodeForm = <T extends UpdateNodeCommand.Request>(props: IProps<
                     leftSection={<PiFloppyDiskDuotone size="16px" />}
                     loading={isDataSubmitting}
                     onClick={handleSubmit}
-                    size="sm"
+                    size="md"
                     variant="light"
                 >
                     {t('common.save')}
