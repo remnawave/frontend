@@ -1,20 +1,13 @@
-.modalFooter {
-    bottom: 0;
-    border-top: none;
+.footer {
+    width: calc(100% + 2 * var(--mantine-spacing-sm));
+    margin-left: calc(-1 * var(--mantine-spacing-sm));
+    bottom: -1px;
+    background: rgba(22, 27, 35, 0.95);
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
     border-bottom: none;
-    border-radius: var(--mantine-radius-default);
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.3);
-    padding: 10px !important;
-
-    background-color: transparent;
-
-    -webkit-backdrop-filter: blur(15px);
-    backdrop-filter: blur(15px);
-
-    @-moz-document url-prefix() {
-        background-color: var(--mantine-color-dark-7);
-        backdrop-filter: none;
-    }
+    padding-left: var(--mantine-spacing-sm);
+    padding-right: var(--mantine-spacing-sm);
+    padding-top: var(--mantine-spacing-sm) !important;
+    padding-bottom: var(--mantine-spacing-sm) !important;
+    border-radius: 0;
 }

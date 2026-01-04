@@ -4,19 +4,18 @@ import {
     PiGlobeSimple,
     PiUsersDuotone
 } from 'react-icons/pi'
-import { Avatar, Badge, Box, em, Flex, Grid, Progress, Text } from '@mantine/core'
-import { CSSProperties, memo, useCallback, useMemo } from 'react'
-import { useClipboard, useMediaQuery } from '@mantine/hooks'
+import { Avatar, Badge, Box, Flex, Grid, Progress, Text } from '@mantine/core'
 import { notifications } from '@mantine/notifications'
 import ReactCountryFlag from 'react-country-flag'
 import { useSortable } from '@dnd-kit/sortable'
 import { TbAlertCircle } from 'react-icons/tb'
 import { useTranslation } from 'react-i18next'
+import { useClipboard } from '@mantine/hooks'
+import { CSSProperties, memo } from 'react'
 import { CSS } from '@dnd-kit/utilities'
 import clsx from 'clsx'
 
 import { getNodeResetDaysUtil, getXrayUptimeUtil } from '@shared/utils/time-utils'
-import { useNodesStoreActions } from '@entities/dashboard/nodes'
 import { prettyBytesToAnyUtil } from '@shared/utils/bytes'
 import { faviconResolver } from '@shared/utils/misc'
 import { XrayLogo } from '@shared/ui/logos'
@@ -25,12 +24,47 @@ import { NodeStatusBadgeWidget } from '../node-status-badge'
 import classes from './NodeCard.module.css'
 import { IProps } from './interfaces'
 
+const getNodeColors = (node: IProps['node']) => {
+    if (node.isDisabled) {
+        return {
+            backgroundColor: 'rgba(107, 114, 128, 0.15)',
+            borderColor: 'rgba(107, 114, 128, 0.3)',
+            boxShadow: 'rgba(107, 114, 128, 0.2)'
+        }
+    }
+    if (node.isConnected) {
+        return {
+            backgroundColor: 'rgba(45, 212, 191, 0.15)',
+            borderColor: 'rgba(45, 212, 191, 0.3)',
+            boxShadow: 'rgba(45, 212, 191, 0.2)'
+        }
+    }
+    if (node.isConnecting) {
+        return {
+            backgroundColor: 'rgba(245, 158, 11, 0.15)',
+            borderColor: 'rgba(245, 158, 11, 0.3)',
+            boxShadow: 'rgba(245, 158, 11, 0.2)'
+        }
+    }
+    return {
+        backgroundColor: 'rgba(239, 68, 68, 0.15)',
+        borderColor: 'rgba(239, 68, 68, 0.3)',
+        boxShadow: 'rgba(239, 68, 68, 0.2)'
+    }
+}
+
+const getProgressColor = (percentage: number, fallback: boolean) => {
+    if (fallback) return 'teal.6'
+    if (percentage > 95) return 'red.6'
+    if (percentage > 80) return 'yellow.6'
+    return 'teal.6'
+}
+
 export const NodeCardWidget = memo((props: IProps) => {
     const { t } = useTranslation()
-    const { node, isDragOverlay = false } = props
-    const actions = useNodesStoreActions()
+    const { handleViewNode, node, isDragOverlay = false, isMobile } = props
+
     const clipboard = useClipboard({ timeout: 500 })
-    const isMobile = useMediaQuery(`(max-width: ${em(768)})`)
 
     const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
         id: node.uuid
@@ -43,95 +77,35 @@ export const NodeCardWidget = memo((props: IProps) => {
         zIndex: isDragging ? 1000 : 'auto'
     }
 
-    const trafficData = useMemo(() => {
-        let maxData = '∞'
-        let percentage = 0
-        const prettyUsedData = prettyBytesToAnyUtil(node.trafficUsedBytes || 0) || '0 B'
+    const prettyUsedData = prettyBytesToAnyUtil(node.trafficUsedBytes || 0) || '0 B'
+    const maxData = node.isTrafficTrackingActive
+        ? prettyBytesToAnyUtil(node.trafficLimitBytes || 0) || '∞'
+        : '∞'
 
-        if (node.isTrafficTrackingActive) {
-            maxData = prettyBytesToAnyUtil(node.trafficLimitBytes || 0) || '∞'
-            if (node.trafficLimitBytes === 0) {
-                percentage = 100
-            } else {
-                percentage = Math.floor(
-                    ((node.trafficUsedBytes ?? 0) * 100) / (node.trafficLimitBytes ?? 0)
-                )
-            }
-        }
+    const calcPercentage = () => {
+        if (!node.isTrafficTrackingActive) return 0
+        if (node.trafficLimitBytes === 0) return 100
+        return Math.floor(((node.trafficUsedBytes ?? 0) * 100) / (node.trafficLimitBytes ?? 0))
+    }
+    const percentage = calcPercentage()
+    const fallbackProgress = node.isTrafficTrackingActive && node.trafficLimitBytes === 0
 
-        return {
-            maxData,
-            percentage,
-            prettyUsedData,
-            fallbackProgress: node.isTrafficTrackingActive && node.trafficLimitBytes === 0
-        }
-    }, [node.trafficUsedBytes, node.trafficLimitBytes, node.isTrafficTrackingActive])
+    const isOnline = node.isConnected && node.xrayUptime !== '0' && !node.isDisabled
+    const isConfigMissing =
+        node.configProfile.activeConfigProfileUuid === null ||
+        node.configProfile.activeInbounds.length === 0
+    const { backgroundColor, borderColor, boxShadow } = getNodeColors(node)
+    const progressColor = getProgressColor(percentage, fallbackProgress)
 
-    const isOnline = useMemo(() => {
-        return node.isConnected && node.xrayUptime !== '0' && !node.isDisabled
-    }, [node.isConnected, node.xrayUptime, node.isDisabled])
-
-    const getProgressColor = useCallback(() => {
-        if (trafficData.fallbackProgress) return 'teal.6'
-        if (trafficData.percentage > 95) return 'red.6'
-        if (trafficData.percentage > 80) return 'yellow.6'
-        return 'teal.6'
-    }, [trafficData.percentage, trafficData.fallbackProgress])
-
-    const handleCopy = useCallback(
-        (e: React.MouseEvent) => {
-            e.stopPropagation()
-            clipboard.copy(`${node.address}`)
-            notifications.show({
-                message: `${node.address}`,
-                title: t('node-card.widget.copied'),
-                color: 'teal'
-            })
-        },
-        [clipboard, node.address, t]
-    )
-
-    const handleViewNode = useCallback(() => {
-        actions.setNode(node)
-        actions.toggleEditModal(true)
-    }, [actions, node])
-
-    const { backgroundColor, borderColor, boxShadow } = useMemo(() => {
-        let backgroundColor = 'rgba(239, 68, 68, 0.15)'
-        let borderColor = 'rgba(239, 68, 68, 0.3)'
-        let boxShadow = 'rgba(239, 68, 68, 0.2)'
-
-        if (node.isDisabled) {
-            backgroundColor = 'rgba(107, 114, 128, 0.15)'
-            borderColor = 'rgba(107, 114, 128, 0.3)'
-            boxShadow = 'rgba(107, 114, 128, 0.2)'
-
-            return { backgroundColor, borderColor, boxShadow }
-        }
-
-        if (node.isConnected) {
-            backgroundColor = 'rgba(45, 212, 191, 0.15)'
-            borderColor = 'rgba(45, 212, 191, 0.3)'
-            boxShadow = 'rgba(45, 212, 191, 0.2)'
-        } else if (node.isConnecting) {
-            backgroundColor = 'rgba(245, 158, 11, 0.15)'
-            borderColor = 'rgba(245, 158, 11, 0.3)'
-            boxShadow = 'rgba(245, 158, 11, 0.2)'
-        } else {
-            backgroundColor = 'rgba(239, 68, 68, 0.15)'
-            borderColor = 'rgba(239, 68, 68, 0.3)'
-            boxShadow = 'rgba(239, 68, 68, 0.2)'
-        }
-
-        return { backgroundColor, borderColor, boxShadow }
-    }, [node.isConnected, node.isConnecting, node.isDisabled, node.configProfile])
-
-    const isConfigMissing = useMemo(() => {
-        return (
-            node.configProfile.activeConfigProfileUuid === null ||
-            node.configProfile.activeInbounds.length === 0
-        )
-    }, [node.configProfile])
+    const handleCopy = (e: React.MouseEvent) => {
+        e.stopPropagation()
+        clipboard.copy(node.address)
+        notifications.show({
+            message: node.address,
+            title: t('node-card.widget.copied'),
+            color: 'teal'
+        })
+    }
 
     return (
         <Box
@@ -139,7 +113,7 @@ export const NodeCardWidget = memo((props: IProps) => {
                 [classes.nodeRowDragging]: isDragging
             })}
             data-dnd-overlay={isDragOverlay}
-            onClick={handleViewNode}
+            onClick={() => handleViewNode(node.uuid)}
             ref={isDragOverlay ? undefined : setNodeRef}
             style={{
                 ...style,
@@ -264,21 +238,17 @@ export const NodeCardWidget = memo((props: IProps) => {
                             <Flex direction="column" gap={4}>
                                 <Flex align="center" justify="space-between">
                                     <Text c="dimmed" ff="monospace" fw={600} size="sm" truncate>
-                                        {trafficData.prettyUsedData}
+                                        {prettyUsedData}
                                     </Text>
                                     <Text c="dimmed" size="xs" truncate>
-                                        {trafficData.maxData}
+                                        {maxData}
                                     </Text>
                                 </Flex>
                                 <Progress
-                                    color={
-                                        node.isTrafficTrackingActive ? getProgressColor() : 'teal'
-                                    }
+                                    color={node.isTrafficTrackingActive ? progressColor : 'teal'}
                                     radius="sm"
                                     size="sm"
-                                    value={
-                                        node.isTrafficTrackingActive ? trafficData.percentage : 100
-                                    }
+                                    value={node.isTrafficTrackingActive ? percentage : 100}
                                 />
                             </Flex>
                         </Box>
@@ -418,10 +388,10 @@ export const NodeCardWidget = memo((props: IProps) => {
                         <Flex direction="column" gap={2}>
                             <Flex align="center" justify="space-between">
                                 <Text c="dimmed" ff="monospace" fw={600} size="sm" truncate>
-                                    {trafficData.prettyUsedData}
+                                    {prettyUsedData}
                                 </Text>
                                 <Text c="dimmed" size="xs">
-                                    {node.isTrafficTrackingActive ? trafficData.maxData : '∞'}
+                                    {maxData}
                                 </Text>
                             </Flex>
                         </Flex>
@@ -429,17 +399,11 @@ export const NodeCardWidget = memo((props: IProps) => {
 
                     <Progress
                         color={
-                            node.isTrafficTrackingActive && trafficData.percentage >= 0
-                                ? getProgressColor()
-                                : 'teal'
+                            node.isTrafficTrackingActive && percentage >= 0 ? progressColor : 'teal'
                         }
                         radius="sm"
                         size="xs"
-                        value={
-                            node.isTrafficTrackingActive && trafficData.percentage >= 0
-                                ? trafficData.percentage
-                                : 100
-                        }
+                        value={node.isTrafficTrackingActive && percentage >= 0 ? percentage : 100}
                     />
 
                     <Flex align="center" justify="space-between" mt="xs">

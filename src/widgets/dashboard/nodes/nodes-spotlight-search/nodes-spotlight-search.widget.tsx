@@ -6,7 +6,7 @@ import ReactCountryFlag from 'react-country-flag'
 import { Spotlight } from '@mantine/spotlight'
 import { useTranslation } from 'react-i18next'
 
-import { useNodesStoreActions } from '@entities/dashboard/nodes'
+import { MODALS, useModalsStoreOpenWithData } from '@entities/dashboard/modal-store'
 
 import { NodeStatusBadgeWidget } from '../node-status-badge'
 
@@ -15,7 +15,8 @@ interface IProps {
 }
 
 export const NodesSpotlightSearchWidget = ({ nodes }: IProps) => {
-    const actions = useNodesStoreActions()
+    const openModalWithData = useModalsStoreOpenWithData()
+
     const { t } = useTranslation()
 
     const handleViewNode = (value: null | string) => {
@@ -25,8 +26,7 @@ export const NodesSpotlightSearchWidget = ({ nodes }: IProps) => {
 
         const node = nodes.find((node) => node.uuid === value)
         if (node) {
-            actions.setNode(node)
-            actions.toggleEditModal(true)
+            openModalWithData(MODALS.EDIT_NODE_BY_UUID_MODAL, { nodeUuid: node.uuid })
         }
     }
 

@@ -30,8 +30,9 @@ import {
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { LoaderModalShared } from '@shared/ui/loader-modal'
 import { handleFormErrors } from '@shared/utils/misc'
-import { FramedModal } from '@shared/ui/framed-modal'
 import { gbToBytesUtil } from '@shared/utils/bytes'
+import { Modal } from '@mantine/core'
+import { ModalFooter } from '@shared/ui/modal-footer'
 
 const MotionWrapper = motion.div
 const MotionStack = motion.create(Stack)
@@ -65,11 +66,13 @@ export const CreateUserModalWidget = () => {
     const { data: tags, isLoading: isTagsLoading } = useGetUserTags()
     const isMobile = useMediaQuery(`(max-width: ${em(768)})`)
 
-    const {
-        mutate: createUser,
-        isPending: isDataSubmitting,
-        isSuccess: isUserCreated
-    } = useCreateUser()
+    const { mutate: createUser, isPending: isDataSubmitting } = useCreateUser({
+        mutationFns: {
+            onSuccess: () => {
+                handleCloseModal()
+            }
+        }
+    })
 
     const form = useForm<CreateUserCommand.Request>({
         name: 'create-user-form',
@@ -117,12 +120,6 @@ export const CreateUserModalWidget = () => {
         form.resetTouched()
     }
 
-    useEffect(() => {
-        if (isUserCreated) {
-            handleCloseModal()
-        }
-    }, [isUserCreated])
-
     const handleSubmit = form.onSubmit(async (values) => {
         createUser(
             {
@@ -151,22 +148,8 @@ export const CreateUserModalWidget = () => {
     })
 
     return (
-        <FramedModal
+        <Modal
             centered
-            footer={
-                <Button
-                    color="teal"
-                    leftSection={<PiFloppyDiskDuotone size="16px" />}
-                    loading={isDataSubmitting}
-                    onClick={() => {
-                        handleSubmit()
-                    }}
-                    size="md"
-                    variant="light"
-                >
-                    {t('common.create')}
-                </Button>
-            }
             fullScreen={isMobile}
             onClose={handleCloseModal}
             onExitTransitionEnd={handleResetForm}
@@ -182,10 +165,13 @@ export const CreateUserModalWidget = () => {
             transitionProps={isMobile ? { transition: 'fade', duration: 200 } : undefined}
         >
             {(isInternalSquadsLoading || isTagsLoading) && (
-                <LoaderModalShared
-                    h="500"
-                    text={t('create-user-modal.widget.loading-user-creation')}
-                />
+                <motion.div
+                    animate={{ opacity: 1 }}
+                    initial={{ opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                >
+                    <LoaderModalShared h="78vh" />
+                </motion.div>
             )}
 
             {!isInternalSquadsLoading && !isTagsLoading && isMobile && (
@@ -275,6 +261,21 @@ export const CreateUserModalWidget = () => {
                     </MotionStack>
                 </Group>
             )}
-        </FramedModal>
+
+            <ModalFooter>
+                <Button
+                    color="teal"
+                    leftSection={<PiFloppyDiskDuotone size="16px" />}
+                    loading={isDataSubmitting}
+                    onClick={() => {
+                        handleSubmit()
+                    }}
+                    size="md"
+                    variant="light"
+                >
+                    {t('common.create')}
+                </Button>
+            </ModalFooter>
+        </Modal>
     )
 }

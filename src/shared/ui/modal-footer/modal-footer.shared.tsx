@@ -12,14 +12,7 @@ export function ModalFooter(props: IProps) {
     const isMobile = useMediaQuery(`(max-width: ${em(768)})`)
 
     return (
-        <Modal.Header
-            bottom={10}
-            className={styles.modalFooter}
-            component="footer"
-            h="auto"
-            mt="md"
-            pos="sticky"
-        >
+        <Modal.Header className={styles.footer} component="footer" h="auto" mt="md" pos="sticky">
             <Group
                 gap="md"
                 grow={!!isMobile}

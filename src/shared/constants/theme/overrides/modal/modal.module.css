@@ -19,5 +19,5 @@
 }
 
 .modalBody {
-    padding: var(--mantine-spacing-lg);
+    padding: var(--mantine-spacing-sm);
 }

@@ -274,8 +274,8 @@ export const NodeDetailsCardWidget = memo(({ node, fetchedNode }: IProps) => {
                     )}
                 </Box>
             </SectionCard.Section>
-            <SectionCard.Section>
-                {nodeData.isConnected && (
+            {nodeData.isConnected && (
+                <SectionCard.Section>
                     <SimpleGrid
                         cols={{
                             base: 1,
@@ -390,8 +390,8 @@ export const NodeDetailsCardWidget = memo(({ node, fetchedNode }: IProps) => {
                             </Paper>
                         )}
                     </SimpleGrid>
-                )}
-            </SectionCard.Section>
+                </SectionCard.Section>
+            )}
         </SectionCard.Root>
     )
 })
