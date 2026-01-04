@@ -123,7 +123,6 @@ export const UserIdentificationCard = memo((props: IProps) => {
                                 key="view-user-status-badge"
                                 size="lg"
                                 status={user.status}
-                                variant="light"
                             />
                         </Group>
                     </Group>

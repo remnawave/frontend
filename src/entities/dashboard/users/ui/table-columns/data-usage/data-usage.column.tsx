@@ -10,12 +10,11 @@ export function DataUsageColumnEntity(props: IProps) {
 
     const { user } = props
 
-    const usedTrafficPercentage = user.trafficLimitBytes
-        ? (user.userTraffic.usedTrafficBytes / user.trafficLimitBytes) * 100
-        : 0
-    const limitBytes = prettyBytesUtil(user.trafficLimitBytes, true)
-    const totalUsedTraffic = prettyBytesUtil(user.userTraffic.usedTrafficBytes, true)
-    const lifetimeUsedTraffic = prettyBytesUtil(user.userTraffic.lifetimeUsedTrafficBytes, true)
+    const usedBytes = user.userTraffic.usedTrafficBytes
+    const limitBytes = user.trafficLimitBytes
+    const lifetimeBytes = user.userTraffic.lifetimeUsedTrafficBytes
+    const isUnlimited = limitBytes === 0
+    const percentage = isUnlimited ? 0 : Math.floor((usedBytes * 100) / limitBytes)
 
     const strategy = {
         [RESET_PERIODS.MONTH]: t('data-usage.column.monthly'),
@@ -24,11 +23,22 @@ export function DataUsageColumnEntity(props: IProps) {
         [RESET_PERIODS.NO_RESET]: '∞'
     }[user.trafficLimitStrategy]
 
+    const prettyUsedData = prettyBytesUtil(usedBytes) || '0 B'
+    const prettyLifetimeData = prettyBytesUtil(lifetimeBytes) || '0 B'
+    const maxData = isUnlimited ? '∞' : prettyBytesUtil(limitBytes) || '∞'
+
+    const getProgressColor = () => {
+        if (isUnlimited) return 'teal'
+        if (percentage > 95) return 'red'
+        if (percentage > 80) return 'yellow.4'
+        return 'teal'
+    }
+
     return (
         <Box miw={300}>
             <Group justify="space-between">
                 <Text c="red.5" fw={700} fz="xs">
-                    {usedTrafficPercentage.toFixed(2)}%
+                    {percentage.toFixed(2)}%
                     <Text c="dimmed" component="span" fz="xs">
                         {' '}
                         {strategy}
@@ -36,25 +46,25 @@ export function DataUsageColumnEntity(props: IProps) {
                 </Text>
                 <Text c="teal.5" fw={700} fz="xs">
                     <Text c="dimmed" component="span" fw={550} fz="xs" size="xs">
-                        Σ {lifetimeUsedTraffic}
+                        Σ {prettyLifetimeData}
                     </Text>{' '}
-                    {(100 - usedTrafficPercentage).toFixed(2)}%
+                    {(100 - percentage).toFixed(2)}%
                 </Text>
             </Group>
             <Progress
-                color={usedTrafficPercentage > 100 ? 'orange.7' : 'teal.9'}
+                color={getProgressColor()}
                 radius="xs"
                 size="md"
-                value={usedTrafficPercentage}
+                value={isUnlimited ? 100 : percentage}
             />
 
             <Group gap="xs" justify="space-between" mt={2}>
                 <Text c="dimmed" fw={550} size="xs">
-                    {totalUsedTraffic === '0' ? '0 GiB' : totalUsedTraffic}
+                    {prettyUsedData}
                 </Text>
 
                 <Text c="dimmed" fw={550} size="xs">
-                    {limitBytes === '0' ? '∞' : `${limitBytes}`}
+                    {maxData}
                 </Text>
             </Group>
         </Box>
