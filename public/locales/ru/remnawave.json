@@ -1686,7 +1686,7 @@
             "empty-hosts": "Отсутствуют хосты",
             "empty-internal-squads": "Отсутствует внутренние сквады",
             "hwid-max-devices-exceeded": "HWID: Макс. число устройств превышено",
-            "hwid-not-supported": "HWID: Not Supported"
+            "hwid-not-supported": "HWID: Не поддерживается"
         }
     },
     "multi-select-nodes": {
@@ -1897,6 +1897,14 @@
             "passwords-only": "Только пароли",
             "passwords-only-decription": "Перегенерировать только пароли подключения, URL-адрес подписки остается тем же",
             "full-revoke-description": "Перегенерировать URL-адрес подписки и пароли подключения"
+        }
+    },
+    "nodes-quick-stats": {
+        "widget": {
+            "users-online": "Пользователи онлайн",
+            "online-nodes": "Ноды онлайн",
+            "offline-nodes": "Ноды оффлайн",
+            "cumulative-traffic": "Общее количество трафика"
         }
     }
 }
