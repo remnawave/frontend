@@ -4,6 +4,10 @@ import { useEffect, useState } from 'react'
 import { Outlet } from 'react-router-dom'
 import clsx from 'clsx'
 
+import {
+    useAppshellStoreActions,
+    useAppshellStoreDesktopSidebarOpen
+} from '@entities/dashboard/appshell'
 import { useIsLoadingRemnawaveUpdates, useRemnawaveInfo } from '@entities/dashboard/updates-store'
 import { ScrollToTopWrapper } from '@shared/hocs/scroll-to-top/scroll-to-top'
 import { SidebarTitleShared } from '@shared/ui/sidebar/sidebar-title'
@@ -17,7 +21,7 @@ import classes from './Main.module.css'
 
 export function MainLayout() {
     const [mobileOpened, { toggle: toggleMobile }] = useDisclosure()
-    const [desktopOpened, { toggle: toggleDesktop }] = useDisclosure(true)
+
     const [isMediaQueryReady, setIsMediaQueryReady] = useState(false)
     const pinned = useHeadroom({ fixedAt: 120 })
 
@@ -27,6 +31,9 @@ export function MainLayout() {
     const isSocialButton = useMediaQuery(`(max-width: 40rem)`, undefined, {
         getInitialValueInEffect: false
     })
+
+    const isDesktopSidebarOpen = useAppshellStoreDesktopSidebarOpen()
+    const { toggleDesktopSidebar } = useAppshellStoreActions()
 
     const remnawaveInfo = useRemnawaveInfo()
     const isLoadingUpdates = useIsLoadingRemnawaveUpdates()
@@ -53,7 +60,7 @@ export function MainLayout() {
             navbar={{
                 width: 300,
                 breakpoint: 'lg',
-                collapsed: { mobile: !mobileOpened, desktop: !desktopOpened }
+                collapsed: { mobile: !mobileOpened, desktop: !isDesktopSidebarOpen }
             }}
             padding={isMobile ? 'md' : 'xl'}
             transitionDuration={500}
@@ -64,8 +71,8 @@ export function MainLayout() {
                     <Group justify="space-between" style={{ flexWrap: 'nowrap' }}>
                         <Group style={{ flex: 1, justifyContent: 'flex-start' }}>
                             <Burger
-                                onClick={isMobile ? toggleMobile : toggleDesktop}
-                                opened={isMobile ? mobileOpened : desktopOpened}
+                                onClick={isMobile ? toggleMobile : toggleDesktopSidebar}
+                                opened={isMobile ? mobileOpened : isDesktopSidebarOpen}
                                 size="md"
                             />
                         </Group>
@@ -85,7 +92,7 @@ export function MainLayout() {
             </AppShell.Header>
             <AppShell.Navbar
                 className={clsx(classes.sidebarWrapper, {
-                    [classes.sidebarWrapperClosedDesktop]: !isMobile && !desktopOpened,
+                    [classes.sidebarWrapperClosedDesktop]: !isMobile && !isDesktopSidebarOpen,
                     [classes.sidebarWrapperClosedMobile]: isMobile && !mobileOpened
                 })}
                 p="md"
@@ -98,8 +105,8 @@ export function MainLayout() {
                     <Box style={{ position: 'absolute', left: '0' }}>
                         <Burger
                             hiddenFrom="lg"
-                            onClick={isMobile ? toggleMobile : toggleDesktop}
-                            opened={isMobile ? mobileOpened : desktopOpened}
+                            onClick={isMobile ? toggleMobile : toggleDesktopSidebar}
+                            opened={isMobile ? mobileOpened : isDesktopSidebarOpen}
                             size="sm"
                         />
                     </Box>

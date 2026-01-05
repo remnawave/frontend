@@ -2,6 +2,7 @@ import { Split } from '@gfazioli/mantine-split-pane'
 import { useTranslation } from 'react-i18next'
 import { Stack } from '@mantine/core'
 import { motion } from 'motion/react'
+import { useEffect } from 'react'
 
 import { CreateInfraBillingRecordDrawerWidget } from '@widgets/dashboard/infra-billing/create-infra-billing-record-modal/create-infra-billing-record.modal.widget'
 import { CreateInfraBillingNodeModalWidget } from '@widgets/dashboard/infra-billing/create-infra-billing-node-modal/create-infra-billing-node.modal.widget'
@@ -12,10 +13,18 @@ import { InfraBillingNodesTableWidget } from '@widgets/dashboard/infra-billing/i
 import { InfraProvidersTableWidget } from '@widgets/dashboard/infra-billing/infra-providers-table/infra-providers-table.widget'
 import { UpdateBillingDateModalWidget } from '@widgets/dashboard/infra-billing/update-billing-date-modal'
 import { StatsWidget } from '@widgets/dashboard/infra-billing/stats-widget/stats.widget'
+import { useAppshellStoreActions } from '@entities/dashboard/appshell'
 import { Page } from '@shared/ui/page'
 
 export const InfraBillingPageComponent = () => {
     const { t } = useTranslation()
+
+    const { hideDesktopSidebar } = useAppshellStoreActions()
+
+    useEffect(() => {
+        hideDesktopSidebar()
+    }, [])
+
     return (
         <Page title={t('constants.infra-billing')}>
             <motion.div
