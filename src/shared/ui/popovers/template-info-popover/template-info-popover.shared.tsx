@@ -1,59 +1,59 @@
-import { Badge, CopyButton, Group, Popover, Text } from '@mantine/core'
-import { TEMPLATE_KEYS } from '@remnawave/backend-contract'
-import { PiCheck, PiCopy, PiInfo } from 'react-icons/pi'
+import { TSubscriptionPageTemplateKey } from '@remnawave/subscription-page-types'
+import { TEMPLATE_KEYS, TemplateKeys } from '@remnawave/backend-contract'
+import { ActionIcon, SimpleGrid, Stack, Text } from '@mantine/core'
 import { useTranslation } from 'react-i18next'
+import { useMediaQuery } from '@mantine/hooks'
+import { TbInfoSquare } from 'react-icons/tb'
+import { modals } from '@mantine/modals'
 
-import { IProps } from './interfaces/props.interface'
+import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
+import { CopyableCodeBlock } from '@shared/ui/copyable-code-block'
+
+interface IProps {
+    templateKeys?: readonly TemplateKeys[] | readonly TSubscriptionPageTemplateKey[]
+}
 
 export const TemplateInfoPopoverShared = (props: IProps) => {
-    const { showHostDescription = true } = props
+    const { templateKeys = TEMPLATE_KEYS } = props
+
+    const isMobile = useMediaQuery('(max-width: 768px)')
+
     const { t } = useTranslation()
 
-    return (
-        <Popover offset={10} position="left" shadow="md" width={200} withArrow>
-            <Popover.Target>
-                <span
-                    style={{
-                        cursor: 'pointer',
-                        display: 'flex',
-                        alignItems: 'center'
-                    }}
-                >
-                    <PiInfo size="20px" />
-                </span>
-            </Popover.Target>
-            <Popover.Dropdown>
-                <Group gap="xs" pb="xs">
-                    {showHostDescription && (
-                        <Text size="sm">{t('remark-info.widget.remark-description')}</Text>
-                    )}
-                    <Text size="sm">{t('remark-info.widget.supports-templates')}</Text>
+    const handleClick = () => {
+        modals.open({
+            children: (
+                <Stack>
+                    <Text size="sm">
+                        {t(
+                            'template-info-popover.shared.you-can-use-template-variables-in-this-field'
+                        )}
+                        <br />
+                        {t('template-info-popover.shared.available-variables-are-listed-below')}
+                    </Text>
 
-                    <Group gap="xs" key="template-keys">
-                        {TEMPLATE_KEYS.map((key) => (
-                            <CopyButton key={key} value={`{{${key}}}`}>
-                                {({ copied, copy }) => (
-                                    <Badge
-                                        color={copied ? 'teal' : 'blue'}
-                                        key={key}
-                                        leftSection={
-                                            copied ? (
-                                                <PiCheck size="16px" />
-                                            ) : (
-                                                <PiCopy size="16px" />
-                                            )
-                                        }
-                                        onClick={copy}
-                                        size="md"
-                                    >
-                                        {`{{${key}}}`}
-                                    </Badge>
-                                )}
-                            </CopyButton>
+                    <SimpleGrid cols={{ base: 1, xs: 2 }} key="template-keys" spacing="xs">
+                        {templateKeys.map((key) => (
+                            <CopyableCodeBlock key={key} size="small" value={`{{${key}}}`} />
                         ))}
-                    </Group>
-                </Group>
-            </Popover.Dropdown>
-        </Popover>
+                    </SimpleGrid>
+                </Stack>
+            ),
+            size: 'auto',
+            fullScreen: isMobile,
+            title: (
+                <BaseOverlayHeader
+                    IconComponent={TbInfoSquare}
+                    iconVariant="gradient-lime"
+                    title={t('template-info-popover.shared.template-variables')}
+                />
+            )
+        })
+    }
+
+    return (
+        <ActionIcon color="lime" onClick={handleClick} variant="transparent">
+            <TbInfoSquare size="20px" />
+        </ActionIcon>
     )
 }

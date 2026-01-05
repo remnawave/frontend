@@ -200,9 +200,7 @@ export const ExternalSquadsResponseHeadersTabWidget = (props: IProps) => {
                                 value={header.key}
                             />
                             <TextInput
-                                leftSection={
-                                    <TemplateInfoPopoverShared showHostDescription={false} />
-                                }
+                                leftSection={<TemplateInfoPopoverShared />}
                                 onChange={(e) => updateLocalHeaderValue(index, e.target.value)}
                                 placeholder={t('headers-manager.widget.value')}
                                 style={{ flex: '1' }}

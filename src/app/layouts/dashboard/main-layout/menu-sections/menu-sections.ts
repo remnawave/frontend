@@ -1,7 +1,6 @@
 import {
     PiAirTrafficControlDuotone,
     PiArrowsInCardinalFill,
-    PiBarcodeDuotone,
     PiChartLine,
     PiCpu,
     PiListChecks,
@@ -13,6 +12,7 @@ import {
     TbCirclesRelation,
     TbDeviceAnalytics,
     TbFolder,
+    TbHexagon,
     TbReportAnalytics,
     TbRoute,
     TbWebhook
@@ -137,7 +137,7 @@ export const useMenuSections = (): MenuItem[] => {
                 {
                     name: t('constants.subscription-settings'),
                     href: ROUTES.DASHBOARD.MANAGEMENT.SUBSCRIPTION_SETTINGS,
-                    icon: PiBarcodeDuotone,
+                    icon: TbHexagon,
                     id: 'subscription-settings'
                 },
                 {

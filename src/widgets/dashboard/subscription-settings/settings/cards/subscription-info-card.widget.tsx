@@ -74,7 +74,7 @@ export const SubscriptionInfoCardWidget = (props: IProps) => {
                             )}
                             key={form.key('profileTitle')}
                             label={t('subscription-settings.widget.profile-title')}
-                            leftSection={<TemplateInfoPopoverShared showHostDescription={false} />}
+                            leftSection={<TemplateInfoPopoverShared />}
                             placeholder={t('subscription-settings.widget.enter-profile-title')}
                             size="sm"
                             {...form.getInputProps('profileTitle')}

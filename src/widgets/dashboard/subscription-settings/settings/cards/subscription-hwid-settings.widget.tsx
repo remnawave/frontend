@@ -101,7 +101,7 @@ export const SubscriptionHwidSettingsWidget = (props: IProps) => {
                             )}
                             key={form.key('hwidSettings.maxDevicesAnnounce')}
                             label={t('subscription-hwid-settings.widget.max-devices-announce')}
-                            leftSection={<TemplateInfoPopoverShared showHostDescription={false} />}
+                            leftSection={<TemplateInfoPopoverShared />}
                             maxLength={200}
                             minRows={4}
                             placeholder={t('subscription-hwid-settings.widget.max-200-characters')}

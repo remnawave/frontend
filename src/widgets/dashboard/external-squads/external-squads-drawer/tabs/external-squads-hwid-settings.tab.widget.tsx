@@ -224,11 +224,7 @@ export const ExternalSquadsHwidSettingsTabWidget = (props: IProps) => {
                                         label={t(
                                             'subscription-hwid-settings.widget.max-devices-announce'
                                         )}
-                                        leftSection={
-                                            <TemplateInfoPopoverShared
-                                                showHostDescription={false}
-                                            />
-                                        }
+                                        leftSection={<TemplateInfoPopoverShared />}
                                         maxLength={200}
                                         minRows={3}
                                         onChange={(e) =>

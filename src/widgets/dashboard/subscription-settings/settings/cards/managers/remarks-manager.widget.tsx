@@ -117,9 +117,7 @@ export const RemarksManager = ({
                     {localRemarks.map((remark, index) => (
                         <Group align="flex-start" gap="sm" key={index}>
                             <TextInput
-                                leftSection={
-                                    <TemplateInfoPopoverShared showHostDescription={false} />
-                                }
+                                leftSection={<TemplateInfoPopoverShared />}
                                 onChange={(e) => updateLocalRemark(index, e.target.value)}
                                 placeholder={t('remarks-manager.widget.enter-remark')}
                                 style={{ flex: 1 }}
