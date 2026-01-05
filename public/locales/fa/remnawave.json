@@ -1898,5 +1898,13 @@
             "passwords-only-decription": "فقط رمزهای اتصال را بازتولید می‌کند و لینک اشتراک تغییر نمی‌کند",
             "full-revoke-description": "آدرس لینک اشتراک و رمزهای اتصال را بازتولید می‌کند"
         }
+    },
+    "nodes-quick-stats": {
+        "widget": {
+            "users-online": "Users Online",
+            "online-nodes": "Online Nodes",
+            "offline-nodes": "Offline Nodes",
+            "cumulative-traffic": "Cumulative Traffic"
+        }
     }
 }
