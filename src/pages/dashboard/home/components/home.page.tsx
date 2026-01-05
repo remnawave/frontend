@@ -1,8 +1,7 @@
 import { Box, SimpleGrid, Stack, Title } from '@mantine/core'
 import { useTranslation } from 'react-i18next'
 
-import { MetricWithIcon } from '@widgets/dashboard/home/metric-with-icons'
-import { MetricWithTrend } from '@shared/ui/metrics'
+import { MetricCardShared, MetricCardWithTrendShared } from '@shared/ui/metrics/metric-card'
 import { LoadingScreen } from '@shared/ui'
 import { Page } from '@shared/ui/page'
 
@@ -53,10 +52,10 @@ export const HomePage = (props: IProps) => {
                             {t('home.page.remnawave-usage')}
                         </Title>
 
-                        <SimpleGrid cols={{ base: 1, sm: 2, xl: 4 }}>
+                        <SimpleGrid cols={{ base: 1, sm: 2, xl: 4 }} spacing="xs">
                             {pm2SummaryMetrics.map((metric, index) => (
                                 <AnimatedCard index={index} key={metric.title}>
-                                    <MetricWithIcon {...metric} />
+                                    <MetricCardShared {...metric} />
                                 </AnimatedCard>
                             ))}
                         </SimpleGrid>
@@ -68,10 +67,10 @@ export const HomePage = (props: IProps) => {
                         <Title className={classes.title} m="xs" ml={0} order={4}>
                             {t('home.page.process-details')}
                         </Title>
-                        <SimpleGrid cols={{ base: 1, sm: 2, xl: 4 }}>
+                        <SimpleGrid cols={{ base: 1, sm: 2, xl: 4 }} spacing="xs">
                             {pm2ProcessMetrics.map((metric, index) => (
                                 <AnimatedCard index={index} key={metric.title}>
-                                    <MetricWithIcon {...metric} />
+                                    <MetricCardShared {...metric} />
                                 </AnimatedCard>
                             ))}
                         </SimpleGrid>
@@ -82,10 +81,10 @@ export const HomePage = (props: IProps) => {
                     <Title className={classes.title} m="xs" ml={0} order={4}>
                         {t('home.page.bandwidth')}
                     </Title>
-                    <SimpleGrid cols={{ base: 1, sm: 2, xl: 3 }}>
+                    <SimpleGrid cols={{ base: 1, sm: 2, xl: 3 }} spacing="xs">
                         {bandwidthMetrics.map((metric, index) => (
                             <AnimatedCard index={index} key={metric.title}>
-                                <MetricWithTrend {...metric} />
+                                <MetricCardWithTrendShared {...metric} />
                             </AnimatedCard>
                         ))}
                     </SimpleGrid>
@@ -95,10 +94,16 @@ export const HomePage = (props: IProps) => {
                     <Title className={classes.title} m="xs" ml={0} order={4}>
                         {t('home.page.online-stats')}
                     </Title>
-                    <SimpleGrid cols={{ base: 1, sm: 2, xl: 4 }}>
+                    <SimpleGrid cols={{ base: 1, sm: 2, xl: 4 }} spacing="xs">
                         {onlineMetrics.map((metric, index) => (
                             <AnimatedCard index={index} key={metric.title}>
-                                <MetricWithIcon {...metric} />
+                                <MetricCardShared
+                                    IconComponent={metric.IconComponent}
+                                    iconVariant={metric.iconVariant}
+                                    isLoading={false}
+                                    title={metric.title}
+                                    value={metric.value}
+                                />
                             </AnimatedCard>
                         ))}
                     </SimpleGrid>
@@ -108,10 +113,16 @@ export const HomePage = (props: IProps) => {
                     <Title className={classes.title} m="xs" ml={0} order={4}>
                         {t('home.page.system')}
                     </Title>
-                    <SimpleGrid cols={{ base: 1, sm: 2, xl: 3 }}>
+                    <SimpleGrid cols={{ base: 1, sm: 2, xl: 4 }} spacing="xs">
                         {simpleMetrics.map((metric, index) => (
                             <AnimatedCard index={index} key={metric.title}>
-                                <MetricWithIcon {...metric} />
+                                <MetricCardShared
+                                    IconComponent={metric.IconComponent}
+                                    iconVariant={metric.iconVariant}
+                                    isLoading={false}
+                                    title={metric.title}
+                                    value={metric.value}
+                                />
                             </AnimatedCard>
                         ))}
                     </SimpleGrid>
@@ -121,10 +132,16 @@ export const HomePage = (props: IProps) => {
                     <Title className={classes.title} m="xs" ml={0} order={4}>
                         {t('user-table.widget.table-title')}
                     </Title>
-                    <SimpleGrid cols={{ base: 1, sm: 2, xl: 4 }}>
+                    <SimpleGrid cols={{ base: 1, sm: 2, xl: 5 }} spacing="xs">
                         {usersMetrics.map((metric, index) => (
                             <AnimatedCard index={index} key={metric.title}>
-                                <MetricWithIcon {...metric} />
+                                <MetricCardShared
+                                    IconComponent={metric.IconComponent}
+                                    iconVariant={metric.iconVariant}
+                                    isLoading={false}
+                                    title={metric.title}
+                                    value={metric.value}
+                                />
                             </AnimatedCard>
                         ))}
                     </SimpleGrid>

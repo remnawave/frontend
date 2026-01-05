@@ -1,92 +1,127 @@
-import { PiArrowDownDuotone, PiArrowUpDuotone, PiSpeedometer } from 'react-icons/pi'
-import { Box, Group, Loader, SimpleGrid } from '@mantine/core'
+import {
+    PiArrowDownDuotone,
+    PiArrowUpDuotone,
+    PiPulse,
+    PiSpeedometer,
+    PiWarningCircle
+} from 'react-icons/pi'
+import { GetAllNodesCommand } from '@remnawave/backend-contract'
+import { TbServer2, TbSum, TbUsers } from 'react-icons/tb'
 import { useTranslation } from 'react-i18next'
-import { TbServer2 } from 'react-icons/tb'
+import { SimpleGrid } from '@mantine/core'
 import { motion } from 'motion/react'
 
+import { IMetricCardProps, MetricCardShared } from '@shared/ui/metrics/metric-card'
+import { prettyBytesToAnyUtil, prettyRealtimeBytesUtil } from '@shared/utils/bytes'
 import { useGetStatsNodesRealtimeUsage } from '@shared/api/hooks'
-import { prettyRealtimeBytesUtil } from '@shared/utils/bytes'
-import { MetricCard } from '@shared/ui/metrics/metric-card'
 
-export function NodesRealtimeUsageMetrics() {
+interface IProps {
+    isLoading: boolean
+    nodes: GetAllNodesCommand.Response['response'] | undefined
+}
+
+export function NodesRealtimeUsageMetrics(props: IProps) {
+    const { nodes, isLoading } = props
+
     const { t } = useTranslation()
 
     const { data: nodesRealtimeUsage, isLoading: isNodesRealtimeUsageLoading } =
         useGetStatsNodesRealtimeUsage()
 
-    const cards = [
+    const cards: IMetricCardProps[] = [
         {
-            icon: PiArrowUpDuotone,
-            title: t('nodes-realtime-metrics.widget.total-upload'),
-            value: prettyRealtimeBytesUtil(
-                nodesRealtimeUsage?.reduce((acc, curr) => acc + curr.uploadBytes, 0),
-                true,
-                false
+            IconComponent: TbUsers,
+            title: t('nodes-quick-stats.widget.users-online'),
+            value: nodes?.reduce((acc, curr) => acc + (curr.usersOnline ?? 0), 0) ?? 0,
+            iconVariant: 'gradient-cyan'
+        },
+        {
+            IconComponent: PiPulse,
+            title: t('nodes-quick-stats.widget.online-nodes'),
+            value: nodes?.filter((node) => node.isConnected).length ?? 0,
+            iconVariant: 'gradient-teal'
+        },
+        {
+            IconComponent: PiWarningCircle,
+            title: t('nodes-quick-stats.widget.offline-nodes'),
+            value: nodes?.filter((node) => !node.isConnected).length ?? 0,
+            iconVariant: 'gradient-red'
+        },
+        {
+            IconComponent: TbSum,
+            title: t('nodes-quick-stats.widget.cumulative-traffic'),
+            value: prettyBytesToAnyUtil(
+                nodes?.reduce((acc, curr) => acc + (curr.trafficUsedBytes ?? 0), 0) ?? 0,
+                true
             ),
-            color: 'blue'
+            iconVariant: 'gradient-cyan'
+        },
+        {
+            IconComponent: PiArrowUpDuotone,
+            title: t('nodes-realtime-metrics.widget.total-upload'),
+            subtitle: t('nodes-realtime-metrics.widget.current-hour'),
+            value:
+                prettyRealtimeBytesUtil(
+                    nodesRealtimeUsage?.reduce((acc, curr) => acc + curr.uploadBytes, 0),
+                    true,
+                    false
+                ) ?? 0,
+            iconVariant: 'gradient-blue'
         },
 
         {
-            icon: PiArrowDownDuotone,
+            IconComponent: PiArrowDownDuotone,
             title: t('nodes-realtime-metrics.widget.total-download'),
-            value: prettyRealtimeBytesUtil(
-                nodesRealtimeUsage?.reduce((acc, curr) => acc + curr.downloadBytes, 0),
-                true,
-                false
-            ),
-            color: 'teal'
+            subtitle: t('nodes-realtime-metrics.widget.current-hour'),
+            value:
+                prettyRealtimeBytesUtil(
+                    nodesRealtimeUsage?.reduce((acc, curr) => acc + curr.downloadBytes, 0),
+                    true,
+                    false
+                ) ?? 0,
+            iconVariant: 'gradient-teal'
         },
         {
-            icon: PiSpeedometer,
+            IconComponent: PiSpeedometer,
             title: t('nodes-realtime-metrics.widget.average-bps'),
-            value: prettyRealtimeBytesUtil(
-                nodesRealtimeUsage?.reduce((acc, curr) => acc + curr.totalSpeedBps, 0),
-                true,
-                true
-            ),
-            color: 'teal'
+            subtitle: t('nodes-realtime-metrics.widget.current-hour'),
+            value:
+                prettyRealtimeBytesUtil(
+                    nodesRealtimeUsage?.reduce((acc, curr) => acc + curr.totalSpeedBps, 0),
+                    true,
+                    true
+                ) ?? 0,
+            iconVariant: 'gradient-indigo'
         },
         {
-            icon: TbServer2,
+            IconComponent: TbServer2,
             title: t('nodes-realtime-metrics.widget.active-nodes'),
-            value: nodesRealtimeUsage?.length,
-            color: 'teal'
+            value: nodesRealtimeUsage?.length || 0,
+            iconVariant: 'gradient-indigo',
+            subtitle: t('nodes-realtime-metrics.widget.current-hour')
         }
     ]
     return (
-        <SimpleGrid cols={{ base: 1, sm: 2, xl: 4 }}>
+        <SimpleGrid cols={{ base: 1, xs: 2, sm: 2, xl: 4 }} spacing="xs">
             {cards.map((card, index) => (
                 <motion.div
                     animate={{ opacity: 1, y: 0 }}
                     initial={{ opacity: 0, y: 0 }}
                     key={card.title}
                     transition={{
-                        duration: 0.2,
-                        delay: index * 0.07,
+                        duration: 0.15,
+                        delay: index * 0.03,
                         ease: 'easeIn'
                     }}
-                    whileHover={{ y: -1 }}
                 >
-                    <MetricCard.Root key={card.title}>
-                        <Group wrap="nowrap">
-                            <MetricCard.Icon c={card.color}>
-                                <card.icon size="32px" />
-                            </MetricCard.Icon>
-                            <Box miw={0}>
-                                <MetricCard.TextMuted truncate>{card.title}</MetricCard.TextMuted>
-                                <MetricCard.TextEmphasis ff="monospace">
-                                    {isNodesRealtimeUsageLoading ? (
-                                        <Loader color={card.color} size="xs" />
-                                    ) : (
-                                        card.value
-                                    )}
-                                </MetricCard.TextEmphasis>
-                                <MetricCard.TextMuted truncate>
-                                    {t('nodes-realtime-metrics.widget.current-hour')}
-                                </MetricCard.TextMuted>
-                            </Box>
-                        </Group>
-                    </MetricCard.Root>
+                    <MetricCardShared
+                        IconComponent={card.IconComponent}
+                        iconVariant={card.iconVariant}
+                        isLoading={isNodesRealtimeUsageLoading || isLoading}
+                        subtitle={card.subtitle}
+                        title={card.title}
+                        value={card.value}
+                    />
                 </motion.div>
             ))}
         </SimpleGrid>

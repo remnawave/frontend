@@ -1,13 +1,14 @@
-import { PiChartBarDuotone, PiCpuDuotone, PiMemoryDuotone } from 'react-icons/pi'
+import { PiChartBarDuotone, PiCpuDuotone, PiMemoryFill, PiMemoryLight } from 'react-icons/pi'
 import { GetStatsCommand } from '@remnawave/backend-contract'
 import { TFunction } from 'i18next'
 
 import { prettyBytesUtil, prettyBytesUtilWithoutPrefix } from '@shared/utils/bytes'
+import { IMetricCardProps } from '@shared/ui/metrics/metric-card'
 
 export const getSimpleMetrics = (
     systemInfo: GetStatsCommand.Response['response'],
     t: TFunction
-) => {
+): IMetricCardProps[] => {
     const { memory, nodes } = systemInfo
 
     const totalRamGB = prettyBytesUtil(memory.total) ?? 0
@@ -16,30 +17,27 @@ export const getSimpleMetrics = (
     return [
         {
             value: nodes.totalOnline,
-            icon: PiCpuDuotone,
+            IconComponent: PiCpuDuotone,
             title: t('simple-metrics.total-online-on-nodes'),
-            color: 'var(--mantine-color-blue-4)'
+            iconVariant: 'gradient-blue'
         },
         {
             value: prettyBytesUtilWithoutPrefix(Number(nodes.totalBytesLifetime)) ?? 0,
-            icon: PiChartBarDuotone,
+            IconComponent: PiChartBarDuotone,
             title: t('simple-metrics.total-traffic'),
-            color: 'var(--mantine-color-green-4)'
+            iconVariant: 'gradient-green'
         },
         {
-            value: `${usedRamGB} / ${totalRamGB}`,
-            icon: PiMemoryDuotone,
+            value: usedRamGB,
+            IconComponent: PiMemoryLight,
             title: t('simple-metrics.ram-usage'),
-            color: 'var(--mantine-color-cyan-4)'
+            iconVariant: 'gradient-cyan'
+        },
+        {
+            value: totalRamGB,
+            IconComponent: PiMemoryFill,
+            title: 'Total RAM',
+            iconVariant: 'gradient-cyan'
         }
-        // {
-        //     value: dayjs
-        //         .duration(systemInfo.uptime, 'seconds')
-        //         .locale(i18n.language)
-        //         .humanize(false),
-        //     title: t('simple-metrics.system-uptime'),
-        //     icon: PiClockDuotone,
-        //     color: 'var(--mantine-color-gray-4)'
-        // }
     ]
 }

@@ -34,7 +34,8 @@ export default function NodesPageComponent(props: IProps) {
             <Grid>
                 <Grid.Col span={12}>
                     <Stack>
-                        <NodesRealtimeUsageMetrics />
+                        <NodesRealtimeUsageMetrics isLoading={isLoading} nodes={nodes} />
+
                         <PageHeaderShared
                             actions={
                                 <NodesHeaderActionButtonsFeature

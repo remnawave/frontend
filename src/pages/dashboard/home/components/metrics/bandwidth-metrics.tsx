@@ -8,41 +8,48 @@ import {
 import { GetBandwidthStatsCommand } from '@remnawave/backend-contract'
 import { TFunction } from 'i18next'
 
+import { IMetricCardWithTrendProps } from '@shared/ui/metrics/metric-card'
+
 export const getBandwidthMetrics = (
     bandwidthStats: GetBandwidthStatsCommand.Response['response'],
     t: TFunction
-) => {
+): IMetricCardWithTrendProps[] => {
     return [
         {
-            icon: <PiCalendarDotDuotone color="var(--mantine-color-blue-4)" size="32px" />,
+            IconComponent: PiCalendarDotDuotone,
+            iconVariant: 'gradient-blue',
             difference: bandwidthStats.bandwidthLastTwoDays.difference,
             period: t('bandwidth-metrics.from-yesterday'),
             title: t('bandwidth-metrics.today'),
             value: bandwidthStats.bandwidthLastTwoDays.current
         },
         {
-            icon: <PiChartDonutDuotone color="var(--mantine-color-green-4)" size="32px" />,
+            IconComponent: PiChartDonutDuotone,
+            iconVariant: 'gradient-green',
             difference: bandwidthStats.bandwidthLastSevenDays.difference,
             period: t('bandwidth-metrics.from-last-week'),
             title: t('bandwidth-metrics.last-7-days'),
             value: bandwidthStats.bandwidthLastSevenDays.current
         },
         {
-            icon: <PiChartPieSliceDuotone color="var(--mantine-color-teal-4)" size="32px" />,
+            IconComponent: PiChartPieSliceDuotone,
+            iconVariant: 'gradient-teal',
             difference: bandwidthStats.bandwidthLast30Days.difference,
             period: t('bandwidth-metrics.from-last-month'),
             title: t('bandwidth-metrics.last-30-days'),
             value: bandwidthStats.bandwidthLast30Days.current
         },
         {
-            icon: <PiCalendarDotsDuotone color="var(--mantine-color-orange-4)" size="32px" />,
+            IconComponent: PiCalendarDotsDuotone,
+            iconVariant: 'gradient-orange',
             difference: bandwidthStats.bandwidthCalendarMonth.difference,
             period: t('bandwidth-metrics.from-last-month-0'),
             title: t('bandwidth-metrics.calendar-month'),
             value: bandwidthStats.bandwidthCalendarMonth.current
         },
         {
-            icon: <PiCalendarStarDuotone color="var(--mantine-color-cyan-4)" size="32px" />,
+            IconComponent: PiCalendarStarDuotone,
+            iconVariant: 'gradient-cyan',
             difference: bandwidthStats.bandwidthCurrentYear.difference,
             period: t('bandwidth-metrics.from-last-year'),
             title: t('bandwidth-metrics.current-year'),

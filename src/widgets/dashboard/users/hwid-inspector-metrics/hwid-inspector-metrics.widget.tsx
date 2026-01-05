@@ -11,9 +11,8 @@ import { useTranslation } from 'react-i18next'
 import { Chart } from '@highcharts/react'
 import { useMemo } from 'react'
 
-import { MetricCard } from '@shared/ui/metrics/metric-card'
+import { IMetricCardProps, MetricCardShared } from '@shared/ui/metrics/metric-card'
 import { useGetHwidDevicesStats } from '@shared/api/hooks'
-import { formatInt } from '@shared/utils/misc'
 
 export function HwidInspectorMetrics() {
     const { t } = useTranslation()
@@ -109,25 +108,24 @@ export function HwidInspectorMetrics() {
         }
     }, [stats?.byApp])
 
-    const metricCards = [
+    const metricCards: IMetricCardProps[] = [
         {
-            icon: PiDevicesDuotone,
+            IconComponent: PiDevicesDuotone,
             title: t('hwid-inspector-metrics.widget.total-unique-devices'),
-            value: stats?.stats.totalUniqueDevices,
-            color: 'blue'
+            value: stats?.stats.totalUniqueDevices ?? 0,
+            iconVariant: 'gradient-blue'
         },
         {
-            icon: PiDeviceMobileDuotone,
+            IconComponent: PiDeviceMobileDuotone,
             title: t('hwid-inspector-metrics.widget.total-hwid-devices'),
-            value: stats?.stats.totalHwidDevices,
-            color: 'teal'
+            value: stats?.stats.totalHwidDevices ?? 0,
+            iconVariant: 'gradient-teal'
         },
         {
-            icon: PiCalculatorDuotone,
+            IconComponent: PiCalculatorDuotone,
             title: t('hwid-inspector-metrics.widget.avg-devices-per-user'),
-            value: stats?.stats.averageHwidDevicesPerUser,
-            color: 'orange',
-            format: (value: number) => value?.toFixed(2) || '0.00'
+            value: stats?.stats.averageHwidDevicesPerUser ?? 0,
+            iconVariant: 'gradient-orange'
         }
     ]
 
@@ -142,27 +140,7 @@ export function HwidInspectorMetrics() {
             {/* Metric Cards */}
             <SimpleGrid cols={{ base: 1, sm: 2, xl: 3 }}>
                 {metricCards.map((card) => (
-                    <MetricCard.Root key={card.title}>
-                        <Group wrap="nowrap">
-                            <MetricCard.Icon c={card.color} p="sm">
-                                <card.icon size="32px" />
-                            </MetricCard.Icon>
-                            <Stack align="self-start" gap="xs" miw={0} w="100%">
-                                <MetricCard.TextMuted>{card.title}</MetricCard.TextMuted>
-                                <Box miw={0} w="100%">
-                                    <MetricCard.TextEmphasis ff="monospace" truncate>
-                                        {isLoading ? (
-                                            <Loader size="xs" />
-                                        ) : card.format ? (
-                                            card.format(card.value ?? 0)
-                                        ) : (
-                                            formatInt(card.value ?? 0)
-                                        )}
-                                    </MetricCard.TextEmphasis>
-                                </Box>
-                            </Stack>
-                        </Group>
-                    </MetricCard.Root>
+                    <MetricCardShared key={card.title} {...card} />
                 ))}
             </SimpleGrid>
 

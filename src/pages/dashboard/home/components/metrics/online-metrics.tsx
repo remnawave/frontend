@@ -7,36 +7,37 @@ import {
 import { GetStatsCommand } from '@remnawave/backend-contract'
 import { TFunction } from 'i18next'
 
+import { IMetricCardProps } from '@shared/ui/metrics/metric-card'
 import { formatInt } from '@shared/utils/misc'
 
 export const getOnlineMetrics = (
     onlineStats: GetStatsCommand.Response['response']['onlineStats'],
     t: TFunction
-) => {
+): IMetricCardProps[] => {
     return [
         {
             value: formatInt(onlineStats.onlineNow) ?? 0,
-            icon: PiPulseDuotone,
+            IconComponent: PiPulseDuotone,
             title: t('online-metrics.online-now'),
-            color: 'var(--mantine-color-teal-4)'
+            iconVariant: 'gradient-teal'
         },
         {
             value: formatInt(onlineStats.lastDay) ?? 0,
-            icon: PiClockCountdownDuotone,
+            IconComponent: PiClockCountdownDuotone,
             title: t('online-metrics.online-today'),
-            color: 'var(--mantine-color-blue-4)'
+            iconVariant: 'gradient-blue'
         },
         {
             value: formatInt(onlineStats.lastWeek) ?? 0,
-            icon: PiUsersDuotone,
+            IconComponent: PiUsersDuotone,
             title: t('online-metrics.online-this-week'),
-            color: 'var(--mantine-color-indigo-4)'
+            iconVariant: 'gradient-indigo'
         },
         {
             value: formatInt(onlineStats.neverOnline) ?? 0,
-            icon: PiProhibitDuotone,
+            IconComponent: PiProhibitDuotone,
             title: t('online-metrics.never-online'),
-            color: 'var(--mantine-color-red-4)'
+            iconVariant: 'gradient-red'
         }
     ]
 }
