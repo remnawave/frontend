@@ -1906,5 +1906,12 @@
             "offline-nodes": "Offline Nodes",
             "cumulative-traffic": "Cumulative Traffic"
         }
+    },
+    "template-info-popover": {
+        "shared": {
+            "template-variables": "Template Variables",
+            "available-variables-are-listed-below": "Available variables are listed below.",
+            "you-can-use-template-variables-in-this-field": "You can use template variables in this field."
+        }
     }
 }
