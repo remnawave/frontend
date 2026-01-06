@@ -8,9 +8,9 @@ import '@mantine/notifications/styles.css'
 import '@mantine/nprogress/styles.css'
 import '@mantine/spotlight/styles.css'
 import 'mantine-react-table/styles.css'
-import 'mantine-datatable/styles.layer.css'
 import '@gfazioli/mantine-list-view-table/styles.css'
 import '@gfazioli/mantine-split-pane/styles.css'
+import 'mantine-datatable/styles.css'
 
 import './global.css'
 
