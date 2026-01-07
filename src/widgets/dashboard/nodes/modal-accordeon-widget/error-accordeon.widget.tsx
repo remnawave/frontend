@@ -8,17 +8,15 @@ import { IProps } from './interfaces'
 export const ModalAccordionWidget = (props: IProps) => {
     const { t } = useTranslation()
 
-    const { node, fetchedNode } = props
+    const { node } = props
 
     const [localStatusMessage, setLocalStatusMessage] = useState<null | string>(null)
 
     useEffect(() => {
-        if (fetchedNode) {
-            setLocalStatusMessage(fetchedNode.lastStatusMessage)
-        } else if (node?.lastStatusMessage) {
+        if (node?.lastStatusMessage) {
             setLocalStatusMessage(node.lastStatusMessage)
         }
-    }, [fetchedNode])
+    }, [node])
 
     if (!localStatusMessage) {
         return null

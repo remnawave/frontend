@@ -40,13 +40,6 @@ export const NodeVitalsCard = <T extends CreateNodeCommand.Request | UpdateNodeC
                 </SectionCard.Section>
                 <SectionCard.Section>
                     <Stack gap="md">
-                        <CopyableFieldShared
-                            label="Secret Key (SECRET_KEY)"
-                            leftSection={<TbCertificate size={16} />}
-                            size="sm"
-                            value={`${pubKey?.pubKey.trimEnd() ?? 'Error loading...'}`}
-                        />
-
                         <Select
                             key={form.key('countryCode')}
                             label={t('base-node-form.country')}
@@ -104,6 +97,13 @@ export const NodeVitalsCard = <T extends CreateNodeCommand.Request | UpdateNodeC
                                 }}
                             />
                         </Group>
+
+                        <CopyableFieldShared
+                            label="Secret Key (SECRET_KEY)"
+                            leftSection={<TbCertificate size={16} />}
+                            size="sm"
+                            value={`${pubKey?.pubKey.trimEnd() ?? 'Error loading...'}`}
+                        />
                     </Stack>
                 </SectionCard.Section>
             </SectionCard.Root>

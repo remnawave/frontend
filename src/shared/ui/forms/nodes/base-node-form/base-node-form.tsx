@@ -45,12 +45,11 @@ const cardVariants = {
 
 interface IProps<T extends UpdateNodeCommand.Request> {
     advancedOpened: boolean
-    fetchedNode: GetOneNodeCommand.Response['response'] | undefined
     form: UseFormReturnType<T>
     handleClose: () => void
     handleSubmit: () => void
     isDataSubmitting: boolean
-    node: GetOneNodeCommand.Response['response'] | null
+    node: GetOneNodeCommand.Response['response']
     nodeDetailsCard?: ReactNode
     pubKey: GetPubKeyCommand.Response['response'] | undefined
     setAdvancedOpened: (value: boolean) => void
@@ -60,7 +59,6 @@ export const BaseNodeForm = <T extends UpdateNodeCommand.Request>(props: IProps<
     const {
         form,
         node,
-        fetchedNode,
         pubKey,
         advancedOpened,
         setAdvancedOpened,
@@ -81,7 +79,7 @@ export const BaseNodeForm = <T extends UpdateNodeCommand.Request>(props: IProps<
                     initial="hidden"
                     variants={containerVariants}
                 >
-                    <ModalAccordionWidget fetchedNode={fetchedNode} node={node} />
+                    <ModalAccordionWidget node={node} />
 
                     {nodeDetailsCard && (
                         <MotionWrapper variants={cardVariants}>{nodeDetailsCard}</MotionWrapper>
@@ -124,7 +122,7 @@ export const BaseNodeForm = <T extends UpdateNodeCommand.Request>(props: IProps<
                         style={{ flex: '1 1 400px' }}
                         variants={containerVariants}
                     >
-                        <ModalAccordionWidget fetchedNode={fetchedNode} node={node} />
+                        <ModalAccordionWidget node={node} />
 
                         {nodeDetailsCard && (
                             <MotionWrapper variants={cardVariants}>{nodeDetailsCard}</MotionWrapper>

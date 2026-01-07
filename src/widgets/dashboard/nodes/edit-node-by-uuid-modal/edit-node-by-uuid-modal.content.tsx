@@ -64,7 +64,8 @@ export const EditNodeByUuidModalContent = (props: IProps) => {
     useEffect(() => {
         if (fetchedNode) {
             setAdvancedOpened(fetchedNode.isTrafficTrackingActive ?? false)
-            form.setValues({
+            form.initialize({
+                uuid: fetchedNode.uuid,
                 countryCode: fetchedNode.countryCode,
                 name: fetchedNode.name,
                 address: fetchedNode.address,
@@ -96,7 +97,6 @@ export const EditNodeByUuidModalContent = (props: IProps) => {
         updateNode({
             variables: {
                 ...values,
-                uuid: fetchedNode.uuid,
                 name: values.name?.trim(),
                 address: values.address?.trim(),
                 trafficLimitBytes: gbToBytesUtil(values.trafficLimitBytes),
@@ -123,13 +123,12 @@ export const EditNodeByUuidModalContent = (props: IProps) => {
     return (
         <BaseNodeForm
             advancedOpened={advancedOpened}
-            fetchedNode={fetchedNode}
             form={form}
             handleClose={onClose}
             handleSubmit={handleSubmit}
             isDataSubmitting={isUpdateNodePending}
             node={fetchedNode}
-            nodeDetailsCard={<NodeDetailsCardWidget fetchedNode={fetchedNode} node={fetchedNode} />}
+            nodeDetailsCard={<NodeDetailsCardWidget node={fetchedNode} />}
             pubKey={pubKey}
             setAdvancedOpened={setAdvancedOpened}
         />
