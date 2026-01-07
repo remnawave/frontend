@@ -39,6 +39,9 @@ export const ConfigProfilesDrawer = (props: IProps) => {
 
     const [searchQuery, setSearchQuery] = useState('')
     const [debouncedSearchQuery, setDebouncedSearchQuery] = useState('')
+    const [selectedInbounds, setSelectedInbounds] = useState<Set<string>>(new Set())
+    const [selectedProfileUuid, setSelectedProfileUuid] = useState<null | string>(null)
+    const [openAccordions, setOpenAccordions] = useState<Set<string>>(new Set())
 
     useEffect(() => {
         const timer = setTimeout(() => {
@@ -47,15 +50,16 @@ export const ConfigProfilesDrawer = (props: IProps) => {
 
         return () => clearTimeout(timer)
     }, [searchQuery])
-    const [selectedInbounds, setSelectedInbounds] = useState<Set<string>>(
-        new Set(activeConfigProfileInbounds || [])
-    )
-    const [selectedProfileUuid, setSelectedProfileUuid] = useState<null | string>(
-        activeConfigProfileUuid || null
-    )
-    const [openAccordions, setOpenAccordions] = useState<Set<string>>(
-        new Set(activeConfigProfileUuid ? [activeConfigProfileUuid] : [])
-    )
+
+    useEffect(() => {
+        if (opened) {
+            setSelectedInbounds(new Set(activeConfigProfileInbounds || []))
+            setSelectedProfileUuid(activeConfigProfileUuid || null)
+            setOpenAccordions(new Set(activeConfigProfileUuid ? [activeConfigProfileUuid] : []))
+            setSearchQuery('')
+            setDebouncedSearchQuery('')
+        }
+    }, [opened, activeConfigProfileInbounds, activeConfigProfileUuid])
 
     const filteredProfiles = useMemo(() => {
         if (!configProfiles?.configProfiles) return []
