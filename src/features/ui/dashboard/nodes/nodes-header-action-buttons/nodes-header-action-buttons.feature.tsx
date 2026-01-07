@@ -1,23 +1,13 @@
 import {
     TbAlertCircle,
     TbCards,
-    TbInfoCircle,
     TbPlus,
     TbRefresh,
     TbRocket,
     TbSearch,
     TbTable
 } from 'react-icons/tb'
-import {
-    ActionIcon,
-    ActionIconGroup,
-    Alert,
-    Button,
-    Group,
-    Stack,
-    Text,
-    Tooltip
-} from '@mantine/core'
+import { ActionIcon, ActionIconGroup, Group, Stack, Tooltip } from '@mantine/core'
 import { useTranslation } from 'react-i18next'
 import { spotlight } from '@mantine/spotlight'
 import { PiSpiral } from 'react-icons/pi'
@@ -27,6 +17,7 @@ import { useNodesStoreActions } from '@entities/dashboard/nodes/nodes-store/node
 import { NodesViewMode } from '@pages/dashboard/nodes/ui/components/interfaces'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { useGetNodes, useRestartAllNodes } from '@shared/api/hooks'
+import { ActionCardShared } from '@shared/ui'
 
 interface IProps {
     setViewMode: (viewMode: NodesViewMode) => void
@@ -64,57 +55,42 @@ export const NodesHeaderActionButtonsFeature = (props: IProps) => {
             centered: true,
             size: 'md',
             children: (
-                <Stack>
-                    <Alert color="blue" icon={<TbInfoCircle size={20} />} variant="light">
-                        <Stack gap="xs">
-                            <Text size="sm">
-                                <Text component="span" fw={600}>
-                                    {t('nodes-header-action-buttons.feature.force-restart')}
-                                </Text>{' '}
-                                {t('nodes-header-action-buttons.feature.force-restart-description')}
-                            </Text>
-                            <Text size="sm">
-                                <Text component="span" fw={600}>
-                                    {t('nodes-header-action-buttons.feature.graceful-restart')}
-                                </Text>{' '}
-                                {t(
-                                    'nodes-header-action-buttons.feature.graceful-restart-description-1'
-                                )}
-                            </Text>
-                        </Stack>
-                    </Alert>
+                <Stack gap="sm">
+                    <ActionCardShared
+                        description={t(
+                            'nodes-header-action-buttons.feature.force-restart-description'
+                        )}
+                        icon={<TbAlertCircle size={22} />}
+                        isLoading={isPending}
+                        onClick={() => {
+                            restartAllNodes({
+                                variables: {
+                                    forceRestart: true
+                                }
+                            })
+                            modals.closeAll()
+                        }}
+                        title={t('nodes-header-action-buttons.feature.force')}
+                        variant="gradient-red"
+                    />
 
-                    <Group grow preventGrowOverflow={false} wrap="wrap">
-                        <Button
-                            color="red"
-                            leftSection={<TbAlertCircle size={22} />}
-                            onClick={() => {
-                                restartAllNodes({
-                                    variables: {
-                                        forceRestart: true
-                                    }
-                                })
-                                modals.closeAll()
-                            }}
-                            size="md"
-                        >
-                            {t('nodes-header-action-buttons.feature.force')}
-                        </Button>
-                        <Button
-                            leftSection={<TbRocket size={22} />}
-                            onClick={() => {
-                                restartAllNodes({
-                                    variables: {
-                                        forceRestart: false
-                                    }
-                                })
-                                modals.closeAll()
-                            }}
-                            size="md"
-                        >
-                            {t('nodes-header-action-buttons.feature.graceful')}
-                        </Button>
-                    </Group>
+                    <ActionCardShared
+                        description={t(
+                            'nodes-header-action-buttons.feature.graceful-restart-description-1'
+                        )}
+                        icon={<TbRocket size={22} />}
+                        isLoading={isPending}
+                        onClick={() => {
+                            restartAllNodes({
+                                variables: {
+                                    forceRestart: false
+                                }
+                            })
+                            modals.closeAll()
+                        }}
+                        title={t('nodes-header-action-buttons.feature.graceful')}
+                        variant="gradient-teal"
+                    />
                 </Stack>
             )
         })

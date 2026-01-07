@@ -174,7 +174,7 @@ export const UserHwidDevicesDrawerWidget = () => {
 
     const renderDrawerContent = () => {
         return (
-            <Stack>
+            <Stack className={classes.drawerContent}>
                 <Card withBorder>
                     <Stack gap="md">
                         <Group gap="sm" justify="space-between">
@@ -240,6 +240,13 @@ export const UserHwidDevicesDrawerWidget = () => {
             opened={isOpen}
             position="right"
             size="500px"
+            styles={{
+                body: {
+                    height: 'calc(100% - 60px)',
+                    display: 'flex',
+                    flexDirection: 'column'
+                }
+            }}
             title={
                 <BaseOverlayHeader
                     IconComponent={TbDevices}
@@ -256,7 +263,11 @@ export const UserHwidDevicesDrawerWidget = () => {
                 timingFunction="ease-in-out"
                 transition="fade"
             >
-                {(styles) => <Box style={styles}>{renderDrawerContent()}</Box>}
+                {(styles) => (
+                    <Box style={{ ...styles, flex: 1, display: 'flex', flexDirection: 'column' }}>
+                        {renderDrawerContent()}
+                    </Box>
+                )}
             </Transition>
         </Drawer>
     )

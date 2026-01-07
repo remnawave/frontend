@@ -8,7 +8,10 @@ import {
     PiRocketLaunchDuotone
 } from 'react-icons/pi'
 import { GetRemnawaveHealthCommand } from '@remnawave/backend-contract'
+import { ThemeIconProps } from '@mantine/core'
 import { TFunction } from 'i18next'
+
+import { IMetricCardProps } from '@shared/ui/metrics/metric-card'
 
 const getProcessIcon = (processName: string) => {
     if (processName.includes('REST API')) return PiCloudDuotone
@@ -17,16 +20,16 @@ const getProcessIcon = (processName: string) => {
     return PiGearSixDuotone
 }
 
-const getCpuColor = (cpuUsage: number) => {
-    if (cpuUsage < 30) return 'var(--mantine-color-green-4)'
-    if (cpuUsage < 70) return 'var(--mantine-color-yellow-4)'
-    return 'var(--mantine-color-red-4)'
+const getIconVariant = (cpuUsage: number): ThemeIconProps['variant'] => {
+    if (cpuUsage < 30) return 'gradient-green'
+    if (cpuUsage < 70) return 'gradient-yellow'
+    return 'gradient-red'
 }
 
 export const getPm2SummaryMetrics = (
     pm2Stats: GetRemnawaveHealthCommand.Response['response']['pm2Stats'],
     t: TFunction
-) => {
+): IMetricCardProps[] => {
     if (!pm2Stats || pm2Stats.length === 0) {
         return []
     }
@@ -48,34 +51,34 @@ export const getPm2SummaryMetrics = (
     return [
         {
             value: pm2Stats.length,
-            icon: PiGearSixDuotone,
+            IconComponent: PiGearSixDuotone,
             title: t('pm2-metrics.total-processes'),
-            color: 'var(--mantine-color-blue-4)'
+            iconVariant: 'gradient-blue'
         },
         {
             value: `${totalMemoryMB.toFixed(0)} MiB`,
-            icon: PiMemoryDuotone,
+            IconComponent: PiMemoryDuotone,
             title: t('pm2-metrics.total-memory'),
-            color: 'var(--mantine-color-cyan-4)'
+            iconVariant: 'gradient-cyan'
         },
         {
             value: `${averageCpu.toFixed(1)}%`,
-            icon: PiCpuDuotone,
+            IconComponent: PiCpuDuotone,
             title: t('pm2-metrics.average-cpu'),
-            color: 'var(--mantine-color-green-4)'
+            iconVariant: 'gradient-green'
         },
         {
             value: `${heaviestProcess.name}`,
-            icon: PiRocketLaunchDuotone,
+            IconComponent: PiRocketLaunchDuotone,
             title: t('pm2-metrics.heaviest-process'),
-            color: 'var(--mantine-color-orange-4)'
+            iconVariant: 'gradient-orange'
         }
     ]
 }
 
 export const getPm2ProcessMetrics = (
     pm2Stats: GetRemnawaveHealthCommand.Response['response']['pm2Stats']
-) => {
+): IMetricCardProps[] => {
     if (!pm2Stats || pm2Stats.length === 0) {
         return []
     }
@@ -83,10 +86,10 @@ export const getPm2ProcessMetrics = (
     return pm2Stats.map((process) => {
         const cpuUsage = parseFloat(process.cpu)
         return {
-            value: `${process.cpu}% / ${process.memory}`,
-            icon: getProcessIcon(process.name),
+            value: `${process.memory} (${process.cpu}%)`,
+            IconComponent: getProcessIcon(process.name),
             title: process.name,
-            color: getCpuColor(cpuUsage)
+            iconVariant: getIconVariant(cpuUsage)
         }
     })
 }

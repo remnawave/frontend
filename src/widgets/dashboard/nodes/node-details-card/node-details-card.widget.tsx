@@ -1,26 +1,32 @@
 import {
     ActionIcon,
+    Badge,
     Box,
-    Card,
     Group,
     Loader,
     Paper,
+    Progress,
     SimpleGrid,
-    Stack,
     Text,
-    ThemeIcon,
-    Title,
+    ThemeIconProps,
     Tooltip
 } from '@mantine/core'
-import { PiCloudArrowUpDuotone, PiUsersDuotone, PiWarningCircle } from 'react-icons/pi'
+import {
+    PiArrowsCounterClockwise,
+    PiCloudArrowUpDuotone,
+    PiUsersDuotone,
+    PiWarningCircle
+} from 'react-icons/pi'
 import { UpdateNodeCommand } from '@remnawave/backend-contract'
 import { TbPower, TbWifi, TbWifiOff } from 'react-icons/tb'
-import { HiOutlineServer } from 'react-icons/hi'
+import { memo, useCallback, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
-import { motion } from 'framer-motion'
-import { memo, useMemo } from 'react'
 
+import { getNodeResetDaysUtil, getXrayUptimeUtil } from '@shared/utils/time-utils'
 import { QueryKeys, useDisableNode, useEnableNode } from '@shared/api/hooks'
+import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
+import { prettyBytesToAnyUtil } from '@shared/utils/bytes'
+import { SectionCard } from '@shared/ui/section-card'
 import { XrayLogo } from '@shared/ui/logos'
 import { queryClient } from '@shared/api'
 import { Logo } from '@shared/ui'
@@ -56,60 +62,67 @@ export const NodeDetailsCardWidget = memo(({ node, fetchedNode }: IProps) => {
         )
     }, [node.configProfile])
 
-    const { icon, color, backgroundColor, borderColor, boxShadow } = useMemo(() => {
-        let icon: React.ReactNode
-        let color = 'red'
-        let backgroundColor = 'rgba(239, 68, 68, 0.15)'
-        let borderColor = 'rgba(239, 68, 68, 0.3)'
-        let boxShadow = 'rgba(239, 68, 68, 0.2)'
+    const { IconComponent, themeIconVariant } = useMemo(() => {
+        let IconComponent: React.ComponentType<{ size: number }>
+        let themeIconVariant: ThemeIconProps['variant'] = 'gradient-red'
 
         if (isConfigMissing) {
-            icon = <PiWarningCircle size={18} style={{ color: 'var(--mantine-color-red-6)' }} />
-            color = 'red'
-            backgroundColor = 'rgba(239, 68, 68, 0.15)'
-            borderColor = 'rgba(239, 68, 68, 0.3)'
-            boxShadow = 'rgba(239, 68, 68, 0.2)'
-
-            return { icon, color, backgroundColor, borderColor, boxShadow }
+            IconComponent = PiWarningCircle
+            themeIconVariant = 'gradient-red'
+            return { IconComponent, themeIconVariant }
         }
 
         if (nodeData.isDisabled) {
-            icon = <TbWifiOff size={18} style={{ color: 'var(--mantine-color-gray-6)' }} />
-            color = 'gray'
-            backgroundColor = 'rgba(107, 114, 128, 0.15)'
-            borderColor = 'rgba(107, 114, 128, 0.3)'
-            boxShadow = 'rgba(107, 114, 128, 0.2)'
-
-            return { icon, color, backgroundColor, borderColor, boxShadow }
+            IconComponent = TbWifiOff
+            themeIconVariant = 'gradient-gray'
+            return { IconComponent, themeIconVariant }
         }
 
         if (nodeData.isConnected) {
-            icon = <TbWifi size={18} style={{ color: 'var(--mantine-color-teal-6)' }} />
-            color = 'teal'
-            backgroundColor = 'rgba(45, 212, 191, 0.15)'
-            borderColor = 'rgba(45, 212, 191, 0.3)'
-            boxShadow = 'rgba(45, 212, 191, 0.2)'
+            IconComponent = TbWifi
+            themeIconVariant = 'gradient-teal'
         } else if (nodeData.isConnecting) {
-            icon = (
-                <PiCloudArrowUpDuotone
-                    size={18}
-                    style={{ color: 'var(--mantine-color-yellow-3)' }}
-                />
-            )
-            color = 'yellow'
-            backgroundColor = 'rgba(245, 158, 11, 0.15)'
-            borderColor = 'rgba(245, 158, 11, 0.3)'
-            boxShadow = 'rgba(245, 158, 11, 0.2)'
+            IconComponent = PiCloudArrowUpDuotone
+            themeIconVariant = 'gradient-yellow'
         } else {
-            icon = <PiWarningCircle size={18} style={{ color: 'var(--mantine-color-red-6)' }} />
-            color = 'red'
-            backgroundColor = 'rgba(239, 68, 68, 0.15)'
-            borderColor = 'rgba(239, 68, 68, 0.3)'
-            boxShadow = 'rgba(239, 68, 68, 0.2)'
+            IconComponent = PiWarningCircle
+            themeIconVariant = 'gradient-red'
         }
 
-        return { icon, color, backgroundColor, borderColor, boxShadow }
-    }, [nodeData.isConnected, nodeData.isConnecting, nodeData.isDisabled, t])
+        return { IconComponent, themeIconVariant }
+    }, [nodeData.isConnected, nodeData.isConnecting, nodeData.isDisabled, isConfigMissing])
+
+    const trafficData = useMemo(() => {
+        let maxData = '∞'
+        let percentage = 0
+
+        const prettyUsedData = prettyBytesToAnyUtil(nodeData.trafficUsedBytes || 0) || '0 B'
+
+        if (nodeData.isTrafficTrackingActive) {
+            maxData = prettyBytesToAnyUtil(nodeData.trafficLimitBytes || 0) || '∞'
+            if (nodeData.trafficLimitBytes === 0) {
+                percentage = 100
+            } else {
+                percentage = Math.floor(
+                    ((nodeData.trafficUsedBytes ?? 0) * 100) / (nodeData.trafficLimitBytes ?? 0)
+                )
+            }
+        }
+
+        return {
+            maxData,
+            percentage,
+            prettyUsedData,
+            isUnlimited: !nodeData.isTrafficTrackingActive || nodeData.trafficLimitBytes === 0
+        }
+    }, [nodeData.trafficUsedBytes, nodeData.trafficLimitBytes, nodeData.isTrafficTrackingActive])
+
+    const getProgressColor = useCallback(() => {
+        if (trafficData.isUnlimited) return 'teal'
+        if (trafficData.percentage > 95) return 'red'
+        if (trafficData.percentage > 80) return 'yellow.4'
+        return 'teal'
+    }, [trafficData.percentage, trafficData.isUnlimited])
 
     const handleToggleNodeStatus = () => {
         if (nodeData.isDisabled) {
@@ -120,52 +133,34 @@ export const NodeDetailsCardWidget = memo(({ node, fetchedNode }: IProps) => {
     }
 
     return (
-        <Card
-            p="lg"
-            style={{
-                background: `
-                    linear-gradient(135deg, 
-                        rgba(15, 23, 42, 0.98) 0%,
-                        rgba(30, 41, 59, 0.98) 50%,
-                        rgba(15, 23, 42, 0.98) 100%
-                    )
-                `,
-                border: '1px solid rgba(148, 163, 184, 0.1)',
-                position: 'relative',
-                overflow: 'hidden'
-            }}
-        >
-            <Box
-                style={{
-                    position: 'absolute',
-                    top: -20,
-                    right: -20,
-                    width: 100,
-                    height: 100,
-                    background: `radial-gradient(circle, ${backgroundColor} 0%, transparent 70%)`,
-                    borderRadius: '50%'
-                }}
-            />
-
-            <Stack gap="md" style={{ position: 'relative', zIndex: 1 }}>
-                <Group align="flex-start" justify="space-between">
-                    <Group gap="xs" mt={5}>
-                        <ThemeIcon
-                            gradient={{ from: 'violet.4', to: 'purple.6', deg: 45 }}
-                            size="sm"
-                            style={{ borderRadius: '8px' }}
-                            variant="gradient"
-                        >
-                            <HiOutlineServer size={14} />
-                        </ThemeIcon>
-                        <Box>
-                            <Title c="white" fw={600} order={5}>
-                                {t('node-details-card.widget.node-details')}
-                            </Title>
-                        </Box>
-                    </Group>
+        <SectionCard.Root>
+            <SectionCard.Section>
+                <Group align="flex-center" justify="space-between">
+                    <BaseOverlayHeader
+                        IconComponent={IconComponent}
+                        iconSize={20}
+                        iconVariant={themeIconVariant}
+                        title={t('node-details-card.widget.node-details')}
+                        titleOrder={5}
+                    />
 
                     <Group gap="xs">
+                        {nodeData.isConnected && (
+                            <Tooltip
+                                label={t('node-stats.card.represents-the-uptime-of-the-xray-core')}
+                            >
+                                <Badge
+                                    color="teal"
+                                    h={28}
+                                    leftSection={<XrayLogo size={14} />}
+                                    size="lg"
+                                    variant="light"
+                                    visibleFrom="sm"
+                                >
+                                    {getXrayUptimeUtil(nodeData.xrayUptime)}
+                                </Badge>
+                            </Tooltip>
+                        )}
                         {!isConfigMissing && (
                             <Tooltip
                                 label={
@@ -242,52 +237,65 @@ export const NodeDetailsCardWidget = memo(({ node, fetchedNode }: IProps) => {
                                 </ActionIcon>
                             </Tooltip>
                         )}
-
-                        <motion.div
-                            animate={{
-                                scale: nodeData?.isConnected ? [1, 1.1, 1] : 1,
-                                opacity: nodeData?.isConnected ? [1, 0.8, 1] : 0.6
-                            }}
-                            transition={{
-                                duration: nodeData?.isConnected ? 2 : 0,
-                                repeat: nodeData?.isConnected ? Infinity : 0
-                            }}
-                        >
-                            <ThemeIcon
-                                color={color}
-                                size="lg"
-                                style={{
-                                    backgroundColor,
-                                    border: `1px solid ${borderColor}`,
-                                    boxShadow: `0 0 15px ${boxShadow}`
-                                }}
-                                variant="light"
-                            >
-                                {icon}
-                            </ThemeIcon>
-                        </motion.div>
                     </Group>
                 </Group>
+            </SectionCard.Section>
+            <SectionCard.Section>
+                <Box>
+                    <Group gap="xs" justify="space-between" mb={6}>
+                        <Group gap={6}>
+                            <Text c="gray.3" ff="monospace" fw={600} size="sm">
+                                {trafficData.prettyUsedData}
+                            </Text>
+                        </Group>
+                        <Text c="dimmed" size="xs">
+                            {trafficData.maxData}
+                        </Text>
+                    </Group>
 
-                {nodeData.isConnected && (
+                    <Progress
+                        color={getProgressColor()}
+                        radius="sm"
+                        size="sm"
+                        value={trafficData.isUnlimited ? 100 : trafficData.percentage}
+                    />
+
+                    {nodeData.isTrafficTrackingActive && nodeData.trafficResetDay && (
+                        <Group gap={4} justify="center" mt={6}>
+                            <PiArrowsCounterClockwise
+                                color="var(--mantine-color-dimmed)"
+                                size={12}
+                            />
+                            <Text c="dimmed" size="xs">
+                                {t('node-stats.card.traffic-refill-in-days')}{' '}
+                                {getNodeResetDaysUtil(nodeData.trafficResetDay)}
+                            </Text>
+                        </Group>
+                    )}
+                </Box>
+            </SectionCard.Section>
+            {nodeData.isConnected && (
+                <SectionCard.Section>
                     <SimpleGrid
                         cols={{
                             base: 1,
-                            sm: 2,
-                            md: 3
+                            xs: 2,
+                            sm: 3
                         }}
+                        spacing="xs"
                     >
                         <Paper
                             p="xs"
+                            radius="md"
                             style={{
                                 background:
                                     nodeData.usersOnline! > 0
-                                        ? 'rgba(45, 212, 191, 0.1)'
-                                        : 'rgba(107, 114, 128, 0.1)',
+                                        ? 'rgba(45, 212, 191, 0.08)'
+                                        : 'rgba(107, 114, 128, 0.08)',
                                 border: `1px solid ${
                                     nodeData.usersOnline! > 0
-                                        ? 'rgba(45, 212, 191, 0.3)'
-                                        : 'rgba(107, 114, 128, 0.3)'
+                                        ? 'rgba(45, 212, 191, 0.2)'
+                                        : 'rgba(107, 114, 128, 0.2)'
                                 }`
                             }}
                         >
@@ -295,13 +303,13 @@ export const NodeDetailsCardWidget = memo(({ node, fetchedNode }: IProps) => {
                                 <PiUsersDuotone
                                     color={
                                         nodeData.usersOnline! > 0
-                                            ? 'var(--mantine-color-teal-4)'
-                                            : 'var(--mantine-color-gray-5)'
+                                            ? 'var(--mantine-color-teal-5)'
+                                            : 'var(--mantine-color-gray-6)'
                                     }
-                                    size={18}
+                                    size={16}
                                 />
                                 <Text
-                                    c={nodeData.usersOnline! > 0 ? 'teal.4' : 'gray.5'}
+                                    c={nodeData.usersOnline! > 0 ? 'teal.5' : 'gray.6'}
                                     fw={600}
                                     size="sm"
                                 >
@@ -313,16 +321,47 @@ export const NodeDetailsCardWidget = memo(({ node, fetchedNode }: IProps) => {
                         {nodeData.xrayVersion && (
                             <Paper
                                 p="xs"
+                                radius="md"
                                 style={{
-                                    background: 'rgba(139, 92, 246, 0.1)',
-                                    border: '1px solid rgba(139, 92, 246, 0.3)'
+                                    background: 'rgba(139, 92, 246, 0.08)',
+                                    border: '1px solid rgba(139, 92, 246, 0.2)'
                                 }}
                             >
                                 <Tooltip label={t('node-details-card.widget.xray-core-version')}>
                                     <Group gap="xs" justify="center">
-                                        <XrayLogo color="var(--mantine-color-violet-4)" size={18} />
-                                        <Text c="violet.4" fw={600} size="sm">
-                                            {nodeData.xrayVersion || 'N/A'}
+                                        <XrayLogo color="var(--mantine-color-violet-5)" size={16} />
+                                        <Text c="violet.5" fw={600} size="sm">
+                                            {nodeData.xrayVersion}
+                                        </Text>
+                                    </Group>
+                                </Tooltip>
+                            </Paper>
+                        )}
+
+                        {nodeData.xrayUptime !== '0' && (
+                            <Paper
+                                hiddenFrom="sm"
+                                p="xs"
+                                radius="md"
+                                style={{
+                                    background: 'rgba(20, 184, 166, 0.08)', // teal-500 at 8%
+                                    border: '1px solid rgba(20, 184, 166, 0.2)' // teal-500 at 20%
+                                }}
+                            >
+                                <Tooltip
+                                    label={t(
+                                        'node-stats.card.represents-the-uptime-of-the-xray-core'
+                                    )}
+                                >
+                                    <Group gap="xs" justify="center">
+                                        <XrayLogo color="var(--mantine-color-teal-5)" size={16} />
+                                        <Text
+                                            c="teal.5"
+                                            fw={600}
+                                            size="sm"
+                                            style={{ textTransform: 'uppercase' }}
+                                        >
+                                            {getXrayUptimeUtil(nodeData.xrayUptime)}
                                         </Text>
                                     </Group>
                                 </Tooltip>
@@ -332,26 +371,27 @@ export const NodeDetailsCardWidget = memo(({ node, fetchedNode }: IProps) => {
                         {nodeData.nodeVersion && (
                             <Paper
                                 p="xs"
+                                radius="md"
                                 style={{
-                                    background: 'rgba(99, 102, 241, 0.1)',
-                                    border: '1px solid rgba(99, 102, 241, 0.3)'
+                                    background: 'rgba(99, 102, 241, 0.08)',
+                                    border: '1px solid rgba(99, 102, 241, 0.2)'
                                 }}
                             >
                                 <Tooltip
                                     label={t('node-details-card.widget.remnawave-node-version')}
                                 >
                                     <Group gap="xs" justify="center">
-                                        <Logo color="var(--mantine-color-indigo-4)" size={18} />
-                                        <Text c="indigo.4" fw={600} size="sm">
-                                            {nodeData.nodeVersion || 'N/A'}
+                                        <Logo color="var(--mantine-color-indigo-5)" size={16} />
+                                        <Text c="indigo.5" fw={600} size="sm">
+                                            {nodeData.nodeVersion}
                                         </Text>
                                     </Group>
                                 </Tooltip>
                             </Paper>
                         )}
                     </SimpleGrid>
-                )}
-            </Stack>
-        </Card>
+                </SectionCard.Section>
+            )}
+        </SectionCard.Root>
     )
 })

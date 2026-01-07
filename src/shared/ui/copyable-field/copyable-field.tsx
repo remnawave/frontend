@@ -9,7 +9,7 @@ export const CopyableFieldShared = ({
     leftSection,
     size
 }: {
-    label?: string
+    label?: React.ReactNode | string
     leftSection?: React.ReactNode
     size?: 'lg' | 'md' | 'sm' | 'xl' | 'xs'
     value: number | string

@@ -70,7 +70,7 @@ export const SubscriptionAnnounceRoutingCardWidget = (props: IProps) => {
                             description={t('subscription-tabs.widget.announce-description')}
                             key={form.key('happAnnounce')}
                             label="Announce"
-                            leftSection={<TemplateInfoPopoverShared showHostDescription={false} />}
+                            leftSection={<TemplateInfoPopoverShared />}
                             minRows={4}
                             placeholder={t(
                                 'subscription-tabs.widget.enter-announce-text-max-200-characters'
@@ -101,7 +101,7 @@ export const SubscriptionAnnounceRoutingCardWidget = (props: IProps) => {
                             leftSection={<PiGear size={px('1.2rem')} />}
                             onClick={() => {
                                 window.open(
-                                    'https://routing.happ.su',
+                                    'https://utils.docs.rw/happ-rb',
                                     '_blank',
                                     'noopener noreferrer'
                                 )

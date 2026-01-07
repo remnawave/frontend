@@ -1,5 +1,4 @@
 import { PiChartBarDuotone } from 'react-icons/pi'
-import { useDisclosure } from '@mantine/hooks'
 import { useTranslation } from 'react-i18next'
 import { Menu } from '@mantine/core'
 
@@ -8,21 +7,19 @@ import { UserUsageModalWidget } from '@widgets/dashboard/users/user-usage-modal/
 import { IProps } from './interfaces'
 
 export function GetUserUsageFeature(props: IProps) {
-    const { userUuid } = props
+    const { onClose, onOpen, opened, userUuid } = props
     const { t } = useTranslation()
-
-    const [opened, handlers] = useDisclosure(false)
 
     return (
         <>
             <Menu.Item
                 leftSection={<PiChartBarDuotone color="var(--mantine-color-blue-5)" size="16px" />}
-                onClick={handlers.open}
+                onClick={onOpen}
             >
-                {t('get-user-usage.feature.show-usage')}
+                {t('user-usage-modal.widget.traffic-statistics')}
             </Menu.Item>
 
-            <UserUsageModalWidget onClose={handlers.close} opened={opened} userUuid={userUuid} />
+            <UserUsageModalWidget onClose={onClose} opened={opened} userUuid={userUuid} />
         </>
     )
 }

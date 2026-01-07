@@ -4,10 +4,8 @@ import {
     Box,
     Card,
     Center,
-    Divider,
     Grid,
     Group,
-    Paper,
     px,
     SimpleGrid,
     Stack,
@@ -29,9 +27,8 @@ import { useTranslation } from 'react-i18next'
 import { TbServer2 } from 'react-icons/tb'
 import { memo, useState } from 'react'
 
+import { SectionCard } from '@shared/ui/section-card'
 import { formatInt } from '@shared/utils/misc'
-
-import styles from './NodesMetrics.module.css'
 
 export const NodeDetailsCard = memo(
     ({
@@ -53,10 +50,8 @@ export const NodeDetailsCard = memo(
         const filteredOutboundStats = filterNonZeroStats(node.outboundsStats)
 
         return (
-            <Paper className={styles.NodeDetailCardPaper} p="lg">
-                <Box className={styles.NodeDetailCardBox} />
-
-                <Stack gap="md" style={{ position: 'relative', zIndex: 1 }}>
+            <SectionCard.Root>
+                <SectionCard.Section>
                     <Group align="center" justify="space-between" style={{ minWidth: 0 }}>
                         <Group
                             gap="md"
@@ -66,20 +61,14 @@ export const NodeDetailsCard = memo(
                             wrap="nowrap"
                         >
                             <ThemeIcon
-                                color="indigo"
                                 onClick={() => {
                                     handleNodeClick(node.nodeUuid)
                                 }}
                                 size="xl"
                                 style={{
-                                    background: 'rgba(99, 102, 241, 0.15)',
-                                    border: '1px solid rgba(99, 102, 241, 0.3)',
-                                    cursor: 'pointer',
-                                    boxShadow: '0 0 0 4px rgba(99, 102, 241, 0.1)',
-                                    transform: 'translateY(-1px)',
-                                    flexShrink: 0
+                                    cursor: 'pointer'
                                 }}
-                                variant="light"
+                                variant="gradient-indigo"
                             >
                                 <TbServer2
                                     size="24px"
@@ -166,15 +155,15 @@ export const NodeDetailsCard = memo(
                             </Badge>
                         </Group>
                     </Group>
-
-                    <Divider color="gray.8" />
-
+                </SectionCard.Section>
+                <SectionCard.Section>
                     <Grid align="flex-start" justify="flex-start">
                         <Grid.Col span={{ base: 12, lg: 6 }}>
                             <Card
                                 p="md"
                                 style={{
-                                    background: 'rgba(16, 185, 129, 0.1)'
+                                    background: 'rgba(16, 185, 129, 0.05)',
+                                    border: '1px solid rgba(16, 185, 129, 0.15)'
                                 }}
                             >
                                 <Group align="center" gap="xs" mb="xs" wrap="nowrap">
@@ -275,7 +264,13 @@ export const NodeDetailsCard = memo(
                             </Card>
                         </Grid.Col>
                         <Grid.Col span={{ base: 12, lg: 6 }}>
-                            <Card p="md" style={{ background: 'rgba(59, 130, 246, 0.1)' }}>
+                            <Card
+                                p="md"
+                                style={{
+                                    background: 'rgba(59, 130, 246, 0.05)',
+                                    border: '1px solid rgba(59, 130, 246, 0.15)'
+                                }}
+                            >
                                 <Group align="center" gap="xs" mb="xs" wrap="nowrap">
                                     <PiArrowUpDuotone
                                         color="var(--mantine-color-blue-4)"
@@ -373,8 +368,8 @@ export const NodeDetailsCard = memo(
                             </Card>
                         </Grid.Col>
                     </Grid>
-                </Stack>
-            </Paper>
+                </SectionCard.Section>
+            </SectionCard.Root>
         )
     }
 )

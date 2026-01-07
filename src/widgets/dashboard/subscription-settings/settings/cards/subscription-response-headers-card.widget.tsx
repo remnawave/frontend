@@ -210,11 +210,7 @@ export const SubscriptionResponseHeadersCardWidget = (props: IProps) => {
                                         value={header.key}
                                     />
                                     <TextInput
-                                        leftSection={
-                                            <TemplateInfoPopoverShared
-                                                showHostDescription={false}
-                                            />
-                                        }
+                                        leftSection={<TemplateInfoPopoverShared />}
                                         onChange={(e) =>
                                             updateLocalHeaderValue(index, e.target.value)
                                         }

@@ -1,0 +1,31 @@
+.skeleton {
+    position: relative;
+    overflow: hidden;
+    border-color: var(--mantine-color-dark-4);
+    border-radius: var(--mantine-radius-md);
+    background: var(--mantine-color-dark-6);
+}
+
+.skeleton::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(6, 182, 212, 0.04) 25%,
+        rgba(6, 182, 212, 0.08) 50%,
+        rgba(6, 182, 212, 0.04) 75%,
+        transparent 100%
+    );
+    animation: shimmer 1.5s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}

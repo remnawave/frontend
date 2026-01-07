@@ -1,10 +1,13 @@
 import { ForwardRefComponent, HTMLMotionProps, Variants } from 'motion/react'
-import { Fieldset, Group, TextInput, Title } from '@mantine/core'
 import { CreateUserCommand } from '@remnawave/backend-contract'
 import { HiIdentification } from 'react-icons/hi'
 import { UseFormReturnType } from '@mantine/form'
 import { PiUserDuotone } from 'react-icons/pi'
 import { useTranslation } from 'react-i18next'
+import { TextInput } from '@mantine/core'
+
+import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
+import { SectionCard } from '@shared/ui/section-card'
 
 interface IProps {
     cardVariants: Variants
@@ -21,30 +24,27 @@ export const UserIdentityCreationCard = (props: IProps) => {
 
     return (
         <MotionWrapper variants={cardVariants}>
-            <Fieldset
-                legend={
-                    <Group gap="xs" mb="xs">
-                        <HiIdentification
-                            size={20}
-                            style={{
-                                color: 'var(--mantine-color-blue-4)'
-                            }}
-                        />
-                        <Title c="blue.4" order={4}>
-                            {t('user-indentity-creation-card.user-identity')}
-                        </Title>
-                    </Group>
-                }
-            >
-                <TextInput
-                    description={t('create-user-modal.widget.username-cannot-be-changed-later')}
-                    key={form.key('username')}
-                    label={t('login-form-feature.username')}
-                    required
-                    {...form.getInputProps('username')}
-                    leftSection={<PiUserDuotone size="16px" />}
-                />
-            </Fieldset>
+            <SectionCard.Root>
+                <SectionCard.Section>
+                    <BaseOverlayHeader
+                        IconComponent={HiIdentification}
+                        iconSize={20}
+                        iconVariant="gradient-blue"
+                        title={t('user-indentity-creation-card.user-identity')}
+                        titleOrder={5}
+                    />
+                </SectionCard.Section>
+                <SectionCard.Section>
+                    <TextInput
+                        description={t('create-user-modal.widget.username-cannot-be-changed-later')}
+                        key={form.key('username')}
+                        label={t('login-form-feature.username')}
+                        required
+                        {...form.getInputProps('username')}
+                        leftSection={<PiUserDuotone size="16px" />}
+                    />
+                </SectionCard.Section>
+            </SectionCard.Root>
         </MotionWrapper>
     )
 }

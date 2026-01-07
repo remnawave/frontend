@@ -1,4 +1,3 @@
-/* eslint-disable @stylistic/indent */
 import {
     Accordion,
     ActionIcon,
@@ -7,7 +6,6 @@ import {
     Drawer,
     Group,
     Paper,
-    ScrollArea,
     Stack,
     Text,
     TextInput
@@ -16,12 +14,14 @@ import { GetConfigProfilesCommand } from '@remnawave/backend-contract'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { TbDeviceFloppy, TbSearch, TbX } from 'react-icons/tb'
 import { useTranslation } from 'react-i18next'
+import { Virtuoso } from 'react-virtuoso'
 
 import { ConfigProfileCardShared } from '@shared/ui/config-profiles/config-profile-card/config-profile-card.shared'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { useGetConfigProfiles } from '@shared/api/hooks'
 import { XrayLogo } from '@shared/ui/logos'
 
+import classes from './config-profiles.module.css'
 import { IProps } from './interfaces'
 
 export const ConfigProfilesDrawer = (props: IProps) => {
@@ -153,6 +153,13 @@ export const ConfigProfilesDrawer = (props: IProps) => {
             padding="md"
             position="right"
             size="480px"
+            styles={{
+                body: {
+                    height: 'calc(100% - 60px)',
+                    display: 'flex',
+                    flexDirection: 'column'
+                }
+            }}
             title={
                 <BaseOverlayHeader
                     IconComponent={XrayLogo}
@@ -161,7 +168,7 @@ export const ConfigProfilesDrawer = (props: IProps) => {
                 />
             }
         >
-            <Stack gap="md" h="100%">
+            <Stack className={classes.drawerContent} gap="md">
                 <Paper p="md" shadow="sm" withBorder>
                     <Stack gap="md">
                         <Box
@@ -245,46 +252,53 @@ export const ConfigProfilesDrawer = (props: IProps) => {
                     value={searchQuery}
                 />
 
-                <ScrollArea flex={1}>
-                    <Stack gap="sm">
-                        <Accordion
-                            chevronPosition="left"
-                            multiple={true}
-                            onChange={(value) => {
-                                setOpenAccordions(new Set(value))
-                            }}
-                            value={Array.from(openAccordions)}
-                            variant="separated"
-                        >
-                            {filteredProfiles.map((profile) => {
+                {filteredProfiles.length === 0 ? (
+                    <Text c="dimmed" py="xl" size="sm" ta="center">
+                        {debouncedSearchQuery
+                            ? t('config-profiles.drawer.widget.no-profiles-or-inbounds-found')
+                            : t('config-profiles.drawer.widget.no-config-profiles-available')}
+                    </Text>
+                ) : (
+                    <Box className={classes.listContainer}>
+                        <Virtuoso
+                            data={filteredProfiles}
+                            itemContent={(_index, profile) => {
                                 const isOpen = openAccordions.has(profile.uuid)
                                 return (
-                                    <ConfigProfileCardShared
-                                        isOpen={isOpen}
-                                        key={profile.uuid}
-                                        onInboundToggle={handleInboundToggle}
-                                        onSelectAllInbounds={handleSelectAllInbounds}
-                                        onUnselectAllInbounds={handleUnselectAllInbounds}
-                                        profile={profile}
-                                        selectedInbounds={selectedInbounds}
-                                    />
+                                    <div className={classes.itemWrapper}>
+                                        <Accordion
+                                            chevronPosition="left"
+                                            onChange={(value) => {
+                                                setOpenAccordions((prev) => {
+                                                    const next = new Set(prev)
+                                                    if (value === profile.uuid) {
+                                                        next.add(profile.uuid)
+                                                    } else {
+                                                        next.delete(profile.uuid)
+                                                    }
+                                                    return next
+                                                })
+                                            }}
+                                            value={isOpen ? profile.uuid : null}
+                                            variant="separated"
+                                        >
+                                            <ConfigProfileCardShared
+                                                isOpen={isOpen}
+                                                onInboundToggle={handleInboundToggle}
+                                                onSelectAllInbounds={handleSelectAllInbounds}
+                                                onUnselectAllInbounds={handleUnselectAllInbounds}
+                                                profile={profile}
+                                                selectedInbounds={selectedInbounds}
+                                            />
+                                        </Accordion>
+                                    </div>
                                 )
-                            })}
-
-                            {filteredProfiles.length === 0 && (
-                                <Text c="dimmed" py="xl" size="sm" ta="center">
-                                    {debouncedSearchQuery
-                                        ? t(
-                                              'config-profiles.drawer.widget.no-profiles-or-inbounds-found'
-                                          )
-                                        : t(
-                                              'config-profiles.drawer.widget.no-config-profiles-available'
-                                          )}
-                                </Text>
-                            )}
-                        </Accordion>
-                    </Stack>
-                </ScrollArea>
+                            }}
+                            style={{ height: '100%' }}
+                            useWindowScroll={false}
+                        />
+                    </Box>
+                )}
             </Stack>
         </Drawer>
     )

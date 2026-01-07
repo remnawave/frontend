@@ -1,17 +1,16 @@
 import { useEffect } from 'react'
 
 import {
-    useNodesStoreActions,
-    useNodesStoreCreateModalIsOpen,
-    useNodesStoreEditModalIsOpen
-} from '@entities/dashboard/nodes/nodes-store'
-import {
     nodesQueryKeys,
     QueryKeys,
     useGetConfigProfiles,
     useGetNodes,
     useGetNodesTags
 } from '@shared/api/hooks'
+import {
+    useNodesStoreActions,
+    useNodesStoreCreateModalIsOpen
+} from '@entities/dashboard/nodes/nodes-store'
 import { queryClient } from '@shared/api'
 
 import NodesPageComponent from '../components/nodes.page.component'
@@ -20,7 +19,6 @@ export function NodesPageConnector() {
     const actions = useNodesStoreActions()
 
     const isCreateModalOpen = useNodesStoreCreateModalIsOpen()
-    const isEditModalOpen = useNodesStoreEditModalIsOpen()
 
     const { data: nodes, isLoading } = useGetNodes()
     const { isLoading: isConfigProfilesLoading } = useGetConfigProfiles()
@@ -38,11 +36,11 @@ export function NodesPageConnector() {
     }, [])
 
     useEffect(() => {
-        if (isCreateModalOpen || isEditModalOpen) return
+        if (isCreateModalOpen) return
         ;(async () => {
             await queryClient.refetchQueries({ queryKey: QueryKeys.nodes.getAllNodes.queryKey })
         })()
-    }, [isCreateModalOpen, isEditModalOpen])
+    }, [isCreateModalOpen])
 
     return <NodesPageComponent isLoading={isLoading || isConfigProfilesLoading} nodes={nodes} />
 }

@@ -1,5 +1,5 @@
 import { CreateUserCommand, USERS_STATUS } from '@remnawave/backend-contract'
-import { Button, em, Group, Modal, Stack } from '@mantine/core'
+import { Button, em, Group, Stack } from '@mantine/core'
 import { zodResolver } from 'mantine-form-zod-resolver'
 import { PiFloppyDiskDuotone } from 'react-icons/pi'
 import { useTranslation } from 'react-i18next'
@@ -30,8 +30,9 @@ import {
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { LoaderModalShared } from '@shared/ui/loader-modal'
 import { handleFormErrors } from '@shared/utils/misc'
-import { ModalFooter } from '@shared/ui/modal-footer'
 import { gbToBytesUtil } from '@shared/utils/bytes'
+import { Modal } from '@mantine/core'
+import { ModalFooter } from '@shared/ui/modal-footer'
 
 const MotionWrapper = motion.div
 const MotionStack = motion.create(Stack)
@@ -65,11 +66,13 @@ export const CreateUserModalWidget = () => {
     const { data: tags, isLoading: isTagsLoading } = useGetUserTags()
     const isMobile = useMediaQuery(`(max-width: ${em(768)})`)
 
-    const {
-        mutate: createUser,
-        isPending: isDataSubmitting,
-        isSuccess: isUserCreated
-    } = useCreateUser()
+    const { mutate: createUser, isPending: isDataSubmitting } = useCreateUser({
+        mutationFns: {
+            onSuccess: () => {
+                handleCloseModal()
+            }
+        }
+    })
 
     const form = useForm<CreateUserCommand.Request>({
         name: 'create-user-form',
@@ -117,12 +120,6 @@ export const CreateUserModalWidget = () => {
         form.resetTouched()
     }
 
-    useEffect(() => {
-        if (isUserCreated) {
-            handleCloseModal()
-        }
-    }, [isUserCreated])
-
     const handleSubmit = form.onSubmit(async (values) => {
         createUser(
             {
@@ -167,122 +164,118 @@ export const CreateUserModalWidget = () => {
             }
             transitionProps={isMobile ? { transition: 'fade', duration: 200 } : undefined}
         >
-            {isInternalSquadsLoading || isTagsLoading ? (
-                <LoaderModalShared
-                    h="500"
-                    text={t('create-user-modal.widget.loading-user-creation')}
-                />
-            ) : (
-                <form onSubmit={handleSubmit}>
-                    {isMobile ? (
-                        <MotionStack
-                            animate="visible"
-                            gap="lg"
-                            initial="hidden"
-                            variants={containerVariants}
-                        >
-                            <UserIdentityCreationCard
-                                cardVariants={cardVariants}
-                                form={form}
-                                motionWrapper={MotionWrapper}
-                            />
-
-                            <TrafficLimitsCard
-                                cardVariants={cardVariants}
-                                form={form}
-                                motionWrapper={MotionWrapper}
-                                user={undefined}
-                            />
-
-                            <AccessSettingsCard
-                                cardVariants={cardVariants}
-                                externalSquads={externalSquads}
-                                form={form}
-                                internalSquads={internalSquads}
-                                motionWrapper={MotionWrapper}
-                            />
-
-                            <ContactInformationCard
-                                cardVariants={cardVariants}
-                                form={form}
-                                motionWrapper={MotionWrapper}
-                            />
-
-                            <DeviceTagSettingsCard
-                                cardVariants={cardVariants}
-                                form={form}
-                                motionWrapper={MotionWrapper}
-                                tags={tags}
-                            />
-                        </MotionStack>
-                    ) : (
-                        <Group align="flex-start" gap="xl" grow={false} wrap="wrap">
-                            <MotionStack
-                                animate="visible"
-                                gap="lg"
-                                initial="hidden"
-                                style={{ flex: '1 1 450px' }}
-                                variants={containerVariants}
-                            >
-                                <UserIdentityCreationCard
-                                    cardVariants={cardVariants}
-                                    form={form}
-                                    motionWrapper={MotionWrapper}
-                                />
-
-                                <ContactInformationCard
-                                    cardVariants={cardVariants}
-                                    form={form}
-                                    motionWrapper={MotionWrapper}
-                                />
-
-                                <DeviceTagSettingsCard
-                                    cardVariants={cardVariants}
-                                    form={form}
-                                    motionWrapper={MotionWrapper}
-                                    tags={tags}
-                                />
-                            </MotionStack>
-
-                            <MotionStack
-                                animate="visible"
-                                gap="lg"
-                                initial="hidden"
-                                style={{ flex: '1 1 450px' }}
-                                variants={containerVariants}
-                            >
-                                <TrafficLimitsCard
-                                    cardVariants={cardVariants}
-                                    form={form}
-                                    motionWrapper={MotionWrapper}
-                                    user={undefined}
-                                />
-
-                                <AccessSettingsCard
-                                    cardVariants={cardVariants}
-                                    externalSquads={externalSquads}
-                                    form={form}
-                                    internalSquads={internalSquads}
-                                    motionWrapper={MotionWrapper}
-                                />
-                            </MotionStack>
-                        </Group>
-                    )}
-
-                    <ModalFooter>
-                        <Button
-                            color="teal"
-                            leftSection={<PiFloppyDiskDuotone size="16px" />}
-                            loading={isDataSubmitting}
-                            size="sm"
-                            type="submit"
-                            variant="outline"
-                        >
-                            {t('create-user-modal.widget.create-user')}
-                        </Button>
-                    </ModalFooter>
-                </form>
+            {(isInternalSquadsLoading || isTagsLoading) && (
+                <motion.div
+                    animate={{ opacity: 1 }}
+                    initial={{ opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                >
+                    <LoaderModalShared h="78vh" />
+                </motion.div>
             )}
+
+            {!isInternalSquadsLoading && !isTagsLoading && isMobile && (
+                <MotionStack
+                    animate="visible"
+                    gap="md"
+                    initial="hidden"
+                    variants={containerVariants}
+                >
+                    <UserIdentityCreationCard
+                        cardVariants={cardVariants}
+                        form={form}
+                        motionWrapper={MotionWrapper}
+                    />
+                    <TrafficLimitsCard
+                        cardVariants={cardVariants}
+                        form={form}
+                        motionWrapper={MotionWrapper}
+                    />
+                    <AccessSettingsCard
+                        cardVariants={cardVariants}
+                        externalSquads={externalSquads}
+                        form={form}
+                        internalSquads={internalSquads}
+                        motionWrapper={MotionWrapper}
+                    />
+                    <ContactInformationCard
+                        cardVariants={cardVariants}
+                        form={form}
+                        motionWrapper={MotionWrapper}
+                    />
+                    <DeviceTagSettingsCard
+                        cardVariants={cardVariants}
+                        form={form}
+                        motionWrapper={MotionWrapper}
+                        tags={tags}
+                    />
+                </MotionStack>
+            )}
+
+            {!isInternalSquadsLoading && !isTagsLoading && !isMobile && (
+                <Group align="flex-start" gap="md" wrap="wrap">
+                    <MotionStack
+                        animate="visible"
+                        gap="md"
+                        initial="hidden"
+                        style={{ flex: '1 1 450px' }}
+                        variants={containerVariants}
+                    >
+                        <UserIdentityCreationCard
+                            cardVariants={cardVariants}
+                            form={form}
+                            motionWrapper={MotionWrapper}
+                        />
+                        <ContactInformationCard
+                            cardVariants={cardVariants}
+                            form={form}
+                            motionWrapper={MotionWrapper}
+                        />
+                        <DeviceTagSettingsCard
+                            cardVariants={cardVariants}
+                            form={form}
+                            motionWrapper={MotionWrapper}
+                            tags={tags}
+                        />
+                    </MotionStack>
+
+                    <MotionStack
+                        animate="visible"
+                        gap="md"
+                        initial="hidden"
+                        style={{ flex: '1 1 450px' }}
+                        variants={containerVariants}
+                    >
+                        <TrafficLimitsCard
+                            cardVariants={cardVariants}
+                            form={form}
+                            motionWrapper={MotionWrapper}
+                        />
+                        <AccessSettingsCard
+                            cardVariants={cardVariants}
+                            externalSquads={externalSquads}
+                            form={form}
+                            internalSquads={internalSquads}
+                            motionWrapper={MotionWrapper}
+                        />
+                    </MotionStack>
+                </Group>
+            )}
+
+            <ModalFooter>
+                <Button
+                    color="teal"
+                    leftSection={<PiFloppyDiskDuotone size="16px" />}
+                    loading={isDataSubmitting}
+                    onClick={() => {
+                        handleSubmit()
+                    }}
+                    size="md"
+                    variant="light"
+                >
+                    {t('common.create')}
+                </Button>
+            </ModalFooter>
         </Modal>
     )
 }

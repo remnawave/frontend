@@ -63,5 +63,65 @@ export const variantColorResolver: VariantColorsResolver = (input) => {
         }
     }
 
+    if (input.variant === 'gradient-gray') {
+        return {
+            background:
+                'linear-gradient(135deg, rgba(128, 128, 128, 0.15) 0%, rgba(160, 160, 160, 0.1) 100%)',
+            border: '1px solid rgba(128, 128, 128, 0.3)',
+            color: 'var(--mantine-color-gray-6)',
+            hover: 'linear-gradient(135deg, rgba(128, 128, 128, 0.25) 0%, rgba(160, 160, 160, 0.2) 100%)'
+        }
+    }
+
+    if (input.variant === 'gradient-green') {
+        return {
+            background:
+                'linear-gradient(135deg, rgba(64, 192, 87, 0.15) 0%, rgba(55, 178, 77, 0.1) 100%)',
+            border: '1px solid rgba(64, 192, 87, 0.3)',
+            color: 'var(--mantine-color-green-4)',
+            hover: 'linear-gradient(135deg, rgba(64, 192, 87, 0.25) 0%, rgba(55, 178, 77, 0.2) 100%)'
+        }
+    }
+
+    if (input.variant === 'gradient-orange') {
+        return {
+            background:
+                'linear-gradient(135deg, rgba(255, 146, 43, 0.15) 0%, rgba(253, 126, 20, 0.1) 100%)',
+            border: '1px solid rgba(255, 146, 43, 0.3)',
+            color: 'var(--mantine-color-orange-4)',
+            hover: 'linear-gradient(135deg, rgba(255, 146, 43, 0.25) 0%, rgba(253, 126, 20, 0.2) 100%)'
+        }
+    }
+
+    if (input.variant === 'gradient-pink') {
+        return {
+            background:
+                'linear-gradient(135deg, rgba(250, 82, 82, 0.15) 0%, rgba(224, 49, 49, 0.1) 100%)',
+            border: '1px solid rgba(250, 82, 82, 0.3)',
+            color: 'var(--mantine-color-pink-4)',
+            hover: 'linear-gradient(135deg, rgba(250, 82, 82, 0.25) 0%, rgba(224, 49, 49, 0.2) 100%)'
+        }
+    }
+
+    if (input.variant === 'gradient-indigo') {
+        return {
+            background:
+                'linear-gradient(135deg, rgba(151, 117, 250, 0.15) 0%, rgba(132, 94, 247, 0.1) 100%)',
+            border: '1px solid rgba(151, 117, 250, 0.3)',
+            color: 'var(--mantine-color-indigo-4)',
+            hover: 'linear-gradient(135deg, rgba(151, 117, 250, 0.25) 0%, rgba(132, 94, 247, 0.2) 100%)'
+        }
+    }
+
+    if (input.variant === 'gradient-lime') {
+        return {
+            background:
+                'linear-gradient(135deg, rgba(64, 192, 87, 0.15) 0%, rgba(55, 178, 77, 0.1) 100%)',
+            border: '1px solid rgba(64, 192, 87, 0.3)',
+            color: 'var(--mantine-color-lime-4)',
+            hover: 'linear-gradient(135deg, rgba(64, 192, 87, 0.25) 0%, rgba(55, 178, 77, 0.2) 100%)'
+        }
+    }
+
     return defaultResolvedColors
 }

@@ -1,29 +1,12 @@
 import {
     PiArrowsDownUpDuotone,
     PiCalendarDotDuotone,
-    PiCheck,
     PiClockDuotone,
-    PiCopy,
     PiNetworkDuotone,
-    PiTag,
     PiTagDuotone,
     PiUserDuotone
 } from 'react-icons/pi'
-import {
-    ActionIcon,
-    Badge,
-    Box,
-    Center,
-    CopyButton,
-    Drawer,
-    Group,
-    Paper,
-    Stack,
-    Text,
-    ThemeIcon,
-    Title,
-    Tooltip
-} from '@mantine/core'
+import { Box, Center, Drawer, Group, Stack } from '@mantine/core'
 import { useTranslation } from 'react-i18next'
 import { useEffect, useState } from 'react'
 import dayjs from 'dayjs'
@@ -33,11 +16,15 @@ import {
     useUserModalStoreDrawerUserUuid,
     useUserModalStoreIsDetailedUserInfoDrawerOpen
 } from '@entities/dashboard/user-modal-store/user-modal-store'
+import { SectionCardSection } from '@shared/ui/section-card/section-card.section'
 import { useEncryptSubscriptionLink, useGetUserByUuid } from '@shared/api/hooks'
 import { CopyableFieldShared } from '@shared/ui/copyable-field/copyable-field'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
+import { SectionCardRoot } from '@shared/ui/section-card/section-card.root'
 import { LoaderModalShared } from '@shared/ui/loader-modal'
 import { prettyBytesToAnyUtil } from '@shared/utils/bytes'
+
+import { UserStatusBadge } from '../user-status-badge/user-status-badge.widget'
 
 export const DetailedUserInfoDrawerWidget = () => {
     const { t } = useTranslation()
@@ -113,255 +100,239 @@ export const DetailedUserInfoDrawerWidget = () => {
 
             {!isUserLoading && user && (
                 <Stack gap="md">
-                    <Paper p="md" withBorder>
-                        <Stack gap="xs">
-                            <Group justify="flex-start">
-                                <Group>
-                                    <ThemeIcon
-                                        autoContrast
-                                        color="blue"
-                                        size="md"
-                                        variant="outline"
-                                    >
-                                        <PiUserDuotone size={16} />
-                                    </ThemeIcon>
-                                    <Title order={5}>
-                                        {t('detailed-user-info-drawer.widget.user-information')}
-                                    </Title>
+                    <SectionCardRoot>
+                        <SectionCardSection>
+                            <Group align="flex-center" justify="space-between">
+                                <BaseOverlayHeader
+                                    IconComponent={PiUserDuotone}
+                                    iconVariant="gradient-blue"
+                                    title={t('detailed-user-info-drawer.widget.user-information')}
+                                />
+
+                                <Group gap="xs">
+                                    <UserStatusBadge
+                                        h={28}
+                                        key="view-user-status-badge"
+                                        size="lg"
+                                        status={user.status}
+                                    />
                                 </Group>
-                                <Badge color={user.status === 'ACTIVE' ? 'teal' : 'red'} size="md">
-                                    {user.status}
-                                </Badge>
                             </Group>
+                        </SectionCardSection>
+                        <SectionCardSection>
+                            <Stack gap="xs">
+                                <CopyableFieldShared label="ID" value={user.id.toString()} />
 
-                            <CopyableFieldShared label="ID" value={user.id.toString()} />
+                                <CopyableFieldShared
+                                    label={t('detailed-user-info-drawer.widget.uuid')}
+                                    value={user.uuid}
+                                />
+                                <CopyableFieldShared
+                                    label={t('detailed-user-info-drawer.widget.short-uuid')}
+                                    value={user.shortUuid}
+                                />
 
-                            <CopyableFieldShared
-                                label={t('detailed-user-info-drawer.widget.uuid')}
-                                value={user.uuid}
-                            />
-                            <CopyableFieldShared
-                                label={t('detailed-user-info-drawer.widget.short-uuid')}
-                                value={user.shortUuid}
-                            />
-                            <CopyableFieldShared
-                                label={t('detailed-user-info-drawer.widget.username')}
-                                value={user.username}
-                            />
-                            <CopyableFieldShared
-                                label={t('detailed-user-info-drawer.widget.email')}
-                                value={user.email || '—'}
-                            />
-                            <CopyableFieldShared
-                                label={t('detailed-user-info-drawer.widget.telegram-id')}
-                                value={user.telegramId || '—'}
-                            />
-                            <CopyableFieldShared
-                                label={t('detailed-user-info-drawer.widget.description')}
-                                value={user.description || '—'}
-                            />
+                                <CopyableFieldShared
+                                    label={t('detailed-user-info-drawer.widget.username')}
+                                    value={user.username}
+                                />
+                                <CopyableFieldShared
+                                    label={t('detailed-user-info-drawer.widget.email')}
+                                    value={user.email || '—'}
+                                />
+                                <CopyableFieldShared
+                                    label={t('detailed-user-info-drawer.widget.telegram-id')}
+                                    value={user.telegramId || '—'}
+                                />
+                                <CopyableFieldShared
+                                    label={t('detailed-user-info-drawer.widget.description')}
+                                    value={user.description || '—'}
+                                />
 
-                            <CopyableFieldShared
-                                label={t('detailed-user-info-drawer.widget.tag')}
-                                value={user.tag || '—'}
+                                <CopyableFieldShared
+                                    label={t('detailed-user-info-drawer.widget.tag')}
+                                    value={user.tag || '—'}
+                                />
+                            </Stack>
+                        </SectionCardSection>
+                    </SectionCardRoot>
+                    <SectionCardRoot>
+                        <SectionCardSection>
+                            <BaseOverlayHeader
+                                IconComponent={PiArrowsDownUpDuotone}
+                                iconVariant="gradient-teal"
+                                title={t('detailed-user-info-drawer.widget.traffic-information')}
                             />
-                        </Stack>
-                    </Paper>
+                        </SectionCardSection>
+                        <SectionCardSection>
+                            <Stack gap="xs">
+                                <CopyableFieldShared
+                                    label={t('detailed-user-info-drawer.widget.used-traffic')}
+                                    value={
+                                        prettyBytesToAnyUtil(
+                                            user.userTraffic.usedTrafficBytes || 0
+                                        ) || '—'
+                                    }
+                                />
+                                <CopyableFieldShared
+                                    label={t(
+                                        'detailed-user-info-drawer.widget.lifetime-used-traffic'
+                                    )}
+                                    value={
+                                        prettyBytesToAnyUtil(
+                                            user.userTraffic.lifetimeUsedTrafficBytes || 0
+                                        ) || '—'
+                                    }
+                                />
+                                <CopyableFieldShared
+                                    label={t('detailed-user-info-drawer.widget.traffic-limit')}
+                                    value={prettyBytesToAnyUtil(user.trafficLimitBytes || 0) || '—'}
+                                />
+                                <CopyableFieldShared
+                                    label={t(
+                                        'detailed-user-info-drawer.widget.traffic-limit-strategy'
+                                    )}
+                                    value={user.trafficLimitStrategy}
+                                />
+                                <CopyableFieldShared
+                                    label={t('detailed-user-info-drawer.widget.last-traffic-reset')}
+                                    value={formatDate(user.lastTrafficResetAt)}
+                                />
+                            </Stack>
+                        </SectionCardSection>
+                    </SectionCardRoot>
+                    <SectionCardRoot>
+                        <SectionCardSection>
+                            <BaseOverlayHeader
+                                IconComponent={PiCalendarDotDuotone}
+                                iconVariant="gradient-orange"
+                                title={t(
+                                    'detailed-user-info-drawer.widget.subscription-information'
+                                )}
+                            />
+                        </SectionCardSection>
+                        <SectionCardSection>
+                            <Stack gap="xs">
+                                <CopyableFieldShared
+                                    label={t('detailed-user-info-drawer.widget.subscription-url')}
+                                    value={user.subscriptionUrl}
+                                />
+                                <CopyableFieldShared
+                                    label="Happ Crypto Link"
+                                    value={encryptedSubscriptionLink}
+                                />
+                                <CopyableFieldShared
+                                    label={t('detailed-user-info-drawer.widget.expires-at')}
+                                    value={formatDate(user.expireAt)}
+                                />
 
-                    <Paper p="md" withBorder>
-                        <Stack gap="xs">
-                            <Group>
-                                <ThemeIcon color="teal" size="md" variant="outline">
-                                    <PiArrowsDownUpDuotone size={16} />
-                                </ThemeIcon>
-                                <Title order={5}>
-                                    {t('detailed-user-info-drawer.widget.traffic-information')}
-                                </Title>
-                            </Group>
+                                <CopyableFieldShared
+                                    label={t('detailed-user-info-drawer.widget.last-opened-at')}
+                                    value={formatDate(user.subLastOpenedAt)}
+                                />
+                                <CopyableFieldShared
+                                    label={t('detailed-user-info-drawer.widget.last-user-agent')}
+                                    value={user.subLastUserAgent || '—'}
+                                />
+                                <CopyableFieldShared
+                                    label={t('detailed-user-info-drawer.widget.revoked-at')}
+                                    value={formatDate(user.subRevokedAt)}
+                                />
+                            </Stack>
+                        </SectionCardSection>
+                    </SectionCardRoot>
 
-                            <CopyableFieldShared
-                                label={t('detailed-user-info-drawer.widget.used-traffic')}
-                                value={
-                                    prettyBytesToAnyUtil(user.userTraffic.usedTrafficBytes || 0) ||
-                                    '—'
-                                }
+                    <SectionCardRoot>
+                        <SectionCardSection>
+                            <BaseOverlayHeader
+                                IconComponent={PiNetworkDuotone}
+                                iconVariant="gradient-violet"
+                                title={t('detailed-user-info-drawer.widget.connection-information')}
                             />
-                            <CopyableFieldShared
-                                label={t('detailed-user-info-drawer.widget.lifetime-used-traffic')}
-                                value={
-                                    prettyBytesToAnyUtil(
-                                        user.userTraffic.lifetimeUsedTrafficBytes || 0
-                                    ) || '—'
-                                }
-                            />
-                            <CopyableFieldShared
-                                label={t('detailed-user-info-drawer.widget.traffic-limit')}
-                                value={prettyBytesToAnyUtil(user.trafficLimitBytes || 0) || '—'}
-                            />
-                            <CopyableFieldShared
-                                label={t('detailed-user-info-drawer.widget.traffic-limit-strategy')}
-                                value={user.trafficLimitStrategy}
-                            />
-                            <CopyableFieldShared
-                                label={t('detailed-user-info-drawer.widget.last-traffic-reset')}
-                                value={formatDate(user.lastTrafficResetAt)}
-                            />
-                        </Stack>
-                    </Paper>
-
-                    <Paper p="md" withBorder>
-                        <Stack gap="xs">
-                            <Group>
-                                <ThemeIcon color="orange" size="md" variant="outline">
-                                    <PiCalendarDotDuotone size={16} />
-                                </ThemeIcon>
-                                <Title order={5}>
-                                    {t('detailed-user-info-drawer.widget.subscription-information')}
-                                </Title>
-                            </Group>
-
-                            <CopyableFieldShared
-                                label={t('detailed-user-info-drawer.widget.subscription-url')}
-                                value={user.subscriptionUrl}
-                            />
-                            <CopyableFieldShared
-                                label="Happ Crypto Link"
-                                value={encryptedSubscriptionLink}
-                            />
-                            <CopyableFieldShared
-                                label={t('detailed-user-info-drawer.widget.expires-at')}
-                                value={formatDate(user.expireAt)}
-                            />
-
-                            <CopyableFieldShared
-                                label={t('detailed-user-info-drawer.widget.last-opened-at')}
-                                value={formatDate(user.subLastOpenedAt)}
-                            />
-                            <CopyableFieldShared
-                                label={t('detailed-user-info-drawer.widget.last-user-agent')}
-                                value={user.subLastUserAgent || '—'}
-                            />
-                            <CopyableFieldShared
-                                label={t('detailed-user-info-drawer.widget.revoked-at')}
-                                value={formatDate(user.subRevokedAt)}
-                            />
-                        </Stack>
-                    </Paper>
-
-                    <Paper p="md" withBorder>
-                        <Stack gap="xs">
-                            <Group>
-                                <ThemeIcon color="violet" size="md" variant="outline">
-                                    <PiNetworkDuotone size={16} />
-                                </ThemeIcon>
-                                <Title order={5}>
-                                    {t('detailed-user-info-drawer.widget.connection-information')}
-                                </Title>
-                            </Group>
-
-                            <CopyableFieldShared
-                                label={t('detailed-user-info-drawer.widget.trojan-password')}
-                                value={user.trojanPassword}
-                            />
-                            <CopyableFieldShared
-                                label={t('detailed-user-info-drawer.widget.vless-uuid')}
-                                value={user.vlessUuid}
-                            />
-                            <CopyableFieldShared
-                                label={t('detailed-user-info-drawer.widget.ss-password')}
-                                value={user.ssPassword}
-                            />
-                            <CopyableFieldShared
-                                label={t('detailed-user-info-drawer.widget.first-connected-at')}
-                                value={formatDate(user.userTraffic.firstConnectedAt)}
-                            />
-                            <CopyableFieldShared
-                                label={t('detailed-user-info-drawer.widget.last-online')}
-                                value={
-                                    user.userTraffic.onlineAt
-                                        ? formatDate(user.userTraffic.onlineAt.toString())
-                                        : '—'
-                                }
-                            />
-                            <CopyableFieldShared
-                                label={t('detailed-user-info-drawer.widget.last-connected-node')}
-                                value={user.userTraffic.lastConnectedNodeUuid || '—'}
-                            />
-                        </Stack>
-                    </Paper>
+                        </SectionCardSection>
+                        <SectionCardSection>
+                            <Stack gap="xs">
+                                <CopyableFieldShared
+                                    label={t('detailed-user-info-drawer.widget.trojan-password')}
+                                    value={user.trojanPassword}
+                                />
+                                <CopyableFieldShared
+                                    label={t('detailed-user-info-drawer.widget.vless-uuid')}
+                                    value={user.vlessUuid}
+                                />
+                                <CopyableFieldShared
+                                    label={t('detailed-user-info-drawer.widget.ss-password')}
+                                    value={user.ssPassword}
+                                />
+                                <CopyableFieldShared
+                                    label={t('detailed-user-info-drawer.widget.first-connected-at')}
+                                    value={formatDate(user.userTraffic.firstConnectedAt)}
+                                />
+                                <CopyableFieldShared
+                                    label={t('detailed-user-info-drawer.widget.last-online')}
+                                    value={
+                                        user.userTraffic.onlineAt
+                                            ? formatDate(user.userTraffic.onlineAt.toString())
+                                            : '—'
+                                    }
+                                />
+                                <CopyableFieldShared
+                                    label={t(
+                                        'detailed-user-info-drawer.widget.last-connected-node'
+                                    )}
+                                    value={user.userTraffic.lastConnectedNodeUuid || '—'}
+                                />
+                            </Stack>
+                        </SectionCardSection>
+                    </SectionCardRoot>
 
                     {user.activeInternalSquads && user.activeInternalSquads.length > 0 && (
-                        <Paper p="md" withBorder>
-                            <Stack gap="xs">
-                                <Group>
-                                    <ThemeIcon color="green" size="md" variant="outline">
-                                        <PiTagDuotone size={16} />
-                                    </ThemeIcon>
-                                    <Title order={5}>
-                                        {t(
-                                            'detailed-user-info-drawer.widget.active-internal-squads'
-                                        )}
-                                    </Title>
-                                </Group>
-
-                                {user.activeInternalSquads.map((squad) => (
-                                    <Paper key={squad.uuid} p="md" shadow="sm" withBorder>
-                                        <Group justify="space-between">
-                                            <Group gap="xs">
-                                                <PiTag size="16px" />
-                                                <Text fw={600} size="sm">
-                                                    {squad.name}
-                                                </Text>
-
-                                                <CopyButton timeout={2000} value={squad.uuid}>
-                                                    {({ copied, copy }) => (
-                                                        <Tooltip
-                                                            label={copied ? 'Copied!' : 'Copy UUID'}
-                                                        >
-                                                            <ActionIcon
-                                                                color={copied ? 'teal' : 'gray'}
-                                                                onClick={copy}
-                                                                size="sm"
-                                                                variant="subtle"
-                                                            >
-                                                                {copied ? (
-                                                                    <PiCheck size={14} />
-                                                                ) : (
-                                                                    <PiCopy size={14} />
-                                                                )}
-                                                            </ActionIcon>
-                                                        </Tooltip>
-                                                    )}
-                                                </CopyButton>
-                                            </Group>
-                                        </Group>
-                                    </Paper>
-                                ))}
-                            </Stack>
-                        </Paper>
+                        <SectionCardRoot>
+                            <SectionCardSection>
+                                <BaseOverlayHeader
+                                    IconComponent={PiTagDuotone}
+                                    iconVariant="gradient-green"
+                                    title={t(
+                                        'detailed-user-info-drawer.widget.active-internal-squads'
+                                    )}
+                                />
+                            </SectionCardSection>
+                            <SectionCardSection>
+                                <Stack gap="xs">
+                                    {user.activeInternalSquads.map((squad) => (
+                                        <CopyableFieldShared
+                                            key={squad.uuid}
+                                            label={squad.name}
+                                            value={squad.uuid}
+                                        />
+                                    ))}
+                                </Stack>
+                            </SectionCardSection>
+                        </SectionCardRoot>
                     )}
-
-                    <Paper p="md" withBorder>
-                        <Stack gap="xs">
-                            <Group>
-                                <ThemeIcon color="gray" size="md" variant="outline">
-                                    <PiClockDuotone size={16} />
-                                </ThemeIcon>
-                                <Title order={5}>
-                                    {t('detailed-user-info-drawer.widget.timestamps')}
-                                </Title>
-                            </Group>
-
-                            <CopyableFieldShared
-                                label={t('detailed-user-info-drawer.widget.created-at')}
-                                value={formatDate(user.createdAt.toString())}
+                    <SectionCardRoot>
+                        <SectionCardSection>
+                            <BaseOverlayHeader
+                                IconComponent={PiClockDuotone}
+                                iconVariant="gradient-gray"
+                                title={t('detailed-user-info-drawer.widget.timestamps')}
                             />
-                            <CopyableFieldShared
-                                label={t('detailed-user-info-drawer.widget.updated-at')}
-                                value={formatDate(user.updatedAt.toString())}
-                            />
-                        </Stack>
-                    </Paper>
+                        </SectionCardSection>
+                        <SectionCardSection>
+                            <Stack gap="xs">
+                                <CopyableFieldShared
+                                    label={t('detailed-user-info-drawer.widget.created-at')}
+                                    value={formatDate(user.createdAt.toString())}
+                                />
+                            </Stack>
+                            <Stack gap="xs">
+                                <CopyableFieldShared
+                                    label={t('detailed-user-info-drawer.widget.updated-at')}
+                                    value={formatDate(user.updatedAt.toString())}
+                                />
+                            </Stack>
+                        </SectionCardSection>
+                    </SectionCardRoot>
                 </Stack>
             )}
         </Drawer>

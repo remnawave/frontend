@@ -342,7 +342,9 @@
             "danger-zone": "هشدار",
             "information": "اطلاعات",
             "detailed-info": "اطلاعات دقیق",
-            "subscription": "اشتراک"
+            "subscription": "اشتراک",
+            "accessible-nodes": "نودهای قابل دسترسی",
+            "qr-code": "کد QR"
         }
     },
     "empty-page": {
@@ -480,6 +482,7 @@
             "no-data-available-for-the-selected-period": "داده‌ای برای دوره انتخاب‌شده در دسترس نیست",
             "click-to-see-all": "برای دیدن همه کلیک کنید",
             "no-data-available": "داده‌ای در دسترس نیست",
+            "current-month": "ماه جاری",
             "7-days": "۷ روز",
             "14-days": "۱۴ روز",
             "30-days": "۳۰ روز",
@@ -729,7 +732,8 @@
         "feature": {
             "subscription-links": "لینک‌های اشتراک",
             "loading-subscription-links": "درحال بارگذاری لینک‌های اشتراک ...",
-            "no-available-hosts-found-for-this-user": "هیچ هاست موجودی برای این کاربر یافت نشد"
+            "no-available-hosts-found-for-this-user": "هیچ هاست موجودی برای این کاربر یافت نشد",
+            "connection-keys": "کلیدهای اتصال"
         }
     },
     "user-usage-modal": {
@@ -759,7 +763,8 @@
     },
     "get-user-usage": {
         "feature": {
-            "show-usage": "نمایش مصرف"
+            "show-usage": "نمایش مصرف",
+            "usage": "میزان استفاده"
         }
     },
     "detailed-user-info-drawer": {
@@ -877,7 +882,7 @@
             "delete-device": "حذف دستگاه",
             "device": "دستگاه",
             "devices": "دستگاه‌ها",
-            "hwid-devices": "HWIDها و دستگاه‌ها",
+            "hwid-devices": "دستگاه‌های HWID",
             "important-note": "نکته مهم",
             "important-note-line-1": "این قابلیت تنها با",
             "important-note-line-2": "مقدار .env در دسترس است.",
@@ -1679,7 +1684,9 @@
         "widget": {
             "user-status": "وضعیت کاربر",
             "empty-hosts": "هاست‌های خالی",
-            "empty-internal-squads": "اسکوادهای داخلی خالی"
+            "empty-internal-squads": "اسکوادهای داخلی خالی",
+            "hwid-max-devices-exceeded": "HWID: ظرفیت دستگاه‌ها پر شده است",
+            "hwid-not-supported": "HWID: پشتیبانی نمی‌شود"
         }
     },
     "multi-select-nodes": {
@@ -1832,12 +1839,12 @@
         "component": {
             "import-config": "وارد کردن پیکربندی",
             "download-config": "دانلود کانفیگ",
-            "importing-config": "Importing config",
-            "this-may-take-a-while": "This may take a while...",
-            "success": "Success",
-            "config-imported-successfully": "Config imported successfully",
-            "error": "Error",
-            "failed-to-parse-config-file": "Failed to parse config file"
+            "importing-config": "در حال درون‌ریزی پیکربندی",
+            "this-may-take-a-while": "این فرایند ممکن است مدتی طول بکشد...",
+            "success": "عملیات موفقیت‌آمیز",
+            "config-imported-successfully": "پیکربندی با موفقیت درون‌ریزی شد",
+            "error": "خطا",
+            "failed-to-parse-config-file": "تجزیه فایل پیکربندی موفقیت آمیز نبود"
         }
     },
     "base-translations-drawer": {
@@ -1860,25 +1867,51 @@
     },
     "base-settings-block": {
         "component": {
-            "base-settings": "Base Settings",
-            "meta-title": "Meta Title",
-            "meta-description": "Meta Description",
-            "show-connection-keys": "Show Connection Keys",
-            "show-or-hide-raw-connection-keys": "Show or hide raw connection keys"
+            "base-settings": "تنظیمات پایه",
+            "meta-title": "عنوان متا",
+            "meta-description": "توضیحات متا",
+            "show-connection-keys": "نمایش کلیدهای اتصال",
+            "show-or-hide-raw-connection-keys": "نمایش یا مخفی‍ی‌سازی کلیدهای اتصال خام",
+            "hide-get-link-button": "مخفی کردن دکمه \"دریافت لینک\"",
+            "hide-the-get-link-button-top-right-corner": "دکمه \"دریافت لینک\" از گوشه بالا راست مخفی شود"
         }
     },
     "import-config-sections": {
         "modal": {
-            "import-options-description": "Choose what you want to import from the config file",
-            "replace-entire-config-with-imported-one": "Replace entire config with imported one",
-            "full-import": "Full Import",
-            "partial-import": "Partial import",
-            "merge-svg-library": "Merge {{0}} icons into your collection ({{1}} existing)",
-            "import-svg-library": "Import SVG Library",
-            "import-platforms-descriptions": "Replaces platforms, locales, translations + merges SVG library",
-            "import-platforms": "Import Platforms",
-            "replace-base-translation-and-locales": "Replace Base Translation and Locales",
-            "import-base-translations": "Import Base Translations"
+            "import-options-description": "مواردی که می‌خواهید از فایل پیکربندی وارد کنید را انتخاب نمایید",
+            "replace-entire-config-with-imported-one": "جایگزینی تمام پیکربندی با فایل آپلود شده",
+            "full-import": "درون‌ریزی کامل",
+            "partial-import": "درون‌ریزی قسمتی",
+            "merge-svg-library": "ادغام {{0}} آیکون با مجموعه شما ({{1}} عدد تکراری)",
+            "import-svg-library": "درون‌ریزی کتابخانه SVG",
+            "import-platforms-descriptions": "پلتفرم‌ها، زبان‌ها و ترجمه‌ها را جایگزین و کتابخانه SVG را ادغام می‌کند",
+            "import-platforms": "درون‌ریزی پلتفرم‌ها",
+            "replace-base-translation-and-locales": "جایگزین کردن ترجمه‌های پایه و لیست زبان‌ها",
+            "import-base-translations": "درون‌ریزی ترجمه‌های پایه"
+        }
+    },
+    "revoke-subscription-user": {
+        "feature": {
+            "full-revoke": "لغو اشتراک کامل",
+            "revoke": "لغو اشتراک",
+            "passwords-only": "فقط رمز عبور",
+            "passwords-only-decription": "فقط رمزهای اتصال را بازتولید می‌کند و لینک اشتراک تغییر نمی‌کند",
+            "full-revoke-description": "آدرس لینک اشتراک و رمزهای اتصال را بازتولید می‌کند"
+        }
+    },
+    "nodes-quick-stats": {
+        "widget": {
+            "users-online": "Users Online",
+            "online-nodes": "Online Nodes",
+            "offline-nodes": "Offline Nodes",
+            "cumulative-traffic": "Cumulative Traffic"
+        }
+    },
+    "template-info-popover": {
+        "shared": {
+            "template-variables": "Template Variables",
+            "available-variables-are-listed-below": "Available variables are listed below.",
+            "you-can-use-template-variables-in-this-field": "You can use template variables in this field."
         }
     }
 }

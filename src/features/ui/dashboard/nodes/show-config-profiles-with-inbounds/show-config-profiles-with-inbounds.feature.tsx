@@ -42,7 +42,7 @@ export function ShowConfigProfilesWithInboundsFeature(props: IProps) {
     const activeProfile = configProfiles.find((profile) => profile.uuid === activeConfigProfileUuid)
 
     return (
-        <Stack gap="md" mt={10}>
+        <Stack gap="md">
             <Stack gap="xs">
                 <Group gap="xs">
                     <XrayLogo size={16} />

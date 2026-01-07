@@ -3,15 +3,16 @@ import { useMediaQuery } from '@mantine/hooks'
 import { motion } from 'framer-motion'
 import { Stack } from '@mantine/core'
 
+import { UserSubscriptionRequestsDrawerWidget } from '@widgets/dashboard/users/user-subscription-requests-drawer/user-subscription-requests-drawer.widget'
 import { UserAccessibleNodesModalWidget } from '@widgets/dashboard/users/user-accessible-nodes-modal/user-accessible-nodes.modal.widget'
 import { DetailedUserInfoDrawerWidget } from '@widgets/dashboard/users/detailed-user-info-drawer/detailed-user-info-drawer.widget'
+import { UserHwidDevicesDrawerWidget } from '@widgets/dashboard/users/user-hwid-devices-drawer/user-hwid-devices.drawer.widget'
 import { HwidInspectorLeaderboardWidget } from '@widgets/dashboard/hwid-inspector/hwid-inspector-leaderboard'
 import { HwidInspectorTableWidget } from '@widgets/dashboard/hwid-inspector/hwid-inspector-table'
 import { MobileWarningOverlay } from '@shared/ui/mobile-warning-overlay/mobile-warning-overlay'
 import { HwidInspectorMetrics } from '@widgets/dashboard/users/hwid-inspector-metrics'
 import { ViewUserModal } from '@widgets/dashboard/users/view-user-modal'
 import { Page } from '@shared/ui'
-import { UserHwidDevicesDrawerWidget } from '@widgets/dashboard/users/user-hwid-devices-drawer/user-hwid-devices.drawer.widget'
 
 export default function HwidInspectorPageComponent() {
     const { t } = useTranslation()
@@ -44,6 +45,7 @@ export default function HwidInspectorPageComponent() {
             <DetailedUserInfoDrawerWidget key="detailed-user-info-drawer" />
             <UserAccessibleNodesModalWidget key="user-accessible-nodes-modal" />
             <UserHwidDevicesDrawerWidget key="user-hwid-devices-drawer" />
+            <UserSubscriptionRequestsDrawerWidget key="user-subscription-requests-drawer" />
         </Page>
     )
 }

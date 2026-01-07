@@ -1,10 +1,12 @@
-import { CreateNodeCommand, UpdateNodeCommand } from '@remnawave/backend-contract'
+import { GetOneNodeCommand, GetPubKeyCommand, UpdateNodeCommand } from '@remnawave/backend-contract'
 import { Button, CopyButton, em, Group, Menu, px, Stack } from '@mantine/core'
 import { PiFloppyDiskDuotone } from 'react-icons/pi'
+import { UseFormReturnType } from '@mantine/form'
 import { TbCopy, TbDots } from 'react-icons/tb'
-import { useTranslation } from 'react-i18next'
 import { useMediaQuery } from '@mantine/hooks'
 import { motion } from 'framer-motion'
+import { ReactNode } from 'react'
+import { t } from 'i18next'
 
 import { ToggleNodeStatusButtonFeature } from '@features/ui/dashboard/nodes/toggle-node-status-button'
 import { GetNodeLinkedHostsFeature } from '@features/ui/dashboard/nodes/get-node-linked-hosts'
@@ -19,8 +21,6 @@ import { NodeTrackingAndBillingCard } from './node-tracking-and-billing.card'
 import { NodeConfigProfilesCard } from './node-config-profiles.card'
 import { NodeConsumptionCard } from './node-consumption.card'
 import { NodeVitalsCard } from './node-vitals.card'
-import { NodeStatsCard } from './node-stats.card'
-import { IProps } from './interfaces'
 
 const MotionWrapper = motion.div
 const MotionStack = motion.create(Stack)
@@ -43,27 +43,37 @@ const cardVariants = {
     }
 }
 
-export const BaseNodeForm = <T extends CreateNodeCommand.Request | UpdateNodeCommand.Request>(
-    props: IProps<T>
-) => {
+interface IProps<T extends UpdateNodeCommand.Request> {
+    advancedOpened: boolean
+    fetchedNode: GetOneNodeCommand.Response['response'] | undefined
+    form: UseFormReturnType<T>
+    handleClose: () => void
+    handleSubmit: () => void
+    isDataSubmitting: boolean
+    node: GetOneNodeCommand.Response['response'] | null
+    nodeDetailsCard?: ReactNode
+    pubKey: GetPubKeyCommand.Response['response'] | undefined
+    setAdvancedOpened: (value: boolean) => void
+}
+
+export const BaseNodeForm = <T extends UpdateNodeCommand.Request>(props: IProps<T>) => {
     const {
         form,
-        handleClose,
         node,
         fetchedNode,
         pubKey,
         advancedOpened,
-        isUpdateNodePending,
-        handleSubmit,
         setAdvancedOpened,
-        nodeDetailsCard
+        nodeDetailsCard,
+        handleClose,
+        handleSubmit,
+        isDataSubmitting
     } = props
 
-    const { t } = useTranslation()
     const isMobile = useMediaQuery(`(max-width: ${em(768)})`)
 
     return (
-        <form onSubmit={handleSubmit}>
+        <>
             {isMobile ? (
                 <MotionStack
                     animate="visible"
@@ -75,15 +85,6 @@ export const BaseNodeForm = <T extends CreateNodeCommand.Request | UpdateNodeCom
 
                     {nodeDetailsCard && (
                         <MotionWrapper variants={cardVariants}>{nodeDetailsCard}</MotionWrapper>
-                    )}
-
-                    {node && (
-                        <NodeStatsCard
-                            cardVariants={cardVariants}
-                            form={form}
-                            motionWrapper={MotionWrapper}
-                            node={node}
-                        />
                     )}
 
                     <NodeVitalsCard
@@ -114,11 +115,11 @@ export const BaseNodeForm = <T extends CreateNodeCommand.Request | UpdateNodeCom
                     />
                 </MotionStack>
             ) : (
-                <Group align="flex-start" gap="xl" grow={false} wrap="wrap">
+                <Group align="flex-start" gap="md" grow={false} wrap="wrap">
                     {/* Left Side */}
                     <MotionStack
                         animate="visible"
-                        gap="lg"
+                        gap="md"
                         initial="hidden"
                         style={{ flex: '1 1 400px' }}
                         variants={containerVariants}
@@ -146,7 +147,7 @@ export const BaseNodeForm = <T extends CreateNodeCommand.Request | UpdateNodeCom
                     {/* Right Side */}
                     <MotionStack
                         animate="visible"
-                        gap="lg"
+                        gap="md"
                         initial="hidden"
                         style={{ flex: '1 1 400px' }}
                         variants={containerVariants}
@@ -156,15 +157,6 @@ export const BaseNodeForm = <T extends CreateNodeCommand.Request | UpdateNodeCom
                             form={form}
                             motionWrapper={MotionWrapper}
                         />
-
-                        {(fetchedNode || node) && (
-                            <NodeStatsCard
-                                cardVariants={cardVariants}
-                                form={form}
-                                motionWrapper={MotionWrapper}
-                                node={fetchedNode || node!}
-                            />
-                        )}
 
                         <NodeTrackingAndBillingCard
                             advancedOpened={advancedOpened}
@@ -184,7 +176,7 @@ export const BaseNodeForm = <T extends CreateNodeCommand.Request | UpdateNodeCom
                             <Button
                                 color="gray"
                                 leftSection={<TbDots size={px('1.2rem')} />}
-                                size="sm"
+                                size="md"
                             >
                                 {t('base-node-form.more-actions')}
                             </Button>
@@ -217,14 +209,14 @@ export const BaseNodeForm = <T extends CreateNodeCommand.Request | UpdateNodeCom
                     color="teal"
                     disabled={!form.isDirty() || !form.isTouched()}
                     leftSection={<PiFloppyDiskDuotone size="16px" />}
-                    loading={isUpdateNodePending}
-                    size="sm"
-                    type="submit"
+                    loading={isDataSubmitting}
+                    onClick={handleSubmit}
+                    size="md"
                     variant="light"
                 >
                     {t('common.save')}
                 </Button>
             </ModalFooter>
-        </form>
+        </>
     )
 }

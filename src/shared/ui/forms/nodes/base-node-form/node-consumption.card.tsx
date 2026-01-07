@@ -1,14 +1,12 @@
 import {
     ActionIcon,
-    Fieldset,
     Group,
     HoverCard,
     NumberInput,
     NumberInputHandlers,
     rem,
     Stack,
-    Text,
-    Title
+    Text
 } from '@mantine/core'
 import { CreateNodeCommand, UpdateNodeCommand } from '@remnawave/backend-contract'
 import { ForwardRefComponent, HTMLMotionProps, Variants } from 'motion/react'
@@ -17,6 +15,9 @@ import { HiQuestionMarkCircle } from 'react-icons/hi'
 import { UseFormReturnType } from '@mantine/form'
 import { useTranslation } from 'react-i18next'
 import { useRef } from 'react'
+
+import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
+import { SectionCard } from '@shared/ui/section-card'
 
 interface IProps<T extends CreateNodeCommand.Request | UpdateNodeCommand.Request> {
     cardVariants: Variants
@@ -37,93 +38,101 @@ export const NodeConsumptionCard = <
 
     return (
         <MotionWrapper variants={cardVariants}>
-            <Fieldset
-                legend={
-                    <Group gap="xs" mb="xs">
-                        <TbChartLine
-                            size={20}
-                            style={{
-                                color: 'var(--mantine-color-indigo-4)'
-                            }}
-                        />
-                        <Title c="indigo.4" order={4}>
-                            {t('base-node-form.consumption')}
-                        </Title>
-                    </Group>
-                }
-            >
-                <Stack gap="md">
-                    <NumberInput
-                        allowDecimal
-                        allowedDecimalSeparators={['.']}
-                        allowNegative={false}
-                        clampBehavior="strict"
-                        decimalScale={1}
-                        fixedDecimalScale
-                        handlersRef={handlersRef}
-                        hideControls
-                        key={form.key('consumptionMultiplier')}
-                        leftSection={
-                            <ActionIcon
-                                color="red"
-                                onClick={() => handlersRef.current?.decrement()}
-                                radius="md"
-                                size={rem(28)}
-                                variant="light"
-                            >
-                                <TbMinus size={16} />
-                            </ActionIcon>
-                        }
-                        leftSectionPointerEvents="all"
-                        leftSectionWidth={44}
-                        max={100.0}
-                        min={0}
-                        rightSection={
-                            <ActionIcon
-                                color="teal"
-                                onClick={() => handlersRef.current?.increment()}
-                                radius="md"
-                                size={rem(28)}
-                                variant="light"
-                            >
-                                <TbPlus size={16} />
-                            </ActionIcon>
-                        }
-                        rightSectionPointerEvents="all"
-                        rightSectionWidth={44}
-                        step={0.1}
-                        styles={{
-                            input: {
-                                textAlign: 'center',
-                                fontWeight: 600
-                            }
-                        }}
-                        {...form.getInputProps('consumptionMultiplier')}
-                        label={
-                            <Group align="center" gap={3}>
-                                <HoverCard shadow="md" width={280} withArrow>
-                                    <HoverCard.Target>
-                                        <ActionIcon color="gray" size="xs" variant="subtle">
-                                            <HiQuestionMarkCircle size={20} />
-                                        </ActionIcon>
-                                    </HoverCard.Target>
-                                    <HoverCard.Dropdown>
-                                        <Stack gap="sm">
-                                            <Text c="dimmed" size="sm">
-                                                {t('base-node-form.consumption-m-line-1')}
-                                            </Text>
-                                            <Text c="dimmed" size="sm">
-                                                {t('base-node-form.consumption-m-line-2')}
-                                            </Text>
-                                        </Stack>
-                                    </HoverCard.Dropdown>
-                                </HoverCard>
-                                <Text inherit>{t('base-node-form.consumption-multiplier')}</Text>
-                            </Group>
-                        }
+            <SectionCard.Root>
+                <SectionCard.Section>
+                    <BaseOverlayHeader
+                        IconComponent={TbChartLine}
+                        iconVariant="gradient-indigo"
+                        title={t('base-node-form.consumption')}
+                        titleOrder={5}
                     />
-                </Stack>
-            </Fieldset>
+                </SectionCard.Section>
+                <SectionCard.Section>
+                    <Stack gap="md">
+                        <NumberInput
+                            allowDecimal
+                            allowedDecimalSeparators={['.']}
+                            allowNegative={false}
+                            clampBehavior="strict"
+                            decimalScale={1}
+                            fixedDecimalScale
+                            handlersRef={handlersRef}
+                            hideControls
+                            key={form.key('consumptionMultiplier')}
+                            leftSection={
+                                <ActionIcon
+                                    color="red"
+                                    onClick={() => handlersRef.current?.decrement()}
+                                    radius="md"
+                                    size={rem(44)}
+                                    variant="light"
+                                >
+                                    <TbMinus size={16} />
+                                </ActionIcon>
+                            }
+                            leftSectionPointerEvents="all"
+                            leftSectionProps={{
+                                style: {
+                                    overflow: 'hidden'
+                                }
+                            }}
+                            leftSectionWidth={40}
+                            max={100.0}
+                            min={0}
+                            rightSection={
+                                <ActionIcon
+                                    color="teal"
+                                    onClick={() => handlersRef.current?.increment()}
+                                    radius="md"
+                                    size={rem(44)}
+                                    variant="light"
+                                >
+                                    <TbPlus size={16} />
+                                </ActionIcon>
+                            }
+                            rightSectionPointerEvents="all"
+                            rightSectionProps={{
+                                style: {
+                                    overflow: 'hidden'
+                                }
+                            }}
+                            rightSectionWidth={40}
+                            step={0.1}
+                            styles={{
+                                input: {
+                                    textAlign: 'center',
+                                    fontWeight: 600
+                                }
+                            }}
+                            {...form.getInputProps('consumptionMultiplier')}
+                            label={
+                                <Group align="center" gap={3}>
+                                    <HoverCard shadow="md" width={280} withArrow>
+                                        <HoverCard.Target>
+                                            <ActionIcon color="gray" size="xs" variant="subtle">
+                                                <HiQuestionMarkCircle size={20} />
+                                            </ActionIcon>
+                                        </HoverCard.Target>
+                                        <HoverCard.Dropdown>
+                                            <Stack gap="sm">
+                                                <Text c="dimmed" size="sm">
+                                                    {t('base-node-form.consumption-m-line-1')}
+                                                </Text>
+                                                <Text c="dimmed" size="sm">
+                                                    {t('base-node-form.consumption-m-line-2')}
+                                                </Text>
+                                            </Stack>
+                                        </HoverCard.Dropdown>
+                                    </HoverCard>
+                                    <Text inherit>
+                                        {t('base-node-form.consumption-multiplier')}
+                                    </Text>
+                                </Group>
+                            }
+                        />
+                    </Stack>
+                </SectionCard.Section>
+            </SectionCard.Root>
         </MotionWrapper>
     )
 }

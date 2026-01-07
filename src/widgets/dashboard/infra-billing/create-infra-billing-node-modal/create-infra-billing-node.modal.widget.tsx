@@ -21,7 +21,7 @@ export function CreateInfraBillingNodeModalWidget() {
     const isOpen = useModalIsOpen(MODALS.CREATE_INFRA_BILLING_NODE_MODAL)
     const close = useModalClose(MODALS.CREATE_INFRA_BILLING_NODE_MODAL)
 
-    const { t } = useTranslation()
+    const { t, i18n } = useTranslation()
 
     const form = useForm<CreateInfraBillingNodeCommand.Request>({
         name: 'create-infra-billing-node-form',
@@ -143,6 +143,7 @@ export function CreateInfraBillingNodeModalWidget() {
                         data-autofocus
                         key={form.key('nextBillingAt')}
                         label={t('create-infra-billing-node.modal.widget.next-billing-at')}
+                        locale={i18n.language}
                         required
                         valueFormat="D MMMM, YYYY"
                         {...form.getInputProps('nextBillingAt')}

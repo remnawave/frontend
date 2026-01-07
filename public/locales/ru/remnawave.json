@@ -342,7 +342,9 @@
             "danger-zone": "Опасная зона",
             "information": "Информация",
             "detailed-info": "Подробная информация",
-            "subscription": "Подписка"
+            "subscription": "Подписка",
+            "accessible-nodes": "Доступные ноды",
+            "qr-code": "QR Код"
         }
     },
     "empty-page": {
@@ -480,6 +482,7 @@
             "no-data-available-for-the-selected-period": "Нет доступных данных за выбранный период",
             "click-to-see-all": "Нажмите чтобы посмотреть все",
             "no-data-available": "Доступных данных нет",
+            "current-month": "Текущий месяц",
             "7-days": "7 дней",
             "14-days": "14 дней",
             "30-days": "30 дней",
@@ -729,7 +732,8 @@
         "feature": {
             "subscription-links": "Подписные ссылки",
             "loading-subscription-links": "Загрузка ссылок на подписку ...",
-            "no-available-hosts-found-for-this-user": "Для этого пользователя не найдено доступных хостов"
+            "no-available-hosts-found-for-this-user": "Для этого пользователя не найдено доступных хостов",
+            "connection-keys": "Ключи для подключения"
         }
     },
     "user-usage-modal": {
@@ -759,7 +763,8 @@
     },
     "get-user-usage": {
         "feature": {
-            "show-usage": "Статистика"
+            "show-usage": "Статистика",
+            "usage": "Usage"
         }
     },
     "detailed-user-info-drawer": {
@@ -877,7 +882,7 @@
             "delete-device": "Удалить устройство",
             "device": "Устройство",
             "devices": "Устройств",
-            "hwid-devices": "HWID Устройства",
+            "hwid-devices": "Устройства HWID",
             "important-note": "Важная информация",
             "important-note-line-1": "Эта функция доступна только с",
             "important-note-line-2": ".env переменной.",
@@ -1679,7 +1684,9 @@
         "widget": {
             "user-status": "Статус пользователя",
             "empty-hosts": "Отсутствуют хосты",
-            "empty-internal-squads": "Отсутствует внутренние сквады"
+            "empty-internal-squads": "Отсутствует внутренние сквады",
+            "hwid-max-devices-exceeded": "HWID: Макс. число устройств превышено",
+            "hwid-not-supported": "HWID: Не поддерживается"
         }
     },
     "multi-select-nodes": {
@@ -1832,7 +1839,7 @@
         "component": {
             "import-config": "Импортировать конфигурацию",
             "download-config": "Загрузить конфигурацию",
-            "importing-config": "Импортирование...",
+            "importing-config": "Импортирование конфига",
             "this-may-take-a-while": "Это может занять немного времени...",
             "success": "Успешно",
             "config-imported-successfully": "Конфигурация успешно импортирована",
@@ -1864,7 +1871,9 @@
             "meta-title": "Мета заголовок",
             "meta-description": "Мета описание",
             "show-connection-keys": "Показать ключи подключения",
-            "show-or-hide-raw-connection-keys": "Показать или скрыть ключи подключения"
+            "show-or-hide-raw-connection-keys": "Показать или скрыть ключи подключения",
+            "hide-get-link-button": "Скрыть кнопку «Получить ссылку»",
+            "hide-the-get-link-button-top-right-corner": "Скрыть кнопку «Получить ссылку» в правом верхнем углу"
         }
     },
     "import-config-sections": {
@@ -1879,6 +1888,30 @@
             "import-platforms": "Импорт платформ",
             "replace-base-translation-and-locales": "Заменяет базовые переводы и локали",
             "import-base-translations": "Импорт базовых переводов"
+        }
+    },
+    "revoke-subscription-user": {
+        "feature": {
+            "full-revoke": "Полный перевыпуск",
+            "revoke": "Перевыпуск подписки",
+            "passwords-only": "Только пароли",
+            "passwords-only-decription": "Перегенерировать только пароли подключения, URL-адрес подписки остается тем же",
+            "full-revoke-description": "Перегенерировать URL-адрес подписки и пароли подключения"
+        }
+    },
+    "nodes-quick-stats": {
+        "widget": {
+            "users-online": "Пользователи онлайн",
+            "online-nodes": "Ноды онлайн",
+            "offline-nodes": "Ноды оффлайн",
+            "cumulative-traffic": "Общее количество трафика"
+        }
+    },
+    "template-info-popover": {
+        "shared": {
+            "template-variables": "Template Variables",
+            "available-variables-are-listed-below": "Available variables are listed below.",
+            "you-can-use-template-variables-in-this-field": "You can use template variables in this field."
         }
     }
 }

@@ -39,7 +39,7 @@ import { gbToBytesUtil } from '@shared/utils/bytes'
 import { IProps } from './interfaces/props.interface'
 
 export const BulkAllUserActionsUpdateTabFeature = (props: IProps) => {
-    const { t } = useTranslation()
+    const { t, i18n } = useTranslation()
     const { cleanUpDrawer } = props
 
     const form = useForm<BulkAllUpdateUsersCommand.Request>({
@@ -162,6 +162,7 @@ export const BulkAllUserActionsUpdateTabFeature = (props: IProps) => {
                     key={form.key('expireAt')}
                     label={t('bulk-all-user-actions-tabs.update.tab.feature.expire-date')}
                     leftSection={<PiCalendar size="16px" />}
+                    locale={i18n.language}
                     placeholder={t(
                         'bulk-all-user-actions-tabs.update.tab.feature.select-expiration-date'
                     )}

@@ -11,7 +11,6 @@ import {
     Badge,
     Card,
     Collapse,
-    CopyButton,
     Group,
     Select,
     Stack,
@@ -19,14 +18,14 @@ import {
     TextInput
 } from '@mantine/core'
 import { IconArrowDown, IconArrowUp, IconChevronRight, IconTrash } from '@tabler/icons-react'
-import { PiCheck, PiCopy } from 'react-icons/pi'
 import { TbExternalLink } from 'react-icons/tb'
 import { useDisclosure } from '@mantine/hooks'
 import { useTranslation } from 'react-i18next'
 
+import { TemplateInfoPopoverShared } from '@shared/ui/popovers'
+
 import { LocalizedTextEditor } from './localized-text-editor.component'
 import styles from '../subpage-config-visual-editor.module.css'
-import { SubpageTooltips } from './subpage-tooltips.component'
 import { SvgIconSelect } from './svg-icon-select.component'
 
 interface IProps {
@@ -147,35 +146,9 @@ export function ButtonEditor(props: IProps) {
                             classNames={{ input: styles.inputDark }}
                             label={t('button-editor.component.link')}
                             leftSection={
-                                <SubpageTooltips>
-                                    <Group gap="xs" key="subpage-template-keys">
-                                        <Text size="sm">
-                                            {t('remark-info.widget.supports-templates')}
-                                        </Text>
-
-                                        {SUBSCRIPTION_PAGE_TEMPLATE_KEYS.map((key) => (
-                                            <CopyButton key={key} value={`{{${key}}}`}>
-                                                {({ copied, copy }) => (
-                                                    <Badge
-                                                        color={copied ? 'teal' : 'blue'}
-                                                        key={key}
-                                                        leftSection={
-                                                            copied ? (
-                                                                <PiCheck size="16px" />
-                                                            ) : (
-                                                                <PiCopy size="16px" />
-                                                            )
-                                                        }
-                                                        onClick={copy}
-                                                        size="md"
-                                                    >
-                                                        {`{{${key}}}`}
-                                                    </Badge>
-                                                )}
-                                            </CopyButton>
-                                        ))}
-                                    </Group>
-                                </SubpageTooltips>
+                                <TemplateInfoPopoverShared
+                                    templateKeys={SUBSCRIPTION_PAGE_TEMPLATE_KEYS}
+                                />
                             }
                             onChange={(e) => onChange({ ...button, link: e.target.value })}
                             placeholder="https:// or app://"

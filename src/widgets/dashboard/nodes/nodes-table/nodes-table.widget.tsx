@@ -19,6 +19,7 @@ import { useListState, useMediaQuery } from '@mantine/hooks'
 import { restrictToVerticalAxis } from '@dnd-kit/modifiers'
 import { Box, Container, em, Stack } from '@mantine/core'
 
+import { MODALS, useModalsStoreOpenWithData } from '@entities/dashboard/modal-store'
 import { nodesQueryKeys, useGetNodes, useReorderNodes } from '@shared/api/hooks'
 import { EmptyPageLayout } from '@shared/ui/layouts/empty-page'
 import { sToMs } from '@shared/utils/time-utils'
@@ -33,6 +34,7 @@ export const NodesTableWidget = memo((props: IProps) => {
     const { nodes } = props
     const [state, handlers] = useListState(nodes || [])
 
+    const openModalWithData = useModalsStoreOpenWithData()
     const [isPollingEnabled, setIsPollingEnabled] = useState(true)
     const [draggedNode, setDraggedNode] = useState<
         GetAllNodesCommand.Response['response'][number] | null
@@ -156,6 +158,10 @@ export const NodesTableWidget = memo((props: IProps) => {
         setDraggedNode(null)
     }, [])
 
+    const handleViewNode = (nodeUuid: string) => {
+        openModalWithData(MODALS.EDIT_NODE_BY_UUID_MODAL, { nodeUuid })
+    }
+
     if (!nodes) {
         return null
     }
@@ -210,7 +216,11 @@ export const NodesTableWidget = memo((props: IProps) => {
                                                 }}
                                             >
                                                 <div className={styles.nodeFadeIn}>
-                                                    <NodeCardWidget node={item} />
+                                                    <NodeCardWidget
+                                                        handleViewNode={handleViewNode}
+                                                        isMobile={isMobile}
+                                                        node={item}
+                                                    />
                                                 </div>
                                             </Box>
                                         )
@@ -223,7 +233,12 @@ export const NodesTableWidget = memo((props: IProps) => {
                 <DragOverlay>
                     {draggedNode && (
                         <Container fluid pl={0} pr={0}>
-                            <NodeCardWidget isDragOverlay node={draggedNode} />
+                            <NodeCardWidget
+                                handleViewNode={handleViewNode}
+                                isDragOverlay
+                                isMobile={isMobile}
+                                node={draggedNode}
+                            />
                         </Container>
                     )}
                 </DragOverlay>

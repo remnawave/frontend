@@ -1,0 +1,47 @@
+.title {
+    color: var(--mantine-color-dimmed);
+    font-size: var(--mantine-font-size-sm);
+    font-weight: 500;
+    line-height: 1.4;
+    letter-spacing: 0.01em;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.value {
+    font-weight: 700;
+    font-size: var(--mantine-font-size-xl);
+    line-height: 1.2;
+    white-space: nowrap;
+    overflow: hidden;
+    font-family: var(--mantine-font-family-monospace);
+    text-overflow: ellipsis;
+    color: var(--mantine-color-white-5);
+}
+
+.subtitle {
+    color: var(--mantine-color-dimmed);
+    font-size: var(--mantine-font-size-xs);
+    font-weight: 400;
+    white-space: nowrap;
+}
+
+.trendContainer {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-top: 2px;
+}
+
+.trendValue {
+    font-size: var(--mantine-font-size-xs);
+    font-weight: 600;
+}
+
+.trendText {
+    color: var(--mantine-color-dimmed);
+    font-size: var(--mantine-font-size-xs);
+    font-weight: 400;
+}

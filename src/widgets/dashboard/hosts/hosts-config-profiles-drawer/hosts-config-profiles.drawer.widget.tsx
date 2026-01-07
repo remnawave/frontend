@@ -125,6 +125,13 @@ export const HostsConfigProfilesDrawer = (props: IProps) => {
             padding="md"
             position="right"
             size="480px"
+            styles={{
+                body: {
+                    height: 'calc(100% - 60px)',
+                    display: 'flex',
+                    flexDirection: 'column'
+                }
+            }}
             title={
                 <BaseOverlayHeader
                     IconComponent={XrayLogo}
@@ -133,7 +140,7 @@ export const HostsConfigProfilesDrawer = (props: IProps) => {
                 />
             }
         >
-            <Stack gap="md" h="100%">
+            <Stack className={classes.drawerContent} gap="md">
                 <Paper p="md" shadow="sm" withBorder>
                     <Stack gap="md">
                         <Box
@@ -235,61 +242,67 @@ export const HostsConfigProfilesDrawer = (props: IProps) => {
                             : t('hosts-config-profiles.drawer.widget.no-config-profiles-available')}
                     </Text>
                 ) : (
-                    <Accordion
-                        chevronPosition="left"
-                        multiple={true}
-                        onChange={(value) => {
-                            setOpenAccordions(new Set(value))
-                        }}
-                        value={Array.from(openAccordions)}
-                        variant="separated"
-                    >
+                    <Box className={classes.listContainer}>
                         <Virtuoso
                             data={filteredProfiles}
                             itemContent={(_index, profile) => {
                                 const isOpen = openAccordions.has(profile.uuid)
                                 return (
-                                    <div
-                                        className={classes.itemWrapper}
-                                        style={{ marginBottom: '8px' }}
-                                    >
-                                        <ConfigProfileCardShared
-                                            isOpen={isOpen}
-                                            onInboundToggle={handleInboundToggle}
-                                            onSelectAllInbounds={() => {
-                                                notifications.show({
-                                                    message: t(
-                                                        'hosts-config-profiles.drawer.widget.hosts-do-not-support-multiple-inbounds'
-                                                    ),
-                                                    color: 'red',
-                                                    title: t(
-                                                        'hosts-config-profiles.drawer.widget.not-supported'
-                                                    ),
-                                                    autoClose: 2000
+                                    <div className={classes.itemWrapper}>
+                                        <Accordion
+                                            chevronPosition="left"
+                                            onChange={(value) => {
+                                                setOpenAccordions((prev) => {
+                                                    const next = new Set(prev)
+                                                    if (value === profile.uuid) {
+                                                        next.add(profile.uuid)
+                                                    } else {
+                                                        next.delete(profile.uuid)
+                                                    }
+                                                    return next
                                                 })
                                             }}
-                                            onUnselectAllInbounds={() => {
-                                                notifications.show({
-                                                    message: t(
-                                                        'hosts-config-profiles.drawer.widget.hosts-do-not-support-multiple-inbounds'
-                                                    ),
-                                                    color: 'red',
-                                                    title: t(
-                                                        'hosts-config-profiles.drawer.widget.not-supported'
-                                                    ),
-                                                    autoClose: 2000
-                                                })
-                                            }}
-                                            profile={profile}
-                                            selectedInbounds={selectedInboundsSet}
-                                        />
+                                            value={isOpen ? profile.uuid : null}
+                                            variant="separated"
+                                        >
+                                            <ConfigProfileCardShared
+                                                isOpen={isOpen}
+                                                onInboundToggle={handleInboundToggle}
+                                                onSelectAllInbounds={() => {
+                                                    notifications.show({
+                                                        message: t(
+                                                            'hosts-config-profiles.drawer.widget.hosts-do-not-support-multiple-inbounds'
+                                                        ),
+                                                        color: 'red',
+                                                        title: t(
+                                                            'hosts-config-profiles.drawer.widget.not-supported'
+                                                        ),
+                                                        autoClose: 2000
+                                                    })
+                                                }}
+                                                onUnselectAllInbounds={() => {
+                                                    notifications.show({
+                                                        message: t(
+                                                            'hosts-config-profiles.drawer.widget.hosts-do-not-support-multiple-inbounds'
+                                                        ),
+                                                        color: 'red',
+                                                        title: t(
+                                                            'hosts-config-profiles.drawer.widget.not-supported'
+                                                        ),
+                                                        autoClose: 2000
+                                                    })
+                                                }}
+                                                profile={profile}
+                                                selectedInbounds={selectedInboundsSet}
+                                            />
+                                        </Accordion>
                                     </div>
                                 )
                             }}
-                            style={{ height: '500px' }}
+                            style={{ height: '100%' }}
                             useWindowScroll={false}
                         />
-                    </Accordion>
+                    </Box>
                 )}
             </Stack>
         </Drawer>

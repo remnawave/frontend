@@ -3,8 +3,6 @@
     -webkit-animation: fadeIn 0.2s ease-out;
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
-    -webkit-perspective: 1000px;
-    perspective: 1000px;
 }
 
 @keyframes fadeIn {

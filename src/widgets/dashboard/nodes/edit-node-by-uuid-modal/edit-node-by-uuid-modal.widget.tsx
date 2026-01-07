@@ -1,146 +1,49 @@
-import { UpdateNodeCommand } from '@remnawave/backend-contract'
-import { Button, em, Modal, Stack, Text } from '@mantine/core'
-import { zodResolver } from 'mantine-form-zod-resolver'
-import { PiEmpty, PiXBold } from 'react-icons/pi'
 import { useTranslation } from 'react-i18next'
 import { useMediaQuery } from '@mantine/hooks'
-import { useEffect, useState } from 'react'
-import { useForm } from '@mantine/form'
+import { em, Modal } from '@mantine/core'
 import { TbCpu } from 'react-icons/tb'
+import { motion } from 'motion/react'
 
-import {
-    configProfilesQueryKeys,
-    nodesQueryKeys,
-    useGetNode,
-    useGetPubKey,
-    useUpdateNode
-} from '@shared/api/hooks'
-import { MODALS, useModalClose, useModalState } from '@entities/dashboard/modal-store'
-import { BaseNodeForm } from '@shared/ui/forms/nodes/base-node-form/base-node-form'
+import { MODALS, useModalCloseActions, useModalState } from '@entities/dashboard/modal-store'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
-import { bytesToGbUtil, gbToBytesUtil } from '@shared/utils/bytes'
+import { nodesQueryKeys, QueryKeys } from '@shared/api/hooks'
 import { LoaderModalShared } from '@shared/ui/loader-modal'
-import { ModalFooter } from '@shared/ui/modal-footer'
 import { queryClient } from '@shared/api'
 
-import { NodeDetailsCardWidget } from '../node-details-card/node-details-card.widget'
+import { EditNodeByUuidModalContent } from './edit-node-by-uuid-modal.content'
 
 export const EditNodeByUuidModalWidget = () => {
     const { t } = useTranslation()
 
     const { isOpen, internalState: nodeUuid } = useModalState(MODALS.EDIT_NODE_BY_UUID_MODAL)
-    const close = useModalClose(MODALS.EDIT_NODE_BY_UUID_MODAL)
+
+    const [handleClose, clearInternalState] = useModalCloseActions(MODALS.EDIT_NODE_BY_UUID_MODAL)
 
     const isMobile = useMediaQuery(`(max-width: ${em(768)})`)
 
-    const [advancedOpened, setAdvancedOpened] = useState(false)
+    const clearInternalStateAndClose = () => {
+        clearInternalState()
 
-    const form = useForm<UpdateNodeCommand.Request>({
-        name: 'edit-node-form',
-        mode: 'uncontrolled',
-        validate: zodResolver(UpdateNodeCommand.RequestSchema.omit({ uuid: true }))
-    })
-
-    const { data: pubKey } = useGetPubKey()
-
-    const isQueryEnabled = isOpen && !form.isTouched()
-
-    const { data: fetchedNode, isLoading } = useGetNode({
-        route: {
-            uuid: nodeUuid?.nodeUuid ?? ''
-        },
-        rQueryParams: {
-            enabled: isQueryEnabled
-        }
-    })
-
-    const handleClose = (closeModal: boolean = false) => {
-        if (closeModal) {
-            close()
-        }
-
-        queryClient.removeQueries({
-            queryKey: nodesQueryKeys.getNode({ uuid: nodeUuid?.nodeUuid ?? '' }).queryKey
-        })
-
-        setTimeout(() => {
-            form.reset()
-            form.resetDirty()
-            form.resetTouched()
-            setAdvancedOpened(false)
-        }, 300)
-    }
-
-    const { mutate: updateNode, isPending: isUpdateNodePending } = useUpdateNode({
-        mutationFns: {
-            onSuccess: async () => {
-                queryClient.refetchQueries({
-                    queryKey: configProfilesQueryKeys.getConfigProfiles.queryKey
-                })
-                queryClient.refetchQueries({
-                    queryKey: nodesQueryKeys.getAllNodes.queryKey
-                })
-                handleClose(true)
-            }
-        }
-    })
-
-    useEffect(() => {
-        if (fetchedNode) {
-            setAdvancedOpened(fetchedNode.isTrafficTrackingActive ?? false)
-            form.setValues({
-                countryCode: fetchedNode.countryCode,
-                name: fetchedNode.name,
-                address: fetchedNode.address,
-                port: fetchedNode.port ?? undefined,
-                isTrafficTrackingActive: fetchedNode.isTrafficTrackingActive ?? undefined,
-                trafficLimitBytes: bytesToGbUtil(fetchedNode.trafficLimitBytes ?? undefined),
-                trafficResetDay: fetchedNode.trafficResetDay ?? undefined,
-                notifyPercent: fetchedNode.notifyPercent ?? undefined,
-                consumptionMultiplier: fetchedNode.consumptionMultiplier ?? undefined,
-
-                configProfile: {
-                    activeConfigProfileUuid:
-                        fetchedNode.configProfile.activeConfigProfileUuid ?? '',
-                    activeInbounds:
-                        fetchedNode.configProfile.activeInbounds.map((inbound) => inbound.uuid) ??
-                        []
-                },
-
-                providerUuid: fetchedNode.providerUuid ?? undefined
+        if (nodeUuid) {
+            queryClient.removeQueries({
+                queryKey: nodesQueryKeys.getNode({ uuid: nodeUuid.nodeUuid }).queryKey
             })
         }
-    }, [fetchedNode])
 
-    const handleSubmit = form.onSubmit(async (values) => {
-        if (!fetchedNode) {
-            return
-        }
-
-        updateNode({
-            variables: {
-                ...values,
-                uuid: fetchedNode.uuid,
-                name: values.name?.trim(),
-                address: values.address?.trim(),
-                trafficLimitBytes: gbToBytesUtil(values.trafficLimitBytes),
-                configProfile: {
-                    activeConfigProfileUuid: values.configProfile?.activeConfigProfileUuid ?? '',
-                    activeInbounds: values.configProfile?.activeInbounds ?? []
-                }
-            }
+        queryClient.refetchQueries({
+            queryKey: QueryKeys.nodes.getAllNodes.queryKey
         })
-    })
+    }
 
     return (
         <Modal
             centered
             closeOnEscape={false}
             fullScreen={isMobile}
-            onClose={close}
-            onExitTransitionEnd={() => handleClose()}
+            onClose={handleClose}
+            onExitTransitionEnd={clearInternalStateAndClose}
             opened={isOpen}
-            size="900px"
+            size="1000px"
             title={
                 <BaseOverlayHeader
                     IconComponent={TbCpu}
@@ -150,52 +53,16 @@ export const EditNodeByUuidModalWidget = () => {
             }
             transitionProps={isMobile ? { transition: 'fade', duration: 200 } : undefined}
         >
-            {isLoading && (
-                <LoaderModalShared
-                    h="80vh"
-                    text={t('edit-node-by-uuid-modal.widget.loading-node')}
-                />
-            )}
-
-            {!isLoading && !fetchedNode && (
-                <>
-                    <Stack align="center" gap="xl" h="80vh" justify="center">
-                        <Stack align="center" c="dimmed" gap="md">
-                            <PiEmpty size={48} />
-                            <Text>{t('empty-page.layout.nothing-found')}</Text>
-                        </Stack>
-                    </Stack>
-                    <ModalFooter>
-                        <Button
-                            color="teal"
-                            leftSection={<PiXBold size="16px" />}
-                            onClick={() => handleClose(true)}
-                            size="sm"
-                            variant="outline"
-                        >
-                            {t('common.close')}
-                        </Button>
-                    </ModalFooter>
-                </>
-            )}
-
-            {fetchedNode && (
-                <BaseNodeForm
-                    advancedOpened={advancedOpened}
-                    fetchedNode={fetchedNode}
-                    form={form}
-                    handleClose={() => handleClose(true)}
-                    handleSubmit={handleSubmit}
-                    isUpdateNodePending={isUpdateNodePending}
-                    node={fetchedNode}
-                    nodeDetailsCard={
-                        fetchedNode && (
-                            <NodeDetailsCardWidget fetchedNode={fetchedNode} node={fetchedNode} />
-                        )
-                    }
-                    pubKey={pubKey}
-                    setAdvancedOpened={setAdvancedOpened}
-                />
+            {!nodeUuid ? (
+                <motion.div
+                    animate={{ opacity: 1 }}
+                    initial={{ opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                >
+                    <LoaderModalShared h="78vh" />
+                </motion.div>
+            ) : (
+                <EditNodeByUuidModalContent nodeUuid={nodeUuid.nodeUuid} onClose={handleClose} />
             )}
         </Modal>
     )

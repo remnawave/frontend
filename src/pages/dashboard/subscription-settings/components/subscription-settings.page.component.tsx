@@ -1,5 +1,5 @@
-import { PiBarcodeDuotone } from 'react-icons/pi'
 import { useTranslation } from 'react-i18next'
+import { TbHexagon } from 'react-icons/tb'
 import { Container } from '@mantine/core'
 
 import { SubscriptionSettingsTabsWidget } from '@widgets/dashboard/subscription-settings/settings/subscription-tabs.widget'
@@ -19,7 +19,7 @@ export const SubscriptionSettingsPageComponent = (props: IProps) => {
     return (
         <Page title={t('constants.subscription-settings')}>
             <PageHeaderShared
-                icon={<PiBarcodeDuotone size={24} />}
+                icon={<TbHexagon size={24} />}
                 title={t('constants.subscription-settings')}
             />
 

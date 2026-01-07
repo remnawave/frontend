@@ -13,7 +13,6 @@ import { NodesDataTableWidget } from '@widgets/dashboard/nodes/nodes-datatable/n
 import { EditNodeByUuidModalWidget } from '@widgets/dashboard/nodes/edit-node-by-uuid-modal'
 import { NodesRealtimeUsageMetrics } from '@widgets/dashboard/nodes/nodes-realtime-metrics'
 import { NodeUsersUsageDrawer } from '@widgets/dashboard/nodes/node-users-usage-statistic'
-import { EditNodeModalConnectorWidget } from '@widgets/dashboard/nodes/edit-node-modal'
 import { CreateNodeModalWidget } from '@widgets/dashboard/nodes/create-node-modal'
 import { NodesTableWidget } from '@widgets/dashboard/nodes/nodes-table'
 import { LoadingScreen, Page, PageHeaderShared } from '@shared/ui'
@@ -35,7 +34,8 @@ export default function NodesPageComponent(props: IProps) {
             <Grid>
                 <Grid.Col span={12}>
                     <Stack>
-                        <NodesRealtimeUsageMetrics />
+                        <NodesRealtimeUsageMetrics isLoading={isLoading} nodes={nodes} />
+
                         <PageHeaderShared
                             actions={
                                 <NodesHeaderActionButtonsFeature
@@ -70,7 +70,6 @@ export default function NodesPageComponent(props: IProps) {
                 </Grid.Col>
             </Grid>
 
-            <EditNodeModalConnectorWidget key="view-node-widget" />
             <EditNodeByUuidModalWidget key="edit-node-by-uuid-modal" />
             <CreateNodeModalWidget key="create-node-widget" />
             <NodeUsersUsageDrawer key="node-users-usage-drawer" />

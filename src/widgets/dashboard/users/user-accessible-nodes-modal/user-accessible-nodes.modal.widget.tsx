@@ -1,52 +1,28 @@
-import {
-    Badge,
-    Box,
-    Card,
-    Center,
-    Drawer,
-    Group,
-    Loader,
-    SimpleGrid,
-    Stack,
-    Text,
-    Tree,
-    TreeNodeData
-} from '@mantine/core'
-import { IconChevronDown, IconFlag, IconServer } from '@tabler/icons-react'
+import { Badge, Box, Center, Drawer, Group, Loader, Stack, Text } from '@mantine/core'
+import { TbChevronRight, TbCirclesRelation, TbServer } from 'react-icons/tb'
 import { GetUserAccessibleNodesCommand } from '@remnawave/backend-contract'
-import { TbCirclesRelation, TbServer } from 'react-icons/tb'
-import ReactCountryFlag from 'react-country-flag'
 import { useTranslation } from 'react-i18next'
+import { DataTable } from 'mantine-datatable'
 import { PiTag } from 'react-icons/pi'
+import { useState } from 'react'
+import clsx from 'clsx'
 
 import { MODALS, useModalClose, useModalState } from '@entities/dashboard/modal-store'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { useGetUserAccessibleNodes } from '@shared/api/hooks'
-import { XrayLogo } from '@shared/ui/logos'
+import { CountryFlag } from '@shared/ui/get-country-flag'
 
-interface CustomTreeNodeData extends TreeNodeData {
-    configProfileName?: string
-    countryCode?: string
-    inbounds?: string[]
-    nodeType?: 'inbound' | 'node' | 'squad'
-}
+import classes from './user-accessible.module.css'
 
-interface RenderTreeNodeProps {
-    elementProps: {
-        className: string
-        'data-hovered': boolean | undefined
-        'data-selected': boolean | undefined
-        'data-value': string
-        onClick: (event: React.MouseEvent) => void
-        style: React.CSSProperties
-    }
-    expanded: boolean
-    hasChildren: boolean
-    node: CustomTreeNodeData
-}
+type ActiveNode = GetUserAccessibleNodesCommand.Response['response']['activeNodes'][number]
+type ActiveSquad = ActiveNode['activeSquads'][number]
+type ActiveInbound = ActiveSquad['activeInbounds'][number]
 
 export const UserAccessibleNodesModalWidget = () => {
     const { t } = useTranslation()
+
+    const [expandedNodeIds, setExpandedNodeIds] = useState<string[]>([])
+    const [expandedSquadIds, setExpandedSquadIds] = useState<string[]>([])
 
     const { isOpen, internalState } = useModalState(MODALS.USER_ACCESSIBLE_NODES_DRAWER)
     const close = useModalClose(MODALS.USER_ACCESSIBLE_NODES_DRAWER)
@@ -73,206 +49,12 @@ export const UserAccessibleNodesModalWidget = () => {
         )
     }
 
-    const convertToTreeData = (
-        nodes: GetUserAccessibleNodesCommand.Response['response']['activeNodes']
-    ): CustomTreeNodeData[] => {
-        return nodes.map((node) => ({
-            value: node.uuid,
-            label: node.nodeName,
-            nodeType: 'node',
-            countryCode: node.countryCode,
-            configProfileName: node.configProfileName,
-            children: node.activeSquads.map((squad) => ({
-                value: `${node.uuid}-${squad.squadName}`,
-                label: squad.squadName,
-                nodeType: 'squad',
-                inbounds: squad.activeInbounds,
-                children: squad.activeInbounds.map((inbound, index) => ({
-                    value: `${node.uuid}-${squad.squadName}-${inbound}-${index}`,
-                    label: inbound,
-                    nodeType: 'inbound'
-                }))
-            }))
-        }))
-    }
-
-    const renderTreeNode = ({ node, expanded, hasChildren, elementProps }: RenderTreeNodeProps) => {
-        const getNodeContent = () => {
-            switch (node.nodeType) {
-                case 'inbound':
-                    return null
-                case 'node':
-                    return (
-                        <Card
-                            m="xs"
-                            p="md"
-                            style={{
-                                backgroundColor: 'var(--mantine-color-dark-6)',
-                                borderWidth: '1px'
-                            }}
-                            withBorder
-                        >
-                            <Stack gap="sm">
-                                <Group align="center" gap="md">
-                                    {hasChildren && (
-                                        <IconChevronDown
-                                            color="var(--mantine-color-gray-4)"
-                                            size={16}
-                                            style={{
-                                                transform: expanded
-                                                    ? 'rotate(180deg)'
-                                                    : 'rotate(0deg)',
-                                                transition: 'transform 150ms ease'
-                                            }}
-                                        />
-                                    )}
-                                    <TbServer color="var(--mantine-color-blue-4)" size={24} />
-                                    {node.countryCode && node.countryCode !== 'XX' && (
-                                        <ReactCountryFlag
-                                            countryCode={node.countryCode}
-                                            style={{ fontSize: '1.4em' }}
-                                        />
-                                    )}
-                                    <Text c="gray.1" fw={600} size="lg">
-                                        {node.label}
-                                    </Text>
-                                    <Badge
-                                        color="teal"
-                                        leftSection={<XrayLogo size={20} />}
-                                        size="lg"
-                                        variant="light"
-                                    >
-                                        {node.configProfileName}
-                                    </Badge>
-
-                                    {node.children?.length && (
-                                        <Badge
-                                            color="violet"
-                                            leftSection={<TbCirclesRelation size={22} />}
-                                            size="lg"
-                                            variant="light"
-                                        >
-                                            {node.children.length}
-                                        </Badge>
-                                    )}
-                                </Group>
-                            </Stack>
-                        </Card>
-                    )
-                case 'squad':
-                    return (
-                        <Box
-                            m="xs"
-                            p="md"
-                            style={{
-                                backgroundColor: 'var(--mantine-color-dark-8)',
-                                borderRadius: '8px',
-                                boxShadow: `0 8px 24px rgba(0, 0, 0, 0.15)`
-                            }}
-                        >
-                            <Stack gap="md">
-                                <Group align="center" gap="md">
-                                    {hasChildren && (
-                                        <IconChevronDown
-                                            color="var(--mantine-color-gray-5)"
-                                            size={12}
-                                            style={{
-                                                transform: expanded
-                                                    ? 'rotate(180deg)'
-                                                    : 'rotate(0deg)',
-                                                transition: 'transform 150ms ease'
-                                            }}
-                                        />
-                                    )}
-                                    <TbCirclesRelation
-                                        color="var(--mantine-color-violet-4)"
-                                        size={22}
-                                    />
-                                    <Text c="gray.3" fw={500} size="lg">
-                                        {node.label}
-                                    </Text>
-                                    {node.inbounds?.length && (
-                                        <Badge
-                                            color="var(--mantine-color-orange-4)"
-                                            leftSection={<PiTag size={22} />}
-                                            size="lg"
-                                            variant="light"
-                                        >
-                                            {node.inbounds.length}
-                                        </Badge>
-                                    )}
-                                </Group>
-
-                                {expanded && node.inbounds && node.inbounds.length > 0 && (
-                                    <SimpleGrid
-                                        cols={{
-                                            base: 1,
-                                            sm: 2,
-                                            md: 3,
-                                            lg: 4
-                                        }}
-                                        spacing="xs"
-                                    >
-                                        {node.inbounds.map((inbound, index) => (
-                                            <Box
-                                                key={index}
-                                                p="xs"
-                                                style={{
-                                                    backgroundColor: 'var(--mantine-color-dark-7)',
-                                                    borderRadius: '12px',
-                                                    border: '1px solid var(--mantine-color-gray-8)',
-                                                    maxWidth: '200px',
-                                                    overflow: 'hidden'
-                                                }}
-                                            >
-                                                <Group align="center" gap="xs" wrap="nowrap">
-                                                    <PiTag
-                                                        color="var(--mantine-color-orange-4)"
-                                                        size={16}
-                                                        style={{ flexShrink: 0 }}
-                                                    />
-                                                    <Text
-                                                        c="gray.4"
-                                                        fw={600}
-                                                        size="sm"
-                                                        style={{ minWidth: 0 }}
-                                                        truncate
-                                                    >
-                                                        {inbound}
-                                                    </Text>
-                                                </Group>
-                                            </Box>
-                                        ))}
-                                    </SimpleGrid>
-                                )}
-                            </Stack>
-                        </Box>
-                    )
-                default:
-                    return null
-            }
-        }
-
-        if (node.nodeType === 'inbound') {
-            return null
-        }
-
-        return (
-            <Box
-                {...elementProps}
-                style={{ ...elementProps.style, cursor: hasChildren ? 'pointer' : 'default' }}
-            >
-                {getNodeContent()}
-            </Box>
-        )
-    }
-
     const renderAccessibleNodes = () => {
         if (!userAccessibleNodes?.activeNodes?.length) {
             return (
                 <Center h={200}>
                     <Stack align="center" gap="md">
-                        <IconServer color="var(--mantine-color-gray-5)" size={48} />
+                        <TbServer color="var(--mantine-color-gray-5)" size={48} />
                         <Text c="dimmed" size="lg" ta="center">
                             {t(
                                 'user-accessible-nodes.modal.widget.no-accessible-nodes-found-for-this-user'
@@ -283,59 +65,175 @@ export const UserAccessibleNodesModalWidget = () => {
             )
         }
 
-        const treeData = convertToTreeData(userAccessibleNodes.activeNodes)
-
         return (
             <Stack gap="lg">
-                <Card p="md" withBorder>
-                    <Group align="center" gap="md">
-                        <IconFlag color="var(--mantine-color-blue-4)" size={20} />
-                        <Text c="gray.1" fw={600} size="lg">
-                            {t('user-accessible-nodes.modal.widget.access-summary')}
-                        </Text>
-                        <Badge
-                            color="blue"
-                            leftSection={<TbServer size={22} />}
-                            size="lg"
-                            variant="light"
-                        >
-                            {userAccessibleNodes.activeNodes.length}
-                        </Badge>
+                <Group gap="md" wrap="wrap">
+                    <Badge
+                        color="blue"
+                        leftSection={<TbServer size={18} />}
+                        size="lg"
+                        variant="light"
+                    >
+                        {userAccessibleNodes.activeNodes.length} {t('constants.nodes')}
+                    </Badge>
 
-                        <Badge
-                            color="violet"
-                            leftSection={<TbCirclesRelation size={22} />}
-                            size="lg"
-                            variant="light"
-                        >
-                            {userAccessibleNodes.activeNodes.reduce(
-                                (acc, node) => acc + node.activeSquads.length,
-                                0
-                            )}
-                        </Badge>
+                    <Badge
+                        color="violet"
+                        leftSection={<TbCirclesRelation size={18} />}
+                        size="lg"
+                        variant="light"
+                    >
+                        {userAccessibleNodes.activeNodes.reduce(
+                            (acc, node) => acc + node.activeSquads.length,
+                            0
+                        )}{' '}
+                        {t('constants.internal-squads')}
+                    </Badge>
 
-                        <Badge
-                            color="var(--mantine-color-orange-4)"
-                            leftSection={<PiTag size={22} />}
-                            size="lg"
-                            variant="light"
-                        >
-                            {userAccessibleNodes.activeNodes.reduce(
-                                (acc, node) =>
-                                    acc +
-                                    node.activeSquads.reduce(
-                                        (sum, squad) => sum + squad.activeInbounds.length,
-                                        0
-                                    ),
-                                0
-                            )}
-                        </Badge>
-                    </Group>
-                </Card>
+                    <Badge
+                        color="orange"
+                        leftSection={<PiTag size={18} />}
+                        size="lg"
+                        variant="light"
+                    >
+                        {userAccessibleNodes.activeNodes.reduce(
+                            (acc, node) =>
+                                acc +
+                                node.activeSquads.reduce(
+                                    (sum, squad) => sum + squad.activeInbounds.length,
+                                    0
+                                ),
+                            0
+                        )}{' '}
+                        Inbounds
+                    </Badge>
+                </Group>
 
-                <Box>
-                    <Tree data={treeData} levelOffset={20} renderNode={renderTreeNode} />
-                </Box>
+                <DataTable
+                    borderRadius="md"
+                    columns={[
+                        {
+                            accessor: 'nodeName',
+                            title: 'Nodes / Internal Squads / Inbounds',
+                            noWrap: true,
+                            render: (node: ActiveNode) => (
+                                <>
+                                    <TbChevronRight
+                                        className={clsx(classes.icon, classes.expandIcon, {
+                                            [classes.expandIconRotated]: expandedNodeIds.includes(
+                                                node.uuid
+                                            )
+                                        })}
+                                    />
+                                    <CountryFlag
+                                        className={classes.icon}
+                                        countryCode={node.countryCode}
+                                    />
+
+                                    <span>{node.nodeName}</span>
+                                </>
+                            )
+                        },
+                        {
+                            accessor: 'configProfileName',
+                            title: 'Config Profile',
+                            textAlign: 'right',
+                            width: 200,
+                            render: (node) => node.configProfileName
+                        },
+                        {
+                            accessor: 'activeSquads',
+                            textAlign: 'right',
+                            width: 200,
+                            title: t('constants.internal-squads'),
+                            render: (node) => node.activeSquads.length
+                        }
+                    ]}
+                    highlightOnHover
+                    idAccessor="uuid"
+                    records={userAccessibleNodes.activeNodes}
+                    rowExpansion={{
+                        allowMultiple: true,
+                        expanded: {
+                            recordIds: expandedNodeIds,
+                            onRecordIdsChange: setExpandedNodeIds
+                        },
+                        content: ({ record: node }) => (
+                            <DataTable
+                                columns={[
+                                    {
+                                        accessor: 'squadName',
+                                        noWrap: true,
+                                        render: (squad: ActiveSquad) => (
+                                            <Box component="span" ml={20}>
+                                                <TbChevronRight
+                                                    className={clsx(
+                                                        classes.icon,
+                                                        classes.expandIcon,
+                                                        {
+                                                            [classes.expandIconRotated]:
+                                                                expandedSquadIds.includes(
+                                                                    `${node.uuid}-${squad.squadName}`
+                                                                )
+                                                        }
+                                                    )}
+                                                />
+                                                <TbCirclesRelation className={classes.icon} />
+                                                <span>{squad.squadName}</span>
+                                            </Box>
+                                        )
+                                    },
+                                    {
+                                        accessor: 'activeInbounds',
+                                        textAlign: 'left',
+                                        width: 400,
+                                        render: (squad: ActiveSquad) => squad.activeInbounds.length
+                                    }
+                                ]}
+                                highlightOnHover
+                                idAccessor={(squad: ActiveSquad) =>
+                                    `${node.uuid}-${squad.squadName}`
+                                }
+                                noHeader
+                                records={node.activeSquads}
+                                rowExpansion={{
+                                    allowMultiple: true,
+                                    expanded: {
+                                        recordIds: expandedSquadIds,
+                                        onRecordIdsChange: setExpandedSquadIds
+                                    },
+                                    content: ({ record: squad }) => (
+                                        <DataTable
+                                            columns={[
+                                                {
+                                                    accessor: 'inbound',
+                                                    noWrap: true,
+                                                    render: (inbound: ActiveInbound) => (
+                                                        <Box component="span" ml={60}>
+                                                            <PiTag className={classes.icon} />
+                                                            <span>{inbound}</span>
+                                                        </Box>
+                                                    )
+                                                }
+                                            ]}
+                                            idAccessor={(inbound: ActiveInbound) =>
+                                                `${node.uuid}-${squad.squadName}-${inbound}`
+                                            }
+                                            noHeader
+                                            records={squad.activeInbounds}
+                                            withColumnBorders
+                                            withRowBorders
+                                        />
+                                    )
+                                }}
+                                withColumnBorders
+                            />
+                        )
+                    }}
+                    withColumnBorders
+                    withRowBorders
+                    withTableBorder
+                />
             </Stack>
         )
     }
@@ -345,13 +243,11 @@ export const UserAccessibleNodesModalWidget = () => {
             keepMounted={false}
             onClose={close}
             opened={isOpen}
-            overlayProps={{ backgroundOpacity: 0.6, blur: 0 }}
-            padding="lg"
             position="right"
             size="800px"
             title={
                 <BaseOverlayHeader
-                    IconComponent={IconServer}
+                    IconComponent={TbServer}
                     iconVariant="gradient-teal"
                     title={t('user-accessible-nodes.modal.widget.user-accessible-nodes')}
                 />

@@ -96,6 +96,7 @@ export const useDeleteUser = createMutationHook({
 
 export const useRevokeUserSubscription = createMutationHook({
     endpoint: RevokeUserSubscriptionCommand.TSQ_url,
+    bodySchema: RevokeUserSubscriptionCommand.RequestBodySchema,
     responseSchema: RevokeUserSubscriptionCommand.ResponseSchema,
     routeParamsSchema: RevokeUserSubscriptionCommand.RequestSchema,
     requestMethod: RevokeUserSubscriptionCommand.endpointDetails.REQUEST_METHOD,

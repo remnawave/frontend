@@ -342,7 +342,9 @@
             "danger-zone": "Danger Zone",
             "information": "Information",
             "detailed-info": "Detailed Info",
-            "subscription": "Subscription"
+            "subscription": "Subscription",
+            "accessible-nodes": "Accessible Nodes",
+            "qr-code": "QR Code"
         }
     },
     "empty-page": {
@@ -480,6 +482,7 @@
             "no-data-available-for-the-selected-period": "No data available for the selected period",
             "click-to-see-all": "Click to see all",
             "no-data-available": "No data available",
+            "current-month": "Current Month",
             "7-days": "7 days",
             "14-days": "14 days",
             "30-days": "30 days",
@@ -729,7 +732,8 @@
         "feature": {
             "subscription-links": "Subscription links",
             "loading-subscription-links": "Loading subscription links...",
-            "no-available-hosts-found-for-this-user": "No available hosts found for this user"
+            "no-available-hosts-found-for-this-user": "No available hosts found for this user",
+            "connection-keys": "Connection Keys"
         }
     },
     "user-usage-modal": {
@@ -759,7 +763,8 @@
     },
     "get-user-usage": {
         "feature": {
-            "show-usage": "Show usage"
+            "show-usage": "Show usage",
+            "usage": "Usage"
         }
     },
     "detailed-user-info-drawer": {
@@ -877,7 +882,7 @@
             "delete-device": "Delete Device",
             "device": "Device",
             "devices": "Devices",
-            "hwid-devices": "HWIDs and Devices",
+            "hwid-devices": "HWID Devices",
             "important-note": "Important note",
             "important-note-line-1": "This feature is only available with the",
             "important-note-line-2": ".env value.",
@@ -1679,7 +1684,9 @@
         "widget": {
             "user-status": "User status",
             "empty-hosts": "Empty Hosts",
-            "empty-internal-squads": "Empty Internal Squads"
+            "empty-internal-squads": "Empty Internal Squads",
+            "hwid-max-devices-exceeded": "HWID: Max Devices Exceeded",
+            "hwid-not-supported": "HWID: Not Supported"
         }
     },
     "multi-select-nodes": {
@@ -1864,7 +1871,9 @@
             "meta-title": "Meta Title",
             "meta-description": "Meta Description",
             "show-connection-keys": "Show Connection Keys",
-            "show-or-hide-raw-connection-keys": "Show or hide raw connection keys"
+            "show-or-hide-raw-connection-keys": "Show or hide raw connection keys",
+            "hide-get-link-button": "Hide \"Get Link\" Button",
+            "hide-the-get-link-button-top-right-corner": "Hide the \"Get Link\" button from the top right corner"
         }
     },
     "import-config-sections": {
@@ -1879,6 +1888,30 @@
             "import-platforms": "Import Platforms",
             "replace-base-translation-and-locales": "Replace Base Translation and Locales",
             "import-base-translations": "Import Base Translations"
+        }
+    },
+    "revoke-subscription-user": {
+        "feature": {
+            "full-revoke": "Full Revoke",
+            "revoke": "Revoke",
+            "passwords-only": "Passwords Only",
+            "passwords-only-decription": "Only regenerates Connection Passwords, Subscription URL stays the same",
+            "full-revoke-description": "Regenerates Subscription URL and Connection Passwords"
+        }
+    },
+    "nodes-quick-stats": {
+        "widget": {
+            "users-online": "Users Online",
+            "online-nodes": "Online Nodes",
+            "offline-nodes": "Offline Nodes",
+            "cumulative-traffic": "Cumulative Traffic"
+        }
+    },
+    "template-info-popover": {
+        "shared": {
+            "template-variables": "Template Variables",
+            "available-variables-are-listed-below": "Available variables are listed below.",
+            "you-can-use-template-variables-in-this-field": "You can use template variables in this field."
         }
     }
 }

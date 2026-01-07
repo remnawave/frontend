@@ -3,6 +3,7 @@ import { TbAlertCircle, TbCheck, TbLink, TbX } from 'react-icons/tb'
 import { useTranslation } from 'react-i18next'
 import { useEffect, useState } from 'react'
 
+import { MODALS, useModalsStoreOpenWithData } from '@entities/dashboard/modal-store'
 import { LottieCheckmarkShared } from '@shared/ui/lotties/checkmark'
 import { useNodesStoreActions } from '@entities/dashboard/nodes'
 import { LottieStopShared } from '@shared/ui/lotties/stop'
@@ -25,6 +26,8 @@ export const CreateNodeStep3Status = ({ nodeUuid, onClose }: IProps) => {
     const [status, setStatus] = useState<STATUS>(STATUS.CONNECTING)
     const [errorMessage, setErrorMessage] = useState<null | string>(null)
     const actions = useNodesStoreActions()
+
+    const openModalWithData = useModalsStoreOpenWithData()
 
     const { data: node, isLoading } = useGetNode({
         route: {
@@ -83,8 +86,7 @@ export const CreateNodeStep3Status = ({ nodeUuid, onClose }: IProps) => {
         onClose()
 
         setTimeout(() => {
-            actions.setNode(node)
-            actions.toggleEditModal(true)
+            openModalWithData(MODALS.EDIT_NODE_BY_UUID_MODAL, { nodeUuid: node.uuid })
         }, 300)
     }
 

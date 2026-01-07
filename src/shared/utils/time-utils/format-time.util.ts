@@ -1,6 +1,6 @@
 import dayjs from 'dayjs'
 
-type TTemplatePreset = 'D MMM' | 'D MMMM YYYY'
+type TTemplatePreset = 'DD.MM.YYYY HH:mm:ss' | 'D MMM' | 'D MMMM YYYY'
 
 export const formatTimeUtil = (
     time: null | number | string | undefined,

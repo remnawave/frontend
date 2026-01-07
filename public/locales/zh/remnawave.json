@@ -342,7 +342,9 @@
             "danger-zone": "危险操作区",
             "information": "信息",
             "detailed-info": "详细信息",
-            "subscription": "订阅"
+            "subscription": "订阅",
+            "accessible-nodes": "可访问节点",
+            "qr-code": "二维码"
         }
     },
     "empty-page": {
@@ -480,6 +482,7 @@
             "no-data-available-for-the-selected-period": "所选时段无可用数据",
             "click-to-see-all": "点击查看全部",
             "no-data-available": "无可用数据",
+            "current-month": "本月",
             "7-days": "7 天",
             "14-days": "14 天",
             "30-days": "30 天",
@@ -729,7 +732,8 @@
         "feature": {
             "subscription-links": "订阅链接",
             "loading-subscription-links": "正在加载订阅链接...",
-            "no-available-hosts-found-for-this-user": "未找到此用户的可用主机"
+            "no-available-hosts-found-for-this-user": "未找到此用户的可用主机",
+            "connection-keys": "连接密钥"
         }
     },
     "user-usage-modal": {
@@ -759,7 +763,8 @@
     },
     "get-user-usage": {
         "feature": {
-            "show-usage": "显示用量"
+            "show-usage": "显示用量",
+            "usage": "使用情况"
         }
     },
     "detailed-user-info-drawer": {
@@ -877,7 +882,7 @@
             "delete-device": "删除设备",
             "device": "设备",
             "devices": "设备",
-            "hwid-devices": "HWID 和设备",
+            "hwid-devices": "HWID 设备列表",
             "important-note": "重要提示",
             "important-note-line-1": "此功能仅在",
             "important-note-line-2": ".env 值存在时可用。",
@@ -1679,7 +1684,9 @@
         "widget": {
             "user-status": "用户状态",
             "empty-hosts": "清空主机",
-            "empty-internal-squads": "清空内部小队"
+            "empty-internal-squads": "清空内部小队",
+            "hwid-max-devices-exceeded": "HWID：超过最大设备数量",
+            "hwid-not-supported": "HWID：不支持"
         }
     },
     "multi-select-nodes": {
@@ -1864,7 +1871,9 @@
             "meta-title": "Meta标题",
             "meta-description": "Meta 描述",
             "show-connection-keys": "显示连接密钥",
-            "show-or-hide-raw-connection-keys": "是否显示原始连接密钥"
+            "show-or-hide-raw-connection-keys": "是否显示原始连接密钥",
+            "hide-get-link-button": "隐藏“获取链接”按钮",
+            "hide-the-get-link-button-top-right-corner": "从右上角隐藏“获取链接”按钮"
         }
     },
     "import-config-sections": {
@@ -1879,6 +1888,30 @@
             "import-platforms": "导入平台",
             "replace-base-translation-and-locales": "替换基础翻译和语言",
             "import-base-translations": "导入基础翻译"
+        }
+    },
+    "revoke-subscription-user": {
+        "feature": {
+            "full-revoke": "完全撤销",
+            "revoke": "撤销",
+            "passwords-only": "仅密码",
+            "passwords-only-decription": "只重新生成连接密码，订阅URL保持相同",
+            "full-revoke-description": "重新生成订阅的 URL 和连接密码"
+        }
+    },
+    "nodes-quick-stats": {
+        "widget": {
+            "users-online": "在线用户",
+            "online-nodes": "在线节点",
+            "offline-nodes": "离线节点",
+            "cumulative-traffic": "累计流量"
+        }
+    },
+    "template-info-popover": {
+        "shared": {
+            "template-variables": "模板变量",
+            "available-variables-are-listed-below": "以下列出了可用变量。",
+            "you-can-use-template-variables-in-this-field": "您可以在此字段中使用模板变量。"
         }
     }
 }
