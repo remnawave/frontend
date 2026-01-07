@@ -17,7 +17,7 @@ import {
     PiUsersDuotone,
     PiWarningCircle
 } from 'react-icons/pi'
-import { UpdateNodeCommand } from '@remnawave/backend-contract'
+import { GetOneNodeCommand, UpdateNodeCommand } from '@remnawave/backend-contract'
 import { TbPower, TbWifi, TbWifiOff } from 'react-icons/tb'
 import { memo, useCallback, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -31,22 +31,24 @@ import { XrayLogo } from '@shared/ui/logos'
 import { queryClient } from '@shared/api'
 import { Logo } from '@shared/ui'
 
-import { IProps } from './interface'
+interface IProps {
+    node: GetOneNodeCommand.Response['response']
+}
 
-export const NodeDetailsCardWidget = memo(({ node, fetchedNode }: IProps) => {
+export const NodeDetailsCardWidget = memo((props: IProps) => {
+    const { node } = props
+
     const { t } = useTranslation()
-
-    const nodeData = fetchedNode || node
 
     const mutationParams = {
         route: {
-            uuid: nodeData.uuid
+            uuid: node.uuid
         },
         mutationFns: {
-            onSuccess: async (nodeData: UpdateNodeCommand.Response['response']) => {
+            onSuccess: async (node: UpdateNodeCommand.Response['response']) => {
                 await queryClient.setQueryData(
-                    QueryKeys.nodes.getNode({ uuid: nodeData.uuid }).queryKey,
-                    nodeData
+                    QueryKeys.nodes.getNode({ uuid: node.uuid }).queryKey,
+                    node
                 )
             }
         }
@@ -72,16 +74,16 @@ export const NodeDetailsCardWidget = memo(({ node, fetchedNode }: IProps) => {
             return { IconComponent, themeIconVariant }
         }
 
-        if (nodeData.isDisabled) {
+        if (node.isDisabled) {
             IconComponent = TbWifiOff
             themeIconVariant = 'gradient-gray'
             return { IconComponent, themeIconVariant }
         }
 
-        if (nodeData.isConnected) {
+        if (node.isConnected) {
             IconComponent = TbWifi
             themeIconVariant = 'gradient-teal'
-        } else if (nodeData.isConnecting) {
+        } else if (node.isConnecting) {
             IconComponent = PiCloudArrowUpDuotone
             themeIconVariant = 'gradient-yellow'
         } else {
@@ -90,21 +92,21 @@ export const NodeDetailsCardWidget = memo(({ node, fetchedNode }: IProps) => {
         }
 
         return { IconComponent, themeIconVariant }
-    }, [nodeData.isConnected, nodeData.isConnecting, nodeData.isDisabled, isConfigMissing])
+    }, [node.isConnected, node.isConnecting, node.isDisabled, isConfigMissing])
 
     const trafficData = useMemo(() => {
         let maxData = '∞'
         let percentage = 0
 
-        const prettyUsedData = prettyBytesToAnyUtil(nodeData.trafficUsedBytes || 0) || '0 B'
+        const prettyUsedData = prettyBytesToAnyUtil(node.trafficUsedBytes || 0) || '0 B'
 
-        if (nodeData.isTrafficTrackingActive) {
-            maxData = prettyBytesToAnyUtil(nodeData.trafficLimitBytes || 0) || '∞'
-            if (nodeData.trafficLimitBytes === 0) {
+        if (node.isTrafficTrackingActive) {
+            maxData = prettyBytesToAnyUtil(node.trafficLimitBytes || 0) || '∞'
+            if (node.trafficLimitBytes === 0) {
                 percentage = 100
             } else {
                 percentage = Math.floor(
-                    ((nodeData.trafficUsedBytes ?? 0) * 100) / (nodeData.trafficLimitBytes ?? 0)
+                    ((node.trafficUsedBytes ?? 0) * 100) / (node.trafficLimitBytes ?? 0)
                 )
             }
         }
@@ -113,9 +115,9 @@ export const NodeDetailsCardWidget = memo(({ node, fetchedNode }: IProps) => {
             maxData,
             percentage,
             prettyUsedData,
-            isUnlimited: !nodeData.isTrafficTrackingActive || nodeData.trafficLimitBytes === 0
+            isUnlimited: !node.isTrafficTrackingActive || node.trafficLimitBytes === 0
         }
-    }, [nodeData.trafficUsedBytes, nodeData.trafficLimitBytes, nodeData.isTrafficTrackingActive])
+    }, [node.trafficUsedBytes, node.trafficLimitBytes, node.isTrafficTrackingActive])
 
     const getProgressColor = useCallback(() => {
         if (trafficData.isUnlimited) return 'teal'
@@ -125,7 +127,7 @@ export const NodeDetailsCardWidget = memo(({ node, fetchedNode }: IProps) => {
     }, [trafficData.percentage, trafficData.isUnlimited])
 
     const handleToggleNodeStatus = () => {
-        if (nodeData.isDisabled) {
+        if (node.isDisabled) {
             enableNode({})
         } else {
             disableNode({})
@@ -145,7 +147,7 @@ export const NodeDetailsCardWidget = memo(({ node, fetchedNode }: IProps) => {
                     />
 
                     <Group gap="xs">
-                        {nodeData.isConnected && (
+                        {node.isConnected && (
                             <Tooltip
                                 label={t('node-stats.card.represents-the-uptime-of-the-xray-core')}
                             >
@@ -157,34 +159,34 @@ export const NodeDetailsCardWidget = memo(({ node, fetchedNode }: IProps) => {
                                     variant="light"
                                     visibleFrom="sm"
                                 >
-                                    {getXrayUptimeUtil(nodeData.xrayUptime)}
+                                    {getXrayUptimeUtil(node.xrayUptime)}
                                 </Badge>
                             </Tooltip>
                         )}
                         {!isConfigMissing && (
                             <Tooltip
                                 label={
-                                    nodeData.isDisabled
+                                    node.isDisabled
                                         ? t('node-details-card.widget.enable-node')
                                         : t('node-details-card.widget.disable-node')
                                 }
                             >
                                 <ActionIcon
-                                    color={nodeData.isDisabled ? 'teal' : 'red'}
+                                    color={node.isDisabled ? 'teal' : 'red'}
                                     disabled={isDisableNodePending || isEnableNodePending}
                                     onClick={handleToggleNodeStatus}
                                     size="md"
                                     style={{
-                                        backgroundColor: nodeData.isDisabled
+                                        backgroundColor: node.isDisabled
                                             ? 'rgba(45, 212, 191, 0.15)'
                                             : 'rgba(239, 68, 68, 0.15)',
                                         border: `1px solid ${
-                                            nodeData.isDisabled
+                                            node.isDisabled
                                                 ? 'rgba(45, 212, 191, 0.3)'
                                                 : 'rgba(239, 68, 68, 0.3)'
                                         }`,
                                         boxShadow: `0 0 10px ${
-                                            nodeData.isDisabled
+                                            node.isDisabled
                                                 ? 'rgba(45, 212, 191, 0.2)'
                                                 : 'rgba(239, 68, 68, 0.2)'
                                         }`
@@ -193,14 +195,14 @@ export const NodeDetailsCardWidget = memo(({ node, fetchedNode }: IProps) => {
                                 >
                                     {isDisableNodePending || isEnableNodePending ? (
                                         <Loader
-                                            color={nodeData.isDisabled ? 'teal' : 'red'}
+                                            color={node.isDisabled ? 'teal' : 'red'}
                                             size="xs"
                                         />
                                     ) : (
                                         <TbPower
                                             size={16}
                                             style={{
-                                                color: nodeData.isDisabled
+                                                color: node.isDisabled
                                                     ? 'var(--mantine-color-teal-4)'
                                                     : 'var(--mantine-color-red-4)'
                                             }}
@@ -260,7 +262,7 @@ export const NodeDetailsCardWidget = memo(({ node, fetchedNode }: IProps) => {
                         value={trafficData.isUnlimited ? 100 : trafficData.percentage}
                     />
 
-                    {nodeData.isTrafficTrackingActive && nodeData.trafficResetDay && (
+                    {node.isTrafficTrackingActive && node.trafficResetDay && (
                         <Group gap={4} justify="center" mt={6}>
                             <PiArrowsCounterClockwise
                                 color="var(--mantine-color-dimmed)"
@@ -268,13 +270,13 @@ export const NodeDetailsCardWidget = memo(({ node, fetchedNode }: IProps) => {
                             />
                             <Text c="dimmed" size="xs">
                                 {t('node-stats.card.traffic-refill-in-days')}{' '}
-                                {getNodeResetDaysUtil(nodeData.trafficResetDay)}
+                                {getNodeResetDaysUtil(node.trafficResetDay)}
                             </Text>
                         </Group>
                     )}
                 </Box>
             </SectionCard.Section>
-            {nodeData.isConnected && (
+            {node.isConnected && (
                 <SectionCard.Section>
                     <SimpleGrid
                         cols={{
@@ -289,11 +291,11 @@ export const NodeDetailsCardWidget = memo(({ node, fetchedNode }: IProps) => {
                             radius="md"
                             style={{
                                 background:
-                                    nodeData.usersOnline! > 0
+                                    node.usersOnline! > 0
                                         ? 'rgba(45, 212, 191, 0.08)'
                                         : 'rgba(107, 114, 128, 0.08)',
                                 border: `1px solid ${
-                                    nodeData.usersOnline! > 0
+                                    node.usersOnline! > 0
                                         ? 'rgba(45, 212, 191, 0.2)'
                                         : 'rgba(107, 114, 128, 0.2)'
                                 }`
@@ -302,23 +304,23 @@ export const NodeDetailsCardWidget = memo(({ node, fetchedNode }: IProps) => {
                             <Group gap="xs" justify="center">
                                 <PiUsersDuotone
                                     color={
-                                        nodeData.usersOnline! > 0
+                                        node.usersOnline! > 0
                                             ? 'var(--mantine-color-teal-5)'
                                             : 'var(--mantine-color-gray-6)'
                                     }
                                     size={16}
                                 />
                                 <Text
-                                    c={nodeData.usersOnline! > 0 ? 'teal.5' : 'gray.6'}
+                                    c={node.usersOnline! > 0 ? 'teal.5' : 'gray.6'}
                                     fw={600}
                                     size="sm"
                                 >
-                                    {nodeData.usersOnline}
+                                    {node.usersOnline}
                                 </Text>
                             </Group>
                         </Paper>
 
-                        {nodeData.xrayVersion && (
+                        {node.xrayVersion && (
                             <Paper
                                 p="xs"
                                 radius="md"
@@ -331,14 +333,14 @@ export const NodeDetailsCardWidget = memo(({ node, fetchedNode }: IProps) => {
                                     <Group gap="xs" justify="center">
                                         <XrayLogo color="var(--mantine-color-violet-5)" size={16} />
                                         <Text c="violet.5" fw={600} size="sm">
-                                            {nodeData.xrayVersion}
+                                            {node.xrayVersion}
                                         </Text>
                                     </Group>
                                 </Tooltip>
                             </Paper>
                         )}
 
-                        {nodeData.xrayUptime !== '0' && (
+                        {node.xrayUptime !== '0' && (
                             <Paper
                                 hiddenFrom="sm"
                                 p="xs"
@@ -361,14 +363,14 @@ export const NodeDetailsCardWidget = memo(({ node, fetchedNode }: IProps) => {
                                             size="sm"
                                             style={{ textTransform: 'uppercase' }}
                                         >
-                                            {getXrayUptimeUtil(nodeData.xrayUptime)}
+                                            {getXrayUptimeUtil(node.xrayUptime)}
                                         </Text>
                                     </Group>
                                 </Tooltip>
                             </Paper>
                         )}
 
-                        {nodeData.nodeVersion && (
+                        {node.nodeVersion && (
                             <Paper
                                 p="xs"
                                 radius="md"
@@ -383,7 +385,7 @@ export const NodeDetailsCardWidget = memo(({ node, fetchedNode }: IProps) => {
                                     <Group gap="xs" justify="center">
                                         <Logo color="var(--mantine-color-indigo-5)" size={16} />
                                         <Text c="indigo.5" fw={600} size="sm">
-                                            {nodeData.nodeVersion}
+                                            {node.nodeVersion}
                                         </Text>
                                     </Group>
                                 </Tooltip>
