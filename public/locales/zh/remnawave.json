@@ -1901,17 +1901,17 @@
     },
     "nodes-quick-stats": {
         "widget": {
-            "users-online": "Users Online",
-            "online-nodes": "Online Nodes",
-            "offline-nodes": "Offline Nodes",
-            "cumulative-traffic": "Cumulative Traffic"
+            "users-online": "在线用户",
+            "online-nodes": "在线节点",
+            "offline-nodes": "离线节点",
+            "cumulative-traffic": "累计流量"
         }
     },
     "template-info-popover": {
         "shared": {
-            "template-variables": "Template Variables",
-            "available-variables-are-listed-below": "Available variables are listed below.",
-            "you-can-use-template-variables-in-this-field": "You can use template variables in this field."
+            "template-variables": "模板变量",
+            "available-variables-are-listed-below": "以下列出了可用变量。",
+            "you-can-use-template-variables-in-this-field": "您可以在此字段中使用模板变量。"
         }
     }
 }
