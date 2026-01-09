@@ -42,9 +42,6 @@ export const ROUTES = {
         CRM: {
             ROOT: '/dashboard/crm',
             INFRA_BILLING: '/dashboard/crm/infra-billing'
-        },
-        EASTER_EGG: {
-            PROXY_DEFENSE: '/dashboard/proxy-defense'
         }
     }
 } as const
