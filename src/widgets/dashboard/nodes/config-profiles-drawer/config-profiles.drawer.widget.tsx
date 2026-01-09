@@ -59,7 +59,7 @@ export const ConfigProfilesDrawer = (props: IProps) => {
             setSearchQuery('')
             setDebouncedSearchQuery('')
         }
-    }, [opened, activeConfigProfileInbounds, activeConfigProfileUuid])
+    }, [opened])
 
     const filteredProfiles = useMemo(() => {
         if (!configProfiles?.configProfiles) return []
