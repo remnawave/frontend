@@ -4,6 +4,7 @@ import { Button, Stack } from '@mantine/core'
 import { useState } from 'react'
 
 import { useOAuth2Authorize } from '@shared/api/hooks'
+import { KeycloakLogo } from '@shared/ui/logos'
 
 import { IProps } from './interfaces/props.interface'
 
@@ -101,6 +102,19 @@ export const OAuth2LoginButtonsFeature = (props: IProps) => {
                     variant="filled"
                 >
                     Yandex
+                </Button>
+            )}
+
+            {authentication.oauth2.providers.keycloak && (
+                <Button
+                    color="#4D4D4D"
+                    leftSection={<KeycloakLogo size={20} />}
+                    loaderProps={{ type: 'dots' }}
+                    loading={loadingProvider === 'keycloak'}
+                    onClick={() => handleOAuth2Login('keycloak')}
+                    variant="filled"
+                >
+                    Keycloak
                 </Button>
             )}
         </Stack>

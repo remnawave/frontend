@@ -33,7 +33,7 @@ import { SettingsCardShared } from '@shared/ui/settings-card'
 import { QueryKeys } from '@shared/api/hooks/keys-factory'
 import { YandexLogo } from '@shared/ui/logos/yandex-logo'
 import { handleFormErrors } from '@shared/utils/misc'
-import { PocketidLogo } from '@shared/ui/logos'
+import { KeycloakLogo, PocketidLogo } from '@shared/ui/logos'
 import { queryClient } from '@shared/api'
 
 interface IProps {
@@ -69,6 +69,13 @@ const getOAuth2ProvidersConfig = () =>
             icon: <YandexLogo size={24} />,
             iconColor: '#FC3F1D',
             fields: ['clientId', 'clientSecret', 'allowedEmails'] as const
+        },
+        {
+            key: 'keycloak' as const,
+            title: 'Keycloak',
+            icon: <KeycloakLogo size={24} />,
+            iconColor: '#4D4D4D',
+            fields: ['domain', 'realm', 'clientId', 'clientSecret', 'seamlessAuth'] as const
         }
     ] as const
 
@@ -97,6 +104,24 @@ const getFieldConfig = (t: TFunction) =>
             description: t('auth-settings.fields.allowedEmails.description'),
             placeholder: t('auth-settings.fields.allowedEmails.placeholder'),
             type: 'tags' as const
+        },
+        domain: {
+            label: t('auth-settings.fields.domain.label', 'Keycloak Domain'),
+            description: t('auth-settings.fields.domain.description', 'Your Keycloak server domain (without https://)'),
+            placeholder: t('auth-settings.fields.domain.placeholder', 'keycloak.example.com'),
+            type: 'text' as const
+        },
+        realm: {
+            label: t('auth-settings.fields.realm.label', 'Realm'),
+            description: t('auth-settings.fields.realm.description', 'Keycloak realm name'),
+            placeholder: t('auth-settings.fields.realm.placeholder', 'master'),
+            type: 'text' as const
+        },
+        seamlessAuth: {
+            label: t('auth-settings.fields.seamlessAuth.label', 'Seamless Authentication'),
+            description: t('auth-settings.fields.seamlessAuth.description', 'Automatically log in after Keycloak authentication'),
+            placeholder: '',
+            type: 'switch' as const
         }
     }) as const
 
@@ -128,7 +153,8 @@ export const AuthentificationSettingsCardWidget = (props: IProps) => {
             oauth2Settings: {
                 github: oauth2Settings.github,
                 pocketid: oauth2Settings.pocketid,
-                yandex: oauth2Settings.yandex
+                yandex: oauth2Settings.yandex,
+                keycloak: oauth2Settings.keycloak
             },
             tgAuthSettings: {
                 enabled: tgAuthSettings.enabled,
@@ -264,6 +290,21 @@ export const AuthentificationSettingsCardWidget = (props: IProps) => {
                                         splitChars={[',', ' ', ';']}
                                         {...form.getInputProps(formPath)}
                                     />
+                                )
+                            }
+
+                            if (fieldConfig.type === 'switch') {
+                                return (
+                                    <Group key={form.key(formPath)} justify="space-between">
+                                        <div>
+                                            <Text size="sm" fw={500}>{fieldConfig.label}</Text>
+                                            <Text size="xs" c="dimmed">{fieldConfig.description}</Text>
+                                        </div>
+                                        <Switch
+                                            color="teal.8"
+                                            {...form.getInputProps(formPath, { type: 'checkbox' })}
+                                        />
+                                    </Group>
                                 )
                             }
 
