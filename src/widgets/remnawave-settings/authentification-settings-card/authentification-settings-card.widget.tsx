@@ -21,6 +21,7 @@ import { zodResolver } from 'mantine-form-zod-resolver'
 import { PiGlobe, PiKey } from 'react-icons/pi'
 import { useDisclosure } from '@mantine/hooks'
 import { useTranslation } from 'react-i18next'
+import { SiKeycloak } from 'react-icons/si'
 import { modals } from '@mantine/modals'
 import { useForm } from '@mantine/form'
 import { TFunction } from 'i18next'
@@ -30,10 +31,9 @@ import { useUpdateRemnawaveSettings } from '@shared/api/hooks/remnawave-settings
 import { HelpActionIconShared, THelpDrawerAvailableScreen } from '@shared/ui/help-drawer'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { SettingsCardShared } from '@shared/ui/settings-card'
+import { PocketidLogo, YandexLogo } from '@shared/ui/logos'
 import { QueryKeys } from '@shared/api/hooks/keys-factory'
-import { YandexLogo } from '@shared/ui/logos/yandex-logo'
 import { handleFormErrors } from '@shared/utils/misc'
-import { KeycloakLogo, PocketidLogo } from '@shared/ui/logos'
 import { queryClient } from '@shared/api'
 
 interface IProps {
@@ -73,9 +73,16 @@ const getOAuth2ProvidersConfig = () =>
         {
             key: 'keycloak' as const,
             title: 'Keycloak',
-            icon: <KeycloakLogo size={24} />,
-            iconColor: '#4D4D4D',
-            fields: ['domain', 'realm', 'clientId', 'clientSecret', 'seamlessAuth'] as const
+            icon: <SiKeycloak color="#FFFFFF" size={24} />,
+            iconColor: '#000000',
+            fields: [
+                'clientId',
+                'clientSecret',
+                'realm',
+                'frontendDomain',
+                'keycloakDomain',
+                'allowedEmails'
+            ] as const
         }
     ] as const
 
@@ -105,23 +112,23 @@ const getFieldConfig = (t: TFunction) =>
             placeholder: t('auth-settings.fields.allowedEmails.placeholder'),
             type: 'tags' as const
         },
-        domain: {
-            label: t('auth-settings.fields.domain.label', 'Keycloak Domain'),
-            description: t('auth-settings.fields.domain.description', 'Your Keycloak server domain (without https://)'),
-            placeholder: t('auth-settings.fields.domain.placeholder', 'keycloak.example.com'),
-            type: 'text' as const
-        },
         realm: {
-            label: t('auth-settings.fields.realm.label', 'Realm'),
-            description: t('auth-settings.fields.realm.description', 'Keycloak realm name'),
-            placeholder: t('auth-settings.fields.realm.placeholder', 'master'),
+            label: t('auth-settings.fields.realm.label'),
+            description: t('auth-settings.fields.realm.description'),
+            placeholder: 'master',
             type: 'text' as const
         },
-        seamlessAuth: {
-            label: t('auth-settings.fields.seamlessAuth.label', 'Seamless Authentication'),
-            description: t('auth-settings.fields.seamlessAuth.description', 'Automatically log in after Keycloak authentication'),
-            placeholder: '',
-            type: 'switch' as const
+        frontendDomain: {
+            label: t('auth-settings.passkey.rpId.label'),
+            description: t('auth-settings.passkey.rpId.description'),
+            placeholder: 'docs.rw',
+            type: 'text' as const
+        },
+        keycloakDomain: {
+            label: t('auth-settings.fields.keycloakDomain.label'),
+            description: t('auth-settings.fields.keycloakDomain.description'),
+            placeholder: 'keycloak.docs.rw',
+            type: 'text' as const
         }
     }) as const
 
@@ -290,21 +297,6 @@ export const AuthentificationSettingsCardWidget = (props: IProps) => {
                                         splitChars={[',', ' ', ';']}
                                         {...form.getInputProps(formPath)}
                                     />
-                                )
-                            }
-
-                            if (fieldConfig.type === 'switch') {
-                                return (
-                                    <Group key={form.key(formPath)} justify="space-between">
-                                        <div>
-                                            <Text size="sm" fw={500}>{fieldConfig.label}</Text>
-                                            <Text size="xs" c="dimmed">{fieldConfig.description}</Text>
-                                        </div>
-                                        <Switch
-                                            color="teal.8"
-                                            {...form.getInputProps(formPath, { type: 'checkbox' })}
-                                        />
-                                    </Group>
                                 )
                             }
 

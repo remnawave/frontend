@@ -1,7 +1,6 @@
-import { Badge, Box, Center, Divider, Group, Image, Loader, Stack, Text, Title } from '@mantine/core'
+import { Badge, Box, Center, Divider, Group, Image, Stack, Text, Title } from '@mantine/core'
 import { GetStatusCommand } from '@remnawave/backend-contract'
-import { useEffect, useMemo, useRef, useState } from 'react'
-import { notifications } from '@mantine/notifications'
+import { useMemo } from 'react'
 
 import { TelegramLoginButtonFeature } from '@features/auth/telegram-login-button/telegram-login-button.feature'
 import { OAuth2LoginButtonsFeature } from '@features/auth/oauth2-login-button/oauth2-login-button.feature'
@@ -10,7 +9,6 @@ import { useGetAuthStatus } from '@shared/api/hooks/auth/auth.query.hooks'
 import { RegisterFormFeature } from '@features/auth/register-form'
 import { LoginFormFeature } from '@features/auth/login-form'
 import { parseColoredTextUtil } from '@shared/utils/misc'
-import { useOAuth2Authorize } from '@shared/api/hooks'
 import { Logo, Page } from '@shared/ui'
 
 const getAuthMethods = (authStatus: GetStatusCommand.Response['response'] | undefined) => {
@@ -98,54 +96,8 @@ const AlternativeAuthMethods = ({
     </Center>
 )
 
-const SEAMLESS_AUTH_KEY = 'keycloak_seamless_attempted'
-
 export const LoginPage = () => {
     const { data: authStatus } = useGetAuthStatus()
-    const [isSeamlessRedirecting, setIsSeamlessRedirecting] = useState(false)
-    const seamlessAttempted = useRef(false)
-
-    const { mutate: oauth2Authorize } = useOAuth2Authorize({
-        mutationFns: {
-            onSuccess: (data) => {
-                if (data.authorizationUrl) {
-                    sessionStorage.setItem(SEAMLESS_AUTH_KEY, 'true')
-                    window.location.assign(data.authorizationUrl)
-                }
-            },
-            onError: (error) => {
-                setIsSeamlessRedirecting(false)
-                sessionStorage.removeItem(SEAMLESS_AUTH_KEY)
-                notifications.show({
-                    title: 'Keycloak Authentication',
-                    message: error.message || 'Seamless authentication failed',
-                    color: 'red'
-                })
-            }
-        }
-    })
-
-    // Seamless Keycloak authentication
-    useEffect(() => {
-        if (seamlessAttempted.current) return
-        if (!authStatus?.authentication?.oauth2?.providers?.keycloak) return
-        if (!authStatus?.authentication?.oauth2?.keycloakSeamlessAuth) return
-
-        // Check if we already attempted seamless auth in this session
-        const alreadyAttempted = sessionStorage.getItem(SEAMLESS_AUTH_KEY)
-        if (alreadyAttempted) {
-            sessionStorage.removeItem(SEAMLESS_AUTH_KEY)
-            return
-        }
-
-        seamlessAttempted.current = true
-        setIsSeamlessRedirecting(true)
-        oauth2Authorize({
-            variables: {
-                provider: 'keycloak'
-            }
-        })
-    }, [authStatus, oauth2Authorize])
 
     const titleParts = useMemo(() => {
         if (authStatus?.branding.title) {
@@ -160,20 +112,6 @@ export const LoginPage = () => {
 
     const isRegister = !authStatus?.isLoginAllowed && authStatus?.isRegisterAllowed
     const authMethods = getAuthMethods(authStatus)
-
-    // Show loading while seamless auth is in progress
-    if (isSeamlessRedirecting) {
-        return (
-            <Page title="Login">
-                <Center style={{ minHeight: '60vh' }}>
-                    <Stack align="center" gap="md">
-                        <Loader size="xl" variant="dots" />
-                        <Text c="dimmed">Redirecting to Keycloak...</Text>
-                    </Stack>
-                </Center>
-            </Page>
-        )
-    }
 
     return (
         <Page title="Login">
