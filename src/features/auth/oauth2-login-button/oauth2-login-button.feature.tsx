@@ -1,6 +1,7 @@
 import { TOAuth2ProvidersKeys } from '@remnawave/backend-contract'
 import { BiLogoGithub } from 'react-icons/bi'
 import { Button, Stack } from '@mantine/core'
+import { SiKeycloak } from 'react-icons/si'
 import { useState } from 'react'
 
 import { useOAuth2Authorize } from '@shared/api/hooks'
@@ -101,6 +102,19 @@ export const OAuth2LoginButtonsFeature = (props: IProps) => {
                     variant="filled"
                 >
                     Yandex
+                </Button>
+            )}
+
+            {authentication.oauth2.providers.keycloak && (
+                <Button
+                    color="#000000"
+                    leftSection={<SiKeycloak size={20} />}
+                    loaderProps={{ type: 'dots' }}
+                    loading={loadingProvider === 'keycloak'}
+                    onClick={() => handleOAuth2Login('keycloak')}
+                    variant="filled"
+                >
+                    Keycloak
                 </Button>
             )}
         </Stack>
