@@ -1576,11 +1576,11 @@
             },
             "realm": {
                 "label": "Realm",
-                "description": "Keycloak realm name"
+                "description": "Keycloak realm 名"
             },
             "keycloakDomain": {
-                "label": "Keycloak Domain",
-                "description": "Keycloak server domain without protocol (e.g., keycloak.docs.rw)"
+                "label": "Keycloak 域",
+                "description": "无协议头的 Keycloak 服务器域 (例如keycloak.docs.rw)"
             }
         }
     },
