@@ -1573,6 +1573,14 @@
                 "label": "允许的电子邮件",
                 "description": "允许的电子邮件地址列表。",
                 "placeholder": "请输入电子邮箱"
+            },
+            "realm": {
+                "label": "Realm",
+                "description": "Keycloak realm 名"
+            },
+            "keycloakDomain": {
+                "label": "Keycloak 域",
+                "description": "无协议头的 Keycloak 服务器域 (例如keycloak.docs.rw)"
             }
         }
     },

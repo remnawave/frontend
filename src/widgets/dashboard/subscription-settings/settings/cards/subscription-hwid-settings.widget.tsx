@@ -120,8 +120,9 @@ export const SubscriptionHwidSettingsWidget = (props: IProps) => {
                             color="grape"
                             component={Link}
                             leftSection={<PiGear size={px('1.2rem')} />}
+                            rel="noopener noreferrer"
                             size="md"
-                            target="_blank,noopener noreferrer"
+                            target="_blank"
                             to="https://docs.rw/docs/features/hwid-device-limit"
                             variant="light"
                             w="fit-content"

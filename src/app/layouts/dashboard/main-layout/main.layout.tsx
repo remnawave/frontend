@@ -14,7 +14,6 @@ import { SidebarTitleShared } from '@shared/ui/sidebar/sidebar-title'
 import { SidebarLogoShared } from '@shared/ui/sidebar/sidebar-logo'
 import { HeaderControls } from '@shared/ui/header-buttons'
 import { HelpDrawerShared } from '@shared/ui/help-drawer'
-import { GameModalShared } from '@shared/ui/sidebar'
 
 import { Navigation } from './navbar/navigation.layout'
 import classes from './Main.module.css'
@@ -126,7 +125,6 @@ export function MainLayout() {
                 </AppShell.Section>
 
                 <AppShell.Section className={classes.footerSection}>
-                    <GameModalShared />
                     {isSocialButton && (
                         <Group justify="center" mt="md" style={{ flexShrink: 0 }}>
                             <HeaderControls

@@ -269,6 +269,7 @@ export const BulkAllUserActionsUpdateTabFeature = (props: IProps) => {
                                 <Code>true</Code>.{' '}
                                 <Anchor
                                     href="https://docs.rw/docs/features/hwid-device-limit"
+                                    rel="noopener noreferrer"
                                     target="_blank"
                                 >
                                     {t('create-user-modal.widget.hwid-user-limit-line-3')}

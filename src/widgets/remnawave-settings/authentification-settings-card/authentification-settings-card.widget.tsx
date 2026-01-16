@@ -21,6 +21,7 @@ import { zodResolver } from 'mantine-form-zod-resolver'
 import { PiGlobe, PiKey } from 'react-icons/pi'
 import { useDisclosure } from '@mantine/hooks'
 import { useTranslation } from 'react-i18next'
+import { SiKeycloak } from 'react-icons/si'
 import { modals } from '@mantine/modals'
 import { useForm } from '@mantine/form'
 import { TFunction } from 'i18next'
@@ -30,10 +31,9 @@ import { useUpdateRemnawaveSettings } from '@shared/api/hooks/remnawave-settings
 import { HelpActionIconShared, THelpDrawerAvailableScreen } from '@shared/ui/help-drawer'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { SettingsCardShared } from '@shared/ui/settings-card'
+import { PocketidLogo, YandexLogo } from '@shared/ui/logos'
 import { QueryKeys } from '@shared/api/hooks/keys-factory'
-import { YandexLogo } from '@shared/ui/logos/yandex-logo'
 import { handleFormErrors } from '@shared/utils/misc'
-import { PocketidLogo } from '@shared/ui/logos'
 import { queryClient } from '@shared/api'
 
 interface IProps {
@@ -69,6 +69,20 @@ const getOAuth2ProvidersConfig = () =>
             icon: <YandexLogo size={24} />,
             iconColor: '#FC3F1D',
             fields: ['clientId', 'clientSecret', 'allowedEmails'] as const
+        },
+        {
+            key: 'keycloak' as const,
+            title: 'Keycloak',
+            icon: <SiKeycloak color="#FFFFFF" size={24} />,
+            iconColor: '#000000',
+            fields: [
+                'clientId',
+                'clientSecret',
+                'realm',
+                'frontendDomain',
+                'keycloakDomain',
+                'allowedEmails'
+            ] as const
         }
     ] as const
 
@@ -97,6 +111,24 @@ const getFieldConfig = (t: TFunction) =>
             description: t('auth-settings.fields.allowedEmails.description'),
             placeholder: t('auth-settings.fields.allowedEmails.placeholder'),
             type: 'tags' as const
+        },
+        realm: {
+            label: t('auth-settings.fields.realm.label'),
+            description: t('auth-settings.fields.realm.description'),
+            placeholder: 'master',
+            type: 'text' as const
+        },
+        frontendDomain: {
+            label: t('auth-settings.passkey.rpId.label'),
+            description: t('auth-settings.passkey.rpId.description'),
+            placeholder: 'docs.rw',
+            type: 'text' as const
+        },
+        keycloakDomain: {
+            label: t('auth-settings.fields.keycloakDomain.label'),
+            description: t('auth-settings.fields.keycloakDomain.description'),
+            placeholder: 'keycloak.docs.rw',
+            type: 'text' as const
         }
     }) as const
 
@@ -128,7 +160,8 @@ export const AuthentificationSettingsCardWidget = (props: IProps) => {
             oauth2Settings: {
                 github: oauth2Settings.github,
                 pocketid: oauth2Settings.pocketid,
-                yandex: oauth2Settings.yandex
+                yandex: oauth2Settings.yandex,
+                keycloak: oauth2Settings.keycloak
             },
             tgAuthSettings: {
                 enabled: tgAuthSettings.enabled,

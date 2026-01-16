@@ -68,6 +68,7 @@ export const CreateNodeStep1Connection = ({ form, onNext, pubKey, port }: IProps
                         fw="700"
                         href="https://docs.rw/docs/install/remnawave-node"
                         inherit
+                        rel="noopener noreferrer"
                         target="_blank"
                         underline="hover"
                     >

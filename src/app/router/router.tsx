@@ -24,7 +24,6 @@ import { NodesMetricsPageConnector } from '@pages/dashboard/nodes-metrics/ui/con
 import { SrhInspectorPageConnector } from '@pages/dashboard/srh-inspector/ui/connectors'
 import { StatisticNodesConnector } from '@pages/dashboard/statistic-nodes/connectors'
 import { Oauth2CallbackPage } from '@pages/auth/oauth2-callback/oauth2-callback.page'
-import { ProxyDefensePageConnector } from '@pages/dashboard/proxy-defense'
 import { HostsPageConnector } from '@pages/dashboard/hosts/ui/connectors'
 import { UsersPageConnector } from '@pages/dashboard/users/ui/connectors'
 import { NodesPageConnector } from '@pages/dashboard/nodes/ui/connectors'
@@ -155,12 +154,6 @@ const router = createBrowserRouter(
                             path={ROUTES.DASHBOARD.CRM.INFRA_BILLING}
                         />
                     </Route>
-
-                    {/* Easter Egg Routes */}
-                    <Route
-                        element={<ProxyDefensePageConnector />}
-                        path={ROUTES.DASHBOARD.EASTER_EGG.PROXY_DEFENSE}
-                    />
                 </Route>
 
                 <Route element={<NotFoundPageComponent />} path="*" />

@@ -764,7 +764,7 @@
     "get-user-usage": {
         "feature": {
             "show-usage": "Статистика",
-            "usage": "Usage"
+            "usage": "КТО ТАКОЙ ЭТОТ ВАШ ЮСАГЕ?"
         }
     },
     "detailed-user-info-drawer": {
@@ -1573,6 +1573,14 @@
                 "label": "Разрешенные Email-адреса",
                 "description": "Список разрешенных email адресов.",
                 "placeholder": "Введите email"
+            },
+            "realm": {
+                "label": "Realm",
+                "description": "Имя realm в Keycloak"
+            },
+            "keycloakDomain": {
+                "label": "Keycloak домен",
+                "description": "Домен сервера Keycloak без протокола (пр. keycloak.docs.rw)"
             }
         }
     },
@@ -1909,9 +1917,9 @@
     },
     "template-info-popover": {
         "shared": {
-            "template-variables": "Template Variables",
-            "available-variables-are-listed-below": "Available variables are listed below.",
-            "you-can-use-template-variables-in-this-field": "You can use template variables in this field."
+            "template-variables": "Варианты переменных",
+            "available-variables-are-listed-below": "Ниже перечислены доступные переменные.",
+            "you-can-use-template-variables-in-this-field": "В этом поле можно использовать шаблонные переменные."
         }
     }
 }

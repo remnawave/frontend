@@ -1573,6 +1573,14 @@
                 "label": "Allowed Emails",
                 "description": "List of allowed email addresses.",
                 "placeholder": "Enter email"
+            },
+            "realm": {
+                "label": "Realm",
+                "description": "Keycloak realm name"
+            },
+            "keycloakDomain": {
+                "label": "Keycloak Domain",
+                "description": "Keycloak server domain without protocol (e.g., keycloak.docs.rw)"
             }
         }
     },
