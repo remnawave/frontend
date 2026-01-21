@@ -2,6 +2,7 @@ import { TOAuth2ProvidersKeys } from '@remnawave/backend-contract'
 import { BiLogoGithub } from 'react-icons/bi'
 import { Button, Stack } from '@mantine/core'
 import { SiKeycloak } from 'react-icons/si'
+import { TbKey } from 'react-icons/tb'
 import { useState } from 'react'
 
 import { useOAuth2Authorize } from '@shared/api/hooks'
@@ -115,6 +116,19 @@ export const OAuth2LoginButtonsFeature = (props: IProps) => {
                     variant="filled"
                 >
                     Keycloak
+                </Button>
+            )}
+
+            {authentication.oauth2.providers.generic && (
+                <Button
+                    color="#000000"
+                    leftSection={<TbKey size={20} />}
+                    loaderProps={{ type: 'dots' }}
+                    loading={loadingProvider === 'generic'}
+                    onClick={() => handleOAuth2Login('generic')}
+                    variant="filled"
+                >
+                    OAuth2
                 </Button>
             )}
         </Stack>

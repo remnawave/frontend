@@ -15,7 +15,7 @@ import {
     GetRemnawaveSettingsCommand,
     UpdateRemnawaveSettingsCommand
 } from '@remnawave/backend-contract'
-import { TbAlertCircle, TbFingerprint, TbPassword, TbServer } from 'react-icons/tb'
+import { TbAlertCircle, TbFingerprint, TbKey, TbPassword, TbServer } from 'react-icons/tb'
 import { BiLogoGithub, BiLogoTelegram } from 'react-icons/bi'
 import { zodResolver } from 'mantine-form-zod-resolver'
 import { PiGlobe, PiKey } from 'react-icons/pi'
@@ -29,6 +29,7 @@ import { TFunction } from 'i18next'
 import { PasskeysDrawerComponent } from '@widgets/remnawave-settings/passkeys-settings-drawer/passkeys-drawer.component'
 import { useUpdateRemnawaveSettings } from '@shared/api/hooks/remnawave-settings/remnawave-settings.mutation.hooks'
 import { HelpActionIconShared, THelpDrawerAvailableScreen } from '@shared/ui/help-drawer'
+import { CheckboxCardShared } from '@shared/ui/checkbox-card/checkbox-card.shared'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { SettingsCardShared } from '@shared/ui/settings-card'
 import { PocketidLogo, YandexLogo } from '@shared/ui/logos'
@@ -83,6 +84,21 @@ const getOAuth2ProvidersConfig = () =>
                 'keycloakDomain',
                 'allowedEmails'
             ] as const
+        },
+        {
+            key: 'generic' as const,
+            title: 'Generic OAuth2',
+            icon: <TbKey size={24} />,
+            iconColor: '#000000',
+            fields: [
+                'clientId',
+                'clientSecret',
+                'frontendDomain',
+                'authorizationUrl',
+                'tokenUrl',
+                'allowedEmails',
+                'withPkce'
+            ] as const
         }
     ] as const
 
@@ -129,6 +145,24 @@ const getFieldConfig = (t: TFunction) =>
             description: t('auth-settings.fields.keycloakDomain.description'),
             placeholder: 'keycloak.docs.rw',
             type: 'text' as const
+        },
+        authorizationUrl: {
+            label: 'Authorization URL',
+            description: 'Authorization URL for the OAuth2 provider',
+            placeholder: 'https://example.com/oauth2/authorize',
+            type: 'text' as const
+        },
+        tokenUrl: {
+            label: 'Token URL',
+            description: 'Token URL for the OAuth2 provider',
+            placeholder: 'https://example.com/oauth2/token',
+            type: 'text' as const
+        },
+        withPkce: {
+            label: 'With PKCE',
+            description: '',
+            placeholder: 'false',
+            type: 'checkbox' as const
         }
     }) as const
 
@@ -161,7 +195,8 @@ export const AuthentificationSettingsCardWidget = (props: IProps) => {
                 github: oauth2Settings.github,
                 pocketid: oauth2Settings.pocketid,
                 yandex: oauth2Settings.yandex,
-                keycloak: oauth2Settings.keycloak
+                keycloak: oauth2Settings.keycloak,
+                generic: oauth2Settings.generic
             },
             tgAuthSettings: {
                 enabled: tgAuthSettings.enabled,
@@ -296,6 +331,19 @@ export const AuthentificationSettingsCardWidget = (props: IProps) => {
                                         placeholder={fieldConfig.placeholder}
                                         splitChars={[',', ' ', ';']}
                                         {...form.getInputProps(formPath)}
+                                    />
+                                )
+                            }
+
+                            if (fieldConfig.type === 'checkbox') {
+                                return (
+                                    <CheckboxCardShared
+                                        description={fieldConfig.description}
+                                        key={form.key(formPath)}
+                                        label={fieldConfig.label}
+                                        {...form.getInputProps(formPath, {
+                                            type: 'checkbox'
+                                        })}
                                     />
                                 )
                             }
