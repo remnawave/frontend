@@ -19,7 +19,7 @@ interface IProps {
 }
 
 const PAGE_SIZE = 20
-const PAGE_SIZE_OPTIONS = [10, 20, 50, 100]
+const PAGE_SIZE_OPTIONS = [10, 20, 50, 100, 150, 200]
 const NODES_CACHE_KEY = 'nodes-datatable-nodes-v1'
 
 export const NodesDataTableWidget = memo((props: IProps) => {
