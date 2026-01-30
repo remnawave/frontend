@@ -3,14 +3,11 @@ import { useTranslation } from 'react-i18next'
 import { TbLanguage } from 'react-icons/tb'
 import { useEffect } from 'react'
 
-const isCrowdin = __CROWDIN__ === '1'
-
 const data = [
     { label: 'English', emoji: '🇬🇧', value: 'en' },
     { label: 'Русский', emoji: '🇷🇺', value: 'ru' },
     { label: 'فارسی', emoji: '🇮🇷', value: 'fa' },
-    { label: '简体中文', emoji: '🇨🇳', value: 'zh' },
-    ...(isCrowdin ? [{ label: 'Crowdin', emoji: '🏴‍☠️', value: 'af' }] : [])
+    { label: '简体中文', emoji: '🇨🇳', value: 'zh' }
 ]
 
 export function LanguagePicker() {
