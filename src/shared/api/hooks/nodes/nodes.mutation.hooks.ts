@@ -1,4 +1,5 @@
 import {
+    BulkNodesActionsCommand,
     BulkNodesProfileModificationCommand,
     CreateNodeCommand,
     DeleteNodeCommand,
@@ -238,6 +239,30 @@ export const useBulkNodesProfileModification = createMutationHook({
         onError: (error) => {
             notifications.show({
                 title: `Bulk Nodes Profile Modification`,
+                message:
+                    error instanceof Error ? error.message : `Request failed with unknown error.`,
+                color: 'red'
+            })
+        }
+    }
+})
+
+export const useBulkNodesActions = createMutationHook({
+    endpoint: BulkNodesActionsCommand.TSQ_url,
+    responseSchema: BulkNodesActionsCommand.ResponseSchema,
+    bodySchema: BulkNodesActionsCommand.RequestSchema,
+    requestMethod: BulkNodesActionsCommand.endpointDetails.REQUEST_METHOD,
+    rMutationParams: {
+        onSuccess: () => {
+            notifications.show({
+                title: 'Success',
+                message: 'Actions added to queue successfully.',
+                color: 'teal'
+            })
+        },
+        onError: (error) => {
+            notifications.show({
+                title: `Bulk Nodes Actions`,
                 message:
                     error instanceof Error ? error.message : `Request failed with unknown error.`,
                 color: 'red'
