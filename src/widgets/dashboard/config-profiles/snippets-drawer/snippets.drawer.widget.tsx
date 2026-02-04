@@ -611,6 +611,7 @@ export const SnippetsDrawerWidget = (props: IProps) => {
                                     bottom: 10
                                 }
                             }}
+                            path="snippet://*"
                             theme="GithubDark"
                             value={JSON.stringify(
                                 createSnippetForm.getValues().snippet || [],
