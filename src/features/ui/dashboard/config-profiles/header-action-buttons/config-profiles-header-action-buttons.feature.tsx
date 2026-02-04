@@ -11,11 +11,12 @@ import {
 } from '@mantine/core'
 import { CreateConfigProfileCommand } from '@remnawave/backend-contract'
 import { generatePath, useNavigate } from 'react-router-dom'
-import { TbPlus, TbRefresh } from 'react-icons/tb'
+import { TbCode, TbPlus, TbRefresh } from 'react-icons/tb'
 import { useDisclosure } from '@mantine/hooks'
 import { useTranslation } from 'react-i18next'
 import { useField } from '@mantine/form'
 
+import { CONFIG_PROFILES_VIEW_MODE } from '@pages/dashboard/config-profiles/components/interfaces'
 import { QueryKeys, useCreateConfigProfile, useGetConfigProfiles } from '@shared/api/hooks'
 import { UniversalSpotlightActionIconShared } from '@shared/ui/universal-spotlight'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
@@ -26,6 +27,8 @@ import { queryClient } from '@shared/api'
 
 interface IProps {
     configProfileCount: number
+    setViewMode: (viewMode: CONFIG_PROFILES_VIEW_MODE) => void
+    viewMode: CONFIG_PROFILES_VIEW_MODE
 }
 
 const generateDefaultConfig = () => {
@@ -67,7 +70,7 @@ const generateDefaultConfig = () => {
 }
 
 export const ConfigProfilesHeaderActionButtonsFeature = (props: IProps) => {
-    const { configProfileCount } = props
+    const { configProfileCount, setViewMode, viewMode } = props
     const { isFetching } = useGetConfigProfiles()
     const { t } = useTranslation()
 
@@ -110,6 +113,27 @@ export const ConfigProfilesHeaderActionButtonsFeature = (props: IProps) => {
             <HelpActionIconShared hidden={false} screen="PAGE_CONFIG_PROFILES" />
 
             {configProfileCount > 0 && <UniversalSpotlightActionIconShared />}
+
+            <ActionIconGroup>
+                <ActionIcon
+                    color="gray"
+                    onClick={() =>
+                        setViewMode(
+                            viewMode === CONFIG_PROFILES_VIEW_MODE.PROFILES
+                                ? CONFIG_PROFILES_VIEW_MODE.SNIPPETS
+                                : CONFIG_PROFILES_VIEW_MODE.PROFILES
+                        )
+                    }
+                    size="input-md"
+                    variant="light"
+                >
+                    {viewMode === CONFIG_PROFILES_VIEW_MODE.PROFILES ? (
+                        <TbCode size="24px" />
+                    ) : (
+                        <XrayLogo size="24px" />
+                    )}
+                </ActionIcon>
+            </ActionIconGroup>
 
             <ActionIconGroup>
                 <Tooltip label={t('common.update')} withArrow>
