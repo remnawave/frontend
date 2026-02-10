@@ -38,7 +38,6 @@ export const EditNodeByUuidModalWidget = () => {
     return (
         <Modal
             centered
-            closeOnEscape={false}
             fullScreen={isMobile}
             onClose={handleClose}
             onExitTransitionEnd={clearInternalStateAndClose}
