@@ -1,6 +1,6 @@
 import { GetConfigProfileByUuidCommand, GetSnippetsCommand } from '@remnawave/backend-contract'
 import { ActionIcon, Box, Drawer, Flex, Group, Transition } from '@mantine/core'
-import { TbArrowBack, TbCode, TbFile } from 'react-icons/tb'
+import { TbArrowBackUp, TbCode, TbFile } from 'react-icons/tb'
 import { useMediaQuery } from '@mantine/hooks'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
@@ -45,7 +45,7 @@ export const ConfigProfileByUuidPageComponent = (props: Props) => {
                                 size="input-md"
                                 variant="light"
                             >
-                                <TbArrowBack size={24} />
+                                <TbArrowBackUp size={24} />
                             </ActionIcon>
                         </Group>
                     }
