@@ -1,7 +1,7 @@
 import { GetSubscriptionTemplateCommand } from '@remnawave/backend-contract'
 import { ActionIcon, Group } from '@mantine/core'
 import { useNavigate } from 'react-router-dom'
-import { TbArrowBack } from 'react-icons/tb'
+import { TbArrowBackUp } from 'react-icons/tb'
 
 import { SubscriptionTemplateEditorWidget } from '@widgets/dashboard/templates/subscription-template-editor'
 import { getCoreLogoFromType } from '@shared/ui/get-core-logo-from-type'
@@ -48,7 +48,7 @@ export const TemplateEditorPageComponent = (props: Props) => {
                             size="input-md"
                             variant="light"
                         >
-                            <TbArrowBack size={24} />
+                            <TbArrowBackUp size={24} />
                         </ActionIcon>
                     </Group>
                 }

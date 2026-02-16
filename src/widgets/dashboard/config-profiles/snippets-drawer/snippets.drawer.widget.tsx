@@ -15,16 +15,16 @@ import {
     Modal,
     Paper,
     ScrollArea,
+    SimpleGrid,
     Stack,
     Text,
     TextInput
 } from '@mantine/core'
+import { TbBraces, TbCode, TbPlus, TbQuestionMark, TbRefresh, TbTrash, TbX } from 'react-icons/tb'
 import { CreateSnippetCommand, UpdateSnippetCommand } from '@remnawave/backend-contract'
-import { TbBraces, TbCode, TbPlus, TbRefresh, TbTrash, TbX } from 'react-icons/tb'
 import { useDisclosure, useMediaQuery } from '@mantine/hooks'
-import MonacoEditor, { Monaco } from '@monaco-editor/react'
 import { zodResolver } from 'mantine-form-zod-resolver'
-import { HiQuestionMarkCircle } from 'react-icons/hi'
+import { Editor, Monaco } from '@monaco-editor/react'
 import { PiCheck, PiCopy } from 'react-icons/pi'
 import { useTranslation } from 'react-i18next'
 import { useEffect, useRef } from 'react'
@@ -42,11 +42,19 @@ import { MonacoSetupSnippetsFeature } from '@features/dashboard/config-profiles/
 import { MODALS, useModalClose, useModalState } from '@entities/dashboard/modal-store'
 import { CopyableFieldShared } from '@shared/ui/copyable-field/copyable-field'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
+import { monacoTheme } from '@shared/constants/monaco-theme'
+import { SectionCard } from '@shared/ui/section-card'
 import { queryClient } from '@shared/api'
 
 import classes from './SnippetsDrawer.module.css'
 
-export const SnippetsDrawerWidget = () => {
+interface IProps {
+    fromMainView?: boolean
+}
+
+export const SnippetsDrawerWidget = (props: IProps) => {
+    const { fromMainView = false } = props
+
     const { t, i18n } = useTranslation()
 
     const { isOpen } = useModalState(MODALS.CONFIG_PROFILE_SHOW_SNIPPETS_DRAWER)
@@ -89,7 +97,12 @@ export const SnippetsDrawerWidget = () => {
         }
     })
 
-    const { data: snippets, isLoading } = useGetSnippets({
+    const {
+        data: snippets,
+        isLoading,
+        isRefetching,
+        refetch
+    } = useGetSnippets({
         rQueryParams: {
             enabled: !!isOpen
         }
@@ -154,6 +167,13 @@ export const SnippetsDrawerWidget = () => {
                 name: values.name,
                 snippet: currentValue
             }
+        })
+    }
+
+    const handleEditorDidMount = (monaco: Monaco) => {
+        monaco.editor.defineTheme('GithubDark', {
+            ...monacoTheme,
+            base: 'vs-dark'
         })
     }
 
@@ -340,7 +360,19 @@ export const SnippetsDrawerWidget = () => {
         }
 
         return (
-            <Stack gap="xs">
+            <SimpleGrid
+                cols={{
+                    base: 1,
+                    '800px': 2,
+                    '1000px': 3,
+                    '1200px': 4,
+                    '1800px': 5,
+                    '2400px': 6,
+                    '3000px': 7
+                }}
+                spacing="xs"
+                type="container"
+            >
                 {snippets.snippets.map((snippet) => {
                     const snippetLength = getSnippetLength(snippet.snippet)
                     const preview = getSnippetPreview(snippet.snippet)
@@ -473,7 +505,7 @@ export const SnippetsDrawerWidget = () => {
                         </Card>
                     )
                 })}
-            </Stack>
+            </SimpleGrid>
         )
     }
 
@@ -517,9 +549,12 @@ export const SnippetsDrawerWidget = () => {
                         }}
                         withBorder
                     >
-                        <MonacoEditor
+                        <Editor
+                            beforeMount={handleEditorDidMount}
+                            className={classes.editor}
+                            defaultLanguage="json"
                             height={400}
-                            language="json"
+                            loading={t('config-editor.widget.loading-editor')}
                             onChange={(value) => {
                                 try {
                                     JSON.parse(value || '[]')
@@ -533,8 +568,8 @@ export const SnippetsDrawerWidget = () => {
                                 }
                             }}
                             onMount={(editor, monaco) => {
-                                monacoRef.current = monaco
                                 editorRef.current = editor
+                                monacoRef.current = monaco
                             }}
                             options={{
                                 autoClosingBrackets: 'always',
@@ -545,25 +580,36 @@ export const SnippetsDrawerWidget = () => {
                                     enabled: true,
                                     independentColorPoolPerBracketType: true
                                 },
+                                scrollbar: {
+                                    useShadows: false,
+                                    verticalHasArrows: true,
+                                    horizontalHasArrows: true,
+                                    vertical: 'visible',
+                                    horizontal: 'visible',
+                                    arrowSize: 30,
+                                    alwaysConsumeMouseWheel: false
+                                },
                                 detectIndentation: true,
                                 folding: true,
                                 foldingStrategy: 'indentation',
                                 fontSize: 14,
                                 formatOnPaste: true,
+                                formatOnType: true,
                                 guides: {
                                     bracketPairs: true,
                                     indentation: true
                                 },
                                 insertSpaces: true,
-
-                                minimap: { enabled: false },
-                                readOnly: isCreating,
-                                scrollBeyondLastLine: true,
-                                scrollbar: {
-                                    alwaysConsumeMouseWheel: false
-                                },
+                                minimap: { enabled: true },
+                                quickSuggestions: true,
+                                renderLineHighlight: 'all',
+                                scrollBeyondLastLine: false,
                                 smoothScrolling: true,
-                                tabSize: 2
+                                tabSize: 2,
+                                padding: {
+                                    top: 10,
+                                    bottom: 10
+                                }
                             }}
                             path="snippet://*"
                             theme="GithubDark"
@@ -657,9 +703,12 @@ export const SnippetsDrawerWidget = () => {
                         }}
                         withBorder
                     >
-                        <MonacoEditor
+                        <Editor
+                            beforeMount={handleEditorDidMount}
+                            className={classes.editor}
+                            defaultLanguage="json"
                             height={400}
-                            language="json"
+                            loading={t('config-editor.widget.loading-editor')}
                             onChange={(value) => {
                                 try {
                                     JSON.parse(value || '[]')
@@ -673,8 +722,8 @@ export const SnippetsDrawerWidget = () => {
                                 }
                             }}
                             onMount={(editor, monaco) => {
-                                monacoRef.current = monaco
                                 editorRef.current = editor
+                                monacoRef.current = monaco
                             }}
                             options={{
                                 autoClosingBrackets: 'always',
@@ -685,26 +734,36 @@ export const SnippetsDrawerWidget = () => {
                                     enabled: true,
                                     independentColorPoolPerBracketType: true
                                 },
+                                scrollbar: {
+                                    useShadows: false,
+                                    verticalHasArrows: true,
+                                    horizontalHasArrows: true,
+                                    vertical: 'visible',
+                                    horizontal: 'visible',
+                                    arrowSize: 30,
+                                    alwaysConsumeMouseWheel: false
+                                },
                                 detectIndentation: true,
                                 folding: true,
                                 foldingStrategy: 'indentation',
                                 fontSize: 14,
                                 formatOnPaste: true,
-
+                                formatOnType: true,
                                 guides: {
                                     bracketPairs: true,
                                     indentation: true
                                 },
                                 insertSpaces: true,
-
-                                minimap: { enabled: false },
-                                readOnly: isUpdating,
-                                scrollBeyondLastLine: true,
-                                scrollbar: {
-                                    alwaysConsumeMouseWheel: false
-                                },
+                                minimap: { enabled: true },
+                                quickSuggestions: true,
+                                renderLineHighlight: 'all',
+                                scrollBeyondLastLine: false,
                                 smoothScrolling: true,
-                                tabSize: 2
+                                tabSize: 2,
+                                padding: {
+                                    top: 10,
+                                    bottom: 10
+                                }
                             }}
                             path="snippet://*"
                             theme="GithubDark"
@@ -762,54 +821,66 @@ export const SnippetsDrawerWidget = () => {
 
     return (
         <>
-            <Paper p={0} shadow="sm" withBorder>
-                <Stack gap={0}>
-                    <Group
-                        gap="sm"
-                        justify="space-between"
-                        p="md"
-                        style={{
-                            borderBottom: '1px solid var(--mantine-color-dark-4)'
-                        }}
-                        wrap="nowrap"
-                    >
-                        <Group gap="xs" style={{ flex: 1, minWidth: 0 }} wrap="nowrap">
-                            <TbCode color="var(--mantine-color-blue-5)" size={20} />
-                            <Text fw={600} size="lg">
-                                {t('snippets.drawer.widget.snippets')}
-                            </Text>
-                            <Badge radius="sm" size="md" variant="default">
-                                {snippets?.snippets.length || 0}
-                            </Badge>
-                        </Group>
-                        <ActionIcon
-                            color="gray"
-                            onClick={openSnippetsHelpModal}
-                            size="sm"
-                            variant="subtle"
-                        >
-                            <HiQuestionMarkCircle size={20} />
-                        </ActionIcon>
-                        <ActionIcon
-                            color="gray"
-                            onClick={() => {
-                                queryClient.refetchQueries({
-                                    queryKey: QueryKeys.snippets.getSnippets.queryKey
-                                })
-                            }}
-                            size="sm"
-                            variant="subtle"
-                        >
-                            <TbRefresh size={18} />
-                        </ActionIcon>
-                        {!isMobile && (
-                            <ActionIcon color="gray" onClick={close} size="sm" variant="subtle">
-                                <TbX size={18} />
-                            </ActionIcon>
-                        )}
-                    </Group>
+            <SectionCard.Root>
+                <SectionCard.Section>
+                    <Group align="flex-center" justify="space-between">
+                        <BaseOverlayHeader
+                            IconComponent={TbCode}
+                            iconSize={20}
+                            iconVariant="gradient-teal"
+                            title={t('snippets.drawer.widget.snippets')}
+                            titleOrder={5}
+                            withCopy
+                        />
 
-                    <Stack gap="md" p="md" style={{ flex: 1, overflow: 'hidden' }}>
+                        <Group gap="xs">
+                            <ActionIcon
+                                color="lime"
+                                onClick={openSnippetsHelpModal}
+                                size="input-sm"
+                                variant="light"
+                            >
+                                <TbQuestionMark size={24} />
+                            </ActionIcon>
+
+                            <ActionIcon
+                                loading={isRefetching || isLoading}
+                                onClick={() => {
+                                    refetch()
+                                }}
+                                size="input-sm"
+                                variant="light"
+                            >
+                                <TbRefresh size="24px" />
+                            </ActionIcon>
+
+                            {fromMainView && (
+                                <ActionIcon
+                                    color="teal"
+                                    onClick={handleOpenCreate}
+                                    size="input-sm"
+                                    variant="light"
+                                >
+                                    <TbPlus size="24px" />
+                                </ActionIcon>
+                            )}
+
+                            {!isMobile && !fromMainView && (
+                                <ActionIcon
+                                    color="red"
+                                    onClick={close}
+                                    size="input-sm"
+                                    variant="light"
+                                >
+                                    <TbX size={24} />
+                                </ActionIcon>
+                            )}
+                        </Group>
+                    </Group>
+                </SectionCard.Section>
+
+                {!fromMainView && (
+                    <SectionCard.Section>
                         <Button
                             fullWidth
                             leftSection={<TbPlus size={18} />}
@@ -818,14 +889,25 @@ export const SnippetsDrawerWidget = () => {
                         >
                             {t('snippets.drawer.widget.new-snippet')}
                         </Button>
+                    </SectionCard.Section>
+                )}
 
+                {fromMainView && (
+                    <SectionCard.Section>
+                        {isLoading && returnLoading()}
+                        {!isLoading && renderSnippets()}
+                    </SectionCard.Section>
+                )}
+
+                {!fromMainView && (
+                    <SectionCard.Section>
                         <ScrollArea h={!isMobile ? '700px' : '100%'}>
                             {isLoading && returnLoading()}
                             {!isLoading && renderSnippets()}
                         </ScrollArea>
-                    </Stack>
-                </Stack>
-            </Paper>
+                    </SectionCard.Section>
+                )}
+            </SectionCard.Root>
 
             {renderCreateModal()}
             {renderEditModal()}

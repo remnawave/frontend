@@ -1,5 +1,5 @@
 import {
-    TbArrowBack,
+    TbArrowBackUp,
     TbCheck,
     TbCloudDownload,
     TbDeviceFloppy,
@@ -307,7 +307,7 @@ export const SubpageConfigEditorPageComponent = (props: Props) => {
                             size="input-md"
                             variant="light"
                         >
-                            <TbArrowBack size={24} />
+                            <TbArrowBackUp size={24} />
                         </ActionIcon>
                     </Group>
                 }
