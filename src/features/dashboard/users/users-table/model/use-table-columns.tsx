@@ -406,6 +406,26 @@ export const useUserTableColumns = (
                 mantineTableBodyCellProps: {
                     align: 'center'
                 }
+            },
+            {
+                accessorKey: 'vlessUuid',
+                header: 'Vless UUID',
+                accessorFn: (originalRow) => originalRow.vlessUuid,
+                minSize: 400,
+                maxSize: 800,
+                mantineTableBodyCellProps: {
+                    align: 'center'
+                }
+            },
+            {
+                accessorKey: 'trojanPassword',
+                header: 'Trojan Password',
+                accessorFn: (originalRow) => originalRow.trojanPassword,
+                minSize: 400,
+                maxSize: 800,
+                mantineTableBodyCellProps: {
+                    align: 'center'
+                }
             }
         ],
         []
