@@ -86,7 +86,7 @@ export const getPm2ProcessMetrics = (
     return pm2Stats.map((process) => {
         const cpuUsage = parseFloat(process.cpu)
         return {
-            value: `${process.memory} (${process.cpu}%)`,
+            value: `${process.memory}`,
             IconComponent: getProcessIcon(process.name),
             title: process.name,
             iconVariant: getIconVariant(cpuUsage)
