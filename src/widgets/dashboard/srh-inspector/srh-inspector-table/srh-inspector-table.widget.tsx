@@ -12,14 +12,15 @@ import {
 } from 'mantine-react-table'
 import { TbExternalLink, TbRefresh, TbReportAnalytics, TbRestore } from 'react-icons/tb'
 import { GetSubscriptionRequestHistoryCommand } from '@remnawave/backend-contract'
+import { useCallback, useLayoutEffect, useMemo, useState } from 'react'
 import { ActionIcon, ActionIconGroup, Tooltip } from '@mantine/core'
-import { useCallback, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { PiUserCircle } from 'react-icons/pi'
 
 import { useSrhInspectorTableColumns } from '@features/dashboard/srh-inspector/srh-inspector-table/model/use-srh-inspector-table-columns'
 import { useUserModalStoreActions } from '@entities/dashboard/user-modal-store'
 import { useGetSubscriptionRequestHistory } from '@shared/api/hooks'
+import { preventBackScrollTables } from '@shared/utils/misc'
 import { DataTableShared } from '@shared/ui/table'
 import { sToMs } from '@shared/utils/time-utils'
 
@@ -43,6 +44,15 @@ export function SrhInspectorTableWidget() {
     const [columnFilterFns, setColumnFilterFns] = useState<MRT_ColumnFilterFnsState>(
         Object.fromEntries(tableColumns.map(({ accessorKey }) => [accessorKey, 'contains']))
     )
+
+    useLayoutEffect(() => {
+        document.body.addEventListener('wheel', preventBackScrollTables, {
+            passive: false
+        })
+        return () => {
+            document.body.removeEventListener('wheel', preventBackScrollTables)
+        }
+    }, [])
 
     const params = {
         start: pagination.pageIndex * pagination.pageSize,

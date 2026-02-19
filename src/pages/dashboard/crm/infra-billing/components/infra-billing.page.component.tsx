@@ -1,8 +1,8 @@
 import { Split } from '@gfazioli/mantine-split-pane'
+import { useEffect, useLayoutEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Stack } from '@mantine/core'
 import { motion } from 'motion/react'
-import { useEffect } from 'react'
 
 import { CreateInfraBillingRecordDrawerWidget } from '@widgets/dashboard/infra-billing/create-infra-billing-record-modal/create-infra-billing-record.modal.widget'
 import { CreateInfraBillingNodeModalWidget } from '@widgets/dashboard/infra-billing/create-infra-billing-node-modal/create-infra-billing-node.modal.widget'
@@ -14,12 +14,22 @@ import { InfraProvidersTableWidget } from '@widgets/dashboard/infra-billing/infr
 import { UpdateBillingDateModalWidget } from '@widgets/dashboard/infra-billing/update-billing-date-modal'
 import { StatsWidget } from '@widgets/dashboard/infra-billing/stats-widget/stats.widget'
 import { useAppshellStoreActions } from '@entities/dashboard/appshell'
+import { preventBackScrollTables } from '@shared/utils/misc'
 import { Page } from '@shared/ui/page'
 
 export const InfraBillingPageComponent = () => {
     const { t } = useTranslation()
 
     const { hideDesktopSidebar } = useAppshellStoreActions()
+
+    useLayoutEffect(() => {
+        document.body.addEventListener('wheel', preventBackScrollTables, {
+            passive: false
+        })
+        return () => {
+            document.body.removeEventListener('wheel', preventBackScrollTables)
+        }
+    }, [])
 
     useEffect(() => {
         hideDesktopSidebar()

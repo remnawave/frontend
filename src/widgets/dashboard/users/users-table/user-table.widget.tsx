@@ -5,10 +5,10 @@ import {
     MRT_SortingState,
     useMantineReactTable
 } from 'mantine-react-table'
+import { useLayoutEffect, useMemo, useState } from 'react'
 import { notifications } from '@mantine/notifications'
 import { PiUsersDuotone } from 'react-icons/pi'
 import { useTranslation } from 'react-i18next'
-import { useMemo, useState } from 'react'
 
 import {
     useUsersTableStoreActions,
@@ -33,6 +33,7 @@ import {
 import { useUserTableColumns } from '@features/dashboard/users/users-table/model/use-table-columns'
 import { UserActionGroupFeature } from '@features/dashboard/users/users-action-group'
 import { useUserModalStoreActions } from '@entities/dashboard/user-modal-store'
+import { preventBackScrollTables } from '@shared/utils/misc'
 import { DataTableShared } from '@shared/ui/table'
 import { sToMs } from '@shared/utils/time-utils'
 
@@ -64,6 +65,15 @@ export function UserTableWidget() {
     const [columnFilterFns, setColumnFilterFns] = useState<MRT_ColumnFilterFnsState>(
         Object.fromEntries(tableColumns.map(({ accessorKey }) => [accessorKey, 'contains']))
     )
+
+    useLayoutEffect(() => {
+        document.body.addEventListener('wheel', preventBackScrollTables, {
+            passive: false
+        })
+        return () => {
+            document.body.removeEventListener('wheel', preventBackScrollTables)
+        }
+    }, [])
 
     const params = {
         start: pagination.pageIndex * pagination.pageSize,
