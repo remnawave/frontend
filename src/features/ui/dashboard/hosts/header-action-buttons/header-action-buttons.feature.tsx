@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next'
 
 import { HelpActionIconShared } from '@shared/ui/help-drawer/help-action-icon.shared'
 import { MODALS, useModalsStoreOpenWithData } from '@entities/dashboard/modal-store'
+import { UniversalSpotlightActionIconShared } from '@shared/ui/universal-spotlight'
 import { QueryKeys, useGetHosts } from '@shared/api/hooks'
 import { queryClient } from '@shared/api'
 
@@ -27,6 +28,8 @@ export const HeaderActionButtonsFeature = () => {
     return (
         <Group grow preventGrowOverflow={false} wrap="wrap">
             <HelpActionIconShared hidden={false} screen="PAGE_HOSTS" />
+
+            <UniversalSpotlightActionIconShared />
 
             <ActionIconGroup>
                 <Tooltip label={t('common.update')} withArrow>
