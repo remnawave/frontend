@@ -1,7 +1,7 @@
 import {
     GetAllTagsCommand,
     GetAllUsersCommand,
-    GetSubscriptionByUuidCommand,
+    GetConnectionKeysByUuidCommand,
     GetUserAccessibleNodesCommand,
     GetUserByUuidCommand,
     GetUserSubscriptionRequestHistoryCommand
@@ -20,7 +20,7 @@ export const usersQueryKeys = createQueryKeys('users', {
     getUserByUuid: (route: GetUserByUuidCommand.Request) => ({
         queryKey: [route]
     }),
-    getSubscriptionByUuid: (route: GetSubscriptionByUuidCommand.Request) => ({
+    getConnectionKeysByUuid: (route: GetConnectionKeysByUuidCommand.Request) => ({
         queryKey: [route]
     }),
     getUserTags: {
@@ -62,17 +62,6 @@ export const useGetUsersV2 = createGetQueryHook({
     errorHandler: (error) => errorHandler(error, 'Get All Users')
 })
 
-export const useGetSubscriptionInfoByUuid = createGetQueryHook({
-    endpoint: GetSubscriptionByUuidCommand.TSQ_url,
-    responseSchema: GetSubscriptionByUuidCommand.ResponseSchema,
-    routeParamsSchema: GetSubscriptionByUuidCommand.RequestSchema,
-    getQueryKey: ({ route }) => usersQueryKeys.getSubscriptionByUuid(route!).queryKey,
-    rQueryParams: {
-        staleTime: sToMs(4)
-    },
-    errorHandler: (error) => errorHandler(error, 'Get Subscription Info By UUID')
-})
-
 export const useGetUserTags = createGetQueryHook({
     endpoint: GetAllTagsCommand.TSQ_url,
     responseSchema: GetAllTagsCommand.ResponseSchema,
@@ -104,4 +93,15 @@ export const useGetUserSubscriptionRequestHistory = createGetQueryHook({
         staleTime: sToMs(60)
     },
     errorHandler: (error) => errorHandler(error, 'Get User Subscription Request History')
+})
+
+export const useGetConnectionKeysByUuid = createGetQueryHook({
+    endpoint: GetConnectionKeysByUuidCommand.TSQ_url,
+    responseSchema: GetConnectionKeysByUuidCommand.ResponseSchema,
+    routeParamsSchema: GetConnectionKeysByUuidCommand.RequestSchema,
+    getQueryKey: ({ route }) => usersQueryKeys.getConnectionKeysByUuid(route!).queryKey,
+    rQueryParams: {
+        staleTime: sToMs(4)
+    },
+    errorHandler: (error) => errorHandler(error, 'Get Connection Keys By UUID')
 })
