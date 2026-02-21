@@ -53,6 +53,9 @@ export const configureMonaco = (
         }
 
         if (language === 'json') {
+            const hostUuids = hosts.map((h) => h.uuid)
+            const hostDescriptions = hosts.map(buildMarkdownDescription)
+
             const schema = {
                 type: 'object',
                 properties: {
@@ -64,23 +67,114 @@ export const configureMonaco = (
                                 items: {
                                     type: 'object',
                                     properties: {
-                                        hostUuids: {
-                                            type: 'array',
-                                            items: {
-                                                type: 'string',
-                                                enum: hosts.map((h) => h.uuid),
-                                                markdownEnumDescriptions:
-                                                    hosts.map(buildMarkdownDescription),
-                                                errorMessage: 'No host found with this UUID'
-                                            }
+                                        selector: {
+                                            type: 'object',
+                                            properties: {
+                                                type: {
+                                                    type: 'string',
+                                                    enum: [
+                                                        'uuids',
+                                                        'remarkRegex',
+                                                        'tagRegex',
+                                                        'sameTagAsRecipient'
+                                                    ]
+                                                }
+                                            },
+                                            required: ['type'],
+                                            allOf: [
+                                                {
+                                                    if: {
+                                                        properties: {
+                                                            type: { const: 'uuids' }
+                                                        },
+                                                        required: ['type']
+                                                    },
+                                                    then: {
+                                                        properties: {
+                                                            type: true,
+                                                            values: {
+                                                                type: 'array',
+                                                                items: {
+                                                                    type: 'string',
+                                                                    format: 'uuid',
+                                                                    enum: hostUuids,
+                                                                    markdownEnumDescriptions:
+                                                                        hostDescriptions,
+                                                                    errorMessage:
+                                                                        'No host found with this UUID'
+                                                                },
+                                                                minItems: 1
+                                                            }
+                                                        },
+                                                        required: ['values'],
+                                                        additionalProperties: false
+                                                    }
+                                                },
+                                                {
+                                                    if: {
+                                                        properties: {
+                                                            type: { const: 'remarkRegex' }
+                                                        },
+                                                        required: ['type']
+                                                    },
+                                                    then: {
+                                                        properties: {
+                                                            type: true,
+                                                            pattern: {
+                                                                type: 'string',
+                                                                minLength: 1
+                                                            }
+                                                        },
+                                                        required: ['pattern'],
+                                                        additionalProperties: false
+                                                    }
+                                                },
+                                                {
+                                                    if: {
+                                                        properties: {
+                                                            type: { const: 'tagRegex' }
+                                                        },
+                                                        required: ['type']
+                                                    },
+                                                    then: {
+                                                        properties: {
+                                                            type: true,
+                                                            pattern: {
+                                                                type: 'string',
+                                                                minLength: 1
+                                                            }
+                                                        },
+                                                        required: ['pattern'],
+                                                        additionalProperties: false
+                                                    }
+                                                },
+                                                {
+                                                    if: {
+                                                        properties: {
+                                                            type: {
+                                                                const: 'sameTagAsRecipient'
+                                                            }
+                                                        },
+                                                        required: ['type']
+                                                    },
+                                                    then: {
+                                                        properties: { type: true },
+                                                        additionalProperties: false
+                                                    }
+                                                }
+                                            ]
                                         },
                                         tagPrefix: {
-                                            type: 'string'
+                                            type: 'string',
+                                            minLength: 1
                                         }
-                                    }
+                                    },
+                                    required: ['selector', 'tagPrefix'],
+                                    additionalProperties: false
                                 }
                             }
-                        }
+                        },
+                        additionalProperties: false
                     }
                 }
             }
