@@ -1,7 +1,7 @@
 import { SUBSCRIPTION_TEMPLATE_TYPE, TSubscriptionTemplateType } from '@remnawave/backend-contract'
 import { useNavigate, useParams } from 'react-router-dom'
 
-import { useGetSubscriptionTemplate } from '@shared/api/hooks'
+import { useGetHosts, useGetSubscriptionTemplate } from '@shared/api/hooks'
 import { LoadingScreen } from '@shared/ui'
 import { ROUTES } from '@shared/constants'
 
@@ -20,7 +20,9 @@ export function TemplateEditorPageConnector() {
         }
     })
 
-    if (isTemplateLoading || !template) {
+    const { data: hosts, isLoading: isHostsLoading } = useGetHosts()
+
+    if (isTemplateLoading || isHostsLoading || !template || !hosts) {
         return <LoadingScreen text="Loading template..." />
     }
 
@@ -58,5 +60,12 @@ export function TemplateEditorPageConnector() {
         return null
     }
 
-    return <TemplateEditorPageComponent editorType={editorType} template={template} title={title} />
+    return (
+        <TemplateEditorPageComponent
+            editorType={editorType}
+            hosts={hosts}
+            template={template}
+            title={title}
+        />
+    )
 }
