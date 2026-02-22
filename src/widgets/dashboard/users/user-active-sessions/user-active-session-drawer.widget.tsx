@@ -46,8 +46,8 @@ interface IProps {
 }
 
 const DOCKER_SNIPPET = `
-cap_add:
-    - NET_ADMIN
+    cap_add:
+        - NET_ADMIN
 `
 
 const HIGHLIGHT_SPAN = <Text c="white" component="span" fw={600} size="sm" />
