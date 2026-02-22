@@ -305,9 +305,7 @@
             "3-months": "+3 months",
             "1-year": "+1 year",
             "2099-year": "year 2099",
-            "hwid-user-limit-line-1": "This feature will only work if",
-            "hwid-user-limit-line-2": "in Subscription Settings is set to",
-            "hwid-user-limit-line-3": "Learn more.",
+            "hwid-user-limit-description": "This feature will only work if <highlight>Subscription → Settings (HWID Limit)</highlight> is enabled. <anchor>Learn more</anchor>.",
             "disable-hwid-limit": "Disable HWID Limit",
             "hwid-device-limit": "HWID Device Limit",
             "expire-at-description": "The date and time when the user's subscription will expire.",
@@ -1951,5 +1949,11 @@
             "drop-all-user-connections-this-node": "Drop All User Connections (this node)",
             "drop-this-connection-on-this-node": "Drop this connection on this node"
         }
+    },
+    "contact-information-card": {
+        "contact-information": "Contact Information"
+    },
+    "traffic-limits-card": {
+        "traffic-and-limits": "Traffic & Limits"
     }
 }

@@ -6,8 +6,8 @@ import {
 import { Anchor, Checkbox, Code, Input, NumberInput, Stack, Text, Textarea } from '@mantine/core'
 import { ForwardRefComponent, HTMLMotionProps, Variants } from 'motion/react'
 import { TbDevices2, TbSettings } from 'react-icons/tb'
+import { Trans, useTranslation } from 'react-i18next'
 import { UseFormReturnType } from '@mantine/form'
-import { useTranslation } from 'react-i18next'
 
 import { CreateableTagInputShared } from '@shared/ui/createable-tag-input/createable-tag-input'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
@@ -37,7 +37,7 @@ export function DeviceTagSettingsCard<
                         IconComponent={TbSettings}
                         iconSize={20}
                         iconVariant="gradient-orange"
-                        title="Device & Tag Settings"
+                        title={t('device-tag-settings-card.device-and-tag-settings')}
                         titleOrder={5}
                     />
                 </SectionCard.Section>
@@ -51,15 +51,19 @@ export function DeviceTagSettingsCard<
                             <Input.Description component="div">
                                 <>
                                     <Text c="dimmed" size="0.75rem">
-                                        {t('create-user-modal.widget.hwid-user-limit-line-1')}{' '}
-                                        <Code>HWID Device Limit Enabled</Code>{' '}
-                                        <Anchor
-                                            href="https://docs.rw/docs/features/hwid-device-limit"
-                                            rel="noopener noreferrer"
-                                            target="_blank"
-                                        >
-                                            {t('create-user-modal.widget.hwid-user-limit-line-3')}
-                                        </Anchor>
+                                        <Trans
+                                            components={{
+                                                highlight: <Code />,
+                                                anchor: (
+                                                    <Anchor
+                                                        href="https://docs.rw/docs/features/hwid-device-limit"
+                                                        rel="noopener noreferrer"
+                                                        target="_blank"
+                                                    />
+                                                )
+                                            }}
+                                            i18nKey="create-user-modal.widget.hwid-user-limit-description"
+                                        />
                                     </Text>
                                     <Checkbox
                                         checked={form.getValues().hwidDeviceLimit === 0}
