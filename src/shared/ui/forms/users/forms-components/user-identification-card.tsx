@@ -25,6 +25,7 @@ import { UserStatusBadge } from '@widgets/dashboard/users/user-status-badge'
 import { resolveCountryCode } from '@shared/utils/misc/resolve-country-code'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { CopyableCodeBlock } from '@shared/ui/copyable-code-block'
+import { getTimeAgoUtil } from '@shared/utils/time-utils'
 import { prettyBytesUtil } from '@shared/utils/bytes'
 import { SectionCard } from '@shared/ui/section-card'
 
@@ -44,7 +45,7 @@ const statusIconVariantMap = {
 } as const
 
 export const UserIdentificationCard = memo((props: IProps) => {
-    const { t } = useTranslation()
+    const { t, i18n } = useTranslation()
 
     const { cardVariants, lastConnectedNode, motionWrapper, openTrafficStatisticsModal, user } =
         props
@@ -209,11 +210,13 @@ export const UserIdentificationCard = memo((props: IProps) => {
                                 radius="md"
                             >
                                 <Tooltip label={t('detailed-user-info-drawer.widget.last-online')}>
-                                    <Group gap="xs" justify="center">
-                                        <TbWifi color="var(--mantine-color-violet-5)" size={18} />
-                                        <Text c="violet.5" fw={600} size="sm">
-                                            {dayjs(user.userTraffic.onlineAt).format(
-                                                'DD.MM.YYYY HH:mm'
+                                    <Group gap="xs" justify="center" wrap="nowrap">
+                                        <TbWifi color="var(--mantine-color-violet-4)" size={18} />
+                                        <Text c="violet.4" fw={600} size="xs" truncate>
+                                            {getTimeAgoUtil(
+                                                user.userTraffic.onlineAt,
+                                                t,
+                                                i18n.language
                                             )}
                                         </Text>
                                     </Group>
