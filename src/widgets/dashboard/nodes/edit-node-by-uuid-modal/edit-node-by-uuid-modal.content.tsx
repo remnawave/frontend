@@ -75,6 +75,7 @@ export const EditNodeByUuidModalContent = (props: IProps) => {
                 trafficResetDay: fetchedNode.trafficResetDay ?? undefined,
                 notifyPercent: fetchedNode.notifyPercent ?? undefined,
                 consumptionMultiplier: fetchedNode.consumptionMultiplier ?? undefined,
+                tags: fetchedNode.tags ?? undefined,
 
                 configProfile: {
                     activeConfigProfileUuid:
