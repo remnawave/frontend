@@ -56,7 +56,8 @@
         "search": "搜索",
         "nothing-found": "未找到",
         "name": "名称",
-        "clone": "克隆"
+        "clone": "克隆",
+        "event-sent": "Event sent"
     },
     "bandwidth-metrics": {
         "current-year": "今年",
@@ -304,9 +305,7 @@
             "3-months": "+3 个月",
             "1-year": "+1 年",
             "2099-year": "2099年",
-            "hwid-user-limit-line-1": "此功能仅在此功能开启时有效",
-            "hwid-user-limit-line-2": "订阅设置为",
-            "hwid-user-limit-line-3": "了解更多。",
+            "hwid-user-limit-description": "This feature will only work if <highlight>Subscription → Settings (HWID Limit)</highlight> is enabled. <anchor>Learn more</anchor>.",
             "disable-hwid-limit": "禁用 HWID 限制",
             "hwid-device-limit": "HWID 设备限制",
             "expire-at-description": "用户的订阅服务将于该时间结束。",
@@ -1943,5 +1942,18 @@
             "available-variables-are-listed-below": "以下列出了可用变量。",
             "you-can-use-template-variables-in-this-field": "您可以在此字段中使用模板变量。"
         }
+    },
+    "user-active-session-drawer": {
+        "widget": {
+            "drop-all-user-connections-all-nodes": "Drop All User Connections (all nodes)",
+            "drop-all-user-connections-this-node": "Drop All User Connections (this node)",
+            "drop-this-connection-on-this-node": "Drop this connection on this node"
+        }
+    },
+    "contact-information-card": {
+        "contact-information": "Contact Information"
+    },
+    "traffic-limits-card": {
+        "traffic-and-limits": "Traffic & Limits"
     }
 }
