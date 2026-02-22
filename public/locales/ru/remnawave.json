@@ -56,7 +56,8 @@
         "search": "Поиск",
         "nothing-found": "Ничего не найдено",
         "name": "Имя",
-        "clone": "Клонировать"
+        "clone": "Клонировать",
+        "event-sent": "Действие отправлено"
     },
     "bandwidth-metrics": {
         "current-year": "Текущий год",
@@ -1942,6 +1943,13 @@
             "template-variables": "Варианты переменных",
             "available-variables-are-listed-below": "Ниже перечислены доступные переменные.",
             "you-can-use-template-variables-in-this-field": "В этом поле можно использовать шаблонные переменные."
+        }
+    },
+    "user-active-session-drawer": {
+        "widget": {
+            "drop-all-user-connections-all-nodes": "Прервать все соединения пользователя (на всех нодах)",
+            "drop-all-user-connections-this-node": "Прервать все соединения пользователя (на ноде)",
+            "drop-this-connection-on-this-node": "Прервать данное соединение на этом узле"
         }
     }
 }
