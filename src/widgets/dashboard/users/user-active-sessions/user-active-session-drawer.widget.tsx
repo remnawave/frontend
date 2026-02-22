@@ -1,4 +1,17 @@
 import {
+    TbAlertTriangle,
+    TbBrandDocker,
+    TbClock,
+    TbExternalLink,
+    TbHourglass,
+    TbRadar,
+    TbRefresh,
+    TbServer,
+    TbTag,
+    TbTrash,
+    TbUnlink
+} from 'react-icons/tb'
+import {
     ActionIcon,
     Badge,
     Box,
@@ -13,28 +26,16 @@ import {
     Tooltip,
     Transition
 } from '@mantine/core'
-import {
-    TbAlertTriangle,
-    TbBrandDocker,
-    TbClock,
-    TbExternalLink,
-    TbHourglass,
-    TbRadar,
-    TbRefresh,
-    TbServer,
-    TbTag,
-    TbTrash
-} from 'react-icons/tb'
 import { useCallback, useEffect, useState } from 'react'
 import { CodeHighlight } from '@mantine/code-highlight'
+import { notifications } from '@mantine/notifications'
 import { Trans, useTranslation } from 'react-i18next'
 import { PiEmptyDuotone } from 'react-icons/pi'
 
-import { useCreateUserIpsJob } from '@shared/api/hooks/bandwidth-stats/bandwidth-stats.mutation.hooks'
+import { useDropConnections, useFetchIps, useFetchIpsResult } from '@shared/api/hooks'
 import { CopyableFieldShared } from '@shared/ui/copyable-field/copyable-field'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { LottieGlobeShared } from '@shared/ui/lotties/globe'
-import { useGetUserIpsResult } from '@shared/api/hooks'
 import { SectionCard } from '@shared/ui/section-card'
 import { formatInt } from '@shared/utils/misc'
 
@@ -59,7 +60,7 @@ export const UserActiveSessionDrawerWidget = (props: IProps) => {
     const [isCompleted, setIsCompleted] = useState(false)
     const [isFailed, setIsFailed] = useState(false)
 
-    const { mutate: createUserIpsJob, isPending: isCreatingJob } = useCreateUserIpsJob({
+    const { mutate: fetchIps, isPending: isFetchingIps } = useFetchIps({
         route: {
             uuid: userUuid
         },
@@ -70,9 +71,21 @@ export const UserActiveSessionDrawerWidget = (props: IProps) => {
         }
     })
 
+    const { mutate: dropConnections } = useDropConnections({
+        mutationFns: {
+            onSuccess: () => {
+                notifications.show({
+                    title: t('common.success'),
+                    message: t('common.event-sent'),
+                    color: 'teal'
+                })
+            }
+        }
+    })
+
     const shouldPoll = opened && !!jobId && !isCompleted && !isFailed
 
-    const { data: userIpsResult } = useGetUserIpsResult({
+    const { data: userIpsResult } = useFetchIpsResult({
         route: {
             jobId: jobId ?? ''
         },
@@ -99,8 +112,8 @@ export const UserActiveSessionDrawerWidget = (props: IProps) => {
     }, [userIpsResult])
 
     const handleGetData = useCallback(() => {
-        createUserIpsJob({})
-    }, [userUuid, createUserIpsJob])
+        fetchIps({})
+    }, [userUuid, fetchIps])
 
     const handleClearResults = useCallback(() => {
         setJobId(null)
@@ -113,8 +126,8 @@ export const UserActiveSessionDrawerWidget = (props: IProps) => {
         onClose()
     }, [onClose, handleClearResults])
 
-    const isIdle = !jobId && !isCompleted && !isCreatingJob
-    const isInProgress = isCreatingJob || (!!jobId && !isCompleted && !isFailed)
+    const isIdle = !jobId && !isCompleted && !isFetchingIps
+    const isInProgress = isFetchingIps || (!!jobId && !isCompleted && !isFailed)
 
     const renderSummaryCard = (totalIps: number, distinctIps: number) => (
         <SectionCard.Root gap="md">
@@ -130,30 +143,53 @@ export const UserActiveSessionDrawerWidget = (props: IProps) => {
                     <Group gap="xs">
                         <Tooltip label={t('active-sessions-drawer.widget.clear')}>
                             <ActionIcon
-                                color="red"
                                 onClick={handleClearResults}
                                 size="lg"
-                                variant="light"
+                                variant="gradient-red"
                             >
                                 <TbTrash size={20} />
                             </ActionIcon>
                         </Tooltip>
 
-                        <Group gap="xs">
-                            <Tooltip label={t('common.refresh')}>
-                                <ActionIcon
-                                    color="indigo"
-                                    onClick={() => {
-                                        handleClearResults()
-                                        handleGetData()
-                                    }}
-                                    size="lg"
-                                    variant="light"
-                                >
-                                    <TbRefresh size={20} />
-                                </ActionIcon>
-                            </Tooltip>
-                        </Group>
+                        <Tooltip
+                            label={t(
+                                'user-active-session-drawer.widget.drop-all-user-connections-all-nodes'
+                            )}
+                        >
+                            <ActionIcon
+                                color="red"
+                                onClick={() =>
+                                    dropConnections({
+                                        variables: {
+                                            dropBy: {
+                                                by: 'userUuids',
+                                                userUuids: [userUuid]
+                                            },
+                                            targetNodes: {
+                                                target: 'allNodes'
+                                            }
+                                        }
+                                    })
+                                }
+                                size="lg"
+                                variant="gradient-orange"
+                            >
+                                <TbUnlink size={20} />
+                            </ActionIcon>
+                        </Tooltip>
+
+                        <Tooltip label={t('common.refresh')}>
+                            <ActionIcon
+                                onClick={() => {
+                                    handleClearResults()
+                                    handleGetData()
+                                }}
+                                size="lg"
+                                variant="gradient-indigo"
+                            >
+                                <TbRefresh size={20} />
+                            </ActionIcon>
+                        </Tooltip>
                     </Group>
                 </Group>
             </SectionCard.Section>
@@ -365,9 +401,38 @@ export const UserActiveSessionDrawerWidget = (props: IProps) => {
                                         iconVariant="gradient-blue"
                                         title={node.nodeName}
                                     />
-                                    <Badge color="teal" size="lg" variant="default">
-                                        {node.ips.length}
-                                    </Badge>
+                                    <Group gap="xs">
+                                        <Badge color="teal" size="lg" variant="default">
+                                            {node.ips.length}
+                                        </Badge>
+                                        <Tooltip
+                                            label={t(
+                                                'user-active-session-drawer.widget.drop-all-user-connections-this-node'
+                                            )}
+                                        >
+                                            <ActionIcon
+                                                color="red"
+                                                onClick={() =>
+                                                    dropConnections({
+                                                        variables: {
+                                                            dropBy: {
+                                                                by: 'userUuids',
+                                                                userUuids: [userUuid]
+                                                            },
+                                                            targetNodes: {
+                                                                target: 'specificNodes',
+                                                                nodeUuids: [node.nodeUuid]
+                                                            }
+                                                        }
+                                                    })
+                                                }
+                                                size="lg"
+                                                variant="gradient-orange"
+                                            >
+                                                <TbUnlink size={20} />
+                                            </ActionIcon>
+                                        </Tooltip>
+                                    </Group>
                                 </Group>
                             </SectionCard.Section>
 
@@ -386,6 +451,34 @@ export const UserActiveSessionDrawerWidget = (props: IProps) => {
                             {node.ips.length > 0 &&
                                 node.ips.map((ip) => (
                                     <Group align="flex-end" gap="xs" key={ip} wrap="nowrap">
+                                        <Tooltip
+                                            label={t(
+                                                'user-active-session-drawer.widget.drop-this-connection-on-this-node'
+                                            )}
+                                        >
+                                            <ActionIcon
+                                                color="red"
+                                                onClick={() =>
+                                                    dropConnections({
+                                                        variables: {
+                                                            dropBy: {
+                                                                by: 'ipAddresses',
+                                                                ipAddresses: [ip]
+                                                            },
+                                                            targetNodes: {
+                                                                target: 'specificNodes',
+                                                                nodeUuids: [node.nodeUuid]
+                                                            }
+                                                        }
+                                                    })
+                                                }
+                                                size="lg"
+                                                variant="gradient-orange"
+                                            >
+                                                <TbUnlink size={20} />
+                                            </ActionIcon>
+                                        </Tooltip>
+
                                         <Box style={{ flex: 1 }}>
                                             <CopyableFieldShared size="sm" value={ip} />
                                         </Box>
@@ -418,7 +511,7 @@ export const UserActiveSessionDrawerWidget = (props: IProps) => {
                         color="teal"
                         fullWidth
                         leftSection={<TbRadar size={20} />}
-                        loading={isCreatingJob}
+                        loading={isFetchingIps}
                         onClick={handleGetData}
                         size="md"
                         variant="light"

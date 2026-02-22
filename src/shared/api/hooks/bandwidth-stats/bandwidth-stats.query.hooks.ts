@@ -4,8 +4,7 @@ import {
     GetStatsNodesRealtimeUsageCommand,
     GetStatsNodesUsageCommand,
     GetStatsNodeUsersUsageCommand,
-    GetStatsUserUsageCommand,
-    GetUserIpsResultCommand
+    GetStatsUserUsageCommand
 } from '@remnawave/backend-contract'
 import { createQueryKeys } from '@lukemorales/query-key-factory'
 
@@ -40,9 +39,6 @@ export const bandwidthStatsQueryKeys = createQueryKeys('bandwidthStats', {
             GetLegacyStatsNodeUserUsageCommand.RequestQuery
     ) => ({
         queryKey: [query]
-    }),
-    getUserIpsResult: (route: GetUserIpsResultCommand.Request) => ({
-        queryKey: [route]
     })
 })
 
@@ -117,16 +113,4 @@ export const useGetLegacyStatsUserUsage = createGetQueryHook({
         staleTime: sToMs(15)
     },
     errorHandler: (error) => errorHandler(error, 'Get User Usage By Range')
-})
-
-export const useGetUserIpsResult = createGetQueryHook({
-    endpoint: GetUserIpsResultCommand.TSQ_url,
-    responseSchema: GetUserIpsResultCommand.ResponseSchema,
-    routeParamsSchema: GetUserIpsResultCommand.RequestSchema,
-    getQueryKey: ({ route, query }) =>
-        bandwidthStatsQueryKeys.getUserIpsResult({ ...route!, ...query! }).queryKey,
-    rQueryParams: {
-        staleTime: sToMs(60)
-    },
-    errorHandler: (error) => errorHandler(error, 'Get User IPs Result')
 })

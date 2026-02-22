@@ -56,7 +56,8 @@
         "search": "Search",
         "nothing-found": "Nothing found",
         "name": "Name",
-        "clone": "Clone"
+        "clone": "Clone",
+        "event-sent": "Event sent"
     },
     "bandwidth-metrics": {
         "current-year": "Current year",
@@ -1942,6 +1943,13 @@
             "template-variables": "Template Variables",
             "available-variables-are-listed-below": "Available variables are listed below.",
             "you-can-use-template-variables-in-this-field": "You can use template variables in this field."
+        }
+    },
+    "user-active-session-drawer": {
+        "widget": {
+            "drop-all-user-connections-all-nodes": "Drop All User Connections (all nodes)",
+            "drop-all-user-connections-this-node": "Drop All User Connections (this node)",
+            "drop-this-connection-on-this-node": "Drop this connection on this node"
         }
     }
 }
