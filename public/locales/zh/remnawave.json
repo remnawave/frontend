@@ -765,28 +765,28 @@
         "feature": {
             "show-usage": "显示用量",
             "usage": "使用情况",
-            "active-sessions": "Active Sessions"
+            "active-sessions": "活跃会话"
         }
     },
     "active-sessions-drawer": {
         "widget": {
-            "title": "Active Sessions",
-            "requirements": "Requirements",
-            "warning-activity": "IP addresses will only be shown if there was activity within the last <highlight>20 seconds</highlight>",
-            "warning-version": "Remnawave Node version <highlight>{{version}}</highlight> or higher",
-            "warning-docker": "Add the following to <highlight>docker-compose.yml</highlight> of Remnawave Node (/opt/remnanode)",
-            "warning-patience": "Fetching data may take some time, do not close this window!",
-            "get-data": "Get Data",
-            "fetching": "Fetching active sessions...",
-            "progress": "Completed {{completed}} of {{total}} nodes",
-            "job-failed": "Job failed",
-            "job-failed-description": "Failed to fetch active sessions.",
-            "try-again": "Try Again",
-            "clear": "Clear",
-            "no-active-sessions": "No active sessions",
-            "no-active-sessions-description": "No active IP addresses were found for this user.",
-            "active-ips-across-nodes": "Active IP addresses",
-            "distinct-ips": "Distinct IPs"
+            "title": "活跃会话",
+            "requirements": "需求",
+            "warning-activity": "仅在最近<highlight>20 秒</highlight>有活动才会显示IP地址",
+            "warning-version": "Remnawave 节点版本 <highlight>{{version}}</highlight> 或者更高",
+            "warning-docker": "将以下内容添加到 Remnawave 节点的 <highlight>docker-compose.yml</highlight> 内(/opt/remnanode)",
+            "warning-patience": "获取数据可能需要一些时间，不要关闭此窗口！",
+            "get-data": "获取数据",
+            "fetching": "正在获取活动会话...",
+            "progress": "已完成 {{completed}} 个，共 {{total}} 个",
+            "job-failed": "任务失败",
+            "job-failed-description": "无法获取活动会话",
+            "try-again": "重试",
+            "clear": "清除",
+            "no-active-sessions": "没有活跃的会话",
+            "no-active-sessions-description": "未找到此用户的活跃IP地址。",
+            "active-ips-across-nodes": "活跃的 IP 地址",
+            "distinct-ips": "独立的IP地址"
         }
     },
     "detailed-user-info-drawer": {
