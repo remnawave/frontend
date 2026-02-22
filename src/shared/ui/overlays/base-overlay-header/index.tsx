@@ -1,8 +1,10 @@
 import { Group, Stack, Text, ThemeIcon, ThemeIconProps, Title, TitleProps } from '@mantine/core'
+import ReactCountryFlag from 'react-country-flag'
 import { useClipboard } from '@mantine/hooks'
 
 type IProps = {
     actionIconProps?: ThemeIconProps
+    countryCode?: string
     IconComponent: React.ComponentType<{ size: number }>
     iconSize?: number
     iconVariant: ThemeIconProps['variant']
@@ -16,6 +18,7 @@ export const BaseOverlayHeader = (props: IProps) => {
     const {
         actionIconProps,
         IconComponent,
+        countryCode,
         iconSize = 20,
         iconVariant,
         subtitle,
@@ -31,6 +34,10 @@ export const BaseOverlayHeader = (props: IProps) => {
             <ThemeIcon size="lg" variant={iconVariant} {...actionIconProps}>
                 <IconComponent size={iconSize} />
             </ThemeIcon>
+
+            {countryCode && countryCode !== 'XX' && (
+                <ReactCountryFlag countryCode={countryCode} style={{ fontSize: '1.5em' }} />
+            )}
 
             <Stack gap="0">
                 <Title
