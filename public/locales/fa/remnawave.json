@@ -56,7 +56,8 @@
         "search": "جستجو",
         "nothing-found": "چیزی یافت نشد",
         "name": "اسم",
-        "clone": "همانندسازی"
+        "clone": "همانندسازی",
+        "event-sent": "Event sent"
     },
     "bandwidth-metrics": {
         "current-year": "امسال",
@@ -304,9 +305,7 @@
             "3-months": "+3 ماه",
             "1-year": "+1 سال",
             "2099-year": "سال 2099",
-            "hwid-user-limit-line-1": "این ویژگی فقط در صورتی کار می‌‌کند که",
-            "hwid-user-limit-line-2": "در تنظیمات اشتراک این مقدار تنظیم شده است:",
-            "hwid-user-limit-line-3": "اطلاعات بیشتر.",
+            "hwid-user-limit-description": "This feature will only work if <highlight>Subscription → Settings (HWID Limit)</highlight> is enabled. <anchor>Learn more</anchor>.",
             "disable-hwid-limit": "غیرفعالسازی لیمیت HWID",
             "hwid-device-limit": "لیمیت دستگاه براساس HWID",
             "expire-at-description": "تاریخ و ساعت منقضی شدن اشتراک کاربر.",
@@ -1943,5 +1942,18 @@
             "available-variables-are-listed-below": "Available variables are listed below.",
             "you-can-use-template-variables-in-this-field": "You can use template variables in this field."
         }
+    },
+    "user-active-session-drawer": {
+        "widget": {
+            "drop-all-user-connections-all-nodes": "Drop All User Connections (all nodes)",
+            "drop-all-user-connections-this-node": "Drop All User Connections (this node)",
+            "drop-this-connection-on-this-node": "Drop this connection on this node"
+        }
+    },
+    "contact-information-card": {
+        "contact-information": "Contact Information"
+    },
+    "traffic-limits-card": {
+        "traffic-and-limits": "Traffic & Limits"
     }
 }
