@@ -22,11 +22,11 @@ export const HelpActionIconShared = memo((props: IProps) => {
 
     const openWithData = useModalsStoreOpenWithData()
 
-    const handleOpenHelpDrawer = () => {
-        if (hidden) {
-            return
-        }
+    if (hidden) {
+        return null
+    }
 
+    const handleOpenHelpDrawer = () => {
         openWithData(MODALS.HELP_DRAWER, {
             screen
         })
@@ -36,7 +36,6 @@ export const HelpActionIconShared = memo((props: IProps) => {
         <Tooltip label={t('help-action-icon.shared.help-article')}>
             <ActionIcon
                 color="lime"
-                hidden={hidden}
                 onClick={handleOpenHelpDrawer}
                 size="input-md"
                 variant="light"
