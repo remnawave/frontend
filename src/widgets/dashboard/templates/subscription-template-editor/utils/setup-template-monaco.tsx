@@ -164,6 +164,13 @@ export const configureMonaco = (
                                                 }
                                             ]
                                         },
+                                        selectFrom: {
+                                            type: 'string',
+                                            enum: ['ALL', 'HIDDEN', 'NOT_HIDDEN'],
+                                            default: 'HIDDEN',
+                                            description:
+                                                'Filter hosts by visibility. Defaults to HIDDEN if not specified.'
+                                        },
                                         tagPrefix: {
                                             type: 'string',
                                             minLength: 1
