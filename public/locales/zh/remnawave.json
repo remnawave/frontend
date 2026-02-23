@@ -57,7 +57,7 @@
         "nothing-found": "未找到",
         "name": "名称",
         "clone": "克隆",
-        "event-sent": "Event sent"
+        "event-sent": "发送事件"
     },
     "bandwidth-metrics": {
         "current-year": "今年",
@@ -1945,9 +1945,9 @@
     },
     "user-active-session-drawer": {
         "widget": {
-            "drop-all-user-connections-all-nodes": "Drop All User Connections (all nodes)",
-            "drop-all-user-connections-this-node": "Drop All User Connections (this node)",
-            "drop-this-connection-on-this-node": "Drop this connection on this node"
+            "drop-all-user-connections-all-nodes": "丢弃所有用户连接(所有节点)",
+            "drop-all-user-connections-this-node": "丢弃所有用户连接(此节点)",
+            "drop-this-connection-on-this-node": "在此节点上丢弃此连接"
         }
     },
     "contact-information-card": {
