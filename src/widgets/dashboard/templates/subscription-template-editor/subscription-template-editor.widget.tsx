@@ -1,6 +1,6 @@
 import type { editor } from 'monaco-editor'
 
-import { GetSubscriptionTemplateCommand } from '@remnawave/backend-contract'
+import { GetAllHostsCommand, GetSubscriptionTemplateCommand } from '@remnawave/backend-contract'
 import Editor, { Monaco } from '@monaco-editor/react'
 import 'monaco-yaml/yaml.worker.js'
 import { Box, Card, Paper } from '@mantine/core'
@@ -16,12 +16,13 @@ import styles from './SubscriptionTemplateEditor.module.css'
 
 interface Props {
     editorType: 'json' | 'yaml'
+    hosts: GetAllHostsCommand.Response['response']
     template: GetSubscriptionTemplateCommand.Response['response']
 }
 
 export function SubscriptionTemplateEditorWidget(props: Props) {
     const { t } = useTranslation()
-    const { editorType, template } = props
+    const { editorType, hosts, template } = props
 
     const editorRef = useRef<editor.IStandaloneCodeEditor | null>(null)
     const monacoRef = useRef<Monaco | null>(null)
@@ -40,12 +41,28 @@ export function SubscriptionTemplateEditorWidget(props: Props) {
             ...monacoTheme,
             base: 'vs-dark'
         })
-        configureMonaco(monaco, editorType)
+        configureMonaco(monaco, editorType, hosts)
     }
 
     const handleEditorDidMount = (editor: editor.IStandaloneCodeEditor, monaco: Monaco) => {
         editorRef.current = editor
         monacoRef.current = monaco
+
+        const contribution = editor.getContribution(
+            'editor.contrib.suggestController'
+            /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
+        ) as any
+
+        if (contribution && contribution.widget) {
+            const suggestWidget = contribution.widget.value
+            if (suggestWidget?._setDetailsVisible) {
+                suggestWidget._setDetailsVisible(true)
+            }
+
+            if (suggestWidget && suggestWidget._persistedSize) {
+                suggestWidget._persistedSize.store({ width: 400, height: 256 })
+            }
+        }
     }
 
     useLayoutEffect(() => {

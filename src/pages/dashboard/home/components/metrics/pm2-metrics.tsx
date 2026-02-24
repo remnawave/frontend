@@ -12,6 +12,7 @@ import { ThemeIconProps } from '@mantine/core'
 import { TFunction } from 'i18next'
 
 import { IMetricCardProps } from '@shared/ui/metrics/metric-card'
+import { prettyBytesToAnyUtil } from '@shared/utils/bytes'
 
 const getProcessIcon = (processName: string) => {
     if (processName.includes('REST API')) return PiCloudDuotone
@@ -34,9 +35,8 @@ export const getPm2SummaryMetrics = (
         return []
     }
 
-    const totalMemoryMB = pm2Stats.reduce((sum, process) => {
-        const memoryValue = parseFloat(process.memory.replace(' MiB', ''))
-        return sum + memoryValue
+    const totalMemoryBytes = pm2Stats.reduce((sum, process) => {
+        return sum + Number(process.memory)
     }, 0)
 
     const averageCpu =
@@ -56,7 +56,7 @@ export const getPm2SummaryMetrics = (
             iconVariant: 'gradient-blue'
         },
         {
-            value: `${totalMemoryMB.toFixed(0)} MiB`,
+            value: prettyBytesToAnyUtil(totalMemoryBytes, true),
             IconComponent: PiMemoryDuotone,
             title: t('pm2-metrics.total-memory'),
             iconVariant: 'gradient-cyan'
@@ -86,7 +86,7 @@ export const getPm2ProcessMetrics = (
     return pm2Stats.map((process) => {
         const cpuUsage = parseFloat(process.cpu)
         return {
-            value: `${process.memory} (${process.cpu}%)`,
+            value: prettyBytesToAnyUtil(process.memory, true),
             IconComponent: getProcessIcon(process.name),
             title: process.name,
             iconVariant: getIconVariant(cpuUsage)

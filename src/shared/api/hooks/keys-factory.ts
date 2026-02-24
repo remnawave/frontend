@@ -12,6 +12,7 @@ import { subpageConfigsQueryKeys } from './subpage-configs/subpage-configs.query
 import { bandwidthStatsQueryKeys } from './bandwidth-stats/bandwidth-stats.query.hooks'
 import { infraBillingQueryKeys } from './infra-billing/infra-billing.query.hooks'
 import { apiTokensQueryKeys } from './api-tokens/api-tokens.query.hooks'
+import { ipControlQueryKeys } from './ip-control/ip-control.query.hooks'
 import { snippetsQueryKeys } from './snippets/snippets.query.hooks'
 import { passkeysQueryKeys } from './passkeys/passkeys.query.hooks'
 import { systemQueryKeys } from './system/system.query.hooks'
@@ -39,7 +40,8 @@ export const QueryKeys = mergeQueryKeys(
     remnawaveSettingsQueryKeys,
     passkeysQueryKeys,
     subpageConfigsQueryKeys,
-    bandwidthStatsQueryKeys
+    bandwidthStatsQueryKeys,
+    ipControlQueryKeys
 )
 
 export type TQueryKeys = inferQueryKeyStore<typeof QueryKeys>

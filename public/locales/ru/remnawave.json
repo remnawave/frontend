@@ -56,7 +56,8 @@
         "search": "Поиск",
         "nothing-found": "Ничего не найдено",
         "name": "Имя",
-        "clone": "Клонировать"
+        "clone": "Клонировать",
+        "event-sent": "Запрос отправлен"
     },
     "bandwidth-metrics": {
         "current-year": "Текущий год",
@@ -304,9 +305,7 @@
             "3-months": "+3 мес.",
             "1-year": "+1 год",
             "2099-year": "2099 год",
-            "hwid-user-limit-line-1": "Эта функция доступна только если",
-            "hwid-user-limit-line-2": "в настройках подписки установлен",
-            "hwid-user-limit-line-3": "Подробнее.",
+            "hwid-user-limit-description": "Эта функция будет работать только если <highlight>Подписка → Настройки (HWID Лимит)</highlight> включен. <anchor>Подробнее</anchor>.",
             "disable-hwid-limit": "Отключить лимит HWID",
             "hwid-device-limit": "Ограничение HWID устройств",
             "expire-at-description": "Дата и время истечения срока действия подписки пользователя.",
@@ -764,7 +763,29 @@
     "get-user-usage": {
         "feature": {
             "show-usage": "Статистика",
-            "usage": "КТО ТАКОЙ ЭТОТ ВАШ ЮСАГЕ?"
+            "usage": "КТО ТАКОЙ ЭТОТ ВАШ ЮСАГЕ?",
+            "active-sessions": "Активные сеансы"
+        }
+    },
+    "active-sessions-drawer": {
+        "widget": {
+            "title": "Активные сеансы",
+            "requirements": "Условия",
+            "warning-activity": "IP адреса будут показаны только при наличии активности в течение последних <highlight>20 секунд</highlight>",
+            "warning-version": "Версия Remnawave Node <highlight>{{version}}</highlight> или выше",
+            "warning-docker": "Добавьте эти строки к <highlight>docker-compose.yml</highlight> Remnawave Node (/opt/remnanode)",
+            "warning-patience": "Получение данных может занять некоторое время, не закрывайте это окно!",
+            "get-data": "Получить данные",
+            "fetching": "Получение активных сессий...",
+            "progress": "Опрошено {{completed}} из {{total}} нод",
+            "job-failed": "Выполнить не удалось",
+            "job-failed-description": "Не удалось получить активные сеансы.",
+            "try-again": "Попробовать снова",
+            "clear": "Очистить",
+            "no-active-sessions": "Нет активных сеансов",
+            "no-active-sessions-description": "Активных IP адресов для этого пользователя не найдено.",
+            "active-ips-across-nodes": "Активные IP адреса",
+            "distinct-ips": "Уникальные IP адреса"
         }
     },
     "detailed-user-info-drawer": {
@@ -1921,5 +1942,18 @@
             "available-variables-are-listed-below": "Ниже перечислены доступные переменные.",
             "you-can-use-template-variables-in-this-field": "В этом поле можно использовать шаблонные переменные."
         }
+    },
+    "user-active-session-drawer": {
+        "widget": {
+            "drop-all-user-connections-all-nodes": "Прервать все соединения пользователя (на всех нодах)",
+            "drop-all-user-connections-this-node": "Прервать все соединения пользователя (на этой ноде)",
+            "drop-this-connection-on-this-node": "Прервать данное соединение на этой ноде"
+        }
+    },
+    "contact-information-card": {
+        "contact-information": "Контактная информация"
+    },
+    "traffic-limits-card": {
+        "traffic-and-limits": "Трафик и лимиты"
     }
 }

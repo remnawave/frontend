@@ -24,8 +24,8 @@ import {
 import { BulkUpdateUsersCommand } from '@remnawave/backend-contract'
 import { zodResolver } from 'mantine-form-zod-resolver'
 import { TbDevices2, TbWebhook } from 'react-icons/tb'
+import { Trans, useTranslation } from 'react-i18next'
 import { DateTimePicker } from '@mantine/dates'
-import { useTranslation } from 'react-i18next'
 import { useForm } from '@mantine/form'
 import dayjs from 'dayjs'
 import { z } from 'zod'
@@ -307,17 +307,19 @@ export const BulkUserActionsUpdateTabFeature = (props: IProps) => {
                     <Input.Description component="div">
                         <>
                             <Text c="dimmed" size="0.75rem">
-                                {t('create-user-modal.widget.hwid-user-limit-line-1')}{' '}
-                                <Code>HWID Limit</Code>{' '}
-                                {t('create-user-modal.widget.hwid-user-limit-line-2')}{' '}
-                                <Code>true</Code>.{' '}
-                                <Anchor
-                                    href="https://docs.rw/docs/features/hwid-device-limit"
-                                    rel="noopener noreferrer"
-                                    target="_blank"
-                                >
-                                    {t('create-user-modal.widget.hwid-user-limit-line-3')}
-                                </Anchor>
+                                <Trans
+                                    components={{
+                                        highlight: <Code />,
+                                        anchor: (
+                                            <Anchor
+                                                href="https://docs.rw/docs/features/hwid-device-limit"
+                                                rel="noopener noreferrer"
+                                                target="_blank"
+                                            />
+                                        )
+                                    }}
+                                    i18nKey="create-user-modal.widget.hwid-user-limit-description"
+                                />
                             </Text>
                             <Checkbox
                                 checked={form.getValues().fields.hwidDeviceLimit === 0}

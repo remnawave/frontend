@@ -3,6 +3,7 @@ import { ForwardRefComponent, HTMLMotionProps, Variants } from 'motion/react'
 import { PiEnvelopeDuotone, PiTelegramLogoDuotone } from 'react-icons/pi'
 import { NumberInput, Stack, TextInput } from '@mantine/core'
 import { UseFormReturnType } from '@mantine/form'
+import { useTranslation } from 'react-i18next'
 import { TbMail } from 'react-icons/tb'
 
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
@@ -17,7 +18,7 @@ interface IProps<T extends CreateUserCommand.Request | UpdateUserCommand.Request
 export function ContactInformationCard<
     T extends CreateUserCommand.Request | UpdateUserCommand.Request
 >(props: IProps<T>) {
-    // const { t } = useTranslation()
+    const { t } = useTranslation()
 
     const { cardVariants, motionWrapper, form } = props
 
@@ -31,7 +32,7 @@ export function ContactInformationCard<
                         IconComponent={TbMail}
                         iconSize={20}
                         iconVariant="gradient-teal"
-                        title="Contact Information"
+                        title={t('contact-information-card.contact-information')}
                         titleOrder={5}
                     />
                 </SectionCard.Section>

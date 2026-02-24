@@ -11,14 +11,15 @@ import {
     useMantineReactTable
 } from 'mantine-react-table'
 import { TbDeviceAnalytics, TbRefresh, TbRestore } from 'react-icons/tb'
+import { useCallback, useLayoutEffect, useMemo, useState } from 'react'
 import { GetAllHwidDevicesCommand } from '@remnawave/backend-contract'
 import { ActionIcon, ActionIconGroup, Tooltip } from '@mantine/core'
-import { useCallback, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { PiUserCircle } from 'react-icons/pi'
 
 import { useHwidInspectorTableColumns } from '@features/dashboard/hwid-inspector/hwid-inspector-table/model/use-hwid-inspector-table-columns'
 import { useUserModalStoreActions } from '@entities/dashboard/user-modal-store'
+import { preventBackScrollTables } from '@shared/utils/misc'
 import { useGetAllHwidDevices } from '@shared/api/hooks'
 import { DataTableShared } from '@shared/ui/table'
 import { sToMs } from '@shared/utils/time-utils'
@@ -66,6 +67,15 @@ export function HwidInspectorTableWidget() {
     })
 
     const filteredData = useMemo(() => usersResponse, [usersResponse])
+
+    useLayoutEffect(() => {
+        document.body.addEventListener('wheel', preventBackScrollTables, {
+            passive: false
+        })
+        return () => {
+            document.body.removeEventListener('wheel', preventBackScrollTables)
+        }
+    }, [])
 
     const table = useMantineReactTable({
         columns: tableColumns,

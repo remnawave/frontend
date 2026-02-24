@@ -4,6 +4,7 @@ import { useState } from 'react'
 
 import { MultiSelectHostsFeature } from '@features/dashboard/hosts/multi-select-hosts/multi-select-hosts.feature'
 import { CreateHostModalWidget } from '@widgets/dashboard/hosts/create-host-modal'
+import { HostsSpotlightWidget } from '@widgets/dashboard/hosts/hosts-spotlight'
 import { EditHostModalWidget } from '@widgets/dashboard/hosts/edit-host-modal'
 import { HostsTableWidget } from '@widgets/dashboard/hosts/hosts-table'
 import { LoadingScreen, Page } from '@shared/ui'
@@ -34,6 +35,8 @@ export default function HostsPageComponent(props: IProps) {
                     />
                 </motion.div>
             )}
+
+            <HostsSpotlightWidget configProfiles={configProfiles ?? []} hosts={hosts ?? []} />
 
             <EditHostModalWidget key="edit-host-modal" />
             <CreateHostModalWidget key="create-host-modal" />

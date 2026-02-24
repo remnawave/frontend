@@ -25,6 +25,8 @@ export const CopyDockerComposeWidget = ({ port }: IProps) => {
     image: remnawave/node:latest
     network_mode: host
     restart: always
+    cap_add:
+      - NET_ADMIN
     ulimits:
       nofile:
         soft: 1048576

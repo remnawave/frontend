@@ -32,6 +32,7 @@ import { GetUserSubscriptionRequestHistoryFeature } from '@features/ui/dashboard
 import { GetUserSubscriptionLinksFeature } from '@features/ui/dashboard/users/get-user-subscription-links'
 import { ToggleUserStatusButtonFeature } from '@features/ui/dashboard/users/toggle-user-status-button'
 import { RevokeSubscriptionUserFeature } from '@features/ui/dashboard/users/revoke-subscription-user'
+import { GetUserActiveSessionsFeature } from '@features/ui/dashboard/users/get-user-active-sessions'
 import { useUserModalStoreActions } from '@entities/dashboard/user-modal-store/user-modal-store'
 import { GetHwidUserDevicesFeature } from '@features/ui/dashboard/users/get-hwid-user-devices'
 import { ResetUsageUserFeature } from '@features/ui/dashboard/users/reset-usage-user'
@@ -339,6 +340,7 @@ export const ViewUserModalContent = (props: IProps) => {
                             opened={trafficStatisticsModalOpened}
                             userUuid={user.uuid}
                         />
+                        <GetUserActiveSessionsFeature userUuid={user.uuid} />
                         <GetHwidUserDevicesFeature userUuid={user.uuid} />
 
                         <Menu.Item

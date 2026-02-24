@@ -56,7 +56,8 @@
         "search": "Search",
         "nothing-found": "Nothing found",
         "name": "Name",
-        "clone": "Clone"
+        "clone": "Clone",
+        "event-sent": "Event sent"
     },
     "bandwidth-metrics": {
         "current-year": "Current year",
@@ -304,9 +305,7 @@
             "3-months": "+3 months",
             "1-year": "+1 year",
             "2099-year": "year 2099",
-            "hwid-user-limit-line-1": "This feature will only work if",
-            "hwid-user-limit-line-2": "in Subscription Settings is set to",
-            "hwid-user-limit-line-3": "Learn more.",
+            "hwid-user-limit-description": "This feature will only work if <highlight>Subscription → Settings (HWID Limit)</highlight> is enabled. <anchor>Learn more</anchor>.",
             "disable-hwid-limit": "Disable HWID Limit",
             "hwid-device-limit": "HWID Device Limit",
             "expire-at-description": "The date and time when the user's subscription will expire.",
@@ -764,7 +763,29 @@
     "get-user-usage": {
         "feature": {
             "show-usage": "Show usage",
-            "usage": "Usage"
+            "usage": "Usage",
+            "active-sessions": "Active Sessions"
+        }
+    },
+    "active-sessions-drawer": {
+        "widget": {
+            "title": "Active Sessions",
+            "requirements": "Requirements",
+            "warning-activity": "IP addresses will only be shown if there was activity within the last <highlight>20 seconds</highlight>",
+            "warning-version": "Remnawave Node version <highlight>{{version}}</highlight> or higher",
+            "warning-docker": "Add the following to <highlight>docker-compose.yml</highlight> of Remnawave Node (/opt/remnanode)",
+            "warning-patience": "Fetching data may take some time, do not close this window!",
+            "get-data": "Get Data",
+            "fetching": "Fetching active sessions...",
+            "progress": "Completed {{completed}} of {{total}} nodes",
+            "job-failed": "Job failed",
+            "job-failed-description": "Failed to fetch active sessions.",
+            "try-again": "Try Again",
+            "clear": "Clear",
+            "no-active-sessions": "No active sessions",
+            "no-active-sessions-description": "No active IP addresses were found for this user.",
+            "active-ips-across-nodes": "Active IP addresses",
+            "distinct-ips": "Distinct IPs"
         }
     },
     "detailed-user-info-drawer": {
@@ -1921,5 +1942,18 @@
             "available-variables-are-listed-below": "Available variables are listed below.",
             "you-can-use-template-variables-in-this-field": "You can use template variables in this field."
         }
+    },
+    "user-active-session-drawer": {
+        "widget": {
+            "drop-all-user-connections-all-nodes": "Drop All User Connections (all nodes)",
+            "drop-all-user-connections-this-node": "Drop All User Connections (this node)",
+            "drop-this-connection-on-this-node": "Drop this connection on this node"
+        }
+    },
+    "contact-information-card": {
+        "contact-information": "Contact Information"
+    },
+    "traffic-limits-card": {
+        "traffic-and-limits": "Traffic & Limits"
     }
 }

@@ -33,7 +33,7 @@ export const TrafficLimitsCard = <T extends CreateUserCommand.Request | UpdateUs
                         IconComponent={TbChartLine}
                         iconSize={20}
                         iconVariant="gradient-violet"
-                        title="Traffic & Limits"
+                        title={t('traffic-limits-card.traffic-and-limits')}
                         titleOrder={5}
                     />
                 </SectionCard.Section>
