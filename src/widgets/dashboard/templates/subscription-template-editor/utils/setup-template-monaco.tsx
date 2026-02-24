@@ -5,6 +5,9 @@ import consola from 'consola'
 
 type Host = GetAllHostsCommand.Response['response'][number]
 
+const DOCS_URL = 'https://docs.rw/docs/learn/xray-json-advanced'
+const DOCS_LINK = `\n\n[📖 Documentation](${DOCS_URL})`
+
 function getHostStatus(host: Host): { icon: string; label: string } {
     if (host.isDisabled) return { icon: '⛔', label: 'Disabled' }
     if (host.isHidden) return { icon: '👁', label: 'Hidden' }
@@ -168,17 +171,44 @@ export const configureMonaco = (
                                             type: 'string',
                                             enum: ['ALL', 'HIDDEN', 'NOT_HIDDEN'],
                                             default: 'HIDDEN',
-                                            description:
-                                                'Filter hosts by visibility. Defaults to HIDDEN if not specified.'
+                                            markdownDescription: `Filter hosts by visibility. Defaults to HIDDEN if not specified. ${DOCS_LINK}`
                                         },
                                         tagPrefix: {
                                             type: 'string',
                                             minLength: 1
+                                        },
+                                        useHostRemarkAsTag: {
+                                            type: 'boolean',
+                                            markdownDescription: `Use host remark as tag. ${DOCS_LINK}`
+                                        },
+                                        useHostTagAsTag: {
+                                            type: 'boolean',
+                                            markdownDescription: `Use host tag as tag. ${DOCS_LINK}`
                                         }
                                     },
-                                    required: ['selector', 'tagPrefix'],
+                                    required: ['selector'],
+                                    anyOf: [
+                                        { required: ['tagPrefix'] },
+                                        {
+                                            properties: {
+                                                useHostRemarkAsTag: {
+                                                    const: true
+                                                }
+                                            },
+                                            required: ['useHostRemarkAsTag']
+                                        },
+                                        {
+                                            properties: {
+                                                useHostTagAsTag: {
+                                                    const: true
+                                                }
+                                            },
+                                            required: ['useHostTagAsTag']
+                                        }
+                                    ],
                                     additionalProperties: false
-                                }
+                                },
+                                markdownDescription: `Inject hosts into the subscription template. ${DOCS_LINK}`
                             }
                         },
                         additionalProperties: false
