@@ -1,0 +1,19 @@
+.card {
+    position: relative;
+    padding: 8px 12px;
+    transition: all 150ms ease;
+    border: 1px solid light-dark(var(--mantine-color-gray-9), var(--mantine-color-dark-4));
+
+    &[data-checked] {
+        border-color: var(--mantine-color-red-9);
+        background-color: var(--mantine-primary-color-dark-color);
+    }
+
+    background-color: var(--mantine-color-dark-6);
+    border-color: var(--mantine-color-dark-3);
+}
+
+.label {
+    font-weight: 600;
+    color: var(--mantine-color-bright);
+}

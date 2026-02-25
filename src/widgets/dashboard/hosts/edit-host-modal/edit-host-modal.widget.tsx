@@ -137,7 +137,8 @@ export const EditHostModalWidget = memo(() => {
                 mihomoX25519: host.mihomoX25519 ?? undefined,
                 nodes: host.nodes ?? undefined,
                 xrayJsonTemplateUuid: host.xrayJsonTemplateUuid ?? undefined,
-                excludedInternalSquads: host.excludedInternalSquads ?? undefined
+                excludedInternalSquads: host.excludedInternalSquads ?? undefined,
+                excludeFromSubscriptionTypes: host.excludeFromSubscriptionTypes ?? undefined
             })
         }
     }, [host, configProfiles])
