@@ -210,7 +210,7 @@ export const configureMonaco = (
                                 },
                                 markdownDescription: `Inject hosts into the subscription template. ${DOCS_LINK}`
                             },
-                            addHostOutbound: {
+                            addVirtualHostAsOutbound: {
                                 type: 'boolean',
                                 markdownDescription: `When \`true\`, the recipient host (the host that owns this template) is added as an outbound with tag \`proxy\`. This allows routing rules that reference \`outboundTag: "proxy"\` to work correctly alongside injected hosts. Defaults to \`false\`. ${DOCS_LINK}`
                             }
