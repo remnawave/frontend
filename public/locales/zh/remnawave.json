@@ -305,7 +305,7 @@
             "3-months": "+3 个月",
             "1-year": "+1 年",
             "2099-year": "2099年",
-            "hwid-user-limit-description": "This feature will only work if <highlight>Subscription → Settings (HWID Limit)</highlight> is enabled. <anchor>Learn more</anchor>.",
+            "hwid-user-limit-description": "此功能只能在启用 <highlight>订阅 -> 设置 (HWID Limit)</highlight> 时才能正常工作。 <anchor>了解更多</anchor>。",
             "disable-hwid-limit": "禁用 HWID 限制",
             "hwid-device-limit": "HWID 设备限制",
             "expire-at-description": "用户的订阅服务将于该时间结束。",
@@ -431,7 +431,10 @@
         "exclude-this-host-from-specific-internal-squads": "从指定的内部小队排除此主机",
         "excluded-internal-squads": "排除的内部分组",
         "keep-sni-blank": "保持SNI 为空",
-        "keep-sni-blank-description": "在某些情况下，SNI必须留空。使用此选项强制一个空的SNI。 请注意，此选项具有最高优先级，因此即使SNI已经设置，它也会被应用。"
+        "keep-sni-blank-description": "在某些情况下，SNI必须留空。使用此选项强制一个空的SNI。 请注意，此选项具有最高优先级，因此即使SNI已经设置，它也会被应用。",
+        "select-one-or-more-subscription-types-description": "选择一个或多个订阅类型，从该订阅类型中排除主机。",
+        "exclude-from-subscription-type": "从订阅类型中排除",
+        "hidden-host-description": "默认情况下，Remnawave 将不会在订阅中包含隐藏主机。隐藏主机可以在 Mihomo 和 Xray-Json Advant, Raw 中使用"
     },
     "base-node-form": {
         "country": "国家",
@@ -1951,9 +1954,9 @@
         }
     },
     "contact-information-card": {
-        "contact-information": "Contact Information"
+        "contact-information": "连接信息"
     },
     "traffic-limits-card": {
-        "traffic-and-limits": "Traffic & Limits"
+        "traffic-and-limits": "流量限制"
     }
 }

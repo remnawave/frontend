@@ -57,7 +57,7 @@
         "nothing-found": "چیزی یافت نشد",
         "name": "اسم",
         "clone": "همانندسازی",
-        "event-sent": "Event sent"
+        "event-sent": "رویداد ارسال شد"
     },
     "bandwidth-metrics": {
         "current-year": "امسال",
@@ -305,7 +305,7 @@
             "3-months": "+3 ماه",
             "1-year": "+1 سال",
             "2099-year": "سال 2099",
-            "hwid-user-limit-description": "This feature will only work if <highlight>Subscription → Settings (HWID Limit)</highlight> is enabled. <anchor>Learn more</anchor>.",
+            "hwid-user-limit-description": "این ویژگی تنها درصورت فعال بودن <highlight>اشتراک ← تنظیمات (محدودیت HWID)</highlight> کار خواهد کرد. <anchor>کسب اطلاعات بیشتر</anchor>",
             "disable-hwid-limit": "غیرفعالسازی لیمیت HWID",
             "hwid-device-limit": "لیمیت دستگاه براساس HWID",
             "expire-at-description": "تاریخ و ساعت منقضی شدن اشتراک کاربر.",
@@ -431,7 +431,10 @@
         "exclude-this-host-from-specific-internal-squads": "این هاست را از اسکوادهای خارجی مشخص حذف کنید",
         "excluded-internal-squads": "اسکوادهای خارجی حذف شده",
         "keep-sni-blank": "SNI خالی بماند",
-        "keep-sni-blank-description": "در برخی موارد باید SNI خالی بماند. از این گزینه برای خالی گذاشتن SNI استفاده کنید. توجه داشته باشید که این گزینه بالاترین اولویت را دارد، بنابراین حتی اگر SNI از قبل تنظیم شده باشد، اعمال خواهد شد."
+        "keep-sni-blank-description": "در برخی موارد باید SNI خالی بماند. از این گزینه برای خالی گذاشتن SNI استفاده کنید. توجه داشته باشید که این گزینه بالاترین اولویت را دارد، بنابراین حتی اگر SNI از قبل تنظیم شده باشد، اعمال خواهد شد.",
+        "select-one-or-more-subscription-types-description": "Select one or more subscription types to exclude host from that subscription type.",
+        "exclude-from-subscription-type": "Exclude from Subscription Type",
+        "hidden-host-description": "By default, Remnawave will not include hidden hosts in the subscription. Hidden host can be used with Mihomo and Xray-Json Advanced, Raw."
     },
     "base-node-form": {
         "country": "کشور",
@@ -764,28 +767,28 @@
         "feature": {
             "show-usage": "نمایش مصرف",
             "usage": "میزان استفاده",
-            "active-sessions": "Active Sessions"
+            "active-sessions": "نشست‌های فعال"
         }
     },
     "active-sessions-drawer": {
         "widget": {
-            "title": "Active Sessions",
-            "requirements": "Requirements",
-            "warning-activity": "IP addresses will only be shown if there was activity within the last <highlight>20 seconds</highlight>",
-            "warning-version": "Remnawave Node version <highlight>{{version}}</highlight> or higher",
-            "warning-docker": "Add the following to <highlight>docker-compose.yml</highlight> of Remnawave Node (/opt/remnanode)",
-            "warning-patience": "Fetching data may take some time, do not close this window!",
-            "get-data": "Get Data",
-            "fetching": "Fetching active sessions...",
-            "progress": "Completed {{completed}} of {{total}} nodes",
-            "job-failed": "Job failed",
-            "job-failed-description": "Failed to fetch active sessions.",
-            "try-again": "Try Again",
-            "clear": "Clear",
-            "no-active-sessions": "No active sessions",
-            "no-active-sessions-description": "No active IP addresses were found for this user.",
-            "active-ips-across-nodes": "Active IP addresses",
-            "distinct-ips": "Distinct IPs"
+            "title": "نشست‌های فعال",
+            "requirements": "پیش‌نیازها",
+            "warning-activity": "آدرس‌های آیپی درصورتی که در <highlight>20 ثانیه</highlight> اخیر فعال بوده باشند نمایش داده می‌شوند",
+            "warning-version": "نود Remnawave نسخه <highlight>{{version}}</highlight> یا بالاتر",
+            "warning-docker": "مقادیر زیر را به <highlight>docker-compose.yml</highlight> نود (در /opt/remnanode) اضافه کنید",
+            "warning-patience": "دریافت اطلاعات ممکن است زمانبر باشد، این پنجره را نبندید!",
+            "get-data": "دریافت اطلاعات",
+            "fetching": "درحال دریافت نشست‌های فعال ...",
+            "progress": "{{completed}} تا از {{total}} نود تکمیل شده",
+            "job-failed": "عملیات با مشکل مواجه شد",
+            "job-failed-description": "دریافت نشست‌های فعال موفقیت‌آمیز نبود",
+            "try-again": "تلاش مجدد",
+            "clear": "پاک کردن",
+            "no-active-sessions": "نشست فعالی وجود نداشت",
+            "no-active-sessions-description": "آدرس آیپی فعالی برای این کاربر یافت نشد",
+            "active-ips-across-nodes": "آدرس‌های آیپی فعال",
+            "distinct-ips": "آیپی‌های مجزا"
         }
     },
     "detailed-user-info-drawer": {
@@ -1596,12 +1599,12 @@
                 "placeholder": "ایمیل را وارد کنید"
             },
             "realm": {
-                "label": "Realm",
-                "description": "Keycloak realm name"
+                "label": "حوزه",
+                "description": "اسم قلمرو Keycloak"
             },
             "keycloakDomain": {
-                "label": "Keycloak Domain",
-                "description": "Keycloak server domain without protocol (e.g., keycloak.docs.rw)"
+                "label": "دامنه Keycloak",
+                "description": "دامنه سرور Keycloak بدون پروتکل (مثلا keycloak.docs.rw)"
             }
         }
     },
@@ -1930,30 +1933,30 @@
     },
     "nodes-quick-stats": {
         "widget": {
-            "users-online": "Users Online",
-            "online-nodes": "Online Nodes",
-            "offline-nodes": "Offline Nodes",
-            "cumulative-traffic": "Cumulative Traffic"
+            "users-online": "کاربر آنلاين",
+            "online-nodes": "نودهای آنلاین",
+            "offline-nodes": "نودهای آفلاین",
+            "cumulative-traffic": "مجموع مصرف ترافیک"
         }
     },
     "template-info-popover": {
         "shared": {
-            "template-variables": "Template Variables",
-            "available-variables-are-listed-below": "Available variables are listed below.",
-            "you-can-use-template-variables-in-this-field": "You can use template variables in this field."
+            "template-variables": "متغیرهای قالب",
+            "available-variables-are-listed-below": "متغیرهای قابل استفاده را در لیست زیر مشاهده کنید.",
+            "you-can-use-template-variables-in-this-field": "می‌توانید از متغیرهای قالب استفاده کنید."
         }
     },
     "user-active-session-drawer": {
         "widget": {
-            "drop-all-user-connections-all-nodes": "Drop All User Connections (all nodes)",
-            "drop-all-user-connections-this-node": "Drop All User Connections (this node)",
-            "drop-this-connection-on-this-node": "Drop this connection on this node"
+            "drop-all-user-connections-all-nodes": "قطع همه کانکشن‌ها (روی همه نودها)",
+            "drop-all-user-connections-this-node": "قطع همه کانکشن‌ها (روی این نود)",
+            "drop-this-connection-on-this-node": "قطع کانکشن روی این نود"
         }
     },
     "contact-information-card": {
-        "contact-information": "Contact Information"
+        "contact-information": "مشخصات تماس"
     },
     "traffic-limits-card": {
-        "traffic-and-limits": "Traffic & Limits"
+        "traffic-and-limits": "محدودیت ترافیک"
     }
 }
