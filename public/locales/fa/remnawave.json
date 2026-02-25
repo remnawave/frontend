@@ -431,7 +431,10 @@
         "exclude-this-host-from-specific-internal-squads": "این هاست را از اسکوادهای خارجی مشخص حذف کنید",
         "excluded-internal-squads": "اسکوادهای خارجی حذف شده",
         "keep-sni-blank": "SNI خالی بماند",
-        "keep-sni-blank-description": "در برخی موارد باید SNI خالی بماند. از این گزینه برای خالی گذاشتن SNI استفاده کنید. توجه داشته باشید که این گزینه بالاترین اولویت را دارد، بنابراین حتی اگر SNI از قبل تنظیم شده باشد، اعمال خواهد شد."
+        "keep-sni-blank-description": "در برخی موارد باید SNI خالی بماند. از این گزینه برای خالی گذاشتن SNI استفاده کنید. توجه داشته باشید که این گزینه بالاترین اولویت را دارد، بنابراین حتی اگر SNI از قبل تنظیم شده باشد، اعمال خواهد شد.",
+        "select-one-or-more-subscription-types-description": "Select one or more subscription types to exclude host from that subscription type.",
+        "exclude-from-subscription-type": "Exclude from Subscription Type",
+        "hidden-host-description": "By default, Remnawave will not include hidden hosts in the subscription. Hidden host can be used with Mihomo and Xray-Json Advanced, Raw."
     },
     "base-node-form": {
         "country": "کشور",
