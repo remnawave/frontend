@@ -37,6 +37,7 @@ import {
     CreateHostCommand,
     FINGERPRINTS,
     SECURITY_LAYERS,
+    SUBSCRIPTION_TEMPLATE_TYPE,
     UpdateHostCommand
 } from '@remnawave/backend-contract'
 import { TbCirclesRelation, TbCloudNetwork, TbEye, TbServer2 } from 'react-icons/tb'
@@ -55,18 +56,46 @@ import {
 import { HostSelectInboundFeature } from '@features/ui/dashboard/hosts/host-select-inbound/host-select-inbound.feature'
 import { HostTagsInputWidget } from '@widgets/dashboard/hosts/host-tags-input/host-tags-input'
 import { emojiFlag, resolveCountryCode } from '@shared/utils/misc/resolve-country-code'
+import { HappLogo, MihomoLogo, SingboxLogo, StashLogo } from '@shared/ui/logos'
 import { PopoverWithInfoShared } from '@shared/ui/popovers/popover-with-info'
 import { DeleteHostFeature } from '@features/ui/dashboard/hosts/delete-host'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { TemplateInfoPopoverShared } from '@shared/ui/popovers'
+import { ChipMultiSelect } from '@shared/ui/chip-multi-select'
 import { DrawerFooter } from '@shared/ui/drawer-footer'
-import { HappLogo, MihomoLogo } from '@shared/ui/logos'
 import { handleFormErrors } from '@shared/utils/misc'
 import { XrayLogo } from '@shared/ui/logos/xray-logo'
 import { SectionCard } from '@shared/ui/section-card'
 
 import classes from './HostTabs.module.css'
 import { IProps } from './interfaces'
+
+const SUBSCRIPTION_TYPES = {
+    [SUBSCRIPTION_TEMPLATE_TYPE.XRAY_JSON]: {
+        label: 'Xray JSON',
+        icon: <XrayLogo size={16} />
+    },
+    [SUBSCRIPTION_TEMPLATE_TYPE.XRAY_BASE64]: {
+        label: 'Xray Base64',
+        icon: <XrayLogo size={16} />
+    },
+    [SUBSCRIPTION_TEMPLATE_TYPE.MIHOMO]: {
+        label: 'Mihomo',
+        icon: <MihomoLogo size={16} />
+    },
+    [SUBSCRIPTION_TEMPLATE_TYPE.STASH]: {
+        label: 'Stash',
+        icon: <StashLogo size={16} />
+    },
+    [SUBSCRIPTION_TEMPLATE_TYPE.SINGBOX]: {
+        label: 'Singbox',
+        icon: <SingboxLogo size={16} />
+    },
+    [SUBSCRIPTION_TEMPLATE_TYPE.CLASH]: {
+        label: 'Clash',
+        icon: <MihomoLogo size={16} />
+    }
+} as const
 
 export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCommand.Request>(
     props: IProps<T>
@@ -782,17 +811,7 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
                                             />
                                         </Stack>
                                     </SectionCard.Section>
-                                </SectionCard.Root>
 
-                                <SectionCard.Root>
-                                    <SectionCard.Section>
-                                        <BaseOverlayHeader
-                                            IconComponent={XrayLogo}
-                                            iconVariant="gradient-violet"
-                                            title={t('base-host-form.xray-json-and-raw')}
-                                            titleOrder={5}
-                                        />
-                                    </SectionCard.Section>
                                     <SectionCard.Section>
                                         <Stack gap="xs">
                                             <Group gap="xs" justify="space-between">
@@ -814,7 +833,7 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
                                                             <Stack gap="sm">
                                                                 <Text c="dimmed" size="sm">
                                                                     {t(
-                                                                        'base-host-form.hide-host-from-users-remnawave-will-send-host-only-for-raw-subscription-responses'
+                                                                        'base-host-form.hidden-host-description'
                                                                     )}
                                                                 </Text>
                                                             </Stack>
@@ -831,6 +850,40 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
                                                 />
                                             </Group>
 
+                                            <ChipMultiSelect
+                                                data={Object.entries(SUBSCRIPTION_TYPES).map(
+                                                    ([value, { label, icon }]) => ({
+                                                        label,
+                                                        icon,
+                                                        value
+                                                    })
+                                                )}
+                                                description={t(
+                                                    'base-host-form.select-one-or-more-subscription-types-description'
+                                                )}
+                                                key={form.key('excludeFromSubscriptionTypes')}
+                                                label={t(
+                                                    'base-host-form.exclude-from-subscription-type'
+                                                )}
+                                                {...form.getInputProps(
+                                                    'excludeFromSubscriptionTypes'
+                                                )}
+                                            />
+                                        </Stack>
+                                    </SectionCard.Section>
+                                </SectionCard.Root>
+
+                                <SectionCard.Root>
+                                    <SectionCard.Section>
+                                        <BaseOverlayHeader
+                                            IconComponent={XrayLogo}
+                                            iconVariant="gradient-violet"
+                                            title={t('base-host-form.xray-json-and-raw')}
+                                            titleOrder={5}
+                                        />
+                                    </SectionCard.Section>
+                                    <SectionCard.Section>
+                                        <Stack gap="xs">
                                             <Select
                                                 clearable
                                                 data={subscriptionTemplates
