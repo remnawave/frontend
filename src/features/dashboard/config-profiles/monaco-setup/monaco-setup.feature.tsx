@@ -4,6 +4,7 @@ import {
     TSubscriptionTemplateType
 } from '@remnawave/backend-contract'
 import zodToJsonSchema, { jsonDescription } from 'zod-to-json-schema'
+import { NodePluginSchema } from '@remnawave/node-plugins'
 import { Monaco } from '@monaco-editor/react'
 import consola from 'consola'
 import axios from 'axios'
@@ -260,6 +261,54 @@ export const MonacoSetupResponseRulesFeature = {
                         fileMatch: ['response-rules://*'],
                         schema,
                         uri: 'https://response-rules-schema.json'
+                    }
+                ],
+                validate: true
+            })
+
+            monaco.languages.json.jsonDefaults.setModeConfiguration({
+                documentFormattingEdits: true,
+                documentRangeFormattingEdits: true,
+                completionItems: true,
+                hovers: true,
+                documentSymbols: true,
+                tokens: true,
+                colors: true,
+                foldingRanges: true,
+                diagnostics: true,
+                selectionRanges: true
+            })
+
+            monaco.editor.defineTheme('GithubDark', {
+                ...monacoTheme,
+                base: 'vs-dark'
+            })
+        } catch (error) {
+            consola.error('Failed to load JSON schema:', error)
+        }
+    }
+}
+
+export const MonacoSetupNodePluginEditorFeature = {
+    setup: async (monaco: Monaco) => {
+        try {
+            const schema = zodToJsonSchema(NodePluginSchema, {
+                name: 'Node Plugin Schema',
+                applyRegexFlags: true,
+                errorMessages: true,
+                postProcess: jsonDescription
+            })
+
+            monaco.languages.json.jsonDefaults.setDiagnosticsOptions({
+                schemaValidation: 'error',
+                comments: 'error',
+                trailingCommas: 'error',
+
+                schemas: [
+                    {
+                        fileMatch: ['node-plugin://*'],
+                        schema,
+                        uri: 'https://node-plugin-schema.json'
                     }
                 ],
                 validate: true

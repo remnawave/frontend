@@ -6,3 +6,5 @@ export const SRR_TEMPLATES_LIST_LINK =
     'https://raw.githubusercontent.com/remnawave/templates/refs/heads/main/srr-templates-list.json'
 export const SUBPAGE_CONFIG_TEMPLATE_LIST_LINK =
     'https://raw.githubusercontent.com/remnawave/templates/refs/heads/main/subpage-configs-list.json'
+export const NODE_PLUGIN_TEMPLATE_LIST_LINK =
+    'https://raw.githubusercontent.com/remnawave/templates/refs/heads/main/node-plugins-list.json'

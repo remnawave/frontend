@@ -9,6 +9,8 @@ import {
 import { SubpageConfigEditorPageConnector } from '@pages/dashboard/subpage-config/ui/connectors/subpage-config-editor-page.connector'
 import { ConfigProfileByUuidPageConnector } from '@pages/dashboard/config-profiles/connectors/config-profile-by-uuid.page.connector'
 import { SubpageConfigBasePageConnector } from '@pages/dashboard/subpage-config/ui/connectors/subpage-config-base-page.connector'
+import { NodePluginEditorPageConnector } from '@pages/dashboard/node-plugins/ui/connectors/node-plugin-editor-page.connector'
+import { NodePluginsBasePageConnector } from '@pages/dashboard/node-plugins/ui/connectors/node-plugins-base-page.connector'
 import { InternalSquadsPageConnector } from '@pages/dashboard/internal-squads/connectors/internal-squads.page.connector'
 import { InfraBillingPageConnector } from '@pages/dashboard/crm/infra-billing/connectors/infra-billing.page.connector'
 import { ResponseRulesPageConnector } from '@pages/dashboard/response-rules/connectors/response-rules.page.connector'
@@ -72,6 +74,7 @@ const router = createBrowserRouter(
                             element={<NodesPageConnector />}
                             path={ROUTES.DASHBOARD.MANAGEMENT.NODES}
                         />
+
                         <Route
                             element={<NodesBandwidthTablePageConnector />}
                             path={ROUTES.DASHBOARD.MANAGEMENT.NODES_BANDWIDTH_TABLE}
@@ -114,6 +117,15 @@ const router = createBrowserRouter(
                             element={<RemnawaveSettingsConnector />}
                             path={ROUTES.DASHBOARD.MANAGEMENT.REMNAWAVE_SETTINGS}
                         />
+
+                        <Route path={ROUTES.DASHBOARD.MANAGEMENT.NODE_PLUGINS.ROOT}>
+                            <Route element={<NodePluginsBasePageConnector />} index />
+
+                            <Route
+                                element={<NodePluginEditorPageConnector />}
+                                path={ROUTES.DASHBOARD.MANAGEMENT.NODE_PLUGINS.NODE_PLUGIN_BY_UUID}
+                            />
+                        </Route>
                     </Route>
 
                     <Route path={ROUTES.DASHBOARD.TOOLS.ROOT}>

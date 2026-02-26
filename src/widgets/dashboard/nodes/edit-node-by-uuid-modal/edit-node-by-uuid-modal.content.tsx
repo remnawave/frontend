@@ -8,6 +8,7 @@ import {
     configProfilesQueryKeys,
     nodesQueryKeys,
     useGetNode,
+    useGetNodePlugins,
     useGetPubKey,
     useUpdateNode
 } from '@shared/api/hooks'
@@ -35,6 +36,7 @@ export const EditNodeByUuidModalContent = (props: IProps) => {
     })
 
     const { data: pubKey } = useGetPubKey()
+    const { data: nodePlugins } = useGetNodePlugins()
 
     const { data: fetchedNode } = useGetNode({
         route: {
@@ -85,7 +87,8 @@ export const EditNodeByUuidModalContent = (props: IProps) => {
                         []
                 },
 
-                providerUuid: fetchedNode.providerUuid ?? undefined
+                providerUuid: fetchedNode.providerUuid ?? undefined,
+                activePluginUuid: fetchedNode.activePluginUuid ?? undefined
             })
         }
     }, [fetchedNode])
@@ -130,6 +133,7 @@ export const EditNodeByUuidModalContent = (props: IProps) => {
             isDataSubmitting={isUpdateNodePending}
             node={fetchedNode}
             nodeDetailsCard={<NodeDetailsCardWidget node={fetchedNode} />}
+            nodePlugins={nodePlugins?.nodePlugins ?? []}
             pubKey={pubKey}
             setAdvancedOpened={setAdvancedOpened}
         />

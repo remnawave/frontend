@@ -1,5 +1,10 @@
-import { CreateNodeCommand, GetPubKeyCommand, UpdateNodeCommand } from '@remnawave/backend-contract'
-import { TbCertificate, TbMapPin, TbUserCheck, TbWorld } from 'react-icons/tb'
+import {
+    CreateNodeCommand,
+    GetNodePluginsCommand,
+    GetPubKeyCommand,
+    UpdateNodeCommand
+} from '@remnawave/backend-contract'
+import { TbCertificate, TbMapPin, TbPlug, TbUserCheck, TbWorld } from 'react-icons/tb'
 import { ForwardRefComponent, HTMLMotionProps, Variants } from 'motion/react'
 import { Group, NumberInput, Select, Stack, TextInput } from '@mantine/core'
 import { UseFormReturnType } from '@mantine/form'
@@ -16,6 +21,7 @@ interface IProps<T extends CreateNodeCommand.Request | UpdateNodeCommand.Request
     cardVariants: Variants
     form: UseFormReturnType<T>
     motionWrapper: ForwardRefComponent<HTMLDivElement, HTMLMotionProps<'div'>>
+    nodePlugins: GetNodePluginsCommand.Response['response']['nodePlugins']
     pubKey: GetPubKeyCommand.Response['response'] | undefined
 }
 
@@ -23,7 +29,7 @@ export const NodeVitalsCard = <T extends CreateNodeCommand.Request | UpdateNodeC
     props: IProps<T>
 ) => {
     const { t } = useTranslation()
-    const { cardVariants, form, motionWrapper, pubKey } = props
+    const { cardVariants, form, motionWrapper, nodePlugins, pubKey } = props
 
     const MotionWrapper = motionWrapper
 
@@ -103,6 +109,28 @@ export const NodeVitalsCard = <T extends CreateNodeCommand.Request | UpdateNodeC
                             leftSection={<TbCertificate size={16} />}
                             size="sm"
                             value={`${pubKey?.pubKey.trimEnd() ?? 'Error loading...'}`}
+                        />
+
+                        <Select
+                            key={form.key('activePluginUuid')}
+                            label={t('node-vitals.card.plugin')}
+                            {...form.getInputProps('activePluginUuid')}
+                            allowDeselect
+                            clearable
+                            data={nodePlugins.map((nodePlugin) => ({
+                                label: nodePlugin.name,
+                                value: nodePlugin.uuid
+                            }))}
+                            description={t(
+                                'node-vitals.card.review-documentation-for-more-information'
+                            )}
+                            leftSection={<TbPlug size={16} />}
+                            nothingFoundMessage={t('node-vitals.card.nothing-found')}
+                            placeholder={t('node-vitals.card.select-plugin')}
+                            searchable
+                            styles={{
+                                label: { fontWeight: 500 }
+                            }}
                         />
                     </Stack>
                 </SectionCard.Section>

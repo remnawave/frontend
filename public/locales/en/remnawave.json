@@ -25,7 +25,8 @@
         "tools": "Tools",
         "srh-inspector": "SRH Inspector",
         "response-rules": "Response Rules",
-        "remnawave-settings": "Remnawave Settings"
+        "remnawave-settings": "Remnawave Settings",
+        "node-plugins": "Plugins"
     },
     "common": {
         "delete": "Delete",
@@ -1958,5 +1959,18 @@
     },
     "traffic-limits-card": {
         "traffic-and-limits": "Traffic & Limits"
+    },
+    "node-plugin-editor-page": {
+        "component": {
+            "plugin-editor": "Plugin Editor"
+        }
+    },
+    "node-vitals": {
+        "card": {
+            "plugin": "Plugin",
+            "review-documentation-for-more-information": "Review documentation for more information.",
+            "nothing-found": "Nothing found...",
+            "select-plugin": "Select plugin"
+        }
     }
 }

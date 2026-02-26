@@ -4,6 +4,7 @@ import {
     nodesQueryKeys,
     QueryKeys,
     useGetConfigProfiles,
+    useGetNodePlugins,
     useGetNodes,
     useGetNodesTags
 } from '@shared/api/hooks'
@@ -22,6 +23,7 @@ export function NodesPageConnector() {
 
     const { data: nodes, isLoading } = useGetNodes()
     const { isLoading: isConfigProfilesLoading } = useGetConfigProfiles()
+    useGetNodePlugins()
     useGetNodesTags()
 
     useEffect(() => {

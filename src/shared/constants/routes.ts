@@ -23,7 +23,11 @@ export const ROUTES = {
             CONFIG_PROFILE_BY_UUID: '/dashboard/management/config-profiles/:uuid',
             INTERNAL_SQUADS: '/dashboard/management/internal-squads',
             EXTERNAL_SQUADS: '/dashboard/management/external-squads',
-            REMNAWAVE_SETTINGS: '/dashboard/management/settings'
+            REMNAWAVE_SETTINGS: '/dashboard/management/settings',
+            NODE_PLUGINS: {
+                ROOT: '/dashboard/management/plugins',
+                NODE_PLUGIN_BY_UUID: '/dashboard/management/plugins/:uuid'
+            }
         },
         TOOLS: {
             ROOT: '/dashboard/tools',

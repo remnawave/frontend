@@ -1,4 +1,9 @@
-import { GetOneNodeCommand, GetPubKeyCommand, UpdateNodeCommand } from '@remnawave/backend-contract'
+import {
+    GetNodePluginsCommand,
+    GetOneNodeCommand,
+    GetPubKeyCommand,
+    UpdateNodeCommand
+} from '@remnawave/backend-contract'
 import { Button, CopyButton, em, Group, Menu, px, Stack } from '@mantine/core'
 import { PiFloppyDiskDuotone } from 'react-icons/pi'
 import { UseFormReturnType } from '@mantine/form'
@@ -51,6 +56,7 @@ interface IProps<T extends UpdateNodeCommand.Request> {
     isDataSubmitting: boolean
     node: GetOneNodeCommand.Response['response']
     nodeDetailsCard?: ReactNode
+    nodePlugins: GetNodePluginsCommand.Response['response']['nodePlugins']
     pubKey: GetPubKeyCommand.Response['response'] | undefined
     setAdvancedOpened: (value: boolean) => void
 }
@@ -59,6 +65,7 @@ export const BaseNodeForm = <T extends UpdateNodeCommand.Request>(props: IProps<
     const {
         form,
         node,
+        nodePlugins,
         pubKey,
         advancedOpened,
         setAdvancedOpened,
@@ -89,6 +96,7 @@ export const BaseNodeForm = <T extends UpdateNodeCommand.Request>(props: IProps<
                         cardVariants={cardVariants}
                         form={form}
                         motionWrapper={MotionWrapper}
+                        nodePlugins={nodePlugins}
                         pubKey={pubKey}
                     />
 
@@ -132,6 +140,7 @@ export const BaseNodeForm = <T extends UpdateNodeCommand.Request>(props: IProps<
                             cardVariants={cardVariants}
                             form={form}
                             motionWrapper={MotionWrapper}
+                            nodePlugins={nodePlugins}
                             pubKey={pubKey}
                         />
 

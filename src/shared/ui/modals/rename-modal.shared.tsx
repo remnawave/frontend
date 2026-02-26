@@ -2,6 +2,7 @@ import {
     UpdateConfigProfileCommand,
     UpdateExternalSquadCommand,
     UpdateInternalSquadCommand,
+    UpdateNodePluginCommand,
     UpdatePasskeyCommand,
     UpdateSubscriptionPageConfigCommand,
     UpdateSubscriptionTemplateCommand
@@ -16,6 +17,7 @@ import {
     useUpdateConfigProfile,
     useUpdateExternalSquad,
     useUpdateInternalSquad,
+    useUpdateNodePlugin,
     useUpdatePasskey,
     useUpdateSubscriptionPageConfig,
     useUpdateSubscriptionTemplate
@@ -29,6 +31,7 @@ type RenameType =
     | 'configProfile'
     | 'externalSquad'
     | 'internalSquad'
+    | 'nodePlugin'
     | 'passkey'
     | 'subpageConfig'
     | 'template'
@@ -76,6 +79,12 @@ export function RenameModalShared({ renameFrom }: IProps) {
                     return UpdateSubscriptionPageConfigCommand.RequestSchema.omit({
                         uuid: true
                     }).safeParse({
+                        name: value
+                    })
+                }
+
+                if (renameFrom === 'nodePlugin') {
+                    return UpdateNodePluginCommand.RequestSchema.omit({ uuid: true }).safeParse({
                         name: value
                     })
                 }
@@ -167,6 +176,17 @@ export function RenameModalShared({ renameFrom }: IProps) {
             }
         })
 
+    const { mutate: updateNodePlugin, isPending: isUpdatingNodePlugin } = useUpdateNodePlugin({
+        mutationFns: {
+            onSuccess: () => {
+                queryClient.refetchQueries({
+                    queryKey: QueryKeys.nodePlugins.getNodePlugins.queryKey
+                })
+                handleModalClose()
+            }
+        }
+    })
+
     const handleSave = async () => {
         if (await nameField.validate()) return
 
@@ -224,6 +244,15 @@ export function RenameModalShared({ renameFrom }: IProps) {
                     name: nameField.getValue()
                 }
             })
+        } else if (renameFrom === 'nodePlugin') {
+            if (!internalState) return
+
+            updateNodePlugin({
+                variables: {
+                    uuid: internalState.uuid,
+                    name: nameField.getValue()
+                }
+            })
         }
     }
 
@@ -233,7 +262,8 @@ export function RenameModalShared({ renameFrom }: IProps) {
         isUpdatingTemplate ||
         isUpdatingExternalSquad ||
         isUpdatingPasskey ||
-        isUpdatingSubpageConfig
+        isUpdatingSubpageConfig ||
+        isUpdatingNodePlugin
 
     return (
         <Modal
