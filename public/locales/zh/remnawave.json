@@ -26,7 +26,7 @@
         "srh-inspector": "SRH 检查",
         "response-rules": "请求订阅的应用",
         "remnawave-settings": "Remnawave 设置",
-        "node-plugins": "Plugins"
+        "node-plugins": "插件"
     },
     "common": {
         "delete": "删除",
@@ -1962,15 +1962,15 @@
     },
     "node-plugin-editor-page": {
         "component": {
-            "plugin-editor": "Plugin Editor"
+            "plugin-editor": "插件编辑器"
         }
     },
     "node-vitals": {
         "card": {
-            "plugin": "Plugin",
-            "review-documentation-for-more-information": "Review documentation for more information.",
-            "nothing-found": "Nothing found...",
-            "select-plugin": "Select plugin"
+            "plugin": "插件",
+            "review-documentation-for-more-information": "查看文件以获取更多信息。",
+            "nothing-found": "未找到任何信息…",
+            "select-plugin": "选择插件"
         }
     }
 }
