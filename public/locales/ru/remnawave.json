@@ -1992,5 +1992,27 @@
             "no-node-plugins-yet": "No node plugins yet",
             "create-a-plugin-to-extend-node-capabilities-with": "Create a plugin to extend node capabilities with"
         }
+    },
+    "node-plugin-executor": {
+        "content": {
+            "enter-at-least-one-ip-address": "Enter at least one IP address.",
+            "block-specific-ip-addresses-on-selected-nodes": "Block specific IP addresses on selected nodes",
+            "block-ips": "Block IPs",
+            "remove-ip-blocks-on-selected-nodes": "Remove IP blocks on selected nodes",
+            "unblock-ips": "Unblock IPs",
+            "executor-description": "IP blocks are temporary — they persist only until the node or its core restarts. Blocks may also be reset if the plugin configuration changes.",
+            "recreate-nftables-rules-on-selected-nodes": "Recreate nftables rules on selected nodes",
+            "recreate-tables": "Recreate Tables",
+            "block-ips-decription": "One entry per line. Timeout 0 = block until restart.",
+            "unblock-ips-decription": "One IP address per line.",
+            "ips-to-block": "IPs to block",
+            "ips-to-unblock": "IPs to unblock",
+            "format-one-per-line": "Format (one per line):",
+            "next": "Next",
+            "no-connected-nodes-available": "No connected nodes available.",
+            "deselect-all": "Deselect all",
+            "select-all": "Select all",
+            "execute": "Execute"
+        }
     }
 }
