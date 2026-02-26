@@ -240,8 +240,6 @@ export function NodePluginsEditorActionsFeature(props: Props) {
 
                         <Menu.Divider />
 
-                        <Menu.Divider />
-
                         <Menu.Item
                             leftSection={<TbDownload size={14} />}
                             onClick={openDownloadModal}
