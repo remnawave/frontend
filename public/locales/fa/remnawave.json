@@ -25,7 +25,8 @@
         "tools": "ابزارها",
         "srh-inspector": "بازرسی SRH",
         "response-rules": "قوانین پاسخ",
-        "remnawave-settings": "تنظیمات Remnawave"
+        "remnawave-settings": "تنظیمات Remnawave",
+        "node-plugins": "Plugins"
     },
     "common": {
         "delete": "حذف",
@@ -1958,5 +1959,18 @@
     },
     "traffic-limits-card": {
         "traffic-and-limits": "محدودیت ترافیک"
+    },
+    "node-plugin-editor-page": {
+        "component": {
+            "plugin-editor": "Plugin Editor"
+        }
+    },
+    "node-vitals": {
+        "card": {
+            "plugin": "Plugin",
+            "review-documentation-for-more-information": "Review documentation for more information.",
+            "nothing-found": "Nothing found...",
+            "select-plugin": "Select plugin"
+        }
     }
 }

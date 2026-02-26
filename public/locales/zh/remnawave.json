@@ -25,7 +25,8 @@
         "tools": "工具",
         "srh-inspector": "SRH 检查",
         "response-rules": "请求订阅的应用",
-        "remnawave-settings": "Remnawave 设置"
+        "remnawave-settings": "Remnawave 设置",
+        "node-plugins": "Plugins"
     },
     "common": {
         "delete": "删除",
@@ -1958,5 +1959,18 @@
     },
     "traffic-limits-card": {
         "traffic-and-limits": "流量限制"
+    },
+    "node-plugin-editor-page": {
+        "component": {
+            "plugin-editor": "Plugin Editor"
+        }
+    },
+    "node-vitals": {
+        "card": {
+            "plugin": "Plugin",
+            "review-documentation-for-more-information": "Review documentation for more information.",
+            "nothing-found": "Nothing found...",
+            "select-plugin": "Select plugin"
+        }
     }
 }
