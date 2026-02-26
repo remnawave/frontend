@@ -1972,5 +1972,25 @@
             "nothing-found": "未找到任何信息…",
             "select-plugin": "选择插件"
         }
+    },
+    "node-plugin-card": {
+        "widget": {
+            "active-on-nodes": "Active on Nodes"
+        }
+    },
+    "adtive-on-nodes": {
+        "modal": {
+            "shared": {
+                "this-plugin-is-not-active-on-any-nodes": "This plugin is not active on any nodes."
+            }
+        }
+    },
+    "node-plugins-grid": {
+        "widget": {
+            "node-plugins-are-an-advanced-feature-please-review-the-documentation-before-use": "Node Plugins are an advanced feature. Please review the documentation before use.",
+            "warning": "Warning",
+            "no-node-plugins-yet": "No node plugins yet",
+            "create-a-plugin-to-extend-node-capabilities-with": "Create a plugin to extend node capabilities with"
+        }
     }
 }
