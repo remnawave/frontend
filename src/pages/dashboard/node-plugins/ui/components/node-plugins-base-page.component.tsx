@@ -1,4 +1,4 @@
-import { GetNodePluginsCommand } from '@remnawave/backend-contract'
+import { GetAllNodesCommand, GetNodePluginsCommand } from '@remnawave/backend-contract'
 import { useTranslation } from 'react-i18next'
 import { TbFile } from 'react-icons/tb'
 import { motion } from 'motion/react'
@@ -10,11 +10,12 @@ import { RenameModalShared } from '@shared/ui/modals/rename-modal.shared'
 import { Page, PageHeaderShared } from '@shared/ui'
 
 interface Props {
+    nodes: GetAllNodesCommand.Response['response']
     plugins: GetNodePluginsCommand.Response['response']['nodePlugins']
 }
 
 export const NodePluginsBasePageComponent = (props: Props) => {
-    const { plugins } = props
+    const { nodes, plugins } = props
     const { t } = useTranslation()
 
     return (
@@ -30,7 +31,7 @@ export const NodePluginsBasePageComponent = (props: Props) => {
                 initial={{ opacity: 0 }}
                 transition={{ duration: 0.5 }}
             >
-                <NodePluginsGridWidget plugins={plugins} />
+                <NodePluginsGridWidget nodes={nodes} plugins={plugins} />
             </motion.div>
 
             <NodePluginsSpotlightWidget plugins={plugins} />

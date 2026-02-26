@@ -1,4 +1,4 @@
-import { PiCheck, PiCopy, PiPencil, PiTrashDuotone } from 'react-icons/pi'
+import { PiCheck, PiCopy, PiCpu, PiPencil, PiTrashDuotone } from 'react-icons/pi'
 import { GetNodePluginsCommand } from '@remnawave/backend-contract'
 import { TbCopyCheck, TbEdit, TbPlug } from 'react-icons/tb'
 import { generatePath, useNavigate } from 'react-router-dom'
@@ -13,6 +13,7 @@ import { ROUTES } from '@shared/constants'
 interface IProps {
     handleCloneNodePlugin: (nodePluginUuid: string) => void
     handleDeleteNodePlugin: (nodePluginUuid: string) => void
+    handleShowActiveNodes: (nodePluginUuid: string) => void
     isDragOverlay?: boolean
     nodePlugin: GetNodePluginsCommand.Response['response']['nodePlugins'][number]
 }
@@ -22,6 +23,7 @@ export function NodePluginCardWidget(props: IProps) {
         nodePlugin,
         handleDeleteNodePlugin,
         handleCloneNodePlugin,
+        handleShowActiveNodes,
         isDragOverlay = false
     } = props
 
@@ -74,6 +76,13 @@ export function NodePluginCardWidget(props: IProps) {
                                 </Menu.Item>
                             )}
                         </CopyButton>
+
+                        <Menu.Item
+                            leftSection={<PiCpu size={18} />}
+                            onClick={() => handleShowActiveNodes(nodePlugin.uuid)}
+                        >
+                            {t('node-plugin-card.widget.active-on-nodes')}
+                        </Menu.Item>
 
                         <Menu.Item
                             leftSection={<PiPencil size={18} />}
