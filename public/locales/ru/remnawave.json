@@ -26,7 +26,7 @@
         "srh-inspector": "Инспектор SRH",
         "response-rules": "Правила ответов",
         "remnawave-settings": "Настройки Remnawave",
-        "node-plugins": "Plugins"
+        "node-plugins": "Плагины"
     },
     "common": {
         "delete": "Удалить",
@@ -1962,15 +1962,35 @@
     },
     "node-plugin-editor-page": {
         "component": {
-            "plugin-editor": "Plugin Editor"
+            "plugin-editor": "Редактор плагинов"
         }
     },
     "node-vitals": {
         "card": {
-            "plugin": "Plugin",
-            "review-documentation-for-more-information": "Review documentation for more information.",
-            "nothing-found": "Nothing found...",
-            "select-plugin": "Select plugin"
+            "plugin": "Плагин",
+            "review-documentation-for-more-information": "Просмотрите документацию для более подробной информации.",
+            "nothing-found": "Ничего не найдено...",
+            "select-plugin": "Выбрать плагин"
+        }
+    },
+    "node-plugin-card": {
+        "widget": {
+            "active-on-nodes": "Active on Nodes"
+        }
+    },
+    "adtive-on-nodes": {
+        "modal": {
+            "shared": {
+                "this-plugin-is-not-active-on-any-nodes": "This plugin is not active on any nodes."
+            }
+        }
+    },
+    "node-plugins-grid": {
+        "widget": {
+            "node-plugins-are-an-advanced-feature-please-review-the-documentation-before-use": "Node Plugins are an advanced feature. Please review the documentation before use.",
+            "warning": "Warning",
+            "no-node-plugins-yet": "No node plugins yet",
+            "create-a-plugin-to-extend-node-capabilities-with": "Create a plugin to extend node capabilities with"
         }
     }
 }
