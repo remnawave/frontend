@@ -2,6 +2,7 @@ import {
     CloneNodePluginCommand,
     CreateNodePluginCommand,
     DeleteNodePluginCommand,
+    PluginExecutorCommand,
     ReorderNodePluginCommand,
     UpdateNodePluginCommand
 } from '@remnawave/backend-contract'
@@ -114,6 +115,30 @@ export const useCloneNodePlugin = createMutationHook({
         onError: (error) => {
             notifications.show({
                 title: `Clone Node Plugin`,
+                message:
+                    error instanceof Error ? error.message : `Request failed with unknown error.`,
+                color: 'red'
+            })
+        }
+    }
+})
+
+export const useNodePluginExecutor = createMutationHook({
+    endpoint: PluginExecutorCommand.TSQ_url,
+    bodySchema: PluginExecutorCommand.RequestSchema,
+    responseSchema: PluginExecutorCommand.ResponseSchema,
+    requestMethod: PluginExecutorCommand.endpointDetails.REQUEST_METHOD,
+    rMutationParams: {
+        onSuccess: () => {
+            notifications.show({
+                title: 'Success',
+                message: 'Request sent',
+                color: 'teal'
+            })
+        },
+        onError: (error) => {
+            notifications.show({
+                title: `Node Plugin Executor`,
                 message:
                     error instanceof Error ? error.message : `Request failed with unknown error.`,
                 color: 'red'

@@ -8,14 +8,15 @@ import {
     TextInput,
     Tooltip
 } from '@mantine/core'
+import { TbFile, TbPlus, TbRefresh, TbTerminal } from 'react-icons/tb'
 import { CreateNodePluginCommand } from '@remnawave/backend-contract'
 import { generatePath, useNavigate } from 'react-router-dom'
-import { TbFile, TbPlus, TbRefresh } from 'react-icons/tb'
 import { useDisclosure } from '@mantine/hooks'
 import { useTranslation } from 'react-i18next'
 import { useField } from '@mantine/form'
 
 import { QueryKeys, useCreateNodePlugin, useGetNodePlugins } from '@shared/api/hooks'
+import { MODALS, useModalsStoreOpenWithData } from '@entities/dashboard/modal-store'
 import { UniversalSpotlightActionIconShared } from '@shared/ui/universal-spotlight'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { ROUTES } from '@shared/constants'
@@ -25,6 +26,8 @@ export const NodePluginsHeaderActionButtonsFeature = () => {
     const { t } = useTranslation()
 
     const { isFetching } = useGetNodePlugins()
+
+    const openModalWithData = useModalsStoreOpenWithData()
 
     const [opened, { open, close }] = useDisclosure(false)
     const navigate = useNavigate()
@@ -63,6 +66,21 @@ export const NodePluginsHeaderActionButtonsFeature = () => {
     return (
         <Group grow preventGrowOverflow={false} wrap="wrap">
             <UniversalSpotlightActionIconShared />
+
+            <ActionIconGroup>
+                <Tooltip label="Executor" withArrow>
+                    <ActionIcon
+                        color="grape"
+                        onClick={() =>
+                            openModalWithData(MODALS.NODE_PLUGIN_EXECUTOR_DRAWER, undefined)
+                        }
+                        size="input-md"
+                        variant="light"
+                    >
+                        <TbTerminal size="24px" />
+                    </ActionIcon>
+                </Tooltip>
+            </ActionIconGroup>
 
             <ActionIconGroup>
                 <Tooltip label={t('common.refresh')} withArrow>
