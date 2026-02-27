@@ -1975,44 +1975,44 @@
     },
     "node-plugin-card": {
         "widget": {
-            "active-on-nodes": "Active on Nodes"
+            "active-on-nodes": "已在节点上激活"
         }
     },
     "adtive-on-nodes": {
         "modal": {
             "shared": {
-                "this-plugin-is-not-active-on-any-nodes": "This plugin is not active on any nodes."
+                "this-plugin-is-not-active-on-any-nodes": "该插件未在任何节点上激活."
             }
         }
     },
     "node-plugins-grid": {
         "widget": {
-            "node-plugins-are-an-advanced-feature-please-review-the-documentation-before-use": "Node Plugins are an advanced feature. Please review the documentation before use.",
-            "warning": "Warning",
-            "no-node-plugins-yet": "No node plugins yet",
-            "create-a-plugin-to-extend-node-capabilities-with": "Create a plugin to extend node capabilities with"
+            "node-plugins-are-an-advanced-feature-please-review-the-documentation-before-use": "节点插件属于进阶功能。请在使用前查看文档。",
+            "warning": "警告",
+            "no-node-plugins-yet": "尚无节点插件",
+            "create-a-plugin-to-extend-node-capabilities-with": "创建插件以扩展功能"
         }
     },
     "node-plugin-executor": {
         "content": {
-            "enter-at-least-one-ip-address": "Enter at least one IP address.",
-            "block-specific-ip-addresses-on-selected-nodes": "Block specific IP addresses on selected nodes",
-            "block-ips": "Block IPs",
-            "remove-ip-blocks-on-selected-nodes": "Remove IP blocks on selected nodes",
-            "unblock-ips": "Unblock IPs",
-            "executor-description": "IP blocks are temporary — they persist only until the node or its core restarts. Blocks may also be reset if the plugin configuration changes.",
-            "recreate-nftables-rules-on-selected-nodes": "Recreate nftables rules on selected nodes",
-            "recreate-tables": "Recreate Tables",
-            "block-ips-decription": "One entry per line. Timeout 0 = block until restart.",
-            "unblock-ips-decription": "One IP address per line.",
-            "ips-to-block": "IPs to block",
-            "ips-to-unblock": "IPs to unblock",
-            "format-one-per-line": "Format (one per line):",
-            "next": "Next",
-            "no-connected-nodes-available": "No connected nodes available.",
-            "deselect-all": "Deselect all",
-            "select-all": "Select all",
-            "execute": "Execute"
+            "enter-at-least-one-ip-address": "请输入至少一个IP地址。",
+            "block-specific-ip-addresses-on-selected-nodes": "屏蔽选中节点上的特定IP地址",
+            "block-ips": "禁止的 IP地址",
+            "remove-ip-blocks-on-selected-nodes": "删除选中节点的 IP 块",
+            "unblock-ips": "解除屏蔽IP",
+            "executor-description": "IP 块是暂时的 — — 它们只能持续到节点或其核心重启。如果插件配置发生变化，IP块也可能被重置。",
+            "recreate-nftables-rules-on-selected-nodes": "在选定的节点重新创建nftables 规则",
+            "recreate-tables": "重新创建数据表",
+            "block-ips-decription": "每行一个条目。超时为 0 = 块直到重启一直有效。",
+            "unblock-ips-decription": "每行一个 IP 地址。",
+            "ips-to-block": "要屏蔽的 IP 地址",
+            "ips-to-unblock": "要解除屏蔽的 IP 地址",
+            "format-one-per-line": "格式(单行)：",
+            "next": "下一步",
+            "no-connected-nodes-available": "无可用的已连接节点。",
+            "deselect-all": "取消全选",
+            "select-all": "全选",
+            "execute": "启动"
         }
     }
 }
