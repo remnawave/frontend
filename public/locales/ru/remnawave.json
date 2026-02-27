@@ -1975,44 +1975,44 @@
     },
     "node-plugin-card": {
         "widget": {
-            "active-on-nodes": "Active on Nodes"
+            "active-on-nodes": "Активен на нодах"
         }
     },
     "adtive-on-nodes": {
         "modal": {
             "shared": {
-                "this-plugin-is-not-active-on-any-nodes": "This plugin is not active on any nodes."
+                "this-plugin-is-not-active-on-any-nodes": "Этот плагин не активен ни на одной ноде."
             }
         }
     },
     "node-plugins-grid": {
         "widget": {
-            "node-plugins-are-an-advanced-feature-please-review-the-documentation-before-use": "Node Plugins are an advanced feature. Please review the documentation before use.",
-            "warning": "Warning",
-            "no-node-plugins-yet": "No node plugins yet",
-            "create-a-plugin-to-extend-node-capabilities-with": "Create a plugin to extend node capabilities with"
+            "node-plugins-are-an-advanced-feature-please-review-the-documentation-before-use": "Плагины нод являются расширенной функцией. Пожалуйста, ознакомьтесь с документацией перед использованием.",
+            "warning": "Предупреждение",
+            "no-node-plugins-yet": "Плагины для нод отсутствуют",
+            "create-a-plugin-to-extend-node-capabilities-with": "Создайте плагин для расширения возможностей узла с"
         }
     },
     "node-plugin-executor": {
         "content": {
-            "enter-at-least-one-ip-address": "Enter at least one IP address.",
-            "block-specific-ip-addresses-on-selected-nodes": "Block specific IP addresses on selected nodes",
-            "block-ips": "Block IPs",
-            "remove-ip-blocks-on-selected-nodes": "Remove IP blocks on selected nodes",
-            "unblock-ips": "Unblock IPs",
-            "executor-description": "IP blocks are temporary — they persist only until the node or its core restarts. Blocks may also be reset if the plugin configuration changes.",
-            "recreate-nftables-rules-on-selected-nodes": "Recreate nftables rules on selected nodes",
-            "recreate-tables": "Recreate Tables",
-            "block-ips-decription": "One entry per line. Timeout 0 = block until restart.",
-            "unblock-ips-decription": "One IP address per line.",
-            "ips-to-block": "IPs to block",
-            "ips-to-unblock": "IPs to unblock",
-            "format-one-per-line": "Format (one per line):",
-            "next": "Next",
-            "no-connected-nodes-available": "No connected nodes available.",
-            "deselect-all": "Deselect all",
-            "select-all": "Select all",
-            "execute": "Execute"
+            "enter-at-least-one-ip-address": "Введите хотя бы один IP-адрес.",
+            "block-specific-ip-addresses-on-selected-nodes": "Блокировать определенные IP-адреса на выбранных нодах",
+            "block-ips": "Блокировать IP",
+            "remove-ip-blocks-on-selected-nodes": "Снять блокировку IP на выбранных нодах",
+            "unblock-ips": "Разблокировать IP",
+            "executor-description": "IP блоки временные — они сохраняются только до перезапуска узла или ядра. Блоки также могут быть сброшены при изменении конфигурации плагина.",
+            "recreate-nftables-rules-on-selected-nodes": "Восстановить правила nftables на выбранных нодах",
+            "recreate-tables": "Пересоздать таблицы",
+            "block-ips-decription": "Одна запись в строке. Тайм-аут 0 = блокировка до перезапуска.",
+            "unblock-ips-decription": "Один IP адрес в строке.",
+            "ips-to-block": "IP для блокировки",
+            "ips-to-unblock": "IP для разблокировки",
+            "format-one-per-line": "Формат (по одному в каждой строке):",
+            "next": "Далее",
+            "no-connected-nodes-available": "Нет доступных подключенных нод.",
+            "deselect-all": "Снять все",
+            "select-all": "Выделить все",
+            "execute": "Выполнить"
         }
     }
 }
