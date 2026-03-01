@@ -2,7 +2,6 @@ import { Badge, Box, Center, Divider, Group, Image, Stack, Text, Title } from '@
 import { GetStatusCommand } from '@remnawave/backend-contract'
 import { useMemo } from 'react'
 
-import { TelegramLoginButtonFeature } from '@features/auth/telegram-login-button/telegram-login-button.feature'
 import { OAuth2LoginButtonsFeature } from '@features/auth/oauth2-login-button/oauth2-login-button.feature'
 import { PasskeyLoginButtonFeature } from '@features/auth/passkey-login-button'
 import { useGetAuthStatus } from '@shared/api/hooks/auth/auth.query.hooks'
@@ -14,7 +13,6 @@ import { Logo, Page } from '@shared/ui'
 const getAuthMethods = (authStatus: GetStatusCommand.Response['response'] | undefined) => {
     const isPasswordEnabled = authStatus?.authentication?.password?.enabled ?? false
     const isPasskeyEnabled = authStatus?.authentication?.passkey?.enabled ?? false
-    const isTelegramEnabled = authStatus?.authentication?.tgAuth?.enabled ?? false
     const isOAuth2Enabled =
         Object.values(authStatus?.authentication?.oauth2?.providers ?? {}).some(Boolean) ?? false
 
@@ -22,8 +20,7 @@ const getAuthMethods = (authStatus: GetStatusCommand.Response['response'] | unde
         isOAuth2Enabled,
         isPasskeyEnabled,
         isPasswordEnabled,
-        isTelegramEnabled,
-        hasAlternativeMethods: isPasskeyEnabled || isTelegramEnabled || isOAuth2Enabled,
+        hasAlternativeMethods: isPasskeyEnabled || isOAuth2Enabled,
         hasPrimaryMethods: isPasswordEnabled
     }
 }
@@ -72,22 +69,17 @@ const AlternativeAuthMethods = ({
     authentication,
     isOAuth2Enabled,
     isPasskeyEnabled,
-    isPasswordEnabled,
-    isTelegramEnabled
+    isPasswordEnabled
 }: {
     authentication: GetStatusCommand.Response['response']['authentication']
     isOAuth2Enabled: boolean
     isPasskeyEnabled: boolean
     isPasswordEnabled: boolean
-    isTelegramEnabled: boolean
 }) => (
     <Center>
         <Stack gap="md" maw={isPasswordEnabled ? 300 : 150} w="100%">
             {isPasskeyEnabled && authentication && (
                 <PasskeyLoginButtonFeature authentication={authentication} />
-            )}
-            {isTelegramEnabled && authentication && (
-                <TelegramLoginButtonFeature authentication={authentication} />
             )}
             {isOAuth2Enabled && authentication && (
                 <OAuth2LoginButtonsFeature authentication={authentication} />
@@ -149,7 +141,6 @@ export const LoginPage = () => {
                                     isOAuth2Enabled={authMethods.isOAuth2Enabled}
                                     isPasskeyEnabled={authMethods.isPasskeyEnabled}
                                     isPasswordEnabled={authMethods.isPasswordEnabled}
-                                    isTelegramEnabled={authMethods.isTelegramEnabled}
                                 />
                             )}
                         </Stack>

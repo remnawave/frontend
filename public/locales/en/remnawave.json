@@ -1567,11 +1567,6 @@
             "title": "Password"
         },
         "telegram": {
-            "botToken": {
-                "label": "Bot Token",
-                "description": "Telegram bot token",
-                "placeholder": "Enter bot token"
-            },
             "adminIds": {
                 "label": "Allowed Admin IDs",
                 "description": "List of allowed admin IDs",

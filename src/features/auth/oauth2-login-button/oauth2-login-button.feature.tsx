@@ -1,5 +1,5 @@
 import { TOAuth2ProvidersKeys } from '@remnawave/backend-contract'
-import { BiLogoGithub } from 'react-icons/bi'
+import { BiLogoGithub, BiLogoTelegram } from 'react-icons/bi'
 import { Button, Stack } from '@mantine/core'
 import { SiKeycloak } from 'react-icons/si'
 import { TbKey } from 'react-icons/tb'
@@ -41,6 +41,19 @@ export const OAuth2LoginButtonsFeature = (props: IProps) => {
 
     return (
         <Stack>
+            {authentication.oauth2.providers.telegram && (
+                <Button
+                    color="#0088cc"
+                    leftSection={<BiLogoTelegram color="white" size={20} />}
+                    loaderProps={{ type: 'dots' }}
+                    loading={loadingProvider === 'telegram'}
+                    onClick={() => handleOAuth2Login('telegram')}
+                    variant="filled"
+                >
+                    Telegram
+                </Button>
+            )}
+
             {authentication.oauth2.providers.pocketid && (
                 <Button
                     color="dark"

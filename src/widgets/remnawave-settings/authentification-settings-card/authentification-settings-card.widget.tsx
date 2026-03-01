@@ -45,11 +45,17 @@ interface IProps {
     passwordSettings: NonNullable<
         GetRemnawaveSettingsCommand.Response['response']['passwordSettings']
     >
-    tgAuthSettings: NonNullable<GetRemnawaveSettingsCommand.Response['response']['tgAuthSettings']>
 }
 
 const getOAuth2ProvidersConfig = () =>
     [
+        {
+            key: 'telegram' as const,
+            title: 'Telegram',
+            icon: <BiLogoTelegram size={24} />,
+            iconColor: '#0088cc',
+            fields: ['clientId', 'clientSecret', 'frontendDomain', 'allowedIds'] as const
+        },
         {
             key: 'github' as const,
             title: 'GitHub',
@@ -163,11 +169,17 @@ const getFieldConfig = (t: TFunction) =>
             description: '',
             placeholder: 'false',
             type: 'checkbox' as const
+        },
+        allowedIds: {
+            label: t('auth-settings.telegram.adminIds.label'),
+            description: t('auth-settings.telegram.adminIds.placeholder'),
+            placeholder: t('auth-settings.telegram.adminIds.placeholder'),
+            type: 'tags' as const
         }
     }) as const
 
 export const AuthentificationSettingsCardWidget = (props: IProps) => {
-    const { passkeySettings, passwordSettings, oauth2Settings, tgAuthSettings } = props
+    const { passkeySettings, passwordSettings, oauth2Settings } = props
     const { t } = useTranslation()
     const [drawerOpened, { open: openDrawer, close: closeDrawer }] = useDisclosure(false)
 
@@ -178,8 +190,7 @@ export const AuthentificationSettingsCardWidget = (props: IProps) => {
             UpdateRemnawaveSettingsCommand.RequestSchema.pick({
                 passkeySettings: true,
                 passwordSettings: true,
-                oauth2Settings: true,
-                tgAuthSettings: true
+                oauth2Settings: true
             })
         ),
         initialValues: {
@@ -196,12 +207,8 @@ export const AuthentificationSettingsCardWidget = (props: IProps) => {
                 pocketid: oauth2Settings.pocketid,
                 yandex: oauth2Settings.yandex,
                 keycloak: oauth2Settings.keycloak,
-                generic: oauth2Settings.generic
-            },
-            tgAuthSettings: {
-                enabled: tgAuthSettings.enabled,
-                botToken: tgAuthSettings.botToken,
-                adminIds: tgAuthSettings.adminIds
+                generic: oauth2Settings.generic,
+                telegram: oauth2Settings.telegram
             }
         }
     })
@@ -216,8 +223,7 @@ export const AuthentificationSettingsCardWidget = (props: IProps) => {
                 form.setValues({
                     passkeySettings: data.passkeySettings!,
                     passwordSettings: data.passwordSettings!,
-                    oauth2Settings: data.oauth2Settings!,
-                    tgAuthSettings: data.tgAuthSettings!
+                    oauth2Settings: data.oauth2Settings!
                 })
 
                 form.resetDirty()
@@ -267,8 +273,7 @@ export const AuthentificationSettingsCardWidget = (props: IProps) => {
             variables: {
                 passkeySettings: values.passkeySettings,
                 passwordSettings: values.passwordSettings,
-                oauth2Settings: values.oauth2Settings,
-                tgAuthSettings: values.tgAuthSettings
+                oauth2Settings: values.oauth2Settings
             }
         })
     })
@@ -491,67 +496,6 @@ export const AuthentificationSettingsCardWidget = (props: IProps) => {
 
                             {/* OAuth2 */}
                             {OAUTH2_PROVIDERS.map(renderOAuth2Provider)}
-
-                            {/* Telegram */}
-                            <Accordion.Item key="tgAuth" value="tgAuth">
-                                <Center>
-                                    <Accordion.Control
-                                        icon={
-                                            <ThemeIcon color="#0088cc" size="lg" variant="filled">
-                                                <BiLogoTelegram color="white" size={20} />
-                                            </ThemeIcon>
-                                        }
-                                    >
-                                        <Group justify="space-between" pr="md">
-                                            <Text fw={500}>Telegram</Text>
-                                        </Group>
-                                    </Accordion.Control>
-                                    <Group gap="xs" justify="flex-end" pr="xs" wrap="nowrap">
-                                        <HelpActionIconShared
-                                            actionIconProps={{
-                                                size: 'input-xs'
-                                            }}
-                                            iconProps={{
-                                                size: 20
-                                            }}
-                                            screen="AUTH_METHODS_TELEGRAM"
-                                        />
-                                        <Switch
-                                            color="teal.8"
-                                            key={form.key('tgAuthSettings.enabled')}
-                                            onClick={(e) => e.stopPropagation()}
-                                            size="md"
-                                            {...form.getInputProps('tgAuthSettings.enabled', {
-                                                type: 'checkbox'
-                                            })}
-                                        />
-                                    </Group>
-                                </Center>
-
-                                <Accordion.Panel>
-                                    <Stack gap="md">
-                                        <TextInput
-                                            key={form.key('tgAuthSettings.botToken')}
-                                            label={t('auth-settings.telegram.botToken.label')}
-                                            placeholder={t(
-                                                'auth-settings.telegram.botToken.placeholder'
-                                            )}
-                                            {...form.getInputProps('tgAuthSettings.botToken')}
-                                        />
-
-                                        <TagsInput
-                                            clearable
-                                            key={form.key('tgAuthSettings.adminIds')}
-                                            label={t('auth-settings.telegram.adminIds.label')}
-                                            placeholder={t(
-                                                'auth-settings.telegram.adminIds.placeholder'
-                                            )}
-                                            splitChars={[',', ' ', ';']}
-                                            {...form.getInputProps('tgAuthSettings.adminIds')}
-                                        />
-                                    </Stack>
-                                </Accordion.Panel>
-                            </Accordion.Item>
                         </Accordion>
                     </SettingsCardShared.Content>
 
