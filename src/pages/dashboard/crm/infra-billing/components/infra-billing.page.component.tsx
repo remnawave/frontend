@@ -1,6 +1,6 @@
 import { Split } from '@gfazioli/mantine-split-pane'
-import { useEffect, useLayoutEffect } from 'react'
 import { useTranslation } from 'react-i18next'
+import { useLayoutEffect } from 'react'
 import { Stack } from '@mantine/core'
 import { motion } from 'motion/react'
 
@@ -13,14 +13,11 @@ import { InfraBillingNodesTableWidget } from '@widgets/dashboard/infra-billing/i
 import { InfraProvidersTableWidget } from '@widgets/dashboard/infra-billing/infra-providers-table/infra-providers-table.widget'
 import { UpdateBillingDateModalWidget } from '@widgets/dashboard/infra-billing/update-billing-date-modal'
 import { StatsWidget } from '@widgets/dashboard/infra-billing/stats-widget/stats.widget'
-import { useAppshellStoreActions } from '@entities/dashboard/appshell'
 import { preventBackScrollTables } from '@shared/utils/misc'
 import { Page } from '@shared/ui/page'
 
 export const InfraBillingPageComponent = () => {
     const { t } = useTranslation()
-
-    const { hideDesktopSidebar } = useAppshellStoreActions()
 
     useLayoutEffect(() => {
         document.body.addEventListener('wheel', preventBackScrollTables, {
@@ -29,10 +26,6 @@ export const InfraBillingPageComponent = () => {
         return () => {
             document.body.removeEventListener('wheel', preventBackScrollTables)
         }
-    }, [])
-
-    useEffect(() => {
-        hideDesktopSidebar()
     }, [])
 
     return (

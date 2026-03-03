@@ -10,9 +10,9 @@ import {
 } from '@mantine/core'
 import { TbCalendar, TbPlus, TbRefresh, TbServer, TbTrash } from 'react-icons/tb'
 import { GetInfraBillingNodesCommand } from '@remnawave/backend-contract'
+import { DataTable, useDataTableColumns } from 'mantine-datatable'
 import { AnimatePresence, motion } from 'motion/react'
 import { useTranslation } from 'react-i18next'
-import { DataTable, useDataTableColumns } from 'mantine-datatable'
 import { useMemo, useState } from 'react'
 import { PiEmpty } from 'react-icons/pi'
 import { modals } from '@mantine/modals'
@@ -219,8 +219,10 @@ export function InfraBillingNodesTableWidget() {
             />
             <DataTable
                 borderRadius="sm"
-                storeColumnsKey={INFRA_BILLING_NODES_CACHE_KEY}
                 columns={effectiveColumns}
+                defaultColumnProps={{
+                    resizable: true
+                }}
                 emptyState={
                     <Stack align="center" gap="xs">
                         <Box mb={4} p={4}>
@@ -257,6 +259,7 @@ export function InfraBillingNodesTableWidget() {
                 records={memoizedInfraBillingNodes?.billingNodes ?? []}
                 recordsPerPage={PAGE_SIZE}
                 selectedRecords={multiSelectedRecords}
+                storeColumnsKey={INFRA_BILLING_NODES_CACHE_KEY}
                 totalRecords={memoizedInfraBillingNodes?.totalBillingNodes ?? 0}
                 withColumnBorders
                 withTableBorder={false}

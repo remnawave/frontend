@@ -31,7 +31,6 @@ export function getInfraBillingNodesColumns(
     return [
         {
             accessor: 'provider.name',
-            resizable: true,
             ellipsis: true,
             title: (
                 <InfraProvidersColumnTitle
@@ -82,7 +81,6 @@ export function getInfraBillingNodesColumns(
         },
         {
             accessor: 'node',
-            resizable: true,
             ellipsis: true,
             title: (
                 <InfraProvidersColumnTitle
@@ -112,7 +110,6 @@ export function getInfraBillingNodesColumns(
 
         {
             accessor: 'nextBillingAt',
-            resizable: true,
             ellipsis: true,
             title: (
                 <InfraProvidersColumnTitle
@@ -133,7 +130,8 @@ export function getInfraBillingNodesColumns(
                     <TbClick size={16} />
                 </Center>
             ),
-            width: 70,
+            width: 50,
+            resizable: false,
             textAlign: 'center',
             render: (row) => (
                 <Group justify="center" wrap="nowrap">
