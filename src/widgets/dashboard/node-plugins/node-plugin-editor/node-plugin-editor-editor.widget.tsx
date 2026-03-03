@@ -128,6 +128,11 @@ export function NodePluginEditorWidget(props: IProps) {
                 </Paper>
             )}
 
+            <div style={{ position: 'absolute', opacity: 0, height: 0, overflow: 'hidden' }}>
+                <input aria-hidden="true" name="fake-login" tabIndex={-1} type="text" />
+                <input aria-hidden="true" name="fake-password" tabIndex={-1} type="password" />
+            </div>
+
             <Paper
                 className={styles.editorWrapper}
                 p={0}
