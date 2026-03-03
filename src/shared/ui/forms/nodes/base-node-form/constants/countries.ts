@@ -94,6 +94,7 @@ export const COUNTRIES = [
     { value: 'KI', label: '🇰🇮 Kiribati' },
     { value: 'KP', label: '🇰🇵 North Korea' },
     { value: 'KR', label: '🇰🇷 South Korea' },
+    { value: 'XK', label: '🇽🇰 Kosovo' },
     { value: 'KW', label: '🇰🇼 Kuwait' },
     { value: 'KG', label: '🇰🇬 Kyrgyzstan' },
     { value: 'LA', label: '🇱🇦 Laos' },
