@@ -3,9 +3,10 @@ import {
     NODES_BULK_ACTIONS,
     TNodesBulkActions
 } from '@remnawave/backend-contract'
-import { TbCheck, TbPlayerStop, TbRefresh, TbRocket } from 'react-icons/tb'
+import { TbCancel, TbRefresh, TbRocket } from 'react-icons/tb'
 import { useTranslation } from 'react-i18next'
 import { modals } from '@mantine/modals'
+import { PiPulse } from 'react-icons/pi'
 import { Stack } from '@mantine/core'
 
 import { QueryKeys, useBulkNodesActions } from '@shared/api/hooks'
@@ -47,7 +48,7 @@ export const MultiSelectNodesModalContent = (props: IProps) => {
             />
             <ActionCardShared
                 description={`${uuids.length} node(s)`}
-                icon={<TbPlayerStop size={20} />}
+                icon={<TbCancel size={20} />}
                 isLoading={isPending}
                 onClick={() => handleAction(NODES_BULK_ACTIONS.DISABLE)}
                 title={t('common.disable')}
@@ -55,7 +56,7 @@ export const MultiSelectNodesModalContent = (props: IProps) => {
             />
             <ActionCardShared
                 description={`${uuids.length} node(s)`}
-                icon={<TbCheck size={20} />}
+                icon={<PiPulse size={20} />}
                 isLoading={isPending}
                 onClick={() => handleAction(NODES_BULK_ACTIONS.ENABLE)}
                 title={t('common.enable')}

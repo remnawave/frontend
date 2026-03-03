@@ -1,21 +1,27 @@
-import { DataTable, useDataTableColumns } from 'mantine-datatable'
+import { DataTable, type DataTableSortStatus, useDataTableColumns } from 'mantine-datatable'
 import { GetAllNodesCommand } from '@remnawave/backend-contract'
+import { memo, useLayoutEffect, useMemo, useState } from 'react'
 import { Box, Button, Stack, Text } from '@mantine/core'
+import { useDebouncedValue } from '@mantine/hooks'
 import { useTranslation } from 'react-i18next'
 import { PiEmpty } from 'react-icons/pi'
-import { memo, useState } from 'react'
+import sortBy from 'lodash/sortBy'
+import get from 'lodash/get'
 
+import { useGetConfigProfiles, useGetNodePlugins, useGetNodes } from '@shared/api/hooks'
 import { MODALS, useModalsStoreOpenWithData } from '@entities/dashboard/modal-store'
-import { useGetConfigProfiles, useGetNodes } from '@shared/api/hooks'
+import { preventBackScrollTables } from '@shared/utils/misc'
 import { sToMs } from '@shared/utils/time-utils'
 import { LoadingScreen } from '@shared/ui'
 
-import { getNodesTableColumns } from './use-nodes-table-widget'
+import { getNodesTableColumns, type NodesTableFilters } from './use-nodes-table-widget'
+
+type NodeType = GetAllNodesCommand.Response['response'][number]
 
 interface IProps {
     nodes: GetAllNodesCommand.Response['response'] | undefined
-    selectedRecords: GetAllNodesCommand.Response['response'][number][]
-    setSelectedRecords: (records: GetAllNodesCommand.Response['response'][number][]) => void
+    selectedRecords: NodeType[]
+    setSelectedRecords: (records: NodeType[]) => void
 }
 
 const PAGE_SIZE = 20
@@ -28,8 +34,21 @@ export const NodesDataTableWidget = memo((props: IProps) => {
 
     const [pageSize, setPageSize] = useState(PAGE_SIZE)
     const [page, setPage] = useState(1)
+    const [sortStatus, setSortStatus] = useState<DataTableSortStatus<NodeType>>({
+        columnAccessor: 'name',
+        direction: 'asc'
+    })
+
+    const [nameQuery, setNameQuery] = useState('')
+    const [debouncedNameQuery] = useDebouncedValue(nameQuery, 200)
+    const [selectedTags, setSelectedTags] = useState<string[]>([])
+    const [selectedProviders, setSelectedProviders] = useState<string[]>([])
+    const [selectedConfigProfiles, setSelectedConfigProfiles] = useState<string[]>([])
+    const [selectedPlugins, setSelectedPlugins] = useState<string[]>([])
+    const [selectedInbounds, setSelectedInbounds] = useState<string[]>([])
 
     const { data: configProfiles } = useGetConfigProfiles({})
+    const { data: nodePlugins } = useGetNodePlugins()
 
     const openModalWithData = useModalsStoreOpenWithData()
 
@@ -40,17 +59,152 @@ export const NodesDataTableWidget = memo((props: IProps) => {
         }
     })
 
+    useLayoutEffect(() => {
+        document.body.addEventListener('wheel', preventBackScrollTables, {
+            passive: false
+        })
+        return () => {
+            document.body.removeEventListener('wheel', preventBackScrollTables)
+        }
+    }, [])
+
     const handleViewNode = (nodeUuid: string) => {
         openModalWithData(MODALS.EDIT_NODE_BY_UUID_MODAL, { nodeUuid })
     }
 
+    const { availableTags, availableProviders, availableInbounds } = useMemo(() => {
+        if (!nodes) return { availableInbounds: [], availableProviders: [], availableTags: [] }
+        const tagsSet = new Set<string>()
+        const providersSet = new Set<string>()
+        const inboundsSet = new Set<string>()
+        for (const node of nodes) {
+            node.tags?.forEach((tag) => tagsSet.add(tag))
+            if (node.provider?.name) providersSet.add(node.provider.name)
+            node.configProfile?.activeInbounds?.forEach((inbound) => inboundsSet.add(inbound.tag))
+        }
+        return {
+            availableInbounds: [...inboundsSet].sort(),
+            availableProviders: [...providersSet].sort(),
+            availableTags: [...tagsSet].sort()
+        }
+    }, [nodes])
+
+    const availableConfigProfiles = useMemo(
+        () =>
+            (configProfiles?.configProfiles ?? []).map((p) => ({
+                label: p.name,
+                value: p.uuid
+            })),
+        [configProfiles]
+    )
+
+    const availablePlugins = useMemo(
+        () =>
+            (nodePlugins?.nodePlugins ?? []).map((p) => ({
+                label: p.name,
+                value: p.uuid
+            })),
+        [nodePlugins]
+    )
+
+    const filters: NodesTableFilters = {
+        availableConfigProfiles,
+        availableInbounds,
+        availablePlugins,
+        availableProviders,
+        availableTags,
+        nameQuery,
+        selectedConfigProfiles,
+        selectedInbounds,
+        selectedPlugins,
+        selectedProviders,
+        selectedTags,
+        setNameQuery,
+        setSelectedConfigProfiles,
+        setSelectedInbounds,
+        setSelectedPlugins,
+        setSelectedProviders,
+        setSelectedTags
+    }
+
     const { effectiveColumns } = useDataTableColumns({
         key: NODES_CACHE_KEY,
-        columns: getNodesTableColumns(t, configProfiles?.configProfiles ?? [], handleViewNode)
+        columns: getNodesTableColumns(
+            t,
+            configProfiles?.configProfiles ?? [],
+            nodePlugins?.nodePlugins ?? [],
+            handleViewNode,
+            filters
+        )
     })
 
-    const handleChangePageSize = (pageSize: number) => {
-        setPageSize(pageSize)
+    const filteredAndSortedNodes = useMemo(() => {
+        if (!nodes) return []
+
+        const filtered = nodes.filter((node) => {
+            if (
+                debouncedNameQuery &&
+                !node.name.toLowerCase().includes(debouncedNameQuery.toLowerCase())
+            ) {
+                return false
+            }
+
+            if (selectedTags.length > 0 && !selectedTags.some((tag) => node.tags?.includes(tag))) {
+                return false
+            }
+
+            if (
+                selectedProviders.length > 0 &&
+                (!node.provider?.name || !selectedProviders.includes(node.provider.name))
+            ) {
+                return false
+            }
+
+            if (
+                selectedConfigProfiles.length > 0 &&
+                (!node.configProfile.activeConfigProfileUuid ||
+                    !selectedConfigProfiles.includes(node.configProfile.activeConfigProfileUuid))
+            ) {
+                return false
+            }
+
+            if (
+                selectedPlugins.length > 0 &&
+                (!node.activePluginUuid || !selectedPlugins.includes(node.activePluginUuid))
+            ) {
+                return false
+            }
+
+            if (
+                selectedInbounds.length > 0 &&
+                !selectedInbounds.some((tag) =>
+                    node.configProfile?.activeInbounds?.some((inbound) => inbound.tag === tag)
+                )
+            ) {
+                return false
+            }
+
+            return true
+        })
+
+        const sorted = sortBy(filtered, (node) => {
+            const value = get(node, sortStatus.columnAccessor)
+            return typeof value === 'string' ? value.toLowerCase() : value
+        })
+        return sortStatus.direction === 'desc' ? sorted.reverse() : sorted
+    }, [
+        nodes,
+        debouncedNameQuery,
+        selectedTags,
+        selectedProviders,
+        selectedConfigProfiles,
+        selectedPlugins,
+        selectedInbounds,
+        sortStatus
+    ])
+
+    const handleChangePageSize = (newSize: number) => {
+        setPageSize(newSize)
         setPage(1)
     }
 
@@ -84,17 +238,19 @@ export const NodesDataTableWidget = memo((props: IProps) => {
             onPageChange={setPage}
             onRecordsPerPageChange={handleChangePageSize}
             onSelectedRecordsChange={setSelectedRecords}
+            onSortStatusChange={setSortStatus}
             page={page}
             pinFirstColumn
-            records={nodes.slice((page - 1) * pageSize, page * pageSize)}
+            records={filteredAndSortedNodes.slice((page - 1) * pageSize, page * pageSize)}
             recordsPerPage={pageSize}
             recordsPerPageOptions={PAGE_SIZE_OPTIONS}
             selectedRecords={selectedRecords}
             selectionColumnStyle={{
                 backgroundColor: 'var(--mantine-color-dark-7)'
             }}
+            sortStatus={sortStatus}
             storeColumnsKey={NODES_CACHE_KEY}
-            totalRecords={nodes.length}
+            totalRecords={filteredAndSortedNodes.length}
             withColumnBorders={false}
             withRowBorders={true}
             withTableBorder={true}

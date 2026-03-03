@@ -1,9 +1,13 @@
-import { GetAllNodesCommand, GetConfigProfilesCommand } from '@remnawave/backend-contract'
-import { ActionIcon, Avatar, Badge, Group, Text } from '@mantine/core'
+import {
+    GetAllNodesCommand,
+    GetConfigProfilesCommand,
+    GetNodePluginsCommand
+} from '@remnawave/backend-contract'
+import { ActionIcon, Avatar, Badge, Group, MultiSelect, Text, TextInput } from '@mantine/core'
+import { TbEdit, TbSearch, TbX } from 'react-icons/tb'
 import { DataTableColumn } from 'mantine-datatable'
 import ReactCountryFlag from 'react-country-flag'
 import { PiUsersDuotone } from 'react-icons/pi'
-import { TbEdit } from 'react-icons/tb'
 import { TFunction } from 'i18next'
 import sortBy from 'lodash/sortBy'
 
@@ -12,10 +16,32 @@ import { faviconResolver } from '@shared/utils/misc'
 
 import { NodeStatusSimplfiedBadgeWidget } from '../node-status-simplfied-badge'
 
+export interface NodesTableFilters {
+    availableConfigProfiles: { label: string; value: string }[]
+    availableInbounds: string[]
+    availablePlugins: { label: string; value: string }[]
+    availableProviders: string[]
+    availableTags: string[]
+    nameQuery: string
+    selectedConfigProfiles: string[]
+    selectedInbounds: string[]
+    selectedPlugins: string[]
+    selectedProviders: string[]
+    selectedTags: string[]
+    setNameQuery: (value: string) => void
+    setSelectedConfigProfiles: (value: string[]) => void
+    setSelectedInbounds: (value: string[]) => void
+    setSelectedPlugins: (value: string[]) => void
+    setSelectedProviders: (value: string[]) => void
+    setSelectedTags: (value: string[]) => void
+}
+
 export function getNodesTableColumns(
     t: TFunction,
     configProfiles: GetConfigProfilesCommand.Response['response']['configProfiles'],
-    handleViewNode: (nodeUuid: string) => void
+    nodePlugins: GetNodePluginsCommand.Response['response']['nodePlugins'],
+    handleViewNode: (nodeUuid: string) => void,
+    filters: NodesTableFilters
 ): DataTableColumn<GetAllNodesCommand.Response['response'][number]>[] {
     return [
         {
@@ -51,6 +77,7 @@ export function getNodesTableColumns(
         },
         {
             accessor: 'isConnected',
+            sortable: true,
             title: '',
             render: ({ isConnected, isConnecting, isDisabled, uuid }) => (
                 <NodeStatusSimplfiedBadgeWidget
@@ -64,6 +91,7 @@ export function getNodesTableColumns(
 
         {
             accessor: 'usersOnline',
+            sortable: true,
             title: t('use-nodes-table-widget.online'),
             render: ({ usersOnline }) => (
                 <Badge
@@ -80,7 +108,29 @@ export function getNodesTableColumns(
 
         {
             accessor: 'name',
+            sortable: true,
             title: t('use-nodes-table-widget.name'),
+            filter: (
+                <TextInput
+                    label={t('use-nodes-table-widget.name')}
+                    leftSection={<TbSearch size={16} />}
+                    onChange={(e) => filters.setNameQuery(e.currentTarget.value)}
+                    rightSection={
+                        filters.nameQuery ? (
+                            <ActionIcon
+                                c="dimmed"
+                                onClick={() => filters.setNameQuery('')}
+                                size="sm"
+                                variant="transparent"
+                            >
+                                <TbX size={14} />
+                            </ActionIcon>
+                        ) : null
+                    }
+                    value={filters.nameQuery}
+                />
+            ),
+            filtering: filters.nameQuery !== '',
             render: ({ name, countryCode }) => (
                 <Group gap={6} wrap="nowrap">
                     {countryCode && countryCode !== 'XX' && (
@@ -108,22 +158,50 @@ export function getNodesTableColumns(
         },
         {
             accessor: 'address',
+            sortable: true,
             title: t('use-nodes-table-widget.address'),
             render: ({ address, port }) => `${address}:${port}`
         },
         {
             accessor: 'trafficUsedBytes',
+            sortable: true,
             title: t('use-nodes-table-widget.traffic-used'),
             render: ({ trafficUsedBytes }) => prettyBytesUtil(trafficUsedBytes, false)
         },
         {
             accessor: 'configProfile.activeConfigProfileUuid',
+            filter: (
+                <MultiSelect
+                    clearable
+                    comboboxProps={{ withinPortal: false }}
+                    data={filters.availableConfigProfiles}
+                    label={t('use-nodes-table-widget.config-profile')}
+                    leftSection={<TbSearch size={16} />}
+                    onChange={filters.setSelectedConfigProfiles}
+                    searchable
+                    value={filters.selectedConfigProfiles}
+                />
+            ),
+            filtering: filters.selectedConfigProfiles.length > 0,
             title: t('use-nodes-table-widget.config-profile'),
             render: ({ configProfile: { activeConfigProfileUuid } }) =>
                 configProfiles.find((profile) => profile.uuid === activeConfigProfileUuid)?.name
         },
         {
             accessor: 'configProfile.activeInbounds',
+            filter: (
+                <MultiSelect
+                    clearable
+                    comboboxProps={{ withinPortal: false }}
+                    data={filters.availableInbounds}
+                    label={t('use-nodes-table-widget.inbounds')}
+                    leftSection={<TbSearch size={16} />}
+                    onChange={filters.setSelectedInbounds}
+                    searchable
+                    value={filters.selectedInbounds}
+                />
+            ),
+            filtering: filters.selectedInbounds.length > 0,
             title: t('use-nodes-table-widget.inbounds'),
             render: ({ configProfile: { activeInbounds } }) =>
                 sortBy(activeInbounds, 'tag')
@@ -132,15 +210,31 @@ export function getNodesTableColumns(
         },
         {
             accessor: 'xrayVersion',
+            sortable: true,
             title: t('use-nodes-table-widget.xray-v')
         },
         {
             accessor: 'nodeVersion',
+            sortable: true,
             title: t('use-nodes-table-widget.node-v')
         },
         {
             accessor: 'provider.name',
+            sortable: true,
             title: t('use-nodes-table-widget.provider'),
+            filter: (
+                <MultiSelect
+                    clearable
+                    comboboxProps={{ withinPortal: false }}
+                    data={filters.availableProviders}
+                    label={t('use-nodes-table-widget.provider')}
+                    leftSection={<TbSearch size={16} />}
+                    onChange={filters.setSelectedProviders}
+                    searchable
+                    value={filters.selectedProviders}
+                />
+            ),
+            filtering: filters.selectedProviders.length > 0,
             render: ({ provider }) =>
                 provider ? (
                     <Group gap="xs" wrap="nowrap">
@@ -165,16 +259,52 @@ export function getNodesTableColumns(
         },
         {
             accessor: 'tags',
+            sortable: true,
             title: t('use-nodes-table-widget.tags'),
+            filter: (
+                <MultiSelect
+                    clearable
+                    comboboxProps={{ withinPortal: false }}
+                    data={filters.availableTags}
+                    label={t('use-nodes-table-widget.tags')}
+                    leftSection={<TbSearch size={16} />}
+                    onChange={filters.setSelectedTags}
+                    searchable
+                    value={filters.selectedTags}
+                />
+            ),
+            filtering: filters.selectedTags.length > 0,
             render: ({ tags }) => tags?.join(', ') ?? '-'
         },
         {
             accessor: 'totalRam',
+            sortable: true,
             title: t('use-nodes-table-widget.total-ram')
         },
         {
             accessor: 'cpuModel',
+            sortable: true,
             title: t('use-nodes-table-widget.cpu-model')
+        },
+        {
+            accessor: 'activePluginUuid',
+            filter: (
+                <MultiSelect
+                    clearable
+                    comboboxProps={{ withinPortal: false }}
+                    data={filters.availablePlugins}
+                    label="Plugin"
+                    leftSection={<TbSearch size={16} />}
+                    onChange={filters.setSelectedPlugins}
+                    searchable
+                    value={filters.selectedPlugins}
+                />
+            ),
+            filtering: filters.selectedPlugins.length > 0,
+            sortable: true,
+            title: 'Plugin',
+            render: ({ activePluginUuid }) =>
+                nodePlugins.find((plugin) => plugin.uuid === activePluginUuid)?.name || '-'
         }
     ]
 }
