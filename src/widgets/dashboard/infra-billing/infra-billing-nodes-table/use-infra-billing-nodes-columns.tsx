@@ -31,6 +31,7 @@ export function getInfraBillingNodesColumns(
     return [
         {
             accessor: 'provider.name',
+            resizable: true,
             ellipsis: true,
             title: (
                 <InfraProvidersColumnTitle
@@ -81,6 +82,7 @@ export function getInfraBillingNodesColumns(
         },
         {
             accessor: 'node',
+            resizable: true,
             ellipsis: true,
             title: (
                 <InfraProvidersColumnTitle
@@ -110,6 +112,7 @@ export function getInfraBillingNodesColumns(
 
         {
             accessor: 'nextBillingAt',
+            resizable: true,
             ellipsis: true,
             title: (
                 <InfraProvidersColumnTitle
@@ -130,9 +133,10 @@ export function getInfraBillingNodesColumns(
                     <TbClick size={16} />
                 </Center>
             ),
-            width: '0%',
+            width: 70,
+            textAlign: 'center',
             render: (row) => (
-                <Group wrap="nowrap">
+                <Group justify="center" wrap="nowrap">
                     <ActionIconGroup>
                         <Tooltip
                             label={t('use-infra-billing-nodes-columns.quick-update-to-next-month')}
