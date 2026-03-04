@@ -3,7 +3,7 @@ import dayjs from 'dayjs'
 type TTemplatePreset = 'DD.MM.YYYY HH:mm:ss' | 'D MMM' | 'D MMMM YYYY'
 
 export const formatTimeUtil = (
-    time: null | number | string | undefined,
+    time: Date | null | number | string | undefined,
     template: TTemplatePreset
 ): string => {
     if (!time) return 'Unknown date'

@@ -33,6 +33,7 @@ import { Trans, useTranslation } from 'react-i18next'
 import { PiEmptyDuotone } from 'react-icons/pi'
 
 import { useDropConnections, useFetchIps, useFetchIpsResult } from '@shared/api/hooks'
+import { formatRelativeDateUtil, formatTimeUtil } from '@shared/utils/time-utils'
 import { CopyableFieldShared } from '@shared/ui/copyable-field/copyable-field'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { LottieGlobeShared } from '@shared/ui/lotties/globe'
@@ -54,7 +55,7 @@ const HIGHLIGHT_SPAN = <Text c="white" component="span" fw={600} size="sm" />
 
 export const UserActiveSessionDrawerWidget = (props: IProps) => {
     const { userUuid, opened, onClose } = props
-    const { t } = useTranslation()
+    const { t, i18n } = useTranslation()
 
     const [jobId, setJobId] = useState<null | string>(null)
     const [isCompleted, setIsCompleted] = useState(false)
@@ -363,7 +364,7 @@ export const UserActiveSessionDrawerWidget = (props: IProps) => {
     const renderResults = () => {
         const nodes = userIpsResult?.result?.nodes
 
-        const allIps = nodes?.flatMap((node) => node.ips) ?? []
+        const allIps = nodes?.flatMap((node) => node.ips.map((item) => item.ip)) ?? []
         const totalIps = allIps.length
         const distinctIps = new Set(allIps).size
 
@@ -449,8 +450,8 @@ export const UserActiveSessionDrawerWidget = (props: IProps) => {
                             )}
 
                             {node.ips.length > 0 &&
-                                node.ips.map((ip) => (
-                                    <Group align="flex-end" gap="xs" key={ip} wrap="nowrap">
+                                node.ips.map((item) => (
+                                    <Group align="center" gap="xs" key={item.ip} wrap="nowrap">
                                         <Tooltip
                                             label={t(
                                                 'user-active-session-drawer.widget.drop-this-connection-on-this-node'
@@ -463,7 +464,7 @@ export const UserActiveSessionDrawerWidget = (props: IProps) => {
                                                         variables: {
                                                             dropBy: {
                                                                 by: 'ipAddresses',
-                                                                ipAddresses: [ip]
+                                                                ipAddresses: [item.ip]
                                                             },
                                                             targetNodes: {
                                                                 target: 'specificNodes',
@@ -478,15 +479,59 @@ export const UserActiveSessionDrawerWidget = (props: IProps) => {
                                                 <TbUnlink size={20} />
                                             </ActionIcon>
                                         </Tooltip>
-
                                         <Box style={{ flex: 1 }}>
-                                            <CopyableFieldShared size="sm" value={ip} />
+                                            <CopyableFieldShared
+                                                leftSection={
+                                                    <Tooltip
+                                                        color="dark.6"
+                                                        label={
+                                                            <Stack gap={2} p={4}>
+                                                                <Text c="white" fw={600} size="xs">
+                                                                    {formatRelativeDateUtil(
+                                                                        item.lastSeen,
+                                                                        t,
+                                                                        i18n.language
+                                                                    )}
+                                                                </Text>
+                                                                <Text
+                                                                    c="dimmed"
+                                                                    ff="monospace"
+                                                                    size="xs"
+                                                                >
+                                                                    {formatTimeUtil(
+                                                                        item.lastSeen,
+                                                                        'DD.MM.YYYY HH:mm:ss'
+                                                                    )}
+                                                                </Text>
+                                                            </Stack>
+                                                        }
+                                                        radius="md"
+                                                        styles={{
+                                                            tooltip: {
+                                                                border: '1px solid var(--mantine-color-dark-4)',
+                                                                backdropFilter: 'blur(8px)'
+                                                            }
+                                                        }}
+                                                    >
+                                                        <Box
+                                                            c="dimmed"
+                                                            style={{
+                                                                display: 'flex',
+                                                                cursor: 'help'
+                                                            }}
+                                                        >
+                                                            <TbClock size={16} />
+                                                        </Box>
+                                                    </Tooltip>
+                                                }
+                                                size="sm"
+                                                value={item.ip}
+                                            />
                                         </Box>
-
                                         <ActionIcon
                                             color="cyan"
                                             component="a"
-                                            href={`https://ipinfo.io/${ip}`}
+                                            href={`https://ipinfo.io/${item.ip}`}
                                             rel="noopener noreferrer"
                                             size="input-sm"
                                             target="_blank"
