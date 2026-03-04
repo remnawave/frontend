@@ -176,7 +176,7 @@ export const BaseNodeForm = <T extends UpdateNodeCommand.Request>(props: IProps<
                 </Group>
             )}
 
-            <ModalFooter>
+            <ModalFooter isMobile={isMobile}>
                 {node && (
                     <Menu keepMounted={true} position="top-end" shadow="md">
                         <Menu.Target>

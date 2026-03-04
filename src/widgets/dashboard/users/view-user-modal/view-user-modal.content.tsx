@@ -305,7 +305,7 @@ export const ViewUserModalContent = (props: IProps) => {
                 </Group>
             )}
 
-            <ModalFooter>
+            <ModalFooter isMobile={isMobile}>
                 <Menu keepMounted position="top-end" shadow="md">
                     <Menu.Target>
                         <Button color="gray" leftSection={<TbDots size={px('1.2rem')} />} size="md">
