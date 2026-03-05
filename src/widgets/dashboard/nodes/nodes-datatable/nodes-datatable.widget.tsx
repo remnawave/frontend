@@ -35,7 +35,7 @@ export const NodesDataTableWidget = memo((props: IProps) => {
     const [pageSize, setPageSize] = useState(PAGE_SIZE)
     const [page, setPage] = useState(1)
     const [sortStatus, setSortStatus] = useState<DataTableSortStatus<NodeType>>({
-        columnAccessor: 'name',
+        columnAccessor: 'viewPosition',
         direction: 'asc'
     })
 

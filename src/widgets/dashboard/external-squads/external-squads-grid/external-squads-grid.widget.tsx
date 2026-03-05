@@ -1,6 +1,6 @@
-import { Card, Stack, Text, Title } from '@mantine/core'
+import { Center, Stack, Text, ThemeIcon } from '@mantine/core'
 import { useTranslation } from 'react-i18next'
-import { PiEmpty } from 'react-icons/pi'
+import { TbWebhook } from 'react-icons/tb'
 import { modals } from '@mantine/modals'
 
 import {
@@ -14,6 +14,7 @@ import {
 import { baseNotificationsMutations } from '@shared/ui/notifications/base-notification-mutations'
 import { VirtualizedDndGrid } from '@shared/ui/virtualized-dnd-grid'
 import { queryClient } from '@shared/api/query-client'
+import { SectionCard } from '@shared/ui/section-card'
 import { sToMs } from '@shared/utils/time-utils'
 
 import { ExternalSquadCardWidget } from '../external-squad-card/external-squad-card.widget'
@@ -136,24 +137,30 @@ export function ExternalSquadsGridWidget(props: IProps) {
 
     if (!externalSquads || externalSquads.length === 0) {
         return (
-            <Card bg="dark.6" h="100%" p="xl" withBorder>
-                <Stack align="center" gap="md">
-                    <PiEmpty size={48} style={{ opacity: 0.5 }} />
-                    <Stack gap="xs">
-                        <Title c="dimmed" order={4} ta="center">
-                            {t('external-squads-grid.widget.no-external-squads')}
-                        </Title>
+            <SectionCard.Root p="xl">
+                <SectionCard.Section>
+                    <Center py="xl">
+                        <Stack align="center" gap="lg">
+                            <ThemeIcon radius="xl" size={64} variant="gradient-gray">
+                                <TbWebhook size={32} />
+                            </ThemeIcon>
 
-                        <Text c="dimmed" mt="xs" size="sm" ta="center">
-                            {t('external-squads-grid.widget.no-external-squads-line-1')}
-                            <br />
-                            {t('external-squads-grid.widget.no-external-squads-line-2')}
-                            <br />
-                            {t('external-squads-grid.widget.no-external-squads-line-3')}
-                        </Text>
-                    </Stack>
-                </Stack>
-            </Card>
+                            <Stack align="center" gap="xs">
+                                <Text fw={600} size="lg" ta="center">
+                                    {t('external-squads-grid.widget.no-external-squads')}
+                                </Text>
+                                <Text c="dimmed" size="sm" ta="center">
+                                    {t('external-squads-grid.widget.no-external-squads-line-1')}
+                                    <br />
+                                    {t('external-squads-grid.widget.no-external-squads-line-2')}
+                                    <br />
+                                    {t('external-squads-grid.widget.no-external-squads-line-3')}
+                                </Text>
+                            </Stack>
+                        </Stack>
+                    </Center>
+                </SectionCard.Section>
+            </SectionCard.Root>
         )
     }
 
