@@ -24,7 +24,7 @@ export const NodePluginsBasePageComponent = (props: Props) => {
             <PageHeaderShared
                 actions={<NodePluginsHeaderActionButtonsFeature />}
                 icon={<TbFile size={24} />}
-                title={t('constants.node-plugins')}
+                title={`${t('constants.node-plugins')} β`}
             />
 
             <motion.div

@@ -96,7 +96,7 @@ export const useMenuSections = (): MenuItem[] => {
                             id: 'management'
                         },
                         {
-                            name: t('constants.node-plugins'),
+                            name: `${t('constants.node-plugins')} β`,
                             href: ROUTES.DASHBOARD.MANAGEMENT.NODE_PLUGINS.ROOT,
                             icon: TbPlug,
                             id: 'node-plugins'
