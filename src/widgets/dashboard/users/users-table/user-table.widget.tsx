@@ -5,8 +5,9 @@ import {
     MRT_SortingState,
     useMantineReactTable
 } from 'mantine-react-table'
-import { useLayoutEffect, useMemo, useState } from 'react'
+import { useEffect, useLayoutEffect, useMemo, useState } from 'react'
 import { notifications } from '@mantine/notifications'
+import { useSearchParams } from 'react-router-dom'
 import { PiUsersDuotone } from 'react-icons/pi'
 import { useTranslation } from 'react-i18next'
 
@@ -33,6 +34,7 @@ import {
 import { useUserTableColumns } from '@features/dashboard/users/users-table/model/use-table-columns'
 import { UserActionGroupFeature } from '@features/dashboard/users/users-action-group'
 import { useUserModalStoreActions } from '@entities/dashboard/user-modal-store'
+import { SEARCH_PARAMS } from '@shared/constants/search-params'
 import { preventBackScrollTables } from '@shared/utils/misc'
 import { DataTableShared } from '@shared/ui/table'
 import { sToMs } from '@shared/utils/time-utils'
@@ -50,6 +52,7 @@ export function UserTableWidget() {
     const bulkUsersActionsStoreActions = useBulkUsersActionsStoreActions()
     const tableSelection = useBulkUsersActionsStoreTableSelection()
     const userModalActions = useUserModalStoreActions()
+    const [searchParams, setSearchParams] = useSearchParams()
 
     const actions = useUsersTableStoreActions()
 
@@ -96,6 +99,16 @@ export function UserTableWidget() {
             refetchInterval: bulkUsersActionsStoreActions.getUuidLength() === 0 ? sToMs(25) : false
         }
     })
+
+    useEffect(() => {
+        if (!isLoading && searchParams.get(SEARCH_PARAMS.USER)) {
+            userModalActions.setUserUuid(searchParams.get(SEARCH_PARAMS.USER)!)
+            userModalActions.changeModalState(true)
+
+            searchParams.delete(SEARCH_PARAMS.USER)
+            setSearchParams(searchParams)
+        }
+    }, [searchParams, isLoading])
 
     const filteredData = useMemo(() => usersResponse, [usersResponse])
 

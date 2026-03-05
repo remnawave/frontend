@@ -108,7 +108,7 @@ export const ViewUserModalContent = (props: IProps) => {
         )
     })
 
-    const { data: user } = useGetUserByUuid({
+    const { data: user, isError } = useGetUserByUuid({
         route: {
             uuid: userUuid
         }
@@ -157,6 +157,12 @@ export const ViewUserModalContent = (props: IProps) => {
             })
         }
     }, [user, internalSquads])
+
+    useEffect(() => {
+        if (isError) {
+            actions.clearModalState()
+        }
+    }, [isError])
 
     const handleSubmit = form.onSubmit(async (values) => {
         const dirtyFields = form.getDirty()
