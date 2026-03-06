@@ -296,8 +296,9 @@ export function ConfigEditorActionsFeature(props: Props) {
                                 modals.open({
                                     title: (
                                         <BaseOverlayHeader
+                                            iconColor="teal"
                                             IconComponent={TbTools}
-                                            iconVariant="gradient-teal"
+                                            iconVariant="soft"
                                             title={t('config-editor-actions.feature.tools')}
                                         />
                                     ),

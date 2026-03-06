@@ -30,7 +30,7 @@ export const NodePluginEditorPageComponent = (props: Props) => {
                             color="gray"
                             onClick={() => navigate(ROUTES.DASHBOARD.MANAGEMENT.NODE_PLUGINS.ROOT)}
                             size="input-md"
-                            variant="light"
+                            variant="soft"
                         >
                             <TbArrowBackUp size={24} />
                         </ActionIcon>

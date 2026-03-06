@@ -55,8 +55,9 @@ export const ConfigProfileCardShared = memo((props: IProps) => {
             ),
             title: (
                 <BaseOverlayHeader
+                    iconColor="teal"
                     IconComponent={XrayLogo}
-                    iconVariant="gradient-teal"
+                    iconVariant="soft"
                     title={profile.name}
                 />
             ),
@@ -156,8 +157,9 @@ export const ConfigProfileCardShared = memo((props: IProps) => {
                                     children: <ActiveNodesListModalShared nodes={profile.nodes} />,
                                     title: (
                                         <BaseOverlayHeader
+                                            iconColor="teal"
                                             IconComponent={PiCpu}
-                                            iconVariant="gradient-teal"
+                                            iconVariant="soft"
                                             title={`Active Nodes - ${profile.name}`}
                                             titleOrder={5}
                                         />

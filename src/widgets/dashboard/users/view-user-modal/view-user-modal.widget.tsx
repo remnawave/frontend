@@ -50,8 +50,9 @@ export const ViewUserModal = () => {
             size="1000px"
             title={
                 <BaseOverlayHeader
+                    iconColor="cyan"
                     IconComponent={IconUser}
-                    iconVariant="gradient-cyan"
+                    iconVariant="soft"
                     title={t('view-user-modal.widget.edit-user-headline')}
                 />
             }

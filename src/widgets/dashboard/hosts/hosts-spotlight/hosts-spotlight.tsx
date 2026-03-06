@@ -24,21 +24,21 @@ export const HostsSpotlightWidget = (props: IProps) => {
     const getHostIcon = (isDisabled: boolean, isHidden: boolean) => {
         if (isDisabled) {
             return (
-                <ThemeIcon size="lg" style={{ flexShrink: 0 }} variant="gradient-gray">
+                <ThemeIcon color="gray" size="lg" style={{ flexShrink: 0 }} variant="soft">
                     <PiProhibit size={20} />
                 </ThemeIcon>
             )
         }
         if (!isDisabled && isHidden) {
             return (
-                <ThemeIcon size="lg" style={{ flexShrink: 0 }} variant="gradient-violet">
+                <ThemeIcon color="violet" size="lg" style={{ flexShrink: 0 }} variant="soft">
                     <TbEyeOff size={20} />
                 </ThemeIcon>
             )
         }
         if (!isDisabled && !isHidden) {
             return (
-                <ThemeIcon size="lg" style={{ flexShrink: 0 }} variant="gradient-teal">
+                <ThemeIcon color="teal" size="lg" style={{ flexShrink: 0 }} variant="soft">
                     <PiPulse size={20} />
                 </ThemeIcon>
             )
@@ -84,12 +84,7 @@ export const HostsSpotlightWidget = (props: IProps) => {
                     </Group>
 
                     {host.xrayJsonTemplateUuid && (
-                        <ThemeIcon
-                            color="teal"
-                            size="lg"
-                            style={{ flexShrink: 0 }}
-                            variant="gradient-teal"
-                        >
+                        <ThemeIcon color="teal" size="lg" style={{ flexShrink: 0 }} variant="soft">
                             <XrayLogo size={20} />
                         </ThemeIcon>
                     )}

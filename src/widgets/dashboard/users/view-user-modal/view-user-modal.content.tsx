@@ -373,8 +373,9 @@ export const ViewUserModalContent = (props: IProps) => {
                                     centered: true,
                                     title: (
                                         <BaseOverlayHeader
+                                            iconColor="teal"
                                             IconComponent={PiQrCodeDuotone}
-                                            iconVariant="gradient-teal"
+                                            iconVariant="soft"
                                             title={t('view-user-modal.widget.subscription-qr-code')}
                                         />
                                     ),

@@ -272,8 +272,9 @@ export const SnippetsDrawerWidget = (props: IProps) => {
         modals.open({
             title: (
                 <BaseOverlayHeader
+                    iconColor="teal"
                     IconComponent={TbCode}
-                    iconVariant="gradient-teal"
+                    iconVariant="soft"
                     title={t('snippets.drawer.widget.snippets')}
                 />
             ),
@@ -522,8 +523,9 @@ export const SnippetsDrawerWidget = (props: IProps) => {
             size="lg"
             title={
                 <BaseOverlayHeader
+                    iconColor="teal"
                     IconComponent={TbCode}
-                    iconVariant="gradient-teal"
+                    iconVariant="soft"
                     title={t('snippets.drawer.widget.create-snippet')}
                 />
             }
@@ -681,8 +683,9 @@ export const SnippetsDrawerWidget = (props: IProps) => {
             size="lg"
             title={
                 <BaseOverlayHeader
+                    iconColor="teal"
                     IconComponent={TbCode}
-                    iconVariant="gradient-teal"
+                    iconVariant="soft"
                     title={t('snippets.drawer.widget.edit-snippet')}
                 />
             }
@@ -825,9 +828,10 @@ export const SnippetsDrawerWidget = (props: IProps) => {
                 <SectionCard.Section>
                     <Group align="flex-center" justify="space-between">
                         <BaseOverlayHeader
+                            iconColor="teal"
                             IconComponent={TbCode}
                             iconSize={20}
-                            iconVariant="gradient-teal"
+                            iconVariant="soft"
                             title={t('snippets.drawer.widget.snippets')}
                             titleOrder={5}
                             withCopy

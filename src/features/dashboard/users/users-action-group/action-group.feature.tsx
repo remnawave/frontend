@@ -92,7 +92,7 @@ export const UserActionGroupFeature = (props: IProps) => {
                             color="lime"
                             onClick={helpDrawerHandlers.open}
                             size="input-md"
-                            variant="light"
+                            variant="soft"
                         >
                             <TbQuestionMark size="24px" />
                         </ActionIcon>
@@ -133,7 +133,7 @@ export const UserActionGroupFeature = (props: IProps) => {
                                 bulkAllDrawerHandlers.open()
                             }}
                             size="input-md"
-                            variant="light"
+                            variant="soft"
                         >
                             <TbSettings size="24px" />
                         </ActionIcon>
@@ -144,7 +144,7 @@ export const UserActionGroupFeature = (props: IProps) => {
                             loading={isLoading}
                             onClick={handleRefetch}
                             size="input-md"
-                            variant="light"
+                            variant="soft"
                         >
                             <TbRefresh size="24px" />
                         </ActionIcon>
@@ -155,7 +155,7 @@ export const UserActionGroupFeature = (props: IProps) => {
                             color="teal"
                             onClick={handleOpenCreateUserModal}
                             size="input-md"
-                            variant="light"
+                            variant="soft"
                         >
                             <TbPlus size="24px" />
                         </ActionIcon>
@@ -178,8 +178,9 @@ export const UserActionGroupFeature = (props: IProps) => {
                 size="500px"
                 title={
                     <BaseOverlayHeader
+                        iconColor="teal"
                         IconComponent={TbQuestionMark}
-                        iconVariant="gradient-teal"
+                        iconVariant="soft"
                         title={t('action-group.feature.table-controls-help')}
                     />
                 }

@@ -63,6 +63,8 @@ export const SubscriptionInfoCardWidget = (props: IProps) => {
                 <SettingsCardShared.Header
                     description={t('subscription-settings.widget.subscription-info-description')}
                     icon={<PiUserCircle size={24} />}
+                    iconColor="cyan"
+                    iconVariant="soft"
                     title={t('subscription-settings.widget.subscription-info')}
                 />
 

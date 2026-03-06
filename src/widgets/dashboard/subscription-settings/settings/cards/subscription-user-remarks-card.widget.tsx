@@ -166,6 +166,8 @@ export const SubscriptionUserRemarksCardWidget = (props: IProps) => {
                         </>
                     }
                     icon={<TbListLetters size={24} />}
+                    iconColor="cyan"
+                    iconVariant="soft"
                     title={t('subscription-settings.widget.custom-remarks')}
                 />
 

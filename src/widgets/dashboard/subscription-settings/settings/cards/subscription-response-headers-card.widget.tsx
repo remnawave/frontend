@@ -185,6 +185,8 @@ export const SubscriptionResponseHeadersCardWidget = (props: IProps) => {
                         'subscription-tabs.widget.headers-that-will-be-sent-with-subscription-content'
                     )}
                     icon={<PiChatsCircle size={24} />}
+                    iconColor="cyan"
+                    iconVariant="soft"
                     title={t('subscription-tabs.widget.additional-response-headers')}
                 />
 

@@ -223,8 +223,9 @@ export const NodePluginExecutorContent = (props: IProps) => {
                     <SectionCard.Root>
                         <SectionCard.Section>
                             <BaseOverlayHeader
+                                iconColor="orange"
                                 IconComponent={TbAlertTriangle}
-                                iconVariant="gradient-orange"
+                                iconVariant="soft"
                                 subtitle={t('node-plugin-executor.content.executor-description')}
                                 title={t('node-plugins-grid.widget.warning')}
                                 titleOrder={5}
@@ -238,27 +239,30 @@ export const NodePluginExecutorContent = (props: IProps) => {
                                 'node-plugin-executor.content.block-specific-ip-addresses-on-selected-nodes'
                             )}
                             icon={<TbLock size={20} />}
+                            iconColor="red"
                             onClick={() => selectCommand('blockIps')}
                             title={t('node-plugin-executor.content.block-ips')}
-                            variant="gradient-red"
+                            variant="soft"
                         />
                         <ActionCardShared
                             description={t(
                                 'node-plugin-executor.content.remove-ip-blocks-on-selected-nodes'
                             )}
                             icon={<TbLockOpen size={20} />}
+                            iconColor="teal"
                             onClick={() => selectCommand('unblockIps')}
                             title={t('node-plugin-executor.content.unblock-ips')}
-                            variant="gradient-teal"
+                            variant="soft"
                         />
                         <ActionCardShared
                             description={t(
                                 'node-plugin-executor.content.recreate-nftables-rules-on-selected-nodes'
                             )}
                             icon={<TbRefresh size={20} />}
+                            iconColor="orange"
                             onClick={() => selectCommand('recreateTables')}
                             title={t('node-plugin-executor.content.recreate-tables')}
-                            variant="gradient-orange"
+                            variant="soft"
                         />
                     </Stack>
                 </Stack>
@@ -275,8 +279,9 @@ export const NodePluginExecutorContent = (props: IProps) => {
                     <SectionCard.Section>
                         <Group align="flex-start" justify="space-between">
                             <BaseOverlayHeader
+                                iconColor={isBlock ? 'cyan' : 'teal'}
                                 IconComponent={isBlock ? TbLock : TbLockOpen}
-                                iconVariant={isBlock ? 'gradient-cyan' : 'gradient-teal'}
+                                iconVariant="soft"
                                 subtitle={
                                     isBlock
                                         ? t('node-plugin-executor.content.block-ips-decription')
@@ -354,8 +359,9 @@ export const NodePluginExecutorContent = (props: IProps) => {
                 <SectionCard.Section>
                     <Group align="flex-start" justify="space-between">
                         <BaseOverlayHeader
+                            iconColor="violet"
                             IconComponent={TbServer2}
-                            iconVariant="gradient-violet"
+                            iconVariant="soft"
                             subtitle={`${selectedNodeUuids.size} selected`}
                             title={t('constants.nodes')}
                             titleOrder={5}

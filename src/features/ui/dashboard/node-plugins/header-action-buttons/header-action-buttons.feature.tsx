@@ -8,7 +8,7 @@ import {
     TextInput,
     Tooltip
 } from '@mantine/core'
-import { TbFile, TbPlus, TbRefresh, TbTerminal } from 'react-icons/tb'
+import { TbPackage, TbPlus, TbRefresh, TbTerminal } from 'react-icons/tb'
 import { CreateNodePluginCommand } from '@remnawave/backend-contract'
 import { generatePath, useNavigate } from 'react-router-dom'
 import { useDisclosure } from '@mantine/hooks'
@@ -75,7 +75,7 @@ export const NodePluginsHeaderActionButtonsFeature = () => {
                             openModalWithData(MODALS.NODE_PLUGIN_EXECUTOR_DRAWER, undefined)
                         }
                         size="input-md"
-                        variant="light"
+                        variant="soft"
                     >
                         <TbTerminal size="24px" />
                     </ActionIcon>
@@ -88,7 +88,7 @@ export const NodePluginsHeaderActionButtonsFeature = () => {
                         loading={isFetching}
                         onClick={handleUpdate}
                         size="input-md"
-                        variant="light"
+                        variant="soft"
                     >
                         <TbRefresh size="24px" />
                     </ActionIcon>
@@ -96,7 +96,7 @@ export const NodePluginsHeaderActionButtonsFeature = () => {
             </ActionIconGroup>
 
             <ActionIconGroup>
-                <ActionIcon color="teal" onClick={open} size="input-md" variant="light">
+                <ActionIcon color="teal" onClick={open} size="input-md" variant="soft">
                     <TbPlus size="24px" />
                 </ActionIcon>
             </ActionIconGroup>
@@ -108,8 +108,9 @@ export const NodePluginsHeaderActionButtonsFeature = () => {
                 size="md"
                 title={
                     <BaseOverlayHeader
-                        IconComponent={TbFile}
-                        iconVariant="gradient-teal"
+                        iconColor="teal"
+                        IconComponent={TbPackage}
+                        iconVariant="soft"
                         title={t('common.create')}
                     />
                 }

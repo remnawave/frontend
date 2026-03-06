@@ -47,8 +47,9 @@ export const NodesHeaderActionButtonsFeature = (props: IProps) => {
         modals.open({
             title: (
                 <BaseOverlayHeader
+                    iconColor="teal"
                     IconComponent={TbRocket}
-                    iconVariant="gradient-teal"
+                    iconVariant="soft"
                     title={t('nodes-header-action-buttons.feature.restart-all-nodes')}
                 />
             ),
@@ -61,6 +62,7 @@ export const NodesHeaderActionButtonsFeature = (props: IProps) => {
                             'nodes-header-action-buttons.feature.force-restart-description'
                         )}
                         icon={<TbAlertCircle size={22} />}
+                        iconColor="red"
                         isLoading={isPending}
                         onClick={() => {
                             restartAllNodes({
@@ -71,7 +73,7 @@ export const NodesHeaderActionButtonsFeature = (props: IProps) => {
                             modals.closeAll()
                         }}
                         title={t('nodes-header-action-buttons.feature.force')}
-                        variant="gradient-red"
+                        variant="soft"
                     />
 
                     <ActionCardShared
@@ -79,6 +81,7 @@ export const NodesHeaderActionButtonsFeature = (props: IProps) => {
                             'nodes-header-action-buttons.feature.graceful-restart-description-1'
                         )}
                         icon={<TbRocket size={22} />}
+                        iconColor="teal"
                         isLoading={isPending}
                         onClick={() => {
                             restartAllNodes({
@@ -89,7 +92,7 @@ export const NodesHeaderActionButtonsFeature = (props: IProps) => {
                             modals.closeAll()
                         }}
                         title={t('nodes-header-action-buttons.feature.graceful')}
-                        variant="gradient-teal"
+                        variant="soft"
                     />
                 </Stack>
             )
@@ -105,7 +108,7 @@ export const NodesHeaderActionButtonsFeature = (props: IProps) => {
                             color="gray"
                             onClick={spotlight.open}
                             size="input-md"
-                            variant="light"
+                            variant="soft"
                         >
                             <TbSearch size="24px" />
                         </ActionIcon>
@@ -125,7 +128,7 @@ export const NodesHeaderActionButtonsFeature = (props: IProps) => {
                             )
                         }
                         size="input-md"
-                        variant="light"
+                        variant="soft"
                     >
                         {viewMode === NodesViewMode.CARDS ? (
                             <TbTable size="24px" />
@@ -147,7 +150,7 @@ export const NodesHeaderActionButtonsFeature = (props: IProps) => {
                             openRestartAllNodesModal()
                         }}
                         size="input-md"
-                        variant="light"
+                        variant="soft"
                     >
                         <PiSpiral size="24px" />
                     </ActionIcon>
@@ -159,7 +162,7 @@ export const NodesHeaderActionButtonsFeature = (props: IProps) => {
                         loading={isGetNodesPending || isPending || isRefetching}
                         onClick={() => refetchNodes()}
                         size="input-md"
-                        variant="light"
+                        variant="soft"
                     >
                         <TbRefresh size="24px" />
                     </ActionIcon>
@@ -167,7 +170,7 @@ export const NodesHeaderActionButtonsFeature = (props: IProps) => {
             </ActionIconGroup>
             <ActionIconGroup>
                 <Tooltip label={t('nodes-header-action-buttons.feature.create-new-node')} withArrow>
-                    <ActionIcon color="teal" onClick={handleCreate} size="input-md" variant="light">
+                    <ActionIcon color="teal" onClick={handleCreate} size="input-md" variant="soft">
                         <TbPlus size="24px" />
                     </ActionIcon>
                 </Tooltip>

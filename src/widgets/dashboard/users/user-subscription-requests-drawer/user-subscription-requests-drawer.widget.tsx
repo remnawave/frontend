@@ -68,7 +68,7 @@ export const UserSubscriptionRequestsDrawerWidget = () => {
                                         loading={isRefetching}
                                         onClick={() => refetch()}
                                         size="lg"
-                                        variant="light"
+                                        variant="soft"
                                     >
                                         <TbRefresh size={20} />
                                     </ActionIcon>
@@ -100,8 +100,9 @@ export const UserSubscriptionRequestsDrawerWidget = () => {
             size="500px"
             title={
                 <BaseOverlayHeader
+                    iconColor="teal"
                     IconComponent={TbRewindBackward50}
-                    iconVariant="gradient-teal"
+                    iconVariant="soft"
                     title={t(
                         'get-user-subscription-request-history.feature.subscription-request-history'
                     )}

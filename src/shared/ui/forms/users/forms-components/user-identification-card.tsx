@@ -37,11 +37,11 @@ interface IProps {
     user: GetUserByUuidCommand.Response['response']
 }
 
-const statusIconVariantMap = {
-    [USERS_STATUS.ACTIVE]: 'gradient-teal',
-    [USERS_STATUS.DISABLED]: 'gradient-gray',
-    [USERS_STATUS.EXPIRED]: 'gradient-red',
-    [USERS_STATUS.LIMITED]: 'gradient-yellow'
+const statusIconColorMap = {
+    [USERS_STATUS.ACTIVE]: 'teal',
+    [USERS_STATUS.DISABLED]: 'gray',
+    [USERS_STATUS.EXPIRED]: 'red',
+    [USERS_STATUS.LIMITED]: 'yellow'
 } as const
 
 export const UserIdentificationCard = memo((props: IProps) => {
@@ -54,7 +54,7 @@ export const UserIdentificationCard = memo((props: IProps) => {
 
     const actions = useUserModalStoreActions()
 
-    const statusIconVariant = statusIconVariantMap[user.status] ?? 'gradient-gray'
+    const statusIconColor = statusIconColorMap[user.status] ?? 'gray'
 
     const usedBytes = user.userTraffic.usedTrafficBytes
     const limitBytes = user.trafficLimitBytes
@@ -109,9 +109,10 @@ export const UserIdentificationCard = memo((props: IProps) => {
                 <SectionCard.Section>
                     <Group align="flex-center" justify="space-between">
                         <BaseOverlayHeader
+                            iconColor={statusIconColor}
                             IconComponent={TbUser}
                             iconSize={20}
-                            iconVariant={statusIconVariant}
+                            iconVariant="soft"
                             subtitle={user.id.toString()}
                             title={user.username}
                             titleOrder={5}

@@ -57,7 +57,7 @@ export function InternalSquadCardWidget(props: IProps) {
                                     color="blue"
                                     leftSection={<PiTag size={12} />}
                                     size="lg"
-                                    variant="light"
+                                    variant="soft"
                                 >
                                     {formatInt(inboundsCount, {
                                         thousandSeparator: ','
@@ -70,7 +70,7 @@ export function InternalSquadCardWidget(props: IProps) {
                                     color={isActive ? 'teal' : 'gray'}
                                     leftSection={<PiUsers size={12} />}
                                     size="lg"
-                                    variant="light"
+                                    variant="soft"
                                 >
                                     {formatInt(membersCount, {
                                         thousandSeparator: ','

@@ -1,8 +1,9 @@
-import { forwardRef, ReactNode, useEffect } from 'react'
+import { forwardRef, ReactNode, useEffect, useMemo } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { nprogress } from '@mantine/nprogress'
 import { Box, BoxProps } from '@mantine/core'
 
+import { useGetAuthStatus } from '@shared/api/hooks'
 import { app } from 'src/config'
 
 interface PageProps extends BoxProps {
@@ -18,9 +19,15 @@ export const Page = forwardRef<HTMLDivElement, PageProps>(
             return () => nprogress.start()
         }, [])
 
+        const { data: authStatus } = useGetAuthStatus()
+
+        const pageTitle = useMemo(() => {
+            return `${title} | ${authStatus?.branding.title || app.name}`
+        }, [title, authStatus?.branding.title])
+
         return (
             <>
-                <title>{`${title} | ${app.name}`}</title>
+                <title>{pageTitle}</title>
                 {meta}
 
                 <AnimatePresence mode="wait">

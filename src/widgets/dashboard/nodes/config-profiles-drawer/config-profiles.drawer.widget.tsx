@@ -166,8 +166,9 @@ export const ConfigProfilesDrawer = (props: IProps) => {
             }}
             title={
                 <BaseOverlayHeader
+                    iconColor="teal"
                     IconComponent={XrayLogo}
-                    iconVariant="gradient-teal"
+                    iconVariant="soft"
                     title={t('config-profiles.drawer.widget.config-profiles')}
                 />
             }

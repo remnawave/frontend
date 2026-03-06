@@ -114,8 +114,9 @@ export const BulkUserActionsActionsTabFeature = (props: IProps) => {
         modals.open({
             title: (
                 <BaseOverlayHeader
+                    iconColor="teal"
                     IconComponent={PiClockUser}
-                    iconVariant="gradient-teal"
+                    iconVariant="soft"
                     title={t('bulk-user-actions.actions.tab.feature.extend-expiration-date')}
                     titleOrder={5}
                 />

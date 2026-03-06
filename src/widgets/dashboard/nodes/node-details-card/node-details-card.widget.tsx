@@ -64,34 +64,34 @@ export const NodeDetailsCardWidget = memo((props: IProps) => {
         )
     }, [node.configProfile])
 
-    const { IconComponent, themeIconVariant } = useMemo(() => {
+    const { IconComponent, themeIconColor } = useMemo(() => {
         let IconComponent: React.ComponentType<{ size: number }>
-        let themeIconVariant: ThemeIconProps['variant'] = 'gradient-red'
+        let themeIconColor: ThemeIconProps['color'] = 'red'
 
         if (isConfigMissing) {
             IconComponent = PiWarningCircle
-            themeIconVariant = 'gradient-red'
-            return { IconComponent, themeIconVariant }
+            themeIconColor = 'red'
+            return { IconComponent, themeIconColor }
         }
 
         if (node.isDisabled) {
             IconComponent = TbWifiOff
-            themeIconVariant = 'gradient-gray'
-            return { IconComponent, themeIconVariant }
+            themeIconColor = 'gray'
+            return { IconComponent, themeIconColor }
         }
 
         if (node.isConnected) {
             IconComponent = TbWifi
-            themeIconVariant = 'gradient-teal'
+            themeIconColor = 'teal'
         } else if (node.isConnecting) {
             IconComponent = PiCloudArrowUpDuotone
-            themeIconVariant = 'gradient-yellow'
+            themeIconColor = 'yellow'
         } else {
             IconComponent = PiWarningCircle
-            themeIconVariant = 'gradient-red'
+            themeIconColor = 'red'
         }
 
-        return { IconComponent, themeIconVariant }
+        return { IconComponent, themeIconColor }
     }, [node.isConnected, node.isConnecting, node.isDisabled, isConfigMissing])
 
     const trafficData = useMemo(() => {
@@ -139,9 +139,10 @@ export const NodeDetailsCardWidget = memo((props: IProps) => {
             <SectionCard.Section>
                 <Group align="flex-center" justify="space-between">
                     <BaseOverlayHeader
+                        iconColor={themeIconColor}
                         IconComponent={IconComponent}
                         iconSize={20}
-                        iconVariant={themeIconVariant}
+                        iconVariant="soft"
                         title={t('node-details-card.widget.node-details')}
                         titleOrder={5}
                     />

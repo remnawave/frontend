@@ -198,7 +198,7 @@ export const UserHwidDevicesDrawerWidget = () => {
                                         loading={isRefetching}
                                         onClick={() => refetch()}
                                         size="lg"
-                                        variant="light"
+                                        variant="soft"
                                     >
                                         <TbRefresh size={20} />
                                     </ActionIcon>
@@ -249,8 +249,9 @@ export const UserHwidDevicesDrawerWidget = () => {
             }}
             title={
                 <BaseOverlayHeader
+                    iconColor="violet"
                     IconComponent={TbDevices}
-                    iconVariant="gradient-violet"
+                    iconVariant="soft"
                     title={t('get-hwid-user-devices.feature.hwid-devices')}
                 />
             }

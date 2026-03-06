@@ -135,8 +135,9 @@ export const UserActiveSessionDrawerWidget = (props: IProps) => {
             <SectionCard.Section>
                 <Group align="flex-center" justify="space-between">
                     <BaseOverlayHeader
+                        iconColor="teal"
                         IconComponent={TbRadar}
-                        iconVariant="gradient-teal"
+                        iconVariant="soft"
                         subtitle={t('active-sessions-drawer.widget.active-ips-across-nodes')}
                         title={formatInt(totalIps)}
                     />
@@ -144,9 +145,10 @@ export const UserActiveSessionDrawerWidget = (props: IProps) => {
                     <Group gap="xs">
                         <Tooltip label={t('active-sessions-drawer.widget.clear')}>
                             <ActionIcon
+                                color="red"
                                 onClick={handleClearResults}
                                 size="lg"
-                                variant="gradient-red"
+                                variant="soft"
                             >
                                 <TbTrash size={20} />
                             </ActionIcon>
@@ -158,7 +160,7 @@ export const UserActiveSessionDrawerWidget = (props: IProps) => {
                             )}
                         >
                             <ActionIcon
-                                color="red"
+                                color="orange"
                                 onClick={() =>
                                     dropConnections({
                                         variables: {
@@ -173,7 +175,7 @@ export const UserActiveSessionDrawerWidget = (props: IProps) => {
                                     })
                                 }
                                 size="lg"
-                                variant="gradient-orange"
+                                variant="soft"
                             >
                                 <TbUnlink size={20} />
                             </ActionIcon>
@@ -181,12 +183,13 @@ export const UserActiveSessionDrawerWidget = (props: IProps) => {
 
                         <Tooltip label={t('common.refresh')}>
                             <ActionIcon
+                                color="indigo"
                                 onClick={() => {
                                     handleClearResults()
                                     handleGetData()
                                 }}
                                 size="lg"
-                                variant="gradient-indigo"
+                                variant="soft"
                             >
                                 <TbRefresh size={20} />
                             </ActionIcon>
@@ -198,8 +201,9 @@ export const UserActiveSessionDrawerWidget = (props: IProps) => {
             {distinctIps > 0 && (
                 <SectionCard.Section>
                     <BaseOverlayHeader
+                        iconColor="yellow"
                         IconComponent={TbAlertTriangle}
-                        iconVariant="gradient-yellow"
+                        iconVariant="soft"
                         subtitle={t('active-sessions-drawer.widget.distinct-ips')}
                         title={formatInt(distinctIps)}
                     />
@@ -212,14 +216,15 @@ export const UserActiveSessionDrawerWidget = (props: IProps) => {
         <SectionCard.Root gap="md">
             <SectionCard.Section>
                 <BaseOverlayHeader
+                    iconColor="yellow"
                     IconComponent={TbAlertTriangle}
-                    iconVariant="gradient-yellow"
+                    iconVariant="soft"
                     title={t('active-sessions-drawer.widget.requirements')}
                 />
             </SectionCard.Section>
 
             <Group gap="sm" wrap="nowrap">
-                <ThemeIcon size="md" variant="gradient-teal">
+                <ThemeIcon color="teal" size="md" variant="soft">
                     <TbTag size={16} />
                 </ThemeIcon>
                 <Text c="dimmed" size="sm">
@@ -233,7 +238,7 @@ export const UserActiveSessionDrawerWidget = (props: IProps) => {
 
             <Stack gap="xs">
                 <Group gap="sm" wrap="nowrap">
-                    <ThemeIcon size="md" variant="gradient-violet">
+                    <ThemeIcon color="violet" size="md" variant="soft">
                         <TbBrandDocker size={16} />
                     </ThemeIcon>
                     <Text c="dimmed" size="sm">
@@ -256,7 +261,7 @@ export const UserActiveSessionDrawerWidget = (props: IProps) => {
             </Stack>
 
             <Group gap="sm" wrap="nowrap">
-                <ThemeIcon size="md" variant="gradient-cyan">
+                <ThemeIcon color="cyan" size="md" variant="soft">
                     <TbClock size={16} />
                 </ThemeIcon>
                 <Text c="dimmed" size="sm">
@@ -268,7 +273,7 @@ export const UserActiveSessionDrawerWidget = (props: IProps) => {
             </Group>
 
             <Group gap="sm" wrap="nowrap">
-                <ThemeIcon size="md" variant="gradient-orange">
+                <ThemeIcon color="orange" size="md" variant="soft">
                     <TbHourglass size={16} />
                 </ThemeIcon>
                 <Text c="dimmed" size="sm">
@@ -338,7 +343,7 @@ export const UserActiveSessionDrawerWidget = (props: IProps) => {
                 <SectionCard.Section>
                     <Center h="230">
                         <Stack align="center" gap="xs">
-                            <ThemeIcon radius="md" size="xl" variant="gradient-red">
+                            <ThemeIcon color="red" radius="md" size="xl" variant="soft">
                                 <TbAlertTriangle size={24} />
                             </ThemeIcon>
                             <Text c="dimmed" size="md">
@@ -350,7 +355,7 @@ export const UserActiveSessionDrawerWidget = (props: IProps) => {
                                 leftSection={<TbRefresh size={20} />}
                                 onClick={handleClearResults}
                                 size="md"
-                                variant="light"
+                                variant="soft"
                             >
                                 {t('active-sessions-drawer.widget.try-again')}
                             </Button>
@@ -398,8 +403,9 @@ export const UserActiveSessionDrawerWidget = (props: IProps) => {
                                 <Group gap="xs" justify="space-between">
                                     <BaseOverlayHeader
                                         countryCode={node.countryCode}
+                                        iconColor="blue"
                                         IconComponent={TbServer}
-                                        iconVariant="gradient-blue"
+                                        iconVariant="soft"
                                         title={node.nodeName}
                                     />
                                     <Group gap="xs">
@@ -412,7 +418,7 @@ export const UserActiveSessionDrawerWidget = (props: IProps) => {
                                             )}
                                         >
                                             <ActionIcon
-                                                color="red"
+                                                color="orange"
                                                 onClick={() =>
                                                     dropConnections({
                                                         variables: {
@@ -428,7 +434,7 @@ export const UserActiveSessionDrawerWidget = (props: IProps) => {
                                                     })
                                                 }
                                                 size="lg"
-                                                variant="gradient-orange"
+                                                variant="soft"
                                             >
                                                 <TbUnlink size={20} />
                                             </ActionIcon>
@@ -458,7 +464,7 @@ export const UserActiveSessionDrawerWidget = (props: IProps) => {
                                             )}
                                         >
                                             <ActionIcon
-                                                color="red"
+                                                color="orange"
                                                 onClick={() =>
                                                     dropConnections({
                                                         variables: {
@@ -474,7 +480,7 @@ export const UserActiveSessionDrawerWidget = (props: IProps) => {
                                                     })
                                                 }
                                                 size="lg"
-                                                variant="gradient-orange"
+                                                variant="soft"
                                             >
                                                 <TbUnlink size={20} />
                                             </ActionIcon>
@@ -529,13 +535,13 @@ export const UserActiveSessionDrawerWidget = (props: IProps) => {
                                             />
                                         </Box>
                                         <ActionIcon
-                                            color="cyan"
+                                            color="teal"
                                             component="a"
                                             href={`https://ipinfo.io/${item.ip}`}
                                             rel="noopener noreferrer"
                                             size="input-sm"
                                             target="_blank"
-                                            variant="gradient-teal"
+                                            variant="soft"
                                         >
                                             <TbExternalLink size={18} />
                                         </ActionIcon>
@@ -583,8 +589,9 @@ export const UserActiveSessionDrawerWidget = (props: IProps) => {
             size="500px"
             title={
                 <BaseOverlayHeader
+                    iconColor="teal"
                     IconComponent={TbRadar}
-                    iconVariant="gradient-teal"
+                    iconVariant="soft"
                     title={t('active-sessions-drawer.widget.title')}
                 />
             }

@@ -76,8 +76,9 @@ export const NodesStatisticBarchartWidget = (props: IProps) => {
             size: '600px',
             title: (
                 <BaseOverlayHeader
+                    iconColor="teal"
                     IconComponent={TbChartBar}
-                    iconVariant="gradient-teal"
+                    iconVariant="soft"
                     subtitle={t('statistic-nodes.component.total-traffic-placeholder', {
                         totalTraffic: prettyBytesToAnyUtil(totalDayTraffic)
                     })}

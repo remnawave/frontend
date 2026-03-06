@@ -56,9 +56,10 @@ export const ImportConfigSectionsModalContent = (props: IProps) => {
                         'import-config-sections.modal.replace-entire-config-with-imported-one'
                     )}
                     icon={<TbReplace size={22} />}
+                    iconColor="red"
                     onClick={handleFullImport}
                     title={t('import-config-sections.modal.full-import')}
-                    variant="gradient-red"
+                    variant="soft"
                 />
 
                 {(hasPlatforms || hasSvgLibrary) && (
@@ -76,9 +77,10 @@ export const ImportConfigSectionsModalContent = (props: IProps) => {
                             1: currentSvgCount
                         })}
                         icon={<TbIcons size={22} />}
+                        iconColor="violet"
                         onClick={handleImportSvgLibrary}
                         title={t('import-config-sections.modal.import-svg-library')}
-                        variant="gradient-violet"
+                        variant="soft"
                     />
                 )}
 
@@ -88,9 +90,10 @@ export const ImportConfigSectionsModalContent = (props: IProps) => {
                             'import-config-sections.modal.import-platforms-descriptions'
                         )}
                         icon={<TbDevices size={22} />}
+                        iconColor="cyan"
                         onClick={handleImportPlatforms}
                         title={t('import-config-sections.modal.import-platforms')}
-                        variant="gradient-cyan"
+                        variant="soft"
                     />
                 )}
 
@@ -99,9 +102,10 @@ export const ImportConfigSectionsModalContent = (props: IProps) => {
                         'import-config-sections.modal.replace-base-translation-and-locales'
                     )}
                     icon={<TbLanguage size={22} />}
+                    iconColor="yellow"
                     onClick={handleImportBaseTranslations}
                     title={t('import-config-sections.modal.import-base-translations')}
-                    variant="gradient-yellow"
+                    variant="soft"
                 />
             </Stack>
         </Stack>

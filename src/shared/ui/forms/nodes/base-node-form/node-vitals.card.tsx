@@ -38,8 +38,9 @@ export const NodeVitalsCard = <T extends CreateNodeCommand.Request | UpdateNodeC
             <SectionCard.Root>
                 <SectionCard.Section>
                     <BaseOverlayHeader
+                        iconColor="blue"
                         IconComponent={HiOutlineServer}
-                        iconVariant="gradient-blue"
+                        iconVariant="soft"
                         title={t('base-node-form.node-vitals')}
                         titleOrder={5}
                     />

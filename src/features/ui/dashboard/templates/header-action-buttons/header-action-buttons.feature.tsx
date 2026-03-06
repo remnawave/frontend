@@ -83,7 +83,7 @@ export const TemplatesHeaderActionButtonsFeature = (props: IProps) => {
                         loading={isFetching}
                         onClick={handleUpdate}
                         size="input-md"
-                        variant="light"
+                        variant="soft"
                     >
                         <TbRefresh size="24px" />
                     </ActionIcon>
@@ -92,7 +92,7 @@ export const TemplatesHeaderActionButtonsFeature = (props: IProps) => {
 
             <ActionIconGroup>
                 <Tooltip label={t('header-action-buttons.feature.create-new-template')} withArrow>
-                    <ActionIcon color="teal" onClick={open} size="input-md" variant="light">
+                    <ActionIcon color="teal" onClick={open} size="input-md" variant="soft">
                         <TbPlus size="24px" />
                     </ActionIcon>
                 </Tooltip>
@@ -105,8 +105,9 @@ export const TemplatesHeaderActionButtonsFeature = (props: IProps) => {
                 size="md"
                 title={
                     <BaseOverlayHeader
+                        iconColor="teal"
                         IconComponent={TbFolder}
-                        iconVariant="gradient-teal"
+                        iconVariant="soft"
                         title={t('header-action-buttons.feature.create-new-template')}
                     />
                 }

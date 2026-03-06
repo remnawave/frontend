@@ -1,4 +1,4 @@
-import { ActionIcon, Box, Card, CardProps, Group, Stack, Text, Title } from '@mantine/core'
+import { Box, Card, CardProps, Group, Stack, Text, ThemeIcon, Title } from '@mantine/core'
 import { notifications } from '@mantine/notifications'
 import { useTranslation } from 'react-i18next'
 import { forwardRef, ReactNode } from 'react'
@@ -72,14 +72,9 @@ export const PageHeaderShared = forwardRef<HTMLDivElement, PageHeaderSharedProps
                                     }}
                                 >
                                     {customThemeIcon || (
-                                        <ActionIcon
-                                            className={classes.actionIcon}
-                                            color="cyan"
-                                            size="input-md"
-                                            variant="light"
-                                        >
+                                        <ThemeIcon size="xl" variant="soft">
                                             {icon}
-                                        </ActionIcon>
+                                        </ThemeIcon>
                                     )}
                                 </motion.div>
 

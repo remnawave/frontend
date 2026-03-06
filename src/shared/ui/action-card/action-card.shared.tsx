@@ -7,6 +7,7 @@ import styles from './action-card.module.css'
 interface IProps {
     description: string
     icon: React.ReactNode
+    iconColor?: ThemeIconProps['color']
     isLoading?: boolean
     onClick: () => void
     title: string
@@ -14,7 +15,7 @@ interface IProps {
 }
 
 export function ActionCardShared(props: IProps) {
-    const { description, icon, isLoading, onClick, title, variant } = props
+    const { description, icon, iconColor, isLoading, onClick, title, variant } = props
 
     return (
         <UnstyledButton disabled={isLoading} onClick={onClick} w="100%">
@@ -26,7 +27,7 @@ export function ActionCardShared(props: IProps) {
             >
                 <Group gap="md" justify="space-between" wrap="nowrap">
                     <Group gap="md" wrap="nowrap">
-                        <ThemeIcon radius="md" size="xl" variant={variant}>
+                        <ThemeIcon color={iconColor} radius="md" size="xl" variant={variant}>
                             {icon}
                         </ThemeIcon>
                         <Stack gap={2}>

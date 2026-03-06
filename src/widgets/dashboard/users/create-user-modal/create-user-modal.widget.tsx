@@ -155,8 +155,9 @@ export const CreateUserModalWidget = () => {
             size="1000px"
             title={
                 <BaseOverlayHeader
+                    iconColor="teal"
                     IconComponent={TbUser}
-                    iconVariant="gradient-teal"
+                    iconVariant="soft"
                     title={t('create-user-modal.widget.create-user')}
                 />
             }

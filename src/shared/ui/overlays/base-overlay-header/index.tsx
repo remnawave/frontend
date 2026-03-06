@@ -3,12 +3,13 @@ import ReactCountryFlag from 'react-country-flag'
 import { useClipboard } from '@mantine/hooks'
 
 type IProps = {
-    actionIconProps?: ThemeIconProps
     countryCode?: string
+    iconColor?: ThemeIconProps['color']
     IconComponent: React.ComponentType<{ size: number }>
     iconSize?: number
     iconVariant: ThemeIconProps['variant']
     subtitle?: string
+    themeIconProps?: ThemeIconProps
     title: string
     titleOrder?: TitleProps['order']
     withCopy?: boolean
@@ -16,11 +17,12 @@ type IProps = {
 
 export const BaseOverlayHeader = (props: IProps) => {
     const {
-        actionIconProps,
+        themeIconProps,
         IconComponent,
         countryCode,
         iconSize = 20,
         iconVariant,
+        iconColor = 'cyan',
         subtitle,
         title,
         titleOrder = 4,
@@ -31,7 +33,7 @@ export const BaseOverlayHeader = (props: IProps) => {
 
     return (
         <Group gap="sm" wrap="nowrap">
-            <ThemeIcon size="lg" variant={iconVariant} {...actionIconProps}>
+            <ThemeIcon color={iconColor} size="lg" variant={iconVariant} {...themeIconProps}>
                 <IconComponent size={iconSize} />
             </ThemeIcon>
 

@@ -30,9 +30,10 @@ export const TrafficLimitsCard = <T extends CreateUserCommand.Request | UpdateUs
             <SectionCard.Root>
                 <SectionCard.Section>
                     <BaseOverlayHeader
+                        iconColor="violet"
                         IconComponent={TbChartLine}
                         iconSize={20}
-                        iconVariant="gradient-violet"
+                        iconVariant="soft"
                         title={t('traffic-limits-card.traffic-and-limits')}
                         titleOrder={5}
                     />

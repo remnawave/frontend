@@ -1,18 +1,26 @@
-import { Box, Divider, Group, Stack, Text, ThemeIcon, Title } from '@mantine/core'
+import { Box, Divider, Group, Stack, Text, ThemeIcon, ThemeIconProps, Title } from '@mantine/core'
 import { ReactNode } from 'react'
 
 interface SettingsCardHeaderProps {
     description: ReactNode | string
     icon: ReactNode
+    iconColor: ThemeIconProps['color']
+    iconVariant: ThemeIconProps['variant']
     title: string
 }
 
-export function SettingsCardHeader({ description, icon, title }: SettingsCardHeaderProps) {
+export function SettingsCardHeader({
+    description,
+    icon,
+    iconColor,
+    iconVariant,
+    title
+}: SettingsCardHeaderProps) {
     return (
         <Box>
             <Group align="flex-start" justify="space-between">
                 <Group align="flex-start" gap="md" wrap="nowrap">
-                    <ThemeIcon color="cyan" size="xl" variant="light">
+                    <ThemeIcon color={iconColor} size="xl" variant={iconVariant}>
                         {icon}
                     </ThemeIcon>
 

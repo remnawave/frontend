@@ -19,9 +19,10 @@ export function BrandingBlockComponent({ form }: IProps) {
         <Card className={styles.sectionCard} p="lg" radius="lg">
             <Stack gap="md" h="100%">
                 <BaseOverlayHeader
+                    iconColor="cyan"
                     IconComponent={IconPalette}
                     iconSize={20}
-                    iconVariant="gradient-cyan"
+                    iconVariant="soft"
                     subtitle={t('subpage-config-visual-editor.widget.brand-appearance')}
                     title={t('subpage-config-visual-editor.widget.branding')}
                     titleOrder={5}

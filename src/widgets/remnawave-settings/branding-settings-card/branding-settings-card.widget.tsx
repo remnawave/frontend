@@ -77,8 +77,9 @@ export const BrandingSettingsCardWidget = (props: IProps) => {
                 modals.open({
                     title: (
                         <BaseOverlayHeader
+                            iconColor="red"
                             IconComponent={TbAlertCircle}
-                            iconVariant="gradient-red"
+                            iconVariant="soft"
                             title={t('auth-settings.error-modal.title')}
                         />
                     ),
@@ -192,6 +193,8 @@ export const BrandingSettingsCardWidget = (props: IProps) => {
                             'branding-settings-card.widget.customize-your-remnawave-instance'
                         )}
                         icon={<Logo size={24} />}
+                        iconColor="cyan"
+                        iconVariant="soft"
                         title={t('branding-settings-card.widget.branding-settings')}
                     />
 

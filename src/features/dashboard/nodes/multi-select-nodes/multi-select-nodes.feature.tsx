@@ -103,8 +103,9 @@ export const MultiSelectNodesFeature = (props: IProps) => {
                                         modals.open({
                                             title: (
                                                 <BaseOverlayHeader
+                                                    iconColor="cyan"
                                                     IconComponent={TbCategoryPlus}
-                                                    iconVariant="gradient-cyan"
+                                                    iconVariant="soft"
                                                     title={t('common.update')}
                                                     titleOrder={5}
                                                 />
@@ -143,8 +144,9 @@ export const MultiSelectNodesFeature = (props: IProps) => {
                                         modals.open({
                                             title: (
                                                 <BaseOverlayHeader
+                                                    iconColor="cyan"
                                                     IconComponent={TbDots}
-                                                    iconVariant="gradient-cyan"
+                                                    iconVariant="soft"
                                                     title={t('base-node-form.more-actions')}
                                                     titleOrder={5}
                                                 />

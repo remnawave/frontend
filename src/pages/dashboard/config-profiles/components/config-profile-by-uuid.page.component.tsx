@@ -43,7 +43,7 @@ export const ConfigProfileByUuidPageComponent = (props: Props) => {
                                     navigate(ROUTES.DASHBOARD.MANAGEMENT.CONFIG_PROFILES)
                                 }
                                 size="input-md"
-                                variant="light"
+                                variant="soft"
                             >
                                 <TbArrowBackUp size={24} />
                             </ActionIcon>
@@ -66,8 +66,9 @@ export const ConfigProfileByUuidPageComponent = (props: Props) => {
                             size="450px"
                             title={
                                 <BaseOverlayHeader
+                                    iconColor="violet"
                                     IconComponent={TbCode}
-                                    iconVariant="gradient-violet"
+                                    iconVariant="soft"
                                     title={t('snippets.drawer.widget.snippets')}
                                 />
                             }

@@ -31,9 +31,10 @@ export function BaseSettingsBlockComponent({ form }: IProps) {
         <Card className={styles.sectionCard} p="lg" radius="lg">
             <Stack gap="md">
                 <BaseOverlayHeader
+                    iconColor="teal"
                     IconComponent={TbHealthRecognition}
                     iconSize={20}
-                    iconVariant="gradient-teal"
+                    iconVariant="soft"
                     title={t('base-settings-block.component.base-settings')}
                     titleOrder={5}
                 />
@@ -65,7 +66,7 @@ export function BaseSettingsBlockComponent({ form }: IProps) {
                     >
                         <Group justify="space-between" wrap="nowrap">
                             <Group gap="sm" wrap="nowrap">
-                                <ThemeIcon size="lg" variant="gradient-cyan">
+                                <ThemeIcon color="cyan" size="lg" variant="soft">
                                     <TbKey size={20} />
                                 </ThemeIcon>
                                 <Stack gap={2}>
@@ -109,7 +110,7 @@ export function BaseSettingsBlockComponent({ form }: IProps) {
                     >
                         <Group justify="space-between" wrap="nowrap">
                             <Group gap="sm" wrap="nowrap">
-                                <ThemeIcon size="lg" variant="gradient-cyan">
+                                <ThemeIcon color="cyan" size="lg" variant="soft">
                                     <TbLink size={20} />
                                 </ThemeIcon>
                                 <Stack gap={2}>

@@ -23,9 +23,10 @@ export function UiConfigBlockComponent({ form }: IProps) {
         <Card className={styles.sectionCard} p="lg" radius="lg">
             <Stack gap="md">
                 <BaseOverlayHeader
+                    iconColor="yellow"
                     IconComponent={IconPalette}
                     iconSize={20}
-                    iconVariant="gradient-yellow"
+                    iconVariant="soft"
                     title={t('subpage-config-visual-editor.widget.ui-configuration')}
                     titleOrder={5}
                 />

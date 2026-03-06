@@ -112,29 +112,33 @@ export const NodeMetricsWidget = () => {
         <Stack gap="md">
             <SimpleGrid cols={{ sm: 1, md: 2, lg: 4 }} spacing="xs">
                 <MetricCardShared
+                    iconColor="indigo"
                     IconComponent={TbServer}
-                    iconVariant="gradient-indigo"
+                    iconVariant="soft"
                     isLoading={isLoading}
                     title="Total Nodes"
                     value={overallStats?.totalNodes || 0}
                 />
                 <MetricCardShared
+                    iconColor="teal"
                     IconComponent={PiPulseDuotone}
-                    iconVariant="gradient-teal"
+                    iconVariant="soft"
                     isLoading={isLoading}
                     title="Active Nodes"
                     value={overallStats?.activeNodes || 0}
                 />
                 <MetricCardShared
+                    iconColor="blue"
                     IconComponent={PiUsersDuotone}
-                    iconVariant="gradient-blue"
+                    iconVariant="soft"
                     isLoading={isLoading}
                     title="Users Online"
                     value={overallStats?.totalUsersOnline || 0}
                 />
                 <MetricCardShared
+                    iconColor="violet"
                     IconComponent={PiGlobeSimple}
-                    iconVariant="gradient-violet"
+                    iconVariant="soft"
                     isLoading={isLoading}
                     title="Total Inbounds"
                     value={overallStats?.totalInbounds || 0}

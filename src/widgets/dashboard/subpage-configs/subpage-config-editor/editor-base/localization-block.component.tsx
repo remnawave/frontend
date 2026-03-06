@@ -41,9 +41,10 @@ export function LocalizationBlockComponent({ form }: IProps) {
             <Stack gap="md" h="100%">
                 <Group gap="sm" justify="space-between">
                     <BaseOverlayHeader
+                        iconColor="teal"
                         IconComponent={IconGlobe}
                         iconSize={20}
-                        iconVariant="gradient-teal"
+                        iconVariant="soft"
                         subtitle={t('subpage-config-visual-editor.widget.additional-languages')}
                         title={t('subpage-config-visual-editor.widget.localization')}
                         titleOrder={5}

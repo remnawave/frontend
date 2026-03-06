@@ -113,19 +113,22 @@ export function HwidInspectorMetrics() {
             IconComponent: PiDevicesDuotone,
             title: t('hwid-inspector-metrics.widget.total-unique-devices'),
             value: stats?.stats.totalUniqueDevices ?? 0,
-            iconVariant: 'gradient-blue'
+            iconVariant: 'soft',
+            iconColor: 'blue'
         },
         {
             IconComponent: PiDeviceMobileDuotone,
             title: t('hwid-inspector-metrics.widget.total-hwid-devices'),
             value: stats?.stats.totalHwidDevices ?? 0,
-            iconVariant: 'gradient-teal'
+            iconVariant: 'soft',
+            iconColor: 'teal'
         },
         {
             IconComponent: PiCalculatorDuotone,
             title: t('hwid-inspector-metrics.widget.avg-devices-per-user'),
             value: stats?.stats.averageHwidDevicesPerUser ?? 0,
-            iconVariant: 'gradient-orange'
+            iconVariant: 'soft',
+            iconColor: 'orange'
         }
     ]
 

@@ -77,7 +77,7 @@ export const ExternalSquadsHeaderActionButtonsFeature = (props: IProps) => {
                         loading={isFetching}
                         onClick={handleUpdate}
                         size="input-md"
-                        variant="light"
+                        variant="soft"
                     >
                         <TbRefresh size="24px" />
                     </ActionIcon>
@@ -89,7 +89,7 @@ export const ExternalSquadsHeaderActionButtonsFeature = (props: IProps) => {
                     label={t('header-action-buttons.feature.create-new-external-squad')}
                     withArrow
                 >
-                    <ActionIcon color="teal" onClick={open} size="input-md" variant="light">
+                    <ActionIcon color="teal" onClick={open} size="input-md" variant="soft">
                         <TbPlus size="24px" />
                     </ActionIcon>
                 </Tooltip>
@@ -102,8 +102,9 @@ export const ExternalSquadsHeaderActionButtonsFeature = (props: IProps) => {
                 size="md"
                 title={
                     <BaseOverlayHeader
+                        iconColor="teal"
                         IconComponent={TbWebhook}
-                        iconVariant="gradient-teal"
+                        iconVariant="soft"
                         title={t('header-action-buttons.feature.create-new-external-squad')}
                     />
                 }
@@ -136,7 +137,7 @@ export const ExternalSquadsHeaderActionButtonsFeature = (props: IProps) => {
                                 disabled={!!nameField.error || nameField.getValue().length === 0}
                                 loading={isPending}
                                 type="submit"
-                                variant="light"
+                                variant="soft"
                             >
                                 {t('common.create')}
                             </Button>

@@ -19,7 +19,7 @@ export const ActivePluginsOnNodesModalShared = (props: IProps) => {
         return (
             <Center py="xl">
                 <Stack align="center" gap="sm">
-                    <ThemeIcon size="xl" variant="gradient-gray">
+                    <ThemeIcon color="gray" size="xl" variant="soft">
                         <PiCpu size={24} />
                     </ThemeIcon>
                     <Text c="dimmed" size="sm" ta="center">
@@ -37,8 +37,9 @@ export const ActivePluginsOnNodesModalShared = (props: IProps) => {
                     <SectionCard.Section key={node.uuid}>
                         <BaseOverlayHeader
                             countryCode={node.countryCode}
+                            iconColor="blue"
                             IconComponent={TbServer}
-                            iconVariant="gradient-blue"
+                            iconVariant="soft"
                             subtitle={node.address}
                             title={node.name}
                             titleOrder={5}

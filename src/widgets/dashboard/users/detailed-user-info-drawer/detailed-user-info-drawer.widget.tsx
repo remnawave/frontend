@@ -81,8 +81,9 @@ export const DetailedUserInfoDrawerWidget = () => {
             size="lg"
             title={
                 <BaseOverlayHeader
+                    iconColor="blue"
                     IconComponent={PiUserDuotone}
-                    iconVariant="gradient-blue"
+                    iconVariant="soft"
                     title={t('detailed-user-info-drawer.widget.detailed-user-info')}
                 />
             }
@@ -104,8 +105,9 @@ export const DetailedUserInfoDrawerWidget = () => {
                         <SectionCardSection>
                             <Group align="flex-center" justify="space-between">
                                 <BaseOverlayHeader
+                                    iconColor="blue"
                                     IconComponent={PiUserDuotone}
-                                    iconVariant="gradient-blue"
+                                    iconVariant="soft"
                                     title={t('detailed-user-info-drawer.widget.user-information')}
                                 />
 
@@ -159,8 +161,9 @@ export const DetailedUserInfoDrawerWidget = () => {
                     <SectionCardRoot>
                         <SectionCardSection>
                             <BaseOverlayHeader
+                                iconColor="teal"
                                 IconComponent={PiArrowsDownUpDuotone}
-                                iconVariant="gradient-teal"
+                                iconVariant="soft"
                                 title={t('detailed-user-info-drawer.widget.traffic-information')}
                             />
                         </SectionCardSection>
@@ -204,8 +207,10 @@ export const DetailedUserInfoDrawerWidget = () => {
                     <SectionCardRoot>
                         <SectionCardSection>
                             <BaseOverlayHeader
+                                iconColor="orange"
                                 IconComponent={PiCalendarDotDuotone}
-                                iconVariant="gradient-orange"
+                                iconSize={16}
+                                iconVariant="soft"
                                 title={t(
                                     'detailed-user-info-drawer.widget.subscription-information'
                                 )}
@@ -245,8 +250,9 @@ export const DetailedUserInfoDrawerWidget = () => {
                     <SectionCardRoot>
                         <SectionCardSection>
                             <BaseOverlayHeader
+                                iconColor="violet"
                                 IconComponent={PiNetworkDuotone}
-                                iconVariant="gradient-violet"
+                                iconVariant="soft"
                                 title={t('detailed-user-info-drawer.widget.connection-information')}
                             />
                         </SectionCardSection>
@@ -290,8 +296,9 @@ export const DetailedUserInfoDrawerWidget = () => {
                         <SectionCardRoot>
                             <SectionCardSection>
                                 <BaseOverlayHeader
+                                    iconColor="green"
                                     IconComponent={PiTagDuotone}
-                                    iconVariant="gradient-green"
+                                    iconVariant="soft"
                                     title={t(
                                         'detailed-user-info-drawer.widget.active-internal-squads'
                                     )}
@@ -313,8 +320,9 @@ export const DetailedUserInfoDrawerWidget = () => {
                     <SectionCardRoot>
                         <SectionCardSection>
                             <BaseOverlayHeader
+                                iconColor="gray"
                                 IconComponent={PiClockDuotone}
-                                iconVariant="gradient-gray"
+                                iconVariant="soft"
                                 title={t('detailed-user-info-drawer.widget.timestamps')}
                             />
                         </SectionCardSection>

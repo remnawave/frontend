@@ -33,19 +33,22 @@ export function NodesRealtimeUsageMetrics(props: IProps) {
             IconComponent: TbUsers,
             title: t('nodes-quick-stats.widget.users-online'),
             value: nodes?.reduce((acc, curr) => acc + (curr.usersOnline ?? 0), 0) ?? 0,
-            iconVariant: 'gradient-cyan'
+            iconVariant: 'soft',
+            iconColor: 'cyan'
         },
         {
             IconComponent: PiPulse,
             title: t('nodes-quick-stats.widget.online-nodes'),
             value: nodes?.filter((node) => node.isConnected).length ?? 0,
-            iconVariant: 'gradient-teal'
+            iconVariant: 'soft',
+            iconColor: 'teal'
         },
         {
             IconComponent: PiWarningCircle,
             title: t('nodes-quick-stats.widget.offline-nodes'),
             value: nodes?.filter((node) => !node.isConnected).length ?? 0,
-            iconVariant: 'gradient-red'
+            iconVariant: 'soft',
+            iconColor: 'red'
         },
         {
             IconComponent: TbSum,
@@ -54,7 +57,8 @@ export function NodesRealtimeUsageMetrics(props: IProps) {
                 nodes?.reduce((acc, curr) => acc + (curr.trafficUsedBytes ?? 0), 0) ?? 0,
                 true
             ),
-            iconVariant: 'gradient-cyan'
+            iconVariant: 'soft',
+            iconColor: 'cyan'
         },
         {
             IconComponent: PiArrowUpDuotone,
@@ -66,7 +70,8 @@ export function NodesRealtimeUsageMetrics(props: IProps) {
                     true,
                     false
                 ) ?? 0,
-            iconVariant: 'gradient-blue'
+            iconVariant: 'soft',
+            iconColor: 'blue'
         },
 
         {
@@ -79,7 +84,8 @@ export function NodesRealtimeUsageMetrics(props: IProps) {
                     true,
                     false
                 ) ?? 0,
-            iconVariant: 'gradient-teal'
+            iconVariant: 'soft',
+            iconColor: 'teal'
         },
         {
             IconComponent: PiSpeedometer,
@@ -91,13 +97,15 @@ export function NodesRealtimeUsageMetrics(props: IProps) {
                     true,
                     true
                 ) ?? 0,
-            iconVariant: 'gradient-indigo'
+            iconVariant: 'soft',
+            iconColor: 'indigo'
         },
         {
             IconComponent: TbServer2,
             title: t('nodes-realtime-metrics.widget.active-nodes'),
             value: nodesRealtimeUsage?.length || 0,
-            iconVariant: 'gradient-indigo',
+            iconVariant: 'soft',
+            iconColor: 'indigo',
             subtitle: t('nodes-realtime-metrics.widget.current-hour')
         }
     ]
@@ -115,6 +123,7 @@ export function NodesRealtimeUsageMetrics(props: IProps) {
                     }}
                 >
                     <MetricCardShared
+                        iconColor={card.iconColor}
                         IconComponent={card.IconComponent}
                         iconVariant={card.iconVariant}
                         isLoading={isNodesRealtimeUsageLoading || isLoading}

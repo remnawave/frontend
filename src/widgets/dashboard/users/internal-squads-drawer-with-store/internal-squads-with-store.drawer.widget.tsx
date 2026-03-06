@@ -473,8 +473,9 @@ export const InternalSquadsDrawerWithStore = () => {
             }}
             title={
                 <BaseOverlayHeader
+                    iconColor="teal"
                     IconComponent={TbCirclesRelation}
-                    iconVariant="gradient-teal"
+                    iconVariant="soft"
                     title={t('internal-squads.drawer.widget.edit-internal-squad')}
                 />
             }

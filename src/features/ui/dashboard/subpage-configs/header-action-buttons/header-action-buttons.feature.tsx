@@ -74,7 +74,7 @@ export const SubpageConfigsHeaderActionButtonsFeature = () => {
                         loading={isFetching}
                         onClick={handleUpdate}
                         size="input-md"
-                        variant="light"
+                        variant="soft"
                     >
                         <TbRefresh size="24px" />
                     </ActionIcon>
@@ -94,8 +94,9 @@ export const SubpageConfigsHeaderActionButtonsFeature = () => {
                 size="md"
                 title={
                     <BaseOverlayHeader
+                        iconColor="teal"
                         IconComponent={TbFile}
-                        iconVariant="gradient-teal"
+                        iconVariant="soft"
                         title={t('common.create')}
                     />
                 }

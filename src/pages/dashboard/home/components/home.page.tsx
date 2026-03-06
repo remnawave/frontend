@@ -98,6 +98,7 @@ export const HomePage = (props: IProps) => {
                         {onlineMetrics.map((metric, index) => (
                             <AnimatedCard index={index} key={metric.title}>
                                 <MetricCardShared
+                                    iconColor={metric.iconColor}
                                     IconComponent={metric.IconComponent}
                                     iconVariant={metric.iconVariant}
                                     isLoading={false}
@@ -117,6 +118,7 @@ export const HomePage = (props: IProps) => {
                         {simpleMetrics.map((metric, index) => (
                             <AnimatedCard index={index} key={metric.title}>
                                 <MetricCardShared
+                                    iconColor={metric.iconColor}
                                     IconComponent={metric.IconComponent}
                                     iconVariant={metric.iconVariant}
                                     isLoading={false}
@@ -136,6 +138,7 @@ export const HomePage = (props: IProps) => {
                         {usersMetrics.map((metric, index) => (
                             <AnimatedCard index={index} key={metric.title}>
                                 <MetricCardShared
+                                    iconColor={metric.iconColor}
                                     IconComponent={metric.IconComponent}
                                     iconVariant={metric.iconVariant}
                                     isLoading={false}

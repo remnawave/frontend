@@ -247,8 +247,9 @@ export const UserAccessibleNodesModalWidget = () => {
             size="800px"
             title={
                 <BaseOverlayHeader
+                    iconColor="teal"
                     IconComponent={TbServer}
-                    iconVariant="gradient-teal"
+                    iconVariant="soft"
                     title={t('user-accessible-nodes.modal.widget.user-accessible-nodes')}
                 />
             }

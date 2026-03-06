@@ -80,6 +80,10 @@ export const HostsFiltersFeature = (props: IProps) => {
             <DataTableShared.Title
                 actions={<HeaderActionButtonsFeature />}
                 icon={<PiListChecks size={24} />}
+                iconProps={{
+                    color: 'cyan',
+                    variant: 'soft'
+                }}
                 title={t('constants.hosts')}
             />
 
@@ -91,7 +95,7 @@ export const HostsFiltersFeature = (props: IProps) => {
                     <Accordion.Item value="filters">
                         <Accordion.Control component="a">
                             <Group align="center" gap="md" wrap="nowrap">
-                                <ActionIcon color="gray" size="input-sm" variant="light">
+                                <ActionIcon color="gray" size="input-sm" variant="soft">
                                     <HiFilter size={20} />
                                 </ActionIcon>
                                 <Title fw={500} fz="md" order={4}>

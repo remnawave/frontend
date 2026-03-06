@@ -38,7 +38,7 @@ export const HelpActionIconShared = memo((props: IProps) => {
                 color="lime"
                 onClick={handleOpenHelpDrawer}
                 size="input-md"
-                variant="light"
+                variant="soft"
                 {...actionIconProps}
             >
                 <TbQuestionMark size={24} {...iconProps} />

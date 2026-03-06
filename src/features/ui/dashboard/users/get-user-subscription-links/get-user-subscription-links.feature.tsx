@@ -60,8 +60,9 @@ export function GetUserSubscriptionLinksFeature(props: IProps) {
             centered: true,
             title: (
                 <BaseOverlayHeader
+                    iconColor="teal"
                     IconComponent={PiQrCodeDuotone}
-                    iconVariant="gradient-teal"
+                    iconVariant="soft"
                     title={remark}
                 />
             ),
@@ -191,8 +192,9 @@ export function GetUserSubscriptionLinksFeature(props: IProps) {
                 size="md"
                 title={
                     <BaseOverlayHeader
+                        iconColor="teal"
                         IconComponent={PiLinkBreakDuotone}
-                        iconVariant="gradient-teal"
+                        iconVariant="soft"
                         title={t('get-user-subscription-links.feature.connection-keys')}
                     />
                 }

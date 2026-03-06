@@ -107,8 +107,9 @@ export function ConfigProfileCardWidget(props: IProps) {
                 size: 'xl',
                 title: (
                     <BaseOverlayHeader
+                        iconColor="teal"
                         IconComponent={TbEye}
-                        iconVariant="gradient-teal"
+                        iconVariant="soft"
                         title={computedConfigProfile.data.name}
                         titleOrder={5}
                     />
@@ -156,7 +157,7 @@ export function ConfigProfileCardWidget(props: IProps) {
                                     }}
                                     size="lg"
                                     style={{ cursor: 'pointer' }}
-                                    variant="light"
+                                    variant="soft"
                                 >
                                     {formatInt(inboundsCount, {
                                         thousandSeparator: ','
@@ -178,7 +179,7 @@ export function ConfigProfileCardWidget(props: IProps) {
                                     style={{
                                         cursor: 'pointer'
                                     }}
-                                    variant="light"
+                                    variant="soft"
                                 >
                                     {formatInt(nodesCount, {
                                         thousandSeparator: ','
@@ -217,8 +218,9 @@ export function ConfigProfileCardWidget(props: IProps) {
                                     ),
                                     title: (
                                         <BaseOverlayHeader
+                                            iconColor="teal"
                                             IconComponent={TbEye}
-                                            iconVariant="gradient-teal"
+                                            iconVariant="soft"
                                             title={configProfile.name}
                                             titleOrder={5}
                                         />

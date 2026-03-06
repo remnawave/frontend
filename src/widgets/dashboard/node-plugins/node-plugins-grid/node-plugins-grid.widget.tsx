@@ -104,8 +104,9 @@ export function NodePluginsGridWidget(props: IProps) {
             children: <ActivePluginsOnNodesModalShared nodes={activeOnNodes} />,
             title: (
                 <BaseOverlayHeader
+                    iconColor="teal"
                     IconComponent={TbPackage}
-                    iconVariant="gradient-teal"
+                    iconVariant="soft"
                     title={t('node-plugin-card.widget.active-on-nodes')}
                     titleOrder={5}
                 />
@@ -120,8 +121,9 @@ export function NodePluginsGridWidget(props: IProps) {
             <SectionCard.Root p="xl">
                 <SectionCard.Section>
                     <BaseOverlayHeader
+                        iconColor="orange"
                         IconComponent={TbAlertTriangle}
-                        iconVariant="gradient-orange"
+                        iconVariant="soft"
                         subtitle={t(
                             'node-plugins-grid.widget.node-plugins-are-an-advanced-feature-please-review-the-documentation-before-use'
                         )}
@@ -133,7 +135,7 @@ export function NodePluginsGridWidget(props: IProps) {
                 <SectionCard.Section>
                     <Center py="xl">
                         <Stack align="center" gap="lg">
-                            <ThemeIcon radius="xl" size={64} variant="gradient-gray">
+                            <ThemeIcon color="gray" radius="xl" size={64} variant="soft">
                                 <TbPackage size={32} />
                             </ThemeIcon>
 

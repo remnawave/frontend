@@ -30,9 +30,10 @@ export function SvgLibraryBlockComponent(props: IProps) {
                 <Group justify="space-between">
                     <Group gap="sm" wrap="nowrap">
                         <BaseOverlayHeader
+                            iconColor="violet"
                             IconComponent={IconPhoto}
                             iconSize={20}
-                            iconVariant="gradient-violet"
+                            iconVariant="soft"
                             title={t('svg-library-modal.component.svg-library')}
                             titleOrder={5}
                         />

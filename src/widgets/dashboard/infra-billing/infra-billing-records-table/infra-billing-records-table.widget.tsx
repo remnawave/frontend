@@ -92,7 +92,7 @@ export function InfraBillingRecordsTableWidget() {
                                         refetchInfraBillingRecords()
                                     }}
                                     size="input-md"
-                                    variant="light"
+                                    variant="soft"
                                 >
                                     <TbRefresh size="24px" />
                                 </ActionIcon>
@@ -105,7 +105,7 @@ export function InfraBillingRecordsTableWidget() {
                                     color="teal"
                                     onClick={handleOpenModal}
                                     size="input-md"
-                                    variant="light"
+                                    variant="soft"
                                 >
                                     <TbPlus size="24px" />
                                 </ActionIcon>

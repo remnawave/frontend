@@ -43,8 +43,9 @@ export const TemplateInfoPopoverShared = (props: IProps) => {
             fullScreen: isMobile,
             title: (
                 <BaseOverlayHeader
+                    iconColor="lime"
                     IconComponent={TbInfoSquare}
-                    iconVariant="gradient-lime"
+                    iconVariant="soft"
                     title={t('template-info-popover.shared.template-variables')}
                 />
             )

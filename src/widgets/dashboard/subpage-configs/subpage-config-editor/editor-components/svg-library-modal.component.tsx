@@ -104,8 +104,9 @@ export function SvgLibraryModal(props: IProps) {
                 size="xl"
                 title={
                     <BaseOverlayHeader
+                        iconColor="violet"
                         IconComponent={IconPhoto}
-                        iconVariant="gradient-violet"
+                        iconVariant="soft"
                         subtitle={`${libraryEntries.length} icons`}
                         title={t('svg-library-modal.component.svg-library')}
                     />
@@ -249,8 +250,9 @@ export function SvgLibraryModal(props: IProps) {
                 size="md"
                 title={
                     <BaseOverlayHeader
+                        iconColor="cyan"
                         IconComponent={editingKey ? IconPhoto : IconPlus}
-                        iconVariant="gradient-cyan"
+                        iconVariant="soft"
                         title={
                             editingKey
                                 ? t('svg-library-modal.component.edit-icon')

@@ -50,7 +50,7 @@ export const UserSubscriptionRequestItem = (props: IProps) => {
                                 rel="noopener noreferrer"
                                 size="input-sm"
                                 target="_blank"
-                                variant="gradient-teal"
+                                variant="soft"
                             >
                                 <TbExternalLink size={18} />
                             </ActionIcon>

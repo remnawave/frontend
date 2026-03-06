@@ -141,7 +141,7 @@ export function ExternalSquadsGridWidget(props: IProps) {
                 <SectionCard.Section>
                     <Center py="xl">
                         <Stack align="center" gap="lg">
-                            <ThemeIcon radius="xl" size={64} variant="gradient-gray">
+                            <ThemeIcon color="gray" radius="xl" size={64} variant="soft">
                                 <TbWebhook size={32} />
                             </ThemeIcon>
 

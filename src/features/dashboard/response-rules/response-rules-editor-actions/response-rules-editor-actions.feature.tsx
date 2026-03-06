@@ -216,8 +216,9 @@ export function ResponseRulesEditorActionsFeature(props: Props) {
         modals.open({
             title: (
                 <BaseOverlayHeader
+                    iconColor="teal"
                     IconComponent={TbBug}
-                    iconVariant="gradient-teal"
+                    iconVariant="soft"
                     title={t('response-rules-editor-actions.feature.response-rules-debugger')}
                 />
             ),

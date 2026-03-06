@@ -103,8 +103,9 @@ export const UserUsageModalWidget = (props: IProps) => {
             size="900px"
             title={
                 <BaseOverlayHeader
+                    iconColor="teal"
                     IconComponent={TbChartPie}
-                    iconVariant="gradient-teal"
+                    iconVariant="soft"
                     title={t('user-usage-modal.widget.traffic-statistics')}
                 />
             }
@@ -204,7 +205,7 @@ export const UserUsageModalWidget = (props: IProps) => {
                         loading={isRefetching}
                         onClick={() => refetch()}
                         size="input-md"
-                        variant="light"
+                        variant="soft"
                     >
                         <TbRefresh size="24px" />
                     </ActionIcon>

@@ -184,8 +184,9 @@ export const PasskeysDrawerComponent = ({ onClose, opened }: IProps) => {
             size="lg"
             title={
                 <BaseOverlayHeader
+                    iconColor="teal"
                     IconComponent={TbFingerprint}
-                    iconVariant="gradient-teal"
+                    iconVariant="soft"
                     title={t('passkeys-drawer.component.passkeys')}
                 />
             }

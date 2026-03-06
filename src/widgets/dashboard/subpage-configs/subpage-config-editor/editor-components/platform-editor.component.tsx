@@ -102,8 +102,9 @@ export function PlatformEditor(props: IProps) {
                     <Accordion.Control className={styles.accordionControl}>
                         <Group gap="sm">
                             <BaseOverlayHeader
+                                iconColor="violet"
                                 IconComponent={PLATFORM_ICONS[platformKey]}
-                                iconVariant="gradient-violet"
+                                iconVariant="soft"
                                 subtitle={`${platform.apps.length} app(s) configured`}
                                 title={PLATFORM_LABELS[platformKey]}
                                 titleOrder={5}
@@ -182,8 +183,9 @@ export function PlatformEditor(props: IProps) {
                 size="lg"
                 title={
                     <BaseOverlayHeader
+                        iconColor="cyan"
                         IconComponent={IconEdit}
-                        iconVariant="gradient-cyan"
+                        iconVariant="soft"
                         subtitle={editingApp?.name || t('platform-editor.component.unnamed-app')}
                         title={t('platform-editor.component.edit-app')}
                         titleOrder={5}

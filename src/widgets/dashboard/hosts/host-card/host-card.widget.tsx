@@ -142,7 +142,7 @@ export function HostCardWidget(props: IProps) {
                                 color="gray"
                                 size="lg"
                                 style={{ flexShrink: 0 }}
-                                variant="light"
+                                variant="soft"
                             >
                                 <PiProhibit size={16} />
                             </ActionIcon>
@@ -153,7 +153,7 @@ export function HostCardWidget(props: IProps) {
                                 color="violet"
                                 size="lg"
                                 style={{ flexShrink: 0 }}
-                                variant="light"
+                                variant="soft"
                             >
                                 <TbEyeOff size={16} />
                             </ActionIcon>
@@ -164,7 +164,7 @@ export function HostCardWidget(props: IProps) {
                                 color="teal"
                                 size="lg"
                                 style={{ flexShrink: 0 }}
-                                variant="light"
+                                variant="soft"
                             >
                                 <PiPulse size={16} />
                             </ActionIcon>
@@ -277,7 +277,7 @@ export function HostCardWidget(props: IProps) {
                                     color="gray"
                                     size="md"
                                     style={{ flexShrink: 0 }}
-                                    variant="light"
+                                    variant="soft"
                                 >
                                     <PiProhibit size={16} />
                                 </ActionIcon>
@@ -288,7 +288,7 @@ export function HostCardWidget(props: IProps) {
                                     color="violet"
                                     size="md"
                                     style={{ flexShrink: 0 }}
-                                    variant="light"
+                                    variant="soft"
                                 >
                                     <TbEyeOff size={16} />
                                 </ActionIcon>
@@ -299,7 +299,7 @@ export function HostCardWidget(props: IProps) {
                                     color="teal"
                                     size="md"
                                     style={{ flexShrink: 0 }}
-                                    variant="light"
+                                    variant="soft"
                                 >
                                     <PiPulse size={16} />
                                 </ActionIcon>

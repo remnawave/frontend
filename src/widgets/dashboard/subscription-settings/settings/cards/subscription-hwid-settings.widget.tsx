@@ -61,6 +61,8 @@ export const SubscriptionHwidSettingsWidget = (props: IProps) => {
                 <SettingsCardShared.Header
                     description={t('subscription-hwid-settings.widget.hwid-card-description')}
                     icon={<PiIdentificationBadge size={24} />}
+                    iconColor="cyan"
+                    iconVariant="soft"
                     title={t('subscription-hwid-settings.widget.hwid-settings')}
                 />
 
