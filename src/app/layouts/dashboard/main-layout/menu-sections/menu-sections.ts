@@ -4,7 +4,7 @@ import {
     TbDeviceAnalytics,
     TbFolder,
     TbHexagon,
-    TbPlug,
+    TbPackage,
     TbReportAnalytics,
     TbRoute,
     TbWebhook
@@ -98,7 +98,7 @@ export const useMenuSections = (): MenuItem[] => {
                         {
                             name: `${t('constants.node-plugins')} β`,
                             href: ROUTES.DASHBOARD.MANAGEMENT.NODE_PLUGINS.ROOT,
-                            icon: TbPlug,
+                            icon: TbPackage,
                             id: 'node-plugins'
                         },
 

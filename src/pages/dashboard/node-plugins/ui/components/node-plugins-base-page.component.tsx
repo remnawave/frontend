@@ -1,6 +1,6 @@
 import { GetAllNodesCommand, GetNodePluginsCommand } from '@remnawave/backend-contract'
 import { useTranslation } from 'react-i18next'
-import { TbFile } from 'react-icons/tb'
+import { TbPackage } from 'react-icons/tb'
 import { motion } from 'motion/react'
 
 import { NodePluginExecutorDrawer } from '@widgets/dashboard/node-plugins/node-plugin-executor/node-plugin-executor.drawer'
@@ -23,7 +23,7 @@ export const NodePluginsBasePageComponent = (props: Props) => {
         <Page title={t('constants.node-plugins')}>
             <PageHeaderShared
                 actions={<NodePluginsHeaderActionButtonsFeature />}
-                icon={<TbFile size={24} />}
+                icon={<TbPackage size={24} />}
                 title={`${t('constants.node-plugins')} β`}
             />
 

@@ -45,6 +45,7 @@ const generateDefaultConfig = () => {
                 protocol: 'shadowsocks',
                 settings: {
                     clients: [],
+                    method: 'chacha20-ietf-poly1305',
                     network: 'tcp,udp'
                 },
                 sniffing: {

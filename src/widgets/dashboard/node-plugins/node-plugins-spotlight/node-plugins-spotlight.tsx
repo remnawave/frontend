@@ -1,6 +1,6 @@
 import { GetNodePluginsCommand } from '@remnawave/backend-contract'
 import { generatePath, useNavigate } from 'react-router-dom'
-import { TbPlug } from 'react-icons/tb'
+import { TbPackage } from 'react-icons/tb'
 
 import { UniversalSpotlightContentShared } from '@shared/ui/universal-spotlight'
 import { ROUTES } from '@shared/constants'
@@ -27,7 +27,7 @@ export const NodePluginsSpotlightWidget = (props: IProps) => {
             actions={plugins.map((plugin) => ({
                 label: plugin.name,
                 id: plugin.uuid,
-                leftSection: <TbPlug size={24} />,
+                leftSection: <TbPackage size={24} />,
 
                 onClick: () => handleViewNodePlugin(plugin.uuid)
             }))}

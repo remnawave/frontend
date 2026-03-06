@@ -12,7 +12,7 @@ import {
     Text
 } from '@mantine/core'
 import { BulkNodesUpdateCommand, GetAllNodesCommand } from '@remnawave/backend-contract'
-import { TbCheck, TbMapPin, TbMinus, TbPlug, TbPlus } from 'react-icons/tb'
+import { TbCheck, TbMapPin, TbMinus, TbPackage, TbPlus } from 'react-icons/tb'
 import { zodResolver } from 'mantine-form-zod-resolver'
 import { HiQuestionMarkCircle } from 'react-icons/hi'
 import { useTranslation } from 'react-i18next'
@@ -126,7 +126,7 @@ export const BulkUpdateNodesModalContent = (props: IProps) => {
                             description={t(
                                 'node-vitals.card.review-documentation-for-more-information'
                             )}
-                            leftSection={<TbPlug size={16} />}
+                            leftSection={<TbPackage size={16} />}
                             nothingFoundMessage={t('node-vitals.card.nothing-found')}
                             placeholder={t('node-vitals.card.select-plugin')}
                             searchable

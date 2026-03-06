@@ -1,4 +1,4 @@
-import { TbAlertTriangle, TbFlame, TbPlug, TbPlugConnectedX, TbShieldX } from 'react-icons/tb'
+import { TbAlertTriangle, TbFlame, TbPackage, TbPlugConnectedX, TbShieldX } from 'react-icons/tb'
 import { GetAllNodesCommand, GetNodePluginsCommand } from '@remnawave/backend-contract'
 import { Badge, Center, Group, Stack, Text, ThemeIcon } from '@mantine/core'
 import { useTranslation } from 'react-i18next'
@@ -104,7 +104,7 @@ export function NodePluginsGridWidget(props: IProps) {
             children: <ActivePluginsOnNodesModalShared nodes={activeOnNodes} />,
             title: (
                 <BaseOverlayHeader
-                    IconComponent={TbPlug}
+                    IconComponent={TbPackage}
                     iconVariant="gradient-teal"
                     title={t('node-plugin-card.widget.active-on-nodes')}
                     titleOrder={5}
@@ -134,7 +134,7 @@ export function NodePluginsGridWidget(props: IProps) {
                     <Center py="xl">
                         <Stack align="center" gap="lg">
                             <ThemeIcon radius="xl" size={64} variant="gradient-gray">
-                                <TbPlug size={32} />
+                                <TbPackage size={32} />
                             </ThemeIcon>
 
                             <Stack align="center" gap="xs">

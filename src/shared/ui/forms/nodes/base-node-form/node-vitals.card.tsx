@@ -4,7 +4,7 @@ import {
     GetPubKeyCommand,
     UpdateNodeCommand
 } from '@remnawave/backend-contract'
-import { TbCertificate, TbMapPin, TbPlug, TbUserCheck, TbWorld } from 'react-icons/tb'
+import { TbCertificate, TbMapPin, TbPackage, TbUserCheck, TbWorld } from 'react-icons/tb'
 import { ForwardRefComponent, HTMLMotionProps, Variants } from 'motion/react'
 import { Group, NumberInput, Select, Stack, TextInput } from '@mantine/core'
 import { UseFormReturnType } from '@mantine/form'
@@ -124,7 +124,7 @@ export const NodeVitalsCard = <T extends CreateNodeCommand.Request | UpdateNodeC
                             description={t(
                                 'node-vitals.card.review-documentation-for-more-information'
                             )}
-                            leftSection={<TbPlug size={16} />}
+                            leftSection={<TbPackage size={16} />}
                             nothingFoundMessage={t('node-vitals.card.nothing-found')}
                             placeholder={t('node-vitals.card.select-plugin')}
                             searchable

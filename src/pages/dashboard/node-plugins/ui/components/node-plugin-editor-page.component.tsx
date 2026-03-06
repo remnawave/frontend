@@ -1,6 +1,6 @@
 import { GetNodePluginCommand } from '@remnawave/backend-contract'
 import { ActionIcon, Box, Flex, Group } from '@mantine/core'
-import { TbArrowBackUp, TbFile } from 'react-icons/tb'
+import { TbArrowBackUp, TbPackage } from 'react-icons/tb'
 import { useNavigate } from 'react-router-dom'
 
 import { NodePluginEditorWidget } from '@widgets/dashboard/node-plugins/node-plugin-editor'
@@ -37,7 +37,7 @@ export const NodePluginEditorPageComponent = (props: Props) => {
                     </Group>
                 }
                 description={plugin.uuid}
-                icon={<TbFile size={24} />}
+                icon={<TbPackage size={24} />}
                 title={plugin.name}
             />
             <Flex gap="md">

@@ -1,6 +1,6 @@
 import { PiCheck, PiCopy, PiCpu, PiPencil, PiTrashDuotone } from 'react-icons/pi'
 import { GetNodePluginsCommand } from '@remnawave/backend-contract'
-import { TbCopyCheck, TbEdit, TbPlug } from 'react-icons/tb'
+import { TbCopyCheck, TbEdit, TbPackage } from 'react-icons/tb'
 import { generatePath, useNavigate } from 'react-router-dom'
 import { CopyButton, Menu } from '@mantine/core'
 import { useTranslation } from 'react-i18next'
@@ -48,7 +48,7 @@ export function NodePluginCardWidget(props: IProps) {
             <EntityCardShared.Root>
                 <EntityCardShared.Header>
                     <EntityCardShared.Icon highlight={false} onClick={navigateToNodePlugin}>
-                        <TbPlug size={24} />
+                        <TbPackage size={24} />
                     </EntityCardShared.Icon>
 
                     <EntityCardShared.Content subtitle="PLUGIN" title={nodePlugin.name} />
