@@ -8,7 +8,7 @@ import {
     TextInput,
     Tooltip
 } from '@mantine/core'
-import { TbPackage, TbPlus, TbRefresh, TbTerminal } from 'react-icons/tb'
+import { TbBook, TbPackage, TbPlus, TbRefresh, TbTerminal } from 'react-icons/tb'
 import { CreateNodePluginCommand } from '@remnawave/backend-contract'
 import { generatePath, useNavigate } from 'react-router-dom'
 import { useDisclosure } from '@mantine/hooks'
@@ -65,6 +65,17 @@ export const NodePluginsHeaderActionButtonsFeature = () => {
 
     return (
         <Group grow preventGrowOverflow={false} wrap="wrap">
+            <ActionIcon
+                color="lime"
+                component="a"
+                href="https://docs.rw/docs/learn/node-plugins"
+                size="input-md"
+                target="_blank"
+                variant="soft"
+            >
+                <TbBook size={24} />
+            </ActionIcon>
+
             <UniversalSpotlightActionIconShared />
 
             <ActionIconGroup>

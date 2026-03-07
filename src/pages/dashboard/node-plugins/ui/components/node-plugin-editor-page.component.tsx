@@ -1,6 +1,6 @@
 import { GetNodePluginCommand } from '@remnawave/backend-contract'
+import { TbArrowBackUp, TbBook, TbPackage } from 'react-icons/tb'
 import { ActionIcon, Box, Flex, Group } from '@mantine/core'
-import { TbArrowBackUp, TbPackage } from 'react-icons/tb'
 import { useNavigate } from 'react-router-dom'
 
 import { NodePluginEditorWidget } from '@widgets/dashboard/node-plugins/node-plugin-editor'
@@ -25,6 +25,17 @@ export const NodePluginEditorPageComponent = (props: Props) => {
                             hidden={!isHelpDrawerVisible}
                             screen="EDITOR_TEMPLATES_XRAY_JSON"
                         /> */}
+
+                        <ActionIcon
+                            color="lime"
+                            component="a"
+                            href="https://docs.rw/docs/learn/node-plugins"
+                            size="input-md"
+                            target="_blank"
+                            variant="soft"
+                        >
+                            <TbBook size={24} />
+                        </ActionIcon>
 
                         <ActionIcon
                             color="gray"
