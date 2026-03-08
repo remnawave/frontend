@@ -128,6 +128,51 @@ export const useTbReportsTableColumns = (nodes?: GetAllNodesCommand.Response['re
                 mantineTableBodyCellProps: {
                     align: 'center'
                 }
+            },
+
+            {
+                accessorKey: 'report.xrayReport.outboundTag',
+                header: 'Outbound Tag',
+                accessorFn: (originalRow) => {
+                    if (
+                        originalRow.report &&
+                        originalRow.report.xrayReport &&
+                        originalRow.report.xrayReport.outboundTag
+                    ) {
+                        return originalRow.report.xrayReport.outboundTag
+                    }
+                    return '–'
+                },
+                size: 300,
+
+                enableSorting: false,
+                enableColumnFilterModes: false,
+                enableColumnFilter: true,
+                mantineTableBodyCellProps: {
+                    align: 'center'
+                }
+            },
+
+            {
+                accessorKey: 'report.xrayReport.protocol',
+                header: 'Protocol',
+                accessorFn: (originalRow) => {
+                    if (
+                        originalRow.report &&
+                        originalRow.report.xrayReport &&
+                        originalRow.report.xrayReport.protocol
+                    ) {
+                        return originalRow.report.xrayReport.protocol
+                    }
+                    return '–'
+                },
+
+                enableSorting: false,
+                enableColumnFilterModes: false,
+                enableColumnFilter: true,
+                mantineTableBodyCellProps: {
+                    align: 'center'
+                }
             }
         ],
         []
