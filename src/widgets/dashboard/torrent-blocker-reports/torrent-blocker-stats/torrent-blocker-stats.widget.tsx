@@ -98,8 +98,8 @@ export function TorrentBlockerStatsWidget() {
                                     iconColor="red"
                                     IconComponent={TbUsers}
                                     iconVariant="soft"
-                                    subtitle="By report count"
-                                    title="Top Users"
+                                    subtitle={t('torrent-blocker-stats.widget.by-report-count')}
+                                    title={t('torrent-blocker-stats.widget.top-users')}
                                     titleOrder={5}
                                 />
                             </SectionCard.Section>
@@ -127,8 +127,8 @@ export function TorrentBlockerStatsWidget() {
                                     iconColor="teal"
                                     IconComponent={TbServer}
                                     iconVariant="soft"
-                                    subtitle="By report count"
-                                    title="Top Nodes"
+                                    subtitle={t('torrent-blocker-stats.widget.by-report-count')}
+                                    title={t('statistic-nodes.component.top-nodes')}
                                     titleOrder={5}
                                 />
                             </SectionCard.Section>

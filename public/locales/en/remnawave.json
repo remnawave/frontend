@@ -2016,7 +2016,9 @@
             "total-reports": "Total Reports",
             "distinct-nodes": "Distinct Nodes",
             "distinct-users": "Distinct Users",
-            "last-24-hours": "Last 24 Hours"
+            "last-24-hours": "Last 24 Hours",
+            "by-report-count": "By report count",
+            "top-users": "Top Users"
         }
     },
     "torrent-blocker-reports-table": {
