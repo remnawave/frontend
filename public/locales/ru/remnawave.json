@@ -2013,16 +2013,18 @@
     },
     "torrent-blocker-stats": {
         "widget": {
-            "total-reports": "Total Reports",
-            "distinct-nodes": "Distinct Nodes",
-            "distinct-users": "Distinct Users",
-            "last-24-hours": "Last 24 Hours"
+            "total-reports": "Всего репортов",
+            "distinct-nodes": "Отдельные ноды",
+            "distinct-users": "Отдельные пользователи",
+            "last-24-hours": "За последние 24 часа",
+            "by-report-count": "По количеству репортов",
+            "top-users": "Топ пользователей"
         }
     },
     "torrent-blocker-reports-table": {
         "widget": {
-            "truncate-reports": "Truncate reports",
-            "truncate-reports-description": "All Torrent Blocker reports will be permanently deleted."
+            "truncate-reports": "Репорты по убыванию",
+            "truncate-reports-description": "Все репорты Torrent Blocker будут удалены навсегда."
         }
     }
 }
