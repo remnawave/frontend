@@ -22,6 +22,7 @@ import { modals } from '@mantine/modals'
 import {
     useGetNodes,
     useGetTorrentBlockerReports,
+    useGetTorrentBlockerStats,
     useTruncateTorrentBlockerReports
 } from '@shared/api/hooks'
 import { useUserModalStoreActions } from '@entities/dashboard/user-modal-store'
@@ -36,6 +37,7 @@ export function TorrentBlockerReportsTableWidget() {
     const { t } = useTranslation()
 
     const { data: nodes } = useGetNodes()
+    const { refetch: refetchTorrentBlockerStats } = useGetTorrentBlockerStats()
 
     const tableColumns = useTbReportsTableColumns(nodes)
     const userModalActions = useUserModalStoreActions()
@@ -200,7 +202,7 @@ export function TorrentBlockerReportsTableWidget() {
                                         <JsonEditor
                                             collapse={3}
                                             data={JSON.parse(JSON.stringify(row.original.report))}
-                                            indent={4}
+                                            indent={2}
                                             maxWidth="100%"
                                             rootName=""
                                             theme={githubDarkTheme}
@@ -277,7 +279,10 @@ export function TorrentBlockerReportsTableWidget() {
                         <Tooltip label={t('common.update')} withArrow>
                             <ActionIcon
                                 loading={isLoading}
-                                onClick={() => refetch()}
+                                onClick={() => {
+                                    refetch()
+                                    refetchTorrentBlockerStats()
+                                }}
                                 size="input-md"
                                 variant="soft"
                             >
