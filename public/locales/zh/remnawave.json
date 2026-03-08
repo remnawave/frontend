@@ -27,7 +27,7 @@
         "response-rules": "请求订阅的应用",
         "remnawave-settings": "Remnawave 设置",
         "node-plugins": "插件",
-        "tb-reports": "Torrent Blocker Reports"
+        "tb-reports": "Torrent 屏蔽报告"
     },
     "common": {
         "delete": "删除",
@@ -2013,18 +2013,18 @@
     },
     "torrent-blocker-stats": {
         "widget": {
-            "total-reports": "Total Reports",
-            "distinct-nodes": "Distinct Nodes",
-            "distinct-users": "Distinct Users",
-            "last-24-hours": "Last 24 Hours",
+            "total-reports": "报告总数",
+            "distinct-nodes": "不同的节点",
+            "distinct-users": "不同的用户",
+            "last-24-hours": "最近24小时",
             "by-report-count": "By report count",
             "top-users": "Top Users"
         }
     },
     "torrent-blocker-reports-table": {
         "widget": {
-            "truncate-reports": "Truncate reports",
-            "truncate-reports-description": "All Torrent Blocker reports will be permanently deleted."
+            "truncate-reports": "截断报告",
+            "truncate-reports-description": "所有 Torrent 屏蔽报告将被永久删除。"
         }
     }
 }
