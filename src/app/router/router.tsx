@@ -16,6 +16,7 @@ import { InfraBillingPageConnector } from '@pages/dashboard/crm/infra-billing/co
 import { ResponseRulesPageConnector } from '@pages/dashboard/response-rules/connectors/response-rules.page.connector'
 import { TemplateEditorPageConnector } from '@pages/dashboard/templates/ui/connectors/template-editor-page.connector'
 import { TemplateBasePageConnector } from '@pages/dashboard/templates/ui/connectors/template-base-page.connector'
+import { TorrentBlockerReportsPageConnector } from '@pages/dashboard/torrent-blocker-reports/ui/connectors'
 import { NodesBandwidthTablePageConnector } from '@pages/dashboard/nodes-bandwidth-table/ui/connectors'
 import { SubscriptionSettingsConnector } from '@pages/dashboard/subscription-settings/connectors'
 import { RemnawaveSettingsConnector } from '@pages/dashboard/remnawave-settings/connectors'
@@ -136,6 +137,11 @@ const router = createBrowserRouter(
                         <Route
                             element={<SrhInspectorPageConnector />}
                             path={ROUTES.DASHBOARD.TOOLS.SRH_INSPECTOR}
+                        />
+
+                        <Route
+                            element={<TorrentBlockerReportsPageConnector />}
+                            path={ROUTES.DASHBOARD.TOOLS.TORRENT_BLOCKER_REPORTS}
                         />
                     </Route>
 

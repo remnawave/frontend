@@ -10,24 +10,34 @@ import {
     MRT_VisibilityState,
     useMantineReactTable
 } from 'mantine-react-table'
-import { TbExternalLink, TbRefresh, TbReportAnalytics, TbRestore } from 'react-icons/tb'
-import { GetSubscriptionRequestHistoryCommand } from '@remnawave/backend-contract'
+import { TbExternalLink, TbFlame, TbJson, TbRefresh, TbRestore, TbTrash } from 'react-icons/tb'
+import { GetTorrentBlockerReportsCommand } from '@remnawave/backend-contract'
+import { ActionIcon, ActionIconGroup, Box, Tooltip } from '@mantine/core'
 import { useCallback, useLayoutEffect, useMemo, useState } from 'react'
-import { ActionIcon, ActionIconGroup, Tooltip } from '@mantine/core'
+import { githubDarkTheme, JsonEditor } from 'json-edit-react'
 import { useTranslation } from 'react-i18next'
 import { PiUserCircle } from 'react-icons/pi'
+import { modals } from '@mantine/modals'
 
-import { useSrhInspectorTableColumns } from '@features/dashboard/srh-inspector/srh-inspector-table/model/use-srh-inspector-table-columns'
+import {
+    useGetNodes,
+    useGetTorrentBlockerReports,
+    useTruncateTorrentBlockerReports
+} from '@shared/api/hooks'
 import { useUserModalStoreActions } from '@entities/dashboard/user-modal-store'
-import { useGetSubscriptionRequestHistory } from '@shared/api/hooks'
+import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { preventBackScrollTables } from '@shared/utils/misc'
 import { DataTableShared } from '@shared/ui/table'
 import { sToMs } from '@shared/utils/time-utils'
 
-export function SrhInspectorTableWidget() {
+import { useTbReportsTableColumns } from './use-tb-reports-table-columns'
+
+export function TorrentBlockerReportsTableWidget() {
     const { t } = useTranslation()
 
-    const tableColumns = useSrhInspectorTableColumns()
+    const { data: nodes } = useGetNodes()
+
+    const tableColumns = useTbReportsTableColumns(nodes)
     const userModalActions = useUserModalStoreActions()
 
     const [columnVisibility, setColumnVisibility] = useState<MRT_VisibilityState>({})
@@ -45,15 +55,6 @@ export function SrhInspectorTableWidget() {
         Object.fromEntries(tableColumns.map(({ accessorKey }) => [accessorKey, 'contains']))
     )
 
-    useLayoutEffect(() => {
-        document.body.addEventListener('wheel', preventBackScrollTables, {
-            passive: false
-        })
-        return () => {
-            document.body.removeEventListener('wheel', preventBackScrollTables)
-        }
-    }, [])
-
     const params = {
         start: pagination.pageIndex * pagination.pageSize,
         size: pagination.pageSize,
@@ -63,19 +64,35 @@ export function SrhInspectorTableWidget() {
     }
 
     const {
-        data: usersResponse,
+        data: tbReportsResponse,
         isError,
         isFetching,
         isLoading,
         refetch
-    } = useGetSubscriptionRequestHistory({
+    } = useGetTorrentBlockerReports({
         query: params,
         rQueryParams: {
             refetchInterval: sToMs(25)
         }
     })
 
-    const filteredData = useMemo(() => usersResponse, [usersResponse])
+    const { mutate: truncateTorrentBlockerReports } = useTruncateTorrentBlockerReports()
+
+    const handleTruncateTorrentBlockerReports = async () => {
+        truncateTorrentBlockerReports({})
+        refetch()
+    }
+
+    const filteredData = useMemo(() => tbReportsResponse, [tbReportsResponse])
+
+    useLayoutEffect(() => {
+        document.body.addEventListener('wheel', preventBackScrollTables, {
+            passive: false
+        })
+        return () => {
+            document.body.removeEventListener('wheel', preventBackScrollTables)
+        }
+    }, [])
 
     const table = useMantineReactTable({
         columns: tableColumns,
@@ -84,7 +101,7 @@ export function SrhInspectorTableWidget() {
         enableSortingRemoval: true,
         enableGlobalFilter: false,
         enableClickToCopy: true,
-        columnFilterModeOptions: ['contains'],
+        columnFilterModeOptions: ['contains', 'equals'],
         initialState: {
             pagination: {
                 pageIndex: 0,
@@ -144,7 +161,7 @@ export function SrhInspectorTableWidget() {
         renderRowActions: useCallback<
             Required<
                 MRT_TableOptions<
-                    GetSubscriptionRequestHistoryCommand.Response['response']['records'][number]
+                    GetTorrentBlockerReportsCommand.Response['response']['records'][number]
                 >
             >['renderRowActions']
         >(
@@ -152,7 +169,7 @@ export function SrhInspectorTableWidget() {
                 <ActionIconGroup>
                     <ActionIcon
                         onClick={async () => {
-                            await userModalActions.setUserUuid(row.original.userUuid)
+                            await userModalActions.setUserUuid(row.original.user.uuid)
                             userModalActions.changeModalState(true)
                         }}
                         size="input-sm"
@@ -163,12 +180,49 @@ export function SrhInspectorTableWidget() {
                     <ActionIcon
                         color="grape"
                         onClick={async () => {
-                            window.open(`https://ipinfo.io/${row.original.requestIp}`, '_blank')
+                            window.open(
+                                `https://ipinfo.io/${row.original.report.actionReport.ip}`,
+                                '_blank'
+                            )
                         }}
                         size="input-sm"
                         variant="soft"
                     >
                         <TbExternalLink size="1.5rem" />
+                    </ActionIcon>
+
+                    <ActionIcon
+                        color="gray"
+                        onClick={async () => {
+                            modals.open({
+                                children: (
+                                    <Box>
+                                        <JsonEditor
+                                            collapse={3}
+                                            data={JSON.parse(JSON.stringify(row.original.report))}
+                                            indent={4}
+                                            maxWidth="100%"
+                                            rootName=""
+                                            theme={githubDarkTheme}
+                                            viewOnly
+                                        />
+                                    </Box>
+                                ),
+                                title: (
+                                    <BaseOverlayHeader
+                                        iconColor="shaded-gray"
+                                        IconComponent={TbJson}
+                                        iconVariant="soft"
+                                        title="Raw Report"
+                                    />
+                                ),
+                                size: 'xl'
+                            })
+                        }}
+                        size="input-sm"
+                        variant="soft"
+                    >
+                        <TbJson size="1.5rem" />
                     </ActionIcon>
                 </ActionIconGroup>
             ),
@@ -177,7 +231,7 @@ export function SrhInspectorTableWidget() {
 
         getRowId: (originalRow) => `${originalRow.id}`,
         displayColumnDefOptions: {
-            'mrt-row-actions': { size: 110 }
+            'mrt-row-actions': { size: 130 }
         }
     })
 
@@ -186,12 +240,46 @@ export function SrhInspectorTableWidget() {
             <DataTableShared.Title
                 actions={
                     <ActionIconGroup>
+                        <Tooltip
+                            label={t('torrent-blocker-reports-table.widget.truncate-reports')}
+                            withArrow
+                        >
+                            <ActionIcon
+                                color="red"
+                                loading={isLoading}
+                                onClick={() => {
+                                    modals.openConfirmModal({
+                                        title: t('common.confirm-action'),
+                                        children: t(
+                                            'torrent-blocker-reports-table.widget.truncate-reports-description'
+                                        ),
+                                        centered: true,
+                                        labels: {
+                                            confirm: t('common.delete'),
+                                            cancel: t('common.cancel')
+                                        },
+                                        confirmProps: {
+                                            color: 'red'
+                                        },
+                                        cancelProps: {
+                                            variant: 'subtle',
+                                            color: 'gray'
+                                        },
+                                        onConfirm: handleTruncateTorrentBlockerReports
+                                    })
+                                }}
+                                size="input-md"
+                                variant="soft"
+                            >
+                                <TbTrash size="24px" />
+                            </ActionIcon>
+                        </Tooltip>
                         <Tooltip label={t('common.update')} withArrow>
                             <ActionIcon
                                 loading={isLoading}
                                 onClick={() => refetch()}
                                 size="input-md"
-                                variant="light"
+                                variant="soft"
                             >
                                 <TbRefresh size="24px" />
                             </ActionIcon>
@@ -209,15 +297,19 @@ export function SrhInspectorTableWidget() {
                                     table.resetGlobalFilter(true)
                                 }}
                                 size="input-md"
-                                variant="light"
+                                variant="soft"
                             >
                                 <TbRestore size="24px" />
                             </ActionIcon>
                         </Tooltip>
                     </ActionIconGroup>
                 }
-                icon={<TbReportAnalytics size={24} />}
-                title={t('srh-inspector-table.widget.subscription-request-history')}
+                icon={<TbFlame size={24} />}
+                iconProps={{
+                    color: 'red',
+                    variant: 'soft'
+                }}
+                title={t('constants.tb-reports')}
             />
 
             <DataTableShared.Content>

@@ -26,7 +26,8 @@
         "srh-inspector": "SRH Inspector",
         "response-rules": "Response Rules",
         "remnawave-settings": "Remnawave Settings",
-        "node-plugins": "Plugins"
+        "node-plugins": "Plugins",
+        "tb-reports": "Torrent Blocker Reports"
     },
     "common": {
         "delete": "Delete",
@@ -2008,6 +2009,20 @@
             "deselect-all": "Deselect all",
             "select-all": "Select all",
             "execute": "Execute"
+        }
+    },
+    "torrent-blocker-stats": {
+        "widget": {
+            "total-reports": "Total Reports",
+            "distinct-nodes": "Distinct Nodes",
+            "distinct-users": "Distinct Users",
+            "last-24-hours": "Last 24 Hours"
+        }
+    },
+    "torrent-blocker-reports-table": {
+        "widget": {
+            "truncate-reports": "Truncate reports",
+            "truncate-reports-description": "All Torrent Blocker reports will be permanently deleted."
         }
     }
 }

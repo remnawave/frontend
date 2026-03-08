@@ -2,6 +2,7 @@ import {
     TbChartArcs,
     TbCirclesRelation,
     TbDeviceAnalytics,
+    TbFlame,
     TbFolder,
     TbHexagon,
     TbPackage,
@@ -229,6 +230,12 @@ export const useMenuSections = (): MenuItem[] => {
                     href: ROUTES.DASHBOARD.TOOLS.SRH_INSPECTOR,
                     icon: TbReportAnalytics,
                     id: 'srh-inspector'
+                },
+                {
+                    name: t('constants.tb-reports'),
+                    href: ROUTES.DASHBOARD.TOOLS.TORRENT_BLOCKER_REPORTS,
+                    icon: TbFlame,
+                    id: 'torrent-blocker-reports'
                 }
             ]
         },

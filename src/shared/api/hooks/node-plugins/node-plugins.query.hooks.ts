@@ -1,5 +1,11 @@
-import { GetNodePluginCommand, GetNodePluginsCommand } from '@remnawave/backend-contract'
+import {
+    GetNodePluginCommand,
+    GetNodePluginsCommand,
+    GetTorrentBlockerReportsCommand,
+    GetTorrentBlockerReportsStatsCommand
+} from '@remnawave/backend-contract'
 import { createQueryKeys } from '@lukemorales/query-key-factory'
+import { keepPreviousData } from '@tanstack/react-query'
 
 import { sToMs } from '@shared/utils/time-utils'
 
@@ -10,6 +16,12 @@ export const nodePluginsQueryKeys = createQueryKeys('nodePlugins', {
         queryKey: [route]
     }),
     getNodePlugins: {
+        queryKey: null
+    },
+    getTorrentBlockerReports: (filters: GetTorrentBlockerReportsCommand.RequestQuery) => ({
+        queryKey: [filters]
+    }),
+    getTorrentBlockerStats: {
         queryKey: null
     }
 })
@@ -35,4 +47,29 @@ export const useGetNodePlugins = createGetQueryHook({
         staleTime: sToMs(15)
     },
     errorHandler: (error) => errorHandler(error, 'Get Node Plugins')
+})
+
+export const useGetTorrentBlockerReports = createGetQueryHook({
+    endpoint: GetTorrentBlockerReportsCommand.TSQ_url,
+    responseSchema: GetTorrentBlockerReportsCommand.ResponseSchema,
+    requestQuerySchema: GetTorrentBlockerReportsCommand.RequestQuerySchema,
+    getQueryKey: ({ query }) => nodePluginsQueryKeys.getTorrentBlockerReports(query!).queryKey,
+    rQueryParams: {
+        staleTime: sToMs(20),
+        refetchInterval: sToMs(25),
+        placeholderData: keepPreviousData,
+        refetchOnMount: true
+    },
+    errorHandler: (error) => errorHandler(error, 'Get Torrent Blocker Reports')
+})
+
+export const useGetTorrentBlockerStats = createGetQueryHook({
+    endpoint: GetTorrentBlockerReportsStatsCommand.TSQ_url,
+    responseSchema: GetTorrentBlockerReportsStatsCommand.ResponseSchema,
+    getQueryKey: () => nodePluginsQueryKeys.getTorrentBlockerStats.queryKey,
+    rQueryParams: {
+        refetchOnMount: true,
+        staleTime: sToMs(30)
+    },
+    errorHandler: (error) => errorHandler(error, 'Get Torrent Blocker Reports Stats')
 })
