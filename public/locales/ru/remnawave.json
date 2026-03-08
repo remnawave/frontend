@@ -26,7 +26,8 @@
         "srh-inspector": "Инспектор SRH",
         "response-rules": "Правила ответов",
         "remnawave-settings": "Настройки Remnawave",
-        "node-plugins": "Плагины"
+        "node-plugins": "Плагины",
+        "tb-reports": "Torrent Blocker Reports"
     },
     "common": {
         "delete": "Удалить",
@@ -2008,6 +2009,20 @@
             "deselect-all": "Снять все",
             "select-all": "Выделить все",
             "execute": "Выполнить"
+        }
+    },
+    "torrent-blocker-stats": {
+        "widget": {
+            "total-reports": "Total Reports",
+            "distinct-nodes": "Distinct Nodes",
+            "distinct-users": "Distinct Users",
+            "last-24-hours": "Last 24 Hours"
+        }
+    },
+    "torrent-blocker-reports-table": {
+        "widget": {
+            "truncate-reports": "Truncate reports",
+            "truncate-reports-description": "All Torrent Blocker reports will be permanently deleted."
         }
     }
 }
