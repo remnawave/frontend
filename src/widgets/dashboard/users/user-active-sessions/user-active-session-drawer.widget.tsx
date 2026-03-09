@@ -2,6 +2,9 @@ import {
     TbAlertTriangle,
     TbBrandDocker,
     TbClock,
+    TbClockCheck,
+    TbClockExclamation,
+    TbClockPause,
     TbExternalLink,
     TbHourglass,
     TbRadar,
@@ -52,6 +55,14 @@ const DOCKER_SNIPPET = `
 `
 
 const HIGHLIGHT_SPAN = <Text c="white" component="span" fw={600} size="sm" />
+
+const getLastSeenIndicator = (lastSeen: Date | string) => {
+    const diffMs = Date.now() - new Date(lastSeen).getTime()
+    const diffMinutes = diffMs / 60_000
+    if (diffMinutes <= 5) return { color: 'var(--mantine-color-teal-6)', Icon: TbClockCheck }
+    if (diffMinutes <= 60) return { color: 'var(--mantine-color-yellow-6)', Icon: TbClockPause }
+    return { color: 'var(--mantine-color-red-6)', Icon: TbClockExclamation }
+}
 
 export const UserActiveSessionDrawerWidget = (props: IProps) => {
     const { userUuid, opened, onClose } = props
@@ -458,33 +469,18 @@ export const UserActiveSessionDrawerWidget = (props: IProps) => {
                             {node.ips.length > 0 &&
                                 node.ips.map((item) => (
                                     <Group align="center" gap="xs" key={item.ip} wrap="nowrap">
-                                        <Tooltip
-                                            label={t(
-                                                'user-active-session-drawer.widget.drop-this-connection-on-this-node'
-                                            )}
+                                        <ActionIcon
+                                            color="cyan"
+                                            component="a"
+                                            href={`https://ipinfo.io/${item.ip}`}
+                                            rel="noopener noreferrer"
+                                            size="input-sm"
+                                            target="_blank"
+                                            variant="soft"
                                         >
-                                            <ActionIcon
-                                                color="orange"
-                                                onClick={() =>
-                                                    dropConnections({
-                                                        variables: {
-                                                            dropBy: {
-                                                                by: 'ipAddresses',
-                                                                ipAddresses: [item.ip]
-                                                            },
-                                                            targetNodes: {
-                                                                target: 'specificNodes',
-                                                                nodeUuids: [node.nodeUuid]
-                                                            }
-                                                        }
-                                                    })
-                                                }
-                                                size="lg"
-                                                variant="soft"
-                                            >
-                                                <TbUnlink size={20} />
-                                            </ActionIcon>
-                                        </Tooltip>
+                                            <TbExternalLink size={18} />
+                                        </ActionIcon>
+
                                         <Box style={{ flex: 1 }}>
                                             <CopyableFieldShared
                                                 leftSection={
@@ -519,32 +515,54 @@ export const UserActiveSessionDrawerWidget = (props: IProps) => {
                                                             }
                                                         }}
                                                     >
-                                                        <Box
-                                                            c="dimmed"
-                                                            style={{
-                                                                display: 'flex',
-                                                                cursor: 'help'
-                                                            }}
-                                                        >
-                                                            <TbClock size={16} />
-                                                        </Box>
+                                                        {(() => {
+                                                            const { color, Icon } =
+                                                                getLastSeenIndicator(item.lastSeen)
+                                                            return (
+                                                                <Box
+                                                                    style={{
+                                                                        display: 'flex',
+                                                                        cursor: 'help',
+                                                                        color
+                                                                    }}
+                                                                >
+                                                                    <Icon size={16} />
+                                                                </Box>
+                                                            )
+                                                        })()}
                                                     </Tooltip>
                                                 }
                                                 size="sm"
                                                 value={item.ip}
                                             />
                                         </Box>
-                                        <ActionIcon
-                                            color="teal"
-                                            component="a"
-                                            href={`https://ipinfo.io/${item.ip}`}
-                                            rel="noopener noreferrer"
-                                            size="input-sm"
-                                            target="_blank"
-                                            variant="soft"
+                                        <Tooltip
+                                            label={t(
+                                                'user-active-session-drawer.widget.drop-this-connection-on-this-node'
+                                            )}
                                         >
-                                            <TbExternalLink size={18} />
-                                        </ActionIcon>
+                                            <ActionIcon
+                                                color="orange"
+                                                onClick={() =>
+                                                    dropConnections({
+                                                        variables: {
+                                                            dropBy: {
+                                                                by: 'ipAddresses',
+                                                                ipAddresses: [item.ip]
+                                                            },
+                                                            targetNodes: {
+                                                                target: 'specificNodes',
+                                                                nodeUuids: [node.nodeUuid]
+                                                            }
+                                                        }
+                                                    })
+                                                }
+                                                size="lg"
+                                                variant="soft"
+                                            >
+                                                <TbUnlink size={20} />
+                                            </ActionIcon>
+                                        </Tooltip>
                                     </Group>
                                 ))}
                         </SectionCard.Root>
