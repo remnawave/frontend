@@ -1,5 +1,5 @@
-import { TbRewindBackward50 } from 'react-icons/tb'
 import { useTranslation } from 'react-i18next'
+import { TbTimeline } from 'react-icons/tb'
 import { Menu } from '@mantine/core'
 
 import { MODALS, useModalsStoreOpenWithData } from '@entities/dashboard/modal-store'
@@ -13,7 +13,7 @@ export function GetUserSubscriptionRequestHistoryFeature(props: IProps) {
 
     return (
         <Menu.Item
-            leftSection={<TbRewindBackward50 size="16px" />}
+            leftSection={<TbTimeline size="16px" />}
             onClick={() =>
                 openModalWithData(MODALS.USER_SUBSCRIPTION_REQUESTS_DRAWER, { userUuid })
             }

@@ -10,7 +10,7 @@ import {
     Tooltip,
     Transition
 } from '@mantine/core'
-import { TbDevices, TbRefresh, TbRewindBackward50 } from 'react-icons/tb'
+import { TbDevices, TbRefresh, TbTimeline } from 'react-icons/tb'
 import { useTranslation } from 'react-i18next'
 
 import { MODALS, useModalClose, useModalState } from '@entities/dashboard/modal-store'
@@ -101,7 +101,7 @@ export const UserSubscriptionRequestsDrawerWidget = () => {
             title={
                 <BaseOverlayHeader
                     iconColor="teal"
-                    IconComponent={TbRewindBackward50}
+                    IconComponent={TbTimeline}
                     iconVariant="soft"
                     title={t(
                         'get-user-subscription-request-history.feature.subscription-request-history'
