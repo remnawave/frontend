@@ -52,14 +52,18 @@ export const useHwidInspectorTableColumns = () => {
                 header: t('use-hwid-inspector-table-columns.created-at'),
                 accessorFn: (originalRow) =>
                     dayjs(originalRow.createdAt).format('DD/MM/YYYY, HH:mm'),
-                minSize: 250
+                minSize: 250,
+                enableColumnFilter: false,
+                enableColumnFilterModes: false
             },
             {
                 accessorKey: 'updatedAt',
                 header: t('use-hwid-inspector-table-columns.updated-at'),
                 accessorFn: (originalRow) =>
                     dayjs(originalRow.updatedAt).format('DD/MM/YYYY, HH:mm'),
-                minSize: 250
+                minSize: 250,
+                enableColumnFilter: false,
+                enableColumnFilterModes: false
             }
         ],
         []
