@@ -15,10 +15,8 @@ import {
     TbAlertTriangle,
     TbBrandDocker,
     TbClock,
-    TbHourglass,
     TbRadar,
     TbRefresh,
-    TbTag,
     TbTrash,
     TbUser
 } from 'react-icons/tb'
@@ -169,19 +167,6 @@ export const NodeActiveSessionsDrawerWidget = (props: IProps) => {
                 />
             </SectionCard.Section>
 
-            <Group gap="sm" wrap="nowrap">
-                <ThemeIcon color="teal" size="md" variant="soft">
-                    <TbTag size={16} />
-                </ThemeIcon>
-                <Text c="dimmed" size="sm">
-                    <Trans
-                        components={{ highlight: HIGHLIGHT_SPAN }}
-                        i18nKey="active-sessions-drawer.widget.warning-version"
-                        values={{ version: '2.7.0' }}
-                    />
-                </Text>
-            </Group>
-
             <Stack gap="xs">
                 <Group gap="sm" wrap="nowrap">
                     <ThemeIcon color="violet" size="md" variant="soft">
@@ -219,11 +204,14 @@ export const NodeActiveSessionsDrawerWidget = (props: IProps) => {
             </Group>
 
             <Group gap="sm" wrap="nowrap">
-                <ThemeIcon color="orange" size="md" variant="soft">
-                    <TbHourglass size={16} />
+                <ThemeIcon color="yellow" size="md" variant="soft">
+                    <TbRadar size={16} />
                 </ThemeIcon>
                 <Text c="dimmed" size="sm">
-                    {t('active-sessions-drawer.widget.warning-patience')}
+                    <Trans
+                        components={{ highlight: HIGHLIGHT_SPAN }}
+                        i18nKey="active-sessions-drawer.widget.warning-n-plus-one"
+                    />
                 </Text>
             </Group>
         </SectionCard.Root>

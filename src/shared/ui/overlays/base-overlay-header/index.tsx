@@ -1,6 +1,7 @@
 import { Group, Stack, Text, ThemeIcon, ThemeIconProps, Title, TitleProps } from '@mantine/core'
 import ReactCountryFlag from 'react-country-flag'
 import { useClipboard } from '@mantine/hooks'
+import { ReactNode } from 'react'
 
 type IProps = {
     countryCode?: string
@@ -8,7 +9,7 @@ type IProps = {
     IconComponent: React.ComponentType<{ size: number }>
     iconSize?: number
     iconVariant: ThemeIconProps['variant']
-    subtitle?: string
+    subtitle?: ReactNode | string
     themeIconProps?: ThemeIconProps
     title: string
     titleOrder?: TitleProps['order']

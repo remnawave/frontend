@@ -780,6 +780,7 @@
             "warning-version": "Remnawave Node version <highlight>{{version}}</highlight> or higher",
             "warning-docker": "Add the following to <highlight>docker-compose.yml</highlight> of Remnawave Node (/opt/remnanode)",
             "warning-patience": "Fetching data may take some time, do not close this window!",
+            "warning-n-plus-one": "<highlight>Please note</highlight>: this request performs <highlight>N+1</highlight> operations to gRPC API of <highlight>Xray-Core</highlight> due to the lack of bulk data retrieval methods. <highlight>N</highlight> is the number of users currently online on the given node.",
             "get-data": "Get Data",
             "fetching": "Fetching active sessions...",
             "progress": "Completed {{completed}} of {{total}} nodes",
