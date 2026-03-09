@@ -1,0 +1,391 @@
+import {
+    ActionIcon,
+    Box,
+    Button,
+    Center,
+    Drawer,
+    Group,
+    Stack,
+    Text,
+    ThemeIcon,
+    Tooltip,
+    Transition
+} from '@mantine/core'
+import {
+    TbAlertTriangle,
+    TbBrandDocker,
+    TbClock,
+    TbHourglass,
+    TbRadar,
+    TbRefresh,
+    TbTag,
+    TbTrash,
+    TbUser
+} from 'react-icons/tb'
+import { useCallback, useEffect, useState } from 'react'
+import { CodeHighlight } from '@mantine/code-highlight'
+import { Trans, useTranslation } from 'react-i18next'
+import { PiEmptyDuotone } from 'react-icons/pi'
+import { Virtuoso } from 'react-virtuoso'
+
+import { useFetchUsersIps, useFetchUsersIpsResult } from '@shared/api/hooks'
+import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
+import { LottieGlobeShared } from '@shared/ui/lotties/globe'
+import { SectionCard } from '@shared/ui/section-card'
+import { formatInt } from '@shared/utils/misc'
+
+import { NodeActiveSessionItem } from './node-active-session.item.widget'
+import classes from './node-active-sessions.module.css'
+
+interface IProps {
+    nodeUuid: string
+    onClose: () => void
+    opened: boolean
+}
+
+const DOCKER_SNIPPET = `
+    cap_add:
+      - NET_ADMIN
+`
+
+const HIGHLIGHT_SPAN = <Text c="white" component="span" fw={600} size="sm" />
+
+export const NodeActiveSessionsDrawerWidget = (props: IProps) => {
+    const { nodeUuid, opened, onClose } = props
+    const { t } = useTranslation()
+
+    const [jobId, setJobId] = useState<null | string>(null)
+    const [isCompleted, setIsCompleted] = useState(false)
+    const [isFailed, setIsFailed] = useState(false)
+
+    const { mutate: fetchUsersIps, isPending: isFetchingUsersIps } = useFetchUsersIps({
+        route: {
+            nodeUuid
+        },
+        mutationFns: {
+            onSuccess: (data) => {
+                setJobId(data.jobId)
+            }
+        }
+    })
+
+    const shouldPoll = opened && !!jobId && !isCompleted && !isFailed
+
+    const { data: usersIpsResult } = useFetchUsersIpsResult({
+        route: {
+            jobId: jobId ?? ''
+        },
+        rQueryParams: {
+            enabled: shouldPoll,
+            refetchInterval: shouldPoll ? 1000 : false
+        }
+    })
+
+    useEffect(() => {
+        if (!usersIpsResult) return undefined
+        if (
+            usersIpsResult.isFailed ||
+            (usersIpsResult.isCompleted && !usersIpsResult.result?.success)
+        ) {
+            setIsFailed(true)
+            return undefined
+        }
+        if (usersIpsResult.isCompleted) {
+            const timer = setTimeout(() => setIsCompleted(true), 500)
+            return () => clearTimeout(timer)
+        }
+        return undefined
+    }, [usersIpsResult])
+
+    const handleGetData = useCallback(() => {
+        fetchUsersIps({})
+    }, [nodeUuid, fetchUsersIps])
+
+    const handleClearResults = useCallback(() => {
+        setJobId(null)
+        setIsCompleted(false)
+        setIsFailed(false)
+    }, [])
+
+    const handleClose = useCallback(() => {
+        handleClearResults()
+        onClose()
+    }, [onClose, handleClearResults])
+
+    const isIdle = !jobId && !isCompleted && !isFetchingUsersIps
+    const isInProgress = isFetchingUsersIps || (!!jobId && !isCompleted && !isFailed)
+
+    const renderSummaryCard = (totalUsers: number) => (
+        <SectionCard.Root gap="md">
+            <SectionCard.Section>
+                <Group align="flex-center" justify="space-between">
+                    <BaseOverlayHeader
+                        iconColor="teal"
+                        IconComponent={TbUser}
+                        iconVariant="soft"
+                        subtitle={t('node-active-sessions.drawer.widget.active-users-on-this-node')}
+                        title={formatInt(totalUsers)}
+                    />
+
+                    <Group gap="xs">
+                        <Tooltip label={t('active-sessions-drawer.widget.clear')}>
+                            <ActionIcon
+                                color="red"
+                                onClick={handleClearResults}
+                                size="lg"
+                                variant="soft"
+                            >
+                                <TbTrash size={20} />
+                            </ActionIcon>
+                        </Tooltip>
+
+                        <Tooltip label={t('common.refresh')}>
+                            <ActionIcon
+                                color="indigo"
+                                onClick={() => {
+                                    handleClearResults()
+                                    handleGetData()
+                                }}
+                                size="lg"
+                                variant="soft"
+                            >
+                                <TbRefresh size={20} />
+                            </ActionIcon>
+                        </Tooltip>
+                    </Group>
+                </Group>
+            </SectionCard.Section>
+        </SectionCard.Root>
+    )
+
+    const renderWarning = () => (
+        <SectionCard.Root gap="md">
+            <SectionCard.Section>
+                <BaseOverlayHeader
+                    iconColor="yellow"
+                    IconComponent={TbAlertTriangle}
+                    iconVariant="soft"
+                    title={t('active-sessions-drawer.widget.requirements')}
+                />
+            </SectionCard.Section>
+
+            <Group gap="sm" wrap="nowrap">
+                <ThemeIcon color="teal" size="md" variant="soft">
+                    <TbTag size={16} />
+                </ThemeIcon>
+                <Text c="dimmed" size="sm">
+                    <Trans
+                        components={{ highlight: HIGHLIGHT_SPAN }}
+                        i18nKey="active-sessions-drawer.widget.warning-version"
+                        values={{ version: '2.7.0' }}
+                    />
+                </Text>
+            </Group>
+
+            <Stack gap="xs">
+                <Group gap="sm" wrap="nowrap">
+                    <ThemeIcon color="violet" size="md" variant="soft">
+                        <TbBrandDocker size={16} />
+                    </ThemeIcon>
+                    <Text c="dimmed" size="sm">
+                        <Trans
+                            components={{ highlight: HIGHLIGHT_SPAN }}
+                            i18nKey="active-sessions-drawer.widget.warning-docker"
+                        />
+                    </Text>
+                </Group>
+                <CodeHighlight
+                    background="rgba(22, 27, 35)"
+                    code={DOCKER_SNIPPET}
+                    language="yaml"
+                    radius="md"
+                    style={{
+                        border: '1px solid rgba(255, 255, 255, 0.08)',
+                        borderRadius: 'var(--mantine-radius-md)'
+                    }}
+                />
+            </Stack>
+
+            <Group gap="sm" wrap="nowrap">
+                <ThemeIcon color="cyan" size="md" variant="soft">
+                    <TbClock size={16} />
+                </ThemeIcon>
+                <Text c="dimmed" size="sm">
+                    <Trans
+                        components={{ highlight: HIGHLIGHT_SPAN }}
+                        i18nKey="active-sessions-drawer.widget.warning-activity"
+                    />
+                </Text>
+            </Group>
+
+            <Group gap="sm" wrap="nowrap">
+                <ThemeIcon color="orange" size="md" variant="soft">
+                    <TbHourglass size={16} />
+                </ThemeIcon>
+                <Text c="dimmed" size="sm">
+                    {t('active-sessions-drawer.widget.warning-patience')}
+                </Text>
+            </Group>
+        </SectionCard.Root>
+    )
+
+    const renderProgress = () => (
+        <SectionCard.Root gap="md">
+            <SectionCard.Section>
+                <Stack align="center" gap="md" py="xl">
+                    <div style={{ height: 120, display: 'flex', alignItems: 'center' }}>
+                        <LottieGlobeShared />
+                    </div>
+
+                    <Text c="white" fw={600} size="md">
+                        {t('active-sessions-drawer.widget.fetching')}
+                    </Text>
+                </Stack>
+            </SectionCard.Section>
+        </SectionCard.Root>
+    )
+
+    const renderFailed = () => (
+        <Stack gap="md">
+            {renderSummaryCard(0)}
+
+            <SectionCard.Root gap="sm">
+                <SectionCard.Section>
+                    <Center h="230">
+                        <Stack align="center" gap="xs">
+                            <ThemeIcon color="red" radius="md" size="xl" variant="soft">
+                                <TbAlertTriangle size={24} />
+                            </ThemeIcon>
+                            <Text c="dimmed" size="md">
+                                {t('active-sessions-drawer.widget.job-failed-description')}
+                            </Text>
+
+                            <Button
+                                color="teal"
+                                leftSection={<TbRefresh size={20} />}
+                                onClick={handleClearResults}
+                                size="sm"
+                                variant="soft"
+                            >
+                                {t('active-sessions-drawer.widget.try-again')}
+                            </Button>
+                        </Stack>
+                    </Center>
+                </SectionCard.Section>
+            </SectionCard.Root>
+        </Stack>
+    )
+
+    const renderResults = () => {
+        const users = usersIpsResult?.result?.users
+
+        return (
+            <Stack gap="md" style={{ flex: 1 }}>
+                {renderSummaryCard(users?.length ?? 0)}
+
+                {users && users.length === 0 && (
+                    <SectionCard.Root gap="sm">
+                        <SectionCard.Section>
+                            <Center h="230">
+                                <Stack align="center" gap="xs">
+                                    <PiEmptyDuotone
+                                        color="var(--mantine-color-gray-5)"
+                                        size="3rem"
+                                    />
+                                    <Text c="dimmed" size="sm">
+                                        {t('active-sessions-drawer.widget.no-active-sessions')}
+                                    </Text>
+                                </Stack>
+                            </Center>
+                        </SectionCard.Section>
+                    </SectionCard.Root>
+                )}
+
+                {users && users.length > 0 && (
+                    <Box className={classes.listContainer}>
+                        <Virtuoso
+                            data={users}
+                            itemContent={(_index, user) => {
+                                return (
+                                    <Box className={classes.itemWrapper}>
+                                        <NodeActiveSessionItem user={user} />
+                                    </Box>
+                                )
+                            }}
+                            style={{
+                                height: '100%'
+                            }}
+                            totalCount={users.length}
+                            useWindowScroll={false}
+                        />
+                    </Box>
+                )}
+            </Stack>
+        )
+    }
+
+    const renderContent = () => (
+        <Stack gap="md" style={{ flex: 1 }}>
+            {isIdle && (
+                <>
+                    {renderWarning()}
+                    <Button
+                        color="teal"
+                        fullWidth
+                        leftSection={<TbRadar size={20} />}
+                        loading={isFetchingUsersIps}
+                        onClick={handleGetData}
+                        size="md"
+                        variant="light"
+                    >
+                        {t('active-sessions-drawer.widget.get-data')}
+                    </Button>
+                </>
+            )}
+
+            {isInProgress && renderProgress()}
+
+            {isFailed && <>{renderFailed()}</>}
+
+            {isCompleted && renderResults()}
+        </Stack>
+    )
+
+    return (
+        <Drawer
+            keepMounted={false}
+            onClose={handleClose}
+            opened={opened}
+            position="right"
+            size="500px"
+            styles={{
+                body: {
+                    height: 'calc(100% - 60px)',
+                    display: 'flex',
+                    flexDirection: 'column'
+                }
+            }}
+            title={
+                <BaseOverlayHeader
+                    iconColor="teal"
+                    IconComponent={TbRadar}
+                    iconVariant="soft"
+                    title={t('active-sessions-drawer.widget.title')}
+                />
+            }
+        >
+            <Transition
+                duration={300}
+                mounted={opened}
+                timingFunction="ease-in-out"
+                transition="fade"
+            >
+                {(styles) => (
+                    <Box style={{ ...styles, flex: 1, display: 'flex', flexDirection: 'column' }}>
+                        {renderContent()}
+                    </Box>
+                )}
+            </Transition>
+        </Drawer>
+    )
+}

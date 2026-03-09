@@ -776,7 +776,7 @@
         "widget": {
             "title": "Active Sessions",
             "requirements": "Requirements",
-            "warning-activity": "IP addresses will only be shown if there was activity within the last <highlight>20 seconds</highlight>",
+            "warning-activity": "An IP address will be shown when <highlight>Xray-Core</highlight> considers the <highlight>connection still open</highlight>. This may result in some displayed IP addresses that are no longer actually connected. Use the <highlight>clock</highlight> icon to track the last activity of a given IP.",
             "warning-version": "Remnawave Node version <highlight>{{version}}</highlight> or higher",
             "warning-docker": "Add the following to <highlight>docker-compose.yml</highlight> of Remnawave Node (/opt/remnanode)",
             "warning-patience": "Fetching data may take some time, do not close this window!",
@@ -2025,6 +2025,20 @@
         "widget": {
             "truncate-reports": "Truncate reports",
             "truncate-reports-description": "All Torrent Blocker reports will be permanently deleted."
+        }
+    },
+    "node-active-session": {
+        "item": {
+            "widget": {
+                "view-user": "View User"
+            }
+        }
+    },
+    "node-active-sessions": {
+        "drawer": {
+            "widget": {
+                "active-users-on-this-node": "Active users on this node"
+            }
         }
     }
 }

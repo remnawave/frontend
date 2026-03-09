@@ -14,6 +14,7 @@ import {
     DisableUserCommand,
     EnableUserCommand,
     ResetUserTrafficCommand,
+    ResolveUserCommand,
     RevokeUserSubscriptionCommand,
     UpdateUserCommand
 } from '@remnawave/backend-contract'
@@ -405,6 +406,23 @@ export const useBulkAllExtendUsersExpirationDate = createMutationHook({
         onError: (error) => {
             notifications.show({
                 title: `Bulk All Extend Users Expiration Date`,
+                message:
+                    error instanceof Error ? error.message : `Request failed with unknown error.`,
+                color: 'red'
+            })
+        }
+    }
+})
+
+export const useResolveUser = createMutationHook({
+    endpoint: ResolveUserCommand.TSQ_url,
+    bodySchema: ResolveUserCommand.RequestSchema,
+    responseSchema: ResolveUserCommand.ResponseSchema,
+    requestMethod: ResolveUserCommand.endpointDetails.REQUEST_METHOD,
+    rMutationParams: {
+        onError: (error) => {
+            notifications.show({
+                title: `Resolve User`,
                 message:
                     error instanceof Error ? error.message : `Request failed with unknown error.`,
                 color: 'red'
