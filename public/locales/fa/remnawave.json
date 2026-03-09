@@ -780,6 +780,7 @@
             "warning-version": "نود Remnawave نسخه <highlight>{{version}}</highlight> یا بالاتر",
             "warning-docker": "مقادیر زیر را به <highlight>docker-compose.yml</highlight> نود (در /opt/remnanode) اضافه کنید",
             "warning-patience": "دریافت اطلاعات ممکن است زمانبر باشد، این پنجره را نبندید!",
+            "warning-n-plus-one": "<highlight>Please note</highlight>: this request performs <highlight>N+1</highlight> operations to gRPC API of <highlight>Xray-Core</highlight> due to the lack of bulk data retrieval methods. <highlight>N</highlight> is the number of users currently online on the given node.",
             "get-data": "دریافت اطلاعات",
             "fetching": "درحال دریافت نشست‌های فعال ...",
             "progress": "{{completed}} تا از {{total}} نود تکمیل شده",
