@@ -780,6 +780,7 @@
             "warning-version": "Remnawave 节点版本 <highlight>{{version}}</highlight> 或者更高",
             "warning-docker": "将以下内容添加到 Remnawave 节点的 <highlight>docker-compose.yml</highlight> 内(/opt/remnanode)",
             "warning-patience": "获取数据可能需要一些时间，不要关闭此窗口！",
+            "warning-n-plus-one": "<highlight>Please note</highlight>: this request performs <highlight>N+1</highlight> operations to gRPC API of <highlight>Xray-Core</highlight> due to the lack of bulk data retrieval methods. <highlight>N</highlight> is the number of users currently online on the given node.",
             "get-data": "获取数据",
             "fetching": "正在获取活动会话...",
             "progress": "已完成 {{completed}} 个，共 {{total}} 个",
