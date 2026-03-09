@@ -776,7 +776,7 @@
         "widget": {
             "title": "نشست‌های فعال",
             "requirements": "پیش‌نیازها",
-            "warning-activity": "آدرس‌های آیپی درصورتی که در <highlight>20 ثانیه</highlight> اخیر فعال بوده باشند نمایش داده می‌شوند",
+            "warning-activity": "An IP address will be shown when <highlight>Xray-Core</highlight> considers the <highlight>connection still open</highlight>. This may result in some displayed IP addresses that are no longer actually connected. Use the <highlight>clock</highlight> icon to track the last activity of a given IP.",
             "warning-version": "نود Remnawave نسخه <highlight>{{version}}</highlight> یا بالاتر",
             "warning-docker": "مقادیر زیر را به <highlight>docker-compose.yml</highlight> نود (در /opt/remnanode) اضافه کنید",
             "warning-patience": "دریافت اطلاعات ممکن است زمانبر باشد، این پنجره را نبندید!",
@@ -2025,6 +2025,20 @@
         "widget": {
             "truncate-reports": "Truncate reports",
             "truncate-reports-description": "All Torrent Blocker reports will be permanently deleted."
+        }
+    },
+    "node-active-session": {
+        "item": {
+            "widget": {
+                "view-user": "View User"
+            }
+        }
+    },
+    "node-active-sessions": {
+        "drawer": {
+            "widget": {
+                "active-users-on-this-node": "Active users on this node"
+            }
         }
     }
 }

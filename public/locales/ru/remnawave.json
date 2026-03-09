@@ -776,7 +776,7 @@
         "widget": {
             "title": "Активные сеансы",
             "requirements": "Условия",
-            "warning-activity": "IP адреса будут показаны только при наличии активности в течение последних <highlight>20 секунд</highlight>",
+            "warning-activity": "An IP address will be shown when <highlight>Xray-Core</highlight> considers the <highlight>connection still open</highlight>. This may result in some displayed IP addresses that are no longer actually connected. Use the <highlight>clock</highlight> icon to track the last activity of a given IP.",
             "warning-version": "Версия Remnawave Node <highlight>{{version}}</highlight> или выше",
             "warning-docker": "Добавьте эти строки к <highlight>docker-compose.yml</highlight> Remnawave Node (/opt/remnanode)",
             "warning-patience": "Получение данных может занять некоторое время, не закрывайте это окно!",
@@ -2025,6 +2025,20 @@
         "widget": {
             "truncate-reports": "Репорты по убыванию",
             "truncate-reports-description": "Все репорты Torrent Blocker будут удалены навсегда."
+        }
+    },
+    "node-active-session": {
+        "item": {
+            "widget": {
+                "view-user": "View User"
+            }
+        }
+    },
+    "node-active-sessions": {
+        "drawer": {
+            "widget": {
+                "active-users-on-this-node": "Active users on this node"
+            }
         }
     }
 }

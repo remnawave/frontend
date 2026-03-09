@@ -776,7 +776,7 @@
         "widget": {
             "title": "活跃会话",
             "requirements": "需求",
-            "warning-activity": "仅在最近<highlight>20 秒</highlight>有活动才会显示IP地址",
+            "warning-activity": "An IP address will be shown when <highlight>Xray-Core</highlight> considers the <highlight>connection still open</highlight>. This may result in some displayed IP addresses that are no longer actually connected. Use the <highlight>clock</highlight> icon to track the last activity of a given IP.",
             "warning-version": "Remnawave 节点版本 <highlight>{{version}}</highlight> 或者更高",
             "warning-docker": "将以下内容添加到 Remnawave 节点的 <highlight>docker-compose.yml</highlight> 内(/opt/remnanode)",
             "warning-patience": "获取数据可能需要一些时间，不要关闭此窗口！",
@@ -2025,6 +2025,20 @@
         "widget": {
             "truncate-reports": "截断报告",
             "truncate-reports-description": "所有 Torrent 屏蔽报告将被永久删除。"
+        }
+    },
+    "node-active-session": {
+        "item": {
+            "widget": {
+                "view-user": "View User"
+            }
+        }
+    },
+    "node-active-sessions": {
+        "drawer": {
+            "widget": {
+                "active-users-on-this-node": "Active users on this node"
+            }
         }
     }
 }
