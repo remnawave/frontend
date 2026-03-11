@@ -13,7 +13,7 @@ import {
 import { TbExternalLink, TbFlame, TbJson, TbRefresh, TbRestore, TbTrash } from 'react-icons/tb'
 import { GetTorrentBlockerReportsCommand } from '@remnawave/backend-contract'
 import { ActionIcon, ActionIconGroup, Box, Tooltip } from '@mantine/core'
-import { useCallback, useLayoutEffect, useMemo, useState } from 'react'
+import { useCallback, useLayoutEffect, useState } from 'react'
 import { githubDarkTheme, JsonEditor } from 'json-edit-react'
 import { useTranslation } from 'react-i18next'
 import { PiUserCircle } from 'react-icons/pi'
@@ -85,8 +85,6 @@ export function TorrentBlockerReportsTableWidget() {
         refetch()
     }
 
-    const filteredData = useMemo(() => tbReportsResponse, [tbReportsResponse])
-
     useLayoutEffect(() => {
         document.body.addEventListener('wheel', preventBackScrollTables, {
             passive: false
@@ -98,7 +96,7 @@ export function TorrentBlockerReportsTableWidget() {
 
     const table = useMantineReactTable({
         columns: tableColumns,
-        data: filteredData?.records ?? [],
+        data: tbReportsResponse?.records ?? [],
         enableFullScreenToggle: true,
         enableSortingRemoval: true,
         enableGlobalFilter: false,
@@ -142,7 +140,7 @@ export function TorrentBlockerReportsTableWidget() {
             style: { '--paper-radius': 'var(--mantine-radius-xs)' },
             withBorder: false
         },
-        rowCount: filteredData?.total ?? 0,
+        rowCount: tbReportsResponse?.total ?? 0,
         enableRowSelection: false,
         enableColumnPinning: true,
         positionToolbarAlertBanner: 'top',

@@ -12,9 +12,9 @@ import { TbCreditCard, TbPlus, TbRefresh } from 'react-icons/tb'
 import { useTranslation } from 'react-i18next'
 import { DataTable } from 'mantine-datatable'
 import { useHotkeys } from '@mantine/hooks'
-import { useMemo, useState } from 'react'
 import { PiEmpty } from 'react-icons/pi'
 import { modals } from '@mantine/modals'
+import { useState } from 'react'
 
 import {
     useDeleteInfraBillingHistoryRecord,
@@ -48,8 +48,6 @@ export function InfraBillingRecordsTableWidget() {
     }
 
     useHotkeys([['mod + K', handleOpenModal]])
-
-    const memoizedInfraBillingRecords = useMemo(() => infraBillingRecords, [infraBillingRecords])
 
     const { mutate: deleteInfraBillingRecord } = useDeleteInfraBillingHistoryRecord({
         mutationFns: {
@@ -142,9 +140,9 @@ export function InfraBillingRecordsTableWidget() {
                     setPage(page)
                 }}
                 page={page}
-                records={memoizedInfraBillingRecords?.records ?? []}
+                records={infraBillingRecords?.records ?? []}
                 recordsPerPage={PAGE_SIZE}
-                totalRecords={memoizedInfraBillingRecords?.total ?? 0}
+                totalRecords={infraBillingRecords?.total ?? 0}
                 withColumnBorders
                 withTableBorder={false}
             />

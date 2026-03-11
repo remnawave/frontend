@@ -5,7 +5,7 @@ import {
     MRT_SortingState,
     useMantineReactTable
 } from 'mantine-react-table'
-import { useEffect, useLayoutEffect, useMemo, useState } from 'react'
+import { useEffect, useLayoutEffect, useState } from 'react'
 import { notifications } from '@mantine/notifications'
 import { useSearchParams } from 'react-router-dom'
 import { PiUsersDuotone } from 'react-icons/pi'
@@ -110,11 +110,9 @@ export function UserTableWidget() {
         }
     }, [searchParams, isLoading])
 
-    const filteredData = useMemo(() => usersResponse, [usersResponse])
-
     const table = useMantineReactTable({
         columns: tableColumns,
-        data: filteredData?.users ?? [],
+        data: usersResponse?.users ?? [],
         enableFullScreenToggle: true,
         enableSortingRemoval: true,
         enableGlobalFilter: false,
@@ -160,7 +158,7 @@ export function UserTableWidget() {
             style: { '--paper-radius': 'var(--mantine-radius-xs)' },
             withBorder: false
         },
-        rowCount: filteredData?.total ?? 0,
+        rowCount: usersResponse?.total ?? 0,
         enableRowSelection: true,
         mantineSelectCheckboxProps: {
             size: 'md',

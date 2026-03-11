@@ -13,9 +13,9 @@ import { GetInfraBillingNodesCommand } from '@remnawave/backend-contract'
 import { DataTable, useDataTableColumns } from 'mantine-datatable'
 import { AnimatePresence, motion } from 'motion/react'
 import { useTranslation } from 'react-i18next'
-import { useMemo, useState } from 'react'
 import { PiEmpty } from 'react-icons/pi'
 import { modals } from '@mantine/modals'
+import { useState } from 'react'
 import dayjs from 'dayjs'
 
 import {
@@ -49,8 +49,6 @@ export function InfraBillingNodesTableWidget() {
     >([])
 
     const [updatingUuids, setUpdatingUuids] = useState<Set<string>>(new Set())
-
-    const memoizedInfraBillingNodes = useMemo(() => infraBillingNodes, [infraBillingNodes])
 
     const { mutate: deleteInfraBillingNode } = useDeleteInfraBillingNode({
         mutationFns: {
@@ -256,11 +254,11 @@ export function InfraBillingNodesTableWidget() {
                 onPageChange={() => {}}
                 onSelectedRecordsChange={setMultiSelectedRecords}
                 page={1}
-                records={memoizedInfraBillingNodes?.billingNodes ?? []}
+                records={infraBillingNodes?.billingNodes ?? []}
                 recordsPerPage={PAGE_SIZE}
                 selectedRecords={multiSelectedRecords}
                 storeColumnsKey={INFRA_BILLING_NODES_CACHE_KEY}
-                totalRecords={memoizedInfraBillingNodes?.totalBillingNodes ?? 0}
+                totalRecords={infraBillingNodes?.totalBillingNodes ?? 0}
                 withColumnBorders
                 withTableBorder={false}
             />

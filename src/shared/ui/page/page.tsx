@@ -1,4 +1,4 @@
-import { forwardRef, ReactNode, useEffect, useMemo } from 'react'
+import { forwardRef, ReactNode, useEffect } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { nprogress } from '@mantine/nprogress'
 import { Box, BoxProps } from '@mantine/core'
@@ -21,9 +21,7 @@ export const Page = forwardRef<HTMLDivElement, PageProps>(
 
         const { data: authStatus } = useGetAuthStatus()
 
-        const pageTitle = useMemo(() => {
-            return `${title} | ${authStatus?.branding.title || app.name}`
-        }, [title, authStatus?.branding.title])
+        const pageTitle = `${title} | ${authStatus?.branding.title || app.name}`
 
         return (
             <>

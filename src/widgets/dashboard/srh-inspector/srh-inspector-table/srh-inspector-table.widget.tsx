@@ -12,8 +12,8 @@ import {
 } from 'mantine-react-table'
 import { TbExternalLink, TbRefresh, TbReportAnalytics, TbRestore } from 'react-icons/tb'
 import { GetSubscriptionRequestHistoryCommand } from '@remnawave/backend-contract'
-import { useCallback, useLayoutEffect, useMemo, useState } from 'react'
 import { ActionIcon, ActionIconGroup, Tooltip } from '@mantine/core'
+import { useCallback, useLayoutEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { PiUserCircle } from 'react-icons/pi'
 
@@ -75,11 +75,9 @@ export function SrhInspectorTableWidget() {
         }
     })
 
-    const filteredData = useMemo(() => usersResponse, [usersResponse])
-
     const table = useMantineReactTable({
         columns: tableColumns,
-        data: filteredData?.records ?? [],
+        data: usersResponse?.records ?? [],
         enableFullScreenToggle: true,
         enableSortingRemoval: true,
         enableGlobalFilter: false,
@@ -123,7 +121,7 @@ export function SrhInspectorTableWidget() {
             style: { '--paper-radius': 'var(--mantine-radius-xs)' },
             withBorder: false
         },
-        rowCount: filteredData?.total ?? 0,
+        rowCount: usersResponse?.total ?? 0,
         enableRowSelection: false,
         enableColumnPinning: true,
         positionToolbarAlertBanner: 'top',
