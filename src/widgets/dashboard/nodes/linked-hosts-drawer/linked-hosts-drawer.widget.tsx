@@ -90,6 +90,7 @@ export const LinkedHostsDrawer = memo(() => {
                     return (
                         <Box
                             className={styles.item}
+                            key={host.uuid}
                             onClick={() => {
                                 close()
 
