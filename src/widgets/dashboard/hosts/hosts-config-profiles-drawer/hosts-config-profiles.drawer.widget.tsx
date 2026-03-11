@@ -54,7 +54,7 @@ export const HostsConfigProfilesDrawer = (props: IProps) => {
     )
 
     const filteredProfiles = useMemo(() => {
-        if (!configProfiles?.configProfiles) return []
+        if (!configProfiles || !configProfiles.configProfiles) return []
 
         if (!debouncedSearchQuery.trim()) {
             return configProfiles.configProfiles
@@ -79,7 +79,7 @@ export const HostsConfigProfilesDrawer = (props: IProps) => {
                         inbound.type.toLowerCase().includes(query)
                 )
             }))
-    }, [configProfiles?.configProfiles, debouncedSearchQuery])
+    }, [configProfiles, debouncedSearchQuery])
 
     const handleInboundToggle = useCallback(
         (

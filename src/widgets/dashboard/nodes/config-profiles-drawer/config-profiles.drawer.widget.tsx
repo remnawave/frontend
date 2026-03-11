@@ -51,18 +51,21 @@ export const ConfigProfilesDrawer = (props: IProps) => {
         return () => clearTimeout(timer)
     }, [searchQuery])
 
-    useEffect(() => {
-        if (opened) {
-            setSelectedInbounds(new Set(activeConfigProfileInbounds || []))
-            setSelectedProfileUuid(activeConfigProfileUuid || null)
-            setOpenAccordions(new Set(activeConfigProfileUuid ? [activeConfigProfileUuid] : []))
-            setSearchQuery('')
-            setDebouncedSearchQuery('')
-        }
-    }, [opened])
+    const [prevOpened, setPrevOpened] = useState(false)
+
+    if (opened && !prevOpened) {
+        setSelectedInbounds(new Set(activeConfigProfileInbounds || []))
+        setSelectedProfileUuid(activeConfigProfileUuid || null)
+        setOpenAccordions(new Set(activeConfigProfileUuid ? [activeConfigProfileUuid] : []))
+        setSearchQuery('')
+        setDebouncedSearchQuery('')
+    }
+    if (opened !== prevOpened) {
+        setPrevOpened(opened)
+    }
 
     const filteredProfiles = useMemo(() => {
-        if (!configProfiles?.configProfiles) return []
+        if (!configProfiles || !configProfiles.configProfiles) return []
 
         if (!debouncedSearchQuery.trim()) {
             return configProfiles.configProfiles
@@ -87,7 +90,7 @@ export const ConfigProfilesDrawer = (props: IProps) => {
                         inbound.type.toLowerCase().includes(query)
                 )
             }))
-    }, [configProfiles?.configProfiles, debouncedSearchQuery])
+    }, [configProfiles, debouncedSearchQuery])
 
     const handleInboundToggle = useCallback(
         (
@@ -128,7 +131,7 @@ export const ConfigProfilesDrawer = (props: IProps) => {
         onSaveInbounds(Array.from(selectedInbounds), selectedProfileUuid)
 
         onClose()
-    }, [selectedInbounds, selectedProfileUuid, onSaveInbounds])
+    }, [selectedInbounds, selectedProfileUuid, onSaveInbounds, onClose])
 
     const handleSelectAllInbounds = useCallback(
         (profileUuid: string) => {

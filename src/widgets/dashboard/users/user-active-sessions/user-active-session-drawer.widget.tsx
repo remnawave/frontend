@@ -29,11 +29,11 @@ import {
     Tooltip,
     Transition
 } from '@mantine/core'
-import { useCallback, useEffect, useState } from 'react'
 import { CodeHighlight } from '@mantine/code-highlight'
 import { notifications } from '@mantine/notifications'
 import { Trans, useTranslation } from 'react-i18next'
 import { PiEmptyDuotone } from 'react-icons/pi'
+import { useEffect, useState } from 'react'
 
 import { useDropConnections, useFetchIps, useFetchIpsResult } from '@shared/api/hooks'
 import { formatRelativeDateUtil, formatTimeUtil } from '@shared/utils/time-utils'
@@ -98,45 +98,46 @@ export const UserActiveSessionDrawerWidget = (props: IProps) => {
     const shouldPoll = opened && !!jobId && !isCompleted && !isFailed
 
     const { data: userIpsResult } = useFetchIpsResult({
-        route: {
-            jobId: jobId ?? ''
-        },
+        route: { jobId: jobId ?? '' },
         rQueryParams: {
             enabled: shouldPoll,
             refetchInterval: shouldPoll ? 1000 : false
         }
     })
 
-    useEffect(() => {
-        if (!userIpsResult) return undefined
+    const [prevResult, setPrevResult] = useState(userIpsResult)
+
+    if (prevResult !== userIpsResult) {
+        setPrevResult(userIpsResult)
         if (
-            userIpsResult.isFailed ||
-            (userIpsResult.isCompleted && !userIpsResult.result?.success)
+            userIpsResult &&
+            (userIpsResult.isFailed ||
+                (userIpsResult.isCompleted && !userIpsResult.result?.success))
         ) {
             setIsFailed(true)
-            return undefined
         }
-        if (userIpsResult.isCompleted) {
-            const timer = setTimeout(() => setIsCompleted(true), 500)
-            return () => clearTimeout(timer)
-        }
-        return undefined
-    }, [userIpsResult])
+    }
 
-    const handleGetData = useCallback(() => {
+    useEffect(() => {
+        if (!userIpsResult?.isCompleted || isFailed) return undefined
+        const timer = setTimeout(() => setIsCompleted(true), 500)
+        return () => clearTimeout(timer)
+    }, [userIpsResult?.isCompleted, isFailed])
+
+    const handleGetData = () => {
         fetchIps({})
-    }, [userUuid, fetchIps])
+    }
 
-    const handleClearResults = useCallback(() => {
+    const handleClearResults = () => {
         setJobId(null)
         setIsCompleted(false)
-        setIsFailed(false)
-    }, [])
+    }
 
-    const handleClose = useCallback(() => {
+    const handleClose = () => {
         handleClearResults()
         onClose()
-    }, [onClose, handleClearResults])
+        setIsFailed(false)
+    }
 
     const isIdle = !jobId && !isCompleted && !isFetchingIps
     const isInProgress = isFetchingIps || (!!jobId && !isCompleted && !isFailed)

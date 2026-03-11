@@ -2,12 +2,12 @@ import { PiClockCountdown, PiClockUser, PiListChecks, PiProhibit } from 'react-i
 import { UpdateSubscriptionSettingsCommand } from '@remnawave/backend-contract'
 import { TbDevices2, TbListLetters, TbX } from 'react-icons/tb'
 import { Button, Card, Group, Stack } from '@mantine/core'
-import { useCallback, useEffect, useState } from 'react'
 import { zodResolver } from 'mantine-form-zod-resolver'
 import { notifications } from '@mantine/notifications'
 import { useTranslation } from 'react-i18next'
 import Masonry from 'react-layout-masonry'
 import { useForm } from '@mantine/form'
+import { useState } from 'react'
 
 import { QueryKeys, useUpdateSubscriptionSettings } from '@shared/api/hooks'
 import { SettingsCardShared } from '@shared/ui/settings-card'
@@ -15,6 +15,7 @@ import { handleFormErrors } from '@shared/utils/misc'
 import { queryClient } from '@shared/api'
 
 import { RemarksManager } from './managers/remarks-manager.widget'
+import { computeRemarks } from './subscription-user-remarks.utils'
 
 interface IProps {
     subscriptionSettings: UpdateSubscriptionSettingsCommand.Response['response']
@@ -24,38 +25,37 @@ export const SubscriptionUserRemarksCardWidget = (props: IProps) => {
     const { subscriptionSettings } = props
     const { t } = useTranslation()
 
-    const [remarks, setRemarks] = useState<Record<string, string[]>>({
-        expired: [''],
-        limited: [''],
-        disabled: [''],
-        emptyHosts: [''],
-        HWIDMaxDevicesExceeded: [''],
-        HWIDNotSupported: ['']
-    })
+    const [remarks, setRemarks] = useState(() => computeRemarks(subscriptionSettings))
 
-    const updateExpiredRemarks = useCallback((newRemarks: string[]) => {
+    const [prevSettings, setPrevSettings] = useState(subscriptionSettings)
+    if (subscriptionSettings !== prevSettings) {
+        setPrevSettings(subscriptionSettings)
+        setRemarks(computeRemarks(subscriptionSettings))
+    }
+
+    const updateExpiredRemarks = (newRemarks: string[]) => {
         setRemarks((prev) => ({ ...prev, expired: newRemarks }))
-    }, [])
+    }
 
-    const updateLimitedRemarks = useCallback((newRemarks: string[]) => {
+    const updateLimitedRemarks = (newRemarks: string[]) => {
         setRemarks((prev) => ({ ...prev, limited: newRemarks }))
-    }, [])
+    }
 
-    const updateDisabledRemarks = useCallback((newRemarks: string[]) => {
+    const updateDisabledRemarks = (newRemarks: string[]) => {
         setRemarks((prev) => ({ ...prev, disabled: newRemarks }))
-    }, [])
+    }
 
-    const updateEmptyHostsRemarks = useCallback((newRemarks: string[]) => {
+    const updateEmptyHostsRemarks = (newRemarks: string[]) => {
         setRemarks((prev) => ({ ...prev, emptyHosts: newRemarks }))
-    }, [])
+    }
 
-    const updateHWIDMaxDevicesExceededRemarks = useCallback((newRemarks: string[]) => {
+    const updateHWIDMaxDevicesExceededRemarks = (newRemarks: string[]) => {
         setRemarks((prev) => ({ ...prev, HWIDMaxDevicesExceeded: newRemarks }))
-    }, [])
+    }
 
-    const updateHWIDNotSupportedRemarks = useCallback((newRemarks: string[]) => {
+    const updateHWIDNotSupportedRemarks = (newRemarks: string[]) => {
         setRemarks((prev) => ({ ...prev, HWIDNotSupported: newRemarks }))
-    }, [])
+    }
 
     const form = useForm<UpdateSubscriptionSettingsCommand.Request>({
         name: 'subscription-user-remarks-card-form',
@@ -73,6 +73,8 @@ export const SubscriptionUserRemarksCardWidget = (props: IProps) => {
                     QueryKeys.subscriptionSettings.getSubscriptionSettings.queryKey,
                     data
                 )
+
+                setRemarks(computeRemarks(data))
             },
 
             onError(error) {
@@ -126,31 +128,6 @@ export const SubscriptionUserRemarksCardWidget = (props: IProps) => {
             }
         })
     })
-
-    useEffect(() => {
-        const processRemarks = (remarksData: string | string[] | undefined): string[] => {
-            if (!remarksData) return ['']
-
-            if (typeof remarksData === 'string') {
-                return remarksData.split('\n').filter(Boolean).length > 0
-                    ? remarksData.split('\n').filter(Boolean)
-                    : ['']
-            }
-
-            return Array.isArray(remarksData) && remarksData.length > 0 ? remarksData : ['']
-        }
-
-        setRemarks({
-            expired: processRemarks(subscriptionSettings.customRemarks.expiredUsers),
-            limited: processRemarks(subscriptionSettings.customRemarks.limitedUsers),
-            disabled: processRemarks(subscriptionSettings.customRemarks.disabledUsers),
-            emptyHosts: processRemarks(subscriptionSettings.customRemarks.emptyHosts),
-            HWIDMaxDevicesExceeded: processRemarks(
-                subscriptionSettings.customRemarks.HWIDMaxDevicesExceeded
-            ),
-            HWIDNotSupported: processRemarks(subscriptionSettings.customRemarks.HWIDNotSupported)
-        })
-    }, [subscriptionSettings])
 
     return (
         <form onSubmit={handleSubmit} style={{ display: 'contents' }}>

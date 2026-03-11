@@ -175,6 +175,6 @@ export const useTbReportsTableColumns = (nodes?: GetAllNodesCommand.Response['re
                 }
             }
         ],
-        []
+        [nodes, t]
     )
 }

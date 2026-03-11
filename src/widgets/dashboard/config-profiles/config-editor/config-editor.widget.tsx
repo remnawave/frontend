@@ -1,9 +1,8 @@
 import type { editor } from 'monaco-editor'
 
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
-import { GetSnippetsCommand } from '@remnawave/backend-contract'
+import Editor, { Monaco, useMonaco } from '@monaco-editor/react'
 import { Box, Card, Code, Paper, Text } from '@mantine/core'
-import Editor, { Monaco } from '@monaco-editor/react'
 import { useTranslation } from 'react-i18next'
 import { useBlocker } from 'react-router-dom'
 import { modals } from '@mantine/modals'
@@ -19,40 +18,55 @@ import { IProps } from './interfaces'
 
 export function ConfigEditorWidget(props: IProps) {
     const { t, i18n } = useTranslation()
+    const monaco = useMonaco()
 
     const { configProfile, snippets } = props
 
     const [result, setResult] = useState('')
-    const [isConfigValid, setIsConfigValid] = useState(false)
+    const [isConfigValid, setIsConfigValid] = useState(true)
     const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false)
-    const [originalValue, setOriginalValue] = useState('')
-    const [snippetsMap, setSnippetsMap] = useState<
-        Map<string, GetSnippetsCommand.Response['response']['snippets'][number]['snippet']>
-    >(new Map())
+    const [originalValue, setOriginalValue] = useState<string>(
+        JSON.stringify(configProfile.config, null, 2) || ''
+    )
 
     const editorRef = useRef<editor.IStandaloneCodeEditor | null>(null)
-    const monacoRef = useRef<Monaco | null>(null)
 
     useEffect(() => {
-        const initialValue = JSON.stringify(configProfile.config, null, 2)
-        setOriginalValue(initialValue)
-        setHasUnsavedChanges(false)
-    }, [configProfile.config])
+        if (!monaco) return
 
-    useEffect(() => {
-        if (!monacoRef.current) return
-
-        MonacoSetupFeature.setup(monacoRef.current, i18n.language, snippets.snippets)
-    }, [monacoRef.current, i18n.language, snippets])
-
-    useEffect(() => {
-        setSnippetsMap(new Map(snippets.snippets.map((s) => [s.name, s.snippet])))
-    }, [snippets])
+        MonacoSetupFeature.setup(monaco, i18n.language, snippets.snippets)
+    }, [i18n.language, snippets, monaco])
 
     const blocker = useBlocker(
         ({ currentLocation, nextLocation }) =>
             hasUnsavedChanges && currentLocation.pathname !== nextLocation.pathname
     )
+
+    const snippetMap = new Map(snippets.snippets.map((s) => [s.name, s.snippet]))
+
+    const handleEditorDidMount = (monaco: Monaco) => {
+        monaco.editor.defineTheme('GithubDark', {
+            ...monacoTheme,
+            base: 'vs-dark'
+        })
+    }
+
+    const checkForChanges = () => {
+        if (!editorRef.current) return
+
+        const currentValue = editorRef.current.getValue()
+        const hasChanges = currentValue !== originalValue
+        setHasUnsavedChanges(hasChanges)
+    }
+
+    useLayoutEffect(() => {
+        document.body.addEventListener('wheel', preventBackScroll, {
+            passive: false
+        })
+        return () => {
+            document.body.removeEventListener('wheel', preventBackScroll)
+        }
+    }, [])
 
     useEffect(() => {
         if (blocker.state === 'blocked') {
@@ -89,30 +103,6 @@ export function ConfigEditorWidget(props: IProps) {
             })
         }
     }, [blocker])
-
-    const handleEditorDidMount = (monaco: Monaco) => {
-        monaco.editor.defineTheme('GithubDark', {
-            ...monacoTheme,
-            base: 'vs-dark'
-        })
-    }
-
-    const checkForChanges = () => {
-        if (!editorRef.current) return
-
-        const currentValue = editorRef.current.getValue()
-        const hasChanges = currentValue !== originalValue
-        setHasUnsavedChanges(hasChanges)
-    }
-
-    useLayoutEffect(() => {
-        document.body.addEventListener('wheel', preventBackScroll, {
-            passive: false
-        })
-        return () => {
-            document.body.removeEventListener('wheel', preventBackScroll)
-        }
-    }, [])
 
     return (
         <Box className={styles.container}>
@@ -157,23 +147,21 @@ export function ConfigEditorWidget(props: IProps) {
                     onChange={() => {
                         ConfigValidationFeature.validate(
                             editorRef,
-                            monacoRef,
+
                             setResult,
                             setIsConfigValid,
-                            snippetsMap
+                            snippetMap
                         )
                         checkForChanges()
                     }}
-                    onMount={(editor, monaco) => {
+                    onMount={(editor) => {
                         editorRef.current = editor
-                        monacoRef.current = monaco
 
                         ConfigValidationFeature.validate(
                             editorRef,
-                            monacoRef,
                             setResult,
                             setIsConfigValid,
-                            snippetsMap
+                            snippetMap
                         )
                     }}
                     options={{
@@ -228,7 +216,6 @@ export function ConfigEditorWidget(props: IProps) {
                     editorRef={editorRef}
                     hasUnsavedChanges={hasUnsavedChanges}
                     isConfigValid={isConfigValid}
-                    monacoRef={monacoRef}
                     originalValue={originalValue}
                     setHasUnsavedChanges={setHasUnsavedChanges}
                     setIsConfigValid={setIsConfigValid}

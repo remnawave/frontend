@@ -50,7 +50,6 @@ const cardVariants = {
 }
 
 interface IProps<T extends UpdateNodeCommand.Request> {
-    advancedOpened: boolean
     form: UseFormReturnType<T>
     handleClose: () => void
     handleSubmit: () => void
@@ -59,7 +58,6 @@ interface IProps<T extends UpdateNodeCommand.Request> {
     nodeDetailsCard?: ReactNode
     nodePlugins: GetNodePluginsCommand.Response['response']['nodePlugins']
     pubKey: GetPubKeyCommand.Response['response'] | undefined
-    setAdvancedOpened: (value: boolean) => void
 }
 
 export const BaseNodeForm = <T extends UpdateNodeCommand.Request>(props: IProps<T>) => {
@@ -68,8 +66,7 @@ export const BaseNodeForm = <T extends UpdateNodeCommand.Request>(props: IProps<
         node,
         nodePlugins,
         pubKey,
-        advancedOpened,
-        setAdvancedOpened,
+
         nodeDetailsCard,
         handleClose,
         handleSubmit,
@@ -108,11 +105,9 @@ export const BaseNodeForm = <T extends UpdateNodeCommand.Request>(props: IProps<
                     />
 
                     <NodeTrackingAndBillingCard
-                        advancedOpened={advancedOpened}
                         cardVariants={cardVariants}
                         form={form}
                         motionWrapper={MotionWrapper}
-                        setAdvancedOpened={setAdvancedOpened}
                     />
 
                     <NodeConsumptionCard
@@ -167,11 +162,9 @@ export const BaseNodeForm = <T extends UpdateNodeCommand.Request>(props: IProps<
                         />
 
                         <NodeTrackingAndBillingCard
-                            advancedOpened={advancedOpened}
                             cardVariants={cardVariants}
                             form={form}
                             motionWrapper={MotionWrapper}
-                            setAdvancedOpened={setAdvancedOpened}
                         />
                     </MotionStack>
                 </Group>

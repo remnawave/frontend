@@ -11,10 +11,10 @@ import {
     ThemeIcon
 } from '@mantine/core'
 import { useAutoAnimate } from '@formkit/auto-animate/react'
-import { useCallback, useEffect, useState } from 'react'
 import { useDebouncedValue } from '@mantine/hooks'
 import { PiPlus, PiTrash } from 'react-icons/pi'
 import { useTranslation } from 'react-i18next'
+import { useEffect, useState } from 'react'
 
 import { TemplateInfoPopoverShared } from '@shared/ui/popovers/template-info-popover/template-info-popover.shared'
 
@@ -65,28 +65,28 @@ export const RemarksManager = ({
 
     useEffect(() => {
         onChange(debouncedRemarks)
-    }, [debouncedRemarks, onChange])
+    }, [debouncedRemarks])
 
-    const addLocalRemark = useCallback(() => {
+    const addLocalRemark = () => {
         setLocalRemarks((prev) => [...prev, ''])
-    }, [])
+    }
 
-    const removeLocalRemark = useCallback((index: number) => {
+    const removeLocalRemark = (index: number) => {
         setLocalRemarks((prev) => {
             const newRemarks = [...prev]
             newRemarks.splice(index, 1)
             if (newRemarks.length === 0) newRemarks.push('')
             return newRemarks
         })
-    }, [])
+    }
 
-    const updateLocalRemark = useCallback((index: number, value: string) => {
+    const updateLocalRemark = (index: number, value: string) => {
         setLocalRemarks((prev) => {
             const newRemarks = [...prev]
             newRemarks[index] = value
             return newRemarks
         })
-    }, [])
+    }
 
     return (
         <Card>

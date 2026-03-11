@@ -14,6 +14,7 @@ import { TbChartBar, TbChartLine } from 'react-icons/tb'
 import { UseFormReturnType } from '@mantine/form'
 import { useTranslation } from 'react-i18next'
 import { PiTagDuotone } from 'react-icons/pi'
+import { useState } from 'react'
 
 import { SelectInfraProviderShared } from '@shared/ui/infra-billing/select-infra-provider/select-infra-provider.shared'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
@@ -21,11 +22,9 @@ import { SectionCard } from '@shared/ui/section-card'
 import { useGetNodesTags } from '@shared/api/hooks'
 
 interface IProps<T extends CreateNodeCommand.Request | UpdateNodeCommand.Request> {
-    advancedOpened: boolean
     cardVariants: Variants
     form: UseFormReturnType<T>
     motionWrapper: ForwardRefComponent<HTMLDivElement, HTMLMotionProps<'div'>>
-    setAdvancedOpened: (value: boolean) => void
 }
 
 export const NodeTrackingAndBillingCard = <
@@ -35,7 +34,13 @@ export const NodeTrackingAndBillingCard = <
 ) => {
     const { t } = useTranslation()
     const { data: nodesTags } = useGetNodesTags()
-    const { cardVariants, form, motionWrapper, setAdvancedOpened, advancedOpened } = props
+    const { cardVariants, form, motionWrapper } = props
+
+    const [advancedOpened, setAdvancedOpened] = useState<boolean>(false)
+
+    form.watch('isTrafficTrackingActive', ({ value }) => {
+        setAdvancedOpened(value ?? false)
+    })
 
     const MotionWrapper = motionWrapper
 

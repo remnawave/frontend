@@ -1,7 +1,7 @@
 import { Alert, Badge, Button, Code, Group, Paper, Stack, Text } from '@mantine/core'
 import { TbAlertCircle, TbCheck, TbLink, TbX } from 'react-icons/tb'
 import { useTranslation } from 'react-i18next'
-import { useEffect, useState } from 'react'
+import { useMemo } from 'react'
 
 import { MODALS, useModalsStoreOpenWithData } from '@entities/dashboard/modal-store'
 import { LottieCheckmarkShared } from '@shared/ui/lotties/checkmark'
@@ -23,8 +23,6 @@ enum STATUS {
 
 export const CreateNodeStep3Status = ({ nodeUuid, onClose }: IProps) => {
     const { t } = useTranslation()
-    const [status, setStatus] = useState<STATUS>(STATUS.CONNECTING)
-    const [errorMessage, setErrorMessage] = useState<null | string>(null)
     const actions = useNodesStoreActions()
 
     const openModalWithData = useModalsStoreOpenWithData()
@@ -39,38 +37,21 @@ export const CreateNodeStep3Status = ({ nodeUuid, onClose }: IProps) => {
         }
     })
 
-    useEffect(() => {
-        if (isLoading) {
-            setStatus(STATUS.CONNECTING)
-            setErrorMessage(null)
-            return
+    const { status, errorMessage } = useMemo(() => {
+        if (isLoading || !node) {
+            return { status: STATUS.CONNECTING, errorMessage: null }
         }
-
-        if (!node) {
-            setStatus(STATUS.CONNECTING)
-            setErrorMessage(null)
-            return
-        }
-
         const { isConnected, isConnecting, lastStatusMessage } = node
-
-        setErrorMessage(lastStatusMessage)
-
         if (isConnected && !isConnecting) {
-            setStatus(STATUS.CONNECTED)
-
-            return
+            return { status: STATUS.CONNECTED, errorMessage: lastStatusMessage }
         }
-
         if (isConnecting) {
-            setStatus(STATUS.CONNECTING)
-
-            return
+            return { status: STATUS.CONNECTING, errorMessage: lastStatusMessage }
         }
-
         if (lastStatusMessage && !isConnected) {
-            setStatus(STATUS.ERROR)
+            return { status: STATUS.ERROR, errorMessage: lastStatusMessage }
         }
+        return { status: STATUS.CONNECTING, errorMessage: lastStatusMessage }
     }, [node, isLoading])
 
     const handleClose = () => {

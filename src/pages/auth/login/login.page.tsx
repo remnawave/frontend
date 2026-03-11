@@ -100,7 +100,7 @@ export const LoginPage = () => {
             { text: 'Remna', color: 'cyan' },
             { text: 'wave', color: 'white' }
         ]
-    }, [authStatus?.branding.title])
+    }, [authStatus])
 
     const isRegister = !authStatus?.isLoginAllowed && authStatus?.isRegisterAllowed
     const authMethods = getAuthMethods(authStatus)

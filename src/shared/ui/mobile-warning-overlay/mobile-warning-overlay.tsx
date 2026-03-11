@@ -13,33 +13,24 @@ import {
 import { TbBaselineDensitySmall, TbColumns, TbMaximize, TbRotate2 } from 'react-icons/tb'
 import { PiDeviceMobile, PiMonitor, PiWarning } from 'react-icons/pi'
 import { useTranslation } from 'react-i18next'
-import { useEffect, useState } from 'react'
 
 import { useMiscStoreActions, useMobileWarningClosed } from '@entities/dashboard/misc-store'
 
 export function MobileWarningOverlay() {
-    const [opened, setOpened] = useState(false)
     const { t } = useTranslation()
 
     const mobileWarningClosed = useMobileWarningClosed()
     const actions = useMiscStoreActions()
 
-    useEffect(() => {
-        if (!mobileWarningClosed) {
-            setOpened(true)
-        }
-    }, [])
-
     const handleClose = () => {
         actions.setMobileWarningClosed(true)
-        setOpened(false)
     }
 
     return (
         <Modal
             centered
             onClose={handleClose}
-            opened={opened}
+            opened={!mobileWarningClosed}
             padding="xl"
             size="sm"
             withCloseButton={false}

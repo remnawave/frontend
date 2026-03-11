@@ -6,15 +6,13 @@ import {
     MRT_ColumnPinningState,
     MRT_PaginationState,
     MRT_SortingState,
-    MRT_TableOptions,
     MRT_VisibilityState,
     useMantineReactTable
 } from 'mantine-react-table'
 import { TbExternalLink, TbFlame, TbJson, TbRefresh, TbRestore, TbTrash } from 'react-icons/tb'
-import { GetTorrentBlockerReportsCommand } from '@remnawave/backend-contract'
 import { ActionIcon, ActionIconGroup, Box, Tooltip } from '@mantine/core'
-import { useCallback, useLayoutEffect, useState } from 'react'
 import { githubDarkTheme, JsonEditor } from 'json-edit-react'
+import { useLayoutEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { PiUserCircle } from 'react-icons/pi'
 import { modals } from '@mantine/modals'
@@ -158,75 +156,66 @@ export function TorrentBlockerReportsTableWidget() {
             columnPinning
         },
         enableRowActions: true,
-        renderRowActions: useCallback<
-            Required<
-                MRT_TableOptions<
-                    GetTorrentBlockerReportsCommand.Response['response']['records'][number]
+        renderRowActions: ({ row }) => (
+            <ActionIconGroup>
+                <ActionIcon
+                    onClick={async () => {
+                        await userModalActions.setUserUuid(row.original.user.uuid)
+                        userModalActions.changeModalState(true)
+                    }}
+                    size="input-sm"
+                    variant="soft"
                 >
-            >['renderRowActions']
-        >(
-            ({ row }) => (
-                <ActionIconGroup>
-                    <ActionIcon
-                        onClick={async () => {
-                            await userModalActions.setUserUuid(row.original.user.uuid)
-                            userModalActions.changeModalState(true)
-                        }}
-                        size="input-sm"
-                        variant="soft"
-                    >
-                        <PiUserCircle size="1.5rem" />
-                    </ActionIcon>
-                    <ActionIcon
-                        color="grape"
-                        onClick={async () => {
-                            window.open(
-                                `https://ipinfo.io/${row.original.report.actionReport.ip}`,
-                                '_blank'
-                            )
-                        }}
-                        size="input-sm"
-                        variant="soft"
-                    >
-                        <TbExternalLink size="1.5rem" />
-                    </ActionIcon>
+                    <PiUserCircle size="1.5rem" />
+                </ActionIcon>
+                <ActionIcon
+                    color="grape"
+                    onClick={async () => {
+                        window.open(
+                            `https://ipinfo.io/${row.original.report.actionReport.ip}`,
+                            '_blank'
+                        )
+                    }}
+                    size="input-sm"
+                    variant="soft"
+                >
+                    <TbExternalLink size="1.5rem" />
+                </ActionIcon>
 
-                    <ActionIcon
-                        color="gray"
-                        onClick={async () => {
-                            modals.open({
-                                children: (
-                                    <Box>
-                                        <JsonEditor
-                                            collapse={3}
-                                            data={JSON.parse(JSON.stringify(row.original.report))}
-                                            indent={2}
-                                            maxWidth="100%"
-                                            rootName=""
-                                            theme={githubDarkTheme}
-                                            viewOnly
-                                        />
-                                    </Box>
-                                ),
-                                title: (
-                                    <BaseOverlayHeader
-                                        iconColor="shaded-gray"
-                                        IconComponent={TbJson}
-                                        iconVariant="soft"
-                                        title="Raw Report"
+                <ActionIcon
+                    color="gray"
+                    onClick={async () => {
+                        modals.open({
+                            children: (
+                                <Box>
+                                    <JsonEditor
+                                        collapse={3}
+                                        data={JSON.parse(JSON.stringify(row.original.report))}
+                                        indent={2}
+                                        maxWidth="100%"
+                                        rootName=""
+                                        theme={githubDarkTheme}
+                                        viewOnly
                                     />
-                                ),
-                                size: 'xl'
-                            })
-                        }}
-                        size="input-sm"
-                        variant="soft"
-                    >
-                        <TbJson size="1.5rem" />
-                    </ActionIcon>
-                </ActionIconGroup>
-            ),
-            []
+                                </Box>
+                            ),
+                            title: (
+                                <BaseOverlayHeader
+                                    iconColor="shaded-gray"
+                                    IconComponent={TbJson}
+                                    iconVariant="soft"
+                                    title="Raw Report"
+                                />
+                            ),
+                            size: 'xl'
+                        })
+                    }}
+                    size="input-sm"
+                    variant="soft"
+                >
+                    <TbJson size="1.5rem" />
+                </ActionIcon>
+            </ActionIconGroup>
         ),
 
         getRowId: (originalRow) => `${originalRow.id}`,

@@ -27,16 +27,12 @@ export function NodePluginEditorWidget(props: IProps) {
     const [result, setResult] = useState('')
     const [isConfigValid, setIsConfigValid] = useState(false)
     const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false)
-    const [originalValue, setOriginalValue] = useState('')
+    const [originalValue, setOriginalValue] = useState<string>(
+        JSON.stringify(nodePlugin, null, 2) || ''
+    )
 
     const editorRef = useRef<editor.IStandaloneCodeEditor | null>(null)
     const monacoRef = useRef<Monaco | null>(null)
-
-    useEffect(() => {
-        const initialValue = JSON.stringify(nodePlugin, null, 2)
-        setOriginalValue(initialValue)
-        setHasUnsavedChanges(false)
-    }, [nodePlugin])
 
     const blocker = useBlocker(
         ({ currentLocation, nextLocation }) =>

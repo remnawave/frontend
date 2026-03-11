@@ -1,8 +1,8 @@
 import { UpdateNodeCommand } from '@remnawave/backend-contract'
 import { zodResolver } from 'mantine-form-zod-resolver'
-import { useEffect, useState } from 'react'
 import { useForm } from '@mantine/form'
 import { motion } from 'motion/react'
+import { useEffect } from 'react'
 
 import {
     configProfilesQueryKeys,
@@ -26,8 +26,6 @@ interface IProps {
 
 export const EditNodeByUuidModalContent = (props: IProps) => {
     const { nodeUuid, onClose } = props
-
-    const [advancedOpened, setAdvancedOpened] = useState(false)
 
     const form = useForm<UpdateNodeCommand.Request>({
         name: 'edit-node-form',
@@ -65,7 +63,6 @@ export const EditNodeByUuidModalContent = (props: IProps) => {
 
     useEffect(() => {
         if (fetchedNode) {
-            setAdvancedOpened(fetchedNode.isTrafficTrackingActive ?? false)
             form.initialize({
                 uuid: fetchedNode.uuid,
                 countryCode: fetchedNode.countryCode,
@@ -126,7 +123,6 @@ export const EditNodeByUuidModalContent = (props: IProps) => {
 
     return (
         <BaseNodeForm
-            advancedOpened={advancedOpened}
             form={form}
             handleClose={onClose}
             handleSubmit={handleSubmit}
@@ -135,7 +131,6 @@ export const EditNodeByUuidModalContent = (props: IProps) => {
             nodeDetailsCard={<NodeDetailsCardWidget node={fetchedNode} />}
             nodePlugins={nodePlugins?.nodePlugins ?? []}
             pubKey={pubKey}
-            setAdvancedOpened={setAdvancedOpened}
         />
     )
 }

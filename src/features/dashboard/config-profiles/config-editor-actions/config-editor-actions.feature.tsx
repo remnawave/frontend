@@ -37,7 +37,6 @@ const MODAL_KEY = MODALS.CONFIG_PROFILE_SHOW_SNIPPETS_DRAWER
 export function ConfigEditorActionsFeature(props: Props) {
     const {
         editorRef,
-        monacoRef,
         isConfigValid,
         setResult,
         setIsConfigValid,
@@ -98,7 +97,6 @@ export function ConfigEditorActionsFeature(props: Props) {
 
     const handleSave = () => {
         if (!editorRef.current) return
-        if (!monacoRef.current) return
 
         const currentValue = editorRef.current.getValue()
 

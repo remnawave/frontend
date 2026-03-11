@@ -75,6 +75,6 @@ export const useBandwidthTableColumns = () => {
                 textAlign: 'left'
             }
         ],
-        []
+        [t]
     )
 }

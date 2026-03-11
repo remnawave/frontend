@@ -7,12 +7,11 @@ import {
     KeyboardSensor,
     MouseSensor,
     TouchSensor,
-    UniqueIdentifier,
     useSensor,
     useSensors
 } from '@dnd-kit/core'
 import { arrayMove, SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
-import { memo, useCallback, useEffect, useRef, useState } from 'react'
+import { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { GetAllHostsCommand } from '@remnawave/backend-contract'
 import { useWindowVirtualizer } from '@tanstack/react-virtual'
 import { useListState, useMediaQuery } from '@mantine/hooks'
@@ -37,22 +36,28 @@ export const HostsTableWidget = memo((props: IProps) => {
     const [searchAddressValue, setSearchAddressValue] = useState<null | string>(null)
 
     const [highlightedHost, setHighlightedHost] = useState<null | string>(null)
+    const [scrollMargin, setScrollMargin] = useState(0)
     const listRef = useRef<HTMLDivElement | null>(null)
     const isMobile = useMediaQuery(`(max-width: ${em(768)})`)
 
     const { data: nodes } = useGetNodes()
     const { mutate: reorderHosts } = useReorderHosts()
 
+    useEffect(() => {
+        if (listRef.current) {
+            setScrollMargin(listRef.current.offsetTop)
+        }
+    }, [])
+
     const virtualizer = useWindowVirtualizer({
         count: state.length,
         estimateSize: () => (isMobile ? 202 : 60),
         overscan: 5,
-        scrollMargin: listRef.current?.offsetTop ?? 0,
+        scrollMargin,
         getItemKey: (index) => state[index].uuid
     })
 
-    const dataIds = useRef<UniqueIdentifier[]>([])
-    dataIds.current = state.map((host) => host.uuid)
+    const dataIds = useMemo(() => state.map((host) => host.uuid), [state])
 
     const sensors = useSensors(
         useSensor(MouseSensor, {
@@ -97,7 +102,7 @@ export const HostsTableWidget = memo((props: IProps) => {
             }
         },
 
-        [state, virtualizer.scrollToIndex]
+        [state, virtualizer]
     )
 
     const handleSearchAddressSelect = useCallback(
@@ -118,7 +123,7 @@ export const HostsTableWidget = memo((props: IProps) => {
             }
         },
 
-        [state, virtualizer.scrollToIndex]
+        [state, virtualizer]
     )
 
     useEffect(() => {
@@ -174,8 +179,8 @@ export const HostsTableWidget = memo((props: IProps) => {
                 return
             }
 
-            const oldIndex = dataIds.current.indexOf(active.id)
-            const newIndex = dataIds.current.indexOf(over.id)
+            const oldIndex = dataIds.indexOf(String(active.id))
+            const newIndex = dataIds.indexOf(String(over.id))
 
             if (oldIndex !== -1 && newIndex !== -1) {
                 const newState = arrayMove(state, oldIndex, newIndex)
@@ -184,7 +189,7 @@ export const HostsTableWidget = memo((props: IProps) => {
 
             setDraggedHost(null)
         },
-        [state, handlers]
+        [dataIds, state, handlers]
     )
 
     const handleDragCancel = useCallback(() => {
@@ -238,10 +243,7 @@ export const HostsTableWidget = memo((props: IProps) => {
                                 position: 'relative'
                             }}
                         >
-                            <SortableContext
-                                items={dataIds.current}
-                                strategy={verticalListSortingStrategy}
-                            >
+                            <SortableContext items={dataIds} strategy={verticalListSortingStrategy}>
                                 <Container fluid>
                                     <Stack gap={0}>
                                         {virtualizer.getVirtualItems().map((virtualItem) => {

@@ -50,6 +50,6 @@ export const useSrhInspectorTableColumns = () => {
                 size: 300
             }
         ],
-        []
+        [t]
     )
 }

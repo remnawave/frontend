@@ -45,7 +45,7 @@ export const HostsFiltersFeature = (props: IProps) => {
                 label: configProfile.name
             }))
         ]
-    }, [configProfiles])
+    }, [configProfiles, t])
 
     const inboundOptions = useMemo(() => {
         if (!configProfiles || !configProfileFilter) return []
@@ -61,7 +61,7 @@ export const HostsFiltersFeature = (props: IProps) => {
                 label: inbound.tag || inbound.uuid
             }))
         ]
-    }, [configProfiles, configProfileFilter])
+    }, [configProfiles, configProfileFilter, t])
 
     const handleConfigProfileChange = (value: null | string) => {
         actions.setConfigProfileFilter(value || null)

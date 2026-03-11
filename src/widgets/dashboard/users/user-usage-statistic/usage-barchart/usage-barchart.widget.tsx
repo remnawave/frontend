@@ -312,8 +312,11 @@ export const UserUsageBarchartWidget = (props: IProps) => {
                             borderColor: s.color,
                             point: {
                                 events: {
-                                    click(this) {
-                                        handleBarClick(this.category as string, this.index)
+                                    click: (event) => {
+                                        handleBarClick(
+                                            event.point.category as string,
+                                            event.point.index
+                                        )
                                     }
                                 }
                             }

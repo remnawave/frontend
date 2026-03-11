@@ -100,7 +100,7 @@ export const CreateUserModalWidget = () => {
             status: USERS_STATUS.ACTIVE,
             username: '',
             trafficLimitStrategy: 'NO_RESET',
-            expireAt: new Date(Date.now() + 24 * 60 * 60 * 1000),
+            expireAt: dayjs().add(1, 'day').toDate(),
             trafficLimitBytes: 0,
             description: '',
             telegramId: undefined,

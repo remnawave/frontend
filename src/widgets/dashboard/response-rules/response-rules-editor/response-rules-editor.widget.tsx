@@ -22,16 +22,12 @@ export function ResponseRulesEditorWidget(props: IProps) {
     const [result, setResult] = useState('')
     const [isConfigValid, setIsConfigValid] = useState(false)
     const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false)
-    const [originalValue, setOriginalValue] = useState('')
+    const [originalValue, setOriginalValue] = useState<string>(
+        JSON.stringify(responseRules, null, 2) || ''
+    )
 
     const editorRef = useRef<editor.IStandaloneCodeEditor | null>(null)
     const monacoRef = useRef<Monaco | null>(null)
-
-    useEffect(() => {
-        const initialValue = JSON.stringify(responseRules, null, 2)
-        setOriginalValue(initialValue)
-        setHasUnsavedChanges(false)
-    }, [responseRules])
 
     const blocker = useBlocker(
         ({ currentLocation, nextLocation }) =>

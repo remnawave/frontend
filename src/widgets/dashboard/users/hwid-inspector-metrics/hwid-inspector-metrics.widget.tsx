@@ -92,10 +92,10 @@ export function HwidInspectorMetrics() {
             ...getHighchartsConfig('platforms'),
             series: [{ ...getHighchartsConfig('platforms').series[0], data }]
         }
-    }, [stats?.byPlatform])
+    }, [stats, getHighchartsConfig])
 
     const appChartOptions = useMemo(() => {
-        if (!stats?.byApp || stats.byApp.length === 0) return {}
+        if (!stats || !stats.byApp || stats.byApp.length === 0) return {}
 
         const data = stats.byApp.map((item) => ({
             name: item.app || 'Unknown',
@@ -106,7 +106,7 @@ export function HwidInspectorMetrics() {
             ...getHighchartsConfig('apps'),
             series: [{ ...getHighchartsConfig('apps').series[0], data }]
         }
-    }, [stats?.byApp])
+    }, [stats, getHighchartsConfig])
 
     const metricCards: IMetricCardProps[] = [
         {

@@ -6,14 +6,12 @@ import {
     MRT_ColumnPinningState,
     MRT_PaginationState,
     MRT_SortingState,
-    MRT_TableOptions,
     MRT_VisibilityState,
     useMantineReactTable
 } from 'mantine-react-table'
 import { TbExternalLink, TbRefresh, TbReportAnalytics, TbRestore } from 'react-icons/tb'
-import { GetSubscriptionRequestHistoryCommand } from '@remnawave/backend-contract'
 import { ActionIcon, ActionIconGroup, Tooltip } from '@mantine/core'
-import { useCallback, useLayoutEffect, useState } from 'react'
+import { useLayoutEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { PiUserCircle } from 'react-icons/pi'
 
@@ -139,38 +137,29 @@ export function SrhInspectorTableWidget() {
             columnPinning
         },
         enableRowActions: true,
-        renderRowActions: useCallback<
-            Required<
-                MRT_TableOptions<
-                    GetSubscriptionRequestHistoryCommand.Response['response']['records'][number]
+        renderRowActions: ({ row }) => (
+            <ActionIconGroup>
+                <ActionIcon
+                    onClick={async () => {
+                        await userModalActions.setUserUuid(row.original.userUuid)
+                        userModalActions.changeModalState(true)
+                    }}
+                    size="input-sm"
+                    variant="soft"
                 >
-            >['renderRowActions']
-        >(
-            ({ row }) => (
-                <ActionIconGroup>
-                    <ActionIcon
-                        onClick={async () => {
-                            await userModalActions.setUserUuid(row.original.userUuid)
-                            userModalActions.changeModalState(true)
-                        }}
-                        size="input-sm"
-                        variant="soft"
-                    >
-                        <PiUserCircle size="1.5rem" />
-                    </ActionIcon>
-                    <ActionIcon
-                        color="grape"
-                        onClick={async () => {
-                            window.open(`https://ipinfo.io/${row.original.requestIp}`, '_blank')
-                        }}
-                        size="input-sm"
-                        variant="soft"
-                    >
-                        <TbExternalLink size="1.5rem" />
-                    </ActionIcon>
-                </ActionIconGroup>
-            ),
-            []
+                    <PiUserCircle size="1.5rem" />
+                </ActionIcon>
+                <ActionIcon
+                    color="grape"
+                    onClick={async () => {
+                        window.open(`https://ipinfo.io/${row.original.requestIp}`, '_blank')
+                    }}
+                    size="input-sm"
+                    variant="soft"
+                >
+                    <TbExternalLink size="1.5rem" />
+                </ActionIcon>
+            </ActionIconGroup>
         ),
 
         getRowId: (originalRow) => `${originalRow.id}`,

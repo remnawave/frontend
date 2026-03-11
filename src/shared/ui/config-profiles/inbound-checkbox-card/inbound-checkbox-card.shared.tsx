@@ -4,7 +4,6 @@ import { githubDarkTheme, JsonEditor } from 'json-edit-react'
 import { useTranslation } from 'react-i18next'
 import { modals } from '@mantine/modals'
 import { TbCode } from 'react-icons/tb'
-import { useCallback } from 'react'
 
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 
@@ -17,38 +16,35 @@ export const InboundCheckboxCardShared = (props: IProps) => {
 
     const { t } = useTranslation()
 
-    const handleShowInboundJson = useCallback(
-        (
-            inbound: GetConfigProfilesCommand.Response['response']['configProfiles'][number]['inbounds'][number]
-        ) => {
-            modals.open({
-                children: (
-                    <JsonEditor
-                        collapse={3}
-                        data={inbound.rawInbound!}
-                        indent={4}
-                        maxWidth="100%"
-                        rootName=""
-                        theme={githubDarkTheme}
-                        viewOnly
-                    />
-                ),
-                title: (
-                    <BaseOverlayHeader
-                        iconColor="teal"
-                        IconComponent={TbCode}
-                        iconVariant="soft"
-                        title={t('flat-inbound-checkbox-card.shared.inbound-config-inbound-tag', {
-                            inboundTag: inbound.tag
-                        })}
-                    />
-                ),
+    const handleShowInboundJson = (
+        inbound: GetConfigProfilesCommand.Response['response']['configProfiles'][number]['inbounds'][number]
+    ) => {
+        modals.open({
+            children: (
+                <JsonEditor
+                    collapse={3}
+                    data={inbound.rawInbound!}
+                    indent={4}
+                    maxWidth="100%"
+                    rootName=""
+                    theme={githubDarkTheme}
+                    viewOnly
+                />
+            ),
+            title: (
+                <BaseOverlayHeader
+                    iconColor="teal"
+                    IconComponent={TbCode}
+                    iconVariant="soft"
+                    title={t('flat-inbound-checkbox-card.shared.inbound-config-inbound-tag', {
+                        inboundTag: inbound.tag
+                    })}
+                />
+            ),
 
-                size: 'xl'
-            })
-        },
-        []
-    )
+            size: 'xl'
+        })
+    }
 
     return (
         <Checkbox.Card

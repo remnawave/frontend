@@ -38,9 +38,6 @@ export const HelpDrawerShared = memo(() => {
         }
 
         setLoading(true)
-        setError(null)
-        setContent('')
-        setShowContent(false)
 
         fetch(resolveDocsUrl(internalState.screen, i18n.language))
             .then((res) => {

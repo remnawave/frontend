@@ -428,6 +428,6 @@ export const useUserTableColumns = (
                 }
             }
         ],
-        []
+        [t, nodes, internalSquads, externalSquads]
     )
 }

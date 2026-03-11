@@ -66,6 +66,6 @@ export const useHwidInspectorTableColumns = () => {
                 enableColumnFilterModes: false
             }
         ],
-        []
+        [t]
     )
 }
