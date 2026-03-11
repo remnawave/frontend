@@ -3,7 +3,6 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { nprogress } from '@mantine/nprogress'
 import { Box, BoxProps } from '@mantine/core'
 
-import { useGetAuthStatus } from '@shared/api/hooks'
 import { app } from 'src/config'
 
 interface PageProps extends BoxProps {
@@ -19,9 +18,7 @@ export const Page = forwardRef<HTMLDivElement, PageProps>(
             return () => nprogress.start()
         }, [])
 
-        const { data: authStatus } = useGetAuthStatus()
-
-        const pageTitle = `${title} | ${authStatus?.branding.title || app.name}`
+        const pageTitle = `${title} | ${app.name}`
 
         return (
             <>
