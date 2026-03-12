@@ -836,7 +836,7 @@
             "show-custom-remarks": "显示自定义备注",
             "show-custom-remark-description-line-1": "仅适用于过期、受限和禁用用户。",
             "show-custom-remark-description-line-2": "如果禁用此设置，过期、受限和禁用用户将收到实际为空的主机列表。",
-            "additional-response-headers": "附加响应头",
+            "additional-response-headers": "Response headers",
             "headers-that-will-be-sent-with-subscription-content": "将与订阅内容一起发送的响应头。",
             "randomize-hosts": "随机化主机",
             "randomize-hosts-description": "在订阅内容中随机排序主机",

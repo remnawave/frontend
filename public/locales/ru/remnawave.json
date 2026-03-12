@@ -836,7 +836,7 @@
             "show-custom-remarks": "Отображать кастомное примечание",
             "show-custom-remark-description-line-1": "Только для EXPIRED, LIMITED, DISABLED пользователей.",
             "show-custom-remark-description-line-2": "Если эта настройка отключена – EXPIRED, LIMITED, DISABLED пользователи получат актуальный список хостов, вместо кастомных примечаний ниже.",
-            "additional-response-headers": "Доп. хэдеры",
+            "additional-response-headers": "Response headers",
             "headers-that-will-be-sent-with-subscription-content": "Хэдеры будут отправлены вместе с содержимым подписки.",
             "randomize-hosts": "Перемешивать хосты",
             "randomize-hosts-description": "Хосты в случайном порядке в содержимом подписки",
