@@ -57,17 +57,23 @@ export function RecapContent() {
     const copy = async () => {
         setCopying(true)
         try {
-            const el = await getEl()
-            const blob = await domToBlob(el, {
-                backgroundColor: '#08080f',
-                scale: 2
-            })
-            if (!blob) throw new Error('blob')
-            await navigator.clipboard.write([new ClipboardItem({ 'image/png': blob })])
-        } catch {
+            const blobPromise = getEl()
+                .then((el) =>
+                    domToBlob(el, {
+                        backgroundColor: '#08080f',
+                        scale: 2
+                    })
+                )
+                .then((blob) => {
+                    if (!blob) throw new Error('blob')
+                    return blob
+                })
+
+            await navigator.clipboard.write([new ClipboardItem({ 'image/png': blobPromise })])
+        } catch (error) {
             notifications.show({
                 color: 'red',
-                message: 'Could not copy Recap',
+                message: `Could not copy Recap: ${error instanceof Error ? error.message : 'Unknown error'}`,
                 title: 'Error'
             })
         } finally {
