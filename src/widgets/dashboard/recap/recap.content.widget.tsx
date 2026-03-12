@@ -36,6 +36,7 @@ export function RecapContent() {
     const { data: recap, isLoading } = useGetRecap()
     const { t } = useTranslation()
 
+    const [cardKey, setCardKey] = useState(0)
     const [sections, setSections] = useState<string[]>(DEFAULT_SECTIONS)
     const [accent, setAccent] = useState(SWATCHES[0])
     const [copying, setCopying] = useState(false)
@@ -57,6 +58,12 @@ export function RecapContent() {
     const copy = async () => {
         setCopying(true)
         try {
+            setCardKey((k) => k + 1)
+
+            await new Promise<void>((resolve) => {
+                requestAnimationFrame(() => requestAnimationFrame(() => resolve()))
+            })
+
             const blobPromise = getEl()
                 .then((el) =>
                     domToBlob(el, {
@@ -84,6 +91,11 @@ export function RecapContent() {
     const download = async () => {
         setDownloading(true)
         try {
+            setCardKey((k) => k + 1)
+            await new Promise<void>((resolve) => {
+                requestAnimationFrame(() => requestAnimationFrame(() => resolve()))
+            })
+
             const el = await getEl()
             const url = await domToPng(el, {
                 backgroundColor: '#08080f',
@@ -218,6 +230,7 @@ export function RecapContent() {
             >
                 <div
                     className={classes.card}
+                    key={cardKey}
                     ref={ref}
                     style={{ border: `3px solid ${alpha(accent, 0.3)}` }}
                 >

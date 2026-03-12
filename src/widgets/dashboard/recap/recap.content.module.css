@@ -4,6 +4,7 @@
     border-radius: 14px;
     background: #08080f;
     position: relative;
+    user-select: none;
     overflow: hidden;
     font-family: 'Unbounded', sans-serif;
 }
