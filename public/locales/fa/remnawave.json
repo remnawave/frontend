@@ -836,7 +836,7 @@
             "show-custom-remarks": "نمایش توضیحات سفارشی",
             "show-custom-remark-description-line-1": "فقط برای کاربران منقضی‌شده، محدودشده و غیرفعال.",
             "show-custom-remark-description-line-2": "اگر این گزینه غیرفعال باشد - کاربران منقضی‌شده، محدودشده و غیرفعال به جای توضیحات سفارشی زیر، لیست واقعی هاست‌ها را دریافت خواهند کرد.",
-            "additional-response-headers": "هدرهای برگشتی اضافی",
+            "additional-response-headers": "Response headers",
             "headers-that-will-be-sent-with-subscription-content": "هدرهای اضافی که می‌خواهید همراه با محتوای اشتراک ارسال شوند را مشخص کنید.",
             "randomize-hosts": "هاست رندوم",
             "randomize-hosts-description": "استفاده از مقادیر رندوم برای هاست در اشتراک‌ها",
