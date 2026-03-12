@@ -322,34 +322,7 @@ export const useUserTableColumns = (
                     align: 'center'
                 }
             },
-            {
-                accessorKey: 'subLastUserAgent',
-                header: t('use-table-columns.last-ua'),
-                accessorFn: (originalRow) => originalRow.subLastUserAgent || '–',
-                minSize: 250,
-                size: 400,
-                mantineTableBodyCellProps: {
-                    align: 'center'
-                }
-            },
 
-            {
-                accessorKey: 'subLastOpenedAt',
-                header: t('use-table-columns.sub-last-opened-at'),
-                accessorFn: (originalRow) =>
-                    originalRow.subLastOpenedAt
-                        ? dayjs(originalRow.subLastOpenedAt).format('DD/MM/YYYY, HH:mm')
-                        : '–',
-                minSize: 250,
-                size: 400,
-
-                enableColumnFilterModes: false,
-                enableColumnFilter: false,
-
-                mantineTableBodyCellProps: {
-                    align: 'center'
-                }
-            },
             {
                 accessorKey: 'userTraffic.lifetimeUsedTrafficBytes',
                 header: t('use-table-columns.lifetime-used'),

@@ -232,14 +232,6 @@ export const DetailedUserInfoDrawerWidget = () => {
                                 />
 
                                 <CopyableFieldShared
-                                    label={t('detailed-user-info-drawer.widget.last-opened-at')}
-                                    value={formatDate(user.subLastOpenedAt)}
-                                />
-                                <CopyableFieldShared
-                                    label={t('detailed-user-info-drawer.widget.last-user-agent')}
-                                    value={user.subLastUserAgent || '—'}
-                                />
-                                <CopyableFieldShared
                                     label={t('detailed-user-info-drawer.widget.revoked-at')}
                                     value={formatDate(user.subRevokedAt)}
                                 />
