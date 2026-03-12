@@ -19,7 +19,7 @@ export function RecapControl() {
                 />
             ),
             centered: true,
-            size: '700px',
+            size: '980px',
             withCloseButton: true,
             children: <RecapContent />
         })

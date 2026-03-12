@@ -8,6 +8,29 @@
     font-family: 'Unbounded', sans-serif;
 }
 
+.controlPanel {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 10px;
+    padding: 14px;
+}
+
+.controlLabel {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.35);
+    margin-bottom: 8px;
+}
+
+.bgOverlay {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+}
+
 .glow {
     position: absolute;
     border-radius: 50%;
@@ -170,6 +193,16 @@
     text-transform: uppercase;
     color: rgba(255, 255, 255, 0.3);
     margin-top: 2px;
+}
+
+.customNote {
+    text-align: left;
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    color: rgba(255, 255, 255, 1);
+    position: relative;
+    z-index: 1;
 }
 
 .footer {

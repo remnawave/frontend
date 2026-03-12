@@ -3,15 +3,15 @@ import {
     Button,
     Center,
     ColorPicker,
-    Divider,
     Group,
     Loader,
     Stack,
-    Switch
+    Switch,
+    TextInput
 } from '@mantine/core'
+import { TbCheck, TbCopy, TbDownload, TbX } from 'react-icons/tb'
 import { domToBlob, domToPng } from 'modern-screenshot'
 import { notifications } from '@mantine/notifications'
-import { TbCopy, TbDownload } from 'react-icons/tb'
 import { useTranslation } from 'react-i18next'
 import { useRef, useState } from 'react'
 import { motion } from 'motion/react'
@@ -21,7 +21,15 @@ import { useGetRecap } from '@shared/api/hooks/system/system.query.hooks'
 import { prettyBytesToAnyUtil } from '@shared/utils/bytes'
 import { Logo } from '@shared/ui/logo'
 
-import { CARD_SECTIONS, DEFAULT_SECTIONS, SWATCHES } from './recap.constants'
+import type { BgStyle, MaskableField } from './recap.constants'
+
+import {
+    BG_STYLES,
+    CARD_SECTIONS,
+    DEFAULT_SECTIONS,
+    MASKABLE_FIELDS,
+    SWATCHES
+} from './recap.constants'
 import classes from './recap.content.module.css'
 
 export function RecapContent() {
@@ -32,6 +40,9 @@ export function RecapContent() {
     const [accent, setAccent] = useState(SWATCHES[0])
     const [copying, setCopying] = useState(false)
     const [downloading, setDownloading] = useState(false)
+    const [maskedFields, setMaskedFields] = useState<string[]>([])
+    const [customNote, setCustomNote] = useState('')
+    const [bgStyle, setBgStyle] = useState<BgStyle>('solid')
 
     const ref = useRef<HTMLDivElement>(null)
 
@@ -105,71 +116,92 @@ export function RecapContent() {
         }).format(value)
     }
 
+    const getBgOverlay = (): null | React.CSSProperties => {
+        switch (bgStyle) {
+            case 'dots':
+                return {
+                    backgroundImage: `radial-gradient(${alpha(accent, 0.12)} 1px, transparent 1px)`,
+                    backgroundSize: '16px 16px'
+                }
+            case 'gradient':
+                return {
+                    background: `linear-gradient(135deg, transparent 0%, ${alpha(accent, 0.08)} 50%, transparent 100%)`
+                }
+            case 'grid':
+                return {
+                    backgroundImage: `linear-gradient(${alpha(accent, 0.06)} 1px, transparent 1px), linear-gradient(90deg, ${alpha(accent, 0.06)} 1px, transparent 1px)`,
+                    backgroundSize: '24px 24px'
+                }
+            default:
+                return null
+        }
+    }
+
+    const bgOverlay = getBgOverlay()
+
+    const MASK = '\u{1F648}'
+    const m = (field: MaskableField, value: number | string | undefined) =>
+        maskedFields.includes(field) ? MASK : value
+
     return (
-        <Group align="center" gap="xl" justify="center" wrap="nowrap">
+        <Group align="center" gap="sm" justify="center" wrap="nowrap">
             <motion.div
                 animate={{ opacity: 1, scale: 1 }}
                 initial={{ opacity: 0, scale: 1 }}
                 transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
             >
-                <Stack gap="md" style={{ flexShrink: 0 }}>
-                    <Stack gap="xs">
-                        {CARD_SECTIONS.map((s) => (
-                            <Switch
-                                checked={sections.includes(s.value)}
-                                key={s.value}
-                                label={s.label}
-                                onChange={(e) => {
-                                    const { checked } = e.currentTarget
-                                    setSections((prev) =>
-                                        checked
-                                            ? [...prev, s.value]
-                                            : prev.filter((v) => v !== s.value)
-                                    )
-                                }}
-                                size="sm"
-                            />
-                        ))}
-                    </Stack>
+                <Stack gap="sm" style={{ flexShrink: 0, width: 270 }}>
+                    <div className={classes.controlPanel}>
+                        <div className={classes.controlLabel}>Sections</div>
+                        <Stack gap="xs">
+                            {CARD_SECTIONS.map((s) => (
+                                <Switch
+                                    checked={sections.includes(s.value)}
+                                    key={s.value}
+                                    label={s.label}
+                                    onChange={(e) => {
+                                        const { checked } = e.currentTarget
+                                        setSections((prev) =>
+                                            checked
+                                                ? [...prev, s.value]
+                                                : prev.filter((v) => v !== s.value)
+                                        )
+                                    }}
+                                    size="sm"
+                                />
+                            ))}
+                        </Stack>
+                    </div>
 
-                    <Divider />
-
-                    <ColorPicker
-                        format="rgb"
-                        onChange={setAccent}
-                        swatches={SWATCHES}
-                        swatchesPerRow={8}
-                        value={accent}
-                        withPicker
-                    />
-
-                    <Divider />
-
-                    <Group gap="xs">
-                        <Button
-                            color={accent}
-                            fullWidth
-                            leftSection={<TbCopy size={14} />}
-                            loading={copying}
-                            onClick={copy}
-                            radius="md"
-                            size="sm"
-                            variant="filled"
-                        >
-                            {t('common.copy')}
-                        </Button>
-                        <Button
-                            fullWidth
-                            leftSection={<TbDownload size={14} />}
-                            loading={downloading}
-                            onClick={download}
-                            radius="md"
-                            size="sm"
-                            variant="default"
-                        >
-                            {t('common.download')}
-                        </Button>
-                    </Group>
+                    <div className={classes.controlPanel}>
+                        <div className={classes.controlLabel}>Mask fields</div>
+                        <Group gap={4}>
+                            {MASKABLE_FIELDS.map((f) => {
+                                const active = maskedFields.includes(f.value)
+                                return (
+                                    <Button
+                                        color={!active ? 'teal' : 'gray'}
+                                        key={f.value}
+                                        leftSection={
+                                            !active ? <TbCheck size={16} /> : <TbX size={16} />
+                                        }
+                                        onClick={() =>
+                                            setMaskedFields((prev) =>
+                                                active
+                                                    ? prev.filter((v) => v !== f.value)
+                                                    : [...prev, f.value]
+                                            )
+                                        }
+                                        radius="md"
+                                        size="compact-sm"
+                                        variant="soft"
+                                    >
+                                        {f.label}
+                                    </Button>
+                                )
+                            })}
+                        </Group>
+                    </div>
                 </Stack>
             </motion.div>
 
@@ -198,6 +230,8 @@ export function RecapContent() {
                         style={{ background: accent }}
                     />
 
+                    {bgOverlay && <div className={classes.bgOverlay} style={bgOverlay} />}
+
                     <div className={classes.brand}>
                         <Logo size={24} style={{ color: accent }} />
                         <span className={classes.brandName}>
@@ -207,7 +241,7 @@ export function RecapContent() {
 
                     <div className={classes.hero}>
                         <div className={classes.heroValue} style={{ color: accent }}>
-                            {formatInt(recap.total.users)}
+                            {m('totalUsers', formatInt(recap.total.users))}
                         </div>
                         <div className={classes.heroLabel}>total users</div>
                     </div>
@@ -216,13 +250,16 @@ export function RecapContent() {
                         <div className={classes.statsRow}>
                             <div className={classes.stat}>
                                 <div className={classes.statValue}>
-                                    {formatInt(recap.total.nodes)}
+                                    {m('nodes', formatInt(recap.total.nodes))}
                                 </div>
                                 <div className={classes.statLabel}>nodes</div>
                             </div>
                             <div className={classes.stat}>
                                 <div className={classes.statValue}>
-                                    {prettyBytesToAnyUtil(recap.total.traffic, true)}
+                                    {m(
+                                        'totalTraffic',
+                                        prettyBytesToAnyUtil(recap.total.traffic, true)
+                                    )}
                                 </div>
                                 <div className={classes.statLabel}>traffic</div>
                             </div>
@@ -239,13 +276,16 @@ export function RecapContent() {
                                 <div className={classes.monthGrid}>
                                     <div className={classes.monthItem}>
                                         <div className={classes.monthValue}>
-                                            {formatInt(recap.thisMonth.users)}
+                                            {m('monthUsers', formatInt(recap.thisMonth.users))}
                                         </div>
                                         <div className={classes.monthLabel}>new users</div>
                                     </div>
                                     <div className={classes.monthItem}>
                                         <div className={classes.monthValue}>
-                                            {prettyBytesToAnyUtil(recap.thisMonth.traffic)}
+                                            {m(
+                                                'monthTraffic',
+                                                prettyBytesToAnyUtil(recap.thisMonth.traffic)
+                                            )}
                                         </div>
                                         <div className={classes.monthLabel}>traffic</div>
                                     </div>
@@ -262,19 +302,25 @@ export function RecapContent() {
                                 <div className={classes.infraGrid}>
                                     <div>
                                         <div className={classes.infraValue}>
-                                            {formatInt(recap.total.distinctCountries)}
+                                            {m(
+                                                'countries',
+                                                formatInt(recap.total.distinctCountries)
+                                            )}
                                         </div>
                                         <div className={classes.infraLabel}>countries</div>
                                     </div>
                                     <div>
                                         <div className={classes.infraValue}>
-                                            {formatInt(recap.total.nodesCpuCores)}
+                                            {m('cpuCores', formatInt(recap.total.nodesCpuCores))}
                                         </div>
                                         <div className={classes.infraLabel}>CPU cores</div>
                                     </div>
                                     <div>
                                         <div className={classes.infraValue}>
-                                            {prettyBytesToAnyUtil(recap.total.nodesRam, true)}
+                                            {m(
+                                                'ram',
+                                                prettyBytesToAnyUtil(recap.total.nodesRam, true)
+                                            )}
                                         </div>
                                         <div className={classes.infraLabel}>RAM</div>
                                     </div>
@@ -285,6 +331,12 @@ export function RecapContent() {
 
                     {sections.length > 0 && (
                         <div className={classes.divider} style={gradientLine} />
+                    )}
+
+                    {customNote && (
+                        <div className={classes.customNote} style={{ color: accent }}>
+                            {customNote}
+                        </div>
                     )}
 
                     <div className={classes.footer}>
@@ -302,6 +354,82 @@ export function RecapContent() {
                         </span>
                     </div>
                 </div>
+            </motion.div>
+
+            <motion.div
+                animate={{ opacity: 1, scale: 1 }}
+                initial={{ opacity: 0, scale: 1 }}
+                transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
+            >
+                <Stack gap="sm" style={{ flexShrink: 0, width: 270 }}>
+                    <div className={classes.controlPanel}>
+                        <div className={classes.controlLabel}>Background</div>
+                        <Group gap={4}>
+                            {BG_STYLES.map((s) => (
+                                <Button
+                                    color={bgStyle === s.value ? 'teal' : 'gray'}
+                                    key={s.value}
+                                    onClick={() => setBgStyle(s.value)}
+                                    radius="md"
+                                    size="compact-sm"
+                                    variant="soft"
+                                >
+                                    {s.label}
+                                </Button>
+                            ))}
+                        </Group>
+                    </div>
+
+                    <div className={classes.controlPanel}>
+                        <div className={classes.controlLabel}>Custom note</div>
+                        <TextInput
+                            maxLength={40}
+                            onChange={(e) => setCustomNote(e.currentTarget.value)}
+                            placeholder="RW <3"
+                            size="xs"
+                            value={customNote}
+                        />
+                    </div>
+
+                    <div className={classes.controlPanel}>
+                        <div className={classes.controlLabel}>Accent color</div>
+                        <ColorPicker
+                            format="rgb"
+                            onChange={setAccent}
+                            size="md"
+                            swatches={SWATCHES}
+                            swatchesPerRow={8}
+                            value={accent}
+                            withPicker
+                        />
+                    </div>
+
+                    <Group gap="xs">
+                        <Button
+                            color={accent}
+                            fullWidth
+                            leftSection={<TbCopy size={14} />}
+                            loading={copying}
+                            onClick={copy}
+                            radius="md"
+                            size="sm"
+                            variant="filled"
+                        >
+                            {t('common.copy')}
+                        </Button>
+                        <Button
+                            fullWidth
+                            leftSection={<TbDownload size={14} />}
+                            loading={downloading}
+                            onClick={download}
+                            radius="md"
+                            size="sm"
+                            variant="default"
+                        >
+                            {t('common.download')}
+                        </Button>
+                    </Group>
+                </Stack>
             </motion.div>
         </Group>
     )

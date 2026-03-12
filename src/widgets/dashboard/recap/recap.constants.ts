@@ -26,3 +26,33 @@ export const CARD_SECTIONS: { label: string; value: CardSection }[] = [
 ]
 
 export const DEFAULT_SECTIONS: CardSection[] = ['stats', 'month', 'infra']
+
+export type BgStyle = 'dots' | 'gradient' | 'grid' | 'solid'
+
+export const BG_STYLES: { label: string; value: BgStyle }[] = [
+    { label: 'Solid', value: 'solid' },
+    { label: 'Gradient', value: 'gradient' },
+    { label: 'Dots', value: 'dots' },
+    { label: 'Grid', value: 'grid' }
+]
+
+export type MaskableField =
+    | 'countries'
+    | 'cpuCores'
+    | 'monthTraffic'
+    | 'monthUsers'
+    | 'nodes'
+    | 'ram'
+    | 'totalTraffic'
+    | 'totalUsers'
+
+export const MASKABLE_FIELDS: { label: string; value: MaskableField }[] = [
+    { label: 'Users', value: 'totalUsers' },
+    { label: 'Nodes', value: 'nodes' },
+    { label: 'Traffic', value: 'totalTraffic' },
+    { label: 'New users', value: 'monthUsers' },
+    { label: 'Month traffic', value: 'monthTraffic' },
+    { label: 'Countries', value: 'countries' },
+    { label: 'CPU cores', value: 'cpuCores' },
+    { label: 'RAM', value: 'ram' }
+]
