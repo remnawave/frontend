@@ -776,11 +776,11 @@
         "widget": {
             "title": "活跃会话",
             "requirements": "需求",
-            "warning-activity": "An IP address will be shown when <highlight>Xray-Core</highlight> considers the <highlight>connection still open</highlight>. This may result in some displayed IP addresses that are no longer actually connected. Use the <highlight>clock</highlight> icon to track the last activity of a given IP.",
+            "warning-activity": "当 <highlight>Xray-Core</highlight> 认为 <highlight>连接仍然打开</highlight>时，将显示IP地址。 这可能导致某些显示的IP地址实际未连接。 使用 <highlight>时钟</highlight> 图标跟踪指定IP的最后活动。",
             "warning-version": "Remnawave 节点版本 <highlight>{{version}}</highlight> 或者更高",
             "warning-docker": "将以下内容添加到 Remnawave 节点的 <highlight>docker-compose.yml</highlight> 内(/opt/remnanode)",
             "warning-patience": "获取数据可能需要一些时间，不要关闭此窗口！",
-            "warning-n-plus-one": "<highlight>Please note</highlight>: this request performs <highlight>N+1</highlight> operations to gRPC API of <highlight>Xray-Core</highlight> due to the lack of bulk data retrieval methods. <highlight>N</highlight> is the number of users currently online on the given node.",
+            "warning-n-plus-one": "<highlight>请注意</highlight>: 由于缺乏批量数据检索方法，此请求会使 <highlight>Xray-Core</highlight> 的 gRPC API 执行<highlight>N+1</highlight> 次操作。 <highlight>N</highlight> 是当前给定节点上的在线用户数。",
             "get-data": "获取数据",
             "fetching": "正在获取活动会话...",
             "progress": "已完成 {{completed}} 个，共 {{total}} 个",
@@ -836,7 +836,7 @@
             "show-custom-remarks": "显示自定义备注",
             "show-custom-remark-description-line-1": "仅适用于过期、受限和禁用用户。",
             "show-custom-remark-description-line-2": "如果禁用此设置，过期、受限和禁用用户将收到实际为空的主机列表。",
-            "additional-response-headers": "Response headers",
+            "additional-response-headers": "响应头",
             "headers-that-will-be-sent-with-subscription-content": "将与订阅内容一起发送的响应头。",
             "randomize-hosts": "随机化主机",
             "randomize-hosts-description": "在订阅内容中随机排序主机",
@@ -2018,8 +2018,8 @@
             "distinct-nodes": "不同的节点",
             "distinct-users": "不同的用户",
             "last-24-hours": "最近24小时",
-            "by-report-count": "By report count",
-            "top-users": "Top Users"
+            "by-report-count": "根据报表计数",
+            "top-users": "用户排行"
         }
     },
     "torrent-blocker-reports-table": {
@@ -2031,14 +2031,14 @@
     "node-active-session": {
         "item": {
             "widget": {
-                "view-user": "View User"
+                "view-user": "查看用户"
             }
         }
     },
     "node-active-sessions": {
         "drawer": {
             "widget": {
-                "active-users-on-this-node": "Active users on this node"
+                "active-users-on-this-node": "在此节点上的活跃用户"
             }
         }
     }
