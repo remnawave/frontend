@@ -14,7 +14,7 @@ export function DataUsageColumnEntity(props: IProps) {
     const limitBytes = user.trafficLimitBytes
     const lifetimeBytes = user.userTraffic.lifetimeUsedTrafficBytes
     const isUnlimited = limitBytes === 0
-    const percentage = isUnlimited ? 0 : Math.floor((usedBytes * 100) / limitBytes)
+    const percentage = isUnlimited ? 0 : (usedBytes * 100) / limitBytes
 
     const strategy = {
         [RESET_PERIODS.MONTH]: t('data-usage.column.monthly'),
