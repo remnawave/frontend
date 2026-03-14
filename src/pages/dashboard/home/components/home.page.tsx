@@ -1,5 +1,9 @@
-import { Box, SimpleGrid, Stack, Title } from '@mantine/core'
+import { ActionIcon, Box, Group, SimpleGrid, Stack, Title } from '@mantine/core'
+import { notifications } from '@mantine/notifications'
+import { PiCameraDuotone } from 'react-icons/pi'
 import { useTranslation } from 'react-i18next'
+import { domToBlob } from 'modern-screenshot'
+import { useRef, useState } from 'react'
 
 import { MetricCardShared, MetricCardWithTrendShared } from '@shared/ui/metrics/metric-card'
 import { LoadingScreen } from '@shared/ui'
@@ -31,7 +35,34 @@ const AnimatedCard = ({ children, index }: IAnimatedCardProps) => (
 export const HomePage = (props: IProps) => {
     const { t } = useTranslation()
 
+    const runtimeRef = useRef<HTMLDivElement>(null)
+    const [copying, setCopying] = useState(false)
+
     const { systemInfo, bandwidthStats, remnawaveHealth } = props
+
+    const copyRuntimeScreenshot = async () => {
+        if (!runtimeRef.current || copying) return
+        setCopying(true)
+        try {
+            const el = runtimeRef.current
+            const blobPromise = domToBlob(el, {
+                backgroundColor: '#1a1b1e',
+                scale: 2
+            }).then((blob) => {
+                if (!blob) throw new Error('Failed to capture')
+                return blob
+            })
+            await navigator.clipboard.write([new ClipboardItem({ 'image/png': blobPromise })])
+        } catch {
+            notifications.show({
+                color: 'red',
+                message: 'Failed to copy screenshot',
+                title: 'Error'
+            })
+        } finally {
+            setCopying(false)
+        }
+    }
 
     if (!systemInfo || !bandwidthStats || !remnawaveHealth) {
         return <LoadingScreen />
@@ -153,10 +184,22 @@ export const HomePage = (props: IProps) => {
 
                 {remnawaveHealth.runtimeMetrics && remnawaveHealth.runtimeMetrics.length > 0 && (
                     <div className={classes.section}>
-                        <Title className={classes.title} m="xs" ml={0} order={4}>
-                            Runtime
-                        </Title>
-                        <SimpleGrid cols={{ base: 1, sm: 1, xl: 2 }} spacing="xs">
+                        <Group align="center" gap="xs" m="xs" ml={0}>
+                            <Title className={classes.title} order={4}>
+                                Runtime
+                            </Title>
+
+                            <ActionIcon
+                                color="gray"
+                                loading={copying}
+                                onClick={copyRuntimeScreenshot}
+                                size="sm"
+                                variant="subtle"
+                            >
+                                <PiCameraDuotone size={16} />
+                            </ActionIcon>
+                        </Group>
+                        <SimpleGrid cols={{ base: 1, sm: 1, xl: 2 }} ref={runtimeRef} spacing="xs">
                             {remnawaveHealth.runtimeMetrics.map((metric, index) => (
                                 <AnimatedCard index={index} key={metric.pid}>
                                     <RuntimeDetailCard metric={metric} />
