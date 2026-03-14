@@ -22,7 +22,8 @@ const DEFAULT_VISIBILITY: MRT_VisibilityState = {
     uuid: false,
     externalSquadUuid: false,
     vlessUuid: false,
-    trojanPassword: false
+    trojanPassword: false,
+    hwidDeviceLimit: false
 }
 
 const DEFAULT_COLUMN_SIZE: MRT_ColumnSizingState = {
@@ -105,7 +106,7 @@ export const useUsersTableStore = create<IActions & IState>()(
 
         {
             name: 'x-rmnw-users-table',
-            version: 7,
+            version: 8,
             storage: createJSONStorage(() => localStorage),
             partialize: (state) => ({
                 columnVisibility: state.columnVisibility,

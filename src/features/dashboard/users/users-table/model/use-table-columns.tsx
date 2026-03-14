@@ -39,11 +39,15 @@ export const useUserTableColumns = (
                 },
                 minSize: 150,
                 maxSize: 300,
-                size: 220
+                size: 220,
+                columnFilterModeOptions: ['contains', 'equals', 'startsWith', 'endsWith'],
+                enableColumnFilterModes: true,
+                enableColumnFilter: true
             },
             {
                 accessorKey: 'id',
                 header: 'ID',
+                enableColumnFilterModes: false,
                 accessorFn: (originalRow) => originalRow.id,
                 size: 80
             },
@@ -54,9 +58,6 @@ export const useUserTableColumns = (
                 filterVariant: 'select',
                 enableColumnFilterModes: false,
                 enableSorting: false,
-                mantineFilterSelectProps: {
-                    data: ['ACTIVE', 'DISABLED', 'LIMITED', 'EXPIRED']
-                },
                 mantineTableBodyCellProps: {
                     align: 'center'
                 }
@@ -93,6 +94,7 @@ export const useUserTableColumns = (
                     }
                 },
                 enableSorting: false,
+                enableColumnFilterModes: false,
                 mantineTableBodyCellProps: {
                     align: 'center'
                 }
@@ -127,7 +129,7 @@ export const useUserTableColumns = (
                 accessorFn: (originalRow) => originalRow.shortUuid,
                 minSize: 400,
                 maxSize: 800,
-
+                enableColumnFilterModes: false,
                 mantineTableBodyCellProps: {
                     align: 'center'
                 }
@@ -139,7 +141,7 @@ export const useUserTableColumns = (
                 accessorFn: (originalRow) => originalRow.description || '–',
                 minSize: 250,
                 size: 400,
-
+                enableColumnFilterModes: false,
                 mantineTableBodyCellProps: {
                     align: 'center',
                     style: { whiteSpace: 'normal', wordBreak: 'break-word' }
@@ -152,6 +154,7 @@ export const useUserTableColumns = (
                 accessorFn: (originalRow) => originalRow.telegramId || '–',
                 minSize: 100,
                 size: 200,
+                enableColumnFilterModes: false,
                 mantineTableBodyCellProps: {
                     align: 'center'
                 }
@@ -165,8 +168,20 @@ export const useUserTableColumns = (
                         {cell.row.original.tag || '–'}
                     </Text>
                 ),
+
                 mantineTableBodyCellProps: {
                     align: 'center'
+                },
+
+                columnFilterModeOptions: ['equals'],
+                enableColumnFilterModes: false,
+                enableColumnFilter: true,
+                filterVariant: 'multi-select',
+                mantineFilterSelectProps: {
+                    comboboxProps: {
+                        transitionProps: { transition: 'fade', duration: 200 }
+                    },
+                    checkIconPosition: 'left'
                 }
             },
 
@@ -261,6 +276,7 @@ export const useUserTableColumns = (
                 accessorFn: (originalRow) => originalRow.email || '–',
                 minSize: 100,
                 size: 200,
+                enableColumnFilterModes: false,
                 mantineTableBodyCellProps: {
                     align: 'center'
                 }
@@ -375,6 +391,7 @@ export const useUserTableColumns = (
                 accessorFn: (originalRow) => originalRow.uuid,
                 minSize: 400,
                 maxSize: 800,
+                enableColumnFilterModes: false,
 
                 mantineTableBodyCellProps: {
                     align: 'center'
@@ -385,6 +402,7 @@ export const useUserTableColumns = (
                 header: 'Vless UUID',
                 accessorFn: (originalRow) => originalRow.vlessUuid,
                 minSize: 400,
+                enableColumnFilterModes: false,
                 maxSize: 800,
                 mantineTableBodyCellProps: {
                     align: 'center'
@@ -396,8 +414,29 @@ export const useUserTableColumns = (
                 accessorFn: (originalRow) => originalRow.trojanPassword,
                 minSize: 400,
                 maxSize: 800,
+                enableColumnFilterModes: false,
                 mantineTableBodyCellProps: {
                     align: 'center'
+                }
+            },
+            {
+                accessorKey: 'hwidDeviceLimit',
+                header: 'HWID Device Limit',
+                accessorFn: (originalRow) => originalRow.hwidDeviceLimit ?? '–',
+                columnFilterModeOptions: [
+                    'equals',
+                    'greaterThan',
+                    'greaterThanOrEqualTo',
+                    'lessThan',
+                    'lessThanOrEqualTo',
+                    'between'
+                ],
+                enableColumnFilterModes: true,
+                enableColumnFilter: true,
+                mantineFilterInputProps: {
+                    type: 'number',
+                    min: 0,
+                    max: 9_999
                 }
             }
         ],

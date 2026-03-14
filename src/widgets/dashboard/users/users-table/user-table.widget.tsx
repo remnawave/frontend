@@ -6,6 +6,7 @@ import {
     useMantineReactTable
 } from 'mantine-react-table'
 import { useEffect, useLayoutEffect, useState } from 'react'
+import { TbSearch, TbSearchOff } from 'react-icons/tb'
 import { notifications } from '@mantine/notifications'
 import { useSearchParams } from 'react-router-dom'
 import { PiUsersDuotone } from 'react-icons/pi'
@@ -24,13 +25,14 @@ import {
     useBulkUsersActionsStoreActions,
     useBulkUsersActionsStoreTableSelection
 } from '@entities/dashboard/users/bulk-users-actions-store'
-import { UsersTableSelectionFeature } from '@features/ui/dashboard/users/users-table-selection/users-table-selection.feature'
 import {
     useGetExternalSquads,
     useGetInternalSquads,
     useGetNodes,
-    useGetUsersV2
+    useGetUsersV2,
+    useGetUserTags
 } from '@shared/api/hooks'
+import { UsersTableSelectionFeature } from '@features/ui/dashboard/users/users-table-selection/users-table-selection.feature'
 import { useUserTableColumns } from '@features/dashboard/users/users-table/model/use-table-columns'
 import { UserActionGroupFeature } from '@features/dashboard/users/users-action-group'
 import { useUserModalStoreActions } from '@entities/dashboard/user-modal-store'
@@ -47,6 +49,7 @@ export function UserTableWidget() {
     const { data: internalSquads } = useGetInternalSquads()
     const { data: externalSquads } = useGetExternalSquads()
     const { data: nodes } = useGetNodes()
+    const { data: tags } = useGetUserTags()
 
     const tableColumns = useUserTableColumns(internalSquads, externalSquads, nodes)
     const bulkUsersActionsStoreActions = useBulkUsersActionsStoreActions()
@@ -65,8 +68,18 @@ export function UserTableWidget() {
 
     const [sorting, setSorting] = useState<MRT_SortingState>([])
 
-    const [columnFilterFns, setColumnFilterFns] = useState<MRT_ColumnFilterFnsState>(
-        Object.fromEntries(tableColumns.map(({ accessorKey }) => [accessorKey, 'contains']))
+    const defaultFilterFns: Record<string, string> = {
+        hwidDeviceLimit: 'equals',
+        tag: 'equals'
+    }
+
+    const [columnFilterFns, setColumnFilterFns] = useState<MRT_ColumnFilterFnsState>(() =>
+        Object.fromEntries(
+            tableColumns.map(({ accessorKey }) => [
+                accessorKey,
+                defaultFilterFns[accessorKey!] ?? 'contains'
+            ])
+        )
     )
 
     useLayoutEffect(() => {
@@ -113,11 +126,29 @@ export function UserTableWidget() {
     const table = useMantineReactTable({
         columns: tableColumns,
         data: usersResponse?.users ?? [],
+        enableFacetedValues: true,
+        getFacetedUniqueValues: (_table, columnId) => () => {
+            if (columnId === 'tag') {
+                return new Map<string, number>(tags?.tags.map((tag) => [tag, 0]) ?? [])
+            }
+            if (columnId === 'status') {
+                return new Map<string, number>(
+                    ['ACTIVE', 'DISABLED', 'LIMITED', 'EXPIRED'].map((status) => [status, 0]) ?? []
+                )
+            }
+            return new Map<string, number>()
+        },
+        columnFilterDisplayMode: 'subheader',
+        icons: {
+            /* eslint-disable @typescript-eslint/no-explicit-any */
+            IconFilter: (props: any) => <TbSearch size={24} {...props} />,
+            IconFilterOff: (props: any) => <TbSearchOff size={24} {...props} />
+        },
         enableFullScreenToggle: true,
         enableSortingRemoval: true,
         enableGlobalFilter: false,
         enableClickToCopy: false,
-        // enableColumnFilterModes: true,
+        enableColumnFilterModes: true,
         columnFilterModeOptions: ['contains'],
         initialState: {
             pagination: {
@@ -155,7 +186,9 @@ export function UserTableWidget() {
         onShowColumnFiltersChange: actions.setShowColumnFilters,
         onColumnSizingChange: actions.setColumnSize,
         mantinePaperProps: {
-            style: { '--paper-radius': 'var(--mantine-radius-xs)' },
+            style: {
+                '--paper-radius': 'var(--mantine-radius-xs)'
+            },
             withBorder: false
         },
         rowCount: usersResponse?.total ?? 0,
