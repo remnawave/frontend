@@ -8,11 +8,12 @@ import { Page } from '@shared/ui/page'
 import {
     getBandwidthMetrics,
     getOnlineMetrics,
-    getPm2ProcessMetrics,
-    getPm2SummaryMetrics,
+    getRuntimeProcessMetrics,
+    getRuntimeSummaryMetrics,
     getSimpleMetrics,
     getUsersMetrics
 } from './metrics'
+import { RuntimeDetailCard } from './runtime-detail-card'
 import classes from './home.module.css'
 import { IProps } from './interfaces'
 
@@ -40,20 +41,20 @@ export const HomePage = (props: IProps) => {
     const simpleMetrics = getSimpleMetrics(systemInfo, t)
     const usersMetrics = getUsersMetrics(systemInfo.users, t)
     const onlineMetrics = getOnlineMetrics(systemInfo.onlineStats, t)
-    const pm2SummaryMetrics = getPm2SummaryMetrics(remnawaveHealth.pm2Stats, t)
-    const pm2ProcessMetrics = getPm2ProcessMetrics(remnawaveHealth.pm2Stats)
+    const runtimeSummaryMetrics = getRuntimeSummaryMetrics(remnawaveHealth.runtimeMetrics, t)
+    const runtimeProcessMetrics = getRuntimeProcessMetrics(remnawaveHealth.runtimeMetrics)
 
     return (
         <Page title={t('constants.home')}>
             <Stack gap="sm">
-                {pm2SummaryMetrics.length > 0 && (
+                {runtimeSummaryMetrics.length > 0 && (
                     <div className={classes.section}>
                         <Title className={classes.title} m="xs" ml={0} order={4}>
                             {t('home.page.remnawave-usage')}
                         </Title>
 
                         <SimpleGrid cols={{ base: 1, sm: 2, xl: 4 }} spacing="xs">
-                            {pm2SummaryMetrics.map((metric, index) => (
+                            {runtimeSummaryMetrics.map((metric, index) => (
                                 <AnimatedCard index={index} key={metric.title}>
                                     <MetricCardShared {...metric} />
                                 </AnimatedCard>
@@ -62,13 +63,13 @@ export const HomePage = (props: IProps) => {
                     </div>
                 )}
 
-                {pm2ProcessMetrics.length > 0 && (
+                {runtimeProcessMetrics.length > 0 && (
                     <div className={classes.section}>
                         <Title className={classes.title} m="xs" ml={0} order={4}>
                             {t('home.page.process-details')}
                         </Title>
                         <SimpleGrid cols={{ base: 1, sm: 2, xl: 4 }} spacing="xs">
-                            {pm2ProcessMetrics.map((metric, index) => (
+                            {runtimeProcessMetrics.map((metric, index) => (
                                 <AnimatedCard index={index} key={metric.title}>
                                     <MetricCardShared {...metric} />
                                 </AnimatedCard>
@@ -149,6 +150,21 @@ export const HomePage = (props: IProps) => {
                         ))}
                     </SimpleGrid>
                 </div>
+
+                {remnawaveHealth.runtimeMetrics && remnawaveHealth.runtimeMetrics.length > 0 && (
+                    <div className={classes.section}>
+                        <Title className={classes.title} m="xs" ml={0} order={4}>
+                            Runtime
+                        </Title>
+                        <SimpleGrid cols={{ base: 1, sm: 1, xl: 2 }} spacing="xs">
+                            {remnawaveHealth.runtimeMetrics.map((metric, index) => (
+                                <AnimatedCard index={index} key={metric.pid}>
+                                    <RuntimeDetailCard metric={metric} />
+                                </AnimatedCard>
+                            ))}
+                        </SimpleGrid>
+                    </div>
+                )}
             </Stack>
         </Page>
     )
