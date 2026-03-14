@@ -1,8 +1,8 @@
 import { ActionIcon, Box, Group, SimpleGrid, Stack, Title } from '@mantine/core'
 import { notifications } from '@mantine/notifications'
-import { PiCameraDuotone } from 'react-icons/pi'
 import { useTranslation } from 'react-i18next'
 import { domToBlob } from 'modern-screenshot'
+import { TbCamera } from 'react-icons/tb'
 import { useRef, useState } from 'react'
 
 import { MetricCardShared, MetricCardWithTrendShared } from '@shared/ui/metrics/metric-card'
@@ -45,6 +45,9 @@ export const HomePage = (props: IProps) => {
         setCopying(true)
         try {
             const el = runtimeRef.current
+            await new Promise<void>((resolve) => {
+                setTimeout(resolve, 100)
+            })
             const blobPromise = domToBlob(el, {
                 backgroundColor: '#1a1b1e',
                 scale: 2
@@ -192,11 +195,12 @@ export const HomePage = (props: IProps) => {
                             <ActionIcon
                                 color="gray"
                                 loading={copying}
-                                onClick={copyRuntimeScreenshot}
+                                onClick={() => copyRuntimeScreenshot()}
+                                radius="md"
                                 size="sm"
-                                variant="subtle"
+                                variant="transparent"
                             >
-                                <PiCameraDuotone size={16} />
+                                <TbCamera size={24} />
                             </ActionIcon>
                         </Group>
                         <SimpleGrid cols={{ base: 1, sm: 1, xl: 2 }} ref={runtimeRef} spacing="xs">
