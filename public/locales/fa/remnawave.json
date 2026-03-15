@@ -516,14 +516,16 @@
             "reset-monthly": "بازنشانی ماهانه",
             "reset-weekly": "بازنشانی هفتگی",
             "reset-daily": "بازنشانی روزانه",
-            "never-reset": "هیچ‌گاه بازنشانی نشود"
+            "never-reset": "هیچ‌گاه بازنشانی نشود",
+            "reset-monthly-by-creation-date": "Reset monthly (by creation date)"
         }
     },
     "data-usage": {
         "column": {
             "monthly": "ماهانه",
             "weekly": "هفتگی",
-            "daily": "روزانه"
+            "daily": "روزانه",
+            "monthly-rolling": "Monthly (rolling)"
         }
     },
     "get-time-ago": {
@@ -1325,6 +1327,19 @@
             "additional-languages": "زبان‌های بیشتر",
             "english-is-always-enabled": "انگلیسی همیشه فعال می‌باشد",
             "english": "انگلیسی"
+        }
+    },
+    "node-system-card": {
+        "widget": {
+            "system-info": "System Info",
+            "memory": "Memory",
+            "used": "Used",
+            "free": "Free",
+            "total": "Total",
+            "system": "System",
+            "system-uptime": "System Uptime",
+            "network": "Network",
+            "kernel": "Kernel"
         }
     },
     "node-stats": {

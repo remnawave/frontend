@@ -516,14 +516,16 @@
             "reset-monthly": "Сброс ежемесячно",
             "reset-weekly": "Сброс еженедельно",
             "reset-daily": "Сброс ежедневно",
-            "never-reset": "Никогда не сбрасывать"
+            "never-reset": "Никогда не сбрасывать",
+            "reset-monthly-by-creation-date": "Сброс ежемесячно (по дате создания)"
         }
     },
     "data-usage": {
         "column": {
             "monthly": "Ежемесячно",
             "weekly": "Еженедельно",
-            "daily": "Ежедневно"
+            "daily": "Ежедневно",
+            "monthly-rolling": "Ежемесячно (скользящий)"
         }
     },
     "get-time-ago": {
@@ -1325,6 +1327,19 @@
             "additional-languages": "Дополнительные языки",
             "english-is-always-enabled": "Английский всегда включен",
             "english": "Английский"
+        }
+    },
+    "node-system-card": {
+        "widget": {
+            "system-info": "System Info",
+            "memory": "Memory",
+            "used": "Used",
+            "free": "Free",
+            "total": "Total",
+            "system": "System",
+            "system-uptime": "System Uptime",
+            "network": "Network",
+            "kernel": "Kernel"
         }
     },
     "node-stats": {
