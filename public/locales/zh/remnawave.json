@@ -516,14 +516,16 @@
             "reset-monthly": "每月重置",
             "reset-weekly": "每周重置",
             "reset-daily": "每日重置",
-            "never-reset": "永不重置"
+            "never-reset": "永不重置",
+            "reset-monthly-by-creation-date": "Reset monthly (by creation date)"
         }
     },
     "data-usage": {
         "column": {
             "monthly": "每月",
             "weekly": "周",
-            "daily": "日"
+            "daily": "日",
+            "monthly-rolling": "Monthly (rolling)"
         }
     },
     "get-time-ago": {
