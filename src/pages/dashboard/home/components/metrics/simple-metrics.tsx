@@ -12,7 +12,7 @@ export const getSimpleMetrics = (
     const { memory, nodes } = systemInfo
 
     const totalRamGB = prettyBytesUtil(memory.total) ?? 0
-    const usedRamGB = prettyBytesUtil(memory.active) ?? 0
+    const usedRamGB = prettyBytesUtil(memory.used) ?? 0
 
     return [
         {

@@ -243,7 +243,7 @@ export const UserActiveSessionDrawerWidget = (props: IProps) => {
                     <Trans
                         components={{ highlight: HIGHLIGHT_SPAN }}
                         i18nKey="active-sessions-drawer.widget.warning-version"
-                        values={{ version: '2.6.0' }}
+                        values={{ version: '2.7.0' }}
                     />
                 </Text>
             </Group>

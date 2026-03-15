@@ -18,6 +18,7 @@ import { LoaderModalShared } from '@shared/ui/loader-modal'
 import { queryClient } from '@shared/api'
 
 import { NodeDetailsCardWidget } from '../node-details-card/node-details-card.widget'
+import { NodeSystemCardWidget } from '../node-system-card/node-system-card.widget'
 
 interface IProps {
     nodeUuid: string
@@ -130,6 +131,7 @@ export const EditNodeByUuidModalContent = (props: IProps) => {
             node={fetchedNode}
             nodeDetailsCard={<NodeDetailsCardWidget node={fetchedNode} />}
             nodePlugins={nodePlugins?.nodePlugins ?? []}
+            nodeSystemCard={<NodeSystemCardWidget node={fetchedNode} />}
             pubKey={pubKey}
         />
     )

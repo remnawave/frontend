@@ -27,3 +27,7 @@ export function getXrayUptimeUtil(uptimeInSeconds: string): string {
 
     return '0s'
 }
+
+export function formatDurationUtil(uptimeInSeconds: number): string {
+    return dayjs.duration(uptimeInSeconds, 'seconds').format('D[d] H[h] m[m] s[s]')
+}

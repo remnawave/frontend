@@ -57,6 +57,7 @@ interface IProps<T extends UpdateNodeCommand.Request> {
     node: GetOneNodeCommand.Response['response']
     nodeDetailsCard?: ReactNode
     nodePlugins: GetNodePluginsCommand.Response['response']['nodePlugins']
+    nodeSystemCard?: ReactNode
     pubKey: GetPubKeyCommand.Response['response'] | undefined
 }
 
@@ -66,8 +67,8 @@ export const BaseNodeForm = <T extends UpdateNodeCommand.Request>(props: IProps<
         node,
         nodePlugins,
         pubKey,
-
         nodeDetailsCard,
+        nodeSystemCard,
         handleClose,
         handleSubmit,
         isDataSubmitting
@@ -88,6 +89,10 @@ export const BaseNodeForm = <T extends UpdateNodeCommand.Request>(props: IProps<
 
                     {nodeDetailsCard && (
                         <MotionWrapper variants={cardVariants}>{nodeDetailsCard}</MotionWrapper>
+                    )}
+
+                    {nodeSystemCard && (
+                        <MotionWrapper variants={cardVariants}>{nodeSystemCard}</MotionWrapper>
                     )}
 
                     <NodeVitalsCard
@@ -155,6 +160,9 @@ export const BaseNodeForm = <T extends UpdateNodeCommand.Request>(props: IProps<
                         style={{ flex: '1 1 400px' }}
                         variants={containerVariants}
                     >
+                        {nodeSystemCard && (
+                            <MotionWrapper variants={cardVariants}>{nodeSystemCard}</MotionWrapper>
+                        )}
                         <NodeConfigProfilesCard
                             cardVariants={cardVariants}
                             form={form}

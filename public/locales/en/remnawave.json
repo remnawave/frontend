@@ -1329,6 +1329,19 @@
             "english": "English"
         }
     },
+    "node-system-card": {
+        "widget": {
+            "system-info": "System Info",
+            "memory": "Memory",
+            "used": "Used",
+            "free": "Free",
+            "total": "Total",
+            "system": "System",
+            "system-uptime": "System Uptime",
+            "network": "Network",
+            "kernel": "Kernel"
+        }
+    },
     "node-stats": {
         "card": {
             "stats": "Stats",

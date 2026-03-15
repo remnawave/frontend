@@ -11,6 +11,7 @@ import { PiUsersDuotone } from 'react-icons/pi'
 import { TFunction } from 'i18next'
 import sortBy from 'lodash/sortBy'
 
+import { formatDurationUtil } from '@shared/utils/time-utils'
 import { prettyBytesUtil } from '@shared/utils/bytes'
 import { faviconResolver } from '@shared/utils/misc'
 
@@ -277,16 +278,6 @@ export function getNodesTableColumns(
             render: ({ tags }) => tags?.join(', ') ?? '-'
         },
         {
-            accessor: 'totalRam',
-            sortable: true,
-            title: t('use-nodes-table-widget.total-ram')
-        },
-        {
-            accessor: 'cpuModel',
-            sortable: true,
-            title: t('use-nodes-table-widget.cpu-model')
-        },
-        {
             accessor: 'activePluginUuid',
             filter: (
                 <MultiSelect
@@ -305,6 +296,55 @@ export function getNodesTableColumns(
             title: 'Plugin',
             render: ({ activePluginUuid }) =>
                 nodePlugins.find((plugin) => plugin.uuid === activePluginUuid)?.name || '-'
+        },
+        {
+            accessor: 'system.info.cpus',
+            sortable: true,
+            title: 'CPU Cores'
+        },
+        {
+            accessor: 'system.stats.memoryFree',
+            sortable: true,
+            title: 'Free RAM',
+            render: ({ system }) => (system ? prettyBytesUtil(system.stats.memoryFree, false) : '-')
+        },
+        {
+            accessor: 'system.stats.memoryUsed',
+            sortable: true,
+            title: 'Used RAM',
+            render: ({ system }) =>
+                system
+                    ? prettyBytesUtil(system.info.memoryTotal - system.stats.memoryFree, false)
+                    : '-'
+        },
+        {
+            accessor: 'system.info.memoryTotal',
+            sortable: true,
+            title: t('use-nodes-table-widget.total-ram'),
+            render: ({ system }) => (system ? prettyBytesUtil(system.info.memoryTotal, false) : '-')
+        },
+        {
+            accessor: 'system.info.cpuModel',
+            sortable: true,
+            title: t('use-nodes-table-widget.cpu-model')
+        },
+        {
+            accessor: 'system.stats.uptime',
+            sortable: true,
+            title: 'Server Uptime',
+            render: ({ system }) => (system ? formatDurationUtil(system.stats.uptime) : '-')
+        },
+        {
+            accessor: 'system.info.networkInterfaces',
+            sortable: true,
+            title: 'Network Interfaces',
+            render: ({ system }) => (system ? system.info.networkInterfaces.join(', ') : '-')
+        },
+        {
+            accessor: 'system.info.release',
+            sortable: true,
+            title: 'OS Release',
+            render: ({ system }) => (system ? system.info.release : '-')
         }
     ]
 }
