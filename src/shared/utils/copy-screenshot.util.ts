@@ -53,13 +53,17 @@ async function renderScreenshot(element: HTMLElement, scale = 3): Promise<HTMLCa
 }
 
 export async function copyScreenshotToClipboard(element: HTMLElement): Promise<void> {
-    const canvas = await renderScreenshot(element)
+    const blobPromise = renderScreenshot(element).then(
+        (canvas) =>
+            new Promise<Blob>((resolve, reject) => {
+                canvas.toBlob(
+                    (b) => (b ? resolve(b) : reject(new Error('Failed to capture'))),
+                    'image/png'
+                )
+            })
+    )
 
-    const blob = await new Promise<Blob>((resolve, reject) => {
-        canvas.toBlob((b) => (b ? resolve(b) : reject(new Error('Failed to capture'))), 'image/png')
-    })
-
-    await navigator.clipboard.write([new ClipboardItem({ 'image/png': blob })])
+    await navigator.clipboard.write([new ClipboardItem({ 'image/png': blobPromise })])
 }
 
 export async function downloadScreenshot(element: HTMLElement, filename: string): Promise<void> {
