@@ -5,6 +5,7 @@ import { TbCamera } from 'react-icons/tb'
 import { useRef, useState } from 'react'
 
 import { MetricCardShared, MetricCardWithTrendShared } from '@shared/ui/metrics/metric-card'
+import { copyScreenshotToClipboard } from '@shared/utils/copy-screenshot.util'
 import { LoadingScreen } from '@shared/ui'
 import { Page } from '@shared/ui/page'
 
@@ -16,7 +17,6 @@ import {
     getSimpleMetrics,
     getUsersMetrics
 } from './metrics'
-import { copyScreenshotToClipboard } from './runtime-detail-card/copy-screenshot.util'
 import { RuntimeDetailCard } from './runtime-detail-card'
 import classes from './home.module.css'
 import { IProps } from './interfaces'

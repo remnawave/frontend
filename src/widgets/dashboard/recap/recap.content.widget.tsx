@@ -10,13 +10,13 @@ import {
     TextInput
 } from '@mantine/core'
 import { TbCheck, TbCopy, TbDownload, TbX } from 'react-icons/tb'
-import { domToBlob, domToPng } from 'modern-screenshot'
 import { notifications } from '@mantine/notifications'
 import { useTranslation } from 'react-i18next'
 import { useRef, useState } from 'react'
 import { motion } from 'motion/react'
 import dayjs from 'dayjs'
 
+import { copyScreenshotToClipboard, downloadScreenshot } from '@shared/utils/copy-screenshot.util'
 import { useGetRecap } from '@shared/api/hooks/system/system.query.hooks'
 import { prettyBytesToAnyUtil } from '@shared/utils/bytes'
 import { Logo } from '@shared/ui/logo'
@@ -47,36 +47,17 @@ export function RecapContent() {
 
     const ref = useRef<HTMLDivElement>(null)
 
-    const getEl = async () => {
-        if (!ref.current) throw new Error('ref')
-        await new Promise<void>((resolve) => {
-            setTimeout(resolve, 100)
-        })
-        return ref.current
-    }
-
     const copy = async () => {
         setCopying(true)
         try {
+            if (!ref.current) throw new Error('ref')
             setCardKey((k) => k + 1)
 
             await new Promise<void>((resolve) => {
                 requestAnimationFrame(() => requestAnimationFrame(() => resolve()))
             })
 
-            const blobPromise = getEl()
-                .then((el) =>
-                    domToBlob(el, {
-                        backgroundColor: '#08080f',
-                        scale: 2
-                    })
-                )
-                .then((blob) => {
-                    if (!blob) throw new Error('blob')
-                    return blob
-                })
-
-            await navigator.clipboard.write([new ClipboardItem({ 'image/png': blobPromise })])
+            await copyScreenshotToClipboard(ref.current)
         } catch (error) {
             notifications.show({
                 color: 'red',
@@ -96,15 +77,11 @@ export function RecapContent() {
                 requestAnimationFrame(() => requestAnimationFrame(() => resolve()))
             })
 
-            const el = await getEl()
-            const url = await domToPng(el, {
-                backgroundColor: '#08080f',
-                scale: 3
-            })
-            const a = document.createElement('a')
-            a.download = `remnawave-recap-${dayjs().format('YYYY-MM-DD')}.png`
-            a.href = url
-            a.click()
+            if (!ref.current) throw new Error('ref')
+            await downloadScreenshot(
+                ref.current,
+                `remnawave-recap-${dayjs().format('YYYY-MM-DD')}.png`
+            )
         } catch {
             notifications.show({
                 color: 'red',

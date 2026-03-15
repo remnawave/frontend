@@ -11,15 +11,14 @@ const BLOB_COLORS = [
     'rgba(59, 78, 171, 0.4)'
 ]
 
-const SCALE = 2
-const PADDING = 48 * SCALE
-const INNER_RADIUS = 5 * SCALE
+async function renderScreenshot(element: HTMLElement, scale = 3): Promise<HTMLCanvasElement> {
+    const padding = 48 * scale
+    const innerRadius = 5 * scale
 
-export async function copyScreenshotToClipboard(element: HTMLElement): Promise<void> {
-    const sourceCanvas = await domToCanvas(element, { scale: SCALE })
+    const sourceCanvas = await domToCanvas(element, { scale })
 
-    const totalWidth = sourceCanvas.width + PADDING * 2
-    const totalHeight = sourceCanvas.height + PADDING * 2
+    const totalWidth = sourceCanvas.width + padding * 2
+    const totalHeight = sourceCanvas.height + padding * 2
 
     const canvas = document.createElement('canvas')
     canvas.width = totalWidth
@@ -45,17 +44,30 @@ export async function copyScreenshotToClipboard(element: HTMLElement): Promise<v
 
     ctx.save()
     ctx.beginPath()
-    ctx.roundRect(PADDING, PADDING, sourceCanvas.width, sourceCanvas.height, INNER_RADIUS)
+    ctx.roundRect(padding, padding, sourceCanvas.width, sourceCanvas.height, innerRadius)
     ctx.clip()
-    ctx.drawImage(sourceCanvas, PADDING, PADDING)
+    ctx.drawImage(sourceCanvas, padding, padding)
     ctx.restore()
 
+    return canvas
+}
+
+export async function copyScreenshotToClipboard(element: HTMLElement): Promise<void> {
+    const canvas = await renderScreenshot(element)
+
     const blob = await new Promise<Blob>((resolve, reject) => {
-        canvas.toBlob(
-            (b) => (b ? resolve(b) : reject(new Error('Failed to capture'))),
-            'image/png'
-        )
+        canvas.toBlob((b) => (b ? resolve(b) : reject(new Error('Failed to capture'))), 'image/png')
     })
 
     await navigator.clipboard.write([new ClipboardItem({ 'image/png': blob })])
+}
+
+export async function downloadScreenshot(element: HTMLElement, filename: string): Promise<void> {
+    const canvas = await renderScreenshot(element)
+
+    const url = canvas.toDataURL('image/png')
+    const a = document.createElement('a')
+    a.download = filename
+    a.href = url
+    a.click()
 }
