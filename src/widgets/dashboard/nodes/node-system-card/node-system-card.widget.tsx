@@ -104,7 +104,13 @@ export const NodeSystemCardWidget = memo((props: IProps) => {
                         />
 
                         <Group gap="xs">
-                            <Badge color="violet" ff="monospace" size="sm" variant="soft">
+                            <Badge
+                                color="violet"
+                                ff="monospace"
+                                size="sm"
+                                variant="soft"
+                                visibleFrom="sm"
+                            >
                                 {info.platform} / {info.arch}
                             </Badge>
                             <Badge
@@ -154,8 +160,8 @@ export const NodeSystemCardWidget = memo((props: IProps) => {
                                 {t('node-system-card.widget.system')}
                             </Text>
 
-                            <Stack gap={0} style={{ minWidth: 0 }}>
-                                <Text className={classes.statLabel}>
+                            <Stack gap={0} style={{ minWidth: 0, overflow: 'hidden' }}>
+                                <Text className={classes.statLabel} component="div">
                                     <Group gap={4}>
                                         <PiCpuDuotone size={12} />
                                         CPU
@@ -168,9 +174,9 @@ export const NodeSystemCardWidget = memo((props: IProps) => {
                                 </Tooltip>
                             </Stack>
 
-                            <Group grow>
-                                <Stack gap={0}>
-                                    <Text className={classes.statLabel}>
+                            <Group grow style={{ overflow: 'hidden' }}>
+                                <Stack gap={0} style={{ minWidth: 0 }}>
+                                    <Text className={classes.statLabel} component="div">
                                         <Group gap={4}>
                                             <PiLinuxLogoDuotone size={12} />
                                             {t('node-system-card.widget.kernel')}
@@ -179,8 +185,8 @@ export const NodeSystemCardWidget = memo((props: IProps) => {
                                     <Text className={classes.statValue}>{info.release}</Text>
                                 </Stack>
                                 {info.networkInterfaces.length > 0 && (
-                                    <Stack gap={0}>
-                                        <Text className={classes.statLabel}>
+                                    <Stack gap={0} style={{ minWidth: 0 }}>
+                                        <Text className={classes.statLabel} component="div">
                                             <Group gap={4}>
                                                 <PiNetworkDuotone size={12} />
                                                 {t('node-system-card.widget.network')}
