@@ -1,4 +1,11 @@
-import { TbAlertTriangle, TbFlame, TbPackage, TbPlugConnectedX, TbShieldX } from 'react-icons/tb'
+import {
+    TbAlertTriangle,
+    TbFlame,
+    TbLogin,
+    TbLogout,
+    TbPackage,
+    TbPlugConnectedX
+} from 'react-icons/tb'
 import { GetAllNodesCommand, GetNodePluginsCommand } from '@remnawave/backend-contract'
 import { Badge, Center, Group, Stack, Text, ThemeIcon } from '@mantine/core'
 import { useTranslation } from 'react-i18next'
@@ -152,7 +159,7 @@ export function NodePluginsGridWidget(props: IProps) {
 
                             <Group gap="sm" justify="center">
                                 <Badge
-                                    leftSection={<TbFlame size={12} />}
+                                    leftSection={<TbFlame size={16} />}
                                     radius="md"
                                     size="lg"
                                     variant="light"
@@ -160,17 +167,26 @@ export function NodePluginsGridWidget(props: IProps) {
                                     Torrent Blocker
                                 </Badge>
                                 <Badge
-                                    color="red"
-                                    leftSection={<TbShieldX size={12} />}
+                                    color="teal"
+                                    leftSection={<TbLogin size={16} />}
                                     radius="md"
                                     size="lg"
                                     variant="light"
                                 >
-                                    Blacklist
+                                    Ingress Filter
                                 </Badge>
                                 <Badge
-                                    color="violet"
-                                    leftSection={<TbPlugConnectedX size={12} />}
+                                    color="orange"
+                                    leftSection={<TbLogout size={16} />}
+                                    radius="md"
+                                    size="lg"
+                                    variant="light"
+                                >
+                                    Egress Filter
+                                </Badge>
+                                <Badge
+                                    color="grape"
+                                    leftSection={<TbPlugConnectedX size={16} />}
                                     radius="md"
                                     size="lg"
                                     variant="light"
