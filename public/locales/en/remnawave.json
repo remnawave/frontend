@@ -516,14 +516,16 @@
             "reset-monthly": "Reset monthly",
             "reset-weekly": "Reset weekly",
             "reset-daily": "Reset daily",
-            "never-reset": "Never reset"
+            "never-reset": "Never reset",
+            "reset-monthly-by-creation-date": "Reset monthly (by creation date)"
         }
     },
     "data-usage": {
         "column": {
             "monthly": "Monthly",
             "weekly": "Weekly",
-            "daily": "Daily"
+            "daily": "Daily",
+            "monthly-rolling": "Monthly (rolling)"
         }
     },
     "get-time-ago": {
