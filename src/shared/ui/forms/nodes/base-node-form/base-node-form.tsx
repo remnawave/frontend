@@ -91,7 +91,7 @@ export const BaseNodeForm = <T extends UpdateNodeCommand.Request>(props: IProps<
                         <MotionWrapper variants={cardVariants}>{nodeDetailsCard}</MotionWrapper>
                     )}
 
-                    {nodeSystemCard && (
+                    {nodeSystemCard && node.system && (
                         <MotionWrapper variants={cardVariants}>{nodeSystemCard}</MotionWrapper>
                     )}
 
@@ -160,9 +160,10 @@ export const BaseNodeForm = <T extends UpdateNodeCommand.Request>(props: IProps<
                         style={{ flex: '1 1 400px' }}
                         variants={containerVariants}
                     >
-                        {nodeSystemCard && (
+                        {nodeSystemCard && node.system && (
                             <MotionWrapper variants={cardVariants}>{nodeSystemCard}</MotionWrapper>
                         )}
+
                         <NodeConfigProfilesCard
                             cardVariants={cardVariants}
                             form={form}
