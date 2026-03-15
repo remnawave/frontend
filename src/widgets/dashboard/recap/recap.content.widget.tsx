@@ -61,7 +61,7 @@ export function RecapContent() {
         } catch (error) {
             notifications.show({
                 color: 'red',
-                message: `Could not copy Recap: ${error instanceof Error ? error.message : 'Unknown error'}`,
+                message: `${error instanceof Error ? error.message : 'Unknown error'}`,
                 title: 'Error'
             })
         } finally {

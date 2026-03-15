@@ -39,7 +39,7 @@ export const NodeSystemCardWidget = memo((props: IProps) => {
         } catch (error) {
             notifications.show({
                 color: 'red',
-                message: `Could not copy Node System Card: ${error instanceof Error ? error.message : 'Unknown error'}`,
+                message: `${error instanceof Error ? error.message : 'Unknown error'}`,
                 title: 'Error'
             })
         } finally {

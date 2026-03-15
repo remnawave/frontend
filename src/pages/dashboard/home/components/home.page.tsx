@@ -48,10 +48,10 @@ export const HomePage = (props: IProps) => {
                 setTimeout(resolve, 100)
             })
             await copyScreenshotToClipboard(runtimeRef.current)
-        } catch {
+        } catch (error) {
             notifications.show({
                 color: 'red',
-                message: 'Failed to copy screenshot',
+                message: `${error instanceof Error ? error.message : 'Unknown error'}`,
                 title: 'Error'
             })
         } finally {

@@ -1,5 +1,7 @@
 import { domToCanvas } from 'modern-screenshot'
 
+export const isScreenshotSupported = !/Firefox|Gecko\//.test(navigator.userAgent)
+
 const BLOB_COLORS = [
     'rgba(99, 59, 171, 0.45)',
     'rgba(49, 120, 198, 0.4)',
@@ -52,7 +54,15 @@ async function renderScreenshot(element: HTMLElement, scale = 3): Promise<HTMLCa
     return canvas
 }
 
+function assertScreenshotSupported(): void {
+    if (!isScreenshotSupported) {
+        throw new Error('Screenshots are not supported in Firefox-based browsers')
+    }
+}
+
 export async function copyScreenshotToClipboard(element: HTMLElement): Promise<void> {
+    assertScreenshotSupported()
+
     const blobPromise = renderScreenshot(element).then(
         (canvas) =>
             new Promise<Blob>((resolve, reject) => {
@@ -67,6 +77,8 @@ export async function copyScreenshotToClipboard(element: HTMLElement): Promise<v
 }
 
 export async function downloadScreenshot(element: HTMLElement, filename: string): Promise<void> {
+    assertScreenshotSupported()
+
     const canvas = await renderScreenshot(element)
 
     const url = canvas.toDataURL('image/png')
