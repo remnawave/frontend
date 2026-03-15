@@ -5,7 +5,6 @@ import { Box, Button, Stack, Text } from '@mantine/core'
 import { useDebouncedValue } from '@mantine/hooks'
 import { useTranslation } from 'react-i18next'
 import { PiEmpty } from 'react-icons/pi'
-import sortBy from 'lodash/sortBy'
 import get from 'lodash/get'
 
 import { useGetConfigProfiles, useGetNodePlugins, useGetNodes } from '@shared/api/hooks'
@@ -17,6 +16,14 @@ import { LoadingScreen } from '@shared/ui'
 import { getNodesTableColumns, type NodesTableFilters } from './use-nodes-table-widget'
 
 type NodeType = GetAllNodesCommand.Response['response'][number]
+
+function getNodeSortValue(node: NodeType, accessor: string): unknown {
+    if (accessor === 'system.stats.memoryUsed') {
+        if (!node.system) return null
+        return node.system.info.memoryTotal - node.system.stats.memoryFree
+    }
+    return get(node, accessor)
+}
 
 interface IProps {
     nodes: GetAllNodesCommand.Response['response'] | undefined
@@ -187,11 +194,29 @@ export const NodesDataTableWidget = memo((props: IProps) => {
             return true
         })
 
-        const sorted = sortBy(filtered, (node) => {
-            const value = get(node, sortStatus.columnAccessor)
-            return typeof value === 'string' ? value.toLowerCase() : value
+        const isDesc = sortStatus.direction === 'desc'
+        const sorted = [...filtered].sort((a, b) => {
+            const aVal = getNodeSortValue(a, sortStatus.columnAccessor)
+            const bVal = getNodeSortValue(b, sortStatus.columnAccessor)
+
+            if (aVal == null && bVal == null) return 0
+            if (aVal == null) return 1
+            if (bVal == null) return -1
+
+            let result: number
+            if (typeof aVal === 'string' && typeof bVal === 'string') {
+                result = aVal.toLowerCase().localeCompare(bVal.toLowerCase())
+            } else if (aVal < bVal) {
+                result = -1
+            } else if (aVal > bVal) {
+                result = 1
+            } else {
+                result = 0
+            }
+
+            return isDesc ? -result : result
         })
-        return sortStatus.direction === 'desc' ? sorted.reverse() : sorted
+        return sorted
     }, [
         nodes,
         debouncedNameQuery,
