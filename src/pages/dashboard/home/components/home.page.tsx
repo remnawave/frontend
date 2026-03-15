@@ -1,7 +1,6 @@
 import { ActionIcon, Box, Group, SimpleGrid, Stack, Title } from '@mantine/core'
 import { notifications } from '@mantine/notifications'
 import { useTranslation } from 'react-i18next'
-import { domToBlob } from 'modern-screenshot'
 import { TbCamera } from 'react-icons/tb'
 import { useRef, useState } from 'react'
 
@@ -17,6 +16,7 @@ import {
     getSimpleMetrics,
     getUsersMetrics
 } from './metrics'
+import { copyScreenshotToClipboard } from './runtime-detail-card/copy-screenshot.util'
 import { RuntimeDetailCard } from './runtime-detail-card'
 import classes from './home.module.css'
 import { IProps } from './interfaces'
@@ -44,18 +44,10 @@ export const HomePage = (props: IProps) => {
         if (!runtimeRef.current || copying) return
         setCopying(true)
         try {
-            const el = runtimeRef.current
             await new Promise<void>((resolve) => {
                 setTimeout(resolve, 100)
             })
-            const blobPromise = domToBlob(el, {
-                backgroundColor: '#1a1b1e',
-                scale: 2
-            }).then((blob) => {
-                if (!blob) throw new Error('Failed to capture')
-                return blob
-            })
-            await navigator.clipboard.write([new ClipboardItem({ 'image/png': blobPromise })])
+            await copyScreenshotToClipboard(runtimeRef.current)
         } catch {
             notifications.show({
                 color: 'red',
