@@ -516,14 +516,16 @@
             "reset-monthly": "بازنشانی ماهانه",
             "reset-weekly": "بازنشانی هفتگی",
             "reset-daily": "بازنشانی روزانه",
-            "never-reset": "هیچ‌گاه بازنشانی نشود"
+            "never-reset": "هیچ‌گاه بازنشانی نشود",
+            "reset-monthly-by-creation-date": "Reset monthly (by creation date)"
         }
     },
     "data-usage": {
         "column": {
             "monthly": "ماهانه",
             "weekly": "هفتگی",
-            "daily": "روزانه"
+            "daily": "روزانه",
+            "monthly-rolling": "Monthly (rolling)"
         }
     },
     "get-time-ago": {

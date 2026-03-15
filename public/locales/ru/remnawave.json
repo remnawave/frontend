@@ -516,14 +516,16 @@
             "reset-monthly": "Сброс ежемесячно",
             "reset-weekly": "Сброс еженедельно",
             "reset-daily": "Сброс ежедневно",
-            "never-reset": "Никогда не сбрасывать"
+            "never-reset": "Никогда не сбрасывать",
+            "reset-monthly-by-creation-date": "Reset monthly (by creation date)"
         }
     },
     "data-usage": {
         "column": {
             "monthly": "Ежемесячно",
             "weekly": "Еженедельно",
-            "daily": "Ежедневно"
+            "daily": "Ежедневно",
+            "monthly-rolling": "Monthly (rolling)"
         }
     },
     "get-time-ago": {
