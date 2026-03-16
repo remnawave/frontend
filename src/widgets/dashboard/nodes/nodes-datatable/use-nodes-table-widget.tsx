@@ -1,4 +1,11 @@
 import {
+    PiCloudArrowUpDuotone,
+    PiProhibitDuotone,
+    PiPulseDuotone,
+    PiUsersDuotone,
+    PiWarningCircle
+} from 'react-icons/pi'
+import {
     GetAllNodesCommand,
     GetConfigProfilesCommand,
     GetNodePluginsCommand
@@ -7,7 +14,6 @@ import { ActionIcon, Avatar, Badge, Group, MultiSelect, Text, TextInput } from '
 import { TbEdit, TbSearch, TbX } from 'react-icons/tb'
 import { DataTableColumn } from 'mantine-datatable'
 import ReactCountryFlag from 'react-country-flag'
-import { PiUsersDuotone } from 'react-icons/pi'
 import { TFunction } from 'i18next'
 import sortBy from 'lodash/sortBy'
 
@@ -16,6 +22,8 @@ import { prettyBytesUtil } from '@shared/utils/bytes'
 import { faviconResolver } from '@shared/utils/misc'
 
 import { NodeStatusSimplfiedBadgeWidget } from '../node-status-simplfied-badge'
+
+export type NodeStatusFilter = 'connected' | 'connecting' | 'disabled' | 'disconnected'
 
 export interface NodesTableFilters {
     availableConfigProfiles: { label: string; value: string }[]
@@ -28,12 +36,14 @@ export interface NodesTableFilters {
     selectedInbounds: string[]
     selectedPlugins: string[]
     selectedProviders: string[]
+    selectedStatuses: NodeStatusFilter[]
     selectedTags: string[]
     setNameQuery: (value: string) => void
     setSelectedConfigProfiles: (value: string[]) => void
     setSelectedInbounds: (value: string[]) => void
     setSelectedPlugins: (value: string[]) => void
     setSelectedProviders: (value: string[]) => void
+    setSelectedStatuses: (value: NodeStatusFilter[]) => void
     setSelectedTags: (value: string[]) => void
 }
 
@@ -46,33 +56,56 @@ export function getNodesTableColumns(
 ): DataTableColumn<GetAllNodesCommand.Response['response'][number]>[] {
     return [
         {
-            accessor: 'actions',
-            draggable: false,
-            titleStyle: {
-                backgroundColor: 'var(--mantine-color-dark-7)'
-            },
-            cellsStyle: () => {
-                return {
-                    backgroundColor: 'var(--mantine-color-dark-7)'
-                }
-            },
-            title: (
-                <Group c="dimmed" gap={4} justify="flex-end" pr={4} wrap="nowrap">
-                    <TbEdit size={18} />
-                </Group>
+            accessor: 'name',
+            sortable: true,
+            title: t('use-nodes-table-widget.name'),
+            filter: (
+                <TextInput
+                    label={t('use-nodes-table-widget.name')}
+                    leftSection={<TbSearch size={16} />}
+                    onChange={(e) => filters.setNameQuery(e.currentTarget.value)}
+                    rightSection={
+                        filters.nameQuery ? (
+                            <ActionIcon
+                                c="dimmed"
+                                onClick={() => filters.setNameQuery('')}
+                                size="sm"
+                                variant="transparent"
+                            >
+                                <TbX size={14} />
+                            </ActionIcon>
+                        ) : null
+                    }
+                    value={filters.nameQuery}
+                />
             ),
-            width: '0%',
-            textAlign: 'right',
-            render: ({ uuid }) => (
-                <Group gap={4} justify="flex-end" wrap="nowrap">
-                    <ActionIcon
-                        color="teal"
-                        onClick={() => handleViewNode(uuid)}
-                        size="md"
-                        variant="outline"
+            draggable: false,
+            toggleable: false,
+            resizable: false,
+
+            filtering: filters.nameQuery !== '',
+            render: ({ name, countryCode }) => (
+                <Group gap={6} wrap="nowrap">
+                    {countryCode && countryCode !== 'XX' && (
+                        <ReactCountryFlag
+                            countryCode={countryCode}
+                            style={{
+                                fontSize: '1.1em',
+                                borderRadius: '2px'
+                            }}
+                        />
+                    )}
+                    <Text
+                        size="sm"
+                        style={{
+                            maxWidth: '100%',
+                            overflow: 'hidden',
+                            textOverflow: 'ellipsis',
+                            whiteSpace: 'nowrap'
+                        }}
                     >
-                        <TbEdit size={18} />
-                    </ActionIcon>
+                        {name}
+                    </Text>
                 </Group>
             )
         },
@@ -80,6 +113,64 @@ export function getNodesTableColumns(
             accessor: 'isConnected',
             sortable: true,
             title: '',
+            filter: (
+                <MultiSelect
+                    clearable
+                    comboboxProps={{ withinPortal: false }}
+                    data={[
+                        {
+                            label: t('node-status-badge.widget.connected'),
+                            value: 'connected'
+                        },
+                        {
+                            label: t('node-status-badge.widget.connecting'),
+                            value: 'connecting'
+                        },
+                        {
+                            label: t('node-status-badge.widget.disabled'),
+                            value: 'disabled'
+                        },
+                        {
+                            label: t('node-status-badge.widget.disconnected'),
+                            value: 'disconnected'
+                        }
+                    ]}
+                    leftSection={<TbSearch size={16} />}
+                    onChange={(value) => filters.setSelectedStatuses(value as NodeStatusFilter[])}
+                    renderOption={({ option }) => (
+                        <Group gap="xs" wrap="nowrap">
+                            {option.value === 'connected' && (
+                                <PiPulseDuotone
+                                    size={16}
+                                    style={{ color: 'var(--mantine-color-teal-6)' }}
+                                />
+                            )}
+                            {option.value === 'connecting' && (
+                                <PiCloudArrowUpDuotone
+                                    size={16}
+                                    style={{ color: 'var(--mantine-color-yellow-3)' }}
+                                />
+                            )}
+                            {option.value === 'disabled' && (
+                                <PiProhibitDuotone
+                                    size={16}
+                                    style={{ color: 'var(--mantine-color-gray-6)' }}
+                                />
+                            )}
+                            {option.value === 'disconnected' && (
+                                <PiWarningCircle
+                                    size={16}
+                                    style={{ color: 'var(--mantine-color-red-3)' }}
+                                />
+                            )}
+                            <Text size="sm">{option.label}</Text>
+                        </Group>
+                    )}
+                    searchable
+                    value={filters.selectedStatuses}
+                />
+            ),
+            filtering: filters.selectedStatuses.length > 0,
             render: ({ isConnected, isConnecting, isDisabled, uuid }) => (
                 <NodeStatusSimplfiedBadgeWidget
                     isConnected={isConnected}
@@ -107,56 +198,6 @@ export function getNodesTableColumns(
             )
         },
 
-        {
-            accessor: 'name',
-            sortable: true,
-            title: t('use-nodes-table-widget.name'),
-            filter: (
-                <TextInput
-                    label={t('use-nodes-table-widget.name')}
-                    leftSection={<TbSearch size={16} />}
-                    onChange={(e) => filters.setNameQuery(e.currentTarget.value)}
-                    rightSection={
-                        filters.nameQuery ? (
-                            <ActionIcon
-                                c="dimmed"
-                                onClick={() => filters.setNameQuery('')}
-                                size="sm"
-                                variant="transparent"
-                            >
-                                <TbX size={14} />
-                            </ActionIcon>
-                        ) : null
-                    }
-                    value={filters.nameQuery}
-                />
-            ),
-            filtering: filters.nameQuery !== '',
-            render: ({ name, countryCode }) => (
-                <Group gap={6} wrap="nowrap">
-                    {countryCode && countryCode !== 'XX' && (
-                        <ReactCountryFlag
-                            countryCode={countryCode}
-                            style={{
-                                fontSize: '1.1em',
-                                borderRadius: '2px'
-                            }}
-                        />
-                    )}
-                    <Text
-                        size="sm"
-                        style={{
-                            maxWidth: '100%',
-                            overflow: 'hidden',
-                            textOverflow: 'ellipsis',
-                            whiteSpace: 'nowrap'
-                        }}
-                    >
-                        {name}
-                    </Text>
-                </Group>
-            )
-        },
         {
             accessor: 'address',
             sortable: true,
@@ -202,6 +243,7 @@ export function getNodesTableColumns(
                     value={filters.selectedInbounds}
                 />
             ),
+            toggleable: true,
             filtering: filters.selectedInbounds.length > 0,
             title: t('use-nodes-table-widget.inbounds'),
             render: ({ configProfile: { activeInbounds } }) =>
@@ -345,6 +387,39 @@ export function getNodesTableColumns(
             sortable: true,
             title: 'OS Release',
             render: ({ system }) => (system ? system.info.release : '-')
+        },
+        {
+            accessor: 'actions',
+            draggable: false,
+            resizable: false,
+            titleStyle: {
+                backgroundColor: 'var(--mantine-color-dark-7)'
+            },
+            cellsStyle: () => {
+                return {
+                    backgroundColor: 'var(--mantine-color-dark-7)'
+                }
+            },
+            title: (
+                <Group c="dimmed" gap={4} justify="flex-end" pr={4} wrap="nowrap">
+                    <TbEdit size={18} />
+                </Group>
+            ),
+
+            textAlign: 'right',
+            toggleable: false,
+            render: ({ uuid }) => (
+                <Group gap={4} justify="flex-end" wrap="nowrap">
+                    <ActionIcon
+                        color="teal"
+                        onClick={() => handleViewNode(uuid)}
+                        size="md"
+                        variant="outline"
+                    >
+                        <TbEdit size={18} />
+                    </ActionIcon>
+                </Group>
+            )
         }
     ]
 }

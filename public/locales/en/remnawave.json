@@ -2056,5 +2056,12 @@
                 "active-users-on-this-node": "Active users on this node"
             }
         }
+    },
+    "nodes-datatable": {
+        "widget": {
+            "column-width": "Column Width",
+            "column-order": "Column Order",
+            "column-toggle": "Column Toggle"
+        }
     }
 }

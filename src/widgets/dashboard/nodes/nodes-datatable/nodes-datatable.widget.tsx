@@ -1,9 +1,10 @@
 import { DataTable, type DataTableSortStatus, useDataTableColumns } from 'mantine-datatable'
 import { GetAllNodesCommand } from '@remnawave/backend-contract'
 import { memo, useLayoutEffect, useMemo, useState } from 'react'
-import { Box, Button, Stack, Text } from '@mantine/core'
+import { Box, Button, Group, Stack, Text } from '@mantine/core'
 import { useDebouncedValue } from '@mantine/hooks'
 import { useTranslation } from 'react-i18next'
+import { TbRestore } from 'react-icons/tb'
 import { PiEmpty } from 'react-icons/pi'
 import get from 'lodash/get'
 
@@ -13,7 +14,11 @@ import { preventBackScrollTables } from '@shared/utils/misc'
 import { sToMs } from '@shared/utils/time-utils'
 import { LoadingScreen } from '@shared/ui'
 
-import { getNodesTableColumns, type NodesTableFilters } from './use-nodes-table-widget'
+import {
+    getNodesTableColumns,
+    type NodesTableFilters,
+    type NodeStatusFilter
+} from './use-nodes-table-widget'
 
 type NodeType = GetAllNodesCommand.Response['response'][number]
 
@@ -31,9 +36,9 @@ interface IProps {
     setSelectedRecords: (records: NodeType[]) => void
 }
 
-const PAGE_SIZE = 20
+const PAGE_SIZE = 50
 const PAGE_SIZE_OPTIONS = [10, 20, 50, 100, 150, 200]
-const NODES_CACHE_KEY = 'nodes-datatable-nodes-v1'
+const NODES_CACHE_KEY = 'nodes-datatable-nodes-v2'
 
 export const NodesDataTableWidget = memo((props: IProps) => {
     const { nodes, selectedRecords, setSelectedRecords } = props
@@ -53,6 +58,7 @@ export const NodesDataTableWidget = memo((props: IProps) => {
     const [selectedConfigProfiles, setSelectedConfigProfiles] = useState<string[]>([])
     const [selectedPlugins, setSelectedPlugins] = useState<string[]>([])
     const [selectedInbounds, setSelectedInbounds] = useState<string[]>([])
+    const [selectedStatuses, setSelectedStatuses] = useState<NodeStatusFilter[]>([])
 
     const { data: configProfiles } = useGetConfigProfiles({})
     const { data: nodePlugins } = useGetNodePlugins()
@@ -125,25 +131,28 @@ export const NodesDataTableWidget = memo((props: IProps) => {
         selectedInbounds,
         selectedPlugins,
         selectedProviders,
+        selectedStatuses,
         selectedTags,
         setNameQuery,
         setSelectedConfigProfiles,
         setSelectedInbounds,
         setSelectedPlugins,
         setSelectedProviders,
+        setSelectedStatuses,
         setSelectedTags
     }
 
-    const { effectiveColumns } = useDataTableColumns({
-        key: NODES_CACHE_KEY,
-        columns: getNodesTableColumns(
-            t,
-            configProfiles?.configProfiles ?? [],
-            nodePlugins?.nodePlugins ?? [],
-            handleViewNode,
-            filters
-        )
-    })
+    const { effectiveColumns, resetColumnsWidth, resetColumnsOrder, resetColumnsToggle } =
+        useDataTableColumns({
+            key: NODES_CACHE_KEY,
+            columns: getNodesTableColumns(
+                t,
+                configProfiles?.configProfiles ?? [],
+                nodePlugins?.nodePlugins ?? [],
+                handleViewNode,
+                filters
+            )
+        })
 
     const filteredAndSortedNodes = useMemo(() => {
         if (!nodes) return []
@@ -191,6 +200,16 @@ export const NodesDataTableWidget = memo((props: IProps) => {
                 return false
             }
 
+            if (selectedStatuses.length > 0) {
+                let nodeStatus: NodeStatusFilter
+                if (node.isConnected) nodeStatus = 'connected'
+                else if (node.isConnecting) nodeStatus = 'connecting'
+                else if (node.isDisabled) nodeStatus = 'disabled'
+                else nodeStatus = 'disconnected'
+
+                if (!selectedStatuses.includes(nodeStatus)) return false
+            }
+
             return true
         })
 
@@ -225,6 +244,7 @@ export const NodesDataTableWidget = memo((props: IProps) => {
         selectedConfigProfiles,
         selectedPlugins,
         selectedInbounds,
+        selectedStatuses,
         sortStatus
     ])
 
@@ -236,49 +256,81 @@ export const NodesDataTableWidget = memo((props: IProps) => {
     if (!nodes || !configProfiles) return <LoadingScreen height="60vh" />
 
     return (
-        <DataTable
-            borderRadius="sm"
-            columns={effectiveColumns}
-            defaultColumnProps={{
-                noWrap: true,
-                textAlign: 'left',
-                ellipsis: true,
-                draggable: true
-            }}
-            emptyState={
-                <Stack align="center" gap="xs">
-                    <Box mb={4} p={4}>
-                        <PiEmpty size={36} strokeWidth={1.5} />
-                    </Box>
-                    <Text c="dimmed" size="sm">
-                        {t('infra-billing-nodes.widget.no-nodes-found')}
-                    </Text>
-                    <Button style={{ pointerEvents: 'all' }} variant="light">
-                        {t('infra-billing-nodes.widget.add-a-node')}
+        <>
+            <DataTable
+                borderRadius="sm"
+                columns={effectiveColumns}
+                defaultColumnProps={{
+                    noWrap: true,
+                    textAlign: 'left',
+                    ellipsis: true,
+                    draggable: true,
+                    toggleable: true,
+                    resizable: true
+                }}
+                emptyState={
+                    <Stack align="center" gap="xs">
+                        <Box mb={4} p={4}>
+                            <PiEmpty size={36} strokeWidth={1.5} />
+                        </Box>
+                        <Text c="dimmed" size="sm">
+                            {t('infra-billing-nodes.widget.no-nodes-found')}
+                        </Text>
+                        <Button style={{ pointerEvents: 'all' }} variant="light">
+                            {t('infra-billing-nodes.widget.add-a-node')}
+                        </Button>
+                    </Stack>
+                }
+                fetching={false}
+                highlightOnHover={true}
+                idAccessor="uuid"
+                onPageChange={setPage}
+                onRecordsPerPageChange={handleChangePageSize}
+                onSelectedRecordsChange={setSelectedRecords}
+                onSortStatusChange={setSortStatus}
+                page={page}
+                pinFirstColumn
+                pinLastColumn
+                records={filteredAndSortedNodes.slice((page - 1) * pageSize, page * pageSize)}
+                recordsPerPage={pageSize}
+                recordsPerPageOptions={PAGE_SIZE_OPTIONS}
+                selectedRecords={selectedRecords}
+                sortStatus={sortStatus}
+                storeColumnsKey={NODES_CACHE_KEY}
+                striped
+                totalRecords={filteredAndSortedNodes.length}
+                withColumnBorders={false}
+                withRowBorders={true}
+                withTableBorder={true}
+            />
+            <Group grow justify="space-between" mt="md">
+                <Group justify="right">
+                    <Button
+                        leftSection={<TbRestore size={16} />}
+                        onClick={resetColumnsWidth}
+                        size="sm"
+                        variant="default"
+                    >
+                        {t('nodes-datatable.widget.column-width')}
                     </Button>
-                </Stack>
-            }
-            fetching={false}
-            idAccessor="uuid"
-            onPageChange={setPage}
-            onRecordsPerPageChange={handleChangePageSize}
-            onSelectedRecordsChange={setSelectedRecords}
-            onSortStatusChange={setSortStatus}
-            page={page}
-            pinFirstColumn
-            records={filteredAndSortedNodes.slice((page - 1) * pageSize, page * pageSize)}
-            recordsPerPage={pageSize}
-            recordsPerPageOptions={PAGE_SIZE_OPTIONS}
-            selectedRecords={selectedRecords}
-            selectionColumnStyle={{
-                backgroundColor: 'var(--mantine-color-dark-7)'
-            }}
-            sortStatus={sortStatus}
-            storeColumnsKey={NODES_CACHE_KEY}
-            totalRecords={filteredAndSortedNodes.length}
-            withColumnBorders={false}
-            withRowBorders={true}
-            withTableBorder={true}
-        />
+                    <Button
+                        leftSection={<TbRestore size={16} />}
+                        onClick={resetColumnsOrder}
+                        size="sm"
+                        variant="default"
+                    >
+                        {t('nodes-datatable.widget.column-order')}
+                    </Button>
+                    <Button
+                        leftSection={<TbRestore size={16} />}
+                        onClick={resetColumnsToggle}
+                        size="sm"
+                        variant="default"
+                    >
+                        {t('nodes-datatable.widget.column-toggle')}
+                    </Button>
+                </Group>
+            </Group>
+        </>
     )
 })
