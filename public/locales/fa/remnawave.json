@@ -859,7 +859,12 @@
             "total-download": "مجموع دانلود",
             "average-bps": "میانگین BPS",
             "active-nodes": "نودهای فعال",
-            "current-hour": "ساعت کنونی"
+            "current-hour": "ساعت کنونی",
+            "download-speed": "Download Speed",
+            "upload-speed": "Upload Speed",
+            "download-total": "Download Total",
+            "ram-usage": "RAM Usage",
+            "for-all-nodes": "For all nodes"
         }
     },
     "node-users-usage-drawer": {
@@ -1339,7 +1344,8 @@
             "system": "System",
             "system-uptime": "System Uptime",
             "network": "Network",
-            "kernel": "Kernel"
+            "kernel": "Kernel",
+            "interface": "Interface"
         }
     },
     "node-stats": {

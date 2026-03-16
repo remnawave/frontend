@@ -859,7 +859,12 @@
             "total-download": "Всего скачано",
             "average-bps": "Средняя скорость",
             "active-nodes": "Активные ноды",
-            "current-hour": "Текущий час"
+            "current-hour": "Текущий час",
+            "download-speed": "Download Speed",
+            "upload-speed": "Upload Speed",
+            "download-total": "Download Total",
+            "ram-usage": "RAM Usage",
+            "for-all-nodes": "For all nodes"
         }
     },
     "node-users-usage-drawer": {
@@ -1339,7 +1344,8 @@
             "system": "Система",
             "system-uptime": "Время работы системы",
             "network": "Сеть",
-            "kernel": "Ядро"
+            "kernel": "Ядро",
+            "interface": "Interface"
         }
     },
     "node-stats": {
