@@ -73,3 +73,36 @@ export function prettyRealtimeBytesUtil(
 
     return `${res.size}${withSeconds ? '/s' : ''}`
 }
+
+export function prettySiBytesUtil(
+    bytesInput: number | string | undefined,
+    returnZero: boolean = false
+): string | undefined {
+    if (!bytesInput) {
+        return returnZero ? '0 B' : undefined
+    }
+    if (typeof bytesInput === 'string') {
+        bytesInput = Number(bytesInput)
+    }
+
+    const res = xbytes.parseBytes(bytesInput, { sticky: true, iec: false })
+
+    return String(res.size)
+}
+
+export function prettySiRealtimeBytesUtil(
+    bytesInput: number | string | undefined,
+    returnZero: boolean = false,
+    withSeconds: boolean = false
+): string | undefined {
+    if (!bytesInput) {
+        return returnZero ? '0 B/s' : undefined
+    }
+    if (typeof bytesInput === 'string') {
+        bytesInput = Number(bytesInput)
+    }
+
+    const res = xbytes.parseBytes(bytesInput, { sticky: true, iec: false })
+
+    return `${res.size}${withSeconds ? '/s' : ''}`
+}

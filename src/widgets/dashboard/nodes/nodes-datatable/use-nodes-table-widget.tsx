@@ -17,8 +17,8 @@ import ReactCountryFlag from 'react-country-flag'
 import { TFunction } from 'i18next'
 import sortBy from 'lodash/sortBy'
 
+import { prettyBytesUtil, prettySiBytesUtil, prettySiRealtimeBytesUtil } from '@shared/utils/bytes'
 import { formatDurationUtil } from '@shared/utils/time-utils'
-import { prettyBytesUtil } from '@shared/utils/bytes'
 import { faviconResolver } from '@shared/utils/misc'
 
 import { NodeStatusSimplfiedBadgeWidget } from '../node-status-simplfied-badge'
@@ -381,6 +381,42 @@ export function getNodesTableColumns(
             sortable: true,
             title: 'Network Interfaces',
             render: ({ system }) => (system ? system.info.networkInterfaces.join(', ') : '-')
+        },
+        {
+            accessor: 'system.stats.interface.rxBytesPerSec',
+            sortable: true,
+            title: 'RX Speed',
+            render: ({ system }) =>
+                system && system.stats.interface
+                    ? prettySiRealtimeBytesUtil(system.stats.interface.rxBytesPerSec, true, true)
+                    : '-'
+        },
+        {
+            accessor: 'system.stats.interface.txBytesPerSec',
+            sortable: true,
+            title: 'TX Speed',
+            render: ({ system }) =>
+                system && system.stats.interface
+                    ? prettySiRealtimeBytesUtil(system.stats.interface.txBytesPerSec, true, true)
+                    : '-'
+        },
+        {
+            accessor: 'system.stats.interface.rxTotal',
+            sortable: true,
+            title: 'RX Total',
+            render: ({ system }) =>
+                system && system.stats.interface
+                    ? prettySiBytesUtil(system.stats.interface.rxTotal, true)
+                    : '-'
+        },
+        {
+            accessor: 'system.stats.interface.txTotal',
+            sortable: true,
+            title: 'TX Total',
+            render: ({ system }) =>
+                system && system.stats.interface
+                    ? prettySiBytesUtil(system.stats.interface.txTotal, true)
+                    : '-'
         },
         {
             accessor: 'system.info.release',

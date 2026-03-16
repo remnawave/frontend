@@ -1,4 +1,6 @@
 import {
+    PiArrowDownDuotone,
+    PiArrowUpDuotone,
     PiCpuDuotone,
     PiDesktopTowerDuotone,
     PiLinuxLogoDuotone,
@@ -12,10 +14,14 @@ import { notifications } from '@mantine/notifications'
 import { useTranslation } from 'react-i18next'
 import { TbCamera } from 'react-icons/tb'
 
+import {
+    prettyBytesToAnyUtil,
+    prettySiBytesUtil,
+    prettySiRealtimeBytesUtil
+} from '@shared/utils/bytes'
 import { copyScreenshotToClipboard } from '@shared/utils/copy-screenshot.util'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { formatDurationUtil } from '@shared/utils/time-utils'
-import { prettyBytesToAnyUtil } from '@shared/utils/bytes'
 import { SectionCard } from '@shared/ui/section-card'
 
 import classes from './node-system-card.module.css'
@@ -73,6 +79,20 @@ export const NodeSystemCardWidget = memo((props: IProps) => {
         return formatDurationUtil(Math.floor(node.system.stats.uptime))
     }, [node.system])
 
+    const interfaceData = useMemo(() => {
+        if (!node.system?.stats.interface) return null
+
+        const { interface: iface } = node.system.stats
+
+        return {
+            name: iface.interface,
+            rxSpeed: prettySiRealtimeBytesUtil(iface.rxBytesPerSec, true, true),
+            txSpeed: prettySiRealtimeBytesUtil(iface.txBytesPerSec, true, true),
+            rxTotal: prettySiBytesUtil(iface.rxTotal) || '0 B',
+            txTotal: prettySiBytesUtil(iface.txTotal) || '0 B'
+        }
+    }, [node.system])
+
     if (!node.system) return null
 
     const { info } = node.system
@@ -91,7 +111,7 @@ export const NodeSystemCardWidget = memo((props: IProps) => {
                 <TbCamera size={24} />
             </ActionIcon>
 
-            <SectionCard.Root ref={cardRef} style={{ overflow: 'hidden' }}>
+            <SectionCard.Root gap="sm" ref={cardRef} style={{ overflow: 'hidden' }}>
                 <SectionCard.Section>
                     <Group justify="space-between" wrap="nowrap">
                         <BaseOverlayHeader
@@ -152,6 +172,69 @@ export const NodeSystemCardWidget = memo((props: IProps) => {
                         </Stack>
                     </div>
                 </SectionCard.Section>
+
+                {interfaceData && (
+                    <SectionCard.Section>
+                        <div className={classes.interfaceSection}>
+                            <Stack gap={6}>
+                                <Group gap={6} justify="space-between">
+                                    <Text
+                                        c="dimmed"
+                                        fw={600}
+                                        lh={1}
+                                        lts={1}
+                                        size="10px"
+                                        tt="uppercase"
+                                    >
+                                        {t('node-system-card.widget.interface')}
+                                    </Text>
+                                    <Badge color="cyan" ff="monospace" size="xs" variant="soft">
+                                        {interfaceData.name}
+                                    </Badge>
+                                </Group>
+
+                                <Group grow>
+                                    <Stack gap={0}>
+                                        <Text className={classes.statLabel} component="div">
+                                            <Group gap={4}>
+                                                <PiArrowDownDuotone
+                                                    color="var(--mantine-color-teal-5)"
+                                                    size={12}
+                                                />
+                                                RX
+                                            </Group>
+                                        </Text>
+                                        <Text className={classes.statValue}>
+                                            {interfaceData.rxSpeed}
+                                        </Text>
+                                        <Text c="dimmed" ff="monospace" size="10px">
+                                            {t('node-system-card.widget.total')}:{' '}
+                                            {interfaceData.rxTotal}
+                                        </Text>
+                                    </Stack>
+                                    <Stack gap={0}>
+                                        <Text className={classes.statLabel} component="div">
+                                            <Group gap={4}>
+                                                <PiArrowUpDuotone
+                                                    color="var(--mantine-color-cyan-5)"
+                                                    size={12}
+                                                />
+                                                TX
+                                            </Group>
+                                        </Text>
+                                        <Text className={classes.statValue}>
+                                            {interfaceData.txSpeed}
+                                        </Text>
+                                        <Text c="dimmed" ff="monospace" size="10px">
+                                            {t('node-system-card.widget.total')}:{' '}
+                                            {interfaceData.txTotal}
+                                        </Text>
+                                    </Stack>
+                                </Group>
+                            </Stack>
+                        </div>
+                    </SectionCard.Section>
+                )}
 
                 <SectionCard.Section>
                     <div className={classes.infoSection}>
