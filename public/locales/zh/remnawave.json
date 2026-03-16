@@ -859,7 +859,12 @@
             "total-download": "总下载",
             "average-bps": "带宽使用平均值",
             "active-nodes": "活动节点",
-            "current-hour": "当前小时"
+            "current-hour": "当前小时",
+            "download-speed": "Download Speed",
+            "upload-speed": "Upload Speed",
+            "download-total": "Download Total",
+            "ram-usage": "RAM Usage",
+            "for-all-nodes": "For all nodes"
         }
     },
     "node-users-usage-drawer": {
@@ -1339,7 +1344,8 @@
             "system": "System",
             "system-uptime": "System Uptime",
             "network": "Network",
-            "kernel": "Kernel"
+            "kernel": "Kernel",
+            "interface": "Interface"
         }
     },
     "node-stats": {
