@@ -32,10 +32,7 @@ export function NodesRealtimeUsageMetrics(props: IProps) {
                 txTotal: acc.txTotal + (curr.system?.stats.interface?.txTotal ?? 0),
                 rxSpeed: acc.rxSpeed + (curr.system?.stats.interface?.rxBytesPerSec ?? 0),
                 txSpeed: acc.txSpeed + (curr.system?.stats.interface?.txBytesPerSec ?? 0),
-                memoryUsed:
-                    acc.memoryUsed +
-                    (curr.system?.info.memoryTotal ?? 0) -
-                    (curr.system?.stats.memoryFree ?? 0)
+                memoryUsed: acc.memoryUsed + (curr.system?.stats.memoryUsed ?? 0)
             }),
             { rxTotal: 0, txTotal: 0, rxSpeed: 0, txSpeed: 0, memoryUsed: 0 }
         )

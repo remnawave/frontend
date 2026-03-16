@@ -354,10 +354,7 @@ export function getNodesTableColumns(
             accessor: 'system.stats.memoryUsed',
             sortable: true,
             title: 'Used RAM',
-            render: ({ system }) =>
-                system
-                    ? prettyBytesUtil(system.info.memoryTotal - system.stats.memoryFree, false)
-                    : '-'
+            render: ({ system }) => (system ? prettyBytesUtil(system.stats.memoryUsed, false) : '-')
         },
         {
             accessor: 'system.info.memoryTotal',

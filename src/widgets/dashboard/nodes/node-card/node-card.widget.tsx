@@ -2,6 +2,7 @@ import {
     PiArrowDownDuotone,
     PiArrowsCounterClockwise,
     PiArrowUpDuotone,
+    PiCpuDuotone,
     PiDotsSixVertical,
     PiGlobeSimple,
     PiMemoryDuotone,
@@ -101,20 +102,34 @@ export const NodeCardWidget = memo((props: IProps) => {
     const { backgroundColor, borderColor, boxShadow } = getNodeColors(node)
     const progressColor = getProgressColor(percentage, fallbackProgress)
 
-    const { ramPercentage, ramColor, rxSpeed, txSpeed } = useMemo(() => {
+    const { ramPercentage, ramColor, rxSpeed, txSpeed, loadAvg, cpus } = useMemo(() => {
         if (!node.system)
-            return { ramPercentage: null, ramColor: 'teal', rxSpeed: null, txSpeed: null }
-        const { memoryTotal } = node.system.info
-        const { memoryFree } = node.system.stats
+            return {
+                ramPercentage: null,
+                ramColor: 'teal',
+                rxSpeed: null,
+                txSpeed: null,
+                loadAvg: null,
+                cpus: 1
+            }
+        const { memoryTotal, cpus } = node.system.info
+        const { memoryUsed, loadAvg } = node.system.stats
 
-        const ramPercentage = Math.round(((memoryTotal - memoryFree) / memoryTotal) * 100)
+        const ramPercentage = Math.round((memoryUsed / memoryTotal) * 100)
 
         let ramColor = 'teal'
         if (ramPercentage > 90) ramColor = 'red'
         if (ramPercentage > 70) ramColor = 'yellow'
 
         if (!node.system.stats.interface)
-            return { ramPercentage, ramColor, rxSpeed: null, txSpeed: null }
+            return {
+                ramPercentage,
+                ramColor,
+                rxSpeed: null,
+                txSpeed: null,
+                loadAvg: null,
+                cpus: 1
+            }
         return {
             ramPercentage,
             ramColor,
@@ -127,7 +142,9 @@ export const NodeCardWidget = memo((props: IProps) => {
                 node.system.stats.interface.txBytesPerSec,
                 true,
                 true
-            )
+            ),
+            loadAvg,
+            cpus
         }
     }, [node.system])
 
@@ -139,6 +156,13 @@ export const NodeCardWidget = memo((props: IProps) => {
             title: t('node-card.widget.copied'),
             color: 'teal'
         })
+    }
+
+    const getLoadColor = (load: number, cpus: number) => {
+        const ratio = load / cpus
+        if (ratio > 1) return 'red'
+        if (ratio > 0.7) return 'yellow'
+        return 'dimmed'
     }
 
     return (
@@ -337,6 +361,29 @@ export const NodeCardWidget = memo((props: IProps) => {
                             <Text c="dimmed" ff="monospace" size="xs">
                                 {ramPercentage !== null ? `${ramPercentage}%` : '—'}
                             </Text>
+                        </Flex>
+                        <Flex align="center" gap={4}>
+                            <PiCpuDuotone className={classes.icon} size={12} />
+                            {loadAvg ? (
+                                <Text ff="monospace" size="xs">
+                                    {loadAvg.map((load, i) => (
+                                        <Text
+                                            c={getLoadColor(load, cpus)}
+                                            component="span"
+                                            ff="monospace"
+                                            key={i}
+                                            size="xs"
+                                        >
+                                            {i > 0 && ' '}
+                                            {load.toFixed(2)}
+                                        </Text>
+                                    ))}
+                                </Text>
+                            ) : (
+                                <Text c="dimmed" ff="monospace" size="xs">
+                                    {'—'}
+                                </Text>
+                            )}
                         </Flex>
                         <Flex align="center" gap={4}>
                             <PiArrowDownDuotone color="var(--mantine-color-teal-5)" size={12} />

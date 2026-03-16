@@ -23,10 +23,6 @@ import {
 type NodeType = GetAllNodesCommand.Response['response'][number]
 
 function getNodeSortValue(node: NodeType, accessor: string): unknown {
-    if (accessor === 'system.stats.memoryUsed') {
-        if (!node.system) return null
-        return node.system.info.memoryTotal - node.system.stats.memoryFree
-    }
     return get(node, accessor)
 }
 
