@@ -1331,15 +1331,15 @@
     },
     "node-system-card": {
         "widget": {
-            "system-info": "System Info",
-            "memory": "Memory",
-            "used": "Used",
-            "free": "Free",
-            "total": "Total",
-            "system": "System",
-            "system-uptime": "System Uptime",
-            "network": "Network",
-            "kernel": "Kernel"
+            "system-info": "Сведения о системе",
+            "memory": "Память",
+            "used": "Использовано",
+            "free": "Свободно",
+            "total": "Всего",
+            "system": "Система",
+            "system-uptime": "Время работы системы",
+            "network": "Сеть",
+            "kernel": "Ядро"
         }
     },
     "node-stats": {
@@ -2055,6 +2055,13 @@
             "widget": {
                 "active-users-on-this-node": "Активные пользователи на этой ноде"
             }
+        }
+    },
+    "nodes-datatable": {
+        "widget": {
+            "column-width": "Ширина столбца",
+            "column-order": "Порядок столбцов",
+            "column-toggle": "Отображаемые столбцы"
         }
     }
 }

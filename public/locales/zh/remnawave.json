@@ -2056,5 +2056,12 @@
                 "active-users-on-this-node": "在此节点上的活跃用户"
             }
         }
+    },
+    "nodes-datatable": {
+        "widget": {
+            "column-width": "Column Width",
+            "column-order": "Column Order",
+            "column-toggle": "Column Toggle"
+        }
     }
 }
