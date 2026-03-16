@@ -63,7 +63,7 @@ export const NodesTableWidget = memo((props: IProps) => {
 
     const virtualizer = useWindowVirtualizer({
         count: state.length,
-        estimateSize: () => (isMobile ? 169 : 64),
+        estimateSize: () => (isMobile ? 190 : 90),
         overscan: 7,
         scrollMargin,
         getItemKey: (index) => state[index].uuid
@@ -188,10 +188,7 @@ export const NodesTableWidget = memo((props: IProps) => {
                             position: 'relative'
                         }}
                     >
-                        <SortableContext
-                            items={dataIds}
-                            strategy={verticalListSortingStrategy}
-                        >
+                        <SortableContext items={dataIds} strategy={verticalListSortingStrategy}>
                             <Container fluid>
                                 <Stack gap={0}>
                                     {virtualizer.getVirtualItems().map((virtualItem) => {
