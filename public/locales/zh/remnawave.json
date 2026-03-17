@@ -860,11 +860,11 @@
             "average-bps": "带宽使用平均值",
             "active-nodes": "活动节点",
             "current-hour": "当前小时",
-            "download-speed": "Download Speed",
-            "upload-speed": "Upload Speed",
-            "download-total": "Download Total",
-            "ram-usage": "RAM Usage",
-            "for-all-nodes": "For all nodes"
+            "download-speed": "下载速度",
+            "upload-speed": "上传速度",
+            "download-total": "下载总计",
+            "ram-usage": "内存使用量",
+            "for-all-nodes": "对于所有节点"
         }
     },
     "node-users-usage-drawer": {
@@ -1336,16 +1336,16 @@
     },
     "node-system-card": {
         "widget": {
-            "system-info": "System Info",
-            "memory": "Memory",
-            "used": "Used",
-            "free": "Free",
-            "total": "Total",
-            "system": "System",
-            "system-uptime": "System Uptime",
-            "network": "Network",
-            "kernel": "Kernel",
-            "interface": "Interface"
+            "system-info": "系统信息",
+            "memory": "内存",
+            "used": "已使用",
+            "free": "可用",
+            "total": "总计",
+            "system": "系统",
+            "system-uptime": "系统运行时间",
+            "network": "网络",
+            "kernel": "内核",
+            "interface": "接口"
         }
     },
     "node-stats": {
@@ -2065,9 +2065,9 @@
     },
     "nodes-datatable": {
         "widget": {
-            "column-width": "Column Width",
-            "column-order": "Column Order",
-            "column-toggle": "Column Toggle"
+            "column-width": "列宽",
+            "column-order": "排序",
+            "column-toggle": "筛选"
         }
     }
 }
