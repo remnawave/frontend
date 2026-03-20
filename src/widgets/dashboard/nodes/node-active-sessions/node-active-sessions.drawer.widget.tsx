@@ -1,4 +1,15 @@
 import {
+    TbAlertTriangle,
+    TbBrandDocker,
+    TbClock,
+    TbRadar,
+    TbRefresh,
+    TbSortAscending,
+    TbSortDescending,
+    TbTrash,
+    TbUser
+} from 'react-icons/tb'
+import {
     ActionIcon,
     Box,
     Button,
@@ -6,21 +17,13 @@ import {
     Drawer,
     Group,
     Stack,
+    Tabs,
     Text,
     ThemeIcon,
     Tooltip,
     Transition
 } from '@mantine/core'
-import {
-    TbAlertTriangle,
-    TbBrandDocker,
-    TbClock,
-    TbRadar,
-    TbRefresh,
-    TbTrash,
-    TbUser
-} from 'react-icons/tb'
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { CodeHighlight } from '@mantine/code-highlight'
 import { Trans, useTranslation } from 'react-i18next'
 import { PiEmptyDuotone } from 'react-icons/pi'
@@ -55,6 +58,9 @@ export const NodeActiveSessionsDrawerWidget = (props: IProps) => {
     const [jobId, setJobId] = useState<null | string>(null)
     const [isCompleted, setIsCompleted] = useState(false)
     const [isFailed, setIsFailed] = useState(false)
+    const [sortMode, setSortMode] = useState<'default' | 'ips-asc' | 'ips-desc' | 'reverse'>(
+        'default'
+    )
 
     const { mutate: fetchUsersIps, isPending: isFetchingUsersIps } = useFetchUsersIps({
         route: {
@@ -264,12 +270,60 @@ export const NodeActiveSessionsDrawerWidget = (props: IProps) => {
         </Stack>
     )
 
-    const renderResults = () => {
+    const sortedUsers = useMemo(() => {
         const users = usersIpsResult?.result?.users
+        if (!users) return undefined
+
+        switch (sortMode) {
+            case 'ips-asc':
+                return [...users].sort((a, b) => a.ips.length - b.ips.length)
+            case 'ips-desc':
+                return [...users].sort((a, b) => b.ips.length - a.ips.length)
+            case 'reverse':
+                return [...users].reverse()
+            default:
+                return users
+        }
+    }, [usersIpsResult?.result?.users, sortMode])
+
+    const renderResults = () => {
+        const users = sortedUsers
 
         return (
             <Stack gap="md" style={{ flex: 1 }}>
                 {renderSummaryCard(users?.length ?? 0)}
+
+                {users && users.length > 0 && (
+                    <Tabs
+                        classNames={{
+                            tab: classes.sortTab,
+                            tabLabel: classes.sortTabLabel
+                        }}
+                        onChange={(value) =>
+                            setSortMode(
+                                (value as 'default' | 'ips-asc' | 'ips-desc' | 'reverse') ??
+                                    'default'
+                            )
+                        }
+                        value={sortMode}
+                        variant="unstyled"
+                    >
+                        <Tabs.List grow>
+                            <Tabs.Tab leftSection={<TbSortAscending size={16} />} value="default">
+                                Default
+                            </Tabs.Tab>
+                            <Tabs.Tab leftSection={<TbSortDescending size={16} />} value="reverse">
+                                Reverse
+                            </Tabs.Tab>
+                            <Tabs.Tab leftSection={<TbSortAscending size={16} />} value="ips-asc">
+                                IPs
+                            </Tabs.Tab>
+                            <Tabs.Tab leftSection={<TbSortDescending size={16} />} value="ips-desc">
+                                IPs
+                            </Tabs.Tab>
+                        </Tabs.List>
+                    </Tabs>
+                )}
 
                 {users && users.length === 0 && (
                     <SectionCard.Root gap="sm">
