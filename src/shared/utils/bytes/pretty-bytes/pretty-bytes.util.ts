@@ -102,7 +102,7 @@ export function prettySiRealtimeBytesUtil(
         bytesInput = Number(bytesInput)
     }
 
-    const res = xbytes.parseBytes(bytesInput, { sticky: true, iec: false })
+    const res = xbytes.parseBytes(bytesInput, { sticky: true, iec: false, bits: true })
 
     return `${res.size}${withSeconds ? '/s' : ''}`
 }
