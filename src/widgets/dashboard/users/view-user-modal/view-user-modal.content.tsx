@@ -29,6 +29,7 @@ import {
     useUpdateUser
 } from '@shared/api/hooks'
 import { GetUserSubscriptionRequestHistoryFeature } from '@features/ui/dashboard/users/get-user-subscription-request-history'
+import { GetUserTorrentBlockerReportsFeature } from '@features/ui/dashboard/users/get-user-torrent-blocker-reports'
 import { GetUserSubscriptionLinksFeature } from '@features/ui/dashboard/users/get-user-subscription-links'
 import { ToggleUserStatusButtonFeature } from '@features/ui/dashboard/users/toggle-user-status-button'
 import { RevokeSubscriptionUserFeature } from '@features/ui/dashboard/users/revoke-subscription-user'
@@ -346,6 +347,7 @@ export const ViewUserModalContent = (props: IProps) => {
                             opened={trafficStatisticsModalOpened}
                             userUuid={user.uuid}
                         />
+                        <GetUserTorrentBlockerReportsFeature userUuid={user.uuid} />
                         <GetUserActiveSessionsFeature userUuid={user.uuid} />
                         <GetHwidUserDevicesFeature userUuid={user.uuid} />
 

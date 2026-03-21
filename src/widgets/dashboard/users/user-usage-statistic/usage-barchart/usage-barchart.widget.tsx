@@ -1,3 +1,4 @@
+/* eslint-disable @stylistic/indent */
 import {
     alpha,
     Box,
@@ -31,7 +32,7 @@ interface IProps {
 export const UserUsageBarchartWidget = (props: IProps) => {
     const { categories = [], series = [], isLoading } = props
 
-    const { t } = useTranslation()
+    const { t, i18n } = useTranslation()
 
     if (isLoading) {
         return <Skeleton height={400} />
@@ -78,7 +79,11 @@ export const UserUsageBarchartWidget = (props: IProps) => {
                     IconComponent={TbChartBar}
                     iconVariant="soft"
                     subtitle={`Σ ${prettyBytesToAnyUtil(totalDayTraffic)}`}
-                    title={formatTimeUtil(category, 'D MMMM YYYY')}
+                    title={formatTimeUtil({
+                        time: category,
+                        template: 'FULL_DATE',
+                        language: i18n.language
+                    })}
                 />
             ),
             children: (
@@ -201,7 +206,12 @@ export const UserUsageBarchartWidget = (props: IProps) => {
                         crosshair: true,
                         labels: {
                             style: { color: 'var(--mantine-color-text)' },
-                            formatter: ({ value }) => formatTimeUtil(value, 'D MMM')
+                            formatter: ({ value }) =>
+                                formatTimeUtil({
+                                    time: value,
+                                    template: 'SHORT_DATE',
+                                    language: i18n.language
+                                })
                         },
                         gridLineColor: 'var(--mantine-color-gray-light-hover)',
                         gridLineWidth: 1,
@@ -251,7 +261,11 @@ export const UserUsageBarchartWidget = (props: IProps) => {
                                 if (idx >= 0 && idx < seriesData.length) {
                                     const point = seriesData[idx]
                                     nearbyDays.push({
-                                        date: formatTimeUtil(point.category, 'D MMM'),
+                                        date: formatTimeUtil({
+                                            time: point.category,
+                                            template: 'SHORT_DATE',
+                                            language: i18n.language
+                                        }),
                                         isCurrent: i === 0,
                                         value: point.y || 0
                                     })
@@ -283,7 +297,12 @@ export const UserUsageBarchartWidget = (props: IProps) => {
                             return `
                             <div style="font-size: 0.875rem; padding: 4px; min-width: 220px;">
                                 <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
-                                    <span style="font-weight: 600;">${formatTimeUtil(this.category, 'D MMMM YYYY')}</span>
+                                    <span style="font-weight: 600;">${formatTimeUtil({
+                                        time: this.category,
+                                        template: 'FULL_DATE',
+
+                                        language: i18n.language
+                                    })}</span>
                                     <span style="font-size: 0.85rem; color: var(--mantine-color-dimmed); display: flex; align-items: center; gap: 4px;">
                                         <span style="font-size: 0.85rem;">Σ</span>
                                         ${prettyBytesToAnyUtil(totalInThisDay, true)}

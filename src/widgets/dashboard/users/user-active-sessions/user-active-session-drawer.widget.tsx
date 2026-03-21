@@ -501,10 +501,12 @@ export const UserActiveSessionDrawerWidget = (props: IProps) => {
                                                                     ff="monospace"
                                                                     size="xs"
                                                                 >
-                                                                    {formatTimeUtil(
-                                                                        item.lastSeen,
-                                                                        'DD.MM.YYYY HH:mm:ss'
-                                                                    )}
+                                                                    {formatTimeUtil({
+                                                                        time: item.lastSeen,
+                                                                        template:
+                                                                            'TIME_FIRST_DATETIME',
+                                                                        language: i18n.language
+                                                                    })}
                                                                 </Text>
                                                             </Stack>
                                                         }

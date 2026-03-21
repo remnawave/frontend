@@ -1,0 +1,26 @@
+.itemWrapper {
+    padding-bottom: 8px;
+    animation: fadeIn 0.2s ease-out;
+    -webkit-animation: fadeIn 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        transform: scale(0.75);
+    }
+    to {
+        transform: scale(1);
+    }
+}
+
+.listContainer {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+}
+
+.drawerContent {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}

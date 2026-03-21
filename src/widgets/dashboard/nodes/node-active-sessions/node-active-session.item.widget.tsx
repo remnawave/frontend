@@ -123,10 +123,11 @@ export const NodeActiveSessionItem = (props: IProps) => {
                                                     )}
                                                 </Text>
                                                 <Text c="dimmed" ff="monospace" size="xs">
-                                                    {formatTimeUtil(
-                                                        item.lastSeen,
-                                                        'DD.MM.YYYY HH:mm:ss'
-                                                    )}
+                                                    {formatTimeUtil({
+                                                        time: item.lastSeen,
+                                                        template: 'TIME_FIRST_DATETIME',
+                                                        language: i18n.language
+                                                    })}
                                                 </Text>
                                             </Stack>
                                         }

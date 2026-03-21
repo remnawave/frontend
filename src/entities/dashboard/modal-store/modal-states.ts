@@ -7,6 +7,7 @@ import {
 import { THelpDrawerAvailableScreen } from '@shared/ui/help-drawer/help-drawer.types'
 
 export const MODALS = {
+    USER_TORRENT_BLOCKER_REPORTS_DRAWER: 'USER_TORRENT_BLOCKER_REPORTS_DRAWER',
     CONFIG_PROFILES_SHOW_ACTIVE_NODE: 'CONFIG_PROFILES_SHOW_ACTIVE_NODE',
     INTERNAL_SQUAD_SHOW_INBOUNDS: 'INTERNAL_SQUAD_SHOW_INBOUNDS',
     USER_HWID_DEVICES_DRAWER: 'USER_HWID_DEVICES_DRAWER',
@@ -76,6 +77,9 @@ export interface ModalInternalStates {
         userUuid: string
     }
     USER_SUBSCRIPTION_REQUESTS_DRAWER: {
+        userUuid: string
+    }
+    USER_TORRENT_BLOCKER_REPORTS_DRAWER: {
         userUuid: string
     }
     VIEW_INFRA_PROVIDER_DRAWER: GetInfraProvidersCommand.Response['response']['providers'][number]

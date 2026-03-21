@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next'
 
 import { CopyableFieldShared } from '@shared/ui/copyable-field/copyable-field'
 import { SettingsCardShared } from '@shared/ui/settings-card'
-import { formatDate } from '@shared/utils/misc'
+import { formatTimeUtil } from '@shared/utils/time-utils'
 
 interface IProps {
     request: GetUserSubscriptionRequestHistoryCommand.Response['response']['records'][number]
@@ -14,7 +14,7 @@ interface IProps {
 export const UserSubscriptionRequestItem = (props: IProps) => {
     const { request } = props
 
-    const { t } = useTranslation()
+    const { t, i18n } = useTranslation()
 
     return (
         <SettingsCardShared.Container>
@@ -66,7 +66,11 @@ export const UserSubscriptionRequestItem = (props: IProps) => {
                     <CopyableFieldShared
                         label={t('get-user-subscription-request-history.feature.request-at')}
                         size="sm"
-                        value={formatDate(request.requestAt, 'DD.MM.YYYY HH:mm:ss')}
+                        value={formatTimeUtil({
+                            time: request.requestAt,
+                            template: 'TIME_FIRST_DATETIME',
+                            language: i18n.language
+                        })}
                     />
                 </Stack>
             </SettingsCardShared.Content>

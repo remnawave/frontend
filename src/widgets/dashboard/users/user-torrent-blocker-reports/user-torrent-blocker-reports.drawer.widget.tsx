@@ -10,37 +10,71 @@ import {
     Tooltip,
     Transition
 } from '@mantine/core'
-import { TbDevices, TbRefresh, TbTimeline } from 'react-icons/tb'
+import { TbDevices, TbFlame, TbRefresh } from 'react-icons/tb'
 import { useTranslation } from 'react-i18next'
+import { Virtuoso } from 'react-virtuoso'
 
 import { MODALS, useModalClose, useModalState } from '@entities/dashboard/modal-store'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
-import { useGetUserSubscriptionRequestHistory } from '@shared/api/hooks'
+import { useGetTorrentBlockerReports } from '@shared/api/hooks'
 import { EmptyPageLayout } from '@shared/ui/layouts/empty-page'
 import { LoaderModalShared } from '@shared/ui/loader-modal'
 
-import { UserSubscriptionRequestItem } from './user-subscription-request-item'
-import classes from './user-subscription-requests.module.css'
+import { UserTorrentBlockerReportItem } from './user-torrent-blocker-report-item'
+import classes from './user-torrent-blocker-reports.module.css'
 
-export const UserSubscriptionRequestsDrawerWidget = () => {
+export const UserTorrentBlockerReportsDrawerWidget = () => {
     const { t } = useTranslation()
 
-    const { isOpen, internalState } = useModalState(MODALS.USER_SUBSCRIPTION_REQUESTS_DRAWER)
-    const close = useModalClose(MODALS.USER_SUBSCRIPTION_REQUESTS_DRAWER)
+    const { isOpen, internalState } = useModalState(MODALS.USER_TORRENT_BLOCKER_REPORTS_DRAWER)
+    const close = useModalClose(MODALS.USER_TORRENT_BLOCKER_REPORTS_DRAWER)
 
     const {
-        data: subscriptionRequestHistory,
+        data: reports,
         isLoading,
         isRefetching,
         refetch
-    } = useGetUserSubscriptionRequestHistory({
-        route: {
-            uuid: internalState?.userUuid ?? ''
+    } = useGetTorrentBlockerReports({
+        query: {
+            start: 0,
+            size: 1000,
+            filters: [
+                {
+                    id: 'user.uuid',
+                    value: internalState?.userUuid ?? ''
+                }
+            ],
+            filterModes: {
+                'user.uuid': 'equals'
+            }
         },
         rQueryParams: {
             enabled: isOpen
         }
     })
+
+    const renderListContent = () => {
+        if (!reports || reports.total === 0) return null
+        return (
+            <Box className={classes.listContainer}>
+                <Virtuoso
+                    data={reports.records}
+                    itemContent={(_, report) => {
+                        return (
+                            <Box className={classes.itemWrapper}>
+                                <UserTorrentBlockerReportItem report={report} />
+                            </Box>
+                        )
+                    }}
+                    style={{
+                        height: '100%'
+                    }}
+                    totalCount={reports.total}
+                    useWindowScroll={false}
+                />
+            </Box>
+        )
+    }
 
     const renderDrawerContent = () => {
         return (
@@ -54,11 +88,11 @@ export const UserSubscriptionRequestsDrawerWidget = () => {
                                 </ThemeIcon>
                                 <Stack gap={0}>
                                     <Text c="white" fw={700} size="xl">
-                                        {subscriptionRequestHistory?.total ?? 0}
+                                        {reports?.total ?? 0}
                                     </Text>
                                     <Text c="dimmed" size="xs">
                                         {t(
-                                            'user-subscription-requests-drawer.widget.total-records'
+                                            'user-torrent-blocker-reports.drawer.widget.total-reports'
                                         )}
                                     </Text>
                                 </Stack>
@@ -80,15 +114,7 @@ export const UserSubscriptionRequestsDrawerWidget = () => {
                     </Stack>
                 </Card>
 
-                {subscriptionRequestHistory?.total && subscriptionRequestHistory.total > 0 ? (
-                    <Stack>
-                        {subscriptionRequestHistory.records.map((record) => (
-                            <UserSubscriptionRequestItem key={record.id} request={record} />
-                        ))}
-                    </Stack>
-                ) : (
-                    <EmptyPageLayout />
-                )}
+                {reports && reports.total > 0 ? renderListContent() : <EmptyPageLayout />}
             </Stack>
         )
     }
@@ -100,14 +126,19 @@ export const UserSubscriptionRequestsDrawerWidget = () => {
             opened={isOpen}
             position="right"
             size="500px"
+            styles={{
+                body: {
+                    height: 'calc(100% - 60px)',
+                    display: 'flex',
+                    flexDirection: 'column'
+                }
+            }}
             title={
                 <BaseOverlayHeader
-                    iconColor="teal"
-                    IconComponent={TbTimeline}
+                    iconColor="red"
+                    IconComponent={TbFlame}
                     iconVariant="soft"
-                    title={t(
-                        'get-user-subscription-request-history.feature.subscription-request-history'
-                    )}
+                    title={t('constants.tb-reports')}
                 />
             }
         >
@@ -119,7 +150,11 @@ export const UserSubscriptionRequestsDrawerWidget = () => {
                 timingFunction="ease-in-out"
                 transition="fade"
             >
-                {(styles) => <Box style={{ ...styles }}>{renderDrawerContent()}</Box>}
+                {(styles) => (
+                    <Box style={{ ...styles, flex: 1, display: 'flex', flexDirection: 'column' }}>
+                        {renderDrawerContent()}
+                    </Box>
+                )}
             </Transition>
         </Drawer>
     )
