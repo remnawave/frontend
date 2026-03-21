@@ -2069,5 +2069,26 @@
             "column-order": "排序",
             "column-toggle": "筛选"
         }
+    },
+    "user-torrent-blocker-report-item": {
+        "processed-at": "处理时间",
+        "unblocked-at": "解除阻止在"
+    },
+    "get-user-torrent-blocker-reports": {
+        "feature": {
+            "blocker-reports": "拦截报告"
+        }
+    },
+    "user-torrent-blocker-reports": {
+        "drawer": {
+            "widget": {
+                "total-reports": "报告总数"
+            }
+        }
+    },
+    "user-subscription-requests-drawer": {
+        "widget": {
+            "total-records": "记录合计"
+        }
     }
 }
