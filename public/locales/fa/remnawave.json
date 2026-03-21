@@ -2069,5 +2069,26 @@
             "column-order": "Column Order",
             "column-toggle": "Column Toggle"
         }
+    },
+    "user-torrent-blocker-report-item": {
+        "processed-at": "Processed At",
+        "unblocked-at": "Unblocked At"
+    },
+    "get-user-torrent-blocker-reports": {
+        "feature": {
+            "blocker-reports": "Blocker Reports"
+        }
+    },
+    "user-torrent-blocker-reports": {
+        "drawer": {
+            "widget": {
+                "total-reports": "Total reports"
+            }
+        }
+    },
+    "user-subscription-requests-drawer": {
+        "widget": {
+            "total-records": "Total records"
+        }
     }
 }
