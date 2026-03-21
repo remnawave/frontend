@@ -112,7 +112,6 @@ export const NodeActiveSessionItem = (props: IProps) => {
                             <CopyableFieldShared
                                 leftSection={
                                     <Tooltip
-                                        color="dark.6"
                                         label={
                                             <Stack gap={2} p={4}>
                                                 <Text c="white" fw={600} size="xs">
@@ -132,12 +131,6 @@ export const NodeActiveSessionItem = (props: IProps) => {
                                             </Stack>
                                         }
                                         radius="md"
-                                        styles={{
-                                            tooltip: {
-                                                border: '1px solid var(--mantine-color-dark-4)',
-                                                backdropFilter: 'blur(8px)'
-                                            }
-                                        }}
                                     >
                                         {(() => {
                                             const { color, Icon } = getLastSeenIndicator(

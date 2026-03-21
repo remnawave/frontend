@@ -27,6 +27,7 @@ import { GetUserSubscriptionRequestHistoryFeature } from '@features/ui/dashboard
 import { GetUserTorrentBlockerReportsFeature } from '@features/ui/dashboard/users/get-user-torrent-blocker-reports'
 import { GetUserSubscriptionLinksFeature } from '@features/ui/dashboard/users/get-user-subscription-links'
 import { GetUserActiveSessionsFeature } from '@features/ui/dashboard/users/get-user-active-sessions'
+import { formatRelativeDateUtil, formatTimeUtil, getTimeAgoUtil } from '@shared/utils/time-utils'
 import { GetHwidUserDevicesFeature } from '@features/ui/dashboard/users/get-hwid-user-devices'
 import { MODALS, useModalsStoreOpenWithData } from '@entities/dashboard/modal-store'
 import { GetUserUsageFeature } from '@features/ui/dashboard/users/get-user-usage'
@@ -36,7 +37,6 @@ import { UserStatusBadge } from '@widgets/dashboard/users/user-status-badge'
 import { resolveCountryCode } from '@shared/utils/misc/resolve-country-code'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { CopyableCodeBlock } from '@shared/ui/copyable-code-block'
-import { getTimeAgoUtil } from '@shared/utils/time-utils'
 import { prettyBytesUtil } from '@shared/utils/bytes'
 import { SectionCard } from '@shared/ui/section-card'
 
@@ -53,6 +53,14 @@ const statusIconColorMap = {
     [USERS_STATUS.EXPIRED]: 'red',
     [USERS_STATUS.LIMITED]: 'yellow'
 } as const
+
+const getLastSeenIndicatorColor = (lastSeen: Date | string) => {
+    const diffMs = Date.now() - new Date(lastSeen).getTime()
+    const diffMinutes = diffMs / 60_000
+    if (diffMinutes <= 5) return 'var(--mantine-color-teal-4)'
+    if (diffMinutes <= 60) return 'var(--mantine-color-yellow-4)'
+    return 'var(--mantine-color-red-4)'
+}
 
 export const UserIdentificationCard = memo((props: IProps) => {
     const { t, i18n } = useTranslation()
@@ -303,9 +311,36 @@ export const UserIdentificationCard = memo((props: IProps) => {
                                 p="xs"
                                 radius="md"
                             >
-                                <Tooltip label={t('detailed-user-info-drawer.widget.last-online')}>
+                                <Tooltip
+                                    label={
+                                        <Stack gap={2} p={4}>
+                                            <Text c="white" fw={600} size="xs">
+                                                {t('detailed-user-info-drawer.widget.last-online')}
+                                            </Text>
+                                            <Text c="white" fw={600} size="xs">
+                                                {formatRelativeDateUtil(
+                                                    user.userTraffic.onlineAt,
+                                                    t,
+                                                    i18n.language
+                                                )}
+                                            </Text>
+                                            <Text c="dimmed" ff="monospace" size="xs">
+                                                {formatTimeUtil({
+                                                    time: user.userTraffic.onlineAt,
+                                                    template: 'TIME_FIRST_DATETIME',
+                                                    language: i18n.language
+                                                })}
+                                            </Text>
+                                        </Stack>
+                                    }
+                                >
                                     <Group gap="xs" justify="center" wrap="nowrap">
-                                        <TbWifi color="var(--mantine-color-violet-4)" size={18} />
+                                        <TbWifi
+                                            color={getLastSeenIndicatorColor(
+                                                user.userTraffic.onlineAt
+                                            )}
+                                            size={18}
+                                        />
                                         <Text c="violet.4" fw={600} size="xs" truncate>
                                             {getTimeAgoUtil(
                                                 user.userTraffic.onlineAt,
