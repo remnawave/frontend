@@ -313,12 +313,6 @@ export const ViewUserModalContent = (props: IProps) => {
                         <ToggleUserStatusButtonFeature user={user} />
                         <ResetUsageUserFeature userUuid={user.uuid} />
                         <RevokeSubscriptionUserFeature userUuid={user.uuid} />
-
-                        <Menu.Divider />
-                        <Menu.Label>{t('view-user-modal.widget.information')}</Menu.Label>
-
-                        <Menu.Divider />
-                        <Menu.Label>{t('view-user-modal.widget.subscription')}</Menu.Label>
                     </Menu.Dropdown>
                 </Menu>
 
