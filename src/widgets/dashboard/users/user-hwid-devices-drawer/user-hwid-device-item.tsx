@@ -48,7 +48,7 @@ export const UserHwidDeviceItem = (props: IProps) => {
         <SettingsCardShared.Container>
             <Group align="center" gap="xs" justify="space-between" wrap="nowrap">
                 <Group align="center" gap="xs" wrap="nowrap">
-                    <ThemeIcon color="indigo" size="lg" variant="light">
+                    <ThemeIcon color="indigo" size="lg" variant="soft">
                         {resolvePlatform(device.platform)}
                     </ThemeIcon>
                     <Text fw={600} size="md">
@@ -61,7 +61,7 @@ export const UserHwidDeviceItem = (props: IProps) => {
                     color="red"
                     onClick={() => onDelete(device.hwid)}
                     size="lg"
-                    variant="light"
+                    variant="soft"
                 >
                     <PiTrash size="20px" />
                 </ActionIcon>

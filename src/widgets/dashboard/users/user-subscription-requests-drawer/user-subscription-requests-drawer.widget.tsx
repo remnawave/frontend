@@ -49,7 +49,7 @@ export const UserSubscriptionRequestsDrawerWidget = () => {
                     <Stack gap="md">
                         <Group gap="sm" justify="space-between">
                             <Group>
-                                <ThemeIcon color="indigo" radius="md" size="xl" variant="light">
+                                <ThemeIcon color="indigo" radius="md" size="xl" variant="soft">
                                     <TbDevices size={24} />
                                 </ThemeIcon>
                                 <Stack gap={0}>

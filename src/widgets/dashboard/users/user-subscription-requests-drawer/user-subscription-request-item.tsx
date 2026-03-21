@@ -20,7 +20,7 @@ export const UserSubscriptionRequestItem = (props: IProps) => {
         <SettingsCardShared.Container>
             <Group align="center" gap="xs" justify="space-between" wrap="nowrap">
                 <Group align="center" gap="xs" wrap="nowrap">
-                    <ThemeIcon color="cyan" size="lg" variant="light">
+                    <ThemeIcon color="cyan" size="lg" variant="soft">
                         <TbViewfinder size="20" />
                     </ThemeIcon>
                     <Text fw={600} size="md">

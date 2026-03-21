@@ -10,7 +10,7 @@ import {
     Tooltip,
     Transition
 } from '@mantine/core'
-import { TbDevices, TbFlame, TbRefresh } from 'react-icons/tb'
+import { TbFlame, TbRefresh } from 'react-icons/tb'
 import { useTranslation } from 'react-i18next'
 import { Virtuoso } from 'react-virtuoso'
 
@@ -83,8 +83,8 @@ export const UserTorrentBlockerReportsDrawerWidget = () => {
                     <Stack gap="md">
                         <Group gap="sm" justify="space-between">
                             <Group>
-                                <ThemeIcon color="indigo" radius="md" size="xl" variant="light">
-                                    <TbDevices size={24} />
+                                <ThemeIcon color="indigo" radius="md" size="xl" variant="soft">
+                                    <TbFlame size={24} />
                                 </ThemeIcon>
                                 <Stack gap={0}>
                                     <Text c="white" fw={700} size="xl">
