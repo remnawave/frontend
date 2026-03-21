@@ -2,6 +2,9 @@ import {
     TbAlertTriangle,
     TbBrandDocker,
     TbClock,
+    TbClockCheck,
+    TbClockExclamation,
+    TbClockPause,
     TbRadar,
     TbRefresh,
     TbSortAscending,
@@ -16,6 +19,7 @@ import {
     Center,
     Drawer,
     Group,
+    Paper,
     Stack,
     Tabs,
     Text,
@@ -28,6 +32,7 @@ import { CodeHighlight } from '@mantine/code-highlight'
 import { Trans, useTranslation } from 'react-i18next'
 import { PiEmptyDuotone } from 'react-icons/pi'
 import { Virtuoso } from 'react-virtuoso'
+import clsx from 'clsx'
 
 import { useFetchUsersIps, useFetchUsersIpsResult } from '@shared/api/hooks'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
@@ -58,9 +63,8 @@ export const NodeActiveSessionsDrawerWidget = (props: IProps) => {
     const [jobId, setJobId] = useState<null | string>(null)
     const [isCompleted, setIsCompleted] = useState(false)
     const [isFailed, setIsFailed] = useState(false)
-    const [sortMode, setSortMode] = useState<'default' | 'ips-asc' | 'ips-desc' | 'reverse'>(
-        'default'
-    )
+    const [sortMode, setSortMode] = useState<'default' | 'ips-asc' | 'ips-desc'>('default')
+    const [isScrolled, setIsScrolled] = useState(false)
 
     const { mutate: fetchUsersIps, isPending: isFetchingUsersIps } = useFetchUsersIps({
         route: {
@@ -161,6 +165,81 @@ export const NodeActiveSessionsDrawerWidget = (props: IProps) => {
             </SectionCard.Section>
         </SectionCard.Root>
     )
+
+    const ipStats = useMemo(() => {
+        const users = usersIpsResult?.result?.users
+        if (!users) return null
+
+        const now = new Date()
+        let active = 0
+        let idle = 0
+        let stale = 0
+
+        for (const user of users) {
+            for (const ip of user.ips) {
+                const diffMinutes = (now.getTime() - new Date(ip.lastSeen).getTime()) / 60_000
+                if (diffMinutes <= 5) active++
+                else if (diffMinutes <= 60) idle++
+                else stale++
+            }
+        }
+
+        return { active, idle, stale, total: active + idle + stale }
+    }, [usersIpsResult?.result?.users])
+
+    const renderIpStatsCard = () => {
+        if (!ipStats) return null
+
+        return (
+            <SectionCard.Root gap="sm">
+                <SectionCard.Section>
+                    <Group gap="xs" grow>
+                        <Paper
+                            bd="1px solid rgba(45, 212, 191, 0.2)"
+                            bg="rgba(45, 212, 191, 0.08)"
+                            p="xs"
+                            radius="md"
+                        >
+                            <Group gap={4} justify="center">
+                                <TbClockCheck color="var(--mantine-color-teal-6)" size={18} />
+                                <Text c="teal.6" fw={700} size="sm">
+                                    {formatInt(ipStats.active)}
+                                </Text>
+                            </Group>
+                        </Paper>
+
+                        <Paper
+                            bd="1px solid rgba(251, 191, 36, 0.2)"
+                            bg="rgba(251, 191, 36, 0.08)"
+                            p="xs"
+                            radius="md"
+                        >
+                            <Group gap={4} justify="center">
+                                <TbClockPause color="var(--mantine-color-yellow-6)" size={18} />
+                                <Text c="yellow.6" fw={700} size="sm">
+                                    {formatInt(ipStats.idle)}
+                                </Text>
+                            </Group>
+                        </Paper>
+
+                        <Paper
+                            bd="1px solid rgba(239, 68, 68, 0.2)"
+                            bg="rgba(239, 68, 68, 0.08)"
+                            p="xs"
+                            radius="md"
+                        >
+                            <Group gap={4} justify="center">
+                                <TbClockExclamation color="var(--mantine-color-red-6)" size={18} />
+                                <Text c="red.6" fw={700} size="sm">
+                                    {formatInt(ipStats.stale)}
+                                </Text>
+                            </Group>
+                        </Paper>
+                    </Group>
+                </SectionCard.Section>
+            </SectionCard.Root>
+        )
+    }
 
     const renderWarning = () => (
         <SectionCard.Root gap="md">
@@ -279,8 +358,6 @@ export const NodeActiveSessionsDrawerWidget = (props: IProps) => {
                 return [...users].sort((a, b) => a.ips.length - b.ips.length)
             case 'ips-desc':
                 return [...users].sort((a, b) => b.ips.length - a.ips.length)
-            case 'reverse':
-                return [...users].reverse()
             default:
                 return users
         }
@@ -292,6 +369,7 @@ export const NodeActiveSessionsDrawerWidget = (props: IProps) => {
         return (
             <Stack gap="md" style={{ flex: 1 }}>
                 {renderSummaryCard(users?.length ?? 0)}
+                {users && users.length > 0 && renderIpStatsCard()}
 
                 {users && users.length > 0 && (
                     <Tabs
@@ -300,10 +378,7 @@ export const NodeActiveSessionsDrawerWidget = (props: IProps) => {
                             tabLabel: classes.sortTabLabel
                         }}
                         onChange={(value) =>
-                            setSortMode(
-                                (value as 'default' | 'ips-asc' | 'ips-desc' | 'reverse') ??
-                                    'default'
-                            )
+                            setSortMode((value as 'default' | 'ips-asc' | 'ips-desc') ?? 'default')
                         }
                         value={sortMode}
                         variant="unstyled"
@@ -312,9 +387,7 @@ export const NodeActiveSessionsDrawerWidget = (props: IProps) => {
                             <Tabs.Tab leftSection={<TbSortAscending size={16} />} value="default">
                                 Default
                             </Tabs.Tab>
-                            <Tabs.Tab leftSection={<TbSortDescending size={16} />} value="reverse">
-                                Reverse
-                            </Tabs.Tab>
+
                             <Tabs.Tab leftSection={<TbSortAscending size={16} />} value="ips-asc">
                                 IPs
                             </Tabs.Tab>
@@ -344,7 +417,13 @@ export const NodeActiveSessionsDrawerWidget = (props: IProps) => {
                 )}
 
                 {users && users.length > 0 && (
-                    <Box className={classes.listContainer}>
+                    <Box
+                        className={clsx(
+                            classes.listContainer,
+                            classes.fadeBottom,
+                            isScrolled && classes.fadeTop
+                        )}
+                    >
                         <Virtuoso
                             data={users}
                             itemContent={(_index, user) => {
@@ -353,6 +432,10 @@ export const NodeActiveSessionsDrawerWidget = (props: IProps) => {
                                         <NodeActiveSessionItem user={user} />
                                     </Box>
                                 )
+                            }}
+                            onScroll={(e) => {
+                                const target = e.target as HTMLElement
+                                setIsScrolled(target.scrollTop > 0)
                             }}
                             style={{
                                 height: '100%'

@@ -4,6 +4,21 @@
     overflow-y: auto;
 }
 
+.fadeTop {
+    mask-image: linear-gradient(to bottom, transparent, black 24px);
+    -webkit-mask-image: linear-gradient(to bottom, transparent, black 24px);
+}
+
+.fadeBottom {
+    mask-image: linear-gradient(to bottom, black calc(100% - 24px), transparent);
+    -webkit-mask-image: linear-gradient(to bottom, black calc(100% - 24px), transparent);
+}
+
+.fadeTop.fadeBottom {
+    mask-image: linear-gradient(to bottom, transparent, black 24px, black calc(100% - 24px), transparent);
+    -webkit-mask-image: linear-gradient(to bottom, transparent, black 24px, black calc(100% - 24px), transparent);
+}
+
 .itemWrapper {
     padding-bottom: 8px;
     animation: fadeIn 0.2s ease-out;
