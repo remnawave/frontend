@@ -1,6 +1,6 @@
+import { ActionIcon, Tooltip } from '@mantine/core'
 import { useTranslation } from 'react-i18next'
 import { TbTimeline } from 'react-icons/tb'
-import { Menu } from '@mantine/core'
 
 import { MODALS, useModalsStoreOpenWithData } from '@entities/dashboard/modal-store'
 
@@ -12,13 +12,17 @@ export function GetUserSubscriptionRequestHistoryFeature(props: IProps) {
     const openModalWithData = useModalsStoreOpenWithData()
 
     return (
-        <Menu.Item
-            leftSection={<TbTimeline size="16px" />}
-            onClick={() =>
-                openModalWithData(MODALS.USER_SUBSCRIPTION_REQUESTS_DRAWER, { userUuid })
-            }
-        >
-            {t('get-user-subscription-request-history.feature.request-history')}
-        </Menu.Item>
+        <Tooltip label={t('get-user-subscription-request-history.feature.request-history')}>
+            <ActionIcon
+                color="indigo"
+                onClick={() =>
+                    openModalWithData(MODALS.USER_SUBSCRIPTION_REQUESTS_DRAWER, { userUuid })
+                }
+                size="lg"
+                variant="soft"
+            >
+                <TbTimeline size="22px" />
+            </ActionIcon>
+        </Tooltip>
     )
 }

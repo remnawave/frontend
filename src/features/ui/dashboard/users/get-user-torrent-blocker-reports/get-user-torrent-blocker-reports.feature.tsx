@@ -1,6 +1,6 @@
+import { ActionIcon, Tooltip } from '@mantine/core'
 import { useTranslation } from 'react-i18next'
 import { TbFlame } from 'react-icons/tb'
-import { Menu } from '@mantine/core'
 
 import { MODALS, useModalsStoreOpenWithData } from '@entities/dashboard/modal-store'
 
@@ -15,13 +15,17 @@ export function GetUserTorrentBlockerReportsFeature(props: IProps) {
     const openModalWithData = useModalsStoreOpenWithData()
 
     return (
-        <Menu.Item
-            leftSection={<TbFlame color="var(--mantine-color-red-5)" size="16px" />}
-            onClick={() =>
-                openModalWithData(MODALS.USER_TORRENT_BLOCKER_REPORTS_DRAWER, { userUuid })
-            }
-        >
-            {t('get-user-torrent-blocker-reports.feature.blocker-reports')}
-        </Menu.Item>
+        <Tooltip label={t('get-user-torrent-blocker-reports.feature.blocker-reports')}>
+            <ActionIcon
+                color="indigo"
+                onClick={() =>
+                    openModalWithData(MODALS.USER_TORRENT_BLOCKER_REPORTS_DRAWER, { userUuid })
+                }
+                size="lg"
+                variant="soft"
+            >
+                <TbFlame size="22px" />
+            </ActionIcon>
+        </Tooltip>
     )
 }

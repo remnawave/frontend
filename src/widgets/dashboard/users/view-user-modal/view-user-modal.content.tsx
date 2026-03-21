@@ -1,15 +1,13 @@
-import { PiFloppyDiskDuotone, PiQrCodeDuotone, PiUserCircle } from 'react-icons/pi'
 import { Button, em, Group, Menu, px, Stack } from '@mantine/core'
 import { UpdateUserCommand } from '@remnawave/backend-contract'
-import { useDisclosure, useMediaQuery } from '@mantine/hooks'
 import { zodResolver } from 'mantine-form-zod-resolver'
-import { TbDots, TbServerCog } from 'react-icons/tb'
+import { PiFloppyDiskDuotone } from 'react-icons/pi'
+import { useMediaQuery } from '@mantine/hooks'
 import { useTranslation } from 'react-i18next'
-import { modals } from '@mantine/modals'
+import { TbDots } from 'react-icons/tb'
 import { useForm } from '@mantine/form'
 import { motion } from 'motion/react'
 import { useEffect } from 'react'
-import { renderSVG } from 'uqr'
 import dayjs from 'dayjs'
 
 import {
@@ -28,19 +26,11 @@ import {
     usersQueryKeys,
     useUpdateUser
 } from '@shared/api/hooks'
-import { GetUserSubscriptionRequestHistoryFeature } from '@features/ui/dashboard/users/get-user-subscription-request-history'
-import { GetUserTorrentBlockerReportsFeature } from '@features/ui/dashboard/users/get-user-torrent-blocker-reports'
-import { GetUserSubscriptionLinksFeature } from '@features/ui/dashboard/users/get-user-subscription-links'
 import { ToggleUserStatusButtonFeature } from '@features/ui/dashboard/users/toggle-user-status-button'
 import { RevokeSubscriptionUserFeature } from '@features/ui/dashboard/users/revoke-subscription-user'
-import { GetUserActiveSessionsFeature } from '@features/ui/dashboard/users/get-user-active-sessions'
 import { useUserModalStoreActions } from '@entities/dashboard/user-modal-store/user-modal-store'
-import { GetHwidUserDevicesFeature } from '@features/ui/dashboard/users/get-hwid-user-devices'
 import { ResetUsageUserFeature } from '@features/ui/dashboard/users/reset-usage-user'
-import { MODALS, useModalsStoreOpenWithData } from '@entities/dashboard/modal-store'
-import { GetUserUsageFeature } from '@features/ui/dashboard/users/get-user-usage'
 import { DeleteUserFeature } from '@features/ui/dashboard/users/delete-user'
-import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { bytesToGbUtil, gbToBytesUtil } from '@shared/utils/bytes'
 import { LoaderModalShared } from '@shared/ui/loader-modal'
 import { handleFormErrors } from '@shared/utils/misc'
@@ -77,13 +67,9 @@ export const ViewUserModalContent = (props: IProps) => {
 
     const { t } = useTranslation()
 
-    const [trafficStatisticsModalOpened, trafficStatisticsModalHandlers] = useDisclosure(false)
-
     const actions = useUserModalStoreActions()
 
     const isMobile = useMediaQuery(`(max-width: ${em(768)})`)
-
-    const openModalWithData = useModalsStoreOpenWithData()
 
     const { data: internalSquads } = useGetInternalSquads()
     const { data: externalSquads } = useGetExternalSquads()
@@ -231,7 +217,6 @@ export const ViewUserModalContent = (props: IProps) => {
                         cardVariants={cardVariants}
                         lastConnectedNode={lastConnectedNode}
                         motionWrapper={MotionWrapper}
-                        openTrafficStatisticsModal={trafficStatisticsModalHandlers.open}
                         user={user}
                     />
                     <TrafficLimitsCard
@@ -273,7 +258,6 @@ export const ViewUserModalContent = (props: IProps) => {
                             cardVariants={cardVariants}
                             lastConnectedNode={lastConnectedNode}
                             motionWrapper={MotionWrapper}
-                            openTrafficStatisticsModal={trafficStatisticsModalHandlers.open}
                             user={user}
                         />
                         <ContactInformationCard
@@ -332,69 +316,9 @@ export const ViewUserModalContent = (props: IProps) => {
 
                         <Menu.Divider />
                         <Menu.Label>{t('view-user-modal.widget.information')}</Menu.Label>
-                        <Menu.Item
-                            leftSection={<PiUserCircle size={14} />}
-                            onClick={async () => {
-                                await actions.setDrawerUserUuid(user.uuid)
-                                actions.changeDetailedUserInfoDrawerState(true)
-                            }}
-                        >
-                            {t('view-user-modal.widget.detailed-info')}
-                        </Menu.Item>
-                        <GetUserUsageFeature
-                            onClose={trafficStatisticsModalHandlers.close}
-                            onOpen={trafficStatisticsModalHandlers.open}
-                            opened={trafficStatisticsModalOpened}
-                            userUuid={user.uuid}
-                        />
-                        <GetUserTorrentBlockerReportsFeature userUuid={user.uuid} />
-                        <GetUserActiveSessionsFeature userUuid={user.uuid} />
-                        <GetHwidUserDevicesFeature userUuid={user.uuid} />
-
-                        <Menu.Item
-                            leftSection={<TbServerCog size={14} />}
-                            onClick={() => {
-                                openModalWithData(MODALS.USER_ACCESSIBLE_NODES_DRAWER, {
-                                    userUuid: user.uuid
-                                })
-                            }}
-                        >
-                            {t('view-user-modal.widget.accessible-nodes')}
-                        </Menu.Item>
 
                         <Menu.Divider />
                         <Menu.Label>{t('view-user-modal.widget.subscription')}</Menu.Label>
-                        <Menu.Item
-                            leftSection={<PiQrCodeDuotone size={16} />}
-                            onClick={() => {
-                                const subscriptionQrCode = renderSVG(user.subscriptionUrl, {
-                                    whiteColor: '#161B22',
-                                    blackColor: '#3CC9DB'
-                                })
-                                modals.open({
-                                    centered: true,
-                                    title: (
-                                        <BaseOverlayHeader
-                                            iconColor="teal"
-                                            IconComponent={PiQrCodeDuotone}
-                                            iconVariant="soft"
-                                            title={t('view-user-modal.widget.subscription-qr-code')}
-                                        />
-                                    ),
-                                    children: (
-                                        <div
-                                            dangerouslySetInnerHTML={{
-                                                __html: subscriptionQrCode
-                                            }}
-                                        />
-                                    )
-                                })
-                            }}
-                        >
-                            {t('view-user-modal.widget.qr-code')}
-                        </Menu.Item>
-                        <GetUserSubscriptionLinksFeature uuid={user.uuid} />
-                        <GetUserSubscriptionRequestHistoryFeature userUuid={user.uuid} />
                     </Menu.Dropdown>
                 </Menu>
 

@@ -1,7 +1,7 @@
+import { ActionIcon, Tooltip } from '@mantine/core'
 import { useTranslation } from 'react-i18next'
 import { useDisclosure } from '@mantine/hooks'
 import { TbRadar } from 'react-icons/tb'
-import { Menu } from '@mantine/core'
 
 import { UserActiveSessionDrawerWidget } from '@widgets/dashboard/users/user-active-sessions'
 
@@ -14,12 +14,16 @@ export function GetUserActiveSessionsFeature(props: IProps) {
 
     return (
         <>
-            <Menu.Item
-                leftSection={<TbRadar size="16px" />}
-                onClick={activeSessionsModalHandlers.open}
-            >
-                {t('get-user-usage.feature.active-sessions')}
-            </Menu.Item>
+            <Tooltip label={t('get-user-usage.feature.active-sessions')}>
+                <ActionIcon
+                    color="indigo"
+                    onClick={activeSessionsModalHandlers.open}
+                    size="lg"
+                    variant="soft"
+                >
+                    <TbRadar size="22px" />
+                </ActionIcon>
+            </Tooltip>
 
             <UserActiveSessionDrawerWidget
                 onClose={activeSessionsModalHandlers.close}

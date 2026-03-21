@@ -1,6 +1,7 @@
 import {
     ActionIcon,
     Code,
+    Divider,
     Group,
     HoverCard,
     Paper,
@@ -10,15 +11,25 @@ import {
     Text,
     Tooltip
 } from '@mantine/core'
+import { TbCalendar, TbChartArcs, TbServerCog, TbUser, TbWifi } from 'react-icons/tb'
 import { GetUserByUuidCommand, USERS_STATUS } from '@remnawave/backend-contract'
 import { ForwardRefComponent, HTMLMotionProps, Variants } from 'motion/react'
-import { TbCalendar, TbChartArcs, TbUser, TbWifi } from 'react-icons/tb'
+import { PiLinkDuotone, PiQrCode, PiUserCircle } from 'react-icons/pi'
 import { HiQuestionMarkCircle } from 'react-icons/hi'
-import { PiLinkDuotone } from 'react-icons/pi'
 import { useTranslation } from 'react-i18next'
+import { useDisclosure } from '@mantine/hooks'
+import { modals } from '@mantine/modals'
+import { renderSVG } from 'uqr'
 import { memo } from 'react'
 import dayjs from 'dayjs'
 
+import { GetUserSubscriptionRequestHistoryFeature } from '@features/ui/dashboard/users/get-user-subscription-request-history'
+import { GetUserTorrentBlockerReportsFeature } from '@features/ui/dashboard/users/get-user-torrent-blocker-reports'
+import { GetUserSubscriptionLinksFeature } from '@features/ui/dashboard/users/get-user-subscription-links'
+import { GetUserActiveSessionsFeature } from '@features/ui/dashboard/users/get-user-active-sessions'
+import { GetHwidUserDevicesFeature } from '@features/ui/dashboard/users/get-hwid-user-devices'
+import { MODALS, useModalsStoreOpenWithData } from '@entities/dashboard/modal-store'
+import { GetUserUsageFeature } from '@features/ui/dashboard/users/get-user-usage'
 import { useUserModalStoreActions } from '@entities/dashboard/user-modal-store'
 import { CopyableFieldShared } from '@shared/ui/copyable-field/copyable-field'
 import { UserStatusBadge } from '@widgets/dashboard/users/user-status-badge'
@@ -33,7 +44,6 @@ interface IProps {
     cardVariants: Variants
     lastConnectedNode?: null | { countryCode: string; name: string }
     motionWrapper: ForwardRefComponent<HTMLDivElement, HTMLMotionProps<'div'>>
-    openTrafficStatisticsModal: () => void
     user: GetUserByUuidCommand.Response['response']
 }
 
@@ -47,12 +57,14 @@ const statusIconColorMap = {
 export const UserIdentificationCard = memo((props: IProps) => {
     const { t, i18n } = useTranslation()
 
-    const { cardVariants, lastConnectedNode, motionWrapper, openTrafficStatisticsModal, user } =
-        props
+    const { cardVariants, lastConnectedNode, motionWrapper, user } = props
+
+    const [trafficStatisticsModalOpened, trafficStatisticsModalHandlers] = useDisclosure(false)
 
     const MotionWrapper = motionWrapper
 
     const actions = useUserModalStoreActions()
+    const openModalWithData = useModalsStoreOpenWithData()
 
     const statusIconColor = statusIconColorMap[user.status] ?? 'gray'
 
@@ -131,6 +143,98 @@ export const UserIdentificationCard = memo((props: IProps) => {
                 </SectionCard.Section>
 
                 <SectionCard.Section>
+                    <Group gap="xs" justify="flex-end">
+                        <Group gap={5} justify="center">
+                            <Tooltip label={t('view-user-modal.widget.qr-code')}>
+                                <ActionIcon
+                                    color="teal"
+                                    onClick={() => {
+                                        const subscriptionQrCode = renderSVG(user.subscriptionUrl, {
+                                            whiteColor: '#161B22',
+                                            blackColor: '#3CC9DB'
+                                        })
+                                        modals.open({
+                                            centered: true,
+                                            title: (
+                                                <BaseOverlayHeader
+                                                    iconColor="teal"
+                                                    IconComponent={PiQrCode}
+                                                    iconVariant="soft"
+                                                    title={t(
+                                                        'view-user-modal.widget.subscription-qr-code'
+                                                    )}
+                                                />
+                                            ),
+                                            children: (
+                                                <div
+                                                    dangerouslySetInnerHTML={{
+                                                        __html: subscriptionQrCode
+                                                    }}
+                                                />
+                                            )
+                                        })
+                                    }}
+                                    size="lg"
+                                    variant="soft"
+                                >
+                                    <PiQrCode size={22} />
+                                </ActionIcon>
+                            </Tooltip>
+
+                            <GetUserSubscriptionLinksFeature uuid={user.uuid} />
+                        </Group>
+
+                        <Divider opacity={0.3} orientation="vertical" />
+
+                        <Group gap={5} justify="center">
+                            <Tooltip label={t('view-user-modal.widget.detailed-info')}>
+                                <ActionIcon
+                                    color="cyan"
+                                    onClick={async () => {
+                                        await actions.setDrawerUserUuid(user.uuid)
+                                        actions.changeDetailedUserInfoDrawerState(true)
+                                    }}
+                                    size="lg"
+                                    variant="soft"
+                                >
+                                    <PiUserCircle size={22} />
+                                </ActionIcon>
+                            </Tooltip>
+
+                            <Tooltip label={t('view-user-modal.widget.accessible-nodes')}>
+                                <ActionIcon
+                                    color="cyan"
+                                    onClick={() => {
+                                        openModalWithData(MODALS.USER_ACCESSIBLE_NODES_DRAWER, {
+                                            userUuid: user.uuid
+                                        })
+                                    }}
+                                    size="lg"
+                                    variant="soft"
+                                >
+                                    <TbServerCog size={22} />
+                                </ActionIcon>
+                            </Tooltip>
+                        </Group>
+
+                        <Divider opacity={0.3} orientation="vertical" />
+
+                        <Group gap={5} justify="center">
+                            <GetUserUsageFeature
+                                onClose={trafficStatisticsModalHandlers.close}
+                                onOpen={trafficStatisticsModalHandlers.open}
+                                opened={trafficStatisticsModalOpened}
+                                userUuid={user.uuid}
+                            />
+                            <GetUserTorrentBlockerReportsFeature userUuid={user.uuid} />
+                            <GetUserSubscriptionRequestHistoryFeature userUuid={user.uuid} />
+                            <GetHwidUserDevicesFeature userUuid={user.uuid} />
+                            <GetUserActiveSessionsFeature userUuid={user.uuid} />
+                        </Group>
+                    </Group>
+                </SectionCard.Section>
+
+                <SectionCard.Section>
                     <Group gap="xs" justify="space-between" mb={6}>
                         <Group gap={6}>
                             <Text c="gray.3" ff="monospace" fw={600} size="sm">
@@ -161,15 +265,8 @@ export const UserIdentificationCard = memo((props: IProps) => {
                         <Paper
                             bd={`1px solid ${getExpirationStyle().border}`}
                             bg={getExpirationStyle().bg}
-                            onClick={async () => {
-                                await actions.setDrawerUserUuid(user.uuid)
-                                actions.changeDetailedUserInfoDrawerState(true)
-                            }}
                             p="xs"
                             radius="md"
-                            style={{
-                                cursor: 'pointer'
-                            }}
                         >
                             <Tooltip label={t('create-user-modal.widget.expiry-date')}>
                                 <Group gap="xs" justify="center">
@@ -184,12 +281,8 @@ export const UserIdentificationCard = memo((props: IProps) => {
                         <Paper
                             bd="1px solid rgba(99, 102, 241, 0.2)"
                             bg="rgba(99, 102, 241, 0.08)"
-                            onClick={openTrafficStatisticsModal}
                             p="xs"
                             radius="md"
-                            style={{
-                                cursor: 'pointer'
-                            }}
                         >
                             <Tooltip
                                 label={t('detailed-user-info-drawer.widget.lifetime-used-traffic')}

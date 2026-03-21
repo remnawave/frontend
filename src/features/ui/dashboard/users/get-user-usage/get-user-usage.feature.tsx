@@ -1,6 +1,6 @@
+import { ActionIcon, Tooltip } from '@mantine/core'
 import { PiChartBarDuotone } from 'react-icons/pi'
 import { useTranslation } from 'react-i18next'
-import { Menu } from '@mantine/core'
 
 import { UserUsageModalWidget } from '@widgets/dashboard/users/user-usage-modal/user-usage-modal.widget'
 
@@ -12,12 +12,11 @@ export function GetUserUsageFeature(props: IProps) {
 
     return (
         <>
-            <Menu.Item
-                leftSection={<PiChartBarDuotone color="var(--mantine-color-blue-5)" size="16px" />}
-                onClick={onOpen}
-            >
-                {t('user-usage-modal.widget.traffic-statistics')}
-            </Menu.Item>
+            <Tooltip label={t('user-usage-modal.widget.traffic-statistics')}>
+                <ActionIcon color="indigo" onClick={onOpen} size="lg" variant="soft">
+                    <PiChartBarDuotone size="24px" />
+                </ActionIcon>
+            </Tooltip>
 
             <UserUsageModalWidget onClose={onClose} opened={opened} userUuid={userUuid} />
         </>
