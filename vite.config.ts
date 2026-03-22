@@ -67,8 +67,6 @@ export default defineConfig({
                     utils: [
                         'nanoid',
                         'ufo',
-                        'base64-js',
-                        'buffer',
                         'consola',
                         'semver',
                         'is-svg',

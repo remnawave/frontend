@@ -13,6 +13,7 @@ import { useClipboard, useDisclosure, useMediaQuery } from '@mantine/hooks'
 import { PiCheckSquareOffset, PiFloppyDisk } from 'react-icons/pi'
 import { ActionIcon, Button, Group, Menu } from '@mantine/core'
 import { useTranslation } from 'react-i18next'
+import { encode } from '@stablelib/base64'
 import { RefObject } from 'react'
 
 import { useDownloadTemplate } from '@shared/ui/load-templates/use-download-template'
@@ -66,7 +67,7 @@ export function TemplateEditorActionsFeature(props: Props) {
                 updateConfig({
                     variables: {
                         uuid: template.uuid,
-                        encodedTemplateYaml: Buffer.from(currentValue, 'utf-8').toString('base64')
+                        encodedTemplateYaml: encode(new TextEncoder().encode(currentValue))
                     }
                 })
             }
