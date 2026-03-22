@@ -13,6 +13,7 @@ import * as dotenv from 'dotenv'
 dotenv.config({ path: `${__dirname}/.env` })
 
 export default defineConfig({
+    assetsInclude: ['**/*.lottie'],
     plugins: [
         react(),
         tsconfigPaths(),
@@ -49,9 +50,10 @@ export default defineConfig({
             output: {
                 manualChunks: {
                     assets: [
-                        '/src/shared/assets/lotties/satellite.json',
-                        '/src/shared/assets/lotties/checkmark.json',
-                        '/src/shared/assets/lotties/stop-v2.json'
+                        '/src/shared/assets/lotties/satellite.lottie',
+                        '/src/shared/assets/lotties/checkmark.lottie',
+                        '/src/shared/assets/lotties/stop-v2.lottie',
+                        '/src/shared/assets/lotties/globe.lottie'
                     ],
                     react: [
                         'react',
@@ -61,8 +63,12 @@ export default defineConfig({
                         'react-dom/client'
                     ],
                     markdown: ['react-markdown', 'remark-gfm', 'rehype-raw'],
-                    icons: ['react-icons/pi', 'react-icons/fa', 'react-icons/tb', 'lottie-web'],
-                    date: ['dayjs'],
+                    icons: [
+                        'react-icons/pi',
+                        'react-icons/fa',
+                        'react-icons/tb',
+                        '@lottiefiles/dotlottie-react'
+                    ],
                     zod: ['axios', 'zod', 'zustand', 'xbytes', 'zod-to-json-schema'],
                     utils: [
                         'nanoid',
@@ -72,7 +78,8 @@ export default defineConfig({
                         'is-svg',
                         'sax',
                         'jsonc-parser',
-                        'json-edit-react'
+                        'json-edit-react',
+                        'dayjs'
                     ],
                     mantine: [
                         '@mantine/core',

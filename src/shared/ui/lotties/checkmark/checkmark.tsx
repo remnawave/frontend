@@ -1,7 +1,8 @@
-import Lottie from 'lottie-react'
+import { DotLottieReact } from '@lottiefiles/dotlottie-react'
 import { FC } from 'react'
 
-import lottie from '../../../assets/lotties/checkmark.json'
+// @ts-expect-error - no types for dotlottie-react
+import lottie from '../../../assets/lotties/checkmark.lottie'
 import { IProps } from './interfaces/props.interface'
 
 export const LottieCheckmarkShared: FC<IProps> = (props) => {
@@ -9,7 +10,7 @@ export const LottieCheckmarkShared: FC<IProps> = (props) => {
 
     return (
         <div style={{ width, height }}>
-            <Lottie animationData={lottie} autoplay={autoplay} controls loop={loop} />
+            <DotLottieReact autoplay={autoplay} loop={loop} src={lottie} />
         </div>
     )
 }
