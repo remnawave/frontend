@@ -5,7 +5,8 @@ import {
     TbExternalLink,
     TbFingerprint,
     TbId,
-    TbServer
+    TbServer,
+    TbSum
 } from 'react-icons/tb'
 import {
     ActionIcon,
@@ -86,27 +87,31 @@ export const SessionsExplorerCard = memo(
                         />
 
                         <Group gap="xs">
-                            <Badge
-                                color={getIpCountColor(user.totalIps, midThreshold, highThreshold)}
-                                size="lg"
-                                variant="soft"
-                            >
-                                {user.totalIps}
-                            </Badge>
                             <Tooltip label={t('sessions-explorer.widget.unique-ips')}>
                                 <Badge
                                     color={getIpCountColor(
-                                        user.totalIps,
+                                        user.uniqueIps,
                                         midThreshold,
                                         highThreshold
                                     )}
                                     leftSection={<TbFingerprint size={16} />}
                                     size="lg"
-                                    variant="default"
+                                    variant="soft"
                                 >
                                     {user.uniqueIps}
                                 </Badge>
                             </Tooltip>
+
+                            <Tooltip label={t('sessions-explorer.widget.total-ips')}>
+                                <Badge
+                                    leftSection={<TbSum size={16} />}
+                                    size="lg"
+                                    variant="default"
+                                >
+                                    {user.totalIps}
+                                </Badge>
+                            </Tooltip>
+
                             <Tooltip label={t('node-active-session.item.widget.view-user')}>
                                 <ActionIcon
                                     color="cyan"

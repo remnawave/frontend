@@ -68,8 +68,8 @@ export function SessionsExplorerWidget() {
 
     const ipThresholds = useMemo(() => {
         if (aggregatedUsers.length === 0) return { high: 0, mid: 0 }
-        const max = aggregatedUsers[0].totalIps
-        const min = aggregatedUsers[aggregatedUsers.length - 1].totalIps
+        const max = aggregatedUsers[0].uniqueIps
+        const min = aggregatedUsers[aggregatedUsers.length - 1].uniqueIps
         const range = max - min
         if (range === 0) return { high: max + 1, mid: max + 1 }
         return {

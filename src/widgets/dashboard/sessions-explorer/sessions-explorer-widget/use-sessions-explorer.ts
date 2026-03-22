@@ -136,7 +136,7 @@ function aggregateResults(results: NodeResult[]) {
         agg.uniqueIps = s.size
     }
 
-    const sorted = [...userMap.values()].sort((a, b) => b.totalIps - a.totalIps)
+    const sorted = [...userMap.values()].sort((a, b) => b.uniqueIps - a.uniqueIps)
 
     return { sorted, totalIpCount, uniqueIpCount: globalIpSet.size }
 }
@@ -216,7 +216,11 @@ export function useSessionsExplorer(nodes: NodeType[] | undefined) {
         }
 
         const processNode = async (node: NodeType) => {
-            activeNodesMap.set(node.uuid, { name: node.name, countryCode: node.countryCode, uuid: node.uuid })
+            activeNodesMap.set(node.uuid, {
+                name: node.name,
+                countryCode: node.countryCode,
+                uuid: node.uuid
+            })
             syncProgress()
 
             try {
