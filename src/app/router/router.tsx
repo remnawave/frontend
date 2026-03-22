@@ -9,6 +9,7 @@ import {
 import { SubpageConfigEditorPageConnector } from '@pages/dashboard/subpage-config/ui/connectors/subpage-config-editor-page.connector'
 import { ConfigProfileByUuidPageConnector } from '@pages/dashboard/config-profiles/connectors/config-profile-by-uuid.page.connector'
 import { SubpageConfigBasePageConnector } from '@pages/dashboard/subpage-config/ui/connectors/subpage-config-base-page.connector'
+import { SessionsExplorerPageConnector } from '@pages/dashboard/sessions-explorer/ui/connectors/sessions-explorer.page.connector'
 import { NodePluginEditorPageConnector } from '@pages/dashboard/node-plugins/ui/connectors/node-plugin-editor-page.connector'
 import { NodePluginsBasePageConnector } from '@pages/dashboard/node-plugins/ui/connectors/node-plugins-base-page.connector'
 import { InternalSquadsPageConnector } from '@pages/dashboard/internal-squads/connectors/internal-squads.page.connector'
@@ -142,6 +143,10 @@ const router = createBrowserRouter(
                         <Route
                             element={<TorrentBlockerReportsPageConnector />}
                             path={ROUTES.DASHBOARD.TOOLS.TORRENT_BLOCKER_REPORTS}
+                        />
+                        <Route
+                            element={<SessionsExplorerPageConnector />}
+                            path={ROUTES.DASHBOARD.TOOLS.SESSIONS_EXPLORER}
                         />
                     </Route>
 

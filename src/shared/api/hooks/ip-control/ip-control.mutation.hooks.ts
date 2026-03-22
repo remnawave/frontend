@@ -1,7 +1,8 @@
 import {
     DropConnectionsCommand,
     FetchIpsCommand,
-    FetchUsersIpsCommand
+    FetchUsersIpsCommand,
+    FetchUsersIpsResultCommand
 } from '@remnawave/backend-contract'
 
 import { createMutationHook } from '../../tsq-helpers'
@@ -18,6 +19,13 @@ export const useFetchUsersIps = createMutationHook({
     routeParamsSchema: FetchUsersIpsCommand.RequestSchema,
     responseSchema: FetchUsersIpsCommand.ResponseSchema,
     requestMethod: FetchUsersIpsCommand.endpointDetails.REQUEST_METHOD
+})
+
+export const useFetchUsersIpsResultMutation = createMutationHook({
+    endpoint: FetchUsersIpsResultCommand.TSQ_url,
+    responseSchema: FetchUsersIpsResultCommand.ResponseSchema,
+    routeParamsSchema: FetchUsersIpsResultCommand.RequestSchema,
+    requestMethod: FetchUsersIpsResultCommand.endpointDetails.REQUEST_METHOD
 })
 
 export const useDropConnections = createMutationHook({
