@@ -18,19 +18,17 @@ import {
     Text,
     Tooltip
 } from '@mantine/core'
-import { createSearchParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { PiUserCircle } from 'react-icons/pi'
 import { memo } from 'react'
 import clsx from 'clsx'
 
 import { formatRelativeDateUtil, formatTimeUtil } from '@shared/utils/time-utils'
+import { useUserModalStoreActions } from '@entities/dashboard/user-modal-store'
 import { CopyableFieldShared } from '@shared/ui/copyable-field/copyable-field'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
-import { SEARCH_PARAMS } from '@shared/constants/search-params'
 import { SectionCard } from '@shared/ui/section-card'
 import { useResolveUser } from '@shared/api/hooks'
-import { ROUTES } from '@shared/constants'
 
 import type { AggregatedUser } from './use-sessions-explorer'
 
@@ -61,6 +59,7 @@ export const SessionsExplorerCard = memo(
     ({ user, midThreshold, highThreshold, ipSearchQuery }: IProps) => {
         const { t, i18n } = useTranslation()
         const { mutateAsync: resolveUser, isPending: isLoading } = useResolveUser()
+        const userModalActions = useUserModalStoreActions()
 
         const handleViewUser = async () => {
             const result = await resolveUser({
@@ -70,13 +69,8 @@ export const SessionsExplorerCard = memo(
             })
 
             if (result.uuid) {
-                const searchParams = createSearchParams({
-                    [SEARCH_PARAMS.USER]: String(result.uuid)
-                })
-                window.open(
-                    `${ROUTES.DASHBOARD.MANAGEMENT.USERS}?${searchParams.toString()}`,
-                    '_blank'
-                )
+                await userModalActions.setUserUuid(result.uuid)
+                userModalActions.changeModalState(true)
             }
         }
 

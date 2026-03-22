@@ -275,7 +275,6 @@ export function SessionsExplorerWidget() {
                         )}
                     </Group>
                 }
-                description={t('sessions-explorer.widget.description')}
                 icon={<TbRadar2 size={24} />}
                 title={t('constants.sessions-explorer')}
             />

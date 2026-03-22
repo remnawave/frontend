@@ -2111,7 +2111,6 @@
             "no-active-sessions-found-on-any-node": "No active sessions found on any node.",
             "restart-scan": "Restart scan",
             "clear-results": "Clear results",
-            "description": "Scan all online nodes to collect active user sessions and IP addresses",
             "search-by-ip": "Search by IP address...",
             "no-results-for-ip": "No users found with IP matching \"{{ip}}\""
         }
