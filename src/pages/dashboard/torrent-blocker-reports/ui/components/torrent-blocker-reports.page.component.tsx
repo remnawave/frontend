@@ -9,6 +9,7 @@ import { DetailedUserInfoDrawerWidget } from '@widgets/dashboard/users/detailed-
 import { UserHwidDevicesDrawerWidget } from '@widgets/dashboard/users/user-hwid-devices-drawer/user-hwid-devices.drawer.widget'
 import { TorrentBlockerReportsTableWidget } from '@widgets/dashboard/torrent-blocker-reports/torrent-blocker-reports-table'
 import { TorrentBlockerStatsWidget } from '@widgets/dashboard/torrent-blocker-reports/torrent-blocker-stats'
+import { InternalSquadsDrawerWithStore } from '@widgets/dashboard/users/internal-squads-drawer-with-store'
 import { ViewUserModal } from '@widgets/dashboard/users/view-user-modal'
 import { Page } from '@shared/ui'
 
@@ -32,6 +33,7 @@ export default function TorrentBlockerReportsPageComponent() {
             <ViewUserModal key="view-user-modal" />
             <DetailedUserInfoDrawerWidget key="detailed-user-info-drawer" />
             <UserAccessibleNodesModalWidget key="user-accessible-nodes-modal" />
+            <InternalSquadsDrawerWithStore key="internal-squads-drawer-with-store" />
             <UserHwidDevicesDrawerWidget key="user-hwid-devices-drawer" />
             <UserTorrentBlockerReportsDrawerWidget key="user-torrent-blocker-reports-drawer" />
             <UserSubscriptionRequestsDrawerWidget key="user-subscription-requests-drawer" />

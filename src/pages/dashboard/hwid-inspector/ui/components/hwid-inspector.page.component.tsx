@@ -9,6 +9,7 @@ import { UserAccessibleNodesModalWidget } from '@widgets/dashboard/users/user-ac
 import { DetailedUserInfoDrawerWidget } from '@widgets/dashboard/users/detailed-user-info-drawer/detailed-user-info-drawer.widget'
 import { UserHwidDevicesDrawerWidget } from '@widgets/dashboard/users/user-hwid-devices-drawer/user-hwid-devices.drawer.widget'
 import { HwidInspectorLeaderboardWidget } from '@widgets/dashboard/hwid-inspector/hwid-inspector-leaderboard'
+import { InternalSquadsDrawerWithStore } from '@widgets/dashboard/users/internal-squads-drawer-with-store'
 import { HwidInspectorTableWidget } from '@widgets/dashboard/hwid-inspector/hwid-inspector-table'
 import { MobileWarningOverlay } from '@shared/ui/mobile-warning-overlay/mobile-warning-overlay'
 import { HwidInspectorMetrics } from '@widgets/dashboard/users/hwid-inspector-metrics'
@@ -45,6 +46,7 @@ export default function HwidInspectorPageComponent() {
             <ViewUserModal key="view-user-modal" />
             <DetailedUserInfoDrawerWidget key="detailed-user-info-drawer" />
             <UserAccessibleNodesModalWidget key="user-accessible-nodes-modal" />
+            <InternalSquadsDrawerWithStore key="internal-squads-drawer-with-store" />
             <UserHwidDevicesDrawerWidget key="user-hwid-devices-drawer" />
             <UserTorrentBlockerReportsDrawerWidget key="user-torrent-blocker-reports-drawer" />
             <UserSubscriptionRequestsDrawerWidget key="user-subscription-requests-drawer" />
