@@ -1,8 +1,6 @@
 import { DotLottieReact } from '@lottiefiles/dotlottie-react'
 import { FC } from 'react'
 
-// @ts-expect-error - no types for dotlottie-react
-import link from '../../../assets/lotties/satellite.lottie'
 import { IProps } from './interfaces/props.interface'
 
 export const LottieLinkShared: FC<IProps> = (props) => {
@@ -10,7 +8,15 @@ export const LottieLinkShared: FC<IProps> = (props) => {
 
     return (
         <div style={{ width, height }}>
-            <DotLottieReact autoplay loop src={link} />
+            <DotLottieReact
+                autoplay
+                loop
+                renderConfig={{
+                    autoResize: true,
+                    devicePixelRatio: window.devicePixelRatio || 2
+                }}
+                src="/lotties/satellite.lottie"
+            />
         </div>
     )
 }

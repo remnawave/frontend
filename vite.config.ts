@@ -49,12 +49,6 @@ export default defineConfig({
         rollupOptions: {
             output: {
                 manualChunks: {
-                    assets: [
-                        '/src/shared/assets/lotties/satellite.lottie',
-                        '/src/shared/assets/lotties/checkmark.lottie',
-                        '/src/shared/assets/lotties/stop-v2.lottie',
-                        '/src/shared/assets/lotties/globe.lottie'
-                    ],
                     react: [
                         'react',
                         'react-dom',
@@ -120,7 +114,10 @@ export default defineConfig({
         port: 3333,
         cors: true,
         strictPort: true,
-        allowedHosts: true
+        allowedHosts: true,
+        hmr: {
+            overlay: false
+        }
     },
     resolve: {
         alias: {

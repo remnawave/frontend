@@ -3,7 +3,7 @@ import { FC } from 'react'
 
 import { IProps } from './interfaces/props.interface'
 
-export const LottieGlobeShared: FC<IProps> = (props) => {
+export const LottieJailShared: FC<IProps> = (props) => {
     const { width = 96, height = 115, autoplay = true, loop = true } = props
 
     return (
@@ -15,7 +15,7 @@ export const LottieGlobeShared: FC<IProps> = (props) => {
                     autoResize: true,
                     devicePixelRatio: window.devicePixelRatio || 2
                 }}
-                src="/lotties/globe.lottie"
+                src="/lotties/jail.lottie"
             />
         </div>
     )

@@ -1,8 +1,9 @@
 import { Badge, Box, Group, Progress, Stack, Text } from '@mantine/core'
 import { AnimatePresence, motion } from 'motion/react'
 import { useTranslation } from 'react-i18next'
+import { FC, useState } from 'react'
 
-import { LottieGlobeShared } from '@shared/ui/lotties/globe'
+import { LottieDuckProgressShared, LottieGlobeShared, LottieJailShared } from '@shared/ui/lotties'
 import { CountryFlag } from '@shared/ui/get-country-flag'
 import { SectionCard } from '@shared/ui/section-card'
 
@@ -10,12 +11,17 @@ import type { ExplorerProgress } from './use-sessions-explorer'
 
 import styles from './sessions-explorer.module.css'
 
+const PROGRESS_LOTTIES: FC[] = [LottieDuckProgressShared, LottieGlobeShared, LottieJailShared]
+
+const pickRandomLottie = () => PROGRESS_LOTTIES[Math.floor(Math.random() * PROGRESS_LOTTIES.length)]
+
 interface IProps {
     progress: ExplorerProgress
 }
 
 export function SessionsExplorerProgress({ progress }: IProps) {
     const { t } = useTranslation()
+    const [LottieComponent] = useState(pickRandomLottie)
 
     const progressPercent =
         progress.total > 0
@@ -27,7 +33,7 @@ export function SessionsExplorerProgress({ progress }: IProps) {
             <SectionCard.Section className={styles.progressCard}>
                 <Stack align="center" gap="lg" py="xl" w="100%">
                     <div style={{ height: 120, display: 'flex', alignItems: 'center' }}>
-                        <LottieGlobeShared />
+                        {LottieComponent && <LottieComponent />}
                     </div>
 
                     <Stack align="center" gap="xs" w="100%">
@@ -42,7 +48,11 @@ export function SessionsExplorerProgress({ progress }: IProps) {
                             {progress.failed > 0 && (
                                 <Text c="red.5" component="span" fw={500}>
                                     {' '}
-                                    ({t('sessions-explorer-progress.nodes-failed', { count: progress.failed })})
+                                    (
+                                    {t('sessions-explorer-progress.nodes-failed', {
+                                        count: progress.failed
+                                    })}
+                                    )
                                 </Text>
                             )}
                         </Text>

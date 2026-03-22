@@ -1,8 +1,6 @@
 import { DotLottieReact } from '@lottiefiles/dotlottie-react'
 import { FC } from 'react'
 
-// @ts-expect-error - no types for dotlottie-react
-import lottie from '../../../assets/lotties/stop-v2.lottie'
 import { IProps } from './interfaces/props.interface'
 
 export const LottieStopShared: FC<IProps> = (props) => {
@@ -10,7 +8,15 @@ export const LottieStopShared: FC<IProps> = (props) => {
 
     return (
         <div style={{ width, height }}>
-            <DotLottieReact autoplay={autoplay} loop={loop} src={lottie} />
+            <DotLottieReact
+                autoplay={autoplay}
+                loop={loop}
+                renderConfig={{
+                    autoResize: true,
+                    devicePixelRatio: window.devicePixelRatio || 2
+                }}
+                src="/lotties/stop-v2.lottie"
+            />
         </div>
     )
 }
