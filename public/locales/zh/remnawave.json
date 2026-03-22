@@ -28,7 +28,7 @@
         "remnawave-settings": "Remnawave 设置",
         "node-plugins": "插件",
         "tb-reports": "Torrent 屏蔽报告",
-        "sessions-explorer": "Sessions Explorer"
+        "sessions-explorer": "会话管理器"
     },
     "common": {
         "delete": "删除",
@@ -2093,26 +2093,26 @@
         }
     },
     "sessions-explorer-idle": {
-        "description-1": "This operation may take a while depending on the number of nodes and users. Sessions are fetched sequentially to avoid overloading the backend.",
-        "start-exploring": "Start exploring"
+        "description-1": "此操作可能需要一段时间，取决于节点和用户的数量。为了避免过多加载后端，会话按顺序获取。",
+        "start-exploring": "立即体验"
     },
     "sessions-explorer-progress": {
-        "exploring-nodes": "Exploring nodes...",
-        "nodes-processed": "{{completed}} of {{total}} nodes processed",
-        "nodes-failed": "{{count}} failed"
+        "exploring-nodes": "正在探索节点...",
+        "nodes-processed": "已处理 {{completed}} / {{total}} 个节点",
+        "nodes-failed": "失败 {{count}} 次"
     },
     "sessions-explorer": {
         "widget": {
-            "all-nodes-failed-to-return-session-data": "All nodes failed to return session data.",
-            "total-ips": "Total IPs",
-            "unique-ips": "Unique IPs",
-            "nodes-explored": "Nodes Explored",
-            "total-users": "Total Users",
-            "no-active-sessions-found-on-any-node": "No active sessions found on any node.",
-            "restart-scan": "Restart scan",
-            "clear-results": "Clear results",
-            "search-by-ip": "Search by IP address...",
-            "no-results-for-ip": "No users found with IP matching \"{{ip}}\""
+            "all-nodes-failed-to-return-session-data": "所有节点无法返回会话数据。",
+            "total-ips": "总共IP地址",
+            "unique-ips": "唯一IP地址",
+            "nodes-explored": "已探索节点",
+            "total-users": "用户总数",
+            "no-active-sessions-found-on-any-node": "在所有节点上找不到活动的会话。",
+            "restart-scan": "重新开始扫描",
+            "clear-results": "清除结果",
+            "search-by-ip": "按IP地址搜索……",
+            "no-results-for-ip": "未找到与 IP “{{ip}}” 匹配的用户"
         }
     }
 }
