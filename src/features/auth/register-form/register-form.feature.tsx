@@ -12,7 +12,6 @@ import { PiShuffleDuotone, PiSignpostDuotone } from 'react-icons/pi'
 import { RegisterCommand } from '@remnawave/backend-contract'
 import { zodResolver } from 'mantine-form-zod-resolver'
 import { notifications } from '@mantine/notifications'
-import { generate } from 'generate-password-ts'
 import { useTranslation } from 'react-i18next'
 import { useClipboard } from '@mantine/hooks'
 import { useForm } from '@mantine/form'
@@ -56,14 +55,9 @@ export const RegisterFormFeature = () => {
     })
 
     const handleGeneratePassword = () => {
-        const newPassword = generate({
-            length: 32,
-            numbers: true,
-            symbols: false,
-            uppercase: true,
-            lowercase: true,
-            strict: true
-        })
+        const charset = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
+        const bytes = crypto.getRandomValues(new Uint8Array(32))
+        const newPassword = Array.from(bytes, (b) => charset[b % charset.length]).join('')
 
         form.setValues({
             ...form.values,

@@ -77,7 +77,6 @@
     "country-flag-emoji-polyfill": "^0.1.8",
     "dayjs": "^1.11.19",
     "dotenv": "^17.3.1",
-    "generate-password-ts": "^1.6.5",
     "highcharts": "^12.4.0",
     "i18next": "^25.7.3",
     "i18next-browser-languagedetector": "^8.2.0",
