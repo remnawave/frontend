@@ -22,6 +22,7 @@ import {
     Center,
     Drawer,
     Group,
+    Paper,
     Progress,
     Stack,
     Text,
@@ -32,8 +33,8 @@ import {
 import { CodeHighlight } from '@mantine/code-highlight'
 import { notifications } from '@mantine/notifications'
 import { Trans, useTranslation } from 'react-i18next'
+import { useEffect, useMemo, useState } from 'react'
 import { PiEmptyDuotone } from 'react-icons/pi'
-import { useEffect, useState } from 'react'
 
 import { useDropConnections, useFetchIps, useFetchIpsResult } from '@shared/api/hooks'
 import { formatRelativeDateUtil, formatTimeUtil } from '@shared/utils/time-utils'
@@ -123,6 +124,81 @@ export const UserActiveSessionDrawerWidget = (props: IProps) => {
         const timer = setTimeout(() => setIsCompleted(true), 500)
         return () => clearTimeout(timer)
     }, [userIpsResult?.isCompleted, isFailed])
+
+    const ipStats = useMemo(() => {
+        const nodes = userIpsResult?.result?.nodes
+        if (!nodes) return null
+
+        const now = new Date().getTime()
+        let active = 0
+        let idle = 0
+        let stale = 0
+
+        for (const node of nodes) {
+            for (const ip of node.ips) {
+                const diffMinutes = (now - new Date(ip.lastSeen).getTime()) / 60_000
+                if (diffMinutes <= 5) active++
+                else if (diffMinutes <= 60) idle++
+                else stale++
+            }
+        }
+
+        return { active, idle, stale, total: active + idle + stale }
+    }, [userIpsResult?.result?.nodes])
+
+    const renderIpStatsCard = () => {
+        if (!ipStats) return null
+
+        return (
+            <SectionCard.Root gap="sm">
+                <SectionCard.Section>
+                    <Group gap="xs" grow>
+                        <Paper
+                            bd="1px solid rgba(45, 212, 191, 0.2)"
+                            bg="rgba(45, 212, 191, 0.08)"
+                            p="xs"
+                            radius="md"
+                        >
+                            <Group gap={4} justify="center">
+                                <TbClockCheck color="var(--mantine-color-teal-6)" size={18} />
+                                <Text c="teal.6" fw={700} size="sm">
+                                    {formatInt(ipStats.active)}
+                                </Text>
+                            </Group>
+                        </Paper>
+
+                        <Paper
+                            bd="1px solid rgba(251, 191, 36, 0.2)"
+                            bg="rgba(251, 191, 36, 0.08)"
+                            p="xs"
+                            radius="md"
+                        >
+                            <Group gap={4} justify="center">
+                                <TbClockPause color="var(--mantine-color-yellow-6)" size={18} />
+                                <Text c="yellow.6" fw={700} size="sm">
+                                    {formatInt(ipStats.idle)}
+                                </Text>
+                            </Group>
+                        </Paper>
+
+                        <Paper
+                            bd="1px solid rgba(239, 68, 68, 0.2)"
+                            bg="rgba(239, 68, 68, 0.08)"
+                            p="xs"
+                            radius="md"
+                        >
+                            <Group gap={4} justify="center">
+                                <TbClockExclamation color="var(--mantine-color-red-6)" size={18} />
+                                <Text c="red.6" fw={700} size="sm">
+                                    {formatInt(ipStats.stale)}
+                                </Text>
+                            </Group>
+                        </Paper>
+                    </Group>
+                </SectionCard.Section>
+            </SectionCard.Root>
+        )
+    }
 
     const handleGetData = () => {
         fetchIps({})
@@ -388,6 +464,8 @@ export const UserActiveSessionDrawerWidget = (props: IProps) => {
         return (
             <Stack gap="md">
                 {renderSummaryCard(totalIps, distinctIps)}
+
+                {renderIpStatsCard()}
 
                 {nodes && nodes.length === 0 && (
                     <SectionCard.Root gap="sm">
