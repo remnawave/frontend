@@ -19,13 +19,13 @@ export function NodePluginEditorPageConnector() {
         }
     })
 
-    if (isPluginLoading || !plugin) {
-        return <LoadingScreen text="Loading plugin..." />
-    }
-
     if (!uuid) {
         navigate(ROUTES.DASHBOARD.HOME, { replace: true })
         return null
+    }
+
+    if (isPluginLoading || !plugin) {
+        return <LoadingScreen text="Loading plugin..." />
     }
 
     return <NodePluginEditorPageComponent plugin={plugin} />

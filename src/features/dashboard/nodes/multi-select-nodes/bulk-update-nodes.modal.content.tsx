@@ -142,15 +142,7 @@ export const BulkUpdateNodesModalContent = (props: IProps) => {
                         <SelectInfraProviderShared
                             selectedInfraProviderUuid={form.getValues().fields.providerUuid}
                             setSelectedInfraProviderUuid={(providerUuid) => {
-                                form.setValues({
-                                    providerUuid
-                                } as Partial<BulkNodesUpdateCommand.Request>)
-                                form.setTouched({
-                                    providerUuid: true
-                                })
-                                form.setDirty({
-                                    providerUuid: true
-                                })
+                                form.setFieldValue('fields.providerUuid', providerUuid)
                             }}
                         />
 
