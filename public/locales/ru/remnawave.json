@@ -1226,8 +1226,6 @@
                 "choose-an-inbound-to-apply-to-the-host": "Выберите инбаунд, который будет привязан к хосту.",
                 "apply-changes": "Применить изменения",
                 "search-profiles-or-inbounds": "Поиск по профилям или инбаундам...",
-                "hosts-do-not-support-multiple-inbounds": "Хосты не поддерживают несколько инбаундов",
-                "not-supported": "Не поддерживается",
                 "no-profiles-or-inbounds-found": "Профили или инбаунды не найдены",
                 "no-config-profiles-available": "Нет доступных профилей"
             }
@@ -2113,6 +2111,25 @@
             "clear-results": "Очистить результаты",
             "search-by-ip": "Поиск по IP-адресу...",
             "no-results-for-ip": "Не найдено пользователей с совпадающим IP \"{{ip}}\""
+        }
+    },
+    "mobile-stats": {
+        "widget": {
+            "billing-nodes": "Billing nodes",
+            "upcoming": "Upcoming",
+            "per-month": "Per month",
+            "total-spent": "Total spent"
+        }
+    },
+    "mobile-providers-list": {
+        "widget": {
+            "invoices": "Invoices"
+        }
+    },
+    "mobile-infra-billing": {
+        "widget": {
+            "history": "History",
+            "providers": "Providers"
         }
     }
 }

@@ -1226,8 +1226,6 @@
                 "choose-an-inbound-to-apply-to-the-host": "یک اینباند برای اعمال به هاست انتخاب کنید.",
                 "apply-changes": "اعمال تغییرات",
                 "search-profiles-or-inbounds": "جستجوی پروفایل یا اینباند...",
-                "hosts-do-not-support-multiple-inbounds": "نمی‌توان به یک هاست چندین اینباند اعمال کرد",
-                "not-supported": "پشتیبانی نمی‌شود",
                 "no-profiles-or-inbounds-found": "هیچ پروفایل یا اینباند یافت نشد",
                 "no-config-profiles-available": "هیچ پروفایل تنظیمات در دسترس نیست"
             }
@@ -2113,6 +2111,25 @@
             "clear-results": "Clear results",
             "search-by-ip": "Search by IP address...",
             "no-results-for-ip": "No users found with IP matching \"{{ip}}\""
+        }
+    },
+    "mobile-stats": {
+        "widget": {
+            "billing-nodes": "Billing nodes",
+            "upcoming": "Upcoming",
+            "per-month": "Per month",
+            "total-spent": "Total spent"
+        }
+    },
+    "mobile-providers-list": {
+        "widget": {
+            "invoices": "Invoices"
+        }
+    },
+    "mobile-infra-billing": {
+        "widget": {
+            "history": "History",
+            "providers": "Providers"
         }
     }
 }
