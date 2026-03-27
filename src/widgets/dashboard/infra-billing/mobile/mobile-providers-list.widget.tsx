@@ -1,4 +1,13 @@
-import { ActionIcon, Avatar, Group, MantineStyleProp, Stack, Text } from '@mantine/core'
+import {
+    ActionIcon,
+    Avatar,
+    Center,
+    Group,
+    MantineStyleProp,
+    Stack,
+    Text,
+    ThemeIcon
+} from '@mantine/core'
 import { GetInfraProvidersCommand } from '@remnawave/backend-contract'
 import { TbCloud, TbEdit, TbLink, TbTrash } from 'react-icons/tb'
 import { useTranslation } from 'react-i18next'
@@ -53,11 +62,23 @@ export function MobileProvidersListWidget(props: IProps) {
 
     if (providers.length === 0) {
         return (
-            <Stack align="center" gap="xs" py="xl">
-                <Text c="dimmed" size="sm">
-                    {t('infra-providers-table.widget.no-providers-found')}
-                </Text>
-            </Stack>
+            <SectionCard.Root p="xl">
+                <SectionCard.Section>
+                    <Center py="xl">
+                        <Stack align="center" gap="lg">
+                            <ThemeIcon color="gray" radius="xl" size={64} variant="soft">
+                                <TbCloud size={32} />
+                            </ThemeIcon>
+
+                            <Stack align="center" gap="xs">
+                                <Text c="dimmed" fw={600} size="md" ta="center">
+                                    {t('infra-providers-table.widget.no-providers-found')}
+                                </Text>
+                            </Stack>
+                        </Stack>
+                    </Center>
+                </SectionCard.Section>
+            </SectionCard.Root>
         )
     }
 

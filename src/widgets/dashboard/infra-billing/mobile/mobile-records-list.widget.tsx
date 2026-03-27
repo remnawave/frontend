@@ -1,4 +1,14 @@
-import { ActionIcon, Avatar, Divider, Group, MantineStyleProp, Stack, Text } from '@mantine/core'
+import {
+    ActionIcon,
+    Avatar,
+    Center,
+    Divider,
+    Group,
+    MantineStyleProp,
+    Stack,
+    Text,
+    ThemeIcon
+} from '@mantine/core'
 import { GetInfraBillingHistoryRecordsCommand } from '@remnawave/backend-contract'
 import { TbCreditCard, TbTrash } from 'react-icons/tb'
 import { useTranslation } from 'react-i18next'
@@ -68,11 +78,25 @@ export function MobileRecordsListWidget(props: IProps) {
 
     if (records.length === 0) {
         return (
-            <Stack align="center" gap="xs" py="xl">
-                <Text c="dimmed" size="sm">
-                    {t('infra-billing-records-table.widget.no-billing-records-found')}
-                </Text>
-            </Stack>
+            <SectionCard.Root p="xl">
+                <SectionCard.Section>
+                    <Center py="xl">
+                        <Stack align="center" gap="lg">
+                            <ThemeIcon color="gray" radius="xl" size={64} variant="soft">
+                                <TbCreditCard size={32} />
+                            </ThemeIcon>
+
+                            <Stack align="center" gap="xs">
+                                <Text c="dimmed" fw={600} size="md" ta="center">
+                                    {t(
+                                        'infra-billing-records-table.widget.no-billing-records-found'
+                                    )}
+                                </Text>
+                            </Stack>
+                        </Stack>
+                    </Center>
+                </SectionCard.Section>
+            </SectionCard.Root>
         )
     }
 

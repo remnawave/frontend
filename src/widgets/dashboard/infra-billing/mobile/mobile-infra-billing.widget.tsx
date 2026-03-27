@@ -1,4 +1,4 @@
-import { TbCloud, TbHistory, TbPlus, TbRefresh, TbServer } from 'react-icons/tb'
+import { TbCloud, TbCreditCard, TbPlus, TbRefresh, TbServer } from 'react-icons/tb'
 import { ActionIcon, Group, Stack, Tabs, Transition } from '@mantine/core'
 import { useTranslation } from 'react-i18next'
 import { useState } from 'react'
@@ -100,7 +100,7 @@ export function MobileInfraBillingWidget() {
                     <Tabs.Tab leftSection={<TbServer size={16} />} value="nodes">
                         {t('constants.nodes')}
                     </Tabs.Tab>
-                    <Tabs.Tab leftSection={<TbHistory size={16} />} value="records">
+                    <Tabs.Tab leftSection={<TbCreditCard size={16} />} value="records">
                         {t('mobile-infra-billing.widget.history')}
                     </Tabs.Tab>
                     <Tabs.Tab leftSection={<TbCloud size={16} />} value="providers">

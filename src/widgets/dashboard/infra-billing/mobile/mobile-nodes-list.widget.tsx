@@ -1,4 +1,13 @@
-import { ActionIcon, Badge, Group, MantineStyleProp, Stack, Text } from '@mantine/core'
+import {
+    ActionIcon,
+    Badge,
+    Center,
+    Group,
+    MantineStyleProp,
+    Stack,
+    Text,
+    ThemeIcon
+} from '@mantine/core'
 import { TbCalendar, TbCheck, TbCreditCard, TbServer } from 'react-icons/tb'
 import { GetInfraBillingNodesCommand } from '@remnawave/backend-contract'
 import { useTranslation } from 'react-i18next'
@@ -67,11 +76,23 @@ export function MobileNodesListWidget(props: IProps) {
 
     if (nodes.length === 0) {
         return (
-            <Stack align="center" gap="xs" py="xl">
-                <Text c="dimmed" size="sm">
-                    {t('infra-billing-nodes.widget.no-nodes-found')}
-                </Text>
-            </Stack>
+            <SectionCard.Root p="xl">
+                <SectionCard.Section>
+                    <Center py="xl">
+                        <Stack align="center" gap="lg">
+                            <ThemeIcon color="gray" radius="xl" size={64} variant="soft">
+                                <TbServer size={32} />
+                            </ThemeIcon>
+
+                            <Stack align="center" gap="xs">
+                                <Text c="dimmed" fw={600} size="md" ta="center">
+                                    {t('infra-billing-nodes.widget.no-nodes-found')}
+                                </Text>
+                            </Stack>
+                        </Stack>
+                    </Center>
+                </SectionCard.Section>
+            </SectionCard.Root>
         )
     }
 
