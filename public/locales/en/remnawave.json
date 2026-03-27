@@ -2114,5 +2114,24 @@
             "search-by-ip": "Search by IP address...",
             "no-results-for-ip": "No users found with IP matching \"{{ip}}\""
         }
+    },
+    "mobile-stats": {
+        "widget": {
+            "billing-nodes": "Billing nodes",
+            "upcoming": "Upcoming",
+            "per-month": "Per month",
+            "total-spent": "Total spent"
+        }
+    },
+    "mobile-providers-list": {
+        "widget": {
+            "invoices": "Invoices"
+        }
+    },
+    "mobile-infra-billing": {
+        "widget": {
+            "history": "History",
+            "providers": "Providers"
+        }
     }
 }

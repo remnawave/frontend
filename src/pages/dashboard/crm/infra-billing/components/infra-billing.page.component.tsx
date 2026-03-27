@@ -1,5 +1,6 @@
 import { Split } from '@gfazioli/mantine-split-pane'
 import { useTranslation } from 'react-i18next'
+import { useMediaQuery } from '@mantine/hooks'
 import { useLayoutEffect } from 'react'
 import { Stack } from '@mantine/core'
 import { motion } from 'motion/react'
@@ -13,20 +14,26 @@ import { InfraBillingNodesTableWidget } from '@widgets/dashboard/infra-billing/i
 import { InfraProvidersTableWidget } from '@widgets/dashboard/infra-billing/infra-providers-table/infra-providers-table.widget'
 import { UpdateBillingDateModalWidget } from '@widgets/dashboard/infra-billing/update-billing-date-modal'
 import { StatsWidget } from '@widgets/dashboard/infra-billing/stats-widget/stats.widget'
+import { MobileInfraBillingWidget } from '@widgets/dashboard/infra-billing/mobile'
 import { preventBackScrollTables } from '@shared/utils/misc'
 import { Page } from '@shared/ui/page'
 
 export const InfraBillingPageComponent = () => {
     const { t } = useTranslation()
+    const isMobile = useMediaQuery('(max-width: 48em)')
 
     useLayoutEffect(() => {
+        if (isMobile) {
+            return undefined
+        }
+
         document.body.addEventListener('wheel', preventBackScrollTables, {
             passive: false
         })
         return () => {
             document.body.removeEventListener('wheel', preventBackScrollTables)
         }
-    }, [])
+    }, [isMobile])
 
     return (
         <Page title={t('constants.infra-billing')}>
@@ -35,23 +42,29 @@ export const InfraBillingPageComponent = () => {
                 initial={{ opacity: 0 }}
                 transition={{ duration: 0.5 }}
             >
-                <StatsWidget />
+                {isMobile ? (
+                    <MobileInfraBillingWidget />
+                ) : (
+                    <>
+                        <StatsWidget />
 
-                <Stack>
-                    <Split spacing="sm" variant="dotted">
-                        <Split.Pane initialWidth="60%">
-                            <InfraBillingNodesTableWidget />
-                        </Split.Pane>
+                        <Stack>
+                            <Split spacing="sm" variant="dotted">
+                                <Split.Pane initialWidth="60%">
+                                    <InfraBillingNodesTableWidget />
+                                </Split.Pane>
 
-                        <Split.Resizer />
+                                <Split.Resizer />
 
-                        <Split.Pane grow initialWidth="40%">
-                            <InfraBillingRecordsTableWidget />
-                        </Split.Pane>
-                    </Split>
+                                <Split.Pane grow initialWidth="40%">
+                                    <InfraBillingRecordsTableWidget />
+                                </Split.Pane>
+                            </Split>
 
-                    <InfraProvidersTableWidget />
-                </Stack>
+                            <InfraProvidersTableWidget />
+                        </Stack>
+                    </>
+                )}
             </motion.div>
 
             <ViewInfraProviderDrawerWidget />

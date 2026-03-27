@@ -6,6 +6,7 @@ import { ReactNode } from 'react'
 type IProps = {
     countryCode?: string
     hideIcon?: boolean
+    icon?: ReactNode
     iconColor?: ThemeIconProps['color']
     IconComponent: React.ComponentType<{ size: number }>
     iconSize?: number
@@ -29,7 +30,8 @@ export const BaseOverlayHeader = (props: IProps) => {
         title,
         titleOrder = 4,
         withCopy = false,
-        hideIcon = false
+        hideIcon = false,
+        icon
     } = props
 
     const { copy } = useClipboard()
@@ -41,6 +43,8 @@ export const BaseOverlayHeader = (props: IProps) => {
                     <IconComponent size={iconSize} />
                 </ThemeIcon>
             )}
+
+            {icon && icon}
 
             {countryCode && countryCode !== 'XX' && (
                 <ReactCountryFlag countryCode={countryCode} style={{ fontSize: '1.5em' }} />
