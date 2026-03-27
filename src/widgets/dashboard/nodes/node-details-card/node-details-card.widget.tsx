@@ -321,7 +321,7 @@ export const NodeDetailsCardWidget = memo((props: IProps) => {
                             </Group>
                         </Paper>
 
-                        {node.xrayVersion && (
+                        {node.versions && (
                             <Paper
                                 p="xs"
                                 radius="md"
@@ -334,14 +334,14 @@ export const NodeDetailsCardWidget = memo((props: IProps) => {
                                     <Group gap="xs" justify="center">
                                         <XrayLogo color="var(--mantine-color-violet-5)" size={16} />
                                         <Text c="violet.5" fw={600} size="sm">
-                                            {node.xrayVersion}
+                                            {node.versions.xray}
                                         </Text>
                                     </Group>
                                 </Tooltip>
                             </Paper>
                         )}
 
-                        {node.xrayUptime !== '0' && (
+                        {node.xrayUptime !== 0 && (
                             <Paper
                                 hiddenFrom="sm"
                                 p="xs"
@@ -371,7 +371,7 @@ export const NodeDetailsCardWidget = memo((props: IProps) => {
                             </Paper>
                         )}
 
-                        {node.nodeVersion && (
+                        {node.versions && (
                             <Paper
                                 p="xs"
                                 radius="md"
@@ -386,7 +386,7 @@ export const NodeDetailsCardWidget = memo((props: IProps) => {
                                     <Group gap="xs" justify="center">
                                         <Logo color="var(--mantine-color-indigo-5)" size={16} />
                                         <Text c="indigo.5" fw={600} size="sm">
-                                            {node.nodeVersion}
+                                            {node.versions.node}
                                         </Text>
                                     </Group>
                                 </Tooltip>

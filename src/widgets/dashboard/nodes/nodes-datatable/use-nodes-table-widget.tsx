@@ -252,14 +252,22 @@ export function getNodesTableColumns(
                     .join(', ')
         },
         {
-            accessor: 'xrayVersion',
+            accessor: 'versions.xray',
             sortable: true,
-            title: t('use-nodes-table-widget.xray-v')
+            title: t('use-nodes-table-widget.xray-v'),
+            render: ({ versions }) => (versions ? versions.xray : '-')
         },
         {
-            accessor: 'nodeVersion',
+            accessor: 'xrayUptime',
             sortable: true,
-            title: t('use-nodes-table-widget.node-v')
+            title: 'Xray Uptime',
+            render: ({ xrayUptime }) => (xrayUptime !== 0 ? formatDurationUtil(xrayUptime) : '-')
+        },
+        {
+            accessor: 'versions.node',
+            sortable: true,
+            title: t('use-nodes-table-widget.node-v'),
+            render: ({ versions }) => (versions ? versions.node : '-')
         },
         {
             accessor: 'provider.name',

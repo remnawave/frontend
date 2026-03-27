@@ -95,7 +95,7 @@ export const NodeCardWidget = memo((props: IProps) => {
     const percentage = calcPercentage()
     const fallbackProgress = node.isTrafficTrackingActive && node.trafficLimitBytes === 0
 
-    const isOnline = node.isConnected && node.xrayUptime !== '0' && !node.isDisabled
+    const isOnline = node.isConnected && node.xrayUptime !== 0 && !node.isDisabled
     const isConfigMissing =
         node.configProfile.activeConfigProfileUuid === null ||
         node.configProfile.activeInbounds.length === 0
@@ -401,13 +401,13 @@ export const NodeCardWidget = memo((props: IProps) => {
                             <Flex align="center" gap={4}>
                                 <XrayLogo color="var(--mantine-color-dimmed)" size={12} />
                                 <Text c="dimmed" ff="monospace" size="xs">
-                                    {node.xrayVersion ? node.xrayVersion : '—'}
+                                    {node.versions ? node.versions.xray : '—'}
                                 </Text>
                             </Flex>
                             <Flex align="center" gap={4}>
                                 <Logo color="var(--mantine-color-dimmed)" size={12} />
                                 <Text c="dimmed" ff="monospace" size="xs">
-                                    {node.nodeVersion ? node.nodeVersion : '—'}
+                                    {node.versions ? node.versions.node : '—'}
                                 </Text>
                             </Flex>
                         </Flex>
