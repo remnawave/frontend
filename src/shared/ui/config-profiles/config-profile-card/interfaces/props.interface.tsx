@@ -3,6 +3,7 @@ import type { InputBaseProps } from '@mantine/core'
 import { GetConfigProfilesCommand } from '@remnawave/backend-contract'
 
 export interface IProps extends InputBaseProps {
+    hideSelectActions?: boolean
     isOpen: boolean
     onInboundToggle: (
         inbound: GetConfigProfilesCommand.Response['response']['configProfiles'][number]['inbounds'][number]

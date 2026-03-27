@@ -1226,8 +1226,6 @@
                 "choose-an-inbound-to-apply-to-the-host": "Choose an inbound to apply to the host.",
                 "apply-changes": "Apply changes",
                 "search-profiles-or-inbounds": "Search profiles or inbounds...",
-                "hosts-do-not-support-multiple-inbounds": "Hosts do not support multiple inbounds",
-                "not-supported": "Not supported",
                 "no-profiles-or-inbounds-found": "No profiles or inbounds found",
                 "no-config-profiles-available": "No config profiles available"
             }

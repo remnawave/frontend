@@ -16,13 +16,16 @@ import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { XrayLogo } from '@shared/ui/logos'
 
 interface IProps extends AccordionControlProps {
+    hideSelectActions?: boolean
     onSelectAllInbounds: (profileUuid: string) => void
+
     onUnselectAllInbounds: (profileUuid: string) => void
     profile: GetConfigProfilesCommand.Response['response']['configProfiles'][number]
 }
 
 export const AccordionControlShared = (props: IProps) => {
-    const { profile, onSelectAllInbounds, onUnselectAllInbounds, ...rest } = props
+    const { profile, onSelectAllInbounds, onUnselectAllInbounds, hideSelectActions, ...rest } =
+        props
 
     const handleShowJson = () => {
         if (!profile) return
@@ -59,32 +62,36 @@ export const AccordionControlShared = (props: IProps) => {
 
             <Group gap="0" mr="xs" wrap="nowrap">
                 <ActionIconGroup>
-                    <ActionIcon
-                        color="gray"
-                        onClick={(e) => {
-                            e.preventDefault()
-                            e.stopPropagation()
-                            e.nativeEvent.stopImmediatePropagation()
-                            onSelectAllInbounds(profile.uuid)
-                        }}
-                        size="lg"
-                        variant="subtle"
-                    >
-                        <PiCheckBold size={16} />
-                    </ActionIcon>
-                    <ActionIcon
-                        color="gray"
-                        onClick={(e) => {
-                            e.preventDefault()
-                            e.stopPropagation()
-                            e.nativeEvent.stopImmediatePropagation()
-                            onUnselectAllInbounds(profile.uuid)
-                        }}
-                        size="lg"
-                        variant="subtle"
-                    >
-                        <PiXBold size={16} />
-                    </ActionIcon>
+                    {!hideSelectActions && (
+                        <>
+                            <ActionIcon
+                                color="gray"
+                                onClick={(e) => {
+                                    e.preventDefault()
+                                    e.stopPropagation()
+                                    e.nativeEvent.stopImmediatePropagation()
+                                    onSelectAllInbounds(profile.uuid)
+                                }}
+                                size="lg"
+                                variant="subtle"
+                            >
+                                <PiCheckBold size={16} />
+                            </ActionIcon>
+                            <ActionIcon
+                                color="gray"
+                                onClick={(e) => {
+                                    e.preventDefault()
+                                    e.stopPropagation()
+                                    e.nativeEvent.stopImmediatePropagation()
+                                    onUnselectAllInbounds(profile.uuid)
+                                }}
+                                size="lg"
+                                variant="subtle"
+                            >
+                                <PiXBold size={16} />
+                            </ActionIcon>
+                        </>
+                    )}
                     <ActionIcon
                         color="gray"
                         onClick={(e) => {

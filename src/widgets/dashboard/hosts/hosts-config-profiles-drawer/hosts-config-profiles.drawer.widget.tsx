@@ -267,29 +267,20 @@ export const HostsConfigProfilesDrawer = (props: IProps) => {
                                             variant="separated"
                                         >
                                             <ConfigProfileCardShared
+                                                hideSelectActions={true}
                                                 isOpen={isOpen}
                                                 onInboundToggle={handleInboundToggle}
                                                 onSelectAllInbounds={() => {
                                                     notifications.show({
-                                                        message: t(
-                                                            'hosts-config-profiles.drawer.widget.hosts-do-not-support-multiple-inbounds'
-                                                        ),
+                                                        message: 'Nice try!',
                                                         color: 'red',
-                                                        title: t(
-                                                            'hosts-config-profiles.drawer.widget.not-supported'
-                                                        ),
                                                         autoClose: 2000
                                                     })
                                                 }}
                                                 onUnselectAllInbounds={() => {
                                                     notifications.show({
-                                                        message: t(
-                                                            'hosts-config-profiles.drawer.widget.hosts-do-not-support-multiple-inbounds'
-                                                        ),
+                                                        message: 'Nice try!',
                                                         color: 'red',
-                                                        title: t(
-                                                            'hosts-config-profiles.drawer.widget.not-supported'
-                                                        ),
                                                         autoClose: 2000
                                                     })
                                                 }}

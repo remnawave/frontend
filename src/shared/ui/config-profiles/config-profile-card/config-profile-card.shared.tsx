@@ -14,6 +14,7 @@ import { AccordionControlShared } from './accordion-control.shared'
 
 export const ConfigProfileCardShared = memo((props: IProps) => {
     const {
+        hideSelectActions,
         profile,
         selectedInbounds,
         onInboundToggle,
@@ -31,6 +32,7 @@ export const ConfigProfileCardShared = memo((props: IProps) => {
     return (
         <Accordion.Item value={profile.uuid}>
             <AccordionControlShared
+                hideSelectActions={hideSelectActions}
                 onSelectAllInbounds={onSelectAllInbounds}
                 onUnselectAllInbounds={onUnselectAllInbounds}
                 profile={profile}
