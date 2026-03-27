@@ -1226,8 +1226,6 @@
                 "choose-an-inbound-to-apply-to-the-host": "选择一个入站以应用到主机。",
                 "apply-changes": "应用更改",
                 "search-profiles-or-inbounds": "搜索配置文件或入站...",
-                "hosts-do-not-support-multiple-inbounds": "主机不支持多个入站",
-                "not-supported": "不支持",
                 "no-profiles-or-inbounds-found": "未找到配置文件或入站",
                 "no-config-profiles-available": "没有可用的配置文件"
             }
@@ -2113,6 +2111,25 @@
             "clear-results": "清除结果",
             "search-by-ip": "按IP地址搜索……",
             "no-results-for-ip": "未找到与 IP “{{ip}}” 匹配的用户"
+        }
+    },
+    "mobile-stats": {
+        "widget": {
+            "billing-nodes": "Billing nodes",
+            "upcoming": "Upcoming",
+            "per-month": "Per month",
+            "total-spent": "Total spent"
+        }
+    },
+    "mobile-providers-list": {
+        "widget": {
+            "invoices": "Invoices"
+        }
+    },
+    "mobile-infra-billing": {
+        "widget": {
+            "history": "History",
+            "providers": "Providers"
         }
     }
 }
