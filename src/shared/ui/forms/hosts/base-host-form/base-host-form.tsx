@@ -931,7 +931,7 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
                                             w="100%"
                                         >
                                             <Button
-                                                color="shaded-gray"
+                                                color="gray"
                                                 disabled={isXhttpExtraButtonDisabled()}
                                                 leftSection={<PiPencilDuotone />}
                                                 onClick={open}
