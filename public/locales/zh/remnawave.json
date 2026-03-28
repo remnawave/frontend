@@ -2115,21 +2115,21 @@
     },
     "mobile-stats": {
         "widget": {
-            "billing-nodes": "Billing nodes",
-            "upcoming": "Upcoming",
-            "per-month": "Per month",
-            "total-spent": "Total spent"
+            "billing-nodes": "计费节点",
+            "upcoming": "即将到来",
+            "per-month": "每月",
+            "total-spent": "合计花费"
         }
     },
     "mobile-providers-list": {
         "widget": {
-            "invoices": "Invoices"
+            "invoices": "发票"
         }
     },
     "mobile-infra-billing": {
         "widget": {
-            "history": "History",
-            "providers": "Providers"
+            "history": "历史",
+            "providers": "服务商"
         }
     }
 }
