@@ -1,5 +1,6 @@
 import {
     ActionIcon,
+    ActionIconProps,
     Box,
     CardSection,
     CardSectionProps,
@@ -17,11 +18,12 @@ export interface CardTitleProps extends Omit<CardSectionProps, 'c' | 'fw' | 'siz
     actions?: ReactNode
     description?: string
     icon: ReactNode
+    iconProps?: ActionIconProps
     title: ReactNode
 }
 
 export const CardTitle = forwardRef<HTMLDivElement, CardTitleProps>(
-    ({ title, description, style, actions, withBorder = true, icon, ...props }, ref) => (
+    ({ title, description, style, actions, withBorder = true, icon, iconProps, ...props }, ref) => (
         <CardSection
             className={classes.card}
             inheritPadding
@@ -55,6 +57,7 @@ export const CardTitle = forwardRef<HTMLDivElement, CardTitleProps>(
                                     color="cyan"
                                     size="input-md"
                                     variant="light"
+                                    {...iconProps}
                                 >
                                     {icon}
                                 </ActionIcon>

@@ -61,6 +61,8 @@ export const SubscriptionAnnounceRoutingCardWidget = (props: IProps) => {
                 <SettingsCardShared.Header
                     description={t('subscription-tabs.widget.announce-and-routing-description')}
                     icon={<PiDeviceMobile size={24} />}
+                    iconColor="cyan"
+                    iconVariant="soft"
                     title={t('subscription-tabs.widget.announce-and-routing')}
                 />
 

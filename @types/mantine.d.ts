@@ -1,34 +1,15 @@
-import { BadgeVariant, ThemeIconVariant } from '@mantine/core'
+import {
+    ActionIconVariant,
+    BadgeVariant,
+    DefaultMantineColor,
+    MantineColorsTuple,
+    ThemeIconVariant
+} from '@mantine/core'
 
-type ExtendedThemeIconVariant =
-    | 'gradient-blue'
-    | 'gradient-cyan'
-    | 'gradient-gray'
-    | 'gradient-green'
-    | 'gradient-indigo'
-    | 'gradient-lime'
-    | 'gradient-orange'
-    | 'gradient-pink'
-    | 'gradient-red'
-    | 'gradient-teal'
-    | 'gradient-violet'
-    | 'gradient-yellow'
-    | ThemeIconVariant
-
-type ExtendedBadgeVariant =
-    | 'gradient-blue'
-    | 'gradient-cyan'
-    | 'gradient-gray'
-    | 'gradient-green'
-    | 'gradient-indigo'
-    | 'gradient-lime'
-    | 'gradient-orange'
-    | 'gradient-pink'
-    | 'gradient-red'
-    | 'gradient-teal'
-    | 'gradient-violet'
-    | 'gradient-yellow'
-    | BadgeVariant
+type ExtendedThemeIconVariant = 'soft' | ThemeIconVariant
+type ExtendedActionIconVariant = 'soft' | ActionIconVariant
+type ExtendedBadgeVariant = 'soft' | BadgeVariant
+type ExtendedCustomColors = 'shaded-gray' | DefaultMantineColor
 
 declare module '@mantine/core' {
     export interface ThemeIconProps {
@@ -37,5 +18,13 @@ declare module '@mantine/core' {
 
     export interface BadgeProps {
         variant?: ExtendedBadgeVariant
+    }
+
+    export interface ActionIconProps {
+        variant?: ExtendedActionIconVariant
+    }
+
+    export interface MantineThemeColorsOverride {
+        colors: Record<ExtendedCustomColors, MantineColorsTuple>
     }
 }

@@ -47,7 +47,7 @@ export const TemplateEditorPageComponent = (props: Props) => {
                                 )
                             }
                             size="input-md"
-                            variant="light"
+                            variant="soft"
                         >
                             <TbArrowBackUp size={24} />
                         </ActionIcon>

@@ -13,7 +13,7 @@ export function EntityCardIcon({ children, highlight = true, ...props }: EntityC
                 className={classes.icon}
                 color={highlight ? 'teal' : 'cyan'}
                 size="xl"
-                variant="light"
+                variant="soft"
                 {...props}
             >
                 {children}

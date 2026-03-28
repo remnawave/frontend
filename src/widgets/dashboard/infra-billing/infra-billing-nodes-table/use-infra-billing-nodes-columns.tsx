@@ -130,9 +130,11 @@ export function getInfraBillingNodesColumns(
                     <TbClick size={16} />
                 </Center>
             ),
-            width: '0%',
+            width: 50,
+            resizable: false,
+            textAlign: 'center',
             render: (row) => (
-                <Group wrap="nowrap">
+                <Group justify="center" wrap="nowrap">
                     <ActionIconGroup>
                         <Tooltip
                             label={t('use-infra-billing-nodes-columns.quick-update-to-next-month')}

@@ -113,8 +113,9 @@ export function BlockEditorModal(props: IProps) {
             size="xl"
             title={
                 <BaseOverlayHeader
+                    iconColor="violet"
                     IconComponent={IconChevronRight}
-                    iconVariant="gradient-violet"
+                    iconVariant="soft"
                     subtitle={blockTitle}
                     title={t('block-editor.modal.component.edit-block')}
                 />
@@ -125,9 +126,10 @@ export function BlockEditorModal(props: IProps) {
                     <Card className={styles.sectionCard} p="md" radius="md">
                         <Stack gap="md">
                             <BaseOverlayHeader
+                                iconColor="cyan"
                                 IconComponent={IconPalette}
                                 iconSize={16}
-                                iconVariant="gradient-cyan"
+                                iconVariant="soft"
                                 title={t('block-editor.modal.component.block-settings')}
                                 titleOrder={5}
                             />
@@ -177,9 +179,10 @@ export function BlockEditorModal(props: IProps) {
                     <Card className={styles.sectionCard} p="md" radius="md">
                         <Stack gap="md">
                             <BaseOverlayHeader
+                                iconColor="teal"
                                 IconComponent={IconPlus}
                                 iconSize={16}
-                                iconVariant="gradient-teal"
+                                iconVariant="soft"
                                 subtitle={`${block.buttons.length} buttons`}
                                 title={t('block-editor.modal.component.buttons')}
                                 titleOrder={5}

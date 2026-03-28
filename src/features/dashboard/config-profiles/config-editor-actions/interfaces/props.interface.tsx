@@ -1,7 +1,6 @@
 import type { editor } from 'monaco-editor'
 
 import { GetConfigProfilesCommand } from '@remnawave/backend-contract'
-import { Monaco } from '@monaco-editor/react'
 import { RefObject } from 'react'
 
 export interface Props {
@@ -9,7 +8,6 @@ export interface Props {
     editorRef: RefObject<editor.IStandaloneCodeEditor | null>
     hasUnsavedChanges: boolean
     isConfigValid: boolean
-    monacoRef: RefObject<Monaco | null>
     originalValue: string
     setHasUnsavedChanges: (value: boolean) => void
     setIsConfigValid: (value: boolean) => void

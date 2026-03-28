@@ -1,5 +1,5 @@
 export const app = {
-    name: 'Remnawave Dashboard',
+    name: 'Remnawave',
     githubRepo: 'https://github.com/remnawave/backend',
     githubStars: 'https://github.com/remnawave/backend/stargazers',
     githubIssues: 'https://github.com/remnawave/backend/issues',

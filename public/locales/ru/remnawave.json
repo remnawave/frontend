@@ -25,7 +25,10 @@
         "tools": "Инструменты",
         "srh-inspector": "Инспектор SRH",
         "response-rules": "Правила ответов",
-        "remnawave-settings": "Настройки Remnawave"
+        "remnawave-settings": "Настройки Remnawave",
+        "node-plugins": "Плагины",
+        "tb-reports": "Torrent Blocker Reports",
+        "sessions-explorer": "Обозреватель сессий"
     },
     "common": {
         "delete": "Удалить",
@@ -514,14 +517,16 @@
             "reset-monthly": "Сброс ежемесячно",
             "reset-weekly": "Сброс еженедельно",
             "reset-daily": "Сброс ежедневно",
-            "never-reset": "Никогда не сбрасывать"
+            "never-reset": "Никогда не сбрасывать",
+            "reset-monthly-by-creation-date": "Сброс ежемесячно (по дате создания)"
         }
     },
     "data-usage": {
         "column": {
             "monthly": "Ежемесячно",
             "weekly": "Еженедельно",
-            "daily": "Ежедневно"
+            "daily": "Ежедневно",
+            "monthly-rolling": "Ежемесячно (скользящий)"
         }
     },
     "get-time-ago": {
@@ -774,10 +779,11 @@
         "widget": {
             "title": "Активные сеансы",
             "requirements": "Условия",
-            "warning-activity": "IP адреса будут показаны только при наличии активности в течение последних <highlight>20 секунд</highlight>",
+            "warning-activity": "IP адрес будет показан, когда <highlight>Xray-Core</highlight> считает подключение <highlight>еще действительным</highlight>. Это может привести к отображению IP адресов, которые в настоящий момент не подключены. Используйте значок <highlight>часов</highlight> для отслеживания последней активности данного IP.",
             "warning-version": "Версия Remnawave Node <highlight>{{version}}</highlight> или выше",
             "warning-docker": "Добавьте эти строки к <highlight>docker-compose.yml</highlight> Remnawave Node (/opt/remnanode)",
             "warning-patience": "Получение данных может занять некоторое время, не закрывайте это окно!",
+            "warning-n-plus-one": "<highlight>Пожалуйста, обратите внимание</highlight>: данный запрос выполняет <highlight>N+1</highlight> операциий к gRPC API <highlight>Xray-Core</highlight> так как API не предоставляет методов для массового получения данных. <highlight>N</highlight> — количество пользователей онлайн на данной ноде.",
             "get-data": "Получить данные",
             "fetching": "Получение активных сессий...",
             "progress": "Опрошено {{completed}} из {{total}} нод",
@@ -833,7 +839,7 @@
             "show-custom-remarks": "Отображать кастомное примечание",
             "show-custom-remark-description-line-1": "Только для EXPIRED, LIMITED, DISABLED пользователей.",
             "show-custom-remark-description-line-2": "Если эта настройка отключена – EXPIRED, LIMITED, DISABLED пользователи получат актуальный список хостов, вместо кастомных примечаний ниже.",
-            "additional-response-headers": "Доп. хэдеры",
+            "additional-response-headers": "Заголовки ответа",
             "headers-that-will-be-sent-with-subscription-content": "Хэдеры будут отправлены вместе с содержимым подписки.",
             "randomize-hosts": "Перемешивать хосты",
             "randomize-hosts-description": "Хосты в случайном порядке в содержимом подписки",
@@ -854,7 +860,12 @@
             "total-download": "Всего скачано",
             "average-bps": "Средняя скорость",
             "active-nodes": "Активные ноды",
-            "current-hour": "Текущий час"
+            "current-hour": "Текущий час",
+            "download-speed": "Скорость загрузки",
+            "upload-speed": "Скорость отдачи",
+            "download-total": "Всего загружено",
+            "ram-usage": "Использовано ОЗУ",
+            "for-all-nodes": "Для всех нод"
         }
     },
     "node-users-usage-drawer": {
@@ -1215,8 +1226,6 @@
                 "choose-an-inbound-to-apply-to-the-host": "Выберите инбаунд, который будет привязан к хосту.",
                 "apply-changes": "Применить изменения",
                 "search-profiles-or-inbounds": "Поиск по профилям или инбаундам...",
-                "hosts-do-not-support-multiple-inbounds": "Хосты не поддерживают несколько инбаундов",
-                "not-supported": "Не поддерживается",
                 "no-profiles-or-inbounds-found": "Профили или инбаунды не найдены",
                 "no-config-profiles-available": "Нет доступных профилей"
             }
@@ -1322,6 +1331,20 @@
             "additional-languages": "Дополнительные языки",
             "english-is-always-enabled": "Английский всегда включен",
             "english": "Английский"
+        }
+    },
+    "node-system-card": {
+        "widget": {
+            "system-info": "Сведения о системе",
+            "memory": "Память",
+            "used": "Использовано",
+            "free": "Свободно",
+            "total": "Всего",
+            "system": "Система",
+            "system-uptime": "Время работы системы",
+            "network": "Сеть",
+            "kernel": "Ядро",
+            "interface": "Интерфейс"
         }
     },
     "node-stats": {
@@ -1566,11 +1589,6 @@
             "title": "Пароль"
         },
         "telegram": {
-            "botToken": {
-                "label": "Токен бота",
-                "description": "Токен Telegram-бота",
-                "placeholder": "Введите токен бота"
-            },
             "adminIds": {
                 "label": "Разрешенные Telegram ID",
                 "description": "Список разрешенных Telegram ID",
@@ -1958,5 +1976,160 @@
     },
     "traffic-limits-card": {
         "traffic-and-limits": "Трафик и лимиты"
+    },
+    "node-plugin-editor-page": {
+        "component": {
+            "plugin-editor": "Редактор плагинов"
+        }
+    },
+    "node-vitals": {
+        "card": {
+            "plugin": "Плагин",
+            "review-documentation-for-more-information": "Просмотрите документацию для более подробной информации.",
+            "nothing-found": "Ничего не найдено...",
+            "select-plugin": "Выбрать плагин"
+        }
+    },
+    "node-plugin-card": {
+        "widget": {
+            "active-on-nodes": "Активен на нодах"
+        }
+    },
+    "adtive-on-nodes": {
+        "modal": {
+            "shared": {
+                "this-plugin-is-not-active-on-any-nodes": "Этот плагин не активен ни на одной ноде."
+            }
+        }
+    },
+    "node-plugins-grid": {
+        "widget": {
+            "node-plugins-are-an-advanced-feature-please-review-the-documentation-before-use": "Плагины нод являются расширенной функцией. Пожалуйста, ознакомьтесь с документацией перед использованием.",
+            "warning": "Предупреждение",
+            "no-node-plugins-yet": "Плагины для нод отсутствуют",
+            "create-a-plugin-to-extend-node-capabilities-with": "Создайте плагин для расширения возможностей узла с"
+        }
+    },
+    "node-plugin-executor": {
+        "content": {
+            "enter-at-least-one-ip-address": "Введите хотя бы один IP-адрес.",
+            "block-specific-ip-addresses-on-selected-nodes": "Блокировать определенные IP-адреса на выбранных нодах",
+            "block-ips": "Блокировать IP",
+            "remove-ip-blocks-on-selected-nodes": "Снять блокировку IP на выбранных нодах",
+            "unblock-ips": "Разблокировать IP",
+            "executor-description": "IP блоки временные — они сохраняются только до перезапуска узла или ядра. Блоки также могут быть сброшены при изменении конфигурации плагина.",
+            "recreate-nftables-rules-on-selected-nodes": "Восстановить правила nftables на выбранных нодах",
+            "recreate-tables": "Пересоздать таблицы",
+            "block-ips-decription": "Одна запись в строке. Тайм-аут 0 = блокировка до перезапуска.",
+            "unblock-ips-decription": "Один IP адрес в строке.",
+            "ips-to-block": "IP для блокировки",
+            "ips-to-unblock": "IP для разблокировки",
+            "format-one-per-line": "Формат (по одному в каждой строке):",
+            "next": "Далее",
+            "no-connected-nodes-available": "Нет доступных подключенных нод.",
+            "deselect-all": "Снять все",
+            "select-all": "Выделить все",
+            "execute": "Выполнить"
+        }
+    },
+    "torrent-blocker-stats": {
+        "widget": {
+            "total-reports": "Всего репортов",
+            "distinct-nodes": "Отдельные ноды",
+            "distinct-users": "Отдельные пользователи",
+            "last-24-hours": "За последние 24 часа",
+            "by-report-count": "По количеству репортов",
+            "top-users": "Топ пользователей"
+        }
+    },
+    "torrent-blocker-reports-table": {
+        "widget": {
+            "truncate-reports": "Репорты по убыванию",
+            "truncate-reports-description": "Все репорты Torrent Blocker будут удалены навсегда."
+        }
+    },
+    "node-active-session": {
+        "item": {
+            "widget": {
+                "view-user": "Просмотреть пользователя"
+            }
+        }
+    },
+    "node-active-sessions": {
+        "drawer": {
+            "widget": {
+                "active-users-on-this-node": "Активные пользователи на этой ноде"
+            }
+        }
+    },
+    "nodes-datatable": {
+        "widget": {
+            "column-width": "Ширина столбца",
+            "column-order": "Порядок столбцов",
+            "column-toggle": "Отображаемые столбцы"
+        }
+    },
+    "user-torrent-blocker-report-item": {
+        "processed-at": "Обработано",
+        "unblocked-at": "Разблокировано"
+    },
+    "get-user-torrent-blocker-reports": {
+        "feature": {
+            "blocker-reports": "Репорты блокировщика"
+        }
+    },
+    "user-torrent-blocker-reports": {
+        "drawer": {
+            "widget": {
+                "total-reports": "Всего репортов"
+            }
+        }
+    },
+    "user-subscription-requests-drawer": {
+        "widget": {
+            "total-records": "Всего записей"
+        }
+    },
+    "sessions-explorer-idle": {
+        "description-1": "Эта операция может занять некоторое время в зависимости от количества нод и пользователей. Сеансы загружаются последовательно, чтобы избежать перезагрузки бэкэнда.",
+        "start-exploring": "Получить данные"
+    },
+    "sessions-explorer-progress": {
+        "exploring-nodes": "Опрос нод...",
+        "nodes-processed": "Обработано {{completed}} нод {{total}}",
+        "nodes-failed": "{{count}} ошибка"
+    },
+    "sessions-explorer": {
+        "widget": {
+            "all-nodes-failed-to-return-session-data": "Не удалось вернуть сессионные данные по всем нодам.",
+            "total-ips": "Всего IP",
+            "unique-ips": "Уникальные IP",
+            "nodes-explored": "Нод опрошенно",
+            "total-users": "Всего пользователей",
+            "no-active-sessions-found-on-any-node": "Не найдено активных сессий ни на одной ноде.",
+            "restart-scan": "Повторить сканирование",
+            "clear-results": "Очистить результаты",
+            "search-by-ip": "Поиск по IP-адресу...",
+            "no-results-for-ip": "Не найдено пользователей с совпадающим IP \"{{ip}}\""
+        }
+    },
+    "mobile-stats": {
+        "widget": {
+            "billing-nodes": "Billing nodes",
+            "upcoming": "Upcoming",
+            "per-month": "Per month",
+            "total-spent": "Total spent"
+        }
+    },
+    "mobile-providers-list": {
+        "widget": {
+            "invoices": "Invoices"
+        }
+    },
+    "mobile-infra-billing": {
+        "widget": {
+            "history": "History",
+            "providers": "Providers"
+        }
     }
 }

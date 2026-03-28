@@ -6,6 +6,7 @@ import { formatInt } from '@shared/utils/misc'
 import classes from './metric-card.module.css'
 
 export interface IMetricCardProps {
+    iconColor?: ThemeIconProps['color']
     IconComponent: React.ComponentType<{ size: number }>
     iconSize?: number
     iconVariant: ThemeIconProps['variant']
@@ -18,6 +19,7 @@ export interface IMetricCardProps {
 
 export function MetricCardShared(props: IMetricCardProps) {
     const {
+        iconColor,
         themeIconProps,
         IconComponent,
         iconSize = 24,
@@ -31,7 +33,13 @@ export function MetricCardShared(props: IMetricCardProps) {
     return (
         <Card>
             <Group gap="md" wrap="nowrap">
-                <ThemeIcon radius="lg" size="xl" variant={iconVariant} {...themeIconProps}>
+                <ThemeIcon
+                    color={iconColor}
+                    radius="lg"
+                    size="xl"
+                    variant={iconVariant}
+                    {...themeIconProps}
+                >
                     <IconComponent size={iconSize} />
                 </ThemeIcon>
 

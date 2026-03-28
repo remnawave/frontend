@@ -1,15 +1,14 @@
-import { em, Group, Modal } from '@mantine/core'
-import { useMediaQuery } from '@mantine/hooks'
+import { Group, Modal } from '@mantine/core'
 
 import styles from './ModalFooter.module.css'
 
 interface IProps {
     children: React.ReactNode
+    isMobile?: boolean
 }
 
 export function ModalFooter(props: IProps) {
-    const { children } = props
-    const isMobile = useMediaQuery(`(max-width: ${em(768)})`)
+    const { children, isMobile = false } = props
 
     return (
         <Modal.Header className={styles.footer} component="footer" h="auto" mt="md" pos="sticky">

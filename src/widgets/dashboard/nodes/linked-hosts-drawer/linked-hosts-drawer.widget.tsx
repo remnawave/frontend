@@ -39,8 +39,9 @@ export const LinkedHostsDrawer = memo(() => {
                 size="500px"
                 title={
                     <BaseOverlayHeader
+                        iconColor="teal"
                         IconComponent={PiListChecks}
-                        iconVariant="gradient-teal"
+                        iconVariant="soft"
                         title={t('linked-hosts-drawer.widget.assigned-hosts')}
                     />
                 }
@@ -63,8 +64,9 @@ export const LinkedHostsDrawer = memo(() => {
             size="500px"
             title={
                 <BaseOverlayHeader
+                    iconColor="teal"
                     IconComponent={PiListChecks}
-                    iconVariant="gradient-teal"
+                    iconVariant="soft"
                     title={t('linked-hosts-drawer.widget.assigned-hosts')}
                 />
             }
@@ -88,6 +90,7 @@ export const LinkedHostsDrawer = memo(() => {
                     return (
                         <Box
                             className={styles.item}
+                            key={host.uuid}
                             onClick={() => {
                                 close()
 

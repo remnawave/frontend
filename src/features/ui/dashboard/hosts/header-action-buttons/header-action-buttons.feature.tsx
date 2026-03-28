@@ -37,7 +37,7 @@ export const HeaderActionButtonsFeature = () => {
                         loading={isFetching}
                         onClick={handleUpdate}
                         size="input-md"
-                        variant="light"
+                        variant="soft"
                     >
                         <TbRefresh size="24px" />
                     </ActionIcon>
@@ -46,7 +46,7 @@ export const HeaderActionButtonsFeature = () => {
 
             <ActionIconGroup>
                 <Tooltip label={t('header-action-buttons.feature.create-new-host')} withArrow>
-                    <ActionIcon color="teal" onClick={handleCreate} size="input-md" variant="light">
+                    <ActionIcon color="teal" onClick={handleCreate} size="input-md" variant="soft">
                         <TbPlus size="24px" />
                     </ActionIcon>
                 </Tooltip>

@@ -31,6 +31,9 @@ export const useUserModalStore = create<IActions & IState>()(
                         queryKey: QueryKeys.users.getAllUsers._def
                     })
                     queryClient.refetchQueries({
+                        queryKey: QueryKeys.users.getUserTags.queryKey
+                    })
+                    queryClient.refetchQueries({
                         queryKey: QueryKeys.system.getSystemStats.queryKey
                     })
 

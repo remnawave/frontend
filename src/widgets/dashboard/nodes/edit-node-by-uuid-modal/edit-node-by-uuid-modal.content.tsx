@@ -1,13 +1,14 @@
 import { UpdateNodeCommand } from '@remnawave/backend-contract'
 import { zodResolver } from 'mantine-form-zod-resolver'
-import { useEffect, useState } from 'react'
 import { useForm } from '@mantine/form'
 import { motion } from 'motion/react'
+import { useEffect } from 'react'
 
 import {
     configProfilesQueryKeys,
     nodesQueryKeys,
     useGetNode,
+    useGetNodePlugins,
     useGetPubKey,
     useUpdateNode
 } from '@shared/api/hooks'
@@ -17,6 +18,7 @@ import { LoaderModalShared } from '@shared/ui/loader-modal'
 import { queryClient } from '@shared/api'
 
 import { NodeDetailsCardWidget } from '../node-details-card/node-details-card.widget'
+import { NodeSystemCardWidget } from '../node-system-card/node-system-card.widget'
 
 interface IProps {
     nodeUuid: string
@@ -26,8 +28,6 @@ interface IProps {
 export const EditNodeByUuidModalContent = (props: IProps) => {
     const { nodeUuid, onClose } = props
 
-    const [advancedOpened, setAdvancedOpened] = useState(false)
-
     const form = useForm<UpdateNodeCommand.Request>({
         name: 'edit-node-form',
         mode: 'uncontrolled',
@@ -35,6 +35,7 @@ export const EditNodeByUuidModalContent = (props: IProps) => {
     })
 
     const { data: pubKey } = useGetPubKey()
+    const { data: nodePlugins } = useGetNodePlugins()
 
     const { data: fetchedNode } = useGetNode({
         route: {
@@ -63,7 +64,6 @@ export const EditNodeByUuidModalContent = (props: IProps) => {
 
     useEffect(() => {
         if (fetchedNode) {
-            setAdvancedOpened(fetchedNode.isTrafficTrackingActive ?? false)
             form.initialize({
                 uuid: fetchedNode.uuid,
                 countryCode: fetchedNode.countryCode,
@@ -85,7 +85,8 @@ export const EditNodeByUuidModalContent = (props: IProps) => {
                         []
                 },
 
-                providerUuid: fetchedNode.providerUuid ?? undefined
+                providerUuid: fetchedNode.providerUuid ?? undefined,
+                activePluginUuid: fetchedNode.activePluginUuid ?? undefined
             })
         }
     }, [fetchedNode])
@@ -123,15 +124,15 @@ export const EditNodeByUuidModalContent = (props: IProps) => {
 
     return (
         <BaseNodeForm
-            advancedOpened={advancedOpened}
             form={form}
             handleClose={onClose}
             handleSubmit={handleSubmit}
             isDataSubmitting={isUpdateNodePending}
             node={fetchedNode}
             nodeDetailsCard={<NodeDetailsCardWidget node={fetchedNode} />}
+            nodePlugins={nodePlugins?.nodePlugins ?? []}
+            nodeSystemCard={<NodeSystemCardWidget node={fetchedNode} />}
             pubKey={pubKey}
-            setAdvancedOpened={setAdvancedOpened}
         />
     )
 }

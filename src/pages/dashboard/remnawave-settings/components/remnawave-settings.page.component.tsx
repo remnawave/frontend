@@ -26,7 +26,6 @@ export const RemnawaveSettingsPageComponent = (props: IProps) => {
         !remnawaveSettings.oauth2Settings ||
         !remnawaveSettings.passkeySettings ||
         !remnawaveSettings.passwordSettings ||
-        !remnawaveSettings.tgAuthSettings ||
         !remnawaveSettings.brandingSettings
     ) {
         return <LoadingScreen />
@@ -41,7 +40,6 @@ export const RemnawaveSettingsPageComponent = (props: IProps) => {
                         oauth2Settings={remnawaveSettings.oauth2Settings}
                         passkeySettings={remnawaveSettings.passkeySettings}
                         passwordSettings={remnawaveSettings.passwordSettings}
-                        tgAuthSettings={remnawaveSettings.tgAuthSettings}
                     />
 
                     <ApiTokensCardWidget apiTokensData={apiTokensData} />

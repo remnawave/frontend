@@ -18,9 +18,11 @@ export const Page = forwardRef<HTMLDivElement, PageProps>(
             return () => nprogress.start()
         }, [])
 
+        const pageTitle = `${title} | ${app.name}`
+
         return (
             <>
-                <title>{`${title} | ${app.name}`}</title>
+                <title>{pageTitle}</title>
                 {meta}
 
                 <AnimatePresence mode="wait">

@@ -3,9 +3,10 @@ import {
     NODES_BULK_ACTIONS,
     TNodesBulkActions
 } from '@remnawave/backend-contract'
-import { TbCheck, TbPlayerStop, TbRefresh, TbRocket } from 'react-icons/tb'
+import { TbCancel, TbRefresh, TbRocket } from 'react-icons/tb'
 import { useTranslation } from 'react-i18next'
 import { modals } from '@mantine/modals'
+import { PiPulse } from 'react-icons/pi'
 import { Stack } from '@mantine/core'
 
 import { QueryKeys, useBulkNodesActions } from '@shared/api/hooks'
@@ -40,34 +41,38 @@ export const MultiSelectNodesModalContent = (props: IProps) => {
             <ActionCardShared
                 description={`${uuids.length} node(s)`}
                 icon={<TbRocket size={20} />}
+                iconColor="teal"
                 isLoading={isPending}
                 onClick={() => handleAction(NODES_BULK_ACTIONS.RESTART)}
                 title={t('restart-node-button.feature.restart')}
-                variant="gradient-teal"
+                variant="soft"
             />
             <ActionCardShared
                 description={`${uuids.length} node(s)`}
-                icon={<TbPlayerStop size={20} />}
+                icon={<TbCancel size={20} />}
+                iconColor="orange"
                 isLoading={isPending}
                 onClick={() => handleAction(NODES_BULK_ACTIONS.DISABLE)}
                 title={t('common.disable')}
-                variant="gradient-orange"
+                variant="soft"
             />
             <ActionCardShared
                 description={`${uuids.length} node(s)`}
-                icon={<TbCheck size={20} />}
+                icon={<PiPulse size={20} />}
+                iconColor="cyan"
                 isLoading={isPending}
                 onClick={() => handleAction(NODES_BULK_ACTIONS.ENABLE)}
                 title={t('common.enable')}
-                variant="gradient-cyan"
+                variant="soft"
             />
             <ActionCardShared
                 description={`${uuids.length} node(s)`}
                 icon={<TbRefresh size={20} />}
+                iconColor="violet"
                 isLoading={isPending}
                 onClick={() => handleAction(NODES_BULK_ACTIONS.RESET_TRAFFIC)}
                 title={t('reset-node-traffic.feature.reset-traffic')}
-                variant="gradient-violet"
+                variant="soft"
             />
         </Stack>
     )

@@ -1,9 +1,9 @@
 import { Affix, Badge, Button, Group, Paper, Stack, Transition } from '@mantine/core'
 import { GetAllNodesCommand } from '@remnawave/backend-contract'
+import { TbCategoryPlus, TbDots } from 'react-icons/tb'
 import { useDisclosure } from '@mantine/hooks'
 import { useTranslation } from 'react-i18next'
 import { modals } from '@mantine/modals'
-import { TbDots } from 'react-icons/tb'
 
 import { ConfigProfilesDrawer } from '@widgets/dashboard/nodes/config-profiles-drawer'
 import { QueryKeys, useBulkNodesProfileModification } from '@shared/api/hooks'
@@ -11,6 +11,7 @@ import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { XrayLogo } from '@shared/ui/logos'
 import { queryClient } from '@shared/api'
 
+import { BulkUpdateNodesModalContent } from './bulk-update-nodes.modal.content'
 import { MultiSelectNodesModalContent } from './multi-select-modal.content'
 
 interface IProps {
@@ -97,6 +98,36 @@ export const MultiSelectNodesFeature = (props: IProps) => {
                                 <Button
                                     color="cyan"
                                     fullWidth
+                                    leftSection={<TbCategoryPlus size={18} />}
+                                    onClick={() =>
+                                        modals.open({
+                                            title: (
+                                                <BaseOverlayHeader
+                                                    iconColor="cyan"
+                                                    IconComponent={TbCategoryPlus}
+                                                    iconVariant="soft"
+                                                    title={t('common.update')}
+                                                    titleOrder={5}
+                                                />
+                                            ),
+                                            centered: true,
+                                            children: (
+                                                <BulkUpdateNodesModalContent
+                                                    selectedRecords={selectedRecords}
+                                                    setSelectedRecords={setSelectedRecords}
+                                                />
+                                            )
+                                        })
+                                    }
+                                    size="md"
+                                    variant="light"
+                                >
+                                    {t('common.update')}
+                                </Button>
+
+                                <Button
+                                    color="cyan"
+                                    fullWidth
                                     leftSection={<XrayLogo size={18} />}
                                     onClick={handlers.open}
                                     size="md"
@@ -113,8 +144,9 @@ export const MultiSelectNodesFeature = (props: IProps) => {
                                         modals.open({
                                             title: (
                                                 <BaseOverlayHeader
+                                                    iconColor="cyan"
                                                     IconComponent={TbDots}
-                                                    iconVariant="gradient-cyan"
+                                                    iconVariant="soft"
                                                     title={t('base-node-form.more-actions')}
                                                     titleOrder={5}
                                                 />

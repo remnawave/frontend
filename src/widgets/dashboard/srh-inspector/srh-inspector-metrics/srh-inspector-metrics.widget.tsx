@@ -132,6 +132,7 @@ export function SrhInspectorMetrics() {
                 style: {
                     color: 'var(--mantine-color-text)'
                 },
+                // eslint-disable-next-line react-hooks/unsupported-syntax
                 pointFormatter(this: { x: number; y: number }): string {
                     return `<b>${dayjs(this.x).format('DD.MM.YYYY, HH:mm')}</b> </br> Requests: <b>${this.y}<b>`
                 }

@@ -1,7 +1,6 @@
 import {
     GetLegacyStatsNodeUserUsageCommand,
     GetLegacyStatsUserUsageCommand,
-    GetStatsNodesRealtimeUsageCommand,
     GetStatsNodesUsageCommand,
     GetStatsNodeUsersUsageCommand,
     GetStatsUserUsageCommand
@@ -13,9 +12,6 @@ import { sToMs } from '@shared/utils/time-utils'
 import { createGetQueryHook, errorHandler } from '../../tsq-helpers'
 
 export const bandwidthStatsQueryKeys = createQueryKeys('bandwidthStats', {
-    getStatsNodesRealtimeUsageCommand: {
-        queryKey: null
-    },
     getStatsNodesUsageCommand: (filters: GetStatsNodesUsageCommand.RequestQuery) => ({
         queryKey: [filters]
     }),
@@ -40,17 +36,6 @@ export const bandwidthStatsQueryKeys = createQueryKeys('bandwidthStats', {
     ) => ({
         queryKey: [query]
     })
-})
-
-export const useGetStatsNodesRealtimeUsage = createGetQueryHook({
-    endpoint: GetStatsNodesRealtimeUsageCommand.TSQ_url,
-    responseSchema: GetStatsNodesRealtimeUsageCommand.ResponseSchema,
-    getQueryKey: () => bandwidthStatsQueryKeys.getStatsNodesRealtimeUsageCommand.queryKey,
-    rQueryParams: {
-        staleTime: sToMs(5),
-        refetchInterval: sToMs(5)
-    },
-    errorHandler: (error) => errorHandler(error, 'Get Nodes Realtime Usage')
 })
 
 export const useGetStatsNodesUsage = createGetQueryHook({

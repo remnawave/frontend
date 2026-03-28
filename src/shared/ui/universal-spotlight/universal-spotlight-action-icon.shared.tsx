@@ -9,7 +9,7 @@ export const UniversalSpotlightActionIconShared = () => {
     return (
         <ActionIconGroup>
             <Tooltip label={t('common.search')}>
-                <ActionIcon color="gray" onClick={spotlight.open} size="input-md" variant="light">
+                <ActionIcon color="gray" onClick={spotlight.open} size="input-md" variant="soft">
                     <TbSearch size="24px" />
                 </ActionIcon>
             </Tooltip>

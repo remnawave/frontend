@@ -6,6 +6,7 @@ import { useState } from 'react'
 import {
     IDownloadableSubscriptionTemplate,
     IDownloadableSubscriptionTemplateList,
+    NODE_PLUGIN_TEMPLATE_LIST_LINK,
     SRR_TEMPLATES_LIST_LINK,
     SUBPAGE_CONFIG_TEMPLATE_LIST_LINK,
     SUBSCRIPTION_TEMPLATE_LIST_LINK,
@@ -22,6 +23,8 @@ export const TemplateDownloadModal = (props: TemplateSelectorModalProps) => {
     let templatesUrl = ''
     if (editorType === 'SRR') {
         templatesUrl = SRR_TEMPLATES_LIST_LINK
+    } else if (editorType === 'NODE_PLUGIN') {
+        templatesUrl = NODE_PLUGIN_TEMPLATE_LIST_LINK
     } else if (editorType === 'SUBSCRIPTION') {
         templatesUrl = SUBSCRIPTION_TEMPLATE_LIST_LINK
     } else if (editorType === 'XRAY_CORE') {

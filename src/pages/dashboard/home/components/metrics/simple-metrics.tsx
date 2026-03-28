@@ -12,32 +12,36 @@ export const getSimpleMetrics = (
     const { memory, nodes } = systemInfo
 
     const totalRamGB = prettyBytesUtil(memory.total) ?? 0
-    const usedRamGB = prettyBytesUtil(memory.active) ?? 0
+    const usedRamGB = prettyBytesUtil(memory.used) ?? 0
 
     return [
         {
             value: nodes.totalOnline,
             IconComponent: PiCpuDuotone,
             title: t('simple-metrics.total-online-on-nodes'),
-            iconVariant: 'gradient-blue'
+            iconVariant: 'soft',
+            iconColor: 'blue'
         },
         {
             value: prettyBytesUtilWithoutPrefix(Number(nodes.totalBytesLifetime)) ?? 0,
             IconComponent: PiChartBarDuotone,
             title: t('simple-metrics.total-traffic'),
-            iconVariant: 'gradient-green'
+            iconVariant: 'soft',
+            iconColor: 'green'
         },
         {
             value: usedRamGB,
             IconComponent: PiMemoryLight,
             title: t('simple-metrics.ram-usage'),
-            iconVariant: 'gradient-cyan'
+            iconVariant: 'soft',
+            iconColor: 'cyan'
         },
         {
             value: totalRamGB,
             IconComponent: PiMemoryFill,
             title: 'Total RAM',
-            iconVariant: 'gradient-cyan'
+            iconVariant: 'soft',
+            iconColor: 'cyan'
         }
     ]
 }

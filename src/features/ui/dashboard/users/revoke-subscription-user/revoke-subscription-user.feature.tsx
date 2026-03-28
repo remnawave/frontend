@@ -34,6 +34,7 @@ export function RevokeSubscriptionUserFeature(props: IProps) {
                 <ActionCardShared
                     description={t('revoke-subscription-user.feature.full-revoke-description')}
                     icon={<TbAlertTriangle size={22} />}
+                    iconColor="red"
                     isLoading={isPending}
                     onClick={() => {
                         revokeUserSubscription({
@@ -44,12 +45,13 @@ export function RevokeSubscriptionUserFeature(props: IProps) {
                         })
                     }}
                     title={t('revoke-subscription-user.feature.full-revoke')}
-                    variant="gradient-red"
+                    variant="soft"
                 />
 
                 <ActionCardShared
                     description={t('revoke-subscription-user.feature.passwords-only-decription')}
                     icon={<TbKey size={22} />}
+                    iconColor="yellow"
                     isLoading={isPending}
                     onClick={() => {
                         revokeUserSubscription({
@@ -60,7 +62,7 @@ export function RevokeSubscriptionUserFeature(props: IProps) {
                         })
                     }}
                     title={t('revoke-subscription-user.feature.passwords-only')}
-                    variant="gradient-yellow"
+                    variant="soft"
                 />
             </Stack>
         )
@@ -70,8 +72,9 @@ export function RevokeSubscriptionUserFeature(props: IProps) {
         modals.open({
             title: (
                 <BaseOverlayHeader
+                    iconColor="teal"
                     IconComponent={PiKeyDuotone}
-                    iconVariant="gradient-teal"
+                    iconVariant="soft"
                     title={t('revoke-subscription-user.feature.revoke')}
                 />
             ),

@@ -37,7 +37,7 @@ export function ShowConfigProfilesWithInboundsFeature(props: IProps) {
             .filter((port) => port !== null)
 
         return [...new Set(ports)]
-    }, [activeConfigProfileInbounds, activeConfigProfileUuid])
+    }, [activeConfigProfileInbounds, activeConfigProfileUuid, configProfiles])
 
     const activeProfile = configProfiles.find((profile) => profile.uuid === activeConfigProfileUuid)
 

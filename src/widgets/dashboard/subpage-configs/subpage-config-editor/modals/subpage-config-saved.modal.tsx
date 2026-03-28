@@ -12,9 +12,10 @@ export const showSubpageConfigSavedModal = (t: TFunction) =>
     modals.open({
         title: (
             <BaseOverlayHeader
+                iconColor="teal"
                 IconComponent={TbCheck}
                 iconSize={20}
-                iconVariant="gradient-teal"
+                iconVariant="soft"
                 title={t('subpage-config-visual-editor.widget.configuration-saved-successfully')}
                 titleOrder={5}
             />

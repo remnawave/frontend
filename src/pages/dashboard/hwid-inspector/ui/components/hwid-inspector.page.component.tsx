@@ -4,10 +4,12 @@ import { motion } from 'framer-motion'
 import { Stack } from '@mantine/core'
 
 import { UserSubscriptionRequestsDrawerWidget } from '@widgets/dashboard/users/user-subscription-requests-drawer/user-subscription-requests-drawer.widget'
+import { UserTorrentBlockerReportsDrawerWidget } from '@widgets/dashboard/users/user-torrent-blocker-reports/user-torrent-blocker-reports.drawer.widget'
 import { UserAccessibleNodesModalWidget } from '@widgets/dashboard/users/user-accessible-nodes-modal/user-accessible-nodes.modal.widget'
 import { DetailedUserInfoDrawerWidget } from '@widgets/dashboard/users/detailed-user-info-drawer/detailed-user-info-drawer.widget'
 import { UserHwidDevicesDrawerWidget } from '@widgets/dashboard/users/user-hwid-devices-drawer/user-hwid-devices.drawer.widget'
 import { HwidInspectorLeaderboardWidget } from '@widgets/dashboard/hwid-inspector/hwid-inspector-leaderboard'
+import { InternalSquadsDrawerWithStore } from '@widgets/dashboard/users/internal-squads-drawer-with-store'
 import { HwidInspectorTableWidget } from '@widgets/dashboard/hwid-inspector/hwid-inspector-table'
 import { MobileWarningOverlay } from '@shared/ui/mobile-warning-overlay/mobile-warning-overlay'
 import { HwidInspectorMetrics } from '@widgets/dashboard/users/hwid-inspector-metrics'
@@ -44,7 +46,9 @@ export default function HwidInspectorPageComponent() {
             <ViewUserModal key="view-user-modal" />
             <DetailedUserInfoDrawerWidget key="detailed-user-info-drawer" />
             <UserAccessibleNodesModalWidget key="user-accessible-nodes-modal" />
+            <InternalSquadsDrawerWithStore key="internal-squads-drawer-with-store" />
             <UserHwidDevicesDrawerWidget key="user-hwid-devices-drawer" />
+            <UserTorrentBlockerReportsDrawerWidget key="user-torrent-blocker-reports-drawer" />
             <UserSubscriptionRequestsDrawerWidget key="user-subscription-requests-drawer" />
         </Page>
     )

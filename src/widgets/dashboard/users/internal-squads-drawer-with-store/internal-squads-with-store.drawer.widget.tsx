@@ -76,7 +76,7 @@ export const InternalSquadsDrawerWithStore = () => {
     const [filterType, setFilterType] = useState<'all' | 'selected' | 'unselected'>('all')
 
     const allInbounds = useMemo(() => {
-        if (!configProfiles?.configProfiles) return []
+        if (!configProfiles || !configProfiles.configProfiles) return []
 
         return configProfiles.configProfiles.flatMap((profile) =>
             profile.inbounds.map((inbound) => ({
@@ -85,7 +85,7 @@ export const InternalSquadsDrawerWithStore = () => {
                 profileConfig: profile.config as object
             }))
         )
-    }, [configProfiles?.configProfiles])
+    }, [configProfiles])
 
     const filteredAllInbounds = useMemo(() => {
         if (!debouncedSearchQuery.trim()) {
@@ -102,7 +102,7 @@ export const InternalSquadsDrawerWithStore = () => {
     }, [allInbounds, debouncedSearchQuery])
 
     const filteredProfiles = useMemo(() => {
-        if (!configProfiles?.configProfiles) return []
+        if (!configProfiles || !configProfiles.configProfiles) return []
 
         if (!debouncedSearchQuery.trim()) {
             return configProfiles.configProfiles
@@ -127,7 +127,7 @@ export const InternalSquadsDrawerWithStore = () => {
                         inbound.type.toLowerCase().includes(query)
                 )
             }))
-    }, [configProfiles?.configProfiles, debouncedSearchQuery])
+    }, [configProfiles, debouncedSearchQuery])
 
     const handleInboundToggle = useCallback(
         (
@@ -473,8 +473,9 @@ export const InternalSquadsDrawerWithStore = () => {
             }}
             title={
                 <BaseOverlayHeader
+                    iconColor="teal"
                     IconComponent={TbCirclesRelation}
-                    iconVariant="gradient-teal"
+                    iconVariant="soft"
                     title={t('internal-squads.drawer.widget.edit-internal-squad')}
                 />
             }

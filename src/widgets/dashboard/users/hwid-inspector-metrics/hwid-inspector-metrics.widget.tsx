@@ -92,10 +92,10 @@ export function HwidInspectorMetrics() {
             ...getHighchartsConfig('platforms'),
             series: [{ ...getHighchartsConfig('platforms').series[0], data }]
         }
-    }, [stats?.byPlatform])
+    }, [stats, getHighchartsConfig])
 
     const appChartOptions = useMemo(() => {
-        if (!stats?.byApp || stats.byApp.length === 0) return {}
+        if (!stats || !stats.byApp || stats.byApp.length === 0) return {}
 
         const data = stats.byApp.map((item) => ({
             name: item.app || 'Unknown',
@@ -106,26 +106,29 @@ export function HwidInspectorMetrics() {
             ...getHighchartsConfig('apps'),
             series: [{ ...getHighchartsConfig('apps').series[0], data }]
         }
-    }, [stats?.byApp])
+    }, [stats, getHighchartsConfig])
 
     const metricCards: IMetricCardProps[] = [
         {
             IconComponent: PiDevicesDuotone,
             title: t('hwid-inspector-metrics.widget.total-unique-devices'),
             value: stats?.stats.totalUniqueDevices ?? 0,
-            iconVariant: 'gradient-blue'
+            iconVariant: 'soft',
+            iconColor: 'blue'
         },
         {
             IconComponent: PiDeviceMobileDuotone,
             title: t('hwid-inspector-metrics.widget.total-hwid-devices'),
             value: stats?.stats.totalHwidDevices ?? 0,
-            iconVariant: 'gradient-teal'
+            iconVariant: 'soft',
+            iconColor: 'teal'
         },
         {
             IconComponent: PiCalculatorDuotone,
             title: t('hwid-inspector-metrics.widget.avg-devices-per-user'),
             value: stats?.stats.averageHwidDevicesPerUser ?? 0,
-            iconVariant: 'gradient-orange'
+            iconVariant: 'soft',
+            iconColor: 'orange'
         }
     ]
 

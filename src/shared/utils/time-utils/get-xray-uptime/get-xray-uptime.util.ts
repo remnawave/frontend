@@ -5,9 +5,8 @@ import dayjs from 'dayjs'
 dayjs.extend(duration)
 dayjs.extend(relativeTime)
 
-export function getXrayUptimeUtil(uptimeInSeconds: string): string {
-    const totalSeconds = parseInt(uptimeInSeconds, 10)
-    const duration = dayjs.duration(totalSeconds, 'seconds')
+export function getXrayUptimeUtil(uptimeInSeconds: number): string {
+    const duration = dayjs.duration(uptimeInSeconds, 'seconds')
 
     if (duration.asDays() >= 1) {
         return `${duration.asDays().toFixed(0)}d`
@@ -26,4 +25,10 @@ export function getXrayUptimeUtil(uptimeInSeconds: string): string {
     }
 
     return '0s'
+}
+
+export function formatDurationUtil(uptimeInSeconds: number): string {
+    const d = dayjs.duration(uptimeInSeconds, 'seconds')
+    const totalDays = Math.floor(d.asDays())
+    return `${totalDays}d ${d.hours()}h ${d.minutes()}m ${d.seconds()}s`
 }

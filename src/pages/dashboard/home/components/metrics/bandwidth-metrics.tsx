@@ -17,7 +17,8 @@ export const getBandwidthMetrics = (
     return [
         {
             IconComponent: PiCalendarDotDuotone,
-            iconVariant: 'gradient-blue',
+            iconVariant: 'soft',
+            iconColor: 'blue',
             difference: bandwidthStats.bandwidthLastTwoDays.difference,
             period: t('bandwidth-metrics.from-yesterday'),
             title: t('bandwidth-metrics.today'),
@@ -25,7 +26,8 @@ export const getBandwidthMetrics = (
         },
         {
             IconComponent: PiChartDonutDuotone,
-            iconVariant: 'gradient-green',
+            iconVariant: 'soft',
+            iconColor: 'green',
             difference: bandwidthStats.bandwidthLastSevenDays.difference,
             period: t('bandwidth-metrics.from-last-week'),
             title: t('bandwidth-metrics.last-7-days'),
@@ -33,7 +35,8 @@ export const getBandwidthMetrics = (
         },
         {
             IconComponent: PiChartPieSliceDuotone,
-            iconVariant: 'gradient-teal',
+            iconVariant: 'soft',
+            iconColor: 'teal',
             difference: bandwidthStats.bandwidthLast30Days.difference,
             period: t('bandwidth-metrics.from-last-month'),
             title: t('bandwidth-metrics.last-30-days'),
@@ -41,7 +44,8 @@ export const getBandwidthMetrics = (
         },
         {
             IconComponent: PiCalendarDotsDuotone,
-            iconVariant: 'gradient-orange',
+            iconVariant: 'soft',
+            iconColor: 'orange',
             difference: bandwidthStats.bandwidthCalendarMonth.difference,
             period: t('bandwidth-metrics.from-last-month-0'),
             title: t('bandwidth-metrics.calendar-month'),
@@ -49,7 +53,8 @@ export const getBandwidthMetrics = (
         },
         {
             IconComponent: PiCalendarStarDuotone,
-            iconVariant: 'gradient-cyan',
+            iconVariant: 'soft',
+            iconColor: 'cyan',
             difference: bandwidthStats.bandwidthCurrentYear.difference,
             period: t('bandwidth-metrics.from-last-year'),
             title: t('bandwidth-metrics.current-year'),

@@ -304,7 +304,7 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
         <form onSubmit={handleSubmit}>
             <Group gap="xs" justify="space-between" mb="md" pl={4} pr={4}>
                 <Group gap="xs">
-                    <ThemeIcon size="lg" variant="gradient-indigo">
+                    <ThemeIcon color="indigo" size="lg" variant="soft">
                         <TbEye size={24} />
                     </ThemeIcon>
 
@@ -353,8 +353,9 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
                             <SectionCard.Root style={styles}>
                                 <SectionCard.Section>
                                     <BaseOverlayHeader
+                                        iconColor="teal"
                                         IconComponent={PiTag}
-                                        iconVariant="gradient-teal"
+                                        iconVariant="soft"
                                         title={t('base-host-form.vital-parameters')}
                                         titleOrder={5}
                                     />
@@ -571,8 +572,9 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
                                 <SectionCard.Root>
                                     <SectionCard.Section>
                                         <BaseOverlayHeader
+                                            iconColor="teal"
                                             IconComponent={PiGearSixDuotone}
-                                            iconVariant="gradient-teal"
+                                            iconVariant="soft"
                                             title={t('base-host-form.connection-overrides')}
                                             titleOrder={5}
                                         />
@@ -876,8 +878,9 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
                                 <SectionCard.Root>
                                     <SectionCard.Section>
                                         <BaseOverlayHeader
+                                            iconColor="violet"
                                             IconComponent={XrayLogo}
-                                            iconVariant="gradient-violet"
+                                            iconVariant="soft"
                                             title={t('base-host-form.xray-json-and-raw')}
                                             titleOrder={5}
                                         />
@@ -945,8 +948,9 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
                                 <SectionCard.Root>
                                     <SectionCard.Section>
                                         <BaseOverlayHeader
+                                            iconColor="teal"
                                             IconComponent={PiListChecks}
-                                            iconVariant="gradient-teal"
+                                            iconVariant="soft"
                                             title={t('base-host-form.misc-settings')}
                                             titleOrder={5}
                                         />
@@ -1059,8 +1063,9 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
                                 <SectionCard.Root>
                                     <SectionCard.Section>
                                         <BaseOverlayHeader
+                                            iconColor="indigo"
                                             IconComponent={MihomoLogo}
-                                            iconVariant="gradient-indigo"
+                                            iconVariant="soft"
                                             title={t('base-host-form.mihomo-specific')}
                                             titleOrder={5}
                                         />
@@ -1135,8 +1140,9 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
                 size="lg"
                 title={
                     <BaseOverlayHeader
+                        iconColor="teal"
                         IconComponent={PiPencilDuotone}
-                        iconVariant="gradient-teal"
+                        iconVariant="soft"
                         title={t('base-host-form.xhttp-extra-params')}
                     />
                 }
@@ -1177,8 +1183,9 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
                 size="lg"
                 title={
                     <BaseOverlayHeader
+                        iconColor="teal"
                         IconComponent={TbCloudNetwork}
-                        iconVariant="gradient-teal"
+                        iconVariant="soft"
                         title="MUX"
                     />
                 }
@@ -1236,8 +1243,9 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
                 size="lg"
                 title={
                     <BaseOverlayHeader
+                        iconColor="teal"
                         IconComponent={PiNetwork}
-                        iconVariant="gradient-teal"
+                        iconVariant="soft"
                         title="SockOpt"
                     />
                 }

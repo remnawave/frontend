@@ -62,9 +62,10 @@ export function PlatformBlockComponent(props: IProps) {
             <Stack gap="md">
                 <Group justify="space-between">
                     <BaseOverlayHeader
+                        iconColor="violet"
                         IconComponent={IconDeviceDesktop}
                         iconSize={20}
-                        iconVariant="gradient-violet"
+                        iconVariant="soft"
                         subtitle={t(
                             'subpage-config-visual-editor.widget.configure-apps-for-each-platform'
                         )}

@@ -10,12 +10,12 @@ import {
 } from '@mantine/core'
 import { TbCalendar, TbPlus, TbRefresh, TbServer, TbTrash } from 'react-icons/tb'
 import { GetInfraBillingNodesCommand } from '@remnawave/backend-contract'
+import { DataTable, useDataTableColumns } from 'mantine-datatable'
 import { AnimatePresence, motion } from 'motion/react'
 import { useTranslation } from 'react-i18next'
-import { DataTable } from 'mantine-datatable'
-import { useMemo, useState } from 'react'
 import { PiEmpty } from 'react-icons/pi'
 import { modals } from '@mantine/modals'
+import { useState } from 'react'
 import dayjs from 'dayjs'
 
 import {
@@ -31,6 +31,7 @@ import { queryClient } from '@shared/api'
 import { getInfraBillingNodesColumns } from './use-infra-billing-nodes-columns'
 
 const PAGE_SIZE = 500
+const INFRA_BILLING_NODES_CACHE_KEY = 'infra-billing-nodes-columns'
 
 export function InfraBillingNodesTableWidget() {
     const {
@@ -48,8 +49,6 @@ export function InfraBillingNodesTableWidget() {
     >([])
 
     const [updatingUuids, setUpdatingUuids] = useState<Set<string>>(new Set())
-
-    const memoizedInfraBillingNodes = useMemo(() => infraBillingNodes, [infraBillingNodes])
 
     const { mutate: deleteInfraBillingNode } = useDeleteInfraBillingNode({
         mutationFns: {
@@ -105,6 +104,15 @@ export function InfraBillingNodesTableWidget() {
             }
         })
     }
+
+    const { effectiveColumns } = useDataTableColumns({
+        key: INFRA_BILLING_NODES_CACHE_KEY,
+        columns: getInfraBillingNodesColumns(
+            handleQuickUpdateNextBillingAt,
+            (uuid) => updatingUuids.has(uuid),
+            t
+        )
+    })
 
     const handleClickBillingAt = (
         node: GetInfraBillingNodesCommand.Response['response']['billingNodes'][number]
@@ -178,7 +186,7 @@ export function InfraBillingNodesTableWidget() {
                                         clearMultiSelectedRecords()
                                     }}
                                     size="input-md"
-                                    variant="light"
+                                    variant="soft"
                                 >
                                     <TbRefresh size="24px" />
                                 </ActionIcon>
@@ -196,7 +204,7 @@ export function InfraBillingNodesTableWidget() {
                                         )
                                     }}
                                     size="input-md"
-                                    variant="light"
+                                    variant="soft"
                                 >
                                     <TbPlus size="24px" />
                                 </ActionIcon>
@@ -209,11 +217,10 @@ export function InfraBillingNodesTableWidget() {
             />
             <DataTable
                 borderRadius="sm"
-                columns={getInfraBillingNodesColumns(
-                    handleQuickUpdateNextBillingAt,
-                    (uuid) => updatingUuids.has(uuid),
-                    t
-                )}
+                columns={effectiveColumns}
+                defaultColumnProps={{
+                    resizable: true
+                }}
                 emptyState={
                     <Stack align="center" gap="xs">
                         <Box mb={4} p={4}>
@@ -247,10 +254,11 @@ export function InfraBillingNodesTableWidget() {
                 onPageChange={() => {}}
                 onSelectedRecordsChange={setMultiSelectedRecords}
                 page={1}
-                records={memoizedInfraBillingNodes?.billingNodes ?? []}
+                records={infraBillingNodes?.billingNodes ?? []}
                 recordsPerPage={PAGE_SIZE}
                 selectedRecords={multiSelectedRecords}
-                totalRecords={memoizedInfraBillingNodes?.totalBillingNodes ?? 0}
+                storeColumnsKey={INFRA_BILLING_NODES_CACHE_KEY}
+                totalRecords={infraBillingNodes?.totalBillingNodes ?? 0}
                 withColumnBorders
                 withTableBorder={false}
             />

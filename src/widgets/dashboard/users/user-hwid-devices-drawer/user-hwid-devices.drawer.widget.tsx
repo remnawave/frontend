@@ -179,7 +179,7 @@ export const UserHwidDevicesDrawerWidget = () => {
                     <Stack gap="md">
                         <Group gap="sm" justify="space-between">
                             <Group>
-                                <ThemeIcon color="indigo" radius="md" size="xl" variant="light">
+                                <ThemeIcon color="indigo" radius="md" size="xl" variant="soft">
                                     <TbDevices size={24} />
                                 </ThemeIcon>
                                 <Stack gap={0}>
@@ -198,7 +198,7 @@ export const UserHwidDevicesDrawerWidget = () => {
                                         loading={isRefetching}
                                         onClick={() => refetch()}
                                         size="lg"
-                                        variant="light"
+                                        variant="soft"
                                     >
                                         <TbRefresh size={20} />
                                     </ActionIcon>
@@ -210,7 +210,7 @@ export const UserHwidDevicesDrawerWidget = () => {
                                         color="red"
                                         onClick={handleDeleteAllDevices}
                                         size="lg"
-                                        variant="light"
+                                        variant="soft"
                                     >
                                         <TbTrash size={20} />
                                     </ActionIcon>
@@ -249,8 +249,9 @@ export const UserHwidDevicesDrawerWidget = () => {
             }}
             title={
                 <BaseOverlayHeader
+                    iconColor="violet"
                     IconComponent={TbDevices}
-                    iconVariant="gradient-violet"
+                    iconVariant="soft"
                     title={t('get-hwid-user-devices.feature.hwid-devices')}
                 />
             }

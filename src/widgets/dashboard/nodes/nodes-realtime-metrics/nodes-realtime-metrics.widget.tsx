@@ -1,19 +1,17 @@
-import {
-    PiArrowDownDuotone,
-    PiArrowUpDuotone,
-    PiPulse,
-    PiSpeedometer,
-    PiWarningCircle
-} from 'react-icons/pi'
+import { PiArrowDownDuotone, PiArrowUpDuotone, PiPulse, PiWarningCircle } from 'react-icons/pi'
 import { GetAllNodesCommand } from '@remnawave/backend-contract'
 import { TbServer2, TbSum, TbUsers } from 'react-icons/tb'
 import { useTranslation } from 'react-i18next'
 import { SimpleGrid } from '@mantine/core'
 import { motion } from 'motion/react'
+import { useMemo } from 'react'
 
+import {
+    prettyBytesToAnyUtil,
+    prettySiBytesUtil,
+    prettySiRealtimeBytesUtil
+} from '@shared/utils/bytes'
 import { IMetricCardProps, MetricCardShared } from '@shared/ui/metrics/metric-card'
-import { prettyBytesToAnyUtil, prettyRealtimeBytesUtil } from '@shared/utils/bytes'
-import { useGetStatsNodesRealtimeUsage } from '@shared/api/hooks'
 
 interface IProps {
     isLoading: boolean
@@ -25,27 +23,42 @@ export function NodesRealtimeUsageMetrics(props: IProps) {
 
     const { t } = useTranslation()
 
-    const { data: nodesRealtimeUsage, isLoading: isNodesRealtimeUsageLoading } =
-        useGetStatsNodesRealtimeUsage()
+    const aggregated = useMemo(() => {
+        if (!nodes?.length) return null
+
+        return nodes.reduce(
+            (acc, curr) => ({
+                rxTotal: acc.rxTotal + (curr.system?.stats.interface?.rxTotal ?? 0),
+                txTotal: acc.txTotal + (curr.system?.stats.interface?.txTotal ?? 0),
+                rxSpeed: acc.rxSpeed + (curr.system?.stats.interface?.rxBytesPerSec ?? 0),
+                txSpeed: acc.txSpeed + (curr.system?.stats.interface?.txBytesPerSec ?? 0),
+                memoryUsed: acc.memoryUsed + (curr.system?.stats.memoryUsed ?? 0)
+            }),
+            { rxTotal: 0, txTotal: 0, rxSpeed: 0, txSpeed: 0, memoryUsed: 0 }
+        )
+    }, [nodes])
 
     const cards: IMetricCardProps[] = [
         {
             IconComponent: TbUsers,
             title: t('nodes-quick-stats.widget.users-online'),
             value: nodes?.reduce((acc, curr) => acc + (curr.usersOnline ?? 0), 0) ?? 0,
-            iconVariant: 'gradient-cyan'
+            iconVariant: 'soft',
+            iconColor: 'cyan'
         },
         {
             IconComponent: PiPulse,
             title: t('nodes-quick-stats.widget.online-nodes'),
             value: nodes?.filter((node) => node.isConnected).length ?? 0,
-            iconVariant: 'gradient-teal'
+            iconVariant: 'soft',
+            iconColor: 'teal'
         },
         {
             IconComponent: PiWarningCircle,
             title: t('nodes-quick-stats.widget.offline-nodes'),
             value: nodes?.filter((node) => !node.isConnected).length ?? 0,
-            iconVariant: 'gradient-red'
+            iconVariant: 'soft',
+            iconColor: 'red'
         },
         {
             IconComponent: TbSum,
@@ -54,51 +67,41 @@ export function NodesRealtimeUsageMetrics(props: IProps) {
                 nodes?.reduce((acc, curr) => acc + (curr.trafficUsedBytes ?? 0), 0) ?? 0,
                 true
             ),
-            iconVariant: 'gradient-cyan'
-        },
-        {
-            IconComponent: PiArrowUpDuotone,
-            title: t('nodes-realtime-metrics.widget.total-upload'),
-            subtitle: t('nodes-realtime-metrics.widget.current-hour'),
-            value:
-                prettyRealtimeBytesUtil(
-                    nodesRealtimeUsage?.reduce((acc, curr) => acc + curr.uploadBytes, 0),
-                    true,
-                    false
-                ) ?? 0,
-            iconVariant: 'gradient-blue'
+            iconVariant: 'soft',
+            iconColor: 'cyan'
         },
 
         {
             IconComponent: PiArrowDownDuotone,
-            title: t('nodes-realtime-metrics.widget.total-download'),
-            subtitle: t('nodes-realtime-metrics.widget.current-hour'),
-            value:
-                prettyRealtimeBytesUtil(
-                    nodesRealtimeUsage?.reduce((acc, curr) => acc + curr.downloadBytes, 0),
-                    true,
-                    false
-                ) ?? 0,
-            iconVariant: 'gradient-teal'
+            title: t('nodes-realtime-metrics.widget.download-speed'),
+            value: prettySiRealtimeBytesUtil(aggregated?.rxSpeed ?? 0, true, true) || '0 B/s',
+            iconVariant: 'soft',
+            iconColor: 'teal',
+            subtitle: t('node-system-card.widget.interface')
         },
         {
-            IconComponent: PiSpeedometer,
-            title: t('nodes-realtime-metrics.widget.average-bps'),
-            subtitle: t('nodes-realtime-metrics.widget.current-hour'),
-            value:
-                prettyRealtimeBytesUtil(
-                    nodesRealtimeUsage?.reduce((acc, curr) => acc + curr.totalSpeedBps, 0),
-                    true,
-                    true
-                ) ?? 0,
-            iconVariant: 'gradient-indigo'
+            IconComponent: PiArrowUpDuotone,
+            title: t('nodes-realtime-metrics.widget.upload-speed'),
+            value: prettySiRealtimeBytesUtil(aggregated?.txSpeed ?? 0, true, true) || '0 B/s',
+            iconVariant: 'soft',
+            iconColor: 'indigo',
+            subtitle: t('node-system-card.widget.interface')
+        },
+        {
+            IconComponent: PiArrowDownDuotone,
+            title: t('nodes-realtime-metrics.widget.download-total'),
+            value: prettySiBytesUtil(aggregated?.rxTotal ?? 0, true) || '0 B',
+            iconVariant: 'soft',
+            iconColor: 'teal',
+            subtitle: t('node-system-card.widget.interface')
         },
         {
             IconComponent: TbServer2,
-            title: t('nodes-realtime-metrics.widget.active-nodes'),
-            value: nodesRealtimeUsage?.length || 0,
-            iconVariant: 'gradient-indigo',
-            subtitle: t('nodes-realtime-metrics.widget.current-hour')
+            title: t('nodes-realtime-metrics.widget.ram-usage'),
+            value: prettyBytesToAnyUtil(aggregated?.memoryUsed ?? 0, true) || '0 B',
+            iconVariant: 'soft',
+            iconColor: 'indigo',
+            subtitle: t('nodes-realtime-metrics.widget.for-all-nodes')
         }
     ]
     return (
@@ -115,9 +118,10 @@ export function NodesRealtimeUsageMetrics(props: IProps) {
                     }}
                 >
                     <MetricCardShared
+                        iconColor={card.iconColor}
                         IconComponent={card.IconComponent}
                         iconVariant={card.iconVariant}
-                        isLoading={isNodesRealtimeUsageLoading || isLoading}
+                        isLoading={isLoading}
                         subtitle={card.subtitle}
                         title={card.title}
                         value={card.value}

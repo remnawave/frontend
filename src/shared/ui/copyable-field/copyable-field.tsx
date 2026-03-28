@@ -25,6 +25,7 @@ export const CopyableFieldShared = ({
                                 section: classes.section
                             }}
                             leftSection={leftSection}
+                            leftSectionPointerEvents={leftSection ? 'all' : 'none'}
                             onClick={copy}
                             readOnly
                             rightSection={

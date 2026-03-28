@@ -6,14 +6,12 @@ import {
     MRT_ColumnPinningState,
     MRT_PaginationState,
     MRT_SortingState,
-    MRT_TableOptions,
     MRT_VisibilityState,
     useMantineReactTable
 } from 'mantine-react-table'
 import { TbExternalLink, TbRefresh, TbReportAnalytics, TbRestore } from 'react-icons/tb'
-import { GetSubscriptionRequestHistoryCommand } from '@remnawave/backend-contract'
-import { useCallback, useLayoutEffect, useMemo, useState } from 'react'
 import { ActionIcon, ActionIconGroup, Tooltip } from '@mantine/core'
+import { useLayoutEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { PiUserCircle } from 'react-icons/pi'
 
@@ -75,11 +73,9 @@ export function SrhInspectorTableWidget() {
         }
     })
 
-    const filteredData = useMemo(() => usersResponse, [usersResponse])
-
     const table = useMantineReactTable({
         columns: tableColumns,
-        data: filteredData?.records ?? [],
+        data: usersResponse?.records ?? [],
         enableFullScreenToggle: true,
         enableSortingRemoval: true,
         enableGlobalFilter: false,
@@ -123,7 +119,7 @@ export function SrhInspectorTableWidget() {
             style: { '--paper-radius': 'var(--mantine-radius-xs)' },
             withBorder: false
         },
-        rowCount: filteredData?.total ?? 0,
+        rowCount: usersResponse?.total ?? 0,
         enableRowSelection: false,
         enableColumnPinning: true,
         positionToolbarAlertBanner: 'top',
@@ -141,38 +137,29 @@ export function SrhInspectorTableWidget() {
             columnPinning
         },
         enableRowActions: true,
-        renderRowActions: useCallback<
-            Required<
-                MRT_TableOptions<
-                    GetSubscriptionRequestHistoryCommand.Response['response']['records'][number]
+        renderRowActions: ({ row }) => (
+            <ActionIconGroup>
+                <ActionIcon
+                    onClick={async () => {
+                        await userModalActions.setUserUuid(row.original.userUuid)
+                        userModalActions.changeModalState(true)
+                    }}
+                    size="input-sm"
+                    variant="soft"
                 >
-            >['renderRowActions']
-        >(
-            ({ row }) => (
-                <ActionIconGroup>
-                    <ActionIcon
-                        onClick={async () => {
-                            await userModalActions.setUserUuid(row.original.userUuid)
-                            userModalActions.changeModalState(true)
-                        }}
-                        size="input-sm"
-                        variant="light"
-                    >
-                        <PiUserCircle size="1.5rem" />
-                    </ActionIcon>
-                    <ActionIcon
-                        color="grape"
-                        onClick={async () => {
-                            window.open(`https://ipinfo.io/${row.original.requestIp}`, '_blank')
-                        }}
-                        size="input-sm"
-                        variant="light"
-                    >
-                        <TbExternalLink size="1.5rem" />
-                    </ActionIcon>
-                </ActionIconGroup>
-            ),
-            []
+                    <PiUserCircle size="1.5rem" />
+                </ActionIcon>
+                <ActionIcon
+                    color="grape"
+                    onClick={async () => {
+                        window.open(`https://ipinfo.io/${row.original.requestIp}`, '_blank')
+                    }}
+                    size="input-sm"
+                    variant="soft"
+                >
+                    <TbExternalLink size="1.5rem" />
+                </ActionIcon>
+            </ActionIconGroup>
         ),
 
         getRowId: (originalRow) => `${originalRow.id}`,

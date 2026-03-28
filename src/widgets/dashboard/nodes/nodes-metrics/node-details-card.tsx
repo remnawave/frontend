@@ -61,6 +61,7 @@ export const NodeDetailsCard = memo(
                             wrap="nowrap"
                         >
                             <ThemeIcon
+                                color="indigo"
                                 onClick={() => {
                                     handleNodeClick(node.nodeUuid)
                                 }}
@@ -68,7 +69,7 @@ export const NodeDetailsCard = memo(
                                 style={{
                                     cursor: 'pointer'
                                 }}
-                                variant="gradient-indigo"
+                                variant="soft"
                             >
                                 <TbServer2
                                     size="24px"

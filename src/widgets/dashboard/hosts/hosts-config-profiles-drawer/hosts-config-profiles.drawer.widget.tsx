@@ -54,7 +54,7 @@ export const HostsConfigProfilesDrawer = (props: IProps) => {
     )
 
     const filteredProfiles = useMemo(() => {
-        if (!configProfiles?.configProfiles) return []
+        if (!configProfiles || !configProfiles.configProfiles) return []
 
         if (!debouncedSearchQuery.trim()) {
             return configProfiles.configProfiles
@@ -79,7 +79,7 @@ export const HostsConfigProfilesDrawer = (props: IProps) => {
                         inbound.type.toLowerCase().includes(query)
                 )
             }))
-    }, [configProfiles?.configProfiles, debouncedSearchQuery])
+    }, [configProfiles, debouncedSearchQuery])
 
     const handleInboundToggle = useCallback(
         (
@@ -134,8 +134,9 @@ export const HostsConfigProfilesDrawer = (props: IProps) => {
             }}
             title={
                 <BaseOverlayHeader
+                    iconColor="teal"
                     IconComponent={XrayLogo}
-                    iconVariant="gradient-teal"
+                    iconVariant="soft"
                     title={t('constants.config-profiles')}
                 />
             }
@@ -266,29 +267,20 @@ export const HostsConfigProfilesDrawer = (props: IProps) => {
                                             variant="separated"
                                         >
                                             <ConfigProfileCardShared
+                                                hideSelectActions={true}
                                                 isOpen={isOpen}
                                                 onInboundToggle={handleInboundToggle}
                                                 onSelectAllInbounds={() => {
                                                     notifications.show({
-                                                        message: t(
-                                                            'hosts-config-profiles.drawer.widget.hosts-do-not-support-multiple-inbounds'
-                                                        ),
+                                                        message: 'Nice try!',
                                                         color: 'red',
-                                                        title: t(
-                                                            'hosts-config-profiles.drawer.widget.not-supported'
-                                                        ),
                                                         autoClose: 2000
                                                     })
                                                 }}
                                                 onUnselectAllInbounds={() => {
                                                     notifications.show({
-                                                        message: t(
-                                                            'hosts-config-profiles.drawer.widget.hosts-do-not-support-multiple-inbounds'
-                                                        ),
+                                                        message: 'Nice try!',
                                                         color: 'red',
-                                                        title: t(
-                                                            'hosts-config-profiles.drawer.widget.not-supported'
-                                                        ),
                                                         autoClose: 2000
                                                     })
                                                 }}

@@ -1,5 +1,5 @@
 import { CreateUserCommand, USERS_STATUS } from '@remnawave/backend-contract'
-import { Button, em, Group, Stack } from '@mantine/core'
+import { Button, em, Group, Modal, Stack } from '@mantine/core'
 import { zodResolver } from 'mantine-form-zod-resolver'
 import { PiFloppyDiskDuotone } from 'react-icons/pi'
 import { useTranslation } from 'react-i18next'
@@ -7,7 +7,6 @@ import { useMediaQuery } from '@mantine/hooks'
 import { useForm } from '@mantine/form'
 import { TbUser } from 'react-icons/tb'
 import { motion } from 'motion/react'
-import { useEffect } from 'react'
 import dayjs from 'dayjs'
 
 import {
@@ -30,9 +29,8 @@ import {
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { LoaderModalShared } from '@shared/ui/loader-modal'
 import { handleFormErrors } from '@shared/utils/misc'
-import { gbToBytesUtil } from '@shared/utils/bytes'
-import { Modal } from '@mantine/core'
 import { ModalFooter } from '@shared/ui/modal-footer'
+import { gbToBytesUtil } from '@shared/utils/bytes'
 
 const MotionWrapper = motion.div
 const MotionStack = motion.create(Stack)
@@ -66,6 +64,10 @@ export const CreateUserModalWidget = () => {
     const { data: tags, isLoading: isTagsLoading } = useGetUserTags()
     const isMobile = useMediaQuery(`(max-width: ${em(768)})`)
 
+    const handleCloseModal = () => {
+        actions.changeModalState(false)
+    }
+
     const { mutate: createUser, isPending: isDataSubmitting } = useCreateUser({
         mutationFns: {
             onSuccess: () => {
@@ -98,7 +100,7 @@ export const CreateUserModalWidget = () => {
             status: USERS_STATUS.ACTIVE,
             username: '',
             trafficLimitStrategy: 'NO_RESET',
-            expireAt: new Date(Date.now() + 24 * 60 * 60 * 1000),
+            expireAt: dayjs().add(1, 'day').toDate(),
             trafficLimitBytes: 0,
             description: '',
             telegramId: undefined,
@@ -108,10 +110,6 @@ export const CreateUserModalWidget = () => {
             activeInternalSquads: []
         }
     })
-
-    const handleCloseModal = () => {
-        actions.changeModalState(false)
-    }
 
     const handleResetForm = () => {
         actions.resetState()
@@ -157,8 +155,9 @@ export const CreateUserModalWidget = () => {
             size="1000px"
             title={
                 <BaseOverlayHeader
+                    iconColor="teal"
                     IconComponent={TbUser}
-                    iconVariant="gradient-teal"
+                    iconVariant="soft"
                     title={t('create-user-modal.widget.create-user')}
                 />
             }
@@ -262,7 +261,7 @@ export const CreateUserModalWidget = () => {
                 </Group>
             )}
 
-            <ModalFooter>
+            <ModalFooter isMobile={isMobile}>
                 <Button
                     color="teal"
                     leftSection={<PiFloppyDiskDuotone size="16px" />}

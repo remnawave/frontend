@@ -1,6 +1,5 @@
 import { useClickOutside, useDisclosure, useHeadroom, useMediaQuery } from '@mantine/hooks'
 import { AppShell, Box, Burger, Container, Group, ScrollArea } from '@mantine/core'
-import { useEffect, useState } from 'react'
 import { Outlet } from 'react-router-dom'
 import clsx from 'clsx'
 
@@ -21,7 +20,6 @@ import classes from './Main.module.css'
 export function MainLayout() {
     const [mobileOpened, { toggle: toggleMobile }] = useDisclosure()
 
-    const [isMediaQueryReady, setIsMediaQueryReady] = useState(false)
     const pinned = useHeadroom({ fixedAt: 120 })
 
     const isMobile = useMediaQuery(`(max-width: 64rem)`, undefined, {
@@ -37,9 +35,7 @@ export function MainLayout() {
     const remnawaveInfo = useRemnawaveInfo()
     const isLoadingUpdates = useIsLoadingRemnawaveUpdates()
 
-    useEffect(() => {
-        setIsMediaQueryReady(true)
-    }, [isMobile, isSocialButton])
+    const isMediaQueryReady = isMobile !== undefined && isSocialButton !== undefined
 
     const ref = useClickOutside(() => {
         if (isMobile && mobileOpened) {
@@ -82,6 +78,7 @@ export function MainLayout() {
                                 stars={remnawaveInfo.starsCount || undefined}
                                 telegramLink="https://t.me/remnawave"
                                 withGithub={!isSocialButton}
+                                withRecap={!isSocialButton}
                                 withSupport={!isSocialButton}
                                 withTelegram={!isSocialButton}
                             />

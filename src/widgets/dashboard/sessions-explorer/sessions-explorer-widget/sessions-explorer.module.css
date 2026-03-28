@@ -1,0 +1,14 @@
+.progressCard {
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ipHighlight {
+    background: rgba(45, 212, 191, 0.08);
+    border-radius: var(--mantine-radius-md);
+    padding: 4px;
+    margin: -4px;
+    outline: 1px solid rgba(45, 212, 191, 0.25);
+}

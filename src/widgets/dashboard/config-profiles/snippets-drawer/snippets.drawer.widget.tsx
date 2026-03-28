@@ -1,52 +1,26 @@
-import type { editor } from 'monaco-editor'
-
 import {
     ActionIcon,
-    Badge,
-    Box,
     Button,
-    Card,
     Center,
     Code,
-    CopyButton,
-    Divider,
     Group,
     Loader,
-    Modal,
-    Paper,
     ScrollArea,
-    SimpleGrid,
     Stack,
-    Text,
-    TextInput
+    Text
 } from '@mantine/core'
-import { TbBraces, TbCode, TbPlus, TbQuestionMark, TbRefresh, TbTrash, TbX } from 'react-icons/tb'
-import { CreateSnippetCommand, UpdateSnippetCommand } from '@remnawave/backend-contract'
-import { useDisclosure, useMediaQuery } from '@mantine/hooks'
-import { zodResolver } from 'mantine-form-zod-resolver'
-import { Editor, Monaco } from '@monaco-editor/react'
-import { PiCheck, PiCopy } from 'react-icons/pi'
+import { TbCode, TbPlus, TbQuestionMark, TbRefresh, TbX } from 'react-icons/tb'
+import { useMediaQuery } from '@mantine/hooks'
 import { useTranslation } from 'react-i18next'
-import { useEffect, useRef } from 'react'
 import { modals } from '@mantine/modals'
-import { useForm } from '@mantine/form'
 
-import {
-    QueryKeys,
-    useCreateSnippet,
-    useDeleteSnippet,
-    useGetSnippets,
-    useUpdateSnippet
-} from '@shared/api/hooks'
-import { MonacoSetupSnippetsFeature } from '@features/dashboard/config-profiles/monaco-setup/monaco-setup.feature'
 import { MODALS, useModalClose, useModalState } from '@entities/dashboard/modal-store'
-import { CopyableFieldShared } from '@shared/ui/copyable-field/copyable-field'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
-import { monacoTheme } from '@shared/constants/monaco-theme'
 import { SectionCard } from '@shared/ui/section-card'
-import { queryClient } from '@shared/api'
+import { useGetSnippets } from '@shared/api/hooks'
 
-import classes from './SnippetsDrawer.module.css'
+import { CREATE_SNIPPET_MODAL_ID, CreateSnippetModal } from './create-snippet.modal'
+import { SnippetsGridWidget } from './snippets-grid.widget'
 
 interface IProps {
     fromMainView?: boolean
@@ -55,47 +29,12 @@ interface IProps {
 export const SnippetsDrawerWidget = (props: IProps) => {
     const { fromMainView = false } = props
 
-    const { t, i18n } = useTranslation()
+    const { t } = useTranslation()
 
     const { isOpen } = useModalState(MODALS.CONFIG_PROFILE_SHOW_SNIPPETS_DRAWER)
     const close = useModalClose(MODALS.CONFIG_PROFILE_SHOW_SNIPPETS_DRAWER)
 
-    const monacoRef = useRef<Monaco | null>(null)
-    const editorRef = useRef<editor.IStandaloneCodeEditor | null>(null)
-
-    useEffect(() => {
-        if (!monacoRef.current) return
-
-        MonacoSetupSnippetsFeature.setup(monacoRef.current, i18n.language)
-    }, [monacoRef.current, i18n.language])
-
     const isMobile = useMediaQuery('(max-width: 1200px)')
-
-    const [createModalOpened, { open: openCreateModal, close: closeCreateModal }] =
-        useDisclosure(false)
-    const [editModalOpened, { open: openEditModal, close: closeEditModal }] = useDisclosure(false)
-
-    const createSnippetForm = useForm<CreateSnippetCommand.Request>({
-        name: 'create-snippet-form',
-        mode: 'uncontrolled',
-        validateInputOnBlur: true,
-        validate: zodResolver(CreateSnippetCommand.RequestSchema),
-        initialValues: {
-            name: '',
-            snippet: []
-        }
-    })
-
-    const editSnippetForm = useForm<UpdateSnippetCommand.Request>({
-        name: 'edit-snippet-form',
-        mode: 'uncontrolled',
-        validateInputOnBlur: true,
-        validate: zodResolver(UpdateSnippetCommand.RequestSchema),
-        initialValues: {
-            name: '',
-            snippet: []
-        }
-    })
 
     const {
         data: snippets,
@@ -108,172 +47,30 @@ export const SnippetsDrawerWidget = (props: IProps) => {
         }
     })
 
-    const { mutate: updateSnippet, isPending: isUpdating } = useUpdateSnippet({
-        mutationFns: {
-            onSuccess: () => {
-                queryClient.refetchQueries({ queryKey: QueryKeys.snippets.getSnippets.queryKey })
-                closeEditModal()
-            }
-        }
-    })
-
-    const { mutate: deleteSnippet, isPending: isDeleting } = useDeleteSnippet({
-        mutationFns: {
-            onSuccess: () => {
-                queryClient.refetchQueries({ queryKey: QueryKeys.snippets.getSnippets.queryKey })
-            }
-        }
-    })
-
-    const { mutate: createSnippet, isPending: isCreating } = useCreateSnippet({
-        mutationFns: {
-            onSuccess: () => {
-                queryClient.refetchQueries({ queryKey: QueryKeys.snippets.getSnippets.queryKey })
-                closeCreateModal()
-            }
-        }
-    })
-
-    const handleCreate = (values: CreateSnippetCommand.Request) => {
-        if (!editorRef.current) return
-
-        let currentValue = editorRef.current.getValue()
-
-        try {
-            currentValue = JSON.parse(currentValue)
-        } catch {
-            createSnippetForm.setFieldError('snippet', t('snippets.drawer.widget.invalid-json'))
-            return
-        }
-
-        if (!Array.isArray(currentValue) || currentValue.length === 0) {
-            createSnippetForm.setFieldError(
-                'snippet',
-                t('snippets.drawer.widget.snippet-cannot-be-empty')
-            )
-            return
-        }
-
-        if (currentValue.some((item) => Object.keys(item).length === 0)) {
-            createSnippetForm.setFieldError(
-                'snippet',
-                t('snippets.drawer.widget.snippet-cannot-contain-empty-objects')
-            )
-            return
-        }
-
-        createSnippet({
-            variables: {
-                name: values.name,
-                snippet: currentValue
-            }
-        })
-    }
-
-    const handleEditorDidMount = (monaco: Monaco) => {
-        monaco.editor.defineTheme('GithubDark', {
-            ...monacoTheme,
-            base: 'vs-dark'
-        })
-    }
-
-    const handleUpdate = (values: UpdateSnippetCommand.Request) => {
-        if (!editorRef.current) return
-
-        let currentValue = editorRef.current.getValue()
-
-        try {
-            currentValue = JSON.parse(currentValue)
-        } catch {
-            editSnippetForm.setFieldError('snippet', t('snippets.drawer.widget.invalid-json'))
-            return
-        }
-
-        if (!Array.isArray(currentValue) || currentValue.length === 0) {
-            editSnippetForm.setFieldError(
-                'snippet',
-                t('snippets.drawer.widget.snippet-cannot-be-empty')
-            )
-            return
-        }
-
-        if (currentValue.some((item) => Object.keys(item).length === 0)) {
-            editSnippetForm.setFieldError(
-                'snippet',
-                t('snippets.drawer.widget.snippet-cannot-contain-empty-objects')
-            )
-            return
-        }
-
-        updateSnippet({
-            variables: {
-                name: values.name,
-                snippet: currentValue
-            }
-        })
-    }
-
-    const handleDelete = (name: string) => {
-        modals.openConfirmModal({
-            title: t('common.confirm-action'),
-            children: t('common.confirm-action-description'),
-            labels: {
-                confirm: t('common.delete'),
-                cancel: t('common.cancel')
-            },
+    const handleCreateModal = () => {
+        modals.open({
+            title: (
+                <BaseOverlayHeader
+                    iconColor="teal"
+                    IconComponent={TbCode}
+                    iconVariant="soft"
+                    title={t('snippets.drawer.widget.create-snippet')}
+                />
+            ),
             centered: true,
-            cancelProps: { variant: 'subtle', color: 'gray' },
-            confirmProps: { color: 'red' },
-            onConfirm: () => {
-                deleteSnippet({
-                    variables: {
-                        name
-                    }
-                })
-            }
+            modalId: CREATE_SNIPPET_MODAL_ID,
+            size: 'lg',
+            children: <CreateSnippetModal />
         })
-    }
-
-    const handleEdit = (snippet: UpdateSnippetCommand.Response['response']['snippets'][number]) => {
-        editSnippetForm.setValues({
-            name: snippet.name,
-            snippet: snippet.snippet as unknown as UpdateSnippetCommand.Request['snippet']
-        })
-        openEditModal()
-    }
-
-    const handleOpenCreate = () => {
-        createSnippetForm.reset()
-        openCreateModal()
-    }
-
-    const returnLoading = () => {
-        return (
-            <Center h={200}>
-                <Stack align="center" gap="md">
-                    <Loader size="lg" />
-                    <Text c="dimmed">{t('snippets.drawer.widget.fetching-snippets')}</Text>
-                </Stack>
-            </Center>
-        )
-    }
-
-    const getSnippetPreview = (snippet: unknown) => {
-        if (!Array.isArray(snippet)) return []
-        return snippet.slice(0, 3)
-    }
-
-    const getSnippetLength = (snippet: unknown) => {
-        if (!Array.isArray(snippet)) return 0
-        return snippet.length
     }
 
     const openSnippetsHelpModal = () => {
         modals.open({
             title: (
                 <BaseOverlayHeader
+                    iconColor="teal"
                     IconComponent={TbCode}
-                    iconVariant="gradient-teal"
+                    iconVariant="soft"
                     title={t('snippets.drawer.widget.snippets')}
                 />
             ),
@@ -345,572 +142,107 @@ export const SnippetsDrawerWidget = (props: IProps) => {
         })
     }
 
-    const renderSnippets = () => {
-        if (!snippets || snippets.snippets.length === 0) {
-            return (
-                <Center h={200}>
-                    <Stack align="center" gap="md">
-                        <TbCode opacity={0.3} size={48} />
-                        <Text c="dimmed" size="sm">
-                            {t('snippets.drawer.widget.no-snippets-yet')}
-                        </Text>
-                    </Stack>
-                </Center>
-            )
-        }
-
-        return (
-            <SimpleGrid
-                cols={{
-                    base: 1,
-                    '800px': 2,
-                    '1000px': 3,
-                    '1200px': 4,
-                    '1800px': 5,
-                    '2400px': 6,
-                    '3000px': 7
-                }}
-                spacing="xs"
-                type="container"
-            >
-                {snippets.snippets.map((snippet) => {
-                    const snippetLength = getSnippetLength(snippet.snippet)
-                    const preview = getSnippetPreview(snippet.snippet)
-
-                    return (
-                        <Card
-                            className={classes.snippetCard}
-                            key={snippet.name}
-                            onClick={() => handleEdit(snippet)}
-                            padding="sm"
-                            shadow="sm"
-                            withBorder
-                        >
-                            <Stack gap="xs">
-                                <Group gap="xs" justify="space-between" wrap="nowrap">
-                                    <Group gap={6} style={{ flex: 1, minWidth: 0 }} wrap="nowrap">
-                                        <TbBraces
-                                            color="var(--mantine-color-blue-5)"
-                                            size={16}
-                                            style={{ flexShrink: 0 }}
-                                        />
-
-                                        <CopyButton timeout={1500} value={snippet.name}>
-                                            {({ copied, copy }) => (
-                                                <Text
-                                                    fw={500}
-                                                    onClick={(e) => {
-                                                        e.stopPropagation()
-                                                        copy()
-                                                    }}
-                                                    size="sm"
-                                                    style={{
-                                                        overflow: 'hidden',
-                                                        textOverflow: 'ellipsis',
-                                                        whiteSpace: 'nowrap',
-                                                        cursor: 'copy',
-                                                        flex: 1,
-                                                        minWidth: 0,
-                                                        transition: 'color 0.1s ease',
-                                                        color: copied
-                                                            ? 'var(--mantine-color-teal-4)'
-                                                            : 'inherit'
-                                                    }}
-                                                >
-                                                    {snippet.name}
-                                                </Text>
-                                            )}
-                                        </CopyButton>
-
-                                        <Badge
-                                            color="blue"
-                                            radius="sm"
-                                            size="md"
-                                            style={{ flexShrink: 0 }}
-                                            variant="default"
-                                        >
-                                            {snippetLength}
-                                        </Badge>
-                                    </Group>
-
-                                    <Group gap={4} wrap="nowrap">
-                                        <CopyButton
-                                            timeout={2000}
-                                            value={JSON.stringify(snippet.snippet || [], null, 2)}
-                                        >
-                                            {({ copied, copy }) => (
-                                                <ActionIcon
-                                                    color={copied ? 'teal' : 'gray'}
-                                                    onClick={(e) => {
-                                                        e.stopPropagation()
-                                                        copy()
-                                                    }}
-                                                    size="sm"
-                                                    variant="subtle"
-                                                >
-                                                    {copied ? (
-                                                        <PiCheck size="16px" />
-                                                    ) : (
-                                                        <PiCopy size="16px" />
-                                                    )}
-                                                </ActionIcon>
-                                            )}
-                                        </CopyButton>
-
-                                        <ActionIcon
-                                            color="red"
-                                            loading={isDeleting}
-                                            onClick={(e) => {
-                                                e.stopPropagation()
-                                                handleDelete(snippet.name)
-                                            }}
-                                            size="sm"
-                                            variant="subtle"
-                                        >
-                                            <TbTrash size={16} />
-                                        </ActionIcon>
-                                    </Group>
-                                </Group>
-
-                                {preview.length > 0 && (
-                                    <>
-                                        <Divider />
-                                        <Stack gap={4}>
-                                            {preview.map((item, idx) => (
-                                                <Box key={idx}>
-                                                    <Code
-                                                        block
-                                                        style={{
-                                                            fontSize: '11px',
-                                                            maxWidth: '100%',
-                                                            overflow: 'hidden',
-                                                            textOverflow: 'ellipsis',
-                                                            whiteSpace: 'nowrap'
-                                                        }}
-                                                    >
-                                                        {JSON.stringify(item)}
-                                                    </Code>
-                                                </Box>
-                                            ))}
-                                            {snippetLength > 3 && (
-                                                <Text c="dimmed" fs="italic" size="xs">
-                                                    +{snippetLength - 3}{' '}
-                                                    {t('snippets.drawer.widget.more-items')}
-                                                </Text>
-                                            )}
-                                        </Stack>
-                                    </>
-                                )}
-                            </Stack>
-                        </Card>
-                    )
-                })}
-            </SimpleGrid>
-        )
-    }
-
-    const renderCreateModal = () => (
-        <Modal
-            centered
-            closeOnClickOutside={!isCreating}
-            closeOnEscape={!isCreating}
-            onClose={() => {
-                createSnippetForm.reset()
-                closeCreateModal()
-            }}
-            opened={createModalOpened}
-            size="lg"
-            title={
-                <BaseOverlayHeader
-                    IconComponent={TbCode}
-                    iconVariant="gradient-teal"
-                    title={t('snippets.drawer.widget.create-snippet')}
-                />
-            }
-        >
-            <form onSubmit={createSnippetForm.onSubmit(handleCreate)}>
-                <Stack gap="md">
-                    <TextInput
-                        key={createSnippetForm.key('name')}
-                        label={t('snippets.drawer.widget.snippet-name')}
-                        placeholder={t(
-                            'snippets.drawer.widget.enter-snippet-name-cannot-be-changed-later'
-                        )}
-                        required
-                        {...createSnippetForm.getInputProps('name')}
-                    />
-
-                    <Paper
-                        p={0}
-                        style={{
-                            border: createSnippetForm.getInputProps('snippet').error
-                                ? '1px solid var(--mantine-color-red-5)'
-                                : '1px solid var(--mantine-color-dark-4)'
-                        }}
-                        withBorder
-                    >
-                        <Editor
-                            beforeMount={handleEditorDidMount}
-                            className={classes.editor}
-                            defaultLanguage="json"
-                            height={400}
-                            loading={t('config-editor.widget.loading-editor')}
-                            onChange={(value) => {
-                                try {
-                                    JSON.parse(value || '[]')
-
-                                    createSnippetForm.clearErrors()
-                                } catch {
-                                    createSnippetForm.setFieldError(
-                                        'snippet',
-                                        t('snippets.drawer.widget.invalid-json')
-                                    )
-                                }
-                            }}
-                            onMount={(editor, monaco) => {
-                                editorRef.current = editor
-                                monacoRef.current = monaco
-                            }}
-                            options={{
-                                autoClosingBrackets: 'always',
-                                autoClosingQuotes: 'always',
-                                autoIndent: 'full',
-                                automaticLayout: true,
-                                bracketPairColorization: {
-                                    enabled: true,
-                                    independentColorPoolPerBracketType: true
-                                },
-                                scrollbar: {
-                                    useShadows: false,
-                                    verticalHasArrows: true,
-                                    horizontalHasArrows: true,
-                                    vertical: 'visible',
-                                    horizontal: 'visible',
-                                    arrowSize: 30,
-                                    alwaysConsumeMouseWheel: false
-                                },
-                                detectIndentation: true,
-                                folding: true,
-                                foldingStrategy: 'indentation',
-                                fontSize: 14,
-                                formatOnPaste: true,
-                                formatOnType: true,
-                                guides: {
-                                    bracketPairs: true,
-                                    indentation: true
-                                },
-                                insertSpaces: true,
-                                minimap: { enabled: true },
-                                quickSuggestions: true,
-                                renderLineHighlight: 'all',
-                                scrollBeyondLastLine: false,
-                                smoothScrolling: true,
-                                tabSize: 2,
-                                padding: {
-                                    top: 10,
-                                    bottom: 10
-                                }
-                            }}
-                            path="snippet://*"
-                            theme="GithubDark"
-                            value={JSON.stringify(
-                                createSnippetForm.getValues().snippet || [],
-                                null,
-                                2
-                            )}
-                        />
-                    </Paper>
-
-                    <Paper
-                        mb="md"
-                        p="md"
-                        radius="sm"
-                        style={{
-                            backgroundColor: createSnippetForm.getInputProps('snippet').error
-                                ? 'rgba(241, 65, 65, 0.1)'
-                                : 'rgba(51, 171, 132, 0.1)',
-                            border: `1px solid ${createSnippetForm.getInputProps('snippet').error ? 'rgb(241, 65, 65)' : 'rgb(51, 171, 132)'}`
-                        }}
-                    >
-                        <Code
-                            block
-                            color={
-                                createSnippetForm.getInputProps('snippet').error ? 'red' : 'teal'
-                            }
-                            style={{
-                                backgroundColor: 'transparent',
-                                fontSize: '0.9rem',
-                                padding: 0
-                            }}
-                        >
-                            {createSnippetForm.getInputProps('snippet').error ||
-                                t('snippets.drawer.widget.snippet-is-valid')}
-                        </Code>
-                    </Paper>
-
-                    <Group gap="sm" justify="flex-end">
-                        <Button
-                            disabled={isCreating}
-                            onClick={() => {
-                                createSnippetForm.reset()
-                                closeCreateModal()
-                            }}
-                            variant="subtle"
-                        >
-                            {t('common.cancel')}
-                        </Button>
-                        <Button loading={isCreating} type="submit">
-                            {t('common.create')}
-                        </Button>
-                    </Group>
-                </Stack>
-            </form>
-        </Modal>
-    )
-
-    const renderEditModal = () => (
-        <Modal
-            centered
-            closeOnClickOutside={!isUpdating}
-            closeOnEscape={!isUpdating}
-            onClose={() => {
-                editSnippetForm.reset()
-                closeEditModal()
-            }}
-            opened={editModalOpened}
-            size="lg"
-            title={
-                <BaseOverlayHeader
-                    IconComponent={TbCode}
-                    iconVariant="gradient-teal"
-                    title={t('snippets.drawer.widget.edit-snippet')}
-                />
-            }
-        >
-            <form onSubmit={editSnippetForm.onSubmit(handleUpdate)}>
-                <Stack gap="md">
-                    <CopyableFieldShared
-                        label={t('snippets.drawer.widget.snippet-name')}
-                        value={editSnippetForm.getValues().name}
-                    />
-
-                    <Paper
-                        p={0}
-                        style={{
-                            border: createSnippetForm.getInputProps('snippet').error
-                                ? '1px solid var(--mantine-color-red-5)'
-                                : '1px solid var(--mantine-color-dark-4)'
-                        }}
-                        withBorder
-                    >
-                        <Editor
-                            beforeMount={handleEditorDidMount}
-                            className={classes.editor}
-                            defaultLanguage="json"
-                            height={400}
-                            loading={t('config-editor.widget.loading-editor')}
-                            onChange={(value) => {
-                                try {
-                                    JSON.parse(value || '[]')
-
-                                    editSnippetForm.clearErrors()
-                                } catch {
-                                    editSnippetForm.setFieldError(
-                                        'snippet',
-                                        t('snippets.drawer.widget.invalid-json')
-                                    )
-                                }
-                            }}
-                            onMount={(editor, monaco) => {
-                                editorRef.current = editor
-                                monacoRef.current = monaco
-                            }}
-                            options={{
-                                autoClosingBrackets: 'always',
-                                autoClosingQuotes: 'always',
-                                autoIndent: 'full',
-                                automaticLayout: true,
-                                bracketPairColorization: {
-                                    enabled: true,
-                                    independentColorPoolPerBracketType: true
-                                },
-                                scrollbar: {
-                                    useShadows: false,
-                                    verticalHasArrows: true,
-                                    horizontalHasArrows: true,
-                                    vertical: 'visible',
-                                    horizontal: 'visible',
-                                    arrowSize: 30,
-                                    alwaysConsumeMouseWheel: false
-                                },
-                                detectIndentation: true,
-                                folding: true,
-                                foldingStrategy: 'indentation',
-                                fontSize: 14,
-                                formatOnPaste: true,
-                                formatOnType: true,
-                                guides: {
-                                    bracketPairs: true,
-                                    indentation: true
-                                },
-                                insertSpaces: true,
-                                minimap: { enabled: true },
-                                quickSuggestions: true,
-                                renderLineHighlight: 'all',
-                                scrollBeyondLastLine: false,
-                                smoothScrolling: true,
-                                tabSize: 2,
-                                padding: {
-                                    top: 10,
-                                    bottom: 10
-                                }
-                            }}
-                            path="snippet://*"
-                            theme="GithubDark"
-                            value={JSON.stringify(
-                                editSnippetForm.getValues().snippet || [],
-                                null,
-                                2
-                            )}
-                        />
-                    </Paper>
-
-                    <Paper
-                        mb="md"
-                        p="md"
-                        radius="sm"
-                        style={{
-                            backgroundColor: editSnippetForm.getInputProps('snippet').error
-                                ? 'rgba(241, 65, 65, 0.1)'
-                                : 'rgba(51, 171, 132, 0.1)',
-                            border: `1px solid ${editSnippetForm.getInputProps('snippet').error ? 'rgb(241, 65, 65)' : 'rgb(51, 171, 132)'}`
-                        }}
-                    >
-                        <Code
-                            color={editSnippetForm.getInputProps('snippet').error ? 'red' : 'teal'}
-                            style={{
-                                backgroundColor: 'transparent',
-                                fontSize: '0.9rem',
-                                padding: 0
-                            }}
-                        >
-                            {editSnippetForm.getInputProps('snippet').error ||
-                                t('snippets.drawer.widget.snippet-is-valid')}
-                        </Code>
-                    </Paper>
-
-                    <Group gap="sm" justify="flex-end">
-                        <Button
-                            disabled={isUpdating}
-                            onClick={() => {
-                                editSnippetForm.reset()
-                                closeEditModal()
-                            }}
-                            variant="subtle"
-                        >
-                            {t('common.cancel')}
-                        </Button>
-                        <Button loading={isUpdating} type="submit">
-                            {t('common.save')}
-                        </Button>
-                    </Group>
-                </Stack>
-            </form>
-        </Modal>
-    )
-
     return (
-        <>
-            <SectionCard.Root>
-                <SectionCard.Section>
-                    <Group align="flex-center" justify="space-between">
-                        <BaseOverlayHeader
-                            IconComponent={TbCode}
-                            iconSize={20}
-                            iconVariant="gradient-teal"
-                            title={t('snippets.drawer.widget.snippets')}
-                            titleOrder={5}
-                            withCopy
-                        />
+        <SectionCard.Root>
+            <SectionCard.Section>
+                <Group align="flex-center" justify="space-between">
+                    <BaseOverlayHeader
+                        iconColor="teal"
+                        IconComponent={TbCode}
+                        iconSize={20}
+                        iconVariant="soft"
+                        title={t('snippets.drawer.widget.snippets')}
+                        titleOrder={5}
+                        withCopy
+                    />
 
-                        <Group gap="xs">
-                            <ActionIcon
-                                color="lime"
-                                onClick={openSnippetsHelpModal}
-                                size="input-sm"
-                                variant="light"
-                            >
-                                <TbQuestionMark size={24} />
-                            </ActionIcon>
-
-                            <ActionIcon
-                                loading={isRefetching || isLoading}
-                                onClick={() => {
-                                    refetch()
-                                }}
-                                size="input-sm"
-                                variant="light"
-                            >
-                                <TbRefresh size="24px" />
-                            </ActionIcon>
-
-                            {fromMainView && (
-                                <ActionIcon
-                                    color="teal"
-                                    onClick={handleOpenCreate}
-                                    size="input-sm"
-                                    variant="light"
-                                >
-                                    <TbPlus size="24px" />
-                                </ActionIcon>
-                            )}
-
-                            {!isMobile && !fromMainView && (
-                                <ActionIcon
-                                    color="red"
-                                    onClick={close}
-                                    size="input-sm"
-                                    variant="light"
-                                >
-                                    <TbX size={24} />
-                                </ActionIcon>
-                            )}
-                        </Group>
-                    </Group>
-                </SectionCard.Section>
-
-                {!fromMainView && (
-                    <SectionCard.Section>
-                        <Button
-                            fullWidth
-                            leftSection={<TbPlus size={18} />}
-                            onClick={handleOpenCreate}
-                            variant="default"
+                    <Group gap="xs">
+                        <ActionIcon
+                            color="lime"
+                            onClick={openSnippetsHelpModal}
+                            size="input-sm"
+                            variant="light"
                         >
-                            {t('snippets.drawer.widget.new-snippet')}
-                        </Button>
-                    </SectionCard.Section>
-                )}
+                            <TbQuestionMark size={24} />
+                        </ActionIcon>
 
-                {fromMainView && (
-                    <SectionCard.Section>
-                        {isLoading && returnLoading()}
-                        {!isLoading && renderSnippets()}
-                    </SectionCard.Section>
-                )}
+                        <ActionIcon
+                            loading={isRefetching || isLoading}
+                            onClick={() => {
+                                refetch()
+                            }}
+                            size="input-sm"
+                            variant="light"
+                        >
+                            <TbRefresh size="24px" />
+                        </ActionIcon>
 
-                {!fromMainView && (
-                    <SectionCard.Section>
-                        <ScrollArea h={!isMobile ? '700px' : '100%'}>
-                            {isLoading && returnLoading()}
-                            {!isLoading && renderSnippets()}
-                        </ScrollArea>
-                    </SectionCard.Section>
-                )}
-            </SectionCard.Root>
+                        {fromMainView && (
+                            <ActionIcon
+                                color="teal"
+                                onClick={handleCreateModal}
+                                size="input-sm"
+                                variant="light"
+                            >
+                                <TbPlus size="24px" />
+                            </ActionIcon>
+                        )}
 
-            {renderCreateModal()}
-            {renderEditModal()}
-        </>
+                        {!isMobile && !fromMainView && (
+                            <ActionIcon color="red" onClick={close} size="input-sm" variant="light">
+                                <TbX size={24} />
+                            </ActionIcon>
+                        )}
+                    </Group>
+                </Group>
+            </SectionCard.Section>
+
+            {!fromMainView && (
+                <SectionCard.Section>
+                    <Button
+                        fullWidth
+                        leftSection={<TbPlus size={18} />}
+                        onClick={handleCreateModal}
+                        variant="default"
+                    >
+                        {t('snippets.drawer.widget.new-snippet')}
+                    </Button>
+                </SectionCard.Section>
+            )}
+
+            {fromMainView && (
+                <SectionCard.Section>
+                    {isLoading && (
+                        <Center h={200}>
+                            <Stack align="center" gap="md">
+                                <Loader size="lg" />
+                                <Text c="dimmed">
+                                    {t('snippets.drawer.widget.fetching-snippets')}
+                                </Text>
+                            </Stack>
+                        </Center>
+                    )}
+                    {!isLoading && <SnippetsGridWidget snippets={snippets} />}
+                </SectionCard.Section>
+            )}
+
+            {!fromMainView && (
+                <SectionCard.Section>
+                    <ScrollArea h={!isMobile ? '700px' : '100%'}>
+                        {isLoading && (
+                            <Center h={200}>
+                                <Stack align="center" gap="md">
+                                    <Loader size="lg" />
+                                    <Text c="dimmed">
+                                        {t('snippets.drawer.widget.fetching-snippets')}
+                                    </Text>
+                                </Stack>
+                            </Center>
+                        )}
+                        {!isLoading && <SnippetsGridWidget snippets={snippets} />}
+                    </ScrollArea>
+                </SectionCard.Section>
+            )}
+        </SectionCard.Root>
     )
 }

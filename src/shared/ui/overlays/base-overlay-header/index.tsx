@@ -1,14 +1,18 @@
 import { Group, Stack, Text, ThemeIcon, ThemeIconProps, Title, TitleProps } from '@mantine/core'
 import ReactCountryFlag from 'react-country-flag'
 import { useClipboard } from '@mantine/hooks'
+import { ReactNode } from 'react'
 
 type IProps = {
-    actionIconProps?: ThemeIconProps
     countryCode?: string
+    hideIcon?: boolean
+    icon?: ReactNode
+    iconColor?: ThemeIconProps['color']
     IconComponent: React.ComponentType<{ size: number }>
     iconSize?: number
     iconVariant: ThemeIconProps['variant']
-    subtitle?: string
+    subtitle?: ReactNode | string
+    themeIconProps?: ThemeIconProps
     title: string
     titleOrder?: TitleProps['order']
     withCopy?: boolean
@@ -16,24 +20,31 @@ type IProps = {
 
 export const BaseOverlayHeader = (props: IProps) => {
     const {
-        actionIconProps,
+        themeIconProps,
         IconComponent,
         countryCode,
         iconSize = 20,
         iconVariant,
+        iconColor = 'cyan',
         subtitle,
         title,
         titleOrder = 4,
-        withCopy = false
+        withCopy = false,
+        hideIcon = false,
+        icon
     } = props
 
     const { copy } = useClipboard()
 
     return (
         <Group gap="sm" wrap="nowrap">
-            <ThemeIcon size="lg" variant={iconVariant} {...actionIconProps}>
-                <IconComponent size={iconSize} />
-            </ThemeIcon>
+            {!hideIcon && (
+                <ThemeIcon color={iconColor} size="lg" variant={iconVariant} {...themeIconProps}>
+                    <IconComponent size={iconSize} />
+                </ThemeIcon>
+            )}
+
+            {icon && icon}
 
             {countryCode && countryCode !== 'XX' && (
                 <ReactCountryFlag countryCode={countryCode} style={{ fontSize: '1.5em' }} />

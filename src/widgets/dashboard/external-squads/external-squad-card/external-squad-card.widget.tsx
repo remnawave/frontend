@@ -69,7 +69,7 @@ export function ExternalSquadCardWidget(props: IProps) {
                                     color={isActive ? 'teal' : 'gray'}
                                     leftSection={<PiUsers size={12} />}
                                     size="lg"
-                                    variant="light"
+                                    variant="soft"
                                 >
                                     {formatInt(membersCount, {
                                         thousandSeparator: ','

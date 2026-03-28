@@ -36,7 +36,12 @@ export const useSrhInspectorTableColumns = () => {
                 header: t('use-srh-inspector-table-columns.request-at'),
                 accessorFn: (originalRow) =>
                     dayjs(originalRow.requestAt).format('DD/MM/YYYY, HH:mm'),
-                minSize: 250
+                minSize: 250,
+                enableColumnFilterModes: false,
+                enableColumnFilter: false,
+                mantineTableBodyCellProps: {
+                    align: 'center'
+                }
             },
             {
                 accessorKey: 'userUuid',
@@ -45,6 +50,6 @@ export const useSrhInspectorTableColumns = () => {
                 size: 300
             }
         ],
-        []
+        [t]
     )
 }

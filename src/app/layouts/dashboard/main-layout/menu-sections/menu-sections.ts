@@ -1,4 +1,17 @@
 import {
+    TbChartArcs,
+    TbCirclesRelation,
+    TbDeviceAnalytics,
+    TbFlame,
+    TbFolder,
+    TbHexagon,
+    TbPackage,
+    TbRadar2,
+    TbReportAnalytics,
+    TbRoute,
+    TbWebhook
+} from 'react-icons/tb'
+import {
     PiAirTrafficControlDuotone,
     PiArrowsInCardinalFill,
     PiChartLine,
@@ -7,16 +20,6 @@ import {
     PiStarDuotone,
     PiUsersDuotone
 } from 'react-icons/pi'
-import {
-    TbChartArcs,
-    TbCirclesRelation,
-    TbDeviceAnalytics,
-    TbFolder,
-    TbHexagon,
-    TbReportAnalytics,
-    TbRoute,
-    TbWebhook
-} from 'react-icons/tb'
 import { SUBSCRIPTION_TEMPLATE_TYPE } from '@remnawave/backend-contract'
 import { HiChartPie, HiCurrencyDollar, HiServer } from 'react-icons/hi'
 import { useTranslation } from 'react-i18next'
@@ -93,6 +96,12 @@ export const useMenuSections = (): MenuItem[] => {
                             href: ROUTES.DASHBOARD.MANAGEMENT.NODES,
                             icon: HiServer,
                             id: 'management'
+                        },
+                        {
+                            name: `${t('constants.node-plugins')} β`,
+                            href: ROUTES.DASHBOARD.MANAGEMENT.NODE_PLUGINS.ROOT,
+                            icon: TbPackage,
+                            id: 'node-plugins'
                         },
 
                         {
@@ -222,6 +231,18 @@ export const useMenuSections = (): MenuItem[] => {
                     href: ROUTES.DASHBOARD.TOOLS.SRH_INSPECTOR,
                     icon: TbReportAnalytics,
                     id: 'srh-inspector'
+                },
+                {
+                    name: t('constants.tb-reports'),
+                    href: ROUTES.DASHBOARD.TOOLS.TORRENT_BLOCKER_REPORTS,
+                    icon: TbFlame,
+                    id: 'torrent-blocker-reports'
+                },
+                {
+                    name: t('constants.sessions-explorer'),
+                    href: ROUTES.DASHBOARD.TOOLS.SESSIONS_EXPLORER,
+                    icon: TbRadar2,
+                    id: 'sessions-explorer'
                 }
             ]
         },

@@ -127,10 +127,10 @@ export function BuildInfoModal({ remnawaveMetadata, isNewVersionAvailable }: Bui
                                 </Text>
                             </Group>
                             <Text c="gray.3" ff="monospace" size="xs">
-                                {formatTimeUtil(
-                                    remnawaveMetadata.build.time,
-                                    'DD.MM.YYYY HH:mm:ss'
-                                )}
+                                {formatTimeUtil({
+                                    time: remnawaveMetadata.build.time,
+                                    template: 'NUMERIC_DATETIME'
+                                })}
                             </Text>
                         </Paper>
 

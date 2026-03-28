@@ -14,9 +14,9 @@ import { TemplateDownloadModal } from './template-selector.modal'
 
 interface IProps {
     editorRef?: RefObject<editor.IStandaloneCodeEditor | null>
-    editorType: 'SRR' | 'SUBPAGE_CONFIG' | 'SUBSCRIPTION' | 'XRAY_CORE'
+    editorType: 'NODE_PLUGIN' | 'SRR' | 'SUBPAGE_CONFIG' | 'SUBSCRIPTION' | 'XRAY_CORE'
     onLoadTemplate?: (content: string) => Promise<void>
-    templateType: 'SRR' | 'SUBPAGE_CONFIG' | TSubscriptionTemplateType
+    templateType: 'NODE_PLUGIN' | 'SRR' | 'SUBPAGE_CONFIG' | TSubscriptionTemplateType
 }
 
 export const useDownloadTemplate = (props: IProps) => {
@@ -60,8 +60,9 @@ export const useDownloadTemplate = (props: IProps) => {
         const modalId = modals.open({
             title: (
                 <BaseOverlayHeader
+                    iconColor="cyan"
                     IconComponent={TbDownload}
-                    iconVariant="gradient-cyan"
+                    iconVariant="soft"
                     title={t('use-download-template.select-template-to-load')}
                 />
             ),

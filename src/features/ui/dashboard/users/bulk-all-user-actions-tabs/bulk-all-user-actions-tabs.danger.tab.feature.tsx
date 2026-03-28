@@ -52,8 +52,9 @@ export const BulkAllUserActionsDangerTabFeature = (props: IProps) => {
                             modals.open({
                                 title: (
                                     <BaseOverlayHeader
+                                        iconColor="red"
                                         IconComponent={PiTrash}
-                                        iconVariant="gradient-red"
+                                        iconVariant="soft"
                                         title={t('common.confirm-action')}
                                     />
                                 ),

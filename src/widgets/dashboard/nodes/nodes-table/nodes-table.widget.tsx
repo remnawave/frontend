@@ -7,12 +7,11 @@ import {
     KeyboardSensor,
     MouseSensor,
     TouchSensor,
-    UniqueIdentifier,
     useSensor,
     useSensors
 } from '@dnd-kit/core'
+import { memo, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import { arrayMove, SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
-import { memo, useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { GetAllNodesCommand } from '@remnawave/backend-contract'
 import { useWindowVirtualizer } from '@tanstack/react-virtual'
 import { useListState, useMediaQuery } from '@mantine/hooks'
@@ -39,8 +38,8 @@ export const NodesTableWidget = memo((props: IProps) => {
     const [draggedNode, setDraggedNode] = useState<
         GetAllNodesCommand.Response['response'][number] | null
     >(null)
+    const [scrollMargin, setScrollMargin] = useState(0)
     const listRef = useRef<HTMLDivElement | null>(null)
-    const parentOffsetRef = useRef(0)
     const prevStateRef = useRef(state)
     const isMobile = useMediaQuery(`(max-width: ${em(768)})`)
 
@@ -64,14 +63,13 @@ export const NodesTableWidget = memo((props: IProps) => {
 
     const virtualizer = useWindowVirtualizer({
         count: state.length,
-        estimateSize: () => (isMobile ? 169 : 64),
+        estimateSize: () => (isMobile ? 190 : 90),
         overscan: 7,
-        scrollMargin: parentOffsetRef.current,
+        scrollMargin,
         getItemKey: (index) => state[index].uuid
     })
 
-    const dataIds = useRef<UniqueIdentifier[]>([])
-    dataIds.current = state.map((node) => node.uuid)
+    const dataIds = useMemo(() => state.map((node) => node.uuid), [state])
 
     const sensors = useSensors(
         useSensor(MouseSensor, {
@@ -117,7 +115,9 @@ export const NodesTableWidget = memo((props: IProps) => {
     }, [nodes])
 
     useLayoutEffect(() => {
-        parentOffsetRef.current = listRef.current?.offsetTop ?? 0
+        if (listRef.current) {
+            setScrollMargin(listRef.current.offsetTop)
+        }
     }, [])
 
     const handleDragStart = useCallback(
@@ -139,8 +139,8 @@ export const NodesTableWidget = memo((props: IProps) => {
                 return
             }
 
-            const oldIndex = dataIds.current.indexOf(active.id)
-            const newIndex = dataIds.current.indexOf(over.id)
+            const oldIndex = dataIds.indexOf(String(active.id))
+            const newIndex = dataIds.indexOf(String(over.id))
 
             if (oldIndex !== -1 && newIndex !== -1) {
                 const newState = arrayMove(state, oldIndex, newIndex)
@@ -150,7 +150,7 @@ export const NodesTableWidget = memo((props: IProps) => {
             setIsPollingEnabled(true)
             setDraggedNode(null)
         },
-        [state, handlers]
+        [dataIds, state, handlers]
     )
 
     const handleDragCancel = useCallback(() => {
@@ -188,10 +188,7 @@ export const NodesTableWidget = memo((props: IProps) => {
                             position: 'relative'
                         }}
                     >
-                        <SortableContext
-                            items={dataIds.current}
-                            strategy={verticalListSortingStrategy}
-                        >
+                        <SortableContext items={dataIds} strategy={verticalListSortingStrategy}>
                             <Container fluid>
                                 <Stack gap={0}>
                                     {virtualizer.getVirtualItems().map((virtualItem) => {

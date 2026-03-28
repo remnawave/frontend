@@ -26,7 +26,9 @@ export default defineConfig([
         'plop/**/*',
         '**/plopfile.js',
         '**/.stylelintrc.js',
-        'node_modules/'
+        'node_modules/',
+        'node_modules/**',
+        '**/node_modules'
     ]),
     {
         extends: fixupConfigRules(
@@ -35,12 +37,11 @@ export default defineConfig([
                 'airbnb-base',
                 'plugin:@typescript-eslint/recommended',
                 'plugin:react-hooks/recommended',
-                'plugin:storybook/recommended',
                 'plugin:perfectionist/recommended-natural-legacy',
                 'prettier'
             )
         ),
-
+        files: ['**/*.{ts,tsx}'],
         plugins: {
             'react-refresh': reactRefresh,
             '@stylistic': stylistic,
@@ -69,6 +70,7 @@ export default defineConfig([
         },
 
         rules: {
+            'react-hooks/set-state-in-effect': 'warn',
             '@typescript-eslint/no-unused-vars': [
                 'error',
                 {

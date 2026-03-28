@@ -1,34 +1,24 @@
 import { Button, Center, List, Modal, Stack, Text, ThemeIcon, Title } from '@mantine/core'
 import { TbAlertTriangle, TbCheck } from 'react-icons/tb'
 import { useTranslation } from 'react-i18next'
-import { useEffect, useState } from 'react'
 
 import { useMiscStoreActions, useSrrAdvancedModalClosed } from '@entities/dashboard/misc-store'
 
 export function SrrAdvancedWarningOverlay() {
     const { t } = useTranslation()
 
-    const [opened, setOpened] = useState(false)
-
-    const srrAdvancedModalClosed = useSrrAdvancedModalClosed()
+    const modalClosed = useSrrAdvancedModalClosed()
     const actions = useMiscStoreActions()
-
-    useEffect(() => {
-        if (!srrAdvancedModalClosed) {
-            setOpened(true)
-        }
-    }, [])
 
     const handleClose = () => {
         actions.setSrrAdvancedModalClosed(true)
-        setOpened(false)
     }
 
     return (
         <Modal
             centered
             onClose={handleClose}
-            opened={opened}
+            opened={!modalClosed}
             padding="xl"
             radius="md"
             size="md"

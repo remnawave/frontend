@@ -63,6 +63,8 @@ export const ApiTokensCardWidget = (props: IProps) => {
                 <SettingsCardShared.Header
                     description={t('api-tokens-card.widget.api-tokens-description')}
                     icon={<TbCookie size={24} />}
+                    iconColor="cyan"
+                    iconVariant="soft"
                     title={t('api-tokens-card.widget.api-tokens')}
                 />
 
@@ -107,7 +109,7 @@ export const ApiTokensCardWidget = (props: IProps) => {
                                 loading={isRefetching}
                                 onClick={() => refetch()}
                                 size="input-md"
-                                variant="light"
+                                variant="soft"
                             >
                                 <TbRefresh size={24} />
                             </ActionIcon>
@@ -158,8 +160,9 @@ export const ApiTokensCardWidget = (props: IProps) => {
                 size="md"
                 title={
                     <BaseOverlayHeader
+                        iconColor="teal"
                         IconComponent={TbCookie}
-                        iconVariant="gradient-teal"
+                        iconVariant="soft"
                         title={t('common.create')}
                     />
                 }

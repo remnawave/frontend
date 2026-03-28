@@ -18,7 +18,7 @@ export const SidebarTitleShared = () => {
             { text: 'Remna', color: 'cyan' },
             { text: 'wave', color: 'white' }
         ]
-    }, [authStatus?.branding.title])
+    }, [authStatus])
 
     return (
         <Text className={classes.logoTitle}>

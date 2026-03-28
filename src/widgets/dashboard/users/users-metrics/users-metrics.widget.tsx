@@ -22,33 +22,38 @@ export function UsersMetrics() {
     const cards: IMetricCardProps[] = [
         {
             IconComponent: PiUsersDuotone,
+            iconColor: 'blue',
             title: t('users-metrics.widget.total'),
             value: users?.totalUsers ?? 0,
-            iconVariant: 'gradient-blue'
+            iconVariant: 'soft'
         },
         {
             IconComponent: PiPulseDuotone,
+            iconColor: 'teal',
             title: 'Active',
             value: users?.statusCounts.ACTIVE ?? 0,
-            iconVariant: 'gradient-teal'
+            iconVariant: 'soft'
         },
         {
             IconComponent: PiClockUserDuotone,
+            iconColor: 'red',
             title: 'Expired',
             value: users?.statusCounts.EXPIRED ?? 0,
-            iconVariant: 'gradient-red'
+            iconVariant: 'soft'
         },
         {
             IconComponent: PiClockCountdownDuotone,
+            iconColor: 'orange',
             title: 'Limited',
             value: users?.statusCounts.LIMITED ?? 0,
-            iconVariant: 'gradient-orange'
+            iconVariant: 'soft'
         },
         {
             IconComponent: PiProhibitDuotone,
+            iconColor: 'gray',
             title: 'Disabled',
             value: users?.statusCounts.DISABLED ?? 0,
-            iconVariant: 'gradient-gray'
+            iconVariant: 'soft'
         }
     ]
     return (
@@ -64,7 +69,12 @@ export function UsersMetrics() {
                         ease: 'easeIn'
                     }}
                 >
-                    <MetricCardShared isLoading={isLoading} key={card.title} {...card} />
+                    <MetricCardShared
+                        iconColor={card.iconColor}
+                        isLoading={isLoading}
+                        key={card.title}
+                        {...card}
+                    />
                 </motion.div>
             ))}
         </SimpleGrid>

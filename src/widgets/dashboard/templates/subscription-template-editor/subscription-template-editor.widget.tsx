@@ -6,6 +6,7 @@ import 'monaco-yaml/yaml.worker.js'
 import { Box, Card, Paper } from '@mantine/core'
 import { useLayoutEffect, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
+import { decode } from '@stablelib/base64'
 
 import { TemplateEditorActionsFeature } from '@features/dashboard/subscription-templates/template-editor-actions'
 import { monacoTheme } from '@shared/constants/monaco-theme/monaco-theme'
@@ -30,7 +31,7 @@ export function SubscriptionTemplateEditorWidget(props: Props) {
     const getConfig = () => {
         if (editorType === 'yaml') {
             return template.encodedTemplateYaml
-                ? Buffer.from(template.encodedTemplateYaml, 'base64').toString()
+                ? new TextDecoder().decode(decode(template.encodedTemplateYaml))
                 : ''
         }
         return JSON.stringify(template.templateJson, null, 2)

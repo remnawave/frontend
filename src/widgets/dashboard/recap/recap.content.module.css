@@ -1,0 +1,245 @@
+.card {
+    width: 380px;
+    padding: 36px 32px;
+    border-radius: 14px;
+    background: #08080f;
+    position: relative;
+    user-select: none;
+    overflow: hidden;
+    font-family: 'Unbounded', sans-serif;
+}
+
+.controlPanel {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 10px;
+    padding: 14px;
+}
+
+.controlLabel {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.35);
+    margin-bottom: 8px;
+}
+
+.bgOverlay {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.glow {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.glowTop {
+    top: -80px;
+    right: -60px;
+    width: 220px;
+    height: 220px;
+    filter: blur(80px);
+    opacity: 0.25;
+}
+
+.glowBottom {
+    bottom: -100px;
+    left: -60px;
+    width: 200px;
+    height: 200px;
+    filter: blur(100px);
+    opacity: 0.12;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 32px;
+    position: relative;
+    z-index: 1;
+}
+
+.brandName {
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    font-family: 'Unbounded', sans-serif;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.hero {
+    text-align: center;
+    margin-bottom: 28px;
+    position: relative;
+    z-index: 1;
+}
+
+.heroValue {
+    font-size: 72px;
+    font-weight: 800;
+    line-height: 1;
+    margin-bottom: 6px;
+}
+
+.heroLabel {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.statsRow {
+    display: flex;
+    justify-content: center;
+    gap: 48px;
+    margin-bottom: 28px;
+    position: relative;
+    z-index: 1;
+}
+
+.stat {
+    text-align: center;
+}
+
+.statValue {
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1.2;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.statLabel {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.35);
+    margin-top: 2px;
+}
+
+.divider {
+    height: 1px;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+.section {
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+.sectionTitle {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.3);
+    margin-bottom: 12px;
+}
+
+.monthGrid {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+}
+
+.monthItem {
+    text-align: center;
+}
+
+.monthValue {
+    font-size: 22px;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.85);
+    line-height: 1.2;
+}
+
+.monthLabel {
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.3);
+    margin-top: 2px;
+}
+
+.infraGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    text-align: center;
+}
+
+.infraValue {
+    font-size: 20px;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.85);
+    line-height: 1.2;
+    white-space: nowrap;
+}
+
+.infraLabel {
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.3);
+    margin-top: 2px;
+}
+
+.customNote {
+    text-align: left;
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    color: rgba(255, 255, 255, 1);
+    position: relative;
+    z-index: 1;
+}
+
+.footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+}
+
+.since {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.version {
+    font-size: 14px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 8px;
+    letter-spacing: 0.5px;
+}
+
+.ribbon {
+    position: absolute;
+    top: 30px;
+    right: -60px;
+    width: 200px;
+    padding: 4px 0;
+    text-align: center;
+    transform: rotate(45deg);
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #08080f;
+    z-index: 2;
+    pointer-events: none;
+}

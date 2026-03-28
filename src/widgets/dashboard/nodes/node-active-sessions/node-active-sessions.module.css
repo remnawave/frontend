@@ -1,0 +1,65 @@
+.listContainer {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+}
+
+.fadeTop {
+    mask-image: linear-gradient(to bottom, transparent, black 24px);
+    -webkit-mask-image: linear-gradient(to bottom, transparent, black 24px);
+}
+
+.fadeBottom {
+    mask-image: linear-gradient(to bottom, black calc(100% - 24px), transparent);
+    -webkit-mask-image: linear-gradient(to bottom, black calc(100% - 24px), transparent);
+}
+
+.fadeTop.fadeBottom {
+    mask-image: linear-gradient(to bottom, transparent, black 24px, black calc(100% - 24px), transparent);
+    -webkit-mask-image: linear-gradient(to bottom, transparent, black 24px, black calc(100% - 24px), transparent);
+}
+
+.itemWrapper {
+    padding-bottom: 8px;
+    animation: fadeIn 0.2s ease-out;
+    -webkit-animation: fadeIn 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        transform: scale(0.75);
+    }
+    to {
+        transform: scale(1);
+    }
+}
+
+.sortTab {
+    position: relative;
+    border: 1px solid var(--mantine-color-dark-4);
+    background-color: var(--mantine-color-dark-6);
+    border-radius: 8px;
+    margin: 4px;
+    font-weight: 500;
+
+    @mixin hover {
+        background-color: var(--mantine-color-dark-5);
+    }
+
+    &[data-active] {
+        z-index: 1;
+        background-color: transparent;
+        border: 1px solid transparent;
+        outline: 2px solid var(--mantine-color-cyan-filled);
+        outline-offset: -2px;
+
+        @mixin hover {
+            background-color: var(--mantine-color-cyan-outline-hover);
+        }
+    }
+}
+
+.sortTabLabel {
+    color: var(--mantine-color-white);
+    font-weight: 500;
+}

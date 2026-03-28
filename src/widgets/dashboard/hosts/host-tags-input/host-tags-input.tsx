@@ -9,7 +9,6 @@ import { useGetHostTags } from '@shared/api/hooks'
 import type { IProps } from './interfaces/props.interface'
 
 export function HostTagsInputWidget(props: IProps) {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { value, onChange, defaultValue, ...restProps } = props
     const [data, setData] = useState<string[]>([])
     const [search, setSearch] = useState(value?.toString() || '')
@@ -52,10 +51,6 @@ export function HostTagsInputWidget(props: IProps) {
             setData(hostTags.tags)
         }
     }, [hostTags, isHostTagsLoading, isHostTagsRefetching])
-
-    useEffect(() => {
-        setSearch(value?.toString() || '')
-    }, [value])
 
     const exactOptionMatch = data.some((item) => item === search)
     const filteredOptions = exactOptionMatch

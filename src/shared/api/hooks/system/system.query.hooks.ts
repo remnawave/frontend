@@ -3,6 +3,7 @@ import {
     GetMetadataCommand,
     GetNodesMetricsCommand,
     GetNodesStatisticsCommand,
+    GetRecapCommand,
     GetRemnawaveHealthCommand,
     GetStatsCommand
 } from '@remnawave/backend-contract'
@@ -33,6 +34,9 @@ export const systemQueryKeys = createQueryKeys('system', {
         queryKey: null
     },
     getRemnawaveMetadata: {
+        queryKey: null
+    },
+    getRecap: {
         queryKey: null
     }
 })
@@ -119,4 +123,16 @@ export const useGetRemnawaveMetadata = createGetQueryHook({
         staleTime: sToMs(3_600)
     },
     errorHandler: (error) => errorHandler(error, 'Get Remnawave Metadata')
+})
+
+export const useGetRecap = createGetQueryHook({
+    endpoint: GetRecapCommand.TSQ_url,
+    responseSchema: GetRecapCommand.ResponseSchema,
+    getQueryKey: () => systemQueryKeys.getRecap.queryKey,
+    rQueryParams: {
+        placeholderData: keepPreviousData,
+        refetchOnMount: true,
+        staleTime: sToMs(60)
+    },
+    errorHandler: (error) => errorHandler(error, 'Get Recap')
 })

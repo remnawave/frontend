@@ -1,0 +1,88 @@
+.card {
+    background: linear-gradient(
+        135deg,
+        var(--mantine-color-dark-6) 0%,
+        var(--mantine-color-dark-7) 50%,
+        var(--mantine-color-dark-8) 100%
+    );
+    border-color: var(--mantine-color-dark-4);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.topAccent {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        var(--accent-color, var(--mantine-color-teal-6)) 50%,
+        transparent 100%
+    );
+    z-index: 1;
+}
+
+.subsection {
+    padding: 8px 12px;
+    border-radius: var(--mantine-radius-sm);
+    border: 1px solid transparent;
+    transition: all 0.2s ease;
+}
+
+.memorySection {
+    composes: subsection;
+    background: rgba(45, 212, 191, 0.06);
+    border-color: rgba(45, 212, 191, 0.12);
+    height: 100%;
+}
+
+.perfSection {
+    composes: subsection;
+    background: rgba(99, 102, 241, 0.06);
+    border-color: rgba(99, 102, 241, 0.12);
+    height: 100%;
+}
+
+.card:hover .memorySection {
+    background: rgba(45, 212, 191, 0.1);
+    border-color: rgba(45, 212, 191, 0.2);
+}
+
+.card:hover .perfSection {
+    background: rgba(99, 102, 241, 0.1);
+    border-color: rgba(99, 102, 241, 0.2);
+}
+
+.statLabel {
+    color: var(--mantine-color-dimmed);
+    font-size: var(--mantine-font-size-xs);
+    font-weight: 500;
+    line-height: 1.2;
+    white-space: nowrap;
+}
+
+.statValue {
+    font-weight: 600;
+    font-size: var(--mantine-font-size-xs);
+    font-family: var(--mantine-font-family-monospace);
+    color: var(--mantine-color-white-5);
+    line-height: 1.2;
+    white-space: nowrap;
+}
+
+.heapValues {
+    font-size: var(--mantine-font-size-xs);
+    font-family: var(--mantine-font-family-monospace);
+    color: var(--mantine-color-white-5);
+    font-weight: 600;
+}
+
+.heapPercent {
+    color: var(--mantine-color-dimmed);
+    font-size: var(--mantine-font-size-xs);
+    font-family: var(--mantine-font-family-monospace);
+}

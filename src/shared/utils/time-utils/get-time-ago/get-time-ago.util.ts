@@ -13,3 +13,10 @@ export function getTimeAgoUtil(
 
     return date.fromNow()
 }
+
+export function formatRelativeDateUtil(dateStr: Date, t: TFunction, language: string): string {
+    const date = dayjs(dateStr).locale(language)
+    if (!date.isValid()) return t('get-time-ago.util.invalid-date')
+
+    return date.fromNow()
+}

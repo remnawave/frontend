@@ -1,3 +1,4 @@
 export const SEARCH_PARAMS = {
-    HOST: 'host'
+    HOST: 'host',
+    USER: 'user'
 } as const

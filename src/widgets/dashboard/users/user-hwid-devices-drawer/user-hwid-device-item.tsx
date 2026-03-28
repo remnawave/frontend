@@ -9,10 +9,10 @@ import {
 import { ActionIcon, Divider, Group, Stack, Text, ThemeIcon } from '@mantine/core'
 import { GetUserHwidDevicesCommand } from '@remnawave/backend-contract'
 import { useTranslation } from 'react-i18next'
-import dayjs from 'dayjs'
 
 import { CopyableFieldShared } from '@shared/ui/copyable-field/copyable-field'
 import { SettingsCardShared } from '@shared/ui/settings-card'
+import { formatTimeUtil } from '@shared/utils/time-utils'
 
 interface IProps {
     device: GetUserHwidDevicesCommand.Response['response']['devices'][number]
@@ -22,8 +22,7 @@ interface IProps {
 
 export const UserHwidDeviceItem = (props: IProps) => {
     const { index, device, onDelete } = props
-
-    const { t } = useTranslation()
+    const { t, i18n } = useTranslation()
 
     const resolvePlatform = (platform: null | string) => {
         if (!platform) return <PiDeviceMobile size={24} />
@@ -49,7 +48,7 @@ export const UserHwidDeviceItem = (props: IProps) => {
         <SettingsCardShared.Container>
             <Group align="center" gap="xs" justify="space-between" wrap="nowrap">
                 <Group align="center" gap="xs" wrap="nowrap">
-                    <ThemeIcon color="indigo" size="lg" variant="light">
+                    <ThemeIcon color="indigo" size="lg" variant="soft">
                         {resolvePlatform(device.platform)}
                     </ThemeIcon>
                     <Text fw={600} size="md">
@@ -62,7 +61,7 @@ export const UserHwidDeviceItem = (props: IProps) => {
                     color="red"
                     onClick={() => onDelete(device.hwid)}
                     size="lg"
-                    variant="light"
+                    variant="soft"
                 >
                     <PiTrash size="20px" />
                 </ActionIcon>
@@ -101,13 +100,21 @@ export const UserHwidDeviceItem = (props: IProps) => {
                     <CopyableFieldShared
                         label={t('get-hwid-user-devices.feature.added')}
                         size="sm"
-                        value={dayjs(device.createdAt).format('HH:mm DD MMMM, YYYY')}
+                        value={formatTimeUtil({
+                            time: device.createdAt,
+                            template: 'TIME_FIRST_DATETIME',
+                            language: i18n.language
+                        })}
                     />
 
                     <CopyableFieldShared
                         label="Updated"
                         size="sm"
-                        value={dayjs(device.updatedAt).format('HH:mm DD MMMM, YYYY')}
+                        value={formatTimeUtil({
+                            time: device.updatedAt,
+                            template: 'TIME_FIRST_DATETIME',
+                            language: i18n.language
+                        })}
                     />
                 </Stack>
             </SettingsCardShared.Content>

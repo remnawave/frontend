@@ -66,6 +66,8 @@ export const SubscriptionAdditionalOptionsWidget = (props: IProps) => {
                         'subscription-tabs.widget.configure-additional-subscription-options'
                     )}
                     icon={<PiGear size={24} />}
+                    iconColor="cyan"
+                    iconVariant="soft"
                     title={t('subscription-tabs.widget.additional-options')}
                 />
 

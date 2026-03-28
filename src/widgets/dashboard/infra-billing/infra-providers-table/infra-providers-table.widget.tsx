@@ -14,7 +14,6 @@ import { useTranslation } from 'react-i18next'
 import { DataTable } from 'mantine-datatable'
 import { PiEmpty } from 'react-icons/pi'
 import { modals } from '@mantine/modals'
-import { useMemo } from 'react'
 
 import { QueryKeys, useDeleteInfraProvider, useGetInfraProviders } from '@shared/api/hooks'
 import { MODALS, useModalsStoreOpenWithData } from '@entities/dashboard/modal-store'
@@ -36,14 +35,10 @@ export function InfraProvidersTableWidget() {
 
     const { t } = useTranslation()
 
-    const memoizedInfraProviders = useMemo(() => infraProviders, [infraProviders])
-
-    const totalAmount = useMemo(() => {
-        return memoizedInfraProviders?.providers.reduce(
-            (acc, provider) => acc + provider.billingHistory.totalAmount,
-            0
-        )
-    }, [memoizedInfraProviders])
+    const totalAmount = infraProviders?.providers.reduce(
+        (acc, provider) => acc + provider.billingHistory.totalAmount,
+        0
+    )
 
     const { mutate: deleteInfraProvider } = useDeleteInfraProvider({
         mutationFns: {
@@ -105,7 +100,7 @@ export function InfraProvidersTableWidget() {
                                         })
                                     }}
                                     size="input-md"
-                                    variant="light"
+                                    variant="soft"
                                 >
                                     <TbRefresh size="24px" />
                                 </ActionIcon>
@@ -126,7 +121,7 @@ export function InfraProvidersTableWidget() {
                                         )
                                     }}
                                     size="input-md"
-                                    variant="light"
+                                    variant="soft"
                                 >
                                     <TbPlus size="24px" />
                                 </ActionIcon>
@@ -140,7 +135,7 @@ export function InfraProvidersTableWidget() {
             <DataTable
                 borderRadius="sm"
                 columns={getInfraProvidersColumns(
-                    memoizedInfraProviders?.total ?? 0,
+                    infraProviders?.total ?? 0,
                     totalAmount ?? 0,
                     handleOpenModal,
                     handleDeleteInfraProvider,
@@ -174,10 +169,10 @@ export function InfraProvidersTableWidget() {
                 }}
                 onPageChange={() => {}}
                 page={1}
-                records={memoizedInfraProviders?.providers ?? []}
+                records={infraProviders?.providers ?? []}
                 recordsPerPage={PAGE_SIZE}
                 textSelectionDisabled
-                totalRecords={memoizedInfraProviders?.total ?? 0}
+                totalRecords={infraProviders?.total ?? 0}
                 withColumnBorders
                 withTableBorder={false}
             />

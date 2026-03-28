@@ -97,8 +97,9 @@ export function CreateInfraBillingNodeModalWidget() {
             size="md"
             title={
                 <BaseOverlayHeader
+                    iconColor="teal"
                     IconComponent={TbServer}
-                    iconVariant="gradient-teal"
+                    iconVariant="soft"
                     title={t('create-infra-billing-node.modal.widget.billing-node')}
                 />
             }

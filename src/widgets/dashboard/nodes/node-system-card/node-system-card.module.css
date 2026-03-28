@@ -1,0 +1,84 @@
+.wrapper {
+    position: relative;
+    overflow: hidden;
+    min-width: 0;
+    width: 100%;
+}
+
+.screenshotButton {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    z-index: 2;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.wrapper:hover .screenshotButton {
+    opacity: 1;
+}
+
+.subsection {
+    padding: 8px 12px;
+    border-radius: var(--mantine-radius-sm);
+    border: 1px solid transparent;
+    transition: all 0.2s ease;
+    overflow: hidden;
+    min-width: 0;
+}
+
+.memorySection {
+    composes: subsection;
+    background: rgba(45, 212, 191, 0.06);
+    border-color: rgba(45, 212, 191, 0.12);
+    height: 100%;
+}
+
+.statLabel {
+    color: var(--mantine-color-dimmed);
+    font-size: var(--mantine-font-size-xs);
+    font-weight: 500;
+    line-height: 1.2;
+    white-space: nowrap;
+}
+
+.statValue {
+    font-weight: 600;
+    font-size: var(--mantine-font-size-xs);
+    font-family: var(--mantine-font-family-monospace);
+    color: var(--mantine-color-white-5);
+    line-height: 1.2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: block;
+    max-width: 100%;
+}
+
+.interfaceSection {
+    composes: subsection;
+    background: rgba(34, 211, 238, 0.06);
+    border-color: rgba(34, 211, 238, 0.12);
+    height: 100%;
+}
+
+.infoSection {
+    composes: subsection;
+    background: rgba(139, 92, 246, 0.06);
+    border-color: rgba(139, 92, 246, 0.12);
+    height: 100%;
+    container-type: inline-size;
+}
+
+.memoryValues {
+    font-size: var(--mantine-font-size-xs);
+    font-family: var(--mantine-font-family-monospace);
+    color: var(--mantine-color-white-5);
+    font-weight: 600;
+}
+
+.memoryPercent {
+    color: var(--mantine-color-dimmed);
+    font-size: var(--mantine-font-size-xs);
+    font-family: var(--mantine-font-family-monospace);
+}

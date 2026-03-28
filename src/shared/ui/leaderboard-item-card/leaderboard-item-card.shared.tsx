@@ -8,18 +8,29 @@ import styles from './leaderboard-item-card.module.css'
 interface IProps {
     color: string
     countryFlag?: ReactNode
-    maxTraffic: number
+    formatValue?: (value: number) => string
     name: string
+    onItemClick?: () => void
     total: number
+    uuid?: string
+    value: number
 }
 
 export const LeaderboardItemCardShared = (props: IProps) => {
-    const { color, countryFlag, maxTraffic, name, total } = props
+    const { color, countryFlag, formatValue, value, name, total, uuid, onItemClick } = props
 
-    const width = (total / maxTraffic) * 100
+    const width = (total / value) * 100
 
     return (
-        <Box bdrs="sm" bg="var(--mantine-color-default-hover)" key={name} p="xs" pos="relative">
+        <Box
+            bdrs="sm"
+            bg="var(--mantine-color-default-hover)"
+            className={`${styles.item} ${onItemClick ? styles.clickable : ''}`}
+            key={uuid ?? name}
+            onClick={onItemClick}
+            p="xs"
+            pos="relative"
+        >
             <Box
                 bdrs="sm"
                 className={styles.itemBackground}
@@ -45,7 +56,7 @@ export const LeaderboardItemCardShared = (props: IProps) => {
                     </Text>
                 </Group>
                 <Text fw={600} size="sm" style={{ flexShrink: 0 }}>
-                    {prettyBytesToAnyUtil(total)}
+                    {formatValue ? formatValue(total) : prettyBytesToAnyUtil(total)}
                 </Text>
             </Group>
         </Box>

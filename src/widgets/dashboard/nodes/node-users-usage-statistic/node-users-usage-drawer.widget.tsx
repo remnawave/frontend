@@ -103,8 +103,9 @@ export const NodeUsersUsageDrawer = () => {
             size="600px"
             title={
                 <BaseOverlayHeader
+                    iconColor="teal"
                     IconComponent={TbChartArcs}
-                    iconVariant="gradient-teal"
+                    iconVariant="soft"
                     title={t('node-users-usage-drawer.widget.user-traffic-statistics')}
                 />
             }
@@ -205,7 +206,7 @@ export const NodeUsersUsageDrawer = () => {
                         loading={isRefetching}
                         onClick={() => refetch()}
                         size="input-md"
-                        variant="light"
+                        variant="soft"
                     >
                         <TbRefresh size="24px" />
                     </ActionIcon>

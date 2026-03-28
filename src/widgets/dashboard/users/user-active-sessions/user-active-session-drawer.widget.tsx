@@ -2,6 +2,9 @@ import {
     TbAlertTriangle,
     TbBrandDocker,
     TbClock,
+    TbClockCheck,
+    TbClockExclamation,
+    TbClockPause,
     TbExternalLink,
     TbHourglass,
     TbRadar,
@@ -19,6 +22,7 @@ import {
     Center,
     Drawer,
     Group,
+    Paper,
     Progress,
     Stack,
     Text,
@@ -26,13 +30,14 @@ import {
     Tooltip,
     Transition
 } from '@mantine/core'
-import { useCallback, useEffect, useState } from 'react'
 import { CodeHighlight } from '@mantine/code-highlight'
 import { notifications } from '@mantine/notifications'
 import { Trans, useTranslation } from 'react-i18next'
+import { useEffect, useMemo, useState } from 'react'
 import { PiEmptyDuotone } from 'react-icons/pi'
 
 import { useDropConnections, useFetchIps, useFetchIpsResult } from '@shared/api/hooks'
+import { formatRelativeDateUtil, formatTimeUtil } from '@shared/utils/time-utils'
 import { CopyableFieldShared } from '@shared/ui/copyable-field/copyable-field'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { LottieGlobeShared } from '@shared/ui/lotties/globe'
@@ -52,9 +57,17 @@ const DOCKER_SNIPPET = `
 
 const HIGHLIGHT_SPAN = <Text c="white" component="span" fw={600} size="sm" />
 
+const getLastSeenIndicator = (lastSeen: Date | string) => {
+    const diffMs = Date.now() - new Date(lastSeen).getTime()
+    const diffMinutes = diffMs / 60_000
+    if (diffMinutes <= 5) return { color: 'var(--mantine-color-teal-6)', Icon: TbClockCheck }
+    if (diffMinutes <= 60) return { color: 'var(--mantine-color-yellow-6)', Icon: TbClockPause }
+    return { color: 'var(--mantine-color-red-6)', Icon: TbClockExclamation }
+}
+
 export const UserActiveSessionDrawerWidget = (props: IProps) => {
     const { userUuid, opened, onClose } = props
-    const { t } = useTranslation()
+    const { t, i18n } = useTranslation()
 
     const [jobId, setJobId] = useState<null | string>(null)
     const [isCompleted, setIsCompleted] = useState(false)
@@ -86,45 +99,121 @@ export const UserActiveSessionDrawerWidget = (props: IProps) => {
     const shouldPoll = opened && !!jobId && !isCompleted && !isFailed
 
     const { data: userIpsResult } = useFetchIpsResult({
-        route: {
-            jobId: jobId ?? ''
-        },
+        route: { jobId: jobId ?? '' },
         rQueryParams: {
             enabled: shouldPoll,
             refetchInterval: shouldPoll ? 1000 : false
         }
     })
 
-    useEffect(() => {
-        if (!userIpsResult) return undefined
+    const [prevResult, setPrevResult] = useState(userIpsResult)
+
+    if (prevResult !== userIpsResult) {
+        setPrevResult(userIpsResult)
         if (
-            userIpsResult.isFailed ||
-            (userIpsResult.isCompleted && !userIpsResult.result?.success)
+            userIpsResult &&
+            (userIpsResult.isFailed ||
+                (userIpsResult.isCompleted && !userIpsResult.result?.success))
         ) {
             setIsFailed(true)
-            return undefined
         }
-        if (userIpsResult.isCompleted) {
-            const timer = setTimeout(() => setIsCompleted(true), 500)
-            return () => clearTimeout(timer)
-        }
-        return undefined
-    }, [userIpsResult])
+    }
 
-    const handleGetData = useCallback(() => {
+    useEffect(() => {
+        if (!userIpsResult?.isCompleted || isFailed) return undefined
+        const timer = setTimeout(() => setIsCompleted(true), 500)
+        return () => clearTimeout(timer)
+    }, [userIpsResult?.isCompleted, isFailed])
+
+    const ipStats = useMemo(() => {
+        const nodes = userIpsResult?.result?.nodes
+        if (!nodes) return null
+
+        const now = new Date().getTime()
+        let active = 0
+        let idle = 0
+        let stale = 0
+
+        for (const node of nodes) {
+            for (const ip of node.ips) {
+                const diffMinutes = (now - new Date(ip.lastSeen).getTime()) / 60_000
+                if (diffMinutes <= 5) active++
+                else if (diffMinutes <= 60) idle++
+                else stale++
+            }
+        }
+
+        return { active, idle, stale, total: active + idle + stale }
+    }, [userIpsResult?.result?.nodes])
+
+    const renderIpStatsCard = () => {
+        if (!ipStats) return null
+
+        return (
+            <SectionCard.Root gap="sm">
+                <SectionCard.Section>
+                    <Group gap="xs" grow>
+                        <Paper
+                            bd="1px solid rgba(45, 212, 191, 0.2)"
+                            bg="rgba(45, 212, 191, 0.08)"
+                            p="xs"
+                            radius="md"
+                        >
+                            <Group gap={4} justify="center">
+                                <TbClockCheck color="var(--mantine-color-teal-6)" size={18} />
+                                <Text c="teal.6" fw={700} size="sm">
+                                    {formatInt(ipStats.active)}
+                                </Text>
+                            </Group>
+                        </Paper>
+
+                        <Paper
+                            bd="1px solid rgba(251, 191, 36, 0.2)"
+                            bg="rgba(251, 191, 36, 0.08)"
+                            p="xs"
+                            radius="md"
+                        >
+                            <Group gap={4} justify="center">
+                                <TbClockPause color="var(--mantine-color-yellow-6)" size={18} />
+                                <Text c="yellow.6" fw={700} size="sm">
+                                    {formatInt(ipStats.idle)}
+                                </Text>
+                            </Group>
+                        </Paper>
+
+                        <Paper
+                            bd="1px solid rgba(239, 68, 68, 0.2)"
+                            bg="rgba(239, 68, 68, 0.08)"
+                            p="xs"
+                            radius="md"
+                        >
+                            <Group gap={4} justify="center">
+                                <TbClockExclamation color="var(--mantine-color-red-6)" size={18} />
+                                <Text c="red.6" fw={700} size="sm">
+                                    {formatInt(ipStats.stale)}
+                                </Text>
+                            </Group>
+                        </Paper>
+                    </Group>
+                </SectionCard.Section>
+            </SectionCard.Root>
+        )
+    }
+
+    const handleGetData = () => {
         fetchIps({})
-    }, [userUuid, fetchIps])
+    }
 
-    const handleClearResults = useCallback(() => {
+    const handleClearResults = () => {
         setJobId(null)
         setIsCompleted(false)
-        setIsFailed(false)
-    }, [])
+    }
 
-    const handleClose = useCallback(() => {
+    const handleClose = () => {
         handleClearResults()
         onClose()
-    }, [onClose, handleClearResults])
+        setIsFailed(false)
+    }
 
     const isIdle = !jobId && !isCompleted && !isFetchingIps
     const isInProgress = isFetchingIps || (!!jobId && !isCompleted && !isFailed)
@@ -134,8 +223,9 @@ export const UserActiveSessionDrawerWidget = (props: IProps) => {
             <SectionCard.Section>
                 <Group align="flex-center" justify="space-between">
                     <BaseOverlayHeader
+                        iconColor="teal"
                         IconComponent={TbRadar}
-                        iconVariant="gradient-teal"
+                        iconVariant="soft"
                         subtitle={t('active-sessions-drawer.widget.active-ips-across-nodes')}
                         title={formatInt(totalIps)}
                     />
@@ -143,9 +233,10 @@ export const UserActiveSessionDrawerWidget = (props: IProps) => {
                     <Group gap="xs">
                         <Tooltip label={t('active-sessions-drawer.widget.clear')}>
                             <ActionIcon
+                                color="red"
                                 onClick={handleClearResults}
                                 size="lg"
-                                variant="gradient-red"
+                                variant="soft"
                             >
                                 <TbTrash size={20} />
                             </ActionIcon>
@@ -157,7 +248,7 @@ export const UserActiveSessionDrawerWidget = (props: IProps) => {
                             )}
                         >
                             <ActionIcon
-                                color="red"
+                                color="orange"
                                 onClick={() =>
                                     dropConnections({
                                         variables: {
@@ -172,7 +263,7 @@ export const UserActiveSessionDrawerWidget = (props: IProps) => {
                                     })
                                 }
                                 size="lg"
-                                variant="gradient-orange"
+                                variant="soft"
                             >
                                 <TbUnlink size={20} />
                             </ActionIcon>
@@ -180,12 +271,13 @@ export const UserActiveSessionDrawerWidget = (props: IProps) => {
 
                         <Tooltip label={t('common.refresh')}>
                             <ActionIcon
+                                color="indigo"
                                 onClick={() => {
                                     handleClearResults()
                                     handleGetData()
                                 }}
                                 size="lg"
-                                variant="gradient-indigo"
+                                variant="soft"
                             >
                                 <TbRefresh size={20} />
                             </ActionIcon>
@@ -197,8 +289,9 @@ export const UserActiveSessionDrawerWidget = (props: IProps) => {
             {distinctIps > 0 && (
                 <SectionCard.Section>
                     <BaseOverlayHeader
+                        iconColor="yellow"
                         IconComponent={TbAlertTriangle}
-                        iconVariant="gradient-yellow"
+                        iconVariant="soft"
                         subtitle={t('active-sessions-drawer.widget.distinct-ips')}
                         title={formatInt(distinctIps)}
                     />
@@ -211,28 +304,29 @@ export const UserActiveSessionDrawerWidget = (props: IProps) => {
         <SectionCard.Root gap="md">
             <SectionCard.Section>
                 <BaseOverlayHeader
+                    iconColor="yellow"
                     IconComponent={TbAlertTriangle}
-                    iconVariant="gradient-yellow"
+                    iconVariant="soft"
                     title={t('active-sessions-drawer.widget.requirements')}
                 />
             </SectionCard.Section>
 
             <Group gap="sm" wrap="nowrap">
-                <ThemeIcon size="md" variant="gradient-teal">
+                <ThemeIcon color="teal" size="md" variant="soft">
                     <TbTag size={16} />
                 </ThemeIcon>
                 <Text c="dimmed" size="sm">
                     <Trans
                         components={{ highlight: HIGHLIGHT_SPAN }}
                         i18nKey="active-sessions-drawer.widget.warning-version"
-                        values={{ version: '2.6.0' }}
+                        values={{ version: '2.7.0' }}
                     />
                 </Text>
             </Group>
 
             <Stack gap="xs">
                 <Group gap="sm" wrap="nowrap">
-                    <ThemeIcon size="md" variant="gradient-violet">
+                    <ThemeIcon color="violet" size="md" variant="soft">
                         <TbBrandDocker size={16} />
                     </ThemeIcon>
                     <Text c="dimmed" size="sm">
@@ -255,7 +349,7 @@ export const UserActiveSessionDrawerWidget = (props: IProps) => {
             </Stack>
 
             <Group gap="sm" wrap="nowrap">
-                <ThemeIcon size="md" variant="gradient-cyan">
+                <ThemeIcon color="cyan" size="md" variant="soft">
                     <TbClock size={16} />
                 </ThemeIcon>
                 <Text c="dimmed" size="sm">
@@ -267,7 +361,7 @@ export const UserActiveSessionDrawerWidget = (props: IProps) => {
             </Group>
 
             <Group gap="sm" wrap="nowrap">
-                <ThemeIcon size="md" variant="gradient-orange">
+                <ThemeIcon color="orange" size="md" variant="soft">
                     <TbHourglass size={16} />
                 </ThemeIcon>
                 <Text c="dimmed" size="sm">
@@ -337,7 +431,7 @@ export const UserActiveSessionDrawerWidget = (props: IProps) => {
                 <SectionCard.Section>
                     <Center h="230">
                         <Stack align="center" gap="xs">
-                            <ThemeIcon radius="md" size="xl" variant="gradient-red">
+                            <ThemeIcon color="red" radius="md" size="xl" variant="soft">
                                 <TbAlertTriangle size={24} />
                             </ThemeIcon>
                             <Text c="dimmed" size="md">
@@ -349,7 +443,7 @@ export const UserActiveSessionDrawerWidget = (props: IProps) => {
                                 leftSection={<TbRefresh size={20} />}
                                 onClick={handleClearResults}
                                 size="md"
-                                variant="light"
+                                variant="soft"
                             >
                                 {t('active-sessions-drawer.widget.try-again')}
                             </Button>
@@ -363,13 +457,15 @@ export const UserActiveSessionDrawerWidget = (props: IProps) => {
     const renderResults = () => {
         const nodes = userIpsResult?.result?.nodes
 
-        const allIps = nodes?.flatMap((node) => node.ips) ?? []
+        const allIps = nodes?.flatMap((node) => node.ips.map((item) => item.ip)) ?? []
         const totalIps = allIps.length
         const distinctIps = new Set(allIps).size
 
         return (
             <Stack gap="md">
                 {renderSummaryCard(totalIps, distinctIps)}
+
+                {renderIpStatsCard()}
 
                 {nodes && nodes.length === 0 && (
                     <SectionCard.Root gap="sm">
@@ -397,8 +493,9 @@ export const UserActiveSessionDrawerWidget = (props: IProps) => {
                                 <Group gap="xs" justify="space-between">
                                     <BaseOverlayHeader
                                         countryCode={node.countryCode}
+                                        iconColor="blue"
                                         IconComponent={TbServer}
-                                        iconVariant="gradient-blue"
+                                        iconVariant="soft"
                                         title={node.nodeName}
                                     />
                                     <Group gap="xs">
@@ -411,7 +508,7 @@ export const UserActiveSessionDrawerWidget = (props: IProps) => {
                                             )}
                                         >
                                             <ActionIcon
-                                                color="red"
+                                                color="orange"
                                                 onClick={() =>
                                                     dropConnections({
                                                         variables: {
@@ -427,7 +524,7 @@ export const UserActiveSessionDrawerWidget = (props: IProps) => {
                                                     })
                                                 }
                                                 size="lg"
-                                                variant="gradient-orange"
+                                                variant="soft"
                                             >
                                                 <TbUnlink size={20} />
                                             </ActionIcon>
@@ -449,21 +546,90 @@ export const UserActiveSessionDrawerWidget = (props: IProps) => {
                             )}
 
                             {node.ips.length > 0 &&
-                                node.ips.map((ip) => (
-                                    <Group align="flex-end" gap="xs" key={ip} wrap="nowrap">
+                                node.ips.map((item) => (
+                                    <Group align="center" gap="xs" key={item.ip} wrap="nowrap">
+                                        <ActionIcon
+                                            color="cyan"
+                                            component="a"
+                                            href={`https://ipinfo.io/${item.ip}`}
+                                            rel="noopener noreferrer"
+                                            size="input-sm"
+                                            target="_blank"
+                                            variant="soft"
+                                        >
+                                            <TbExternalLink size={18} />
+                                        </ActionIcon>
+
+                                        <Box style={{ flex: 1 }}>
+                                            <CopyableFieldShared
+                                                leftSection={
+                                                    <Tooltip
+                                                        color="dark.6"
+                                                        label={
+                                                            <Stack gap={2} p={4}>
+                                                                <Text c="white" fw={600} size="xs">
+                                                                    {formatRelativeDateUtil(
+                                                                        item.lastSeen,
+                                                                        t,
+                                                                        i18n.language
+                                                                    )}
+                                                                </Text>
+                                                                <Text
+                                                                    c="dimmed"
+                                                                    ff="monospace"
+                                                                    size="xs"
+                                                                >
+                                                                    {formatTimeUtil({
+                                                                        time: item.lastSeen,
+                                                                        template:
+                                                                            'TIME_FIRST_DATETIME',
+                                                                        language: i18n.language
+                                                                    })}
+                                                                </Text>
+                                                            </Stack>
+                                                        }
+                                                        radius="md"
+                                                        styles={{
+                                                            tooltip: {
+                                                                border: '1px solid var(--mantine-color-dark-4)',
+                                                                backdropFilter: 'blur(8px)'
+                                                            }
+                                                        }}
+                                                    >
+                                                        {(() => {
+                                                            const { color, Icon } =
+                                                                getLastSeenIndicator(item.lastSeen)
+                                                            return (
+                                                                <Box
+                                                                    style={{
+                                                                        display: 'flex',
+                                                                        cursor: 'help',
+                                                                        color
+                                                                    }}
+                                                                >
+                                                                    <Icon size={16} />
+                                                                </Box>
+                                                            )
+                                                        })()}
+                                                    </Tooltip>
+                                                }
+                                                size="sm"
+                                                value={item.ip}
+                                            />
+                                        </Box>
                                         <Tooltip
                                             label={t(
                                                 'user-active-session-drawer.widget.drop-this-connection-on-this-node'
                                             )}
                                         >
                                             <ActionIcon
-                                                color="red"
+                                                color="orange"
                                                 onClick={() =>
                                                     dropConnections({
                                                         variables: {
                                                             dropBy: {
                                                                 by: 'ipAddresses',
-                                                                ipAddresses: [ip]
+                                                                ipAddresses: [item.ip]
                                                             },
                                                             targetNodes: {
                                                                 target: 'specificNodes',
@@ -473,27 +639,11 @@ export const UserActiveSessionDrawerWidget = (props: IProps) => {
                                                     })
                                                 }
                                                 size="lg"
-                                                variant="gradient-orange"
+                                                variant="soft"
                                             >
                                                 <TbUnlink size={20} />
                                             </ActionIcon>
                                         </Tooltip>
-
-                                        <Box style={{ flex: 1 }}>
-                                            <CopyableFieldShared size="sm" value={ip} />
-                                        </Box>
-
-                                        <ActionIcon
-                                            color="cyan"
-                                            component="a"
-                                            href={`https://ipinfo.io/${ip}`}
-                                            rel="noopener noreferrer"
-                                            size="input-sm"
-                                            target="_blank"
-                                            variant="gradient-teal"
-                                        >
-                                            <TbExternalLink size={18} />
-                                        </ActionIcon>
                                     </Group>
                                 ))}
                         </SectionCard.Root>
@@ -538,8 +688,9 @@ export const UserActiveSessionDrawerWidget = (props: IProps) => {
             size="500px"
             title={
                 <BaseOverlayHeader
+                    iconColor="teal"
                     IconComponent={TbRadar}
-                    iconVariant="gradient-teal"
+                    iconVariant="soft"
                     title={t('active-sessions-drawer.widget.title')}
                 />
             }

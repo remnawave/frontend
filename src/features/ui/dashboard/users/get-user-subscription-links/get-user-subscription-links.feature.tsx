@@ -3,6 +3,7 @@ import {
     PiCopy,
     PiEmptyDuotone,
     PiEyeSlashDuotone,
+    PiLinkBreak,
     PiLinkBreakDuotone,
     PiProhibitDuotone,
     PiQrCodeDuotone,
@@ -15,11 +16,11 @@ import {
     CopyButton,
     Drawer,
     Group,
-    Menu,
     Stack,
     Text,
     TextInput,
-    ThemeIcon
+    ThemeIcon,
+    Tooltip
 } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
 import { useTranslation } from 'react-i18next'
@@ -60,8 +61,9 @@ export function GetUserSubscriptionLinksFeature(props: IProps) {
             centered: true,
             title: (
                 <BaseOverlayHeader
+                    iconColor="teal"
                     IconComponent={PiQrCodeDuotone}
-                    iconVariant="gradient-teal"
+                    iconVariant="soft"
                     title={remark}
                 />
             ),
@@ -191,8 +193,9 @@ export function GetUserSubscriptionLinksFeature(props: IProps) {
                 size="md"
                 title={
                     <BaseOverlayHeader
+                        iconColor="teal"
                         IconComponent={PiLinkBreakDuotone}
-                        iconVariant="gradient-teal"
+                        iconVariant="soft"
                         title={t('get-user-subscription-links.feature.connection-keys')}
                     />
                 }
@@ -206,12 +209,11 @@ export function GetUserSubscriptionLinksFeature(props: IProps) {
                 )}
             </Drawer>
 
-            <Menu.Item
-                leftSection={<PiLinkBreakDuotone color="var(--mantine-color-teal-5)" size="16px" />}
-                onClick={handlers.open}
-            >
-                {t('get-user-subscription-links.feature.connection-keys')}
-            </Menu.Item>
+            <Tooltip label={t('get-user-subscription-links.feature.connection-keys')}>
+                <ActionIcon color="teal" onClick={handlers.open} size="lg" variant="soft">
+                    <PiLinkBreak size="22px" />
+                </ActionIcon>
+            </Tooltip>
         </>
     )
 }

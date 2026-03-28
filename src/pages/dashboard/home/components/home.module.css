@@ -40,26 +40,31 @@
 }
 
 .section {
+    --section-delay: 0ms;
     animation: sectionFadeIn 0.4s ease-out both;
+    animation-delay: var(--section-delay);
 }
 
 .section:nth-child(1) {
-    animation-delay: 0ms;
+    --section-delay: 0ms;
 }
 .section:nth-child(2) {
-    animation-delay: 150ms;
+    --section-delay: 150ms;
 }
 .section:nth-child(3) {
-    animation-delay: 300ms;
+    --section-delay: 300ms;
 }
 .section:nth-child(4) {
-    animation-delay: 450ms;
+    --section-delay: 450ms;
 }
 .section:nth-child(5) {
-    animation-delay: 600ms;
+    --section-delay: 600ms;
 }
 .section:nth-child(6) {
-    animation-delay: 750ms;
+    --section-delay: 750ms;
+}
+.section:nth-child(7) {
+    --section-delay: 900ms;
 }
 
 .title {
@@ -72,7 +77,7 @@
 
 .card {
     animation: cardFadeIn 0.25s ease-out both;
-    animation-delay: calc(var(--card-index, 0) * 70ms + 100ms);
+    animation-delay: calc(var(--section-delay, 0ms) + var(--card-index, 0) * 100ms + 200ms);
 }
 
 @media (prefers-reduced-motion: reduce) {

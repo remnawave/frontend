@@ -6,14 +6,12 @@ import {
     MRT_ColumnPinningState,
     MRT_PaginationState,
     MRT_SortingState,
-    MRT_TableOptions,
     MRT_VisibilityState,
     useMantineReactTable
 } from 'mantine-react-table'
 import { TbDeviceAnalytics, TbRefresh, TbRestore } from 'react-icons/tb'
-import { useCallback, useLayoutEffect, useMemo, useState } from 'react'
-import { GetAllHwidDevicesCommand } from '@remnawave/backend-contract'
 import { ActionIcon, ActionIconGroup, Tooltip } from '@mantine/core'
+import { useLayoutEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { PiUserCircle } from 'react-icons/pi'
 
@@ -141,24 +139,17 @@ export function HwidInspectorTableWidget() {
             columnPinning
         },
         enableRowActions: true,
-        renderRowActions: useCallback<
-            Required<
-                MRT_TableOptions<GetAllHwidDevicesCommand.Response['response']['devices'][number]>
-            >['renderRowActions']
-        >(
-            ({ row }) => (
-                <ActionIcon
-                    onClick={async () => {
-                        await userModalActions.setUserUuid(row.original.userUuid)
-                        userModalActions.changeModalState(true)
-                    }}
-                    size="input-sm"
-                    variant="light"
-                >
-                    <PiUserCircle size="1.5rem" />
-                </ActionIcon>
-            ),
-            []
+        renderRowActions: ({ row }) => (
+            <ActionIcon
+                onClick={async () => {
+                    await userModalActions.setUserUuid(row.original.userUuid)
+                    userModalActions.changeModalState(true)
+                }}
+                size="input-sm"
+                variant="light"
+            >
+                <PiUserCircle size="1.5rem" />
+            </ActionIcon>
         ),
 
         getRowId: (originalRow) => `${originalRow.hwid}-${originalRow.userUuid}`

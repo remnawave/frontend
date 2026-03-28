@@ -1,7 +1,6 @@
 import type { editor } from 'monaco-editor'
 
 import { GetSnippetsCommand } from '@remnawave/backend-contract'
-import { Monaco } from '@monaco-editor/react'
 import consola from 'consola/browser'
 import { RefObject } from 'react'
 import dayjs from 'dayjs'
@@ -32,7 +31,7 @@ const replaceSnippetsInArray = (array: any[], snippetsMap: Map<string, unknown>)
 export const ConfigValidationFeature = {
     validate: (
         editorRef: RefObject<editor.IStandaloneCodeEditor | null>,
-        monacoRef: RefObject<Monaco | null>,
+
         setResult: (message: string) => void,
         setIsConfigValid: (isValid: boolean) => void,
         snippetsMap: Map<
@@ -42,7 +41,6 @@ export const ConfigValidationFeature = {
     ) => {
         try {
             if (!editorRef.current) return
-            if (!monacoRef.current) return
 
             const currentValue = editorRef.current.getValue()
 

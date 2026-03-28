@@ -48,9 +48,10 @@ export function BaseTranslationsBlockComponent({ form }: IProps) {
                 <Group justify="space-between">
                     <Group gap="sm" wrap="nowrap">
                         <BaseOverlayHeader
+                            iconColor="violet"
                             IconComponent={IconLanguage}
                             iconSize={20}
-                            iconVariant="gradient-violet"
+                            iconVariant="soft"
                             title="Base Translations"
                             titleOrder={5}
                         />

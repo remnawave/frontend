@@ -103,9 +103,10 @@ export function AppEditorDrawerContent(props: IProps) {
                     <Stack gap="md">
                         <Group gap="sm" justify="space-between">
                             <BaseOverlayHeader
+                                iconColor="cyan"
                                 IconComponent={IconStar}
                                 iconSize={16}
-                                iconVariant="gradient-cyan"
+                                iconVariant="soft"
                                 title={t('app-editor-drawer-content.component.app-settings')}
                                 titleOrder={5}
                             />
@@ -144,9 +145,10 @@ export function AppEditorDrawerContent(props: IProps) {
                 <Card className={styles.sectionCard} p="md" radius="md">
                     <Stack gap="md">
                         <BaseOverlayHeader
+                            iconColor="violet"
                             IconComponent={IconChevronRight}
                             iconSize={16}
-                            iconVariant="gradient-violet"
+                            iconVariant="soft"
                             subtitle={`${app.blocks.length} blocks`}
                             title={t('app-editor-drawer-content.component.blocks')}
                             titleOrder={5}

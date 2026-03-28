@@ -1,7 +1,6 @@
-import Lottie from 'lottie-react'
+import { DotLottieReact } from '@lottiefiles/dotlottie-react'
 import { FC } from 'react'
 
-import lottie from '../../../assets/lotties/checkmark.json'
 import { IProps } from './interfaces/props.interface'
 
 export const LottieCheckmarkShared: FC<IProps> = (props) => {
@@ -9,7 +8,15 @@ export const LottieCheckmarkShared: FC<IProps> = (props) => {
 
     return (
         <div style={{ width, height }}>
-            <Lottie animationData={lottie} autoplay={autoplay} controls loop={loop} />
+            <DotLottieReact
+                autoplay={autoplay}
+                loop={loop}
+                renderConfig={{
+                    autoResize: true,
+                    devicePixelRatio: window.devicePixelRatio || 2
+                }}
+                src="/lotties/checkmark.lottie"
+            />
         </div>
     )
 }

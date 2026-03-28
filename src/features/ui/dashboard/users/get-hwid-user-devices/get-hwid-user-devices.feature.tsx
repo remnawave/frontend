@@ -1,6 +1,6 @@
+import { ActionIcon, Tooltip } from '@mantine/core'
 import { useTranslation } from 'react-i18next'
 import { TbDevices } from 'react-icons/tb'
-import { Menu } from '@mantine/core'
 
 import { MODALS, useModalsStoreOpenWithData } from '@entities/dashboard/modal-store'
 
@@ -13,11 +13,15 @@ export function GetHwidUserDevicesFeature(props: IProps) {
     const openModalWithData = useModalsStoreOpenWithData()
 
     return (
-        <Menu.Item
-            leftSection={<TbDevices color="var(--mantine-color-indigo-5)" size="16px" />}
-            onClick={() => openModalWithData(MODALS.USER_HWID_DEVICES_DRAWER, { userUuid })}
-        >
-            {t('get-hwid-user-devices.feature.hwid-devices')}
-        </Menu.Item>
+        <Tooltip label={t('get-hwid-user-devices.feature.hwid-devices')}>
+            <ActionIcon
+                color="indigo"
+                onClick={() => openModalWithData(MODALS.USER_HWID_DEVICES_DRAWER, { userUuid })}
+                size="lg"
+                variant="soft"
+            >
+                <TbDevices size="22px" />
+            </ActionIcon>
+        </Tooltip>
     )
 }

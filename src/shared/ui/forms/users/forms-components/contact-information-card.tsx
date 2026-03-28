@@ -29,9 +29,10 @@ export function ContactInformationCard<
             <SectionCard.Root>
                 <SectionCard.Section>
                     <BaseOverlayHeader
+                        iconColor="teal"
                         IconComponent={TbMail}
                         iconSize={20}
-                        iconVariant="gradient-teal"
+                        iconVariant="soft"
                         title={t('contact-information-card.contact-information')}
                         titleOrder={5}
                     />

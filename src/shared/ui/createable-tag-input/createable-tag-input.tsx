@@ -5,7 +5,6 @@ import { useEffect, useState } from 'react'
 import type { IProps } from './interfaces/props.interface'
 
 export function CreateableTagInputShared(props: IProps) {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { tags, value, onChange, defaultValue, ...restProps } = props
     const combobox = useCombobox({
         onDropdownClose: () => combobox.resetSelectedOption()

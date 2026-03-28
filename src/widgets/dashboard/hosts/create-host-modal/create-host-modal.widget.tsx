@@ -169,8 +169,9 @@ export const CreateHostModalWidget = () => {
             size="lg"
             title={
                 <BaseOverlayHeader
+                    iconColor="teal"
                     IconComponent={PiListChecks}
-                    iconVariant="gradient-teal"
+                    iconVariant="soft"
                     title={t('create-host-modal.widget.new-host')}
                 />
             }

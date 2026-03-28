@@ -1,10 +1,11 @@
 import { Card, CardProps, Divider, MantineSpacing, Stack } from '@mantine/core'
-import { Children, ReactNode } from 'react'
+import { Children, ReactNode, RefObject } from 'react'
 
 interface ISectionCardRootProps extends Omit<CardProps, 'children'> {
     children: ReactNode
     dividerOpacity?: number
     gap?: MantineSpacing
+    ref?: RefObject<HTMLDivElement | null>
 }
 
 export function SectionCardRoot({
@@ -14,6 +15,7 @@ export function SectionCardRoot({
     p = 'md',
     radius = 'md',
     style,
+    ref,
     ...props
 }: ISectionCardRootProps) {
     const childArray = Children.toArray(children).filter(Boolean)
@@ -32,6 +34,7 @@ export function SectionCardRoot({
         <Card
             p={p}
             radius={radius}
+            ref={ref}
             style={{
                 background: 'rgba(255, 255, 255, 0.02)',
                 border: '1px solid rgba(255, 255, 255, 0.08)',

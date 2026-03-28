@@ -20,31 +20,36 @@ export const getUsersMetrics = (
             value: formatInt(users.totalUsers) ?? 0,
             IconComponent: PiUsersDuotone,
             title: t('users-metrics.widget.total'),
-            iconVariant: 'gradient-blue'
+            iconVariant: 'soft',
+            iconColor: 'blue'
         },
         {
             value: formatInt(users.statusCounts.ACTIVE) ?? 0,
             title: 'Active',
             IconComponent: PiPulseDuotone,
-            iconVariant: 'gradient-teal'
+            iconVariant: 'soft',
+            iconColor: 'teal'
         },
         {
             value: formatInt(users.statusCounts.EXPIRED) ?? 0,
             IconComponent: PiClockUserDuotone,
             title: 'Expired',
-            iconVariant: 'gradient-red'
+            iconVariant: 'soft',
+            iconColor: 'red'
         },
         {
             value: formatInt(users.statusCounts.LIMITED) ?? 0,
             IconComponent: PiClockCountdownDuotone,
             title: 'Limited',
-            iconVariant: 'gradient-orange'
+            iconVariant: 'soft',
+            iconColor: 'orange'
         },
         {
             value: formatInt(users.statusCounts.DISABLED) ?? 0,
             IconComponent: PiProhibitDuotone,
             title: 'Disabled',
-            iconVariant: 'gradient-gray'
+            iconVariant: 'soft',
+            iconColor: 'gray'
         }
     ]
 }

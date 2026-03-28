@@ -47,8 +47,9 @@ export function BaseTranslationsDrawer(props: IProps) {
             size="md"
             title={
                 <BaseOverlayHeader
+                    iconColor="violet"
                     IconComponent={IconLanguage}
-                    iconVariant="gradient-violet"
+                    iconVariant="soft"
                     subtitle={t('base-translations-drawer.component.completed', {
                         count: filledCount,
                         total: totalKeys
