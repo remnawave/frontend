@@ -147,7 +147,6 @@ export function ConfigEditorWidget(props: IProps) {
                     onChange={() => {
                         ConfigValidationFeature.validate(
                             editorRef,
-
                             setResult,
                             setIsConfigValid,
                             snippetMap
