@@ -394,6 +394,7 @@
         "please-ensure-you-provide-a-valid-json-mux-object": "Please ensure you provide a valid JSON MUX object.",
         "for-more-information-refer-to": "For more information, refer to",
         "xtls-documentation": "XTLS documentation",
+        "final-mask-description": "The finalMask override allows you to fine-tune the finalMask in cases where the server-side and client-side finalMask configurations need to differ.<br/><br/>FinalMask will only be applied to Xray-JSON and Base64 client output formats.<br/><br/>Make sure to review the <anchor>Xray documentation</anchor>.",
         "paste-default-mux-params": "Paste default Mux Params",
         "please-ensure-you-provide-a-valid-json-sockopt-object": "Please ensure you provide a valid JSON Sockopt object.",
         "paste-default-sockopt-params": "Paste default Sockopt Params",

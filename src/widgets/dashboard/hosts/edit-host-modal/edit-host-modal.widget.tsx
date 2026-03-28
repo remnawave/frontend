@@ -23,7 +23,6 @@ import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { BaseHostForm } from '@shared/ui/forms/hosts/base-host-form'
 import { cloneString } from '@shared/utils/misc/clone-string'
 import { queryClient } from '@shared/api'
-import {} from '@entities/dashboard'
 
 export const EditHostModalWidget = memo(() => {
     const { t } = useTranslation()
@@ -88,6 +87,7 @@ export const EditHostModalWidget = memo(() => {
             let xHttpExtraParamsParsed: null | object | string
             let muxParamsParsed: null | object | string
             let sockoptParamsParsed: null | object | string
+            let finalMaskParsed: null | object | string
 
             if (typeof host.xHttpExtraParams === 'object' && host.xHttpExtraParams !== null) {
                 xHttpExtraParamsParsed = JSON.stringify(host.xHttpExtraParams, null, 2)
@@ -105,6 +105,12 @@ export const EditHostModalWidget = memo(() => {
                 sockoptParamsParsed = JSON.stringify(host.sockoptParams, null, 2)
             } else {
                 sockoptParamsParsed = ''
+            }
+
+            if (typeof host.finalMask === 'object' && host.finalMask !== null) {
+                finalMaskParsed = JSON.stringify(host.finalMask, null, 2)
+            } else {
+                finalMaskParsed = ''
             }
 
             form.setValues({
@@ -127,6 +133,7 @@ export const EditHostModalWidget = memo(() => {
                 xHttpExtraParams: xHttpExtraParamsParsed,
                 muxParams: muxParamsParsed,
                 sockoptParams: sockoptParamsParsed,
+                finalMask: finalMaskParsed,
                 tag: host.tag ?? undefined,
                 isHidden: host.isHidden,
                 overrideSniFromAddress: host.overrideSniFromAddress,
@@ -193,6 +200,7 @@ export const EditHostModalWidget = memo(() => {
         let xHttpExtraParams
         let muxParams
         let sockoptParams
+        let finalMask
 
         try {
             if (values.xHttpExtraParams === '') {
@@ -230,6 +238,18 @@ export const EditHostModalWidget = memo(() => {
             // silence
         }
 
+        try {
+            if (values.finalMask === '') {
+                finalMask = null
+            } else {
+                finalMask = JSON.parse(values.finalMask as unknown as string)
+            }
+        } catch (error) {
+            consola.error(error)
+            finalMask = null
+            // silence
+        }
+
         updateHost({
             variables: {
                 ...values,
@@ -238,6 +258,7 @@ export const EditHostModalWidget = memo(() => {
                 xHttpExtraParams,
                 muxParams,
                 sockoptParams,
+                finalMask,
                 tag: values.tag === '' ? null : values.tag
             }
         })
@@ -286,7 +307,8 @@ export const EditHostModalWidget = memo(() => {
                 allowInsecure: host.allowInsecure ?? undefined,
                 nodes: host.nodes ?? undefined,
                 xrayJsonTemplateUuid: host.xrayJsonTemplateUuid ?? undefined,
-                excludedInternalSquads: host.excludedInternalSquads ?? undefined
+                excludedInternalSquads: host.excludedInternalSquads ?? undefined,
+                finalMask: host.finalMask ?? undefined
             }
         })
     }

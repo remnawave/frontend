@@ -45,6 +45,7 @@ import {
     TbCloudNetwork,
     TbEye,
     TbFileDescription,
+    TbMask,
     TbServer2
 } from 'react-icons/tb'
 import { HiQuestionMarkCircle } from 'react-icons/hi'
@@ -73,6 +74,7 @@ import { handleFormErrors } from '@shared/utils/misc'
 import { XrayLogo } from '@shared/ui/logos/xray-logo'
 import { SectionCard } from '@shared/ui/section-card'
 
+import { FinalMaskDrawer } from './final-mask.drawer'
 import classes from './HostTabs.module.css'
 import { IProps } from './interfaces'
 
@@ -124,6 +126,8 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
     const [muxParamsOpened, { open: openMuxParams, close: closeMuxParams }] = useDisclosure(false)
     const [sockoptParamsOpened, { open: openSockoptParams, close: closeSockoptParams }] =
         useDisclosure(false)
+
+    const [finalMaskOpened, { open: openFinalMask, close: closeFinalMask }] = useDisclosure(false)
 
     const securityLayerLabels = {
         [SECURITY_LAYERS.TLS]: t('base-host-form.tls-transport-layer-security'),
@@ -927,25 +931,40 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
                                             w="100%"
                                         >
                                             <Button
+                                                color="shaded-gray"
                                                 disabled={isXhttpExtraButtonDisabled()}
                                                 leftSection={<PiPencilDuotone />}
                                                 onClick={open}
+                                                variant="soft"
                                             >
                                                 xHTTP
                                             </Button>
 
                                             <Button
+                                                color="gray"
                                                 leftSection={<TbCloudNetwork />}
                                                 onClick={openMuxParams}
+                                                variant="soft"
                                             >
                                                 Mux
                                             </Button>
 
                                             <Button
+                                                color="gray"
                                                 leftSection={<PiNetwork />}
                                                 onClick={openSockoptParams}
+                                                variant="soft"
                                             >
                                                 SockOpt
+                                            </Button>
+
+                                            <Button
+                                                color="gray"
+                                                leftSection={<TbMask />}
+                                                onClick={openFinalMask}
+                                                variant="soft"
+                                            >
+                                                Final Mask
                                             </Button>
                                         </Group>
                                     </SectionCard.Section>
@@ -1301,6 +1320,8 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
                     <Button onClick={closeSockoptParams}>{t('common.close')}</Button>
                 </Stack>
             </Drawer>
+
+            <FinalMaskDrawer close={closeFinalMask} form={form} opened={finalMaskOpened} />
         </form>
     )
 }
