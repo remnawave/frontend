@@ -15,6 +15,7 @@ type IProps = {
     themeIconProps?: ThemeIconProps
     title: string
     titleOrder?: TitleProps['order']
+    truncateTitle?: boolean
     withCopy?: boolean
 }
 
@@ -31,13 +32,14 @@ export const BaseOverlayHeader = (props: IProps) => {
         titleOrder = 4,
         withCopy = false,
         hideIcon = false,
-        icon
+        icon,
+        truncateTitle = false
     } = props
 
     const { copy } = useClipboard()
 
     return (
-        <Group gap="sm" wrap="nowrap">
+        <Group gap="sm" style={truncateTitle ? { minWidth: 0 } : undefined} wrap="nowrap">
             {!hideIcon && (
                 <ThemeIcon color={iconColor} size="lg" variant={iconVariant} {...themeIconProps}>
                     <IconComponent size={iconSize} />
@@ -50,13 +52,18 @@ export const BaseOverlayHeader = (props: IProps) => {
                 <ReactCountryFlag countryCode={countryCode} style={{ fontSize: '1.5em' }} />
             )}
 
-            <Stack gap="0">
+            <Stack gap="0" style={truncateTitle ? { overflow: 'hidden' } : undefined}>
                 <Title
                     c="white"
                     onClick={() => withCopy && copy(title)}
                     order={titleOrder}
                     style={{
-                        cursor: withCopy ? 'copy' : 'default'
+                        cursor: withCopy ? 'copy' : 'default',
+                        ...(truncateTitle && {
+                            overflow: 'hidden',
+                            textOverflow: 'ellipsis',
+                            whiteSpace: 'nowrap'
+                        })
                     }}
                 >
                     {title}

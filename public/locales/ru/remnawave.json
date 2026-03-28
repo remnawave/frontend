@@ -781,7 +781,7 @@
             "requirements": "Условия",
             "warning-activity": "IP адрес будет показан, когда <highlight>Xray-Core</highlight> считает подключение <highlight>еще действительным</highlight>. Это может привести к отображению IP адресов, которые в настоящий момент не подключены. Используйте значок <highlight>часов</highlight> для отслеживания последней активности данного IP.",
             "warning-version": "Версия Remnawave Node <highlight>{{version}}</highlight> или выше",
-            "warning-docker": "Добавьте эти строки к <highlight>docker-compose.yml</highlight> Remnawave Node (/opt/remnanode)",
+            "warning-docker": "</highlight>Добавьте эти строки к <highlight>docker-compose.yml</highlight> Remnawave Node (/opt/remnanode)",
             "warning-patience": "Получение данных может занять некоторое время, не закрывайте это окно!",
             "warning-n-plus-one": "<highlight>Пожалуйста, обратите внимание</highlight>: данный запрос выполняет <highlight>N+1</highlight> операциий к gRPC API <highlight>Xray-Core</highlight> так как API не предоставляет методов для массового получения данных. <highlight>N</highlight> — количество пользователей онлайн на данной ноде.",
             "get-data": "Получить данные",
@@ -2044,7 +2044,7 @@
     },
     "torrent-blocker-reports-table": {
         "widget": {
-            "truncate-reports": "Репорты по убыванию",
+            "truncate-reports": "Очистить список",
             "truncate-reports-description": "Все репорты Torrent Blocker будут удалены навсегда."
         }
     },
@@ -2115,21 +2115,21 @@
     },
     "mobile-stats": {
         "widget": {
-            "billing-nodes": "Billing nodes",
-            "upcoming": "Upcoming",
-            "per-month": "Per month",
-            "total-spent": "Total spent"
+            "billing-nodes": "Биллинг нод",
+            "upcoming": "Предстоящие",
+            "per-month": "За месяц",
+            "total-spent": "Всего потрачено"
         }
     },
     "mobile-providers-list": {
         "widget": {
-            "invoices": "Invoices"
+            "invoices": "Счета"
         }
     },
     "mobile-infra-billing": {
         "widget": {
-            "history": "History",
-            "providers": "Providers"
+            "history": "История",
+            "providers": "Провайдеры"
         }
     }
 }
