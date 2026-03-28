@@ -2,9 +2,8 @@ import { ExternalSquadHostOverridesSchema } from '@remnawave/backend-contract'
 import { ActionIcon, HoverCard, px, Stack, Text } from '@mantine/core'
 import { PiIdentificationBadge } from 'react-icons/pi'
 import { HiQuestionMarkCircle } from 'react-icons/hi'
+import { TbFileDescription } from 'react-icons/tb'
 import { TFunction } from 'i18next'
-
-import { HappLogo } from '@shared/ui/logos'
 
 const hoverCard = (text: string) => {
     return (
@@ -42,7 +41,7 @@ export function resolveHostFormFields(
         case 'serverDescription':
             return {
                 label: t('base-host-form.server-description-header'),
-                leftSection: <HappLogo size={20} />,
+                leftSection: <TbFileDescription size={20} />,
                 inputType: 'string'
             }
 
