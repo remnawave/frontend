@@ -78,15 +78,30 @@ export const SessionsExplorerCard = memo(
         return (
             <SectionCard.Root dividerOpacity={0} gap="xs">
                 <SectionCard.Section>
-                    <Group gap="xs" justify="space-between">
+                    <Group gap="xs" justify="space-between" wrap="nowrap">
                         <BaseOverlayHeader
-                            iconColor="blue"
+                            hideIcon
+                            icon={
+                                <Tooltip label={t('node-active-session.item.widget.view-user')}>
+                                    <ActionIcon
+                                        color="cyan"
+                                        loading={isLoading}
+                                        onClick={handleViewUser}
+                                        size="lg"
+                                        variant="soft"
+                                    >
+                                        <PiUserCircle size={20} />
+                                    </ActionIcon>
+                                </Tooltip>
+                            }
                             IconComponent={TbId}
                             iconVariant="soft"
                             title={user.userId}
+                            titleOrder={5}
+                            truncateTitle
                         />
 
-                        <Group gap="xs">
+                        <Group gap="xs" style={{ flexShrink: 0 }} wrap="nowrap">
                             <Tooltip label={t('sessions-explorer.widget.unique-ips')}>
                                 <Badge
                                     color={getIpCountColor(
@@ -110,18 +125,6 @@ export const SessionsExplorerCard = memo(
                                 >
                                     {user.totalIps}
                                 </Badge>
-                            </Tooltip>
-
-                            <Tooltip label={t('node-active-session.item.widget.view-user')}>
-                                <ActionIcon
-                                    color="cyan"
-                                    loading={isLoading}
-                                    onClick={handleViewUser}
-                                    size="lg"
-                                    variant="soft"
-                                >
-                                    <PiUserCircle size={20} />
-                                </ActionIcon>
                             </Tooltip>
                         </Group>
                     </Group>
