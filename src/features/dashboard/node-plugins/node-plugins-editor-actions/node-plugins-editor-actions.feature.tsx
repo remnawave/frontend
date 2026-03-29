@@ -61,7 +61,6 @@ export function NodePluginsEditorActionsFeature(props: Props) {
                 })
 
                 setIsNodePluginValid(true)
-                setHasUnsavedChanges(false)
 
                 const newValue = JSON.stringify(updatedNodePlugin.pluginConfig, null, 2)
 
@@ -74,6 +73,8 @@ export function NodePluginsEditorActionsFeature(props: Props) {
                     QueryKeys.nodePlugins.getNodePlugin({ uuid: pluginUuid }).queryKey,
                     updatedNodePlugin
                 )
+
+                setHasUnsavedChanges(false)
             },
             onError: (error) => {
                 setIsNodePluginValid(false)

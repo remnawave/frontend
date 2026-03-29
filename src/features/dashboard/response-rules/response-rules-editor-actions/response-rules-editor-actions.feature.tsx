@@ -69,7 +69,6 @@ export function ResponseRulesEditorActionsFeature(props: Props) {
                     })
 
                     setIsResponseRulesValid(true)
-                    setHasUnsavedChanges(false)
 
                     const newValue = JSON.stringify(updatedResponseRules.responseRules, null, 2)
 
@@ -82,6 +81,8 @@ export function ResponseRulesEditorActionsFeature(props: Props) {
                         QueryKeys.subscriptionSettings.getSubscriptionSettings.queryKey,
                         updatedResponseRules
                     )
+
+                    setHasUnsavedChanges(false)
                 },
                 onError: (error) => {
                     setIsResponseRulesValid(false)

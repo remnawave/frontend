@@ -21,7 +21,7 @@ interface IProps {
 }
 
 const HEADER_NAME_REGEX = /^[!#$%&'*+\-.0-9A-Z^_`a-z|~]+$/
-const HEADER_VALUE_REGEX = /^[\x21-\x7E]([\x20-\x7E]*[\x21-\x7E])?$/
+const HEADER_VALUE_REGEX = /^$|^[\x21-\x7E]([\x20-\x7E]*[\x21-\x7E])?$/
 
 export const ExternalSquadsResponseHeadersTabWidget = (props: IProps) => {
     const { externalSquad, isOpen } = props

@@ -66,7 +66,6 @@ export function ConfigEditorActionsFeature(props: Props) {
                 })
 
                 setIsConfigValid(true)
-                setHasUnsavedChanges(false)
 
                 const newValue = JSON.stringify(updatedConfigProfile.config, null, 2)
 
@@ -81,6 +80,8 @@ export function ConfigEditorActionsFeature(props: Props) {
                     }).queryKey,
                     updatedConfigProfile
                 )
+
+                setHasUnsavedChanges(false)
             },
             onError: (error) => {
                 setIsConfigValid(false)

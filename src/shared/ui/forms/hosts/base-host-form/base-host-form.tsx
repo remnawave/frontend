@@ -40,7 +40,14 @@ import {
     SUBSCRIPTION_TEMPLATE_TYPE,
     UpdateHostCommand
 } from '@remnawave/backend-contract'
-import { TbCirclesRelation, TbCloudNetwork, TbEye, TbServer2 } from 'react-icons/tb'
+import {
+    TbCirclesRelation,
+    TbCloudNetwork,
+    TbEye,
+    TbFileDescription,
+    TbMask,
+    TbServer2
+} from 'react-icons/tb'
 import { HiQuestionMarkCircle } from 'react-icons/hi'
 import { useDisclosure } from '@mantine/hooks'
 import { useTranslation } from 'react-i18next'
@@ -56,10 +63,10 @@ import {
 import { HostSelectInboundFeature } from '@features/ui/dashboard/hosts/host-select-inbound/host-select-inbound.feature'
 import { HostTagsInputWidget } from '@widgets/dashboard/hosts/host-tags-input/host-tags-input'
 import { emojiFlag, resolveCountryCode } from '@shared/utils/misc/resolve-country-code'
-import { HappLogo, MihomoLogo, SingboxLogo, StashLogo } from '@shared/ui/logos'
 import { PopoverWithInfoShared } from '@shared/ui/popovers/popover-with-info'
 import { DeleteHostFeature } from '@features/ui/dashboard/hosts/delete-host'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
+import { MihomoLogo, SingboxLogo, StashLogo } from '@shared/ui/logos'
 import { TemplateInfoPopoverShared } from '@shared/ui/popovers'
 import { ChipMultiSelect } from '@shared/ui/chip-multi-select'
 import { DrawerFooter } from '@shared/ui/drawer-footer'
@@ -67,6 +74,7 @@ import { handleFormErrors } from '@shared/utils/misc'
 import { XrayLogo } from '@shared/ui/logos/xray-logo'
 import { SectionCard } from '@shared/ui/section-card'
 
+import { FinalMaskDrawer } from './final-mask.drawer'
 import classes from './HostTabs.module.css'
 import { IProps } from './interfaces'
 
@@ -118,6 +126,8 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
     const [muxParamsOpened, { open: openMuxParams, close: closeMuxParams }] = useDisclosure(false)
     const [sockoptParamsOpened, { open: openSockoptParams, close: closeSockoptParams }] =
         useDisclosure(false)
+
+    const [finalMaskOpened, { open: openFinalMask, close: closeFinalMask }] = useDisclosure(false)
 
     const securityLayerLabels = {
         [SECURITY_LAYERS.TLS]: t('base-host-form.tls-transport-layer-security'),
@@ -921,25 +931,40 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
                                             w="100%"
                                         >
                                             <Button
+                                                color="gray"
                                                 disabled={isXhttpExtraButtonDisabled()}
                                                 leftSection={<PiPencilDuotone />}
                                                 onClick={open}
+                                                variant="soft"
                                             >
                                                 xHTTP
                                             </Button>
 
                                             <Button
+                                                color="gray"
                                                 leftSection={<TbCloudNetwork />}
                                                 onClick={openMuxParams}
+                                                variant="soft"
                                             >
                                                 Mux
                                             </Button>
 
                                             <Button
+                                                color="gray"
                                                 leftSection={<PiNetwork />}
                                                 onClick={openSockoptParams}
+                                                variant="soft"
                                             >
                                                 SockOpt
+                                            </Button>
+
+                                            <Button
+                                                color="gray"
+                                                leftSection={<TbMask />}
+                                                onClick={openFinalMask}
+                                                variant="soft"
+                                            >
+                                                Final Mask
                                             </Button>
                                         </Group>
                                     </SectionCard.Section>
@@ -958,9 +983,6 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
                                     <SectionCard.Section>
                                         <Stack gap="xs">
                                             <TextInput
-                                                description={t(
-                                                    'base-host-form.server-description-description'
-                                                )}
                                                 key={form.key('serverDescription')}
                                                 label={
                                                     <Group gap={4} justify="flex-start">
@@ -994,30 +1016,31 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
                                                                     </Text>
                                                                     <Text c="dimmed" size="sm">
                                                                         {t(
-                                                                            'base-host-form.server-description-line-1'
-                                                                        )}{' '}
-                                                                        <Link
-                                                                            target="_blank"
-                                                                            to="https://www.happ.su/main/dev-docs/examples-of-links-and-parameters#serverdescription"
-                                                                        >
-                                                                            {t(
-                                                                                'base-host-form.server-description-line-2'
-                                                                            )}
-                                                                        </Link>{' '}
-                                                                        {t(
-                                                                            'base-host-form.server-description-line-3'
+                                                                            'base-host-form.server-description-1'
                                                                         )}
                                                                         <br />
+                                                                        <br />
                                                                         {t(
-                                                                            'base-host-form.server-description-line-4'
+                                                                            'base-host-form.server-description-2'
                                                                         )}
+                                                                    </Text>
+                                                                    <Text fw={600} size="sm">
+                                                                        {t(
+                                                                            'base-host-form.supported-clients'
+                                                                        )}
+                                                                    </Text>
+                                                                    <Text c="dimmed" size="sm">
+                                                                        Mihomo: FlClash X, Flowvy,
+                                                                        prizrak-box, Koala Clash
+                                                                        <br />
+                                                                        Xray: Happ, Incy
                                                                     </Text>
                                                                 </Stack>
                                                             </HoverCard.Dropdown>
                                                         </HoverCard>
                                                     </Group>
                                                 }
-                                                leftSection={<HappLogo size={20} />}
+                                                leftSection={<TbFileDescription size={20} />}
                                                 placeholder={t(
                                                     'base-host-form.server-description-placeholder'
                                                 )}
@@ -1297,6 +1320,8 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
                     <Button onClick={closeSockoptParams}>{t('common.close')}</Button>
                 </Stack>
             </Drawer>
+
+            <FinalMaskDrawer close={closeFinalMask} form={form} opened={finalMaskOpened} />
         </form>
     )
 }

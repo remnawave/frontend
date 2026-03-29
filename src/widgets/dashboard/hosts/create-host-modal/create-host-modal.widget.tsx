@@ -90,6 +90,7 @@ export const CreateHostModalWidget = () => {
         let xHttpExtraParams
         let muxParams
         let sockoptParams
+        let finalMask
 
         try {
             if (values.xHttpExtraParams === '') {
@@ -124,6 +125,17 @@ export const CreateHostModalWidget = () => {
             // silence
         }
 
+        try {
+            if (values.finalMask === '') {
+                finalMask = null
+            } else {
+                finalMask = JSON.parse(values.finalMask as unknown as string)
+            }
+        } catch {
+            finalMask = null
+            // silence
+        }
+
         createHost({
             variables: {
                 ...values,
@@ -131,6 +143,7 @@ export const CreateHostModalWidget = () => {
                 sockoptParams,
                 muxParams,
                 xHttpExtraParams,
+                finalMask,
                 inbound: {
                     configProfileInboundUuid: values.inbound.configProfileInboundUuid,
                     configProfileUuid: values.inbound.configProfileUuid

@@ -2,6 +2,7 @@ import {
     ActionIcon,
     Badge,
     Box,
+    Divider,
     Group,
     Loader,
     Paper,
@@ -22,6 +23,9 @@ import { TbPower, TbWifi, TbWifiOff } from 'react-icons/tb'
 import { memo, useCallback, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 
+import { GetActiveSessionsOnNodeFeature } from '@features/ui/dashboard/nodes/get-active-sesions-on-node'
+import { GetNodeLinkedHostsFeature } from '@features/ui/dashboard/nodes/get-node-linked-hosts'
+import { GetNodeUsersUsageFeature } from '@features/ui/dashboard/nodes/get-node-users-usage'
 import { getNodeResetDaysUtil, getXrayUptimeUtil } from '@shared/utils/time-utils'
 import { QueryKeys, useDisableNode, useEnableNode } from '@shared/api/hooks'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
@@ -243,6 +247,22 @@ export const NodeDetailsCardWidget = memo((props: IProps) => {
                     </Group>
                 </Group>
             </SectionCard.Section>
+
+            <SectionCard.Section>
+                <Group gap="xs" justify="flex-end">
+                    <Group gap="xs" justify="center">
+                        <GetNodeLinkedHostsFeature nodeUuid={node.uuid} />
+                    </Group>
+
+                    <Divider opacity={0.3} orientation="vertical" />
+
+                    <Group gap="xs" justify="center">
+                        <GetNodeUsersUsageFeature nodeUuid={node.uuid} />
+                        <GetActiveSessionsOnNodeFeature nodeUuid={node.uuid} />
+                    </Group>
+                </Group>
+            </SectionCard.Section>
+
             <SectionCard.Section>
                 <Box>
                     <Group gap="xs" justify="space-between" mb={6}>

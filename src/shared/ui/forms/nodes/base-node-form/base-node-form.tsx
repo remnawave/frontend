@@ -13,10 +13,7 @@ import { motion } from 'framer-motion'
 import { ReactNode } from 'react'
 import { t } from 'i18next'
 
-import { GetActiveSessionsOnNodeFeature } from '@features/ui/dashboard/nodes/get-active-sesions-on-node'
 import { ToggleNodeStatusButtonFeature } from '@features/ui/dashboard/nodes/toggle-node-status-button'
-import { GetNodeLinkedHostsFeature } from '@features/ui/dashboard/nodes/get-node-linked-hosts'
-import { GetNodeUsersUsageFeature } from '@features/ui/dashboard/nodes/get-node-users-usage'
 import { RestartNodeButtonFeature } from '@features/ui/dashboard/nodes/restart-node-button'
 import { ResetNodeTrafficFeature } from '@features/ui/dashboard/nodes/reset-node-traffic'
 import { ModalAccordionWidget } from '@widgets/dashboard/nodes/modal-accordeon-widget'
@@ -208,11 +205,6 @@ export const BaseNodeForm = <T extends UpdateNodeCommand.Request>(props: IProps<
 
                             <RestartNodeButtonFeature handleClose={handleClose} node={node} />
                             <ToggleNodeStatusButtonFeature handleClose={handleClose} node={node} />
-                            <Menu.Divider />
-                            <Menu.Label>{t('base-node-form.quick-actions')}</Menu.Label>
-                            <GetActiveSessionsOnNodeFeature nodeUuid={node.uuid} />
-                            <GetNodeUsersUsageFeature nodeUuid={node.uuid} />
-                            <GetNodeLinkedHostsFeature nodeUuid={node.uuid} />
                         </Menu.Dropdown>
                     </Menu>
                 )}
