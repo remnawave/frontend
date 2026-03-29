@@ -1,6 +1,6 @@
+import { ActionIcon, Tooltip } from '@mantine/core'
 import { PiChartBarDuotone } from 'react-icons/pi'
 import { useTranslation } from 'react-i18next'
-import { Menu } from '@mantine/core'
 import { memo } from 'react'
 
 import { MODALS, useModalsStoreOpenWithData } from '@entities/dashboard/modal-store'
@@ -14,17 +14,20 @@ const GetNodeUsersUsageFeatureComponent = (props: IProps) => {
     const openModalWithData = useModalsStoreOpenWithData()
 
     return (
-        <Menu.Item
-            color="grape"
-            leftSection={<PiChartBarDuotone size="16px" />}
-            onClick={() => {
-                openModalWithData(MODALS.SHOW_NODE_USERS_USAGE_DRAWER, {
-                    nodeUuid
-                })
-            }}
-        >
-            {t('get-user-usage.feature.show-usage')}
-        </Menu.Item>
+        <Tooltip label={t('get-user-usage.feature.show-usage')}>
+            <ActionIcon
+                color="indigo"
+                onClick={() => {
+                    openModalWithData(MODALS.SHOW_NODE_USERS_USAGE_DRAWER, {
+                        nodeUuid
+                    })
+                }}
+                size="lg"
+                variant="soft"
+            >
+                <PiChartBarDuotone size="22px" />
+            </ActionIcon>
+        </Tooltip>
     )
 }
 
