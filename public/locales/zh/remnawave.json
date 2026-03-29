@@ -434,9 +434,9 @@
         "select-one-or-more-subscription-types-description": "选择一个或多个订阅类型，从该订阅类型中排除主机。",
         "exclude-from-subscription-type": "从订阅类型中排除",
         "hidden-host-description": "默认情况下，Remnawave 将不会在订阅中包含隐藏主机。隐藏主机可以在 Mihomo 和 Xray-Json Advant, Raw 中使用",
-        "server-description-1": "In supported clients, the protocol name (e.g. vless) will be replaced with the description specified here.",
-        "server-description-2": "Not all client applications support this feature. For more details, refer to the documentation of the apps listed below.",
-        "supported-clients": "Supported clients"
+        "server-description-1": "在支持的客户端中，协议名称(例如无)将被此处指定的描述所取代。",
+        "server-description-2": "并非所有客户端应用程序都支持此功能。欲了解更多详情，请参阅下面列出的应用程序的文档。",
+        "supported-clients": "支持的客户端"
     },
     "base-node-form": {
         "country": "国家",
