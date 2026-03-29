@@ -8,7 +8,7 @@ import {
     PiMemoryDuotone,
     PiUsersDuotone
 } from 'react-icons/pi'
-import { Avatar, Badge, Box, Flex, Grid, Progress, Text } from '@mantine/core'
+import { Avatar, Badge, Box, Flex, Grid, Progress, Stack, Text, Tooltip } from '@mantine/core'
 import { notifications } from '@mantine/notifications'
 import { CSSProperties, memo, useMemo } from 'react'
 import ReactCountryFlag from 'react-country-flag'
@@ -362,29 +362,58 @@ export const NodeCardWidget = memo((props: IProps) => {
                                 {ramPercentage !== null ? `${ramPercentage}%` : '—'}
                             </Text>
                         </Flex>
-                        <Flex align="center" gap={4}>
-                            <PiCpuDuotone className={classes.icon} size={12} />
-                            {loadAvg ? (
-                                <Text ff="monospace" size="xs">
-                                    {loadAvg.map((load, i) => (
-                                        <Text
-                                            c={getLoadColor(load, cpus)}
-                                            component="span"
-                                            ff="monospace"
-                                            key={i}
-                                            size="xs"
-                                        >
-                                            {i > 0 && ' '}
-                                            {load.toFixed(2)}
+                        <Tooltip
+                            label={
+                                loadAvg ? (
+                                    <Stack gap={0}>
+                                        <Text fw={600} size="xs">
+                                            {`Load Average (${cpus} ${cpus === 1 ? 'core' : 'cores'})`}
                                         </Text>
-                                    ))}
-                                </Text>
-                            ) : (
-                                <Text c="dimmed" ff="monospace" size="xs">
-                                    {'—'}
-                                </Text>
-                            )}
-                        </Flex>
+                                        <Text size="xs">
+                                            {`1 min: ${loadAvg[0].toFixed(2)} (${Math.round((loadAvg[0] / cpus) * 100)}%)`}
+                                        </Text>
+                                        <Text size="xs">
+                                            {`5 min: ${loadAvg[1].toFixed(2)} (${Math.round((loadAvg[1] / cpus) * 100)}%)`}
+                                        </Text>
+                                        <Text size="xs">
+                                            {`15 min: ${loadAvg[2].toFixed(2)} (${Math.round((loadAvg[2] / cpus) * 100)}%)`}
+                                        </Text>
+                                        <Text c="dimmed" mt={4} size="xs">
+                                            {'0–70% normal · 70–100% high · >100% overloaded'}
+                                        </Text>
+                                    </Stack>
+                                ) : (
+                                    'No data'
+                                )
+                            }
+                            multiline
+                            radius="md"
+                            w={250}
+                        >
+                            <Flex align="center" gap={4}>
+                                <PiCpuDuotone className={classes.icon} size={12} />
+                                {loadAvg ? (
+                                    <Text ff="monospace" size="xs">
+                                        {loadAvg.map((load, i) => (
+                                            <Text
+                                                c={getLoadColor(load, cpus)}
+                                                component="span"
+                                                ff="monospace"
+                                                key={i}
+                                                size="xs"
+                                            >
+                                                {i > 0 && ' '}
+                                                {load.toFixed(2)}
+                                            </Text>
+                                        ))}
+                                    </Text>
+                                ) : (
+                                    <Text c="dimmed" ff="monospace" size="xs">
+                                        {'—'}
+                                    </Text>
+                                )}
+                            </Flex>
+                        </Tooltip>
                         <Flex align="center" gap={4}>
                             <PiArrowDownDuotone color="var(--mantine-color-teal-5)" size={12} />
                             <Text c="dimmed" ff="monospace" size="xs">
