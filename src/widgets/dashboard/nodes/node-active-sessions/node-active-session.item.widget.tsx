@@ -7,14 +7,15 @@ import {
 } from 'react-icons/tb'
 import { ActionIcon, Badge, Box, Group, Stack, Text, Tooltip } from '@mantine/core'
 import { FetchUsersIpsResultCommand } from '@remnawave/backend-contract'
+import { createSearchParams, useNavigate } from 'react-router-dom'
 import { PiEmptyDuotone, PiUserCircle } from 'react-icons/pi'
-import { createSearchParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 
 import { formatRelativeDateUtil, formatTimeUtil } from '@shared/utils/time-utils'
 import { CopyableFieldShared } from '@shared/ui/copyable-field/copyable-field'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { SEARCH_PARAMS } from '@shared/constants/search-params'
+import { openOrNavigate } from '@shared/utils/open-or-navigate'
 import { SectionCard } from '@shared/ui/section-card'
 import { useResolveUser } from '@shared/api/hooks'
 import { ROUTES } from '@shared/constants'
@@ -36,6 +37,7 @@ export const NodeActiveSessionItem = (props: IProps) => {
 
     const { t, i18n } = useTranslation()
 
+    const navigate = useNavigate()
     const { mutateAsync: resolveUser, isPending: isLoading } = useResolveUser()
 
     const handleViewUser = async () => {
@@ -50,7 +52,8 @@ export const NodeActiveSessionItem = (props: IProps) => {
                 [SEARCH_PARAMS.USER]: String(result.uuid)
             })
 
-            window.open(`${ROUTES.DASHBOARD.MANAGEMENT.USERS}?${searchParams.toString()}`, '_blank')
+            const url = `${ROUTES.DASHBOARD.MANAGEMENT.USERS}?${searchParams.toString()}`
+            openOrNavigate(url, navigate)
         }
     }
 
@@ -59,6 +62,20 @@ export const NodeActiveSessionItem = (props: IProps) => {
             <SectionCard.Section>
                 <Group gap="xs" justify="space-between">
                     <BaseOverlayHeader
+                        hideIcon
+                        icon={
+                            <Tooltip label={t('node-active-session.item.widget.view-user')}>
+                                <ActionIcon
+                                    color="cyan"
+                                    loading={isLoading}
+                                    onClick={handleViewUser}
+                                    size="lg"
+                                    variant="soft"
+                                >
+                                    <PiUserCircle size={20} />
+                                </ActionIcon>
+                            </Tooltip>
+                        }
                         iconColor="blue"
                         IconComponent={TbId}
                         iconVariant="soft"
@@ -69,17 +86,6 @@ export const NodeActiveSessionItem = (props: IProps) => {
                         <Badge color="teal" size="lg" variant="default">
                             {user.ips.length}
                         </Badge>
-                        <Tooltip label={t('node-active-session.item.widget.view-user')}>
-                            <ActionIcon
-                                color="cyan"
-                                loading={isLoading}
-                                onClick={handleViewUser}
-                                size="lg"
-                                variant="soft"
-                            >
-                                <PiUserCircle size={20} />
-                            </ActionIcon>
-                        </Tooltip>
                     </Group>
                 </Group>
             </SectionCard.Section>
