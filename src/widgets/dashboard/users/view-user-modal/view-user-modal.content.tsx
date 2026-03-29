@@ -115,6 +115,7 @@ export const ViewUserModalContent = (props: IProps) => {
                     }).queryKey,
                     data
                 )
+                form.resetTouched()
             },
 
             onError: (error) => {
@@ -152,31 +153,31 @@ export const ViewUserModalContent = (props: IProps) => {
     }, [isError])
 
     const handleSubmit = form.onSubmit(async (values) => {
-        const dirtyFields = form.getDirty()
+        const touchedFields = form.getTouched()
 
         updateUser({
             variables: {
                 uuid: values.uuid,
-                trafficLimitStrategy: dirtyFields.trafficLimitStrategy
+                trafficLimitStrategy: touchedFields.trafficLimitStrategy
                     ? values.trafficLimitStrategy
                     : undefined,
-                trafficLimitBytes: dirtyFields.trafficLimitBytes
+                trafficLimitBytes: touchedFields.trafficLimitBytes
                     ? gbToBytesUtil(values.trafficLimitBytes)
                     : undefined,
                 // @ts-expect-error - TODO: fix ZOD schema
-                expireAt: dirtyFields.expireAt ? dayjs(values.expireAt).toISOString() : undefined,
-                activeInternalSquads: dirtyFields.activeInternalSquads
+                expireAt: touchedFields.expireAt ? dayjs(values.expireAt).toISOString() : undefined,
+                activeInternalSquads: touchedFields.activeInternalSquads
                     ? values.activeInternalSquads
                     : undefined,
-                description: dirtyFields.description ? values.description : undefined,
+                description: touchedFields.description ? values.description : undefined,
                 // @ts-expect-error - TODO: fix ZOD schema
                 telegramId: values.telegramId === '' ? null : values.telegramId,
                 email: values.email === '' ? null : values.email,
                 // @ts-expect-error - TODO: fix ZOD schema
                 hwidDeviceLimit: values.hwidDeviceLimit === '' ? null : values.hwidDeviceLimit,
                 // eslint-disable-next-line no-nested-ternary
-                tag: dirtyFields.tag ? (values.tag === '' ? null : values.tag) : undefined,
-                externalSquadUuid: dirtyFields.externalSquadUuid
+                tag: touchedFields.tag ? (values.tag === '' ? null : values.tag) : undefined,
+                externalSquadUuid: touchedFields.externalSquadUuid
                     ? values.externalSquadUuid
                     : undefined
             }
