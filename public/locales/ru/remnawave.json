@@ -394,7 +394,7 @@
         "please-ensure-you-provide-a-valid-json-mux-object": "Убедитесь, что вы предоставили правильный объект JSON MUX.",
         "for-more-information-refer-to": "За дополнительной информацией обратитесь к",
         "xtls-documentation": "документации XTLS",
-        "final-mask-description": "The finalMask override allows you to fine-tune the finalMask in cases where the server-side and client-side finalMask configurations need to differ.<br/><br/>FinalMask will only be applied to Xray-JSON and Base64 client output formats.<br/><br/>Make sure to review the <anchor>Xray documentation</anchor>.",
+        "final-mask-description": "Переопределение finalMask позволяет точно настроить finalMask в случаях, когда конфигурации finalMask на стороне сервера и клиента должны отличаться.<br/><br/>FinalMask применяется только к форматам вывода клиента Xray-JSON и Base64.<br/><br/>Обязательно ознакомьтесь с <anchor>документацией Xray</anchor>.",
         "paste-default-mux-params": "Вставить пример MUX",
         "please-ensure-you-provide-a-valid-json-sockopt-object": "Убедитесь, что вы предоставили правильный объект JSON Sockopt.",
         "paste-default-sockopt-params": "Вставить пример Sockopt",
@@ -1334,7 +1334,7 @@
     },
     "node-system-card": {
         "widget": {
-            "system-info": "Сведения о системе",
+            "system-info": "Система",
             "memory": "Память",
             "used": "Использовано",
             "free": "Свободно",
