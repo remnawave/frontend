@@ -524,8 +524,7 @@
         "column": {
             "monthly": "ماهانه",
             "weekly": "هفتگی",
-            "daily": "روزانه",
-            "monthly-rolling": "Monthly (rolling)"
+            "daily": "روزانه"
         }
     },
     "get-time-ago": {
