@@ -20,7 +20,7 @@ export function DataUsageColumnEntity(props: IProps) {
         [RESET_PERIODS.MONTH]: t('data-usage.column.monthly'),
         [RESET_PERIODS.WEEK]: t('data-usage.column.weekly'),
         [RESET_PERIODS.DAY]: t('data-usage.column.daily'),
-        [RESET_PERIODS.MONTH_ROLLING]: t('data-usage.column.monthly-rolling'),
+        [RESET_PERIODS.MONTH_ROLLING]: `${t('data-usage.column.monthly')} ↻`,
         [RESET_PERIODS.NO_RESET]: '∞'
     }[user.trafficLimitStrategy]
 

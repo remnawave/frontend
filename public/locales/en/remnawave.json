@@ -524,8 +524,7 @@
         "column": {
             "monthly": "Monthly",
             "weekly": "Weekly",
-            "daily": "Daily",
-            "monthly-rolling": "Monthly (rolling)"
+            "daily": "Daily"
         }
     },
     "get-time-ago": {
