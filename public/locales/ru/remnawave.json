@@ -524,8 +524,7 @@
         "column": {
             "monthly": "Ежемесячно",
             "weekly": "Еженедельно",
-            "daily": "Ежедневно",
-            "monthly-rolling": "Ежемесячно (скользящий)"
+            "daily": "Ежедневно"
         }
     },
     "get-time-ago": {

@@ -524,8 +524,7 @@
         "column": {
             "monthly": "每月",
             "weekly": "周",
-            "daily": "日",
-            "monthly-rolling": "按月(滚动)"
+            "daily": "日"
         }
     },
     "get-time-ago": {
