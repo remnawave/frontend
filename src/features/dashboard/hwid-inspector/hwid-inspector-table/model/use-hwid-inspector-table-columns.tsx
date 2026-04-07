@@ -13,6 +13,17 @@ export const useHwidInspectorTableColumns = () => {
     >(
         () => [
             {
+                accessorKey: 'userId',
+                header: 'User ID',
+                accessorFn: (originalRow) => originalRow.userId,
+                size: 130
+            },
+            {
+                accessorKey: 'requestIp',
+                header: t('use-srh-inspector-table-columns.request-ip'),
+                accessorFn: (originalRow) => originalRow.requestIp || '–'
+            },
+            {
                 accessorKey: 'hwid',
                 header: 'HWID',
                 accessorFn: (originalRow) => originalRow.hwid,
@@ -39,12 +50,6 @@ export const useHwidInspectorTableColumns = () => {
                 header: t('use-hwid-inspector-table-columns.user-agent'),
                 accessorFn: (originalRow) => originalRow.userAgent || '–',
                 size: 500
-            },
-            {
-                accessorKey: 'userUuid',
-                header: t('use-hwid-inspector-table-columns.user-uuid'),
-                accessorFn: (originalRow) => originalRow.userUuid,
-                size: 350
             },
 
             {

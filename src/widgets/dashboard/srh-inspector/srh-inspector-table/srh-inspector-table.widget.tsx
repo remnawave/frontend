@@ -13,10 +13,9 @@ import { TbExternalLink, TbRefresh, TbReportAnalytics, TbRestore } from 'react-i
 import { ActionIcon, ActionIconGroup, Tooltip } from '@mantine/core'
 import { useLayoutEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { PiUserCircle } from 'react-icons/pi'
 
 import { useSrhInspectorTableColumns } from '@features/dashboard/srh-inspector/srh-inspector-table/model/use-srh-inspector-table-columns'
-import { useUserModalStoreActions } from '@entities/dashboard/user-modal-store'
+import { ResolveUserActionShared } from '@shared/ui/resolve-user-action-icon'
 import { useGetSubscriptionRequestHistory } from '@shared/api/hooks'
 import { preventBackScrollTables } from '@shared/utils/misc'
 import { DataTableShared } from '@shared/ui/table'
@@ -26,7 +25,6 @@ export function SrhInspectorTableWidget() {
     const { t } = useTranslation()
 
     const tableColumns = useSrhInspectorTableColumns()
-    const userModalActions = useUserModalStoreActions()
 
     const [columnVisibility, setColumnVisibility] = useState<MRT_VisibilityState>({})
     const [columnPinning, setColumnPinning] = useState<MRT_ColumnPinningState>({})
@@ -139,16 +137,7 @@ export function SrhInspectorTableWidget() {
         enableRowActions: true,
         renderRowActions: ({ row }) => (
             <ActionIconGroup>
-                <ActionIcon
-                    onClick={async () => {
-                        await userModalActions.setUserUuid(row.original.userUuid)
-                        userModalActions.changeModalState(true)
-                    }}
-                    size="input-sm"
-                    variant="soft"
-                >
-                    <PiUserCircle size="1.5rem" />
-                </ActionIcon>
+                <ResolveUserActionShared userId={row.original.userId} />
                 <ActionIcon
                     color="grape"
                     onClick={async () => {

@@ -9,14 +9,13 @@ import {
     MRT_VisibilityState,
     useMantineReactTable
 } from 'mantine-react-table'
-import { TbDeviceAnalytics, TbRefresh, TbRestore } from 'react-icons/tb'
+import { TbDeviceAnalytics, TbExternalLink, TbRefresh, TbRestore } from 'react-icons/tb'
 import { ActionIcon, ActionIconGroup, Tooltip } from '@mantine/core'
 import { useLayoutEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { PiUserCircle } from 'react-icons/pi'
 
 import { useHwidInspectorTableColumns } from '@features/dashboard/hwid-inspector/hwid-inspector-table/model/use-hwid-inspector-table-columns'
-import { useUserModalStoreActions } from '@entities/dashboard/user-modal-store'
+import { ResolveUserActionShared } from '@shared/ui/resolve-user-action-icon'
 import { preventBackScrollTables } from '@shared/utils/misc'
 import { useGetAllHwidDevices } from '@shared/api/hooks'
 import { DataTableShared } from '@shared/ui/table'
@@ -26,7 +25,6 @@ export function HwidInspectorTableWidget() {
     const { t } = useTranslation()
 
     const tableColumns = useHwidInspectorTableColumns()
-    const userModalActions = useUserModalStoreActions()
 
     const [columnVisibility, setColumnVisibility] = useState<MRT_VisibilityState>({})
     const [columnPinning, setColumnPinning] = useState<MRT_ColumnPinningState>({})
@@ -140,19 +138,25 @@ export function HwidInspectorTableWidget() {
         },
         enableRowActions: true,
         renderRowActions: ({ row }) => (
-            <ActionIcon
-                onClick={async () => {
-                    await userModalActions.setUserUuid(row.original.userUuid)
-                    userModalActions.changeModalState(true)
-                }}
-                size="input-sm"
-                variant="light"
-            >
-                <PiUserCircle size="1.5rem" />
-            </ActionIcon>
+            <ActionIconGroup>
+                <ResolveUserActionShared userId={row.original.userId} />
+                <ActionIcon
+                    color="grape"
+                    onClick={() => {
+                        window.open(`https://ipinfo.io/${row.original.requestIp}`, '_blank')
+                    }}
+                    size="input-sm"
+                    variant="soft"
+                >
+                    <TbExternalLink size="1.5rem" />
+                </ActionIcon>
+            </ActionIconGroup>
         ),
 
-        getRowId: (originalRow) => `${originalRow.hwid}-${originalRow.userUuid}`
+        getRowId: (originalRow) => `${originalRow.hwid}-${originalRow.userId}`,
+        displayColumnDefOptions: {
+            'mrt-row-actions': { size: 110 }
+        }
     })
 
     return (
@@ -165,7 +169,7 @@ export function HwidInspectorTableWidget() {
                                 loading={isLoading}
                                 onClick={() => refetch()}
                                 size="input-md"
-                                variant="light"
+                                variant="soft"
                             >
                                 <TbRefresh size="24px" />
                             </ActionIcon>
@@ -183,7 +187,7 @@ export function HwidInspectorTableWidget() {
                                     table.resetGlobalFilter(true)
                                 }}
                                 size="input-md"
-                                variant="light"
+                                variant="soft"
                             >
                                 <TbRestore size="24px" />
                             </ActionIcon>
@@ -191,6 +195,10 @@ export function HwidInspectorTableWidget() {
                     </ActionIconGroup>
                 }
                 icon={<TbDeviceAnalytics size={24} />}
+                iconProps={{
+                    color: 'cyan',
+                    variant: 'soft'
+                }}
                 title={t('hwid-inspector-table.widget.hwid-devices-list')}
             />
 

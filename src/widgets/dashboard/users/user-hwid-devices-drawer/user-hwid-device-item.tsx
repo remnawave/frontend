@@ -6,8 +6,9 @@ import {
     PiTrash,
     PiWindowsLogo
 } from 'react-icons/pi'
-import { ActionIcon, Divider, Group, Stack, Text, ThemeIcon } from '@mantine/core'
+import { ActionIcon, Box, Divider, Group, Stack, Text, ThemeIcon } from '@mantine/core'
 import { GetUserHwidDevicesCommand } from '@remnawave/backend-contract'
+import { TbExternalLink } from 'react-icons/tb'
 import { useTranslation } from 'react-i18next'
 
 import { CopyableFieldShared } from '@shared/ui/copyable-field/copyable-field'
@@ -70,6 +71,32 @@ export const UserHwidDeviceItem = (props: IProps) => {
             <SettingsCardShared.Content>
                 <Stack gap="xs">
                     <CopyableFieldShared label="HWID" size="sm" value={device.hwid} />
+
+                    <Group align="flex-end" gap="xs" wrap="nowrap">
+                        <Box style={{ flex: 1 }}>
+                            <CopyableFieldShared
+                                label={t(
+                                    'get-user-subscription-request-history.feature.ip-address'
+                                )}
+                                size="sm"
+                                value={device.requestIp || '-'}
+                            />
+                        </Box>
+
+                        {device.requestIp && (
+                            <ActionIcon
+                                color="cyan"
+                                component="a"
+                                href={`https://ipinfo.io/${device.requestIp}`}
+                                rel="noopener noreferrer"
+                                size="input-sm"
+                                target="_blank"
+                                variant="soft"
+                            >
+                                <TbExternalLink size={18} />
+                            </ActionIcon>
+                        )}
+                    </Group>
 
                     <Group gap="xs" grow>
                         <CopyableFieldShared
