@@ -134,7 +134,7 @@ export const EditHostModalWidget = memo(() => {
                 muxParams: muxParamsParsed,
                 sockoptParams: sockoptParamsParsed,
                 finalMask: finalMaskParsed,
-                tag: host.tag ?? undefined,
+                tags: host.tags ?? [],
                 isHidden: host.isHidden,
                 overrideSniFromAddress: host.overrideSniFromAddress,
                 keepSniBlank: host.keepSniBlank,
@@ -259,7 +259,7 @@ export const EditHostModalWidget = memo(() => {
                 muxParams,
                 sockoptParams,
                 finalMask,
-                tag: values.tag === '' ? null : values.tag
+                tags: values.tags ?? []
             }
         })
     })
@@ -300,7 +300,7 @@ export const EditHostModalWidget = memo(() => {
                 },
                 serverDescription: host.serverDescription ?? undefined,
                 sockoptParams: host.sockoptParams ?? undefined,
-                tag: host.tag ?? undefined,
+                tags: host.tags ?? [],
                 overrideSniFromAddress: host.overrideSniFromAddress,
                 keepSniBlank: host.keepSniBlank,
                 vlessRouteId: host.vlessRouteId ?? undefined,
