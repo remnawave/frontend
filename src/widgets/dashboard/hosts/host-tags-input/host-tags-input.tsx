@@ -17,6 +17,9 @@ export function HostTagsInputWidget(props: TagsInputProps) {
         <TagsInput
             clearable
             data={hostTags?.tags || []}
+            description={t(
+                'host-tags-input.tags-are-not-visible-to-end-users-tag-will-be-sent-with-raw-subscription-only'
+            )}
             label="Tags"
             leftSection={<PiTagDuotone size="16px" />}
             maxTags={10}
