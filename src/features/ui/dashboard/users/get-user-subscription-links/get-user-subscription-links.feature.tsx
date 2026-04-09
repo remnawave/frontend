@@ -26,13 +26,13 @@ import { useDisclosure } from '@mantine/hooks'
 import { useTranslation } from 'react-i18next'
 import { modals } from '@mantine/modals'
 import { useEffect } from 'react'
-import { renderSVG } from 'uqr'
 
 import { SectionCardSection } from '@shared/ui/section-card/section-card.section'
 import { SectionCardRoot } from '@shared/ui/section-card/section-card.root'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { useGetConnectionKeysByUuid } from '@shared/api/hooks'
 import { LoaderModalShared } from '@shared/ui/loader-modal'
+import { QrCodeBuilder } from '@shared/ui/qr-code-builder'
 
 import { IProps } from './interfaces'
 
@@ -59,6 +59,7 @@ export function GetUserSubscriptionLinksFeature(props: IProps) {
     const renderQrCode = (link: string, remark: string) => {
         modals.open({
             centered: true,
+            size: 'auto',
             title: (
                 <BaseOverlayHeader
                     iconColor="teal"
@@ -67,16 +68,7 @@ export function GetUserSubscriptionLinksFeature(props: IProps) {
                     title={remark}
                 />
             ),
-            children: (
-                <div
-                    dangerouslySetInnerHTML={{
-                        __html: renderSVG(link, {
-                            whiteColor: '#161B22',
-                            blackColor: '#3CC9DB'
-                        })
-                    }}
-                />
-            )
+            children: <QrCodeBuilder data={link} title={remark} />
         })
     }
 

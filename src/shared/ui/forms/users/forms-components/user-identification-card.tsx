@@ -19,7 +19,6 @@ import { HiQuestionMarkCircle } from 'react-icons/hi'
 import { useTranslation } from 'react-i18next'
 import { useDisclosure } from '@mantine/hooks'
 import { modals } from '@mantine/modals'
-import { renderSVG } from 'uqr'
 import { memo } from 'react'
 import dayjs from 'dayjs'
 
@@ -37,6 +36,7 @@ import { UserStatusBadge } from '@widgets/dashboard/users/user-status-badge'
 import { resolveCountryCode } from '@shared/utils/misc/resolve-country-code'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { CopyableCodeBlock } from '@shared/ui/copyable-code-block'
+import { QrCodeBuilder } from '@shared/ui/qr-code-builder'
 import { prettyBytesUtil } from '@shared/utils/bytes'
 import { SectionCard } from '@shared/ui/section-card'
 
@@ -157,12 +157,9 @@ export const UserIdentificationCard = memo((props: IProps) => {
                                 <ActionIcon
                                     color="teal"
                                     onClick={() => {
-                                        const subscriptionQrCode = renderSVG(user.subscriptionUrl, {
-                                            whiteColor: '#161B22',
-                                            blackColor: '#3CC9DB'
-                                        })
                                         modals.open({
                                             centered: true,
+                                            size: 'auto',
                                             title: (
                                                 <BaseOverlayHeader
                                                     iconColor="teal"
@@ -174,10 +171,9 @@ export const UserIdentificationCard = memo((props: IProps) => {
                                                 />
                                             ),
                                             children: (
-                                                <div
-                                                    dangerouslySetInnerHTML={{
-                                                        __html: subscriptionQrCode
-                                                    }}
+                                                <QrCodeBuilder
+                                                    data={user.subscriptionUrl}
+                                                    title={user.username}
                                                 />
                                             )
                                         })
