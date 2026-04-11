@@ -2102,7 +2102,7 @@
             "all-nodes-failed-to-return-session-data": "Не удалось вернуть сессионные данные по всем нодам.",
             "total-ips": "Всего IP",
             "unique-ips": "Уникальные IP",
-            "nodes-explored": "Нод опрошенно",
+            "nodes-explored": "Нод опрошено",
             "total-users": "Всего пользователей",
             "no-active-sessions-found-on-any-node": "Не найдено активных сессий ни на одной ноде.",
             "restart-scan": "Повторить сканирование",
