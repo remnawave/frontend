@@ -394,7 +394,7 @@
         "please-ensure-you-provide-a-valid-json-mux-object": "请确保您提供一个有效的 JSON MUX 对象。",
         "for-more-information-refer-to": "欲了解更多信息，请参阅",
         "xtls-documentation": "XTLS 文档",
-        "final-mask-description": "The finalMask override allows you to fine-tune the finalMask in cases where the server-side and client-side finalMask configurations need to differ.<br/><br/>FinalMask will only be applied to Xray-JSON and Base64 client output formats.<br/><br/>Make sure to review the <anchor>Xray documentation</anchor>.",
+        "final-mask-description": "最终伪装层覆写允许您在服务器端和客户端的 finalMask 配置需要不同时，对最终伪装层进行微调。<br/><br/>FinalMask 将仅适用于Xray-JSON和Base64客户端。<br/><br/>请务必审阅 <anchor>Xray 文档</anchor>。",
         "paste-default-mux-params": "粘贴默认的 Mux 参数",
         "please-ensure-you-provide-a-valid-json-sockopt-object": "请确保您提供一个有效的 JSON Sockopt 对象。",
         "paste-default-sockopt-params": "粘贴默认 Sockopt 参数",
@@ -1539,7 +1539,7 @@
     },
     "external-squads-grid": {
         "widget": {
-            "no-external-squads": "暂无内部分组",
+            "no-external-squads": "暂无外部分组",
             "no-external-squads-line-1": "额外分组允许您为特定用户组自定义设置。",
             "no-external-squads-line-2": "你可以覆盖每个分组的默认订阅模板和其他设置。",
             "no-external-squads-line-3": "创建一个分组并指定用户应用自定义配置。"
