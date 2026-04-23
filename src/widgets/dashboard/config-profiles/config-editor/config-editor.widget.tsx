@@ -1,8 +1,8 @@
 import type { editor } from 'monaco-editor'
 
+import { Box, Button, Card, Code, Group, Loader, Paper, Text } from '@mantine/core'
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import Editor, { Monaco, useMonaco } from '@monaco-editor/react'
-import { Box, Card, Code, Paper, Text } from '@mantine/core'
 import { useTranslation } from 'react-i18next'
 import { useBlocker } from 'react-router-dom'
 import { modals } from '@mantine/modals'
@@ -20,7 +20,7 @@ export function ConfigEditorWidget(props: IProps) {
     const { t, i18n } = useTranslation()
     const monaco = useMonaco()
 
-    const { configProfile, snippets } = props
+    const { configProfile, isWasmCrashed, isWasmRestarting, onRestartWasm, snippets } = props
 
     const [result, setResult] = useState('')
     const [isConfigValid, setIsConfigValid] = useState(true)
@@ -30,6 +30,7 @@ export function ConfigEditorWidget(props: IProps) {
     )
 
     const editorRef = useRef<editor.IStandaloneCodeEditor | null>(null)
+    const wasWasmRestarting = useRef(false)
 
     useEffect(() => {
         if (!monaco) return
@@ -43,6 +44,13 @@ export function ConfigEditorWidget(props: IProps) {
     )
 
     const snippetMap = new Map(snippets.snippets.map((s) => [s.name, s.snippet]))
+
+    useEffect(() => {
+        if (wasWasmRestarting.current && !isWasmRestarting && !isWasmCrashed && editorRef.current) {
+            ConfigValidationFeature.validate(editorRef, setResult, setIsConfigValid, snippetMap)
+        }
+        wasWasmRestarting.current = isWasmRestarting
+    }, [isWasmRestarting, isWasmCrashed])
 
     const handleEditorDidMount = (monaco: Monaco) => {
         monaco.editor.defineTheme('GithubDark', {
@@ -106,28 +114,72 @@ export function ConfigEditorWidget(props: IProps) {
 
     return (
         <Box className={styles.container}>
-            {result && (
+            {(result || isWasmRestarting || isWasmCrashed) && (
                 <Paper
                     className={styles.validationMessage}
                     p="md"
                     radius="sm"
                     style={{
-                        backgroundColor: isConfigValid
-                            ? 'rgba(51, 171, 132, 0.1)'
-                            : 'rgba(241, 65, 65, 0.1)',
-                        border: `1px solid ${isConfigValid ? 'rgb(51, 171, 132)' : 'rgb(241, 65, 65)'}`
+                        backgroundColor:
+                            isWasmCrashed || isWasmRestarting || !isConfigValid
+                                ? 'rgba(241, 65, 65, 0.1)'
+                                : 'rgba(51, 171, 132, 0.1)',
+                        border: `1px solid ${
+                            isWasmCrashed || isWasmRestarting || !isConfigValid
+                                ? 'rgb(241, 65, 65)'
+                                : 'rgb(51, 171, 132)'
+                        }`
                     }}
                 >
-                    <Code
-                        color={isConfigValid ? 'teal' : 'red'}
-                        style={{
-                            backgroundColor: 'transparent',
-                            fontSize: '0.9rem',
-                            padding: 0
-                        }}
-                    >
-                        {result}
-                    </Code>
+                    {isWasmRestarting && (
+                        <Group gap="xs">
+                            <Loader color="orange" size="xs" />
+                            <Code
+                                color="orange"
+                                style={{
+                                    backgroundColor: 'transparent',
+                                    fontSize: '0.9rem',
+                                    padding: 0
+                                }}
+                            >
+                                Xray Core (WASM) is restarting...
+                            </Code>
+                        </Group>
+                    )}
+                    {!isWasmRestarting && isWasmCrashed && (
+                        <Group gap="sm">
+                            <Code
+                                color="red"
+                                style={{
+                                    backgroundColor: 'transparent',
+                                    fontSize: '0.9rem',
+                                    padding: 0
+                                }}
+                            >
+                                Xray Core (WASM) crashed. Validation is unavailable.
+                            </Code>
+                            <Button
+                                color="red"
+                                onClick={onRestartWasm}
+                                size="compact-xs"
+                                variant="light"
+                            >
+                                {t('restart-node-button.feature.restart')}
+                            </Button>
+                        </Group>
+                    )}
+                    {!isWasmRestarting && !isWasmCrashed && (
+                        <Code
+                            color={isConfigValid ? 'teal' : 'red'}
+                            style={{
+                                backgroundColor: 'transparent',
+                                fontSize: '0.9rem',
+                                padding: 0
+                            }}
+                        >
+                            {result}
+                        </Code>
+                    )}
                 </Paper>
             )}
 
@@ -145,12 +197,14 @@ export function ConfigEditorWidget(props: IProps) {
                     defaultLanguage="json"
                     loading={t('config-editor.widget.loading-editor')}
                     onChange={() => {
-                        ConfigValidationFeature.validate(
-                            editorRef,
-                            setResult,
-                            setIsConfigValid,
-                            snippetMap
-                        )
+                        if (!isWasmCrashed && !isWasmRestarting) {
+                            ConfigValidationFeature.validate(
+                                editorRef,
+                                setResult,
+                                setIsConfigValid,
+                                snippetMap
+                            )
+                        }
                         checkForChanges()
                     }}
                     onMount={(editor) => {

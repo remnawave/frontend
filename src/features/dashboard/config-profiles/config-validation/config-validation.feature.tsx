@@ -73,7 +73,16 @@ export const ConfigValidationFeature = {
             )
             setIsConfigValid(!validationResult)
         } catch (err: unknown) {
-            setResult(`${dayjs().format('HH:mm:ss')} | Validation error: ${(err as Error).message}`)
+            const message = (err as Error).message
+            if (message?.includes('Go program has already exited')) {
+                setResult(
+                    `${dayjs().format('HH:mm:ss')} | WASM module crashed, restarting...`
+                )
+            } else {
+                setResult(
+                    `${dayjs().format('HH:mm:ss')} | Validation error: ${message}`
+                )
+            }
             setIsConfigValid(false)
         }
     }
