@@ -159,10 +159,12 @@ export const SessionsExplorerCard = memo(
                 <SectionCard.Section mt={-10} style={{ height: '400px' }}>
                     <GroupedVirtuoso
                         components={virtuosoComponents}
-                        computeItemKey={(index, item) =>
-                            item ? `${item.nodeUuid}-${item.ip.ip}` : `__group-${index}`
-                        }
-                        data={flatIps}
+                        computeItemKey={(index) => {
+                            const item = flatIps[index]
+                            return item
+                                ? `${item.nodeUuid}-${item.ip.ip}-${index}`
+                                : `__group-${index}`
+                        }}
                         groupContent={(groupIndex) => {
                             const node = visibleNodes[groupIndex]
                             if (!node) return null
@@ -187,12 +189,19 @@ export const SessionsExplorerCard = memo(
                             )
                         }}
                         groupCounts={groupCounts}
-                        itemContent={(_, __, item) => (
-                            <SessionsExplorerIpRow
-                                ip={item.ip}
-                                isMatch={!!ipSearchQuery && item.ip.ip.includes(ipSearchQuery)}
-                            />
-                        )}
+                        itemContent={(index) => {
+                            const item = flatIps[index]
+                            if (!item) return null
+                            return (
+                                <SessionsExplorerIpRow
+                                    ip={item.ip}
+                                    isMatch={
+                                        !!ipSearchQuery &&
+                                        item.ip.ip.includes(ipSearchQuery)
+                                    }
+                                />
+                            )
+                        }}
                         style={{ height: '100%' }}
                     />
                 </SectionCard.Section>
