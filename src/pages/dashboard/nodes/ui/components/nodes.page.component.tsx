@@ -7,6 +7,11 @@ import { motion } from 'motion/react'
 import { useState } from 'react'
 
 import { NodesUsersUsageStatisticsDrawer } from '@widgets/dashboard/nodes/nodes-users-usage-statistics/nodes-users-usage-statistics.drawer'
+import {
+    NODES_VIEW_MODE,
+    useNodesViewMode,
+    useViewPreferencesStoreActions
+} from '@entities/dashboard/view-preferences-store'
 import { MultiSelectNodesFeature } from '@features/dashboard/nodes/multi-select-nodes/multi-select-nodes.feature'
 import { LinkedHostsDrawer } from '@widgets/dashboard/nodes/linked-hosts-drawer/linked-hosts-drawer.widget'
 import { NodesHeaderActionButtonsFeature } from '@features/ui/dashboard/nodes/nodes-header-action-buttons'
@@ -18,14 +23,15 @@ import { CreateNodeModalWidget } from '@widgets/dashboard/nodes/create-node-moda
 import { NodesTableWidget } from '@widgets/dashboard/nodes/nodes-table'
 import { LoadingScreen, Page, PageHeaderShared } from '@shared/ui'
 
-import { IProps, NodesViewMode } from './interfaces'
+import { IProps } from './interfaces'
 
 export default function NodesPageComponent(props: IProps) {
     const { nodes, isLoading } = props
 
     const { t } = useTranslation()
 
-    const [viewMode, setViewMode] = useState<NodesViewMode>(NodesViewMode.CARDS)
+    const viewMode = useNodesViewMode()
+    const { setNodesViewMode } = useViewPreferencesStoreActions()
     const [selectedRecords, setSelectedRecords] = useState<
         GetAllNodesCommand.Response['response'][number][]
     >([])
@@ -40,7 +46,7 @@ export default function NodesPageComponent(props: IProps) {
                         <PageHeaderShared
                             actions={
                                 <NodesHeaderActionButtonsFeature
-                                    setViewMode={setViewMode}
+                                    setViewMode={setNodesViewMode}
                                     viewMode={viewMode}
                                 />
                             }
@@ -51,7 +57,7 @@ export default function NodesPageComponent(props: IProps) {
 
                     {isLoading ? (
                         <LoadingScreen height="60vh" />
-                    ) : viewMode === NodesViewMode.TABLE ? (
+                    ) : viewMode === NODES_VIEW_MODE.TABLE ? (
                         <motion.div
                             animate={{ opacity: 1 }}
                             initial={{ opacity: 0 }}
