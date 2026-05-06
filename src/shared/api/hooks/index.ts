@@ -5,11 +5,11 @@ export * from './auth/auth.hooks'
 export * from './auth/auth.query.hooks'
 
 export * from './bandwidth-stats/bandwidth-stats.query.hooks'
+
 export * from './config-profiles/config-profiles.mutation.hooks'
-
 export * from './config-profiles/config-profiles.query.hooks'
-export * from './external-squads/external-squads.mutation.hooks'
 
+export * from './external-squads/external-squads.mutation.hooks'
 export * from './external-squads/external-squads.query.hooks'
 
 export * from './hosts/hosts.mutation.hooks'

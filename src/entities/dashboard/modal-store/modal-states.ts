@@ -29,7 +29,8 @@ export const MODALS = {
     CONFIG_PROFILE_SHOW_SNIPPETS_DRAWER: 'CONFIG_PROFILE_SHOW_SNIPPETS_DRAWER',
     EDIT_HOST_MODAL: 'EDIT_HOST_MODAL',
     CREATE_HOST_MODAL: 'CREATE_HOST_MODAL',
-    HELP_DRAWER: 'HELP_DRAWER'
+    HELP_DRAWER: 'HELP_DRAWER',
+    NODES_USERS_USAGE_STATISTICS_MODAL: 'NODES_USERS_USAGE_STATISTICS_MODAL'
 } as const
 
 export interface ModalInternalStates {
@@ -55,6 +56,9 @@ export interface ModalInternalStates {
         squadUuid: string
     }
     NODE_PLUGIN_EXECUTOR_DRAWER: undefined
+    NODES_USERS_USAGE_STATISTICS_MODAL: {
+        nodeUuids: string[]
+    }
     RENAME_SQUAD_OR_CONFIG_PROFILE_MODAL: {
         name: string
         uuid: string

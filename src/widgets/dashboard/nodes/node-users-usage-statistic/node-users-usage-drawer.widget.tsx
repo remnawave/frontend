@@ -226,7 +226,7 @@ export const NodeUsersUsageDrawer = () => {
                         total: user.total
                     }))}
                     maxHeight={500}
-                    skeletonCount={25}
+                    skeletonCount={11}
                 />
             </Stack>
         </Drawer>

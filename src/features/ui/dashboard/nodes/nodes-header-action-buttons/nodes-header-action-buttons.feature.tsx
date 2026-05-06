@@ -156,6 +156,7 @@ export const NodesHeaderActionButtonsFeature = (props: IProps) => {
                     </ActionIcon>
                 </Tooltip>
             </ActionIconGroup>
+
             <ActionIconGroup>
                 <Tooltip label={t('common.update')} withArrow>
                     <ActionIcon

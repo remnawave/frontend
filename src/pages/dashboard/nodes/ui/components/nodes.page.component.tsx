@@ -6,6 +6,7 @@ import { HiServer } from 'react-icons/hi'
 import { motion } from 'motion/react'
 import { useState } from 'react'
 
+import { NodesUsersUsageStatisticsDrawer } from '@widgets/dashboard/nodes/nodes-users-usage-statistics/nodes-users-usage-statistics.drawer'
 import { MultiSelectNodesFeature } from '@features/dashboard/nodes/multi-select-nodes/multi-select-nodes.feature'
 import { LinkedHostsDrawer } from '@widgets/dashboard/nodes/linked-hosts-drawer/linked-hosts-drawer.widget'
 import { NodesHeaderActionButtonsFeature } from '@features/ui/dashboard/nodes/nodes-header-action-buttons'
@@ -79,6 +80,7 @@ export default function NodesPageComponent(props: IProps) {
                 selectedRecords={selectedRecords}
                 setSelectedRecords={setSelectedRecords}
             />
+            <NodesUsersUsageStatisticsDrawer key="nodes-users-usage-statistics-drawer" />
         </Page>
     )
 }

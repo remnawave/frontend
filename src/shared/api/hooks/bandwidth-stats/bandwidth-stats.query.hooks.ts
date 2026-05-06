@@ -2,6 +2,7 @@ import {
     GetLegacyStatsNodeUserUsageCommand,
     GetLegacyStatsUserUsageCommand,
     GetStatsNodesUsageCommand,
+    GetStatsNodesUsersUsageCommand,
     GetStatsNodeUsersUsageCommand,
     GetStatsUserUsageCommand
 } from '@remnawave/backend-contract'
@@ -9,7 +10,7 @@ import { createQueryKeys } from '@lukemorales/query-key-factory'
 
 import { sToMs } from '@shared/utils/time-utils'
 
-import { createGetQueryHook, errorHandler } from '../../tsq-helpers'
+import { createBodyQueryHook, createGetQueryHook, errorHandler } from '../../tsq-helpers'
 
 export const bandwidthStatsQueryKeys = createQueryKeys('bandwidthStats', {
     getStatsNodesUsageCommand: (filters: GetStatsNodesUsageCommand.RequestQuery) => ({
@@ -24,6 +25,11 @@ export const bandwidthStatsQueryKeys = createQueryKeys('bandwidthStats', {
         query: GetStatsNodeUsersUsageCommand.Request & GetStatsNodeUsersUsageCommand.RequestQuery
     ) => ({
         queryKey: [query]
+    }),
+    getStatsNodesUsersUsageCommand: (
+        params: GetStatsNodesUsersUsageCommand.Request & GetStatsNodesUsersUsageCommand.RequestQuery
+    ) => ({
+        queryKey: [params]
     }),
     getLegacyStatsUserUsageCommand: (
         query: GetLegacyStatsUserUsageCommand.Request & GetLegacyStatsUserUsageCommand.RequestQuery
@@ -71,6 +77,20 @@ export const useGetStatsNodeUsersUsage = createGetQueryHook({
         staleTime: sToMs(60)
     },
     errorHandler: (error) => errorHandler(error, 'Get Node Users Usage By Range')
+})
+
+export const useGetStatsNodesUsersUsage = createBodyQueryHook({
+    endpoint: GetStatsNodesUsersUsageCommand.TSQ_url,
+    requestMethod: GetStatsNodesUsersUsageCommand.endpointDetails.REQUEST_METHOD,
+    responseSchema: GetStatsNodesUsersUsageCommand.ResponseSchema,
+    requestQuerySchema: GetStatsNodesUsersUsageCommand.RequestQuerySchema,
+    bodySchema: GetStatsNodesUsersUsageCommand.RequestSchema,
+    getQueryKey: ({ query, body }) =>
+        bandwidthStatsQueryKeys.getStatsNodesUsersUsageCommand({ ...query!, ...body! }).queryKey,
+    rQueryParams: {
+        staleTime: sToMs(60)
+    },
+    errorHandler: (error) => errorHandler(error, 'Get Nodes Users Usage By Range')
 })
 
 export const useGetLegacyStatsNodeUserUsage = createGetQueryHook({
