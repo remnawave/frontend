@@ -4,7 +4,14 @@ import {
     GetPubKeyCommand,
     UpdateNodeCommand
 } from '@remnawave/backend-contract'
-import { TbCertificate, TbMapPin, TbPackage, TbUserCheck, TbWorld } from 'react-icons/tb'
+import {
+    TbCertificate,
+    TbCpu,
+    TbMapPin,
+    TbPackage,
+    TbUserCheck,
+    TbWorld
+} from 'react-icons/tb'
 import { ForwardRefComponent, HTMLMotionProps, Variants } from 'motion/react'
 import { Group, NumberInput, Select, Stack, TextInput } from '@mantine/core'
 import { UseFormReturnType } from '@mantine/form'
@@ -13,9 +20,15 @@ import { useTranslation } from 'react-i18next'
 
 import { CopyableFieldShared } from '@shared/ui/copyable-field/copyable-field'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
+import { NODE_CORE, NODE_CORE_LABELS } from '@shared/constants/veil'
 import { SectionCard } from '@shared/ui/section-card'
 
 import { COUNTRIES } from './constants'
+
+const NODE_CORE_OPTIONS = [
+    { value: NODE_CORE.XRAY, label: NODE_CORE_LABELS.XRAY },
+    { value: NODE_CORE.VEIL, label: NODE_CORE_LABELS.VEIL }
+]
 
 interface IProps<T extends CreateNodeCommand.Request | UpdateNodeCommand.Request> {
     cardVariants: Variants
@@ -59,6 +72,20 @@ export const NodeVitalsCard = <T extends CreateNodeCommand.Request | UpdateNodeC
                             styles={{
                                 label: { fontWeight: 500 }
                             }}
+                        />
+
+                        <Select
+                            allowDeselect={false}
+                            data={NODE_CORE_OPTIONS}
+                            description="Veil ships an opaque server.yaml from the panel; pre-alpha"
+                            key={form.key('core' as never)}
+                            label="Proxy core"
+                            leftSection={<TbCpu size={16} />}
+                            required
+                            styles={{
+                                label: { fontWeight: 500 }
+                            }}
+                            {...form.getInputProps('core' as never)}
                         />
 
                         <TextInput

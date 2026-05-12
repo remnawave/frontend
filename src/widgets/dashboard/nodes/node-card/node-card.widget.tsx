@@ -21,8 +21,9 @@ import clsx from 'clsx'
 
 import { prettyBytesToAnyUtil, prettySiRealtimeBytesUtil } from '@shared/utils/bytes'
 import { getNodeResetDaysUtil, getXrayUptimeUtil } from '@shared/utils/time-utils'
+import { NODE_CORE, TNodeCore } from '@shared/constants/veil'
+import { VeilLogo, XrayLogo } from '@shared/ui/logos'
 import { faviconResolver } from '@shared/utils/misc'
-import { XrayLogo } from '@shared/ui/logos'
 import { Logo } from '@shared/ui/logo'
 
 import { NodeStatusBadgeWidget } from '../node-status-badge'
@@ -74,6 +75,12 @@ export const NodeCardWidget = memo((props: IProps) => {
     const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
         id: node.uuid
     })
+
+    // `core` isn't on the typed Nodes schema in @remnawave/backend-contract@2.7.2.
+    // Cast and fall back to XRAY so the legacy fleet keeps the legacy logo.
+    const nodeCore: TNodeCore =
+        ((node as unknown as { core?: TNodeCore }).core ?? NODE_CORE.XRAY)
+    const CoreLogo = nodeCore === NODE_CORE.VEIL ? VeilLogo : XrayLogo
 
     const style: CSSProperties = {
         transform: CSS.Transform.toString(transform),
@@ -333,7 +340,7 @@ export const NodeCardWidget = memo((props: IProps) => {
 
                                 {isOnline && (
                                     <Flex align="center" gap={4}>
-                                        <XrayLogo size={14} />
+                                        <CoreLogo size={14} />
                                         <Text
                                             c={isOnline ? 'teal' : 'red'}
                                             fw={isOnline ? 600 : 500}
@@ -428,7 +435,7 @@ export const NodeCardWidget = memo((props: IProps) => {
                         </Flex>
                         <Flex align="center" gap="md" ml="auto">
                             <Flex align="center" gap={4}>
-                                <XrayLogo color="var(--mantine-color-dimmed)" size={12} />
+                                <CoreLogo color="var(--mantine-color-dimmed)" size={12} />
                                 <Text c="dimmed" ff="monospace" size="xs">
                                     {node.versions ? node.versions.xray : '—'}
                                 </Text>
@@ -578,7 +585,7 @@ export const NodeCardWidget = memo((props: IProps) => {
                         )}
 
                         <Flex align="center" gap={4}>
-                            <XrayLogo size={12} />
+                            <CoreLogo size={12} />
                             <Text
                                 c={isOnline ? 'teal' : 'dimmed'}
                                 fw={isOnline ? 600 : 500}

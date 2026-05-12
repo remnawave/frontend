@@ -7,9 +7,14 @@ import { useEffect, useState } from 'react'
 import { useForm } from '@mantine/form'
 import { TbCpu } from 'react-icons/tb'
 
+import {
+    CreateVeilAwareNodeRequest,
+    CreateVeilAwareNodeRequestSchema
+} from '@shared/api/contracts'
 import { useNodesStoreActions, useNodesStoreCreateModalIsOpen } from '@entities/dashboard/nodes'
 import { configProfilesQueryKeys, useCreateNode, useGetPubKey } from '@shared/api/hooks'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
+import { DEFAULT_NODE_CORE } from '@shared/constants/veil'
 import { gbToBytesUtil } from '@shared/utils/bytes'
 import { queryClient } from '@shared/api'
 
@@ -31,10 +36,10 @@ export const CreateNodeModalWidget = () => {
     const [createdNodeUuid, setCreatedNodeUuid] = useState<string>()
     const [selectedPort, setSelectedPort] = useState<number>(2222)
 
-    const form = useForm<CreateNodeCommand.Request>({
+    const form = useForm<CreateVeilAwareNodeRequest>({
         name: 'create-node-form',
         mode: 'uncontrolled',
-        validate: zodResolver(CreateNodeCommand.RequestSchema)
+        validate: zodResolver(CreateVeilAwareNodeRequestSchema)
     })
 
     const handleClose = () => {
@@ -70,7 +75,7 @@ export const CreateNodeModalWidget = () => {
                 name: values.name.trim(),
                 address: values.address.trim(),
                 trafficLimitBytes: gbToBytesUtil(values.trafficLimitBytes)
-            }
+            } satisfies CreateNodeCommand.Request & { core: CreateVeilAwareNodeRequest['core'] }
         })
     }
 
@@ -83,7 +88,8 @@ export const CreateNodeModalWidget = () => {
         }
 
         form.setValues({
-            port: 2222
+            port: 2222,
+            core: DEFAULT_NODE_CORE
         })
     }, [form])
 
