@@ -1287,7 +1287,7 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
                             {t('base-host-form.for-more-information-refer-to')}{' '}
                             <Link
                                 target="_blank"
-                                to="https://xtls.github.io/ru/config/transport.html#sockoptobject"
+                                to="https://xtls.github.io/ru/config/transports/sockopt.html"
                             >
                                 {t('base-host-form.xtls-documentation')}
                             </Link>

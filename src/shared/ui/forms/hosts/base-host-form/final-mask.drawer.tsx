@@ -55,7 +55,7 @@ export const FinalMaskDrawer = <T extends CreateHostCommand.Request | UpdateHost
                         components={{
                             anchor: (
                                 <Anchor
-                                    href="https://xtls.github.io/ru/config/transport.html#finalmaskobject"
+                                    href="https://xtls.github.io/ru/config/transports/finalmask.html"
                                     rel="noopener noreferrer"
                                     target="_blank"
                                 />
