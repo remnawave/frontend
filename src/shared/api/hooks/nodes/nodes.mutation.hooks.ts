@@ -14,11 +14,21 @@ import {
 } from '@remnawave/backend-contract'
 import { notifications } from '@mantine/notifications'
 
+import {
+    CreateVeilAwareNodeRequestSchema,
+    UpdateVeilAwareNodeRequestSchema
+} from '@shared/api/contracts'
+
 import { createMutationHook } from '../../tsq-helpers'
 
+// Body schemas point at Veil-aware extensions of the upstream
+// CreateNodeCommand / UpdateNodeCommand schemas. They are pure
+// supersets — every existing XRAY-only payload still parses unchanged.
+// See `@shared/api/contracts/veil-node.contract` for the swap-out plan
+// once @remnawave/backend-contract publishes the upstream `core` field.
 export const useCreateNode = createMutationHook({
     endpoint: CreateNodeCommand.TSQ_url,
-    bodySchema: CreateNodeCommand.RequestSchema,
+    bodySchema: CreateVeilAwareNodeRequestSchema,
     responseSchema: CreateNodeCommand.ResponseSchema,
     requestMethod: CreateNodeCommand.endpointDetails.REQUEST_METHOD,
     rMutationParams: {
@@ -42,7 +52,7 @@ export const useCreateNode = createMutationHook({
 
 export const useUpdateNode = createMutationHook({
     endpoint: UpdateNodeCommand.TSQ_url,
-    bodySchema: UpdateNodeCommand.RequestSchema,
+    bodySchema: UpdateVeilAwareNodeRequestSchema,
     responseSchema: UpdateNodeCommand.ResponseSchema,
     requestMethod: UpdateNodeCommand.endpointDetails.REQUEST_METHOD,
     rMutationParams: {

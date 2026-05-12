@@ -10,20 +10,26 @@ import {
     Text,
     TextInput
 } from '@mantine/core'
-import { TbCertificate, TbId, TbMapPin, TbWorld } from 'react-icons/tb'
-import { CreateNodeCommand } from '@remnawave/backend-contract'
+import { TbCertificate, TbCpu, TbId, TbMapPin, TbWorld } from 'react-icons/tb'
 import { UseFormReturnType } from '@mantine/form'
 import { useTranslation } from 'react-i18next'
 import { PiArrowRight } from 'react-icons/pi'
 
 import { CopyableFieldShared } from '@shared/ui/copyable-field/copyable-field'
 import { COUNTRIES } from '@shared/ui/forms/nodes/base-node-form/constants'
+import { NODE_CORE, NODE_CORE_LABELS } from '@shared/constants/veil'
+import { CreateVeilAwareNodeRequest } from '@shared/api/contracts'
 
 import { CopyDockerComposeWidget } from './copy-docker-compose.widget'
 
+const NODE_CORE_OPTIONS = [
+    { value: NODE_CORE.XRAY, label: NODE_CORE_LABELS.XRAY },
+    { value: NODE_CORE.VEIL, label: NODE_CORE_LABELS.VEIL }
+]
+
 interface IProps {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    form: UseFormReturnType<CreateNodeCommand.Request, any>
+    form: UseFormReturnType<CreateVeilAwareNodeRequest, any>
     onNext: () => void
     port: number
     pubKey: string | undefined
@@ -37,12 +43,14 @@ export const CreateNodeStep1Connection = ({ form, onNext, pubKey, port }: IProps
         const countryCodeErrors = form.validateField('countryCode')
         const addressErrors = form.validateField('address')
         const portErrors = form.validateField('port')
+        const coreErrors = form.validateField('core')
 
         if (
             nameErrors.hasError ||
             countryCodeErrors.hasError ||
             addressErrors.hasError ||
-            portErrors.hasError
+            portErrors.hasError ||
+            coreErrors.hasError
         ) {
             return
         }
@@ -110,6 +118,21 @@ export const CreateNodeStep1Connection = ({ form, onNext, pubKey, port }: IProps
                         styles={{
                             label: { fontWeight: 500 }
                         }}
+                    />
+
+                    <Select
+                        allowDeselect={false}
+                        data={NODE_CORE_OPTIONS}
+                        description="Veil ships an opaque server.yaml from the panel; pre-alpha"
+                        key={form.key('core')}
+                        label="Proxy core"
+                        leftSection={<TbCpu size={16} />}
+                        required
+                        size="sm"
+                        styles={{
+                            label: { fontWeight: 500 }
+                        }}
+                        {...form.getInputProps('core')}
                     />
 
                     <Group align="flex-start" gap="xs" w="100%">

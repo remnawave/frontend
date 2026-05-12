@@ -12,7 +12,12 @@ import {
     useGetPubKey,
     useUpdateNode
 } from '@shared/api/hooks'
+import {
+    UpdateVeilAwareNodeRequest,
+    UpdateVeilAwareNodeRequestSchema
+} from '@shared/api/contracts'
 import { BaseNodeForm } from '@shared/ui/forms/nodes/base-node-form/base-node-form'
+import { DEFAULT_NODE_CORE, TNodeCore } from '@shared/constants/veil'
 import { bytesToGbUtil, gbToBytesUtil } from '@shared/utils/bytes'
 import { LoaderModalShared } from '@shared/ui/loader-modal'
 import { queryClient } from '@shared/api'
@@ -28,10 +33,10 @@ interface IProps {
 export const EditNodeByUuidModalContent = (props: IProps) => {
     const { nodeUuid, onClose } = props
 
-    const form = useForm<UpdateNodeCommand.Request>({
+    const form = useForm<UpdateVeilAwareNodeRequest>({
         name: 'edit-node-form',
         mode: 'uncontrolled',
-        validate: zodResolver(UpdateNodeCommand.RequestSchema.omit({ uuid: true }))
+        validate: zodResolver(UpdateVeilAwareNodeRequestSchema.omit({ uuid: true }))
     })
 
     const { data: pubKey } = useGetPubKey()
@@ -64,6 +69,13 @@ export const EditNodeByUuidModalContent = (props: IProps) => {
 
     useEffect(() => {
         if (fetchedNode) {
+            // `core` isn't on the typed Nodes schema in
+            // @remnawave/backend-contract@2.7.2 yet — read it through a
+            // narrowly-typed cast until the upstream release lands. The
+            // backend serialises it on every node row regardless.
+            const fetchedCore =
+                ((fetchedNode as unknown as { core?: TNodeCore }).core ?? DEFAULT_NODE_CORE)
+
             form.initialize({
                 uuid: fetchedNode.uuid,
                 countryCode: fetchedNode.countryCode,
@@ -76,6 +88,7 @@ export const EditNodeByUuidModalContent = (props: IProps) => {
                 notifyPercent: fetchedNode.notifyPercent ?? undefined,
                 consumptionMultiplier: fetchedNode.consumptionMultiplier ?? undefined,
                 tags: fetchedNode.tags ?? undefined,
+                core: fetchedCore,
 
                 configProfile: {
                     activeConfigProfileUuid:
@@ -106,7 +119,7 @@ export const EditNodeByUuidModalContent = (props: IProps) => {
                     activeConfigProfileUuid: values.configProfile?.activeConfigProfileUuid ?? '',
                     activeInbounds: values.configProfile?.activeInbounds ?? []
                 }
-            }
+            } satisfies UpdateNodeCommand.Request & { core?: TNodeCore }
         })
     })
 

@@ -1,4 +1,3 @@
-import { CreateNodeCommand } from '@remnawave/backend-contract'
 import { Button, Group, Skeleton, Stack } from '@mantine/core'
 import { UseFormReturnType } from '@mantine/form'
 import { useTranslation } from 'react-i18next'
@@ -6,13 +5,14 @@ import { PiArrowLeft } from 'react-icons/pi'
 import { TbCheck } from 'react-icons/tb'
 
 import { ShowConfigProfilesWithInboundsFeature } from '@features/ui/dashboard/nodes/show-config-profiles-with-inbounds'
+import { CreateVeilAwareNodeRequest } from '@shared/api/contracts'
 import { useGetConfigProfiles } from '@shared/api/hooks'
 
 import { CopyDockerComposeWidget } from './copy-docker-compose.widget'
 
 interface IProps {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    form: UseFormReturnType<CreateNodeCommand.Request, any>
+    form: UseFormReturnType<CreateVeilAwareNodeRequest, any>
     isCreating: boolean
     onCreateNode: () => void
     onPrev: () => void
