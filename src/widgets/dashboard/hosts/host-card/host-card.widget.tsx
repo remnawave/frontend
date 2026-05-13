@@ -37,6 +37,7 @@ export function HostCardWidget(props: IProps) {
     const openModalWithData = useModalsStoreOpenWithData()
 
     const [isHovered, setIsHovered] = useState(false)
+    const [tagsExpanded, setTagsExpanded] = useState(false)
     const isMobile = useMediaQuery('(max-width: 48em)')
 
     const configProfile = configProfiles?.find(
@@ -46,7 +47,7 @@ export function HostCardWidget(props: IProps) {
     const isFiltered =
         (!!filters.configProfileUuid && configProfile?.uuid !== filters.configProfileUuid) ||
         (!!filters.inboundUuid && item.inbound.configProfileInboundUuid !== filters.inboundUuid) ||
-        (!!filters.hostTag && item.tag !== filters.hostTag)
+        (!!filters.hostTag && !item.tags?.includes(filters.hostTag))
 
     const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
         id: item.uuid,
@@ -123,16 +124,33 @@ export function HostCardWidget(props: IProps) {
                             </Box>
                         </Group>
 
-                        <Group gap="xs">
-                            {item.tag && (
+                        <Group gap="xs" wrap="wrap">
+                            {(tagsExpanded ? item.tags : item.tags?.slice(0, 2))?.map(
+                                (tag) => (
+                                    <Badge
+                                        autoContrast
+                                        color={ch.hex(tag)}
+                                        key={tag}
+                                        leftSection={<TbTagStarred size={12} />}
+                                        size="md"
+                                        variant="outline"
+                                    >
+                                        {tag}
+                                    </Badge>
+                                )
+                            )}
+                            {(item.tags?.length ?? 0) > 2 && (
                                 <Badge
-                                    autoContrast
-                                    color={ch.hex(item.tag)}
-                                    leftSection={<TbTagStarred size={12} />}
+                                    color="gray"
+                                    onClick={(e) => {
+                                        e.stopPropagation()
+                                        setTagsExpanded((v) => !v)
+                                    }}
                                     size="md"
-                                    variant="outline"
+                                    style={{ cursor: 'pointer' }}
+                                    variant="default"
                                 >
-                                    {item.tag}
+                                    {tagsExpanded ? '−' : `+${item.tags!.length - 2}`}
                                 </Badge>
                             )}
                         </Group>
@@ -348,15 +366,31 @@ export function HostCardWidget(props: IProps) {
                                 </Badge>
                             )}
 
-                            {item.tag && (
+                            {!tagsExpanded &&
+                                item.tags?.slice(0, 2).map((tag) => (
+                                    <Badge
+                                        autoContrast
+                                        color={ch.hex(tag)}
+                                        key={tag}
+                                        leftSection={<TbTagStarred size={12} />}
+                                        size="md"
+                                        variant="outline"
+                                    >
+                                        {tag}
+                                    </Badge>
+                                ))}
+                            {(item.tags?.length ?? 0) > 2 && (
                                 <Badge
-                                    autoContrast
-                                    color={ch.hex(item.tag)}
-                                    leftSection={<TbTagStarred size={12} />}
+                                    color="gray"
+                                    onClick={(e) => {
+                                        e.stopPropagation()
+                                        setTagsExpanded((v) => !v)
+                                    }}
                                     size="md"
-                                    variant="outline"
+                                    style={{ cursor: 'pointer' }}
+                                    variant="default"
                                 >
-                                    {item.tag}
+                                    {tagsExpanded ? '−' : `+${item.tags!.length - 2}`}
                                 </Badge>
                             )}
 
@@ -392,6 +426,23 @@ export function HostCardWidget(props: IProps) {
                             </Badge>
                         </Group>
                     </Group>
+
+                    {tagsExpanded && (item.tags?.length ?? 0) > 0 && (
+                        <Group gap="xs" mt="xs" wrap="wrap">
+                            {item.tags!.map((tag) => (
+                                <Badge
+                                    autoContrast
+                                    color={ch.hex(tag)}
+                                    key={tag}
+                                    leftSection={<TbTagStarred size={12} />}
+                                    size="md"
+                                    variant="outline"
+                                >
+                                    {tag}
+                                </Badge>
+                            ))}
+                        </Group>
+                    )}
                 </Box>
             </Group>
         </Box>

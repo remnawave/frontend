@@ -461,9 +461,15 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
                                         </Group>
 
                                         <HostTagsInputWidget
-                                            key={form.key('tag')}
-                                            {...form.getInputProps('tag')}
-                                            value={form.getValues().tag}
+                                            key={form.key('tags')}
+                                            {...form.getInputProps('tags')}
+                                            error={
+                                                Object.keys(form.errors)
+                                                    .filter((key) => key.startsWith('tags.'))
+                                                    .map((key) => form.errors[key])
+                                                    .join(', ') ||
+                                                form.getInputProps('tags').error
+                                            }
                                         />
 
                                         <MultiSelect
