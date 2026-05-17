@@ -97,6 +97,7 @@ export const BaseNodeForm = <T extends UpdateNodeCommand.Request>(props: IProps<
                         form={form}
                         motionWrapper={MotionWrapper}
                         nodePlugins={nodePlugins}
+                        nodeUuid={node.uuid}
                         pubKey={pubKey}
                     />
 
@@ -139,6 +140,7 @@ export const BaseNodeForm = <T extends UpdateNodeCommand.Request>(props: IProps<
                             form={form}
                             motionWrapper={MotionWrapper}
                             nodePlugins={nodePlugins}
+                            nodeUuid={node.uuid}
                             pubKey={pubKey}
                         />
 
