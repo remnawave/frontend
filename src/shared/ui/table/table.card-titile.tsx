@@ -26,6 +26,7 @@ export const CardTitle = forwardRef<HTMLDivElement, CardTitleProps>(
     ({ title, description, style, actions, withBorder = true, icon, iconProps, ...props }, ref) => (
         <CardSection
             className={classes.card}
+            data-orientation="vertical"
             inheritPadding
             py="md"
             ref={ref}

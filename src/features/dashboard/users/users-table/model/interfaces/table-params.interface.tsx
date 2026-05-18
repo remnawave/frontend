@@ -3,7 +3,7 @@ import {
     MRT_ColumnFilterFnsState,
     MRT_ColumnFiltersState,
     MRT_SortingState
-} from 'mantine-react-table'
+} from '@kastov/mantine-react-table-open'
 
 export interface UsersTableFilters {
     filterModes: MRT_ColumnFilterFnsState

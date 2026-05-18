@@ -39,7 +39,7 @@ export function MobileStatsWidget() {
     ]
 
     return (
-        <Grid gutter="xs" mb="md">
+        <Grid gap="xs" mb="md">
             {stats.map((stat, index) => (
                 <Grid.Col key={index} span={6}>
                     <Card padding="sm">

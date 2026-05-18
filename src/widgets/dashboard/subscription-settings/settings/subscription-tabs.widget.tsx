@@ -39,6 +39,7 @@ export const SubscriptionSettingsTabsWidget = ({ subscriptionSettings }: Subscri
             }}
             color="cyan"
             defaultValue={TABS.general}
+            keepMountedMode="display-none"
             onChange={(value) => {
                 if (value) {
                     setActiveTab(value as TabKey)

@@ -99,7 +99,7 @@ export const NodeTrackingAndBillingCard = <
                                 />
                             </Group>
 
-                            <Collapse in={advancedOpened}>
+                            <Collapse expanded={advancedOpened}>
                                 <Stack gap="sm" mt="sm">
                                     <Divider size="xs" />
                                     <Group gap="md" grow justify="space-between" w="100%">

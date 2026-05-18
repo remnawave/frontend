@@ -125,7 +125,7 @@ export function ButtonEditor(props: IProps) {
                     </Group>
                 </Group>
 
-                <Collapse in={opened}>
+                <Collapse expanded={opened}>
                     <Stack gap="sm" pt="sm">
                         <Select
                             allowDeselect={false}

@@ -166,6 +166,7 @@ export const ExternalSquadsDrawer = memo(() => {
                     }}
                     color="cyan"
                     defaultValue={TAB_TYPE.templates}
+                    keepMountedMode="display-none"
                     onChange={(value) => {
                         if (value) {
                             setActiveTab(value as TabType)

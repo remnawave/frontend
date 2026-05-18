@@ -30,6 +30,7 @@ export const KeypairGeneratorWidget = () => {
             <Tabs
                 classNames={classes}
                 keepMounted
+                keepMountedMode="display-none"
                 onChange={(value) => value && setActiveTab(value as TabTypes)}
                 value={activeTab}
                 variant="unstyled"

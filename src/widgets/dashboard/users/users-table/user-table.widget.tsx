@@ -4,7 +4,7 @@ import {
     MRT_ColumnFilterFnsState,
     MRT_SortingState,
     useMantineReactTable
-} from 'mantine-react-table'
+} from '@kastov/mantine-react-table-open'
 import { useEffect, useLayoutEffect, useState } from 'react'
 import { TbSearch, TbSearchOff } from 'react-icons/tb'
 import { notifications } from '@mantine/notifications'
@@ -12,15 +12,6 @@ import { useSearchParams } from 'react-router-dom'
 import { PiUsersDuotone } from 'react-icons/pi'
 import { useTranslation } from 'react-i18next'
 
-import {
-    useUsersTableStoreActions,
-    useUsersTableStoreColumnFilter,
-    useUsersTableStoreColumnPinning,
-    useUsersTableStoreColumnSize,
-    useUsersTableStoreColumnVisibility,
-    useUsersTableStorePagination,
-    useUsersTableStoreShowColumnFilters
-} from '@entities/dashboard/users/users-table-store'
 import {
     useBulkUsersActionsStoreActions,
     useBulkUsersActionsStoreTableSelection
@@ -34,7 +25,9 @@ import {
 } from '@shared/api/hooks'
 import { UsersTableSelectionFeature } from '@features/ui/dashboard/users/users-table-selection/users-table-selection.feature'
 import { useUserTableColumns } from '@features/dashboard/users/users-table/model/use-table-columns'
+import { DEFAULT_PAGINATION_STATE, useMrtTableBinding } from '@shared/lib/mrt-table-store'
 import { UserActionGroupFeature } from '@features/dashboard/users/users-action-group'
+import { useUsersTableStore } from '@entities/dashboard/users/users-table-store'
 import { useUserModalStoreActions } from '@entities/dashboard/user-modal-store'
 import { SEARCH_PARAMS } from '@shared/constants/search-params'
 import { preventBackScrollTables } from '@shared/utils/misc'
@@ -57,14 +50,8 @@ export function UserTableWidget() {
     const userModalActions = useUserModalStoreActions()
     const [searchParams, setSearchParams] = useSearchParams()
 
-    const actions = useUsersTableStoreActions()
-
-    const columnVisibility = useUsersTableStoreColumnVisibility()
-    const columnPinning = useUsersTableStoreColumnPinning()
-    const showColumnFilters = useUsersTableStoreShowColumnFilters()
-    const columnFilter = useUsersTableStoreColumnFilter()
-    const columnSize = useUsersTableStoreColumnSize()
-    const pagination = useUsersTableStorePagination()
+    const { state: persistedTableState, handlers: persistedTableHandlers } =
+        useMrtTableBinding(useUsersTableStore)
 
     const [sorting, setSorting] = useState<MRT_SortingState>([])
 
@@ -92,9 +79,9 @@ export function UserTableWidget() {
     }, [])
 
     const params = {
-        start: pagination.pageIndex * pagination.pageSize,
-        size: pagination.pageSize,
-        filters: columnFilter,
+        start: persistedTableState.pagination.pageIndex * persistedTableState.pagination.pageSize,
+        size: persistedTableState.pagination.pageSize,
+        filters: persistedTableState.columnFilters,
         filterModes: columnFilterFns,
         sorting
     }
@@ -149,17 +136,11 @@ export function UserTableWidget() {
         enableGlobalFilter: false,
         enableClickToCopy: false,
         enableColumnFilterModes: true,
+        enableColumnOrdering: true,
         columnFilterModeOptions: ['contains'],
         initialState: {
-            pagination: {
-                pageIndex: 0,
-                pageSize: 25
-            },
-            showColumnFilters,
             density: 'xs',
-            columnVisibility,
-            columnPinning,
-            columnSizing: columnSize
+            pagination: DEFAULT_PAGINATION_STATE
         },
         manualFiltering: true,
         manualPagination: true,
@@ -177,14 +158,9 @@ export function UserTableWidget() {
             children: t('user-table.widget.error-loading-data')
         } : undefined,
 
+        ...persistedTableHandlers,
         onColumnFilterFnsChange: setColumnFilterFns,
-        onColumnFiltersChange: actions.setColumnFilter,
-        onPaginationChange: actions.setPaginationState,
         onSortingChange: setSorting,
-        onColumnPinningChange: actions.setColumnPinning,
-        onColumnVisibilityChange: actions.setColumnVisibility,
-        onShowColumnFiltersChange: actions.setShowColumnFilters,
-        onColumnSizingChange: actions.setColumnSize,
         mantinePaperProps: {
             style: {
                 '--paper-radius': 'var(--mantine-radius-xs)'
@@ -215,18 +191,13 @@ export function UserTableWidget() {
         },
         selectAllMode: 'page',
         state: {
+            ...persistedTableState,
             columnFilterFns,
-            columnFilters: columnFilter,
             isLoading,
-            pagination,
             showAlertBanner: isError,
             showProgressBars: isFetching,
-            showColumnFilters,
             sorting,
-            columnVisibility,
-            columnPinning,
-            rowSelection: tableSelection,
-            columnSizing: columnSize
+            rowSelection: tableSelection
         },
         mantineTableBodyRowProps: ({ row }) => ({
             onClick: async () => {

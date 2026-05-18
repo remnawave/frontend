@@ -61,6 +61,7 @@ export const BulkAllUserActionsDrawerWidget = (props: IBulkAllDrawerProps) => {
                     tabLabel: classes.tabLabel
                 }}
                 color="cyan"
+                keepMountedMode="display-none"
                 onChange={(value) => setActiveTab(value as TabType)}
                 value={activeTab}
                 variant="unstyled"

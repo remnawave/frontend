@@ -88,6 +88,7 @@ export function MobileInfraBillingWidget() {
                     tabLabel: styles.tabLabel
                 }}
                 color="cyan"
+                keepMountedMode="display-none"
                 onChange={(value) => {
                     if (value) {
                         setActiveTab(value as TabValue)

@@ -196,7 +196,7 @@ export const NodeCardWidget = memo((props: IProps) => {
 
             {!isMobile && (
                 <>
-                    <Grid align="center" className={classes.desktopGrid} gutter="md">
+                    <Grid align="center" className={classes.desktopGrid} gap="md">
                         <Grid.Col span={{ base: 12, sm: 5.5 }}>
                             <Flex align="center" gap="sm">
                                 {isConfigMissing ? (

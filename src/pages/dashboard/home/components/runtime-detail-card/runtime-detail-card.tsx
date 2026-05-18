@@ -88,7 +88,7 @@ export function RuntimeDetailCard({ metric }: RuntimeDetailCardProps) {
                     </Group>
                 </Group>
 
-                <Grid gutter="sm">
+                <Grid gap="sm">
                     <Grid.Col span={{ base: 12, sm: 7 }}>
                         <div className={classes.memorySection}>
                             <Stack gap={6}>

@@ -333,6 +333,7 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
             <Tabs
                 classNames={classes}
                 keepMounted
+                keepMountedMode="display-none"
                 onChange={setActiveTab}
                 value={activeTab}
                 variant="unstyled"

@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
 import { GetAllNodesCommand, GetTorrentBlockerReportsCommand } from '@remnawave/backend-contract'
-import { MRT_ColumnDef } from 'mantine-react-table'
+import { MRT_ColumnDef } from '@kastov/mantine-react-table-open'
 import { useTranslation } from 'react-i18next'
 import { Group, Text } from '@mantine/core'
 import { useMemo } from 'react'

@@ -92,7 +92,7 @@ export default defineConfig({
                     crypto: ['@stablelib/base64', '@stablelib/x25519'],
                     charts: ['recharts', 'highcharts', '@highcharts/react'],
                     dnd: ['@dnd-kit/core', '@dnd-kit/sortable', '@dnd-kit/utilities'],
-                    mantinetable: ['mantine-react-table', 'mantine-datatable'],
+                    mantinetable: ['@kastov/mantine-react-table-open', 'mantine-datatable'],
                     prettier: ['prettier', 'vscode-languageserver-types', 'prettier/plugins/yaml'],
                     monaco: ['monaco-editor', 'monaco-yaml', 'yaml'],
                     tanstack: [

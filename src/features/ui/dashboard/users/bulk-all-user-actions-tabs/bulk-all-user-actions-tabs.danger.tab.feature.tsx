@@ -15,7 +15,7 @@ export const BulkAllUserActionsDangerTabFeature = (props: IProps) => {
     return (
         <Stack gap="md">
             <Alert
-                color="red.6"
+                color="red"
                 icon={<PiWarning size="16px" />}
                 title={t('bulk-all-user-actions-tabs.danger.tab.feature.danger-zone')}
             >
@@ -47,7 +47,7 @@ export const BulkAllUserActionsDangerTabFeature = (props: IProps) => {
 
                 <Group justify="flex-end">
                     <Button
-                        color="red.6"
+                        color="red"
                         onClick={() => {
                             modals.open({
                                 title: (

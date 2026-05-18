@@ -2,19 +2,17 @@
 import {
     MantineReactTable,
     MRT_ColumnFilterFnsState,
-    MRT_ColumnFiltersState,
-    MRT_ColumnPinningState,
-    MRT_PaginationState,
     MRT_SortingState,
-    MRT_VisibilityState,
     useMantineReactTable
-} from 'mantine-react-table'
+} from '@kastov/mantine-react-table-open'
 import { TbDeviceAnalytics, TbExternalLink, TbRefresh, TbRestore } from 'react-icons/tb'
 import { ActionIcon, ActionIconGroup, Tooltip } from '@mantine/core'
 import { useLayoutEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { useHwidInspectorTableColumns } from '@features/dashboard/hwid-inspector/hwid-inspector-table/model/use-hwid-inspector-table-columns'
+import { useHwidInspectorTableStore } from '@entities/dashboard/hwid-inspector/hwid-inspector-table-store'
+import { DEFAULT_PAGINATION_STATE, useMrtTableBinding } from '@shared/lib/mrt-table-store'
 import { ResolveUserActionShared } from '@shared/ui/resolve-user-action-icon'
 import { preventBackScrollTables } from '@shared/utils/misc'
 import { useGetAllHwidDevices } from '@shared/api/hooks'
@@ -26,25 +24,20 @@ export function HwidInspectorTableWidget() {
 
     const tableColumns = useHwidInspectorTableColumns()
 
-    const [columnVisibility, setColumnVisibility] = useState<MRT_VisibilityState>({})
-    const [columnPinning, setColumnPinning] = useState<MRT_ColumnPinningState>({})
-    const [showColumnFilters, setShowColumnFilters] = useState(false)
+    const { state: persistedTableState, handlers: persistedTableHandlers } = useMrtTableBinding(
+        useHwidInspectorTableStore
+    )
+
     const [sorting, setSorting] = useState<MRT_SortingState>([])
 
-    const [pagination, setPagination] = useState<MRT_PaginationState>({
-        pageIndex: 0,
-        pageSize: 25
-    })
-
-    const [columnFilters, setColumnFilters] = useState<MRT_ColumnFiltersState>([])
     const [columnFilterFns, setColumnFilterFns] = useState<MRT_ColumnFilterFnsState>(
         Object.fromEntries(tableColumns.map(({ accessorKey }) => [accessorKey, 'contains']))
     )
 
     const params = {
-        start: pagination.pageIndex * pagination.pageSize,
-        size: pagination.pageSize,
-        filters: columnFilters,
+        start: persistedTableState.pagination.pageIndex * persistedTableState.pagination.pageSize,
+        size: persistedTableState.pagination.pageSize,
+        filters: persistedTableState.columnFilters,
         filterModes: columnFilterFns,
         sorting
     }
@@ -80,24 +73,15 @@ export function HwidInspectorTableWidget() {
         enableSortingRemoval: true,
         enableGlobalFilter: false,
         enableClickToCopy: true,
+        enableColumnOrdering: true,
         columnFilterModeOptions: ['contains'],
         initialState: {
-            pagination: {
-                pageIndex: 0,
-                pageSize: 25
-            },
-            showColumnFilters: false,
             density: 'xs',
-            columnVisibility: {},
-            columnPinning: {},
-            columnSizing: {}
+            pagination: DEFAULT_PAGINATION_STATE
         },
         manualFiltering: true,
         manualPagination: true,
         manualSorting: true,
-        // mantinePaginationProps: {
-        //     rowsPerPageOptions: ['25', '50', '100']
-        // },
 
         enableColumnResizing: true,
 
@@ -107,13 +91,9 @@ export function HwidInspectorTableWidget() {
             children: t('user-table.widget.error-loading-data')
         } : undefined,
 
+        ...persistedTableHandlers,
         onColumnFilterFnsChange: setColumnFilterFns,
-        onColumnFiltersChange: setColumnFilters,
-        onPaginationChange: setPagination,
         onSortingChange: setSorting,
-        onColumnPinningChange: setColumnPinning,
-        onColumnVisibilityChange: setColumnVisibility,
-        onShowColumnFiltersChange: setShowColumnFilters,
 
         mantinePaperProps: {
             style: { '--paper-radius': 'var(--mantine-radius-xs)' },
@@ -125,16 +105,12 @@ export function HwidInspectorTableWidget() {
         positionToolbarAlertBanner: 'top',
         selectAllMode: 'page',
         state: {
+            ...persistedTableState,
             columnFilterFns,
-            columnFilters,
             isLoading,
-            pagination,
             showAlertBanner: isError,
             showProgressBars: isFetching,
-            showColumnFilters,
-            sorting,
-            columnVisibility,
-            columnPinning
+            sorting
         },
         enableRowActions: true,
         renderRowActions: ({ row }) => (
@@ -185,6 +161,9 @@ export function HwidInspectorTableWidget() {
                                     table.resetPagination(false)
                                     table.resetColumnFilters(true)
                                     table.resetGlobalFilter(true)
+                                    table.resetColumnOrder(true)
+                                    table.resetColumnPinning(true)
+                                    table.resetColumnVisibility(true)
                                 }}
                                 size="input-md"
                                 variant="soft"
