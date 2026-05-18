@@ -6,7 +6,7 @@ import {
     GetExternalSquadsCommand,
     GetInternalSquadsCommand
 } from '@remnawave/backend-contract'
-import { Badge, Group, Stack, Text, Tooltip } from '@mantine/core'
+import { Badge, OverflowList, Stack, Text, Tooltip } from '@mantine/core'
 import { MRT_ColumnDef } from '@kastov/mantine-react-table-open'
 import { useTranslation } from 'react-i18next'
 import { useMemo } from 'react'
@@ -205,39 +205,44 @@ export const useUserTableColumns = (
                         return <Text c="dimmed">–</Text>
                     }
 
-                    if (squads.length === 1) {
-                        return (
-                            <Group gap="xs" wrap="nowrap">
-                                {squads.map((squad) => (
-                                    <Badge key={squad.uuid} size="sm" variant="light">
-                                        {squad.name}
-                                    </Badge>
-                                ))}
-                            </Group>
-                        )
-                    }
-
                     return (
-                        <Tooltip
-                            bg="dark.7"
-                            label={
-                                <Stack gap="xs">
-                                    {squads.map((squad) => (
-                                        <Badge fullWidth key={squad.uuid} size="sm" variant="light">
-                                            {squad.name}
-                                        </Badge>
-                                    ))}
-                                </Stack>
-                            }
-                            multiline
-                            position="top"
-                        >
-                            <Group gap="xs" style={{ cursor: 'help' }} wrap="nowrap">
-                                <Badge color="gray" size="sm" variant="outline">
-                                    {squads.length} squads
+                        <OverflowList
+                            data={squads}
+                            gap={4}
+                            maxRows={1}
+                            maxVisibleItems={2}
+                            renderItem={(squad) => (
+                                <Badge
+                                    key={`${squad.uuid}|${cell.row.original.uuid}`}
+                                    variant="soft"
+                                >
+                                    {squad.name}
                                 </Badge>
-                            </Group>
-                        </Tooltip>
+                            )}
+                            renderOverflow={(items) => (
+                                <Tooltip
+                                    label={
+                                        <Stack gap="xs">
+                                            {squads.map((squad) => (
+                                                <Badge
+                                                    fullWidth
+                                                    key={`${squad.uuid}|${cell.row.original.uuid}`}
+                                                    variant="soft"
+                                                >
+                                                    {squad.name}
+                                                </Badge>
+                                            ))}
+                                        </Stack>
+                                    }
+                                    multiline
+                                    position="top"
+                                >
+                                    <Badge color="violet" variant="soft">
+                                        +{items.length}
+                                    </Badge>
+                                </Tooltip>
+                            )}
+                        />
                     )
                 }
             },
