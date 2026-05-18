@@ -25,6 +25,7 @@ import { CSSProperties, useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { useSortable } from '@dnd-kit/sortable'
 import { useMediaQuery } from '@mantine/hooks'
+import { useTranslation } from 'react-i18next'
 import { RiDraggable } from 'react-icons/ri'
 import { CSS } from '@dnd-kit/utilities'
 import ColorHash from 'color-hash'
@@ -49,6 +50,8 @@ export function HostCardWidget(props: IProps) {
         isDragOverlay = false,
         isHighlighted = false
     } = props
+
+    const { t } = useTranslation()
 
     const [searchParams, setSearchParams] = useSearchParams()
 
@@ -364,42 +367,52 @@ export function HostCardWidget(props: IProps) {
 
                         <Group gap={6} style={{ flexShrink: 0 }} wrap="nowrap">
                             {hasExcludedSquads && (
-                                <ThemeIcon color="yellow" size={28} variant="soft">
-                                    <TbCirclesRelation size={16} />
-                                </ThemeIcon>
+                                <Tooltip label={t('base-host-form.excluded-internal-squads')}>
+                                    <ThemeIcon color="yellow" size={28} variant="soft">
+                                        <TbCirclesRelation size={16} />
+                                    </ThemeIcon>
+                                </Tooltip>
                             )}
 
-                            <ThemeIcon
-                                color={hasXrayJsonTemplate ? 'teal' : 'gray'}
-                                size={28}
-                                variant="soft"
-                            >
-                                <XrayLogo size={16} />
-                            </ThemeIcon>
+                            <Tooltip label={t('base-host-form.xray-json-template')}>
+                                <ThemeIcon
+                                    color={hasXrayJsonTemplate ? 'teal' : 'gray'}
+                                    size={28}
+                                    variant="soft"
+                                >
+                                    <XrayLogo size={16} />
+                                </ThemeIcon>
+                            </Tooltip>
 
-                            <ThemeIcon
-                                color={hasMuxParams ? 'teal' : 'gray'}
-                                size={28}
-                                variant="soft"
-                            >
-                                <TbCloudNetwork size={16} />
-                            </ThemeIcon>
+                            <Tooltip label="Mux">
+                                <ThemeIcon
+                                    color={hasMuxParams ? 'teal' : 'gray'}
+                                    size={28}
+                                    variant="soft"
+                                >
+                                    <TbCloudNetwork size={16} />
+                                </ThemeIcon>
+                            </Tooltip>
 
-                            <ThemeIcon
-                                color={hasSockoptParams ? 'teal' : 'gray'}
-                                size={28}
-                                variant="soft"
-                            >
-                                <PiNetwork size={16} />
-                            </ThemeIcon>
+                            <Tooltip label="Final Mask">
+                                <ThemeIcon
+                                    color={hasFinalMask ? 'teal' : 'gray'}
+                                    size={28}
+                                    variant="soft"
+                                >
+                                    <TbMask size={16} />
+                                </ThemeIcon>
+                            </Tooltip>
 
-                            <ThemeIcon
-                                color={hasFinalMask ? 'teal' : 'gray'}
-                                size={28}
-                                variant="soft"
-                            >
-                                <TbMask size={16} />
-                            </ThemeIcon>
+                            <Tooltip label="SockOpt">
+                                <ThemeIcon
+                                    color={hasSockoptParams ? 'teal' : 'gray'}
+                                    size={28}
+                                    variant="soft"
+                                >
+                                    <PiNetwork size={16} />
+                                </ThemeIcon>
+                            </Tooltip>
                         </Group>
                     </Group>
 
@@ -485,7 +498,7 @@ export function HostCardWidget(props: IProps) {
                                         leftSection={resolveCountryCode(node.countryCode, 18)}
                                         size="md"
                                         style={{ cursor: 'pointer' }}
-                                        variant="default"
+                                        variant="soft"
                                     >
                                         {node.name}
                                     </Badge>
@@ -503,7 +516,7 @@ export function HostCardWidget(props: IProps) {
                                                             node.countryCode,
                                                             18
                                                         )}
-                                                        variant="default"
+                                                        variant="soft"
                                                     >
                                                         {node.name}
                                                     </Badge>
@@ -513,7 +526,7 @@ export function HostCardWidget(props: IProps) {
                                         multiline
                                         position="top"
                                     >
-                                        <Badge color="gray" size="md" variant="default">
+                                        <Badge color="gray" size="md" variant="soft">
                                             +{items.length}
                                         </Badge>
                                     </Tooltip>
