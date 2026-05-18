@@ -13,6 +13,7 @@ import {
 } from '@mantine/core'
 import {
     TbAlertCircle,
+    TbCirclesRelation,
     TbCloudNetwork,
     TbEyeOff,
     TbFileDescription,
@@ -61,6 +62,10 @@ export function HostCardWidget(props: IProps) {
     const configProfile = configProfiles?.find(
         (configProfile) => configProfile.uuid === item.inbound.configProfileUuid
     )
+
+    const inboundTag = configProfile?.inbounds.find(
+        (inbound) => inbound.uuid === item.inbound.configProfileInboundUuid
+    )?.tag
 
     const isFiltered =
         (!!filters.configProfileUuid && configProfile?.uuid !== filters.configProfileUuid) ||
@@ -114,6 +119,7 @@ export function HostCardWidget(props: IProps) {
     const hasSockoptParams = isParamSet(item.sockoptParams)
     const hasXrayJsonTemplate = !!item.xrayJsonTemplateUuid
     const serverDescription = item.serverDescription?.trim() || ''
+    const hasExcludedSquads = item.excludedInternalSquads.length > 0
 
     if (isMobile) {
         return (
@@ -249,10 +255,7 @@ export function HostCardWidget(props: IProps) {
                                     size="sm"
                                     variant="outline"
                                 >
-                                    {configProfile?.inbounds.find(
-                                        (inbound) =>
-                                            inbound.uuid === item.inbound.configProfileInboundUuid
-                                    )?.tag || 'UNKNOWN'}
+                                    {inboundTag || 'UNKNOWN'}
                                 </Badge>
                             </Stack>
                         </Stack>
@@ -357,34 +360,15 @@ export function HostCardWidget(props: IProps) {
                                 {item.address}
                                 {item.port ? `:${item.port}` : ''}
                             </Text>
-
-                            {serverDescription && (
-                                <Group
-                                    gap={4}
-                                    style={{ flexShrink: 1, minWidth: 0, overflow: 'hidden' }}
-                                    wrap="nowrap"
-                                >
-                                    <Text c="dimmed" size="sm" style={{ flexShrink: 0 }}>
-                                        ·
-                                    </Text>
-                                    <TbFileDescription
-                                        size={12}
-                                        style={{ flexShrink: 0, opacity: 0.6 }}
-                                    />
-                                    <Text
-                                        c="dimmed"
-                                        fs="italic"
-                                        size="xs"
-                                        style={{ flexShrink: 1, minWidth: 0 }}
-                                        truncate
-                                    >
-                                        {serverDescription}
-                                    </Text>
-                                </Group>
-                            )}
                         </Group>
 
                         <Group gap={6} style={{ flexShrink: 0 }} wrap="nowrap">
+                            {hasExcludedSquads && (
+                                <ThemeIcon color="yellow" size={28} variant="soft">
+                                    <TbCirclesRelation size={16} />
+                                </ThemeIcon>
+                            )}
+
                             <ThemeIcon
                                 color={hasXrayJsonTemplate ? 'teal' : 'gray'}
                                 size={28}
@@ -427,7 +411,7 @@ export function HostCardWidget(props: IProps) {
                         wrap="nowrap"
                     >
                         <Group
-                            gap="xs"
+                            gap={0}
                             miw={0}
                             style={{ flexShrink: 1, overflow: 'hidden' }}
                             wrap="nowrap"
@@ -443,25 +427,18 @@ export function HostCardWidget(props: IProps) {
                                     )
                                 }
                                 size="md"
-                                variant="light"
+                                variant="transparent"
                             >
                                 {configProfile?.name || 'DANGLING'}
+                                {item.inbound.configProfileInboundUuid && (
+                                    <>
+                                        <span style={{ margin: '0 6px', opacity: 0.5 }}>›</span>
+                                        <span style={{ opacity: 0.75 }}>
+                                            {inboundTag || 'UNKNOWN'}
+                                        </span>
+                                    </>
+                                )}
                             </Badge>
-
-                            {item.inbound.configProfileInboundUuid && (
-                                <Badge
-                                    autoContrast
-                                    color={ch.hex(item.inbound.configProfileInboundUuid)}
-                                    leftSection={<PiTag size={12} />}
-                                    size="md"
-                                    variant="light"
-                                >
-                                    {configProfile?.inbounds.find(
-                                        (inbound) =>
-                                            inbound.uuid === item.inbound.configProfileInboundUuid
-                                    )?.tag || 'UNKNOWN'}
-                                </Badge>
-                            )}
 
                             {item.tag && (
                                 <Badge
@@ -469,9 +446,25 @@ export function HostCardWidget(props: IProps) {
                                     color={ch.hex(item.tag)}
                                     leftSection={<TbTagStarred size={12} />}
                                     size="md"
-                                    variant="outline"
+                                    variant="transparent"
                                 >
                                     {item.tag}
+                                </Badge>
+                            )}
+
+                            {serverDescription && (
+                                <Badge
+                                    color="dark.3"
+                                    leftSection={<TbFileDescription size={12} />}
+                                    size="md"
+                                    style={{
+                                        fontStyle: 'italic',
+                                        fontWeight: 500,
+                                        letterSpacing: '1px'
+                                    }}
+                                    variant="transparent"
+                                >
+                                    {serverDescription}
                                 </Badge>
                             )}
                         </Group>
