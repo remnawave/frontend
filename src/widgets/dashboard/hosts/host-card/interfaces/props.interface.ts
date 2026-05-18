@@ -10,6 +10,6 @@ export interface IProps {
     isHighlighted?: boolean
     isSelected?: boolean
     item: GetAllHostsCommand.Response['response'][number]
-    nodes: GetAllNodesCommand.Response['response']
+    nodesByUuid: Map<string, GetAllNodesCommand.Response['response'][number]>
     onSelect?: () => void
 }

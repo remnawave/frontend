@@ -1,4 +1,15 @@
-import { ActionIcon, Badge, Box, Checkbox, Group, px, Stack, Text } from '@mantine/core'
+import {
+    ActionIcon,
+    Badge,
+    Box,
+    Checkbox,
+    Group,
+    OverflowList,
+    px,
+    Stack,
+    Text,
+    Tooltip
+} from '@mantine/core'
 import { TbAlertCircle, TbEyeOff, TbTagStarred } from 'react-icons/tb'
 import { PiLock, PiProhibit, PiPulse, PiTag } from 'react-icons/pi'
 import { CSSProperties, useEffect, useState } from 'react'
@@ -21,7 +32,7 @@ import { IProps } from './interfaces'
 
 export function HostCardWidget(props: IProps) {
     const {
-        nodes,
+        nodesByUuid,
         item,
         configProfiles,
         isSelected,
@@ -322,31 +333,55 @@ export function HostCardWidget(props: IProps) {
                         </Group>
 
                         <Group gap="md" style={{ flexShrink: 0 }} wrap="nowrap">
-                            {item.nodes.length > 0 &&
-                                item.nodes.slice(0, 3).map((nodeId) => {
-                                    const node = nodes.find((node) => node.uuid === nodeId)
-                                    if (!node) return null
-                                    return (
-                                        <Badge
-                                            autoContrast
-                                            color="gray"
-                                            key={node.uuid}
-                                            leftSection={resolveCountryCode(node.countryCode)}
-                                            size="md"
-                                            style={{
-                                                cursor: 'pointer'
-                                            }}
-                                            variant="default"
-                                        >
-                                            {node.name}
+                            <OverflowList
+                                data={item.nodes
+                                    .map((nodeId) => nodesByUuid.get(nodeId))
+                                    .filter((n): n is NonNullable<typeof n> => Boolean(n))}
+                                gap={4}
+                                maxRows={1}
+                                maxVisibleItems={3}
+                                renderItem={(node) => (
+                                    <Badge
+                                        autoContrast
+                                        color="gray"
+                                        key={`${node.uuid}|${item.uuid}`}
+                                        leftSection={resolveCountryCode(node.countryCode, 18)}
+                                        size="md"
+                                        style={{ cursor: 'pointer' }}
+                                        variant="default"
+                                    >
+                                        {node.name}
+                                    </Badge>
+                                )}
+                                renderOverflow={(items) => (
+                                    <Tooltip
+                                        label={
+                                            <Stack gap="xs">
+                                                {items.map((node) => (
+                                                    <Badge
+                                                        color="gray"
+                                                        fullWidth
+                                                        key={`${node.uuid}|${item.uuid}`}
+                                                        leftSection={resolveCountryCode(
+                                                            node.countryCode,
+                                                            18
+                                                        )}
+                                                        variant="default"
+                                                    >
+                                                        {node.name}
+                                                    </Badge>
+                                                ))}
+                                            </Stack>
+                                        }
+                                        multiline
+                                        position="top"
+                                    >
+                                        <Badge color="gray" size="md" variant="default">
+                                            +{items.length}
                                         </Badge>
-                                    )
-                                })}
-                            {item.nodes.length > 3 && (
-                                <Badge color="gray" size="md" variant="default">
-                                    +{item.nodes.length - 3}
-                                </Badge>
-                            )}
+                                    </Tooltip>
+                                )}
+                            />
 
                             {item.tag && (
                                 <Badge

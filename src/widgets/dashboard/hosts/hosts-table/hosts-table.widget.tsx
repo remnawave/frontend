@@ -59,6 +59,11 @@ export const HostsTableWidget = memo((props: IProps) => {
 
     const dataIds = useMemo(() => state.map((host) => host.uuid), [state])
 
+    const nodesByUuid = useMemo(
+        () => new Map((nodes ?? []).map((node) => [node.uuid, node] as const)),
+        [nodes]
+    )
+
     const sensors = useSensors(
         useSensor(MouseSensor, {
             activationConstraint: {
@@ -282,7 +287,7 @@ export const HostsTableWidget = memo((props: IProps) => {
                                                                 item.uuid
                                                             )}
                                                             item={item}
-                                                            nodes={nodes!}
+                                                            nodesByUuid={nodesByUuid}
                                                             onSelect={() =>
                                                                 toggleHostSelection(item.uuid)
                                                             }
@@ -305,7 +310,7 @@ export const HostsTableWidget = memo((props: IProps) => {
                                     isDragOverlay
                                     isSelected={selectedHosts.includes(draggedHost.uuid)}
                                     item={draggedHost}
-                                    nodes={nodes!}
+                                    nodesByUuid={nodesByUuid}
                                     onSelect={() => toggleHostSelection(draggedHost.uuid)}
                                 />
                             </Container>
