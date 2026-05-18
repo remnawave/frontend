@@ -91,7 +91,19 @@ export function getInfraBillingNodesColumns(
             width: 150,
             textAlign: 'center',
             render: ({ node }) => (
-                <Flex align="center" gap="xs">
+                <Flex
+                    align="center"
+                    gap="sm"
+                    onMouseEnter={(e) => {
+                        e.currentTarget.style.backgroundColor = 'var(--mantine-color-dark-6)'
+                    }}
+                    onMouseLeave={(e) => {
+                        e.currentTarget.style.backgroundColor = 'transparent'
+                    }}
+                    style={{
+                        cursor: 'pointer'
+                    }}
+                >
                     {node.countryCode && node.countryCode !== 'XX' && (
                         <ReactCountryFlag
                             countryCode={node.countryCode}
@@ -104,6 +116,11 @@ export function getInfraBillingNodesColumns(
                     <Text fw={600} size="sm">
                         {node.name}
                     </Text>
+                    <TbExternalLink
+                        color="var(--mantine-color-gray-5)"
+                        size={14}
+                        style={{ flexShrink: 0 }}
+                    />
                 </Flex>
             )
         },

@@ -247,6 +247,11 @@ export function InfraBillingNodesTableWidget() {
                     if (record.provider.loginUrl && column.accessor === 'provider.name') {
                         window.open(record.provider.loginUrl, '_blank', 'noopener,noreferrer')
                     }
+                    if (record.nodeUuid && column.accessor === 'node') {
+                        openModalWithData(MODALS.EDIT_NODE_BY_UUID_MODAL, {
+                            nodeUuid: record.nodeUuid
+                        })
+                    }
                     if (column.accessor === 'nextBillingAt') {
                         handleClickBillingAt(record)
                     }
