@@ -51,7 +51,7 @@ export const HostsTableWidget = memo((props: IProps) => {
 
     const virtualizer = useWindowVirtualizer({
         count: state.length,
-        estimateSize: () => (isMobile ? 202 : 60),
+        estimateSize: () => (isMobile ? 202 : 88),
         overscan: 5,
         scrollMargin,
         getItemKey: (index) => state[index].uuid

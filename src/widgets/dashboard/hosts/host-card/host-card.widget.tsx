@@ -8,10 +8,18 @@ import {
     px,
     Stack,
     Text,
+    ThemeIcon,
     Tooltip
 } from '@mantine/core'
-import { TbAlertCircle, TbEyeOff, TbTagStarred } from 'react-icons/tb'
-import { PiLock, PiProhibit, PiPulse, PiTag } from 'react-icons/pi'
+import {
+    TbAlertCircle,
+    TbCloudNetwork,
+    TbEyeOff,
+    TbFileDescription,
+    TbMask,
+    TbTagStarred
+} from 'react-icons/tb'
+import { PiLock, PiNetwork, PiProhibit, PiPulse, PiTag } from 'react-icons/pi'
 import { CSSProperties, useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { useSortable } from '@dnd-kit/sortable'
@@ -92,6 +100,20 @@ export function HostCardWidget(props: IProps) {
     const isHostActive = !item.isDisabled
 
     const ch = new ColorHash({ lightness: [0.65, 0.65, 0.65] })
+
+    const isParamSet = (value: unknown): boolean => {
+        if (value == null) return false
+        if (typeof value === 'string') return value.trim().length > 0
+        if (Array.isArray(value)) return value.length > 0
+        if (typeof value === 'object') return Object.keys(value as object).length > 0
+        return true
+    }
+
+    const hasFinalMask = isParamSet(item.finalMask)
+    const hasMuxParams = isParamSet(item.muxParams)
+    const hasSockoptParams = isParamSet(item.sockoptParams)
+    const hasXrayJsonTemplate = !!item.xrayJsonTemplateUuid
+    const serverDescription = item.serverDescription?.trim() || ''
 
     if (isMobile) {
         return (
@@ -268,19 +290,26 @@ export function HostCardWidget(props: IProps) {
                     </Box>
                 </Group>
 
-                <Box
+                <Stack
                     className={classes.contentArea}
                     flex={1}
+                    gap={6}
+                    miw={0}
                     onClick={handleEdit}
                     onMouseEnter={() => setIsHovered(true)}
                     onMouseLeave={() => setIsHovered(false)}
                 >
-                    <Group gap="md" justify="space-between" wrap="nowrap">
+                    <Group
+                        gap="sm"
+                        justify="space-between"
+                        miw={0}
+                        style={{ overflow: 'hidden' }}
+                        wrap="nowrap"
+                    >
                         <Group
-                            flex={1}
                             gap="sm"
                             miw={0}
-                            style={{ overflow: 'hidden' }}
+                            style={{ flexShrink: 1, overflow: 'hidden' }}
                             wrap="nowrap"
                         >
                             {!isHostActive && (
@@ -316,23 +345,138 @@ export function HostCardWidget(props: IProps) {
                                 </ActionIcon>
                             )}
 
-                            <Group gap="md" style={{ flexShrink: 1, minWidth: 0 }} wrap="nowrap">
-                                <Text fw={600} style={{ flexShrink: 0 }} truncate>
-                                    {item.remark}
-                                </Text>
-                                <Text
-                                    c="dimmed"
-                                    className={classes.hostAddress}
-                                    style={{ flexShrink: 1, minWidth: 0 }}
-                                    truncate
+                            <Text fw={600} style={{ flexShrink: 0 }} truncate>
+                                {item.remark}
+                            </Text>
+                            <Text
+                                c="dimmed"
+                                className={classes.hostAddress}
+                                style={{ flexShrink: 1, minWidth: 0 }}
+                                truncate
+                            >
+                                {item.address}
+                                {item.port ? `:${item.port}` : ''}
+                            </Text>
+
+                            {serverDescription && (
+                                <Group
+                                    gap={4}
+                                    style={{ flexShrink: 1, minWidth: 0, overflow: 'hidden' }}
+                                    wrap="nowrap"
                                 >
-                                    {item.address}
-                                    {item.port ? `:${item.port}` : ''}
-                                </Text>
-                            </Group>
+                                    <Text c="dimmed" size="sm" style={{ flexShrink: 0 }}>
+                                        ·
+                                    </Text>
+                                    <TbFileDescription
+                                        size={12}
+                                        style={{ flexShrink: 0, opacity: 0.6 }}
+                                    />
+                                    <Text
+                                        c="dimmed"
+                                        fs="italic"
+                                        size="xs"
+                                        style={{ flexShrink: 1, minWidth: 0 }}
+                                        truncate
+                                    >
+                                        {serverDescription}
+                                    </Text>
+                                </Group>
+                            )}
                         </Group>
 
-                        <Group gap="md" style={{ flexShrink: 0 }} wrap="nowrap">
+                        <Group gap={6} style={{ flexShrink: 0 }} wrap="nowrap">
+                            <ThemeIcon
+                                color={hasXrayJsonTemplate ? 'teal' : 'gray'}
+                                size={28}
+                                variant="soft"
+                            >
+                                <XrayLogo size={16} />
+                            </ThemeIcon>
+
+                            <ThemeIcon
+                                color={hasMuxParams ? 'teal' : 'gray'}
+                                size={28}
+                                variant="soft"
+                            >
+                                <TbCloudNetwork size={16} />
+                            </ThemeIcon>
+
+                            <ThemeIcon
+                                color={hasSockoptParams ? 'teal' : 'gray'}
+                                size={28}
+                                variant="soft"
+                            >
+                                <PiNetwork size={16} />
+                            </ThemeIcon>
+
+                            <ThemeIcon
+                                color={hasFinalMask ? 'teal' : 'gray'}
+                                size={28}
+                                variant="soft"
+                            >
+                                <TbMask size={16} />
+                            </ThemeIcon>
+                        </Group>
+                    </Group>
+
+                    <Group
+                        gap="xs"
+                        justify="space-between"
+                        miw={0}
+                        style={{ overflow: 'hidden' }}
+                        wrap="nowrap"
+                    >
+                        <Group
+                            gap="xs"
+                            miw={0}
+                            style={{ flexShrink: 1, overflow: 'hidden' }}
+                            wrap="nowrap"
+                        >
+                            <Badge
+                                autoContrast
+                                color={configProfile?.uuid ? ch.hex(configProfile.uuid) : 'red'}
+                                leftSection={
+                                    configProfile?.uuid ? (
+                                        <XrayLogo size={12} />
+                                    ) : (
+                                        <TbAlertCircle size={12} />
+                                    )
+                                }
+                                size="md"
+                                variant="light"
+                            >
+                                {configProfile?.name || 'DANGLING'}
+                            </Badge>
+
+                            {item.inbound.configProfileInboundUuid && (
+                                <Badge
+                                    autoContrast
+                                    color={ch.hex(item.inbound.configProfileInboundUuid)}
+                                    leftSection={<PiTag size={12} />}
+                                    size="md"
+                                    variant="light"
+                                >
+                                    {configProfile?.inbounds.find(
+                                        (inbound) =>
+                                            inbound.uuid === item.inbound.configProfileInboundUuid
+                                    )?.tag || 'UNKNOWN'}
+                                </Badge>
+                            )}
+
+                            {item.tag && (
+                                <Badge
+                                    autoContrast
+                                    color={ch.hex(item.tag)}
+                                    leftSection={<TbTagStarred size={12} />}
+                                    size="md"
+                                    variant="outline"
+                                >
+                                    {item.tag}
+                                </Badge>
+                            )}
+                        </Group>
+
+                        <Group gap="xs" style={{ flexShrink: 0 }} wrap="nowrap">
                             <OverflowList
                                 data={item.nodes
                                     .map((nodeId) => nodesByUuid.get(nodeId))
@@ -382,52 +526,9 @@ export function HostCardWidget(props: IProps) {
                                     </Tooltip>
                                 )}
                             />
-
-                            {item.tag && (
-                                <Badge
-                                    autoContrast
-                                    color={ch.hex(item.tag)}
-                                    leftSection={<TbTagStarred size={12} />}
-                                    size="md"
-                                    variant="outline"
-                                >
-                                    {item.tag}
-                                </Badge>
-                            )}
-
-                            {item.inbound.configProfileInboundUuid && (
-                                <Badge
-                                    autoContrast
-                                    color={ch.hex(item.inbound.configProfileInboundUuid)}
-                                    leftSection={<PiTag size={12} />}
-                                    size="md"
-                                    variant="outline"
-                                >
-                                    {configProfile?.inbounds.find(
-                                        (inbound) =>
-                                            inbound.uuid === item.inbound.configProfileInboundUuid
-                                    )?.tag || 'UNKNOWN'}
-                                </Badge>
-                            )}
-
-                            <Badge
-                                autoContrast
-                                color={configProfile?.uuid ? ch.hex(configProfile.uuid) : 'red'}
-                                leftSection={
-                                    configProfile?.uuid ? (
-                                        <XrayLogo size={12} />
-                                    ) : (
-                                        <TbAlertCircle size={12} />
-                                    )
-                                }
-                                size="md"
-                                variant="light"
-                            >
-                                {configProfile?.name || 'DANGLING'}
-                            </Badge>
                         </Group>
                     </Group>
-                </Box>
+                </Stack>
             </Group>
         </Box>
     )
