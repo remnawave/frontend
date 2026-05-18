@@ -51,7 +51,9 @@ export const configureMonaco = (
                 enableSchemaRequest: true,
                 hover: true,
                 completion: true,
-                format: true
+                format: {
+                    enable: true
+                }
             })
         }
 
