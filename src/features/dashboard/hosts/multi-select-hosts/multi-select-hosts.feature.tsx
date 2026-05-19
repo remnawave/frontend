@@ -1,4 +1,18 @@
 import {
+    ActionIcon,
+    Affix,
+    Badge,
+    Button,
+    CloseButton,
+    Drawer,
+    Group,
+    NumberInput,
+    Paper,
+    Stack,
+    Tooltip,
+    Transition
+} from '@mantine/core'
+import {
     PiArrowBendDownLeftDuotone,
     PiListChecks,
     PiProhibitDuotone,
@@ -7,16 +21,12 @@ import {
     PiTrash
 } from 'react-icons/pi'
 import {
-    Affix,
-    Badge,
-    Button,
-    Drawer,
-    Group,
-    NumberInput,
-    Paper,
-    Stack,
-    Transition
-} from '@mantine/core'
+    TbArrowBarToDown,
+    TbArrowBarToUp,
+    TbArrowBigDown,
+    TbArrowBigUp,
+    TbSelectAll
+} from 'react-icons/tb'
 import { notifications } from '@mantine/notifications'
 import { useTranslation } from 'react-i18next'
 import { useDisclosure } from '@mantine/hooks'
@@ -37,7 +47,7 @@ import { useBulkEnableHosts, useGetHosts } from '@shared/api/hooks'
 import { IProps } from './interfaces/props.interface'
 
 export const MultiSelectHostsFeature = (props: IProps) => {
-    const { configProfiles, hosts, selectedHosts, setSelectedHosts } = props
+    const { configProfiles, hosts, moveSelected, selectedHosts, setSelectedHosts } = props
 
     const [opened, handlers] = useDisclosure(false)
 
@@ -196,7 +206,7 @@ export const MultiSelectHostsFeature = (props: IProps) => {
             <Transition mounted={hasSelection} transition="slide-up">
                 {(styles) => (
                     <Paper
-                        p="md"
+                        p={4}
                         shadow="md"
                         style={{
                             ...styles,
@@ -206,61 +216,131 @@ export const MultiSelectHostsFeature = (props: IProps) => {
                         }}
                         withBorder
                     >
-                        <Stack>
-                            <Group justify="flex-start">
-                                <Group justify="center" w="100%">
-                                    <Badge color="blue" size="lg">
-                                        Selected: {selectedHosts.length}
+                        <Paper
+                            p="md"
+                            style={{
+                                borderRadius: 'calc(var(--mantine-radius-default) - 4px)',
+                                border: '1px solid var(--mantine-color-dark-5)'
+                            }}
+                        >
+                            <Stack>
+                                <Group justify="space-between">
+                                    <Badge color="shaded-gray" size="lg" variant="soft">
+                                        {t('internal-squads.drawer.widget.selected')}:{' '}
+                                        {selectedHosts.length}
                                     </Badge>
+                                    <Group gap={0} justify="flex-end">
+                                        <Tooltip
+                                            label={t('multi-select-hosts.feature.select-all')}
+                                            withArrow
+                                        >
+                                            <ActionIcon
+                                                color="gray"
+                                                onClick={selectAllHosts}
+                                                size="lg"
+                                                variant="subtle"
+                                            >
+                                                <TbSelectAll size={20} />
+                                            </ActionIcon>
+                                        </Tooltip>
+                                        <Tooltip
+                                            label={t('multi-select-hosts.feature.clear-selection')}
+                                            withArrow
+                                        >
+                                            <CloseButton onClick={clearSelection} />
+                                        </Tooltip>
+                                    </Group>
                                 </Group>
-                                <Group grow justify="apart" preventGrowOverflow={false} wrap="wrap">
-                                    <Button onClick={clearSelection} variant="subtle">
-                                        {t('multi-select-hosts.feature.clear-selection')}
-                                    </Button>
-                                    <Button onClick={selectAllHosts} variant="subtle">
-                                        {t('multi-select-hosts.feature.select-all')}
-                                    </Button>
-                                </Group>
-                            </Group>
 
-                            <Group grow justify="apart" preventGrowOverflow={false} wrap="wrap">
-                                <Button
-                                    color="green"
-                                    leftSection={<PiPulseDuotone />}
-                                    onClick={enableSelectedHosts}
-                                >
-                                    {t('common.enable')}
-                                </Button>
-                                <Button
-                                    color="gray"
-                                    leftSection={<PiProhibitDuotone />}
-                                    onClick={disableSelectedHosts}
-                                >
-                                    {t('common.disable')}
-                                </Button>
-                                <Button
-                                    color="cyan"
-                                    leftSection={<PiTagDuotone />}
-                                    onClick={handlers.open}
-                                >
-                                    {t('multi-select-hosts.feature.set-inbound')}
-                                </Button>
-                                <Button
-                                    color="grape"
-                                    leftSection={<PiArrowBendDownLeftDuotone />}
-                                    onClick={setPortSelectedHosts}
-                                >
-                                    {t('multi-select-hosts.feature.set-port')}
-                                </Button>
-                                <Button
-                                    color="red"
-                                    leftSection={<PiTrash />}
-                                    onClick={deleteSelectedHosts}
-                                >
-                                    {t('common.delete')}
-                                </Button>
-                            </Group>
-                        </Stack>
+                                <ActionIcon.Group style={{ width: '100%' }}>
+                                    <Tooltip label="Move to top" withArrow>
+                                        <ActionIcon
+                                            color="gray"
+                                            onClick={() => moveSelected('top')}
+                                            size="lg"
+                                            style={{ flex: 1 }}
+                                            variant="soft"
+                                        >
+                                            <TbArrowBarToUp size={20} />
+                                        </ActionIcon>
+                                    </Tooltip>
+
+                                    <Tooltip label="Move up" withArrow>
+                                        <ActionIcon
+                                            color="gray"
+                                            onClick={() => moveSelected('up')}
+                                            size="lg"
+                                            style={{ flex: 1 }}
+                                            variant="soft"
+                                        >
+                                            <TbArrowBigUp size={20} />
+                                        </ActionIcon>
+                                    </Tooltip>
+
+                                    <Tooltip label="Move down" withArrow>
+                                        <ActionIcon
+                                            color="gray"
+                                            onClick={() => moveSelected('down')}
+                                            size="lg"
+                                            style={{ flex: 1 }}
+                                            variant="soft"
+                                        >
+                                            <TbArrowBigDown size={20} />
+                                        </ActionIcon>
+                                    </Tooltip>
+
+                                    <Tooltip label="Move to bottom" withArrow>
+                                        <ActionIcon
+                                            color="gray"
+                                            onClick={() => moveSelected('bottom')}
+                                            size="lg"
+                                            style={{ flex: 1 }}
+                                            variant="soft"
+                                        >
+                                            <TbArrowBarToDown size={20} />
+                                        </ActionIcon>
+                                    </Tooltip>
+                                </ActionIcon.Group>
+
+                                <Group grow justify="apart" preventGrowOverflow={false} wrap="wrap">
+                                    <Button
+                                        color="green"
+                                        leftSection={<PiPulseDuotone />}
+                                        onClick={enableSelectedHosts}
+                                    >
+                                        {t('common.enable')}
+                                    </Button>
+                                    <Button
+                                        color="gray"
+                                        leftSection={<PiProhibitDuotone />}
+                                        onClick={disableSelectedHosts}
+                                    >
+                                        {t('common.disable')}
+                                    </Button>
+                                    <Button
+                                        color="cyan"
+                                        leftSection={<PiTagDuotone />}
+                                        onClick={handlers.open}
+                                    >
+                                        {t('multi-select-hosts.feature.set-inbound')}
+                                    </Button>
+                                    <Button
+                                        color="grape"
+                                        leftSection={<PiArrowBendDownLeftDuotone />}
+                                        onClick={setPortSelectedHosts}
+                                    >
+                                        {t('multi-select-hosts.feature.set-port')}
+                                    </Button>
+                                    <Button
+                                        color="red"
+                                        leftSection={<PiTrash />}
+                                        onClick={deleteSelectedHosts}
+                                    >
+                                        {t('common.delete')}
+                                    </Button>
+                                </Group>
+                            </Stack>
+                        </Paper>
                     </Paper>
                 )}
             </Transition>

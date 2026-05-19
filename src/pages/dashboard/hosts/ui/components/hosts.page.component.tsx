@@ -2,7 +2,6 @@ import { useTranslation } from 'react-i18next'
 import { motion } from 'motion/react'
 import { useState } from 'react'
 
-import { MultiSelectHostsFeature } from '@features/dashboard/hosts/multi-select-hosts/multi-select-hosts.feature'
 import { CreateHostModalWidget } from '@widgets/dashboard/hosts/create-host-modal'
 import { HostsSpotlightWidget } from '@widgets/dashboard/hosts/hosts-spotlight'
 import { EditHostModalWidget } from '@widgets/dashboard/hosts/edit-host-modal'
@@ -40,12 +39,6 @@ export default function HostsPageComponent(props: IProps) {
 
             <EditHostModalWidget key="edit-host-modal" />
             <CreateHostModalWidget key="create-host-modal" />
-            <MultiSelectHostsFeature
-                configProfiles={configProfiles}
-                hosts={hosts}
-                selectedHosts={selectedHosts}
-                setSelectedHosts={setSelectedHosts}
-            />
         </Page>
     )
 }

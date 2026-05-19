@@ -19,6 +19,7 @@ import { restrictToVerticalAxis } from '@dnd-kit/modifiers'
 import { Box, Container, em, Stack } from '@mantine/core'
 import { motion } from 'framer-motion'
 
+import { MultiSelectHostsFeature } from '@features/dashboard/hosts/multi-select-hosts/multi-select-hosts.feature'
 import { HostsFiltersFeature } from '@features/dashboard/hosts/hosts-filters'
 import { HostCardWidget } from '@widgets/dashboard/hosts/host-card'
 import { useGetNodes, useReorderHosts } from '@shared/api/hooks'
@@ -210,6 +211,36 @@ export const HostsTableWidget = memo((props: IProps) => {
         [setSelectedHosts]
     )
 
+    const moveSelected = useCallback(
+        (mode: 'bottom' | 'down' | 'top' | 'up') => {
+            if (selectedHosts.length === 0) return
+            const selected = new Set(selectedHosts)
+
+            handlers.setState((current) => {
+                if (mode === 'top' || mode === 'bottom') {
+                    const sel = current.filter((host) => selected.has(host.uuid))
+                    const rest = current.filter((host) => !selected.has(host.uuid))
+                    return mode === 'top' ? [...sel, ...rest] : [...rest, ...sel]
+                }
+
+                const next = [...current]
+                const offset = mode === 'up' ? -1 : 1
+                const start = mode === 'up' ? 1 : next.length - 2
+                const end = mode === 'up' ? next.length : -1
+                const step = mode === 'up' ? 1 : -1
+
+                for (let i = start; i !== end; i += step) {
+                    const j = i + offset
+                    if (selected.has(next[i].uuid) && !selected.has(next[j].uuid)) {
+                        ;[next[i], next[j]] = [next[j], next[i]]
+                    }
+                }
+                return next
+            })
+        },
+        [selectedHosts, handlers]
+    )
+
     if (!hosts || !configProfiles) {
         return null
     }
@@ -318,6 +349,14 @@ export const HostsTableWidget = memo((props: IProps) => {
                     </DragOverlay>
                 </DndContext>
             )}
+
+            <MultiSelectHostsFeature
+                configProfiles={configProfiles}
+                hosts={hosts}
+                moveSelected={moveSelected}
+                selectedHosts={selectedHosts}
+                setSelectedHosts={setSelectedHosts}
+            />
         </Stack>
     )
 })
