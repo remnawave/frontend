@@ -1,8 +1,8 @@
 /* eslint-disable no-nested-ternary */
 import { CloseButton, Combobox, InputBase, Loader, useCombobox } from '@mantine/core'
 import { useTranslation } from 'react-i18next'
-import { PiTagDuotone } from 'react-icons/pi'
 import { useEffect, useState } from 'react'
+import { TbStar } from 'react-icons/tb'
 
 import { useGetHostTags } from '@shared/api/hooks'
 
@@ -100,7 +100,7 @@ export function HostTagsInputWidget(props: IProps) {
                     )}
                     error={error || restProps.error}
                     label="Tag"
-                    leftSection={<PiTagDuotone size="16px" />}
+                    leftSection={<TbStar size="16px" />}
                     onBlur={() => {
                         combobox.closeDropdown()
                         onChange?.(search.trim() === '' ? null : search)

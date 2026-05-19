@@ -18,7 +18,7 @@ import {
     TbEyeOff,
     TbFileDescription,
     TbMask,
-    TbTagStarred
+    TbStar
 } from 'react-icons/tb'
 import { PiLock, PiNetwork, PiProhibit, PiPulse, PiTag } from 'react-icons/pi'
 import { CSSProperties, useEffect, useState } from 'react'
@@ -170,7 +170,7 @@ export function HostCardWidget(props: IProps) {
                                 <Badge
                                     autoContrast
                                     color={ch.hex(item.tag)}
-                                    leftSection={<TbTagStarred size={12} />}
+                                    leftSection={<TbStar size={12} />}
                                     size="md"
                                     variant="outline"
                                 >
@@ -457,7 +457,7 @@ export function HostCardWidget(props: IProps) {
                                 <Badge
                                     autoContrast
                                     color={ch.hex(item.tag)}
-                                    leftSection={<TbTagStarred size={12} />}
+                                    leftSection={<TbStar size={12} />}
                                     size="md"
                                     variant="transparent"
                                 >
