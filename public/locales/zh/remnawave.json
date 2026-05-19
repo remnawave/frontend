@@ -298,7 +298,7 @@
             "traffic-reset-strategy": "流量重置策略",
             "traffic-reset-strategy-description": "用户流量使用统计应多久重置一次",
             "data-limit": "流量限制",
-            "data-limit-description": "输入流量限制 GB（0 表示无限制）",
+            "data-limit-description": "输入流量限制 GiB（0 表示无限制）",
             "username-cannot-be-changed-later": "用户名之后无法更改",
             "loading-user-creation": "正在加载创建用户窗口..",
             "create-user": "创建用户",
@@ -898,8 +898,8 @@
             "total-traffic-prettybytestoanyutil": "总流量: {{totalTraffic}}",
             "user": "用户",
             "traffic": "流量",
-            "no-users-with-traffic-100-kb": "没有流量 ≥ 100 KB 的用户",
-            "users-hidden-with-less-than-100-kb": "{{usersCount}} 个流量小于 100 KB 的用户已隐藏 (总计 {{totalTraffic}})"
+            "no-users-with-traffic-100-kb": "没有流量 ≥ 100 KiB 的用户",
+            "users-hidden-with-less-than-100-kb": "{{usersCount}} 个流量小于 100 KiB 的用户已隐藏 (总计 {{totalTraffic}})"
         }
     },
     "get-hwid-user-devices": {

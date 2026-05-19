@@ -298,7 +298,7 @@
             "traffic-reset-strategy": "Стратегия сброса трафика",
             "traffic-reset-strategy-description": "Как часто следует сбрасывать трафик пользователя",
             "data-limit": "Лимит трафика",
-            "data-limit-description": "Введите лимит данных в ГБ, 0 – безлимит.",
+            "data-limit-description": "Введите лимит данных в GiB, 0 – безлимит.",
             "username-cannot-be-changed-later": "Имя пользователя нельзя будет изменить позже",
             "loading-user-creation": "Загрузка создания пользователя...",
             "create-user": "Создать пользователя",
@@ -898,8 +898,8 @@
             "total-traffic-prettybytestoanyutil": "Общий трафик: {{totalTraffic}}",
             "user": "Пользователь",
             "traffic": "Трафик",
-            "no-users-with-traffic-100-kb": "Нет пользователей с трафиком ≥ 100 KB",
-            "users-hidden-with-less-than-100-kb": "{{usersCount}} пользователей с трафиком <100 KB, ({{totalTraffic}} всего)"
+            "no-users-with-traffic-100-kb": "Нет пользователей с трафиком ≥ 100 KiB",
+            "users-hidden-with-less-than-100-kb": "{{usersCount}} пользователей с трафиком <100 KiB, ({{totalTraffic}} всего)"
         }
     },
     "get-hwid-user-devices": {
