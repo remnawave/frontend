@@ -31,7 +31,7 @@ import { RevokeSubscriptionUserFeature } from '@features/ui/dashboard/users/revo
 import { useUserModalStoreActions } from '@entities/dashboard/user-modal-store/user-modal-store'
 import { ResetUsageUserFeature } from '@features/ui/dashboard/users/reset-usage-user'
 import { DeleteUserFeature } from '@features/ui/dashboard/users/delete-user'
-import { bytesToGbUtil, gbToBytesUtil } from '@shared/utils/bytes'
+import { bytesToGibUtil, gibToBytesUtil } from '@shared/utils/bytes'
 import { LoaderModalShared } from '@shared/ui/loader-modal'
 import { handleFormErrors } from '@shared/utils/misc'
 import { ModalFooter } from '@shared/ui/modal-footer'
@@ -132,7 +132,7 @@ export const ViewUserModalContent = (props: IProps) => {
 
             form.initialize({
                 uuid: user.uuid,
-                trafficLimitBytes: bytesToGbUtil(user.trafficLimitBytes),
+                trafficLimitBytes: bytesToGibUtil(user.trafficLimitBytes),
                 trafficLimitStrategy: user.trafficLimitStrategy,
                 expireAt: user.expireAt,
                 activeInternalSquads,
@@ -162,7 +162,7 @@ export const ViewUserModalContent = (props: IProps) => {
                     ? values.trafficLimitStrategy
                     : undefined,
                 trafficLimitBytes: touchedFields.trafficLimitBytes
-                    ? gbToBytesUtil(values.trafficLimitBytes)
+                    ? gibToBytesUtil(values.trafficLimitBytes)
                     : undefined,
                 // @ts-expect-error - TODO: fix ZOD schema
                 expireAt: touchedFields.expireAt ? dayjs(values.expireAt).toISOString() : undefined,

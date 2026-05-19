@@ -50,7 +50,7 @@ export const useBandwidthTableColumns = () => {
                     return (
                         <Flex direction="column" gap={4}>
                             <Text c="dimmed" ff="monospace" fw={600} size="md">
-                                {prettyBytesUtil(node.trafficUsedBytes || 0) || '0 GB'}
+                                {prettyBytesUtil(node.trafficUsedBytes || 0) || '0 GiB'}
                             </Text>
                             <Progress
                                 color={getProgressColor(percentage)}
@@ -69,7 +69,7 @@ export const useBandwidthTableColumns = () => {
                 sortable: true,
                 renderCell: (node) => (
                     <Text ff="monospace">
-                        {prettyBytesUtil(node.trafficLimitBytes || 0) || '0 GB'}
+                        {prettyBytesUtil(node.trafficLimitBytes || 0) || '0 GiB'}
                     </Text>
                 ),
                 textAlign: 'left'

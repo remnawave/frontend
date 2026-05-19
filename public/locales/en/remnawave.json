@@ -298,7 +298,7 @@
             "traffic-reset-strategy": "Traffic reset strategy",
             "traffic-reset-strategy-description": "How often the user's traffic usage statistics should be reset",
             "data-limit": "Data Limit",
-            "data-limit-description": "Enter data limit in GB (0 for unlimited)",
+            "data-limit-description": "Enter data limit in GiB (0 for unlimited)",
             "username-cannot-be-changed-later": "Username cannot be changed later",
             "loading-user-creation": "Loading user creation modal ...",
             "create-user": "Create user",
@@ -898,8 +898,8 @@
             "total-traffic-prettybytestoanyutil": "Total traffic: {{totalTraffic}}",
             "user": "User",
             "traffic": "Traffic",
-            "no-users-with-traffic-100-kb": "No users with traffic ≥ 100 KB",
-            "users-hidden-with-less-than-100-kb": "{{usersCount}} users hidden with less than 100 KB ({{totalTraffic}} total)"
+            "no-users-with-traffic-100-kb": "No users with traffic ≥ 100 KiB",
+            "users-hidden-with-less-than-100-kb": "{{usersCount}} users hidden with less than 100 KiB ({{totalTraffic}} total)"
         }
     },
     "get-hwid-user-devices": {

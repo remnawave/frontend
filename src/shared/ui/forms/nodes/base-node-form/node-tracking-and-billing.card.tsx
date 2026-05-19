@@ -119,7 +119,7 @@ export const NodeTrackingAndBillingCard = <
                                                         ta="center"
                                                         w={26}
                                                     >
-                                                        GB
+                                                        GiB
                                                     </Text>
                                                     <Divider orientation="vertical" />
                                                 </>

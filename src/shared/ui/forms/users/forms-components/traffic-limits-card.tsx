@@ -55,7 +55,7 @@ export const TrafficLimitsCard = <T extends CreateUserCommand.Request | UpdateUs
                                     ta="center"
                                     w={26}
                                 >
-                                    GB
+                                    GiB
                                 </Text>
                             }
                             thousandSeparator=","

@@ -898,8 +898,8 @@
             "total-traffic-prettybytestoanyutil": "ترافیک کل: {{totalTraffic}}",
             "user": "کاربر",
             "traffic": "ترافیک",
-            "no-users-with-traffic-100-kb": "هیچ کاربری با ترافیک ≥ 100 کیلوبایت وجود ندارد",
-            "users-hidden-with-less-than-100-kb": "{{usersCount}} کاربر با کمتر از 100 کیلوبایت مخفی شده‌اند ({{totalTraffic}} کل)"
+            "no-users-with-traffic-100-kb": "هیچ کاربری با ترافیک ≥ 100 KiB وجود ندارد",
+            "users-hidden-with-less-than-100-kb": "{{usersCount}} کاربر با کمتر از 100 KiB مخفی شده‌اند ({{totalTraffic}} کل)"
         }
     },
     "get-hwid-user-devices": {

@@ -36,7 +36,7 @@ import { useBulkUpdateUsers, useGetExternalSquads, useGetUserTags } from '@share
 import { userStatusValues } from '@shared/constants/forms/user-status.constants'
 import { resetDataStrategy } from '@shared/constants'
 import { handleFormErrors } from '@shared/utils/misc'
-import { gbToBytesUtil } from '@shared/utils/bytes'
+import { gibToBytesUtil } from '@shared/utils/bytes'
 
 import { IProps } from './interfaces/props.interface'
 
@@ -96,7 +96,7 @@ export const BulkUserActionsUpdateTabFeature = (props: IProps) => {
                     uuids: actions.getUuids(),
                     fields: {
                         ...values.fields,
-                        trafficLimitBytes: gbToBytesUtil(values.fields.trafficLimitBytes),
+                        trafficLimitBytes: gibToBytesUtil(values.fields.trafficLimitBytes),
                         telegramId:
                             // @ts-expect-error - TODO: fix ZOD schema
                             values.fields.telegramId === '' ? null : values.fields.telegramId,
@@ -181,7 +181,7 @@ export const BulkUserActionsUpdateTabFeature = (props: IProps) => {
                                 ta="center"
                                 w={26}
                             >
-                                GB
+                                GiB
                             </Text>
                             <Divider orientation="vertical" />
                         </>
