@@ -898,7 +898,7 @@
             "total-traffic-prettybytestoanyutil": "总流量: {{totalTraffic}}",
             "user": "用户",
             "traffic": "流量",
-            "no-users-with-traffic-100-kb": "没有流量 ≥ 100 KiB 的用户",
+            "no-users-with-traffic-100-kb": "流量 ≥ 100 KiB 的用户",
             "users-hidden-with-less-than-100-kb": "{{usersCount}} 个流量小于 100 KiB 的用户已隐藏 (总计 {{totalTraffic}})"
         }
     },
