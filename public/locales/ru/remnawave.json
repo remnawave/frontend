@@ -471,6 +471,25 @@
             "short-stats": "Краткая статистика",
             "remnawave-usage": "Remnawave Usage",
             "process-details": "Детали по процессам"
+        },
+        "runtime-info": {
+            "title": "Справка по метрикам Runtime",
+            "subtitle": "Что означает каждый значение в карточках runtime",
+            "intro": "Each card shows a live snapshot of a single <highlight>Remnawave process</highlight>. Use this guide to understand what each metric measures and when to worry about it.",
+            "instance-types-title": "Типы процессов",
+            "instance-types-description": "Remnawave разделен на несколько специализированных процессов. Каждый из них выполняет свою задачу, имеет свою память и свой цикл обработки событий.",
+            "api-description": "Обрабатывает все HTTP-запросы с панели и подписки. Это <highlight>main user-facing process</highlight>— им обрабатывается практически каждый запрос к панели и подписке.",
+            "scheduler-description": "<highlight>cron-driven dispatcher</highlight> сам не выполняет никакой работы. В запланированный момент он добавляет задание в очередь для выполнения посредством <highlight>Processor</highlight>.",
+            "processor-description": "<highlight>worker</highlight> обрабатывает поставленные в очередь задания. А так-же выполняет обработку данных <highlight>node health checks</highlight> для <highlight>агрегации трафика</highlight> каждого пользователя и каждого узла, а также другие длительные задачи, которые не должны блокировать API.",
+            "memory-description": "Здесь процесс хранит свои рабочие данные. Все значения передаются Node.js в режиме реального времени.",
+            "heap-description": "Память, используемая объектами JavaScript, управляется <highlight>V8</highlight> движком Node.js. Отображается как <highlight>used / total</highlight>. Высокое значение означает, <highlight>expected and healthy</highlight> что V8 удерживает память до тех пор, пока ей действительно не потребуется больше, поэтому значение типа <highlight>100 / 120 MB</highlight> является нормальным, а не предупреждением.",
+            "rss-description": "<highlight>Resident Set Size</highlight> — общий объем физической памяти, выделенной процессу операционной системой, включая heap, собственный код и разделяемые библиотеки. Лучший отдельный показатель того, <highlight>сколько оперативной памяти фактически использует этот процесс</highlight>.",
+            "external-description": "Память, удерживаемая вне V8 нативными объектами C++, связанными с JavaScript — типичными источниками являются <highlight>open sockets</highlight>, <highlight>streams</highlight>, и полезные нагрузки, поддерживаемые буфером.",
+            "array-buffers-description": "Память выделена специально для экземпляров <highlight>ArrayBuffer</highlight> и <highlight>Buffer</highlight> (сырые бинарные данные). Она считается подмножеством <highlight>External</highlight>.",
+            "event-loop-description": "Проверка работоспособности однопоточного цикла, который управляет всей асинхронной работой в Node.js. Если цикл заблокирован, весь процесс останавливается.",
+            "delay-description": "Среднее время между последовательными тактами цикла событий. Нормальное значение близко к <highlight>0–2 ms</highlight>. Более высокие значения означают, что цикл блокируется длительной синхронной работой.",
+            "p99-description": "<highlight>99th percentile</highlight> задержка цикла событий в течение окна измерения. Выявляет наихудшую задержку, которую скрывает только среднее значение — полезно для обнаружения случайных всплесков.",
+            "active-handles-description": "Долгоживущие ресурсы, поддерживающие работоспособность контура: <highlight>open sockets</highlight>, <highlight>timers</highlight>, <highlight>file descriptors</highlight>. Стационарный режим — это нормально; <highlight>unbounded growth</highlight>— это сильный сигнал утечки."
         }
     },
     "login-form": {

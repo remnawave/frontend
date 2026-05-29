@@ -471,6 +471,25 @@
             "short-stats": "آمار مختصر",
             "remnawave-usage": "مصرف منابع Remnawave",
             "process-details": "مشخصات Process"
+        },
+        "runtime-info": {
+            "title": "Runtime Metrics Guide",
+            "subtitle": "What every number on a runtime card actually means",
+            "intro": "Each card shows a live snapshot of a single <highlight>Remnawave process</highlight>. Use this guide to understand what each metric measures and when to worry about it.",
+            "instance-types-title": "Process Types",
+            "instance-types-description": "Remnawave is split into several specialized processes. Each one has its own job, its own memory, and its own event loop.",
+            "api-description": "Handles every HTTP requests from the dashboard, and subscription endpoints. This is the <highlight>main user-facing process</highlight> — virtually every panel and subscription request is served here.",
+            "scheduler-description": "A <highlight>cron-driven dispatcher</highlight>. It does not run any work itself — at the scheduled moment it simply pushes a job into the queue for the <highlight>Processor</highlight> to pick up.",
+            "processor-description": "The actual <highlight>worker</highlight>. It consumes queued jobs and runs the heavy lifting: <highlight>node health checks</highlight>, <highlight>traffic aggregation</highlight> per user and per node, and other long-running tasks that must not block the API.",
+            "memory-description": "Where the process holds its working data. All values are reported by Node.js in real time.",
+            "heap-description": "Memory used by JavaScript objects, managed by <highlight>V8</highlight> — Node.js' engine. Shown as <highlight>used / total</highlight>. A high ratio is <highlight>expected and healthy</highlight> — V8 holds onto memory until it really needs more, so something like <highlight>100 / 120 MB</highlight> is normal, not a warning.",
+            "rss-description": "<highlight>Resident Set Size</highlight> — the total physical memory the OS has given to the process, including the heap, native code, and shared libraries. The best single signal of <highlight>how much RAM this process is actually using</highlight>.",
+            "external-description": "Memory held outside V8 by native C++ objects bound to JavaScript — typical sources are <highlight>open sockets</highlight>, <highlight>streams</highlight>, and Buffer-backed payloads.",
+            "array-buffers-description": "Memory specifically allocated for <highlight>ArrayBuffer</highlight> and <highlight>Buffer</highlight> instances (raw binary data). It is counted as a subset of <highlight>External</highlight>.",
+            "event-loop-description": "Health of the single-threaded loop that drives all asynchronous work in Node.js. If the loop is blocked, the whole process stalls.",
+            "delay-description": "Average time between consecutive event loop ticks. A healthy value sits close to <highlight>0–2 ms</highlight>. Higher numbers mean the loop is being blocked by long synchronous work.",
+            "p99-description": "<highlight>99th percentile</highlight> of event loop delay over the measurement window. Reveals worst-case latency that the average alone hides — useful for spotting occasional spikes.",
+            "active-handles-description": "Long-lived resources keeping the loop alive: <highlight>open sockets</highlight>, <highlight>timers</highlight>, <highlight>file descriptors</highlight>. Steady-state is normal; <highlight>unbounded growth</highlight> is a strong leak signal."
         }
     },
     "login-form": {
