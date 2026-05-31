@@ -11,7 +11,7 @@ export function SurgeLogo({ size = 20, style, ...props }: LogoProps) {
     return (
         <Box
             component="svg"
-            fill="none"
+            fill="currentColor"
             preserveAspectRatio="xMidYMid meet"
             style={{
                 width: size,
@@ -21,16 +21,15 @@ export function SurgeLogo({ size = 20, style, ...props }: LogoProps) {
                 flexShrink: 0,
                 ...style
             }}
-            viewBox="0 0 35 35"
+            viewBox="0 0 512 512"
             xmlns="http://www.w3.org/2000/svg"
             {...props}
         >
-            <path
-                d="M27.1 5.3H14.9L7.7 18h8.1l-4 11.7 15.5-17.4h-8.5l8.3-7Z"
-                stroke="currentColor"
-                strokeLinejoin="round"
-                strokeWidth="3"
-            />
+            <rect height="80" rx="20" width="40" x="96" y="286" />
+            <rect height="190" rx="20" width="40" x="166" y="227" />
+            <rect height="260" rx="20" width="40" x="237" y="126" />
+            <rect height="190" rx="20" width="40" x="308" y="96" />
+            <rect height="80" rx="20" width="40" x="378" y="147" />
         </Box>
     )
 }
