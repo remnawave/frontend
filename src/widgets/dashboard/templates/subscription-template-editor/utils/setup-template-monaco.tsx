@@ -41,7 +41,7 @@ function buildMarkdownDescription(host: Host): string {
 
 export const configureMonaco = (
     monaco: Monaco,
-    language: 'json' | 'yaml',
+    language: 'json' | 'plaintext' | 'yaml',
     hosts: GetAllHostsCommand.Response['response']
 ) => {
     try {

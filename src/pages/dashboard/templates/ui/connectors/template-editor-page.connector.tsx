@@ -27,7 +27,7 @@ export function TemplateEditorPageConnector() {
     }
 
     let title: string
-    let editorType: 'json' | 'yaml'
+    let editorType: 'json' | 'plaintext' | 'yaml'
 
     switch (type as TSubscriptionTemplateType) {
         case SUBSCRIPTION_TEMPLATE_TYPE.CLASH:
@@ -45,6 +45,10 @@ export function TemplateEditorPageConnector() {
         case SUBSCRIPTION_TEMPLATE_TYPE.STASH:
             title = 'Stash'
             editorType = 'yaml'
+            break
+        case SUBSCRIPTION_TEMPLATE_TYPE.SURGE:
+            title = 'Surge'
+            editorType = 'plaintext'
             break
         case SUBSCRIPTION_TEMPLATE_TYPE.XRAY_JSON:
             title = 'Xray JSON'

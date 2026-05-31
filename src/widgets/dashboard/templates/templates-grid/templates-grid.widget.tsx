@@ -11,6 +11,7 @@ import { VirtualizedDndGrid } from '@shared/ui/virtualized-dnd-grid'
 import { SingboxLogo } from '@shared/ui/logos/singbox-logo'
 import { MihomoLogo } from '@shared/ui/logos/mihomo-logo'
 import { StashLogo } from '@shared/ui/logos/stash-logo'
+import { SurgeLogo } from '@shared/ui/logos/surge-logo'
 import { queryClient } from '@shared/api/query-client'
 import { XrayLogo } from '@shared/ui/logos/xray-logo'
 
@@ -81,6 +82,8 @@ export function TemplatesGridWidget(props: IProps) {
                 return <SingboxLogo size={28} />
             case 'STASH':
                 return <StashLogo size={28} />
+            case 'SURGE':
+                return <SurgeLogo size={28} />
             case 'XRAY_JSON':
                 return <XrayLogo size={28} />
             default:

@@ -26,7 +26,14 @@ import { useTranslation } from 'react-i18next'
 import { useHotkeys } from '@mantine/hooks'
 import { useState } from 'react'
 
-import { HappLogo, MihomoLogo, SingboxLogo, StashLogo, XrayLogo } from '@shared/ui/logos'
+import {
+    HappLogo,
+    MihomoLogo,
+    SingboxLogo,
+    StashLogo,
+    SurgeLogo,
+    XrayLogo
+} from '@shared/ui/logos'
 import { ROUTES } from '@shared/constants'
 import { Logo } from '@shared/ui'
 
@@ -199,6 +206,15 @@ export const useMenuSections = (): MenuItem[] => {
                             ),
                             icon: MihomoLogo,
                             id: 'clash'
+                        },
+                        {
+                            name: 'Surge',
+                            href: ROUTES.DASHBOARD.TEMPLATES.TEMPLATES_BY_TYPE.replace(
+                                ':type',
+                                SUBSCRIPTION_TEMPLATE_TYPE.SURGE
+                            ),
+                            icon: SurgeLogo,
+                            id: 'surge'
                         }
                     ]
                 },

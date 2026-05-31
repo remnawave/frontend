@@ -9,7 +9,7 @@ import { TbDeviceFloppy } from 'react-icons/tb'
 import { useTranslation } from 'react-i18next'
 
 import { useGetSubscriptionTemplates } from '@shared/api/hooks/subscription-template/subscription-template.query.hooks'
-import { MihomoLogo, SingboxLogo, StashLogo, XrayLogo } from '@shared/ui/logos'
+import { MihomoLogo, SingboxLogo, StashLogo, SurgeLogo, XrayLogo } from '@shared/ui/logos'
 import { QueryKeys, useUpdateExternalSquad } from '@shared/api/hooks'
 import { queryClient } from '@shared/api'
 
@@ -30,7 +30,8 @@ export const ExternalSquadsTemplatesTabWidget = (props: IProps) => {
         SUBSCRIPTION_TEMPLATE_TYPE.MIHOMO,
         SUBSCRIPTION_TEMPLATE_TYPE.STASH,
         SUBSCRIPTION_TEMPLATE_TYPE.SINGBOX,
-        SUBSCRIPTION_TEMPLATE_TYPE.CLASH
+        SUBSCRIPTION_TEMPLATE_TYPE.CLASH,
+        SUBSCRIPTION_TEMPLATE_TYPE.SURGE
     ]
 
     const [selectedTemplates, setSelectedTemplates] = useState<
@@ -40,6 +41,7 @@ export const ExternalSquadsTemplatesTabWidget = (props: IProps) => {
         [SUBSCRIPTION_TEMPLATE_TYPE.MIHOMO]: null,
         [SUBSCRIPTION_TEMPLATE_TYPE.SINGBOX]: null,
         [SUBSCRIPTION_TEMPLATE_TYPE.STASH]: null,
+        [SUBSCRIPTION_TEMPLATE_TYPE.SURGE]: null,
         [SUBSCRIPTION_TEMPLATE_TYPE.XRAY_BASE64]: null,
         [SUBSCRIPTION_TEMPLATE_TYPE.XRAY_JSON]: null
     })
@@ -74,6 +76,7 @@ export const ExternalSquadsTemplatesTabWidget = (props: IProps) => {
                 [SUBSCRIPTION_TEMPLATE_TYPE.MIHOMO]: null,
                 [SUBSCRIPTION_TEMPLATE_TYPE.SINGBOX]: null,
                 [SUBSCRIPTION_TEMPLATE_TYPE.STASH]: null,
+                [SUBSCRIPTION_TEMPLATE_TYPE.SURGE]: null,
                 [SUBSCRIPTION_TEMPLATE_TYPE.XRAY_BASE64]: null,
                 [SUBSCRIPTION_TEMPLATE_TYPE.XRAY_JSON]: null
             }
@@ -140,6 +143,8 @@ export const ExternalSquadsTemplatesTabWidget = (props: IProps) => {
                 return <SingboxLogo size={16} />
             case SUBSCRIPTION_TEMPLATE_TYPE.STASH:
                 return <StashLogo size={16} />
+            case SUBSCRIPTION_TEMPLATE_TYPE.SURGE:
+                return <SurgeLogo size={16} />
             case SUBSCRIPTION_TEMPLATE_TYPE.XRAY_BASE64:
             case SUBSCRIPTION_TEMPLATE_TYPE.XRAY_JSON:
                 return <XrayLogo size={16} />
@@ -158,6 +163,8 @@ export const ExternalSquadsTemplatesTabWidget = (props: IProps) => {
                 return 'Sing-box'
             case SUBSCRIPTION_TEMPLATE_TYPE.STASH:
                 return 'Stash'
+            case SUBSCRIPTION_TEMPLATE_TYPE.SURGE:
+                return 'Surge'
             case SUBSCRIPTION_TEMPLATE_TYPE.XRAY_BASE64:
                 return 'Xray Base64'
             case SUBSCRIPTION_TEMPLATE_TYPE.XRAY_JSON:
