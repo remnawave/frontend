@@ -1079,6 +1079,14 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
                                                     })}
                                                 />
                                             </Group>
+
+                                            <TextInput
+                                                label={t('base-host-form.pinned-peer-cert-sha256')}
+                                                placeholder="SHA256 hash of server certificate"
+                                                key={form.key('pinnedPeerCertSha256')}
+                                                {...form.getInputProps('pinnedPeerCertSha256')}
+                                                maxLength={64}
+                                            />
                                         </Stack>
                                     </SectionCard.Section>
                                 </SectionCard.Root>
