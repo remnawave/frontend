@@ -415,6 +415,7 @@
         "override-sni-from-address-description": "این گزینه مقدار SNI را با آدرس مشخص شده جایگزین خواهد کرد که برای کانفیگ‌های چند دامنه‌ای و wildcard قابل استفاده می‌باشد",
         "legacy-options": "تنظیمات قدیمی",
         "allow-insecure": "اجازه اتصال ناامن",
+        "pinned-peer-cert-sha256": "هش SHA256 گواهی سرور",
         "shuffled-hosts-hover-card": "هاست‌های به هم زده شده در بالای لیست قرار گرفته و به صورت تصادفی مرتب خواهند شد.",
         "vless-route-description": "از 1 تا 65535، برای غیرفعال‌سازی 0 یا خالی بگذارید",
         "misc-settings": "تنظیمات متفرقه",
