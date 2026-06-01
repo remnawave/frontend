@@ -16,7 +16,7 @@ import { configureMonaco } from './utils/setup-template-monaco'
 import styles from './SubscriptionTemplateEditor.module.css'
 
 interface Props {
-    editorType: 'json' | 'yaml'
+    editorType: 'json' | 'plaintext' | 'yaml'
     hosts: GetAllHostsCommand.Response['response']
     template: GetSubscriptionTemplateCommand.Response['response']
 }
@@ -29,7 +29,7 @@ export function SubscriptionTemplateEditorWidget(props: Props) {
     const monacoRef = useRef<Monaco | null>(null)
 
     const getConfig = () => {
-        if (editorType === 'yaml') {
+        if (editorType !== 'json') {
             return template.encodedTemplateYaml
                 ? new TextDecoder().decode(decode(template.encodedTemplateYaml))
                 : ''

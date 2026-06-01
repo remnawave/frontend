@@ -63,10 +63,10 @@ import {
 import { HostSelectInboundFeature } from '@features/ui/dashboard/hosts/host-select-inbound/host-select-inbound.feature'
 import { HostTagsInputWidget } from '@widgets/dashboard/hosts/host-tags-input/host-tags-input'
 import { emojiFlag, resolveCountryCode } from '@shared/utils/misc/resolve-country-code'
+import { MihomoLogo, SingboxLogo, StashLogo, SurgeLogo } from '@shared/ui/logos'
 import { PopoverWithInfoShared } from '@shared/ui/popovers/popover-with-info'
 import { DeleteHostFeature } from '@features/ui/dashboard/hosts/delete-host'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
-import { MihomoLogo, SingboxLogo, StashLogo } from '@shared/ui/logos'
 import { TemplateInfoPopoverShared } from '@shared/ui/popovers'
 import { ChipMultiSelect } from '@shared/ui/chip-multi-select'
 import { DrawerFooter } from '@shared/ui/drawer-footer'
@@ -102,6 +102,10 @@ const SUBSCRIPTION_TYPES = {
     [SUBSCRIPTION_TEMPLATE_TYPE.CLASH]: {
         label: 'Clash',
         icon: <MihomoLogo size={16} />
+    },
+    [SUBSCRIPTION_TEMPLATE_TYPE.SURGE]: {
+        label: 'Surge',
+        icon: <SurgeLogo size={16} />
     }
 } as const
 

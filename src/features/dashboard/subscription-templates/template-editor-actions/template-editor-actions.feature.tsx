@@ -24,7 +24,7 @@ import classes from './template-editor-actions.module.css'
 
 interface Props {
     editorRef: RefObject<editor.IStandaloneCodeEditor | null>
-    editorType: 'json' | 'yaml'
+    editorType: 'json' | 'plaintext' | 'yaml'
     template: GetSubscriptionTemplateCommand.Response['response']
 }
 
@@ -63,7 +63,7 @@ export function TemplateEditorActionsFeature(props: Props) {
         const currentValue = editorRef.current.getValue()
 
         if (currentValue && currentValue.trim()) {
-            if (editorType === 'yaml') {
+            if (editorType !== 'json') {
                 updateConfig({
                     variables: {
                         uuid: template.uuid,

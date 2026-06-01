@@ -10,7 +10,7 @@ import { Page, PageHeaderShared } from '@shared/ui'
 import { ROUTES } from '@shared/constants'
 
 interface Props {
-    editorType: 'json' | 'yaml'
+    editorType: 'json' | 'plaintext' | 'yaml'
     hosts: GetAllHostsCommand.Response['response']
     template: GetSubscriptionTemplateCommand.Response['response']
     title: string
