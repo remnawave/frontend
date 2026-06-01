@@ -274,6 +274,14 @@
             "disconnected": "disconnected"
         }
     },
+    "user-status-badge": {
+        "widget": {
+            "active": "Active",
+            "disabled": "Disabled",
+            "expired": "Expired",
+            "limited": "Limited"
+        }
+    },
     "nodes-page-header": {
         "widget": {
             "list-of-all-nodes": "List of all nodes"
