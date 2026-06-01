@@ -13,6 +13,7 @@ import { SelectInfraProviderShared } from '@shared/ui/infra-billing/select-infra
 import { MODALS, useModalClose, useModalIsOpen } from '@entities/dashboard/modal-store'
 import { QueryKeys, useCreateInfraBillingHistoryRecord } from '@shared/api/hooks'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
+import { toUtcDayISO } from '@shared/utils/time-utils'
 import { handleFormErrors } from '@shared/utils/misc'
 import { queryClient } from '@shared/api'
 
@@ -80,9 +81,7 @@ export function CreateInfraBillingRecordDrawerWidget() {
         createInfraBillingRecord({
             variables: {
                 // @ts-expect-error - TODO: fix ZOD schema
-                billedAt: values.billedAt
-                    ? dayjs(values.billedAt).startOf('day').toISOString()
-                    : undefined,
+                billedAt: toUtcDayISO(values.billedAt),
                 providerUuid: values.providerUuid,
                 amount: values.amount
             }

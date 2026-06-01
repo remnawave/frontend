@@ -14,6 +14,7 @@ import { SelectBillingNodeShared } from '@shared/ui/infra-billing/select-billing
 import { MODALS, useModalClose, useModalIsOpen } from '@entities/dashboard/modal-store'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { QueryKeys, useCreateInfraBillingNode } from '@shared/api/hooks'
+import { toUtcDayISO } from '@shared/utils/time-utils'
 import { handleFormErrors } from '@shared/utils/misc'
 import { queryClient } from '@shared/api'
 
@@ -76,9 +77,7 @@ export function CreateInfraBillingNodeModalWidget() {
                 providerUuid: values.providerUuid,
                 nodeUuid: values.nodeUuid,
                 // @ts-expect-error - TODO: fix ZOD schema
-                nextBillingAt: values.nextBillingAt
-                    ? dayjs(values.nextBillingAt).startOf('day').toISOString()
-                    : undefined
+                nextBillingAt: toUtcDayISO(values.nextBillingAt)
             }
         })
     })

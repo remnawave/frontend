@@ -8,6 +8,7 @@ import dayjs from 'dayjs'
 import { MODALS, useModalClose, useModalState } from '@entities/dashboard/modal-store'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { QueryKeys, useUpdateInfraBillingNode } from '@shared/api/hooks'
+import { toUtcDayISO } from '@shared/utils/time-utils'
 import { queryClient } from '@shared/api'
 
 import styles from './UpdateModal.module.css'
@@ -52,7 +53,7 @@ export function UpdateBillingDateModalWidget() {
             variables: {
                 uuids: billingNode.uuids,
                 // @ts-expect-error - TODO: fix ZOD schema
-                nextBillingAt: selectedDate ? dayjs(selectedDate).toISOString() : undefined
+                nextBillingAt: toUtcDayISO(selectedDate)
             }
         })
     }
