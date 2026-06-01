@@ -49,7 +49,7 @@ export function DataUsageColumnEntity(props: IProps) {
                     <Text c="dimmed" component="span" fw={550} fz="xs" size="xs">
                         Σ {prettyLifetimeData}
                     </Text>{' '}
-                    {(100 - percentage).toFixed(2)}%
+                    {Math.max(0, 100 - percentage).toFixed(2)}%
                 </Text>
             </Group>
             <Progress
