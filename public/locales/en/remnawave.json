@@ -415,6 +415,7 @@
         "override-sni-from-address-description": "This option replaces the SNI value with the specified Address field value. This is particularly useful for multi-domain configurations or wildcard domains configuration.",
         "legacy-options": "Legacy options",
         "allow-insecure": "Allow Insecure",
+        "pinned-peer-cert-sha256": "Pinned Peer Certificate SHA256",
         "shuffled-hosts-hover-card": "Shuffled hosts will be placed at the top of the list and sorted randomly.",
         "vless-route-description": "From 1 to 65535, 0/empty to disable",
         "misc-settings": "Misc settings",
