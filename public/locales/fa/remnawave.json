@@ -210,11 +210,7 @@
         "widget": {
             "edit-host": "ویرایش هاست",
             "dangling-host-cannot-be-cloned": "نمی‌توان هاست معلق را کلون کرد",
-            "error": "خطا",
-            "are-you-sure": "آیا مطمئن هستید؟",
-            "allowing-insecure-connections-can-lead-to-security-risks-we-do-not-recommend-enabling-this-option": "اجازه دادن برای برقراری اتصال‌های ناامن می‌تواند موجب ریسک‌های امنیتی شود. ما فعال کردن این گزینه را پیشنهاد نمی‌کنیم.",
-            "proceed": "ادامه",
-            "cancel": "انصراف"
+            "error": "خطا"
         }
     },
     "hosts-page-header": {
@@ -414,7 +410,6 @@
         "override-sni-from-address": "بازنویسی SNI از آدرس دامنه",
         "override-sni-from-address-description": "این گزینه مقدار SNI را با آدرس مشخص شده جایگزین خواهد کرد که برای کانفیگ‌های چند دامنه‌ای و wildcard قابل استفاده می‌باشد",
         "legacy-options": "تنظیمات قدیمی",
-        "allow-insecure": "اجازه اتصال ناامن",
         "shuffled-hosts-hover-card": "هاست‌های به هم زده شده در بالای لیست قرار گرفته و به صورت تصادفی مرتب خواهند شد.",
         "vless-route-description": "از 1 تا 65535، برای غیرفعال‌سازی 0 یا خالی بگذارید",
         "misc-settings": "تنظیمات متفرقه",

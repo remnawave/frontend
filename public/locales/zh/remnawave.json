@@ -210,11 +210,7 @@
         "widget": {
             "edit-host": "编辑主机",
             "dangling-host-cannot-be-cloned": "同名主机不能被克隆",
-            "error": "错误",
-            "are-you-sure": "您确定吗？",
-            "allowing-insecure-connections-can-lead-to-security-risks-we-do-not-recommend-enabling-this-option": "允许不安全的连接会导致安全风险。我们不建议启用此选项。",
-            "proceed": "继续",
-            "cancel": "取消"
+            "error": "错误"
         }
     },
     "hosts-page-header": {
@@ -414,7 +410,6 @@
         "override-sni-from-address": "从地址覆盖SNI地址",
         "override-sni-from-address-description": "此选项用指定的地址字段值替换SNI值。这对于多域配置或通配符域配置特别有用。",
         "legacy-options": "传统选项",
-        "allow-insecure": "允许不安全的连接",
         "shuffled-hosts-hover-card": "随机排序的主机将放置在列表的顶端。",
         "vless-route-description": "从 1 到 65535，0 或留空以禁用",
         "misc-settings": "杂项设置",
