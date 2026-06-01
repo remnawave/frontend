@@ -1,4 +1,7 @@
+import utc from 'dayjs/plugin/utc'
 import dayjs from 'dayjs'
+
+dayjs.extend(utc)
 
 /**
  * Converts a date picked from a calendar (date-only semantics) into an ISO
