@@ -26,6 +26,7 @@ import { useTranslation } from 'react-i18next'
 import { GetActiveSessionsOnNodeFeature } from '@features/ui/dashboard/nodes/get-active-sesions-on-node'
 import { GetNodeLinkedHostsFeature } from '@features/ui/dashboard/nodes/get-node-linked-hosts'
 import { GetNodeUsersUsageFeature } from '@features/ui/dashboard/nodes/get-node-users-usage'
+import { ToggleNodeWarpFeature } from '@features/ui/dashboard/nodes/toggle-node-warp'
 import { getNodeResetDaysUtil, getXrayUptimeUtil } from '@shared/utils/time-utils'
 import { QueryKeys, useDisableNode, useEnableNode } from '@shared/api/hooks'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
@@ -34,6 +35,8 @@ import { SectionCard } from '@shared/ui/section-card'
 import { XrayLogo } from '@shared/ui/logos'
 import { queryClient } from '@shared/api'
 import { Logo } from '@shared/ui'
+
+import { NodeWarpBadgeWidget } from '../node-warp-badge'
 
 interface IProps {
     node: GetOneNodeCommand.Response['response']
@@ -152,6 +155,9 @@ export const NodeDetailsCardWidget = memo((props: IProps) => {
                     />
 
                     <Group gap="xs">
+                        <NodeWarpBadgeWidget node={node} visibleFrom="sm" />
+                        <ToggleNodeWarpFeature node={node} />
+
                         {node.isConnected && (
                             <Tooltip
                                 label={t('node-stats.card.represents-the-uptime-of-the-xray-core')}

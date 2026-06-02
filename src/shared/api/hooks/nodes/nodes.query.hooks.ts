@@ -10,6 +10,10 @@ import { keepPreviousData } from '@tanstack/react-query'
 import { sToMs } from '@shared/utils/time-utils'
 
 import { createGetQueryHook, errorHandler } from '../../tsq-helpers'
+import {
+    GetAllNodesWithWarpResponseSchema,
+    GetOneNodeWithWarpResponseSchema
+} from './node-warp-contract'
 
 export const nodesQueryKeys = createQueryKeys('nodes', {
     getAllNodes: {
@@ -28,7 +32,7 @@ export const nodesQueryKeys = createQueryKeys('nodes', {
 
 export const useGetNodes = createGetQueryHook({
     endpoint: GetAllNodesCommand.TSQ_url,
-    responseSchema: GetAllNodesCommand.ResponseSchema,
+    responseSchema: GetAllNodesWithWarpResponseSchema,
     getQueryKey: () => nodesQueryKeys.getAllNodes.queryKey,
     rQueryParams: {
         refetchOnMount: true,
@@ -39,7 +43,7 @@ export const useGetNodes = createGetQueryHook({
 
 export const useGetNode = createGetQueryHook({
     endpoint: GetOneNodeCommand.TSQ_url,
-    responseSchema: GetOneNodeCommand.ResponseSchema,
+    responseSchema: GetOneNodeWithWarpResponseSchema,
     routeParamsSchema: GetOneNodeCommand.RequestSchema,
     getQueryKey: ({ route }) => nodesQueryKeys.getNode(route!).queryKey,
     rQueryParams: {

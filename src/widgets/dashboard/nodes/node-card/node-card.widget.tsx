@@ -26,6 +26,7 @@ import { XrayLogo } from '@shared/ui/logos'
 import { Logo } from '@shared/ui/logo'
 
 import { NodeStatusBadgeWidget } from '../node-status-badge'
+import { NodeWarpBadgeWidget } from '../node-warp-badge'
 import classes from './NodeCard.module.css'
 import { IProps } from './interfaces'
 
@@ -220,6 +221,7 @@ export const NodeCardWidget = memo((props: IProps) => {
                                         >
                                             {node.usersOnline}
                                         </Badge>
+                                        <NodeWarpBadgeWidget node={node} withText={false} />
                                     </>
                                 )}
 
@@ -471,6 +473,8 @@ export const NodeCardWidget = memo((props: IProps) => {
                                 {node.usersOnline}
                             </Badge>
                         )}
+
+                        {!isConfigMissing && <NodeWarpBadgeWidget node={node} withText={false} />}
 
                         <Flex align="center" gap="xs" style={{ flex: 1, minWidth: 0 }}>
                             {node.countryCode && node.countryCode !== 'XX' && (

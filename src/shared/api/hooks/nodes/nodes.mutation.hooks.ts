@@ -15,6 +15,11 @@ import {
 import { notifications } from '@mantine/notifications'
 
 import { createMutationHook } from '../../tsq-helpers'
+import {
+    NODE_WARP_ENDPOINTS,
+    NodeWarpActionResponseSchema,
+    NodeWarpRouteSchema
+} from './node-warp-contract'
 
 export const useCreateNode = createMutationHook({
     endpoint: CreateNodeCommand.TSQ_url,
@@ -128,6 +133,54 @@ export const useDisableNode = createMutationHook({
         onError: (error) => {
             notifications.show({
                 title: `Disable Node`,
+                message:
+                    error instanceof Error ? error.message : `Request failed with unknown error.`,
+                color: 'red'
+            })
+        }
+    }
+})
+
+export const useEnableNodeWarp = createMutationHook({
+    endpoint: NODE_WARP_ENDPOINTS.ENABLE,
+    responseSchema: NodeWarpActionResponseSchema,
+    routeParamsSchema: NodeWarpRouteSchema,
+    requestMethod: 'post',
+    rMutationParams: {
+        onSuccess: () => {
+            notifications.show({
+                title: 'Success',
+                message: 'Node WARP enabled successfully',
+                color: 'teal'
+            })
+        },
+        onError: (error) => {
+            notifications.show({
+                title: `Enable WARP`,
+                message:
+                    error instanceof Error ? error.message : `Request failed with unknown error.`,
+                color: 'red'
+            })
+        }
+    }
+})
+
+export const useDisableNodeWarp = createMutationHook({
+    endpoint: NODE_WARP_ENDPOINTS.DISABLE,
+    responseSchema: NodeWarpActionResponseSchema,
+    routeParamsSchema: NodeWarpRouteSchema,
+    requestMethod: 'post',
+    rMutationParams: {
+        onSuccess: () => {
+            notifications.show({
+                title: 'Success',
+                message: 'Node WARP disabled successfully',
+                color: 'teal'
+            })
+        },
+        onError: (error) => {
+            notifications.show({
+                title: `Disable WARP`,
                 message:
                     error instanceof Error ? error.message : `Request failed with unknown error.`,
                 color: 'red'

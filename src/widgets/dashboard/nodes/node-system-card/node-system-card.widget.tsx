@@ -5,6 +5,7 @@ import {
     PiDesktopTowerDuotone,
     PiLinuxLogoDuotone,
     PiNetworkDuotone,
+    PiCloudDuotone,
     PiTimerDuotone
 } from 'react-icons/pi'
 import { ActionIcon, Badge, Group, Progress, Stack, Text, Tooltip } from '@mantine/core'
@@ -21,6 +22,7 @@ import {
 } from '@shared/utils/bytes'
 import { copyScreenshotToClipboard } from '@shared/utils/copy-screenshot.util'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
+import { getNodeWarpStatus, getNodeWarpUiState } from '@shared/api/hooks'
 import { formatDurationUtil } from '@shared/utils/time-utils'
 import { SectionCard } from '@shared/ui/section-card'
 
@@ -92,6 +94,14 @@ export const NodeSystemCardWidget = memo((props: IProps) => {
             txTotal: prettySiBytesUtil(iface.txTotal) || '0 B'
         }
     }, [node.system])
+
+    const warpData = useMemo(() => {
+        const warp = getNodeWarpStatus(node)
+        return {
+            warp,
+            state: getNodeWarpUiState(warp)
+        }
+    }, [node])
 
     if (!node.system) return null
 
@@ -235,6 +245,54 @@ export const NodeSystemCardWidget = memo((props: IProps) => {
                         </div>
                     </SectionCard.Section>
                 )}
+
+                <SectionCard.Section>
+                    <div className={classes.warpSection}>
+                        <Stack gap={6}>
+                            <Group gap={6} justify="space-between">
+                                <Text c="dimmed" fw={600} lh={1} size="10px" tt="uppercase">
+                                    WARP
+                                </Text>
+                                <Badge
+                                    color={warpData.state.color}
+                                    ff="monospace"
+                                    leftSection={<PiCloudDuotone size={12} />}
+                                    size="xs"
+                                    variant={warpData.state.isRunning ? 'light' : 'outline'}
+                                >
+                                    {warpData.state.label}
+                                </Badge>
+                            </Group>
+
+                            <Group grow style={{ overflow: 'hidden' }}>
+                                <Stack gap={0} style={{ minWidth: 0 }}>
+                                    <Text className={classes.statLabel} component="div">
+                                        IP
+                                    </Text>
+                                    <Text className={classes.statValue}>
+                                        {warpData.warp?.publicIp ?? '—'}
+                                    </Text>
+                                </Stack>
+                                <Stack gap={0} style={{ minWidth: 0 }}>
+                                    <Text className={classes.statLabel} component="div">
+                                        Interface
+                                    </Text>
+                                    <Text className={classes.statValue}>
+                                        {warpData.warp?.interfaceName ?? '—'}
+                                    </Text>
+                                </Stack>
+                                <Stack gap={0} style={{ minWidth: 0 }}>
+                                    <Text className={classes.statLabel} component="div">
+                                        Edge
+                                    </Text>
+                                    <Text className={classes.statValue}>
+                                        {warpData.warp?.colo ?? '—'}
+                                    </Text>
+                                </Stack>
+                            </Group>
+                        </Stack>
+                    </div>
+                </SectionCard.Section>
 
                 <SectionCard.Section>
                     <div className={classes.infoSection}>
