@@ -2141,5 +2141,19 @@
             "history": "历史",
             "providers": "服务商"
         }
+    },
+    "prime-modal": {
+        "shared": {
+            "description": "Back the project and become part of its inner circle - closer to the team, the roadmap, and the work itself.",
+            "priority-support-title": "Priority Support",
+            "priority-support-description": "Skip the queue - your questions are answered first, directly by the team.",
+            "private-community-title": "Private Community",
+            "private-community-description": "A closed circle of Prime members.",
+            "shape-the-roadmap-title": "Shape the Roadmap",
+            "shape-the-roadmap-description": "Vote on what gets built next and help steer where the project goes.",
+            "direct-developer-access-title": "Direct Developer Access",
+            "direct-developer-access-description": "A direct line to the developer - no tickets, no middlemen.",
+            "join-button": "Join RW Prime"
+        }
     }
 }
