@@ -9,12 +9,20 @@ import {
     PiTimerDuotone
 } from 'react-icons/pi'
 import { ActionIcon, Badge, Group, Progress, Stack, Text, Tooltip } from '@mantine/core'
-import { GetOneNodeCommand } from '@remnawave/backend-contract'
 import { memo, useMemo, useRef, useState } from 'react'
 import { notifications } from '@mantine/notifications'
 import { useTranslation } from 'react-i18next'
 import { TbCamera } from 'react-icons/tb'
 
+import {
+    getNodeHostConnectivity,
+    getNodeWarpStatus,
+    getNodeWarpUiState,
+    getWarpOperationLabel,
+    isNodeWarpOperationPending,
+    TNodeWithWarp,
+    useGetNodeWarpStatus
+} from '@shared/api/hooks'
 import {
     prettyBytesToAnyUtil,
     prettySiBytesUtil,
@@ -22,15 +30,16 @@ import {
 } from '@shared/utils/bytes'
 import { copyScreenshotToClipboard } from '@shared/utils/copy-screenshot.util'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
-import { getNodeWarpStatus, getNodeWarpUiState } from '@shared/api/hooks'
 import { formatDurationUtil } from '@shared/utils/time-utils'
 import { SectionCard } from '@shared/ui/section-card'
 
 import classes from './node-system-card.module.css'
 
 interface IProps {
-    node: GetOneNodeCommand.Response['response']
+    node: TNodeWithWarp
 }
+
+const EMPTY_VALUE = '—'
 
 export const NodeSystemCardWidget = memo((props: IProps) => {
     const { node } = props
@@ -95,13 +104,29 @@ export const NodeSystemCardWidget = memo((props: IProps) => {
         }
     }, [node.system])
 
+    const cachedWarp = getNodeWarpStatus(node)
+    const warpStatusQuery = useGetNodeWarpStatus({
+        route: {
+            uuid: node.uuid
+        },
+        rQueryParams: {
+            enabled:
+                node.isConnected && !node.isDisabled && isNodeWarpOperationPending(cachedWarp)
+        }
+    })
+
     const warpData = useMemo(() => {
-        const warp = getNodeWarpStatus(node)
+        const warp = warpStatusQuery.data ?? cachedWarp
         return {
             warp,
             state: getNodeWarpUiState(warp)
         }
-    }, [node])
+    }, [cachedWarp, warpStatusQuery.data])
+
+    const hostData = useMemo(() => getNodeHostConnectivity(node), [node])
+    const operation = warpData.warp?.operation
+    const operationLogs = operation?.logs.slice(-4) ?? []
+    const isOperationRunning = isNodeWarpOperationPending(warpData.warp)
 
     if (!node.system) return null
 
@@ -247,6 +272,49 @@ export const NodeSystemCardWidget = memo((props: IProps) => {
                 )}
 
                 <SectionCard.Section>
+                    <div className={classes.interfaceSection}>
+                        <Stack gap={6}>
+                            <Group gap={6} justify="space-between">
+                                <Text c="dimmed" fw={600} lh={1} size="10px" tt="uppercase">
+                                    Host
+                                </Text>
+                                <Badge
+                                    color={hostData?.supportsIpv6 ? 'teal' : 'gray'}
+                                    ff="monospace"
+                                    size="xs"
+                                    variant="soft"
+                                >
+                                    IPv6 {hostData?.supportsIpv6 ? 'ON' : 'OFF'}
+                                </Badge>
+                            </Group>
+
+                            <Group grow style={{ overflow: 'hidden' }}>
+                                <Stack gap={0} style={{ minWidth: 0 }}>
+                                    <Text className={classes.statLabel} component="div">
+                                        IPv4
+                                    </Text>
+                                    <Tooltip label={hostData?.publicIpv4 ?? EMPTY_VALUE}>
+                                        <Text className={classes.statValue}>
+                                            {hostData?.publicIpv4 ?? EMPTY_VALUE}
+                                        </Text>
+                                    </Tooltip>
+                                </Stack>
+                                <Stack gap={0} style={{ minWidth: 0 }}>
+                                    <Text className={classes.statLabel} component="div">
+                                        IPv6
+                                    </Text>
+                                    <Tooltip label={hostData?.publicIpv6 ?? EMPTY_VALUE}>
+                                        <Text className={classes.statValue}>
+                                            {hostData?.publicIpv6 ?? EMPTY_VALUE}
+                                        </Text>
+                                    </Tooltip>
+                                </Stack>
+                            </Group>
+                        </Stack>
+                    </div>
+                </SectionCard.Section>
+
+                <SectionCard.Section>
                     <div className={classes.memorySection}>
                         <Stack gap={6}>
                             <Group gap={6} justify="space-between">
@@ -267,29 +335,106 @@ export const NodeSystemCardWidget = memo((props: IProps) => {
                             <Group grow style={{ overflow: 'hidden' }}>
                                 <Stack gap={0} style={{ minWidth: 0 }}>
                                     <Text className={classes.statLabel} component="div">
-                                        IP
+                                        IPv4
                                     </Text>
-                                    <Text className={classes.statValue}>
-                                        {warpData.warp?.publicIp ?? '—'}
-                                    </Text>
+                                    <Tooltip
+                                        label={
+                                            warpData.warp?.publicIpv4 ??
+                                            warpData.warp?.ipv4?.publicIp ??
+                                            EMPTY_VALUE
+                                        }
+                                    >
+                                        <Text className={classes.statValue}>
+                                            {warpData.warp?.publicIpv4 ??
+                                                warpData.warp?.ipv4?.publicIp ??
+                                                EMPTY_VALUE}
+                                        </Text>
+                                    </Tooltip>
                                 </Stack>
                                 <Stack gap={0} style={{ minWidth: 0 }}>
                                     <Text className={classes.statLabel} component="div">
-                                        Interface
+                                        IPv6
                                     </Text>
-                                    <Text className={classes.statValue}>
-                                        {warpData.warp?.interfaceName ?? '—'}
-                                    </Text>
+                                    <Tooltip
+                                        label={
+                                            warpData.warp?.publicIpv6 ??
+                                            warpData.warp?.ipv6?.publicIp ??
+                                            EMPTY_VALUE
+                                        }
+                                    >
+                                        <Text className={classes.statValue}>
+                                            {warpData.warp?.publicIpv6 ??
+                                                warpData.warp?.ipv6?.publicIp ??
+                                                EMPTY_VALUE}
+                                        </Text>
+                                    </Tooltip>
                                 </Stack>
                                 <Stack gap={0} style={{ minWidth: 0 }}>
                                     <Text className={classes.statLabel} component="div">
                                         Edge
                                     </Text>
                                     <Text className={classes.statValue}>
-                                        {warpData.warp?.colo ?? '—'}
+                                        {warpData.warp?.colo ?? EMPTY_VALUE}
                                     </Text>
                                 </Stack>
                             </Group>
+
+                            {operation && (isOperationRunning || operation.logs.length > 0) && (
+                                <Stack gap={4}>
+                                    <Group gap={6} justify="space-between">
+                                        <Text
+                                            c="dimmed"
+                                            fw={600}
+                                            lh={1}
+                                            size="10px"
+                                            tt="uppercase"
+                                        >
+                                            Operation
+                                        </Text>
+                                        <Badge
+                                            color={isOperationRunning ? 'blue' : 'gray'}
+                                            ff="monospace"
+                                            size="xs"
+                                            variant="light"
+                                        >
+                                            {getWarpOperationLabel(operation)}
+                                        </Badge>
+                                    </Group>
+
+                                    {isOperationRunning && (
+                                        <Progress
+                                            animated
+                                            color="blue"
+                                            radius="xl"
+                                            size="xs"
+                                            striped
+                                            value={100}
+                                        />
+                                    )}
+
+                                    {operation.step && (
+                                        <Text c="dimmed" ff="monospace" size="10px">
+                                            {operation.step}
+                                        </Text>
+                                    )}
+
+                                    {operationLogs.length > 0 && (
+                                        <Stack gap={2}>
+                                            {operationLogs.map((line, index) => (
+                                                <Text
+                                                    c="dimmed"
+                                                    ff="monospace"
+                                                    key={`${line}-${index}`}
+                                                    size="10px"
+                                                    truncate
+                                                >
+                                                    {line}
+                                                </Text>
+                                            ))}
+                                        </Stack>
+                                    )}
+                                </Stack>
+                            )}
                         </Stack>
                     </div>
                 </SectionCard.Section>

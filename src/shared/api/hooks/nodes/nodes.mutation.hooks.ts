@@ -141,6 +141,30 @@ export const useDisableNode = createMutationHook({
     }
 })
 
+export const useInstallNodeWarp = createMutationHook({
+    endpoint: NODE_WARP_ENDPOINTS.INSTALL,
+    responseSchema: NodeWarpActionResponseSchema,
+    routeParamsSchema: NodeWarpRouteSchema,
+    requestMethod: 'post',
+    rMutationParams: {
+        onSuccess: () => {
+            notifications.show({
+                title: 'Success',
+                message: 'Node WARP installed successfully',
+                color: 'teal'
+            })
+        },
+        onError: (error) => {
+            notifications.show({
+                title: `Install WARP`,
+                message:
+                    error instanceof Error ? error.message : `Request failed with unknown error.`,
+                color: 'red'
+            })
+        }
+    }
+})
+
 export const useEnableNodeWarp = createMutationHook({
     endpoint: NODE_WARP_ENDPOINTS.ENABLE,
     responseSchema: NodeWarpActionResponseSchema,
@@ -181,6 +205,30 @@ export const useDisableNodeWarp = createMutationHook({
         onError: (error) => {
             notifications.show({
                 title: `Disable WARP`,
+                message:
+                    error instanceof Error ? error.message : `Request failed with unknown error.`,
+                color: 'red'
+            })
+        }
+    }
+})
+
+export const useUninstallNodeWarp = createMutationHook({
+    endpoint: NODE_WARP_ENDPOINTS.UNINSTALL,
+    responseSchema: NodeWarpActionResponseSchema,
+    routeParamsSchema: NodeWarpRouteSchema,
+    requestMethod: 'post',
+    rMutationParams: {
+        onSuccess: () => {
+            notifications.show({
+                title: 'Success',
+                message: 'Node WARP uninstalled successfully',
+                color: 'teal'
+            })
+        },
+        onError: (error) => {
+            notifications.show({
+                title: `Uninstall WARP`,
                 message:
                     error instanceof Error ? error.message : `Request failed with unknown error.`,
                 color: 'red'

@@ -11,7 +11,10 @@ import { sToMs } from '@shared/utils/time-utils'
 
 import {
     GetAllNodesWithWarpResponseSchema,
-    GetOneNodeWithWarpResponseSchema
+    GetOneNodeWithWarpResponseSchema,
+    NODE_WARP_ENDPOINTS,
+    NodeWarpRouteSchema,
+    NodeWarpStatusResponseSchema
 } from './node-warp-contract'
 import { createGetQueryHook, errorHandler } from '../../tsq-helpers'
 
@@ -21,6 +24,9 @@ export const nodesQueryKeys = createQueryKeys('nodes', {
     },
     getNode: (route: GetOneNodeCommand.Request) => ({
         queryKey: [route]
+    }),
+    getNodeWarpStatus: (route: { uuid: string }) => ({
+        queryKey: ['warp-status', route]
     }),
     getPubKey: {
         queryKey: null
@@ -53,6 +59,21 @@ export const useGetNode = createGetQueryHook({
     },
     errorHandler: (error) => errorHandler(error, 'Get Node')
 })
+
+export const useGetNodeWarpStatus = createGetQueryHook({
+    endpoint: NODE_WARP_ENDPOINTS.STATUS,
+    responseSchema: NodeWarpStatusResponseSchema,
+    routeParamsSchema: NodeWarpRouteSchema,
+    getQueryKey: ({ route }) => nodesQueryKeys.getNodeWarpStatus(route!).queryKey,
+    rQueryParams: {
+        enabled: false,
+        refetchOnMount: false,
+        refetchInterval: sToMs(2),
+        staleTime: 0
+    },
+    errorHandler: (error) => errorHandler(error, 'Get Node WARP Status')
+})
+
 export const useGetPubKey = createGetQueryHook({
     endpoint: GetPubKeyCommand.TSQ_url,
     responseSchema: GetPubKeyCommand.ResponseSchema,

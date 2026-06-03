@@ -17,16 +17,32 @@ describe('frontend WARP controls', () => {
         const detailsCard = readProjectFile(
             'src/widgets/dashboard/nodes/node-details-card/node-details-card.widget.tsx'
         )
+        const toggleWarp = readProjectFile(
+            'src/features/ui/dashboard/nodes/toggle-node-warp/toggle-node-warp.feature.tsx'
+        )
         const systemCard = readProjectFile(
             'src/widgets/dashboard/nodes/node-system-card/node-system-card.widget.tsx'
         )
 
         assert.match(hooks, /useEnableNodeWarp/)
         assert.match(hooks, /useDisableNodeWarp/)
+        assert.match(hooks, /useInstallNodeWarp/)
+        assert.match(hooks, /useUninstallNodeWarp/)
+        assert.match(warpContract, /publicIpv4/)
+        assert.match(warpContract, /publicIpv6/)
+        assert.match(warpContract, /HostConnectivitySchema/)
+        assert.match(warpContract, /operation/)
+        assert.match(warpContract, /\/api\/nodes\/:uuid\/actions\/warp\/install/)
         assert.match(warpContract, /\/api\/nodes\/:uuid\/actions\/warp\/enable/)
         assert.match(warpContract, /\/api\/nodes\/:uuid\/actions\/warp\/disable/)
+        assert.match(warpContract, /\/api\/nodes\/:uuid\/actions\/warp\/uninstall/)
         assert.match(nodeCard, /NodeWarpBadgeWidget/)
         assert.match(detailsCard, /ToggleNodeWarpFeature/)
+        assert.match(toggleWarp, /Install WARP/)
+        assert.match(toggleWarp, /Uninstall WARP/)
         assert.match(systemCard, /WARP/)
+        assert.match(systemCard, /IPv4/)
+        assert.match(systemCard, /IPv6/)
+        assert.match(systemCard, /Host/)
     })
 })
