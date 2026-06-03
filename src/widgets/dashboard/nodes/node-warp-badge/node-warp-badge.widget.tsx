@@ -3,9 +3,9 @@ import { Badge, BadgeProps, Tooltip } from '@mantine/core'
 import { memo } from 'react'
 
 import {
-    TNodeWarpCarrier,
     getNodeWarpStatus,
-    getNodeWarpUiState
+    getNodeWarpUiState,
+    TNodeWarpCarrier
 } from '@shared/api/hooks/nodes/node-warp-contract'
 
 interface IProps extends BadgeProps {
@@ -17,11 +17,12 @@ export const NodeWarpBadgeWidget = memo(({ node, withText = true, ...rest }: IPr
     const warp = getNodeWarpStatus(node)
     const state = getNodeWarpUiState(warp)
 
-    const Icon = state.isRunning
-        ? PiCloudCheckDuotone
-        : warp?.lastError
-          ? PiCloudWarningDuotone
-          : PiCloudSlashDuotone
+    let Icon = PiCloudSlashDuotone
+    if (state.isRunning) {
+        Icon = PiCloudCheckDuotone
+    } else if (warp?.lastError) {
+        Icon = PiCloudWarningDuotone
+    }
 
     return (
         <Tooltip label={state.tooltip} withArrow>

@@ -1,8 +1,8 @@
 import {
     GetAllNodesCommand,
+    NodesSchema,
     NodeSystemSchema,
-    NodeSystemStatsSchema,
-    NodesSchema
+    NodeSystemStatsSchema
 } from '@remnawave/backend-contract'
 import { z } from 'zod'
 
@@ -53,17 +53,17 @@ export type TWarpStatus = z.infer<typeof WarpStatusSchema>
 export type TNodeWithWarp = z.infer<typeof NodeWithWarpSchema>
 export type TNodesWithWarp = GetAllNodesCommand.Response['response'][number] & TNodeWithWarp
 export type TNodeWarpCarrier = {
-    system: {
+    system: null | {
         stats: object
-    } | null
+    }
 }
 
-export function getNodeWarpStatus(node: TNodeWarpCarrier): TWarpStatus | null {
-    const stats = node.system?.stats as { warp?: TWarpStatus | null } | undefined
+export function getNodeWarpStatus(node: TNodeWarpCarrier): null | TWarpStatus {
+    const stats = node.system?.stats as undefined | { warp?: null | TWarpStatus }
     return stats?.warp ?? null
 }
 
-export function getNodeWarpUiState(warp: TWarpStatus | null) {
+export function getNodeWarpUiState(warp: null | TWarpStatus) {
     if (!warp) {
         return {
             color: 'gray',

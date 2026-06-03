@@ -1,11 +1,11 @@
 import {
     PiArrowDownDuotone,
     PiArrowUpDuotone,
+    PiCloudDuotone,
     PiCpuDuotone,
     PiDesktopTowerDuotone,
     PiLinuxLogoDuotone,
     PiNetworkDuotone,
-    PiCloudDuotone,
     PiTimerDuotone
 } from 'react-icons/pi'
 import { ActionIcon, Badge, Group, Progress, Stack, Text, Tooltip } from '@mantine/core'
@@ -247,7 +247,7 @@ export const NodeSystemCardWidget = memo((props: IProps) => {
                 )}
 
                 <SectionCard.Section>
-                    <div className={classes.warpSection}>
+                    <div className={classes.memorySection}>
                         <Stack gap={6}>
                             <Group gap={6} justify="space-between">
                                 <Text c="dimmed" fw={600} lh={1} size="10px" tt="uppercase">

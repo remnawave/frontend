@@ -3,11 +3,11 @@ import { ActionIcon, Loader, Tooltip } from '@mantine/core'
 import { memo } from 'react'
 
 import {
+    getNodeWarpStatus,
+    getNodeWarpUiState,
     nodesQueryKeys,
     QueryKeys,
     TNodeWithWarp,
-    getNodeWarpStatus,
-    getNodeWarpUiState,
     useDisableNodeWarp,
     useEnableNodeWarp
 } from '@shared/api/hooks'
@@ -54,6 +54,18 @@ export const ToggleNodeWarpFeature = memo(({ node }: IProps) => {
         enableWarp({})
     }
 
+    const renderIcon = () => {
+        if (isPending) {
+            return <Loader color={state.isRunning ? 'teal' : 'gray'} size="xs" />
+        }
+
+        if (state.isRunning) {
+            return <PiCloudCheckDuotone size={16} />
+        }
+
+        return <PiCloudSlashDuotone size={16} />
+    }
+
     return (
         <Tooltip label={state.isRunning ? 'Disable WARP' : 'Enable WARP'}>
             <ActionIcon
@@ -63,13 +75,7 @@ export const ToggleNodeWarpFeature = memo(({ node }: IProps) => {
                 size="md"
                 variant="light"
             >
-                {isPending ? (
-                    <Loader color={state.isRunning ? 'teal' : 'gray'} size="xs" />
-                ) : state.isRunning ? (
-                    <PiCloudCheckDuotone size={16} />
-                ) : (
-                    <PiCloudSlashDuotone size={16} />
-                )}
+                {renderIcon()}
             </ActionIcon>
         </Tooltip>
     )
