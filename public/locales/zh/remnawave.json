@@ -2144,16 +2144,16 @@
     },
     "prime-modal": {
         "shared": {
-            "description": "Back the project and become part of its inner circle - closer to the team, the roadmap, and the work itself.",
-            "priority-support-title": "Priority Support",
-            "priority-support-description": "Skip the queue - your questions are answered first, directly by the team.",
-            "private-community-title": "Private Community",
-            "private-community-description": "A closed circle of Prime members.",
-            "shape-the-roadmap-title": "Shape the Roadmap",
-            "shape-the-roadmap-description": "Vote on what gets built next and help steer where the project goes.",
-            "direct-developer-access-title": "Direct Developer Access",
-            "direct-developer-access-description": "A direct line to the developer - no tickets, no middlemen.",
-            "join-button": "Join RW Prime"
+            "description": "支持项目并成为核心成员——更贴近团队、产品路线以及实际工作",
+            "priority-support-title": "优先支持",
+            "priority-support-description": "跳过排队——你的问题将优先得到团队的直接解答",
+            "private-community-title": "私密社群",
+            "private-community-description": "仅限 Prime 会员参与的专属社群",
+            "shape-the-roadmap-title": "参与路线规划",
+            "shape-the-roadmap-description": "投票决定下一个开发的内容，并帮助引导项目的发展方向。",
+            "direct-developer-access-title": "开发者直接访问",
+            "direct-developer-access-description": "直接联系开发者-没有工单，没有中间人。",
+            "join-button": "加入最棒的RW"
         }
     }
 }
