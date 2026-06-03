@@ -10,7 +10,7 @@ import { logoutEvents } from '../emitters/emit-logout'
 let authorizationToken = ''
 
 let BASE_DOMAIN = __DOMAIN_BACKEND__
-const isDev = __NODE_ENV__ === 'development'
+const isDev = import.meta.env.DEV
 const isDomainOverride = __DOMAIN_OVERRIDE__ === '1'
 
 if (isDev) {
