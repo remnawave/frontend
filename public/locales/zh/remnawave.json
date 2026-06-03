@@ -2155,5 +2155,19 @@
             "direct-developer-access-description": "直接联系开发者-没有工单，没有中间人。",
             "join-button": "加入最棒的RW"
         }
+    },
+    "hosts-datatable": {
+        "widget": {
+            "reset-sort": "Reset sort"
+        }
+    },
+    "columns-visibility-popover": {
+        "show-all": "Show all",
+        "hide-all": "Hide all"
+    },
+    "use-hosts-table-widget": {
+        "disabled": "Disabled",
+        "enabled": "Enabled",
+        "hidden": "Hidden"
     }
 }

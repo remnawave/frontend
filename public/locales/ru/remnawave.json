@@ -2155,5 +2155,19 @@
             "direct-developer-access-description": "Прямая связь с разработчиком — никаких заявок, никаких посредников.",
             "join-button": "Присоединиться к RW Prime"
         }
+    },
+    "hosts-datatable": {
+        "widget": {
+            "reset-sort": "Reset sort"
+        }
+    },
+    "columns-visibility-popover": {
+        "show-all": "Show all",
+        "hide-all": "Hide all"
+    },
+    "use-hosts-table-widget": {
+        "disabled": "Disabled",
+        "enabled": "Enabled",
+        "hidden": "Hidden"
     }
 }
