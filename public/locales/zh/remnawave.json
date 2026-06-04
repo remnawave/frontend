@@ -60,7 +60,8 @@
         "nothing-found": "未找到",
         "name": "名称",
         "clone": "克隆",
-        "event-sent": "发送事件"
+        "event-sent": "发送事件",
+        "open": "Open"
     },
     "bandwidth-metrics": {
         "current-year": "今年",
@@ -2169,5 +2170,10 @@
         "disabled": "Disabled",
         "enabled": "Enabled",
         "hidden": "Hidden"
+    },
+    "node-tracking-and-billing": {
+        "card": {
+            "note": "Note"
+        }
     }
 }

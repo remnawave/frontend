@@ -60,7 +60,8 @@
         "nothing-found": "چیزی یافت نشد",
         "name": "اسم",
         "clone": "همانندسازی",
-        "event-sent": "رویداد ارسال شد"
+        "event-sent": "رویداد ارسال شد",
+        "open": "Open"
     },
     "bandwidth-metrics": {
         "current-year": "امسال",
@@ -2169,5 +2170,10 @@
         "disabled": "Disabled",
         "enabled": "Enabled",
         "hidden": "Hidden"
+    },
+    "node-tracking-and-billing": {
+        "card": {
+            "note": "Note"
+        }
     }
 }
