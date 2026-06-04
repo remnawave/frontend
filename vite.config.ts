@@ -11,9 +11,14 @@ import { defineConfig } from 'vite'
 import * as dotenv from 'dotenv'
 
 export default defineConfig(({ command }) => {
-    if (command === 'serve') {
+    const isServe = command === 'serve'
+
+    if (isServe) {
         dotenv.config({ path: `${__dirname}/.env` })
     }
+
+    const domainBackend = isServe ? process.env.DOMAIN_BACKEND || 'http://127.0.0.1:3003' : ''
+    const domainOverride = isServe ? process.env.DOMAIN_OVERRIDE || '0' : '0'
 
     return {
         assetsInclude: ['**/*.lottie'],
@@ -116,9 +121,9 @@ export default defineConfig(({ command }) => {
             }
         },
         define: {
-            __DOMAIN_BACKEND__: JSON.stringify(process.env.DOMAIN_BACKEND || 'example.com').trim(),
+            __DOMAIN_BACKEND__: JSON.stringify(domainBackend).trim(),
             __NODE_ENV__: JSON.stringify(process.env.NODE_ENV).trim(),
-            __DOMAIN_OVERRIDE__: JSON.stringify(process.env.DOMAIN_OVERRIDE || '0').trim()
+            __DOMAIN_OVERRIDE__: JSON.stringify(domainOverride).trim()
         },
         server: {
             host: '0.0.0.0',
