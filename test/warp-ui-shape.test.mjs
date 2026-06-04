@@ -45,4 +45,28 @@ describe('frontend WARP controls', () => {
         assert.match(systemCard, /IPv6/)
         assert.match(systemCard, /Host/)
     })
+
+    it('keeps host and WARP addresses readable and copyable', () => {
+        const systemCard = readProjectFile(
+            'src/widgets/dashboard/nodes/node-system-card/node-system-card.widget.tsx'
+        )
+        const systemCardCss = readProjectFile(
+            'src/widgets/dashboard/nodes/node-system-card/node-system-card.module.css'
+        )
+
+        assert.match(systemCard, /NodeNetworkAddress/)
+        assert.match(systemCard, /CopyButton/)
+        assert.match(systemCard, /PiCheck/)
+        assert.match(systemCard, /PiCopy/)
+        assert.match(systemCard, /aria-label=\{`Copy \$\{section\} \$\{label\}`\}/)
+        assert.match(systemCard, /section="Host"/)
+        assert.match(systemCard, /section="WARP"/)
+        assert.match(systemCard, /className=\{classes\.networkAddressValue\}/)
+
+        const addressValueRule = systemCardCss.match(/\.networkAddressValue\s*{[^}]+}/s)?.[0] ?? ''
+
+        assert.match(addressValueRule, /overflow-wrap:\s*anywhere;/)
+        assert.match(addressValueRule, /white-space:\s*normal;/)
+        assert.doesNotMatch(addressValueRule, /text-overflow|ellipsis/)
+    })
 })

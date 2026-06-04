@@ -1,14 +1,16 @@
 import {
     PiArrowDownDuotone,
     PiArrowUpDuotone,
+    PiCheck,
     PiCloudDuotone,
+    PiCopy,
     PiCpuDuotone,
     PiDesktopTowerDuotone,
     PiLinuxLogoDuotone,
     PiNetworkDuotone,
     PiTimerDuotone
 } from 'react-icons/pi'
-import { ActionIcon, Badge, Group, Progress, Stack, Text, Tooltip } from '@mantine/core'
+import { ActionIcon, Badge, CopyButton, Group, Progress, Stack, Text, Tooltip } from '@mantine/core'
 import { memo, useMemo, useRef, useState } from 'react'
 import { notifications } from '@mantine/notifications'
 import { useTranslation } from 'react-i18next'
@@ -40,6 +42,55 @@ interface IProps {
 }
 
 const EMPTY_VALUE = '—'
+
+interface NodeNetworkAddressProps {
+    label: 'IPv4' | 'IPv6'
+    section: 'Host' | 'WARP'
+    value: null | string | undefined
+}
+
+const NodeNetworkAddress = (props: NodeNetworkAddressProps) => {
+    const { label, section, value } = props
+    const displayValue = value?.trim() || EMPTY_VALUE
+    const canCopy = displayValue !== EMPTY_VALUE
+    const copyLabel = `Copy ${section} ${label}`
+
+    return (
+        <Stack className={classes.networkAddress} gap={3}>
+            <Group align="center" gap={4} justify="space-between" wrap="nowrap">
+                <Text className={classes.statLabel} component="div">
+                    {label}
+                </Text>
+
+                {canCopy && (
+                    <CopyButton timeout={2000} value={displayValue}>
+                        {({ copied, copy }) => (
+                            <Tooltip label={copied ? 'Copied!' : copyLabel}>
+                                <ActionIcon
+                                    aria-label={`Copy ${section} ${label}`}
+                                    className={classes.networkAddressCopy}
+                                    color={copied ? 'teal' : 'gray'}
+                                    onClick={copy}
+                                    size="xs"
+                                    variant="subtle"
+                                >
+                                    {copied ? <PiCheck size={12} /> : <PiCopy size={12} />}
+                                </ActionIcon>
+                            </Tooltip>
+                        )}
+                    </CopyButton>
+                )}
+            </Group>
+
+            <Text
+                className={classes.networkAddressValue}
+                title={canCopy ? displayValue : undefined}
+            >
+                {displayValue}
+            </Text>
+        </Stack>
+    )
+}
 
 export const NodeSystemCardWidget = memo((props: IProps) => {
     const { node } = props
@@ -110,8 +161,7 @@ export const NodeSystemCardWidget = memo((props: IProps) => {
             uuid: node.uuid
         },
         rQueryParams: {
-            enabled:
-                node.isConnected && !node.isDisabled && isNodeWarpOperationPending(cachedWarp)
+            enabled: node.isConnected && !node.isDisabled && isNodeWarpOperationPending(cachedWarp)
         }
     })
 
@@ -288,28 +338,18 @@ export const NodeSystemCardWidget = memo((props: IProps) => {
                                 </Badge>
                             </Group>
 
-                            <Group grow style={{ overflow: 'hidden' }}>
-                                <Stack gap={0} style={{ minWidth: 0 }}>
-                                    <Text className={classes.statLabel} component="div">
-                                        IPv4
-                                    </Text>
-                                    <Tooltip label={hostData?.publicIpv4 ?? EMPTY_VALUE}>
-                                        <Text className={classes.statValue}>
-                                            {hostData?.publicIpv4 ?? EMPTY_VALUE}
-                                        </Text>
-                                    </Tooltip>
-                                </Stack>
-                                <Stack gap={0} style={{ minWidth: 0 }}>
-                                    <Text className={classes.statLabel} component="div">
-                                        IPv6
-                                    </Text>
-                                    <Tooltip label={hostData?.publicIpv6 ?? EMPTY_VALUE}>
-                                        <Text className={classes.statValue}>
-                                            {hostData?.publicIpv6 ?? EMPTY_VALUE}
-                                        </Text>
-                                    </Tooltip>
-                                </Stack>
-                            </Group>
+                            <div className={classes.networkAddressGrid}>
+                                <NodeNetworkAddress
+                                    label="IPv4"
+                                    section="Host"
+                                    value={hostData?.publicIpv4}
+                                />
+                                <NodeNetworkAddress
+                                    label="IPv6"
+                                    section="Host"
+                                    value={hostData?.publicIpv6}
+                                />
+                            </div>
                         </Stack>
                     </div>
                 </SectionCard.Section>
@@ -332,43 +372,21 @@ export const NodeSystemCardWidget = memo((props: IProps) => {
                                 </Badge>
                             </Group>
 
-                            <Group grow style={{ overflow: 'hidden' }}>
-                                <Stack gap={0} style={{ minWidth: 0 }}>
-                                    <Text className={classes.statLabel} component="div">
-                                        IPv4
-                                    </Text>
-                                    <Tooltip
-                                        label={
-                                            warpData.warp?.publicIpv4 ??
-                                            warpData.warp?.ipv4?.publicIp ??
-                                            EMPTY_VALUE
-                                        }
-                                    >
-                                        <Text className={classes.statValue}>
-                                            {warpData.warp?.publicIpv4 ??
-                                                warpData.warp?.ipv4?.publicIp ??
-                                                EMPTY_VALUE}
-                                        </Text>
-                                    </Tooltip>
-                                </Stack>
-                                <Stack gap={0} style={{ minWidth: 0 }}>
-                                    <Text className={classes.statLabel} component="div">
-                                        IPv6
-                                    </Text>
-                                    <Tooltip
-                                        label={
-                                            warpData.warp?.publicIpv6 ??
-                                            warpData.warp?.ipv6?.publicIp ??
-                                            EMPTY_VALUE
-                                        }
-                                    >
-                                        <Text className={classes.statValue}>
-                                            {warpData.warp?.publicIpv6 ??
-                                                warpData.warp?.ipv6?.publicIp ??
-                                                EMPTY_VALUE}
-                                        </Text>
-                                    </Tooltip>
-                                </Stack>
+                            <div className={classes.networkAddressGrid}>
+                                <NodeNetworkAddress
+                                    label="IPv4"
+                                    section="WARP"
+                                    value={
+                                        warpData.warp?.publicIpv4 ?? warpData.warp?.ipv4?.publicIp
+                                    }
+                                />
+                                <NodeNetworkAddress
+                                    label="IPv6"
+                                    section="WARP"
+                                    value={
+                                        warpData.warp?.publicIpv6 ?? warpData.warp?.ipv6?.publicIp
+                                    }
+                                />
                                 <Stack gap={0} style={{ minWidth: 0 }}>
                                     <Text className={classes.statLabel} component="div">
                                         Edge
@@ -377,18 +395,12 @@ export const NodeSystemCardWidget = memo((props: IProps) => {
                                         {warpData.warp?.colo ?? EMPTY_VALUE}
                                     </Text>
                                 </Stack>
-                            </Group>
+                            </div>
 
                             {operation && (isOperationRunning || operation.logs.length > 0) && (
                                 <Stack gap={4}>
                                     <Group gap={6} justify="space-between">
-                                        <Text
-                                            c="dimmed"
-                                            fw={600}
-                                            lh={1}
-                                            size="10px"
-                                            tt="uppercase"
-                                        >
+                                        <Text c="dimmed" fw={600} lh={1} size="10px" tt="uppercase">
                                             Operation
                                         </Text>
                                         <Badge
