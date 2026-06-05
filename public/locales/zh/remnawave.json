@@ -631,8 +631,15 @@
             "set-port": "设置端口",
             "port": "端口",
             "clear-selection": "清除选择",
-            "select-all": "全选"
+            "select-all": "全选",
+            "dangling-hosts-skipped": "{{count}} dangling host(s) were skipped and not cloned."
         }
+    },
+    "edit-many-hosts-drawer": {
+        "confirm-title": "Confirm bulk update",
+        "confirm-description": "The following fields will be updated for {{count}} host(s):",
+        "no-changes-title": "Nothing to update",
+        "no-changes-description": "You haven't changed any fields."
     },
     "bulk-user-actions-drawer": {
         "widget": {

@@ -631,8 +631,15 @@
             "set-port": "تنظیم پورت",
             "port": "پورت",
             "clear-selection": "پاک کردن انتخاب",
-            "select-all": "انتخاب همه"
+            "select-all": "انتخاب همه",
+            "dangling-hosts-skipped": "{{count}} dangling host(s) were skipped and not cloned."
         }
+    },
+    "edit-many-hosts-drawer": {
+        "confirm-title": "Confirm bulk update",
+        "confirm-description": "The following fields will be updated for {{count}} host(s):",
+        "no-changes-title": "Nothing to update",
+        "no-changes-description": "You haven't changed any fields."
     },
     "bulk-user-actions-drawer": {
         "widget": {
