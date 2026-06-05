@@ -55,6 +55,54 @@
     max-width: 100%;
 }
 
+.networkAddressGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(148px, 1fr));
+    gap: var(--mantine-spacing-xs) var(--mantine-spacing-sm);
+    align-items: start;
+    min-width: 0;
+}
+
+.networkAddress {
+    min-width: 0;
+}
+
+.networkAddressCopy {
+    flex: 0 0 auto;
+}
+
+.networkAddressValue {
+    font-weight: 600;
+    font-size: var(--mantine-font-size-xs);
+    font-family: var(--mantine-font-family-monospace);
+    color: var(--mantine-color-white-5);
+    line-height: 1.25;
+    display: block;
+    max-width: 100%;
+    overflow-wrap: anywhere;
+    white-space: normal;
+}
+
+.networkAddressCountry {
+    min-width: 0;
+    color: var(--mantine-color-dimmed);
+}
+
+.networkAddressFlag {
+    flex: 0 0 auto;
+    font-size: 0.95em !important;
+}
+
+.networkAddressCountryName {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: var(--mantine-color-dimmed);
+    font-size: 10px;
+    line-height: 1.1;
+}
+
 .interfaceSection {
     composes: subsection;
     background: rgba(34, 211, 238, 0.06);

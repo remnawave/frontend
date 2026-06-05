@@ -14,6 +14,11 @@ import {
 } from '@remnawave/backend-contract'
 import { notifications } from '@mantine/notifications'
 
+import {
+    NODE_WARP_ENDPOINTS,
+    NodeWarpActionResponseSchema,
+    NodeWarpRouteSchema
+} from './node-warp-contract'
 import { createMutationHook } from '../../tsq-helpers'
 
 export const useCreateNode = createMutationHook({
@@ -128,6 +133,102 @@ export const useDisableNode = createMutationHook({
         onError: (error) => {
             notifications.show({
                 title: `Disable Node`,
+                message:
+                    error instanceof Error ? error.message : `Request failed with unknown error.`,
+                color: 'red'
+            })
+        }
+    }
+})
+
+export const useInstallNodeWarp = createMutationHook({
+    endpoint: NODE_WARP_ENDPOINTS.INSTALL,
+    responseSchema: NodeWarpActionResponseSchema,
+    routeParamsSchema: NodeWarpRouteSchema,
+    requestMethod: 'post',
+    rMutationParams: {
+        onSuccess: () => {
+            notifications.show({
+                title: 'Success',
+                message: 'Node WARP installed successfully',
+                color: 'teal'
+            })
+        },
+        onError: (error) => {
+            notifications.show({
+                title: `Install WARP`,
+                message:
+                    error instanceof Error ? error.message : `Request failed with unknown error.`,
+                color: 'red'
+            })
+        }
+    }
+})
+
+export const useEnableNodeWarp = createMutationHook({
+    endpoint: NODE_WARP_ENDPOINTS.ENABLE,
+    responseSchema: NodeWarpActionResponseSchema,
+    routeParamsSchema: NodeWarpRouteSchema,
+    requestMethod: 'post',
+    rMutationParams: {
+        onSuccess: () => {
+            notifications.show({
+                title: 'Success',
+                message: 'Node WARP enabled successfully',
+                color: 'teal'
+            })
+        },
+        onError: (error) => {
+            notifications.show({
+                title: `Enable WARP`,
+                message:
+                    error instanceof Error ? error.message : `Request failed with unknown error.`,
+                color: 'red'
+            })
+        }
+    }
+})
+
+export const useDisableNodeWarp = createMutationHook({
+    endpoint: NODE_WARP_ENDPOINTS.DISABLE,
+    responseSchema: NodeWarpActionResponseSchema,
+    routeParamsSchema: NodeWarpRouteSchema,
+    requestMethod: 'post',
+    rMutationParams: {
+        onSuccess: () => {
+            notifications.show({
+                title: 'Success',
+                message: 'Node WARP disabled successfully',
+                color: 'teal'
+            })
+        },
+        onError: (error) => {
+            notifications.show({
+                title: `Disable WARP`,
+                message:
+                    error instanceof Error ? error.message : `Request failed with unknown error.`,
+                color: 'red'
+            })
+        }
+    }
+})
+
+export const useUninstallNodeWarp = createMutationHook({
+    endpoint: NODE_WARP_ENDPOINTS.UNINSTALL,
+    responseSchema: NodeWarpActionResponseSchema,
+    routeParamsSchema: NodeWarpRouteSchema,
+    requestMethod: 'post',
+    rMutationParams: {
+        onSuccess: () => {
+            notifications.show({
+                title: 'Success',
+                message: 'Node WARP uninstalled successfully',
+                color: 'teal'
+            })
+        },
+        onError: (error) => {
+            notifications.show({
+                title: `Uninstall WARP`,
                 message:
                     error instanceof Error ? error.message : `Request failed with unknown error.`,
                 color: 'red'

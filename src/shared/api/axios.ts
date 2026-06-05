@@ -10,8 +10,8 @@ import { logoutEvents } from '../emitters/emit-logout'
 let authorizationToken = ''
 
 let BASE_DOMAIN = __DOMAIN_BACKEND__
-const isDev = __NODE_ENV__ === 'development'
-const isDomainOverride = __DOMAIN_OVERRIDE__ === '1'
+const isDev = import.meta.env.DEV
+const isDomainOverride = isDev && __DOMAIN_OVERRIDE__ === '1'
 
 if (isDev) {
     BASE_DOMAIN = __DOMAIN_BACKEND__
@@ -41,6 +41,10 @@ export const setAuthorizationToken = (token: string) => {
     authorizationToken = token
 }
 
+export const clearAuthorizationToken = () => {
+    authorizationToken = ''
+}
+
 instance.interceptors.response.use(
     (response) => {
         return response
@@ -50,6 +54,7 @@ instance.interceptors.response.use(
             const responseStatus = error.response.status
             if (responseStatus === 403 || responseStatus === 401) {
                 try {
+                    clearAuthorizationToken()
                     logoutEvents.emit()
                 } catch (error) {
                     consola.log('error', error)

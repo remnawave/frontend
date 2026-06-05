@@ -31,8 +31,9 @@ export * from './keys-factory'
 export * from './node-plugins/node-plugins.mutation.hooks'
 
 export * from './node-plugins/node-plugins.query.hooks'
-export * from './nodes/nodes.mutation.hooks'
+export * from './nodes/node-warp-contract'
 
+export * from './nodes/nodes.mutation.hooks'
 export * from './nodes/nodes.query.hooks'
 export * from './passkeys/passkeys.hooks'
 

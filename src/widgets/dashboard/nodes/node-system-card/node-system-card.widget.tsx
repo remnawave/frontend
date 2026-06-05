@@ -1,19 +1,30 @@
 import {
     PiArrowDownDuotone,
     PiArrowUpDuotone,
+    PiCheck,
+    PiCloudDuotone,
+    PiCopy,
     PiCpuDuotone,
     PiDesktopTowerDuotone,
     PiLinuxLogoDuotone,
     PiNetworkDuotone,
     PiTimerDuotone
 } from 'react-icons/pi'
-import { ActionIcon, Badge, Group, Progress, Stack, Text, Tooltip } from '@mantine/core'
-import { GetOneNodeCommand } from '@remnawave/backend-contract'
+import { ActionIcon, Badge, CopyButton, Group, Progress, Stack, Text, Tooltip } from '@mantine/core'
 import { memo, useMemo, useRef, useState } from 'react'
 import { notifications } from '@mantine/notifications'
 import { useTranslation } from 'react-i18next'
 import { TbCamera } from 'react-icons/tb'
 
+import {
+    getNodeHostConnectivity,
+    getNodeWarpStatus,
+    getNodeWarpUiState,
+    getWarpOperationLabel,
+    isNodeWarpOperationPending,
+    TNodeWithWarp,
+    useGetNodeWarpStatus
+} from '@shared/api/hooks'
 import {
     prettyBytesToAnyUtil,
     prettySiBytesUtil,
@@ -22,12 +33,85 @@ import {
 import { copyScreenshotToClipboard } from '@shared/utils/copy-screenshot.util'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { formatDurationUtil } from '@shared/utils/time-utils'
+import { CountryFlag } from '@shared/ui/get-country-flag'
 import { SectionCard } from '@shared/ui/section-card'
 
 import classes from './node-system-card.module.css'
 
 interface IProps {
-    node: GetOneNodeCommand.Response['response']
+    node: TNodeWithWarp
+}
+
+const EMPTY_VALUE = '—'
+
+interface NodeNetworkAddressProps {
+    countryCode?: null | string
+    label: 'IPv4' | 'IPv6'
+    section: 'Host' | 'WARP'
+    value: null | string | undefined
+}
+
+const NodeNetworkAddress = (props: NodeNetworkAddressProps) => {
+    const { countryCode, label, section, value } = props
+    const displayValue = value?.trim() || EMPTY_VALUE
+    const canCopy = displayValue !== EMPTY_VALUE
+    const copyLabel = `Copy ${section} ${label}`
+    const countryName = useMemo(() => {
+        if (!countryCode || countryCode === 'XX') return null
+
+        try {
+            return (
+                new Intl.DisplayNames(undefined, {
+                    type: 'region'
+                }).of(countryCode) ?? countryCode
+            )
+        } catch {
+            return countryCode
+        }
+    }, [countryCode])
+
+    return (
+        <Stack className={classes.networkAddress} gap={3}>
+            <Group align="center" gap={4} justify="space-between" wrap="nowrap">
+                <Text className={classes.statLabel} component="div">
+                    {label}
+                </Text>
+
+                {canCopy && (
+                    <CopyButton timeout={2000} value={displayValue}>
+                        {({ copied, copy }) => (
+                            <Tooltip label={copied ? 'Copied!' : copyLabel}>
+                                <ActionIcon
+                                    aria-label={`Copy ${section} ${label}`}
+                                    className={classes.networkAddressCopy}
+                                    color={copied ? 'teal' : 'gray'}
+                                    onClick={copy}
+                                    size="xs"
+                                    variant="subtle"
+                                >
+                                    {copied ? <PiCheck size={12} /> : <PiCopy size={12} />}
+                                </ActionIcon>
+                            </Tooltip>
+                        )}
+                    </CopyButton>
+                )}
+            </Group>
+
+            <Text
+                className={classes.networkAddressValue}
+                title={canCopy ? displayValue : undefined}
+            >
+                {displayValue}
+            </Text>
+
+            {countryName && (
+                <Group className={classes.networkAddressCountry} gap={4} wrap="nowrap">
+                    <CountryFlag className={classes.networkAddressFlag} countryCode={countryCode} />
+                    <Text className={classes.networkAddressCountryName}>{countryName}</Text>
+                </Group>
+            )}
+        </Stack>
+    )
 }
 
 export const NodeSystemCardWidget = memo((props: IProps) => {
@@ -92,6 +176,29 @@ export const NodeSystemCardWidget = memo((props: IProps) => {
             txTotal: prettySiBytesUtil(iface.txTotal) || '0 B'
         }
     }, [node.system])
+
+    const cachedWarp = getNodeWarpStatus(node)
+    const warpStatusQuery = useGetNodeWarpStatus({
+        route: {
+            uuid: node.uuid
+        },
+        rQueryParams: {
+            enabled: node.isConnected && !node.isDisabled && isNodeWarpOperationPending(cachedWarp)
+        }
+    })
+
+    const warpData = useMemo(() => {
+        const warp = warpStatusQuery.data ?? cachedWarp
+        return {
+            warp,
+            state: getNodeWarpUiState(warp)
+        }
+    }, [cachedWarp, warpStatusQuery.data])
+
+    const hostData = useMemo(() => getNodeHostConnectivity(node), [node])
+    const operation = warpData.warp?.operation
+    const operationLogs = operation?.logs.slice(-4) ?? []
+    const isOperationRunning = isNodeWarpOperationPending(warpData.warp)
 
     if (!node.system) return null
 
@@ -235,6 +342,140 @@ export const NodeSystemCardWidget = memo((props: IProps) => {
                         </div>
                     </SectionCard.Section>
                 )}
+
+                <SectionCard.Section>
+                    <div className={classes.interfaceSection}>
+                        <Stack gap={6}>
+                            <Group gap={6} justify="space-between">
+                                <Text c="dimmed" fw={600} lh={1} size="10px" tt="uppercase">
+                                    Host
+                                </Text>
+                                <Badge
+                                    color={hostData?.supportsIpv6 ? 'teal' : 'gray'}
+                                    ff="monospace"
+                                    size="xs"
+                                    variant="soft"
+                                >
+                                    IPv6 {hostData?.supportsIpv6 ? 'ON' : 'OFF'}
+                                </Badge>
+                            </Group>
+
+                            <div className={classes.networkAddressGrid}>
+                                <NodeNetworkAddress
+                                    countryCode={hostData?.ipv4?.countryCode}
+                                    label="IPv4"
+                                    section="Host"
+                                    value={hostData?.publicIpv4}
+                                />
+                                <NodeNetworkAddress
+                                    countryCode={hostData?.ipv6?.countryCode}
+                                    label="IPv6"
+                                    section="Host"
+                                    value={hostData?.publicIpv6}
+                                />
+                            </div>
+                        </Stack>
+                    </div>
+                </SectionCard.Section>
+
+                <SectionCard.Section>
+                    <div className={classes.memorySection}>
+                        <Stack gap={6}>
+                            <Group gap={6} justify="space-between">
+                                <Text c="dimmed" fw={600} lh={1} size="10px" tt="uppercase">
+                                    WARP
+                                </Text>
+                                <Badge
+                                    color={warpData.state.color}
+                                    ff="monospace"
+                                    leftSection={<PiCloudDuotone size={12} />}
+                                    size="xs"
+                                    variant={warpData.state.isRunning ? 'light' : 'outline'}
+                                >
+                                    {warpData.state.label}
+                                </Badge>
+                            </Group>
+
+                            <div className={classes.networkAddressGrid}>
+                                <NodeNetworkAddress
+                                    countryCode={warpData.warp?.ipv4?.countryCode}
+                                    label="IPv4"
+                                    section="WARP"
+                                    value={
+                                        warpData.warp?.publicIpv4 ?? warpData.warp?.ipv4?.publicIp
+                                    }
+                                />
+                                <NodeNetworkAddress
+                                    countryCode={warpData.warp?.ipv6?.countryCode}
+                                    label="IPv6"
+                                    section="WARP"
+                                    value={
+                                        warpData.warp?.publicIpv6 ?? warpData.warp?.ipv6?.publicIp
+                                    }
+                                />
+                                <Stack gap={0} style={{ minWidth: 0 }}>
+                                    <Text className={classes.statLabel} component="div">
+                                        Edge
+                                    </Text>
+                                    <Text className={classes.statValue}>
+                                        {warpData.warp?.colo ?? EMPTY_VALUE}
+                                    </Text>
+                                </Stack>
+                            </div>
+
+                            {operation && (isOperationRunning || operation.logs.length > 0) && (
+                                <Stack gap={4}>
+                                    <Group gap={6} justify="space-between">
+                                        <Text c="dimmed" fw={600} lh={1} size="10px" tt="uppercase">
+                                            Operation
+                                        </Text>
+                                        <Badge
+                                            color={isOperationRunning ? 'blue' : 'gray'}
+                                            ff="monospace"
+                                            size="xs"
+                                            variant="light"
+                                        >
+                                            {getWarpOperationLabel(operation)}
+                                        </Badge>
+                                    </Group>
+
+                                    {isOperationRunning && (
+                                        <Progress
+                                            animated
+                                            color="blue"
+                                            radius="xl"
+                                            size="xs"
+                                            striped
+                                            value={100}
+                                        />
+                                    )}
+
+                                    {operation.step && (
+                                        <Text c="dimmed" ff="monospace" size="10px">
+                                            {operation.step}
+                                        </Text>
+                                    )}
+
+                                    {operationLogs.length > 0 && (
+                                        <Stack gap={2}>
+                                            {operationLogs.map((line, index) => (
+                                                <Text
+                                                    c="dimmed"
+                                                    ff="monospace"
+                                                    key={`${line}-${index}`}
+                                                    size="10px"
+                                                    truncate
+                                                >
+                                                    {line}
+                                                </Text>
+                                            ))}
+                                        </Stack>
+                                    )}
+                                </Stack>
+                            )}
+                        </Stack>
+                    </div>
+                </SectionCard.Section>
 
                 <SectionCard.Section>
                     <div className={classes.infoSection}>
