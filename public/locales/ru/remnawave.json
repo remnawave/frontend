@@ -2010,8 +2010,8 @@
             "review-documentation-for-more-information": "Просмотрите документацию для более подробной информации.",
             "nothing-found": "Ничего не найдено...",
             "select-plugin": "Выбрать плагин",
-            "proxy-url": "Proxy URL",
-            "proxy-url-description": "Optional. If provided, internal API connection from panel to node will be proxied through this proxy."
+            "proxy-url": "Адрес прокси",
+            "proxy-url-description": "Необязательно. Если указано, внутреннее API-соединение между панелью и узлом будет осуществляться через этот прокси сервер."
         }
     },
     "node-plugin-card": {
