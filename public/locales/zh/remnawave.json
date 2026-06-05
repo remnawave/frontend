@@ -61,7 +61,7 @@
         "name": "名称",
         "clone": "克隆",
         "event-sent": "发送事件",
-        "open": "Open"
+        "open": "打开"
     },
     "bandwidth-metrics": {
         "current-year": "今年",
@@ -1271,15 +1271,15 @@
         }
     },
     "disclaimer-overlay": {
-        "title": "Disclaimer",
-        "subtitle": "Please read this notice before you continue.",
-        "intro": "Remnawave is an <highlight>open-source, self-hosted</highlight> proxy and user-management tool. It is provided <warning>\"as is\", without any warranty</warning> of any kind, express or implied.",
-        "responsibility": "You are <highlight>solely responsible</highlight> for how you deploy and use this software.",
-        "compliance": "You must comply with <highlight>all laws and regulations</highlight> applicable in your jurisdiction.",
-        "liability": "The developers and contributors accept <warning>no liability</warning> for any misuse, damage, or data loss.",
-        "license-acknowledgement": "By continuing you acknowledge that you have read and agree to the <anchor>license terms</anchor>.",
-        "accept-button": "I understand and accept",
-        "shown-once": "This notice is shown only once."
+        "title": "免责声明",
+        "subtitle": "请在您继续之前阅读此消息。",
+        "intro": "Remnawave 是一款<highlight>开源、自托管</highlight>的代理和用户管理工具。其提供方式为<warning>“按现状提供（As Is）”，不附带任何形式的保证，无论是明示还是默示保证</warning>。",
+        "responsibility": "您需对本软件的部署和使用方式承担全部责任。",
+        "compliance": "您必须遵守所在司法管辖区适用的所有法律法规。",
+        "liability": "开发者和贡献者对任何误用、损害或数据丢失均不承担任何责任。",
+        "license-acknowledgement": "继续操作即表示您已阅读并同意<anchor>许可协议条款</anchor>。",
+        "accept-button": "我已了解并接受",
+        "shown-once": "此通知只显示一次。"
     },
     "mobile-warning-overlay": {
         "mobile-device-detected": "检测到移动设备",
@@ -2010,8 +2010,8 @@
             "review-documentation-for-more-information": "查看文件以获取更多信息。",
             "nothing-found": "未找到任何信息…",
             "select-plugin": "选择插件",
-            "proxy-url": "Proxy URL",
-            "proxy-url-description": "Optional. If provided, internal API connection from panel to node will be proxied through this proxy."
+            "proxy-url": "代理 URL",
+            "proxy-url-description": "可选。如果填写此项，面板与节点之间的内部 API 连接将通过该代理转发。"
         }
     },
     "node-plugin-card": {
@@ -2172,21 +2172,21 @@
     },
     "hosts-datatable": {
         "widget": {
-            "reset-sort": "Reset sort"
+            "reset-sort": "重置排序"
         }
     },
     "columns-visibility-popover": {
-        "show-all": "Show all",
-        "hide-all": "Hide all"
+        "show-all": "显示全部",
+        "hide-all": "隐藏全部"
     },
     "use-hosts-table-widget": {
-        "disabled": "Disabled",
-        "enabled": "Enabled",
-        "hidden": "Hidden"
+        "disabled": "已禁用",
+        "enabled": "已启用",
+        "hidden": "已隐藏"
     },
     "node-tracking-and-billing": {
         "card": {
-            "note": "Note"
+            "note": "备注"
         }
     }
 }
