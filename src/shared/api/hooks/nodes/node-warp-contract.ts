@@ -8,6 +8,7 @@ import { z } from 'zod'
 
 const PublicIpProbeSchema = z.object({
     publicIp: z.string().nullable(),
+    countryCode: z.string().nullable(),
     reachable: z.boolean(),
     lastError: z.string().nullable()
 })
@@ -24,6 +25,7 @@ export const HostConnectivitySchema = z.object({
 
 const WarpTraceSchema = z.object({
     publicIp: z.string().nullable(),
+    countryCode: z.string().nullable(),
     warp: z.enum(['on', 'off', 'unknown']),
     colo: z.string().nullable()
 })

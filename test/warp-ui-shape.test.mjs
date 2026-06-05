@@ -30,6 +30,7 @@ describe('frontend WARP controls', () => {
         assert.match(hooks, /useUninstallNodeWarp/)
         assert.match(warpContract, /publicIpv4/)
         assert.match(warpContract, /publicIpv6/)
+        assert.match(warpContract, /countryCode: z\.string\(\)\.nullable\(\)/)
         assert.match(warpContract, /HostConnectivitySchema/)
         assert.match(warpContract, /operation/)
         assert.match(warpContract, /\/api\/nodes\/:uuid\/actions\/warp\/install/)
@@ -56,11 +57,17 @@ describe('frontend WARP controls', () => {
 
         assert.match(systemCard, /NodeNetworkAddress/)
         assert.match(systemCard, /CopyButton/)
+        assert.match(systemCard, /CountryFlag/)
+        assert.match(systemCard, /Intl\.DisplayNames/)
         assert.match(systemCard, /PiCheck/)
         assert.match(systemCard, /PiCopy/)
         assert.match(systemCard, /aria-label=\{`Copy \$\{section\} \$\{label\}`\}/)
         assert.match(systemCard, /section="Host"/)
         assert.match(systemCard, /section="WARP"/)
+        assert.match(systemCard, /countryCode=\{hostData\?\.ipv4\?\.countryCode\}/)
+        assert.match(systemCard, /countryCode=\{hostData\?\.ipv6\?\.countryCode\}/)
+        assert.match(systemCard, /countryCode=\{warpData\.warp\?\.ipv4\?\.countryCode\}/)
+        assert.match(systemCard, /countryCode=\{warpData\.warp\?\.ipv6\?\.countryCode\}/)
         assert.match(systemCard, /className=\{classes\.networkAddressValue\}/)
 
         const addressValueRule = systemCardCss.match(/\.networkAddressValue\s*{[^}]+}/s)?.[0] ?? ''

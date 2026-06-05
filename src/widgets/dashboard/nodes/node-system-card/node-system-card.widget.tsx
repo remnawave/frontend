@@ -33,6 +33,7 @@ import {
 import { copyScreenshotToClipboard } from '@shared/utils/copy-screenshot.util'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { formatDurationUtil } from '@shared/utils/time-utils'
+import { CountryFlag } from '@shared/ui/get-country-flag'
 import { SectionCard } from '@shared/ui/section-card'
 
 import classes from './node-system-card.module.css'
@@ -44,16 +45,30 @@ interface IProps {
 const EMPTY_VALUE = '—'
 
 interface NodeNetworkAddressProps {
+    countryCode?: null | string
     label: 'IPv4' | 'IPv6'
     section: 'Host' | 'WARP'
     value: null | string | undefined
 }
 
 const NodeNetworkAddress = (props: NodeNetworkAddressProps) => {
-    const { label, section, value } = props
+    const { countryCode, label, section, value } = props
     const displayValue = value?.trim() || EMPTY_VALUE
     const canCopy = displayValue !== EMPTY_VALUE
     const copyLabel = `Copy ${section} ${label}`
+    const countryName = useMemo(() => {
+        if (!countryCode || countryCode === 'XX') return null
+
+        try {
+            return (
+                new Intl.DisplayNames(undefined, {
+                    type: 'region'
+                }).of(countryCode) ?? countryCode
+            )
+        } catch {
+            return countryCode
+        }
+    }, [countryCode])
 
     return (
         <Stack className={classes.networkAddress} gap={3}>
@@ -88,6 +103,13 @@ const NodeNetworkAddress = (props: NodeNetworkAddressProps) => {
             >
                 {displayValue}
             </Text>
+
+            {countryName && (
+                <Group className={classes.networkAddressCountry} gap={4} wrap="nowrap">
+                    <CountryFlag className={classes.networkAddressFlag} countryCode={countryCode} />
+                    <Text className={classes.networkAddressCountryName}>{countryName}</Text>
+                </Group>
+            )}
         </Stack>
     )
 }
@@ -340,11 +362,13 @@ export const NodeSystemCardWidget = memo((props: IProps) => {
 
                             <div className={classes.networkAddressGrid}>
                                 <NodeNetworkAddress
+                                    countryCode={hostData?.ipv4?.countryCode}
                                     label="IPv4"
                                     section="Host"
                                     value={hostData?.publicIpv4}
                                 />
                                 <NodeNetworkAddress
+                                    countryCode={hostData?.ipv6?.countryCode}
                                     label="IPv6"
                                     section="Host"
                                     value={hostData?.publicIpv6}
@@ -374,6 +398,7 @@ export const NodeSystemCardWidget = memo((props: IProps) => {
 
                             <div className={classes.networkAddressGrid}>
                                 <NodeNetworkAddress
+                                    countryCode={warpData.warp?.ipv4?.countryCode}
                                     label="IPv4"
                                     section="WARP"
                                     value={
@@ -381,6 +406,7 @@ export const NodeSystemCardWidget = memo((props: IProps) => {
                                     }
                                 />
                                 <NodeNetworkAddress
+                                    countryCode={warpData.warp?.ipv6?.countryCode}
                                     label="IPv6"
                                     section="WARP"
                                     value={
