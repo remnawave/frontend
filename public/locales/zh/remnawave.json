@@ -2009,7 +2009,9 @@
             "plugin": "插件",
             "review-documentation-for-more-information": "查看文件以获取更多信息。",
             "nothing-found": "未找到任何信息…",
-            "select-plugin": "选择插件"
+            "select-plugin": "选择插件",
+            "proxy-url": "Proxy URL",
+            "proxy-url-description": "Optional. If provided, internal API connection from panel to node will be proxied through this proxy."
         }
     },
     "node-plugin-card": {
