@@ -632,14 +632,14 @@
             "port": "Порт",
             "clear-selection": "Очистить выбор",
             "select-all": "Выбрать все",
-            "dangling-hosts-skipped": "{{count}} dangling host(s) were skipped and not cloned."
+            "dangling-hosts-skipped": "{{count}} хостов было пропущено при клонировании."
         }
     },
     "edit-many-hosts-drawer": {
-        "confirm-title": "Confirm bulk update",
-        "confirm-description": "The following fields will be updated for {{count}} host(s):",
-        "no-changes-title": "Nothing to update",
-        "no-changes-description": "You haven't changed any fields."
+        "confirm-title": "Подтвердите массовое обновление",
+        "confirm-description": "Следующие поля будут обновлены для {{count}} хостов:",
+        "no-changes-title": "Обновлять нечего",
+        "no-changes-description": "Вы не изменили ни одного поля."
     },
     "bulk-user-actions-drawer": {
         "widget": {

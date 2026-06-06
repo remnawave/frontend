@@ -632,14 +632,14 @@
             "port": "端口",
             "clear-selection": "清除选择",
             "select-all": "全选",
-            "dangling-hosts-skipped": "{{count}} dangling host(s) were skipped and not cloned."
+            "dangling-hosts-skipped": "已跳过 {{count}} 个孤立主机，未执行克隆。"
         }
     },
     "edit-many-hosts-drawer": {
-        "confirm-title": "Confirm bulk update",
-        "confirm-description": "The following fields will be updated for {{count}} host(s):",
-        "no-changes-title": "Nothing to update",
-        "no-changes-description": "You haven't changed any fields."
+        "confirm-title": "确认批量更新",
+        "confirm-description": "以下字段将应用于 {{count}} 个主机:",
+        "no-changes-title": "无需更新",
+        "no-changes-description": "您尚未修改任何字段。"
     },
     "bulk-user-actions-drawer": {
         "widget": {
