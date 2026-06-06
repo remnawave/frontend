@@ -154,7 +154,8 @@
         "internal-squads": "اسکوادهای داخلی",
         "first-connected-at": "اولین اتصال",
         "sub-last-opened-at": "آخرین دریافت اشتراک",
-        "tag": "برچسب"
+        "tag": "برچسب",
+        "used-traffic": "Used Traffic (%)"
     },
     "header-buttons": {
         "feature": {}

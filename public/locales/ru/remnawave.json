@@ -154,7 +154,8 @@
         "internal-squads": "Внутренние сквады",
         "first-connected-at": "Первое подключение",
         "sub-last-opened-at": "Последний запрос подписки",
-        "tag": "Tag"
+        "tag": "Tag",
+        "used-traffic": "Использованный трафик (%)"
     },
     "header-buttons": {
         "feature": {}

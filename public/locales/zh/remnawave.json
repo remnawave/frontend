@@ -154,7 +154,8 @@
         "internal-squads": "内部分组",
         "first-connected-at": "首次连接于",
         "sub-last-opened-at": "上次订阅时间",
-        "tag": "Tag"
+        "tag": "Tag",
+        "used-traffic": "Used Traffic (%)"
     },
     "header-buttons": {
         "feature": {}
