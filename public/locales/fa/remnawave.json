@@ -1526,7 +1526,8 @@
         "copy-the": "محتوای",
         "content-for-the-remnawave-node-below": "زیر را برای نود کپی کنید.",
         "learn-more": "اطلاعات بیشتر.",
-        "domain-or-ip": "دامنه یا آیپی"
+        "domain-or-ip": "دامنه یا آیپی",
+        "additional-options": "Additional options"
     },
     "create-node-step-3-status": {
         "establishing-mtls-connection": "درحال برقراری اتصال mTLS",

@@ -1526,7 +1526,8 @@
         "copy-the": "Скопируйте",
         "content-for-the-remnawave-node-below": "содержимое для Remnawave node ниже.",
         "learn-more": "Дополнительная информация.",
-        "domain-or-ip": "Домен или IP"
+        "domain-or-ip": "Домен или IP",
+        "additional-options": "Additional options"
     },
     "create-node-step-3-status": {
         "establishing-mtls-connection": "Установка mTLS соединения...",
