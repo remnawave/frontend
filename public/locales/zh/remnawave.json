@@ -1527,7 +1527,7 @@
         "content-for-the-remnawave-node-below": "以下是 Remnawave 节点的内容。",
         "learn-more": "了解更多。",
         "domain-or-ip": "域名或IP",
-        "additional-options": "Additional options"
+        "additional-options": "附加参数"
     },
     "create-node-step-3-status": {
         "establishing-mtls-connection": "正在建立mTLS连接...",

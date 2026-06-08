@@ -1527,7 +1527,7 @@
         "content-for-the-remnawave-node-below": "содержимое для Remnawave node ниже.",
         "learn-more": "Дополнительная информация.",
         "domain-or-ip": "Домен или IP",
-        "additional-options": "Additional options"
+        "additional-options": "Дополнительные параметры"
     },
     "create-node-step-3-status": {
         "establishing-mtls-connection": "Установка mTLS соединения...",
