@@ -841,7 +841,6 @@
             "revoked-at": "لغو شده در",
             "connection-information": "اطلاعات اتصال",
             "trojan-password": "رمز عبور تروجان",
-            "vless-uuid": "(UUID) شناسه VLESS",
             "ss-password": "رمز عبور SS",
             "last-online": "آخرین آنلاین",
             "last-connected-node": "آخرین نود متصل‌شده",

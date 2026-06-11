@@ -841,7 +841,6 @@
             "revoked-at": "撤销于",
             "connection-information": "连接信息",
             "trojan-password": "Trojan 密码",
-            "vless-uuid": "VLESS UUID",
             "ss-password": "SS 密码",
             "last-online": "最后在线",
             "last-connected-node": "最后连接节点",

@@ -841,7 +841,6 @@
             "revoked-at": "Дата отзыва",
             "connection-information": "Информация о подключении",
             "trojan-password": "Trojan Password",
-            "vless-uuid": "VLESS UUID",
             "ss-password": "SS Password",
             "last-online": "Последний раз в сети",
             "last-connected-node": "Последняя подключенная нода",
