@@ -442,7 +442,6 @@
         "internal-name-placeholder": "e.g. US-NY-Node-01",
         "address": "Адрес",
         "e-g-example-com": "например, example.com",
-        "consumption-multiplier": "Коэффициент использования",
         "traffic-tracking": "Отслеживание трафика",
         "limit": "Лимит",
         "reset-day": "День сброса",
@@ -2195,6 +2194,14 @@
     "node-tracking-and-billing": {
         "card": {
             "note": "Заметка"
+        }
+    },
+    "node-consumption": {
+        "card": {
+            "node-consumption-multiplier-1": "Applies selected multiplier to Node traffic (1.0 = normal, 0.5 = half, 2.0 = double).",
+            "node-consumption-multiplier-2": "Mainly used for accurate display of usage limits when traffic tracking is enabled. The node consumption multiplier does not affect detailed statistics display (on graphs).",
+            "node-consumption-multiplier": "Node Consumption Multiplier",
+            "user-consumption-multiplier": "User Consumption Multiplier"
         }
     }
 }

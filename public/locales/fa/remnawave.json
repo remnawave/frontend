@@ -442,7 +442,6 @@
         "internal-name-placeholder": "برای مثال US-NY-Node-01",
         "address": "آدرس",
         "e-g-example-com": "مثلا example.com",
-        "consumption-multiplier": "ضریب مصرف ترافیک",
         "traffic-tracking": "پایش مصرف ترافیک",
         "limit": "حد مصرف",
         "reset-day": "روز صفر کردن ترافیک",
@@ -2195,6 +2194,14 @@
     "node-tracking-and-billing": {
         "card": {
             "note": "Note"
+        }
+    },
+    "node-consumption": {
+        "card": {
+            "node-consumption-multiplier-1": "Applies selected multiplier to Node traffic (1.0 = normal, 0.5 = half, 2.0 = double).",
+            "node-consumption-multiplier-2": "Mainly used for accurate display of usage limits when traffic tracking is enabled. The node consumption multiplier does not affect detailed statistics display (on graphs).",
+            "node-consumption-multiplier": "Node Consumption Multiplier",
+            "user-consumption-multiplier": "User Consumption Multiplier"
         }
     }
 }
