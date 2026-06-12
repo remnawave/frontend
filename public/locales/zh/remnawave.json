@@ -61,7 +61,8 @@
         "name": "名称",
         "clone": "克隆",
         "event-sent": "发送事件",
-        "open": "打开"
+        "open": "打开",
+        "color": "Color"
     },
     "bandwidth-metrics": {
         "current-year": "今年",
@@ -2202,6 +2203,11 @@
             "node-consumption-multiplier-2": "Mainly used for accurate display of usage limits when traffic tracking is enabled. The node consumption multiplier does not affect detailed statistics display (on graphs).",
             "node-consumption-multiplier": "Node Consumption Multiplier",
             "user-consumption-multiplier": "User Consumption Multiplier"
+        }
+    },
+    "keypair-generator": {
+        "widget": {
+            "generate": "Generate"
         }
     }
 }
