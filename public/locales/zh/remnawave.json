@@ -62,7 +62,7 @@
         "clone": "克隆",
         "event-sent": "发送事件",
         "open": "打开",
-        "color": "Color"
+        "color": "颜色"
     },
     "bandwidth-metrics": {
         "current-year": "今年",
@@ -2199,15 +2199,15 @@
     },
     "node-consumption": {
         "card": {
-            "node-consumption-multiplier-1": "Applies selected multiplier to Node traffic (1.0 = normal, 0.5 = half, 2.0 = double).",
-            "node-consumption-multiplier-2": "Mainly used for accurate display of usage limits when traffic tracking is enabled. The node consumption multiplier does not affect detailed statistics display (on graphs).",
-            "node-consumption-multiplier": "Node Consumption Multiplier",
-            "user-consumption-multiplier": "User Consumption Multiplier"
+            "node-consumption-multiplier-1": "将所选倍率应用于节点流量（1.0 = 正常，0.5 = 一半，2.0 = 双倍）。",
+            "node-consumption-multiplier-2": "主要用于在启用流量统计时准确显示流量配额。节点流量倍率不会影响详细统计数据（图表）的显示。",
+            "node-consumption-multiplier": "节点流量倍率",
+            "user-consumption-multiplier": "用户流量倍率"
         }
     },
     "keypair-generator": {
         "widget": {
-            "generate": "Generate"
+            "generate": "生成"
         }
     }
 }

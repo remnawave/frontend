@@ -62,7 +62,7 @@
         "clone": "Клонировать",
         "event-sent": "Запрос отправлен",
         "open": "Открыть",
-        "color": "Color"
+        "color": "Цвет"
     },
     "bandwidth-metrics": {
         "current-year": "Текущий год",
@@ -2199,15 +2199,15 @@
     },
     "node-consumption": {
         "card": {
-            "node-consumption-multiplier-1": "Applies selected multiplier to Node traffic (1.0 = normal, 0.5 = half, 2.0 = double).",
-            "node-consumption-multiplier-2": "Mainly used for accurate display of usage limits when traffic tracking is enabled. The node consumption multiplier does not affect detailed statistics display (on graphs).",
-            "node-consumption-multiplier": "Node Consumption Multiplier",
-            "user-consumption-multiplier": "User Consumption Multiplier"
+            "node-consumption-multiplier-1": "Применяется выбранный множитель к трафику ноды (1,0 = обычный, 0,5 = половина, 2,0 = двойной).",
+            "node-consumption-multiplier-2": "В основном используется для точного отображения лимитов использования при включенном отслеживании трафика. Множитель потребления узла не влияет на отображение подробной статистики (на графиках).",
+            "node-consumption-multiplier": "Коэффициент потребления нодой",
+            "user-consumption-multiplier": "Коэффициент потребления пользователем"
         }
     },
     "keypair-generator": {
         "widget": {
-            "generate": "Generate"
+            "generate": "Сгенерировать"
         }
     }
 }
