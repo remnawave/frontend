@@ -1320,7 +1320,9 @@
     },
     "restart-node-button": {
         "feature": {
-            "restart": "Перезапустить"
+            "restart": "Перезапустить",
+            "restart-description-line-1": "ensures that the node completely restarts the Xray core. It is recommended option.",
+            "restart-description-line-2": "will send a request to this node to restart Xray, but request can be unfulfilled if the node hash is the same as the current one."
         }
     },
     "node-details-card": {
