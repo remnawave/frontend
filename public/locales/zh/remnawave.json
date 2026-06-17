@@ -1321,8 +1321,8 @@
     "restart-node-button": {
         "feature": {
             "restart": "重新启动",
-            "restart-description-line-1": "ensures that the node completely restarts the Xray core. It is recommended option.",
-            "restart-description-line-2": "will send a request to this node to restart Xray, but request can be unfulfilled if the node hash is the same as the current one."
+            "restart-description-line-1": "确保节点完全重启Xra核心。建议选中。",
+            "restart-description-line-2": "将向所有节点发送请求以重启 Xray。 但如果节点哈希与当前的哈希相同，则请求可能无法实现。 这是默认的选项。"
         }
     },
     "node-details-card": {
