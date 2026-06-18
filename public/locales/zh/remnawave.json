@@ -1257,7 +1257,12 @@
             "payments-in": "{{month}} 的付款",
             "total-payments-made": "已完成付款总数",
             "total-spent": "总支出",
-            "lifetime-spending": "累计支出"
+            "lifetime-spending": "累计支出",
+            "overdue": "Overdue",
+            "payment-overdue": "payment overdue",
+            "all-up-to-date": "all up to date",
+            "next-payment": "Next payment",
+            "no-upcoming-payments": "no upcoming payments"
         }
     },
     "edit-node-by-uuid-modal": {
@@ -2152,7 +2157,9 @@
             "billing-nodes": "计费节点",
             "upcoming": "即将到来",
             "per-month": "每月",
-            "total-spent": "合计花费"
+            "total-spent": "合计花费",
+            "overdue": "Overdue",
+            "no-upcoming": "No upcoming"
         }
     },
     "mobile-providers-list": {

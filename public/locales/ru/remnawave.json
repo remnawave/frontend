@@ -1257,7 +1257,12 @@
             "payments-in": "Платежей в {{month}}",
             "total-payments-made": "всего платежей",
             "total-spent": "Всего потрачено",
-            "lifetime-spending": "суммарных трат"
+            "lifetime-spending": "суммарных трат",
+            "overdue": "Overdue",
+            "payment-overdue": "payment overdue",
+            "all-up-to-date": "all up to date",
+            "next-payment": "Next payment",
+            "no-upcoming-payments": "no upcoming payments"
         }
     },
     "edit-node-by-uuid-modal": {
@@ -2152,7 +2157,9 @@
             "billing-nodes": "Биллинг нод",
             "upcoming": "Предстоящие",
             "per-month": "За месяц",
-            "total-spent": "Всего потрачено"
+            "total-spent": "Всего потрачено",
+            "overdue": "Overdue",
+            "no-upcoming": "No upcoming"
         }
     },
     "mobile-providers-list": {

@@ -1257,7 +1257,12 @@
             "payments-in": "پرداخت‌ها در {{month}}",
             "total-payments-made": "کل پرداخت‌های انجام شده",
             "total-spent": "کل هزینه شده",
-            "lifetime-spending": "هزینه کل طول عمر"
+            "lifetime-spending": "هزینه کل طول عمر",
+            "overdue": "Overdue",
+            "payment-overdue": "payment overdue",
+            "all-up-to-date": "all up to date",
+            "next-payment": "Next payment",
+            "no-upcoming-payments": "no upcoming payments"
         }
     },
     "edit-node-by-uuid-modal": {
@@ -2152,7 +2157,9 @@
             "billing-nodes": "Billing nodes",
             "upcoming": "Upcoming",
             "per-month": "Per month",
-            "total-spent": "Total spent"
+            "total-spent": "Total spent",
+            "overdue": "Overdue",
+            "no-upcoming": "No upcoming"
         }
     },
     "mobile-providers-list": {
