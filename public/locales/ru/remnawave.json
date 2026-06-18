@@ -1258,11 +1258,11 @@
             "total-payments-made": "всего платежей",
             "total-spent": "Всего потрачено",
             "lifetime-spending": "суммарных трат",
-            "overdue": "Overdue",
-            "payment-overdue": "payment overdue",
-            "all-up-to-date": "all up to date",
-            "next-payment": "Next payment",
-            "no-upcoming-payments": "no upcoming payments"
+            "overdue": "Просрочено",
+            "payment-overdue": "платеж просрочен",
+            "all-up-to-date": "все актуально",
+            "next-payment": "Следующий платёж",
+            "no-upcoming-payments": "нет предстоящих платежей"
         }
     },
     "edit-node-by-uuid-modal": {
@@ -1326,8 +1326,8 @@
     "restart-node-button": {
         "feature": {
             "restart": "Перезапустить",
-            "restart-description-line-1": "ensures that the node completely restarts the Xray core. It is recommended option.",
-            "restart-description-line-2": "will send a request to this node to restart Xray, but request can be unfulfilled if the node hash is the same as the current one."
+            "restart-description-line-1": "гарантирует перезапуск ядра Xray на ноде. Рекомендуется использовать данный вариант.",
+            "restart-description-line-2": "будет отправлен запрос этой ноде для перезапуска Xray, но запрос может быть невыполнен, если хэш узла совпадает с текущим."
         }
     },
     "node-details-card": {
@@ -2158,8 +2158,8 @@
             "upcoming": "Предстоящие",
             "per-month": "За месяц",
             "total-spent": "Всего потрачено",
-            "overdue": "Overdue",
-            "no-upcoming": "No upcoming"
+            "overdue": "Просрочено",
+            "no-upcoming": "Нет предстоящих"
         }
     },
     "mobile-providers-list": {
