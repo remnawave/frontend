@@ -1290,8 +1290,7 @@
         "compliance": "You must comply with <highlight>all laws and regulations</highlight> applicable in your jurisdiction.",
         "liability": "The developers and contributors accept <warning>no liability</warning> for any misuse, damage, or data loss.",
         "license-acknowledgement": "By continuing you acknowledge that you have read and agree to the <anchor>license terms</anchor>.",
-        "accept-button": "I understand and accept",
-        "shown-once": "This notice is shown only once."
+        "accept-button": "I understand and accept"
     },
     "mobile-warning-overlay": {
         "mobile-device-detected": "دستگاه موبایل شناسایی شد",

@@ -1290,8 +1290,7 @@
         "compliance": "您必须遵守所在司法管辖区适用的所有法律法规。",
         "liability": "开发者和贡献者对任何误用、损害或数据丢失均不承担任何责任。",
         "license-acknowledgement": "继续操作即表示您已阅读并同意<anchor>许可协议条款</anchor>。",
-        "accept-button": "我已了解并接受",
-        "shown-once": "此通知只显示一次。"
+        "accept-button": "我已了解并接受"
     },
     "mobile-warning-overlay": {
         "mobile-device-detected": "检测到移动设备",
