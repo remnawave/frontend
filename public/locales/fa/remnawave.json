@@ -62,6 +62,8 @@
         "clone": "همانندسازی",
         "event-sent": "رویداد ارسال شد",
         "open": "Open",
+        "view": "View",
+        "clear": "Clear",
         "color": "Color"
     },
     "bandwidth-metrics": {
@@ -1681,7 +1683,7 @@
             "the-title-that-will-be-displayed-on-login-page": "عنوانی که در صفحه ورود نشان داده خواهد شد",
             "brand-name": "اسم برند",
             "logo-url": "آدرس URL لوگو",
-            "the-url-to-your-brand-logo-image": "آدرس تصویر لوگوی برند شما",
+            "the-url-to-your-brand-logo-image": "The URL to your brand logo image. Accepts a regular http(s) URL or a base64 data URL (data:image/svg+xml;base64,...)",
             "colored-title-format": "فرمت عنوان رنگی",
             "colored-title-description": "می‌توانید کلمه‌ها را به صورت تکی به کمک نوشتار \"{color}کلمه\" رنگ‌آمیزی کنید. این ویژگی از رنگ‌های HEX (#RRGGBB) و اسم رنگ‌های MantineUI پشتیبانی می‌کند.",
             "example-hex-colors": "مثال با رنگ‌های HEX",
@@ -1695,7 +1697,12 @@
             "api-tokens-description": "توکن‌های API خود را مدیریت کنید.",
             "api-tokens": "توکن‌های API",
             "no-api-tokens-found": "هیچ توکن API یافت نشد",
-            "token-name": "نام توکن"
+            "token-name": "نام توکن",
+            "create-api-token": "Create API Token",
+            "full-access": "Full access",
+            "col-scopes": "Scopes",
+            "col-created": "Created",
+            "copy-token": "Copy token"
         }
     },
     "external-squads-hosts": {

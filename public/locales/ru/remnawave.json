@@ -62,6 +62,8 @@
         "clone": "Клонировать",
         "event-sent": "Запрос отправлен",
         "open": "Открыть",
+        "view": "View",
+        "clear": "Clear",
         "color": "Цвет"
     },
     "bandwidth-metrics": {
@@ -1681,7 +1683,7 @@
             "the-title-that-will-be-displayed-on-login-page": "Заголовок, отображаемый на странице входа",
             "brand-name": "Название бренда",
             "logo-url": "Ссылка на логотип",
-            "the-url-to-your-brand-logo-image": "URL-адрес логотипа вашего бренда",
+            "the-url-to-your-brand-logo-image": "The URL to your brand logo image. Accepts a regular http(s) URL or a base64 data URL (data:image/svg+xml;base64,...)",
             "colored-title-format": "Цветной формат заголовка",
             "colored-title-description": "Вы можете окрасить отдельные слова, используя синтаксис {color}. Поддерживает оба цвета HEX (#RRGGBB) и MantineUI цвета.",
             "example-hex-colors": "Пример цветов HEX",
@@ -1695,7 +1697,12 @@
             "api-tokens-description": "Управление API токенами для доступа из кода.",
             "api-tokens": "API токены",
             "no-api-tokens-found": "API токены не найдены",
-            "token-name": "Название токена"
+            "token-name": "Название токена",
+            "create-api-token": "Create API Token",
+            "full-access": "Full access",
+            "col-scopes": "Scopes",
+            "col-created": "Created",
+            "copy-token": "Copy token"
         }
     },
     "external-squads-hosts": {
