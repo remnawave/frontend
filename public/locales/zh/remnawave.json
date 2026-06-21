@@ -36,7 +36,7 @@
         "cancel": "取消",
         "copied": "复制成功",
         "copy": "复制",
-        "paste": "Paste",
+        "paste": "粘贴",
         "refresh": "刷新",
         "save": "保存",
         "update": "更新",
@@ -63,8 +63,8 @@
         "clone": "克隆",
         "event-sent": "发送事件",
         "open": "打开",
-        "view": "View",
-        "clear": "Clear",
+        "view": "查看",
+        "clear": "清除",
         "color": "颜色"
     },
     "bandwidth-metrics": {
@@ -1684,7 +1684,7 @@
             "the-title-that-will-be-displayed-on-login-page": "登录页面显示的标题",
             "brand-name": "品牌名称",
             "logo-url": "Logo 网址链接",
-            "the-url-to-your-brand-logo-image": "The URL to your brand logo image. Accepts a regular http(s) URL or a base64 data URL (data:image/svg+xml;base64,...)",
+            "the-url-to-your-brand-logo-image": "您品牌徽标图片的 URL。接受普通http(s) URL或base64数据URL(data:image/svg+xml;base64...)",
             "colored-title-format": "彩色标题格式",
             "colored-title-description": "您可以使用 {color}文字 语法为单个单词着色。支持十六进制颜色 (#RRGGBB) 和 MantineUI 颜色名称。",
             "example-hex-colors": "十六进制颜色示例",
@@ -1699,11 +1699,11 @@
             "api-tokens": "API Tokens",
             "no-api-tokens-found": "未找到 API Tokens",
             "token-name": "API Tokens 名称",
-            "create-api-token": "Create API Token",
-            "full-access": "Full access",
-            "col-scopes": "Scopes",
-            "col-created": "Created",
-            "copy-token": "Copy token"
+            "create-api-token": "创建新 API 密钥",
+            "full-access": "完全访问权限",
+            "col-scopes": "范围",
+            "col-created": "创建日期",
+            "copy-token": "复制令牌"
         }
     },
     "external-squads-hosts": {
