@@ -36,6 +36,7 @@
         "cancel": "Закрыть",
         "copied": "Скопировано",
         "copy": "Скопировать",
+        "paste": "Вставить",
         "refresh": "Обновить",
         "save": "Сохранить",
         "update": "Обновить",
@@ -1177,7 +1178,7 @@
     "internal-squads-list": {
         "widget": {
             "search-internal-squads": "Поиск по внутренним сквадам...",
-            "no-squads-found": "Внутренние отряды не найдены"
+            "no-squads-found": "Внутренние сквады не найдены"
         }
     },
     "user-accessible-nodes": {
