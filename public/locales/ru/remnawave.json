@@ -2018,8 +2018,8 @@
     },
     "traffic-limits-card": {
         "traffic-and-limits": "Трафик и лимиты",
-        "traffic-limit-description": "0 means unlimited",
-        "traffic-limit": "Traffic limit"
+        "traffic-limit-description": "0 - неограниченно",
+        "traffic-limit": "Лимит трафика"
     },
     "node-plugin-editor-page": {
         "component": {
