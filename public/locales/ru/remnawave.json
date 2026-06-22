@@ -299,8 +299,6 @@
             "pick-value": "Выберите значение",
             "traffic-reset-strategy": "Стратегия сброса трафика",
             "traffic-reset-strategy-description": "Как часто следует сбрасывать трафик пользователя",
-            "data-limit": "Лимит трафика",
-            "data-limit-description": "Введите лимит данных в GiB, 0 – безлимит.",
             "username-cannot-be-changed-later": "Имя пользователя нельзя будет изменить позже",
             "loading-user-creation": "Загрузка создания пользователя...",
             "create-user": "Создать пользователя",
@@ -2019,7 +2017,9 @@
         "contact-information": "Контактная информация"
     },
     "traffic-limits-card": {
-        "traffic-and-limits": "Трафик и лимиты"
+        "traffic-and-limits": "Трафик и лимиты",
+        "traffic-limit-description": "0 means unlimited",
+        "traffic-limit": "Traffic limit"
     },
     "node-plugin-editor-page": {
         "component": {

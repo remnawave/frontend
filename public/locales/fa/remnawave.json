@@ -299,8 +299,6 @@
             "pick-value": "انتخاب مقدار",
             "traffic-reset-strategy": "دوره بازنشانی ترافیک",
             "traffic-reset-strategy-description": "هر چند وقت یک بار ترافیک کاربر بازنشانی شود",
-            "data-limit": "محدودیت ترافیک",
-            "data-limit-description": "Enter data limit in GiB (0 for unlimited)",
             "username-cannot-be-changed-later": "نام کاربری نمی تواند بعدا تغییر داده شود",
             "loading-user-creation": "در حال بارگذاری صفحه ساخت کاربر ...",
             "create-user": "ساخت کاربر",
@@ -2019,7 +2017,9 @@
         "contact-information": "مشخصات تماس"
     },
     "traffic-limits-card": {
-        "traffic-and-limits": "محدودیت ترافیک"
+        "traffic-and-limits": "محدودیت ترافیک",
+        "traffic-limit-description": "0 means unlimited",
+        "traffic-limit": "Traffic limit"
     },
     "node-plugin-editor-page": {
         "component": {

@@ -299,8 +299,6 @@
             "pick-value": "选择值",
             "traffic-reset-strategy": "流量重置策略",
             "traffic-reset-strategy-description": "用户流量使用统计应多久重置一次",
-            "data-limit": "流量限制",
-            "data-limit-description": "输入流量限制 GiB（0 表示无限制）",
             "username-cannot-be-changed-later": "用户名之后无法更改",
             "loading-user-creation": "正在加载创建用户窗口..",
             "create-user": "创建用户",
@@ -2019,7 +2017,9 @@
         "contact-information": "连接信息"
     },
     "traffic-limits-card": {
-        "traffic-and-limits": "流量限制"
+        "traffic-and-limits": "流量限制",
+        "traffic-limit-description": "0 means unlimited",
+        "traffic-limit": "Traffic limit"
     },
     "node-plugin-editor-page": {
         "component": {
