@@ -1117,7 +1117,10 @@
                 "please-select-a-provider-and-billing-node": "请选择一个网络提供商和计费节点",
                 "billing-node": "计费节点",
                 "next-billing-at": "下次计费时间",
-                "next-billing-at-description": "计费节点将被计费的日期和时间。Remnawave 将会通知你即将到来的账单。"
+                "next-billing-at-description": "计费节点将被计费的日期和时间。Remnawave 将会通知你即将到来的账单。",
+                "existing-node": "Existing node",
+                "custom-name": "Custom name",
+                "custom-name-description": "Use a custom name when the node is not managed by Remnawave."
             }
         }
     },

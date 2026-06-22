@@ -1117,7 +1117,10 @@
                 "please-select-a-provider-and-billing-node": "لطفاً یک ارائه‌دهنده و نود صورتحساب انتخاب کنید",
                 "billing-node": "نود صورتحساب",
                 "next-billing-at": "صورتحساب بعدی در",
-                "next-billing-at-description": "تاریخ و زمانی که نود صورتحساب بعدی صادر می‌شود. Remnawave شما را مطلع خواهد کرد."
+                "next-billing-at-description": "تاریخ و زمانی که نود صورتحساب بعدی صادر می‌شود. Remnawave شما را مطلع خواهد کرد.",
+                "existing-node": "Existing node",
+                "custom-name": "Custom name",
+                "custom-name-description": "Use a custom name when the node is not managed by Remnawave."
             }
         }
     },

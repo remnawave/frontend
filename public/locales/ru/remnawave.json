@@ -1117,7 +1117,10 @@
                 "please-select-a-provider-and-billing-node": "Пожалуйста, выберите провайдера и биллинг ноду",
                 "billing-node": "Биллинг нода",
                 "next-billing-at": "Следующий платеж",
-                "next-billing-at-description": "Дата и время для следующей оплаты этого узла. Remnawave уведомит вас о предстоящем платеже."
+                "next-billing-at-description": "Дата и время для следующей оплаты этого узла. Remnawave уведомит вас о предстоящем платеже.",
+                "existing-node": "Existing node",
+                "custom-name": "Custom name",
+                "custom-name-description": "Use a custom name when the node is not managed by Remnawave."
             }
         }
     },
