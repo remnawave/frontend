@@ -1118,9 +1118,9 @@
                 "billing-node": "计费节点",
                 "next-billing-at": "下次计费时间",
                 "next-billing-at-description": "计费节点将被计费的日期和时间。Remnawave 将会通知你即将到来的账单。",
-                "existing-node": "Existing node",
-                "custom-name": "Custom name",
-                "custom-name-description": "Use a custom name when the node is not managed by Remnawave."
+                "existing-node": "已存在节点",
+                "custom-name": "自定义名称",
+                "custom-name-description": "当节点不由 Remnawave 管理时使用自定义名称。"
             }
         }
     },
@@ -2021,8 +2021,8 @@
     },
     "traffic-limits-card": {
         "traffic-and-limits": "流量限制",
-        "traffic-limit-description": "0 means unlimited",
-        "traffic-limit": "Traffic limit"
+        "traffic-limit-description": "0 表示无限制",
+        "traffic-limit": "流量限制"
     },
     "node-plugin-editor-page": {
         "component": {
