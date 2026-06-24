@@ -1245,11 +1245,10 @@
                 "unknown-inbound": "未知的入站",
                 "selected": "已选择",
                 "no-inbound-selected": "未选择入站",
-                "choose-an-inbound-to-apply-to-the-host": "选择一个入站以应用到主机。",
-                "apply-changes": "应用更改",
                 "search-profiles-or-inbounds": "搜索配置文件或入站...",
                 "no-profiles-or-inbounds-found": "未找到配置文件或入站",
-                "no-config-profiles-available": "没有可用的配置文件"
+                "no-config-profiles-available": "没有可用的配置文件",
+                "assign-an-inbound-to-the-host": "Assign an inbound to the host"
             }
         }
     },
@@ -1353,8 +1352,6 @@
                 "config-profiles": "配置文件",
                 "no-profile-selected": "未选择配置文件",
                 "no-inbounds-selected": "未选择入站配置",
-                "choose-config-profile-to-apply-to-the-node": "选择要应用到节点的配置文件。",
-                "apply-changes": "应用更改",
                 "search-profiles-or-inbounds": "搜索配置文件或入站配置...",
                 "no-profiles-or-inbounds-found": "未找到配置文件或入站配置",
                 "no-config-profiles-available": "暂无可用配置文件"

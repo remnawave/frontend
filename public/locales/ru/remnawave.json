@@ -1118,9 +1118,9 @@
                 "billing-node": "Биллинг нода",
                 "next-billing-at": "Следующий платеж",
                 "next-billing-at-description": "Дата и время для следующей оплаты этого узла. Remnawave уведомит вас о предстоящем платеже.",
-                "existing-node": "Existing node",
-                "custom-name": "Custom name",
-                "custom-name-description": "Use a custom name when the node is not managed by Remnawave."
+                "existing-node": "Существующий узел",
+                "custom-name": "Пользовательское название",
+                "custom-name-description": "Если узел не управляется Remnawave, используйте пользовательское имя."
             }
         }
     },
@@ -1245,11 +1245,10 @@
                 "unknown-inbound": "Неизвестный инбаунд",
                 "selected": "выбрано",
                 "no-inbound-selected": "Инбаунд не выбран",
-                "choose-an-inbound-to-apply-to-the-host": "Выберите инбаунд, который будет привязан к хосту.",
-                "apply-changes": "Применить изменения",
                 "search-profiles-or-inbounds": "Поиск по профилям или инбаундам...",
                 "no-profiles-or-inbounds-found": "Профили или инбаунды не найдены",
-                "no-config-profiles-available": "Нет доступных профилей"
+                "no-config-profiles-available": "Нет доступных профилей",
+                "assign-an-inbound-to-the-host": "[deprecated]"
             }
         }
     },
@@ -1353,8 +1352,6 @@
                 "config-profiles": "Профили",
                 "no-profile-selected": "Профиль не выбран",
                 "no-inbounds-selected": "Инбаунды не выбраны",
-                "choose-config-profile-to-apply-to-the-node": "Выберите Профиль для применения к ноде.",
-                "apply-changes": "Сохранить",
                 "search-profiles-or-inbounds": "Поиск по профилям или инбаундам...",
                 "no-profiles-or-inbounds-found": "Профили или инбаунды не найдены",
                 "no-config-profiles-available": "Нет доступных профилей"
