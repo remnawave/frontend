@@ -1248,7 +1248,7 @@
                 "search-profiles-or-inbounds": "搜索配置文件或入站...",
                 "no-profiles-or-inbounds-found": "未找到配置文件或入站",
                 "no-config-profiles-available": "没有可用的配置文件",
-                "assign-an-inbound-to-the-host": "Assign an inbound to the host"
+                "assign-an-inbound-to-the-host": "指定一个入站到主机"
             }
         }
     },
