@@ -1701,11 +1701,11 @@
       "full-access": "完全访问权限",
       "col-scopes": "范围",
       "col-created": "创建日期",
-      "col-expires": "Expires",
-      "expired": "Expired",
-      "expires-in-days": "Expires in (days)",
-      "expires-in": "Expires",
-      "one-time-notice": "For security reasons, the token is shown <emphasis>only once</emphasis> right after creation. Make sure to copy and store it somewhere safe — you won't be able to see it again."
+      "col-expires": "过期",
+      "expired": "已过期",
+      "expires-in-days": "过期时间 (天)",
+      "expires-in": "过期",
+      "one-time-notice": "出于安全原因，令牌会在创建后立即显示 <emphasis>仅此一次</emphasis>。请务必复制并将其妥善保存在安全的地方——之后你将无法再次查看它。"
     }
   },
   "external-squads-hosts": {
