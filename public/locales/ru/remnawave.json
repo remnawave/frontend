@@ -1701,11 +1701,11 @@
       "full-access": "Полные права",
       "col-scopes": "Области",
       "col-created": "Создано",
-      "col-expires": "Expires",
-      "expired": "Expired",
-      "expires-in-days": "Expires in (days)",
-      "expires-in": "Expires",
-      "one-time-notice": "For security reasons, the token is shown <emphasis>only once</emphasis> right after creation. Make sure to copy and store it somewhere safe — you won't be able to see it again."
+      "col-expires": "Истекает",
+      "expired": "Истек",
+      "expires-in-days": "Срок жизни (дней)",
+      "expires-in": "Истекает",
+      "one-time-notice": "Из соображений безопасности токен отображается <emphasis>только один раз</emphasis> сразу после создания. Обязательно скопируйте и сохраните его в надежном месте — вы больше не сможете его увидеть."
     }
   },
   "external-squads-hosts": {
