@@ -65,7 +65,9 @@
     "open": "Открыть",
     "view": "Посмотреть",
     "clear": "Очистить",
-    "color": "Цвет"
+    "color": "Цвет",
+    "all": "All",
+    "without-tags": "Without tags"
   },
   "bandwidth-metrics": {
     "current-year": "Текущий год",
@@ -1221,7 +1223,6 @@
   "show-config-profiles-with-inbounds": {
     "feature": {
       "config-profile": "Профили",
-      "select-the-config-profile-that-will-be-applied-to-this-node": "Выберите профиль, который будет применить для этой ноды.",
       "no-config-profile-selected": "Профиль не выбран",
       "choose-a-profile-to-configure-inbounds-for-this-node": "Выберите профиль для настройки инбаундов для этой ноды"
     }

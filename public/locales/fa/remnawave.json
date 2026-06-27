@@ -65,7 +65,9 @@
     "open": "Open",
     "view": "View",
     "clear": "Clear",
-    "color": "Color"
+    "color": "Color",
+    "all": "All",
+    "without-tags": "Without tags"
   },
   "bandwidth-metrics": {
     "current-year": "امسال",
@@ -1221,7 +1223,6 @@
   "show-config-profiles-with-inbounds": {
     "feature": {
       "config-profile": "پروفایل پیکربندی",
-      "select-the-config-profile-that-will-be-applied-to-this-node": "پروفایل پیکربندی که به این نود اعمال می‌شود را انتخاب کنید",
       "no-config-profile-selected": "هیچ پروفایلی انتخاب نشده است",
       "choose-a-profile-to-configure-inbounds-for-this-node": "یک پروفایل برای پیکربندی اینباند برای این نود انتخاب کنید"
     }

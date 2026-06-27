@@ -65,7 +65,9 @@
     "open": "打开",
     "view": "查看",
     "clear": "清除",
-    "color": "颜色"
+    "color": "颜色",
+    "all": "All",
+    "without-tags": "Without tags"
   },
   "bandwidth-metrics": {
     "current-year": "今年",
@@ -1221,7 +1223,6 @@
   "show-config-profiles-with-inbounds": {
     "feature": {
       "config-profile": "配置文件",
-      "select-the-config-profile-that-will-be-applied-to-this-node": "选择将应用于此节点的配置文件",
       "no-config-profile-selected": "未选择配置文件",
       "choose-a-profile-to-configure-inbounds-for-this-node": "选择一个配置文件以为该节点配置入站"
     }
