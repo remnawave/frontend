@@ -66,8 +66,8 @@
     "view": "查看",
     "clear": "清除",
     "color": "颜色",
-    "all": "All",
-    "without-tags": "Without tags"
+    "all": "全部",
+    "without-tags": "无标签"
   },
   "bandwidth-metrics": {
     "current-year": "今年",
