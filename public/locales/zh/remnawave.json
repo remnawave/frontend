@@ -883,10 +883,7 @@
       "active-nodes": "活动节点",
       "current-hour": "当前小时",
       "download-speed": "下载速度",
-      "upload-speed": "上传速度",
-      "download-total": "下载总计",
-      "ram-usage": "内存使用量",
-      "for-all-nodes": "对于所有节点"
+      "upload-speed": "上传速度"
     }
   },
   "node-users-usage-drawer": {
@@ -1690,6 +1687,14 @@
       "example-mantine-colors": "MantineUI颜色示例",
       "example-mixed": "混合颜色示例",
       "color-format-note": "💡 颜色仅适用于标记后面的单词。没有标记，文本将为白色。"
+    }
+  },
+  "visual-settings-card": {
+    "widget": {
+      "layout-style": "Layout Style",
+      "choose-how-the-desktop-navigation-is-displayed": "Choose how the desktop navigation is displayed",
+      "compact": "Compact",
+      "sidebar": "Sidebar"
     }
   },
   "api-tokens-card": {

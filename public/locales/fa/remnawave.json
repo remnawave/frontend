@@ -883,10 +883,7 @@
       "active-nodes": "نودهای فعال",
       "current-hour": "ساعت کنونی",
       "download-speed": "Download Speed",
-      "upload-speed": "Upload Speed",
-      "download-total": "Download Total",
-      "ram-usage": "RAM Usage",
-      "for-all-nodes": "For all nodes"
+      "upload-speed": "Upload Speed"
     }
   },
   "node-users-usage-drawer": {
@@ -1690,6 +1687,14 @@
       "example-mantine-colors": "مثال با رنگ‌های MantineUI",
       "example-mixed": "مثال با رنگ‌های مختلط",
       "color-format-note": "💡 رنگ مشخص شده فقط برای کلمه‌ای که به نشانگر رنگ چسبیده اعمال می‌شود. بدون نشانگر، متن سفیدرنگ خواهد بود."
+    }
+  },
+  "visual-settings-card": {
+    "widget": {
+      "layout-style": "Layout Style",
+      "choose-how-the-desktop-navigation-is-displayed": "Choose how the desktop navigation is displayed",
+      "compact": "Compact",
+      "sidebar": "Sidebar"
     }
   },
   "api-tokens-card": {

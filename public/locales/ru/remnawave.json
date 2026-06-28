@@ -66,8 +66,8 @@
     "view": "Посмотреть",
     "clear": "Очистить",
     "color": "Цвет",
-    "all": "All",
-    "without-tags": "Without tags"
+    "all": "Все",
+    "without-tags": "Без тегов"
   },
   "bandwidth-metrics": {
     "current-year": "Текущий год",
@@ -883,10 +883,7 @@
       "active-nodes": "Активные ноды",
       "current-hour": "Текущий час",
       "download-speed": "Скорость загрузки",
-      "upload-speed": "Скорость отдачи",
-      "download-total": "Всего загружено",
-      "ram-usage": "Использовано ОЗУ",
-      "for-all-nodes": "Для всех нод"
+      "upload-speed": "Скорость отдачи"
     }
   },
   "node-users-usage-drawer": {
@@ -1690,6 +1687,14 @@
       "example-mantine-colors": "Пример цветов MantineUI",
       "example-mixed": "Пример со смешанными цветами",
       "color-format-note": "💡 Цвет применяется только к словам, непосредственно следующим за маркером. Без маркеров текст будет белым."
+    }
+  },
+  "visual-settings-card": {
+    "widget": {
+      "layout-style": "Стиль оформления",
+      "choose-how-the-desktop-navigation-is-displayed": "Выберите способ навигации по интерфейсу панели",
+      "compact": "Компактный",
+      "sidebar": "Боковая панель"
     }
   },
   "api-tokens-card": {
