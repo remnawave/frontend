@@ -1691,10 +1691,10 @@
   },
   "visual-settings-card": {
     "widget": {
-      "layout-style": "Layout Style",
-      "choose-how-the-desktop-navigation-is-displayed": "Choose how the desktop navigation is displayed",
-      "compact": "Compact",
-      "sidebar": "Sidebar"
+      "layout-style": "布局样式",
+      "choose-how-the-desktop-navigation-is-displayed": "选择桌面导航的显示方式",
+      "compact": "紧凑",
+      "sidebar": "侧边栏"
     }
   },
   "api-tokens-card": {
