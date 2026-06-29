@@ -1117,8 +1117,8 @@
         "billing-node": "计费节点",
         "next-billing-at": "下次计费时间",
         "next-billing-at-description": "计费节点将被计费的日期和时间。Remnawave 将会通知你即将到来的账单。",
-        "existing-node": "已存在节点",
-        "custom-name": "自定义名称",
+        "existing": "Existing",
+        "custom": "Custom",
         "custom-name-description": "当节点不由 Remnawave 管理时使用自定义名称。"
       }
     }
