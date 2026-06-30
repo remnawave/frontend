@@ -67,7 +67,8 @@
     "clear": "清除",
     "color": "颜色",
     "all": "全部",
-    "without-tags": "无标签"
+    "without-tags": "无标签",
+    "reset": "Reset"
   },
   "bandwidth-metrics": {
     "current-year": "今年",

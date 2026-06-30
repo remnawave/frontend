@@ -67,7 +67,8 @@
     "clear": "Очистить",
     "color": "Цвет",
     "all": "Все",
-    "without-tags": "Без тегов"
+    "without-tags": "Без тегов",
+    "reset": "Reset"
   },
   "bandwidth-metrics": {
     "current-year": "Текущий год",

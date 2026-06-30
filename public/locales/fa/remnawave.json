@@ -67,7 +67,8 @@
     "clear": "Clear",
     "color": "Color",
     "all": "All",
-    "without-tags": "Without tags"
+    "without-tags": "Without tags",
+    "reset": "Reset"
   },
   "bandwidth-metrics": {
     "current-year": "امسال",
