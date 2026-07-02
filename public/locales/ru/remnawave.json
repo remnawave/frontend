@@ -68,7 +68,14 @@
     "color": "Цвет",
     "all": "Все",
     "without-tags": "Без тегов",
-    "reset": "Сбросить"
+    "reset": "Сбросить",
+    "actions": "Actions",
+    "clear-selection": "Clear selection",
+    "select-all": "Select all",
+    "selected": "Selected: {{count}}",
+    "bulk-actions": "Bulk actions",
+    "bulk-edit": "Bulk edit",
+    "creation": "Creation"
   },
   "bandwidth-metrics": {
     "current-year": "Текущий год",
@@ -131,16 +138,7 @@
       "new-user": "Создать польз.",
       "reset-table": "Сбросить таблицу",
       "clear-filters": "Очистить фильтры",
-      "bulk-actions": "Масс. действия",
-      "help": "Справка",
-      "table-controls-help": "Помощь по управлению таблицей",
-      "table-controler-description-line-1": "Эта таблица содержит несколько элементов управления, которые помогут вам эффективно просматривать и управлять данными. Вот что делает каждый переключатель:",
-      "table-controler-description-line-2": "Переключатель",
-      "table-controler-description-line-3": "Описание",
-      "table-controler-description-line-4": "Переключение фильтров столбцов для поиска и фильтрации данных",
-      "show-or-hide-specific-columns": "Показать или скрыть определенные столбцы",
-      "adjust-row-spacing-density": "Регулировка плотности таблицы",
-      "toggle-fullscreen-table-view": "Полноэкранный вид таблицы"
+      "help": "Справка"
     }
   },
   "use-table-columns": {
@@ -635,8 +633,6 @@
       "set-inbound": "Установить инбаунд",
       "set-port": "Установить порт",
       "port": "Порт",
-      "clear-selection": "Очистить выбор",
-      "select-all": "Выбрать все",
       "dangling-hosts-skipped": "{{count}} хостов было пропущено при клонировании."
     }
   },
@@ -645,14 +641,6 @@
     "confirm-description": "Следующие поля будут обновлены для {{count}} хостов:",
     "no-changes-title": "Обновлять нечего",
     "no-changes-description": "Вы не изменили ни одного поля."
-  },
-  "bulk-user-actions-drawer": {
-    "widget": {
-      "bulk-user-actions": "Массовые действия с пользователями",
-      "users": "пользователей",
-      "actions": "Действия",
-      "danger": "Опасно"
-    }
   },
   "delete-all-users-by-status": {
     "feature": {
@@ -695,14 +683,6 @@
           "delete-users-by-status-description": "Навсегда удаляет всех пользователей с выбранным статусом"
         }
       }
-    }
-  },
-  "bulk-all-user-actions-drawer": {
-    "widget": {
-      "bulk-all-user-actions": "Массовые действия со всеми пользователями",
-      "all-users": "Все пользователи",
-      "actions": "Действия",
-      "danger": "Опасно"
     }
   },
   "bulk-user-actions": {
@@ -748,14 +728,6 @@
           "update-users": "Обновить пользователей"
         }
       }
-    }
-  },
-  "users-table-selection": {
-    "feature": {
-      "row-s-selected": "строк(а) выбрано",
-      "clear-selection": "Очистить выбор",
-      "select-all": "Выбрать все",
-      "bulk-actions": "Массовые действия"
     }
   },
   "get-user-subscription-links": {
@@ -1028,8 +1000,7 @@
         "favicon-link-description": "Это ссылка на иконку провайдера. Она используется для отображения иконки провайдера в UI. Достаточно просто ввести доменное имя.",
         "login-url": "Ссылка для входа",
         "enter-login-url": "Введите URL входа",
-        "login-url-description": "URL-адрес входа — это URL-адрес страницы входа провайдера. Он поможет вам быстро перейти на страницу входа провайдера.",
-        "save-changes": "Сохранить изменения"
+        "login-url-description": "URL-адрес входа — это URL-адрес страницы входа провайдера. Он поможет вам быстро перейти на страницу входа провайдера."
       }
     }
   },
@@ -1040,8 +1011,7 @@
       "new-date": "Новая дата",
       "today": "Сегодня",
       "tomorrow": "Завтра",
-      "next-month": "Следующий месяц",
-      "update-date": "Обновить дату"
+      "next-month": "Следующий месяц"
     }
   },
   "infra-providers-table": {
@@ -2235,6 +2205,11 @@
   "keypair-generator": {
     "widget": {
       "generate": "Сгенерировать"
+    }
+  },
+  "bulk-all-users-actions": {
+    "modal": {
+      "perform-actions-on-all-users": "Perform actions on all users"
     }
   }
 }

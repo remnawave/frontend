@@ -68,7 +68,14 @@
     "color": "颜色",
     "all": "全部",
     "without-tags": "无标签",
-    "reset": "重置"
+    "reset": "重置",
+    "actions": "Actions",
+    "clear-selection": "Clear selection",
+    "select-all": "Select all",
+    "selected": "Selected: {{count}}",
+    "bulk-actions": "Bulk actions",
+    "bulk-edit": "Bulk edit",
+    "creation": "Creation"
   },
   "bandwidth-metrics": {
     "current-year": "今年",
@@ -131,16 +138,7 @@
       "new-user": "新建用户",
       "reset-table": "重置表格样式",
       "clear-filters": "清除筛选",
-      "bulk-actions": "批量操作",
-      "help": "帮助",
-      "table-controls-help": "表格控件帮助",
-      "table-controler-description-line-1": "此表格提供多个控件，帮助你更高效地查看和管理数据。以下是每个控件的作用说明：",
-      "table-controler-description-line-2": "控件",
-      "table-controler-description-line-3": "说明",
-      "table-controler-description-line-4": "切换列筛选功能以搜索和过滤数据",
-      "show-or-hide-specific-columns": "显示或隐藏指定列",
-      "adjust-row-spacing-density": "调整行间距密度",
-      "toggle-fullscreen-table-view": "切换全屏表格视图"
+      "help": "帮助"
     }
   },
   "use-table-columns": {
@@ -635,8 +633,6 @@
       "set-inbound": "设置入站",
       "set-port": "设置端口",
       "port": "端口",
-      "clear-selection": "清除选择",
-      "select-all": "全选",
       "dangling-hosts-skipped": "已跳过 {{count}} 个未关联的主机，未执行克隆。"
     }
   },
@@ -645,14 +641,6 @@
     "confirm-description": "以下字段将应用于 {{count}} 个主机:",
     "no-changes-title": "无需更新",
     "no-changes-description": "您尚未修改任何字段。"
-  },
-  "bulk-user-actions-drawer": {
-    "widget": {
-      "bulk-user-actions": "批量操作用户",
-      "users": "用户",
-      "actions": "操作",
-      "danger": "危险"
-    }
   },
   "delete-all-users-by-status": {
     "feature": {
@@ -695,14 +683,6 @@
           "delete-users-by-status-description": "永久删除所有具有选定状态的用户"
         }
       }
-    }
-  },
-  "bulk-all-user-actions-drawer": {
-    "widget": {
-      "bulk-all-user-actions": "批量所有用户操作",
-      "all-users": "所有用户",
-      "actions": "操作",
-      "danger": "危险区"
     }
   },
   "bulk-user-actions": {
@@ -748,14 +728,6 @@
           "update-users": "更新用户"
         }
       }
-    }
-  },
-  "users-table-selection": {
-    "feature": {
-      "row-s-selected": "选定的行",
-      "clear-selection": "清除选择",
-      "select-all": "全选",
-      "bulk-actions": "批量操作"
     }
   },
   "get-user-subscription-links": {
@@ -1028,8 +1000,7 @@
         "favicon-link-description": "Favicon 链接是提供商图标的链接。用于在界面中显示该提供商的图标。你也可以直接输入域名。",
         "login-url": "登录网址",
         "enter-login-url": "输入登录网址",
-        "login-url-description": "登录网址是该提供商登录页面的链接，可帮助你快速跳转到其登录页面。",
-        "save-changes": "保存更改"
+        "login-url-description": "登录网址是该提供商登录页面的链接，可帮助你快速跳转到其登录页面。"
       }
     }
   },
@@ -1040,8 +1011,7 @@
       "new-date": "新日期",
       "today": "今天",
       "tomorrow": "明天",
-      "next-month": "下个月",
-      "update-date": "更新日期"
+      "next-month": "下个月"
     }
   },
   "infra-providers-table": {
@@ -2235,6 +2205,11 @@
   "keypair-generator": {
     "widget": {
       "generate": "生成"
+    }
+  },
+  "bulk-all-users-actions": {
+    "modal": {
+      "perform-actions-on-all-users": "Perform actions on all users"
     }
   }
 }
