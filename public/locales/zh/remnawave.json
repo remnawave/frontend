@@ -69,13 +69,13 @@
     "all": "全部",
     "without-tags": "无标签",
     "reset": "重置",
-    "actions": "Actions",
-    "clear-selection": "Clear selection",
-    "select-all": "Select all",
-    "selected": "Selected: {{count}}",
-    "bulk-actions": "Bulk actions",
-    "bulk-edit": "Bulk edit",
-    "creation": "Creation"
+    "actions": "操作",
+    "clear-selection": "清除选择",
+    "select-all": "全选",
+    "selected": "已选 {{count}} 项",
+    "bulk-actions": "批量操作",
+    "bulk-edit": "批量编辑",
+    "creation": "创建"
   },
   "bandwidth-metrics": {
     "current-year": "今年",
@@ -2209,7 +2209,7 @@
   },
   "bulk-all-users-actions": {
     "modal": {
-      "perform-actions-on-all-users": "Perform actions on all users"
+      "perform-actions-on-all-users": "对所有用户执行操作"
     }
   }
 }
