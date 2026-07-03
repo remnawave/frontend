@@ -75,7 +75,9 @@
     "selected": "Selected: {{count}}",
     "bulk-actions": "Bulk actions",
     "bulk-edit": "Bulk edit",
-    "creation": "Creation"
+    "creation": "Creation",
+    "processing": "Processing",
+    "operation-completed": "Operation completed"
   },
   "bandwidth-metrics": {
     "current-year": "امسال",
@@ -644,10 +646,7 @@
   },
   "delete-all-users-by-status": {
     "feature": {
-      "processing": "در حال پردازش",
-      "deleting-users": "در حال حذف کاربران...",
-      "success": "عملیات موفقیت‌آمیز",
-      "deleted-data-affectedrows-users": "{{count}} کاربر حذف شد"
+      "deleting-users": "در حال حذف کاربران..."
     }
   },
   "bulk-all-user-actions-tabs": {

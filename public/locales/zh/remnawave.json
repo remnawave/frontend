@@ -75,7 +75,9 @@
     "selected": "已选 {{count}} 项",
     "bulk-actions": "批量操作",
     "bulk-edit": "批量编辑",
-    "creation": "创建"
+    "creation": "创建",
+    "processing": "Processing",
+    "operation-completed": "Operation completed"
   },
   "bandwidth-metrics": {
     "current-year": "今年",
@@ -644,10 +646,7 @@
   },
   "delete-all-users-by-status": {
     "feature": {
-      "processing": "处理中",
-      "deleting-users": "正在删除用户...",
-      "success": "成功",
-      "deleted-data-affectedrows-users": "已删除 {{count}} 个用户"
+      "deleting-users": "正在删除用户..."
     }
   },
   "bulk-all-user-actions-tabs": {

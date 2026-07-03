@@ -75,7 +75,9 @@
     "selected": "Selected: {{count}}",
     "bulk-actions": "Bulk actions",
     "bulk-edit": "Bulk edit",
-    "creation": "Creation"
+    "creation": "Creation",
+    "processing": "Processing",
+    "operation-completed": "Operation completed"
   },
   "bandwidth-metrics": {
     "current-year": "Текущий год",
@@ -644,10 +646,7 @@
   },
   "delete-all-users-by-status": {
     "feature": {
-      "processing": "Обработка",
-      "deleting-users": "Удаление пользователей...",
-      "success": "Успешно",
-      "deleted-data-affectedrows-users": "Удалено {{count}} пользователей"
+      "deleting-users": "Удаление пользователей..."
     }
   },
   "bulk-all-user-actions-tabs": {
