@@ -69,15 +69,15 @@
     "all": "Все",
     "without-tags": "Без тегов",
     "reset": "Сбросить",
-    "actions": "Actions",
-    "clear-selection": "Clear selection",
-    "select-all": "Select all",
-    "selected": "Selected: {{count}}",
-    "bulk-actions": "Bulk actions",
-    "bulk-edit": "Bulk edit",
-    "creation": "Creation",
-    "processing": "Processing",
-    "operation-completed": "Operation completed"
+    "actions": "Действия",
+    "clear-selection": "Очистить выбор",
+    "select-all": "Выделить все",
+    "selected": "Выбрано: {{count}}",
+    "bulk-actions": "Массовые действия",
+    "bulk-edit": "Массовое редактирование",
+    "creation": "Создание",
+    "processing": "Обработка",
+    "operation-completed": "Операция завершена"
   },
   "bandwidth-metrics": {
     "current-year": "Текущий год",
@@ -2208,7 +2208,7 @@
   },
   "bulk-all-users-actions": {
     "modal": {
-      "perform-actions-on-all-users": "Perform actions on all users"
+      "perform-actions-on-all-users": "Выполнить действия для всех пользователей"
     }
   }
 }
