@@ -2203,7 +2203,15 @@
   },
   "keypair-generator": {
     "widget": {
-      "generate": "Generate"
+      "generate": "Generate",
+      "apply-to-inbounds": "Apply to inbounds",
+      "apply": "Apply",
+      "no-reality-inbounds": "No inbounds with a Reality key found in this config",
+      "invalid-config": "Config is not valid JSON",
+      "applied": "Applied a fresh key to {{count}} inbound(s)",
+      "nothing-applied": "No matching inbounds to apply keys to",
+      "success": "Success",
+      "error": "Error"
     }
   },
   "bulk-all-users-actions": {

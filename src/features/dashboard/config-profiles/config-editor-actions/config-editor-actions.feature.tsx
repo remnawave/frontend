@@ -304,7 +304,16 @@ export function ConfigEditorActionsFeature(props: Props) {
                                         />
                                     ),
                                     centered: true,
-                                    children: <KeypairGeneratorWidget />
+                                    children: (
+                                        <KeypairGeneratorWidget
+                                            applyConfigValue={(value) =>
+                                                editorRef.current?.setValue(value)
+                                            }
+                                            getConfigValue={() =>
+                                                editorRef.current?.getValue() ?? ''
+                                            }
+                                        />
+                                    )
                                 })
                             }}
                         >

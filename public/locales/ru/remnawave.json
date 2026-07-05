@@ -2203,7 +2203,15 @@
   },
   "keypair-generator": {
     "widget": {
-      "generate": "Сгенерировать"
+      "generate": "Сгенерировать",
+      "apply-to-inbounds": "Применить к inbound'ам",
+      "apply": "Применить",
+      "no-reality-inbounds": "В этом конфиге нет inbound'ов с ключом Reality",
+      "invalid-config": "Конфиг не является корректным JSON",
+      "applied": "Новый ключ применён к {{count}} inbound'ам",
+      "nothing-applied": "Нет подходящих inbound'ов для применения ключей",
+      "success": "Готово",
+      "error": "Ошибка"
     }
   },
   "bulk-all-users-actions": {
