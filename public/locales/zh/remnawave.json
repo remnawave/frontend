@@ -1263,6 +1263,10 @@
     "license-acknowledgement": "继续操作即表示您已阅读并同意<anchor>许可协议条款</anchor>。",
     "accept-button": "我已了解并接受"
   },
+  "connection-status-overlay": {
+    "connection-lost": "Connection lost",
+    "reconnecting": "Reconnecting..."
+  },
   "mobile-warning-overlay": {
     "mobile-device-detected": "检测到移动设备",
     "description-line-1": "此页面包含复杂的表格，可能不适合在移动设备上使用。",
@@ -2209,6 +2213,17 @@
   "bulk-all-users-actions": {
     "modal": {
       "perform-actions-on-all-users": "对所有用户执行操作"
+    }
+  },
+  "backend-tools-card": {
+    "widget": {
+      "queue-viewer": "Queue Viewer",
+      "queue-viewer-description": "Monitor and manage background job queues.",
+      "scalar-description": "Modern interactive API reference.",
+      "swagger-description": "Classic OpenAPI documentation explorer.",
+      "backend-tools-description": "Access to Queue Viewer, Scalar or Swagger.",
+      "login": "Login",
+      "backend-tools": "Backend tools"
     }
   }
 }

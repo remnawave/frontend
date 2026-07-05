@@ -1263,6 +1263,10 @@
     "license-acknowledgement": "By continuing you acknowledge that you have read and agree to the <anchor>license terms</anchor>.",
     "accept-button": "I understand and accept"
   },
+  "connection-status-overlay": {
+    "connection-lost": "Connection lost",
+    "reconnecting": "Reconnecting..."
+  },
   "mobile-warning-overlay": {
     "mobile-device-detected": "دستگاه موبایل شناسایی شد",
     "description-line-1": "این صفحه حاوی جدول‌های پیچیده‌ای است که شاید روی دستگاه موبایل به خوبی قابل استفاده نباشند",
@@ -2209,6 +2213,17 @@
   "bulk-all-users-actions": {
     "modal": {
       "perform-actions-on-all-users": "Perform actions on all users"
+    }
+  },
+  "backend-tools-card": {
+    "widget": {
+      "queue-viewer": "Queue Viewer",
+      "queue-viewer-description": "Monitor and manage background job queues.",
+      "scalar-description": "Modern interactive API reference.",
+      "swagger-description": "Classic OpenAPI documentation explorer.",
+      "backend-tools-description": "Access to Queue Viewer, Scalar or Swagger.",
+      "login": "Login",
+      "backend-tools": "Backend tools"
     }
   }
 }
