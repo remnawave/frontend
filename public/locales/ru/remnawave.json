@@ -1264,8 +1264,8 @@
     "accept-button": "Я понимаю и принимаю"
   },
   "connection-status-overlay": {
-    "connection-lost": "Connection lost",
-    "reconnecting": "Reconnecting..."
+    "connection-lost": "Соединение потеряно",
+    "reconnecting": "Переподключение..."
   },
   "mobile-warning-overlay": {
     "mobile-device-detected": "Обнаружен смартфон",
@@ -2217,13 +2217,13 @@
   },
   "backend-tools-card": {
     "widget": {
-      "queue-viewer": "Queue Viewer",
-      "queue-viewer-description": "Monitor and manage background job queues.",
-      "scalar-description": "Modern interactive API reference.",
-      "swagger-description": "Classic OpenAPI documentation explorer.",
-      "backend-tools-description": "Access to Queue Viewer, Scalar or Swagger.",
-      "login": "Login",
-      "backend-tools": "Backend tools"
+      "queue-viewer": "Просмотр очереди",
+      "queue-viewer-description": "Мониторинг и управление очередями фоновых заданий.",
+      "scalar-description": "Современные интерактивные API методы.",
+      "swagger-description": "Классический исследователь документации OpenAPI.",
+      "backend-tools-description": "Доступ к Queue Viewer, Scalar или Swagger.",
+      "login": "Перейти",
+      "backend-tools": "Бэкэнд инструменты"
     }
   }
 }
