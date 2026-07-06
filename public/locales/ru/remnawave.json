@@ -77,7 +77,9 @@
     "bulk-edit": "Массовое редактирование",
     "creation": "Создание",
     "processing": "Обработка",
-    "operation-completed": "Операция завершена"
+    "operation-completed": "Операция завершена",
+    "usage-stats": "Usage stats",
+    "active-sessions": "Active sessions"
   },
   "bandwidth-metrics": {
     "current-year": "Текущий год",
@@ -741,7 +743,6 @@
     "widget": {
       "no-data-available-for-the-selected-period": "Нет доступных данных за выбранный период",
       "no-data-available": "Нет доступных данных",
-      "traffic-statistics": "Статистика трафика",
       "click-to-show-all": "Нажмите чтобы посмотреть все",
       "click-to-highlight-only-this-node": "Нажмите чтобы показать только эту ноду",
       "usage-by-period": "Использовано за период",
@@ -762,16 +763,8 @@
       "click-to-see-all": "Показать все"
     }
   },
-  "get-user-usage": {
-    "feature": {
-      "show-usage": "Статистика",
-      "usage": "КТО ТАКОЙ ЭТОТ ВАШ ЮСАГЕ?",
-      "active-sessions": "Активные сеансы"
-    }
-  },
   "active-sessions-drawer": {
     "widget": {
-      "title": "Активные сеансы",
       "requirements": "Условия",
       "warning-activity": "IP адрес будет показан, когда <highlight>Xray-Core</highlight> считает подключение <highlight>еще действительным</highlight>. Это может привести к отображению IP адресов, которые в настоящий момент не подключены. Используйте значок <highlight>часов</highlight> для отслеживания последней активности данного IP.",
       "warning-version": "Версия Remnawave Node <highlight>{{version}}</highlight> или выше",
@@ -867,7 +860,6 @@
       "click-to-show-all-users": "Нажмите, чтобы показать всех пользователей",
       "click-to-highlight-only-this-user": "Нажмите, чтобы выделить только этого пользователя",
       "users-accordeon": "Пользователи ({{displayedUserCount}} из {{significantUserCount}} активных, {{userCount}} всего)",
-      "user-traffic-statistics": "Статистика трафика пользователя",
       "usage-by-period": "Использование по периоду",
       "7-days": "7 дней",
       "14-days": "14 дней",
@@ -1638,7 +1630,6 @@
   "passkeys-drawer": {
     "component": {
       "passkeys": "Passkeys",
-      "passkeys-description": "С помощью ключей входа вы можете безопасности входить без паролей. Вы можете зарегистрировать несколько ключей входа с помощью разных устройств.",
       "active-passkeys": "Активные ключи входа",
       "no-passkeys-registered-yet": "Ключей входа пока что не зарегистрировано",
       "add-passkeys-description": "Добавьте свой первый ключ входа, чтобы включить безопасную и беспарольную аутентификацию на ваших устройствах",

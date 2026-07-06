@@ -77,7 +77,9 @@
     "bulk-edit": "Bulk edit",
     "creation": "Creation",
     "processing": "Processing",
-    "operation-completed": "Operation completed"
+    "operation-completed": "Operation completed",
+    "usage-stats": "Usage stats",
+    "active-sessions": "Active sessions"
   },
   "bandwidth-metrics": {
     "current-year": "امسال",
@@ -741,7 +743,6 @@
     "widget": {
       "no-data-available-for-the-selected-period": "داده‌ای برای دوره انتخاب‌شده در دسترس نیست",
       "no-data-available": "داده‌ای در دسترس نیست",
-      "traffic-statistics": "آمار ترافیک",
       "click-to-show-all": "برای نمایش همه کلیک کنید",
       "click-to-highlight-only-this-node": "کلیک کنید تا فقط این نود برجسته شود",
       "usage-by-period": "استفاده بر اساس دوره",
@@ -762,16 +763,8 @@
       "click-to-see-all": "کلیک کنید تا همه را ببینید"
     }
   },
-  "get-user-usage": {
-    "feature": {
-      "show-usage": "نمایش مصرف",
-      "usage": "میزان استفاده",
-      "active-sessions": "نشست‌های فعال"
-    }
-  },
   "active-sessions-drawer": {
     "widget": {
-      "title": "نشست‌های فعال",
       "requirements": "پیش‌نیازها",
       "warning-activity": "An IP address will be shown when <highlight>Xray-Core</highlight> considers the <highlight>connection still open</highlight>. This may result in some displayed IP addresses that are no longer actually connected. Use the <highlight>clock</highlight> icon to track the last activity of a given IP.",
       "warning-version": "نود Remnawave نسخه <highlight>{{version}}</highlight> یا بالاتر",
@@ -867,7 +860,6 @@
       "click-to-show-all-users": "برای نمایش همه کاربران کلیک کنید",
       "click-to-highlight-only-this-user": "برای برجسته کردن فقط این کاربر کلیک کنید",
       "users-accordeon": "کاربران (درحال نمایش {{displayedUserCount}} کاربر برتر از {{significantUserCount}} فعال از مجموع {{userCount}})",
-      "user-traffic-statistics": "آمار ترافیک کاربر",
       "usage-by-period": "استفاده بر اساس دوره",
       "7-days": "7 روز",
       "14-days": "14 روز",
@@ -1638,7 +1630,6 @@
   "passkeys-drawer": {
     "component": {
       "passkeys": "کلیدهای عبور",
-      "passkeys-description": "کلیدهای عبور به شما اجازه می‌دهند بدون گذرواژه وارد پنل شوید. می‌توانید چندین کلیدعبور برای دستگاه‎‌های مختلف ثبت کنید.",
       "active-passkeys": "کلیدهای عبور فعال",
       "no-passkeys-registered-yet": "هیچ کلید عبوری ثبت نشده است.",
       "add-passkeys-description": "اولین کلید عبور خود را اضافه کنید تا ورود امن بدون گذرواژه در همه دستگاه‌های شما فعال شود.",
