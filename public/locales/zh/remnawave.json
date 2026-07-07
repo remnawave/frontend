@@ -78,8 +78,8 @@
     "creation": "创建",
     "processing": "处理中",
     "operation-completed": "操作已完成",
-    "usage-stats": "Usage stats",
-    "active-sessions": "Active sessions"
+    "usage-stats": "使用状态",
+    "active-sessions": "活跃会话"
   },
   "bandwidth-metrics": {
     "current-year": "今年",
