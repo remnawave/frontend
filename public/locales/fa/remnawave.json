@@ -28,7 +28,8 @@
     "remnawave-settings": "تنظیمات Remnawave",
     "node-plugins": "Plugins",
     "tb-reports": "Torrent Blocker Reports",
-    "sessions-explorer": "Sessions Explorer"
+    "sessions-explorer": "Sessions Explorer",
+    "http-stats": "HTTP Stats"
   },
   "common": {
     "delete": "حذف",
@@ -2215,6 +2216,21 @@
       "backend-tools-description": "Access to Queue Viewer, Scalar or Swagger.",
       "login": "Login",
       "backend-tools": "Backend tools"
+    }
+  },
+  "http-stats": {
+    "page": {
+      "component": {
+        "http-stats-description": "Aggregated request counts per API route since the last panel restart."
+      }
+    }
+  },
+  "http-stats-table": {
+    "widget": {
+      "total-requests": "Total Requests",
+      "tracked-routes": "Tracked Routes",
+      "peak-requests": "Peak Requests",
+      "avg-route": "Avg / Route"
     }
   }
 }

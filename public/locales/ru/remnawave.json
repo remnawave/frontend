@@ -28,7 +28,8 @@
     "remnawave-settings": "Настройки Remnawave",
     "node-plugins": "Плагины",
     "tb-reports": "Torrent Blocker Reports",
-    "sessions-explorer": "Обозреватель сессий"
+    "sessions-explorer": "Обозреватель сессий",
+    "http-stats": "HTTP Stats"
   },
   "common": {
     "delete": "Удалить",
@@ -2215,6 +2216,21 @@
       "backend-tools-description": "Доступ к Queue Viewer, Scalar или Swagger.",
       "login": "Перейти",
       "backend-tools": "Бэкэнд инструменты"
+    }
+  },
+  "http-stats": {
+    "page": {
+      "component": {
+        "http-stats-description": "Aggregated request counts per API route since the last panel restart."
+      }
+    }
+  },
+  "http-stats-table": {
+    "widget": {
+      "total-requests": "Total Requests",
+      "tracked-routes": "Tracked Routes",
+      "peak-requests": "Peak Requests",
+      "avg-route": "Avg / Route"
     }
   }
 }

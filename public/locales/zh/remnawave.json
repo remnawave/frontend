@@ -28,7 +28,8 @@
     "remnawave-settings": "Remnawave 设置",
     "node-plugins": "插件",
     "tb-reports": "Torrent 屏蔽报告",
-    "sessions-explorer": "会话管理器"
+    "sessions-explorer": "会话管理器",
+    "http-stats": "HTTP Stats"
   },
   "common": {
     "delete": "删除",
@@ -2215,6 +2216,21 @@
       "backend-tools-description": "访问队列查看器，Scalar 或Swagger。",
       "login": "登录",
       "backend-tools": "后端工具"
+    }
+  },
+  "http-stats": {
+    "page": {
+      "component": {
+        "http-stats-description": "Aggregated request counts per API route since the last panel restart."
+      }
+    }
+  },
+  "http-stats-table": {
+    "widget": {
+      "total-requests": "Total Requests",
+      "tracked-routes": "Tracked Routes",
+      "peak-requests": "Peak Requests",
+      "avg-route": "Avg / Route"
     }
   }
 }
