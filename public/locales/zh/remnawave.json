@@ -29,7 +29,7 @@
     "node-plugins": "插件",
     "tb-reports": "Torrent 屏蔽报告",
     "sessions-explorer": "会话管理器",
-    "http-stats": "HTTP Stats"
+    "http-stats": "HTTP 状态"
   },
   "common": {
     "delete": "删除",
@@ -2221,16 +2221,16 @@
   "http-stats": {
     "page": {
       "component": {
-        "http-stats-description": "Aggregated request counts per API route since the last panel restart."
+        "http-stats-description": "自上次面板重新启动以来，每一个 API 路由的综合请求计数。"
       }
     }
   },
   "http-stats-table": {
     "widget": {
-      "total-requests": "Total Requests",
-      "tracked-routes": "Tracked Routes",
-      "peak-requests": "Peak Requests",
-      "avg-route": "Avg / Route"
+      "total-requests": "总请求数",
+      "tracked-routes": "路由追踪",
+      "peak-requests": "峰值请求",
+      "avg-route": "平均／路由"
     }
   }
 }
