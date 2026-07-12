@@ -17,7 +17,11 @@ import {
     UpdateBillingDateModal,
     ViewInfraProviderModal
 } from './infra-billing'
-import { InternalSquadAccessibleNodesDrawer, InternalSquadsInboundsDrawer } from './internal-squads'
+import {
+    InternalSquadAccessibleNodesDrawer,
+    InternalSquadsInboundsDrawer,
+    InternalSquadsUsageDrawer
+} from './internal-squads'
 import { NodePluginExecutorDrawer } from './node-plugins'
 import {
     CreateNodeModal,
@@ -79,6 +83,7 @@ export const MODAL_REGISTRY = {
 
     internalSquads_internalSquadsInboundsDrawer: InternalSquadsInboundsDrawer,
     internalSquads_internalSquadAccessibleNodesDrawer: InternalSquadAccessibleNodesDrawer,
+    internalSquads_internalSquadsUsageDrawer: InternalSquadsUsageDrawer,
 
     externalSquads_externalSquadsDrawer: ExternalSquadsDrawer,
 

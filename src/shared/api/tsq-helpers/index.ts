@@ -1,4 +1,5 @@
 export { createBodyQueryHook } from './create-body-query.hook'
+export { createGetInfiniteQueryHook } from './create-get-infinite-query.hook'
 export { createGetQueryHook } from './create-get-query.hook'
 export { createMutationHook } from './create-mutation-hook'
 export { errorHandler } from './error-handler'

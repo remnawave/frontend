@@ -51,6 +51,7 @@ export const TrafficLimitInput = ({ defaultValue, onChange, value, ...rest }: IP
                 allowNegative={false}
                 hideControls
                 thousandSeparator=","
+                size={rest.size ? rest.size : undefined}
                 {...rest}
                 flex={1}
                 onChange={handleValueChange}
@@ -60,7 +61,7 @@ export const TrafficLimitInput = ({ defaultValue, onChange, value, ...rest }: IP
                 aria-label="Unit"
                 data={IEC_UNITS}
                 onChange={(event) => handleUnitChange(event.currentTarget.value as TIecUnit)}
-                size={rest.size}
+                size={rest.size ? rest.size : undefined}
                 styles={{ input: { fontWeight: 500 } }}
                 value={unit}
                 w={92}

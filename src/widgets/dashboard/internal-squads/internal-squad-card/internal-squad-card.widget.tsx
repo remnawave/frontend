@@ -2,7 +2,14 @@ import { Badge, CopyButton, Group, Menu, Tooltip } from '@mantine/core'
 import { GetInternalSquadsCommand } from '@remnawave/backend-contract'
 import { useTranslation } from 'react-i18next'
 import { PiCheck, PiCopy, PiPencil, PiTag, PiTrashDuotone, PiUsers } from 'react-icons/pi'
-import { TbCirclesRelation, TbServerCog, TbTag, TbUsersMinus, TbUsersPlus } from 'react-icons/tb'
+import {
+    TbChartArcs,
+    TbCirclesRelation,
+    TbServerCog,
+    TbTag,
+    TbUsersMinus,
+    TbUsersPlus
+} from 'react-icons/tb'
 
 import { showModal } from '@shared/_modals/show-modal'
 import { WithDndSortable } from '@shared/hocs/with-dnd-sortable'
@@ -115,6 +122,17 @@ export function InternalSquadCardWidget(props: IProps) {
                             }
                         >
                             {t('internal-squad-card.widget.available-nodes')}
+                        </Menu.Item>
+
+                        <Menu.Item
+                            leftSection={<TbChartArcs size={18} />}
+                            onClick={() =>
+                                showModal('internalSquads_internalSquadsUsageDrawer', {
+                                    squadUuid: internalSquad.uuid
+                                })
+                            }
+                        >
+                            {t('common.usage-stats')}
                         </Menu.Item>
 
                         <CopyButton timeout={2000} value={internalSquad.uuid}>

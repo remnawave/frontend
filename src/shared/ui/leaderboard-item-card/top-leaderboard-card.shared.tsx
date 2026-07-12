@@ -1,8 +1,17 @@
 import { Card, Center, ScrollArea, Skeleton, Stack, Text } from '@mantine/core'
 import { ReactNode } from 'react'
 import { PiEmpty } from 'react-icons/pi'
+import { Virtuoso } from 'react-virtuoso'
 
 import { LeaderboardItemCardShared } from './leaderboard-item-card.shared'
+
+const LoadingMoreFooter = () => (
+    <Stack gap={6}>
+        {Array.from({ length: 3 }, (_, i) => (
+            <Skeleton height={40} key={`more-${i}`} />
+        ))}
+    </Stack>
+)
 
 export interface ITopLeaderboardItem {
     color: string
@@ -15,13 +24,17 @@ export interface ITopLeaderboardItem {
 interface IProps<T extends ITopLeaderboardItem> {
     emptyText: string
     formatValue?: (value: number) => string
+    isFetchingMore?: boolean
     isLoading: boolean
     items: T[] | undefined
     maxHeight?: number
+    onEndReached?: () => void
     onItemClick?: (item: T) => void
     renderCountryFlag?: (item: T) => ReactNode
     skeletonCount?: number
     wrapper?: (children: ReactNode) => ReactNode
+    ordered?: boolean
+    virtualized?: boolean
 }
 
 export function TopLeaderboardCardShared<T extends ITopLeaderboardItem>(props: IProps<T>) {
@@ -34,12 +47,20 @@ export function TopLeaderboardCardShared<T extends ITopLeaderboardItem>(props: I
         maxHeight,
         skeletonCount = 5,
         formatValue,
-        wrapper
+        wrapper,
+        ordered = true,
+        onEndReached,
+        isFetchingMore,
+        virtualized = false
     } = props
 
     let maxTraffic = 1
     if (items && items.length > 0) {
-        maxTraffic = items[0].total
+        if (ordered) {
+            maxTraffic = items[0].total
+        } else {
+            maxTraffic = items.reduce((max, item) => Math.max(max, item.total), 1)
+        }
     }
 
     const content = (
@@ -73,7 +94,32 @@ export function TopLeaderboardCardShared<T extends ITopLeaderboardItem>(props: I
                     </Stack>
                 )}
 
-                {!isLoading && items && items.length > 0 && (
+                {!isLoading && items && items.length > 0 && virtualized && (
+                    <Virtuoso
+                        components={{ Footer: isFetchingMore ? LoadingMoreFooter : undefined }}
+                        computeItemKey={(_, item) => item.name}
+                        data={items}
+                        endReached={onEndReached}
+                        increaseViewportBy={200}
+                        itemContent={(_, item) => (
+                            <div style={{ paddingBottom: 6 }}>
+                                <LeaderboardItemCardShared
+                                    color={item.color}
+                                    countryFlag={renderCountryFlag?.(item)}
+                                    formatValue={formatValue}
+                                    name={item.name}
+                                    onItemClick={onItemClick ? () => onItemClick(item) : undefined}
+                                    total={item.total}
+                                    uuid={item.uuid}
+                                    value={maxTraffic}
+                                />
+                            </div>
+                        )}
+                        style={{ height: maxHeight ?? 400 }}
+                    />
+                )}
+
+                {!isLoading && items && items.length > 0 && !virtualized && (
                     <>
                         {maxHeight ? (
                             <ScrollArea.Autosize

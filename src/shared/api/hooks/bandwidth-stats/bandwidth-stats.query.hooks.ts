@@ -3,12 +3,18 @@ import {
     GetStatsNodesUsageCommand,
     GetStatsNodesUsersUsageCommand,
     GetStatsNodeUsersUsageCommand,
-    GetStatsUserUsageCommand
+    GetStatsUserUsageCommand,
+    GetInternalSquadUsageCommand
 } from '@remnawave/backend-contract'
 
 import { sToMs } from '@shared/utils/time-utils'
 
-import { createBodyQueryHook, createGetQueryHook, errorHandler } from '../../tsq-helpers'
+import {
+    createBodyQueryHook,
+    createGetInfiniteQueryHook,
+    createGetQueryHook,
+    errorHandler
+} from '../../tsq-helpers'
 
 export const bandwidthStatsQueryKeys = createQueryKeys('bandwidthStats', {
     getStatsNodesUsageCommand: (filters: GetStatsNodesUsageCommand.RequestQuery) => ({
@@ -28,6 +34,12 @@ export const bandwidthStatsQueryKeys = createQueryKeys('bandwidthStats', {
     getStatsNodesUsersUsageCommand: (
         params: GetStatsNodesUsersUsageCommand.RequestBody &
             GetStatsNodesUsersUsageCommand.RequestQuery
+    ) => ({
+        queryKey: [params]
+    }),
+    getInternalSquadUsageCommand: (
+        params: GetInternalSquadUsageCommand.RequestParam &
+            GetInternalSquadUsageCommand.RequestQuery
     ) => ({
         queryKey: [params]
     })
@@ -82,4 +94,36 @@ export const useGetStatsNodesUsersUsage = createBodyQueryHook({
         staleTime: sToMs(60)
     },
     errorHandler: (error) => errorHandler(error, 'Get Nodes Users Usage By Range')
+})
+
+export const useGetInternalSquadUsage = createGetQueryHook({
+    endpoint: GetInternalSquadUsageCommand.TSQ_url,
+    responseSchema: GetInternalSquadUsageCommand.ResponseSchema,
+    requestQuerySchema: GetInternalSquadUsageCommand.RequestQuerySchema,
+    routeParamsSchema: GetInternalSquadUsageCommand.RequestParamSchema,
+    getQueryKey: ({ route, query }) =>
+        bandwidthStatsQueryKeys.getInternalSquadUsageCommand({ ...route!, ...query! }).queryKey,
+    rQueryParams: {
+        staleTime: sToMs(60)
+    },
+    errorHandler: (error) => errorHandler(error, 'Get Internal Squad Users Usage By Range')
+})
+
+export const useGetInternalSquadUsageInfinite = createGetInfiniteQueryHook({
+    endpoint: GetInternalSquadUsageCommand.TSQ_url,
+    responseSchema: GetInternalSquadUsageCommand.ResponseSchema,
+    requestQuerySchema: GetInternalSquadUsageCommand.RequestQuerySchema,
+    routeParamsSchema: GetInternalSquadUsageCommand.RequestParamSchema,
+    getQueryKey: ({ route, query }) => [
+        ...bandwidthStatsQueryKeys.getInternalSquadUsageCommand({ ...route!, ...query! }).queryKey,
+        'infinite'
+    ],
+    pageParamKey: 'cursor',
+    initialPageParam: null,
+    getNextPageParam: (lastPage) => (lastPage.hasMore ? lastPage.nextCursor : null),
+    rQueryParams: {
+        staleTime: sToMs(60),
+        refetchOnMount: true
+    },
+    errorHandler: (error) => errorHandler(error, 'Get Internal Squad Usage (infinite)')
 })
