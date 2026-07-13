@@ -889,22 +889,22 @@
   },
   "internal-squads-usage-drawer": {
     "info": {
-      "title": "How usage is calculated",
-      "summary": "Returns internal squad members who spent at least the given threshold over the selected period, with the <b>total volume</b> for each of them.",
-      "nodes-title": "Which nodes are counted",
-      "nodes-intro": "A squad isn't tied to nodes directly – the link is derived through inbounds:",
-      "nodes-step-1": "All inbounds that belong to the internal squad are taken.",
-      "nodes-step-2": "For each inbound, the config profiles it belongs to are resolved.",
-      "nodes-step-3": "A node is counted when it has such a profile set as <b>active</b> and that inbound is enabled on the node itself.",
-      "nodes-outro": "So only the nodes a squad member can <hl>actually connect to right now</hl> are counted. If the squad has no inbound available on at least one node, the list is empty.",
-      "traffic-title": "How traffic is counted",
-      "traffic-granularity": "Stats are stored with <b>daily</b> granularity: one record = user + node + day. Node data is flushed to the database roughly <hl>every 2 minutes</hl>, so today's numbers are near real-time, lagging by up to a couple of minutes.",
-      "traffic-sum": "For each member, all of their daily per-node records are summed over the period from the start of <code>start</code> to the end of <code>end</code> (both dates inclusive, UTC).",
-      "traffic-threshold": "Only users whose total is <b>≥ minTotalBytes</b> make it into the response. Volume is returned in <hl>raw bytes</hl>, without rounding.",
-      "caveats-title": "What to keep in mind",
-      "caveats-per-node": "Traffic is counted <b>per whole node</b>, not per inbound. If a node is shared across squads (its active profile also serves other inbounds), the user's total includes all their traffic on that node – including what they poured through other squads' inbounds. It's an <hl>upper bound</hl>, not exact per-squad attribution.",
-      "caveats-membership": "Squad membership and the node set are taken <b>at request time</b>, not historically. A user who left the squad disappears from the response (even though they used traffic); a recently joined one shows all their traffic for the period, including days before joining. The same goes for a change of a node's active profile.",
-      "caveats-sorting": "The list is sorted by <b>user ID</b>, not by volume. Since traffic changes in real time, data may drift between pages – to hunt down abusers set a <code>minTotalBytes</code> threshold instead of reading everyone."
+      "title": "如何计算使用量",
+      "summary": "返回所选时间范围内，总流量达到或超过指定阈值的内部组成员，并列出每位成员的</b>总流量</b>",
+      "nodes-title": "哪些节点被计算",
+      "nodes-intro": "一个分组没有直接绑定到节点 — 链接是通过输入而产生的：",
+      "nodes-step-1": "已包含内部分组中的所有入站配置",
+      "nodes-step-2": "对于每个嵌入符，它所属的配置配置文件已被解析。",
+      "nodes-step-3": "仅当节点使用了该配置文件且其状态为</b>启用</b>，并且该节点上的对应入站（Inbound）也已启用时，该节点才会被计入统计",
+      "nodes-outro": "因此，仅统计小组成员<hl>当前实际能够连接</hl>的节点。如果该小组在任何节点上都没有可用的入站，则返回的列表为空。",
+      "traffic-title": "流量计算方式",
+      "traffic-granularity": "统计数据按<b>天</b>存储：一条记录 = 用户 + 节点 + 日期。节点数据大约每 <hl>2 分钟</hl> 刷新一次到数据库，因此当天的数据接近实时，最多可能延迟几分钟。",
+      "traffic-sum": "对于每位成员，会汇总其从 <code>start</code> 开始到 <code>end</code> 结束（包含这两个日期，UTC）的所有按天、按节点统计的记录。",
+      "traffic-threshold": "仅返回总流量 <b>≥ minTotalBytes</b> 的用户。流量以<hl>原始字节数（Raw Bytes）</hl>返回，不进行任何四舍五入。",
+      "caveats-title": "要牢记的内容",
+      "caveats-per-node": "流量按<b>整个节点</b>统计，而不是按入站 统计。如果某个节点被多个小组共享（即其活动配置文件同时服务于其他入站），则用户的总流量会包含其在该节点上的全部流量——包括通过其他小组 入站 产生的流量。因此，该统计值只是一个<hl>上限估计</hl>，而不是精确的小组流量归属。",
+      "caveats-membership": "小组成员关系和节点集合均以<b>请求发起时</b>的状态为准，而非历史状态。已退出小组的用户不会出现在返回结果中（即使其在统计期间产生过流量）；新加入小组的用户则会显示整个统计期间的全部流量，包括加入小组之前的流量。节点活动配置文件的变更也遵循相同规则。",
+      "caveats-sorting": "返回列表按<b>用户 ID</b> 排序，而不是按流量排序。由于流量数据会实时变化，分页之间的数据可能发生漂移。若需排查流量滥用者，建议设置 <code>minTotalBytes</code> 阈值，而不是遍历所有用户。"
     }
   },
   "get-hwid-user-devices": {
