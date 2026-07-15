@@ -68,7 +68,13 @@ const getOAuth2ProvidersConfig = () =>
             title: 'PocketID',
             icon: <PocketidLogo size={24} />,
             iconColor: '#000',
-            fields: ['clientId', 'clientSecret', 'plainDomain', 'allowedEmails'] as const
+            fields: [
+                'clientId',
+                'clientSecret',
+                'plainDomain',
+                'frontendDomain',
+                'allowedEmails'
+            ] as const
         },
         {
             key: 'yandex' as const,
