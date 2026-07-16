@@ -1,4 +1,5 @@
 import { GetActiveSessionsOnNodeFeature } from '@features/ui/dashboard/nodes/get-active-sesions-on-node'
+import { GetNodeInboundsHostsFeature } from '@features/ui/dashboard/nodes/get-node-inbounds-hosts'
 import { GetNodeLinkedHostsFeature } from '@features/ui/dashboard/nodes/get-node-linked-hosts'
 import { GetNodeUsersUsageFeature } from '@features/ui/dashboard/nodes/get-node-users-usage'
 import {
@@ -301,6 +302,7 @@ export const NodeDetailsCardWidget = memo((props: IProps) => {
 
                     <Group gap="xs" justify="center">
                         <GetNodeLinkedHostsFeature nodeUuid={node.uuid} />
+                        <GetNodeInboundsHostsFeature nodeUuid={node.uuid} />
                     </Group>
 
                     <Divider opacity={0.3} orientation="vertical" />

@@ -30,6 +30,7 @@ import {
     NodeActiveSessionsDrawer,
     NodesConfigProfilesDrawer,
     NodesUsageStatsModal,
+    NodeInboundsHostsDrawer,
     NodeUsageStatsDrawer
 } from './nodes'
 import { PasskeysDrawer } from './remnawave-settings'
@@ -80,6 +81,7 @@ export const MODAL_REGISTRY = {
     nodes_linkedHostsDrawer: LinkedHostsDrawer,
     nodes_nodeActiveSessionsDrawer: NodeActiveSessionsDrawer,
     nodes_nodesConfigProfilesDrawer: NodesConfigProfilesDrawer,
+    nodes_nodeInboundsHostsDrawer: NodeInboundsHostsDrawer,
 
     internalSquads_internalSquadsInboundsDrawer: InternalSquadsInboundsDrawer,
     internalSquads_internalSquadAccessibleNodesDrawer: InternalSquadAccessibleNodesDrawer,
