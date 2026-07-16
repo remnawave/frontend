@@ -18,6 +18,7 @@ import { useTranslation } from 'react-i18next'
 import { PiListChecks, PiTag } from 'react-icons/pi'
 import { TbChevronRight, TbLink, TbLock } from 'react-icons/tb'
 
+import { showModal } from '@shared/_modals/show-modal'
 import { CountryFlag } from '@shared/ui/get-country-flag'
 import { XrayLogo } from '@shared/ui/logos'
 import { SectionCard } from '@shared/ui/section-card'
@@ -29,7 +30,7 @@ type TopologyNode = GetNodesCommand.Response['response'][number]
 type NodeInboundsHostsTreeMeta =
     | { active: boolean; hostsCount: number; kind: 'inbound'; type: string }
     | { address: string; countryCode: string; kind: 'node' }
-    | { address: string; kind: 'host'; linked: boolean }
+    | { address: string; host: TopologyHost; kind: 'host'; linked: boolean }
     | { inboundsCount: number; kind: 'profile' }
 
 interface NodeInboundsHostsTreeNode extends TreeNodeData {
@@ -78,6 +79,7 @@ export function NodeInboundsHostsTree(props: IProps) {
                                     label: host.remark,
                                     nodeProps: {
                                         address: `${host.address}${host.port ? `:${host.port}` : ''}`,
+                                        host,
                                         kind: 'host' as const,
                                         linked: host.nodes.includes(node.uuid)
                                     },
@@ -135,6 +137,14 @@ export function NodeInboundsHostsTree(props: IProps) {
                 py={4}
                 wrap="nowrap"
                 {...elementProps}
+                onClick={
+                    meta?.kind === 'host'
+                        ? (event) => {
+                              event.stopPropagation()
+                              showModal('hosts_editHostDrawer', { host: meta.host })
+                          }
+                        : elementProps.onClick
+                }
                 style={{
                     ...elementProps.style,
                     opacity: isUnlinkedHost ? 0.5 : undefined
