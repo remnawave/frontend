@@ -16,12 +16,14 @@ import { useTranslation } from 'react-i18next'
 import { PiInfo, PiPlus, PiTrash } from 'react-icons/pi'
 import { TbDeviceFloppy, TbPrescription } from 'react-icons/tb'
 
+import { HelpActionIconShared } from '@shared/_modals/universal'
 import { queryClient } from '@shared/api'
 import { QueryKeys, useGetSubscriptionSettings, useUpdateExternalSquad } from '@shared/api/hooks'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { TemplateInfoPopoverShared } from '@shared/ui/popovers/template-info-popover/template-info-popover.shared'
 import { SectionCard } from '@shared/ui/section-card'
 import { TagInputPill } from '@shared/ui/tag-input-pill/tag-input-pill'
+import { sortResponseHeadersByPriority } from '@shared/utils/misc'
 
 interface HeaderItem {
     key: string
@@ -54,10 +56,12 @@ export const ExternalSquadsResponseHeadersTabWidget = (props: IProps) => {
 
     useEffect(() => {
         setAddHeaders(
-            Object.entries(externalSquad.responseHeadersAdd ?? {}).map(([key, value]) => ({
-                key,
-                value: String(value)
-            }))
+            sortResponseHeadersByPriority(
+                Object.entries(externalSquad.responseHeadersAdd ?? {}).map(([key, value]) => ({
+                    key,
+                    value: String(value)
+                }))
+            )
         )
         setRemoveKeys(externalSquad.responseHeadersRemove ?? [])
     }, [externalSquad])
@@ -180,19 +184,22 @@ export const ExternalSquadsResponseHeadersTabWidget = (props: IProps) => {
                         iconVariant="soft"
                         title={t('external-squads-response-headers.widget.response-headers')}
                     />
-                    <Button
-                        color="teal"
-                        leftSection={<TbDeviceFloppy size="1.2rem" />}
-                        loading={isUpdatingExternalSquad}
-                        onClick={handleUpdateExternalSquad}
-                        size="md"
-                        style={{
-                            transition: 'all 0.2s ease'
-                        }}
-                        variant="soft"
-                    >
-                        {t('common.save')}
-                    </Button>
+                    <Group>
+                        <HelpActionIconShared screen="PAGE_RESPONSE_HEADERS" />
+                        <Button
+                            color="teal"
+                            leftSection={<TbDeviceFloppy size="1.2rem" />}
+                            loading={isUpdatingExternalSquad}
+                            onClick={handleUpdateExternalSquad}
+                            size="md"
+                            style={{
+                                transition: 'all 0.2s ease'
+                            }}
+                            variant="soft"
+                        >
+                            {t('common.save')}
+                        </Button>
+                    </Group>
                 </Group>
             </SectionCard.Section>
             <SectionCard.Section>

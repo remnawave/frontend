@@ -25,8 +25,7 @@ export const SubscriptionAdditionalOptionsWidget = (props: IProps) => {
             uuid: subscriptionSettings.uuid,
             serveJsonAtBaseSubscription: subscriptionSettings.serveJsonAtBaseSubscription,
             randomizeHosts: subscriptionSettings.randomizeHosts,
-            isShowCustomRemarks: subscriptionSettings.isShowCustomRemarks,
-            isProfileWebpageUrlEnabled: subscriptionSettings.isProfileWebpageUrlEnabled
+            isShowCustomRemarks: subscriptionSettings.isShowCustomRemarks
         }
     })
 
@@ -51,8 +50,7 @@ export const SubscriptionAdditionalOptionsWidget = (props: IProps) => {
                 uuid: values.uuid,
                 serveJsonAtBaseSubscription: values.serveJsonAtBaseSubscription,
                 randomizeHosts: values.randomizeHosts,
-                isShowCustomRemarks: values.isShowCustomRemarks,
-                isProfileWebpageUrlEnabled: values.isProfileWebpageUrlEnabled
+                isShowCustomRemarks: values.isShowCustomRemarks
             }
         })
     })
@@ -90,18 +88,6 @@ export const SubscriptionAdditionalOptionsWidget = (props: IProps) => {
                             label={t('subscription-tabs.widget.randomize-hosts')}
                             size="sm"
                             {...form.getInputProps('randomizeHosts', {
-                                type: 'checkbox'
-                            })}
-                        />
-
-                        <Switch
-                            description={t(
-                                'subscription-settings.widget.profile-webpage-url-description'
-                            )}
-                            key={form.key('isProfileWebpageUrlEnabled')}
-                            label={t('subscription-settings.widget.profile-webpage-url')}
-                            size="sm"
-                            {...form.getInputProps('isProfileWebpageUrlEnabled', {
                                 type: 'checkbox'
                             })}
                         />

@@ -7,9 +7,7 @@ import { TbListLetters, TbPrescription } from 'react-icons/tb'
 import Masonry from 'react-layout-masonry'
 
 import { SubscriptionAdditionalOptionsWidget } from './cards/subscription-additional-options.widget'
-import { SubscriptionAnnounceRoutingCardWidget } from './cards/subscription-announce-routing-card.widget'
 import { SubscriptionHwidSettingsWidget } from './cards/subscription-hwid-settings.widget'
-import { SubscriptionInfoCardWidget } from './cards/subscription-info-card.widget'
 import { SubscriptionResponseHeadersCardWidget } from './cards/subscription-response-headers-card.widget'
 import { SubscriptionUserRemarksCardWidget } from './cards/subscription-user-remarks-card.widget'
 
@@ -44,7 +42,7 @@ export const SubscriptionSettingsTabsWidget = ({ subscriptionSettings }: Subscri
         >
             <Tabs.List>
                 <Tabs.Tab leftSection={<PiInfo size={px('1.2rem')} />} value={TABS.general}>
-                    {t('subscription-settings.widget.subscription-info')}
+                    {t('subscription-settings.widget.main-settings')}
                 </Tabs.Tab>
                 <Tabs.Tab leftSection={<TbListLetters size={px('1.2rem')} />} value={TABS.remarks}>
                     {t('subscription-settings.widget.custom-remarks')}
@@ -59,15 +57,10 @@ export const SubscriptionSettingsTabsWidget = ({ subscriptionSettings }: Subscri
 
             <Tabs.Panel pt="xl" value={TABS.general}>
                 <Masonry columns={{ 300: 1, 1400: 2, 2000: 3, 3000: 4 }} gap={16}>
-                    <SubscriptionInfoCardWidget subscriptionSettings={subscriptionSettings} />
-
                     <SubscriptionAdditionalOptionsWidget
                         subscriptionSettings={subscriptionSettings}
                     />
                     <SubscriptionHwidSettingsWidget subscriptionSettings={subscriptionSettings} />
-                    <SubscriptionAnnounceRoutingCardWidget
-                        subscriptionSettings={subscriptionSettings}
-                    />
                 </Masonry>
             </Tabs.Panel>
 

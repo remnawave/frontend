@@ -5,11 +5,12 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { PiChatsCircle, PiInfo, PiPlus, PiTrash } from 'react-icons/pi'
 
+import { HelpActionIconShared } from '@shared/_modals/universal/help-drawer/help-action-icon.shared'
 import { queryClient } from '@shared/api'
 import { QueryKeys, useUpdateSubscriptionSettings } from '@shared/api/hooks'
 import { TemplateInfoPopoverShared } from '@shared/ui/popovers/template-info-popover/template-info-popover.shared'
 import { SettingsCardShared } from '@shared/ui/settings-card'
-import { handleFormErrors } from '@shared/utils/misc'
+import { handleFormErrors, sortResponseHeadersByPriority } from '@shared/utils/misc'
 
 interface HeaderItem {
     key: string
@@ -40,10 +41,7 @@ export const SubscriptionResponseHeadersCardWidget = (props: IProps) => {
         mode: 'uncontrolled',
         validate: schemaResolver(UpdateSubscriptionSettingsCommand.RequestBodySchema),
         initialValues: {
-            uuid: subscriptionSettings.uuid,
-            profileTitle: subscriptionSettings.profileTitle,
-            supportLink: subscriptionSettings.supportLink,
-            profileUpdateInterval: subscriptionSettings.profileUpdateInterval
+            uuid: subscriptionSettings.uuid
         }
     })
 
@@ -116,7 +114,7 @@ export const SubscriptionResponseHeadersCardWidget = (props: IProps) => {
             const headerItems = Object.entries(subscriptionSettings.customResponseHeaders).map(
                 ([key, value]) => ({ key, value })
             )
-            setHeaders(headerItems)
+            setHeaders(sortResponseHeadersByPriority(headerItems))
         } else {
             setHeaders([])
         }
@@ -201,7 +199,7 @@ export const SubscriptionResponseHeadersCardWidget = (props: IProps) => {
                                         color="red"
                                         onClick={() => removeLocalHeader(index)}
                                         size="input-sm"
-                                        variant="light"
+                                        variant="soft"
                                     >
                                         <PiTrash size="16px" />
                                     </ActionIcon>
@@ -242,15 +240,23 @@ export const SubscriptionResponseHeadersCardWidget = (props: IProps) => {
 
                 <SettingsCardShared.Bottom>
                     <Group justify="flex-end">
+                        <HelpActionIconShared screen="PAGE_RESPONSE_HEADERS" />
+
                         <Button
                             leftSection={<PiPlus size="16px" />}
                             onClick={addLocalHeader}
                             size="md"
-                            variant="light"
+                            variant="soft"
                         >
                             {t('headers-manager.widget.add-header')}
                         </Button>
-                        <Button color="teal" loading={isPending} size="md" type="submit">
+                        <Button
+                            color="teal"
+                            loading={isPending}
+                            size="md"
+                            type="submit"
+                            variant="soft"
+                        >
                             {t('common.save')}
                         </Button>
                     </Group>

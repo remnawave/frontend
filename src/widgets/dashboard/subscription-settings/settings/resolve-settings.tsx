@@ -1,8 +1,7 @@
-import { ActionIcon, HoverCard, px, Stack, Text } from '@mantine/core'
+import { ActionIcon, HoverCard, Stack, Text } from '@mantine/core'
 import { ExternalSquadSubscriptionSettingsSchema } from '@remnawave/backend-contract'
 import { TFunction } from 'i18next'
 import { HiQuestionMarkCircle } from 'react-icons/hi'
-import { PiClock, PiIdentificationBadge, PiLink } from 'react-icons/pi'
 
 const hoverCard = (text: string) => {
     return (
@@ -37,55 +36,10 @@ export function resolveSubscriptionSetting(
     rightSection?: React.ReactNode
 } {
     switch (field) {
-        case 'happAnnounce':
-            return {
-                description: t('subscription-settings.widget.happ-announce-description'),
-                label: t('subscription-settings.widget.happ-announce'),
-                inputType: 'textarea',
-                hoverCard: hoverCard(t('subscription-settings.widget.happ-announce-description'))
-            }
-        case 'happRouting':
-            return {
-                description: t('subscription-settings.widget.happ-routing-description'),
-                label: t('subscription-settings.widget.happ-routing'),
-                inputType: 'textarea',
-                hoverCard: hoverCard(t('subscription-settings.widget.happ-routing-description'))
-            }
-        case 'isProfileWebpageUrlEnabled':
-            return {
-                description: t('subscription-settings.widget.profile-webpage-url-description'),
-                label: t('subscription-settings.widget.profile-webpage-url'),
-                inputType: 'boolean',
-                hoverCard: hoverCard(
-                    t('subscription-settings.widget.profile-webpage-url-description')
-                )
-            }
         case 'isShowCustomRemarks':
             return {
                 label: t('subscription-tabs.widget.show-custom-remarks'),
                 inputType: 'boolean'
-            }
-        case 'profileTitle':
-            return {
-                description: t(
-                    'subscription-settings.widget.this-title-will-be-displayed-as-subscription-name'
-                ),
-                label: t('subscription-settings.widget.profile-title'),
-                leftSection: <PiIdentificationBadge size={px('1.2rem')} />,
-                inputType: 'string',
-                hoverCard: hoverCard(
-                    t(
-                        'subscription-settings.widget.this-title-will-be-displayed-as-subscription-name'
-                    )
-                )
-            }
-        case 'profileUpdateInterval':
-            return {
-                description: t('subscription-settings.widget.auto-update-description'),
-                label: t('subscription-settings.widget.auto-update-interval-hours'),
-                inputType: 'number',
-                hoverCard: hoverCard(t('subscription-settings.widget.auto-update-description')),
-                leftSection: <PiClock size={px('1.2rem')} />
             }
         case 'randomizeHosts':
             return {
@@ -100,14 +54,6 @@ export function resolveSubscriptionSetting(
                 label: t('subscription-settings.widget.serve-json-at-base-subscription'),
                 inputType: 'boolean',
                 hoverCard: hoverCard(t('subscription-settings.widget.serve-json-description'))
-            }
-        case 'supportLink':
-            return {
-                description: t('subscription-settings.widget.support-link-description'),
-                label: t('subscription-settings.widget.support-link'),
-                inputType: 'string',
-                hoverCard: hoverCard(t('subscription-settings.widget.support-link-description')),
-                leftSection: <PiLink size={px('1.2rem')} />
             }
 
         default:
