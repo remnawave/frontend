@@ -1,4 +1,5 @@
 import {
+    ActionIcon,
     Affix,
     Badge,
     Button,
@@ -12,7 +13,15 @@ import {
 import { modals } from '@mantine/modals'
 import { GetNodesCommand } from '@remnawave/backend-contract'
 import { useTranslation } from 'react-i18next'
-import { TbCategoryPlus, TbChartArcs, TbDots } from 'react-icons/tb'
+import {
+    TbArrowBarToDown,
+    TbArrowBarToUp,
+    TbArrowBigDown,
+    TbArrowBigUp,
+    TbCategoryPlus,
+    TbChartArcs,
+    TbDots
+} from 'react-icons/tb'
 
 import { showModal } from '@shared/_modals/show-modal'
 import { queryClient } from '@shared/api'
@@ -24,12 +33,13 @@ import { BulkUpdateNodesModalContent } from './bulk-update-nodes.modal.content'
 import { MultiSelectNodesModalContent } from './multi-select-modal.content'
 
 interface IProps {
+    moveSelected: (mode: 'bottom' | 'down' | 'top' | 'up') => void
     selectedRecords: GetNodesCommand.Response['response'][number][]
     setSelectedRecords: (records: GetNodesCommand.Response['response'][number][]) => void
 }
 
 export const MultiSelectNodesFeature = (props: IProps) => {
-    const { selectedRecords, setSelectedRecords } = props
+    const { moveSelected, selectedRecords, setSelectedRecords } = props
     const { t } = useTranslation()
 
     const hasSelection = selectedRecords.length > 0
@@ -92,6 +102,56 @@ export const MultiSelectNodesFeature = (props: IProps) => {
                                         </Tooltip>
                                     </Group>
                                 </Group>
+
+                                <ActionIcon.Group style={{ width: '100%' }}>
+                                    <Tooltip label="Move to top" withArrow>
+                                        <ActionIcon
+                                            color="gray"
+                                            onClick={() => moveSelected('top')}
+                                            size="lg"
+                                            style={{ flex: 1 }}
+                                            variant="soft"
+                                        >
+                                            <TbArrowBarToUp size={20} />
+                                        </ActionIcon>
+                                    </Tooltip>
+
+                                    <Tooltip label="Move up" withArrow>
+                                        <ActionIcon
+                                            color="gray"
+                                            onClick={() => moveSelected('up')}
+                                            size="lg"
+                                            style={{ flex: 1 }}
+                                            variant="soft"
+                                        >
+                                            <TbArrowBigUp size={20} />
+                                        </ActionIcon>
+                                    </Tooltip>
+
+                                    <Tooltip label="Move down" withArrow>
+                                        <ActionIcon
+                                            color="gray"
+                                            onClick={() => moveSelected('down')}
+                                            size="lg"
+                                            style={{ flex: 1 }}
+                                            variant="soft"
+                                        >
+                                            <TbArrowBigDown size={20} />
+                                        </ActionIcon>
+                                    </Tooltip>
+
+                                    <Tooltip label="Move to bottom" withArrow>
+                                        <ActionIcon
+                                            color="gray"
+                                            onClick={() => moveSelected('bottom')}
+                                            size="lg"
+                                            style={{ flex: 1 }}
+                                            variant="soft"
+                                        >
+                                            <TbArrowBarToDown size={20} />
+                                        </ActionIcon>
+                                    </Tooltip>
+                                </ActionIcon.Group>
 
                                 <Button
                                     color="cyan"
