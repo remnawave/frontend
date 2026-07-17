@@ -1736,7 +1736,13 @@
   },
   "external-squads-response-headers": {
     "widget": {
-      "response-headers": "Headers"
+      "response-headers": "Headers",
+      "headers-inherited-description": "By default, response headers are inherited from the main subscription settings.",
+      "add-headers": "Add headers",
+      "add-headers-description": "Headers listed here are added to the inherited ones. If a header with the same key already exists in the main settings, it will be overridden.",
+      "remove-headers": "Remove headers",
+      "remove-headers-description": "Header keys listed here will be removed from the response, even if they are provided by the main settings.",
+      "enter-header-key": "Enter header key"
     }
   },
   "subscription-hwid-settings": {

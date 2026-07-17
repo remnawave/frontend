@@ -85,7 +85,10 @@ export const SubscriptionResponseHeadersCardWidget = (props: IProps) => {
                 form.setFieldError('customResponseHeaders', `Invalid header name: ${header.key}`)
                 return
             }
-            if (!HEADER_VALUE_REGEX.test(header.value)) {
+            if (
+                !header.value.startsWith('rwEncodeBase64:') &&
+                !HEADER_VALUE_REGEX.test(header.value)
+            ) {
                 form.setFieldError('customResponseHeaders', `Invalid header value: ${header.value}`)
                 return
             }
