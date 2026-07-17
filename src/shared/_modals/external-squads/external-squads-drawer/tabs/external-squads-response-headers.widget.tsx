@@ -8,6 +8,7 @@ import {
     Stack,
     TagsInput,
     Text,
+    Textarea,
     TextInput
 } from '@mantine/core'
 import { GetExternalSquadByUuidCommand } from '@remnawave/backend-contract'
@@ -107,6 +108,11 @@ export const ExternalSquadsResponseHeadersTabWidget = (props: IProps) => {
         for (const header of uniqueHeaders) {
             if (!HEADER_NAME_REGEX.test(header.key)) {
                 setError(`Invalid header name: ${header.key}`)
+                return
+            }
+
+            if (header.value.includes('\n') && !header.value.startsWith('rwEncodeBase64:')) {
+                setError(`Multiline value of "${header.key}" requires the rwEncodeBase64: prefix`)
                 return
             }
 
@@ -226,8 +232,11 @@ export const ExternalSquadsResponseHeadersTabWidget = (props: IProps) => {
                                     style={{ flex: '0 0 35%' }}
                                     value={header.key}
                                 />
-                                <TextInput
+                                <Textarea
+                                    autosize
                                     leftSection={<TemplateInfoPopoverShared />}
+                                    maxRows={6}
+                                    minRows={1}
                                     onChange={(e) => updateLocalHeaderValue(index, e.target.value)}
                                     placeholder={t('headers-manager.widget.value')}
                                     style={{ flex: '1' }}

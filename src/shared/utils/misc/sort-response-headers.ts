@@ -13,5 +13,9 @@ export function sortResponseHeadersByPriority<T extends { key: string }>(headers
         return index === -1 ? Number.MAX_SAFE_INTEGER : index
     }
 
-    return [...headers].sort((a, b) => priorityIndex(a.key) - priorityIndex(b.key))
+    return [...headers].sort((a, b) => {
+        const diff = priorityIndex(a.key) - priorityIndex(b.key)
+        if (diff !== 0) return diff
+        return a.key.localeCompare(b.key)
+    })
 }

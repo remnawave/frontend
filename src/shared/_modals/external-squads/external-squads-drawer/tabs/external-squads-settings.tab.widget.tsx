@@ -21,7 +21,7 @@ export const ExternalSquadsSettingsTabWidget = (props: IProps) => {
     return (
         <ExternalSquadOverridesTab<SubscriptionSettingsOverride>
             config={{
-                title: t('subscription-settings.widget.subscription-info'),
+                title: t('subscription-settings.widget.main-settings'),
                 description: t(
                     'external-squads-settings.tab.widget.override-subscription-settings-for-this-external-squad'
                 ),

@@ -1,4 +1,4 @@
-import { ActionIcon, Alert, Button, Card, Group, Stack, TextInput } from '@mantine/core'
+import { ActionIcon, Alert, Button, Card, Group, Stack, Textarea, TextInput } from '@mantine/core'
 import { useForm, schemaResolver } from '@mantine/form'
 import { UpdateSubscriptionSettingsCommand } from '@remnawave/backend-contract'
 import { useCallback, useEffect, useRef, useState } from 'react'
@@ -81,6 +81,13 @@ export const SubscriptionResponseHeadersCardWidget = (props: IProps) => {
         for (const header of uniqueHeaders) {
             if (!HEADER_NAME_REGEX.test(header.key)) {
                 form.setFieldError('customResponseHeaders', `Invalid header name: ${header.key}`)
+                return
+            }
+            if (header.value.includes('\n') && !header.value.startsWith('rwEncodeBase64:')) {
+                form.setFieldError(
+                    'customResponseHeaders',
+                    `Multiline value of "${header.key}" requires the rwEncodeBase64: prefix`
+                )
                 return
             }
             if (
@@ -211,8 +218,11 @@ export const SubscriptionResponseHeadersCardWidget = (props: IProps) => {
                                         style={{ flex: '0 0 35%' }}
                                         value={header.key}
                                     />
-                                    <TextInput
+                                    <Textarea
+                                        autosize
                                         leftSection={<TemplateInfoPopoverShared />}
+                                        maxRows={6}
+                                        minRows={1}
                                         onChange={(e) =>
                                             updateLocalHeaderValue(index, e.target.value)
                                         }
