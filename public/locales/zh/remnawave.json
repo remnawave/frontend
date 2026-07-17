@@ -2254,14 +2254,14 @@
   },
   "get-node-inbounds-hosts": {
     "feature": {
-      "inbounds-and-hosts": "Inbounds & hosts"
+      "inbounds-and-hosts": "入站 & 主机"
     }
   },
   "node-inbounds-hosts-drawer": {
     "widget": {
-      "inbounds-and-hosts": "Inbounds & hosts",
-      "no-active-config-profile": "This node has no active config profile",
-      "linked": "Linked"
+      "inbounds-and-hosts": "入站 & 主机",
+      "no-active-config-profile": "此节点没有激活的配置文件",
+      "linked": "已关联"
     }
   }
 }
