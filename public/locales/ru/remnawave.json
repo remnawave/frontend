@@ -593,36 +593,16 @@
   "subscription-settings": {
     "widget": {
       "validation-error": "Ошибка валидации",
+      "main-settings": "Main settings",
       "you-must-add-at-least-one-remark-with-text": "Вы должны добавить хотя бы одно примечание с текстом",
-      "subscription-info": "Информация о подписке",
-      "this-title-will-be-displayed-as-subscription-name": "Этот заголовок будет отображаться как имя подписки.",
-      "profile-title": "Заголовок профиля",
-      "enter-profile-title": "Введите заголовок профиля",
-      "auto-update-description": "Некоторые клиенты могут использовать этот интервал для автоматического обновления подписки.",
-      "auto-update-interval-hours": "Интервал авто-обновления (часы)",
-      "support-link-description": "Некоторые клиенты могут отображать эту ссылку в странице подписки, которая должна вести на страницу поддержки.",
-      "support-link": "Ссылка на поддержку",
-      "happ-settings": "Настройки Happ",
-      "happ-announce-description": "Введите Happ Announce, максимум 200 символов. Будет отображаться в странице подписки.",
-      "happ-announce": "Happ Announce",
-      "enter-happ-announce-max-200-characters": "Введите Happ Announce, максимум 200 символов",
-      "happ-routing-description": "Happ routing — это функция, которая позволяет настроить маршрутизацию.",
-      "happ-routing-description-line-2": "Маршрутизация должна быть настроена через Happ Routing Builder. Используйте кнопку ниже для настройки маршрутизации.",
-      "configure-happ-routing": "Настроить Happ Routing",
-      "happ-routing": "Happ routing",
       "user-status-remarks-description": "Эти значения будут отображаться в странице подписки, если пользователь просрочен, ограничен или отключен.",
       "user-status-remarks-description-line-2": "Вы можете добавить несколько примечаний для каждого статуса.",
       "user-status-remarks-description-line-3": "Поскольку просроченные, ограниченные и отключенные пользователи не могут подключиться к серверу, они увидят эти примечания вместо пустой подписки.",
       "update-settings": "Обновить настройки",
       "enabled": "Включено",
       "disabled": "Выключено",
-      "profile-webpage-url": "URL страницы профиля",
-      "profile-webpage-url-description": "Используется некоторыми клиентами. \nВключено по умолчанию, домен резволится из SUB_PUBLIC_DOMAIN .env переменной.",
       "serve-json-at-base-subscription": "Использовать JSON в базовой подписке",
       "serve-json-description": "Это позволит вам сервить JSON подписку в базовом пути подписки. Если запрошенный клиент поддерживает его, он будет сервиться как JSON, в противном случае он будет сервиться как обычно.",
-      "subscription-info-description": "Эти настройки поддерживаются многими клиентами, такими как Happ, V2RayNG, Streisand и т.д.",
-      "happ-description-line-1": "Здесь вы можете сконфигурировать настройки Happ для подписки.",
-      "happ-description-line-2": "Эти настройки будут использоваться только в том случае, если подписка используется в Happ.",
       "custom-remarks": "Кастомные примечания"
     },
     "page": {
@@ -1736,7 +1716,13 @@
   },
   "external-squads-response-headers": {
     "widget": {
-      "response-headers": "Хэдеры"
+      "response-headers": "Хэдеры",
+      "headers-inherited-description": "By default, response headers are inherited from the main subscription settings.",
+      "add-headers": "Add headers",
+      "add-headers-description": "Headers listed here are added to the inherited ones. If a header with the same key already exists in the main settings, it will be overridden.",
+      "remove-headers": "Remove headers",
+      "remove-headers-description": "Header keys listed here will be removed from the response, even if they are provided by the main settings.",
+      "enter-header-key": "Enter header key"
     }
   },
   "subscription-hwid-settings": {
