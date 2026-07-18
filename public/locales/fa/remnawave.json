@@ -593,36 +593,16 @@
   "subscription-settings": {
     "widget": {
       "validation-error": "خطای اعتبارسنجی",
+      "main-settings": "Main settings",
       "you-must-add-at-least-one-remark-with-text": "باید حداقل یک ریمارک وارد نمایید",
-      "subscription-info": "مشخصات اشتراک",
-      "this-title-will-be-displayed-as-subscription-name": "عنوان لینک اشتراک در نرم‌افزار",
-      "profile-title": "عنوان پروفایل",
-      "enter-profile-title": "عنوان پروفایل را وارد نمایید",
-      "auto-update-description": "بعضی نرم‌افزارها براساس این بازه زمانی لینک را به صورت خودکار به‌روزرسانی خواهند کرد",
-      "auto-update-interval-hours": "بازه آپدیت خودکار لینک اشتراک (ساعت)",
-      "support-link-description": "لینک صفحه پشتیبانی که بعضی از نرم‌افزارها آن را در مشخصات اشتراک نشان می‌دهند",
-      "support-link": "لینک پشتیبانی",
-      "happ-settings": "تنظیمات Happ",
-      "happ-announce-description": "اعلامیه Happ که زیر عنوان اشتراک نشان داده می‌شود. حداکثر 200 کاراکتر.",
-      "happ-announce": "اعلامیه Happ",
-      "enter-happ-announce-max-200-characters": "اعلامیه Happ را وارد نمایید. حداکثر 200 کاراکتر.",
-      "happ-routing-description": "به کمک این ویژگی می‌توانید قوانین مسیریابی هسته را در لینک اشتراک مشخص کنید",
-      "happ-routing-description-line-2": "برای ایجاد لینک مسیریابی می‌توانید از بخش مربوطه در پنل استفاده کنید",
-      "configure-happ-routing": "ساخت لینک مسیریابی Happ",
-      "happ-routing": "مسیریابی Happ",
       "user-status-remarks-description": "درصورتی که کاربر منقضی، محدود یا غیرفعال شده باشد مقادیر زیر در اشتراک او نمایش داده خواهند شد",
       "user-status-remarks-description-line-2": "می‌توانید برای هر وضعیت چند ریمارک ایجاد کنید",
       "user-status-remarks-description-line-3": "چون کاربرهای منقضی، محدود یا غیرفعال توانایی اتصال به سرورها را ندارند، به جای دریافت لینک خالی این مقادیر را در نرم‌افزار خواهند دید",
       "update-settings": "به‌روزرسانی تنظیمات",
       "enabled": "فعال",
       "disabled": "غیرفعال",
-      "profile-webpage-url": "URL صفحه وب مشخصات",
-      "profile-webpage-url-description": "توسط برخی از نرم‌افزارها استفاده می‌شود. \nبه طور پیش فرض فعال شده ، دامنه از متغیر SUB_PUBLIC_DOMAIN .env دریافت می‌شود",
       "serve-json-at-base-subscription": "ارائه JSON در لینک پایه پیشفرض",
       "serve-json-description": "درصورت پشتیبانی نرم‌افزار، بدون نیاز به قرار دادن /json در انتهای لینک، اشتراک JSON برای آن ارسال خواهد شد",
-      "subscription-info-description": "این تنظیمات توسط نرم‌افزارهایی مثل Happ, v2RayNG, Streisand و..و استفاده می‌شود",
-      "happ-description-line-1": "در این قسمت می‌توانید تنظیمات مربوط به نرم‌افزار Happ را برای لینک‌های اشتراک مشخص کنید.",
-      "happ-description-line-2": "این تنظیمات فقط در نرم‌افزار Happ استفاده خواهد شد",
       "custom-remarks": "ریمارک‌های سفارشی"
     },
     "page": {
@@ -1736,7 +1716,13 @@
   },
   "external-squads-response-headers": {
     "widget": {
-      "response-headers": "هدرها"
+      "response-headers": "هدرها",
+      "headers-inherited-description": "By default, response headers are inherited from the main subscription settings.",
+      "add-headers": "Add headers",
+      "add-headers-description": "Headers listed here are added to the inherited ones. If a header with the same key already exists in the main settings, it will be overridden.",
+      "remove-headers": "Remove headers",
+      "remove-headers-description": "Header keys listed here will be removed from the response, even if they are provided by the main settings.",
+      "enter-header-key": "Enter header key"
     }
   },
   "subscription-hwid-settings": {

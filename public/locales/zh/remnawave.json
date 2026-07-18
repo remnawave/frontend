@@ -593,36 +593,16 @@
   "subscription-settings": {
     "widget": {
       "validation-error": "验证错误",
+      "main-settings": "Main settings",
       "you-must-add-at-least-one-remark-with-text": "您必须至少添加一个带有文本的备注",
-      "subscription-info": "订阅信息",
-      "this-title-will-be-displayed-as-subscription-name": "此标题将显示为订阅名称。",
-      "profile-title": "配置标题",
-      "enter-profile-title": "输入配置标题",
-      "auto-update-description": "某些客户端应用遵循此间隔自动更新订阅。",
-      "auto-update-interval-hours": "自动更新间隔（小时）",
-      "support-link-description": "某些客户端会在订阅信息中显示此链接。该链接应将用户引导至支持页面。",
-      "support-link": "支持链接",
-      "happ-settings": "Happ 设置",
-      "happ-announce-description": "最多 200 个字符。将在 Happ 中的订阅名称下显示。",
-      "happ-announce": "Happ 公告",
-      "enter-happ-announce-max-200-characters": "输入 Happ 公告，最多 200 个字符",
-      "happ-routing-description": "Happ 路由是一项功能，允许您通过订阅链接配置 Xray-Core 将使用的路由规则。",
-      "happ-routing-description-line-2": "可以通过 Remnawave 的 Happ 路由编辑器获取 Happ 的路由链接。下面的按钮将重定向到上述页面。",
-      "configure-happ-routing": "Happ 路由编辑器",
-      "happ-routing": "Happ 路由",
       "user-status-remarks-description": "如果用户已过期、受限或禁用，以下值将显示在订阅页面中。",
       "user-status-remarks-description-line-2": "您可以为每种状态添加多个备注。",
       "user-status-remarks-description-line-3": "因为过期、受限和禁用的用户无法连接到服务器，他们将在客户端中看到这些备注，而不是收到空的订阅。",
       "update-settings": "更新设置",
       "enabled": "已启用",
       "disabled": "已禁用",
-      "profile-webpage-url": "配置网页 URL",
-      "profile-webpage-url-description": "某些客户端使用。默认启用，域名来自 SUB_PUBLIC_DOMAIN .env 变量。",
       "serve-json-at-base-subscription": "在基础订阅提供 JSON",
       "serve-json-description": "在基础订阅路径（无需附加 /json）提供 JSON 配置。如果客户端支持，将提供 JSON，否则将照常提供。",
-      "subscription-info-description": "订阅链接受许多客户端应用支持，例如 Happ, v2RayNG, Streisand 等。",
-      "happ-description-line-1": "您可以在此处配置仅适用于 Happ 的设置。",
-      "happ-description-line-2": "这些设置仅适用于在 Happ 中导入的订阅链接。",
       "custom-remarks": "自定义备注"
     },
     "page": {
@@ -1736,7 +1716,13 @@
   },
   "external-squads-response-headers": {
     "widget": {
-      "response-headers": "请求头"
+      "response-headers": "请求头",
+      "headers-inherited-description": "默认情况下，headers 是从主要订阅设置继承的。",
+      "add-headers": "添加 headers",
+      "add-headers-description": "此处列出的 header 被添加到继承的标题中。 如果在主设定中已经存在具有相同键的标题，它将被覆盖。",
+      "remove-headers": "删除 header",
+      "remove-headers-description": "此处列出的header 值 将从响应中删除，即使它们是由主要设置提供的。",
+      "enter-header-key": "输入 header 值"
     }
   },
   "subscription-hwid-settings": {
