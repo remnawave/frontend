@@ -593,7 +593,7 @@
   "subscription-settings": {
     "widget": {
       "validation-error": "Ошибка валидации",
-      "main-settings": "Main settings",
+      "main-settings": "Основные настройки",
       "you-must-add-at-least-one-remark-with-text": "Вы должны добавить хотя бы одно примечание с текстом",
       "user-status-remarks-description": "Эти значения будут отображаться в странице подписки, если пользователь просрочен, ограничен или отключен.",
       "user-status-remarks-description-line-2": "Вы можете добавить несколько примечаний для каждого статуса.",
@@ -1717,12 +1717,12 @@
   "external-squads-response-headers": {
     "widget": {
       "response-headers": "Хэдеры",
-      "headers-inherited-description": "By default, response headers are inherited from the main subscription settings.",
-      "add-headers": "Add headers",
-      "add-headers-description": "Headers listed here are added to the inherited ones. If a header with the same key already exists in the main settings, it will be overridden.",
-      "remove-headers": "Remove headers",
-      "remove-headers-description": "Header keys listed here will be removed from the response, even if they are provided by the main settings.",
-      "enter-header-key": "Enter header key"
+      "headers-inherited-description": "По умолчанию хэдеры ответов унаследованы от основных настроек подписки.",
+      "add-headers": "Добавить хэдер",
+      "add-headers-description": "Хэдеры, перечисленные здесь, добавляются к унаследованным хэдерам. Если хэдер с таким ключом уже существует в основных настройках, он будет переопределен.",
+      "remove-headers": "Удалить хедер",
+      "remove-headers-description": "Хэдеры перечисленные здесь, будут удалены из ответа, даже если они предоставлены основными настройками.",
+      "enter-header-key": "Введите хэдер"
     }
   },
   "subscription-hwid-settings": {
@@ -2240,14 +2240,14 @@
   },
   "get-node-inbounds-hosts": {
     "feature": {
-      "inbounds-and-hosts": "Inbounds & hosts"
+      "inbounds-and-hosts": "Инбаунды и хосты"
     }
   },
   "node-inbounds-hosts-drawer": {
     "widget": {
-      "inbounds-and-hosts": "Inbounds & hosts",
-      "no-active-config-profile": "This node has no active config profile",
-      "linked": "Linked"
+      "inbounds-and-hosts": "Инбаунды и хосты",
+      "no-active-config-profile": "Эта нода не имеет активного профиля конфигурации",
+      "linked": "Связанный"
     }
   }
 }
