@@ -222,6 +222,24 @@ export const configureMonaco = (
                             }
                         },
                         additionalProperties: false
+                    },
+                    outbounds: {
+                        type: 'array',
+                        items: {
+                            type: 'object',
+                            properties: {
+                                remnawave: {
+                                    type: 'object',
+                                    properties: {
+                                        includeProxies: {
+                                            type: 'boolean',
+                                            markdownDescription: `When \`false\`, Remnawave will not inject proxy tags into this \`selector\`/\`urltest\` outbound — its \`outbounds\` list is kept as written. ${DOCS_LINK}`
+                                        }
+                                    },
+                                    additionalProperties: false
+                                }
+                            }
+                        }
                     }
                 }
             }
