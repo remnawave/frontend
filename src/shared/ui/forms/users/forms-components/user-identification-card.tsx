@@ -48,7 +48,7 @@ import { formatRelativeDateUtil, formatTimeUtil, getTimeAgoUtil } from '@shared/
 
 interface IProps {
     cardVariants: Variants
-    lastConnectedNode?: null | { countryCode: string; name: string }
+    lastConnectedNode?: null | { countryCode: string; name: string; uuid: string }
     motionWrapper: ForwardRefComponent<HTMLDivElement, HTMLMotionProps<'div'>>
     user: GetUserByIdCommand.Response['response']
 }
@@ -472,6 +472,12 @@ export const UserIdentificationCard = memo((props: IProps) => {
                                 bg="rgba(6, 182, 212, 0.08)"
                                 p="xs"
                                 radius="md"
+                                onClick={() => {
+                                    showModal('nodes_editNodeModal', {
+                                        nodeUuid: lastConnectedNode.uuid
+                                    })
+                                }}
+                                style={{ cursor: 'pointer' }}
                             >
                                 <Tooltip
                                     label={t(
