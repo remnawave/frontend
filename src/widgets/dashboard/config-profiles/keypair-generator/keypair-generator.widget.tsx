@@ -74,7 +74,7 @@ export const KeypairGeneratorWidget = () => {
                                         value={keyPair.password}
                                     />
                                     <CopyableFieldShared
-                                        label="Prvate Key"
+                                        label="Private Key"
                                         value={keyPair.privateKey}
                                     />
                                 </Stack>
