@@ -1427,7 +1427,9 @@
     "request-ip": "IP درخواست کننده",
     "user-agent": "عامل کاربر",
     "request-at": "درخواست شده در",
-    "user-uuid": "UUID کاربر"
+    "user-uuid": "UUID کاربر",
+    "response-type": "Response Type",
+    "rule-name": "Rule Name"
   },
   "srh-inspector-table": {
     "widget": {

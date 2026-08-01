@@ -1427,7 +1427,9 @@
     "request-ip": "请求IP地址",
     "user-agent": "User Agent",
     "request-at": "请求时间",
-    "user-uuid": "用户 UUID"
+    "user-uuid": "用户 UUID",
+    "response-type": "Response Type",
+    "rule-name": "Rule Name"
   },
   "srh-inspector-table": {
     "widget": {
