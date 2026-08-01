@@ -4,7 +4,6 @@ import { HiChartPie, HiServer } from 'react-icons/hi'
 import { PiArrowsInCardinalFill, PiChartLine, PiListChecks, PiUsers } from 'react-icons/pi'
 import {
     TbApi,
-    TbChartArcs,
     TbCirclesRelation,
     TbCreditCard,
     TbDeviceAnalytics,
@@ -102,13 +101,6 @@ export const useDesktopMenuSections = (): MenuItem[] => {
                     href: ROUTES.DASHBOARD.MANAGEMENT.NODES_METRICS,
                     icon: PiChartLine,
                     id: 'nodes-metrics'
-                },
-
-                {
-                    name: t('constants.nodes-bandwidth-table'),
-                    href: ROUTES.DASHBOARD.MANAGEMENT.NODES_BANDWIDTH_TABLE,
-                    icon: TbChartArcs,
-                    id: 'nodes-bandwidth-table'
                 }
             ]
         },

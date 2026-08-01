@@ -11,7 +11,6 @@ import {
 } from 'react-icons/pi'
 import {
     TbApi,
-    TbChartArcs,
     TbCirclesRelation,
     TbCreditCard,
     TbDeviceAnalytics,
@@ -111,12 +110,6 @@ export const useMobileMenuSections = (): MenuItem[] => {
                             href: ROUTES.DASHBOARD.CRM.INFRA_BILLING,
                             icon: TbCreditCard,
                             id: 'infra-billing'
-                        },
-                        {
-                            name: t('constants.nodes-bandwidth-table'),
-                            href: ROUTES.DASHBOARD.MANAGEMENT.NODES_BANDWIDTH_TABLE,
-                            icon: TbChartArcs,
-                            id: 'nodes-bandwidth-table'
                         },
                         {
                             name: t('constants.nodes-metrics'),

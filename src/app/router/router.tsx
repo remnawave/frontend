@@ -11,7 +11,6 @@ import { HwidInspectorPageConnector } from '@pages/dashboard/hwid-inspector/ui/c
 import { InternalSquadsPageConnector } from '@pages/dashboard/internal-squads/connectors/internal-squads.page.connector'
 import { NodePluginEditorPageConnector } from '@pages/dashboard/node-plugins/ui/connectors/node-plugin-editor-page.connector'
 import { NodePluginsBasePageConnector } from '@pages/dashboard/node-plugins/ui/connectors/node-plugins-base-page.connector'
-import { NodesBandwidthTablePageConnector } from '@pages/dashboard/nodes-bandwidth-table/ui/connectors'
 import { NodesMetricsPageConnector } from '@pages/dashboard/nodes-metrics/ui/connectors'
 import { NodesPageConnector } from '@pages/dashboard/nodes/ui/connectors'
 import { RemnawaveSettingsConnector } from '@pages/dashboard/remnawave-settings/connectors'
@@ -76,11 +75,6 @@ const router = createBrowserRouter(
                         <Route
                             element={<NodesPageConnector />}
                             path={ROUTES.DASHBOARD.MANAGEMENT.NODES}
-                        />
-
-                        <Route
-                            element={<NodesBandwidthTablePageConnector />}
-                            path={ROUTES.DASHBOARD.MANAGEMENT.NODES_BANDWIDTH_TABLE}
                         />
                         <Route
                             element={<StatisticNodesConnector />}
