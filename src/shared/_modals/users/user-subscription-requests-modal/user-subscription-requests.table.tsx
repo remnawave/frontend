@@ -28,7 +28,7 @@ const DEFAULT_SORT_STATUS: DataTableSortStatus<TRecord> = {
     direction: 'desc'
 }
 
-const TEXT_ACCESSORS = ['id', 'requestIp', 'userAgent'] as const
+const TEXT_ACCESSORS = ['id', 'requestIp', 'userAgent', 'srrRuleName', 'srrResponseType'] as const
 
 export const UserSubscriptionRequestsTable = (props: IProps) => {
     const { records: data, isLoading } = props
@@ -114,7 +114,19 @@ export const UserSubscriptionRequestsTable = (props: IProps) => {
                     })}
                 </Text>
             )
-        }
+        },
+        textColumn(
+            'srrRuleName',
+            t('use-srh-inspector-table-columns.rule-name'),
+            (record) => <CopyableCell value={record.srrRuleName || '–'} />,
+            200
+        ),
+        textColumn(
+            'srrResponseType',
+            t('use-srh-inspector-table-columns.response-type'),
+            (record) => <CopyableCell value={record.srrResponseType} />,
+            200
+        )
     ]
 
     const {
@@ -131,7 +143,9 @@ export const UserSubscriptionRequestsTable = (props: IProps) => {
             id: 'ID',
             requestIp: t('get-user-subscription-request-history.feature.ip-address'),
             userAgent: t('get-user-subscription-request-history.feature.user-agent'),
-            requestAt: t('get-user-subscription-request-history.feature.request-at')
+            requestAt: t('get-user-subscription-request-history.feature.request-at'),
+            srrRuleName: t('use-srh-inspector-table-columns.rule-name'),
+            srrResponseType: t('use-srh-inspector-table-columns.response-type')
         }),
         [t]
     )

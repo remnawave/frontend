@@ -64,6 +64,18 @@ export const UserSubscriptionRequestItem = (props: IProps) => {
                     />
 
                     <CopyableFieldShared
+                        label={t('use-srh-inspector-table-columns.rule-name')}
+                        size="sm"
+                        value={request.srrRuleName || '-'}
+                    />
+
+                    <CopyableFieldShared
+                        label={t('use-srh-inspector-table-columns.response-type')}
+                        size="sm"
+                        value={request.srrResponseType}
+                    />
+
+                    <CopyableFieldShared
                         label={t('get-user-subscription-request-history.feature.request-at')}
                         size="sm"
                         value={formatTimeUtil({

@@ -50,6 +50,18 @@ export const useSrhInspectorTableColumns = () => {
                 }
             },
             {
+                accessorKey: 'srrResponseType',
+                header: t('use-srh-inspector-table-columns.response-type'),
+                accessorFn: (originalRow) => originalRow.srrResponseType,
+                size: 200
+            },
+            {
+                accessorKey: 'srrRuleName',
+                header: t('use-srh-inspector-table-columns.rule-name'),
+                accessorFn: (originalRow) => originalRow.srrRuleName || '–',
+                size: 200
+            },
+            {
                 accessorKey: 'id',
                 header: 'ID',
                 accessorFn: (originalRow) => originalRow.id,

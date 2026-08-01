@@ -1427,7 +1427,9 @@
     "request-ip": "Request IP",
     "user-agent": "User Agent",
     "request-at": "Request At",
-    "user-uuid": "User UUID"
+    "user-uuid": "User UUID",
+    "response-type": "Response Type",
+    "rule-name": "Rule Name"
   },
   "srh-inspector-table": {
     "widget": {
