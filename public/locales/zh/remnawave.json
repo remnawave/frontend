@@ -593,7 +593,7 @@
   "subscription-settings": {
     "widget": {
       "validation-error": "验证错误",
-      "main-settings": "Main settings",
+      "main-settings": "主要设置",
       "you-must-add-at-least-one-remark-with-text": "您必须至少添加一个带有文本的备注",
       "user-status-remarks-description": "如果用户已过期、受限或禁用，以下值将显示在订阅页面中。",
       "user-status-remarks-description-line-2": "您可以为每种状态添加多个备注。",
@@ -1428,8 +1428,8 @@
     "user-agent": "User Agent",
     "request-at": "请求时间",
     "user-uuid": "用户 UUID",
-    "response-type": "Response Type",
-    "rule-name": "Rule Name"
+    "response-type": "响应类型",
+    "rule-name": "规则名称"
   },
   "srh-inspector-table": {
     "widget": {
