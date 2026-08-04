@@ -79,7 +79,7 @@
     "creation": "创建",
     "processing": "处理中",
     "operation-completed": "操作已完成",
-    "usage-stats": "使用状态",
+    "usage-stats": "流量使用统计",
     "active-sessions": "活跃会话"
   },
   "bandwidth-metrics": {
@@ -349,7 +349,7 @@
       "management": "管理",
       "danger-zone": "危险操作区",
       "information": "信息",
-      "detailed-info": "详细信息",
+      "detailed-info": "用户详细信息",
       "subscription": "订阅",
       "accessible-nodes": "可访问节点",
       "qr-code": "二维码"
@@ -431,7 +431,7 @@
     "select-a-xray-json-template": "选择一个 Xray JSON 模板",
     "xray-json-template": "Xray JSON 模板",
     "override-the-xray-json-template": "覆盖将用于此主机的 Xray JSON 模板。",
-    "vital-parameters": "关键参数",
+    "vital-parameters": "主要参数",
     "exclude-this-host-from-specific-internal-squads": "从指定的内部小队排除此主机",
     "excluded-internal-squads": "排除的内部分组",
     "keep-sni-blank": "保持SNI 为空",
@@ -767,7 +767,7 @@
   },
   "detailed-user-info-drawer": {
     "widget": {
-      "detailed-user-info": "详细用户信息",
+      "detailed-user-info": "用户详细信息",
       "loading-user-info": "正在加载用户信息...",
       "user-information": "用户信息",
       "uuid": "UUID",
@@ -1451,7 +1451,7 @@
   },
   "get-node-linked-hosts": {
     "feature": {
-      "linked-hosts": "链接的主机"
+      "linked-hosts": "关联主机"
     }
   },
   "snippets": {
