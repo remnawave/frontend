@@ -279,18 +279,25 @@ export const NodesStatisticBarchartWidget = (props: IProps) => {
 
                             let nearbyDaysHtml = ''
 
+                            const mutedColor = alpha(parsedColor, 0.4)
+                            const mutedTextColor = alpha('var(--mantine-color-text)', 0.5)
+
                             nearbyDays.forEach((day) => {
                                 if (day.value === 0) {
                                     return
                                 }
 
                                 const fontWeight = day.isCurrent ? 600 : 400
+                                const textColor = day.isCurrent
+                                    ? 'var(--mantine-color-text)'
+                                    : mutedTextColor
+                                const barColor = day.isCurrent ? parsedColor : mutedColor
 
                                 nearbyDaysHtml += `
-                            <div style="display: flex; align-items: center; gap: 6px; opacity: ${day.isCurrent ? 1 : 0.5};">
+                            <div style="display: flex; align-items: center; gap: 6px; color: ${textColor};">
                                 <span style="width: 42px; font-size: 0.7rem; text-align: right; font-weight: ${fontWeight};">${day.date}</span>
                                 <div style="flex: 1; height: 6px; background: var(--mantine-color-body); border-radius: 3px; overflow: hidden;">
-                                    <div style="width: ${Math.max((day.value / maxValue) * 100, 2)}%; height: 100%; background: ${parsedColor}; border-radius: 3px;"></div>
+                                    <div style="width: ${Math.max((day.value / maxValue) * 100, 2)}%; height: 100%; background: ${barColor}; border-radius: 3px;"></div>
                                 </div>
                                 <span style="width: 50px; font-size: 0.7rem; font-weight: ${fontWeight};">${prettifyBytesUtil(day.value, true)}</span>
                             </div>
