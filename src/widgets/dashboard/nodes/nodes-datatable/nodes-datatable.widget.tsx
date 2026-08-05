@@ -26,7 +26,7 @@ interface IProps {
     setSelectedRecords: (records: NodeType[]) => void
 }
 
-const NODES_CACHE_KEY = 'nodes-datatable-nodes-v5'
+const NODES_CACHE_KEY = 'nodes-datatable-nodes-v6'
 const DEFAULT_SORT_STATUS: DataTableSortStatus<NodeType> = {
     columnAccessor: 'viewPosition',
     direction: 'asc'

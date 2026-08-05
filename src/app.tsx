@@ -10,7 +10,6 @@ import '@mantine/spotlight/styles.css'
 import '@kastov/mantine-react-table-open/styles.css'
 import '@kastov/mantine-datatable/styles.css'
 import './global.css'
-import NiceModal from '@ebay/nice-modal-react'
 import { Center, DirectionProvider, MantineProvider, v8CssVariablesResolver } from '@mantine/core'
 import { ModalsProvider } from '@mantine/modals'
 import { Notifications } from '@mantine/notifications'
@@ -71,22 +70,20 @@ export function App() {
                                 theme={theme}
                                 deduplicateInlineStyles
                             >
-                                <NiceModal.Provider>
-                                    <ModalsProvider>
-                                        <Notifications position="top-right" />
-                                        <ConnectionStatusOverlay />
-                                        <NavigationProgress />
-                                        <Suspense
-                                            fallback={
-                                                <Center h="100%">
-                                                    <LoadingScreen height="60vh" />
-                                                </Center>
-                                            }
-                                        >
-                                            <Router />
-                                        </Suspense>
-                                    </ModalsProvider>
-                                </NiceModal.Provider>
+                                <ModalsProvider>
+                                    <Notifications position="top-right" />
+                                    <ConnectionStatusOverlay />
+                                    <NavigationProgress />
+                                    <Suspense
+                                        fallback={
+                                            <Center h="100%">
+                                                <LoadingScreen height="60vh" />
+                                            </Center>
+                                        }
+                                    >
+                                        <Router />
+                                    </Suspense>
+                                </ModalsProvider>
                             </MantineProvider>
                         </DirectionProvider>
                     </IsMobileProvider>

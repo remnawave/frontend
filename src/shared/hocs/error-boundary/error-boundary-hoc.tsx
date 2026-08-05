@@ -1,3 +1,4 @@
+import NiceModal from '@ebay/nice-modal-react'
 import { ComponentType, FC, useState } from 'react'
 import { ErrorBoundary } from 'react-error-boundary'
 import { Outlet } from 'react-router'
@@ -26,7 +27,9 @@ export const ErrorBoundaryHoc: FC<IProps> = ({ FallbackComponent }) => {
             )}
             onError={(_error, info) => setComponentStack(info.componentStack ?? null)}
         >
-            <Outlet />
+            <NiceModal.Provider>
+                <Outlet />
+            </NiceModal.Provider>
         </ErrorBoundary>
     )
 }

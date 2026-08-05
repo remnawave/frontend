@@ -16,6 +16,7 @@ import {
 } from '@shared/api/hooks'
 import { BaseNodeForm } from '@shared/ui/forms/nodes/base-node-form/base-node-form'
 import { LoaderModalShared } from '@shared/ui/loader-modal'
+import { withNodeIpsErrors } from '@shared/ui/node-ips'
 
 interface IProps {
     nodeUuid: string
@@ -35,7 +36,9 @@ export const EditNodeByUuidModalContent = (props: IProps) => {
                 form.setFieldValue('proxyUrl', null)
             }
         },
-        validate: schemaResolver(UpdateNodeCommand.RequestBodySchema.omit({ uuid: true }))
+        validate: withNodeIpsErrors(
+            schemaResolver(UpdateNodeCommand.RequestBodySchema.omit({ uuid: true }))
+        )
     })
 
     const { data: secretKey } = useGetNodeSecretKey()
@@ -88,6 +91,7 @@ export const EditNodeByUuidModalContent = (props: IProps) => {
                 consumptionMultiplier: fetchedNode.consumptionMultiplier ?? undefined,
                 nodeConsumptionMultiplier: fetchedNode.nodeConsumptionMultiplier ?? undefined,
                 tags: fetchedNode.tags ?? undefined,
+                ips: fetchedNode.ips ?? [],
                 proxyUrl: fetchedNode.proxyUrl ?? undefined,
                 configProfile: {
                     activeConfigProfileUuid:

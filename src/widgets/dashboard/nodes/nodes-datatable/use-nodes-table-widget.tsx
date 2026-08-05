@@ -17,6 +17,7 @@ import {
 } from 'react-icons/pi'
 import { TbEdit, TbSearch, TbX } from 'react-icons/tb'
 
+import { NodeIpsCompactView } from '@shared/ui/node-ips'
 import {
     prettifyBytesUtil,
     prettySiBytesUtil,
@@ -205,6 +206,12 @@ export function getNodesTableColumns(
             sortable: true,
             title: t('use-nodes-table-widget.address'),
             render: ({ address, port }) => `${address}:${port}`
+        },
+        {
+            accessor: 'ips',
+            sortable: false,
+            title: t('use-nodes-table-widget.ip-addresses'),
+            render: ({ ips }) => <NodeIpsCompactView ips={ips} />
         },
         {
             accessor: 'trafficUsedBytes',
