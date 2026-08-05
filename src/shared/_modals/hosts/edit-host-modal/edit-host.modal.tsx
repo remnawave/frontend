@@ -17,6 +17,7 @@ import {
     useGetSubscriptionTemplates,
     useUpdateHost
 } from '@shared/api/hooks'
+import { LoadingScreen } from '@shared/ui'
 import { BaseHostForm } from '@shared/ui/forms/hosts/base-host-form'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { parseJsonField, stringifyJsonField } from '@shared/utils/misc'
@@ -160,19 +161,23 @@ export const EditHostDrawer = NiceModal.create((props: IProps) => {
                 />
             }
         >
-            <BaseHostForm
-                advancedOpened={advancedOpened}
-                configProfiles={configProfiles?.configProfiles ?? []}
-                form={form}
-                handleSubmit={handleSubmit}
-                hostTags={hostTags?.tags ?? []}
-                internalSquads={internalSquads?.internalSquads ?? []}
-                isSubmitting={isUpdateHostPending}
-                nodes={nodes!}
-                hostUuid={host.uuid}
-                setAdvancedOpened={setAdvancedOpened}
-                subscriptionTemplates={templates?.templates ?? []}
-            />
+            {!configProfiles || !nodes || !templates || !internalSquads || !hostTags ? (
+                <LoadingScreen />
+            ) : (
+                <BaseHostForm
+                    advancedOpened={advancedOpened}
+                    configProfiles={configProfiles.configProfiles}
+                    form={form}
+                    handleSubmit={handleSubmit}
+                    hostTags={hostTags.tags}
+                    internalSquads={internalSquads.internalSquads}
+                    isSubmitting={isUpdateHostPending}
+                    nodes={nodes}
+                    hostUuid={host.uuid}
+                    setAdvancedOpened={setAdvancedOpened}
+                    subscriptionTemplates={templates.templates}
+                />
+            )}
         </Drawer>
     )
 })

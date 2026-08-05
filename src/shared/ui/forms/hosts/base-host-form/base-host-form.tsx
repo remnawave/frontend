@@ -490,10 +490,10 @@ export const BaseHostForm = <
                                                     </>
                                                 )
                                             }}
-                                            renderPill={({ option, onRemove }) => (
+                                            renderPill={({ option, value, onRemove }) => (
                                                 <TagInputPill
                                                     onRemove={onRemove}
-                                                    value={option.label}
+                                                    value={option?.label ?? value}
                                                 />
                                             )}
                                             searchable
@@ -533,10 +533,10 @@ export const BaseHostForm = <
                                                     />
                                                 )
                                             }}
-                                            renderPill={({ option, onRemove }) => (
+                                            renderPill={({ option, value, onRemove }) => (
                                                 <TagInputPill
                                                     onRemove={onRemove}
-                                                    value={option.label}
+                                                    value={option?.label ?? value}
                                                 />
                                             )}
                                             searchable
