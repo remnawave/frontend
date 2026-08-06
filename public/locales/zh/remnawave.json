@@ -1773,7 +1773,7 @@
     "online": "在线",
     "name": "名称",
     "address": "地址",
-    "ip-addresses": "IP addresses",
+    "ip-addresses": "IP 地址",
     "traffic-used": "流量使用",
     "config-profile": "配置文件",
     "inbounds": "入站",
@@ -2198,26 +2198,26 @@
     }
   },
   "node-ips": {
-    "title": "IP addresses",
-    "add-ip": "Add IP",
-    "status": "Status",
-    "remove-ip": "Remove IP",
-    "invalid-ip": "Not a valid IPv4 or IPv6 address",
-    "ip-is-required": "IP address is required",
-    "max-ips-reached": "Maximum {{max}} IP addresses",
-    "no-ips-yet": "No IP addresses yet"
+    "title": "IP 地址",
+    "add-ip": "添加 IP",
+    "status": "状态",
+    "remove-ip": "删除 IP",
+    "invalid-ip": "不是有效的 IPv4 或 IPv6 地址",
+    "ip-is-required": "IP 地址为必填项",
+    "max-ips-reached": "最多允许 {{max}} 个 IP 地址",
+    "no-ips-yet": "还没有填写IP地址"
   },
   "node-ip-statuses": {
-    "inbound": "Inbound",
-    "outbound": "Outbound",
-    "management": "Management",
-    "transit": "Transit",
-    "monitoring": "Monitoring",
-    "reserve": "Reserve",
-    "blocked": "Blocked",
-    "flagged": "Flagged",
-    "deprecated": "Deprecated",
-    "unknown": "Unknown"
+    "inbound": "入站",
+    "outbound": "出站",
+    "management": "管理",
+    "transit": "传输",
+    "monitoring": "监测",
+    "reserve": "储备",
+    "blocked": "禁止访问",
+    "flagged": "已被标记 (Flagged)",
+    "deprecated": "已弃用",
+    "unknown": "未知"
   },
   "node-consumption": {
     "card": {
