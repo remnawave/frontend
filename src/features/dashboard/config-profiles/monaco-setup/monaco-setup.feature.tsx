@@ -11,6 +11,32 @@ import { app } from 'src/config'
 
 import { monacoTheme } from '@shared/constants/monaco-theme'
 
+interface ISchemaNode {
+    allOf?: ISchemaNode[]
+    anyOf?: ISchemaNode[]
+    oneOf?: ISchemaNode[]
+    properties?: Record<string, unknown>
+}
+
+const injectSnippetProperty = (node: ISchemaNode | undefined, snippetSchema: object): number => {
+    if (!node || typeof node !== 'object') {
+        return 0
+    }
+
+    let injected = 0
+
+    if (node.properties) {
+        node.properties.snippet = snippetSchema
+        injected += 1
+    }
+
+    for (const branch of [...(node.anyOf ?? []), ...(node.oneOf ?? []), ...(node.allOf ?? [])]) {
+        injected += injectSnippetProperty(branch, snippetSchema)
+    }
+
+    return injected
+}
+
 export const MonacoSetupFeature = {
     setup: async (
         monaco: Monaco,
@@ -30,7 +56,7 @@ export const MonacoSetupFeature = {
             }
 
             const response = await axios.get(jsonSchemaUrl)
-            const schema = await response.data
+            const schema = response.data
 
             const snippetDescriptions = snippets.map((snippet) => {
                 const snippetJson = JSON.stringify(snippet.snippet, null, 1)
@@ -53,16 +79,17 @@ export const MonacoSetupFeature = {
                     'Snippet name can only contain: letters, numbers, spaces, _ and -'
             }
 
-            if (schema.definitions?.OutboundObject?.properties) {
-                schema.definitions.OutboundObject.properties.snippet = snippetSchema
-            }
+            const notInjected = (
+                ['OutboundObject', 'RuleObject', 'BalancerObject'] as const
+            ).filter(
+                (definition) =>
+                    injectSnippetProperty(schema.definitions?.[definition], snippetSchema) === 0
+            )
 
-            if (schema.definitions?.RuleObject?.properties) {
-                schema.definitions.RuleObject.properties.snippet = snippetSchema
-            }
-
-            if (schema.definitions?.BalancerObject?.properties) {
-                schema.definitions.BalancerObject.properties.snippet = snippetSchema
+            if (notInjected.length > 0) {
+                consola.error(
+                    `Failed to inject the snippet property into the Xray schema: ${notInjected.join(', ')}.`
+                )
             }
 
             monaco.languages.json.jsonDefaults.setDiagnosticsOptions({
