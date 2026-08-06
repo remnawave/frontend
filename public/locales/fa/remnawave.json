@@ -1773,6 +1773,7 @@
     "online": "آنلاین",
     "name": "اسم",
     "address": "آدرس",
+    "ip-addresses": "IP addresses",
     "traffic-used": "ترافیک استفاده‌شده",
     "config-profile": "پروفایل پیکربندی",
     "inbounds": "اینباندها",
@@ -2195,6 +2196,28 @@
     "card": {
       "note": "Note"
     }
+  },
+  "node-ips": {
+    "title": "IP addresses",
+    "add-ip": "Add IP",
+    "status": "Status",
+    "remove-ip": "Remove IP",
+    "invalid-ip": "Not a valid IPv4 or IPv6 address",
+    "ip-is-required": "IP address is required",
+    "max-ips-reached": "Maximum {{max}} IP addresses",
+    "no-ips-yet": "No IP addresses yet"
+  },
+  "node-ip-statuses": {
+    "inbound": "Inbound",
+    "outbound": "Outbound",
+    "management": "Management",
+    "transit": "Transit",
+    "monitoring": "Monitoring",
+    "reserve": "Reserve",
+    "blocked": "Blocked",
+    "flagged": "Flagged",
+    "deprecated": "Deprecated",
+    "unknown": "Unknown"
   },
   "node-consumption": {
     "card": {
