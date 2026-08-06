@@ -5,7 +5,7 @@ import { TbCpu } from 'react-icons/tb'
 
 import { useNiceMantineModal } from '@shared/_modals/use-nice-modal'
 import { queryClient } from '@shared/api'
-import { QueryKeys } from '@shared/api/hooks'
+import { QueryKeys, useGetNode } from '@shared/api/hooks'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 
 import { EditNodeByUuidModalContent } from './edit-node.modal.content'
@@ -27,6 +27,11 @@ export const EditNodeModal = NiceModal.create((props: IProps) => {
         }
     })
 
+    const { data: node } = useGetNode({
+        route: { uuid: nodeUuid },
+        rQueryParams: { enabled: false }
+    })
+
     const { t } = useTranslation()
 
     return (
@@ -35,10 +40,11 @@ export const EditNodeModal = NiceModal.create((props: IProps) => {
             size="1000px"
             title={
                 <BaseOverlayHeader
+                    countryCode={node?.countryCode}
                     iconColor="teal"
                     IconComponent={TbCpu}
                     iconVariant="soft"
-                    title={t('edit-node-modal.widget.edit-node')}
+                    title={node?.name ?? t('edit-node-modal.widget.edit-node')}
                 />
             }
         >
