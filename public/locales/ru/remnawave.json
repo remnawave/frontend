@@ -1428,8 +1428,8 @@
     "user-agent": "User Agent",
     "request-at": "Дата запроса",
     "user-uuid": "UUID польз.",
-    "response-type": "Response Type",
-    "rule-name": "Rule Name"
+    "response-type": "Тип ответа",
+    "rule-name": "Имя правила"
   },
   "srh-inspector-table": {
     "widget": {
@@ -1773,7 +1773,7 @@
     "online": "Онлайн",
     "name": "Имя",
     "address": "Адрес",
-    "ip-addresses": "IP addresses",
+    "ip-addresses": "IP адреса",
     "traffic-used": "Польз. трафик",
     "config-profile": "Профиль",
     "inbounds": "Инбаунды",
@@ -2198,26 +2198,26 @@
     }
   },
   "node-ips": {
-    "title": "IP addresses",
-    "add-ip": "Add IP",
-    "status": "Status",
-    "remove-ip": "Remove IP",
-    "invalid-ip": "Not a valid IPv4 or IPv6 address",
-    "ip-is-required": "IP address is required",
-    "max-ips-reached": "Maximum {{max}} IP addresses",
-    "no-ips-yet": "No IP addresses yet"
+    "title": "IP адреса",
+    "add-ip": "Добавить IP",
+    "status": "Статус",
+    "remove-ip": "Удалить IP",
+    "invalid-ip": "Недопустимый IPv4 или IPv6 адрес",
+    "ip-is-required": "Не указан IP-адрес",
+    "max-ips-reached": "Максимум {{max}} IP адресов",
+    "no-ips-yet": "Нет IP адресов"
   },
   "node-ip-statuses": {
-    "inbound": "Inbound",
-    "outbound": "Outbound",
-    "management": "Management",
-    "transit": "Transit",
-    "monitoring": "Monitoring",
-    "reserve": "Reserve",
-    "blocked": "Blocked",
-    "flagged": "Flagged",
-    "deprecated": "Deprecated",
-    "unknown": "Unknown"
+    "inbound": "Входящий",
+    "outbound": "Исходящий",
+    "management": "Менеджмент",
+    "transit": "Транзит",
+    "monitoring": "Мониторинг",
+    "reserve": "Резерв",
+    "blocked": "Заблокирован",
+    "flagged": "Помеченный",
+    "deprecated": "Устаревший",
+    "unknown": "Неизвестно"
   },
   "node-consumption": {
     "card": {
