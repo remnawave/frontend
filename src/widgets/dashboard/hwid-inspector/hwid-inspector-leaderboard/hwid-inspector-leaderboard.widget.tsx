@@ -56,7 +56,7 @@ export function HwidInspectorLeaderboardWidget() {
             }}
             fetching={isLoading}
             height={350}
-            idAccessor="userUuid"
+            idAccessor="id"
             onCellClick={({ record, column }) => {
                 if (column.accessor === 'actions') {
                     return
