@@ -11,6 +11,7 @@ import {
 } from 'react-icons/pi'
 import {
     TbApi,
+    TbCertificate,
     TbCirclesRelation,
     TbCreditCard,
     TbDeviceAnalytics,
@@ -97,6 +98,12 @@ export const useMobileMenuSections = (): MenuItem[] => {
                             href: ROUTES.DASHBOARD.MANAGEMENT.NODE_PLUGINS.ROOT,
                             icon: TbPackage,
                             id: 'node-plugins'
+                        },
+                        {
+                            name: t('constants.certificates'),
+                            href: ROUTES.DASHBOARD.MANAGEMENT.ACME,
+                            icon: TbCertificate,
+                            id: 'acme-certificates'
                         },
 
                         {
