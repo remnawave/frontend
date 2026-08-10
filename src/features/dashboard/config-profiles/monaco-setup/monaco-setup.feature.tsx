@@ -26,6 +26,59 @@ interface IXraySchema {
 const DEFINITIONS_REF_PREFIX = '#/definitions/'
 const PROTECTED_ROOT_KEYS = new Set(['api', 'inbounds', 'metrics', 'snippets', 'stats'])
 
+const CUSTOM_CORE_SCHEMA = {
+    title: 'Remnawave Custom Core',
+    markdownDescription: [
+        '**Remnawave custom field.** Not part of Xray-Core – it is handled by the Remnawave Node.',
+        '',
+        '> ⚠️ **Beta feature. Use strictly at your own risk.**',
+        '>',
+        '> It may be changed or removed at any time without prior notice.',
+        '',
+        'Replaces the Xray-Core binary on every node running this config profile with the one downloaded from `url`.',
+        '',
+        'The node verifies the `sha256` checksum before installing anything, keeps the bundled core untouched, and rolls back to it as soon as this section is removed.',
+        '',
+        '```json',
+        '{',
+        '  "geodata": {',
+        '    "core": {',
+        '      "url": "https://example.com/xray-linux-amd64",',
+        '      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"',
+        '    }',
+        '  }',
+        '}',
+        '```'
+    ].join('\n'),
+    type: 'object',
+    additionalProperties: false,
+    required: ['url', 'sha256'],
+    properties: {
+        url: {
+            title: 'Core URL',
+            markdownDescription: [
+                'Direct link to the Xray-Core binary to install on the node.',
+                '',
+                '> Only `https` is accepted. The file is downloaded on every node that runs this config profile.'
+            ].join('\n'),
+            type: 'string',
+            pattern: '^https://\\S+$',
+            patternErrorMessage: 'URL must start with https:// '
+        },
+        sha256: {
+            title: 'Core SHA-256',
+            markdownDescription: [
+                'SHA-256 checksum of the binary, 64 hexadecimal characters.',
+                '',
+                '> The node refuses to install the binary if the checksum does not match, so a wrong value here leaves the currently installed core in place.'
+            ].join('\n'),
+            type: 'string',
+            pattern: '^[A-Fa-f0-9]{64}$',
+            patternErrorMessage: 'SHA-256 must be exactly 64 hexadecimal characters'
+        }
+    }
+}
+
 const injectProperty = (
     node: ISchemaNode | undefined,
     propertyName: string,
@@ -130,7 +183,9 @@ export const MonacoSetupFeature = {
                     injectProperty(schema.definitions?.[definition], 'snippet', snippetSchema) === 0
             )
 
-            if (injectProperty(resolveRootNode(schema), 'snippets', rootSnippetsSchema) === 0) {
+            const rootNode = resolveRootNode(schema)
+
+            if (injectProperty(rootNode, 'snippets', rootSnippetsSchema) === 0) {
                 notInjected.push('config root')
             }
 
@@ -138,6 +193,14 @@ export const MonacoSetupFeature = {
                 consola.error(
                     `Failed to inject the snippet property into the Xray schema: ${notInjected.join(', ')}.`
                 )
+            }
+
+            if (
+                injectProperty(schema.definitions?.GeodataObject, 'core', CUSTOM_CORE_SCHEMA) ===
+                    0 &&
+                rootNode?.properties?.geodata
+            ) {
+                consola.error('Failed to inject the custom core property into GeodataObject.')
             }
 
             monaco.languages.json.jsonDefaults.setDiagnosticsOptions({
@@ -175,6 +238,8 @@ export const MonacoSetupSnippetsFeature = {
             const schema = await response.data
 
             const rootNode = resolveRootNode(schema)
+
+            injectProperty(schema.definitions?.GeodataObject, 'core', CUSTOM_CORE_SCHEMA)
 
             const snippetArraySchema = {
                 $schema: 'http://json-schema.org/draft-07/schema#',
