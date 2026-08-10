@@ -1470,11 +1470,8 @@
         "edit-snippet": "ویرایش قطعه کد",
         "snippets": "قطعه کدها",
         "new-snippet": "قطعه کد جدید",
-        "snippets-help-line-1": "قطعه کدها برای آماده‌سازی بخشی از کانفیگ استفاده می‌شوند.",
-        "snippets-help-line-2": "هر قطعه کد باید شامل آرایه‌ای از اشیا Outbound یا Rule باشد و باید حداقل یک آیتم داخل آرایه وجود داشته باشد.",
-        "snippets-help-line-3": "برای اسم قطعه کدها تکمیل خودکار در دسترس است. همچنین با بردن نشانگر موس روی اسم اسنیپت می‌توانید پیش‌نمایش سریعی از محتوای آن را مشاهده کنید.",
-        "snippets-help-line-4": "داخل آرایه outbounds[] می‌توانید به اسم قطعه کدها اشاره کنید.",
-        "snippets-help-line-5": "داخل آرایه routing.rules[] می‌توانید به اسم قطعه کدها اشاره کنید."
+        "sync-nodes-description": "Nodes still run the previous configuration. Restart affected nodes now to apply the change?",
+        "sync-nodes-cancel": "Not now"
       }
     }
   },
