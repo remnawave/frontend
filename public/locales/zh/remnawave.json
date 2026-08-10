@@ -1470,11 +1470,8 @@
         "edit-snippet": "编辑代码块",
         "snippets": "代码块",
         "new-snippet": "新建代码块",
-        "snippets-help-line-1": "它们用于预定义您的一些配置。",
-        "snippets-help-line-2": "代码块必须包含一个出站或规则对象数组，而且至少需要一个项目。",
-        "snippets-help-line-3": "自动完成是可用的代码块名称。此外，您可以快速预览代码块，在编辑器的名称上悬停。",
-        "snippets-help-line-4": "在出站内[]，你可以引用的代码块名称。",
-        "snippets-help-line-5": "在路由规则[]中，你可以引用的代码块名称。"
+        "sync-nodes-description": "节点仍在运行旧配置。是否立即重启受影响的节点以应用更改？",
+        "sync-nodes-cancel": "暂不需要"
       }
     }
   },
