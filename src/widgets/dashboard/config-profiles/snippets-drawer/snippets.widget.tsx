@@ -1,19 +1,10 @@
-import {
-    ActionIcon,
-    Button,
-    Center,
-    Code,
-    Group,
-    Loader,
-    ScrollArea,
-    Stack,
-    Text
-} from '@mantine/core'
+import { ActionIcon, Button, Center, Group, Loader, ScrollArea, Stack, Text } from '@mantine/core'
 import { useMediaQuery } from '@mantine/hooks'
 import { modals } from '@mantine/modals'
 import { useTranslation } from 'react-i18next'
-import { TbCode, TbPlus, TbQuestionMark, TbRefresh, TbX } from 'react-icons/tb'
+import { TbCode, TbPlus, TbRefresh, TbX } from 'react-icons/tb'
 
+import { HelpActionIconShared } from '@shared/_modals/universal'
 import { useGetSnippets } from '@shared/api/hooks'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { SectionCard } from '@shared/ui/section-card'
@@ -65,84 +56,6 @@ export const SnippetsWidget = (props: IProps) => {
         })
     }
 
-    const openSnippetsHelpModal = () => {
-        modals.open({
-            title: (
-                <BaseOverlayHeader
-                    iconColor="teal"
-                    IconComponent={TbCode}
-                    iconVariant="soft"
-                    title={t('snippets.drawer.widget.snippets')}
-                />
-            ),
-            centered: true,
-
-            children: (
-                <Stack gap="md">
-                    <Stack gap="sm">
-                        <Stack gap={0}>
-                            <Text mb={6} size="sm">
-                                {t('snippets.drawer.widget.snippets-help-line-1')}
-                            </Text>
-                            <Text mb={6} size="sm">
-                                {t('snippets.drawer.widget.snippets-help-line-2')}
-                            </Text>
-                            <Text mb={6} size="sm">
-                                {t('snippets.drawer.widget.snippets-help-line-3')}
-                            </Text>
-                        </Stack>
-
-                        <Stack gap={0}>
-                            <Text fw={600} mb={4} size="sm">
-                                Outbounds
-                            </Text>
-                            <Text c="dimmed" mb={6} size="xs">
-                                {t('snippets.drawer.widget.snippets-help-line-4')}
-                            </Text>
-                            <Code block color="dark.8">
-                                {JSON.stringify(
-                                    {
-                                        outbounds: [
-                                            {
-                                                snippet: 'snippet-name'
-                                            }
-                                        ]
-                                    },
-                                    null,
-                                    2
-                                )}
-                            </Code>
-                        </Stack>
-
-                        <Stack gap={0}>
-                            <Text fw={600} mb={4} size="sm">
-                                Routing → Rules
-                            </Text>
-                            <Text c="dimmed" mb={6} size="xs">
-                                {t('snippets.drawer.widget.snippets-help-line-5')}
-                            </Text>
-                            <Code block color="dark.8">
-                                {JSON.stringify(
-                                    {
-                                        routing: {
-                                            rules: [
-                                                {
-                                                    snippet: 'snippet-name'
-                                                }
-                                            ]
-                                        }
-                                    },
-                                    null,
-                                    2
-                                )}
-                            </Code>
-                        </Stack>
-                    </Stack>
-                </Stack>
-            )
-        })
-    }
-
     return (
         <SectionCard.Root>
             <SectionCard.Section>
@@ -158,14 +71,7 @@ export const SnippetsWidget = (props: IProps) => {
                     />
 
                     <Group gap="xs">
-                        <ActionIcon
-                            color="lime"
-                            onClick={openSnippetsHelpModal}
-                            size="input-sm"
-                            variant="light"
-                        >
-                            <TbQuestionMark size={24} />
-                        </ActionIcon>
+                        <HelpActionIconShared hidden={false} screen="PAGE_SNIPPETS" />
 
                         <ActionIcon
                             loading={isRefetching || isLoading}

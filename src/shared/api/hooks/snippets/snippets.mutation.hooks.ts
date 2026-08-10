@@ -2,7 +2,8 @@ import { notifications } from '@mantine/notifications'
 import {
     CreateSnippetCommand,
     DeleteSnippetCommand,
-    UpdateSnippetCommand
+    UpdateSnippetCommand,
+    SyncSnippetCommand
 } from '@remnawave/backend-contract'
 
 import { createMutationHook } from '../../tsq-helpers'
@@ -70,6 +71,29 @@ export const useCreateSnippet = createMutationHook({
         onError: (error) => {
             notifications.show({
                 title: `Create Snippet`,
+                message:
+                    error instanceof Error ? error.message : `Request failed with unknown error.`,
+                color: 'red'
+            })
+        }
+    }
+})
+
+export const useSyncSnippet = createMutationHook({
+    endpoint: SyncSnippetCommand.TSQ_url,
+    bodySchema: SyncSnippetCommand.RequestBodySchema,
+    requestMethod: SyncSnippetCommand.endpointDetails.REQUEST_METHOD,
+    rMutationParams: {
+        onSuccess: () => {
+            notifications.show({
+                title: 'Success',
+                message: 'Snippet synced successfully',
+                color: 'teal'
+            })
+        },
+        onError: (error) => {
+            notifications.show({
+                title: `Sync Snippet`,
                 message:
                     error instanceof Error ? error.message : `Request failed with unknown error.`,
                 color: 'red'

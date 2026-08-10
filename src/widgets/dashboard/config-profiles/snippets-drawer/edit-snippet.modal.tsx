@@ -11,11 +11,12 @@ import { useEffect, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { queryClient } from '@shared/api'
-import { useUpdateSnippet } from '@shared/api/hooks'
+import { useSyncSnippet, useUpdateSnippet } from '@shared/api/hooks'
 import { QueryKeys } from '@shared/api/hooks/keys-factory'
 import { monacoTheme } from '@shared/constants/monaco-theme'
 import { CopyableFieldShared } from '@shared/ui/copyable-field/copyable-field'
 
+import { openConfirmSnippetSyncModal } from './confirm-snippet-sync.modal'
 import classes from './SnippetsDrawer.module.css'
 
 export const EDIT_SNIPPET_MODAL_ID = 'edit-snippet-modal'
@@ -40,6 +41,8 @@ export const EditSnippetModal = (props: IProps) => {
             }
         }
     })
+
+    const { mutate: syncSnippet } = useSyncSnippet()
 
     const editSnippetForm = useForm<UpdateSnippetCommand.RequestBody>({
         name: 'edit-snippet-form',
@@ -87,12 +90,25 @@ export const EditSnippetModal = (props: IProps) => {
             return
         }
 
-        updateSnippet({
-            variables: {
-                name: values.name,
-                snippet: currentValue
+        updateSnippet(
+            {
+                variables: {
+                    name: values.name,
+                    snippet: currentValue
+                }
+            },
+            {
+                onSuccess: () => {
+                    openConfirmSnippetSyncModal(() => {
+                        syncSnippet({
+                            variables: {
+                                name: values.name
+                            }
+                        })
+                    })
+                }
             }
-        })
+        )
     }
 
     useEffect(() => {

@@ -19,10 +19,11 @@ import { PiCheck, PiCopy } from 'react-icons/pi'
 import { TbBraces, TbCode, TbTrash } from 'react-icons/tb'
 
 import { queryClient } from '@shared/api'
-import { useDeleteSnippet } from '@shared/api/hooks'
+import { useDeleteSnippet, useSyncSnippet } from '@shared/api/hooks'
 import { QueryKeys } from '@shared/api/hooks/keys-factory'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 
+import { openConfirmSnippetSyncModal } from './confirm-snippet-sync.modal'
 import { EDIT_SNIPPET_MODAL_ID, EditSnippetModal } from './edit-snippet.modal'
 import classes from './SnippetsDrawer.module.css'
 
@@ -41,6 +42,8 @@ export const SnippetsGridWidget = (props: IProps) => {
         }
     })
 
+    const { mutate: syncSnippet } = useSyncSnippet()
+
     const handleDelete = (name: string) => {
         modals.openConfirmModal({
             title: t('common.confirm-action'),
@@ -53,11 +56,24 @@ export const SnippetsGridWidget = (props: IProps) => {
             cancelProps: { variant: 'subtle' },
             confirmProps: { color: 'red', variant: 'soft' },
             onConfirm: () => {
-                deleteSnippet({
-                    variables: {
-                        name
+                deleteSnippet(
+                    {
+                        variables: {
+                            name
+                        }
+                    },
+                    {
+                        onSuccess: () => {
+                            openConfirmSnippetSyncModal(() => {
+                                syncSnippet({
+                                    variables: {
+                                        name
+                                    }
+                                })
+                            })
+                        }
                     }
-                })
+                )
             }
         })
     }

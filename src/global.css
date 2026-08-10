@@ -29,6 +29,28 @@ body {
     }
 }
 
+.monaco-hover blockquote,
+.monaco-editor .suggest-details blockquote,
+.monaco-editor .parameter-hints-widget blockquote {
+    margin: 8px 0;
+    padding: 6px 10px;
+    border-left: 3px solid var(--vscode-textBlockQuote-border, #007acc80);
+    border-radius: 3px;
+    background: var(--vscode-textBlockQuote-background, rgba(255, 255, 255, 0.05));
+}
+
+.monaco-hover blockquote > :first-child,
+.monaco-editor .suggest-details blockquote > :first-child,
+.monaco-editor .parameter-hints-widget blockquote > :first-child {
+    margin-top: 0;
+}
+
+.monaco-hover blockquote > :last-child,
+.monaco-editor .suggest-details blockquote > :last-child,
+.monaco-editor .parameter-hints-widget blockquote > :last-child {
+    margin-bottom: 0;
+}
+
 .mantine-Spotlight-action[data-selected] {
     background-color: var(--mantine-color-dark-5) !important;
 }

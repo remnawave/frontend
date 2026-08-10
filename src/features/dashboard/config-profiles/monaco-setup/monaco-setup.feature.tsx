@@ -18,7 +18,19 @@ interface ISchemaNode {
     properties?: Record<string, unknown>
 }
 
-const injectSnippetProperty = (node: ISchemaNode | undefined, snippetSchema: object): number => {
+interface IXraySchema {
+    $ref?: unknown
+    definitions?: Record<string, ISchemaNode | undefined>
+}
+
+const DEFINITIONS_REF_PREFIX = '#/definitions/'
+const PROTECTED_ROOT_KEYS = new Set(['api', 'inbounds', 'metrics', 'snippets', 'stats'])
+
+const injectProperty = (
+    node: ISchemaNode | undefined,
+    propertyName: string,
+    propertySchema: object
+): number => {
     if (!node || typeof node !== 'object') {
         return 0
     }
@@ -26,15 +38,25 @@ const injectSnippetProperty = (node: ISchemaNode | undefined, snippetSchema: obj
     let injected = 0
 
     if (node.properties) {
-        node.properties.snippet = snippetSchema
+        node.properties[propertyName] = propertySchema
         injected += 1
     }
 
     for (const branch of [...(node.anyOf ?? []), ...(node.oneOf ?? []), ...(node.allOf ?? [])]) {
-        injected += injectSnippetProperty(branch, snippetSchema)
+        injected += injectProperty(branch, propertyName, propertySchema)
     }
 
     return injected
+}
+
+const resolveRootNode = (schema: IXraySchema | undefined): ISchemaNode | undefined => {
+    const ref = schema?.$ref
+
+    if (typeof ref !== 'string' || !ref.startsWith(DEFINITIONS_REF_PREFIX)) {
+        return undefined
+    }
+
+    return schema?.definitions?.[ref.slice(DEFINITIONS_REF_PREFIX.length)]
 }
 
 export const MonacoSetupFeature = {
@@ -79,12 +101,38 @@ export const MonacoSetupFeature = {
                     'Snippet name can only contain: letters, numbers, spaces, _ and -'
             }
 
-            const notInjected = (
+            const rootSnippetsSchema = {
+                name: 'snippets',
+                title: 'Remnawave Snippets',
+                markdownDescription: [
+                    'Snippets merged into the **root** of this config.',
+                    '',
+                    'Every object of a listed snippet must hold root-level sections, for example:',
+                    '```json',
+                    '[{ "log": { "loglevel": "debug" } }]',
+                    '```',
+                    'Sections already written in this config are kept – a snippet never overwrites them.',
+                    '',
+                    '`inbounds`, `api`, `stats` and `metrics` are always skipped.'
+                ].join('\n'),
+                type: 'array',
+                items: {
+                    ...snippetSchema,
+                    title: 'Snippet name'
+                },
+                minItems: 1
+            }
+
+            const notInjected: string[] = (
                 ['OutboundObject', 'RuleObject', 'BalancerObject'] as const
             ).filter(
                 (definition) =>
-                    injectSnippetProperty(schema.definitions?.[definition], snippetSchema) === 0
+                    injectProperty(schema.definitions?.[definition], 'snippet', snippetSchema) === 0
             )
+
+            if (injectProperty(resolveRootNode(schema), 'snippets', rootSnippetsSchema) === 0) {
+                notInjected.push('config root')
+            }
 
             if (notInjected.length > 0) {
                 consola.error(
@@ -110,6 +158,7 @@ export const MonacoSetupFeature = {
         }
     }
 }
+
 export const MonacoSetupSnippetsFeature = {
     setup: async (monaco: Monaco, currentLanguage: string) => {
         try {
@@ -125,10 +174,12 @@ export const MonacoSetupSnippetsFeature = {
             const response = await axios.get(jsonSchemaUrl)
             const schema = await response.data
 
+            const rootNode = resolveRootNode(schema)
+
             const snippetArraySchema = {
                 $schema: 'http://json-schema.org/draft-07/schema#',
                 title: 'Snippet Array',
-                description: 'Array of Outbound, Rule or Balancer objects for snippets',
+                description: 'Array of Root, Outbound, Rule or Balancer objects for snippets',
                 type: 'array',
                 items: {
                     oneOf: [
@@ -146,7 +197,24 @@ export const MonacoSetupSnippetsFeature = {
                             ...schema.definitions?.BalancerObject,
                             title: 'Balancer Object',
                             description: 'Balancer configuration (for routing.balancers[])'
-                        }
+                        },
+                        ...(rootNode?.properties
+                            ? [
+                                  {
+                                      ...rootNode,
+                                      properties: Object.fromEntries(
+                                          Object.entries(rootNode.properties).filter(
+                                              ([key]) => !PROTECTED_ROOT_KEYS.has(key)
+                                          )
+                                      ),
+                                      title: 'Root Object',
+                                      description:
+                                          'Root-level sections (for configs referencing this snippet in the root "snippets" array)',
+                                      markdownDescription:
+                                          'Root-level sections, merged into the **root** of every config that lists this snippet in its root `snippets` array. \n\n\n`inbounds`, `api`, `stats` and `metrics` cannot be provided by a snippet.'
+                                  }
+                              ]
+                            : [])
                     ]
                 },
                 minItems: 1,

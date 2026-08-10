@@ -5,6 +5,43 @@ import consola from 'consola/browser'
 import dayjs from 'dayjs'
 import { RefObject } from 'react'
 
+const PROTECTED_ROOT_KEYS = new Set(['api', 'inbounds', 'metrics', 'snippets', 'stats'])
+
+const replaceSnippetsInRoot = (
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    config: any,
+    snippetsMap: Map<string, unknown>
+): void => {
+    const names = config.snippets
+
+    delete config.snippets
+
+    if (!Array.isArray(names)) return
+
+    const merged: Record<string, unknown> = {}
+
+    for (const name of names) {
+        const snippet = snippetsMap.get(name)
+
+        if (!snippet) {
+            consola.error(`Snippet ${name} not found`)
+            continue
+        }
+
+        for (const part of Array.isArray(snippet) ? snippet : [snippet]) {
+            if (!part || typeof part !== 'object' || Array.isArray(part)) continue
+
+            Object.assign(merged, part)
+        }
+    }
+
+    for (const [key, value] of Object.entries(merged)) {
+        if (PROTECTED_ROOT_KEYS.has(key) || key in config) continue
+
+        config[key] = value
+    }
+}
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const replaceSnippetsInArray = (array: any[], snippetsMap: Map<string, unknown>): void => {
     for (let i = array.length - 1; i >= 0; i--) {
@@ -53,6 +90,8 @@ export const ConfigValidationFeature = {
                 setIsConfigValid(false)
                 return
             }
+
+            replaceSnippetsInRoot(clonedCurrentValue, snippetsMap)
 
             if (clonedCurrentValue.outbounds) {
                 replaceSnippetsInArray(clonedCurrentValue.outbounds, snippetsMap)
