@@ -29,6 +29,11 @@ body {
     }
 }
 
+.monaco-editor .overflowingContentWidgets,
+.monaco-editor .overflowingOverlayWidgets {
+    z-index: 2147483647 !important;
+}
+
 .monaco-hover blockquote,
 .monaco-editor .suggest-details blockquote,
 .monaco-editor .parameter-hints-widget blockquote {

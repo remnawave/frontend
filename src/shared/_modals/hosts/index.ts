@@ -1,4 +1,5 @@
 export { CreateHostDrawer } from './create-host-drawer/create-host.modal'
 export { EditHostDrawer } from './edit-host-modal/edit-host.modal'
 export { EditManyHostsDrawer } from './edit-many-hosts-drawer/edit-many-hosts.drawer'
+export { HostMapperModal } from './host-mapper-modal/host-mapper.modal'
 export { HostsConfigProfilesDrawer } from './hosts-config-profiles-drawer/hosts-config-profiles.drawer.widget'

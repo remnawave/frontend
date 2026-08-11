@@ -8,6 +8,7 @@ import {
     CreateHostDrawer,
     EditHostDrawer,
     EditManyHostsDrawer,
+    HostMapperModal,
     HostsConfigProfilesDrawer
 } from './hosts'
 import {
@@ -103,6 +104,7 @@ export const MODAL_REGISTRY = {
     hosts_createHostDrawer: CreateHostDrawer,
     hosts_editHostDrawer: EditHostDrawer,
     hosts_editManyHostsDrawer: EditManyHostsDrawer,
+    hosts_hostMapperModal: HostMapperModal,
     hosts_hostsConfigProfilesDrawer: HostsConfigProfilesDrawer,
 
     rwSettings_passkeysDrawer: PasskeysDrawer

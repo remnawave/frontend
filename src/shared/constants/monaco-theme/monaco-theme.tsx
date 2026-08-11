@@ -130,6 +130,17 @@ export const monacoTheme = {
         'editorCursor.foreground': '#54aeff',
         'editorWhitespace.foreground': '#484f58',
         'editorLineNumber.foreground': '#6e7681',
-        'editorLineNumber.activeForeground': '#c9d1d9'
+        'editorLineNumber.activeForeground': '#c9d1d9',
+        'editorWidget.background': '#1c2128',
+        'editorWidget.border': '#30363d',
+        'editorWidget.foreground': '#c9d1d9',
+        'editorHoverWidget.background': '#1c2128',
+        'editorHoverWidget.border': '#30363d',
+        'editorHoverWidget.foreground': '#c9d1d9',
+        'editorSuggestWidget.background': '#1c2128',
+        'editorSuggestWidget.border': '#30363d',
+        'editorSuggestWidget.foreground': '#c9d1d9',
+        'editorSuggestWidget.selectedBackground': '#21262d',
+        'editorSuggestWidget.highlightForeground': '#54aeff'
     }
 }

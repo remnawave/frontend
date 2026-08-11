@@ -441,7 +441,8 @@
     "hidden-host-description": "By default, Remnawave will not include hidden hosts in the subscription. Hidden host can be used with Mihomo and Xray-Json Advanced, Raw.",
     "server-description-1": "In supported clients, the protocol name (e.g. vless) will be replaced with the description specified here.",
     "server-description-2": "Not all client applications support this feature. For more details, refer to the documentation of the apps listed below.",
-    "supported-clients": "Supported clients"
+    "supported-clients": "Supported clients",
+    "mapper": "Mapper"
   },
   "base-node-form": {
     "country": "Country",

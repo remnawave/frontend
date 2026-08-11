@@ -95,6 +95,7 @@ export const EditHostDrawer = NiceModal.create((props: IProps) => {
                 muxParams: stringifyJsonField(host.muxParams),
                 sockoptParams: stringifyJsonField(host.sockoptParams),
                 finalMask: stringifyJsonField(host.finalMask),
+                mapper: host.mapper,
                 tags: host.tags ?? undefined,
                 isHidden: host.isHidden,
                 overrideSniFromAddress: host.overrideSniFromAddress,

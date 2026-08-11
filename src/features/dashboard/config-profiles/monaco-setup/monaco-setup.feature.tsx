@@ -1,6 +1,7 @@
 import { Monaco } from '@monaco-editor/react'
 import {
     GetSnippetsCommand,
+    HostMapperSchema,
     ResponseRulesConfigSchema,
     TSubscriptionTemplateType
 } from '@remnawave/backend-contract'
@@ -100,6 +101,74 @@ const injectProperty = (
     }
 
     return injected
+}
+
+const MAX_INBOUND_PATHS = 400
+const MAX_INBOUND_DEPTH = 10
+const MAX_INBOUND_VALUE_PREVIEW = 400
+
+const collectInboundPaths = (
+    value: unknown,
+    prefix: string,
+    depth: number,
+    collected: Map<string, unknown>
+) => {
+    if (collected.size >= MAX_INBOUND_PATHS || depth > MAX_INBOUND_DEPTH) return
+    if (value === null || typeof value !== 'object') return
+
+    const entries = Array.isArray(value)
+        ? value.map((item, index) => [String(index), item] as const)
+        : Object.entries(value as Record<string, unknown>)
+
+    for (const [key, child] of entries) {
+        if (collected.size >= MAX_INBOUND_PATHS) return
+
+        const path = prefix ? `${prefix}.${key}` : key
+
+        collected.set(path, child)
+        collectInboundPaths(child, path, depth + 1, collected)
+    }
+}
+
+const injectInboundPaths = (schema: unknown, rawInbound: unknown) => {
+    const collected = new Map<string, unknown>()
+    collectInboundPaths(rawInbound, '', 0, collected)
+
+    if (collected.size === 0) return
+
+    const snippets = [...collected.entries()].map(([path, value]) => {
+        const json = JSON.stringify(value, null, 2) ?? 'undefined'
+        const preview =
+            json.length > MAX_INBOUND_VALUE_PREVIEW
+                ? `${json.slice(0, MAX_INBOUND_VALUE_PREVIEW)}\n…`
+                : json
+
+        return {
+            label: path,
+            body: path,
+            markdownDescription: [
+                '',
+                'Current value in the inbound:',
+                '',
+                '```json',
+                preview,
+                '```'
+            ].join('\n')
+        }
+    })
+
+    const properties = (schema as { properties?: Record<string, { items?: ISchemaNode }> })
+        .properties
+
+    for (const client of ['xrayJson', 'mihomo', 'base64']) {
+        for (const branch of properties?.[client]?.items?.oneOf ?? []) {
+            const from = branch.properties?.from as Record<string, unknown> | undefined
+
+            if (!from) continue
+
+            from.defaultSnippets = snippets
+        }
+    }
 }
 
 const resolveRootNode = (schema: IXraySchema | undefined): ISchemaNode | undefined => {
@@ -401,6 +470,51 @@ export const MonacoSetupResponseRulesFeature = {
                         fileMatch: ['response-rules://*'],
                         schema,
                         uri: 'https://response-rules-schema.json'
+                    }
+                ],
+                validate: true
+            })
+
+            monaco.languages.json.jsonDefaults.setModeConfiguration({
+                documentFormattingEdits: true,
+                documentRangeFormattingEdits: true,
+                completionItems: true,
+                hovers: true,
+                documentSymbols: true,
+                tokens: true,
+                colors: true,
+                foldingRanges: true,
+                diagnostics: true,
+                selectionRanges: true
+            })
+
+            monaco.editor.defineTheme('GithubDark', {
+                ...monacoTheme,
+                base: 'vs-dark'
+            })
+        } catch (error) {
+            consola.error('Failed to load JSON schema:', error)
+        }
+    }
+}
+
+export const MonacoSetupHostMapperEditorFeature = {
+    setup: async (monaco: Monaco, rawInbound?: unknown) => {
+        try {
+            const schema = HostMapperSchema.toJSONSchema({ target: 'draft-07' })
+
+            injectInboundPaths(schema, rawInbound)
+
+            monaco.languages.json.jsonDefaults.setDiagnosticsOptions({
+                schemaValidation: 'error',
+                comments: 'error',
+                trailingCommas: 'error',
+
+                schemas: [
+                    {
+                        fileMatch: ['host-mapper://*'],
+                        schema,
+                        uri: 'https://host-mapper-schema.json'
                     }
                 ],
                 validate: true
