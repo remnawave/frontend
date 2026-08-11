@@ -4,6 +4,7 @@ import { HiChartPie, HiServer } from 'react-icons/hi'
 import { PiArrowsInCardinalFill, PiChartLine, PiListChecks, PiUsers } from 'react-icons/pi'
 import {
     TbApi,
+    TbCertificate,
     TbCirclesRelation,
     TbCreditCard,
     TbDeviceAnalytics,
@@ -83,6 +84,12 @@ export const useDesktopMenuSections = (): MenuItem[] => {
                     href: ROUTES.DASHBOARD.MANAGEMENT.NODE_PLUGINS.ROOT,
                     icon: TbPackage,
                     id: 'node-plugins'
+                },
+                {
+                    name: t('constants.certificates'),
+                    href: ROUTES.DASHBOARD.MANAGEMENT.ACME,
+                    icon: TbCertificate,
+                    id: 'acme-certificates'
                 },
                 {
                     name: t('constants.nodes-statistics'),

@@ -1,5 +1,6 @@
 import { LoginPage } from '@pages/auth/login'
 import { Oauth2CallbackPage } from '@pages/auth/oauth2-callback/oauth2-callback.page'
+import { AcmePageConnector } from '@pages/dashboard/acme/ui/connectors/acme-page.connector'
 import { ConfigProfilesPageConnector } from '@pages/dashboard/config-profiles/connectors'
 import { ConfigProfileByUuidPageConnector } from '@pages/dashboard/config-profiles/connectors/config-profile-by-uuid.page.connector'
 import { InfraBillingPageConnector } from '@pages/dashboard/crm/infra-billing/connectors/infra-billing.page.connector'
@@ -113,6 +114,11 @@ const router = createBrowserRouter(
                         <Route
                             element={<RemnawaveSettingsConnector />}
                             path={ROUTES.DASHBOARD.MANAGEMENT.REMNAWAVE_SETTINGS}
+                        />
+
+                        <Route
+                            element={<AcmePageConnector />}
+                            path={ROUTES.DASHBOARD.MANAGEMENT.ACME}
                         />
 
                         <Route path={ROUTES.DASHBOARD.MANAGEMENT.NODE_PLUGINS.ROOT}>
