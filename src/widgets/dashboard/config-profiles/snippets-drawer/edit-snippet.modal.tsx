@@ -1,11 +1,12 @@
 import type { editor } from 'monaco-editor'
 
 import { MonacoSetupSnippetsFeature } from '@features/dashboard/config-profiles/monaco-setup'
-import { Button, Code, Group, Paper, Stack } from '@mantine/core'
+import { Box, Button, Code, Group, Paper } from '@mantine/core'
 import { useForm, schemaResolver } from '@mantine/form'
 import { modals } from '@mantine/modals'
 import { Editor, Monaco, useMonaco } from '@monaco-editor/react'
 import { UpdateSnippetCommand } from '@remnawave/backend-contract'
+import clsx from 'clsx'
 import { t } from 'i18next'
 import { useEffect, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -14,7 +15,10 @@ import { queryClient } from '@shared/api'
 import { useSyncSnippet, useUpdateSnippet } from '@shared/api/hooks'
 import { QueryKeys } from '@shared/api/hooks/keys-factory'
 import { monacoTheme } from '@shared/constants/monaco-theme'
+import { usePseudoFullscreen } from '@shared/hooks'
 import { CopyableFieldShared } from '@shared/ui/copyable-field/copyable-field'
+import { fullscreenClasses, FullscreenToggleButton } from '@shared/ui/fullscreen-toggle-button'
+import { forceMonacoRetokenize } from '@shared/utils/monaco/force-retokenize'
 
 import { openConfirmSnippetSyncModal } from './confirm-snippet-sync.modal'
 import classes from './SnippetsDrawer.module.css'
@@ -31,6 +35,7 @@ export const EditSnippetModal = (props: IProps) => {
     const { i18n } = useTranslation()
 
     const monaco = useMonaco()
+    const { isFullscreen, toggle: toggleFullscreen } = usePseudoFullscreen()
     const editorRef = useRef<editor.IStandaloneCodeEditor | null>(null)
 
     const { mutate: updateSnippet, isPending: isUpdating } = useUpdateSnippet({
@@ -119,14 +124,18 @@ export const EditSnippetModal = (props: IProps) => {
 
     return (
         <form onSubmit={(e) => editSnippetForm.onSubmit(handleUpdate)(e)}>
-            <Stack gap="md">
-                <CopyableFieldShared
-                    label={t('snippets.drawer.widget.snippet-name')}
-                    value={editSnippetForm.getValues().name}
-                />
+            <Box className={clsx(classes.container, isFullscreen && fullscreenClasses.overlay)}>
+                {!isFullscreen && (
+                    <CopyableFieldShared
+                        label={t('snippets.drawer.widget.snippet-name')}
+                        value={editSnippetForm.getValues().name}
+                    />
+                )}
 
                 <Paper
+                    className={clsx(classes.editorWrapper, isFullscreen && fullscreenClasses.fill)}
                     p={0}
+                    pos="relative"
                     style={{
                         border: editSnippetForm.getInputProps('snippet').error
                             ? '1px solid var(--mantine-color-red-5)'
@@ -134,11 +143,15 @@ export const EditSnippetModal = (props: IProps) => {
                     }}
                     withBorder
                 >
+                    <FullscreenToggleButton
+                        isFullscreen={isFullscreen}
+                        onToggle={toggleFullscreen}
+                    />
+
                     <Editor
                         beforeMount={handleEditorDidMount}
                         className={classes.editor}
                         defaultLanguage="json"
-                        height={400}
                         loading={t('config-editor.widget.loading-editor')}
                         onChange={(value) => {
                             try {
@@ -154,6 +167,8 @@ export const EditSnippetModal = (props: IProps) => {
                         }}
                         onMount={(editor) => {
                             editorRef.current = editor
+
+                            forceMonacoRetokenize(editor)
                         }}
                         options={{
                             autoClosingBrackets: 'always',
@@ -173,6 +188,8 @@ export const EditSnippetModal = (props: IProps) => {
                                 arrowSize: 30,
                                 alwaysConsumeMouseWheel: false
                             },
+                            hover: { above: false },
+                            fixedOverflowWidgets: true,
                             detectIndentation: true,
                             folding: true,
                             foldingStrategy: 'indentation',
@@ -240,7 +257,7 @@ export const EditSnippetModal = (props: IProps) => {
                         {t('common.save')}
                     </Button>
                 </Group>
-            </Stack>
+            </Box>
         </form>
     )
 }

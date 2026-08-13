@@ -2,3 +2,22 @@
     z-index: auto;
     position: static;
 }
+
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--mantine-spacing-md);
+}
+
+.editorWrapper {
+    height: 600px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.monacoEditor {
+    flex: 1;
+    height: 100%;
+    width: 100%;
+}

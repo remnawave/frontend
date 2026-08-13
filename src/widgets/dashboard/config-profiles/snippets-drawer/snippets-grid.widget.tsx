@@ -102,7 +102,8 @@ export const SnippetsGridWidget = (props: IProps) => {
                 />
             ),
             centered: true,
-            size: 'lg',
+            size: '80%',
+            transitionProps: { transition: 'fade' },
             children: <EditSnippetModal snippet={snippet} />
         })
     }

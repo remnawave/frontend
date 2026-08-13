@@ -1,11 +1,12 @@
 import type { editor } from 'monaco-editor'
 
 import { MonacoSetupSnippetsFeature } from '@features/dashboard/config-profiles/monaco-setup'
-import { Button, Code, Group, Paper, Stack, TextInput } from '@mantine/core'
+import { Box, Button, Code, Group, Paper, TextInput } from '@mantine/core'
 import { useForm, schemaResolver } from '@mantine/form'
 import { modals } from '@mantine/modals'
 import { Editor, Monaco, useMonaco } from '@monaco-editor/react'
 import { CreateSnippetCommand } from '@remnawave/backend-contract'
+import clsx from 'clsx'
 import { useEffect, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 
@@ -13,6 +14,9 @@ import { queryClient } from '@shared/api'
 import { QueryKeys } from '@shared/api/hooks/keys-factory'
 import { useCreateSnippet } from '@shared/api/hooks/snippets/snippets.mutation.hooks'
 import { monacoTheme } from '@shared/constants/monaco-theme'
+import { usePseudoFullscreen } from '@shared/hooks'
+import { fullscreenClasses, FullscreenToggleButton } from '@shared/ui/fullscreen-toggle-button'
+import { forceMonacoRetokenize } from '@shared/utils/monaco/force-retokenize'
 
 import classes from './SnippetsDrawer.module.css'
 
@@ -22,6 +26,7 @@ export const CreateSnippetModal = () => {
     const { t, i18n } = useTranslation()
 
     const monaco = useMonaco()
+    const { isFullscreen, toggle: toggleFullscreen } = usePseudoFullscreen()
     const editorRef = useRef<editor.IStandaloneCodeEditor | null>(null)
 
     const createSnippetForm = useForm<CreateSnippetCommand.RequestBody>({
@@ -96,19 +101,23 @@ export const CreateSnippetModal = () => {
 
     return (
         <form onSubmit={(e) => createSnippetForm.onSubmit(handleCreate)(e)}>
-            <Stack gap="md">
-                <TextInput
-                    key={createSnippetForm.key('name')}
-                    label={t('snippets.drawer.widget.snippet-name')}
-                    placeholder={t(
-                        'snippets.drawer.widget.enter-snippet-name-cannot-be-changed-later'
-                    )}
-                    required
-                    {...createSnippetForm.getInputProps('name')}
-                />
+            <Box className={clsx(classes.container, isFullscreen && fullscreenClasses.overlay)}>
+                {!isFullscreen && (
+                    <TextInput
+                        key={createSnippetForm.key('name')}
+                        label={t('snippets.drawer.widget.snippet-name')}
+                        placeholder={t(
+                            'snippets.drawer.widget.enter-snippet-name-cannot-be-changed-later'
+                        )}
+                        required
+                        {...createSnippetForm.getInputProps('name')}
+                    />
+                )}
 
                 <Paper
+                    className={clsx(classes.editorWrapper, isFullscreen && fullscreenClasses.fill)}
                     p={0}
+                    pos="relative"
                     style={{
                         border: createSnippetForm.getInputProps('snippet').error
                             ? '1px solid var(--mantine-color-red-5)'
@@ -116,11 +125,15 @@ export const CreateSnippetModal = () => {
                     }}
                     withBorder
                 >
+                    <FullscreenToggleButton
+                        isFullscreen={isFullscreen}
+                        onToggle={toggleFullscreen}
+                    />
+
                     <Editor
                         beforeMount={handleEditorDidMount}
                         className={classes.editor}
                         defaultLanguage="json"
-                        height={400}
                         loading={t('config-editor.widget.loading-editor')}
                         onChange={(value) => {
                             try {
@@ -136,6 +149,8 @@ export const CreateSnippetModal = () => {
                         }}
                         onMount={(editor) => {
                             editorRef.current = editor
+
+                            forceMonacoRetokenize(editor)
                         }}
                         options={{
                             autoClosingBrackets: 'always',
@@ -165,6 +180,7 @@ export const CreateSnippetModal = () => {
                                 bracketPairs: true,
                                 indentation: true
                             },
+                            hover: { above: false },
                             insertSpaces: true,
                             minimap: { enabled: true },
                             quickSuggestions: true,
@@ -223,7 +239,7 @@ export const CreateSnippetModal = () => {
                         {t('common.create')}
                     </Button>
                 </Group>
-            </Stack>
+            </Box>
         </form>
     )
 }

@@ -11,6 +11,7 @@ import { useTranslation } from 'react-i18next'
 import { TbAlertTriangle } from 'react-icons/tb'
 import { useBlocker } from 'react-router'
 
+import { monacoTheme } from '@shared/constants/monaco-theme'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { preventBackScroll } from '@shared/utils/misc'
 
@@ -82,6 +83,11 @@ export function NodePluginEditorWidget(props: IProps) {
     }, [blocker])
 
     const handleEditorDidMount = (monaco: Monaco) => {
+        monaco.editor.defineTheme('GithubDark', {
+            ...monacoTheme,
+            base: 'vs-dark'
+        })
+
         MonacoSetupNodePluginEditorFeature.setup(monaco)
     }
 

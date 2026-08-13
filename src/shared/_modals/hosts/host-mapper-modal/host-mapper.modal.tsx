@@ -2,7 +2,7 @@ import type { editor } from 'monaco-editor'
 
 import NiceModal, { useModal } from '@ebay/nice-modal-react'
 import { MonacoSetupHostMapperEditorFeature } from '@features/dashboard/config-profiles/monaco-setup'
-import { Button, Code, Group, Modal, Paper, Stack } from '@mantine/core'
+import { Box, Button, Code, Group, Modal, Paper } from '@mantine/core'
 import { UseFormReturnType } from '@mantine/form'
 import { Editor, Monaco, useMonaco } from '@monaco-editor/react'
 import {
@@ -11,13 +11,17 @@ import {
     UpdateHostCommand,
     UpdateManyHostsCommand
 } from '@remnawave/backend-contract'
+import clsx from 'clsx'
 import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { TbArrowsExchange } from 'react-icons/tb'
 
 import { useNiceMantineModal } from '@shared/_modals/use-nice-modal'
 import { monacoTheme } from '@shared/constants/monaco-theme'
+import { usePseudoFullscreen } from '@shared/hooks'
+import { fullscreenClasses, FullscreenToggleButton } from '@shared/ui/fullscreen-toggle-button'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
+import { forceMonacoRetokenize } from '@shared/utils/monaco/force-retokenize'
 
 import classes from './HostMapperModal.module.css'
 
@@ -39,8 +43,10 @@ export const HostMapperModal = NiceModal.create((props: IProps) => {
     const { modalProps, hide } = useNiceMantineModal({ modal })
 
     const { t } = useTranslation()
+    const { isFullscreen, toggle: toggleFullscreen } = usePseudoFullscreen()
 
     const monaco = useMonaco()
+    const monacoRef = useRef<Monaco | null>(null)
     const editorRef = useRef<editor.IStandaloneCodeEditor | null>(null)
 
     const [error, setError] = useState<null | string>(null)
@@ -58,6 +64,12 @@ export const HostMapperModal = NiceModal.create((props: IProps) => {
             base: 'vs-dark'
         })
     }
+
+    useEffect(() => {
+        if (!monaco) return
+
+        MonacoSetupHostMapperEditorFeature.setup(monaco, rawInbound)
+    }, [monaco, rawInbound])
 
     const handleSave = () => {
         if (!editorRef.current) return
@@ -91,17 +103,11 @@ export const HostMapperModal = NiceModal.create((props: IProps) => {
         hide()
     }
 
-    useEffect(() => {
-        if (!monaco) return
-
-        MonacoSetupHostMapperEditorFeature.setup(monaco, rawInbound)
-    }, [monaco, rawInbound])
-
     return (
         <Modal
             {...modalProps}
             classNames={{ header: classes.header }}
-            size="70%"
+            size="90%"
             transitionProps={{ transition: 'fade', duration: 200 }}
             title={
                 <BaseOverlayHeader
@@ -112,9 +118,11 @@ export const HostMapperModal = NiceModal.create((props: IProps) => {
                 />
             }
         >
-            <Stack gap="md">
+            <Box className={clsx(classes.container, isFullscreen && fullscreenClasses.overlay)}>
                 <Paper
+                    className={clsx(classes.editorWrapper, isFullscreen && fullscreenClasses.fill)}
                     p={0}
+                    pos="relative"
                     style={{
                         border: error
                             ? '1px solid var(--mantine-color-red-5)'
@@ -122,15 +130,23 @@ export const HostMapperModal = NiceModal.create((props: IProps) => {
                     }}
                     withBorder
                 >
+                    <FullscreenToggleButton
+                        isFullscreen={isFullscreen}
+                        onToggle={toggleFullscreen}
+                    />
+
                     <Editor
                         beforeMount={handleEditorWillMount}
+                        className={classes.monacoEditor}
                         defaultLanguage="json"
-                        defaultValue={initialValue}
-                        height={500}
+                        value={initialValue}
                         loading={t('config-editor.widget.loading-editor')}
                         onChange={() => setError(null)}
-                        onMount={(editor) => {
+                        onMount={(editor, monaco) => {
                             editorRef.current = editor
+                            monacoRef.current = monaco
+
+                            forceMonacoRetokenize(editor)
 
                             const contribution = editor.getContribution(
                                 'editor.contrib.suggestController'
@@ -215,7 +231,7 @@ export const HostMapperModal = NiceModal.create((props: IProps) => {
                     </Button>
                     <Button onClick={handleSave}>{t('common.save')}</Button>
                 </Group>
-            </Stack>
+            </Box>
         </Modal>
     )
 })

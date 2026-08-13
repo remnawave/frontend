@@ -21,4 +21,6 @@ self.MonacoEnvironment = {
 
 loader.config({ monaco })
 
-loader.init().then(/* ... */)
+loader.init().then(() => {
+    monaco.editor.createModel('{}', 'json').dispose()
+})

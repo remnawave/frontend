@@ -10,8 +10,6 @@ import axios from 'axios'
 import consola from 'consola'
 import { app } from 'src/config'
 
-import { monacoTheme } from '@shared/constants/monaco-theme'
-
 interface ISchemaNode {
     allOf?: ISchemaNode[]
     anyOf?: ISchemaNode[]
@@ -474,24 +472,6 @@ export const MonacoSetupResponseRulesFeature = {
                 ],
                 validate: true
             })
-
-            monaco.languages.json.jsonDefaults.setModeConfiguration({
-                documentFormattingEdits: true,
-                documentRangeFormattingEdits: true,
-                completionItems: true,
-                hovers: true,
-                documentSymbols: true,
-                tokens: true,
-                colors: true,
-                foldingRanges: true,
-                diagnostics: true,
-                selectionRanges: true
-            })
-
-            monaco.editor.defineTheme('GithubDark', {
-                ...monacoTheme,
-                base: 'vs-dark'
-            })
         } catch (error) {
             consola.error('Failed to load JSON schema:', error)
         }
@@ -519,24 +499,6 @@ export const MonacoSetupHostMapperEditorFeature = {
                 ],
                 validate: true
             })
-
-            monaco.languages.json.jsonDefaults.setModeConfiguration({
-                documentFormattingEdits: true,
-                documentRangeFormattingEdits: true,
-                completionItems: true,
-                hovers: true,
-                documentSymbols: true,
-                tokens: true,
-                colors: true,
-                foldingRanges: true,
-                diagnostics: true,
-                selectionRanges: true
-            })
-
-            monaco.editor.defineTheme('GithubDark', {
-                ...monacoTheme,
-                base: 'vs-dark'
-            })
         } catch (error) {
             consola.error('Failed to load JSON schema:', error)
         }
@@ -561,24 +523,6 @@ export const MonacoSetupNodePluginEditorFeature = {
                     }
                 ],
                 validate: true
-            })
-
-            monaco.languages.json.jsonDefaults.setModeConfiguration({
-                documentFormattingEdits: true,
-                documentRangeFormattingEdits: true,
-                completionItems: true,
-                hovers: true,
-                documentSymbols: true,
-                tokens: true,
-                colors: true,
-                foldingRanges: true,
-                diagnostics: true,
-                selectionRanges: true
-            })
-
-            monaco.editor.defineTheme('GithubDark', {
-                ...monacoTheme,
-                base: 'vs-dark'
             })
         } catch (error) {
             consola.error('Failed to load JSON schema:', error)

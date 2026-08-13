@@ -51,7 +51,8 @@ export const SnippetsWidget = (props: IProps) => {
             ),
             centered: true,
             modalId: CREATE_SNIPPET_MODAL_ID,
-            size: 'lg',
+            size: '80%',
+            transitionProps: { transition: 'fade' },
             children: <CreateSnippetModal />
         })
     }
