@@ -141,6 +141,13 @@ export const monacoTheme = {
         'editorSuggestWidget.border': '#30363d',
         'editorSuggestWidget.foreground': '#c9d1d9',
         'editorSuggestWidget.selectedBackground': '#21262d',
-        'editorSuggestWidget.highlightForeground': '#54aeff'
+        'editorSuggestWidget.highlightForeground': '#54aeff',
+
+        'menu.background': '#1c2128',
+        'menu.foreground': '#c9d1d9',
+        'menu.selectionBackground': '#22b8cf29',
+        'menu.selectionForeground': '#e6edf3',
+        'menu.separatorBackground': '#30363d',
+        'menu.border': '#30363d'
     }
 }

@@ -2,17 +2,17 @@ import type { editor } from 'monaco-editor'
 
 import { MonacoSetupResponseRulesFeature } from '@features/dashboard/config-profiles/monaco-setup'
 import { ResponseRulesEditorActionsFeature } from '@features/dashboard/response-rules/response-rules-editor-actions'
-import { Box, Card, Code, Paper, Stack } from '@mantine/core'
+import { Box, Card, Paper, Stack } from '@mantine/core'
 import { modals } from '@mantine/modals'
-import Editor, { Monaco } from '@monaco-editor/react'
+import { Monaco } from '@monaco-editor/react'
 import clsx from 'clsx'
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { TbAlertTriangle } from 'react-icons/tb'
 import { useBlocker } from 'react-router'
 
-import { monacoTheme } from '@shared/constants/monaco-theme'
-import { usePseudoFullscreen } from '@shared/hooks'
+import { usePseudoFullscreen, useViewportFillHeight } from '@shared/hooks'
+import { CodeEditor, EditorStatusBar } from '@shared/ui/code-editor'
 import { fullscreenClasses, FullscreenToggleButton } from '@shared/ui/fullscreen-toggle-button'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { preventBackScroll } from '@shared/utils/misc'
@@ -26,6 +26,9 @@ export function ResponseRulesEditorWidget(props: IProps) {
     const { groupedTemplates, responseRules, subscriptionSettingsUuid } = props
 
     const { isFullscreen, toggle: toggleFullscreen } = usePseudoFullscreen()
+    const { containerRef: editorWrapperRef, footerRef } = useViewportFillHeight({
+        enabled: !isFullscreen
+    })
 
     const [result, setResult] = useState('')
     const [isConfigValid, setIsConfigValid] = useState(false)
@@ -83,11 +86,6 @@ export function ResponseRulesEditorWidget(props: IProps) {
     }, [blocker])
 
     const handleEditorDidMount = (monaco: Monaco) => {
-        monaco.editor.defineTheme('GithubDark', {
-            ...monacoTheme,
-            base: 'vs-dark'
-        })
-
         MonacoSetupResponseRulesFeature.setup(monaco, groupedTemplates)
     }
 
@@ -113,6 +111,7 @@ export function ResponseRulesEditorWidget(props: IProps) {
             <Paper
                 className={clsx(styles.editorWrapper, isFullscreen && fullscreenClasses.fill)}
                 p={0}
+                ref={editorWrapperRef}
                 pos="relative"
                 style={{
                     direction: 'ltr'
@@ -121,11 +120,17 @@ export function ResponseRulesEditorWidget(props: IProps) {
             >
                 <FullscreenToggleButton isFullscreen={isFullscreen} onToggle={toggleFullscreen} />
 
-                <Editor
+                <CodeEditor
+                    footer={
+                        result && (
+                            <EditorStatusBar status={isConfigValid ? 'success' : 'error'}>
+                                {result}
+                            </EditorStatusBar>
+                        )
+                    }
                     beforeMount={handleEditorDidMount}
                     className={styles.monacoEditor}
                     defaultLanguage="json"
-                    loading="Editor is loading..."
                     onChange={() => {
                         checkForChanges()
                     }}
@@ -148,82 +153,14 @@ export function ResponseRulesEditorWidget(props: IProps) {
                             }
                         }
                     }}
-                    options={{
-                        autoClosingBrackets: 'always',
-                        autoClosingQuotes: 'always',
-                        autoIndent: 'full',
-                        automaticLayout: true,
-                        fixedOverflowWidgets: true,
-                        bracketPairColorization: {
-                            enabled: true,
-                            independentColorPoolPerBracketType: true
-                        },
-                        scrollbar: {
-                            useShadows: false,
-                            verticalHasArrows: true,
-                            horizontalHasArrows: true,
-                            vertical: 'visible',
-                            horizontal: 'visible',
-                            arrowSize: 30,
-                            alwaysConsumeMouseWheel: false
-                        },
-                        detectIndentation: true,
-                        folding: true,
-                        foldingStrategy: 'indentation',
-                        fontSize: 14,
-                        formatOnPaste: true,
-                        formatOnType: true,
-                        guides: {
-                            bracketPairs: true,
-                            indentation: true
-                        },
-                        insertSpaces: true,
-
-                        minimap: { enabled: true },
-                        quickSuggestions: true,
-                        renderLineHighlight: 'all',
-                        scrollBeyondLastLine: false,
-                        smoothScrolling: true,
-                        tabSize: 2,
-                        padding: {
-                            top: 10,
-                            bottom: 10
-                        }
-                    }}
                     path="response-rules://*"
-                    theme="GithubDark"
                     value={JSON.stringify(responseRules, null, 2)}
                 />
             </Paper>
 
             {!isFullscreen && (
-                <Card className={styles.footer} h="auto" m="0" pos="sticky">
+                <Card className={styles.footer} h="auto" m="0" pos="sticky" ref={footerRef}>
                     <Stack gap="md">
-                        {result && (
-                            <Paper
-                                className={styles.validationMessage}
-                                p="md"
-                                radius="sm"
-                                style={{
-                                    backgroundColor: isConfigValid
-                                        ? 'rgba(51, 171, 132, 0.1)'
-                                        : 'rgba(241, 65, 65, 0.1)',
-                                    border: `1px solid ${isConfigValid ? 'rgb(51, 171, 132)' : 'rgb(241, 65, 65)'}`
-                                }}
-                            >
-                                <Code
-                                    color={isConfigValid ? 'teal' : 'red'}
-                                    style={{
-                                        backgroundColor: 'transparent',
-                                        fontSize: '0.9rem',
-                                        padding: 0
-                                    }}
-                                >
-                                    {result}
-                                </Code>
-                            </Paper>
-                        )}
-
                         <ResponseRulesEditorActionsFeature
                             editorRef={editorRef}
                             hasUnsavedChanges={hasUnsavedChanges}

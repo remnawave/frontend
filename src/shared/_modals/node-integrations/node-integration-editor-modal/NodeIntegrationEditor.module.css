@@ -1,0 +1,12 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--mantine-spacing-md);
+}
+
+.editorWrapper {
+    height: 400px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}

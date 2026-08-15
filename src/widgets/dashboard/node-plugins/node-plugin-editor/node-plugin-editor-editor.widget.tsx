@@ -2,16 +2,19 @@ import type { editor } from 'monaco-editor'
 
 import { MonacoSetupNodePluginEditorFeature } from '@features/dashboard/config-profiles/monaco-setup'
 import { NodePluginsEditorActionsFeature } from '@features/dashboard/node-plugins/node-plugins-editor-actions'
-import { Box, Card, Code, Paper } from '@mantine/core'
+import { Box, Card, Paper } from '@mantine/core'
 import { modals } from '@mantine/modals'
-import Editor, { Monaco } from '@monaco-editor/react'
+import { Monaco } from '@monaco-editor/react'
 import { GetNodePluginCommand } from '@remnawave/backend-contract'
+import clsx from 'clsx'
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { TbAlertTriangle } from 'react-icons/tb'
 import { useBlocker } from 'react-router'
 
-import { monacoTheme } from '@shared/constants/monaco-theme'
+import { usePseudoFullscreen, useViewportFillHeight } from '@shared/hooks'
+import { CodeEditor, EditorStatusBar } from '@shared/ui/code-editor'
+import { fullscreenClasses, FullscreenToggleButton } from '@shared/ui/fullscreen-toggle-button'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { preventBackScroll } from '@shared/utils/misc'
 
@@ -33,6 +36,11 @@ export function NodePluginEditorWidget(props: IProps) {
     const [originalValue, setOriginalValue] = useState<string>(
         JSON.stringify(nodePlugin, null, 2) || ''
     )
+
+    const { isFullscreen, toggle: toggleFullscreen } = usePseudoFullscreen()
+    const { containerRef: editorWrapperRef, footerRef } = useViewportFillHeight({
+        enabled: !isFullscreen
+    })
 
     const editorRef = useRef<editor.IStandaloneCodeEditor | null>(null)
     const monacoRef = useRef<Monaco | null>(null)
@@ -83,11 +91,6 @@ export function NodePluginEditorWidget(props: IProps) {
     }, [blocker])
 
     const handleEditorDidMount = (monaco: Monaco) => {
-        monaco.editor.defineTheme('GithubDark', {
-            ...monacoTheme,
-            base: 'vs-dark'
-        })
-
         MonacoSetupNodePluginEditorFeature.setup(monaco)
     }
 
@@ -109,51 +112,35 @@ export function NodePluginEditorWidget(props: IProps) {
     }, [])
 
     return (
-        <Box className={styles.container}>
-            {result && (
-                <Paper
-                    className={styles.validationMessage}
-                    mb="md"
-                    p="md"
-                    radius="sm"
-                    style={{
-                        backgroundColor: isConfigValid
-                            ? 'rgba(51, 171, 132, 0.1)'
-                            : 'rgba(241, 65, 65, 0.1)',
-                        border: `1px solid ${isConfigValid ? 'rgb(51, 171, 132)' : 'rgb(241, 65, 65)'}`
-                    }}
-                >
-                    <Code
-                        color={isConfigValid ? 'teal' : 'red'}
-                        style={{
-                            backgroundColor: 'transparent',
-                            fontSize: '0.9rem',
-                            padding: 0
-                        }}
-                    >
-                        {result}
-                    </Code>
-                </Paper>
-            )}
-
+        <Box className={clsx(styles.container, isFullscreen && fullscreenClasses.overlay)}>
             <div style={{ position: 'absolute', opacity: 0, height: 0, overflow: 'hidden' }}>
                 <input aria-hidden="true" name="fake-login" tabIndex={-1} type="text" />
                 <input aria-hidden="true" name="fake-password" tabIndex={-1} type="password" />
             </div>
 
             <Paper
-                className={styles.editorWrapper}
+                className={clsx(styles.editorWrapper, isFullscreen && fullscreenClasses.fill)}
                 p={0}
+                ref={editorWrapperRef}
+                pos="relative"
                 style={{
                     direction: 'ltr'
                 }}
                 withBorder
             >
-                <Editor
+                <FullscreenToggleButton isFullscreen={isFullscreen} onToggle={toggleFullscreen} />
+
+                <CodeEditor
+                    footer={
+                        result && (
+                            <EditorStatusBar status={isConfigValid ? 'success' : 'error'}>
+                                {result}
+                            </EditorStatusBar>
+                        )
+                    }
                     beforeMount={handleEditorDidMount}
                     className={styles.monacoEditor}
                     defaultLanguage="json"
-                    loading="Editor is loading..."
                     onChange={() => {
                         checkForChanges()
                     }}
@@ -176,55 +163,12 @@ export function NodePluginEditorWidget(props: IProps) {
                             }
                         }
                     }}
-                    options={{
-                        autoClosingBrackets: 'always',
-                        autoClosingQuotes: 'always',
-                        autoIndent: 'full',
-                        automaticLayout: true,
-                        fixedOverflowWidgets: true,
-                        bracketPairColorization: {
-                            enabled: true,
-                            independentColorPoolPerBracketType: true
-                        },
-                        scrollbar: {
-                            useShadows: false,
-                            verticalHasArrows: true,
-                            horizontalHasArrows: true,
-                            vertical: 'visible',
-                            horizontal: 'visible',
-                            arrowSize: 30,
-                            alwaysConsumeMouseWheel: false
-                        },
-                        detectIndentation: true,
-                        folding: true,
-                        foldingStrategy: 'indentation',
-                        fontSize: 14,
-                        formatOnPaste: true,
-                        formatOnType: true,
-                        guides: {
-                            bracketPairs: true,
-                            indentation: true
-                        },
-                        insertSpaces: true,
-
-                        minimap: { enabled: true },
-                        quickSuggestions: true,
-                        renderLineHighlight: 'all',
-                        scrollBeyondLastLine: false,
-                        smoothScrolling: true,
-                        tabSize: 2,
-                        padding: {
-                            top: 10,
-                            bottom: 10
-                        }
-                    }}
                     path="node-plugin://*"
-                    theme="GithubDark"
                     value={JSON.stringify(nodePlugin, null, 2)}
                 />
             </Paper>
 
-            <Card className={styles.footer} h="auto" m="0" mt="md" pos="sticky">
+            <Card className={styles.footer} h="auto" m="0" mt="md" pos="sticky" ref={footerRef}>
                 <NodePluginsEditorActionsFeature
                     editorRef={editorRef}
                     hasUnsavedChanges={hasUnsavedChanges}

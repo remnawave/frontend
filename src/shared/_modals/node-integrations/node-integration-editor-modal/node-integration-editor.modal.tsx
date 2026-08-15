@@ -1,12 +1,12 @@
 import NiceModal, { useModal } from '@ebay/nice-modal-react'
-import { Button, Code, Group, Modal, Paper, Stack, TextInput } from '@mantine/core'
+import { Box, Button, Group, Modal, Paper, Stack, TextInput } from '@mantine/core'
 import { schemaResolver, useForm } from '@mantine/form'
 import { modals } from '@mantine/modals'
-import Editor, { Monaco } from '@monaco-editor/react'
 import {
     CreateNodeIntegrationCommand,
     UpdateNodeIntegrationCommand
 } from '@remnawave/backend-contract'
+import clsx from 'clsx'
 import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { TbDeviceFloppy, TbPlugConnected, TbRocket } from 'react-icons/tb'
@@ -19,12 +19,17 @@ import {
     useGetNodeIntegration,
     useUpdateNodeIntegration
 } from '@shared/api/hooks'
-import { monacoTheme } from '@shared/constants/monaco-theme'
+import { COMPACT_MONACO_OPTIONS } from '@shared/constants/monaco-theme'
+import { usePseudoFullscreen } from '@shared/hooks'
 import { ActionCardShared } from '@shared/ui'
+import { CodeEditor, EditorStatusBar } from '@shared/ui/code-editor'
+import { fullscreenClasses, FullscreenToggleButton } from '@shared/ui/fullscreen-toggle-button'
 import { LoaderModalShared } from '@shared/ui/loader-modal'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { handleFormErrors } from '@shared/utils/misc'
 import { forceMonacoRetokenize } from '@shared/utils/monaco/force-retokenize'
+
+import classes from './NodeIntegrationEditor.module.css'
 
 const EMPTY_CONFIG = '{}'
 
@@ -50,6 +55,8 @@ export const NodeIntegrationEditorModal = NiceModal.create((props: IProps) => {
 
     const [configValue, setConfigValue] = useState(EMPTY_CONFIG)
     const [configError, setConfigError] = useState<null | string>(null)
+
+    const { isFullscreen, toggle: toggleFullscreen } = usePseudoFullscreen()
 
     const form = useForm<IFormValues>({
         name: 'node-integration-form',
@@ -210,13 +217,6 @@ export const NodeIntegrationEditorModal = NiceModal.create((props: IProps) => {
         })
     })
 
-    const handleEditorWillMount = (monaco: Monaco) => {
-        monaco.editor.defineTheme('GithubDark', {
-            ...monacoTheme,
-            base: 'vs-dark'
-        })
-    }
-
     return (
         <Modal
             {...modalProps}
@@ -235,28 +235,55 @@ export const NodeIntegrationEditorModal = NiceModal.create((props: IProps) => {
 
             {(!isEditMode || !isLoading) && (
                 <form onSubmit={handleSubmit}>
-                    <Stack gap="md">
-                        <TextInput
-                            key={form.key('name')}
-                            label={t('node-integrations.editor.name')}
-                            placeholder="Integration"
-                            required
-                            {...form.getInputProps('name')}
-                        />
+                    <Box
+                        className={clsx(
+                            classes.container,
+                            isFullscreen && fullscreenClasses.overlay
+                        )}
+                    >
+                        {!isFullscreen && (
+                            <TextInput
+                                key={form.key('name')}
+                                label={t('node-integrations.editor.name')}
+                                placeholder="Integration"
+                                required
+                                {...form.getInputProps('name')}
+                            />
+                        )}
 
-                        <TextInput
-                            key={form.key('description')}
-                            label={t('node-integrations.editor.description')}
-                            placeholder={t('node-integrations.editor.description-placeholder')}
-                            {...form.getInputProps('description')}
-                        />
+                        {!isFullscreen && (
+                            <TextInput
+                                key={form.key('description')}
+                                label={t('node-integrations.editor.description')}
+                                placeholder={t('node-integrations.editor.description-placeholder')}
+                                {...form.getInputProps('description')}
+                            />
+                        )}
 
-                        <Paper h={400} p={0} radius="sm" style={{ overflow: 'hidden' }} withBorder>
-                            <Editor
-                                beforeMount={handleEditorWillMount}
+                        <Paper
+                            className={clsx(
+                                classes.editorWrapper,
+                                isFullscreen && fullscreenClasses.fill
+                            )}
+                            p={0}
+                            pos="relative"
+                            radius="sm"
+                            withBorder
+                        >
+                            <FullscreenToggleButton
+                                isFullscreen={isFullscreen}
+                                onToggle={toggleFullscreen}
+                            />
+
+                            <CodeEditor
                                 defaultLanguage="json"
-                                height="100%"
-                                loading="Editor is loading..."
+                                footer={
+                                    configError && (
+                                        <EditorStatusBar status="error">
+                                            {configError}
+                                        </EditorStatusBar>
+                                    )
+                                }
                                 onChange={(value) => {
                                     setConfigValue(value ?? '')
                                     setConfigError(null)
@@ -265,80 +292,31 @@ export const NodeIntegrationEditorModal = NiceModal.create((props: IProps) => {
                                     forceMonacoRetokenize(editor)
                                 }}
                                 options={{
-                                    autoClosingBrackets: 'always',
-                                    autoClosingQuotes: 'always',
-                                    autoIndent: 'full',
-                                    automaticLayout: true,
-                                    bracketPairColorization: {
-                                        enabled: true,
-                                        independentColorPoolPerBracketType: true
-                                    },
-                                    detectIndentation: true,
-                                    fixedOverflowWidgets: true,
-                                    folding: true,
-                                    fontSize: 14,
-                                    hover: { above: false },
-                                    formatOnPaste: true,
-                                    formatOnType: true,
-                                    guides: {
-                                        bracketPairs: true,
-                                        indentation: true
-                                    },
-                                    insertSpaces: true,
-                                    minimap: { enabled: false },
+                                    ...COMPACT_MONACO_OPTIONS,
                                     quickSuggestions: false,
                                     suggestOnTriggerCharacters: false,
-                                    wordBasedSuggestions: 'off',
-                                    renderLineHighlight: 'all',
-                                    scrollBeyondLastLine: false,
-                                    smoothScrolling: true,
-                                    tabSize: 2,
-                                    padding: {
-                                        top: 10,
-                                        bottom: 10
-                                    }
+                                    wordBasedSuggestions: 'off'
                                 }}
                                 path="node-integration://*"
-                                theme="GithubDark"
                                 value={configValue}
                             />
                         </Paper>
 
-                        {configError && (
-                            <Paper
-                                p="md"
-                                radius="sm"
-                                style={{
-                                    backgroundColor: 'rgba(241, 65, 65, 0.1)',
-                                    border: `1px solid rgb(241, 65, 65)`
-                                }}
-                            >
-                                <Code
-                                    color="red"
-                                    style={{
-                                        backgroundColor: 'transparent',
-                                        fontSize: '0.9rem',
-                                        padding: 0
-                                    }}
+                        {!isFullscreen && (
+                            <Group justify="flex-end">
+                                <Button onClick={hide} variant="subtle">
+                                    {t('common.cancel')}
+                                </Button>
+                                <Button
+                                    loading={isCreatePending || isUpdatePending}
+                                    type="submit"
+                                    variant="soft"
                                 >
-                                    {configError}
-                                </Code>
-                            </Paper>
+                                    {t('common.save')}
+                                </Button>
+                            </Group>
                         )}
-
-                        <Group justify="flex-end">
-                            <Button onClick={hide} variant="subtle">
-                                {t('common.cancel')}
-                            </Button>
-                            <Button
-                                loading={isCreatePending || isUpdatePending}
-                                type="submit"
-                                variant="soft"
-                            >
-                                {t('common.save')}
-                            </Button>
-                        </Group>
-                    </Stack>
+                    </Box>
                 </form>
             )}
         </Modal>

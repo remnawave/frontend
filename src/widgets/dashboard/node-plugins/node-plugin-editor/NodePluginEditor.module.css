@@ -9,8 +9,8 @@
 }
 
 .editorWrapper {
-    height: calc(100vh - 250px);
-    min-height: 600px;
+    height: 60vh;
+    min-height: 320px;
     overflow: hidden;
     resize: vertical;
     display: flex;

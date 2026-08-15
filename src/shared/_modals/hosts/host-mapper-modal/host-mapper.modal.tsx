@@ -2,9 +2,9 @@ import type { editor } from 'monaco-editor'
 
 import NiceModal, { useModal } from '@ebay/nice-modal-react'
 import { MonacoSetupHostMapperEditorFeature } from '@features/dashboard/config-profiles/monaco-setup'
-import { Box, Button, Code, Group, Modal, Paper } from '@mantine/core'
+import { Box, Button, Group, Modal, Paper } from '@mantine/core'
 import { UseFormReturnType } from '@mantine/form'
-import { Editor, Monaco, useMonaco } from '@monaco-editor/react'
+import { Monaco, useMonaco } from '@monaco-editor/react'
 import {
     CreateHostCommand,
     HostMapperSchema,
@@ -17,8 +17,9 @@ import { useTranslation } from 'react-i18next'
 import { TbArrowsExchange } from 'react-icons/tb'
 
 import { useNiceMantineModal } from '@shared/_modals/use-nice-modal'
-import { monacoTheme } from '@shared/constants/monaco-theme'
+import { COMPACT_MONACO_OPTIONS } from '@shared/constants/monaco-theme'
 import { usePseudoFullscreen } from '@shared/hooks'
+import { CodeEditor, EditorStatusBar } from '@shared/ui/code-editor'
 import { fullscreenClasses, FullscreenToggleButton } from '@shared/ui/fullscreen-toggle-button'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { forceMonacoRetokenize } from '@shared/utils/monaco/force-retokenize'
@@ -57,13 +58,6 @@ export const HostMapperModal = NiceModal.create((props: IProps) => {
         currentMapper && Object.keys(currentMapper).length > 0
             ? JSON.stringify(currentMapper, null, 2)
             : EMPTY_MAPPER
-
-    const handleEditorWillMount = (monaco: Monaco) => {
-        monaco.editor.defineTheme('GithubDark', {
-            ...monacoTheme,
-            base: 'vs-dark'
-        })
-    }
 
     useEffect(() => {
         if (!monaco) return
@@ -135,12 +129,11 @@ export const HostMapperModal = NiceModal.create((props: IProps) => {
                         onToggle={toggleFullscreen}
                     />
 
-                    <Editor
-                        beforeMount={handleEditorWillMount}
+                    <CodeEditor
+                        footer={error && <EditorStatusBar status="error">{error}</EditorStatusBar>}
                         className={classes.monacoEditor}
                         defaultLanguage="json"
                         value={initialValue}
-                        loading={t('config-editor.widget.loading-editor')}
                         onChange={() => setError(null)}
                         onMount={(editor, monaco) => {
                             editorRef.current = editor
@@ -166,64 +159,10 @@ export const HostMapperModal = NiceModal.create((props: IProps) => {
                                 }
                             }
                         }}
-                        options={{
-                            autoClosingBrackets: 'always',
-                            autoClosingQuotes: 'always',
-                            autoIndent: 'full',
-                            automaticLayout: true,
-                            bracketPairColorization: {
-                                enabled: true,
-                                independentColorPoolPerBracketType: true
-                            },
-                            detectIndentation: true,
-                            fixedOverflowWidgets: true,
-                            folding: true,
-                            fontSize: 14,
-                            hover: { above: false },
-                            formatOnPaste: true,
-                            formatOnType: true,
-                            guides: {
-                                bracketPairs: true,
-                                indentation: true
-                            },
-                            insertSpaces: true,
-                            minimap: { enabled: false },
-                            quickSuggestions: true,
-                            renderLineHighlight: 'all',
-                            scrollBeyondLastLine: false,
-                            smoothScrolling: true,
-                            tabSize: 2,
-                            padding: {
-                                top: 10,
-                                bottom: 10
-                            }
-                        }}
+                        options={COMPACT_MONACO_OPTIONS}
                         path="host-mapper://*"
-                        theme="GithubDark"
                     />
                 </Paper>
-
-                {error && (
-                    <Paper
-                        p="md"
-                        radius="sm"
-                        style={{
-                            backgroundColor: 'rgba(241, 65, 65, 0.1)',
-                            border: `1px solid rgb(241, 65, 65)`
-                        }}
-                    >
-                        <Code
-                            color="red"
-                            style={{
-                                backgroundColor: 'transparent',
-                                fontSize: '0.9rem',
-                                padding: 0
-                            }}
-                        >
-                            {error}
-                        </Code>
-                    </Paper>
-                )}
 
                 <Group gap="sm" justify="flex-end">
                     <Button onClick={hide} variant="subtle">

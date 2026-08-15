@@ -10,6 +10,8 @@ import axios from 'axios'
 import consola from 'consola'
 import { app } from 'src/config'
 
+import { registerJsonSchema } from '@shared/utils/monaco/json-schema-registry'
+
 interface ISchemaNode {
     allOf?: ISchemaNode[]
     anyOf?: ISchemaNode[]
@@ -270,18 +272,10 @@ export const MonacoSetupFeature = {
                 consola.error('Failed to inject the custom core property into GeodataObject.')
             }
 
-            monaco.languages.json.jsonDefaults.setDiagnosticsOptions({
-                allowComments: false,
-                enableSchemaRequest: true,
-                schemaRequest: 'warning',
-                schemas: [
-                    {
-                        fileMatch: ['xray-config://*'],
-                        schema,
-                        uri: 'https://xray-config-schema.json'
-                    }
-                ],
-                validate: true
+            registerJsonSchema(monaco, {
+                fileMatch: ['xray-config://*'],
+                schema,
+                uri: 'https://xray-config-schema.json'
             })
         } catch (error) {
             consola.error('Failed to load JSON schema:', error)
@@ -353,18 +347,10 @@ export const MonacoSetupSnippetsFeature = {
                 definitions: schema.definitions || {}
             }
 
-            monaco.languages.json.jsonDefaults.setDiagnosticsOptions({
-                allowComments: false,
-                enableSchemaRequest: true,
-                schemaRequest: 'warning',
-                schemas: [
-                    {
-                        fileMatch: ['snippet://*'],
-                        schema: snippetArraySchema,
-                        uri: 'https://snippet-schema.json'
-                    }
-                ],
-                validate: true
+            registerJsonSchema(monaco, {
+                fileMatch: ['snippet://*'],
+                schema: snippetArraySchema,
+                uri: 'https://snippet-schema.json'
             })
 
             return snippetArraySchema
@@ -458,20 +444,19 @@ export const MonacoSetupResponseRulesFeature = {
                 })
             }
 
-            monaco.languages.json.jsonDefaults.setDiagnosticsOptions({
-                schemaValidation: 'error',
-                comments: 'error',
-                trailingCommas: 'error',
-
-                schemas: [
-                    {
-                        fileMatch: ['response-rules://*'],
-                        schema,
-                        uri: 'https://response-rules-schema.json'
-                    }
-                ],
-                validate: true
-            })
+            registerJsonSchema(
+                monaco,
+                {
+                    fileMatch: ['response-rules://*'],
+                    schema,
+                    uri: 'https://response-rules-schema.json'
+                },
+                {
+                    comments: 'error',
+                    schemaValidation: 'error',
+                    trailingCommas: 'error'
+                }
+            )
         } catch (error) {
             consola.error('Failed to load JSON schema:', error)
         }
@@ -485,20 +470,19 @@ export const MonacoSetupHostMapperEditorFeature = {
 
             injectInboundPaths(schema, rawInbound)
 
-            monaco.languages.json.jsonDefaults.setDiagnosticsOptions({
-                schemaValidation: 'error',
-                comments: 'error',
-                trailingCommas: 'error',
-
-                schemas: [
-                    {
-                        fileMatch: ['host-mapper://*'],
-                        schema,
-                        uri: 'https://host-mapper-schema.json'
-                    }
-                ],
-                validate: true
-            })
+            registerJsonSchema(
+                monaco,
+                {
+                    fileMatch: ['host-mapper://*'],
+                    schema,
+                    uri: 'https://host-mapper-schema.json'
+                },
+                {
+                    comments: 'error',
+                    schemaValidation: 'error',
+                    trailingCommas: 'error'
+                }
+            )
         } catch (error) {
             consola.error('Failed to load JSON schema:', error)
         }
@@ -510,20 +494,19 @@ export const MonacoSetupNodePluginEditorFeature = {
         try {
             const schema = NodePluginSchema.toJSONSchema()
 
-            monaco.languages.json.jsonDefaults.setDiagnosticsOptions({
-                schemaValidation: 'error',
-                comments: 'error',
-                trailingCommas: 'error',
-
-                schemas: [
-                    {
-                        fileMatch: ['node-plugin://*'],
-                        schema,
-                        uri: 'https://node-plugin-schema.json'
-                    }
-                ],
-                validate: true
-            })
+            registerJsonSchema(
+                monaco,
+                {
+                    fileMatch: ['node-plugin://*'],
+                    schema,
+                    uri: 'https://node-plugin-schema.json'
+                },
+                {
+                    comments: 'error',
+                    schemaValidation: 'error',
+                    trailingCommas: 'error'
+                }
+            )
         } catch (error) {
             consola.error('Failed to load JSON schema:', error)
         }

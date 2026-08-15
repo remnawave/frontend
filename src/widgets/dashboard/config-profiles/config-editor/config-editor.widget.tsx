@@ -3,17 +3,17 @@ import type { editor } from 'monaco-editor'
 import { ConfigEditorActionsFeature } from '@features/dashboard/config-profiles/config-editor-actions'
 import { ConfigValidationFeature } from '@features/dashboard/config-profiles/config-validation'
 import { MonacoSetupFeature } from '@features/dashboard/config-profiles/monaco-setup'
-import { Box, Button, Card, Code, Group, Loader, Paper, Stack } from '@mantine/core'
+import { Box, Button, Card, Code, Group, Loader, Paper } from '@mantine/core'
 import { modals } from '@mantine/modals'
-import Editor, { Monaco, useMonaco } from '@monaco-editor/react'
+import { useMonaco } from '@monaco-editor/react'
 import clsx from 'clsx'
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { TbAlertTriangle } from 'react-icons/tb'
 import { useBlocker } from 'react-router'
 
-import { monacoTheme } from '@shared/constants/monaco-theme/monaco-theme'
-import { usePseudoFullscreen } from '@shared/hooks'
+import { usePseudoFullscreen, useViewportFillHeight } from '@shared/hooks'
+import { CodeEditor, EditorStatusBar } from '@shared/ui/code-editor'
 import { FullscreenToggleButton, fullscreenClasses } from '@shared/ui/fullscreen-toggle-button'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { preventBackScroll } from '@shared/utils/misc'
@@ -38,6 +38,9 @@ export function ConfigEditorWidget(props: IProps) {
     const wasWasmRestarting = useRef(false)
 
     const { isFullscreen, toggle: toggleFullscreen } = usePseudoFullscreen()
+    const { containerRef: editorWrapperRef, footerRef } = useViewportFillHeight({
+        enabled: !isFullscreen
+    })
 
     useEffect(() => {
         if (!monaco) return
@@ -58,13 +61,6 @@ export function ConfigEditorWidget(props: IProps) {
         }
         wasWasmRestarting.current = isWasmRestarting
     }, [isWasmRestarting, isWasmCrashed])
-
-    const handleEditorDidMount = (monaco: Monaco) => {
-        monaco.editor.defineTheme('GithubDark', {
-            ...monacoTheme,
-            base: 'vs-dark'
-        })
-    }
 
     const checkForChanges = () => {
         if (!editorRef.current) return
@@ -123,12 +119,39 @@ export function ConfigEditorWidget(props: IProps) {
         }
     }, [blocker])
 
+    const statusBar = (result || isWasmRestarting || isWasmCrashed) && (
+        <EditorStatusBar
+            status={isWasmCrashed || isWasmRestarting || !isConfigValid ? 'error' : 'success'}
+        >
+            {isWasmRestarting && (
+                <Group gap="xs">
+                    <Loader color="orange" size="xs" />
+                    <Code className={styles.statusCode} color="orange">
+                        Xray Core (WASM) is restarting...
+                    </Code>
+                </Group>
+            )}
+            {!isWasmRestarting && isWasmCrashed && (
+                <Group gap="sm">
+                    <Code className={styles.statusCode} color="red">
+                        Xray Core (WASM) crashed. Validation is unavailable.
+                    </Code>
+                    <Button color="red" onClick={onRestartWasm} size="compact-xs" variant="light">
+                        {t('restart-node-button.feature.restart')}
+                    </Button>
+                </Group>
+            )}
+            {!isWasmRestarting && !isWasmCrashed && result}
+        </EditorStatusBar>
+    )
+
     return (
         <Box className={clsx(styles.container, isFullscreen && fullscreenClasses.overlay)}>
             <Paper
                 className={clsx(styles.editorWrapper, isFullscreen && fullscreenClasses.fill)}
                 p={0}
                 pos="relative"
+                ref={editorWrapperRef}
                 style={{
                     direction: 'ltr'
                 }}
@@ -136,8 +159,8 @@ export function ConfigEditorWidget(props: IProps) {
             >
                 <FullscreenToggleButton isFullscreen={isFullscreen} onToggle={toggleFullscreen} />
 
-                <Editor
-                    beforeMount={handleEditorDidMount}
+                <CodeEditor
+                    footer={statusBar}
                     className={styles.monacoEditor}
                     defaultLanguage="json"
                     loading={t('config-editor.widget.loading-editor')}
@@ -150,10 +173,13 @@ export function ConfigEditorWidget(props: IProps) {
                                 snippetMap
                             )
                         }
+
                         checkForChanges()
                     }}
                     onMount={(editor) => {
                         editorRef.current = editor
+
+                        editor.getAction('editor.foldLevel7')?.run()
 
                         ConfigValidationFeature.validate(
                             editorRef,
@@ -163,138 +189,28 @@ export function ConfigEditorWidget(props: IProps) {
                         )
                     }}
                     options={{
-                        autoClosingBrackets: 'always',
-                        autoClosingQuotes: 'always',
-                        autoIndent: 'full',
-                        automaticLayout: true,
-                        fixedOverflowWidgets: true,
-                        bracketPairColorization: {
-                            enabled: true,
-                            independentColorPoolPerBracketType: true
-                        },
-                        scrollbar: {
-                            useShadows: false,
-                            verticalHasArrows: true,
-                            horizontalHasArrows: true,
-                            vertical: 'visible',
-                            horizontal: 'visible',
-                            arrowSize: 30,
-                            alwaysConsumeMouseWheel: false
-                        },
-                        detectIndentation: true,
-                        folding: true,
-                        foldingStrategy: 'indentation',
-                        fontSize: 14,
-                        formatOnPaste: true,
-                        formatOnType: true,
-                        guides: {
-                            bracketPairs: true,
-                            indentation: true
-                        },
-                        insertSpaces: true,
-                        minimap: { enabled: true },
-                        quickSuggestions: true,
-                        renderLineHighlight: 'all',
-                        scrollBeyondLastLine: false,
-                        smoothScrolling: true,
-                        tabSize: 2,
-                        padding: {
-                            top: 10,
-                            bottom: 10
-                        }
+                        stickyScroll: { enabled: false }
                     }}
-                    theme="GithubDark"
                     path="xray-config://*"
                     value={JSON.stringify(configProfile.config, null, 2)}
                 />
             </Paper>
 
-            <Card className={styles.footer} h="auto" m="0" pos="sticky">
-                <Stack gap="md">
-                    {(result || isWasmRestarting || isWasmCrashed) && (
-                        <Paper
-                            className={styles.validationMessage}
-                            p="md"
-                            radius="sm"
-                            style={{
-                                backgroundColor:
-                                    isWasmCrashed || isWasmRestarting || !isConfigValid
-                                        ? 'rgba(241, 65, 65, 0.1)'
-                                        : 'rgba(51, 171, 132, 0.1)',
-                                border: `1px solid ${
-                                    isWasmCrashed || isWasmRestarting || !isConfigValid
-                                        ? 'rgb(241, 65, 65)'
-                                        : 'rgb(51, 171, 132)'
-                                }`
-                            }}
-                        >
-                            {isWasmRestarting && (
-                                <Group gap="xs">
-                                    <Loader color="orange" size="xs" />
-                                    <Code
-                                        color="orange"
-                                        style={{
-                                            backgroundColor: 'transparent',
-                                            fontSize: '0.9rem',
-                                            padding: 0
-                                        }}
-                                    >
-                                        Xray Core (WASM) is restarting...
-                                    </Code>
-                                </Group>
-                            )}
-                            {!isWasmRestarting && isWasmCrashed && (
-                                <Group gap="sm">
-                                    <Code
-                                        color="red"
-                                        style={{
-                                            backgroundColor: 'transparent',
-                                            fontSize: '0.9rem',
-                                            padding: 0
-                                        }}
-                                    >
-                                        Xray Core (WASM) crashed. Validation is unavailable.
-                                    </Code>
-                                    <Button
-                                        color="red"
-                                        onClick={onRestartWasm}
-                                        size="compact-xs"
-                                        variant="light"
-                                    >
-                                        {t('restart-node-button.feature.restart')}
-                                    </Button>
-                                </Group>
-                            )}
-                            {!isWasmRestarting && !isWasmCrashed && (
-                                <Code
-                                    color={isConfigValid ? 'teal' : 'red'}
-                                    style={{
-                                        backgroundColor: 'transparent',
-                                        fontSize: '0.9rem',
-                                        padding: 0
-                                    }}
-                                >
-                                    {result}
-                                </Code>
-                            )}
-                        </Paper>
-                    )}
-
-                    {!isFullscreen && (
-                        <ConfigEditorActionsFeature
-                            configProfile={configProfile}
-                            editorRef={editorRef}
-                            hasUnsavedChanges={hasUnsavedChanges}
-                            isConfigValid={isConfigValid}
-                            originalValue={originalValue}
-                            setHasUnsavedChanges={setHasUnsavedChanges}
-                            setIsConfigValid={setIsConfigValid}
-                            setOriginalValue={setOriginalValue}
-                            setResult={setResult}
-                        />
-                    )}
-                </Stack>
-            </Card>
+            {!isFullscreen && (
+                <Card className={styles.footer} h="auto" m="0" pos="sticky" ref={footerRef}>
+                    <ConfigEditorActionsFeature
+                        configProfile={configProfile}
+                        editorRef={editorRef}
+                        hasUnsavedChanges={hasUnsavedChanges}
+                        isConfigValid={isConfigValid}
+                        originalValue={originalValue}
+                        setHasUnsavedChanges={setHasUnsavedChanges}
+                        setIsConfigValid={setIsConfigValid}
+                        setOriginalValue={setOriginalValue}
+                        setResult={setResult}
+                    />
+                </Card>
+            )}
         </Box>
     )
 }

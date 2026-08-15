@@ -78,6 +78,36 @@ body {
     padding-top: env(safe-area-inset-top, 0px) !important;
 }
 
+.monaco-menu-container {
+    padding: 4px;
+    border: 1px solid var(--mantine-color-dark-4);
+    border-radius: var(--mantine-radius-default);
+    box-shadow: var(--mantine-shadow-md);
+}
+
+.monaco-menu .monaco-action-bar.vertical .action-item {
+    border-radius: var(--mantine-radius-sm);
+    overflow: hidden;
+}
+
+.monaco-menu .monaco-action-bar.vertical .action-menu-item {
+    height: 32px;
+    transition: background-color 150ms ease;
+}
+
+.monaco-menu .monaco-action-bar.vertical .action-label {
+    font-size: var(--mantine-font-size-sm);
+}
+
+.monaco-menu .monaco-action-bar.vertical .keybinding {
+    font-size: var(--mantine-font-size-xs);
+    opacity: 0.55;
+}
+
+.monaco-menu .monaco-action-bar.vertical .action-item.separator {
+    margin: 4px 6px;
+}
+
 .monaco-editor {
     border-radius: var(--mantine-radius-default);
 }

@@ -1,0 +1,45 @@
+.root {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    height: 100%;
+    min-height: 0;
+}
+
+.editorWrapper {
+    flex: 1;
+    min-height: 0;
+}
+
+.pathBar {
+    flex-shrink: 0;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    padding-left: var(--mantine-spacing-md);
+    padding-right: 52px;
+    border-bottom: 1px solid var(--mantine-color-dark-4);
+    background-color: rgba(255, 255, 255, 0.02);
+}
+
+.pathSeparator {
+    color: var(--mantine-color-dark-2);
+}
+
+.pathSegmentActive {
+    color: var(--mantine-color-gray-4);
+}
+
+.statusBar {
+    flex-shrink: 0;
+    z-index: 60;
+    max-height: 30%;
+    overflow-y: auto;
+}
+
+.statusCode {
+    background-color: transparent;
+    font-size: 0.9rem;
+    padding: 0;
+}

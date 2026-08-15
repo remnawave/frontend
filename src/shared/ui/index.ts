@@ -1,4 +1,5 @@
 export * from './action-card'
+export * from './code-editor'
 export * from './datatable'
 export * from './fullscreen-toggle-button'
 export * from './get-core-logo-from-type'

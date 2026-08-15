@@ -72,7 +72,15 @@ export function ConfigEditorActionsFeature(props: Props) {
                 const newValue = JSON.stringify(updatedConfigProfile.config, null, 2)
 
                 if (editorRef.current) {
-                    editorRef.current.setValue(newValue)
+                    const instance = editorRef.current
+
+                    if (instance.getValue() !== newValue) {
+                        const viewState = instance.saveViewState()
+
+                        instance.setValue(newValue)
+                        instance.restoreViewState(viewState)
+                    }
+
                     setOriginalValue(newValue)
                 }
 

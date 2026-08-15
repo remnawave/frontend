@@ -3,6 +3,8 @@ import { GetHostsCommand } from '@remnawave/backend-contract'
 import consola from 'consola'
 import { configureMonacoYaml } from 'monaco-yaml'
 
+import { registerJsonSchema } from '@shared/utils/monaco/json-schema-registry'
+
 type Host = GetHostsCommand.Response['response'][number]
 
 const DOCS_URL = 'https://docs.rw/docs/learn/xray-json-advanced'
@@ -226,18 +228,10 @@ export const configureMonaco = (
                 }
             }
 
-            monaco.languages.json.jsonDefaults.setDiagnosticsOptions({
-                allowComments: false,
-                enableSchemaRequest: true,
-                schemaRequest: 'warning',
-                schemas: [
-                    {
-                        fileMatch: ['subscription-template://*'],
-                        schema,
-                        uri: 'https://subscription-template-schema.json'
-                    }
-                ],
-                validate: true
+            registerJsonSchema(monaco, {
+                fileMatch: ['subscription-template://*'],
+                schema,
+                uri: 'https://subscription-template-schema.json'
             })
         }
     } catch (error) {
