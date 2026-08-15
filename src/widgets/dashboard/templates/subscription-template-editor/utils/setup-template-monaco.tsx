@@ -228,7 +228,7 @@ export const configureMonaco = (
                 }
             }
 
-            registerJsonSchema(monaco, {
+            registerJsonSchema({
                 fileMatch: ['subscription-template://*'],
                 schema,
                 uri: 'https://subscription-template-schema.json'

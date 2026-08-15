@@ -28,7 +28,13 @@ export default defineConfig({
         // })
     ],
     optimizeDeps: {
-        include: ['html-parse-stringify']
+        include: [
+            'html-parse-stringify',
+            'monaco-editor/editor',
+            'monaco-editor/features/register.all',
+            'monaco-editor/languages/definitions/yaml/register',
+            'monaco-editor/languages/features/json/register'
+        ]
     },
     build: {
         target: 'esnext',
@@ -126,5 +132,13 @@ export default defineConfig({
             overlay: false
         }
     },
-    resolve: { tsconfigPaths: true }
+    resolve: {
+        tsconfigPaths: true,
+        alias: [
+            {
+                find: /^monaco-editor\/esm\/vs\/(.*)$/,
+                replacement: 'monaco-editor/$1'
+            }
+        ]
+    }
 })

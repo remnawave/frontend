@@ -90,8 +90,8 @@ export function NodePluginEditorWidget(props: IProps) {
         }
     }, [blocker])
 
-    const handleEditorDidMount = (monaco: Monaco) => {
-        MonacoSetupNodePluginEditorFeature.setup(monaco)
+    const handleEditorDidMount = () => {
+        MonacoSetupNodePluginEditorFeature.setup()
     }
 
     const checkForChanges = () => {

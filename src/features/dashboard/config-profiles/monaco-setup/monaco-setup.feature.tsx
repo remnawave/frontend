@@ -1,4 +1,3 @@
-import { Monaco } from '@monaco-editor/react'
 import {
     GetSnippetsCommand,
     HostMapperSchema,
@@ -183,7 +182,6 @@ const resolveRootNode = (schema: IXraySchema | undefined): ISchemaNode | undefin
 
 export const MonacoSetupFeature = {
     setup: async (
-        monaco: Monaco,
         currentLanguage: string,
         snippets: GetSnippetsCommand.Response['response']['snippets']
     ) => {
@@ -272,7 +270,7 @@ export const MonacoSetupFeature = {
                 consola.error('Failed to inject the custom core property into GeodataObject.')
             }
 
-            registerJsonSchema(monaco, {
+            registerJsonSchema({
                 fileMatch: ['xray-config://*'],
                 schema,
                 uri: 'https://xray-config-schema.json'
@@ -284,7 +282,7 @@ export const MonacoSetupFeature = {
 }
 
 export const MonacoSetupSnippetsFeature = {
-    setup: async (monaco: Monaco, currentLanguage: string) => {
+    setup: async (currentLanguage: string) => {
         try {
             let { jsonSchemaUrl } = app.configEditor
             switch (currentLanguage) {
@@ -347,7 +345,7 @@ export const MonacoSetupSnippetsFeature = {
                 definitions: schema.definitions || {}
             }
 
-            registerJsonSchema(monaco, {
+            registerJsonSchema({
                 fileMatch: ['snippet://*'],
                 schema: snippetArraySchema,
                 uri: 'https://snippet-schema.json'
@@ -362,10 +360,7 @@ export const MonacoSetupSnippetsFeature = {
 }
 
 export const MonacoSetupResponseRulesFeature = {
-    setup: async (
-        monaco: Monaco,
-        groupedTemplates: Record<TSubscriptionTemplateType, string[]>
-    ) => {
+    setup: async (groupedTemplates: Record<TSubscriptionTemplateType, string[]>) => {
         try {
             const schema = ResponseRulesConfigSchema.toJSONSchema({
                 target: 'draft-07'
@@ -445,7 +440,6 @@ export const MonacoSetupResponseRulesFeature = {
             }
 
             registerJsonSchema(
-                monaco,
                 {
                     fileMatch: ['response-rules://*'],
                     schema,
@@ -464,14 +458,13 @@ export const MonacoSetupResponseRulesFeature = {
 }
 
 export const MonacoSetupHostMapperEditorFeature = {
-    setup: async (monaco: Monaco, rawInbound?: unknown) => {
+    setup: async (rawInbound?: unknown) => {
         try {
             const schema = HostMapperSchema.toJSONSchema({ target: 'draft-07' })
 
             injectInboundPaths(schema, rawInbound)
 
             registerJsonSchema(
-                monaco,
                 {
                     fileMatch: ['host-mapper://*'],
                     schema,
@@ -490,12 +483,11 @@ export const MonacoSetupHostMapperEditorFeature = {
 }
 
 export const MonacoSetupNodePluginEditorFeature = {
-    setup: async (monaco: Monaco) => {
+    setup: async () => {
         try {
             const schema = NodePluginSchema.toJSONSchema()
 
             registerJsonSchema(
-                monaco,
                 {
                     fileMatch: ['node-plugin://*'],
                     schema,

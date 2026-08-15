@@ -45,7 +45,7 @@ export function ConfigEditorWidget(props: IProps) {
     useEffect(() => {
         if (!monaco) return
 
-        MonacoSetupFeature.setup(monaco, i18n.language, snippets.snippets)
+        MonacoSetupFeature.setup(i18n.language, snippets.snippets)
     }, [i18n.language, snippets, monaco])
 
     const blocker = useBlocker(

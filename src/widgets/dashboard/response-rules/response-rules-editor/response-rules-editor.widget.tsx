@@ -85,8 +85,8 @@ export function ResponseRulesEditorWidget(props: IProps) {
         }
     }, [blocker])
 
-    const handleEditorDidMount = (monaco: Monaco) => {
-        MonacoSetupResponseRulesFeature.setup(monaco, groupedTemplates)
+    const handleEditorDidMount = () => {
+        MonacoSetupResponseRulesFeature.setup(groupedTemplates)
     }
 
     const checkForChanges = () => {

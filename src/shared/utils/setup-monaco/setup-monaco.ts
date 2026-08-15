@@ -1,9 +1,12 @@
 // oxlint-disable
 
 import { loader } from '@monaco-editor/react'
-import * as monaco from 'monaco-editor'
-import editorWorker from 'monaco-editor/esm/vs/editor/editor.worker?worker'
-import jsonWorker from 'monaco-editor/esm/vs/language/json/json.worker?worker'
+import * as monaco from 'monaco-editor/editor'
+import editorWorker from 'monaco-editor/editor/editor.worker?worker'
+import 'monaco-editor/features/register.all'
+import 'monaco-editor/languages/definitions/yaml/register'
+import jsonWorker from 'monaco-editor/languages/features/json/json.worker?worker'
+export { jsonDefaults } from 'monaco-editor/languages/features/json/register'
 
 import { MONACO_THEME_NAME, monacoTheme } from '@shared/constants/monaco-theme'
 

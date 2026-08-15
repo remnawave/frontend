@@ -62,7 +62,7 @@ export const HostMapperModal = NiceModal.create((props: IProps) => {
     useEffect(() => {
         if (!monaco) return
 
-        MonacoSetupHostMapperEditorFeature.setup(monaco, rawInbound)
+        MonacoSetupHostMapperEditorFeature.setup(rawInbound)
     }, [monaco, rawInbound])
 
     const handleSave = () => {

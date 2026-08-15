@@ -1,7 +1,6 @@
-import type { Monaco } from '@monaco-editor/react'
-import type { languages } from 'monaco-editor'
+import { jsonDefaults } from '@shared/utils/setup-monaco/setup-monaco'
 
-type DiagnosticsOptions = languages.json.DiagnosticsOptions
+type DiagnosticsOptions = Parameters<typeof jsonDefaults.setDiagnosticsOptions>[0]
 type JsonSchema = NonNullable<DiagnosticsOptions['schemas']>[number]
 type SeverityOptions = Omit<DiagnosticsOptions, 'schemas'>
 
@@ -14,14 +13,10 @@ const DEFAULT_DIAGNOSTICS: SeverityOptions = {
 
 const registry = new Map<string, JsonSchema>()
 
-export const registerJsonSchema = (
-    monaco: Monaco,
-    schema: JsonSchema,
-    diagnostics?: SeverityOptions
-) => {
+export const registerJsonSchema = (schema: JsonSchema, diagnostics?: SeverityOptions) => {
     registry.set(schema.uri, schema)
 
-    monaco.languages.json.jsonDefaults.setDiagnosticsOptions({
+    jsonDefaults.setDiagnosticsOptions({
         ...DEFAULT_DIAGNOSTICS,
         ...diagnostics,
         schemas: [...registry.values()]

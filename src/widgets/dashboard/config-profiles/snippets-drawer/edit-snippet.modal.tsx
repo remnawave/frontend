@@ -112,7 +112,7 @@ export const EditSnippetModal = (props: IProps) => {
     useEffect(() => {
         if (!monaco) return
 
-        MonacoSetupSnippetsFeature.setup(monaco, i18n.language)
+        MonacoSetupSnippetsFeature.setup(i18n.language)
     }, [i18n.language, monaco])
 
     return (
