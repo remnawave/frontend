@@ -3,6 +3,7 @@ import { ActionIcon, Avatar, Badge, Group, MultiSelect, Text, TextInput } from '
 import {
     GetNodesCommand,
     GetConfigProfilesCommand,
+    GetNodeIntegrationsCommand,
     GetNodePluginsCommand
 } from '@remnawave/backend-contract'
 import { TFunction } from 'i18next'
@@ -33,12 +34,14 @@ export type NodeStatusFilter = 'connected' | 'connecting' | 'disabled' | 'discon
 export interface NodesTableFilters {
     availableConfigProfiles: { label: string; value: string }[]
     availableInbounds: string[]
+    availableIntegrations: { label: string; value: string }[]
     availablePlugins: { label: string; value: string }[]
     availableProviders: string[]
     availableTags: string[]
     nameQuery: string
     selectedConfigProfiles: string[]
     selectedInbounds: string[]
+    selectedIntegrations: string[]
     selectedPlugins: string[]
     selectedProviders: string[]
     selectedStatuses: NodeStatusFilter[]
@@ -46,6 +49,7 @@ export interface NodesTableFilters {
     setNameQuery: (value: string) => void
     setSelectedConfigProfiles: (value: string[]) => void
     setSelectedInbounds: (value: string[]) => void
+    setSelectedIntegrations: (value: string[]) => void
     setSelectedPlugins: (value: string[]) => void
     setSelectedProviders: (value: string[]) => void
     setSelectedStatuses: (value: NodeStatusFilter[]) => void
@@ -56,6 +60,7 @@ export function getNodesTableColumns(
     t: TFunction,
     configProfiles: GetConfigProfilesCommand.Response['response']['configProfiles'],
     nodePlugins: GetNodePluginsCommand.Response['response']['nodePlugins'],
+    nodeIntegrations: GetNodeIntegrationsCommand.Response['response']['nodeIntegrations'],
     handleViewNode: (nodeUuid: string) => void,
     filters: NodesTableFilters
 ): DataTableColumn<GetNodesCommand.Response['response'][number]>[] {
@@ -367,6 +372,28 @@ export function getNodesTableColumns(
             title: 'Plugin',
             render: ({ activePluginUuid }) =>
                 nodePlugins.find((plugin) => plugin.uuid === activePluginUuid)?.name || '-'
+        },
+        {
+            accessor: 'integrationUuids',
+            filter: (
+                <MultiSelect
+                    clearable
+                    comboboxProps={{ withinPortal: false }}
+                    data={filters.availableIntegrations}
+                    label={t('node-integrations.modal.title')}
+                    leftSection={<TbSearch size={16} />}
+                    onChange={filters.setSelectedIntegrations}
+                    searchable
+                    value={filters.selectedIntegrations}
+                />
+            ),
+            filtering: filters.selectedIntegrations.length > 0,
+            title: t('node-integrations.modal.title'),
+            render: ({ integrationUuids }) =>
+                integrationUuids
+                    .map((uuid) => nodeIntegrations.find((i) => i.uuid === uuid)?.name)
+                    .filter((name) => name !== undefined)
+                    .join(', ') || '-'
         },
         {
             accessor: 'system.info.cpus',

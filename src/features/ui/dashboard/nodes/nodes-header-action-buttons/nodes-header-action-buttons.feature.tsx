@@ -7,6 +7,7 @@ import {
     TbAlertCircle,
     TbCards,
     TbPlus,
+    TbPlugConnected,
     TbRefresh,
     TbRocket,
     TbSearch,
@@ -133,6 +134,20 @@ export const NodesHeaderActionButtonsFeature = (props: IProps) => {
                     </ActionIcon>
                 </Tooltip>
             </ActionIconGroup>
+
+            <ActionIconGroup>
+                <Tooltip label={t('node-integrations.modal.title')} withArrow>
+                    <ActionIcon
+                        color="pink"
+                        onClick={() => showModal('nodeIntegrations_nodeIntegrationsModal')}
+                        size="input-md"
+                        variant="soft"
+                    >
+                        <TbPlugConnected size="24px" />
+                    </ActionIcon>
+                </Tooltip>
+            </ActionIconGroup>
+
             <ActionIconGroup>
                 <Tooltip
                     label={t('nodes-header-action-buttons.feature.restart-all-nodes')}

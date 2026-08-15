@@ -17,8 +17,9 @@ import {
     PiMemoryDuotone,
     PiUsersDuotone
 } from 'react-icons/pi'
-import { TbAlertCircle } from 'react-icons/tb'
+import { TbAlertCircle, TbPlugConnected } from 'react-icons/tb'
 
+import { useGetNodeIntegrations } from '@shared/api/hooks'
 import { Logo } from '@shared/ui/logo'
 import { XrayLogo } from '@shared/ui/logos'
 import { prettifyBytesUtil, prettySiRealtimeBytesUtil } from '@shared/utils/bytes'
@@ -105,6 +106,22 @@ export const NodeCardWidget = memo((props: IProps) => {
     }
     const percentage = calcPercentage()
     const fallbackProgress = node.isTrafficTrackingActive && node.trafficLimitBytes === 0
+
+    const { data: nodeIntegrations } = useGetNodeIntegrations()
+
+    const integrationNames = useMemo(
+        () =>
+            node.integrationUuids
+                .map(
+                    (uuid) =>
+                        nodeIntegrations?.nodeIntegrations.find(
+                            (integration) => integration.uuid === uuid
+                        )?.name
+                )
+                .filter((name) => name !== undefined)
+                .join(', '),
+        [node.integrationUuids, nodeIntegrations]
+    )
 
     const isOnline = node.isConnected && node.xrayUptime !== 0 && !node.isDisabled
     const isConfigMissing =
@@ -443,6 +460,20 @@ export const NodeCardWidget = memo((props: IProps) => {
                             </Text>
                         </Flex>
                         <Flex align="center" gap="md" ml="auto">
+                            {integrationNames && (
+                                <Tooltip label={integrationNames} multiline radius="md" w={250}>
+                                    <Flex align="center" gap={4} maw={220}>
+                                        <TbPlugConnected
+                                            color="var(--mantine-color-pink-5)"
+                                            size={12}
+                                            style={{ flexShrink: 0 }}
+                                        />
+                                        <Text c="dimmed" ff="monospace" size="xs" truncate="end">
+                                            {integrationNames}
+                                        </Text>
+                                    </Flex>
+                                </Tooltip>
+                            )}
                             <Flex align="center" gap={4}>
                                 <XrayLogo color="var(--mantine-color-dimmed)" size={12} />
                                 <Text c="dimmed" ff="monospace" size="xs">

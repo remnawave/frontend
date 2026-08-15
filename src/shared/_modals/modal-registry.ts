@@ -23,6 +23,7 @@ import {
     InternalSquadsInboundsDrawer,
     InternalSquadsUsageDrawer
 } from './internal-squads'
+import { NodeIntegrationEditorModal, NodeIntegrationsModal } from './node-integrations'
 import { NodePluginExecutorDrawer } from './node-plugins'
 import {
     CreateNodeModal,
@@ -94,6 +95,9 @@ export const MODAL_REGISTRY = {
     configProfiles_configProfileInboundsDrawer: ConfigProfileInboundsDrawer,
 
     nodePlugins_nodePluginExecutorDrawer: NodePluginExecutorDrawer,
+
+    nodeIntegrations_nodeIntegrationsModal: NodeIntegrationsModal,
+    nodeIntegrations_nodeIntegrationEditorModal: NodeIntegrationEditorModal,
 
     infraBilling_viewInfraProviderModal: ViewInfraProviderModal,
     infraBilling_createInfraProviderModal: CreateInfraProviderModal,
