@@ -2272,5 +2272,26 @@
       "no-active-config-profile": "此节点没有激活的配置文件",
       "linked": "已关联"
     }
+  },
+  "node-integrations": {
+    "modal": {
+      "title": "Node Integrations",
+      "delete-description": "The integration will be removed from all nodes and affected nodes will be restarted."
+    },
+    "editor": {
+      "name": "Name",
+      "description": "Description",
+      "description-placeholder": "What this integration does",
+      "config-must-be-an-object": "Config must be a JSON object",
+      "apply-to-nodes": "Apply to nodes?",
+      "save-and-restart": "Save and restart nodes",
+      "save-and-restart-description": "Nodes using this integration will be restarted profile by profile and pick up the new config right away.",
+      "save-without-restart": "Save only",
+      "save-without-restart-description": "Changes are stored, but nodes keep running the current config until their next restart."
+    },
+    "select": {
+      "label": "Integrations",
+      "placeholder": "Select integrations"
+    }
   }
 }
