@@ -145,6 +145,7 @@ export function SubscriptionTemplateEditorWidget(props: Props) {
                         }
                     }}
                     theme="GithubDark"
+                    path={editorType === 'json' ? 'subscription-template://*' : undefined}
                     value={getConfig() || ''}
                 />
             </Paper>

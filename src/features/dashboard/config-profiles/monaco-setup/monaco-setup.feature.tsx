@@ -276,7 +276,7 @@ export const MonacoSetupFeature = {
                 schemaRequest: 'warning',
                 schemas: [
                     {
-                        fileMatch: ['*'],
+                        fileMatch: ['xray-config://*'],
                         schema,
                         uri: 'https://xray-config-schema.json'
                     }

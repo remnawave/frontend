@@ -204,6 +204,7 @@ export function ConfigEditorWidget(props: IProps) {
                         }
                     }}
                     theme="GithubDark"
+                    path="xray-config://*"
                     value={JSON.stringify(configProfile.config, null, 2)}
                 />
             </Paper>

@@ -232,7 +232,7 @@ export const configureMonaco = (
                 schemaRequest: 'warning',
                 schemas: [
                     {
-                        fileMatch: ['*'],
+                        fileMatch: ['subscription-template://*'],
                         schema,
                         uri: 'https://subscription-template-schema.json'
                     }
