@@ -81,7 +81,7 @@
     "operation-completed": "Операция завершена",
     "usage-stats": "Статистика использования",
     "active-sessions": "Активные сессии",
-    "shared-lists": "Shared lists"
+    "shared-lists": "Общие списки"
   },
   "bandwidth-metrics": {
     "current-year": "Текущий год",
@@ -2272,33 +2272,33 @@
   },
   "node-integrations": {
     "modal": {
-      "title": "Node Integrations",
-      "delete-description": "The integration will be removed from all nodes and affected nodes will be restarted."
+      "title": "Интеграции ноды",
+      "delete-description": "Интеграция будет удалена со всех нод и затрагиваемые ноды будут перезапущены."
     },
     "editor": {
-      "description": "Description",
-      "description-placeholder": "What this integration does",
-      "config-must-be-an-object": "Config must be a JSON object"
+      "description": "Описание",
+      "description-placeholder": "Что делает эта интеграция",
+      "config-must-be-an-object": "Конфигурация должна быть JSON объектом"
     },
     "select": {
-      "label": "Integrations",
-      "placeholder": "Select integrations"
+      "label": "Интеграции",
+      "placeholder": "Выбрать интеграцию"
     }
   },
   "shared-lists": {
     "modal": {
-      "subtitle": "Reusable IP and ASN lists referenced by plugins as ext:name",
-      "delete-description": "The list will be deleted. Plugins referencing it keep the ext: reference and will fail validation until it is fixed."
+      "subtitle": "Множественное использование IP и ASN списков, на которые ссылаются плагины как ext:name",
+      "delete-description": "Список будет удален. Плагины, ссылающиеся на него, сохраняют свою актуальность: ссылка не будет проверена до тех пор, пока не будет исправлена."
     },
     "editor": {
-      "name-description": "Referenced in plugins as ext:name. Cannot be changed later."
+      "name-description": "Ссылки в плагинах как ext:name. Нельзя изменить позже."
     }
   },
   "apply-to-nodes": {
-    "title": "Apply to nodes?",
-    "apply": "Apply now",
-    "apply-description": "Affected nodes receive the new configuration right away.",
-    "later": "Not now",
-    "later-description": "Changes are saved, but nodes keep the current version until their next sync or restart."
+    "title": "Применить к нодам?",
+    "apply": "Применить сейчас",
+    "apply-description": "Затрагиваемые ноды сразу же получают новую конфигурацию.",
+    "later": "Позже",
+    "later-description": "Изменения сохранены, но ноды сохраняют текущую версию до их следующей синхронизации или перезапуска."
   }
 }
