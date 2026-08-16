@@ -1,0 +1,35 @@
+.message {
+    position: relative;
+    padding: 12px 44px 12px 14px;
+    background: rgba(22, 27, 35, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-left: 2px solid var(--mantine-color-red-5);
+    border-radius: var(--mantine-radius-md);
+}
+
+.text {
+    font-family: var(--mantine-font-family-monospace);
+    font-size: var(--mantine-font-size-xs);
+    line-height: 1.6;
+    color: var(--mantine-color-red-1);
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    max-height: 240px;
+    overflow-y: auto;
+}
+
+.copyButton {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    opacity: 0.5;
+    transition: opacity 150ms ease;
+}
+
+.message:hover .copyButton {
+    opacity: 1;
+}
+
+.copyButton[data-copied='true'] {
+    opacity: 1;
+}

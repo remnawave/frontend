@@ -11,7 +11,7 @@ import {
     GetNodeCommand,
     UpdateNodeCommand
 } from '@remnawave/backend-contract'
-import { ModalAccordionWidget } from '@widgets/dashboard/nodes/modal-accordeon-widget'
+import { NodeErrorMessageWidget } from '@widgets/dashboard/nodes/node-error-message'
 import { motion } from 'framer-motion'
 import { t } from 'i18next'
 import { ReactNode } from 'react'
@@ -86,7 +86,7 @@ export const BaseNodeForm = <T extends UpdateNodeCommand.RequestBody>(props: IPr
                     initial="hidden"
                     variants={containerVariants}
                 >
-                    <ModalAccordionWidget node={node} />
+                    <NodeErrorMessageWidget node={node} />
 
                     {nodeDetailsCard && (
                         <MotionWrapper variants={cardVariants}>{nodeDetailsCard}</MotionWrapper>
@@ -140,7 +140,7 @@ export const BaseNodeForm = <T extends UpdateNodeCommand.RequestBody>(props: IPr
                         style={{ flex: '1 1 400px' }}
                         variants={containerVariants}
                     >
-                        <ModalAccordionWidget node={node} />
+                        <NodeErrorMessageWidget node={node} />
 
                         {nodeDetailsCard && (
                             <MotionWrapper variants={cardVariants}>{nodeDetailsCard}</MotionWrapper>
