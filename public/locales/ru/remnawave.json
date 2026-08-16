@@ -80,7 +80,8 @@
     "processing": "Обработка",
     "operation-completed": "Операция завершена",
     "usage-stats": "Статистика использования",
-    "active-sessions": "Активные сессии"
+    "active-sessions": "Активные сессии",
+    "shared-lists": "Shared lists"
   },
   "bandwidth-metrics": {
     "current-year": "Текущий год",
@@ -986,7 +987,6 @@
       "widget": {
         "infra-provider": "Провайдер",
         "name-description": "Имя провайдера. Используется для вывода в UI.",
-        "name": "Имя",
         "enter-provider-name": "Введите имя провайдера",
         "favicon-link": "Ссылка на Favicon",
         "enter-favicon-link": "Введите ссылку на Favicon",
@@ -1470,9 +1470,7 @@
         "snippet-is-valid": "Сниппет валиден",
         "edit-snippet": "Редактировать сниппет",
         "snippets": "Сниппеты",
-        "new-snippet": "Новый сниппет",
-        "sync-nodes-description": "На нодах по-прежнему используется предыдущая конфигурация. Перезапустить затронутые ноды для применения изменений?",
-        "sync-nodes-cancel": "Не сейчас"
+        "new-snippet": "Новый сниппет"
       }
     }
   },
@@ -1769,7 +1767,6 @@
   },
   "use-nodes-table-widget": {
     "online": "Онлайн",
-    "name": "Имя",
     "address": "Адрес",
     "ip-addresses": "IP адреса",
     "traffic-used": "Польз. трафик",
@@ -2279,19 +2276,29 @@
       "delete-description": "The integration will be removed from all nodes and affected nodes will be restarted."
     },
     "editor": {
-      "name": "Name",
       "description": "Description",
       "description-placeholder": "What this integration does",
-      "config-must-be-an-object": "Config must be a JSON object",
-      "apply-to-nodes": "Apply to nodes?",
-      "save-and-restart": "Save and restart nodes",
-      "save-and-restart-description": "Nodes using this integration will be restarted profile by profile and pick up the new config right away.",
-      "save-without-restart": "Save only",
-      "save-without-restart-description": "Changes are stored, but nodes keep running the current config until their next restart."
+      "config-must-be-an-object": "Config must be a JSON object"
     },
     "select": {
       "label": "Integrations",
       "placeholder": "Select integrations"
     }
+  },
+  "shared-lists": {
+    "modal": {
+      "subtitle": "Reusable IP and ASN lists referenced by plugins as ext:name",
+      "delete-description": "The list will be deleted. Plugins referencing it keep the ext: reference and will fail validation until it is fixed."
+    },
+    "editor": {
+      "name-description": "Referenced in plugins as ext:name. Cannot be changed later."
+    }
+  },
+  "apply-to-nodes": {
+    "title": "Apply to nodes?",
+    "apply": "Apply now",
+    "apply-description": "Affected nodes receive the new configuration right away.",
+    "later": "Not now",
+    "later-description": "Changes are saved, but nodes keep the current version until their next sync or restart."
   }
 }

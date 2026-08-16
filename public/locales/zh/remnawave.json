@@ -80,7 +80,8 @@
     "processing": "处理中",
     "operation-completed": "操作已完成",
     "usage-stats": "流量使用统计",
-    "active-sessions": "活跃会话"
+    "active-sessions": "活跃会话",
+    "shared-lists": "Shared lists"
   },
   "bandwidth-metrics": {
     "current-year": "今年",
@@ -986,7 +987,6 @@
       "widget": {
         "infra-provider": "网络提供商",
         "name-description": "提供商名称。用于在界面中识别该提供商。",
-        "name": "名称",
         "enter-provider-name": "输入提供商名称",
         "favicon-link": "Favicon 链接",
         "enter-favicon-link": "输入 Favicon 链接",
@@ -1470,9 +1470,7 @@
         "snippet-is-valid": "代码块有效",
         "edit-snippet": "编辑代码块",
         "snippets": "代码块",
-        "new-snippet": "新建代码块",
-        "sync-nodes-description": "节点仍在运行旧配置。是否立即重启受影响的节点以应用更改？",
-        "sync-nodes-cancel": "暂不需要"
+        "new-snippet": "新建代码块"
       }
     }
   },
@@ -1769,7 +1767,6 @@
   },
   "use-nodes-table-widget": {
     "online": "在线",
-    "name": "名称",
     "address": "地址",
     "ip-addresses": "IP 地址",
     "traffic-used": "流量使用",
@@ -2279,19 +2276,29 @@
       "delete-description": "The integration will be removed from all nodes and affected nodes will be restarted."
     },
     "editor": {
-      "name": "Name",
       "description": "Description",
       "description-placeholder": "What this integration does",
-      "config-must-be-an-object": "Config must be a JSON object",
-      "apply-to-nodes": "Apply to nodes?",
-      "save-and-restart": "Save and restart nodes",
-      "save-and-restart-description": "Nodes using this integration will be restarted profile by profile and pick up the new config right away.",
-      "save-without-restart": "Save only",
-      "save-without-restart-description": "Changes are stored, but nodes keep running the current config until their next restart."
+      "config-must-be-an-object": "Config must be a JSON object"
     },
     "select": {
       "label": "Integrations",
       "placeholder": "Select integrations"
     }
+  },
+  "shared-lists": {
+    "modal": {
+      "subtitle": "Reusable IP and ASN lists referenced by plugins as ext:name",
+      "delete-description": "The list will be deleted. Plugins referencing it keep the ext: reference and will fail validation until it is fixed."
+    },
+    "editor": {
+      "name-description": "Referenced in plugins as ext:name. Cannot be changed later."
+    }
+  },
+  "apply-to-nodes": {
+    "title": "Apply to nodes?",
+    "apply": "Apply now",
+    "apply-description": "Affected nodes receive the new configuration right away.",
+    "later": "Not now",
+    "later-description": "Changes are saved, but nodes keep the current version until their next sync or restart."
   }
 }
