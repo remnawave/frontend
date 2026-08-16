@@ -81,7 +81,7 @@
     "operation-completed": "操作已完成",
     "usage-stats": "流量使用统计",
     "active-sessions": "活跃会话",
-    "shared-lists": "Shared lists"
+    "shared-lists": "共享列表"
   },
   "bandwidth-metrics": {
     "current-year": "今年",
@@ -2272,33 +2272,33 @@
   },
   "node-integrations": {
     "modal": {
-      "title": "Node Integrations",
-      "delete-description": "The integration will be removed from all nodes and affected nodes will be restarted."
+      "title": "节点集合",
+      "delete-description": "集合将从所有节点中移除，受影响的节点将重新启动。"
     },
     "editor": {
-      "description": "Description",
-      "description-placeholder": "What this integration does",
-      "config-must-be-an-object": "Config must be a JSON object"
+      "description": "描述",
+      "description-placeholder": "这个集合做了什么",
+      "config-must-be-an-object": "配置必须是JSON对象"
     },
     "select": {
-      "label": "Integrations",
-      "placeholder": "Select integrations"
+      "label": "集合",
+      "placeholder": "选择集合"
     }
   },
   "shared-lists": {
     "modal": {
-      "subtitle": "Reusable IP and ASN lists referenced by plugins as ext:name",
-      "delete-description": "The list will be deleted. Plugins referencing it keep the ext: reference and will fail validation until it is fixed."
+      "subtitle": "可重用的 IP 和 ASN 列表，插件引用为 ext:name",
+      "delete-description": "列表将被删除。插件引用它保持范围：引用并在修复之前失败验证。"
     },
     "editor": {
-      "name-description": "Referenced in plugins as ext:name. Cannot be changed later."
+      "name-description": "插件中引用为 ext:name。以后无法更改。"
     }
   },
   "apply-to-nodes": {
-    "title": "Apply to nodes?",
-    "apply": "Apply now",
-    "apply-description": "Affected nodes receive the new configuration right away.",
-    "later": "Not now",
-    "later-description": "Changes are saved, but nodes keep the current version until their next sync or restart."
+    "title": "是否应用到节点？",
+    "apply": "立即应用",
+    "apply-description": "受影响的节点立即收到新的配置。",
+    "later": "以后再说",
+    "later-description": "更改已保存，但节点保留当前版本，直到下次同步或重新启动。"
   }
 }
