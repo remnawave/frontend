@@ -1,8 +1,8 @@
-import { Menu, Menubar, UnstyledButton } from '@mantine/core'
+import { Menu, Menubar } from '@mantine/core'
 import clsx from 'clsx'
 import { ElementType, Fragment } from 'react'
 import { PiCaretDownBold } from 'react-icons/pi'
-import { Link, matchPath, useLocation } from 'react-router'
+import { Link, matchPath, useLocation, useNavigate } from 'react-router'
 
 import { useDesktopMenuSections } from '../menu-sections/desktop-menu-sections'
 import classes from './desktop-navigation.module.css'
@@ -22,6 +22,7 @@ const externalLinkProps = (newTab?: boolean) =>
 
 export const DesktopNavigation = () => {
     const { pathname } = useLocation()
+    const navigate = useNavigate()
     const menu = useDesktopMenuSections()
 
     return (
@@ -47,17 +48,22 @@ export const DesktopNavigation = () => {
 
                 if (singleItem) {
                     return (
-                        <UnstyledButton
-                            className={clsx(classes.navItem, {
-                                [classes.navItemActive]: sectionActive
-                            })}
-                            component={Link}
-                            key={section.id}
-                            to={singleItem.href}
-                        >
-                            <NavIcon icon={section.icon ?? singleItem.icon} />
-                            <span>{section.header}</span>
-                        </UnstyledButton>
+                        <Menubar.Menu key={section.id}>
+                            <Menubar.Target
+                                className={clsx(classes.navItem, {
+                                    [classes.navItemActive]: sectionActive
+                                })}
+                                onKeyDown={(event) => {
+                                    if (event.key === 'Enter' || event.key === ' ') {
+                                        navigate(singleItem.href)
+                                    }
+                                }}
+                                {...{ component: Link, to: singleItem.href }}
+                            >
+                                <NavIcon icon={section.icon ?? singleItem.icon} />
+                                <span>{section.header}</span>
+                            </Menubar.Target>
+                        </Menubar.Menu>
                     )
                 }
 
