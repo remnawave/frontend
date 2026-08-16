@@ -192,7 +192,7 @@ export const EditSnippetModal = (props: IProps) => {
                     >
                         {t('common.cancel')}
                     </Button>
-                    <Button loading={isUpdating} type="submit">
+                    <Button loading={isUpdating} type="submit" variant="soft">
                         {t('common.save')}
                     </Button>
                 </Group>

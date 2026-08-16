@@ -235,7 +235,7 @@ export const BaseNodeForm = <T extends UpdateNodeCommand.RequestBody>(props: IPr
                     loading={isDataSubmitting}
                     onClick={handleSubmit}
                     size="md"
-                    variant="light"
+                    variant="soft"
                 >
                     {t('common.save')}
                 </Button>

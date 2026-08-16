@@ -82,7 +82,7 @@ export const ExternalSquadsSubpageConfigTabWidget = (props: IProps) => {
                     loading={isUpdatingExternalSquad}
                     onClick={handleSave}
                     size="md"
-                    variant="light"
+                    variant="soft"
                 >
                     {t('common.save')}
                 </Button>

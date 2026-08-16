@@ -31,8 +31,10 @@ import { NodesSpotlightSearchWidget } from '../nodes-spotlight-search'
 import { IProps } from './interfaces'
 import styles from './NodesTable.module.css'
 
+const EMPTY_NAMES: string[] = []
+
 export const NodesTableWidget = memo((props: IProps) => {
-    const { nodes } = props
+    const { nodes, nodePlugins, nodeIntegrations } = props
 
     const activeTag = useNodesActiveTag()
     const { setNodesActiveTag } = useViewPreferencesStoreActions()
@@ -175,11 +177,37 @@ export const NodesTableWidget = memo((props: IProps) => {
         [handlers]
     )
 
+    const nodeNames = useMemo(() => {
+        const pluginNameByUuid = new Map(
+            (nodePlugins?.nodePlugins ?? []).map((plugin) => [plugin.uuid, plugin.name])
+        )
+        const integrationNameByUuid = new Map(
+            (nodeIntegrations?.nodeIntegrations ?? []).map((integration) => [
+                integration.uuid,
+                integration.name
+            ])
+        )
+
+        return new Map(
+            (nodes ?? []).map((node) => [
+                node.uuid,
+                {
+                    integrationsNames: (node.integrationUuids ?? [])
+                        .map((uuid) => integrationNameByUuid.get(uuid))
+                        .filter((name): name is string => name !== undefined),
+                    pluginsName: node.activePluginUuid
+                        ? pluginNameByUuid.get(node.activePluginUuid)
+                        : undefined
+                }
+            ])
+        )
+    }, [nodes, nodePlugins, nodeIntegrations])
+
     const handleViewNode = (nodeUuid: string) => {
         showModal('nodes_editNodeModal', { nodeUuid })
     }
 
-    if (!nodes) {
+    if (!nodes || !nodePlugins || !nodeIntegrations) {
         return null
     }
 
@@ -211,6 +239,8 @@ export const NodesTableWidget = memo((props: IProps) => {
                                     const item = state[virtualItem.index]
                                     if (!item) return null
 
+                                    const names = nodeNames.get(item.uuid)
+
                                     return (
                                         <Box
                                             data-index={virtualItem.index}
@@ -236,6 +266,10 @@ export const NodesTableWidget = memo((props: IProps) => {
                                                     index={virtualItem.index}
                                                     isMobile={isMobile}
                                                     node={item}
+                                                    integrationsNames={
+                                                        names?.integrationsNames ?? EMPTY_NAMES
+                                                    }
+                                                    pluginsName={names?.pluginsName}
                                                 />
                                             </div>
                                         </Box>
@@ -251,9 +285,14 @@ export const NodesTableWidget = memo((props: IProps) => {
                             <NodeCardWidget
                                 handleViewNode={handleViewNode}
                                 index={0}
+                                integrationsNames={
+                                    nodeNames.get(draggedNode.uuid)?.integrationsNames ??
+                                    EMPTY_NAMES
+                                }
                                 isDragOverlay
                                 isMobile={isMobile}
                                 node={draggedNode}
+                                pluginsName={nodeNames.get(draggedNode.uuid)?.pluginsName}
                             />
                         </Container>
                     )}

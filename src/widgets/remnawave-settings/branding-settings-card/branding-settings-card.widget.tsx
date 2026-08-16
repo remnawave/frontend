@@ -226,7 +226,13 @@ export const BrandingSettingsCardWidget = (props: IProps) => {
 
                     <SettingsCardShared.Bottom>
                         <Group justify="flex-end">
-                            <Button color="teal" loading={isUpdatePending} size="md" type="submit">
+                            <Button
+                                color="teal"
+                                loading={isUpdatePending}
+                                size="md"
+                                type="submit"
+                                variant="soft"
+                            >
                                 {t('common.save')}
                             </Button>
                         </Group>

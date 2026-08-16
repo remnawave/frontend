@@ -67,7 +67,7 @@ export const CreateInfraProviderModal = NiceModal.create(() => {
                 <Stack>
                     <TextInput
                         description={t('view-infra-provider.drawer.widget.name-description')}
-                        label={t('view-infra-provider.drawer.widget.name')}
+                        label={t('common.name')}
                         placeholder={t('view-infra-provider.drawer.widget.enter-provider-name')}
                         required
                         {...form.getInputProps('name')}

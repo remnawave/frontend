@@ -1,7 +1,6 @@
 import NiceModal, { useModal } from '@ebay/nice-modal-react'
-import { Box, Button, Group, Modal, Paper, Stack, TextInput } from '@mantine/core'
+import { Box, Button, Group, Modal, Paper, TextInput } from '@mantine/core'
 import { schemaResolver, useForm } from '@mantine/form'
-import { modals } from '@mantine/modals'
 import {
     CreateNodeIntegrationCommand,
     UpdateNodeIntegrationCommand
@@ -9,8 +8,9 @@ import {
 import clsx from 'clsx'
 import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { TbDeviceFloppy, TbPlugConnected, TbRocket } from 'react-icons/tb'
+import { TbPlugConnected } from 'react-icons/tb'
 
+import { openApplyToNodesModal } from '@shared/_modals/universal'
 import { useNiceMantineModal } from '@shared/_modals/use-nice-modal'
 import { queryClient } from '@shared/api'
 import {
@@ -21,7 +21,6 @@ import {
 } from '@shared/api/hooks'
 import { COMPACT_MONACO_OPTIONS } from '@shared/constants/monaco-theme'
 import { usePseudoFullscreen } from '@shared/hooks'
-import { ActionCardShared } from '@shared/ui'
 import { CodeEditor, EditorStatusBar } from '@shared/ui/code-editor'
 import { fullscreenClasses, FullscreenToggleButton } from '@shared/ui/fullscreen-toggle-button'
 import { LoaderModalShared } from '@shared/ui/loader-modal'
@@ -143,48 +142,13 @@ export const NodeIntegrationEditorModal = NiceModal.create((props: IProps) => {
     }
 
     const openRestartChoiceModal = (variables: UpdateNodeIntegrationCommand.RequestBody) => {
-        modals.open({
-            title: (
-                <BaseOverlayHeader
-                    iconColor="pink"
-                    IconComponent={TbPlugConnected}
-                    iconVariant="soft"
-                    title={t('node-integrations.editor.apply-to-nodes')}
-                />
-            ),
-            centered: true,
-            size: 'md',
-            children: (
-                <Stack gap="sm">
-                    <ActionCardShared
-                        description={t('node-integrations.editor.save-and-restart-description')}
-                        icon={<TbRocket size={22} />}
-                        iconColor="teal"
-                        onClick={() => {
-                            updateNodeIntegration({
-                                variables: { ...variables, restartNodes: true }
-                            })
-                            modals.closeAll()
-                        }}
-                        title={t('node-integrations.editor.save-and-restart')}
-                        variant="soft"
-                    />
-
-                    <ActionCardShared
-                        description={t('node-integrations.editor.save-without-restart-description')}
-                        icon={<TbDeviceFloppy size={22} />}
-                        iconColor="gray"
-                        onClick={() => {
-                            updateNodeIntegration({
-                                variables: { ...variables, restartNodes: false }
-                            })
-                            modals.closeAll()
-                        }}
-                        title={t('node-integrations.editor.save-without-restart')}
-                        variant="soft"
-                    />
-                </Stack>
-            )
+        openApplyToNodesModal({
+            IconComponent: TbPlugConnected,
+            iconColor: 'pink',
+            onApply: () =>
+                updateNodeIntegration({ variables: { ...variables, restartNodes: true } }),
+            onLater: () =>
+                updateNodeIntegration({ variables: { ...variables, restartNodes: false } })
         })
     }
 
@@ -244,7 +208,7 @@ export const NodeIntegrationEditorModal = NiceModal.create((props: IProps) => {
                         {!isFullscreen && (
                             <TextInput
                                 key={form.key('name')}
-                                label={t('node-integrations.editor.name')}
+                                label={t('common.name')}
                                 placeholder="Integration"
                                 required
                                 {...form.getInputProps('name')}

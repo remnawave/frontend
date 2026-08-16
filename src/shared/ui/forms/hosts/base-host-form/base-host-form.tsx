@@ -1306,6 +1306,7 @@ export const BaseHostForm = <
                             loading={isSubmitting}
                             size="md"
                             type="submit"
+                            variant="soft"
                         >
                             {t('common.save')}
                         </Button>

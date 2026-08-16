@@ -203,6 +203,7 @@ export function ConfigEditorActionsFeature(props: Props) {
                 leftSection={<PiFloppyDisk size={16} />}
                 loading={isUpdating}
                 onClick={handleSave}
+                variant="soft"
             >
                 {t('common.save')}
             </Button>

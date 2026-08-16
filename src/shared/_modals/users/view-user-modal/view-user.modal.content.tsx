@@ -315,7 +315,7 @@ export const ViewUserModalContent = (props: IProps) => {
                         handleSubmit()
                     }}
                     size="md"
-                    variant="light"
+                    variant="soft"
                 >
                     {t('common.save')}
                 </Button>

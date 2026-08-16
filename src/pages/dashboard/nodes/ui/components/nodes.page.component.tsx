@@ -24,7 +24,7 @@ import {
 import { IProps } from './interfaces'
 
 export default function NodesPageComponent(props: IProps) {
-    const { nodes, isLoading } = props
+    const { nodes, isLoading, nodePlugins, nodeIntegrations } = props
 
     const { t } = useTranslation()
 
@@ -119,7 +119,11 @@ export default function NodesPageComponent(props: IProps) {
                             />
                         </motion.div>
                     ) : (
-                        <NodesTableWidget nodes={nodes} />
+                        <NodesTableWidget
+                            nodes={nodes}
+                            nodePlugins={nodePlugins}
+                            nodeIntegrations={nodeIntegrations}
+                        />
                     )}
                 </Grid.Col>
             </Grid>

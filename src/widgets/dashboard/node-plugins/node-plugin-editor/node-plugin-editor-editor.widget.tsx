@@ -7,11 +7,12 @@ import { modals } from '@mantine/modals'
 import { Monaco } from '@monaco-editor/react'
 import { GetNodePluginCommand } from '@remnawave/backend-contract'
 import clsx from 'clsx'
-import { useEffect, useLayoutEffect, useRef, useState } from 'react'
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { TbAlertTriangle } from 'react-icons/tb'
 import { useBlocker } from 'react-router'
 
+import { useGetSharedLists } from '@shared/api/hooks'
 import { usePseudoFullscreen, useViewportFillHeight } from '@shared/hooks'
 import { CodeEditor, EditorStatusBar } from '@shared/ui/code-editor'
 import { fullscreenClasses, FullscreenToggleButton } from '@shared/ui/fullscreen-toggle-button'
@@ -29,6 +30,8 @@ export function NodePluginEditorWidget(props: IProps) {
     const { t } = useTranslation()
 
     const { nodePlugin, pluginUuid } = props
+
+    const { data: sharedLists } = useGetSharedLists()
 
     const [result, setResult] = useState('')
     const [isConfigValid, setIsConfigValid] = useState(false)
@@ -90,8 +93,14 @@ export function NodePluginEditorWidget(props: IProps) {
         }
     }, [blocker])
 
+    const sharedListsData = useMemo(() => sharedLists?.sharedLists ?? [], [sharedLists])
+
+    useEffect(() => {
+        MonacoSetupNodePluginEditorFeature.setup(sharedListsData)
+    }, [sharedListsData])
+
     const handleEditorDidMount = () => {
-        MonacoSetupNodePluginEditorFeature.setup()
+        MonacoSetupNodePluginEditorFeature.setup(sharedListsData)
     }
 
     const checkForChanges = () => {

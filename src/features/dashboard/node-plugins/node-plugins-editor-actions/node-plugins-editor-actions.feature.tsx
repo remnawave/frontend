@@ -15,11 +15,13 @@ import {
     TbCut,
     TbDownload,
     TbMenuDeep,
+    TbPackage,
     TbSelectAll
 } from 'react-icons/tb'
 
+import { openApplyToNodesModal } from '@shared/_modals/universal'
 import { queryClient } from '@shared/api'
-import { QueryKeys, useUpdateNodePlugin } from '@shared/api/hooks'
+import { QueryKeys, useSyncNodePlugin, useUpdateNodePlugin } from '@shared/api/hooks'
 import { useIsMobile } from '@shared/hooks'
 import { useDownloadTemplate } from '@shared/ui/load-templates/use-download-template'
 
@@ -54,6 +56,16 @@ export function NodePluginsEditorActionsFeature(props: Props) {
     const clipboard = useClipboard({ timeout: 500 })
     const [opened, handlers] = useDisclosure(false)
 
+    const { mutate: syncNodePlugin } = useSyncNodePlugin()
+
+    const openSyncChoiceModal = () => {
+        openApplyToNodesModal({
+            IconComponent: TbPackage,
+            iconColor: 'grape',
+            onApply: () => syncNodePlugin({ variables: { uuid: pluginUuid } })
+        })
+    }
+
     const { mutate: updateNodePluginRes, isPending: isUpdating } = useUpdateNodePlugin({
         mutationFns: {
             onSuccess: async (updatedNodePlugin: UpdateNodePluginCommand.Response['response']) => {
@@ -76,6 +88,8 @@ export function NodePluginsEditorActionsFeature(props: Props) {
                 )
 
                 setHasUnsavedChanges(false)
+
+                openSyncChoiceModal()
             },
             onError: (error) => {
                 setIsNodePluginValid(false)
@@ -188,6 +202,7 @@ export function NodePluginsEditorActionsFeature(props: Props) {
                 leftSection={<PiFloppyDisk size={16} />}
                 loading={isUpdating}
                 onClick={handleSave}
+                variant="soft"
             >
                 {t('common.save')}
             </Button>

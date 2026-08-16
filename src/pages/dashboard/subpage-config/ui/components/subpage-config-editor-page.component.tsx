@@ -336,7 +336,7 @@ export const SubpageConfigEditorPageComponent = (props: Props) => {
                             loading={isUpdatingSubscriptionPageConfig}
                             onClick={handleSave}
                             size="md"
-                            variant="light"
+                            variant="soft"
                         >
                             {t('common.save')}
                         </Button>

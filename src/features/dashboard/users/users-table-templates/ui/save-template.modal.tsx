@@ -71,6 +71,7 @@ export const SaveTemplateModal = (props: IProps) => {
                 fullWidth
                 leftSection={<TbDeviceFloppy size={16} />}
                 onClick={handleSave}
+                variant="soft"
             >
                 {t('common.save')}
             </Button>

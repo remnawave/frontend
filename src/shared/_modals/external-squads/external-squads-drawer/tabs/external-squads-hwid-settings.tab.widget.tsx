@@ -253,7 +253,7 @@ export const ExternalSquadsHwidSettingsTabWidget = (props: IProps) => {
                     style={{
                         transition: 'all 0.2s ease'
                     }}
-                    variant="light"
+                    variant="soft"
                 >
                     {t('common.save')}
                 </Button>

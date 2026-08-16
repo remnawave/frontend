@@ -296,7 +296,7 @@ export const RenameModalShared = NiceModal.create((props: IProps) => {
                                 transition: 'all 0.2s ease'
                             }}
                             type="submit"
-                            variant="light"
+                            variant="soft"
                         >
                             {t('common.save')}
                         </Button>

@@ -1,6 +1,6 @@
 import { ActionIcon, ActionIconGroup, Group, Tooltip } from '@mantine/core'
 import { useTranslation } from 'react-i18next'
-import { TbBook, TbPlus, TbRefresh, TbTerminal } from 'react-icons/tb'
+import { TbBook, TbList, TbPlus, TbRefresh, TbTerminal } from 'react-icons/tb'
 import { useNavigate } from 'react-router'
 
 import { showModal } from '@shared/_modals/show-modal'
@@ -34,6 +34,19 @@ export const NodePluginsHeaderActionButtonsFeature = () => {
             </ActionIcon>
 
             <UniversalSpotlightActionIconShared />
+
+            <ActionIconGroup>
+                <Tooltip label={t('common.shared-lists')} withArrow>
+                    <ActionIcon
+                        color="indigo"
+                        onClick={() => showModal('sharedLists_sharedListsModal')}
+                        size="input-md"
+                        variant="soft"
+                    >
+                        <TbList size="24px" />
+                    </ActionIcon>
+                </Tooltip>
+            </ActionIconGroup>
 
             <ActionIconGroup>
                 <Tooltip label="Executor" withArrow>

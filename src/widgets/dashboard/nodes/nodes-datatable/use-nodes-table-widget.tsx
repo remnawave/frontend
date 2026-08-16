@@ -68,10 +68,10 @@ export function getNodesTableColumns(
         {
             accessor: 'name',
             sortable: true,
-            title: t('use-nodes-table-widget.name'),
+            title: t('common.name'),
             filter: (
                 <TextInput
-                    label={t('use-nodes-table-widget.name')}
+                    label={t('common.name')}
                     leftSection={<TbSearch size={16} />}
                     onChange={(e) => filters.setNameQuery(e.currentTarget.value)}
                     rightSection={
