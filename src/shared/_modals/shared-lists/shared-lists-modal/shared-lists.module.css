@@ -8,6 +8,7 @@
 .sharedListRow {
     display: grid;
     grid-template-columns: minmax(0, 1.4fr) max-content 44px;
+    grid-template-areas: 'name meta actions';
     gap: 16px;
     align-items: center;
     padding: 11px 16px;
@@ -17,10 +18,26 @@
     transition: background-color 120ms ease;
 }
 
+.sharedListRow > *:nth-child(1) {
+    grid-area: name;
+}
+
+.sharedListRow > *:nth-child(2) {
+    grid-area: meta;
+}
+
+.sharedListRow > *:nth-child(3) {
+    grid-area: actions;
+    justify-self: end;
+}
+
 @media (max-width: 48em) {
     .sharedListRow {
         grid-template-columns: minmax(0, 1fr) 44px;
-        gap: 10px;
+        grid-template-areas:
+            'name actions'
+            'meta actions';
+        gap: 6px 10px;
     }
 }
 

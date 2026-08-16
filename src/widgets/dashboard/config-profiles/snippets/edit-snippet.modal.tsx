@@ -21,7 +21,7 @@ import { fullscreenClasses, FullscreenToggleButton } from '@shared/ui/fullscreen
 import { forceMonacoRetokenize } from '@shared/utils/monaco/force-retokenize'
 
 import { openConfirmSnippetSyncModal } from './confirm-snippet-sync.modal'
-import classes from './SnippetsDrawer.module.css'
+import classes from './Snippets.module.css'
 
 export const EDIT_SNIPPET_MODAL_ID = 'edit-snippet-modal'
 

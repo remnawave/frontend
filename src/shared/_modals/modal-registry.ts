@@ -37,6 +37,7 @@ import {
 } from './nodes'
 import { PasskeysDrawer } from './remnawave-settings'
 import { SharedListEditorModal, SharedListsModal } from './shared-lists'
+import { SnippetsModal } from './snippets'
 import { CreateModal, HelpDrawerShared, RenameModalShared } from './universal'
 import {
     DetailedUserInfoDrawer,
@@ -114,6 +115,8 @@ export const MODAL_REGISTRY = {
 
     sharedLists_sharedListsModal: SharedListsModal,
     sharedLists_sharedListEditorModal: SharedListEditorModal,
+
+    snippets_snippetsModal: SnippetsModal,
 
     rwSettings_passkeysDrawer: PasskeysDrawer
 } as const

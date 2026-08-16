@@ -8,6 +8,7 @@
 .integrationRow {
     display: grid;
     grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.6fr) 44px;
+    grid-template-areas: 'name description actions';
     gap: 16px;
     align-items: center;
     padding: 11px 16px;
@@ -17,10 +18,26 @@
     transition: background-color 120ms ease;
 }
 
+.integrationRow > *:nth-child(1) {
+    grid-area: name;
+}
+
+.integrationRow > *:nth-child(2) {
+    grid-area: description;
+}
+
+.integrationRow > *:nth-child(3) {
+    grid-area: actions;
+    justify-self: end;
+}
+
 @media (max-width: 48em) {
     .integrationRow {
         grid-template-columns: minmax(0, 1fr) 44px;
-        gap: 10px;
+        grid-template-areas:
+            'name actions'
+            'description actions';
+        gap: 4px 10px;
     }
 }
 

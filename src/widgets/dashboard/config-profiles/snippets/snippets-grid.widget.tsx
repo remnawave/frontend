@@ -25,7 +25,7 @@ import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 
 import { openConfirmSnippetSyncModal } from './confirm-snippet-sync.modal'
 import { EDIT_SNIPPET_MODAL_ID, EditSnippetModal } from './edit-snippet.modal'
-import classes from './SnippetsDrawer.module.css'
+import classes from './Snippets.module.css'
 
 interface IProps {
     snippets: GetSnippetsCommand.Response['response'] | undefined

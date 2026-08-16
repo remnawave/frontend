@@ -79,7 +79,7 @@ export const NodeIntegrationItem = (props: IProps) => {
                 </Text>
             </Group>
 
-            <Text c="dimmed" ff="monospace" size="xs" truncate="end" visibleFrom="sm">
+            <Text c="dimmed" ff="monospace" size="xs" truncate="end">
                 {integration.description || '—'}
             </Text>
 

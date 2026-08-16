@@ -18,7 +18,7 @@ import { CodeEditor, EditorStatusBar } from '@shared/ui/code-editor'
 import { fullscreenClasses, FullscreenToggleButton } from '@shared/ui/fullscreen-toggle-button'
 import { forceMonacoRetokenize } from '@shared/utils/monaco/force-retokenize'
 
-import classes from './SnippetsDrawer.module.css'
+import classes from './Snippets.module.css'
 
 export const CREATE_SNIPPET_MODAL_ID = 'create-snippet-modal'
 
