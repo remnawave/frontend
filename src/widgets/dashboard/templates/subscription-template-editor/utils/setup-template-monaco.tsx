@@ -1,11 +1,32 @@
 import { Monaco } from '@monaco-editor/react'
 import { GetHostsCommand } from '@remnawave/backend-contract'
 import consola from 'consola'
-import { configureMonacoYaml } from 'monaco-yaml'
+import { configureMonacoYaml, MonacoYaml, MonacoYamlOptions } from 'monaco-yaml'
 
 import { registerJsonSchema } from '@shared/utils/monaco/json-schema-registry'
 
 type Host = GetHostsCommand.Response['response'][number]
+
+const YAML_OPTIONS: MonacoYamlOptions = {
+    validate: true,
+    enableSchemaRequest: true,
+    hover: true,
+    completion: true,
+    format: {
+        enable: true
+    }
+}
+
+let monacoYaml: MonacoYaml | undefined
+
+const configureYaml = (monaco: Monaco) => {
+    if (monacoYaml) {
+        monacoYaml.update(YAML_OPTIONS)
+        return
+    }
+
+    monacoYaml = configureMonacoYaml(monaco, YAML_OPTIONS)
+}
 
 const DOCS_URL = 'https://docs.rw/docs/learn/xray-json-advanced'
 const DOCS_LINK = `\n\n[📖 Documentation](${DOCS_URL})`
@@ -48,15 +69,7 @@ export const configureMonaco = (
 ) => {
     try {
         if (language === 'yaml') {
-            configureMonacoYaml(monaco, {
-                validate: true,
-                enableSchemaRequest: true,
-                hover: true,
-                completion: true,
-                format: {
-                    enable: true
-                }
-            })
+            configureYaml(monaco)
         }
 
         if (language === 'json') {

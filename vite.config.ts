@@ -32,7 +32,7 @@ export default defineConfig({
             'html-parse-stringify',
             'monaco-editor/editor',
             'monaco-editor/features/register.all',
-            'monaco-editor/languages/definitions/yaml/register',
+            'monaco-editor/languages/definitions/yaml/yaml',
             'monaco-editor/languages/features/json/register'
         ]
     },
