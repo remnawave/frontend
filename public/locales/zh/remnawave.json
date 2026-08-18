@@ -81,7 +81,10 @@
     "operation-completed": "操作已完成",
     "usage-stats": "流量使用统计",
     "active-sessions": "活跃会话",
-    "shared-lists": "共享列表"
+    "shared-lists": "共享列表",
+    "try-again": "Try again",
+    "interface": "Interface",
+    "ip-address": "IP address"
   },
   "bandwidth-metrics": {
     "current-year": "今年",
@@ -759,7 +762,6 @@
       "progress": "已完成 {{completed}} 个，共 {{total}} 个",
       "job-failed": "任务失败",
       "job-failed-description": "无法获取活动会话",
-      "try-again": "重试",
       "clear": "清除",
       "no-active-sessions": "没有活跃的会话",
       "no-active-sessions-description": "未找到此用户的活跃IP地址。",
@@ -1344,8 +1346,7 @@
       "system": "系统",
       "system-uptime": "系统运行时间",
       "network": "网络",
-      "kernel": "内核",
-      "interface": "接口"
+      "kernel": "内核"
     }
   },
   "node-stats": {
@@ -1392,7 +1393,6 @@
       "subscription-request-history": "订阅请求历史",
       "nothing-to-show": "没有要显示的内容...",
       "request-at": "请求时间",
-      "ip-address": "IP 地址",
       "user-agent": "User Agent",
       "request-history": "请求历史"
     }
@@ -2300,5 +2300,19 @@
     "apply-description": "受影响的节点立即收到新的配置。",
     "later": "以后再说",
     "later-description": "更改已保存，但节点保留当前版本，直到下次同步或重新启动。"
+  },
+  "node-geocheck": {
+    "title": "GeoCheck",
+    "source-default": "Default",
+    "default-placeholder": "Automatic",
+    "default-description": "The node will use its default outbound route.",
+    "ip-description": "Pick one of the node IPs or type any address",
+    "interface-description": "Pick one of the node interfaces or type any name",
+    "run": "Run check",
+    "running": "Running GeoCheck",
+    "running-description": "The node is probing its connectivity, this usually takes up to a minute.",
+    "failed-description": "The node could not complete the GeoCheck.",
+    "view-image": "Report",
+    "no-image": "No image in the report, open JSON"
   }
 }
