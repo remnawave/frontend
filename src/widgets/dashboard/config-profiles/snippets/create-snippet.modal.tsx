@@ -13,7 +13,7 @@ import { useTranslation } from 'react-i18next'
 import { queryClient } from '@shared/api'
 import { QueryKeys } from '@shared/api/hooks/keys-factory'
 import { useCreateSnippet } from '@shared/api/hooks/snippets/snippets.mutation.hooks'
-import { usePseudoFullscreen } from '@shared/hooks'
+import { useModalEscapeGuard, usePseudoFullscreen } from '@shared/hooks'
 import { CodeEditor, editorClasses, EditorFooter, EditorStatusBar } from '@shared/ui/code-editor'
 import { fullscreenClasses, FullscreenToggleButton } from '@shared/ui/fullscreen-toggle-button'
 import { forceMonacoRetokenize } from '@shared/utils/monaco/force-retokenize'
@@ -27,6 +27,8 @@ export const CreateSnippetModal = () => {
 
     const monaco = useMonaco()
     const { isFullscreen, toggle: toggleFullscreen } = usePseudoFullscreen()
+
+    useModalEscapeGuard(CREATE_SNIPPET_MODAL_ID, isFullscreen)
     const editorRef = useRef<editor.IStandaloneCodeEditor | null>(null)
 
     const createSnippetForm = useForm<CreateSnippetCommand.RequestBody>({

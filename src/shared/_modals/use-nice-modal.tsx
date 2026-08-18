@@ -2,6 +2,7 @@ import { NiceModalHandler } from '@ebay/nice-modal-react'
 import { useCallback, useEffect, useEffectEvent, useState } from 'react'
 
 import { useIsMobile } from '@shared/hooks/use-is-mobile'
+import { isPseudoFullscreenActive } from '@shared/hooks/use-pseudo-fullscreen'
 
 const stack: { id: string; hide: () => void }[] = []
 let listening = false
@@ -16,6 +17,7 @@ function hasManagedModalOpen(): boolean {
 
 function handleKeyDown(e: KeyboardEvent) {
     if (e.key !== 'Escape') return
+    if (isPseudoFullscreenActive()) return
     if (hasManagedModalOpen()) return
     const top = stack[stack.length - 1]
     if (!top) return

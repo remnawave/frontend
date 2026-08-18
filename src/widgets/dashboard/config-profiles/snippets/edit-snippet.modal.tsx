@@ -14,7 +14,7 @@ import { useTranslation } from 'react-i18next'
 import { queryClient } from '@shared/api'
 import { useSyncSnippet, useUpdateSnippet } from '@shared/api/hooks'
 import { QueryKeys } from '@shared/api/hooks/keys-factory'
-import { usePseudoFullscreen } from '@shared/hooks'
+import { useModalEscapeGuard, usePseudoFullscreen } from '@shared/hooks'
 import { CodeEditor, editorClasses, EditorFooter, EditorStatusBar } from '@shared/ui/code-editor'
 import { CopyableFieldShared } from '@shared/ui/copyable-field/copyable-field'
 import { fullscreenClasses, FullscreenToggleButton } from '@shared/ui/fullscreen-toggle-button'
@@ -36,6 +36,8 @@ export const EditSnippetModal = (props: IProps) => {
 
     const monaco = useMonaco()
     const { isFullscreen, toggle: toggleFullscreen } = usePseudoFullscreen()
+
+    useModalEscapeGuard(EDIT_SNIPPET_MODAL_ID, isFullscreen)
     const editorRef = useRef<editor.IStandaloneCodeEditor | null>(null)
 
     const { mutate: updateSnippet, isPending: isUpdating } = useUpdateSnippet({
