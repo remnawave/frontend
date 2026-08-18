@@ -2313,6 +2313,7 @@
     "running-description": "Нода проверяет соединение, обычно занимает до минуты.",
     "failed-description": "Нода не смогла завершить GeoCheck.",
     "view-image": "Отчет",
-    "no-image": "Нет изображения в отчете, открыть JSON"
+    "no-image": "Нет изображения в отчете, открыть JSON",
+    "requires-node-version": "Требуется Remnawave Node {{version}} или новее"
   }
 }

@@ -2313,6 +2313,7 @@
     "running-description": "The node is probing its connectivity, this usually takes up to a minute.",
     "failed-description": "The node could not complete the GeoCheck.",
     "view-image": "Report",
-    "no-image": "No image in the report, open JSON"
+    "no-image": "No image in the report, open JSON",
+    "requires-node-version": "نیازمند Remnawave Node نسخه {{version}} یا بالاتر"
   }
 }
