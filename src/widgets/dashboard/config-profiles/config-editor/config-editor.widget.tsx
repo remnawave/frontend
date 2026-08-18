@@ -161,7 +161,12 @@ export function ConfigEditorWidget(props: IProps) {
                 }}
                 withBorder
             >
-                <FullscreenToggleButton isFullscreen={isFullscreen} onToggle={toggleFullscreen} />
+                {isFullscreen && (
+                    <FullscreenToggleButton
+                        isFullscreen={isFullscreen}
+                        onToggle={toggleFullscreen}
+                    />
+                )}
 
                 <CodeEditor
                     footer={statusBar}
@@ -202,6 +207,13 @@ export function ConfigEditorWidget(props: IProps) {
 
             {!isFullscreen && (
                 <EditorFooter ref={footerRef}>
+                    <FullscreenToggleButton
+                        floating={false}
+                        isFullscreen={isFullscreen}
+                        onToggle={toggleFullscreen}
+                        size={36}
+                    />
+
                     <ConfigEditorActionsFeature
                         configProfile={configProfile}
                         editorRef={editorRef}

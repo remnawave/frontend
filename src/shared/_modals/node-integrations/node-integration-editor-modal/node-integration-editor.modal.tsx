@@ -240,11 +240,6 @@ export const NodeIntegrationEditorModal = NiceModal.create((props: IProps) => {
                                 pos="relative"
                                 withBorder
                             >
-                                <FullscreenToggleButton
-                                    isFullscreen={isFullscreen}
-                                    onToggle={toggleFullscreen}
-                                />
-
                                 <CodeEditor
                                     defaultLanguage="json"
                                     footer={
@@ -273,6 +268,13 @@ export const NodeIntegrationEditorModal = NiceModal.create((props: IProps) => {
                             </Paper>
 
                             <EditorFooter>
+                                <FullscreenToggleButton
+                                    floating={false}
+                                    isFullscreen={isFullscreen}
+                                    onToggle={toggleFullscreen}
+                                    size={36}
+                                />
+
                                 <Group>
                                     <Button
                                         loading={isCreatePending || isUpdatePending}

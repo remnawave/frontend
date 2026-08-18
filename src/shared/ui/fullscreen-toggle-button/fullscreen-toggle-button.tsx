@@ -6,21 +6,29 @@ import styles from './Fullscreen.module.css'
 
 interface IProps extends ActionIconProps {
     className?: string
+    floating?: boolean
     iconSize?: number
     isFullscreen: boolean
     onToggle: () => void
 }
 
 export function FullscreenToggleButton(props: IProps) {
-    const { className, iconSize = 18, isFullscreen, onToggle, ...actionIconProps } = props
+    const {
+        className,
+        floating = true,
+        iconSize = 18,
+        isFullscreen,
+        onToggle,
+        ...actionIconProps
+    } = props
 
     return (
         <ActionIcon
-            className={clsx(styles.button, className)}
+            className={clsx(floating && styles.button, className)}
             color="gray"
             onClick={onToggle}
             size="lg"
-            variant="default"
+            variant="soft"
             {...actionIconProps}
         >
             {isFullscreen ? (

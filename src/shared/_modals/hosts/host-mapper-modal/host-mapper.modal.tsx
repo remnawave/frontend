@@ -128,11 +128,6 @@ export const HostMapperModal = NiceModal.create((props: IProps) => {
                     }}
                     withBorder
                 >
-                    <FullscreenToggleButton
-                        isFullscreen={isFullscreen}
-                        onToggle={toggleFullscreen}
-                    />
-
                     <CodeEditor
                         footer={error && <EditorStatusBar status="error">{error}</EditorStatusBar>}
                         className={classes.monacoEditor}
@@ -169,6 +164,13 @@ export const HostMapperModal = NiceModal.create((props: IProps) => {
                 </Paper>
 
                 <EditorFooter className={clsx(error && classes.footerError)}>
+                    <FullscreenToggleButton
+                        floating={false}
+                        isFullscreen={isFullscreen}
+                        onToggle={toggleFullscreen}
+                        size={36}
+                    />
+
                     <Group gap="sm">
                         <Button onClick={handleSave} variant="soft">
                             {t('common.save')}

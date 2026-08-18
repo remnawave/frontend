@@ -130,11 +130,6 @@ export const CreateSnippetModal = () => {
                         }}
                         withBorder
                     >
-                        <FullscreenToggleButton
-                            isFullscreen={isFullscreen}
-                            onToggle={toggleFullscreen}
-                        />
-
                         <CodeEditor
                             footer={
                                 <EditorStatusBar status={hasSnippetError ? 'error' : 'success'}>
@@ -174,6 +169,13 @@ export const CreateSnippetModal = () => {
                     </Paper>
 
                     <EditorFooter className={clsx(hasSnippetError && classes.footerError)}>
+                        <FullscreenToggleButton
+                            floating={false}
+                            isFullscreen={isFullscreen}
+                            onToggle={toggleFullscreen}
+                            size={36}
+                        />
+
                         <Group>
                             <Button loading={isCreating} type="submit" variant="soft">
                                 {t('common.create')}

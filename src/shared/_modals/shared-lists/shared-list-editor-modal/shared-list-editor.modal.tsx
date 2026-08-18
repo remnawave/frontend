@@ -219,11 +219,6 @@ export const SharedListEditorModal = NiceModal.create((props: IProps) => {
                             pos="relative"
                             withBorder
                         >
-                            <FullscreenToggleButton
-                                isFullscreen={isFullscreen}
-                                onToggle={toggleFullscreen}
-                            />
-
                             <CodeEditor
                                 defaultLanguage="json"
                                 footer={
@@ -244,6 +239,13 @@ export const SharedListEditorModal = NiceModal.create((props: IProps) => {
                         </Paper>
 
                         <EditorFooter className={clsx(error && classes.footerError)}>
+                            <FullscreenToggleButton
+                                floating={false}
+                                isFullscreen={isFullscreen}
+                                onToggle={toggleFullscreen}
+                                size={36}
+                            />
+
                             <Group gap="sm">
                                 <Button
                                     loading={isCreatePending || isUpdatePending}

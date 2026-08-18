@@ -93,7 +93,12 @@ export function SubscriptionTemplateEditorWidget(props: Props) {
                 }}
                 withBorder
             >
-                <FullscreenToggleButton isFullscreen={isFullscreen} onToggle={toggleFullscreen} />
+                {isFullscreen && (
+                    <FullscreenToggleButton
+                        isFullscreen={isFullscreen}
+                        onToggle={toggleFullscreen}
+                    />
+                )}
 
                 <CodeEditor
                     beforeMount={handleEditorWillMount}
@@ -115,6 +120,13 @@ export function SubscriptionTemplateEditorWidget(props: Props) {
 
             {!isFullscreen && (
                 <EditorFooter ref={footerRef}>
+                    <FullscreenToggleButton
+                        floating={false}
+                        isFullscreen={isFullscreen}
+                        onToggle={toggleFullscreen}
+                        size={36}
+                    />
+
                     <TemplateEditorActionsFeature
                         editorRef={editorRef}
                         editorType={editorType}

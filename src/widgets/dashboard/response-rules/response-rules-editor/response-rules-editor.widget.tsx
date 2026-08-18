@@ -122,7 +122,12 @@ export function ResponseRulesEditorWidget(props: IProps) {
                 }}
                 withBorder
             >
-                <FullscreenToggleButton isFullscreen={isFullscreen} onToggle={toggleFullscreen} />
+                {isFullscreen && (
+                    <FullscreenToggleButton
+                        isFullscreen={isFullscreen}
+                        onToggle={toggleFullscreen}
+                    />
+                )}
 
                 <CodeEditor
                     footer={
@@ -164,6 +169,13 @@ export function ResponseRulesEditorWidget(props: IProps) {
 
             {!isFullscreen && (
                 <EditorFooter ref={footerRef}>
+                    <FullscreenToggleButton
+                        floating={false}
+                        isFullscreen={isFullscreen}
+                        onToggle={toggleFullscreen}
+                        size={36}
+                    />
+
                     <Stack gap="md">
                         <ResponseRulesEditorActionsFeature
                             editorRef={editorRef}
