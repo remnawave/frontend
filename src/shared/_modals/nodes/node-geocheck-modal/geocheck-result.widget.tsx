@@ -30,6 +30,7 @@ import {
 
 import { usePseudoFullscreen } from '@shared/hooks'
 import { fullscreenClasses } from '@shared/ui/fullscreen-toggle-button'
+import { ZoomableImage } from '@shared/ui/zoomable-image'
 import {
     copyImageScreenshotToClipboard,
     downloadImageScreenshot
@@ -180,23 +181,19 @@ export const GeocheckResultWidget = (props: IProps) => {
                 )}
                 pos="relative"
             >
-                <Box className={classes.canvas} display={view === 'image' ? 'flex' : 'none'}>
+                <Box className={classes.imageArea} display={view === 'image' ? 'block' : 'none'}>
                     {imageSrc ? (
-                        <img
-                            alt="geocheck"
-                            className={classes.image}
-                            ref={imageRef}
-                            src={imageSrc}
-                            style={{ width: `100%` }}
-                        />
+                        <ZoomableImage alt="geocheck" ref={imageRef} src={imageSrc} />
                     ) : (
-                        <Button
-                            leftSection={<TbPhoto size={18} />}
-                            onClick={() => setView('json')}
-                            variant="subtle"
-                        >
-                            {t('node-geocheck.no-image')}
-                        </Button>
+                        <Center className={classes.canvas}>
+                            <Button
+                                leftSection={<TbPhoto size={18} />}
+                                onClick={() => setView('json')}
+                                variant="subtle"
+                            >
+                                {t('node-geocheck.no-image')}
+                            </Button>
+                        </Center>
                     )}
                 </Box>
 

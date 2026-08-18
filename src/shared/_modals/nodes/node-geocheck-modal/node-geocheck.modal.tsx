@@ -47,6 +47,7 @@ export const NodeGeocheckModal = NiceModal.create((props: IProps) => {
     return (
         <Modal
             {...modalProps}
+            removeScrollProps={{ allowPinchZoom: true }}
             size={hasReport ? 'min(1000px, 95vw)' : 'min(520px, 95vw)'}
             title={
                 <BaseOverlayHeader

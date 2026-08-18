@@ -12,13 +12,16 @@
     height: 100%;
 }
 
-.canvas {
-    display: flex;
-    justify-content: safe center;
-    padding: 16px;
+.imageArea {
+    height: 62vh;
+    min-height: 320px;
 }
 
-.image {
-    display: block;
-    flex: none;
+.fullscreenViewport .imageArea {
+    height: 100%;
+}
+
+.canvas {
+    height: 100%;
+    padding: 16px;
 }
