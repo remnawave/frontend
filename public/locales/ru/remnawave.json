@@ -82,9 +82,9 @@
     "usage-stats": "Статистика использования",
     "active-sessions": "Активные сессии",
     "shared-lists": "Общие списки",
-    "try-again": "Try again",
-    "interface": "Interface",
-    "ip-address": "IP address"
+    "try-again": "Попробуйте снова",
+    "interface": "Интерфейс",
+    "ip-address": "IP-адрес"
   },
   "bandwidth-metrics": {
     "current-year": "Текущий год",
@@ -2303,16 +2303,16 @@
   },
   "node-geocheck": {
     "title": "GeoCheck",
-    "source-default": "Default",
-    "default-placeholder": "Automatic",
-    "default-description": "The node will use its default outbound route.",
-    "ip-description": "Pick one of the node IPs or type any address",
-    "interface-description": "Pick one of the node interfaces or type any name",
-    "run": "Run check",
-    "running": "Running GeoCheck",
-    "running-description": "The node is probing its connectivity, this usually takes up to a minute.",
-    "failed-description": "The node could not complete the GeoCheck.",
-    "view-image": "Report",
-    "no-image": "No image in the report, open JSON"
+    "source-default": "По умолчанию",
+    "default-placeholder": "Автоматически",
+    "default-description": "Узел будет использовать исходящий маршрут по умолчанию.",
+    "ip-description": "Выберите один из IP-адресов узла или введите любой адрес",
+    "interface-description": "Выберите один из интерфейсов узла или введите любое имя",
+    "run": "Запустить проверку",
+    "running": "Выполняется проверка геоданных",
+    "running-description": "Нода проверяет соединение, обычно занимает до минуты.",
+    "failed-description": "Нода не смогла завершить GeoCheck.",
+    "view-image": "Отчет",
+    "no-image": "Нет изображения в отчете, открыть JSON"
   }
 }
