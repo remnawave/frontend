@@ -10,5 +10,9 @@ export const app = {
         wasmJsUrl: '/assets/wasm_exec.js',
         jsonSchemaUrl: '/assets/xray.schema.json',
         jsonSchemaCnUrl: '/assets/xray.schema.cn.json'
+    },
+    templateEditor: {
+        singboxJsonSchemaUrl: '/assets/singbox.schema.json',
+        mihomoYamlSchemaUrl: '/assets/mihomo.schema.json'
     }
 }

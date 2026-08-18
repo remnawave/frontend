@@ -15,7 +15,7 @@ import { CodeEditor } from '@shared/ui/code-editor'
 import { preventBackScroll } from '@shared/utils/misc'
 
 import styles from './SubscriptionTemplateEditor.module.css'
-import { configureMonaco } from './utils/setup-template-monaco'
+import { configureMonaco, getTemplateModelPath } from './utils/setup-template-monaco'
 
 interface Props {
     editorType: 'json' | 'yaml'
@@ -44,7 +44,7 @@ export function SubscriptionTemplateEditorWidget(props: Props) {
     }
 
     const handleEditorWillMount = (monaco: Monaco) => {
-        configureMonaco(monaco, editorType, hosts)
+        configureMonaco(monaco, editorType, hosts, template.templateType)
     }
 
     const handleEditorDidMount = (editor: editor.IStandaloneCodeEditor, monaco: Monaco) => {
@@ -104,7 +104,7 @@ export function SubscriptionTemplateEditorWidget(props: Props) {
                             other: true
                         }
                     }}
-                    path={editorType === 'json' ? 'subscription-template://*' : undefined}
+                    path={getTemplateModelPath(template.templateType)}
                     value={getConfig() || ''}
                 />
             </Paper>
