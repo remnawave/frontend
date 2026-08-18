@@ -11,15 +11,17 @@ import {
     Stack,
     Tooltip
 } from '@mantine/core'
+import { notifications } from '@mantine/notifications'
 import clsx from 'clsx'
 import { githubDarkTheme, JsonEditor } from 'json-edit-react'
-import { useMemo, useState } from 'react'
+import { useMemo, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import {
     TbArrowsMaximize,
     TbArrowsMinimize,
     TbBrandGithub,
     TbCode,
+    TbCopy,
     TbDownload,
     TbEye,
     TbPhoto,
@@ -28,6 +30,11 @@ import {
 
 import { usePseudoFullscreen } from '@shared/hooks'
 import { fullscreenClasses } from '@shared/ui/fullscreen-toggle-button'
+import {
+    copyScreenshotToClipboard,
+    downloadScreenshot,
+    isScreenshotSupported
+} from '@shared/utils/copy-screenshot.util'
 
 import classes from './GeocheckResult.module.css'
 
@@ -43,6 +50,10 @@ export const GeocheckResultWidget = (props: IProps) => {
     const { t } = useTranslation()
 
     const [view, setView] = useState<'image' | 'json'>('image')
+    const [copying, setCopying] = useState(false)
+    const [downloading, setDownloading] = useState(false)
+
+    const imageRef = useRef<HTMLImageElement>(null)
 
     const { isFullscreen, toggle: toggleFullscreen } = usePseudoFullscreen()
 
@@ -52,13 +63,46 @@ export const GeocheckResultWidget = (props: IProps) => {
         return `data:${result.image.media_type};base64,${result.image.data}`
     }, [result.image])
 
-    const handleDownload = () => {
-        if (!imageSrc) return
+    const showError = (error: unknown) => {
+        notifications.show({
+            color: 'red',
+            message: `${error instanceof Error ? error.message : 'Unknown error'}`,
+            title: 'Error'
+        })
+    }
 
-        const link = document.createElement('a')
-        link.href = imageSrc
-        link.download = `geocheck-${result.nodeUuid}.svg`
-        link.click()
+    const resolveImage = async () => {
+        await new Promise<void>((resolve) => {
+            requestAnimationFrame(() => requestAnimationFrame(() => resolve()))
+        })
+
+        if (!imageRef.current) throw new Error('imageRef')
+
+        await imageRef.current.decode().catch(() => {})
+
+        return imageRef.current
+    }
+
+    const handleCopy = async () => {
+        setCopying(true)
+        try {
+            await copyScreenshotToClipboard(resolveImage)
+        } catch (error) {
+            showError(error)
+        } finally {
+            setCopying(false)
+        }
+    }
+
+    const handleDownload = async () => {
+        setDownloading(true)
+        try {
+            await downloadScreenshot(await resolveImage(), `geocheck-${result.nodeUuid}.png`)
+        } catch (error) {
+            showError(error)
+        } finally {
+            setDownloading(false)
+        }
     }
 
     return (
@@ -99,10 +143,30 @@ export const GeocheckResultWidget = (props: IProps) => {
                         )}
                     </ActionIcon>
 
-                    {view === 'image' && imageSrc && (
-                        <ActionIcon onClick={handleDownload} variant="default" size="lg">
-                            <TbDownload size={18} />
-                        </ActionIcon>
+                    {view === 'image' && imageSrc && isScreenshotSupported && (
+                        <>
+                            <Tooltip label={t('common.copy')}>
+                                <ActionIcon
+                                    loading={copying}
+                                    onClick={handleCopy}
+                                    size="lg"
+                                    variant="default"
+                                >
+                                    <TbCopy size={18} />
+                                </ActionIcon>
+                            </Tooltip>
+
+                            <Tooltip label={t('common.download')}>
+                                <ActionIcon
+                                    loading={downloading}
+                                    onClick={handleDownload}
+                                    size="lg"
+                                    variant="default"
+                                >
+                                    <TbDownload size={18} />
+                                </ActionIcon>
+                            </Tooltip>
+                        </>
                     )}
 
                     <Tooltip label={t('common.refresh')}>
@@ -126,6 +190,7 @@ export const GeocheckResultWidget = (props: IProps) => {
                         <img
                             alt="geocheck"
                             className={classes.image}
+                            ref={imageRef}
                             src={imageSrc}
                             style={{ width: `100%` }}
                         />

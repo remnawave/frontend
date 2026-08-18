@@ -62,6 +62,30 @@ function assertScreenshotSupported(): void {
 
 type ScreenshotTarget = (() => HTMLElement | Promise<HTMLElement>) | HTMLElement
 
+function canvasToBlob(canvas: HTMLCanvasElement): Promise<Blob> {
+    return new Promise<Blob>((resolve, reject) => {
+        canvas.toBlob(
+            (blob) => (blob ? resolve(blob) : reject(new Error('Failed to capture'))),
+            'image/png'
+        )
+    })
+}
+
+export function downloadBlob(blob: Blob, filename: string): void {
+    const url = URL.createObjectURL(blob)
+
+    const a = document.createElement('a')
+    a.download = filename
+    a.href = url
+    a.rel = 'noopener'
+
+    document.body.appendChild(a)
+    a.click()
+    document.body.removeChild(a)
+
+    setTimeout(() => URL.revokeObjectURL(url), 10_000)
+}
+
 export async function copyScreenshotToClipboard(target: ScreenshotTarget): Promise<void> {
     assertScreenshotSupported()
 
@@ -70,15 +94,7 @@ export async function copyScreenshotToClipboard(target: ScreenshotTarget): Promi
     const blobPromise = Promise.resolve()
         .then(() => (typeof target === 'function' ? target() : target))
         .then((element) => renderScreenshot(element))
-        .then(
-            (canvas) =>
-                new Promise<Blob>((resolve, reject) => {
-                    canvas.toBlob(
-                        (b) => (b ? resolve(b) : reject(new Error('Failed to capture'))),
-                        'image/png'
-                    )
-                })
-        )
+        .then((canvas) => canvasToBlob(canvas))
         .catch((error) => {
             renderError = error
             throw error
@@ -96,9 +112,5 @@ export async function downloadScreenshot(element: HTMLElement, filename: string)
 
     const canvas = await renderScreenshot(element)
 
-    const url = canvas.toDataURL('image/png')
-    const a = document.createElement('a')
-    a.download = filename
-    a.href = url
-    a.click()
+    downloadBlob(await canvasToBlob(canvas), filename)
 }
