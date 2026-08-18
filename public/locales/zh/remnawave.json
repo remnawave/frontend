@@ -82,9 +82,9 @@
     "usage-stats": "流量使用统计",
     "active-sessions": "活跃会话",
     "shared-lists": "共享列表",
-    "try-again": "Try again",
-    "interface": "Interface",
-    "ip-address": "IP address"
+    "try-again": "再试一次",
+    "interface": "接口",
+    "ip-address": "IP 地址"
   },
   "bandwidth-metrics": {
     "current-year": "今年",
@@ -2302,17 +2302,17 @@
     "later-description": "更改已保存，但节点保留当前版本，直到下次同步或重新启动。"
   },
   "node-geocheck": {
-    "title": "GeoCheck",
-    "source-default": "Default",
-    "default-placeholder": "Automatic",
-    "default-description": "The node will use its default outbound route.",
-    "ip-description": "Pick one of the node IPs or type any address",
-    "interface-description": "Pick one of the node interfaces or type any name",
-    "run": "Run check",
-    "running": "Running GeoCheck",
-    "running-description": "The node is probing its connectivity, this usually takes up to a minute.",
-    "failed-description": "The node could not complete the GeoCheck.",
-    "view-image": "Report",
-    "no-image": "No image in the report, open JSON"
+    "title": "地理检测",
+    "source-default": "默认",
+    "default-placeholder": "自动化",
+    "default-description": "节点将使用默认的出站路由。",
+    "ip-description": "选择一个节点IP或输入任何地址",
+    "interface-description": "选择一个节点接口或输入任意名称",
+    "run": "运行检查",
+    "running": "正在运行地理检测",
+    "running-description": "该节点正在探索其连接性，这通常需要一分钟。",
+    "failed-description": "节点无法完成地理检测。",
+    "view-image": "反馈",
+    "no-image": "报告中没有图片，打开 JSON"
   }
 }
