@@ -162,3 +162,5 @@ export function CodeEditor(props: Props) {
         </Box>
     )
 }
+
+export { styles as editorClasses }

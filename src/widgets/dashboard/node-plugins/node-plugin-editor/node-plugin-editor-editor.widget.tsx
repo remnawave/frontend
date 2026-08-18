@@ -2,7 +2,7 @@ import type { editor } from 'monaco-editor'
 
 import { MonacoSetupNodePluginEditorFeature } from '@features/dashboard/config-profiles/monaco-setup'
 import { NodePluginsEditorActionsFeature } from '@features/dashboard/node-plugins/node-plugins-editor-actions'
-import { Box, Card, Paper } from '@mantine/core'
+import { Box, Paper } from '@mantine/core'
 import { modals } from '@mantine/modals'
 import { Monaco } from '@monaco-editor/react'
 import { GetNodePluginCommand } from '@remnawave/backend-contract'
@@ -14,7 +14,7 @@ import { useBlocker } from 'react-router'
 
 import { useGetSharedLists } from '@shared/api/hooks'
 import { usePseudoFullscreen, useViewportFillHeight } from '@shared/hooks'
-import { CodeEditor, EditorStatusBar } from '@shared/ui/code-editor'
+import { CodeEditor, editorClasses, EditorFooter, EditorStatusBar } from '@shared/ui/code-editor'
 import { fullscreenClasses, FullscreenToggleButton } from '@shared/ui/fullscreen-toggle-button'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { preventBackScroll } from '@shared/utils/misc'
@@ -128,7 +128,11 @@ export function NodePluginEditorWidget(props: IProps) {
             </div>
 
             <Paper
-                className={clsx(styles.editorWrapper, isFullscreen && fullscreenClasses.fill)}
+                className={clsx(
+                    styles.editorWrapper,
+                    !isFullscreen && editorClasses.editorAttached,
+                    isFullscreen && fullscreenClasses.fill
+                )}
                 p={0}
                 ref={editorWrapperRef}
                 pos="relative"
@@ -177,20 +181,22 @@ export function NodePluginEditorWidget(props: IProps) {
                 />
             </Paper>
 
-            <Card className={styles.footer} h="auto" m="0" mt="md" pos="sticky" ref={footerRef}>
-                <NodePluginsEditorActionsFeature
-                    editorRef={editorRef}
-                    hasUnsavedChanges={hasUnsavedChanges}
-                    isNodePluginValid={isConfigValid}
-                    monacoRef={monacoRef}
-                    originalValue={originalValue}
-                    pluginUuid={pluginUuid}
-                    setHasUnsavedChanges={setHasUnsavedChanges}
-                    setIsNodePluginValid={setIsConfigValid}
-                    setOriginalValue={setOriginalValue}
-                    setResult={setResult}
-                />
-            </Card>
+            {!isFullscreen && (
+                <EditorFooter ref={footerRef}>
+                    <NodePluginsEditorActionsFeature
+                        editorRef={editorRef}
+                        hasUnsavedChanges={hasUnsavedChanges}
+                        isNodePluginValid={isConfigValid}
+                        monacoRef={monacoRef}
+                        originalValue={originalValue}
+                        pluginUuid={pluginUuid}
+                        setHasUnsavedChanges={setHasUnsavedChanges}
+                        setIsNodePluginValid={setIsConfigValid}
+                        setOriginalValue={setOriginalValue}
+                        setResult={setResult}
+                    />
+                </EditorFooter>
+            )}
         </Box>
     )
 }

@@ -23,7 +23,7 @@ import {
 } from '@shared/api/hooks'
 import { COMPACT_MONACO_OPTIONS } from '@shared/constants/monaco-theme'
 import { usePseudoFullscreen } from '@shared/hooks'
-import { CodeEditor, EditorStatusBar } from '@shared/ui/code-editor'
+import { CodeEditor, editorClasses, EditorFooter, EditorStatusBar } from '@shared/ui/code-editor'
 import { fullscreenClasses, FullscreenToggleButton } from '@shared/ui/fullscreen-toggle-button'
 import { LoaderModalShared } from '@shared/ui/loader-modal'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
@@ -212,11 +212,11 @@ export const SharedListEditorModal = NiceModal.create((props: IProps) => {
 
                             className={clsx(
                                 classes.editorWrapper,
+                                editorClasses.editorAttached,
                                 isFullscreen && fullscreenClasses.fill
                             )}
                             p={0}
                             pos="relative"
-                            radius="sm"
                             withBorder
                         >
                             <FullscreenToggleButton
@@ -242,22 +242,22 @@ export const SharedListEditorModal = NiceModal.create((props: IProps) => {
                                 value={initialValue}
                             />
                         </Paper>
-                    </Box>
 
-                    {!isFullscreen && (
-                        <Group gap="sm" justify="flex-end">
-                            <Button onClick={hide} variant="subtle">
-                                {t('common.cancel')}
-                            </Button>
-                            <Button
-                                loading={isCreatePending || isUpdatePending}
-                                onClick={handleSave}
-                                variant="soft"
-                            >
-                                {t('common.save')}
-                            </Button>
-                        </Group>
-                    )}
+                        <EditorFooter className={clsx(error && classes.footerError)}>
+                            <Group gap="sm">
+                                <Button
+                                    loading={isCreatePending || isUpdatePending}
+                                    onClick={handleSave}
+                                    variant="soft"
+                                >
+                                    {t('common.save')}
+                                </Button>
+                                <Button onClick={hide} variant="subtle">
+                                    {t('common.cancel')}
+                                </Button>
+                            </Group>
+                        </EditorFooter>
+                    </Box>
                 </Stack>
             )}
         </Modal>

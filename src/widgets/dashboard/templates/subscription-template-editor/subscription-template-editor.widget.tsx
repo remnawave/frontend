@@ -1,7 +1,7 @@
 import type { editor } from 'monaco-editor'
 
 import { TemplateEditorActionsFeature } from '@features/dashboard/subscription-templates/template-editor-actions'
-import { Box, Card, Paper } from '@mantine/core'
+import { Box, Paper } from '@mantine/core'
 import { Monaco } from '@monaco-editor/react'
 import 'monaco-yaml/yaml.worker.js'
 import { GetHostsCommand, GetSubscriptionTemplateCommand } from '@remnawave/backend-contract'
@@ -11,7 +11,7 @@ import { useLayoutEffect, useRef } from 'react'
 
 import { usePseudoFullscreen, useViewportFillHeight } from '@shared/hooks'
 import { fullscreenClasses, FullscreenToggleButton } from '@shared/ui'
-import { CodeEditor } from '@shared/ui/code-editor'
+import { CodeEditor, editorClasses, EditorFooter } from '@shared/ui/code-editor'
 import { preventBackScroll } from '@shared/utils/misc'
 
 import styles from './SubscriptionTemplateEditor.module.css'
@@ -80,7 +80,11 @@ export function SubscriptionTemplateEditorWidget(props: Props) {
     return (
         <Box className={clsx(styles.container, isFullscreen && fullscreenClasses.overlay)}>
             <Paper
-                className={clsx(styles.editorWrapper, isFullscreen && fullscreenClasses.fill)}
+                className={clsx(
+                    styles.editorWrapper,
+                    !isFullscreen && editorClasses.editorAttached,
+                    isFullscreen && fullscreenClasses.fill
+                )}
                 p={0}
                 ref={editorWrapperRef}
                 pos="relative"
@@ -110,13 +114,13 @@ export function SubscriptionTemplateEditorWidget(props: Props) {
             </Paper>
 
             {!isFullscreen && (
-                <Card className={styles.footer} h="auto" m="0" pos="sticky" ref={footerRef}>
+                <EditorFooter ref={footerRef}>
                     <TemplateEditorActionsFeature
                         editorRef={editorRef}
                         editorType={editorType}
                         template={template}
                     />
-                </Card>
+                </EditorFooter>
             )}
         </Box>
     )

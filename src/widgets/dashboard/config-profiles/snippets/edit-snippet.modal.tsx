@@ -15,7 +15,7 @@ import { queryClient } from '@shared/api'
 import { useSyncSnippet, useUpdateSnippet } from '@shared/api/hooks'
 import { QueryKeys } from '@shared/api/hooks/keys-factory'
 import { usePseudoFullscreen } from '@shared/hooks'
-import { CodeEditor, EditorStatusBar } from '@shared/ui/code-editor'
+import { CodeEditor, editorClasses, EditorFooter, EditorStatusBar } from '@shared/ui/code-editor'
 import { CopyableFieldShared } from '@shared/ui/copyable-field/copyable-field'
 import { fullscreenClasses, FullscreenToggleButton } from '@shared/ui/fullscreen-toggle-button'
 import { forceMonacoRetokenize } from '@shared/utils/monaco/force-retokenize'
@@ -115,6 +115,8 @@ export const EditSnippetModal = (props: IProps) => {
         MonacoSetupSnippetsFeature.setup(i18n.language)
     }, [i18n.language, monaco])
 
+    const hasSnippetError = Boolean(editSnippetForm.getInputProps('snippet').error)
+
     return (
         <form onSubmit={(e) => editSnippetForm.onSubmit(handleUpdate)(e)}>
             <Box className={clsx(classes.container, isFullscreen && fullscreenClasses.overlay)}>
@@ -125,77 +127,88 @@ export const EditSnippetModal = (props: IProps) => {
                     />
                 )}
 
-                <Paper
-                    className={clsx(classes.editorWrapper, isFullscreen && fullscreenClasses.fill)}
-                    p={0}
-                    pos="relative"
-                    style={{
-                        border: editSnippetForm.getInputProps('snippet').error
-                            ? '1px solid var(--mantine-color-red-5)'
-                            : '1px solid var(--mantine-color-dark-4)'
-                    }}
-                    withBorder
+                <div
+                    className={clsx(
+                        editorClasses.editorGroup,
+                        isFullscreen && fullscreenClasses.fill
+                    )}
                 >
-                    <FullscreenToggleButton
-                        isFullscreen={isFullscreen}
-                        onToggle={toggleFullscreen}
-                    />
-
-                    <CodeEditor
-                        footer={
-                            <EditorStatusBar
-                                status={
-                                    editSnippetForm.getInputProps('snippet').error
-                                        ? 'error'
-                                        : 'success'
-                                }
-                            >
-                                {(editSnippetForm.getInputProps('snippet').error as string) ||
-                                    t('snippets.drawer.widget.snippet-is-valid')}
-                            </EditorStatusBar>
-                        }
-                        className={classes.editor}
-                        defaultLanguage="json"
-                        onChange={(value) => {
-                            try {
-                                JSON.parse(value || '[]')
-
-                                editSnippetForm.clearErrors()
-                            } catch {
-                                editSnippetForm.setFieldError(
-                                    'snippet',
-                                    t('snippets.drawer.widget.invalid-json')
-                                )
-                            }
+                    <Paper
+                        className={clsx(
+                            classes.editorWrapper,
+                            editorClasses.editorAttached,
+                            isFullscreen && fullscreenClasses.fill
+                        )}
+                        p={0}
+                        pos="relative"
+                        style={{
+                            border: hasSnippetError
+                                ? '1px solid var(--mantine-color-red-5)'
+                                : '1px solid var(--mantine-color-dark-4)'
                         }}
-                        onMount={(editor) => {
-                            editorRef.current = editor
-
-                            forceMonacoRetokenize(editor)
-                        }}
-                        options={{
-                            hover: { above: false }
-                        }}
-                        path="snippet://*"
-                        value={JSON.stringify(editSnippetForm.getValues().snippet || [], null, 2)}
-                    />
-                </Paper>
-
-                <Group gap="sm" justify="flex-end">
-                    <Button
-                        disabled={isUpdating}
-                        onClick={() => {
-                            editSnippetForm.reset()
-                            modals.close(EDIT_SNIPPET_MODAL_ID)
-                        }}
-                        variant="subtle"
+                        withBorder
                     >
-                        {t('common.cancel')}
-                    </Button>
-                    <Button loading={isUpdating} type="submit" variant="soft">
-                        {t('common.save')}
-                    </Button>
-                </Group>
+                        <FullscreenToggleButton
+                            isFullscreen={isFullscreen}
+                            onToggle={toggleFullscreen}
+                        />
+
+                        <CodeEditor
+                            footer={
+                                <EditorStatusBar status={hasSnippetError ? 'error' : 'success'}>
+                                    {(editSnippetForm.getInputProps('snippet').error as string) ||
+                                        t('snippets.drawer.widget.snippet-is-valid')}
+                                </EditorStatusBar>
+                            }
+                            className={classes.editor}
+                            defaultLanguage="json"
+                            onChange={(value) => {
+                                try {
+                                    JSON.parse(value || '[]')
+
+                                    editSnippetForm.clearErrors()
+                                } catch {
+                                    editSnippetForm.setFieldError(
+                                        'snippet',
+                                        t('snippets.drawer.widget.invalid-json')
+                                    )
+                                }
+                            }}
+                            onMount={(editor) => {
+                                editorRef.current = editor
+
+                                forceMonacoRetokenize(editor)
+                            }}
+                            options={{
+                                hover: { above: false }
+                            }}
+                            path="snippet://*"
+                            value={JSON.stringify(
+                                editSnippetForm.getValues().snippet || [],
+                                null,
+                                2
+                            )}
+                        />
+                    </Paper>
+
+                    <EditorFooter className={clsx(hasSnippetError && classes.footerError)}>
+                        <Group>
+                            <Button loading={isUpdating} type="submit" variant="soft">
+                                {t('common.save')}
+                            </Button>
+                            <Button
+                                disabled={isUpdating}
+                                onClick={() => {
+                                    editSnippetForm.reset()
+                                    modals.close(EDIT_SNIPPET_MODAL_ID)
+                                }}
+                                variant="subtle"
+                            >
+                                {t('common.cancel')}
+                            </Button>
+                        </Group>
+                    </EditorFooter>
+                </div>
             </Box>
         </form>
     )

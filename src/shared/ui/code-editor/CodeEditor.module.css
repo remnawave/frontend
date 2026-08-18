@@ -43,3 +43,27 @@
     font-size: 0.9rem;
     padding: 0;
 }
+
+.editorGroup {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+}
+
+.editorAttached {
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.footer {
+    display: flex;
+    flex-shrink: 0;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--mantine-spacing-sm);
+    padding: 10px 12px;
+    border: 1px solid var(--mantine-color-default-border);
+    border-top: none;
+    border-radius: 0 0 var(--mantine-radius-md) var(--mantine-radius-md);
+    background-color: rgba(255, 255, 255, 0.02);
+}

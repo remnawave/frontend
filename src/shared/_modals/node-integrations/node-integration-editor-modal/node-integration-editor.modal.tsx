@@ -21,7 +21,7 @@ import {
 } from '@shared/api/hooks'
 import { COMPACT_MONACO_OPTIONS } from '@shared/constants/monaco-theme'
 import { usePseudoFullscreen } from '@shared/hooks'
-import { CodeEditor, EditorStatusBar } from '@shared/ui/code-editor'
+import { CodeEditor, editorClasses, EditorFooter, EditorStatusBar } from '@shared/ui/code-editor'
 import { fullscreenClasses, FullscreenToggleButton } from '@shared/ui/fullscreen-toggle-button'
 import { LoaderModalShared } from '@shared/ui/loader-modal'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
@@ -224,62 +224,69 @@ export const NodeIntegrationEditorModal = NiceModal.create((props: IProps) => {
                             />
                         )}
 
-                        <Paper
+                        <div
                             className={clsx(
-                                classes.editorWrapper,
+                                editorClasses.editorGroup,
                                 isFullscreen && fullscreenClasses.fill
                             )}
-                            p={0}
-                            pos="relative"
-                            radius="sm"
-                            withBorder
                         >
-                            <FullscreenToggleButton
-                                isFullscreen={isFullscreen}
-                                onToggle={toggleFullscreen}
-                            />
+                            <Paper
+                                className={clsx(
+                                    classes.editorWrapper,
+                                    editorClasses.editorAttached,
+                                    isFullscreen && fullscreenClasses.fill
+                                )}
+                                p={0}
+                                pos="relative"
+                                withBorder
+                            >
+                                <FullscreenToggleButton
+                                    isFullscreen={isFullscreen}
+                                    onToggle={toggleFullscreen}
+                                />
 
-                            <CodeEditor
-                                defaultLanguage="json"
-                                footer={
-                                    configError && (
-                                        <EditorStatusBar status="error">
-                                            {configError}
-                                        </EditorStatusBar>
-                                    )
-                                }
-                                onChange={(value) => {
-                                    setConfigValue(value ?? '')
-                                    setConfigError(null)
-                                }}
-                                onMount={(editor) => {
-                                    forceMonacoRetokenize(editor)
-                                }}
-                                options={{
-                                    ...COMPACT_MONACO_OPTIONS,
-                                    quickSuggestions: false,
-                                    suggestOnTriggerCharacters: false,
-                                    wordBasedSuggestions: 'off'
-                                }}
-                                path="node-integration://*"
-                                value={configValue}
-                            />
-                        </Paper>
+                                <CodeEditor
+                                    defaultLanguage="json"
+                                    footer={
+                                        configError && (
+                                            <EditorStatusBar status="error">
+                                                {configError}
+                                            </EditorStatusBar>
+                                        )
+                                    }
+                                    onChange={(value) => {
+                                        setConfigValue(value ?? '')
+                                        setConfigError(null)
+                                    }}
+                                    onMount={(editor) => {
+                                        forceMonacoRetokenize(editor)
+                                    }}
+                                    options={{
+                                        ...COMPACT_MONACO_OPTIONS,
+                                        quickSuggestions: false,
+                                        suggestOnTriggerCharacters: false,
+                                        wordBasedSuggestions: 'off'
+                                    }}
+                                    path="node-integration://*"
+                                    value={configValue}
+                                />
+                            </Paper>
 
-                        {!isFullscreen && (
-                            <Group justify="flex-end">
-                                <Button onClick={hide} variant="subtle">
-                                    {t('common.cancel')}
-                                </Button>
-                                <Button
-                                    loading={isCreatePending || isUpdatePending}
-                                    type="submit"
-                                    variant="soft"
-                                >
-                                    {t('common.save')}
-                                </Button>
-                            </Group>
-                        )}
+                            <EditorFooter>
+                                <Group>
+                                    <Button
+                                        loading={isCreatePending || isUpdatePending}
+                                        type="submit"
+                                        variant="soft"
+                                    >
+                                        {t('common.save')}
+                                    </Button>
+                                    <Button onClick={hide} variant="subtle">
+                                        {t('common.cancel')}
+                                    </Button>
+                                </Group>
+                            </EditorFooter>
+                        </div>
                     </Box>
                 </form>
             )}

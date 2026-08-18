@@ -19,7 +19,7 @@ import { TbArrowsExchange } from 'react-icons/tb'
 import { useNiceMantineModal } from '@shared/_modals/use-nice-modal'
 import { COMPACT_MONACO_OPTIONS } from '@shared/constants/monaco-theme'
 import { usePseudoFullscreen } from '@shared/hooks'
-import { CodeEditor, EditorStatusBar } from '@shared/ui/code-editor'
+import { CodeEditor, editorClasses, EditorFooter, EditorStatusBar } from '@shared/ui/code-editor'
 import { fullscreenClasses, FullscreenToggleButton } from '@shared/ui/fullscreen-toggle-button'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { forceMonacoRetokenize } from '@shared/utils/monaco/force-retokenize'
@@ -114,7 +114,11 @@ export const HostMapperModal = NiceModal.create((props: IProps) => {
         >
             <Box className={clsx(classes.container, isFullscreen && fullscreenClasses.overlay)}>
                 <Paper
-                    className={clsx(classes.editorWrapper, isFullscreen && fullscreenClasses.fill)}
+                    className={clsx(
+                        classes.editorWrapper,
+                        editorClasses.editorAttached,
+                        isFullscreen && fullscreenClasses.fill
+                    )}
                     p={0}
                     pos="relative"
                     style={{
@@ -164,12 +168,16 @@ export const HostMapperModal = NiceModal.create((props: IProps) => {
                     />
                 </Paper>
 
-                <Group gap="sm" justify="flex-end">
-                    <Button onClick={hide} variant="subtle">
-                        {t('common.cancel')}
-                    </Button>
-                    <Button onClick={handleSave}>{t('common.save')}</Button>
-                </Group>
+                <EditorFooter className={clsx(error && classes.footerError)}>
+                    <Group gap="sm">
+                        <Button onClick={handleSave} variant="soft">
+                            {t('common.save')}
+                        </Button>
+                        <Button onClick={hide} variant="subtle">
+                            {t('common.cancel')}
+                        </Button>
+                    </Group>
+                </EditorFooter>
             </Box>
         </Modal>
     )

@@ -2,7 +2,7 @@ import type { editor } from 'monaco-editor'
 
 import { MonacoSetupResponseRulesFeature } from '@features/dashboard/config-profiles/monaco-setup'
 import { ResponseRulesEditorActionsFeature } from '@features/dashboard/response-rules/response-rules-editor-actions'
-import { Box, Card, Paper, Stack } from '@mantine/core'
+import { Box, Paper, Stack } from '@mantine/core'
 import { modals } from '@mantine/modals'
 import { Monaco } from '@monaco-editor/react'
 import clsx from 'clsx'
@@ -12,7 +12,7 @@ import { TbAlertTriangle } from 'react-icons/tb'
 import { useBlocker } from 'react-router'
 
 import { usePseudoFullscreen, useViewportFillHeight } from '@shared/hooks'
-import { CodeEditor, EditorStatusBar } from '@shared/ui/code-editor'
+import { CodeEditor, editorClasses, EditorFooter, EditorStatusBar } from '@shared/ui/code-editor'
 import { fullscreenClasses, FullscreenToggleButton } from '@shared/ui/fullscreen-toggle-button'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { preventBackScroll } from '@shared/utils/misc'
@@ -109,7 +109,11 @@ export function ResponseRulesEditorWidget(props: IProps) {
     return (
         <Box className={clsx(styles.container, isFullscreen && fullscreenClasses.overlay)}>
             <Paper
-                className={clsx(styles.editorWrapper, isFullscreen && fullscreenClasses.fill)}
+                className={clsx(
+                    styles.editorWrapper,
+                    !isFullscreen && editorClasses.editorAttached,
+                    isFullscreen && fullscreenClasses.fill
+                )}
                 p={0}
                 ref={editorWrapperRef}
                 pos="relative"
@@ -159,7 +163,7 @@ export function ResponseRulesEditorWidget(props: IProps) {
             </Paper>
 
             {!isFullscreen && (
-                <Card className={styles.footer} h="auto" m="0" pos="sticky" ref={footerRef}>
+                <EditorFooter ref={footerRef}>
                     <Stack gap="md">
                         <ResponseRulesEditorActionsFeature
                             editorRef={editorRef}
@@ -175,7 +179,7 @@ export function ResponseRulesEditorWidget(props: IProps) {
                             subscriptionSettingsUuid={subscriptionSettingsUuid}
                         />
                     </Stack>
-                </Card>
+                </EditorFooter>
             )}
         </Box>
     )
