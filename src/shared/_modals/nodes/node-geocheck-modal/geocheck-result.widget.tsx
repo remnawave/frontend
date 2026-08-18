@@ -31,9 +31,8 @@ import {
 import { usePseudoFullscreen } from '@shared/hooks'
 import { fullscreenClasses } from '@shared/ui/fullscreen-toggle-button'
 import {
-    copyScreenshotToClipboard,
-    downloadScreenshot,
-    isScreenshotSupported
+    copyImageScreenshotToClipboard,
+    downloadImageScreenshot
 } from '@shared/utils/copy-screenshot.util'
 
 import classes from './GeocheckResult.module.css'
@@ -71,14 +70,10 @@ export const GeocheckResultWidget = (props: IProps) => {
         })
     }
 
-    const resolveImage = async () => {
-        await new Promise<void>((resolve) => {
-            requestAnimationFrame(() => requestAnimationFrame(() => resolve()))
-        })
+    const filename = `geocheck-${result.nodeUuid}.png`
 
+    const resolveImage = () => {
         if (!imageRef.current) throw new Error('imageRef')
-
-        await imageRef.current.decode().catch(() => {})
 
         return imageRef.current
     }
@@ -86,7 +81,7 @@ export const GeocheckResultWidget = (props: IProps) => {
     const handleCopy = async () => {
         setCopying(true)
         try {
-            await copyScreenshotToClipboard(resolveImage)
+            await copyImageScreenshotToClipboard(resolveImage(), filename)
         } catch (error) {
             showError(error)
         } finally {
@@ -97,7 +92,7 @@ export const GeocheckResultWidget = (props: IProps) => {
     const handleDownload = async () => {
         setDownloading(true)
         try {
-            await downloadScreenshot(await resolveImage(), `geocheck-${result.nodeUuid}.png`)
+            await downloadImageScreenshot(resolveImage(), filename)
         } catch (error) {
             showError(error)
         } finally {
@@ -143,7 +138,7 @@ export const GeocheckResultWidget = (props: IProps) => {
                         )}
                     </ActionIcon>
 
-                    {view === 'image' && imageSrc && isScreenshotSupported && (
+                    {view === 'image' && imageSrc && (
                         <>
                             <Tooltip label={t('common.copy')}>
                                 <ActionIcon

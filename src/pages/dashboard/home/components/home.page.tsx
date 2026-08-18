@@ -56,7 +56,7 @@ export const HomePage = (props: IProps) => {
                 })
                 if (!runtimeRef.current) throw new Error('runtimeRef')
                 return runtimeRef.current
-            })
+            }, 'remnawave-runtime.png')
         } catch (error) {
             notifications.show({
                 color: 'red',

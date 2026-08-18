@@ -75,13 +75,16 @@ export function QrCodeBuilder({ data, title }: IProps) {
         if (!qrRef.current) return
         setCopying(true)
         try {
-            await copyScreenshotToClipboard(async () => {
-                await new Promise<void>((resolve) => {
-                    requestAnimationFrame(() => requestAnimationFrame(() => resolve()))
-                })
-                if (!qrRef.current) throw new Error('qrRef')
-                return qrRef.current
-            })
+            await copyScreenshotToClipboard(
+                async () => {
+                    await new Promise<void>((resolve) => {
+                        requestAnimationFrame(() => requestAnimationFrame(() => resolve()))
+                    })
+                    if (!qrRef.current) throw new Error('qrRef')
+                    return qrRef.current
+                },
+                title ? `qr-${title}.png` : 'qr-code.png'
+            )
         } catch (error) {
             notifications.show({
                 color: 'red',

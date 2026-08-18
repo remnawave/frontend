@@ -41,7 +41,7 @@ export const NodeSystemCardWidget = memo((props: IProps) => {
         setCopying(true)
         try {
             if (!cardRef.current) throw new Error('cardRef')
-            await copyScreenshotToClipboard(cardRef.current)
+            await copyScreenshotToClipboard(cardRef.current, `node-${node.name}.png`)
         } catch (error) {
             notifications.show({
                 color: 'red',
