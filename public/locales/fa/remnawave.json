@@ -81,7 +81,10 @@
     "operation-completed": "Operation completed",
     "usage-stats": "Usage stats",
     "active-sessions": "Active sessions",
-    "shared-lists": "Shared lists"
+    "shared-lists": "Shared lists",
+    "try-again": "Try again",
+    "interface": "Interface",
+    "ip-address": "IP address"
   },
   "bandwidth-metrics": {
     "current-year": "امسال",
@@ -759,7 +762,6 @@
       "progress": "{{completed}} تا از {{total}} نود تکمیل شده",
       "job-failed": "عملیات با مشکل مواجه شد",
       "job-failed-description": "دریافت نشست‌های فعال موفقیت‌آمیز نبود",
-      "try-again": "تلاش مجدد",
       "clear": "پاک کردن",
       "no-active-sessions": "نشست فعالی وجود نداشت",
       "no-active-sessions-description": "آدرس آیپی فعالی برای این کاربر یافت نشد",
@@ -1344,8 +1346,7 @@
       "system": "System",
       "system-uptime": "System Uptime",
       "network": "Network",
-      "kernel": "Kernel",
-      "interface": "Interface"
+      "kernel": "Kernel"
     }
   },
   "node-stats": {
@@ -1392,7 +1393,6 @@
       "subscription-request-history": "تاریخچه درخواست اشتراک",
       "nothing-to-show": "چیزی برای نشان دادن موجود نیست...",
       "request-at": "درخواست شده در",
-      "ip-address": "آدرس IP",
       "user-agent": "عامل کاربر",
       "request-history": "تاریخچه درخواست"
     }
@@ -2300,5 +2300,19 @@
     "apply-description": "Affected nodes receive the new configuration right away.",
     "later": "Not now",
     "later-description": "Changes are saved, but nodes keep the current version until their next sync or restart."
+  },
+  "node-geocheck": {
+    "title": "GeoCheck",
+    "source-default": "Default",
+    "default-placeholder": "Automatic",
+    "default-description": "The node will use its default outbound route.",
+    "ip-description": "Pick one of the node IPs or type any address",
+    "interface-description": "Pick one of the node interfaces or type any name",
+    "run": "Run check",
+    "running": "Running GeoCheck",
+    "running-description": "The node is probing its connectivity, this usually takes up to a minute.",
+    "failed-description": "The node could not complete the GeoCheck.",
+    "view-image": "Report",
+    "no-image": "No image in the report, open JSON"
   }
 }
