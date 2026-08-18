@@ -2313,6 +2313,7 @@
     "running-description": "该节点正在探索其连接性，这通常需要一分钟。",
     "failed-description": "节点无法完成地理检测。",
     "view-image": "反馈",
-    "no-image": "报告中没有图片，打开 JSON"
+    "no-image": "报告中没有图片，打开 JSON",
+    "requires-node-version": "需要 Remnawave Node {{version}} 或更高版本"
   }
 }
