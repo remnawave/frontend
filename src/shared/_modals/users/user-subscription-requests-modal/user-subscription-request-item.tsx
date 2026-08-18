@@ -34,9 +34,7 @@ export const UserSubscriptionRequestItem = (props: IProps) => {
                     <Group align="flex-end" gap="xs" wrap="nowrap">
                         <Box style={{ flex: 1 }}>
                             <CopyableFieldShared
-                                label={t(
-                                    'get-user-subscription-request-history.feature.ip-address'
-                                )}
+                                label={t('common.ip-address')}
                                 size="sm"
                                 value={request.requestIp || '-'}
                             />

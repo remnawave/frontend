@@ -2,7 +2,8 @@ import {
     DropConnectionsCommand,
     ConnectionsByUserCommand,
     ConnectionsByNodeCommand,
-    ConnectionsByNodeResultCommand
+    ConnectionsByNodeResultCommand,
+    GeocheckByNodeCommand
 } from '@remnawave/backend-contract'
 
 import { createMutationHook } from '../../tsq-helpers'
@@ -26,6 +27,14 @@ export const useConnectionsByNodeResultMutation = createMutationHook({
     responseSchema: ConnectionsByNodeResultCommand.ResponseSchema,
     routeParamsSchema: ConnectionsByNodeResultCommand.RequestParamSchema,
     requestMethod: ConnectionsByNodeResultCommand.endpointDetails.REQUEST_METHOD
+})
+
+export const useGeocheckByNode = createMutationHook({
+    endpoint: GeocheckByNodeCommand.TSQ_url,
+    routeParamsSchema: GeocheckByNodeCommand.RequestParamSchema,
+    bodySchema: GeocheckByNodeCommand.RequestBodySchema,
+    responseSchema: GeocheckByNodeCommand.ResponseSchema,
+    requestMethod: GeocheckByNodeCommand.endpointDetails.REQUEST_METHOD
 })
 
 export const useDropConnections = createMutationHook({

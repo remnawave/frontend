@@ -35,7 +35,7 @@ export const FailedStateWidget = ({ onRefresh }: IProps) => {
                                 size="sm"
                                 variant="soft"
                             >
-                                {t('active-sessions-drawer.widget.try-again')}
+                                {t('common.try-again')}
                             </Button>
                         </Stack>
                     </Center>

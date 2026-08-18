@@ -73,7 +73,7 @@ export const UserSubscriptionRequestsTable = (props: IProps) => {
         textColumn('id', 'ID', undefined, 80),
         textColumn(
             'requestIp',
-            t('get-user-subscription-request-history.feature.ip-address'),
+            t('common.ip-address'),
             (record) =>
                 record.requestIp ? (
                     <Anchor
@@ -141,7 +141,7 @@ export const UserSubscriptionRequestsTable = (props: IProps) => {
     const columnLabels = useMemo<Record<string, string>>(
         () => ({
             id: 'ID',
-            requestIp: t('get-user-subscription-request-history.feature.ip-address'),
+            requestIp: t('common.ip-address'),
             userAgent: t('get-user-subscription-request-history.feature.user-agent'),
             requestAt: t('get-user-subscription-request-history.feature.request-at'),
             srrRuleName: t('use-srh-inspector-table-columns.rule-name'),

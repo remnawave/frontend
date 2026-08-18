@@ -112,7 +112,7 @@ export const UserHwidDevicesTable = (props: IProps) => {
         textColumn('hwid', 'HWID', (device) => <CopyableCell value={device.hwid} />, 120),
         textColumn(
             'requestIp',
-            t('get-user-subscription-request-history.feature.ip-address'),
+            t('common.ip-address'),
             (device) =>
                 device.requestIp ? (
                     <Anchor
@@ -220,7 +220,7 @@ export const UserHwidDevicesTable = (props: IProps) => {
         () => ({
             platform: 'Platform',
             hwid: 'HWID',
-            requestIp: t('get-user-subscription-request-history.feature.ip-address'),
+            requestIp: t('common.ip-address'),
             deviceModel: t('get-hwid-user-devices.feature.model'),
             userAgent: t('get-hwid-user-devices.feature.user-agent'),
             createdAt: t('get-hwid-user-devices.feature.added'),

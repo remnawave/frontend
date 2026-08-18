@@ -81,7 +81,10 @@
     "operation-completed": "Operation completed",
     "usage-stats": "Usage stats",
     "active-sessions": "Active sessions",
-    "shared-lists": "Shared lists"
+    "shared-lists": "Shared lists",
+    "try-again": "Try again",
+    "interface": "Interface",
+    "ip-address": "IP address"
   },
   "bandwidth-metrics": {
     "current-year": "Current year",
@@ -759,7 +762,6 @@
       "progress": "Completed {{completed}} of {{total}} nodes",
       "job-failed": "Job failed",
       "job-failed-description": "Failed to fetch active sessions.",
-      "try-again": "Try Again",
       "clear": "Clear",
       "no-active-sessions": "No active sessions",
       "no-active-sessions-description": "No active IP addresses were found for this user.",
@@ -1344,8 +1346,7 @@
       "system": "System",
       "system-uptime": "System Uptime",
       "network": "Network",
-      "kernel": "Kernel",
-      "interface": "Interface"
+      "kernel": "Kernel"
     }
   },
   "node-stats": {
@@ -1392,7 +1393,6 @@
       "subscription-request-history": "Subscription Request History",
       "nothing-to-show": "Nothing to show...",
       "request-at": "Request At",
-      "ip-address": "IP Address",
       "user-agent": "User Agent",
       "request-history": "Request History"
     }
@@ -2300,5 +2300,19 @@
     "apply-description": "Affected nodes receive the new configuration right away.",
     "later": "Not now",
     "later-description": "Changes are saved, but nodes keep the current version until their next sync or restart."
+  },
+  "node-geocheck": {
+    "title": "GeoCheck",
+    "source-default": "Default",
+    "default-placeholder": "Automatic",
+    "default-description": "The node will use its default outbound route.",
+    "ip-description": "Pick one of the node IPs or type any address",
+    "interface-description": "Pick one of the node interfaces or type any name",
+    "run": "Run check",
+    "running": "Running GeoCheck",
+    "running-description": "The node is probing its connectivity, this usually takes up to a minute.",
+    "failed-description": "The node could not complete the GeoCheck.",
+    "view-image": "Report",
+    "no-image": "No image in the report, open JSON"
   }
 }

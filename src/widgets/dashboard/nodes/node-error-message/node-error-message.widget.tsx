@@ -1,13 +1,11 @@
-import { ActionIcon, Box, CopyButton, Text, Tooltip } from '@mantine/core'
 import { useTranslation } from 'react-i18next'
-import { PiCheck, PiCopy } from 'react-icons/pi'
 import { TbAlertTriangle } from 'react-icons/tb'
 
+import { ErrorMessageBlock } from '@shared/ui/error-message-block'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { SectionCard } from '@shared/ui/section-card'
 
 import { IProps } from './interfaces'
-import classes from './NodeErrorMessage.module.css'
 
 export const NodeErrorMessageWidget = (props: IProps) => {
     const { t } = useTranslation()
@@ -31,26 +29,7 @@ export const NodeErrorMessageWidget = (props: IProps) => {
             </SectionCard.Section>
 
             <SectionCard.Section>
-                <Box className={classes.message}>
-                    <Text className={classes.text}>{node.lastStatusMessage}</Text>
-
-                    <CopyButton timeout={2000} value={node.lastStatusMessage}>
-                        {({ copied, copy }) => (
-                            <Tooltip label={t('common.copy')}>
-                                <ActionIcon
-                                    className={classes.copyButton}
-                                    color={copied ? 'teal' : 'gray'}
-                                    data-copied={copied}
-                                    onClick={copy}
-                                    size="sm"
-                                    variant="subtle"
-                                >
-                                    {copied ? <PiCheck size={14} /> : <PiCopy size={14} />}
-                                </ActionIcon>
-                            </Tooltip>
-                        )}
-                    </CopyButton>
-                </Box>
+                <ErrorMessageBlock message={node.lastStatusMessage} />
             </SectionCard.Section>
         </SectionCard.Root>
     )

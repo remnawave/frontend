@@ -1,7 +1,8 @@
 import { createQueryKeys } from '@lukemorales/query-key-factory'
 import {
     ConnectionsByUserResultCommand,
-    ConnectionsByNodeResultCommand
+    ConnectionsByNodeResultCommand,
+    GeocheckByNodeResultCommand
 } from '@remnawave/backend-contract'
 
 import { sToMs } from '@shared/utils/time-utils'
@@ -13,6 +14,9 @@ export const connectionsQueryKeys = createQueryKeys('connections', {
         queryKey: [route]
     }),
     connectionsByNodeResult: (route: ConnectionsByNodeResultCommand.RequestParam) => ({
+        queryKey: [route]
+    }),
+    geocheckByNodeResult: (route: GeocheckByNodeResultCommand.RequestParam) => ({
         queryKey: [route]
     })
 })
@@ -39,4 +43,16 @@ export const useConnectionsByNodeResult = createGetQueryHook({
         staleTime: sToMs(60)
     },
     errorHandler: (error) => errorHandler(error, 'Connections By Node Result')
+})
+
+export const useGeocheckByNodeResult = createGetQueryHook({
+    endpoint: GeocheckByNodeResultCommand.TSQ_url,
+    responseSchema: GeocheckByNodeResultCommand.ResponseSchema,
+    routeParamsSchema: GeocheckByNodeResultCommand.RequestParamSchema,
+    getQueryKey: ({ route, query }) =>
+        connectionsQueryKeys.geocheckByNodeResult({ ...route!, ...query! }).queryKey,
+    rQueryParams: {
+        staleTime: sToMs(60)
+    },
+    errorHandler: (error) => errorHandler(error, 'Geocheck By Node Result')
 })
