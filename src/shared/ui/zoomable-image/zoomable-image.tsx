@@ -1,7 +1,9 @@
 import type { Ref } from 'react'
+import type { ReactZoomPanPinchRef } from 'react-zoom-pan-pinch'
 
 import { UnstyledButton } from '@mantine/core'
 import clsx from 'clsx'
+import { useEffect, useRef } from 'react'
 import { TbRestore, TbZoomIn, TbZoomOut } from 'react-icons/tb'
 import { TransformComponent, TransformWrapper } from 'react-zoom-pan-pinch'
 
@@ -20,14 +22,41 @@ const CONTENT_STYLE = { width: '100%' }
 export function ZoomableImage(props: IProps) {
     const { alt, className, ref, src } = props
 
+    const transformRef = useRef<ReactZoomPanPinchRef>(null)
+
+    useEffect(() => {
+        const instance = transformRef.current?.instance
+        const content = instance?.contentComponent
+        const wrapper = instance?.wrapperComponent
+
+        if (!instance || !content || !wrapper) return undefined
+
+        const observer = new ResizeObserver(() => instance.update(instance.props))
+
+        observer.observe(content)
+        observer.observe(wrapper)
+
+        return () => observer.disconnect()
+    }, [])
+
+    const handleReset = () => {
+        const controls = transformRef.current
+
+        if (!controls) return
+
+        controls.resetTransform(0)
+        controls.instance.update(controls.instance.props)
+    }
+
     return (
         <TransformWrapper
+            ref={transformRef}
             disablePadding
             doubleClick={{ mode: 'toggle' }}
             trackPadPanning={{ disabled: false }}
             wheel={{ wheelDisabled: true }}
         >
-            {({ resetTransform, zoomIn, zoomOut }) => (
+            {({ zoomIn, zoomOut }) => (
                 <div className={clsx(classes.root, className)}>
                     <TransformComponent
                         contentStyle={CONTENT_STYLE}
@@ -61,7 +90,7 @@ export function ZoomableImage(props: IProps) {
                         <UnstyledButton
                             aria-label="Reset"
                             className={classes.controlButton}
-                            onClick={() => resetTransform()}
+                            onClick={handleReset}
                         >
                             <TbRestore size={16} />
                         </UnstyledButton>
