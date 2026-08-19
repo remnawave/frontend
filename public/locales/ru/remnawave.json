@@ -27,6 +27,7 @@
     "response-rules": "Правила ответов",
     "remnawave-settings": "Настройки Remnawave",
     "node-plugins": "Плагины",
+    "quick-open": "Quick open",
     "tb-reports": "Torrent Blocker Reports",
     "sessions-explorer": "Обозреватель сессий",
     "http-stats": "HTTP Статистика"
@@ -48,6 +49,7 @@
     "confirm-action-description": "Вы уверены, что хотите выполнить это действие? Это действие нельзя отменить.",
     "edit": "Изменить",
     "copy-uuid": "Скопировать UUID",
+    "copy-link": "Copy link",
     "rename": "Переименовать",
     "close": "Закрыть",
     "change": "Изменить",
@@ -2315,5 +2317,10 @@
     "view-image": "Отчет",
     "no-image": "Нет изображения в отчете, открыть JSON",
     "requires-node-version": "Требуется Remnawave Node {{version}} или новее"
+  },
+  "quick-open": {
+    "page": {
+      "description": "Open any entity by its identifier, or copy a direct link to share"
+    }
   }
 }

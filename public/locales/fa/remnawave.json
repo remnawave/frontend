@@ -27,6 +27,7 @@
     "response-rules": "قوانین پاسخ",
     "remnawave-settings": "تنظیمات Remnawave",
     "node-plugins": "Plugins",
+    "quick-open": "Quick open",
     "tb-reports": "Torrent Blocker Reports",
     "sessions-explorer": "Sessions Explorer",
     "http-stats": "HTTP Stats"
@@ -48,6 +49,7 @@
     "confirm-action-description": "آیا از انجام دادن این عملیات مطمئن هستید؟ این کار غیرقابل بازگشت است.",
     "edit": "ویرایش",
     "copy-uuid": "کپی UUID",
+    "copy-link": "Copy link",
     "rename": "تغییر نام",
     "close": "بستن",
     "change": "تغییر دادن",
@@ -2315,5 +2317,10 @@
     "view-image": "Report",
     "no-image": "No image in the report, open JSON",
     "requires-node-version": "نیازمند Remnawave Node نسخه {{version}} یا بالاتر"
+  },
+  "quick-open": {
+    "page": {
+      "description": "Open any entity by its identifier, or copy a direct link to share"
+    }
   }
 }
