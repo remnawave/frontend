@@ -2320,8 +2320,7 @@
   },
   "quick-open": {
     "page": {
-      "description": "Open any entity by its identifier, or copy a direct link to share",
-      "invalid-id": "Invalid identifier"
+      "description": "Open any entity by its identifier, or copy a direct link to share"
     }
   }
 }

@@ -74,11 +74,9 @@ export function QuickOpenPage() {
                                     </Stack>
                                 </Group>
 
-                                <Group align="flex-end" gap="xs" wrap="nowrap">
+                                <Group align="center" gap="xs" wrap="nowrap">
                                     <TextInput
-                                        error={
-                                            id && !isValid ? t('quick-open.page.invalid-id') : null
-                                        }
+                                        error={Boolean(id) && !isValid}
                                         onChange={(event) => {
                                             const value = event.currentTarget.value.trim()
 
