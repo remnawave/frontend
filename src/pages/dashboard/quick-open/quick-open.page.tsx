@@ -79,12 +79,11 @@ export function QuickOpenPage() {
                                         error={
                                             id && !isValid ? t('quick-open.page.invalid-id') : null
                                         }
-                                        onChange={(event) =>
-                                            setIds((prev) => ({
-                                                ...prev,
-                                                [entity]: event.currentTarget.value.trim()
-                                            }))
-                                        }
+                                        onChange={(event) => {
+                                            const value = event.currentTarget.value.trim()
+
+                                            setIds((prev) => ({ ...prev, [entity]: value }))
+                                        }}
                                         onKeyDown={(event) => event.key === 'Enter' && open()}
                                         placeholder={target.idPlaceholder}
                                         style={{ flex: 1 }}
