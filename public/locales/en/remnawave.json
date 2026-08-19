@@ -27,6 +27,7 @@
     "response-rules": "Response Rules",
     "remnawave-settings": "Remnawave Settings",
     "node-plugins": "Plugins",
+    "quick-open": "Quick open",
     "tb-reports": "Torrent Blocker Reports",
     "sessions-explorer": "Sessions Explorer",
     "http-stats": "HTTP Stats"
@@ -48,6 +49,7 @@
     "confirm-action-description": "Are you sure you want to perform this action? This action cannot be undone.",
     "edit": "Edit",
     "copy-uuid": "Copy UUID",
+    "copy-link": "Copy link",
     "rename": "Rename",
     "close": "Close",
     "change": "Change",
@@ -2315,5 +2317,11 @@
     "view-image": "Report",
     "no-image": "No image in the report, open JSON",
     "requires-node-version": "Requires Remnawave Node {{version}} or newer"
+  },
+  "quick-open": {
+    "page": {
+      "description": "Open any entity by its identifier, or copy a direct link to share",
+      "invalid-id": "Invalid identifier"
+    }
   }
 }

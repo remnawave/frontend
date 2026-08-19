@@ -50,8 +50,8 @@ import { useNavigate } from 'react-router'
 
 import { QueryKeys, useUpdateSubpageConfig } from '@shared/api/hooks'
 import { queryClient } from '@shared/api/query-client'
-import { ROUTES } from '@shared/constants'
-import { Page, PageHeaderShared } from '@shared/ui'
+import { OPEN_ENTITY, ROUTES } from '@shared/constants'
+import { CopyEntityLinkButton, Page, PageHeaderShared } from '@shared/ui'
 import { useDownloadTemplate } from '@shared/ui/load-templates/use-download-template'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { sleep } from '@shared/utils/misc'
@@ -249,6 +249,14 @@ export const SubpageConfigEditorPageComponent = (props: Props) => {
             <PageHeaderShared
                 actions={
                     <Group>
+                        <CopyEntityLinkButton
+                            entity={OPEN_ENTITY.SUBPAGE_CONFIG}
+                            iconSize={24}
+                            id={config.uuid}
+                            size="input-md"
+                            variant="soft"
+                        />
+
                         {/* <HelpActionIconShared
                             hidden={!isHelpDrawerVisible}
                             screen="EDITOR_TEMPLATES_XRAY_JSON"

@@ -11,6 +11,7 @@ import {
 } from 'react-icons/pi'
 import {
     TbApi,
+    TbLink,
     TbCirclesRelation,
     TbCreditCard,
     TbDeviceAnalytics,
@@ -238,6 +239,12 @@ export const useMobileMenuSections = (): MenuItem[] => {
                     href: ROUTES.DASHBOARD.TOOLS.HTTP_STATS,
                     icon: TbApi,
                     id: 'http-stats'
+                },
+                {
+                    name: t('constants.quick-open'),
+                    href: ROUTES.DASHBOARD.TOOLS.QUICK_OPEN,
+                    icon: TbLink,
+                    id: 'quick-open'
                 }
             ]
         }

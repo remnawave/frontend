@@ -7,7 +7,8 @@ import { useNavigate } from 'react-router'
 
 import { showModal } from '@shared/_modals/show-modal'
 import { HelpActionIconShared } from '@shared/_modals/universal'
-import { ROUTES } from '@shared/constants'
+import { OPEN_ENTITY, ROUTES } from '@shared/constants'
+import { CopyEntityLinkButton } from '@shared/ui'
 import { Page } from '@shared/ui/page'
 import { PageHeaderShared } from '@shared/ui/page-header/page-header.shared'
 
@@ -31,6 +32,14 @@ export const ConfigProfileByUuidPageComponent = (props: Props) => {
                 <PageHeaderShared
                     actions={
                         <Group>
+                            <CopyEntityLinkButton
+                                entity={OPEN_ENTITY.CONFIG_PROFILE}
+                                iconSize={24}
+                                id={configProfile.uuid}
+                                size="input-md"
+                                variant="soft"
+                            />
+
                             <HelpActionIconShared hidden={false} screen="PAGE_CONFIG_PROFILES" />
 
                             <ActionIconGroup>

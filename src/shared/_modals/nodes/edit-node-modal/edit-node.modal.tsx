@@ -6,6 +6,7 @@ import { TbCpu } from 'react-icons/tb'
 import { useNiceMantineModal } from '@shared/_modals/use-nice-modal'
 import { queryClient } from '@shared/api'
 import { QueryKeys, useGetNode } from '@shared/api/hooks'
+import { OPEN_ENTITY } from '@shared/constants'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 
 import { EditNodeByUuidModalContent } from './edit-node.modal.content'
@@ -45,6 +46,7 @@ export const EditNodeModal = NiceModal.create((props: IProps) => {
                     IconComponent={TbCpu}
                     iconVariant="soft"
                     title={node?.name ?? t('edit-node-modal.widget.edit-node')}
+                    openEntity={{ entity: OPEN_ENTITY.NODE, id: nodeUuid }}
                 />
             }
         >

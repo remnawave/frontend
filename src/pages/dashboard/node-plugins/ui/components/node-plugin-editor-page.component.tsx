@@ -6,8 +6,8 @@ import { TbArrowBackUp, TbBook, TbList, TbPackage } from 'react-icons/tb'
 import { useNavigate } from 'react-router'
 
 import { showModal } from '@shared/_modals/show-modal'
-import { ROUTES } from '@shared/constants'
-import { Page, PageHeaderShared } from '@shared/ui'
+import { OPEN_ENTITY, ROUTES } from '@shared/constants'
+import { CopyEntityLinkButton, Page, PageHeaderShared } from '@shared/ui'
 
 interface Props {
     plugin: GetNodePluginCommand.Response['response']
@@ -24,6 +24,14 @@ export const NodePluginEditorPageComponent = (props: Props) => {
             <PageHeaderShared
                 actions={
                     <Group>
+                        <CopyEntityLinkButton
+                            entity={OPEN_ENTITY.NODE_PLUGIN}
+                            iconSize={24}
+                            id={plugin.uuid}
+                            size="input-md"
+                            variant="soft"
+                        />
+
                         {/* <HelpActionIconShared
                             hidden={!isHelpDrawerVisible}
                             screen="EDITOR_TEMPLATES_XRAY_JSON"

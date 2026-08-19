@@ -13,6 +13,8 @@ import { NodePluginEditorPageConnector } from '@pages/dashboard/node-plugins/ui/
 import { NodePluginsBasePageConnector } from '@pages/dashboard/node-plugins/ui/connectors/node-plugins-base-page.connector'
 import { NodesMetricsPageConnector } from '@pages/dashboard/nodes-metrics/ui/connectors'
 import { NodesPageConnector } from '@pages/dashboard/nodes/ui/connectors'
+import { OpenEntityPage } from '@pages/dashboard/open-entity'
+import { QuickOpenPage } from '@pages/dashboard/quick-open'
 import { RemnawaveSettingsConnector } from '@pages/dashboard/remnawave-settings/connectors'
 import { ResponseRulesPageConnector } from '@pages/dashboard/response-rules/connectors/response-rules.page.connector'
 import { SessionsExplorerPageConnector } from '@pages/dashboard/sessions-explorer/ui/connectors/sessions-explorer.page.connector'
@@ -58,6 +60,7 @@ const router = createBrowserRouter(
                 <Route element={<MainLayout />} path={ROUTES.DASHBOARD.ROOT}>
                     <Route element={<Navigate replace to={ROUTES.DASHBOARD.HOME} />} index />
                     <Route element={<HomePageConnector />} path={ROUTES.DASHBOARD.HOME} />
+                    <Route element={<OpenEntityPage />} path={ROUTES.DASHBOARD.OPEN_ENTITY} />
 
                     <Route path={ROUTES.DASHBOARD.MANAGEMENT.ROOT}>
                         <Route
@@ -146,6 +149,10 @@ const router = createBrowserRouter(
                         <Route
                             element={<HttpStatsPageConnector />}
                             path={ROUTES.DASHBOARD.TOOLS.HTTP_STATS}
+                        />
+                        <Route
+                            element={<QuickOpenPage />}
+                            path={ROUTES.DASHBOARD.TOOLS.QUICK_OPEN}
                         />
                     </Route>
 

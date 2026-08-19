@@ -9,12 +9,9 @@ import { motion } from 'motion/react'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { TbListCheck } from 'react-icons/tb'
-import { useSearchParams } from 'react-router'
 
-import { showModal } from '@shared/_modals/show-modal'
 import { queryClient } from '@shared/api'
 import { hostsQueryKeys, useReorderHosts } from '@shared/api/hooks'
-import { SEARCH_PARAMS } from '@shared/constants/search-params'
 import { LoadingScreen, Page, PageHeaderShared } from '@shared/ui'
 
 import {
@@ -40,8 +37,6 @@ export default function HostsPageComponent(props: IProps) {
             }
         }
     })
-
-    const [searchParams, setSearchParams] = useSearchParams()
 
     const { setHostsViewMode } = useViewPreferencesStoreActions()
 
@@ -76,29 +71,6 @@ export default function HostsPageComponent(props: IProps) {
     useEffect(() => {
         handlers.setState(hosts || [])
     }, [hosts])
-
-    useEffect(() => {
-        if (!hosts || isLoading) return
-        if (!searchParams.get(SEARCH_PARAMS.HOST)) return
-        const hostUuid = searchParams.get(SEARCH_PARAMS.HOST)
-        if (!hostUuid) return
-
-        const host = hosts.find((host) => host.uuid === hostUuid)
-        if (!host) return
-
-        showModal('hosts_editHostDrawer', {
-            host: host
-        })
-
-        setSearchParams(
-            (prev) => {
-                const next = new URLSearchParams(prev)
-                next.delete(SEARCH_PARAMS.HOST)
-                return next
-            },
-            { replace: true }
-        )
-    }, [searchParams, hosts, isLoading, setSearchParams])
 
     const moveSelected = useCallback(
         (mode: 'bottom' | 'down' | 'top' | 'up') => {
