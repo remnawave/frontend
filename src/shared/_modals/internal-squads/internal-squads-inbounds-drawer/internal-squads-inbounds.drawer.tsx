@@ -46,7 +46,7 @@ export const InternalSquadsInboundsDrawer = NiceModal.create((props: IProps) => 
     const { squadUuid } = props
 
     const modal = useModal()
-    const { modalProps } = useNiceMantineModal({
+    const { hide, modalProps } = useNiceMantineModal({
         modal,
         drawer: true
     })
@@ -197,7 +197,7 @@ export const InternalSquadsInboundsDrawer = NiceModal.create((props: IProps) => 
                         }).queryKey,
                         data
                     )
-                    close()
+                    hide()
                 }
             }
         })
