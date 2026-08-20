@@ -1,6 +1,6 @@
 {
   "name": "@remnawave/frontend",
-  "version": "3.3.1",
+  "version": "3.3.2",
   "private": false,
   "homepage": "https://github.com/remnawave",
   "bugs": {
@@ -61,7 +61,7 @@
     "@noble/post-quantum": "^0.6.1",
     "@paralleldrive/cuid2": "3.3.0",
     "@remnawave/backend-contract": "3.4.2",
-    "@remnawave/node-plugins": "0.7.2",
+    "@remnawave/node-plugins": "0.7.3",
     "@remnawave/subscription-page-types": "0.5.0",
     "@simplewebauthn/browser": "^13.3.0",
     "@stablelib/base64": "^2.0.1",
