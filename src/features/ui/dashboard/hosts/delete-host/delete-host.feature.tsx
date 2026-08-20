@@ -4,7 +4,8 @@ import { useTranslation } from 'react-i18next'
 import { TbTrash } from 'react-icons/tb'
 
 import { hideModal } from '@shared/_modals/show-modal'
-import { useDeleteHost } from '@shared/api/hooks'
+import { queryClient } from '@shared/api'
+import { QueryKeys, useDeleteHost } from '@shared/api/hooks'
 
 interface IProps {
     hostUuid: string
@@ -19,6 +20,7 @@ export function DeleteHostFeature(props: IProps) {
         mutationFns: {
             onSuccess: () => {
                 hideModal('hosts_editHostDrawer')
+                queryClient.refetchQueries({ queryKey: QueryKeys.hosts.getAllHosts.queryKey })
             }
         }
     })
