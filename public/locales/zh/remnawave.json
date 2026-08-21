@@ -27,7 +27,7 @@
     "response-rules": "请求订阅的应用",
     "remnawave-settings": "Remnawave 设置",
     "node-plugins": "插件",
-    "quick-open": "快速打开",
+    "quick-open": "快捷方式",
     "tb-reports": "Torrent 屏蔽报告",
     "sessions-explorer": "会话管理器",
     "http-stats": "HTTP 状态"
@@ -170,7 +170,7 @@
     "internal-squads": "内部分组",
     "first-connected-at": "首次连接于",
     "sub-last-opened-at": "上次订阅时间",
-    "tag": "Tag",
+    "tag": "标签",
     "used-traffic": "已使用的流量(%)"
   },
   "header-buttons": {
@@ -325,7 +325,7 @@
       "hwid-device-limit": "HWID 设备限制",
       "expire-at-description": "用户的订阅服务将于该时间结束。",
       "internal-squads": "内部分组",
-      "internal-squads-description": "指定用户所属内部分组。"
+      "internal-squads-description": "指定用户将加入的内部分组。"
     }
   },
   "login-form-feature": {
@@ -439,12 +439,12 @@
     "override-the-xray-json-template": "覆盖将用于此主机的 Xray JSON 模板。",
     "vital-parameters": "主要参数",
     "exclude-this-host-from-specific-internal-squads": "从指定的内部小队排除此主机",
-    "excluded-internal-squads": "排除的内部分组",
+    "excluded-internal-squads": "被排除的内部分组",
     "keep-sni-blank": "保持SNI 为空",
     "keep-sni-blank-description": "在某些情况下，SNI必须留空。使用此选项强制一个空的SNI。 请注意，此选项具有最高优先级，因此即使SNI已经设置，它也会被应用。",
     "select-one-or-more-subscription-types-description": "选择一个或多个订阅类型，从该订阅类型中排除主机。",
     "exclude-from-subscription-type": "从订阅类型中排除",
-    "hidden-host-description": "默认情况下，Remnawave 将不会在订阅中包含隐藏主机。隐藏主机可以在 Mihomo 和 Xray-Json Advant, Raw 中使用",
+    "hidden-host-description": "默认情况下，Remnawave 将不会在订阅中包含隐藏主机。隐藏主机可以在 Mihomo 和 Xray-Json Advant, Raw 中使用。",
     "server-description-1": "在支持的客户端中，协议名称(例如无)将被此处指定的描述所取代。",
     "server-description-2": "并非所有客户端应用程序都支持此功能。欲了解更多详情，请参阅下面列出的应用程序的文档。",
     "supported-clients": "支持的客户端",
@@ -478,7 +478,7 @@
     "page": {
       "online-stats": "在线统计",
       "system": "系统",
-      "bandwidth": "带宽",
+      "bandwidth": "流量使用情况",
       "short-stats": "简要统计",
       "remnawave-usage": "Remnawave 使用情况",
       "process-details": "进程详情"
@@ -602,7 +602,7 @@
       "validation-error": "验证错误",
       "main-settings": "主要设置",
       "you-must-add-at-least-one-remark-with-text": "您必须至少添加一个带有文本的备注",
-      "user-status-remarks-description": "如果用户已过期、受限或禁用，以下值将显示在订阅页面中。",
+      "user-status-remarks-description": "如果用户已过期、受限或禁用，以下信息将显示在订阅页面中。",
       "user-status-remarks-description-line-2": "您可以为每种状态添加多个备注。",
       "user-status-remarks-description-line-3": "因为过期、受限和禁用的用户无法连接到服务器，他们将在客户端中看到这些备注，而不是收到空的订阅。",
       "update-settings": "更新设置",
@@ -685,7 +685,7 @@
           "perform-action-on-users": "对 {{usersCount}} 位选定用户执行操作",
           "resets-the-traffic-usage-to-zero-for-all-selected-users": "将所有选定用户的流量使用重置为0",
           "revokes-subscription-for-all-selected-users": "撤销所有选定用户的订阅",
-          "specify-internal-squads-that-will-be-assigned-to-the-user": "指定将分配给用户的内部小组",
+          "specify-internal-squads-that-will-be-assigned-to-the-user": "指定用户的内部分组",
           "internal-squads": "内部分组",
           "extend-expiration-date": "延长日期",
           "enter-the-number-of-days-to-extend-the-expiration-date": "输入延长到期日的天数",
@@ -814,7 +814,7 @@
       "show-custom-remark-description-line-2": "如果禁用此设置，过期、受限和禁用用户将收到实际为空的主机列表。",
       "additional-response-headers": "响应头",
       "headers-that-will-be-sent-with-subscription-content": "将与订阅内容一起发送的响应头。",
-      "randomize-hosts": "随机化主机",
+      "randomize-hosts": "随机排序主机",
       "randomize-hosts-description": "在订阅内容中随机排序主机",
       "additional-options": "附加选项",
       "configure-additional-subscription-options": "配置附加订阅选项",
@@ -879,7 +879,7 @@
       "summary": "返回所选时间范围内，总流量达到或超过指定阈值的内部组成员，并列出每位成员的</b>总流量</b>",
       "nodes-title": "哪些节点被计算",
       "nodes-intro": "一个分组没有直接绑定到节点 — 链接是通过输入而产生的：",
-      "nodes-step-1": "已包含内部分组中的所有入站配置",
+      "nodes-step-1": "该内部分组中的所有入站均已被使用。",
       "nodes-step-2": "对于每个嵌入符，它所属的配置配置文件已被解析。",
       "nodes-step-3": "仅当节点使用了该配置文件且其状态为</b>启用</b>，并且该节点上的对应入站（Inbound）也已启用时，该节点才会被计入统计",
       "nodes-outro": "因此，仅统计小组成员<hl>当前实际能够连接</hl>的节点。如果该小组在任何节点上都没有可用的入站，则返回的列表为空。",
@@ -959,7 +959,7 @@
   "internal-squads-grid": {
     "widget": {
       "no-internal-squads": "暂无内部分组",
-      "create-your-first-internal-squad-to-get-started": "创建你的第一个内部分组以开始使用",
+      "create-your-first-internal-squad-to-get-started": "创建第一个内部分组，开始使用",
       "delete-squad": "删除分组",
       "inbounds": "入站连接",
       "users": "用户",
@@ -1145,7 +1145,7 @@
   },
   "internal-squads-list": {
     "widget": {
-      "search-internal-squads": "搜索内部分组...",
+      "search-internal-squads": "搜索内部分组……",
       "no-squads-found": "未找到分组"
     }
   },
@@ -1528,7 +1528,7 @@
         "subscription-templates-description-line-2": "请注意，《响应规则》有更高的优先级别。",
         "select-a-template": "选择一个模板",
         "default-template-in-use": "正在使用默认模板...",
-        "edit-external-squad": "编辑额外分组",
+        "edit-external-squad": "编辑外部分组",
         "templates": "模板",
         "settings": "设置",
         "remarks": "备注"
@@ -1536,14 +1536,14 @@
     },
     "page": {
       "component": {
-        "list-of-all-external-squads": "所有额外分组列表"
+        "list-of-all-external-squads": "所有外部分组列表"
       }
     }
   },
   "external-squads-grid": {
     "widget": {
       "no-external-squads": "暂无外部分组",
-      "no-external-squads-line-1": "额外分组允许您为特定用户组自定义设置。",
+      "no-external-squads-line-1": "外部分组允许您为特定用户组自定义设置。",
       "no-external-squads-line-2": "你可以覆盖每个分组的默认订阅模板和其他设置。",
       "no-external-squads-line-3": "创建一个分组并指定用户应用自定义配置。"
     }
@@ -2320,7 +2320,7 @@
   },
   "quick-open": {
     "page": {
-      "description": "打开任何实体的标识符，或复制直接链接以共享"
+      "description": "输入ID用来打开UI，或方便分享直达连接"
     }
   }
 }
