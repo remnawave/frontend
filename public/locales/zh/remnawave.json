@@ -18,6 +18,7 @@
     "subscription": "订阅",
     "subscription-page": "订阅页面",
     "config-profiles": "配置文件",
+    "inbounds": "Inbounds",
     "internal-squads": "内部分组",
     "external-squads": "外部分组",
     "infra-billing": "网络供应商计费",
@@ -836,6 +837,13 @@
       "current-hour": "当前小时",
       "download-speed": "下载速度",
       "upload-speed": "上传速度"
+    }
+  },
+  "inbounds-realtime-metrics": {
+    "widget": {
+      "users-online": "在线用户",
+      "active-inbounds": "活跃入站",
+      "total-inbounds": "入站总数"
     }
   },
   "node-users-usage-drawer": {
@@ -1780,6 +1788,15 @@
     "tags": "标签",
     "total-ram": "内存总数",
     "cpu-model": "CPU 型号"
+  },
+  "inbounds-datatable": {
+    "widget": {
+      "online": "在线",
+      "type": "类型",
+      "profile": "配置文件",
+      "squads": "分组",
+      "no-inbounds-found": "未找到入站"
+    }
   },
   "subpage-config-visual-editor": {
     "widget": {

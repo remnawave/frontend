@@ -21,6 +21,7 @@ export const ROUTES = {
             RESPONSE_RULES: '/dashboard/management/response-rules',
             CONFIG_PROFILES: '/dashboard/management/config-profiles',
             CONFIG_PROFILE_BY_UUID: '/dashboard/management/config-profiles/:uuid',
+            INBOUNDS: '/dashboard/management/inbounds',
             INTERNAL_SQUADS: '/dashboard/management/internal-squads',
             EXTERNAL_SQUADS: '/dashboard/management/external-squads',
             REMNAWAVE_SETTINGS: '/dashboard/management/settings',

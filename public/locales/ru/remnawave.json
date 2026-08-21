@@ -18,6 +18,7 @@
     "subscription": "Подписка",
     "subscription-page": "Subscription Page",
     "config-profiles": "Профили",
+    "inbounds": "Инбаунды",
     "internal-squads": "Внутренние сквады",
     "external-squads": "Внешние сквады",
     "infra-billing": "Инфра-биллинг",
@@ -836,6 +837,13 @@
       "current-hour": "Текущий час",
       "download-speed": "Скорость загрузки",
       "upload-speed": "Скорость отдачи"
+    }
+  },
+  "inbounds-realtime-metrics": {
+    "widget": {
+      "users-online": "Онлайн юзеров",
+      "active-inbounds": "Активные инбаунды",
+      "total-inbounds": "Всего инбаундов"
     }
   },
   "node-users-usage-drawer": {
@@ -1780,6 +1788,15 @@
     "tags": "Теги",
     "total-ram": "Всего памяти",
     "cpu-model": "Модель CPU"
+  },
+  "inbounds-datatable": {
+    "widget": {
+      "online": "Онлайн",
+      "type": "Тип",
+      "profile": "Профиль",
+      "squads": "Сквады",
+      "no-inbounds-found": "Инбаунды не найдены"
+    }
   },
   "subpage-config-visual-editor": {
     "widget": {

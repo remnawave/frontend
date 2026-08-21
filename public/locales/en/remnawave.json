@@ -18,6 +18,7 @@
     "subscription": "Subscription",
     "subscription-page": "Subscription Page",
     "config-profiles": "Config Profiles",
+    "inbounds": "Inbounds",
     "internal-squads": "Internal Squads",
     "external-squads": "External Squads",
     "infra-billing": "Infra Billing",
@@ -836,6 +837,13 @@
       "current-hour": "Current hour",
       "download-speed": "Download Speed",
       "upload-speed": "Upload Speed"
+    }
+  },
+  "inbounds-realtime-metrics": {
+    "widget": {
+      "users-online": "Users Online",
+      "active-inbounds": "Active Inbounds",
+      "total-inbounds": "Total Inbounds"
     }
   },
   "node-users-usage-drawer": {
@@ -1780,6 +1788,15 @@
     "tags": "Tags",
     "total-ram": "Total RAM",
     "cpu-model": "CPU Model"
+  },
+  "inbounds-datatable": {
+    "widget": {
+      "online": "Online",
+      "type": "Type",
+      "profile": "Profile",
+      "squads": "Squads",
+      "no-inbounds-found": "No inbounds found"
+    }
   },
   "subpage-config-visual-editor": {
     "widget": {

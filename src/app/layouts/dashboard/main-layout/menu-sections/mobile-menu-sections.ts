@@ -22,6 +22,7 @@ import {
     TbRadar2,
     TbReportAnalytics,
     TbRoute,
+    TbTag,
     TbWebhook
 } from 'react-icons/tb'
 
@@ -74,6 +75,12 @@ export const useMobileMenuSections = (): MenuItem[] => {
                     href: ROUTES.DASHBOARD.MANAGEMENT.CONFIG_PROFILES,
                     icon: XrayLogo,
                     id: 'config-profiles'
+                },
+                {
+                    name: t('constants.inbounds'),
+                    href: ROUTES.DASHBOARD.MANAGEMENT.INBOUNDS,
+                    icon: TbTag,
+                    id: 'inbounds'
                 },
                 {
                     name: t('constants.hosts'),

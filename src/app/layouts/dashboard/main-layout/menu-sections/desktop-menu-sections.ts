@@ -16,6 +16,7 @@ import {
     TbReportAnalytics,
     TbRoute,
     TbStar,
+    TbTag,
     TbTools,
     TbWebhook
 } from 'react-icons/tb'
@@ -115,6 +116,12 @@ export const useDesktopMenuSections = (): MenuItem[] => {
                     href: ROUTES.DASHBOARD.MANAGEMENT.CONFIG_PROFILES,
                     icon: XrayLogo,
                     id: 'config-profiles'
+                },
+                {
+                    name: t('constants.inbounds'),
+                    href: ROUTES.DASHBOARD.MANAGEMENT.INBOUNDS,
+                    icon: TbTag,
+                    id: 'inbounds'
                 }
             ]
         },

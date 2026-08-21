@@ -18,6 +18,7 @@
     "subscription": "اشتراک",
     "subscription-page": "صفحه اشتراک",
     "config-profiles": "پروفایل‌های کانفیگ",
+    "inbounds": "Inbounds",
     "internal-squads": "اسکوادهای داخلی",
     "external-squads": "اسکوادهای خارجی",
     "infra-billing": "صورتحساب‌های تجهیزات",
@@ -836,6 +837,13 @@
       "current-hour": "ساعت کنونی",
       "download-speed": "Download Speed",
       "upload-speed": "Upload Speed"
+    }
+  },
+  "inbounds-realtime-metrics": {
+    "widget": {
+      "users-online": "Users Online",
+      "active-inbounds": "Active Inbounds",
+      "total-inbounds": "Total Inbounds"
     }
   },
   "node-users-usage-drawer": {
@@ -1780,6 +1788,15 @@
     "tags": "برچسب‌ها",
     "total-ram": "کل RAM",
     "cpu-model": "مدل پردازنده"
+  },
+  "inbounds-datatable": {
+    "widget": {
+      "online": "Online",
+      "type": "Type",
+      "profile": "Profile",
+      "squads": "Squads",
+      "no-inbounds-found": "No inbounds found"
+    }
   },
   "subpage-config-visual-editor": {
     "widget": {
