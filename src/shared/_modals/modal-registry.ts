@@ -39,7 +39,13 @@ import {
 import { PasskeysDrawer } from './remnawave-settings'
 import { SharedListEditorModal, SharedListsModal } from './shared-lists'
 import { SnippetsModal } from './snippets'
-import { CreateModal, HelpDrawerShared, JsonEditorModal, RenameModalShared } from './universal'
+import {
+    Base64EditorModal,
+    CreateModal,
+    HelpDrawerShared,
+    JsonEditorModal,
+    RenameModalShared
+} from './universal'
 import {
     DetailedUserInfoDrawer,
     ViewUserModal,
@@ -63,6 +69,7 @@ export const MODAL_REGISTRY = {
     renameModal: RenameModalShared,
     createModal: CreateModal,
     jsonEditorModal: JsonEditorModal,
+    base64EditorModal: Base64EditorModal,
 
     users_viewUserModal: ViewUserModal,
     users_detailedUserInfoDrawer: DetailedUserInfoDrawer,

@@ -1,0 +1,46 @@
+.container {
+    display: flex;
+    flex-direction: column;
+}
+
+.panes {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--mantine-spacing-xs);
+    min-height: 0;
+}
+
+.panesFill {
+    flex: 1 1 auto;
+    min-height: 0;
+}
+
+@media (max-width: 62em) {
+    .panes {
+        grid-template-columns: 1fr;
+    }
+}
+
+.pane {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    min-height: 0;
+}
+
+.editorWrapper {
+    height: 480px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    border-color: var(--mantine-color-dark-4);
+    transition: border-color 150ms ease;
+}
+
+.editorWrapperError {
+    border-color: var(--mantine-color-red-5);
+}
+
+.footerError {
+    border-color: var(--mantine-color-red-5);
+}
