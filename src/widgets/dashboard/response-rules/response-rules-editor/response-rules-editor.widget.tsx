@@ -16,6 +16,7 @@ import { CodeEditor, editorClasses, EditorFooter, EditorStatusBar } from '@share
 import { fullscreenClasses, FullscreenToggleButton } from '@shared/ui/fullscreen-toggle-button'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { preventBackScroll } from '@shared/utils/misc'
+import { setupSuggestWidget } from '@shared/utils/setup-monaco/setup-suggest-monaco'
 
 import { IProps } from './interfaces'
 import styles from './ResponseRulesEditor.module.css'
@@ -147,20 +148,7 @@ export function ResponseRulesEditorWidget(props: IProps) {
                         editorRef.current = editor
                         monacoRef.current = monaco
 
-                        const contribution = editor.getContribution(
-                            'editor.contrib.suggestController'
-                            /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
-                        ) as any
-
-                        if (contribution && contribution.widget) {
-                            const suggestWidget = contribution.widget.value
-                            if (suggestWidget?._setDetailsVisible) {
-                                suggestWidget._setDetailsVisible(true)
-                            }
-                            if (suggestWidget?._persistedSize) {
-                                suggestWidget._persistedSize.store({ width: 300, height: 300 })
-                            }
-                        }
+                        setupSuggestWidget(editor)
                     }}
                     path="response-rules://*"
                     value={JSON.stringify(responseRules, null, 2)}

@@ -24,6 +24,7 @@ import { fullscreenClasses, FullscreenToggleButton } from '@shared/ui/fullscreen
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { forceMonacoRetokenize } from '@shared/utils/monaco/force-retokenize'
 import { formatFirstErrorMarker } from '@shared/utils/monaco/markers'
+import { setupSuggestWidget } from '@shared/utils/setup-monaco/setup-suggest-monaco'
 
 import classes from './HostMapperModal.module.css'
 
@@ -137,24 +138,7 @@ export const HostMapperModal = NiceModal.create((props: IProps) => {
                             monacoRef.current = monaco
 
                             forceMonacoRetokenize(editor)
-
-                            const contribution = editor.getContribution(
-                                'editor.contrib.suggestController'
-                                /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
-                            ) as any
-
-                            if (contribution && contribution.widget) {
-                                const suggestWidget = contribution.widget.value
-                                if (suggestWidget?._setDetailsVisible) {
-                                    suggestWidget._setDetailsVisible(true)
-                                }
-                                if (suggestWidget?._persistedSize) {
-                                    suggestWidget._persistedSize.store({
-                                        width: 300,
-                                        height: 300
-                                    })
-                                }
-                            }
+                            setupSuggestWidget(editor)
                         }}
                         options={COMPACT_MONACO_OPTIONS}
                         path="host-mapper://*"

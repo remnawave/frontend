@@ -43,7 +43,6 @@
 .statusBar {
     animation: statusBarIn 150ms ease;
     flex-shrink: 0;
-    z-index: 60;
     max-height: 30%;
     overflow-y: auto;
 }

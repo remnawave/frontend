@@ -13,6 +13,7 @@ import { usePseudoFullscreen, useViewportFillHeight } from '@shared/hooks'
 import { fullscreenClasses, FullscreenToggleButton } from '@shared/ui'
 import { CodeEditor, editorClasses, EditorFooter } from '@shared/ui/code-editor'
 import { preventBackScroll } from '@shared/utils/misc'
+import { setupSuggestWidget } from '@shared/utils/setup-monaco/setup-suggest-monaco'
 
 import styles from './SubscriptionTemplateEditor.module.css'
 import { configureMonaco, getTemplateModelPath } from './utils/setup-template-monaco'
@@ -51,21 +52,7 @@ export function SubscriptionTemplateEditorWidget(props: Props) {
         editorRef.current = editor
         monacoRef.current = monaco
 
-        const contribution = editor.getContribution(
-            'editor.contrib.suggestController'
-            /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
-        ) as any
-
-        if (contribution && contribution.widget) {
-            const suggestWidget = contribution.widget.value
-            if (suggestWidget?._setDetailsVisible) {
-                suggestWidget._setDetailsVisible(true)
-            }
-
-            if (suggestWidget && suggestWidget._persistedSize) {
-                suggestWidget._persistedSize.store({ width: 400, height: 256 })
-            }
-        }
+        setupSuggestWidget(editor)
     }
 
     useLayoutEffect(() => {
