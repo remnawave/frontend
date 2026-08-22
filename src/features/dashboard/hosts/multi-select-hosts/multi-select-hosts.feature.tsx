@@ -49,7 +49,15 @@ export const MultiSelectHostsFeature = (props: IProps) => {
     const activeTag = useHostsActiveTag()
 
     useEffect(() => {
-        setSelectedHosts([])
+        if (!hosts) return
+
+        const existingUuids = new Set(hosts.map((host) => host.uuid))
+
+        setSelectedHosts((current) => {
+            const alive = current.filter((uuid) => existingUuids.has(uuid))
+
+            return alive.length === current.length ? current : alive
+        })
     }, [hosts])
 
     const { mutate: bulkDeleteHosts } = useBulkDeleteHosts({
