@@ -204,7 +204,6 @@
   },
   "config-editor": {
     "widget": {
-      "loading-editor": "正在加载编辑器..",
       "unsaved-changes": "修改未保存",
       "your-changes-will-be-lost-if-you-leave-this-page-without-saving": "如果您离开此页面而不保存，您的更改将会丢失。",
       "leave": "离开",
@@ -361,11 +360,6 @@
       "subscription": "订阅",
       "accessible-nodes": "可访问节点",
       "qr-code": "二维码"
-    }
-  },
-  "empty-page": {
-    "layout": {
-      "nothing-found": "未找到任何内容"
     }
   },
   "base-host-form": {
@@ -721,8 +715,6 @@
   "get-user-subscription-links": {
     "feature": {
       "subscription-links": "订阅链接",
-      "loading-subscription-links": "正在加载订阅链接...",
-      "no-available-hosts-found-for-this-user": "未找到此用户的可用主机",
       "connection-keys": "连接密钥"
     }
   },
@@ -764,8 +756,6 @@
       "job-failed": "任务失败",
       "job-failed-description": "无法获取活动会话",
       "clear": "清除",
-      "no-active-sessions": "没有活跃的会话",
-      "no-active-sessions-description": "未找到此用户的活跃IP地址。",
       "active-ips-across-nodes": "活跃的 IP 地址",
       "distinct-ips": "独立的IP地址"
     }
@@ -773,7 +763,6 @@
   "detailed-user-info-drawer": {
     "widget": {
       "detailed-user-info": "用户详细信息",
-      "loading-user-info": "正在加载用户信息...",
       "user-information": "用户信息",
       "uuid": "UUID",
       "short-uuid": "短 UUID",
@@ -1357,12 +1346,6 @@
       "represents-the-uptime-of-the-xray-core": "表示Xray 核心的运行时间"
     }
   },
-  "nodes-spotlight-search": {
-    "widget": {
-      "no-nodes-found": "未找到任何节点。",
-      "search-by-name-or-address": "按名称或地址搜索……"
-    }
-  },
   "host-tags-input": {
     "tag-can-only-contain-uppercase-letters-numbers-underscores-and-colons": "标签只能包含大写字母、数字、下划线和冒号",
     "tag-must-be-less-than-32-characters": "标签必须小于 32 个字符",
@@ -1462,8 +1445,6 @@
         "invalid-json": "无效的 JSON",
         "snippet-cannot-be-empty": "代码块不能为空",
         "snippet-cannot-contain-empty-objects": "代码块不能包含空对象",
-        "fetching-snippets": "正在获取代码块...",
-        "no-snippets-yet": "尚无代码块",
         "more-items": "更多项目...",
         "create-snippet": "创建代码块",
         "snippet-name": "代码块名称",
@@ -1703,8 +1684,7 @@
   },
   "help-drawer": {
     "shared": {
-      "failed-to-load-documentation": "无法加载文档",
-      "loading-documentation": "正在加载文档..."
+      "failed-to-load-documentation": "无法加载文档"
     }
   },
   "reset-node-traffic": {
