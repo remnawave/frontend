@@ -181,7 +181,7 @@ export const ViewUserModalContent = (props: IProps) => {
                 initial={{ opacity: 0 }}
                 transition={{ duration: 0.3 }}
             >
-                <LoaderModalShared h="78vh" />
+                <LoaderModalShared mih="78vh" />
             </motion.div>
         )
     }

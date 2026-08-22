@@ -1,10 +1,10 @@
 import { useAutoAnimate } from '@formkit/auto-animate/react'
-import { Center, RollingNumber, SimpleGrid, Stack, Text } from '@mantine/core'
+import { RollingNumber, SimpleGrid, Stack } from '@mantine/core'
 import { GetHttpStatsCommand } from '@remnawave/backend-contract'
 import { useTranslation } from 'react-i18next'
-import { PiEmpty } from 'react-icons/pi'
 import { TbDivide, TbFlame, TbRoute, TbTrendingUp } from 'react-icons/tb'
 
+import { EmptyPageLayout } from '@shared/ui/layouts/empty-page'
 import { MetricCardShared } from '@shared/ui/metrics/metric-card'
 import { SectionCard } from '@shared/ui/section-card'
 
@@ -75,14 +75,7 @@ export const HttpStatsTableWidget = ({ httpStats }: IProps) => {
             <SectionCard.Root>
                 <SectionCard.Section>
                     {httpStats.routes.length === 0 ? (
-                        <Center py="xl">
-                            <Stack align="center" gap="xs">
-                                <PiEmpty color="var(--mantine-color-gray-5)" size="3rem" />
-                                <Text c="dimmed" size="sm">
-                                    {t('common.nothing-found')}
-                                </Text>
-                            </Stack>
-                        </Center>
+                        <EmptyPageLayout icon={<TbRoute size="3rem" />} />
                     ) : (
                         <Stack gap="xs" ref={listRef}>
                             {httpStats.routes.map((route) => (

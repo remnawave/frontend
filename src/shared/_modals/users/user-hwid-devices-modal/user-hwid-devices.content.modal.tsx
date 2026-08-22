@@ -206,9 +206,11 @@ export const UserHwidDevicesContentModal = (props: IProps) => {
                     </Stack>
                 </Card>
 
-                {mobile && !isLoading && devices?.devices.length === 0 && <EmptyPageLayout />}
+                {mobile && !isLoading && devices?.devices.length === 0 && (
+                    <EmptyPageLayout icon={<TbDevices size={32} />} />
+                )}
 
-                {mobile && isLoading && <LoaderModalShared h="80vh" text="Loading..." w="100%" />}
+                {mobile && isLoading && <LoaderModalShared mih="80vh" />}
                 {mobile && !isLoading && renderListContent()}
 
                 {!mobile && (

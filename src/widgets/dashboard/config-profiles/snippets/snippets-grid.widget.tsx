@@ -3,7 +3,6 @@ import {
     Badge,
     Box,
     Card,
-    Center,
     Code,
     CopyButton,
     Divider,
@@ -21,6 +20,7 @@ import { TbBraces, TbCode, TbTrash } from 'react-icons/tb'
 import { queryClient } from '@shared/api'
 import { useDeleteSnippet, useSyncSnippet } from '@shared/api/hooks'
 import { QueryKeys } from '@shared/api/hooks/keys-factory'
+import { EmptyPageLayout } from '@shared/ui/layouts/empty-page'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 
 import { openConfirmSnippetSyncModal } from './confirm-snippet-sync.modal'
@@ -109,16 +109,7 @@ export const SnippetsGridWidget = (props: IProps) => {
     }
 
     if (!snippets || snippets.snippets.length === 0) {
-        return (
-            <Center h={200}>
-                <Stack align="center" gap="md">
-                    <TbCode opacity={0.3} size={48} />
-                    <Text c="dimmed" size="sm">
-                        {t('snippets.drawer.widget.no-snippets-yet')}
-                    </Text>
-                </Stack>
-            </Center>
-        )
+        return <EmptyPageLayout icon={<TbCode size={32} />} />
     }
 
     return (

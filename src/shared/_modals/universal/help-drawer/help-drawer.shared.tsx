@@ -76,13 +76,7 @@ export const HelpDrawerShared = NiceModal.create((props: IProps) => {
                 />
             }
         >
-            {loading && (
-                <LoaderModalShared
-                    h="80vh"
-                    text={t('help-drawer.shared.loading-documentation')}
-                    w="100%"
-                />
-            )}
+            {loading && <LoaderModalShared mih="80vh" />}
 
             {error && (
                 <Center h="80vh" w="100%">

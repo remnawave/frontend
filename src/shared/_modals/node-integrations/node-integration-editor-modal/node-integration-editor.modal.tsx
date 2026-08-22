@@ -198,7 +198,7 @@ export const NodeIntegrationEditorModal = NiceModal.create((props: IProps) => {
                 />
             }
         >
-            {isEditMode && isLoading && <LoaderModalShared h="50vh" />}
+            {isEditMode && isLoading && <LoaderModalShared mih="50vh" />}
 
             {(!isEditMode || !isLoading) && (
                 <form onSubmit={handleSubmit}>

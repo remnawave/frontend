@@ -174,7 +174,7 @@ export const SharedListEditorModal = NiceModal.create((props: IProps) => {
                 />
             }
         >
-            {isEditMode && isLoading && <LoaderModalShared h="50vh" />}
+            {isEditMode && isLoading && <LoaderModalShared mih="50vh" />}
 
             {(!isEditMode || !isLoading) && (
                 <Stack gap="md">

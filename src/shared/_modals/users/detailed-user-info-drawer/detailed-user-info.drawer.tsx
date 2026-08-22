@@ -1,5 +1,5 @@
 import NiceModal, { useModal } from '@ebay/nice-modal-react'
-import { Box, Center, DataList, Drawer, Group, Stack } from '@mantine/core'
+import { DataList, Drawer, Group, Stack } from '@mantine/core'
 import { UserStatusBadge } from '@widgets/dashboard/users/user-status-badge'
 import { useTranslation } from 'react-i18next'
 import {
@@ -56,15 +56,7 @@ export const DetailedUserInfoDrawer = NiceModal.create((props: IProps) => {
                 />
             }
         >
-            {isUserLoading && (
-                <Center h="100%" mt="md" py="xl" ta="center">
-                    <Box>
-                        <LoaderModalShared
-                            text={t('detailed-user-info-drawer.widget.loading-user-info')}
-                        />
-                    </Box>
-                </Center>
-            )}
+            {isUserLoading && <LoaderModalShared mih="80vh" />}
 
             {!isUserLoading && user && (
                 <Stack gap="md">

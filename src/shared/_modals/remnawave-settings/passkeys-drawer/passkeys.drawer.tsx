@@ -201,13 +201,7 @@ export const PasskeysDrawer = NiceModal.create(() => {
                 </Tooltip>
             }
         >
-            {isLoading && (
-                <SectionCard.Root>
-                    <SectionCard.Section>
-                        <LoaderModalShared h="224px" />
-                    </SectionCard.Section>
-                </SectionCard.Root>
-            )}
+            {isLoading && <LoaderModalShared mih="300px" />}
 
             {!isLoading && passkeys.length === 0 && (
                 <SectionCard.Root>

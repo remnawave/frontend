@@ -94,7 +94,7 @@ export function ConfigProfileByUuidPageConnector() {
     }
 
     if (isLoading || isConfigProfileLoading || !configProfile || isSnippetsLoading || !snippets) {
-        return <LoadingScreen text="WASM module is loading..." value={downloadProgress} />
+        return <LoadingScreen text="The WASM module is loading..." value={downloadProgress} />
     }
 
     return (

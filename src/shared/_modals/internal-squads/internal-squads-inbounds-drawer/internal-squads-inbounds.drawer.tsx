@@ -473,11 +473,7 @@ export const InternalSquadsInboundsDrawer = NiceModal.create((props: IProps) => 
                 />
             }
         >
-            {isLoading ? (
-                <LoaderModalShared h="80vh" text="Loading..." w="100%" />
-            ) : (
-                renderDrawerContent()
-            )}
+            {isLoading ? <LoaderModalShared /> : renderDrawerContent()}
         </Drawer>
     )
 })

@@ -204,7 +204,6 @@
   },
   "config-editor": {
     "widget": {
-      "loading-editor": "Loading editor...",
       "unsaved-changes": "Unsaved Changes",
       "your-changes-will-be-lost-if-you-leave-this-page-without-saving": "Your changes will be lost if you leave this page without saving.",
       "leave": "Leave",
@@ -361,11 +360,6 @@
       "subscription": "Subscription",
       "accessible-nodes": "Accessible Nodes",
       "qr-code": "QR Code"
-    }
-  },
-  "empty-page": {
-    "layout": {
-      "nothing-found": "Nothing found"
     }
   },
   "base-host-form": {
@@ -721,8 +715,6 @@
   "get-user-subscription-links": {
     "feature": {
       "subscription-links": "Subscription links",
-      "loading-subscription-links": "Loading subscription links...",
-      "no-available-hosts-found-for-this-user": "No available hosts found for this user",
       "connection-keys": "Connection Keys"
     }
   },
@@ -764,8 +756,6 @@
       "job-failed": "Job failed",
       "job-failed-description": "Failed to fetch active sessions.",
       "clear": "Clear",
-      "no-active-sessions": "No active sessions",
-      "no-active-sessions-description": "No active IP addresses were found for this user.",
       "active-ips-across-nodes": "Active IP addresses",
       "distinct-ips": "Distinct IPs"
     }
@@ -773,7 +763,6 @@
   "detailed-user-info-drawer": {
     "widget": {
       "detailed-user-info": "Detailed User Info",
-      "loading-user-info": "Loading user info...",
       "user-information": "User Information",
       "uuid": "UUID",
       "short-uuid": "Short UUID",
@@ -1357,12 +1346,6 @@
       "represents-the-uptime-of-the-xray-core": "Represents the uptime of the Xray Core"
     }
   },
-  "nodes-spotlight-search": {
-    "widget": {
-      "no-nodes-found": "No nodes found...",
-      "search-by-name-or-address": "Search by name or address..."
-    }
-  },
   "host-tags-input": {
     "tag-can-only-contain-uppercase-letters-numbers-underscores-and-colons": "Tag can only contain uppercase letters, numbers, underscores and colons",
     "tag-must-be-less-than-32-characters": "Tag must be less than 32 characters",
@@ -1462,8 +1445,6 @@
         "invalid-json": "Invalid JSON",
         "snippet-cannot-be-empty": "Snippet cannot be empty",
         "snippet-cannot-contain-empty-objects": "Snippet cannot contain empty objects",
-        "fetching-snippets": "Fetching snippets...",
-        "no-snippets-yet": "No snippets yet.",
         "more-items": "more items...",
         "create-snippet": "Create Snippet",
         "snippet-name": "Snippet Name",
@@ -1703,8 +1684,7 @@
   },
   "help-drawer": {
     "shared": {
-      "failed-to-load-documentation": "Failed to load documentation",
-      "loading-documentation": "Loading documentation..."
+      "failed-to-load-documentation": "Failed to load documentation"
     }
   },
   "reset-node-traffic": {

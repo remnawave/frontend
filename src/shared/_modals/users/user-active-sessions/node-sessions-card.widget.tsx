@@ -1,8 +1,8 @@
-import { ActionIcon, Badge, Group, Stack, Text, Tooltip } from '@mantine/core'
+import { ActionIcon, Badge, Group, Tooltip } from '@mantine/core'
 import { useTranslation } from 'react-i18next'
-import { PiEmptyDuotone } from 'react-icons/pi'
-import { TbServer, TbUnlink } from 'react-icons/tb'
+import { TbRadar, TbServer, TbUnlink } from 'react-icons/tb'
 
+import { EmptyPageLayout } from '@shared/ui/layouts/empty-page'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { SectionCard } from '@shared/ui/section-card'
 
@@ -51,14 +51,7 @@ export const NodeSessionsCardWidget = ({ node, onDropIp, onDropNode }: IProps) =
                 </Group>
             </SectionCard.Section>
 
-            {node.ips.length === 0 && (
-                <Stack align="center" gap="xs">
-                    <PiEmptyDuotone color="var(--mantine-color-gray-5)" size="3rem" />
-                    <Text c="dimmed" size="sm">
-                        {t('common.nothing-found')}
-                    </Text>
-                </Stack>
-            )}
+            {node.ips.length === 0 && <EmptyPageLayout icon={<TbRadar size="3rem" />} />}
 
             {node.ips.map((ip) => (
                 <SessionIpRowWidget ip={ip} key={ip.ip} onDrop={() => onDropIp(ip.ip)} />

@@ -2,7 +2,6 @@ import NiceModal, { useModal } from '@ebay/nice-modal-react'
 import {
     ActionIcon,
     Badge,
-    Center,
     CopyButton,
     Drawer,
     Group,
@@ -31,6 +30,7 @@ import { TbJson } from 'react-icons/tb'
 
 import { useNiceMantineModal } from '@shared/_modals/use-nice-modal'
 import { useGetConnectionKeysByUserId, useGetRawSubscription } from '@shared/api/hooks'
+import { EmptyPageLayout } from '@shared/ui/layouts/empty-page'
 import { LoaderModalShared } from '@shared/ui/loader-modal'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { QrCodeBuilder } from '@shared/ui/qr-code-builder'
@@ -140,18 +140,7 @@ export const ConnectionKeysDrawer = NiceModal.create((props: IProps) => {
             !connectionKeys?.hiddenKeys.length
 
         if (hasNoKeys) {
-            return (
-                <Center py="xl">
-                    <Stack align="center" gap="xs">
-                        <PiEmptyDuotone color="var(--mantine-color-gray-5)" size="3rem" />
-                        <Text c="dimmed" size="sm">
-                            {t(
-                                'get-user-subscription-links.feature.no-available-hosts-found-for-this-user'
-                            )}
-                        </Text>
-                    </Stack>
-                </Center>
-            )
+            return <EmptyPageLayout icon={<PiEmptyDuotone size="3rem" />} />
         }
 
         return (
@@ -242,13 +231,7 @@ export const ConnectionKeysDrawer = NiceModal.create((props: IProps) => {
                 >
                     Raw Subscription
                 </Button>
-                {isLoading ? (
-                    <LoaderModalShared
-                        text={t('get-user-subscription-links.feature.loading-subscription-links')}
-                    />
-                ) : (
-                    <Stack>{renderLinks()}</Stack>
-                )}
+                {isLoading ? <LoaderModalShared mih="240px" /> : <Stack>{renderLinks()}</Stack>}
             </Stack>
         </Drawer>
     )

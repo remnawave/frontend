@@ -12,6 +12,7 @@ import { useListState } from '@mantine/hooks'
 import { GetNodesCommand } from '@remnawave/backend-contract'
 import { useWindowVirtualizer } from '@tanstack/react-virtual'
 import { memo, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
+import { TbCpu } from 'react-icons/tb'
 
 import { showModal } from '@shared/_modals/show-modal'
 import { queryClient } from '@shared/api'
@@ -218,7 +219,7 @@ export const NodesTableWidget = memo((props: IProps) => {
     }
 
     if (nodes.length === 0) {
-        return <EmptyPageLayout />
+        return <EmptyPageLayout icon={<TbCpu size={32} />} />
     }
 
     return (

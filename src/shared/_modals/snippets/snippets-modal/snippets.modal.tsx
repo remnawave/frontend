@@ -55,7 +55,7 @@ export const SnippetsModal = NiceModal.create(() => {
             }
             transitionProps={{ transition: 'fade', duration: 200 }}
         >
-            {isLoading && <LoaderModalShared h="300px" />}
+            {isLoading && <LoaderModalShared mih="240px" />}
 
             {!isLoading && (
                 <Stack gap="md">
