@@ -440,7 +440,14 @@
     "server-description-1": "在支持的客户端中，协议名称(例如无)将被此处指定的描述所取代。",
     "server-description-2": "并非所有客户端应用程序都支持此功能。欲了解更多详情，请参阅下面列出的应用程序的文档。",
     "supported-clients": "支持的客户端",
-    "mapper": "映射"
+    "mapper": "映射",
+    "internal-squads-mode-description": "Choose how the selected Internal Squads are treated for this host",
+    "internal-squads-mode-exclude": "Exclude",
+    "internal-squads-mode-allow-only": "Allow only",
+    "allowed-internal-squads": "Allowed Internal Squads",
+    "allow-this-host-only-for-specific-internal-squads": "Show this host only to the selected Internal Squads",
+    "access-overrides": "Access overrides",
+    "override-type": "Override type"
   },
   "base-node-form": {
     "country": "国家",
@@ -1646,12 +1653,11 @@
       "color-format-note": "💡 颜色仅适用于标记后面的单词。没有标记，文本将为白色。"
     }
   },
-  "visual-settings-card": {
+  "experimental-settings-card": {
     "widget": {
-      "layout-style": "布局样式",
-      "choose-how-the-desktop-navigation-is-displayed": "选择桌面导航的显示方式",
-      "compact": "紧凑",
-      "sidebar": "侧边栏"
+      "experimental-features": "Experimental features",
+      "description": "Features that are still in development. They can change or disappear at any time.",
+      "legacy-layout-style": "Legacy Layout Style"
     }
   },
   "api-tokens-card": {

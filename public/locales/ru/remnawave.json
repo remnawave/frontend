@@ -440,7 +440,14 @@
     "server-description-1": "В поддерживаемых клиентах имя протокола (например, vless) будет заменено на описание, указанное здесь.",
     "server-description-2": "Не все клиентские приложения поддерживают эту функцию. Для получения более подробной информации обратитесь к документации по приложениям, перечисленным ниже.",
     "supported-clients": "Поддерживаемые клиенты",
-    "mapper": "Маппер"
+    "mapper": "Маппер",
+    "internal-squads-mode-description": "Choose how the selected Internal Squads are treated for this host",
+    "internal-squads-mode-exclude": "Exclude",
+    "internal-squads-mode-allow-only": "Allow only",
+    "allowed-internal-squads": "Allowed Internal Squads",
+    "allow-this-host-only-for-specific-internal-squads": "Show this host only to the selected Internal Squads",
+    "access-overrides": "Access overrides",
+    "override-type": "Override type"
   },
   "base-node-form": {
     "country": "Страна",
@@ -1646,12 +1653,11 @@
       "color-format-note": "💡 Цвет применяется только к словам, непосредственно следующим за маркером. Без маркеров текст будет белым."
     }
   },
-  "visual-settings-card": {
+  "experimental-settings-card": {
     "widget": {
-      "layout-style": "Стиль оформления",
-      "choose-how-the-desktop-navigation-is-displayed": "Выберите способ навигации по интерфейсу панели",
-      "compact": "Компактный",
-      "sidebar": "Боковая панель"
+      "experimental-features": "Experimental features",
+      "description": "Features that are still in development. They can change or disappear at any time.",
+      "legacy-layout-style": "Legacy Layout Style"
     }
   },
   "api-tokens-card": {
