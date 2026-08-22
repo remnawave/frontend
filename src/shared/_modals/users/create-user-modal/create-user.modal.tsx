@@ -162,7 +162,7 @@ export const CreateUserModal = NiceModal.create(() => {
                     initial={{ opacity: 0 }}
                     transition={{ duration: 0.3 }}
                 >
-                    <LoaderModalShared mih="78vh" />
+                    <LoaderModalShared mih="70vh" />
                 </motion.div>
             )}
 
