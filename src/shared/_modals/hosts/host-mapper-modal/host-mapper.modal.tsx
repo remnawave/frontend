@@ -72,7 +72,7 @@ export const HostMapperModal = NiceModal.create((props: IProps) => {
         const currentValue = editorRef.current.getValue().trim()
 
         if (currentValue === '') {
-            form.setFieldValue('mapper', undefined)
+            form.setFieldValue('mapper', {})
             hide()
             return
         }
@@ -162,20 +162,16 @@ export const HostMapperModal = NiceModal.create((props: IProps) => {
                 </Paper>
 
                 <EditorFooter className={clsx(error && classes.footerError)}>
-                    <FullscreenToggleButton
-                        floating={false}
-                        isFullscreen={isFullscreen}
-                        onToggle={toggleFullscreen}
-                        size={36}
-                    />
-
-                    <Group gap="sm">
+                    <Group gap="sm" ml="auto">
                         <Button onClick={handleSave} variant="soft">
                             {t('common.save')}
                         </Button>
-                        <Button onClick={hide} variant="subtle">
-                            {t('common.cancel')}
-                        </Button>
+                        <FullscreenToggleButton
+                            floating={false}
+                            isFullscreen={isFullscreen}
+                            onToggle={toggleFullscreen}
+                            size={36}
+                        />
                     </Group>
                 </EditorFooter>
             </Box>
