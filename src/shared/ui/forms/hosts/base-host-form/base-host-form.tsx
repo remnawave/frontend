@@ -21,7 +21,6 @@ import {
     Tooltip,
     Transition
 } from '@mantine/core'
-import { modals } from '@mantine/modals'
 import {
     ALPN,
     CreateHostCommand,
@@ -32,7 +31,7 @@ import {
     UpdateHostCommand,
     UpdateManyHostsCommand
 } from '@remnawave/backend-contract'
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { HiQuestionMarkCircle } from 'react-icons/hi'
 import {
@@ -41,24 +40,19 @@ import {
     PiGearSixDuotone,
     PiInfo,
     PiListChecks,
-    PiNetwork,
     PiNoteDuotone,
-    PiPencilDuotone,
     PiTag
 } from 'react-icons/pi'
 import {
     TbArrowsExchange,
     TbCirclesRelation,
-    TbCloudNetwork,
     TbEye,
     TbFileDescription,
-    TbMask,
     TbServer2,
     TbStar
 } from 'react-icons/tb'
 
 import { showModal } from '@shared/_modals/show-modal'
-import { useIsMobile } from '@shared/hooks'
 import { ChipMultiSelect } from '@shared/ui/chip-multi-select'
 import { DrawerFooter } from '@shared/ui/drawer-footer'
 import { MihomoLogo, SingboxLogo, StashLogo } from '@shared/ui/logos'
@@ -71,10 +65,7 @@ import { TagInputPill } from '@shared/ui/tag-input-pill'
 import { emojiFlag, resolveCountryCode } from '@shared/utils/misc/resolve-country-code'
 
 import { IProps } from './interfaces'
-import { FINAL_MASK_MODAL_ID, FinalMaskModalContent } from './modals/final-mask.modal.content'
-import { MUX_MODAL_ID, MuxModalContent } from './modals/mux.modal.content'
-import { SOCKOPT_MODAL_ID, SockoptModalContent } from './modals/sockopt.modal.content'
-import { XHTTP_MODAL_ID, XhttpModalContent } from './modals/xhttp.modal.content'
+import { getHostJsonFields, openHostJsonFieldModal } from './json-fields'
 
 const SUBSCRIPTION_TYPES = {
     [SUBSCRIPTION_TEMPLATE_TYPE.XRAY_JSON]: {
@@ -124,9 +115,10 @@ export const BaseHostForm = <
         hostUuid
     } = props
 
-    const { t } = useTranslation()
+    const { i18n, t } = useTranslation()
     const [activeTab, setActiveTab] = useState<null | string>('basic')
-    const isMobile = useIsMobile()
+
+    const hostJsonFields = useMemo(() => getHostJsonFields(t), [t])
 
     const securityLayerLabels = {
         [SECURITY_LAYERS.TLS]: t('base-host-form.tls-transport-layer-security'),
@@ -937,116 +929,29 @@ export const BaseHostForm = <
                                             preventGrowOverflow={false}
                                             w="100%"
                                         >
-                                            <Button
-                                                color="gray"
-                                                disabled={isXhttpExtraButtonDisabled()}
-                                                leftSection={<PiPencilDuotone />}
-                                                onClick={() => {
-                                                    modals.open({
-                                                        modalId: XHTTP_MODAL_ID,
-                                                        fullScreen: isMobile,
-                                                        title: (
-                                                            <BaseOverlayHeader
-                                                                iconColor="teal"
-                                                                IconComponent={PiPencilDuotone}
-                                                                iconVariant="soft"
-                                                                title={t(
-                                                                    'base-host-form.xhttp-extra-params'
-                                                                )}
-                                                            />
-                                                        ),
-                                                        centered: true,
-                                                        size: 'lg',
-                                                        withCloseButton: true,
-                                                        children: <XhttpModalContent form={form} />
-                                                    })
-                                                }}
-                                                variant="soft"
-                                            >
-                                                xHTTP
-                                            </Button>
-
-                                            <Button
-                                                color="gray"
-                                                leftSection={<TbCloudNetwork />}
-                                                onClick={() => {
-                                                    modals.open({
-                                                        modalId: MUX_MODAL_ID,
-                                                        fullScreen: isMobile,
-                                                        title: (
-                                                            <BaseOverlayHeader
-                                                                iconColor="teal"
-                                                                IconComponent={TbCloudNetwork}
-                                                                iconVariant="soft"
-                                                                title="MUX"
-                                                            />
-                                                        ),
-                                                        centered: true,
-                                                        size: 'lg',
-                                                        withCloseButton: true,
-                                                        children: <MuxModalContent form={form} />
-                                                    })
-                                                }}
-                                                variant="soft"
-                                            >
-                                                Mux
-                                            </Button>
-
-                                            <Button
-                                                color="gray"
-                                                leftSection={<PiNetwork />}
-                                                onClick={() => {
-                                                    modals.open({
-                                                        modalId: SOCKOPT_MODAL_ID,
-                                                        fullScreen: isMobile,
-                                                        title: (
-                                                            <BaseOverlayHeader
-                                                                iconColor="teal"
-                                                                IconComponent={PiNetwork}
-                                                                iconVariant="soft"
-                                                                title="SockOpt"
-                                                            />
-                                                        ),
-                                                        centered: true,
-                                                        size: 'lg',
-                                                        withCloseButton: true,
-                                                        children: (
-                                                            <SockoptModalContent form={form} />
+                                            {hostJsonFields.map((jsonField) => (
+                                                <Button
+                                                    color="gray"
+                                                    disabled={
+                                                        jsonField.field === 'xhttpExtraParams' &&
+                                                        isXhttpExtraButtonDisabled()
+                                                    }
+                                                    key={jsonField.field}
+                                                    leftSection={
+                                                        <jsonField.IconComponent size={18} />
+                                                    }
+                                                    onClick={() =>
+                                                        openHostJsonFieldModal(
+                                                            jsonField,
+                                                            form,
+                                                            i18n.language
                                                         )
-                                                    })
-                                                }}
-                                                variant="soft"
-                                            >
-                                                SockOpt
-                                            </Button>
-
-                                            <Button
-                                                color="gray"
-                                                leftSection={<TbMask />}
-                                                onClick={() => {
-                                                    modals.open({
-                                                        modalId: FINAL_MASK_MODAL_ID,
-                                                        fullScreen: isMobile,
-                                                        title: (
-                                                            <BaseOverlayHeader
-                                                                iconColor="teal"
-                                                                IconComponent={TbMask}
-                                                                iconVariant="soft"
-                                                                title="Final Mask"
-                                                            />
-                                                        ),
-                                                        centered: true,
-                                                        size: 'lg',
-                                                        withCloseButton: true,
-                                                        children: (
-                                                            <FinalMaskModalContent form={form} />
-                                                        )
-                                                    })
-                                                }}
-                                                variant="soft"
-                                            >
-                                                Final Mask
-                                            </Button>
+                                                    }
+                                                    variant="soft"
+                                                >
+                                                    {jsonField.buttonLabel}
+                                                </Button>
+                                            ))}
                                         </Group>
                                     </SectionCard.Section>
 

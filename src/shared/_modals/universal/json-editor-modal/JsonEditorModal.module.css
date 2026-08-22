@@ -1,15 +1,10 @@
-.header {
-    z-index: auto;
-    position: static;
-}
-
 .container {
     display: flex;
     flex-direction: column;
 }
 
 .editorWrapper {
-    height: 600px;
+    height: 460px;
     overflow: hidden;
     display: flex;
     flex-direction: column;
@@ -19,12 +14,6 @@
 
 .editorWrapperError {
     border-color: var(--mantine-color-red-5);
-}
-
-.monacoEditor {
-    flex: 1;
-    height: 100%;
-    width: 100%;
 }
 
 .footerError {

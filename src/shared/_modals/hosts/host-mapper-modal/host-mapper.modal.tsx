@@ -23,6 +23,7 @@ import { CodeEditor, editorClasses, EditorFooter, EditorStatusBar } from '@share
 import { fullscreenClasses, FullscreenToggleButton } from '@shared/ui/fullscreen-toggle-button'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { forceMonacoRetokenize } from '@shared/utils/monaco/force-retokenize'
+import { formatFirstErrorMarker } from '@shared/utils/monaco/markers'
 
 import classes from './HostMapperModal.module.css'
 
@@ -117,15 +118,11 @@ export const HostMapperModal = NiceModal.create((props: IProps) => {
                     className={clsx(
                         classes.editorWrapper,
                         editorClasses.editorAttached,
+                        error && classes.editorWrapperError,
                         isFullscreen && fullscreenClasses.fill
                     )}
                     p={0}
                     pos="relative"
-                    style={{
-                        border: error
-                            ? '1px solid var(--mantine-color-red-5)'
-                            : '1px solid var(--mantine-color-dark-4)'
-                    }}
                     withBorder
                 >
                     <CodeEditor
@@ -134,6 +131,7 @@ export const HostMapperModal = NiceModal.create((props: IProps) => {
                         defaultLanguage="json"
                         value={initialValue}
                         onChange={() => setError(null)}
+                        onValidate={(markers) => setError(formatFirstErrorMarker(markers))}
                         onMount={(editor, monaco) => {
                             editorRef.current = editor
                             monacoRef.current = monaco

@@ -563,3 +563,74 @@ export const MonacoSetupSharedListEditorFeature = {
         }
     }
 }
+
+const HOST_JSON_FIELD_SCHEMAS = [
+    { definition: 'MuxObject', fileMatch: 'host-mux://*', uri: 'https://host-mux-schema.json' },
+    {
+        definition: 'SockoptObject',
+        fileMatch: 'host-sockopt://*',
+        uri: 'https://host-sockopt-schema.json'
+    },
+    {
+        definition: 'FinalMaskObject',
+        fileMatch: 'host-final-mask://*',
+        uri: 'https://host-final-mask-schema.json'
+    }
+]
+
+const buildFinalMaskProperties = (definitions: Record<string, ISchemaNode | undefined>) => {
+    if (!definitions.TCPMask || !definitions.UDPMask) {
+        return undefined
+    }
+
+    return {
+        quicParams: definitions.quicParams
+            ? { $ref: '#/definitions/quicParams' }
+            : { type: 'object' },
+        tcp: { type: 'array', items: { $ref: '#/definitions/TCPMask' } },
+        udp: { type: 'array', items: { $ref: '#/definitions/UDPMask' } }
+    }
+}
+
+export const MonacoSetupHostJsonFieldsFeature = {
+    setup: async (currentLanguage: string) => {
+        try {
+            let { jsonSchemaUrl } = app.configEditor
+            switch (currentLanguage) {
+                case 'zh':
+                    jsonSchemaUrl = app.configEditor.jsonSchemaCnUrl
+                    break
+                default:
+                    jsonSchemaUrl = app.configEditor.jsonSchemaUrl
+            }
+
+            const response = await axios.get<IXraySchema>(jsonSchemaUrl)
+            const { definitions = {} } = response.data
+
+            HOST_JSON_FIELD_SCHEMAS.forEach(({ definition, fileMatch, uri }) => {
+                const node = definitions[definition]
+
+                if (!node) {
+                    return
+                }
+
+                const properties =
+                    definition === 'FinalMaskObject'
+                        ? buildFinalMaskProperties(definitions)
+                        : undefined
+
+                registerJsonSchema({
+                    fileMatch: [fileMatch],
+                    schema: {
+                        ...node,
+                        ...(properties ? { type: 'object', properties } : {}),
+                        definitions
+                    },
+                    uri
+                })
+            })
+        } catch (error) {
+            consola.error('Failed to load JSON schema:', error)
+        }
+    }
+}

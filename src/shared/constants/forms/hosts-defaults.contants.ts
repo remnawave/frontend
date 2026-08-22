@@ -70,3 +70,19 @@ export const BASIC_SOCKOPT_PARAMS = `{
     "tcpMptcp": false,
     "tcpNoDelay": false
   }`
+
+export const BASIC_FINAL_MASK_PARAMS = `{
+    "tcp": [
+      {
+        "type": "",
+        "settings": {}
+      }
+    ],
+    "udp": [
+      {
+        "type": "",
+        "settings": {}
+      }
+    ],
+    "quicParams": {}
+  }`
