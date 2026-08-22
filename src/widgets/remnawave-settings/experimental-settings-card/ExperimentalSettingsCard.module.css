@@ -1,0 +1,27 @@
+.feature {
+    position: relative;
+    padding: 10px 12px;
+    min-height: 56px;
+    transition: all 150ms ease;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+
+    &[data-checked] {
+        border-color: var(--mantine-primary-color-filled);
+        background-image: linear-gradient(135deg, rgba(34, 184, 207, 0.08) 0%, transparent 60%);
+    }
+
+    @mixin hover {
+        background-color: color-mix(
+            in srgb,
+            var(--mantine-color-dark-5) 35%,
+            var(--mantine-color-dark-6)
+        );
+    }
+}
+
+.label {
+    font-weight: 600;
+    line-height: 1.2;
+    color: var(--mantine-color-bright);
+}

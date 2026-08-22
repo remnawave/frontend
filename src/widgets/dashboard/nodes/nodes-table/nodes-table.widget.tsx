@@ -22,6 +22,7 @@ import { EmptyPageLayout } from '@shared/ui/layouts/empty-page'
 import { sToMs } from '@shared/utils/time-utils'
 
 import {
+    useExperimentalFeature,
     useNodesActiveTag,
     useViewPreferencesStoreActions
 } from '@entities/dashboard/view-preferences-store'
@@ -38,6 +39,7 @@ export const NodesTableWidget = memo((props: IProps) => {
 
     const activeTag = useNodesActiveTag()
     const { setNodesActiveTag } = useViewPreferencesStoreActions()
+    const isNodeIntegrationsEnabled = useExperimentalFeature('nodeIntegrations')
 
     const visibleNodes = useMemo(() => {
         if (!nodes) return []
@@ -181,27 +183,31 @@ export const NodesTableWidget = memo((props: IProps) => {
         const pluginNameByUuid = new Map(
             (nodePlugins?.nodePlugins ?? []).map((plugin) => [plugin.uuid, plugin.name])
         )
-        const integrationNameByUuid = new Map(
-            (nodeIntegrations?.nodeIntegrations ?? []).map((integration) => [
-                integration.uuid,
-                integration.name
-            ])
-        )
+        const integrationNameByUuid = isNodeIntegrationsEnabled
+            ? new Map(
+                  (nodeIntegrations?.nodeIntegrations ?? []).map((integration) => [
+                      integration.uuid,
+                      integration.name
+                  ])
+              )
+            : null
 
         return new Map(
             (nodes ?? []).map((node) => [
                 node.uuid,
                 {
-                    integrationsNames: (node.integrationUuids ?? [])
-                        .map((uuid) => integrationNameByUuid.get(uuid))
-                        .filter((name): name is string => name !== undefined),
+                    integrationsNames: integrationNameByUuid
+                        ? (node.integrationUuids ?? [])
+                              .map((uuid) => integrationNameByUuid.get(uuid))
+                              .filter((name): name is string => name !== undefined)
+                        : EMPTY_NAMES,
                     pluginsName: node.activePluginUuid
                         ? pluginNameByUuid.get(node.activePluginUuid)
                         : undefined
                 }
             ])
         )
-    }, [nodes, nodePlugins, nodeIntegrations])
+    }, [nodes, nodePlugins, nodeIntegrations, isNodeIntegrationsEnabled])
 
     const handleViewNode = (nodeUuid: string) => {
         showModal('nodes_editNodeModal', { nodeUuid })

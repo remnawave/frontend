@@ -1,14 +1,47 @@
 import { create } from 'zustand'
 import { createJSONStorage, devtools, persist } from 'zustand/middleware'
 
-import { HOSTS_VIEW_MODE, IActions, IState, LAYOUT_STYLE, NODES_VIEW_MODE } from './interfaces'
+import {
+    HOSTS_VIEW_MODE,
+    IActions,
+    IExperimentalFeatures,
+    IState,
+    NODES_VIEW_MODE
+} from './interfaces'
+
+const LEGACY_LAYOUT_STYLE = 'sidebar'
+
+const initialExperimental: IExperimentalFeatures = {
+    legacyLayoutStyle: false,
+    nodeIntegrations: false
+}
 
 const initialState: IState = {
+    experimental: initialExperimental,
     nodesViewMode: NODES_VIEW_MODE.CARDS,
     nodesActiveTag: null,
     hostsViewMode: HOSTS_VIEW_MODE.CARDS,
-    hostsActiveTag: null,
-    layoutStyle: LAYOUT_STYLE.COMPACT
+    hostsActiveTag: null
+}
+
+type PersistedState = IState & { layoutStyle?: string }
+
+const migrateState = (persistedState: unknown, version: number): IState => {
+    const { layoutStyle, ...state } = (persistedState ?? {}) as Partial<PersistedState>
+
+    if (version >= 2) {
+        return { ...initialState, ...state }
+    }
+
+    return {
+        ...initialState,
+        ...state,
+        experimental: {
+            ...initialExperimental,
+            ...state.experimental,
+            legacyLayoutStyle: layoutStyle === LEGACY_LAYOUT_STYLE
+        }
+    }
 }
 
 export const useViewPreferencesStore = create<IActions & IState>()(
@@ -21,12 +54,9 @@ export const useViewPreferencesStore = create<IActions & IState>()(
                     setNodesActiveTag: (tag) => set({ nodesActiveTag: tag }),
                     setHostsViewMode: (mode) => set({ hostsViewMode: mode }),
                     setHostsActiveTag: (tag) => set({ hostsActiveTag: tag }),
-                    toggleLayoutStyle: () =>
+                    setExperimentalFeature: (feature, enabled) =>
                         set((state) => ({
-                            layoutStyle:
-                                state.layoutStyle === LAYOUT_STYLE.SIDEBAR
-                                    ? LAYOUT_STYLE.COMPACT
-                                    : LAYOUT_STYLE.SIDEBAR
+                            experimental: { ...state.experimental, [feature]: enabled }
                         })),
                     resetState: () => set({ ...initialState })
                 }
@@ -35,16 +65,16 @@ export const useViewPreferencesStore = create<IActions & IState>()(
         ),
         {
             name: 'viewPreferencesStore',
-            version: 1,
+            version: 2,
             storage: createJSONStorage(() => localStorage),
             partialize: (state) => ({
+                experimental: state.experimental,
                 nodesViewMode: state.nodesViewMode,
                 nodesActiveTag: state.nodesActiveTag,
                 hostsViewMode: state.hostsViewMode,
-                hostsActiveTag: state.hostsActiveTag,
-                layoutStyle: state.layoutStyle
+                hostsActiveTag: state.hostsActiveTag
             }),
-            migrate: () => initialState
+            migrate: migrateState
         }
     )
 )
@@ -55,6 +85,6 @@ export const useViewPreferencesStoreActions = () =>
     useViewPreferencesStore((state) => state.actions)
 export const useHostsViewMode = () => useViewPreferencesStore((state) => state.hostsViewMode)
 export const useHostsActiveTag = () => useViewPreferencesStore((state) => state.hostsActiveTag)
-export const useLayoutStyle = () => useViewPreferencesStore((state) => state.layoutStyle)
-export const useToggleLayoutStyleAction = () =>
-    useViewPreferencesStore((state) => state.actions.toggleLayoutStyle)
+export const useExperimentalFeatures = () => useViewPreferencesStore((state) => state.experimental)
+export const useExperimentalFeature = (feature: keyof IExperimentalFeatures) =>
+    useViewPreferencesStore((state) => state.experimental[feature])

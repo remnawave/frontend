@@ -1646,12 +1646,11 @@
       "color-format-note": "💡 Color applies only to the word immediately following the marker. Without markers, text will be white."
     }
   },
-  "visual-settings-card": {
+  "experimental-settings-card": {
     "widget": {
-      "layout-style": "Layout Style",
-      "choose-how-the-desktop-navigation-is-displayed": "Choose how the desktop navigation is displayed",
-      "compact": "Compact",
-      "sidebar": "Sidebar"
+      "experimental-features": "Experimental features",
+      "description": "Features that are still in development. They can change or disappear at any time.",
+      "legacy-layout-style": "Legacy Layout Style"
     }
   },
   "api-tokens-card": {

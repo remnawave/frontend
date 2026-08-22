@@ -267,12 +267,14 @@ export function getNodesTableColumns(
         {
             accessor: 'consumptionMultiplier',
             sortable: false,
+            defaultToggle: false,
             title: t('node-consumption.card.user-consumption-multiplier'),
             render: ({ consumptionMultiplier }) => consumptionMultiplier.toFixed(1)
         },
         {
             accessor: 'nodeConsumptionMultiplier',
             sortable: false,
+            defaultToggle: false,
             title: t('node-consumption.card.node-consumption-multiplier'),
             render: ({ nodeConsumptionMultiplier }) => nodeConsumptionMultiplier.toFixed(1)
         },
@@ -375,6 +377,7 @@ export function getNodesTableColumns(
         },
         {
             accessor: 'integrationUuids',
+            defaultToggle: false,
             filter: (
                 <MultiSelect
                     clearable
@@ -398,11 +401,13 @@ export function getNodesTableColumns(
         {
             accessor: 'system.info.cpus',
             sortable: true,
+            defaultToggle: false,
             title: 'CPU Cores'
         },
         {
             accessor: 'system.stats.memoryFree',
             sortable: true,
+            defaultToggle: false,
             title: 'Free RAM',
             render: ({ system }) =>
                 system ? prettifyBytesUtil(system.stats.memoryFree, false) : '-'
@@ -410,6 +415,7 @@ export function getNodesTableColumns(
         {
             accessor: 'system.stats.memoryUsed',
             sortable: true,
+            defaultToggle: false,
             title: 'Used RAM',
             render: ({ system }) =>
                 system ? prettifyBytesUtil(system.stats.memoryUsed, false) : '-'
@@ -417,6 +423,7 @@ export function getNodesTableColumns(
         {
             accessor: 'system.info.memoryTotal',
             sortable: true,
+            defaultToggle: false,
             title: t('use-nodes-table-widget.total-ram'),
             render: ({ system }) =>
                 system ? prettifyBytesUtil(system.info.memoryTotal, false) : '-'
@@ -424,17 +431,20 @@ export function getNodesTableColumns(
         {
             accessor: 'system.info.cpuModel',
             sortable: true,
+            defaultToggle: false,
             title: t('use-nodes-table-widget.cpu-model')
         },
         {
             accessor: 'system.stats.uptime',
             sortable: true,
+            defaultToggle: false,
             title: 'Server Uptime',
             render: ({ system }) => (system ? formatDurationUtil(system.stats.uptime) : '-')
         },
         {
             accessor: 'system.info.networkInterfaces',
             sortable: true,
+            defaultToggle: false,
             title: 'Network Interfaces',
             render: ({ system }) => (system ? system.info.networkInterfaces.join(', ') : '-')
         },
@@ -459,6 +469,7 @@ export function getNodesTableColumns(
         {
             accessor: 'system.stats.interface.rxTotal',
             sortable: true,
+            defaultToggle: false,
             title: 'RX Total',
             render: ({ system }) =>
                 system && system.stats.interface
@@ -468,6 +479,7 @@ export function getNodesTableColumns(
         {
             accessor: 'system.stats.interface.txTotal',
             sortable: true,
+            defaultToggle: false,
             title: 'TX Total',
             render: ({ system }) =>
                 system && system.stats.interface
@@ -477,6 +489,7 @@ export function getNodesTableColumns(
         {
             accessor: 'system.info.release',
             sortable: true,
+            defaultToggle: false,
             title: 'OS Release',
             render: ({ system }) => (system ? system.info.release : '-')
         },

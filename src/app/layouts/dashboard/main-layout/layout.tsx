@@ -4,7 +4,7 @@ import { useIsMobile } from '@shared/hooks'
 import { HeaderControls } from '@shared/ui/header-buttons'
 
 import { useIsLoadingRemnawaveUpdates, useRemnawaveInfo } from '@entities/dashboard/updates-store'
-import { LAYOUT_STYLE, useLayoutStyle } from '@entities/dashboard/view-preferences-store'
+import { useExperimentalFeature } from '@entities/dashboard/view-preferences-store'
 
 import { DASHBOARD_LINKS } from './layout-shared'
 import { CompactLayout } from './layout-variants/compact.layout'
@@ -14,7 +14,7 @@ import { SidebarLayout } from './layout-variants/sidebar.layout'
 import '@shared/_modals/modal-registry'
 
 export function MainLayout() {
-    const layoutStyle = useLayoutStyle()
+    const isLegacyLayoutStyle = useExperimentalFeature('legacyLayoutStyle')
 
     const isMobile = useIsMobile()
 
@@ -49,7 +49,7 @@ export function MainLayout() {
         )
     }
 
-    if (layoutStyle === LAYOUT_STYLE.SIDEBAR) {
+    if (isLegacyLayoutStyle) {
         return <SidebarLayout headerControls={headerControls} />
     }
 
