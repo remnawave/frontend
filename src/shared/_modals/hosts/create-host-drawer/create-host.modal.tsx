@@ -2,7 +2,11 @@ import NiceModal, { useModal } from '@ebay/nice-modal-react'
 import { Drawer } from '@mantine/core'
 import { useForm, schemaResolver } from '@mantine/form'
 import { notifications } from '@mantine/notifications'
-import { CreateHostCommand, SECURITY_LAYERS } from '@remnawave/backend-contract'
+import {
+    CreateHostCommand,
+    INTERNAL_SQUADS_MODE,
+    SECURITY_LAYERS
+} from '@remnawave/backend-contract'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { PiListChecks } from 'react-icons/pi'
@@ -59,6 +63,10 @@ export const CreateHostDrawer = NiceModal.create(() => {
             inbound: {
                 configProfileUuid: '',
                 configProfileInboundUuid: ''
+            },
+            internalSquads: {
+                mode: INTERNAL_SQUADS_MODE.EXCLUDE,
+                squads: []
             }
         }
     })

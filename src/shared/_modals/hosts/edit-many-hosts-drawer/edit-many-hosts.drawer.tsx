@@ -3,7 +3,7 @@ import { Code, Drawer, List, Stack, Text } from '@mantine/core'
 import { useForm, schemaResolver } from '@mantine/form'
 import { modals } from '@mantine/modals'
 import { notifications } from '@mantine/notifications'
-import { UpdateManyHostsCommand } from '@remnawave/backend-contract'
+import { INTERNAL_SQUADS_MODE, UpdateManyHostsCommand } from '@remnawave/backend-contract'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { PiListChecks } from 'react-icons/pi'
@@ -55,18 +55,29 @@ export const EditManyHostsDrawer = NiceModal.create((props: IProps) => {
                 form.setFieldValue('vlessRouteId', null)
             }
         },
-        validate: schemaResolver(UpdateManyHostsCommand.RequestBodySchema.omit({ uuids: true }))
+        validate: schemaResolver(UpdateManyHostsCommand.RequestBodySchema.omit({ uuids: true })),
+
+        initialValues: {
+            uuids,
+            internalSquads: {
+                mode: INTERNAL_SQUADS_MODE.EXCLUDE,
+                squads: []
+            }
+        }
     })
 
     const { mutate: updateManyHosts, isPending: isUpdateManyHostsPending } = useUpdateManyHosts({
         mutationFns: {
-            onSuccess: async (data) => {
-                queryClient.setQueryData(QueryKeys.hosts.getAllHosts.queryKey, data)
+            onSuccess: async () => {
+                hide()
+
                 await queryClient.refetchQueries({
                     queryKey: QueryKeys.hosts.getAllTags.queryKey
                 })
 
-                hide()
+                await queryClient.refetchQueries({
+                    queryKey: QueryKeys.hosts.getAllHosts.queryKey
+                })
             }
         }
     })

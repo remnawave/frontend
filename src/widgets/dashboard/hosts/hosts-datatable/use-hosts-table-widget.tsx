@@ -212,12 +212,20 @@ export const HOST_SELECT_FIELDS: HostSelectFieldConfig[] = [
         valueLabel: (value, context) => context.nodeNameByUuid.get(value) ?? value
     },
     {
-        accessor: 'excludedInternalSquads',
-        getValues: (host) => host.excludedInternalSquads ?? [],
+        accessor: 'internalSquads.squads',
+        getValues: (host) => host.internalSquads?.squads ?? [],
         hiddenByDefault: true,
-        key: 'excludedInternalSquads',
-        label: (t) => t('base-host-form.excluded-internal-squads'),
+        key: 'internalSquads',
+        label: (t) => t('constants.internal-squads'),
         valueLabel: (value, context) => context.internalSquadNameByUuid.get(value) ?? value
+    },
+    {
+        accessor: 'internalSquads.mode',
+        getValues: (host) => (host.internalSquads?.mode ? [host.internalSquads.mode] : []),
+        hiddenByDefault: true,
+        key: 'internalSquadsMode',
+        label: (t) => t('base-host-form.override-type'),
+        sortable: true
     },
     {
         accessor: 'xrayJsonTemplateUuid',

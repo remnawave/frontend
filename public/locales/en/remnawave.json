@@ -440,7 +440,14 @@
     "server-description-1": "In supported clients, the protocol name (e.g. vless) will be replaced with the description specified here.",
     "server-description-2": "Not all client applications support this feature. For more details, refer to the documentation of the apps listed below.",
     "supported-clients": "Supported clients",
-    "mapper": "Mapper"
+    "mapper": "Mapper",
+    "internal-squads-mode-description": "Choose how the selected Internal Squads are treated for this host",
+    "internal-squads-mode-exclude": "Exclude",
+    "internal-squads-mode-allow-only": "Allow only",
+    "allowed-internal-squads": "Allowed Internal Squads",
+    "allow-this-host-only-for-specific-internal-squads": "Show this host only to the selected Internal Squads",
+    "access-overrides": "Access overrides",
+    "override-type": "Override type"
   },
   "base-node-form": {
     "country": "Country",

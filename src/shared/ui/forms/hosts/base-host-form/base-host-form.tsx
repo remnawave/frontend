@@ -8,8 +8,10 @@ import {
     Checkbox,
     Group,
     HoverCard,
+    Input,
     MultiSelect,
     NumberInput,
+    SegmentedControl,
     Select,
     Stack,
     Switch,
@@ -25,6 +27,7 @@ import {
     ALPN,
     CreateHostCommand,
     FINGERPRINTS,
+    INTERNAL_SQUADS_MODE,
     MIHOMO_IP_VERSION,
     SECURITY_LAYERS,
     SUBSCRIPTION_TEMPLATE_TYPE,
@@ -117,6 +120,15 @@ export const BaseHostForm = <
 
     const { i18n, t } = useTranslation()
     const [activeTab, setActiveTab] = useState<null | string>('basic')
+    const [internalSquadsMode, setInternalSquadsMode] = useState(
+        () => form.getValues().internalSquads?.mode
+    )
+
+    form.watch('internalSquads.mode', ({ value }) => setInternalSquadsMode(value))
+
+    const isAllowOnlyInternalSquads = internalSquadsMode === INTERNAL_SQUADS_MODE.ALLOW_ONLY
+    const { error: internalSquadsModeError, ...internalSquadsModeProps } =
+        form.getInputProps('internalSquads.mode')
 
     const hostJsonFields = useMemo(() => getHostJsonFields(t), [t])
 
@@ -317,242 +329,312 @@ export const BaseHostForm = <
                         transition="fade"
                     >
                         {(styles) => (
-                            <SectionCard.Root style={styles}>
-                                <SectionCard.Section>
-                                    <BaseOverlayHeader
-                                        iconColor="teal"
-                                        IconComponent={PiTag}
-                                        iconVariant="soft"
-                                        title={t('base-host-form.vital-parameters')}
-                                        titleOrder={5}
-                                    />
-                                </SectionCard.Section>
-                                <SectionCard.Section>
-                                    <Stack gap="md">
-                                        <TextInput
-                                            key={form.key('remark')}
-                                            label={t('base-host-form.remark')}
-                                            {...form.getInputProps('remark')}
-                                            leftSection={<TemplateInfoPopoverShared />}
-                                            required={!removeRequiredFields}
+                            <Stack gap="md" style={styles}>
+                                <SectionCard.Root>
+                                    <SectionCard.Section>
+                                        <BaseOverlayHeader
+                                            iconColor="teal"
+                                            IconComponent={PiTag}
+                                            iconVariant="soft"
+                                            title={t('base-host-form.vital-parameters')}
+                                            titleOrder={5}
                                         />
+                                    </SectionCard.Section>
+                                    <SectionCard.Section>
+                                        <Stack gap="md">
+                                            <TextInput
+                                                key={form.key('remark')}
+                                                label={t('base-host-form.remark')}
+                                                {...form.getInputProps('remark')}
+                                                leftSection={<TemplateInfoPopoverShared />}
+                                                required={!removeRequiredFields}
+                                            />
 
-                                        <Stack gap="xs">
-                                            <HostSelectInboundFeature
-                                                activeConfigProfileInbound={
-                                                    form.getValues().inbound
-                                                        ?.configProfileInboundUuid ?? undefined
+                                            <Stack gap="xs">
+                                                <HostSelectInboundFeature
+                                                    activeConfigProfileInbound={
+                                                        form.getValues().inbound
+                                                            ?.configProfileInboundUuid ?? undefined
+                                                    }
+                                                    activeConfigProfileUuid={
+                                                        form.getValues().inbound
+                                                            ?.configProfileUuid ?? undefined
+                                                    }
+                                                    configProfiles={configProfiles}
+                                                    onSaveInbound={saveInbound}
+                                                />
+                                            </Stack>
+
+                                            <Group
+                                                gap="xs"
+                                                grow
+                                                justify="space-between"
+                                                preventGrowOverflow={false}
+                                                w="100%"
+                                            >
+                                                <TextInput
+                                                    key={form.key('address')}
+                                                    label={t('base-host-form.address')}
+                                                    leftSection={
+                                                        <PopoverWithInfoShared
+                                                            text={
+                                                                <>
+                                                                    {t(
+                                                                        'base-host-form.address-description-line-1'
+                                                                    )}
+                                                                    <br />
+                                                                    {t(
+                                                                        'base-host-form.address-description-line-2'
+                                                                    )}
+                                                                </>
+                                                            }
+                                                        />
+                                                    }
+                                                    {...form.getInputProps('address')}
+                                                    placeholder={t(
+                                                        'base-host-form.e-g-example-com'
+                                                    )}
+                                                    required={!removeRequiredFields}
+                                                    rightSection={patternHoverCard(
+                                                        true,
+                                                        true,
+                                                        true
+                                                    )}
+                                                    w="65%"
+                                                />
+
+                                                <NumberInput
+                                                    key={form.key('port')}
+                                                    label={t('base-host-form.port')}
+                                                    {...form.getInputProps('port')}
+                                                    allowDecimal={false}
+                                                    allowNegative={false}
+                                                    clampBehavior="strict"
+                                                    decimalScale={0}
+                                                    hideControls
+                                                    leftSection={
+                                                        <PopoverWithInfoShared
+                                                            text={
+                                                                <>
+                                                                    {t(
+                                                                        'base-host-form.port-description-line-1'
+                                                                    )}
+                                                                    <br />
+                                                                    <br />
+                                                                    {t(
+                                                                        'base-host-form.port-description-line-2'
+                                                                    )}
+                                                                </>
+                                                            }
+                                                        />
+                                                    }
+                                                    max={65535}
+                                                    min={1}
+                                                    placeholder={t('base-host-form.e-g-443')}
+                                                    required={!removeRequiredFields}
+                                                    w="30%"
+                                                />
+                                            </Group>
+
+                                            <TagsInput
+                                                clearable
+                                                data={hostTags ?? []}
+                                                description={t(
+                                                    'host-tags-input.tags-are-not-visible-to-end-users-tag-will-be-sent-with-raw-subscription-only'
+                                                )}
+                                                key={form.key('tags')}
+                                                label={t('use-nodes-table-widget.tags')}
+                                                leftSection={<TbStar size="16px" />}
+                                                maxTags={10}
+                                                placeholder="Enter tags (comma, space, semicolon)"
+                                                splitChars={[',', ' ', ';']}
+                                                {...tagsInputProps}
+                                                error={
+                                                    Object.keys(form.errors)
+                                                        .filter((key) => key.startsWith('tags.'))
+                                                        .map((key) => form.errors[key])
+                                                        .join(', ') || tagsInputProps.error
                                                 }
-                                                activeConfigProfileUuid={
-                                                    form.getValues().inbound?.configProfileUuid ??
-                                                    undefined
-                                                }
-                                                configProfiles={configProfiles}
-                                                onSaveInbound={saveInbound}
+                                                onChange={handleTagsChange}
+                                                renderPill={({ value, onRemove }) => (
+                                                    <TagInputPill
+                                                        onRemove={onRemove}
+                                                        value={value}
+                                                    />
+                                                )}
+                                            />
+
+                                            <MultiSelect
+                                                clearButtonProps={{
+                                                    size: 'xs'
+                                                }}
+                                                data={nodes.map((node) => ({
+                                                    label: `${emojiFlag(node.countryCode)} ${node.name}${
+                                                        node.provider
+                                                            ? ` (${node.provider.name})`
+                                                            : ''
+                                                    }`,
+                                                    value: node.uuid
+                                                }))}
+                                                description={t(
+                                                    'base-host-form.pick-nodes-which-resolved-from-this-host-only-visual-assignment'
+                                                )}
+                                                inputWrapperOrder={[
+                                                    'label',
+                                                    'input',
+                                                    'description',
+                                                    'error'
+                                                ]}
+                                                key={form.key('nodes')}
+                                                label={t('base-host-form.nodes')}
+                                                leftSection={<TbServer2 size={16} />}
+                                                renderOption={(item) => {
+                                                    const node = nodes.find(
+                                                        (node) => node.uuid === item.option.value
+                                                    )
+                                                    if (!node) return null
+                                                    return (
+                                                        <>
+                                                            <Checkbox
+                                                                aria-hidden
+                                                                checked={item.checked}
+                                                                onChange={() => {}}
+                                                                style={{ pointerEvents: 'none' }}
+                                                                tabIndex={-1}
+                                                            />
+                                                            <Group
+                                                                gap={7}
+                                                                justify="space-between"
+                                                                w="100%"
+                                                            >
+                                                                <Group gap={7}>
+                                                                    {resolveCountryCode(
+                                                                        node.countryCode
+                                                                    )}
+                                                                    <span>{node.name}</span>
+                                                                </Group>
+                                                                {node.provider && (
+                                                                    <Badge color="gray" size="xs">
+                                                                        {node.provider.name}
+                                                                    </Badge>
+                                                                )}
+                                                            </Group>
+                                                        </>
+                                                    )
+                                                }}
+                                                renderPill={({ option, value, onRemove }) => (
+                                                    <TagInputPill
+                                                        onRemove={onRemove}
+                                                        value={option?.label ?? value}
+                                                    />
+                                                )}
+                                                searchable
+                                                {...form.getInputProps('nodes')}
                                             />
                                         </Stack>
-
-                                        <Group
-                                            gap="xs"
-                                            grow
-                                            justify="space-between"
-                                            preventGrowOverflow={false}
-                                            w="100%"
-                                        >
-                                            <TextInput
-                                                key={form.key('address')}
-                                                label={t('base-host-form.address')}
-                                                leftSection={
-                                                    <PopoverWithInfoShared
-                                                        text={
-                                                            <>
-                                                                {t(
-                                                                    'base-host-form.address-description-line-1'
-                                                                )}
-                                                                <br />
-                                                                {t(
-                                                                    'base-host-form.address-description-line-2'
-                                                                )}
-                                                            </>
-                                                        }
-                                                    />
-                                                }
-                                                {...form.getInputProps('address')}
-                                                placeholder={t('base-host-form.e-g-example-com')}
-                                                required={!removeRequiredFields}
-                                                rightSection={patternHoverCard(true, true, true)}
-                                                w="65%"
-                                            />
-
-                                            <NumberInput
-                                                key={form.key('port')}
-                                                label={t('base-host-form.port')}
-                                                {...form.getInputProps('port')}
-                                                allowDecimal={false}
-                                                allowNegative={false}
-                                                clampBehavior="strict"
-                                                decimalScale={0}
-                                                hideControls
-                                                leftSection={
-                                                    <PopoverWithInfoShared
-                                                        text={
-                                                            <>
-                                                                {t(
-                                                                    'base-host-form.port-description-line-1'
-                                                                )}
-                                                                <br />
-                                                                <br />
-                                                                {t(
-                                                                    'base-host-form.port-description-line-2'
-                                                                )}
-                                                            </>
-                                                        }
-                                                    />
-                                                }
-                                                max={65535}
-                                                min={1}
-                                                placeholder={t('base-host-form.e-g-443')}
-                                                required={!removeRequiredFields}
-                                                w="30%"
-                                            />
-                                        </Group>
-
-                                        <TagsInput
-                                            clearable
-                                            data={hostTags ?? []}
-                                            description={t(
-                                                'host-tags-input.tags-are-not-visible-to-end-users-tag-will-be-sent-with-raw-subscription-only'
-                                            )}
-                                            key={form.key('tags')}
-                                            label={t('use-nodes-table-widget.tags')}
-                                            leftSection={<TbStar size="16px" />}
-                                            maxTags={10}
-                                            placeholder="Enter tags (comma, space, semicolon)"
-                                            splitChars={[',', ' ', ';']}
-                                            {...tagsInputProps}
-                                            error={
-                                                Object.keys(form.errors)
-                                                    .filter((key) => key.startsWith('tags.'))
-                                                    .map((key) => form.errors[key])
-                                                    .join(', ') || tagsInputProps.error
-                                            }
-                                            onChange={handleTagsChange}
-                                            renderPill={({ value, onRemove }) => (
-                                                <TagInputPill onRemove={onRemove} value={value} />
-                                            )}
+                                    </SectionCard.Section>
+                                </SectionCard.Root>
+                                <SectionCard.Root>
+                                    <SectionCard.Section>
+                                        <BaseOverlayHeader
+                                            iconColor="teal"
+                                            IconComponent={TbCirclesRelation}
+                                            iconVariant="soft"
+                                            title={t('base-host-form.access-overrides')}
+                                            titleOrder={5}
                                         />
+                                    </SectionCard.Section>
+                                    <SectionCard.Section>
+                                        <Stack gap="md">
+                                            <Input.Wrapper
+                                                description={t(
+                                                    'base-host-form.internal-squads-mode-description'
+                                                )}
+                                                error={internalSquadsModeError}
+                                                label={t('base-host-form.override-type')}
+                                            >
+                                                <SegmentedControl
+                                                    data={[
+                                                        {
+                                                            label: t(
+                                                                'base-host-form.internal-squads-mode-exclude'
+                                                            ),
+                                                            value: INTERNAL_SQUADS_MODE.EXCLUDE
+                                                        },
+                                                        {
+                                                            label: t(
+                                                                'base-host-form.internal-squads-mode-allow-only'
+                                                            ),
+                                                            value: INTERNAL_SQUADS_MODE.ALLOW_ONLY
+                                                        }
+                                                    ]}
+                                                    fullWidth
+                                                    key={form.key('internalSquads.mode')}
+                                                    mt="xs"
+                                                    {...internalSquadsModeProps}
+                                                />
+                                            </Input.Wrapper>
 
-                                        <MultiSelect
-                                            clearButtonProps={{
-                                                size: 'xs'
-                                            }}
-                                            data={nodes.map((node) => ({
-                                                label: `${emojiFlag(node.countryCode)} ${node.name}${
-                                                    node.provider ? ` (${node.provider.name})` : ''
-                                                }`,
-                                                value: node.uuid
-                                            }))}
-                                            description={t(
-                                                'base-host-form.pick-nodes-which-resolved-from-this-host-only-visual-assignment'
-                                            )}
-                                            inputWrapperOrder={[
-                                                'label',
-                                                'input',
-                                                'description',
-                                                'error'
-                                            ]}
-                                            key={form.key('nodes')}
-                                            label={t('base-host-form.nodes')}
-                                            leftSection={<TbServer2 size={16} />}
-                                            renderOption={(item) => {
-                                                const node = nodes.find(
-                                                    (node) => node.uuid === item.option.value
-                                                )
-                                                if (!node) return null
-                                                return (
-                                                    <>
+                                            <MultiSelect
+                                                clearable
+                                                clearButtonProps={{
+                                                    size: 'xs'
+                                                }}
+                                                data={internalSquads.map((internalSquad) => ({
+                                                    label: internalSquad.name,
+                                                    value: internalSquad.uuid
+                                                }))}
+                                                inputWrapperOrder={[
+                                                    'input',
+                                                    'label',
+                                                    'description',
+                                                    'error'
+                                                ]}
+                                                description={
+                                                    isAllowOnlyInternalSquads
+                                                        ? t(
+                                                              'base-host-form.allow-this-host-only-for-specific-internal-squads'
+                                                          )
+                                                        : t(
+                                                              'base-host-form.exclude-this-host-from-specific-internal-squads'
+                                                          )
+                                                }
+                                                key={form.key('internalSquads.squads')}
+                                                label={
+                                                    isAllowOnlyInternalSquads
+                                                        ? t(
+                                                              'base-host-form.allowed-internal-squads'
+                                                          )
+                                                        : t(
+                                                              'base-host-form.excluded-internal-squads'
+                                                          )
+                                                }
+                                                leftSection={<TbCirclesRelation size={16} />}
+                                                renderOption={(item) => {
+                                                    return (
                                                         <Checkbox
                                                             aria-hidden
                                                             checked={item.checked}
+                                                            label={item.option.label}
                                                             onChange={() => {}}
                                                             style={{ pointerEvents: 'none' }}
                                                             tabIndex={-1}
                                                         />
-                                                        <Group
-                                                            gap={7}
-                                                            justify="space-between"
-                                                            w="100%"
-                                                        >
-                                                            <Group gap={7}>
-                                                                {resolveCountryCode(
-                                                                    node.countryCode
-                                                                )}
-                                                                <span>{node.name}</span>
-                                                            </Group>
-                                                            {node.provider && (
-                                                                <Badge color="gray" size="xs">
-                                                                    {node.provider.name}
-                                                                </Badge>
-                                                            )}
-                                                        </Group>
-                                                    </>
-                                                )
-                                            }}
-                                            renderPill={({ option, value, onRemove }) => (
-                                                <TagInputPill
-                                                    onRemove={onRemove}
-                                                    value={option?.label ?? value}
-                                                />
-                                            )}
-                                            searchable
-                                            {...form.getInputProps('nodes')}
-                                        />
-
-                                        <MultiSelect
-                                            clearable
-                                            clearButtonProps={{
-                                                size: 'xs'
-                                            }}
-                                            data={internalSquads.map((internalSquad) => ({
-                                                label: internalSquad.name,
-                                                value: internalSquad.uuid
-                                            }))}
-                                            description={t(
-                                                'base-host-form.exclude-this-host-from-specific-internal-squads'
-                                            )}
-                                            inputWrapperOrder={[
-                                                'label',
-                                                'input',
-                                                'description',
-                                                'error'
-                                            ]}
-                                            key={form.key('excludedInternalSquads')}
-                                            label={t('base-host-form.excluded-internal-squads')}
-                                            leftSection={<TbCirclesRelation size={16} />}
-                                            renderOption={(item) => {
-                                                return (
-                                                    <Checkbox
-                                                        aria-hidden
-                                                        checked={item.checked}
-                                                        label={item.option.label}
-                                                        onChange={() => {}}
-                                                        style={{ pointerEvents: 'none' }}
-                                                        tabIndex={-1}
+                                                    )
+                                                }}
+                                                renderPill={({ option, value, onRemove }) => (
+                                                    <TagInputPill
+                                                        onRemove={onRemove}
+                                                        value={option?.label ?? value}
                                                     />
-                                                )
-                                            }}
-                                            renderPill={({ option, value, onRemove }) => (
-                                                <TagInputPill
-                                                    onRemove={onRemove}
-                                                    value={option?.label ?? value}
-                                                />
-                                            )}
-                                            searchable
-                                            {...form.getInputProps('excludedInternalSquads')}
-                                        />
-                                    </Stack>
-                                </SectionCard.Section>
-                            </SectionCard.Root>
+                                                )}
+                                                searchable
+                                                {...form.getInputProps('internalSquads.squads')}
+                                            />
+                                        </Stack>
+                                    </SectionCard.Section>
+                                </SectionCard.Root>
+                            </Stack>
                         )}
                     </Transition>
                 </Tabs.Panel>
