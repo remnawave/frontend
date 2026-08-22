@@ -204,7 +204,6 @@
   },
   "config-editor": {
     "widget": {
-      "loading-editor": "Загрузка редактора...",
       "unsaved-changes": "Несохранённые изменения",
       "your-changes-will-be-lost-if-you-leave-this-page-without-saving": "Ваши изменения будут потеряны, если вы покинете эту страницу без сохранения.",
       "leave": "Выйти",
@@ -361,11 +360,6 @@
       "subscription": "Подписка",
       "accessible-nodes": "Доступные ноды",
       "qr-code": "QR Код"
-    }
-  },
-  "empty-page": {
-    "layout": {
-      "nothing-found": "Ничего не найдено"
     }
   },
   "base-host-form": {
@@ -721,8 +715,6 @@
   "get-user-subscription-links": {
     "feature": {
       "subscription-links": "Подписные ссылки",
-      "loading-subscription-links": "Загрузка ссылок на подписку ...",
-      "no-available-hosts-found-for-this-user": "Для этого пользователя не найдено доступных хостов",
       "connection-keys": "Ключи для подключения"
     }
   },
@@ -764,8 +756,6 @@
       "job-failed": "Выполнить не удалось",
       "job-failed-description": "Не удалось получить активные сеансы.",
       "clear": "Очистить",
-      "no-active-sessions": "Нет активных сеансов",
-      "no-active-sessions-description": "Активных IP адресов для этого пользователя не найдено.",
       "active-ips-across-nodes": "Активные IP адреса",
       "distinct-ips": "Уникальные IP адреса"
     }
@@ -773,7 +763,6 @@
   "detailed-user-info-drawer": {
     "widget": {
       "detailed-user-info": "Подробная информация о пользователе",
-      "loading-user-info": "Загрузка информации о пользователе...",
       "user-information": "Информация о пользователе",
       "uuid": "UUID",
       "short-uuid": "Short UUID",
@@ -1357,12 +1346,6 @@
       "represents-the-uptime-of-the-xray-core": "Отражает время работы ядра Xray"
     }
   },
-  "nodes-spotlight-search": {
-    "widget": {
-      "no-nodes-found": "Нод не найдено...",
-      "search-by-name-or-address": "Поиск по имени или адресу..."
-    }
-  },
   "host-tags-input": {
     "tag-can-only-contain-uppercase-letters-numbers-underscores-and-colons": "Тег может содержать только заглавные буквы, цифры, подчеркивания и двоеточия",
     "tag-must-be-less-than-32-characters": "Тег должен быть меньше 32 символов",
@@ -1462,8 +1445,6 @@
         "invalid-json": "Неверный JSON",
         "snippet-cannot-be-empty": "Сниппет не может быть пустым",
         "snippet-cannot-contain-empty-objects": "Сниппет не может содержать пустые объекты",
-        "fetching-snippets": "Загрузка сниппетов...",
-        "no-snippets-yet": "Пока ничего нет.",
         "more-items": "ещё элементов...",
         "create-snippet": "Создать сниппет",
         "snippet-name": "Имя сниппета",
@@ -1703,8 +1684,7 @@
   },
   "help-drawer": {
     "shared": {
-      "failed-to-load-documentation": "Не удалось загрузить документацию",
-      "loading-documentation": "Загрузка документации..."
+      "failed-to-load-documentation": "Не удалось загрузить документацию"
     }
   },
   "reset-node-traffic": {

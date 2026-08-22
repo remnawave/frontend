@@ -204,7 +204,6 @@
   },
   "config-editor": {
     "widget": {
-      "loading-editor": "در حال بارگذاری ویرایشگر...",
       "unsaved-changes": "تغییرات ذخیره نشده",
       "your-changes-will-be-lost-if-you-leave-this-page-without-saving": "اگر این صفحه را بدون ذخیره تغییرات ترک کنید، تغییرات ایجاد شده از دست خواهند رفت.",
       "leave": "ترک",
@@ -361,11 +360,6 @@
       "subscription": "اشتراک",
       "accessible-nodes": "نودهای قابل دسترسی",
       "qr-code": "کد QR"
-    }
-  },
-  "empty-page": {
-    "layout": {
-      "nothing-found": "چیزی یافت نشد"
     }
   },
   "base-host-form": {
@@ -721,8 +715,6 @@
   "get-user-subscription-links": {
     "feature": {
       "subscription-links": "لینک‌های اشتراک",
-      "loading-subscription-links": "درحال بارگذاری لینک‌های اشتراک ...",
-      "no-available-hosts-found-for-this-user": "هیچ هاست موجودی برای این کاربر یافت نشد",
       "connection-keys": "کلیدهای اتصال"
     }
   },
@@ -764,8 +756,6 @@
       "job-failed": "عملیات با مشکل مواجه شد",
       "job-failed-description": "دریافت نشست‌های فعال موفقیت‌آمیز نبود",
       "clear": "پاک کردن",
-      "no-active-sessions": "نشست فعالی وجود نداشت",
-      "no-active-sessions-description": "آدرس آیپی فعالی برای این کاربر یافت نشد",
       "active-ips-across-nodes": "آدرس‌های آیپی فعال",
       "distinct-ips": "آیپی‌های مجزا"
     }
@@ -773,7 +763,6 @@
   "detailed-user-info-drawer": {
     "widget": {
       "detailed-user-info": "اطلاعات دقیق کاربر",
-      "loading-user-info": "در حال بارگذاری اطلاعات کاربر...",
       "user-information": "اطلاعات کاربر",
       "uuid": "UUID",
       "short-uuid": "شناسه (UUID) کوتاه",
@@ -1357,12 +1346,6 @@
       "represents-the-uptime-of-the-xray-core": "نشان‌دهنده آپتایم هسته Xray"
     }
   },
-  "nodes-spotlight-search": {
-    "widget": {
-      "no-nodes-found": "هیچ نودی یافت نشد...",
-      "search-by-name-or-address": "جست‌وجو براساس نام یا آدرس"
-    }
-  },
   "host-tags-input": {
     "tag-can-only-contain-uppercase-letters-numbers-underscores-and-colons": "برچسب باید فقط شامل حروف بزرگ، ارقام، آندرلاین و دونقطه باشد",
     "tag-must-be-less-than-32-characters": "طول برچسب باید زیر 32 کاراکتر باشد",
@@ -1462,8 +1445,6 @@
         "invalid-json": "JSON نامعتبر",
         "snippet-cannot-be-empty": "قطعه کد نمی‌تواند خالی باشد",
         "snippet-cannot-contain-empty-objects": "قطعه کد نمی‌تواند حاوی مقادیر خالی باشد",
-        "fetching-snippets": "درحال دریافت قطعه کدها",
-        "no-snippets-yet": "هیچ قطعه کدی وجود ندارد",
         "more-items": "موارد بیشتر",
         "create-snippet": "ایجاد قطعه کد",
         "snippet-name": "نام قطعه کد",
@@ -1703,8 +1684,7 @@
   },
   "help-drawer": {
     "shared": {
-      "failed-to-load-documentation": "بارگذاری مستندات با شکست مواجه شد",
-      "loading-documentation": "درحال بارگذاری مستندات"
+      "failed-to-load-documentation": "بارگذاری مستندات با شکست مواجه شد"
     }
   },
   "reset-node-traffic": {
