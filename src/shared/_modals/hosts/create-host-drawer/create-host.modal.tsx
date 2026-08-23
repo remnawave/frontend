@@ -53,6 +53,7 @@ export const CreateHostDrawer = NiceModal.create(() => {
         validate: schemaResolver(CreateHostCommand.RequestBodySchema),
 
         initialValues: {
+            isDisabled: true,
             securityLayer: SECURITY_LAYERS.DEFAULT,
             port: 0,
             remark: '',
@@ -98,7 +99,6 @@ export const CreateHostDrawer = NiceModal.create(() => {
         createHost({
             variables: {
                 ...values,
-                isDisabled: !values.isDisabled,
                 sockoptParams: parseJsonField(values.sockoptParams),
                 muxParams: parseJsonField(values.muxParams),
                 xhttpExtraParams: parseJsonField(values.xhttpExtraParams),

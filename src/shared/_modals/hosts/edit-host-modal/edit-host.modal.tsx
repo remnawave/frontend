@@ -78,7 +78,7 @@ export const EditHostDrawer = NiceModal.create((props: IProps) => {
                 address: host.address,
                 port: host.port,
                 securityLayer: host.securityLayer,
-                isDisabled: !host.isDisabled,
+                isDisabled: host.isDisabled,
                 sni: host.sni ?? undefined,
                 host: host.host ?? undefined,
                 path: host.path ?? undefined,
@@ -133,7 +133,6 @@ export const EditHostDrawer = NiceModal.create((props: IProps) => {
         updateHost({
             variables: {
                 ...values,
-                isDisabled: !values.isDisabled,
                 uuid: host.uuid,
                 xhttpExtraParams: parseJsonField(values.xhttpExtraParams),
                 muxParams: parseJsonField(values.muxParams),

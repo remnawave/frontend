@@ -105,9 +105,6 @@ export const EditManyHostsDrawer = NiceModal.create((props: IProps) => {
             Object.entries(values).filter(([key]) => form.isDirty(key))
         ) as Partial<UpdateManyHostsCommand.RequestBody>
 
-        if (form.isDirty('isDisabled')) {
-            dirtyValues.isDisabled = !values.isDisabled
-        }
         if (form.isDirty('xhttpExtraParams')) {
             dirtyValues.xhttpExtraParams = parseJsonField(values.xhttpExtraParams)
         }

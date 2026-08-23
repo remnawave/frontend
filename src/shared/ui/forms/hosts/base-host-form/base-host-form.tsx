@@ -7,10 +7,8 @@ import {
     Popover,
     NumberInput,
     Stack,
-    Switch,
     Text,
-    TextInput,
-    ThemeIcon
+    TextInput
 } from '@mantine/core'
 import {
     CreateHostCommand,
@@ -18,11 +16,10 @@ import {
     UpdateManyHostsCommand
 } from '@remnawave/backend-contract'
 import { INTERNAL_SQUADS_MODE, SECURITY_LAYERS } from '@remnawave/backend-contract'
-import { useCallback, useId, useMemo, useState } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { HiQuestionMarkCircle } from 'react-icons/hi'
 import { PiFloppyDiskDuotone, PiTag } from 'react-icons/pi'
-import { TbEye, TbEyeOff } from 'react-icons/tb'
 
 import { DrawerFooter } from '@shared/ui/drawer-footer'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
@@ -30,6 +27,7 @@ import { TemplateInfoPopoverShared } from '@shared/ui/popovers'
 import { PopoverWithInfoShared } from '@shared/ui/popovers/popover-with-info'
 import { SectionCard } from '@shared/ui/section-card'
 
+import { HostVisibility } from './host-visibility'
 import { IProps } from './interfaces'
 import { getHostJsonFields } from './json-fields'
 import {
@@ -65,16 +63,6 @@ export const BaseHostForm = <
     const [internalSquadsMode, setInternalSquadsMode] = useState(
         () => form.getValues().internalSquads?.mode
     )
-
-    const hostVisibilityId = useId()
-    const [isHostEnabled, setIsHostEnabled] = useState(() => form.getValues().isDisabled !== false)
-
-    const watchHostEnabled = useCallback(
-        ({ value }: { value: unknown }) => setIsHostEnabled(value !== false),
-        []
-    )
-
-    form.watch('isDisabled', watchHostEnabled)
 
     const watchInternalSquadsMode = useCallback(
         ({ value }: { value: unknown }) =>
@@ -258,50 +246,7 @@ export const BaseHostForm = <
                                 />
                             </SectionCard.Section>
                             <SectionCard.Section>
-                                <Group gap="sm" justify="space-between" wrap="nowrap">
-                                    <Group gap="sm" wrap="nowrap">
-                                        <ThemeIcon
-                                            color={isHostEnabled ? 'teal' : 'gray'}
-                                            size="lg"
-                                            variant="soft"
-                                        >
-                                            {isHostEnabled ? (
-                                                <TbEye size={22} />
-                                            ) : (
-                                                <TbEyeOff size={22} />
-                                            )}
-                                        </ThemeIcon>
-
-                                        <Stack gap={0}>
-                                            <Text
-                                                component="label"
-                                                fw={600}
-                                                htmlFor={hostVisibilityId}
-                                                size="sm"
-                                                style={{ cursor: 'pointer' }}
-                                            >
-                                                {t('base-host-form.host-visibility')}
-                                            </Text>
-                                            <Text
-                                                c={isHostEnabled ? 'teal.4' : 'dimmed'}
-                                                fw={600}
-                                                size="xs"
-                                            >
-                                                {isHostEnabled
-                                                    ? t('use-hosts-table-widget.enabled')
-                                                    : t('use-hosts-table-widget.disabled')}
-                                            </Text>
-                                        </Stack>
-                                    </Group>
-
-                                    <Switch
-                                        color="teal.8"
-                                        id={hostVisibilityId}
-                                        key={form.key('isDisabled')}
-                                        size="lg"
-                                        {...form.getInputProps('isDisabled', { type: 'checkbox' })}
-                                    />
-                                </Group>
+                                <HostVisibility />
                             </SectionCard.Section>
                             <SectionCard.Section>
                                 <Stack gap="md">
