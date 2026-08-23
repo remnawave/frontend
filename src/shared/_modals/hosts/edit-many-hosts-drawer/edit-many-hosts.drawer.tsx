@@ -4,7 +4,6 @@ import { useForm, schemaResolver } from '@mantine/form'
 import { modals } from '@mantine/modals'
 import { notifications } from '@mantine/notifications'
 import { INTERNAL_SQUADS_MODE, UpdateManyHostsCommand } from '@remnawave/backend-contract'
-import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { PiListChecks } from 'react-icons/pi'
 
@@ -37,8 +36,6 @@ export const EditManyHostsDrawer = NiceModal.create((props: IProps) => {
         modal,
         drawer: true
     })
-
-    const [advancedOpened, setAdvancedOpened] = useState(false)
 
     const { data: configProfiles } = useGetConfigProfiles()
     const { data: nodes } = useGetNodes()
@@ -192,7 +189,7 @@ export const EditManyHostsDrawer = NiceModal.create((props: IProps) => {
             {...modalProps}
             padding="lg"
             position="right"
-            size="lg"
+            size="700px"
             title={
                 <BaseOverlayHeader
                     iconColor="teal"
@@ -207,16 +204,15 @@ export const EditManyHostsDrawer = NiceModal.create((props: IProps) => {
                 <LoadingScreen />
             ) : (
                 <BaseHostForm
-                    advancedOpened={advancedOpened}
                     configProfiles={configProfiles.configProfiles}
                     form={form}
                     handleSubmit={handleSubmit}
                     hostTags={hostTags.tags}
                     internalSquads={internalSquads.internalSquads}
+                    isBulkEdit
                     isSubmitting={isUpdateManyHostsPending}
                     nodes={nodes}
                     removeRequiredFields={true}
-                    setAdvancedOpened={setAdvancedOpened}
                     subscriptionTemplates={templates.templates}
                 />
             )}

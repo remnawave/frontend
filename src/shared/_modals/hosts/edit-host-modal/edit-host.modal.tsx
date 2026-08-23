@@ -2,7 +2,7 @@ import NiceModal, { useModal } from '@ebay/nice-modal-react'
 import { Drawer } from '@mantine/core'
 import { useForm, schemaResolver } from '@mantine/form'
 import { UpdateHostCommand } from '@remnawave/backend-contract'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { PiListChecks } from 'react-icons/pi'
 
@@ -43,8 +43,6 @@ export const EditHostDrawer = NiceModal.create((props: IProps) => {
             })
         }
     })
-
-    const [advancedOpened, setAdvancedOpened] = useState(false)
 
     const { data: configProfiles } = useGetConfigProfiles()
     const { data: nodes } = useGetNodes()
@@ -150,7 +148,7 @@ export const EditHostDrawer = NiceModal.create((props: IProps) => {
             {...modalProps}
             padding="lg"
             position="right"
-            size="lg"
+            size="700px"
             title={
                 <BaseOverlayHeader
                     iconColor="teal"
@@ -166,7 +164,6 @@ export const EditHostDrawer = NiceModal.create((props: IProps) => {
                 <LoadingScreen />
             ) : (
                 <BaseHostForm
-                    advancedOpened={advancedOpened}
                     configProfiles={configProfiles.configProfiles}
                     form={form}
                     handleSubmit={handleSubmit}
@@ -175,7 +172,6 @@ export const EditHostDrawer = NiceModal.create((props: IProps) => {
                     isSubmitting={isUpdateHostPending}
                     nodes={nodes}
                     hostUuid={host.uuid}
-                    setAdvancedOpened={setAdvancedOpened}
                     subscriptionTemplates={templates.templates}
                 />
             )}

@@ -1,4 +1,5 @@
 export { useAuth } from './use-auth'
+export { useDrawerStickyOffset } from './use-drawer-sticky-offset'
 export { useIsMobile } from './use-is-mobile'
 export { useModalEscapeGuard } from './use-modal-escape-guard'
 export { usePreventBackNavigation } from './use-prevent-back-navigation'

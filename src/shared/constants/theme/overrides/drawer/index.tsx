@@ -6,6 +6,7 @@ import classes from './drawer.module.css'
 export default {
     Drawer: Drawer.extend({
         classNames: {
+            content: classes.drawerContent,
             header: classes.drawerHeader,
             body: classes.drawerBody
         },

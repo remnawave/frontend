@@ -16,16 +16,15 @@ export interface IProps<
         | UpdateHostCommand.RequestBody
         | UpdateManyHostsCommand.RequestBody
 > {
-    advancedOpened: boolean
     configProfiles: GetConfigProfilesCommand.Response['response']['configProfiles']
     form: UseFormReturnType<T>
     handleSubmit: () => void
     hostTags: GetHostsTagsCommand.Response['response']['tags']
     internalSquads: GetInternalSquadsCommand.Response['response']['internalSquads']
+    isBulkEdit?: boolean
     isSubmitting: boolean
     nodes: GetNodesCommand.Response['response']
     removeRequiredFields?: boolean
-    setAdvancedOpened: (value: boolean) => void
     subscriptionTemplates: GetSubscriptionTemplatesCommand.Response['response']['templates']
     hostUuid?: string
 }

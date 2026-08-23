@@ -3,14 +3,8 @@ import type { editor } from 'monaco-editor'
 import NiceModal, { useModal } from '@ebay/nice-modal-react'
 import { MonacoSetupHostMapperEditorFeature } from '@features/dashboard/config-profiles/monaco-setup'
 import { Box, Button, Group, Modal, Paper } from '@mantine/core'
-import { UseFormReturnType } from '@mantine/form'
 import { Monaco, useMonaco } from '@monaco-editor/react'
-import {
-    CreateHostCommand,
-    HostMapperSchema,
-    UpdateHostCommand,
-    UpdateManyHostsCommand
-} from '@remnawave/backend-contract'
+import { HostMapperSchema } from '@remnawave/backend-contract'
 import clsx from 'clsx'
 import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -20,6 +14,7 @@ import { useNiceMantineModal } from '@shared/_modals/use-nice-modal'
 import { COMPACT_MONACO_OPTIONS } from '@shared/constants/monaco-theme'
 import { usePseudoFullscreen } from '@shared/hooks'
 import { CodeEditor, editorClasses, EditorFooter, EditorStatusBar } from '@shared/ui/code-editor'
+import { THostForm } from '@shared/ui/forms/hosts/base-host-form/host-form.types'
 import { fullscreenClasses, FullscreenToggleButton } from '@shared/ui/fullscreen-toggle-button'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { forceMonacoRetokenize } from '@shared/utils/monaco/force-retokenize'
@@ -31,11 +26,7 @@ import classes from './HostMapperModal.module.css'
 const EMPTY_MAPPER = JSON.stringify({ xrayJson: [], mihomo: [], base64: [] }, null, 2)
 
 interface IProps {
-    form: UseFormReturnType<
-        | CreateHostCommand.RequestBody
-        | UpdateHostCommand.RequestBody
-        | UpdateManyHostsCommand.RequestBody
-    >
+    form: THostForm
     rawInbound?: unknown
 }
 

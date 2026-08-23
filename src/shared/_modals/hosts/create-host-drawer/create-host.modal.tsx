@@ -7,7 +7,6 @@ import {
     INTERNAL_SQUADS_MODE,
     SECURITY_LAYERS
 } from '@remnawave/backend-contract'
-import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { PiListChecks } from 'react-icons/pi'
 
@@ -41,8 +40,6 @@ export const CreateHostDrawer = NiceModal.create(() => {
     const { data: internalSquads } = useGetInternalSquads()
     const { data: templates } = useGetSubscriptionTemplates()
     const { data: hostTags } = useGetHostTags()
-
-    const [advancedOpened, setAdvancedOpened] = useState(false)
 
     const form = useForm<CreateHostCommand.RequestBody>({
         mode: 'uncontrolled',
@@ -138,7 +135,7 @@ export const CreateHostDrawer = NiceModal.create(() => {
             {...modalProps}
             padding="lg"
             position="right"
-            size="lg"
+            size="700px"
             title={
                 <BaseOverlayHeader
                     iconColor="teal"
@@ -152,7 +149,6 @@ export const CreateHostDrawer = NiceModal.create(() => {
                 <LoadingScreen />
             ) : (
                 <BaseHostForm
-                    advancedOpened={advancedOpened}
                     configProfiles={configProfiles.configProfiles}
                     form={form}
                     handleSubmit={handleSubmit}
@@ -160,7 +156,6 @@ export const CreateHostDrawer = NiceModal.create(() => {
                     internalSquads={internalSquads.internalSquads}
                     isSubmitting={isCreateHostPending}
                     nodes={nodes}
-                    setAdvancedOpened={setAdvancedOpened}
                     subscriptionTemplates={templates.templates}
                 />
             )}

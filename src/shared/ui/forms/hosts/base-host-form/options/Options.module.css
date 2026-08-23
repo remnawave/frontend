@@ -1,0 +1,10 @@
+.stickyHeader {
+    position: sticky;
+    top: var(--drawer-sticky-offset, 60px);
+    z-index: 3;
+    margin-top: calc(var(--mantine-spacing-md) * -1);
+    padding-top: var(--mantine-spacing-md);
+    background-color: rgba(22, 27, 35, 0.95);
+    background-color: color-mix(in srgb, var(--mantine-color-body) 95%, transparent);
+    background-image: linear-gradient(rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.02));
+}

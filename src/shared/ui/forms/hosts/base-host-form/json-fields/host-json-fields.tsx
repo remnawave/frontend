@@ -1,10 +1,4 @@
 import { MonacoSetupHostJsonFieldsFeature } from '@features/dashboard/config-profiles/monaco-setup'
-import { UseFormReturnType } from '@mantine/form'
-import {
-    CreateHostCommand,
-    UpdateHostCommand,
-    UpdateManyHostsCommand
-} from '@remnawave/backend-contract'
 import { TFunction } from 'i18next'
 import { ComponentType } from 'react'
 import { PiNetwork, PiPencilDuotone } from 'react-icons/pi'
@@ -18,16 +12,11 @@ import {
     PASTE_BASIC_XHTTP_EXTRA_PARAMS
 } from '@shared/constants'
 
-type THostForm = UseFormReturnType<
-    | CreateHostCommand.RequestBody
-    | UpdateHostCommand.RequestBody
-    | UpdateManyHostsCommand.RequestBody
->
+import { THostForm } from '../host-form.types'
 
 export type THostJsonField = 'finalMask' | 'muxParams' | 'sockoptParams' | 'xhttpExtraParams'
 
 export interface IHostJsonFieldConfig {
-    buttonLabel: string
     docsUrl: string
     field: THostJsonField
     IconComponent: ComponentType<{ size: number }>
@@ -38,7 +27,6 @@ export interface IHostJsonFieldConfig {
 
 export const getHostJsonFields = (t: TFunction): IHostJsonFieldConfig[] => [
     {
-        buttonLabel: 'xHTTP',
         docsUrl: 'https://xtls.github.io/ru/config/transports/splithttp.html',
         field: 'xhttpExtraParams',
         IconComponent: PiPencilDuotone,
@@ -47,7 +35,6 @@ export const getHostJsonFields = (t: TFunction): IHostJsonFieldConfig[] => [
         title: t('base-host-form.xhttp-extra-params')
     },
     {
-        buttonLabel: 'Mux',
         docsUrl: 'https://xtls.github.io/ru/config/outbound.html#muxobject',
         field: 'muxParams',
         IconComponent: TbCloudNetwork,
@@ -56,7 +43,6 @@ export const getHostJsonFields = (t: TFunction): IHostJsonFieldConfig[] => [
         title: 'MUX'
     },
     {
-        buttonLabel: 'SockOpt',
         docsUrl: 'https://xtls.github.io/ru/config/transports/sockopt.html',
         field: 'sockoptParams',
         IconComponent: PiNetwork,
@@ -65,7 +51,6 @@ export const getHostJsonFields = (t: TFunction): IHostJsonFieldConfig[] => [
         title: 'SockOpt'
     },
     {
-        buttonLabel: 'Final Mask',
         docsUrl: 'https://xtls.github.io/ru/config/transports/finalmask.html',
         field: 'finalMask',
         IconComponent: TbMask,
