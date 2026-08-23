@@ -39,8 +39,8 @@
     "copied": "复制成功",
     "copy": "复制",
     "paste": "粘贴",
-    "paste-default": "Paste default",
-    "documentation": "Documentation",
+    "paste-default": "粘贴默认值",
+    "documentation": "文档",
     "refresh": "刷新",
     "save": "保存",
     "update": "更新",
@@ -435,13 +435,13 @@
     "server-description-2": "并非所有客户端应用程序都支持此功能。欲了解更多详情，请参阅下面列出的应用程序的文档。",
     "supported-clients": "支持的客户端",
     "mapper": "映射",
-    "internal-squads-mode-description": "Choose how the selected Internal Squads are treated for this host",
-    "internal-squads-mode-exclude": "Exclude",
-    "internal-squads-mode-allow-only": "Allow only",
-    "allowed-internal-squads": "Allowed Internal Squads",
-    "allow-this-host-only-for-specific-internal-squads": "Show this host only to the selected Internal Squads",
-    "access-overrides": "Access overrides",
-    "override-type": "Override type"
+    "internal-squads-mode-description": "选择此主机如何处理所选内部分组",
+    "internal-squads-mode-exclude": "排除",
+    "internal-squads-mode-allow-only": "仅允许",
+    "allowed-internal-squads": "已授权的内部分组",
+    "allow-this-host-only-for-specific-internal-squads": "仅在选定的内部分组显示此主机",
+    "access-overrides": "权限覆盖",
+    "override-type": "覆盖类型"
   },
   "base-node-form": {
     "country": "国家",
@@ -1636,9 +1636,9 @@
   },
   "experimental-settings-card": {
     "widget": {
-      "experimental-features": "Experimental features",
-      "description": "Features that are still in development. They can change or disappear at any time.",
-      "legacy-layout-style": "Legacy Layout Style"
+      "experimental-features": "实验性功能",
+      "description": "仍在开发中的功能。它们可以随时改变或消失。",
+      "legacy-layout-style": "传统布局样式"
     }
   },
   "api-tokens-card": {
