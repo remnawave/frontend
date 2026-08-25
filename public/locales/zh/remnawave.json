@@ -2392,6 +2392,9 @@
     "snippet-name": "名称",
     "snippet-command": "命令",
     "snippet-add": "添加片段",
-    "snippet-edit": "编辑片段"
+    "snippet-edit": "编辑片段",
+    "connections-title": "Saved connections",
+    "connections-empty": "No saved connections yet",
+    "connections-current": "Current"
   }
 }
