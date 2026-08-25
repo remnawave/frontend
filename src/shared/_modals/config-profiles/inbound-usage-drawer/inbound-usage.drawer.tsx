@@ -1,11 +1,10 @@
 import NiceModal, { useModal } from '@ebay/nice-modal-react'
-import { ActionIcon, Badge, Group, NativeSelect, Stack } from '@mantine/core'
+import { ActionIcon, Group, NativeSelect, Stack } from '@mantine/core'
 import { DatePickerInput, DatesRangeValue } from '@mantine/dates'
 import { nprogress } from '@mantine/nprogress'
 import dayjs from 'dayjs'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { PiUsersDuotone } from 'react-icons/pi'
 import { TbCalendar, TbChartArcs, TbRefresh, TbUsers } from 'react-icons/tb'
 
 import { showModal } from '@shared/_modals/show-modal'
@@ -94,11 +93,6 @@ export const InboundUsageDrawer = NiceModal.create((props: IProps) => {
         }
     })
 
-    const onlineUsersCount = (topUsersUsage?.onlineByNode ?? []).reduce(
-        (acc, node) => acc + node.count,
-        0
-    )
-
     const { mutateAsync: resolveUser } = useResolveUser()
 
     const handleViewUser = async (user: ITopLeaderboardItem) => {
@@ -130,25 +124,14 @@ export const InboundUsageDrawer = NiceModal.create((props: IProps) => {
                 />
             }
             buttons={
-                <Group gap="xs" wrap="nowrap">
-                    <Badge
-                        color={onlineUsersCount > 0 ? 'teal' : 'gray'}
-                        leftSection={<PiUsersDuotone size={14} />}
-                        size="lg"
-                        variant="outline"
-                    >
-                        {onlineUsersCount}
-                    </Badge>
-
-                    <ActionIcon
-                        loading={isRefetching || isLoading}
-                        onClick={() => refetch()}
-                        size="lg"
-                        variant="soft"
-                    >
-                        <TbRefresh size="20px" />
-                    </ActionIcon>
-                </Group>
+                <ActionIcon
+                    loading={isRefetching || isLoading}
+                    onClick={() => refetch()}
+                    size="lg"
+                    variant="soft"
+                >
+                    <TbRefresh size="20px" />
+                </ActionIcon>
             }
         >
             <Stack gap="md">
