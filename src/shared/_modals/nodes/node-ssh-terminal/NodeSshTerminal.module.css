@@ -15,6 +15,30 @@
     border-radius: 0 !important;
 }
 
+.window[data-minimized] {
+    height: auto !important;
+    min-height: 0 !important;
+}
+
+.trafficLights {
+    flex: 0 0 auto;
+}
+
+.trafficLight {
+    --ai-size: 12px;
+}
+
+.trafficLight svg {
+    opacity: 0;
+    color: var(--mantine-color-dark-9);
+    transition: opacity 200ms ease;
+}
+
+.trafficLights:hover .trafficLight svg,
+.trafficLight:focus-visible svg {
+    opacity: 1;
+}
+
 .header {
     display: flex;
     align-items: center;
@@ -128,7 +152,8 @@
     outline-offset: -2px;
 }
 
-.window[data-maximized] .resizeHandle {
+.window[data-maximized] .resizeHandle,
+.window[data-minimized] .resizeHandle {
     display: none;
 }
 

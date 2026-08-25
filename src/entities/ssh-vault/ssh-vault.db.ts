@@ -159,6 +159,9 @@ export const getConnectionProfile = (nodeUuid: string) =>
 export const putConnectionProfile = (record: IConnectionProfileRecord) =>
     run(STORE_PROFILES, 'readwrite', (store) => store.put(record))
 
+export const getAllConnectionProfiles = () =>
+    run<IConnectionProfileRecord[]>(STORE_PROFILES, 'readonly', (store) => store.getAll())
+
 export const getDeviceKey = () =>
     run<CryptoKey | undefined>(STORE_DEVICE, 'readonly', (store) => store.get('device'))
 

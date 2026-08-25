@@ -40,6 +40,7 @@ import {
     getAllKnownHosts,
     getAllNodeKeys,
     getAllSnippets,
+    getAllConnectionProfiles,
     getConnectionProfile,
     getKnownHost,
     getNodeKey,
@@ -91,6 +92,7 @@ interface IActions {
         getPrivateKey: (nodeUuid: string) => Promise<ISshPrivateKey | null>
         deleteSnippet: (id: string) => Promise<void>
         getProfile: (nodeUuid: string) => Promise<IConnectionProfile | null>
+        listProfiles: () => Promise<IConnectionProfile[]>
         listSnippets: () => Promise<ISshSnippet[]>
         lock: () => void
         refresh: () => Promise<void>
@@ -538,6 +540,33 @@ export const useSshVaultStore = create<IActions & IState>()(
                     } catch {
                         return null
                     }
+                },
+
+                listProfiles: async () => {
+                    const { dataKey } = get()
+                    if (!dataKey) return []
+
+                    const records = await getAllConnectionProfiles()
+
+                    const profiles = await Promise.all(
+                        records.map(async (record) => {
+                            try {
+                                return JSON.parse(
+                                    new TextDecoder().decode(
+                                        await decrypt(
+                                            dataKey,
+                                            record.payload,
+                                            profileAad(record.nodeUuid)
+                                        )
+                                    )
+                                ) as IConnectionProfile
+                            } catch {
+                                return null
+                            }
+                        })
+                    )
+
+                    return profiles.filter((profile) => profile !== null)
                 },
 
                 saveProfile: async (profile) => {

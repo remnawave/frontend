@@ -1,3 +1,5 @@
+import type { SetFloatingWindowPosition } from '@mantine/hooks'
+
 import NiceModal, { useModal } from '@ebay/nice-modal-react'
 import {
     ActionIcon,
@@ -14,17 +16,10 @@ import { Terminal } from '@xterm/xterm'
 import { AnimatePresence } from 'motion/react'
 import { useCallback, useEffect, useEffectEvent, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import {
-    TbArrowsMaximize,
-    TbArrowsMinimize,
-    TbSettings,
-    TbShieldLock,
-    TbTerminal2,
-    TbX
-} from 'react-icons/tb'
+import { TbServer, TbSettings, TbShieldLock, TbTerminal2 } from 'react-icons/tb'
 
 import { getAuthorizationToken, getBackendDomain } from '@shared/api'
-import { useCreateSshTicket } from '@shared/api/hooks'
+import { useCreateSshTicket, useGetNodes } from '@shared/api/hooks'
 import { registerScrollLockShard } from '@shared/utils/scroll-lock-shards'
 
 import type { INodeKeyInfo, ISshSnippet } from '@entities/ssh-vault'
@@ -42,10 +37,16 @@ import { HostKeyOverlay } from './host-key.overlay'
 import { KeyImportOverlay } from './key-import.overlay'
 import classes from './NodeSshTerminal.module.css'
 import { PasscodeRequiredScreen } from './passcode-required.screen'
+import {
+    buildSavedConnections,
+    ISavedConnection,
+    SavedConnectionsOverlay
+} from './saved-connections.overlay'
 import { SnippetsBar } from './snippets-bar'
 import { SnippetsOverlay } from './snippets.overlay'
 import { ISshHostKeyPrompt, SshConnection, TSshStage } from './ssh-connection'
 import { TerminalView } from './terminal.view'
+import { TrafficLights } from './traffic-lights'
 import { VaultManageScreen } from './vault-manage.screen'
 import { VaultSetupScreen } from './vault-setup.screen'
 import { VaultUnlockScreen } from './vault-unlock.screen'
@@ -56,13 +57,33 @@ interface IProps {
     node: GetNodeCommand.Response['response']
 }
 
+interface IWindowGeometry {
+    height: number
+    isMaximized: boolean
+    left: number
+    top: number
+    width: number
+}
+
+const CONSTRAIN_OFFSET = 1
+
+const DEFAULT_GEOMETRY: IWindowGeometry = {
+    height: 560,
+    isMaximized: false,
+    left: 120,
+    top: 80,
+    width: 880
+}
+
 interface IWindowProps {
+    geometry: IWindowGeometry
     modal: ReturnType<typeof useModal>
     node: GetNodeCommand.Response['response']
+    onGeometryChange: (geometry: IWindowGeometry) => void
 }
 
 const SshTerminalWindow = (props: IWindowProps) => {
-    const { modal, node } = props
+    const { geometry, modal, node, onGeometryChange } = props
     const { t } = useTranslation()
 
     const vaultStatus = useSshVaultStatus()
@@ -83,11 +104,13 @@ const SshTerminalWindow = (props: IWindowProps) => {
     })
     const [hostKeyPrompt, setHostKeyPrompt] = useState<ISshHostKeyPrompt | null>(null)
     const [error, setError] = useState<null | string>(null)
-    const [isMaximized, setIsMaximized] = useState(false)
+    const [isMaximized, setIsMaximized] = useState(geometry.isMaximized)
+    const [isMinimized, setIsMinimized] = useState(false)
     const [isManagingVault, setIsManagingVault] = useState(false)
     const [snippets, setSnippets] = useState<ISshSnippet[]>([])
     const [isEditingSnippets, setIsEditingSnippets] = useState(false)
     const [isImportingKey, setIsImportingKey] = useState(false)
+    const [savedConnections, setSavedConnections] = useState<ISavedConnection[] | null>(null)
     const [size, setSize] = useState('80×24')
     const [statusText, setStatusText] = useState<null | string>(null)
 
@@ -109,11 +132,62 @@ const SshTerminalWindow = (props: IWindowProps) => {
         setHostKeyPrompt(null)
     }, [])
 
+    const pendingGeometryRef = useRef(geometry)
+
+    const commitGeometry = (patch: Partial<IWindowGeometry>) => {
+        pendingGeometryRef.current = { ...pendingGeometryRef.current, ...patch }
+        onGeometryChange(pendingGeometryRef.current)
+    }
+
+    const setWindowPositionRef = useRef<null | SetFloatingWindowPosition>(null)
+
+    const toggleMinimized = () => {
+        const next = !isMinimized
+
+        setIsMinimized(next)
+
+        if (next) return
+
+        const { height, left, top, width } = pendingGeometryRef.current
+        const nextLeft = Math.max(0, Math.min(left, window.innerWidth - width - CONSTRAIN_OFFSET))
+        const nextTop = Math.max(0, Math.min(top, window.innerHeight - height - CONSTRAIN_OFFSET))
+
+        if (nextLeft === left && nextTop === top) return
+
+        setWindowPositionRef.current?.({ left: nextLeft, top: nextTop })
+        commitGeometry({ left: nextLeft, top: nextTop })
+    }
+
+    const toggleMaximized = () => {
+        const next = !isMaximized
+
+        commitGeometry({ isMaximized: next })
+        setIsMaximized(next)
+        setIsMinimized(false)
+    }
+
     const close = useCallback(() => {
         teardown()
         modal.hide()
         modal.remove()
     }, [teardown, modal])
+
+    const { data: nodes } = useGetNodes()
+
+    const openSavedConnections = async () => {
+        const profiles = await vaultActions.listProfiles()
+
+        setSavedConnections(buildSavedConnections(nodes ?? [], profiles, node.uuid))
+    }
+
+    const selectSavedConnection = (nodeUuid: string) => {
+        setSavedConnections(null)
+
+        const next = nodes?.find((item) => item.uuid === nodeUuid)
+        if (!next || nodeUuid === node.uuid) return
+
+        void modal.show({ node: next })
+    }
 
     useEffect(() => {
         void vaultActions.refresh()
@@ -396,24 +470,55 @@ const SshTerminalWindow = (props: IWindowProps) => {
         <FloatingWindow
             className={classes.window}
             ref={registerShard}
-            constrainOffset={12}
+            constrainOffset={CONSTRAIN_OFFSET}
             data-maximized={isMaximized || undefined}
+            data-minimized={isMinimized || undefined}
             dimensions={{
-                initialWidth: 880,
-                initialHeight: 560,
+                initialWidth: geometry.width,
+                initialHeight: geometry.height,
                 minWidth: 420,
                 minHeight: 320
             }}
             dragHandleSelector={`.${classes.header}`}
             excludeDragHandleSelector="button"
-            initialPosition={{ top: 80, left: 120 }}
+            initialPosition={{ top: geometry.top, left: geometry.left }}
+            setPositionRef={setWindowPositionRef}
+            onDragEnd={() => onGeometryChange(pendingGeometryRef.current)}
+            onPositionChange={(position) => {
+                pendingGeometryRef.current = {
+                    ...pendingGeometryRef.current,
+                    left: position.x,
+                    top: position.y
+                }
+            }}
+            onResizeEnd={() => onGeometryChange(pendingGeometryRef.current)}
+            onSizeChange={(size) => {
+                pendingGeometryRef.current = {
+                    ...pendingGeometryRef.current,
+                    height: size.height,
+                    width: size.width
+                }
+            }}
             radius="md"
             shadow="xl"
             zIndex={500}
             withBorder
             withinPortal
         >
-            <Group className={classes.header} gap="xs" wrap="nowrap">
+            <Group
+                className={classes.header}
+                gap="xs"
+                onDoubleClick={toggleMinimized}
+                wrap="nowrap"
+            >
+                <TrafficLights
+                    isMaximized={isMaximized}
+                    isMinimized={isMinimized}
+                    onClose={close}
+                    onToggleMaximized={toggleMaximized}
+                    onToggleMinimized={toggleMinimized}
+                />
+
                 <TbTerminal2 color="var(--mantine-color-cyan-4)" size={16} />
 
                 <Text fw={600} size="sm" truncate>
@@ -424,6 +529,18 @@ const SshTerminalWindow = (props: IWindowProps) => {
                 </Text>
 
                 <Group gap={4} ml="auto" wrap="nowrap">
+                    {vaultStatus === 'unlocked' && (
+                        <Tooltip label={t('node-ssh.connections-title')} withArrow>
+                            <ActionIcon
+                                color={savedConnections ? 'cyan' : 'gray'}
+                                onClick={() => void openSavedConnections()}
+                                size="sm"
+                                variant="subtle"
+                            >
+                                <TbServer size={15} />
+                            </ActionIcon>
+                        </Tooltip>
+                    )}
                     <Tooltip label={t('node-ssh.vault-manage')} withArrow>
                         <ActionIcon
                             color={isManagingVault ? 'cyan' : 'gray'}
@@ -453,29 +570,10 @@ const SshTerminalWindow = (props: IWindowProps) => {
                             </ActionIcon>
                         </Tooltip>
                     )}
-
-                    <ActionIcon
-                        color="gray"
-                        onClick={() => setIsMaximized((value) => !value)}
-                        size="sm"
-                        variant="subtle"
-                    >
-                        {isMaximized ? (
-                            <TbArrowsMinimize size={15} />
-                        ) : (
-                            <TbArrowsMaximize size={15} />
-                        )}
-                    </ActionIcon>
-
-                    <Tooltip label={t('common.close')} withArrow>
-                        <ActionIcon color="gray" onClick={close} size="sm" variant="subtle">
-                            <TbX size={15} />
-                        </ActionIcon>
-                    </Tooltip>
                 </Group>
             </Group>
 
-            <Box className={classes.body}>
+            <Box className={classes.body} display={isMinimized ? 'none' : undefined}>
                 {renderBody()}
 
                 <AnimatePresence>
@@ -491,6 +589,16 @@ const SshTerminalWindow = (props: IWindowProps) => {
                                 await refreshSnippets()
                             }}
                             snippets={snippets}
+                        />
+                    )}
+                </AnimatePresence>
+
+                <AnimatePresence>
+                    {savedConnections && (
+                        <SavedConnectionsOverlay
+                            connections={savedConnections}
+                            onClose={() => setSavedConnections(null)}
+                            onSelect={selectSavedConnection}
                         />
                     )}
                 </AnimatePresence>
@@ -517,7 +625,7 @@ const SshTerminalWindow = (props: IWindowProps) => {
                 </AnimatePresence>
             </Box>
 
-            {stage === 'session' && (
+            {stage === 'session' && !isMinimized && (
                 <SnippetsBar
                     onManage={() => setIsEditingSnippets(true)}
                     onRun={(snippet) => connectionRef.current?.write(`${snippet.command}\n`)}
@@ -525,7 +633,7 @@ const SshTerminalWindow = (props: IWindowProps) => {
                 />
             )}
 
-            {stage !== 'setup' && (
+            {stage !== 'setup' && !isMinimized && (
                 <Group className={classes.statusBar} gap="sm" wrap="nowrap">
                     <Box
                         className={classes.dot}
@@ -554,6 +662,15 @@ const SshTerminalWindow = (props: IWindowProps) => {
 
 export const NodeSshTerminalWindow = NiceModal.create((props: IProps) => {
     const modal = useModal()
+    const [geometry, setGeometry] = useState<IWindowGeometry>(DEFAULT_GEOMETRY)
 
-    return <SshTerminalWindow key={props.node.uuid} modal={modal} node={props.node} />
+    return (
+        <SshTerminalWindow
+            geometry={geometry}
+            key={props.node.uuid}
+            modal={modal}
+            node={props.node}
+            onGeometryChange={setGeometry}
+        />
+    )
 })
