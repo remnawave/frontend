@@ -81,6 +81,12 @@ export const useDesktopMenuSections = (): MenuItem[] => {
                     id: 'nodes-management'
                 },
                 {
+                    name: t('constants.inbounds'),
+                    href: ROUTES.DASHBOARD.MANAGEMENT.INBOUNDS,
+                    icon: TbTag,
+                    id: 'inbounds'
+                },
+                {
                     name: `${t('constants.node-plugins')} β`,
                     href: ROUTES.DASHBOARD.MANAGEMENT.NODE_PLUGINS.ROOT,
                     icon: TbPackage,
@@ -116,12 +122,6 @@ export const useDesktopMenuSections = (): MenuItem[] => {
                     href: ROUTES.DASHBOARD.MANAGEMENT.CONFIG_PROFILES,
                     icon: XrayLogo,
                     id: 'config-profiles'
-                },
-                {
-                    name: t('constants.inbounds'),
-                    href: ROUTES.DASHBOARD.MANAGEMENT.INBOUNDS,
-                    icon: TbTag,
-                    id: 'inbounds'
                 }
             ]
         },

@@ -77,12 +77,6 @@ export const useMobileMenuSections = (): MenuItem[] => {
                     id: 'config-profiles'
                 },
                 {
-                    name: t('constants.inbounds'),
-                    href: ROUTES.DASHBOARD.MANAGEMENT.INBOUNDS,
-                    icon: TbTag,
-                    id: 'inbounds'
-                },
-                {
                     name: t('constants.hosts'),
                     href: ROUTES.DASHBOARD.MANAGEMENT.HOSTS,
                     icon: PiListChecks,
@@ -99,6 +93,12 @@ export const useMobileMenuSections = (): MenuItem[] => {
                             href: ROUTES.DASHBOARD.MANAGEMENT.NODES,
                             icon: HiServer,
                             id: 'management'
+                        },
+                        {
+                            name: t('constants.inbounds'),
+                            href: ROUTES.DASHBOARD.MANAGEMENT.INBOUNDS,
+                            icon: TbTag,
+                            id: 'inbounds'
                         },
                         {
                             name: `${t('constants.node-plugins')} β`,
