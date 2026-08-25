@@ -146,7 +146,12 @@ const SshTerminalWindow = (props: IWindowProps) => {
 
         setIsMinimized(next)
 
-        if (next) return
+        if (next) {
+            setIsMaximized(false)
+            commitGeometry({ isMaximized: false })
+
+            return
+        }
 
         const { height, left, top, width } = pendingGeometryRef.current
         const nextLeft = Math.max(0, Math.min(left, window.innerWidth - width - CONSTRAIN_OFFSET))
@@ -156,6 +161,12 @@ const SshTerminalWindow = (props: IWindowProps) => {
 
         setWindowPositionRef.current?.({ left: nextLeft, top: nextTop })
         commitGeometry({ left: nextLeft, top: nextTop })
+    }
+
+    const handleHeaderDoubleClick = (event: React.MouseEvent<HTMLDivElement>) => {
+        if ((event.target as Element).closest('button')) return
+
+        toggleMinimized()
     }
 
     const toggleMaximized = () => {
@@ -515,7 +526,7 @@ const SshTerminalWindow = (props: IWindowProps) => {
             <Group
                 className={classes.header}
                 gap="xs"
-                onDoubleClick={toggleMinimized}
+                onDoubleClick={handleHeaderDoubleClick}
                 wrap="nowrap"
             >
                 <TrafficLights
