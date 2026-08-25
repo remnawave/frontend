@@ -1,12 +1,14 @@
-import { Alert, Anchor, Button, Group, PinInput, Stack, Text, Textarea } from '@mantine/core'
-import { useRef, useState } from 'react'
+import { Alert, Anchor, Button, Group, Stack, Text, Textarea } from '@mantine/core'
+import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { TbAlertTriangle, TbBook, TbLock, TbLockOpen } from 'react-icons/tb'
 
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { SectionCard } from '@shared/ui/section-card'
 
-import { isValidSeedPhrase } from '@entities/ssh-vault'
+import { describeVaultError, isValidSeedPhrase } from '@entities/ssh-vault'
+
+import { PasscodeInput } from './passcode-input'
 
 interface IProps {
     attemptsLeft: number
@@ -32,13 +34,13 @@ export const VaultUnlockScreen = (props: IProps) => {
     const [passcode, setPasscode] = useState('')
     const [phrase, setPhrase] = useState('')
     const [passcodeError, setPasscodeError] = useState<null | string>(null)
+    const [didSpendAttempt, setDidSpendAttempt] = useState(false)
     const [phraseError, setPhraseError] = useState<null | string>(null)
     const [isBusy, setIsBusy] = useState(false)
 
-    const firstCellRef = useRef<HTMLInputElement | null>(null)
-
     const submitPasscode = async (value: string) => {
         setPasscodeError(null)
+        setDidSpendAttempt(false)
         setIsBusy(true)
 
         try {
@@ -46,8 +48,11 @@ export const VaultUnlockScreen = (props: IProps) => {
             if (!unlocked) {
                 setPasscode('')
                 setPasscodeError(t('node-ssh.passcode-wrong'))
-                requestAnimationFrame(() => firstCellRef.current?.focus())
+                setDidSpendAttempt(true)
             }
+        } catch (error) {
+            setPasscode('')
+            setPasscodeError(describeVaultError(error))
         } finally {
             setIsBusy(false)
         }
@@ -65,6 +70,8 @@ export const VaultUnlockScreen = (props: IProps) => {
         try {
             const unlocked = await onUnlockWithPhrase(phrase)
             if (!unlocked) setPhraseError(t('node-ssh.seed-mismatch'))
+        } catch (error) {
+            setPhraseError(describeVaultError(error))
         } finally {
             setIsBusy(false)
         }
@@ -85,24 +92,21 @@ export const VaultUnlockScreen = (props: IProps) => {
                 </SectionCard.Section>
                 <SectionCard.Section>
                     <Stack align="center" gap="md">
-                        <PinInput
+                        <PasscodeInput
                             autoFocus
                             disabled={isBusy}
                             error={Boolean(passcodeError)}
                             length={passcodeLength}
-                            mask
-                            placeholder=""
                             onChange={setPasscode}
                             onComplete={(value) => void submitPasscode(value)}
-                            ref={firstCellRef}
-                            size="md"
                             value={passcode}
                         />
 
                         {passcodeError && (
                             <Text c="red" size="xs" ta="center">
-                                {passcodeError} ·{' '}
-                                {t('node-ssh.passcode-attempts', { count: attemptsLeft })}
+                                {passcodeError}
+                                {didSpendAttempt &&
+                                    ` · ${t('node-ssh.passcode-attempts', { count: attemptsLeft })}`}
                             </Text>
                         )}
 

@@ -108,6 +108,11 @@ interface IActions {
 }
 
 export const VAULT_DEVICE_KEY_MISSING = 'vault-device-key-missing'
+
+export const describeVaultError = (error: unknown): string =>
+    error instanceof Error && error.message !== VAULT_DEVICE_KEY_MISSING
+        ? error.message
+        : 'Vault is temporarily unavailable'
 const VAULT_AAD = 'rw-vault-v1'
 const PASSCODE_AAD = 'rw-vault-passcode-v1'
 
