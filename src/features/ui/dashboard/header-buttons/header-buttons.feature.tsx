@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router'
 
 import { clearQueryClient } from '@shared/api'
 import { ROUTES } from '@shared/constants'
+import { logoutEvents } from '@shared/emitters'
 import { resetAllStores } from '@shared/hocs/store-wrapper'
 import { useAuth } from '@shared/hooks'
 import { LanguagePicker } from '@shared/ui/language-picker/language-picker.shared'
@@ -15,6 +16,7 @@ export const HeaderButtons = () => {
     const navigate = useNavigate()
 
     const handleLogout = () => {
+        logoutEvents.emit()
         setIsAuthenticated(false)
         removeToken()
         resetAllStores()

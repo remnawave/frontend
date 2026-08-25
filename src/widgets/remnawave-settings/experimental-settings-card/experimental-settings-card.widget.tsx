@@ -2,7 +2,7 @@ import { Checkbox, Group, Stack, Text, ThemeIcon, ThemeIconProps } from '@mantin
 import { TFunction } from 'i18next'
 import { ComponentType } from 'react'
 import { useTranslation } from 'react-i18next'
-import { TbFlask, TbLayoutSidebar, TbPlugConnected } from 'react-icons/tb'
+import { TbFlask, TbLayoutSidebar, TbPlugConnected, TbTerminal2 } from 'react-icons/tb'
 
 import { useIsMobile } from '@shared/hooks'
 import { SettingsCardShared } from '@shared/ui/settings-card'
@@ -36,6 +36,13 @@ const getExperimentalFeatures = (t: TFunction): IExperimentalFeatureItem[] => [
         feature: 'nodeIntegrations',
         IconComponent: TbPlugConnected,
         label: t('node-integrations.modal.title')
+    },
+    {
+        color: 'cyan',
+        desktopOnly: true,
+        feature: 'sshTerminal',
+        IconComponent: TbTerminal2,
+        label: t('node-ssh.title')
     }
 ]
 

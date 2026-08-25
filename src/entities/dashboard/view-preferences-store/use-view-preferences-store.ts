@@ -13,7 +13,8 @@ const LEGACY_LAYOUT_STYLE = 'sidebar'
 
 const initialExperimental: IExperimentalFeatures = {
     legacyLayoutStyle: false,
-    nodeIntegrations: false
+    nodeIntegrations: false,
+    sshTerminal: false
 }
 
 const initialState: IState = {
@@ -74,7 +75,16 @@ export const useViewPreferencesStore = create<IActions & IState>()(
                 hostsViewMode: state.hostsViewMode,
                 hostsActiveTag: state.hostsActiveTag
             }),
-            migrate: migrateState
+            migrate: migrateState,
+            merge: (persistedState, currentState) => {
+                const state = (persistedState ?? {}) as Partial<IState>
+
+                return {
+                    ...currentState,
+                    ...state,
+                    experimental: { ...currentState.experimental, ...state.experimental }
+                }
+            }
         }
     )
 )

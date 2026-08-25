@@ -1,6 +1,8 @@
 // oxlint-disable
 import { Drawer, DrawerOverlay } from '@mantine/core'
 
+import { scrollLockShards } from '@shared/utils/scroll-lock-shards'
+
 import classes from './drawer.module.css'
 
 export default {
@@ -11,6 +13,7 @@ export default {
             body: classes.drawerBody
         },
         defaultProps: {
+            removeScrollProps: { shards: scrollLockShards },
             radius: 'md'
         }
     }),

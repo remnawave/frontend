@@ -111,6 +111,10 @@ export default defineConfig({
                         {
                             name: 'tanstack',
                             test: /node_modules[\\/]@tanstack[\\/](react-query|react-table|react-virtual)[\\/]/
+                        },
+                        {
+                            name: 'xterm',
+                            test: /node_modules[\\/]@xterm[\\/]/
                         }
                     ]
                 }

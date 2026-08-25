@@ -34,7 +34,8 @@ import {
     NodesUsageStatsModal,
     NodeInboundsHostsDrawer,
     NodeUsageStatsDrawer,
-    NodeGeocheckModal
+    NodeGeocheckModal,
+    NodeSshTerminalWindow
 } from './nodes'
 import { PasskeysDrawer } from './remnawave-settings'
 import { SharedListEditorModal, SharedListsModal } from './shared-lists'
@@ -96,6 +97,7 @@ export const MODAL_REGISTRY = {
     nodes_nodesConfigProfilesDrawer: NodesConfigProfilesDrawer,
     nodes_nodeInboundsHostsDrawer: NodeInboundsHostsDrawer,
     nodes_nodeGeocheckModal: NodeGeocheckModal,
+    nodes_nodeSshTerminal: NodeSshTerminalWindow,
 
     internalSquads_internalSquadsInboundsDrawer: InternalSquadsInboundsDrawer,
     internalSquads_internalSquadAccessibleNodesDrawer: InternalSquadAccessibleNodesDrawer,

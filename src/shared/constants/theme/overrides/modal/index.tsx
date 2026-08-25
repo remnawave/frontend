@@ -1,6 +1,8 @@
 // oxlint-disable
 import { Modal } from '@mantine/core'
 
+import { scrollLockShards } from '@shared/utils/scroll-lock-shards'
+
 import classes from './modal.module.css'
 
 export default {
@@ -12,6 +14,7 @@ export default {
             content: classes.modalContent
         },
         defaultProps: {
+            removeScrollProps: { shards: scrollLockShards },
             radius: 'md',
             centered: true
         }
