@@ -22,7 +22,7 @@ import { Props } from './interfaces'
 
 export const InboundsPageComponent = (props: Props) => {
     const { t } = useTranslation()
-    const { inbounds, configProfiles, nodes } = props
+    const { inbounds, configProfiles, internalSquads, nodes } = props
 
     const viewMode = useInboundsViewMode()
     const { setInboundsViewMode } = useViewPreferencesStoreActions()
@@ -66,6 +66,7 @@ export const InboundsPageComponent = (props: Props) => {
                             <InboundsDataTableWidget
                                 configProfiles={configProfiles}
                                 inbounds={inbounds}
+                                internalSquads={internalSquads}
                                 nodeAggregateByInboundUuid={nodeAggregateByInboundUuid}
                             />
                         </motion.div>

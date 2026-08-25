@@ -1,7 +1,11 @@
 import { DataTable, type DataTableSortStatus, useDataTableColumns } from '@kastov/mantine-datatable'
 import { Box, Stack, Text } from '@mantine/core'
 import { modals } from '@mantine/modals'
-import { GetAllInboundsCommand, GetConfigProfilesCommand } from '@remnawave/backend-contract'
+import {
+    GetAllInboundsCommand,
+    GetConfigProfilesCommand,
+    GetInternalSquadsCommand
+} from '@remnawave/backend-contract'
 import { IInboundNodeAggregate } from '@widgets/dashboard/inbounds/inbound-status-tile/get-inbound-node-status.util'
 import { githubDarkTheme, JsonEditor } from 'json-edit-react'
 import { memo, useMemo, useState } from 'react'
@@ -59,11 +63,17 @@ const openRawInboundModal = (inbound: InboundRow) => {
 interface IProps {
     inbounds: Inbound[] | undefined
     configProfiles: GetConfigProfilesCommand.Response['response']['configProfiles'] | undefined
+    internalSquads: GetInternalSquadsCommand.Response['response']['internalSquads'] | undefined
     nodeAggregateByInboundUuid: Map<string, IInboundNodeAggregate>
 }
 
 export const InboundsDataTableWidget = memo((props: IProps) => {
-    const { inbounds, configProfiles: configProfilesProp, nodeAggregateByInboundUuid } = props
+    const {
+        inbounds,
+        configProfiles: configProfilesProp,
+        internalSquads: internalSquadsProp,
+        nodeAggregateByInboundUuid
+    } = props
     const { t } = useTranslation()
 
     const [sortStatus, setSortStatus] =
@@ -87,6 +97,7 @@ export const InboundsDataTableWidget = memo((props: IProps) => {
     }
 
     const configProfiles = configProfilesProp ?? []
+    const internalSquads = internalSquadsProp ?? []
 
     const availableConfigProfiles = useMemo(
         () => configProfiles.map((profile) => ({ label: profile.name, value: profile.uuid })),
@@ -110,6 +121,7 @@ export const InboundsDataTableWidget = memo((props: IProps) => {
     const tableColumns = getInboundsTableColumns(
         t,
         configProfiles,
+        internalSquads,
         nodeAggregateByInboundUuid,
         openRawInboundModal,
         filters

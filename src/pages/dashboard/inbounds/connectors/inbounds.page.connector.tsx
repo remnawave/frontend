@@ -1,4 +1,9 @@
-import { useGetAllInbounds, useGetConfigProfiles, useGetNodes } from '@shared/api/hooks'
+import {
+    useGetAllInbounds,
+    useGetConfigProfiles,
+    useGetInternalSquads,
+    useGetNodes
+} from '@shared/api/hooks'
 import { LoadingScreen } from '@shared/ui'
 import { sToMs } from '@shared/utils/time-utils'
 
@@ -12,6 +17,9 @@ export function InboundsPageConnector() {
         }
     })
     const { data: configProfilesData, isLoading: isConfigProfilesLoading } = useGetConfigProfiles()
+    const { data: internalSquadsData, isLoading: isInternalSquadsLoading } = useGetInternalSquads(
+        {}
+    )
     const { data: nodes, isLoading: isNodesLoading } = useGetNodes({
         rQueryParams: {
             enabled: true,
@@ -22,9 +30,11 @@ export function InboundsPageConnector() {
     if (
         isInboundsLoading ||
         isConfigProfilesLoading ||
+        isInternalSquadsLoading ||
         isNodesLoading ||
         !inboundsData ||
         !configProfilesData ||
+        !internalSquadsData ||
         !nodes
     ) {
         return <LoadingScreen />
@@ -34,6 +44,7 @@ export function InboundsPageConnector() {
         <InboundsPageComponent
             configProfiles={configProfilesData.configProfiles}
             inbounds={inboundsData.inbounds}
+            internalSquads={internalSquadsData.internalSquads}
             nodes={nodes}
         />
     )

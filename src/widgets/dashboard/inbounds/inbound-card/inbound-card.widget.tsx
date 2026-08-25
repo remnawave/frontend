@@ -89,9 +89,9 @@ export const InboundCardWidget = memo((props: IProps) => {
                                     {inbound.tag}
                                 </Text>
                             </Flex>
-                            <Badge size="sm" variant="outline">
+                            <Text c="dimmed" size="sm">
                                 {inbound.type}
-                            </Badge>
+                            </Text>
                         </Flex>
                     </div>
 
@@ -103,7 +103,7 @@ export const InboundCardWidget = memo((props: IProps) => {
 
                     <div>
                         <Flex align="center" gap={4}>
-                            <TbCirclesRelation className={classes.icon} size={14} />
+                            <TbCirclesRelation color="var(--mantine-color-blue-5)" size={18} />
                             <Text c="dimmed" size="sm">
                                 {inbound.activeSquads.length}
                             </Text>
@@ -125,14 +125,14 @@ export const InboundCardWidget = memo((props: IProps) => {
                     </Flex>
 
                     <Flex align="center" gap="xs" justify="space-between">
-                        <Badge size="sm" variant="outline">
+                        <Text c="dimmed" size="xs">
                             {inbound.type}
-                        </Badge>
+                        </Text>
                         <Text c="dimmed" size="xs" truncate="end">
                             {profileName ?? inbound.profileUuid}
                         </Text>
                         <Flex align="center" gap={4}>
-                            <TbCirclesRelation className={classes.icon} size={14} />
+                            <TbCirclesRelation color="var(--mantine-color-blue-5)" size={18} />
                             <Text c="dimmed" size="xs">
                                 {inbound.activeSquads.length}
                             </Text>

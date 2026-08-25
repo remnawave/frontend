@@ -1,6 +1,10 @@
 import { DataTableColumn } from '@kastov/mantine-datatable'
 import { ActionIcon, Badge, Group, MultiSelect, Text } from '@mantine/core'
-import { GetAllInboundsCommand, GetConfigProfilesCommand } from '@remnawave/backend-contract'
+import {
+    GetAllInboundsCommand,
+    GetConfigProfilesCommand,
+    GetInternalSquadsCommand
+} from '@remnawave/backend-contract'
 import {
     EMPTY_INBOUND_NODE_AGGREGATE,
     IInboundNodeAggregate
@@ -8,8 +12,9 @@ import {
 import { InboundStatusTileWidget } from '@widgets/dashboard/inbounds/inbound-status-tile/inbound-status-tile.widget'
 import ColorHash from 'color-hash'
 import { TFunction } from 'i18next'
+import sortBy from 'lodash/sortBy'
 import { PiUsersDuotone } from 'react-icons/pi'
-import { TbCirclesRelation, TbSearch, TbTag } from 'react-icons/tb'
+import { TbSearch, TbTag } from 'react-icons/tb'
 
 import { formatInt } from '@shared/utils/misc'
 
@@ -30,10 +35,13 @@ const colorHash = new ColorHash({ lightness: 0.7, saturation: 0.6 })
 export function getInboundsTableColumns(
     t: TFunction,
     configProfiles: GetConfigProfilesCommand.Response['response']['configProfiles'],
+    internalSquads: GetInternalSquadsCommand.Response['response']['internalSquads'],
     nodeAggregateByInboundUuid: Map<string, IInboundNodeAggregate>,
     handleViewRawInbound: (inbound: InboundRow) => void,
     filters: InboundsTableFilters
 ): DataTableColumn<InboundRow>[] {
+    const squadNameByUuid = new Map(internalSquads.map((squad) => [squad.uuid, squad.name]))
+
     return [
         {
             accessor: 'tag',
@@ -104,11 +112,7 @@ export function getInboundsTableColumns(
                 />
             ),
             filtering: filters.selectedTypes.length > 0,
-            render: ({ type }) => (
-                <Badge size="sm" variant="outline">
-                    {type}
-                </Badge>
-            )
+            render: ({ type }) => <Text size="sm">{type}</Text>
         },
         {
             accessor: 'profileUuid',
@@ -134,15 +138,17 @@ export function getInboundsTableColumns(
             accessor: 'activeSquads',
             sortable: true,
             title: t('inbounds-datatable.widget.squads'),
-            render: ({ activeSquads }) => (
-                <Badge
-                    leftSection={<TbCirclesRelation size={14} />}
-                    size="lg"
-                    variant="transparent"
-                >
-                    {activeSquads.length}
-                </Badge>
-            )
+            render: ({ activeSquads }) => {
+                const names = sortBy(
+                    activeSquads.map((uuid) => squadNameByUuid.get(uuid) ?? uuid)
+                )
+
+                return (
+                    <Text size="sm" truncate="end">
+                        {names.join(', ') || '-'}
+                    </Text>
+                )
+            }
         }
     ]
 }
