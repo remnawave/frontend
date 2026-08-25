@@ -2315,8 +2315,8 @@
     }
   },
   "node-ssh": {
-    "title": "SSH terminal",
-    "key-imported": "your key",
+    "title": "SSH терминал",
+    "key-imported": "ваш ключ",
     "key-description-imported": "Signing uses the key you imported; it never leaves your browser. Make sure its public half is in authorized_keys on the server.",
     "key-use-own": "Use my own key",
     "key-generate-new": "Generate a new key",
@@ -2392,6 +2392,9 @@
     "snippet-name": "Name",
     "snippet-command": "Command",
     "snippet-add": "Add snippet",
-    "snippet-edit": "Edit snippet"
+    "snippet-edit": "Edit snippet",
+    "connections-title": "Saved connections",
+    "connections-empty": "No saved connections yet",
+    "connections-current": "Current"
   }
 }
