@@ -174,9 +174,16 @@ const SshTerminalWindow = (props: IWindowProps) => {
 
     const { data: nodes } = useGetNodes()
 
+    const closeOverlays = () => {
+        setSavedConnections(null)
+        setIsEditingSnippets(false)
+        setIsImportingKey(false)
+    }
+
     const openSavedConnections = async () => {
         const profiles = await vaultActions.listProfiles()
 
+        closeOverlays()
         setSavedConnections(buildSavedConnections(nodes ?? [], profiles, node.uuid))
     }
 
@@ -546,6 +553,7 @@ const SshTerminalWindow = (props: IWindowProps) => {
                             color={isManagingVault ? 'cyan' : 'gray'}
                             onClick={() => {
                                 teardown()
+                                closeOverlays()
                                 setStage('setup')
                                 setIsManagingVault((value) => !value)
                             }}
@@ -561,6 +569,7 @@ const SshTerminalWindow = (props: IWindowProps) => {
                                 color="gray"
                                 onClick={() => {
                                     teardown()
+                                    closeOverlays()
                                     setStage('setup')
                                 }}
                                 size="sm"
@@ -627,7 +636,10 @@ const SshTerminalWindow = (props: IWindowProps) => {
 
             {stage === 'session' && !isMinimized && (
                 <SnippetsBar
-                    onManage={() => setIsEditingSnippets(true)}
+                    onManage={() => {
+                        closeOverlays()
+                        setIsEditingSnippets(true)
+                    }}
                     onRun={(snippet) => connectionRef.current?.write(`${snippet.command}\n`)}
                     snippets={snippets}
                 />
