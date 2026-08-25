@@ -7,6 +7,7 @@ import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { TbCalendar, TbChartArcs, TbRefresh, TbUsers } from 'react-icons/tb'
 
+import { NodeUsersSparklineCardWidget } from '@shared/_modals/nodes/node-usage-stats/usage-sparkline-card'
 import { showModal } from '@shared/_modals/show-modal'
 import { useNiceMantineModal } from '@shared/_modals/use-nice-modal'
 import { useGetInboundTopUsersUsage, useResolveUser } from '@shared/api/hooks'
@@ -135,7 +136,7 @@ export const InboundUsageDrawer = NiceModal.create((props: IProps) => {
             }
         >
             <Stack gap="md">
-                <Group gap="xs" justify="flex-end" wrap="nowrap">
+                <Group gap="xs" justify="space-between" wrap="nowrap">
                     <NativeSelect
                         data={TOP_USERS_LIMIT_OPTIONS}
                         leftSection={<TbUsers size="20px" />}
@@ -144,9 +145,7 @@ export const InboundUsageDrawer = NiceModal.create((props: IProps) => {
                         value={String(topUsersLimit)}
                         miw="fit-content"
                     />
-                </Group>
 
-                <Group gap="xs" justify="flex-end" wrap="nowrap">
                     <DatePickerInput
                         allowSingleDateInRange
                         dropdownType="modal"
@@ -215,7 +214,6 @@ export const InboundUsageDrawer = NiceModal.create((props: IProps) => {
                         ]}
                         size="md"
                         miw={0}
-                        w="100%"
                         styles={{
                             calendarHeaderLevel: {
                                 justifyContent: 'flex-end'
@@ -226,8 +224,7 @@ export const InboundUsageDrawer = NiceModal.create((props: IProps) => {
                             input: {
                                 whiteSpace: 'nowrap',
                                 overflow: 'hidden',
-                                textOverflow: 'ellipsis',
-                                textAlign: 'center'
+                                textOverflow: 'ellipsis'
                             }
                         }}
                         type="range"
@@ -235,6 +232,11 @@ export const InboundUsageDrawer = NiceModal.create((props: IProps) => {
                         valueFormat="DD MMM, YYYY"
                     />
                 </Group>
+
+                <NodeUsersSparklineCardWidget
+                    isLoading={isLoading}
+                    sparklineData={topUsersUsage?.sparklineData}
+                />
 
                 <TopLeaderboardCardShared
                     emptyText={t('node-users-usage-drawer.widget.no-data-available')}
