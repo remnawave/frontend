@@ -18,7 +18,7 @@ import {
 import ColorHash from 'color-hash'
 import { githubDarkTheme, JsonEditor } from 'json-edit-react'
 import { useMemo } from 'react'
-import { PiCheck, PiCopy, PiTag, PiUsers, PiUsersDuotone } from 'react-icons/pi'
+import { PiCheck, PiCopy, PiTag, PiUsers } from 'react-icons/pi'
 import { TbChevronRight, TbCirclesRelation, TbTag } from 'react-icons/tb'
 
 import { showModal } from '@shared/_modals/show-modal'
@@ -164,28 +164,6 @@ export function ConfigProfileInboundsTree(props: IProps) {
                         </Text>
 
                         <Group gap={0} ml="auto" style={{ flexShrink: 0 }} wrap="nowrap">
-                            <Badge
-                                color={
-                                    meta.inbound.onlineByNode.some((node) => node.count > 0)
-                                        ? 'teal'
-                                        : 'gray'
-                                }
-                                leftSection={<PiUsersDuotone size={14} />}
-                                onClick={(event) => {
-                                    event.stopPropagation()
-                                    showModal('configProfiles_inboundUsageDrawer', {
-                                        inboundUuid: meta.inbound.uuid
-                                    })
-                                }}
-                                size="lg"
-                                style={{ cursor: 'pointer' }}
-                                variant="outline"
-                            >
-                                {meta.inbound.onlineByNode.reduce(
-                                    (acc, node) => acc + node.count,
-                                    0
-                                )}
-                            </Badge>
                             <Badge
                                 leftSection={<TbCirclesRelation size={18} />}
                                 size="lg"
