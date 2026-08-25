@@ -94,7 +94,10 @@ export const InboundUsageDrawer = NiceModal.create((props: IProps) => {
 
     const pages = inboundUsage?.pages ?? []
     const usageUsers = pages.flatMap((page) => page.users)
-    const onlineUsersCount = pages.at(-1)?.onlineUsersCount ?? 0
+    const onlineUsersCount = (pages.at(-1)?.onlineByNode ?? []).reduce(
+        (acc, node) => acc + node.count,
+        0
+    )
 
     const handleViewUser = async (user: ITopLeaderboardItem) => {
         showModal('users_viewUserModal', { userId: Number(user.name) })
@@ -260,7 +263,6 @@ export const InboundUsageDrawer = NiceModal.create((props: IProps) => {
                     onItemClick={(user) => {
                         handleViewUser(user)
                     }}
-                    ordered={false}
                     skeletonCount={11}
                     virtualized
                 />

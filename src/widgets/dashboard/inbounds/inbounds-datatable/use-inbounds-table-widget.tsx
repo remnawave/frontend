@@ -23,6 +23,7 @@ export interface InboundsTableFilters {
 }
 
 type Inbound = GetAllInboundsCommand.Response['response']['inbounds'][number]
+export type InboundRow = Inbound & { onlineUsersCount: number }
 
 const colorHash = new ColorHash({ lightness: 0.7, saturation: 0.6 })
 
@@ -30,9 +31,9 @@ export function getInboundsTableColumns(
     t: TFunction,
     configProfiles: GetConfigProfilesCommand.Response['response']['configProfiles'],
     nodeAggregateByInboundUuid: Map<string, IInboundNodeAggregate>,
-    handleViewRawInbound: (inbound: Inbound) => void,
+    handleViewRawInbound: (inbound: InboundRow) => void,
     filters: InboundsTableFilters
-): DataTableColumn<Inbound>[] {
+): DataTableColumn<InboundRow>[] {
     return [
         {
             accessor: 'tag',

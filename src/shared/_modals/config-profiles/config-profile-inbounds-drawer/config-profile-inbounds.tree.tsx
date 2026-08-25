@@ -165,7 +165,11 @@ export function ConfigProfileInboundsTree(props: IProps) {
 
                         <Group gap={0} ml="auto" style={{ flexShrink: 0 }} wrap="nowrap">
                             <Badge
-                                color={meta.inbound.onlineUsersCount > 0 ? 'teal' : 'gray'}
+                                color={
+                                    meta.inbound.onlineByNode.some((node) => node.count > 0)
+                                        ? 'teal'
+                                        : 'gray'
+                                }
                                 leftSection={<PiUsersDuotone size={14} />}
                                 onClick={(event) => {
                                     event.stopPropagation()
@@ -177,7 +181,10 @@ export function ConfigProfileInboundsTree(props: IProps) {
                                 style={{ cursor: 'pointer' }}
                                 variant="outline"
                             >
-                                {meta.inbound.onlineUsersCount}
+                                {meta.inbound.onlineByNode.reduce(
+                                    (acc, node) => acc + node.count,
+                                    0
+                                )}
                             </Badge>
                             <Badge
                                 leftSection={<TbCirclesRelation size={18} />}

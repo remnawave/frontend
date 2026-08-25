@@ -29,7 +29,8 @@ export const InboundCardWidget = memo((props: IProps) => {
     const { inbound, isMobile, profileName, nodeAggregate, onOpenRawInbound, onOpenUsage } = props
 
     const colorHash = useMemo(() => new ColorHash({ lightness: 0.7, saturation: 0.6 }), [])
-    const isOnline = inbound.onlineUsersCount > 0
+    const onlineUsersCount = inbound.onlineByNode.reduce((acc, curr) => acc + curr.count, 0)
+    const isOnline = onlineUsersCount > 0
     const { backgroundColor, borderColor, boxShadow } = getInboundCardColors(nodeAggregate.status)
 
     const onlineBadge = (
@@ -40,7 +41,7 @@ export const InboundCardWidget = memo((props: IProps) => {
             size="lg"
             variant="outline"
         >
-            {formatInt(inbound.onlineUsersCount)}
+            {formatInt(onlineUsersCount)}
         </Badge>
     )
 

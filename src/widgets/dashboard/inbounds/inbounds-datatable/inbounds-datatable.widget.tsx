@@ -14,17 +14,21 @@ import { usePreventTableBackScroll } from '@shared/hooks'
 import { DataTableControls, sortRecords } from '@shared/ui'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 
-import { getInboundsTableColumns, type InboundsTableFilters } from './use-inbounds-table-widget'
+import {
+    getInboundsTableColumns,
+    type InboundRow,
+    type InboundsTableFilters
+} from './use-inbounds-table-widget'
 
 type Inbound = GetAllInboundsCommand.Response['response']['inbounds'][number]
 
 const INBOUNDS_CACHE_KEY = 'inbounds-datatable-v1'
-const DEFAULT_SORT_STATUS: DataTableSortStatus<Inbound> = {
+const DEFAULT_SORT_STATUS: DataTableSortStatus<InboundRow> = {
     columnAccessor: 'tag',
     direction: 'asc'
 }
 
-const openRawInboundModal = (inbound: Inbound) => {
+const openRawInboundModal = (inbound: InboundRow) => {
     modals.open({
         children: (
             <Box>
@@ -62,13 +66,23 @@ export const InboundsDataTableWidget = memo((props: IProps) => {
     const { inbounds, configProfiles: configProfilesProp, nodeAggregateByInboundUuid } = props
     const { t } = useTranslation()
 
-    const [sortStatus, setSortStatus] = useState<DataTableSortStatus<Inbound>>(DEFAULT_SORT_STATUS)
+    const [sortStatus, setSortStatus] =
+        useState<DataTableSortStatus<InboundRow>>(DEFAULT_SORT_STATUS)
     const [selectedConfigProfiles, setSelectedConfigProfiles] = useState<string[]>([])
     const [selectedTypes, setSelectedTypes] = useState<string[]>([])
 
     usePreventTableBackScroll()
 
-    const handleRowClick = (inbound: Inbound) => {
+    const rows: InboundRow[] = useMemo(
+        () =>
+            (inbounds ?? []).map((inbound) => ({
+                ...inbound,
+                onlineUsersCount: inbound.onlineByNode.reduce((acc, node) => acc + node.count, 0)
+            })),
+        [inbounds]
+    )
+
+    const handleRowClick = (inbound: InboundRow) => {
         showModal('configProfiles_inboundUsageDrawer', { inboundUuid: inbound.uuid })
     }
 
@@ -117,9 +131,7 @@ export const InboundsDataTableWidget = memo((props: IProps) => {
     ) as Record<string, string>
 
     const filteredAndSortedInbounds = useMemo(() => {
-        if (!inbounds) return []
-
-        const filtered = inbounds.filter((inbound) => {
+        const filtered = rows.filter((inbound) => {
             if (
                 selectedConfigProfiles.length > 0 &&
                 !selectedConfigProfiles.includes(inbound.profileUuid)
@@ -135,7 +147,7 @@ export const InboundsDataTableWidget = memo((props: IProps) => {
         })
 
         return sortRecords(filtered, sortStatus)
-    }, [inbounds, selectedConfigProfiles, selectedTypes, sortStatus])
+    }, [rows, selectedConfigProfiles, selectedTypes, sortStatus])
 
     if (!inbounds) return null
 

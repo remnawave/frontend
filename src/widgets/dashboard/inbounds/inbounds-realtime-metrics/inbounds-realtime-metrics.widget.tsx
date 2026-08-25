@@ -21,14 +21,22 @@ export function InboundsRealtimeMetricsWidget(props: IProps) {
         {
             IconComponent: TbUsers,
             title: t('inbounds-realtime-metrics.widget.users-online'),
-            value: inbounds?.reduce((acc, curr) => acc + (curr.onlineUsersCount ?? 0), 0) ?? 0,
+            value:
+                inbounds?.reduce(
+                    (acc, curr) =>
+                        acc + curr.onlineByNode.reduce((nodeAcc, node) => nodeAcc + node.count, 0),
+                    0
+                ) ?? 0,
             iconVariant: 'soft',
             iconColor: 'cyan'
         },
         {
             IconComponent: PiPulse,
             title: t('inbounds-realtime-metrics.widget.active-inbounds'),
-            value: inbounds?.filter((inbound) => inbound.onlineUsersCount > 0).length ?? 0,
+            value:
+                inbounds?.filter((inbound) =>
+                    inbound.onlineByNode.some((node) => node.count > 0)
+                ).length ?? 0,
             iconVariant: 'soft',
             iconColor: 'teal'
         },
