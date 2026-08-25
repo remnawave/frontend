@@ -19,16 +19,11 @@ export function InboundsRealtimeMetricsWidget(props: IProps) {
 
     const cards: IMetricCardProps[] = [
         {
-            IconComponent: TbUsers,
-            title: t('inbounds-realtime-metrics.widget.users-online'),
-            value:
-                inbounds?.reduce(
-                    (acc, curr) =>
-                        acc + curr.onlineByNode.reduce((nodeAcc, node) => nodeAcc + node.count, 0),
-                    0
-                ) ?? 0,
+            IconComponent: PiTagDuotone,
+            title: t('inbounds-realtime-metrics.widget.total-inbounds'),
+            value: inbounds?.length ?? 0,
             iconVariant: 'soft',
-            iconColor: 'cyan'
+            iconColor: 'indigo'
         },
         {
             IconComponent: PiPulse,
@@ -41,11 +36,16 @@ export function InboundsRealtimeMetricsWidget(props: IProps) {
             iconColor: 'teal'
         },
         {
-            IconComponent: PiTagDuotone,
-            title: t('inbounds-realtime-metrics.widget.total-inbounds'),
-            value: inbounds?.length ?? 0,
+            IconComponent: TbUsers,
+            title: t('inbounds-realtime-metrics.widget.users-online'),
+            value:
+                inbounds?.reduce(
+                    (acc, curr) =>
+                        acc + curr.onlineByNode.reduce((nodeAcc, node) => nodeAcc + node.count, 0),
+                    0
+                ) ?? 0,
             iconVariant: 'soft',
-            iconColor: 'indigo'
+            iconColor: 'cyan'
         }
     ]
 
