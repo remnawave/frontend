@@ -1,24 +1,33 @@
 import NiceModal, { useModal } from '@ebay/nice-modal-react'
-import { colorFromId } from '@kastov/uuid-color'
-import { ActionIcon, Badge, Group, Stack } from '@mantine/core'
+import { ActionIcon, Badge, Group, NativeSelect, Stack } from '@mantine/core'
 import { DatePickerInput, DatesRangeValue } from '@mantine/dates'
-import { useDebouncedState } from '@mantine/hooks'
+import { nprogress } from '@mantine/nprogress'
 import dayjs from 'dayjs'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { PiUsersDuotone } from 'react-icons/pi'
-import { TbCalendar, TbChartArcs, TbChartLine, TbRefresh } from 'react-icons/tb'
+import { TbCalendar, TbChartArcs, TbRefresh, TbUsers } from 'react-icons/tb'
 
 import { showModal } from '@shared/_modals/show-modal'
 import { useNiceMantineModal } from '@shared/_modals/use-nice-modal'
-import { useGetInboundUsageInfinite } from '@shared/api/hooks'
+import { useGetInboundTopUsersUsage, useResolveUser } from '@shared/api/hooks'
 import { CompoundDrawerShared } from '@shared/ui/compound-drawer/compound-drawer.shared'
-import { TrafficLimitInput } from '@shared/ui/forms/traffic-limit-input/traffic-limit-input'
 import { ITopLeaderboardItem, TopLeaderboardCardShared } from '@shared/ui/leaderboard-item-card'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { getDefaultDateRange } from '@shared/utils/time-utils'
 
-const DEFAULT_MIN_USAGE_THRESHOLD = 0
+const TOP_USERS_LIMIT_OPTIONS = [
+    { value: '5', label: 'Top 5' },
+    { value: '10', label: 'Top 10' },
+    { value: '30', label: 'Top 30' },
+    { value: '50', label: 'Top 50' },
+    { value: '100', label: 'Top 100' },
+    { value: '500', label: 'Top 500' },
+    { value: '1000', label: 'Top 1000' },
+    { value: '2000', label: 'Top 2000' }
+]
+
+const DEFAULT_TOP_USERS_LIMIT = 100
 
 interface IProps {
     inboundUuid: string
@@ -41,10 +50,7 @@ export const InboundUsageDrawer = NiceModal.create((props: IProps) => {
         defaultRange.start,
         defaultRange.end
     ])
-    const [minUsageThreshold, setMinUsageThreshold] = useDebouncedState<number>(
-        DEFAULT_MIN_USAGE_THRESHOLD,
-        500
-    )
+    const [topUsersLimit, setTopUsersLimit] = useState<number>(DEFAULT_TOP_USERS_LIMIT)
 
     const [queryRange, setQueryRange] = useState<{ end: string; start: string }>(defaultRange)
 
@@ -70,37 +76,41 @@ export const InboundUsageDrawer = NiceModal.create((props: IProps) => {
     }
 
     const {
-        data: inboundUsage,
+        data: topUsersUsage,
         isLoading,
         refetch,
-        isRefetching,
-        fetchNextPage,
-        hasNextPage,
-        isFetchingNextPage
-    } = useGetInboundUsageInfinite({
+        isRefetching
+    } = useGetInboundTopUsersUsage({
         route: {
             uuid: inboundUuid
         },
         query: {
             start: queryRange.start,
             end: queryRange.end,
-            limit: 250,
-            minTotalBytes: minUsageThreshold
+            topUsersLimit
         },
         rQueryParams: {
             enabled: Boolean(queryRange.start && queryRange.end)
         }
     })
 
-    const pages = inboundUsage?.pages ?? []
-    const usageUsers = pages.flatMap((page) => page.users)
-    const onlineUsersCount = (pages.at(-1)?.onlineByNode ?? []).reduce(
+    const onlineUsersCount = (topUsersUsage?.onlineByNode ?? []).reduce(
         (acc, node) => acc + node.count,
         0
     )
 
+    const { mutateAsync: resolveUser } = useResolveUser()
+
     const handleViewUser = async (user: ITopLeaderboardItem) => {
-        showModal('users_viewUserModal', { userId: Number(user.name) })
+        nprogress.start()
+        try {
+            const result = await resolveUser({ variables: { username: user.name } })
+            if (result.id) {
+                showModal('users_viewUserModal', { userId: result.id })
+            }
+        } finally {
+            nprogress.complete()
+        }
     }
 
     return (
@@ -143,15 +153,13 @@ export const InboundUsageDrawer = NiceModal.create((props: IProps) => {
         >
             <Stack gap="md">
                 <Group gap="xs" justify="flex-end" wrap="nowrap">
-                    <TrafficLimitInput
-                        hideControls
+                    <NativeSelect
+                        data={TOP_USERS_LIMIT_OPTIONS}
+                        leftSection={<TbUsers size="20px" />}
+                        onChange={(value) => setTopUsersLimit(Number(value.target.value))}
                         size="md"
-                        leftSection={<TbChartLine size={16} />}
-                        styles={{
-                            label: { fontWeight: 500 }
-                        }}
-                        onChange={(value) => setMinUsageThreshold(value ?? 0)}
-                        value={minUsageThreshold}
+                        value={String(topUsersLimit)}
+                        miw="fit-content"
                     />
                 </Group>
 
@@ -247,24 +255,17 @@ export const InboundUsageDrawer = NiceModal.create((props: IProps) => {
 
                 <TopLeaderboardCardShared
                     emptyText={t('node-users-usage-drawer.widget.no-data-available')}
-                    isFetchingMore={isFetchingNextPage}
                     isLoading={isLoading}
-                    items={usageUsers.map((user) => ({
-                        color: colorFromId(user.id),
-                        name: user.id.toString(),
-                        total: user.totalBytes
+                    items={topUsersUsage?.topUsers?.map((user) => ({
+                        color: user.color,
+                        name: user.username,
+                        total: user.total
                     }))}
                     maxHeight={500}
-                    onEndReached={() => {
-                        if (hasNextPage && !isFetchingNextPage) {
-                            fetchNextPage()
-                        }
-                    }}
                     onItemClick={(user) => {
                         handleViewUser(user)
                     }}
                     skeletonCount={11}
-                    virtualized
                 />
             </Stack>
         </CompoundDrawerShared>

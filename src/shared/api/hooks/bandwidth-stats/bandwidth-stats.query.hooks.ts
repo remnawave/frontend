@@ -5,6 +5,7 @@ import {
     GetStatsNodeUsersUsageCommand,
     GetStatsUserUsageCommand,
     GetInternalSquadUsageCommand,
+    GetInboundTopUsersUsageCommand,
     GetInboundUsageCommand
 } from '@remnawave/backend-contract'
 
@@ -46,6 +47,12 @@ export const bandwidthStatsQueryKeys = createQueryKeys('bandwidthStats', {
     }),
     getInboundUsageCommand: (
         params: GetInboundUsageCommand.RequestParam & GetInboundUsageCommand.RequestQuery
+    ) => ({
+        queryKey: [params]
+    }),
+    getInboundTopUsersUsageCommand: (
+        params: GetInboundTopUsersUsageCommand.RequestParam &
+            GetInboundTopUsersUsageCommand.RequestQuery
     ) => ({
         queryKey: [params]
     })
@@ -151,4 +158,17 @@ export const useGetInboundUsageInfinite = createGetInfiniteQueryHook({
         refetchOnMount: true
     },
     errorHandler: (error) => errorHandler(error, 'Get Inbound Usage (infinite)')
+})
+
+export const useGetInboundTopUsersUsage = createGetQueryHook({
+    endpoint: GetInboundTopUsersUsageCommand.TSQ_url,
+    responseSchema: GetInboundTopUsersUsageCommand.ResponseSchema,
+    requestQuerySchema: GetInboundTopUsersUsageCommand.RequestQuerySchema,
+    routeParamsSchema: GetInboundTopUsersUsageCommand.RequestParamSchema,
+    getQueryKey: ({ route, query }) =>
+        bandwidthStatsQueryKeys.getInboundTopUsersUsageCommand({ ...route!, ...query! }).queryKey,
+    rQueryParams: {
+        staleTime: sToMs(15)
+    },
+    errorHandler: (error) => errorHandler(error, 'Get Inbound Top Users Usage')
 })
