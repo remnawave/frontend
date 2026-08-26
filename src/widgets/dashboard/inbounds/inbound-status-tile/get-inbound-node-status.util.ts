@@ -49,26 +49,26 @@ export function getInboundCardColors(status: InboundNodeStatus): {
         return {
             backgroundColor: 'rgba(45, 212, 191, 0.15)',
             borderColor: 'rgba(45, 212, 191, 0.3)',
-            boxShadow: 'rgba(45, 212, 191, 0.2)'
+            boxShadow: '0 0 12px 0 rgba(45, 212, 191, 0.2)'
         }
     }
     if (status === 'connecting') {
         return {
             backgroundColor: 'rgba(245, 158, 11, 0.15)',
             borderColor: 'rgba(245, 158, 11, 0.3)',
-            boxShadow: 'rgba(245, 158, 11, 0.2)'
+            boxShadow: '0 0 12px 0 rgba(245, 158, 11, 0.2)'
         }
     }
     if (status === 'disconnected') {
         return {
             backgroundColor: 'rgba(239, 68, 68, 0.15)',
             borderColor: 'rgba(239, 68, 68, 0.3)',
-            boxShadow: 'rgba(239, 68, 68, 0.2)'
+            boxShadow: '0 0 12px 0 rgba(239, 68, 68, 0.2)'
         }
     }
     return {
         backgroundColor: 'rgba(107, 114, 128, 0.15)',
         borderColor: 'rgba(107, 114, 128, 0.3)',
-        boxShadow: 'rgba(107, 114, 128, 0.2)'
+        boxShadow: '0 0 12px 0 rgba(107, 114, 128, 0.2)'
     }
 }
