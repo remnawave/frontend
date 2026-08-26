@@ -33,11 +33,11 @@ export function ToggleNodeStatusButtonFeature(props: IProps) {
 
     if (node.isDisabled) {
         color = 'teal'
-        buttonLabel = t('common.enable')
+        buttonLabel = t('common.action.enable')
         icon = <PiCellSignalFullDuotone size="16px" />
     } else {
         color = 'red'
-        buttonLabel = t('common.disable')
+        buttonLabel = t('common.action.disable')
         icon = <PiCellSignalSlashDuotone size="16px" />
     }
 

@@ -71,7 +71,7 @@ export const CreateInternalSquadContent = (props: IProps) => {
                 />
                 <Group justify="flex-end">
                     <Button color="gray" onClick={onClose} variant="soft">
-                        {t('common.cancel')}
+                        {t('common.action.cancel')}
                     </Button>
 
                     <Button
@@ -81,7 +81,7 @@ export const CreateInternalSquadContent = (props: IProps) => {
                         type="submit"
                         variant="default"
                     >
-                        {t('common.create')}
+                        {t('common.action.create')}
                     </Button>
                 </Group>
             </Stack>

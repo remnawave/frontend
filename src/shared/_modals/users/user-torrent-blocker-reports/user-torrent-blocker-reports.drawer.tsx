@@ -104,7 +104,7 @@ export const UserTorrentBlockerReportsModal = NiceModal.create((props: IProps) =
                                 </Stack>
                             </Group>
                             <Group gap="xs">
-                                <Tooltip label={t('common.refresh')}>
+                                <Tooltip label={t('common.action.refresh')}>
                                     <ActionIcon
                                         color="indigo"
                                         loading={isRefetching}

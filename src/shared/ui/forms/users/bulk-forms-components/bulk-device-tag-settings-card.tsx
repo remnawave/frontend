@@ -98,7 +98,7 @@ export function BulkDeviceTagSettingsCard(props: IProps) {
                         <Textarea
                             description={t('create-user-modal.widget.user-description')}
                             key={form.key('description')}
-                            label={t('use-table-columns.description')}
+                            label={t('common.field.description')}
                             resize="vertical"
                             {...form.getInputProps('description')}
                             styles={{

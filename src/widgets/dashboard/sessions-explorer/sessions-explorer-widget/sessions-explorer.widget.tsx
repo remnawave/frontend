@@ -124,7 +124,7 @@ export function SessionsExplorerWidget() {
                             size="sm"
                             variant="soft"
                         >
-                            {t('common.try-again')}
+                            {t('common.action.try-again')}
                         </Button>
                     </Stack>
                 </Center>

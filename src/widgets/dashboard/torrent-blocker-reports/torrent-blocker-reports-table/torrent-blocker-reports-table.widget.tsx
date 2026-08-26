@@ -243,14 +243,14 @@ export function TorrentBlockerReportsTableWidget() {
                                 loading={isLoading}
                                 onClick={() => {
                                     modals.openConfirmModal({
-                                        title: t('common.confirm-action'),
+                                        title: t('common.action.confirm-action'),
                                         children: t(
                                             'torrent-blocker-reports-table.widget.truncate-reports-description'
                                         ),
                                         centered: true,
                                         labels: {
-                                            confirm: t('common.delete'),
-                                            cancel: t('common.cancel')
+                                            confirm: t('common.action.delete'),
+                                            cancel: t('common.action.cancel')
                                         },
                                         confirmProps: {
                                             color: 'red'
@@ -268,7 +268,7 @@ export function TorrentBlockerReportsTableWidget() {
                                 <TbTrash size="24px" />
                             </ActionIcon>
                         </Tooltip>
-                        <Tooltip label={t('common.update')} withArrow>
+                        <Tooltip label={t('common.action.update')} withArrow>
                             <ActionIcon
                                 loading={isLoading}
                                 onClick={() => {

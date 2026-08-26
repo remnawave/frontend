@@ -88,7 +88,7 @@ export const CreateHostDrawer = NiceModal.create(() => {
     const handleSubmit = form.onSubmit(async (values) => {
         if (!values.inbound.configProfileInboundUuid || !values.inbound.configProfileUuid) {
             notifications.show({
-                title: t('create-host-modal.widget.error'),
+                title: t('common.message.error'),
                 message: t('create-host-modal.widget.please-select-the-config-profile-and-inbound'),
                 color: 'red'
             })

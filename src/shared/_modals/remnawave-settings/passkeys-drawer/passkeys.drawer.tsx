@@ -75,12 +75,12 @@ export const PasskeysDrawer = NiceModal.create(() => {
 
     const handleDelete = (passkeyId: string) => {
         modals.openConfirmModal({
-            title: t('common.confirm-action'),
+            title: t('common.action.confirm-action'),
             centered: true,
-            children: t('common.confirm-action-description'),
+            children: t('common.message.confirm-action-description'),
             labels: {
-                confirm: t('common.delete'),
-                cancel: t('common.cancel')
+                confirm: t('common.action.delete'),
+                cancel: t('common.action.cancel')
             },
             cancelProps: { variant: 'subtle' },
             confirmProps: { color: 'red', variant: 'soft' },
@@ -188,7 +188,7 @@ export const PasskeysDrawer = NiceModal.create(() => {
                 />
             }
             buttons={
-                <Tooltip label={t('common.add')}>
+                <Tooltip label={t('common.action.add')}>
                     <ActionIcon
                         color="teal"
                         onClick={handleRegisterPasskey}
@@ -251,7 +251,7 @@ export const PasskeysDrawer = NiceModal.create(() => {
                                         title={passkey.name}
                                     />
                                     <Group gap="xs">
-                                        <Tooltip label={t('common.rename')}>
+                                        <Tooltip label={t('common.action.rename')}>
                                             <ActionIcon
                                                 onClick={() =>
                                                     showModal('renameModal', {
@@ -267,7 +267,7 @@ export const PasskeysDrawer = NiceModal.create(() => {
                                             </ActionIcon>
                                         </Tooltip>
 
-                                        <Tooltip label={t('common.delete')}>
+                                        <Tooltip label={t('common.action.delete')}>
                                             <ActionIcon
                                                 color="red"
                                                 disabled={isDeleting}
@@ -295,7 +295,7 @@ export const PasskeysDrawer = NiceModal.create(() => {
                                         })}
                                     />
                                     <CopyableDataListItem
-                                        label={t('passkeys-drawer.component.created-at')}
+                                        label={t('common.field.created-at')}
                                         monospace
                                         value={formatTimeUtil({
                                             time: passkey.createdAt,

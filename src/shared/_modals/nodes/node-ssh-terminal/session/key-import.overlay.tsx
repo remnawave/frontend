@@ -84,7 +84,7 @@ export const KeyImportOverlay = (props: IProps) => {
                 <SectionCard.Section>
                     <Group gap="xs" grow>
                         <Button color="gray" onClick={onClose} variant="light">
-                            {t('common.cancel')}
+                            {t('common.action.cancel')}
                         </Button>
                         <Button
                             disabled={!privateKey.trim()}

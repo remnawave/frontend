@@ -165,7 +165,7 @@ export const AccessSettingsCard = <
                             description={t('create-user-modal.widget.internal-squads-description')}
                             filteredInternalSquads={filteredInternalSquads}
                             formKey={form.key('activeInternalSquads')}
-                            label={t('create-user-modal.widget.internal-squads')}
+                            label={t('common.field.internal-squads')}
                             searchQuery={searchQuery}
                             setSearchQuery={setSearchQuery}
                             {...form.getInputProps('activeInternalSquads')}

@@ -46,7 +46,7 @@ export const CreateModal = NiceModal.create((props: IProps) => {
                     iconColor="teal"
                     IconComponent={TbNewSection}
                     iconVariant="soft"
-                    title={t('common.creation')}
+                    title={t('common.field.creation')}
                 />
             }
         >

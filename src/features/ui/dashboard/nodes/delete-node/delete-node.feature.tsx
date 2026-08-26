@@ -24,11 +24,11 @@ export function DeleteNodeFeature(props: IProps) {
 
     const openModal = () =>
         modals.openConfirmModal({
-            title: t('common.confirm-action'),
-            children: t('common.confirm-action-description'),
+            title: t('common.action.confirm-action'),
+            children: t('common.message.confirm-action-description'),
             labels: {
-                confirm: t('common.delete'),
-                cancel: t('common.cancel')
+                confirm: t('common.action.delete'),
+                cancel: t('common.action.cancel')
             },
             centered: true,
             cancelProps: {
@@ -44,7 +44,7 @@ export function DeleteNodeFeature(props: IProps) {
             leftSection={isPending ? <Loader color="red" size="1rem" /> : <TbTrash size="1rem" />}
             onClick={openModal}
         >
-            {t('common.delete')}
+            {t('common.action.delete')}
         </Menu.Item>
     )
 }

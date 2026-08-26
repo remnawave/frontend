@@ -134,7 +134,7 @@ export const SharedListEditorModal = NiceModal.create((props: IProps) => {
         try {
             parsed = JSON.parse(editorRef.current.getValue().trim() || EMPTY_CONFIG)
         } catch {
-            setError(t('base-host-form.invalid-json'))
+            setError(t('common.message.invalid-json'))
             return
         }
 
@@ -169,7 +169,7 @@ export const SharedListEditorModal = NiceModal.create((props: IProps) => {
                     iconColor="indigo"
                     IconComponent={TbList}
                     iconVariant="soft"
-                    title={isEditMode ? `ext:${listName}` : t('common.create')}
+                    title={isEditMode ? `ext:${listName}` : t('common.action.create')}
                     withCopy={isEditMode}
                 />
             }
@@ -182,7 +182,7 @@ export const SharedListEditorModal = NiceModal.create((props: IProps) => {
                         <TextInput
                             description={t('shared-lists.editor.name-description')}
                             error={nameError}
-                            label={t('common.name')}
+                            label={t('common.field.name')}
                             leftSection={
                                 <Text c="dimmed" ff="monospace" size="xs">
                                     ext:
@@ -252,10 +252,10 @@ export const SharedListEditorModal = NiceModal.create((props: IProps) => {
                                     onClick={handleSave}
                                     variant="soft"
                                 >
-                                    {t('common.save')}
+                                    {t('common.action.save')}
                                 </Button>
                                 <Button onClick={hide} variant="subtle">
-                                    {t('common.cancel')}
+                                    {t('common.action.cancel')}
                                 </Button>
                             </Group>
                         </EditorFooter>

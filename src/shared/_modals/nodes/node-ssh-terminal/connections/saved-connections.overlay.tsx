@@ -86,7 +86,7 @@ export const SavedConnectionsList = (props: IListProps) => {
                     />
 
                     {onClose && (
-                        <CloseButton aria-label={t('common.close')} ml="auto" onClick={onClose} />
+                        <CloseButton aria-label={t('common.action.close')} ml="auto" onClick={onClose} />
                     )}
                 </Group>
             </SectionCard.Section>

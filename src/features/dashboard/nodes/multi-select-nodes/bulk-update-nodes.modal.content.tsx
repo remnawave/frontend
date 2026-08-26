@@ -167,7 +167,7 @@ export const BulkUpdateNodesModalContent = (props: IProps) => {
                                     })
                                 )}
                                 leftSection={<TbPlugConnected size={16} />}
-                                nothingFoundMessage={t('common.nothing-found')}
+                                nothingFoundMessage={t('common.message.nothing-found')}
                                 placeholder={t('node-integrations.select.placeholder')}
                                 classNames={{ option: integrationsClasses.option }}
                                 scrollAreaProps={{ styles: { content: { minWidth: '100%' } } }}
@@ -440,7 +440,7 @@ export const BulkUpdateNodesModalContent = (props: IProps) => {
                             size="md"
                             variant="light"
                         >
-                            {t('common.update')}
+                            {t('common.action.update')}
                         </Button>
                     </Group>
                 </SectionCard.Section>

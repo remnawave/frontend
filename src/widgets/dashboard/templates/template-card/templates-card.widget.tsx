@@ -68,7 +68,7 @@ export function TemplatesCardWidget(props: IProps) {
                             )
                         }
                     >
-                        {t('common.edit')}
+                        {t('common.action.edit')}
                     </EntityCardShared.Button>
                     <EntityCardShared.Menu>
                         <CopyButton timeout={2000} value={template.uuid}>
@@ -80,7 +80,7 @@ export function TemplatesCardWidget(props: IProps) {
                                     }
                                     onClick={copy}
                                 >
-                                    {t('common.copy-uuid')}
+                                    {t('common.action.copy-uuid')}
                                 </Menu.Item>
                             )}
                         </CopyButton>
@@ -96,7 +96,7 @@ export function TemplatesCardWidget(props: IProps) {
                                 })
                             }}
                         >
-                            {t('common.rename')}
+                            {t('common.action.rename')}
                         </Menu.Item>
 
                         <Menu.Item
@@ -108,7 +108,7 @@ export function TemplatesCardWidget(props: IProps) {
                                 handleDeleteTemplate(template.uuid)
                             }}
                         >
-                            {t('common.delete')}
+                            {t('common.action.delete')}
                         </Menu.Item>
                     </EntityCardShared.Menu>
                 </EntityCardShared.Actions>

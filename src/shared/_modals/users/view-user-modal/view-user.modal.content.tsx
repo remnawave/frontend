@@ -291,7 +291,7 @@ export const ViewUserModalContent = (props: IProps) => {
                 <Menu keepMounted position="top-end" shadow="md">
                     <Menu.Target>
                         <Button color="gray" leftSection={<TbDots size={px('1.2rem')} />} size="md">
-                            {t('view-user-modal.widget.more-actions')}
+                            {t('common.action.more-actions')}
                         </Button>
                     </Menu.Target>
 
@@ -317,7 +317,7 @@ export const ViewUserModalContent = (props: IProps) => {
                     size="md"
                     variant="soft"
                 >
-                    {t('common.save')}
+                    {t('common.action.save')}
                 </Button>
             </ModalFooter>
         </motion.div>

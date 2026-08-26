@@ -125,7 +125,7 @@ export const CreateNodeStep3Status = ({ nodeUuid, onClose }: IProps) => {
                 <Alert
                     color="teal"
                     icon={<TbCheck size={20} />}
-                    title={t('create-node-step-3-status.no-errros-so-far')}
+                    title={t('create-node-step-3-status.no-errors-so-far')}
                     variant="light"
                 />
             )}
@@ -134,7 +134,7 @@ export const CreateNodeStep3Status = ({ nodeUuid, onClose }: IProps) => {
                 <Alert
                     color="red"
                     icon={<TbAlertCircle size={20} />}
-                    title={t('create-node-step-3-status.last-error-message')}
+                    title={t('common.message.last-error-message')}
                     variant="light"
                 >
                     <Code color="dark.7">{errorMessage}</Code>
@@ -143,7 +143,7 @@ export const CreateNodeStep3Status = ({ nodeUuid, onClose }: IProps) => {
 
             <Group gap="md" justify="space-between" mt="auto">
                 <Button color="gray" leftSection={<TbX size={18} />} onClick={onClose} size="md">
-                    {t('create-node-modal.widget.close')}
+                    {t('common.action.close')}
                 </Button>
 
                 <Button

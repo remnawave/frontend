@@ -98,9 +98,9 @@ export function DesktopColumnsInfraBillingWidget() {
 
     const handleDeleteSelected = () =>
         modals.openConfirmModal({
-            title: t('common.confirm-action'),
-            children: t('common.confirm-action-description'),
-            labels: { confirm: t('common.delete'), cancel: t('common.cancel') },
+            title: t('common.action.confirm-action'),
+            children: t('common.message.confirm-action-description'),
+            labels: { confirm: t('common.action.delete'), cancel: t('common.action.cancel') },
             centered: true,
             confirmProps: { color: 'red', variant: 'soft' },
             cancelProps: {
@@ -138,7 +138,7 @@ export function DesktopColumnsInfraBillingWidget() {
                 {selectedUuids.size}
             </Badge>
 
-            <Tooltip label={t('common.delete')} withArrow>
+            <Tooltip label={t('common.action.delete')} withArrow>
                 <ActionIcon
                     color="red"
                     disabled={selectedUuids.size === 0}
@@ -162,7 +162,7 @@ export function DesktopColumnsInfraBillingWidget() {
                 </ActionIcon>
             </Tooltip>
 
-            <Tooltip label={t('common.close')} withArrow>
+            <Tooltip label={t('common.action.close')} withArrow>
                 <ActionIcon color="gray" onClick={exitSelectMode} size="input-xs" variant="subtle">
                     <TbX size={18} />
                 </ActionIcon>
@@ -170,7 +170,7 @@ export function DesktopColumnsInfraBillingWidget() {
         </>
     ) : (
         <>
-            <Tooltip label={t('common.select')} withArrow>
+            <Tooltip label={t('common.action.select')} withArrow>
                 <ActionIcon
                     color="gray"
                     onClick={() => setSelectMode(true)}

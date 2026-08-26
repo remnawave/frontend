@@ -130,7 +130,7 @@ export const ConnectionSetupScreen = (props: IProps) => {
 
                     <Box className={classes.targetRow}>
                         <TextInput
-                            label={t('node-ssh.username')}
+                            label={t('common.field.username')}
                             onChange={(event) => setUsername(event.currentTarget.value)}
                             value={username}
                         />
@@ -173,7 +173,7 @@ export const ConnectionSetupScreen = (props: IProps) => {
                         <NumberInput
                             allowDecimal={false}
                             hideControls
-                            label={t('node-ssh.port')}
+                            label={t('common.field.port')}
                             max={65535}
                             min={1}
                             onChange={(value) => setPort(Number(value) || 22)}

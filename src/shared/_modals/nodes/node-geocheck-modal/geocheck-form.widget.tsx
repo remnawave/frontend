@@ -63,8 +63,8 @@ export const GeocheckFormWidget = (props: IProps) => {
             <SegmentedControl
                 data={[
                     { value: 'default', label: t('node-geocheck.source-default') },
-                    { value: 'ip', label: t('common.ip-address') },
-                    { value: 'interface', label: t('common.interface') }
+                    { value: 'ip', label: t('common.field.ip-address') },
+                    { value: 'interface', label: t('common.field.interface') }
                 ]}
                 fullWidth
                 onChange={(nextSource) => setSource(nextSource as TSource)}
@@ -85,7 +85,7 @@ export const GeocheckFormWidget = (props: IProps) => {
                 <Autocomplete
                     data={ipOptions}
                     description={t('node-geocheck.ip-description')}
-                    label={t('common.ip-address')}
+                    label={t('common.field.ip-address')}
                     leftSection={
                         selectedIpStatus ? (
                             <NodeIpStatusIcon size="sm" status={selectedIpStatus} />
@@ -120,7 +120,7 @@ export const GeocheckFormWidget = (props: IProps) => {
                 <Autocomplete
                     data={interfaceOptions}
                     description={t('node-geocheck.interface-description')}
-                    label={t('common.interface')}
+                    label={t('common.field.interface')}
                     leftSection={<TbAffiliate size={18} />}
                     onChange={setNetworkInterface}
                     placeholder="eth0"
@@ -141,7 +141,7 @@ export const GeocheckFormWidget = (props: IProps) => {
 
             <Group gap="sm" justify="flex-end">
                 <Button onClick={onCancel} variant="subtle">
-                    {t('common.cancel')}
+                    {t('common.action.cancel')}
                 </Button>
                 <Button
                     color="teal"

@@ -57,10 +57,10 @@ export const BulkAccessSettingsCard = (props: IProps) => {
                                 (status) => status.value !== 'EXPIRED' && status.value !== 'LIMITED'
                             )}
                             description={t(
-                                'bulk-all-user-actions-tabs.update.tab.feature.user-status'
+                                'common.field.user-status'
                             )}
                             key={form.key('status')}
-                            label={t('bulk-all-user-actions-tabs.update.tab.feature.status')}
+                            label={t('common.field.status')}
                             leftSection={<TbStatusChange size="16px" />}
                             placeholder={t(
                                 'bulk-all-user-actions-tabs.update.tab.feature.select-status'

@@ -12,7 +12,7 @@ export function RefreshButton(props: RefreshButtonProps) {
     const { t } = useTranslation()
 
     return (
-        <Tooltip label={t('common.refresh')} withArrow>
+        <Tooltip label={t('common.action.refresh')} withArrow>
             <ActionIcon
                 color="cyan"
                 loading={loading}

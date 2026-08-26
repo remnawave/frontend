@@ -69,11 +69,11 @@ export function ExternalSquadsGridWidget(props: IProps) {
 
     const handleDeleteExternalSquad = (externalSquadUuid: string) => {
         modals.openConfirmModal({
-            title: t('common.confirm-action'),
-            children: t('common.confirm-action-description'),
+            title: t('common.action.confirm-action'),
+            children: t('common.message.confirm-action-description'),
             labels: {
-                confirm: t('common.delete'),
-                cancel: t('common.cancel')
+                confirm: t('common.action.delete'),
+                cancel: t('common.action.cancel')
             },
             cancelProps: { variant: 'subtle' },
             confirmProps: { color: 'red', variant: 'soft' },
@@ -90,12 +90,12 @@ export function ExternalSquadsGridWidget(props: IProps) {
 
     const handleRemoveFromUsers = (externalSquadUuid: string) => {
         modals.openConfirmModal({
-            title: t('common.confirm-action'),
+            title: t('common.action.confirm-action'),
             centered: true,
-            children: t('common.confirm-action-description'),
+            children: t('common.message.confirm-action-description'),
             labels: {
-                confirm: t('common.remove'),
-                cancel: t('common.cancel')
+                confirm: t('common.action.remove'),
+                cancel: t('common.action.cancel')
             },
             cancelProps: { variant: 'subtle' },
             confirmProps: { color: 'red', variant: 'soft' },
@@ -111,12 +111,12 @@ export function ExternalSquadsGridWidget(props: IProps) {
 
     const handleAddToUsers = (externalSquadUuid: string) => {
         modals.openConfirmModal({
-            title: t('common.confirm-action'),
+            title: t('common.action.confirm-action'),
             centered: true,
-            children: t('common.confirm-action-description'),
+            children: t('common.message.confirm-action-description'),
             labels: {
-                confirm: t('common.add'),
-                cancel: t('common.cancel')
+                confirm: t('common.action.add'),
+                cancel: t('common.action.cancel')
             },
             cancelProps: { variant: 'subtle' },
             confirmProps: { color: 'teal', variant: 'soft' },
@@ -155,12 +155,12 @@ export function ExternalSquadsGridWidget(props: IProps) {
         }
 
         modals.openConfirmModal({
-            title: t('common.confirm-action'),
+            title: t('common.action.confirm-action'),
             centered: true,
-            children: t('common.confirm-action-description'),
+            children: t('common.message.confirm-action-description'),
             labels: {
-                confirm: t('common.clone'),
-                cancel: t('common.cancel')
+                confirm: t('common.action.clone'),
+                cancel: t('common.action.cancel')
             },
             cancelProps: {
                 variant: 'subtle'

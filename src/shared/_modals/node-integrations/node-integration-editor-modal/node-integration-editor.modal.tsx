@@ -211,7 +211,7 @@ export const NodeIntegrationEditorModal = NiceModal.create((props: IProps) => {
                         {!isFullscreen && (
                             <TextInput
                                 key={form.key('name')}
-                                label={t('common.name')}
+                                label={t('common.field.name')}
                                 placeholder="Integration"
                                 required
                                 {...form.getInputProps('name')}
@@ -221,7 +221,7 @@ export const NodeIntegrationEditorModal = NiceModal.create((props: IProps) => {
                         {!isFullscreen && (
                             <TextInput
                                 key={form.key('description')}
-                                label={t('node-integrations.editor.description')}
+                                label={t('common.field.description')}
                                 placeholder={t('node-integrations.editor.description-placeholder')}
                                 {...form.getInputProps('description')}
                             />
@@ -295,10 +295,10 @@ export const NodeIntegrationEditorModal = NiceModal.create((props: IProps) => {
                                         type="submit"
                                         variant="soft"
                                     >
-                                        {t('common.save')}
+                                        {t('common.action.save')}
                                     </Button>
                                     <Button onClick={hide} variant="subtle">
-                                        {t('common.cancel')}
+                                        {t('common.action.cancel')}
                                     </Button>
                                 </Group>
                             </EditorFooter>

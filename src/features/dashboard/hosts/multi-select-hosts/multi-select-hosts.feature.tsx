@@ -94,12 +94,12 @@ export const MultiSelectHostsFeature = (props: IProps) => {
 
     const deleteSelectedHosts = () => {
         modals.openConfirmModal({
-            title: t('common.confirm-action'),
+            title: t('common.action.confirm-action'),
             centered: true,
-            children: t('common.confirm-action-description'),
+            children: t('common.message.confirm-action-description'),
             labels: {
-                confirm: t('common.delete'),
-                cancel: t('common.cancel')
+                confirm: t('common.action.delete'),
+                cancel: t('common.action.cancel')
             },
             confirmProps: {
                 color: 'red',
@@ -134,7 +134,7 @@ export const MultiSelectHostsFeature = (props: IProps) => {
 
         if (cloneableHosts.length === 0) {
             notifications.show({
-                title: t('edit-host-modal.widget.error'),
+                title: t('common.message.error'),
                 message: t('edit-host-modal.widget.dangling-host-cannot-be-cloned'),
                 color: 'red'
             })
@@ -143,12 +143,12 @@ export const MultiSelectHostsFeature = (props: IProps) => {
         }
 
         modals.openConfirmModal({
-            title: t('common.confirm-action'),
+            title: t('common.action.confirm-action'),
             centered: true,
-            children: t('common.confirm-action-description'),
+            children: t('common.message.confirm-action-description'),
             labels: {
-                confirm: t('common.clone'),
-                cancel: t('common.cancel')
+                confirm: t('common.action.clone'),
+                cancel: t('common.action.cancel')
             },
             confirmProps: {
                 color: 'cyan',
@@ -157,7 +157,7 @@ export const MultiSelectHostsFeature = (props: IProps) => {
             onConfirm: async () => {
                 if (danglingCount > 0) {
                     notifications.show({
-                        title: t('edit-host-modal.widget.error'),
+                        title: t('common.message.error'),
                         message: t('multi-select-hosts.feature.dangling-hosts-skipped', {
                             count: danglingCount
                         }),
@@ -240,10 +240,10 @@ export const MultiSelectHostsFeature = (props: IProps) => {
                             <Stack>
                                 <Group justify="space-between">
                                     <Badge color="shaded-gray" size="lg" variant="soft">
-                                        {t('common.selected', { count: selectedHosts.length })}
+                                        {t('common.message.selected', { count: selectedHosts.length })}
                                     </Badge>
                                     <Group gap={0} justify="flex-end">
-                                        <Tooltip label={t('common.select-all')} withArrow>
+                                        <Tooltip label={t('common.action.select-all')} withArrow>
                                             <ActionIcon
                                                 color="gray"
                                                 onClick={selectAllHosts}
@@ -253,7 +253,7 @@ export const MultiSelectHostsFeature = (props: IProps) => {
                                                 <TbSelectAll size={20} />
                                             </ActionIcon>
                                         </Tooltip>
-                                        <Tooltip label={t('common.clear-selection')} withArrow>
+                                        <Tooltip label={t('common.action.clear-selection')} withArrow>
                                             <CloseButton onClick={clearSelection} />
                                         </Tooltip>
                                     </Group>
@@ -318,7 +318,7 @@ export const MultiSelectHostsFeature = (props: IProps) => {
                                         onClick={enableSelectedHosts}
                                         variant="soft"
                                     >
-                                        {t('common.enable')}
+                                        {t('common.action.enable')}
                                     </Button>
                                     <Button
                                         color="gray"
@@ -326,7 +326,7 @@ export const MultiSelectHostsFeature = (props: IProps) => {
                                         onClick={disableSelectedHosts}
                                         variant="soft"
                                     >
-                                        {t('common.disable')}
+                                        {t('common.action.disable')}
                                     </Button>
                                 </Group>
                                 <Stack>
@@ -341,7 +341,7 @@ export const MultiSelectHostsFeature = (props: IProps) => {
                                         }
                                         variant="soft"
                                     >
-                                        {t('common.update')}
+                                        {t('common.action.update')}
                                     </Button>
 
                                     <Button
@@ -351,7 +351,7 @@ export const MultiSelectHostsFeature = (props: IProps) => {
                                         onClick={cloneSelectedHosts}
                                         variant="soft"
                                     >
-                                        {t('common.clone')}
+                                        {t('common.action.clone')}
                                     </Button>
 
                                     <Button
@@ -361,7 +361,7 @@ export const MultiSelectHostsFeature = (props: IProps) => {
                                         onClick={deleteSelectedHosts}
                                         variant="soft"
                                     >
-                                        {t('common.delete')}
+                                        {t('common.action.delete')}
                                     </Button>
                                 </Stack>
                             </Stack>

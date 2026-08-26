@@ -186,7 +186,7 @@ export const NodeSystemCardWidget = memo((props: IProps) => {
                                         size="10px"
                                         tt="uppercase"
                                     >
-                                        {t('common.interface')}
+                                        {t('common.field.interface')}
                                     </Text>
                                     <Badge color="cyan" ff="monospace" size="xs" variant="soft">
                                         {interfaceData.name}
@@ -208,7 +208,7 @@ export const NodeSystemCardWidget = memo((props: IProps) => {
                                             {interfaceData.rxSpeed}
                                         </Text>
                                         <Text c="dimmed" ff="monospace" size="10px">
-                                            {t('node-system-card.widget.total')}:{' '}
+                                            {t('common.field.total')}:{' '}
                                             {interfaceData.rxTotal}
                                         </Text>
                                     </Stack>
@@ -226,7 +226,7 @@ export const NodeSystemCardWidget = memo((props: IProps) => {
                                             {interfaceData.txSpeed}
                                         </Text>
                                         <Text c="dimmed" ff="monospace" size="10px">
-                                            {t('node-system-card.widget.total')}:{' '}
+                                            {t('common.field.total')}:{' '}
                                             {interfaceData.txTotal}
                                         </Text>
                                     </Stack>
@@ -240,7 +240,7 @@ export const NodeSystemCardWidget = memo((props: IProps) => {
                     <div className={classes.infoSection}>
                         <Stack gap={6}>
                             <Text c="dimmed" fw={600} lh={1} lts={1} size="10px" tt="uppercase">
-                                {t('node-system-card.widget.system')}
+                                {t('common.field.system')}
                             </Text>
 
                             <Stack gap={0} style={{ minWidth: 0, overflow: 'hidden' }}>

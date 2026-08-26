@@ -63,7 +63,7 @@ export function ShowConfigProfilesWithInboundsFeature(props: IProps) {
                                     {inboundsCount}
                                 </Badge>
 
-                                <Tooltip label={t('common.edit')}>
+                                <Tooltip label={t('common.action.edit')}>
                                     <ActionIcon
                                         onClick={() =>
                                             showModal('nodes_nodesConfigProfilesDrawer', {
@@ -136,7 +136,7 @@ export function ShowConfigProfilesWithInboundsFeature(props: IProps) {
                             size="sm"
                             variant="light"
                         >
-                            {t('common.select')}
+                            {t('common.action.select')}
                         </Button>
                     </SectionCard.Section>
                 </>

@@ -56,14 +56,14 @@ export function AddOptionButton() {
                     size="sm"
                     variant="soft"
                 >
-                    {t('base-host-form.add-option')}
+                    {t('common.action.add')}
                 </Button>
             </Combobox.Target>
 
             <Combobox.Dropdown>
                 <Combobox.Search
                     onChange={(event) => setSearch(event.currentTarget.value)}
-                    placeholder={t('common.search')}
+                    placeholder={t('common.action.search')}
                     value={search}
                 />
 
@@ -84,7 +84,7 @@ export function AddOptionButton() {
                     ) : (
                         <Combobox.Empty>
                             <Text c="dimmed" size="sm">
-                                {t('common.nothing-found')}
+                                {t('common.message.nothing-found')}
                             </Text>
                         </Combobox.Empty>
                     )}

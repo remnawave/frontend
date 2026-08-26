@@ -282,7 +282,7 @@ export const BaseHostForm = <
                                     >
                                         <TextInput
                                             key={form.key('address')}
-                                            label={t('base-host-form.address')}
+                                            label={t('common.field.address')}
                                             leftSection={
                                                 <PopoverWithInfoShared
                                                     text={
@@ -308,7 +308,7 @@ export const BaseHostForm = <
 
                                         <NumberInput
                                             key={form.key('port')}
-                                            label={t('base-host-form.port')}
+                                            label={t('common.field.port')}
                                             {...form.getInputProps('port')}
                                             allowDecimal={false}
                                             allowNegative={false}
@@ -358,7 +358,7 @@ export const BaseHostForm = <
                             type="submit"
                             variant="soft"
                         >
-                            {t('common.save')}
+                            {t('common.action.save')}
                         </Button>
                     </Group>
 

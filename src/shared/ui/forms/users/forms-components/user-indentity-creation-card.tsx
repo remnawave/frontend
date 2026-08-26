@@ -31,7 +31,7 @@ export const UserIdentityCreationCard = (props: IProps) => {
                         IconComponent={HiIdentification}
                         iconSize={20}
                         iconVariant="soft"
-                        title={t('user-indentity-creation-card.user-identity')}
+                        title={t('user-identity-creation-card.user-identity')}
                         titleOrder={5}
                     />
                 </SectionCard.Section>
@@ -39,7 +39,7 @@ export const UserIdentityCreationCard = (props: IProps) => {
                     <TextInput
                         description={t('create-user-modal.widget.username-cannot-be-changed-later')}
                         key={form.key('username')}
-                        label={t('login-form-feature.username')}
+                        label={t('common.field.username')}
                         required
                         {...form.getInputProps('username')}
                         leftSection={<PiUserDuotone size="16px" />}

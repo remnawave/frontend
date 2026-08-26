@@ -161,7 +161,7 @@ export const Base64EditorModal = NiceModal.create((props: IProps) => {
                     />
 
                     <Button onClick={handleSave} variant="soft">
-                        {t('common.save')}
+                        {t('common.action.save')}
                     </Button>
 
                     <SegmentedControl

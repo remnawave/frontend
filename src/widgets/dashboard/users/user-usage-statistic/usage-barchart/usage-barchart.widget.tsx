@@ -44,7 +44,7 @@ export const UserUsageBarchartWidget = (props: IProps) => {
                     <Stack align="center" gap={8}>
                         <PiEmpty size="2rem" />
                         <Text c="dimmed">
-                            {t('user-usage-modal.widget.no-data-available-for-the-selected-period')}
+                            {t('common.message.no-data-available-for-the-selected-period')}
                         </Text>
                     </Stack>
                 </Center>
@@ -321,7 +321,7 @@ export const UserUsageBarchartWidget = (props: IProps) => {
                                 <div style="display: flex; flex-direction: column; gap: 3px; padding-top: 8px; border-top: 1px solid var(--mantine-color-gray-4);">
                                     ${nearbyDaysHtml}
                                 </div>
-                                <div style="color: var(--mantine-color-dimmed); font-size: 0.7rem; text-align: center; margin-top: 10px;">${t('user-usage-modal.widget.click-to-see-all')}</div>
+                                <div style="color: var(--mantine-color-dimmed); font-size: 0.7rem; text-align: center; margin-top: 10px;">${t('common.message.click-to-see-all')}</div>
                             </div>
                         `
                         }

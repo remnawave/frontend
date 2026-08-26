@@ -66,11 +66,11 @@ export function NodePluginsGridWidget(props: IProps) {
 
     const handleDeleteNodePlugin = (nodePluginUuid: string) => {
         modals.openConfirmModal({
-            title: t('common.confirm-action'),
-            children: t('common.confirm-action-description'),
+            title: t('common.action.confirm-action'),
+            children: t('common.message.confirm-action-description'),
             labels: {
-                confirm: t('common.delete'),
-                cancel: t('common.cancel')
+                confirm: t('common.action.delete'),
+                cancel: t('common.action.cancel')
             },
             cancelProps: { variant: 'subtle' },
             confirmProps: { color: 'red', variant: 'soft' },
@@ -134,7 +134,7 @@ export function NodePluginsGridWidget(props: IProps) {
                         subtitle={t(
                             'node-plugins-grid.widget.node-plugins-are-an-advanced-feature-please-review-the-documentation-before-use'
                         )}
-                        title={t('node-plugins-grid.widget.warning')}
+                        title={t('common.message.warning')}
                         titleOrder={4}
                     />
                 </SectionCard.Section>

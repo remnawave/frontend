@@ -33,7 +33,7 @@ export const SharedListsModal = NiceModal.create(() => {
                     IconComponent={TbList}
                     iconVariant="soft"
                     subtitle={t('shared-lists.modal.subtitle')}
-                    title={t('common.shared-lists')}
+                    title={t('common.field.shared-lists')}
                 />
             }
         >
@@ -56,7 +56,7 @@ export const SharedListsModal = NiceModal.create(() => {
 
                 <Group justify="space-between">
                     <ActionIcon.Group>
-                        <Tooltip label={t('common.refresh')}>
+                        <Tooltip label={t('common.action.refresh')}>
                             <ActionIcon
                                 loading={isRefetching}
                                 onClick={() => refetch()}
@@ -68,7 +68,7 @@ export const SharedListsModal = NiceModal.create(() => {
                         </Tooltip>
                     </ActionIcon.Group>
 
-                    <Tooltip label={t('common.create')}>
+                    <Tooltip label={t('common.action.create')}>
                         <ActionIcon
                             color="teal"
                             onClick={() => showModal('sharedLists_sharedListEditorModal', {})}

@@ -113,7 +113,7 @@ export const InternalSquadsUsageDrawer = NiceModal.create((props: IProps) => {
                     iconColor="teal"
                     IconComponent={TbChartArcs}
                     iconVariant="soft"
-                    title={t('common.usage-stats')}
+                    title={t('common.field.usage-stats')}
                 />
             }
             buttons={
@@ -257,7 +257,7 @@ export const InternalSquadsUsageDrawer = NiceModal.create((props: IProps) => {
                 </Group>
 
                 <TopLeaderboardCardShared
-                    emptyText={t('node-users-usage-drawer.widget.no-data-available')}
+                    emptyText={t('common.message.no-data-available')}
                     isFetchingMore={isFetchingNextPage}
                     isLoading={isLoading}
                     items={usageUsers.map((user) => ({

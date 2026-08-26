@@ -23,7 +23,7 @@ export function UsersMetrics() {
         {
             IconComponent: PiUsersDuotone,
             iconColor: 'blue',
-            title: t('users-metrics.widget.total'),
+            title: t('common.field.total'),
             value: users?.totalUsers ?? 0,
             iconVariant: 'soft'
         },

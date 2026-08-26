@@ -205,7 +205,7 @@ export const BaseNodeForm = <T extends UpdateNodeCommand.RequestBody>(props: IPr
                                 leftSection={<TbDots size={px('1.2rem')} />}
                                 size="md"
                             >
-                                {t('base-node-form.more-actions')}
+                                {t('common.action.more-actions')}
                             </Button>
                         </Menu.Target>
 
@@ -217,7 +217,7 @@ export const BaseNodeForm = <T extends UpdateNodeCommand.RequestBody>(props: IPr
                             <CopyButton value={node.uuid}>
                                 {({ copy }) => (
                                     <Menu.Item leftSection={<TbCopy size="16px" />} onClick={copy}>
-                                        {t('common.copy-uuid')}
+                                        {t('common.action.copy-uuid')}
                                     </Menu.Item>
                                 )}
                             </CopyButton>
@@ -237,7 +237,7 @@ export const BaseNodeForm = <T extends UpdateNodeCommand.RequestBody>(props: IPr
                     size="md"
                     variant="soft"
                 >
-                    {t('common.save')}
+                    {t('common.action.save')}
                 </Button>
             </ModalFooter>
         </>

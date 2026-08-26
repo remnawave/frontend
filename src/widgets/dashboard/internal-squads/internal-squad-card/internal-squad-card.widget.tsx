@@ -58,7 +58,7 @@ export function InternalSquadCardWidget(props: IProps) {
                     </EntityCardShared.Icon>
                     <EntityCardShared.Content title={internalSquad.name}>
                         <Group gap="xs" wrap="nowrap">
-                            <Tooltip label={t('internal-squads-grid.widget.inbounds')}>
+                            <Tooltip label={t('common.field.inbounds')}>
                                 <Badge
                                     color="blue"
                                     leftSection={<PiTag size={12} />}
@@ -92,7 +92,7 @@ export function InternalSquadCardWidget(props: IProps) {
                         leftSection={<TbTag size={16} />}
                         onClick={handleOpenInbounds}
                     >
-                        {t('common.edit')}
+                        {t('common.action.edit')}
                     </EntityCardShared.Button>
                     <EntityCardShared.Menu>
                         <Menu.Item
@@ -100,7 +100,7 @@ export function InternalSquadCardWidget(props: IProps) {
                             leftSection={<TbUsersPlus size={18} />}
                             onClick={() => handleAddToUsers(internalSquad.uuid, internalSquad.name)}
                         >
-                            {t('internal-squads-grid.widget.add-users')}
+                            {t('common.action.add-users')}
                         </Menu.Item>
                         <Menu.Item
                             color="red"
@@ -110,7 +110,7 @@ export function InternalSquadCardWidget(props: IProps) {
                                 handleRemoveFromUsers(internalSquad.uuid, internalSquad.name)
                             }
                         >
-                            {t('internal-squads-grid.widget.remove-users')}
+                            {t('common.action.remove-users')}
                         </Menu.Item>
 
                         <Menu.Item
@@ -132,7 +132,7 @@ export function InternalSquadCardWidget(props: IProps) {
                                 })
                             }
                         >
-                            {t('common.usage-stats')}
+                            {t('common.field.usage-stats')}
                         </Menu.Item>
 
                         <CopyButton timeout={2000} value={internalSquad.uuid}>
@@ -144,7 +144,7 @@ export function InternalSquadCardWidget(props: IProps) {
                                     }
                                     onClick={copy}
                                 >
-                                    {t('common.copy-uuid')}
+                                    {t('common.action.copy-uuid')}
                                 </Menu.Item>
                             )}
                         </CopyButton>
@@ -159,7 +159,7 @@ export function InternalSquadCardWidget(props: IProps) {
                                 })
                             }
                         >
-                            {t('common.rename')}
+                            {t('common.action.rename')}
                         </Menu.Item>
 
                         <Menu.Item

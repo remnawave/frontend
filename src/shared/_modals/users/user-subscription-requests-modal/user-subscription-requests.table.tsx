@@ -73,7 +73,7 @@ export const UserSubscriptionRequestsTable = (props: IProps) => {
         textColumn('id', 'ID', undefined, 80),
         textColumn(
             'requestIp',
-            t('common.ip-address'),
+            t('common.field.ip-address'),
             (record) =>
                 record.requestIp ? (
                     <Anchor
@@ -94,13 +94,13 @@ export const UserSubscriptionRequestsTable = (props: IProps) => {
         ),
         textColumn(
             'userAgent',
-            t('get-user-subscription-request-history.feature.user-agent'),
+            t('common.field.user-agent'),
             (record) => <CopyableCell value={record.userAgent || '–'} />,
             400
         ),
         {
             accessor: 'requestAt',
-            title: t('get-user-subscription-request-history.feature.request-at'),
+            title: t('common.field.request-at'),
             ellipsis: false,
             sortable: true,
             toggleable: true,
@@ -141,9 +141,9 @@ export const UserSubscriptionRequestsTable = (props: IProps) => {
     const columnLabels = useMemo<Record<string, string>>(
         () => ({
             id: 'ID',
-            requestIp: t('common.ip-address'),
-            userAgent: t('get-user-subscription-request-history.feature.user-agent'),
-            requestAt: t('get-user-subscription-request-history.feature.request-at'),
+            requestIp: t('common.field.ip-address'),
+            userAgent: t('common.field.user-agent'),
+            requestAt: t('common.field.request-at'),
             srrRuleName: t('use-srh-inspector-table-columns.rule-name'),
             srrResponseType: t('use-srh-inspector-table-columns.response-type')
         }),

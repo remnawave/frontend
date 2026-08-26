@@ -223,7 +223,7 @@ export const NodeTrackingAndBillingCard = <
                                     variant="soft"
                                     w="fit-content"
                                 >
-                                    {t('common.open')}
+                                    {t('common.action.open')}
                                 </Button>
                             )}
                         </Stack>

@@ -52,7 +52,7 @@ export function ConfigProfileCardWidget(props: IProps) {
         notifications.show({
             id: 'view-computed-config-profile',
             loading: true,
-            title: t('common.loading'),
+            title: t('common.message.loading'),
             message: t('config-profile-card.widget.loading-computed-config-profile'),
             autoClose: false,
             withCloseButton: false
@@ -64,7 +64,7 @@ export function ConfigProfileCardWidget(props: IProps) {
             notifications.update({
                 id: 'view-computed-config-profile',
                 loading: false,
-                title: t('common.success'),
+                title: t('common.message.success'),
                 message: t(
                     'config-profile-card.widget.computed-config-profile-loaded-successfully'
                 ),
@@ -99,8 +99,8 @@ export function ConfigProfileCardWidget(props: IProps) {
                     color: 'teal'
                 },
                 labels: {
-                    confirm: t('common.download'),
-                    cancel: t('common.cancel')
+                    confirm: t('common.action.download'),
+                    cancel: t('common.action.cancel')
                 },
                 size: 'xl',
                 title: (
@@ -143,7 +143,7 @@ export function ConfigProfileCardWidget(props: IProps) {
                     </EntityCardShared.Icon>
                     <EntityCardShared.Content title={configProfile.name}>
                         <Group gap="xs" wrap="nowrap">
-                            <Tooltip label={t('config-profiles-grid.widget.inbounds')}>
+                            <Tooltip label={t('common.field.inbounds')}>
                                 <Badge
                                     color="blue"
                                     leftSection={<PiTag size={12} />}
@@ -263,7 +263,7 @@ export function ConfigProfileCardWidget(props: IProps) {
                                 URL.revokeObjectURL(url)
                             }}
                         >
-                            {t('config-profiles-grid.widget.download')}
+                            {t('common.action.download')}
                         </Menu.Item>
 
                         <CopyButton timeout={2000} value={configProfile.uuid}>
@@ -275,7 +275,7 @@ export function ConfigProfileCardWidget(props: IProps) {
                                     }
                                     onClick={copy}
                                 >
-                                    {t('common.copy-uuid')}
+                                    {t('common.action.copy-uuid')}
                                 </Menu.Item>
                             )}
                         </CopyButton>
@@ -290,7 +290,7 @@ export function ConfigProfileCardWidget(props: IProps) {
                                 })
                             }}
                         >
-                            {t('common.rename')}
+                            {t('common.action.rename')}
                         </Menu.Item>
 
                         <Menu.Item

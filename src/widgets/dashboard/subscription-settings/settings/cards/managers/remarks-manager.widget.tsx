@@ -107,7 +107,7 @@ export const RemarksManager = ({
                         size="sm"
                         variant="light"
                     >
-                        {t('common.add')}
+                        {t('common.action.add')}
                     </Button>
                 </Group>
 

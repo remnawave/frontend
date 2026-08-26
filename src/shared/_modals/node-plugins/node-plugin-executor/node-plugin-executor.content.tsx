@@ -227,7 +227,7 @@ export const NodePluginExecutorContent = (props: IProps) => {
                                 IconComponent={TbAlertTriangle}
                                 iconVariant="soft"
                                 subtitle={t('node-plugin-executor.content.executor-description')}
-                                title={t('node-plugins-grid.widget.warning')}
+                                title={t('common.message.warning')}
                                 titleOrder={5}
                             />
                         </SectionCard.Section>
@@ -284,8 +284,8 @@ export const NodePluginExecutorContent = (props: IProps) => {
                                 iconVariant="soft"
                                 subtitle={
                                     isBlock
-                                        ? t('node-plugin-executor.content.block-ips-decription')
-                                        : t('node-plugin-executor.content.unblock-ips-decription')
+                                        ? t('node-plugin-executor.content.block-ips-description')
+                                        : t('node-plugin-executor.content.unblock-ips-description')
                                 }
                                 title={
                                     isBlock
@@ -334,7 +334,7 @@ export const NodePluginExecutorContent = (props: IProps) => {
                                     if (validateAndProceed()) setStep('target')
                                 }}
                             >
-                                {t('node-plugin-executor.content.next')}
+                                {t('common.action.next')}
                             </Button>
                         </Group>
                     </SectionCard.Section>
@@ -455,7 +455,7 @@ export const NodePluginExecutorContent = (props: IProps) => {
                             >
                                 {selectedNodeUuids.size === connectedNodes.length
                                     ? t('node-plugin-executor.content.deselect-all')
-                                    : t('node-plugin-executor.content.select-all')}
+                                    : t('common.action.select-all')}
                             </Button>
                         )}
 

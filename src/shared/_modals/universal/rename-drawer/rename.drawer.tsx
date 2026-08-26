@@ -266,7 +266,7 @@ export const RenameModalShared = NiceModal.create((props: IProps) => {
                     iconColor="teal"
                     IconComponent={TbPencil}
                     iconVariant="soft"
-                    title={t('common.rename')}
+                    title={t('common.action.rename')}
                 />
             }
         >
@@ -298,7 +298,7 @@ export const RenameModalShared = NiceModal.create((props: IProps) => {
                             type="submit"
                             variant="soft"
                         >
-                            {t('common.save')}
+                            {t('common.action.save')}
                         </Button>
                     </Group>
                 </Stack>

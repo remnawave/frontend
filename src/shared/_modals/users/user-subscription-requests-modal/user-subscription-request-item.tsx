@@ -34,7 +34,7 @@ export const UserSubscriptionRequestItem = (props: IProps) => {
                     <Group align="flex-end" gap="xs" wrap="nowrap">
                         <Box style={{ flex: 1 }}>
                             <CopyableFieldShared
-                                label={t('common.ip-address')}
+                                label={t('common.field.ip-address')}
                                 size="sm"
                                 value={request.requestIp || '-'}
                             />
@@ -56,7 +56,7 @@ export const UserSubscriptionRequestItem = (props: IProps) => {
                     </Group>
 
                     <CopyableFieldShared
-                        label={t('get-user-subscription-request-history.feature.user-agent')}
+                        label={t('common.field.user-agent')}
                         size="sm"
                         value={request.userAgent || '-'}
                     />
@@ -74,7 +74,7 @@ export const UserSubscriptionRequestItem = (props: IProps) => {
                     />
 
                     <CopyableFieldShared
-                        label={t('get-user-subscription-request-history.feature.request-at')}
+                        label={t('common.field.request-at')}
                         size="sm"
                         value={formatTimeUtil({
                             time: request.requestAt,

@@ -33,7 +33,7 @@ export const GeocheckFailedWidget = (props: IProps) => {
                 onClick={onRestart}
                 variant="soft"
             >
-                {t('common.try-again')}
+                {t('common.action.try-again')}
             </Button>
         </Stack>
     )

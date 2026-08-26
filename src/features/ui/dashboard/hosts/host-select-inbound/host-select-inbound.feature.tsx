@@ -73,7 +73,7 @@ export function HostSelectInboundFeature(props: IProps) {
                                 variant="light"
                                 visibleFrom="md"
                             >
-                                {t('common.change')}
+                                {t('common.action.change')}
                             </Button>
                         </Group>
                     ) : (
@@ -87,7 +87,7 @@ export function HostSelectInboundFeature(props: IProps) {
 
                                 <Stack gap={2} style={{ flex: 1 }}>
                                     <Text c="dimmed" fw={500} size="sm">
-                                        {t('host-select-inbound.feature.no-inbound-selected')}
+                                        {t('common.message.no-inbound-selected')}
                                     </Text>
                                     <Text c="dimmed" size="xs">
                                         {t(
@@ -98,7 +98,7 @@ export function HostSelectInboundFeature(props: IProps) {
                             </Group>
 
                             <Button leftSection={<TbFile size={14} />} size="xs" variant="light">
-                                {t('common.select')}
+                                {t('common.action.select')}
                             </Button>
                         </Group>
                     )}

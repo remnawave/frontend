@@ -203,7 +203,7 @@ export const ExternalSquadsResponseHeadersTabWidget = (props: IProps) => {
                             }}
                             variant="soft"
                         >
-                            {t('common.save')}
+                            {t('common.action.save')}
                         </Button>
                     </Group>
                 </Group>

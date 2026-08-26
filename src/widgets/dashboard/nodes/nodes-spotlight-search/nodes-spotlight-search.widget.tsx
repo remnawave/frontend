@@ -71,7 +71,7 @@ export const NodesSpotlightSearchWidget = ({ nodes }: IProps) => {
             scrollable
             searchProps={{
                 leftSection: <TbServer2 size={20} />,
-                placeholder: `${t('common.search')}...`
+                placeholder: `${t('common.action.search')}...`
             }}
             shortcut={['mod + F']}
         />

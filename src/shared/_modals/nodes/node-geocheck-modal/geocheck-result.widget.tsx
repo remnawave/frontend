@@ -141,7 +141,7 @@ export const GeocheckResultWidget = (props: IProps) => {
 
                     {view === 'image' && imageSrc && (
                         <>
-                            <Tooltip label={t('common.copy')}>
+                            <Tooltip label={t('common.action.copy')}>
                                 <ActionIcon
                                     loading={copying}
                                     onClick={handleCopy}
@@ -152,7 +152,7 @@ export const GeocheckResultWidget = (props: IProps) => {
                                 </ActionIcon>
                             </Tooltip>
 
-                            <Tooltip label={t('common.download')}>
+                            <Tooltip label={t('common.action.download')}>
                                 <ActionIcon
                                     loading={downloading}
                                     onClick={handleDownload}
@@ -165,7 +165,7 @@ export const GeocheckResultWidget = (props: IProps) => {
                         </>
                     )}
 
-                    <Tooltip label={t('common.refresh')}>
+                    <Tooltip label={t('common.action.refresh')}>
                         <ActionIcon color="teal" onClick={onRestart} size="lg" variant="soft">
                             <TbRefresh size={18} />
                         </ActionIcon>

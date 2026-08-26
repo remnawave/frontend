@@ -77,7 +77,7 @@ export const UserTorrentBlockerReportItem = (props: IProps) => {
                     <Group align="flex-end" gap="xs" wrap="nowrap">
                         <Box style={{ flex: 1 }}>
                             <CopyableFieldShared
-                                label={t('common.ip-address')}
+                                label={t('common.field.ip-address')}
                                 size="sm"
                                 value={report.report.actionReport.ip}
                             />

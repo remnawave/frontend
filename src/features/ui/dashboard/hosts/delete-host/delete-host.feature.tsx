@@ -31,11 +31,11 @@ export function DeleteHostFeature(props: IProps) {
 
     const openModal = () =>
         modals.openConfirmModal({
-            title: t('common.confirm-action'),
-            children: t('common.confirm-action-description'),
+            title: t('common.action.confirm-action'),
+            children: t('common.message.confirm-action-description'),
             labels: {
-                confirm: t('common.delete'),
-                cancel: t('common.cancel')
+                confirm: t('common.action.delete'),
+                cancel: t('common.action.cancel')
             },
             centered: true,
             cancelProps: {
@@ -46,7 +46,7 @@ export function DeleteHostFeature(props: IProps) {
         })
 
     return (
-        <Tooltip label={t('common.delete')}>
+        <Tooltip label={t('common.action.delete')}>
             <ActionIcon
                 color="red"
                 loading={isDeleteHostPending}

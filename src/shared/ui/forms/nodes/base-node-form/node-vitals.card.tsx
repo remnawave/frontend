@@ -114,7 +114,7 @@ export const NodeVitalsCard = <
                         <Group gap="xs" grow justify="space-between" w="100%">
                             <TextInput
                                 key={form.key('address')}
-                                label={t('base-node-form.address')}
+                                label={t('common.field.address')}
                                 {...form.getInputProps('address')}
                                 leftSection={<TbWorld size={16} />}
                                 placeholder={t('base-node-form.e-g-example-com')}
@@ -185,7 +185,7 @@ export const NodeVitalsCard = <
                                     description: integration.description
                                 }))}
                                 leftSection={<TbPlugConnected size={16} />}
-                                nothingFoundMessage={t('common.nothing-found')}
+                                nothingFoundMessage={t('common.message.nothing-found')}
                                 placeholder={t('node-integrations.select.placeholder')}
                                 classNames={{ option: integrationsClasses.option }}
                                 scrollAreaProps={{ styles: { content: { minWidth: '100%' } } }}

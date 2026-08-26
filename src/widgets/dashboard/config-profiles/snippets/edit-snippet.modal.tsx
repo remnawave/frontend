@@ -70,7 +70,7 @@ export const EditSnippetModal = (props: IProps) => {
         try {
             currentValue = JSON.parse(currentValue)
         } catch {
-            editSnippetForm.setFieldError('snippet', t('snippets.drawer.widget.invalid-json'))
+            editSnippetForm.setFieldError('snippet', t('common.message.invalid-json'))
             return
         }
 
@@ -167,7 +167,7 @@ export const EditSnippetModal = (props: IProps) => {
                                 } catch {
                                     editSnippetForm.setFieldError(
                                         'snippet',
-                                        t('snippets.drawer.widget.invalid-json')
+                                        t('common.message.invalid-json')
                                     )
                                 }
                             }}
@@ -198,7 +198,7 @@ export const EditSnippetModal = (props: IProps) => {
 
                         <Group>
                             <Button loading={isUpdating} type="submit" variant="soft">
-                                {t('common.save')}
+                                {t('common.action.save')}
                             </Button>
                             <Button
                                 disabled={isUpdating}
@@ -208,7 +208,7 @@ export const EditSnippetModal = (props: IProps) => {
                                 }}
                                 variant="subtle"
                             >
-                                {t('common.cancel')}
+                                {t('common.action.cancel')}
                             </Button>
                         </Group>
                     </EditorFooter>

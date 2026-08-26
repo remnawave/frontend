@@ -40,7 +40,7 @@ export function DataTableControls(props: IProps) {
                         size="sm"
                         variant="default"
                     >
-                        {t('common.reset')}
+                        {t('common.action.reset')}
                     </Button>
                 </Menu.Target>
                 <Menu.Dropdown>

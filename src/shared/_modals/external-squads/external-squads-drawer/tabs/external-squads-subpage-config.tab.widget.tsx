@@ -84,7 +84,7 @@ export const ExternalSquadsSubpageConfigTabWidget = (props: IProps) => {
                     size="md"
                     variant="soft"
                 >
-                    {t('common.save')}
+                    {t('common.action.save')}
                 </Button>
             </Stack>
         </Card>

@@ -265,7 +265,7 @@ export const CreateUserModal = NiceModal.create(() => {
                     size="md"
                     variant="light"
                 >
-                    {t('common.create')}
+                    {t('common.action.create')}
                 </Button>
             </ModalFooter>
         </Modal>

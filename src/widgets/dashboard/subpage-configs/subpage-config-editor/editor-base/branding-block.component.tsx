@@ -42,7 +42,7 @@ export function BrandingBlockComponent({ form }: IProps) {
                 <TextInput
                     classNames={{ input: styles.inputDark }}
                     key={form.key('brandingSettings.logoUrl')}
-                    label={t('subpage-config-visual-editor.widget.logo-url')}
+                    label={t('common.field.logo-url')}
                     placeholder="https://example.com/logo.png"
                     required
                     {...form.getInputProps('brandingSettings.logoUrl')}

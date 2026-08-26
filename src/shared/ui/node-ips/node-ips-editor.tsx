@@ -130,7 +130,7 @@ export const NodeIpsEditor = <
                         iconColor="cyan"
                         IconComponent={TbNetwork}
                         iconVariant="soft"
-                        title={t('node-ips.title')}
+                        title={t('common.field.ip-addresses')}
                         titleOrder={5}
                     />
 

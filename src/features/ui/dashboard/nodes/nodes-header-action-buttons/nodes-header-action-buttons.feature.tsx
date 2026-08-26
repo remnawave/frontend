@@ -172,7 +172,7 @@ export const NodesHeaderActionButtonsFeature = (props: IProps) => {
             </ActionIconGroup>
 
             <ActionIconGroup>
-                <Tooltip label={t('common.update')} withArrow>
+                <Tooltip label={t('common.action.update')} withArrow>
                     <ActionIcon
                         loading={isGetNodesPending || isPending || isRefetching}
                         onClick={() => refetchNodes()}
@@ -184,7 +184,7 @@ export const NodesHeaderActionButtonsFeature = (props: IProps) => {
                 </Tooltip>
             </ActionIconGroup>
             <ActionIconGroup>
-                <Tooltip label={t('nodes-header-action-buttons.feature.create-new-node')} withArrow>
+                <Tooltip label={t('common.action.create')} withArrow>
                     <ActionIcon
                         color="teal"
                         onClick={() => showModal('nodes_createNodeModal')}

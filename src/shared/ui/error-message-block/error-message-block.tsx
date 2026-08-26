@@ -18,7 +18,7 @@ export const ErrorMessageBlock = (props: IProps) => {
 
             <CopyButton timeout={2000} value={message}>
                 {({ copied, copy }) => (
-                    <Tooltip label={t('common.copy')}>
+                    <Tooltip label={t('common.action.copy')}>
                         <ActionIcon
                             className={classes.copyButton}
                             color={copied ? 'teal' : 'gray'}

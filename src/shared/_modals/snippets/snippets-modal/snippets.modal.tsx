@@ -67,7 +67,7 @@ export const SnippetsModal = NiceModal.create(() => {
                         <Group gap="xs">
                             <HelpActionIconShared hidden={false} screen="PAGE_SNIPPETS" />
 
-                            <Tooltip label={t('common.refresh')}>
+                            <Tooltip label={t('common.action.refresh')}>
                                 <ActionIcon
                                     loading={isRefetching}
                                     onClick={() => refetch()}

@@ -28,13 +28,13 @@ export const useSrhInspectorTableColumns = () => {
             },
             {
                 accessorKey: 'userAgent',
-                header: t('use-srh-inspector-table-columns.user-agent'),
+                header: t('common.field.user-agent'),
                 accessorFn: (originalRow) => originalRow.userAgent || '–',
                 size: 400
             },
             {
                 accessorKey: 'requestAt',
-                header: t('use-srh-inspector-table-columns.request-at'),
+                header: t('common.field.request-at'),
                 accessorFn: (originalRow) =>
                     formatTimeUtil({
                         time: originalRow.requestAt,

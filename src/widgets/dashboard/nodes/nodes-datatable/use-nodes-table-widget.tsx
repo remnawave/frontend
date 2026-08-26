@@ -68,10 +68,10 @@ export function getNodesTableColumns(
         {
             accessor: 'name',
             sortable: true,
-            title: t('common.name'),
+            title: t('common.field.name'),
             filter: (
                 <TextInput
-                    label={t('common.name')}
+                    label={t('common.field.name')}
                     leftSection={<TbSearch size={16} />}
                     onChange={(e) => filters.setNameQuery(e.currentTarget.value)}
                     rightSection={
@@ -209,13 +209,13 @@ export function getNodesTableColumns(
         {
             accessor: 'address',
             sortable: true,
-            title: t('use-nodes-table-widget.address'),
+            title: t('common.field.address'),
             render: ({ address, port }) => `${address}:${port}`
         },
         {
             accessor: 'ips',
             sortable: false,
-            title: t('use-nodes-table-widget.ip-addresses'),
+            title: t('common.field.ip-addresses'),
             render: ({ ips }) => <NodeIpsCompactView ips={ips} />
         },
         {
@@ -250,7 +250,7 @@ export function getNodesTableColumns(
                     clearable
                     comboboxProps={{ withinPortal: false }}
                     data={filters.availableInbounds}
-                    label={t('use-nodes-table-widget.inbounds')}
+                    label={t('common.field.inbounds')}
                     leftSection={<TbSearch size={16} />}
                     onChange={filters.setSelectedInbounds}
                     searchable
@@ -258,7 +258,7 @@ export function getNodesTableColumns(
                 />
             ),
             filtering: filters.selectedInbounds.length > 0,
-            title: t('use-nodes-table-widget.inbounds'),
+            title: t('common.field.inbounds'),
             render: ({ configProfile: { activeInbounds } }) =>
                 sortBy(activeInbounds, 'tag')
                     .map((inbound) => inbound.tag)

@@ -51,7 +51,7 @@ export function RevokeSubscriptionUserFeature(props: IProps) {
                 />
 
                 <ActionCardShared
-                    description={t('revoke-subscription-user.feature.passwords-only-decription')}
+                    description={t('revoke-subscription-user.feature.passwords-only-description')}
                     icon={<TbKey size={22} />}
                     iconColor="yellow"
                     isLoading={isPending}

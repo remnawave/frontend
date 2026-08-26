@@ -170,7 +170,7 @@ export function HwidInspectorTableWidget() {
             <DataTableShared.Title
                 actions={
                     <ActionIconGroup>
-                        <Tooltip label={t('common.update')} withArrow>
+                        <Tooltip label={t('common.action.update')} withArrow>
                             <ActionIcon
                                 loading={isLoading}
                                 onClick={() => refetch()}

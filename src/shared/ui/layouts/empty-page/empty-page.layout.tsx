@@ -23,7 +23,7 @@ export const EmptyPageLayout = (props: IProps) => {
 
                         <Stack align="center" gap="xs">
                             <Text fw={600} size="lg" ta="center">
-                                {title ?? t('common.nothing-found')}
+                                {title ?? t('common.message.nothing-found')}
                             </Text>
                         </Stack>
                     </Stack>

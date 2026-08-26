@@ -31,7 +31,7 @@ function JsonFieldOption(props: { field: THostJsonField }) {
             aria-labelledby={`${rowControl.labelId} ${rowControl.id}`}
             id={rowControl.id}
         >
-            {isValueSet(field) ? t('common.configured') : t('common.not-set')}
+            {isValueSet(field) ? t('common.message.configured') : t('common.message.not-set')}
         </Button>
     )
 }

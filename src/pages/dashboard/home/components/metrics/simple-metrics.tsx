@@ -25,7 +25,7 @@ export const getSimpleMetrics = (
         {
             value: prettifyBytesUtil(Number(nodes.totalBytesLifetime)) ?? 0,
             IconComponent: PiChartBarDuotone,
-            title: t('simple-metrics.total-traffic'),
+            title: t('common.field.total-traffic'),
             iconVariant: 'soft',
             iconColor: 'green'
         },

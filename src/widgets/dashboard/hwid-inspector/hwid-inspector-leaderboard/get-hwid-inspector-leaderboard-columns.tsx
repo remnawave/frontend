@@ -39,7 +39,7 @@ export function getHwidInspectorLeaderboardColumns(
         },
         {
             accessor: 'username',
-            title: t('detailed-user-info-drawer.widget.username'),
+            title: t('common.field.username'),
             render: ({ username }) => username
         },
         {

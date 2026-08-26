@@ -19,7 +19,7 @@ export const getUsersMetrics = (
         {
             value: formatInt(users.totalUsers) ?? 0,
             IconComponent: PiUsersDuotone,
-            title: t('users-metrics.widget.total'),
+            title: t('common.field.total'),
             iconVariant: 'soft',
             iconColor: 'blue'
         },

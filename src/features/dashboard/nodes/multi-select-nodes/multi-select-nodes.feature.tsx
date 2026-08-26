@@ -94,10 +94,10 @@ export const MultiSelectNodesFeature = (props: IProps) => {
                             <Stack gap="sm">
                                 <Group justify="space-between">
                                     <Badge color="shaded-gray" size="lg" variant="soft">
-                                        {t('common.selected', { count: selectedRecords.length })}
+                                        {t('common.message.selected', { count: selectedRecords.length })}
                                     </Badge>
                                     <Group gap={0} justify="flex-end">
-                                        <Tooltip label={t('common.clear-selection')} withArrow>
+                                        <Tooltip label={t('common.action.clear-selection')} withArrow>
                                             <CloseButton onClick={() => setSelectedRecords([])} />
                                         </Tooltip>
                                     </Group>
@@ -165,7 +165,7 @@ export const MultiSelectNodesFeature = (props: IProps) => {
                                     size="sm"
                                     variant="soft"
                                 >
-                                    {t('common.usage-stats')}
+                                    {t('common.field.usage-stats')}
                                 </Button>
 
                                 <Button
@@ -179,7 +179,7 @@ export const MultiSelectNodesFeature = (props: IProps) => {
                                                     iconColor="cyan"
                                                     IconComponent={TbCategoryPlus}
                                                     iconVariant="soft"
-                                                    title={t('common.update')}
+                                                    title={t('common.action.update')}
                                                     titleOrder={5}
                                                 />
                                             ),
@@ -195,7 +195,7 @@ export const MultiSelectNodesFeature = (props: IProps) => {
                                     size="sm"
                                     variant="soft"
                                 >
-                                    {t('common.update')}
+                                    {t('common.action.update')}
                                 </Button>
 
                                 <Button
@@ -234,7 +234,7 @@ export const MultiSelectNodesFeature = (props: IProps) => {
                                                     iconColor="cyan"
                                                     IconComponent={TbDots}
                                                     iconVariant="soft"
-                                                    title={t('base-node-form.more-actions')}
+                                                    title={t('common.action.more-actions')}
                                                     titleOrder={5}
                                                 />
                                             ),
@@ -250,7 +250,7 @@ export const MultiSelectNodesFeature = (props: IProps) => {
                                     size="sm"
                                     variant="soft"
                                 >
-                                    {t('base-node-form.more-actions')}
+                                    {t('common.action.more-actions')}
                                 </Button>
                             </Stack>
                         </Paper>

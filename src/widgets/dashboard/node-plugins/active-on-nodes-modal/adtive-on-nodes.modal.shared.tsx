@@ -23,7 +23,7 @@ export const ActivePluginsOnNodesModalShared = (props: IProps) => {
                         <PiCpu size={24} />
                     </ThemeIcon>
                     <Text c="dimmed" size="sm" ta="center">
-                        {t('adtive-on-nodes.modal.shared.this-plugin-is-not-active-on-any-nodes')}
+                        {t('active-on-nodes.modal.shared.this-plugin-is-not-active-on-any-nodes')}
                     </Text>
                 </Stack>
             </Center>

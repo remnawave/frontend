@@ -167,8 +167,8 @@ export const EditManyHostsDrawer = NiceModal.create((props: IProps) => {
                 </Stack>
             ),
             labels: {
-                confirm: t('common.save'),
-                cancel: t('common.cancel')
+                confirm: t('common.action.save'),
+                cancel: t('common.action.cancel')
             },
             confirmProps: { color: 'teal', variant: 'soft' },
             onConfirm: () =>

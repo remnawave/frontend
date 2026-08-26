@@ -28,7 +28,7 @@ export function ResetNodeTrafficFeature(props: IProps) {
             }
             onClick={() => resetNodeTraffic({})}
         >
-            {t('reset-node-traffic.feature.reset-traffic')}
+            {t('common.action.reset-traffic')}
         </Menu.Item>
     )
 }

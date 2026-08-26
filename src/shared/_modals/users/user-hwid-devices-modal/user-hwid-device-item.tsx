@@ -75,7 +75,7 @@ export const UserHwidDeviceItem = (props: IProps) => {
                     <Group align="flex-end" gap="xs" wrap="nowrap">
                         <Box style={{ flex: 1 }}>
                             <CopyableFieldShared
-                                label={t('common.ip-address')}
+                                label={t('common.field.ip-address')}
                                 size="sm"
                                 value={device.requestIp || '-'}
                             />
@@ -98,13 +98,13 @@ export const UserHwidDeviceItem = (props: IProps) => {
 
                     <Group gap="xs" grow>
                         <CopyableFieldShared
-                            label={t('get-hwid-user-devices.feature.platform')}
+                            label={t('common.field.platform')}
                             size="sm"
                             value={device.platform || t('get-hwid-user-devices.feature.unknown')}
                         />
 
                         <CopyableFieldShared
-                            label={t('get-hwid-user-devices.feature.os-version')}
+                            label={t('common.field.os-version')}
                             size="sm"
                             value={device.osVersion || t('get-hwid-user-devices.feature.unknown')}
                         />
@@ -117,7 +117,7 @@ export const UserHwidDeviceItem = (props: IProps) => {
                     />
 
                     <CopyableFieldShared
-                        label={t('get-hwid-user-devices.feature.user-agent')}
+                        label={t('common.field.user-agent')}
                         size="sm"
                         value={device.userAgent || t('get-hwid-user-devices.feature.unknown')}
                     />

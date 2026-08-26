@@ -100,7 +100,7 @@ export function TagFilterBar(props: IProps) {
                     count={items?.length ?? 0}
                     icon={<TbStack2 size={16} />}
                     isActive={activeTag === null}
-                    label={t('common.all')}
+                    label={t('common.field.all')}
                     onClick={() => onChange(null)}
                 />
 
@@ -120,7 +120,7 @@ export function TagFilterBar(props: IProps) {
                         count={untaggedCount}
                         icon={<TbTagOff size={16} />}
                         isActive={activeTag === NO_TAG}
-                        label={t('common.without-tags')}
+                        label={t('common.field.without-tags')}
                         onClick={() => onChange(NO_TAG)}
                     />
                 )}

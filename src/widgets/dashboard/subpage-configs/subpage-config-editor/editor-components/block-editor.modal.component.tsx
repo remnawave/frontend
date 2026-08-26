@@ -135,7 +135,7 @@ export function BlockEditorModal(props: IProps) {
                             />
 
                             <SvgIconSelect
-                                label={t('block-editor.modal.component.svg-icon')}
+                                label={t('common.field.svg-icon')}
                                 onChange={(svgIconKey) => onChange({ ...block, svgIconKey })}
                                 svgLibrary={svgLibrary}
                                 value={block.svgIconKey}
@@ -168,7 +168,7 @@ export function BlockEditorModal(props: IProps) {
 
                             <LocalizedTextEditor
                                 enabledLocales={enabledLocales}
-                                label={t('block-editor.modal.component.description')}
+                                label={t('common.field.description')}
                                 multiline
                                 onChange={(description) => onChange({ ...block, description })}
                                 value={block.description}

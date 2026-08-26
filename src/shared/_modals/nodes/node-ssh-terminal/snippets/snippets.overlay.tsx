@@ -66,7 +66,7 @@ export const SnippetsOverlay = (props: IProps) => {
                             icon={
                                 draft ? (
                                     <ActionIcon
-                                        aria-label={t('common.cancel')}
+                                        aria-label={t('common.action.cancel')}
                                         color="gray"
                                         onClick={() => setDraft(null)}
                                         size="lg"
@@ -89,7 +89,7 @@ export const SnippetsOverlay = (props: IProps) => {
                             titleOrder={5}
                         />
 
-                        <CloseButton aria-label={t('common.close')} ml="auto" onClick={onClose} />
+                        <CloseButton aria-label={t('common.action.close')} ml="auto" onClick={onClose} />
                     </Group>
                 </SectionCard.Section>
 
@@ -99,7 +99,7 @@ export const SnippetsOverlay = (props: IProps) => {
                             <Stack gap="sm">
                                 <TextInput
                                     autoFocus
-                                    label={t('node-ssh.snippet-name')}
+                                    label={t('common.field.name')}
                                     onChange={(event) =>
                                         setDraft({ ...draft, name: event.currentTarget.value })
                                     }
@@ -197,7 +197,7 @@ export const SnippetsOverlay = (props: IProps) => {
                             onClick={() => void save()}
                             variant="soft"
                         >
-                            {t('common.save')}
+                            {t('common.action.save')}
                         </Button>
                     ) : (
                         <Button

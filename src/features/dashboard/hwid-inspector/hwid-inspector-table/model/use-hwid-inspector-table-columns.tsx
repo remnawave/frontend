@@ -30,12 +30,12 @@ export const useHwidInspectorTableColumns = () => {
             },
             {
                 accessorKey: 'platform',
-                header: t('use-hwid-inspector-table-columns.platform'),
+                header: t('common.field.platform'),
                 accessorFn: (originalRow) => originalRow.platform || '–'
             },
             {
                 accessorKey: 'osVersion',
-                header: t('use-hwid-inspector-table-columns.os-version'),
+                header: t('common.field.os-version'),
                 accessorFn: (originalRow) => originalRow.osVersion || '–',
                 size: 100
             },
@@ -46,14 +46,14 @@ export const useHwidInspectorTableColumns = () => {
             },
             {
                 accessorKey: 'userAgent',
-                header: t('use-hwid-inspector-table-columns.user-agent'),
+                header: t('common.field.user-agent'),
                 accessorFn: (originalRow) => originalRow.userAgent || '–',
                 size: 500
             },
 
             {
                 accessorKey: 'createdAt',
-                header: t('use-hwid-inspector-table-columns.created-at'),
+                header: t('common.field.created-at'),
                 accessorFn: (originalRow) =>
                     formatTimeUtil({
                         time: originalRow.createdAt,
@@ -71,7 +71,7 @@ export const useHwidInspectorTableColumns = () => {
             },
             {
                 accessorKey: 'updatedAt',
-                header: t('use-hwid-inspector-table-columns.updated-at'),
+                header: t('common.field.updated-at'),
                 accessorFn: (originalRow) =>
                     formatTimeUtil({
                         time: originalRow.updatedAt,

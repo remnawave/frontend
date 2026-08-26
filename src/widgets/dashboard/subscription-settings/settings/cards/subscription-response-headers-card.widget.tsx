@@ -239,7 +239,7 @@ export const SubscriptionResponseHeadersCardWidget = (props: IProps) => {
                                 <Alert
                                     color="red"
                                     icon={<PiInfo />}
-                                    title={t('subscription-tabs.widget.error')}
+                                    title={t('common.message.error')}
                                 >
                                     {form.errors.customResponseHeaders}
                                 </Alert>
@@ -267,7 +267,7 @@ export const SubscriptionResponseHeadersCardWidget = (props: IProps) => {
                             type="submit"
                             variant="soft"
                         >
-                            {t('common.save')}
+                            {t('common.action.save')}
                         </Button>
                     </Group>
                 </SettingsCardShared.Bottom>

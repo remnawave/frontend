@@ -247,7 +247,7 @@ export const BulkManyUsersUpdateModal = NiceModal.create((props: IProps) => {
                         size="md"
                         variant="light"
                     >
-                        {t('common.update')}
+                        {t('common.action.update')}
                     </Button>
                 </ModalFooter>
             </motion.div>

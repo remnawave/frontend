@@ -58,7 +58,7 @@ export const NodeIntegrationsModal = NiceModal.create(() => {
 
                 <Group justify="space-between">
                     <ActionIcon.Group>
-                        <Tooltip label={t('common.refresh')}>
+                        <Tooltip label={t('common.action.refresh')}>
                             <ActionIcon
                                 loading={isRefetching}
                                 onClick={() => refetch()}
@@ -70,7 +70,7 @@ export const NodeIntegrationsModal = NiceModal.create(() => {
                         </Tooltip>
                     </ActionIcon.Group>
 
-                    <Tooltip label={t('common.create')}>
+                    <Tooltip label={t('common.action.create')}>
                         <ActionIcon
                             color="teal"
                             onClick={() =>

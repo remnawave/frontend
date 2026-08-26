@@ -23,7 +23,7 @@ export const UniversalSpotlightContentShared = (props: IProps) => {
             scrollable
             searchProps={{
                 leftSection: <TbSearch color="var(--mantine-color-gray-5)" size={16} />,
-                placeholder: `${t('common.search')}...`
+                placeholder: `${t('common.action.search')}...`
             }}
             shortcut={['mod + F']}
         />

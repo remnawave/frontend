@@ -1,19 +1,14 @@
 {
   "constants": {
-    "dashboard": "Dashboard",
-    "config": "Xray Config",
     "home": "Home",
     "hosts": "Hosts",
     "nodes": "Nodes",
-    "nodes-bandwidth-table": "Bandwidth",
     "nodes-statistics": "Statistics",
     "nodes-metrics": "Metrics",
     "users": "Users",
     "overview": "Overview",
     "management": "Management",
     "subscription-settings": "Settings",
-    "utils": "Utilities",
-    "happ-routing-builder": "Happ Routing",
     "templates": "Templates",
     "subscription": "Subscription",
     "subscription-page": "Subscription Page",
@@ -33,75 +28,125 @@
     "http-stats": "HTTP Stats"
   },
   "common": {
-    "delete": "Delete",
-    "create": "Create",
-    "cancel": "Cancel",
-    "copied": "Copied",
-    "copy": "Copy",
-    "paste": "Paste",
-    "paste-default": "Paste default",
-    "documentation": "Documentation",
-    "refresh": "Refresh",
-    "save": "Save",
-    "update": "Update",
-    "enable": "Enable",
-    "disable": "Disable",
-    "continue": "Continue",
-    "confirm-action": "Confirm action",
-    "confirm-action-description": "Are you sure you want to perform this action? This action cannot be undone.",
-    "edit": "Edit",
-    "copy-uuid": "Copy UUID",
-    "copy-link": "Copy link",
-    "rename": "Rename",
-    "close": "Close",
-    "change": "Change",
-    "save-changes": "Save changes",
-    "remove": "Remove",
-    "add": "Add",
-    "select": "Select",
-    "loading": "Loading",
-    "success": "Success",
-    "download": "Download",
-    "search": "Search",
-    "nothing-found": "Nothing found",
-    "name": "Name",
-    "clone": "Clone",
-    "event-sent": "Event sent",
-    "open": "Open",
-    "view": "View",
-    "clear": "Clear",
-    "color": "Color",
-    "all": "All",
-    "without-tags": "Without tags",
-    "reset": "Reset",
-    "actions": "Actions",
-    "clear-selection": "Clear selection",
-    "select-all": "Select all",
-    "selected": "Selected: {{count}}",
-    "bulk-actions": "Bulk actions",
-    "bulk-edit": "Bulk edit",
-    "creation": "Creation",
-    "processing": "Processing",
-    "operation-completed": "Operation completed",
-    "usage-stats": "Usage stats",
-    "active-sessions": "Active sessions",
-    "shared-lists": "Shared lists",
-    "try-again": "Try again",
-    "interface": "Interface",
-    "ip-address": "IP address",
-    "not-set": "Not set",
-    "configured": "Configured"
+    "action": {
+      "actions": "Actions",
+      "add": "Add",
+      "add-users": "Add users",
+      "bulk-actions": "Bulk actions",
+      "bulk-edit": "Bulk edit",
+      "cancel": "Cancel",
+      "change": "Change",
+      "clear": "Clear",
+      "clear-selection": "Clear selection",
+      "clone": "Clone",
+      "close": "Close",
+      "confirm-action": "Confirm action",
+      "continue": "Continue",
+      "copy": "Copy",
+      "copy-link": "Copy link",
+      "copy-uuid": "Copy UUID",
+      "create": "Create",
+      "delete": "Delete",
+      "disable": "Disable",
+      "documentation": "Documentation",
+      "download": "Download",
+      "edit": "Edit",
+      "enable": "Enable",
+      "load-from-github": "Load from GitHub",
+      "more-actions": "More actions",
+      "next": "Next",
+      "open": "Open",
+      "paste": "Paste",
+      "paste-default": "Paste default",
+      "refresh": "Refresh",
+      "remove": "Remove",
+      "remove-users": "Remove users",
+      "rename": "Rename",
+      "reset": "Reset",
+      "reset-traffic": "Reset traffic",
+      "save": "Save",
+      "search": "Search",
+      "select": "Select",
+      "select-all": "Select all",
+      "try-again": "Try again",
+      "update": "Update",
+      "view": "View"
+    },
+    "field": {
+      "active-sessions": "Active sessions",
+      "address": "Address",
+      "all": "All",
+      "billing-node": "Billing node",
+      "color": "Color",
+      "created-at": "Created at",
+      "creation": "Creation",
+      "description": "Description",
+      "first-connected-at": "First connected at",
+      "inbounds": "Inbounds",
+      "inbounds-hosts": "Inbounds & hosts",
+      "interface": "Interface",
+      "internal-squads": "Internal squads",
+      "ip-address": "IP address",
+      "ip-addresses": "IP addresses",
+      "logo-url": "Logo URL",
+      "name": "Name",
+      "os-version": "OS version",
+      "password": "Password",
+      "platform": "Platform",
+      "port": "Port",
+      "request-at": "Request at",
+      "shared-lists": "Shared lists",
+      "status": "Status",
+      "subscription-request-history": "Subscription request history",
+      "subscription-url": "Subscription URL",
+      "svg-icon": "SVG icon",
+      "system": "System",
+      "tag": "Tag",
+      "today": "Today",
+      "total": "Total",
+      "total-traffic": "Total traffic",
+      "updated-at": "Updated at",
+      "usage-stats": "Usage stats",
+      "user-agent": "User agent",
+      "user-status": "User status",
+      "username": "Username",
+      "without-tags": "Without tags"
+    },
+    "message": {
+      "click-to-see-all": "Click to see all",
+      "configured": "Configured",
+      "confirm-action-description": "Are you sure you want to perform this action? This action cannot be undone.",
+      "copied": "Copied",
+      "error": "Error",
+      "event-sent": "Event sent",
+      "invalid-json": "Invalid JSON",
+      "last-error-message": "Last error message",
+      "loading": "Loading",
+      "no-config-profiles-available": "No config profiles available",
+      "no-data-available": "No data available",
+      "no-data-available-for-the-selected-period": "No data available for the selected period",
+      "no-inbound-selected": "No inbound selected",
+      "no-profile-selected": "No profile selected",
+      "no-profiles-or-inbounds-found": "No profiles or inbounds found",
+      "not-set": "Not set",
+      "nothing-found": "Nothing found",
+      "operation-completed": "Operation completed",
+      "overdue": "Overdue",
+      "processing": "Processing",
+      "search-profiles-or-inbounds": "Search profiles or inbounds...",
+      "selected": "Selected: {{count}}",
+      "success": "Success",
+      "warning": "Warning"
+    }
   },
   "bandwidth-metrics": {
     "current-year": "Current year",
     "from-last-year": "vs last year",
     "calendar-month": "Calendar month",
-    "from-last-month-0": "vs last month",
     "last-30-days": "Last 30 days",
     "from-last-month": "vs last month",
     "last-7-days": "Last 7 days",
     "from-last-week": "vs last week",
-    "today": "Today",
     "from-yesterday": "vs yesterday"
   },
   "online-metrics": {
@@ -111,102 +156,66 @@
     "online-now": "Online now"
   },
   "simple-metrics": {
-    "system-uptime": "System uptime",
     "ram-usage": "RAM usage",
-    "total-traffic": "Total traffic",
     "total-online-on-nodes": "Total online on nodes"
-  },
-  "users-metrics": {
-    "disabled-users": "Disabled users",
-    "limited-users": "Limited users",
-    "expired-users": "Expired users",
-    "active-users": "Active users",
-    "total-users": "Total users",
-    "widget": {
-      "total": "Total"
-    }
   },
   "config-editor-actions": {
     "feature": {
       "format": "Format",
       "failed-to-save-invalid-json": "Failed to save, invalid JSON.",
-      "error": "Error",
       "save-anyway": "Save anyway",
-      "save-anyway-description": "Are you sure you want to save invalid Xray config? This action\n                                    can lead to unexpected behavior. Continue only if you know what\n                                    you are doing.",
-      "load-from-github": "Load from GitHub",
+      "save-anyway-description": "Are you sure you want to save an invalid Xray config? This action can lead to unexpected behavior. Continue only if you know what you are doing.",
       "tools": "Tools",
       "copy-all-content": "Copy all content",
-      "select-all": "Select all",
       "cut-selection": "Cut selection",
       "paste-from-clipboard": "Paste from clipboard",
-      "generate-keypair": "Generate Keypair"
+      "generate-keypair": "Generate keypair"
     }
-  },
-  "use-bandwidth-table-columns": {
-    "traffic-limit": "Traffic limit",
-    "traffic": "Traffic",
-    "traffic-cycle": "Traffic cycle",
-    "node-name": "Node name"
   },
   "action-group": {
     "feature": {
-      "new-user": "New user",
       "reset-table": "Reset table",
-      "clear-filters": "Clear filters",
-      "help": "Help"
+      "clear-filters": "Clear filters"
     }
   },
   "use-table-columns": {
-    "username": "Username",
-    "status": "Status",
     "last-connected-node": "Last connected node",
     "expire-at": "Expires at",
     "data-usage": "Data usage",
     "sub-link": "Sub-link",
-    "description": "Description",
     "traffic-reset": "Traffic reset",
     "never": "Never",
     "online-at": "Online at",
-    "last-ua": "Last UA",
-    "lifetime-used": "Lifetime Usage",
+    "lifetime-used": "Lifetime usage",
     "sub-link-revoked-at": "Sub-link revoked at",
     "created-at": "Created at",
-    "internal-squads": "Internal Squads",
-    "first-connected-at": "First connected at",
-    "sub-last-opened-at": "Sub last opened at",
-    "tag": "Tag",
-    "used-traffic": "Used Traffic (%)"
+    "internal-squads": "Internal squads",
+    "used-traffic": "Used traffic (%)"
   },
   "header-buttons": {
     "feature": {}
   },
   "header-action-buttons": {
     "feature": {
-      "create-new-host": "Create new host",
       "update-external-squads": "Update external squads",
-      "create-new-external-squad": "Create new external squad",
-      "external-squad-name": "External Squad Name",
+      "external-squad-name": "External squad name",
       "update-templates": "Update templates",
-      "create-new-template": "Create new template",
       "template-name": "Template name"
     }
   },
   "nodes-header-action-buttons": {
     "feature": {
-      "create-new-node": "Create new node",
       "restart-all-nodes": "Restart all nodes",
       "search-nodes": "Search nodes",
-      "force-restart": "Force restart",
-      "force-restart-description": "will guarantee that all nodes will fully restart Xray Core.",
-      "graceful-restart": "Graceful restart",
-      "graceful-restart-description-1": "will send a request to all nodes to restart Xray, but request can be unfulfilled if the node hash is the same as the current one. This is the default option.",
+      "force-restart-description": "Guarantees that all nodes fully restart Xray Core.",
+      "graceful-restart-description-1": "Sends a request to all nodes to restart Xray, but the request may go unfulfilled if the node hash matches the current one. This is the default option.",
       "force": "Force",
       "graceful": "Graceful"
     }
   },
   "config-editor": {
     "widget": {
-      "unsaved-changes": "Unsaved Changes",
+      "unsaved-changes": "Unsaved changes",
       "your-changes-will-be-lost-if-you-leave-this-page-without-saving": "Your changes will be lost if you leave this page without saving.",
       "leave": "Leave",
       "stay": "Stay"
@@ -214,77 +223,34 @@
   },
   "keypair": {
     "widget": {
-      "public-key": "Public Key",
-      "private-key": "Private Key",
-      "generate-key-pair": "Generate Key Pair",
+      "generate-key-pair": "Generate key pair",
       "both-keys": "Both keys"
     }
   },
   "create-host-modal": {
     "widget": {
       "new-host": "New host",
-      "please-select-the-config-profile-and-inbound": "Please select the config profile and inbound",
-      "error": "Error"
+      "please-select-the-config-profile-and-inbound": "Please select the config profile and inbound"
     }
   },
   "edit-host-modal": {
     "widget": {
       "edit-host": "Edit host",
-      "dangling-host-cannot-be-cloned": "Dangling host cannot be cloned",
-      "error": "Error"
-    }
-  },
-  "hosts-page-header": {
-    "widget": {
-      "list-of-all-hosts": "List of all hosts",
-      "about-hosts": "About hosts",
-      "header-description-line-1": "A host is an entry point for a user. A group of hosts forms a so-called \"subscription\".",
-      "header-description-line-2": "Each host can optionally refer to one server.",
-      "remark": "Remark",
-      "remark-description-line-1": "The name of the host. It can be anything but must remain unique within a single subscription.",
-      "remark-description-line-2": "The remark will be displayed in the list of available servers in the end client.",
-      "inbound": "Inbound",
-      "inbound-line-1": "It is necessary to select an inbound to which a host will be bound.",
-      "inbound-line-2": "The list of inbounds is derived from the \"Xray Config\".",
-      "address-and-port": "Address and port",
-      "address-and-port-line-1": "In most cases the IP/domain name should point to one of the connected nodes.",
-      "address-and-port-line-2": "The port must be open and accessible for incoming connections.",
-      "address-and-port-line-3": "Usually the port should match the inbound port from the Xray configuration.",
-      "advanced-settings": "\"Advanced Settings\" are additional parameters that can be used to further customize the host.",
-      "advanced-settings-2": "Anything specified in \"Advanced Settings\" will take a higher priority than what is specified in the Xray configuration."
-    }
-  },
-  "remark-info": {
-    "widget": {
-      "supports-templates": "Supports templates.",
-      "remark-description": "This is the name of the host that will be displayed in the dashboard."
+      "dangling-host-cannot-be-cloned": "Dangling host cannot be cloned"
     }
   },
   "create-node-modal": {
     "widget": {
       "create-node": "Create node",
-      "next": "Next",
       "back": "Back",
-      "checking-connection": "Checking connection",
       "connection-successful": "Connection successful",
       "connection-failed": "Connection failed",
-      "open-node": "Open Node",
-      "close": "Close"
+      "open-node": "Open node"
     }
   },
   "edit-node-modal": {
     "widget": {
       "edit-node": "Edit node"
-    }
-  },
-  "error-accordeon": {
-    "widget": {
-      "last-error-message": "Last error message"
-    }
-  },
-  "node-card": {
-    "widget": {
-      "copied": "Copied"
     }
   },
   "node-status-badge": {
@@ -295,165 +261,122 @@
       "disconnected": "disconnected"
     }
   },
-  "nodes-page-header": {
-    "widget": {
-      "list-of-all-nodes": "List of all nodes"
-    }
-  },
-  "table": {
-    "widget": {
-      "only-active-nodes": "Only nodes with active traffic tracking are displayed",
-      "today": "Today",
-      "nodes-with-active-traffic-tracking-not-found": "Nodes with active traffic tracking not found."
-    }
-  },
   "create-user-modal": {
     "widget": {
       "user-description": "User description",
-      "expiry-date": "Expiry Date",
+      "expiry-date": "Expiry date",
       "pick-value": "Pick value",
       "traffic-reset-strategy": "Traffic reset strategy",
       "traffic-reset-strategy-description": "How often the user's traffic usage statistics should be reset",
       "username-cannot-be-changed-later": "Username cannot be changed later",
-      "loading-user-creation": "Loading user creation modal ...",
       "create-user": "Create user",
-      "telegram-id-of-a-user-in-telegram": "Numeric ID of the user in Telegram messenger",
-      "email-of-a-user": "Email address of the user",
       "1-month": "+1 month",
       "3-months": "+3 months",
       "1-year": "+1 year",
       "2099-year": "year 2099",
       "hwid-user-limit-description": "This feature will only work if <highlight>Subscription → Settings (HWID Limit)</highlight> is enabled. <anchor>Learn more</anchor>.",
-      "disable-hwid-limit": "Disable HWID Limit",
-      "hwid-device-limit": "HWID Device Limit",
+      "disable-hwid-limit": "Disable HWID limit",
+      "hwid-device-limit": "HWID device limit",
       "expire-at-description": "The date and time when the user's subscription will expire.",
-      "internal-squads": "Internal squads",
       "internal-squads-description": "Specify which internal squads the user will be a member of."
     }
-  },
-  "login-form-feature": {
-    "username": "Username"
   },
   "home-page": {},
   "user-table": {
     "widget": {
-      "list-of-all-users": "List of all users",
       "error-loading-data": "Error loading data",
       "table-title": "Users"
     }
   },
   "view-user-modal": {
     "widget": {
-      "connection-details": "Connection Details",
-      "subscription-url": "Subscription URL",
-      "subscription-short-uuid": "Subscription short uuid",
-      "edit-user": "Edit user",
-      "subscription-qr-code": "Subscription QR Code",
+      "subscription-qr-code": "Subscription QR code",
       "edit-user-headline": "Edit user",
       "subscription-url-description-line-1": "Domain and path resolved from .env variable:",
       "subscription-url-description-line-2": "If you want to change it, please change it in the .env file and restart Remnawave using command:",
-      "view-accessible-nodes": "View accessible nodes",
-      "fetching-user-data": "Fetching user data...",
-      "more-actions": "More Actions",
       "management": "Management",
-      "danger-zone": "Danger Zone",
-      "information": "Information",
-      "detailed-info": "Detailed Info",
-      "subscription": "Subscription",
-      "accessible-nodes": "Accessible Nodes",
-      "qr-code": "QR Code"
+      "danger-zone": "Danger zone",
+      "detailed-info": "Detailed info",
+      "accessible-nodes": "Accessible nodes",
+      "qr-code": "QR code"
     }
   },
   "base-host-form": {
     "remark": "Remark",
-    "address": "Address",
-    "port": "Port",
-    "advanced-options": "Advanced options",
     "host": "Host",
     "path": "Path",
     "fingerprint": "Fingerprint",
-    "security-layer": "Security Layer",
+    "security-layer": "Security layer",
     "tls-transport-layer-security": "TLS (Transport Layer Security)",
     "none": "None",
     "inbounds-default": "Inbound's default",
-    "extra-xhttp": "XHTTP Extra",
+    "extra-xhttp": "XHTTP extra",
     "xhttp-extra-params": "XHTTP extra parameters",
-    "invalid-json": "Invalid JSON",
-    "clone": "Clone",
     "address-description-line-1": "Address must be the IP address or a domain name pointing to the connection destination.",
-    "address-description-line-2": "In most cases, it should points to the one of connected nodes.",
+    "address-description-line-2": "In most cases, it should point to one of the connected nodes.",
     "port-description-line-1": "Connection port.",
     "port-description-line-2": "In most cases, must match the port of selected inbound.",
     "sni-description-line-1": "SNI stands for Server Name Indication.",
     "sni-description-line-2": "If not specified, the value from config's inbound will be used.",
-    "host-visibility": "Host Visibility",
-    "select-one-inbound-to-apply-to-the-host": "Select an inbound to apply to the host",
-    "server-description-header": "Server Description",
+    "host-visibility": "Host visibility",
+    "server-description-header": "Server description",
     "server-description-placeholder": "Maximum 30 characters",
-    "basic": "Basic",
-    "advanced": "Advanced",
     "group-security": "Security",
     "group-transport": "Transport",
     "group-subscription": "Subscription",
     "group-client": "Client-specific",
     "group-advanced": "Advanced",
-    "hide-host": "Hide Host",
-    "hide-host-from-users-remnawave-will-send-host-only-for-raw-subscription-responses": "Hide host from users, Remnawave will send host only for RAW Subscription responses.",
-    "apps-specific": "Apps specific",
+    "hide-host": "Hide host",
     "single-domain": "Single domain",
     "default-mode-for-one-domain": "Default mode for one domain",
     "multi-domain": "Multi domain",
     "multi-domain-description": "Multiple domains separated by commas. Remnawave will randomly choose one of the domains.",
     "wildcard-domain": "Wildcard domain",
     "wildcard-domain-description": "Wildcard pattern for subdomains. Remnawave will replace * with the randomly generated string.",
-    "override-sni-from-address": "Override SNI from Address",
-    "override-sni-from-address-description": "This option replaces the SNI value with the specified Address field value. This is particularly useful for multi-domain configurations or wildcard domains configuration.",
-    "legacy-options": "Legacy options",
+    "override-sni-from-address": "Override SNI from address",
+    "override-sni-from-address-description": "This option replaces the SNI value with the specified Address field value. This is particularly useful for multi-domain or wildcard domain configurations.",
     "shuffled-hosts-hover-card": "Shuffled hosts will be placed at the top of the list and sorted randomly.",
     "vless-route-description": "From 1 to 65535, 0/empty to disable",
-    "shuffle-host": "Shuffle Host",
+    "shuffle-host": "Shuffle host",
     "enable-x25519mlkem768": "Enable x25519mlkem768",
     "pick-nodes-which-resolved-from-this-host-only-visual-assignment": "Pick nodes which resolved from this host. Only visual assignment.",
     "nodes": "Nodes",
-    "select-a-xray-json-template": "Select a Xray JSON Template",
-    "xray-json-template": "Xray JSON Template",
-    "vital-parameters": "Vital Parameters",
-    "exclude-this-host-from-specific-internal-squads": "Exclude this host from specific Internal Squads",
-    "excluded-internal-squads": "Excluded Internal Squads",
+    "select-a-xray-json-template": "Select an Xray JSON template",
+    "xray-json-template": "Xray JSON template",
+    "vital-parameters": "Vital parameters",
+    "exclude-this-host-from-specific-internal-squads": "Exclude this host from specific internal squads",
+    "excluded-internal-squads": "Excluded internal squads",
     "keep-sni-blank": "Keep SNI blank",
     "keep-sni-blank-description": "In some cases, SNI must be left blank. Use this option to force an empty SNI. Note that this option has the highest priority, so it will be applied even if SNI is already set.",
-    "exclude-from-subscription-type": "Exclude from Subscription Type",
-    "hidden-host-description": "By default, Remnawave will not include hidden hosts in the subscription. Hidden host can be used with Mihomo and Xray-Json Advanced, Raw.",
+    "exclude-from-subscription-type": "Exclude from subscription type",
+    "hidden-host-description": "By default, Remnawave will not include hidden hosts in the subscription. Hidden hosts can be used with Mihomo, Xray-Json Advanced, and Raw.",
     "server-description-1": "In supported clients, the protocol name (e.g. vless) will be replaced with the description specified here.",
     "server-description-2": "Not all client applications support this feature. For more details, refer to the documentation of the apps listed below.",
     "supported-clients": "Supported clients",
     "mapper": "Mapper",
-    "internal-squads-mode-description": "Choose how the selected Internal Squads are treated for this host",
     "internal-squads-mode-exclude": "Exclude",
     "internal-squads-mode-allow-only": "Allow only",
-    "allowed-internal-squads": "Allowed Internal Squads",
-    "allow-this-host-only-for-specific-internal-squads": "Show this host only to the selected Internal Squads",
+    "allowed-internal-squads": "Allowed internal squads",
+    "allow-this-host-only-for-specific-internal-squads": "Show this host only to the selected internal squads",
     "group-assignment": "Assignment",
     "access-mode": "Access mode",
     "override-type": "Override type",
     "sni": "SNI",
     "alpn": "ALPN",
-    "vless-route-id": "Vless Route ID",
+    "vless-route-id": "Vless route ID",
     "mux-params": "MUX",
     "sockopt-params": "SockOpt",
-    "final-mask-params": "Final Mask",
+    "final-mask-params": "Final mask",
     "pinned-peer-cert-sha256": "Pinned peer certificate",
     "verify-peer-cert-by-name": "Verify peer certificate by name",
     "mihomo-x25519": "Mihomo X25519",
     "mihomo-ip-version": "Mihomo IP version",
-    "add-option": "Add",
     "no-options-title": "Nothing else configured",
     "no-options-description": "This host runs on its inbound and the essentials above. Add an option to change how it is generated, or who it reaches.",
     "no-bulk-options-title": "No changes queued",
     "no-bulk-options-description": "Every option you add is applied to all selected hosts. Leave one empty to clear that field on all of them.",
     "bulk-option-will-be-cleared": "Will be cleared on all selected hosts.",
     "leave-field-untouched": "Leave this field untouched",
-    "remove-option": "Remove",
     "options": "Options"
   },
   "base-node-form": {
@@ -461,7 +384,6 @@
     "select-country": "Select country",
     "internal-name": "Internal name",
     "internal-name-placeholder": "e.g. US-NY-Node-01",
-    "address": "Address",
     "e-g-example-com": "e.g. example.com",
     "traffic-tracking": "Track traffic usage",
     "limit": "Limit",
@@ -469,72 +391,59 @@
     "e-g-1-31": "e.g. 1-31",
     "notify-percent": "Notification %",
     "e-g-50": "e.g. 50",
-    "consumption-m-line-1": "Applies selected multiplier to user's traffic (1.0 = normal, 0.5 = half, 2.0 = double).",
+    "consumption-m-line-1": "Applies the selected multiplier to the user's traffic (1.0 = normal, 0.5 = half, 2.0 = double).",
     "consumption-m-line-2": "In simple terms, this means that if a user's traffic limit is 1 GiB and the consumption multiplier is 2.0, the user will be able to use only 0.5 GiB of traffic (real usage), but Remnawave will show usage as 1 GiB and the user will be LIMITED.",
-    "node-vitals": "Node Vitals",
+    "node-vitals": "Vitals",
     "consumption": "Consumption",
     "core-configuration": "Core configuration",
-    "tracking-and-billing": "Tracking & Billing",
-    "more-actions": "More Actions",
-    "quick-actions": "Quick Actions",
-    "copy-node-uuid": "Copy Node UUID",
+    "tracking-and-billing": "Tracking & billing",
     "management": "Management"
   },
   "home": {
     "page": {
       "online-stats": "Online stats",
-      "system": "System",
       "bandwidth": "Bandwidth",
-      "short-stats": "Home",
-      "remnawave-usage": "Remnawave Usage",
-      "process-details": "Process Details"
+      "remnawave-usage": "Remnawave usage",
+      "process-details": "Process details"
     },
     "runtime-info": {
-      "title": "Runtime Metrics Guide",
+      "title": "Runtime metrics guide",
       "subtitle": "What every number on a runtime card actually means",
       "intro": "Each card shows a live snapshot of a single <highlight>Remnawave process</highlight>. Use this guide to understand what each metric measures and when to worry about it.",
-      "instance-types-title": "Process Types",
+      "instance-types-title": "Process types",
       "instance-types-description": "Remnawave is split into several specialized processes. Each one has its own job, its own memory, and its own event loop.",
-      "api-description": "Handles every HTTP requests from the dashboard, and subscription endpoints. This is the <highlight>main user-facing process</highlight> — virtually every panel and subscription request is served here.",
+      "api-description": "Handles every HTTP request from the dashboard and subscription endpoints. This is the <highlight>main user-facing process</highlight> — virtually every panel and subscription request is served here.",
       "scheduler-description": "A <highlight>cron-driven dispatcher</highlight>. It does not run any work itself — at the scheduled moment it simply pushes a job into the queue for the <highlight>Processor</highlight> to pick up.",
       "processor-description": "The actual <highlight>worker</highlight>. It consumes queued jobs and runs the heavy lifting: <highlight>node health checks</highlight>, <highlight>traffic aggregation</highlight> per user and per node, and other long-running tasks that must not block the API.",
       "memory-description": "Where the process holds its working data. All values are reported by Node.js in real time.",
-      "heap-description": "Memory used by JavaScript objects, managed by <highlight>V8</highlight> — Node.js' engine. Shown as <highlight>used / total</highlight>. A high ratio is <highlight>expected and healthy</highlight> — V8 holds onto memory until it really needs more, so something like <highlight>100 / 120 MB</highlight> is normal, not a warning.",
+      "heap-description": "Memory used by JavaScript objects, managed by <highlight>V8</highlight> — the Node.js engine. Shown as <highlight>used / total</highlight>. A high ratio is <highlight>expected and healthy</highlight> — V8 holds onto memory until it really needs more, so something like <highlight>100 / 120 MB</highlight> is normal, not a warning.",
       "rss-description": "<highlight>Resident Set Size</highlight> — the total physical memory the OS has given to the process, including the heap, native code, and shared libraries. The best single signal of <highlight>how much RAM this process is actually using</highlight>.",
       "external-description": "Memory held outside V8 by native C++ objects bound to JavaScript — typical sources are <highlight>open sockets</highlight>, <highlight>streams</highlight>, and Buffer-backed payloads.",
       "array-buffers-description": "Memory specifically allocated for <highlight>ArrayBuffer</highlight> and <highlight>Buffer</highlight> instances (raw binary data). It is counted as a subset of <highlight>External</highlight>.",
       "event-loop-description": "Health of the single-threaded loop that drives all asynchronous work in Node.js. If the loop is blocked, the whole process stalls.",
       "delay-description": "Average time between consecutive event loop ticks. A healthy value sits close to <highlight>0–2 ms</highlight>. Higher numbers mean the loop is being blocked by long synchronous work.",
       "p99-description": "<highlight>99th percentile</highlight> of event loop delay over the measurement window. Reveals worst-case latency that the average alone hides — useful for spotting occasional spikes.",
-      "active-handles-description": "Long-lived resources keeping the loop alive: <highlight>open sockets</highlight>, <highlight>timers</highlight>, <highlight>file descriptors</highlight>. Steady-state is normal; <highlight>unbounded growth</highlight> is a strong leak signal."
+      "active-handles-description": "Long-lived resources keeping the loop alive: <highlight>open sockets</highlight>, <highlight>timers</highlight>, <highlight>file descriptors</highlight>. A steady state is normal; <highlight>unbounded growth</highlight> is a strong leak signal."
     }
   },
   "login-form": {
     "feature": {
       "sign-in": "Sign in",
-      "your-password": "Your password",
-      "password": "Password",
-      "username": "Username"
+      "your-password": "Your password"
     }
   },
   "statistic-nodes": {
     "component": {
-      "no-data-available-for-the-selected-period": "No data available for the selected period",
-      "click-to-see-all": "Click to see all",
-      "no-data-available": "No data available",
-      "current-month": "Current Month",
+      "current-month": "Current month",
       "7-days": "7 days",
       "14-days": "14 days",
       "30-days": "30 days",
       "60-days": "60 days",
       "90-days": "90 days",
       "180-days": "180 days",
-      "total-traffic": "Total Traffic",
-      "total-traffic-placeholder": "Total Traffic: {{totalTraffic}}",
-      "top-nodes": "Top Nodes",
-      "filter-nodes": "Filter Nodes",
-      "previous-day": "Previous day",
-      "next-day": "Next day",
+      "total-traffic": "Total traffic",
+      "total-traffic-placeholder": "Total traffic: {{totalTraffic}}",
+      "top-nodes": "Top nodes",
       "node": "Node",
       "traffic": "Traffic",
       "3-days": "3 days"
@@ -565,33 +474,24 @@
   },
   "get-time-ago": {
     "util": {
-      "invalid-date": "Invalid Date",
+      "invalid-date": "Invalid date",
       "not-connected-yet": "Not connected yet"
     }
   },
-  "toggle-user-status-button": {
-    "feature": {
-      "enable": "Enable user",
-      "disable": "Disable user"
-    }
-  },
-  "bulk-user-actioins-modal": {
+  "bulk-user-actions-modal": {
     "widget": {
-      "user-deletion-description": "Delete all users with selected status. If you will delete users with \"Active\" status, you should restart all nodes to apply changes.",
+      "user-deletion-description": "Delete all users with the selected status. If you delete users with the \"Active\" status, you should restart all nodes to apply the changes.",
       "select-status": "Delete by status"
     }
   },
   "register-form": {
     "feature": {
-      "username": "Username",
-      "password": "Password",
-      "generate": "Generate & Copy",
+      "generate": "Generate & copy",
       "confirm-password": "Confirm password",
       "sign-up": "Sign up",
       "password-copied": "Password copied",
       "password-copied-message": "Password copied to clipboard",
       "password-copied-error": "Failed to copy password to clipboard",
-      "error": "Error",
       "passwords-do-not-match": "Passwords do not match",
       "password-too-short": "Minimum 24 characters",
       "register-description": "Create a super-admin account to get started",
@@ -608,29 +508,15 @@
       "validation-error": "Validation error",
       "main-settings": "Main settings",
       "you-must-add-at-least-one-remark-with-text": "You must add at least one remark with text",
-      "user-status-remarks-description": "The following values will be displayed in the subscription page if the user is expired, limited or disabled.",
+      "user-status-remarks-description": "The following values will be displayed on the subscription page if the user is expired, limited, or disabled.",
       "user-status-remarks-description-line-2": "You can add multiple remarks for each status.",
-      "user-status-remarks-description-line-3": "Because expired, limited and disabled users are not able to connect to the server, they will see these remarks in the client instead of receiving an empty subscription.",
-      "update-settings": "Update settings",
-      "enabled": "Enabled",
-      "disabled": "Disabled",
       "serve-json-at-base-subscription": "Serve JSON at base subscription",
-      "serve-json-description": "Serve JSON configurations at the base subscription path (without having to append /json). If the client supports it, it will be served JSON, otherwise it will be served as usual.",
+      "serve-json-description": "Serve JSON configurations at the base subscription path (without having to append /json). If the client supports it, it will be served JSON; otherwise, it will be served as usual.",
       "custom-remarks": "Custom remarks"
-    },
-    "page": {
-      "component": {
-        "what-is-subscription-settings": "What is subscription settings?",
-        "subscription-settings-description": "The settings below apply to subscription link details used and displayed by client apps such as Happ, v2RayNG, Streisand, etc.",
-        "subscription-settings-description-line-2": "It is recommended to change the values to match your specific needs and circumstances."
-      }
     }
   },
   "multi-select-hosts": {
     "feature": {
-      "set-inbound": "Set inbound",
-      "set-port": "Set Port",
-      "port": "Port",
       "dangling-hosts-skipped": "{{count}} dangling host(s) were skipped and not cloned."
     }
   },
@@ -649,22 +535,14 @@
     "update": {
       "tab": {
         "feature": {
-          "update-fields-for-all-users": "Update fields for all users",
-          "user-status": "User status",
-          "status": "Status",
           "select-status": "Select status",
-          "expire-date": "Expiry Date",
-          "select-expiration-date": "Select expiration date",
-          "update-users": "Update Users"
+          "update-users": "Update users"
         }
       }
     },
     "actions": {
       "tab": {
         "feature": {
-          "reset": "Reset",
-          "perform-actions-on-all-users": "Perform actions on all users",
-          "reset-traffic": "Reset Traffic",
           "reset-traffic-description": "Resets the traffic usage to zero for all selected users"
         }
       }
@@ -672,9 +550,7 @@
     "danger": {
       "tab": {
         "feature": {
-          "danger-zone": "Danger Zone",
-          "danger-zone-description": "These actions are irreversible and can result in permanent data loss.",
-          "delete-users-by-status": "Delete Users By Status",
+          "delete-users-by-status": "Delete users by status",
           "delete-users-by-status-description": "Permanently deletes all users with the selected status"
         }
       }
@@ -684,194 +560,88 @@
     "actions": {
       "tab": {
         "feature": {
-          "revoke-subscription": "Revoke Subscription",
-          "revoke": "Revoke",
-          "reset-traffic": "Reset Traffic",
-          "reset": "Reset",
+          "revoke-subscription": "Revoke subscription",
           "perform-action-on-users": "Perform actions on {{usersCount}} selected users",
-          "resets-the-traffic-usage-to-zero-for-all-selected-users": "Resets the traffic usage to zero for all selected users",
           "revokes-subscription-for-all-selected-users": "Revokes subscription for all selected users",
           "specify-internal-squads-that-will-be-assigned-to-the-user": "Specify internal squads that will be assigned to the user",
-          "internal-squads": "Internal squads",
-          "extend-expiration-date": "Extend Expiration Date",
+          "extend-expiration-date": "Extend expiration date",
           "enter-the-number-of-days-to-extend-the-expiration-date": "Enter the number of days to extend the expiration date",
-          "extend-days": "Extend Days",
+          "extend-days": "Extend days",
           "extend": "Extend",
-          "extend-expiration-date-description": "Add days to the expiration date for selected users. Days will be added to the current expiration date of each user."
+          "extend-expiration-date-description": "Add days to the expiration date for the selected users. Days will be added to the current expiration date of each user."
         }
       }
     },
     "danger": {
       "tab": {
         "feature": {
-          "delete-users": "Delete Users",
-          "danger-zone": "Danger Zone",
-          "these-actions-are-irreversible-and-can-result-in-permanent-data-loss": "These actions are irreversible and can result in permanent data loss.",
+          "delete-users": "Delete users",
           "permanently-deletes-all-selected-users-and-their-data": "Permanently deletes all selected users and their data"
-        }
-      }
-    },
-    "update": {
-      "tab": {
-        "feature": {
-          "update-fields-counter": "Update fields for {{usersCount}} selected users",
-          "user-status": "User status",
-          "status": "Status",
-          "select-status": "Select status",
-          "expire-date": "Expiry Date",
-          "select-expiration-date": "Select expiration date",
-          "update-users": "Update Users"
         }
       }
     }
   },
   "get-user-subscription-links": {
     "feature": {
-      "subscription-links": "Subscription links",
-      "connection-keys": "Connection Keys"
-    }
-  },
-  "user-usage-modal": {
-    "widget": {
-      "no-data-available-for-the-selected-period": "No data available for the selected period",
-      "no-data-available": "No data available",
-      "click-to-show-all": "Click to show all",
-      "click-to-highlight-only-this-node": "Click to highlight only this node",
-      "usage-by-period": "Usage by period",
-      "7-days": "7 days",
-      "14-days": "14 days",
-      "30-days": "30 days",
-      "60-days": "60 days",
-      "90-days": "90 days",
-      "180-days": "180 days",
-      "365-days": "365 days",
-      "total-traffic": "Total traffic",
-      "top-nodes": "Top nodes",
-      "stacked": "Stacked",
-      "grouped": "Grouped",
-      "filter-nodes": "Filter nodes",
-      "bar-chart": "Bar chart",
-      "show-nodes": "Show nodes",
-      "click-to-see-all": "Click to see all"
+      "connection-keys": "Connection keys"
     }
   },
   "active-sessions-drawer": {
     "widget": {
       "requirements": "Requirements",
-      "warning-activity": "An IP address will be shown when <highlight>Xray-Core</highlight> considers the <highlight>connection still open</highlight>. This may result in some displayed IP addresses that are no longer actually connected. Use the <highlight>clock</highlight> icon to track the last activity of a given IP.",
+      "warning-activity": "An IP address will be shown when <highlight>Xray Core</highlight> considers the <highlight>connection still open</highlight>. As a result, some of the IP addresses shown may no longer be connected. Use the <highlight>clock</highlight> icon to track the last activity of a given IP.",
       "warning-version": "Remnawave Node version <highlight>{{version}}</highlight> or higher",
       "warning-docker": "Add the following to <highlight>docker-compose.yml</highlight> of Remnawave Node (/opt/remnanode)",
       "warning-patience": "Fetching data may take some time, do not close this window!",
-      "warning-n-plus-one": "<highlight>Please note</highlight>: this request performs <highlight>N+1</highlight> operations to gRPC API of <highlight>Xray-Core</highlight> due to the lack of bulk data retrieval methods. <highlight>N</highlight> is the number of users currently online on the given node.",
-      "get-data": "Get Data",
+      "warning-n-plus-one": "<highlight>Please note</highlight>: this request performs <highlight>N+1</highlight> calls to the gRPC API of <highlight>Xray Core</highlight> due to the lack of bulk data retrieval methods. <highlight>N</highlight> is the number of users currently online on the given node.",
       "fetching": "Fetching active sessions...",
       "progress": "Completed {{completed}} of {{total}} nodes",
-      "job-failed": "Job failed",
       "job-failed-description": "Failed to fetch active sessions.",
-      "clear": "Clear",
       "active-ips-across-nodes": "Active IP addresses",
       "distinct-ips": "Distinct IPs"
     }
   },
   "detailed-user-info-drawer": {
     "widget": {
-      "detailed-user-info": "Detailed User Info",
-      "user-information": "User Information",
-      "uuid": "UUID",
+      "detailed-user-info": "Detailed user info",
+      "user-information": "User information",
       "short-uuid": "Short UUID",
-      "username": "Username",
       "email": "Email",
       "telegram-id": "Telegram ID",
-      "description": "Description",
-      "traffic-information": "Traffic Information",
-      "used-traffic": "Traffic Usage",
-      "lifetime-used-traffic": "Lifetime Traffic Usage",
-      "traffic-limit": "Traffic Limit",
-      "traffic-limit-strategy": "Traffic Limit Strategy",
-      "last-traffic-reset": "Last Traffic Reset",
-      "subscription-information": "Subscription Information",
-      "subscription-url": "Subscription URL",
-      "expires-at": "Expires At",
-      "last-opened-at": "Last Opened At",
-      "last-user-agent": "Last User Agent",
-      "revoked-at": "Revoked At",
-      "connection-information": "Connection Information",
-      "trojan-password": "Trojan Password",
-      "ss-password": "SS Password",
-      "last-online": "Last Online",
-      "last-connected-node": "Last Connected Node",
+      "traffic-information": "Traffic information",
+      "used-traffic": "Traffic usage",
+      "lifetime-used-traffic": "Lifetime traffic usage",
+      "traffic-limit": "Traffic limit",
+      "traffic-limit-strategy": "Traffic limit strategy",
+      "last-traffic-reset": "Last traffic reset",
+      "subscription-information": "Subscription information",
+      "expires-at": "Expires at",
+      "revoked-at": "Revoked at",
+      "connection-information": "Connection information",
+      "trojan-password": "Trojan password",
+      "ss-password": "SS password",
+      "last-online": "Last online",
+      "last-connected-node": "Last connected node",
       "timestamps": "Timestamps",
-      "created-at": "Created At",
-      "updated-at": "Updated At",
-      "tag": "Tag",
-      "first-connected-at": "First connected at",
-      "active-internal-squads": "Active Internal Squads"
+      "active-internal-squads": "Active internal squads"
     }
   },
   "subscription-tabs": {
     "widget": {
       "show-custom-remarks": "Show custom remarks",
-      "show-custom-remark-description-line-1": "Only for EXPIRED, LIMITED and DISABLED users.",
-      "show-custom-remark-description-line-2": "If this setting is disabled, EXPIRED, LIMITED and DISABLED users will receive an actual empty host list instead.",
+      "show-custom-remark-description-line-2": "If this setting is disabled, EXPIRED, LIMITED, and DISABLED users will receive an actual empty host list instead.",
       "additional-response-headers": "Response headers",
       "headers-that-will-be-sent-with-subscription-content": "Headers that will be sent with the subscription content.",
       "randomize-hosts": "Randomize hosts",
       "randomize-hosts-description": "Randomize hosts in subscription content",
-      "additional-options": "Additional Options",
-      "configure-additional-subscription-options": "Configure additional subscription options",
-      "error": "Error",
-      "save-settings": "Save Settings",
-      "save-your-subscription-settings-to-apply-changes": "Save your subscription settings to apply changes",
-      "announce-and-routing": "Announce & Routing",
-      "announce-and-routing-description": "Configure announce message and routing rules for supported clients",
-      "announce-description": "This text will be displayed beneath the subscription name in supported clients such as Happ and v2rayTUN",
-      "enter-announce-text-max-200-characters": "Enter Announce text, max. 200 characters"
+      "additional-options": "Additional options",
+      "configure-additional-subscription-options": "Configure additional subscription options"
     }
   },
   "nodes-realtime-metrics": {
     "widget": {
-      "total-upload": "Total upload",
-      "total-download": "Total download",
-      "average-bps": "Average BPS",
-      "active-nodes": "Active nodes",
-      "current-hour": "Current hour",
-      "download-speed": "Download Speed",
-      "upload-speed": "Upload Speed"
-    }
-  },
-  "node-users-usage-drawer": {
-    "widget": {
-      "no-data-available-for-the-selected-period": "No data available for the selected period",
-      "click-to-see-all-users": "Click to see all users",
-      "click-on-bars-to-view-details": "Click on bars to view details",
-      "no-data-available": "No data available",
-      "click-to-show-all-users": "Click to show all users",
-      "click-to-highlight-only-this-user": "Click to highlight only this user",
-      "users-accordeon": "Users (showing top {{displayedUserCount}} of {{significantUserCount}} active out of {{userCount}} total)",
-      "usage-by-period": "Usage by period",
-      "7-days": "7 days",
-      "14-days": "14 days",
-      "30-days": "30 days",
-      "60-days": "60 days",
-      "90-days": "90 days",
-      "180-days": "180 days",
-      "365-days": "365 days",
-      "performance-line-1": "Some of the data might be hidden to improve performance.",
-      "performance-line-2": "Use Grafana or any other relevant tool to view all data.",
-      "total-traffic": "Total traffic",
-      "top-users": "Top users",
-      "stacked": "Stacked",
-      "grouped": "Grouped",
-      "filter-users": "Filter users",
-      "bar-chart": "Bar Chart",
-      "previous-day": "Previous day",
-      "next-day": "Next day",
-      "hidden-users": "({{hiddenCount}} users with <{{minTraffic}} hidden)",
-      "total-traffic-prettybytestoanyutil": "Total traffic: {{totalTraffic}}",
-      "user": "User",
-      "traffic": "Traffic",
-      "no-users-with-traffic-100-kb": "No users with traffic ≥ 100 KiB",
-      "users-hidden-with-less-than-100-kb": "{{usersCount}} users hidden with less than 100 KiB ({{totalTraffic}} total)"
+      "download-speed": "Download speed",
+      "upload-speed": "Upload speed"
     }
   },
   "internal-squads-usage-drawer": {
@@ -879,7 +649,7 @@
       "title": "How usage is calculated",
       "summary": "Returns internal squad members who spent at least the given threshold over the selected period, with the <b>total volume</b> for each of them.",
       "nodes-title": "Which nodes are counted",
-      "nodes-intro": "A squad isn't tied to nodes directly – the link is derived through inbounds:",
+      "nodes-intro": "A squad isn't tied to nodes directly — the link is derived through inbounds:",
       "nodes-step-1": "All inbounds that belong to the internal squad are taken.",
       "nodes-step-2": "For each inbound, the config profiles it belongs to are resolved.",
       "nodes-step-3": "A node is counted when it has such a profile set as <b>active</b> and that inbound is enabled on the node itself.",
@@ -889,37 +659,20 @@
       "traffic-sum": "For each member, all of their daily per-node records are summed over the period from the start of <code>start</code> to the end of <code>end</code> (both dates inclusive, UTC).",
       "traffic-threshold": "Only users whose total is <b>≥ minTotalBytes</b> make it into the response. Volume is returned in <hl>raw bytes</hl>, without rounding.",
       "caveats-title": "What to keep in mind",
-      "caveats-per-node": "Traffic is counted <b>per whole node</b>, not per inbound. If a node is shared across squads (its active profile also serves other inbounds), the user's total includes all their traffic on that node – including what they poured through other squads' inbounds. It's an <hl>upper bound</hl>, not exact per-squad attribution.",
+      "caveats-per-node": "Traffic is counted <b>per whole node</b>, not per inbound. If a node is shared across squads (its active profile also serves other inbounds), the user's total includes all their traffic on that node — including what they poured through other squads' inbounds. It's an <hl>upper bound</hl>, not exact per-squad attribution.",
       "caveats-membership": "Squad membership and the node set are taken <b>at request time</b>, not historically. A user who left the squad disappears from the response (even though they used traffic); a recently joined one shows all their traffic for the period, including days before joining. The same goes for a change of a node's active profile.",
-      "caveats-sorting": "The list is sorted by <b>user ID</b>, not by volume. Since traffic changes in real time, data may drift between pages – to hunt down abusers set a <code>minTotalBytes</code> threshold instead of reading everyone."
+      "caveats-sorting": "The list is sorted by <b>user ID</b>, not by volume. Since traffic changes in real time, data may drift between pages — to hunt down abusers, set a <code>minTotalBytes</code> threshold instead of reading everyone."
     }
   },
   "get-hwid-user-devices": {
     "feature": {
-      "no-devices-found": "No devices found",
-      "no-devices-match-your-search": "No devices match your search",
-      "platform": "Platform",
       "unknown": "Unknown",
       "model": "Model",
-      "user-agent": "User Agent",
       "added": "Added",
-      "os-version": "OS Version",
-      "delete-device": "Delete Device",
-      "device": "Device",
+      "delete-device": "Delete device",
       "devices": "Devices",
-      "hwid-devices": "HWID Devices",
-      "important-note": "Important note",
-      "important-note-line-1": "This feature is only available with the",
-      "important-note-line-2": ".env value.",
-      "important-note-line-3": "Not all client applications support this feature.",
-      "important-note-line-4": "If left empty, ",
-      "important-note-line-5": "will be used.",
-      "important-note-line-6": "Please check out the documentation for more information.",
-      "important-note-line-7": "Learn more.",
-      "loading-hwid-devices": "Loading HWIDs and Devices ...",
-      "search-by-hwid": "Search by HWID",
-      "enter-hwid-to-filter-devices": "Enter HWID to filter devices ...",
-      "delete-all-devices": "Delete All Devices"
+      "hwid-devices": "HWID devices",
+      "delete-all-devices": "Delete all devices"
     }
   },
   "headers-manager": {
@@ -931,147 +684,90 @@
   },
   "template-selector": {
     "search-templates": "Search templates...",
-    "official-templates": "Official Templates",
-    "author-templates": "{{author}} Templates",
+    "official-templates": "Official templates",
+    "author-templates": "{{author}} templates",
     "modal": {
-      "load-template": "Load Template"
+      "load-template": "Load template"
     },
     "add-template": "Add template"
   },
   "use-download-template": {
     "failed-to-load-template": "Failed to load template",
-    "template-loaded": "Template Loaded",
+    "template-loaded": "Template loaded",
     "template-name-has-been-loaded-into-the-editor": "{{name}} has been loaded into the editor",
-    "load-failed": "Load Failed",
+    "load-failed": "Load failed",
     "failed-to-load-template-please-try-again": "Failed to load template. Please try again.",
-    "select-template-to-load": "Select Template to Load"
+    "select-template-to-load": "Select template to load"
   },
   "pm2-metrics": {
-    "total-processes": "Total Processes",
-    "total-memory": "Total Memory",
-    "average-cpu": "Average CPU",
-    "heaviest-process": "Heaviest Process"
-  },
-  "internal-squads-header": {
-    "widget": {
-      "list": "List of all internal squads"
-    }
+    "total-processes": "Total processes",
+    "total-memory": "Total memory"
   },
   "internal-squads-grid": {
     "widget": {
-      "no-internal-squads": "No Internal Squads",
+      "no-internal-squads": "No internal squads",
       "create-your-first-internal-squad-to-get-started": "Create your first internal squad to get started",
       "delete-squad": "Delete squad",
-      "inbounds": "Inbounds",
-      "users": "Users",
-      "edit-inbounds": "Edit inbounds",
-      "remove-users": "Remove users",
-      "add-users": "Add users"
+      "users": "Users"
     }
   },
   "config-profiles-grid": {
     "widget": {
-      "no-config-profiles": "No Config Profiles",
+      "no-config-profiles": "No config profiles",
       "create-your-first-config-profile-to-get-started": "Create your first config profile to get started",
       "delete-profile": "Delete profile",
-      "inbounds": "Inbounds",
       "nodes": "Nodes",
-      "download": "Download",
       "quick-view": "Quick view",
-      "edit-xray-config": "Edit Xray Config",
-      "xray-config": "Xray Config"
-    }
-  },
-  "config-profiles-header": {
-    "widget": {
-      "list-of-all-config-profiles": "List of all config profiles"
+      "xray-config": "Xray config"
     }
   },
   "view-infra-provider": {
     "drawer": {
       "widget": {
-        "infra-provider": "Infra Provider",
+        "infra-provider": "Infra provider",
         "name-description": "The name of the provider. This is used to identify the provider in the UI.",
         "enter-provider-name": "Enter provider name",
-        "favicon-link": "Favicon Link",
+        "favicon-link": "Favicon link",
         "enter-favicon-link": "Enter favicon link",
-        "favicon-link-description": "A link to the favicon of the provider. It is used to display the favicon of the provider in the UI. You can enter only the domain name.",
+        "favicon-link-description": "A link to the provider's favicon, used to display it in the UI. You can enter just the domain name.",
         "login-url": "Login URL",
         "enter-login-url": "Enter login URL",
-        "login-url-description": "The URL of the login page of the provider. It will help you to quickly move to the login page of the provider."
+        "login-url-description": "The URL of the provider's login page. It lets you jump straight to that page."
       }
     }
   },
   "update-billing-date-modal": {
     "widget": {
-      "update-billing-date": "Update Billing Date",
-      "current-date": "Current Date",
-      "new-date": "New Date",
-      "today": "Today",
+      "update-billing-date": "Update billing date",
+      "current-date": "Current date",
+      "new-date": "New date",
       "tomorrow": "Tomorrow",
-      "next-month": "Next Month"
+      "next-month": "Next month"
     }
   },
   "infra-providers-table": {
     "widget": {
-      "create-infra-provider": "Create Infra Provider",
-      "infra-providers": "Infra Providers",
-      "list-of-all-infra-providers": "List of all infra providers",
       "no-providers-found": "No providers found."
     }
   },
-  "use-infra-providers-columns": {
-    "hoster-name": "Hoster name",
-    "providers": "providers",
-    "login-url": "Login URL",
-    "total": "Total, $",
-    "servers": "Servers",
-    "no-servers": "No servers"
-  },
   "infra-billing-records-table": {
     "widget": {
-      "billing-records-sorted-by-date": "Billing records sorted by date",
-      "infra-billing-records": "Infra Billing Records",
       "no-billing-records-found": "No billing records found."
     }
   },
-  "use-infra-billing-records-columns": {
-    "hoster-name": "Hoster name",
-    "billed-at": "Billed at",
-    "paid": "Paid, $"
-  },
   "infra-billing-nodes": {
     "widget": {
-      "add-node": "Add Node",
-      "list-of-all-infra-billing-nodes": "List of all infra billing nodes sorted by next billing date",
-      "infra-billing-nodes": "Infra Billing Nodes",
       "no-nodes-found": "No nodes found.",
       "add-a-node": "Add a node",
       "update-multiple-nodes": "Update multiple nodes"
     }
   },
-  "use-infra-billing-nodes-columns": {
-    "hoster-name": "Hoster name",
-    "node": "Node",
-    "next-billing-at": "Next billing at",
-    "quick-update-to-next-month": "Quick update to next month"
-  },
-  "next-billing-at-cell": {
-    "in-current-month": "In current month",
-    "far-future": "Far future",
-    "date-approaching": "Date approaching",
-    "today": "Today",
-    "tomorrow": "Tomorrow",
-    "more-than-3-days-ago": "More than 3 days ago",
-    "yesterday": "Yesterday"
-  },
   "create-infra-billing-record": {
     "modal": {
       "widget": {
-        "error": "Error",
         "please-select-a-provider": "Please select a provider",
-        "bill-record": "Bill Record",
-        "billed-at": "Billed At",
+        "bill-record": "Bill record",
+        "billed-at": "Billed at",
         "the-date-and-time-when-the-bill-was-paid": "The date and time when the bill was paid.",
         "payment-amount-usd": "Payment amount, USD",
         "amount": "Amount"
@@ -1081,10 +777,8 @@
   "create-infra-billing-node": {
     "modal": {
       "widget": {
-        "error": "Error",
         "please-select-a-provider-and-billing-node": "Please select a provider and billing node",
-        "billing-node": "Billing Node",
-        "next-billing-at": "Next Billing At",
+        "next-billing-at": "Next billing at",
         "next-billing-at-description": "The date and time for the next billing of this node. Remnawave will notify you about upcoming billing.",
         "existing": "Existing",
         "custom": "Custom",
@@ -1095,15 +789,7 @@
   "active-nodes-list": {
     "modal": {
       "shared": {
-        "profile-is-active-on": "Profile is active on {{nodeCount}} node(s)",
         "this-profile-is-not-active-on-any-nodes": "This profile is not active on any nodes"
-      }
-    }
-  },
-  "active-nodes-list-with-store": {
-    "modal": {
-      "shared": {
-        "active-nodes": "Active Nodes"
       }
     }
   },
@@ -1115,12 +801,12 @@
       "loading-computed-config-profile": "Loading computed config profile...",
       "computed-config-profile-loaded-successfully": "Computed config profile loaded successfully",
       "the-computed-config-profile-description": "The computed config profile shows the final configuration after all snippets have been applied.",
-      "view-computed": "View Computed"
+      "view-computed": "View computed"
     }
   },
   "flat-inbound-checkbox-card": {
     "shared": {
-      "inbound-config-inbound-tag": "Inbound Config: {{inboundTag}}"
+      "inbound-config-inbound-tag": "Inbound config: {{inboundTag}}"
     }
   },
   "virtualized-flat-inbounds-list": {
@@ -1130,7 +816,6 @@
   },
   "select-billing-node": {
     "shared": {
-      "billing-node": "Billing Node",
       "no-billing-nodes-available": "No billing nodes available",
       "select-the-billing-node": "Select the billing node.",
       "select-billing-node": "Select billing node..."
@@ -1138,7 +823,7 @@
   },
   "select-infra-provider": {
     "shared": {
-      "infrastructure-provider": "Infrastructure Provider",
+      "infrastructure-provider": "Infrastructure provider",
       "no-providers-available": "No providers available",
       "select-the-infrastructure-provider": "Select the infrastructure provider.",
       "select-provider": "Select provider..."
@@ -1153,102 +838,63 @@
   "user-accessible-nodes": {
     "modal": {
       "widget": {
-        "loading-accessible-nodes": "Loading accessible nodes...",
-        "access-summary": "Access Summary",
-        "user-accessible-nodes": "User Accessible Nodes"
+        "user-accessible-nodes": "User accessible nodes"
       }
     }
   },
   "internal-squads": {
     "drawer": {
       "widget": {
-        "selected-from-multiple-profiles": "From multiple profiles",
-        "no-inbounds-selected": "No inbounds selected",
-        "choose-inbounds-from-any-profiles": "Choose inbounds from any profiles",
-        "update-internal-squad": "Update Internal Squad",
-        "search-profiles-or-inbounds": "Search profiles or inbounds...",
-        "config-profiles": "Config Profiles",
-        "flat-list": "Flat List",
-        "no-profiles-or-inbounds-found": "No profiles or inbounds found",
-        "no-config-profiles-available": "No config profiles available",
-        "all": "All",
+        "config-profiles": "Config profiles",
+        "flat-list": "Flat list",
         "selected": "Selected",
         "unselected": "Unselected",
-        "edit-internal-squad": "Edit Internal Squad",
+        "edit-internal-squad": "Edit internal squad",
         "selected-inbounds": "Selected inbounds: {{count}}"
       }
     }
   },
   "host-select-inbound": {
     "feature": {
-      "no-inbound-selected": "No inbound selected",
       "choose-an-inbound-to-apply-to-the-host": "Choose an inbound to apply to the host"
     }
   },
   "show-config-profiles-with-inbounds": {
     "feature": {
-      "config-profile": "Config Profile",
       "no-config-profile-selected": "No config profile selected",
       "choose-a-profile-to-configure-inbounds-for-this-node": "Choose a profile to configure inbounds for this node"
     }
   },
   "access-settings-card": {
-    "access-settings": "Access Settings",
+    "access-settings": "Access settings",
     "select-an-external-squad-to-apply-custom-settings-to-this-user": "Select an external squad to apply custom settings to this user.",
-    "external-squad": "External Squad",
+    "external-squad": "External squad",
     "select-an-external-squad": "Select an external squad..."
   },
   "device-tag-settings-card": {
-    "device-and-tag-settings": "Device & Tag Settings"
+    "device-and-tag-settings": "Device & tag settings"
   },
-  "user-indentity-creation-card": {
-    "user-identity": "User Identity"
+  "user-identity-creation-card": {
+    "user-identity": "User identity"
   },
   "hosts-config-profiles": {
     "drawer": {
       "widget": {
-        "no-profile-selected": "No profile selected",
         "unknown-inbound": "Unknown inbound",
-        "selected": "selected",
-        "no-inbound-selected": "No inbound selected",
-        "search-profiles-or-inbounds": "Search profiles or inbounds...",
-        "no-profiles-or-inbounds-found": "No profiles or inbounds found",
-        "no-config-profiles-available": "No config profiles available",
         "assign-an-inbound-to-the-host": "Assign an inbound to the host"
       }
     }
   },
   "stats": {
     "widget": {
-      "current-date": "Current Date",
       "upcoming-in": "Upcoming in {{month}}",
       "nodes-pending-payment": "nodes pending payment",
       "payments-in": "Payments in {{month}}",
       "total-payments-made": "total payments made",
-      "total-spent": "Total Spent",
+      "total-spent": "Total spent",
       "lifetime-spending": "lifetime spending",
-      "overdue": "Overdue",
       "payment-overdue": "payment overdue",
-      "all-up-to-date": "all up to date",
-      "next-payment": "Next payment",
-      "no-upcoming-payments": "no upcoming payments"
-    }
-  },
-  "edit-node-by-uuid-modal": {
-    "widget": {
-      "loading-node": "Loading node..."
-    }
-  },
-  "hosts-filters": {
-    "feature": {
-      "all-config-profiles": "All Config Profiles",
-      "all-inbounds": "All Inbounds",
-      "filters": "Filters",
-      "select-config-profile": "Select config profile",
-      "select-inbound": "Select inbound",
-      "search-by-remark": "Search by remark...",
-      "address": "Address",
-      "filter-by-tags": "Filter by tags"
+      "all-up-to-date": "all up to date"
     }
   },
   "disclaimer-overlay": {
@@ -1266,7 +912,7 @@
     "reconnecting": "Reconnecting..."
   },
   "mobile-warning-overlay": {
-    "mobile-device-detected": "Mobile Device Detected",
+    "mobile-device-detected": "Mobile device detected",
     "description-line-1": "This page contains complex tables that may not be comfortable to use on mobile devices.",
     "description-line-2": "Here are some controls you can use to manage the table on mobile devices.",
     "show-or-hide-columns": "Show or hide columns",
@@ -1279,27 +925,23 @@
   },
   "internal-squad-header-action-buttons": {
     "feature": {
-      "create-internal-squad": "Create Internal Squad",
-      "create-a-new-internal-squad-by-entering-a-name-below": "Create a new internal squad by entering a name below.",
-      "it-cant-be-changed-later": "It can't be changed later",
-      "squad-name": "Squad Name",
+      "squad-name": "Squad name",
       "enter-squad-name": "Enter squad name"
     }
   },
   "config-profiles-header-action-buttons": {
     "feature": {
-      "create-config-profile": "Create Config Profile",
       "create-a-new-config-profile-by-entering-a-name-below": "Create a new config profile by entering a name below.",
-      "you-can-customize-xray-config-after-creation": "You can customize XRay config after creation.",
-      "profile-name": "Profile Name",
+      "you-can-customize-xray-config-after-creation": "You can customize the Xray config after creation.",
+      "profile-name": "Profile name",
       "enter-profile-name": "Enter profile name"
     }
   },
   "restart-node-button": {
     "feature": {
       "restart": "Restart",
-      "restart-description-line-1": "ensures that the node completely restarts the Xray core. It is recommended option.",
-      "restart-description-line-2": "will send a request to this node to restart Xray, but request can be unfulfilled if the node hash is the same as the current one."
+      "restart-description-line-1": "Ensures that the node completely restarts Xray Core. This is the recommended option.",
+      "restart-description-line-2": "Sends a request to this node to restart Xray, but the request may go unfulfilled if the node hash matches the current one."
     }
   },
   "node-details-card": {
@@ -1308,72 +950,48 @@
     "no-inbound-traffic-data": "No inbound traffic data",
     "no-outbound-traffic-data": "No outbound traffic data",
     "widget": {
-      "node-details": "Node Details",
-      "enable-node": "Enable Node",
-      "disable-node": "Disable Node",
+      "node-details": "Details",
+      "enable-node": "Enable node",
+      "disable-node": "Disable node",
       "config-profile-or-inbounds-is-missing": "Config profile or inbounds is missing",
-      "xray-core-version": "Xray Core Version",
+      "xray-core-version": "Xray Core version",
       "remnawave-node-version": "Node version, @remnawave/node"
     }
   },
   "config-profiles": {
     "drawer": {
       "widget": {
-        "config-profiles": "Config Profiles",
-        "no-profile-selected": "No profile selected",
-        "no-inbounds-selected": "No inbounds selected",
-        "search-profiles-or-inbounds": "Search profiles or inbounds...",
-        "no-profiles-or-inbounds-found": "No profiles or inbounds found",
-        "no-config-profiles-available": "No config profiles available"
+        "config-profiles": "Config profiles",
+        "no-inbounds-selected": "No inbounds selected"
       }
-    }
-  },
-  "language-selector": {
-    "component": {
-      "persian": "Persian",
-      "russian": "Russian",
-      "chinese": "Chinese",
-      "french": "French",
-      "additional-languages": "Additional Languages",
-      "english-is-always-enabled": "English is always enabled",
-      "english": "English"
     }
   },
   "node-system-card": {
     "widget": {
-      "system-info": "System Info",
+      "system-info": "System info",
       "memory": "Memory",
-      "used": "Used",
-      "free": "Free",
-      "total": "Total",
-      "system": "System",
-      "system-uptime": "System Uptime",
       "network": "Network",
       "kernel": "Kernel"
     }
   },
   "node-stats": {
     "card": {
-      "stats": "Stats",
       "traffic-refill-in-days": "Traffic refill in (days):",
       "represents-the-uptime-of-the-xray-core": "Represents the uptime of the Xray Core"
     }
   },
   "host-tags-input": {
-    "tag-can-only-contain-uppercase-letters-numbers-underscores-and-colons": "Tag can only contain uppercase letters, numbers, underscores and colons",
-    "tag-must-be-less-than-32-characters": "Tag must be less than 32 characters",
-    "tags-are-not-visible-to-end-users-tag-will-be-sent-with-raw-subscription-only": "Tags are not visible to end users. Tag will be sent with RAW subscription only.",
-    "clear-value": "Clear value"
+    "tags-are-not-visible-to-end-users-tag-will-be-sent-with-raw-subscription-only": "Tags are not visible to end users. Tag will be sent with RAW subscription only."
   },
   "rename-modal": {
     "shared": {
-      "new-name": "New Name"
+      "new-name": "New name"
     }
   },
   "internal-squad-accessible-nodes": {
     "modal": {
       "widget": {
-        "internal-squad-accessible-nodes": "Internal Squad Accessible Nodes"
+        "internal-squad-accessible-nodes": "Internal squad accessible nodes"
       }
     }
   },
@@ -1387,57 +1005,37 @@
   },
   "get-user-subscription-request-history": {
     "feature": {
-      "subscription-request-history": "Subscription Request History",
-      "nothing-to-show": "Nothing to show...",
-      "request-at": "Request At",
-      "user-agent": "User Agent",
-      "request-history": "Request History"
+      "request-history": "Request history"
     }
   },
   "use-hwid-inspector-table-columns": {
-    "platform": "Platform",
-    "os-version": "OS Version",
-    "device-model": "Device Model",
-    "user-agent": "User Agent",
-    "user-uuid": "User UUID",
-    "created-at": "Created At",
-    "updated-at": "Updated At"
+    "device-model": "Device model"
   },
   "hwid-inspector-table": {
     "widget": {
-      "hwid-devices-list": "HWID Devices list"
+      "hwid-devices-list": "HWID devices list"
     }
   },
   "hwid-inspector-metrics": {
     "widget": {
-      "apps": "Apps",
-      "platforms": "Platforms",
-      "total-unique-devices": "Total Unique Devices",
-      "total-hwid-devices": "Total HWID Devices",
-      "avg-devices-per-user": "Avg Devices Per User",
-      "platform-distribution": "Platform Distribution",
-      "app-distribution": "App Distribution",
+      "total-unique-devices": "Total unique devices",
+      "total-hwid-devices": "Total HWID devices",
+      "avg-devices-per-user": "Avg devices per user",
+      "platform-distribution": "Platform distribution",
+      "app-distribution": "App distribution",
       "no-platform-data": "No platform data available",
       "no-app-data": "No app data available"
     }
   },
   "use-srh-inspector-table-columns": {
     "request-ip": "Request IP",
-    "user-agent": "User Agent",
-    "request-at": "Request At",
-    "user-uuid": "User UUID",
-    "response-type": "Response Type",
-    "rule-name": "Rule Name"
-  },
-  "srh-inspector-table": {
-    "widget": {
-      "subscription-request-history": "Subscription Request History"
-    }
+    "response-type": "Response type",
+    "rule-name": "Rule name"
   },
   "srh-inspector-metrics": {
     "widget": {
       "requests": "Requests",
-      "hourly-request-statistics": "Hourly Request Statistics",
+      "hourly-request-statistics": "Hourly request statistics",
       "no-hourly-data-available": "No hourly data available"
     }
   },
@@ -1455,15 +1053,14 @@
   "snippets": {
     "drawer": {
       "widget": {
-        "invalid-json": "Invalid JSON",
         "snippet-cannot-be-empty": "Snippet cannot be empty",
         "snippet-cannot-contain-empty-objects": "Snippet cannot contain empty objects",
         "more-items": "more items...",
-        "create-snippet": "Create Snippet",
-        "snippet-name": "Snippet Name",
+        "create-snippet": "Create snippet",
+        "snippet-name": "Snippet name",
         "enter-snippet-name-cannot-be-changed-later": "Enter snippet name (cannot be changed later)",
         "snippet-is-valid": "Snippet is valid",
-        "edit-snippet": "Edit Snippet",
+        "edit-snippet": "Edit snippet",
         "snippets": "Snippets",
         "new-snippet": "New snippet"
       }
@@ -1471,11 +1068,11 @@
   },
   "response-rules-editor-actions": {
     "feature": {
-      "response-rules-debugger": "Response Rules Debugger",
+      "response-rules-debugger": "Response rules debugger",
       "response-rules-debugger-description-1": "Use this cURL command to test how your response rules match different request headers.",
       "response-rules-debugger-description-2": "You can import it into:",
       "or": ", or",
-      "curl-command": "cURL Command",
+      "curl-command": "cURL command",
       "copy-curl-command": "Copy cURL command",
       "debugger": "Debugger"
     }
@@ -1496,14 +1093,11 @@
     "establishing-mtls-connection": "Establishing mTLS connection...",
     "xray-core-is-up-and-running": "Xray Core is up and running!",
     "remnawave-will-try-to-reconnect-shortly": "Remnawave will try to reconnect shortly...",
-    "no-errros-so-far": "No errros so far",
-    "last-error-message": "Last error message"
+    "no-errors-so-far": "No errors so far"
   },
   "external-squad-card": {
     "widget": {
-      "users": "Users",
-      "add-users": "Add users",
-      "remove-users": "Remove users"
+      "users": "Users"
     }
   },
   "internal-squads-with-store": {
@@ -1516,7 +1110,7 @@
   "external-squads": {
     "drawer": {
       "widget": {
-        "subscription-templates": "Subscription Templates",
+        "subscription-templates": "Subscription templates",
         "subscription-templates-description-line-1": "Select one template for each subscription type. If not selected, the default template will be used automatically.",
         "subscription-templates-description-line-2": "Please note, Response Rules have a higher priority.",
         "select-a-template": "Select a template",
@@ -1525,11 +1119,6 @@
         "templates": "Templates",
         "settings": "Settings",
         "remarks": "Remarks"
-      }
-    },
-    "page": {
-      "component": {
-        "list-of-all-external-squads": "List of all external squads"
       }
     }
   },
@@ -1550,7 +1139,6 @@
     }
   },
   "srr-advanced-warning-overlay": {
-    "warning": "Warning",
     "warning-line-1": "This feature is designed for advanced users who understand the potential risks and implications.",
     "incorrect-configuration-line-1": "Incorrect configuration",
     "incorrect-configuration-line-2": "may cause unexpected behavior",
@@ -1559,11 +1147,11 @@
   },
   "auth-settings": {
     "header": {
-      "title": "Authentication Methods",
+      "title": "Authentication methods",
       "description": "Manage your authentication methods."
     },
     "error-modal": {
-      "title": "Update Failed",
+      "title": "Update failed",
       "description": "An error occurred while updating authentication settings. Please review the error details below and try again.",
       "unknown-error": "Request failed with unknown error."
     },
@@ -1571,11 +1159,11 @@
       "title": "Passkey",
       "manage-button": "Manage",
       "rpId": {
-        "label": "Frontend Domain",
+        "label": "Frontend domain",
         "description": "Public domain of your frontend without protocol (e.g., example.com)"
       },
       "origin": {
-        "label": "Backend Domain",
+        "label": "Backend domain",
         "description": "Fully qualified https origin of your backend (e.g., https://api.example.com)"
       }
     },
@@ -1584,29 +1172,28 @@
     },
     "telegram": {
       "adminIds": {
-        "label": "Allowed Admin IDs",
-        "description": "List of allowed admin IDs",
+        "label": "Allowed admin IDs",
         "placeholder": "Enter admin IDs"
       }
     },
     "fields": {
       "clientId": {
         "label": "Client ID",
-        "description": "Provider OAuth2 Client ID",
+        "description": "Provider OAuth2 client ID",
         "placeholder": "Enter client ID"
       },
       "clientSecret": {
-        "label": "Client Secret",
-        "description": "Provider OAuth2 Client Secret",
+        "label": "Client secret",
+        "description": "Provider OAuth2 client secret",
         "placeholder": "Enter client secret"
       },
       "plainDomain": {
-        "label": "Plain Domain",
+        "label": "Plain domain",
         "description": "Plain domain for PocketID (e.g., example.com)",
         "placeholder": "example.com"
       },
       "allowedEmails": {
-        "label": "Allowed Emails",
+        "label": "Allowed emails",
         "description": "List of allowed email addresses.",
         "placeholder": "Enter email"
       },
@@ -1615,7 +1202,7 @@
         "description": "Keycloak realm name"
       },
       "keycloakDomain": {
-        "label": "Keycloak Domain",
+        "label": "Keycloak domain",
         "description": "Keycloak server domain without protocol (e.g., keycloak.docs.rw)"
       }
     }
@@ -1623,26 +1210,23 @@
   "passkeys-drawer": {
     "component": {
       "passkeys": "Passkeys",
-      "active-passkeys": "Active Passkeys",
       "no-passkeys-registered-yet": "No passkeys registered yet",
       "add-passkeys-description": "Add your first passkey to enable secure, passwordless sign-in across your devices",
       "register": "Register",
-      "last-used-at": "Last Used At",
-      "created-at": "Created At"
+      "last-used-at": "Last used at"
     }
   },
   "branding-settings-card": {
     "widget": {
-      "customize-your-remnawave-instance": "Customize your Remnawave instance",
-      "branding-settings": "Branding Settings",
+      "customize-your-remnawave-instance": "Customize the look of your Remnawave instance",
+      "branding-settings": "Branding settings",
       "the-title-that-will-be-displayed-on-login-page": "The title that will be displayed on login page",
-      "brand-name": "Brand Name",
-      "logo-url": "Logo URL",
-      "the-url-to-your-brand-logo-image": "The URL to your brand logo image. Accepts a regular http(s) URL or a base64 data URL (data:image/svg+xml;base64,...)",
-      "colored-title-format": "Colored Title Format",
-      "colored-title-description": "You can color individual words using {color}word syntax. Supports both HEX colors (#RRGGBB) and MantineUI color names.",
+      "brand-name": "Brand name",
+      "the-url-to-your-brand-logo-image": "The URL to your brand logo image. Accepts a regular http(s) URL or a base64 data URL (data:image/svg+xml;base64,...).",
+      "colored-title-format": "Colored title format",
+      "colored-title-description": "You can color individual words using {color}word syntax. Supports both HEX colors (#RRGGBB) and Mantine color names.",
       "example-hex-colors": "Example with HEX colors",
-      "example-mantine-colors": "Example with MantineUI colors",
+      "example-mantine-colors": "Example with Mantine colors",
       "example-mixed": "Example with mixed colors",
       "color-format-note": "💡 Color applies only to the word immediately following the marker. Without markers, text will be white."
     }
@@ -1651,58 +1235,51 @@
     "widget": {
       "experimental-features": "Experimental features",
       "description": "Features that are still in development. They can change or disappear at any time.",
-      "legacy-layout-style": "Legacy Layout Style"
+      "legacy-layout-style": "Legacy layout style"
     }
   },
   "api-tokens-card": {
     "widget": {
       "api-tokens-description": "Manage your API access tokens for programmatic access.",
-      "api-tokens": "API Tokens",
+      "api-tokens": "API tokens",
       "no-api-tokens-found": "No API tokens found",
-      "token-name": "Token Name",
-      "create-api-token": "Create API Token",
+      "token-name": "Token name",
+      "create-api-token": "Create API token",
       "full-access": "Full access",
       "col-scopes": "Scopes",
       "col-created": "Created",
       "col-expires": "Expires",
       "expired": "Expired",
       "expires-in-days": "Expires in (days)",
-      "expires-in": "Expires",
       "one-time-notice": "For security reasons, the token is shown <emphasis>only once</emphasis> right after creation. Make sure to copy and store it somewhere safe — you won't be able to see it again."
     }
   },
   "external-squads-hosts": {
     "tab": {
       "widget": {
-        "host-overrides": "Host Overrides",
+        "host-overrides": "Host overrides",
         "override-host-settings-for-this-external-squad": "Override host settings for this external squad."
       }
     }
   },
   "reset-usage-user": {
     "feature": {
-      "reset": "Reset",
       "reset-usage": "Reset usage"
     }
   },
   "help-action-icon": {
     "shared": {
-      "help-article": "Help Article"
+      "help-article": "Help"
     }
   },
   "internal-squad-card": {
     "widget": {
-      "available-nodes": "Available Nodes"
+      "available-nodes": "Available nodes"
     }
   },
   "help-drawer": {
     "shared": {
       "failed-to-load-documentation": "Failed to load documentation"
-    }
-  },
-  "reset-node-traffic": {
-    "feature": {
-      "reset-traffic": "Reset Traffic"
     }
   },
   "external-squads-response-headers": {
@@ -1718,153 +1295,122 @@
   },
   "subscription-hwid-settings": {
     "widget": {
-      "hwid-card-description": "Carefully review documentation before enabling HWID feature. Not all client applications support this feature.",
-      "hwid-settings": "HWID Settings",
-      "hwid-limit": "HWID Limit",
+      "hwid-card-description": "Carefully review the documentation before enabling the HWID feature. Not all client applications support this feature.",
+      "hwid-settings": "HWID settings",
+      "hwid-limit": "HWID limit",
       "fallback-device-limit-description": "Enter the maximum number of devices that can be used with a subscription",
-      "fallback-device-limit": "Fallback Device Limit",
-      "max-devices-announce-description": "Enter message that will be displayed when the user has reached the maximum number of devices",
-      "max-devices-announce": "Max Devices Announce",
-      "max-200-characters": "Max. 200 characters",
-      "documentation": "Documentation"
+      "fallback-device-limit": "Fallback device limit",
+      "max-devices-announce-description": "Enter the message that will be displayed when the user has reached the maximum number of devices",
+      "max-devices-announce": "Max devices announce",
+      "max-200-characters": "Max. 200 characters"
     }
   },
   "external-squads-hwid-settings": {
     "tab": {
       "widget": {
-        "hwid-settings-override": "HWID Settings Override",
+        "hwid-settings-override": "HWID settings override",
         "override-hwid-description": "Override HWID device limit settings for this external squad. When disabled, global subscription settings will be used.",
-        "enable-hwid-override": "Enable HWID Override"
+        "enable-hwid-override": "Enable HWID override"
       }
     }
   },
   "external-squads-custom-remarks": {
     "widget": {
       "override-remarks-description": "Override user status remarks for this external squad. When disabled, global subscription settings will be used.",
-      "enable-override": "Enable Override"
+      "enable-override": "Enable override"
     }
   },
   "subscription-user-remarks-card": {
     "widget": {
-      "user-status": "User status",
-      "empty-hosts": "Empty Hosts",
-      "empty-internal-squads": "Empty Internal Squads",
-      "hwid-max-devices-exceeded": "HWID: Max Devices Exceeded",
-      "hwid-not-supported": "HWID: Not Supported"
+      "empty-hosts": "Empty hosts",
+      "hwid-max-devices-exceeded": "HWID: max devices exceeded",
+      "hwid-not-supported": "HWID: not supported"
     }
   },
   "multi-select-nodes": {
     "feature": {
-      "profile-and-inbounds": "Profile & Inbounds"
+      "profile-and-inbounds": "Profile & inbounds"
     }
   },
   "use-nodes-table-widget": {
     "online": "Online",
-    "address": "Address",
-    "ip-addresses": "IP addresses",
-    "traffic-used": "Traffic Used",
-    "config-profile": "Config Profile",
-    "inbounds": "Inbounds",
+    "traffic-used": "Traffic used",
+    "config-profile": "Config profile",
     "xray-v": "Xray V.",
     "node-v": "Node V.",
     "provider": "Provider",
     "tags": "Tags",
     "total-ram": "Total RAM",
-    "cpu-model": "CPU Model"
+    "cpu-model": "CPU model"
   },
   "subpage-config-visual-editor": {
     "widget": {
       "configuration-saved-successfully": "Configuration saved successfully",
       "edit-your-subscription-page-configuration": "Edit your subscription page configuration",
-      "subpage-editor": "Subpage Editor",
-      "load-from-github": "Load from GitHub",
+      "subpage-editor": "Subpage editor",
       "brand-appearance": "Brand appearance",
       "branding": "Branding",
-      "brand-title": "Brand Title",
-      "your-brand-name": "Your Brand Name",
-      "logo-url": "Logo URL",
+      "brand-title": "Brand title",
+      "your-brand-name": "Your brand name",
       "support-url": "Support URL",
       "additional-languages": "Additional languages",
       "localization": "Localization",
-      "ui-configuration": "UI Configuration",
-      "collapsed": "Collapsed",
-      "expanded": "Expanded",
-      "subscription-info-block-design": "Subscription Info Block Design",
-      "installation-guides-header": "Installation Guides Header",
-      "connection-keys-header": "Connection Keys Header",
+      "ui-configuration": "UI configuration",
+      "subscription-info-block-design": "Subscription info block design",
       "configure-apps-for-each-platform": "Configure apps for each platform",
       "platforms": "Platforms",
       "add-platform": "Add platform",
       "no-platforms-configured": "No platforms configured",
       "add-a-platform-to-get-started": "Add a platform to get started",
-      "validation-error": "Validation Error",
-      "manage-your-svg-icons": "Manage your SVG icons",
-      "open-svg-library": "Open SVG Library",
-      "cards": "Cards",
-      "hidden": "Hidden",
-      "accordion": "Accordion",
-      "minimal": "Minimal",
-      "timeline": "Timeline",
-      "installation-guides-design": "Installation Guides Design"
+      "open-svg-library": "Open SVG library",
+      "installation-guides-design": "Installation guides design"
     },
     "subpage-config-saved-line-1": "To apply the changes, please restart the Remnawave Subscription-page Docker container.",
     "subpage-config-saved-line-2": "For example, you can use the following command in your terminal:"
   },
   "app-editor-drawer-content": {
     "component": {
-      "app-settings": "App Settings",
+      "app-settings": "App settings",
       "featured": "Featured",
-      "app-name": "App Name",
+      "app-name": "App name",
       "blocks": "Blocks",
-      "add-block": "Add Block"
+      "add-block": "Add block"
     }
   },
   "block-editor": {
     "modal": {
       "component": {
-        "untitled-block": "Untitled Block",
-        "edit-block": "Edit Block",
-        "block-settings": "Block Settings",
-        "svg-icon": "SVG Icon",
-        "icon-color": "Icon Color",
+        "untitled-block": "Untitled block",
+        "edit-block": "Edit block",
+        "block-settings": "Block settings",
+        "icon-color": "Icon color",
         "icon-color-help": "You can use any Mantine theme color ({{colors}}) or any valid HEX color (for example: #009688).",
         "title": "Title",
-        "description": "Description",
         "buttons": "Buttons",
-        "add-button": "Add Button"
+        "add-button": "Add button"
       }
     }
   },
   "button-editor": {
     "component": {
       "link": "Link",
-      "external-link": "External Link",
-      "subscription-link": "Subscription Link",
       "type": "Type",
-      "svg-icon": "SVG Icon",
-      "button-text": "Button Text"
+      "button-text": "Button text"
     }
   },
   "localized-text-editor": {
     "component": {
-      "not-set": "Not set",
-      "required-default-language": "Required (default language)",
       "done": "Done"
     }
   },
   "platform-editor": {
     "component": {
-      "platform-svg-icon": "Platform SVG Icon",
-      "display-name": "Display Name",
+      "platform-svg-icon": "Platform SVG icon",
+      "display-name": "Display name",
       "apps": "Apps",
-      "add-app": "Add App",
-      "unnamed-app": "Unnamed App",
-      "edit-app": "Edit App"
-    }
-  },
-  "svg-icon-input": {
-    "component": {
-      "svg-icon": "SVG Icon"
+      "add-app": "Add app",
+      "unnamed-app": "Unnamed app",
+      "edit-app": "Edit app"
     }
   },
   "svg-icon-select": {
@@ -1875,26 +1421,26 @@
   },
   "svg-library-modal": {
     "component": {
-      "svg-library": "SVG Library",
-      "add-icon": "Add Icon",
+      "svg-library": "SVG library",
+      "add-icon": "Add icon",
       "add-icons-to-use-them-in-blocks-and-buttons": "Add icons to use them in blocks and buttons",
-      "edit-icon": "Edit Icon",
+      "edit-icon": "Edit icon",
       "only-latin-characters-no-spaces": "Only latin characters, no spaces",
       "only-latin-characters-allowed": "Only latin characters allowed",
-      "icon-key": "Icon Key",
-      "svg-code": "SVG Code",
+      "icon-key": "Icon key",
+      "svg-code": "SVG code",
       "preview": "Preview",
       "where-to-find-icons": "Where to find icons?",
       "you-can-find-beautiful-icons-at": "You can find beautiful icons at",
-      "where-to-find-icons-description": "Сlick on any icon, select \"Copy SVG\" and paste it here. Make sure to choose \"Outline\" or \"Filled\" style."
+      "where-to-find-icons-description": "Click on any icon, select \"Copy SVG\", and paste it here. Make sure to choose the \"Outline\" or \"Filled\" style."
     }
   },
   "external-squads-subpage-config": {
     "tab": {
       "widget": {
-        "subscription-page-config": "Subscription Page Config",
+        "subscription-page-config": "Subscription page config",
         "subscription-page-config-description": "You can override the subscription page configuration (Remnawave Subscription Page) for this external squad.",
-        "subpage-config": "Subpage Config",
+        "subpage-config": "Subpage config",
         "select-config": "Select config..."
       }
     }
@@ -1905,15 +1451,13 @@
       "download-config": "Download config",
       "importing-config": "Importing config",
       "this-may-take-a-while": "This may take a while...",
-      "success": "Success",
       "config-imported-successfully": "Config imported successfully",
-      "error": "Error",
       "failed-to-parse-config-file": "Failed to parse config file"
     }
   },
   "base-translations-drawer": {
     "component": {
-      "base-translations": "Base Translations",
+      "base-translations": "Base translations",
       "completed": "{{count}}/{{total}} completed"
     }
   },
@@ -1922,21 +1466,14 @@
       "peak": "Peak"
     }
   },
-  "user-hwid-devices": {
-    "drawer": {
-      "widget": {
-        "enter-search-query": "Enter search query..."
-      }
-    }
-  },
   "base-settings-block": {
     "component": {
-      "base-settings": "Base Settings",
-      "meta-title": "Meta Title",
-      "meta-description": "Meta Description",
-      "show-connection-keys": "Show Connection Keys",
+      "base-settings": "Base settings",
+      "meta-title": "Meta title",
+      "meta-description": "Meta description",
+      "show-connection-keys": "Show connection keys",
       "show-or-hide-raw-connection-keys": "Show or hide raw connection keys",
-      "hide-get-link-button": "Hide \"Get Link\" Button",
+      "hide-get-link-button": "Hide \"Get Link\" button",
       "hide-the-get-link-button-top-right-corner": "Hide the \"Get Link\" button from the top right corner"
     }
   },
@@ -1944,64 +1481,57 @@
     "modal": {
       "import-options-description": "Choose what you want to import from the config file",
       "replace-entire-config-with-imported-one": "Replace entire config with imported one",
-      "full-import": "Full Import",
+      "full-import": "Full import",
       "partial-import": "Partial import",
       "merge-svg-library": "Merge {{0}} icons into your collection ({{1}} existing)",
-      "import-svg-library": "Import SVG Library",
+      "import-svg-library": "Import SVG library",
       "import-platforms-descriptions": "Replaces platforms, locales, translations + merges SVG library",
-      "import-platforms": "Import Platforms",
-      "replace-base-translation-and-locales": "Replace Base Translation and Locales",
-      "import-base-translations": "Import Base Translations"
+      "import-platforms": "Import platforms",
+      "replace-base-translation-and-locales": "Replace base translation and locales",
+      "import-base-translations": "Import base translations"
     }
   },
   "revoke-subscription-user": {
     "feature": {
-      "full-revoke": "Full Revoke",
+      "full-revoke": "Full revoke",
       "revoke": "Revoke",
-      "passwords-only": "Passwords Only",
-      "passwords-only-decription": "Only regenerates Connection Passwords, Subscription URL stays the same",
-      "full-revoke-description": "Regenerates Subscription URL and Connection Passwords"
+      "passwords-only": "Passwords only",
+      "passwords-only-description": "Only regenerates Connection Passwords; the Subscription URL stays the same",
+      "full-revoke-description": "Regenerates subscription URL and connection passwords"
     }
   },
   "nodes-quick-stats": {
     "widget": {
-      "users-online": "Users Online",
-      "online-nodes": "Online Nodes",
-      "offline-nodes": "Offline Nodes",
-      "cumulative-traffic": "Cumulative Traffic"
+      "users-online": "Users online",
+      "online-nodes": "Online nodes"
     }
   },
   "template-info-popover": {
     "shared": {
-      "template-variables": "Template Variables",
+      "template-variables": "Template variables",
       "available-variables-are-listed-below": "Available variables are listed below.",
       "you-can-use-template-variables-in-this-field": "You can use template variables in this field."
     }
   },
   "user-active-session-drawer": {
     "widget": {
-      "drop-all-user-connections-all-nodes": "Drop All User Connections (all nodes)",
-      "drop-all-user-connections-this-node": "Drop All User Connections (this node)",
+      "drop-all-user-connections-all-nodes": "Drop all user connections (all nodes)",
+      "drop-all-user-connections-this-node": "Drop all user connections (this node)",
       "drop-this-connection-on-this-node": "Drop this connection on this node"
     }
   },
   "contact-information-card": {
-    "contact-information": "Contact Information"
+    "contact-information": "Contact information"
   },
   "traffic-limits-card": {
-    "traffic-and-limits": "Traffic & Limits",
+    "traffic-and-limits": "Traffic & limits",
     "traffic-limit-description": "0 means unlimited",
     "traffic-limit": "Traffic limit"
-  },
-  "node-plugin-editor-page": {
-    "component": {
-      "plugin-editor": "Plugin Editor"
-    }
   },
   "node-vitals": {
     "card": {
       "plugin": "Plugin",
-      "review-documentation-for-more-information": "Review documentation for more information.",
+      "review-documentation-for-more-information": "Review the documentation for more information.",
       "nothing-found": "Nothing found...",
       "select-plugin": "Select plugin",
       "proxy-url": "Proxy URL",
@@ -2010,10 +1540,10 @@
   },
   "node-plugin-card": {
     "widget": {
-      "active-on-nodes": "Active on Nodes"
+      "active-on-nodes": "Active on nodes"
     }
   },
-  "adtive-on-nodes": {
+  "active-on-nodes": {
     "modal": {
       "shared": {
         "this-plugin-is-not-active-on-any-nodes": "This plugin is not active on any nodes."
@@ -2023,7 +1553,6 @@
   "node-plugins-grid": {
     "widget": {
       "node-plugins-are-an-advanced-feature-please-review-the-documentation-before-use": "Node Plugins are an advanced feature. Please review the documentation before use.",
-      "warning": "Warning",
       "no-node-plugins-yet": "No node plugins yet",
       "create-a-plugin-to-extend-node-capabilities-with": "Create a plugin to extend node capabilities with"
     }
@@ -2037,27 +1566,25 @@
       "unblock-ips": "Unblock IPs",
       "executor-description": "IP blocks are temporary — they persist only until the node or its core restarts. Blocks may also be reset if the plugin configuration changes.",
       "recreate-nftables-rules-on-selected-nodes": "Recreate nftables rules on selected nodes",
-      "recreate-tables": "Recreate Tables",
-      "block-ips-decription": "One entry per line. Timeout 0 = block until restart.",
-      "unblock-ips-decription": "One IP address per line.",
+      "recreate-tables": "Recreate tables",
+      "block-ips-description": "One entry per line. Timeout 0 = block until restart.",
+      "unblock-ips-description": "One IP address per line.",
       "ips-to-block": "IPs to block",
       "ips-to-unblock": "IPs to unblock",
       "format-one-per-line": "Format (one per line):",
-      "next": "Next",
       "no-connected-nodes-available": "No connected nodes available.",
       "deselect-all": "Deselect all",
-      "select-all": "Select all",
       "execute": "Execute"
     }
   },
   "torrent-blocker-stats": {
     "widget": {
-      "total-reports": "Total Reports",
-      "distinct-nodes": "Distinct Nodes",
-      "distinct-users": "Distinct Users",
-      "last-24-hours": "Last 24 Hours",
+      "total-reports": "Total reports",
+      "distinct-nodes": "Distinct nodes",
+      "distinct-users": "Distinct users",
+      "last-24-hours": "Last 24 hours",
       "by-report-count": "By report count",
-      "top-users": "Top Users"
+      "top-users": "Top users"
     }
   },
   "torrent-blocker-reports-table": {
@@ -2069,7 +1596,7 @@
   "node-active-session": {
     "item": {
       "widget": {
-        "view-user": "View User"
+        "view-user": "View user"
       }
     }
   },
@@ -2082,18 +1609,18 @@
   },
   "nodes-datatable": {
     "widget": {
-      "column-width": "Column Width",
-      "column-order": "Column Order",
-      "column-toggle": "Column Toggle"
+      "column-width": "Column width",
+      "column-order": "Column order",
+      "column-toggle": "Column toggle"
     }
   },
   "user-torrent-blocker-report-item": {
-    "processed-at": "Processed At",
-    "unblocked-at": "Unblocked At"
+    "processed-at": "Processed at",
+    "unblocked-at": "Unblocked at"
   },
   "get-user-torrent-blocker-reports": {
     "feature": {
-      "blocker-reports": "Blocker Reports"
+      "blocker-reports": "Torrent Blocker reports"
     }
   },
   "user-torrent-blocker-reports": {
@@ -2122,9 +1649,8 @@
       "all-nodes-failed-to-return-session-data": "All nodes failed to return session data.",
       "total-ips": "Total IPs",
       "unique-ips": "Unique IPs",
-      "nodes-explored": "Nodes Explored",
-      "total-users": "Total Users",
-      "no-active-sessions-found-on-any-node": "No active sessions found on any node.",
+      "nodes-explored": "Nodes explored",
+      "total-users": "Total users",
       "restart-scan": "Restart scan",
       "clear-results": "Clear results",
       "search-by-ip": "Search by IP address...",
@@ -2133,12 +1659,9 @@
   },
   "mobile-stats": {
     "widget": {
-      "billing-nodes": "Billing nodes",
       "upcoming": "Upcoming",
       "per-month": "Per month",
-      "total-spent": "Total spent",
-      "overdue": "Overdue",
-      "no-upcoming": "No upcoming"
+      "total-spent": "Total spent"
     }
   },
   "mobile-providers-list": {
@@ -2154,15 +1677,15 @@
   },
   "prime-modal": {
     "shared": {
-      "description": "Back the project and become part of its inner circle - closer to the team, the roadmap, and the work itself.",
-      "priority-support-title": "Priority Support",
-      "priority-support-description": "Skip the queue - your questions are answered first, directly by the team.",
-      "private-community-title": "Private Community",
+      "description": "Back the project and become part of its inner circle — closer to the team, the roadmap, and the work itself.",
+      "priority-support-title": "Priority support",
+      "priority-support-description": "Skip the queue — your questions are answered first, directly by the team.",
+      "private-community-title": "Private community",
       "private-community-description": "A closed circle of Prime members.",
-      "shape-the-roadmap-title": "Shape the Roadmap",
+      "shape-the-roadmap-title": "Shape the roadmap",
       "shape-the-roadmap-description": "Vote on what gets built next and help steer where the project goes.",
-      "direct-developer-access-title": "Direct Developer Access",
-      "direct-developer-access-description": "A direct line to the developer - no tickets, no middlemen.",
+      "direct-developer-access-title": "Direct developer access",
+      "direct-developer-access-description": "A direct line to the developer — no tickets, no middlemen.",
       "join-button": "Join RW Prime"
     }
   },
@@ -2186,9 +1709,7 @@
     }
   },
   "node-ips": {
-    "title": "IP addresses",
     "add-ip": "Add IP",
-    "status": "Status",
     "remove-ip": "Remove IP",
     "invalid-ip": "Not a valid IPv4 or IPv6 address",
     "ip-is-required": "IP address is required",
@@ -2209,10 +1730,10 @@
   },
   "node-consumption": {
     "card": {
-      "node-consumption-multiplier-1": "Applies selected multiplier to Node traffic (1.0 = normal, 0.5 = half, 2.0 = double).",
+      "node-consumption-multiplier-1": "Applies the selected multiplier to node traffic (1.0 = normal, 0.5 = half, 2.0 = double).",
       "node-consumption-multiplier-2": "Mainly used for accurate display of usage limits when traffic tracking is enabled. The node consumption multiplier does not affect detailed statistics display (on graphs).",
-      "node-consumption-multiplier": "Node Consumption Multiplier",
-      "user-consumption-multiplier": "User Consumption Multiplier"
+      "node-consumption-multiplier": "Node consumption multiplier",
+      "user-consumption-multiplier": "User consumption multiplier"
     }
   },
   "keypair-generator": {
@@ -2227,11 +1748,11 @@
   },
   "backend-tools-card": {
     "widget": {
-      "queue-viewer": "Queue Viewer",
+      "queue-viewer": "Queue viewer",
       "queue-viewer-description": "Monitor and manage background job queues.",
       "scalar-description": "Modern interactive API reference.",
       "swagger-description": "Classic OpenAPI documentation explorer.",
-      "backend-tools-description": "Access to Queue Viewer, Scalar or Swagger.",
+      "backend-tools-description": "Access to Queue Viewer, Scalar, or Swagger.",
       "login": "Login",
       "backend-tools": "Backend tools"
     }
@@ -2245,31 +1766,24 @@
   },
   "http-stats-table": {
     "widget": {
-      "total-requests": "Total Requests",
-      "tracked-routes": "Tracked Routes",
-      "peak-requests": "Peak Requests",
-      "avg-route": "Avg / Route"
-    }
-  },
-  "get-node-inbounds-hosts": {
-    "feature": {
-      "inbounds-and-hosts": "Inbounds & hosts"
+      "total-requests": "Total requests",
+      "tracked-routes": "Tracked routes",
+      "peak-requests": "Peak requests",
+      "avg-route": "Avg / route"
     }
   },
   "node-inbounds-hosts-drawer": {
     "widget": {
-      "inbounds-and-hosts": "Inbounds & hosts",
       "no-active-config-profile": "This node has no active config profile",
       "linked": "Linked"
     }
   },
   "node-integrations": {
     "modal": {
-      "title": "Node Integrations",
+      "title": "Node integrations",
       "delete-description": "The integration will be removed from all nodes and affected nodes will be restarted."
     },
     "editor": {
-      "description": "Description",
       "description-placeholder": "What this integration does",
       "config-must-be-an-object": "Config must be a JSON object"
     },
@@ -2302,7 +1816,7 @@
     "ip-description": "Pick one of the node IPs or type any address",
     "interface-description": "Pick one of the node interfaces or type any name",
     "run": "Run check",
-    "running": "Running GeoCheck",
+    "running": "Running geoCheck",
     "running-description": "The node is probing its connectivity, this usually takes up to a minute.",
     "failed-description": "The node could not complete the GeoCheck.",
     "view-image": "Report",
@@ -2332,7 +1846,7 @@
     },
     "vault-setup-title": "Set up the key vault",
     "vault-unlock-title": "Unlock the key vault",
-    "seed-warning": "Write these 12 words down and keep them offline. They are the only way to restore your SSH keys – the panel never sees them and cannot recover them for you.",
+    "seed-warning": "Write these 12 words down and keep them offline. They are the only way to restore your SSH keys — the panel never sees them and cannot recover them for you.",
     "create-vault": "Create vault",
     "unlock": "Unlock",
     "unlock-description": "Enter the 12 words you saved when the vault was created.",
@@ -2341,10 +1855,8 @@
     "key-title": "Install the public key",
     "key-description": "A dedicated key was generated for this node and never leaves your browser. Add the line below to authorized_keys on the server, then connect.",
     "authorized-keys": "authorized_keys entry",
-    "username": "Username",
     "host": "Host",
     "host-hint": "Leave empty to use the node address",
-    "port": "Port",
     "connect": "Connect",
     "hostkey-new-title": "Unknown host key",
     "hostkey-new-description": "This is the first time you connect to this host from this browser. Verify the fingerprint out of band before trusting it.",
@@ -2355,7 +1867,7 @@
     "trust-and-connect": "Trust and connect",
     "abort": "Abort",
     "disconnected": "Session closed",
-    "passcode-required-description": "This browser has no passcode yet. Set one so you do not have to type the recovery phrase every time.",
+    "passcode-required-description": "The vault cannot be used in this browser until you set a passcode. It also saves you from typing the recovery phrase every time.",
     "passcode-save": "Save passcode",
     "passcode-title": "Set a passcode for this browser",
     "passcode-description": "Unlocks the vault on this browser after a reload.",
@@ -2368,13 +1880,12 @@
     "use-phrase": "Forgot your passcode?",
     "use-passcode": "Back to passcode",
     "connection-settings": "Settings",
-    "restore": "Restore",
     "resize": "Resize window",
     "retry": "Retry",
     "ticket-failed": "The panel refused to open a session.",
     "vault-manage": "Manage vault",
     "export": "Export vault",
-    "export-locked": "Unlock the vault first – a backup can only be made from an open vault.",
+    "export-locked": "Unlock the vault first — a backup can only be made from an open vault.",
     "export-description": "Saves an encrypted file with your node keys and addresses. Nothing in it is readable without the recovery phrase, so it is safe to keep anywhere.",
     "import": "Import vault",
     "import-description": "Restores keys from a backup file. Enter the recovery phrase that the backup was created with.",
@@ -2385,11 +1896,10 @@
     "import-invalid": "This file is not a vault backup",
     "import-mismatch": "The recovery phrase does not open this backup",
     "reset": "Reset vault",
-    "reset-description": "Deletes the vault and every SSH key in it. Nodes will refuse the old keys, so you will have to install new public keys on each of them. Panel access is not affected.",
+    "reset-description": "Deletes the vault and every SSH key in it. The private keys are gone for good, so the public keys already installed on your nodes become useless and you will have to install a new one on each. Panel access is not affected.",
     "lost-everything": "Lost both the passcode and the phrase?",
     "snippets-title": "Snippets",
     "snippets-empty": "No snippets yet",
-    "snippet-name": "Name",
     "snippet-command": "Command",
     "snippet-add": "Add snippet",
     "snippet-edit": "Edit snippet",

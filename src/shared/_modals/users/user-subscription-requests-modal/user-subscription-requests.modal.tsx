@@ -40,7 +40,7 @@ export const UserSubscriptionRequestsModal = NiceModal.create((props: IProps) =>
                     IconComponent={TbTimeline}
                     iconVariant="soft"
                     title={t(
-                        'get-user-subscription-request-history.feature.subscription-request-history'
+                        'common.field.subscription-request-history'
                     )}
                 />
             }

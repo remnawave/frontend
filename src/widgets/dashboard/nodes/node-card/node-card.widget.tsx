@@ -166,7 +166,7 @@ export const NodeCardWidget = memo((props: IProps) => {
         clipboard.copy(node.address)
         notifications.show({
             message: node.address,
-            title: t('node-card.widget.copied'),
+            title: t('common.message.copied'),
             color: 'teal'
         })
     }

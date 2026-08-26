@@ -133,7 +133,7 @@ export function AppEditorDrawerContent(props: IProps) {
                         />
 
                         <SvgIconSelect
-                            label={t('block-editor.modal.component.svg-icon')}
+                            label={t('common.field.svg-icon')}
                             onChange={(svgIconKey) => onChange({ ...app, svgIconKey })}
                             required={false}
                             svgLibrary={svgLibrary}

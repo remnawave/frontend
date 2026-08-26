@@ -86,7 +86,7 @@ export function ExternalSquadCardWidget(props: IProps) {
                             })
                         }
                     >
-                        {t('common.edit')}
+                        {t('common.action.edit')}
                     </EntityCardShared.Button>
                     <EntityCardShared.Menu>
                         <Menu.Item
@@ -94,7 +94,7 @@ export function ExternalSquadCardWidget(props: IProps) {
                             leftSection={<TbUsersPlus size={18} />}
                             onClick={() => handleAddToUsers(externalSquad.uuid)}
                         >
-                            {t('external-squad-card.widget.add-users')}
+                            {t('common.action.add-users')}
                         </Menu.Item>
                         <Menu.Item
                             color="red"
@@ -102,7 +102,7 @@ export function ExternalSquadCardWidget(props: IProps) {
                             leftSection={<TbUsersMinus size={18} />}
                             onClick={() => handleRemoveFromUsers(externalSquad.uuid)}
                         >
-                            {t('external-squad-card.widget.remove-users')}
+                            {t('common.action.remove-users')}
                         </Menu.Item>
 
                         <CopyButton timeout={2000} value={externalSquad.uuid}>
@@ -114,20 +114,20 @@ export function ExternalSquadCardWidget(props: IProps) {
                                     }
                                     onClick={copy}
                                 >
-                                    {t('common.copy-uuid')}
+                                    {t('common.action.copy-uuid')}
                                 </Menu.Item>
                             )}
                         </CopyButton>
 
                         <Menu.Item leftSection={<PiPencil size={18} />} onClick={handleRename}>
-                            {t('common.rename')}
+                            {t('common.action.rename')}
                         </Menu.Item>
 
                         <Menu.Item
                             leftSection={<TbCopy size={18} />}
                             onClick={() => handleCloneExternalSquad(externalSquad.uuid)}
                         >
-                            {t('common.clone')}
+                            {t('common.action.clone')}
                         </Menu.Item>
 
                         <Menu.Item
@@ -135,7 +135,7 @@ export function ExternalSquadCardWidget(props: IProps) {
                             leftSection={<PiTrashDuotone size={18} />}
                             onClick={() => handleDeleteExternalSquad(externalSquad.uuid)}
                         >
-                            {t('common.delete')}
+                            {t('common.action.delete')}
                         </Menu.Item>
                     </EntityCardShared.Menu>
                 </EntityCardShared.Actions>

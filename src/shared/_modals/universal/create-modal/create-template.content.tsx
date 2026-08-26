@@ -75,11 +75,11 @@ export const CreateTemplateContent = (props: IProps) => {
                 />
                 <Group justify="flex-end">
                     <Button color="gray" onClick={onClose} variant="light">
-                        {t('common.cancel')}
+                        {t('common.action.cancel')}
                     </Button>
 
                     <Button color="teal" loading={isPending} type="submit">
-                        {t('common.create')}
+                        {t('common.action.create')}
                     </Button>
                 </Group>
             </Stack>

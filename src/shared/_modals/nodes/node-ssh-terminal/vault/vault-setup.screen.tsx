@@ -77,7 +77,7 @@ export const VaultSetupScreen = (props: IProps) => {
                                         variant="subtle"
                                         style={{ flex: 1 }}
                                     >
-                                        {t('common.copy')}
+                                        {t('common.action.copy')}
                                     </Button>
                                 )}
                             </CopyButton>
@@ -87,7 +87,7 @@ export const VaultSetupScreen = (props: IProps) => {
                                 style={{ flex: 1 }}
                                 rightSection={<TbArrowRight size={16} />}
                             >
-                                {t('common.continue')}
+                                {t('common.action.continue')}
                             </Button>
                         </Group>
                     </Stack>

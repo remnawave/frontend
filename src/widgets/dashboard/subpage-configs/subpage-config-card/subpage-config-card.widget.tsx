@@ -62,7 +62,7 @@ export function SubpageConfigCardWidget(props: IProps) {
                         leftSection={<TbEdit size={16} />}
                         onClick={navigateToConfig}
                     >
-                        {t('common.edit')}
+                        {t('common.action.edit')}
                     </EntityCardShared.Button>
 
                     <EntityCardShared.Menu>
@@ -75,7 +75,7 @@ export function SubpageConfigCardWidget(props: IProps) {
                                     }
                                     onClick={copy}
                                 >
-                                    {t('common.copy-uuid')}
+                                    {t('common.action.copy-uuid')}
                                 </Menu.Item>
                             )}
                         </CopyButton>
@@ -90,14 +90,14 @@ export function SubpageConfigCardWidget(props: IProps) {
                                 })
                             }}
                         >
-                            {t('common.rename')}
+                            {t('common.action.rename')}
                         </Menu.Item>
 
                         <Menu.Item
                             leftSection={<TbCopyCheck size={18} />}
                             onClick={() => handleCloneSubpageConfig(subpageConfig.uuid)}
                         >
-                            {t('common.clone')}
+                            {t('common.action.clone')}
                         </Menu.Item>
 
                         <Menu.Item
@@ -109,7 +109,7 @@ export function SubpageConfigCardWidget(props: IProps) {
                                 handleDeleteSubpageConfig(subpageConfig.uuid)
                             }}
                         >
-                            {t('common.delete')}
+                            {t('common.action.delete')}
                         </Menu.Item>
                     </EntityCardShared.Menu>
                 </EntityCardShared.Actions>

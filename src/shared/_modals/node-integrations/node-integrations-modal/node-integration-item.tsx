@@ -33,11 +33,11 @@ export const NodeIntegrationItem = (props: IProps) => {
 
     const handleDelete = () => {
         modals.openConfirmModal({
-            title: t('common.confirm-action'),
+            title: t('common.action.confirm-action'),
             children: t('node-integrations.modal.delete-description'),
             labels: {
-                confirm: t('common.delete'),
-                cancel: t('common.cancel')
+                confirm: t('common.action.delete'),
+                cancel: t('common.action.cancel')
             },
             cancelProps: { variant: 'subtle' },
             confirmProps: { color: 'red', variant: 'soft' },
@@ -83,7 +83,7 @@ export const NodeIntegrationItem = (props: IProps) => {
                 {integration.description || '—'}
             </Text>
 
-            <Tooltip label={t('common.delete')}>
+            <Tooltip label={t('common.action.delete')}>
                 <ActionIcon
                     color="red"
                     loading={isDeleting}

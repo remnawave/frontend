@@ -117,7 +117,7 @@ export function NodePluginsEditorActionsFeature(props: Props) {
             notifications.show({
                 color: 'red',
                 message: t('config-editor-actions.feature.failed-to-save-invalid-json'),
-                title: t('config-editor-actions.feature.error')
+                title: t('common.message.error')
             })
             return
         }
@@ -204,7 +204,7 @@ export function NodePluginsEditorActionsFeature(props: Props) {
                 onClick={handleSave}
                 variant="soft"
             >
-                {t('common.save')}
+                {t('common.action.save')}
             </Button>
 
             <Group gap={0} wrap="nowrap">
@@ -241,7 +241,7 @@ export function NodePluginsEditorActionsFeature(props: Props) {
                             leftSection={<TbSelectAll size={14} />}
                             onClick={handleSelectAll}
                         >
-                            {t('config-editor-actions.feature.select-all')}
+                            {t('common.action.select-all')}
                         </Menu.Item>
 
                         <Menu.Item leftSection={<TbCut size={14} />} onClick={handleCut}>
@@ -261,7 +261,7 @@ export function NodePluginsEditorActionsFeature(props: Props) {
                             leftSection={<TbDownload size={14} />}
                             onClick={openDownloadModal}
                         >
-                            {t('config-editor-actions.feature.load-from-github')}
+                            {t('common.action.load-from-github')}
                         </Menu.Item>
                     </Menu.Dropdown>
                 </Menu>

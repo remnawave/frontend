@@ -43,14 +43,14 @@ export const LoginFormFeature = () => {
             <Container size="100%">
                 <Paper>
                     <TextInput
-                        label={t('login-form.feature.username')}
+                        label={t('common.field.username')}
                         name="username"
-                        placeholder={t('login-form.feature.username')}
+                        placeholder={t('common.field.username')}
                         required
                         {...form.getInputProps('username')}
                     />
                     <PasswordInput
-                        label={t('login-form.feature.password')}
+                        label={t('common.field.password')}
                         mt="md"
                         name="password"
                         placeholder={t('login-form.feature.your-password')}

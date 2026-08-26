@@ -74,7 +74,7 @@ export const HostMapperModal = NiceModal.create((props: IProps) => {
         try {
             parsed = JSON.parse(currentValue)
         } catch {
-            setError(t('base-host-form.invalid-json'))
+            setError(t('common.message.invalid-json'))
             return
         }
 
@@ -139,7 +139,7 @@ export const HostMapperModal = NiceModal.create((props: IProps) => {
                 <EditorFooter className={clsx(error && classes.footerError)}>
                     <Group gap="sm" ml="auto">
                         <Button onClick={handleSave} variant="soft">
-                            {t('common.save')}
+                            {t('common.action.save')}
                         </Button>
                         <FullscreenToggleButton
                             floating={false}

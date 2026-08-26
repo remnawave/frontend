@@ -77,7 +77,7 @@ export const JsonEditorModal = NiceModal.create((props: IJsonEditorModalProps) =
             try {
                 JSON.parse(currentValue)
             } catch {
-                setError(t('base-host-form.invalid-json'))
+                setError(t('common.message.invalid-json'))
                 return
             }
         }
@@ -136,7 +136,7 @@ export const JsonEditorModal = NiceModal.create((props: IJsonEditorModalProps) =
                     />
 
                     {docsUrl && (
-                        <Tooltip label={t('common.documentation')}>
+                        <Tooltip label={t('common.action.documentation')}>
                             <ActionIcon
                                 color="gray"
                                 component="a"
@@ -158,16 +158,16 @@ export const JsonEditorModal = NiceModal.create((props: IJsonEditorModalProps) =
                             onClick={() => editorRef.current?.setValue(sample)}
                             variant="soft"
                         >
-                            {t('common.paste-default')}
+                            {t('common.action.paste-default')}
                         </Button>
                     )}
 
                     <Group gap="sm" ml="auto">
                         <Button onClick={hide} variant="subtle">
-                            {t('common.cancel')}
+                            {t('common.action.cancel')}
                         </Button>
                         <Button onClick={handleSave} variant="soft" disabled={!!error}>
-                            {t('common.save')}
+                            {t('common.action.save')}
                         </Button>
                     </Group>
                 </EditorFooter>

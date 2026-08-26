@@ -18,7 +18,7 @@ export function CopyEntityLinkButton(props: IProps) {
     const { copied, copy } = useClipboard({ timeout: 1500 })
 
     return (
-        <Tooltip label={t('common.copy-link')}>
+        <Tooltip label={t('common.action.copy-link')}>
             <ActionIcon
                 color={copied ? 'teal' : 'gray'}
                 onClick={() => copy(buildOpenEntityUrl(entity, id))}

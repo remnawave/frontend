@@ -281,7 +281,7 @@ export const CreateNodeStep1Connection = ({ form, onNext, secretKey, port }: IPr
                             size="md"
                             type="submit"
                         >
-                            {t('create-node-modal.widget.next')}
+                            {t('common.action.next')}
                         </Button>
                     </Group>
                 </Stack>

@@ -49,7 +49,7 @@ export const NodePluginEditorPageComponent = (props: Props) => {
                         </ActionIcon>
 
                         <ActionIconGroup>
-                            <Tooltip label={t('common.shared-lists')} withArrow>
+                            <Tooltip label={t('common.field.shared-lists')} withArrow>
                                 <ActionIcon
                                     color="indigo"
                                     onClick={() => showModal('sharedLists_sharedListsModal')}

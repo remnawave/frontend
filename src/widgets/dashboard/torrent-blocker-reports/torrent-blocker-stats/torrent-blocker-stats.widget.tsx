@@ -75,7 +75,7 @@ export function TorrentBlockerStatsWidget() {
             </SimpleGrid>
             <SimpleGrid cols={{ base: 1, sm: 2 }} spacing="md">
                 <TopLeaderboardCardShared
-                    emptyText={t('user-usage-modal.widget.no-data-available')}
+                    emptyText={t('common.message.no-data-available')}
                     formatValue={(value) => formatInt(value)}
                     isLoading={isStatsLoading}
                     items={stats?.topUsers?.map((user) => ({
@@ -106,7 +106,7 @@ export function TorrentBlockerStatsWidget() {
                 />
 
                 <TopLeaderboardCardShared
-                    emptyText={t('user-usage-modal.widget.no-data-available')}
+                    emptyText={t('common.message.no-data-available')}
                     formatValue={(value) => formatInt(value)}
                     isLoading={isStatsLoading}
                     items={stats?.topNodes?.map((node) => ({

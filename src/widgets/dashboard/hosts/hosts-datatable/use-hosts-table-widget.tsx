@@ -82,13 +82,13 @@ export const HOST_TEXT_FIELDS: HostTextFieldConfig[] = [
         accessor: 'address',
         getValue: (host) => host.address,
         key: 'address',
-        label: (t) => t('base-host-form.address')
+        label: (t) => t('common.field.address')
     },
     {
         accessor: 'port',
         getValue: (host) => host.port,
         key: 'port',
-        label: (t) => t('base-host-form.port')
+        label: (t) => t('common.field.port')
     },
     {
         accessor: 'sni',
@@ -154,7 +154,7 @@ export const HOST_SELECT_FIELDS: HostSelectFieldConfig[] = [
         getValues: (host) =>
             host.inbound.configProfileInboundUuid ? [host.inbound.configProfileInboundUuid] : [],
         key: 'inbound',
-        label: (t) => t('use-nodes-table-widget.inbounds'),
+        label: (t) => t('common.field.inbounds'),
         valueLabel: (value, context) => context.inboundTagByUuid.get(value) ?? value
     },
     {

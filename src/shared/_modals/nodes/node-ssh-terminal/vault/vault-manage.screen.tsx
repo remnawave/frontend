@@ -116,7 +116,7 @@ export const VaultManageScreen = (props: IProps) => {
                                 size="sm"
                                 variant="soft"
                             >
-                                {t('common.download')}
+                                {t('common.action.download')}
                             </Button>
                         </Stack>
                     </SectionCard.Section>

@@ -66,7 +66,7 @@ export const CreateSnippetModal = () => {
         try {
             currentValue = JSON.parse(currentValue)
         } catch {
-            createSnippetForm.setFieldError('snippet', t('snippets.drawer.widget.invalid-json'))
+            createSnippetForm.setFieldError('snippet', t('common.message.invalid-json'))
             return
         }
 
@@ -149,7 +149,7 @@ export const CreateSnippetModal = () => {
                                 } catch {
                                     createSnippetForm.setFieldError(
                                         'snippet',
-                                        t('snippets.drawer.widget.invalid-json')
+                                        t('common.message.invalid-json')
                                     )
                                 }
                             }}
@@ -180,7 +180,7 @@ export const CreateSnippetModal = () => {
 
                         <Group>
                             <Button loading={isCreating} type="submit" variant="soft">
-                                {t('common.create')}
+                                {t('common.action.create')}
                             </Button>
                             <Button
                                 disabled={isCreating}
@@ -190,7 +190,7 @@ export const CreateSnippetModal = () => {
                                 }}
                                 variant="subtle"
                             >
-                                {t('common.cancel')}
+                                {t('common.action.cancel')}
                             </Button>
                         </Group>
                     </EditorFooter>

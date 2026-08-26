@@ -19,7 +19,7 @@ export default function HttpStatsPageComponent({ refetch, isFetching, httpStats 
             <PageHeaderShared
                 actions={
                     <ActionIconGroup>
-                        <Tooltip label={t('common.update')} withArrow>
+                        <Tooltip label={t('common.action.update')} withArrow>
                             <ActionIcon
                                 loading={isFetching}
                                 onClick={() => refetch()}

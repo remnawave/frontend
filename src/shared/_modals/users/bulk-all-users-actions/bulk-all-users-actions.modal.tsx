@@ -99,7 +99,7 @@ export const BulkAllUsersActionsModal = NiceModal.create(() => {
                     IconComponent={TbBolt}
                     iconVariant="soft"
                     subtitle={t('bulk-all-users-actions.modal.perform-actions-on-all-users')}
-                    title={t('common.bulk-actions')}
+                    title={t('common.action.bulk-actions')}
                     titleOrder={5}
                 />
             }
@@ -124,7 +124,7 @@ export const BulkAllUsersActionsModal = NiceModal.create(() => {
                     iconColor="blue"
                     isLoading={isResetTrafficPending}
                     onClick={() => resetTraffic({})}
-                    title={t('bulk-all-user-actions-tabs.actions.tab.feature.reset-traffic')}
+                    title={t('common.action.reset-traffic')}
                     variant="soft"
                     withConfirmation
                 />

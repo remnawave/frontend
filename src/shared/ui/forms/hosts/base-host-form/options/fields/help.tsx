@@ -11,7 +11,7 @@ export function HelpPopover(props: { children: ReactNode; docsUrl?: string }) {
         <Popover position="top" shadow="md" width={300} withArrow>
             <Popover.Target>
                 <ActionIcon
-                    aria-label={t('common.documentation')}
+                    aria-label={t('common.action.documentation')}
                     color="gray"
                     size="xs"
                     variant="subtle"
@@ -25,7 +25,7 @@ export function HelpPopover(props: { children: ReactNode; docsUrl?: string }) {
 
                     {docsUrl && (
                         <Anchor href={docsUrl} rel="noreferrer" size="sm" target="_blank">
-                            {t('common.documentation')}
+                            {t('common.action.documentation')}
                         </Anchor>
                     )}
                 </Stack>
@@ -40,7 +40,7 @@ export function DocsHelp(props: { url: string }) {
 
     return (
         <ActionIcon
-            aria-label={t('common.documentation')}
+            aria-label={t('common.action.documentation')}
             color="gray"
             component="a"
             href={url}

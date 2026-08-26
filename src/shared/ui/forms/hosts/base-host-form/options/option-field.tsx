@@ -111,7 +111,7 @@ function OptionRow(props: IRowProps) {
             resetLabel={
                 isBulkEdit
                     ? t('base-host-form.leave-field-untouched')
-                    : t('base-host-form.remove-option')
+                    : t('common.action.remove')
             }
         >
             <Component />

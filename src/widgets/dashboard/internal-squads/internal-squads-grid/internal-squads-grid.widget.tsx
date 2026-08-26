@@ -61,11 +61,11 @@ export function InternalSquadsGridWidget(props: IProps) {
 
     const handleDeleteInternalSquad = (internalSquadUuid: string) => {
         modals.openConfirmModal({
-            title: t('common.confirm-action'),
-            children: t('common.confirm-action-description'),
+            title: t('common.action.confirm-action'),
+            children: t('common.message.confirm-action-description'),
             labels: {
-                confirm: t('common.delete'),
-                cancel: t('common.cancel')
+                confirm: t('common.action.delete'),
+                cancel: t('common.action.cancel')
             },
             cancelProps: { variant: 'subtle' },
             confirmProps: { color: 'red', variant: 'soft' },
@@ -82,12 +82,12 @@ export function InternalSquadsGridWidget(props: IProps) {
 
     const handleRemoveFromUsers = (internalSquadUuid: string) => {
         modals.openConfirmModal({
-            title: t('internal-squads-grid.widget.remove-users'),
+            title: t('common.action.remove-users'),
             centered: true,
-            children: t('common.confirm-action-description'),
+            children: t('common.message.confirm-action-description'),
             labels: {
-                confirm: t('common.delete'),
-                cancel: t('common.cancel')
+                confirm: t('common.action.delete'),
+                cancel: t('common.action.cancel')
             },
             cancelProps: { variant: 'subtle' },
             confirmProps: { color: 'red', variant: 'soft' },
@@ -103,12 +103,12 @@ export function InternalSquadsGridWidget(props: IProps) {
 
     const handleAddToUsers = (internalSquadUuid: string) => {
         modals.openConfirmModal({
-            title: t('internal-squads-grid.widget.add-users'),
+            title: t('common.action.add-users'),
             centered: true,
-            children: t('common.confirm-action-description'),
+            children: t('common.message.confirm-action-description'),
             labels: {
-                confirm: t('common.add'),
-                cancel: t('common.cancel')
+                confirm: t('common.action.add'),
+                cancel: t('common.action.cancel')
             },
             cancelProps: { variant: 'subtle' },
             confirmProps: { color: 'teal', variant: 'soft' },

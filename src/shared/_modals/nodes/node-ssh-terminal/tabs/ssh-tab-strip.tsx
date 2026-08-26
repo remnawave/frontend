@@ -59,7 +59,7 @@ export const SshTabStrip = (props: IProps) => {
                             </Text>
 
                             <ActionIcon
-                                aria-label={t('common.close')}
+                                aria-label={t('common.action.close')}
                                 className={classes.tabClose}
                                 color="gray"
                                 onClick={(event) => {
