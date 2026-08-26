@@ -112,7 +112,11 @@ export function getInboundsTableColumns(
                 />
             ),
             filtering: filters.selectedTypes.length > 0,
-            render: ({ type }) => <Text size="sm">{type}</Text>
+            render: ({ type }) => (
+                <Text size="sm" tt="uppercase">
+                    {type}
+                </Text>
+            )
         },
         {
             accessor: 'profileUuid',

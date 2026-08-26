@@ -89,7 +89,7 @@ export const InboundCardWidget = memo((props: IProps) => {
                                     {inbound.tag}
                                 </Text>
                             </Flex>
-                            <Text c="dimmed" size="sm">
+                            <Text c="dimmed" size="sm" tt="uppercase">
                                 {inbound.type}
                             </Text>
                         </Flex>
@@ -125,7 +125,7 @@ export const InboundCardWidget = memo((props: IProps) => {
                     </Flex>
 
                     <Flex align="center" gap="xs" justify="space-between">
-                        <Text c="dimmed" size="xs">
+                        <Text c="dimmed" size="xs" tt="uppercase">
                             {inbound.type}
                         </Text>
                         <Text c="dimmed" size="xs" truncate="end">
