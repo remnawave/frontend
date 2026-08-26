@@ -1,19 +1,16 @@
-import { Box, Container, Stack } from '@mantine/core'
-import { modals } from '@mantine/modals'
+import { Container, Stack } from '@mantine/core'
 import { GetAllInboundsCommand, GetConfigProfilesCommand } from '@remnawave/backend-contract'
 import { InboundCardWidget } from '@widgets/dashboard/inbounds/inbound-card/inbound-card.widget'
 import {
     EMPTY_INBOUND_NODE_AGGREGATE,
     IInboundNodeAggregate
 } from '@widgets/dashboard/inbounds/inbound-status-tile/get-inbound-node-status.util'
-import { githubDarkTheme, JsonEditor } from 'json-edit-react'
+import { openRawInboundModal } from '@widgets/dashboard/inbounds/open-raw-inbound-modal.util'
 import { memo, useMemo } from 'react'
-import { TbTag } from 'react-icons/tb'
 
 import { showModal } from '@shared/_modals/show-modal'
 import { useIsMobile } from '@shared/hooks'
 import { EmptyPageLayout } from '@shared/ui/layouts/empty-page'
-import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 
 type Inbound = GetAllInboundsCommand.Response['response']['inbounds'][number]
 
@@ -21,34 +18,6 @@ interface IProps {
     inbounds: Inbound[] | undefined
     configProfiles: GetConfigProfilesCommand.Response['response']['configProfiles'] | undefined
     nodeAggregateByInboundUuid: Map<string, IInboundNodeAggregate>
-}
-
-const openRawInboundModal = (inbound: Inbound) => {
-    modals.open({
-        children: (
-            <Box>
-                <JsonEditor
-                    collapse={3}
-                    data={inbound.rawInbound as object}
-                    indent={4}
-                    maxWidth="100%"
-                    rootName=""
-                    theme={githubDarkTheme}
-                    viewOnly
-                />
-            </Box>
-        ),
-        size: 'xl',
-        title: (
-            <BaseOverlayHeader
-                iconColor="teal"
-                IconComponent={TbTag}
-                iconVariant="soft"
-                title={inbound.tag}
-                titleOrder={5}
-            />
-        )
-    })
 }
 
 export const InboundsCardsWidget = memo((props: IProps) => {

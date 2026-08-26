@@ -1,22 +1,19 @@
 import { DataTable, type DataTableSortStatus, useDataTableColumns } from '@kastov/mantine-datatable'
 import { Box, Stack, Text } from '@mantine/core'
-import { modals } from '@mantine/modals'
 import {
     GetAllInboundsCommand,
     GetConfigProfilesCommand,
     GetInternalSquadsCommand
 } from '@remnawave/backend-contract'
 import { IInboundNodeAggregate } from '@widgets/dashboard/inbounds/inbound-status-tile/get-inbound-node-status.util'
-import { githubDarkTheme, JsonEditor } from 'json-edit-react'
+import { openRawInboundModal } from '@widgets/dashboard/inbounds/open-raw-inbound-modal.util'
 import { memo, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { PiEmpty } from 'react-icons/pi'
-import { TbTag } from 'react-icons/tb'
 
 import { showModal } from '@shared/_modals/show-modal'
 import { usePreventTableBackScroll } from '@shared/hooks'
 import { DataTableControls, sortRecords } from '@shared/ui'
-import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 
 import {
     getInboundsTableColumns,
@@ -30,34 +27,6 @@ const INBOUNDS_CACHE_KEY = 'inbounds-datatable-v1'
 const DEFAULT_SORT_STATUS: DataTableSortStatus<InboundRow> = {
     columnAccessor: 'tag',
     direction: 'asc'
-}
-
-const openRawInboundModal = (inbound: InboundRow) => {
-    modals.open({
-        children: (
-            <Box>
-                <JsonEditor
-                    collapse={3}
-                    data={inbound.rawInbound as object}
-                    indent={4}
-                    maxWidth="100%"
-                    rootName=""
-                    theme={githubDarkTheme}
-                    viewOnly
-                />
-            </Box>
-        ),
-        size: 'xl',
-        title: (
-            <BaseOverlayHeader
-                iconColor="teal"
-                IconComponent={TbTag}
-                iconVariant="soft"
-                title={inbound.tag}
-                titleOrder={5}
-            />
-        )
-    })
 }
 
 interface IProps {
