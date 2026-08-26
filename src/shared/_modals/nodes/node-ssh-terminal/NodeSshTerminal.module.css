@@ -78,6 +78,100 @@
     overflow: hidden;
 }
 
+.tabStrip {
+    flex: 0 0 auto;
+    border-bottom: 1px solid var(--mantine-color-dark-4);
+    background-color: var(--mantine-color-dark-6);
+}
+
+.tab {
+    display: flex;
+    max-width: 220px;
+    height: 26px;
+    flex: 0 0 auto;
+    align-items: center;
+    gap: 6px;
+    padding: 0 3px 0 8px;
+    border-radius: var(--mantine-radius-md);
+    background-color: color-mix(in srgb, var(--mantine-color-gray-6) 15%, transparent);
+    cursor: pointer;
+    transition: background-color 120ms ease;
+}
+
+.tab:hover {
+    background-color: color-mix(in srgb, var(--mantine-color-gray-6) 20%, transparent);
+}
+
+.tab[data-active] {
+    background-color: color-mix(in srgb, var(--mantine-color-gray-6) 30%, transparent);
+}
+
+.tab:focus-visible {
+    outline: 2px solid var(--mantine-primary-color-filled);
+    outline-offset: 1px;
+}
+
+.tabName {
+    min-width: 0;
+    color: var(--mantine-color-dimmed);
+    font-weight: 600;
+}
+
+.tab[data-active] .tabName {
+    color: var(--mantine-color-bright);
+}
+
+.tabDot {
+    width: 6px;
+    height: 6px;
+    flex: 0 0 auto;
+    border-radius: 50%;
+    background-color: var(--mantine-color-gray-6);
+}
+
+.tabDot[data-connected] {
+    background-color: var(--mantine-color-teal-5);
+}
+
+.tabDot[data-absent] {
+    background-color: transparent;
+}
+
+.tabClose {
+    flex: 0 0 auto;
+    opacity: 0.45;
+    transition: opacity 120ms ease;
+}
+
+.tab:hover .tabClose,
+.tabClose:focus-visible {
+    opacity: 1;
+}
+
+.startScreen {
+    display: flex;
+    flex: 1 1 auto;
+    min-height: 0;
+    align-items: center;
+    justify-content: center;
+    padding: var(--mantine-spacing-md);
+    overflow-y: auto;
+}
+
+.startScreen > * {
+    width: 100%;
+    max-width: 520px;
+}
+
+.sessionHost {
+    position: relative;
+    display: flex;
+    flex: 1 1 auto;
+    min-height: 0;
+    flex-direction: column;
+    overflow: hidden;
+}
+
 .screen {
     display: flex;
     flex-direction: column;
@@ -120,8 +214,8 @@
     align-items: center;
     justify-content: center;
     padding: var(--mantine-spacing-md);
-    background-color: color-mix(in srgb, var(--mantine-color-dark-7) 78%, transparent);
-    backdrop-filter: blur(6px);
+    background-color: color-mix(in srgb, var(--mantine-color-dark-7) 88%, transparent);
+    backdrop-filter: blur(8px);
     overflow-y: auto;
 }
 
@@ -179,7 +273,7 @@
     padding: 6px 6px 6px 10px;
 }
 
-.terminalHost :global(.xterm .xterm-viewport) {
+.terminalHost :global(.xterm:not(.allow-transparency) .xterm-viewport) {
     background-color: transparent;
     scrollbar-width: thin;
 }

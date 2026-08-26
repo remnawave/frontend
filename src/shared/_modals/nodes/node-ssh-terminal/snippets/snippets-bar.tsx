@@ -4,7 +4,7 @@ import { TbPlus } from 'react-icons/tb'
 
 import type { ISshSnippet } from '@entities/ssh-vault'
 
-import classes from './NodeSshTerminal.module.css'
+import classes from '../NodeSshTerminal.module.css'
 
 interface IProps {
     onManage: () => void

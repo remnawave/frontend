@@ -204,6 +204,10 @@ export const putNodeKeys = async (records: INodeKeyRecord[]): Promise<void> => {
     for (const record of records) await putNodeKey(record)
 }
 
+export const putConnectionProfiles = async (records: IConnectionProfileRecord[]): Promise<void> => {
+    for (const record of records) await putConnectionProfile(record)
+}
+
 export const getAllSnippets = () =>
     run<ISnippetRecord[]>(STORE_SNIPPETS, 'readonly', (store) => store.getAll())
 

@@ -1,3 +1,5 @@
+import type { ISshTarget } from '../ssh-terminal.types'
+
 import {
     Autocomplete,
     Badge,
@@ -20,13 +22,7 @@ import { SectionCard } from '@shared/ui/section-card'
 
 import { INodeKeyInfo } from '@entities/ssh-vault'
 
-import classes from './NodeSshTerminal.module.css'
-
-export interface ISshTarget {
-    host: string
-    port: number
-    username: string
-}
+import classes from '../NodeSshTerminal.module.css'
 
 export interface INodeIp {
     ip: string

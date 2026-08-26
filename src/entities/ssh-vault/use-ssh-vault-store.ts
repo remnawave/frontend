@@ -2,6 +2,7 @@ import type { IEncryptedBlob } from './ssh-crypto'
 import type { IParsedSshKey, ISshPrivateKey, TSshKeyAlgo } from './ssh-private-key'
 import type {
     IConnectionProfile,
+    IConnectionProfileRecord,
     IKnownHost,
     ISnippetRecord,
     IKnownHostRecord,
@@ -48,6 +49,7 @@ import {
     getOrCreateDeviceKey,
     getVaultMeta,
     putConnectionProfile,
+    putConnectionProfiles,
     putKnownHost,
     putKnownHosts,
     putNodeKey,
@@ -59,7 +61,9 @@ import {
 import {
     decodeVaultFile,
     encodeVaultFile,
+    padPayload,
     IVaultBackupFile,
+    unpadPayload,
     vaultFileAad
 } from './vault-backup-file'
 
@@ -123,6 +127,7 @@ let rawDataKeyCache: null | Uint8Array = null
 interface IVaultBackupPayload {
     hosts: IKnownHostRecord[]
     keys: INodeKeyRecord[]
+    profiles?: IConnectionProfileRecord[]
     snippets?: ISnippetRecord[]
 }
 
@@ -163,9 +168,11 @@ function isRestorablePayload(payload: IVaultBackupPayload): boolean {
         Array.isArray(payload.keys) &&
         Array.isArray(payload.hosts) &&
         (payload.snippets === undefined || Array.isArray(payload.snippets)) &&
+        (payload.profiles === undefined || Array.isArray(payload.profiles)) &&
         payload.keys.every((record) => hasKey(record, 'nodeUuid')) &&
         payload.hosts.every((record) => hasKey(record, 'id')) &&
-        (payload.snippets ?? []).every((record) => hasKey(record, 'id'))
+        (payload.snippets ?? []).every((record) => hasKey(record, 'id')) &&
+        (payload.profiles ?? []).every((record) => hasKey(record, 'nodeUuid'))
     )
 }
 
@@ -393,6 +400,7 @@ export const useSshVaultStore = create<IActions & IState>()(
                     const payload: IVaultBackupPayload = {
                         hosts: await getAllKnownHosts(),
                         keys: await getAllNodeKeys(),
+                        profiles: await getAllConnectionProfiles(),
                         snippets: await getAllSnippets()
                     }
 
@@ -402,7 +410,7 @@ export const useSshVaultStore = create<IActions & IState>()(
                         createdAt,
                         payload: await encrypt(
                             dataKey,
-                            new TextEncoder().encode(JSON.stringify(payload)),
+                            padPayload(new TextEncoder().encode(JSON.stringify(payload))),
                             vaultFileAad(createdAt, meta.wrappedDataKey)
                         ),
                         wrappedDataKey: meta.wrappedDataKey
@@ -424,10 +432,12 @@ export const useSshVaultStore = create<IActions & IState>()(
 
                         records = JSON.parse(
                             new TextDecoder().decode(
-                                await decrypt(
-                                    dataKey,
-                                    backup.payload,
-                                    vaultFileAad(backup.createdAt, backup.wrappedDataKey)
+                                unpadPayload(
+                                    await decrypt(
+                                        dataKey,
+                                        backup.payload,
+                                        vaultFileAad(backup.createdAt, backup.wrappedDataKey)
+                                    )
                                 )
                             )
                         ) as IVaultBackupPayload
@@ -447,6 +457,7 @@ export const useSshVaultStore = create<IActions & IState>()(
                     await putNodeKeys(records.keys)
                     await putKnownHosts(records.hosts)
                     await putSnippets(records.snippets ?? [])
+                    await putConnectionProfiles(records.profiles ?? [])
 
                     rawDataKeyCache = rawDataKey
 

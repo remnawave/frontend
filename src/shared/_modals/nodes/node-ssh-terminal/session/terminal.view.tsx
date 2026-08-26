@@ -1,14 +1,14 @@
-import { CanvasAddon } from '@xterm/addon-canvas'
+import { notifications } from '@mantine/notifications'
 import { FitAddon } from '@xterm/addon-fit'
 import { Unicode11Addon } from '@xterm/addon-unicode11'
-import { loadFonts, WebFontsAddon } from '@xterm/addon-web-fonts'
 import { WebLinksAddon } from '@xterm/addon-web-links'
 import { WebglAddon } from '@xterm/addon-webgl'
 import { ITheme, Terminal } from '@xterm/xterm'
 import { useEffect, useEffectEvent, useRef } from 'react'
+import { useTranslation } from 'react-i18next'
 import '@xterm/xterm/css/xterm.css'
 
-import classes from './NodeSshTerminal.module.css'
+import classes from '../NodeSshTerminal.module.css'
 
 const TERMINAL_FONT = 'Fira Mono'
 const FALLBACK_STACK = 'ui-monospace, SFMono-Regular, Menlo, monospace'
@@ -38,6 +38,18 @@ const THEME: ITheme = {
     yellow: '#e0af68'
 }
 
+async function loadTerminalFont(family: string): Promise<void> {
+    await document.fonts.ready
+
+    const faces = [...document.fonts].filter(
+        (face) => face.family.replaceAll(/["']/gu, '') === family
+    )
+
+    if (faces.length === 0) throw new Error(`Font family "${family}" is not registered`)
+
+    await Promise.all(faces.map((face) => face.load()))
+}
+
 function createTerminal(fontFamily: string): { fit: () => void; terminal: Terminal } {
     const terminal = new Terminal({
         allowProposedApi: true,
@@ -53,13 +65,16 @@ function createTerminal(fontFamily: string): { fit: () => void; terminal: Termin
     terminal.loadAddon(fitAddon)
     terminal.loadAddon(new WebLinksAddon())
     terminal.loadAddon(new Unicode11Addon())
-    terminal.loadAddon(new WebFontsAddon())
     terminal.unicode.activeVersion = '11'
 
     return {
         terminal,
         fit: () => {
             try {
+                const next = fitAddon.proposeDimensions()
+                if (!next) return
+                if (next.cols === terminal.cols && next.rows === terminal.rows) return
+
                 fitAddon.fit()
             } catch {
                 // silence
@@ -68,33 +83,54 @@ function createTerminal(fontFamily: string): { fit: () => void; terminal: Termin
     }
 }
 
-function loadRenderer(terminal: Terminal): void {
+function loadRenderer(terminal: Terminal, onUnavailable: () => void): void {
     try {
         const webgl = new WebglAddon()
+
         webgl.onContextLoss(() => {
             webgl.dispose()
-            terminal.loadAddon(new CanvasAddon())
+            onUnavailable()
         })
+
         terminal.loadAddon(webgl)
     } catch {
-        terminal.loadAddon(new CanvasAddon())
+        onUnavailable()
     }
 }
 
 interface IProps {
+    isPaused: boolean
     onInput: (data: string) => void
-    onReady: (terminal: Terminal) => void
     onResize: (cols: number, rows: number) => void
+    onTerminal: (terminal: null | Terminal) => void
 }
 
 export const TerminalView = (props: IProps) => {
-    const { onInput, onReady, onResize } = props
+    const { isPaused, onInput, onResize, onTerminal } = props
+    const { t } = useTranslation()
+
+    const warnAboutRenderer = useEffectEvent(() =>
+        notifications.show({
+            color: 'red',
+            message:
+                'This browser has no WebGL, which the terminal needs to draw. It keeps working, ' +
+                'but redrawing stays noticeably slower until WebGL is enabled.',
+            title: t('node-ssh.title')
+        })
+    )
 
     const containerRef = useRef<HTMLDivElement | null>(null)
+    const fitRef = useRef<(() => void) | null>(null)
+
+    const shouldFit = useEffectEvent(() => !isPaused)
+
+    useEffect(() => {
+        if (!isPaused) fitRef.current?.()
+    }, [isPaused])
 
     const handleInput = useEffectEvent((data: string) => onInput(data))
     const handleResize = useEffectEvent((cols: number, rows: number) => onResize(cols, rows))
-    const handleReady = useEffectEvent((terminal: Terminal) => onReady(terminal))
+    const handleTerminal = useEffectEvent((terminal: null | Terminal) => onTerminal(terminal))
 
     useEffect(() => {
         const container = containerRef.current
@@ -111,7 +147,7 @@ export const TerminalView = (props: IProps) => {
         container.addEventListener('keydown', swallowEscape)
 
         void (async () => {
-            const fontFamily = await loadFonts([TERMINAL_FONT]).then(
+            const fontFamily = await loadTerminalFont(TERMINAL_FONT).then(
                 () => TERMINAL_STACK,
                 () => FALLBACK_STACK
             )
@@ -125,15 +161,19 @@ export const TerminalView = (props: IProps) => {
             terminal.onResize(({ cols, rows }) => handleResize(cols, rows))
 
             terminal.open(container)
-            loadRenderer(terminal)
+            loadRenderer(terminal, warnAboutRenderer)
 
             frame = requestAnimationFrame(() => {
                 created.fit()
                 created.terminal.focus()
-                handleReady(created.terminal)
+                handleTerminal(created.terminal)
             })
 
-            observer = new ResizeObserver(() => created.fit())
+            fitRef.current = created.fit
+
+            observer = new ResizeObserver(() => {
+                if (shouldFit()) created.fit()
+            })
             observer.observe(container)
         })()
 
@@ -141,7 +181,9 @@ export const TerminalView = (props: IProps) => {
             disposed = true
             container.removeEventListener('keydown', swallowEscape)
             cancelAnimationFrame(frame)
+            fitRef.current = null
             observer?.disconnect()
+            if (terminal) handleTerminal(null)
             terminal?.dispose()
         }
     }, [])

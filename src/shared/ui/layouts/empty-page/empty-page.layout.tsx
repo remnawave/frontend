@@ -6,10 +6,11 @@ import { SectionCard } from '@shared/ui/section-card'
 interface IProps {
     icon: React.ReactNode
     mih?: string
+    title?: React.ReactNode
 }
 
 export const EmptyPageLayout = (props: IProps) => {
-    const { icon, mih } = props
+    const { icon, mih, title } = props
     const { t } = useTranslation()
     return (
         <SectionCard.Root p="xl" mih={mih}>
@@ -22,7 +23,7 @@ export const EmptyPageLayout = (props: IProps) => {
 
                         <Stack align="center" gap="xs">
                             <Text fw={600} size="lg" ta="center">
-                                {t('common.nothing-found')}
+                                {title ?? t('common.nothing-found')}
                             </Text>
                         </Stack>
                     </Stack>

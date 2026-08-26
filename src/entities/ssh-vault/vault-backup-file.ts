@@ -5,17 +5,40 @@ import { concatBytes } from '@noble/curves/utils.js'
 import { fromBase64, toBase64 } from './ssh-crypto'
 
 export const VAULT_FILE_EXTENSION = '.rw'
+export const VAULT_FILE_VERSION = 2
 
 const MAGIC = new Uint8Array([0x52, 0x57, 0x56, 0x4c, 0x54, 0x00])
 const IV_LENGTH = 12
-
-export const VAULT_FILE_VERSION = 1
+const PADDING_BLOCK = 4096
 
 export class VaultFileError extends Error {
     constructor() {
         super('malformed vault file')
         this.name = 'VaultFileError'
     }
+}
+
+export function padPayload(payload: Uint8Array): Uint8Array {
+    const total = Math.ceil((4 + payload.length) / PADDING_BLOCK) * PADDING_BLOCK
+    const padded = new Uint8Array(total)
+
+    new DataView(padded.buffer).setUint32(0, payload.length, false)
+    padded.set(payload, 4)
+
+    return padded
+}
+
+export function unpadPayload(padded: Uint8Array): Uint8Array {
+    if (padded.length < 4) throw new VaultFileError()
+
+    const length = new DataView(padded.buffer, padded.byteOffset, padded.byteLength).getUint32(
+        0,
+        false
+    )
+
+    if (length > padded.length - 4) throw new VaultFileError()
+
+    return padded.subarray(4, 4 + length)
 }
 
 export interface IVaultBackupFile {

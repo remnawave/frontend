@@ -1,7 +1,7 @@
 import { ActionIcon, Group } from '@mantine/core'
 import { TbArrowsDiagonal, TbArrowsDiagonalMinimize2, TbMinus, TbPlus, TbX } from 'react-icons/tb'
 
-import classes from './NodeSshTerminal.module.css'
+import classes from '../NodeSshTerminal.module.css'
 
 interface IProps {
     isMaximized: boolean

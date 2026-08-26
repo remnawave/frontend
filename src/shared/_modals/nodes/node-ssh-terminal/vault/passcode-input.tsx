@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 
-import classes from './NodeSshTerminal.module.css'
+import classes from '../NodeSshTerminal.module.css'
 
 const ALLOWED_CHARS = /[!-~]/gu
 

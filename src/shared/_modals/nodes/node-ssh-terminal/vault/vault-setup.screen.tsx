@@ -8,7 +8,7 @@ import { SectionCard } from '@shared/ui/section-card'
 
 import { generateSeedPhrase } from '@entities/ssh-vault'
 
-import classes from './NodeSshTerminal.module.css'
+import classes from '../NodeSshTerminal.module.css'
 import { PasscodeForm } from './passcode-form'
 
 interface IProps {
