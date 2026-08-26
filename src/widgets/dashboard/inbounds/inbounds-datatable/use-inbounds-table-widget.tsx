@@ -140,7 +140,6 @@ export function getInboundsTableColumns(
         },
         {
             accessor: 'activeSquads',
-            sortable: true,
             title: t('inbounds-datatable.widget.squads'),
             render: ({ activeSquads }) => {
                 const names = sortBy(
