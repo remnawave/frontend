@@ -1279,7 +1279,7 @@
   "internal-squad-header-action-buttons": {
     "feature": {
       "create-internal-squad": "Создать внутренний сквад",
-      "create-a-new-internal-squad-by-entering-a-name-below": "Создайте новый внутренний отряд, введя имя ниже.",
+      "create-a-new-internal-squad-by-entering-a-name-below": "Создайте новый внутренний сквад, введя имя ниже.",
       "it-cant-be-changed-later": "Его нельзя изменить позже",
       "squad-name": "Имя сквада",
       "enter-squad-name": "Введите имя сквада"
@@ -1528,7 +1528,7 @@
         "subscription-templates-description-line-2": "Обратите внимание, Правила Ответа имеют более высокий приоритет.",
         "select-a-template": "Выберите шаблон",
         "default-template-in-use": "Используется Default шаблон...",
-        "edit-external-squad": "Редактировать внешний отряд",
+        "edit-external-squad": "Редактировать внешний сквад",
         "templates": "Шаблоны",
         "settings": "Настройки",
         "remarks": "Примечания"
@@ -1902,7 +1902,7 @@
     "tab": {
       "widget": {
         "subscription-page-config": "Конфигурация Subscription Page",
-        "subscription-page-config-description": "Вы можете переопределить конфигурацию Remnawave Subscription Page для этого внешнего отряда.",
+        "subscription-page-config-description": "Вы можете переопределить конфигурацию Remnawave Subscription Page для этого внешнего сквада.",
         "subpage-config": "Subpage Config",
         "select-config": "Выберите конфигурацию..."
       }
