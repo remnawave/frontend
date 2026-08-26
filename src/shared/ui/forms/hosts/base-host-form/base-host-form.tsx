@@ -19,10 +19,9 @@ import { INTERNAL_SQUADS_MODE, SECURITY_LAYERS } from '@remnawave/backend-contra
 import { useCallback, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { HiQuestionMarkCircle } from 'react-icons/hi'
-import { PiFloppyDiskDuotone, PiTag } from 'react-icons/pi'
+import { PiFloppyDiskDuotone } from 'react-icons/pi'
 
 import { DrawerFooter } from '@shared/ui/drawer-footer'
-import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { TemplateInfoPopoverShared } from '@shared/ui/popovers'
 import { PopoverWithInfoShared } from '@shared/ui/popovers/popover-with-info'
 import { SectionCard } from '@shared/ui/section-card'
@@ -237,15 +236,6 @@ export const BaseHostForm = <
                     <Stack>
                         <SectionCard.Root>
                             <SectionCard.Section>
-                                <BaseOverlayHeader
-                                    iconColor="teal"
-                                    IconComponent={PiTag}
-                                    iconVariant="soft"
-                                    title={t('base-host-form.vital-parameters')}
-                                    titleOrder={5}
-                                />
-                            </SectionCard.Section>
-                            <SectionCard.Section>
                                 <HostVisibility />
                             </SectionCard.Section>
                             <SectionCard.Section>
@@ -269,6 +259,11 @@ export const BaseHostForm = <
                                                 undefined
                                             }
                                             configProfiles={configProfiles}
+                                            error={
+                                                form.errors['inbound.configProfileUuid'] ??
+                                                form.errors['inbound.configProfileInboundUuid'] ??
+                                                null
+                                            }
                                             onSaveInbound={saveInbound}
                                         />
                                     </Stack>
@@ -351,7 +346,7 @@ export const BaseHostForm = <
                     <Group gap="xs">
                         <Button
                             color="teal"
-                            disabled={!form.isValid() || !form.isDirty() || !form.isTouched()}
+                            disabled={!form.isDirty() || !form.isTouched()}
                             leftSection={<PiFloppyDiskDuotone size="16px" />}
                             loading={isSubmitting}
                             size="md"

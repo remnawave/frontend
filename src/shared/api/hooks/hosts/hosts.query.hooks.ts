@@ -1,5 +1,5 @@
 import { createQueryKeys } from '@lukemorales/query-key-factory'
-import { GetHostsCommand, GetHostsTagsCommand } from '@remnawave/backend-contract'
+import { GetHostCommand, GetHostsCommand, GetHostsTagsCommand } from '@remnawave/backend-contract'
 
 import { sToMs } from '@shared/utils/time-utils'
 
@@ -11,7 +11,10 @@ export const hostsQueryKeys = createQueryKeys('hosts', {
     },
     getAllTags: {
         queryKey: null
-    }
+    },
+    getHost: (route: GetHostCommand.RequestParam) => ({
+        queryKey: [route]
+    })
 })
 
 export const useGetHosts = createGetQueryHook({
@@ -35,4 +38,13 @@ export const useGetHostTags = createGetQueryHook({
         placeholderData: false
     },
     errorHandler: (error) => errorHandler(error, 'Get All Host Tags')
+})
+
+export const useGetHost = createGetQueryHook({
+    endpoint: GetHostCommand.TSQ_url,
+    responseSchema: GetHostCommand.ResponseSchema,
+    routeParamsSchema: GetHostCommand.RequestParamSchema,
+    getQueryKey: ({ route }) => hostsQueryKeys.getHost(route!).queryKey,
+    rQueryParams: {},
+    errorHandler: (error) => errorHandler(error, 'Get Host')
 })

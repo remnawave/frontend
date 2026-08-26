@@ -105,7 +105,7 @@ export function HostCardWidget(props: IProps) {
 
     const handleEdit = () => {
         showModal('hosts_editHostDrawer', {
-            host: item
+            hostUuid: item.uuid
         })
     }
 

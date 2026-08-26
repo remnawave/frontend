@@ -55,6 +55,7 @@ export const ROUTES = {
 } as const
 
 export const OPEN_ENTITY = {
+    HOST: 'host',
     CONFIG_PROFILE: 'config-profile',
     EXTERNAL_SQUAD: 'external-squad',
     INTERNAL_SQUAD: 'internal-squad',
