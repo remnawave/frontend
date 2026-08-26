@@ -30,113 +30,113 @@
   "common": {
     "action": {
       "actions": "Actions",
-      "add": "Add",
-      "add-users": "Add users",
+      "add": "افزودن",
+      "add-users": "افزودن کاربران",
       "bulk-actions": "Bulk actions",
       "bulk-edit": "Bulk edit",
-      "cancel": "Cancel",
-      "change": "Change",
-      "clear": "Clear",
+      "cancel": "لغو",
+      "change": "تغییر دادن",
+      "clear": "پاک کردن",
       "clear-selection": "Clear selection",
-      "clone": "Clone",
-      "close": "Close",
-      "confirm-action": "Confirm action",
-      "continue": "Continue",
-      "copy": "Copy",
+      "clone": "همانندسازی",
+      "close": "بستن",
+      "confirm-action": "تأیید اقدام",
+      "continue": "ادامه",
+      "copy": "کپی",
       "copy-link": "Copy link",
-      "copy-uuid": "Copy UUID",
-      "create": "Create",
-      "delete": "Delete",
-      "disable": "Disable",
-      "documentation": "Documentation",
-      "download": "Download",
-      "edit": "Edit",
-      "enable": "Enable",
-      "load-from-github": "Load from GitHub",
-      "more-actions": "More actions",
-      "next": "Next",
+      "copy-uuid": "کپی UUID",
+      "create": "ایجاد",
+      "delete": "حذف",
+      "disable": "غیرفعالسازی",
+      "documentation": "مستندات",
+      "download": "دانلود",
+      "edit": "ویرایش",
+      "enable": "فعالسازی",
+      "load-from-github": "بارگذاری از گیت‌هاب",
+      "more-actions": "عملیات بیشتر",
+      "next": "بعدی",
       "open": "Open",
       "paste": "Paste",
       "paste-default": "Paste default",
-      "refresh": "Refresh",
-      "remove": "Remove",
-      "remove-users": "Remove users",
-      "rename": "Rename",
-      "reset": "Reset",
-      "reset-traffic": "Reset traffic",
-      "save": "Save",
-      "search": "Search",
-      "select": "Select",
-      "select-all": "Select all",
+      "refresh": "تازه‌سازی",
+      "remove": "حذف کردن",
+      "remove-users": "پاک کردن کاربران",
+      "rename": "تغییر نام",
+      "reset": "بازنشانی",
+      "reset-traffic": "بازنشانی ترافیک",
+      "save": "ذخیره",
+      "search": "جستجو",
+      "select": "انتخاب",
+      "select-all": "انتخاب همه",
       "try-again": "Try again",
-      "update": "Update",
+      "update": "به‌روزرسانی",
       "view": "View"
     },
     "field": {
       "active-sessions": "Active sessions",
-      "address": "Address",
-      "all": "All",
-      "billing-node": "Billing node",
+      "address": "آدرس",
+      "all": "همه",
+      "billing-node": "نود صورتحساب",
       "color": "Color",
-      "created-at": "Created at",
+      "created-at": "ساخته شده در",
       "creation": "Creation",
-      "description": "Description",
-      "first-connected-at": "First connected at",
-      "inbounds": "Inbounds",
+      "description": "توضیحات",
+      "first-connected-at": "اولین اتصال",
+      "inbounds": "اینباندها",
       "inbounds-hosts": "Inbounds & hosts",
       "interface": "Interface",
-      "internal-squads": "Internal squads",
+      "internal-squads": "اسکوادهای داخلی",
       "ip-address": "IP address",
       "ip-addresses": "IP addresses",
-      "logo-url": "Logo URL",
-      "name": "Name",
-      "os-version": "OS version",
-      "password": "Password",
-      "platform": "Platform",
-      "port": "Port",
-      "request-at": "Request at",
+      "logo-url": "آدرس URL لوگو",
+      "name": "اسم",
+      "os-version": "نسخه سیستم‌عامل",
+      "password": "گذرواژه",
+      "platform": "پلتفرم",
+      "port": "پورت",
+      "request-at": "درخواست شده در",
       "shared-lists": "Shared lists",
-      "status": "Status",
-      "subscription-request-history": "Subscription request history",
-      "subscription-url": "Subscription URL",
-      "svg-icon": "SVG icon",
-      "system": "System",
-      "tag": "Tag",
-      "today": "Today",
-      "total": "Total",
-      "total-traffic": "Total traffic",
-      "updated-at": "Updated at",
+      "status": "وضعیت",
+      "subscription-request-history": "تاریخچه درخواست اشتراک",
+      "subscription-url": "لینک اشتراک",
+      "svg-icon": "آیکون SVG",
+      "system": "سیستم",
+      "tag": "برچسب",
+      "today": "امروز",
+      "total": "مجموع",
+      "total-traffic": "مصرف کل ترافیک",
+      "updated-at": "به‌روزرسانی شده در",
       "usage-stats": "Usage stats",
-      "user-agent": "User agent",
-      "user-status": "User status",
-      "username": "Username",
+      "user-agent": "عامل کاربر",
+      "user-status": "وضعیت کاربر",
+      "username": "نام کاربر",
       "without-tags": "Without tags"
     },
     "message": {
-      "click-to-see-all": "Click to see all",
+      "click-to-see-all": "برای دیدن همه کلیک کنید",
       "configured": "Configured",
-      "confirm-action-description": "Are you sure you want to perform this action? This action cannot be undone.",
-      "copied": "Copied",
-      "error": "Error",
-      "event-sent": "Event sent",
-      "invalid-json": "Invalid JSON",
-      "last-error-message": "Last error message",
-      "loading": "Loading",
-      "no-config-profiles-available": "No config profiles available",
-      "no-data-available": "No data available",
-      "no-data-available-for-the-selected-period": "No data available for the selected period",
-      "no-inbound-selected": "No inbound selected",
-      "no-profile-selected": "No profile selected",
-      "no-profiles-or-inbounds-found": "No profiles or inbounds found",
-      "not-set": "Not set",
-      "nothing-found": "Nothing found",
+      "confirm-action-description": "آیا از انجام دادن این عملیات مطمئن هستید؟ این کار غیرقابل بازگشت است.",
+      "copied": "کپی شد",
+      "error": "خطا",
+      "event-sent": "رویداد ارسال شد",
+      "invalid-json": "JSON نامعتبر",
+      "last-error-message": "آخرین پیام خطا",
+      "loading": "در حال بارگذاری",
+      "no-config-profiles-available": "هیچ پروفایل پیکربندی‌ای موجود نیست",
+      "no-data-available": "داده‌ای در دسترس نیست",
+      "no-data-available-for-the-selected-period": "داده‌ای برای دوره انتخاب‌شده در دسترس نیست",
+      "no-inbound-selected": "هیچ اینباندی انتخاب نشده است",
+      "no-profile-selected": "هیچ پروفایلی انتخاب نشده",
+      "no-profiles-or-inbounds-found": "هیچ پروفایل یا اینباندی یافت نشد",
+      "not-set": "تنظیم نشده",
+      "nothing-found": "چیزی یافت نشد",
       "operation-completed": "Operation completed",
       "overdue": "Overdue",
       "processing": "Processing",
-      "search-profiles-or-inbounds": "Search profiles or inbounds...",
+      "search-profiles-or-inbounds": "جستجوی پروفایل یا اینباند...",
       "selected": "Selected: {{count}}",
-      "success": "Success",
-      "warning": "Warning"
+      "success": "با موفقیت انجام شد",
+      "warning": "هشدار"
     }
   },
   "bandwidth-metrics": {
@@ -164,12 +164,12 @@
       "format": "فرمت",
       "failed-to-save-invalid-json": "به دلیل JSON نامتعتبر ذخیره نشد.",
       "save-anyway": "ذخیره کانفیگ نامعتبر",
-      "save-anyway-description": "Are you sure you want to save an invalid Xray config? This action can lead to unexpected behavior. Continue only if you know what you are doing.",
+      "save-anyway-description": "این آیا از ذخیره کانفیگ نامعتبر مطمئن هستید؟ این عملیات ممکن است باعث بروز مشکلاتی در نرم‌افزار شود. اگر مطمئن هستید، روی \"ذخیره کانفیگ نامعتبر\" کلیک کنید.",
       "tools": "ابزارها",
       "copy-all-content": "کپی همهٔ محتوا",
       "cut-selection": "بریدن محتوای انتخاب شده",
       "paste-from-clipboard": "جای‌گذاری از کلیپ‌بورد",
-      "generate-keypair": "Generate keypair"
+      "generate-keypair": "ایجاد جفت‌کلید"
     }
   },
   "action-group": {
@@ -186,10 +186,10 @@
     "traffic-reset": "بازنشانی ترافیک",
     "never": "هرگز",
     "online-at": "متصل در",
-    "lifetime-used": "Lifetime usage",
+    "lifetime-used": "مصرف کل",
     "sub-link-revoked-at": "ساب لینک لفو شده در",
     "created-at": "ساخته شده در",
-    "internal-squads": "Internal squads",
+    "internal-squads": "اسکوادهای داخلی",
     "used-traffic": "Used traffic (%)"
   },
   "header-buttons": {
@@ -198,7 +198,7 @@
   "header-action-buttons": {
     "feature": {
       "update-external-squads": "به روزرسانی اسکوادهای خارجی",
-      "external-squad-name": "External squad name",
+      "external-squad-name": "نام اسکواد خارجی",
       "update-templates": "به روزرسانی الگوها",
       "template-name": "نام الگو"
     }
@@ -207,15 +207,15 @@
     "feature": {
       "restart-all-nodes": "ریستارت کردن تمامی نودها",
       "search-nodes": "جست‌وجوی نودها",
-      "force-restart-description": "Guarantees that all nodes fully restart Xray Core.",
-      "graceful-restart-description-1": "Sends a request to all nodes to restart Xray, but the request may go unfulfilled if the node hash matches the current one. This is the default option.",
+      "force-restart-description": "با این روش همه نودها هسته Xray را به صورت اجباری ری‌استارت خواهند کرد",
+      "graceful-restart-description-1": "با این روش درخواست ری‌استارت هسته به همه نودها ارسال خواهد شد اما درصورت یکسان بودن هش نود با هش فعلی ممکن است درخواست اجرا نشود. این، حالت پیشفرض ری‌استارت است",
       "force": "اجباری",
       "graceful": "آرام"
     }
   },
   "config-editor": {
     "widget": {
-      "unsaved-changes": "Unsaved changes",
+      "unsaved-changes": "تغییرات ذخیره نشده",
       "your-changes-will-be-lost-if-you-leave-this-page-without-saving": "اگر این صفحه را بدون ذخیره تغییرات ترک کنید، تغییرات ایجاد شده از دست خواهند رفت.",
       "leave": "ترک",
       "stay": "ماندن"
@@ -223,7 +223,7 @@
   },
   "keypair": {
     "widget": {
-      "generate-key-pair": "Generate key pair",
+      "generate-key-pair": "ایجاد جفت کلید",
       "both-keys": "هر دو"
     }
   },
@@ -245,7 +245,7 @@
       "back": "بازگشت",
       "connection-successful": "اتصال موفقیت‌آمیز بود",
       "connection-failed": "اتصال ناموفق بود",
-      "open-node": "Open node"
+      "open-node": "باز کردن نود"
     }
   },
   "edit-node-modal": {
@@ -264,7 +264,7 @@
   "create-user-modal": {
     "widget": {
       "user-description": "توضیحات کاربر",
-      "expiry-date": "Expiry date",
+      "expiry-date": "تاریخ انقضا",
       "pick-value": "انتخاب مقدار",
       "traffic-reset-strategy": "دوره بازنشانی ترافیک",
       "traffic-reset-strategy-description": "هر چند وقت یک بار ترافیک کاربر بازنشانی شود",
@@ -275,8 +275,8 @@
       "1-year": "+1 سال",
       "2099-year": "سال 2099",
       "hwid-user-limit-description": "این ویژگی تنها درصورت فعال بودن <highlight>اشتراک ← تنظیمات (محدودیت HWID)</highlight> کار خواهد کرد. <anchor>کسب اطلاعات بیشتر</anchor>",
-      "disable-hwid-limit": "Disable HWID limit",
-      "hwid-device-limit": "HWID device limit",
+      "disable-hwid-limit": "غیرفعالسازی لیمیت HWID",
+      "hwid-device-limit": "لیمیت دستگاه براساس HWID",
       "expire-at-description": "تاریخ و ساعت منقضی شدن اشتراک کاربر.",
       "internal-squads-description": "اسکوادهایی که کاربر عضو آن‌ها خواهد بود را مشخص کنید."
     }
@@ -290,15 +290,15 @@
   },
   "view-user-modal": {
     "widget": {
-      "subscription-qr-code": "Subscription QR code",
+      "subscription-qr-code": "اشتراک کد QR",
       "edit-user-headline": "ویرایش کاربر",
       "subscription-url-description-line-1": "دامنه و مسیر استخراج شده از فایل .env:",
       "subscription-url-description-line-2": "برای تغییر این مقدار لطفا فایل .env را ویرایش کرده و سپس Remnawave را با این کامند ریستارت کنید:",
       "management": "مدیریت",
-      "danger-zone": "Danger zone",
-      "detailed-info": "Detailed info",
-      "accessible-nodes": "Accessible nodes",
-      "qr-code": "QR code"
+      "danger-zone": "هشدار",
+      "detailed-info": "اطلاعات دقیق",
+      "accessible-nodes": "نودهای قابل دسترسی",
+      "qr-code": "کد QR"
     }
   },
   "base-host-form": {
@@ -306,46 +306,46 @@
     "host": "هاست",
     "path": "مسیر",
     "fingerprint": "اثر انگشت",
-    "security-layer": "Security layer",
+    "security-layer": "لایه امنیتی",
     "tls-transport-layer-security": "TLS (امنیت لایه حمل و نقل)",
     "none": "هیچ کدام",
     "inbounds-default": "پیش فرض اینباند",
-    "extra-xhttp": "XHTTP extra",
+    "extra-xhttp": "تنظیمات Extra XHTTP",
     "xhttp-extra-params": "XHTTP Extra پارامترهای",
     "address-description-line-1": "آدرس باید یک آدرس IP یا دامنه برای مقصد اتصال باشد.",
-    "address-description-line-2": "In most cases, it should point to one of the connected nodes.",
+    "address-description-line-2": "در بیشتر موارد، باید به یکی از نود‌های متصل اشاره کند.",
     "port-description-line-1": "پورت اتصال.",
     "port-description-line-2": "در بیشتر موارد، باید با پورت اینباند انتخاب‌شده مطابقت داشته باشد.",
     "sni-description-line-1": "SNI نشان‌دهنده نام سرور است.",
     "sni-description-line-2": "اگر مشخص نشود، مقدار از کانفیگ اینباند استخراج خواهد شد.",
-    "host-visibility": "Host visibility",
-    "server-description-header": "Server description",
+    "host-visibility": "قابلیت دیده شدن هاست",
+    "server-description-header": "توضیحات سرور",
     "server-description-placeholder": "حداکثر 30 کاراکتر",
     "group-security": "Security",
     "group-transport": "Transport",
-    "group-subscription": "Subscription",
+    "group-subscription": "اشتراک",
     "group-client": "Client-specific",
-    "group-advanced": "Advanced",
-    "hide-host": "Hide host",
+    "group-advanced": "پیشرفته",
+    "hide-host": "مخفی کردن هاست",
     "single-domain": "تک‌دامنه",
     "default-mode-for-one-domain": "حالت پیشفرض برای یک دامنه",
     "multi-domain": "چند دامنه",
     "multi-domain-description": "چندین دامنه که با کاما (,) جدا شده‌اند، Remnawave یکی از دامنه‌ها را به صورت تصادفی انتخاب خواهد کرد.",
     "wildcard-domain": "دامنه wildcard",
     "wildcard-domain-description": "الگوی wildcard برای دامنه. Remnawave به جای * یک رشته متنی رندوم جایگذاری خواهد کرد",
-    "override-sni-from-address": "Override SNI from address",
-    "override-sni-from-address-description": "This option replaces the SNI value with the specified Address field value. This is particularly useful for multi-domain or wildcard domain configurations.",
+    "override-sni-from-address": "بازنویسی SNI از آدرس دامنه",
+    "override-sni-from-address-description": "این گزینه مقدار SNI را با آدرس مشخص شده جایگزین خواهد کرد که برای کانفیگ‌های چند دامنه‌ای و wildcard قابل استفاده می‌باشد",
     "shuffled-hosts-hover-card": "هاست‌های به هم زده شده در بالای لیست قرار گرفته و به صورت تصادفی مرتب خواهند شد.",
     "vless-route-description": "از 1 تا 65535، برای غیرفعال‌سازی 0 یا خالی بگذارید",
-    "shuffle-host": "Shuffle host",
+    "shuffle-host": "به هم زدن هاست‌ها",
     "enable-x25519mlkem768": "فعالسازی x25519mlkem768",
     "pick-nodes-which-resolved-from-this-host-only-visual-assignment": "نودهایی که از طریق این هاست استفاده می‌شوند را انتخاب کنید. (تاثیر عملکردی ندارد و فقط جنبه نمایشی دارد)",
     "nodes": "نودها",
-    "select-a-xray-json-template": "Select an Xray JSON template",
-    "xray-json-template": "Xray JSON template",
-    "vital-parameters": "Vital parameters",
-    "exclude-this-host-from-specific-internal-squads": "Exclude this host from specific internal squads",
-    "excluded-internal-squads": "Excluded internal squads",
+    "select-a-xray-json-template": "یکی از الگوهای کانفیگ Json را انتخاب کنید",
+    "xray-json-template": "الگوی کانفیگ Json",
+    "vital-parameters": "پارامترهای حیاتی",
+    "exclude-this-host-from-specific-internal-squads": "این هاست را از اسکوادهای خارجی مشخص حذف کنید",
+    "excluded-internal-squads": "اسکوادهای خارجی حذف شده",
     "keep-sni-blank": "SNI خالی بماند",
     "keep-sni-blank-description": "در برخی موارد باید SNI خالی بماند. از این گزینه برای خالی گذاشتن SNI استفاده کنید. توجه داشته باشید که این گزینه بالاترین اولویت را دارد، بنابراین حتی اگر SNI از قبل تنظیم شده باشد، اعمال خواهد شد.",
     "exclude-from-subscription-type": "Exclude from subscription type",
@@ -391,20 +391,20 @@
     "e-g-1-31": "مثلا 1-31",
     "notify-percent": "اطلاع‌رسانی در چند درصد",
     "e-g-50": "مثلا 50",
-    "consumption-m-line-1": "Applies the selected multiplier to the user's traffic (1.0 = normal, 0.5 = half, 2.0 = double).",
+    "consumption-m-line-1": "ضریب مشخص شده را به مقدار مصرف ترافیک اعمال می‌کند (به عنوان مثال اگر ضریب مصرف 0.5 باشد، مقدار مصرف نصف خواهد شد. 1.0 = نرمال، 2.0 = مصرف دوبل)",
     "consumption-m-line-2": "به زبان ساده اگر محدودیت مصرف یک کاربر 1 گیگابایت باشد، با ضریب 2.0 کاربر فقط می‌تواند به اندازه 500 مگابایت از سرور استفاده (مصرف واقعی) کند و سپس اکانت ایشان محدود می‌شود.",
-    "node-vitals": "Vitals",
+    "node-vitals": "اطلاعات اصلی نود",
     "consumption": "مصرف",
     "core-configuration": "پیکربندی هسته",
-    "tracking-and-billing": "Tracking & billing",
+    "tracking-and-billing": "پایش و صورتحساب‌ها",
     "management": "مدیریت"
   },
   "home": {
     "page": {
       "online-stats": "آمار آنلاین شدن کاربرها",
       "bandwidth": "پهنای باند",
-      "remnawave-usage": "Remnawave usage",
-      "process-details": "Process details"
+      "remnawave-usage": "مصرف منابع Remnawave",
+      "process-details": "مشخصات Process"
     },
     "runtime-info": {
       "title": "Runtime metrics guide",
@@ -434,16 +434,16 @@
   },
   "statistic-nodes": {
     "component": {
-      "current-month": "Current month",
+      "current-month": "ماه جاری",
       "7-days": "۷ روز",
       "14-days": "۱۴ روز",
       "30-days": "۳۰ روز",
       "60-days": "۶۰ روز",
       "90-days": "۹۰ روز",
       "180-days": "۱۸۰ روز",
-      "total-traffic": "Total traffic",
-      "total-traffic-placeholder": "Total traffic: {{totalTraffic}}",
-      "top-nodes": "Top nodes",
+      "total-traffic": "ترافیک کل",
+      "total-traffic-placeholder": "ترافیک کل: {{totalTraffic}}",
+      "top-nodes": "نودهای پرمصرف",
       "node": "نود",
       "traffic": "ترافیک",
       "3-days": "۳ روز"
@@ -474,19 +474,19 @@
   },
   "get-time-ago": {
     "util": {
-      "invalid-date": "Invalid date",
+      "invalid-date": "تاریخ نامعتبر",
       "not-connected-yet": "هنوز متصل نشده"
     }
   },
   "bulk-user-actions-modal": {
     "widget": {
-      "user-deletion-description": "Delete all users with the selected status. If you delete users with the \"Active\" status, you should restart all nodes to apply the changes.",
-      "select-status": "Delete by status"
+      "user-deletion-description": "حذف تمامی کاربران با وضعیت انتخاب شده. اگر کاربران با وضعیت \"فعال یا Active\" را حذف می‌کنید، باید تمامی نودها را برای اعمال تغییرات مجدداً راه‌اندازی کنید.",
+      "select-status": "حذف کردن بر اساس وضعیت"
     }
   },
   "register-form": {
     "feature": {
-      "generate": "Generate & copy",
+      "generate": "ایجاد و کپی کردن رمز",
       "confirm-password": "تایید گذرواژه",
       "sign-up": "ثبت نام",
       "password-copied": "گذرواژه کپی شد",
@@ -508,10 +508,10 @@
       "validation-error": "خطای اعتبارسنجی",
       "main-settings": "Main settings",
       "you-must-add-at-least-one-remark-with-text": "باید حداقل یک ریمارک وارد نمایید",
-      "user-status-remarks-description": "The following values will be displayed on the subscription page if the user is expired, limited, or disabled.",
+      "user-status-remarks-description": "درصورتی که کاربر منقضی، محدود یا غیرفعال شده باشد مقادیر زیر در اشتراک او نمایش داده خواهند شد",
       "user-status-remarks-description-line-2": "می‌توانید برای هر وضعیت چند ریمارک ایجاد کنید",
       "serve-json-at-base-subscription": "ارائه JSON در لینک پایه پیشفرض",
-      "serve-json-description": "Serve JSON configurations at the base subscription path (without having to append /json). If the client supports it, it will be served JSON; otherwise, it will be served as usual.",
+      "serve-json-description": "درصورت پشتیبانی نرم‌افزار، بدون نیاز به قرار دادن /json در انتهای لینک، اشتراک JSON برای آن ارسال خواهد شد",
       "custom-remarks": "ریمارک‌های سفارشی"
     }
   },
@@ -536,7 +536,7 @@
       "tab": {
         "feature": {
           "select-status": "انتخاب وضعیت",
-          "update-users": "Update users"
+          "update-users": "به‌روزرسانی کاربران"
         }
       }
     },
@@ -550,7 +550,7 @@
     "danger": {
       "tab": {
         "feature": {
-          "delete-users-by-status": "Delete users by status",
+          "delete-users-by-status": "حذف کاربران بر اساس وضعیت",
           "delete-users-by-status-description": "همه کاربران با وضعیت انتخاب‌شده را به‌طور دائم حذف می‌کند"
         }
       }
@@ -560,22 +560,22 @@
     "actions": {
       "tab": {
         "feature": {
-          "revoke-subscription": "Revoke subscription",
+          "revoke-subscription": "لغو اشتراک",
           "perform-action-on-users": "انجام اقدامات برای {{usersCount}} کاربر انتخاب‌شده",
           "revokes-subscription-for-all-selected-users": "اشتراک را برای همه کاربران انتخاب‌شده لغو می‌کند",
           "specify-internal-squads-that-will-be-assigned-to-the-user": "اسکوادهایی که این کاربر عضو آن‌ها خواهد شد را مشخص کنید",
-          "extend-expiration-date": "Extend expiration date",
+          "extend-expiration-date": "تمدید زمان انقضا",
           "enter-the-number-of-days-to-extend-the-expiration-date": "تعداد روزهایی که به زمان اشتراک افزوده می‌شوند.",
-          "extend-days": "Extend days",
+          "extend-days": "روزهای تمدید ",
           "extend": "تمدید",
-          "extend-expiration-date-description": "Add days to the expiration date for the selected users. Days will be added to the current expiration date of each user."
+          "extend-expiration-date-description": "افزودن به تعداد روزهای باقی مانده تا انقضای کاربرهای انتخاب شده."
         }
       }
     },
     "danger": {
       "tab": {
         "feature": {
-          "delete-users": "Delete users",
+          "delete-users": "حذف کاربران",
           "permanently-deletes-all-selected-users-and-their-data": "همه کاربران انتخاب‌شده و داده‌های آنها را به‌طور دائم حذف می‌کند"
         }
       }
@@ -583,7 +583,7 @@
   },
   "get-user-subscription-links": {
     "feature": {
-      "connection-keys": "Connection keys"
+      "connection-keys": "کلیدهای اتصال"
     }
   },
   "active-sessions-drawer": {
@@ -603,38 +603,38 @@
   },
   "detailed-user-info-drawer": {
     "widget": {
-      "detailed-user-info": "Detailed user info",
-      "user-information": "User information",
+      "detailed-user-info": "اطلاعات دقیق کاربر",
+      "user-information": "اطلاعات کاربر",
       "short-uuid": "شناسه (UUID) کوتاه",
       "email": "ایمیل",
       "telegram-id": "آیدی عددی تلگرام",
-      "traffic-information": "Traffic information",
-      "used-traffic": "Traffic usage",
-      "lifetime-used-traffic": "Lifetime traffic usage",
-      "traffic-limit": "Traffic limit",
-      "traffic-limit-strategy": "Traffic limit strategy",
-      "last-traffic-reset": "Last traffic reset",
-      "subscription-information": "Subscription information",
-      "expires-at": "Expires at",
-      "revoked-at": "Revoked at",
-      "connection-information": "Connection information",
-      "trojan-password": "Trojan password",
-      "ss-password": "SS password",
-      "last-online": "Last online",
-      "last-connected-node": "Last connected node",
+      "traffic-information": "اطلاعات ترافیک",
+      "used-traffic": "ترافیک استفاده‌شده",
+      "lifetime-used-traffic": "ترافیک استفاده‌شده در طول عمر",
+      "traffic-limit": "محدودیت ترافیک",
+      "traffic-limit-strategy": "استراتژی محدودیت ترافیک",
+      "last-traffic-reset": "آخرین بازنشانی ترافیک",
+      "subscription-information": "اطلاعات اشتراک",
+      "expires-at": "زمان انقضا",
+      "revoked-at": "لغو شده در",
+      "connection-information": "اطلاعات اتصال",
+      "trojan-password": "رمز عبور تروجان",
+      "ss-password": "رمز عبور SS",
+      "last-online": "آخرین آنلاین",
+      "last-connected-node": "آخرین نود متصل‌شده",
       "timestamps": "مهرهای زمانی",
-      "active-internal-squads": "Active internal squads"
+      "active-internal-squads": "اسکوادهای داخلی فعال"
     }
   },
   "subscription-tabs": {
     "widget": {
       "show-custom-remarks": "نمایش توضیحات سفارشی",
-      "show-custom-remark-description-line-2": "If this setting is disabled, EXPIRED, LIMITED, and DISABLED users will receive an actual empty host list instead.",
+      "show-custom-remark-description-line-2": "اگر این گزینه غیرفعال باشد - کاربران منقضی‌شده، محدودشده و غیرفعال به جای توضیحات سفارشی زیر، لیست واقعی هاست‌ها را دریافت خواهند کرد.",
       "additional-response-headers": "Response headers",
       "headers-that-will-be-sent-with-subscription-content": "هدرهای اضافی که می‌خواهید همراه با محتوای اشتراک ارسال شوند را مشخص کنید.",
       "randomize-hosts": "هاست رندوم",
       "randomize-hosts-description": "استفاده از مقادیر رندوم برای هاست در اشتراک‌ها",
-      "additional-options": "Additional options",
+      "additional-options": "تنظیمات بیشتر",
       "configure-additional-subscription-options": "پیکربندی تنظیمات اضافی"
     }
   },
@@ -669,10 +669,10 @@
       "unknown": "ناشناخته",
       "model": "مدل",
       "added": "اضافه شده در",
-      "delete-device": "Delete device",
+      "delete-device": "حذف دستگاه",
       "devices": "دستگاه‌ها",
-      "hwid-devices": "HWID devices",
-      "delete-all-devices": "Delete all devices"
+      "hwid-devices": "دستگاه‌های HWID",
+      "delete-all-devices": "حذف همه دستگاه‌ها"
     }
   },
   "headers-manager": {
@@ -684,28 +684,28 @@
   },
   "template-selector": {
     "search-templates": "جست‌وجوی قالب‌ها",
-    "official-templates": "Official templates",
-    "author-templates": "{{author}} templates",
+    "official-templates": "قالب‌های رسمی",
+    "author-templates": "{{author}} قالب‌های",
     "modal": {
-      "load-template": "Load template"
+      "load-template": "بارگذاری قالب"
     },
     "add-template": "افزودن قالب"
   },
   "use-download-template": {
     "failed-to-load-template": "خطا هنگام بارگذاری قالب",
-    "template-loaded": "Template loaded",
+    "template-loaded": "قالب مورد نظر بارگذاری شد",
     "template-name-has-been-loaded-into-the-editor": "وارد ویرایشگر شده‌است {{name}}",
-    "load-failed": "Load failed",
+    "load-failed": "بارگذاری ناموفق",
     "failed-to-load-template-please-try-again": "بارگذاری قالب ناموفق بود، لطفا مجدد تلاش کنید",
-    "select-template-to-load": "Select template to load"
+    "select-template-to-load": "قالب مورد نظر خود را انتخاب کنید"
   },
   "pm2-metrics": {
-    "total-processes": "Total processes",
-    "total-memory": "Total memory"
+    "total-processes": "تعداد کل Processها",
+    "total-memory": "کل رم مصرفی"
   },
   "internal-squads-grid": {
     "widget": {
-      "no-internal-squads": "No internal squads",
+      "no-internal-squads": "هیچ اسکواد داخلی‌ای وجود ندارد",
       "create-your-first-internal-squad-to-get-started": "برای شروع، اولین اسکواد داخلی خود را ایجاد کنید",
       "delete-squad": "حذف اسکواد",
       "users": "کاربران"
@@ -713,36 +713,36 @@
   },
   "config-profiles-grid": {
     "widget": {
-      "no-config-profiles": "No config profiles",
+      "no-config-profiles": "هیچ پروفایل پیکربندی‌ای وجود ندارد",
       "create-your-first-config-profile-to-get-started": "برای شروع، اولین پروفایل پیکربندی خود را ایجاد کنید",
       "delete-profile": "حذف پروفایل",
       "nodes": "نودها",
       "quick-view": "نمای سریع",
-      "xray-config": "Xray config"
+      "xray-config": "Xray کانفیگ"
     }
   },
   "view-infra-provider": {
     "drawer": {
       "widget": {
-        "infra-provider": "Infra provider",
+        "infra-provider": "ارائه‌دهنده تجهیزات",
         "name-description": "نام ارائه‌دهنده. این نام برای شناسایی ارائه‌دهنده در رابط کاربری استفاده می‌شود.",
         "enter-provider-name": "نام ارائه‌دهنده را وارد کنید",
-        "favicon-link": "Favicon link",
+        "favicon-link": "لینک Favicon",
         "enter-favicon-link": "لینک Favicon را وارد کنید",
-        "favicon-link-description": "A link to the provider's favicon, used to display it in the UI. You can enter just the domain name.",
+        "favicon-link-description": "لینک favicon، لینک نماد ارائه‌دهنده است که در رابط کاربری نمایش داده می‌شود. فقط نام دامنه را وارد کنید.",
         "login-url": "آدرس ورود",
         "enter-login-url": "آدرس ورود را وارد کنید",
-        "login-url-description": "The URL of the provider's login page. It lets you jump straight to that page."
+        "login-url-description": "آدرس ورود صفحه لاگین ارائه‌دهنده است و برای دسترسی سریع به آن استفاده می‌شود."
       }
     }
   },
   "update-billing-date-modal": {
     "widget": {
-      "update-billing-date": "Update billing date",
-      "current-date": "Current date",
-      "new-date": "New date",
+      "update-billing-date": "به‌روزرسانی تاریخ صورتحساب",
+      "current-date": "تاریخ فعلی",
+      "new-date": "تاریخ جدید",
       "tomorrow": "فردا",
-      "next-month": "Next month"
+      "next-month": "ماه بعد"
     }
   },
   "infra-providers-table": {
@@ -766,8 +766,8 @@
     "modal": {
       "widget": {
         "please-select-a-provider": "لطفاً یک ارائه‌دهنده انتخاب کنید",
-        "bill-record": "Bill record",
-        "billed-at": "Billed at",
+        "bill-record": "رکورد صورتحساب",
+        "billed-at": "تاریخ صورتحساب",
         "the-date-and-time-when-the-bill-was-paid": "تاریخ و زمان پرداخت صورتحساب.",
         "payment-amount-usd": "مبلغ پرداختی (دلار)",
         "amount": "مقدار"
@@ -778,7 +778,7 @@
     "modal": {
       "widget": {
         "please-select-a-provider-and-billing-node": "لطفاً یک ارائه‌دهنده و نود صورتحساب انتخاب کنید",
-        "next-billing-at": "Next billing at",
+        "next-billing-at": "صورتحساب بعدی در",
         "next-billing-at-description": "تاریخ و زمانی که نود صورتحساب بعدی صادر می‌شود. Remnawave شما را مطلع خواهد کرد.",
         "existing": "Existing",
         "custom": "Custom",
@@ -801,12 +801,12 @@
       "loading-computed-config-profile": "درحال بارگذاری کانفیگ محاسبه‌شده ...",
       "computed-config-profile-loaded-successfully": "کانفیگ محاسبه‌شده با موفقیت بارگذاری شد",
       "the-computed-config-profile-description": "کانفیگ محاسبه‌شده نشان‌دهنده کانفیگ نهایی پس از جایگذاری مقادیر اسنیپت‌ها می‌باشد.",
-      "view-computed": "View computed"
+      "view-computed": "نشان دادن کانفیگ ‌محاسبه‌شده"
     }
   },
   "flat-inbound-checkbox-card": {
     "shared": {
-      "inbound-config-inbound-tag": "Inbound config: {{inboundTag}}"
+      "inbound-config-inbound-tag": "پیکربندی اینباند: {{inboundTag}}"
     }
   },
   "virtualized-flat-inbounds-list": {
@@ -823,7 +823,7 @@
   },
   "select-infra-provider": {
     "shared": {
-      "infrastructure-provider": "Infrastructure provider",
+      "infrastructure-provider": "ارائه‌دهنده تجهیزات",
       "no-providers-available": "هیچ ارائه‌دهنده‌ای موجود نیست",
       "select-the-infrastructure-provider": "ارائه‌دهنده تجهیزات را انتخاب کنید.",
       "select-provider": "انتخاب ارائه‌دهنده..."
@@ -838,18 +838,18 @@
   "user-accessible-nodes": {
     "modal": {
       "widget": {
-        "user-accessible-nodes": "User accessible nodes"
+        "user-accessible-nodes": "نودهای قابل دسترس برای کاربر"
       }
     }
   },
   "internal-squads": {
     "drawer": {
       "widget": {
-        "config-profiles": "Config profiles",
-        "flat-list": "Flat list",
+        "config-profiles": "پروفایل‌های پیکربندی",
+        "flat-list": "لیست ساده",
         "selected": "انتخاب شده",
         "unselected": "انتخاب نشده",
-        "edit-internal-squad": "Edit internal squad",
+        "edit-internal-squad": "ویرایش اسکواد",
         "selected-inbounds": "اینباندهای انتخاب شده: {{count}}"
       }
     }
@@ -866,16 +866,16 @@
     }
   },
   "access-settings-card": {
-    "access-settings": "Access settings",
+    "access-settings": "تنظیمات دسترسی",
     "select-an-external-squad-to-apply-custom-settings-to-this-user": "یک اسکواد خارجی انتخاب کنید تا تنظیمات شخصی‌سازی شده برای این کاربر اعمال شود",
-    "external-squad": "External squad",
+    "external-squad": "اسکواد خارجی",
     "select-an-external-squad": "یک اسکواد خارجی انتخاب کنید"
   },
   "device-tag-settings-card": {
-    "device-and-tag-settings": "Device & tag settings"
+    "device-and-tag-settings": "تنظیمات دستگاه و برچسب"
   },
   "user-identity-creation-card": {
-    "user-identity": "User identity"
+    "user-identity": "هویت کاربر"
   },
   "hosts-config-profiles": {
     "drawer": {
@@ -891,7 +891,7 @@
       "nodes-pending-payment": "نود‌های در انتظار پرداخت",
       "payments-in": "پرداخت‌ها در {{month}}",
       "total-payments-made": "کل پرداخت‌های انجام شده",
-      "total-spent": "Total spent",
+      "total-spent": "کل هزینه شده",
       "lifetime-spending": "هزینه کل طول عمر",
       "payment-overdue": "payment overdue",
       "all-up-to-date": "all up to date"
@@ -912,7 +912,7 @@
     "reconnecting": "Reconnecting..."
   },
   "mobile-warning-overlay": {
-    "mobile-device-detected": "Mobile device detected",
+    "mobile-device-detected": "دستگاه موبایل شناسایی شد",
     "description-line-1": "این صفحه حاوی جدول‌های پیچیده‌ای است که شاید روی دستگاه موبایل به خوبی قابل استفاده نباشند",
     "description-line-2": "برخی فرمان‌ها که می‌توانید برای مدیریت جدول روی دستگاه موبایل استفاده کنید:",
     "show-or-hide-columns": "نمایش یا مخفی کردن ستون‌ها",
@@ -925,15 +925,15 @@
   },
   "internal-squad-header-action-buttons": {
     "feature": {
-      "squad-name": "Squad name",
+      "squad-name": "نام اسکواد",
       "enter-squad-name": "نام اسکواد را وارد کنید"
     }
   },
   "config-profiles-header-action-buttons": {
     "feature": {
       "create-a-new-config-profile-by-entering-a-name-below": "برای ایجاد پروفایل پیکربندی جدید اسم آن را وارد کنید",
-      "you-can-customize-xray-config-after-creation": "You can customize the Xray config after creation.",
-      "profile-name": "Profile name",
+      "you-can-customize-xray-config-after-creation": "کانفیگ Xray را می‌توانید بعد از ایجاد شخصی‌سازی کنید",
+      "profile-name": "نام پروفایل",
       "enter-profile-name": "نام پروفایل را وارد کنید"
     }
   },
@@ -950,18 +950,18 @@
     "no-inbound-traffic-data": "اطلاعات ترافیک اینباند موجود نمی‌باشد",
     "no-outbound-traffic-data": "اطلاعات ترافیک اوتباند موجود نمی‌باشد",
     "widget": {
-      "node-details": "Details",
-      "enable-node": "Enable node",
-      "disable-node": "Disable node",
+      "node-details": "مشخصات نود",
+      "enable-node": "فعالسازی نود",
+      "disable-node": "غیرفعالسازی نود",
       "config-profile-or-inbounds-is-missing": "پروفایل پیکربندی یا اینباند وجود ندارد",
-      "xray-core-version": "Xray Core version",
+      "xray-core-version": "نسخه هسته Xray",
       "remnawave-node-version": "نسخه نود، @remnawave/node"
     }
   },
   "config-profiles": {
     "drawer": {
       "widget": {
-        "config-profiles": "Config profiles",
+        "config-profiles": "پروفایل‌های پیکربندی",
         "no-inbounds-selected": "اینباندی انتخاب نشده است"
       }
     }
@@ -985,13 +985,13 @@
   },
   "rename-modal": {
     "shared": {
-      "new-name": "New name"
+      "new-name": "نام جدید"
     }
   },
   "internal-squad-accessible-nodes": {
     "modal": {
       "widget": {
-        "internal-squad-accessible-nodes": "Internal squad accessible nodes"
+        "internal-squad-accessible-nodes": "نودهای قابل دسترسی برای اسکواد"
       }
     }
   },
@@ -1005,24 +1005,24 @@
   },
   "get-user-subscription-request-history": {
     "feature": {
-      "request-history": "Request history"
+      "request-history": "تاریخچه درخواست"
     }
   },
   "use-hwid-inspector-table-columns": {
-    "device-model": "Device model"
+    "device-model": "مدل دستگاه"
   },
   "hwid-inspector-table": {
     "widget": {
-      "hwid-devices-list": "HWID devices list"
+      "hwid-devices-list": "لیست دستگاه‌های HWID"
     }
   },
   "hwid-inspector-metrics": {
     "widget": {
-      "total-unique-devices": "Total unique devices",
-      "total-hwid-devices": "Total HWID devices",
-      "avg-devices-per-user": "Avg devices per user",
-      "platform-distribution": "Platform distribution",
-      "app-distribution": "App distribution",
+      "total-unique-devices": "لیست دستگاه‌های منحصر به فرد",
+      "total-hwid-devices": "تغداد کل دستگاه‌های HWID",
+      "avg-devices-per-user": "میانگین دستگاه بر کاربر",
+      "platform-distribution": "توزیع پلتفرم‌ها",
+      "app-distribution": "توزیع نرم‌افزارها",
       "no-platform-data": "داده‌ای برای پلتفرم‌ها در دسترس نیست",
       "no-app-data": "داده‌ای برای نرم‌افزارها در دسترس نیست"
     }
@@ -1035,7 +1035,7 @@
   "srh-inspector-metrics": {
     "widget": {
       "requests": "درخواست‌ها",
-      "hourly-request-statistics": "Hourly request statistics",
+      "hourly-request-statistics": "آمار ساعتی درخواست‌ها",
       "no-hourly-data-available": "داده‌های ساعتی در دسترس نمی‌باشد"
     }
   },
@@ -1056,11 +1056,11 @@
         "snippet-cannot-be-empty": "قطعه کد نمی‌تواند خالی باشد",
         "snippet-cannot-contain-empty-objects": "قطعه کد نمی‌تواند حاوی مقادیر خالی باشد",
         "more-items": "موارد بیشتر",
-        "create-snippet": "Create snippet",
-        "snippet-name": "Snippet name",
+        "create-snippet": "ایجاد قطعه کد",
+        "snippet-name": "نام قطعه کد",
         "enter-snippet-name-cannot-be-changed-later": "اسم اسنیپت را وارد کنید (قابل تغییر نخواهد بود)",
         "snippet-is-valid": "قطعه کد صحیح است",
-        "edit-snippet": "Edit snippet",
+        "edit-snippet": "ویرایش قطعه کد",
         "snippets": "قطعه کدها",
         "new-snippet": "قطعه کد جدید"
       }
@@ -1068,11 +1068,11 @@
   },
   "response-rules-editor-actions": {
     "feature": {
-      "response-rules-debugger": "Response rules debugger",
+      "response-rules-debugger": "عیب‌یاب قوانین پاسخ",
       "response-rules-debugger-description-1": "می‌توانید از این دستور cURL برای آزمایش کردن قوانین پاسخ خود با هدرهای مختلف استفاده کنید",
       "response-rules-debugger-description-2": "می‌توانید آن را در آدرس مقابل ایمپورت کنید:",
       "or": "یا",
-      "curl-command": "cURL command",
+      "curl-command": "دستور cURL",
       "copy-curl-command": "کپی کردن دستور cURL",
       "debugger": "عیب‌یاب"
     }
@@ -1087,13 +1087,13 @@
     "content-for-the-remnawave-node-below": "زیر را برای نود کپی کنید.",
     "learn-more": "اطلاعات بیشتر.",
     "domain-or-ip": "دامنه یا آیپی",
-    "additional-options": "Additional options"
+    "additional-options": "تنظیمات بیشتر"
   },
   "create-node-step-3-status": {
     "establishing-mtls-connection": "درحال برقراری اتصال mTLS",
     "xray-core-is-up-and-running": "هسته Xray درحال اجرا می‌باشد!",
     "remnawave-will-try-to-reconnect-shortly": "به زودی Remnawave برای اتصال مجدد تلاش خواهد کرد",
-    "no-errors-so-far": "No errors so far"
+    "no-errors-so-far": "تا کنون خطایی وجود نداشته است"
   },
   "external-squad-card": {
     "widget": {
@@ -1110,7 +1110,7 @@
   "external-squads": {
     "drawer": {
       "widget": {
-        "subscription-templates": "Subscription templates",
+        "subscription-templates": "الگوهای اشتراک",
         "subscription-templates-description-line-1": "یک الگو برای هر نوع اشتراک انتخاب کنید. درصورت انتخاب نکردن از الگوی پیش‌فرض استفاده خواهد شد.",
         "subscription-templates-description-line-2": "لطفا توجه کنید که قوانین پاسخ اولویت بالاتری خواهند داشت.",
         "select-a-template": "یک الگو انتخاب کنید",
@@ -1147,11 +1147,11 @@
   },
   "auth-settings": {
     "header": {
-      "title": "Authentication methods",
+      "title": "روش های احراز هویت",
       "description": "روش های احراز هویت خود را مدیریت کنید"
     },
     "error-modal": {
-      "title": "Update failed",
+      "title": "به‌روزرسانی ناموفق",
       "description": "هنگام به‌روزرسانی تنظیمات ورود مشکلی پیش آمده است. لطفا مشخصات خطا را مشاهده کرده و مجددا تلاش کنید.",
       "unknown-error": "درخواست با یک خطای ناشناخته مواجه شد"
     },
@@ -1159,11 +1159,11 @@
       "title": "رمز عبور",
       "manage-button": "مدیریت",
       "rpId": {
-        "label": "Frontend domain",
+        "label": "دامنه فرانت‌اند",
         "description": "دامنه عمومی فرانت‌اند شما بدون پروتکل (به طور مثال example.com)"
       },
       "origin": {
-        "label": "Backend domain",
+        "label": "دامنه بک‌اند",
         "description": "آدرس کامل https بک‌اند شما (به طور مثال https://api.example.com)"
       }
     },
@@ -1172,28 +1172,28 @@
     },
     "telegram": {
       "adminIds": {
-        "label": "Allowed admin IDs",
+        "label": "آیدی‌های ادمین مورد قبول",
         "placeholder": "آیدی‌های ادمین را وارد کنید"
       }
     },
     "fields": {
       "clientId": {
         "label": "شناسه کاربر",
-        "description": "Provider OAuth2 client ID",
+        "description": "شناسه کاربری ارائه دهنده OAuth2",
         "placeholder": "شناسه کاربر را وارد نمایید"
       },
       "clientSecret": {
-        "label": "Client secret",
-        "description": "Provider OAuth2 client secret",
+        "label": "رمز مشتری (Client Secret)",
+        "description": "رمز مشتری ارائه دهنده OAuth2",
         "placeholder": "رمز مشتری را وارد کنید"
       },
       "plainDomain": {
-        "label": "Plain domain",
+        "label": "دامنه ساده",
         "description": "دامنه ساده برای PocketID (مثلا example.com)",
         "placeholder": "example.com"
       },
       "allowedEmails": {
-        "label": "Allowed emails",
+        "label": "ایمیل‌های مورد قبول",
         "description": "لیست ایمیل‌های مورد قبول.",
         "placeholder": "ایمیل را وارد کنید"
       },
@@ -1202,7 +1202,7 @@
         "description": "اسم قلمرو Keycloak"
       },
       "keycloakDomain": {
-        "label": "Keycloak domain",
+        "label": "دامنه Keycloak",
         "description": "دامنه سرور Keycloak بدون پروتکل (مثلا keycloak.docs.rw)"
       }
     }
@@ -1213,20 +1213,20 @@
       "no-passkeys-registered-yet": "هیچ کلید عبوری ثبت نشده است.",
       "add-passkeys-description": "اولین کلید عبور خود را اضافه کنید تا ورود امن بدون گذرواژه در همه دستگاه‌های شما فعال شود.",
       "register": "ثبت نام",
-      "last-used-at": "Last used at"
+      "last-used-at": "آخرین استفاده در"
     }
   },
   "branding-settings-card": {
     "widget": {
-      "customize-your-remnawave-instance": "Customize the look of your Remnawave instance",
-      "branding-settings": "Branding settings",
+      "customize-your-remnawave-instance": "پنل Remnawave خود را شخصی‌سازی کنید",
+      "branding-settings": "تنظیمات برندینگ",
       "the-title-that-will-be-displayed-on-login-page": "عنوانی که در صفحه ورود نشان داده خواهد شد",
-      "brand-name": "Brand name",
+      "brand-name": "اسم برند",
       "the-url-to-your-brand-logo-image": "The URL to your brand logo image. Accepts a regular http(s) URL or a base64 data URL (data:image/svg+xml;base64,...).",
-      "colored-title-format": "Colored title format",
-      "colored-title-description": "You can color individual words using {color}word syntax. Supports both HEX colors (#RRGGBB) and Mantine color names.",
+      "colored-title-format": "فرمت عنوان رنگی",
+      "colored-title-description": "می‌توانید کلمه‌ها را به صورت تکی به کمک نوشتار \"{color}کلمه\" رنگ‌آمیزی کنید. این ویژگی از رنگ‌های HEX (#RRGGBB) و اسم رنگ‌های MantineUI پشتیبانی می‌کند.",
       "example-hex-colors": "مثال با رنگ‌های HEX",
-      "example-mantine-colors": "Example with Mantine colors",
+      "example-mantine-colors": "مثال با رنگ‌های MantineUI",
       "example-mixed": "مثال با رنگ‌های مختلط",
       "color-format-note": "💡 رنگ مشخص شده فقط برای کلمه‌ای که به نشانگر رنگ چسبیده اعمال می‌شود. بدون نشانگر، متن سفیدرنگ خواهد بود."
     }
@@ -1241,9 +1241,9 @@
   "api-tokens-card": {
     "widget": {
       "api-tokens-description": "توکن‌های API خود را مدیریت کنید.",
-      "api-tokens": "API tokens",
+      "api-tokens": "توکن‌های API",
       "no-api-tokens-found": "هیچ توکن API یافت نشد",
-      "token-name": "Token name",
+      "token-name": "نام توکن",
       "create-api-token": "Create API token",
       "full-access": "Full access",
       "col-scopes": "Scopes",
@@ -1257,7 +1257,7 @@
   "external-squads-hosts": {
     "tab": {
       "widget": {
-        "host-overrides": "Host overrides",
+        "host-overrides": "تنظیمات override هاست‌ها",
         "override-host-settings-for-this-external-squad": "override تنظیمات هاست برای این اسکواد خارجی."
       }
     }
@@ -1269,12 +1269,12 @@
   },
   "help-action-icon": {
     "shared": {
-      "help-article": "Help"
+      "help-article": "مقاله راهنما"
     }
   },
   "internal-squad-card": {
     "widget": {
-      "available-nodes": "Available nodes"
+      "available-nodes": "نودهای قابل دسترسی"
     }
   },
   "help-drawer": {
@@ -1295,99 +1295,99 @@
   },
   "subscription-hwid-settings": {
     "widget": {
-      "hwid-card-description": "Carefully review the documentation before enabling the HWID feature. Not all client applications support this feature.",
-      "hwid-settings": "HWID settings",
-      "hwid-limit": "HWID limit",
+      "hwid-card-description": "قبل از فعال کردن محدودیت HWID به دقت مستندات مربوط به آن را بخوانید. همه نرم افزارهای کلاینت از این ویژگی پشتیبانی نمی‌کنند.",
+      "hwid-settings": "تنظیمات HWID",
+      "hwid-limit": "محدودیت HWID",
       "fallback-device-limit-description": "حداکثر تعداد دستگاه‌هایی که با هر اشتراک قابل استفاده خواهند بود را وارد نمایید",
-      "fallback-device-limit": "Fallback device limit",
-      "max-devices-announce-description": "Enter the message that will be displayed when the user has reached the maximum number of devices",
-      "max-devices-announce": "Max devices announce",
+      "fallback-device-limit": "محدودیت پیشفرض تعداد دستگاه ",
+      "max-devices-announce-description": "پیامی را که کاربر هنگام پر شدن محدودیت تعداد دستگاه مشاهده خواهد کرد وارد نمایید",
+      "max-devices-announce": "پیغام پر شدن تعداد دستگاه",
       "max-200-characters": "حداکثر 200 کاراکتر"
     }
   },
   "external-squads-hwid-settings": {
     "tab": {
       "widget": {
-        "hwid-settings-override": "HWID settings override",
+        "hwid-settings-override": "override تنظیمات HWID",
         "override-hwid-description": "برای این اسکواد خارجی تنظیمات HWID override خواهند شد. درصورت غیرفعال بودن، مقادیر موجود در تنظیمات عمومی استفاده خواهد شد.",
-        "enable-hwid-override": "Enable HWID override"
+        "enable-hwid-override": "فعالسازی override تنظیمات HWID"
       }
     }
   },
   "external-squads-custom-remarks": {
     "widget": {
       "override-remarks-description": "تغییر دادن ریمارک‌های وضعیت کاربر برای این اسکواد خارجی. درصورت غیرفعال بودن از تنظیمات کلی اشتراک استفاده خواهد شد.",
-      "enable-override": "Enable override"
+      "enable-override": "فعالسازی override"
     }
   },
   "subscription-user-remarks-card": {
     "widget": {
-      "empty-hosts": "Empty hosts",
-      "hwid-max-devices-exceeded": "HWID: max devices exceeded",
-      "hwid-not-supported": "HWID: not supported"
+      "empty-hosts": "هاست‌های خالی",
+      "hwid-max-devices-exceeded": "HWID: ظرفیت دستگاه‌ها پر شده است",
+      "hwid-not-supported": "HWID: پشتیبانی نمی‌شود"
     }
   },
   "multi-select-nodes": {
     "feature": {
-      "profile-and-inbounds": "Profile & inbounds"
+      "profile-and-inbounds": "پروفایل و اینباندها"
     }
   },
   "use-nodes-table-widget": {
     "online": "آنلاین",
-    "traffic-used": "Traffic used",
-    "config-profile": "Config profile",
+    "traffic-used": "ترافیک استفاده‌شده",
+    "config-profile": "پروفایل پیکربندی",
     "xray-v": "نسخه هسته Xray",
     "node-v": "نسخه نود",
     "provider": "ارائه‌دهنده",
     "tags": "برچسب‌ها",
     "total-ram": "کل RAM",
-    "cpu-model": "CPU model"
+    "cpu-model": "مدل پردازنده"
   },
   "subpage-config-visual-editor": {
     "widget": {
       "configuration-saved-successfully": "پیکربندی با موفقیت ذخیره شد",
       "edit-your-subscription-page-configuration": "پیکربندی صفحه اشتراک خود را ویرایش کنید",
-      "subpage-editor": "Subpage editor",
+      "subpage-editor": "ویرایشگر صفحه اشتراک",
       "brand-appearance": "ظاهر برند",
       "branding": "برندینگ",
-      "brand-title": "Brand title",
-      "your-brand-name": "Your brand name",
+      "brand-title": "عنوان برند",
+      "your-brand-name": "اسم برند شما",
       "support-url": "آدرس پشتیبانی",
       "additional-languages": "زبان‌های بیشتر",
       "localization": "بومی‌سازی",
-      "ui-configuration": "UI configuration",
-      "subscription-info-block-design": "Subscription info block design",
+      "ui-configuration": "تنظیمات رابط کاربری",
+      "subscription-info-block-design": "طراحی بلاک‌های مشخصات اشتراک",
       "configure-apps-for-each-platform": "نرم افزارهای هر پلتفرم را تنظیم کنید",
       "platforms": "پلتفرم‌ها",
       "add-platform": "افزودن پلتفرم",
       "no-platforms-configured": "پلتفرمی تنظیم نشده است",
       "add-a-platform-to-get-started": "برای شروع یک پلتفرم اضافه کنید",
-      "open-svg-library": "Open SVG library",
-      "installation-guides-design": "Installation guides design"
+      "open-svg-library": "باز کردن کتابخانه SVG",
+      "installation-guides-design": "طراحی آموزش‌های نصب"
     },
     "subpage-config-saved-line-1": "برای اعمال تغییرات لطفا مخزن",
     "subpage-config-saved-line-2": "برای مثال می‌توانید این دستور را در ترمینال استفاده کنید:"
   },
   "app-editor-drawer-content": {
     "component": {
-      "app-settings": "App settings",
+      "app-settings": "تنظیمات نرم‌افزار",
       "featured": "ویژه",
-      "app-name": "App name",
+      "app-name": "اسم برنامه",
       "blocks": "بلاک‌ها",
-      "add-block": "Add block"
+      "add-block": "افزودن بلاک"
     }
   },
   "block-editor": {
     "modal": {
       "component": {
-        "untitled-block": "Untitled block",
-        "edit-block": "Edit block",
-        "block-settings": "Block settings",
-        "icon-color": "Icon color",
+        "untitled-block": "بلاک بدون عنوان",
+        "edit-block": "ویرایش بلاک",
+        "block-settings": "تنظیمات بلاک",
+        "icon-color": "رنگ آیکون",
         "icon-color-help": "می‌توانید از رنگ‌های قالب Mantine ({{colors}}) یا هر رنگ با کد HEX معتبر (مانند #009688) استفاده کنید",
         "title": "عنوان",
         "buttons": "دکمه‌ها",
-        "add-button": "Add button"
+        "add-button": "افزودن دکمه"
       }
     }
   },
@@ -1395,7 +1395,7 @@
     "component": {
       "link": "لینک",
       "type": "نوع",
-      "button-text": "Button text"
+      "button-text": "متن دکمه"
     }
   },
   "localized-text-editor": {
@@ -1405,12 +1405,12 @@
   },
   "platform-editor": {
     "component": {
-      "platform-svg-icon": "Platform SVG icon",
-      "display-name": "Display name",
+      "platform-svg-icon": "آیکون SVG پلتفرم",
+      "display-name": "نام نمایشی",
       "apps": "نرم‌افزارها",
-      "add-app": "Add app",
-      "unnamed-app": "Unnamed app",
-      "edit-app": "Edit app"
+      "add-app": "افزودن برنامه",
+      "unnamed-app": "نرم‌افزار بدون اسم",
+      "edit-app": "ویرایش برنامه"
     }
   },
   "svg-icon-select": {
@@ -1421,26 +1421,26 @@
   },
   "svg-library-modal": {
     "component": {
-      "svg-library": "SVG library",
-      "add-icon": "Add icon",
+      "svg-library": "کتابخانه SVG",
+      "add-icon": "افزودن آیکون",
       "add-icons-to-use-them-in-blocks-and-buttons": "چند آیکون برای استفاده در بلاک‌ها و دکمه‌ها اضافه کنید",
-      "edit-icon": "Edit icon",
+      "edit-icon": "ویرایش آیکون",
       "only-latin-characters-no-spaces": "فقط کاراکترهای لاتین، بدون فاصله",
       "only-latin-characters-allowed": "فقط کاراکترهای لاتین قابل قبول می‌باشد",
-      "icon-key": "Icon key",
-      "svg-code": "SVG code",
+      "icon-key": "کلید آیکون",
+      "svg-code": "کد SVG",
       "preview": "پیش‌نمایش",
       "where-to-find-icons": "از کجا آیکون پیدا کنم؟",
       "you-can-find-beautiful-icons-at": "برای پیدا کردن آیکون‌های زیبا می‌توانید از این منابع استفاده کنید:",
-      "where-to-find-icons-description": "Click on any icon, select \"Copy SVG\", and paste it here. Make sure to choose the \"Outline\" or \"Filled\" style."
+      "where-to-find-icons-description": "روی آیکون مورد نظر کلیک کرده، Copy SVG را بزنید و آن را در اینجا وارد کنید. مطمئن شوید که از حالت Outline یا Filled استفاده می‌کنید."
     }
   },
   "external-squads-subpage-config": {
     "tab": {
       "widget": {
-        "subscription-page-config": "Subscription page config",
+        "subscription-page-config": "پیکربندی صفحه اشتراک",
         "subscription-page-config-description": "شما می‌توانید پیکربندی صفحه اشتراک (صفحه اشتراک Remnawave) را برای این گروه خارجی override کنید.",
-        "subpage-config": "Subpage config",
+        "subpage-config": "تنظیمات صفحه اشتراک",
         "select-config": "کانفیگ را انتخاب کنید..."
       }
     }
@@ -1457,7 +1457,7 @@
   },
   "base-translations-drawer": {
     "component": {
-      "base-translations": "Base translations",
+      "base-translations": "ترجمه‌های پایه",
       "completed": "{{count}}/{{total}} تکمیل شده است"
     }
   },
@@ -1468,12 +1468,12 @@
   },
   "base-settings-block": {
     "component": {
-      "base-settings": "Base settings",
-      "meta-title": "Meta title",
-      "meta-description": "Meta description",
-      "show-connection-keys": "Show connection keys",
+      "base-settings": "تنظیمات پایه",
+      "meta-title": "عنوان متا",
+      "meta-description": "توضیحات متا",
+      "show-connection-keys": "نمایش کلیدهای اتصال",
       "show-or-hide-raw-connection-keys": "نمایش یا مخفی‍ی‌سازی کلیدهای اتصال خام",
-      "hide-get-link-button": "Hide \"Get Link\" button",
+      "hide-get-link-button": "مخفی کردن دکمه \"دریافت لینک\"",
       "hide-the-get-link-button-top-right-corner": "دکمه \"دریافت لینک\" از گوشه بالا راست مخفی شود"
     }
   },
@@ -1481,52 +1481,52 @@
     "modal": {
       "import-options-description": "مواردی که می‌خواهید از فایل پیکربندی وارد کنید را انتخاب نمایید",
       "replace-entire-config-with-imported-one": "جایگزینی تمام پیکربندی با فایل آپلود شده",
-      "full-import": "Full import",
+      "full-import": "درون‌ریزی کامل",
       "partial-import": "درون‌ریزی قسمتی",
       "merge-svg-library": "ادغام {{0}} آیکون با مجموعه شما ({{1}} عدد تکراری)",
-      "import-svg-library": "Import SVG library",
+      "import-svg-library": "درون‌ریزی کتابخانه SVG",
       "import-platforms-descriptions": "پلتفرم‌ها، زبان‌ها و ترجمه‌ها را جایگزین و کتابخانه SVG را ادغام می‌کند",
-      "import-platforms": "Import platforms",
-      "replace-base-translation-and-locales": "Replace base translation and locales",
-      "import-base-translations": "Import base translations"
+      "import-platforms": "درون‌ریزی پلتفرم‌ها",
+      "replace-base-translation-and-locales": "جایگزین کردن ترجمه‌های پایه و لیست زبان‌ها",
+      "import-base-translations": "درون‌ریزی ترجمه‌های پایه"
     }
   },
   "revoke-subscription-user": {
     "feature": {
-      "full-revoke": "Full revoke",
+      "full-revoke": "لغو اشتراک کامل",
       "revoke": "لغو اشتراک",
-      "passwords-only": "Passwords only",
-      "passwords-only-description": "Only regenerates Connection Passwords; the Subscription URL stays the same",
-      "full-revoke-description": "Regenerates subscription URL and connection passwords"
+      "passwords-only": "فقط رمز عبور",
+      "passwords-only-description": "فقط رمزهای اتصال را بازتولید می‌کند و لینک اشتراک تغییر نمی‌کند",
+      "full-revoke-description": "آدرس لینک اشتراک و رمزهای اتصال را بازتولید می‌کند"
     }
   },
   "nodes-quick-stats": {
     "widget": {
-      "users-online": "Users online",
-      "online-nodes": "Online nodes"
+      "users-online": "کاربر آنلاين",
+      "online-nodes": "نودهای آنلاین"
     }
   },
   "template-info-popover": {
     "shared": {
-      "template-variables": "Template variables",
+      "template-variables": "متغیرهای قالب",
       "available-variables-are-listed-below": "متغیرهای قابل استفاده را در لیست زیر مشاهده کنید.",
       "you-can-use-template-variables-in-this-field": "می‌توانید از متغیرهای قالب استفاده کنید."
     }
   },
   "user-active-session-drawer": {
     "widget": {
-      "drop-all-user-connections-all-nodes": "Drop all user connections (all nodes)",
-      "drop-all-user-connections-this-node": "Drop all user connections (this node)",
+      "drop-all-user-connections-all-nodes": "قطع همه کانکشن‌ها (روی همه نودها)",
+      "drop-all-user-connections-this-node": "قطع همه کانکشن‌ها (روی این نود)",
       "drop-this-connection-on-this-node": "قطع کانکشن روی این نود"
     }
   },
   "contact-information-card": {
-    "contact-information": "Contact information"
+    "contact-information": "مشخصات تماس"
   },
   "traffic-limits-card": {
-    "traffic-and-limits": "Traffic & limits",
+    "traffic-and-limits": "محدودیت ترافیک",
     "traffic-limit-description": "0 means unlimited",
-    "traffic-limit": "Traffic limit"
+    "traffic-limit": "محدودیت ترافیک"
   },
   "node-vitals": {
     "card": {
@@ -1540,7 +1540,7 @@
   },
   "node-plugin-card": {
     "widget": {
-      "active-on-nodes": "Active on nodes"
+      "active-on-nodes": "فعال روی نودها"
     }
   },
   "active-on-nodes": {
@@ -1584,7 +1584,7 @@
       "distinct-users": "Distinct users",
       "last-24-hours": "Last 24 hours",
       "by-report-count": "By report count",
-      "top-users": "Top users"
+      "top-users": "کاربران برتر"
     }
   },
   "torrent-blocker-reports-table": {
@@ -1650,7 +1650,7 @@
       "total-ips": "Total IPs",
       "unique-ips": "Unique IPs",
       "nodes-explored": "Nodes explored",
-      "total-users": "Total users",
+      "total-users": "کل کاربران",
       "restart-scan": "Restart scan",
       "clear-results": "Clear results",
       "search-by-ip": "Search by IP address...",
@@ -1661,7 +1661,7 @@
     "widget": {
       "upcoming": "Upcoming",
       "per-month": "Per month",
-      "total-spent": "Total spent"
+      "total-spent": "کل هزینه شده"
     }
   },
   "mobile-providers-list": {
@@ -1672,7 +1672,7 @@
   "mobile-infra-billing": {
     "widget": {
       "history": "History",
-      "providers": "Providers"
+      "providers": "ارائه‌دهنده‌ها"
     }
   },
   "prime-modal": {
@@ -1699,9 +1699,9 @@
     "hide-all": "Hide all"
   },
   "use-hosts-table-widget": {
-    "disabled": "Disabled",
-    "enabled": "Enabled",
-    "hidden": "Hidden"
+    "disabled": "غیرفعال",
+    "enabled": "فعال",
+    "hidden": "مخفی"
   },
   "node-tracking-and-billing": {
     "card": {
@@ -1717,16 +1717,16 @@
     "no-ips-yet": "No IP addresses yet"
   },
   "node-ip-statuses": {
-    "inbound": "Inbound",
+    "inbound": "اینباند",
     "outbound": "Outbound",
-    "management": "Management",
+    "management": "مدیریت",
     "transit": "Transit",
     "monitoring": "Monitoring",
     "reserve": "Reserve",
     "blocked": "Blocked",
     "flagged": "Flagged",
     "deprecated": "Deprecated",
-    "unknown": "Unknown"
+    "unknown": "نامعلوم"
   },
   "node-consumption": {
     "card": {
@@ -1743,7 +1743,7 @@
   },
   "bulk-all-users-actions": {
     "modal": {
-      "perform-actions-on-all-users": "Perform actions on all users"
+      "perform-actions-on-all-users": "انجام اقدامات برای همه کاربران"
     }
   },
   "backend-tools-card": {
@@ -1836,7 +1836,7 @@
     "key-generate-new": "Generate a new key",
     "key-import": "Import key",
     "key-import-title": "Use your own key",
-    "key-import-label": "Private key",
+    "key-import-label": "کلید خصوصی (Private Key)",
     "key-import-description": "Stays in this browser, encrypted in the vault. Passphrase-protected keys are not supported.",
     "key-error": {
       "encrypted": "This key is passphrase-protected. Remove the passphrase, or import a copy without one.",
@@ -1855,14 +1855,14 @@
     "key-title": "Install the public key",
     "key-description": "A dedicated key was generated for this node and never leaves your browser. Add the line below to authorized_keys on the server, then connect.",
     "authorized-keys": "authorized_keys entry",
-    "host": "Host",
+    "host": "هاست",
     "host-hint": "Leave empty to use the node address",
     "connect": "Connect",
     "hostkey-new-title": "Unknown host key",
     "hostkey-new-description": "This is the first time you connect to this host from this browser. Verify the fingerprint out of band before trusting it.",
     "hostkey-changed-title": "Host key changed",
     "hostkey-changed-description": "The host key does not match the one you trusted earlier. This can mean the server was reinstalled — or that someone is intercepting the connection.",
-    "fingerprint": "Fingerprint",
+    "fingerprint": "اثر انگشت",
     "known-fingerprint": "Previously trusted",
     "trust-and-connect": "Trust and connect",
     "abort": "Abort",
@@ -1879,7 +1879,7 @@
     "passcode-exhausted": "Too many wrong attempts, the passcode was turned off. Unlock with your recovery phrase and set a new one.",
     "use-phrase": "Forgot your passcode?",
     "use-passcode": "Back to passcode",
-    "connection-settings": "Settings",
+    "connection-settings": "تنظیمات اشتراک",
     "resize": "Resize window",
     "retry": "Retry",
     "ticket-failed": "The panel refused to open a session.",
@@ -1898,11 +1898,11 @@
     "reset": "Reset vault",
     "reset-description": "Deletes the vault and every SSH key in it. The private keys are gone for good, so the public keys already installed on your nodes become useless and you will have to install a new one on each. Panel access is not affected.",
     "lost-everything": "Lost both the passcode and the phrase?",
-    "snippets-title": "Snippets",
+    "snippets-title": "قطعه کدها",
     "snippets-empty": "No snippets yet",
     "snippet-command": "Command",
     "snippet-add": "Add snippet",
-    "snippet-edit": "Edit snippet",
+    "snippet-edit": "ویرایش قطعه کد",
     "connections-title": "Saved connections",
     "connections-empty": "No saved connections yet",
     "connections-current": "Current"
