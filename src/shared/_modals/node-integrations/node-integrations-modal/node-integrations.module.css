@@ -1,54 +1,7 @@
-.integrationTable {
-    border: 1px solid rgb(255, 255, 255, 0.08);
-    border-radius: var(--mantine-radius-md);
-    overflow: hidden;
-    background: rgb(255, 255, 255, 0.02);
-}
-
-.integrationRow {
-    display: grid;
-    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.6fr) 44px;
-    grid-template-areas: 'name description actions';
-    gap: 16px;
-    align-items: center;
-    padding: 11px 16px;
-    border-bottom: 1px solid rgb(255, 255, 255, 0.04);
-    cursor: pointer;
-    outline: none;
-    transition: background-color 120ms ease;
-}
-
-.integrationRow > *:nth-child(1) {
-    grid-area: name;
-}
-
-.integrationRow > *:nth-child(2) {
-    grid-area: description;
-}
-
-.integrationRow > *:nth-child(3) {
-    grid-area: actions;
-    justify-self: end;
-}
-
-@media (max-width: 48em) {
-    .integrationRow {
-        grid-template-columns: minmax(0, 1fr) 44px;
-        grid-template-areas:
-            'name actions'
-            'description actions';
-        gap: 4px 10px;
-    }
-}
-
-.integrationRow:last-child {
-    border-bottom: none;
-}
-
-.integrationRow:hover {
-    background-color: rgb(255, 255, 255, 0.02);
-}
-
-.integrationRow:focus-visible {
-    background-color: rgb(255, 255, 255, 0.04);
+.dot {
+    flex-shrink: 0;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--mantine-color-pink-5);
 }

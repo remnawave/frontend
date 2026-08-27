@@ -26,8 +26,8 @@ export const nodePluginsQueryKeys = createQueryKeys('nodePlugins', {
     getTorrentBlockerStats: {
         queryKey: null
     },
-    getSharedList: (route: GetSharedListCommand.RequestParam) => ({
-        queryKey: [route]
+    getSharedList: (query: GetSharedListCommand.RequestQuery) => ({
+        queryKey: [query]
     }),
     getSharedLists: {
         queryKey: null
@@ -95,9 +95,9 @@ export const useGetSharedLists = createGetQueryHook({
 
 export const useGetSharedList = createGetQueryHook({
     endpoint: GetSharedListCommand.TSQ_url,
-    routeParamsSchema: GetSharedListCommand.RequestParamSchema,
+    requestQuerySchema: GetSharedListCommand.RequestQuerySchema,
     responseSchema: GetSharedListCommand.ResponseSchema,
-    getQueryKey: ({ route }) => nodePluginsQueryKeys.getSharedList(route!).queryKey,
+    getQueryKey: ({ query }) => nodePluginsQueryKeys.getSharedList(query!).queryKey,
     rQueryParams: {
         refetchOnMount: true,
         staleTime: sToMs(5)

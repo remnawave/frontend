@@ -62,7 +62,7 @@
     "@noble/hashes": "^2.3.0",
     "@noble/post-quantum": "^0.7.0",
     "@paralleldrive/cuid2": "3.3.0",
-    "@remnawave/backend-contract": "3.4.6",
+    "@remnawave/backend-contract": "3.4.10",
     "@remnawave/node-plugins": "0.7.3",
     "@remnawave/subscription-page-types": "0.5.1",
     "@scure/bip39": "^2.3.0",

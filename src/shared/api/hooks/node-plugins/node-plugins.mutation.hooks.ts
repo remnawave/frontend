@@ -246,7 +246,7 @@ export const useUpdateSharedList = createMutationHook({
 
 export const useDeleteSharedList = createMutationHook({
     endpoint: DeleteSharedListCommand.TSQ_url,
-    routeParamsSchema: DeleteSharedListCommand.RequestParamSchema,
+    bodySchema: DeleteSharedListCommand.RequestBodySchema,
     requestMethod: DeleteSharedListCommand.endpointDetails.REQUEST_METHOD,
     rMutationParams: {
         onSuccess: () => {

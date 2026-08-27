@@ -217,9 +217,9 @@ export const MonacoSetupFeature = {
                 markdownEnumDescriptions: snippetDescriptions,
                 minLength: 2,
                 maxLength: 255,
-                pattern: '^[A-Za-z0-9_\\s-]+$',
+                pattern: '^[A-Za-z0-9_ -]+(/[A-Za-z0-9_ -]+)*$',
                 patternErrorMessage:
-                    'Snippet name can only contain: letters, numbers, spaces, _ and -'
+                    'Snippet name can only contain letters, numbers, spaces, _ and -. Use / to nest, but not at the start or end and never doubled.'
             }
 
             const rootSnippetsSchema = {

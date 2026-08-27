@@ -1,5 +1,6 @@
 import NiceModal, { useModal } from '@ebay/nice-modal-react'
-import { ActionIcon, Box, Group, Modal, ScrollArea, Stack, Tooltip } from '@mantine/core'
+import { ActionIcon, Box, Group, Modal, Stack, Tooltip } from '@mantine/core'
+import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { TbList, TbPlus, TbRefresh } from 'react-icons/tb'
 
@@ -9,9 +10,12 @@ import { useGetSharedLists } from '@shared/api/hooks'
 import { EmptyPageLayout } from '@shared/ui/layouts/empty-page/empty-page.layout'
 import { LoaderModalShared } from '@shared/ui/loader-modal'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
+import { buildTree, TreeBrowser } from '@shared/ui/tree-browser'
 
-import { SharedListItem } from './shared-list-item'
-import classes from './shared-lists.module.css'
+import { sharedListRow, TSharedList } from './shared-list-row'
+import { useSharedListActions } from './use-shared-list-actions'
+
+const getName = (sharedList: TSharedList) => sharedList.name
 
 export const SharedListsModal = NiceModal.create(() => {
     const modal = useModal()
@@ -22,6 +26,10 @@ export const SharedListsModal = NiceModal.create(() => {
     const { data: sharedLists, isLoading, isRefetching, refetch } = useGetSharedLists()
 
     const lists = sharedLists?.sharedLists ?? []
+
+    const tree = useMemo(() => buildTree(lists, getName), [sharedLists])
+
+    const { deletingName, handleDelete } = useSharedListActions()
 
     return (
         <Modal
@@ -43,14 +51,25 @@ export const SharedListsModal = NiceModal.create(() => {
                     <EmptyPageLayout icon={<TbList size={32} />} />
                 )}
                 {!isLoading && lists.length > 0 && (
-                    <Box className={classes.sharedListTable}>
-                        <ScrollArea.Autosize mah={360}>
-                            <Stack gap={0}>
-                                {lists.map((sharedList) => (
-                                    <SharedListItem key={sharedList.name} sharedList={sharedList} />
-                                ))}
-                            </Stack>
-                        </ScrollArea.Autosize>
+                    <Box h={360}>
+                        <TreeBrowser
+                            emptyLabel={t('common.message.nothing-found')}
+                            onSelect={(sharedList) =>
+                                showModal('sharedLists_sharedListEditorModal', {
+                                    name: sharedList.name
+                                })
+                            }
+                            renderRow={(node, isFolder) =>
+                                sharedListRow({
+                                    deletingName,
+                                    isFolder,
+                                    node,
+                                    onDelete: handleDelete
+                                })
+                            }
+                            rootLabel={t('common.field.shared-lists')}
+                            tree={tree}
+                        />
                     </Box>
                 )}
 

@@ -1,12 +1,29 @@
-.snippetCard {
-    cursor: pointer;
-    transition: all 0.15s ease;
-    border: 1px solid var(--mantine-color-dark-4);
+.folderGlyph {
+    flex-shrink: 0;
+    color: var(--mantine-color-yellow-5);
 }
 
-.snippetCard:hover {
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-    border-color: var(--mantine-color-cyan-5);
+.snippetIcon {
+    flex-shrink: 0;
+    color: var(--mantine-color-blue-5);
+}
+
+.leadAction {
+    flex-shrink: 0;
+}
+
+.glyphCopy {
+    display: none;
+}
+
+[data-tree-row]:hover .glyphType,
+[data-tree-row]:focus-visible .glyphType {
+    display: none;
+}
+
+[data-tree-row]:hover .glyphCopy,
+[data-tree-row]:focus-visible .glyphCopy {
+    display: block;
 }
 
 .editor {

@@ -56,7 +56,7 @@ export const SharedListEditorModal = NiceModal.create((props: IProps) => {
     const [error, setError] = useState<null | string>(null)
 
     const { data: sharedList, isLoading } = useGetSharedList({
-        route: { name: name ?? '' },
+        query: { name: name ?? '' },
         rQueryParams: { enabled: isEditMode }
     })
 
