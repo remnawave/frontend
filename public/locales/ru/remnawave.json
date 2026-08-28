@@ -102,6 +102,8 @@
       "svg-icon": "SVG-иконка",
       "system": "Система",
       "tag": "Тег",
+      "tags": "Теги",
+      "untagged": "Без тега",
       "today": "Сегодня",
       "total": "Всего",
       "total-traffic": "Всего трафика",
@@ -109,8 +111,7 @@
       "usage-stats": "Статистика использования",
       "user-agent": "User-Agent",
       "user-status": "Статус пользователя",
-      "username": "Юзернейм",
-      "without-tags": "Без тегов"
+      "username": "Юзернейм"
     },
     "message": {
       "click-to-see-all": "Нажмите, чтобы увидеть все",
@@ -983,11 +984,6 @@
   "host-tags-input": {
     "tags-are-not-visible-to-end-users-tag-will-be-sent-with-raw-subscription-only": "Теги не видны конечным пользователям. Тег уходит только с подпиской RAW."
   },
-  "rename-modal": {
-    "shared": {
-      "new-name": "Новое название"
-    }
-  },
   "internal-squad-accessible-nodes": {
     "modal": {
       "widget": {
@@ -1339,7 +1335,6 @@
     "xray-v": "Xray v.",
     "node-v": "Node v.",
     "provider": "Провайдер",
-    "tags": "Теги",
     "total-ram": "Всего RAM",
     "cpu-model": "Модель CPU"
   },

@@ -68,7 +68,7 @@
       "search": "搜索",
       "select": "选择",
       "select-all": "全选",
-      "try-again": "再试一次",
+      "try-again": "重试",
       "update": "更新",
       "view": "查看"
     },
@@ -78,11 +78,11 @@
       "all": "全部",
       "billing-node": "计费节点",
       "color": "颜色",
-      "created-at": "创建于",
+      "created-at": "创建时间",
       "creation": "创建",
-      "description": "描述",
-      "first-connected-at": "首次连接于",
-      "inbounds": "入站连接",
+      "description": "备注",
+      "first-connected-at": "首次连接时间",
+      "inbounds": "入站",
       "inbounds-hosts": "入站 & 主机",
       "interface": "接口",
       "internal-squads": "内部分组",
@@ -102,21 +102,22 @@
       "svg-icon": "SVG 图标",
       "system": "系统",
       "tag": "标签",
+      "tags": "Tags",
+      "untagged": "Untagged",
       "today": "今天",
       "total": "总计",
-      "total-traffic": "总流量",
-      "updated-at": "更新于",
+      "total-traffic": "流量总计",
+      "updated-at": "更新时间",
       "usage-stats": "流量使用统计",
-      "user-agent": "浏览器版本(User Agent)",
+      "user-agent": "User Agent",
       "user-status": "用户状态",
-      "username": "用户名",
-      "without-tags": "无标签"
+      "username": "用户名"
     },
     "message": {
       "click-to-see-all": "点击查看全部",
       "configured": "已配置",
       "confirm-action-description": "您确定要执行此操作吗？此操作不能撤消。",
-      "copied": "复制成功",
+      "copied": "已复制",
       "error": "错误",
       "event-sent": "发送事件",
       "invalid-json": "无效的 JSON",
@@ -983,11 +984,6 @@
   "host-tags-input": {
     "tags-are-not-visible-to-end-users-tag-will-be-sent-with-raw-subscription-only": "标签对最终用户不可见。标签将只能与 Raw 订阅一起发送。"
   },
-  "rename-modal": {
-    "shared": {
-      "new-name": "新名称"
-    }
-  },
   "internal-squad-accessible-nodes": {
     "modal": {
       "widget": {
@@ -1339,7 +1335,6 @@
     "xray-v": "Xray V.",
     "node-v": "节点 V.",
     "provider": "服务商",
-    "tags": "标签",
     "total-ram": "内存总数",
     "cpu-model": "CPU 型号"
   },
