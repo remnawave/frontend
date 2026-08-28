@@ -87,15 +87,15 @@
     white-space: nowrap;
     text-overflow: ellipsis;
     color: var(--mantine-color-bright);
-    font-size: var(--mantine-font-size-sm);
-    line-height: 20px;
+    font-size: var(--mantine-font-size-md);
+    line-height: 22px;
 }
 
 .meta {
     display: flex;
     align-items: center;
     gap: 6px;
-    height: 20px;
+    height: 26px;
     min-width: 0;
     overflow: hidden;
 }

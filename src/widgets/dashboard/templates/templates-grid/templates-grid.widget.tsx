@@ -91,15 +91,15 @@ export function TemplatesGridWidget(props: IProps) {
         switch (type) {
             case 'CLASH':
             case 'MIHOMO':
-                return <MihomoLogo size={20} />
+                return <MihomoLogo size={22} />
             case 'SINGBOX':
-                return <SingboxLogo size={20} />
+                return <SingboxLogo size={22} />
             case 'STASH':
-                return <StashLogo size={20} />
+                return <StashLogo size={22} />
             case 'XRAY_JSON':
-                return <XrayLogo size={20} />
+                return <XrayLogo size={22} />
             default:
-                return <PiBracketsAngle size={20} />
+                return <PiBracketsAngle size={22} />
         }
     }, [type])
 

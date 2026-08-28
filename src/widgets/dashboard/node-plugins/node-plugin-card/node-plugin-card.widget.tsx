@@ -50,7 +50,7 @@ export function NodePluginCardWidget(props: IProps) {
             <EntityCardShared.Root onClick={navigateToNodePlugin}>
                 <EntityCardShared.Header>
                     <EntityCardShared.Icon highlight={false}>
-                        <TbPackage size={20} />
+                        <TbPackage size={22} />
                     </EntityCardShared.Icon>
 
                     <EntityCardShared.Content tags={nodePlugin.tags} title={nodePlugin.name} />

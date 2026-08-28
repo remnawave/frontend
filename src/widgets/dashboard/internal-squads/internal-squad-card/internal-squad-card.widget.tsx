@@ -57,7 +57,7 @@ export function InternalSquadCardWidget(props: IProps) {
             <EntityCardShared.Root isActive={isActive} onClick={handleOpenInbounds}>
                 <EntityCardShared.Header>
                     <EntityCardShared.Icon highlight={isActive}>
-                        <TbCirclesRelation size={20} />
+                        <TbCirclesRelation size={22} />
                     </EntityCardShared.Icon>
                     <EntityCardShared.Content
                         tags={internalSquad.tags}
@@ -67,7 +67,7 @@ export function InternalSquadCardWidget(props: IProps) {
                                     <Badge
                                         color="blue"
                                         leftSection={<PiTag size={12} />}
-                                        size="md"
+                                        size="lg"
                                         variant="soft"
                                     >
                                         {formatInt(inboundsCount, {
@@ -80,7 +80,7 @@ export function InternalSquadCardWidget(props: IProps) {
                                     <Badge
                                         color={isActive ? 'teal' : 'gray'}
                                         leftSection={<PiUsers size={12} />}
-                                        size="md"
+                                        size="lg"
                                         variant="soft"
                                     >
                                         {formatInt(membersCount, {

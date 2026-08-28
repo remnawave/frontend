@@ -51,7 +51,7 @@ export function SubpageConfigCardWidget(props: IProps) {
             <EntityCardShared.Root isActive={isDefault} onClick={navigateToConfig}>
                 <EntityCardShared.Header>
                     <EntityCardShared.Icon highlight={isDefault}>
-                        <TbFile size={20} />
+                        <TbFile size={22} />
                     </EntityCardShared.Icon>
 
                     <EntityCardShared.Content

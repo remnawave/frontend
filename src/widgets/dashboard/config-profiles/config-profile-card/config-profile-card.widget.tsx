@@ -146,7 +146,7 @@ export function ConfigProfileCardWidget(props: IProps) {
             <EntityCardShared.Root isActive={isActive} onClick={handleEditConfigProfile}>
                 <EntityCardShared.Header>
                     <EntityCardShared.Icon highlight={isActive}>
-                        <XrayLogo size={20} />
+                        <XrayLogo size={22} />
                     </EntityCardShared.Icon>
                     <EntityCardShared.Content
                         tags={configProfile.tags}
@@ -165,7 +165,7 @@ export function ConfigProfileCardWidget(props: IProps) {
                                                 }
                                             )
                                         }}
-                                        size="md"
+                                        size="lg"
                                         style={{ cursor: 'pointer' }}
                                         variant="soft"
                                     >
@@ -186,7 +186,7 @@ export function ConfigProfileCardWidget(props: IProps) {
                                                 profileName: configProfile.name
                                             })
                                         }}
-                                        size="md"
+                                        size="lg"
                                         style={{
                                             cursor: 'pointer'
                                         }}

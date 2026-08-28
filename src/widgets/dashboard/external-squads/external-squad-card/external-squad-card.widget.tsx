@@ -56,7 +56,7 @@ export function ExternalSquadCardWidget(props: IProps) {
             <EntityCardShared.Root isActive={isActive} onClick={openExternalSquad}>
                 <EntityCardShared.Header>
                     <EntityCardShared.Icon highlight={isActive}>
-                        <TbWebhook size={20} />
+                        <TbWebhook size={22} />
                     </EntityCardShared.Icon>
                     <EntityCardShared.Content
                         tags={externalSquad.tags}
@@ -66,7 +66,7 @@ export function ExternalSquadCardWidget(props: IProps) {
                                     <Badge
                                         color={isActive ? 'teal' : 'gray'}
                                         leftSection={<PiUsers size={12} />}
-                                        size="md"
+                                        size="lg"
                                         variant="soft"
                                     >
                                         {formatInt(membersCount, {

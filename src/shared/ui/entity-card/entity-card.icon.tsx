@@ -12,7 +12,7 @@ export function EntityCardIcon({ children, highlight = true, ...props }: EntityC
             className={classes.icon}
             component="div"
             color={highlight ? 'teal' : 'gray'}
-            size="lg"
+            size={32}
             variant="soft"
             {...props}
         >

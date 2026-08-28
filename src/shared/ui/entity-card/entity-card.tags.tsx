@@ -25,9 +25,9 @@ export function EntityCardTags({ tags }: IProps) {
                     autoContrast
                     color={ch.hex(tag)}
                     key={tag}
-                    leftSection={<TbTag size={11} />}
-                    px={5}
-                    size="sm"
+                    leftSection={<TbTag size={12} />}
+                    px={6}
+                    size="md"
                     variant="transparent"
                 >
                     {tag}
@@ -42,8 +42,8 @@ export function EntityCardTags({ tags }: IProps) {
                                     color={ch.hex(tag)}
                                     fullWidth
                                     key={tag}
-                                    leftSection={<TbTag size={11} />}
-                                    size="sm"
+                                    leftSection={<TbTag size={12} />}
+                                    size="md"
                                     variant="transparent"
                                 >
                                     {tag}
@@ -54,7 +54,7 @@ export function EntityCardTags({ tags }: IProps) {
                     multiline
                     position="top"
                 >
-                    <Badge color="gray" px={5} size="sm" variant="transparent">
+                    <Badge color="gray" px={6} size="md" variant="transparent">
                         +{hidden.length}
                     </Badge>
                 </Tooltip>
