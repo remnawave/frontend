@@ -25,7 +25,8 @@
     "quick-open": "Быстрый переход",
     "tb-reports": "Отчёты Torrent Blocker",
     "sessions-explorer": "Обозреватель сессий",
-    "http-stats": "Статистика HTTP"
+    "http-stats": "Статистика HTTP",
+    "quick-launcher": "Launcher"
   },
   "common": {
     "action": {

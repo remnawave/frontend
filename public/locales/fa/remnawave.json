@@ -25,7 +25,8 @@
     "quick-open": "Quick open",
     "tb-reports": "Torrent Blocker Reports",
     "sessions-explorer": "Sessions Explorer",
-    "http-stats": "HTTP Stats"
+    "http-stats": "HTTP Stats",
+    "quick-launcher": "Launcher"
   },
   "common": {
     "action": {

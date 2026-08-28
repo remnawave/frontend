@@ -25,7 +25,8 @@
     "quick-open": "快捷方式",
     "tb-reports": "Torrent 屏蔽报告",
     "sessions-explorer": "会话管理器",
-    "http-stats": "HTTP 状态"
+    "http-stats": "HTTP 状态",
+    "quick-launcher": "Launcher"
   },
   "common": {
     "action": {
