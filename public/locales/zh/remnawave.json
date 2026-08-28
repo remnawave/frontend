@@ -26,7 +26,7 @@
     "tb-reports": "Torrent 屏蔽报告",
     "sessions-explorer": "会话管理器",
     "http-stats": "HTTP 状态",
-    "quick-launcher": "Launcher"
+    "quick-launcher": "开始菜单"
   },
   "common": {
     "action": {
@@ -103,8 +103,8 @@
       "svg-icon": "SVG 图标",
       "system": "系统",
       "tag": "标签",
-      "tags": "Tags",
-      "untagged": "Untagged",
+      "tags": "标签",
+      "untagged": "无标签",
       "today": "今天",
       "total": "总计",
       "total-traffic": "流量总计",
@@ -135,7 +135,7 @@
       "operation-completed": "操作已完成",
       "overdue": "已过期",
       "processing": "处理中",
-      "search-profiles-or-inbounds": "搜索配置文件或入站配置...",
+      "search-profiles-or-inbounds": "搜索配置文件或入站配置……",
       "selected": "已选 {{count}} 项",
       "success": "成功",
       "warning": "警告"
@@ -166,7 +166,7 @@
       "format": "格式化",
       "failed-to-save-invalid-json": "保存失败，无效的 JSON。",
       "save-anyway": "仍然保存",
-      "save-anyway-description": "您确定要保存无效的 Xray 配置吗？ 此操作\n                                    可能导致意外行为。请仅在您清楚自己在做什么的情况下继续。",
+      "save-anyway-description": "您确定要保存无效的 Xray 配置吗？ 此操作可能导致意外问题。请您清楚自己在做什么。",
       "tools": "工具",
       "copy-all-content": "复制全部内容",
       "cut-selection": "剪切选中项",
@@ -188,7 +188,7 @@
     "traffic-reset": "流量重置",
     "never": "从不",
     "online-at": "最后在线时间",
-    "lifetime-used": "累计用量",
+    "lifetime-used": "累计使用量",
     "sub-link-revoked-at": "订阅链接撤销于",
     "created-at": "创建于",
     "internal-squads": "内部分组",
@@ -209,8 +209,8 @@
     "feature": {
       "restart-all-nodes": "重启所有节点",
       "search-nodes": "搜索节点",
-      "force-restart-description": "将保证所有节点将完全重启 Xray 核心。",
-      "graceful-restart-description-1": "将向所有节点发送请求以重启 Xray。 但如果节点哈希与当前的哈希相同，则请求可能无法实现。 这是默认的选项。",
+      "force-restart-description": "将保证所有节点完全重启 Xray 核心。",
+      "graceful-restart-description-1": "重启所有节点上的 Xray。 但如果节点哈希与当前的哈希相同，则请求可能无法实现。 这是默认的选项。",
       "force": "强制执行",
       "graceful": "平滑的"
     }
@@ -266,7 +266,7 @@
   "create-user-modal": {
     "widget": {
       "user-description": "用户描述",
-      "expiry-date": "过期日期",
+      "expiry-date": "到期时间",
       "pick-value": "选择值",
       "traffic-reset-strategy": "流量重置策略",
       "traffic-reset-strategy-description": "用户流量使用统计应多久重置一次",
@@ -299,7 +299,7 @@
       "management": "管理",
       "danger-zone": "危险操作区",
       "detailed-info": "用户详细信息",
-      "accessible-nodes": "可访问节点",
+      "accessible-nodes": "授权访问节点",
       "qr-code": "二维码"
     }
   },
@@ -315,7 +315,7 @@
     "extra-xhttp": "XHTTP 额外设置",
     "xhttp-extra-params": "XHTTP 额外参数",
     "address-description-line-1": "地址必须是连接目标的 IP 地址或域名。",
-    "address-description-line-2": "在大多数情况下，它应指向已连接的节点之一。",
+    "address-description-line-2": "在大多数情况下，它应指向某一个在线节点。",
     "port-description-line-1": "连接端口。",
     "port-description-line-2": "在大多数情况下，必须与所选入站的端口匹配。",
     "sni-description-line-1": "SNI 代表服务器名称。",
@@ -336,10 +336,10 @@
     "wildcard-domain": "通配符域名",
     "wildcard-domain-description": "子域的通配符模式。Remnawave将以 * 替换为随机生成的字符串。",
     "override-sni-from-address": "从地址覆盖SNI地址",
-    "override-sni-from-address-description": "此选项用指定的地址字段值替换SNI值。这对于多域配置或通配符域配置特别有用。",
+    "override-sni-from-address-description": "此选项用指定的地址字段值替换SNI值。这对于多域名配置或通配符域配置特别有用。",
     "shuffled-hosts-hover-card": "随机排序的主机将放置在列表的顶端。",
     "vless-route-description": "从 1 到 65535，0 或留空以禁用",
-    "shuffle-host": "随机主机",
+    "shuffle-host": "随机排序主机",
     "enable-x25519mlkem768": "启用 x25519mlkem768 ",
     "pick-nodes-which-resolved-from-this-host-only-visual-assignment": "从主机中选择解析的节点。仅可视化。",
     "nodes": "节点",
@@ -409,7 +409,7 @@
       "process-details": "进程详情"
     },
     "runtime-info": {
-      "title": "运行时指标指南",
+      "title": "运行时指标",
       "subtitle": "运行时卡片上每个数值的实际含义",
       "intro": "每张卡片都展示了一个 <highlight>Remnawave 进程</highlight> 的实时状态快照。可通过本说明了解每项指标的含义，以及在什么情况下需要关注或排查问题。",
       "instance-types-title": "进程类型",
@@ -443,8 +443,8 @@
       "60-days": "60 天",
       "90-days": "90 天",
       "180-days": "180 天",
-      "total-traffic": "总流量",
-      "total-traffic-placeholder": "总流量: {{totalTraffic}}",
+      "total-traffic": "总计使用流量",
+      "total-traffic-placeholder": "总计使用流量: {{totalTraffic}}",
       "top-nodes": "活跃节点",
       "node": "节点",
       "traffic": "流量",
@@ -482,7 +482,7 @@
   },
   "bulk-user-actions-modal": {
     "widget": {
-      "user-deletion-description": "删除所有具有选定状态的用户。如果您删除状态为“活跃”的用户，应重启所有节点以使更改生效。",
+      "user-deletion-description": "删除所有特定状态的用户。如果您删除状态为“活跃”的用户，应重启所有节点以使更改生效。",
       "select-status": "按状态删除"
     }
   },
@@ -562,11 +562,11 @@
     "actions": {
       "tab": {
         "feature": {
-          "revoke-subscription": "撤销订阅",
+          "revoke-subscription": "重置订阅",
           "perform-action-on-users": "对 {{usersCount}} 位选定用户执行操作",
           "revokes-subscription-for-all-selected-users": "撤销所有选定用户的订阅",
           "specify-internal-squads-that-will-be-assigned-to-the-user": "指定用户的内部分组",
-          "extend-expiration-date": "延长日期",
+          "extend-expiration-date": "延长到期日期",
           "enter-the-number-of-days-to-extend-the-expiration-date": "输入延长到期日的天数",
           "extend-days": "延长天数",
           "extend": "延长",
@@ -610,15 +610,15 @@
       "short-uuid": "短 UUID",
       "email": "邮箱",
       "telegram-id": "Telegram ID",
-      "traffic-information": "流量信息",
+      "traffic-information": "流量使用信息",
       "used-traffic": "已用流量",
       "lifetime-used-traffic": "累计已用流量",
       "traffic-limit": "流量限制",
       "traffic-limit-strategy": "流量限制策略",
-      "last-traffic-reset": "上次流量重置",
+      "last-traffic-reset": "上次流量重置日期",
       "subscription-information": "订阅信息",
-      "expires-at": "过期时间",
-      "revoked-at": "撤销于",
+      "expires-at": "到期时间",
+      "revoked-at": "重置时间",
       "connection-information": "连接信息",
       "trojan-password": "Trojan 密码",
       "ss-password": "SS 密码",
@@ -934,7 +934,7 @@
   "config-profiles-header-action-buttons": {
     "feature": {
       "create-a-new-config-profile-by-entering-a-name-below": "在下方输入名称以创建新的配置文件。",
-      "you-can-customize-xray-config-after-creation": "创建后可以自定义 XRay 配置。",
+      "you-can-customize-xray-config-after-creation": "创建后，您可以自定义 Xray 配置。",
       "profile-name": "配置文件名称",
       "enter-profile-name": "输入配置文件名称"
     }
@@ -943,7 +943,7 @@
     "feature": {
       "restart": "重新启动",
       "restart-description-line-1": "确保节点完全重启Xra核心。建议选中。",
-      "restart-description-line-2": "将向所有节点发送请求以重启 Xray。 但如果节点哈希与当前的哈希相同，则请求可能无法实现。 这是默认的选项。"
+      "restart-description-line-2": "重启所有节点上的 Xray。 但如果节点哈希与当前的哈希相同，则请求可能无法实现。 这是默认的选项。"
     }
   },
   "node-details-card": {
@@ -988,7 +988,7 @@
   "internal-squad-accessible-nodes": {
     "modal": {
       "widget": {
-        "internal-squad-accessible-nodes": "内置分组可访问节点"
+        "internal-squad-accessible-nodes": "内置分组授权访问节点"
       }
     }
   },
@@ -1017,7 +1017,7 @@
     "widget": {
       "total-unique-devices": "唯一设备总数",
       "total-hwid-devices": "HWID 设备总数",
-      "avg-devices-per-user": "每个用户平均设备数",
+      "avg-devices-per-user": "平均每个用户设备数",
       "platform-distribution": "平台分布",
       "app-distribution": "应用分布",
       "no-platform-data": "无平台数据",
@@ -1053,11 +1053,11 @@
         "snippet-cannot-be-empty": "代码块不能为空",
         "snippet-cannot-contain-empty-objects": "代码块不能包含空对象",
         "more-items": "更多项目...",
-        "create-snippet": "创建代码块",
-        "snippet-name": "代码块名称",
+        "create-snippet": "创建片段",
+        "snippet-name": "片段名称",
         "enter-snippet-name-cannot-be-changed-later": "输入代码块名称 (稍后不能更改)",
         "snippet-is-valid": "代码块有效",
-        "edit-snippet": "编辑代码块",
+        "edit-snippet": "编辑片段",
         "snippets": "代码块",
         "new-snippet": "新建代码块"
       }
@@ -1219,7 +1219,7 @@
       "branding-settings": "商标设置",
       "the-title-that-will-be-displayed-on-login-page": "登录页面显示的标题",
       "brand-name": "品牌名称",
-      "the-url-to-your-brand-logo-image": "您品牌徽标图片的 URL。接受普通http(s) URL或base64数据URL(data:image/svg+xml;base64...)",
+      "the-url-to-your-brand-logo-image": "您品牌徽标图片的 URL。接受普通http(s) URL或base64数据URL(data:image/svg+xml;base64...)。",
       "colored-title-format": "彩色标题格式",
       "colored-title-description": "您可以使用 {color}文字 语法为单个单词着色。支持十六进制颜色 (#RRGGBB) 和 MantineUI 颜色名称。",
       "example-hex-colors": "十六进制颜色示例",
@@ -1238,9 +1238,9 @@
   "api-tokens-card": {
     "widget": {
       "api-tokens-description": "管理您的 API Token用于程序访问。",
-      "api-tokens": "API tokens",
+      "api-tokens": "API Tokens",
       "no-api-tokens-found": "未找到 API Tokens",
-      "token-name": "API Tokens 名称",
+      "token-name": "Tokens 名称",
       "create-api-token": "创建新 API 密钥",
       "full-access": "完全访问权限",
       "col-scopes": "范围",
@@ -1254,7 +1254,7 @@
   "external-squads-hosts": {
     "tab": {
       "widget": {
-        "host-overrides": "主机替换",
+        "host-overrides": "主机覆写",
         "override-host-settings-for-this-external-squad": "覆盖此外部分组的主机设置."
       }
     }
@@ -1266,7 +1266,7 @@
   },
   "help-action-icon": {
     "shared": {
-      "help-article": "帮助文章"
+      "help-article": "帮助"
     }
   },
   "internal-squad-card": {
@@ -1298,7 +1298,7 @@
       "fallback-device-limit-description": "输入可以通过订阅同时使用的最大设备数量",
       "fallback-device-limit": "回退设备限制",
       "max-devices-announce-description": "输入用户达到设备同时最大使用数量时将显示的消息",
-      "max-devices-announce": "最多设备公告",
+      "max-devices-announce": "最多设备通知",
       "max-200-characters": "最多为200字符"
     }
   },
@@ -1314,7 +1314,7 @@
   "external-squads-custom-remarks": {
     "widget": {
       "override-remarks-description": "覆盖此外部分组的用户状态注释。禁用时，将使用全局订阅设置。",
-      "enable-override": "启用覆盖"
+      "enable-override": "启用覆写"
     }
   },
   "subscription-user-remarks-card": {
@@ -1536,13 +1536,13 @@
   },
   "node-plugin-card": {
     "widget": {
-      "active-on-nodes": "已在节点上激活"
+      "active-on-nodes": "已在节点上启用"
     }
   },
   "active-on-nodes": {
     "modal": {
       "shared": {
-        "this-plugin-is-not-active-on-any-nodes": "该插件未在任何节点上激活."
+        "this-plugin-is-not-active-on-any-nodes": "该插件未在任何节点上启用。"
       }
     }
   },
@@ -1612,7 +1612,7 @@
   },
   "user-torrent-blocker-report-item": {
     "processed-at": "处理时间",
-    "unblocked-at": "解除阻止在"
+    "unblocked-at": "解除阻止时间"
   },
   "get-user-torrent-blocker-reports": {
     "feature": {
@@ -1673,9 +1673,9 @@
   },
   "prime-modal": {
     "shared": {
-      "description": "支持项目并成为核心成员——更贴近团队、产品路线以及实际工作",
+      "description": "支持项目并成为核心成员——更贴近团队、产品路线以及实际工作。",
       "priority-support-title": "优先支持",
-      "priority-support-description": "跳过排队——你的问题将优先得到团队的直接解答",
+      "priority-support-description": "跳过排队——你的问题将优先得到团队的直接解答。",
       "private-community-title": "私密社群",
       "private-community-description": "仅限 Prime 会员参与的专属社群",
       "shape-the-roadmap-title": "参与路线规划",
