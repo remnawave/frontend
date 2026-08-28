@@ -5,6 +5,7 @@ import {
     DeleteInternalSquadCommand,
     DeleteUsersFromInternalSquadCommand,
     ReorderInternalSquadCommand,
+    SetInternalSquadTagsCommand,
     UpdateInternalSquadCommand
 } from '@remnawave/backend-contract'
 
@@ -122,6 +123,23 @@ export const useReorderInternalSquads = createMutationHook({
         onError: (error) => {
             notifications.show({
                 title: `Reorder Internal Squads`,
+                message:
+                    error instanceof Error ? error.message : `Request failed with unknown error.`,
+                color: 'red'
+            })
+        }
+    }
+})
+
+export const useSetInternalSquadsTags = createMutationHook({
+    endpoint: SetInternalSquadTagsCommand.TSQ_url,
+    bodySchema: SetInternalSquadTagsCommand.RequestBodySchema,
+    responseSchema: SetInternalSquadTagsCommand.ResponseSchema,
+    requestMethod: SetInternalSquadTagsCommand.endpointDetails.REQUEST_METHOD,
+    rMutationParams: {
+        onError: (error) => {
+            notifications.show({
+                title: 'Update tags',
                 message:
                     error instanceof Error ? error.message : `Request failed with unknown error.`,
                 color: 'red'

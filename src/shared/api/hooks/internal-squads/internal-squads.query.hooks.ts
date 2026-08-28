@@ -2,7 +2,8 @@ import { createQueryKeys } from '@lukemorales/query-key-factory'
 import {
     GetInternalSquadAccessibleNodesCommand,
     GetInternalSquadCommand,
-    GetInternalSquadsCommand
+    GetInternalSquadsCommand,
+    GetInternalSquadsTagsCommand
 } from '@remnawave/backend-contract'
 import { keepPreviousData } from '@tanstack/react-query'
 
@@ -11,6 +12,9 @@ import { sToMs } from '@shared/utils/time-utils'
 import { createGetQueryHook, errorHandler } from '../../tsq-helpers'
 
 export const internalSquadsQueryKeys = createQueryKeys('internalSquads', {
+    getInternalSquadsTags: {
+        queryKey: null
+    },
     getInternalSquads: {
         queryKey: null
     },
@@ -59,4 +63,15 @@ export const useGetInternalSquadAccessibleNodes = createGetQueryHook({
         staleTime: sToMs(15)
     },
     errorHandler: (error) => errorHandler(error, 'Get Internal Squad Accessible Nodes')
+})
+
+export const useGetInternalSquadsTags = createGetQueryHook({
+    endpoint: GetInternalSquadsTagsCommand.TSQ_url,
+    responseSchema: GetInternalSquadsTagsCommand.ResponseSchema,
+    getQueryKey: () => internalSquadsQueryKeys.getInternalSquadsTags.queryKey,
+    rQueryParams: {
+        refetchOnMount: true,
+        staleTime: sToMs(30)
+    },
+    errorHandler: (error) => errorHandler(error, 'Get InternalSquads Tags')
 })

@@ -3,6 +3,7 @@ import {
     GetComputedConfigProfileByUuidCommand,
     GetConfigProfileByUuidCommand,
     GetConfigProfilesCommand,
+    GetConfigProfilesTagsCommand,
     GetInboundsByProfileUuidCommand
 } from '@remnawave/backend-contract'
 
@@ -11,6 +12,9 @@ import { sToMs } from '@shared/utils/time-utils'
 import { createGetQueryHook, errorHandler } from '../../tsq-helpers'
 
 export const configProfilesQueryKeys = createQueryKeys('configProfiles', {
+    getConfigProfilesTags: {
+        queryKey: null
+    },
     getConfigProfiles: {
         queryKey: null
     },
@@ -69,4 +73,15 @@ export const useGetComputedConfigProfile = createGetQueryHook({
         enabled: false
     },
     errorHandler: (error) => errorHandler(error, 'Get Computed Config Profile')
+})
+
+export const useGetConfigProfilesTags = createGetQueryHook({
+    endpoint: GetConfigProfilesTagsCommand.TSQ_url,
+    responseSchema: GetConfigProfilesTagsCommand.ResponseSchema,
+    getQueryKey: () => configProfilesQueryKeys.getConfigProfilesTags.queryKey,
+    rQueryParams: {
+        refetchOnMount: true,
+        staleTime: sToMs(30)
+    },
+    errorHandler: (error) => errorHandler(error, 'Get ConfigProfiles Tags')
 })

@@ -3,7 +3,7 @@ import { GetSubpageConfigsCommand } from '@remnawave/backend-contract'
 import { SUBPAGE_DEFAULT_CONFIG_UUID } from '@remnawave/subscription-page-types'
 import { useTranslation } from 'react-i18next'
 import { PiCheck, PiCopy, PiPencil, PiTrashDuotone } from 'react-icons/pi'
-import { TbCopyCheck, TbEdit, TbFile } from 'react-icons/tb'
+import { TbCopyCheck, TbFile, TbTags } from 'react-icons/tb'
 import { generatePath, useNavigate } from 'react-router'
 
 import { showModal } from '@shared/_modals/show-modal'
@@ -12,6 +12,7 @@ import { WithDndSortable } from '@shared/hocs/with-dnd-sortable'
 import { EntityCardShared } from '@shared/ui/entity-card'
 
 interface IProps {
+    disableReordering?: boolean
     handleCloneSubpageConfig: (subpageConfigUuid: string) => void
     handleDeleteSubpageConfig: (subpageConfigUuid: string) => void
     isDragOverlay?: boolean
@@ -20,6 +21,7 @@ interface IProps {
 
 export function SubpageConfigCardWidget(props: IProps) {
     const {
+        disableReordering = false,
         subpageConfig,
         handleDeleteSubpageConfig,
         handleCloneSubpageConfig,
@@ -41,30 +43,24 @@ export function SubpageConfigCardWidget(props: IProps) {
 
     return (
         <WithDndSortable
-            dragHandlePosition="top-right"
+            disableReordering={disableReordering}
+            dragHandlePosition="inline-end"
             id={subpageConfig.uuid}
             isDragOverlay={isDragOverlay}
         >
-            <EntityCardShared.Root withTopAccent={isDefault}>
+            <EntityCardShared.Root isActive={isDefault} onClick={navigateToConfig}>
                 <EntityCardShared.Header>
-                    <EntityCardShared.Icon highlight={isDefault} onClick={navigateToConfig}>
-                        <TbFile size={24} />
+                    <EntityCardShared.Icon highlight={isDefault}>
+                        <TbFile size={20} />
                     </EntityCardShared.Icon>
 
                     <EntityCardShared.Content
-                        subtitle="Subpage Config"
+                        tags={subpageConfig.tags}
                         title={subpageConfig.name}
                     />
                 </EntityCardShared.Header>
 
                 <EntityCardShared.Actions>
-                    <EntityCardShared.Button
-                        leftSection={<TbEdit size={16} />}
-                        onClick={navigateToConfig}
-                    >
-                        {t('common.action.edit')}
-                    </EntityCardShared.Button>
-
                     <EntityCardShared.Menu>
                         <CopyButton timeout={2000} value={subpageConfig.uuid}>
                             {({ copied, copy }) => (
@@ -91,6 +87,22 @@ export function SubpageConfigCardWidget(props: IProps) {
                             }}
                         >
                             {t('common.action.rename')}
+                        </Menu.Item>
+
+                        <Menu.Item
+                            leftSection={<TbTags size={18} />}
+
+                            onClick={() => {
+                                showModal('editTagsModal', {
+                                    editTagsFrom: 'subpageConfig',
+
+                                    tags: subpageConfig.tags,
+
+                                    uuid: subpageConfig.uuid
+                                })
+                            }}
+                        >
+                            {t('common.field.tags')}
                         </Menu.Item>
 
                         <Menu.Item

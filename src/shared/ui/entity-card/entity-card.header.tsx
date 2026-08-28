@@ -1,4 +1,6 @@
-import { Group, Stack } from '@mantine/core'
+import { Group } from '@mantine/core'
+
+import classes from './entity-card.module.css'
 
 interface HeaderProps {
     children: React.ReactNode
@@ -6,10 +8,8 @@ interface HeaderProps {
 
 export function EntityCardHeader({ children }: HeaderProps) {
     return (
-        <Stack gap="md">
-            <Group gap="md" wrap="nowrap">
-                {children}
-            </Group>
-        </Stack>
+        <Group align="center" className={classes.header} gap={10} wrap="nowrap">
+            {children}
+        </Group>
     )
 }

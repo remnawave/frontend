@@ -106,7 +106,7 @@ export const HOST_OPTION_FIELDS: IHostOptionField[] = [
         fields: [list('tags')],
         group: 'group-assignment',
         kind: 'stacked',
-        labelKey: 'use-nodes-table-widget.tags'
+        labelKey: 'common.field.tags'
     },
     {
         name: 'nodes',

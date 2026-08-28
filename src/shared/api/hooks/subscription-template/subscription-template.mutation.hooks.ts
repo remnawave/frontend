@@ -3,6 +3,7 @@ import {
     CreateSubscriptionTemplateCommand,
     DeleteSubscriptionTemplateCommand,
     ReorderSubscriptionTemplateCommand,
+    SetSubscriptionTemplateTagsCommand,
     UpdateSubscriptionTemplateCommand
 } from '@remnawave/backend-contract'
 
@@ -88,6 +89,23 @@ export const useReorderSubscriptionTemplates = createMutationHook({
         onError: (error) => {
             notifications.show({
                 title: `Reorder Subscription Templates`,
+                message:
+                    error instanceof Error ? error.message : `Request failed with unknown error.`,
+                color: 'red'
+            })
+        }
+    }
+})
+
+export const useSetSubscriptionTemplatesTags = createMutationHook({
+    endpoint: SetSubscriptionTemplateTagsCommand.TSQ_url,
+    bodySchema: SetSubscriptionTemplateTagsCommand.RequestBodySchema,
+    responseSchema: SetSubscriptionTemplateTagsCommand.ResponseSchema,
+    requestMethod: SetSubscriptionTemplateTagsCommand.endpointDetails.REQUEST_METHOD,
+    rMutationParams: {
+        onError: (error) => {
+            notifications.show({
+                title: 'Update tags',
                 message:
                     error instanceof Error ? error.message : `Request failed with unknown error.`,
                 color: 'red'

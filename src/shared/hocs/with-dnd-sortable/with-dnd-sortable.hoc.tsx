@@ -10,7 +10,14 @@ export const DndSortableIndexContext = createContext(0)
 
 interface WithDndSortableProps {
     children: React.ReactNode
-    dragHandlePosition?: 'bottom-left' | 'bottom-right' | 'top-left' | 'top-right'
+    disableReordering?: boolean
+    dragHandlePosition?:
+        | 'bottom-left'
+        | 'bottom-right'
+        | 'inline-end'
+        | 'inline-start'
+        | 'top-left'
+        | 'top-right'
     id: string
     isDragOverlay?: boolean
     showDragHandle?: boolean
@@ -23,6 +30,7 @@ export const WithDndSortable = forwardRef<HTMLDivElement, WithDndSortableProps>(
             isDragOverlay = false,
             children,
             showDragHandle = true,
+            disableReordering = false,
             dragHandlePosition = 'top-right'
         } = props
 
@@ -31,11 +39,12 @@ export const WithDndSortable = forwardRef<HTMLDivElement, WithDndSortableProps>(
         const sortable = useSortable({
             id,
             index,
-            disabled: isDragOverlay,
+            disabled: isDragOverlay || disableReordering,
             plugins: (defaults) => defaults.filter((plugin) => plugin !== OptimisticSortingPlugin)
         })
 
         const isDragging = !isDragOverlay && sortable.isDragging
+        const hasDragHandle = showDragHandle && !disableReordering
         const { ref, handleRef } = sortable
 
         const style: CSSProperties = {
@@ -47,19 +56,27 @@ export const WithDndSortable = forwardRef<HTMLDivElement, WithDndSortableProps>(
             'top-left': classes.dragHandleTopLeft,
             'top-right': classes.dragHandleTopRight,
             'bottom-left': classes.dragHandleBottomLeft,
-            'bottom-right': classes.dragHandleBottomRight
+            'bottom-right': classes.dragHandleBottomRight,
+            'inline-start': classes.dragHandleInline,
+            'inline-end': classes.dragHandleInlineEnd
         }
 
         return (
-            <div ref={isDragOverlay ? externalRef : ref} style={style}>
-                {showDragHandle && (
+            <div
+                className={dragHandlePosition === 'inline-start' ? classes.inlineRoot : undefined}
+                data-drag-handle={hasDragHandle ? undefined : 'hidden'}
+                ref={isDragOverlay ? externalRef : ref}
+                style={style}
+            >
+                {hasDragHandle && (
                     <ActionIcon
                         className={`${classes.dragHandle} ${dragHandleClasses[dragHandlePosition]}`}
+                        color="gray"
                         ref={isDragOverlay ? undefined : handleRef}
-                        size="lg"
-                        variant="transparent"
+                        size="30"
+                        variant="subtle"
                     >
-                        <RiDraggable size={24} />
+                        <RiDraggable size={16} />
                     </ActionIcon>
                 )}
                 {children}

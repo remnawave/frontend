@@ -53,7 +53,7 @@ interface IProps {
 }
 
 export function useNiceMantineModal(props: IProps) {
-    const { modal, drawer, onClose } = props
+    const { modal, onClose } = props
     const isMobile = useIsMobile()
     const [entered, setEntered] = useState(false)
 
@@ -76,21 +76,13 @@ export function useNiceMantineModal(props: IProps) {
         return () => unregister(modal.id)
     }, [modal.visible, modal.id])
 
-    const drawerProps = !drawer
-        ? {
-              fullScreen: isMobile,
-              transition: isMobile ? { transition: 'fade', duration: 200 } : undefined,
-              centered: true
-          }
-        : {}
-
     const modalProps = {
+        fullScreen: isMobile,
         opened: entered && modal.visible,
         closeOnEscape: false,
         'data-nice-modal': modal.id,
         onClose: hide,
-        onExitTransitionEnd: () => modal.remove(),
-        ...drawerProps
+        onExitTransitionEnd: () => modal.remove()
     }
 
     return { modalProps, hide }

@@ -184,7 +184,7 @@ export const NodeTrackingAndBillingCard = <
                             clearable
                             data={nodesTags?.tags || []}
                             key={form.key('tags')}
-                            label={t('use-nodes-table-widget.tags')}
+                            label={t('common.field.tags')}
                             leftSection={<PiTagDuotone size="16px" />}
                             maxTags={10}
                             placeholder="Enter tags (comma, space, semicolon)"

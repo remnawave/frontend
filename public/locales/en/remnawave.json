@@ -102,6 +102,8 @@
       "svg-icon": "SVG icon",
       "system": "System",
       "tag": "Tag",
+      "tags": "Tags",
+      "untagged": "Untagged",
       "today": "Today",
       "total": "Total",
       "total-traffic": "Total traffic",
@@ -109,8 +111,7 @@
       "usage-stats": "Usage stats",
       "user-agent": "User agent",
       "user-status": "User status",
-      "username": "Username",
-      "without-tags": "Without tags"
+      "username": "Username"
     },
     "message": {
       "click-to-see-all": "Click to see all",
@@ -983,11 +984,6 @@
   "host-tags-input": {
     "tags-are-not-visible-to-end-users-tag-will-be-sent-with-raw-subscription-only": "Tags are not visible to end users. Tag will be sent with RAW subscription only."
   },
-  "rename-modal": {
-    "shared": {
-      "new-name": "New name"
-    }
-  },
   "internal-squad-accessible-nodes": {
     "modal": {
       "widget": {
@@ -1339,7 +1335,6 @@
     "xray-v": "Xray V.",
     "node-v": "Node V.",
     "provider": "Provider",
-    "tags": "Tags",
     "total-ram": "Total RAM",
     "cpu-model": "CPU model"
   },

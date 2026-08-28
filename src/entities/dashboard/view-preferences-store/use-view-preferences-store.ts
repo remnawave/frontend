@@ -22,7 +22,8 @@ const initialState: IState = {
     nodesViewMode: NODES_VIEW_MODE.CARDS,
     nodesActiveTag: null,
     hostsViewMode: HOSTS_VIEW_MODE.CARDS,
-    hostsActiveTag: null
+    hostsActiveTag: null,
+    sectionActiveTags: {}
 }
 
 type PersistedState = IState & { layoutStyle?: string }
@@ -52,6 +53,10 @@ export const useViewPreferencesStore = create<IActions & IState>()(
                 ...initialState,
                 actions: {
                     setNodesViewMode: (mode) => set({ nodesViewMode: mode }),
+                    setSectionActiveTag: (section, tag) =>
+                        set((state) => ({
+                            sectionActiveTags: { ...state.sectionActiveTags, [section]: tag }
+                        })),
                     setNodesActiveTag: (tag) => set({ nodesActiveTag: tag }),
                     setHostsViewMode: (mode) => set({ hostsViewMode: mode }),
                     setHostsActiveTag: (tag) => set({ hostsActiveTag: tag }),
@@ -73,7 +78,8 @@ export const useViewPreferencesStore = create<IActions & IState>()(
                 nodesViewMode: state.nodesViewMode,
                 nodesActiveTag: state.nodesActiveTag,
                 hostsViewMode: state.hostsViewMode,
-                hostsActiveTag: state.hostsActiveTag
+                hostsActiveTag: state.hostsActiveTag,
+                sectionActiveTags: state.sectionActiveTags
             }),
             migrate: migrateState,
             merge: (persistedState, currentState) => {
@@ -95,6 +101,8 @@ export const useViewPreferencesStoreActions = () =>
     useViewPreferencesStore((state) => state.actions)
 export const useHostsViewMode = () => useViewPreferencesStore((state) => state.hostsViewMode)
 export const useHostsActiveTag = () => useViewPreferencesStore((state) => state.hostsActiveTag)
+export const useSectionActiveTag = (section: string) =>
+    useViewPreferencesStore((state) => state.sectionActiveTags[section] ?? null)
 export const useExperimentalFeatures = () => useViewPreferencesStore((state) => state.experimental)
 export const useExperimentalFeature = (feature: keyof IExperimentalFeatures) =>
     useViewPreferencesStore((state) => state.experimental[feature])

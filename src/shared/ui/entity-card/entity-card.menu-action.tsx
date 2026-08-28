@@ -1,19 +1,15 @@
 import { ActionIcon, Menu } from '@mantine/core'
 import { useDisclosure, useId } from '@mantine/hooks'
-import clsx from 'clsx'
-import { TbChevronDown } from 'react-icons/tb'
+import { TbDots } from 'react-icons/tb'
 
-// import { useEntityCardContext } from './entity-card.context'
 import classes from './entity-card.module.css'
 
 interface MenuActionProps {
     children: React.ReactNode
-    color?: string
 }
 
-export function EntityCardMenuAction({ children, color = 'cyan' }: MenuActionProps) {
+export function EntityCardMenuAction({ children }: MenuActionProps) {
     const uuid = useId()
-    // const { menuOpened, setMenuOpened } = useEntityCardContext()
     const [opened, handlers] = useDisclosure()
 
     return (
@@ -24,21 +20,22 @@ export function EntityCardMenuAction({ children, color = 'cyan' }: MenuActionPro
             position="bottom-end"
             radius="md"
             trigger="click-hover"
+            openDelay={150}
             withinPortal
         >
             <Menu.Target>
-                <ActionIcon className={classes.menuControl} color={color} size="36" variant="light">
-                    <TbChevronDown
-                        className={clsx(classes.menuControlIcon, {
-                            [classes.menuControlIconOpen]: opened,
-                            [classes.menuControlIconClosed]: !opened
-                        })}
-                        size={20}
-                    />
+                <ActionIcon
+                    className={classes.menuControl}
+                    color={opened ? 'cyan' : 'gray'}
+                    onClick={(event) => event.stopPropagation()}
+                    size="30"
+                    variant={opened ? 'light' : 'subtle'}
+                >
+                    <TbDots size={18} />
                 </ActionIcon>
             </Menu.Target>
 
-            <Menu.Dropdown>{children}</Menu.Dropdown>
+            <Menu.Dropdown onClick={(event) => event.stopPropagation()}>{children}</Menu.Dropdown>
         </Menu>
     )
 }

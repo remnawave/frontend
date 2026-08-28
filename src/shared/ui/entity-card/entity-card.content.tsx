@@ -1,32 +1,34 @@
-import { Stack, Text } from '@mantine/core'
+import { Text } from '@mantine/core'
+import { ReactNode } from 'react'
 
 import classes from './entity-card.module.css'
+import { EntityCardTags } from './entity-card.tags'
 
-interface ContentProps {
-    children?: React.ReactNode
-    subtitle?: string
-    title: string
-}
+type MetaProps =
+    | { badges: ReactNode; subtitle?: never }
+    | { badges?: never; subtitle: ReactNode }
+    | { badges?: never; subtitle?: never }
 
-export function EntityCardContent({ children, title, subtitle }: ContentProps) {
+type ContentProps = { tags?: string[]; title: string } & MetaProps
+
+export function EntityCardContent(props: ContentProps) {
+    const { title, subtitle, badges, tags } = props
+
     return (
-        <Stack gap={6} style={{ flex: 1, minWidth: 0 }}>
-            <Text
-                className={classes.title}
-                ff="monospace"
-                fw={700}
-                lineClamp={1}
-                size="lg"
-                title={title}
-            >
+        <div className={classes.content}>
+            <Text className={classes.title} ff="monospace" fw={600} title={title}>
                 {title}
             </Text>
-            {subtitle && (
-                <Text c="dimmed" className={classes.subtitle} lineClamp={1} size="xs">
-                    {subtitle}
-                </Text>
+
+            {tags && tags.length > 0 && (
+                <div className={classes.tags}>
+                    <EntityCardTags tags={tags} />
+                </div>
             )}
-            {children}
-        </Stack>
+
+            <div className={classes.meta}>
+                {subtitle ? <span className={classes.subtitle}>{subtitle}</span> : badges}
+            </div>
+        </div>
     )
 }

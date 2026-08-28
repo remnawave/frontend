@@ -1,3 +1,4 @@
+export { EditTagsModalShared } from './edit-tags-modal/edit-tags.modal'
 export { RenameModalShared } from './rename-drawer/rename.drawer'
 export { HelpActionIconShared } from './help-drawer/help-action-icon.shared'
 export { HelpDrawerShared } from './help-drawer/help-drawer.shared'

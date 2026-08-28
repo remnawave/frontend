@@ -5,6 +5,7 @@ import {
     DeleteExternalSquadCommand,
     DeleteUsersFromExternalSquadCommand,
     ReorderExternalSquadCommand,
+    SetExternalSquadTagsCommand,
     UpdateExternalSquadCommand
 } from '@remnawave/backend-contract'
 
@@ -122,6 +123,23 @@ export const useReorderExternalSquads = createMutationHook({
         onError: (error) => {
             notifications.show({
                 title: `Reorder External Squads`,
+                message:
+                    error instanceof Error ? error.message : `Request failed with unknown error.`,
+                color: 'red'
+            })
+        }
+    }
+})
+
+export const useSetExternalSquadsTags = createMutationHook({
+    endpoint: SetExternalSquadTagsCommand.TSQ_url,
+    bodySchema: SetExternalSquadTagsCommand.RequestBodySchema,
+    responseSchema: SetExternalSquadTagsCommand.ResponseSchema,
+    requestMethod: SetExternalSquadTagsCommand.endpointDetails.REQUEST_METHOD,
+    rMutationParams: {
+        onError: (error) => {
+            notifications.show({
+                title: 'Update tags',
                 message:
                     error instanceof Error ? error.message : `Request failed with unknown error.`,
                 color: 'red'

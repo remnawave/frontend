@@ -226,7 +226,7 @@ export const BulkUpdateNodesModalContent = (props: IProps) => {
                             clearable
                             data={tags?.tags || []}
                             key={form.key('fields.tags')}
-                            label={t('use-nodes-table-widget.tags')}
+                            label={t('common.field.tags')}
                             leftSection={<PiTagDuotone size="16px" />}
                             maxTags={10}
                             placeholder="Enter tags (comma, space, semicolon)"

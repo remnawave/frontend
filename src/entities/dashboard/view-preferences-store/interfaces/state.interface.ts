@@ -12,4 +12,5 @@ export interface IState {
     hostsViewMode: HOSTS_VIEW_MODE
     nodesActiveTag: null | string
     nodesViewMode: NODES_VIEW_MODE
+    sectionActiveTags: Record<string, null | string>
 }

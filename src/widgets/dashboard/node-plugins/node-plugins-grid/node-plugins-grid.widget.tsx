@@ -1,6 +1,7 @@
 import { Badge, Center, Group, Stack, Text, ThemeIcon } from '@mantine/core'
 import { modals } from '@mantine/modals'
 import { GetNodesCommand, GetNodePluginsCommand } from '@remnawave/backend-contract'
+import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import {
     TbAlertTriangle,
@@ -18,9 +19,15 @@ import {
     useReorderNodePlugins
 } from '@shared/api/hooks'
 import { queryClient } from '@shared/api/query-client'
+import { filterByTag, TagFilterBar } from '@shared/ui'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { SectionCard } from '@shared/ui/section-card'
 import { VirtualizedDndGrid } from '@shared/ui/virtualized-dnd-grid'
+
+import {
+    useSectionActiveTag,
+    useViewPreferencesStoreActions
+} from '@entities/dashboard/view-preferences-store'
 
 import { ActivePluginsOnNodesModalShared } from '../active-on-nodes-modal/adtive-on-nodes.modal.shared'
 import { NodePluginCardWidget } from '../node-plugin-card/node-plugin-card.widget'
@@ -33,6 +40,10 @@ interface IProps {
 export function NodePluginsGridWidget(props: IProps) {
     const { t } = useTranslation()
     const { nodes, plugins } = props
+
+    const activeTag = useSectionActiveTag('nodePlugins')
+    const { setSectionActiveTag } = useViewPreferencesStoreActions()
+    const visibleItems = useMemo(() => filterByTag(plugins ?? [], activeTag), [plugins, activeTag])
 
     const { mutate: deleteNodePlugin } = useDeleteNodePlugin({
         mutationFns: {
@@ -203,8 +214,15 @@ export function NodePluginsGridWidget(props: IProps) {
 
     return (
         <VirtualizedDndGrid
-            enableDnd={true}
-            items={plugins}
+            enableDnd={activeTag === null}
+            header={
+                <TagFilterBar
+                    activeTag={activeTag}
+                    items={plugins}
+                    onChange={(tag) => setSectionActiveTag('nodePlugins', tag)}
+                />
+            }
+            items={visibleItems}
             key={`node-plugins-grid-widget`}
             onReorder={handleReorder}
             renderDragOverlay={(nodePlugin) => (
@@ -218,6 +236,7 @@ export function NodePluginsGridWidget(props: IProps) {
             )}
             renderItem={(nodePlugin) => (
                 <NodePluginCardWidget
+                    disableReordering={activeTag !== null}
                     handleCloneNodePlugin={handleCloneNodePlugin}
                     handleDeleteNodePlugin={handleDeleteNodePlugin}
                     handleShowActiveNodes={handleShowActiveNodes}

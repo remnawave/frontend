@@ -132,7 +132,7 @@ export const HostsTableWidget = memo((props: IProps) => {
     }
 
     return (
-        <Stack gap="md">
+        <Stack gap={0}>
             {hosts.length === 0 && <EmptyPageLayout icon={<TbListCheck size={32} />} />}
 
             <TagFilterBar activeTag={activeTag} items={hosts} onChange={setHostsActiveTag} />

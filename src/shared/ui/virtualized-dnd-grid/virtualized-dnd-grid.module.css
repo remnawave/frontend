@@ -1,6 +1,7 @@
 .list {
     display: flex;
     flex-wrap: wrap;
+    padding-inline: calc(var(--mantine-spacing-md) - 4px);
     container-type: inline-size;
 }
 
@@ -8,42 +9,12 @@
     box-sizing: border-box;
     flex: none;
     width: 100%;
-    padding: calc(var(--mantine-spacing-md) / 2);
-}
-
-@container (min-width: 800px) {
-    .item {
-        width: 50%;
-    }
+    padding: 4px;
 }
 
 @container (min-width: 1000px) {
     .item {
-        width: 33.3333%;
-    }
-}
-
-@container (min-width: 1200px) {
-    .item {
-        width: 25%;
-    }
-}
-
-@container (min-width: 1800px) {
-    .item {
-        width: 20%;
-    }
-}
-
-@container (min-width: 2400px) {
-    .item {
-        width: 16.6666%;
-    }
-}
-
-@container (min-width: 3000px) {
-    .item {
-        width: 14.2857%;
+        width: 50%;
     }
 }
 

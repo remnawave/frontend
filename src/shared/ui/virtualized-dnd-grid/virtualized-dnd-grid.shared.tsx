@@ -18,6 +18,7 @@ import { VirtualizedGridComponents } from './virtualized-grid-components'
 
 interface VirtualizedDndGridProps<T extends { uuid: string }> {
     enableDnd?: boolean
+    header?: ReactNode
     items: T[]
     onReorder?: (items: T[]) => void
     renderDragOverlay?: (item: T) => ReactNode
@@ -33,11 +34,13 @@ export function VirtualizedDndGrid<T extends { uuid: string }>(props: Virtualize
         renderDragOverlay,
         onReorder,
         useWindowScroll = true,
+        header,
         style,
         enableDnd = true
     } = props
 
     const [items, setItems] = useState(initialItems)
+    const [prevItems, setPrevItems] = useState(initialItems)
     const [activeId, setActiveId] = useState<null | string>(null)
     const itemsRef = useRef(items)
     const dragSnapshotRef = useRef<null | T[]>(null)
@@ -46,9 +49,10 @@ export function VirtualizedDndGrid<T extends { uuid: string }>(props: Virtualize
         itemsRef.current = items
     }, [items])
 
-    useEffect(() => {
+    if (prevItems !== initialItems && !activeId) {
+        setPrevItems(initialItems)
         setItems(initialItems)
-    }, [initialItems])
+    }
 
     const handleDragStart = (event: DragStartEvent) => {
         const sourceId = event.operation.source?.id
@@ -104,6 +108,8 @@ export function VirtualizedDndGrid<T extends { uuid: string }>(props: Virtualize
     if (!enableDnd) {
         return (
             <Box style={style}>
+                {header}
+
                 <VirtuosoGrid
                     components={VirtualizedGridComponents}
                     computeItemKey={computeItemKey}
@@ -123,6 +129,8 @@ export function VirtualizedDndGrid<T extends { uuid: string }>(props: Virtualize
             onDragStart={handleDragStart}
         >
             <Box style={style}>
+                {header}
+
                 <VirtuosoGrid
                     components={VirtualizedGridComponents}
                     computeItemKey={computeItemKey}

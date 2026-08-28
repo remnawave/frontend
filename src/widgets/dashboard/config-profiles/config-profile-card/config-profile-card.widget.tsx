@@ -5,7 +5,7 @@ import { GetConfigProfilesCommand } from '@remnawave/backend-contract'
 import { githubDarkTheme, JsonEditor } from 'json-edit-react'
 import { useTranslation } from 'react-i18next'
 import { PiCheck, PiCopy, PiCpu, PiPencil, PiTag, PiTrashDuotone } from 'react-icons/pi'
-import { TbCheck, TbCpu2, TbDownload, TbEdit, TbEye } from 'react-icons/tb'
+import { TbCheck, TbCpu2, TbDownload, TbEye, TbTags } from 'react-icons/tb'
 import { generatePath, useNavigate } from 'react-router'
 
 import { showModal } from '@shared/_modals/show-modal'
@@ -19,12 +19,18 @@ import { formatInt } from '@shared/utils/misc'
 
 interface IProps {
     configProfile: GetConfigProfilesCommand.Response['response']['configProfiles'][number]
+    disableReordering?: boolean
     handleDeleteConfigProfile: (configProfileUuid: string) => void
     isDragOverlay?: boolean
 }
 
 export function ConfigProfileCardWidget(props: IProps) {
-    const { configProfile, handleDeleteConfigProfile, isDragOverlay = false } = props
+    const {
+        configProfile,
+        disableReordering = false,
+        handleDeleteConfigProfile,
+        isDragOverlay = false
+    } = props
     const { t } = useTranslation()
 
     const navigate = useNavigate()
@@ -132,68 +138,72 @@ export function ConfigProfileCardWidget(props: IProps) {
 
     return (
         <WithDndSortable
-            dragHandlePosition="top-right"
+            disableReordering={disableReordering}
+            dragHandlePosition="inline-end"
             id={configProfile.uuid}
             isDragOverlay={isDragOverlay}
         >
-            <EntityCardShared.Root withTopAccent={isActive}>
+            <EntityCardShared.Root isActive={isActive} onClick={handleEditConfigProfile}>
                 <EntityCardShared.Header>
-                    <EntityCardShared.Icon highlight={isActive} onClick={handleEditConfigProfile}>
-                        <XrayLogo size={28} />
+                    <EntityCardShared.Icon highlight={isActive}>
+                        <XrayLogo size={20} />
                     </EntityCardShared.Icon>
-                    <EntityCardShared.Content title={configProfile.name}>
-                        <Group gap="xs" wrap="nowrap">
-                            <Tooltip label={t('common.field.inbounds')}>
-                                <Badge
-                                    color="blue"
-                                    leftSection={<PiTag size={12} />}
-                                    onClick={() => {
-                                        showModal('configProfiles_configProfileInboundsDrawer', {
-                                            uuid: configProfile.uuid
-                                        })
-                                    }}
-                                    size="lg"
-                                    style={{ cursor: 'pointer' }}
-                                    variant="soft"
-                                >
-                                    {formatInt(inboundsCount, {
-                                        thousandSeparator: ','
-                                    })}
-                                </Badge>
-                            </Tooltip>
+                    <EntityCardShared.Content
+                        tags={configProfile.tags}
+                        badges={
+                            <Group gap="xs" wrap="nowrap">
+                                <Tooltip label={t('common.field.inbounds')}>
+                                    <Badge
+                                        color="blue"
+                                        leftSection={<PiTag size={12} />}
+                                        onClick={(event) => {
+                                            event.stopPropagation()
+                                            showModal(
+                                                'configProfiles_configProfileInboundsDrawer',
+                                                {
+                                                    uuid: configProfile.uuid
+                                                }
+                                            )
+                                        }}
+                                        size="md"
+                                        style={{ cursor: 'pointer' }}
+                                        variant="soft"
+                                    >
+                                        {formatInt(inboundsCount, {
+                                            thousandSeparator: ','
+                                        })}
+                                    </Badge>
+                                </Tooltip>
 
-                            <Tooltip label={t('config-profiles-grid.widget.nodes')}>
-                                <Badge
-                                    color={isActive ? 'teal' : 'gray'}
-                                    leftSection={<PiCpu size={12} />}
-                                    onClick={() => {
-                                        showModal('configProfiles_activeNodesModal', {
-                                            nodes: configProfile.nodes,
-                                            profileName: configProfile.name
-                                        })
-                                    }}
-                                    size="lg"
-                                    style={{
-                                        cursor: 'pointer'
-                                    }}
-                                    variant="soft"
-                                >
-                                    {formatInt(nodesCount, {
-                                        thousandSeparator: ','
-                                    })}
-                                </Badge>
-                            </Tooltip>
-                        </Group>
-                    </EntityCardShared.Content>
+                                <Tooltip label={t('config-profiles-grid.widget.nodes')}>
+                                    <Badge
+                                        color={isActive ? 'teal' : 'gray'}
+                                        leftSection={<PiCpu size={12} />}
+                                        onClick={(event) => {
+                                            event.stopPropagation()
+                                            showModal('configProfiles_activeNodesModal', {
+                                                nodes: configProfile.nodes,
+                                                profileName: configProfile.name
+                                            })
+                                        }}
+                                        size="md"
+                                        style={{
+                                            cursor: 'pointer'
+                                        }}
+                                        variant="soft"
+                                    >
+                                        {formatInt(nodesCount, {
+                                            thousandSeparator: ','
+                                        })}
+                                    </Badge>
+                                </Tooltip>
+                            </Group>
+                        }
+                        title={configProfile.name}
+                    />
                 </EntityCardShared.Header>
 
                 <EntityCardShared.Actions>
-                    <EntityCardShared.Button
-                        leftSection={<TbEdit size={16} />}
-                        onClick={handleEditConfigProfile}
-                    >
-                        {t('config-profiles-grid.widget.xray-config')}
-                    </EntityCardShared.Button>
                     <EntityCardShared.Menu>
                         <Menu.Item
                             leftSection={<TbEye size={18} />}
@@ -291,6 +301,22 @@ export function ConfigProfileCardWidget(props: IProps) {
                             }}
                         >
                             {t('common.action.rename')}
+                        </Menu.Item>
+
+                        <Menu.Item
+                            leftSection={<TbTags size={18} />}
+
+                            onClick={() => {
+                                showModal('editTagsModal', {
+                                    editTagsFrom: 'configProfile',
+
+                                    tags: configProfile.tags,
+
+                                    uuid: configProfile.uuid
+                                })
+                            }}
+                        >
+                            {t('common.field.tags')}
                         </Menu.Item>
 
                         <Menu.Item

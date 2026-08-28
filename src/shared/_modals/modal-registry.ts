@@ -45,6 +45,7 @@ import {
     CreateModal,
     HelpDrawerShared,
     JsonEditorModal,
+    EditTagsModalShared,
     RenameModalShared
 } from './universal'
 import {
@@ -68,6 +69,7 @@ import {
 export const MODAL_REGISTRY = {
     helpDrawer: HelpDrawerShared,
     renameModal: RenameModalShared,
+    editTagsModal: EditTagsModalShared,
     createModal: CreateModal,
     jsonEditorModal: JsonEditorModal,
     base64EditorModal: Base64EditorModal,

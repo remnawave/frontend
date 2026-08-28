@@ -2,6 +2,7 @@ import { createQueryKeys } from '@lukemorales/query-key-factory'
 import {
     GetNodePluginCommand,
     GetNodePluginsCommand,
+    GetNodePluginsTagsCommand,
     GetSharedListCommand,
     GetSharedListsCommand,
     GetTorrentBlockerReportsCommand,
@@ -14,6 +15,9 @@ import { sToMs } from '@shared/utils/time-utils'
 import { createGetQueryHook, errorHandler } from '../../tsq-helpers'
 
 export const nodePluginsQueryKeys = createQueryKeys('nodePlugins', {
+    getNodePluginsTags: {
+        queryKey: null
+    },
     getNodePlugin: (route: GetNodePluginCommand.RequestParam) => ({
         queryKey: [route]
     }),
@@ -103,4 +107,15 @@ export const useGetSharedList = createGetQueryHook({
         staleTime: sToMs(5)
     },
     errorHandler: (error) => errorHandler(error, 'Get Shared List')
+})
+
+export const useGetNodePluginsTags = createGetQueryHook({
+    endpoint: GetNodePluginsTagsCommand.TSQ_url,
+    responseSchema: GetNodePluginsTagsCommand.ResponseSchema,
+    getQueryKey: () => nodePluginsQueryKeys.getNodePluginsTags.queryKey,
+    rQueryParams: {
+        refetchOnMount: true,
+        staleTime: sToMs(30)
+    },
+    errorHandler: (error) => errorHandler(error, 'Get NodePlugins Tags')
 })

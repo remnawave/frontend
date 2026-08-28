@@ -161,7 +161,7 @@ export const HOST_SELECT_FIELDS: HostSelectFieldConfig[] = [
         accessor: 'tags',
         getValues: (host) => (host.tags && host.tags.length > 0 ? host.tags : []),
         key: 'tags',
-        label: (t) => t('use-nodes-table-widget.tags'),
+        label: (t) => t('common.field.tags'),
         sortable: true
     },
     {

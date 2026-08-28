@@ -7,6 +7,7 @@ import {
     DeleteSharedListCommand,
     PluginExecutorCommand,
     ReorderNodePluginCommand,
+    SetNodePluginTagsCommand,
     SyncNodePluginCommand,
     SyncSharedListCommand,
     TruncateTorrentBlockerReportsCommand,
@@ -282,6 +283,23 @@ export const useSyncSharedList = createMutationHook({
         onError: (error) => {
             notifications.show({
                 title: `Sync Shared List`,
+                message:
+                    error instanceof Error ? error.message : `Request failed with unknown error.`,
+                color: 'red'
+            })
+        }
+    }
+})
+
+export const useSetNodePluginsTags = createMutationHook({
+    endpoint: SetNodePluginTagsCommand.TSQ_url,
+    bodySchema: SetNodePluginTagsCommand.RequestBodySchema,
+    responseSchema: SetNodePluginTagsCommand.ResponseSchema,
+    requestMethod: SetNodePluginTagsCommand.endpointDetails.REQUEST_METHOD,
+    rMutationParams: {
+        onError: (error) => {
+            notifications.show({
+                title: 'Update tags',
                 message:
                     error instanceof Error ? error.message : `Request failed with unknown error.`,
                 color: 'red'

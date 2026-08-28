@@ -339,13 +339,13 @@ export function getNodesTableColumns(
         {
             accessor: 'tags',
             sortable: true,
-            title: t('use-nodes-table-widget.tags'),
+            title: t('common.field.tags'),
             filter: (
                 <MultiSelect
                     clearable
                     comboboxProps={{ withinPortal: false }}
                     data={filters.availableTags}
-                    label={t('use-nodes-table-widget.tags')}
+                    label={t('common.field.tags')}
                     leftSection={<TbSearch size={16} />}
                     onChange={filters.setSelectedTags}
                     searchable
