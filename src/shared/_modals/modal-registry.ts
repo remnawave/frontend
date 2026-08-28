@@ -46,6 +46,7 @@ import {
     HelpDrawerShared,
     JsonEditorModal,
     EditTagsModalShared,
+    QuickLinksModalShared,
     RenameModalShared
 } from './universal'
 import {
@@ -73,6 +74,7 @@ export const MODAL_REGISTRY = {
     createModal: CreateModal,
     jsonEditorModal: JsonEditorModal,
     base64EditorModal: Base64EditorModal,
+    quickLinksModal: QuickLinksModalShared,
 
     users_viewUserModal: ViewUserModal,
     users_detailedUserInfoDrawer: DetailedUserInfoDrawer,

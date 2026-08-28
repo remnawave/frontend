@@ -21,7 +21,7 @@ export interface ISavedConnection {
     username: string
 }
 
-interface INodeOrder {
+export interface INodeOrder {
     countryCode?: null | string
     name: string
     uuid: string
@@ -86,7 +86,11 @@ export const SavedConnectionsList = (props: IListProps) => {
                     />
 
                     {onClose && (
-                        <CloseButton aria-label={t('common.action.close')} ml="auto" onClick={onClose} />
+                        <CloseButton
+                            aria-label={t('common.action.close')}
+                            ml="auto"
+                            onClick={onClose}
+                        />
                     )}
                 </Group>
             </SectionCard.Section>

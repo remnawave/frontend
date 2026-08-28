@@ -29,13 +29,13 @@ interface IActions {
 
 export type TSshTabsStore = ReturnType<typeof createSshTabsStore>
 
-export function createSshTabsStore(initial: GetNodeCommand.Response['response']) {
+export function createSshTabsStore(initial?: GetNodeCommand.Response['response']) {
     const handles = new Map<string, ISshSessionHandle>()
 
     return createStore<IActions & IState>()((set, get) => ({
-        activeId: initial.uuid,
+        activeId: initial?.uuid ?? '',
         statuses: {},
-        tabs: [{ id: initial.uuid, node: initial }],
+        tabs: initial ? [{ id: initial.uuid, node: initial }] : [],
 
         actions: {
             closeTab: (id) => {

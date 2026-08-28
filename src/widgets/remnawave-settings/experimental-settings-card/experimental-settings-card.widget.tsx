@@ -2,7 +2,7 @@ import { Checkbox, Group, Stack, Text, ThemeIcon, ThemeIconProps } from '@mantin
 import { TFunction } from 'i18next'
 import { ComponentType } from 'react'
 import { useTranslation } from 'react-i18next'
-import { TbFlask, TbLayoutSidebar, TbPlugConnected, TbTerminal2 } from 'react-icons/tb'
+import { TbFlask, TbLayoutSidebar, TbPlugConnected, TbRocket, TbTerminal2 } from 'react-icons/tb'
 
 import { useIsMobile } from '@shared/hooks'
 import { SettingsCardShared } from '@shared/ui/settings-card'
@@ -43,6 +43,13 @@ const getExperimentalFeatures = (t: TFunction): IExperimentalFeatureItem[] => [
         feature: 'sshTerminal',
         IconComponent: TbTerminal2,
         label: t('node-ssh.title')
+    },
+    {
+        color: 'teal',
+        desktopOnly: true,
+        feature: 'quickLauncher',
+        IconComponent: TbRocket,
+        label: t('constants.quick-launcher')
     }
 ]
 

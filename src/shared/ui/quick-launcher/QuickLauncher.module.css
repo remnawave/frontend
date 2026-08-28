@@ -1,0 +1,102 @@
+.window {
+    width: calc(var(--columns) * var(--cell) + 2px);
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: var(--mantine-color-dark-7);
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: var(--header-height);
+    padding: 0 4px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    color: var(--mantine-color-dark-2);
+    cursor: grab;
+    user-select: none;
+}
+
+.settings:active {
+    transform: none;
+}
+
+.header:active {
+    cursor: grabbing;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(var(--columns), var(--cell));
+    margin-right: -1px;
+    margin-bottom: -1px;
+}
+
+.item {
+    display: flex;
+    position: relative;
+    min-width: 0;
+    align-items: center;
+    justify-content: center;
+    padding: 13px 0;
+    border: 0;
+    border-right: 1px solid rgba(255, 255, 255, 0.06);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    background: transparent;
+    color: var(--mantine-color-dimmed);
+    cursor: pointer;
+    transition: background-color 120ms ease;
+}
+
+.item:hover,
+.item:focus-visible {
+    outline: none;
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--mantine-color-bright);
+}
+
+.empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 13px 0;
+    border: 0;
+    background: transparent;
+    color: var(--mantine-color-dimmed);
+    cursor: pointer;
+    transition: background-color 120ms ease;
+}
+
+.empty:hover,
+.empty:focus-visible {
+    outline: none;
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--mantine-color-bright);
+}
+
+.grabOverlay {
+    display: flex;
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--mantine-color-bright);
+    pointer-events: none;
+}
+
+.resizer {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2;
+    width: 8px;
+    cursor: ew-resize;
+}
+
+.resizer:hover {
+    background: rgba(255, 255, 255, 0.06);
+}

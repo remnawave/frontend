@@ -15,11 +15,11 @@ import type { ISshSnippet } from '@entities/ssh-vault'
 import { useSshVaultActions, useSshVaultStatus } from '@entities/ssh-vault'
 
 import {
-    buildSavedConnections,
-    ISavedConnection,
     SavedConnectionsList,
     SavedConnectionsOverlay
 } from './connections/saved-connections.overlay'
+import { useSavedConnections } from './connections/use-saved-connections'
+import { useSshProfiles } from './connections/use-ssh-profiles'
 import classes from './NodeSshTerminal.module.css'
 import { SshSessionTab } from './session/ssh-session.tab'
 import { SnippetsBar } from './snippets/snippets-bar'
@@ -41,13 +41,13 @@ import { defaultGeometry, IWindowGeometry, useWindowGeometry } from './window/us
 const SSH_TERMINAL_LOCK = 'rw-ssh-terminal'
 
 interface IProps {
-    node: GetNodeCommand.Response['response']
+    node?: GetNodeCommand.Response['response']
 }
 
 interface IWindowProps {
     geometry: IWindowGeometry
     modal: ReturnType<typeof useModal>
-    node: GetNodeCommand.Response['response']
+    node?: GetNodeCommand.Response['response']
     onGeometryChange: (geometry: IWindowGeometry) => void
 }
 
@@ -71,7 +71,6 @@ const SshTerminalWindow = (props: IWindowProps) => {
     const [isManagingVault, setIsManagingVault] = useState(false)
     const [snippets, setSnippets] = useState<ISshSnippet[]>([])
     const [isEditingSnippets, setIsEditingSnippets] = useState(false)
-    const [savedConnections, setSavedConnections] = useState<ISavedConnection[] | null>(null)
     const [isPickingConnection, setIsPickingConnection] = useState(false)
 
     const tabs = useSshTabs()
@@ -92,11 +91,13 @@ const SshTerminalWindow = (props: IWindowProps) => {
         })
     }
 
-    const addTabForNode = useEffectEvent(() => openTab(node))
+    const addTabForNode = useEffectEvent(() => {
+        if (node) openTab(node)
+    })
 
     useEffect(() => {
         addTabForNode()
-    }, [node.uuid])
+    }, [node?.uuid])
 
     const stopSessions = useEffectEvent(() => {
         for (const tab of tabs) tabActions.getHandle(tab.id)?.showSettings()
@@ -113,14 +114,14 @@ const SshTerminalWindow = (props: IWindowProps) => {
 
         tabActions.dropSessions()
         setIsManagingVault(false)
-        await openSavedConnections([], '')
+        await openSavedConnections([])
 
         return true
     }
 
     const destroyVault = () => {
         tabActions.dropSessions()
-        setSavedConnections([])
+        clearProfiles()
 
         void vaultActions.reset()
     }
@@ -128,7 +129,7 @@ const SshTerminalWindow = (props: IWindowProps) => {
     const closeTab = (id: string) => {
         tabActions.closeTab(id)
 
-        if (tabs.length === 1) void openSavedConnections([], '')
+        if (tabs.length === 1) void openSavedConnections([])
     }
 
     const registerShard = useCallback(
@@ -143,30 +144,24 @@ const SshTerminalWindow = (props: IWindowProps) => {
 
     const { data: nodes } = useGetNodes()
 
+    const {
+        clear: clearProfiles,
+        profiles,
+        refresh: refreshProfiles
+    } = useSshProfiles(vaultStatus === 'unlocked')
+    const savedConnections = useSavedConnections(nodes, profiles)
+
     const closeOverlays = () => {
         setIsPickingConnection(false)
         setIsEditingSnippets(false)
     }
 
-    const openSavedConnections = async (openTabs = tabs, active = activeId) => {
-        const [profiles, allStatuses] = [
-            await vaultActions.listProfiles(),
-            tabActions.getStatuses()
-        ]
-
+    const openSavedConnections = async (openTabs = tabs) => {
         closeOverlays()
         setIsManagingVault(false)
         setIsPickingConnection(openTabs.length > 0)
-        setSavedConnections(
-            buildSavedConnections(
-                nodes ?? [],
-                profiles,
-                active,
-                Object.fromEntries(
-                    openTabs.map((tab) => [tab.id, Boolean(allStatuses[tab.id]?.isConnected)])
-                )
-            )
-        )
+
+        await refreshProfiles()
     }
 
     const selectSavedConnection = (nodeUuid: string) => {
