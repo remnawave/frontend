@@ -102,6 +102,8 @@
       "svg-icon": "آیکون SVG",
       "system": "سیستم",
       "tag": "برچسب",
+      "tags": "Tags",
+      "untagged": "Untagged",
       "today": "امروز",
       "total": "مجموع",
       "total-traffic": "مصرف کل ترافیک",
@@ -109,8 +111,7 @@
       "usage-stats": "Usage stats",
       "user-agent": "عامل کاربر",
       "user-status": "وضعیت کاربر",
-      "username": "نام کاربر",
-      "without-tags": "Without tags"
+      "username": "نام کاربر"
     },
     "message": {
       "click-to-see-all": "برای دیدن همه کلیک کنید",
@@ -983,11 +984,6 @@
   "host-tags-input": {
     "tags-are-not-visible-to-end-users-tag-will-be-sent-with-raw-subscription-only": "برچسب‌ها برای کاربران قابل مشاهده نیستند و فقط با اشتراک خام ارسال خواهند شد."
   },
-  "rename-modal": {
-    "shared": {
-      "new-name": "نام جدید"
-    }
-  },
   "internal-squad-accessible-nodes": {
     "modal": {
       "widget": {
@@ -1339,7 +1335,6 @@
     "xray-v": "نسخه هسته Xray",
     "node-v": "نسخه نود",
     "provider": "ارائه‌دهنده",
-    "tags": "برچسب‌ها",
     "total-ram": "کل RAM",
     "cpu-model": "مدل پردازنده"
   },
