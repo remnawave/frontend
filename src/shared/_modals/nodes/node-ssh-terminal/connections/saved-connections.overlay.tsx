@@ -1,9 +1,18 @@
-import { Badge, Box, CloseButton, Group, Stack, Text, ThemeIcon } from '@mantine/core'
+import {
+    Badge,
+    Box,
+    CloseButton,
+    Group,
+    Stack,
+    Text,
+    ThemeIcon,
+    UnstyledButton
+} from '@mantine/core'
 import { useTranslation } from 'react-i18next'
 import { TbServer } from 'react-icons/tb'
 
 import { CountryFlag } from '@shared/ui/get-country-flag'
-import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
+import { Logo } from '@shared/ui/logo'
 import { SectionCard } from '@shared/ui/section-card'
 
 import classes from '../NodeSshTerminal.module.css'
@@ -17,6 +26,7 @@ export interface ISavedConnection {
     isOpen: boolean
     nodeName: string
     nodeUuid: string
+    nodeVersion: null | string
     port: number
     username: string
 }
@@ -25,6 +35,7 @@ export interface INodeOrder {
     countryCode?: null | string
     name: string
     uuid: string
+    versions?: null | { node: string }
     viewPosition: number
 }
 
@@ -57,6 +68,7 @@ export const buildSavedConnections = (
                 isOpen: node.uuid in openSessions,
                 nodeName: node.name,
                 nodeUuid: node.uuid,
+                nodeVersion: node.versions?.node ?? null,
                 port: profile.port,
                 username: profile.username
             }
@@ -73,76 +85,78 @@ export const SavedConnectionsList = (props: IListProps) => {
     const { connections, onClose, onSelect } = props
     const { t } = useTranslation()
 
-    return (
-        <SectionCard.Root>
-            <SectionCard.Section>
-                <Group gap="sm" wrap="nowrap">
-                    <BaseOverlayHeader
-                        iconColor="cyan"
-                        IconComponent={TbServer}
-                        iconVariant="soft"
-                        title={t('node-ssh.connections-title')}
-                        titleOrder={5}
-                    />
+    const renderBody = () => {
+        if (connections.length === 0) {
+            return (
+                <Stack align="center" gap={6} py="lg">
+                    <ThemeIcon color="gray" radius="md" size={38} variant="soft">
+                        <TbServer size={20} />
+                    </ThemeIcon>
+                    <Text c="dimmed" size="sm" ta="center">
+                        {t('node-ssh.connections-empty')}
+                    </Text>
+                </Stack>
+            )
+        }
 
-                    {onClose && (
-                        <CloseButton
-                            aria-label={t('common.action.close')}
-                            ml="auto"
-                            onClick={onClose}
-                        />
-                    )}
-                </Group>
-            </SectionCard.Section>
+        return (
+            <Box className={classes.connectionsGrid}>
+                {connections.map((connection) => (
+                    <UnstyledButton
+                        className={classes.connectionCard}
+                        data-current={connection.isCurrent || undefined}
+                        key={connection.nodeUuid}
+                        onClick={() => onSelect(connection.nodeUuid)}
+                    >
+                        <Group gap={6} wrap="nowrap">
+                            <Box
+                                className={classes.tabDot}
+                                data-absent={!connection.isOpen || undefined}
+                                data-connected={connection.isConnected || undefined}
+                            />
+                            <CountryFlag countryCode={connection.countryCode} />
+                            <Text fw={500} size="sm" truncate>
+                                {connection.nodeName}
+                            </Text>
+                            {connection.isCurrent && (
+                                <Badge color="cyan" ml="auto" size="xs" variant="soft">
+                                    {t('node-ssh.connections-current')}
+                                </Badge>
+                            )}
+                        </Group>
 
-            <SectionCard.Section>
-                {connections.length === 0 ? (
-                    <Stack align="center" gap={6} py="lg">
-                        <ThemeIcon color="gray" radius="md" size={38} variant="soft">
-                            <TbServer size={20} />
-                        </ThemeIcon>
-                        <Text c="dimmed" size="sm" ta="center">
-                            {t('node-ssh.connections-empty')}
+                        <Text c="dimmed" ff="monospace" size="xs" truncate>
+                            {connection.username}@{connection.host}:{connection.port}
                         </Text>
-                    </Stack>
-                ) : (
-                    <Box className={classes.snippetList}>
-                        <Stack gap={4}>
-                            {connections.map((connection) => (
-                                <Group
-                                    className={classes.snippetRow}
-                                    gap="xs"
-                                    key={connection.nodeUuid}
-                                    onClick={() => onSelect(connection.nodeUuid)}
-                                    wrap="nowrap"
-                                >
-                                    <Box flex={1} miw={0}>
-                                        <Group gap={6} wrap="nowrap">
-                                            <Box
-                                                className={classes.tabDot}
-                                                data-absent={!connection.isOpen || undefined}
-                                                data-connected={connection.isConnected || undefined}
-                                            />
-                                            <CountryFlag countryCode={connection.countryCode} />
-                                            <Text size="sm" truncate>
-                                                {connection.nodeName}
-                                            </Text>
-                                        </Group>
-                                        <Text c="dimmed" ff="monospace" size="xs" truncate>
-                                            {connection.username}@{connection.host}:
-                                            {connection.port}
-                                        </Text>
-                                    </Box>
-                                    {connection.isCurrent && (
-                                        <Badge color="cyan" size="xs" variant="soft">
-                                            {t('node-ssh.connections-current')}
-                                        </Badge>
-                                    )}
-                                </Group>
-                            ))}
-                        </Stack>
-                    </Box>
-                )}
+
+                        {connection.nodeVersion && (
+                            <Group c="dimmed" gap={4} wrap="nowrap">
+                                <Logo size={11} />
+                                <Text ff="monospace" size="xs" truncate>
+                                    {connection.nodeVersion}
+                                </Text>
+                            </Group>
+                        )}
+                    </UnstyledButton>
+                ))}
+            </Box>
+        )
+    }
+
+    return (
+        <SectionCard.Root allDividers={false} className={classes.connectionsCard} pos="relative">
+            {onClose && (
+                <CloseButton
+                    aria-label={t('common.action.close')}
+                    className={classes.connectionsClose}
+                    onClick={onClose}
+                    radius="xl"
+                    size="md"
+                />
+            )}
+
+            <SectionCard.Section className={classes.connectionsScroll}>
+                {renderBody()}
             </SectionCard.Section>
         </SectionCard.Root>
     )
@@ -158,7 +172,7 @@ export const SavedConnectionsOverlay = (props: IProps) => {
     const { connections, onClose, onSelect } = props
 
     return (
-        <TerminalOverlay onDismiss={onClose}>
+        <TerminalOverlay fitHeight maxWidth={860} onDismiss={onClose}>
             <SavedConnectionsList connections={connections} onClose={onClose} onSelect={onSelect} />
         </TerminalOverlay>
     )

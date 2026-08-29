@@ -5,12 +5,13 @@ import type {
     TStage
 } from '../ssh-terminal.types'
 
-import { Box, Center, Loader } from '@mantine/core'
+import { Box, Button, Center, Loader } from '@mantine/core'
 import { GetNodeCommand } from '@remnawave/backend-contract'
 import { Terminal } from '@xterm/xterm'
-import { AnimatePresence } from 'motion/react'
+import { AnimatePresence, motion } from 'motion/react'
 import { useCallback, useEffect, useEffectEvent, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { TbPlugConnected } from 'react-icons/tb'
 
 import { getAuthorizationToken, getBackendDomain } from '@shared/api'
 import { useCreateSshTicket } from '@shared/api/hooks'
@@ -324,6 +325,27 @@ export const SshSessionTab = (props: IProps) => {
     return (
         <Box className={classes.sessionHost} display={isHidden ? 'none' : undefined}>
             {renderScreen()}
+
+            <AnimatePresence>
+                {stage === 'session' && statusText && (
+                    <motion.div
+                        animate={{ opacity: 1, y: 0 }}
+                        className={classes.reconnectBar}
+                        exit={{ opacity: 0, y: 8 }}
+                        initial={{ opacity: 0, y: 8 }}
+                        transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
+                    >
+                        <Button
+                            leftSection={<TbPlugConnected size={16} />}
+                            onClick={() => void connect(target)}
+                            size="xs"
+                            variant="soft"
+                        >
+                            {t('node-ssh.retry')}
+                        </Button>
+                    </motion.div>
+                )}
+            </AnimatePresence>
 
             <AnimatePresence>
                 {isImportingKey && (

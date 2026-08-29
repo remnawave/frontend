@@ -150,17 +150,90 @@
 
 .startScreen {
     display: flex;
+    flex-direction: column;
     flex: 1 1 auto;
     min-height: 0;
-    align-items: center;
     justify-content: center;
     padding: var(--mantine-spacing-md);
-    overflow-y: auto;
+    overflow: hidden;
 }
 
 .startScreen > * {
     width: 100%;
-    max-width: 520px;
+    max-height: 100%;
+}
+
+.connectionsCard {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    overflow: visible;
+}
+
+.connectionsCard > * {
+    flex: 1 1 auto;
+    min-height: 0;
+}
+
+.connectionsScroll {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    overscroll-behavior: contain;
+}
+
+.connectionsClose {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    z-index: 2;
+    border: 1px solid var(--mantine-color-dark-4);
+    background-color: var(--mantine-color-dark-6);
+    transition:
+        background-color 150ms ease,
+        border-color 150ms ease;
+}
+
+.connectionsClose:hover {
+    border-color: var(--mantine-color-dark-3);
+    background-color: var(--mantine-color-dark-5);
+}
+
+.connectionsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 8px;
+    align-content: start;
+}
+
+.connectionCard {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    padding: 9px 11px;
+    border: 1px solid var(--mantine-color-dark-5);
+    border-radius: var(--mantine-radius-md);
+    background-color: color-mix(in srgb, var(--mantine-color-dark-6) 55%, transparent);
+    transition:
+        background-color 150ms ease,
+        border-color 150ms ease;
+}
+
+.connectionCard:hover {
+    border-color: var(--mantine-color-dark-3);
+    background-color: var(--mantine-color-dark-6);
+}
+
+.connectionCard:focus-visible {
+    outline: 2px solid var(--mantine-primary-color-filled);
+    outline-offset: 1px;
+}
+
+.connectionCard[data-current] {
+    border-color: color-mix(in srgb, var(--mantine-color-cyan-5) 45%, transparent);
+    background-color: color-mix(in srgb, var(--mantine-color-cyan-9) 20%, transparent);
 }
 
 .sessionHost {
@@ -179,10 +252,27 @@
     min-height: 0;
     padding: var(--mantine-spacing-lg);
     overflow-y: auto;
+    overscroll-behavior: contain;
 }
 
 .screen > * {
+    flex: 0 0 auto;
     margin-block: auto;
+}
+
+.reconnectBar {
+    position: absolute;
+    right: 0;
+    bottom: 14px;
+    left: 0;
+    z-index: 3;
+    display: flex;
+    justify-content: center;
+    pointer-events: none;
+}
+
+.reconnectBar > * {
+    pointer-events: auto;
 }
 
 .statusBar {
@@ -211,12 +301,17 @@
     inset: 0;
     z-index: 2;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
     padding: var(--mantine-spacing-md);
     background-color: color-mix(in srgb, var(--mantine-color-dark-7) 88%, transparent);
     backdrop-filter: blur(8px);
     overflow-y: auto;
+    overscroll-behavior: contain;
+}
+
+.overlay > * {
+    margin-block: auto;
 }
 
 .resizeHandle {
@@ -434,6 +529,7 @@
     overflow-x: hidden;
     overflow-y: auto;
     scrollbar-width: thin;
+    overscroll-behavior: contain;
 }
 
 .snippetRow {

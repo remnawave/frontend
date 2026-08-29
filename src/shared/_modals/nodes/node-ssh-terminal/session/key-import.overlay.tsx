@@ -64,16 +64,16 @@ export const KeyImportOverlay = (props: IProps) => {
                             autosize
                             error={error}
                             label={t('node-ssh.key-import-label')}
-                            maxRows={10}
-                            minRows={6}
+                            maxRows={8}
+                            minRows={8}
+                            ff="monospace"
                             onChange={(event) => setPrivateKey(event.currentTarget.value)}
                             placeholder="-----BEGIN OPENSSH PRIVATE KEY-----"
                             autoComplete="off"
                             spellCheck={false}
                             styles={{
                                 input: {
-                                    fontFamily: 'var(--mantine-font-family-monospace)',
-                                    fontSize: 11
+                                    fontSize: 10
                                 }
                             }}
                             value={privateKey}

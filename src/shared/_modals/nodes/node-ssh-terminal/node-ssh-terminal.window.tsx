@@ -1,5 +1,6 @@
 import NiceModal, { useModal } from '@ebay/nice-modal-react'
 import { ActionIcon, Box, FloatingWindow, Group, Text, Tooltip } from '@mantine/core'
+import { useHotkeys } from '@mantine/hooks'
 import { notifications } from '@mantine/notifications'
 import { GetNodeCommand } from '@remnawave/backend-contract'
 import { AnimatePresence } from 'motion/react'
@@ -10,6 +11,7 @@ import { TbServer, TbSettings, TbShieldLock, TbTerminal2 } from 'react-icons/tb'
 import { useGetNodes } from '@shared/api/hooks'
 import { useSingleInstanceLock } from '@shared/hooks/use-single-instance-lock'
 import { registerScrollLockShard } from '@shared/utils/scroll-lock-shards'
+import { sToMs } from '@shared/utils/time-utils'
 
 import type { ISshSnippet } from '@entities/ssh-vault'
 import { useSshVaultActions, useSshVaultStatus } from '@entities/ssh-vault'
@@ -20,6 +22,14 @@ import {
 } from './connections/saved-connections.overlay'
 import { useSavedConnections } from './connections/use-saved-connections'
 import { useSshProfiles } from './connections/use-ssh-profiles'
+import {
+    CLOSE_TAB_HOTKEY,
+    HOTKEY_OPTIONS,
+    ZOOM_IN_HOTKEY,
+    ZOOM_IN_SHIFT_HOTKEY,
+    ZOOM_OUT_HOTKEY,
+    ZOOM_RESET_HOTKEY
+} from './hotkeys'
 import classes from './NodeSshTerminal.module.css'
 import { SshSessionTab } from './session/ssh-session.tab'
 import { SnippetsBar } from './snippets/snippets-bar'
@@ -34,6 +44,7 @@ import {
     useSshTabs,
     useSshTabsActions
 } from './tabs/ssh-tabs.store'
+import { useTerminalFontActions } from './terminal-font.store'
 import { useIsVaultGateOpen, VaultGate } from './vault/vault-gate'
 import { TrafficLights } from './window/traffic-lights'
 import { defaultGeometry, IWindowGeometry, useWindowGeometry } from './window/use-window-geometry'
@@ -78,6 +89,7 @@ const SshTerminalWindow = (props: IWindowProps) => {
     const activeId = useSshActiveTabId()
     const status = useSshActiveStatus()
     const tabActions = useSshTabsActions()
+    const fontActions = useTerminalFontActions()
     const isVaultGateOpen = useIsVaultGateOpen(instanceLock, isManagingVault)
 
     const visibleSnippets = vaultStatus === 'unlocked' ? snippets : []
@@ -136,6 +148,34 @@ const SshTerminalWindow = (props: IWindowProps) => {
         if (tabs.length === 1) void openSavedConnections([])
     }
 
+    const isWindowFocused = () => Boolean(document.activeElement?.closest('[data-ssh-window]'))
+
+    const zoom = (step: number) => {
+        if (isMinimized || !isWindowFocused()) return
+
+        if (step === 0) fontActions.resetZoom()
+        else fontActions.zoom(step)
+    }
+
+    useHotkeys(
+        [
+            [
+                CLOSE_TAB_HOTKEY,
+                () => {
+                    if (isMinimized || isVaultGateOpen || !activeId) return
+
+                    closeTab(activeId)
+                },
+                HOTKEY_OPTIONS
+            ],
+            [ZOOM_IN_HOTKEY, () => zoom(1), HOTKEY_OPTIONS],
+            [ZOOM_IN_SHIFT_HOTKEY, () => zoom(1), HOTKEY_OPTIONS],
+            [ZOOM_OUT_HOTKEY, () => zoom(-1), HOTKEY_OPTIONS],
+            [ZOOM_RESET_HOTKEY, () => zoom(0), HOTKEY_OPTIONS]
+        ],
+        []
+    )
+
     const registerShard = useCallback(
         (node: HTMLDivElement | null) => (node ? registerScrollLockShard(node) : undefined),
         []
@@ -146,7 +186,11 @@ const SshTerminalWindow = (props: IWindowProps) => {
         modal.remove()
     }, [modal])
 
-    const { data: nodes } = useGetNodes()
+    const { data: nodes } = useGetNodes({
+        rQueryParams: {
+            refetchInterval: sToMs(20)
+        }
+    })
 
     const {
         clear: clearProfiles,
@@ -200,6 +244,7 @@ const SshTerminalWindow = (props: IWindowProps) => {
     return (
         <FloatingWindow
             className={classes.window}
+            data-ssh-window
             ref={registerShard}
             {...windowProps}
             dragHandleSelector={`.${classes.header}`}

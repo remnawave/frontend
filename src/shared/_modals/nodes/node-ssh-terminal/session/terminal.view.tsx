@@ -8,7 +8,9 @@ import { useEffect, useEffectEvent, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import '@xterm/xterm/css/xterm.css'
 
+import { isWindowHotkey } from '../hotkeys'
 import classes from '../NodeSshTerminal.module.css'
+import { useTerminalFontSize } from '../terminal-font.store'
 
 const TERMINAL_FONT = 'Fira Mono'
 const FALLBACK_STACK = 'ui-monospace, SFMono-Regular, Menlo, monospace'
@@ -50,12 +52,15 @@ async function loadTerminalFont(family: string): Promise<void> {
     await Promise.all(faces.map((face) => face.load()))
 }
 
-function createTerminal(fontFamily: string): { fit: () => void; terminal: Terminal } {
+function createTerminal(
+    fontFamily: string,
+    fontSize: number
+): { fit: () => void; terminal: Terminal } {
     const terminal = new Terminal({
         allowProposedApi: true,
         cursorBlink: true,
         fontFamily,
-        fontSize: 13,
+        fontSize,
         lineHeight: 1.2,
         scrollback: 10_000,
         theme: THEME
@@ -119,14 +124,28 @@ export const TerminalView = (props: IProps) => {
         })
     )
 
+    const fontSize = useTerminalFontSize()
+
     const containerRef = useRef<HTMLDivElement | null>(null)
     const fitRef = useRef<(() => void) | null>(null)
+    const terminalRef = useRef<null | Terminal>(null)
 
-    const shouldFit = useEffectEvent(() => !isPaused)
+    const isVisible = useEffectEvent(() => !isPaused)
+    const currentFontSize = useEffectEvent(() => fontSize)
 
     useEffect(() => {
-        if (!isPaused) fitRef.current?.()
+        if (isPaused) return
+
+        fitRef.current?.()
+        terminalRef.current?.focus()
     }, [isPaused])
+
+    useEffect(() => {
+        if (!terminalRef.current) return
+
+        terminalRef.current.options.fontSize = fontSize
+        fitRef.current?.()
+    }, [fontSize])
 
     const handleInput = useEffectEvent((data: string) => onInput(data))
     const handleResize = useEffectEvent((cols: number, rows: number) => onResize(cols, rows))
@@ -144,7 +163,13 @@ export const TerminalView = (props: IProps) => {
         const swallowEscape = (event: KeyboardEvent) => {
             if (event.key === 'Escape') event.stopPropagation()
         }
+
+        const stopScrollChaining = (event: WheelEvent) => {
+            if (!event.ctrlKey) event.preventDefault()
+        }
+
         container.addEventListener('keydown', swallowEscape)
+        container.addEventListener('wheel', stopScrollChaining, { passive: false })
 
         void (async () => {
             const fontFamily = await loadTerminalFont(TERMINAL_FONT).then(
@@ -154,9 +179,10 @@ export const TerminalView = (props: IProps) => {
 
             if (disposed) return
 
-            const created = createTerminal(fontFamily)
+            const created = createTerminal(fontFamily, currentFontSize())
             terminal = created.terminal
 
+            terminal.attachCustomKeyEventHandler((event) => !isWindowHotkey(event))
             terminal.onData((data) => handleInput(data))
             terminal.onResize(({ cols, rows }) => handleResize(cols, rows))
 
@@ -165,14 +191,15 @@ export const TerminalView = (props: IProps) => {
 
             frame = requestAnimationFrame(() => {
                 created.fit()
-                created.terminal.focus()
+                if (isVisible()) created.terminal.focus()
                 handleTerminal(created.terminal)
             })
 
             fitRef.current = created.fit
+            terminalRef.current = created.terminal
 
             observer = new ResizeObserver(() => {
-                if (shouldFit()) created.fit()
+                if (isVisible()) created.fit()
             })
             observer.observe(container)
         })()
@@ -180,8 +207,10 @@ export const TerminalView = (props: IProps) => {
         return () => {
             disposed = true
             container.removeEventListener('keydown', swallowEscape)
+            container.removeEventListener('wheel', stopScrollChaining)
             cancelAnimationFrame(frame)
             fitRef.current = null
+            terminalRef.current = null
             observer?.disconnect()
             if (terminal) handleTerminal(null)
             terminal?.dispose()
