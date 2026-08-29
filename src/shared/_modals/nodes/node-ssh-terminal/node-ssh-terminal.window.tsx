@@ -64,6 +64,7 @@ const SshTerminalWindow = (props: IWindowProps) => {
         isMaximized,
         isMinimized,
         onHeaderDoubleClick,
+        restore,
         toggleMaximized,
         toggleMinimized,
         windowProps
@@ -92,12 +93,15 @@ const SshTerminalWindow = (props: IWindowProps) => {
     }
 
     const addTabForNode = useEffectEvent(() => {
-        if (node) openTab(node)
+        if (!node) return
+
+        restore()
+        openTab(node)
     })
 
     useEffect(() => {
         addTabForNode()
-    }, [node?.uuid])
+    }, [modal.args])
 
     const stopSessions = useEffectEvent(() => {
         for (const tab of tabs) tabActions.getHandle(tab.id)?.showSettings()

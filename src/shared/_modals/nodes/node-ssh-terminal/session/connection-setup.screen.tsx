@@ -59,7 +59,11 @@ export const ConnectionSetupScreen = (props: IProps) => {
         }
     }
 
-    const ipOptions = useMemo(() => nodeIps.map((item) => item.ip), [nodeIps])
+    const ipOptions = useMemo(
+        () => Array.from(new Set(nodeIps.map((item) => item.ip).filter(Boolean))),
+        [nodeIps]
+    )
+
     const ipStatuses = useMemo(
         () => new Map(nodeIps.map((item) => [item.ip, item.status])),
         [nodeIps]

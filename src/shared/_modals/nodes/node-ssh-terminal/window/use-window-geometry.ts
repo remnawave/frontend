@@ -52,17 +52,10 @@ export function useWindowGeometry(
         onGeometryChange(pendingRef.current)
     }
 
-    const toggleMinimized = () => {
-        const next = !isMinimized
+    const restore = () => {
+        if (!isMinimized) return
 
-        setIsMinimized(next)
-
-        if (next) {
-            setIsMaximized(false)
-            commit({ isMaximized: false })
-
-            return
-        }
+        setIsMinimized(false)
 
         const { height, left, top, width } = pendingRef.current
         const nextLeft = Math.max(0, Math.min(left, window.innerWidth - width - CONSTRAIN_OFFSET))
@@ -72,6 +65,18 @@ export function useWindowGeometry(
 
         setPositionRef.current?.({ left: nextLeft, top: nextTop })
         commit({ left: nextLeft, top: nextTop })
+    }
+
+    const toggleMinimized = () => {
+        if (isMinimized) {
+            restore()
+
+            return
+        }
+
+        setIsMinimized(true)
+        setIsMaximized(false)
+        commit({ isMaximized: false })
     }
 
     const toggleMaximized = () => {
@@ -85,6 +90,7 @@ export function useWindowGeometry(
     return {
         isMaximized,
         isMinimized,
+        restore,
         toggleMaximized,
         toggleMinimized,
 
