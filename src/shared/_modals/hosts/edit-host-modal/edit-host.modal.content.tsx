@@ -2,7 +2,9 @@ import { useForm, schemaResolver } from '@mantine/form'
 import { UpdateHostCommand } from '@remnawave/backend-contract'
 import { useEffect } from 'react'
 
+import { queryClient } from '@shared/api'
 import {
+    QueryKeys,
     useGetConfigProfiles,
     useGetHostTags,
     useGetInternalSquads,
@@ -42,7 +44,11 @@ export const EditHostDrawerContent = (props: IProps) => {
 
     const { mutate: updateHost, isPending: isUpdateHostPending } = useUpdateHost({
         mutationFns: {
-            onSuccess: async () => {
+            onSuccess: (data) => {
+                queryClient.setQueryData(
+                    QueryKeys.hosts.getHost({ uuid: host.uuid }).queryKey,
+                    data
+                )
                 onClose()
             }
         }
