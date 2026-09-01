@@ -802,7 +802,7 @@
     "widget": {
       "loading-computed-config-profile": "正在加载配置文件……",
       "computed-config-profile-loaded-successfully": "已成功加载配置文件",
-      "the-computed-config-profile-description": "显示所有代码块合并后的最终配置文件。",
+      "the-computed-config-profile-description": "显示所有片段合并后的最终配置文件。",
       "view-computed": "查看视图"
     }
   },
@@ -1050,16 +1050,16 @@
   "snippets": {
     "drawer": {
       "widget": {
-        "snippet-cannot-be-empty": "代码块不能为空",
-        "snippet-cannot-contain-empty-objects": "代码块不能包含空对象",
+        "snippet-cannot-be-empty": "片段不能为空",
+        "snippet-cannot-contain-empty-objects": "片段不能包含空对象",
         "more-items": "更多项目...",
         "create-snippet": "创建片段",
         "snippet-name": "片段名称",
-        "enter-snippet-name-cannot-be-changed-later": "输入代码块名称 (稍后不能更改)",
-        "snippet-is-valid": "代码块有效",
+        "enter-snippet-name-cannot-be-changed-later": "输入片段名称 (稍后不能更改)",
+        "snippet-is-valid": "片段有效",
         "edit-snippet": "编辑片段",
-        "snippets": "代码块",
-        "new-snippet": "新建代码块"
+        "snippets": "片段",
+        "new-snippet": "新建片段"
       }
     }
   },
@@ -1459,7 +1459,7 @@
   },
   "statistic-sparkline-card": {
     "widget": {
-      "peak": "峰值"
+      "peak": "最高单日使用量"
     }
   },
   "base-settings-block": {
