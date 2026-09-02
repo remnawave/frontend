@@ -27,7 +27,7 @@ export const UpdateBillingDateModal = NiceModal.create((props: IProps) => {
     const { modalProps, hide } = useNiceMantineModal({ modal })
 
     const [selectedDate, setSelectedDate] = useState<Date | null>(null)
-    const { t } = useTranslation()
+    const { t, i18n } = useTranslation()
 
     const { mutate: updateNode, isPending: isLoading } = useUpdateInfraBillingNode({
         mutationFns: {
@@ -88,7 +88,9 @@ export const UpdateBillingDateModal = NiceModal.create((props: IProps) => {
                             label={t('update-billing-date-modal.widget.current-date')}
                             mb="xs"
                             readOnly
-                            value={dayjs(new Date(nextBillingAt)).format('D MMMM YYYY')}
+                            value={dayjs(new Date(nextBillingAt))
+                                .locale(i18n.language)
+                                .format('D MMMM YYYY')}
                             w="100%"
                         />
                     )}
@@ -97,12 +99,13 @@ export const UpdateBillingDateModal = NiceModal.create((props: IProps) => {
                         label={t('update-billing-date-modal.widget.new-date')}
                         mb="xs"
                         readOnly
-                        value={dayjs(selectedDate).format('D MMMM YYYY')}
+                        value={dayjs(selectedDate).locale(i18n.language).format('D MMMM YYYY')}
                         w="100%"
                     />
                     <DatePicker
                         classNames={styles}
                         defaultDate={selectedDate ?? undefined}
+                        locale={i18n.language}
                         maxDate={dayjs().add(2, 'years').toDate()}
                         onChange={handleDateChange}
                         presets={[
