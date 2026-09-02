@@ -79,15 +79,7 @@ export const NodeTrackingAndBillingCard = <
                         <SelectInfraProviderShared
                             selectedInfraProviderUuid={form.getValues().providerUuid}
                             setSelectedInfraProviderUuid={(providerUuid) => {
-                                form.setValues({
-                                    providerUuid
-                                } as Partial<T>)
-                                form.setTouched({
-                                    providerUuid: true
-                                })
-                                form.setDirty({
-                                    providerUuid: true
-                                })
+                                form.setFieldValue('providerUuid', providerUuid as never)
                             }}
                         />
 
