@@ -18,6 +18,7 @@ export interface IProps<
 > {
     configProfiles: GetConfigProfilesCommand.Response['response']['configProfiles']
     form: UseFormReturnType<T>
+    handleCloneHost?: () => void
     handleSubmit: () => void
     hostTags: GetHostsTagsCommand.Response['response']['tags']
     internalSquads: GetInternalSquadsCommand.Response['response']['internalSquads']
