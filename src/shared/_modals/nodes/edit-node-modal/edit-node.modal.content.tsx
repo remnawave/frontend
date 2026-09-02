@@ -116,16 +116,21 @@ export const EditNodeByUuidModalContent = (props: IProps) => {
             return
         }
 
+        const changedValues = Object.fromEntries(
+            Object.entries(values).filter(([field]) => form.isDirty(field))
+        ) as Partial<UpdateNodeCommand.RequestBody>
+
         updateNode({
             variables: {
-                ...values,
-                name: values.name?.trim(),
-                address: values.address?.trim(),
-                trafficLimitBytes: values.trafficLimitBytes,
-                configProfile: {
-                    activeConfigProfileUuid: values.configProfile?.activeConfigProfileUuid ?? '',
-                    activeInbounds: values.configProfile?.activeInbounds ?? []
-                }
+                ...changedValues,
+                uuid: fetchedNode.uuid,
+                ...(changedValues.configProfile !== undefined && {
+                    configProfile: {
+                        activeConfigProfileUuid:
+                            changedValues.configProfile.activeConfigProfileUuid,
+                        activeInbounds: changedValues.configProfile.activeInbounds ?? []
+                    }
+                })
             }
         })
     })
