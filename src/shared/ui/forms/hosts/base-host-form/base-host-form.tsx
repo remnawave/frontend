@@ -1,3 +1,4 @@
+import { CloneHostFeature } from '@features/ui/dashboard/hosts/clone-host'
 import { DeleteHostFeature } from '@features/ui/dashboard/hosts/delete-host'
 import { HostSelectInboundFeature } from '@features/ui/dashboard/hosts/host-select-inbound/host-select-inbound.feature'
 import {
@@ -357,7 +358,12 @@ export const BaseHostForm = <
                         </Button>
                     </Group>
 
-                    {!!hostUuid && <DeleteHostFeature hostUuid={hostUuid} />}
+                    {!!hostUuid && (
+                        <Group gap="xs">
+                            <CloneHostFeature hostUuid={hostUuid} />
+                            <DeleteHostFeature hostUuid={hostUuid} />
+                        </Group>
+                    )}
                 </Group>
             </DrawerFooter>
         </form>
