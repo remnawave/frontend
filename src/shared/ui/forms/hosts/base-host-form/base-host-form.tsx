@@ -8,7 +8,8 @@ import {
     NumberInput,
     Stack,
     Text,
-    TextInput
+    TextInput,
+    Tooltip
 } from '@mantine/core'
 import {
     CreateHostCommand,
@@ -19,7 +20,7 @@ import { INTERNAL_SQUADS_MODE, SECURITY_LAYERS } from '@remnawave/backend-contra
 import { useCallback, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { HiQuestionMarkCircle } from 'react-icons/hi'
-import { PiFloppyDiskDuotone } from 'react-icons/pi'
+import { PiCopyDuotone, PiFloppyDiskDuotone } from 'react-icons/pi'
 
 import { DrawerFooter } from '@shared/ui/drawer-footer'
 import { TemplateInfoPopoverShared } from '@shared/ui/popovers'
@@ -46,6 +47,7 @@ export const BaseHostForm = <
 ) => {
     const {
         form,
+        handleCloneHost,
         handleSubmit,
         configProfiles,
         isSubmitting,
@@ -357,7 +359,22 @@ export const BaseHostForm = <
                         </Button>
                     </Group>
 
-                    {!!hostUuid && <DeleteHostFeature hostUuid={hostUuid} />}
+                    <Group gap="xs">
+                        {handleCloneHost && (
+                            <Tooltip label={t('common.action.clone')}>
+                                <ActionIcon
+                                    color="blue"
+                                    loading={isSubmitting}
+                                    onClick={handleCloneHost}
+                                    size="xl"
+                                    variant="soft"
+                                >
+                                    <PiCopyDuotone size="24px" />
+                                </ActionIcon>
+                            </Tooltip>
+                        )}
+                        {!!hostUuid && <DeleteHostFeature hostUuid={hostUuid} />}
+                    </Group>
                 </Group>
             </DrawerFooter>
         </form>

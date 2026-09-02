@@ -1,20 +1,25 @@
 import { useForm, schemaResolver } from '@mantine/form'
+import { notifications } from '@mantine/notifications'
 import { UpdateHostCommand } from '@remnawave/backend-contract'
 import { useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
 
 import { queryClient } from '@shared/api'
 import {
     QueryKeys,
+    useCreateHost,
     useGetConfigProfiles,
+    useGetHosts,
     useGetHostTags,
     useGetInternalSquads,
     useGetNodes,
     useGetSubscriptionTemplates,
+    useReorderHosts,
     useUpdateHost
 } from '@shared/api/hooks'
 import { BaseHostForm } from '@shared/ui/forms/hosts/base-host-form'
 import { LoaderModalShared } from '@shared/ui/loader-modal'
-import { parseJsonField, stringifyJsonField } from '@shared/utils/misc'
+import { cloneString, parseJsonField, stringifyJsonField } from '@shared/utils/misc'
 
 interface IProps {
     host: UpdateHostCommand.Response['response']
@@ -23,12 +28,14 @@ interface IProps {
 
 export const EditHostDrawerContent = (props: IProps) => {
     const { host, onClose } = props
+    const { t } = useTranslation()
 
     const { data: configProfiles } = useGetConfigProfiles()
     const { data: nodes } = useGetNodes()
     const { data: templates } = useGetSubscriptionTemplates()
     const { data: internalSquads } = useGetInternalSquads()
     const { data: hostTags } = useGetHostTags()
+    const { data: hosts } = useGetHosts()
 
     const form = useForm<UpdateHostCommand.RequestBody>({
         name: 'edit-host-form',
@@ -113,6 +120,47 @@ export const EditHostDrawerContent = (props: IProps) => {
         }
     })
 
+    const { mutateAsync: createHost, isPending: isCreateHostPending } = useCreateHost()
+    const { mutateAsync: reorderHosts } = useReorderHosts()
+
+    const handleCloneHost = async () => {
+        if (!host.inbound.configProfileUuid || !host.inbound.configProfileInboundUuid) {
+            notifications.show({
+                title: t('common.message.error'),
+                message: t('edit-host-modal.widget.dangling-host-cannot-be-cloned'),
+                color: 'red'
+            })
+            return
+        }
+
+        const clone = await createHost({
+            variables: {
+                ...host,
+                remark: cloneString(host.remark),
+                isDisabled: true,
+                inbound: {
+                    configProfileUuid: host.inbound.configProfileUuid,
+                    configProfileInboundUuid: host.inbound.configProfileInboundUuid
+                }
+            }
+        })
+        if (!clone) return
+
+        // ponytail: place clone right under parent, same as bulk clone does
+        if (hosts) {
+            const orderedUuids = hosts.flatMap((h) =>
+                h.uuid === host.uuid ? [h.uuid, clone.uuid] : [h.uuid]
+            )
+            await reorderHosts({
+                variables: {
+                    hosts: orderedUuids.map((uuid, index) => ({ uuid, viewPosition: index }))
+                }
+            })
+        }
+
+        onClose()
+    }
+
     const handleSubmit = form.onSubmit(async (values) => {
         updateHost({
             variables: {
@@ -134,10 +182,11 @@ export const EditHostDrawerContent = (props: IProps) => {
         <BaseHostForm
             configProfiles={configProfiles.configProfiles}
             form={form}
+            handleCloneHost={handleCloneHost}
             handleSubmit={handleSubmit}
             hostTags={hostTags.tags}
             internalSquads={internalSquads.internalSquads}
-            isSubmitting={isUpdateHostPending}
+            isSubmitting={isUpdateHostPending || isCreateHostPending}
             nodes={nodes}
             hostUuid={host.uuid}
             subscriptionTemplates={templates.templates}
