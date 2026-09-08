@@ -25,7 +25,8 @@ import {
     TbDownload,
     TbEye,
     TbPhoto,
-    TbRefresh
+    TbRefresh,
+    TbRoute
 } from 'react-icons/tb'
 
 import { usePseudoFullscreen } from '@shared/hooks'
@@ -37,6 +38,7 @@ import {
 } from '@shared/utils/copy-screenshot.util'
 
 import classes from './GeocheckResult.module.css'
+import { GeocheckTraceWidget, resolveConnectivity } from './trace'
 
 const GEOCHECK_REPO_URL = 'https://github.com/remnawave/geocheck'
 
@@ -49,13 +51,15 @@ export const GeocheckResultWidget = (props: IProps) => {
     const { onRestart, result } = props
     const { t } = useTranslation()
 
-    const [view, setView] = useState<'image' | 'json'>('image')
+    const [view, setView] = useState<'image' | 'json' | 'trace'>('image')
     const [copying, setCopying] = useState(false)
     const [downloading, setDownloading] = useState(false)
 
     const imageRef = useRef<HTMLImageElement>(null)
 
     const { isFullscreen, toggle: toggleFullscreen } = usePseudoFullscreen()
+
+    const connectivity = useMemo(() => resolveConnectivity(result.rawReport), [result.rawReport])
 
     const imageSrc = useMemo(() => {
         if (!result.image) return null
@@ -103,7 +107,7 @@ export const GeocheckResultWidget = (props: IProps) => {
 
     return (
         <Stack className={clsx(isFullscreen && fullscreenClasses.overlay)} gap="sm">
-            <Group gap="xs" justify="space-between" wrap="nowrap">
+            <Group gap="xs" justify="space-between">
                 <SegmentedControl
                     data={[
                         {
@@ -115,6 +119,19 @@ export const GeocheckResultWidget = (props: IProps) => {
                                 </Center>
                             )
                         },
+                        ...(connectivity
+                            ? [
+                                  {
+                                      value: 'trace',
+                                      label: (
+                                          <Center style={{ gap: 10 }}>
+                                              <TbRoute size={18} />
+                                              <span>Traceroute</span>
+                                          </Center>
+                                      )
+                                  }
+                              ]
+                            : []),
                         {
                             value: 'json',
                             label: (
@@ -125,7 +142,7 @@ export const GeocheckResultWidget = (props: IProps) => {
                             )
                         }
                     ]}
-                    onChange={(next) => setView(next as 'image' | 'json')}
+                    onChange={(next) => setView(next as 'image' | 'json' | 'trace')}
                     size="sm"
                     value={view}
                 />
@@ -197,6 +214,10 @@ export const GeocheckResultWidget = (props: IProps) => {
                     )}
                 </Box>
 
+                {connectivity && view === 'trace' && (
+                    <GeocheckTraceWidget connectivity={connectivity} isFullscreen={isFullscreen} />
+                )}
+
                 <Box display={view === 'json' ? 'block' : 'none'} p="xs">
                     <JsonEditor
                         collapse={2}
@@ -210,21 +231,23 @@ export const GeocheckResultWidget = (props: IProps) => {
                 </Box>
             </Box>
 
-            <Group gap={6} justify="flex-end">
-                <Anchor
-                    c="dimmed"
-                    href={GEOCHECK_REPO_URL}
-                    rel="noopener noreferrer"
-                    size="xs"
-                    target="_blank"
-                    underline="never"
-                >
-                    <Group gap={4} wrap="nowrap">
-                        <TbBrandGithub size={14} />
-                        Powered by GeoCheck
-                    </Group>
-                </Anchor>
-            </Group>
+            {view === 'image' && (
+                <Group gap={6} justify="flex-end">
+                    <Anchor
+                        c="dimmed"
+                        href={GEOCHECK_REPO_URL}
+                        rel="noopener noreferrer"
+                        size="xs"
+                        target="_blank"
+                        underline="never"
+                    >
+                        <Group gap={4} wrap="nowrap">
+                            <TbBrandGithub size={14} />
+                            Powered by GeoCheck
+                        </Group>
+                    </Anchor>
+                </Group>
+            )}
         </Stack>
     )
 }

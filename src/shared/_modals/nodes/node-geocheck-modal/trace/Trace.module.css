@@ -1,0 +1,172 @@
+.root {
+    display: flex;
+    flex-direction: column;
+    gap: var(--mantine-spacing-sm);
+    height: 62vh;
+    min-height: 320px;
+    padding: var(--mantine-spacing-xs);
+}
+
+.fullHeight {
+    height: 100%;
+}
+
+.summary {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--mantine-spacing-md);
+    flex: 0 0 auto;
+    padding: 10px 14px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--mantine-radius-md);
+    background-color: rgba(255, 255, 255, 0.02);
+}
+
+.body {
+    display: flex;
+    gap: var(--mantine-spacing-sm);
+    flex: 1 1 auto;
+    min-height: 0;
+}
+
+.targets {
+    display: flex;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--mantine-radius-md);
+    background-color: rgba(255, 255, 255, 0.02);
+    flex-direction: column;
+    gap: 4px;
+    flex: 0 0 300px;
+    min-height: 0;
+    padding: 4px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    overscroll-behavior: contain;
+}
+
+.detail {
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--mantine-radius-md);
+    background-color: rgba(255, 255, 255, 0.02);
+    flex: 1 1 auto;
+    min-width: 0;
+    min-height: 0;
+    padding: var(--mantine-spacing-md);
+    overflow-x: hidden;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    overscroll-behavior: contain;
+}
+
+.targetRow {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    flex: 0 0 auto;
+    padding: 8px 10px;
+    border: 1px solid transparent;
+    border-radius: var(--mantine-radius-sm);
+    transition:
+        background-color 150ms ease,
+        border-color 150ms ease;
+}
+
+.targetRow:hover {
+    border-color: var(--mantine-color-dark-4);
+    background-color: var(--mantine-color-dark-6);
+}
+
+.targetRow[data-active] {
+    border-color: color-mix(in srgb, var(--mantine-color-cyan-5) 45%, transparent);
+    background-color: color-mix(in srgb, var(--mantine-color-cyan-9) 20%, transparent);
+}
+
+.targetRow:focus-visible {
+    outline: 2px solid var(--mantine-primary-color-filled);
+    outline-offset: 1px;
+}
+
+.link {
+    color: inherit;
+    text-decoration: none;
+    transition: color 150ms ease;
+}
+
+.link:hover {
+    color: var(--mantine-color-cyan-4);
+}
+
+.microLabel {
+    color: var(--mantine-color-dimmed);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    line-height: 1;
+    text-transform: uppercase;
+}
+
+.segment {
+    border-left: 2px solid var(--as-color, var(--mantine-color-dark-4));
+    padding-left: 10px;
+}
+
+.hopRow {
+    display: grid;
+    grid-template-columns: 2.5ch minmax(0, 1fr) 74px 92px 46px;
+    align-items: center;
+    gap: 8px;
+    padding: 3px 6px;
+    border-radius: var(--mantine-radius-sm);
+    font-size: 12px;
+}
+
+.hopRow:hover {
+    background-color: rgba(255, 255, 255, 0.03);
+}
+
+.hopRow[data-timeout] {
+    opacity: 0.45;
+}
+
+.hopBarTrack {
+    height: 4px;
+    border-radius: 2px;
+    background-color: rgba(255, 255, 255, 0.06);
+    overflow: hidden;
+}
+
+.hopBarFill {
+    height: 100%;
+    border-radius: 2px;
+    background-color: var(--bar-color, var(--mantine-color-teal-5));
+}
+
+@media (max-width: 62em) {
+    .root {
+        height: auto;
+    }
+
+    .body {
+        flex-direction: column;
+    }
+
+    .targets {
+        flex: 0 0 auto;
+        max-height: 220px;
+    }
+
+    .detail {
+        overflow: visible;
+    }
+
+    .hopRow {
+        grid-template-columns: 2.5ch minmax(0, 1fr) 74px;
+    }
+
+    .hopRow > *:nth-child(4),
+    .hopRow > *:nth-child(5) {
+        display: none;
+    }
+}
