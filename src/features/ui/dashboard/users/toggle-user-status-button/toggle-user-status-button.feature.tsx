@@ -41,7 +41,7 @@ export function ToggleUserStatusButtonFeature(props: IProps) {
         buttonLabel = t('common.action.enable')
         icon = <PiCellSignalFullDuotone size="16px" />
     } else {
-        color = 'var(--mantine-color-red-5)'
+        color = 'var(--mantine-color-yellow-5)'
         buttonLabel = t('common.action.disable')
         icon = <PiCellSignalSlashDuotone size="16px" />
     }
