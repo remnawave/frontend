@@ -142,9 +142,7 @@ export function getInboundsTableColumns(
             accessor: 'activeSquads',
             title: t('inbounds-datatable.widget.squads'),
             render: ({ activeSquads }) => {
-                const names = sortBy(
-                    activeSquads.map((uuid) => squadNameByUuid.get(uuid) ?? uuid)
-                )
+                const names = sortBy(activeSquads.map((uuid) => squadNameByUuid.get(uuid) ?? uuid))
 
                 return (
                     <Text size="sm" truncate="end">

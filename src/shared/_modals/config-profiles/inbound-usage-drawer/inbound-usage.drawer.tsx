@@ -2,6 +2,7 @@ import NiceModal, { useModal } from '@ebay/nice-modal-react'
 import { ActionIcon, Group, NativeSelect, Stack } from '@mantine/core'
 import { DatePickerInput, DatesRangeValue } from '@mantine/dates'
 import { nprogress } from '@mantine/nprogress'
+import { GetInboundTopUsersUsageCommand, ResolveUserCommand } from '@remnawave/backend-contract'
 import dayjs from 'dayjs'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -100,8 +101,9 @@ export const InboundUsageDrawer = NiceModal.create((props: IProps) => {
         nprogress.start()
         try {
             const result = await resolveUser({ variables: { username: user.name } })
-            if (result.id) {
-                showModal('users_viewUserModal', { userId: result.id })
+            const resolvedUser = result as ResolveUserCommand.Response['response']
+            if (resolvedUser.id) {
+                showModal('users_viewUserModal', { userId: resolvedUser.id })
             }
         } finally {
             nprogress.complete()
@@ -235,13 +237,23 @@ export const InboundUsageDrawer = NiceModal.create((props: IProps) => {
 
                 <NodeUsersSparklineCardWidget
                     isLoading={isLoading}
-                    sparklineData={topUsersUsage?.sparklineData}
+                    sparklineData={
+                        (
+                            topUsersUsage as
+                                | GetInboundTopUsersUsageCommand.Response['response']
+                                | undefined
+                        )?.sparklineData
+                    }
                 />
 
                 <TopLeaderboardCardShared
                     emptyText={t('node-users-usage-drawer.widget.no-data-available')}
                     isLoading={isLoading}
-                    items={topUsersUsage?.topUsers?.map((user) => ({
+                    items={(
+                        topUsersUsage as
+                            | GetInboundTopUsersUsageCommand.Response['response']
+                            | undefined
+                    )?.topUsers?.map((user) => ({
                         color: user.color,
                         name: user.username,
                         total: user.total

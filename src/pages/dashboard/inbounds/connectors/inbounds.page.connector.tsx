@@ -1,4 +1,11 @@
 import {
+    GetAllInboundsCommand,
+    GetConfigProfilesCommand,
+    GetInternalSquadsCommand,
+    GetNodesCommand
+} from '@remnawave/backend-contract'
+
+import {
     useGetAllInbounds,
     useGetConfigProfiles,
     useGetInternalSquads,
@@ -42,10 +49,14 @@ export function InboundsPageConnector() {
 
     return (
         <InboundsPageComponent
-            configProfiles={configProfilesData.configProfiles}
-            inbounds={inboundsData.inbounds}
-            internalSquads={internalSquadsData.internalSquads}
-            nodes={nodes}
+            configProfiles={
+                (configProfilesData as GetConfigProfilesCommand.Response['response']).configProfiles
+            }
+            inbounds={(inboundsData as GetAllInboundsCommand.Response['response']).inbounds}
+            internalSquads={
+                (internalSquadsData as GetInternalSquadsCommand.Response['response']).internalSquads
+            }
+            nodes={nodes as GetNodesCommand.Response['response']}
         />
     )
 }

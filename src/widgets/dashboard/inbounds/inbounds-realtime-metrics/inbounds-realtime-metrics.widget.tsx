@@ -29,9 +29,8 @@ export function InboundsRealtimeMetricsWidget(props: IProps) {
             IconComponent: PiPulse,
             title: t('inbounds-realtime-metrics.widget.active-inbounds'),
             value:
-                inbounds?.filter((inbound) =>
-                    inbound.onlineByNode.some((node) => node.count > 0)
-                ).length ?? 0,
+                inbounds?.filter((inbound) => inbound.onlineByNode.some((node) => node.count > 0))
+                    .length ?? 0,
             iconVariant: 'soft',
             iconColor: 'teal'
         },
