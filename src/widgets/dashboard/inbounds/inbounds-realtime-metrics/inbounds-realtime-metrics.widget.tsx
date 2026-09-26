@@ -36,7 +36,8 @@ export function InboundsRealtimeMetricsWidget(props: IProps) {
         },
         {
             IconComponent: TbUsers,
-            title: t('inbounds-realtime-metrics.widget.users-online'),
+            title: t('inbounds-realtime-metrics.widget.inbound-connections'),
+            subtitle: t('inbounds-realtime-metrics.widget.inbound-connections-hint'),
             value:
                 inbounds?.reduce(
                     (acc, curr) =>

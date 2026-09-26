@@ -2404,7 +2404,8 @@
   },
   "inbounds-realtime-metrics": {
     "widget": {
-      "users-online": "在线用户",
+      "inbound-connections": "入站连接数",
+      "inbound-connections-hint": "同一用户在多个入站上会分别计数",
       "active-inbounds": "活跃入站",
       "total-inbounds": "入站总数"
     }

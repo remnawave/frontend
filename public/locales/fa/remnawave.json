@@ -2404,7 +2404,8 @@
   },
   "inbounds-realtime-metrics": {
     "widget": {
-      "users-online": "Users Online",
+      "inbound-connections": "Inbound connections",
+      "inbound-connections-hint": "One user on several inbounds is counted for each",
       "active-inbounds": "Active Inbounds",
       "total-inbounds": "Total Inbounds"
     }

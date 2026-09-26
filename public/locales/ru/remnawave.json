@@ -2404,7 +2404,8 @@
   },
   "inbounds-realtime-metrics": {
     "widget": {
-      "users-online": "Онлайн юзеров",
+      "inbound-connections": "Подключений по инбаундам",
+      "inbound-connections-hint": "Пользователь на нескольких инбаундах учитывается в каждом",
       "active-inbounds": "Активные инбаунды",
       "total-inbounds": "Всего инбаундов"
     }
