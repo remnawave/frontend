@@ -130,7 +130,7 @@ export const useTbReportsTableColumns = (nodes?: GetNodesCommand.Response['respo
 
             {
                 accessorKey: 'createdAt',
-                header: t('use-hwid-inspector-table-columns.created-at'),
+                header: t('common.field.created-at'),
                 accessorFn: (originalRow) =>
                     formatTimeUtil({
                         time: originalRow.createdAt,

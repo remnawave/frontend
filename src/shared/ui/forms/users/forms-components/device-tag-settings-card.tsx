@@ -105,7 +105,7 @@ export function DeviceTagSettingsCard<
                         <Textarea
                             description={t('create-user-modal.widget.user-description')}
                             key={form.key('description')}
-                            label={t('use-table-columns.description')}
+                            label={t('common.field.description')}
                             resize="vertical"
                             {...form.getInputProps('description')}
                             styles={{

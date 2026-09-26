@@ -1,11 +1,18 @@
 import { Card, Stack, Text, Title } from '@mantine/core'
 import { modals } from '@mantine/modals'
+import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { QueryKeys, useDeleteConfigProfile, useReorderConfigProfiles } from '@shared/api/hooks'
 import { queryClient } from '@shared/api/query-client'
+import { filterByTag, TagFilterBar } from '@shared/ui'
 import { XrayLogo } from '@shared/ui/logos'
 import { VirtualizedDndGrid } from '@shared/ui/virtualized-dnd-grid'
+
+import {
+    useSectionActiveTag,
+    useViewPreferencesStoreActions
+} from '@entities/dashboard/view-preferences-store'
 
 import { ConfigProfileCardWidget } from '../config-profile-card/config-profile-card.widget'
 import { IProps } from './interfaces'
@@ -13,6 +20,14 @@ import { IProps } from './interfaces'
 export function ConfigProfilesGridWidget(props: IProps) {
     const { configProfiles } = props
     const { t } = useTranslation()
+
+    const activeTag = useSectionActiveTag('configProfiles')
+    const { setSectionActiveTag } = useViewPreferencesStoreActions()
+
+    const visibleProfiles = useMemo(
+        () => filterByTag(configProfiles ?? [], activeTag),
+        [configProfiles, activeTag]
+    )
 
     const { mutate: reorderConfigProfiles } = useReorderConfigProfiles({
         mutationFns: {
@@ -34,11 +49,11 @@ export function ConfigProfilesGridWidget(props: IProps) {
 
     const handleDeleteProfile = (profileUuid: string) => {
         modals.openConfirmModal({
-            title: t('common.confirm-action'),
-            children: t('common.confirm-action-description'),
+            title: t('common.action.confirm-action'),
+            children: t('common.message.confirm-action-description'),
             labels: {
-                confirm: t('common.delete'),
-                cancel: t('common.cancel')
+                confirm: t('common.action.delete'),
+                cancel: t('common.action.cancel')
             },
             confirmProps: { color: 'red', variant: 'soft' },
             cancelProps: {
@@ -88,8 +103,15 @@ export function ConfigProfilesGridWidget(props: IProps) {
 
     return (
         <VirtualizedDndGrid
-            enableDnd={true}
-            items={configProfiles}
+            enableDnd={activeTag === null}
+            header={
+                <TagFilterBar
+                    activeTag={activeTag}
+                    items={configProfiles}
+                    onChange={(tag) => setSectionActiveTag('configProfiles', tag)}
+                />
+            }
+            items={visibleProfiles}
             onReorder={handleReorder}
             renderDragOverlay={(profile) => (
                 <ConfigProfileCardWidget
@@ -101,6 +123,7 @@ export function ConfigProfilesGridWidget(props: IProps) {
             renderItem={(profile) => (
                 <ConfigProfileCardWidget
                     configProfile={profile}
+                    disableReordering={activeTag !== null}
                     handleDeleteConfigProfile={handleDeleteProfile}
                 />
             )}

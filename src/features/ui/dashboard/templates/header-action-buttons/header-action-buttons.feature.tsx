@@ -45,7 +45,7 @@ export const TemplatesHeaderActionButtonsFeature = (props: IProps) => {
             </ActionIconGroup>
 
             <ActionIconGroup>
-                <Tooltip label={t('header-action-buttons.feature.create-new-template')} withArrow>
+                <Tooltip label={t('common.action.create')} withArrow>
                     <ActionIcon
                         color="teal"
                         onClick={() =>

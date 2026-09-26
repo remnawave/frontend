@@ -1,13 +1,13 @@
 import NiceModal, { useModal } from '@ebay/nice-modal-react'
-import { Center, Drawer, Stack, Text, ThemeIcon } from '@mantine/core'
+import { Drawer } from '@mantine/core'
 import { useTranslation } from 'react-i18next'
 import { TbServer } from 'react-icons/tb'
 
 import { useNiceMantineModal } from '@shared/_modals/use-nice-modal'
 import { useGetInternalSquadAccessibleNodes } from '@shared/api/hooks'
 import { LoadingScreen } from '@shared/ui'
+import { EmptyPageLayout } from '@shared/ui/layouts/empty-page'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
-import { SectionCard } from '@shared/ui/section-card'
 
 import { AccessibleNodesTree } from './accessible-nodes.tree'
 
@@ -48,23 +48,7 @@ export const InternalSquadAccessibleNodesDrawer = NiceModal.create((props: IProp
         >
             {isLoading && <LoadingScreen />}
             {!isLoading && accessibleNodes.length === 0 && (
-                <SectionCard.Root p="xl">
-                    <SectionCard.Section>
-                        <Center py="xl">
-                            <Stack align="center" gap="lg">
-                                <ThemeIcon color="gray" radius="xl" size={64} variant="soft">
-                                    <TbServer size={32} />
-                                </ThemeIcon>
-
-                                <Stack align="center" gap="xs">
-                                    <Text c="dimmed" fw={600} size="md" ta="center">
-                                        {t('common.nothing-found')}
-                                    </Text>
-                                </Stack>
-                            </Stack>
-                        </Center>
-                    </SectionCard.Section>
-                </SectionCard.Root>
+                <EmptyPageLayout icon={<TbServer size="32" />} />
             )}
             {!isLoading && accessibleNodes.length > 0 && (
                 <AccessibleNodesTree accessibleNodes={accessibleNodes} />

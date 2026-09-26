@@ -69,7 +69,7 @@ export const CreateInfraBillingRecordModal = NiceModal.create(() => {
     const handleSubmit = form.onSubmit(async (values) => {
         if (!values.providerUuid) {
             notifications.show({
-                title: t('create-infra-billing-record.modal.widget.error'),
+                title: t('common.message.error'),
                 message: t('create-infra-billing-record.modal.widget.please-select-a-provider'),
                 color: 'red'
             })
@@ -151,7 +151,7 @@ export const CreateInfraBillingRecordModal = NiceModal.create(() => {
                         type="submit"
                         variant="soft"
                     >
-                        {t('common.create')}
+                        {t('common.action.create')}
                     </Button>
                 </Stack>
             </form>

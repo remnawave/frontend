@@ -1,23 +1,22 @@
-import { ActionIcon, ActionIconProps, Box, PolymorphicComponentProps } from '@mantine/core'
+import { ActionIcon, ActionIconProps, PolymorphicComponentProps } from '@mantine/core'
 
 import classes from './entity-card.module.css'
 
-interface EntityCardIconProps extends PolymorphicComponentProps<'button', ActionIconProps> {
+interface EntityCardIconProps extends PolymorphicComponentProps<'div', ActionIconProps> {
     highlight?: boolean
 }
 
 export function EntityCardIcon({ children, highlight = true, ...props }: EntityCardIconProps) {
     return (
-        <Box className={classes.iconWrapper}>
-            <ActionIcon
-                className={classes.icon}
-                color={highlight ? 'teal' : 'cyan'}
-                size="xl"
-                variant="soft"
-                {...props}
-            >
-                {children}
-            </ActionIcon>
-        </Box>
+        <ActionIcon
+            className={classes.icon}
+            component="div"
+            color={highlight ? 'teal' : 'gray'}
+            size={32}
+            variant="soft"
+            {...props}
+        >
+            {children}
+        </ActionIcon>
     )
 }

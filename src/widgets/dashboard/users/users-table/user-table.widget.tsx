@@ -204,7 +204,7 @@ export function UserTableWidget() {
         renderToolbarInternalActions: ({ table: tableInstance }) => (
             <>
                 <ActionIconGroup>
-                    <Tooltip label={t('common.bulk-actions')} withArrow>
+                    <Tooltip label={t('common.action.bulk-actions')} withArrow>
                         <ActionIcon
                             color="green"
                             onClick={() => showModal('users_bulkAllUsersActionsModal')}
@@ -214,7 +214,7 @@ export function UserTableWidget() {
                             <TbBolt size={20} />
                         </ActionIcon>
                     </Tooltip>
-                    <Tooltip label={t('common.bulk-edit')} withArrow>
+                    <Tooltip label={t('common.action.bulk-edit')} withArrow>
                         <ActionIcon
                             color="red"
                             onClick={() => showModal('users_bulkAllUsersUpdateModal')}

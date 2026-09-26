@@ -62,7 +62,7 @@ export const HeaderActionButtonsFeature = (props: IProps) => {
             </ActionIconGroup>
 
             <ActionIconGroup>
-                <Tooltip label={t('common.update')} withArrow>
+                <Tooltip label={t('common.action.update')} withArrow>
                     <ActionIcon
                         loading={isFetching}
                         onClick={handleUpdate}
@@ -75,7 +75,7 @@ export const HeaderActionButtonsFeature = (props: IProps) => {
             </ActionIconGroup>
 
             <ActionIconGroup>
-                <Tooltip label={t('header-action-buttons.feature.create-new-host')} withArrow>
+                <Tooltip label={t('common.action.create')} withArrow>
                     <ActionIcon color="teal" onClick={handleCreate} size="input-md" variant="soft">
                         <TbPlus size="24px" />
                     </ActionIcon>

@@ -35,8 +35,8 @@ export const useUserActiveSessions = (userId: number) => {
         mutationFns: {
             onSuccess: () => {
                 notifications.show({
-                    title: t('common.success'),
-                    message: t('common.event-sent'),
+                    title: t('common.message.success'),
+                    message: t('common.message.event-sent'),
                     color: 'teal'
                 })
             }

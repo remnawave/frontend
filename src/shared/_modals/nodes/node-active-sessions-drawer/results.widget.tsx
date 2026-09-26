@@ -1,10 +1,8 @@
-import { Center, Stack, Tabs, Text } from '@mantine/core'
+import { Stack, Tabs } from '@mantine/core'
 import { useMemo, useState } from 'react'
-import { useTranslation } from 'react-i18next'
-import { PiEmptyDuotone } from 'react-icons/pi'
-import { TbSortAscending, TbSortDescending } from 'react-icons/tb'
+import { TbRadar, TbSortAscending, TbSortDescending } from 'react-icons/tb'
 
-import { SectionCard } from '@shared/ui/section-card'
+import { EmptyPageLayout } from '@shared/ui/layouts/empty-page'
 
 import { IpStatsWidget } from './ip-stats.widget'
 import { SessionsListWidget } from './sessions-list.widget'
@@ -19,7 +17,6 @@ interface IProps {
 }
 
 export const ResultsWidget = ({ onRefresh, users }: IProps) => {
-    const { t } = useTranslation()
     const [sortMode, setSortMode] = useState<SortMode>('default')
 
     const sortedUsers = useMemo(() => {
@@ -62,20 +59,7 @@ export const ResultsWidget = ({ onRefresh, users }: IProps) => {
                 </Tabs>
             )}
 
-            {!hasUsers && (
-                <SectionCard.Root gap="sm">
-                    <SectionCard.Section>
-                        <Center h="230">
-                            <Stack align="center" gap="xs">
-                                <PiEmptyDuotone color="var(--mantine-color-gray-5)" size="3rem" />
-                                <Text c="dimmed" size="sm">
-                                    {t('active-sessions-drawer.widget.no-active-sessions')}
-                                </Text>
-                            </Stack>
-                        </Center>
-                    </SectionCard.Section>
-                </SectionCard.Root>
-            )}
+            {!hasUsers && <EmptyPageLayout icon={<TbRadar size="3rem" />} />}
 
             {hasUsers && <SessionsListWidget users={sortedUsers} />}
         </Stack>

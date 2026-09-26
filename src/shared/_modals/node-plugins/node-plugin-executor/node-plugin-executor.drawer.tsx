@@ -35,7 +35,7 @@ export const NodePluginExecutorDrawer = NiceModal.create(() => {
                     initial={{ opacity: 0 }}
                     transition={{ duration: 0.3 }}
                 >
-                    <LoaderModalShared h="78vh" />
+                    <LoaderModalShared mih="50vh" />
                 </motion.div>
             ) : (
                 <NodePluginExecutorContent nodes={nodes} onClose={hide} />

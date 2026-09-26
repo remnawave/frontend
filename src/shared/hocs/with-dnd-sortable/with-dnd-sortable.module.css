@@ -8,9 +8,8 @@
 }
 
 .dragHandle:hover {
-    color: var(--mantine-color-teal-5);
-    background: rgba(20, 184, 166, 0.2);
-    transform: scale(1.1);
+    color: var(--mantine-color-bright);
+    background: var(--mantine-color-default-hover);
 }
 
 .dragHandle:active {
@@ -36,4 +35,30 @@
 .dragHandleBottomRight {
     bottom: 8px;
     right: 8px;
+}
+
+.inlineRoot {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.inlineRoot > *:last-child {
+    flex: 1;
+    min-width: 0;
+}
+
+.dragHandleInline {
+    position: static;
+    flex: none;
+}
+
+.dragHandleInlineEnd {
+    top: 50%;
+    right: 4px;
+    transform: translateY(-50%);
+}
+
+.dragHandleInlineEnd:active {
+    transform: translateY(-50%) scale(0.95);
 }

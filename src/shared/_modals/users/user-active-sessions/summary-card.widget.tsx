@@ -75,7 +75,7 @@ export const SummaryCardWidget = ({
                             </ActionIcon>
                         </Tooltip>
 
-                        <Tooltip label={t('common.refresh')}>
+                        <Tooltip label={t('common.action.refresh')}>
                             <ActionIcon color="indigo" onClick={onRefresh} size="lg" variant="soft">
                                 <TbRefresh size={20} />
                             </ActionIcon>

@@ -13,6 +13,12 @@
     overflow: hidden;
     display: flex;
     flex-direction: column;
+    border-color: var(--mantine-color-dark-4);
+    transition: border-color 150ms ease;
+}
+
+.editorWrapperError {
+    border-color: var(--mantine-color-red-5);
 }
 
 .monacoEditor {

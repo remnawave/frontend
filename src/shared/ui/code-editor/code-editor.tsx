@@ -6,12 +6,12 @@ import Editor, { EditorProps, OnMount } from '@monaco-editor/react'
 import clsx from 'clsx'
 import { parse } from 'jsonc-parser'
 import { Fragment, ReactNode, useRef, useState } from 'react'
-import { useTranslation } from 'react-i18next'
 
 import { BASE_MONACO_OPTIONS, MONACO_THEME_NAME } from '@shared/constants/monaco-theme'
 import { describeJsonPath } from '@shared/utils/monaco/json-path'
 import { RepairResult, repairJsonInEditor } from '@shared/utils/monaco/repair-json'
 
+import { LoaderModalShared } from '../loader-modal/loader-model.shared'
 import styles from './CodeEditor.module.css'
 
 const REPAIR_ACTION_ID = 'remnawave.repairJson'
@@ -41,8 +41,6 @@ export function CodeEditor(props: Props) {
         wrapperProps,
         ...rest
     } = props
-
-    const { t } = useTranslation()
 
     const [jsonPath, setJsonPath] = useState<string[]>([])
     const documentTextRef = useRef('')
@@ -147,7 +145,7 @@ export function CodeEditor(props: Props) {
             <Editor
                 defaultLanguage={defaultLanguage}
                 language={language}
-                loading={t('config-editor.widget.loading-editor')}
+                loading={<LoaderModalShared mih="100%" />}
                 onMount={handleMount}
                 theme={MONACO_THEME_NAME}
                 {...rest}

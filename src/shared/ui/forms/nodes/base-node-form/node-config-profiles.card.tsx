@@ -29,20 +29,10 @@ export const NodeConfigProfilesCard = <
     const { data: configProfiles, isLoading: isConfigProfilesLoading } = useGetConfigProfiles()
 
     const saveInbounds = (inbounds: string[], configProfileUuid: string) => {
-        form.setValues({
-            configProfile: {
-                activeInbounds: inbounds,
-                activeConfigProfileUuid: configProfileUuid
-            }
-        } as Partial<T>)
-        form.setTouched({
-            activeConfigProfileUuid: true,
-            activeInbounds: true
-        })
-        form.setDirty({
-            activeConfigProfileUuid: true,
-            activeInbounds: true
-        })
+        form.setFieldValue('configProfile', {
+            activeInbounds: inbounds,
+            activeConfigProfileUuid: configProfileUuid
+        } as never)
     }
 
     return (

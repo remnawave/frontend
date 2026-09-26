@@ -339,7 +339,7 @@ export function SvgLibraryModal(props: IProps) {
                         fullWidth
                         onClick={editingKey ? handleUpdate : handleAdd}
                     >
-                        {editingKey ? t('common.update') : t('common.add')}
+                        {editingKey ? t('common.action.update') : t('common.action.add')}
                     </Button>
                 </Stack>
             </Drawer>

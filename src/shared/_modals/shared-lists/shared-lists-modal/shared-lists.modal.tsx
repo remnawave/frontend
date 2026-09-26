@@ -1,28 +1,21 @@
 import NiceModal, { useModal } from '@ebay/nice-modal-react'
-import {
-    ActionIcon,
-    Box,
-    Center,
-    Group,
-    Modal,
-    ScrollArea,
-    Stack,
-    Text,
-    ThemeIcon,
-    Tooltip
-} from '@mantine/core'
+import { ActionIcon, Box, Group, Modal, Stack, Tooltip } from '@mantine/core'
+import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { TbList, TbPlus, TbRefresh } from 'react-icons/tb'
 
 import { showModal } from '@shared/_modals/show-modal'
 import { useNiceMantineModal } from '@shared/_modals/use-nice-modal'
 import { useGetSharedLists } from '@shared/api/hooks'
+import { EmptyPageLayout } from '@shared/ui/layouts/empty-page/empty-page.layout'
 import { LoaderModalShared } from '@shared/ui/loader-modal'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
-import { SectionCard } from '@shared/ui/section-card'
+import { buildTree, TreeBrowser } from '@shared/ui/tree-browser'
 
-import { SharedListItem } from './shared-list-item'
-import classes from './shared-lists.module.css'
+import { sharedListRow, TSharedList } from './shared-list-row'
+import { useSharedListActions } from './use-shared-list-actions'
+
+const getName = (sharedList: TSharedList) => sharedList.name
 
 export const SharedListsModal = NiceModal.create(() => {
     const modal = useModal()
@@ -34,6 +27,10 @@ export const SharedListsModal = NiceModal.create(() => {
 
     const lists = sharedLists?.sharedLists ?? []
 
+    const tree = useMemo(() => buildTree(lists, getName), [sharedLists])
+
+    const { deletingName, handleDelete } = useSharedListActions()
+
     return (
         <Modal
             {...modalProps}
@@ -44,79 +41,64 @@ export const SharedListsModal = NiceModal.create(() => {
                     IconComponent={TbList}
                     iconVariant="soft"
                     subtitle={t('shared-lists.modal.subtitle')}
-                    title={t('common.shared-lists')}
+                    title={t('common.field.shared-lists')}
                 />
             }
         >
-            {isLoading && <LoaderModalShared h="300px" />}
+            <Stack gap="md">
+                {isLoading && <LoaderModalShared mih="180px" />}
+                {!isLoading && lists.length === 0 && (
+                    <EmptyPageLayout icon={<TbList size={32} />} />
+                )}
+                {!isLoading && lists.length > 0 && (
+                    <Box h={360}>
+                        <TreeBrowser
+                            emptyLabel={t('common.message.nothing-found')}
+                            onSelect={(sharedList) =>
+                                showModal('sharedLists_sharedListEditorModal', {
+                                    name: sharedList.name
+                                })
+                            }
+                            renderRow={(node, isFolder) =>
+                                sharedListRow({
+                                    deletingName,
+                                    isFolder,
+                                    node,
+                                    onDelete: handleDelete
+                                })
+                            }
+                            rootLabel={t('common.field.shared-lists')}
+                            tree={tree}
+                        />
+                    </Box>
+                )}
 
-            {!isLoading && (
-                <Stack gap="md">
-                    {lists.length === 0 ? (
-                        <SectionCard.Root p="xl">
-                            <SectionCard.Section>
-                                <Center py="xl">
-                                    <Stack align="center" gap="lg">
-                                        <ThemeIcon
-                                            color="gray"
-                                            radius="xl"
-                                            size={64}
-                                            variant="soft"
-                                        >
-                                            <TbList size={32} />
-                                        </ThemeIcon>
-
-                                        <Stack align="center" gap="xs">
-                                            <Text c="dimmed" fw={600} size="md" ta="center">
-                                                {t('common.nothing-found')}
-                                            </Text>
-                                        </Stack>
-                                    </Stack>
-                                </Center>
-                            </SectionCard.Section>
-                        </SectionCard.Root>
-                    ) : (
-                        <Box className={classes.sharedListTable}>
-                            <ScrollArea.Autosize mah={360}>
-                                <Stack gap={0}>
-                                    {lists.map((sharedList) => (
-                                        <SharedListItem
-                                            key={sharedList.name}
-                                            sharedList={sharedList}
-                                        />
-                                    ))}
-                                </Stack>
-                            </ScrollArea.Autosize>
-                        </Box>
-                    )}
-
-                    <Group justify="space-between">
-                        <ActionIcon.Group>
-                            <Tooltip label={t('common.refresh')}>
-                                <ActionIcon
-                                    loading={isRefetching}
-                                    onClick={() => refetch()}
-                                    size="input-md"
-                                    variant="soft"
-                                >
-                                    <TbRefresh size={24} />
-                                </ActionIcon>
-                            </Tooltip>
-                        </ActionIcon.Group>
-
-                        <Tooltip label={t('common.create')}>
+                <Group justify="space-between">
+                    <ActionIcon.Group>
+                        <Tooltip label={t('common.action.refresh')}>
                             <ActionIcon
-                                color="teal"
-                                onClick={() => showModal('sharedLists_sharedListEditorModal', {})}
+                                loading={isRefetching}
+                                onClick={() => refetch()}
                                 size="input-md"
                                 variant="soft"
                             >
-                                <TbPlus size={24} />
+                                <TbRefresh size={24} />
                             </ActionIcon>
                         </Tooltip>
-                    </Group>
-                </Stack>
-            )}
+                    </ActionIcon.Group>
+
+                    <Tooltip label={t('common.action.create')}>
+                        <ActionIcon
+                            color="teal"
+                            onClick={() => showModal('sharedLists_sharedListEditorModal', {})}
+                            size="input-md"
+                            variant="soft"
+                        >
+                            <TbPlus size={24} />
+                        </ActionIcon>
+                    </Tooltip>
+                </Group>
+            </Stack>
         </Modal>
     )
 })

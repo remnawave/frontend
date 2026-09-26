@@ -6,6 +6,16 @@
     background-size: 40px 40px;
 } */
 
+.drawerContent {
+    border-radius: var(--drawer-radius, var(--mantine-radius-md));
+}
+
+@media (max-width: $mantine-breakpoint-sm) {
+    .drawerContent {
+        border-radius: 0;
+    }
+}
+
 .drawerHeader {
     background: rgba(22, 27, 35, 0.95);
     border-bottom: 1px solid rgba(255, 255, 255, 0.06);

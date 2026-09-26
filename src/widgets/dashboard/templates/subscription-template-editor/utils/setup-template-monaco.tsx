@@ -27,6 +27,7 @@ const YAML_OPTIONS: MonacoYamlOptions = {
     hover: true,
     completion: true,
     format: {
+        printWidth: 160,
         enable: true
     }
 }

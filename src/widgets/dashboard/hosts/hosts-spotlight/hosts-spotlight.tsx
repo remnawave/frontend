@@ -17,7 +17,7 @@ export const HostsSpotlightWidget = (props: IProps) => {
 
     const handleViewHost = (hostUuid: string) => {
         showModal('hosts_editHostDrawer', {
-            host: hosts.find((host) => host.uuid === hostUuid)!
+            hostUuid: hosts.find((host) => host.uuid === hostUuid)!.uuid
         })
     }
 

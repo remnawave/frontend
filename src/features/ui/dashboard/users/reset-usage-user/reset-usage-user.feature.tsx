@@ -35,9 +35,9 @@ export function ResetUsageUserFeature(props: IProps) {
 
     const openModal = () =>
         modals.openConfirmModal({
-            title: t('common.confirm-action'),
-            children: t('common.confirm-action-description'),
-            labels: { confirm: t('reset-usage-user.feature.reset'), cancel: t('common.cancel') },
+            title: t('common.action.confirm-action'),
+            children: t('common.message.confirm-action-description'),
+            labels: { confirm: t('common.action.reset'), cancel: t('common.action.cancel') },
             centered: true,
             confirmProps: { color: 'red', variant: 'soft' },
             cancelProps: {

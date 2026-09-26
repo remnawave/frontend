@@ -27,7 +27,7 @@ export function MobileStatsWidget() {
             icon: TbAlertTriangle,
             color: overdueCount > 0 ? 'red' : 'teal',
             value: overdueCount,
-            label: t('mobile-stats.widget.overdue')
+            label: t('common.message.overdue')
         },
         {
             icon: FaServer,

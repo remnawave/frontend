@@ -63,6 +63,7 @@ export function VirtualizedRecordsList(props: IProps) {
     const virtualizer = useVirtualizer({
         count: rows.length,
         getScrollElement: () => scrollRef.current,
+        getItemKey: (index) => rows[index].key,
         estimateSize: (index) =>
             rows[index].type === 'divider' ? DIVIDER_ESTIMATE : RECORD_ESTIMATE,
         overscan: 8

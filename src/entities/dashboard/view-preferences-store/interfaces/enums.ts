@@ -12,8 +12,3 @@ export enum INBOUNDS_VIEW_MODE {
     CARDS = 'cards',
     TABLE = 'table'
 }
-
-export enum LAYOUT_STYLE {
-    SIDEBAR = 'sidebar',
-    COMPACT = 'compact'
-}

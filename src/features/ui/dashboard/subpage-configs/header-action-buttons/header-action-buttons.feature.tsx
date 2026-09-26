@@ -26,7 +26,7 @@ export const SubpageConfigsHeaderActionButtonsFeature = () => {
             <UniversalSpotlightActionIconShared />
 
             <ActionIconGroup>
-                <Tooltip label={t('common.refresh')} withArrow>
+                <Tooltip label={t('common.action.refresh')} withArrow>
                     <ActionIcon
                         loading={isFetching}
                         onClick={handleUpdate}

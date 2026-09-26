@@ -64,7 +64,7 @@ export const ApiTokensCardWidget = (props: IProps) => {
                                 <Box className={classes.tokenTable}>
                                     <Box className={classes.tokenHeaderRow}>
                                         <Text className={classes.tokenColLabel}>
-                                            {t('common.name')}
+                                            {t('common.field.name')}
                                         </Text>
                                         <Text className={classes.tokenColLabel}>
                                             {t('api-tokens-card.widget.col-scopes')}
@@ -94,7 +94,7 @@ export const ApiTokensCardWidget = (props: IProps) => {
             <SettingsCardShared.Bottom>
                 <Group justify="space-between">
                     <ActionIcon.Group>
-                        <Tooltip label={t('common.refresh')}>
+                        <Tooltip label={t('common.action.refresh')}>
                             <ActionIcon
                                 loading={isRefetching}
                                 onClick={() => refetch()}
@@ -106,7 +106,7 @@ export const ApiTokensCardWidget = (props: IProps) => {
                         </Tooltip>
                     </ActionIcon.Group>
 
-                    <Tooltip label={t('common.create')}>
+                    <Tooltip label={t('common.action.create')}>
                         <ActionIcon
                             onClick={() => {
                                 modals.open({

@@ -19,7 +19,7 @@ export const ConfigProfileInboundsDrawer = NiceModal.create((props: IProps) => {
     const { t } = useTranslation()
 
     const modal = useModal()
-    const { modalProps } = useNiceMantineModal({ modal })
+    const { modalProps } = useNiceMantineModal({ modal, drawer: true })
 
     const { data: configProfileInbounds, isLoading } = useGetConfigProfileInbounds({
         route: {

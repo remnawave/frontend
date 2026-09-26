@@ -38,12 +38,21 @@ import {
     NodesUsageStatsModal,
     NodeInboundsHostsDrawer,
     NodeUsageStatsDrawer,
-    NodeGeocheckModal
+    NodeGeocheckModal,
+    NodeSshTerminalWindow
 } from './nodes'
 import { PasskeysDrawer } from './remnawave-settings'
 import { SharedListEditorModal, SharedListsModal } from './shared-lists'
 import { SnippetsModal } from './snippets'
-import { CreateModal, HelpDrawerShared, RenameModalShared } from './universal'
+import {
+    Base64EditorModal,
+    CreateModal,
+    HelpDrawerShared,
+    JsonEditorModal,
+    EditTagsModalShared,
+    QuickLinksModalShared,
+    RenameModalShared
+} from './universal'
 import {
     DetailedUserInfoDrawer,
     ViewUserModal,
@@ -65,7 +74,11 @@ import {
 export const MODAL_REGISTRY = {
     helpDrawer: HelpDrawerShared,
     renameModal: RenameModalShared,
+    editTagsModal: EditTagsModalShared,
     createModal: CreateModal,
+    jsonEditorModal: JsonEditorModal,
+    base64EditorModal: Base64EditorModal,
+    quickLinksModal: QuickLinksModalShared,
 
     users_viewUserModal: ViewUserModal,
     users_detailedUserInfoDrawer: DetailedUserInfoDrawer,
@@ -92,6 +105,7 @@ export const MODAL_REGISTRY = {
     nodes_nodesConfigProfilesDrawer: NodesConfigProfilesDrawer,
     nodes_nodeInboundsHostsDrawer: NodeInboundsHostsDrawer,
     nodes_nodeGeocheckModal: NodeGeocheckModal,
+    nodes_nodeSshTerminal: NodeSshTerminalWindow,
 
     internalSquads_internalSquadsInboundsDrawer: InternalSquadsInboundsDrawer,
     internalSquads_internalSquadAccessibleNodesDrawer: InternalSquadAccessibleNodesDrawer,

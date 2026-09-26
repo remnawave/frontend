@@ -1,54 +1,7 @@
-.sharedListTable {
-    border: 1px solid rgb(255, 255, 255, 0.08);
-    border-radius: var(--mantine-radius-md);
-    overflow: hidden;
-    background: rgb(255, 255, 255, 0.02);
-}
-
-.sharedListRow {
-    display: grid;
-    grid-template-columns: minmax(0, 1.4fr) max-content 44px;
-    grid-template-areas: 'name meta actions';
-    gap: 16px;
-    align-items: center;
-    padding: 11px 16px;
-    border-bottom: 1px solid rgb(255, 255, 255, 0.04);
-    cursor: pointer;
-    outline: none;
-    transition: background-color 120ms ease;
-}
-
-.sharedListRow > *:nth-child(1) {
-    grid-area: name;
-}
-
-.sharedListRow > *:nth-child(2) {
-    grid-area: meta;
-}
-
-.sharedListRow > *:nth-child(3) {
-    grid-area: actions;
-    justify-self: end;
-}
-
-@media (max-width: 48em) {
-    .sharedListRow {
-        grid-template-columns: minmax(0, 1fr) 44px;
-        grid-template-areas:
-            'name actions'
-            'meta actions';
-        gap: 6px 10px;
-    }
-}
-
-.sharedListRow:last-child {
-    border-bottom: none;
-}
-
-.sharedListRow:hover {
-    background-color: rgb(255, 255, 255, 0.02);
-}
-
-.sharedListRow:focus-visible {
-    background-color: rgb(255, 255, 255, 0.04);
+.dot {
+    flex-shrink: 0;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--mantine-color-indigo-5);
 }

@@ -80,7 +80,7 @@ export const NodeIpRow = (props: IProps) => {
                 <Menu.Target>
                     <Tooltip label={t(meta.labelKey)}>
                         <ActionIcon
-                            aria-label={t('node-ips.status')}
+                            aria-label={t('common.field.status')}
                             color={meta.color}
                             size={`input-${size}`}
                             variant="soft"

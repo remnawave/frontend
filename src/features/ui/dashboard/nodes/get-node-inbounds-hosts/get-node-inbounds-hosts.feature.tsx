@@ -14,7 +14,7 @@ const GetNodeInboundsHostsFeatureComponent = (props: IProps) => {
     const { t } = useTranslation()
 
     return (
-        <Tooltip label={t('get-node-inbounds-hosts.feature.inbounds-and-hosts')}>
+        <Tooltip label={t('common.field.inbounds-hosts')}>
             <ActionIcon
                 color="teal"
                 onClick={() => {

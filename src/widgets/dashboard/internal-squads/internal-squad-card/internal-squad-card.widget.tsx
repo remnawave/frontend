@@ -6,7 +6,7 @@ import {
     TbChartArcs,
     TbCirclesRelation,
     TbServerCog,
-    TbTag,
+    TbTags,
     TbUsersMinus,
     TbUsersPlus
 } from 'react-icons/tb'
@@ -17,6 +17,7 @@ import { EntityCardShared } from '@shared/ui/entity-card'
 import { formatInt } from '@shared/utils/misc'
 
 interface IProps {
+    disableReordering?: boolean
     handleAddToUsers: (internalSquadUuid: string, internalSquadName: string) => void
     handleDeleteInternalSquad: (internalSquadUuid: string, internalSquadName: string) => void
     handleRemoveFromUsers: (internalSquadUuid: string, internalSquadName: string) => void
@@ -26,6 +27,7 @@ interface IProps {
 
 export function InternalSquadCardWidget(props: IProps) {
     const {
+        disableReordering = false,
         handleAddToUsers,
         handleDeleteInternalSquad,
         handleRemoveFromUsers,
@@ -47,60 +49,59 @@ export function InternalSquadCardWidget(props: IProps) {
 
     return (
         <WithDndSortable
-            dragHandlePosition="top-right"
+            disableReordering={disableReordering}
+            dragHandlePosition="inline-end"
             id={internalSquad.uuid}
             isDragOverlay={isDragOverlay}
         >
-            <EntityCardShared.Root withTopAccent={isActive}>
+            <EntityCardShared.Root isActive={isActive} onClick={handleOpenInbounds}>
                 <EntityCardShared.Header>
-                    <EntityCardShared.Icon highlight={isActive} onClick={handleOpenInbounds}>
-                        <TbCirclesRelation size={28} />
+                    <EntityCardShared.Icon highlight={isActive}>
+                        <TbCirclesRelation size={22} />
                     </EntityCardShared.Icon>
-                    <EntityCardShared.Content title={internalSquad.name}>
-                        <Group gap="xs" wrap="nowrap">
-                            <Tooltip label={t('internal-squads-grid.widget.inbounds')}>
-                                <Badge
-                                    color="blue"
-                                    leftSection={<PiTag size={12} />}
-                                    size="lg"
-                                    variant="soft"
-                                >
-                                    {formatInt(inboundsCount, {
-                                        thousandSeparator: ','
-                                    })}
-                                </Badge>
-                            </Tooltip>
+                    <EntityCardShared.Content
+                        tags={internalSquad.tags}
+                        badges={
+                            <Group gap="xs" wrap="nowrap">
+                                <Tooltip label={t('common.field.inbounds')}>
+                                    <Badge
+                                        color="blue"
+                                        leftSection={<PiTag size={12} />}
+                                        size="lg"
+                                        variant="soft"
+                                    >
+                                        {formatInt(inboundsCount, {
+                                            thousandSeparator: ','
+                                        })}
+                                    </Badge>
+                                </Tooltip>
 
-                            <Tooltip label={t('internal-squads-grid.widget.users')}>
-                                <Badge
-                                    color={isActive ? 'teal' : 'gray'}
-                                    leftSection={<PiUsers size={12} />}
-                                    size="lg"
-                                    variant="soft"
-                                >
-                                    {formatInt(membersCount, {
-                                        thousandSeparator: ','
-                                    })}
-                                </Badge>
-                            </Tooltip>
-                        </Group>
-                    </EntityCardShared.Content>
+                                <Tooltip label={t('internal-squads-grid.widget.users')}>
+                                    <Badge
+                                        color={isActive ? 'teal' : 'gray'}
+                                        leftSection={<PiUsers size={12} />}
+                                        size="lg"
+                                        variant="soft"
+                                    >
+                                        {formatInt(membersCount, {
+                                            thousandSeparator: ','
+                                        })}
+                                    </Badge>
+                                </Tooltip>
+                            </Group>
+                        }
+                        title={internalSquad.name}
+                    />
                 </EntityCardShared.Header>
 
                 <EntityCardShared.Actions>
-                    <EntityCardShared.Button
-                        leftSection={<TbTag size={16} />}
-                        onClick={handleOpenInbounds}
-                    >
-                        {t('common.edit')}
-                    </EntityCardShared.Button>
                     <EntityCardShared.Menu>
                         <Menu.Item
                             color="teal"
                             leftSection={<TbUsersPlus size={18} />}
                             onClick={() => handleAddToUsers(internalSquad.uuid, internalSquad.name)}
                         >
-                            {t('internal-squads-grid.widget.add-users')}
+                            {t('common.action.add-users')}
                         </Menu.Item>
                         <Menu.Item
                             color="red"
@@ -110,7 +111,7 @@ export function InternalSquadCardWidget(props: IProps) {
                                 handleRemoveFromUsers(internalSquad.uuid, internalSquad.name)
                             }
                         >
-                            {t('internal-squads-grid.widget.remove-users')}
+                            {t('common.action.remove-users')}
                         </Menu.Item>
 
                         <Menu.Item
@@ -132,7 +133,7 @@ export function InternalSquadCardWidget(props: IProps) {
                                 })
                             }
                         >
-                            {t('common.usage-stats')}
+                            {t('common.field.usage-stats')}
                         </Menu.Item>
 
                         <CopyButton timeout={2000} value={internalSquad.uuid}>
@@ -144,7 +145,7 @@ export function InternalSquadCardWidget(props: IProps) {
                                     }
                                     onClick={copy}
                                 >
-                                    {t('common.copy-uuid')}
+                                    {t('common.action.copy-uuid')}
                                 </Menu.Item>
                             )}
                         </CopyButton>
@@ -159,7 +160,23 @@ export function InternalSquadCardWidget(props: IProps) {
                                 })
                             }
                         >
-                            {t('common.rename')}
+                            {t('common.action.rename')}
+                        </Menu.Item>
+
+                        <Menu.Item
+                            leftSection={<TbTags size={18} />}
+
+                            onClick={() => {
+                                showModal('editTagsModal', {
+                                    editTagsFrom: 'internalSquad',
+
+                                    tags: internalSquad.tags,
+
+                                    uuid: internalSquad.uuid
+                                })
+                            }}
+                        >
+                            {t('common.field.tags')}
                         </Menu.Item>
 
                         <Menu.Item

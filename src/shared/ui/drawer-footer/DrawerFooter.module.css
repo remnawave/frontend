@@ -1,8 +1,19 @@
-.modalFooter {
-    bottom: 0;
-    border-radius: var(--mantine-radius-default);
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    padding: 10px;
-    background: rgba(22, 27, 35, 0.95);
+.footer {
+    position: sticky;
+    bottom: -1px;
+    z-index: 2;
+
+    width: calc(100% + 2 * var(--mantine-spacing-sm));
+    margin-top: var(--mantine-spacing-md);
+    margin-left: calc(-1 * var(--mantine-spacing-sm));
+
+    padding: var(--mantine-spacing-sm) var(--mantine-spacing-lg);
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    background-color: var(--mantine-color-body);
+}
+
+@supports (padding: env(safe-area-inset-bottom)) {
+    .footer {
+        padding-bottom: max(var(--mantine-spacing-sm), env(safe-area-inset-bottom, 0px));
+    }
 }

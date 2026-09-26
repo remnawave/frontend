@@ -49,7 +49,7 @@ export const MultiSelectNodesModalContent = (props: IProps) => {
                 iconColor="orange"
                 isLoading={isPending}
                 onClick={() => handleAction(NODES_BULK_ACTIONS.DISABLE)}
-                title={t('common.disable')}
+                title={t('common.action.disable')}
                 variant="soft"
             />
             <ActionCardShared
@@ -58,7 +58,7 @@ export const MultiSelectNodesModalContent = (props: IProps) => {
                 iconColor="cyan"
                 isLoading={isPending}
                 onClick={() => handleAction(NODES_BULK_ACTIONS.ENABLE)}
-                title={t('common.enable')}
+                title={t('common.action.enable')}
                 variant="soft"
             />
             <ActionCardShared
@@ -67,7 +67,7 @@ export const MultiSelectNodesModalContent = (props: IProps) => {
                 iconColor="violet"
                 isLoading={isPending}
                 onClick={() => handleAction(NODES_BULK_ACTIONS.RESET_TRAFFIC)}
-                title={t('reset-node-traffic.feature.reset-traffic')}
+                title={t('common.action.reset-traffic')}
                 variant="soft"
             />
         </Stack>

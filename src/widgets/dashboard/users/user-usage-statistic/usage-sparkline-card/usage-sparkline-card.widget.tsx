@@ -31,7 +31,7 @@ export const UserUsageSparklineCardWidget = (props: IProps) => {
             <Stack gap="md">
                 <Box>
                     <Text c="dimmed" fw={500} mb={4} size="xs" tt="uppercase">
-                        {t('user-usage-modal.widget.total-traffic')}
+                        {t('common.field.total-traffic')}
                     </Text>
                     {isLoading ? (
                         <Skeleton height={28} width={140} />

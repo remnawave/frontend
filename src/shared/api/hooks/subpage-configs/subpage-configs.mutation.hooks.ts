@@ -4,6 +4,7 @@ import {
     CreateSubpageConfigCommand,
     DeleteSubpageConfigCommand,
     ReorderSubpageConfigsCommand,
+    SetSubpageConfigTagsCommand,
     UpdateSubpageConfigCommand
 } from '@remnawave/backend-contract'
 
@@ -113,6 +114,23 @@ export const useCloneSubpageConfig = createMutationHook({
         onError: (error) => {
             notifications.show({
                 title: `Clone Subscription Page Config`,
+                message:
+                    error instanceof Error ? error.message : `Request failed with unknown error.`,
+                color: 'red'
+            })
+        }
+    }
+})
+
+export const useSetSubpageConfigsTags = createMutationHook({
+    endpoint: SetSubpageConfigTagsCommand.TSQ_url,
+    bodySchema: SetSubpageConfigTagsCommand.RequestBodySchema,
+    responseSchema: SetSubpageConfigTagsCommand.ResponseSchema,
+    requestMethod: SetSubpageConfigTagsCommand.endpointDetails.REQUEST_METHOD,
+    rMutationParams: {
+        onError: (error) => {
+            notifications.show({
+                title: 'Update tags',
                 message:
                     error instanceof Error ? error.message : `Request failed with unknown error.`,
                 color: 'red'

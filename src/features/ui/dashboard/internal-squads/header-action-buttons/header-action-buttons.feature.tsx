@@ -31,7 +31,7 @@ export const InternalSquadsHeaderActionButtonsFeature = (props: IProps) => {
             {internalSquadCount > 0 && <UniversalSpotlightActionIconShared />}
 
             <ActionIconGroup>
-                <Tooltip label={t('common.update')} withArrow>
+                <Tooltip label={t('common.action.update')} withArrow>
                     <ActionIcon
                         loading={isFetching}
                         onClick={handleUpdate}
@@ -45,7 +45,7 @@ export const InternalSquadsHeaderActionButtonsFeature = (props: IProps) => {
 
             <ActionIconGroup>
                 <Tooltip
-                    label={t('internal-squad-header-action-buttons.feature.create-internal-squad')}
+                    label={t('common.action.create')}
                     withArrow
                 >
                     <ActionIcon

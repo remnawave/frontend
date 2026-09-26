@@ -22,6 +22,7 @@ import {
     TbArrowUp,
     TbFingerprint,
     TbNetwork,
+    TbRadar,
     TbRadar2,
     TbRefresh,
     TbSearch,
@@ -33,6 +34,7 @@ import {
 import { VirtuosoGrid, VirtuosoGridHandle } from 'react-virtuoso'
 
 import { useGetNodes } from '@shared/api/hooks'
+import { EmptyPageLayout } from '@shared/ui/layouts/empty-page'
 import { MetricCardShared } from '@shared/ui/metrics/metric-card'
 import { PageHeaderShared } from '@shared/ui/page-header'
 import { SectionCard } from '@shared/ui/section-card'
@@ -122,7 +124,7 @@ export function SessionsExplorerWidget() {
                             size="sm"
                             variant="soft"
                         >
-                            {t('common.try-again')}
+                            {t('common.action.try-again')}
                         </Button>
                     </Stack>
                 </Center>
@@ -194,22 +196,7 @@ export function SessionsExplorerWidget() {
                 </Group>
             )}
 
-            {aggregatedUsers.length === 0 && (
-                <SectionCard.Root gap="sm">
-                    <SectionCard.Section>
-                        <Center h="230">
-                            <Stack align="center" gap="xs">
-                                <PiEmptyDuotone color="var(--mantine-color-gray-5)" size="3rem" />
-                                <Text c="dimmed" size="sm">
-                                    {t(
-                                        'sessions-explorer.widget.no-active-sessions-found-on-any-node'
-                                    )}
-                                </Text>
-                            </Stack>
-                        </Center>
-                    </SectionCard.Section>
-                </SectionCard.Root>
-            )}
+            {aggregatedUsers.length === 0 && <EmptyPageLayout icon={<TbRadar size="3rem" />} />}
 
             {isSearchActive && filteredUsers.length === 0 && (
                 <SectionCard.Root gap="sm">

@@ -71,7 +71,7 @@ export const UserSubscriptionRequestsModalContent = (props: IProps) => {
                         </Stack>
                     </Group>
                     <Group gap="xs">
-                        <Tooltip label={t('common.refresh')}>
+                        <Tooltip label={t('common.action.refresh')}>
                             <ActionIcon
                                 color="indigo"
                                 loading={isRefetching}
@@ -86,9 +86,11 @@ export const UserSubscriptionRequestsModalContent = (props: IProps) => {
                 </Group>
             </Card>
 
-            {mobile && !isLoading && records?.total === 0 && <EmptyPageLayout />}
+            {mobile && !isLoading && records?.total === 0 && (
+                <EmptyPageLayout icon={<TbDevices size={32} />} />
+            )}
 
-            {mobile && isLoading && <LoaderModalShared h="80vh" text="Loading..." w="100%" />}
+            {mobile && isLoading && <LoaderModalShared mih="80vh" />}
             {mobile && !isLoading && records && records.records.length > 0 && (
                 <ScrollAreaAutosize style={{ flex: 1, minHeight: 0 }}>
                     <Stack>

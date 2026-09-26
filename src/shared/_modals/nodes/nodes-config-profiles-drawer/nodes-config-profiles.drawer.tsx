@@ -188,7 +188,7 @@ export const NodesConfigProfilesDrawer = NiceModal.create((props: IProps) => {
                                         {filteredProfiles.find(
                                             (p) => p.uuid === selectedProfileUuid
                                         )?.name ||
-                                            t('config-profiles.drawer.widget.no-profile-selected')}
+                                            t('common.message.no-profile-selected')}
                                     </Text>
                                     <Text c="dimmed" size="xs">
                                         {t('internal-squads.drawer.widget.selected-inbounds', {
@@ -199,7 +199,7 @@ export const NodesConfigProfilesDrawer = NiceModal.create((props: IProps) => {
                             ) : (
                                 <Box>
                                     <Text fw={700} size="sm">
-                                        {t('config-profiles.drawer.widget.no-profile-selected')}
+                                        {t('common.message.no-profile-selected')}
                                     </Text>
                                     <Text c="dimmed" size="xs">
                                         {t('config-profiles.drawer.widget.no-inbounds-selected')}
@@ -219,7 +219,7 @@ export const NodesConfigProfilesDrawer = NiceModal.create((props: IProps) => {
                                 <TbX size={24} />
                             </ActionIcon>
 
-                            <Tooltip label={t('common.save')}>
+                            <Tooltip label={t('common.action.save')}>
                                 <ActionIcon
                                     color="teal"
                                     disabled={selectedInbounds.size === 0}
@@ -237,15 +237,15 @@ export const NodesConfigProfilesDrawer = NiceModal.create((props: IProps) => {
                 <TextInput
                     leftSection={<TbSearch size={16} />}
                     onChange={(event) => setSearchQuery(event.currentTarget.value)}
-                    placeholder={t('config-profiles.drawer.widget.search-profiles-or-inbounds')}
+                    placeholder={t('common.message.search-profiles-or-inbounds')}
                     value={searchQuery}
                 />
 
                 {filteredProfiles.length === 0 ? (
                     <Text c="dimmed" py="xl" size="sm" ta="center">
                         {debouncedSearchQuery
-                            ? t('config-profiles.drawer.widget.no-profiles-or-inbounds-found')
-                            : t('config-profiles.drawer.widget.no-config-profiles-available')}
+                            ? t('common.message.no-profiles-or-inbounds-found')
+                            : t('common.message.no-config-profiles-available')}
                     </Text>
                 ) : (
                     <Box className={classes.listContainer}>

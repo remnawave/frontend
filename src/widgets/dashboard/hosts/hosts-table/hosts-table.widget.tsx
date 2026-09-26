@@ -12,6 +12,7 @@ import { GetHostsCommand } from '@remnawave/backend-contract'
 import { useWindowVirtualizer } from '@tanstack/react-virtual'
 import { HostCardWidget } from '@widgets/dashboard/hosts/host-card'
 import { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { TbListCheck } from 'react-icons/tb'
 
 import { useGetNodes } from '@shared/api/hooks'
 import { useIsMobile } from '@shared/hooks'
@@ -131,8 +132,8 @@ export const HostsTableWidget = memo((props: IProps) => {
     }
 
     return (
-        <Stack gap="md">
-            {hosts.length === 0 && <EmptyPageLayout />}
+        <Stack gap={0}>
+            {hosts.length === 0 && <EmptyPageLayout icon={<TbListCheck size={32} />} />}
 
             <TagFilterBar activeTag={activeTag} items={hosts} onChange={setHostsActiveTag} />
 

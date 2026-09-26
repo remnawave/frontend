@@ -54,7 +54,7 @@ export const SelectBillingNodeShared = (props: IProps) => {
             <Select
                 data={[]}
                 disabled
-                label={t('select-billing-node.shared.billing-node')}
+                label={t('common.field.billing-node')}
                 placeholder={t('select-billing-node.shared.no-billing-nodes-available')}
             />
         )
@@ -108,7 +108,7 @@ export const SelectBillingNodeShared = (props: IProps) => {
             }}
             data={selectData}
             description={t('select-billing-node.shared.select-the-billing-node')}
-            label={t('select-billing-node.shared.billing-node')}
+            label={t('common.field.billing-node')}
             leftSection={leftSection}
             leftSectionPointerEvents="none"
             leftSectionWidth={selectedBillingNode ? 40 : 0}

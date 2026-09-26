@@ -1,12 +1,13 @@
-import { Badge, Center, Group, Stack, Text } from '@mantine/core'
+import { Badge, Group } from '@mantine/core'
 import { Spotlight } from '@mantine/spotlight'
 import { GetNodesCommand } from '@remnawave/backend-contract'
 import ReactCountryFlag from 'react-country-flag'
 import { useTranslation } from 'react-i18next'
-import { PiEmptyDuotone, PiUsersDuotone } from 'react-icons/pi'
+import { PiUsersDuotone } from 'react-icons/pi'
 import { TbServer, TbServer2 } from 'react-icons/tb'
 
 import { showModal } from '@shared/_modals/show-modal'
+import { EmptyPageLayout } from '@shared/ui/layouts/empty-page'
 
 import { NodeStatusBadgeWidget } from '../node-status-badge'
 
@@ -65,21 +66,12 @@ export const NodesSpotlightSearchWidget = ({ nodes }: IProps) => {
             centered
             highlightQuery
             maxHeight={350}
-            nothingFound={
-                <Center h="230">
-                    <Stack align="center" gap="xs">
-                        <PiEmptyDuotone color="var(--mantine-color-gray-5)" size="3rem" />
-                        <Text c="dimmed" size="sm">
-                            {t('nodes-spotlight-search.widget.no-nodes-found')}
-                        </Text>
-                    </Stack>
-                </Center>
-            }
+            nothingFound={<EmptyPageLayout icon={<TbServer size="32px" />} />}
             overlayProps={{ backgroundOpacity: 0.6, blur: 0 }}
             scrollable
             searchProps={{
                 leftSection: <TbServer2 size={20} />,
-                placeholder: t('nodes-spotlight-search.widget.search-by-name-or-address')
+                placeholder: `${t('common.action.search')}...`
             }}
             shortcut={['mod + F']}
         />

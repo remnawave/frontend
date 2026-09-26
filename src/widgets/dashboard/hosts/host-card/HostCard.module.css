@@ -2,16 +2,10 @@
     display: flex;
     align-items: center;
     border-radius: var(--mantine-radius-md);
-    border: 1px solid light-dark(var(--mantine-color-gray-2), var(--mantine-color-dark-6));
+    border: 1px solid var(--mantine-color-dark-5);
     padding: var(--mantine-spacing-xs) var(--mantine-spacing-md);
     margin-bottom: var(--mantine-spacing-xs);
-
-    background: linear-gradient(
-        135deg,
-        var(--mantine-color-dark-6) 0%,
-        var(--mantine-color-dark-7) 100%
-    );
-    box-shadow: var(--mantine-shadow-sm);
+    background: #1b1f26;
 }
 
 .mobileItem {
@@ -21,21 +15,12 @@
     border-radius: var(--mantine-radius-lg);
     transition: all 0.2s ease;
     height: 190px;
-    background: linear-gradient(
-        135deg,
-        var(--mantine-color-dark-6) 0%,
-        var(--mantine-color-dark-7) 100%
-    );
+    background: #1b1f26;
 }
 
 .mobileItem:active {
     transform: scale(0.98);
-    box-shadow: var(--mantine-shadow-lg);
-    background: linear-gradient(
-        135deg,
-        var(--mantine-color-dark-6) 0%,
-        var(--mantine-color-dark-7) 100%
-    );
+    background: #1b1f26;
 }
 
 .filteredItem {
@@ -62,10 +47,9 @@
 
 /* DragOverlay styles */
 .item[data-drag-overlay='true'] {
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
-    border-color: light-dark(var(--mantine-color-blue-4), var(--mantine-color-blue-4));
+    border-color: var(--mantine-color-blue-4);
     z-index: 9999;
-    background: light-dark(var(--mantine-color-white), var(--mantine-color-dark-6));
+    background: var(--mantine-color-dark-6);
 }
 
 .dragHandle {

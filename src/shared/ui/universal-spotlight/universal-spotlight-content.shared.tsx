@@ -1,8 +1,8 @@
-import { Center, Stack, Text } from '@mantine/core'
 import { Spotlight, SpotlightProps } from '@mantine/spotlight'
 import { useTranslation } from 'react-i18next'
-import { PiEmptyDuotone } from 'react-icons/pi'
 import { TbSearch } from 'react-icons/tb'
+
+import { EmptyPageLayout } from '../layouts/empty-page'
 
 interface IProps {
     actions: SpotlightProps['actions']
@@ -18,21 +18,12 @@ export const UniversalSpotlightContentShared = (props: IProps) => {
             centered
             highlightQuery
             maxHeight={350}
-            nothingFound={
-                <Center h="230">
-                    <Stack align="center" gap="xs">
-                        <PiEmptyDuotone color="var(--mantine-color-gray-5)" size="3rem" />
-                        <Text c="dimmed" size="sm">
-                            {t('common.nothing-found')}
-                        </Text>
-                    </Stack>
-                </Center>
-            }
+            nothingFound={<EmptyPageLayout icon={<TbSearch size="32px" />} />}
             overlayProps={{ backgroundOpacity: 0.6, blur: 0 }}
             scrollable
             searchProps={{
                 leftSection: <TbSearch color="var(--mantine-color-gray-5)" size={16} />,
-                placeholder: `${t('common.search')}...`
+                placeholder: `${t('common.action.search')}...`
             }}
             shortcut={['mod + F']}
         />

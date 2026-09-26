@@ -222,7 +222,7 @@ export const BulkAllUsersUpdateModal = NiceModal.create(() => {
                         size="md"
                         variant="light"
                     >
-                        {t('common.update')}
+                        {t('common.action.update')}
                     </Button>
                 </ModalFooter>
             </motion.div>

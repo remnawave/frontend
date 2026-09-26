@@ -19,7 +19,7 @@ import { useGetNodes, useRestartAllNodes } from '@shared/api/hooks'
 import { ActionCardShared } from '@shared/ui'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 
-import { NODES_VIEW_MODE } from '@entities/dashboard/view-preferences-store'
+import { NODES_VIEW_MODE, useExperimentalFeature } from '@entities/dashboard/view-preferences-store'
 
 interface IProps {
     setViewMode: (viewMode: NODES_VIEW_MODE) => void
@@ -30,6 +30,8 @@ export const NodesHeaderActionButtonsFeature = (props: IProps) => {
     const { setViewMode, viewMode } = props
 
     const { t } = useTranslation()
+
+    const isNodeIntegrationsEnabled = useExperimentalFeature('nodeIntegrations')
 
     const {
         isLoading: isGetNodesPending,
@@ -135,18 +137,20 @@ export const NodesHeaderActionButtonsFeature = (props: IProps) => {
                 </Tooltip>
             </ActionIconGroup>
 
-            <ActionIconGroup>
-                <Tooltip label={t('node-integrations.modal.title')} withArrow>
-                    <ActionIcon
-                        color="pink"
-                        onClick={() => showModal('nodeIntegrations_nodeIntegrationsModal')}
-                        size="input-md"
-                        variant="soft"
-                    >
-                        <TbPlugConnected size="24px" />
-                    </ActionIcon>
-                </Tooltip>
-            </ActionIconGroup>
+            {isNodeIntegrationsEnabled && (
+                <ActionIconGroup>
+                    <Tooltip label={t('node-integrations.modal.title')} withArrow>
+                        <ActionIcon
+                            color="pink"
+                            onClick={() => showModal('nodeIntegrations_nodeIntegrationsModal')}
+                            size="input-md"
+                            variant="soft"
+                        >
+                            <TbPlugConnected size="24px" />
+                        </ActionIcon>
+                    </Tooltip>
+                </ActionIconGroup>
+            )}
 
             <ActionIconGroup>
                 <Tooltip
@@ -168,7 +172,7 @@ export const NodesHeaderActionButtonsFeature = (props: IProps) => {
             </ActionIconGroup>
 
             <ActionIconGroup>
-                <Tooltip label={t('common.update')} withArrow>
+                <Tooltip label={t('common.action.update')} withArrow>
                     <ActionIcon
                         loading={isGetNodesPending || isPending || isRefetching}
                         onClick={() => refetchNodes()}
@@ -180,7 +184,7 @@ export const NodesHeaderActionButtonsFeature = (props: IProps) => {
                 </Tooltip>
             </ActionIconGroup>
             <ActionIconGroup>
-                <Tooltip label={t('nodes-header-action-buttons.feature.create-new-node')} withArrow>
+                <Tooltip label={t('common.action.create')} withArrow>
                     <ActionIcon
                         color="teal"
                         onClick={() => showModal('nodes_createNodeModal')}

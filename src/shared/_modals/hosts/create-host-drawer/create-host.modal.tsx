@@ -2,8 +2,11 @@ import NiceModal, { useModal } from '@ebay/nice-modal-react'
 import { Drawer } from '@mantine/core'
 import { useForm, schemaResolver } from '@mantine/form'
 import { notifications } from '@mantine/notifications'
-import { CreateHostCommand, SECURITY_LAYERS } from '@remnawave/backend-contract'
-import { useState } from 'react'
+import {
+    CreateHostCommand,
+    INTERNAL_SQUADS_MODE,
+    SECURITY_LAYERS
+} from '@remnawave/backend-contract'
 import { useTranslation } from 'react-i18next'
 import { PiListChecks } from 'react-icons/pi'
 
@@ -38,8 +41,6 @@ export const CreateHostDrawer = NiceModal.create(() => {
     const { data: templates } = useGetSubscriptionTemplates()
     const { data: hostTags } = useGetHostTags()
 
-    const [advancedOpened, setAdvancedOpened] = useState(false)
-
     const form = useForm<CreateHostCommand.RequestBody>({
         mode: 'uncontrolled',
         name: 'create-host-form',
@@ -52,6 +53,7 @@ export const CreateHostDrawer = NiceModal.create(() => {
         validate: schemaResolver(CreateHostCommand.RequestBodySchema),
 
         initialValues: {
+            isDisabled: true,
             securityLayer: SECURITY_LAYERS.DEFAULT,
             port: 0,
             remark: '',
@@ -59,6 +61,10 @@ export const CreateHostDrawer = NiceModal.create(() => {
             inbound: {
                 configProfileUuid: '',
                 configProfileInboundUuid: ''
+            },
+            internalSquads: {
+                mode: INTERNAL_SQUADS_MODE.EXCLUDE,
+                squads: []
             }
         }
     })
@@ -82,7 +88,7 @@ export const CreateHostDrawer = NiceModal.create(() => {
     const handleSubmit = form.onSubmit(async (values) => {
         if (!values.inbound.configProfileInboundUuid || !values.inbound.configProfileUuid) {
             notifications.show({
-                title: t('create-host-modal.widget.error'),
+                title: t('common.message.error'),
                 message: t('create-host-modal.widget.please-select-the-config-profile-and-inbound'),
                 color: 'red'
             })
@@ -93,7 +99,6 @@ export const CreateHostDrawer = NiceModal.create(() => {
         createHost({
             variables: {
                 ...values,
-                isDisabled: !values.isDisabled,
                 sockoptParams: parseJsonField(values.sockoptParams),
                 muxParams: parseJsonField(values.muxParams),
                 xhttpExtraParams: parseJsonField(values.xhttpExtraParams),
@@ -130,7 +135,7 @@ export const CreateHostDrawer = NiceModal.create(() => {
             {...modalProps}
             padding="lg"
             position="right"
-            size="lg"
+            size="700px"
             title={
                 <BaseOverlayHeader
                     iconColor="teal"
@@ -144,7 +149,6 @@ export const CreateHostDrawer = NiceModal.create(() => {
                 <LoadingScreen />
             ) : (
                 <BaseHostForm
-                    advancedOpened={advancedOpened}
                     configProfiles={configProfiles.configProfiles}
                     form={form}
                     handleSubmit={handleSubmit}
@@ -152,7 +156,6 @@ export const CreateHostDrawer = NiceModal.create(() => {
                     internalSquads={internalSquads.internalSquads}
                     isSubmitting={isCreateHostPending}
                     nodes={nodes}
-                    setAdvancedOpened={setAdvancedOpened}
                     subscriptionTemplates={templates.templates}
                 />
             )}

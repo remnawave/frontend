@@ -24,7 +24,7 @@ export function StatsWidget() {
 
     const stats: IMetricCardProps[] = [
         {
-            title: t('stats.widget.overdue'),
+            title: t('common.message.overdue'),
             value: overdueCount,
             subtitle:
                 overdueCount > 0

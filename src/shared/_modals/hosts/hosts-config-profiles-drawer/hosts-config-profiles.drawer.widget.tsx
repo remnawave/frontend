@@ -168,7 +168,7 @@ export const HostsConfigProfilesDrawer = NiceModal.create((props: IProps) => {
                                             (p) => p.uuid === selectedProfileUuid
                                         )?.name ||
                                             t(
-                                                'hosts-config-profiles.drawer.widget.no-profile-selected'
+                                                'common.message.no-profile-selected'
                                             )}
                                     </Text>
                                     <Text c="white" ff="monospace" size="xs">
@@ -185,7 +185,7 @@ export const HostsConfigProfilesDrawer = NiceModal.create((props: IProps) => {
                                 <>
                                     <Text fw={700} size="sm">
                                         {t(
-                                            'hosts-config-profiles.drawer.widget.no-inbound-selected'
+                                            'common.message.no-inbound-selected'
                                         )}
                                     </Text>
                                     <Text c="dimmed" ff="monospace" size="xs">
@@ -208,7 +208,7 @@ export const HostsConfigProfilesDrawer = NiceModal.create((props: IProps) => {
                                 <TbX size={24} />
                             </ActionIcon>
 
-                            <Tooltip label={t('common.save')}>
+                            <Tooltip label={t('common.action.save')}>
                                 <ActionIcon
                                     color="teal"
                                     disabled={!selectedInbound}
@@ -227,7 +227,7 @@ export const HostsConfigProfilesDrawer = NiceModal.create((props: IProps) => {
                     leftSection={<TbSearch size={16} />}
                     onChange={(event) => setSearchQuery(event.currentTarget.value)}
                     placeholder={t(
-                        'hosts-config-profiles.drawer.widget.search-profiles-or-inbounds'
+                        'common.message.search-profiles-or-inbounds'
                     )}
                     value={searchQuery}
                 />
@@ -235,8 +235,8 @@ export const HostsConfigProfilesDrawer = NiceModal.create((props: IProps) => {
                 {filteredProfiles.length === 0 ? (
                     <Text c="dimmed" py="xl" size="sm" ta="center">
                         {debouncedSearchQuery
-                            ? t('hosts-config-profiles.drawer.widget.no-profiles-or-inbounds-found')
-                            : t('hosts-config-profiles.drawer.widget.no-config-profiles-available')}
+                            ? t('common.message.no-profiles-or-inbounds-found')
+                            : t('common.message.no-config-profiles-available')}
                     </Text>
                 ) : (
                     <Box className={classes.listContainer}>

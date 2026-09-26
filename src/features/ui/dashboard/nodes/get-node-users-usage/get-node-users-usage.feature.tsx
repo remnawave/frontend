@@ -12,7 +12,7 @@ const GetNodeUsersUsageFeatureComponent = (props: IProps) => {
     const { t } = useTranslation()
 
     return (
-        <Tooltip label={t('common.usage-stats')}>
+        <Tooltip label={t('common.field.usage-stats')}>
             <ActionIcon
                 color="indigo"
                 onClick={() => {

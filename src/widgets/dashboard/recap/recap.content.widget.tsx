@@ -415,7 +415,7 @@ export function RecapContent() {
                             size="sm"
                             variant="filled"
                         >
-                            {t('common.copy')}
+                            {t('common.action.copy')}
                         </Button>
                         <Button
                             fullWidth
@@ -426,7 +426,7 @@ export function RecapContent() {
                             size="sm"
                             variant="default"
                         >
-                            {t('common.download')}
+                            {t('common.action.download')}
                         </Button>
                     </Group>
                 </Stack>

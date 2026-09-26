@@ -1,5 +1,5 @@
 import NiceModal, { useModal } from '@ebay/nice-modal-react'
-import { Box, Center, DataList, Drawer, Group, Stack } from '@mantine/core'
+import { DataList, Drawer, Group, Stack } from '@mantine/core'
 import { UserStatusBadge } from '@widgets/dashboard/users/user-status-badge'
 import { useTranslation } from 'react-i18next'
 import {
@@ -56,15 +56,7 @@ export const DetailedUserInfoDrawer = NiceModal.create((props: IProps) => {
                 />
             }
         >
-            {isUserLoading && (
-                <Center h="100%" mt="md" py="xl" ta="center">
-                    <Box>
-                        <LoaderModalShared
-                            text={t('detailed-user-info-drawer.widget.loading-user-info')}
-                        />
-                    </Box>
-                </Center>
-            )}
+            {isUserLoading && <LoaderModalShared mih="80vh" />}
 
             {!isUserLoading && user && (
                 <Stack gap="md">
@@ -98,7 +90,7 @@ export const DetailedUserInfoDrawer = NiceModal.create((props: IProps) => {
                                     value={user.shortUuid}
                                 />
                                 <CopyableDataListItem
-                                    label={t('detailed-user-info-drawer.widget.username')}
+                                    label={t('common.field.username')}
                                     value={user.username}
                                 />
                                 <CopyableDataListItem
@@ -111,11 +103,11 @@ export const DetailedUserInfoDrawer = NiceModal.create((props: IProps) => {
                                     value={user.telegramId}
                                 />
                                 <CopyableDataListItem
-                                    label={t('detailed-user-info-drawer.widget.description')}
+                                    label={t('common.field.description')}
                                     value={user.description}
                                 />
                                 <CopyableDataListItem
-                                    label={t('detailed-user-info-drawer.widget.tag')}
+                                    label={t('common.field.tag')}
                                     value={user.tag}
                                 />
                             </DataList>
@@ -180,7 +172,7 @@ export const DetailedUserInfoDrawer = NiceModal.create((props: IProps) => {
                         <SectionCard.Section>
                             <DataList withDivider orientation="vertical">
                                 <CopyableDataListItem
-                                    label={t('detailed-user-info-drawer.widget.subscription-url')}
+                                    label={t('common.field.subscription-url')}
                                     monospace
                                     value={user.subscriptionUrl}
                                 />
@@ -231,7 +223,7 @@ export const DetailedUserInfoDrawer = NiceModal.create((props: IProps) => {
                                     value={user.ssPassword}
                                 />
                                 <CopyableDataListItem
-                                    label={t('detailed-user-info-drawer.widget.first-connected-at')}
+                                    label={t('common.field.first-connected-at')}
                                     value={formatTimeUtil({
                                         time: user.userTraffic.firstConnectedAt,
                                         template: 'TIME_FIRST_DATETIME',
@@ -295,7 +287,7 @@ export const DetailedUserInfoDrawer = NiceModal.create((props: IProps) => {
                         <SectionCard.Section>
                             <DataList withDivider orientation="vertical">
                                 <CopyableDataListItem
-                                    label={t('detailed-user-info-drawer.widget.created-at')}
+                                    label={t('common.field.created-at')}
                                     value={formatTimeUtil({
                                         time: user.createdAt,
                                         template: 'TIME_FIRST_DATETIME',
@@ -303,7 +295,7 @@ export const DetailedUserInfoDrawer = NiceModal.create((props: IProps) => {
                                     })}
                                 />
                                 <CopyableDataListItem
-                                    label={t('detailed-user-info-drawer.widget.updated-at')}
+                                    label={t('common.field.updated-at')}
                                     value={formatTimeUtil({
                                         time: user.updatedAt,
                                         template: 'TIME_FIRST_DATETIME',

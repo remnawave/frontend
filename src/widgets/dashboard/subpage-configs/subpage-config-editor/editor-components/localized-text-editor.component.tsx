@@ -45,7 +45,7 @@ export function LocalizedTextEditor(props: IProps) {
     const filledCount = enabledLocales.filter((locale) => value[locale]?.trim()).length
     const previewLocale = enabledLocales[0]
     const previewText =
-        (previewLocale && value[previewLocale]) || t('localized-text-editor.component.not-set')
+        (previewLocale && value[previewLocale]) || t('common.message.not-set')
 
     return (
         <>

@@ -31,9 +31,18 @@
     color: var(--mantine-color-gray-4);
 }
 
+@keyframes statusBarIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
 .statusBar {
+    animation: statusBarIn 150ms ease;
     flex-shrink: 0;
-    z-index: 60;
     max-height: 30%;
     overflow-y: auto;
 }
@@ -65,5 +74,6 @@
     border: 1px solid var(--mantine-color-default-border);
     border-top: none;
     border-radius: 0 0 var(--mantine-radius-md) var(--mantine-radius-md);
+    transition: border-color 150ms ease;
     background-color: rgba(255, 255, 255, 0.02);
 }

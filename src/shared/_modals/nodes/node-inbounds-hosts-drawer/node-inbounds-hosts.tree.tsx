@@ -141,7 +141,7 @@ export function NodeInboundsHostsTree(props: IProps) {
                     meta?.kind === 'host'
                         ? (event) => {
                               event.stopPropagation()
-                              showModal('hosts_editHostDrawer', { host: meta.host })
+                              showModal('hosts_editHostDrawer', { hostUuid: meta.host.uuid })
                           }
                         : elementProps.onClick
                 }

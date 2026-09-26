@@ -92,7 +92,7 @@ export function TagFilterBar(props: IProps) {
             mb="xs"
             style={{
                 border: '1px solid rgb(255, 255, 255, 0.08)',
-                background: 'rgb(255, 255, 255, 0.02)'
+                background: '#1b1f26'
             }}
         >
             <Group gap="xs" p="xs" wrap="nowrap">
@@ -100,7 +100,7 @@ export function TagFilterBar(props: IProps) {
                     count={items?.length ?? 0}
                     icon={<TbStack2 size={16} />}
                     isActive={activeTag === null}
-                    label={t('common.all')}
+                    label={t('common.field.all')}
                     onClick={() => onChange(null)}
                 />
 
@@ -120,11 +120,21 @@ export function TagFilterBar(props: IProps) {
                         count={untaggedCount}
                         icon={<TbTagOff size={16} />}
                         isActive={activeTag === NO_TAG}
-                        label={t('common.without-tags')}
+                        label={t('common.field.untagged')}
                         onClick={() => onChange(NO_TAG)}
                     />
                 )}
             </Group>
         </Scroller>
     )
+}
+
+export function filterByTag<T extends { tags?: null | string[] }>(
+    items: T[],
+    activeTag: null | string
+): T[] {
+    if (activeTag === null) return items
+    if (activeTag === NO_TAG) return items.filter((item) => (item.tags ?? []).length === 0)
+
+    return items.filter((item) => (item.tags ?? []).includes(activeTag))
 }

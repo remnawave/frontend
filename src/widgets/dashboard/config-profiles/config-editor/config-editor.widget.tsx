@@ -15,6 +15,7 @@ import { useBlocker } from 'react-router'
 import { usePseudoFullscreen, useViewportFillHeight } from '@shared/hooks'
 import { CodeEditor, editorClasses, EditorFooter, EditorStatusBar } from '@shared/ui/code-editor'
 import { FullscreenToggleButton, fullscreenClasses } from '@shared/ui/fullscreen-toggle-button'
+import { LoaderModalShared } from '@shared/ui/loader-modal'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { preventBackScroll } from '@shared/utils/misc'
 
@@ -172,7 +173,7 @@ export function ConfigEditorWidget(props: IProps) {
                     footer={statusBar}
                     className={styles.monacoEditor}
                     defaultLanguage="json"
-                    loading={t('config-editor.widget.loading-editor')}
+                    loading={<LoaderModalShared mih="100%" />}
                     onChange={() => {
                         if (!isWasmCrashed && !isWasmRestarting) {
                             ConfigValidationFeature.validate(

@@ -3,8 +3,7 @@ import { Code, Drawer, List, Stack, Text } from '@mantine/core'
 import { useForm, schemaResolver } from '@mantine/form'
 import { modals } from '@mantine/modals'
 import { notifications } from '@mantine/notifications'
-import { UpdateManyHostsCommand } from '@remnawave/backend-contract'
-import { useState } from 'react'
+import { INTERNAL_SQUADS_MODE, UpdateManyHostsCommand } from '@remnawave/backend-contract'
 import { useTranslation } from 'react-i18next'
 import { PiListChecks } from 'react-icons/pi'
 
@@ -38,8 +37,6 @@ export const EditManyHostsDrawer = NiceModal.create((props: IProps) => {
         drawer: true
     })
 
-    const [advancedOpened, setAdvancedOpened] = useState(false)
-
     const { data: configProfiles } = useGetConfigProfiles()
     const { data: nodes } = useGetNodes()
     const { data: templates } = useGetSubscriptionTemplates()
@@ -55,18 +52,29 @@ export const EditManyHostsDrawer = NiceModal.create((props: IProps) => {
                 form.setFieldValue('vlessRouteId', null)
             }
         },
-        validate: schemaResolver(UpdateManyHostsCommand.RequestBodySchema.omit({ uuids: true }))
+        validate: schemaResolver(UpdateManyHostsCommand.RequestBodySchema.omit({ uuids: true })),
+
+        initialValues: {
+            uuids,
+            internalSquads: {
+                mode: INTERNAL_SQUADS_MODE.EXCLUDE,
+                squads: []
+            }
+        }
     })
 
     const { mutate: updateManyHosts, isPending: isUpdateManyHostsPending } = useUpdateManyHosts({
         mutationFns: {
-            onSuccess: async (data) => {
-                queryClient.setQueryData(QueryKeys.hosts.getAllHosts.queryKey, data)
+            onSuccess: async () => {
+                hide()
+
                 await queryClient.refetchQueries({
                     queryKey: QueryKeys.hosts.getAllTags.queryKey
                 })
 
-                hide()
+                await queryClient.refetchQueries({
+                    queryKey: QueryKeys.hosts.getAllHosts.queryKey
+                })
             }
         }
     })
@@ -97,9 +105,6 @@ export const EditManyHostsDrawer = NiceModal.create((props: IProps) => {
             Object.entries(values).filter(([key]) => form.isDirty(key))
         ) as Partial<UpdateManyHostsCommand.RequestBody>
 
-        if (form.isDirty('isDisabled')) {
-            dirtyValues.isDisabled = !values.isDisabled
-        }
         if (form.isDirty('xhttpExtraParams')) {
             dirtyValues.xhttpExtraParams = parseJsonField(values.xhttpExtraParams)
         }
@@ -162,8 +167,8 @@ export const EditManyHostsDrawer = NiceModal.create((props: IProps) => {
                 </Stack>
             ),
             labels: {
-                confirm: t('common.save'),
-                cancel: t('common.cancel')
+                confirm: t('common.action.save'),
+                cancel: t('common.action.cancel')
             },
             confirmProps: { color: 'teal', variant: 'soft' },
             onConfirm: () =>
@@ -181,7 +186,7 @@ export const EditManyHostsDrawer = NiceModal.create((props: IProps) => {
             {...modalProps}
             padding="lg"
             position="right"
-            size="lg"
+            size="700px"
             title={
                 <BaseOverlayHeader
                     iconColor="teal"
@@ -196,16 +201,15 @@ export const EditManyHostsDrawer = NiceModal.create((props: IProps) => {
                 <LoadingScreen />
             ) : (
                 <BaseHostForm
-                    advancedOpened={advancedOpened}
                     configProfiles={configProfiles.configProfiles}
                     form={form}
                     handleSubmit={handleSubmit}
                     hostTags={hostTags.tags}
                     internalSquads={internalSquads.internalSquads}
+                    isBulkEdit
                     isSubmitting={isUpdateManyHostsPending}
                     nodes={nodes}
                     removeRequiredFields={true}
-                    setAdvancedOpened={setAdvancedOpened}
                     subscriptionTemplates={templates.templates}
                 />
             )}

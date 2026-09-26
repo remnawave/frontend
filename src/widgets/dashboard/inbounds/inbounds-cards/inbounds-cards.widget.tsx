@@ -7,6 +7,7 @@ import {
 } from '@widgets/dashboard/inbounds/inbound-status-tile/get-inbound-node-status.util'
 import { openRawInboundModal } from '@widgets/dashboard/inbounds/open-raw-inbound-modal.util'
 import { memo, useMemo } from 'react'
+import { TbTag } from 'react-icons/tb'
 
 import { showModal } from '@shared/_modals/show-modal'
 import { useIsMobile } from '@shared/hooks'
@@ -36,7 +37,7 @@ export const InboundsCardsWidget = memo((props: IProps) => {
     if (!inbounds) return null
 
     if (inbounds.length === 0) {
-        return <EmptyPageLayout />
+        return <EmptyPageLayout icon={<TbTag size={32} />} />
     }
 
     return (

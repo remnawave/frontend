@@ -41,7 +41,7 @@ export const FailedStateWidget = ({ onDropAll, onRefresh }: IProps) => {
                                 size="md"
                                 variant="soft"
                             >
-                                {t('common.try-again')}
+                                {t('common.action.try-again')}
                             </Button>
                         </Stack>
                     </Center>

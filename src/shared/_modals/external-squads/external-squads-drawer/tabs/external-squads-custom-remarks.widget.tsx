@@ -261,7 +261,7 @@ export const ExternalSquadsCustomRemarksTabWidget = (props: IProps) => {
                                 iconColor="red"
                                 initialRemarks={remarks.expired}
                                 onChange={updateExpiredRemarks}
-                                title={`${t('subscription-user-remarks-card.widget.user-status')}: EXPIRED`}
+                                title={`${t('common.field.user-status')}: EXPIRED`}
                             />
 
                             <RemarksManager
@@ -269,7 +269,7 @@ export const ExternalSquadsCustomRemarksTabWidget = (props: IProps) => {
                                 iconColor="orange"
                                 initialRemarks={remarks.limited}
                                 onChange={updateLimitedRemarks}
-                                title={`${t('subscription-user-remarks-card.widget.user-status')}: LIMITED`}
+                                title={`${t('common.field.user-status')}: LIMITED`}
                             />
 
                             <RemarksManager
@@ -277,7 +277,7 @@ export const ExternalSquadsCustomRemarksTabWidget = (props: IProps) => {
                                 iconColor="gray"
                                 initialRemarks={remarks.disabled}
                                 onChange={updateDisabledRemarks}
-                                title={`${t('subscription-user-remarks-card.widget.user-status')}: DISABLED`}
+                                title={`${t('common.field.user-status')}: DISABLED`}
                             />
 
                             <RemarksManager
@@ -303,7 +303,7 @@ export const ExternalSquadsCustomRemarksTabWidget = (props: IProps) => {
                     }}
                     variant="soft"
                 >
-                    {t('common.save')}
+                    {t('common.action.save')}
                 </Button>
             </Stack>
         </Card>

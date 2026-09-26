@@ -361,7 +361,7 @@ export const ExternalSquadsDrawer = NiceModal.create((props: IProps) => {
                 {(styles) => <Box style={styles}>{renderDrawerContent()}</Box>}
             </Transition>
 
-            {isLoading && <LoaderModalShared h="80vh" text="Loading..." w="100%" />}
+            {isLoading && <LoaderModalShared />}
         </Drawer>
     )
 })

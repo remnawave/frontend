@@ -38,7 +38,7 @@ export const PageHeaderShared = forwardRef<HTMLDivElement, PageHeaderSharedProps
                 copy(description)
                 notifications.show({
                     message: description,
-                    title: t('common.copied'),
+                    title: t('common.message.copied'),
                     color: 'teal'
                 })
             }

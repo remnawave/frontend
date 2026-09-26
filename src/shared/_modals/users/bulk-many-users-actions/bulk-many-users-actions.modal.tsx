@@ -154,7 +154,7 @@ export const BulkManyUsersActionsModal = NiceModal.create((props: IProps) => {
                     subtitle={t('bulk-user-actions.actions.tab.feature.perform-action-on-users', {
                         usersCount
                     })}
-                    title={t('common.bulk-actions')}
+                    title={t('common.action.bulk-actions')}
                     titleOrder={5}
                 />
             }
@@ -183,7 +183,7 @@ export const BulkManyUsersActionsModal = NiceModal.create((props: IProps) => {
                             variables: { userIds }
                         })
                     }
-                    title={t('bulk-all-user-actions-tabs.actions.tab.feature.reset-traffic')}
+                    title={t('common.action.reset-traffic')}
                     variant="soft"
                     withConfirmation
                 />
@@ -236,7 +236,7 @@ export const BulkManyUsersActionsModal = NiceModal.create((props: IProps) => {
                                 </ThemeIcon>
                                 <Stack gap={2}>
                                     <Text fw={600} size="sm">
-                                        {t('bulk-user-actions.actions.tab.feature.internal-squads')}
+                                        {t('common.field.internal-squads')}
                                     </Text>
                                     <Text c="dimmed" size="xs">
                                         {t(
@@ -273,7 +273,7 @@ export const BulkManyUsersActionsModal = NiceModal.create((props: IProps) => {
                             }}
                             variant="soft"
                         >
-                            {t('common.change')}
+                            {t('common.action.change')}
                         </Button>
                     </Group>
                 </Paper>

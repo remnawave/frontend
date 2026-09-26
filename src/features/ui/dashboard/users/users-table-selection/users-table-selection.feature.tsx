@@ -38,10 +38,10 @@ export const UsersTableSelectionFeature = (props: IProps) => {
         <Group justify="apart" px="xs">
             <Group justify="space-between">
                 <Badge color="gray" size="lg" variant="light">
-                    {t('common.selected', { count: usersToUpdate })}
+                    {t('common.message.selected', { count: usersToUpdate })}
                 </Badge>
                 <Group gap={0} justify="flex-end">
-                    <Tooltip label={t('common.select-all')} withArrow>
+                    <Tooltip label={t('common.action.select-all')} withArrow>
                         <ActionIcon
                             color="gray"
                             onClick={toggleAllPageRowsSelected}
@@ -51,7 +51,7 @@ export const UsersTableSelectionFeature = (props: IProps) => {
                             <TbSelectAll size={20} />
                         </ActionIcon>
                     </Tooltip>
-                    <Tooltip label={t('common.clear-selection')} withArrow>
+                    <Tooltip label={t('common.action.clear-selection')} withArrow>
                         <CloseButton onClick={handleClearSelection} />
                     </Tooltip>
                 </Group>
@@ -70,7 +70,7 @@ export const UsersTableSelectionFeature = (props: IProps) => {
                     size="sm"
                     variant="soft"
                 >
-                    {t('common.actions')}
+                    {t('common.action.actions')}
                 </Button>
                 <Button
                     color="red"
@@ -84,7 +84,7 @@ export const UsersTableSelectionFeature = (props: IProps) => {
                     size="sm"
                     variant="soft"
                 >
-                    {t('common.update')}
+                    {t('common.action.update')}
                 </Button>
             </Group>
         </Group>

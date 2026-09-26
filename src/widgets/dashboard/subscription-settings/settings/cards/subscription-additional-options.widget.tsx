@@ -115,7 +115,7 @@ export const SubscriptionAdditionalOptionsWidget = (props: IProps) => {
                             type="submit"
                             variant="soft"
                         >
-                            {t('common.save')}
+                            {t('common.action.save')}
                         </Button>
                     </Group>
                 </SettingsCardShared.Bottom>

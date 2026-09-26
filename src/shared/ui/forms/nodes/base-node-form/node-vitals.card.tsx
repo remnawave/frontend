@@ -35,6 +35,8 @@ import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { SectionCard } from '@shared/ui/section-card'
 import { TagInputPill } from '@shared/ui/tag-input-pill'
 
+import { useExperimentalFeature } from '@entities/dashboard/view-preferences-store'
+
 import { COUNTRIES } from './constants'
 import integrationsClasses from './integrations-select.module.css'
 
@@ -63,6 +65,8 @@ export const NodeVitalsCard = <
         secretKey,
         nodeUuid
     } = props
+
+    const isNodeIntegrationsEnabled = useExperimentalFeature('nodeIntegrations')
 
     const MotionWrapper = motionWrapper
 
@@ -110,7 +114,7 @@ export const NodeVitalsCard = <
                         <Group gap="xs" grow justify="space-between" w="100%">
                             <TextInput
                                 key={form.key('address')}
-                                label={t('base-node-form.address')}
+                                label={t('common.field.address')}
                                 {...form.getInputProps('address')}
                                 leftSection={<TbWorld size={16} />}
                                 placeholder={t('base-node-form.e-g-example-com')}
@@ -169,56 +173,61 @@ export const NodeVitalsCard = <
                             }}
                         />
 
-                        <MultiSelect
-                            key={form.key('integrationUuids')}
-                            label={t('node-integrations.select.label')}
-                            {...form.getInputProps('integrationUuids')}
-                            clearable
-                            data={nodeIntegrations.map((integration) => ({
-                                label: integration.name,
-                                value: integration.uuid,
-                                description: integration.description
-                            }))}
-                            leftSection={<TbPlugConnected size={16} />}
-                            nothingFoundMessage={t('common.nothing-found')}
-                            placeholder={t('node-integrations.select.placeholder')}
-                            classNames={{ option: integrationsClasses.option }}
-                            scrollAreaProps={{ styles: { content: { minWidth: '100%' } } }}
-                            renderOption={({ option, checked }) => {
-                                const { description } = option as ComboboxItem & {
-                                    description?: null | string
-                                }
+                        {isNodeIntegrationsEnabled && (
+                            <MultiSelect
+                                key={form.key('integrationUuids')}
+                                label={t('node-integrations.select.label')}
+                                {...form.getInputProps('integrationUuids')}
+                                clearable
+                                data={nodeIntegrations.map((integration) => ({
+                                    label: integration.name,
+                                    value: integration.uuid,
+                                    description: integration.description
+                                }))}
+                                leftSection={<TbPlugConnected size={16} />}
+                                nothingFoundMessage={t('common.message.nothing-found')}
+                                placeholder={t('node-integrations.select.placeholder')}
+                                classNames={{ option: integrationsClasses.option }}
+                                scrollAreaProps={{ styles: { content: { minWidth: '100%' } } }}
+                                renderOption={({ option, checked }) => {
+                                    const { description } = option as ComboboxItem & {
+                                        description?: null | string
+                                    }
 
-                                return (
-                                    <Group gap="xs" miw={0} w="100%" wrap="nowrap">
-                                        <CheckIcon
-                                            size={12}
-                                            style={{
-                                                flexShrink: 0,
-                                                opacity: checked ? 1 : 0.25
-                                            }}
-                                        />
-                                        <Stack flex={1} gap={0} miw={0}>
-                                            <Text size="sm" truncate="end">
-                                                {option.label}
-                                            </Text>
-                                            {description && (
-                                                <Text c="dimmed" size="xs" truncate="end">
-                                                    {description}
+                                    return (
+                                        <Group gap="xs" miw={0} w="100%" wrap="nowrap">
+                                            <CheckIcon
+                                                size={12}
+                                                style={{
+                                                    flexShrink: 0,
+                                                    opacity: checked ? 1 : 0.25
+                                                }}
+                                            />
+                                            <Stack flex={1} gap={0} miw={0}>
+                                                <Text size="sm" truncate="end">
+                                                    {option.label}
                                                 </Text>
-                                            )}
-                                        </Stack>
-                                    </Group>
-                                )
-                            }}
-                            renderPill={({ option, value, onRemove }) => (
-                                <TagInputPill onRemove={onRemove} value={option?.label ?? value} />
-                            )}
-                            searchable
-                            styles={{
-                                label: { fontWeight: 500 }
-                            }}
-                        />
+                                                {description && (
+                                                    <Text c="dimmed" size="xs" truncate="end">
+                                                        {description}
+                                                    </Text>
+                                                )}
+                                            </Stack>
+                                        </Group>
+                                    )
+                                }}
+                                renderPill={({ option, value, onRemove }) => (
+                                    <TagInputPill
+                                        onRemove={onRemove}
+                                        value={option?.label ?? value}
+                                    />
+                                )}
+                                searchable
+                                styles={{
+                                    label: { fontWeight: 500 }
+                                }}
+                            />
+                        )}
 
                         <TextInput
                             key={form.key('proxyUrl')}

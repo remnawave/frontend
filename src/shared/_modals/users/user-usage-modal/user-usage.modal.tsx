@@ -122,7 +122,7 @@ export const UserUsageModal = NiceModal.create((props: IProps) => {
                     iconColor="teal"
                     IconComponent={TbChartArcs}
                     iconVariant="soft"
-                    title={t('common.usage-stats')}
+                    title={t('common.field.usage-stats')}
                 />
             }
         >
@@ -229,7 +229,7 @@ export const UserUsageModal = NiceModal.create((props: IProps) => {
                     />
 
                     <TopLeaderboardCardShared
-                        emptyText={t('user-usage-modal.widget.no-data-available')}
+                        emptyText={t('common.message.no-data-available')}
                         isLoading={isLoading}
                         onItemClick={(node) => handleNodeClick(node.uuid)}
                         items={userUsageStats?.topNodes?.map((node) => ({

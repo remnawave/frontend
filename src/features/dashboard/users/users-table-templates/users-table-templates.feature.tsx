@@ -43,7 +43,7 @@ export const UsersTableTemplatesFeature = (props: IProps) => {
                             onClick={() => applySnapshot(table, template.snapshot)}
                             rightSection={
                                 <ActionIcon
-                                    aria-label={t('common.delete')}
+                                    aria-label={t('common.action.delete')}
                                     color="red"
                                     component="div"
                                     onClick={(event) => {
@@ -83,7 +83,7 @@ export const UsersTableTemplatesFeature = (props: IProps) => {
                         })
                     }}
                 >
-                    {t('common.save')}
+                    {t('common.action.save')}
                 </Menu.Item>
             </Menu.Dropdown>
         </Menu>

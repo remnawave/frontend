@@ -116,7 +116,7 @@ export const ApiTokenItem = ({ apiToken }: IProps) => {
                             })
                         }}
                     >
-                        {t('common.view')}
+                        {t('common.action.view')}
                     </Menu.Item>
                     <Menu.Divider />
                     <Menu.Item
@@ -125,7 +125,7 @@ export const ApiTokenItem = ({ apiToken }: IProps) => {
                         leftSection={<TbTrash size={15} />}
                         onClick={() => deleteApiToken({ route: { uuid: apiToken.uuid } })}
                     >
-                        {t('common.delete')}
+                        {t('common.action.delete')}
                     </Menu.Item>
                 </Menu.Dropdown>
             </Menu>

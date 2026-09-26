@@ -79,15 +79,7 @@ export const NodeTrackingAndBillingCard = <
                         <SelectInfraProviderShared
                             selectedInfraProviderUuid={form.getValues().providerUuid}
                             setSelectedInfraProviderUuid={(providerUuid) => {
-                                form.setValues({
-                                    providerUuid
-                                } as Partial<T>)
-                                form.setTouched({
-                                    providerUuid: true
-                                })
-                                form.setDirty({
-                                    providerUuid: true
-                                })
+                                form.setFieldValue('providerUuid', providerUuid as never)
                             }}
                         />
 
@@ -184,7 +176,7 @@ export const NodeTrackingAndBillingCard = <
                             clearable
                             data={nodesTags?.tags || []}
                             key={form.key('tags')}
-                            label={t('use-nodes-table-widget.tags')}
+                            label={t('common.field.tags')}
                             leftSection={<PiTagDuotone size="16px" />}
                             maxTags={10}
                             placeholder="Enter tags (comma, space, semicolon)"
@@ -223,7 +215,7 @@ export const NodeTrackingAndBillingCard = <
                                     variant="soft"
                                     w="fit-content"
                                 >
-                                    {t('common.open')}
+                                    {t('common.action.open')}
                                 </Button>
                             )}
                         </Stack>

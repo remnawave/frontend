@@ -70,7 +70,7 @@ export const RegisterFormFeature = () => {
     useEffect(() => {
         if (error) {
             notifications.show({
-                title: t('register-form.feature.error'),
+                title: t('common.message.error'),
                 message: t('register-form.feature.password-copied-error')
             })
         }
@@ -104,7 +104,7 @@ export const RegisterFormFeature = () => {
                     </Text>
 
                     <TextInput
-                        label={t('register-form.feature.username')}
+                        label={t('common.field.username')}
                         placeholder="IamSuperAdmin"
                         required
                         size="md"
@@ -113,7 +113,7 @@ export const RegisterFormFeature = () => {
 
                     <Stack mt="md">
                         <PasswordInput
-                            label={t('register-form.feature.password')}
+                            label={t('common.field.password')}
                             placeholder="soy_t5Px5`Gm4j0@Hf&Dd7iU"
                             required
                             size="md"

@@ -177,7 +177,7 @@ export const SubpageConfigEditorPageComponent = (props: Props) => {
         notifications.update({
             id: 'import-config',
             loading: false,
-            title: t('subpage-config-editor-page.component.success'),
+            title: t('common.message.success'),
             message: t('subpage-config-editor-page.component.config-imported-successfully'),
             icon: <TbCheck size={18} />,
             autoClose: 3000,
@@ -227,7 +227,7 @@ export const SubpageConfigEditorPageComponent = (props: Props) => {
             })
         } catch {
             notifications.show({
-                title: t('subpage-config-editor-page.component.error'),
+                title: t('common.message.error'),
                 message: t('subpage-config-editor-page.component.failed-to-parse-config-file'),
                 color: 'red'
             })
@@ -296,7 +296,7 @@ export const SubpageConfigEditorPageComponent = (props: Props) => {
 
                         <CopyButton timeout={2000} value={config.uuid}>
                             {({ copied, copy }) => (
-                                <Tooltip label={t('common.copy-uuid')}>
+                                <Tooltip label={t('common.action.copy-uuid')}>
                                     <ActionIcon
                                         color={copied ? 'teal' : 'gray'}
                                         onClick={copy}
@@ -334,7 +334,7 @@ export const SubpageConfigEditorPageComponent = (props: Props) => {
                             size="md"
                             variant="light"
                         >
-                            {t('subpage-config-visual-editor.widget.load-from-github')}
+                            {t('common.action.load-from-github')}
                         </Button>
 
                         <Button
@@ -346,7 +346,7 @@ export const SubpageConfigEditorPageComponent = (props: Props) => {
                             size="md"
                             variant="soft"
                         >
-                            {t('common.save')}
+                            {t('common.action.save')}
                         </Button>
                     </Group>
                 }

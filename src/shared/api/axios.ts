@@ -44,6 +44,7 @@ export const setAuthorizationToken = (token: string) => {
 }
 
 export const hasAuthorizationToken = () => authorizationToken !== ''
+export const getAuthorizationToken = () => authorizationToken
 
 instance.interceptors.response.use(
     (response) => {

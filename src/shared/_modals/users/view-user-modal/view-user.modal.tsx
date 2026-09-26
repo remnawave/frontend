@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next'
 
 import { useNiceMantineModal } from '@shared/_modals/use-nice-modal'
 import { queryClient } from '@shared/api'
-import { QueryKeys } from '@shared/api/hooks'
+import { QueryKeys, useGetUserById } from '@shared/api/hooks'
 import { OPEN_ENTITY } from '@shared/constants'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 
@@ -35,6 +35,11 @@ export const ViewUserModal = NiceModal.create((props: IProps) => {
         }
     })
 
+    const { data: user } = useGetUserById({
+        route: { userId },
+        query: { enabled: false }
+    })
+
     return (
         <Modal
             {...modalProps}
@@ -45,7 +50,7 @@ export const ViewUserModal = NiceModal.create((props: IProps) => {
                     IconComponent={IconUser}
                     iconVariant="soft"
                     openEntity={{ entity: OPEN_ENTITY.USER, id: userId }}
-                    title={t('view-user-modal.widget.edit-user-headline')}
+                    title={user?.username ?? t('view-user-modal.widget.edit-user-headline')}
                 />
             }
         >

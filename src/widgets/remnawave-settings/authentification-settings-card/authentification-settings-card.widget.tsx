@@ -265,7 +265,7 @@ export const AuthentificationSettingsCardWidget = (props: IProps) => {
                                 onClick={() => modals.closeAll()}
                                 variant="light"
                             >
-                                {t('common.close')}
+                                {t('common.action.close')}
                             </Button>
                         </Stack>
                     )
@@ -512,7 +512,7 @@ export const AuthentificationSettingsCardWidget = (props: IProps) => {
                             type="submit"
                             variant="soft"
                         >
-                            {t('common.save')}
+                            {t('common.action.save')}
                         </Button>
                     </Group>
                 </SettingsCardShared.Bottom>

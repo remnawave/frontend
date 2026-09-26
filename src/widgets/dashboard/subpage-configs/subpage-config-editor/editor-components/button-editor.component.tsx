@@ -156,7 +156,7 @@ export function ButtonEditor(props: IProps) {
                         />
 
                         <SvgIconSelect
-                            label={t('button-editor.component.svg-icon')}
+                            label={t('common.field.svg-icon')}
                             onChange={(svgIconKey) => onChange({ ...button, svgIconKey })}
                             svgLibrary={svgLibrary}
                             value={button.svgIconKey}

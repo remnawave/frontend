@@ -23,7 +23,7 @@ export const NodeErrorMessageWidget = (props: IProps) => {
                     iconColor="red"
                     IconComponent={TbAlertTriangle}
                     iconVariant="soft"
-                    title={t('error-accordeon.widget.last-error-message')}
+                    title={t('common.message.last-error-message')}
                     titleOrder={5}
                 />
             </SectionCard.Section>

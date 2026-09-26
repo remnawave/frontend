@@ -81,7 +81,7 @@ export const UserActionGroupFeature = (props: IProps) => {
             </ActionIconGroup>
 
             <ActionIconGroup>
-                <Tooltip label={t('common.refresh')} withArrow>
+                <Tooltip label={t('common.action.refresh')} withArrow>
                     <ActionIcon
                         loading={isLoading}
                         onClick={handleRefetch}
@@ -92,7 +92,7 @@ export const UserActionGroupFeature = (props: IProps) => {
                     </ActionIcon>
                 </Tooltip>
 
-                <Tooltip label={t('action-group.feature.new-user')} withArrow>
+                <Tooltip label={t('common.action.create')} withArrow>
                     <ActionIcon
                         color="teal"
                         onClick={() => showModal('users_createUserModal')}

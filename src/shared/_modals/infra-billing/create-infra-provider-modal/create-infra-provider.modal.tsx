@@ -67,7 +67,7 @@ export const CreateInfraProviderModal = NiceModal.create(() => {
                 <Stack>
                     <TextInput
                         description={t('view-infra-provider.drawer.widget.name-description')}
-                        label={t('common.name')}
+                        label={t('common.field.name')}
                         placeholder={t('view-infra-provider.drawer.widget.enter-provider-name')}
                         required
                         {...form.getInputProps('name')}
@@ -92,7 +92,7 @@ export const CreateInfraProviderModal = NiceModal.create(() => {
                     />
 
                     <Button loading={isCreateInfraProviderPending} type="submit">
-                        {t('common.create')}
+                        {t('common.action.create')}
                     </Button>
                 </Stack>
             </form>

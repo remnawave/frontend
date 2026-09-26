@@ -62,18 +62,18 @@ export const CreateNodePluginContent = (props: IProps) => {
             <Stack gap="md">
                 <TextInput
                     data-autofocus
-                    label={t('common.name')}
+                    label={t('common.field.name')}
                     placeholder="My Node Plugin"
                     required
                     {...nameField.getInputProps()}
                 />
                 <Group justify="flex-end">
                     <Button color="gray" onClick={onClose} variant="light">
-                        {t('common.cancel')}
+                        {t('common.action.cancel')}
                     </Button>
 
                     <Button color="teal" loading={isPending} type="submit">
-                        {t('common.create')}
+                        {t('common.action.create')}
                     </Button>
                 </Group>
             </Stack>

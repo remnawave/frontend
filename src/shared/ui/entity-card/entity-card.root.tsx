@@ -1,34 +1,43 @@
-import { Box, Card, Stack } from '@mantine/core'
+import { Box, Card } from '@mantine/core'
 import clsx from 'clsx'
-import { useState } from 'react'
 
-import { EntityCardContext } from './entity-card.context'
 import classes from './entity-card.module.css'
 
 interface EntityCardProps {
     children: React.ReactNode
-    withTopAccent?: boolean
+    isActive?: boolean
+    onClick?: () => void
 }
 
-export function EntityCardRoot({ children, withTopAccent = true }: EntityCardProps) {
-    const [menuOpened, setMenuOpened] = useState(false)
+export function EntityCardRoot(props: EntityCardProps) {
+    const { children, isActive = true, onClick } = props
 
     return (
-        <EntityCardContext.Provider value={{ menuOpened, setMenuOpened }}>
-            <Card className={classes.card} h="100%" p="xl" shadow="sm" withBorder>
-                <Box
-                    className={clsx({
-                        [classes.topAccent]: withTopAccent,
-                        [classes.inactiveTopAccent]: !withTopAccent
-                    })}
-                />
+        <Card
+            className={classes.card}
+            data-clickable={onClick ? true : undefined}
+            data-layout="row"
+            onClick={onClick}
+            onKeyDown={
+                onClick
+                    ? (event) => {
+                          if (event.key !== 'Enter' && event.key !== ' ') return
+                          if (event.target !== event.currentTarget) return
 
-                <Box className={classes.glowEffect} />
-
-                <Stack gap="lg" justify="space-between" style={{ flex: 1 }}>
-                    {children}
-                </Stack>
-            </Card>
-        </EntityCardContext.Provider>
+                          event.preventDefault()
+                          onClick()
+                      }
+                    : undefined
+            }
+            pb={6}
+            pl={12}
+            pr={10}
+            pt={6}
+            role={onClick ? 'button' : undefined}
+            tabIndex={onClick ? 0 : undefined}
+        >
+            <Box className={clsx(classes.rail, { [classes.railInactive]: !isActive })} />
+            {children}
+        </Card>
     )
 }

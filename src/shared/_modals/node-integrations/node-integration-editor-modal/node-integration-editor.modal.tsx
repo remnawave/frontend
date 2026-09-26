@@ -1,6 +1,7 @@
 import NiceModal, { useModal } from '@ebay/nice-modal-react'
 import { Box, Button, Group, Modal, Paper, TextInput } from '@mantine/core'
 import { schemaResolver, useForm } from '@mantine/form'
+import { notifications } from '@mantine/notifications'
 import {
     CreateNodeIntegrationCommand,
     UpdateNodeIntegrationCommand
@@ -10,6 +11,7 @@ import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { TbPlugConnected } from 'react-icons/tb'
 
+import { showModal } from '@shared/_modals/show-modal'
 import { openApplyToNodesModal } from '@shared/_modals/universal'
 import { useNiceMantineModal } from '@shared/_modals/use-nice-modal'
 import { queryClient } from '@shared/api'
@@ -26,6 +28,7 @@ import { fullscreenClasses, FullscreenToggleButton } from '@shared/ui/fullscreen
 import { LoaderModalShared } from '@shared/ui/loader-modal'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { handleFormErrors } from '@shared/utils/misc'
+import { addBase64EditorAction } from '@shared/utils/monaco/base64-action'
 import { forceMonacoRetokenize } from '@shared/utils/monaco/force-retokenize'
 
 import classes from './NodeIntegrationEditor.module.css'
@@ -195,7 +198,7 @@ export const NodeIntegrationEditorModal = NiceModal.create((props: IProps) => {
                 />
             }
         >
-            {isEditMode && isLoading && <LoaderModalShared h="50vh" />}
+            {isEditMode && isLoading && <LoaderModalShared mih="50vh" />}
 
             {(!isEditMode || !isLoading) && (
                 <form onSubmit={handleSubmit}>
@@ -208,7 +211,7 @@ export const NodeIntegrationEditorModal = NiceModal.create((props: IProps) => {
                         {!isFullscreen && (
                             <TextInput
                                 key={form.key('name')}
-                                label={t('common.name')}
+                                label={t('common.field.name')}
                                 placeholder="Integration"
                                 required
                                 {...form.getInputProps('name')}
@@ -218,7 +221,7 @@ export const NodeIntegrationEditorModal = NiceModal.create((props: IProps) => {
                         {!isFullscreen && (
                             <TextInput
                                 key={form.key('description')}
-                                label={t('node-integrations.editor.description')}
+                                label={t('common.field.description')}
                                 placeholder={t('node-integrations.editor.description-placeholder')}
                                 {...form.getInputProps('description')}
                             />
@@ -255,6 +258,17 @@ export const NodeIntegrationEditorModal = NiceModal.create((props: IProps) => {
                                     }}
                                     onMount={(editor) => {
                                         forceMonacoRetokenize(editor)
+
+                                        addBase64EditorAction(
+                                            editor,
+                                            (request) => showModal('base64EditorModal', request),
+                                            (message) =>
+                                                notifications.show({
+                                                    color: 'gray',
+                                                    message,
+                                                    title: 'Base64 editor'
+                                                })
+                                        )
                                     }}
                                     options={{
                                         ...COMPACT_MONACO_OPTIONS,
@@ -281,10 +295,10 @@ export const NodeIntegrationEditorModal = NiceModal.create((props: IProps) => {
                                         type="submit"
                                         variant="soft"
                                     >
-                                        {t('common.save')}
+                                        {t('common.action.save')}
                                     </Button>
                                     <Button onClick={hide} variant="subtle">
-                                        {t('common.cancel')}
+                                        {t('common.action.cancel')}
                                     </Button>
                                 </Group>
                             </EditorFooter>

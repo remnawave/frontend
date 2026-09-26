@@ -1,5 +1,6 @@
 import { Card, Stack, Text, Title } from '@mantine/core'
 import { modals } from '@mantine/modals'
+import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { PiEmpty } from 'react-icons/pi'
 
@@ -12,15 +13,28 @@ import {
     useReorderInternalSquads
 } from '@shared/api/hooks'
 import { queryClient } from '@shared/api/query-client'
+import { filterByTag, TagFilterBar } from '@shared/ui'
 import { baseNotificationsMutations } from '@shared/ui/notifications/base-notification-mutations'
 import { VirtualizedDndGrid } from '@shared/ui/virtualized-dnd-grid'
 import { sToMs } from '@shared/utils/time-utils'
+
+import {
+    useSectionActiveTag,
+    useViewPreferencesStoreActions
+} from '@entities/dashboard/view-preferences-store'
 
 import { InternalSquadCardWidget } from '../internal-squad-card/internal-squad-card.widget'
 import { IProps } from './interfaces'
 
 export function InternalSquadsGridWidget(props: IProps) {
     const { internalSquads } = props
+
+    const activeTag = useSectionActiveTag('internalSquads')
+    const { setSectionActiveTag } = useViewPreferencesStoreActions()
+    const visibleItems = useMemo(
+        () => filterByTag(internalSquads ?? [], activeTag),
+        [internalSquads, activeTag]
+    )
     const { t } = useTranslation()
 
     const { mutate: reorderInternalSquads } = useReorderInternalSquads({
@@ -61,11 +75,11 @@ export function InternalSquadsGridWidget(props: IProps) {
 
     const handleDeleteInternalSquad = (internalSquadUuid: string) => {
         modals.openConfirmModal({
-            title: t('common.confirm-action'),
-            children: t('common.confirm-action-description'),
+            title: t('common.action.confirm-action'),
+            children: t('common.message.confirm-action-description'),
             labels: {
-                confirm: t('common.delete'),
-                cancel: t('common.cancel')
+                confirm: t('common.action.delete'),
+                cancel: t('common.action.cancel')
             },
             cancelProps: { variant: 'subtle' },
             confirmProps: { color: 'red', variant: 'soft' },
@@ -82,12 +96,12 @@ export function InternalSquadsGridWidget(props: IProps) {
 
     const handleRemoveFromUsers = (internalSquadUuid: string) => {
         modals.openConfirmModal({
-            title: t('internal-squads-grid.widget.remove-users'),
+            title: t('common.action.remove-users'),
             centered: true,
-            children: t('common.confirm-action-description'),
+            children: t('common.message.confirm-action-description'),
             labels: {
-                confirm: t('common.delete'),
-                cancel: t('common.cancel')
+                confirm: t('common.action.delete'),
+                cancel: t('common.action.cancel')
             },
             cancelProps: { variant: 'subtle' },
             confirmProps: { color: 'red', variant: 'soft' },
@@ -103,12 +117,12 @@ export function InternalSquadsGridWidget(props: IProps) {
 
     const handleAddToUsers = (internalSquadUuid: string) => {
         modals.openConfirmModal({
-            title: t('internal-squads-grid.widget.add-users'),
+            title: t('common.action.add-users'),
             centered: true,
-            children: t('common.confirm-action-description'),
+            children: t('common.message.confirm-action-description'),
             labels: {
-                confirm: t('common.add'),
-                cancel: t('common.cancel')
+                confirm: t('common.action.add'),
+                cancel: t('common.action.cancel')
             },
             cancelProps: { variant: 'subtle' },
             confirmProps: { color: 'teal', variant: 'soft' },
@@ -155,8 +169,15 @@ export function InternalSquadsGridWidget(props: IProps) {
 
     return (
         <VirtualizedDndGrid
-            enableDnd={true}
-            items={internalSquads}
+            enableDnd={activeTag === null}
+            header={
+                <TagFilterBar
+                    activeTag={activeTag}
+                    items={internalSquads}
+                    onChange={(tag) => setSectionActiveTag('internalSquads', tag)}
+                />
+            }
+            items={visibleItems}
             onReorder={handleReorder}
             renderDragOverlay={(internalSquad) => (
                 <InternalSquadCardWidget
@@ -169,6 +190,7 @@ export function InternalSquadsGridWidget(props: IProps) {
             )}
             renderItem={(internalSquad) => (
                 <InternalSquadCardWidget
+                    disableReordering={activeTag !== null}
                     handleAddToUsers={handleAddToUsers}
                     handleDeleteInternalSquad={handleDeleteInternalSquad}
                     handleRemoveFromUsers={handleRemoveFromUsers}

@@ -282,7 +282,7 @@ export const CreateApiTokenContentWidget = ({ isMobile }: IProps) => {
 
             <ModalFooter isMobile={isMobile}>
                 <ActionIconGroup ml="auto">
-                    <Tooltip label={t('common.clear')}>
+                    <Tooltip label={t('common.action.clear')}>
                         <ActionIcon
                             color="gray"
                             onClick={() => setSelectedEndpoints(new Set())}
@@ -298,7 +298,7 @@ export const CreateApiTokenContentWidget = ({ isMobile }: IProps) => {
                         value={JSON.stringify(buildScopes(resources, selectedEndpoints), null, 2)}
                     >
                         {({ copied, copy }) => (
-                            <Tooltip label={t('common.copy')}>
+                            <Tooltip label={t('common.action.copy')}>
                                 <ActionIcon
                                     color={copied ? 'teal' : 'gray'}
                                     onClick={copy}
@@ -311,7 +311,7 @@ export const CreateApiTokenContentWidget = ({ isMobile }: IProps) => {
                         )}
                     </CopyButton>
 
-                    <Tooltip label={t('common.paste')}>
+                    <Tooltip label={t('common.action.paste')}>
                         <ActionIcon
                             color="gray"
                             onClick={handlePasteScopes}
@@ -332,7 +332,7 @@ export const CreateApiTokenContentWidget = ({ isMobile }: IProps) => {
                     size="md"
                     variant="soft"
                 >
-                    {t('common.create')}
+                    {t('common.action.create')}
                 </Button>
             </ModalFooter>
         </Stack>

@@ -360,7 +360,7 @@ export function ExternalSquadOverridesTab<T extends Record<string, unknown>>(pro
                 }}
                 variant="soft"
             >
-                {t('common.save')}
+                {t('common.action.save')}
             </Button>
         </Card>
     )

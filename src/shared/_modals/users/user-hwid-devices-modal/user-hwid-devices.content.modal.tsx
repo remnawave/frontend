@@ -76,11 +76,11 @@ export const UserHwidDevicesContentModal = (props: IProps) => {
 
     const handleDeleteDevice = (hwid: string) => {
         modals.openConfirmModal({
-            title: t('common.confirm-action'),
-            children: t('common.confirm-action-description'),
+            title: t('common.action.confirm-action'),
+            children: t('common.message.confirm-action-description'),
             labels: {
-                confirm: t('common.delete'),
-                cancel: t('common.cancel')
+                confirm: t('common.action.delete'),
+                cancel: t('common.action.cancel')
             },
             confirmProps: { color: 'red', variant: 'soft' },
             cancelProps: {
@@ -100,11 +100,11 @@ export const UserHwidDevicesContentModal = (props: IProps) => {
 
     const handleDeleteAllDevices = () => {
         modals.openConfirmModal({
-            title: t('common.confirm-action'),
-            children: t('common.confirm-action-description'),
+            title: t('common.action.confirm-action'),
+            children: t('common.message.confirm-action-description'),
             labels: {
-                confirm: t('common.delete'),
-                cancel: t('common.cancel')
+                confirm: t('common.action.delete'),
+                cancel: t('common.action.cancel')
             },
             confirmProps: { color: 'red', variant: 'soft' },
             cancelProps: {
@@ -178,7 +178,7 @@ export const UserHwidDevicesContentModal = (props: IProps) => {
                                 </Stack>
                             </Group>
                             <Group gap="xs">
-                                <Tooltip label={t('common.refresh')}>
+                                <Tooltip label={t('common.action.refresh')}>
                                     <ActionIcon
                                         color="indigo"
                                         loading={isFetching}
@@ -206,9 +206,11 @@ export const UserHwidDevicesContentModal = (props: IProps) => {
                     </Stack>
                 </Card>
 
-                {mobile && !isLoading && devices?.devices.length === 0 && <EmptyPageLayout />}
+                {mobile && !isLoading && devices?.devices.length === 0 && (
+                    <EmptyPageLayout icon={<TbDevices size={32} />} />
+                )}
 
-                {mobile && isLoading && <LoaderModalShared h="80vh" text="Loading..." w="100%" />}
+                {mobile && isLoading && <LoaderModalShared mih="80vh" />}
                 {mobile && !isLoading && renderListContent()}
 
                 {!mobile && (

@@ -270,7 +270,7 @@ export const UserIdentificationCard = memo((props: IProps) => {
                         <Divider opacity={0.3} orientation="vertical" />
 
                         <Group gap={5} justify="center">
-                            <Tooltip label={t('common.usage-stats')}>
+                            <Tooltip label={t('common.field.usage-stats')}>
                                 <ActionIcon
                                     color="indigo"
                                     onClick={() => {
@@ -337,7 +337,7 @@ export const UserIdentificationCard = memo((props: IProps) => {
                                 </ActionIcon>
                             </Tooltip>
 
-                            <Tooltip label={t('common.active-sessions')}>
+                            <Tooltip label={t('common.field.active-sessions')}>
                                 <ActionIcon
                                     color="indigo"
                                     onClick={() => {
@@ -502,7 +502,7 @@ export const UserIdentificationCard = memo((props: IProps) => {
                         label={
                             <Group gap={4} justify="flex-start">
                                 <Text fw={500} fz="sm">
-                                    {t('view-user-modal.widget.subscription-url')}
+                                    {t('common.field.subscription-url')}
                                 </Text>
                                 <HoverCard shadow="md" width={280} withArrow>
                                     <HoverCard.Target>
@@ -513,7 +513,7 @@ export const UserIdentificationCard = memo((props: IProps) => {
                                     <HoverCard.Dropdown>
                                         <Stack gap="sm">
                                             <Text fw={600} size="sm">
-                                                {t('view-user-modal.widget.subscription-url')}
+                                                {t('common.field.subscription-url')}
                                             </Text>
                                             <Text c="dimmed" size="sm">
                                                 {t(

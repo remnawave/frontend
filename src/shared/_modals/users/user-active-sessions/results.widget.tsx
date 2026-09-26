@@ -1,9 +1,8 @@
-import { Center, Stack, Text } from '@mantine/core'
+import { Stack } from '@mantine/core'
 import { useMemo } from 'react'
-import { useTranslation } from 'react-i18next'
-import { PiEmptyDuotone } from 'react-icons/pi'
+import { TbRadar } from 'react-icons/tb'
 
-import { SectionCard } from '@shared/ui/section-card'
+import { EmptyPageLayout } from '@shared/ui/layouts/empty-page'
 
 import { IpStatsWidget } from './ip-stats.widget'
 import { NodeSessionsCardWidget } from './node-sessions-card.widget'
@@ -19,8 +18,6 @@ interface IProps {
 }
 
 export const ResultsWidget = ({ nodes, onDropAll, onDropIp, onDropNode, onRefresh }: IProps) => {
-    const { t } = useTranslation()
-
     const { distinctIps, totalIps } = useMemo(() => {
         const allIps = nodes.flatMap((node) => node.ips.map((item) => item.ip))
         return { distinctIps: new Set(allIps).size, totalIps: allIps.length }
@@ -38,20 +35,7 @@ export const ResultsWidget = ({ nodes, onDropAll, onDropIp, onDropNode, onRefres
                 totalIps={totalIps}
             />
 
-            {!hasNodes && (
-                <SectionCard.Root gap="sm">
-                    <SectionCard.Section>
-                        <Center h="230">
-                            <Stack align="center" gap="xs">
-                                <PiEmptyDuotone color="var(--mantine-color-gray-5)" size="3rem" />
-                                <Text c="dimmed" size="sm">
-                                    {t('active-sessions-drawer.widget.no-active-sessions')}
-                                </Text>
-                            </Stack>
-                        </Center>
-                    </SectionCard.Section>
-                </SectionCard.Root>
-            )}
+            {!hasNodes && <EmptyPageLayout icon={<TbRadar size="3rem" />} />}
 
             {nodes.map((node) => (
                 <NodeSessionsCardWidget

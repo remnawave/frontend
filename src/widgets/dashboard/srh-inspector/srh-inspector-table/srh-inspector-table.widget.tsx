@@ -166,7 +166,7 @@ export function SrhInspectorTableWidget() {
             <DataTableShared.Title
                 actions={
                     <ActionIconGroup>
-                        <Tooltip label={t('common.update')} withArrow>
+                        <Tooltip label={t('common.action.update')} withArrow>
                             <ActionIcon
                                 loading={isLoading}
                                 onClick={() => refetch()}
@@ -220,7 +220,7 @@ export function SrhInspectorTableWidget() {
                     </ActionIconGroup>
                 }
                 icon={<TbReportAnalytics size={24} />}
-                title={t('srh-inspector-table.widget.subscription-request-history')}
+                title={t('common.field.subscription-request-history')}
             />
 
             <DataTableShared.Content>

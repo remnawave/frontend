@@ -63,7 +63,7 @@ export function HwidInspectorLeaderboardWidget() {
                 }
                 copy(record[column.accessor as keyof typeof record])
                 notifications.show({
-                    title: t('common.copied'),
+                    title: t('common.message.copied'),
                     message: record[column.accessor as keyof typeof record],
                     color: 'teal'
                 })
@@ -79,7 +79,7 @@ export function HwidInspectorLeaderboardWidget() {
             renderPagination={({ Controls }) => (
                 <>
                     <Controls.Text />
-                    <Tooltip label={t('common.update')} withArrow>
+                    <Tooltip label={t('common.action.update')} withArrow>
                         <ActionIcon
                             loading={isFetching}
                             onClick={() => refetch()}

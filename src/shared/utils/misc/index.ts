@@ -1,3 +1,4 @@
+export * from './base64'
 export * from './boolean'
 export * from './clone-string'
 export * from './date'

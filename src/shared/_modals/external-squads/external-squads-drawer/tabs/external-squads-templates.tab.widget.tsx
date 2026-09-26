@@ -224,7 +224,7 @@ export const ExternalSquadsTemplatesTabWidget = (props: IProps) => {
                     }}
                     variant="soft"
                 >
-                    {t('common.save')}
+                    {t('common.action.save')}
                 </Button>
             </Stack>
         </Card>

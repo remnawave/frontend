@@ -107,7 +107,7 @@ export const UpdateBillingDateModal = NiceModal.create((props: IProps) => {
                         onChange={handleDateChange}
                         presets={[
                             {
-                                label: t('update-billing-date-modal.widget.today'),
+                                label: t('common.field.today'),
                                 value: dayjs().toISOString()
                             },
                             {
@@ -127,7 +127,7 @@ export const UpdateBillingDateModal = NiceModal.create((props: IProps) => {
 
                 <Group justify="flex-end" mt="lg">
                     <Button disabled={!selectedDate} loading={isLoading} onClick={handleSave}>
-                        {t('common.update')}
+                        {t('common.action.update')}
                     </Button>
                 </Group>
             </Stack>

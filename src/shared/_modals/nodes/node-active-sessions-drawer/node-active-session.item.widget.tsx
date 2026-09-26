@@ -12,6 +12,7 @@ import {
 
 import { showModal } from '@shared/_modals/show-modal'
 import { CopyableFieldShared } from '@shared/ui/copyable-field/copyable-field'
+import { EmptyPageLayout } from '@shared/ui/layouts/empty-page'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { SectionCard } from '@shared/ui/section-card'
 import { formatRelativeDateUtil, formatTimeUtil } from '@shared/utils/time-utils'
@@ -73,14 +74,7 @@ export const NodeActiveSessionItem = (props: IProps) => {
                 </Group>
             </SectionCard.Section>
 
-            {user.ips.length === 0 && (
-                <Stack align="center" gap="xs">
-                    <PiEmptyDuotone color="var(--mantine-color-gray-5)" size="3rem" />
-                    <Text c="dimmed" size="sm">
-                        {t('common.nothing-found')}
-                    </Text>
-                </Stack>
-            )}
+            {user.ips.length === 0 && <EmptyPageLayout icon={<PiEmptyDuotone size="3rem" />} />}
 
             {user.ips.length > 0 &&
                 user.ips.map((item) => (

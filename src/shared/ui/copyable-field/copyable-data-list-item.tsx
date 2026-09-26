@@ -32,7 +32,7 @@ export const CopyableDataListItem = ({
                     <CopyButton timeout={2000} value={text}>
                         {({ copied, copy }) => (
                             <Tooltip
-                                label={copied ? t('common.copied') : t('common.copy')}
+                                label={copied ? t('common.message.copied') : t('common.action.copy')}
                                 withArrow
                             >
                                 <UnstyledButton

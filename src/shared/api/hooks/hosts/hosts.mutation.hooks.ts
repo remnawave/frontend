@@ -3,6 +3,7 @@ import {
     BulkDeleteHostsCommand,
     BulkDisableHostsCommand,
     BulkEnableHostsCommand,
+    CloneHostCommand,
     CreateHostCommand,
     DeleteHostCommand,
     ReorderHostsCommand,
@@ -21,6 +22,23 @@ export const useCreateHost = createMutationHook({
         onError: (error) => {
             notifications.show({
                 title: `Create Host`,
+                message:
+                    error instanceof Error ? error.message : `Request failed with unknown error.`,
+                color: 'red'
+            })
+        }
+    }
+})
+
+export const useCloneHost = createMutationHook({
+    endpoint: CloneHostCommand.TSQ_url,
+    bodySchema: CloneHostCommand.RequestBodySchema,
+    responseSchema: CloneHostCommand.ResponseSchema,
+    requestMethod: CloneHostCommand.endpointDetails.REQUEST_METHOD,
+    rMutationParams: {
+        onError: (error) => {
+            notifications.show({
+                title: `Clone Host`,
                 message:
                     error instanceof Error ? error.message : `Request failed with unknown error.`,
                 color: 'red'

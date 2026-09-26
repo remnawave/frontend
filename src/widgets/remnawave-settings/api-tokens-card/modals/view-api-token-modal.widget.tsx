@@ -95,7 +95,7 @@ export const ViewApiTokenContentWidget = ({ isMobile, token }: IProps) => {
                             </Text>
                             <CopyButton timeout={1600} value={token.uuid}>
                                 {({ copied, copy }) => (
-                                    <Tooltip label={t('common.copy')}>
+                                    <Tooltip label={t('common.action.copy')}>
                                         <ActionIcon
                                             color={copied ? 'teal' : 'gray'}
                                             onClick={copy}
@@ -132,7 +132,7 @@ export const ViewApiTokenContentWidget = ({ isMobile, token }: IProps) => {
                 <ActionIconGroup ml="auto">
                     <CopyButton timeout={1600} value={JSON.stringify(token.scopes, null, 2)}>
                         {({ copied, copy }) => (
-                            <Tooltip label={t('common.copy')}>
+                            <Tooltip label={t('common.action.copy')}>
                                 <ActionIcon
                                     color={copied ? 'teal' : 'gray'}
                                     onClick={copy}
@@ -147,7 +147,7 @@ export const ViewApiTokenContentWidget = ({ isMobile, token }: IProps) => {
                 </ActionIconGroup>
 
                 <Button color="teal" onClick={() => modals.closeAll()} size="md" variant="light">
-                    {t('common.close')}
+                    {t('common.action.close')}
                 </Button>
             </ModalFooter>
         </Stack>

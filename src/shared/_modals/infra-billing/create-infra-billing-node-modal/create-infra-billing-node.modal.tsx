@@ -86,7 +86,7 @@ export const CreateInfraBillingNodeModal = NiceModal.create(() => {
 
         if (!values.providerUuid || (!hasNode && !hasName)) {
             notifications.show({
-                title: t('create-infra-billing-node.modal.widget.error'),
+                title: t('common.message.error'),
                 message: t(
                     'create-infra-billing-node.modal.widget.please-select-a-provider-and-billing-node'
                 ),
@@ -115,7 +115,7 @@ export const CreateInfraBillingNodeModal = NiceModal.create(() => {
                     iconColor="teal"
                     IconComponent={TbServer}
                     iconVariant="soft"
-                    title={t('create-infra-billing-node.modal.widget.billing-node')}
+                    title={t('common.field.billing-node')}
                 />
             }
         >
@@ -214,7 +214,7 @@ export const CreateInfraBillingNodeModal = NiceModal.create(() => {
                     />
 
                     <Button loading={isCreateInfraBillingNodePending} type="submit" variant="soft">
-                        {t('common.create')}
+                        {t('common.action.create')}
                     </Button>
                 </Stack>
             </form>

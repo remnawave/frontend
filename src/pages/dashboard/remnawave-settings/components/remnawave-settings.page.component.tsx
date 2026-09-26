@@ -4,7 +4,7 @@ import { ApiTokensCardWidget } from '@widgets/remnawave-settings/api-tokens-card
 import { AuthentificationSettingsCardWidget } from '@widgets/remnawave-settings/authentification-settings-card/authentification-settings-card.widget'
 import { BackendToolsCardWidget } from '@widgets/remnawave-settings/backend-tools-card/backend-tools-card.widget'
 import { BrandingSettingsCardWidget } from '@widgets/remnawave-settings/branding-settings-card/branding-settings-card.widget'
-import { VisualSettingsCardWidget } from '@widgets/remnawave-settings/visual-settings-card/visual-settings-card.widget'
+import { ExperimentalSettingsCardWidget } from '@widgets/remnawave-settings/experimental-settings-card/experimental-settings-card.widget'
 import { useTranslation } from 'react-i18next'
 import Masonry from 'react-layout-masonry'
 
@@ -44,11 +44,11 @@ export const RemnawaveSettingsPageComponent = (props: IProps) => {
                         passwordSettings={remnawaveSettings.passwordSettings}
                     />
                     <ApiTokensCardWidget apiTokensData={apiTokensData} />
-                    <VisualSettingsCardWidget />
                     <BackendToolsCardWidget />
                     <BrandingSettingsCardWidget
                         brandingSettings={remnawaveSettings.brandingSettings}
                     />
+                    <ExperimentalSettingsCardWidget />
                 </Masonry>
             </Container>
         </Page>

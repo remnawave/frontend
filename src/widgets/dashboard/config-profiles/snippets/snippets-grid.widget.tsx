@@ -1,31 +1,21 @@
-import {
-    ActionIcon,
-    Badge,
-    Box,
-    Card,
-    Center,
-    Code,
-    CopyButton,
-    Divider,
-    Group,
-    SimpleGrid,
-    Stack,
-    Text
-} from '@mantine/core'
-import { modals } from '@mantine/modals'
-import { GetSnippetsCommand, UpdateSnippetCommand } from '@remnawave/backend-contract'
+import { ActionIcon, CopyButton, Tooltip } from '@mantine/core'
+import { GetSnippetsCommand } from '@remnawave/backend-contract'
+import cx from 'clsx'
 import { t } from 'i18next'
+import { useMemo } from 'react'
 import { PiCheck, PiCopy } from 'react-icons/pi'
-import { TbBraces, TbCode, TbTrash } from 'react-icons/tb'
+import { TbBraces, TbCode, TbFolder, TbPencil, TbTrash } from 'react-icons/tb'
 
-import { queryClient } from '@shared/api'
-import { useDeleteSnippet, useSyncSnippet } from '@shared/api/hooks'
-import { QueryKeys } from '@shared/api/hooks/keys-factory'
-import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
+import { EmptyPageLayout } from '@shared/ui/layouts/empty-page'
+import { buildTree, ITreeNode, ITreeRowContent, TreeBrowser } from '@shared/ui/tree-browser'
 
-import { openConfirmSnippetSyncModal } from './confirm-snippet-sync.modal'
-import { EDIT_SNIPPET_MODAL_ID, EditSnippetModal } from './edit-snippet.modal'
 import classes from './Snippets.module.css'
+import { TSnippet } from './types'
+import { useSnippetActions } from './use-snippet-actions'
+
+const countItems = (snippet: unknown) => (Array.isArray(snippet) ? snippet.length : 0)
+
+const getName = (snippet: TSnippet) => snippet.name
 
 interface IProps {
     snippets: GetSnippetsCommand.Response['response'] | undefined
@@ -34,239 +24,101 @@ interface IProps {
 export const SnippetsGridWidget = (props: IProps) => {
     const { snippets } = props
 
-    const { mutate: deleteSnippet, isPending: isDeleting } = useDeleteSnippet({
-        mutationFns: {
-            onSuccess: () => {
-                queryClient.refetchQueries({ queryKey: QueryKeys.snippets.getSnippets.queryKey })
-            }
-        }
-    })
+    const tree = useMemo(() => buildTree(snippets?.snippets ?? [], getName), [snippets])
 
-    const { mutate: syncSnippet } = useSyncSnippet()
-
-    const handleDelete = (name: string) => {
-        modals.openConfirmModal({
-            title: t('common.confirm-action'),
-            children: t('common.confirm-action-description'),
-            labels: {
-                confirm: t('common.delete'),
-                cancel: t('common.cancel')
-            },
-            centered: true,
-            cancelProps: { variant: 'subtle' },
-            confirmProps: { color: 'red', variant: 'soft' },
-            onConfirm: () => {
-                deleteSnippet(
-                    {
-                        variables: {
-                            name
-                        }
-                    },
-                    {
-                        onSuccess: () => {
-                            openConfirmSnippetSyncModal(() => {
-                                syncSnippet({
-                                    variables: {
-                                        name
-                                    }
-                                })
-                            })
-                        }
-                    }
-                )
-            }
-        })
-    }
-
-    const getSnippetPreview = (snippet: unknown) => {
-        if (!Array.isArray(snippet)) return []
-        return snippet.slice(0, 3)
-    }
-
-    const getSnippetLength = (snippet: unknown) => {
-        if (!Array.isArray(snippet)) return 0
-        return snippet.length
-    }
-
-    const handleEditModal = (
-        snippet: UpdateSnippetCommand.Response['response']['snippets'][number]
-    ) => {
-        modals.open({
-            modalId: EDIT_SNIPPET_MODAL_ID,
-            title: (
-                <BaseOverlayHeader
-                    iconColor="teal"
-                    IconComponent={TbCode}
-                    iconVariant="soft"
-                    title={t('snippets.drawer.widget.edit-snippet')}
-                />
-            ),
-            centered: true,
-            size: '80%',
-            transitionProps: { transition: 'fade' },
-            children: <EditSnippetModal snippet={snippet} />
-        })
-    }
+    const { deletingName, handleDelete, handleEdit } = useSnippetActions()
 
     if (!snippets || snippets.snippets.length === 0) {
-        return (
-            <Center h={200}>
-                <Stack align="center" gap="md">
-                    <TbCode opacity={0.3} size={48} />
-                    <Text c="dimmed" size="sm">
-                        {t('snippets.drawer.widget.no-snippets-yet')}
-                    </Text>
-                </Stack>
-            </Center>
-        )
+        return <EmptyPageLayout icon={<TbCode size={32} />} />
+    }
+
+    const stop = (handler: () => void) => (event: React.MouseEvent) => {
+        event.stopPropagation()
+        handler()
+    }
+
+    const renderRow = (node: ITreeNode<TSnippet>, isFolder: boolean) => {
+        const snippet = node.item
+
+        const content: ITreeRowContent = {}
+
+        if (snippet) {
+            content.count = isFolder ? undefined : countItems(snippet.snippet)
+
+            content.leading = (
+                <>
+                    {isFolder && <TbFolder className={classes.folderGlyph} size={18} />}
+
+                    <CopyButton timeout={1500} value={snippet.name}>
+                        {({ copied, copy }) => (
+                            <Tooltip label={snippet.name}>
+                                <ActionIcon
+                                    className={classes.leadAction}
+                                    color={copied ? 'teal' : 'gray'}
+                                    component="div"
+                                    onClick={stop(copy)}
+                                    size="sm"
+                                    variant="subtle"
+                                >
+                                    {copied ? (
+                                        <PiCheck size="16px" />
+                                    ) : (
+                                        <>
+                                            <TbBraces
+                                                className={cx(
+                                                    classes.snippetIcon,
+                                                    classes.glyphType
+                                                )}
+                                                size={18}
+                                            />
+                                            <PiCopy className={classes.glyphCopy} size="16px" />
+                                        </>
+                                    )}
+                                </ActionIcon>
+                            </Tooltip>
+                        )}
+                    </CopyButton>
+                </>
+            )
+
+            content.actions = (
+                <>
+                    {isFolder && (
+                        <ActionIcon
+                            color="gray"
+                            component="div"
+                            onClick={stop(() => handleEdit(snippet))}
+                            size="sm"
+                            variant="subtle"
+                        >
+                            <TbPencil size={16} />
+                        </ActionIcon>
+                    )}
+
+                    <ActionIcon
+                        color="red"
+                        component="div"
+                        loading={deletingName === snippet.name}
+                        onClick={stop(() => handleDelete(snippet.name))}
+                        size="sm"
+                        variant="subtle"
+                    >
+                        <TbTrash size={16} />
+                    </ActionIcon>
+                </>
+            )
+        }
+
+        return content
     }
 
     return (
-        <SimpleGrid
-            cols={{
-                base: 1,
-                '800px': 2,
-                '1000px': 3,
-                '1200px': 4,
-                '1800px': 5,
-                '2400px': 6,
-                '3000px': 7
-            }}
-            spacing="xs"
-            type="container"
-        >
-            {snippets.snippets.map((snippet) => {
-                const snippetLength = getSnippetLength(snippet.snippet)
-                const preview = getSnippetPreview(snippet.snippet)
-
-                return (
-                    <Card
-                        className={classes.snippetCard}
-                        key={snippet.name}
-                        onClick={() => handleEditModal(snippet)}
-                        padding="sm"
-                        shadow="sm"
-                        withBorder
-                    >
-                        <Stack gap="xs">
-                            <Group gap="xs" justify="space-between" wrap="nowrap">
-                                <Group gap={6} style={{ flex: 1, minWidth: 0 }} wrap="nowrap">
-                                    <TbBraces
-                                        color="var(--mantine-color-blue-5)"
-                                        size={16}
-                                        style={{ flexShrink: 0 }}
-                                    />
-
-                                    <CopyButton timeout={1500} value={snippet.name}>
-                                        {({ copied, copy }) => (
-                                            <Text
-                                                fw={500}
-                                                onClick={(e) => {
-                                                    e.stopPropagation()
-                                                    copy()
-                                                }}
-                                                size="sm"
-                                                style={{
-                                                    overflow: 'hidden',
-                                                    textOverflow: 'ellipsis',
-                                                    whiteSpace: 'nowrap',
-                                                    cursor: 'copy',
-                                                    flex: 1,
-                                                    minWidth: 0,
-                                                    transition: 'color 0.1s ease',
-                                                    color: copied
-                                                        ? 'var(--mantine-color-teal-4)'
-                                                        : 'inherit'
-                                                }}
-                                            >
-                                                {snippet.name}
-                                            </Text>
-                                        )}
-                                    </CopyButton>
-
-                                    <Badge
-                                        color="blue"
-                                        radius="sm"
-                                        size="md"
-                                        style={{ flexShrink: 0 }}
-                                        variant="default"
-                                    >
-                                        {snippetLength}
-                                    </Badge>
-                                </Group>
-
-                                <Group gap={4} wrap="nowrap">
-                                    <CopyButton
-                                        timeout={2000}
-                                        value={JSON.stringify(snippet.snippet || [], null, 2)}
-                                    >
-                                        {({ copied, copy }) => (
-                                            <ActionIcon
-                                                color={copied ? 'teal' : 'gray'}
-                                                onClick={(e) => {
-                                                    e.stopPropagation()
-                                                    copy()
-                                                }}
-                                                size="sm"
-                                                variant="subtle"
-                                            >
-                                                {copied ? (
-                                                    <PiCheck size="16px" />
-                                                ) : (
-                                                    <PiCopy size="16px" />
-                                                )}
-                                            </ActionIcon>
-                                        )}
-                                    </CopyButton>
-
-                                    <ActionIcon
-                                        color="red"
-                                        loading={isDeleting}
-                                        onClick={(e) => {
-                                            e.stopPropagation()
-                                            handleDelete(snippet.name)
-                                        }}
-                                        size="sm"
-                                        variant="subtle"
-                                    >
-                                        <TbTrash size={16} />
-                                    </ActionIcon>
-                                </Group>
-                            </Group>
-
-                            {preview.length > 0 && (
-                                <>
-                                    <Divider />
-                                    <Stack gap={4}>
-                                        {preview.map((item, idx) => (
-                                            <Box key={idx}>
-                                                <Code
-                                                    block
-                                                    style={{
-                                                        fontSize: '11px',
-                                                        maxWidth: '100%',
-                                                        overflow: 'hidden',
-                                                        textOverflow: 'ellipsis',
-                                                        whiteSpace: 'nowrap'
-                                                    }}
-                                                >
-                                                    {JSON.stringify(item)}
-                                                </Code>
-                                            </Box>
-                                        ))}
-                                        {snippetLength > 3 && (
-                                            <Text c="dimmed" fs="italic" size="xs">
-                                                +{snippetLength - 3}{' '}
-                                                {t('snippets.drawer.widget.more-items')}
-                                            </Text>
-                                        )}
-                                    </Stack>
-                                </>
-                            )}
-                        </Stack>
-                    </Card>
-                )
-            })}
-        </SimpleGrid>
+        <TreeBrowser
+            emptyLabel={t('common.message.nothing-found')}
+            onSelect={handleEdit}
+            renderRow={renderRow}
+            rootLabel={t('snippets.drawer.widget.snippets')}
+            tree={tree}
+        />
     )
 }

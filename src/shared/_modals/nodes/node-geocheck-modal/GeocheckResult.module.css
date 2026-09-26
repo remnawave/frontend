@@ -4,7 +4,7 @@
     contain: paint;
     border-radius: var(--mantine-radius-md);
     min-height: 320px;
-    max-height: 62vh;
+    max-height: 69vh;
 }
 
 .viewport.fullscreenViewport {

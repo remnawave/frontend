@@ -14,7 +14,7 @@ export function GetActiveSessionsOnNodeFeature(props: IProps) {
     const { t } = useTranslation()
 
     return (
-        <Tooltip label={t('common.active-sessions')}>
+        <Tooltip label={t('common.field.active-sessions')}>
             <ActionIcon
                 color="indigo"
                 onClick={() => showModal('nodes_nodeActiveSessionsDrawer', { nodeUuid })}

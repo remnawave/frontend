@@ -3,6 +3,8 @@ import { ComponentType, FC, useState } from 'react'
 import { ErrorBoundary } from 'react-error-boundary'
 import { Outlet } from 'react-router'
 
+import { NiceModalAutoClose } from '@shared/_modals/nice-modal-auto-close'
+
 export interface ErrorBoundaryFallbackProps {
     componentStack: null | string
     error: unknown
@@ -28,6 +30,7 @@ export const ErrorBoundaryHoc: FC<IProps> = ({ FallbackComponent }) => {
             onError={(_error, info) => setComponentStack(info.componentStack ?? null)}
         >
             <NiceModal.Provider>
+                <NiceModalAutoClose />
                 <Outlet />
             </NiceModal.Provider>
         </ErrorBoundary>

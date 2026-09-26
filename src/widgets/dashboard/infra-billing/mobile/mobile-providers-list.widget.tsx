@@ -48,9 +48,9 @@ export function MobileProvidersListWidget(props: IProps) {
 
     const handleDeleteProvider = (uuid: string) =>
         modals.openConfirmModal({
-            title: t('common.confirm-action'),
-            children: t('common.confirm-action-description'),
-            labels: { confirm: t('common.delete'), cancel: t('common.cancel') },
+            title: t('common.action.confirm-action'),
+            children: t('common.message.confirm-action-description'),
+            labels: { confirm: t('common.action.delete'), cancel: t('common.action.cancel') },
             centered: true,
             confirmProps: { color: 'red', variant: 'soft' },
             cancelProps: {
@@ -176,7 +176,7 @@ export function MobileProvidersListWidget(props: IProps) {
                                     {formatCurrencyWithIntl(provider.billingHistory.totalAmount)}
                                 </Text>
                                 <Text c="dimmed" size="xs">
-                                    {t('users-metrics.widget.total')}
+                                    {t('common.field.total')}
                                 </Text>
                             </Stack>
                         </Group>

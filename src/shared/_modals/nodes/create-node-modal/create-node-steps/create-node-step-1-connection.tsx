@@ -246,7 +246,7 @@ export const CreateNodeStep1Connection = ({ form, onNext, secretKey, port }: IPr
                                     clearable
                                     data={nodesTags?.tags || []}
                                     key={form.key('tags')}
-                                    label={t('use-nodes-table-widget.tags')}
+                                    label={t('common.field.tags')}
                                     leftSection={<PiTagDuotone size="16px" />}
                                     maxTags={10}
                                     placeholder="Enter tags (comma, space, semicolon)"
@@ -281,7 +281,7 @@ export const CreateNodeStep1Connection = ({ form, onNext, secretKey, port }: IPr
                             size="md"
                             type="submit"
                         >
-                            {t('create-node-modal.widget.next')}
+                            {t('common.action.next')}
                         </Button>
                     </Group>
                 </Stack>

@@ -196,7 +196,7 @@ export const StatisticNodesPage = () => {
                     />
 
                     <TopLeaderboardCardShared
-                        emptyText={t('statistic-nodes.component.no-data-available')}
+                        emptyText={t('common.message.no-data-available')}
                         isLoading={isLoading}
                         items={nodesStats?.topNodes?.map((node) => ({
                             color: node.color,

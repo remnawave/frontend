@@ -31,7 +31,7 @@ interface IProps {
     setSelectedRecords: (records: NodeType[]) => void
 }
 
-const NODES_CACHE_KEY = 'nodes-datatable-nodes-v7'
+const NODES_CACHE_KEY = 'nodes-datatable-nodes-v8'
 const DEFAULT_SORT_STATUS: DataTableSortStatus<NodeType> = {
     columnAccessor: 'viewPosition',
     direction: 'asc'

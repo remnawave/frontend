@@ -46,7 +46,7 @@ export const useUserTableColumns = (
         () => [
             {
                 accessorKey: 'username',
-                header: t('use-table-columns.username'),
+                header: t('common.field.username'),
                 Cell: ({ cell }) => <UsernameColumnEntity user={cell.row.original} />,
                 mantineTableBodyCellProps: {
                     align: 'left'
@@ -67,7 +67,7 @@ export const useUserTableColumns = (
             },
             {
                 accessorKey: 'status',
-                header: t('use-table-columns.status'),
+                header: t('common.field.status'),
                 Cell: ({ cell }) => <StatusColumnEntity need="badge" user={cell.row.original} />,
                 filterVariant: 'select',
                 enableColumnFilterModes: false,
@@ -194,7 +194,7 @@ export const useUserTableColumns = (
 
             {
                 accessorKey: 'description',
-                header: t('use-table-columns.description'),
+                header: t('common.field.description'),
                 accessorFn: (originalRow) => originalRow.description || '–',
                 minSize: 250,
                 size: 400,
@@ -219,7 +219,7 @@ export const useUserTableColumns = (
 
             {
                 accessorKey: 'tag',
-                header: t('use-table-columns.tag'),
+                header: t('common.field.tag'),
                 Cell: ({ cell }) => (
                     <Text ff="monospace" fw={500} size="md">
                         {cell.row.original.tag || '–'}
@@ -346,7 +346,7 @@ export const useUserTableColumns = (
 
             {
                 accessorKey: 'userTraffic.firstConnectedAt',
-                header: t('use-table-columns.first-connected-at'),
+                header: t('common.field.first-connected-at'),
                 accessorFn: (originalRow) => {
                     if (originalRow.userTraffic && originalRow.userTraffic.firstConnectedAt) {
                         return formatTimeUtil({

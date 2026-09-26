@@ -50,7 +50,7 @@ export const NodeActiveSessionsDrawer = NiceModal.create((props: IProps) => {
                     iconColor="teal"
                     IconComponent={TbRadar}
                     iconVariant="soft"
-                    title={t('common.active-sessions')}
+                    title={t('common.field.active-sessions')}
                 />
             }
         >

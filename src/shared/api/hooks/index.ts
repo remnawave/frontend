@@ -32,6 +32,8 @@ export * from './node-integrations/node-integrations.mutation.hooks'
 export * from './node-integrations/node-integrations.query.hooks'
 
 export * from './node-plugins/node-plugins.mutation.hooks'
+export * from './node-ssh/evaluate-vault'
+export * from './node-ssh/node-ssh.mutation.hooks'
 
 export * from './node-plugins/node-plugins.query.hooks'
 export * from './nodes/nodes.mutation.hooks'

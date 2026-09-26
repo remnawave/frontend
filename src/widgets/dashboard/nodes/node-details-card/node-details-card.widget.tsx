@@ -3,6 +3,7 @@ import { GetNodeGeocheckFeature } from '@features/ui/dashboard/nodes/get-node-ge
 import { GetNodeInboundsHostsFeature } from '@features/ui/dashboard/nodes/get-node-inbounds-hosts'
 import { GetNodeLinkedHostsFeature } from '@features/ui/dashboard/nodes/get-node-linked-hosts'
 import { GetNodeUsersUsageFeature } from '@features/ui/dashboard/nodes/get-node-users-usage'
+import { OpenNodeSshFeature } from '@features/ui/dashboard/nodes/open-node-ssh'
 import {
     ActionIcon,
     Badge,
@@ -310,6 +311,7 @@ export const NodeDetailsCardWidget = memo((props: IProps) => {
 
                     <Group gap="xs" justify="center">
                         <GetNodeGeocheckFeature node={node} />
+                        <OpenNodeSshFeature node={node} />
                         <GetNodeUsersUsageFeature nodeUuid={node.uuid} />
                         <GetActiveSessionsOnNodeFeature nodeUuid={node.uuid} />
                     </Group>

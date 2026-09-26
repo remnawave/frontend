@@ -17,6 +17,7 @@ import {
     GetHostsCommand,
     GetNodesCommand,
     GetConfigProfilesCommand,
+    INTERNAL_SQUADS_MODE,
     SUBSCRIPTION_TEMPLATE_TYPE
 } from '@remnawave/backend-contract'
 import cx from 'clsx'
@@ -104,7 +105,7 @@ export function HostCardWidget(props: IProps) {
 
     const handleEdit = () => {
         showModal('hosts_editHostDrawer', {
-            host: item
+            hostUuid: item.uuid
         })
     }
 
@@ -129,7 +130,8 @@ export function HostCardWidget(props: IProps) {
     const hasSockoptParams = isParamSet(item.sockoptParams)
     const hasXrayJsonTemplate = !!item.xrayJsonTemplateUuid
     const serverDescription = item.serverDescription?.trim() || ''
-    const hasExcludedSquads = item.excludedInternalSquads.length > 0
+    const hasInternalSquadsRule = item.internalSquads.squads.length > 0
+    const isInternalSquadsAllowOnly = item.internalSquads.mode === INTERNAL_SQUADS_MODE.ALLOW_ONLY
 
     if (isMobile) {
         return (
@@ -401,9 +403,19 @@ export function HostCardWidget(props: IProps) {
                         </Group>
 
                         <Group gap={6} style={{ flexShrink: 0 }} wrap="nowrap">
-                            {hasExcludedSquads && (
-                                <Tooltip label={t('base-host-form.excluded-internal-squads')}>
-                                    <ThemeIcon color="yellow" size={28} variant="soft">
+                            {hasInternalSquadsRule && (
+                                <Tooltip
+                                    label={
+                                        isInternalSquadsAllowOnly
+                                            ? t('base-host-form.allowed-internal-squads')
+                                            : t('base-host-form.excluded-internal-squads')
+                                    }
+                                >
+                                    <ThemeIcon
+                                        color={isInternalSquadsAllowOnly ? 'teal' : 'yellow'}
+                                        size={28}
+                                        variant="soft"
+                                    >
                                         <TbCirclesRelation size={16} />
                                     </ThemeIcon>
                                 </Tooltip>

@@ -283,7 +283,7 @@ export const InternalSquadsInboundsDrawer = NiceModal.create((props: IProps) => 
                                             })}
                                         </Badge>
                                     </Tooltip>
-                                    <Tooltip label={t('internal-squads-grid.widget.inbounds')}>
+                                    <Tooltip label={t('common.field.inbounds')}>
                                         <Badge
                                             color="blue"
                                             ff="monospace"
@@ -336,7 +336,7 @@ export const InternalSquadsInboundsDrawer = NiceModal.create((props: IProps) => 
                 <TextInput
                     leftSection={<TbSearch size={16} />}
                     onChange={(event) => setSearchQuery(event.currentTarget.value)}
-                    placeholder={t('internal-squads.drawer.widget.search-profiles-or-inbounds')}
+                    placeholder={t('common.message.search-profiles-or-inbounds')}
                     value={searchQuery}
                 />
 
@@ -359,7 +359,7 @@ export const InternalSquadsInboundsDrawer = NiceModal.create((props: IProps) => 
                     <Tabs.Panel className={classes.tabPanel} pt="sm" value="profiles">
                         {filteredProfiles.length === 0 ? (
                             <Text c="dimmed" py="xl" size="sm" ta="center">
-                                {t('internal-squads.drawer.widget.no-profiles-or-inbounds-found')}
+                                {t('common.message.no-profiles-or-inbounds-found')}
                             </Text>
                         ) : (
                             <Box className={classes.listContainer}>
@@ -414,7 +414,7 @@ export const InternalSquadsInboundsDrawer = NiceModal.create((props: IProps) => 
                         <Stack className={classes.tabPanel} gap="sm">
                             <SegmentedControl
                                 data={[
-                                    { label: t('internal-squads.drawer.widget.all'), value: 'all' },
+                                    { label: t('common.field.all'), value: 'all' },
                                     {
                                         label: t('internal-squads.drawer.widget.selected'),
                                         value: 'selected'
@@ -473,11 +473,7 @@ export const InternalSquadsInboundsDrawer = NiceModal.create((props: IProps) => 
                 />
             }
         >
-            {isLoading ? (
-                <LoaderModalShared h="80vh" text="Loading..." w="100%" />
-            ) : (
-                renderDrawerContent()
-            )}
+            {isLoading ? <LoaderModalShared /> : renderDrawerContent()}
         </Drawer>
     )
 })
