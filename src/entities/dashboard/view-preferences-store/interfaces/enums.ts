@@ -7,3 +7,8 @@ export enum HOSTS_VIEW_MODE {
     CARDS = 'cards',
     TABLE = 'table'
 }
+
+export enum INBOUNDS_VIEW_MODE {
+    CARDS = 'cards',
+    TABLE = 'table'
+}

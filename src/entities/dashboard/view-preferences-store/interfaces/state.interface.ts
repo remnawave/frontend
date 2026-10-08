@@ -1,6 +1,6 @@
 import type { ILauncherPosition, TQuickLink } from '@shared/ui/quick-launcher/quick-links.types'
 
-import { HOSTS_VIEW_MODE, NODES_VIEW_MODE } from './enums'
+import { HOSTS_VIEW_MODE, INBOUNDS_VIEW_MODE, NODES_VIEW_MODE } from './enums'
 
 export interface IExperimentalFeatures {
     legacyLayoutStyle: boolean
@@ -18,5 +18,6 @@ export interface IState {
     hostsViewMode: HOSTS_VIEW_MODE
     nodesActiveTag: null | string
     nodesViewMode: NODES_VIEW_MODE
+    inboundsViewMode: INBOUNDS_VIEW_MODE
     sectionActiveTags: Record<string, null | string>
 }

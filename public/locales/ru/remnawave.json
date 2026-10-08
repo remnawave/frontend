@@ -26,7 +26,13 @@
     "tb-reports": "Отчёты Torrent Blocker",
     "sessions-explorer": "Обозреватель сессий",
     "http-stats": "Статистика HTTP",
-    "quick-launcher": "Лаунчер"
+    "quick-launcher": "Лаунчер",
+    "dashboard": "Панель управления",
+    "config": "Конфиг",
+    "nodes-bandwidth-table": "Расход трафика",
+    "utils": "Утилиты",
+    "happ-routing-builder": "Happ-роутинг",
+    "inbounds": "Инбаунды"
   },
   "common": {
     "action": {
@@ -139,7 +145,61 @@
       "selected": "Выбрано: {{count}}",
       "success": "Готово",
       "warning": "Внимание"
-    }
+    },
+    "delete": "Удалить",
+    "create": "Создать",
+    "cancel": "Закрыть",
+    "copied": "Скопировано",
+    "copy": "Скопировать",
+    "paste": "Вставить",
+    "refresh": "Обновить",
+    "save": "Сохранить",
+    "update": "Обновить",
+    "enable": "Включить",
+    "disable": "Отключить",
+    "continue": "Продолжить",
+    "confirm-action": "Подтвердите действие",
+    "confirm-action-description": "Вы уверены, что хотите выполнить это действие? Это действие нельзя отменить.",
+    "edit": "Изменить",
+    "copy-uuid": "Скопировать UUID",
+    "copy-link": "Copy link",
+    "rename": "Переименовать",
+    "close": "Закрыть",
+    "change": "Изменить",
+    "save-changes": "Сохранить изменения",
+    "remove": "Удалить",
+    "add": "Добавить",
+    "select": "Выбрать",
+    "loading": "Загрузка",
+    "success": "Успешно",
+    "download": "Скачать",
+    "search": "Поиск",
+    "nothing-found": "Ничего не найдено",
+    "name": "Имя",
+    "clone": "Клонировать",
+    "event-sent": "Запрос отправлен",
+    "open": "Открыть",
+    "view": "Посмотреть",
+    "clear": "Очистить",
+    "color": "Цвет",
+    "all": "Все",
+    "without-tags": "Без тегов",
+    "reset": "Сбросить",
+    "actions": "Действия",
+    "clear-selection": "Очистить выбор",
+    "select-all": "Выделить все",
+    "selected": "Выбрано: {{count}}",
+    "bulk-actions": "Массовые действия",
+    "bulk-edit": "Массовое редактирование",
+    "creation": "Создание",
+    "processing": "Обработка",
+    "operation-completed": "Операция завершена",
+    "usage-stats": "Статистика использования",
+    "active-sessions": "Активные сессии",
+    "shared-lists": "Общие списки",
+    "try-again": "Попробуйте снова",
+    "interface": "Интерфейс",
+    "ip-address": "IP-адрес"
   },
   "bandwidth-metrics": {
     "current-year": "Текущий год",
@@ -149,7 +209,9 @@
     "from-last-month": "к прошлому месяцу",
     "last-7-days": "Последние 7 дней",
     "from-last-week": "к прошлой неделе",
-    "from-yesterday": "ко вчера"
+    "from-yesterday": "ко вчера",
+    "from-last-month-0": "с прошлого месяца",
+    "today": "Сегодня"
   },
   "online-metrics": {
     "never-online": "Ни разу не были онлайн",
@@ -159,7 +221,9 @@
   },
   "simple-metrics": {
     "ram-usage": "Использование RAM",
-    "total-online-on-nodes": "Всего онлайн на нодах"
+    "total-online-on-nodes": "Всего онлайн на нодах",
+    "system-uptime": "Время работы системы",
+    "total-traffic": "Общий трафик"
   },
   "config-editor-actions": {
     "feature": {
@@ -171,13 +235,18 @@
       "copy-all-content": "Скопировать всё",
       "cut-selection": "Вырезать выделенное",
       "paste-from-clipboard": "Вставить из буфера",
-      "generate-keypair": "Сгенерировать пару ключей"
+      "generate-keypair": "Сгенерировать пару ключей",
+      "error": "Ошибка",
+      "load-from-github": "Скачать с Github",
+      "select-all": "Выделить все"
     }
   },
   "action-group": {
     "feature": {
       "reset-table": "Сбросить таблицу",
-      "clear-filters": "Сбросить фильтры"
+      "clear-filters": "Сбросить фильтры",
+      "new-user": "Создать польз.",
+      "help": "Справка"
     }
   },
   "use-table-columns": {
@@ -192,7 +261,14 @@
     "sub-link-revoked-at": "Ссылка отозвана",
     "created-at": "Создан",
     "internal-squads": "Внутренние сквады",
-    "used-traffic": "Израсходовано трафика (%)"
+    "used-traffic": "Израсходовано трафика (%)",
+    "username": "Имя пользователя",
+    "status": "Статус",
+    "description": "Описание",
+    "last-ua": "Последний UA",
+    "first-connected-at": "Первое подключение",
+    "sub-last-opened-at": "Последний запрос подписки",
+    "tag": "Tag"
   },
   "header-buttons": {
     "feature": {}
@@ -202,7 +278,10 @@
       "update-external-squads": "Обновить внешние сквады",
       "external-squad-name": "Название внешнего сквада",
       "update-templates": "Обновить шаблоны",
-      "template-name": "Название шаблона"
+      "template-name": "Название шаблона",
+      "create-new-host": "Создать новый хост",
+      "create-new-external-squad": "Создать новый внешний сквад",
+      "create-new-template": "Создать новый шаблон"
     }
   },
   "nodes-header-action-buttons": {
@@ -212,7 +291,10 @@
       "force-restart-description": "Гарантирует, что все ноды полностью перезапустят Xray Core.",
       "graceful-restart-description-1": "Отправляет всем нодам запрос на перезапуск Xray, но запрос может остаться без ответа, если хеш ноды совпадает с текущим. Вариант по умолчанию.",
       "force": "Жёстко",
-      "graceful": "Мягко"
+      "graceful": "Мягко",
+      "create-new-node": "Создать новую ноду",
+      "force-restart": "Принудительный перезапуск",
+      "graceful-restart": "Плавный перезапуск"
     }
   },
   "config-editor": {
@@ -220,25 +302,30 @@
       "unsaved-changes": "Несохранённые изменения",
       "your-changes-will-be-lost-if-you-leave-this-page-without-saving": "Если уйти со страницы, не сохранившись, изменения потеряются.",
       "leave": "Уйти",
-      "stay": "Остаться"
+      "stay": "Остаться",
+      "loading-editor": "Загрузка редактора..."
     }
   },
   "keypair": {
     "widget": {
       "generate-key-pair": "Сгенерировать пару ключей",
-      "both-keys": "Оба ключа"
+      "both-keys": "Оба ключа",
+      "public-key": "Публичный ключ",
+      "private-key": "Приватный ключ"
     }
   },
   "create-host-modal": {
     "widget": {
       "new-host": "Новый хост",
-      "please-select-the-config-profile-and-inbound": "Выберите профиль и инбаунд"
+      "please-select-the-config-profile-and-inbound": "Выберите профиль и инбаунд",
+      "error": "Ошибка"
     }
   },
   "edit-host-modal": {
     "widget": {
       "edit-host": "Изменить хост",
-      "dangling-host-cannot-be-cloned": "Осиротевший хост нельзя клонировать"
+      "dangling-host-cannot-be-cloned": "Осиротевший хост нельзя клонировать",
+      "error": "Ошибка"
     }
   },
   "create-node-modal": {
@@ -247,7 +334,10 @@
       "back": "Назад",
       "connection-successful": "Подключение установлено",
       "connection-failed": "Подключиться не удалось",
-      "open-node": "Открыть ноду"
+      "open-node": "Открыть ноду",
+      "next": "Далее",
+      "checking-connection": "Проверяем соединение",
+      "close": "Закрыть"
     }
   },
   "edit-node-modal": {
@@ -280,14 +370,19 @@
       "disable-hwid-limit": "Отключить лимит HWID",
       "hwid-device-limit": "Лимит устройств HWID",
       "expire-at-description": "Дата и время, когда подписка пользователя закончится.",
-      "internal-squads-description": "Укажите, в каких внутренних сквадах будет состоять пользователь."
+      "internal-squads-description": "Укажите, в каких внутренних сквадах будет состоять пользователь.",
+      "loading-user-creation": "Загрузка создания пользователя...",
+      "telegram-id-of-a-user-in-telegram": "Telegram ID пользователя в Telegram",
+      "email-of-a-user": "Email пользователя",
+      "internal-squads": "Внутренние сквады"
     }
   },
   "home-page": {},
   "user-table": {
     "widget": {
       "error-loading-data": "Не удалось загрузить данные",
-      "table-title": "Пользователи"
+      "table-title": "Пользователи",
+      "list-of-all-users": "Список всех пользователей"
     }
   },
   "view-user-modal": {
@@ -300,7 +395,16 @@
       "danger-zone": "Опасная зона",
       "detailed-info": "Подробности",
       "accessible-nodes": "Доступные ноды",
-      "qr-code": "QR-код"
+      "qr-code": "QR-код",
+      "connection-details": "Детали подключения",
+      "subscription-url": "URL подписки",
+      "subscription-short-uuid": "ShortUuid подписки",
+      "edit-user": "Сохранить",
+      "view-accessible-nodes": "Доступные ноды",
+      "fetching-user-data": "Получение данных пользователя...",
+      "more-actions": "Действия",
+      "information": "Информация",
+      "subscription": "Подписка"
     }
   },
   "base-host-form": {
@@ -379,7 +483,42 @@
     "no-bulk-options-description": "Каждая добавленная опция применится ко всем выбранным хостам. Оставьте её пустой, чтобы очистить это поле у всех.",
     "bulk-option-will-be-cleared": "Будет очищено у всех выбранных хостов.",
     "leave-field-untouched": "Не трогать это поле",
-    "options": "Опции"
+    "options": "Опции",
+    "address": "Адрес",
+    "port": "Порт",
+    "advanced-options": "Расширенные настройки",
+    "alpn-e-g-h2": "ALPN (например, h2)",
+    "fingerprint-e-g-chrome": "Отпечаток (например, chrome)",
+    "sni-e-g-example-com": "SNI (например, example.com)",
+    "host-e-g-example-com": "Хост (например, example.com)",
+    "e-g-example-com": "например, example.com",
+    "e-g-443": "например, 443",
+    "path-e-g-ws": "путь (например, /ws)",
+    "here-you-can-override-security-settings-from-xtls-config": "Здесь вы можете переопределить настройки безопасности из конфигурации XTLS.",
+    "extra-xhttp-description": "Этот параметр будет работать только с протоколом XHTTP. Клиенту будет передан объект \"extra\". Ввод JSON не проверяется, убедитесь в правильности написания конфигурации. Вы можете использовать кнопку ниже, чтобы скопировать дополнительные настройки и вставить их в JSON вход.",
+    "invalid-json": "Неверный JSON",
+    "fill-with-sample-xhttp-extra-params": "Заполнить примером xHTTP extra",
+    "clone": "Дублировать",
+    "select-one-inbound-to-apply-to-the-host": "Select one inbound to apply to the host",
+    "this-will-only-be-used-for-xray-json-output": "Это будет использоваться только с Xray-JSON.",
+    "please-ensure-you-provide-a-valid-json-mux-object": "Убедитесь, что вы предоставили правильный объект JSON MUX.",
+    "for-more-information-refer-to": "За дополнительной информацией обратитесь к",
+    "xtls-documentation": "документации XTLS",
+    "final-mask-description": "Переопределение finalMask позволяет точно настроить finalMask в случаях, когда конфигурации finalMask на стороне сервера и клиента должны отличаться.<br/><br/>FinalMask применяется только к форматам вывода клиента Xray-JSON и Base64.<br/><br/>Обязательно ознакомьтесь с <anchor>документацией Xray</anchor>.",
+    "paste-default-mux-params": "Вставить пример MUX",
+    "please-ensure-you-provide-a-valid-json-sockopt-object": "Убедитесь, что вы предоставили правильный объект JSON Sockopt.",
+    "paste-default-sockopt-params": "Вставить пример Sockopt",
+    "basic": "Основные",
+    "advanced": "Расширенные",
+    "connection-overrides": "Переопределения соединений",
+    "xray-json-and-raw": "Xray Json & Raw",
+    "hide-host-from-users-remnawave-will-send-host-only-for-raw-subscription-responses": "Скрыть хост от пользователей, Remnawave отправит этот хост только для RAW-формата подписки",
+    "apps-specific": "Настройки для приложений",
+    "legacy-options": "Устаревшие настройки",
+    "misc-settings": "Прочие настройки",
+    "mihomo-specific": "Настройки для Mihomo",
+    "override-the-xray-json-template": "Переопределить шаблон Xray JSON, который будет использоваться для этого узла.",
+    "select-one-or-more-subscription-types-description": "Выберите один или несколько типов подписки, чтобы исключить хост из этого типа подписки."
   },
   "base-node-form": {
     "country": "Страна",
@@ -399,14 +538,20 @@
     "consumption": "Расход",
     "core-configuration": "Конфигурация ядра",
     "tracking-and-billing": "Учёт и биллинг",
-    "management": "Управление"
+    "management": "Управление",
+    "address": "Адрес",
+    "more-actions": "Действия",
+    "quick-actions": "Быстрые действия",
+    "copy-node-uuid": "Скопировать UUID ноды"
   },
   "home": {
     "page": {
       "online-stats": "Статистика онлайна",
       "bandwidth": "Трафик",
       "remnawave-usage": "Нагрузка Remnawave",
-      "process-details": "Подробности процесса"
+      "process-details": "Подробности процесса",
+      "system": "Система",
+      "short-stats": "Краткая статистика"
     },
     "runtime-info": {
       "title": "Гид по метрикам рантайма",
@@ -431,7 +576,9 @@
   "login-form": {
     "feature": {
       "sign-in": "Войти",
-      "your-password": "Ваш пароль"
+      "your-password": "Ваш пароль",
+      "password": "Пароль",
+      "username": "Имя пользователя"
     }
   },
   "statistic-nodes": {
@@ -448,7 +595,13 @@
       "top-nodes": "Топ нод",
       "node": "Нода",
       "traffic": "Трафик",
-      "3-days": "3 дня"
+      "3-days": "3 дня",
+      "no-data-available-for-the-selected-period": "Нет доступных данных за выбранный период",
+      "click-to-see-all": "Нажмите чтобы посмотреть все",
+      "no-data-available": "Доступных данных нет",
+      "filter-nodes": "Фильтр нод",
+      "previous-day": "Пред. день",
+      "next-day": "След. день"
     }
   },
   "get-expiration-text": {
@@ -497,7 +650,10 @@
       "passwords-do-not-match": "Пароли не совпадают",
       "password-too-short": "Минимум 24 символа",
       "register-description": "Создайте аккаунт супер-админа, чтобы начать",
-      "registration": "Регистрация"
+      "registration": "Регистрация",
+      "username": "Имя пользователя",
+      "password": "Пароль",
+      "error": "Ошибка"
     }
   },
   "remarks-manager": {
@@ -514,12 +670,26 @@
       "user-status-remarks-description-line-2": "Для каждого статуса можно добавить несколько примечаний.",
       "serve-json-at-base-subscription": "Отдавать JSON на базовом пути подписки",
       "serve-json-description": "Отдавать JSON-конфигурации по базовому пути подписки, без добавления /json. Если клиент это поддерживает, он получит JSON; если нет — всё как обычно.",
-      "custom-remarks": "Свои примечания"
+      "custom-remarks": "Свои примечания",
+      "user-status-remarks-description-line-3": "Поскольку просроченные, ограниченные и отключенные пользователи не могут подключиться к серверу, они увидят эти примечания вместо пустой подписки.",
+      "update-settings": "Обновить настройки",
+      "enabled": "Включено",
+      "disabled": "Выключено"
+    },
+    "page": {
+      "component": {
+        "what-is-subscription-settings": "Что такое настройки подписки?",
+        "subscription-settings-description": "Настройки ниже в основном используются приложениями клиентов (то есть Happ, V2rayng Streisand и т.д.)",
+        "subscription-settings-description-line-2": "Вы можете изменить их на значения, которые будут соотвествовать вашему сервису."
+      }
     }
   },
   "multi-select-hosts": {
     "feature": {
-      "dangling-hosts-skipped": "Осиротевших хостов пропущено и не клонировано: {{count}}."
+      "dangling-hosts-skipped": "Осиротевших хостов пропущено и не клонировано: {{count}}.",
+      "set-inbound": "Установить инбаунд",
+      "set-port": "Установить порт",
+      "port": "Порт"
     }
   },
   "edit-many-hosts-drawer": {
@@ -538,14 +708,22 @@
       "tab": {
         "feature": {
           "select-status": "Выберите статус",
-          "update-users": "Обновить пользователей"
+          "update-users": "Обновить пользователей",
+          "update-fields-for-all-users": "Обновить поля для всех пользователей",
+          "user-status": "Статус пользователя",
+          "status": "Статус",
+          "expire-date": "Дата истечения",
+          "select-expiration-date": "Выберите дату истечения"
         }
       }
     },
     "actions": {
       "tab": {
         "feature": {
-          "reset-traffic-description": "Обнуляет израсходованный трафик у всех выбранных пользователей"
+          "reset-traffic-description": "Обнуляет израсходованный трафик у всех выбранных пользователей",
+          "reset": "Сбросить",
+          "perform-actions-on-all-users": "Выполнить действия для всех пользователей",
+          "reset-traffic": "Сбросить трафик"
         }
       }
     },
@@ -553,7 +731,9 @@
       "tab": {
         "feature": {
           "delete-users-by-status": "Удалить пользователей по статусу",
-          "delete-users-by-status-description": "Безвозвратно удаляет всех пользователей с выбранным статусом"
+          "delete-users-by-status-description": "Безвозвратно удаляет всех пользователей с выбранным статусом",
+          "danger-zone": "Опасная зона",
+          "danger-zone-description": "Эти действия необратимы и могут привести к постоянной потере данных."
         }
       }
     }
@@ -570,7 +750,12 @@
           "enter-the-number-of-days-to-extend-the-expiration-date": "Укажите, на сколько дней продлить дату окончания",
           "extend-days": "Дней",
           "extend": "Продлить",
-          "extend-expiration-date-description": "Добавляет дни к дате окончания у выбранных пользователей. Дни прибавляются к текущей дате окончания каждого."
+          "extend-expiration-date-description": "Добавляет дни к дате окончания у выбранных пользователей. Дни прибавляются к текущей дате окончания каждого.",
+          "revoke": "Отозвать",
+          "reset-traffic": "Сбросить трафик",
+          "reset": "Сбросить",
+          "resets-the-traffic-usage-to-zero-for-all-selected-users": "Сбрасывает использование трафика до нуля для всех выбранных пользователей",
+          "internal-squads": "Внутренние сквады"
         }
       }
     },
@@ -578,14 +763,32 @@
       "tab": {
         "feature": {
           "delete-users": "Удалить пользователей",
-          "permanently-deletes-all-selected-users-and-their-data": "Безвозвратно удаляет всех выбранных пользователей и их данные"
+          "permanently-deletes-all-selected-users-and-their-data": "Безвозвратно удаляет всех выбранных пользователей и их данные",
+          "danger-zone": "Опасная зона",
+          "these-actions-are-irreversible-and-can-result-in-permanent-data-loss": "Эти действия необратимы и могут привести к постоянной потере данных."
+        }
+      }
+    },
+    "update": {
+      "tab": {
+        "feature": {
+          "update-fields-counter": "Обновить поля для {{usersCount}} выбранных пользователей",
+          "user-status": "Статус пользователя",
+          "status": "Статус",
+          "select-status": "Выберите статус",
+          "expire-date": "Дата истечения",
+          "select-expiration-date": "Выберите дату истечения",
+          "update-users": "Обновить пользователей"
         }
       }
     }
   },
   "get-user-subscription-links": {
     "feature": {
-      "connection-keys": "Ключи подключения"
+      "connection-keys": "Ключи подключения",
+      "subscription-links": "Подписные ссылки",
+      "loading-subscription-links": "Загрузка ссылок на подписку ...",
+      "no-available-hosts-found-for-this-user": "Для этого пользователя не найдено доступных хостов"
     }
   },
   "active-sessions-drawer": {
@@ -600,7 +803,12 @@
       "progress": "Обработано нод: {{completed}} из {{total}}",
       "job-failed-description": "Не удалось собрать активные сессии.",
       "active-ips-across-nodes": "Активные IP-адреса",
-      "distinct-ips": "Уникальных IP"
+      "distinct-ips": "Уникальных IP",
+      "get-data": "Получить данные",
+      "job-failed": "Выполнить не удалось",
+      "clear": "Очистить",
+      "no-active-sessions": "Нет активных сеансов",
+      "no-active-sessions-description": "Активных IP адресов для этого пользователя не найдено."
     }
   },
   "detailed-user-info-drawer": {
@@ -625,7 +833,18 @@
       "last-online": "Последний онлайн",
       "last-connected-node": "Последняя нода",
       "timestamps": "Даты",
-      "active-internal-squads": "Активные внутренние сквады"
+      "active-internal-squads": "Активные внутренние сквады",
+      "loading-user-info": "Загрузка информации о пользователе...",
+      "uuid": "UUID",
+      "username": "Имя пользователя",
+      "description": "Описание",
+      "subscription-url": "URL-адрес подписки",
+      "last-opened-at": "Дата последнего открытия",
+      "last-user-agent": "Последний User Agent",
+      "created-at": "Дата создания",
+      "updated-at": "Дата обновления",
+      "tag": "Tag",
+      "first-connected-at": "Первое подключение"
     }
   },
   "subscription-tabs": {
@@ -637,13 +856,26 @@
       "randomize-hosts": "Перемешивать хосты",
       "randomize-hosts-description": "Перемешивать хосты в содержимом подписки",
       "additional-options": "Дополнительные настройки",
-      "configure-additional-subscription-options": "Дополнительные настройки подписки"
+      "configure-additional-subscription-options": "Дополнительные настройки подписки",
+      "show-custom-remark-description-line-1": "Только для EXPIRED, LIMITED, DISABLED пользователей.",
+      "error": "Ошибка",
+      "save-settings": "Сохранить",
+      "save-your-subscription-settings-to-apply-changes": "Сохраните настройки подписки, чтобы применить изменения",
+      "announce-and-routing": "Announce & Роутинг",
+      "announce-and-routing-description": "Настройка Announce-сообщения и правил роутинга для поддерживаемых клиентов",
+      "announce-description": "Этот текст будет отображаться под названием подписки в поддерживаемых клиентах, таких как Happ и v2rayTUN",
+      "enter-announce-text-max-200-characters": "Введите Announce-сообщение, максимум 200 символов"
     }
   },
   "nodes-realtime-metrics": {
     "widget": {
       "download-speed": "Скорость скачивания",
-      "upload-speed": "Скорость отдачи"
+      "upload-speed": "Скорость отдачи",
+      "total-upload": "Всего загружено",
+      "total-download": "Всего скачано",
+      "average-bps": "Средняя скорость",
+      "active-nodes": "Активные ноды",
+      "current-hour": "Текущий час"
     }
   },
   "internal-squads-usage-drawer": {
@@ -674,7 +906,24 @@
       "delete-device": "Удалить устройство",
       "devices": "Устройства",
       "hwid-devices": "Устройства HWID",
-      "delete-all-devices": "Удалить все устройства"
+      "delete-all-devices": "Удалить все устройства",
+      "no-devices-found": "Устройства не найдены",
+      "no-devices-match-your-search": "Устройства не найдены",
+      "platform": "Платформа",
+      "user-agent": "User Agent",
+      "os-version": "Версия OS",
+      "device": "Устройство",
+      "important-note": "Важная информация",
+      "important-note-line-1": "Эта функция доступна только с",
+      "important-note-line-2": ".env переменной.",
+      "important-note-line-3": "Не все приложения поддерживают эту функцию.",
+      "important-note-line-4": "Если HWID лимит пользователь пустой –",
+      "important-note-line-5": "будет использован.",
+      "important-note-line-6": "Пожалуйста, ознакомьтесь с документацией для получения более подробной информации.",
+      "important-note-line-7": "Подробнее.",
+      "loading-hwid-devices": "Загружаем HWID устройства...",
+      "search-by-hwid": "Поиск по HWID",
+      "enter-hwid-to-filter-devices": "Введите HWID для поиска..."
     }
   },
   "headers-manager": {
@@ -703,14 +952,20 @@
   },
   "pm2-metrics": {
     "total-processes": "Всего процессов",
-    "total-memory": "Всего памяти"
+    "total-memory": "Всего памяти",
+    "average-cpu": "Средний CPU",
+    "heaviest-process": "Heaviest Process"
   },
   "internal-squads-grid": {
     "widget": {
       "no-internal-squads": "Внутренних сквадов нет",
       "create-your-first-internal-squad-to-get-started": "Создайте первый внутренний сквад, чтобы начать",
       "delete-squad": "Удалить сквад",
-      "users": "Пользователи"
+      "users": "Пользователи",
+      "inbounds": "Инбаунды",
+      "edit-inbounds": "Изменить инбаунды",
+      "remove-users": "Удалить пользователей",
+      "add-users": "Добавить пользователей"
     }
   },
   "config-profiles-grid": {
@@ -720,7 +975,10 @@
       "delete-profile": "Удалить профиль",
       "nodes": "Ноды",
       "quick-view": "Быстрый просмотр",
-      "xray-config": "Конфиг. Xray"
+      "xray-config": "Конфиг. Xray",
+      "inbounds": "Инбаунды",
+      "download": "Скачать",
+      "edit-xray-config": "Изменить конфиг Xray"
     }
   },
   "view-infra-provider": {
@@ -744,24 +1002,33 @@
       "current-date": "Текущая дата",
       "new-date": "Новая дата",
       "tomorrow": "Завтра",
-      "next-month": "В следующем месяце"
+      "next-month": "В следующем месяце",
+      "today": "Сегодня"
     }
   },
   "infra-providers-table": {
     "widget": {
-      "no-providers-found": "Провайдеры не найдены."
+      "no-providers-found": "Провайдеры не найдены.",
+      "create-infra-provider": "Создать провайдера",
+      "infra-providers": "Провайдеры",
+      "list-of-all-infra-providers": "Список всех провайдеров"
     }
   },
   "infra-billing-records-table": {
     "widget": {
-      "no-billing-records-found": "Записей о списаниях не найдено."
+      "no-billing-records-found": "Записей о списаниях не найдено.",
+      "billing-records-sorted-by-date": "Список всех платежей",
+      "infra-billing-records": "История платежей"
     }
   },
   "infra-billing-nodes": {
     "widget": {
       "no-nodes-found": "Ноды не найдены.",
       "add-a-node": "Добавить ноду",
-      "update-multiple-nodes": "Обновить несколько нод"
+      "update-multiple-nodes": "Обновить несколько нод",
+      "add-node": "Добавить ноду",
+      "list-of-all-infra-billing-nodes": "Список всех оплачиваемых нод, отсортированных по дате",
+      "infra-billing-nodes": "Оплачиваемые ноды"
     }
   },
   "create-infra-billing-record": {
@@ -772,7 +1039,8 @@
         "billed-at": "Дата списания",
         "the-date-and-time-when-the-bill-was-paid": "Дата и время, когда счёт был оплачен.",
         "payment-amount-usd": "Сумма платежа, USD",
-        "amount": "Сумма"
+        "amount": "Сумма",
+        "error": "Ошибка"
       }
     }
   },
@@ -784,14 +1052,17 @@
         "next-billing-at-description": "Дата и время следующего списания по этой ноде. Remnawave напомнит о нём заранее.",
         "existing": "Существующая",
         "custom": "Своя",
-        "custom-name-description": "Укажите своё название, если нода не управляется Remnawave."
+        "custom-name-description": "Укажите своё название, если нода не управляется Remnawave.",
+        "error": "Ошибка",
+        "billing-node": "Биллинг нода"
       }
     }
   },
   "active-nodes-list": {
     "modal": {
       "shared": {
-        "this-profile-is-not-active-on-any-nodes": "Этот профиль не активен ни на одной ноде"
+        "this-profile-is-not-active-on-any-nodes": "Этот профиль не активен ни на одной ноде",
+        "profile-is-active-on": "Профиль активен на {{nodeCount}} ноде(ах)"
       }
     }
   },
@@ -820,7 +1091,8 @@
     "shared": {
       "no-billing-nodes-available": "Нет доступных биллинговых нод",
       "select-the-billing-node": "Выберите биллинговую ноду.",
-      "select-billing-node": "Выберите биллинговую ноду..."
+      "select-billing-node": "Выберите биллинговую ноду...",
+      "billing-node": "Биллинг нода"
     }
   },
   "select-infra-provider": {
@@ -840,7 +1112,9 @@
   "user-accessible-nodes": {
     "modal": {
       "widget": {
-        "user-accessible-nodes": "Ноды, доступные пользователю"
+        "user-accessible-nodes": "Ноды, доступные пользователю",
+        "loading-accessible-nodes": "Загружаем ноды...",
+        "access-summary": "Сводка доступа"
       }
     }
   },
@@ -852,19 +1126,29 @@
         "selected": "Выбранные",
         "unselected": "Невыбранные",
         "edit-internal-squad": "Изменить внутренний сквад",
-        "selected-inbounds": "Выбрано инбаундов: {{count}}"
+        "selected-inbounds": "Выбрано инбаундов: {{count}}",
+        "selected-from-multiple-profiles": "Из нескольких профилей",
+        "no-inbounds-selected": "Инбаунды не выбраны",
+        "choose-inbounds-from-any-profiles": "Выберите инбаунды из любых профилей",
+        "update-internal-squad": "Обновить внутренний сквад",
+        "search-profiles-or-inbounds": "Поиск по профилям или инбаундам...",
+        "no-profiles-or-inbounds-found": "Профили или инбаунды не найдены",
+        "no-config-profiles-available": "Нет доступных профилей",
+        "all": "Все"
       }
     }
   },
   "host-select-inbound": {
     "feature": {
-      "choose-an-inbound-to-apply-to-the-host": "Выберите инбаунд для этого хоста"
+      "choose-an-inbound-to-apply-to-the-host": "Выберите инбаунд для этого хоста",
+      "no-inbound-selected": "Инбаунд не выбран"
     }
   },
   "show-config-profiles-with-inbounds": {
     "feature": {
       "no-config-profile-selected": "Профиль не выбран",
-      "choose-a-profile-to-configure-inbounds-for-this-node": "Выберите профиль, чтобы настроить инбаунды этой ноды"
+      "choose-a-profile-to-configure-inbounds-for-this-node": "Выберите профиль, чтобы настроить инбаунды этой ноды",
+      "config-profile": "Профили"
     }
   },
   "access-settings-card": {
@@ -883,7 +1167,13 @@
     "drawer": {
       "widget": {
         "unknown-inbound": "Неизвестный инбаунд",
-        "assign-an-inbound-to-the-host": "Назначьте хосту инбаунд"
+        "assign-an-inbound-to-the-host": "Назначьте хосту инбаунд",
+        "no-profile-selected": "Профиль не выбран",
+        "selected": "выбрано",
+        "no-inbound-selected": "Инбаунд не выбран",
+        "search-profiles-or-inbounds": "Поиск по профилям или инбаундам...",
+        "no-profiles-or-inbounds-found": "Профили или инбаунды не найдены",
+        "no-config-profiles-available": "Нет доступных профилей"
       }
     }
   },
@@ -896,7 +1186,11 @@
       "total-spent": "Всего потрачено",
       "lifetime-spending": "за всё время",
       "payment-overdue": "платёж просрочен",
-      "all-up-to-date": "всё оплачено"
+      "all-up-to-date": "всё оплачено",
+      "current-date": "Текущая дата",
+      "overdue": "Просрочено",
+      "next-payment": "Следующий платёж",
+      "no-upcoming-payments": "нет предстоящих платежей"
     }
   },
   "disclaimer-overlay": {
@@ -928,7 +1222,10 @@
   "internal-squad-header-action-buttons": {
     "feature": {
       "squad-name": "Название сквада",
-      "enter-squad-name": "Введите название сквада"
+      "enter-squad-name": "Введите название сквада",
+      "create-internal-squad": "Создать внутренний сквад",
+      "create-a-new-internal-squad-by-entering-a-name-below": "Создайте новый внутренний отряд, введя имя ниже.",
+      "it-cant-be-changed-later": "Его нельзя изменить позже"
     }
   },
   "config-profiles-header-action-buttons": {
@@ -936,7 +1233,8 @@
       "create-a-new-config-profile-by-entering-a-name-below": "Введите название ниже, чтобы создать новый профиль.",
       "you-can-customize-xray-config-after-creation": "Настроить конфиг Xray можно после создания.",
       "profile-name": "Название профиля",
-      "enter-profile-name": "Введите название профиля"
+      "enter-profile-name": "Введите название профиля",
+      "create-config-profile": "Создать профиль"
     }
   },
   "restart-node-button": {
@@ -964,7 +1262,11 @@
     "drawer": {
       "widget": {
         "config-profiles": "Профили",
-        "no-inbounds-selected": "Инбаунды не выбраны"
+        "no-inbounds-selected": "Инбаунды не выбраны",
+        "no-profile-selected": "Профиль не выбран",
+        "search-profiles-or-inbounds": "Поиск по профилям или инбаундам...",
+        "no-profiles-or-inbounds-found": "Профили или инбаунды не найдены",
+        "no-config-profiles-available": "Нет доступных профилей"
       }
     }
   },
@@ -973,17 +1275,26 @@
       "system-info": "О системе",
       "memory": "Память",
       "network": "Сеть",
-      "kernel": "Ядро"
+      "kernel": "Ядро",
+      "used": "Использовано",
+      "free": "Свободно",
+      "total": "Всего",
+      "system": "Система",
+      "system-uptime": "Время работы системы"
     }
   },
   "node-stats": {
     "card": {
       "traffic-refill-in-days": "Пополнение трафика через (дней):",
-      "represents-the-uptime-of-the-xray-core": "Показывает аптайм Xray Core"
+      "represents-the-uptime-of-the-xray-core": "Показывает аптайм Xray Core",
+      "stats": "Статистика"
     }
   },
   "host-tags-input": {
-    "tags-are-not-visible-to-end-users-tag-will-be-sent-with-raw-subscription-only": "Теги не видны конечным пользователям. Тег уходит только с подпиской RAW."
+    "tags-are-not-visible-to-end-users-tag-will-be-sent-with-raw-subscription-only": "Теги не видны конечным пользователям. Тег уходит только с подпиской RAW.",
+    "tag-can-only-contain-uppercase-letters-numbers-underscores-and-colons": "Тег может содержать только заглавные буквы, цифры, подчеркивания и двоеточия",
+    "tag-must-be-less-than-32-characters": "Тег должен быть меньше 32 символов",
+    "clear-value": "Очистить значение"
   },
   "internal-squad-accessible-nodes": {
     "modal": {
@@ -1002,11 +1313,21 @@
   },
   "get-user-subscription-request-history": {
     "feature": {
-      "request-history": "История запросов"
+      "request-history": "История запросов",
+      "subscription-request-history": "История запросов подписки",
+      "nothing-to-show": "Нечего показывать...",
+      "request-at": "Запрос в",
+      "user-agent": "User Agent"
     }
   },
   "use-hwid-inspector-table-columns": {
-    "device-model": "Модель устройства"
+    "device-model": "Модель устройства",
+    "platform": "Платформа",
+    "os-version": "Версия OS",
+    "user-agent": "User Agent",
+    "user-uuid": "UUID польз.",
+    "created-at": "Дата создания",
+    "updated-at": "Дата обновления"
   },
   "hwid-inspector-table": {
     "widget": {
@@ -1021,13 +1342,18 @@
       "platform-distribution": "Распределение по платформам",
       "app-distribution": "Распределение по приложениям",
       "no-platform-data": "Нет данных по платформам",
-      "no-app-data": "Нет данных по приложениям"
+      "no-app-data": "Нет данных по приложениям",
+      "apps": "Приложения",
+      "platforms": "Платформы"
     }
   },
   "use-srh-inspector-table-columns": {
     "request-ip": "IP запроса",
     "response-type": "Тип ответа",
-    "rule-name": "Название правила"
+    "rule-name": "Название правила",
+    "user-agent": "User Agent",
+    "request-at": "Дата запроса",
+    "user-uuid": "UUID польз."
   },
   "srh-inspector-metrics": {
     "widget": {
@@ -1059,7 +1385,10 @@
         "snippet-is-valid": "Сниппет корректен",
         "edit-snippet": "Изменить сниппет",
         "snippets": "Сниппеты",
-        "new-snippet": "Новый сниппет"
+        "new-snippet": "Новый сниппет",
+        "invalid-json": "Неверный JSON",
+        "fetching-snippets": "Загрузка сниппетов...",
+        "no-snippets-yet": "Пока ничего нет."
       }
     }
   },
@@ -1090,11 +1419,15 @@
     "establishing-mtls-connection": "Устанавливаем mTLS-соединение...",
     "xray-core-is-up-and-running": "Xray Core запущен и работает!",
     "remnawave-will-try-to-reconnect-shortly": "Remnawave скоро попробует переподключиться...",
-    "no-errors-so-far": "Ошибок пока нет"
+    "no-errors-so-far": "Ошибок пока нет",
+    "no-errros-so-far": "Пока никаких ошибок нет",
+    "last-error-message": "Последнее сообщение об ошибке"
   },
   "external-squad-card": {
     "widget": {
-      "users": "Пользователи"
+      "users": "Пользователи",
+      "add-users": "Добавить пользователей",
+      "remove-users": "Удалить пользователей"
     }
   },
   "internal-squads-with-store": {
@@ -1116,6 +1449,11 @@
         "templates": "Шаблоны",
         "settings": "Настройки",
         "remarks": "Примечания"
+      }
+    },
+    "page": {
+      "component": {
+        "list-of-all-external-squads": "Список всех внешних сквадов"
       }
     }
   },
@@ -1140,7 +1478,8 @@
     "incorrect-configuration-line-1": "Неверная конфигурация",
     "incorrect-configuration-line-2": "может привести к непредсказуемому поведению",
     "review-settings-carefully-line-1": "Внимательно проверьте настройки",
-    "review-settings-carefully-line-2": "прежде чем применять изменения"
+    "review-settings-carefully-line-2": "прежде чем применять изменения",
+    "warning": "Предупреждение"
   },
   "auth-settings": {
     "header": {
@@ -1170,7 +1509,8 @@
     "telegram": {
       "adminIds": {
         "label": "Разрешённые ID админов",
-        "placeholder": "Введите ID админов"
+        "placeholder": "Введите ID админов",
+        "description": "Список разрешенных Telegram ID"
       }
     },
     "fields": {
@@ -1210,7 +1550,9 @@
       "no-passkeys-registered-yet": "Passkey пока не добавлены",
       "add-passkeys-description": "Добавьте первый Passkey, чтобы входить без пароля на всех своих устройствах",
       "register": "Добавить",
-      "last-used-at": "Последнее использование"
+      "last-used-at": "Последнее использование",
+      "active-passkeys": "Активные ключи входа",
+      "created-at": "Дата создания"
     }
   },
   "branding-settings-card": {
@@ -1225,7 +1567,8 @@
       "example-hex-colors": "Пример с HEX-цветами",
       "example-mantine-colors": "Пример с цветами Mantine",
       "example-mixed": "Пример со смешанными цветами",
-      "color-format-note": "💡 Цвет применяется только к слову сразу после маркера. Без маркеров текст будет белым."
+      "color-format-note": "💡 Цвет применяется только к слову сразу после маркера. Без маркеров текст будет белым.",
+      "logo-url": "Ссылка на логотип"
     }
   },
   "experimental-settings-card": {
@@ -1248,7 +1591,8 @@
       "col-expires": "Истекает",
       "expired": "Истёк",
       "expires-in-days": "Истекает через (дней)",
-      "one-time-notice": "Из соображений безопасности токен показывается <emphasis>только один раз</emphasis>, сразу после создания. Обязательно скопируйте и сохраните его в надёжном месте — увидеть его снова не получится."
+      "one-time-notice": "Из соображений безопасности токен показывается <emphasis>только один раз</emphasis>, сразу после создания. Обязательно скопируйте и сохраните его в надёжном месте — увидеть его снова не получится.",
+      "expires-in": "Истекает"
     }
   },
   "external-squads-hosts": {
@@ -1261,7 +1605,8 @@
   },
   "reset-usage-user": {
     "feature": {
-      "reset-usage": "Сбросить расход"
+      "reset-usage": "Сбросить расход",
+      "reset": "Сбросить"
     }
   },
   "help-action-icon": {
@@ -1276,7 +1621,8 @@
   },
   "help-drawer": {
     "shared": {
-      "failed-to-load-documentation": "Не удалось загрузить документацию"
+      "failed-to-load-documentation": "Не удалось загрузить документацию",
+      "loading-documentation": "Загрузка документации..."
     }
   },
   "external-squads-response-headers": {
@@ -1299,7 +1645,8 @@
       "fallback-device-limit": "Лимит устройств по умолчанию",
       "max-devices-announce-description": "Введите сообщение, которое увидит пользователь, достигший максимума устройств",
       "max-devices-announce": "Сообщение о лимите устройств",
-      "max-200-characters": "Не больше 200 символов"
+      "max-200-characters": "Не больше 200 символов",
+      "documentation": "Документация"
     }
   },
   "external-squads-hwid-settings": {
@@ -1321,7 +1668,9 @@
     "widget": {
       "empty-hosts": "Пустой список хостов",
       "hwid-max-devices-exceeded": "HWID: превышен лимит устройств",
-      "hwid-not-supported": "HWID: не поддерживается"
+      "hwid-not-supported": "HWID: не поддерживается",
+      "user-status": "Статус пользователя",
+      "empty-internal-squads": "Отсутствует внутренние сквады"
     }
   },
   "multi-select-nodes": {
@@ -1337,7 +1686,11 @@
     "node-v": "Node v.",
     "provider": "Провайдер",
     "total-ram": "Всего RAM",
-    "cpu-model": "Модель CPU"
+    "cpu-model": "Модель CPU",
+    "address": "Адрес",
+    "ip-addresses": "IP адреса",
+    "inbounds": "Инбаунды",
+    "tags": "Теги"
   },
   "subpage-config-visual-editor": {
     "widget": {
@@ -1359,7 +1712,20 @@
       "no-platforms-configured": "Платформы не настроены",
       "add-a-platform-to-get-started": "Добавьте платформу, чтобы начать",
       "open-svg-library": "Открыть библиотеку SVG",
-      "installation-guides-design": "Оформление инструкций по установке"
+      "installation-guides-design": "Оформление инструкций по установке",
+      "load-from-github": "Скачать с Github",
+      "logo-url": "Ссылка на логотип",
+      "collapsed": "Collapsed",
+      "expanded": "Expanded",
+      "installation-guides-header": "Installation Guides Header",
+      "connection-keys-header": "Connection Keys Header",
+      "validation-error": "Ошибка валидации",
+      "manage-your-svg-icons": "Управление иконками SVG",
+      "cards": "Карточки",
+      "hidden": "Скрытое",
+      "accordion": "Аккордеон",
+      "minimal": "Минимальная",
+      "timeline": "Хронология"
     },
     "subpage-config-saved-line-1": "Чтобы изменения применились, перезапустите docker-контейнер Remnawave Subscription-page.",
     "subpage-config-saved-line-2": "Например, можно выполнить в терминале такую команду:"
@@ -1383,7 +1749,9 @@
         "icon-color-help": "Подойдёт любой цвет темы Mantine ({{colors}}) или любой корректный HEX (например: #009688).",
         "title": "Заголовок",
         "buttons": "Кнопки",
-        "add-button": "Добавить кнопку"
+        "add-button": "Добавить кнопку",
+        "svg-icon": "Иконка SVG",
+        "description": "Описание"
       }
     }
   },
@@ -1391,12 +1759,17 @@
     "component": {
       "link": "Ссылка",
       "type": "Тип",
-      "button-text": "Текст кнопки"
+      "button-text": "Текст кнопки",
+      "external-link": "Внешняя ссылка",
+      "subscription-link": "Ссылка подписки",
+      "svg-icon": "Иконка SVG"
     }
   },
   "localized-text-editor": {
     "component": {
-      "done": "Готово"
+      "done": "Готово",
+      "not-set": "Не задано",
+      "required-default-language": "Требуется (язык по умолчанию)"
     }
   },
   "platform-editor": {
@@ -1448,7 +1821,9 @@
       "importing-config": "Импортируем конфигурацию",
       "this-may-take-a-while": "Это может занять время...",
       "config-imported-successfully": "Конфигурация импортирована",
-      "failed-to-parse-config-file": "Не удалось разобрать файл конфигурации"
+      "failed-to-parse-config-file": "Не удалось разобрать файл конфигурации",
+      "success": "Успешно",
+      "error": "Ошибка"
     }
   },
   "base-translations-drawer": {
@@ -1493,13 +1868,16 @@
       "revoke": "Отозвать",
       "passwords-only": "Только пароли",
       "passwords-only-description": "Перевыпускает только пароли подключения; ссылка на подписку остаётся прежней",
-      "full-revoke-description": "Перевыпускает ссылку на подписку и пароли подключения"
+      "full-revoke-description": "Перевыпускает ссылку на подписку и пароли подключения",
+      "passwords-only-decription": "Перегенерировать только пароли подключения, URL-адрес подписки остается тем же"
     }
   },
   "nodes-quick-stats": {
     "widget": {
       "users-online": "Пользователей онлайн",
-      "online-nodes": "Нод онлайн"
+      "online-nodes": "Нод онлайн",
+      "offline-nodes": "Ноды оффлайн",
+      "cumulative-traffic": "Общее количество трафика"
     }
   },
   "template-info-popover": {
@@ -1550,7 +1928,8 @@
     "widget": {
       "node-plugins-are-an-advanced-feature-please-review-the-documentation-before-use": "Плагины нод — продвинутая возможность. Прочитайте документацию перед использованием.",
       "no-node-plugins-yet": "Плагинов нод пока нет",
-      "create-a-plugin-to-extend-node-capabilities-with": "Создайте плагин, чтобы расширить возможности ноды через"
+      "create-a-plugin-to-extend-node-capabilities-with": "Создайте плагин, чтобы расширить возможности ноды через",
+      "warning": "Предупреждение"
     }
   },
   "node-plugin-executor": {
@@ -1570,7 +1949,11 @@
       "format-one-per-line": "Формат (по одному в строке):",
       "no-connected-nodes-available": "Нет подключённых нод.",
       "deselect-all": "Снять выделение",
-      "execute": "Выполнить"
+      "execute": "Выполнить",
+      "block-ips-decription": "Одна запись в строке. Тайм-аут 0 = блокировка до перезапуска.",
+      "unblock-ips-decription": "Один IP адрес в строке.",
+      "next": "Далее",
+      "select-all": "Выделить все"
     }
   },
   "torrent-blocker-stats": {
@@ -1650,14 +2033,18 @@
       "restart-scan": "Запустить заново",
       "clear-results": "Очистить результаты",
       "search-by-ip": "Поиск по IP-адресу...",
-      "no-results-for-ip": "Пользователей с IP «{{ip}}» не найдено"
+      "no-results-for-ip": "Пользователей с IP «{{ip}}» не найдено",
+      "no-active-sessions-found-on-any-node": "Не найдено активных сессий ни на одной ноде."
     }
   },
   "mobile-stats": {
     "widget": {
       "upcoming": "Предстоит",
       "per-month": "За месяц",
-      "total-spent": "Всего потрачено"
+      "total-spent": "Всего потрачено",
+      "billing-nodes": "Биллинг нод",
+      "overdue": "Просрочено",
+      "no-upcoming": "Нет предстоящих"
     }
   },
   "mobile-providers-list": {
@@ -1710,7 +2097,9 @@
     "invalid-ip": "Некорректный адрес IPv4 или IPv6",
     "ip-is-required": "Укажите IP-адрес",
     "max-ips-reached": "Максимум {{max}} IP-адресов",
-    "no-ips-yet": "IP-адресов пока нет"
+    "no-ips-yet": "IP-адресов пока нет",
+    "title": "IP адреса",
+    "status": "Статус"
   },
   "node-ip-statuses": {
     "inbound": "Входящий",
@@ -1771,7 +2160,8 @@
   "node-inbounds-hosts-drawer": {
     "widget": {
       "no-active-config-profile": "У этой ноды нет активного профиля",
-      "linked": "Связан"
+      "linked": "Связан",
+      "inbounds-and-hosts": "Инбаунды и хосты"
     }
   },
   "node-integrations": {
@@ -1781,7 +2171,8 @@
     },
     "editor": {
       "description-placeholder": "Что делает эта интеграция",
-      "config-must-be-an-object": "Конфигурация должна быть JSON-объектом"
+      "config-must-be-an-object": "Конфигурация должна быть JSON-объектом",
+      "description": "Описание"
     },
     "select": {
       "label": "Интеграции",
@@ -1902,5 +2293,299 @@
     "connections-title": "Сохранённые подключения",
     "connections-empty": "Сохранённых подключений пока нет",
     "connections-current": "Текущее"
+  },
+  "users-metrics": {
+    "disabled-users": "Disabled польз.",
+    "limited-users": "Limited польз.",
+    "expired-users": "Expired польз.",
+    "active-users": "Active польз.",
+    "total-users": "Всего польз.",
+    "widget": {
+      "total": "Всего"
+    }
+  },
+  "use-bandwidth-table-columns": {
+    "traffic-limit": "Лимит трафика",
+    "traffic": "Трафик",
+    "traffic-cycle": "Цикл трафика",
+    "node-name": "Имя ноды"
+  },
+  "hosts-page-header": {
+    "widget": {
+      "list-of-all-hosts": "Список всех хостов",
+      "about-hosts": "Подробнее о хостах",
+      "header-description-line-1": "Хост – это входная точка для пользователя. Группа хостов – формирует так называемую \"подписку\".",
+      "header-description-line-2": "При желании, каждый хост может обозначать один сервер.",
+      "remark": "Примечание",
+      "remark-description-line-1": "Название хоста может быть любым, но должно быть уникальным в рамках одной подписки.",
+      "remark-description-line-2": "Примечание будет отображаться в списке доступных серверов в конечном клиенте.",
+      "inbound": "Инбаунд",
+      "inbound-line-1": "Необходимо выбрать один из инбаундов, к которому будет привязан конкретный хост.",
+      "inbound-line-2": "Список инбаундов формируется в разделе \"Конфиг\"",
+      "address-and-port": "Адрес и порт",
+      "address-and-port-line-1": "В большинстве случаев, IP/домен должен указывать на одну из подключенных нод.",
+      "address-and-port-line-2": "Порт должен быть открытым и доступным для входящих соединений.",
+      "address-and-port-line-3": "Обычно порт должен соотвествовать порту инбаунда из конфигурации Xray.",
+      "advanced-settings": "\"Расширенные настройки\" – это дополнительные параметры, которые могут быть использованы для более тонкой настройки хоста.",
+      "advanced-settings-2": "Все, что указано в \"Расширенных настройках\" имеет более высокий приоритет чем настройки, указанные в конфигурации Xray."
+    }
+  },
+  "remark-info": {
+    "widget": {
+      "supports-templates": "Поддерживает шаблоны.",
+      "remark-description": "Это имя хоста, которое будет отображаться у пользователя в подписке и в панели управления."
+    }
+  },
+  "error-accordeon": {
+    "widget": {
+      "last-error-message": "Последнее сообщение об ошибке"
+    }
+  },
+  "node-card": {
+    "widget": {
+      "copied": "Скопировано"
+    }
+  },
+  "nodes-page-header": {
+    "widget": {
+      "list-of-all-nodes": "Список всех нод"
+    }
+  },
+  "table": {
+    "widget": {
+      "only-active-nodes": "Отображаются только ноды с активным отслеживанием трафика",
+      "today": "Сегодня",
+      "nodes-with-active-traffic-tracking-not-found": "Ноды с включенным трекингом не найдены."
+    }
+  },
+  "login-form-feature": {
+    "username": "Имя пользователя"
+  },
+  "empty-page": {
+    "layout": {
+      "nothing-found": "Ничего не найдено"
+    }
+  },
+  "toggle-user-status-button": {
+    "feature": {
+      "enable": "Включить польз.",
+      "disable": "Выключить польз."
+    }
+  },
+  "bulk-user-actioins-modal": {
+    "widget": {
+      "user-deletion-description": "Удалить всех пользователей с выбранным статусом. \nЕсли вы удалите пользователей со статусом «ACTIVE», вы должны перезапустить все ноды, чтобы применить изменения.",
+      "select-status": "Удалить по статусу"
+    }
+  },
+  "user-usage-modal": {
+    "widget": {
+      "no-data-available-for-the-selected-period": "Нет доступных данных за выбранный период",
+      "no-data-available": "Нет доступных данных",
+      "click-to-show-all": "Нажмите чтобы посмотреть все",
+      "click-to-highlight-only-this-node": "Нажмите чтобы показать только эту ноду",
+      "usage-by-period": "Использовано за период",
+      "7-days": "7 дней",
+      "14-days": "14 дней",
+      "30-days": "30 дней",
+      "60-days": "60 дней",
+      "90-days": "90 дней",
+      "180-days": "180 дней",
+      "365-days": "365 дней",
+      "total-traffic": "Общий трафик",
+      "top-nodes": "Наиболее используемые ноды",
+      "stacked": "Сложить",
+      "grouped": "Сгруппировать",
+      "filter-nodes": "Фильтр по нодам",
+      "bar-chart": "Столбчатая диаграмма",
+      "show-nodes": "Показать ноды",
+      "click-to-see-all": "Показать все"
+    }
+  },
+  "inbounds-realtime-metrics": {
+    "widget": {
+      "inbound-connections": "Подключений по инбаундам",
+      "inbound-connections-hint": "Пользователь на нескольких инбаундах учитывается в каждом",
+      "active-inbounds": "Активные инбаунды",
+      "total-inbounds": "Всего инбаундов"
+    }
+  },
+  "node-users-usage-drawer": {
+    "widget": {
+      "no-data-available-for-the-selected-period": "Нет данных для выбранного периода",
+      "click-to-see-all-users": "Нажмите, чтобы показать всех пользователей",
+      "click-on-bars-to-view-details": "Нажмите на столбцы, чтобы просмотреть детали",
+      "no-data-available": "Нет данных",
+      "click-to-show-all-users": "Нажмите, чтобы показать всех пользователей",
+      "click-to-highlight-only-this-user": "Нажмите, чтобы выделить только этого пользователя",
+      "users-accordeon": "Пользователи ({{displayedUserCount}} из {{significantUserCount}} активных, {{userCount}} всего)",
+      "usage-by-period": "Использование по периоду",
+      "7-days": "7 дней",
+      "14-days": "14 дней",
+      "30-days": "30 дней",
+      "60-days": "60 дней",
+      "90-days": "90 дней",
+      "180-days": "180 дней",
+      "365-days": "365 дней",
+      "performance-line-1": "Некоторые данные могут быть скрыты из-за проблем с производительностью.",
+      "performance-line-2": "Используйте Grafana или любые другие инструменты для просмотра всех данных.",
+      "total-traffic": "Общий трафик",
+      "top-users": "Топ пользователи",
+      "stacked": "Сложить",
+      "grouped": "Сгруппировать",
+      "filter-users": "Фильтр пользователей",
+      "bar-chart": "Столбчатая диаграмма",
+      "previous-day": "Предыдущий день",
+      "next-day": "Следующий день",
+      "hidden-users": "({{hiddenCount}} пользователей с <{{minTraffic}} скрытым)",
+      "total-traffic-prettybytestoanyutil": "Общий трафик: {{totalTraffic}}",
+      "user": "Пользователь",
+      "traffic": "Трафик",
+      "no-users-with-traffic-100-kb": "Нет пользователей с трафиком ≥ 100 KiB",
+      "users-hidden-with-less-than-100-kb": "{{usersCount}} пользователей с трафиком <100 KiB, ({{totalTraffic}} всего)"
+    }
+  },
+  "internal-squads-header": {
+    "widget": {
+      "list": "Список всех внутренних сквадов"
+    }
+  },
+  "config-profiles-header": {
+    "widget": {
+      "list-of-all-config-profiles": "Список всех профилей"
+    }
+  },
+  "use-infra-providers-columns": {
+    "hoster-name": "Имя хостера",
+    "providers": "провайдер(а)",
+    "login-url": "Ссылка для входа",
+    "total": "Всего, $",
+    "servers": "Сервера",
+    "no-servers": "Серверов нет"
+  },
+  "use-infra-billing-records-columns": {
+    "hoster-name": "Имя хостера",
+    "billed-at": "Дата оплаты",
+    "paid": "Оплачено, $"
+  },
+  "use-infra-billing-nodes-columns": {
+    "hoster-name": "Имя хостера",
+    "node": "Нода",
+    "next-billing-at": "Следующий платеж",
+    "quick-update-to-next-month": "Быстро обновить до следующего месяца"
+  },
+  "next-billing-at-cell": {
+    "in-current-month": "В текущем месяце",
+    "far-future": "В будущем",
+    "date-approaching": "Дата приближается",
+    "today": "Сегодня",
+    "tomorrow": "Завтра",
+    "more-than-3-days-ago": "Больше 3-х дней назад",
+    "yesterday": "Вчера"
+  },
+  "active-nodes-list-with-store": {
+    "modal": {
+      "shared": {
+        "active-nodes": "Активные ноды"
+      }
+    }
+  },
+  "user-indentity-creation-card": {
+    "user-identity": "Личность"
+  },
+  "edit-node-by-uuid-modal": {
+    "widget": {
+      "loading-node": "Загрузка ноды..."
+    }
+  },
+  "hosts-filters": {
+    "feature": {
+      "all-config-profiles": "Все профили",
+      "all-inbounds": "Все инбаунды",
+      "filters": "Фильтры",
+      "select-config-profile": "Выберите профиль",
+      "select-inbound": "Выберите инбаунд",
+      "search-by-remark": "Поиск по примечанию...",
+      "address": "Поиск по адресу...",
+      "filter-by-tags": "Фильтр по тегам"
+    }
+  },
+  "language-selector": {
+    "component": {
+      "persian": "Персидский",
+      "russian": "Русский",
+      "chinese": "Китайский",
+      "french": "French",
+      "additional-languages": "Дополнительные языки",
+      "english-is-always-enabled": "Английский всегда включен",
+      "english": "Английский"
+    }
+  },
+  "nodes-spotlight-search": {
+    "widget": {
+      "no-nodes-found": "Нод не найдено...",
+      "search-by-name-or-address": "Поиск по имени или адресу..."
+    }
+  },
+  "rename-modal": {
+    "shared": {
+      "new-name": "Новое имя"
+    }
+  },
+  "srh-inspector-table": {
+    "widget": {
+      "subscription-request-history": "История запросов подписки"
+    }
+  },
+  "visual-settings-card": {
+    "widget": {
+      "layout-style": "Стиль оформления",
+      "choose-how-the-desktop-navigation-is-displayed": "Выберите способ навигации по интерфейсу панели",
+      "compact": "Компактный",
+      "sidebar": "Боковая панель"
+    }
+  },
+  "reset-node-traffic": {
+    "feature": {
+      "reset-traffic": "Сбросить трафик"
+    }
+  },
+  "inbounds-datatable": {
+    "widget": {
+      "online": "Онлайн",
+      "type": "Тип",
+      "profile": "Профиль",
+      "squads": "Сквады",
+      "no-inbounds-found": "Инбаунды не найдены"
+    }
+  },
+  "svg-icon-input": {
+    "component": {
+      "svg-icon": "Иконка SVG"
+    }
+  },
+  "user-hwid-devices": {
+    "drawer": {
+      "widget": {
+        "enter-search-query": "Введите запрос для поиска..."
+      }
+    }
+  },
+  "node-plugin-editor-page": {
+    "component": {
+      "plugin-editor": "Редактор плагинов"
+    }
+  },
+  "adtive-on-nodes": {
+    "modal": {
+      "shared": {
+        "this-plugin-is-not-active-on-any-nodes": "Этот плагин не активен ни на одной ноде."
+      }
+    }
+  },
+  "get-node-inbounds-hosts": {
+    "feature": {
+      "inbounds-and-hosts": "Инбаунды и хосты"
+    }
   }
 }

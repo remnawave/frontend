@@ -26,7 +26,13 @@
     "tb-reports": "Torrent 屏蔽报告",
     "sessions-explorer": "会话管理器",
     "http-stats": "HTTP 状态",
-    "quick-launcher": "开始菜单"
+    "quick-launcher": "开始菜单",
+    "dashboard": "仪表",
+    "config": "Xray 配置",
+    "nodes-bandwidth-table": "流量使用情况",
+    "utils": "实用工具",
+    "happ-routing-builder": "Happ 路由编辑器",
+    "inbounds": "Inbounds"
   },
   "common": {
     "action": {
@@ -139,7 +145,61 @@
       "selected": "已选 {{count}} 项",
       "success": "成功",
       "warning": "警告"
-    }
+    },
+    "delete": "删除",
+    "create": "创建",
+    "cancel": "取消",
+    "copied": "复制成功",
+    "copy": "复制",
+    "paste": "粘贴",
+    "refresh": "刷新",
+    "save": "保存",
+    "update": "更新",
+    "enable": "启用",
+    "disable": "禁用",
+    "continue": "继续",
+    "confirm-action": "确认操作",
+    "confirm-action-description": "您确定要执行此操作吗？此操作不能撤消。",
+    "edit": "编辑",
+    "copy-uuid": "复制 UUID",
+    "copy-link": "Copy link",
+    "rename": "重命名",
+    "close": "关闭",
+    "change": "更改",
+    "save-changes": "保存更改",
+    "remove": "删除",
+    "add": "添加",
+    "select": "选择",
+    "loading": "正在加载",
+    "success": "成功",
+    "download": "下载",
+    "search": "搜索",
+    "nothing-found": "未找到",
+    "name": "名称",
+    "clone": "克隆",
+    "event-sent": "发送事件",
+    "open": "打开",
+    "view": "查看",
+    "clear": "清除",
+    "color": "颜色",
+    "all": "全部",
+    "without-tags": "无标签",
+    "reset": "重置",
+    "actions": "操作",
+    "clear-selection": "清除选择",
+    "select-all": "全选",
+    "selected": "已选 {{count}} 项",
+    "bulk-actions": "批量操作",
+    "bulk-edit": "批量编辑",
+    "creation": "创建",
+    "processing": "处理中",
+    "operation-completed": "操作已完成",
+    "usage-stats": "流量使用统计",
+    "active-sessions": "活跃会话",
+    "shared-lists": "共享列表",
+    "try-again": "再试一次",
+    "interface": "接口",
+    "ip-address": "IP 地址"
   },
   "bandwidth-metrics": {
     "current-year": "今年",
@@ -149,7 +209,9 @@
     "from-last-month": "对比上月",
     "last-7-days": "最近 7 天",
     "from-last-week": "对比上周",
-    "from-yesterday": "对比昨日"
+    "from-yesterday": "对比昨日",
+    "from-last-month-0": "对比上月",
+    "today": "今天"
   },
   "online-metrics": {
     "never-online": "从未在线",
@@ -159,7 +221,9 @@
   },
   "simple-metrics": {
     "ram-usage": "内存使用率",
-    "total-online-on-nodes": "所有节点在线用户总数"
+    "total-online-on-nodes": "所有节点在线用户总数",
+    "system-uptime": "系统运行时间",
+    "total-traffic": "总流量"
   },
   "config-editor-actions": {
     "feature": {
@@ -171,13 +235,18 @@
       "copy-all-content": "复制全部内容",
       "cut-selection": "剪切选中项",
       "paste-from-clipboard": "从剪切板中粘贴",
-      "generate-keypair": "生成密钥"
+      "generate-keypair": "生成密钥",
+      "error": "错误",
+      "load-from-github": "从 GitHub 加载",
+      "select-all": "全选"
     }
   },
   "action-group": {
     "feature": {
       "reset-table": "重置表格样式",
-      "clear-filters": "清除筛选"
+      "clear-filters": "清除筛选",
+      "new-user": "新建用户",
+      "help": "帮助"
     }
   },
   "use-table-columns": {
@@ -192,7 +261,14 @@
     "sub-link-revoked-at": "订阅链接撤销于",
     "created-at": "创建于",
     "internal-squads": "内部分组",
-    "used-traffic": "已使用的流量(%)"
+    "used-traffic": "已使用的流量(%)",
+    "username": "用户名",
+    "status": "状态",
+    "description": "描述",
+    "last-ua": "最后订阅用UA",
+    "first-connected-at": "首次连接于",
+    "sub-last-opened-at": "上次订阅时间",
+    "tag": "Tag"
   },
   "header-buttons": {
     "feature": {}
@@ -202,7 +278,10 @@
       "update-external-squads": "更新外部分组",
       "external-squad-name": "外部分组名称",
       "update-templates": "更新模板",
-      "template-name": "模板名称"
+      "template-name": "模板名称",
+      "create-new-host": "创建新主机",
+      "create-new-external-squad": "新建外部分组",
+      "create-new-template": "创建新模板"
     }
   },
   "nodes-header-action-buttons": {
@@ -212,7 +291,10 @@
       "force-restart-description": "将保证所有节点完全重启 Xray 核心。",
       "graceful-restart-description-1": "重启所有节点上的 Xray。 但如果节点哈希与当前的哈希相同，则请求可能无法实现。 这是默认的选项。",
       "force": "强制执行",
-      "graceful": "平滑的"
+      "graceful": "平滑的",
+      "create-new-node": "创建新节点",
+      "force-restart": "强制重启",
+      "graceful-restart": "平滑重启"
     }
   },
   "config-editor": {
@@ -220,25 +302,30 @@
       "unsaved-changes": "修改未保存",
       "your-changes-will-be-lost-if-you-leave-this-page-without-saving": "如果您离开此页面而不保存，您的更改将会丢失。",
       "leave": "离开",
-      "stay": "留在当前页面"
+      "stay": "留在当前页面",
+      "loading-editor": "正在加载编辑器.."
     }
   },
   "keypair": {
     "widget": {
       "generate-key-pair": "生成密钥对",
-      "both-keys": "双钥"
+      "both-keys": "双钥",
+      "public-key": "公钥",
+      "private-key": "私钥"
     }
   },
   "create-host-modal": {
     "widget": {
       "new-host": "新建主机",
-      "please-select-the-config-profile-and-inbound": "请选择配置文件和入站配置"
+      "please-select-the-config-profile-and-inbound": "请选择配置文件和入站配置",
+      "error": "错误"
     }
   },
   "edit-host-modal": {
     "widget": {
       "edit-host": "编辑主机",
-      "dangling-host-cannot-be-cloned": "同名主机不能被克隆"
+      "dangling-host-cannot-be-cloned": "同名主机不能被克隆",
+      "error": "错误"
     }
   },
   "create-node-modal": {
@@ -247,7 +334,10 @@
       "back": "后退",
       "connection-successful": "连接成功",
       "connection-failed": "连接失败",
-      "open-node": "打开节点"
+      "open-node": "打开节点",
+      "next": "下一步",
+      "checking-connection": "检查连接",
+      "close": "关闭"
     }
   },
   "edit-node-modal": {
@@ -280,14 +370,19 @@
       "disable-hwid-limit": "禁用 HWID 限制",
       "hwid-device-limit": "HWID 设备限制",
       "expire-at-description": "用户的订阅服务将于该时间结束。",
-      "internal-squads-description": "指定用户将加入的内部分组。"
+      "internal-squads-description": "指定用户将加入的内部分组。",
+      "loading-user-creation": "正在加载创建用户窗口..",
+      "telegram-id-of-a-user-in-telegram": "用户在 Telegram 中的数字 ID",
+      "email-of-a-user": "用户的邮箱地址",
+      "internal-squads": "内部分组"
     }
   },
   "home-page": {},
   "user-table": {
     "widget": {
       "error-loading-data": "数据加载错误",
-      "table-title": "用户"
+      "table-title": "用户",
+      "list-of-all-users": "所有用户列表"
     }
   },
   "view-user-modal": {
@@ -300,7 +395,16 @@
       "danger-zone": "危险操作区",
       "detailed-info": "用户详细信息",
       "accessible-nodes": "授权访问节点",
-      "qr-code": "二维码"
+      "qr-code": "二维码",
+      "connection-details": "连接详情",
+      "subscription-url": "订阅 URL",
+      "subscription-short-uuid": "订阅短uuid",
+      "edit-user": "编辑用户",
+      "view-accessible-nodes": "查看可访问的节点",
+      "fetching-user-data": "正在获取用户数据……",
+      "more-actions": "更多操作",
+      "information": "信息",
+      "subscription": "订阅"
     }
   },
   "base-host-form": {
@@ -379,7 +483,42 @@
     "no-bulk-options-description": "您添加的每个选项都适用于所有选定的主机。留空则清除所有主机的字段。",
     "bulk-option-will-be-cleared": "将清除所有选中的主机。",
     "leave-field-untouched": "未触及此字段",
-    "options": "设置"
+    "options": "设置",
+    "address": "地址",
+    "port": "端口",
+    "advanced-options": "高级选项",
+    "alpn-e-g-h2": "ALPN (例如h2)",
+    "fingerprint-e-g-chrome": "浏览器指纹 (例如 chrome)",
+    "sni-e-g-example-com": "SNI (例如 example.com)",
+    "host-e-g-example-com": "主机 (例如 example.com)",
+    "e-g-example-com": "例如 example.com",
+    "e-g-443": "例如 443",
+    "path-e-g-ws": "路径 (例如 /ws)",
+    "here-you-can-override-security-settings-from-xtls-config": "您可以在此处覆盖 XTLS 配置中的安全设置。",
+    "extra-xhttp-description": "此设置仅适用于 XHTTP 协议。 一个 \"extra\" JSON 将被传递给客户端. 输入的 JSON 不会被验证可用性，请确保输入有效的配置。您可以使用下面的按钮复制基本 \"extra\" 设置并粘贴到 JSON 中。",
+    "invalid-json": "无效的 JSON",
+    "fill-with-sample-xhttp-extra-params": "填充示例 XHTTP 额外选项",
+    "clone": "克隆",
+    "select-one-inbound-to-apply-to-the-host": "请选择一个入站连接应用到该主机",
+    "this-will-only-be-used-for-xray-json-output": "这将仅用于 Xray-JSON 输出。",
+    "please-ensure-you-provide-a-valid-json-mux-object": "请确保您提供一个有效的 JSON MUX 对象。",
+    "for-more-information-refer-to": "欲了解更多信息，请参阅",
+    "xtls-documentation": "XTLS 文档",
+    "final-mask-description": "最终伪装层覆写允许您在服务器端和客户端的 finalMask 配置需要不同时，对最终伪装层进行微调。<br/><br/>FinalMask 将仅适用于Xray-JSON和Base64客户端。<br/><br/>请务必审阅 <anchor>Xray 文档</anchor>。",
+    "paste-default-mux-params": "粘贴默认的 Mux 参数",
+    "please-ensure-you-provide-a-valid-json-sockopt-object": "请确保您提供一个有效的 JSON Sockopt 对象。",
+    "paste-default-sockopt-params": "粘贴默认 Sockopt 参数",
+    "basic": "基本设置",
+    "advanced": "高级",
+    "connection-overrides": "连接覆盖",
+    "xray-json-and-raw": "Xray Json 和 Raw",
+    "hide-host-from-users-remnawave-will-send-host-only-for-raw-subscription-responses": "隐藏用户的主机。Remnawave 将仅发送RAW 订阅。",
+    "apps-specific": "特定的应用程序",
+    "legacy-options": "传统选项",
+    "misc-settings": "杂项设置",
+    "mihomo-specific": "Mihomo 特定设置",
+    "override-the-xray-json-template": "覆盖将用于此主机的 Xray JSON 模板。",
+    "select-one-or-more-subscription-types-description": "选择一个或多个订阅类型，从该订阅类型中排除主机。"
   },
   "base-node-form": {
     "country": "国家",
@@ -399,14 +538,20 @@
     "consumption": "流量消耗",
     "core-configuration": "核心配置",
     "tracking-and-billing": "跟踪与计费",
-    "management": "管理"
+    "management": "管理",
+    "address": "地址",
+    "more-actions": "更多操作",
+    "quick-actions": "快捷操作",
+    "copy-node-uuid": "复制节点 UUID"
   },
   "home": {
     "page": {
       "online-stats": "在线统计",
       "bandwidth": "流量使用情况",
       "remnawave-usage": "Remnawave 使用情况",
-      "process-details": "进程详情"
+      "process-details": "进程详情",
+      "system": "系统",
+      "short-stats": "简要统计"
     },
     "runtime-info": {
       "title": "运行时指标",
@@ -431,7 +576,9 @@
   "login-form": {
     "feature": {
       "sign-in": "登录",
-      "your-password": "您的密码"
+      "your-password": "您的密码",
+      "password": "密码",
+      "username": "用户名"
     }
   },
   "statistic-nodes": {
@@ -448,7 +595,13 @@
       "top-nodes": "活跃节点",
       "node": "节点",
       "traffic": "流量",
-      "3-days": "3 天"
+      "3-days": "3 天",
+      "no-data-available-for-the-selected-period": "所选时段无可用数据",
+      "click-to-see-all": "点击查看全部",
+      "no-data-available": "无可用数据",
+      "filter-nodes": "筛选节点",
+      "previous-day": "前一天",
+      "next-day": "后一天"
     }
   },
   "get-expiration-text": {
@@ -497,7 +650,10 @@
       "passwords-do-not-match": "密码不匹配",
       "password-too-short": "最少 24 个字符",
       "register-description": "创建一个超级管理员账户以开始使用",
-      "registration": "注册"
+      "registration": "注册",
+      "username": "用户名",
+      "password": "密码",
+      "error": "错误"
     }
   },
   "remarks-manager": {
@@ -514,12 +670,26 @@
       "user-status-remarks-description-line-2": "您可以为每种状态添加多个备注。",
       "serve-json-at-base-subscription": "在基础订阅提供 JSON",
       "serve-json-description": "在基础订阅路径（无需附加 /json）提供 JSON 配置。如果客户端支持，将提供 JSON，否则将照常提供。",
-      "custom-remarks": "自定义备注"
+      "custom-remarks": "自定义备注",
+      "user-status-remarks-description-line-3": "因为过期、受限和禁用的用户无法连接到服务器，他们将在客户端中看到这些备注，而不是收到空的订阅。",
+      "update-settings": "更新设置",
+      "enabled": "已启用",
+      "disabled": "已禁用"
+    },
+    "page": {
+      "component": {
+        "what-is-subscription-settings": "什么是订阅设置？",
+        "subscription-settings-description": "以下设置适用于客户端应用（如 Happ, v2RayNG, Streisand 等）使用和显示的订阅链接详细信息。",
+        "subscription-settings-description-line-2": "建议更改这些值以符合您的特定需求和情况。"
+      }
     }
   },
   "multi-select-hosts": {
     "feature": {
-      "dangling-hosts-skipped": "已跳过 {{count}} 个未关联的主机，未执行克隆。"
+      "dangling-hosts-skipped": "已跳过 {{count}} 个未关联的主机，未执行克隆。",
+      "set-inbound": "设置入站",
+      "set-port": "设置端口",
+      "port": "端口"
     }
   },
   "edit-many-hosts-drawer": {
@@ -538,14 +708,22 @@
       "tab": {
         "feature": {
           "select-status": "选择状态",
-          "update-users": "更新用户"
+          "update-users": "更新用户",
+          "update-fields-for-all-users": "更新所有用户的字段",
+          "user-status": "用户状态",
+          "status": "状态",
+          "expire-date": "过期日期",
+          "select-expiration-date": "选择过期日期"
         }
       }
     },
     "actions": {
       "tab": {
         "feature": {
-          "reset-traffic-description": "将所有选定用户的流量使用重置为零"
+          "reset-traffic-description": "将所有选定用户的流量使用重置为零",
+          "reset": "重置",
+          "perform-actions-on-all-users": "对所有用户执行操作",
+          "reset-traffic": "重置流量"
         }
       }
     },
@@ -553,7 +731,9 @@
       "tab": {
         "feature": {
           "delete-users-by-status": "按状态删除用户",
-          "delete-users-by-status-description": "永久删除所有具有选定状态的用户"
+          "delete-users-by-status-description": "永久删除所有具有选定状态的用户",
+          "danger-zone": "危险区",
+          "danger-zone-description": "这些操作不可逆，可能导致永久性数据丢失。"
         }
       }
     }
@@ -570,7 +750,12 @@
           "enter-the-number-of-days-to-extend-the-expiration-date": "输入延长到期日的天数",
           "extend-days": "延长天数",
           "extend": "延长",
-          "extend-expiration-date-description": "将天数添加到选定用户的到期日期。天数将添加到当前每个用户的到期日期。"
+          "extend-expiration-date-description": "将天数添加到选定用户的到期日期。天数将添加到当前每个用户的到期日期。",
+          "revoke": "撤销",
+          "reset-traffic": "重置流量",
+          "reset": "重置",
+          "resets-the-traffic-usage-to-zero-for-all-selected-users": "将所有选定用户的流量使用重置为0",
+          "internal-squads": "内部分组"
         }
       }
     },
@@ -578,14 +763,32 @@
       "tab": {
         "feature": {
           "delete-users": "删除用户",
-          "permanently-deletes-all-selected-users-and-their-data": "永久删除所有选定用户及其数据"
+          "permanently-deletes-all-selected-users-and-their-data": "永久删除所有选定用户及其数据",
+          "danger-zone": "危险区",
+          "these-actions-are-irreversible-and-can-result-in-permanent-data-loss": "这些操作不可逆，可能导致永久性数据丢失。"
+        }
+      }
+    },
+    "update": {
+      "tab": {
+        "feature": {
+          "update-fields-counter": "更新 {{usersCount}} 位选定用户的字段",
+          "user-status": "用户状态",
+          "status": "状态",
+          "select-status": "选择状态",
+          "expire-date": "过期日期",
+          "select-expiration-date": "选择过期日期",
+          "update-users": "更新用户"
         }
       }
     }
   },
   "get-user-subscription-links": {
     "feature": {
-      "connection-keys": "连接密钥"
+      "connection-keys": "连接密钥",
+      "subscription-links": "订阅链接",
+      "loading-subscription-links": "正在加载订阅链接...",
+      "no-available-hosts-found-for-this-user": "未找到此用户的可用主机"
     }
   },
   "active-sessions-drawer": {
@@ -600,7 +803,12 @@
       "progress": "已完成 {{completed}} 个，共 {{total}} 个",
       "job-failed-description": "无法获取活动会话",
       "active-ips-across-nodes": "活跃的 IP 地址",
-      "distinct-ips": "独立的IP地址"
+      "distinct-ips": "独立的IP地址",
+      "get-data": "获取数据",
+      "job-failed": "任务失败",
+      "clear": "清除",
+      "no-active-sessions": "没有活跃的会话",
+      "no-active-sessions-description": "未找到此用户的活跃IP地址。"
     }
   },
   "detailed-user-info-drawer": {
@@ -625,7 +833,18 @@
       "last-online": "最后在线",
       "last-connected-node": "最后连接节点",
       "timestamps": "时间戳",
-      "active-internal-squads": "激活的的内部分组"
+      "active-internal-squads": "激活的的内部分组",
+      "loading-user-info": "正在加载用户信息...",
+      "uuid": "UUID",
+      "username": "用户名",
+      "description": "描述",
+      "subscription-url": "订阅 URL",
+      "last-opened-at": "最后打开时间",
+      "last-user-agent": "最后用户代理",
+      "created-at": "创建于",
+      "updated-at": "更新于",
+      "tag": "标签",
+      "first-connected-at": "首次连接于"
     }
   },
   "subscription-tabs": {
@@ -637,13 +856,26 @@
       "randomize-hosts": "随机排序主机",
       "randomize-hosts-description": "在订阅内容中随机排序主机",
       "additional-options": "附加选项",
-      "configure-additional-subscription-options": "配置附加订阅选项"
+      "configure-additional-subscription-options": "配置附加订阅选项",
+      "show-custom-remark-description-line-1": "仅适用于过期、受限和禁用用户。",
+      "error": "错误",
+      "save-settings": "保存设置",
+      "save-your-subscription-settings-to-apply-changes": "保存订阅设置以应用更改",
+      "announce-and-routing": "公告与路由",
+      "announce-and-routing-description": "为支持的客户端配置公告信息和路由规则",
+      "announce-description": "该文本将在 Happ 和 v2rayTUN 等支持的客户端中显示在订阅名称下方",
+      "enter-announce-text-max-200-characters": "请输入公告内容，最多 200 个字符"
     }
   },
   "nodes-realtime-metrics": {
     "widget": {
       "download-speed": "下载速度",
-      "upload-speed": "上传速度"
+      "upload-speed": "上传速度",
+      "total-upload": "总上传",
+      "total-download": "总下载",
+      "average-bps": "带宽使用平均值",
+      "active-nodes": "活动节点",
+      "current-hour": "当前小时"
     }
   },
   "internal-squads-usage-drawer": {
@@ -674,7 +906,24 @@
       "delete-device": "删除设备",
       "devices": "设备",
       "hwid-devices": "HWID 设备列表",
-      "delete-all-devices": "删除所有设备"
+      "delete-all-devices": "删除所有设备",
+      "no-devices-found": "未找到设备",
+      "no-devices-match-your-search": "没有符合您搜索条件的设备",
+      "platform": "平台",
+      "user-agent": "浏览器版本(User Agent)",
+      "os-version": "操作系统版本",
+      "device": "设备",
+      "important-note": "重要提示",
+      "important-note-line-1": "此功能仅在",
+      "important-note-line-2": ".env 值存在时可用。",
+      "important-note-line-3": "并非所有客户端应用程序都支持此功能。",
+      "important-note-line-4": "如果留空，",
+      "important-note-line-5": "将被使用。",
+      "important-note-line-6": "请查阅文档以获取更多信息。",
+      "important-note-line-7": "了解更多。",
+      "loading-hwid-devices": "正在加载 HWID 和设备...",
+      "search-by-hwid": "按 HWID 搜索",
+      "enter-hwid-to-filter-devices": "输入 HWID 以筛选设备..."
     }
   },
   "headers-manager": {
@@ -703,14 +952,20 @@
   },
   "pm2-metrics": {
     "total-processes": "进程总数",
-    "total-memory": "总内存使用"
+    "total-memory": "总内存使用",
+    "average-cpu": "CPU 平均使用率",
+    "heaviest-process": "最耗资源的进程"
   },
   "internal-squads-grid": {
     "widget": {
       "no-internal-squads": "暂无内部分组",
       "create-your-first-internal-squad-to-get-started": "创建第一个内部分组，开始使用",
       "delete-squad": "删除分组",
-      "users": "用户"
+      "users": "用户",
+      "inbounds": "入站连接",
+      "edit-inbounds": "编辑入站连接",
+      "remove-users": "删除用户",
+      "add-users": "添加用户"
     }
   },
   "config-profiles-grid": {
@@ -720,7 +975,10 @@
       "delete-profile": "删除文件",
       "nodes": "节点",
       "quick-view": "快速查看",
-      "xray-config": "Xray 配置"
+      "xray-config": "Xray 配置",
+      "inbounds": "入站",
+      "download": "下载",
+      "edit-xray-config": "编辑 Xray 配置"
     }
   },
   "view-infra-provider": {
@@ -744,24 +1002,33 @@
       "current-date": "当前日期",
       "new-date": "新日期",
       "tomorrow": "明天",
-      "next-month": "下个月"
+      "next-month": "下个月",
+      "today": "今天"
     }
   },
   "infra-providers-table": {
     "widget": {
-      "no-providers-found": "未找到提供商。"
+      "no-providers-found": "未找到提供商。",
+      "create-infra-provider": "创建网络提供商",
+      "infra-providers": "网络提供商",
+      "list-of-all-infra-providers": "所有网络提供商列表"
     }
   },
   "infra-billing-records-table": {
     "widget": {
-      "no-billing-records-found": "未找到账单记录"
+      "no-billing-records-found": "未找到账单记录",
+      "billing-records-sorted-by-date": "账单记录按日期排序",
+      "infra-billing-records": "网络账单记录"
     }
   },
   "infra-billing-nodes": {
     "widget": {
       "no-nodes-found": "未找到任何节点。",
       "add-a-node": "添加一个节点",
-      "update-multiple-nodes": "升级多个节点"
+      "update-multiple-nodes": "升级多个节点",
+      "add-node": "添加节点",
+      "list-of-all-infra-billing-nodes": "按下次计费日期排序的所有网络计费节点列表",
+      "infra-billing-nodes": "网络计费节点"
     }
   },
   "create-infra-billing-record": {
@@ -772,7 +1039,8 @@
         "billed-at": "账单日期",
         "the-date-and-time-when-the-bill-was-paid": "账单支付的日期和时间。",
         "payment-amount-usd": "付款金额（美元）",
-        "amount": "金额"
+        "amount": "金额",
+        "error": "错误"
       }
     }
   },
@@ -784,14 +1052,17 @@
         "next-billing-at-description": "计费节点将被计费的日期和时间。Remnawave 将会通知你即将到来的账单。",
         "existing": "已存在",
         "custom": "自定义",
-        "custom-name-description": "当节点不由 Remnawave 管理时使用自定义名称。"
+        "custom-name-description": "当节点不由 Remnawave 管理时使用自定义名称。",
+        "error": "错误",
+        "billing-node": "计费节点"
       }
     }
   },
   "active-nodes-list": {
     "modal": {
       "shared": {
-        "this-profile-is-not-active-on-any-nodes": "该配置文件未在任何节点上激活"
+        "this-profile-is-not-active-on-any-nodes": "该配置文件未在任何节点上激活",
+        "profile-is-active-on": "该配置文件已在 {{nodeCount}} 个节点上激活"
       }
     }
   },
@@ -820,7 +1091,8 @@
     "shared": {
       "no-billing-nodes-available": "无可用计费节点",
       "select-the-billing-node": "请选择计费节点。",
-      "select-billing-node": "选择计费节点..."
+      "select-billing-node": "选择计费节点...",
+      "billing-node": "计费节点"
     }
   },
   "select-infra-provider": {
@@ -840,7 +1112,9 @@
   "user-accessible-nodes": {
     "modal": {
       "widget": {
-        "user-accessible-nodes": "用户可访问节点"
+        "user-accessible-nodes": "用户可访问节点",
+        "loading-accessible-nodes": "正在加载可访问节点…",
+        "access-summary": "访问摘要"
       }
     }
   },
@@ -852,19 +1126,29 @@
         "selected": "已选择",
         "unselected": "未选择",
         "edit-internal-squad": "编辑内部分组",
-        "selected-inbounds": "已设置的入站：{{count}}"
+        "selected-inbounds": "已设置的入站：{{count}}",
+        "selected-from-multiple-profiles": "来自多个配置文件",
+        "no-inbounds-selected": "未选择入站配置",
+        "choose-inbounds-from-any-profiles": "从任意配置档中选择入站配置",
+        "update-internal-squad": "更新内部分组",
+        "search-profiles-or-inbounds": "搜索配置文件或入站配置...",
+        "no-profiles-or-inbounds-found": "未找到配置文件或入站配置",
+        "no-config-profiles-available": "暂无可用配置文件",
+        "all": "全部"
       }
     }
   },
   "host-select-inbound": {
     "feature": {
-      "choose-an-inbound-to-apply-to-the-host": "选择一个入站配置应用到该主机"
+      "choose-an-inbound-to-apply-to-the-host": "选择一个入站配置应用到该主机",
+      "no-inbound-selected": "未选择入站配置"
     }
   },
   "show-config-profiles-with-inbounds": {
     "feature": {
       "no-config-profile-selected": "未选择配置文件",
-      "choose-a-profile-to-configure-inbounds-for-this-node": "选择一个配置文件以为该节点配置入站"
+      "choose-a-profile-to-configure-inbounds-for-this-node": "选择一个配置文件以为该节点配置入站",
+      "config-profile": "配置文件"
     }
   },
   "access-settings-card": {
@@ -883,7 +1167,13 @@
     "drawer": {
       "widget": {
         "unknown-inbound": "未知的入站",
-        "assign-an-inbound-to-the-host": "指定一个入站到主机"
+        "assign-an-inbound-to-the-host": "指定一个入站到主机",
+        "no-profile-selected": "未选择配置文件",
+        "selected": "已选择",
+        "no-inbound-selected": "未选择入站",
+        "search-profiles-or-inbounds": "搜索配置文件或入站...",
+        "no-profiles-or-inbounds-found": "未找到配置文件或入站",
+        "no-config-profiles-available": "没有可用的配置文件"
       }
     }
   },
@@ -896,7 +1186,11 @@
       "total-spent": "总支出",
       "lifetime-spending": "累计支出",
       "payment-overdue": "付款已过期",
-      "all-up-to-date": "全部已更新"
+      "all-up-to-date": "全部已更新",
+      "current-date": "当前日期",
+      "overdue": "已过期",
+      "next-payment": "下次付款日期",
+      "no-upcoming-payments": "没有即将进行的付款"
     }
   },
   "disclaimer-overlay": {
@@ -928,7 +1222,10 @@
   "internal-squad-header-action-buttons": {
     "feature": {
       "squad-name": "分组名称",
-      "enter-squad-name": "输入分组名称"
+      "enter-squad-name": "输入分组名称",
+      "create-internal-squad": "创建内部分组",
+      "create-a-new-internal-squad-by-entering-a-name-below": "在下方输入名称以创建新的内部分组。",
+      "it-cant-be-changed-later": "创建后无法更改名称"
     }
   },
   "config-profiles-header-action-buttons": {
@@ -936,7 +1233,8 @@
       "create-a-new-config-profile-by-entering-a-name-below": "在下方输入名称以创建新的配置文件。",
       "you-can-customize-xray-config-after-creation": "创建后，您可以自定义 Xray 配置。",
       "profile-name": "配置文件名称",
-      "enter-profile-name": "输入配置文件名称"
+      "enter-profile-name": "输入配置文件名称",
+      "create-config-profile": "创建配置文件"
     }
   },
   "restart-node-button": {
@@ -964,7 +1262,11 @@
     "drawer": {
       "widget": {
         "config-profiles": "配置文件",
-        "no-inbounds-selected": "未选择入站配置"
+        "no-inbounds-selected": "未选择入站配置",
+        "no-profile-selected": "未选择配置文件",
+        "search-profiles-or-inbounds": "搜索配置文件或入站配置...",
+        "no-profiles-or-inbounds-found": "未找到配置文件或入站配置",
+        "no-config-profiles-available": "暂无可用配置文件"
       }
     }
   },
@@ -973,17 +1275,26 @@
       "system-info": "系统信息",
       "memory": "内存",
       "network": "网络",
-      "kernel": "内核"
+      "kernel": "内核",
+      "used": "已使用",
+      "free": "可用",
+      "total": "总计",
+      "system": "系统",
+      "system-uptime": "系统运行时间"
     }
   },
   "node-stats": {
     "card": {
       "traffic-refill-in-days": "流量重置(天)：",
-      "represents-the-uptime-of-the-xray-core": "表示Xray 核心的运行时间"
+      "represents-the-uptime-of-the-xray-core": "表示Xray 核心的运行时间",
+      "stats": "统计信息"
     }
   },
   "host-tags-input": {
-    "tags-are-not-visible-to-end-users-tag-will-be-sent-with-raw-subscription-only": "标签对最终用户不可见。标签将只能与 Raw 订阅一起发送。"
+    "tags-are-not-visible-to-end-users-tag-will-be-sent-with-raw-subscription-only": "标签对最终用户不可见。标签将只能与 Raw 订阅一起发送。",
+    "tag-can-only-contain-uppercase-letters-numbers-underscores-and-colons": "标签只能包含大写字母、数字、下划线和冒号",
+    "tag-must-be-less-than-32-characters": "标签必须小于 32 个字符",
+    "clear-value": "清除"
   },
   "internal-squad-accessible-nodes": {
     "modal": {
@@ -1002,11 +1313,21 @@
   },
   "get-user-subscription-request-history": {
     "feature": {
-      "request-history": "请求历史"
+      "request-history": "请求历史",
+      "subscription-request-history": "订阅请求历史",
+      "nothing-to-show": "没有要显示的内容...",
+      "request-at": "请求时间",
+      "user-agent": "User Agent"
     }
   },
   "use-hwid-inspector-table-columns": {
-    "device-model": "设备型号"
+    "device-model": "设备型号",
+    "platform": "平台",
+    "os-version": "操作系统版本",
+    "user-agent": "User Agent",
+    "user-uuid": "用户 UUID",
+    "created-at": "创建于",
+    "updated-at": "更新于"
   },
   "hwid-inspector-table": {
     "widget": {
@@ -1021,13 +1342,18 @@
       "platform-distribution": "平台分布",
       "app-distribution": "应用分布",
       "no-platform-data": "无平台数据",
-      "no-app-data": "无可用数据"
+      "no-app-data": "无可用数据",
+      "apps": "应用",
+      "platforms": "平台"
     }
   },
   "use-srh-inspector-table-columns": {
     "request-ip": "请求IP地址",
     "response-type": "响应类型",
-    "rule-name": "规则名称"
+    "rule-name": "规则名称",
+    "user-agent": "User Agent",
+    "request-at": "请求时间",
+    "user-uuid": "用户 UUID"
   },
   "srh-inspector-metrics": {
     "widget": {
@@ -1059,7 +1385,10 @@
         "snippet-is-valid": "片段有效",
         "edit-snippet": "编辑片段",
         "snippets": "片段",
-        "new-snippet": "新建片段"
+        "new-snippet": "新建片段",
+        "invalid-json": "无效的 JSON",
+        "fetching-snippets": "正在获取代码块...",
+        "no-snippets-yet": "尚无代码块"
       }
     }
   },
@@ -1090,11 +1419,15 @@
     "establishing-mtls-connection": "正在建立mTLS连接...",
     "xray-core-is-up-and-running": "Xray 核心正在运行！",
     "remnawave-will-try-to-reconnect-shortly": "Remnawave 将很快尝试重新连接...",
-    "no-errors-so-far": "到目前为止没有错误"
+    "no-errors-so-far": "到目前为止没有错误",
+    "no-errros-so-far": "到目前为止没有错误",
+    "last-error-message": "最后一个错误消息"
   },
   "external-squad-card": {
     "widget": {
-      "users": "用户"
+      "users": "用户",
+      "add-users": "添加用户",
+      "remove-users": "删除用户"
     }
   },
   "internal-squads-with-store": {
@@ -1116,6 +1449,11 @@
         "templates": "模板",
         "settings": "设置",
         "remarks": "备注"
+      }
+    },
+    "page": {
+      "component": {
+        "list-of-all-external-squads": "所有额外分组列表"
       }
     }
   },
@@ -1140,7 +1478,8 @@
     "incorrect-configuration-line-1": "配置错误",
     "incorrect-configuration-line-2": "可能导致异常行为",
     "review-settings-carefully-line-1": "谨慎审查设置",
-    "review-settings-carefully-line-2": "应用更改前"
+    "review-settings-carefully-line-2": "应用更改前",
+    "warning": "警告"
   },
   "auth-settings": {
     "header": {
@@ -1170,7 +1509,8 @@
     "telegram": {
       "adminIds": {
         "label": "允许的管理员 ID",
-        "placeholder": "输入管理员 ID"
+        "placeholder": "输入管理员 ID",
+        "description": "允许的管理员 ID 列表"
       }
     },
     "fields": {
@@ -1210,7 +1550,9 @@
       "no-passkeys-registered-yet": "尚无通行密钥注册",
       "add-passkeys-description": "添加您的第一个通行密钥以启用无密码登录您的设备",
       "register": "注册",
-      "last-used-at": "上次使用时间"
+      "last-used-at": "上次使用时间",
+      "active-passkeys": "激活的通行密钥",
+      "created-at": "创建时间"
     }
   },
   "branding-settings-card": {
@@ -1225,7 +1567,8 @@
       "example-hex-colors": "十六进制颜色示例",
       "example-mantine-colors": "MantineUI颜色示例",
       "example-mixed": "混合颜色示例",
-      "color-format-note": "💡 颜色仅适用于标记后面的单词。没有标记，文本将为白色。"
+      "color-format-note": "💡 颜色仅适用于标记后面的单词。没有标记，文本将为白色。",
+      "logo-url": "Logo 网址链接"
     }
   },
   "experimental-settings-card": {
@@ -1248,7 +1591,8 @@
       "col-expires": "过期",
       "expired": "已过期",
       "expires-in-days": "过期时间 (天)",
-      "one-time-notice": "出于安全原因，令牌会在创建后立即显示 <emphasis>仅此一次</emphasis>。请务必复制并将其妥善保存在安全的地方——之后你将无法再次查看它。"
+      "one-time-notice": "出于安全原因，令牌会在创建后立即显示 <emphasis>仅此一次</emphasis>。请务必复制并将其妥善保存在安全的地方——之后你将无法再次查看它。",
+      "expires-in": "过期"
     }
   },
   "external-squads-hosts": {
@@ -1261,7 +1605,8 @@
   },
   "reset-usage-user": {
     "feature": {
-      "reset-usage": "重置使用量"
+      "reset-usage": "重置使用量",
+      "reset": "重置"
     }
   },
   "help-action-icon": {
@@ -1276,7 +1621,8 @@
   },
   "help-drawer": {
     "shared": {
-      "failed-to-load-documentation": "无法加载文档"
+      "failed-to-load-documentation": "无法加载文档",
+      "loading-documentation": "正在加载文档..."
     }
   },
   "external-squads-response-headers": {
@@ -1299,7 +1645,8 @@
       "fallback-device-limit": "回退设备限制",
       "max-devices-announce-description": "输入用户达到设备同时最大使用数量时将显示的消息",
       "max-devices-announce": "最多设备通知",
-      "max-200-characters": "最多为200字符"
+      "max-200-characters": "最多为200字符",
+      "documentation": "文档"
     }
   },
   "external-squads-hwid-settings": {
@@ -1321,7 +1668,9 @@
     "widget": {
       "empty-hosts": "清空主机",
       "hwid-max-devices-exceeded": "HWID：超过最大设备数量",
-      "hwid-not-supported": "HWID：不支持"
+      "hwid-not-supported": "HWID：不支持",
+      "user-status": "用户状态",
+      "empty-internal-squads": "清空内部小队"
     }
   },
   "multi-select-nodes": {
@@ -1337,7 +1686,11 @@
     "node-v": "节点 V.",
     "provider": "服务商",
     "total-ram": "内存总数",
-    "cpu-model": "CPU 型号"
+    "cpu-model": "CPU 型号",
+    "address": "地址",
+    "ip-addresses": "IP 地址",
+    "inbounds": "入站",
+    "tags": "标签"
   },
   "subpage-config-visual-editor": {
     "widget": {
@@ -1359,7 +1712,20 @@
       "no-platforms-configured": "未配置平台",
       "add-a-platform-to-get-started": "添加一个平台以开始",
       "open-svg-library": "打开 SVG 库",
-      "installation-guides-design": "安装指南标题"
+      "installation-guides-design": "安装指南标题",
+      "load-from-github": "从 GitHub 加载",
+      "logo-url": "Logo 网址链接",
+      "collapsed": "收起",
+      "expanded": "展开",
+      "installation-guides-header": "安装指南标题",
+      "connection-keys-header": "连接密钥标题",
+      "validation-error": "验证错误",
+      "manage-your-svg-icons": "管理您的 SVG 图标",
+      "cards": "卡片",
+      "hidden": "隐藏",
+      "accordion": "可折叠",
+      "minimal": "极简",
+      "timeline": "时间轴"
     },
     "subpage-config-saved-line-1": "若要应用更改，请重启Remnawave 订阅页面容器。",
     "subpage-config-saved-line-2": "例如，您可以在终端中使用以下命令："
@@ -1383,7 +1749,9 @@
         "icon-color-help": "您可以使用任何 Mantine 主题颜色（{{colors}}）或任何有效的十六进制颜色代码（例如：#009688）。",
         "title": "标题",
         "buttons": "按钮",
-        "add-button": "添加按钮"
+        "add-button": "添加按钮",
+        "svg-icon": "SVG 图标",
+        "description": "描述"
       }
     }
   },
@@ -1391,12 +1759,17 @@
     "component": {
       "link": "链接",
       "type": "类型",
-      "button-text": "按钮文本"
+      "button-text": "按钮文本",
+      "external-link": "外部链接",
+      "subscription-link": "订阅链接",
+      "svg-icon": "SVG 图标"
     }
   },
   "localized-text-editor": {
     "component": {
-      "done": "完成"
+      "done": "完成",
+      "not-set": "未设置",
+      "required-default-language": "必填(默认语言)"
     }
   },
   "platform-editor": {
@@ -1448,7 +1821,9 @@
       "importing-config": "导入配置",
       "this-may-take-a-while": "这可能需要一点时间。",
       "config-imported-successfully": "配置导入成功",
-      "failed-to-parse-config-file": "解析配置文件失败"
+      "failed-to-parse-config-file": "解析配置文件失败",
+      "success": "成功",
+      "error": "错误"
     }
   },
   "base-translations-drawer": {
@@ -1493,13 +1868,16 @@
       "revoke": "撤销",
       "passwords-only": "仅密码",
       "passwords-only-description": "只重新生成连接密码，订阅URL保持相同",
-      "full-revoke-description": "重新生成订阅的 URL 和连接密码"
+      "full-revoke-description": "重新生成订阅的 URL 和连接密码",
+      "passwords-only-decription": "只重新生成连接密码，订阅URL保持相同"
     }
   },
   "nodes-quick-stats": {
     "widget": {
       "users-online": "在线用户",
-      "online-nodes": "在线节点"
+      "online-nodes": "在线节点",
+      "offline-nodes": "离线节点",
+      "cumulative-traffic": "累计流量"
     }
   },
   "template-info-popover": {
@@ -1550,7 +1928,8 @@
     "widget": {
       "node-plugins-are-an-advanced-feature-please-review-the-documentation-before-use": "节点插件属于进阶功能。请在使用前查看文档。",
       "no-node-plugins-yet": "尚无节点插件",
-      "create-a-plugin-to-extend-node-capabilities-with": "创建插件以扩展功能"
+      "create-a-plugin-to-extend-node-capabilities-with": "创建插件以扩展功能",
+      "warning": "警告"
     }
   },
   "node-plugin-executor": {
@@ -1570,7 +1949,11 @@
       "format-one-per-line": "格式(单行)：",
       "no-connected-nodes-available": "无可用的已连接节点。",
       "deselect-all": "取消全选",
-      "execute": "启动"
+      "execute": "启动",
+      "block-ips-decription": "每行一个条目。超时为 0 = 块直到重启一直有效。",
+      "unblock-ips-decription": "每行一个 IP 地址。",
+      "next": "下一步",
+      "select-all": "全选"
     }
   },
   "torrent-blocker-stats": {
@@ -1650,14 +2033,18 @@
       "restart-scan": "重新开始扫描",
       "clear-results": "清除结果",
       "search-by-ip": "按IP地址搜索……",
-      "no-results-for-ip": "未找到与 IP “{{ip}}” 匹配的用户"
+      "no-results-for-ip": "未找到与 IP “{{ip}}” 匹配的用户",
+      "no-active-sessions-found-on-any-node": "在所有节点上找不到活动的会话。"
     }
   },
   "mobile-stats": {
     "widget": {
       "upcoming": "即将到来",
       "per-month": "每月",
-      "total-spent": "合计花费"
+      "total-spent": "合计花费",
+      "billing-nodes": "计费节点",
+      "overdue": "已过期",
+      "no-upcoming": "没有即将到来的"
     }
   },
   "mobile-providers-list": {
@@ -1710,7 +2097,9 @@
     "invalid-ip": "不是有效的 IPv4 或 IPv6 地址",
     "ip-is-required": "IP 地址为必填项",
     "max-ips-reached": "最多允许 {{max}} 个 IP 地址",
-    "no-ips-yet": "还没有填写IP地址"
+    "no-ips-yet": "还没有填写IP地址",
+    "title": "IP 地址",
+    "status": "状态"
   },
   "node-ip-statuses": {
     "inbound": "入站",
@@ -1771,7 +2160,8 @@
   "node-inbounds-hosts-drawer": {
     "widget": {
       "no-active-config-profile": "此节点没有激活的配置文件",
-      "linked": "已关联"
+      "linked": "已关联",
+      "inbounds-and-hosts": "入站 & 主机"
     }
   },
   "node-integrations": {
@@ -1781,7 +2171,8 @@
     },
     "editor": {
       "description-placeholder": "这个集合做了什么",
-      "config-must-be-an-object": "配置必须是JSON对象"
+      "config-must-be-an-object": "配置必须是JSON对象",
+      "description": "描述"
     },
     "select": {
       "label": "集合",
@@ -1902,5 +2293,299 @@
     "connections-title": "已保存的连接",
     "connections-empty": "尚无保存的连接",
     "connections-current": "当前设置"
+  },
+  "users-metrics": {
+    "disabled-users": "禁用用户",
+    "limited-users": "受限用户",
+    "expired-users": "过期用户",
+    "active-users": "活跃用户",
+    "total-users": "总用户数",
+    "widget": {
+      "total": "总计"
+    }
+  },
+  "use-bandwidth-table-columns": {
+    "traffic-limit": "流量限制",
+    "traffic": "流量",
+    "traffic-cycle": "流量周期",
+    "node-name": "节点名称"
+  },
+  "hosts-page-header": {
+    "widget": {
+      "list-of-all-hosts": "所有主机列表",
+      "about-hosts": "关于主机",
+      "header-description-line-1": "主机是用户的入口点。一组主机形成一个所谓的“订阅”。",
+      "header-description-line-2": "每个主机都可以选择性地指向一个服务器。",
+      "remark": "备注",
+      "remark-description-line-1": "主机的名称。它可以是任何内容，但在单个订阅中必须保持唯一。",
+      "remark-description-line-2": "备注将显示在终端客户端的可用服务器列表中。",
+      "inbound": "入站",
+      "inbound-line-1": "必须选择一个主机用来绑定入站。",
+      "inbound-line-2": "入站列表来自“Xray 配置”。",
+      "address-and-port": "地址和端口",
+      "address-and-port-line-1": "在大多数情况下，IP/域名应指向已连接的节点之一。",
+      "address-and-port-line-2": "端口必须开放且可访问以接收传入连接。",
+      "address-and-port-line-3": "通常端口应与 Xray 配置中的入站端口匹配。",
+      "advanced-settings": "“高级设置”是可用于进一步自定义主机的附加参数。",
+      "advanced-settings-2": "在“高级设置”中指定的任何内容将比 Xray 配置中的内容具有更高的优先级。"
+    }
+  },
+  "remark-info": {
+    "widget": {
+      "supports-templates": "支持模板。",
+      "remark-description": "这是在仪表盘中显示的主机名称。"
+    }
+  },
+  "error-accordeon": {
+    "widget": {
+      "last-error-message": "最后的错误消息"
+    }
+  },
+  "node-card": {
+    "widget": {
+      "copied": "已复制"
+    }
+  },
+  "nodes-page-header": {
+    "widget": {
+      "list-of-all-nodes": "所有节点列表"
+    }
+  },
+  "table": {
+    "widget": {
+      "only-active-nodes": "仅显示启用了流量统计的节点",
+      "today": "今天",
+      "nodes-with-active-traffic-tracking-not-found": "未找到启用流量统计的节点。"
+    }
+  },
+  "login-form-feature": {
+    "username": "用户名"
+  },
+  "empty-page": {
+    "layout": {
+      "nothing-found": "未找到任何内容"
+    }
+  },
+  "toggle-user-status-button": {
+    "feature": {
+      "enable": "启用用户",
+      "disable": "禁用用户"
+    }
+  },
+  "bulk-user-actioins-modal": {
+    "widget": {
+      "user-deletion-description": "删除所有具有选定状态的用户。如果您删除状态为“活跃”的用户，应重启所有节点以使更改生效。",
+      "select-status": "按状态删除"
+    }
+  },
+  "user-usage-modal": {
+    "widget": {
+      "no-data-available-for-the-selected-period": "所选时段无可用数据",
+      "no-data-available": "无可用数据",
+      "click-to-show-all": "点击显示全部",
+      "click-to-highlight-only-this-node": "点击仅高亮此节点",
+      "usage-by-period": "时段用量",
+      "7-days": "7 天",
+      "14-days": "14 天",
+      "30-days": "30 天",
+      "60-days": "60 天",
+      "90-days": "90 天",
+      "180-days": "180 天",
+      "365-days": "365 天",
+      "total-traffic": "总流量",
+      "top-nodes": "活跃节点",
+      "stacked": "堆叠",
+      "grouped": "分组",
+      "filter-nodes": "筛选节点",
+      "bar-chart": "条形图",
+      "show-nodes": "显示节点",
+      "click-to-see-all": "点击查看全部"
+    }
+  },
+  "inbounds-realtime-metrics": {
+    "widget": {
+      "inbound-connections": "入站连接数",
+      "inbound-connections-hint": "同一用户在多个入站上会分别计数",
+      "active-inbounds": "活跃入站",
+      "total-inbounds": "入站总数"
+    }
+  },
+  "node-users-usage-drawer": {
+    "widget": {
+      "no-data-available-for-the-selected-period": "所选时段无可用数据",
+      "click-to-see-all-users": "点击查看所有用户",
+      "click-on-bars-to-view-details": "点击柱状图查看详情",
+      "no-data-available": "无可用数据",
+      "click-to-show-all-users": "点击显示所有用户",
+      "click-to-highlight-only-this-user": "点击仅高亮此用户",
+      "users-accordeon": "用户 (显示 {{displayedUserCount}} 个活跃用户中的前 {{significantUserCount}} 个 / 总用户数 {{userCount}})",
+      "usage-by-period": "时段用量",
+      "7-days": "7 天",
+      "14-days": "14 天",
+      "30-days": "30 天",
+      "60-days": "60 天",
+      "90-days": "90 天",
+      "180-days": "180 天",
+      "365-days": "365 天",
+      "performance-line-1": "为提升性能，部分数据可能被隐藏。",
+      "performance-line-2": "请使用 Grafana 或任何其他相关工具查看所有数据。",
+      "total-traffic": "总流量",
+      "top-users": "活跃用户",
+      "stacked": "堆叠",
+      "grouped": "分组",
+      "filter-users": "筛选用户",
+      "bar-chart": "条形图",
+      "previous-day": "前一天",
+      "next-day": "后一天",
+      "hidden-users": "（{{hiddenCount}} 位用户因流量低于 {{minTraffic}} 而被隐藏）",
+      "total-traffic-prettybytestoanyutil": "总流量: {{totalTraffic}}",
+      "user": "用户",
+      "traffic": "流量",
+      "no-users-with-traffic-100-kb": "流量 ≥ 100 KiB 的用户",
+      "users-hidden-with-less-than-100-kb": "{{usersCount}} 个流量小于 100 KiB 的用户已隐藏 (总计 {{totalTraffic}})"
+    }
+  },
+  "internal-squads-header": {
+    "widget": {
+      "list": "所有内部分组列表"
+    }
+  },
+  "config-profiles-header": {
+    "widget": {
+      "list-of-all-config-profiles": "全部配置文件列表"
+    }
+  },
+  "use-infra-providers-columns": {
+    "hoster-name": "主机商名称",
+    "providers": "提供商",
+    "login-url": "登录网址",
+    "total": "总计，$",
+    "servers": "服务器",
+    "no-servers": "无服务器"
+  },
+  "use-infra-billing-records-columns": {
+    "hoster-name": "主机商名称",
+    "billed-at": "计费时间",
+    "paid": "已支付，$"
+  },
+  "use-infra-billing-nodes-columns": {
+    "hoster-name": "主机商名称",
+    "node": "节点",
+    "next-billing-at": "下一计费时间",
+    "quick-update-to-next-month": "下个月快速更新"
+  },
+  "next-billing-at-cell": {
+    "in-current-month": "本月内",
+    "far-future": "遥远的未来",
+    "date-approaching": "日期临近",
+    "today": "今天",
+    "tomorrow": "明天",
+    "more-than-3-days-ago": "三天前以上",
+    "yesterday": "昨天"
+  },
+  "active-nodes-list-with-store": {
+    "modal": {
+      "shared": {
+        "active-nodes": "活跃节点"
+      }
+    }
+  },
+  "user-indentity-creation-card": {
+    "user-identity": "用户身份"
+  },
+  "edit-node-by-uuid-modal": {
+    "widget": {
+      "loading-node": "正在加载节点..."
+    }
+  },
+  "hosts-filters": {
+    "feature": {
+      "all-config-profiles": "所有配置文件",
+      "all-inbounds": "所有入站",
+      "filters": "筛选器",
+      "select-config-profile": "选择配置文件",
+      "select-inbound": "选择入站",
+      "search-by-remark": "按备注搜索...",
+      "address": "地址",
+      "filter-by-tags": "按标签进行筛选"
+    }
+  },
+  "language-selector": {
+    "component": {
+      "persian": "波斯语",
+      "russian": "俄语",
+      "chinese": "中文",
+      "french": "法语",
+      "additional-languages": "其它语言",
+      "english-is-always-enabled": "总是使用英语",
+      "english": "英语"
+    }
+  },
+  "nodes-spotlight-search": {
+    "widget": {
+      "no-nodes-found": "未找到任何节点。",
+      "search-by-name-or-address": "按名称或地址搜索……"
+    }
+  },
+  "rename-modal": {
+    "shared": {
+      "new-name": "新名称"
+    }
+  },
+  "srh-inspector-table": {
+    "widget": {
+      "subscription-request-history": "订阅请求历史"
+    }
+  },
+  "visual-settings-card": {
+    "widget": {
+      "layout-style": "布局样式",
+      "choose-how-the-desktop-navigation-is-displayed": "选择桌面导航的显示方式",
+      "compact": "紧凑",
+      "sidebar": "侧边栏"
+    }
+  },
+  "reset-node-traffic": {
+    "feature": {
+      "reset-traffic": "重置流量"
+    }
+  },
+  "inbounds-datatable": {
+    "widget": {
+      "online": "在线",
+      "type": "类型",
+      "profile": "配置文件",
+      "squads": "分组",
+      "no-inbounds-found": "未找到入站"
+    }
+  },
+  "svg-icon-input": {
+    "component": {
+      "svg-icon": "SVG 图标"
+    }
+  },
+  "user-hwid-devices": {
+    "drawer": {
+      "widget": {
+        "enter-search-query": "输入查询……"
+      }
+    }
+  },
+  "node-plugin-editor-page": {
+    "component": {
+      "plugin-editor": "插件编辑器"
+    }
+  },
+  "adtive-on-nodes": {
+    "modal": {
+      "shared": {
+        "this-plugin-is-not-active-on-any-nodes": "该插件未在任何节点上激活."
+      }
+    }
+  },
+  "get-node-inbounds-hosts": {
+    "feature": {
+      "inbounds-and-hosts": "入站 & 主机"
+    }
   }
 }
