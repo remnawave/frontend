@@ -10,7 +10,7 @@ import { PiClockCountdown, PiClockUser, PiListChecks, PiProhibit } from 'react-i
 import { TbDeviceFloppy, TbDevices2, TbListLetters, TbX } from 'react-icons/tb'
 
 import { queryClient } from '@shared/api'
-import { QueryKeys, useUpdateExternalSquad } from '@shared/api/hooks'
+import { QueryKeys, useGetSubscriptionSettings, useUpdateExternalSquad } from '@shared/api/hooks'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 
 interface IProps {
@@ -40,11 +40,14 @@ export const ExternalSquadsCustomRemarksTabWidget = (props: IProps) => {
         HWIDNotSupported: DEFAULT_REMARKS.HWIDNotSupported
     })
 
-    useEffect(() => {
-        const currentRemarks = externalSquad.customRemarks
-        if (currentRemarks) {
-            setIsOverrideEnabled(true)
+    const { data: subscriptionSettings } = useGetSubscriptionSettings()
 
+    useEffect(() => {
+        setIsOverrideEnabled(!!externalSquad.customRemarks)
+
+        // Without an override, prefill the form with the global remarks the squad currently inherits
+        const currentRemarks = externalSquad.customRemarks ?? subscriptionSettings?.customRemarks
+        if (currentRemarks) {
             const processRemarks = (remarksData: string | string[] | undefined): string[] => {
                 if (!remarksData) return ['']
                 if (typeof remarksData === 'string') {
@@ -64,7 +67,6 @@ export const ExternalSquadsCustomRemarksTabWidget = (props: IProps) => {
                 HWIDNotSupported: processRemarks(currentRemarks.HWIDNotSupported)
             })
         } else {
-            setIsOverrideEnabled(false)
             setRemarks({
                 expired: DEFAULT_REMARKS.expired,
                 limited: DEFAULT_REMARKS.limited,
@@ -74,7 +76,7 @@ export const ExternalSquadsCustomRemarksTabWidget = (props: IProps) => {
                 HWIDNotSupported: DEFAULT_REMARKS.HWIDNotSupported
             })
         }
-    }, [externalSquad])
+    }, [externalSquad, subscriptionSettings])
 
     const updateExpiredRemarks = useCallback((newRemarks: string[]) => {
         setRemarks((prev) => ({ ...prev, expired: newRemarks }))
