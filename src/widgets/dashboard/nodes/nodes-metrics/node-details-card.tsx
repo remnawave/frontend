@@ -41,7 +41,9 @@ export const NodeDetailsCard = memo(
         const [hideZeroValues, setHideZeroValues] = useState(true)
         const { t } = useTranslation()
 
-        const filterNonZeroStats = (stats: typeof node.inboundsStats) => {
+        const filterNonZeroStats = <T extends { download: string; upload: string }>(
+            stats: T[]
+        ): T[] => {
             if (!hideZeroValues) return stats
             return stats.filter((stat) => stat.upload !== '0' || stat.download !== '0')
         }
@@ -198,6 +200,16 @@ export const NodeDetailsCard = memo(
                                                     variant="outline"
                                                 >
                                                     {stat.tag}
+                                                </Badge>
+                                                <Badge
+                                                    color={stat.online > 0 ? 'teal' : 'gray'}
+                                                    leftSection={
+                                                        <PiUsersDuotone size={px('0.8rem')} />
+                                                    }
+                                                    size="sm"
+                                                    variant="light"
+                                                >
+                                                    {formatInt(stat.online)}
                                                 </Badge>
                                             </Group>
                                             <SimpleGrid cols={{ base: 1, xs: 2 }} spacing="xs">
