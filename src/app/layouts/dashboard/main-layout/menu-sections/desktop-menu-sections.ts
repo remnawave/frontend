@@ -14,6 +14,7 @@ import {
     TbHexagon,
     TbPackage,
     TbRadar2,
+    TbNetwork,
     TbReportAnalytics,
     TbRoute,
     TbStar,
@@ -80,6 +81,12 @@ export const useDesktopMenuSections = (): MenuItem[] => {
                         href: ROUTES.DASHBOARD.MANAGEMENT.NODES,
                         icon: HiServer,
                         id: 'nodes-management'
+                    },
+                    {
+                        name: t('constants.mesh'),
+                        href: ROUTES.DASHBOARD.MANAGEMENT.MESH,
+                        icon: TbNetwork,
+                        id: 'mesh'
                     },
                     {
                         name: `${t('constants.node-plugins')} β`,
