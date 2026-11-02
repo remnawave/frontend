@@ -714,11 +714,20 @@ export default function MeshPageComponent(props: IProps) {
                                                                         }
                                                                     ]}
                                                                     disabled={
-                                                                        relay.isPending &&
-                                                                        relay.variables?.exit ===
-                                                                            name
+                                                                        !editable ||
+                                                                        !status.capabilities
+                                                                            .relay ||
+                                                                        (relay.isPending &&
+                                                                            relay.variables
+                                                                                ?.exit === name)
                                                                     }
                                                                     onChange={(mode) => {
+                                                                        if (
+                                                                            !editable ||
+                                                                            !status.capabilities
+                                                                                .relay
+                                                                        )
+                                                                            return
                                                                         if (
                                                                             mode === 'auto' ||
                                                                             mode === 'direct' ||

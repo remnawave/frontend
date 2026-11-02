@@ -25,17 +25,19 @@ export function MeshMap({ status }: { status: MeshStatus }) {
     const [hover, setHover] = useState<null | string>(null)
     const nodes = status.topology.nodes
 
-    const { pos, links } = useMemo(() => {
+    const { height, pos, links } = useMemo(() => {
         const entries = nodes.filter((n) => n.role === 'entry')
         const exits = nodes.filter((n) => n.role !== 'entry')
+        // Reserve room for the outer rings and addresses at both ends of the entry column.
+        const height = Math.max(H, (entries.length - 1) * 100 + 100)
         const p: Record<string, { x: number; y: number }> = {}
         entries.forEach((n, i) => {
-            p[n.name] = { x: 70, y: H / 2 + (i - (entries.length - 1) / 2) * 100 }
+            p[n.name] = { x: 70, y: height / 2 + (i - (entries.length - 1) / 2) * 100 }
         })
         exits.forEach((n, i) => {
             const t = exits.length === 1 ? 0.5 : i / (exits.length - 1)
             const ang = -Math.PI / 2.3 + t * ((Math.PI * 2) / 2.3)
-            p[n.name] = { x: 400 + Math.cos(ang) * 150, y: H / 2 + Math.sin(ang) * 128 }
+            p[n.name] = { x: 400 + Math.cos(ang) * 150, y: height / 2 + Math.sin(ang) * 128 }
         })
         const ls: Link[] = []
         for (let i = 0; i < nodes.length; i++) {
@@ -50,7 +52,7 @@ export function MeshMap({ status }: { status: MeshStatus }) {
                 ls.push({ a, b, rttAB: ab?.rtt, rttBA: ba?.rtt, state })
             }
         }
-        return { links: ls, pos: p }
+        return { height, links: ls, pos: p }
     }, [nodes, status.overlay.obs])
 
     // transit routes: A -> via -> D, drawn on top
@@ -83,7 +85,7 @@ export function MeshMap({ status }: { status: MeshStatus }) {
                 aria-label={ui('mesh-link-map')}
                 role="img"
                 style={{ display: 'block', height: 'auto', margin: '0 auto', maxWidth: MAX_WIDTH }}
-                viewBox={`0 0 ${W} ${H}`}
+                viewBox={`0 0 ${W} ${height}`}
                 width="100%"
             >
                 {links.map((l) => {
