@@ -1499,6 +1499,7 @@
   "nodes-quick-stats": {
     "widget": {
       "users-online": "Users online",
+      "sessions-on-nodes": "Sessions on nodes: {{total}}",
       "online-nodes": "Online nodes"
     }
   },
