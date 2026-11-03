@@ -402,11 +402,19 @@ export const MonacoSetupResponseRulesFeature = {
                                     responseModifications: {
                                         properties: {
                                             subscriptionTemplate: {
-                                                enum: templates,
-                                                markdownDescription: `Available templates for **${responseType}** response type.`,
-                                                markdownEnumDescriptions: templates.map(
-                                                    (t) => `Use ${t} template`
-                                                )
+                                                anyOf: [
+                                                    {
+                                                        enum: templates,
+                                                        markdownEnumDescriptions: templates.map(
+                                                            (t) => `Use ${t} template`
+                                                        )
+                                                    },
+                                                    {
+                                                        type: 'string',
+                                                        pattern: '\\{squad\\}'
+                                                    }
+                                                ],
+                                                markdownDescription: `Available templates for **${responseType}** response type. Use \`{squad}\` to insert the user's External Squad template name, e.g. \`{squad}-mobile\`.`
                                             }
                                         }
                                     }
