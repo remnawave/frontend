@@ -18,7 +18,7 @@ import { showModal } from '@shared/_modals/show-modal'
 import { queryClient } from '@shared/api'
 import { nodesQueryKeys, useGetNodes, useReorderNodes } from '@shared/api/hooks'
 import { useIsMobile } from '@shared/hooks'
-import { NO_TAG, TagFilterBar } from '@shared/ui'
+import { filterByTag, TagFilterBar } from '@shared/ui'
 import { EmptyPageLayout } from '@shared/ui/layouts/empty-page'
 import { sToMs } from '@shared/utils/time-utils'
 
@@ -42,12 +42,7 @@ export const NodesTableWidget = memo((props: IProps) => {
     const { setNodesActiveTag } = useViewPreferencesStoreActions()
     const isNodeIntegrationsEnabled = useExperimentalFeature('nodeIntegrations')
 
-    const visibleNodes = useMemo(() => {
-        if (!nodes) return []
-        if (activeTag === null) return nodes
-        if (activeTag === NO_TAG) return nodes.filter((node) => (node.tags ?? []).length === 0)
-        return nodes.filter((node) => (node.tags ?? []).includes(activeTag))
-    }, [nodes, activeTag])
+    const visibleNodes = useMemo(() => filterByTag(nodes ?? [], activeTag), [nodes, activeTag])
 
     const [state, handlers] = useListState(visibleNodes)
 
@@ -61,6 +56,7 @@ export const NodesTableWidget = memo((props: IProps) => {
     const isDraggingRef = useRef(false)
     const dragSnapshotRef = useRef<typeof state | null>(null)
     const activeTagRef = useRef(activeTag)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     activeTagRef.current = activeTag
     const isMobile = useIsMobile()
 

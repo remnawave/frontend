@@ -16,7 +16,7 @@ import { TbListCheck } from 'react-icons/tb'
 
 import { useGetNodes } from '@shared/api/hooks'
 import { useIsMobile } from '@shared/hooks'
-import { NO_TAG, TagFilterBar } from '@shared/ui'
+import { filterByTag, TagFilterBar } from '@shared/ui'
 import { EmptyPageLayout } from '@shared/ui/layouts/empty-page'
 
 import {
@@ -51,11 +51,7 @@ export const HostsTableWidget = memo((props: IProps) => {
 
     const { data: nodes } = useGetNodes()
 
-    const visibleState = useMemo(() => {
-        if (activeTag === null) return state
-        if (activeTag === NO_TAG) return state.filter((host) => (host.tags ?? []).length === 0)
-        return state.filter((host) => (host.tags ?? []).includes(activeTag))
-    }, [state, activeTag])
+    const visibleState = useMemo(() => filterByTag(state, activeTag), [state, activeTag])
 
     useEffect(() => {
         if (listRef.current) {

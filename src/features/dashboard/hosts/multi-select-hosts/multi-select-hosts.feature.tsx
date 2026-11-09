@@ -32,6 +32,7 @@ import {
     useBulkDeleteHosts,
     useBulkDisableHosts
 } from '@shared/api/hooks/hosts/hosts.mutation.hooks'
+import { filterByTag } from '@shared/ui'
 
 import { useHostsActiveTag } from '@entities/dashboard/view-preferences-store'
 
@@ -83,7 +84,7 @@ export const MultiSelectHostsFeature = (props: IProps) => {
     const { mutateAsync: cloneHost } = useCloneHost()
 
     const selectAllHosts = () => {
-        setSelectedHosts(hosts?.map((host) => host.uuid) || [])
+        setSelectedHosts(filterByTag(hosts ?? [], activeTag).map((host) => host.uuid))
     }
 
     const clearSelection = () => {
