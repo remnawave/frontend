@@ -5,6 +5,7 @@ import {
     GetNodesCommand,
     GetConfigProfilesCommand,
     GetInternalSquadsCommand,
+    GetSubscriptionSettingsCommand,
     GetSubscriptionTemplatesCommand,
     UpdateHostCommand,
     UpdateManyHostsCommand
@@ -25,6 +26,9 @@ export interface IProps<
     isSubmitting: boolean
     nodes: GetNodesCommand.Response['response']
     removeRequiredFields?: boolean
+    responseRules: NonNullable<
+        GetSubscriptionSettingsCommand.Response['response']['responseRules']
+    >['rules']
     subscriptionTemplates: GetSubscriptionTemplatesCommand.Response['response']['templates']
     hostUuid?: string
 }

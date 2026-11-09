@@ -19,6 +19,7 @@ import {
     useGetHostTags,
     useGetInternalSquads,
     useGetNodes,
+    useGetSubscriptionSettings,
     useGetSubscriptionTemplates
 } from '@shared/api/hooks'
 import { LoadingScreen } from '@shared/ui'
@@ -40,6 +41,7 @@ export const CreateHostDrawer = NiceModal.create(() => {
     const { data: internalSquads } = useGetInternalSquads()
     const { data: templates } = useGetSubscriptionTemplates()
     const { data: hostTags } = useGetHostTags()
+    const { data: subscriptionSettings } = useGetSubscriptionSettings()
 
     const form = useForm<CreateHostCommand.RequestBody>({
         mode: 'uncontrolled',
@@ -145,7 +147,12 @@ export const CreateHostDrawer = NiceModal.create(() => {
                 />
             }
         >
-            {!configProfiles || !nodes || !templates || !internalSquads || !hostTags ? (
+            {!configProfiles ||
+            !nodes ||
+            !templates ||
+            !internalSquads ||
+            !hostTags ||
+            !subscriptionSettings ? (
                 <LoadingScreen />
             ) : (
                 <BaseHostForm
@@ -156,6 +163,7 @@ export const CreateHostDrawer = NiceModal.create(() => {
                     internalSquads={internalSquads.internalSquads}
                     isSubmitting={isCreateHostPending}
                     nodes={nodes}
+                    responseRules={subscriptionSettings.responseRules?.rules ?? []}
                     subscriptionTemplates={templates.templates}
                 />
             )}

@@ -9,6 +9,7 @@ import {
     useGetHostTags,
     useGetInternalSquads,
     useGetNodes,
+    useGetSubscriptionSettings,
     useGetSubscriptionTemplates,
     useUpdateHost
 } from '@shared/api/hooks'
@@ -29,6 +30,7 @@ export const EditHostDrawerContent = (props: IProps) => {
     const { data: templates } = useGetSubscriptionTemplates()
     const { data: internalSquads } = useGetInternalSquads()
     const { data: hostTags } = useGetHostTags()
+    const { data: subscriptionSettings } = useGetSubscriptionSettings()
 
     const form = useForm<UpdateHostCommand.RequestBody>({
         name: 'edit-host-form',
@@ -78,6 +80,7 @@ export const EditHostDrawerContent = (props: IProps) => {
                 sockoptParams: stringifyJsonField(host.sockoptParams),
                 finalMask: stringifyJsonField(host.finalMask),
                 mapper: host.mapper,
+                includeInSrrRules: host.includeInSrrRules ?? undefined,
                 tags: host.tags ?? undefined,
                 isHidden: host.isHidden,
                 overrideSniFromAddress: host.overrideSniFromAddress,
@@ -126,7 +129,14 @@ export const EditHostDrawerContent = (props: IProps) => {
         })
     })
 
-    if (!configProfiles || !nodes || !templates || !internalSquads || !hostTags) {
+    if (
+        !configProfiles ||
+        !nodes ||
+        !templates ||
+        !internalSquads ||
+        !hostTags ||
+        !subscriptionSettings
+    ) {
         return <LoaderModalShared mih="78vh" />
     }
 
@@ -140,6 +150,7 @@ export const EditHostDrawerContent = (props: IProps) => {
             isSubmitting={isUpdateHostPending}
             nodes={nodes}
             hostUuid={host.uuid}
+            responseRules={subscriptionSettings.responseRules?.rules ?? []}
             subscriptionTemplates={templates.templates}
         />
     )

@@ -28,6 +28,7 @@ export interface IHostFormData {
     ) => ReactNode
     resolveSelectedRawInbound: () => unknown
     securityLayerLabels: Record<string, string>
+    srrRuleNames: string[]
     subscriptionTemplates: GetSubscriptionTemplatesCommand.Response['response']['templates']
     tagsInputProps: GetInputPropsReturnType
 }
