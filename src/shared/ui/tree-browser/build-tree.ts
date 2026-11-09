@@ -82,6 +82,8 @@ function compareNodes<T>(a: ITreeNode<T>, b: ITreeNode<T>): number {
 
     if (aIsFolder !== bIsFolder) return aIsFolder ? -1 : 1
 
+    if (!aIsFolder) return 0
+
     return COLLATOR.compare(a.label, b.label)
 }
 
