@@ -69,7 +69,7 @@ const ServerDescriptionHelp = () => {
                 {t('base-host-form.supported-clients')}
             </Text>
             <DimmedText>
-                Mihomo: FlClash X, Flowvy, prizrak-box, Koala Clash
+                Mihomo: FlClash X, Flowvy, prizrak-box, Koala Clash, Clod Clash
                 <br />
                 Xray: Happ, Incy
             </DimmedText>
