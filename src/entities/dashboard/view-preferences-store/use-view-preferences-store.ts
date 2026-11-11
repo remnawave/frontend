@@ -12,6 +12,7 @@ import {
     HOSTS_VIEW_MODE,
     IActions,
     IExperimentalFeatures,
+    INBOUNDS_VIEW_MODE,
     IState,
     NODES_VIEW_MODE
 } from './interfaces'
@@ -34,6 +35,7 @@ const initialState: IState = {
     nodesActiveTag: null,
     hostsViewMode: HOSTS_VIEW_MODE.CARDS,
     hostsActiveTag: null,
+    inboundsViewMode: INBOUNDS_VIEW_MODE.TABLE,
     sectionActiveTags: {}
 }
 
@@ -71,6 +73,7 @@ export const useViewPreferencesStore = create<IActions & IState>()(
                     setNodesActiveTag: (tag) => set({ nodesActiveTag: tag }),
                     setHostsViewMode: (mode) => set({ hostsViewMode: mode }),
                     setHostsActiveTag: (tag) => set({ hostsActiveTag: tag }),
+                    setInboundsViewMode: (mode) => set({ inboundsViewMode: mode }),
                     setLauncherPosition: (position) => set({ launcherPosition: position }),
                     setLauncherColumns: (columns) => set({ launcherColumns: columns }),
                     setQuickLinks: (links) => set({ quickLinks: sanitizeQuickLinks(links) }),
@@ -96,6 +99,7 @@ export const useViewPreferencesStore = create<IActions & IState>()(
                 nodesActiveTag: state.nodesActiveTag,
                 hostsViewMode: state.hostsViewMode,
                 hostsActiveTag: state.hostsActiveTag,
+                inboundsViewMode: state.inboundsViewMode,
                 sectionActiveTags: state.sectionActiveTags
             }),
             migrate: migrateState,
@@ -123,6 +127,7 @@ export const useViewPreferencesStoreActions = () =>
     useViewPreferencesStore((state) => state.actions)
 export const useHostsViewMode = () => useViewPreferencesStore((state) => state.hostsViewMode)
 export const useHostsActiveTag = () => useViewPreferencesStore((state) => state.hostsActiveTag)
+export const useInboundsViewMode = () => useViewPreferencesStore((state) => state.inboundsViewMode)
 export const useLauncherPosition = () => useViewPreferencesStore((state) => state.launcherPosition)
 export const useLauncherColumns = () => useViewPreferencesStore((state) => state.launcherColumns)
 export const useQuickLinks = () => useViewPreferencesStore((state) => state.quickLinks)

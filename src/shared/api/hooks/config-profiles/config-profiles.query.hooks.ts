@@ -1,5 +1,6 @@
 import { createQueryKeys } from '@lukemorales/query-key-factory'
 import {
+    GetAllInboundsCommand,
     GetComputedConfigProfileByUuidCommand,
     GetConfigProfileByUuidCommand,
     GetConfigProfilesCommand,
@@ -26,7 +27,10 @@ export const configProfilesQueryKeys = createQueryKeys('configProfiles', {
     }),
     getConfigProfileInbounds: (route: GetConfigProfileByUuidCommand.RequestParam) => ({
         queryKey: [route]
-    })
+    }),
+    getAllInbounds: {
+        queryKey: null
+    }
 })
 
 export const useGetConfigProfiles = createGetQueryHook({
@@ -62,6 +66,18 @@ export const useGetConfigProfileInbounds = createGetQueryHook({
         staleTime: sToMs(30)
     },
     errorHandler: (error) => errorHandler(error, 'Get Config Profile Inbounds')
+})
+
+export const useGetAllInbounds = createGetQueryHook({
+    endpoint: GetAllInboundsCommand.TSQ_url,
+    responseSchema: GetAllInboundsCommand.ResponseSchema,
+    getQueryKey: () => configProfilesQueryKeys.getAllInbounds.queryKey,
+    rQueryParams: {
+        refetchOnMount: true,
+        staleTime: sToMs(5),
+        refetchInterval: sToMs(5)
+    },
+    errorHandler: (error) => errorHandler(error, 'Get All Inbounds')
 })
 
 export const useGetComputedConfigProfile = createGetQueryHook({

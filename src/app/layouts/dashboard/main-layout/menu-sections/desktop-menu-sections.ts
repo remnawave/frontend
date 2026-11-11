@@ -17,6 +17,7 @@ import {
     TbReportAnalytics,
     TbRoute,
     TbStar,
+    TbTag,
     TbTools,
     TbWebhook
 } from 'react-icons/tb'
@@ -80,6 +81,12 @@ export const useDesktopMenuSections = (): MenuItem[] => {
                         href: ROUTES.DASHBOARD.MANAGEMENT.NODES,
                         icon: HiServer,
                         id: 'nodes-management'
+                    },
+                    {
+                        name: t('constants.inbounds'),
+                        href: ROUTES.DASHBOARD.MANAGEMENT.INBOUNDS,
+                        icon: TbTag,
+                        id: 'inbounds'
                     },
                     {
                         name: `${t('constants.node-plugins')} β`,
