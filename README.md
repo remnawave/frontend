@@ -16,3 +16,7 @@ Thanks to the all contributors who have helped improve Remnawave:
   <img src="https://contrib.rocks/image?repo=remnawave/frontend" />
 </a>
 </p>
+
+## Mesh dashboard
+
+See [Mesh dashboard](docs/mesh.md) and the [companion backend PR](https://github.com/remnawave/backend/pull/237).

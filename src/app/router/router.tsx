@@ -9,6 +9,7 @@ import { HostsPageConnector } from '@pages/dashboard/hosts/ui/connectors'
 import { HttpStatsPageConnector } from '@pages/dashboard/http-stats/ui/connectors/http-stats.page.connector'
 import { HwidInspectorPageConnector } from '@pages/dashboard/hwid-inspector/ui/connectors'
 import { InternalSquadsPageConnector } from '@pages/dashboard/internal-squads/connectors/internal-squads.page.connector'
+import { MeshPageConnector } from '@pages/dashboard/mesh/ui/connectors/mesh.page.connector'
 import { NodePluginEditorPageConnector } from '@pages/dashboard/node-plugins/ui/connectors/node-plugin-editor-page.connector'
 import { NodePluginsBasePageConnector } from '@pages/dashboard/node-plugins/ui/connectors/node-plugins-base-page.connector'
 import { NodesMetricsPageConnector } from '@pages/dashboard/nodes-metrics/ui/connectors'
@@ -63,6 +64,10 @@ const router = createBrowserRouter(
                     <Route element={<OpenEntityPage />} path={ROUTES.DASHBOARD.OPEN_ENTITY} />
 
                     <Route path={ROUTES.DASHBOARD.MANAGEMENT.ROOT}>
+                        <Route
+                            element={<MeshPageConnector />}
+                            path={ROUTES.DASHBOARD.MANAGEMENT.MESH}
+                        />
                         <Route
                             element={<Navigate replace to={ROUTES.DASHBOARD.MANAGEMENT.USERS} />}
                             index
