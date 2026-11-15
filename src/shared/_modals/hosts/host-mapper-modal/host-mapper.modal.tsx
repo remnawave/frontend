@@ -28,10 +28,11 @@ const EMPTY_MAPPER = JSON.stringify({ xrayJson: [], mihomo: [], base64: [] }, nu
 interface IProps {
     form: THostForm
     rawInbound?: unknown
+    srrRuleNames?: string[]
 }
 
 export const HostMapperModal = NiceModal.create((props: IProps) => {
-    const { form, rawInbound } = props
+    const { form, rawInbound, srrRuleNames } = props
 
     const modal = useModal()
     const { modalProps, hide } = useNiceMantineModal({ modal })
@@ -42,6 +43,7 @@ export const HostMapperModal = NiceModal.create((props: IProps) => {
     const monaco = useMonaco()
     const monacoRef = useRef<Monaco | null>(null)
     const editorRef = useRef<editor.IStandaloneCodeEditor | null>(null)
+    const markersRef = useRef<editor.IMarker[]>([])
 
     const [error, setError] = useState<null | string>(null)
 
@@ -55,8 +57,8 @@ export const HostMapperModal = NiceModal.create((props: IProps) => {
     useEffect(() => {
         if (!monaco) return
 
-        MonacoSetupHostMapperEditorFeature.setup(rawInbound)
-    }, [monaco, rawInbound])
+        MonacoSetupHostMapperEditorFeature.setup(rawInbound, srrRuleNames)
+    }, [monaco, rawInbound, srrRuleNames])
 
     const handleSave = () => {
         if (!editorRef.current) return
@@ -74,7 +76,7 @@ export const HostMapperModal = NiceModal.create((props: IProps) => {
         try {
             parsed = JSON.parse(currentValue)
         } catch {
-            setError(t('common.message.invalid-json'))
+            setError(formatFirstErrorMarker(markersRef.current) ?? t('common.message.invalid-json'))
             return
         }
 
@@ -123,7 +125,9 @@ export const HostMapperModal = NiceModal.create((props: IProps) => {
                         defaultLanguage="json"
                         value={initialValue}
                         onChange={() => setError(null)}
-                        onValidate={(markers) => setError(formatFirstErrorMarker(markers))}
+                        onValidate={(markers) => {
+                            markersRef.current = markers
+                        }}
                         onMount={(editor, monaco) => {
                             editorRef.current = editor
                             monacoRef.current = monaco

@@ -130,6 +130,34 @@ const collectInboundPaths = (
     }
 }
 
+const RAW_SRR_RULE_NAME = 'RAW'
+
+const injectSrrRuleNames = (node: unknown, srrRuleNames: string[]): void => {
+    if (!node || typeof node !== 'object') return
+
+    if (Array.isArray(node)) {
+        node.forEach((item) => injectSrrRuleNames(item, srrRuleNames))
+        return
+    }
+
+    const schemaNode = node as Record<string, unknown>
+    const properties = schemaNode.properties as
+        | Record<string, { items?: Record<string, unknown> }>
+        | undefined
+    const srrRuleItems = properties?.srrRule?.items
+
+    if (srrRuleItems) {
+        const names = [...new Set([...srrRuleNames, RAW_SRR_RULE_NAME])]
+
+        srrRuleItems.enum = names
+        srrRuleItems.markdownEnumDescriptions = names.map((name) =>
+            name === RAW_SRR_RULE_NAME ? 'Raw subscription endpoint.' : `Response rule **${name}**.`
+        )
+    }
+
+    Object.values(schemaNode).forEach((value) => injectSrrRuleNames(value, srrRuleNames))
+}
+
 const injectInboundPaths = (schema: unknown, rawInbound: unknown) => {
     const collected = new Map<string, unknown>()
     collectInboundPaths(rawInbound, '', 0, collected)
@@ -459,11 +487,15 @@ export const MonacoSetupResponseRulesFeature = {
 }
 
 export const MonacoSetupHostMapperEditorFeature = {
-    setup: async (rawInbound?: unknown) => {
+    setup: async (rawInbound?: unknown, srrRuleNames: string[] = []) => {
         try {
             const schema = HostMapperSchema.toJSONSchema({ target: 'draft-07' })
 
             injectInboundPaths(schema, rawInbound)
+
+            if (srrRuleNames.length > 0) {
+                injectSrrRuleNames(schema, srrRuleNames)
+            }
 
             registerJsonSchema(
                 {

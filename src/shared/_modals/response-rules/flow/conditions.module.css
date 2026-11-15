@@ -1,0 +1,194 @@
+.group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.row {
+    display: grid;
+    grid-template-columns: 52px minmax(0, 1fr);
+    align-items: baseline;
+    column-gap: var(--mantine-spacing-xs);
+}
+
+.joiner {
+    color: var(--mantine-color-dimmed);
+    font-size: var(--mantine-font-size-xs);
+    text-align: right;
+}
+
+.joinerAnd {
+    color: var(--mantine-color-teal-5);
+}
+
+.joinerOr {
+    color: var(--mantine-color-grape-4);
+}
+
+.nested {
+    padding: var(--mantine-spacing-xs) var(--mantine-spacing-sm) var(--mantine-spacing-xs) 0;
+    border-radius: var(--mantine-radius-md);
+    background-color: var(--mantine-color-dark-6);
+}
+
+.sentence {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 4px 8px;
+    min-width: 0;
+    font-size: var(--mantine-font-size-sm);
+    line-height: 1.6;
+}
+
+.header {
+    color: var(--mantine-color-cyan-4);
+    font-family: var(--mantine-font-family-monospace);
+    font-weight: 600;
+}
+
+.operator {
+    color: var(--mantine-color-dimmed);
+}
+
+.token {
+    max-width: 100%;
+    padding: 0 6px;
+    border-radius: var(--mantine-radius-sm);
+    background-color: var(--mantine-color-dark-5);
+    color: var(--mantine-color-bright);
+    font-family: var(--mantine-font-family-monospace);
+    overflow-wrap: anywhere;
+}
+
+.note {
+    color: var(--mantine-color-yellow-5);
+    font-size: var(--mantine-font-size-xs);
+}
+
+.summary {
+    display: flex;
+    align-items: baseline;
+    gap: var(--mantine-spacing-xs);
+    min-width: 0;
+}
+
+.flowCanvas {
+    height: 65vh;
+    min-height: 360px;
+    overflow: hidden;
+    border: 1px solid var(--mantine-color-dark-4);
+    border-radius: var(--mantine-radius-md);
+}
+
+.flowHidden {
+    visibility: hidden;
+}
+
+.flow :global(.react-flow__handle) {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.flowEdgeLabel {
+    position: absolute;
+    padding: 0 4px;
+    border-radius: var(--mantine-radius-sm);
+    background-color: var(--mantine-color-body);
+    font-family: var(--mantine-font-family-monospace);
+    font-size: 10px;
+    font-weight: 600;
+    line-height: 1.4;
+    pointer-events: none;
+}
+
+.flowCheck {
+    max-width: 320px;
+    padding: 8px 12px;
+    border: 1px solid var(--mantine-color-dark-4);
+    border-radius: var(--mantine-radius-md);
+    background-color: var(--mantine-color-dark-6);
+}
+
+.flowTerminal {
+    padding: 4px 12px;
+    border: 1px solid var(--mantine-color-dark-4);
+    border-radius: 999px;
+    background-color: var(--mantine-color-dark-6);
+    font-family: var(--mantine-font-family-monospace);
+    font-size: var(--mantine-font-size-xs);
+    white-space: nowrap;
+}
+
+.flowTerminal_start {
+    color: var(--mantine-color-dimmed);
+}
+
+.flowTerminal_match {
+    border-color: var(--mantine-color-teal-6);
+    color: var(--mantine-color-teal-4);
+    font-weight: 600;
+}
+
+.flowTerminal_next {
+    border-style: dashed;
+    color: var(--mantine-color-dimmed);
+}
+
+.flowCanvasLarge {
+    height: 75vh;
+    min-height: 420px;
+    overflow: hidden;
+    border: 1px solid var(--mantine-color-dark-4);
+    border-radius: var(--mantine-radius-md);
+}
+
+.flowFrame {
+    border: 1px solid var(--mantine-color-dark-4);
+    border-radius: var(--mantine-radius-lg);
+    background-color: rgb(255 255 255 / 1.5%);
+}
+
+.flowFrameUnreachable {
+    border-style: dashed;
+    opacity: 0.5;
+}
+
+.flowFrameHeader {
+    display: flex;
+    align-items: baseline;
+    gap: var(--mantine-spacing-xs);
+    height: 32px;
+    padding: 8px 14px 0;
+    overflow: hidden;
+    font-size: var(--mantine-font-size-sm);
+    white-space: nowrap;
+}
+
+.flowFrameIndex {
+    color: var(--mantine-color-cyan-4);
+    font-family: var(--mantine-font-family-monospace);
+    font-weight: 700;
+}
+
+.flowFrameName {
+    overflow: hidden;
+    color: var(--mantine-color-bright);
+    font-weight: 600;
+    text-overflow: ellipsis;
+}
+
+.flowFrameType {
+    color: var(--mantine-color-dimmed);
+    font-family: var(--mantine-font-family-monospace);
+    font-size: var(--mantine-font-size-xs);
+}
+
+.flowFrameNote {
+    color: var(--mantine-color-yellow-5);
+    font-size: var(--mantine-font-size-xs);
+}
+
+.flowDimmed {
+    opacity: 0.45;
+}

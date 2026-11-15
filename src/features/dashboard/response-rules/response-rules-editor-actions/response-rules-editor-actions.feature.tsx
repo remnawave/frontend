@@ -36,6 +36,7 @@ import { QueryKeys, useUpdateSubscriptionSettings } from '@shared/api/hooks'
 import { useIsMobile } from '@shared/hooks'
 import { useDownloadTemplate } from '@shared/ui/load-templates/use-download-template'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
+import { formatEditorAsCompactJson, stringifyCompactJson } from '@shared/utils/monaco/compact-json'
 
 import { useToken } from '@entities/auth/session-store/use-session-store'
 
@@ -72,7 +73,7 @@ export function ResponseRulesEditorActionsFeature(props: Props) {
 
                     setIsResponseRulesValid(true)
 
-                    const newValue = JSON.stringify(updatedResponseRules.responseRules, null, 2)
+                    const newValue = stringifyCompactJson(updatedResponseRules.responseRules)
 
                     if (editorRef.current) {
                         editorRef.current.setValue(newValue)
@@ -187,7 +188,7 @@ export function ResponseRulesEditorActionsFeature(props: Props) {
     const formatDocument = () => {
         if (!editorRef.current) return
 
-        editorRef.current.getAction('editor.action.formatDocument')?.run()
+        formatEditorAsCompactJson(editorRef.current)
     }
 
     const handleOpenDebugger = () => {

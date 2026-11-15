@@ -9,7 +9,7 @@ import { useHostFormData } from '../host-form-data.context'
 import { useHostOptions } from '../host-options.context'
 
 export function MapperOption() {
-    const { form, resolveSelectedRawInbound } = useHostFormData()
+    const { form, resolveSelectedRawInbound, srrRuleNames } = useHostFormData()
     const { isValueSet } = useHostOptions()
     const { t } = useTranslation()
     const rowControl = useSettingsRowControl()
@@ -21,7 +21,8 @@ export function MapperOption() {
             onClick={() => {
                 showModal('hosts_hostMapperModal', {
                     form,
-                    rawInbound: resolveSelectedRawInbound()
+                    rawInbound: resolveSelectedRawInbound(),
+                    srrRuleNames
                 })
             }}
             rightSection={<TbPencil size={14} />}

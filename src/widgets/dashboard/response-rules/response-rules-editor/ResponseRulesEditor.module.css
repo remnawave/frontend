@@ -23,3 +23,51 @@
     width: 100%;
     z-index: 50;
 }
+
+.ruleSeparator {
+    display: flex;
+    align-items: center;
+    gap: var(--mantine-spacing-xs);
+    height: 100%;
+    padding-right: var(--mantine-spacing-md);
+    font-family: var(--mantine-font-family-monospace);
+    font-size: var(--mantine-font-size-xs);
+    line-height: 1;
+    white-space: nowrap;
+    pointer-events: none;
+    user-select: none;
+}
+
+.ruleSeparatorIndex {
+    color: var(--mantine-color-cyan-4);
+    font-weight: 700;
+}
+
+.ruleSeparatorName {
+    overflow: hidden;
+    max-width: 48ch;
+    color: var(--mantine-color-bright);
+    font-weight: 600;
+    text-overflow: ellipsis;
+}
+
+.ruleSeparatorLine {
+    flex: 1;
+    min-width: var(--mantine-spacing-md);
+    border-top: 1px solid var(--mantine-color-dark-4);
+}
+
+.ruleSeparatorType {
+    color: var(--mantine-color-dimmed);
+    letter-spacing: 0.04em;
+}
+
+.ruleSeparatorDisabled {
+    opacity: 0.55;
+}
+
+.ruleSeparatorDisabled .ruleSeparatorIndex,
+.ruleSeparatorDisabled .ruleSeparatorName {
+    color: var(--mantine-color-dimmed);
+    text-decoration: line-through;
+}

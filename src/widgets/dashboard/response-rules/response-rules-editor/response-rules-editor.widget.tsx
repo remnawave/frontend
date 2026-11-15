@@ -11,15 +11,19 @@ import { useTranslation } from 'react-i18next'
 import { TbAlertTriangle } from 'react-icons/tb'
 import { useBlocker } from 'react-router'
 
+import { showModal } from '@shared/_modals/show-modal'
 import { usePseudoFullscreen, useViewportFillHeight } from '@shared/hooks'
 import { CodeEditor, editorClasses, EditorFooter, EditorStatusBar } from '@shared/ui/code-editor'
 import { fullscreenClasses, FullscreenToggleButton } from '@shared/ui/fullscreen-toggle-button'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { preventBackScroll } from '@shared/utils/misc'
+import { formatEditorAsCompactJson, stringifyCompactJson } from '@shared/utils/monaco/compact-json'
 import { setupSuggestWidget } from '@shared/utils/setup-monaco/setup-suggest-monaco'
 
+import { setupConditionsCodeLens } from './conditions-code-lens'
 import { IProps } from './interfaces'
 import styles from './ResponseRulesEditor.module.css'
+import { setupRuleSeparators } from './rule-separators'
 
 export function ResponseRulesEditorWidget(props: IProps) {
     const { t } = useTranslation()
@@ -34,9 +38,7 @@ export function ResponseRulesEditorWidget(props: IProps) {
     const [result, setResult] = useState('')
     const [isConfigValid, setIsConfigValid] = useState(false)
     const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false)
-    const [originalValue, setOriginalValue] = useState<string>(
-        JSON.stringify(responseRules, null, 2) || ''
-    )
+    const [originalValue, setOriginalValue] = useState<string>(stringifyCompactJson(responseRules))
 
     const editorRef = useRef<editor.IStandaloneCodeEditor | null>(null)
     const monacoRef = useRef<Monaco | null>(null)
@@ -149,9 +151,26 @@ export function ResponseRulesEditorWidget(props: IProps) {
                         monacoRef.current = monaco
 
                         setupSuggestWidget(editor)
+                        setupRuleSeparators(editor)
+                        setupConditionsCodeLens(editor, monaco, {
+                            onOpenOverview: (rules) =>
+                                showModal('responseRules_rulesOverviewModal', { rules }),
+                            onOpenRule: (rule, index) =>
+                                showModal('responseRules_ruleConditionsModal', { rule, index })
+                        })
+
+                        editor.addAction({
+                            id: 'remnawave.format-compact-json',
+                            label: 'Format Document',
+                            keybindings: [
+                                monaco.KeyMod.Shift | monaco.KeyMod.Alt | monaco.KeyCode.KeyF
+                            ],
+                            contextMenuGroupId: '1_modification',
+                            run: () => formatEditorAsCompactJson(editor)
+                        })
                     }}
                     path="response-rules://*"
-                    value={JSON.stringify(responseRules, null, 2)}
+                    value={stringifyCompactJson(responseRules)}
                 />
             </Paper>
 

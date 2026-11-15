@@ -38,6 +38,7 @@ import {
     NodeSshTerminalWindow
 } from './nodes'
 import { PasskeysDrawer } from './remnawave-settings'
+import { RuleConditionsModal, RulesOverviewModal } from './response-rules'
 import { SharedListEditorModal, SharedListsModal } from './shared-lists'
 import { SnippetsModal } from './snippets'
 import {
@@ -133,6 +134,9 @@ export const MODAL_REGISTRY = {
     sharedLists_sharedListEditorModal: SharedListEditorModal,
 
     snippets_snippetsModal: SnippetsModal,
+
+    responseRules_ruleConditionsModal: RuleConditionsModal,
+    responseRules_rulesOverviewModal: RulesOverviewModal,
 
     rwSettings_passkeysDrawer: PasskeysDrawer
 } as const
