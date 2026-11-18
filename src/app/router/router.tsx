@@ -8,6 +8,7 @@ import { HomePageConnector } from '@pages/dashboard/home/connectors'
 import { HostsPageConnector } from '@pages/dashboard/hosts/ui/connectors'
 import { HttpStatsPageConnector } from '@pages/dashboard/http-stats/ui/connectors/http-stats.page.connector'
 import { HwidInspectorPageConnector } from '@pages/dashboard/hwid-inspector/ui/connectors'
+import { InboundsPageConnector } from '@pages/dashboard/inbounds/connectors'
 import { InternalSquadsPageConnector } from '@pages/dashboard/internal-squads/connectors/internal-squads.page.connector'
 import { NodePluginEditorPageConnector } from '@pages/dashboard/node-plugins/ui/connectors/node-plugin-editor-page.connector'
 import { NodePluginsBasePageConnector } from '@pages/dashboard/node-plugins/ui/connectors/node-plugins-base-page.connector'
@@ -94,6 +95,10 @@ const router = createBrowserRouter(
                         <Route
                             element={<ConfigProfileByUuidPageConnector />}
                             path={ROUTES.DASHBOARD.MANAGEMENT.CONFIG_PROFILE_BY_UUID}
+                        />
+                        <Route
+                            element={<InboundsPageConnector />}
+                            path={ROUTES.DASHBOARD.MANAGEMENT.INBOUNDS}
                         />
                         <Route
                             element={<InternalSquadsPageConnector />}
