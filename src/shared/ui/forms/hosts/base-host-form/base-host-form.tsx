@@ -16,7 +16,11 @@ import {
     UpdateHostCommand,
     UpdateManyHostsCommand
 } from '@remnawave/backend-contract'
-import { INTERNAL_SQUADS_MODE, SECURITY_LAYERS } from '@remnawave/backend-contract'
+import {
+    INTERNAL_SQUADS_MODE,
+    SECURITY_LAYERS,
+    SUBSCRIPTION_TEMPLATE_TYPE
+} from '@remnawave/backend-contract'
 import { useCallback, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { HiQuestionMarkCircle } from 'react-icons/hi'
@@ -81,10 +85,30 @@ export const BaseHostForm = <
 
     const hostJsonFields = useMemo(() => getHostJsonFields(t), [t])
 
+    const hostResponseRules = useMemo(() => {
+        const templateTypes = new Set<string>(Object.values(SUBSCRIPTION_TEMPLATE_TYPE))
+
+        return responseRules.filter((rule) => templateTypes.has(rule.responseType))
+    }, [responseRules])
+
     const srrRuleNames = useMemo(
-        () => [...new Set(responseRules.map((rule) => rule.name))],
-        [responseRules]
+        () => [...new Set(hostResponseRules.map((rule) => rule.name))],
+        [hostResponseRules]
     )
+
+    const srrRuleResponseTypes = useMemo(() => {
+        const responseTypes = new Map<string, Set<string>>()
+
+        for (const rule of hostResponseRules) {
+            const types = responseTypes.get(rule.name) ?? new Set<string>()
+            types.add(rule.responseType)
+            responseTypes.set(rule.name, types)
+        }
+
+        return Object.fromEntries(
+            [...responseTypes].map(([name, types]) => [name, [...types].join(', ')])
+        )
+    }, [hostResponseRules])
 
     const securityLayerLabels = {
         [SECURITY_LAYERS.TLS]: t('base-host-form.tls-transport-layer-security'),
@@ -233,6 +257,7 @@ export const BaseHostForm = <
         resolveSelectedRawInbound,
         securityLayerLabels,
         srrRuleNames,
+        srrRuleResponseTypes,
         subscriptionTemplates,
         tagsInputProps
     }

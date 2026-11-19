@@ -29,6 +29,7 @@ export interface IHostFormData {
     resolveSelectedRawInbound: () => unknown
     securityLayerLabels: Record<string, string>
     srrRuleNames: string[]
+    srrRuleResponseTypes: Record<string, string>
     subscriptionTemplates: GetSubscriptionTemplatesCommand.Response['response']['templates']
     tagsInputProps: GetInputPropsReturnType
 }
