@@ -8,6 +8,7 @@ export interface IActions {
         resetState: () => void
         setExperimentalFeature: (feature: keyof IExperimentalFeatures, enabled: boolean) => void
         setHostsActiveTag: (tag: null | string) => void
+        setHostsActiveSrrRule: (rule: null | string) => void
         setLauncherPosition: (position: ILauncherPosition) => void
         setLauncherColumns: (columns: null | number) => void
         setHostsViewMode: (mode: HOSTS_VIEW_MODE) => void

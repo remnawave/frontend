@@ -15,6 +15,7 @@ export interface IState {
     launcherColumns: null | number
     quickLinks: TQuickLink[]
     hostsActiveTag: null | string
+    hostsActiveSrrRule: null | string
     hostsViewMode: HOSTS_VIEW_MODE
     nodesActiveTag: null | string
     nodesViewMode: NODES_VIEW_MODE

@@ -148,7 +148,7 @@ export const NodesTableWidget = memo((props: IProps) => {
                 if (newIds === ids) return prev
 
                 const nodesByUuid = new Map(prev.map((node) => [node.uuid, node]))
-                return newIds.map((uuid) => nodesByUuid.get(uuid)!)
+                return newIds.map((uuid: string) => nodesByUuid.get(uuid)!)
             })
         },
         [handlers]

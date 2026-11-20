@@ -9,11 +9,18 @@ interface ITaggable {
     tags?: null | string[]
 }
 
-interface IProps {
+type TGetTags<T> = (item: T) => null | readonly string[] | undefined
+
+interface IProps<T> {
     activeTag: null | string
-    items: readonly ITaggable[] | undefined
+    getTags?: TGetTags<T>
+    items: readonly T[] | undefined
     onChange: (tag: null | string) => void
+    tagIcon?: React.ReactNode
+    withUntagged?: boolean
 }
+
+const getItemTags = (item: unknown) => (item as ITaggable).tags
 
 interface ITabProps {
     count: number
@@ -49,8 +56,15 @@ function FilterTab(props: ITabProps) {
     )
 }
 
-export function TagFilterBar(props: IProps) {
-    const { activeTag, items, onChange } = props
+export function TagFilterBar<T>(props: IProps<T>) {
+    const {
+        activeTag,
+        getTags = getItemTags,
+        items,
+        onChange,
+        tagIcon = <TbTag size={16} />,
+        withUntagged = true
+    } = props
     const { t } = useTranslation()
 
     const { tags, tagCounts, untaggedCount } = useMemo(() => {
@@ -58,7 +72,7 @@ export function TagFilterBar(props: IProps) {
         let untagged = 0
 
         ;(items ?? []).forEach((item) => {
-            const itemTags = item.tags ?? []
+            const itemTags = getTags(item) ?? []
             if (itemTags.length === 0) {
                 untagged += 1
                 return
@@ -71,7 +85,7 @@ export function TagFilterBar(props: IProps) {
             tagCounts: countMap,
             untaggedCount: untagged
         }
-    }, [items])
+    }, [items, getTags])
 
     useEffect(() => {
         if (activeTag === null) return
@@ -107,7 +121,7 @@ export function TagFilterBar(props: IProps) {
                 {tags.map((tag) => (
                     <FilterTab
                         count={tagCounts.get(tag) ?? 0}
-                        icon={<TbTag size={16} />}
+                        icon={tagIcon}
                         isActive={activeTag === tag}
                         key={tag}
                         label={tag}
@@ -115,7 +129,7 @@ export function TagFilterBar(props: IProps) {
                     />
                 ))}
 
-                {untaggedCount > 0 && (
+                {withUntagged && untaggedCount > 0 && (
                     <FilterTab
                         count={untaggedCount}
                         icon={<TbTagOff size={16} />}
@@ -129,12 +143,13 @@ export function TagFilterBar(props: IProps) {
     )
 }
 
-export function filterByTag<T extends { tags?: null | string[] }>(
+export function filterByTag<T>(
     items: T[],
-    activeTag: null | string
+    activeTag: null | string,
+    getTags: TGetTags<T> = getItemTags
 ): T[] {
     if (activeTag === null) return items
-    if (activeTag === NO_TAG) return items.filter((item) => (item.tags ?? []).length === 0)
+    if (activeTag === NO_TAG) return items.filter((item) => (getTags(item) ?? []).length === 0)
 
-    return items.filter((item) => (item.tags ?? []).includes(activeTag))
+    return items.filter((item) => (getTags(item) ?? []).includes(activeTag))
 }

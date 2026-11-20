@@ -11,15 +11,18 @@ import { Box, Container, Stack } from '@mantine/core'
 import { GetHostsCommand } from '@remnawave/backend-contract'
 import { useWindowVirtualizer } from '@tanstack/react-virtual'
 import { HostCardWidget } from '@widgets/dashboard/hosts/host-card'
-import { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { TbListCheck } from 'react-icons/tb'
+import { memo, useCallback, useLayoutEffect, useMemo, useRef, useState } from 'react'
+import { TbListCheck, TbRoute } from 'react-icons/tb'
 
 import { useGetNodes } from '@shared/api/hooks'
 import { useIsMobile } from '@shared/hooks'
-import { filterByTag, TagFilterBar } from '@shared/ui'
+import { TagFilterBar } from '@shared/ui'
 import { EmptyPageLayout } from '@shared/ui/layouts/empty-page'
 
 import {
+    filterHosts,
+    getHostSrrRules,
+    useHostsActiveSrrRule,
     useHostsActiveTag,
     useViewPreferencesStoreActions
 } from '@entities/dashboard/view-preferences-store'
@@ -47,17 +50,21 @@ export const HostsTableWidget = memo((props: IProps) => {
     const isMobile = useIsMobile()
 
     const activeTag = useHostsActiveTag()
-    const { setHostsActiveTag } = useViewPreferencesStoreActions()
+    const activeSrrRule = useHostsActiveSrrRule()
+    const { setHostsActiveSrrRule, setHostsActiveTag } = useViewPreferencesStoreActions()
 
     const { data: nodes } = useGetNodes()
 
-    const visibleState = useMemo(() => filterByTag(state, activeTag), [state, activeTag])
+    const visibleState = useMemo(
+        () => filterHosts(state, activeTag, activeSrrRule),
+        [state, activeTag, activeSrrRule]
+    )
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         if (listRef.current) {
             setScrollMargin(listRef.current.offsetTop)
         }
-    }, [])
+    }, [hosts])
 
     const virtualizer = useWindowVirtualizer({
         count: visibleState.length,
@@ -90,7 +97,7 @@ export const HostsTableWidget = memo((props: IProps) => {
                 if (newIds === ids) return prev
 
                 const hostsByUuid = new Map(prev.map((host) => [host.uuid, host]))
-                return newIds.map((uuid) => hostsByUuid.get(uuid)!)
+                return newIds.map((uuid: string) => hostsByUuid.get(uuid)!)
             })
         },
         [handlers]
@@ -132,6 +139,15 @@ export const HostsTableWidget = memo((props: IProps) => {
             {hosts.length === 0 && <EmptyPageLayout icon={<TbListCheck size={32} />} />}
 
             <TagFilterBar activeTag={activeTag} items={hosts} onChange={setHostsActiveTag} />
+
+            <TagFilterBar
+                activeTag={activeSrrRule}
+                getTags={getHostSrrRules}
+                items={hosts}
+                onChange={setHostsActiveSrrRule}
+                tagIcon={<TbRoute size={16} />}
+                withUntagged={false}
+            />
 
             {hosts.length > 0 && (
                 <DragDropProvider

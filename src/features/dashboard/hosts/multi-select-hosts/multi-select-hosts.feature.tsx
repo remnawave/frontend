@@ -32,9 +32,12 @@ import {
     useBulkDeleteHosts,
     useBulkDisableHosts
 } from '@shared/api/hooks/hosts/hosts.mutation.hooks'
-import { filterByTag } from '@shared/ui'
 
-import { useHostsActiveTag } from '@entities/dashboard/view-preferences-store'
+import {
+    filterHosts,
+    useHostsActiveSrrRule,
+    useHostsActiveTag
+} from '@entities/dashboard/view-preferences-store'
 
 import { IProps } from './interfaces/props.interface'
 
@@ -47,6 +50,7 @@ export const MultiSelectHostsFeature = (props: IProps) => {
 
     const { refetch: refetchHosts } = useGetHosts()
     const activeTag = useHostsActiveTag()
+    const activeSrrRule = useHostsActiveSrrRule()
 
     useEffect(() => {
         if (!hosts) return
@@ -84,7 +88,9 @@ export const MultiSelectHostsFeature = (props: IProps) => {
     const { mutateAsync: cloneHost } = useCloneHost()
 
     const selectAllHosts = () => {
-        setSelectedHosts(filterByTag(hosts ?? [], activeTag).map((host) => host.uuid))
+        setSelectedHosts(
+            filterHosts(hosts ?? [], activeTag, activeSrrRule).map((host) => host.uuid)
+        )
     }
 
     const clearSelection = () => {
@@ -227,7 +233,7 @@ export const MultiSelectHostsFeature = (props: IProps) => {
                                     </Group>
                                 </Group>
 
-                                {activeTag === null && (
+                                {activeTag === null && activeSrrRule === null && (
                                     <ActionIcon.Group style={{ width: '100%' }}>
                                         <Tooltip label="Move to top" withArrow>
                                             <ActionIcon

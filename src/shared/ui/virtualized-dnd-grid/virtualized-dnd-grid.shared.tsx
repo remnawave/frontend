@@ -67,7 +67,7 @@ export function VirtualizedDndGrid<T extends { uuid: string }>(props: Virtualize
             if (newIds === ids) return prev
 
             const itemsByUuid = new Map(prev.map((item) => [item.uuid, item]))
-            return newIds.map((uuid) => itemsByUuid.get(uuid)!)
+            return newIds.map((uuid: string) => itemsByUuid.get(uuid)!)
         })
     }
 
