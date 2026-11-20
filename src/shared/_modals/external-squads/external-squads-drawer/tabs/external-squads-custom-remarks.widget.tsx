@@ -10,7 +10,7 @@ import { PiClockCountdown, PiClockUser, PiListChecks, PiProhibit } from 'react-i
 import { TbDeviceFloppy, TbDevices2, TbListLetters, TbX } from 'react-icons/tb'
 
 import { queryClient } from '@shared/api'
-import { QueryKeys, useUpdateExternalSquad } from '@shared/api/hooks'
+import { QueryKeys, useGetSubscriptionSettings, useUpdateExternalSquad } from '@shared/api/hooks'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 
 interface IProps {
@@ -26,6 +26,27 @@ const DEFAULT_REMARKS = {
     HWIDNotSupported: ['🚫 HWID: Not Supported']
 }
 
+const processRemarks = (remarksData: string | string[] | undefined): string[] => {
+    if (!remarksData) return ['']
+    if (typeof remarksData === 'string') {
+        return remarksData.split('\n').filter(Boolean).length > 0
+            ? remarksData.split('\n').filter(Boolean)
+            : ['']
+    }
+    return Array.isArray(remarksData) && remarksData.length > 0 ? remarksData : ['']
+}
+
+const toFormRemarks = (
+    customRemarks: NonNullable<IProps['externalSquad']['customRemarks']>
+): Record<string, string[]> => ({
+    expired: processRemarks(customRemarks.expiredUsers),
+    limited: processRemarks(customRemarks.limitedUsers),
+    disabled: processRemarks(customRemarks.disabledUsers),
+    emptyHosts: processRemarks(customRemarks.emptyHosts),
+    HWIDMaxDevicesExceeded: processRemarks(customRemarks.HWIDMaxDevicesExceeded),
+    HWIDNotSupported: processRemarks(customRemarks.HWIDNotSupported)
+})
+
 export const ExternalSquadsCustomRemarksTabWidget = (props: IProps) => {
     const { externalSquad } = props
     const { t } = useTranslation()
@@ -40,29 +61,13 @@ export const ExternalSquadsCustomRemarksTabWidget = (props: IProps) => {
         HWIDNotSupported: DEFAULT_REMARKS.HWIDNotSupported
     })
 
+    const { data: subscriptionSettings } = useGetSubscriptionSettings()
+
     useEffect(() => {
         const currentRemarks = externalSquad.customRemarks
         if (currentRemarks) {
             setIsOverrideEnabled(true)
-
-            const processRemarks = (remarksData: string | string[] | undefined): string[] => {
-                if (!remarksData) return ['']
-                if (typeof remarksData === 'string') {
-                    return remarksData.split('\n').filter(Boolean).length > 0
-                        ? remarksData.split('\n').filter(Boolean)
-                        : ['']
-                }
-                return Array.isArray(remarksData) && remarksData.length > 0 ? remarksData : ['']
-            }
-
-            setRemarks({
-                expired: processRemarks(currentRemarks.expiredUsers),
-                limited: processRemarks(currentRemarks.limitedUsers),
-                disabled: processRemarks(currentRemarks.disabledUsers),
-                emptyHosts: processRemarks(currentRemarks.emptyHosts),
-                HWIDMaxDevicesExceeded: processRemarks(currentRemarks.HWIDMaxDevicesExceeded),
-                HWIDNotSupported: processRemarks(currentRemarks.HWIDNotSupported)
-            })
+            setRemarks(toFormRemarks(currentRemarks))
         } else {
             setIsOverrideEnabled(false)
             setRemarks({
@@ -191,6 +196,10 @@ export const ExternalSquadsCustomRemarksTabWidget = (props: IProps) => {
     }
 
     const handleToggleOverride = (checked: boolean) => {
+        // Prefill on toggle rather than in the effect, so a late settings response can't wipe edits
+        if (checked && !externalSquad.customRemarks && subscriptionSettings?.customRemarks) {
+            setRemarks(toFormRemarks(subscriptionSettings.customRemarks))
+        }
         setIsOverrideEnabled(checked)
     }
 
