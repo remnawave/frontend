@@ -222,6 +222,26 @@ export const BaseHostForm = <
                                     </Text>
                                 </Stack>
                             )}
+
+                            {showWildcard && (
+                                <Stack gap={0}>
+                                    <Text fw={600} mb={4} size="sm">
+                                        {t('base-host-form.random-tokens')}
+                                    </Text>
+                                    <Text c="dimmed" mb={6} size="xs">
+                                        {t('base-host-form.random-tokens-description')}
+                                    </Text>
+                                    <Text c="blue" ff="monospace" size="xs">
+                                        {'{hex:8}.node.com'}
+                                    </Text>
+                                    <Text c="blue" ff="monospace" size="xs">
+                                        {'{alpha:4}-{digits:3}.node.com'}
+                                    </Text>
+                                    <Text c="blue" ff="monospace" size="xs">
+                                        {'{pick:hel|ams}{range:01-20}.node.com'}
+                                    </Text>
+                                </Stack>
+                            )}
                         </Stack>
                     </Stack>
                 </Popover.Dropdown>
