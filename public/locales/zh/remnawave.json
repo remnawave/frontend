@@ -335,6 +335,8 @@
     "multi-domain-description": "多个域名用逗号分隔。Remnawave将随机选择其中一个域名。",
     "wildcard-domain": "通配符域名",
     "wildcard-domain-description": "子域的通配符模式。Remnawave将以 * 替换为随机生成的字符串。",
+    "random-tokens": "Random tokens",
+    "random-tokens-description": "Remnawave replaces {nanoid:N}, {alpha:N}, {digits:N} and {hex:N} with N random characters (1–63), {uuid} with a random UUID, {range:1-20} with a random number (a leading zero keeps the width: {range:01-20}) and {pick:a|b|c} with one of the options. * is the same as {nanoid:10}.",
     "override-sni-from-address": "从地址覆盖SNI地址",
     "override-sni-from-address-description": "此选项用指定的地址字段值替换SNI值。这对于多域名配置或通配符域配置特别有用。",
     "shuffled-hosts-hover-card": "随机排序的主机将放置在列表的顶端。",

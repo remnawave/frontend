@@ -335,6 +335,8 @@
     "multi-domain-description": "Несколько доменов через запятую. Remnawave будет выбирать один из них случайным образом.",
     "wildcard-domain": "Wildcard-домен",
     "wildcard-domain-description": "Wildcard-шаблон для поддоменов. Remnawave подставит вместо * случайную строку.",
+    "random-tokens": "Random tokens",
+    "random-tokens-description": "Remnawave replaces {nanoid:N}, {alpha:N}, {digits:N} and {hex:N} with N random characters (1–63), {uuid} with a random UUID, {range:1-20} with a random number (a leading zero keeps the width: {range:01-20}) and {pick:a|b|c} with one of the options. * is the same as {nanoid:10}.",
     "override-sni-from-address": "Брать SNI из адреса",
     "override-sni-from-address-description": "Подставляет в SNI значение поля «Адрес». Особенно полезно для конфигураций с несколькими доменами или wildcard-доменом.",
     "shuffled-hosts-hover-card": "Перемешанные хосты встанут в начало списка и будут отсортированы случайным образом.",
