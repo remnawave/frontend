@@ -335,6 +335,8 @@
     "multi-domain-description": "چندین دامنه که با کاما (,) جدا شده‌اند، Remnawave یکی از دامنه‌ها را به صورت تصادفی انتخاب خواهد کرد.",
     "wildcard-domain": "دامنه wildcard",
     "wildcard-domain-description": "الگوی wildcard برای دامنه. Remnawave به جای * یک رشته متنی رندوم جایگذاری خواهد کرد",
+    "random-tokens": "Random tokens",
+    "random-tokens-description": "Remnawave replaces {nanoid:N}, {alpha:N}, {digits:N} and {hex:N} with N random characters (1–63), {uuid} with a random UUID, {range:1-20} with a random number (a leading zero keeps the width: {range:01-20}) and {pick:a|b|c} with one of the options. * is the same as {nanoid:10}.",
     "override-sni-from-address": "بازنویسی SNI از آدرس دامنه",
     "override-sni-from-address-description": "این گزینه مقدار SNI را با آدرس مشخص شده جایگزین خواهد کرد که برای کانفیگ‌های چند دامنه‌ای و wildcard قابل استفاده می‌باشد",
     "shuffled-hosts-hover-card": "هاست‌های به هم زده شده در بالای لیست قرار گرفته و به صورت تصادفی مرتب خواهند شد.",
