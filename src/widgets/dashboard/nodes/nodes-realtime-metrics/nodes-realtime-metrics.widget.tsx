@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next'
 import { PiArrowDownDuotone, PiArrowUpDuotone, PiPulse } from 'react-icons/pi'
 import { TbUsers } from 'react-icons/tb'
 
+import { useGetSystemStats } from '@shared/api/hooks'
 import { IMetricCardProps, MetricCardShared } from '@shared/ui/metrics/metric-card'
 import { prettySiRealtimeBytesUtil } from '@shared/utils/bytes'
 
@@ -18,6 +19,8 @@ export function NodesRealtimeUsageMetrics(props: IProps) {
     const { nodes, isLoading } = props
 
     const { t } = useTranslation()
+
+    const { data: systemInfo } = useGetSystemStats()
 
     const aggregated = useMemo(() => {
         if (!nodes?.length) return null
@@ -50,7 +53,11 @@ export function NodesRealtimeUsageMetrics(props: IProps) {
         {
             IconComponent: TbUsers,
             title: t('nodes-quick-stats.widget.users-online'),
-            value: nodes?.reduce((acc, curr) => acc + (curr.usersOnline ?? 0), 0) ?? 0,
+            // A user connected through several nodes (balancer, auto-select) counts once here; the per-node sum counts sessions.
+            value: systemInfo?.onlineStats.onlineNow ?? 0,
+            subtitle: t('nodes-quick-stats.widget.sessions-on-nodes', {
+                total: nodes?.reduce((acc, curr) => acc + (curr.usersOnline ?? 0), 0) ?? 0
+            }),
             iconVariant: 'soft',
             iconColor: 'cyan'
         },
