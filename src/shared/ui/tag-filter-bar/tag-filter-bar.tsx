@@ -17,6 +17,7 @@ interface IProps<T> {
     items: readonly T[] | undefined
     onChange: (tag: null | string) => void
     tagIcon?: React.ReactNode
+    tags?: readonly string[]
     withUntagged?: boolean
 }
 
@@ -63,6 +64,7 @@ export function TagFilterBar<T>(props: IProps<T>) {
         items,
         onChange,
         tagIcon = <TbTag size={16} />,
+        tags: tagList,
         withUntagged = true
     } = props
     const { t } = useTranslation()
@@ -81,19 +83,21 @@ export function TagFilterBar<T>(props: IProps<T>) {
         })
 
         return {
-            tags: [...countMap.keys()].sort((a, b) => a.localeCompare(b)),
+            tags: tagList
+                ? [...new Set(tagList)].filter((tag) => countMap.has(tag))
+                : [...countMap.keys()].sort((a, b) => a.localeCompare(b)),
             tagCounts: countMap,
             untaggedCount: untagged
         }
-    }, [items, getTags])
+    }, [items, getTags, tagList])
 
     useEffect(() => {
         if (activeTag === null) return
-        const isStale = activeTag === NO_TAG ? untaggedCount === 0 : !tagCounts.has(activeTag)
+        const isStale = activeTag === NO_TAG ? untaggedCount === 0 : !tags.includes(activeTag)
         if (isStale) {
             onChange(null)
         }
-    }, [activeTag, tagCounts, untaggedCount, onChange])
+    }, [activeTag, tags, untaggedCount, onChange])
 
     if (tags.length === 0) {
         return null

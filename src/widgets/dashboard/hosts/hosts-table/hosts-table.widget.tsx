@@ -14,7 +14,7 @@ import { HostCardWidget } from '@widgets/dashboard/hosts/host-card'
 import { memo, useCallback, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import { TbListCheck, TbRoute } from 'react-icons/tb'
 
-import { useGetNodes } from '@shared/api/hooks'
+import { useGetNodes, useGetSubscriptionSettings } from '@shared/api/hooks'
 import { useIsMobile } from '@shared/hooks'
 import { TagFilterBar } from '@shared/ui'
 import { EmptyPageLayout } from '@shared/ui/layouts/empty-page'
@@ -54,6 +54,12 @@ export const HostsTableWidget = memo((props: IProps) => {
     const { setHostsActiveSrrRule, setHostsActiveTag } = useViewPreferencesStoreActions()
 
     const { data: nodes } = useGetNodes()
+    const { data: subscriptionSettings } = useGetSubscriptionSettings()
+
+    const srrRuleNames = useMemo(
+        () => subscriptionSettings?.responseRules?.rules.map((rule) => rule.name),
+        [subscriptionSettings]
+    )
 
     const visibleState = useMemo(
         () => filterHosts(state, activeTag, activeSrrRule),
@@ -146,6 +152,7 @@ export const HostsTableWidget = memo((props: IProps) => {
                 items={hosts}
                 onChange={setHostsActiveSrrRule}
                 tagIcon={<TbRoute size={16} />}
+                tags={srrRuleNames}
                 withUntagged={false}
             />
 
