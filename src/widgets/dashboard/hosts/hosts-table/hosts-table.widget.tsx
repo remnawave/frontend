@@ -197,7 +197,10 @@ export const HostsTableWidget = memo((props: IProps) => {
                                             >
                                                 <div className={classes.hostFadeIn}>
                                                     <HostCardWidget
-                                                        disableReordering={activeTag !== null}
+                                                        disableReordering={
+                                                            activeTag !== null ||
+                                                            activeSrrRule !== null
+                                                        }
                                                         configProfiles={configProfiles}
                                                         index={virtualItem.index}
                                                         isSelected={selectedHosts.includes(
@@ -208,6 +211,7 @@ export const HostsTableWidget = memo((props: IProps) => {
                                                         onSelect={() =>
                                                             toggleHostSelection(item.uuid)
                                                         }
+                                                        srrRuleNames={srrRuleNames}
                                                     />
                                                 </div>
                                             </Box>
@@ -229,6 +233,7 @@ export const HostsTableWidget = memo((props: IProps) => {
                                     item={draggedHost}
                                     nodesByUuid={nodesByUuid}
                                     onSelect={() => toggleHostSelection(draggedHost.uuid)}
+                                    srrRuleNames={srrRuleNames}
                                 />
                             </Container>
                         )}

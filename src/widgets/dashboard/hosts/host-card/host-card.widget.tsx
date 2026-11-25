@@ -34,6 +34,7 @@ import {
     TbEyeOff,
     TbFileDescription,
     TbMask,
+    TbRoute,
     TbStar
 } from 'react-icons/tb'
 import { generatePath } from 'react-router'
@@ -56,6 +57,7 @@ export interface IProps {
     item: GetHostsCommand.Response['response'][number]
     nodesByUuid: Map<string, GetNodesCommand.Response['response'][number]>
     onSelect?: () => void
+    srrRuleNames?: readonly string[]
     viewOnly?: boolean
     disableReordering?: boolean
 }
@@ -69,6 +71,7 @@ export function HostCardWidget(props: IProps) {
         isSelected,
         onSelect,
         isDragOverlay = false,
+        srrRuleNames,
         viewOnly = false,
 
         disableReordering = false
@@ -132,6 +135,14 @@ export function HostCardWidget(props: IProps) {
     const serverDescription = item.serverDescription?.trim() || ''
     const hasInternalSquadsRule = item.internalSquads.squads.length > 0
     const isInternalSquadsAllowOnly = item.internalSquads.mode === INTERNAL_SQUADS_MODE.ALLOW_ONLY
+    const selectedSrrRules = srrRuleNames
+        ? [
+              ...new Set([
+                  ...srrRuleNames.filter((name) => item.includeInSrrRules.includes(name)),
+                  ...item.includeInSrrRules
+              ])
+          ]
+        : item.includeInSrrRules
 
     if (isMobile) {
         return (
@@ -403,6 +414,36 @@ export function HostCardWidget(props: IProps) {
                         </Group>
 
                         <Group gap={6} style={{ flexShrink: 0 }} wrap="nowrap">
+                            {selectedSrrRules.length > 0 && (
+                                <Tooltip
+                                    label={
+                                        <Stack gap={2}>
+                                            <Text fw={600} size="xs">
+                                                {t('base-host-form.include-in-srr-rules')}
+                                            </Text>
+                                            {selectedSrrRules.map((name) => (
+                                                <Text key={name} size="xs">
+                                                    {name}
+                                                </Text>
+                                            ))}
+                                        </Stack>
+                                    }
+                                    multiline
+                                >
+                                    <Badge
+                                        color="cyan"
+                                        h={28}
+                                        leftSection={<TbRoute size={14} />}
+                                        radius="sm"
+                                        size="lg"
+                                        style={{ flexShrink: 0 }}
+                                        variant="soft"
+                                    >
+                                        {selectedSrrRules.length}
+                                    </Badge>
+                                </Tooltip>
+                            )}
+
                             {hasInternalSquadsRule && (
                                 <Tooltip
                                     label={
