@@ -21,6 +21,7 @@ import { formatEditorAsCompactJson, stringifyCompactJson } from '@shared/utils/m
 import { setupSuggestWidget } from '@shared/utils/setup-monaco/setup-suggest-monaco'
 
 import { setupConditionsCodeLens } from './conditions-code-lens'
+import { setupExternalSquadHints } from './external-squad-hints'
 import { IProps } from './interfaces'
 import styles from './ResponseRulesEditor.module.css'
 import { setupRuleSeparators } from './rule-separators'
@@ -28,7 +29,7 @@ import { setupRuleSeparators } from './rule-separators'
 export function ResponseRulesEditorWidget(props: IProps) {
     const { t } = useTranslation()
 
-    const { groupedTemplates, responseRules, subscriptionSettingsUuid } = props
+    const { externalSquads, groupedTemplates, responseRules, subscriptionSettingsUuid } = props
 
     const { isFullscreen, toggle: toggleFullscreen } = usePseudoFullscreen()
     const { containerRef: editorWrapperRef, footerRef } = useViewportFillHeight({
@@ -41,7 +42,12 @@ export function ResponseRulesEditorWidget(props: IProps) {
     const [originalValue, setOriginalValue] = useState<string>(stringifyCompactJson(responseRules))
 
     const editorRef = useRef<editor.IStandaloneCodeEditor | null>(null)
+    const squadNamesRef = useRef<ReadonlyMap<string, string>>(new Map())
     const monacoRef = useRef<Monaco | null>(null)
+
+    useEffect(() => {
+        squadNamesRef.current = new Map(externalSquads.map((squad) => [squad.uuid, squad.name]))
+    }, [externalSquads])
 
     const blocker = useBlocker(
         ({ currentLocation, nextLocation }) =>
@@ -89,7 +95,7 @@ export function ResponseRulesEditorWidget(props: IProps) {
     }, [blocker])
 
     const handleEditorDidMount = () => {
-        MonacoSetupResponseRulesFeature.setup(groupedTemplates)
+        MonacoSetupResponseRulesFeature.setup(groupedTemplates, externalSquads)
     }
 
     const checkForChanges = () => {
@@ -152,6 +158,7 @@ export function ResponseRulesEditorWidget(props: IProps) {
 
                         setupSuggestWidget(editor)
                         setupRuleSeparators(editor)
+                        setupExternalSquadHints(editor, monaco, () => squadNamesRef.current)
                         setupConditionsCodeLens(editor, monaco, {
                             onOpenOverview: (rules) =>
                                 showModal('responseRules_rulesOverviewModal', { rules }),

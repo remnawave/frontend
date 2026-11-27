@@ -2,17 +2,27 @@ import type { editor } from 'monaco-editor'
 
 const INDENT = '  '
 const MAX_LINE_LENGTH = 140
+const UUID_REGEX = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i
 
 const isContainer = (value: unknown): value is object => value !== null && typeof value === 'object'
 
 const isPrimitiveArray = (value: unknown): value is unknown[] =>
     Array.isArray(value) && !value.some(isContainer)
 
+const isUuidArray = (value: unknown): boolean =>
+    Array.isArray(value) &&
+    value.length > 0 &&
+    value.every((item) => typeof item === 'string' && UUID_REGEX.test(item))
+
 const isFlat = (value: object): boolean =>
+    !isUuidArray(value) &&
     Object.values(value).every(
         (child) =>
             !isContainer(child) ||
-            (!Array.isArray(value) && isPrimitiveArray(child) && child.length > 0)
+            (!Array.isArray(value) &&
+                isPrimitiveArray(child) &&
+                child.length > 0 &&
+                !isUuidArray(child))
     )
 
 const stringifyInline = (value: unknown): string => {

@@ -1,6 +1,10 @@
 import { TSubscriptionTemplateType } from '@remnawave/backend-contract'
 
-import { useGetSubscriptionSettings, useGetSubscriptionTemplates } from '@shared/api/hooks'
+import {
+    useGetExternalSquads,
+    useGetSubscriptionSettings,
+    useGetSubscriptionTemplates
+} from '@shared/api/hooks'
 import { LoadingScreen } from '@shared/ui'
 
 import { ResponseRulesPageComponent } from '../components/response-rules.page.component'
@@ -10,12 +14,15 @@ export function ResponseRulesPageConnector() {
         useGetSubscriptionSettings()
 
     const { data: templates, isLoading: isTemplatesLoading } = useGetSubscriptionTemplates({})
+    const { data: externalSquads, isLoading: isExternalSquadsLoading } = useGetExternalSquads()
 
     if (
         isSubscriptionSettingsLoading ||
         !subscriptionSettings ||
         isTemplatesLoading ||
-        !templates
+        !templates ||
+        isExternalSquadsLoading ||
+        !externalSquads
     ) {
         return <LoadingScreen />
     }
@@ -33,6 +40,7 @@ export function ResponseRulesPageConnector() {
 
     return (
         <ResponseRulesPageComponent
+            externalSquads={externalSquads.externalSquads.map(({ name, uuid }) => ({ name, uuid }))}
             groupedTemplates={groupedTemplates}
             responseRules={subscriptionSettings.responseRules}
             subscriptionSettingsUuid={subscriptionSettings.uuid}

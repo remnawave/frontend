@@ -389,7 +389,10 @@ export const MonacoSetupSnippetsFeature = {
 }
 
 export const MonacoSetupResponseRulesFeature = {
-    setup: async (groupedTemplates: Record<TSubscriptionTemplateType, string[]>) => {
+    setup: async (
+        groupedTemplates: Record<TSubscriptionTemplateType, string[]>,
+        externalSquads: { name: string; uuid: string }[]
+    ) => {
         try {
             const schema = ResponseRulesConfigSchema.toJSONSchema({
                 target: 'draft-07'
@@ -435,6 +438,19 @@ export const MonacoSetupResponseRulesFeature = {
                                                 markdownEnumDescriptions: templates.map(
                                                     (t) => `Use ${t} template`
                                                 )
+                                            },
+                                            subscriptionTemplateByExternalSquad: {
+                                                items: {
+                                                    properties: {
+                                                        template: {
+                                                            enum: templates,
+                                                            markdownDescription: `Available templates for **${responseType}** response type.`,
+                                                            markdownEnumDescriptions: templates.map(
+                                                                (t) => `Use ${t} template`
+                                                            )
+                                                        }
+                                                    }
+                                                }
                                             }
                                         }
                                     }
@@ -458,12 +474,41 @@ export const MonacoSetupResponseRulesFeature = {
                                                 type: 'null',
                                                 not: { type: 'string' },
                                                 markdownDescription: `⚠️ No templates available for **${responseType}** response type. This field should not be used.`
+                                            },
+                                            subscriptionTemplateByExternalSquad: {
+                                                type: 'null',
+                                                not: { type: 'array' },
+                                                markdownDescription: `⚠️ No templates available for **${responseType}** response type. This field should not be used.`
                                             }
                                         }
                                     }
                                 }
                             }
                         })
+                    }
+                })
+            }
+
+            if (rulesItems) {
+                ;(rulesItems.allOf ??= []).push({
+                    properties: {
+                        responseModifications: {
+                            properties: {
+                                subscriptionTemplateByExternalSquad: {
+                                    items: {
+                                        properties: {
+                                            externalSquads: {
+                                                items: {
+                                                    pattern: `^(${externalSquads.map((squad) => squad.uuid).join('|')})$`,
+                                                    patternErrorMessage:
+                                                        'External Squad does not exist'
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 })
             }

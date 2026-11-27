@@ -11,13 +11,14 @@ import { Page, PageHeaderShared } from '@shared/ui'
 import { SrrAdvancedWarningOverlay } from '@shared/ui/srr-advanced-warning-overlay/srr-advanced-warning-overlay'
 
 interface Props {
+    externalSquads: { name: string; uuid: string }[]
     groupedTemplates: Record<TSubscriptionTemplateType, string[]>
     responseRules: GetSubscriptionSettingsCommand.Response['response']['responseRules']
     subscriptionSettingsUuid: string
 }
 
 export const ResponseRulesPageComponent = (props: Props) => {
-    const { groupedTemplates, responseRules, subscriptionSettingsUuid } = props
+    const { externalSquads, groupedTemplates, responseRules, subscriptionSettingsUuid } = props
 
     const { t } = useTranslation()
 
@@ -30,6 +31,7 @@ export const ResponseRulesPageComponent = (props: Props) => {
             <Flex gap="md">
                 <Box style={{ flex: 1, minWidth: 0 }}>
                     <ResponseRulesEditorWidget
+                        externalSquads={externalSquads}
                         groupedTemplates={groupedTemplates}
                         responseRules={responseRules}
                         subscriptionSettingsUuid={subscriptionSettingsUuid}
